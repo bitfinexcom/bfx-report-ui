@@ -9,16 +9,16 @@ User can use either the UUID or the API key to access his data
 The report tool support:
 [x] react/redux structure
 [x] run lint & run lintFix with eslint
-[] husky prepush validation
-[] redux-saga request
+[x] husky prepush validation
+[] switch themes
+[] l10n
 [] export to different platform (bitfinex/ethfinex, local)
+[] redux-saga request
 [] show in a nice scrolling tables
 [] ledger entries
 [] trades
 [] orders
 [] movements (deposits/withdrawals)
 [] request a full history CSV
-[] switch themes
-[] l10n
 
 Doc example https://docs.bitfinex.com/v2/reference#movements
