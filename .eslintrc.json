@@ -1,0 +1,80 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
+  ],
+  "rules": {
+    "jsx-quotes": ["error", "prefer-single"],
+    "react/jsx-filename-extension": [2, { "extensions": [".js"] }],
+    "semi": 0,
+    "max-len": 0,
+    "no-console": 0,
+    "react/prop-types": 0,
+    "react/forbid-prop-types": 0,
+    "react/require-default-props": 0,
+    "react/default-props-match-prop-types": 0,
+    "react/prefer-stateless-function": 0,
+    "react/no-did-update-set-state": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "react/no-array-index-key": 0,
+    "prefer-destructuring": 0,
+    "jsx-a11y/label-has-for": 0,
+    "no-nested-ternary": 0,
+    "import/first": 0,
+    "react/no-multi-comp": 0,
+    "react/no-unused-prop-types": 0,
+    "react/no-unused-state": 0,
+    "consistent-return": 0,
+    "no-param-reassign": 0,
+    "import/no-extraneous-dependencies": 0,
+    "no-underscore-dangle": 0,
+    "import/prefer-default-export": 0,
+    "no-shadow": 0,
+    "no-use-before-define": 0,
+    "react/jsx-indent": 0,
+    "react/jsx-closing-tag-location": 0,
+    "no-restricted-syntax": 0,
+    "guard-for-in": 0,
+    "no-unused-expressions": 0,
+    "class-methods-use-this": 0,
+    "react/sort-comp": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "no-return-assign": 0,
+    "no-mixed-operators": 0,
+    "no-restricted-globals": 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "no-plusplus": 0,
+    "one-var": 0,
+    "no-empty": 0,
+    "func-names": 0,
+    "import/extensions": 0,
+    "import/no-duplicates": 0,
+    "prefer-rest-params": 0,
+    "import/no-named-as-default": 0,
+    "camelcase": 0,
+    "prefer-const": 0,
+    "react/no-danger": 0,
+    "import/no-mutable-exports": 0,
+    "import/no-named-default": 0,
+    "react/jsx-no-bind": 0,
+    "no-continue": 0,
+    "jsx-a11y/mouse-events-have-key-events": 0,
+    "no-await-in-loop": 0,
+    "import/no-named-as-default-member": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": [
+          "node_modules",
+          "src"
+        ]
+      }
+    }
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  }
+}
