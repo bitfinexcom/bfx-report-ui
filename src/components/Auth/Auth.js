@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 class Auth extends PureComponent {
+  static propTypes = {
+    setKey: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
@@ -18,8 +23,8 @@ class Auth extends PureComponent {
   render() {
     return (
       <p className='App-intro'>
-          Enter your API Key: <input type='text' onChange={this.handleChange} />
-          <button onClick={this.handleClick}>Submit</button>
+        Enter your API Key: <input type='text' onChange={this.handleChange} />
+        <button onClick={this.handleClick}>Submit</button>
       </p>
     )
   }
