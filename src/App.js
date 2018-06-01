@@ -2,6 +2,10 @@ import React, { PureComponent } from 'react'
 import './App.css'
 
 import Auth from 'components/Auth'
+import Ledgers from 'components/Ledgers'
+import Movements from 'components/Movements'
+import Orders from 'components/Orders'
+import Trades from 'components/Trades'
 
 class App extends PureComponent {
   render() {
@@ -11,6 +15,10 @@ class App extends PureComponent {
           <h1 className='App-title'>Bfx Report</h1>
         </header>
         <Auth />
+        <Ledgers />
+        <Trades />
+        <Orders />
+        <Movements />
       </div>
     )
   }
