@@ -1,7 +1,20 @@
 {
   "name": "bfx-report-ui",
   "version": "0.1.0",
-  "private": true,
+  "description": "Report page to overview the user actions in Bitfinex and download related csv files",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitfinexcom/bfx-report-ui.git"
+  },
+  "keywords": [
+    "bitfinex"
+  ],
+  "author": "Bitfinex",
+  "license": "apache-2.0",
+  "bugs": {
+    "url": "https://github.com/bitfinexcom/bfx-report-ui/issues"
+  },
+  "homepage": "https://github.com/bitfinexcom/bfx-report-ui#readme",
   "dependencies": {
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
@@ -18,11 +31,15 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2",
-    "husky": "^0.14.3"
+    "husky": "^0.14.3",
+    "jest-cli": "^23.1.0",
+    "node-sass-chokidar": "^1.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-sass": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-sass": "npm run build-sass && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "start": "npm run build-sass && react-scripts start",
+    "build": "npm run build-sass && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "lint": "eslint src --ignore-path .gitignore",
     "lintFix": "eslint src --fix --ignore-path .gitignore",
