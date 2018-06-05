@@ -7,8 +7,8 @@ import actions from '../../state/auth/actions'
 // }
 
 const mapDispatchToProps = dispatch => ({
-  setKey: (key) => {
-    dispatch(actions.setApiKey(key))
+  setKey: (key, secret) => {
+    dispatch(actions.setApiKey(key, secret))
   },
 })
 

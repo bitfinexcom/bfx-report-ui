@@ -13,19 +13,23 @@ class Auth extends PureComponent {
   }
 
   handleClick() {
-    this.props.setKey(this.state.key)
+    this.props.setKey(this.state.key, this.state.secret)
   }
 
   handleChange(event) {
-    this.setState({ key: event.target.value })
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   render() {
     return (
-      <p className='App-intro'>
-        Enter your API Key: <input type='text' onChange={this.handleChange} />
-        <button onClick={this.handleClick}>Submit</button>
-      </p>
+      <div>
+        <h5>Auth</h5>
+        <p className='App-intro'>
+          Enter your API Key: <input name='key' type='text' onChange={this.handleChange} /><br />
+          Enter your API Secret: <input name='secret' type='text' onChange={this.handleChange} /><br />
+          <button onClick={this.handleClick}>Submit</button>
+        </p>
+      </div>
     )
   }
 }
