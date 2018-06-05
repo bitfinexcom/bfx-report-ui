@@ -1,3 +1,3 @@
-import Ledgers from './Ledgers'
+import Ledgers from './Ledgers.container'
 
 export default Ledgers
