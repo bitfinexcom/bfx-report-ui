@@ -1,3 +1,3 @@
-import Movements from './Movements'
+import Movements from './Movements.container'
 
 export default Movements
