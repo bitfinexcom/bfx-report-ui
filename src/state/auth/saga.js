@@ -1,6 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import types from './constants'
-import { postJsonfetch } from '../../utils'
+import { postJsonfetch } from '../utils'
 
 function getAuth(apiKey, apiSecret) {
   return postJsonfetch('http://localhost:31339/check-auth', {
