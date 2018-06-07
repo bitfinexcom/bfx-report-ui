@@ -50,7 +50,7 @@ import types from './constants'
  */
 const initialState = {
   entries: [
-    {
+    /* {
       currency: 'ETH',
       currencyName: 'ETHEREUM',
       mtsStarted: 1528251777000,
@@ -60,7 +60,7 @@ const initialState = {
       fees: -0.0024,
       destinationAddress: '0x9AE5d369c3E5833A1664fA7F8A757D226669f3c6',
       transactionId: '',
-    },
+    }, */
   ],
 }
 

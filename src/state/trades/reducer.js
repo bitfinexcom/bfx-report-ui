@@ -32,12 +32,12 @@ import types from './constants'
  */
 const initialState = {
   entries: [
-    {
+    /* {
       id: 24172397,
       mts: 1528147137131,
       amount: -0.1,
       price: 17602,
-    },
+    }, */
   ],
 }
 

@@ -77,7 +77,7 @@ import types from './constants'
  */
 const initialState = {
   entries: [
-    {
+    /* {
       gid: '',
       cid: 12175783466,
       symbol: 'tBTCUSD',
@@ -95,13 +95,13 @@ const initialState = {
       priceAuxLimit: 0,
       notify: 0,
       placedId: '',
-    },
+    }, */
   ],
 }
 
 export function ordersReducer(state = initialState, action) {
   switch (action.type) {
-    case types.UPDATE_TRADES: {
+    case types.UPDATE_ORDERS: {
       const result = action.payload;
       const entries = result.map(entry => ({
         id: entry.id,

@@ -405,7 +405,7 @@ const initialState = {
   // can we fetch that config?
   valueCurrency: 'default', // if the user specified a value currency
   entries: [
-    {
+    /* {
       id: 131919156,
       currency: 'USD',
       timestampMilli: 1528335001000,
@@ -420,7 +420,7 @@ const initialState = {
       amount: 5000.885,
       balance: 5000.885,
       description: 'Transfer of 5000.885 USD from wallet Exchange to Deposit on wallet funding',
-    },
+    }, */
   ],
 }
 
