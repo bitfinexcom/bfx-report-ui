@@ -32,7 +32,7 @@ class Auth extends PureComponent {
         <h5>Auth</h5>
         {
           this.props.isValid ? <div>Auth Success</div> :
-            <div>Auth Fail</div>
+          <div>Auth Fail</div>
         }
         <p className='App-intro'>
           Enter your API Key: <input name='key' type='text' onChange={this.handleChange} /><br />

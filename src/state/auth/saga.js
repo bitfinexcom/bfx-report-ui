@@ -7,21 +7,21 @@ function getAuth(apiKey, apiSecret) {
     auth: {
       apiKey,
       apiSecret,
-    }
+    },
   })
 }
 
-function* checkAuth(action = {}) {
-  const state = yield select(state => state.auth);
+function* checkAuth() {
+  const auth = yield select(state => state.auth)
   try {
-    const data = yield call(getAuth, state.apiKey, state.apiSecret)
-    console.log(data)
+    const data = yield call(getAuth, auth.apiKey, auth.apiSecret)
     yield put({
       type: types.UPDATE_AUTH_RESULT,
-      payload: data && data.result
+      payload: data && data.result,
     })
   } catch (error) {
-    console.error(error)
+    // TODO: handle error case
+    // console.error(error)
     // yield put({ type: 'REQUEST_FAILED', error })
   }
 }
@@ -34,6 +34,6 @@ function* checkAuth(action = {}) {
 // }
 
 export default function* authSaga() {
-    yield takeLatest(types.CHECK_AUTH, checkAuth)
+  yield takeLatest(types.CHECK_AUTH, checkAuth)
   // yield takeLatest(types.SET_AUTH_KEY, checkAuthWithAuthKey)
 }
