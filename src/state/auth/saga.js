@@ -3,6 +3,7 @@ import types from './constants'
 import ledgersTypes from '../ledgers/constants'
 import tradesTypes from '../trades/constants'
 import ordersTypes from '../orders/constants'
+import movementsTypes from '../movements/constants'
 import { postJsonfetch } from '../utils'
 import { baseUrl } from '../../var/config'
 
@@ -33,6 +34,9 @@ function* checkAuth() {
       yield put({
         type: ordersTypes.FETCH_ORDERS,
       })
+      yield put({
+        type: movementsTypes.FETCH_MOVEMENTS
+      })
     }
   } catch (error) {
     // TODO: handle error case
@@ -50,5 +54,4 @@ function* checkAuth() {
 
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
-  // yield takeLatest(types.SET_AUTH_KEY, checkAuthWithAuthKey)
 }

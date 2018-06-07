@@ -4,7 +4,7 @@ import Movements from './Movements'
 
 function mapStateToProps(state = {}) {
   return {
-    movements: state.movements.movements,
+    entries: state.movements.entries,
   }
 }
 

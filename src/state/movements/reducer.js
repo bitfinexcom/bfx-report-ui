@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#movements
-// import types from './constants'
+import types from './constants'
 
 /*
 {
@@ -49,7 +49,7 @@
 }
  */
 const initialState = {
-  movements: [
+  entries: [
     {
       currency: 'ETH',
       currencyName: 'ETHEREUM',
@@ -66,8 +66,28 @@ const initialState = {
 
 export function movementsReducer(state = initialState, action) {
   switch (action.type) {
-    default:
-      return state;
+    case types.UPDATE_MOVEMENTS: {
+      const result = action.payload;
+      const entries = result.map(entry => ({
+        id: entry.id,
+        currency: entry.currency,
+        currencyName: entry.currencyName,
+        mtsStarted: entry.mtsStarted,
+        mtsUpdated: entry.mtsUpdated,
+        status: entry.status,
+        amount: entry.amount,
+        fees: entry.fees,
+        destinationAddress: entry.destinationAddress,
+        transactionId: entry.transactionId,
+      }))
+      return {
+        ...state,
+        entries,
+      }
+    }
+    default: {
+      return state
+    }
   }
 }
 
