@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-orders
-// import types from './constants'
+import types from './constants'
 
 /*
 {
@@ -76,7 +76,7 @@
 }
  */
 const initialState = {
-  orders: [
+  entries: [
     {
       gid: '',
       cid: 12175783466,
@@ -101,8 +101,36 @@ const initialState = {
 
 export function ordersReducer(state = initialState, action) {
   switch (action.type) {
-    default:
-      return state;
+    case types.UPDATE_TRADES: {
+      const result = action.payload;
+      const entries = result.map(entry => ({
+        id: entry.id,
+        gid: entry.gid,
+        cid: entry.cid,
+        symbol: entry.symbol,
+        mtsCreate: entry.mtsCreate,
+        mtsUpdate: entry.mtsUpdate,
+        amout: entry.amout,
+        amountOrig: entry.amountOrig,
+        type: entry.type,
+        typePrev: entry.typePrev,
+        flags: entry.flags,
+        status: entry.status,
+        price: entry.price,
+        priceAvg: entry.priceAvg,
+        priceTrailing: entry.priceTrailing,
+        priceAuxLimit: entry.priceAuxLimit,
+        notify: entry.notify,
+        placedId: entry.placedId,
+      }))
+      return {
+        ...state,
+        entries,
+      }
+    }
+    default: {
+      return state
+    }
   }
 }
 

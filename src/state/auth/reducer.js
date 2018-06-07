@@ -26,7 +26,7 @@ export function authReducer(state = initialState, action) {
         isValid: action.payload,
       }
     default:
-      return state;
+      return state
   }
 }
 

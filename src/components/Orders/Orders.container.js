@@ -4,7 +4,7 @@ import Orders from './Orders'
 
 function mapStateToProps(state = {}) {
   return {
-    orders: state.orders.orders,
+    entries: state.orders.entries,
   }
 }
 
