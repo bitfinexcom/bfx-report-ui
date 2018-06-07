@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#ledgers
-// import types from './constants'
+import types from './constants'
 
 /*
 {
@@ -400,36 +400,50 @@
     "id": 5
 }
 */
-
 const initialState = {
   // the default might be configuable on server only,
   // can we fetch that config?
   valueCurrency: 'default', // if the user specified a value currency
-  balances: [{
-    type: 'Exchange',
-    currency: 'BTC',
-    amount: '19.0',
-    balance: '19.0',
-  },
-  {
-    type: 'Exchange',
-    currency: 'ETH',
-    amount: '50.0',
-    balance: '50.0',
-  },
-  {
-    type: 'Exchange',
-    currency: 'USD',
-    amount: '200.0',
-    balance: '200.0',
-  },
+  entries: [
+    {
+      id: 131919156,
+      currency: 'USD',
+      timestampMilli: 1528335001000,
+      amount: 17.18587619,
+      balance: 5018.07087619,
+      description: 'Margin Funding Payment on wallet funding',
+    },
+    {
+      id: 131918375,
+      currency: 'USD',
+      timestampMilli: 1528274257000,
+      amount: 5000.885,
+      balance: 5000.885,
+      description: 'Transfer of 5000.885 USD from wallet Exchange to Deposit on wallet funding',
+    },
   ],
 }
 
 export function ledgersReducer(state = initialState, action) {
   switch (action.type) {
-    default:
+    case types.UPDATE_LEDGERS: {
+      const result = action.payload;
+      const entries = result.map(entry => ({
+        id: entry.id,
+        currency: entry.currency,
+        timestampMilli: entry.timestampMilli,
+        amount: entry.amount,
+        balance: entry.balance,
+        description: entry.description,
+      }))
+      return {
+        ...state,
+        entries,
+      }
+    }
+    default: {
       return state;
+    }
   }
 }
 

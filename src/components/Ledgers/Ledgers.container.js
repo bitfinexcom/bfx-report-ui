@@ -4,7 +4,7 @@ import Ledgers from './Ledgers'
 
 function mapStateToProps(state = {}) {
   return {
-    balances: state.ledgers.balances,
+    entries: state.ledgers.entries,
   }
 }
 

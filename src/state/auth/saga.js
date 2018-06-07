@@ -1,5 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import types from './constants'
+import ledgersTypes from '../ledgers/constants'
 import { postJsonfetch } from '../utils'
 
 function getAuth(apiKey, apiSecret) {
@@ -19,6 +20,11 @@ function* checkAuth() {
       type: types.UPDATE_AUTH_RESULT,
       payload: data && data.result,
     })
+    if (data && data.result) { // fetch all
+      yield put({
+        type: ledgersTypes.FETCH_LEDGERS,
+      })
+    }
   } catch (error) {
     // TODO: handle error case
     // console.error(error)
