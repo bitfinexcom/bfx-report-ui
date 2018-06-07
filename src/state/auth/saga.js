@@ -35,7 +35,7 @@ function* checkAuth() {
         type: ordersTypes.FETCH_ORDERS,
       })
       yield put({
-        type: movementsTypes.FETCH_MOVEMENTS
+        type: movementsTypes.FETCH_MOVEMENTS,
       })
     }
   } catch (error) {
