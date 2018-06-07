@@ -1,10 +1,11 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import types from './constants'
 import { postJsonfetch, selectAuth } from '../../state/utils'
+import { baseUrl } from '../../var/config'
 
 function getLedgers(auth) {
   // let now = (new Date()).getTime();
-  return postJsonfetch('http://localhost:31339/get-data', {
+  return postJsonfetch(`${baseUrl}/get-data`, {
     auth,
     method: 'getLedgers',
   })

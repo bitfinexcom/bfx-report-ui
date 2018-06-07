@@ -2,9 +2,10 @@ import { call, put, select, takeLatest } from 'redux-saga/effects'
 import types from './constants'
 import ledgersTypes from '../ledgers/constants'
 import { postJsonfetch } from '../utils'
+import { baseUrl } from '../../var/config'
 
 function getAuth(apiKey, apiSecret) {
-  return postJsonfetch('http://localhost:31339/check-auth', {
+  return postJsonfetch(`${baseUrl}/check-auth`, {
     auth: {
       apiKey,
       apiSecret,
