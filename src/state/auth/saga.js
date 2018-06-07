@@ -1,6 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import types from './constants'
 import ledgersTypes from '../ledgers/constants'
+import tradesTypes from '../trades/constants'
 import { postJsonfetch } from '../utils'
 import { baseUrl } from '../../var/config'
 
@@ -24,6 +25,9 @@ function* checkAuth() {
     if (data && data.result) { // fetch all
       yield put({
         type: ledgersTypes.FETCH_LEDGERS,
+      })
+      yield put({
+        type: tradesTypes.FETCH_TRADES,
       })
     }
   } catch (error) {
