@@ -16,11 +16,15 @@
   },
   "homepage": "https://github.com/bitfinexcom/bfx-report-ui#readme",
   "dependencies": {
+    "@blueprintjs/core": "^2.3.1",
+    "@blueprintjs/table": "^2.1.1",
+    "flexboxgrid": "^6.3.1",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
+    "react-transition-group": "^2.3.1",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0"

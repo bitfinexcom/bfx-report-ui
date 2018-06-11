@@ -1,0 +1,25 @@
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import Ledgers from '../Ledgers'
+import Movements from '../Movements'
+import Orders from '../Orders'
+import Timeframe from '../Timeframe'
+import Trades from '../Trades'
+
+function Main(props) {
+  return props.isValid ? (
+    <div className="row">
+      <Timeframe />
+      <Ledgers />
+      <Trades />
+      <Orders />
+      <Movements />
+    </div>
+  ) : ''
+}
+
+Main.propTypes = {
+  isValid: PropTypes.bool,
+}
+
+export default Main
