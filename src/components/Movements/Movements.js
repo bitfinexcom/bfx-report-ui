@@ -11,47 +11,33 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-export const Movements = props => {
+export const Movements = (props) => {
   const numRows = props.entries.length
-  const idCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].id}</Cell>
-  }
+  const idCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].id}</Cell>
 
-  const mtsStartedCellRenderer = (rowIndex) => {
-    return <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsStarted).toLocaleString()}</TruncatedFormat></Cell>
-  };
+  const mtsStartedCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsStarted).toLocaleString()}</TruncatedFormat></Cell>;
 
-  const mtsUpdatedCellRenderer = (rowIndex) => {
-    return <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdated).toLocaleString()}</TruncatedFormat></Cell>
-  };
+  const mtsUpdatedCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdated).toLocaleString()}</TruncatedFormat></Cell>;
 
-  const currencyCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].currency}</Cell>
-  }
+  const currencyCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].currency}</Cell>
 
-  const amountCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].amount}</Cell>
-  };
+  const amountCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].amount}</Cell>;
 
-  const statusCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].status}</Cell>
-  }
+  const statusCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].status}</Cell>
 
-  const destinationCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].destinationAddress}</Cell>
-  }
+  const destinationCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].destinationAddress}</Cell>
 
   return (
-    <Card interactive={true} elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+    <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
       <h5>Movements</h5>
       <Table numRows={numRows}>
-        <Column id="id" name="#" cellRenderer={idCellRenderer}/>
-        <Column id="mtsstarted" name="Started" cellRenderer={mtsStartedCellRenderer}/>
-        <Column id="mtsstarted" name="Updated" cellRenderer={mtsUpdatedCellRenderer}/>
-        <Column id="currency" name="Currency" cellRenderer={currencyCellRenderer}/>
-        <Column id="amount" name="Amount" cellRenderer={amountCellRenderer} />
-        <Column id="status" name="Status" cellRenderer={statusCellRenderer}/>
-        <Column id="destination" name="Destination" cellRenderer={destinationCellRenderer}/>
+        <Column id='id' name='#' cellRenderer={idCellRenderer} />
+        <Column id='mtsstarted' name='Started' cellRenderer={mtsStartedCellRenderer} />
+        <Column id='mtsstarted' name='Updated' cellRenderer={mtsUpdatedCellRenderer} />
+        <Column id='currency' name='Currency' cellRenderer={currencyCellRenderer} />
+        <Column id='amount' name='Amount' cellRenderer={amountCellRenderer} />
+        <Column id='status' name='Status' cellRenderer={statusCellRenderer} />
+        <Column id='destination' name='Destination' cellRenderer={destinationCellRenderer} />
       </Table>
     </Card>
   )

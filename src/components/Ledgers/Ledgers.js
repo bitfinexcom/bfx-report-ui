@@ -11,41 +11,31 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-export const Ledgers = props => {
+export const Ledgers = (props) => {
   const numRows = props.entries.length
-  const idCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].id}</Cell>
-  }
+  const idCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].id}</Cell>
 
-  const mtsCellRenderer = (rowIndex) => {
-    return <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].timestampMilli).toLocaleString()}</TruncatedFormat></Cell>
-  };
+  const mtsCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].timestampMilli).toLocaleString()}</TruncatedFormat></Cell>;
 
-  const currencyCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].currency}</Cell>
-  }
+  const currencyCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].currency}</Cell>
 
-  const amountCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].amount}</Cell>
-  };
+  const amountCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].amount}</Cell>;
 
-  const balanceCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].balance}</Cell>
-  };
+  const balanceCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].balance}</Cell>;
 
   // TODO: show description message
 
-return (
-  <Card interactive={true} elevation={Elevation.ZERO} className='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+  return (
+    <Card interactive elevation={Elevation.ZERO} className='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
       <h5>Ledgers</h5>
       <Table numRows={numRows}>
-        <Column id="id" name="#" cellRenderer={idCellRenderer}/>
-        <Column id="mts" name="Time" cellRenderer={mtsCellRenderer}/>
-        <Column id="currency" name="Currency" cellRenderer={currencyCellRenderer}/>
-        <Column id="amount" name="Amount" cellRenderer={amountCellRenderer} />
-        <Column id="balance" name="Balance" cellRenderer={balanceCellRenderer}/>
+        <Column id='id' name='#' cellRenderer={idCellRenderer} />
+        <Column id='mts' name='Time' cellRenderer={mtsCellRenderer} />
+        <Column id='currency' name='Currency' cellRenderer={currencyCellRenderer} />
+        <Column id='amount' name='Amount' cellRenderer={amountCellRenderer} />
+        <Column id='balance' name='Balance' cellRenderer={balanceCellRenderer} />
       </Table>
-  </Card>
+    </Card>
   )
 }
 

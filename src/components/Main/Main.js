@@ -8,7 +8,7 @@ import Trades from '../Trades'
 
 function Main(props) {
   return props.isValid ? (
-    <div className="row">
+    <div className='row'>
       <Timeframe />
       <Ledgers />
       <Trades />

@@ -11,32 +11,24 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-export const Trades = props => {
+export const Trades = (props) => {
   const numRows = props.entries.length;
-  const idCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].id}</Cell>
-  }
+  const idCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].id}</Cell>
 
-  const mtsCellRenderer = (rowIndex) => {
-    return <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mts).toLocaleString()}</TruncatedFormat></Cell>
-  };
+  const mtsCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mts).toLocaleString()}</TruncatedFormat></Cell>;
 
-  const amountCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].amount}</Cell>
-  };
+  const amountCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].amount}</Cell>;
 
-  const priceCellRenderer = (rowIndex) => {
-    return <Cell>{props.entries[rowIndex].price}</Cell>
-  };
+  const priceCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].price}</Cell>;
 
   return (
-    <Card interactive={true} elevation={Elevation.ZERO} className='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+    <Card interactive elevation={Elevation.ZERO} className='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
       <h5>Trades</h5>
       <Table numRows={numRows}>
-        <Column id="id" name="#" cellRenderer={idCellRenderer}/>
-        <Column id="mts" name="Time" cellRenderer={mtsCellRenderer}/>
-        <Column id="amount" name="Amount" cellRenderer={amountCellRenderer} />
-        <Column id="price" name="Price" cellRenderer={priceCellRenderer} />
+        <Column id='id' name='#' cellRenderer={idCellRenderer} />
+        <Column id='mts' name='Time' cellRenderer={mtsCellRenderer} />
+        <Column id='amount' name='Amount' cellRenderer={amountCellRenderer} />
+        <Column id='price' name='Price' cellRenderer={priceCellRenderer} />
       </Table>
     </Card>
   )

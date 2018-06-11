@@ -6,13 +6,17 @@ export function checkAuth() {
   }
 }
 
-export function setApiKey(key, secret) {
+export function setApiKey(key) {
   return {
     type: types.SET_API_KEY,
-    payload: {
-      key,
-      secret,
-    },
+    payload: key,
+  }
+}
+
+export function setApiSecret(secret) {
+  return {
+    type: types.SET_API_SECRET,
+    payload: secret,
   }
 }
 
@@ -26,4 +30,5 @@ export function setAuthKey(key) {
 export default {
   checkAuth,
   setApiKey,
+  setApiSecret,
 }

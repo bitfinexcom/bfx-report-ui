@@ -11,8 +11,8 @@ function mapStateToProps(state = {}) {
 const mapDispatchToProps = dispatch => ({
   checkAuth: () =>
     dispatch(actions.checkAuth()),
-  setKey: (key, secret) =>
-    dispatch(actions.setApiKey(key, secret)),
+  setKey: key => dispatch(actions.setApiKey(key)),
+  setSecret: secret => dispatch(actions.setApiSecret(secret)),
 })
 
 const AuthContainer = connect(mapStateToProps, mapDispatchToProps)(Auth)
