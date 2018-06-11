@@ -4,13 +4,58 @@ import {
   Card,
   Elevation,
 } from '@blueprintjs/core'
+import {
+  Cell,
+  Column,
+  Table,
+  TruncatedFormat,
+} from '@blueprintjs/table'
 
-export const Movements = props => (
-  <Card interactive={true} elevation={Elevation.ZERO} className='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-    <h5>Movements</h5>
-    <div>{JSON.stringify(props.entries)}</div>
-  </Card>
-)
+export const Movements = props => {
+  const numRows = props.entries.length
+  const idCellRenderer = (rowIndex) => {
+    return <Cell>{props.entries[rowIndex].id}</Cell>
+  }
+
+  const mtsStartedCellRenderer = (rowIndex) => {
+    return <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsStarted).toLocaleString()}</TruncatedFormat></Cell>
+  };
+
+  const mtsUpdatedCellRenderer = (rowIndex) => {
+    return <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdated).toLocaleString()}</TruncatedFormat></Cell>
+  };
+
+  const currencyCellRenderer = (rowIndex) => {
+    return <Cell>{props.entries[rowIndex].currency}</Cell>
+  }
+
+  const amountCellRenderer = (rowIndex) => {
+    return <Cell>{props.entries[rowIndex].amount}</Cell>
+  };
+
+  const statusCellRenderer = (rowIndex) => {
+    return <Cell>{props.entries[rowIndex].status}</Cell>
+  }
+
+  const destinationCellRenderer = (rowIndex) => {
+    return <Cell>{props.entries[rowIndex].destinationAddress}</Cell>
+  }
+
+  return (
+    <Card interactive={true} elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <h5>Movements</h5>
+      <Table numRows={numRows}>
+        <Column id="id" name="#" cellRenderer={idCellRenderer}/>
+        <Column id="mtsstarted" name="Started" cellRenderer={mtsStartedCellRenderer}/>
+        <Column id="mtsstarted" name="Updated" cellRenderer={mtsUpdatedCellRenderer}/>
+        <Column id="currency" name="Currency" cellRenderer={currencyCellRenderer}/>
+        <Column id="amount" name="Amount" cellRenderer={amountCellRenderer} />
+        <Column id="status" name="Status" cellRenderer={statusCellRenderer}/>
+        <Column id="destination" name="Destination" cellRenderer={destinationCellRenderer}/>
+      </Table>
+    </Card>
+  )
+}
 
 Movements.propTypes = {
   entries: PropTypes.array.isRequired,

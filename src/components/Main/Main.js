@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Ledgers from '../Ledgers'
 import Movements from '../Movements'
