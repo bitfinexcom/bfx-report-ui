@@ -5,7 +5,6 @@ import { platform } from '../../var/config'
 
 function getTrades(auth) {
   const now = (new Date()).getTime();
-  // TODO: should customizable
   // const shift = 2 * 7 * 24 * 60 * 60; // 2 weeks
   const start = 0; // now - shift;
   // TODO: should be customizable

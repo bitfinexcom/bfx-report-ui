@@ -37,5 +37,6 @@ export default {
   checkAuth,
   setApiKey,
   setApiSecret,
+  setAuthKey,
   showAuth,
 }

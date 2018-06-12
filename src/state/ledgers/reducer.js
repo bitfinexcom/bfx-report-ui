@@ -401,9 +401,6 @@ import types from './constants'
 }
 */
 const initialState = {
-  // the default might be configuable on server only,
-  // can we fetch that config?
-  valueCurrency: 'default', // if the user specified a value currency
   entries: [
     /* {
       id: 131919156,

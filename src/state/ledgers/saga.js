@@ -4,7 +4,6 @@ import { postJsonfetch, selectAuth } from '../../state/utils'
 import { platform } from '../../var/config'
 
 function getLedgers(auth) {
-  // let now = (new Date()).getTime();
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getLedgers',

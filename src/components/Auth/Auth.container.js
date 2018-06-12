@@ -12,8 +12,7 @@ function mapStateToProps(state = {}) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  checkAuth: () =>
-    dispatch(actions.checkAuth()),
+  checkAuth: () => dispatch(actions.checkAuth()),
   setKey: key => dispatch(actions.setApiKey(key)),
   setSecret: secret => dispatch(actions.setApiSecret(secret)),
 })
