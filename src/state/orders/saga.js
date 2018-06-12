@@ -8,8 +8,8 @@ function getOrders(auth) {
   // TODO: should customizable
   // const shift = 2 * 7 * 24 * 60 * 60; // 2 weeks
   const start = 0; // now - shift;
-  // TODO: should customizable
-  const limit = 10;
+  // TODO: should be customizable
+  const limit = 20;
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getOrders',

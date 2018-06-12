@@ -23,14 +23,14 @@ export const Orders = (props) => {
 
   const priceAvgCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].priceAvg}</Cell>
 
-  const mtsUpdateCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdate).toLocaleString()}</TruncatedFormat></Cell>;
+  const mtsUpdateCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdate).toLocaleString()}</TruncatedFormat></Cell>
 
   const statusCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].status}</Cell>
 
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
       <h5>Orders</h5>
-      <Table numRows={numRows}>
+      <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
         <Column id='id' name='#' cellRenderer={idCellRenderer} />
         <Column id='symbol' name='Symbol' cellRenderer={symbolCellRenderer} />
         <Column id='type' name='Type' cellRenderer={typeCellRenderer} />
