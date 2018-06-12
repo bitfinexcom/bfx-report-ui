@@ -18,7 +18,7 @@ function Timeframe() {
         <Button disabled>Past month</Button>
         <Button disabled>Past 3 months</Button>
         <Button disabled>Custom (max range 3 months)</Button>
-        <Button disabled>Download</Button>
+        <Button icon='cloud-download' disabled>Download</Button>
       </ButtonGroup>
     </Card>
   )

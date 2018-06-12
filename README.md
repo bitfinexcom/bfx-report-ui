@@ -64,6 +64,7 @@ User can use either the UUID(not support yet) or the API key to access his data.
 
 ## 3rd party libraries
 
-* react/redux/redux-saga
-* blueprintjs http://blueprintjs.com
-* flexboxgrid http://flexboxgrid.com/
+* react/redux/redux-saga for core architecture
+* [re-ducks](https://github.com/alexnm/re-ducks)-like state structure
+* blueprintjs for ui framework http://blueprintjs.com
+* flexboxgrid for layout http://flexboxgrid.com/

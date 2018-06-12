@@ -17,6 +17,7 @@
   "homepage": "https://github.com/bitfinexcom/bfx-report-ui#readme",
   "dependencies": {
     "@blueprintjs/core": "^2.3.1",
+    "@blueprintjs/icons": "^2.2.1",
     "@blueprintjs/table": "^2.1.1",
     "flexboxgrid": "^6.3.1",
     "prop-types": "^15.6.1",
