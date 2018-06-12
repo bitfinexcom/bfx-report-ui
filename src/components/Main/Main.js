@@ -7,7 +7,7 @@ import Timeframe from '../Timeframe'
 import Trades from '../Trades'
 
 function Main(props) {
-  return props.isValid ? (
+  return props.isValid && !props.authIsShown ? (
     <div className='row'>
       <Timeframe />
       <Ledgers />
@@ -19,6 +19,7 @@ function Main(props) {
 }
 
 Main.propTypes = {
+  authIsShown: PropTypes.bool.isRequired,
   isValid: PropTypes.bool,
 }
 

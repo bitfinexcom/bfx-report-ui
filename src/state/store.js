@@ -11,7 +11,7 @@ import saga from './sagas'
 const sagaMiddleware = createSagaMiddleware();
 
 function configureStore() {
-  /* eslint-disable-next-line no-underscore-dangle */
+  // eslint-disable-next-line no-underscore-dangle
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   // add middlewares here
   const middleware = [sagaMiddleware];

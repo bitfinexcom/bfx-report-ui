@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import types from './constants'
 import { postJsonfetch, selectAuth } from '../../state/utils'
-import { baseUrl } from '../../var/config'
+import { platform } from '../../var/config'
 
 function getOrders(auth) {
   const now = (new Date()).getTime();
@@ -10,7 +10,7 @@ function getOrders(auth) {
   const start = 0; // now - shift;
   // TODO: should customizable
   const limit = 10;
-  return postJsonfetch(`${baseUrl}/get-data`, {
+  return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getOrders',
     params: {
@@ -27,12 +27,12 @@ function* fetchOrders() {
     const data = yield call(getOrders, auth)
     yield put({
       type: types.UPDATE_ORDERS,
-      payload: data && data.result,
+      payload: (data && data.result) || [],
     })
   } catch (error) {
     // TODO: handle error case
-    // console.error(error)
-    // yield put({ type: 'REQUEST_FAILED', error })
+    // eslint-disable-next-line no-console
+    console.error(error)
   }
 }
 

@@ -4,6 +4,9 @@ import actions from '../../state/auth/actions'
 
 function mapStateToProps(state = {}) {
   return {
+    apiKey: state.auth.apiKey,
+    apiSecret: state.auth.apiSecret,
+    isShown: state.auth.isShown,
     isValid: state.auth.isValid,
   }
 }

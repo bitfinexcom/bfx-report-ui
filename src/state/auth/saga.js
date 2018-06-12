@@ -5,10 +5,10 @@ import tradesTypes from '../trades/constants'
 import ordersTypes from '../orders/constants'
 import movementsTypes from '../movements/constants'
 import { postJsonfetch } from '../utils'
-import { baseUrl } from '../../var/config'
+import { platform } from '../../var/config'
 
 function getAuth(apiKey, apiSecret) {
-  return postJsonfetch(`${baseUrl}/check-auth`, {
+  return postJsonfetch(`${platform.API_URL}/check-auth`, {
     auth: {
       apiKey,
       apiSecret,
@@ -22,7 +22,7 @@ function* checkAuth() {
     const data = yield call(getAuth, auth.apiKey, auth.apiSecret)
     yield put({
       type: types.UPDATE_AUTH_RESULT,
-      payload: data && data.result,
+      payload: (data && data.result) || false,
     })
     if (data && data.result) { // fetch all
       yield put({
@@ -40,17 +40,11 @@ function* checkAuth() {
     }
   } catch (error) {
     // TODO: handle error case
-    // console.error(error)
+    // eslint-disable-next-line no-console
+    console.error(error)
     // yield put({ type: 'REQUEST_FAILED', error })
   }
 }
-
-// function* checkAuthWithApiKey(action = {}) {
-// }
-
-// function *checkAuthWithAuthKey(action = {}) {
-
-// }
 
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)

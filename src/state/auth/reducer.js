@@ -5,6 +5,7 @@ const initialState = {
   apiSecret: '',
   authKey: '',
   isValid: null,
+  isShown: true,
 }
 
 export function authReducer(state = initialState, action) {
@@ -28,6 +29,12 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         isValid: action.payload,
+        isShown: !action.payload,
+      }
+    case types.SHOW_AUTH:
+      return {
+        ...state,
+        isShown: true,
       }
     default:
       return state
