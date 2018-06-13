@@ -67,7 +67,7 @@ const initialState = {
 export function movementsReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_MOVEMENTS: {
-      const result = action.payload;
+      const result = action.payload
       const entries = result.map(entry => ({
         id: entry.id,
         currency: entry.currency,

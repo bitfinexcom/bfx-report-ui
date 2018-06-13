@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
 import {
   Card,
@@ -47,4 +47,4 @@ Movements.propTypes = {
   entries: PropTypes.array.isRequired,
 }
 
-export default Movements;
+export default Movements

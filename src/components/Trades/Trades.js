@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
 import {
   Card,
@@ -38,4 +38,4 @@ Trades.propTypes = {
   entries: PropTypes.array.isRequired,
 }
 
-export default Trades;
+export default Trades

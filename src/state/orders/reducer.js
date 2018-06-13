@@ -102,7 +102,7 @@ const initialState = {
 export function ordersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_ORDERS: {
-      const result = action.payload;
+      const result = action.payload
       const entries = result.map(entry => ({
         id: entry.id,
         gid: entry.gid,

@@ -44,7 +44,7 @@ const initialState = {
 export function tradesReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_TRADES: {
-      const result = action.payload;
+      const result = action.payload
       const entries = result.map(entry => ({
         id: entry.id,
         mts: entry.mts,

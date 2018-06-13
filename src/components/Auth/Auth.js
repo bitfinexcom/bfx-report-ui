@@ -28,7 +28,7 @@ class Auth extends PureComponent {
 
   handleClick(event) {
     if (event.target.name === 'check') {
-      this.props.checkAuth();
+      this.props.checkAuth()
     }
   }
 
@@ -41,11 +41,11 @@ class Auth extends PureComponent {
   }
 
   render() {
-    let showValid = '';
+    let showValid = ''
     if (this.props.isValid === true) {
-      showValid = (<blockquote>Auth Success</blockquote>);
+      showValid = (<blockquote>Auth Success</blockquote>)
     } else if (this.props.isValid === false) {
-      showValid = (<blockquote>Auth Fail</blockquote>);
+      showValid = (<blockquote>Auth Fail</blockquote>)
     }
 
     return this.props.isShown ? (

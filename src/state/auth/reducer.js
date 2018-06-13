@@ -14,12 +14,12 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         apiKey: action.payload,
-      };
+      }
     case types.SET_API_SECRET:
       return {
         ...state,
         apiSecret: action.payload,
-      };
+      }
     case types.SET_AUTH_KEY:
       return {
         ...state,
