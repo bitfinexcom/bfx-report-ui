@@ -47,6 +47,7 @@ npm install
 4. set up your env variables:
 
 ```
+export PUBLIC_URL=/
 export REACT_APP_PLATFORM=localhost
 ```
 
