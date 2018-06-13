@@ -52,7 +52,7 @@ class Auth extends PureComponent {
       <div className='row'>
         <Card interactive elevation={Elevation.ZERO} className='bitfinex-auth col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4 '>
           <h5>Auth</h5>
-          <blockquote>Visit <a href={platform.KEY_URL} target='_blank'>{platform.KEY_URL}</a> to get your readonly API key and secret.</blockquote>
+          <blockquote>Visit <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>{platform.KEY_URL}</a> to get your readonly API key and secret.</blockquote>
           <p><Label text='Enter your API Key:' />
             <input type='text' required minLength='10' className='pt-input' dir='auto' name='key' placeholder='API Key' value={this.props.apiKey} onChange={this.handleChange} />
           </p>

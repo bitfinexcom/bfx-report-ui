@@ -44,10 +44,10 @@ cd bfx-report-ui
 npm install
 ```
 
-4. set up your env variables:
+4. set up your env variables to run locally:
 
 ```
-export PUBLIC_URL=/
+export PUBLIC_URL=./
 export REACT_APP_PLATFORM=localhost
 ```
 
