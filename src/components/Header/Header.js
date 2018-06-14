@@ -8,7 +8,7 @@ import {
   NavbarHeading,
   NavbarDivider,
 } from '@blueprintjs/core'
-import { platform } from '../../var/config'
+import { platform } from 'var/config'
 
 function handleClick(event) {
   if (event.target.name === 'dark') {

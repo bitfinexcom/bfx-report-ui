@@ -7,7 +7,7 @@ import {
   Intent,
   Label,
 } from '@blueprintjs/core'
-import { platform } from '../../var/config'
+import { platform } from 'var/config'
 
 class Auth extends PureComponent {
   static propTypes = {

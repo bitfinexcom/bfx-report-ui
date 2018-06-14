@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { postJsonfetch, selectAuth } from 'state/utils'
+import { platform } from 'var/config'
 import types from './constants'
-import { postJsonfetch, selectAuth } from '../../state/utils'
-import { platform } from '../../var/config'
 
 function getMovements(auth) {
   return postJsonfetch(`${platform.API_URL}/get-data`, {

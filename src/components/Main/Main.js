@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Ledgers from '../Ledgers'
-import Movements from '../Movements'
-import Orders from '../Orders'
-import Timeframe from '../Timeframe'
-import Trades from '../Trades'
+import Ledgers from 'components/Ledgers'
+import Movements from 'components/Movements'
+import Orders from 'components/Orders'
+import Timeframe from 'components/Timeframe'
+import Trades from 'components/Trades'
 
 function Main(props) {
   return props.isValid && !props.authIsShown ? (
