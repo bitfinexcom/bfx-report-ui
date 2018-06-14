@@ -110,7 +110,7 @@ export function ordersReducer(state = initialState, action) {
         symbol: entry.symbol,
         mtsCreate: entry.mtsCreate,
         mtsUpdate: entry.mtsUpdate,
-        amout: entry.amout,
+        amount: entry.amout,
         amountOrig: entry.amountOrig,
         type: entry.type,
         typePrev: entry.typePrev,
