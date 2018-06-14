@@ -7,7 +7,7 @@ import Timeframe from 'components/Timeframe'
 import Trades from 'components/Trades'
 
 function Main(props) {
-  return props.isValid && !props.authIsShown ? (
+  return props.authStatus && !props.authIsShown ? (
     <div className='row'>
       <Timeframe />
       <Ledgers />
@@ -20,7 +20,7 @@ function Main(props) {
 
 Main.propTypes = {
   authIsShown: PropTypes.bool.isRequired,
-  isValid: PropTypes.bool,
+  authStatus: PropTypes.bool,
 }
 
 export default Main

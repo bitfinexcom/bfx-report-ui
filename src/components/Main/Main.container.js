@@ -4,7 +4,7 @@ import Main from './Main'
 function mapStateToProps(state = {}) {
   return {
     authIsShown: state.auth.isShown,
-    isValid: state.auth.isValid,
+    authStatus: state.auth.authStatus,
   }
 }
 

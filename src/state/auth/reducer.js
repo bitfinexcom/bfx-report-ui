@@ -4,7 +4,7 @@ const initialState = {
   apiKey: '',
   apiSecret: '',
   authKey: '',
-  isValid: null,
+  authStatus: null,
   isShown: true,
 }
 
@@ -28,7 +28,7 @@ export function authReducer(state = initialState, action) {
     case types.UPDATE_AUTH_RESULT:
       return {
         ...state,
-        isValid: action.payload,
+        authStatus: action.payload,
         isShown: !action.payload,
       }
     case types.SHOW_AUTH:

@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
-import Auth from './Auth'
 import actions from 'state/auth/actions'
+import Auth from './Auth'
 
 function mapStateToProps(state = {}) {
   return {
     apiKey: state.auth.apiKey,
     apiSecret: state.auth.apiSecret,
     isShown: state.auth.isShown,
-    isValid: state.auth.isValid,
+    authStatus: state.auth.status,
   }
 }
 
