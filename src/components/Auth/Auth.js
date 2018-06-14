@@ -42,9 +42,9 @@ class Auth extends PureComponent {
   render() {
     let showValid = ''
     if (this.props.authStatus === true) {
-      showValid = (<Icon icon='tick' />)
+      showValid = (<Icon icon='tick' intent={Intent.SUCCESS} />)
     } else if (this.props.authStatus === false) {
-      showValid = (<Icon icon='cross' />)
+      showValid = (<Icon icon='cross' intent={Intent.DANGER} />)
     }
 
     return this.props.isShown ? (
