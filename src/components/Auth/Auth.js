@@ -26,10 +26,8 @@ class Auth extends PureComponent {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleClick(event) {
-    if (event.target.name === 'check') {
-      this.props.checkAuth()
-    }
+  handleClick() {
+    this.props.checkAuth()
   }
 
   handleChange(event) {

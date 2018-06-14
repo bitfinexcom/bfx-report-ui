@@ -47,9 +47,14 @@ npm install
 4. set up your env variables to run locally:
 
 ```
+export NODE_PATH=src/
 export PUBLIC_URL=./
 export REACT_APP_PLATFORM=localhost
 ```
+
+`NODE_PATH` is used to support absolute import local package instead of relative import.
+`PUBLIC_URL` is used to define default import path in `public/index.html`.
+`REACT_APP_PLATFORM` is used to select the right set for site title, api endpoint and more configs.
 
 5. run the report-ui
 
