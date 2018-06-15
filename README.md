@@ -64,6 +64,12 @@ export REACT_APP_PLATFORM=localhost
 `PUBLIC_URL` is used to define default import path in `public/index.html`.
 `REACT_APP_PLATFORM` is used to select the right set for site title, api endpoint and more configs.
 
+if you want to check the performance in production or don't want to see much console logs, set an extra  env variable:
+
+```
+export NODE_ENV="production"
+```
+
 5. run the report-ui
 
 ```

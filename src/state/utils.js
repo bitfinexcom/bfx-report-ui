@@ -20,14 +20,14 @@ export function selectAuth(state) {
   }
 }
 
-export function getTimeFrame(state) {
-  // TODO: should be customizable via TimeFrame
+export function getTimeFrame() {
+  // TODO: implement as a TimeFrame selector and move into state/timeframe
   // const shift = 2 * 7 * 24 * 60 * 60; // 2 weeks
   const now = (new Date()).getTime()
   return {
     start: 0,
     end: now,
-    limit: 25
+    limit: 25,
   }
 }
 

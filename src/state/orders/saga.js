@@ -4,7 +4,7 @@ import { platform } from 'var/config'
 import types from './constants'
 
 function getOrders(auth) {
-  const {start, end, limit} = getTimeFrame()
+  const { start, end, limit } = getTimeFrame()
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getOrders',

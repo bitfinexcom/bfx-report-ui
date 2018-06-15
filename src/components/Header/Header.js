@@ -24,7 +24,7 @@ function Header(props) {
   }
 
   return (
-    <Navbar fixedToTop={true}>
+    <Navbar fixedToTop>
       <NavbarGroup align='left'>
         <NavbarHeading>{platform.Name} Report</NavbarHeading>
       </NavbarGroup>
