@@ -23,7 +23,11 @@ export const Orders = (props) => {
 
   const priceAvgCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].priceAvg}</Cell>
 
-  const mtsUpdateCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdate).toLocaleString()}</TruncatedFormat></Cell>
+  const mtsUpdateCellRenderer = rowIndex => (
+    <Cell>
+      <TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdate).toLocaleString()}</TruncatedFormat>
+    </Cell>
+  )
 
   const statusCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].status}</Cell>
 

@@ -15,7 +15,11 @@ export const Trades = (props) => {
   const numRows = props.entries.length
   const idCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].id}</Cell>
 
-  const mtsCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mts).toLocaleString()}</TruncatedFormat></Cell>
+  const mtsCellRenderer = rowIndex => (
+    <Cell>
+      <TruncatedFormat>{new Date(props.entries[rowIndex].mts).toLocaleString()}</TruncatedFormat>
+    </Cell>
+  )
 
   const amountCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].amount}</Cell>
 
