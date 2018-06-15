@@ -7,7 +7,7 @@ function mapStateToProps(state = {}) {
     apiKey: state.auth.apiKey,
     apiSecret: state.auth.apiSecret,
     isShown: state.auth.isShown,
-    authStatus: state.auth.status,
+    authStatus: state.auth.authStatus,
   }
 }
 

@@ -15,9 +15,17 @@ export const Movements = (props) => {
   const numRows = props.entries.length
   const idCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].id}</Cell>
 
-  const mtsStartedCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsStarted).toLocaleString()}</TruncatedFormat></Cell>
+  const mtsStartedCellRenderer = rowIndex => (
+    <Cell>
+      <TruncatedFormat>{new Date(props.entries[rowIndex].mtsStarted).toLocaleString()}</TruncatedFormat>
+    </Cell>
+  )
 
-  const mtsUpdatedCellRenderer = rowIndex => <Cell><TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdated).toLocaleString()}</TruncatedFormat></Cell>
+  const mtsUpdatedCellRenderer = rowIndex => (
+    <Cell>
+      <TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdated).toLocaleString()}</TruncatedFormat>
+    </Cell>
+  )
 
   const currencyCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].currency}</Cell>
 

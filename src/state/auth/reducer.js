@@ -25,7 +25,7 @@ export function authReducer(state = initialState, action) {
         ...state,
         authKey: action.payload,
       }
-    case types.UPDATE_AUTH_RESULT:
+    case types.UPDATE_AUTH_STATUS:
       return {
         ...state,
         authStatus: action.payload,

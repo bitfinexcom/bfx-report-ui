@@ -21,9 +21,10 @@ function* checkAuth() {
   try {
     const data = yield call(getAuth, auth.apiKey, auth.apiSecret)
     yield put({
-      type: types.UPDATE_AUTH_RESULT,
+      type: types.UPDATE_AUTH_STATUS,
       payload: (data && data.result) || false,
     })
+
     if (data && data.result) { // fetch all
       yield put({
         type: ledgersTypes.FETCH_LEDGERS,

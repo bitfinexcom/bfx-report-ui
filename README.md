@@ -16,11 +16,11 @@ git clone https://github.com/bitfinexcom/bfx-report.git
 npm i -g grenache-grape
 ```
 
-2. Get bfx-report PR and save as pr.patch https://github.com/bitfinexcom/bfx-report/pull/1.patch
+2. Get PR from `bfx-report` repo and save as `pr.patch` https://github.com/bitfinexcom/bfx-report/pull/2.patch
 
 ```
 cd bfx-report
-# curl .... > pr.patch
+curl .... > pr.patch
 git apply pr.patch
 npm install
 ```
@@ -35,6 +35,14 @@ grape --dp 20002 --aph 40001 --bn '127.0.0.1:20001'
 npm run startWorker
 npm run start
 ```
+
+or run a single command
+
+```
+npm run startAll
+````
+
+instead.
 
 3. Clone `bfx-report-ui` project
 
