@@ -1,20 +1,16 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
-import { postJsonfetch, selectAuth } from 'state/utils'
+import { getTimeFrame, postJsonfetch, selectAuth } from 'state/utils'
 import { platform } from 'var/config'
 import types from './constants'
 
 function getOrders(auth) {
-  const now = (new Date()).getTime()
-  // const shift = 2 * 7 * 24 * 60 * 60; // 2 weeks
-  const start = 0 // now - shift;
-  // TODO: should be customizable
-  const limit = 20
+  const {start, end, limit} = getTimeFrame()
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getOrders',
     params: {
       start,
-      end: now,
+      end,
       limit,
     },
   })

@@ -20,7 +20,19 @@ export function selectAuth(state) {
   }
 }
 
+export function getTimeFrame(state) {
+  // TODO: should be customizable via TimeFrame
+  // const shift = 2 * 7 * 24 * 60 * 60; // 2 weeks
+  const now = (new Date()).getTime()
+  return {
+    start: 0,
+    end: now,
+    limit: 25
+  }
+}
+
 export default {
+  getTimeFrame,
   postJsonfetch,
   selectAuth,
 }

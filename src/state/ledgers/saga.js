@@ -1,12 +1,18 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
-import { postJsonfetch, selectAuth } from 'state/utils'
+import { getTimeFrame, postJsonfetch, selectAuth } from 'state/utils'
 import { platform } from 'var/config'
 import types from './constants'
 
 function getLedgers(auth) {
+  const {start, end, limit} = getTimeFrame()
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getLedgers',
+    params: {
+      start,
+      end,
+      limit,
+    },
   })
 }
 
