@@ -8,7 +8,7 @@ import Main from './components/Main'
 
 function App() {
   return (
-    <div>
+    <div className='container-fluid'>
       <Header />
       <Auth />
       <Main />
