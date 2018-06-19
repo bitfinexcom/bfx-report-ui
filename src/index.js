@@ -8,9 +8,9 @@ import 'flexboxgrid2/flexboxgrid2.css'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 import '@blueprintjs/table/lib/css/table.css'
+import { persistor, store } from 'state/store'
 import './index.css'
 import App from './App'
-import { persistor, store } from './state/store'
 
 ReactDOM.render(
   <Provider store={store}>

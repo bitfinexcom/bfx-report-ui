@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { injectIntl } from 'react-intl'
 import {
   Button,
   Intent,
@@ -10,15 +11,32 @@ import {
 } from '@blueprintjs/core'
 import { platform } from 'var/config'
 
-function switchDark() {
+function switchDark(e) {
+  e.preventDefault()
   document.body.className = 'pt-dark'
 }
 
-function switchLight() {
+function switchLight(e) {
+  e.preventDefault()
   document.body.className = ''
 }
 
+function switchLang(e, lang) {
+  e.preventDefault()
+  localStorage.setItem('lang', lang)
+  window.location.reload()
+}
+
+function switchEn(e) {
+  switchLang(e, 'en')
+}
+
+function switchTw(e) {
+  switchLang(e, 'tw')
+}
+
 function Header(props) {
+  const { intl } = props
   function showAuth() {
     props.showAuth()
   }
@@ -29,18 +47,21 @@ function Header(props) {
         <NavbarHeading>{platform.Name} Report</NavbarHeading>
       </NavbarGroup>
       <NavbarGroup align='right'>
-        <Button minimal text='Auth' intent={Intent.PRIMARY} onClick={showAuth} />
+        <Button minimal text={intl.formatMessage({ id: 'Auth' })} intent={Intent.PRIMARY} onClick={showAuth} />
         <NavbarDivider />
-        <Button minimal name='light' text='Light' onClick={switchLight} />
+        <Button minimal text='En' onClick={switchEn} />
+        <Button minimal text='正' onClick={switchTw} />
         <NavbarDivider />
-        <Button minimal name='dark' text='Dark' onClick={switchDark} />
+        <Button minimal name='light' text={intl.formatMessage({ id: 'Light' })} onClick={switchLight} />
+        <Button minimal name='dark' text={intl.formatMessage({ id: 'Dark' })} onClick={switchDark} />
       </NavbarGroup>
     </Navbar>
   )
 }
 
 Header.propTypes = {
+  intl: PropTypes.object.isRequired,
   showAuth: PropTypes.func.isRequired,
 }
 
-export default Header
+export default injectIntl(Header)

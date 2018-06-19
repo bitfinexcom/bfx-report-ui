@@ -1,0 +1,8 @@
+{
+  "Auth": "認證",
+  "Light": "白",
+  "Dark": "黑",
+  "EnterAPIKey": "輸入 API Key:",
+  "EnterAPISecret": "輸入 API Secret:",
+  "CheckAuth": "開始驗證"
+}
