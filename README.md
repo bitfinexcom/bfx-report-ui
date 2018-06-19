@@ -39,7 +39,7 @@ npm run start
 or run a single command
 
 ```
-npm run startAll
+npm run startAllDev
 ````
 
 instead.
