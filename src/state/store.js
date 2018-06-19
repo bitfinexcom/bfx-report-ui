@@ -5,6 +5,7 @@ import {
 } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { createLogger } from 'redux-logger'
+import { persistStore } from 'redux-persist'
 import reducer from './reducers'
 import saga from './sagas'
 
@@ -27,9 +28,11 @@ function configureStore() {
 }
 
 const store = configureStore()
+const persistor = persistStore(store)
 sagaMiddleware.run(saga)
 
 export {
   configureStore,
+  persistor,
   store,
 }
