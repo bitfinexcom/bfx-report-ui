@@ -1,5 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
 import { getTimeFrame, postJsonfetch, selectAuth } from 'state/utils'
+import statusTypes from 'state/status/constants'
 import { platform } from 'var/config'
 import types from './constants'
 
@@ -24,10 +25,18 @@ function* fetchLedgers() {
       type: types.UPDATE_LEDGERS,
       payload: (data && data.result) || [],
     })
+
+    if (data && data.error) {
+      yield put({
+        type: statusTypes.UPDATE_ERROR_STATUS,
+        payload: `Ledgers fail ${JSON.stringify(data.error)}`,
+      })
+    }
   } catch (error) {
-    // TODO: handle error case
-    // eslint-disable-next-line no-console
-    console.error(error)
+    yield put({
+      type: statusTypes.UPDATE_ERROR_STATUS,
+      payload: `Ledgers request fail ${JSON.stringify(error)}`,
+    })
   }
 }
 

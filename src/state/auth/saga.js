@@ -3,6 +3,7 @@ import ledgersTypes from 'state/ledgers/constants'
 import tradesTypes from 'state/trades/constants'
 import ordersTypes from 'state/orders/constants'
 import movementsTypes from 'state/movements/constants'
+import statusTypes from 'state/status/constants'
 import { postJsonfetch } from 'state/utils'
 import { platform } from 'var/config'
 import types from './constants'
@@ -20,12 +21,25 @@ function* checkAuth() {
   const auth = yield select(state => state.auth)
   try {
     const data = yield call(getAuth, auth.apiKey, auth.apiSecret)
+    const result = (data && data.result) || false
     yield put({
       type: types.UPDATE_AUTH_STATUS,
-      payload: (data && data.result) || false,
+      payload: result,
     })
 
-    if (data && data.result) { // fetch all
+    yield put({
+      type: result ? statusTypes.UPDATE_SUCCESS_STATUS : statusTypes.UPDATE_ERROR_STATUS,
+      payload: result ? `Auth Success at ${(new Date()).toLocaleString()}` : 'Auth Fail',
+    })
+
+    if (data && data.error) {
+      yield put({
+        type: statusTypes.UPDATE_ERROR_STATUS,
+        payload: `Auth fail ${JSON.stringify(data.error)}`,
+      })
+    }
+
+    if (result) { // fetch all
       yield put({
         type: ledgersTypes.FETCH_LEDGERS,
       })
@@ -40,10 +54,10 @@ function* checkAuth() {
       })
     }
   } catch (error) {
-    // TODO: handle error case
-    // eslint-disable-next-line no-console
-    console.error(error)
-    // yield put({ type: 'REQUEST_FAILED', error })
+    yield put({
+      type: statusTypes.UPDATE_ERROR_STATUS,
+      payload: `Auth request fail ${JSON.stringify(error)}`,
+    })
   }
 }
 

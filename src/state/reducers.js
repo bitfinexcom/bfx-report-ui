@@ -7,6 +7,7 @@ import ledgersReducer from './ledgers/reducer'
 import movementsReducer from './movements/reducer'
 import ordersReducer from './orders/reducer'
 import tradesReducer from './trades/reducer'
+import statusReducer from './status/reducer'
 
 const PERSIST_WHITELIST = ['auth']
 const PERSIST_DEBUG = false
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   movements: movementsReducer,
   orders: ordersReducer,
   trades: tradesReducer,
+  status: statusReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
