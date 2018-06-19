@@ -1,16 +1,18 @@
 import { connect } from 'react-redux'
+import actions from 'state/auth/actions'
 import Auth from './Auth'
-import actions from '../../state/auth/actions'
 
 function mapStateToProps(state = {}) {
   return {
-    isValid: state.auth.isValid,
+    apiKey: state.auth.apiKey,
+    apiSecret: state.auth.apiSecret,
+    isShown: state.auth.isShown,
+    authStatus: state.auth.authStatus,
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  checkAuth: () =>
-    dispatch(actions.checkAuth()),
+  checkAuth: () => dispatch(actions.checkAuth()),
   setKey: key => dispatch(actions.setApiKey(key)),
   setSecret: secret => dispatch(actions.setApiSecret(secret)),
 })

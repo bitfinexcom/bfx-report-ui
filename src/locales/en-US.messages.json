@@ -1,0 +1,8 @@
+{
+  "Auth": "Auth",
+  "Light": "Light",
+  "Dark": "Dark",
+  "EnterAPIKey": "Enter API Key:",
+  "EnterAPISecret": "Enter API Secret:",
+  "CheckAuth": "Check Auth"
+}

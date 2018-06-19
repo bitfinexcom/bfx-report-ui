@@ -1,12 +1,19 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { getTimeFrame, postJsonfetch, selectAuth } from 'state/utils'
+import statusTypes from 'state/status/constants'
+import { platform } from 'var/config'
 import types from './constants'
-import { postJsonfetch, selectAuth } from '../../state/utils'
-import { baseUrl } from '../../var/config'
 
 function getMovements(auth) {
-  return postJsonfetch(`${baseUrl}/get-data`, {
+  const { start, end, limit } = getTimeFrame()
+  return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getMovements',
+    params: {
+      start,
+      end,
+      limit,
+    },
   })
 }
 
@@ -16,12 +23,20 @@ function* fetchMovements() {
     const data = yield call(getMovements, auth)
     yield put({
       type: types.UPDATE_MOVEMENTS,
-      payload: data && data.result,
+      payload: (data && data.result) || [],
     })
+
+    if (data && data.error) {
+      yield put({
+        type: statusTypes.UPDATE_ERROR_STATUS,
+        payload: `Movements fail ${JSON.stringify(data.error)}`,
+      })
+    }
   } catch (error) {
-    // TODO: handle error case
-    // console.error(error)
-    // yield put({ type: 'REQUEST_FAILED', error })
+    yield put({
+      type: statusTypes.UPDATE_ERROR_STATUS,
+      payload: `Movements request fail ${JSON.stringify(error)}`,
+    })
   }
 }
 

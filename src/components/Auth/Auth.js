@@ -1,17 +1,25 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import { injectIntl } from 'react-intl'
 import {
   Button,
+  Callout,
   Card,
   Elevation,
+  Icon,
   Intent,
   Label,
 } from '@blueprintjs/core'
+import { platform } from 'var/config'
 
 class Auth extends PureComponent {
   static propTypes = {
+    authStatus: PropTypes.bool,
+    apiKey: PropTypes.string,
+    apiSecret: PropTypes.string,
     checkAuth: PropTypes.func.isRequired,
-    isValid: PropTypes.bool,
+    intl: PropTypes.object.isRequired,
+    isShown: PropTypes.bool.isRequired,
     setKey: PropTypes.func.isRequired,
     setSecret: PropTypes.func.isRequired,
   }
@@ -22,10 +30,8 @@ class Auth extends PureComponent {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleClick(event) {
-    if (event.target.name === 'check') {
-      this.props.checkAuth();
-    }
+  handleClick() {
+    this.props.checkAuth()
   }
 
   handleChange(event) {
@@ -37,30 +43,31 @@ class Auth extends PureComponent {
   }
 
   render() {
-    let showValid = '';
-    if (this.props.isValid === true) {
-      showValid = (<blockquote>Auth Success</blockquote>);
-    } else if (this.props.isValid === false) {
-      showValid = (<blockquote>Auth Fail</blockquote>);
+    const { intl } = this.props
+    let showValid = ''
+    if (this.props.authStatus === true) {
+      showValid = (<Icon iconSize={21} icon='tick' intent={Intent.SUCCESS} />)
+    } else if (this.props.authStatus === false) {
+      showValid = (<Icon iconSize={21} icon='cross' intent={Intent.DANGER} />)
     }
 
-    return (
+    return this.props.isShown ? (
       <div className='row'>
-        <Card interactive elevation={Elevation.ZERO} className='bitfinex-auth col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4 '>
-          <h5>Auth</h5>
-          <blockquote>Visit <a href='https://dev-prdn.bitfinex.com:2998/api'>https://dev-prdn.bitfinex.com:2998/api</a> to get your readonly API key and secret.</blockquote>
-          <p><Label text='Enter your API Key:' />
-            <input type='text' required minLength='10' className='pt-input' dir='auto' name='key' placeholder='API Key' onChange={this.handleChange} />
+        <Card interactive elevation={Elevation.ZERO} className='bitfinex-auth col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6'>
+          <h5>{intl.formatMessage({ id: 'Auth' })} {showValid}</h5>
+          <Callout>Visit <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>{platform.KEY_URL}</a> to get the readonly API key and secret pair.</Callout>
+          <br />
+          <p><Label text={intl.formatMessage({ id: 'EnterAPIKey' })} />
+            <input type='text' required minLength='10' className='pt-input' dir='auto' name='key' placeholder='API Key' value={this.props.apiKey} onChange={this.handleChange} />
           </p>
-          <p><Label text='Enter your API Secret:' />
-            <input type='text' required minLength='10' className='pt-input' dir='auto' name='secret' placeholder='API Secret' onChange={this.handleChange} />
+          <p><Label text={intl.formatMessage({ id: 'EnterAPISecret' })} />
+            <input type='text' required minLength='10' className='pt-input' dir='auto' name='secret' placeholder='API Secret' value={this.props.apiSecret} onChange={this.handleChange} />
           </p>
-          <p><Button name='check' intent={Intent.PRIMARY} onClick={this.handleClick}>CheckAuth</Button></p>
-          {showValid}
+          <p><Button name='check' intent={Intent.PRIMARY} onClick={this.handleClick}>{intl.formatMessage({ id: 'CheckAuth' })}</Button></p>
         </Card>
       </div>
-    )
+    ) : ''
   }
 }
 
-export default Auth
+export default injectIntl(Auth)

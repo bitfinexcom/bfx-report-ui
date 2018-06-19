@@ -27,8 +27,16 @@ export function setAuthKey(key) {
   }
 }
 
+export function showAuth() {
+  return {
+    type: types.SHOW_AUTH,
+  }
+}
+
 export default {
   checkAuth,
   setApiKey,
   setApiSecret,
+  setAuthKey,
+  showAuth,
 }

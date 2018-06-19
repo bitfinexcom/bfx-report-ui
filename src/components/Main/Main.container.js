@@ -3,7 +3,8 @@ import Main from './Main'
 
 function mapStateToProps(state = {}) {
   return {
-    isValid: state.auth.isValid,
+    authIsShown: state.auth.isShown,
+    authStatus: state.auth.authStatus,
   }
 }
 

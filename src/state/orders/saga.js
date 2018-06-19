@@ -1,21 +1,17 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { getTimeFrame, postJsonfetch, selectAuth } from 'state/utils'
+import statusTypes from 'state/status/constants'
+import { platform } from 'var/config'
 import types from './constants'
-import { postJsonfetch, selectAuth } from '../../state/utils'
-import { baseUrl } from '../../var/config'
 
 function getOrders(auth) {
-  const now = (new Date()).getTime();
-  // TODO: should customizable
-  // const shift = 2 * 7 * 24 * 60 * 60; // 2 weeks
-  const start = 0; // now - shift;
-  // TODO: should customizable
-  const limit = 10;
-  return postJsonfetch(`${baseUrl}/get-data`, {
+  const { start, end, limit } = getTimeFrame()
+  return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getOrders',
     params: {
       start,
-      end: now,
+      end,
       limit,
     },
   })
@@ -27,12 +23,20 @@ function* fetchOrders() {
     const data = yield call(getOrders, auth)
     yield put({
       type: types.UPDATE_ORDERS,
-      payload: data && data.result,
+      payload: (data && data.result) || [],
     })
+
+    if (data && data.error) {
+      yield put({
+        type: statusTypes.UPDATE_ERROR_STATUS,
+        payload: `Orders fail ${JSON.stringify(data.error)}`,
+      })
+    }
   } catch (error) {
-    // TODO: handle error case
-    // console.error(error)
-    // yield put({ type: 'REQUEST_FAILED', error })
+    yield put({
+      type: statusTypes.UPDATE_ERROR_STATUS,
+      payload: `Orders request fail ${JSON.stringify(error)}`,
+    })
   }
 }
 

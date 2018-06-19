@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  padding: 50px 0 0 0;
+  font-family: "Roboto", sans-serif;
 }
 
 body.pt-dark {
@@ -11,4 +11,8 @@ body.pt-dark {
 div.bitfinex-auth {
   text-align: center;
   margin-top: 10px;
+}
+
+.bitfinex-table {
+  max-height: 400px;
 }

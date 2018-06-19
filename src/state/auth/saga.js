@@ -1,14 +1,15 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
+import ledgersTypes from 'state/ledgers/constants'
+import tradesTypes from 'state/trades/constants'
+import ordersTypes from 'state/orders/constants'
+import movementsTypes from 'state/movements/constants'
+import statusTypes from 'state/status/constants'
+import { postJsonfetch } from 'state/utils'
+import { platform } from 'var/config'
 import types from './constants'
-import ledgersTypes from '../ledgers/constants'
-import tradesTypes from '../trades/constants'
-import ordersTypes from '../orders/constants'
-import movementsTypes from '../movements/constants'
-import { postJsonfetch } from '../utils'
-import { baseUrl } from '../../var/config'
 
 function getAuth(apiKey, apiSecret) {
-  return postJsonfetch(`${baseUrl}/check-auth`, {
+  return postJsonfetch(`${platform.API_URL}/check-auth`, {
     auth: {
       apiKey,
       apiSecret,
@@ -20,11 +21,25 @@ function* checkAuth() {
   const auth = yield select(state => state.auth)
   try {
     const data = yield call(getAuth, auth.apiKey, auth.apiSecret)
+    const result = (data && data.result) || false
     yield put({
-      type: types.UPDATE_AUTH_RESULT,
-      payload: data && data.result,
+      type: types.UPDATE_AUTH_STATUS,
+      payload: result,
     })
-    if (data && data.result) { // fetch all
+
+    yield put({
+      type: result ? statusTypes.UPDATE_SUCCESS_STATUS : statusTypes.UPDATE_ERROR_STATUS,
+      payload: result ? `Auth Success at ${(new Date()).toLocaleString()}` : 'Auth Fail',
+    })
+
+    if (data && data.error) {
+      yield put({
+        type: statusTypes.UPDATE_ERROR_STATUS,
+        payload: `Auth fail ${JSON.stringify(data.error)}`,
+      })
+    }
+
+    if (result) { // fetch all
       yield put({
         type: ledgersTypes.FETCH_LEDGERS,
       })
@@ -39,18 +54,12 @@ function* checkAuth() {
       })
     }
   } catch (error) {
-    // TODO: handle error case
-    // console.error(error)
-    // yield put({ type: 'REQUEST_FAILED', error })
+    yield put({
+      type: statusTypes.UPDATE_ERROR_STATUS,
+      payload: `Auth request fail ${JSON.stringify(error)}`,
+    })
   }
 }
-
-// function* checkAuthWithApiKey(action = {}) {
-// }
-
-// function *checkAuthWithAuthKey(action = {}) {
-
-// }
 
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
