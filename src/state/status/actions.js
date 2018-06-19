@@ -2,7 +2,6 @@ import types from './constants'
 
 /**
  * Create an action to clear status.
- * @param {boolean} payload
  */
 export function clearStatus() {
   return {
@@ -12,33 +11,33 @@ export function clearStatus() {
 
 /**
  * Create an action to update primary status.
- * @param {string} payload
+ * @param {string} msg
  */
-export function updateStatus(payload) {
+export function updateStatus(msg) {
   return {
     type: types.UPDATE_STATUS,
-    payload,
+    payload: msg,
   }
 }
 
 /**
  * Create an action to update success status.
- * @param {string} payload
+ * @param {string} msg
  */
-export function updateSuccessStatus(payload) {
+export function updateSuccessStatus(msg) {
   return {
     type: types.UPDATE_SUCCESS_STATUS,
-    payload,
+    payload: msg,
   }
 }
 
 /**
  * Create an action to update error status.
- * @param {string} payload
+ * @param {string} msg
  */
-export function updateErrorStatus(payload) {
+export function updateErrorStatus(msg) {
   return {
     type: types.UPDATE_ERROR_STATUS,
-    payload,
+    payload: msg,
   }
 }
