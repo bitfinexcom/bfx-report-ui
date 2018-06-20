@@ -1,4 +1,4 @@
-// https://docs.bitfinex.com/v2/reference#rest-auth-orders
+// https://docs.bitfinex.com/v2/reference#orders-history
 import types from './constants'
 
 /*

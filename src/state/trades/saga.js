@@ -1,5 +1,6 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
-import { getTimeFrame, postJsonfetch, selectAuth } from 'state/utils'
+import { postJsonfetch, selectAuth } from 'state/utils'
+import { getTimeFrame } from 'state/query/selector'
 import statusTypes from 'state/status/constants'
 import { platform } from 'var/config'
 import types from './constants'
