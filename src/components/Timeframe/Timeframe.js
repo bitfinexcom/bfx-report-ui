@@ -4,19 +4,33 @@ import {
   ButtonGroup,
   Card,
   Elevation,
+  Menu,
+  MenuItem,
+  Popover,
+  Position,
 } from '@blueprintjs/core'
+
+function QueryRangeMenu() {
+  return (
+    <Menu>
+      <MenuItem text='Last 24 hours' disabled />
+      <MenuItem text='Yesterday' disabled />
+      <MenuItem text='Last 2 weeks' active />
+      <MenuItem text='Month to date' disabled />
+      <MenuItem text='Past month' disabled />
+      <MenuItem text='Past 3 month' disabled />
+      <MenuItem text='Custom (max range 3 months)' disabled />
+    </Menu>
+  )
+}
 
 function Timeframe() {
   return (
-    <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-      <ButtonGroup minimal large={false}>
-        <Button disabled>Last 24 hours</Button>
-        <Button disabled>Yesterday</Button>
-        <Button active>Last 2 weeks</Button>
-        <Button disabled>Month to date</Button>
-        <Button disabled>Past month</Button>
-        <Button disabled>Past 3 months</Button>
-        <Button disabled>Custom (max range 3 months)</Button>
+    <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12' align='right'>
+      <ButtonGroup minimal>
+        <Popover content={<QueryRangeMenu />} position={Position.BOTTOM_LEFT}>
+          <Button icon='database' rightIcon='caret-down'>Query Range</Button>
+        </Popover>
         <Button icon='cloud-download' disabled>Download</Button>
       </ButtonGroup>
     </Card>
