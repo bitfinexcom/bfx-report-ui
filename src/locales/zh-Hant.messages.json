@@ -1,8 +1,9 @@
 {
-  "Auth": "認證",
-  "Light": "白",
-  "Dark": "黑",
-  "EnterAPIKey": "輸入 API Key:",
-  "EnterAPISecret": "輸入 API Secret:",
-  "CheckAuth": "開始驗證"
+  "header.auth": "認證",
+  "theme.light": "白",
+  "theme.dark": "黑",
+  "auth.auth": "認證",
+  "auth.enterAPIKey": "輸入 API Key:",
+  "auth.enterAPISecret": "輸入 API Secret:",
+  "auth.checkAuth": "開始驗證"
 }

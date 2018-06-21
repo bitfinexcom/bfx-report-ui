@@ -54,16 +54,16 @@ class Auth extends PureComponent {
     return this.props.isShown ? (
       <div className='row'>
         <Card interactive elevation={Elevation.ZERO} className='bitfinex-auth col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6'>
-          <h5>{intl.formatMessage({ id: 'Auth' })} {showValid}</h5>
+          <h5>{intl.formatMessage({ id: 'auth.auth' })} {showValid}</h5>
           <Callout>Visit <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>{platform.KEY_URL}</a> to get the readonly API key and secret pair.</Callout>
           <br />
-          <p><Label text={intl.formatMessage({ id: 'EnterAPIKey' })} />
+          <p><Label text={intl.formatMessage({ id: 'auth.enterAPIKey' })} />
             <input type='text' required minLength='10' className='pt-input' dir='auto' name='key' placeholder='API Key' value={this.props.apiKey} onChange={this.handleChange} />
           </p>
-          <p><Label text={intl.formatMessage({ id: 'EnterAPISecret' })} />
+          <p><Label text={intl.formatMessage({ id: 'auth.enterAPISecret' })} />
             <input type='text' required minLength='10' className='pt-input' dir='auto' name='secret' placeholder='API Secret' value={this.props.apiSecret} onChange={this.handleChange} />
           </p>
-          <p><Button name='check' intent={Intent.PRIMARY} onClick={this.handleClick}>{intl.formatMessage({ id: 'CheckAuth' })}</Button></p>
+          <p><Button name='check' intent={Intent.PRIMARY} onClick={this.handleClick}>{intl.formatMessage({ id: 'auth.checkAuth' })}</Button></p>
         </Card>
       </div>
     ) : ''

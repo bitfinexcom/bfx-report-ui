@@ -47,13 +47,13 @@ function Header(props) {
         <NavbarHeading>{platform.Name} Report</NavbarHeading>
       </NavbarGroup>
       <NavbarGroup align='right'>
-        <Button minimal text={intl.formatMessage({ id: 'Auth' })} intent={Intent.PRIMARY} onClick={showAuth} />
+        <Button minimal text={intl.formatMessage({ id: 'header.auth' })} intent={Intent.PRIMARY} onClick={showAuth} />
         <NavbarDivider />
         <Button minimal text='En' onClick={switchEn} />
         <Button minimal text='正' onClick={switchTw} />
         <NavbarDivider />
-        <Button minimal name='light' text={intl.formatMessage({ id: 'Light' })} onClick={switchLight} />
-        <Button minimal name='dark' text={intl.formatMessage({ id: 'Dark' })} onClick={switchDark} />
+        <Button minimal name='light' text={intl.formatMessage({ id: 'theme.light' })} onClick={switchLight} />
+        <Button minimal name='dark' text={intl.formatMessage({ id: 'theme.dark' })} onClick={switchDark} />
       </NavbarGroup>
     </Navbar>
   )

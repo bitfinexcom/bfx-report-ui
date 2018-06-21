@@ -1,8 +1,9 @@
 {
-  "Auth": "Auth",
-  "Light": "Light",
-  "Dark": "Dark",
-  "EnterAPIKey": "Enter API Key:",
-  "EnterAPISecret": "Enter API Secret:",
-  "CheckAuth": "Check Auth"
+  "header.auth": "Auth",
+  "theme.light": "Light",
+  "theme.dark": "Dark",
+  "auth.auth": "Auth",
+  "auth.enterAPIKey": "Enter API Key:",
+  "auth.enterAPISecret": "Enter API Secret:",
+  "auth.checkAuth": "Check Auth"
 }
