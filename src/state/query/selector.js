@@ -1,11 +1,11 @@
 export function getTimeFrame() {
-  // TODO: implement as a selector and move into state/query
-  // const shift = 2 * 7 * 24 * 60 * 60; // 2 weeks
+  // Currently its fixed to last 2 weeks and no query limit
+  const TIME_SHIFT = 60 * 60 * 24 * 7 * 2 // 2 weeks
   const now = (new Date()).getTime()
   return {
-    start: 0,
+    start: now - TIME_SHIFT,
     end: now,
-    limit: 25,
+    // limit: 0, // no limit applied for the first version
   }
 }
 

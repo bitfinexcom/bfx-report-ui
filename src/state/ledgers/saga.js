@@ -6,15 +6,10 @@ import { platform } from 'var/config'
 import types from './constants'
 
 function getLedgers(auth) {
-  const { start, end, limit } = getTimeFrame()
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getLedgers',
-    params: {
-      start,
-      end,
-      limit,
-    },
+    params: getTimeFrame(),
   })
 }
 

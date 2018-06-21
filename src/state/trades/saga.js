@@ -6,15 +6,10 @@ import { platform } from 'var/config'
 import types from './constants'
 
 function getTrades(auth) {
-  const { start, end, limit } = getTimeFrame()
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getTrades',
-    params: {
-      start,
-      end,
-      limit,
-    },
+    params: getTimeFrame(),
   })
 }
 

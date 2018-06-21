@@ -6,15 +6,10 @@ import { platform } from 'var/config'
 import types from './constants'
 
 function getMovements(auth) {
-  const { start, end, limit } = getTimeFrame()
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getMovements',
-    params: {
-      start,
-      end,
-      limit,
-    },
+    params: getTimeFrame(),
   })
 }
 
