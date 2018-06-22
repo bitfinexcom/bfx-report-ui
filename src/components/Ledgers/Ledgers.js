@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { injectIntl } from 'react-intl'
 import {
   Card,
   Elevation,
@@ -11,21 +12,21 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-export const Ledgers = (props) => {
-  const numRows = props.entries.length
-  const idCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].id}</Cell>
+export const Ledgers = ({ entries, intl }) => {
+  const numRows = entries.length
+  const idCellRenderer = rowIndex => <Cell>{entries[rowIndex].id}</Cell>
 
   const mtsCellRenderer = rowIndex => (
     <Cell>
-      <TruncatedFormat>{new Date(props.entries[rowIndex].mts).toLocaleString()}</TruncatedFormat>
+      <TruncatedFormat>{new Date(entries[rowIndex].mts).toLocaleString()}</TruncatedFormat>
     </Cell>
   )
 
-  const currencyCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].currency}</Cell>
+  const currencyCellRenderer = rowIndex => <Cell>{entries[rowIndex].currency}</Cell>
 
-  const amountCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].amount}</Cell>
+  const amountCellRenderer = rowIndex => <Cell>{entries[rowIndex].amount}</Cell>
 
-  const balanceCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].balance}</Cell>
+  const balanceCellRenderer = rowIndex => <Cell>{entries[rowIndex].balance}</Cell>
 
   // TODO: show description message
 
@@ -34,10 +35,10 @@ export const Ledgers = (props) => {
       <h5>Ledgers</h5>
       <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
         <Column id='id' name='#' cellRenderer={idCellRenderer} />
-        <Column id='mts' name='Time' cellRenderer={mtsCellRenderer} />
-        <Column id='currency' name='Currency' cellRenderer={currencyCellRenderer} />
-        <Column id='amount' name='Amount' cellRenderer={amountCellRenderer} />
-        <Column id='balance' name='Balance' cellRenderer={balanceCellRenderer} />
+        <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />
+        <Column id='currency' name={intl.formatMessage({ id: 'ledgers.column.currency' })} cellRenderer={currencyCellRenderer} />
+        <Column id='amount' name={intl.formatMessage({ id: 'ledgers.column.amount' })} cellRenderer={amountCellRenderer} />
+        <Column id='balance' name={intl.formatMessage({ id: 'ledgers.column.balance' })} cellRenderer={balanceCellRenderer} />
       </Table>
     </Card>
   )
@@ -45,6 +46,7 @@ export const Ledgers = (props) => {
 
 Ledgers.propTypes = {
   entries: PropTypes.array.isRequired,
+  intl: PropTypes.object.isRequired,
 }
 
-export default Ledgers
+export default injectIntl(Ledgers)

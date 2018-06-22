@@ -1,4 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { injectIntl } from 'react-intl'
+
 import {
   Button,
   ButtonGroup,
@@ -10,31 +13,39 @@ import {
   Position,
 } from '@blueprintjs/core'
 
-function QueryRangeMenu() {
+function QueryRangeMenu({ intl }) {
   return (
     <Menu>
-      <MenuItem text='Last 24 hours' disabled />
-      <MenuItem text='Yesterday' disabled />
-      <MenuItem text='Last 2 weeks' active />
-      <MenuItem text='Month to date' disabled />
-      <MenuItem text='Past month' disabled />
-      <MenuItem text='Past 3 month' disabled />
-      <MenuItem text='Custom (max range 3 months)' disabled />
+      <MenuItem text={intl.formatMessage({ id: 'timeframe.24h' })} disabled />
+      <MenuItem text={intl.formatMessage({ id: 'timeframe.yesterday' })} disabled />
+      <MenuItem text={intl.formatMessage({ id: 'timeframe.2w' })} active />
+      <MenuItem text={intl.formatMessage({ id: 'timeframe.month_to_date' })} disabled />
+      <MenuItem text={intl.formatMessage({ id: 'timeframe.past_month' })} disabled />
+      <MenuItem text={intl.formatMessage({ id: 'timeframe.past_3m' })} disabled />
+      <MenuItem text={intl.formatMessage({ id: 'timeframe.custom' })} disabled />
     </Menu>
   )
 }
 
-function Timeframe() {
+QueryRangeMenu.propTypes = {
+  intl: PropTypes.object.isRequired,
+}
+
+function Timeframe({ intl }) {
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12' align='right'>
       <ButtonGroup minimal>
-        <Popover content={<QueryRangeMenu />} position={Position.BOTTOM_LEFT}>
-          <Button icon='database' rightIcon='caret-down'>Query Range</Button>
+        <Popover content={<QueryRangeMenu intl={intl} />} position={Position.BOTTOM_LEFT}>
+          <Button icon='database' rightIcon='caret-down'>{intl.formatMessage({ id: 'timeframe.queryrange' })}</Button>
         </Popover>
-        <Button icon='cloud-download' disabled>Download</Button>
+        <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button>
       </ButtonGroup>
     </Card>
   )
 }
 
-export default Timeframe
+Timeframe.propTypes = {
+  intl: PropTypes.object.isRequired,
+}
+
+export default injectIntl(Timeframe)
