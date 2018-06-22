@@ -10,7 +10,7 @@
     "bitfinex"
   ],
   "author": "Bitfinex",
-  "license": "apache-2.0",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/bitfinexcom/bfx-report-ui/issues"
   },
