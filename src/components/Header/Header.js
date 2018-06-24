@@ -49,8 +49,8 @@ function Header(props) {
       <NavbarGroup align='right'>
         <Button minimal text={intl.formatMessage({ id: 'header.auth' })} intent={Intent.PRIMARY} onClick={showAuth} />
         <NavbarDivider />
-        <Button minimal text='En' onClick={switchEn} />
-        <Button minimal text='正' onClick={switchTw} />
+        <Button minimal text={intl.formatMessage({ id: 'header.lang.en' })} onClick={switchEn} />
+        <Button minimal text={intl.formatMessage({ id: 'header.lang.tw' })} onClick={switchTw} />
         <NavbarDivider />
         <Button minimal name='light' text={intl.formatMessage({ id: 'theme.light' })} onClick={switchLight} />
         <Button minimal name='dark' text={intl.formatMessage({ id: 'theme.dark' })} onClick={switchDark} />

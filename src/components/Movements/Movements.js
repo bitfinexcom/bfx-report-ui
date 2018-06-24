@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { injectIntl } from 'react-intl'
 import {
   Card,
   Elevation,
@@ -11,41 +12,41 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-export const Movements = (props) => {
-  const numRows = props.entries.length
-  const idCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].id}</Cell>
+export const Movements = ({ entries, intl }) => {
+  const numRows = entries.length
+  const idCellRenderer = rowIndex => <Cell>{entries[rowIndex].id}</Cell>
 
   const mtsStartedCellRenderer = rowIndex => (
     <Cell>
-      <TruncatedFormat>{new Date(props.entries[rowIndex].mtsStarted).toLocaleString()}</TruncatedFormat>
+      <TruncatedFormat>{new Date(entries[rowIndex].mtsStarted).toLocaleString()}</TruncatedFormat>
     </Cell>
   )
 
   const mtsUpdatedCellRenderer = rowIndex => (
     <Cell>
-      <TruncatedFormat>{new Date(props.entries[rowIndex].mtsUpdated).toLocaleString()}</TruncatedFormat>
+      <TruncatedFormat>{new Date(entries[rowIndex].mtsUpdated).toLocaleString()}</TruncatedFormat>
     </Cell>
   )
 
-  const currencyCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].currency}</Cell>
+  const currencyCellRenderer = rowIndex => <Cell>{entries[rowIndex].currency}</Cell>
 
-  const amountCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].amount}</Cell>
+  const amountCellRenderer = rowIndex => <Cell>{entries[rowIndex].amount}</Cell>
 
-  const statusCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].status}</Cell>
+  const statusCellRenderer = rowIndex => <Cell>{entries[rowIndex].status}</Cell>
 
-  const destinationCellRenderer = rowIndex => <Cell>{props.entries[rowIndex].destinationAddress}</Cell>
+  const destinationCellRenderer = rowIndex => <Cell>{entries[rowIndex].destinationAddress}</Cell>
 
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
       <h5>Movements</h5>
       <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
         <Column id='id' name='#' cellRenderer={idCellRenderer} />
-        <Column id='mtsstarted' name='Started' cellRenderer={mtsStartedCellRenderer} />
-        <Column id='mtsstarted' name='Updated' cellRenderer={mtsUpdatedCellRenderer} />
-        <Column id='currency' name='Currency' cellRenderer={currencyCellRenderer} />
-        <Column id='amount' name='Amount' cellRenderer={amountCellRenderer} />
-        <Column id='status' name='Status' cellRenderer={statusCellRenderer} />
-        <Column id='destination' name='Destination' cellRenderer={destinationCellRenderer} />
+        <Column id='mtsstarted' name={intl.formatMessage({ id: 'movements.column.started' })} cellRenderer={mtsStartedCellRenderer} />
+        <Column id='mtsstarted' name={intl.formatMessage({ id: 'movements.column.updated' })} cellRenderer={mtsUpdatedCellRenderer} />
+        <Column id='currency' name={intl.formatMessage({ id: 'movements.column.currency' })} cellRenderer={currencyCellRenderer} />
+        <Column id='amount' name={intl.formatMessage({ id: 'movements.column.amount' })} cellRenderer={amountCellRenderer} />
+        <Column id='status' name={intl.formatMessage({ id: 'movements.column.status' })} cellRenderer={statusCellRenderer} />
+        <Column id='destination' name={intl.formatMessage({ id: 'movements.column.destination' })} cellRenderer={destinationCellRenderer} />
       </Table>
     </Card>
   )
@@ -53,6 +54,7 @@ export const Movements = (props) => {
 
 Movements.propTypes = {
   entries: PropTypes.array.isRequired,
+  intl: PropTypes.object.isRequired,
 }
 
-export default Movements
+export default injectIntl(Movements)

@@ -1,6 +1,6 @@
 export function getTimeFrame() {
-  // Currently its fixed to last 2 weeks and no query limit
-  const TIME_SHIFT = 60 * 60 * 24 * 7 * 2 // 2 weeks
+  // Currently its fixed to last 2 months and no query limit
+  const TIME_SHIFT = 60 * 60 * 24 * 30 * 2 // 2 months
   const now = (new Date()).getTime()
   return {
     start: now - TIME_SHIFT,
