@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { injectIntl } from 'react-intl'
 import {
   Card,
@@ -11,6 +10,7 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
+import { propTypes, defaultProps } from './Orders.props'
 
 export const Orders = ({ entries, intl }) => {
   const numRows = entries.length
@@ -48,9 +48,7 @@ export const Orders = ({ entries, intl }) => {
   )
 }
 
-Orders.propTypes = {
-  entries: PropTypes.array.isRequired,
-  intl: PropTypes.object.isRequired,
-}
+Orders.propTypes = propTypes
+Orders.defaultProps = defaultProps
 
 export default injectIntl(Orders)

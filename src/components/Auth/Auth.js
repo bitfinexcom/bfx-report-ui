@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { injectIntl } from 'react-intl'
 import {
   Button,
@@ -11,18 +10,11 @@ import {
   Label,
 } from '@blueprintjs/core'
 import { platform } from 'var/config'
+import { propTypes, defaultProps } from './Auth.props'
 
 class Auth extends PureComponent {
-  static propTypes = {
-    authStatus: PropTypes.bool,
-    apiKey: PropTypes.string,
-    apiSecret: PropTypes.string,
-    checkAuth: PropTypes.func.isRequired,
-    intl: PropTypes.object.isRequired,
-    isShown: PropTypes.bool.isRequired,
-    setKey: PropTypes.func.isRequired,
-    setSecret: PropTypes.func.isRequired,
-  }
+  static propTypes = propTypes
+  static defaultProps = defaultProps
 
   constructor(props) {
     super(props)

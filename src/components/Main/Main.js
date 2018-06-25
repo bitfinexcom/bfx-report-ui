@@ -1,11 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import Timeframe from 'components/Timeframe'
 import Trades from 'components/Trades'
 import Status from 'components/Status'
+import { propTypes, defaultProps } from './Main.props'
 
 function Main(props) {
   return props.authStatus && !props.authIsShown ? (
@@ -20,9 +20,7 @@ function Main(props) {
   ) : ''
 }
 
-Main.propTypes = {
-  authIsShown: PropTypes.bool.isRequired,
-  authStatus: PropTypes.bool,
-}
+Main.propTypes = propTypes
+Main.defaultProps = defaultProps
 
 export default Main

@@ -1,35 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { injectIntl } from 'react-intl'
-
 import {
   Button,
   ButtonGroup,
   Card,
   Elevation,
-  Menu,
-  MenuItem,
   Popover,
   Position,
 } from '@blueprintjs/core'
+import QueryRangeMenu from './QueryRangeMenu'
+import { propTypes, defaultProps } from './Timeframe.props'
 
-function QueryRangeMenu({ intl }) {
-  return (
-    <Menu>
-      <MenuItem text={intl.formatMessage({ id: 'timeframe.24h' })} disabled />
-      <MenuItem text={intl.formatMessage({ id: 'timeframe.yesterday' })} disabled />
-      <MenuItem text={intl.formatMessage({ id: 'timeframe.2w' })} active />
-      <MenuItem text={intl.formatMessage({ id: 'timeframe.month_to_date' })} disabled />
-      <MenuItem text={intl.formatMessage({ id: 'timeframe.past_month' })} disabled />
-      <MenuItem text={intl.formatMessage({ id: 'timeframe.past_3m' })} disabled />
-      <MenuItem text={intl.formatMessage({ id: 'timeframe.custom' })} disabled />
-    </Menu>
-  )
-}
-
-QueryRangeMenu.propTypes = {
-  intl: PropTypes.object.isRequired,
-}
 
 function Timeframe({ intl }) {
   return (
@@ -44,8 +25,7 @@ function Timeframe({ intl }) {
   )
 }
 
-Timeframe.propTypes = {
-  intl: PropTypes.object.isRequired,
-}
+Timeframe.propTypes = propTypes
+Timeframe.defaultProps = defaultProps
 
 export default injectIntl(Timeframe)
