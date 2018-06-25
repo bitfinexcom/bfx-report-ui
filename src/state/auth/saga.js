@@ -1,4 +1,5 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 import ledgersTypes from 'state/ledgers/constants'
 import tradesTypes from 'state/trades/constants'
 import ordersTypes from 'state/orders/constants'
@@ -16,6 +17,8 @@ function getAuth(apiKey, apiSecret) {
     },
   })
 }
+
+const WAIT_INTERVAL = 300
 
 function* checkAuth() {
   const auth = yield select(state => state.auth)
@@ -43,12 +46,15 @@ function* checkAuth() {
       yield put({
         type: ledgersTypes.FETCH_LEDGERS,
       })
+      yield call(delay, WAIT_INTERVAL) // do not make sequent call
       yield put({
         type: tradesTypes.FETCH_TRADES,
       })
+      yield call(delay, WAIT_INTERVAL)
       yield put({
         type: ordersTypes.FETCH_ORDERS,
       })
+      yield call(delay, WAIT_INTERVAL)
       yield put({
         type: movementsTypes.FETCH_MOVEMENTS,
       })
