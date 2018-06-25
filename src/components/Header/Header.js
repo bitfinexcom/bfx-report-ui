@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { injectIntl } from 'react-intl'
 import {
   Button,
@@ -10,6 +9,7 @@ import {
   NavbarDivider,
 } from '@blueprintjs/core'
 import { platform } from 'var/config'
+import { propTypes, defaultProps } from './Header.props'
 
 function switchDark(e) {
   e.preventDefault()
@@ -59,9 +59,7 @@ function Header(props) {
   )
 }
 
-Header.propTypes = {
-  intl: PropTypes.object.isRequired,
-  showAuth: PropTypes.func.isRequired,
-}
+Header.propTypes = propTypes
+Header.defaultProps = defaultProps
 
 export default injectIntl(Header)

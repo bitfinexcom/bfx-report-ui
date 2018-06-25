@@ -1,17 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {
   Callout,
   Intent,
 } from '@blueprintjs/core'
+import { propTypes, defaultProps } from './Status.props'
 
 export const Status = props => (props.msg ? (
   <Callout intent={props.intent || Intent.PRIMARY}>{props.msg}</Callout>
 ) : '')
 
-Status.propTypes = {
-  msg: PropTypes.string,
-  intent: PropTypes.string,
-}
+Status.propTypes = propTypes
+Status.defaultProps = defaultProps
 
 export default Status
