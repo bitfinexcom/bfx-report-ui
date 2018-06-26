@@ -32,7 +32,7 @@ export const Ledgers = ({ entries, intl }) => {
 
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-      <h5>Ledgers</h5>
+      <h5>{intl.formatMessage({ id: 'ledgers.title' })}</h5>
       <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
         <Column id='id' name='#' cellRenderer={idCellRenderer} />
         <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />
