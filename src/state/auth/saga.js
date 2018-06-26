@@ -18,7 +18,7 @@ function getAuth(apiKey, apiSecret) {
   })
 }
 
-const WAIT_INTERVAL = 300
+const WAIT_INTERVAL = 500
 
 function* checkAuth() {
   const auth = yield select(state => state.auth)
