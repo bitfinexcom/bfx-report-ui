@@ -15,8 +15,8 @@ export function postJsonfetch(url, bodyJson) {
 export function selectAuth(state) {
   // TODO: support apiAuthKey
   return {
-    apiKey: state.auth.apiKey,
-    apiSecret: state.auth.apiSecret,
+    apiKey: state.base.apiKey,
+    apiSecret: state.base.apiSecret,
   }
 }
 
