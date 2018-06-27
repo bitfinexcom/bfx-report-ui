@@ -3,13 +3,14 @@ import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { platform } from 'var/config'
 import authReducer from './auth/reducer'
+import baseReducer from './base/reducer'
 import ledgersReducer from './ledgers/reducer'
 import movementsReducer from './movements/reducer'
 import ordersReducer from './orders/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
 
-const PERSIST_WHITELIST = ['auth']
+const PERSIST_WHITELIST = ['base']
 const PERSIST_DEBUG = false
 const persistConfig = {
   key: platform.id,
@@ -20,6 +21,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  base: baseReducer,
   ledgers: ledgersReducer,
   movements: movementsReducer,
   orders: ordersReducer,

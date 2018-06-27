@@ -21,9 +21,9 @@ function getAuth(apiKey, apiSecret) {
 const WAIT_INTERVAL = 500
 
 function* checkAuth() {
-  const auth = yield select(state => state.auth)
+  const base = yield select(state => state.base)
   try {
-    const data = yield call(getAuth, auth.apiKey, auth.apiSecret)
+    const data = yield call(getAuth, base.apiKey, base.apiSecret)
     const result = (data && data.result) || false
     yield put({
       type: types.UPDATE_AUTH_STATUS,
