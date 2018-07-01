@@ -4,30 +4,28 @@ The frontend of bfx-report at https://report.bitfinex.com
 
 Should work with [bfx-report](https://github.com/bitfinexcom/bfx-report)
 
+Or you can download the standalone electron version at [bfx-report-electron](https://github.com/bitfinexcom/bfx-report-electron)
 
-## Instructions (For alpha test)
+## Instructions (For development)
 
 Refer the first 2 steps from `bfx-report` project.
 
-1. Clone `bfx-report` project and install  `grenache-grape` globally.
+1. Clone `bfx-report` project and npm install.
 
 ```
 git clone https://github.com/bitfinexcom/bfx-report.git
-npm i -g grenache-grape
-```
-
-2. Get PR from `bfx-report` repo and save as `pr.patch` https://github.com/bitfinexcom/bfx-report/pull/2.patch
-
-```
-cd bfx-report
-curl .... > pr.patch
-git apply pr.patch
 npm install
 ```
 
-Then copy all `config/**/*.json.example` to `config/**/*.json`
+2. Then copy all `config/**/*.json.example` to `config/**/*.json`
 
-run the 4 servers (in different terminal)
+3. Run a the backend with single command
+
+```
+npm run startAllDev
+````
+
+Or manually run the 4 servers (in different terminal)
 
 ```
 grape --dp 20001 --aph 30001 --bn '127.0.0.1:20002'
@@ -36,15 +34,11 @@ npm run startWorker
 npm run start
 ```
 
-or run a single command
+If grape command is not available, install  `grenache-grape` globally via
 
-```
-npm run startAllDev
-````
+`npm i -g grenache-grape`
 
-instead.
-
-3. Clone `bfx-report-ui` project
+4. Clone `bfx-report-ui` project
 
 ```
 git clone https://github.com/bitfinexcom/bfx-report-ui.git
@@ -52,7 +46,7 @@ cd bfx-report-ui
 npm install
 ```
 
-4. set up your env variables to run locally:
+5. set up env variables to run locally:
 
 ```
 export NODE_PATH=src/
@@ -64,11 +58,13 @@ export REACT_APP_PLATFORM=localhost
 `PUBLIC_URL` is used to define default import path in `public/index.html`.
 `REACT_APP_PLATFORM` is used to select the right set for site title, api endpoint and more configs.
 
-5. run the report-ui
+6. start the report-ui
 
 ```
 npm run start
 ```
+
+Make sure you have access permission to test with the staging server/API.
 
 ## Overview
 
