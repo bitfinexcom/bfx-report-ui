@@ -5,6 +5,7 @@ import tradesTypes from 'state/trades/constants'
 import ordersTypes from 'state/orders/constants'
 import movementsTypes from 'state/movements/constants'
 import statusTypes from 'state/status/constants'
+import queryTypes from 'state/query/constants'
 import { postJsonfetch } from 'state/utils'
 import { platform } from 'var/config'
 import types from './constants'
@@ -51,12 +52,13 @@ function* checkAuth() {
 
 function* checkUpdate() {
   try {
+    yield call(delay, WAIT_INTERVAL) // do not make a sequent call
     const authStatus = yield select(state => state.auth.authStatus)
     if (authStatus) {
       yield put({
         type: ledgersTypes.FETCH_LEDGERS,
       })
-      yield call(delay, WAIT_INTERVAL) // do not make sequent call
+      yield call(delay, WAIT_INTERVAL)
       yield put({
         type: tradesTypes.FETCH_TRADES,
       })
@@ -80,4 +82,5 @@ function* checkUpdate() {
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.UPDATE_AUTH_STATUS, checkUpdate)
+  yield takeLatest(queryTypes.SET_TIME_RANGE, checkUpdate)
 }
