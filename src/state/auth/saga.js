@@ -41,8 +41,18 @@ function* checkAuth() {
         payload: `Auth fail ${JSON.stringify(data.error)}`,
       })
     }
+  } catch (error) {
+    yield put({
+      type: statusTypes.UPDATE_ERROR_STATUS,
+      payload: `Auth request fail ${JSON.stringify(error)}`,
+    })
+  }
+}
 
-    if (result) { // fetch all
+function* checkUpdate() {
+  try {
+    const authStatus = yield select(state => state.auth.authStatus)
+    if (authStatus) {
       yield put({
         type: ledgersTypes.FETCH_LEDGERS,
       })
@@ -62,11 +72,12 @@ function* checkAuth() {
   } catch (error) {
     yield put({
       type: statusTypes.UPDATE_ERROR_STATUS,
-      payload: `Auth request fail ${JSON.stringify(error)}`,
+      payload: `update request fail ${JSON.stringify(error)}`,
     })
   }
 }
 
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
+  yield takeLatest(types.UPDATE_AUTH_STATUS, checkUpdate)
 }
