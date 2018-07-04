@@ -4,7 +4,7 @@
   "description": "Report page to overview the user actions in Bitfinex and download related csv files",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bitfinexcom/bfx-report-ui.git"
+    "url": "https://github.com/bitfinexcom/bfx-report-ui.git"
   },
   "keywords": [
     "bitfinex"

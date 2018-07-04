@@ -26,7 +26,7 @@ export function formatTime(mts) {
 
 export function formatDate(mts) {
   const date = new Date(mts)
-  // yyyy/MM/dd
+  // yyyy MM dd
   return `${date.getFullYear()} ${date.getMonth() + 1} ${date.getDate()}`
 }
 
