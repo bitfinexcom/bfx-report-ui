@@ -1,12 +1,9 @@
 import types from './constants'
 
-const DEFAULT_QUERY_LIMIT = 0
-const DEFAULT_RANGE = types.TIME_RANGE_LAST_2WEEKS
-const DEFAULT_TIME_TYPE = types.TIME_TYPE_LOCALTIME
 const initialState = {
-  queryLimit: DEFAULT_QUERY_LIMIT,
-  timeRange: DEFAULT_RANGE,
-  timeType: DEFAULT_TIME_TYPE,
+  queryLimit: types.DEFAULT_QUERY_LIMIT,
+  timeRange: types.DEFAULT_RANGE,
+  timeType: types.DEFAULT_TIME_TYPE,
 }
 
 export function queryReducer(state = initialState, action) {
@@ -19,7 +16,7 @@ export function queryReducer(state = initialState, action) {
     case types.SET_TIME_RANGE:
       return {
         ...state,
-        timeRange: (action.payload && action.payload.rangeType) || DEFAULT_RANGE,
+        timeRange: (action.payload && action.payload.rangeType) || types.DEFAULT_RANGE,
       }
     default: {
       return state
