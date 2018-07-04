@@ -9,7 +9,7 @@ export function getTimeFrame(state = {}) {
   const now = date.getTime()
   let TIME_SHIFT
   let start
-  let end = now
+  const end = now
   // no limit applied for the first version
   const limit = constants.DEFAULT_QUERY_LIMIT
   switch (state.timeRange) {
@@ -18,21 +18,21 @@ export function getTimeFrame(state = {}) {
       start = now - TIME_SHIFT
       break
     case constants.TIME_RANGE_YESTERDAY:
-      date.setDate(date.getDate() -1)
-      date.setHours(0,0)
+      date.setDate(date.getDate() - 1)
+      date.setHours(0, 0)
       date.setMinutes(0, 0)
       start = date.getTime()
       break
     case constants.TIME_RANGE_MONTH_TO_DATE:
       date.setDate(1)
-      date.setHours(0,0)
+      date.setHours(0, 0)
       date.setMinutes(0, 0)
       start = date.getTime()
       break
     case constants.TIME_RANGE_PAST_MONTH:
       date.setMonth(date.getMonth() - 1)
       date.setDate(1)
-      date.setHours(0,0)
+      date.setHours(0, 0)
       date.setMinutes(0, 0)
       start = date.getTime()
       break
