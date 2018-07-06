@@ -1,0 +1,22 @@
+import PropTypes from 'prop-types'
+import { intlShape } from 'react-intl'
+
+const MOVEMENTS_ENTRIES_PROPS = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
+  mtsStarted: PropTypes.number.isRequired,
+  mtsUpdated: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired,
+  destinationAddress: PropTypes.string.isRequired,
+})
+
+export const propTypes = {
+  entries: PropTypes.arrayOf(MOVEMENTS_ENTRIES_PROPS).isRequired,
+  intl: intlShape.isRequired,
+}
+
+export const defaultProps = {
+  entries: [],
+  intl: {},
+}
