@@ -16,3 +16,19 @@ div.bitfinex-auth {
 .bitfinex-table {
   max-height: 400px;
 }
+
+.bitfinex-logo-light {
+  width: 176px;
+}
+
+.bitfinex-logo-dark {
+  width: 176px;
+}
+
+body.pt-dark .bitfinex-logo-light {
+  display: none;
+}
+
+body.pt-light .bitfinex-logo-dark {
+  display: none;
+}
