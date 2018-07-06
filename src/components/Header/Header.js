@@ -10,6 +10,8 @@ import {
 } from '@blueprintjs/core'
 import { platform } from 'var/config'
 import { propTypes, defaultProps } from './Header.props'
+import darkLogo from './logo3-dark-theme.svg'
+import lightLogo from './logo3-light-theme.svg'
 
 function switchDark(e) {
   e.preventDefault()
@@ -18,7 +20,7 @@ function switchDark(e) {
 
 function switchLight(e) {
   e.preventDefault()
-  document.body.className = ''
+  document.body.className = 'pt-light'
 }
 
 function switchLang(e, lang) {
@@ -44,7 +46,10 @@ function Header(props) {
   return (
     <Navbar fixedToTop>
       <NavbarGroup align='left'>
-        <NavbarHeading>{platform.Name} Report</NavbarHeading>
+        <NavbarHeading>
+          <img alt={platform.Name} src={darkLogo} className='bitfinex-logo-dark' />
+          <img alt={platform.Name} src={lightLogo} className='bitfinex-logo-light' />
+        </NavbarHeading>
       </NavbarGroup>
       <NavbarGroup align='right'>
         <Button minimal text={intl.formatMessage({ id: 'header.auth' })} intent={Intent.PRIMARY} onClick={showAuth} />

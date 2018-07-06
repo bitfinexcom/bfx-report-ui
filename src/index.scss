@@ -20,3 +20,19 @@ div.bitfinex-auth {
 .bitfinex-timerange {
   padding-top: 6px;
 }
+
+.bitfinex-logo-light {
+  width: 176px;
+}
+
+.bitfinex-logo-dark {
+  width: 176px;
+}
+
+body.pt-dark .bitfinex-logo-light {
+  display: none;
+}
+
+body.pt-light .bitfinex-logo-dark {
+  display: none;
+}
