@@ -1,22 +1,18 @@
-import React from 'react'
-import Ledgers from 'components/Ledgers'
-import Movements from 'components/Movements'
-import Orders from 'components/Orders'
+import React, { Fragment } from 'react'
 import Timeframe from 'components/Timeframe'
-import Trades from 'components/Trades'
 import Status from 'components/Status'
 import { propTypes, defaultProps } from './Main.props'
+import ContentContainer from './ContentContainer'
 
 function Main(props) {
   return props.authStatus && !props.authIsShown ? (
-    <div className='row'>
-      <Status />
-      <Timeframe />
-      <Ledgers />
-      <Trades />
-      <Orders />
-      <Movements />
-    </div>
+    <Fragment>
+      <div className='row'>
+        <Status />
+        <Timeframe />
+      </div>
+      <ContentContainer />
+    </Fragment>
   ) : ''
 }
 
