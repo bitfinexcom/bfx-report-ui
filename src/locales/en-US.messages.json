@@ -9,6 +9,7 @@
   "auth.enterAPISecret": "Enter API Secret:",
   "auth.checkAuth": "Check Auth",
   "ledgers.title": "Ledgers",
+  "ledgers.column.description": "Description",
   "ledgers.column.time": "Time",
   "ledgers.column.currency": "Currency",
   "ledgers.column.amount": "Amount",

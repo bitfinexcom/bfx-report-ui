@@ -9,6 +9,7 @@
   "auth.enterAPISecret": "輸入 API Secret:",
   "auth.checkAuth": "開始驗證",
   "ledgers.title": "餘額",
+  "ledgers.column.description": "描述",
   "ledgers.column.time": "時間",
   "ledgers.column.currency": "幣別",
   "ledgers.column.amount": "數量",

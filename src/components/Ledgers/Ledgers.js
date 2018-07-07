@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
   Card,
   Elevation,
+  Intent,
 } from '@blueprintjs/core'
 import {
   Cell,
@@ -14,9 +15,10 @@ import {
 import { formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Ledgers.props'
 
-export const Ledgers = ({ entries, intl }) => {
-  const numRows = entries.length
-  const idCellRenderer = rowIndex => <Cell>{entries[rowIndex].id}</Cell>
+class Ledgers extends PureComponent {
+  state = {
+    currency: ''
+  }
 
   const mtsCellRenderer = rowIndex => (
     <Cell>
@@ -24,26 +26,50 @@ export const Ledgers = ({ entries, intl }) => {
     </Cell>
   )
 
-  const currencyCellRenderer = rowIndex => <Cell>{entries[rowIndex].currency}</Cell>
+  handleClick(currency) {
+    this.setState({ currency })
+  }
 
-  const amountCellRenderer = rowIndex => <Cell>{entries[rowIndex].amount}</Cell>
+  render() {
+    const  { currencies, entries, intl } = this.props
+    const { currency } = this.state
+    const filteredData = entries.filter(entry => entry.currency === currency)
+    const numRows = filteredData.length
+    const idCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].id}</Cell>
 
-  const balanceCellRenderer = rowIndex => <Cell>{entries[rowIndex].balance}</Cell>
+    const descriptionCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].description}</Cell>
 
-  // TODO: show description message
+    const mtsCellRenderer = rowIndex => (
+      <Cell>
+        <TruncatedFormat>{new Date(filteredData[rowIndex].mts).toLocaleString()}</TruncatedFormat>
+      </Cell>
+    )
 
-  return (
-    <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-      <h5>{intl.formatMessage({ id: 'ledgers.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h5>
-      <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
-        <Column id='id' name='#' cellRenderer={idCellRenderer} />
-        <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />
-        <Column id='currency' name={intl.formatMessage({ id: 'ledgers.column.currency' })} cellRenderer={currencyCellRenderer} />
-        <Column id='amount' name={intl.formatMessage({ id: 'ledgers.column.amount' })} cellRenderer={amountCellRenderer} />
-        <Column id='balance' name={intl.formatMessage({ id: 'ledgers.column.balance' })} cellRenderer={balanceCellRenderer} />
-      </Table>
-    </Card>
-  )
+    const currencyCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].currency}</Cell>
+
+    const amountCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].amount}</Cell>
+
+    const balanceCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].balance}</Cell>
+
+    const currencyButtons = currencies.map(symbol => (
+      <Button intent={currency === symbol ? Intent.PRIMARY : Intent.NONE} onClick={() => this.handleClick(symbol)}>
+        {symbol}
+      </Button>))
+    return (
+      <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <h5>{intl.formatMessage({ id: 'ledgers.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h5>
+        {currencyButtons}
+        <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
+          <Column id='id' name='#' cellRenderer={idCellRenderer} />
+          <Column id='description' name={intl.formatMessage({ id: 'ledgers.column.description' })} cellRenderer={descriptionCellRenderer} />
+          <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />
+          <Column id='currency' name={intl.formatMessage({ id: 'ledgers.column.currency' })} cellRenderer={currencyCellRenderer} />
+          <Column id='amount' name={intl.formatMessage({ id: 'ledgers.column.amount' })} cellRenderer={amountCellRenderer} />
+          <Column id='balance' name={intl.formatMessage({ id: 'ledgers.column.balance' })} cellRenderer={balanceCellRenderer} />
+        </Table>
+      </Card>
+    )
+  }
 }
 
 Ledgers.propTypes = propTypes
