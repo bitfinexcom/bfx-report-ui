@@ -17,18 +17,31 @@ div.bitfinex-auth {
   max-height: 400px;
 }
 
-.bitfinex-logo-light {
-  width: 176px;
-}
-
+.bitfinex-logo-light,
 .bitfinex-logo-dark {
   width: 176px;
 }
 
-body.pt-dark .bitfinex-logo-light {
+.bitfinex-logo-m-light,
+.bitfinex-logo-m-dark {
+  width: 79px;
+}
+
+body.pt-dark .bitfinex-logo-light,
+body.pt-light .bitfinex-logo-dark,
+.bitfinex-logo-m-light,
+.bitfinex-logo-m-dark {
   display: none;
 }
 
-body.pt-light .bitfinex-logo-dark {
-  display: none;
+@media only screen and (max-width: 48em) {
+  .bitfinex-logo-light,
+  .bitfinex-logo-dark {
+    display: none;
+  }
+
+  body.pt-dark .bitfinex-logo-m-dark,
+  body.pt-light .bitfinex-logo-m-light {
+    display: block;
+  }
 }
