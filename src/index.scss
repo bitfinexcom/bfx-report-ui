@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 50px 0 0 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body.pt-dark {
+  background-color: #394b59;
+}
+
+div.bitfinex-auth {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.bitfinex-table {
+  max-height: 400px;
+}
+
+.bitfinex-logo-light,
+.bitfinex-logo-dark {
+  width: 176px;
+}
+
+.bitfinex-logo-m-light,
+.bitfinex-logo-m-dark {
+  width: 79px;
+}
+
+body.pt-dark .bitfinex-logo-light,
+body.pt-light .bitfinex-logo-dark,
+.bitfinex-logo-m-light,
+.bitfinex-logo-m-dark {
+  display: none;
+}
+
+@media only screen and (max-width: 48em) {
+  .bitfinex-logo-light,
+  .bitfinex-logo-dark {
+    display: none;
+  }
+
+  body.pt-dark .bitfinex-logo-m-dark,
+  body.pt-light .bitfinex-logo-m-light {
+    display: block;
+  }
+}
