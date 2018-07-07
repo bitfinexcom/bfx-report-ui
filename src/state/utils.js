@@ -20,7 +20,19 @@ export function selectAuth(state) {
   }
 }
 
+export function formatTime(mts) {
+  return new Date(mts).toLocaleString()
+}
+
+export function formatDate(mts) {
+  const date = new Date(mts)
+  // yyyy MM dd
+  return `${date.getFullYear()} ${date.getMonth() + 1} ${date.getDate()}`
+}
+
 export default {
+  formatDate,
+  formatTime,
   postJsonfetch,
   selectAuth,
 }

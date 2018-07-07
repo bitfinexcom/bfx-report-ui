@@ -7,6 +7,7 @@ import baseReducer from './base/reducer'
 import ledgersReducer from './ledgers/reducer'
 import movementsReducer from './movements/reducer'
 import ordersReducer from './orders/reducer'
+import queryReducer from './query/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
 
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   ledgers: ledgersReducer,
   movements: movementsReducer,
   orders: ordersReducer,
+  query: queryReducer,
   trades: tradesReducer,
   status: statusReducer,
 })

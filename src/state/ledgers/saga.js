@@ -5,18 +5,20 @@ import statusTypes from 'state/status/constants'
 import { platform } from 'var/config'
 import types from './constants'
 
-function getLedgers(auth) {
+function getLedgers(auth, query) {
+  const params = getTimeFrame(query)
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getLedgers',
-    params: getTimeFrame(),
+    params,
   })
 }
 
 function* fetchLedgers() {
-  const auth = yield select(selectAuth)
   try {
-    const data = yield call(getLedgers, auth)
+    const auth = yield select(selectAuth)
+    const query = yield select(state => state.query)
+    const data = yield call(getLedgers, auth, query)
     yield put({
       type: types.UPDATE_LEDGERS,
       payload: (data && data.result) || [],
