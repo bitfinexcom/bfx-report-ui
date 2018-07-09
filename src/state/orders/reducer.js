@@ -107,7 +107,7 @@ export function ordersReducer(state = initialState, action) {
         id: entry.id,
         gid: entry.gid,
         cid: entry.cid,
-        symbol: entry.symbol,
+        symbol: `${entry.symbol.slice(1, 4)}/${entry.symbol.slice(4, 7)}`,
         mtsCreate: entry.mtsCreate,
         mtsUpdate: entry.mtsUpdate,
         amount: entry.amout,
