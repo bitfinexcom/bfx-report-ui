@@ -32,7 +32,6 @@
   "trades.column.amount": "Amount",
   "trades.column.price": "Price",
   "timeframe.download": "Download",
-  "timeframe.queryrange": "Query Range",
   "timeframe.24h": "Last 24 hours",
   "timeframe.yesterday": "Yesterday",
   "timeframe.2w": "Last 2 weeks",
