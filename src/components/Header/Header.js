@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
@@ -8,6 +8,7 @@ import {
   NavbarHeading,
   NavbarDivider,
 } from '@blueprintjs/core'
+import Status from 'components/Status'
 import { platform } from 'var/config'
 import { propTypes, defaultProps } from './Header.props'
 import darkLogo from './logo3-dark-theme.svg'
@@ -46,25 +47,30 @@ function Header(props) {
   }
 
   return (
-    <Navbar fixedToTop>
-      <NavbarGroup align='left'>
-        <NavbarHeading>
-          <img alt={platform.Name} src={darkLogo} className='bitfinex-logo-dark' />
-          <img alt={platform.Name} src={lightLogo} className='bitfinex-logo-light' />
-          <img alt={platform.Name} src={mDarkLogo} className='bitfinex-logo-m-dark' />
-          <img alt={platform.Name} src={mLightLogo} className='bitfinex-logo-m-light' />
-        </NavbarHeading>
-      </NavbarGroup>
-      <NavbarGroup align='right'>
-        <Button minimal text={intl.formatMessage({ id: 'header.auth' })} intent={Intent.PRIMARY} onClick={showAuth} />
-        <NavbarDivider />
-        <Button minimal text={intl.formatMessage({ id: 'header.lang.en' })} onClick={switchEn} />
-        <Button minimal text={intl.formatMessage({ id: 'header.lang.tw' })} onClick={switchTw} />
-        <NavbarDivider />
-        <Button minimal name='light' text={intl.formatMessage({ id: 'theme.light' })} onClick={switchLight} />
-        <Button minimal name='dark' text={intl.formatMessage({ id: 'theme.dark' })} onClick={switchDark} />
-      </NavbarGroup>
-    </Navbar>
+    <Fragment>
+      <Navbar fixedToTop>
+        <NavbarGroup align='left'>
+          <NavbarHeading>
+            <img alt={platform.Name} src={darkLogo} className='bitfinex-logo-dark' />
+            <img alt={platform.Name} src={lightLogo} className='bitfinex-logo-light' />
+            <img alt={platform.Name} src={mDarkLogo} className='bitfinex-logo-m-dark' />
+            <img alt={platform.Name} src={mLightLogo} className='bitfinex-logo-m-light' />
+          </NavbarHeading>
+        </NavbarGroup>
+        <NavbarGroup align='right'>
+          <Button minimal text={intl.formatMessage({ id: 'header.auth' })} intent={Intent.PRIMARY} onClick={showAuth} />
+          <NavbarDivider />
+          <Button minimal text={intl.formatMessage({ id: 'header.lang.en' })} onClick={switchEn} />
+          <Button minimal text={intl.formatMessage({ id: 'header.lang.tw' })} onClick={switchTw} />
+          <NavbarDivider />
+          <Button minimal name='light' text={intl.formatMessage({ id: 'theme.light' })} onClick={switchLight} />
+          <Button minimal name='dark' text={intl.formatMessage({ id: 'theme.dark' })} onClick={switchDark} />
+        </NavbarGroup>
+      </Navbar>
+      <div className='row'>
+        <Status />
+      </div>
+    </Fragment>
   )
 }
 
