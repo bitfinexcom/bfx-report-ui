@@ -17,55 +17,47 @@ import { propTypes, defaultProps } from './Ledgers.props'
 
 class Ledgers extends PureComponent {
   state = {
-    currency: ''
+    currency: '',
   }
-
-  const mtsCellRenderer = rowIndex => (
-    <Cell>
-      <TruncatedFormat>{formatTime(entries[rowIndex].mts)}</TruncatedFormat>
-    </Cell>
-  )
 
   handleClick(currency) {
     this.setState({ currency })
   }
 
   render() {
-    const  { currencies, entries, intl } = this.props
-    const { currency } = this.state
+    const { currencies, entries, intl } = this.props
+    const currency = this.state.currency || currencies[0]
     const filteredData = entries.filter(entry => entry.currency === currency)
     const numRows = filteredData.length
-    const idCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].id}</Cell>
 
     const descriptionCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].description}</Cell>
 
     const mtsCellRenderer = rowIndex => (
       <Cell>
-        <TruncatedFormat>{new Date(filteredData[rowIndex].mts).toLocaleString()}</TruncatedFormat>
+        <TruncatedFormat>{formatTime(filteredData[rowIndex].mts)}</TruncatedFormat>
       </Cell>
     )
 
-    const currencyCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].currency}</Cell>
+    const creditCellRenderer = rowIndex => <Cell className='bitfinex-green-text'>{parseFloat(filteredData[rowIndex].amount) > 0 ? filteredData[rowIndex].amount : ''}</Cell>
 
-    const amountCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].amount}</Cell>
+    const debitCellRenderer = rowIndex => <Cell className='bitfinex-red-text'>{parseFloat(filteredData[rowIndex].amount) < 0 ? parseFloat(filteredData[rowIndex].amount) * -1 : ''}</Cell>
 
     const balanceCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].balance}</Cell>
 
     const currencyButtons = currencies.map(symbol => (
-      <Button intent={currency === symbol ? Intent.PRIMARY : Intent.NONE} onClick={() => this.handleClick(symbol)}>
+      <Button key={symbol} intent={currency === symbol ? Intent.PRIMARY : Intent.NONE} onClick={() => this.handleClick(symbol)}>
         {symbol}
       </Button>))
     return (
       <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <h5>{intl.formatMessage({ id: 'ledgers.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h5>
-        {currencyButtons}
-        <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
-          <Column id='id' name='#' cellRenderer={idCellRenderer} />
+        <div className='bitfinex-symbol-group'>{currencyButtons}</div>
+        <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false} columnWidths={[500, 120, 120, 120, 150]}>
           <Column id='description' name={intl.formatMessage({ id: 'ledgers.column.description' })} cellRenderer={descriptionCellRenderer} />
-          <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />
-          <Column id='currency' name={intl.formatMessage({ id: 'ledgers.column.currency' })} cellRenderer={currencyCellRenderer} />
-          <Column id='amount' name={intl.formatMessage({ id: 'ledgers.column.amount' })} cellRenderer={amountCellRenderer} />
+          <Column id='credit' name={intl.formatMessage({ id: 'ledgers.column.credit' })} cellRenderer={creditCellRenderer} />
+          <Column id='debit' name={intl.formatMessage({ id: 'ledgers.column.debit' })} cellRenderer={debitCellRenderer} />
           <Column id='balance' name={intl.formatMessage({ id: 'ledgers.column.balance' })} cellRenderer={balanceCellRenderer} />
+          <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />
         </Table>
       </Card>
     )

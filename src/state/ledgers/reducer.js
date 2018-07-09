@@ -90,8 +90,8 @@ export function ledgersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_LEDGERS: {
       const result = action.payload
-      let currencies = []
-      const entries = result.map(entry => {
+      const currencies = []
+      const entries = result.map((entry) => {
         // save new symbol to currencies list
         if (currencies.indexOf(entry.currency) === -1) {
           currencies.push(entry.currency)
