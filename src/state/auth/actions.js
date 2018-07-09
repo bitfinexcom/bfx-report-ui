@@ -18,7 +18,14 @@ export function showAuth() {
   }
 }
 
+export function logout() {
+  return {
+    type: types.LOGOUT,
+  }
+}
+
 export default {
   checkAuth,
+  logout,
   showAuth,
 }

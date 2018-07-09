@@ -2,7 +2,6 @@ import React from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
-  Intent,
   Navbar,
   NavbarGroup,
   NavbarHeading,
@@ -40,10 +39,14 @@ function switchTw(e) {
 }
 
 function Header(props) {
-  const { intl } = props
-  function showAuth() {
-    props.showAuth()
+  const {
+    authIsShown, authStatus, logout, intl,
+  } = props
+  function authLogout() {
+    logout()
   }
+
+  const buttonLogout = !authIsShown && authStatus === true ? (<Button minimal text={intl.formatMessage({ id: 'header.logout' })} onClick={authLogout} />) : ''
 
   return (
     <Navbar fixedToTop>
@@ -56,7 +59,7 @@ function Header(props) {
         </NavbarHeading>
       </NavbarGroup>
       <NavbarGroup align='right'>
-        <Button minimal text={intl.formatMessage({ id: 'header.auth' })} intent={Intent.PRIMARY} onClick={showAuth} />
+        {buttonLogout}
         <NavbarDivider />
         <Button minimal text={intl.formatMessage({ id: 'header.lang.en' })} onClick={switchEn} />
         <Button minimal text={intl.formatMessage({ id: 'header.lang.tw' })} onClick={switchTw} />
