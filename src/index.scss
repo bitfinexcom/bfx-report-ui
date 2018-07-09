@@ -45,3 +45,23 @@ body.pt-light .bitfinex-logo-dark,
     display: block;
   }
 }
+
+.bitfinex-symbol-group {
+  padding-bottom: 10px;
+}
+
+body.pt-dark .bitfinex-green-text > div {
+  color: #7a9c4a;
+}
+
+body.pt-dark .bitfinex-red-text > div {
+  color: #aa6064;
+}
+
+body.pt-light .bitfinex-green-text > div {
+  color: #8bc040;
+}
+
+body.pt-light .bitfinex-red-text > div {
+  color: #de5f66;
+}

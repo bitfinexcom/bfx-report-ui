@@ -10,11 +10,13 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  currencies: PropTypes.arrayOf(PropTypes.string),
   entries: PropTypes.arrayOf(LEDGERS_ENTRIES_PROPS).isRequired,
   intl: intlShape.isRequired,
 }
 
 export const defaultProps = {
+  currencies: [],
   entries: [],
   intl: {},
 }
