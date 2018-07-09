@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
-  Intent,
   Navbar,
   NavbarGroup,
   NavbarHeading,
@@ -41,36 +40,35 @@ function switchTw(e) {
 }
 
 function Header(props) {
-  const { intl } = props
-  function showAuth() {
-    props.showAuth()
+  const {
+    authIsShown, authStatus, logout, intl,
+  } = props
+  function authLogout() {
+    logout()
   }
 
+  const buttonLogout = !authIsShown && authStatus === true ? (<Button minimal text={intl.formatMessage({ id: 'header.logout' })} onClick={authLogout} />) : ''
+
   return (
-    <Fragment>
-      <Navbar fixedToTop>
-        <NavbarGroup align='left'>
-          <NavbarHeading>
-            <img alt={platform.Name} src={darkLogo} className='bitfinex-logo-dark' />
-            <img alt={platform.Name} src={lightLogo} className='bitfinex-logo-light' />
-            <img alt={platform.Name} src={mDarkLogo} className='bitfinex-logo-m-dark' />
-            <img alt={platform.Name} src={mLightLogo} className='bitfinex-logo-m-light' />
-          </NavbarHeading>
-        </NavbarGroup>
-        <NavbarGroup align='right'>
-          <Button minimal text={intl.formatMessage({ id: 'header.auth' })} intent={Intent.PRIMARY} onClick={showAuth} />
-          <NavbarDivider />
-          <Button minimal text={intl.formatMessage({ id: 'header.lang.en' })} onClick={switchEn} />
-          <Button minimal text={intl.formatMessage({ id: 'header.lang.tw' })} onClick={switchTw} />
-          <NavbarDivider />
-          <Button minimal name='light' text={intl.formatMessage({ id: 'theme.light' })} onClick={switchLight} />
-          <Button minimal name='dark' text={intl.formatMessage({ id: 'theme.dark' })} onClick={switchDark} />
-        </NavbarGroup>
-      </Navbar>
-      <div className='row'>
-        <Status />
-      </div>
-    </Fragment>
+    <Navbar fixedToTop>
+      <NavbarGroup align='left'>
+        <NavbarHeading>
+          <img alt={platform.Name} src={darkLogo} className='bitfinex-logo-dark' />
+          <img alt={platform.Name} src={lightLogo} className='bitfinex-logo-light' />
+          <img alt={platform.Name} src={mDarkLogo} className='bitfinex-logo-m-dark' />
+          <img alt={platform.Name} src={mLightLogo} className='bitfinex-logo-m-light' />
+        </NavbarHeading>
+      </NavbarGroup>
+      <NavbarGroup align='right'>
+        {buttonLogout}
+        <NavbarDivider />
+        <Button minimal text={intl.formatMessage({ id: 'header.lang.en' })} onClick={switchEn} />
+        <Button minimal text={intl.formatMessage({ id: 'header.lang.tw' })} onClick={switchTw} />
+        <NavbarDivider />
+        <Button minimal name='light' text={intl.formatMessage({ id: 'theme.light' })} onClick={switchLight} />
+        <Button minimal name='dark' text={intl.formatMessage({ id: 'theme.dark' })} onClick={switchDark} />
+      </NavbarGroup>
+    </Navbar>
   )
 }
 
