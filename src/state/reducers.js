@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { platform } from 'var/config'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import ledgersReducer from './ledgers/reducer'
@@ -14,7 +13,7 @@ import statusReducer from './status/reducer'
 const PERSIST_WHITELIST = ['base']
 const PERSIST_DEBUG = false
 const persistConfig = {
-  key: platform.id,
+  key: 'bfx',
   storage,
   whitelist: PERSIST_WHITELIST,
   debug: PERSIST_DEBUG,

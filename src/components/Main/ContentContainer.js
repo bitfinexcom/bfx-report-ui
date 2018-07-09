@@ -25,7 +25,7 @@ class ContentContainer extends PureComponent {
   }
 
   state = {
-    target: 'ledgers',
+    target: MENU_LEDGERS,
   }
 
   handleClick(target) {
@@ -55,7 +55,7 @@ class ContentContainer extends PureComponent {
     }
     return (
       <div className='row'>
-        <Menu large className='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
+        <Menu large className='col-xs-12 col-sm-12 col-md-12 col-lg-1 col-xl-2'>
           <MenuItem
             icon='book'
             text={intl.formatMessage({ id: 'ledgers.title' })}
@@ -81,7 +81,7 @@ class ContentContainer extends PureComponent {
             active={target === MENU_MOVEMENTS}
           />
         </Menu>
-        <div className='col-xs-12 col-sm-10 col-md-10 col-lg-10'>
+        <div className='col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-10'>
           {content}
         </div>
       </div>

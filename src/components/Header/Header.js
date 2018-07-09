@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
-  Intent,
   Navbar,
   NavbarGroup,
   NavbarHeading,
@@ -15,60 +14,66 @@ import lightLogo from './logo3-light-theme.svg'
 import mDarkLogo from './mobile_logo_dark.svg'
 import mLightLogo from './mobile_logo_light.svg'
 
-function switchDark(e) {
-  e.preventDefault()
-  document.body.className = 'pt-dark'
-}
+class Header extends PureComponent {
+  static propTypes = propTypes
+  static defaultProps = defaultProps
 
-function switchLight(e) {
-  e.preventDefault()
-  document.body.className = 'pt-light'
-}
-
-function switchLang(e, lang) {
-  e.preventDefault()
-  localStorage.setItem('lang', lang)
-  window.location.reload()
-}
-
-function switchEn(e) {
-  switchLang(e, 'en')
-}
-
-function switchTw(e) {
-  switchLang(e, 'tw')
-}
-
-function Header(props) {
-  const { intl } = props
-  function showAuth() {
-    props.showAuth()
+  constructor(props) {
+    super(props)
+    this.authLogout = this.authLogout.bind(this)
+    this.switchEn = this.switchLang.bind(this, 'en')
+    this.switchTw = this.switchLang.bind(this, 'tw')
+    this.switchDark = this.switchTheme.bind(this, 'pt-dark')
+    this.switchLight = this.switchTheme.bind(this, 'pt-light')
   }
 
-  return (
-    <Navbar fixedToTop>
-      <NavbarGroup align='left'>
-        <NavbarHeading>
-          <img alt={platform.Name} src={darkLogo} className='bitfinex-logo-dark hidden-sm hidden-xs' />
-          <img alt={platform.Name} src={lightLogo} className='bitfinex-logo-light hidden-sm hidden-xs' />
-          <img alt={platform.Name} src={mDarkLogo} className='bitfinex-logo-m-dark hidden-lg hidden-md' />
-          <img alt={platform.Name} src={mLightLogo} className='bitfinex-logo-m-light hidden-lg hidden-md' />
-        </NavbarHeading>
-      </NavbarGroup>
-      <NavbarGroup align='right'>
-        <Button minimal text={intl.formatMessage({ id: 'header.auth' })} intent={Intent.PRIMARY} onClick={showAuth} />
-        <NavbarDivider />
-        <Button minimal text={intl.formatMessage({ id: 'header.lang.en' })} onClick={switchEn} />
-        <Button minimal text={intl.formatMessage({ id: 'header.lang.tw' })} onClick={switchTw} />
-        <NavbarDivider />
-        <Button minimal name='light' text={intl.formatMessage({ id: 'theme.light' })} onClick={switchLight} />
-        <Button minimal name='dark' text={intl.formatMessage({ id: 'theme.dark' })} onClick={switchDark} />
-      </NavbarGroup>
-    </Navbar>
-  )
-}
+  authLogout() {
+    this.props.logout()
+  }
 
-Header.propTypes = propTypes
-Header.defaultProps = defaultProps
+  switchLang(lang, e) {
+    e.preventDefault()
+    this.props.setLang(lang)
+  }
+
+  switchTheme(theme, e) {
+    e.preventDefault()
+    this.props.setTheme(theme)
+  }
+
+  render() {
+    const { authIsShown, authStatus, intl } = this.props
+    const buttonLogout = !authIsShown && authStatus === true ?
+      (<Button minimal text={intl.formatMessage({ id: 'header.logout' })} onClick={this.authLogout} />) : ''
+
+    return (
+      <Navbar fixedToTop>
+        <NavbarGroup align='left'>
+          <NavbarHeading>
+            <img alt={platform.Name} src={darkLogo} className='bitfinex-logo-dark hidden-sm hidden-xs' />
+            <img alt={platform.Name} src={lightLogo} className='bitfinex-logo-light hidden-sm hidden-xs' />
+            <img alt={platform.Name} src={mDarkLogo} className='bitfinex-logo-m-dark hidden-xl hidden-lg hidden-md' />
+            <img alt={platform.Name} src={mLightLogo} className='bitfinex-logo-m-light hidden-xl hidden-lg hidden-md' />
+          </NavbarHeading>
+        </NavbarGroup>
+        <NavbarGroup align='right'>
+          {buttonLogout}
+          <NavbarDivider />
+          <Button minimal text={intl.formatMessage({ id: 'header.lang.en' })} onClick={this.switchEn} />
+          <Button minimal text={intl.formatMessage({ id: 'header.lang.tw' })} onClick={this.switchTw} />
+          <NavbarDivider />
+          <Button
+            minimal name='light'
+            text={intl.formatMessage({ id: 'theme.light' })}
+            onClick={this.switchLight} />
+          <Button
+            minimal name='dark'
+            text={intl.formatMessage({ id: 'theme.dark' })}
+            onClick={this.switchDark} />
+        </NavbarGroup>
+      </Navbar>
+    )
+  }
+}
 
 export default injectIntl(Header)
