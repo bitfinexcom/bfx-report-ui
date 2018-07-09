@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
@@ -7,6 +7,7 @@ import {
   NavbarHeading,
   NavbarDivider,
 } from '@blueprintjs/core'
+import Status from 'components/Status'
 import { platform } from 'var/config'
 import { propTypes, defaultProps } from './Header.props'
 import darkLogo from './logo3-dark-theme.svg'
