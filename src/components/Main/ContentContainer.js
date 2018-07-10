@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Menu,
+  MenuDivider,
   MenuItem,
 } from '@blueprintjs/core'
+import Timeframe from 'components/Timeframe'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
@@ -43,6 +45,8 @@ class ContentContainer extends PureComponent {
     return (
       <div className='row'>
         <Menu large className='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
+          <Timeframe />
+          <MenuDivider />
           <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'ledgers.title' })} onClick={() => this.handleClick('ledgers')} active={this.state.target === 'ledgers'} />
           <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'trades.title' })} onClick={() => this.handleClick('trades')} active={this.state.target === 'trades'} />
           <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'orders.title' })} onClick={() => this.handleClick('orders')} active={this.state.target === 'orders'} />

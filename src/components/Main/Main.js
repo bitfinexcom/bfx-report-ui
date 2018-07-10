@@ -1,17 +1,9 @@
-import React, { Fragment } from 'react'
-import Timeframe from 'components/Timeframe'
+import React from 'react'
 import { propTypes, defaultProps } from './Main.props'
 import ContentContainer from './ContentContainer'
 
 function Main(props) {
-  return props.authStatus && !props.authIsShown ? (
-    <Fragment>
-      <div className='row'>
-        <Timeframe />
-      </div>
-      <ContentContainer />
-    </Fragment>
-  ) : ''
+  return props.authStatus && !props.authIsShown ? (<ContentContainer />) : ''
 }
 
 Main.propTypes = propTypes

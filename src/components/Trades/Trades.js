@@ -30,7 +30,7 @@ export const Trades = ({ entries, intl }) => {
 
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-      <h5>{intl.formatMessage({ id: 'trades.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h5>
+      <h2>{intl.formatMessage({ id: 'trades.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h2>
       <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
         <Column id='id' name='#' cellRenderer={idCellRenderer} />
         <Column id='mts' name={intl.formatMessage({ id: 'trades.column.time' })} cellRenderer={mtsCellRenderer} />

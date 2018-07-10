@@ -1,30 +1,38 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Elevation,
-  Popover,
-  Position,
-} from '@blueprintjs/core'
+import { MenuItem } from '@blueprintjs/core'
+import constants from 'state/query/constants'
 import { formatDate } from 'state/utils'
-import QueryRangeMenu from './QueryRangeMenu'
 import { propTypes, defaultProps } from './Timeframe.props'
 
+class Timeframe extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-function Timeframe({
-  intl, setTimeRange, start, end, timeRange,
-}) {
-  return (
-    <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12' align='left'>
-      <ButtonGroup minimal>
-        <Popover content={<QueryRangeMenu intl={intl} setTimeRange={setTimeRange} start={start} end={end} timeRange={timeRange} />} position={Position.BOTTOM_LEFT}>
-          <Button rightIcon='caret-down'>{formatDate(start)} — {formatDate(end)}</Button>
-        </Popover>
-      </ButtonGroup>
-    </Card>
-  )
+  handleClick(rangeType) {
+    return () => {
+      this.props.setTimeRange(rangeType)
+    }
+  }
+
+  render() {
+    const {
+      intl, start, end, timeRange,
+    } = this.props
+    return (
+      <MenuItem icon='calendar' text={`${formatDate(start)} — ${formatDate(end)}`} className='bitfinex-timerange'>
+        <MenuItem text={intl.formatMessage({ id: 'timeframe.24h' })} onClick={this.handleClick(constants.TIME_RANGE_LAST_24HOURS)} active={timeRange === constants.TIME_RANGE_LAST_24HOURS} />
+        <MenuItem text={intl.formatMessage({ id: 'timeframe.yesterday' })} onClick={this.handleClick(constants.TIME_RANGE_YESTERDAY)} active={timeRange === constants.TIME_RANGE_YESTERDAY} />
+        <MenuItem text={intl.formatMessage({ id: 'timeframe.2w' })} onClick={this.handleClick(constants.TIME_RANGE_LAST_2WEEKS)} active={timeRange === constants.TIME_RANGE_LAST_2WEEKS} />
+        <MenuItem text={intl.formatMessage({ id: 'timeframe.month_to_date' })} onClick={this.handleClick(constants.TIME_RANGE_MONTH_TO_DATE)} active={timeRange === constants.TIME_RANGE_MONTH_TO_DATE} />
+        <MenuItem text={intl.formatMessage({ id: 'timeframe.past_month' })} onClick={this.handleClick(constants.TIME_RANGE_PAST_MONTH)} active={timeRange === constants.TIME_RANGE_PAST_MONTH} />
+        <MenuItem text={intl.formatMessage({ id: 'timeframe.past_3m' })} onClick={this.handleClick(constants.TIME_RANGE_PAST_3MONTH)} active={timeRange === constants.TIME_RANGE_PAST_3MONTH} />
+        {/* <MenuItem text={intl.formatMessage({ id: 'timeframe.custom' })} onClick={this.handleClick(constants.TIME_RANGE_CUSTOM)} active={timeRange === constants.TIME_RANGE_CUSTOM} disabled /> */}
+      </MenuItem>
+    )
+  }
 }
 
 Timeframe.propTypes = propTypes
