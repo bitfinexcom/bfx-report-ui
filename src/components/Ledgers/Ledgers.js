@@ -1,6 +1,7 @@
 import React from 'react'
 import { injectIntl } from 'react-intl'
 import {
+  Button,
   Card,
   Elevation,
 } from '@blueprintjs/core'
@@ -10,6 +11,7 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
+import { formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Ledgers.props'
 
 export const Ledgers = ({ entries, intl }) => {
@@ -18,7 +20,7 @@ export const Ledgers = ({ entries, intl }) => {
 
   const mtsCellRenderer = rowIndex => (
     <Cell>
-      <TruncatedFormat>{new Date(entries[rowIndex].mts).toLocaleString()}</TruncatedFormat>
+      <TruncatedFormat>{formatTime(entries[rowIndex].mts)}</TruncatedFormat>
     </Cell>
   )
 
@@ -32,7 +34,7 @@ export const Ledgers = ({ entries, intl }) => {
 
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-      <h5>{intl.formatMessage({ id: 'ledgers.title' })}</h5>
+      <h5>{intl.formatMessage({ id: 'ledgers.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h5>
       <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
         <Column id='id' name='#' cellRenderer={idCellRenderer} />
         <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />

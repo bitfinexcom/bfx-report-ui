@@ -5,18 +5,20 @@ import statusTypes from 'state/status/constants'
 import { platform } from 'var/config'
 import types from './constants'
 
-function getOrders(auth) {
+function getOrders(auth, query) {
+  const params = getTimeFrame(query)
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getOrders',
-    params: getTimeFrame(),
+    params,
   })
 }
 
 function* fetchOrders() {
-  const auth = yield select(selectAuth)
   try {
-    const data = yield call(getOrders, auth)
+    const auth = yield select(selectAuth)
+    const query = yield select(state => state.query)
+    const data = yield call(getOrders, auth, query)
     yield put({
       type: types.UPDATE_ORDERS,
       payload: (data && data.result) || [],
