@@ -1,3 +1,5 @@
+import _padStart from 'lodash/padStart'
+
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
     method: 'POST',
@@ -21,13 +23,19 @@ export function selectAuth(state) {
 }
 
 export function formatTime(mts) {
-  return new Date(mts).toLocaleString()
+  // TODO: support local GMT time by preference
+  //  new Date(mts).toLocaleString()
+  const date = new Date(mts)
+  // 18-07-06 02:08:02
+  return `${date.getFullYear() % 100}-${_padStart(date.getMonth() + 1, 2, 0)}-${_padStart(date.getDate(), 2, 0)} ${_padStart(date.getHours(), 2, 0)}:${_padStart(date.getMinutes(), 2, 0)}:${_padStart(date.getSeconds(), 2, 0)}`
 }
+
+const monthstr = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
 
 export function formatDate(mts) {
   const date = new Date(mts)
-  // yyyy MM dd
-  return `${date.getFullYear()} ${date.getMonth() + 1} ${date.getDate()}`
+  // MMM dd yyyy
+  return `${monthstr[date.getMonth()]} ${_padStart(date.getDate(), 2, 0)} ${date.getFullYear()}`
 }
 
 export default {

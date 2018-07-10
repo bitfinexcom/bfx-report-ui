@@ -50,7 +50,7 @@ class Ledgers extends PureComponent {
       </Button>))
     return (
       <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-        <h5>{intl.formatMessage({ id: 'ledgers.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h5>
+        <h2>{intl.formatMessage({ id: 'ledgers.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h2>
         <div className='bitfinex-symbol-group'>{currencyButtons}</div>
         <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false} columnWidths={[500, 120, 120, 120, 150]}>
           <Column id='description' name={intl.formatMessage({ id: 'ledgers.column.description' })} cellRenderer={descriptionCellRenderer} />
