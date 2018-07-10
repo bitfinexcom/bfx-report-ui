@@ -12,14 +12,24 @@ import Orders from 'components/Orders'
 import Trades from 'components/Trades'
 import { propTypes, defaultProps } from './ContentContainer.props'
 
+const MENU_LEDGERS = 'ledgers'
+const MENU_ORDERS = 'orders'
+const MENU_TRADES = 'trades'
+const MENU_DEPOSITS = 'deposits'
+const MENU_WITHDRAWALS = 'withdrawals'
+
 class ContentContainer extends PureComponent {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleClickLedgers = this.handleClick.bind(this, MENU_LEDGERS)
+    this.handleClickOrders = this.handleClick.bind(this, MENU_ORDERS)
+    this.handleClickTrades = this.handleClick.bind(this, MENU_TRADES)
+    this.handleClickDeposits = this.handleClick.bind(this, MENU_DEPOSITS)
+    this.handleClickWithdrawals = this.handleClick.bind(this, MENU_WITHDRAWALS)
   }
 
   state = {
-    target: 'ledgers',
+    target: MENU_LEDGERS,
   }
 
   handleClick(target) {
@@ -33,20 +43,20 @@ class ContentContainer extends PureComponent {
     const { target } = this.state
     let content
     switch (target) {
-      case 'ledgers':
+      case MENU_LEDGERS:
         content = (<Ledgers />)
         break
-      case 'trades':
+      case MENU_TRADES:
         content = (<Trades />)
         break
-      case 'orders':
+      case MENU_ORDERS:
         content = (<Orders />)
         break
-      case 'deposits':
-        content = (<Movements type='deposits' />)
+      case MENU_DEPOSITS:
+        content = (<Movements type={MENU_DEPOSITS} />)
         break
-      case 'withdrawals':
-        content = (<Movements type='withdrawals' />)
+      case MENU_WITHDRAWALS:
+        content = (<Movements type={MENU_WITHDRAWALS} />)
         break
       default:
         content = (<Ledgers />)
@@ -57,10 +67,11 @@ class ContentContainer extends PureComponent {
         <Menu large className='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
           <Timeframe />
           <MenuDivider />
-          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'ledgers.title' })} onClick={() => this.handleClick('ledgers')} active={this.state.target === 'ledgers'} />
-          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'trades.title' })} onClick={() => this.handleClick('trades')} active={this.state.target === 'trades'} />
-          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'orders.title' })} onClick={() => this.handleClick('orders')} active={this.state.target === 'orders'} />
-          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'movements.title' })} onClick={() => this.handleClick('movements')} active={this.state.target === 'movements'} />
+          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'ledgers.title' })} onClick={this.handleClickLedgers()} active={target === MENU_LEDGERS} />
+          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'trades.title' })} onClick={this.handleClickTrades()} active={target === MENU_TRADES} />
+          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'orders.title' })} onClick={this.handleClickOrders()} active={target === MENU_ORDERS} />
+          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'movements.deposits.title' })} onClick={this.handleClickDeposits()} active={target === MENU_DEPOSITS} />
+          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'movements.withdrawals.title' })} onClick={this.handleClickWithdrawals()} active={target === MENU_WITHDRAWALS} />
         </Menu>
         <div className='col-xs-12 col-sm-10 col-md-10 col-lg-10'>
           {content}
