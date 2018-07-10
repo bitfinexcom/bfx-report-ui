@@ -13,12 +13,19 @@ import Trades from 'components/Trades'
 import { propTypes, defaultProps } from './ContentContainer.props'
 
 class ContentContainer extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   state = {
     target: 'ledgers',
   }
 
   handleClick(target) {
-    this.setState({ target })
+    return () => {
+      this.setState({ target })
+    }
   }
 
   render() {
@@ -35,8 +42,11 @@ class ContentContainer extends PureComponent {
       case 'orders':
         content = (<Orders />)
         break
-      case 'movements':
-        content = (<Movements />)
+      case 'deposits':
+        content = (<Movements type='deposits' />)
+        break
+      case 'withdrawals':
+        content = (<Movements type='withdrawals' />)
         break
       default:
         content = (<Ledgers />)
