@@ -41,3 +41,10 @@ export function updateErrorStatus(msg) {
     payload: msg,
   }
 }
+
+export default {
+  clearStatus,
+  updateStatus,
+  updateSuccessStatus,
+  updateErrorStatus,
+}

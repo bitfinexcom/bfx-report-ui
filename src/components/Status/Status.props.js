@@ -2,11 +2,13 @@ import PropTypes from 'prop-types'
 import { Intent } from '@blueprintjs/core'
 
 export const propTypes = {
-  msg: PropTypes.string,
+  clearStatus: PropTypes.func,
   intent: PropTypes.string,
+  msg: PropTypes.string,
 }
 
 export const defaultProps = {
-  msg: '',
+  clearStatus: () => {},
   intent: Intent.PRIMARY,
+  msg: '',
 }
