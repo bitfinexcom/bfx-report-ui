@@ -30,7 +30,7 @@ export const Trades = ({ entries, intl }) => {
 
   const priceCellRenderer = rowIndex => <Cell>{entries[rowIndex].price}</Cell>
 
-  const feeCellRenderer = rowIndex => <Cell>{`${entries[rowIndex].fee} ${entries[rowIndex].fee_currency}`}</Cell>
+  const feeCellRenderer = rowIndex => <Cell>{entries[rowIndex].fee} <span className='bitfinex-show-soft'>{entries[rowIndex].fee_currency}</span></Cell>
 
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>

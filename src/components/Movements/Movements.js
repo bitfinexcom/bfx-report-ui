@@ -29,7 +29,7 @@ export const Movements = ({ entries, intl, type }) => {
     </Cell>
   )
 
-  const amountCellRenderer = rowIndex => <Cell>{`${parseFloat(filteredData[rowIndex].amount) < 0 ? parseFloat(filteredData[rowIndex].amount) * -1 : filteredData[rowIndex].amount} ${filteredData[rowIndex].currency}`}</Cell>
+  const amountCellRenderer = rowIndex => <Cell>{parseFloat(filteredData[rowIndex].amount) < 0 ? parseFloat(filteredData[rowIndex].amount) * -1 : filteredData[rowIndex].amount} <span className='bitfinex-show-soft'>{filteredData[rowIndex].currency}</span></Cell>
 
   const statusCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].status}</Cell>
 
