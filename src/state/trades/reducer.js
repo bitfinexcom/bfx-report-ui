@@ -47,9 +47,12 @@ export function tradesReducer(state = initialState, action) {
       const result = action.payload
       const entries = result.map(entry => ({
         id: entry.id,
+        pair: entry.pair ? `${entry.pair.slice(1, 4)}/${entry.pair.slice(4, 7)}` : '',
         mts: entry.mts,
         amount: entry.amount,
         price: entry.price,
+        fee: entry.fee || 0,
+        fee_currency: entry.fee_currency || '',
       }))
       return {
         ...state,
