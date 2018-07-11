@@ -67,11 +67,11 @@ class ContentContainer extends PureComponent {
         <Menu large className='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
           <Timeframe />
           <MenuDivider />
-          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'ledgers.title' })} onClick={this.handleClickLedgers()} active={target === MENU_LEDGERS} />
-          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'trades.title' })} onClick={this.handleClickTrades()} active={target === MENU_TRADES} />
-          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'orders.title' })} onClick={this.handleClickOrders()} active={target === MENU_ORDERS} />
-          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'movements.deposits.title' })} onClick={this.handleClickDeposits()} active={target === MENU_DEPOSITS} />
-          <MenuItem icon='folder-close' text={intl.formatMessage({ id: 'movements.withdrawals.title' })} onClick={this.handleClickWithdrawals()} active={target === MENU_WITHDRAWALS} />
+          <MenuItem icon='book' text={intl.formatMessage({ id: 'ledgers.title' })} onClick={this.handleClickLedgers()} active={target === MENU_LEDGERS} />
+          <MenuItem icon='exchange' text={intl.formatMessage({ id: 'trades.title' })} onClick={this.handleClickTrades()} active={target === MENU_TRADES} />
+          <MenuItem icon='flows' text={intl.formatMessage({ id: 'orders.title' })} onClick={this.handleClickOrders()} active={target === MENU_ORDERS} />
+          <MenuItem icon='add-to-folder' text={intl.formatMessage({ id: 'movements.deposits.title' })} onClick={this.handleClickDeposits()} active={target === MENU_DEPOSITS} />
+          <MenuItem icon='folder-shared-open' text={intl.formatMessage({ id: 'movements.withdrawals.title' })} onClick={this.handleClickWithdrawals()} active={target === MENU_WITHDRAWALS} />
         </Menu>
         <div className='col-xs-12 col-sm-10 col-md-10 col-lg-10'>
           {content}
