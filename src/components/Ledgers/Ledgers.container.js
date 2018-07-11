@@ -5,6 +5,7 @@ function mapStateToProps(state = {}) {
   return {
     currencies: state.ledgers.currencies,
     entries: state.ledgers.entries,
+    loading: !state.ledgers.dataReceived,
   }
 }
 

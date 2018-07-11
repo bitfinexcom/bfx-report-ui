@@ -4,6 +4,7 @@ import Trades from './Trades'
 function mapStateToProps(state = {}) {
   return {
     entries: state.trades.entries,
+    loading: !state.trades.dataReceived,
   }
 }
 

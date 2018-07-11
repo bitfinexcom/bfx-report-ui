@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
@@ -14,7 +14,7 @@ import {
 import { formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Trades.props'
 
-export const Trades = ({ entries, intl }) => {
+export const Trades = ({ entries, intl, loading }) => {
   const numRows = entries.length
   const idCellRenderer = rowIndex => <Cell wrapText={false}>{entries[rowIndex].id}</Cell>
 
@@ -32,17 +32,40 @@ export const Trades = ({ entries, intl }) => {
 
   const feeCellRenderer = rowIndex => <Cell>{entries[rowIndex].fee} <span className='bitfinex-show-soft'>{entries[rowIndex].fee_currency}</span></Cell>
 
+  let showContent
+  if (loading) {
+    showContent = (
+      <Fragment>
+        <h2>{intl.formatMessage({ id: 'trades.title' })}</h2>
+        <div>{intl.formatMessage({ id: 'loading' })}</div>
+      </Fragment>
+    )
+  } else if (numRows === 0) {
+    showContent = (
+      <Fragment>
+        <h2>{intl.formatMessage({ id: 'trades.title' })}</h2>
+        <div>{intl.formatMessage({ id: 'nodata' })}</div>
+      </Fragment>
+    )
+  } else {
+    showContent = (
+      <Fragment>
+        <h2>{intl.formatMessage({ id: 'trades.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h2>
+        <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false} columnWidths={[80, 70, 125, 125, 125, 150]}>
+          <Column id='id' name='#' cellRenderer={idCellRenderer} />
+          <Column id='pair' name={intl.formatMessage({ id: 'trades.column.pair' })} cellRenderer={pairCellRenderer} />
+          <Column id='amount' name={intl.formatMessage({ id: 'trades.column.amount' })} cellRenderer={amountCellRenderer} />
+          <Column id='price' name={intl.formatMessage({ id: 'trades.column.price' })} cellRenderer={priceCellRenderer} />
+          <Column id='fee' name={intl.formatMessage({ id: 'trades.column.fee' })} cellRenderer={feeCellRenderer} />
+          <Column id='mts' name={intl.formatMessage({ id: 'trades.column.time' })} cellRenderer={mtsCellRenderer} />
+        </Table>
+      </Fragment>
+    )
+  }
+
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-      <h2>{intl.formatMessage({ id: 'trades.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h2>
-      <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false} columnWidths={[80, 70, 125, 125, 125, 150]}>
-        <Column id='id' name='#' cellRenderer={idCellRenderer} />
-        <Column id='pair' name={intl.formatMessage({ id: 'trades.column.pair' })} cellRenderer={pairCellRenderer} />
-        <Column id='amount' name={intl.formatMessage({ id: 'trades.column.amount' })} cellRenderer={amountCellRenderer} />
-        <Column id='price' name={intl.formatMessage({ id: 'trades.column.price' })} cellRenderer={priceCellRenderer} />
-        <Column id='fee' name={intl.formatMessage({ id: 'trades.column.fee' })} cellRenderer={feeCellRenderer} />
-        <Column id='mts' name={intl.formatMessage({ id: 'trades.column.time' })} cellRenderer={mtsCellRenderer} />
-      </Table>
+      {showContent}
     </Card>
   )
 }

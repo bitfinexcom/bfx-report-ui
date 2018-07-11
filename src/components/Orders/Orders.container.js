@@ -4,6 +4,7 @@ import Orders from './Orders'
 function mapStateToProps(state = {}) {
   return {
     entries: state.orders.entries,
+    loading: !state.orders.dataReceived,
   }
 }
 

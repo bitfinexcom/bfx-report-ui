@@ -8,6 +8,8 @@
   "auth.enterAPIKey": "輸入 API Key:",
   "auth.enterAPISecret": "輸入 API Secret:",
   "auth.checkAuth": "開始驗證",
+  "loading": "讀取中...",
+  "nodata": "沒有相關資料。請試試其他時間範圍。",
   "ledgers.title": "餘額",
   "ledgers.column.description": "描述",
   "ledgers.column.time": "時間",

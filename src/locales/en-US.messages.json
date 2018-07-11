@@ -8,6 +8,8 @@
   "auth.enterAPIKey": "Enter API Key:",
   "auth.enterAPISecret": "Enter API Secret:",
   "auth.checkAuth": "Check Auth",
+  "loading": "Loading...",
+  "nodata": "No related data in this time range. You can try another time range.",
   "ledgers.title": "Ledgers",
   "ledgers.column.description": "DESCRIPTION",
   "ledgers.column.time": "DATE",
