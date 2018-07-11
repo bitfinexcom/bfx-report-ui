@@ -97,6 +97,7 @@ const initialState = {
       placedId: '',
     }, */
   ],
+  dataReceived: false,
 }
 
 export function ordersReducer(state = initialState, action) {
@@ -110,7 +111,7 @@ export function ordersReducer(state = initialState, action) {
         symbol: `${entry.symbol.slice(1, 4)}/${entry.symbol.slice(4, 7)}`,
         mtsCreate: entry.mtsCreate,
         mtsUpdate: entry.mtsUpdate,
-        amount: entry.amout,
+        amount: entry.amount,
         amountOrig: entry.amountOrig,
         type: entry.type,
         typePrev: entry.typePrev,
@@ -126,6 +127,7 @@ export function ordersReducer(state = initialState, action) {
       return {
         ...state,
         entries,
+        dataReceived: true,
       }
     }
     default: {

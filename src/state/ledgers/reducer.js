@@ -84,6 +84,7 @@ const initialState = {
       description: 'Transfer of 5000.885 USD from wallet Exchange to Deposit on wallet funding',
     }, */
   ],
+  dataReceived: false,
 }
 
 export function ledgersReducer(state = initialState, action) {
@@ -109,6 +110,7 @@ export function ledgersReducer(state = initialState, action) {
         ...state,
         entries,
         currencies,
+        dataReceived: true,
       }
     }
     default: {

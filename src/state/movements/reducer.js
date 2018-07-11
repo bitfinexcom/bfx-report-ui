@@ -62,6 +62,7 @@ const initialState = {
       transactionId: '',
     }, */
   ],
+  dataReceived: false,
 }
 
 export function movementsReducer(state = initialState, action) {
@@ -83,6 +84,7 @@ export function movementsReducer(state = initialState, action) {
       return {
         ...state,
         entries,
+        dataReceived: true,
       }
     }
     default: {

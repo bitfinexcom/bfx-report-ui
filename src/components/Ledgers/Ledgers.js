@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
@@ -25,7 +25,9 @@ class Ledgers extends PureComponent {
   }
 
   render() {
-    const { currencies, entries, intl } = this.props
+    const {
+      currencies, entries, intl, loading,
+    } = this.props
     const currency = this.state.currency || currencies[0]
     const filteredData = entries.filter(entry => entry.currency === currency)
     const numRows = filteredData.length
@@ -48,17 +50,40 @@ class Ledgers extends PureComponent {
       <Button key={symbol} intent={currency === symbol ? Intent.PRIMARY : Intent.NONE} onClick={() => this.handleClick(symbol)}>
         {symbol}
       </Button>))
+
+    let showContent
+    if (loading) {
+      showContent = (
+        <Fragment>
+          <h2>{intl.formatMessage({ id: 'ledgers.title' })}</h2>
+          <div>{intl.formatMessage({ id: 'loading' })}</div>
+        </Fragment>
+      )
+    } else if (numRows === 0) {
+      showContent = (
+        <Fragment>
+          <h2>{intl.formatMessage({ id: 'ledgers.title' })}</h2>
+          <div>{intl.formatMessage({ id: 'nodata' })}</div>
+        </Fragment>
+      )
+    } else {
+      showContent = (
+        <Fragment>
+          <h2>{intl.formatMessage({ id: 'ledgers.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h2>
+          <div className='bitfinex-symbol-group'>{currencyButtons}</div>
+          <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false} columnWidths={[500, 120, 120, 120, 150]}>
+            <Column id='description' name={intl.formatMessage({ id: 'ledgers.column.description' })} cellRenderer={descriptionCellRenderer} />
+            <Column id='credit' name={intl.formatMessage({ id: 'ledgers.column.credit' })} cellRenderer={creditCellRenderer} />
+            <Column id='debit' name={intl.formatMessage({ id: 'ledgers.column.debit' })} cellRenderer={debitCellRenderer} />
+            <Column id='balance' name={intl.formatMessage({ id: 'ledgers.column.balance' })} cellRenderer={balanceCellRenderer} />
+            <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />
+          </Table>
+        </Fragment>
+      )
+    }
     return (
       <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-        <h2>{intl.formatMessage({ id: 'ledgers.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h2>
-        <div className='bitfinex-symbol-group'>{currencyButtons}</div>
-        <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false} columnWidths={[500, 120, 120, 120, 150]}>
-          <Column id='description' name={intl.formatMessage({ id: 'ledgers.column.description' })} cellRenderer={descriptionCellRenderer} />
-          <Column id='credit' name={intl.formatMessage({ id: 'ledgers.column.credit' })} cellRenderer={creditCellRenderer} />
-          <Column id='debit' name={intl.formatMessage({ id: 'ledgers.column.debit' })} cellRenderer={debitCellRenderer} />
-          <Column id='balance' name={intl.formatMessage({ id: 'ledgers.column.balance' })} cellRenderer={balanceCellRenderer} />
-          <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />
-        </Table>
+        {showContent}
       </Card>
     )
   }
