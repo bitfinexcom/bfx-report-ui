@@ -16,26 +16,65 @@ import { propTypes, defaultProps } from './Trades.props'
 
 export const Trades = ({ entries, intl }) => {
   const numRows = entries.length
-  const idCellRenderer = rowIndex => <Cell>{entries[rowIndex].id}</Cell>
+  const idCellRenderer = rowIndex => <Cell wrapText={false}>{entries[rowIndex].id}</Cell>
+
+  const pairCellRenderer = rowIndex => <Cell>{entries[rowIndex].pair}</Cell>
 
   const mtsCellRenderer = rowIndex => (
     <Cell>
-      <TruncatedFormat>{formatTime(entries[rowIndex].mts)}</TruncatedFormat>
+      <TruncatedFormat>{formatTime(entries[rowIndex].mtsCreate)}</TruncatedFormat>
     </Cell>
   )
 
-  const amountCellRenderer = rowIndex => <Cell>{entries[rowIndex].amount}</Cell>
+  const amountCellRenderer = rowIndex => <Cell>{entries[rowIndex].execAmount}</Cell>
 
-  const priceCellRenderer = rowIndex => <Cell>{entries[rowIndex].price}</Cell>
+  const priceCellRenderer = rowIndex => <Cell>{entries[rowIndex].execPrice}</Cell>
+
+  const feeCellRenderer = rowIndex => (
+    <Cell>
+      {entries[rowIndex].fee}&nbsp;
+      <span className='bitfinex-show-soft'>{entries[rowIndex].feeCurrency}</span>
+    </Cell>
+  )
 
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-      <h5>{intl.formatMessage({ id: 'trades.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h5>
+      <h2>
+        {intl.formatMessage({ id: 'trades.title' })}
+        &nbsp;
+        <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button>
+      </h2>
       <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
-        <Column id='id' name='#' cellRenderer={idCellRenderer} />
-        <Column id='mts' name={intl.formatMessage({ id: 'trades.column.time' })} cellRenderer={mtsCellRenderer} />
-        <Column id='amount' name={intl.formatMessage({ id: 'trades.column.amount' })} cellRenderer={amountCellRenderer} />
-        <Column id='price' name={intl.formatMessage({ id: 'trades.column.price' })} cellRenderer={priceCellRenderer} />
+        <Column
+          id='id'
+          name='#'
+          cellRenderer={idCellRenderer}
+        />
+        <Column
+          id='pair'
+          name={intl.formatMessage({ id: 'trades.column.pair' })}
+          cellRenderer={pairCellRenderer}
+        />
+        <Column
+          id='amount'
+          name={intl.formatMessage({ id: 'trades.column.amount' })}
+          cellRenderer={amountCellRenderer}
+        />
+        <Column
+          id='price'
+          name={intl.formatMessage({ id: 'trades.column.price' })}
+          cellRenderer={priceCellRenderer}
+        />
+        <Column
+          id='fee'
+          name={intl.formatMessage({ id: 'trades.column.fee' })}
+          cellRenderer={feeCellRenderer}
+        />
+        <Column
+          id='mts'
+          name={intl.formatMessage({ id: 'trades.column.time' })}
+          cellRenderer={mtsCellRenderer}
+        />
       </Table>
     </Card>
   )
