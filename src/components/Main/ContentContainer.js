@@ -29,9 +29,7 @@ class ContentContainer extends PureComponent {
   }
 
   handleClick(target) {
-    return () => {
-      this.setState({ target })
-    }
+    this.setState({ target })
   }
 
   render() {
@@ -61,25 +59,25 @@ class ContentContainer extends PureComponent {
           <MenuItem
             icon='book'
             text={intl.formatMessage({ id: 'ledgers.title' })}
-            onClick={this.handleClickLedgers()}
+            onClick={this.handleClickLedgers}
             active={target === MENU_LEDGERS}
           />
           <MenuItem
             icon='exchange'
             text={intl.formatMessage({ id: 'trades.title' })}
-            onClick={this.handleClickTrades()}
+            onClick={this.handleClickTrades}
             active={target === MENU_TRADES}
           />
           <MenuItem
             icon='flows'
             text={intl.formatMessage({ id: 'orders.title' })}
-            onClick={this.handleClickOrders()}
+            onClick={this.handleClickOrders}
             active={target === MENU_ORDERS}
           />
           <MenuItem
             icon='folder-close'
             text={intl.formatMessage({ id: 'movements.title' })}
-            onClick={this.handleClickMovements()}
+            onClick={this.handleClickMovements}
             active={target === MENU_MOVEMENTS}
           />
         </Menu>
