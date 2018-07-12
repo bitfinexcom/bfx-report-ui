@@ -13,6 +13,7 @@ import {
 } from '@blueprintjs/table'
 import { formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Movements.props'
+import Inspector from './Inspector'
 
 // const TYPE_DEPOSITS = 'deposits'
 const TYPE_WITHDRAWALS = 'withdrawals'
@@ -35,7 +36,14 @@ export const Movements = ({
 
   const statusCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].status}</Cell>
 
-  const destinationCellRenderer = rowIndex => <Cell>{filteredData[rowIndex].destinationAddress}</Cell>
+  const destinationCellRenderer = (rowIndex) => {
+    const entry = filteredData[rowIndex]
+    return (
+      <Cell>
+        {entry.destinationAddress} <Inspector currency={entry.currency} destinationAddress={entry.destinationAddress} />
+      </Cell>
+    )
+  }
 
   let showContent
   if (loading) {
