@@ -57,12 +57,12 @@ export const Orders = ({ entries, intl, loading }) => {
     showContent = (
       <Fragment>
         <h2>{intl.formatMessage({ id: 'orders.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h2>
-        <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false} columnWidths={[80, 70, 150, 100, 100, 100, 100, 150, 200]}>
+        <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false} columnWidths={[85, 70, 150, 100, 100, 100, 100, 150, 200]}>
           <Column id='id' name='#' cellRenderer={idCellRenderer} />
           <Column id='symbol' name={intl.formatMessage({ id: 'orders.column.pair' })} cellRenderer={symbolCellRenderer} />
           <Column id='type' name={intl.formatMessage({ id: 'orders.column.type' })} cellRenderer={typeCellRenderer} />
-          <Column id='amountOrig' name={intl.formatMessage({ id: 'orders.column.amount-orig' })} cellRenderer={amountOrigCellRenderer} />
           <Column id='amount' name={intl.formatMessage({ id: 'orders.column.amount' })} cellRenderer={amountCellRenderer} />
+          <Column id='amountOrig' name={intl.formatMessage({ id: 'orders.column.amount-orig' })} cellRenderer={amountOrigCellRenderer} />
           <Column id='price' name={intl.formatMessage({ id: 'orders.column.price' })} cellRenderer={priceCellRenderer} />
           <Column id='priceAvg' name={intl.formatMessage({ id: 'orders.column.avgprice' })} cellRenderer={priceAvgCellRenderer} />
           <Column id='mtsUpdate' name={intl.formatMessage({ id: 'orders.column.update' })} cellRenderer={mtsUpdateCellRenderer} />
