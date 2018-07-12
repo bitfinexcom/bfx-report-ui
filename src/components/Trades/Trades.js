@@ -22,15 +22,15 @@ export const Trades = ({ entries, intl, loading }) => {
 
   const mtsCellRenderer = rowIndex => (
     <Cell>
-      <TruncatedFormat>{formatTime(entries[rowIndex].mts)}</TruncatedFormat>
+      <TruncatedFormat>{formatTime(entries[rowIndex].mtsCreate)}</TruncatedFormat>
     </Cell>
   )
 
-  const amountCellRenderer = rowIndex => <Cell>{entries[rowIndex].amount}</Cell>
+  const amountCellRenderer = rowIndex => <Cell>{entries[rowIndex].execAmount}</Cell>
 
-  const priceCellRenderer = rowIndex => <Cell>{entries[rowIndex].price}</Cell>
+  const priceCellRenderer = rowIndex => <Cell>{entries[rowIndex].execPrice}</Cell>
 
-  const feeCellRenderer = rowIndex => <Cell>{entries[rowIndex].fee} <span className='bitfinex-show-soft'>{entries[rowIndex].fee_currency}</span></Cell>
+  const feeCellRenderer = rowIndex => <Cell>{entries[rowIndex].fee} <span className='bitfinex-show-soft'>{entries[rowIndex].feeCurrency}</span></Cell>
 
   let showContent
   if (loading) {
