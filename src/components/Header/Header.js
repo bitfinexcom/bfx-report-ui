@@ -54,10 +54,10 @@ function Header(props) {
       <Navbar fixedToTop>
         <NavbarGroup align='left'>
           <NavbarHeading>
-            <img alt={platform.Name} src={darkLogo} className='bitfinex-logo-dark' />
-            <img alt={platform.Name} src={lightLogo} className='bitfinex-logo-light' />
-            <img alt={platform.Name} src={mDarkLogo} className='bitfinex-logo-m-dark' />
-            <img alt={platform.Name} src={mLightLogo} className='bitfinex-logo-m-light' />
+            <img alt={platform.Name} src={darkLogo} className='bitfinex-logo-dark hidden-sm hidden-xs' />
+            <img alt={platform.Name} src={lightLogo} className='bitfinex-logo-light hidden-sm hidden-xs' />
+            <img alt={platform.Name} src={mDarkLogo} className='bitfinex-logo-m-dark hidden-xl hidden-lg hidden-md' />
+            <img alt={platform.Name} src={mLightLogo} className='bitfinex-logo-m-light hidden-xl hidden-lg hidden-md' />
           </NavbarHeading>
         </NavbarGroup>
         <NavbarGroup align='right'>
