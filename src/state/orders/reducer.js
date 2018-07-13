@@ -1,6 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
+import { formatPair } from 'state/utils'
 import types from './constants'
-
 /*
 {
     "result": [
@@ -107,7 +107,7 @@ export function ordersReducer(state = initialState, action) {
         id: entry.id,
         gid: entry.gid,
         cid: entry.cid,
-        pair: `${entry.symbol.slice(1, 4)}/${entry.symbol.slice(4, 7)}`,
+        pair: formatPair(entry.symbol),
         mtsCreate: entry.mtsCreate,
         mtsUpdate: entry.mtsUpdate,
         amount: entry.amount,
