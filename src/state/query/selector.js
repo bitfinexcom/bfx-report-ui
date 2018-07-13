@@ -31,9 +31,6 @@ export function getTimeFrame(state = {}) {
       break
     case constants.TIME_RANGE_PAST_MONTH:
       date.setMonth(date.getMonth() - 1)
-      date.setDate(1)
-      date.setHours(0, 0)
-      date.setMinutes(0, 0)
       start = date.getTime()
       break
     case constants.TIME_RANGE_PAST_3MONTH:
