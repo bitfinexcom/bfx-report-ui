@@ -30,8 +30,13 @@ export function formatDate(mts) {
   return `${date.getFullYear()} ${date.getMonth() + 1} ${date.getDate()}`
 }
 
+export function formatPair(symbol) {
+  return `${symbol.slice(1, 4)}/${symbol.slice(4, 7)}`
+}
+
 export default {
   formatDate,
+  formatPair,
   formatTime,
   postJsonfetch,
   selectAuth,
