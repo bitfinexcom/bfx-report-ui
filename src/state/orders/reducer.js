@@ -1,6 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
+import { formatPair } from 'state/utils'
 import types from './constants'
-
 /*
 {
     "result": [
@@ -80,7 +80,7 @@ const initialState = {
     /* {
       gid: '',
       cid: 12175783466,
-      symbol: 'tBTCUSD',
+      pair: 'BTC/USD',
       mtsCreate: 1527564176000,
       mtsUpdate: 1527625559000,
       amout: 0,
@@ -107,10 +107,10 @@ export function ordersReducer(state = initialState, action) {
         id: entry.id,
         gid: entry.gid,
         cid: entry.cid,
-        symbol: entry.symbol,
+        pair: formatPair(entry.symbol),
         mtsCreate: entry.mtsCreate,
         mtsUpdate: entry.mtsUpdate,
-        amount: entry.amout,
+        amount: entry.amount,
         amountOrig: entry.amountOrig,
         type: entry.type,
         typePrev: entry.typePrev,
