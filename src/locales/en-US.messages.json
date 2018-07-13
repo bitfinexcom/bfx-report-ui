@@ -37,7 +37,7 @@
   "trades.column.amount": "AMOUNT",
   "trades.column.price": "PRICE",
   "trades.column.fee": "FEE",
-  "timeframe.download": "Download",
+  "timeframe.download": "Export",
   "timeframe.24h": "Last 24 hours",
   "timeframe.yesterday": "Yesterday",
   "timeframe.2w": "Last 2 weeks",

@@ -37,7 +37,7 @@
   "trades.column.amount": "數量",
   "trades.column.price": "價格",
   "trades.column.fee": "手續費",
-  "timeframe.download": "下載",
+  "timeframe.download": "匯出",
   "timeframe.24h": "24 小時間",
   "timeframe.yesterday": "昨天",
   "timeframe.2w": "兩週間",
