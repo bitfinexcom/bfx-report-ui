@@ -10,13 +10,13 @@ const platforms = {
     id: 'efx',
     Name: 'Ethfinex',
     API_URL: 'https://api.ethfinex.com/api',
-    KEY_URL: 'https://dev-prdn.bitfinex.com:2998/api',
+    KEY_URL: 'https://staging.bitfinex.com:2997/api',
   },
   localhost: {
     id: 'local',
     Name: 'Bfx',
     API_URL: 'http://localhost:31339/api',
-    KEY_URL: 'https://dev-prdn.bitfinex.com:2998/api',
+    KEY_URL: 'https://staging.bitfinex.com:2998/api',
   },
 }
 
