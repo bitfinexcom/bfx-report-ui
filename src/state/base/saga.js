@@ -1,4 +1,8 @@
-import { call, select, takeLatest } from 'redux-saga/effects'
+import {
+  call,
+  select,
+  takeLatest,
+} from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import types from './constants'
 
