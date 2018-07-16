@@ -2,12 +2,14 @@ import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Menu,
+  MenuDivider,
   MenuItem,
 } from '@blueprintjs/core'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import Trades from 'components/Trades'
+import Timeframe from 'components/Timeframe'
 import { propTypes, defaultProps } from './ContentContainer.props'
 
 const MENU_LEDGERS = 'ledgers'
@@ -56,6 +58,8 @@ class ContentContainer extends PureComponent {
     return (
       <div className='row'>
         <Menu large className='col-xs-12 col-sm-12 col-md-12 col-lg-1 col-xl-2'>
+          <Timeframe />
+          <MenuDivider />
           <MenuItem
             icon='book'
             text={intl.formatMessage({ id: 'ledgers.title' })}
