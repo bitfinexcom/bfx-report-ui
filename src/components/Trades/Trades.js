@@ -16,34 +16,58 @@ import { propTypes, defaultProps } from './Trades.props'
 
 export const Trades = ({ entries, intl }) => {
   const numRows = entries.length
-  const idCellRenderer = rowIndex => <Cell wrapText={false}>{entries[rowIndex].id}</Cell>
 
-  const pairCellRenderer = rowIndex => <Cell>{entries[rowIndex].pair}</Cell>
-
-  const mtsCellRenderer = rowIndex => (
-    <Cell>
-      <TruncatedFormat>{formatTime(entries[rowIndex].mtsCreate)}</TruncatedFormat>
+  const idCellRenderer = rowIndex => (
+    <Cell wrapText={false}>
+      {entries[rowIndex].id}
     </Cell>
   )
 
-  const amountCellRenderer = rowIndex => <Cell>{entries[rowIndex].execAmount}</Cell>
+  const pairCellRenderer = rowIndex => (
+    <Cell>
+      {entries[rowIndex].pair}
+    </Cell>
+  )
 
-  const priceCellRenderer = rowIndex => <Cell>{entries[rowIndex].execPrice}</Cell>
+  const amountCellRenderer = rowIndex => (
+    <Cell>
+      {entries[rowIndex].amount}
+    </Cell>
+  )
+
+  const priceCellRenderer = rowIndex => (
+    <Cell>
+      {entries[rowIndex].price}
+    </Cell>
+  )
 
   const feeCellRenderer = rowIndex => (
     <Cell>
-      {entries[rowIndex].fee}&nbsp;
-      <span className='bitfinex-show-soft'>{entries[rowIndex].feeCurrency}</span>
+      {entries[rowIndex].fee}
+      &nbsp;
+      <span className='bitfinex-show-soft'>
+        {entries[rowIndex].feeCurrency}
+      </span>
+    </Cell>
+  )
+
+  const mtsCellRenderer = rowIndex => (
+    <Cell>
+      <TruncatedFormat>
+        {formatTime(entries[rowIndex].mts)}
+      </TruncatedFormat>
     </Cell>
   )
 
   return (
     <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-      <h2>
+      <h4>
         {intl.formatMessage({ id: 'trades.title' })}
         &nbsp;
-        <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button>
-      </h2>
+        <Button icon='cloud-download' disabled>
+          {intl.formatMessage({ id: 'timeframe.download' })}
+        </Button>
+      </h4>
       <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
         <Column
           id='id'
