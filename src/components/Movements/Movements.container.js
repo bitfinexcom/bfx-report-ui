@@ -4,6 +4,7 @@ import Movements from './Movements'
 function mapStateToProps(state = {}) {
   return {
     entries: state.movements.entries,
+    loading: !state.movements.dataReceived,
   }
 }
 
