@@ -10,6 +10,8 @@
   "auth.checkAuth": "開始驗證",
   "auth.auth.note1": "請先前往 ",
   "auth.auth.note2": " 取得唯讀的API金鑰與密鑰對。",
+  "loading": "讀取中...",
+  "nodata": "沒有相關資料。請試試其他時間範圍。",
   "ledgers.title": "餘額",
   "ledgers.column.description": "描述",
   "ledgers.column.time": "時間",

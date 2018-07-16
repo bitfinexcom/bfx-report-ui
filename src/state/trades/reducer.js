@@ -70,6 +70,7 @@ const initialState = {
       feeCurrency: "BTC"
     }, */
   ],
+  dataReceived: false,
 }
 
 export function tradesReducer(state = initialState, action) {
@@ -92,6 +93,7 @@ export function tradesReducer(state = initialState, action) {
       return {
         ...state,
         entries,
+        dataReceived: true,
       }
     }
     default: {

@@ -97,6 +97,7 @@ const initialState = {
       placedId: '',
     }, */
   ],
+  dataReceived: false,
 }
 
 export function ordersReducer(state = initialState, action) {
@@ -126,6 +127,7 @@ export function ordersReducer(state = initialState, action) {
       return {
         ...state,
         entries,
+        dataReceived: true,
       }
     }
     default: {
