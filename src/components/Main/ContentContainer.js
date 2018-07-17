@@ -15,7 +15,8 @@ import { propTypes, defaultProps } from './ContentContainer.props'
 const MENU_LEDGERS = 'ledgers'
 const MENU_ORDERS = 'orders'
 const MENU_TRADES = 'trades'
-const MENU_MOVEMENTS = 'movements'
+const MENU_DEPOSITS = 'deposits'
+const MENU_WITHDRAWALS = 'withdrawals'
 
 class ContentContainer extends PureComponent {
   constructor(props) {
@@ -23,7 +24,8 @@ class ContentContainer extends PureComponent {
     this.handleClickLedgers = this.handleClick.bind(this, MENU_LEDGERS)
     this.handleClickOrders = this.handleClick.bind(this, MENU_ORDERS)
     this.handleClickTrades = this.handleClick.bind(this, MENU_TRADES)
-    this.handleClickMovements = this.handleClick.bind(this, MENU_MOVEMENTS)
+    this.handleClickDeposits = this.handleClick.bind(this, MENU_DEPOSITS)
+    this.handleClickWithdrawals = this.handleClick.bind(this, MENU_WITHDRAWALS)
   }
 
   state = {
@@ -48,13 +50,17 @@ class ContentContainer extends PureComponent {
       case MENU_ORDERS:
         content = (<Orders />)
         break
-      case MENU_MOVEMENTS:
-        content = (<Movements />)
+      case MENU_DEPOSITS:
+        content = (<Movements type={MENU_DEPOSITS} />)
+        break
+      case MENU_WITHDRAWALS:
+        content = (<Movements type={MENU_WITHDRAWALS} />)
         break
       default:
         content = (<Ledgers />)
         break
     }
+
     return (
       <div className='row'>
         <Menu large className='col-xs-12 col-sm-12 col-md-12 col-lg-1 col-xl-2'>
@@ -79,10 +85,16 @@ class ContentContainer extends PureComponent {
             active={target === MENU_ORDERS}
           />
           <MenuItem
-            icon='folder-close'
-            text={intl.formatMessage({ id: 'movements.title' })}
-            onClick={this.handleClickMovements}
-            active={target === MENU_MOVEMENTS}
+            icon='add-to-folder'
+            text={intl.formatMessage({ id: 'movements.deposits.title' })}
+            onClick={this.handleClickDeposits}
+            active={target === MENU_DEPOSITS}
+          />
+          <MenuItem
+            icon='folder-shared-open'
+            text={intl.formatMessage({ id: 'movements.withdrawals.title' })}
+            onClick={this.handleClickWithdrawals}
+            active={target === MENU_WITHDRAWALS}
           />
         </Menu>
         <div className='col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-10'>

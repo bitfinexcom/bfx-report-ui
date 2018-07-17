@@ -65,6 +65,7 @@ import types from './constants'
 }
 */
 const initialState = {
+  currencies: [],
   entries: [
     /* {
       id: 131919156,
@@ -83,23 +84,33 @@ const initialState = {
       description: 'Transfer of 5000.885 USD from wallet Exchange to Deposit on wallet funding',
     }, */
   ],
+  dataReceived: false,
 }
 
 export function ledgersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_LEDGERS: {
       const result = action.payload
-      const entries = result.map(entry => ({
-        id: entry.id,
-        currency: entry.currency,
-        mts: entry.mts,
-        amount: entry.amount,
-        balance: entry.balance,
-        description: entry.description,
-      }))
+      const currencies = []
+      const entries = result.map((entry) => {
+        // save new symbol to currencies list
+        if (currencies.indexOf(entry.currency) === -1) {
+          currencies.push(entry.currency)
+        }
+        return {
+          id: entry.id,
+          currency: entry.currency,
+          mts: entry.mts,
+          amount: entry.amount,
+          balance: entry.balance,
+          description: entry.description,
+        }
+      })
       return {
         ...state,
         entries,
+        currencies,
+        dataReceived: true,
       }
     }
     default: {

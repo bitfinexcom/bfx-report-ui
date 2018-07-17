@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
   Card,
   Elevation,
+  Intent,
 } from '@blueprintjs/core'
 import {
   Cell,
@@ -11,39 +12,149 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
+import Loading from 'components/Loading'
+import NoData from 'components/NoData'
 import { formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Ledgers.props'
 
-export const Ledgers = ({ entries, intl }) => {
-  const numRows = entries.length
-  const idCellRenderer = rowIndex => <Cell>{entries[rowIndex].id}</Cell>
+const COLUMN_WIDTHS = [500, 120, 120, 120, 150]
 
-  const mtsCellRenderer = rowIndex => (
-    <Cell>
-      <TruncatedFormat>{formatTime(entries[rowIndex].mts)}</TruncatedFormat>
-    </Cell>
-  )
+class Ledgers extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.handlers = {}
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-  const currencyCellRenderer = rowIndex => <Cell>{entries[rowIndex].currency}</Cell>
+  state = {
+    symbol: '',
+  }
 
-  const amountCellRenderer = rowIndex => <Cell>{entries[rowIndex].amount}</Cell>
+  handleClick(symbol) {
+    if (!this.handlers[symbol]) {
+      this.handlers[symbol] = () => {
+        this.setState({ symbol })
+      }
+    }
+    return this.handlers[symbol]
+  }
 
-  const balanceCellRenderer = rowIndex => <Cell>{entries[rowIndex].balance}</Cell>
+  render() {
+    const {
+      currencies,
+      entries,
+      intl,
+      loading,
+    } = this.props
+    // eslint-disable-next-line react/destructuring-assignment
+    const currency = this.state.symbol || currencies[0]
+    const filteredData = entries.filter(entry => entry.currency === currency)
+    const numRows = filteredData.length
 
-  // TODO: show description message
+    const descriptionCellRenderer = rowIndex => (
+      <Cell>
+        {filteredData[rowIndex].description}
+      </Cell>
+    )
 
-  return (
-    <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-      <h5>{intl.formatMessage({ id: 'ledgers.title' })} <Button icon='cloud-download' disabled>{intl.formatMessage({ id: 'timeframe.download' })}</Button></h5>
-      <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
-        <Column id='id' name='#' cellRenderer={idCellRenderer} />
-        <Column id='mts' name={intl.formatMessage({ id: 'ledgers.column.time' })} cellRenderer={mtsCellRenderer} />
-        <Column id='currency' name={intl.formatMessage({ id: 'ledgers.column.currency' })} cellRenderer={currencyCellRenderer} />
-        <Column id='amount' name={intl.formatMessage({ id: 'ledgers.column.amount' })} cellRenderer={amountCellRenderer} />
-        <Column id='balance' name={intl.formatMessage({ id: 'ledgers.column.balance' })} cellRenderer={balanceCellRenderer} />
-      </Table>
-    </Card>
-  )
+    const mtsCellRenderer = rowIndex => (
+      <Cell>
+        <TruncatedFormat>
+          {formatTime(filteredData[rowIndex].mts)}
+        </TruncatedFormat>
+      </Cell>
+    )
+
+    const creditCellRenderer = rowIndex => (
+      <Cell className='bitfinex-green-text'>
+        {parseFloat(filteredData[rowIndex].amount) > 0 ? filteredData[rowIndex].amount : ''}
+      </Cell>
+    )
+
+    const debitCellRenderer = rowIndex => (
+      <Cell className='bitfinex-red-text'>
+        {parseFloat(filteredData[rowIndex].amount) < 0 ? Math.abs(filteredData[rowIndex].amount) : ''}
+      </Cell>
+    )
+
+    const balanceCellRenderer = rowIndex => (
+      <Cell>
+        {filteredData[rowIndex].balance}
+      </Cell>
+    )
+
+    const currencyButtons = currencies.map(symbol => (
+      <Button
+        key={symbol}
+        intent={currency === symbol ? Intent.PRIMARY : Intent.NONE}
+        onClick={this.handleClick(symbol)}
+      >
+        {symbol}
+      </Button>))
+
+    let showContent
+    if (loading) {
+      showContent = (
+        <Loading title='ledgers.title' />
+      )
+    } else if (numRows === 0) {
+      showContent = (
+        <NoData title='ledgers.title' />
+      )
+    } else {
+      showContent = (
+        <Fragment>
+          <h4>
+            {intl.formatMessage({ id: 'ledgers.title' })}
+            &nbsp;
+            <Button icon='cloud-download' disabled>
+              {intl.formatMessage({ id: 'timeframe.download' })}
+            </Button>
+          </h4>
+          <div className='bitfinex-symbol-group'>
+            {currencyButtons}
+          </div>
+          <Table
+            className='bitfinex-table'
+            numRows={numRows}
+            enableRowHeader={false}
+            columnWidths={COLUMN_WIDTHS}
+          >
+            <Column
+              id='description'
+              name={intl.formatMessage({ id: 'ledgers.column.description' })}
+              cellRenderer={descriptionCellRenderer}
+            />
+            <Column
+              id='credit'
+              name={intl.formatMessage({ id: 'ledgers.column.credit' })}
+              cellRenderer={creditCellRenderer}
+            />
+            <Column
+              id='debit'
+              name={intl.formatMessage({ id: 'ledgers.column.debit' })}
+              cellRenderer={debitCellRenderer}
+            />
+            <Column
+              id='balance'
+              name={intl.formatMessage({ id: 'ledgers.column.balance' })}
+              cellRenderer={balanceCellRenderer}
+            />
+            <Column
+              id='mts'
+              name={intl.formatMessage({ id: 'ledgers.column.time' })}
+              cellRenderer={mtsCellRenderer}
+            />
+          </Table>
+        </Fragment>
+      )
+    }
+    return (
+      <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        {showContent}
+      </Card>
+    )
+  }
 }
 
 Ledgers.propTypes = propTypes
