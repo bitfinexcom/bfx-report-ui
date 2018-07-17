@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
+import classNames from 'classnames'
 import {
   Button,
   Callout,
@@ -7,10 +8,21 @@ import {
   Elevation,
   Icon,
   Intent,
-  Label,
 } from '@blueprintjs/core'
 import { platform } from 'var/config'
 import { propTypes, defaultProps } from './Auth.props'
+import InputKey from './InputKey'
+
+const classes = classNames(
+  'bitfinex-auth',
+  'col-xs-12',
+  'col-sm-offset-1',
+  'col-sm-10',
+  'col-md-offset-2',
+  'col-md-8',
+  'col-lg-offset-3',
+  'col-lg-6',
+)
 
 class Auth extends PureComponent {
   static propTypes = propTypes
@@ -53,21 +65,10 @@ class Auth extends PureComponent {
       showValid = (<Icon iconSize={21} icon='cross' intent={Intent.DANGER} />)
     }
 
-    const classNames = [
-      'bitfinex-auth',
-      'col-xs-12',
-      'col-sm-offset-1',
-      'col-sm-10',
-      'col-md-offset-2',
-      'col-md-8',
-      'col-lg-offset-3',
-      'col-lg-6',
-    ]
-
     return isShown ? (
       <div className='row'>
         <Card
-          className={classNames.join(' ')}
+          className={classes}
           elevation={Elevation.ZERO}
           interactive
         >
@@ -84,34 +85,20 @@ class Auth extends PureComponent {
             {intl.formatMessage({ id: 'auth.auth.note2' })}
           </Callout>
           <br />
-          <p>
-            <Label text={intl.formatMessage({ id: 'auth.enterAPIKey' })} />
-            <input
-              type='text'
-              required
-              minLength='10'
-              className='pt-input'
-              dir='auto'
-              name='key'
-              placeholder={intl.formatMessage({ id: 'auth.enterAPIKey' })}
-              value={apiKey}
-              onChange={this.handleChange}
-            />
-          </p>
-          <p>
-            <Label text={intl.formatMessage({ id: 'auth.enterAPISecret' })} />
-            <input
-              type='text'
-              required
-              minLength='10'
-              className='pt-input'
-              dir='auto'
-              name='secret'
-              placeholder={intl.formatMessage({ id: 'auth.enterAPISecret' })}
-              value={apiSecret}
-              onChange={this.handleChange}
-            />
-          </p>
+          <InputKey
+            label='auth.enterAPIKey'
+            name='key'
+            placeholder='auth.enterAPIKey'
+            value={apiKey}
+            onChange={this.handleChange}
+          />
+          <InputKey
+            label='auth.enterAPISecret'
+            name='secret'
+            placeholder='auth.enterAPISecret'
+            value={apiSecret}
+            onChange={this.handleChange}
+          />
           <p>
             <Button name='check' intent={Intent.PRIMARY} onClick={this.handleClick}>
               {intl.formatMessage({ id: 'auth.checkAuth' })}
