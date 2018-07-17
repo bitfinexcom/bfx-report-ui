@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import actions from 'state/status/actions'
 import Status from './Status'
 
 function mapStateToProps(state = {}) {
@@ -8,6 +9,10 @@ function mapStateToProps(state = {}) {
   }
 }
 
-const StatusContainer = connect(mapStateToProps)(Status)
+const mapDispatchToProps = dispatch => ({
+  clearStatus: () => dispatch(actions.clearStatus()),
+})
+
+const StatusContainer = connect(mapStateToProps, mapDispatchToProps)(Status)
 
 export default StatusContainer

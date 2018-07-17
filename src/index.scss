@@ -13,6 +13,14 @@ div.bitfinex-auth {
   margin-top: 10px;
 }
 
+/* status close button */
+.pt-callout.pt-callout-icon .pt-icon.bitfinex-status-close {
+  top: 12px;
+  right: 10px;
+  left: unset;
+  cursor: pointer;
+}
+
 .bitfinex-show-soft {
   opacity: 0.5;
 }
