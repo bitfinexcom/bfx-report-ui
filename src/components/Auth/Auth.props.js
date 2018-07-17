@@ -22,3 +22,21 @@ export const defaultProps = {
   setKey: () => {},
   setSecret: () => {},
 }
+
+export const inputKeyPropTypes = {
+  intl: intlShape.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string,
+}
+
+export const inputKeyDefaultProps = {
+  intl: {},
+  label: '',
+  onChange: () => {},
+  name: '',
+  placeholder: '',
+  value: '',
+}
