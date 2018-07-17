@@ -16,6 +16,8 @@ import NoData from 'components/NoData'
 import { formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Orders.props'
 
+const COLUMN_WIDTHS = [80, 70, 150, 100, 100, 100, 100, 150, 200]
+
 export const Orders = ({ entries, intl, loading }) => {
   const numRows = entries.length
 
@@ -98,7 +100,7 @@ export const Orders = ({ entries, intl, loading }) => {
           className='bitfinex-table'
           numRows={numRows}
           enableRowHeader={false}
-          columnWidths={[80, 70, 150, 100, 100, 100, 100, 150, 200]}
+          columnWidths={COLUMN_WIDTHS}
         >
           <Column
             id='id'

@@ -16,6 +16,8 @@ import NoData from 'components/NoData'
 import { formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Trades.props'
 
+const COLUMN_WIDTHS = [80, 70, 125, 125, 125, 150]
+
 export const Trades = ({ entries, intl, loading }) => {
   const numRows = entries.length
 
@@ -80,7 +82,12 @@ export const Trades = ({ entries, intl, loading }) => {
             {intl.formatMessage({ id: 'timeframe.download' })}
           </Button>
         </h4>
-        <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
+        <Table
+          className='bitfinex-table'
+          numRows={numRows}
+          enableRowHeader={false}
+          columnWidths={COLUMN_WIDTHS}
+        >
           <Column
             id='id'
             name='#'
