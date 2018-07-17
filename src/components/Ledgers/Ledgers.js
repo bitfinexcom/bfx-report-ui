@@ -17,6 +17,8 @@ import NoData from 'components/NoData'
 import { formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Ledgers.props'
 
+const COLUMN_WIDTHS = [500, 120, 120, 120, 150]
+
 class Ledgers extends PureComponent {
   constructor(props) {
     super(props)
@@ -116,27 +118,33 @@ class Ledgers extends PureComponent {
             className='bitfinex-table'
             numRows={numRows}
             enableRowHeader={false}
-            columnWidths={[500, 120, 120, 120, 150]}>
+            columnWidths={COLUMN_WIDTHS}
+          >
             <Column
               id='description'
               name={intl.formatMessage({ id: 'ledgers.column.description' })}
-              cellRenderer={descriptionCellRenderer} />
+              cellRenderer={descriptionCellRenderer}
+            />
             <Column
               id='credit'
               name={intl.formatMessage({ id: 'ledgers.column.credit' })}
-              cellRenderer={creditCellRenderer} />
+              cellRenderer={creditCellRenderer}
+            />
             <Column
               id='debit'
               name={intl.formatMessage({ id: 'ledgers.column.debit' })}
-              cellRenderer={debitCellRenderer} />
+              cellRenderer={debitCellRenderer}
+            />
             <Column
               id='balance'
               name={intl.formatMessage({ id: 'ledgers.column.balance' })}
-              cellRenderer={balanceCellRenderer} />
+              cellRenderer={balanceCellRenderer}
+            />
             <Column
               id='mts'
               name={intl.formatMessage({ id: 'ledgers.column.time' })}
-              cellRenderer={mtsCellRenderer} />
+              cellRenderer={mtsCellRenderer}
+            />
           </Table>
         </Fragment>
       )

@@ -19,6 +19,7 @@ import Inspector from './Inspector'
 
 // const TYPE_DEPOSITS = 'deposits'
 const TYPE_WITHDRAWALS = 'withdrawals'
+const COLUMN_WIDTHS = [80, 150, 125, 120, 400]
 
 export const Movements = ({
   entries,
@@ -88,7 +89,12 @@ export const Movements = ({
             {intl.formatMessage({ id: 'timeframe.download' })}
           </Button>
         </h4>
-        <Table className='bitfinex-table' numRows={numRows} enableRowHeader={false}>
+        <Table
+          className='bitfinex-table'
+          numRows={numRows}
+          enableRowHeader={false}
+          columnWidths={COLUMN_WIDTHS}
+        >
           <Column
             id='id'
             name='#'
@@ -100,14 +106,14 @@ export const Movements = ({
             cellRenderer={mtsUpdatedCellRenderer}
           />
           <Column
-            id='amount'
-            name={intl.formatMessage({ id: 'movements.column.amount' })}
-            cellRenderer={amountCellRenderer}
-          />
-          <Column
             id='status'
             name={intl.formatMessage({ id: 'movements.column.status' })}
             cellRenderer={statusCellRenderer}
+          />
+          <Column
+            id='amount'
+            name={intl.formatMessage({ id: 'movements.column.amount' })}
+            cellRenderer={amountCellRenderer}
           />
           <Column
             id='destination'

@@ -55,19 +55,23 @@ class Header extends PureComponent {
               <img
                 alt={platform.Name}
                 src={darkLogo}
-                className='bitfinex-logo-dark hidden-sm hidden-xs' />
+                className='bitfinex-logo-dark hidden-sm hidden-xs'
+              />
               <img
                 alt={platform.Name}
                 src={lightLogo}
-                className='bitfinex-logo-light hidden-sm hidden-xs' />
+                className='bitfinex-logo-light hidden-sm hidden-xs'
+              />
               <img
                 alt={platform.Name}
                 src={mDarkLogo}
-                className='bitfinex-logo-m-dark hidden-xl hidden-lg hidden-md' />
+                className='bitfinex-logo-m-dark hidden-xl hidden-lg hidden-md'
+              />
               <img
                 alt={platform.Name}
                 src={mLightLogo}
-                className='bitfinex-logo-m-light hidden-xl hidden-lg hidden-md' />
+                className='bitfinex-logo-m-light hidden-xl hidden-lg hidden-md'
+              />
             </NavbarHeading>
           </NavbarGroup>
           <NavbarGroup align='right'>
