@@ -5,11 +5,11 @@ import {
   MenuDivider,
   MenuItem,
 } from '@blueprintjs/core'
-import Timeframe from 'components/Timeframe'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import Trades from 'components/Trades'
+import Timeframe from 'components/Timeframe'
 import { propTypes, defaultProps } from './ContentContainer.props'
 
 const MENU_LEDGERS = 'ledgers'

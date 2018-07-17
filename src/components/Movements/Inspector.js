@@ -12,7 +12,11 @@ export const Inspector = ({ currency, destinationAddress }) => {
   const target = INSPECTORS[currency]
   return target ? (
     <span className='bitfinex-show-soft'>
-      (<a href={`${target.url}${destinationAddress}`} target='_blank' rel='noopener noreferrer'>{target.name}</a>)
+      (
+      <a href={`${target.url}${destinationAddress}`} target='_blank' rel='noopener noreferrer'>
+        {target.name}
+      </a>
+)
     </span>
   ) : ''
 }

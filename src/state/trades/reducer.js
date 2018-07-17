@@ -1,4 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
+import { formatPair } from 'state/utils'
 import types from './constants'
 
 /*
@@ -57,7 +58,7 @@ const initialState = {
   entries: [
     /* {
       id: 24178707,
-      pair: "tBTCUSD",
+      pair: "BTC/USD",
       mtsCreate: 1529942518000,
       orderID: 1149732562,
       execAmount: 0.00026691,
@@ -78,7 +79,7 @@ export function tradesReducer(state = initialState, action) {
       const result = action.payload
       const entries = result.map(entry => ({
         id: entry.id,
-        pair: `${entry.pair.slice(1, 4)}/${entry.pair.slice(4, 7)}`,
+        pair: formatPair(entry.pair),
         mtsCreate: entry.mtsCreate,
         orderID: entry.orderID,
         execAmount: entry.execAmount,
@@ -86,7 +87,7 @@ export function tradesReducer(state = initialState, action) {
         orderType: entry.orderType,
         orderPrice: entry.orderPrice,
         maker: entry.maker,
-        fee: parseFloat(entry.fee) < 0 ? parseFloat(entry.fee) * -1 : entry.fee,
+        fee: Math.abs(entry.fee),
         feeCurrency: entry.feeCurrency,
       }))
       return {

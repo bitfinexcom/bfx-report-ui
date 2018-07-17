@@ -3,7 +3,7 @@ import { intlShape } from 'react-intl'
 
 const ORDERS_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  symbol: PropTypes.string.isRequired,
+  pair: PropTypes.string.isRequired,
   mtsUpdate: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
