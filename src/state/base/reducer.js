@@ -5,8 +5,8 @@ const initialState = {
   apiKey: '',
   apiSecret: '',
   authKey: '',
-  // locale: 'en',
-  // theme: 'dark',
+  locale: 'en',
+  theme: 'pt_dark',
 }
 
 export function baseReducer(state = initialState, action) {
@@ -25,6 +25,16 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         authKey: action.payload,
+      }
+    case types.SET_LANG:
+      return {
+        ...state,
+        locale: action.payload,
+      }
+    case types.SET_THEME:
+      return {
+        ...state,
+        theme: action.payload,
       }
     default:
       return state
