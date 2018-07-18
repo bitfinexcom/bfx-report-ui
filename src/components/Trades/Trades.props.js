@@ -3,9 +3,11 @@ import { intlShape } from 'react-intl'
 
 const TRADES_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  mts: PropTypes.number.isRequired,
-  amount: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
+  mtsCreate: PropTypes.number.isRequired,
+  execAmount: PropTypes.number.isRequired,
+  execPrice: PropTypes.number.isRequired,
+  fee: PropTypes.number,
+  feeCurrency: PropTypes.string,
 })
 
 export const propTypes = {

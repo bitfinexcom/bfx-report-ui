@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render loading correctly 1`] = `
+<div
+  className="pt-card pt-interactive pt-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+>
+  <h4>
+    Trades
+  </h4>
+  <div>
+    Loading...
+  </div>
+</div>
+`;
+
+exports[`render no data correctly 1`] = `
+<div
+  className="pt-card pt-interactive pt-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+>
+  <h4>
+    Trades
+  </h4>
+  <div>
+    No related data in this time range. You can try another time range.
+  </div>
+</div>
+`;

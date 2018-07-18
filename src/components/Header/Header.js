@@ -17,6 +17,7 @@ import mLightLogo from './mobile_logo_light.svg'
 
 class Header extends PureComponent {
   static propTypes = propTypes
+
   static defaultProps = defaultProps
 
   constructor(props) {
@@ -29,23 +30,26 @@ class Header extends PureComponent {
   }
 
   authLogout() {
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.logout()
   }
 
   switchLang(lang, e) {
     e.preventDefault()
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.setLang(lang)
   }
 
   switchTheme(theme, e) {
     e.preventDefault()
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.setTheme(theme)
   }
 
   render() {
     const { authIsShown, authStatus, intl } = this.props
-    const buttonLogout = !authIsShown && authStatus === true ?
-      (<Button minimal text={intl.formatMessage({ id: 'header.logout' })} onClick={this.authLogout} />) : ''
+    const buttonLogout = !authIsShown && authStatus === true
+      ? (<Button minimal text={intl.formatMessage({ id: 'header.logout' })} onClick={this.authLogout} />) : ''
 
     return (
       <Fragment>
