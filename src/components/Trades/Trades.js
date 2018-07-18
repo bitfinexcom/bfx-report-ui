@@ -35,13 +35,13 @@ export const Trades = ({ entries, intl, loading }) => {
 
   const amountCellRenderer = rowIndex => (
     <Cell>
-      {entries[rowIndex].amount}
+      {entries[rowIndex].execAmount}
     </Cell>
   )
 
   const priceCellRenderer = rowIndex => (
     <Cell>
-      {entries[rowIndex].price}
+      {entries[rowIndex].execPrice}
     </Cell>
   )
 
@@ -58,7 +58,7 @@ export const Trades = ({ entries, intl, loading }) => {
   const mtsCellRenderer = rowIndex => (
     <Cell>
       <TruncatedFormat>
-        {formatTime(entries[rowIndex].mts)}
+        {formatTime(entries[rowIndex].mtsCreate)}
       </TruncatedFormat>
     </Cell>
   )
