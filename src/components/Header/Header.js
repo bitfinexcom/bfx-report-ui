@@ -25,8 +25,8 @@ class Header extends PureComponent {
     this.authLogout = this.authLogout.bind(this)
     this.switchEn = this.switchLang.bind(this, 'en')
     this.switchTw = this.switchLang.bind(this, 'tw')
-    this.switchDark = this.switchTheme.bind(this, 'pt-dark')
-    this.switchLight = this.switchTheme.bind(this, 'pt-light')
+    this.switchDark = this.switchTheme.bind(this, 'bp3-dark')
+    this.switchLight = this.switchTheme.bind(this, 'bp3-light')
   }
 
   authLogout() {

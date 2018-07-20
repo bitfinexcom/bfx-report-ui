@@ -6,7 +6,7 @@ const initialState = {
   apiSecret: '',
   authKey: '',
   locale: 'en',
-  theme: 'pt_dark',
+  theme: 'bp3_dark',
 }
 
 export function baseReducer(state = initialState, action) {
