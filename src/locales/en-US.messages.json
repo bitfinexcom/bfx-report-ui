@@ -10,6 +10,7 @@
   "auth.checkAuth": "Check Auth",
   "auth.auth.note1": "Visit ",
   "auth.auth.note2": " to get the readonly API key and secret pair.",
+  "auth.required": "(required)",
   "loading": "Loading...",
   "nodata": "No related data in this time range. You can try another time range.",
   "ledgers.title": "Ledgers",

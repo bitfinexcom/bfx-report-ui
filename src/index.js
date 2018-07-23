@@ -5,11 +5,11 @@ import { FocusStyleManager } from '@blueprintjs/core'
 import { PersistGate } from 'redux-persist/integration/react'
 import 'normalize.css/normalize.css'
 import 'flexboxgrid2/flexboxgrid2.css'
-import '@blueprintjs/core/lib/css/blueprint.css'
 import '@blueprintjs/icons/lib/css/blueprint-icons.css'
+import '@blueprintjs/core/lib/css/blueprint.css'
 import '@blueprintjs/table/lib/css/table.css'
 import { persistor, store } from 'state/store'
-import './index.css'
+import 'styles/index.css'
 import App from './App'
 
 ReactDOM.render(

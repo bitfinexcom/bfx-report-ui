@@ -2,20 +2,36 @@
 
 exports[`deposits render loading correctly 1`] = `
 <div
-  className="pt-card pt-interactive pt-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+  className="bp3-card bp3-interactive bp3-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
 >
   <h4>
     Deposits
   </h4>
-  <div>
-    Loading...
-  </div>
+  <svg
+    className="bp3-spinner"
+    height={24}
+    strokeWidth={16}
+    viewBox="0 0 100 100"
+    width={24}
+  >
+    <path
+      className="bp3-spinner-track"
+      d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"
+    />
+    <path
+      className="bp3-spinner-head"
+      d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"
+      pathLength={280}
+      strokeDasharray="280 280"
+      strokeDashoffset={210}
+    />
+  </svg>
 </div>
 `;
 
 exports[`deposits render no data correctly 1`] = `
 <div
-  className="pt-card pt-interactive pt-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+  className="bp3-card bp3-interactive bp3-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
 >
   <h4>
     Deposits
@@ -28,20 +44,36 @@ exports[`deposits render no data correctly 1`] = `
 
 exports[`withdrawals render loading correctly 1`] = `
 <div
-  className="pt-card pt-interactive pt-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+  className="bp3-card bp3-interactive bp3-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
 >
   <h4>
     Withdrawals
   </h4>
-  <div>
-    Loading...
-  </div>
+  <svg
+    className="bp3-spinner"
+    height={24}
+    strokeWidth={16}
+    viewBox="0 0 100 100"
+    width={24}
+  >
+    <path
+      className="bp3-spinner-track"
+      d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"
+    />
+    <path
+      className="bp3-spinner-head"
+      d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"
+      pathLength={280}
+      strokeDasharray="280 280"
+      strokeDashoffset={210}
+    />
+  </svg>
 </div>
 `;
 
 exports[`withdrawals render no data correctly 1`] = `
 <div
-  className="pt-card pt-interactive pt-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
+  className="bp3-card bp3-interactive bp3-elevation-0 col-lg-12 col-md-12 col-sm-12 col-xs-12"
 >
   <h4>
     Withdrawals
