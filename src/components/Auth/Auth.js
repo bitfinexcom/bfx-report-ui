@@ -72,11 +72,11 @@ class Auth extends PureComponent {
           elevation={Elevation.ZERO}
           interactive
         >
-          <h5>
+          <h4>
             {intl.formatMessage({ id: 'auth.auth' })}
             &nbsp;
             {showValid}
-          </h5>
+          </h4>
           <Callout>
             {intl.formatMessage({ id: 'auth.auth.note1' })}
             <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>

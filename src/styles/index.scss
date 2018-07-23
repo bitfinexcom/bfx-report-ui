@@ -1,10 +1,12 @@
+@import "./variables.scss";
+
 body {
   margin: 0;
   padding: 50px 0 0 0;
   font-family: "Roboto", sans-serif;
 }
 
-body.pt-dark {
+body.#{$ns}-dark {
   background-color: #394b59;
 }
 
@@ -14,11 +16,16 @@ div.bitfinex-auth {
 }
 
 /* status close button */
-.pt-callout.pt-callout-icon .pt-icon.bitfinex-status-close {
+.#{$ns}-callout.#{$ns}-callout-icon .#{$ns}-icon.bitfinex-status-close {
+  position: absolute;
   top: 12px;
   right: 10px;
-  left: unset;
   cursor: pointer;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
 .bitfinex-show-soft {
@@ -41,10 +48,10 @@ div.bitfinex-auth {
   width: 79px;
 }
 
-body.pt-dark .bitfinex-logo-light,
-body.pt-light .bitfinex-logo-dark,
-body.pt-dark .bitfinex-logo-m-light,
-body.pt-light .bitfinex-logo-m-dark {
+body.#{$ns}-dark .bitfinex-logo-light,
+body.#{$ns}-light .bitfinex-logo-dark,
+body.#{$ns}-dark .bitfinex-logo-m-light,
+body.#{$ns}-light .bitfinex-logo-m-dark {
   display: none;
 }
 
@@ -52,18 +59,18 @@ body.pt-light .bitfinex-logo-m-dark {
   padding-bottom: 10px;
 }
 
-body.pt-dark .bitfinex-green-text > div {
+body.#{$ns}-dark .bitfinex-green-text > div {
   color: #7a9c4a;
 }
 
-body.pt-dark .bitfinex-red-text > div {
+body.#{$ns}-dark .bitfinex-red-text > div {
   color: #aa6064;
 }
 
-body.pt-light .bitfinex-green-text > div {
+body.#{$ns}-light .bitfinex-green-text > div {
   color: #8bc040;
 }
 
-body.pt-light .bitfinex-red-text > div {
+body.#{$ns}-light .bitfinex-red-text > div {
   color: #de5f66;
 }
