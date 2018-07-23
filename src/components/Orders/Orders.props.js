@@ -12,12 +12,14 @@ const ORDERS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   entries: PropTypes.arrayOf(ORDERS_ENTRIES_PROPS).isRequired,
+  fetchOrders: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   loading: PropTypes.bool.isRequired,
 }
 
 export const defaultProps = {
   entries: [],
+  fetchOrders: () => {},
   intl: {},
   loading: true,
 }
