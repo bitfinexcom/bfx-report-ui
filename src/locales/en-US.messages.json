@@ -1,7 +1,7 @@
 {
   "header.logout": "Logout",
-  "header.lang.en": "En",
-  "header.lang.tw": "正",
+  "header.lang.en": "English",
+  "header.lang.tw": "Traditional Chinese",
   "theme.light": "Light",
   "theme.dark": "Dark",
   "auth.auth": "Auth",
