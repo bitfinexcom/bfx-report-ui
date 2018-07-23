@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import actions from 'state/ledgers/actions'
 import Ledgers from './Ledgers'
 
 function mapStateToProps(state = {}) {
@@ -9,6 +10,10 @@ function mapStateToProps(state = {}) {
   }
 }
 
-const LedgersContainer = connect(mapStateToProps)(Ledgers)
+const mapDispatchToProps = dispatch => ({
+  fetchLedgers: () => dispatch(actions.fetchLedgers()),
+})
+
+const LedgersContainer = connect(mapStateToProps, mapDispatchToProps)(Ledgers)
 
 export default LedgersContainer

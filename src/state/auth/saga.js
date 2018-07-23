@@ -86,6 +86,5 @@ function* checkUpdate() {
 
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
-  yield takeLatest(types.UPDATE_AUTH_STATUS, checkUpdate)
   yield takeLatest(queryTypes.SET_TIME_RANGE, checkUpdate)
 }

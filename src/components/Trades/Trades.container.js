@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import actions from 'state/trades/actions'
 import Trades from './Trades'
 
 function mapStateToProps(state = {}) {
@@ -8,6 +9,10 @@ function mapStateToProps(state = {}) {
   }
 }
 
-const TradesContainer = connect(mapStateToProps)(Trades)
+const mapDispatchToProps = dispatch => ({
+  fetchTrades: () => dispatch(actions.fetchTrades()),
+})
+
+const TradesContainer = connect(mapStateToProps, mapDispatchToProps)(Trades)
 
 export default TradesContainer

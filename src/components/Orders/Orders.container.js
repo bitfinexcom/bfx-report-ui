@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import actions from 'state/orders/actions'
 import Orders from './Orders'
 
 function mapStateToProps(state = {}) {
@@ -8,6 +9,10 @@ function mapStateToProps(state = {}) {
   }
 }
 
-const OrdersContainer = connect(mapStateToProps)(Orders)
+const mapDispatchToProps = dispatch => ({
+  fetchOrders: () => dispatch(actions.fetchOrders()),
+})
+
+const OrdersContainer = connect(mapStateToProps, mapDispatchToProps)(Orders)
 
 export default OrdersContainer
