@@ -30,6 +30,11 @@ class Ledgers extends PureComponent {
     symbol: '',
   }
 
+  componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.fetchLedgers()
+  }
+
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
