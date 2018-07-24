@@ -12,6 +12,7 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string),
   entries: PropTypes.arrayOf(LEDGERS_ENTRIES_PROPS).isRequired,
+  fetchLedgers: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   loading: PropTypes.bool.isRequired,
 }
@@ -19,6 +20,7 @@ export const propTypes = {
 export const defaultProps = {
   currencies: [],
   entries: [],
+  fetchLedgers: () => {},
   intl: {},
   loading: true,
 }

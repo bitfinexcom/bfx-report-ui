@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import actions from 'state/movements/actions'
 import Movements from './Movements'
 
 function mapStateToProps(state = {}) {
@@ -8,6 +9,10 @@ function mapStateToProps(state = {}) {
   }
 }
 
-const MovementsContainer = connect(mapStateToProps)(Movements)
+const mapDispatchToProps = dispatch => ({
+  fetchMovements: () => dispatch(actions.fetchMovements()),
+})
+
+const MovementsContainer = connect(mapStateToProps, mapDispatchToProps)(Movements)
 
 export default MovementsContainer
