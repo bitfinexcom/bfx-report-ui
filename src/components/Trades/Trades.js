@@ -24,6 +24,14 @@ class Trades extends PureComponent {
     this.props.fetchTrades()
   }
 
+  componentDidUpdate(prevProps) {
+    const { loading, fetchTrades } = this.props
+    const { prevLoading } = prevProps
+    if (loading && loading !== prevLoading) {
+      fetchTrades()
+    }
+  }
+
   render() {
     const { entries, intl, loading } = this.props
     const numRows = entries.length

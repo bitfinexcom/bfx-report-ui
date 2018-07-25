@@ -27,6 +27,14 @@ class Movements extends PureComponent {
     this.props.fetchMovements()
   }
 
+  componentDidUpdate(prevProps) {
+    const { loading, fetchMovements } = this.props
+    const { prevLoading } = prevProps
+    if (loading && loading !== prevLoading) {
+      fetchMovements()
+    }
+  }
+
   render() {
     const {
       entries,

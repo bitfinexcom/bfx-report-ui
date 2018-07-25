@@ -1,4 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#ledgers
+import queryTypes from 'state/query/constants'
 import types from './constants'
 
 /*
@@ -113,6 +114,11 @@ export function ledgersReducer(state = initialState, action) {
         dataReceived: true,
       }
     }
+    case queryTypes.SET_TIME_RANGE:
+      return {
+        ...state,
+        dataReceived: false,
+      }
     default: {
       return state
     }

@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
 import { formatPair } from 'state/utils'
+import queryTypes from 'state/query/constants'
 import types from './constants'
 /*
 {
@@ -130,6 +131,11 @@ export function ordersReducer(state = initialState, action) {
         dataReceived: true,
       }
     }
+    case queryTypes.SET_TIME_RANGE:
+      return {
+        ...state,
+        dataReceived: false,
+      }
     default: {
       return state
     }

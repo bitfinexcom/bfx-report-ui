@@ -4,13 +4,7 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
-import ledgersTypes from 'state/ledgers/constants'
-import tradesTypes from 'state/trades/constants'
-import ordersTypes from 'state/orders/constants'
-import movementsTypes from 'state/movements/constants'
 import statusTypes from 'state/status/constants'
-import queryTypes from 'state/query/constants'
 import { postJsonfetch } from 'state/utils'
 import { platform } from 'var/config'
 import types from './constants'
@@ -23,8 +17,6 @@ function getAuth(apiKey, apiSecret) {
     },
   })
 }
-
-const WAIT_INTERVAL = 500
 
 function* checkAuth() {
   const base = yield select(state => state.base)
@@ -55,36 +47,6 @@ function* checkAuth() {
   }
 }
 
-function* checkUpdate() {
-  try {
-    yield call(delay, WAIT_INTERVAL) // do not make a sequent call
-    const authStatus = yield select(state => state.auth.authStatus)
-    if (authStatus) {
-      yield put({
-        type: ledgersTypes.FETCH_LEDGERS,
-      })
-      yield call(delay, WAIT_INTERVAL)
-      yield put({
-        type: tradesTypes.FETCH_TRADES,
-      })
-      yield call(delay, WAIT_INTERVAL)
-      yield put({
-        type: ordersTypes.FETCH_ORDERS,
-      })
-      yield call(delay, WAIT_INTERVAL)
-      yield put({
-        type: movementsTypes.FETCH_MOVEMENTS,
-      })
-    }
-  } catch (error) {
-    yield put({
-      type: statusTypes.UPDATE_ERROR_STATUS,
-      payload: `update request fail ${JSON.stringify(error)}`,
-    })
-  }
-}
-
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
-  yield takeLatest(queryTypes.SET_TIME_RANGE, checkUpdate)
 }

@@ -35,6 +35,14 @@ class Ledgers extends PureComponent {
     this.props.fetchLedgers()
   }
 
+  componentDidUpdate(prevProps) {
+    const { loading, fetchLedgers } = this.props
+    const { prevLoading } = prevProps
+    if (loading && loading !== prevLoading) {
+      fetchLedgers()
+    }
+  }
+
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {

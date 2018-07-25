@@ -24,6 +24,14 @@ class Orders extends PureComponent {
     this.props.fetchOrders()
   }
 
+  componentDidUpdate(prevProps) {
+    const { loading, fetchOrders } = this.props
+    const { prevLoading } = prevProps
+    if (loading && loading !== prevLoading) {
+      fetchOrders()
+    }
+  }
+
   render() {
     const {
       entries,
