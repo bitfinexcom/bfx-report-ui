@@ -11,7 +11,7 @@ import { platform } from 'var/config'
 import types from './constants'
 
 function getTrades(auth, query) {
-  const params = getTimeFrame(query)
+  const params = getTimeFrame(query, 'trades')
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getTrades',
