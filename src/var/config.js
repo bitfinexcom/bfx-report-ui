@@ -3,7 +3,7 @@ const platforms = {
   bitfinex: {
     id: 'bfx',
     Name: 'Bitfinex',
-    API_URL: 'https://api.bitfinex.com/api`',
+    API_URL: 'https://api.bitfinex.com/api',
     KEY_URL: 'https://www.bitfinex.com/api',
   },
   ethfinex: {

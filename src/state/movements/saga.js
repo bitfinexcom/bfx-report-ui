@@ -11,7 +11,7 @@ import { platform } from 'var/config'
 import types from './constants'
 
 function getMovements(auth, query) {
-  const params = getTimeFrame(query)
+  const params = getTimeFrame(query, 'movements')
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getMovements',

@@ -1,6 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#movements
+import queryTypes from 'state/query/constants'
 import types from './constants'
-
 /*
 {
     "result": [
@@ -87,6 +87,8 @@ export function movementsReducer(state = initialState, action) {
         dataReceived: true,
       }
     }
+    case queryTypes.SET_TIME_RANGE:
+      return initialState
     default: {
       return state
     }

@@ -11,7 +11,7 @@ import { platform } from 'var/config'
 import types from './constants'
 
 function getOrders(auth, query) {
-  const params = getTimeFrame(query)
+  const params = getTimeFrame(query, 'orders')
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getOrders',
