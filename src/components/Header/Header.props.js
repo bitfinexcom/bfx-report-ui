@@ -6,7 +6,6 @@ export const propTypes = {
   authStatus: PropTypes.bool,
   intl: intlShape.isRequired,
   logout: PropTypes.func.isRequired,
-  setLang: PropTypes.func.isRequired,
   setTheme: PropTypes.func.isRequired,
 }
 
@@ -15,6 +14,5 @@ export const defaultProps = {
   authStatus: false,
   intl: {},
   logout: () => {},
-  setLang: () => {},
   setTheme: () => {},
 }
