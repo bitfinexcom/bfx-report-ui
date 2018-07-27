@@ -8,6 +8,7 @@ import {
   NavbarDivider,
 } from '@blueprintjs/core'
 import Status from 'components/Status'
+import LangMenu from 'components/LangMenu'
 import { platform } from 'var/config'
 import { propTypes, defaultProps } from './Header.props'
 import darkLogo from './logo3-dark-theme.svg'
@@ -23,8 +24,6 @@ class Header extends PureComponent {
   constructor(props) {
     super(props)
     this.authLogout = this.authLogout.bind(this)
-    this.switchEn = this.switchLang.bind(this, 'en')
-    this.switchTw = this.switchLang.bind(this, 'tw')
     this.switchDark = this.switchTheme.bind(this, 'bp3-dark')
     this.switchLight = this.switchTheme.bind(this, 'bp3-light')
   }
@@ -32,12 +31,6 @@ class Header extends PureComponent {
   authLogout() {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.logout()
-  }
-
-  switchLang(lang, e) {
-    e.preventDefault()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.setLang(lang)
   }
 
   switchTheme(theme, e) {
@@ -81,9 +74,6 @@ class Header extends PureComponent {
           <NavbarGroup align='right'>
             {buttonLogout}
             <NavbarDivider />
-            <Button minimal text={intl.formatMessage({ id: 'header.lang.en' })} onClick={this.switchEn} />
-            <Button minimal text={intl.formatMessage({ id: 'header.lang.tw' })} onClick={this.switchTw} />
-            <NavbarDivider />
             <Button
               minimal
               name='light'
@@ -96,6 +86,8 @@ class Header extends PureComponent {
               text={intl.formatMessage({ id: 'theme.dark' })}
               onClick={this.switchDark}
             />
+            <NavbarDivider />
+            <LangMenu />
           </NavbarGroup>
         </Navbar>
         <div className='row'>
