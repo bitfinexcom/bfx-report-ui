@@ -115,10 +115,7 @@ export function ledgersReducer(state = initialState, action) {
       }
     }
     case queryTypes.SET_TIME_RANGE:
-      return {
-        ...state,
-        dataReceived: false,
-      }
+      return initialState
     default: {
       return state
     }

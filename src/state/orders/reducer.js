@@ -132,10 +132,7 @@ export function ordersReducer(state = initialState, action) {
       }
     }
     case queryTypes.SET_TIME_RANGE:
-      return {
-        ...state,
-        dataReceived: false,
-      }
+      return initialState
     default: {
       return state
     }
