@@ -14,16 +14,21 @@ import {
 } from '@blueprintjs/table'
 import Loading from 'components/Loading'
 import NoData from 'components/NoData'
+import Pagination from 'components/Pagination'
+import queryConstants from 'state/query/constants'
 import { formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Ledgers.props'
 
 const COLUMN_WIDTHS = [500, 120, 120, 120, 150]
+const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
 
 class Ledgers extends PureComponent {
   constructor(props) {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
+    this.fetchPrev = this.fetchPrev.bind(this)
+    this.fetchNext = this.fetchNext.bind(this)
   }
 
   state = {
@@ -52,16 +57,28 @@ class Ledgers extends PureComponent {
     return this.handlers[symbol]
   }
 
+  fetchPrev() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.fetchPrevLedgers()
+  }
+
+  fetchNext() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.fetchNextLedgers()
+  }
+
   render() {
     const {
+      offset,
       currencies,
       entries,
       intl,
       loading,
     } = this.props
+    const currentEntries = offset < LIMIT ? entries : entries.slice(offset - LIMIT, offset)
     // eslint-disable-next-line react/destructuring-assignment
     const currency = this.state.symbol || currencies[0]
-    const filteredData = entries.filter(entry => entry.currency === currency)
+    const filteredData = currentEntries.filter(entry => entry.currency === currency)
     const numRows = filteredData.length
 
     const descriptionCellRenderer = rowIndex => (
@@ -110,7 +127,7 @@ class Ledgers extends PureComponent {
       showContent = (
         <Loading title='ledgers.title' />
       )
-    } else if (numRows === 0) {
+    } else if (currentEntries.length === 0) {
       showContent = (
         <NoData title='ledgers.title' />
       )
@@ -159,6 +176,12 @@ class Ledgers extends PureComponent {
               cellRenderer={mtsCellRenderer}
             />
           </Table>
+          <Pagination
+            prevClick={this.fetchPrev}
+            prevCondition={offset <= LIMIT}
+            nextClick={this.fetchNext}
+            nextCondition={entries.length % LIMIT !== 0 && entries.length - LIMIT < offset}
+          />
         </Fragment>
       )
     }

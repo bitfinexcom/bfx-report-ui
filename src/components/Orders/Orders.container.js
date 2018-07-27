@@ -4,6 +4,7 @@ import Orders from './Orders'
 
 function mapStateToProps(state = {}) {
   return {
+    offset: state.orders.offset,
     entries: state.orders.entries,
     loading: !state.orders.dataReceived,
   }
@@ -11,6 +12,8 @@ function mapStateToProps(state = {}) {
 
 const mapDispatchToProps = dispatch => ({
   fetchOrders: () => dispatch(actions.fetchOrders()),
+  fetchNextOrders: () => dispatch(actions.fetchNextOrders()),
+  fetchPrevOrders: () => dispatch(actions.fetchPrevOrders()),
 })
 
 const OrdersContainer = connect(mapStateToProps, mapDispatchToProps)(Orders)

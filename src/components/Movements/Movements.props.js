@@ -12,15 +12,21 @@ const MOVEMENTS_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(MOVEMENTS_ENTRIES_PROPS).isRequired,
   fetchMovements: PropTypes.func.isRequired,
+  fetchNextMovements: PropTypes.func.isRequired,
+  fetchPrevMovements: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   loading: PropTypes.bool.isRequired,
 }
 
 export const defaultProps = {
+  offset: 0,
   entries: [],
   fetchMovements: () => {},
+  fetchNextMovements: () => {},
+  fetchPrevMovements: () => {},
   intl: {},
   loading: true,
 }

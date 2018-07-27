@@ -86,17 +86,26 @@ const initialState = {
     }, */
   ],
   dataReceived: false,
+  smallestMts: 0,
+  offset: 0,
 }
+
+const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
 
 export function ledgersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_LEDGERS: {
       const result = action.payload
-      const currencies = []
+      const { currencies } = state
+      let smallestMts
       const entries = result.map((entry) => {
         // save new symbol to currencies list
         if (currencies.indexOf(entry.currency) === -1) {
           currencies.push(entry.currency)
+        }
+        // log smallest mts
+        if (!smallestMts || smallestMts > entry.mts) {
+          smallestMts = entry.mts
         }
         return {
           id: entry.id,
@@ -109,11 +118,24 @@ export function ledgersReducer(state = initialState, action) {
       })
       return {
         ...state,
-        entries,
-        currencies,
+        entries: [...state.entries, ...entries],
+        currencies: currencies.sort(),
         dataReceived: true,
+        smallestMts,
+        offset: state.offset + entries.length,
       }
     }
+    case types.FETCH_NEXT_LEDGERS:
+      return (state.entries.length - LIMIT >= state.offset)
+        ? {
+          ...state,
+          offset: state.offset + LIMIT,
+        } : state
+    case types.FETCH_PREV_LEDGERS:
+      return {
+        ...state,
+        offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
+      }
     case queryTypes.SET_TIME_RANGE:
       return initialState
     default: {

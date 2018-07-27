@@ -11,7 +11,7 @@ const TYPE_WHITELIST = [
  * Selector to return query range (in milliseconds) and limit.
  * @param {object} state query state
  */
-export function getTimeFrame(state = {}, type = '') {
+export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
   const date = new Date()
   const now = date.getTime()
   let TIME_SHIFT
@@ -53,7 +53,7 @@ export function getTimeFrame(state = {}, type = '') {
   }
   return {
     start,
-    end,
+    end: smallestMts > 0 ? smallestMts - 1 : end,
     limit,
   }
 }

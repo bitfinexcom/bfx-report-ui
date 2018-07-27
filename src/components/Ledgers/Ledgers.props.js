@@ -11,16 +11,22 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string),
+  offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(LEDGERS_ENTRIES_PROPS).isRequired,
   fetchLedgers: PropTypes.func.isRequired,
+  fetchNextLedgers: PropTypes.func.isRequired,
+  fetchPrevLedgers: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   loading: PropTypes.bool.isRequired,
 }
 
 export const defaultProps = {
   currencies: [],
+  offset: 0,
   entries: [],
   fetchLedgers: () => {},
+  fetchNextLedgers: () => {},
+  fetchPrevLedgers: () => {},
   intl: {},
   loading: true,
 }
