@@ -9,6 +9,30 @@ import Movements from '../Movements'
 const NO_ENTRY = []
 const ENTRIES = [
   {
+    id: 10450678,
+    currency: 'USD',
+    currencyName: 'WIRE',
+    mtsStarted: 1530801307000,
+    mtsUpdated: 1530804653000,
+    status: 'COMPLETED',
+    amount: 1234,
+    fees: 0,
+    destinationAddress: null,
+    transactionId: null,
+  },
+  {
+    id: 10450289,
+    currency: 'ETH',
+    currencyName: 'ETHEREUM',
+    mtsStarted: 1527418430000,
+    mtsUpdated: 1527418789000,
+    status: 'COMPLETED',
+    amount: 12.3,
+    fees: 0,
+    destinationAddress: '0x1234c77b33444514babcded17ee0f6197f0e3ff4',
+    transactionId: '0xb62d0ca12fad7294ec1234c611233bea66e4b37d0e4a101bf7a4dfd06cf8261c',
+  },
+  {
     id: 1350463,
     currency: 'ETH',
     currencyName: 'ETHEREUM',
