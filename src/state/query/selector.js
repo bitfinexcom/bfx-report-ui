@@ -1,11 +1,5 @@
+import { TYPE_WHITELIST } from 'state/utils'
 import constants from './constants'
-
-const TYPE_WHITELIST = [
-  'ledgers',
-  'movements',
-  'orders',
-  'trades',
-]
 
 /**
  * Selector to return query range (in milliseconds) and limit.

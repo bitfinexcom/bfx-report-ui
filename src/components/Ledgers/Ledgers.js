@@ -16,7 +16,7 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { formatTime } from 'state/utils'
+import { checkFetch, formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Ledgers.props'
 
 const COLUMN_WIDTHS = [500, 120, 120, 120, 150]
@@ -41,11 +41,7 @@ class Ledgers extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { loading, fetchLedgers } = this.props
-    const { prevLoading } = prevProps
-    if (loading && loading !== prevLoading) {
-      fetchLedgers()
-    }
+    checkFetch(prevProps, this.props, 'ledgers')
   }
 
   handleClick(symbol) {

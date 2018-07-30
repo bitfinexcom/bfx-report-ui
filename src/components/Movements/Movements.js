@@ -15,7 +15,7 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { formatTime } from 'state/utils'
+import { checkFetch, formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Movements.props'
 import Inspector from './Inspector'
 
@@ -37,11 +37,7 @@ class Movements extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { loading, fetchMovements } = this.props
-    const { prevLoading } = prevProps
-    if (loading && loading !== prevLoading) {
-      fetchMovements()
-    }
+    checkFetch(prevProps, this.props, 'movements')
   }
 
   fetchPrev() {
