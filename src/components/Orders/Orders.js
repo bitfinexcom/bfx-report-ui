@@ -13,78 +13,103 @@ import {
 } from '@blueprintjs/table'
 import Loading from 'components/Loading'
 import NoData from 'components/NoData'
-import { formatTime } from 'state/utils'
+import Pagination from 'components/Pagination'
+import queryConstants from 'state/query/constants'
+import { checkFetch, formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Orders.props'
 
 const COLUMN_WIDTHS = [80, 70, 150, 100, 100, 100, 100, 150, 200]
+const LIMIT = queryConstants.DEFAULT_ORDERS_QUERY_LIMIT
 
 class Orders extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.fetchPrev = this.fetchPrev.bind(this)
+    this.fetchNext = this.fetchNext.bind(this)
+  }
+
   componentDidMount() {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchOrders()
   }
 
+  componentDidUpdate(prevProps) {
+    checkFetch(prevProps, this.props, 'orders')
+  }
+
+  fetchPrev() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.fetchPrevOrders()
+  }
+
+  fetchNext() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.fetchNextOrders()
+  }
+
   render() {
     const {
+      offset,
       entries,
       intl,
       loading,
     } = this.props
-    const numRows = entries.length
+    const filteredData = offset < LIMIT ? entries : entries.slice(offset - LIMIT, offset)
+    const numRows = filteredData.length
 
     const idCellRenderer = rowIndex => (
       <Cell wrapText={false}>
-        {entries[rowIndex].id}
+        {filteredData[rowIndex].id}
       </Cell>
     )
 
     const pairCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].pair}
+        {filteredData[rowIndex].pair}
       </Cell>
     )
 
     const typeCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].type}
+        {filteredData[rowIndex].type}
       </Cell>
     )
 
     const amountOrigCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].amountOrig}
+        {filteredData[rowIndex].amountOrig}
       </Cell>
     )
 
     const amountCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].amount}
+        {filteredData[rowIndex].amount}
       </Cell>
     )
 
     const priceCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].price}
+        {filteredData[rowIndex].price}
       </Cell>
     )
 
     const priceAvgCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].priceAvg}
+        {filteredData[rowIndex].priceAvg}
       </Cell>
     )
 
     const mtsUpdateCellRenderer = rowIndex => (
       <Cell>
         <TruncatedFormat>
-          {formatTime(entries[rowIndex].mtsUpdate)}
+          {formatTime(filteredData[rowIndex].mtsUpdate)}
         </TruncatedFormat>
       </Cell>
     )
 
     const statusCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].status}
+        {filteredData[rowIndex].status}
       </Cell>
     )
 
@@ -159,6 +184,12 @@ class Orders extends PureComponent {
               cellRenderer={statusCellRenderer}
             />
           </Table>
+          <Pagination
+            prevClick={this.fetchPrev}
+            prevCondition={offset <= LIMIT}
+            nextClick={this.fetchNext}
+            nextCondition={entries.length % LIMIT !== 0 && entries.length - LIMIT < offset}
+          />
         </Fragment>
       )
     }

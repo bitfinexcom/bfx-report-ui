@@ -41,10 +41,34 @@ export function formatPair(symbol) {
   return `${symbol.slice(1, 4)}/${symbol.slice(4, 7)}`
 }
 
+export const TYPE_WHITELIST = [
+  'ledgers',
+  'movements',
+  'orders',
+  'trades',
+]
+
+export function checkFetch(prevProps, props, type) {
+  if (!TYPE_WHITELIST.includes(type)) {
+    // eslint-disable-next-line no-console
+    console.warn(`${type} is not a valid type`)
+    return
+  }
+  const { prevLoading } = prevProps
+  const { loading } = props
+  // eslint-disable-next-line react/destructuring-assignment
+  const fetch = props[`fetch${type.charAt(0).toUpperCase() + type.slice(1)}`]
+  if (loading && loading !== prevLoading) {
+    fetch()
+  }
+}
+
 export default {
+  checkFetch,
   formatDate,
   formatPair,
   formatTime,
   postJsonfetch,
   selectAuth,
+  TYPE_WHITELIST,
 }

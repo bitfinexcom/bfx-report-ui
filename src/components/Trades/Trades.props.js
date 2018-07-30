@@ -11,15 +11,21 @@ const TRADES_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(TRADES_ENTRIES_PROPS).isRequired,
   fetchTrades: PropTypes.func.isRequired,
+  fetchNextTrades: PropTypes.func.isRequired,
+  fetchPrevTrades: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   loading: PropTypes.bool.isRequired,
 }
 
 export const defaultProps = {
+  offset: 0,
   entries: [],
   fetchTrades: () => {},
+  fetchNextTrades: () => {},
+  fetchPrevTrades: () => {},
   intl: {},
   loading: true,
 }

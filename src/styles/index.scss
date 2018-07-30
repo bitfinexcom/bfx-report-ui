@@ -57,6 +57,18 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
 
 .bitfinex-symbol-group {
   padding-bottom: 10px;
+
+  &> button {
+    margin-right: 3px;
+  }
+}
+
+.bitfinex-pagination-group {
+  padding-top: 10px;
+
+  &> button {
+    margin-right: 3px;
+  }
 }
 
 body.#{$ns}-dark .bitfinex-green-text > div {

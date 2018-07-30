@@ -1,9 +1,10 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
 import { formatPair } from 'state/utils'
+import queryTypes from 'state/query/constants'
 import types from './constants'
 /*
 {
-    "result": [
+    "result": [NEXT
         {
             "domain": null,
             "_events": {},
@@ -98,38 +99,64 @@ const initialState = {
     }, */
   ],
   dataReceived: false,
+  smallestMts: 0,
+  offset: 0,
 }
+
+const LIMIT = queryTypes.DEFAULT_ORDERS_QUERY_LIMIT
 
 export function ordersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_ORDERS: {
       const result = action.payload
-      const entries = result.map(entry => ({
-        id: entry.id,
-        gid: entry.gid,
-        cid: entry.cid,
-        pair: formatPair(entry.symbol),
-        mtsCreate: entry.mtsCreate,
-        mtsUpdate: entry.mtsUpdate,
-        amount: entry.amount,
-        amountOrig: entry.amountOrig,
-        type: entry.type,
-        typePrev: entry.typePrev,
-        flags: entry.flags,
-        status: entry.status,
-        price: entry.price,
-        priceAvg: entry.priceAvg,
-        priceTrailing: entry.priceTrailing,
-        priceAuxLimit: entry.priceAuxLimit,
-        notify: entry.notify,
-        placedId: entry.placedId,
-      }))
+      let smallestMts
+      const entries = result.map((entry) => {
+        // log smallest mts
+        if (!smallestMts || smallestMts > entry.mtsUpdate) {
+          smallestMts = entry.mtsUpdate
+        }
+        return {
+          id: entry.id,
+          gid: entry.gid,
+          cid: entry.cid,
+          pair: formatPair(entry.symbol),
+          mtsCreate: entry.mtsCreate,
+          mtsUpdate: entry.mtsUpdate,
+          amount: entry.amount,
+          amountOrig: entry.amountOrig,
+          type: entry.type,
+          typePrev: entry.typePrev,
+          flags: entry.flags,
+          status: entry.status,
+          price: entry.price,
+          priceAvg: entry.priceAvg,
+          priceTrailing: entry.priceTrailing,
+          priceAuxLimit: entry.priceAuxLimit,
+          notify: entry.notify,
+          placedId: entry.placedId,
+        }
+      })
       return {
         ...state,
-        entries,
+        entries: [...state.entries, ...entries],
         dataReceived: true,
+        smallestMts,
+        offset: state.offset + entries.length,
       }
     }
+    case types.FETCH_NEXT_ORDERS:
+      return (state.entries.length - LIMIT > state.offset)
+        ? {
+          ...state,
+          offset: state.offset + LIMIT,
+        } : state
+    case types.FETCH_PREV_ORDERS:
+      return {
+        ...state,
+        offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
+      }
+    case queryTypes.SET_TIME_RANGE:
+      return initialState
     default: {
       return state
     }

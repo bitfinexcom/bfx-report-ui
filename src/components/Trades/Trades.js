@@ -13,51 +13,80 @@ import {
 } from '@blueprintjs/table'
 import Loading from 'components/Loading'
 import NoData from 'components/NoData'
-import { formatTime } from 'state/utils'
+import Pagination from 'components/Pagination'
+import queryConstants from 'state/query/constants'
+import { checkFetch, formatTime } from 'state/utils'
 import { propTypes, defaultProps } from './Trades.props'
 
 const COLUMN_WIDTHS = [80, 70, 125, 125, 125, 150]
+const LIMIT = queryConstants.DEFAULT_TRADES_QUERY_LIMIT
 
 class Trades extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.fetchPrev = this.fetchPrev.bind(this)
+    this.fetchNext = this.fetchNext.bind(this)
+  }
+
   componentDidMount() {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchTrades()
   }
 
+  componentDidUpdate(prevProps) {
+    checkFetch(prevProps, this.props, 'trades')
+  }
+
+  fetchPrev() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.fetchPrevTrades()
+  }
+
+  fetchNext() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.fetchNextTrades()
+  }
+
   render() {
-    const { entries, intl, loading } = this.props
-    const numRows = entries.length
+    const {
+      offset,
+      entries,
+      intl,
+      loading,
+    } = this.props
+    const filteredData = offset < LIMIT ? entries : entries.slice(offset - LIMIT, offset)
+    const numRows = filteredData.length
 
     const idCellRenderer = rowIndex => (
       <Cell wrapText={false}>
-        {entries[rowIndex].id}
+        {filteredData[rowIndex].id}
       </Cell>
     )
 
     const pairCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].pair}
+        {filteredData[rowIndex].pair}
       </Cell>
     )
 
     const amountCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].execAmount}
+        {filteredData[rowIndex].execAmount}
       </Cell>
     )
 
     const priceCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].execPrice}
+        {filteredData[rowIndex].execPrice}
       </Cell>
     )
 
     const feeCellRenderer = rowIndex => (
       <Cell>
-        {entries[rowIndex].fee}
+        {filteredData[rowIndex].fee}
         &nbsp;
         <span className='bitfinex-show-soft'>
-          {entries[rowIndex].feeCurrency}
+          {filteredData[rowIndex].feeCurrency}
         </span>
       </Cell>
     )
@@ -65,7 +94,7 @@ class Trades extends PureComponent {
     const mtsCellRenderer = rowIndex => (
       <Cell>
         <TruncatedFormat>
-          {formatTime(entries[rowIndex].mtsCreate)}
+          {formatTime(filteredData[rowIndex].mtsCreate)}
         </TruncatedFormat>
       </Cell>
     )
@@ -126,6 +155,12 @@ class Trades extends PureComponent {
               cellRenderer={mtsCellRenderer}
             />
           </Table>
+          <Pagination
+            prevClick={this.fetchPrev}
+            prevCondition={offset <= LIMIT}
+            nextClick={this.fetchNext}
+            nextCondition={entries.length % LIMIT !== 0 && entries.length - LIMIT < offset}
+          />
         </Fragment>
       )
     }

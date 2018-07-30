@@ -1,17 +1,18 @@
+import { TYPE_WHITELIST } from 'state/utils'
 import constants from './constants'
 
 /**
  * Selector to return query range (in milliseconds) and limit.
  * @param {object} state query state
  */
-export function getTimeFrame(state = {}) {
+export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
   const date = new Date()
   const now = date.getTime()
   let TIME_SHIFT
   let start
   const end = now
-  // no limit applied for the first version
-  const limit = constants.DEFAULT_QUERY_LIMIT
+  const limit = TYPE_WHITELIST.includes(type)
+    ? constants[`DEFAULT_${type.toUpperCase()}_QUERY_LIMIT`] : constants.DEFAULT_QUERY_LIMIT
   switch (state.timeRange) {
     case constants.TIME_RANGE_LAST_24HOURS:
       TIME_SHIFT = 1000 * 60 * 60 * 24 // 24 hours
@@ -46,7 +47,7 @@ export function getTimeFrame(state = {}) {
   }
   return {
     start,
-    end,
+    end: smallestMts > 0 ? smallestMts - 1 : end,
     limit,
   }
 }

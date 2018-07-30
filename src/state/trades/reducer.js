@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
 import { formatPair } from 'state/utils'
+import queryTypes from 'state/query/constants'
 import types from './constants'
 
 /*
@@ -71,31 +72,57 @@ const initialState = {
     }, */
   ],
   dataReceived: false,
+  smallestMts: 0,
+  offset: 0,
 }
+
+const LIMIT = queryTypes.DEFAULT_TRADES_QUERY_LIMIT
 
 export function tradesReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_TRADES: {
       const result = action.payload
-      const entries = result.map(entry => ({
-        id: entry.id,
-        pair: formatPair(entry.pair),
-        mtsCreate: entry.mtsCreate,
-        orderID: entry.orderID,
-        execAmount: entry.execAmount,
-        execPrice: entry.execPrice,
-        orderType: entry.orderType,
-        orderPrice: entry.orderPrice,
-        maker: entry.maker,
-        fee: Math.abs(entry.fee),
-        feeCurrency: entry.feeCurrency,
-      }))
+      let smallestMts
+      const entries = result.map((entry) => {
+        // log smallest mts
+        if (!smallestMts || smallestMts > entry.mtsCreate) {
+          smallestMts = entry.mtsCreate
+        }
+        return {
+          id: entry.id,
+          pair: formatPair(entry.pair),
+          mtsCreate: entry.mtsCreate,
+          orderID: entry.orderID,
+          execAmount: entry.execAmount,
+          execPrice: entry.execPrice,
+          orderType: entry.orderType,
+          orderPrice: entry.orderPrice,
+          maker: entry.maker,
+          fee: Math.abs(entry.fee),
+          feeCurrency: entry.feeCurrency,
+        }
+      })
       return {
         ...state,
-        entries,
+        entries: [...state.entries, ...entries],
         dataReceived: true,
+        smallestMts,
+        offset: state.offset + entries.length,
       }
     }
+    case types.FETCH_NEXT_TRADES:
+      return (state.entries.length - LIMIT >= state.offset)
+        ? {
+          ...state,
+          offset: state.offset + LIMIT,
+        } : state
+    case types.FETCH_PREV_TRADES:
+      return {
+        ...state,
+        offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
+      }
+    case queryTypes.SET_TIME_RANGE:
+      return initialState
     default: {
       return state
     }
