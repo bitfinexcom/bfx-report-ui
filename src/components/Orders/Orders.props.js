@@ -11,15 +11,21 @@ const ORDERS_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(ORDERS_ENTRIES_PROPS).isRequired,
   fetchOrders: PropTypes.func.isRequired,
+  fetchNextOrders: PropTypes.func.isRequired,
+  fetchPrevOrders: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   loading: PropTypes.bool.isRequired,
 }
 
 export const defaultProps = {
+  offset: 0,
   entries: [],
   fetchOrders: () => {},
+  fetchNextOrders: () => {},
+  fetchPrevOrders: () => {},
   intl: {},
   loading: true,
 }

@@ -47,5 +47,7 @@
   "timeframe.month_to_date": "月初至今",
   "timeframe.past_month": "過去一個月",
   "timeframe.past_3m": "過去三個月",
-  "timeframe.custom": "自訂 (間距至多三個月)"
+  "timeframe.custom": "自訂 (間距至多三個月)",
+  "pagination.next": "下一頁",
+  "pagination.prev": "上一頁"
 }

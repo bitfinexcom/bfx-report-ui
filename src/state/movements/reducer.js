@@ -1,6 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#movements
+import queryTypes from 'state/query/constants'
 import types from './constants'
-
 /*
 {
     "result": [
@@ -63,30 +63,56 @@ const initialState = {
     }, */
   ],
   dataReceived: false,
+  smallestMts: 0,
+  offset: 0,
 }
+
+const LIMIT = queryTypes.DEFAULT_MOVEMENTS_QUERY_LIMIT
 
 export function movementsReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_MOVEMENTS: {
       const result = action.payload
-      const entries = result.map(entry => ({
-        id: entry.id,
-        currency: entry.currency,
-        currencyName: entry.currencyName,
-        mtsStarted: entry.mtsStarted,
-        mtsUpdated: entry.mtsUpdated,
-        status: entry.status,
-        amount: entry.amount,
-        fees: entry.fees,
-        destinationAddress: entry.destinationAddress,
-        transactionId: entry.transactionId,
-      }))
+      let smallestMts
+      const entries = result.map((entry) => {
+        // log smallest mts
+        if (!smallestMts || smallestMts > entry.mtsUpdated) {
+          smallestMts = entry.mtsUpdated
+        }
+        return {
+          id: entry.id,
+          currency: entry.currency,
+          currencyName: entry.currencyName,
+          mtsStarted: entry.mtsStarted,
+          mtsUpdated: entry.mtsUpdated,
+          status: entry.status,
+          amount: entry.amount,
+          fees: entry.fees,
+          destinationAddress: entry.destinationAddress,
+          transactionId: entry.transactionId,
+        }
+      })
       return {
         ...state,
-        entries,
+        entries: [...state.entries, ...entries],
         dataReceived: true,
+        smallestMts,
+        offset: state.offset + entries.length,
       }
     }
+    case types.FETCH_NEXT_MOVEMENTS:
+      return (state.entries.length - LIMIT >= state.offset)
+        ? {
+          ...state,
+          offset: state.offset + LIMIT,
+        } : state
+    case types.FETCH_PREV_MOVEMENTS:
+      return {
+        ...state,
+        offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
+      }
+    case queryTypes.SET_TIME_RANGE:
+      return initialState
     default: {
       return state
     }

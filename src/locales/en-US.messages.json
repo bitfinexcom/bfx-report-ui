@@ -47,5 +47,7 @@
   "timeframe.month_to_date": "Month to date",
   "timeframe.past_month": "Past month",
   "timeframe.past_3m": "Past 3 month",
-  "timeframe.custom": "Custom (max range 3 months)"
+  "timeframe.custom": "Custom (max range 3 months)",
+  "pagination.next": "Next",
+  "pagination.prev": "Prev"
 }
