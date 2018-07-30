@@ -70,19 +70,19 @@ class Trades extends PureComponent {
     )
 
     const amountCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].execAmount}
       </Cell>
     )
 
     const priceCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].execPrice}
       </Cell>
     )
 
     const feeCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].fee}
         &nbsp;
         <span className='bitfinex-show-soft'>

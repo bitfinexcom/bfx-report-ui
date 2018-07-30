@@ -92,13 +92,13 @@ class Ledgers extends PureComponent {
     )
 
     const creditCellRenderer = rowIndex => (
-      <Cell className='bitfinex-green-text'>
+      <Cell className='bitfinex-green-text bitfinex-text-align-right'>
         {parseFloat(filteredData[rowIndex].amount) > 0 ? filteredData[rowIndex].amount : ''}
       </Cell>
     )
 
     const debitCellRenderer = rowIndex => (
-      <Cell className='bitfinex-red-text'>
+      <Cell className='bitfinex-red-text bitfinex-text-align-right'>
         {parseFloat(filteredData[rowIndex].amount) < 0 ? Math.abs(filteredData[rowIndex].amount) : ''}
       </Cell>
     )
