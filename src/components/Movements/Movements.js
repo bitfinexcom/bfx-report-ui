@@ -78,8 +78,12 @@ class Movements extends PureComponent {
     )
 
     const amountCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].amount}
+        &nbsp;
+        <span className='bitfinex-show-soft'>
+          {filteredData[rowIndex].currency}
+        </span>
       </Cell>
     )
 

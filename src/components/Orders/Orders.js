@@ -76,25 +76,25 @@ class Orders extends PureComponent {
     )
 
     const amountOrigCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].amountOrig}
       </Cell>
     )
 
     const amountCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].amount}
       </Cell>
     )
 
     const priceCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].price}
       </Cell>
     )
 
     const priceAvgCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].priceAvg}
       </Cell>
     )
