@@ -27,8 +27,20 @@ export function fetchPrevMovements() {
   }
 }
 
+/**
+ * Create an action to update Movements.
+ * @param {Object[]} payload data set
+ */
+export function updateMovements(payload) {
+  return {
+    type: types.UPDATE_MOVEMENTS,
+    payload,
+  }
+}
+
 export default {
   fetchMovements,
   fetchNextMovements,
   fetchPrevMovements,
+  updateMovements,
 }

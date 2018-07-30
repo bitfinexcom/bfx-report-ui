@@ -27,8 +27,20 @@ export function fetchPrevOrders() {
   }
 }
 
+/**
+ * Create an action to update Orders.
+ * @param {Object[]} payload data set
+ */
+export function updateOrders(payload) {
+  return {
+    type: types.UPDATE_ORDERS,
+    payload,
+  }
+}
+
 export default {
   fetchOrders,
   fetchNextOrders,
   fetchPrevOrders,
+  updateOrders,
 }

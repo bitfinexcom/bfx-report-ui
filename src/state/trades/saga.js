@@ -6,10 +6,11 @@ import {
 } from 'redux-saga/effects'
 import { postJsonfetch, selectAuth } from 'state/utils'
 import { getTimeFrame } from 'state/query/selector'
-import statusTypes from 'state/status/constants'
+import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { platform } from 'var/config'
 import types from './constants'
+import actions from './actions'
 
 function getTrades(auth, query, smallestMts) {
   const params = getTimeFrame(query, 'trades', smallestMts)
@@ -25,22 +26,14 @@ function* fetchTrades() {
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
     const data = yield call(getTrades, auth, query, 0)
-    yield put({
-      type: types.UPDATE_TRADES,
-      payload: (data && data.result) || [],
-    })
+    const { result = [], error } = data
+    yield put(actions.updateTrades(result))
 
-    if (data && data.error) {
-      yield put({
-        type: statusTypes.UPDATE_ERROR_STATUS,
-        payload: `Trades fail ${JSON.stringify(data.error)}`,
-      })
+    if (error) {
+      yield put(updateErrorStatus(`Trades fail ${JSON.stringify(error)}`))
     }
-  } catch (error) {
-    yield put({
-      type: statusTypes.UPDATE_ERROR_STATUS,
-      payload: `Trades request fail ${JSON.stringify(error)}`,
-    })
+  } catch (fail) {
+    yield put(updateErrorStatus(`Trades request fail ${JSON.stringify(fail)}`))
   }
 }
 
@@ -57,22 +50,14 @@ function* fetchNextTrades() {
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
     const data = yield call(getTrades, auth, query, smallestMts)
-    yield put({
-      type: types.UPDATE_TRADES,
-      payload: (data && data.result) || [],
-    })
+    const { result = [], error } = data
+    yield put(actions.updateTrades(result))
 
-    if (data && data.error) {
-      yield put({
-        type: statusTypes.UPDATE_ERROR_STATUS,
-        payload: `Trades fail ${JSON.stringify(data.error)}`,
-      })
+    if (error) {
+      yield put(updateErrorStatus(`Trades fail ${JSON.stringify(error)}`))
     }
-  } catch (error) {
-    yield put({
-      type: statusTypes.UPDATE_ERROR_STATUS,
-      payload: `Trades request fail ${JSON.stringify(error)}`,
-    })
+  } catch (fail) {
+    yield put(updateErrorStatus(`Trades request fail ${JSON.stringify(fail)}`))
   }
 }
 

@@ -27,8 +27,20 @@ export function fetchPrevLedgers() {
   }
 }
 
+/**
+ * Create an action to update Ledgers.
+ * @param {Object[]} payload data set
+ */
+export function updateLedgers(payload) {
+  return {
+    type: types.UPDATE_LEDGERS,
+    payload,
+  }
+}
+
 export default {
   fetchLedgers,
   fetchNextLedgers,
   fetchPrevLedgers,
+  updateLedgers,
 }

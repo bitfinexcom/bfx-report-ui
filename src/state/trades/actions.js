@@ -27,8 +27,20 @@ export function fetchPrevTrades() {
   }
 }
 
+/**
+ * Create an action to update Trades.
+ * @param {Object[]} payload data set
+ */
+export function updateTrades(payload) {
+  return {
+    type: types.UPDATE_TRADES,
+    payload,
+  }
+}
+
 export default {
   fetchTrades,
   fetchNextTrades,
   fetchPrevTrades,
+  updateTrades,
 }
