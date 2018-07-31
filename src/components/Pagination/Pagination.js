@@ -1,42 +1,105 @@
-import React from 'react'
-import { injectIntl, intlShape } from 'react-intl'
+import React, { Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Button } from '@blueprintjs/core'
+import { Button, Intent } from '@blueprintjs/core'
+import { isValidateType } from 'state/utils'
+import queryConstants from 'state/query/constants'
 
-export const Pagination = ({
-  intl, prevClick, prevCondition, nextClick, nextCondition,
-}) => (
-  <div className='bitfinex-pagination-group'>
-    <Button
-      icon='chevron-left'
-      onClick={prevClick}
-      disabled={prevCondition}
-    >
-      {intl.formatMessage({ id: 'pagination.prev' })}
-    </Button>
-    <Button
-      rightIcon='chevron-right'
-      onClick={nextClick}
-      disabled={nextCondition}
-    >
-      {intl.formatMessage({ id: 'pagination.next' })}
-    </Button>
-  </div>
-)
+class Pagination extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.handlers = {}
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(page) {
+    if (!this.handlers[page]) {
+      this.handlers[page] = () => {
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.jumpPage(page)
+      }
+    }
+    return this.handlers[page]
+  }
+
+  render() {
+    const {
+      type,
+      dataLen,
+      offset,
+      nextClick,
+      prevClick,
+      pageOffset,
+    } = this.props
+    if (!isValidateType(type)) {
+      return ''
+    }
+    const LIMIT = queryConstants[`DEFAULT_${type.toUpperCase()}_QUERY_LIMIT`]
+    const PAGE_SIZE = queryConstants[`DEFAULT_${type.toUpperCase()}_PAGE_SIZE`]
+    const pageLen = Math.ceil(dataLen / PAGE_SIZE)
+    const nextCondition = dataLen % LIMIT !== 0 && dataLen - LIMIT < offset
+    const prevCondition = offset <= LIMIT
+    const currentPage = Math.floor((offset + pageOffset - LIMIT) / PAGE_SIZE) + 1
+    const pages = []
+    // eslint-disable-next-line no-plusplus
+    for (let i = 1; i <= pageLen; i++) {
+      pages.push(
+        <Button
+          key={`page${i}`}
+          intent={currentPage === i ? Intent.PRIMARY : Intent.NONE}
+          onClick={this.handleClick(i)}
+        >
+          {i}
+        </Button>,
+      )
+    }
+    const renderPages = (
+      <Fragment>
+        {pages}
+      </Fragment>
+    )
+
+    const renderRestDots = !nextCondition ? (
+      <Fragment>
+        <span>
+...
+        </span>
+        &nbsp;
+      </Fragment>
+    ) : ''
+
+    return (
+      <div className='bitfinex-pagination-group'>
+        <Button
+          icon='double-chevron-left'
+          onClick={prevClick}
+          disabled={prevCondition}
+        />
+        {renderPages}
+        {renderRestDots}
+        <Button
+          rightIcon='double-chevron-right'
+          onClick={nextClick}
+          disabled={nextCondition}
+        />
+      </div>
+    )
+  }
+}
 
 Pagination.propTypes = {
-  intl: intlShape.isRequired,
-  prevClick: PropTypes.func,
-  prevCondition: PropTypes.bool,
+  dataLen: PropTypes.number.isRequired,
+  jumpPage: PropTypes.func,
+  offset: PropTypes.number.isRequired,
   nextClick: PropTypes.func,
-  nextCondition: PropTypes.bool,
+  prevClick: PropTypes.func,
+  pageOffset: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
 }
 
 Pagination.defaultProps = {
-  prevClick: () => {},
-  prevCondition: false,
+  jumpPage: () => {},
   nextClick: () => {},
-  nextCondition: false,
+  prevClick: () => {},
 }
 
-export default injectIntl(Pagination)
+export default Pagination

@@ -28,6 +28,17 @@ export function fetchPrevLedgers() {
 }
 
 /**
+ * Create an action to jump to a specific Ledgers page.
+ * @param {number} payload page number
+ */
+export function jumpPage(payload) {
+  return {
+    type: types.JUMP_LEDGERS_PAGE,
+    payload,
+  }
+}
+
+/**
  * Create an action to update Ledgers.
  * @param {Object[]} payload data set
  */
@@ -42,5 +53,6 @@ export default {
   fetchLedgers,
   fetchNextLedgers,
   fetchPrevLedgers,
+  jumpPage,
   updateLedgers,
 }

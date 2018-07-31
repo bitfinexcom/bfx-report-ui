@@ -28,6 +28,17 @@ export function fetchPrevTrades() {
 }
 
 /**
+ * Create an action to jump to a specific Trades page.
+ * @param {number} payload page number
+ */
+export function jumpPage(payload) {
+  return {
+    type: types.JUMP_TRADES_PAGE,
+    payload,
+  }
+}
+
+/**
  * Create an action to update Trades.
  * @param {Object[]} payload data set
  */
@@ -42,5 +53,6 @@ export default {
   fetchTrades,
   fetchNextTrades,
   fetchPrevTrades,
+  jumpPage,
   updateTrades,
 }

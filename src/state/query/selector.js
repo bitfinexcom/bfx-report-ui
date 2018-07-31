@@ -1,4 +1,4 @@
-import { TYPE_WHITELIST } from 'state/utils'
+import { isValidateType } from 'state/utils'
 import constants from './constants'
 
 /**
@@ -11,7 +11,7 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
   let TIME_SHIFT
   let start
   const end = now
-  const limit = TYPE_WHITELIST.includes(type)
+  const limit = isValidateType(type)
     ? constants[`DEFAULT_${type.toUpperCase()}_QUERY_LIMIT`] : constants.DEFAULT_QUERY_LIMIT
   switch (state.timeRange) {
     case constants.TIME_RANGE_LAST_24HOURS:

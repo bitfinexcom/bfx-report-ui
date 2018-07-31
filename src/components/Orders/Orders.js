@@ -15,11 +15,12 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime } from 'state/utils'
+import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
 import { propTypes, defaultProps } from './Orders.props'
 
 const COLUMN_WIDTHS = [80, 70, 150, 100, 100, 100, 100, 150, 200]
 const LIMIT = queryConstants.DEFAULT_ORDERS_QUERY_LIMIT
+const PAGE_SIZE = queryConstants.DEFAULT_ORDERS_PAGE_SIZE
 
 class Orders extends PureComponent {
   constructor(props) {
@@ -50,11 +51,13 @@ class Orders extends PureComponent {
   render() {
     const {
       offset,
+      pageOffset,
       entries,
       intl,
+      jumpPage,
       loading,
     } = this.props
-    const filteredData = offset < LIMIT ? entries : entries.slice(offset - LIMIT, offset)
+    const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
 
     const idCellRenderer = rowIndex => (
@@ -185,10 +188,13 @@ class Orders extends PureComponent {
             />
           </Table>
           <Pagination
+            type='orders'
+            dataLen={entries.length}
+            offset={offset}
+            jumpPage={jumpPage}
             prevClick={this.fetchPrev}
-            prevCondition={offset <= LIMIT}
             nextClick={this.fetchNext}
-            nextCondition={entries.length % LIMIT !== 0 && entries.length - LIMIT < offset}
+            pageOffset={pageOffset}
           />
         </Fragment>
       )

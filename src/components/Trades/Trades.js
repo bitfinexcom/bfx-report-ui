@@ -15,11 +15,12 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime } from 'state/utils'
+import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
 import { propTypes, defaultProps } from './Trades.props'
 
 const COLUMN_WIDTHS = [80, 70, 125, 125, 125, 150]
 const LIMIT = queryConstants.DEFAULT_TRADES_QUERY_LIMIT
+const PAGE_SIZE = queryConstants.DEFAULT_TRADES_PAGE_SIZE
 
 class Trades extends PureComponent {
   constructor(props) {
@@ -50,11 +51,13 @@ class Trades extends PureComponent {
   render() {
     const {
       offset,
+      pageOffset,
       entries,
       intl,
+      jumpPage,
       loading,
     } = this.props
-    const filteredData = offset < LIMIT ? entries : entries.slice(offset - LIMIT, offset)
+    const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
 
     const idCellRenderer = rowIndex => (
@@ -156,10 +159,13 @@ class Trades extends PureComponent {
             />
           </Table>
           <Pagination
+            type='trades'
+            dataLen={entries.length}
+            offset={offset}
+            jumpPage={jumpPage}
             prevClick={this.fetchPrev}
-            prevCondition={offset <= LIMIT}
             nextClick={this.fetchNext}
-            nextCondition={entries.length % LIMIT !== 0 && entries.length - LIMIT < offset}
+            pageOffset={pageOffset}
           />
         </Fragment>
       )
