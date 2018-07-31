@@ -28,6 +28,17 @@ export function fetchPrevOrders() {
 }
 
 /**
+ * Create an action to jump to a specific Orders page.
+ * @param {number} payload page number
+ */
+export function jumpPage(payload) {
+  return {
+    type: types.JUMP_ORDERS_PAGE,
+    payload,
+  }
+}
+
+/**
  * Create an action to update Orders.
  * @param {Object[]} payload data set
  */
@@ -42,5 +53,6 @@ export default {
   fetchOrders,
   fetchNextOrders,
   fetchPrevOrders,
+  jumpPage,
   updateOrders,
 }

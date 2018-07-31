@@ -15,7 +15,7 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime } from 'state/utils'
+import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
 import { propTypes, defaultProps } from './Movements.props'
 import Inspector from './Inspector'
 
@@ -23,6 +23,7 @@ import Inspector from './Inspector'
 const TYPE_WITHDRAWALS = 'withdrawals'
 const COLUMN_WIDTHS = [80, 150, 125, 120, 400]
 const LIMIT = queryConstants.DEFAULT_MOVEMENTS_QUERY_LIMIT
+const PAGE_SIZE = queryConstants.DEFAULT_MOVEMENTS_PAGE_SIZE
 
 class Movements extends PureComponent {
   constructor(props) {
@@ -53,12 +54,14 @@ class Movements extends PureComponent {
   render() {
     const {
       offset,
+      pageOffset,
       entries,
       intl,
+      jumpPage,
       type,
       loading,
     } = this.props
-    const currentEntries = offset < LIMIT ? entries : entries.slice(offset - LIMIT, offset)
+    const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
     const numRows = filteredData.length
@@ -158,10 +161,13 @@ class Movements extends PureComponent {
             />
           </Table>
           <Pagination
+            type='movements'
+            dataLen={entries.length}
+            offset={offset}
+            jumpPage={jumpPage}
             prevClick={this.fetchPrev}
-            prevCondition={offset <= LIMIT}
             nextClick={this.fetchNext}
-            nextCondition={entries.length % LIMIT !== 0 && entries.length - LIMIT < offset}
+            pageOffset={pageOffset}
           />
         </Fragment>
       )

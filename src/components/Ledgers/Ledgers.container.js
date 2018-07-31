@@ -8,6 +8,7 @@ function mapStateToProps(state = {}) {
     currencies: state.ledgers.currencies,
     entries: state.ledgers.entries,
     loading: !state.ledgers.dataReceived,
+    pageOffset: state.ledgers.pageOffset,
   }
 }
 
@@ -15,6 +16,7 @@ const mapDispatchToProps = dispatch => ({
   fetchLedgers: () => dispatch(actions.fetchLedgers()),
   fetchNextLedgers: () => dispatch(actions.fetchNextLedgers()),
   fetchPrevLedgers: () => dispatch(actions.fetchPrevLedgers()),
+  jumpPage: page => dispatch(actions.jumpPage(page)),
 })
 
 const LedgersContainer = connect(mapStateToProps, mapDispatchToProps)(Ledgers)

@@ -17,7 +17,9 @@ export const propTypes = {
   fetchNextTrades: PropTypes.func.isRequired,
   fetchPrevTrades: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
+  jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  pageOffset: PropTypes.number.isRequired,
 }
 
 export const defaultProps = {
@@ -27,5 +29,7 @@ export const defaultProps = {
   fetchNextTrades: () => {},
   fetchPrevTrades: () => {},
   intl: {},
+  jumpPage: () => {},
   loading: true,
+  pageOffset: 0,
 }

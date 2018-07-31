@@ -41,17 +41,19 @@ export function formatPair(symbol) {
   return `${symbol.slice(1, 4)}/${symbol.slice(4, 7)}`
 }
 
-export const TYPE_WHITELIST = [
+const TYPE_WHITELIST = [
   'ledgers',
   'movements',
   'orders',
   'trades',
 ]
 
+export function isValidateType(type) {
+  return TYPE_WHITELIST.includes(type)
+}
+
 export function checkFetch(prevProps, props, type) {
-  if (!TYPE_WHITELIST.includes(type)) {
-    // eslint-disable-next-line no-console
-    console.warn(`${type} is not a valid type`)
+  if (!isValidateType(type)) {
     return
   }
   const { prevLoading } = prevProps
@@ -63,12 +65,19 @@ export function checkFetch(prevProps, props, type) {
   }
 }
 
+export function getCurrentEntries(entries, offset, limit, pageOffset, pageSize) {
+  return offset < limit
+    ? entries.slice(pageOffset, pageOffset + pageSize)
+    : entries.slice(offset + pageOffset - limit, offset + pageOffset - limit + pageSize)
+}
+
 export default {
   checkFetch,
   formatDate,
   formatPair,
   formatTime,
+  getCurrentEntries,
+  isValidateType,
   postJsonfetch,
   selectAuth,
-  TYPE_WHITELIST,
 }
