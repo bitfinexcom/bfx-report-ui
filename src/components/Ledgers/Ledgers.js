@@ -140,7 +140,7 @@ class Ledgers extends PureComponent {
     }
 
     const balanceCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].balance}
       </Cell>
     )
