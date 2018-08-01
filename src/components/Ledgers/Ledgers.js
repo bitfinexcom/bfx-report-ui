@@ -38,8 +38,10 @@ class Ledgers extends PureComponent {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchLedgers()
+    const { loading, fetchLedgers } = this.props
+    if (loading){
+      fetchLedgers()
+    }
   }
 
   componentDidUpdate(prevProps) {

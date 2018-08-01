@@ -30,8 +30,10 @@ class Trades extends PureComponent {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchTrades()
+    const { loading, fetchTrades } = this.props
+    if (loading){
+      fetchTrades()
+    }
   }
 
   componentDidUpdate(prevProps) {
