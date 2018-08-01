@@ -31,7 +31,7 @@ class Trades extends PureComponent {
 
   componentDidMount() {
     const { loading, fetchTrades } = this.props
-    if (loading){
+    if (loading) {
       fetchTrades()
     }
   }

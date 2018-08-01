@@ -31,7 +31,7 @@ class Orders extends PureComponent {
 
   componentDidMount() {
     const { loading, fetchOrders } = this.props
-    if (loading){
+    if (loading) {
       fetchOrders()
     }
   }

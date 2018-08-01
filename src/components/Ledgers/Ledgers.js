@@ -39,7 +39,7 @@ class Ledgers extends PureComponent {
 
   componentDidMount() {
     const { loading, fetchLedgers } = this.props
-    if (loading){
+    if (loading) {
       fetchLedgers()
     }
   }
