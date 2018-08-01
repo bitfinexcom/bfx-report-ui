@@ -22,6 +22,7 @@ import { propTypes, defaultProps } from './Ledgers.props'
 const COLUMN_WIDTHS = [500, 120, 120, 120, 150]
 const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
+const WILD_CARD = ['', 'All']
 
 class Ledgers extends PureComponent {
   constructor(props) {
@@ -96,17 +97,45 @@ class Ledgers extends PureComponent {
       </Cell>
     )
 
-    const creditCellRenderer = rowIndex => (
-      <Cell className='bitfinex-green-text bitfinex-text-align-right'>
-        {parseFloat(filteredData[rowIndex].amount) > 0 ? filteredData[rowIndex].amount : ''}
-      </Cell>
-    )
+    const creditCellRenderer = (rowIndex) => {
+      const show = parseFloat(filteredData[rowIndex].amount) > 0
+      const showAmount = show ? filteredData[rowIndex].amount : ''
+      // eslint-disable-next-line react/destructuring-assignment
+      const showCurrency = show && WILD_CARD.includes(this.state.symbol) ? (
+        <Fragment>
+          &nbsp;
+          <span className='bitfinex-show-soft'>
+            {filteredData[rowIndex].currency}
+          </span>
+        </Fragment>
+      ) : ''
+      return (
+        <Cell className='bitfinex-green-text bitfinex-text-align-right'>
+          {showAmount}
+          {showCurrency}
+        </Cell>
+      )
+    }
 
-    const debitCellRenderer = rowIndex => (
-      <Cell className='bitfinex-red-text bitfinex-text-align-right'>
-        {parseFloat(filteredData[rowIndex].amount) < 0 ? Math.abs(filteredData[rowIndex].amount) : ''}
-      </Cell>
-    )
+    const debitCellRenderer = (rowIndex) => {
+      const show = parseFloat(filteredData[rowIndex].amount) < 0
+      const showAmount = show ? Math.abs(filteredData[rowIndex].amount) : ''
+      // eslint-disable-next-line react/destructuring-assignment
+      const showCurrency = show && WILD_CARD.includes(this.state.symbol) ? (
+        <Fragment>
+          &nbsp;
+          <span className='bitfinex-show-soft'>
+            {filteredData[rowIndex].currency}
+          </span>
+        </Fragment>
+      ) : ''
+      return (
+        <Cell className='bitfinex-red-text bitfinex-text-align-right'>
+          {showAmount}
+          {showCurrency}
+        </Cell>
+      )
+    }
 
     const balanceCellRenderer = rowIndex => (
       <Cell>
