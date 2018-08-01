@@ -33,8 +33,10 @@ class Movements extends PureComponent {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchMovements()
+    const { loading, fetchMovements } = this.props
+    if (loading) {
+      fetchMovements()
+    }
   }
 
   componentDidUpdate(prevProps) {

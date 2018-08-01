@@ -59,7 +59,8 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
   padding-bottom: 10px;
 
   &> button {
-    margin-right: 3px;
+    margin-right: 2px;
+    margin-left: 2px;
   }
 }
 
@@ -67,7 +68,8 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
   padding-top: 10px;
 
   &> button {
-    margin-right: 3px;
+    margin-right: 2px;
+    margin-left: 2px;
   }
 }
 
@@ -89,4 +91,11 @@ body.#{$ns}-light .bitfinex-red-text > div {
 
 .bitfinex-text-align-right {
   text-align: right;
+}
+
+.bitfinex-page-input {
+  width: 20px;
+  margin-right: 2px;
+  margin-left: 2px;
+  text-align: center;
 }

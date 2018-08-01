@@ -56,7 +56,7 @@ export function checkFetch(prevProps, props, type) {
   if (!isValidateType(type)) {
     return
   }
-  const { prevLoading } = prevProps
+  const { loading: prevLoading } = prevProps
   const { loading } = props
   // eslint-disable-next-line react/destructuring-assignment
   const fetch = props[`fetch${type.charAt(0).toUpperCase() + type.slice(1)}`]

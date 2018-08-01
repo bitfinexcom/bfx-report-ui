@@ -30,8 +30,10 @@ class Orders extends PureComponent {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchOrders()
+    const { loading, fetchOrders } = this.props
+    if (loading) {
+      fetchOrders()
+    }
   }
 
   componentDidUpdate(prevProps) {
