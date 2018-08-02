@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { createRef, Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { Button } from '@blueprintjs/core'
@@ -12,7 +12,7 @@ class Pagination extends PureComponent {
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.backward = this.backward.bind(this)
     this.forward = this.forward.bind(this)
-    this.pageInput = React.createRef()
+    this.pageInput = createRef()
   }
 
   componentDidUpdate() {
