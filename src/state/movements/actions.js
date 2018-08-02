@@ -28,6 +28,17 @@ export function fetchPrevMovements() {
 }
 
 /**
+ * Create an action to jump to a specific Movements page.
+ * @param {number} payload page number
+ */
+export function jumpPage(payload) {
+  return {
+    type: types.JUMP_MOVEMENTS_PAGE,
+    payload,
+  }
+}
+
+/**
  * Create an action to update Movements.
  * @param {Object[]} payload data set
  */
@@ -42,5 +53,6 @@ export default {
   fetchMovements,
   fetchNextMovements,
   fetchPrevMovements,
+  jumpPage,
   updateMovements,
 }

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import {
   renderWithIntl,
   rendererCreateWithIntl,
+  shallowWithIntl,
 } from 'tests/helper'
 import Movements from '../Movements'
 
@@ -59,15 +60,11 @@ test('withdrawals renders without crashing', () => {
 })
 
 test('deposits renders without crashing with data', () => {
-  const div = document.createElement('div')
-  renderWithIntl(<Movements type='deposits' loading={false} entries={ENTRIES} />, div)
-  ReactDOM.unmountComponentAtNode(div)
+  shallowWithIntl(<Movements type='deposits' loading={false} entries={ENTRIES} />)
 })
 
 test('withdrawals renders without crashing with data', () => {
-  const div = document.createElement('div')
-  renderWithIntl(<Movements type='withdrawals' loading={false} entries={ENTRIES} />, div)
-  ReactDOM.unmountComponentAtNode(div)
+  shallowWithIntl(<Movements type='withdrawals' loading={false} entries={ENTRIES} />)
 })
 
 test('deposits render loading correctly', () => {

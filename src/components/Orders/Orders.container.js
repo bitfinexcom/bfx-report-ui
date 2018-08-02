@@ -7,6 +7,7 @@ function mapStateToProps(state = {}) {
     offset: state.orders.offset,
     entries: state.orders.entries,
     loading: !state.orders.dataReceived,
+    pageOffset: state.orders.pageOffset,
   }
 }
 
@@ -14,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
   fetchOrders: () => dispatch(actions.fetchOrders()),
   fetchNextOrders: () => dispatch(actions.fetchNextOrders()),
   fetchPrevOrders: () => dispatch(actions.fetchPrevOrders()),
+  jumpPage: page => dispatch(actions.jumpPage(page)),
 })
 
 const OrdersContainer = connect(mapStateToProps, mapDispatchToProps)(Orders)

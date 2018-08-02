@@ -16,7 +16,7 @@ const platforms = {
     id: 'local',
     Name: 'Bfx',
     API_URL: 'http://localhost:31339/api',
-    KEY_URL: 'https://staging.bitfinex.com:2998/api',
+    KEY_URL: 'https://www.bitfinex.com/api',
   },
 }
 

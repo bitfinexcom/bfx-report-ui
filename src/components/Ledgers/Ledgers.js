@@ -16,11 +16,13 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime } from 'state/utils'
+import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
 import { propTypes, defaultProps } from './Ledgers.props'
 
 const COLUMN_WIDTHS = [500, 120, 120, 120, 150]
 const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
+const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
+const WILD_CARD = ['', 'All']
 
 class Ledgers extends PureComponent {
   constructor(props) {
@@ -36,8 +38,10 @@ class Ledgers extends PureComponent {
   }
 
   componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchLedgers()
+    const { loading, fetchLedgers } = this.props
+    if (loading) {
+      fetchLedgers()
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -66,15 +70,19 @@ class Ledgers extends PureComponent {
   render() {
     const {
       offset,
+      pageOffset,
       currencies,
       entries,
       intl,
+      jumpPage,
       loading,
     } = this.props
-    const currentEntries = offset < LIMIT ? entries : entries.slice(offset - LIMIT, offset)
+    const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
+    const currencyList = ['All', ...currencies]
     // eslint-disable-next-line react/destructuring-assignment
-    const currency = this.state.symbol || currencies[0]
-    const filteredData = currentEntries.filter(entry => entry.currency === currency)
+    const currentCurrency = this.state.symbol || currencyList[0]
+    const filteredData = currentCurrency === currencyList[0]
+      ? currentEntries : currentEntries.filter(entry => entry.currency === currentCurrency)
     const numRows = filteredData.length
 
     const descriptionCellRenderer = rowIndex => (
@@ -91,28 +99,56 @@ class Ledgers extends PureComponent {
       </Cell>
     )
 
-    const creditCellRenderer = rowIndex => (
-      <Cell className='bitfinex-green-text'>
-        {parseFloat(filteredData[rowIndex].amount) > 0 ? filteredData[rowIndex].amount : ''}
-      </Cell>
-    )
+    const creditCellRenderer = (rowIndex) => {
+      const show = parseFloat(filteredData[rowIndex].amount) > 0
+      const showAmount = show ? filteredData[rowIndex].amount : ''
+      // eslint-disable-next-line react/destructuring-assignment
+      const showCurrency = show && WILD_CARD.includes(this.state.symbol) ? (
+        <Fragment>
+          &nbsp;
+          <span className='bitfinex-show-soft'>
+            {filteredData[rowIndex].currency}
+          </span>
+        </Fragment>
+      ) : ''
+      return (
+        <Cell className='bitfinex-green-text bitfinex-text-align-right'>
+          {showAmount}
+          {showCurrency}
+        </Cell>
+      )
+    }
 
-    const debitCellRenderer = rowIndex => (
-      <Cell className='bitfinex-red-text'>
-        {parseFloat(filteredData[rowIndex].amount) < 0 ? Math.abs(filteredData[rowIndex].amount) : ''}
-      </Cell>
-    )
+    const debitCellRenderer = (rowIndex) => {
+      const show = parseFloat(filteredData[rowIndex].amount) < 0
+      const showAmount = show ? Math.abs(filteredData[rowIndex].amount) : ''
+      // eslint-disable-next-line react/destructuring-assignment
+      const showCurrency = show && WILD_CARD.includes(this.state.symbol) ? (
+        <Fragment>
+          &nbsp;
+          <span className='bitfinex-show-soft'>
+            {filteredData[rowIndex].currency}
+          </span>
+        </Fragment>
+      ) : ''
+      return (
+        <Cell className='bitfinex-red-text bitfinex-text-align-right'>
+          {showAmount}
+          {showCurrency}
+        </Cell>
+      )
+    }
 
     const balanceCellRenderer = rowIndex => (
-      <Cell>
+      <Cell className='bitfinex-text-align-right'>
         {filteredData[rowIndex].balance}
       </Cell>
     )
 
-    const currencyButtons = currencies.map(symbol => (
+    const currencyButtons = currencyList.map(symbol => (
       <Button
         key={symbol}
-        intent={currency === symbol ? Intent.PRIMARY : Intent.NONE}
+        intent={currentCurrency === symbol ? Intent.PRIMARY : Intent.NONE}
         onClick={this.handleClick(symbol)}
       >
         {symbol}
@@ -173,10 +209,13 @@ class Ledgers extends PureComponent {
             />
           </Table>
           <Pagination
-            prevClick={this.fetchPrev}
-            prevCondition={offset <= LIMIT}
+            type='ledgers'
+            dataLen={entries.length}
+            offset={offset}
+            jumpPage={jumpPage}
             nextClick={this.fetchNext}
-            nextCondition={entries.length % LIMIT !== 0 && entries.length - LIMIT < offset}
+            prevClick={this.fetchPrev}
+            pageOffset={pageOffset}
           />
         </Fragment>
       )

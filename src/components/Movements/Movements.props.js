@@ -18,7 +18,9 @@ export const propTypes = {
   fetchNextMovements: PropTypes.func.isRequired,
   fetchPrevMovements: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
+  jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  pageOffset: PropTypes.number.isRequired,
 }
 
 export const defaultProps = {
@@ -28,5 +30,7 @@ export const defaultProps = {
   fetchNextMovements: () => {},
   fetchPrevMovements: () => {},
   intl: {},
+  jumpPage: () => {},
   loading: true,
+  pageOffset: 0,
 }

@@ -87,10 +87,12 @@ const initialState = {
   ],
   dataReceived: false,
   smallestMts: 0,
-  offset: 0,
+  offset: 0, // end of current offset
+  pageOffset: 0, // start of current page
 }
 
 const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
+const PAGE_SIZE = queryTypes.DEFAULT_LEDGERS_PAGE_SIZE
 
 export function ledgersReducer(state = initialState, action) {
   switch (action.type) {
@@ -123,6 +125,7 @@ export function ledgersReducer(state = initialState, action) {
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,
+        pageOffset: 0,
       }
     }
     case types.FETCH_NEXT_LEDGERS:
@@ -130,12 +133,24 @@ export function ledgersReducer(state = initialState, action) {
         ? {
           ...state,
           offset: state.offset + LIMIT,
+          pageOffset: 0,
         } : state
     case types.FETCH_PREV_LEDGERS:
       return {
         ...state,
         offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
+        pageOffset: 0,
       }
+    case types.JUMP_LEDGERS_PAGE: {
+      const page = action.payload
+      const totalOffset = (page - 1) * PAGE_SIZE
+      const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
+      return {
+        ...state,
+        offset: currentOffset + LIMIT,
+        pageOffset: totalOffset - currentOffset,
+      }
+    }
     case queryTypes.SET_TIME_RANGE:
       return initialState
     default: {
