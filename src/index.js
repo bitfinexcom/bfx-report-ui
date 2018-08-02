@@ -9,6 +9,7 @@ import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import '@blueprintjs/table/lib/css/table.css'
 import { persistor, store } from 'state/store'
+import { checkAuthWithToken } from 'state/auth/actions'
 import 'styles/index.css'
 import App from './App'
 
@@ -20,5 +21,19 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 )
+
+function getUrlParameter(name) {
+  // name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  const regex = new RegExp(`[\\?&]${name}=([^&#]*)`)
+  const results = regex.exec(window.location.search)
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
+}
+
+window.addEventListener('load', () => {
+  const token = getUrlParameter('authToken')
+  if (token) {
+    store.dispatch(checkAuthWithToken(token))
+  }
+})
 
 FocusStyleManager.onlyShowFocusOnTabs()
