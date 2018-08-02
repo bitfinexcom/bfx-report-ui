@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { createRef, Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { Button } from '@blueprintjs/core'
@@ -10,14 +10,37 @@ class Pagination extends PureComponent {
     super(props)
     this.handlers = {}
     this.handleKeyPress = this.handleKeyPress.bind(this)
+    this.backward = this.backward.bind(this)
+    this.forward = this.forward.bind(this)
+    this.pageInput = createRef()
+  }
+
+  componentDidUpdate() {
+    this.pageInput.current.value = ''
+  }
+
+  getCurrentPage() {
+    return parseInt(this.pageInput.current.value || 1, 10)
   }
 
   handleKeyPress(event) {
     if (event.key === 'Enter') {
-      const page = parseInt(this.pageInput.value || 1, 10)
+      const page = this.getCurrentPage()
       // eslint-disable-next-line react/destructuring-assignment
       this.props.jumpPage(page)
     }
+  }
+
+  backward() {
+    const page = this.getCurrentPage()
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.jumpPage(page - 1)
+  }
+
+  forward() {
+    const page = this.getCurrentPage()
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.jumpPage(page + 1)
   }
 
   render() {
@@ -59,12 +82,16 @@ class Pagination extends PureComponent {
           onClick={prevClick}
           disabled={prevCondition}
         />
+        <Button
+          minimal
+          icon='chevron-left'
+          onClick={this.backward}
+          disabled={currentPage - 1 === 0}
+        />
         {intl.formatMessage({ id: 'pagination.page' })}
         <input
           className='bitfinex-page-input'
-          ref={(ref) => {
-            this.pageInput = ref
-          }}
+          ref={this.pageInput}
           placeholder={currentPage}
           onKeyPress={this.handleKeyPress}
         />
@@ -72,6 +99,12 @@ class Pagination extends PureComponent {
         &nbsp;
         {pageLen}
         {renderRestDots}
+        <Button
+          minimal
+          icon='chevron-right'
+          onClick={this.forward}
+          disabled={currentPage === pageLen}
+        />
         <Button
           minimal
           rightIcon='double-chevron-right'
