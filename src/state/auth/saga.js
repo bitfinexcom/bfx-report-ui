@@ -4,49 +4,64 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
-import statusTypes from 'state/status/constants'
 import { postJsonfetch } from 'state/utils'
+import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { platform } from 'var/config'
 import types from './constants'
+import { setAuthToken, updateAuthStatus } from './actions'
 
-function getAuth(apiKey, apiSecret) {
+function getAuth(auth) {
   return postJsonfetch(`${platform.API_URL}/check-auth`, {
-    auth: {
-      apiKey,
-      apiSecret,
-    },
+    auth,
   })
 }
 
 function* checkAuth() {
-  const base = yield select(state => state.base)
   try {
-    const data = yield call(getAuth, base.apiKey, base.apiSecret)
-    const result = (data && data.result) || false
-    yield put({
-      type: types.UPDATE_AUTH_STATUS,
-      payload: result,
+    const base = yield select(state => state.base)
+    const data = yield call(getAuth, {
+      apiKey: base.apiKey,
+      apiSecret: base.apiSecret,
     })
+    const { result = false, error } = data
+    yield put(updateAuthStatus(result))
 
-    yield put({
-      type: result ? statusTypes.UPDATE_SUCCESS_STATUS : statusTypes.UPDATE_ERROR_STATUS,
-      payload: result ? `Auth Success at ${(new Date()).toLocaleString()}` : 'Auth Fail',
-    })
-
-    if (data && data.error) {
-      yield put({
-        type: statusTypes.UPDATE_ERROR_STATUS,
-        payload: `Auth fail ${JSON.stringify(data.error)}`,
-      })
+    if (result) {
+      yield put(updateSuccessStatus(`Auth Success at ${(new Date()).toLocaleString()}`))
+    } else {
+      yield put(updateErrorStatus('Auth Fail'))
     }
-  } catch (error) {
-    yield put({
-      type: statusTypes.UPDATE_ERROR_STATUS,
-      payload: `Auth request fail ${JSON.stringify(error)}`,
-    })
+
+    if (error) {
+      yield put(updateErrorStatus(`Auth fail ${JSON.stringify(error)}`))
+    }
+  } catch (fail) {
+    yield put(updateErrorStatus(`Auth request fail ${JSON.stringify(fail)}`))
+  }
+}
+
+function* checkAuthWithToken({ payload: authToken }) {
+  try {
+    yield put(setAuthToken(authToken))
+    const data = yield call(getAuth, { authToken })
+    const { result = false, error } = data
+    yield put(updateAuthStatus(result))
+
+    if (result) {
+      yield put(updateSuccessStatus(`Auth Success at ${(new Date()).toLocaleString()}`))
+    } else {
+      yield put(updateErrorStatus('Auth Fail'))
+    }
+
+    if (error) {
+      yield put(updateErrorStatus(`Auth fail ${JSON.stringify(error)}`))
+    }
+  } catch (fail) {
+    yield put(updateErrorStatus(`Auth request fail ${JSON.stringify(fail)}`))
   }
 }
 
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
+  yield takeLatest(types.CHECK_AUTH_WITH_TOKEN, checkAuthWithToken)
 }

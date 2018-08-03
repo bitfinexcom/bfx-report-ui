@@ -15,11 +15,14 @@ export function postJsonfetch(url, bodyJson) {
 }
 
 export function selectAuth(state) {
-  // TODO: support apiAuthKey
-  return {
-    apiKey: state.base.apiKey,
-    apiSecret: state.base.apiSecret,
-  }
+  return state.auth.authToken
+    ? {
+      authToken: state.auth.authToken,
+    }
+    : {
+      apiKey: state.base.apiKey,
+      apiSecret: state.base.apiSecret,
+    }
 }
 
 export function formatTime(mts) {

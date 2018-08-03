@@ -66,6 +66,24 @@ npm run start
 
 Make sure you have access permission to test with the staging server/API.
 
+## Web Token authentication
+
+Web Token authentication will be used for site `https://report.bitfinex.com`.
+
+To test web token authentication locally,
+
+1. Open `var/config.js` and change the value of `bitfinex.API_URL` to `http://localhost:31339/api`
+
+2. Visit `https://www.bitfinex.com`, login and open web console, type `window.WSTOKEN` to copy the authToken.
+
+3. Set environment variable as follow
+
+    ```
+    export REACT_APP_PLATFORM=bitfinex
+    ```
+
+4. Start server locally via `npm start` and visit `http://localhost:3000/?authToken=pub:api:<token string>`, you'll auto login without enter auth secret and key.
+
 ## Overview
 
 The hosted version of report (https://report.bitfinex.com) will not allow access via API keys (for security reasons), https://report.bitfinex.com will be only accessible starting from https://www.bitfinex.com/report that will redirect the user to https://report.bitfinex.com/?auth=UUID
