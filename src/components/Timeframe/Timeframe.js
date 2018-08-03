@@ -30,7 +30,7 @@ class Timeframe extends PureComponent {
       <MenuItem
         icon='calendar'
         text={`${formatDate(start)} — ${formatDate(end)}`}
-        className='bitfinex-timerange'
+        className='bitfinex-dropdown'
       >
         <MenuItem
           text={intl.formatMessage({ id: 'timeframe.24h' })}
