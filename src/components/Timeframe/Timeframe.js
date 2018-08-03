@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
-import { MenuItem } from '@blueprintjs/core'
+import { Dialog, MenuItem } from '@blueprintjs/core'
 import constants from 'state/query/constants'
 import { formatDate } from 'state/utils'
 import { propTypes, defaultProps } from './Timeframe.props'
@@ -14,12 +14,18 @@ class Timeframe extends PureComponent {
     this.handleClickMonthToDate = this.handleClick.bind(this, constants.TIME_RANGE_MONTH_TO_DATE)
     this.handleClickPastMonth = this.handleClick.bind(this, constants.TIME_RANGE_PAST_MONTH)
     this.handleClickPast3Month = this.handleClick.bind(this, constants.TIME_RANGE_PAST_3MONTH)
+    this.handleClickCustom = this.handleClickCustom.bind(this)
   }
 
   handleClick(rangeType, e) {
     e.preventDefault()
     // eslint-disable-next-line react/destructuring-assignment
     this.props.setTimeRange(rangeType)
+  }
+
+  handleClickCustom(e) {
+    e.preventDefault()
+    console.warn('POP')
   }
 
   render() {
@@ -62,10 +68,11 @@ class Timeframe extends PureComponent {
           onClick={this.handleClickPast3Month}
           active={timeRange === constants.TIME_RANGE_PAST_3MONTH}
         />
-        {/* <MenuItem
+        <MenuItem
           text={intl.formatMessage({ id: 'timeframe.custom' })}
-          onClick={() => this.handleClickCustom}
-          active={timeRange === constants.TIME_RANGE_CUSTOM} disabled /> */}
+          onClick={this.handleClickCustom}
+          active={timeRange === constants.TIME_RANGE_CUSTOM}
+         />
       </MenuItem>
     )
   }
