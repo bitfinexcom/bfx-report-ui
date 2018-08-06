@@ -20,14 +20,15 @@ class Pagination extends PureComponent {
   }
 
   getCurrentPage() {
-    return parseInt(this.pageInput.current.value || 1, 10)
+    return parseInt(this.pageInput.current.placeholder || 1, 10)
   }
 
   handleKeyPress(event) {
     if (event.key === 'Enter') {
-      const page = this.getCurrentPage()
+      const pageLen = parseInt(this.pageInput.current.dataset.pagelen || 1, 10)
+      const page = Math.abs(parseInt(this.pageInput.current.value || 1, 10))
       // eslint-disable-next-line react/destructuring-assignment
-      this.props.jumpPage(page)
+      this.props.jumpPage(page < pageLen ? page : pageLen)
     }
   }
 
@@ -94,6 +95,7 @@ class Pagination extends PureComponent {
           ref={this.pageInput}
           placeholder={currentPage}
           onKeyPress={this.handleKeyPress}
+          data-pagelen={pageLen}
         />
         {intl.formatMessage({ id: 'pagination.of' })}
         &nbsp;
