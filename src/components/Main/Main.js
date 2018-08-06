@@ -1,15 +1,22 @@
 import React, { PureComponent, Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
+  Button,
+  Classes,
+  Dialog,
+  Intent,
   Menu,
   MenuDivider,
   MenuItem,
 } from '@blueprintjs/core'
+import { DateRangeInput } from '@blueprintjs/datetime'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import Trades from 'components/Trades'
 import Timeframe from 'components/Timeframe'
+import { momentFormatter } from 'state/utils'
+import queryType from 'state/query/constants'
 import { propTypes, defaultProps } from './Main.props'
 
 const MENU_LEDGERS = 'ledgers'
@@ -25,6 +32,8 @@ const ICON = {
   withdrawals: 'folder-shared-open',
 }
 
+const DATE_FORMAT = momentFormatter('YYYY-MM-DD HH:mm:ss')
+
 class Main extends PureComponent {
   constructor(props) {
     super(props)
@@ -33,19 +42,57 @@ class Main extends PureComponent {
     this.handleClickTrades = this.handleClick.bind(this, MENU_TRADES)
     this.handleClickDeposits = this.handleClick.bind(this, MENU_DEPOSITS)
     this.handleClickWithdrawals = this.handleClick.bind(this, MENU_WITHDRAWALS)
+    this.handleClickCustom = this.handleClickCustom.bind(this)
+    this.handleCustomDialogClose = this.handleCustomDialogClose.bind(this)
+    this.handleRangeChange = this.handleRangeChange.bind(this)
+    this.startQuery = this.startQuery.bind(this)
   }
 
   state = {
     target: MENU_LEDGERS,
+    isCustomOpen: false,
+    startDate: null,
+    endDate: new Date(),
   }
 
   handleClick(target) {
     this.setState({ target })
   }
 
+  handleClickCustom(e) {
+    e.preventDefault()
+    this.setState({ isCustomOpen: true })
+  }
+
+  handleCustomDialogClose(e) {
+    e.preventDefault()
+    this.setState({ isCustomOpen: false })
+  }
+
+  handleRangeChange(range) {
+    this.setState({
+      startDate: range[0],
+      endDate: range[1],
+    })
+  }
+
+  startQuery() {
+    const { startDate, endDate } = this.state
+    const { setTimeRange } = this.props
+    if (startDate !== null && endDate !== null) {
+      setTimeRange(queryType.TIME_RANGE_CUSTOM, startDate.getTime(), endDate.getTime())
+    }
+    this.setState({ isCustomOpen: false })
+  }
+
   render() {
     const { authStatus, authIsShown, intl } = this.props
-    const { target } = this.state
+    const {
+      endDate,
+      isCustomOpen,
+      startDate,
+      target,
+    } = this.state
     let content
     switch (target) {
       case MENU_LEDGERS:
@@ -105,12 +152,12 @@ class Main extends PureComponent {
     return authStatus && !authIsShown ? (
       <div className='row'>
         <Menu large className='hidden-xs hidden-sm hidden-md col-lg-1 col-xl-2'>
-          <Timeframe />
+          <Timeframe handleClickCustom={this.handleClickCustom} />
           <MenuDivider />
           {sideMenuItems}
         </Menu>
         <Menu large className='col-xs-12 col-sm-12 col-md-12 hidden-lg hidden-xl'>
-          <Timeframe />
+          <Timeframe handleClickCustom={this.handleClickCustom} />
           <MenuDivider />
           <MenuItem
             icon={ICON[target]}
@@ -123,6 +170,40 @@ class Main extends PureComponent {
         <div className='col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-10'>
           {content}
         </div>
+        <Dialog
+          icon='calendar'
+          onClose={this.handleCustomDialogClose}
+          title={intl.formatMessage({ id: 'timeframe.custom.title' })}
+          autoFocus
+          canEscapeKeyClose
+          canOutsideClickClose
+          enforceFocus
+          usePortal
+          isOpen={isCustomOpen}
+        >
+          <div className={Classes.DIALOG_BODY}>
+            <DateRangeInput
+              allowSingleDayRange
+              closeOnSelection
+              formatDate={DATE_FORMAT.formatDate}
+              parseDate={DATE_FORMAT.parseDate}
+              onChange={this.handleRangeChange}
+              value={[startDate, endDate]}
+              maxDate={new Date()}
+            />
+          </div>
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <Button
+                intent={Intent.PRIMARY}
+                onClick={this.startQuery}
+                disabled={!startDate || !endDate}
+              >
+                {intl.formatMessage({ id: 'timeframe.custom.view' })}
+              </Button>
+            </div>
+          </div>
+        </Dialog>
       </div>
     ) : ''
   }

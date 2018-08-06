@@ -5,10 +5,12 @@ export const propTypes = {
   authIsShown: PropTypes.bool.isRequired,
   authStatus: PropTypes.bool,
   intl: intlShape.isRequired,
+  setTimeRange: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
   authIsShown: false,
   authStatus: false,
   intl: {},
+  setTimeRange: () => {},
 }

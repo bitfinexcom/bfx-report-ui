@@ -48,6 +48,8 @@
   "timeframe.past_month": "過去一個月",
   "timeframe.past_3m": "過去三個月",
   "timeframe.custom": "自訂",
+  "timeframe.custom.title": "選擇查詢時段",
+  "timeframe.custom.view" : "查詢",
   "pagination.page": "頁數",
   "pagination.of": "/"
 }

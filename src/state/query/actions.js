@@ -42,4 +42,5 @@ export function setTimeRange(rangeType, start, end) {
 export default {
   setQueryLimit,
   setTimeType,
+  setTimeRange,
 }

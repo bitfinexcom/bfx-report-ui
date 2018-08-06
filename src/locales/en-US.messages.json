@@ -48,6 +48,8 @@
   "timeframe.past_month": "Past month",
   "timeframe.past_3m": "Past 3 month",
   "timeframe.custom": "Custom",
+  "timeframe.custom.title": "Select Query Range",
+  "timeframe.custom.view" : "View",
   "pagination.page": "Page",
   "pagination.of": "of"
 }

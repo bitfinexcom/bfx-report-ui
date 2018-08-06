@@ -7,17 +7,24 @@ const initialState = {
 }
 
 export function queryReducer(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload = {} } = action
+  switch (type) {
     case types.SET_QUERY_LIMIT:
       return {
         ...state,
-        queryLimit: action.payload,
+        queryLimit: payload,
       }
-    case types.SET_TIME_RANGE:
+    case types.SET_TIME_RANGE: {
+      const isValidCustom = payload.rangeType === types.TIME_RANGE_CUSTOM
+        && payload.start
+        && payload.end
       return {
         ...state,
-        timeRange: (action.payload && action.payload.rangeType) || types.DEFAULT_RANGE,
+        timeRange: payload.rangeType || types.DEFAULT_RANGE,
+        start: isValidCustom ? payload.start : undefined,
+        end: isValidCustom ? payload.end : undefined,
       }
+    }
     default: {
       return state
     }
