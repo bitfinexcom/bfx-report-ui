@@ -109,8 +109,7 @@ class Movements extends PureComponent {
       )
     }
 
-    const titleMsgId = type === TYPE_WITHDRAWALS
-      ? 'movements.withdrawals.title' : 'movements.deposits.title'
+    const titleMsgId = type === TYPE_WITHDRAWALS ? 'withdrawals.title' : 'deposits.title'
     let showContent
     if (loading) {
       showContent = (

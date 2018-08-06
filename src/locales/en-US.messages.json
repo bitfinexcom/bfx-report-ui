@@ -19,8 +19,8 @@
   "ledgers.column.credit": "CREDIT",
   "ledgers.column.debit": "DEBIT",
   "ledgers.column.balance": "BALANCE",
-  "movements.deposits.title": "Deposits",
-  "movements.withdrawals.title": "Withdrawals",
+  "deposits.title": "Deposits",
+  "withdrawals.title": "Withdrawals",
   "movements.column.updated": "DATE",
   "movements.column.amount": "AMOUNT",
   "movements.column.status": "STATUS",
@@ -47,7 +47,9 @@
   "timeframe.month_to_date": "Month to date",
   "timeframe.past_month": "Past month",
   "timeframe.past_3m": "Past 3 month",
-  "timeframe.custom": "Custom (max range 3 months)",
+  "timeframe.custom": "Custom",
+  "timeframe.custom.title": "Select Query Range",
+  "timeframe.custom.view" : "View",
   "pagination.page": "Page",
   "pagination.of": "of"
 }

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { setTimeRange } from 'state/query/actions'
 import Main from './Main'
 
 function mapStateToProps(state = {}) {
@@ -8,6 +9,10 @@ function mapStateToProps(state = {}) {
   }
 }
 
-const MainContainer = connect(mapStateToProps)(Main)
+const mapDispatchToProps = dispatch => ({
+  setTimeRange: (rangeType, start, end) => dispatch(setTimeRange(rangeType, start, end)),
+})
+
+const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main)
 
 export default MainContainer

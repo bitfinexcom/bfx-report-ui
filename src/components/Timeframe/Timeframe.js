@@ -24,13 +24,17 @@ class Timeframe extends PureComponent {
 
   render() {
     const {
-      intl, start, end, timeRange,
+      end,
+      handleClickCustom,
+      intl,
+      start,
+      timeRange,
     } = this.props
     return (
       <MenuItem
         icon='calendar'
         text={`${formatDate(start)} — ${formatDate(end)}`}
-        className='bitfinex-timerange'
+        className='bitfinex-dropdown'
       >
         <MenuItem
           text={intl.formatMessage({ id: 'timeframe.24h' })}
@@ -62,10 +66,11 @@ class Timeframe extends PureComponent {
           onClick={this.handleClickPast3Month}
           active={timeRange === constants.TIME_RANGE_PAST_3MONTH}
         />
-        {/* <MenuItem
+        <MenuItem
           text={intl.formatMessage({ id: 'timeframe.custom' })}
-          onClick={() => this.handleClickCustom}
-          active={timeRange === constants.TIME_RANGE_CUSTOM} disabled /> */}
+          onClick={handleClickCustom}
+          active={timeRange === constants.TIME_RANGE_CUSTOM}
+        />
       </MenuItem>
     )
   }

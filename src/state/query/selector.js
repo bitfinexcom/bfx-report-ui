@@ -10,7 +10,7 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
   const now = date.getTime()
   let TIME_SHIFT
   let start
-  const end = now
+  let end = now
   const limit = isValidateType(type)
     ? constants[`DEFAULT_${type.toUpperCase()}_QUERY_LIMIT`] : constants.DEFAULT_QUERY_LIMIT
   switch (state.timeRange) {
@@ -38,7 +38,12 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
       date.setMonth(date.getMonth() - 3)
       start = date.getTime()
       break
-    // case constants.TIME_RANGE_CUSTOM:
+    case constants.TIME_RANGE_CUSTOM:
+      /* eslint-disable prefer-destructuring */
+      start = state.start
+      end = state.end
+      /* eslint-enable prefer-destructuring */
+      break
     case constants.TIME_RANGE_LAST_2WEEKS:
     default:
       TIME_SHIFT = 1000 * 60 * 60 * 24 * 7 * 2 // 2 weeks

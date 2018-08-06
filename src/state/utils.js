@@ -1,4 +1,5 @@
 import _padStart from 'lodash/padStart'
+import moment from 'moment'
 
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
@@ -74,6 +75,14 @@ export function getCurrentEntries(entries, offset, limit, pageOffset, pageSize) 
     : entries.slice(offset + pageOffset - limit, offset + pageOffset - limit + pageSize)
 }
 
+export function momentFormatter(format) {
+  return {
+    formatDate: date => moment(date).format(format),
+    parseDate: str => moment(str, format).toDate(),
+    placeholder: `${format} (moment)`,
+  }
+}
+
 export default {
   checkFetch,
   formatDate,
@@ -81,6 +90,7 @@ export default {
   formatTime,
   getCurrentEntries,
   isValidateType,
+  momentFormatter,
   postJsonfetch,
   selectAuth,
 }
