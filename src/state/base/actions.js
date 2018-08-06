@@ -23,17 +23,6 @@ export function setApiSecret(secret) {
 }
 
 /**
- * Create an action to store Auth key (UUID).
- * @param {string} key
- */
-export function setAuthKey(key) {
-  return {
-    type: types.SET_AUTH_KEY,
-    payload: key,
-  }
-}
-
-/**
  * Create an action to store default language.
  * @param {string} lang
  */
@@ -58,7 +47,6 @@ export function setTheme(theme) {
 export default {
   setApiKey,
   setApiSecret,
-  setAuthKey,
   setLang,
   setTheme,
 }
