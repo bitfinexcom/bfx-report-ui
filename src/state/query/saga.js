@@ -5,9 +5,11 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import _omit from 'lodash/omit'
+
 import { postJsonfetch, selectAuth } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { platform } from 'var/config'
+
 import { getTimeFrame } from './selector'
 import types from './constants'
 

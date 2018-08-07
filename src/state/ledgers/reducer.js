@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#ledgers
 import queryTypes from 'state/query/constants'
+
 import types from './constants'
 
 /*

@@ -4,9 +4,11 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+
 import { postJsonfetch } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { platform } from 'var/config'
+
 import types from './constants'
 import { setAuthToken, updateAuthStatus } from './actions'
 

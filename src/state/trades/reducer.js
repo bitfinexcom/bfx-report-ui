@@ -1,6 +1,7 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
 import { formatPair } from 'state/utils'
 import queryTypes from 'state/query/constants'
+
 import types from './constants'
 
 /*

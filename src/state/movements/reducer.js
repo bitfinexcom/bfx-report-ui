@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#movements
 import queryTypes from 'state/query/constants'
+
 import types from './constants'
 /*
 {

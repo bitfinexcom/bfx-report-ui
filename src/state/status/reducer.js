@@ -1,4 +1,5 @@
 import { Intent } from '@blueprintjs/core'
+
 import types from './constants'
 
 const initialState = {

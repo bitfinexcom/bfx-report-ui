@@ -1,5 +1,6 @@
 import React from 'react'
 import { IntlProvider } from 'react-intl'
+
 import { getLocale } from 'locales'
 import Auth from 'components/Auth'
 import Header from 'components/Header'

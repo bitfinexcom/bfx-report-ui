@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import ledgersReducer from './ledgers/reducer'

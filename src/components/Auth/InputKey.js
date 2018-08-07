@@ -4,6 +4,7 @@ import {
   FormGroup,
   InputGroup,
 } from '@blueprintjs/core'
+
 import { inputKeyPropTypes, inputKeyDefaultProps } from './Auth.props'
 
 export const InputKey = ({

@@ -4,6 +4,7 @@ import {
   Icon,
   Intent,
 } from '@blueprintjs/core'
+
 import { propTypes, defaultProps } from './Status.props'
 
 export const Status = ({ clearStatus, intent, msg }) => (msg ? (

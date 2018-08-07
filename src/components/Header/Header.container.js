@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
+
 import authActions from 'state/auth/actions'
 import baseActions from 'state/base/actions'
+
 import Header from './Header'
 
 function mapStateToProps(state = {}) {

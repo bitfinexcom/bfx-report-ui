@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+
 import actions from 'state/movements/actions'
+
 import Movements from './Movements'
 
 function mapStateToProps(state = {}) {

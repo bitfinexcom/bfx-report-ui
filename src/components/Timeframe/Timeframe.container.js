@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
+
 import { getTimeFrame } from 'state/query/selector'
 import { setTimeRange } from 'state/query/actions'
+
 import Timeframe from './Timeframe'
 
 function mapStateToProps(state = {}) {

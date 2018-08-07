@@ -5,6 +5,7 @@ import {
   MenuDivider,
   MenuItem,
 } from '@blueprintjs/core'
+
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
@@ -12,6 +13,7 @@ import Trades from 'components/Trades'
 import Timeframe from 'components/Timeframe'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
+
 import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
 

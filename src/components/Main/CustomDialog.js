@@ -7,7 +7,9 @@ import {
   Intent,
 } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
+
 import { momentFormatter } from 'state/utils'
+
 import { customDialogPropTypes, customDialogDefaultProps } from './Main.props'
 
 const DATE_FORMAT = momentFormatter('YYYY-MM-DD HH:mm:ss')
@@ -58,7 +60,7 @@ class CustomDialog extends PureComponent {
           </div>
         </div>
       </Dialog>
-    ) : ''
+    ) : null
   }
 }
 

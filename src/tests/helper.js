@@ -6,6 +6,7 @@ import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 /* eslint-enable import/no-extraneous-dependencies */
 import { addLocaleData, IntlProvider } from 'react-intl'
+
 import locale from 'locales/en-US'
 
 configure({ adapter: new Adapter() })

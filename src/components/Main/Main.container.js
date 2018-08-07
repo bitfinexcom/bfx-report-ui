@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+
 import { exportCsv, setTimeRange } from 'state/query/actions'
+
 import Main from './Main'
 
 function mapStateToProps(state = {}) {

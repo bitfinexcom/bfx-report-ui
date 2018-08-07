@@ -6,7 +6,9 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+
 import { formatDate } from 'state/utils'
+
 import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
@@ -21,7 +23,7 @@ class ExportDialog extends PureComponent {
       type,
     } = this.props
     if (!isExportOpen) {
-      return ''
+      return null
     }
 
     const intlType = intl.formatMessage({ id: `${type}.title` })
