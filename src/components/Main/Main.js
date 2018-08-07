@@ -1,29 +1,27 @@
 import React, { PureComponent, Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
-  Button,
-  Classes,
-  Dialog,
-  Intent,
   Menu,
   MenuDivider,
   MenuItem,
 } from '@blueprintjs/core'
-import { DateRangeInput } from '@blueprintjs/datetime'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import Trades from 'components/Trades'
 import Timeframe from 'components/Timeframe'
-import { momentFormatter } from 'state/utils'
 import queryType from 'state/query/constants'
 import { propTypes, defaultProps } from './Main.props'
+import CustomDialog from './CustomDialog'
 
-const MENU_LEDGERS = 'ledgers'
-const MENU_ORDERS = 'orders'
-const MENU_TRADES = 'trades'
-const MENU_DEPOSITS = 'deposits'
-const MENU_WITHDRAWALS = 'withdrawals'
+const {
+  MENU_LEDGERS,
+  MENU_ORDERS,
+  MENU_TRADES,
+  MENU_DEPOSITS,
+  MENU_WITHDRAWALS,
+} = queryType
+
 const ICON = {
   ledgers: 'book',
   orders: 'flows',
@@ -31,8 +29,6 @@ const ICON = {
   deposits: 'add-to-folder',
   withdrawals: 'folder-shared-open',
 }
-
-const DATE_FORMAT = momentFormatter('YYYY-MM-DD HH:mm:ss')
 
 class Main extends PureComponent {
   constructor(props) {
@@ -95,9 +91,6 @@ class Main extends PureComponent {
     } = this.state
     let content
     switch (target) {
-      case MENU_LEDGERS:
-        content = (<Ledgers />)
-        break
       case MENU_TRADES:
         content = (<Trades />)
         break
@@ -110,6 +103,7 @@ class Main extends PureComponent {
       case MENU_WITHDRAWALS:
         content = (<Movements type={MENU_WITHDRAWALS} />)
         break
+      case MENU_LEDGERS:
       default:
         content = (<Ledgers />)
         break
@@ -170,40 +164,15 @@ class Main extends PureComponent {
         <div className='col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-10'>
           {content}
         </div>
-        <Dialog
-          icon='calendar'
-          onClose={this.handleCustomDialogClose}
-          title={intl.formatMessage({ id: 'timeframe.custom.title' })}
-          autoFocus
-          canEscapeKeyClose
-          canOutsideClickClose
-          enforceFocus
-          usePortal
-          isOpen={isCustomOpen}
-        >
-          <div className={Classes.DIALOG_BODY}>
-            <DateRangeInput
-              allowSingleDayRange
-              closeOnSelection
-              formatDate={DATE_FORMAT.formatDate}
-              parseDate={DATE_FORMAT.parseDate}
-              onChange={this.handleRangeChange}
-              value={[startDate, endDate]}
-              maxDate={new Date()}
-            />
-          </div>
-          <div className={Classes.DIALOG_FOOTER}>
-            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              <Button
-                intent={Intent.PRIMARY}
-                onClick={this.startQuery}
-                disabled={!startDate || !endDate}
-              >
-                {intl.formatMessage({ id: 'timeframe.custom.view' })}
-              </Button>
-            </div>
-          </div>
-        </Dialog>
+        <CustomDialog
+          type={target}
+          isCustomOpen={isCustomOpen}
+          handleCustomDialogClose={this.handleCustomDialogClose}
+          handleRangeChange={this.handleRangeChange}
+          startQuery={this.startQuery}
+          startDate={startDate}
+          endDate={endDate}
+        />
       </div>
     ) : ''
   }

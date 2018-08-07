@@ -14,3 +14,16 @@ export const defaultProps = {
   intl: {},
   setTimeRange: () => {},
 }
+
+export const customDialogPropTypes = {
+  handleCustomDialogClose: PropTypes.func.isRequired,
+  handleRangeChange: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
+  isCustomOpen: PropTypes.bool.isRequired,
+  startQuery: PropTypes.func.isRequired,
+  startDate: PropTypes.instanceOf(Date),
+  endDate: PropTypes.instanceOf(Date),
+}
+
+export const customDialogDefaultProps = {
+}

@@ -1,4 +1,9 @@
 export default {
+  MENU_LEDGERS: 'ledgers',
+  MENU_ORDERS: 'orders',
+  MENU_TRADES: 'trades',
+  MENU_DEPOSITS: 'deposits',
+  MENU_WITHDRAWALS: 'withdrawals',
   TIME_TYPE_UTC: 'utc',
   TIME_TYPE_LOCALTIME: 'local',
   VALID_QUERY_RANGE: 7776000, // 3 month
