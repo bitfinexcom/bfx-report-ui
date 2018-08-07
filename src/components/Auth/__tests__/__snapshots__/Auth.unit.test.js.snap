@@ -32,11 +32,11 @@ exports[`render correctly 1`] = `
     >
       Visit 
       <a
-        href="https://staging.bitfinex.com:2998/api"
+        href="https://www.bitfinex.com/api"
         rel="noopener noreferrer"
         target="_blank"
       >
-        https://staging.bitfinex.com:2998/api
+        https://www.bitfinex.com/api
       </a>
        to get the readonly API key and secret pair.
     </div>

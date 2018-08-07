@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import { MenuItem } from '@blueprintjs/core'
+
 import constants from 'state/query/constants'
 import { formatDate } from 'state/utils'
+
 import { propTypes, defaultProps } from './Timeframe.props'
 
 class Timeframe extends PureComponent {

@@ -1,4 +1,9 @@
 export default {
+  MENU_LEDGERS: 'ledgers',
+  MENU_ORDERS: 'orders',
+  MENU_TRADES: 'trades',
+  MENU_DEPOSITS: 'deposits',
+  MENU_WITHDRAWALS: 'withdrawals',
   TIME_TYPE_UTC: 'utc',
   TIME_TYPE_LOCALTIME: 'local',
   VALID_QUERY_RANGE: 7776000, // 3 month
@@ -23,4 +28,5 @@ export default {
   SET_TIME_TYPE: 'BITFINEX/QUERY/SET/TIME_TYPE',
   SET_TIME_RANGE: 'BITFINEX/QUERY/SET/TIME_RANGE',
   SET_QUERY_LIMIT: 'BITFINEX/QUERY/SET/LIMIT',
+  EXPORT_CSV: 'BITFINEX/EXPORT/CSV',
 }

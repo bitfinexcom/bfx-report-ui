@@ -11,11 +11,13 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
+
 import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
 import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+
 import { propTypes, defaultProps } from './Trades.props'
 
 const COLUMN_WIDTHS = [80, 70, 125, 125, 125, 150]
@@ -55,6 +57,7 @@ class Trades extends PureComponent {
       offset,
       pageOffset,
       entries,
+      handleClickExport,
       intl,
       jumpPage,
       loading,
@@ -119,7 +122,7 @@ class Trades extends PureComponent {
           <h4>
             {intl.formatMessage({ id: 'trades.title' })}
             &nbsp;
-            <Button icon='cloud-download' disabled>
+            <Button icon='cloud-download' onClick={handleClickExport}>
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>

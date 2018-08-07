@@ -9,7 +9,9 @@ import {
   Icon,
   Intent,
 } from '@blueprintjs/core'
+
 import { platform } from 'var/config'
+
 import { propTypes, defaultProps } from './Auth.props'
 import InputKey from './InputKey'
 

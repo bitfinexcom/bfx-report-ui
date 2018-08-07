@@ -6,6 +6,7 @@ import {
   MenuItem,
   Popover,
 } from '@blueprintjs/core'
+
 import { propTypes, defaultProps } from './LangMenu.props'
 
 class LangMenu extends PureComponent {

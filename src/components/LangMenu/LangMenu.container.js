@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+
 import baseActions from 'state/base/actions'
+
 import LangMenu from './LangMenu'
 
 function mapStateToProps(state = {}) {
