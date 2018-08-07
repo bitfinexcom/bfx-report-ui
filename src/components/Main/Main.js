@@ -10,6 +10,7 @@ import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import Trades from 'components/Trades'
 import Timeframe from 'components/Timeframe'
+import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
 import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
@@ -42,10 +43,14 @@ class Main extends PureComponent {
     this.handleCustomDialogClose = this.handleCustomDialogClose.bind(this)
     this.handleRangeChange = this.handleRangeChange.bind(this)
     this.startQuery = this.startQuery.bind(this)
+    this.handleClickExport = this.handleClickExport.bind(this)
+    this.handleExportDialogClose = this.handleExportDialogClose.bind(this)
+    this.startExport = this.startExport.bind(this)
   }
 
   state = {
     target: MENU_LEDGERS,
+    isExportOpen: false,
     isCustomOpen: false,
     startDate: null,
     endDate: new Date(),
@@ -81,31 +86,47 @@ class Main extends PureComponent {
     this.setState({ isCustomOpen: false })
   }
 
+  handleClickExport() {
+    this.setState({ isExportOpen: true })
+  }
+
+  handleExportDialogClose(e) {
+    e.preventDefault()
+    this.setState({ isExportOpen: false })
+  }
+
+  startExport() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.exportCsv(this.state.target)
+    this.setState({ isExportOpen: false })
+  }
+
   render() {
     const { authStatus, authIsShown, intl } = this.props
     const {
       endDate,
       isCustomOpen,
+      isExportOpen,
       startDate,
       target,
     } = this.state
     let content
     switch (target) {
       case MENU_TRADES:
-        content = (<Trades />)
+        content = (<Trades handleClickExport={this.handleClickExport} />)
         break
       case MENU_ORDERS:
-        content = (<Orders />)
+        content = (<Orders handleClickExport={this.handleClickExport} />)
         break
       case MENU_DEPOSITS:
-        content = (<Movements type={MENU_DEPOSITS} />)
+        content = (<Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />)
         break
       case MENU_WITHDRAWALS:
-        content = (<Movements type={MENU_WITHDRAWALS} />)
+        content = (<Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />)
         break
       case MENU_LEDGERS:
       default:
-        content = (<Ledgers />)
+        content = (<Ledgers handleClickExport={this.handleClickExport} />)
         break
     }
     const sideMenuItems = (
@@ -172,6 +193,12 @@ class Main extends PureComponent {
           startQuery={this.startQuery}
           startDate={startDate}
           endDate={endDate}
+        />
+        <ExportDialog
+          type={target}
+          isExportOpen={isExportOpen}
+          handleExportDialogClose={this.handleExportDialogClose}
+          startExport={this.startExport}
         />
       </div>
     ) : ''

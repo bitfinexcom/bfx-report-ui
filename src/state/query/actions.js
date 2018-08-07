@@ -39,7 +39,19 @@ export function setTimeRange(rangeType, start, end) {
   }
 }
 
+/**
+ * Create an action to export CSV.
+ * @param {string} target export type
+ */
+export function exportCsv(target) {
+  return {
+    type: types.EXPORT_CSV,
+    payload: target,
+  }
+}
+
 export default {
+  exportCsv,
   setQueryLimit,
   setTimeType,
   setTimeRange,

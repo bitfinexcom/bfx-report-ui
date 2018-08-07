@@ -55,6 +55,7 @@ class Trades extends PureComponent {
       offset,
       pageOffset,
       entries,
+      handleClickExport,
       intl,
       jumpPage,
       loading,
@@ -119,7 +120,7 @@ class Trades extends PureComponent {
           <h4>
             {intl.formatMessage({ id: 'trades.title' })}
             &nbsp;
-            <Button icon='cloud-download' disabled>
+            <Button icon='cloud-download' onClick={handleClickExport}>
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>

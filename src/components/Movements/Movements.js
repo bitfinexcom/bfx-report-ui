@@ -58,6 +58,7 @@ class Movements extends PureComponent {
       offset,
       pageOffset,
       entries,
+      handleClickExport,
       intl,
       jumpPage,
       type,
@@ -125,7 +126,7 @@ class Movements extends PureComponent {
           <h4>
             {intl.formatMessage({ id: titleMsgId })}
             &nbsp;
-            <Button icon='cloud-download' disabled>
+            <Button icon='cloud-download' onClick={handleClickExport}>
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>
