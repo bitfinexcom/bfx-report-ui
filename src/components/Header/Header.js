@@ -1,15 +1,14 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
 import {
-  Button,
   Navbar,
   NavbarGroup,
   NavbarHeading,
-  NavbarDivider,
 } from '@blueprintjs/core'
 
 import Status from 'components/Status'
 import LangMenu from 'components/LangMenu'
+import PrefMenu from 'components/PrefMenu'
+import PrefDialog from 'components/PrefDialog'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Header.props'
@@ -26,8 +25,12 @@ class Header extends PureComponent {
   constructor(props) {
     super(props)
     this.authLogout = this.authLogout.bind(this)
-    this.switchDark = this.switchTheme.bind(this, 'bp3-dark')
-    this.switchLight = this.switchTheme.bind(this, 'bp3-light')
+    this.handleClickPref = this.handleClickPref.bind(this)
+    this.handlePrefDialogClose = this.handlePrefDialogClose.bind(this)
+  }
+
+  state = {
+    isPrefOpen: false,
   }
 
   authLogout() {
@@ -35,16 +38,30 @@ class Header extends PureComponent {
     this.props.logout()
   }
 
-  switchTheme(theme, e) {
+  handleClickPref(e) {
     e.preventDefault()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.setTheme(theme)
+    this.setState({ isPrefOpen: true })
+  }
+
+  handlePrefDialogClose(e) {
+    e.preventDefault()
+    this.setState({ isPrefOpen: false })
   }
 
   render() {
-    const { authIsShown, authStatus, intl } = this.props
-    const buttonLogout = !authIsShown && authStatus === true
-      ? (<Button minimal text={intl.formatMessage({ id: 'header.logout' })} onClick={this.authLogout} />) : ''
+    const { authIsShown, authStatus } = this.props
+    const { isPrefOpen } = this.state
+
+    const isLogin = !authIsShown && authStatus === true
+    const renderMenu = isLogin ? (
+      <PrefMenu
+        isLogin={isLogin}
+        handleLogout={this.authLogout}
+        handleClickPref={this.handleClickPref}
+      />
+    ) : (
+      <LangMenu />
+    )
 
     return (
       <Fragment>
@@ -74,30 +91,19 @@ class Header extends PureComponent {
             </NavbarHeading>
           </NavbarGroup>
           <NavbarGroup align='right'>
-            {buttonLogout}
-            <NavbarDivider />
-            <Button
-              minimal
-              name='light'
-              text={intl.formatMessage({ id: 'theme.light' })}
-              onClick={this.switchLight}
-            />
-            <Button
-              minimal
-              name='dark'
-              text={intl.formatMessage({ id: 'theme.dark' })}
-              onClick={this.switchDark}
-            />
-            <NavbarDivider />
-            <LangMenu />
+            {renderMenu}
           </NavbarGroup>
         </Navbar>
         <div className='row'>
           <Status />
         </div>
+        <PrefDialog
+          isPrefOpen={isPrefOpen}
+          handlePrefDialogClose={this.handlePrefDialogClose}
+        />
       </Fragment>
     )
   }
 }
 
-export default injectIntl(Header)
+export default Header

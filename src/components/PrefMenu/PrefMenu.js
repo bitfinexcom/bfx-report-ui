@@ -2,17 +2,16 @@ import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
-  Intent,
   Menu,
   MenuItem,
+  MenuDivider,
   Popover,
   PopoverInteractionKind,
   Position,
 } from '@blueprintjs/core'
+import { propTypes, defaultProps } from './PrefMenu.props'
 
-import { propTypes, defaultProps } from './LangMenu.props'
-
-class LangMenu extends PureComponent {
+class PrefMenu extends PureComponent {
   static propTypes = propTypes
 
   static defaultProps = defaultProps
@@ -30,18 +29,20 @@ class LangMenu extends PureComponent {
   }
 
   render() {
-    const { intl, locale } = this.props
+    const {
+      intl, isLogin, handleClickPref, handleLogout,
+    } = this.props
     const langContent = (
       <Menu>
         <MenuItem
-          text={intl.formatMessage({ id: 'header.lang.en' })}
-          onClick={this.switchEn}
-          intent={locale === 'en' ? Intent.PRIMARY : undefined}
+          text={intl.formatMessage({ id: 'header.preferences' })}
+          onClick={handleClickPref}
         />
+        <MenuDivider />
         <MenuItem
-          text={intl.formatMessage({ id: 'header.lang.tw' })}
-          onClick={this.switchTw}
-          intent={locale === 'tw' ? Intent.PRIMARY : undefined}
+          text={intl.formatMessage({ id: 'header.logout' })}
+          onClick={handleLogout}
+          disabled={!isLogin}
         />
       </Menu>
     )
@@ -49,15 +50,15 @@ class LangMenu extends PureComponent {
       <Popover
         content={langContent}
         interactionKind={PopoverInteractionKind.HOVER}
-        position={Position.BOTTOM}
+        position={Position.BOTTOM_RIGHT}
       >
         <Button
-          rightIcon='caret-down'
-          text={intl.formatMessage({ id: `header.lang.${locale}` })}
+          minimal
+          icon='person'
         />
       </Popover>
     )
   }
 }
 
-export default injectIntl(LangMenu)
+export default injectIntl(PrefMenu)
