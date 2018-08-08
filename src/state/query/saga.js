@@ -55,7 +55,11 @@ function* exportCSV({ payload: target }) {
     const data = yield call(getCSV, auth, query, target)
     const { result = [], error } = data
     if (result) {
-      yield put(updateSuccessStatus(`${target} sent, please check your Email`))
+      if (platform.id === 'local') {
+        yield put(updateSuccessStatus(`${target} csv generated, please check your local 'csv' folder`))
+      } else {
+        yield put(updateSuccessStatus(`${target} csv sent, please check your Email`))
+      }
     }
 
     if (error) {
