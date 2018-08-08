@@ -6,6 +6,7 @@ import {
 } from '@blueprintjs/core'
 
 import Status from 'components/Status'
+import LangMenu from 'components/LangMenu'
 import PrefMenu from 'components/PrefMenu'
 import PrefDialog from 'components/PrefDialog'
 import { platform } from 'var/config'
@@ -51,6 +52,17 @@ class Header extends PureComponent {
     const { authIsShown, authStatus } = this.props
     const { isPrefOpen } = this.state
 
+    const isLogin = !authIsShown && authStatus === true
+    const renderMenu = isLogin ? (
+      <PrefMenu
+        isLogin={isLogin}
+        handleLogout={this.authLogout}
+        handleClickPref={this.handleClickPref}
+      />
+    ) : (
+      <LangMenu />
+    )
+
     return (
       <Fragment>
         <Navbar fixedToTop>
@@ -79,11 +91,7 @@ class Header extends PureComponent {
             </NavbarHeading>
           </NavbarGroup>
           <NavbarGroup align='right'>
-            <PrefMenu
-              isLogin={!authIsShown && authStatus === true}
-              handleLogout={this.authLogout}
-              handleClickPref={this.handleClickPref}
-            />
+            {renderMenu}
           </NavbarGroup>
         </Navbar>
         <div className='row'>
