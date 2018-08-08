@@ -2,9 +2,12 @@ import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
+  Intent,
   Menu,
   MenuItem,
   Popover,
+  PopoverInteractionKind,
+  Position,
 } from '@blueprintjs/core'
 
 import { propTypes, defaultProps } from './LangMenu.props'
@@ -33,17 +36,22 @@ class LangMenu extends PureComponent {
         <MenuItem
           text={intl.formatMessage({ id: 'header.lang.en' })}
           onClick={this.switchEn}
+          intent={locale === 'en' ? Intent.PRIMARY : undefined}
         />
         <MenuItem
           text={intl.formatMessage({ id: 'header.lang.tw' })}
           onClick={this.switchTw}
+          intent={locale === 'tw' ? Intent.PRIMARY : undefined}
         />
       </Menu>
     )
     return (
-      <Popover content={langContent}>
+      <Popover
+        content={langContent}
+        interactionKind={PopoverInteractionKind.HOVER}
+        position={Position.BOTTOM}
+      >
         <Button
-          minimal
           rightIcon='caret-down'
           text={intl.formatMessage({ id: `header.lang.${locale}` })}
         />
