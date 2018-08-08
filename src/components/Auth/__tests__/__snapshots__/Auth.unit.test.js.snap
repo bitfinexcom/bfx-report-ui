@@ -119,13 +119,13 @@ exports[`render correctly 1`] = `
     <br />
     <p>
       <button
-        className="bp3-button bp3-intent-primary"
-        disabled={undefined}
+        className="bp3-button bp3-disabled bp3-intent-primary"
+        disabled={true}
         name="check"
-        onClick={[Function]}
+        onClick={undefined}
         onKeyDown={[Function]}
         onKeyUp={[Function]}
-        tabIndex={undefined}
+        tabIndex={-1}
         type="button"
       >
         <span

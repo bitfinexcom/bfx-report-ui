@@ -102,7 +102,12 @@ class Auth extends PureComponent {
             onChange={this.handleChange}
           />
           <p>
-            <Button name='check' intent={Intent.PRIMARY} onClick={this.handleClick}>
+            <Button
+              name='check'
+              intent={Intent.PRIMARY}
+              onClick={this.handleClick}
+              disabled={!apiKey || !apiSecret}
+            >
               {intl.formatMessage({ id: 'auth.checkAuth' })}
             </Button>
           </p>
