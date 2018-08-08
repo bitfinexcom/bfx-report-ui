@@ -59,10 +59,10 @@ function* exportCSV({ payload: target }) {
     }
 
     if (error) {
-      yield put(updateErrorStatus(`Ledgers fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus(`Export fail ${JSON.stringify(error)}`))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Ledgers request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus(`Export request fail ${JSON.stringify(fail)}`))
   }
 }
 

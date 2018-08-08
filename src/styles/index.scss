@@ -99,3 +99,12 @@ body.#{$ns}-light .bitfinex-red-text > div {
   margin-left: 2px;
   text-align: center;
 }
+
+/* preferences dialog */
+.#{$ns}-dialog-body > .row {
+  margin-bottom: 10px;
+}
+
+.bitfinex-preferences-desc {
+  padding-top: 6px;
+}

@@ -1,7 +1,12 @@
 {
   "header.logout": "Logout",
   "header.lang.en": "English",
-  "header.lang.tw": "Traditional Chinese",
+  "header.lang.tw": "中文 (繁體)",
+  "header.preferences": "Preferences",
+  "preferences.title": "Preferences",
+  "preferences.close": "Close",
+  "preferences.language": "Language:",
+  "preferences.theme": "Theme:",
   "theme.light": "Light",
   "theme.dark": "Dark",
   "auth.auth": "Auth",

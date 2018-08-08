@@ -52,8 +52,8 @@ class Main extends PureComponent {
 
   state = {
     target: MENU_LEDGERS,
-    isExportOpen: false,
     isCustomOpen: false,
+    isExportOpen: false,
     startDate: null,
     endDate: new Date(),
   }
