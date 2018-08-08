@@ -44,6 +44,7 @@
   "timeframe.download.title": "匯出成CSV",
   "timeframe.download.prepare": "Bitfinex 將為您準備於",
   "timeframe.download.send": "期間的{intlType}資料，並寄送至您的Email。",
+  "timeframe.download.store": "期間的{intlType}資料，並儲存至本地資料夾。",
   "timeframe.download.export": "匯出",
   "timeframe.download.cancel": "取消",
   "timeframe.24h": "24 小時間",

@@ -44,6 +44,7 @@
   "timeframe.download.title": "Export CSV",
   "timeframe.download.prepare": "Bitfinex will prepare your {intlType} data from",
   "timeframe.download.send": "and send to your Email.",
+  "timeframe.download.store": "and store to your local folder.",
   "timeframe.download.export": "Export",
   "timeframe.download.cancel": "Cancel",
   "timeframe.24h": "Last 24 hours",

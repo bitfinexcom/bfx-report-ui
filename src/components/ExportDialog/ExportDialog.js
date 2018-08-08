@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
@@ -8,6 +8,7 @@ import {
 } from '@blueprintjs/core'
 
 import { formatDate } from 'state/utils'
+import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './ExportDialog.props'
 
@@ -27,6 +28,27 @@ class ExportDialog extends PureComponent {
     }
 
     const intlType = intl.formatMessage({ id: `${type}.title` })
+    const renderMessage = platform.id === 'local' ? (
+      <Fragment>
+        {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
+        &nbsp;
+        <span className='bitfinex-show-soft'>
+          {`${formatDate(start)} — ${formatDate(end)}`}
+        </span>
+        &nbsp;
+        {intl.formatMessage({ id: 'timeframe.download.store' }, { intlType })}
+      </Fragment>
+    ) : (
+      <Fragment>
+        {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
+        &nbsp;
+        <span className='bitfinex-show-soft'>
+          {`${formatDate(start)} — ${formatDate(end)}`}
+        </span>
+        &nbsp;
+        {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType })}
+      </Fragment>
+    )
     return (
       <Dialog
         icon='cloud-download'
@@ -40,13 +62,7 @@ class ExportDialog extends PureComponent {
         isOpen={isExportOpen}
       >
         <div className={Classes.DIALOG_BODY}>
-          {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
-          &nbsp;
-          <span className='bitfinex-show-soft'>
-            {`${formatDate(start)} — ${formatDate(end)}`}
-          </span>
-          &nbsp;
-          {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType })}
+          {renderMessage}
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
