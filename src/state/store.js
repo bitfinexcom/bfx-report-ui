@@ -6,6 +6,7 @@ import {
 import createSagaMiddleware from 'redux-saga'
 import { createLogger } from 'redux-logger'
 import { persistStore } from 'redux-persist'
+
 import reducer from './reducers'
 import saga from './sagas'
 

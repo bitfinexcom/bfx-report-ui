@@ -32,11 +32,11 @@ exports[`render correctly 1`] = `
     >
       Visit 
       <a
-        href="https://staging.bitfinex.com:2998/api"
+        href="https://www.bitfinex.com/api"
         rel="noopener noreferrer"
         target="_blank"
       >
-        https://staging.bitfinex.com:2998/api
+        https://www.bitfinex.com/api
       </a>
        to get the readonly API key and secret pair.
     </div>
@@ -119,13 +119,13 @@ exports[`render correctly 1`] = `
     <br />
     <p>
       <button
-        className="bp3-button bp3-intent-primary"
-        disabled={undefined}
+        className="bp3-button bp3-disabled bp3-intent-primary"
+        disabled={true}
         name="check"
-        onClick={[Function]}
+        onClick={undefined}
         onKeyDown={[Function]}
         onKeyUp={[Function]}
-        tabIndex={undefined}
+        tabIndex={-1}
         type="button"
       >
         <span

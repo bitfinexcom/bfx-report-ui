@@ -11,11 +11,13 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
+
 import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
 import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+
 import { propTypes, defaultProps } from './Orders.props'
 
 const COLUMN_WIDTHS = [80, 70, 150, 100, 100, 100, 100, 150, 200]
@@ -55,6 +57,7 @@ class Orders extends PureComponent {
       offset,
       pageOffset,
       entries,
+      handleClickExport,
       intl,
       jumpPage,
       loading,
@@ -133,7 +136,7 @@ class Orders extends PureComponent {
           <h4>
             {intl.formatMessage({ id: 'orders.title' })}
             &nbsp;
-            <Button icon='cloud-download' disabled>
+            <Button icon='cloud-download' onClick={handleClickExport}>
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>

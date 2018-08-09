@@ -1,4 +1,5 @@
 import { addLocaleData } from 'react-intl'
+
 import enUS from './en-US'
 import zhHANT from './zh-Hant'
 

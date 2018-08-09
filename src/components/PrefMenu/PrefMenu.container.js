@@ -1,8 +1,6 @@
 import { connect } from 'react-redux'
-
 import baseActions from 'state/base/actions'
-
-import LangMenu from './LangMenu'
+import PrefMenu from './PrefMenu'
 
 function mapStateToProps(state = {}) {
   return {
@@ -14,6 +12,6 @@ const mapDispatchToProps = dispatch => ({
   setLang: lang => dispatch(baseActions.setLang(lang)),
 })
 
-const LangMenuContainer = connect(mapStateToProps, mapDispatchToProps)(LangMenu)
+const PrefMenuContainer = connect(mapStateToProps, mapDispatchToProps)(PrefMenu)
 
-export default LangMenuContainer
+export default PrefMenuContainer

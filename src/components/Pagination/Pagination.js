@@ -2,6 +2,7 @@ import React, { createRef, Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
 import { Button } from '@blueprintjs/core'
+
 import { isValidateType } from 'state/utils'
 import queryConstants from 'state/query/constants'
 

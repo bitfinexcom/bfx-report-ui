@@ -4,11 +4,13 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+
 import { postJsonfetch, selectAuth } from 'state/utils'
 import { getTimeFrame } from 'state/query/selector'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { platform } from 'var/config'
+
 import types from './constants'
 import actions from './actions'
 

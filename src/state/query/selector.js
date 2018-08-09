@@ -1,4 +1,5 @@
 import { isValidateType } from 'state/utils'
+
 import constants from './constants'
 
 /**

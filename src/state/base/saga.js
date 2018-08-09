@@ -4,6 +4,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+
 import types from './constants'
 
 function* updateTheme() {

@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+
 import actions from 'state/trades/actions'
+
 import Trades from './Trades'
 
 function mapStateToProps(state = {}) {

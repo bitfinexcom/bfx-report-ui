@@ -12,11 +12,13 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
+
 import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
 import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+
 import { propTypes, defaultProps } from './Ledgers.props'
 
 const COLUMN_WIDTHS = [500, 120, 120, 120, 150]
@@ -73,6 +75,7 @@ class Ledgers extends PureComponent {
       pageOffset,
       currencies,
       entries,
+      handleClickExport,
       intl,
       jumpPage,
       loading,
@@ -169,7 +172,7 @@ class Ledgers extends PureComponent {
           <h4>
             {intl.formatMessage({ id: 'ledgers.title' })}
             &nbsp;
-            <Button icon='cloud-download' disabled>
+            <Button icon='cloud-download' onClick={handleClickExport}>
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>

@@ -9,7 +9,9 @@ import {
   Icon,
   Intent,
 } from '@blueprintjs/core'
+
 import { platform } from 'var/config'
+
 import { propTypes, defaultProps } from './Auth.props'
 import InputKey from './InputKey'
 
@@ -100,7 +102,12 @@ class Auth extends PureComponent {
             onChange={this.handleChange}
           />
           <p>
-            <Button name='check' intent={Intent.PRIMARY} onClick={this.handleClick}>
+            <Button
+              name='check'
+              intent={Intent.PRIMARY}
+              onClick={this.handleClick}
+              disabled={!apiKey || !apiSecret}
+            >
               {intl.formatMessage({ id: 'auth.checkAuth' })}
             </Button>
           </p>
