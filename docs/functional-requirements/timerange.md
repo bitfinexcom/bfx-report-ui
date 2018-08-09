@@ -18,3 +18,13 @@ Allow user to select the start and end range by date and time.
     1. `Past 3 month`(translate)
     1. `Custom`(translate)
         1. Click this will trigger the Custom Time range dialog.
+
+When Custom Time Range dialog is shown:
+
+1. The dialog has tilte `Select Query Range`(translate).
+1. The dialog has a close icon at top right, click it will close the dialog.
+1. The dialog contain `startDate` and `endDate` input fields.
+    1. tap these field will pop the date selector.
+1. The dialog has a `View`(translate) button at the bottom of dialog.
+    1. The button is disabled if `startDate` or `endDate` field doesn't entered
+    1. Click the button will save current custom query and close the dialog.
