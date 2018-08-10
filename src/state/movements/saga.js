@@ -32,10 +32,18 @@ function* fetchMovements() {
     yield put(actions.updateMovements(result))
 
     if (error) {
-      yield put(updateErrorStatus(`Movements fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'movements.title',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Movements request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'movements.title',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 
@@ -56,10 +64,18 @@ function* fetchNextMovements() {
     yield put(actions.updateMovements(result))
 
     if (error) {
-      yield put(updateErrorStatus(`Movements fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'movements.title',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Movements request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'movements.title',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 

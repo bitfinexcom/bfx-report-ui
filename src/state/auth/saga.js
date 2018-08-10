@@ -29,16 +29,26 @@ function* checkAuth() {
     yield put(updateAuthStatus(result))
 
     if (result) {
-      yield put(updateSuccessStatus(`Auth Success at ${(new Date()).toLocaleString()}`))
-    } else {
-      yield put(updateErrorStatus('Auth Fail'))
+      yield put(updateSuccessStatus({
+        id: 'status.success',
+        topic: 'auth.auth',
+        time: (new Date()).toLocaleString(),
+      }))
     }
 
     if (error) {
-      yield put(updateErrorStatus(`Auth fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.auth',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Auth request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'auth.auth',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 
@@ -50,16 +60,26 @@ function* checkAuthWithToken({ payload: authToken }) {
     yield put(updateAuthStatus(result))
 
     if (result) {
-      yield put(updateSuccessStatus(`Auth Success at ${(new Date()).toLocaleString()}`))
-    } else {
-      yield put(updateErrorStatus('Auth Fail'))
+      yield put(updateSuccessStatus({
+        id: 'status.success',
+        topic: 'auth.auth',
+        time: (new Date()).toLocaleString(),
+      }))
     }
 
     if (error) {
-      yield put(updateErrorStatus(`Auth fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.auth',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Auth request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'auth.auth',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 

@@ -11,9 +11,16 @@ export function clearStatus() {
 
 /**
  * Create an action to update primary status.
- * @param {string} msg
+ * @param {Object} msg
  */
 export function updateStatus(msg) {
+  if (!msg.id) {
+    return {
+      type: types.UPDATE_ERROR_STATUS,
+      payload: { id: 'status.noid' },
+    }
+  }
+
   return {
     type: types.UPDATE_STATUS,
     payload: msg,
@@ -22,9 +29,16 @@ export function updateStatus(msg) {
 
 /**
  * Create an action to update success status.
- * @param {string} msg
+ * @param {Object} msg
  */
 export function updateSuccessStatus(msg) {
+  if (!msg.id) {
+    return {
+      type: types.UPDATE_ERROR_STATUS,
+      payload: { id: 'status.noid' },
+    }
+  }
+
   return {
     type: types.UPDATE_SUCCESS_STATUS,
     payload: msg,
@@ -33,9 +47,16 @@ export function updateSuccessStatus(msg) {
 
 /**
  * Create an action to update error status.
- * @param {string} msg
+ * @param {Object} msg
  */
 export function updateErrorStatus(msg) {
+  if (!msg.id) {
+    return {
+      type: types.UPDATE_ERROR_STATUS,
+      payload: { id: 'status.noid' },
+    }
+  }
+
   return {
     type: types.UPDATE_ERROR_STATUS,
     payload: msg,

@@ -4,7 +4,7 @@ import types from './constants'
 
 const initialState = {
   intent: '',
-  msg: '',
+  msg: {},
 }
 
 export function statusReducer(state = initialState, action) {
@@ -28,11 +28,7 @@ export function statusReducer(state = initialState, action) {
         msg: action.payload,
       }
     case types.CLEAR_STATUS:
-      return {
-        ...state,
-        intent: '',
-        msg: '',
-      }
+      return initialState
     default:
       return state
   }
