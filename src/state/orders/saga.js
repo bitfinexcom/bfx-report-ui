@@ -32,10 +32,18 @@ function* fetchOrders() {
     yield put(actions.updateOrders(result))
 
     if (error) {
-      yield put(updateErrorStatus(`Orders fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'orders.title',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Orders request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'orders.title',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 
@@ -56,10 +64,18 @@ function* fetchNextOrders() {
     yield put(actions.updateOrders(result))
 
     if (error) {
-      yield put(updateErrorStatus(`Orders fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'orders.title',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Orders request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'orders.title',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 

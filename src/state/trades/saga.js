@@ -32,10 +32,18 @@ function* fetchTrades() {
     yield put(actions.updateTrades(result))
 
     if (error) {
-      yield put(updateErrorStatus(`Trades fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'trades.title',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Trades request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'trades.title',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 
@@ -56,10 +64,18 @@ function* fetchNextTrades() {
     yield put(actions.updateTrades(result))
 
     if (error) {
-      yield put(updateErrorStatus(`Trades fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'trades.title',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Trades request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'trades.title',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 

@@ -32,10 +32,18 @@ function* fetchLedgers() {
     yield put(actions.updateLedgers(result))
 
     if (error) {
-      yield put(updateErrorStatus(`Ledgers fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'ledgers.title',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Ledgers request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'ledgers.title',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 
@@ -56,10 +64,18 @@ function* fetchNextLedgers() {
     yield put(actions.updateLedgers(result))
 
     if (error) {
-      yield put(updateErrorStatus(`Ledgers fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'ledgers.title',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Ledgers request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'ledgers.title',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 

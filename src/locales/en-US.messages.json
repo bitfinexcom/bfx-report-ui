@@ -24,6 +24,7 @@
   "ledgers.column.credit": "CREDIT",
   "ledgers.column.debit": "DEBIT",
   "ledgers.column.balance": "BALANCE",
+  "movements.title": "Movements",
   "deposits.title": "Deposits",
   "withdrawals.title": "Withdrawals",
   "movements.column.updated": "DATE",
@@ -52,6 +53,8 @@
   "timeframe.download.store": "and store to your local folder.",
   "timeframe.download.export": "Export",
   "timeframe.download.cancel": "Cancel",
+  "timeframe.download.status.local": "{topic} csv generated, please check your local 'csv' folder",
+  "timeframe.download.status.email": "{topic} csv sent, please check your Email",
   "timeframe.24h": "Last 24 hours",
   "timeframe.yesterday": "Yesterday",
   "timeframe.2w": "Last 2 weeks",
@@ -62,5 +65,9 @@
   "timeframe.custom.title": "Select Query Range",
   "timeframe.custom.view" : "View",
   "pagination.page": "Page",
-  "pagination.of": "of"
+  "pagination.of": "of",
+  "status.success": "{topic} Success at {time}",
+  "status.fail": "{topic} fail {detail}",
+  "status.request.error": "{topic} request fail {detail}",
+  "status.noid": "dev: the status action should contain the id param"
 }
