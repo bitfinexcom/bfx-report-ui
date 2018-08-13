@@ -56,17 +56,31 @@ function* exportCSV({ payload: target }) {
     const { result = [], error } = data
     if (result) {
       if (platform.id === 'local') {
-        yield put(updateSuccessStatus(`${target} csv generated, please check your local 'csv' folder`))
+        yield put(updateSuccessStatus({
+          id: 'timeframe.download.status.local',
+          topic: `${target}.title`,
+        }))
       } else {
-        yield put(updateSuccessStatus(`${target} csv sent, please check your Email`))
+        yield put(updateSuccessStatus({
+          id: 'timeframe.download.status.email',
+          topic: `${target}.title`,
+        }))
       }
     }
 
     if (error) {
-      yield put(updateErrorStatus(`Export fail ${JSON.stringify(error)}`))
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'timeframe.download',
+        detail: JSON.stringify(error),
+      }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus(`Export request fail ${JSON.stringify(fail)}`))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'timeframe.download',
+      detail: JSON.stringify(fail),
+    }))
   }
 }
 
