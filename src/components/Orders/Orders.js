@@ -20,7 +20,7 @@ import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
 
 import { propTypes, defaultProps } from './Orders.props'
 
-const COLUMN_WIDTHS = [80, 70, 150, 100, 100, 100, 100, 150, 200]
+const COLUMN_WIDTHS = [100, 70, 150, 100, 100, 100, 100, 150, 200]
 const LIMIT = queryConstants.DEFAULT_ORDERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_ORDERS_PAGE_SIZE
 
