@@ -138,5 +138,3 @@ TEST_CASES.forEach((entry) => {
     expect(tree.children[6]).toEqual(entry.totalPages)
   })
 })
-
-// console.warn(tree)
