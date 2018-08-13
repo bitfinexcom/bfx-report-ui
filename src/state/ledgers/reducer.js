@@ -146,6 +146,12 @@ export function ledgersReducer(state = initialState, action) {
       const page = action.payload
       const totalOffset = (page - 1) * PAGE_SIZE
       const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
+      if (totalOffset < LIMIT) {
+        return {
+          ...state,
+          pageOffset: totalOffset - currentOffset,
+        }
+      }
       return {
         ...state,
         offset: currentOffset + LIMIT,

@@ -127,10 +127,16 @@ export function tradesReducer(state = initialState, action) {
         offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
         pageOffset: 0,
       }
-    case types.JUMP_LEDGERS_PAGE: {
+    case types.JUMP_TRADES_PAGE: {
       const page = action.payload
       const totalOffset = (page - 1) * PAGE_SIZE
       const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
+      if (totalOffset < LIMIT) {
+        return {
+          ...state,
+          pageOffset: totalOffset - currentOffset,
+        }
+      }
       return {
         ...state,
         offset: currentOffset + LIMIT,
