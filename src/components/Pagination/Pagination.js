@@ -64,8 +64,7 @@ class Pagination extends PureComponent {
     const nextCondition = dataLen % LIMIT !== 0 && dataLen - LIMIT < offset
     const prevCondition = offset <= LIMIT
     const pageBase = offset + pageOffset < LIMIT
-      ? Math.floor(offset / PAGE_SIZE)
-      : Math.floor(offset - LIMIT / PAGE_SIZE)
+      ? 0 : Math.floor(offset - LIMIT / PAGE_SIZE)
     const currentPageBase = pageBase === 0 ? 1 : pageBase
     const currentPage = currentPageBase + pageOffset / PAGE_SIZE
     const renderRestDots = !nextCondition ? (
