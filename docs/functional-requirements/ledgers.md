@@ -2,6 +2,8 @@
 
 ## Overview
 
+Ledgers shows ledgers balances and descriptions by date. Contain sections `Export button`, `Symbol filter buttons`, `Table`, `Pagination`.
+
 ## UI
 
 1. The panel has title named `Ledgers`(translate).
@@ -19,4 +21,8 @@
     1. `BALANCE`(translate), the number is left aligned.
     1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
 1. The pagination bar is shown at the bottom of the table.
-    1. The query limit is 5000 entries at once
+    1. The query limit is 5000 entries at once.
+    1. The table shows 200 entries per page.
+    1. Contain `<<` (previous query), `<`(backward a page), `>`(forward a page), `>>`(next query) buttons
+    1. Contain a page indicator field which shows current page.
+    1. The page indicator field allows user input a page number, press enter key will jump to that  page.
