@@ -24,7 +24,8 @@ import { propTypes, defaultProps } from './Ledgers.props'
 const COLUMN_WIDTHS = [500, 120, 120, 120, 150]
 const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
-const WILD_CARD = ['', 'All']
+const ALL = 'ALL'
+const WILD_CARD = ['', ALL]
 
 class Ledgers extends PureComponent {
   constructor(props) {
@@ -33,10 +34,6 @@ class Ledgers extends PureComponent {
     this.handleClick = this.handleClick.bind(this)
     this.fetchPrev = this.fetchPrev.bind(this)
     this.fetchNext = this.fetchNext.bind(this)
-  }
-
-  state = {
-    symbol: '',
   }
 
   componentDidMount() {
@@ -53,7 +50,8 @@ class Ledgers extends PureComponent {
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
-        this.setState({ symbol })
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.setCurrentSymbol(symbol === ALL ? '' : symbol)
       }
     }
     return this.handlers[symbol]
@@ -74,18 +72,17 @@ class Ledgers extends PureComponent {
       offset,
       pageOffset,
       currencies,
+      currentSymbol,
       entries,
       handleClickExport,
       intl,
       jumpPage,
       loading,
     } = this.props
-    const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const currencyList = ['All', ...currencies]
+    const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
+    const currencyList = [ALL, ...currencies]
     // eslint-disable-next-line react/destructuring-assignment
-    const currentCurrency = this.state.symbol || currencyList[0]
-    const filteredData = currentCurrency === currencyList[0]
-      ? currentEntries : currentEntries.filter(entry => entry.currency === currentCurrency)
+    const currentCurrency = currentSymbol || currencyList[0]
     const numRows = filteredData.length
 
     const descriptionCellRenderer = rowIndex => (
@@ -106,7 +103,7 @@ class Ledgers extends PureComponent {
       const show = parseFloat(filteredData[rowIndex].amount) > 0
       const showAmount = show ? filteredData[rowIndex].amount : ''
       // eslint-disable-next-line react/destructuring-assignment
-      const showCurrency = show && WILD_CARD.includes(this.state.symbol) ? (
+      const showCurrency = show && WILD_CARD.includes(currentSymbol) ? (
         <Fragment>
           &nbsp;
           <span className='bitfinex-show-soft'>
@@ -126,7 +123,7 @@ class Ledgers extends PureComponent {
       const show = parseFloat(filteredData[rowIndex].amount) < 0
       const showAmount = show ? Math.abs(filteredData[rowIndex].amount) : ''
       // eslint-disable-next-line react/destructuring-assignment
-      const showCurrency = show && WILD_CARD.includes(this.state.symbol) ? (
+      const showCurrency = show && WILD_CARD.includes(currentSymbol) ? (
         <Fragment>
           &nbsp;
           <span className='bitfinex-show-soft'>
@@ -162,7 +159,7 @@ class Ledgers extends PureComponent {
       showContent = (
         <Loading title='ledgers.title' />
       )
-    } else if (currentEntries.length === 0) {
+    } else if (numRows === 0) {
       showContent = (
         <NoData title='ledgers.title' />
       )

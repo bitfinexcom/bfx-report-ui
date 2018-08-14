@@ -14,8 +14,11 @@ import { platform } from 'var/config'
 import types from './constants'
 import actions from './actions'
 
-function getLedgers(auth, query, smallestMts) {
+function getLedgers(auth, query, currentSymbol, smallestMts) {
   const params = getTimeFrame(query, 'ledgers', smallestMts)
+  if (currentSymbol) {
+    params.symbol = currentSymbol
+  }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getLedgers',
@@ -25,9 +28,11 @@ function getLedgers(auth, query, smallestMts) {
 
 function* fetchLedgers() {
   try {
+    const ledgers = yield select(state => state.ledgers)
+    const { currentSymbol } = ledgers
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getLedgers, auth, query, 0)
+    const data = yield call(getLedgers, auth, query, currentSymbol, 0)
     const { result = [], error } = data
     yield put(actions.updateLedgers(result))
 
@@ -52,14 +57,16 @@ const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
 function* fetchNextLedgers() {
   try {
     const ledgers = yield select(state => state.ledgers)
-    const { offset, entries, smallestMts } = ledgers
+    const {
+      currentSymbol, offset, entries, smallestMts,
+    } = ledgers
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getLedgers, auth, query, smallestMts)
+    const data = yield call(getLedgers, auth, query, currentSymbol, smallestMts)
     const { result = [], error } = data
     yield put(actions.updateLedgers(result))
 
@@ -81,5 +88,6 @@ function* fetchNextLedgers() {
 
 export default function* ledgersSaga() {
   yield takeLatest(types.FETCH_LEDGERS, fetchLedgers)
+  yield takeLatest(types.SET_SYMBOL, fetchLedgers)
   yield takeLatest(types.FETCH_NEXT_LEDGERS, fetchNextLedgers)
 }
