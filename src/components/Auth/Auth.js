@@ -67,7 +67,7 @@ class Auth extends PureComponent {
       showValid = (<Icon iconSize={21} icon='cross' intent={Intent.DANGER} />)
     }
 
-    return platform.id === 'local' && isShown ? (
+    return platform.showAuthPage && isShown ? (
       <div className='row'>
         <Card
           className={classes}
