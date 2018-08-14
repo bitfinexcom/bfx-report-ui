@@ -49,10 +49,22 @@ export function updateLedgers(payload) {
   }
 }
 
+/**
+ * Create an action to set current symbol.
+ * @param {string}  symbol symbol
+ */
+export function setCurrentSymbol(symbol) {
+  return {
+    type: types.SET_SYMBOL,
+    payload: symbol,
+  }
+}
+
 export default {
   fetchLedgers,
   fetchNextLedgers,
   fetchPrevLedgers,
   jumpPage,
+  setCurrentSymbol,
   updateLedgers,
 }
