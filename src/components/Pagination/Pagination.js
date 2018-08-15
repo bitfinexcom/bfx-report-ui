@@ -66,7 +66,8 @@ class Pagination extends PureComponent {
     const prevCondition = offset <= LIMIT
     const pageBase = offset < LIMIT
       ? 0 : Math.floor(offset / LIMIT) * PAGE_GAP
-    const currentPageBase = pageBase % PAGE_GAP === 0 ? pageBase + 1 : pageBase
+    const currentPageBase = (pageBase % PAGE_GAP === 0 && offset % LIMIT !== 0)
+      ? pageBase + 1 : pageBase
     const currentPage = currentPageBase + pageOffset / PAGE_SIZE
     const renderRestDots = !nextCondition ? (
       <Fragment>

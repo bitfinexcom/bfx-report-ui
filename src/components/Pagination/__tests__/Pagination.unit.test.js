@@ -74,6 +74,14 @@ const TEST_CASES = [
     totalPages: '25',
   },
   {
+    title: 'render correctly in 25 of 25 pages',
+    dataLen: 5000,
+    offset: 5000,
+    pageOffset: 0,
+    placeholder: 25,
+    totalPages: '25',
+  },
+  {
     title: 'render correctly in 26 of 26 pages',
     dataLen: 5100,
     offset: 5100,
@@ -96,6 +104,14 @@ const TEST_CASES = [
     pageOffset: 200,
     placeholder: 27,
     totalPages: '28',
+  },
+  {
+    title: 'render correctly in 50 of 50 pages',
+    dataLen: 10000,
+    offset: 10000,
+    pageOffset: 0,
+    placeholder: 50,
+    totalPages: '50',
   },
   {
     title: 'render correctly in 51 of 51 pages',
