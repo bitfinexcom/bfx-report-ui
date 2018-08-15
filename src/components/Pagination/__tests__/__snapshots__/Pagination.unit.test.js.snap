@@ -732,6 +732,131 @@ exports[`render correctly in 25 of 25 pages 1`] = `
 </div>
 `;
 
+exports[`render correctly in 25 of 25 pages 2`] = `
+<div
+  className="bitfinex-pagination-group"
+>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-left
+      </desc>
+      <path
+        d="M4.41 8L7.7 4.71c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C2.11 7.47 2 7.72 2 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L4.41 8zm5 0l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C7.11 7.47 7 7.72 7 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L9.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-left
+      </desc>
+      <path
+        d="M7.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C5.11 7.47 5 7.72 5 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L7.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  Page
+  <input
+    className="bitfinex-page-input"
+    data-pagelen={25}
+    onKeyPress={[Function]}
+    placeholder={25}
+  />
+  of
+   
+  25
+  <span>
+    +
+  </span>
+   
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-right
+      </desc>
+      <path
+        d="M10.71 7.29l-4-4a1.003 1.003 0 0 0-1.42 1.42L8.59 8 5.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-right
+      </desc>
+      <path
+        d="M9 8c0-.28-.11-.53-.29-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4C8.89 8.53 9 8.28 9 8zm4.71-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L11.59 8 8.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
 exports[`render correctly in 26 of 26 pages 1`] = `
 <div
   className="bitfinex-pagination-group"
@@ -1098,6 +1223,131 @@ exports[`render correctly in 27 of 28 pages 1`] = `
 </div>
 `;
 
+exports[`render correctly in 50 of 50 pages 1`] = `
+<div
+  className="bitfinex-pagination-group"
+>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-left
+      </desc>
+      <path
+        d="M4.41 8L7.7 4.71c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C2.11 7.47 2 7.72 2 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L4.41 8zm5 0l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C7.11 7.47 7 7.72 7 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L9.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-left
+      </desc>
+      <path
+        d="M7.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C5.11 7.47 5 7.72 5 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L7.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  Page
+  <input
+    className="bitfinex-page-input"
+    data-pagelen={50}
+    onKeyPress={[Function]}
+    placeholder={50}
+  />
+  of
+   
+  50
+  <span>
+    +
+  </span>
+   
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-right
+      </desc>
+      <path
+        d="M10.71 7.29l-4-4a1.003 1.003 0 0 0-1.42 1.42L8.59 8 5.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-right
+      </desc>
+      <path
+        d="M9 8c0-.28-.11-.53-.29-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4C8.89 8.53 9 8.28 9 8zm4.71-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L11.59 8 8.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
 exports[`render correctly in 51 of 51 pages 1`] = `
 <div
   className="bitfinex-pagination-group"
@@ -1416,6 +1666,741 @@ exports[`render correctly with 35 entry 1`] = `
     onKeyDown={[Function]}
     onKeyUp={[Function]}
     tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-right
+      </desc>
+      <path
+        d="M10.71 7.29l-4-4a1.003 1.003 0 0 0-1.42 1.42L8.59 8 5.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-right
+      </desc>
+      <path
+        d="M9 8c0-.28-.11-.53-.29-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4C8.89 8.53 9 8.28 9 8zm4.71-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L11.59 8 8.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`render trades correctly in 1 of 1 pages 1`] = `
+<div
+  className="bitfinex-pagination-group"
+>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-left
+      </desc>
+      <path
+        d="M4.41 8L7.7 4.71c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C2.11 7.47 2 7.72 2 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L4.41 8zm5 0l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C7.11 7.47 7 7.72 7 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L9.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-left
+      </desc>
+      <path
+        d="M7.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C5.11 7.47 5 7.72 5 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L7.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  Page
+  <input
+    className="bitfinex-page-input"
+    data-pagelen={1}
+    onKeyPress={[Function]}
+    placeholder={1}
+  />
+  of
+   
+  1
+  
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-right
+      </desc>
+      <path
+        d="M10.71 7.29l-4-4a1.003 1.003 0 0 0-1.42 1.42L8.59 8 5.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-right
+      </desc>
+      <path
+        d="M9 8c0-.28-.11-.53-.29-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4C8.89 8.53 9 8.28 9 8zm4.71-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L11.59 8 8.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`render trades correctly in 1 of 2 pages 1`] = `
+<div
+  className="bitfinex-pagination-group"
+>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-left
+      </desc>
+      <path
+        d="M4.41 8L7.7 4.71c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C2.11 7.47 2 7.72 2 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L4.41 8zm5 0l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C7.11 7.47 7 7.72 7 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L9.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-left
+      </desc>
+      <path
+        d="M7.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C5.11 7.47 5 7.72 5 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L7.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  Page
+  <input
+    className="bitfinex-page-input"
+    data-pagelen={2}
+    onKeyPress={[Function]}
+    placeholder={1}
+  />
+  of
+   
+  2
+  
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-right
+      </desc>
+      <path
+        d="M10.71 7.29l-4-4a1.003 1.003 0 0 0-1.42 1.42L8.59 8 5.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-right
+      </desc>
+      <path
+        d="M9 8c0-.28-.11-.53-.29-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4C8.89 8.53 9 8.28 9 8zm4.71-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L11.59 8 8.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`render trades correctly in 1 of 2 pages 2`] = `
+<div
+  className="bitfinex-pagination-group"
+>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-left
+      </desc>
+      <path
+        d="M4.41 8L7.7 4.71c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C2.11 7.47 2 7.72 2 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L4.41 8zm5 0l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C7.11 7.47 7 7.72 7 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L9.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-left
+      </desc>
+      <path
+        d="M7.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C5.11 7.47 5 7.72 5 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L7.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  Page
+  <input
+    className="bitfinex-page-input"
+    data-pagelen={2}
+    onKeyPress={[Function]}
+    placeholder={2}
+  />
+  of
+   
+  2
+  
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-right
+      </desc>
+      <path
+        d="M10.71 7.29l-4-4a1.003 1.003 0 0 0-1.42 1.42L8.59 8 5.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-right
+      </desc>
+      <path
+        d="M9 8c0-.28-.11-.53-.29-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4C8.89 8.53 9 8.28 9 8zm4.71-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L11.59 8 8.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`render trades correctly in 10 of 10 pages 1`] = `
+<div
+  className="bitfinex-pagination-group"
+>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-left
+      </desc>
+      <path
+        d="M4.41 8L7.7 4.71c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C2.11 7.47 2 7.72 2 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L4.41 8zm5 0l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C7.11 7.47 7 7.72 7 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L9.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-left
+      </desc>
+      <path
+        d="M7.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C5.11 7.47 5 7.72 5 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L7.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  Page
+  <input
+    className="bitfinex-page-input"
+    data-pagelen={10}
+    onKeyPress={[Function]}
+    placeholder={10}
+  />
+  of
+   
+  10
+  
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-right
+      </desc>
+      <path
+        d="M10.71 7.29l-4-4a1.003 1.003 0 0 0-1.42 1.42L8.59 8 5.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-right
+      </desc>
+      <path
+        d="M9 8c0-.28-.11-.53-.29-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4C8.89 8.53 9 8.28 9 8zm4.71-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L11.59 8 8.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`render trades correctly in 10 of 10 pages 2`] = `
+<div
+  className="bitfinex-pagination-group"
+>
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-left
+      </desc>
+      <path
+        d="M4.41 8L7.7 4.71c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C2.11 7.47 2 7.72 2 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L4.41 8zm5 0l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C7.11 7.47 7 7.72 7 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L9.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-left
+      </desc>
+      <path
+        d="M7.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C5.11 7.47 5 7.72 5 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L7.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  Page
+  <input
+    className="bitfinex-page-input"
+    data-pagelen={10}
+    onKeyPress={[Function]}
+    placeholder={10}
+  />
+  of
+   
+  10
+  <span>
+    +
+  </span>
+   
+  <button
+    className="bp3-button bp3-disabled bp3-minimal"
+    disabled={true}
+    onClick={undefined}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={-1}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-right
+      </desc>
+      <path
+        d="M10.71 7.29l-4-4a1.003 1.003 0 0 0-1.42 1.42L8.59 8 5.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-right"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-right
+      </desc>
+      <path
+        d="M9 8c0-.28-.11-.53-.29-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L6.59 8 3.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4C8.89 8.53 9 8.28 9 8zm4.71-.71l-4-4a1.003 1.003 0 0 0-1.42 1.42L11.59 8 8.3 11.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71l4-4c.18-.18.29-.43.29-.71 0-.28-.11-.53-.29-.71z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
+
+exports[`render trades correctly in 11 of 12 pages 1`] = `
+<div
+  className="bitfinex-pagination-group"
+>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="double-chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        double-chevron-left
+      </desc>
+      <path
+        d="M4.41 8L7.7 4.71c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C2.11 7.47 2 7.72 2 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L4.41 8zm5 0l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C7.11 7.47 7 7.72 7 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L9.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
+    type="button"
+  >
+    <svg
+      className="bp3-icon"
+      data-icon="chevron-left"
+      height={16}
+      style={Object {}}
+      viewBox="0 0 16 16"
+      width={16}
+    >
+      <desc>
+        chevron-left
+      </desc>
+      <path
+        d="M7.41 8l3.29-3.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71l-4 4C5.11 7.47 5 7.72 5 8c0 .28.11.53.29.71l4 4a1.003 1.003 0 0 0 1.42-1.42L7.41 8z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  Page
+  <input
+    className="bitfinex-page-input"
+    data-pagelen={12}
+    onKeyPress={[Function]}
+    placeholder={11}
+  />
+  of
+   
+  12
+  
+  <button
+    className="bp3-button bp3-minimal"
+    disabled={undefined}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    tabIndex={undefined}
     type="button"
   >
     <svg
