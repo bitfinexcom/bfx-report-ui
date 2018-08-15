@@ -31,9 +31,12 @@ function getUrlParameter(name) {
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
 }
 
-window.addEventListener('load', () => {
+window.addEventListener('load', function handler() {
   const token = getUrlParameter('authToken')
   if (token) {
+    window.removeEventListener('load', handler)
+    // remove url params
+    window.history.pushState(null, null, window.location.href.replace(window.location.search, ''))
     store.dispatch(checkAuthWithToken(token))
   }
 })
