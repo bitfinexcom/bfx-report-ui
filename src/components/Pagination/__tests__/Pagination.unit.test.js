@@ -84,12 +84,12 @@ const TEST_CASES = [
     totalPages: '25',
   },
   {
-    title: 'render correctly in 25 of 25 pages',
+    title: 'render correctly in 1 of 25 pages',
     type: MOCK_DEFAULT_TYPE,
     dataLen: 5000,
     offset: 5000,
     pageOffset: 0,
-    placeholder: 25,
+    placeholder: 1,
     totalPages: '25',
   },
   {
@@ -120,12 +120,12 @@ const TEST_CASES = [
     totalPages: '28',
   },
   {
-    title: 'render correctly in 50 of 50 pages',
+    title: 'render correctly in 26 of 50 pages',
     type: MOCK_DEFAULT_TYPE,
     dataLen: 10000,
     offset: 10000,
     pageOffset: 0,
-    placeholder: 50,
+    placeholder: 26,
     totalPages: '50',
   },
   {
@@ -174,12 +174,12 @@ const TEST_CASES = [
     totalPages: '10',
   },
   {
-    title: 'render trades correctly in 10 of 10 pages',
+    title: 'render trades correctly in 1 of 10 pages',
     type: TYPE_TRADES,
     dataLen: 1500,
     offset: 1500,
     pageOffset: 0,
-    placeholder: 10,
+    placeholder: 1,
     totalPages: '10',
   },
   {
