@@ -86,6 +86,7 @@ const initialState = {
       description: 'Transfer of 5000.885 USD from wallet Exchange to Deposit on wallet funding',
     }, */
   ],
+  currentSymbol: '',
   dataReceived: false,
   smallestMts: 0,
   offset: 0, // end of current offset
@@ -158,6 +159,12 @@ export function ledgersReducer(state = initialState, action) {
         pageOffset: totalOffset - currentOffset,
       }
     }
+    case types.SET_SYMBOL:
+      return {
+        ...initialState,
+        currentSymbol: action.payload,
+        currencies: state.currencies,
+      }
     case queryTypes.SET_TIME_RANGE:
       return initialState
     default: {
