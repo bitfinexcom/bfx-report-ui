@@ -8,6 +8,7 @@
   "preferences.close": "Close",
   "preferences.language": "Language:",
   "preferences.theme": "Theme:",
+  "preferences.timezone": "Timezone:",
   "theme.light": "Light",
   "theme.dark": "Dark",
   "auth.auth": "Auth",

@@ -44,6 +44,7 @@ export function setTheme(theme) {
   }
 }
 
+<<<<<<< dc357a5bd6b6353b08bdf7ed01df3b061c5d5f72
 
 /**
  * Create an action to store menu mode.
@@ -53,6 +54,16 @@ export function setMenuMode(mode) {
   return {
     type: types.SET_MENU_MODE,
     payload: mode,
+=======
+/**
+ * Create an action to store timezone.
+ * @param {string} timezone
+ */
+export function setTimezone(timezone) {
+  return {
+    type: types.SET_TIMEZONE,
+    payload: timezone,
+>>>>>>> add timezone setting to pref dialog
   }
 }
 
@@ -62,4 +73,5 @@ export default {
   setLang,
   setMenuMode,
   setTheme,
+  setTimezone,
 }

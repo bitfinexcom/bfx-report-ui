@@ -7,6 +7,7 @@ const initialState = {
   locale: 'en',
   menuMode: types.MENU_MODE_NORMAL,
   theme: 'bp3_dark',
+  timezone: '',
 }
 
 export function baseReducer(state = initialState, action) {
@@ -35,6 +36,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         menuMode: action.payload,
+      }
+    case types.SET_TIMEZONE:
+      return {
+        ...state,
+        timezone: action.payload,
       }
     default:
       return state
