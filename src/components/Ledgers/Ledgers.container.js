@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 
 import actions from 'state/ledgers/actions'
+import { getTimezone } from 'state/base/selectors'
 import { getCoins } from 'state/symbols/selectors'
 import {
   getDataReceived,
@@ -11,6 +12,7 @@ import {
   getPageOffset,
   getTargetSymbol,
 } from 'state/ledgers/selectors'
+
 import Ledgers from './Ledgers'
 
 const mapStateToProps = (state = {}) => ({
@@ -22,6 +24,7 @@ const mapStateToProps = (state = {}) => ({
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   targetSymbol: getTargetSymbol(state),
+  timezone: getTimezone(state),
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -9,6 +9,7 @@ const MOVEMENTS_ENTRIES_PROPS = PropTypes.shape({
   status: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
   destinationAddress: PropTypes.string,
+  timezone: PropTypes.string,
 })
 
 export const propTypes = {

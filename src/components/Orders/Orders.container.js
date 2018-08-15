@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 
 import actions from 'state/orders/actions'
+import { getTimezone } from 'state/base/selectors'
 import { getPairs } from 'state/symbols/selectors'
 import {
   getDataReceived,
@@ -23,6 +24,7 @@ const mapStateToProps = (state = {}) => ({
   pageLoading: getPageLoading(state),
   pairs: getPairs(state),
   targetPair: getTargetPair(state),
+  timezone: getTimezone(state),
 })
 
 const mapDispatchToProps = dispatch => ({

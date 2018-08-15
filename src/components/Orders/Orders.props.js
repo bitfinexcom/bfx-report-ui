@@ -8,6 +8,7 @@ const ORDERS_ENTRIES_PROPS = PropTypes.shape({
   type: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   priceAvg: PropTypes.number.isRequired,
+  timezone: PropTypes.string,
 })
 
 export const propTypes = {

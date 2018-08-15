@@ -88,6 +88,7 @@ class Ledgers extends PureComponent {
       jumpPage,
       loading,
       refresh,
+      timezone,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
@@ -113,7 +114,7 @@ class Ledgers extends PureComponent {
     }
 
     const mtsCellRenderer = (rowIndex) => {
-      const mts = formatTime(filteredData[rowIndex].mts)
+      const mts = formatTime(filteredData[rowIndex].mts, timezone)
       return (
         <Cell tooltip={mts}>
           <TruncatedFormat>

@@ -1,4 +1,3 @@
-import _padStart from 'lodash/padStart'
 import moment from 'moment'
 
 import { platform } from 'var/config'
@@ -25,19 +24,21 @@ export function makeFetchCall(method, auth = null, params = null) {
   })
 }
 
-export function formatTime(mts) {
-  const date = new Date(mts)
+export function formatTime(mts, timezone) {
   // 18-07-06 02:08:02
-  return `${date.getFullYear() % 100}-${_padStart(date.getMonth() + 1, 2, 0)}-${_padStart(date.getDate(), 2, 0)}
- ${_padStart(date.getHours(), 2, 0)}:${_padStart(date.getMinutes(), 2, 0)}:${_padStart(date.getSeconds(), 2, 0)}`
+  if (timezone) {
+    return moment(mts, 'x').tz(timezone).format('YY-MM-DD HH:mm:ss')
+  }
+  return moment(mts, 'x').format('YY-MM-DD HH:mm:ss')
 }
 
-const MONTH_SYM = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-
-export function formatDate(mts) {
-  const date = new Date(mts)
+export function formatDate(mts, timezone) {
   // MMM dd yyyy
-  return `${MONTH_SYM[date.getMonth()]} ${_padStart(date.getDate(), 2, 0)} ${date.getFullYear()}`
+  if (timezone) {
+    return moment(mts, 'x').tz(timezone).utcOffset('0').format('MMM DD YYYY')
+      .toUpperCase()
+  }
+  return moment(mts, 'x').format('MMM DD YYYY').toUpperCase()
 }
 
 // tBTCUSD -> btcusd

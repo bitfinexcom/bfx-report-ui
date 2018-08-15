@@ -91,6 +91,7 @@ class Movements extends PureComponent {
       type,
       loading,
       refresh,
+      timezone,
     } = this.props
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
@@ -109,7 +110,7 @@ class Movements extends PureComponent {
     }
 
     const mtsUpdatedCellRenderer = (rowIndex) => {
-      const mtsUpdated = formatTime(filteredData[rowIndex].mtsUpdated)
+      const mtsUpdated = formatTime(filteredData[rowIndex].mtsUpdated, timezone)
       return (
         <Cell tooltip={mtsUpdated}>
           <TruncatedFormat>

@@ -7,6 +7,7 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
   mts: PropTypes.number.isRequired,
   amount: PropTypes.number.isRequired,
   balance: PropTypes.number.isRequired,
+  timezone: PropTypes.string,
 })
 
 export const propTypes = {
