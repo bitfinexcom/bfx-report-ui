@@ -7,7 +7,9 @@ import {
 
 import Pagination from '../Pagination'
 
-const MOCK_DEFAULT_TYPE = 'ledgers'
+const TYPE_LEDGERS = 'ledgers'
+const TYPE_TRADES = 'trades'
+const MOCK_DEFAULT_TYPE = TYPE_LEDGERS
 const TEST_CASES = [
   {
     title: 'render correctly with 1 entry',
@@ -62,24 +64,6 @@ const TEST_CASES = [
     pageOffset: 400,
     placeholder: 3,
     totalPages: '4',
-  },
-  {
-    title: 'render correctly in 10 of 10 pages',
-    type: 'trades',
-    dataLen: 1500,
-    offset: 1500,
-    pageOffset: 0,
-    placeholder: 10,
-    totalPages: '10',
-  },
-  {
-    title: 'render correctly in 11 of 12 pages',
-    type: 'trades',
-    dataLen: 1700,
-    offset: 1700,
-    pageOffset: 0,
-    placeholder: 11,
-    totalPages: '12',
   },
   {
     title: 'render correctly in 24 of 25 pages',
@@ -152,6 +136,60 @@ const TEST_CASES = [
     pageOffset: 0,
     placeholder: 51,
     totalPages: '51',
+  },
+  {
+    title: 'render trades correctly in 1 of 1 pages',
+    type: TYPE_TRADES,
+    dataLen: 1,
+    offset: 1,
+    pageOffset: 0,
+    placeholder: 1,
+    totalPages: '1',
+  },
+  {
+    title: 'render trades correctly in 1 of 2 pages',
+    type: TYPE_TRADES,
+    dataLen: 151,
+    offset: 151,
+    pageOffset: 0,
+    placeholder: 1,
+    totalPages: '2',
+  },
+  {
+    title: 'render trades correctly in 1 of 2 pages',
+    type: TYPE_TRADES,
+    dataLen: 151,
+    offset: 151,
+    pageOffset: 150,
+    placeholder: 2,
+    totalPages: '2',
+  },
+  {
+    title: 'render trades correctly in 10 of 10 pages',
+    type: TYPE_TRADES,
+    dataLen: 1480,
+    offset: 1480,
+    pageOffset: 1350,
+    placeholder: 10,
+    totalPages: '10',
+  },
+  {
+    title: 'render trades correctly in 10 of 10 pages',
+    type: TYPE_TRADES,
+    dataLen: 1500,
+    offset: 1500,
+    pageOffset: 0,
+    placeholder: 10,
+    totalPages: '10',
+  },
+  {
+    title: 'render trades correctly in 11 of 12 pages',
+    type: TYPE_TRADES,
+    dataLen: 1700,
+    offset: 1700,
+    pageOffset: 0,
+    placeholder: 11,
+    totalPages: '12',
   },
 ]
 
