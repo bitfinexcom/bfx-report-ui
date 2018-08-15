@@ -3,15 +3,22 @@ const platforms = {
   bitfinex: {
     id: 'bfx',
     Name: 'Bitfinex',
-    API_URL: 'https://api.bitfinex.com/api',
+    API_URL: 'https://report.bitfinex.com/api',
     KEY_URL: 'https://www.bitfinex.com/api',
     showAuthPage: true,
   },
   ethfinex: {
     id: 'efx',
     Name: 'Ethfinex',
-    API_URL: 'https://api.ethfinex.com/api',
-    KEY_URL: 'https://staging.bitfinex.com:2997/api',
+    API_URL: 'https://report.ethfinex.com/api',
+    KEY_URL: 'https://www.ethfinex.com/api',
+    showAuthPage: true,
+  },
+  test: {
+    id: 'test',
+    Name: 'Bitfinex Test',
+    API_URL: 'https://test-report.bitfinex.com/api',
+    KEY_URL: 'https://test.bitfinex.com/api',
     showAuthPage: true,
   },
   localhost: {
