@@ -60,11 +60,23 @@ export function setCurrentSymbol(symbol) {
   }
 }
 
+/**
+ * Create an action to update all symbols.
+ * @param {string[]}  symbols array of symbols
+ */
+export function updateAllSymbols(symbols) {
+  return {
+    type: types.UPDATE_ALL_SYMBOLS,
+    payload: symbols,
+  }
+}
+
 export default {
   fetchLedgers,
   fetchNextLedgers,
   fetchPrevLedgers,
   jumpPage,
   setCurrentSymbol,
+  updateAllSymbols,
   updateLedgers,
 }

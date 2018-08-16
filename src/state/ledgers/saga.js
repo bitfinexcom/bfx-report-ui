@@ -26,6 +26,13 @@ function getLedgers(auth, query, currentSymbol, smallestMts) {
   })
 }
 
+function getSymbols(auth) {
+  return postJsonfetch(`${platform.API_URL}/get-data`, {
+    auth,
+    method: 'getSymbols',
+  })
+}
+
 function* fetchLedgers() {
   try {
     const ledgers = yield select(state => state.ledgers)
@@ -37,6 +44,19 @@ function* fetchLedgers() {
     yield put(actions.updateLedgers(result))
 
     if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'ledgers.title',
+        detail: JSON.stringify(error),
+      }))
+    }
+
+    const allsymbols = yield call(getSymbols, auth)
+    const { result: sresult, error: serror } = allsymbols
+    if (sresult && sresult.coins) {
+      yield put(actions.updateAllSymbols(sresult.coins))
+    }
+    if (serror) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'ledgers.title',

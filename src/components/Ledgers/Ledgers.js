@@ -69,6 +69,7 @@ class Ledgers extends PureComponent {
 
   render() {
     const {
+      allSymbols,
       offset,
       pageOffset,
       currencies,
@@ -80,9 +81,9 @@ class Ledgers extends PureComponent {
       loading,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const currencyList = [ALL, ...currencies]
+    const currencyList = allSymbols ? [ALL, ...allSymbols] : [ALL, ...currencies]
     // eslint-disable-next-line react/destructuring-assignment
-    const currentCurrency = currentSymbol || currencyList[0]
+    const currentCurrency = currentSymbol || ALL
     const numRows = filteredData.length
 
     const descriptionCellRenderer = rowIndex => (
@@ -145,23 +146,46 @@ class Ledgers extends PureComponent {
       </Cell>
     )
 
-    const currencyButtons = currencyList.map(symbol => (
-      <Button
-        key={symbol}
-        intent={currentCurrency === symbol ? Intent.PRIMARY : Intent.NONE}
-        onClick={this.handleClick(symbol)}
-      >
-        {symbol}
-      </Button>))
+    const currencyButtons = currencyList.length > 1
+      ? currencyList.map((symbol) => {
+        const isCurrent = currentCurrency === symbol
+        const className = (WILD_CARD.includes(symbol) || currencies.includes(symbol)) && !isCurrent
+          ? 'bitfinex-queried-symbol' : ''
+        return (
+          <Button
+            className={className}
+            key={symbol}
+            intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
+            onClick={this.handleClick(symbol)}
+          >
+            {symbol}
+          </Button>)
+      }) : ''
 
     let showContent
     if (loading) {
       showContent = (
-        <Loading title='ledgers.title' />
+        <Fragment>
+          <h4>
+            {intl.formatMessage({ id: 'ledgers.title' })}
+          </h4>
+          <div className='bitfinex-symbol-group'>
+            {currencyButtons}
+          </div>
+          <Loading />
+        </Fragment>
       )
     } else if (numRows === 0) {
       showContent = (
-        <NoData title='ledgers.title' />
+        <Fragment>
+          <h4>
+            {intl.formatMessage({ id: 'ledgers.title' })}
+          </h4>
+          <div className='bitfinex-symbol-group'>
+            {currencyButtons}
+          </div>
+          <NoData />
+        </Fragment>
       )
     } else {
       showContent = (
