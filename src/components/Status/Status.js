@@ -1,12 +1,17 @@
-import React from 'react'
 import { injectIntl } from 'react-intl'
 import {
-  Callout,
-  Icon,
+  Toaster,
   Intent,
+  Position,
 } from '@blueprintjs/core'
 
 import { propTypes, defaultProps } from './Status.props'
+
+/** Singleton toaster instance. */
+export const AppToaster = Toaster.create({
+  className: 'bitfinex-toaster',
+  position: Position.TOP,
+})
 
 export const Status = ({
   clearStatus,
@@ -22,12 +27,13 @@ export const Status = ({
     ...msg,
     topic: msg.topic ? intl.formatMessage({ id: msg.topic }) || msg.topic : undefined,
   }
-  return (
-    <Callout intent={intent || Intent.PRIMARY}>
-      {intl.formatMessage({ id: msg.id }, params)}
-      <Icon icon='cross' className='bitfinex-status-close' onClick={clearStatus} />
-    </Callout>
-  )
+  AppToaster.show({
+    intent: intent || Intent.PRIMARY,
+    message: intl.formatMessage({ id: msg.id }, params),
+    onDismiss: clearStatus,
+    timeout: 10000, // 10s
+  })
+  return ''
 }
 
 Status.propTypes = propTypes
