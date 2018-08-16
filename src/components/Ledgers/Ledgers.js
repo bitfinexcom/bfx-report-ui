@@ -165,15 +165,7 @@ class Ledgers extends PureComponent {
     let showContent
     if (loading) {
       showContent = (
-        <Fragment>
-          <h4>
-            {intl.formatMessage({ id: 'ledgers.title' })}
-          </h4>
-          <div className='bitfinex-symbol-group'>
-            {currencyButtons}
-          </div>
-          <Loading />
-        </Fragment>
+        <Loading title='ledgers.title' />
       )
     } else if (numRows === 0) {
       showContent = (
