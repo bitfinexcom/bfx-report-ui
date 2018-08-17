@@ -20,7 +20,7 @@ import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
 
 import { propTypes, defaultProps } from './Trades.props'
 
-const COLUMN_WIDTHS = [85, 70, 125, 125, 125, 150]
+const COLUMN_WIDTHS = [85, 80, 125, 125, 125, 150]
 const LIMIT = queryConstants.DEFAULT_TRADES_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_TRADES_PAGE_SIZE
 
