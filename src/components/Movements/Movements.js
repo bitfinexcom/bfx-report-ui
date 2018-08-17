@@ -34,6 +34,11 @@ class Movements extends PureComponent {
     this.fetchNext = this.fetchNext.bind(this)
   }
 
+  state = {
+    offset: 0,
+    pageLoading: false,
+  }
+
   componentDidMount() {
     const { loading, fetchMovements } = this.props
     if (loading) {
@@ -45,12 +50,27 @@ class Movements extends PureComponent {
     checkFetch(prevProps, this.props, 'movements')
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.offset !== prevState.offset) {
+      return {
+        offset: nextProps.offset,
+        pageLoading: false,
+      }
+    }
+
+    return {
+      offset: nextProps.offset,
+    }
+  }
+
   fetchPrev() {
+    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevMovements()
   }
 
   fetchNext() {
+    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchNextMovements()
   }
@@ -66,6 +86,9 @@ class Movements extends PureComponent {
       type,
       loading,
     } = this.props
+    const {
+      pageLoading,
+    } = this.state
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
@@ -167,6 +190,7 @@ class Movements extends PureComponent {
           <Pagination
             type='movements'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             prevClick={this.fetchPrev}

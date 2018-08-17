@@ -31,6 +31,11 @@ class Orders extends PureComponent {
     this.fetchNext = this.fetchNext.bind(this)
   }
 
+  state = {
+    offset: 0,
+    pageLoading: false,
+  }
+
   componentDidMount() {
     const { loading, fetchOrders } = this.props
     if (loading) {
@@ -42,12 +47,27 @@ class Orders extends PureComponent {
     checkFetch(prevProps, this.props, 'orders')
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.offset !== prevState.offset) {
+      return {
+        offset: nextProps.offset,
+        pageLoading: false,
+      }
+    }
+
+    return {
+      offset: nextProps.offset,
+    }
+  }
+
   fetchPrev() {
+    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevOrders()
   }
 
   fetchNext() {
+    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchNextOrders()
   }
@@ -62,6 +82,9 @@ class Orders extends PureComponent {
       jumpPage,
       loading,
     } = this.props
+    const {
+      pageLoading,
+    } = this.state
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
 
@@ -195,6 +218,7 @@ class Orders extends PureComponent {
           <Pagination
             type='orders'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             prevClick={this.fetchPrev}

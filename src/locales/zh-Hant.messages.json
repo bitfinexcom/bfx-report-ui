@@ -66,6 +66,7 @@
   "timeframe.custom.view" : "查詢",
   "pagination.page": "頁數",
   "pagination.of": "/",
+  "pagination.loading": "查詢中...",
   "status.success": "於 {time} {topic}成功",
   "status.fail": "{topic} 失敗 {detail}",
   "status.request.error": "{topic} 請求失敗 {detail}",
