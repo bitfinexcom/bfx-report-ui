@@ -16,7 +16,12 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+import {
+  checkFetch,
+  formatTime,
+  getCurrentEntries,
+  getPageLoadingState,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './Orders.props'
 
@@ -48,16 +53,7 @@ class Orders extends PureComponent {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.offset !== prevState.offset) {
-      return {
-        offset: nextProps.offset,
-        pageLoading: false,
-      }
-    }
-
-    return {
-      offset: nextProps.offset,
-    }
+    return getPageLoadingState(nextProps.offset, prevState.offset)
   }
 
   fetchPrev() {
