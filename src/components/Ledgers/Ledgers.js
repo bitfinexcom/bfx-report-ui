@@ -17,7 +17,12 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+import {
+  checkFetch,
+  formatTime,
+  getCurrentEntries,
+  getPageLoadingState,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './Ledgers.props'
 
@@ -36,6 +41,11 @@ class Ledgers extends PureComponent {
     this.fetchNext = this.fetchNext.bind(this)
   }
 
+  state = {
+    offset: 0,
+    pageLoading: false,
+  }
+
   componentDidMount() {
     const { loading, fetchLedgers } = this.props
     if (loading) {
@@ -45,6 +55,10 @@ class Ledgers extends PureComponent {
 
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, 'ledgers')
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return getPageLoadingState(nextProps.offset, prevState.offset)
   }
 
   handleClick(symbol) {
@@ -58,11 +72,13 @@ class Ledgers extends PureComponent {
   }
 
   fetchPrev() {
+    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevLedgers()
   }
 
   fetchNext() {
+    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchNextLedgers()
   }
@@ -80,6 +96,9 @@ class Ledgers extends PureComponent {
       jumpPage,
       loading,
     } = this.props
+    const {
+      pageLoading,
+    } = this.state
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const currencyList = allSymbols ? [ALL, ...allSymbols] : [ALL, ...currencies]
     // eslint-disable-next-line react/destructuring-assignment
@@ -227,6 +246,7 @@ class Ledgers extends PureComponent {
           <Pagination
             type='ledgers'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             nextClick={this.fetchNext}

@@ -16,7 +16,12 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+import {
+  checkFetch,
+  formatTime,
+  getCurrentEntries,
+  getPageLoadingState,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './Trades.props'
 
@@ -31,6 +36,11 @@ class Trades extends PureComponent {
     this.fetchNext = this.fetchNext.bind(this)
   }
 
+  state = {
+    offset: 0,
+    pageLoading: false,
+  }
+
   componentDidMount() {
     const { loading, fetchTrades } = this.props
     if (loading) {
@@ -42,12 +52,18 @@ class Trades extends PureComponent {
     checkFetch(prevProps, this.props, 'trades')
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return getPageLoadingState(nextProps.offset, prevState.offset)
+  }
+
   fetchPrev() {
+    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevTrades()
   }
 
   fetchNext() {
+    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchNextTrades()
   }
@@ -62,6 +78,9 @@ class Trades extends PureComponent {
       jumpPage,
       loading,
     } = this.props
+    const {
+      pageLoading,
+    } = this.state
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
 
@@ -166,6 +185,7 @@ class Trades extends PureComponent {
           <Pagination
             type='trades'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             prevClick={this.fetchPrev}

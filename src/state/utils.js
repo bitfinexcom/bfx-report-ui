@@ -83,12 +83,26 @@ export function momentFormatter(format) {
   }
 }
 
+export function getPageLoadingState(nextOffset, prevOffset) {
+  if (nextOffset !== prevOffset) {
+    return {
+      offset: nextOffset,
+      pageLoading: false,
+    }
+  }
+
+  return {
+    offset: nextOffset,
+  }
+}
+
 export default {
   checkFetch,
   formatDate,
   formatPair,
   formatTime,
   getCurrentEntries,
+  getPageLoadingState,
   isValidateType,
   momentFormatter,
   postJsonfetch,
