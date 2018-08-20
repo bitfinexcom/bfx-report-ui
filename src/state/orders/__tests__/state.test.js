@@ -2,9 +2,7 @@ import actions from '../actions'
 import reducer from '../reducer'
 
 const initBlockState = {
-  currencies: [],
   entries: [],
-  currentSymbol: '',
   dataReceived: false,
   smallestMts: 0,
   offset: 0,
@@ -171,7 +169,7 @@ describe('ledger state', () => {
         offset: 10000,
         pageOffset: 0,
       },
-      actions.fetchPrevLedgers(),
+      actions.fetchPrevOrders(),
     )).toEqual({
       ...initBlockState,
       offset: 5000,
@@ -185,7 +183,7 @@ describe('ledger state', () => {
         offset: 15000,
         pageOffset: 4800,
       },
-      actions.fetchPrevLedgers(),
+      actions.fetchPrevOrders(),
     )).toEqual({
       ...initBlockState,
       offset: 10000,
