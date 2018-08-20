@@ -142,8 +142,10 @@ export function tradesReducer(state = initialState, action) {
       const totalOffset = (page - 1) * PAGE_SIZE
       const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
       if (totalOffset < LIMIT) {
+        const baseOffset = Math.ceil(page / LIMIT * PAGE_SIZE) * LIMIT
         return {
           ...state,
+          offset: state.offset < baseOffset ? state.offset : baseOffset,
           pageOffset: totalOffset - currentOffset,
         }
       }

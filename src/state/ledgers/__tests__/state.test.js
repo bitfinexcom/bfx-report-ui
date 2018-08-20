@@ -192,4 +192,34 @@ describe('ledger state', () => {
       pageOffset: 0,
     })
   })
+
+  it('should handle jump page across the LIMIT correctly', () => {
+    // jump from p26 to p25
+    expect(reducer(
+      {
+        ...initBlockState,
+        offset: 10000,
+        pageOffset: 0,
+      },
+      actions.jumpPage(25),
+    )).toEqual({
+      ...initBlockState,
+      offset: 5000,
+      pageOffset: 4800,
+    })
+  })
+
+  // jump from p51 to p50
+  expect(reducer(
+    {
+      ...initBlockState,
+      offset: 15000,
+      pageOffset: 0,
+    },
+    actions.jumpPage(50),
+  )).toEqual({
+    ...initBlockState,
+    offset: 10000,
+    pageOffset: 4800,
+  })
 })
