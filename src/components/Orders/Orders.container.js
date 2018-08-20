@@ -10,6 +10,7 @@ function mapStateToProps(state = {}) {
     entries: state.orders.entries,
     loading: !state.orders.dataReceived,
     pageOffset: state.orders.pageOffset,
+    pageLoading: state.orders.pageLoading,
   }
 }
 

@@ -16,11 +16,15 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+import {
+  checkFetch,
+  formatTime,
+  getCurrentEntries,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './Orders.props'
 
-const COLUMN_WIDTHS = [100, 70, 150, 100, 100, 100, 100, 150, 200]
+const COLUMN_WIDTHS = [100, 80, 150, 100, 100, 100, 100, 150, 200]
 const LIMIT = queryConstants.DEFAULT_ORDERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_ORDERS_PAGE_SIZE
 
@@ -56,6 +60,7 @@ class Orders extends PureComponent {
     const {
       offset,
       pageOffset,
+      pageLoading,
       entries,
       handleClickExport,
       intl,
@@ -195,6 +200,7 @@ class Orders extends PureComponent {
           <Pagination
             type='orders'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             prevClick={this.fetchPrev}

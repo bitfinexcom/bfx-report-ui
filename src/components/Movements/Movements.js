@@ -16,7 +16,11 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+import {
+  checkFetch,
+  formatTime,
+  getCurrentEntries,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './Movements.props'
 import Inspector from './Inspector'
@@ -59,6 +63,7 @@ class Movements extends PureComponent {
     const {
       offset,
       pageOffset,
+      pageLoading,
       entries,
       handleClickExport,
       intl,
@@ -167,6 +172,7 @@ class Movements extends PureComponent {
           <Pagination
             type='movements'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             prevClick={this.fetchPrev}

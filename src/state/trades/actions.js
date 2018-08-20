@@ -10,6 +10,17 @@ export function fetchTrades() {
 }
 
 /**
+ * Create an action to note fetch fail.
+ * @param {number} payload fail message
+ */
+export function fetchFail(payload) {
+  return {
+    type: types.FETCH_FAIL,
+    payload,
+  }
+}
+
+/**
  * Create an action to fetch next Trades data.
  */
 export function fetchNextTrades() {
@@ -50,6 +61,7 @@ export function updateTrades(payload) {
 }
 
 export default {
+  fetchFail,
   fetchTrades,
   fetchNextTrades,
   fetchPrevTrades,

@@ -10,6 +10,7 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  allSymbols: PropTypes.arrayOf(PropTypes.string),
   currencies: PropTypes.arrayOf(PropTypes.string),
   currentSymbol: PropTypes.string,
   offset: PropTypes.number.isRequired,
@@ -21,10 +22,12 @@ export const propTypes = {
   jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   pageOffset: PropTypes.number.isRequired,
+  pageLoading: PropTypes.bool.isRequired,
   setCurrentSymbol: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
+  allSymbols: [],
   currencies: [],
   offset: 0,
   entries: [],
@@ -35,5 +38,6 @@ export const defaultProps = {
   jumpPage: () => {},
   loading: true,
   pageOffset: 0,
+  pageLoading: false,
   setCurrentSymbol: () => {},
 }

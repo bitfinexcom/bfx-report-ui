@@ -6,12 +6,14 @@ import Ledgers from './Ledgers'
 
 function mapStateToProps(state = {}) {
   return {
+    allSymbols: state.ledgers.allSymbols,
     offset: state.ledgers.offset,
     currencies: state.ledgers.currencies,
     currentSymbol: state.ledgers.currentSymbol,
     entries: state.ledgers.entries,
     loading: !state.ledgers.dataReceived,
     pageOffset: state.ledgers.pageOffset,
+    pageLoading: state.ledgers.pageLoading,
   }
 }
 

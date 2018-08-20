@@ -10,6 +10,17 @@ export function fetchLedgers() {
 }
 
 /**
+ * Create an action to note fetch fail.
+ * @param {number} payload fail message
+ */
+export function fetchFail(payload) {
+  return {
+    type: types.FETCH_FAIL,
+    payload,
+  }
+}
+
+/**
  * Create an action to fetch next Ledgers data.
  */
 export function fetchNextLedgers() {
@@ -60,11 +71,24 @@ export function setCurrentSymbol(symbol) {
   }
 }
 
+/**
+ * Create an action to update all symbols.
+ * @param {string[]}  symbols array of symbols
+ */
+export function updateAllSymbols(symbols) {
+  return {
+    type: types.UPDATE_ALL_SYMBOLS,
+    payload: symbols,
+  }
+}
+
 export default {
+  fetchFail,
   fetchLedgers,
   fetchNextLedgers,
   fetchPrevLedgers,
   jumpPage,
   setCurrentSymbol,
+  updateAllSymbols,
   updateLedgers,
 }

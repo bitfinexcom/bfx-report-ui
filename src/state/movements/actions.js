@@ -10,6 +10,17 @@ export function fetchMovements() {
 }
 
 /**
+ * Create an action to note fetch fail.
+ * @param {number} payload fail message
+ */
+export function fetchFail(payload) {
+  return {
+    type: types.FETCH_FAIL,
+    payload,
+  }
+}
+
+/**
  * Create an action to fetch next Movements data.
  */
 export function fetchNextMovements() {
@@ -50,6 +61,7 @@ export function updateMovements(payload) {
 }
 
 export default {
+  fetchFail,
   fetchMovements,
   fetchNextMovements,
   fetchPrevMovements,

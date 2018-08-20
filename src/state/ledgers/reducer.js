@@ -67,6 +67,7 @@ import types from './constants'
 }
 */
 const initialState = {
+  allSymbols: [],
   currencies: [],
   entries: [
     /* {
@@ -91,6 +92,7 @@ const initialState = {
   smallestMts: 0,
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
+  pageLoading: false,
 }
 
 const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
@@ -128,6 +130,18 @@ export function ledgersReducer(state = initialState, action) {
         smallestMts,
         offset: state.offset + entries.length,
         pageOffset: 0,
+        pageLoading: false,
+      }
+    }
+    case types.FETCH_FAIL:
+      return {
+        ...state,
+        pageLoading: false,
+      }
+    case types.UPDATE_ALL_SYMBOLS: {
+      return {
+        ...state,
+        allSymbols: action.payload.sort().map(sym => sym.toUpperCase()),
       }
     }
     case types.FETCH_NEXT_LEDGERS:
@@ -136,7 +150,10 @@ export function ledgersReducer(state = initialState, action) {
           ...state,
           offset: state.offset + LIMIT,
           pageOffset: 0,
-        } : state
+        } : {
+          ...state,
+          pageLoading: true,
+        }
     case types.FETCH_PREV_LEDGERS:
       return {
         ...state,
@@ -163,10 +180,14 @@ export function ledgersReducer(state = initialState, action) {
       return {
         ...initialState,
         currentSymbol: action.payload,
+        allSymbols: state.allSymbols,
         currencies: state.currencies,
       }
     case queryTypes.SET_TIME_RANGE:
-      return initialState
+      return {
+        ...initialState,
+        allSymbols: state.allSymbols,
+      }
     default: {
       return state
     }

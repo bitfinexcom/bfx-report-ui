@@ -10,6 +10,17 @@ export function fetchOrders() {
 }
 
 /**
+ * Create an action to note fetch fail.
+ * @param {number} payload fail message
+ */
+export function fetchFail(payload) {
+  return {
+    type: types.FETCH_FAIL,
+    payload,
+  }
+}
+
+/**
  * Create an action to fetch next Orders data.
  */
 export function fetchNextOrders() {
@@ -50,6 +61,7 @@ export function updateOrders(payload) {
 }
 
 export default {
+  fetchFail,
   fetchOrders,
   fetchNextOrders,
   fetchPrevOrders,

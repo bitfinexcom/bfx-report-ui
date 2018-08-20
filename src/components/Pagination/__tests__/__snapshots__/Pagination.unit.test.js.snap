@@ -60,6 +60,7 @@ exports[`render correctly in 1 of 1 page 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={1}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={1}
   />
@@ -182,6 +183,7 @@ exports[`render correctly in 1 of 2 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={2}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={1}
   />
@@ -304,6 +306,7 @@ exports[`render correctly in 1 of 25 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={25}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={1}
   />
@@ -429,6 +432,7 @@ exports[`render correctly in 2 of 2 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={2}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={2}
   />
@@ -551,6 +555,7 @@ exports[`render correctly in 3 of 4 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={4}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={3}
   />
@@ -673,6 +678,7 @@ exports[`render correctly in 24 of 25 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={25}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={24}
   />
@@ -795,6 +801,7 @@ exports[`render correctly in 25 of 25 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={25}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={25}
   />
@@ -917,6 +924,7 @@ exports[`render correctly in 26 of 26 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={26}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={26}
   />
@@ -1039,6 +1047,7 @@ exports[`render correctly in 26 of 28 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={28}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={26}
   />
@@ -1161,6 +1170,7 @@ exports[`render correctly in 26 of 50 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={50}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={26}
   />
@@ -1286,6 +1296,7 @@ exports[`render correctly in 27 of 28 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={28}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={27}
   />
@@ -1408,6 +1419,7 @@ exports[`render correctly in 51 of 51 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={51}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={51}
   />
@@ -1530,6 +1542,7 @@ exports[`render correctly with 1 entry 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={1}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={1}
   />
@@ -1652,6 +1665,7 @@ exports[`render correctly with 35 entry 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={1}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={1}
   />
@@ -1774,6 +1788,7 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={1}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={1}
   />
@@ -1896,6 +1911,7 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={2}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={1}
   />
@@ -2018,6 +2034,7 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={2}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={2}
   />
@@ -2140,6 +2157,7 @@ exports[`render trades correctly in 1 of 10 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={10}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={1}
   />
@@ -2265,6 +2283,7 @@ exports[`render trades correctly in 10 of 10 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={10}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={10}
   />
@@ -2387,6 +2406,7 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
   <input
     className="bitfinex-page-input"
     data-pagelen={12}
+    disabled={false}
     onKeyPress={[Function]}
     placeholder={11}
   />

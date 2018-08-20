@@ -16,11 +16,15 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+import {
+  checkFetch,
+  formatTime,
+  getCurrentEntries,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './Trades.props'
 
-const COLUMN_WIDTHS = [85, 70, 125, 125, 125, 150]
+const COLUMN_WIDTHS = [85, 80, 125, 125, 125, 150]
 const LIMIT = queryConstants.DEFAULT_TRADES_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_TRADES_PAGE_SIZE
 
@@ -56,6 +60,7 @@ class Trades extends PureComponent {
     const {
       offset,
       pageOffset,
+      pageLoading,
       entries,
       handleClickExport,
       intl,
@@ -166,6 +171,7 @@ class Trades extends PureComponent {
           <Pagination
             type='trades'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             prevClick={this.fetchPrev}
