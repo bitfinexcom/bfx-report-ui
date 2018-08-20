@@ -11,10 +11,12 @@ export function fetchOrders() {
 
 /**
  * Create an action to note fetch fail.
+ * @param {number} payload fail message
  */
-export function fetchFail() {
+export function fetchFail(payload) {
   return {
     type: types.FETCH_FAIL,
+    payload,
   }
 }
 

@@ -32,14 +32,14 @@ function* fetchOrders() {
     yield put(actions.updateOrders(result))
 
     if (error) {
-      yield put(updateErrorStatus({
+      yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'orders.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
+    yield put(actions.fetchFail({
       id: 'status.request.error',
       topic: 'orders.title',
       detail: JSON.stringify(fail),
@@ -64,14 +64,14 @@ function* fetchNextOrders() {
     yield put(actions.updateOrders(result))
 
     if (error) {
-      yield put(updateErrorStatus({
+      yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'orders.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
+    yield put(actions.fetchFail({
       id: 'status.request.error',
       topic: 'orders.title',
       detail: JSON.stringify(fail),
@@ -79,7 +79,12 @@ function* fetchNextOrders() {
   }
 }
 
+function* fetchOrdersFail(params) {
+  yield put(updateErrorStatus(params))
+}
+
 export default function* ordersSaga() {
   yield takeLatest(types.FETCH_ORDERS, fetchOrders)
   yield takeLatest(types.FETCH_NEXT_ORDERS, fetchNextOrders)
+  yield takeLatest(types.FETCH_FAIL, fetchOrdersFail)
 }

@@ -37,14 +37,14 @@ function* fetchLedgers() {
     yield put(actions.updateLedgers(result))
 
     if (error) {
-      yield put(updateErrorStatus({
+      yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'ledgers.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
+    yield put(actions.fetchFail({
       id: 'status.request.error',
       topic: 'ledgers.title',
       detail: JSON.stringify(fail),
@@ -71,14 +71,14 @@ function* fetchNextLedgers() {
     yield put(actions.updateLedgers(result))
 
     if (error) {
-      yield put(updateErrorStatus({
+      yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'ledgers.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
+    yield put(actions.fetchFail({
       id: 'status.request.error',
       topic: 'ledgers.title',
       detail: JSON.stringify(fail),
@@ -86,8 +86,13 @@ function* fetchNextLedgers() {
   }
 }
 
+function* fetchLedgersFail(params) {
+  yield put(updateErrorStatus(params))
+}
+
 export default function* ledgersSaga() {
   yield takeLatest(types.FETCH_LEDGERS, fetchLedgers)
   yield takeLatest(types.SET_SYMBOL, fetchLedgers)
   yield takeLatest(types.FETCH_NEXT_LEDGERS, fetchNextLedgers)
+  yield takeLatest(types.FETCH_FAIL, fetchLedgersFail)
 }
