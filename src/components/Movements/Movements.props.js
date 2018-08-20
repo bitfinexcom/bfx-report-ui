@@ -21,6 +21,7 @@ export const propTypes = {
   jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   pageOffset: PropTypes.number.isRequired,
+  pageLoading: PropTypes.bool.isRequired,
 }
 
 export const defaultProps = {
@@ -33,4 +34,5 @@ export const defaultProps = {
   jumpPage: () => {},
   loading: true,
   pageOffset: 0,
+  pageLoading: false,
 }

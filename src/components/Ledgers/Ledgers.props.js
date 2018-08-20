@@ -21,6 +21,7 @@ export const propTypes = {
   jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   pageOffset: PropTypes.number.isRequired,
+  pageLoading: PropTypes.bool.isRequired,
   setCurrentSymbol: PropTypes.func.isRequired,
 }
 
@@ -35,5 +36,6 @@ export const defaultProps = {
   jumpPage: () => {},
   loading: true,
   pageOffset: 0,
+  pageLoading: false,
   setCurrentSymbol: () => {},
 }

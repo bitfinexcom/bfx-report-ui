@@ -20,7 +20,6 @@ import {
   checkFetch,
   formatTime,
   getCurrentEntries,
-  getPageLoadingState,
 } from 'state/utils'
 
 import { propTypes, defaultProps } from './Movements.props'
@@ -39,11 +38,6 @@ class Movements extends PureComponent {
     this.fetchNext = this.fetchNext.bind(this)
   }
 
-  state = {
-    offset: 0,
-    pageLoading: false,
-  }
-
   componentDidMount() {
     const { loading, fetchMovements } = this.props
     if (loading) {
@@ -55,18 +49,12 @@ class Movements extends PureComponent {
     checkFetch(prevProps, this.props, 'movements')
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return getPageLoadingState(nextProps.offset, prevState.offset)
-  }
-
   fetchPrev() {
-    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevMovements()
   }
 
   fetchNext() {
-    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchNextMovements()
   }
@@ -75,6 +63,7 @@ class Movements extends PureComponent {
     const {
       offset,
       pageOffset,
+      pageLoading,
       entries,
       handleClickExport,
       intl,
@@ -82,9 +71,6 @@ class Movements extends PureComponent {
       type,
       loading,
     } = this.props
-    const {
-      pageLoading,
-    } = this.state
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))

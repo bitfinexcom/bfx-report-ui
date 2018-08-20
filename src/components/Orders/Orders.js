@@ -20,7 +20,6 @@ import {
   checkFetch,
   formatTime,
   getCurrentEntries,
-  getPageLoadingState,
 } from 'state/utils'
 
 import { propTypes, defaultProps } from './Orders.props'
@@ -36,11 +35,6 @@ class Orders extends PureComponent {
     this.fetchNext = this.fetchNext.bind(this)
   }
 
-  state = {
-    offset: 0,
-    pageLoading: false,
-  }
-
   componentDidMount() {
     const { loading, fetchOrders } = this.props
     if (loading) {
@@ -52,18 +46,12 @@ class Orders extends PureComponent {
     checkFetch(prevProps, this.props, 'orders')
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return getPageLoadingState(nextProps.offset, prevState.offset)
-  }
-
   fetchPrev() {
-    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevOrders()
   }
 
   fetchNext() {
-    this.setState({ pageLoading: true })
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchNextOrders()
   }
@@ -72,15 +60,13 @@ class Orders extends PureComponent {
     const {
       offset,
       pageOffset,
+      pageLoading,
       entries,
       handleClickExport,
       intl,
       jumpPage,
       loading,
     } = this.props
-    const {
-      pageLoading,
-    } = this.state
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
 
