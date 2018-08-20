@@ -30,6 +30,7 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         authStatus: false,
+        authToken: '',
         isShown: true,
       }
     default:
