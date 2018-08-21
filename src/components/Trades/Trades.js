@@ -65,47 +65,75 @@ class Trades extends PureComponent {
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
 
-    const idCellRenderer = rowIndex => (
-      <Cell wrapText={false}>
-        {filteredData[rowIndex].id}
-      </Cell>
-    )
+    const idCellRenderer = (rowIndex) => {
+      const { id } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={id}>
+          {id}
+        </Cell>
+      )
+    }
 
-    const pairCellRenderer = rowIndex => (
-      <Cell>
-        {filteredData[rowIndex].pair}
-      </Cell>
-    )
+    const pairCellRenderer = (rowIndex) => {
+      const { pair } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={pair}>
+          {pair}
+        </Cell>
+      )
+    }
 
-    const amountCellRenderer = rowIndex => (
-      <Cell className='bitfinex-text-align-right'>
-        {filteredData[rowIndex].execAmount}
-      </Cell>
-    )
+    const amountCellRenderer = (rowIndex) => {
+      const { execAmount } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={execAmount}
+        >
+          {execAmount}
+        </Cell>
+      )
+    }
 
-    const priceCellRenderer = rowIndex => (
-      <Cell className='bitfinex-text-align-right'>
-        {filteredData[rowIndex].execPrice}
-      </Cell>
-    )
+    const priceCellRenderer = (rowIndex) => {
+      const { execPrice } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={execPrice}
+        >
+          {execPrice}
+        </Cell>
+      )
+    }
 
-    const feeCellRenderer = rowIndex => (
-      <Cell className='bitfinex-text-align-right'>
-        {filteredData[rowIndex].fee}
-        &nbsp;
-        <span className='bitfinex-show-soft'>
-          {filteredData[rowIndex].feeCurrency}
-        </span>
-      </Cell>
-    )
+    const feeCellRenderer = (rowIndex) => {
+      const { fee, feeCurrency } = filteredData[rowIndex]
+      const tooltip = `${fee} ${feeCurrency}`
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={tooltip}
+        >
+          {fee}
+          &nbsp;
+          <span className='bitfinex-show-soft'>
+            {feeCurrency}
+          </span>
+        </Cell>
+      )
+    }
 
-    const mtsCellRenderer = rowIndex => (
-      <Cell>
-        <TruncatedFormat>
-          {formatTime(filteredData[rowIndex].mtsCreate)}
-        </TruncatedFormat>
-      </Cell>
-    )
+    const mtsCellRenderer = (rowIndex) => {
+      const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate)
+      return (
+        <Cell tooltip={mtsCreate}>
+          <TruncatedFormat>
+            {mtsCreate}
+          </TruncatedFormat>
+        </Cell>
+      )
+    }
 
     let showContent
     if (loading) {

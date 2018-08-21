@@ -65,61 +65,100 @@ class Orders extends PureComponent {
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
 
-    const idCellRenderer = rowIndex => (
-      <Cell wrapText={false}>
-        {filteredData[rowIndex].id}
-      </Cell>
-    )
+    const idCellRenderer = (rowIndex) => {
+      const { id } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={id}>
+          {id}
+        </Cell>
+      )
+    }
 
-    const pairCellRenderer = rowIndex => (
-      <Cell>
-        {filteredData[rowIndex].pair}
-      </Cell>
-    )
+    const pairCellRenderer = (rowIndex) => {
+      const { pair } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={pair}>
+          {pair}
+        </Cell>
+      )
+    }
 
-    const typeCellRenderer = rowIndex => (
-      <Cell>
-        {filteredData[rowIndex].type}
-      </Cell>
-    )
+    const typeCellRenderer = (rowIndex) => {
+      const { type } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={type}>
+          {type}
+        </Cell>
+      )
+    }
 
-    const amountOrigCellRenderer = rowIndex => (
-      <Cell className='bitfinex-text-align-right'>
-        {filteredData[rowIndex].amountOrig}
-      </Cell>
-    )
+    const amountOrigCellRenderer = (rowIndex) => {
+      const { amountOrig } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={amountOrig}
+        >
+          {amountOrig}
+        </Cell>
+      )
+    }
 
-    const amountCellRenderer = rowIndex => (
-      <Cell className='bitfinex-text-align-right'>
-        {filteredData[rowIndex].amount}
-      </Cell>
-    )
+    const amountCellRenderer = (rowIndex) => {
+      const { amount } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={amount}
+        >
+          {amount}
+        </Cell>
+      )
+    }
 
-    const priceCellRenderer = rowIndex => (
-      <Cell className='bitfinex-text-align-right'>
-        {filteredData[rowIndex].price}
-      </Cell>
-    )
+    const priceCellRenderer = (rowIndex) => {
+      const { price } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={price}
+        >
+          {price}
+        </Cell>
+      )
+    }
 
-    const priceAvgCellRenderer = rowIndex => (
-      <Cell className='bitfinex-text-align-right'>
-        {filteredData[rowIndex].priceAvg}
-      </Cell>
-    )
+    const priceAvgCellRenderer = (rowIndex) => {
+      const { priceAvg } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={priceAvg}
+        >
+          {priceAvg}
+        </Cell>
+      )
+    }
 
-    const mtsUpdateCellRenderer = rowIndex => (
-      <Cell>
-        <TruncatedFormat>
-          {formatTime(filteredData[rowIndex].mtsUpdate)}
-        </TruncatedFormat>
-      </Cell>
-    )
+    const mtsUpdateCellRenderer = (rowIndex) => {
+      const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate)
+      return (
+        <Cell tooltip={mtsUpdate}>
+          <TruncatedFormat>
+            {mtsUpdate}
+          </TruncatedFormat>
+        </Cell>
+      )
+    }
 
-    const statusCellRenderer = rowIndex => (
-      <Cell>
-        {filteredData[rowIndex].status}
-      </Cell>
-    )
+    const statusCellRenderer = (rowIndex) => {
+      const { status } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={status}>
+          {status}
+        </Cell>
+      )
+    }
 
     let showContent
     if (loading) {
