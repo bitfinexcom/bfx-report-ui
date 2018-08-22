@@ -21,6 +21,7 @@ Orders shows orders related data by date. Contain sections `Export button`, `Tab
     1. `AVERAGE PRICE`(translate), the number is left aligned.
     1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
     1. `STATUS`(translate)
+1. Should show tooltip when mouse hover any contents in table cell
 1. The pagination bar is shown at the bottom of the table.
     1. The query limit is 5000 entries at once.
     1. The table shows 200 entries per page.
