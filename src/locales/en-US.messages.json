@@ -70,5 +70,6 @@
   "status.success": "{topic} Success at {time}",
   "status.fail": "{topic} fail {detail}",
   "status.request.error": "{topic} request fail {detail}",
-  "status.noid": "dev: the status action should contain the id param"
+  "status.noid": "dev: the status action should contain the id param",
+  "symbols.title": "Get symbols"
 }

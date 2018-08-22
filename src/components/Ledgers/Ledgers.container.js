@@ -6,7 +6,7 @@ import Ledgers from './Ledgers'
 
 function mapStateToProps(state = {}) {
   return {
-    allSymbols: state.ledgers.allSymbols,
+    coins: state.symbols.coins,
     offset: state.ledgers.offset,
     currencies: state.ledgers.currencies,
     currentSymbol: state.ledgers.currentSymbol,

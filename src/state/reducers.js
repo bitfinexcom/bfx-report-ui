@@ -10,6 +10,7 @@ import ordersReducer from './orders/reducer'
 import queryReducer from './query/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
+import symbolsReducer from './symbols/reducer'
 
 const PERSIST_WHITELIST = ['base']
 const PERSIST_DEBUG = false
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   query: queryReducer,
   trades: tradesReducer,
   status: statusReducer,
+  symbols: symbolsReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

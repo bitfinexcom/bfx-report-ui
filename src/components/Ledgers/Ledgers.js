@@ -5,6 +5,7 @@ import {
   Card,
   Elevation,
   Intent,
+  MenuItem,
 } from '@blueprintjs/core'
 import {
   Cell,
@@ -12,6 +13,7 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
+import { Select } from '@blueprintjs/select'
 
 import Loading from 'components/Loading'
 import NoData from 'components/NoData'
@@ -73,7 +75,7 @@ class Ledgers extends PureComponent {
 
   render() {
     const {
-      allSymbols,
+      coins,
       offset,
       pageOffset,
       pageLoading,
@@ -86,7 +88,7 @@ class Ledgers extends PureComponent {
       loading,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const currencyList = allSymbols ? [ALL, ...allSymbols] : [ALL, ...currencies]
+    const currencyList = coins ? [ALL, ...coins] : [ALL, ...currencies]
     // eslint-disable-next-line react/destructuring-assignment
     const currentCurrency = currentSymbol || ALL
     const numRows = filteredData.length
@@ -174,21 +176,47 @@ class Ledgers extends PureComponent {
       )
     }
 
-    const currencyButtons = currencyList.length > 1
-      ? currencyList.map((symbol) => {
-        const isCurrent = currentCurrency === symbol
-        const className = (WILD_CARD.includes(symbol) || currencies.includes(symbol)) && !isCurrent
-          ? 'bitfinex-queried-symbol' : ''
-        return (
+    const renderSymbol = (symbol, { modifiers }) => {
+      if (!modifiers.matchesPredicate) {
+        return null
+      }
+      const isCurrent = currentCurrency === symbol
+      const className = (WILD_CARD.includes(symbol) || currencies.includes(symbol)) && !isCurrent
+        ? 'bitfinex-queried-symbol' : ''
+
+      return (
+        <MenuItem
+          className={className}
+          active={modifiers.active}
+          intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
+          disabled={modifiers.disabled}
+          key={symbol}
+          onClick={this.handleClick(symbol)}
+          text={symbol}
+        />
+      )
+    }
+
+    const filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
+
+    const renderSymbolSelector = () => (
+      <Fragment>
+          &nbsp;
+        <Select
+          disabled={coins.length === 0}
+          items={currencyList}
+          itemRenderer={renderSymbol}
+          itemPredicate={filterSymbol}
+          onItemSelect={this.handleClick}
+        >
           <Button
-            className={className}
-            key={symbol}
-            intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-            onClick={this.handleClick(symbol)}
-          >
-            {symbol}
-          </Button>)
-      }) : ''
+            text={currentCurrency}
+            rightIcon='caret-down'
+            disabled={coins.length === 0}
+          />
+        </Select>
+      </Fragment>
+    )
 
     let showContent
     if (loading) {
@@ -200,10 +228,8 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {intl.formatMessage({ id: 'ledgers.title' })}
+            {renderSymbolSelector()}
           </h4>
-          <div className='bitfinex-symbol-group'>
-            {currencyButtons}
-          </div>
           <NoData />
         </Fragment>
       )
@@ -212,14 +238,12 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {intl.formatMessage({ id: 'ledgers.title' })}
+            {renderSymbolSelector()}
             &nbsp;
             <Button icon='cloud-download' onClick={handleClickExport}>
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>
-          <div className='bitfinex-symbol-group'>
-            {currencyButtons}
-          </div>
           <Table
             className='bitfinex-table'
             numRows={numRows}
