@@ -2,28 +2,28 @@
 const platforms = {
   bitfinex: {
     id: 'bfx',
-    Name: 'Bitfinex',
+    name: 'Bitfinex',
     API_URL: 'https://report.bitfinex.com/api',
     KEY_URL: 'https://www.bitfinex.com/api',
     showAuthPage: true,
   },
   ethfinex: {
     id: 'efx',
-    Name: 'Ethfinex',
+    name: 'Ethfinex',
     API_URL: 'https://report.ethfinex.com/api',
     KEY_URL: 'https://www.ethfinex.com/api',
     showAuthPage: true,
   },
   test: {
     id: 'test',
-    Name: 'Bitfinex Test',
+    name: 'Bitfinex Test',
     API_URL: 'https://test-report.bitfinex.com/api',
     KEY_URL: 'https://test.bitfinex.com/api',
     showAuthPage: true,
   },
   localhost: {
     id: 'local',
-    Name: 'Bfx',
+    name: 'Local',
     API_URL: 'http://localhost:31339/api',
     KEY_URL: 'https://www.bitfinex.com/api',
     showAuthPage: true,

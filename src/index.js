@@ -10,8 +10,10 @@ import '@blueprintjs/icons/lib/css/blueprint-icons.css'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import '@blueprintjs/table/lib/css/table.css'
 import '@blueprintjs/datetime/lib/css/blueprint-datetime.css'
+
 import { persistor, store } from 'state/store'
 import { checkAuthWithToken } from 'state/auth/actions'
+import { platform } from 'var/config'
 import 'styles/index.css'
 
 import App from './App'
@@ -39,6 +41,9 @@ window.addEventListener('load', function handler() {
     window.history.pushState(null, null, window.location.href.replace(window.location.search, ''))
     store.dispatch(checkAuthWithToken(token))
   }
+
+  // eslint-disable-next-line no-console
+  console.log(`platform: ${platform.name}`)
 })
 
 FocusStyleManager.onlyShowFocusOnTabs()
