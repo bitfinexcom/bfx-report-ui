@@ -1,7 +1,7 @@
 import React, { createRef, Fragment, PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
-import { Button } from '@blueprintjs/core'
+import { Button, Spinner } from '@blueprintjs/core'
 
 import { isValidateType } from 'state/utils'
 import queryConstants from 'state/query/constants'
@@ -50,6 +50,7 @@ class Pagination extends PureComponent {
       type,
       dataLen,
       intl,
+      loading,
       offset,
       nextClick,
       prevClick,
@@ -84,19 +85,29 @@ class Pagination extends PureComponent {
       </Fragment>
     ) : ''
 
+    const renderLoading = loading ? (
+      <Fragment>
+        <Spinner size={5} />
+        &nbsp;
+        <span className='bitfinex-show-soft'>
+          {intl.formatMessage({ id: 'pagination.loading' })}
+        </span>
+      </Fragment>
+    ) : undefined
+
     return (
       <div className='bitfinex-pagination-group'>
         <Button
           minimal
           icon='double-chevron-left'
           onClick={prevClick}
-          disabled={prevCondition}
+          disabled={prevCondition || loading}
         />
         <Button
           minimal
           icon='chevron-left'
           onClick={this.backward}
-          disabled={currentPage - 1 === 0}
+          disabled={currentPage - 1 === 0 || loading}
         />
         {intl.formatMessage({ id: 'pagination.page' })}
         <input
@@ -105,6 +116,7 @@ class Pagination extends PureComponent {
           placeholder={currentPage}
           onKeyPress={this.handleKeyPress}
           data-pagelen={pageLen}
+          disabled={loading}
         />
         {intl.formatMessage({ id: 'pagination.of' })}
         &nbsp;
@@ -114,14 +126,15 @@ class Pagination extends PureComponent {
           minimal
           icon='chevron-right'
           onClick={this.forward}
-          disabled={currentPage === pageLen}
+          disabled={currentPage === pageLen || loading}
         />
         <Button
           minimal
           rightIcon='double-chevron-right'
           onClick={nextClick}
-          disabled={nextCondition}
+          disabled={nextCondition || loading}
         />
+        {renderLoading}
       </div>
     )
   }
@@ -129,6 +142,7 @@ class Pagination extends PureComponent {
 
 Pagination.propTypes = {
   dataLen: PropTypes.number.isRequired,
+  loading: PropTypes.bool,
   intl: intlShape.isRequired,
   jumpPage: PropTypes.func,
   offset: PropTypes.number.isRequired,
@@ -142,6 +156,7 @@ Pagination.defaultProps = {
   jumpPage: () => {},
   nextClick: () => {},
   prevClick: () => {},
+  loading: false,
 }
 
 export default injectIntl(Pagination)

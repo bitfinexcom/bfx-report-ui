@@ -12,6 +12,7 @@ function mapStateToProps(state = {}) {
     entries: state.ledgers.entries,
     loading: !state.ledgers.dataReceived,
     pageOffset: state.ledgers.pageOffset,
+    pageLoading: state.ledgers.pageLoading,
   }
 }
 

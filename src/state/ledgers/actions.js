@@ -10,6 +10,17 @@ export function fetchLedgers() {
 }
 
 /**
+ * Create an action to note fetch fail.
+ * @param {number} payload fail message
+ */
+export function fetchFail(payload) {
+  return {
+    type: types.FETCH_FAIL,
+    payload,
+  }
+}
+
+/**
  * Create an action to fetch next Ledgers data.
  */
 export function fetchNextLedgers() {
@@ -61,6 +72,7 @@ export function setCurrentSymbol(symbol) {
 }
 
 export default {
+  fetchFail,
   fetchLedgers,
   fetchNextLedgers,
   fetchPrevLedgers,

@@ -22,3 +22,4 @@ Movemnets shows deposits and withdrawals data by date. Contain sections `Export 
 1. The pagination bar is shown at the bottom of the table.
     1. The query limit is 25 entries at once
     1. The table shows 25 entries per page.
+    1. should work similar to ledgers

@@ -17,7 +17,11 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+import {
+  checkFetch,
+  formatTime,
+  getCurrentEntries,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './Ledgers.props'
 
@@ -71,6 +75,7 @@ class Ledgers extends PureComponent {
     const {
       offset,
       pageOffset,
+      pageLoading,
       currencies,
       currentSymbol,
       entries,
@@ -234,6 +239,7 @@ class Ledgers extends PureComponent {
           <Pagination
             type='ledgers'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             nextClick={this.fetchNext}

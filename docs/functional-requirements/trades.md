@@ -22,3 +22,4 @@ Trades shows trades related data by date. Contain sections `Export button`, `Tab
 1. The pagination bar is shown at the bottom of the table.
     1. The query limit is 1500 entries at once.
     1. The table shows 200 entries per page.
+    1. should work similar to ledgers

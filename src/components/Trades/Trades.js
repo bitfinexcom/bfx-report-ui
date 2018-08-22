@@ -16,7 +16,11 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+import {
+  checkFetch,
+  formatTime,
+  getCurrentEntries,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './Trades.props'
 
@@ -56,6 +60,7 @@ class Trades extends PureComponent {
     const {
       offset,
       pageOffset,
+      pageLoading,
       entries,
       handleClickExport,
       intl,
@@ -194,6 +199,7 @@ class Trades extends PureComponent {
           <Pagination
             type='trades'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             prevClick={this.fetchPrev}

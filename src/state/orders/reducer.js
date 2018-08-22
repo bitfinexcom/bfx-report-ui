@@ -103,6 +103,7 @@ const initialState = {
   smallestMts: 0,
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
+  pageLoading: false,
 }
 
 const LIMIT = queryTypes.DEFAULT_ORDERS_QUERY_LIMIT
@@ -146,15 +147,24 @@ export function ordersReducer(state = initialState, action) {
         smallestMts,
         offset: state.offset + entries.length,
         pageOffset: 0,
+        pageLoading: false,
       }
     }
+    case types.FETCH_FAIL:
+      return {
+        ...state,
+        pageLoading: false,
+      }
     case types.FETCH_NEXT_ORDERS:
       return (state.entries.length - LIMIT > state.offset)
         ? {
           ...state,
           offset: state.offset + LIMIT,
           pageOffset: 0,
-        } : state
+        } : {
+          ...state,
+          pageLoading: true,
+        }
     case types.FETCH_PREV_ORDERS:
       return {
         ...state,
@@ -166,8 +176,10 @@ export function ordersReducer(state = initialState, action) {
       const totalOffset = (page - 1) * PAGE_SIZE
       const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
       if (totalOffset < LIMIT) {
+        const baseOffset = Math.ceil(page / LIMIT * PAGE_SIZE) * LIMIT
         return {
           ...state,
+          offset: state.offset < baseOffset ? state.offset : baseOffset,
           pageOffset: totalOffset - currentOffset,
         }
       }

@@ -32,14 +32,14 @@ function* fetchMovements() {
     yield put(actions.updateMovements(result))
 
     if (error) {
-      yield put(updateErrorStatus({
+      yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'movements.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
+    yield put(actions.fetchFail({
       id: 'status.request.error',
       topic: 'movements.title',
       detail: JSON.stringify(fail),
@@ -64,14 +64,14 @@ function* fetchNextMovements() {
     yield put(actions.updateMovements(result))
 
     if (error) {
-      yield put(updateErrorStatus({
+      yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'movements.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
+    yield put(actions.fetchFail({
       id: 'status.request.error',
       topic: 'movements.title',
       detail: JSON.stringify(fail),
@@ -79,7 +79,12 @@ function* fetchNextMovements() {
   }
 }
 
+function* fetchMovementsFail(params) {
+  yield put(updateErrorStatus(params))
+}
+
 export default function* movementsSaga() {
   yield takeLatest(types.FETCH_MOVEMENTS, fetchMovements)
   yield takeLatest(types.FETCH_NEXT_MOVEMENTS, fetchNextMovements)
+  yield takeLatest(types.FETCH_FAIL, fetchMovementsFail)
 }

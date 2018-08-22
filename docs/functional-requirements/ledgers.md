@@ -27,3 +27,7 @@ Ledgers shows ledgers balances and descriptions by date. Contain sections `Expor
     1. Contain `<<` (previous query), `<`(backward a page), `>`(forward a page), `>>`(next query) buttons
     1. Contain a page indicator field which shows current page.
     1. The page indicator field allows user input a page number, press enter key will jump to that  page.
+    1. when user press >> in pagination, show `loading...`(translate) with animation icon.
+        1. all pagination function are disabled while loading
+        1. hide the text when new data retrieved
+        1. hide the text when data fetch failed

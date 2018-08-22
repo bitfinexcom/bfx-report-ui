@@ -16,7 +16,11 @@ import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import queryConstants from 'state/query/constants'
-import { checkFetch, formatTime, getCurrentEntries } from 'state/utils'
+import {
+  checkFetch,
+  formatTime,
+  getCurrentEntries,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './Orders.props'
 
@@ -56,6 +60,7 @@ class Orders extends PureComponent {
     const {
       offset,
       pageOffset,
+      pageLoading,
       entries,
       handleClickExport,
       intl,
@@ -234,6 +239,7 @@ class Orders extends PureComponent {
           <Pagination
             type='orders'
             dataLen={entries.length}
+            loading={pageLoading}
             offset={offset}
             jumpPage={jumpPage}
             prevClick={this.fetchPrev}

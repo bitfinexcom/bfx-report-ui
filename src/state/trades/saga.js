@@ -32,14 +32,14 @@ function* fetchTrades() {
     yield put(actions.updateTrades(result))
 
     if (error) {
-      yield put(updateErrorStatus({
+      yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'trades.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
+    yield put(actions.fetchFail({
       id: 'status.request.error',
       topic: 'trades.title',
       detail: JSON.stringify(fail),
@@ -64,14 +64,14 @@ function* fetchNextTrades() {
     yield put(actions.updateTrades(result))
 
     if (error) {
-      yield put(updateErrorStatus({
+      yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'trades.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
+    yield put(actions.fetchFail({
       id: 'status.request.error',
       topic: 'trades.title',
       detail: JSON.stringify(fail),
@@ -79,7 +79,12 @@ function* fetchNextTrades() {
   }
 }
 
+function* fetchTradesFail(params) {
+  yield put(updateErrorStatus(params))
+}
+
 export default function* tradesSaga() {
   yield takeLatest(types.FETCH_TRADES, fetchTrades)
   yield takeLatest(types.FETCH_NEXT_TRADES, fetchNextTrades)
+  yield takeLatest(types.FETCH_FAIL, fetchTradesFail)
 }
