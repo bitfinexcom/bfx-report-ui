@@ -21,8 +21,11 @@ const {
   MENU_WITHDRAWALS,
 } = types
 
-function getCSV(auth, query, target) {
+function getCSV(auth, query, target, symbol) {
   const params = _omit(getTimeFrame(query, target), 'limit')
+  if (symbol) {
+    params.symbol = symbol
+  }
   let method = ''
   switch (target) {
     case MENU_ORDERS:
@@ -52,7 +55,9 @@ function* exportCSV({ payload: target }) {
   try {
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getCSV, auth, query, target)
+    const symbol = target === MENU_LEDGERS
+      ? yield select(state => state.ledgers.currentSymbol) : ''
+    const data = yield call(getCSV, auth, query, target, symbol)
     const { result = [], error } = data
     if (result) {
       if (platform.id === 'local') {
