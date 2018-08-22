@@ -10,11 +10,11 @@ Ledgers shows ledgers balances and descriptions by date. Contain sections `Expor
 1. The panel has a `Export`(translate) button with `cloud-download` icon besides the panel title.
 1. The panel shows loading animation when load new data.
 1. The panel shows `No related data in this time range. You can try another time range.`(translate) when no data is fetched.
-    1. The panel shows a list of symbol filter buttons if available.
-1. The panel shows a list of symbol filter buttons and table when data is ready.
-    1. The first button is `All`, click it will shows all fetched data.
-        1. The related symbol will be shown in `BALANCE`(translate) field.
-    1. Symbol buttons are sorted alphabetically, click it will filter the fetched data to this symbol.
+1. The panel shows a symbol selector.
+    1. The default symbol is `ALL` (which means to show data for all symbols).
+    1. The symbol selector is enabled when symbol data is ready.
+        1. The related symbol unit will be shown in `CREDIT`(translate) and `DEBIT`(translate) field.
+    1. Symbols are sorted alphabetically, select it will fetch data for this symbol.
     1. Symbols appeared in current queried data is shown with a different color.
 1. The tables shows several columns:
     1. `DESCRIPTION`(translate)
