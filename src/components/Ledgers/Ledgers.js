@@ -85,34 +85,45 @@ class Ledgers extends PureComponent {
     const currentCurrency = currentSymbol || currencyList[0]
     const numRows = filteredData.length
 
-    const descriptionCellRenderer = rowIndex => (
-      <Cell>
-        {filteredData[rowIndex].description}
-      </Cell>
-    )
+    const descriptionCellRenderer = (rowIndex) => {
+      const { description } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={description}>
+          {description}
+        </Cell>
+      )
+    }
 
-    const mtsCellRenderer = rowIndex => (
-      <Cell>
-        <TruncatedFormat>
-          {formatTime(filteredData[rowIndex].mts)}
-        </TruncatedFormat>
-      </Cell>
-    )
+    const mtsCellRenderer = (rowIndex) => {
+      const mts = formatTime(filteredData[rowIndex].mts)
+      return (
+        <Cell tooltip={mts}>
+          <TruncatedFormat>
+            {mts}
+          </TruncatedFormat>
+        </Cell>
+      )
+    }
 
     const creditCellRenderer = (rowIndex) => {
-      const show = parseFloat(filteredData[rowIndex].amount) > 0
-      const showAmount = show ? filteredData[rowIndex].amount : ''
+      const { amount, currency } = filteredData[rowIndex]
+      const show = parseFloat(amount) > 0
+      const showAmount = show ? amount : ''
       // eslint-disable-next-line react/destructuring-assignment
       const showCurrency = show && WILD_CARD.includes(currentSymbol) ? (
         <Fragment>
           &nbsp;
           <span className='bitfinex-show-soft'>
-            {filteredData[rowIndex].currency}
+            {currency}
           </span>
         </Fragment>
       ) : ''
+      const tooltip = show ? `${amount} ${currency}` : undefined
       return (
-        <Cell className='bitfinex-green-text bitfinex-text-align-right'>
+        <Cell
+          className='bitfinex-green-text bitfinex-text-align-right'
+          tooltip={tooltip}
+        >
           {showAmount}
           {showCurrency}
         </Cell>
@@ -120,30 +131,42 @@ class Ledgers extends PureComponent {
     }
 
     const debitCellRenderer = (rowIndex) => {
-      const show = parseFloat(filteredData[rowIndex].amount) < 0
-      const showAmount = show ? Math.abs(filteredData[rowIndex].amount) : ''
+      const { amount, currency } = filteredData[rowIndex]
+      const show = parseFloat(amount) < 0
+      const showAmount = show ? Math.abs(amount) : ''
       // eslint-disable-next-line react/destructuring-assignment
       const showCurrency = show && WILD_CARD.includes(currentSymbol) ? (
         <Fragment>
           &nbsp;
           <span className='bitfinex-show-soft'>
-            {filteredData[rowIndex].currency}
+            {currency}
           </span>
         </Fragment>
       ) : ''
+      const tooltip = show ? `${Math.abs(amount)} ${currency}` : undefined
       return (
-        <Cell className='bitfinex-red-text bitfinex-text-align-right'>
+        <Cell
+          className='bitfinex-red-text bitfinex-text-align-right'
+          tooltip={tooltip}
+        >
           {showAmount}
           {showCurrency}
         </Cell>
       )
     }
 
-    const balanceCellRenderer = rowIndex => (
-      <Cell className='bitfinex-text-align-right'>
-        {filteredData[rowIndex].balance}
-      </Cell>
-    )
+    const balanceCellRenderer = (rowIndex) => {
+      const { balance, currency } = filteredData[rowIndex]
+      const tooltip = `${balance} ${currency}`
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={tooltip}
+        >
+          {balance}
+        </Cell>
+      )
+    }
 
     const currencyButtons = currencyList.map(symbol => (
       <Button

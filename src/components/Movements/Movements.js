@@ -71,43 +71,59 @@ class Movements extends PureComponent {
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
     const numRows = filteredData.length
 
-    const idCellRenderer = rowIndex => (
-      <Cell>
-        {filteredData[rowIndex].id}
-      </Cell>
-    )
+    const idCellRenderer = (rowIndex) => {
+      const { id } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={id}>
+          {id}
+        </Cell>
+      )
+    }
 
-    const mtsUpdatedCellRenderer = rowIndex => (
-      <Cell>
-        <TruncatedFormat>
-          {formatTime(filteredData[rowIndex].mtsUpdated)}
-        </TruncatedFormat>
-      </Cell>
-    )
+    const mtsUpdatedCellRenderer = (rowIndex) => {
+      const mtsUpdated = formatTime(filteredData[rowIndex].mtsUpdated)
+      return (
+        <Cell tooltip={mtsUpdated}>
+          <TruncatedFormat>
+            {mtsUpdated}
+          </TruncatedFormat>
+        </Cell>
+      )
+    }
 
-    const amountCellRenderer = rowIndex => (
-      <Cell className='bitfinex-text-align-right'>
-        {filteredData[rowIndex].amount}
-        &nbsp;
-        <span className='bitfinex-show-soft'>
-          {filteredData[rowIndex].currency}
-        </span>
-      </Cell>
-    )
+    const amountCellRenderer = (rowIndex) => {
+      const { amount, currency } = filteredData[rowIndex]
+      const tooltip = `${amount} ${currency}`
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={tooltip}
+        >
+          {amount}
+          &nbsp;
+          <span className='bitfinex-show-soft'>
+            {currency}
+          </span>
+        </Cell>
+      )
+    }
 
-    const statusCellRenderer = rowIndex => (
-      <Cell>
-        {filteredData[rowIndex].status}
-      </Cell>
-    )
+    const statusCellRenderer = (rowIndex) => {
+      const { status } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={status}>
+          {status}
+        </Cell>
+      )
+    }
 
     const destinationCellRenderer = (rowIndex) => {
-      const entry = filteredData[rowIndex]
+      const { currency, destinationAddress } = filteredData[rowIndex]
       return (
-        <Cell>
-          {entry.destinationAddress}
+        <Cell tooltip={destinationAddress}>
+          {destinationAddress}
           &nbsp;
-          <Inspector currency={entry.currency} destinationAddress={entry.destinationAddress} />
+          <Inspector currency={currency} destinationAddress={destinationAddress} />
         </Cell>
       )
     }
