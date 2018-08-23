@@ -35,7 +35,57 @@ exports[`render no data correctly 1`] = `
 >
   <h4>
     Ledgers
+     
+    <span
+      className="bp3-popover-wrapper"
+    >
+      <span
+        className="bp3-popover-target"
+        onClick={[Function]}
+      >
+        <div
+          className=""
+          disabled={undefined}
+          onKeyDown={[Function]}
+          onKeyUp={undefined}
+          tabIndex={undefined}
+        >
+          <button
+            className="bp3-button bp3-disabled"
+            disabled={true}
+            onClick={undefined}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            tabIndex={-1}
+            type="button"
+          >
+            <span
+              className="bp3-button-text"
+            >
+              ALL
+            </span>
+            <svg
+              className="bp3-icon"
+              data-icon="caret-down"
+              height={16}
+              style={Object {}}
+              viewBox="0 0 16 16"
+              width={16}
+            >
+              <desc>
+                caret-down
+              </desc>
+              <path
+                d="M12 6.5c0-.28-.22-.5-.5-.5h-7a.495.495 0 0 0-.37.83l3.5 4c.09.1.22.17.37.17s.28-.07.37-.17l3.5-4c.08-.09.13-.2.13-.33z"
+                fillRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </span>
+    </span>
   </h4>
+  
   <div>
     No related data in this time range. You can try another time range.
   </div>

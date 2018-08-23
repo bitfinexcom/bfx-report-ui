@@ -199,7 +199,7 @@ class Ledgers extends PureComponent {
 
     const filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
 
-    const renderSymbolSelector = () => (
+    const renderSymbolSelector = (
       <Fragment>
           &nbsp;
         <Select
@@ -228,7 +228,7 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {intl.formatMessage({ id: 'ledgers.title' })}
-            {renderSymbolSelector()}
+            {renderSymbolSelector}
           </h4>
           <NoData />
         </Fragment>
@@ -238,7 +238,7 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {intl.formatMessage({ id: 'ledgers.title' })}
-            {renderSymbolSelector()}
+            {renderSymbolSelector}
             &nbsp;
             <Button icon='cloud-download' onClick={handleClickExport}>
               {intl.formatMessage({ id: 'timeframe.download' })}
