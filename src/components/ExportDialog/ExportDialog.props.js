@@ -9,9 +9,11 @@ export const propTypes = {
   type: PropTypes.string.isRequired,
   start: PropTypes.number,
   end: PropTypes.number,
+  email: PropTypes.string,
 }
 
 export const defaultProps = {
   start: 0,
   end: 0,
+  email: '',
 }

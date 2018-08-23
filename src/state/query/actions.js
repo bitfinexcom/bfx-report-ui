@@ -50,8 +50,30 @@ export function exportCsv(target) {
   }
 }
 
+/**
+ * Create an action to prepare export related params.
+ */
+export function prepareExport() {
+  return {
+    type: types.PREPARE_EXPORT,
+  }
+}
+
+/**
+ * Create an action to export CSV.
+ * @param {boolean | string} payload return false or the email address
+ */
+export function exportReady(payload) {
+  return {
+    type: types.EXPORT_READY,
+    payload,
+  }
+}
+
 export default {
   exportCsv,
+  exportReady,
+  prepareExport,
   setQueryLimit,
   setTimeType,
   setTimeRange,

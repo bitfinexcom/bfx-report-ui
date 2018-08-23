@@ -27,8 +27,7 @@ function* fetchTrades() {
   try {
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getTrades, auth, query, 0)
-    const { result = [], error } = data
+    const { result = [], error } = yield call(getTrades, auth, query, 0)
     yield put(actions.updateTrades(result))
 
     if (error) {
@@ -59,8 +58,7 @@ function* fetchNextTrades() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getTrades, auth, query, smallestMts)
-    const { result = [], error } = data
+    const { result = [], error } = yield call(getTrades, auth, query, smallestMts)
     yield put(actions.updateTrades(result))
 
     if (error) {

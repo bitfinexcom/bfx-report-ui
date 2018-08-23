@@ -8,13 +8,13 @@ import {
 } from '@blueprintjs/core'
 
 import { formatDate } from 'state/utils'
-import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
   render() {
     const {
+      email,
       end,
       handleExportDialogClose,
       intl,
@@ -28,7 +28,7 @@ class ExportDialog extends PureComponent {
     }
 
     const intlType = intl.formatMessage({ id: `${type}.title` })
-    const renderMessage = platform.id === 'local' ? (
+    const renderMessage = !email ? (
       <Fragment>
         {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
         &nbsp;
@@ -46,7 +46,7 @@ class ExportDialog extends PureComponent {
           {`${formatDate(start)} — ${formatDate(end)}`}
         </span>
         &nbsp;
-        {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType })}
+        {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}
       </Fragment>
     )
     return (

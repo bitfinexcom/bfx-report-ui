@@ -17,6 +17,6 @@ An information dialog and a confirm button to help user export the query data as
     1. The dialog shows message `Bitfinex will prepare your {panel title} data during {start date} — {end date} and store to your local folder.`(translate).
 1. When host on server:
     1.  Click `Export`(translate) button will send CSV file to user email.
-    1. The dialog shows message `Bitfinex will prepare your {panel title} data during {start date} — {end date} and send to your Email.`(translate).
+    1. The dialog shows message `Bitfinex will prepare your {panel title} data during {start date} — {end date} and send to Email {email@address} .`(translate).
 1. The export data has the same time range shown in the main page
 1. If data was previously filtered, the export csv contains the filtered coin / pair.

@@ -11,6 +11,7 @@ import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { platform } from 'var/config'
 
 import { getTimeFrame } from './selector'
+import actions from './actions'
 import types from './constants'
 
 const {
@@ -22,7 +23,8 @@ const {
 } = types
 
 function getCSV(auth, query, target, symbol) {
-  const params = _omit(getTimeFrame(query, target), 'limit')
+  const omitList = query.email === '' ? ['limit', 'email'] : ['limit']
+  const params = _omit(getTimeFrame(query, target), omitList)
   if (symbol) {
     params.symbol = symbol
   }
@@ -51,23 +53,26 @@ function getCSV(auth, query, target, symbol) {
   })
 }
 
+function checkEmail() {
+  return postJsonfetch(`${platform.API_URL}/check-stored-locally`)
+}
+
 function* exportCSV({ payload: target }) {
   try {
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
     const symbol = target === MENU_LEDGERS
       ? yield select(state => state.ledgers.currentSymbol) : ''
-    const data = yield call(getCSV, auth, query, target, symbol)
-    const { result = [], error } = data
+    const { result, error } = yield call(getCSV, auth, query, target, symbol)
     if (result) {
-      if (platform.id === 'local') {
-        yield put(updateSuccessStatus({
-          id: 'timeframe.download.status.local',
-          topic: `${target}.title`,
-        }))
-      } else {
+      if (result.isSendEmail) {
         yield put(updateSuccessStatus({
           id: 'timeframe.download.status.email',
+          topic: `${target}.title`,
+        }))
+      } else if (result.isSaveLocaly) {
+        yield put(updateSuccessStatus({
+          id: 'timeframe.download.status.local',
           topic: `${target}.title`,
         }))
       }
@@ -89,6 +94,22 @@ function* exportCSV({ payload: target }) {
   }
 }
 
+function* prepareExport() {
+  try {
+    const { result } = yield call(checkEmail)
+    yield put(actions.exportReady, result)
+  } catch (fail) {
+    yield put(actions.exportReady, false)
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'timeframe.download.query',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
+
 export default function* tradesSaga() {
+  yield takeLatest(types.PREPARE_EXPORT, prepareExport)
   yield takeLatest(types.EXPORT_CSV, exportCSV)
 }

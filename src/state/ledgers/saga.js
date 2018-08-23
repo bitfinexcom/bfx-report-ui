@@ -32,8 +32,7 @@ function* fetchLedgers() {
     const { currentSymbol } = ledgers
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getLedgers, auth, query, currentSymbol, 0)
-    const { result = [], error } = data
+    const { result = [], error } = yield call(getLedgers, auth, query, currentSymbol, 0)
     yield put(actions.updateLedgers(result))
 
     if (error) {
@@ -66,8 +65,7 @@ function* fetchNextLedgers() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getLedgers, auth, query, currentSymbol, smallestMts)
-    const { result = [], error } = data
+    const { result = [], error } = yield call(getLedgers, auth, query, currentSymbol, smallestMts)
     yield put(actions.updateLedgers(result))
 
     if (error) {

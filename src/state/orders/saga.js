@@ -27,8 +27,7 @@ function* fetchOrders() {
   try {
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getOrders, auth, query, 0)
-    const { result = [], error } = data
+    const { result = [], error } = yield call(getOrders, auth, query, 0)
     yield put(actions.updateOrders(result))
 
     if (error) {
@@ -59,8 +58,7 @@ function* fetchNextOrders() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getOrders, auth, query, smallestMts)
-    const { result = [], error } = data
+    const { result = [], error } = yield call(getOrders, auth, query, smallestMts)
     yield put(actions.updateOrders(result))
 
     if (error) {

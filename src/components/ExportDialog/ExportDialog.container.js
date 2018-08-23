@@ -9,6 +9,7 @@ function mapStateToProps(state = {}) {
   return {
     start,
     end,
+    email: state.query.email,
   }
 }
 
