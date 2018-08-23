@@ -55,32 +55,31 @@ class ExportDialog extends PureComponent {
       ? (
         <Fragment>
           <div className={Classes.DIALOG_BODY}>
-            <Loading/>
+            <Loading />
           </div>
-          <div className={Classes.DIALOG_FOOTER}>
-          </div>
+          <div className={Classes.DIALOG_FOOTER} />
         </Fragment>
       )
       : (
-      <Fragment>
-        <div className={Classes.DIALOG_BODY}>
-          {renderMessage}
-        </div>
-        <div className={Classes.DIALOG_FOOTER}>
-          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <Button onClick={handleExportDialogClose}>
-              {intl.formatMessage({ id: 'timeframe.download.cancel' })}
-            </Button>
-            <Button
-              intent={Intent.PRIMARY}
-              onClick={startExport}
-            >
-              {intl.formatMessage({ id: 'timeframe.download.export' })}
-            </Button>
+        <Fragment>
+          <div className={Classes.DIALOG_BODY}>
+            {renderMessage}
           </div>
-        </div>
-      </Fragment>
-    )
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <Button onClick={handleExportDialogClose}>
+                {intl.formatMessage({ id: 'timeframe.download.cancel' })}
+              </Button>
+              <Button
+                intent={Intent.PRIMARY}
+                onClick={startExport}
+              >
+                {intl.formatMessage({ id: 'timeframe.download.export' })}
+              </Button>
+            </div>
+          </div>
+        </Fragment>
+      )
 
     return (
       <Dialog
