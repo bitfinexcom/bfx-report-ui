@@ -53,12 +53,7 @@ const TYPE_WHITELIST = [
 ]
 
 export function isValidateType(type) {
-  if (TYPE_WHITELIST.includes(type)) {
-    return true
-  }
-  // eslint-disable-next-line no-console
-  console.error('invalid type', type)
-  return false
+  return TYPE_WHITELIST.includes(type)
 }
 
 export function checkFetch(prevProps, props, type) {

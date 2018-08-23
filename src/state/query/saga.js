@@ -100,9 +100,9 @@ function* prepareExport() {
   try {
     const auth = yield select(selectAuth)
     const { result } = yield call(checkEmail, auth)
-    yield put(actions.exportReady, result)
+    yield put(actions.exportReady(result))
   } catch (fail) {
-    yield put(actions.exportReady, false)
+    yield put(actions.exportReady(false))
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'timeframe.download.query',
@@ -110,7 +110,6 @@ function* prepareExport() {
     }))
   }
 }
-
 
 export default function* tradesSaga() {
   yield takeLatest(types.PREPARE_EXPORT, prepareExport)
