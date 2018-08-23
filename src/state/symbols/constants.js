@@ -1,0 +1,3 @@
+export default {
+  UPDATE_SYMBOLS: 'BITFINEX/SYMBOLS/UPDATE',
+}

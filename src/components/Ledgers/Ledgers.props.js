@@ -10,6 +10,7 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  coins: PropTypes.arrayOf(PropTypes.string),
   currencies: PropTypes.arrayOf(PropTypes.string),
   currentSymbol: PropTypes.string,
   offset: PropTypes.number.isRequired,
@@ -26,6 +27,7 @@ export const propTypes = {
 }
 
 export const defaultProps = {
+  coins: [],
   currencies: [],
   offset: 0,
   entries: [],
