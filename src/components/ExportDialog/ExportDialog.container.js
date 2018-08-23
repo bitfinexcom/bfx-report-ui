@@ -10,6 +10,7 @@ function mapStateToProps(state = {}) {
     start,
     end,
     email: state.query.email,
+    loading: state.query.prepareExport,
   }
 }
 

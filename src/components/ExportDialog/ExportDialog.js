@@ -8,6 +8,7 @@ import {
 } from '@blueprintjs/core'
 
 import { formatDate } from 'state/utils'
+import Loading from 'components/Loading'
 
 import { propTypes, defaultProps } from './ExportDialog.props'
 
@@ -19,6 +20,7 @@ class ExportDialog extends PureComponent {
       handleExportDialogClose,
       intl,
       isExportOpen,
+      loading,
       start,
       startExport,
       type,
@@ -49,18 +51,18 @@ class ExportDialog extends PureComponent {
         {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}
       </Fragment>
     )
-    return (
-      <Dialog
-        icon='cloud-download'
-        onClose={handleExportDialogClose}
-        title={intl.formatMessage({ id: 'timeframe.download.title' })}
-        autoFocus
-        canEscapeKeyClose
-        canOutsideClickClose
-        enforceFocus
-        usePortal
-        isOpen={isExportOpen}
-      >
+    const renderContent = loading
+      ? (
+        <Fragment>
+          <div className={Classes.DIALOG_BODY}>
+            <Loading/>
+          </div>
+          <div className={Classes.DIALOG_FOOTER}>
+          </div>
+        </Fragment>
+      )
+      : (
+      <Fragment>
         <div className={Classes.DIALOG_BODY}>
           {renderMessage}
         </div>
@@ -77,6 +79,22 @@ class ExportDialog extends PureComponent {
             </Button>
           </div>
         </div>
+      </Fragment>
+    )
+
+    return (
+      <Dialog
+        icon='cloud-download'
+        onClose={handleExportDialogClose}
+        title={intl.formatMessage({ id: 'timeframe.download.title' })}
+        autoFocus
+        canEscapeKeyClose
+        canOutsideClickClose
+        enforceFocus
+        usePortal
+        isOpen={isExportOpen}
+      >
+        {renderContent}
       </Dialog>
     )
   }

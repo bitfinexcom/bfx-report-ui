@@ -2,6 +2,7 @@ import types from './constants'
 
 const initialState = {
   email: '',
+  prepareExport: false,
   queryLimit: types.DEFAULT_QUERY_LIMIT,
   timeRange: types.DEFAULT_RANGE,
   timeType: types.DEFAULT_TIME_TYPE,
@@ -26,10 +27,16 @@ export function queryReducer(state = initialState, action) {
         end: isValidCustom ? payload.end : undefined,
       }
     }
+    case types.PREPARE_EXPORT:
+      return {
+        ...state,
+        prepareExport: true,
+      }
     case types.EXPORT_READY: {
       const email = action.payload === false ? '' : action.payload
       return {
         ...state,
+        prepareExport: false,
         email,
       }
     }
