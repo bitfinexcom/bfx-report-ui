@@ -23,8 +23,10 @@ const {
 } = types
 
 function getCSV(auth, query, target, symbol) {
-  const omitList = query.email === '' ? ['limit', 'email'] : ['limit']
-  const params = _omit(getTimeFrame(query, target), omitList)
+  const params = _omit(getTimeFrame(query, target), 'limit')
+  if (query.email) {
+    params.email = query.email
+  }
   if (symbol) {
     params.symbol = symbol
   }
@@ -99,8 +101,16 @@ function* exportCSV({ payload: target }) {
 function* prepareExport() {
   try {
     const auth = yield select(selectAuth)
-    const { result } = yield call(checkEmail, auth)
+    const { result, error } = yield call(checkEmail, auth)
     yield put(actions.exportReady(result))
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'timeframe.download.query',
+        detail: JSON.stringify(error),
+      }))
+    }
   } catch (fail) {
     yield put(actions.exportReady(false))
     yield put(updateErrorStatus({
