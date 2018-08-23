@@ -53,8 +53,10 @@ function getCSV(auth, query, target, symbol) {
   })
 }
 
-function checkEmail() {
-  return postJsonfetch(`${platform.API_URL}/check-stored-locally`)
+function checkEmail(auth) {
+  return postJsonfetch(`${platform.API_URL}/check-stored-locally`, {
+    auth,
+  })
 }
 
 function* exportCSV({ payload: target }) {
@@ -96,7 +98,8 @@ function* exportCSV({ payload: target }) {
 
 function* prepareExport() {
   try {
-    const { result } = yield call(checkEmail)
+    const auth = yield select(selectAuth)
+    const { result } = yield call(checkEmail, auth)
     yield put(actions.exportReady, result)
   } catch (fail) {
     yield put(actions.exportReady, false)
