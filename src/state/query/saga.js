@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 import _omit from 'lodash/omit'
 
-import { postJsonfetch, selectAuth } from 'state/utils'
+import { getUrlParameter, postJsonfetch, selectAuth } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { platform } from 'var/config'
 
@@ -102,7 +102,13 @@ function* prepareExport() {
   try {
     const auth = yield select(selectAuth)
     const { result, error } = yield call(checkEmail, auth)
-    yield put(actions.exportReady(result))
+    const reportEmail = getUrlParameter('reportEmail')
+    // send email get from the URL when possible
+    if (reportEmail && result) {
+      yield put(actions.exportReady(reportEmail))
+    } else {
+      yield put(actions.exportReady(result))
+    }
 
     if (error) {
       yield put(updateErrorStatus({
