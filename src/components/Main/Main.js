@@ -89,6 +89,8 @@ class Main extends PureComponent {
   }
 
   handleClickExport() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.prepareExport()
     this.setState({ isExportOpen: true })
   }
 

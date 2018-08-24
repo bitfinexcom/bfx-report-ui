@@ -27,8 +27,7 @@ function* fetchMovements() {
   try {
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getMovements, auth, query, 0)
-    const { result = [], error } = data
+    const { result = [], error } = yield call(getMovements, auth, query, 0)
     yield put(actions.updateMovements(result))
 
     if (error) {
@@ -59,8 +58,7 @@ function* fetchNextMovements() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
-    const data = yield call(getMovements, auth, query, smallestMts)
-    const { result = [], error } = data
+    const { result = [], error } = yield call(getMovements, auth, query, smallestMts)
     yield put(actions.updateMovements(result))
 
     if (error) {

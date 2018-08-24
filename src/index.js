@@ -14,6 +14,7 @@ import '@blueprintjs/select/lib/css/blueprint-select.css'
 
 import { persistor, store } from 'state/store'
 import { checkAuthWithToken } from 'state/auth/actions'
+import { getUrlParameter } from 'state/utils'
 import { platform } from 'var/config'
 import 'styles/index.css'
 
@@ -27,12 +28,6 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 )
-
-function getUrlParameter(name) {
-  const regex = new RegExp(`[\\?&]${name}=([^&#]*)`)
-  const results = regex.exec(window.location.search)
-  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
-}
 
 window.addEventListener('load', function handler() {
   const token = getUrlParameter('authToken')

@@ -6,11 +6,12 @@ import {
 } from 'redux-saga/effects'
 import _omit from 'lodash/omit'
 
-import { postJsonfetch, selectAuth } from 'state/utils'
+import { getUrlParameter, postJsonfetch, selectAuth } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { platform } from 'var/config'
 
 import { getTimeFrame } from './selector'
+import actions from './actions'
 import types from './constants'
 
 const {
@@ -23,6 +24,9 @@ const {
 
 function getCSV(auth, query, target, symbol) {
   const params = _omit(getTimeFrame(query, target), 'limit')
+  if (query.email) {
+    params.email = query.email
+  }
   if (symbol) {
     params.symbol = symbol
   }
@@ -51,23 +55,28 @@ function getCSV(auth, query, target, symbol) {
   })
 }
 
+function checkEmail(auth) {
+  return postJsonfetch(`${platform.API_URL}/check-stored-locally`, {
+    auth,
+  })
+}
+
 function* exportCSV({ payload: target }) {
   try {
     const auth = yield select(selectAuth)
     const query = yield select(state => state.query)
     const symbol = target === MENU_LEDGERS
       ? yield select(state => state.ledgers.currentSymbol) : ''
-    const data = yield call(getCSV, auth, query, target, symbol)
-    const { result = [], error } = data
+    const { result, error } = yield call(getCSV, auth, query, target, symbol)
     if (result) {
-      if (platform.id === 'local') {
-        yield put(updateSuccessStatus({
-          id: 'timeframe.download.status.local',
-          topic: `${target}.title`,
-        }))
-      } else {
+      if (result.isSendEmail) {
         yield put(updateSuccessStatus({
           id: 'timeframe.download.status.email',
+          topic: `${target}.title`,
+        }))
+      } else if (result.isSaveLocaly) {
+        yield put(updateSuccessStatus({
+          id: 'timeframe.download.status.local',
           topic: `${target}.title`,
         }))
       }
@@ -89,6 +98,36 @@ function* exportCSV({ payload: target }) {
   }
 }
 
+function* prepareExport() {
+  try {
+    const auth = yield select(selectAuth)
+    const { result, error } = yield call(checkEmail, auth)
+    const reportEmail = getUrlParameter('reportEmail')
+    // send email get from the URL when possible
+    if (reportEmail && result) {
+      yield put(actions.exportReady(reportEmail))
+    } else {
+      yield put(actions.exportReady(result))
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'timeframe.download.query',
+        detail: JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(actions.exportReady(false))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'timeframe.download.query',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
 export default function* tradesSaga() {
+  yield takeLatest(types.PREPARE_EXPORT, prepareExport)
   yield takeLatest(types.EXPORT_CSV, exportCSV)
 }

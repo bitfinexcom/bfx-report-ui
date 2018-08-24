@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { exportCsv, setTimeRange } from 'state/query/actions'
+import { exportCsv, prepareExport, setTimeRange } from 'state/query/actions'
 
 import Main from './Main'
 
@@ -13,6 +13,7 @@ function mapStateToProps(state = {}) {
 
 const mapDispatchToProps = dispatch => ({
   exportCsv: target => dispatch(exportCsv(target)),
+  prepareExport: () => dispatch(prepareExport()),
   setTimeRange: (rangeType, start, end) => dispatch(setTimeRange(rangeType, start, end)),
 })
 

@@ -8,17 +8,19 @@ import {
 } from '@blueprintjs/core'
 
 import { formatDate } from 'state/utils'
-import { platform } from 'var/config'
+import Loading from 'components/Loading'
 
 import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
   render() {
     const {
+      email,
       end,
       handleExportDialogClose,
       intl,
       isExportOpen,
+      loading,
       start,
       startExport,
       type,
@@ -28,7 +30,7 @@ class ExportDialog extends PureComponent {
     }
 
     const intlType = intl.formatMessage({ id: `${type}.title` })
-    const renderMessage = platform.id === 'local' ? (
+    const renderMessage = !email ? (
       <Fragment>
         {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
         &nbsp;
@@ -46,9 +48,39 @@ class ExportDialog extends PureComponent {
           {`${formatDate(start)} — ${formatDate(end)}`}
         </span>
         &nbsp;
-        {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType })}
+        {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}
       </Fragment>
     )
+    const renderContent = loading
+      ? (
+        <Fragment>
+          <div className={Classes.DIALOG_BODY}>
+            <Loading />
+          </div>
+          <div className={Classes.DIALOG_FOOTER} />
+        </Fragment>
+      )
+      : (
+        <Fragment>
+          <div className={Classes.DIALOG_BODY}>
+            {renderMessage}
+          </div>
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <Button onClick={handleExportDialogClose}>
+                {intl.formatMessage({ id: 'timeframe.download.cancel' })}
+              </Button>
+              <Button
+                intent={Intent.PRIMARY}
+                onClick={startExport}
+              >
+                {intl.formatMessage({ id: 'timeframe.download.export' })}
+              </Button>
+            </div>
+          </div>
+        </Fragment>
+      )
+
     return (
       <Dialog
         icon='cloud-download'
@@ -61,22 +93,7 @@ class ExportDialog extends PureComponent {
         usePortal
         isOpen={isExportOpen}
       >
-        <div className={Classes.DIALOG_BODY}>
-          {renderMessage}
-        </div>
-        <div className={Classes.DIALOG_FOOTER}>
-          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <Button onClick={handleExportDialogClose}>
-              {intl.formatMessage({ id: 'timeframe.download.cancel' })}
-            </Button>
-            <Button
-              intent={Intent.PRIMARY}
-              onClick={startExport}
-            >
-              {intl.formatMessage({ id: 'timeframe.download.export' })}
-            </Button>
-          </div>
-        </div>
+        {renderContent}
       </Dialog>
     )
   }

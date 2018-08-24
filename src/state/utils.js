@@ -53,12 +53,7 @@ const TYPE_WHITELIST = [
 ]
 
 export function isValidateType(type) {
-  if (TYPE_WHITELIST.includes(type)) {
-    return true
-  }
-  // eslint-disable-next-line no-console
-  console.error('invalid type', type)
-  return false
+  return TYPE_WHITELIST.includes(type)
 }
 
 export function checkFetch(prevProps, props, type) {
@@ -88,12 +83,19 @@ export function momentFormatter(format) {
   }
 }
 
+export function getUrlParameter(name) {
+  const regex = new RegExp(`[\\?&]${name}=([^&#]*)`)
+  const results = regex.exec(window.location.search)
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
+}
+
 export default {
   checkFetch,
   formatDate,
   formatPair,
   formatTime,
   getCurrentEntries,
+  getUrlParameter,
   isValidateType,
   momentFormatter,
   postJsonfetch,
