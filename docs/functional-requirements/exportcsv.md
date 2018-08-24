@@ -20,3 +20,4 @@ An information dialog and a confirm button to help user export the query data as
     1. The dialog shows message `Bitfinex will prepare your {panel title} data during {start date} — {end date} and send to Email {email@address} .`(translate).
 1. The export data has the same time range shown in the main page
 1. If data was previously filtered, the export csv contains the filtered coin / pair.
+1. User can pass `reportEmail` url parms like `/?reportEmail=any@mail.address` to specify the email destination. The email address will be shown at dialog.
