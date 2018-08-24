@@ -18,6 +18,7 @@ import { Select } from '@blueprintjs/select'
 import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
+import TimeRange from 'components/TimeRange'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -228,6 +229,8 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {intl.formatMessage({ id: 'ledgers.title' })}
+            &nbsp;
+            <TimeRange />
             {renderSymbolSelector}
           </h4>
           <NoData />
@@ -238,6 +241,8 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {intl.formatMessage({ id: 'ledgers.title' })}
+            &nbsp;
+            <TimeRange />
             {renderSymbolSelector}
             &nbsp;
             <Button icon='cloud-download' onClick={handleClickExport}>
