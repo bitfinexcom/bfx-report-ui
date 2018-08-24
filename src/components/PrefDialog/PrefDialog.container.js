@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
+
 import baseActions from 'state/base/actions'
+import { getTheme } from 'state/base/selectors'
+
 import PrefDialog from './PrefDialog'
 
-function mapStateToProps(state = {}) {
-  return {
-    theme: state.base.theme,
-  }
-}
+const mapStateToProps = (state = {}) => ({
+  theme: getTheme(state),
+})
 
 const mapDispatchToProps = dispatch => ({
   setTheme: theme => dispatch(baseActions.setTheme(theme)),

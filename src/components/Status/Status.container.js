@@ -1,15 +1,14 @@
 import { connect } from 'react-redux'
 
 import actions from 'state/status/actions'
+import { getIntent, getMsg } from 'state/status/selectors'
 
 import Status from './Status'
 
-function mapStateToProps(state = {}) {
-  return {
-    intent: state.status.intent,
-    msg: state.status.msg,
-  }
-}
+const mapStateToProps = (state = {}) => ({
+  intent: getIntent(state),
+  msg: getMsg(state),
+})
 
 const mapDispatchToProps = dispatch => ({
   clearStatus: () => dispatch(actions.clearStatus()),

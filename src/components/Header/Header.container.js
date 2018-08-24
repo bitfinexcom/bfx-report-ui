@@ -1,15 +1,14 @@
 import { connect } from 'react-redux'
 
 import authActions from 'state/auth/actions'
+import { getAuthStatus, getIsShown } from 'state/auth/selectors'
 
 import Header from './Header'
 
-function mapStateToProps(state = {}) {
-  return {
-    authIsShown: state.auth.isShown,
-    authStatus: state.auth.authStatus,
-  }
-}
+const mapStateToProps = (state = {}) => ({
+  authIsShown: getIsShown(state),
+  authStatus: getAuthStatus(state),
+})
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(authActions.logout()),

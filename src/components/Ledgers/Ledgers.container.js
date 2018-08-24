@@ -1,21 +1,28 @@
 import { connect } from 'react-redux'
 
 import actions from 'state/ledgers/actions'
-
+import { getCoins } from 'state/symbols/selectors'
+import {
+  getCurencies,
+  getCurrentSymbol,
+  getDataReceived,
+  getEntries,
+  getOffset,
+  getPageLoading,
+  getPageOffset,
+} from 'state/ledgers/selectors'
 import Ledgers from './Ledgers'
 
-function mapStateToProps(state = {}) {
-  return {
-    coins: state.symbols.coins,
-    offset: state.ledgers.offset,
-    currencies: state.ledgers.currencies,
-    currentSymbol: state.ledgers.currentSymbol,
-    entries: state.ledgers.entries,
-    loading: !state.ledgers.dataReceived,
-    pageOffset: state.ledgers.pageOffset,
-    pageLoading: state.ledgers.pageLoading,
-  }
-}
+const mapStateToProps = (state = {}) => ({
+  coins: getCoins(state),
+  offset: getOffset(state),
+  currencies: getCurencies(state),
+  currentSymbol: getCurrentSymbol(state),
+  entries: getEntries(state),
+  loading: !getDataReceived(state),
+  pageOffset: getPageOffset(state),
+  pageLoading: getPageLoading(state),
+})
 
 const mapDispatchToProps = dispatch => ({
   fetchLedgers: () => dispatch(actions.fetchLedgers()),

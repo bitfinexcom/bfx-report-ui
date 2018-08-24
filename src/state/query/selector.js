@@ -2,6 +2,10 @@ import { isValidateType } from 'state/utils'
 
 import constants from './constants'
 
+const getQuery = state => state.query
+
+export const getTimeRange = state => getQuery(state).timeRange
+
 /**
  * Selector to return query range (in milliseconds) and limit.
  * @param {object} state query state
@@ -60,4 +64,5 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
 
 export default {
   getTimeFrame,
+  getTimeRange,
 }

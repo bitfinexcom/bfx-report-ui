@@ -1,18 +1,23 @@
 import { connect } from 'react-redux'
 
 import actions from 'state/orders/actions'
+import {
+  getDataReceived,
+  getEntries,
+  getOffset,
+  getPageLoading,
+  getPageOffset,
+} from 'state/orders/selectors'
 
 import Orders from './Orders'
 
-function mapStateToProps(state = {}) {
-  return {
-    offset: state.orders.offset,
-    entries: state.orders.entries,
-    loading: !state.orders.dataReceived,
-    pageOffset: state.orders.pageOffset,
-    pageLoading: state.orders.pageLoading,
-  }
-}
+const mapStateToProps = (state = {}) => ({
+  offset: getOffset(state),
+  entries: getEntries(state),
+  loading: !getDataReceived(state),
+  pageOffset: getPageOffset(state),
+  pageLoading: getPageLoading(state),
+})
 
 const mapDispatchToProps = dispatch => ({
   fetchOrders: () => dispatch(actions.fetchOrders()),

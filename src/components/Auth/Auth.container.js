@@ -2,17 +2,17 @@ import { connect } from 'react-redux'
 
 import authActions from 'state/auth/actions'
 import baseActions from 'state/base/actions'
+import { getAuthStatus, getIsShown } from 'state/auth/selectors'
+import { getApiKey, getApiSecret } from 'state/base/selectors'
 
 import Auth from './Auth'
 
-function mapStateToProps(state = {}) {
-  return {
-    apiKey: state.base.apiKey,
-    apiSecret: state.base.apiSecret,
-    isShown: state.auth.isShown,
-    authStatus: state.auth.authStatus,
-  }
-}
+const mapStateToProps = (state = {}) => ({
+  apiKey: getApiKey(state),
+  apiSecret: getApiSecret(state),
+  isShown: getIsShown(state),
+  authStatus: getAuthStatus(state),
+})
 
 const mapDispatchToProps = dispatch => ({
   checkAuth: () => dispatch(authActions.checkAuth()),
