@@ -5,6 +5,8 @@ import constants from './constants'
 const getQuery = state => state.query
 
 export const getTimeRange = state => getQuery(state).timeRange
+export const getEmail = state => getQuery(state).email
+export const getPrepareExport = state => getQuery(state).prepareExport
 
 /**
  * Selector to return query range (in milliseconds) and limit.
@@ -63,6 +65,8 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
 }
 
 export default {
+  getEmail,
+  getPrepareExport,
   getTimeFrame,
   getTimeRange,
 }

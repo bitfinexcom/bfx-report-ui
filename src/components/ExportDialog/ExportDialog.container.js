@@ -1,16 +1,14 @@
 import { connect } from 'react-redux'
 
-import { getTimeFrame } from 'state/query/selector'
+import { getEmail, getPrepareExport, getTimeFrame } from 'state/query/selector'
 
 import ExportDialog from './ExportDialog'
 
 function mapStateToProps(state = {}) {
-  const { start, end } = getTimeFrame(state.query)
   return {
-    start,
-    end,
-    email: state.query.email,
-    loading: state.query.prepareExport,
+    ...getTimeFrame(state.query),
+    email: getEmail(state),
+    loading: getPrepareExport(state),
   }
 }
 
