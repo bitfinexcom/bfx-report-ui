@@ -15,6 +15,7 @@ import {
 import Loading from 'components/Loading'
 import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
+import TimeRange from 'components/TimeRange'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -148,6 +149,8 @@ class Movements extends PureComponent {
         <Fragment>
           <h4>
             {intl.formatMessage({ id: titleMsgId })}
+            &nbsp;
+            <TimeRange />
             &nbsp;
             <Button icon='cloud-download' onClick={handleClickExport}>
               {intl.formatMessage({ id: 'timeframe.download' })}
