@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#movements
 import queryTypes from 'state/query/constants'
+import authTypes from 'state/auth/constants'
 
 import types from './constants'
 /*
@@ -146,6 +147,7 @@ export function movementsReducer(state = initialState, action) {
       }
     }
     case queryTypes.SET_TIME_RANGE:
+    case authTypes.LOGOUT:
       return initialState
     default: {
       return state

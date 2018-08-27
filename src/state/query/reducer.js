@@ -1,3 +1,5 @@
+import authTypes from 'state/auth/constants'
+
 import types from './constants'
 
 const initialState = {
@@ -40,6 +42,8 @@ export function queryReducer(state = initialState, action) {
         email,
       }
     }
+    case authTypes.LOGOUT:
+      return initialState
     default: {
       return state
     }

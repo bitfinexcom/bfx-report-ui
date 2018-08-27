@@ -27,12 +27,7 @@ export function authReducer(state = initialState, action) {
         authToken: action.payload,
       }
     case types.LOGOUT:
-      return {
-        ...state,
-        authStatus: false,
-        authToken: '',
-        isShown: true,
-      }
+      return initialState
     default:
       return state
   }

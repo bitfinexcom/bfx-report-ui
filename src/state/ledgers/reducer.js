@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#ledgers
 import queryTypes from 'state/query/constants'
+import authTypes from 'state/auth/constants'
 
 import types from './constants'
 
@@ -178,6 +179,7 @@ export function ledgersReducer(state = initialState, action) {
         currencies: state.currencies,
       }
     case queryTypes.SET_TIME_RANGE:
+    case authTypes.LOGOUT:
       return initialState
     default: {
       return state

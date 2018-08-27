@@ -1,6 +1,7 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
 import { formatPair } from 'state/utils'
 import queryTypes from 'state/query/constants'
+import authTypes from 'state/auth/constants'
 
 import types from './constants'
 
@@ -156,6 +157,7 @@ export function tradesReducer(state = initialState, action) {
       }
     }
     case queryTypes.SET_TIME_RANGE:
+    case authTypes.LOGOUT:
       return initialState
     default: {
       return state
