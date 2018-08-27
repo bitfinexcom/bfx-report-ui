@@ -249,6 +249,16 @@ class Ledgers extends PureComponent {
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>
+          <Pagination
+            type='ledgers'
+            dataLen={entries.length}
+            loading={pageLoading}
+            offset={offset}
+            jumpPage={jumpPage}
+            nextClick={this.fetchNext}
+            prevClick={this.fetchPrev}
+            pageOffset={pageOffset}
+          />
           <Table
             className='bitfinex-table'
             numRows={numRows}

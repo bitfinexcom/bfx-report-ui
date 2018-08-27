@@ -187,6 +187,16 @@ class Orders extends PureComponent {
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>
+          <Pagination
+            type='orders'
+            dataLen={entries.length}
+            loading={pageLoading}
+            offset={offset}
+            jumpPage={jumpPage}
+            prevClick={this.fetchPrev}
+            nextClick={this.fetchNext}
+            pageOffset={pageOffset}
+          />
           <Table
             className='bitfinex-table'
             numRows={numRows}
