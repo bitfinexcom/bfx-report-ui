@@ -55,7 +55,7 @@
   "timeframe.download.export": "匯出",
   "timeframe.download.cancel": "取消",
   "timeframe.download.status.local": "已產生{topic}的csv檔，請查看您本地的'csv'資料夾。",
-  "timeframe.download.status.email": "已傳送{topic}的csv檔，請查看您的Email。",
+  "timeframe.download.status.email": "正在生成您的 CSV 格式報告。生成後將立即透過 Email 送出。",
   "timeframe.24h": "24 小時間",
   "timeframe.yesterday": "昨天",
   "timeframe.2w": "兩週間",
