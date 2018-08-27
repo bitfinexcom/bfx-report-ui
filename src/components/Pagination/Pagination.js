@@ -97,7 +97,7 @@ class Pagination extends PureComponent {
 
     return (
       <div className='row center-xs'>
-        <div className='bitfinex-pagination-group col-xs-6'>
+        <div className='bitfinex-pagination-group col-xs-12 col-sm-6'>
           <Button
             minimal
             icon='double-chevron-left'
