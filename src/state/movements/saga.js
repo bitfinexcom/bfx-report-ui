@@ -77,8 +77,8 @@ function* fetchNextMovements() {
   }
 }
 
-function* fetchMovementsFail(params) {
-  yield put(updateErrorStatus(params))
+function* fetchMovementsFail({ payload }) {
+  yield put(updateErrorStatus(payload))
 }
 
 export default function* movementsSaga() {

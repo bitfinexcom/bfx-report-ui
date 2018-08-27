@@ -77,8 +77,8 @@ function* fetchNextTrades() {
   }
 }
 
-function* fetchTradesFail(params) {
-  yield put(updateErrorStatus(params))
+function* fetchTradesFail({ payload }) {
+  yield put(updateErrorStatus(payload))
 }
 
 export default function* tradesSaga() {
