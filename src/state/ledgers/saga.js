@@ -84,8 +84,8 @@ function* fetchNextLedgers() {
   }
 }
 
-function* fetchLedgersFail(params) {
-  yield put(updateErrorStatus(params))
+function* fetchLedgersFail({ payload }) {
+  yield put(updateErrorStatus(payload))
 }
 
 export default function* ledgersSaga() {

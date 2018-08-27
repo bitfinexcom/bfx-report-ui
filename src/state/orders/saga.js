@@ -77,8 +77,8 @@ function* fetchNextOrders() {
   }
 }
 
-function* fetchOrdersFail(params) {
-  yield put(updateErrorStatus(params))
+function* fetchOrdersFail({ payload }) {
+  yield put(updateErrorStatus(payload))
 }
 
 export default function* ordersSaga() {
