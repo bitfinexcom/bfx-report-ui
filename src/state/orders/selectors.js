@@ -1,4 +1,4 @@
-const getOrders = state => state.orders
+export const getOrders = state => state.orders
 
 export const getDataReceived = state => getOrders(state).dataReceived
 export const getEntries = state => getOrders(state).entries
@@ -10,6 +10,7 @@ export default {
   getDataReceived,
   getEntries,
   getOffset,
+  getOrders,
   getPageLoading,
   getPageOffset,
 }

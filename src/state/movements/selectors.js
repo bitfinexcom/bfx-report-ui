@@ -1,4 +1,4 @@
-const getMovements = state => state.movements
+export const getMovements = state => state.movements
 
 export const getDataReceived = state => getMovements(state).dataReceived
 export const getEntries = state => getMovements(state).entries
@@ -9,6 +9,7 @@ export const getPageOffset = state => getMovements(state).pageOffset
 export default {
   getDataReceived,
   getEntries,
+  getMovements,
   getOffset,
   getPageLoading,
   getPageOffset,

@@ -8,9 +8,11 @@ import _omit from 'lodash/omit'
 
 import { getUrlParameter, postJsonfetch, selectAuth } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { getCurrentSymbol } from 'state/ledgers/selectors'
+
 import { platform } from 'var/config'
 
-import { getTimeFrame } from './selector'
+import { getQuery, getTimeFrame } from './selector'
 import actions from './actions'
 import types from './constants'
 
@@ -64,9 +66,9 @@ function checkEmail(auth) {
 function* exportCSV({ payload: target }) {
   try {
     const auth = yield select(selectAuth)
-    const query = yield select(state => state.query)
+    const query = yield select(getQuery)
     const symbol = target === MENU_LEDGERS
-      ? yield select(state => state.ledgers.currentSymbol) : ''
+      ? yield select(getCurrentSymbol) : ''
     const { result, error } = yield call(getCSV, auth, query, target, symbol)
     if (result) {
       if (result.isSendEmail) {

@@ -1,4 +1,4 @@
-const getTrades = state => state.trades
+export const getTrades = state => state.trades
 
 export const getDataReceived = state => getTrades(state).dataReceived
 export const getEntries = state => getTrades(state).entries
@@ -12,4 +12,5 @@ export default {
   getOffset,
   getPageLoading,
   getPageOffset,
+  getTrades,
 }

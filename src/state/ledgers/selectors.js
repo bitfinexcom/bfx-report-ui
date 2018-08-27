@@ -1,4 +1,4 @@
-const getLedgers = state => state.ledgers
+export const getLedgers = state => state.ledgers
 
 export const getCurencies = state => getLedgers(state).currencies
 export const getCurrentSymbol = state => getLedgers(state).currentSymbol
@@ -13,6 +13,7 @@ export default {
   getCurrentSymbol,
   getDataReceived,
   getEntries,
+  getLedgers,
   getOffset,
   getPageLoading,
   getPageOffset,

@@ -2,7 +2,7 @@ import { isValidateType } from 'state/utils'
 
 import constants from './constants'
 
-const getQuery = state => state.query
+export const getQuery = state => state.query
 
 export const getTimeRange = state => getQuery(state).timeRange
 export const getEmail = state => getQuery(state).email
@@ -67,6 +67,7 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
 export default {
   getEmail,
   getPrepareExport,
+  getQuery,
   getTimeFrame,
   getTimeRange,
 }

@@ -7,6 +7,7 @@ import {
 
 import { postJsonfetch } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { getBase } from 'state/base/selectors'
 import { platform } from 'var/config'
 
 import types from './constants'
@@ -20,7 +21,7 @@ function getAuth(auth) {
 
 function* checkAuth() {
   try {
-    const base = yield select(state => state.base)
+    const base = yield select(getBase)
     const data = yield call(getAuth, {
       apiKey: base.apiKey,
       apiSecret: base.apiSecret,
