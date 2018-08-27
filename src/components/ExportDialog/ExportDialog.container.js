@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { getEmail, getPrepareExport, getTimeFrame } from 'state/query/selector'
+import { getEmail, getPrepareExport, getTimeFrame } from 'state/query/selectors'
 
 import ExportDialog from './ExportDialog'
 

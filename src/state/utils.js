@@ -15,17 +15,6 @@ export function postJsonfetch(url, bodyJson) {
     .then(data => data)
 }
 
-export function selectAuth(state) {
-  return state.auth.authToken
-    ? {
-      authToken: state.auth.authToken,
-    }
-    : {
-      apiKey: state.base.apiKey,
-      apiSecret: state.base.apiSecret,
-    }
-}
-
 export function formatTime(mts) {
   const date = new Date(mts)
   // 18-07-06 02:08:02
@@ -99,5 +88,4 @@ export default {
   isValidateType,
   momentFormatter,
   postJsonfetch,
-  selectAuth,
 }

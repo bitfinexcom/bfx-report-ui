@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { getTimeFrame, getTimeRange } from 'state/query/selector'
+import { getTimeFrame, getTimeRange } from 'state/query/selectors'
 import { setTimeRange } from 'state/query/actions'
 
 import Timeframe from './Timeframe'

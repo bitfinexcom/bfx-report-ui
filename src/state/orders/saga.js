@@ -5,8 +5,9 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { postJsonfetch, selectAuth } from 'state/utils'
-import { getQuery, getTimeFrame } from 'state/query/selector'
+import { postJsonfetch } from 'state/utils'
+import { selectAuth } from 'state/auth/selectors'
+import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { platform } from 'var/config'

@@ -6,13 +6,14 @@ import {
 } from 'redux-saga/effects'
 import _omit from 'lodash/omit'
 
-import { getUrlParameter, postJsonfetch, selectAuth } from 'state/utils'
+import { getUrlParameter, postJsonfetch } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { selectAuth } from 'state/auth/selectors'
 import { getCurrentSymbol } from 'state/ledgers/selectors'
 
 import { platform } from 'var/config'
 
-import { getQuery, getTimeFrame } from './selector'
+import { getQuery, getTimeFrame } from './selectors'
 import actions from './actions'
 import types from './constants'
 
