@@ -1,3 +1,5 @@
+import authTypes from 'state/auth/constants'
+
 import types from './constants'
 
 const initialState = {
@@ -15,6 +17,8 @@ export function symbolsReducer(state = initialState, action) {
         pairs: pairs.sort(),
       }
     }
+    case authTypes.LOGOUT:
+      return initialState
     default: {
       return state
     }
