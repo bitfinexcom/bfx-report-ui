@@ -60,12 +60,15 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
 }
 
 .bitfinex-pagination-group {
-  padding-top: 10px;
-
   &> button {
     margin-right: 2px;
     margin-left: 2px;
   }
+}
+
+.bitfinex-table {
+  padding-top: 4px;
+  padding-bottom: 8px;
 }
 
 body.#{$ns}-dark .bitfinex-green-text > div {

@@ -96,45 +96,47 @@ class Pagination extends PureComponent {
     ) : undefined
 
     return (
-      <div className='bitfinex-pagination-group'>
-        <Button
-          minimal
-          icon='double-chevron-left'
-          onClick={prevClick}
-          disabled={prevCondition || loading}
-        />
-        <Button
-          minimal
-          icon='chevron-left'
-          onClick={this.backward}
-          disabled={currentPage - 1 === 0 || loading}
-        />
-        {intl.formatMessage({ id: 'pagination.page' })}
-        <input
-          className='bitfinex-page-input'
-          ref={this.pageInput}
-          placeholder={currentPage}
-          onKeyPress={this.handleKeyPress}
-          data-pagelen={pageLen}
-          disabled={loading}
-        />
-        {intl.formatMessage({ id: 'pagination.of' })}
-        &nbsp;
-        {pageLen}
-        {renderRestDots}
-        <Button
-          minimal
-          icon='chevron-right'
-          onClick={this.forward}
-          disabled={currentPage === pageLen || loading}
-        />
-        <Button
-          minimal
-          rightIcon='double-chevron-right'
-          onClick={nextClick}
-          disabled={nextCondition || loading}
-        />
-        {renderLoading}
+      <div className='row center-xs'>
+        <div className='bitfinex-pagination-group col-xs-12 col-sm-6'>
+          <Button
+            minimal
+            icon='double-chevron-left'
+            onClick={prevClick}
+            disabled={prevCondition || loading}
+          />
+          <Button
+            minimal
+            icon='chevron-left'
+            onClick={this.backward}
+            disabled={currentPage - 1 === 0 || loading}
+          />
+          {intl.formatMessage({ id: 'pagination.page' })}
+          <input
+            className='bitfinex-page-input'
+            ref={this.pageInput}
+            placeholder={currentPage}
+            onKeyPress={this.handleKeyPress}
+            data-pagelen={pageLen}
+            disabled={loading}
+          />
+          {intl.formatMessage({ id: 'pagination.of' })}
+          &nbsp;
+          {pageLen}
+          {renderRestDots}
+          <Button
+            minimal
+            icon='chevron-right'
+            onClick={this.forward}
+            disabled={currentPage === pageLen || loading}
+          />
+          <Button
+            minimal
+            rightIcon='double-chevron-right'
+            onClick={nextClick}
+            disabled={nextCondition || loading}
+          />
+          {renderLoading}
+        </div>
       </div>
     )
   }

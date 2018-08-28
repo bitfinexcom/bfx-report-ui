@@ -166,6 +166,19 @@ class Orders extends PureComponent {
       )
     }
 
+    const renderPagination = (
+      <Pagination
+        type='orders'
+        dataLen={entries.length}
+        loading={pageLoading}
+        offset={offset}
+        jumpPage={jumpPage}
+        prevClick={this.fetchPrev}
+        nextClick={this.fetchNext}
+        pageOffset={pageOffset}
+      />
+    )
+
     let showContent
     if (loading) {
       showContent = (
@@ -187,6 +200,7 @@ class Orders extends PureComponent {
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>
+          {renderPagination}
           <Table
             className='bitfinex-table'
             numRows={numRows}
@@ -239,16 +253,7 @@ class Orders extends PureComponent {
               cellRenderer={statusCellRenderer}
             />
           </Table>
-          <Pagination
-            type='orders'
-            dataLen={entries.length}
-            loading={pageLoading}
-            offset={offset}
-            jumpPage={jumpPage}
-            prevClick={this.fetchPrev}
-            nextClick={this.fetchNext}
-            pageOffset={pageOffset}
-          />
+          {renderPagination}
         </Fragment>
       )
     }
