@@ -7,7 +7,7 @@ export const getAuthToken = state => getAuth(state).authToken
 export const getIsShown = state => getAuth(state).isShown
 
 export function selectAuth(state) {
-  return state.auth.authToken
+  return getAuthToken(state)
     ? {
       authToken: getAuthToken(state),
     }
