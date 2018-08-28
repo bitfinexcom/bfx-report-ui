@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
-import { formatPair } from 'state/utils'
+import { formatSymbolToPair } from 'state/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 
@@ -119,33 +119,54 @@ export function ordersReducer(state = initialState, action) {
       const { existPairs } = state
       let smallestMts
       const entries = result.map((entry) => {
+        const {
+          amount,
+          amountOrig,
+          cid,
+          flags,
+          gid,
+          id,
+          mtsCreate,
+          mtsUpdate,
+          notify,
+          placedId,
+          price,
+          priceAvg,
+          priceAuxLimit,
+          priceTrailing,
+          status,
+          symbol,
+          type,
+          typePrev,
+        } = entry
+        const pair = `${symbol.slice(1, 4).toLowerCase()}${symbol.slice(4, 7).toLowerCase()}`
         // save new pair to existPairs list
-        if (existPairs.indexOf(entry.pair) === -1) {
-          existPairs.push(entry.pair)
+        if (existPairs.indexOf(pair) === -1) {
+          existPairs.push(pair)
         }
         // log smallest mts
-        if (!smallestMts || smallestMts > entry.mtsUpdate) {
-          smallestMts = entry.mtsUpdate
+        if (!smallestMts || smallestMts > mtsUpdate) {
+          smallestMts = mtsUpdate
         }
         return {
-          id: entry.id,
-          gid: entry.gid,
-          cid: entry.cid,
-          pair: formatPair(entry.symbol),
-          mtsCreate: entry.mtsCreate,
-          mtsUpdate: entry.mtsUpdate,
-          amount: entry.amount,
-          amountOrig: entry.amountOrig,
-          type: entry.type,
-          typePrev: entry.typePrev,
-          flags: entry.flags,
-          status: entry.status,
-          price: entry.price,
-          priceAvg: entry.priceAvg,
-          priceTrailing: entry.priceTrailing,
-          priceAuxLimit: entry.priceAuxLimit,
-          notify: entry.notify,
-          placedId: entry.placedId,
+          id,
+          gid,
+          cid,
+          pair: formatSymbolToPair(symbol),
+          mtsCreate,
+          mtsUpdate,
+          amount,
+          amountOrig,
+          type,
+          typePrev,
+          flags,
+          status,
+          price,
+          priceAvg,
+          priceTrailing,
+          priceAuxLimit,
+          notify,
+          placedId,
         }
       })
       return {

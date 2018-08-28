@@ -24,7 +24,7 @@ import queryConstants from 'state/query/constants'
 import {
   checkFetch,
   formatTime,
-  formatGetSymbolsPair,
+  formatPair,
   getCurrentEntries,
 } from 'state/utils'
 
@@ -34,10 +34,8 @@ const COLUMN_WIDTHS = [100, 80, 150, 100, 100, 100, 100, 150, 200]
 const LIMIT = queryConstants.DEFAULT_ORDERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_ORDERS_PAGE_SIZE
 const TYPE = queryConstants.MENU_ORDERS
-const ALL = {
-  name: 'ALL',
-  value: '',
-}
+const ALL = 'ALL'
+const WILD_CARD = ['', ALL]
 
 class Orders extends PureComponent {
   constructor(props) {
@@ -95,15 +93,7 @@ class Orders extends PureComponent {
       targetPair,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const formatedPairs = pairs.map(pair => ({
-      name: formatGetSymbolsPair(pair),
-      value: pair,
-    }))
-    const formatedExistPairs = existPairs.map(pair => ({
-      name: formatGetSymbolsPair(pair),
-      value: pair,
-    }))
-    const pairList = pairs ? [ALL, ...formatedPairs] : [ALL, ...formatedExistPairs]
+    const pairList = pairs ? [ALL, ...pairs] : [ALL, ...existPairs]
     // eslint-disable-next-line react/destructuring-assignment
     const currentPair = targetPair || ALL.value
     const numRows = filteredData.length
@@ -220,8 +210,8 @@ class Orders extends PureComponent {
       if (!modifiers.matchesPredicate) {
         return null
       }
-      const isCurrent = currentPair === pair.value
-      const className = (pair.value === '' || existPairs.includes(pair.value)) && !isCurrent
+      const isCurrent = currentPair === pair
+      const className = (WILD_CARD.includes(pair) || existPairs.includes(pair)) && !isCurrent
         ? 'bitfinex-queried-symbol' : ''
 
       return (
@@ -230,14 +220,14 @@ class Orders extends PureComponent {
           active={modifiers.active}
           intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
           disabled={modifiers.disabled}
-          key={pair.value}
+          key={pair}
           onClick={this.handleClick(pair.value)}
-          text={pair.name}
+          text={formatPair(pair)}
         />
       )
     }
 
-    const filterPair = (query, pair) => pair.name.toLowerCase().indexOf(query.toLowerCase()) >= 0
+    const filterPair = (query, pair) => pair.toLowerCase().indexOf(query.replace('/', '').toLowerCase()) >= 0
 
     const renderPairSelector = (
       <Fragment>
@@ -250,7 +240,7 @@ class Orders extends PureComponent {
           onItemSelect={this.handleClick}
         >
           <Button
-            text={formatGetSymbolsPair(currentPair)}
+            text={formatPair(currentPair)}
             rightIcon='caret-down'
             disabled={pairs.length === 0}
           />
