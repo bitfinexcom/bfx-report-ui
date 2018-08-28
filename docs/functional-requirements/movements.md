@@ -19,7 +19,7 @@ Movemnets shows deposits and withdrawals data by date. Contain sections `Export 
     1. `DESTINATION`(translate)
         1. If its Ethereum, the extra link `(etherscan.io)` is attached and open a new tab to `https://etherscan.io/address/{address}`
 1. Should show tooltip when mouse hover any contents in table cell
-1. The pagination bar is shown at the bottom of the table.
+1. The pagination bar is shown at the top and the bottom of the table.
     1. The query limit is 25 entries at once
     1. The table shows 25 entries per page.
     1. should work similar to ledgers
