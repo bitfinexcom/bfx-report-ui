@@ -5,16 +5,18 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { postJsonfetch, selectAuth } from 'state/utils'
-import { getTimeFrame } from 'state/query/selector'
+import { postJsonfetch } from 'state/utils'
+import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
+import { getTrades } from './selectors'
 
-function getTrades(auth, query, smallestMts) {
+function getReqTrades(auth, query, smallestMts) {
   const params = getTimeFrame(query, 'trades', smallestMts)
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
@@ -26,8 +28,8 @@ function getTrades(auth, query, smallestMts) {
 function* fetchTrades() {
   try {
     const auth = yield select(selectAuth)
-    const query = yield select(state => state.query)
-    const { result = [], error } = yield call(getTrades, auth, query, 0)
+    const query = yield select(getQuery)
+    const { result = [], error } = yield call(getReqTrades, auth, query, 0)
     yield put(actions.updateTrades(result))
 
     if (error) {
@@ -50,15 +52,15 @@ const LIMIT = queryTypes.DEFAULT_TRADES_QUERY_LIMIT
 
 function* fetchNextTrades() {
   try {
-    const trades = yield select(state => state.trades)
+    const trades = yield select(getTrades)
     const { offset, entries, smallestMts } = trades
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
-    const query = yield select(state => state.query)
-    const { result = [], error } = yield call(getTrades, auth, query, smallestMts)
+    const query = yield select(getQuery)
+    const { result = [], error } = yield call(getReqTrades, auth, query, smallestMts)
     yield put(actions.updateTrades(result))
 
     if (error) {

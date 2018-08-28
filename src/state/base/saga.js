@@ -6,9 +6,10 @@ import {
 import { delay } from 'redux-saga'
 
 import types from './constants'
+import { getTheme } from './selectors'
 
 function* updateTheme() {
-  const theme = yield select(state => state.base.theme)
+  const theme = yield select(getTheme)
   document.body.className = theme
 }
 

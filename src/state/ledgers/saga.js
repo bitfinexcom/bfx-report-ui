@@ -5,16 +5,18 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { postJsonfetch, selectAuth } from 'state/utils'
-import { getTimeFrame } from 'state/query/selector'
+import { postJsonfetch } from 'state/utils'
+import { selectAuth } from 'state/auth/selectors'
+import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
+import { getCurrentSymbol, getLedgers } from './selectors'
 
-function getLedgers(auth, query, currentSymbol, smallestMts) {
+function getReqLedgers(auth, query, currentSymbol, smallestMts) {
   const params = getTimeFrame(query, 'ledgers', smallestMts)
   if (currentSymbol) {
     params.symbol = currentSymbol
@@ -28,11 +30,10 @@ function getLedgers(auth, query, currentSymbol, smallestMts) {
 
 function* fetchLedgers() {
   try {
-    const ledgers = yield select(state => state.ledgers)
-    const { currentSymbol } = ledgers
+    const currentSymbol = yield select(getCurrentSymbol)
     const auth = yield select(selectAuth)
-    const query = yield select(state => state.query)
-    const { result = [], error } = yield call(getLedgers, auth, query, currentSymbol, 0)
+    const query = yield select(getQuery)
+    const { result = [], error } = yield call(getReqLedgers, auth, query, currentSymbol, 0)
     yield put(actions.updateLedgers(result))
 
     if (error) {
@@ -55,17 +56,19 @@ const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
 
 function* fetchNextLedgers() {
   try {
-    const ledgers = yield select(state => state.ledgers)
     const {
-      currentSymbol, offset, entries, smallestMts,
-    } = ledgers
+      currentSymbol,
+      offset,
+      entries,
+      smallestMts,
+    } = yield select(getLedgers)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
-    const query = yield select(state => state.query)
-    const { result = [], error } = yield call(getLedgers, auth, query, currentSymbol, smallestMts)
+    const query = yield select(getQuery)
+    const { result = [], error } = yield call(getReqLedgers, auth, query, currentSymbol, smallestMts)
     yield put(actions.updateLedgers(result))
 
     if (error) {

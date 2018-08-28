@@ -1,15 +1,14 @@
 import { connect } from 'react-redux'
 
 import { exportCsv, prepareExport, setTimeRange } from 'state/query/actions'
+import { getAuthStatus, getIsShown } from 'state/auth/selectors'
 
 import Main from './Main'
 
-function mapStateToProps(state = {}) {
-  return {
-    authIsShown: state.auth.isShown,
-    authStatus: state.auth.authStatus,
-  }
-}
+const mapStateToProps = (state = {}) => ({
+  authIsShown: getIsShown(state),
+  authStatus: getAuthStatus(state),
+})
 
 const mapDispatchToProps = dispatch => ({
   exportCsv: target => dispatch(exportCsv(target)),

@@ -5,16 +5,18 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { postJsonfetch, selectAuth } from 'state/utils'
-import { getTimeFrame } from 'state/query/selector'
+import { postJsonfetch } from 'state/utils'
+import { selectAuth } from 'state/auth/selectors'
+import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
+import { getOrders } from './selectors'
 
-function getOrders(auth, query, smallestMts) {
+function getReqOrders(auth, query, smallestMts) {
   const params = getTimeFrame(query, 'orders', smallestMts)
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
@@ -26,8 +28,8 @@ function getOrders(auth, query, smallestMts) {
 function* fetchOrders() {
   try {
     const auth = yield select(selectAuth)
-    const query = yield select(state => state.query)
-    const { result = [], error } = yield call(getOrders, auth, query, 0)
+    const query = yield select(getQuery)
+    const { result = [], error } = yield call(getReqOrders, auth, query, 0)
     yield put(actions.updateOrders(result))
 
     if (error) {
@@ -50,15 +52,14 @@ const LIMIT = queryTypes.DEFAULT_ORDERS_QUERY_LIMIT
 
 function* fetchNextOrders() {
   try {
-    const orders = yield select(state => state.orders)
-    const { offset, entries, smallestMts } = orders
+    const { offset, entries, smallestMts } = yield select(getOrders)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
-    const query = yield select(state => state.query)
-    const { result = [], error } = yield call(getOrders, auth, query, smallestMts)
+    const query = yield select(getQuery)
+    const { result = [], error } = yield call(getReqOrders, auth, query, smallestMts)
     yield put(actions.updateOrders(result))
 
     if (error) {

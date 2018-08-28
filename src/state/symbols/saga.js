@@ -6,9 +6,10 @@ import {
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
-import { postJsonfetch, selectAuth } from 'state/utils'
+import { postJsonfetch } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import types from 'state/auth/constants'
+import { selectAuth } from 'state/auth/selectors'
 import { platform } from 'var/config'
 
 import actions from './actions'

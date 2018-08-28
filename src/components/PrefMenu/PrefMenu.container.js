@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
+
 import baseActions from 'state/base/actions'
+import { getLocale } from 'state/base/selectors'
+
 import PrefMenu from './PrefMenu'
 
-function mapStateToProps(state = {}) {
-  return {
-    locale: state.base.locale,
-  }
-}
+const mapStateToProps = (state = {}) => ({
+  locale: getLocale(state),
+})
 
 const mapDispatchToProps = dispatch => ({
   setLang: lang => dispatch(baseActions.setLang(lang)),

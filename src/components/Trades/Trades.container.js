@@ -1,18 +1,23 @@
 import { connect } from 'react-redux'
 
 import actions from 'state/trades/actions'
+import {
+  getDataReceived,
+  getEntries,
+  getOffset,
+  getPageLoading,
+  getPageOffset,
+} from 'state/trades/selectors'
 
 import Trades from './Trades'
 
-function mapStateToProps(state = {}) {
-  return {
-    offset: state.trades.offset,
-    entries: state.trades.entries,
-    loading: !state.trades.dataReceived,
-    pageOffset: state.trades.pageOffset,
-    pageLoading: state.trades.pageLoading,
-  }
-}
+const mapStateToProps = (state = {}) => ({
+  offset: getOffset(state),
+  entries: getEntries(state),
+  loading: !getDataReceived(state),
+  pageOffset: getPageOffset(state),
+  pageLoading: getPageLoading(state),
+})
 
 const mapDispatchToProps = dispatch => ({
   fetchTrades: () => dispatch(actions.fetchTrades()),

@@ -5,16 +5,18 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { postJsonfetch, selectAuth } from 'state/utils'
-import { getTimeFrame } from 'state/query/selector'
+import { postJsonfetch } from 'state/utils'
+import { selectAuth } from 'state/auth/selectors'
+import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
+import { getMovements } from './selectors'
 
-function getMovements(auth, query, smallestMts) {
+function getReqMovements(auth, query, smallestMts) {
   const params = getTimeFrame(query, 'movements', smallestMts)
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
@@ -26,8 +28,8 @@ function getMovements(auth, query, smallestMts) {
 function* fetchMovements() {
   try {
     const auth = yield select(selectAuth)
-    const query = yield select(state => state.query)
-    const { result = [], error } = yield call(getMovements, auth, query, 0)
+    const query = yield select(getQuery)
+    const { result = [], error } = yield call(getReqMovements, auth, query, 0)
     yield put(actions.updateMovements(result))
 
     if (error) {
@@ -50,15 +52,14 @@ const LIMIT = queryTypes.DEFAULT_MOVEMENTS_QUERY_LIMIT
 
 function* fetchNextMovements() {
   try {
-    const movements = yield select(state => state.movements)
-    const { offset, entries, smallestMts } = movements
+    const { offset, entries, smallestMts } = yield select(getMovements)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
-    const query = yield select(state => state.query)
-    const { result = [], error } = yield call(getMovements, auth, query, smallestMts)
+    const query = yield select(getQuery)
+    const { result = [], error } = yield call(getReqMovements, auth, query, smallestMts)
     yield put(actions.updateMovements(result))
 
     if (error) {
