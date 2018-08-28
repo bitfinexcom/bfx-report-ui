@@ -134,6 +134,19 @@ class Movements extends PureComponent {
       )
     }
 
+    const renderPagination = (
+      <Pagination
+        type='movements'
+        dataLen={entries.length}
+        loading={pageLoading}
+        offset={offset}
+        jumpPage={jumpPage}
+        prevClick={this.fetchPrev}
+        nextClick={this.fetchNext}
+        pageOffset={pageOffset}
+      />
+    )
+
     const titleMsgId = type === TYPE_WITHDRAWALS ? 'withdrawals.title' : 'deposits.title'
     let showContent
     if (loading) {
@@ -156,16 +169,7 @@ class Movements extends PureComponent {
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>
-          <Pagination
-            type='movements'
-            dataLen={entries.length}
-            loading={pageLoading}
-            offset={offset}
-            jumpPage={jumpPage}
-            prevClick={this.fetchPrev}
-            nextClick={this.fetchNext}
-            pageOffset={pageOffset}
-          />
+          {renderPagination}
           <Table
             className='bitfinex-table'
             numRows={numRows}
@@ -198,16 +202,7 @@ class Movements extends PureComponent {
               cellRenderer={destinationCellRenderer}
             />
           </Table>
-          <Pagination
-            type='movements'
-            dataLen={entries.length}
-            loading={pageLoading}
-            offset={offset}
-            jumpPage={jumpPage}
-            prevClick={this.fetchPrev}
-            nextClick={this.fetchNext}
-            pageOffset={pageOffset}
-          />
+          {renderPagination}
         </Fragment>
       )
     }

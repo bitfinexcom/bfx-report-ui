@@ -219,6 +219,19 @@ class Ledgers extends PureComponent {
       </Fragment>
     )
 
+    const renderPagination = (
+      <Pagination
+        type='ledgers'
+        dataLen={entries.length}
+        loading={pageLoading}
+        offset={offset}
+        jumpPage={jumpPage}
+        nextClick={this.fetchNext}
+        prevClick={this.fetchPrev}
+        pageOffset={pageOffset}
+      />
+    )
+
     let showContent
     if (loading) {
       showContent = (
@@ -249,16 +262,7 @@ class Ledgers extends PureComponent {
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>
-          <Pagination
-            type='ledgers'
-            dataLen={entries.length}
-            loading={pageLoading}
-            offset={offset}
-            jumpPage={jumpPage}
-            nextClick={this.fetchNext}
-            prevClick={this.fetchPrev}
-            pageOffset={pageOffset}
-          />
+          {renderPagination}
           <Table
             className='bitfinex-table'
             numRows={numRows}
@@ -291,16 +295,7 @@ class Ledgers extends PureComponent {
               cellRenderer={mtsCellRenderer}
             />
           </Table>
-          <Pagination
-            type='ledgers'
-            dataLen={entries.length}
-            loading={pageLoading}
-            offset={offset}
-            jumpPage={jumpPage}
-            nextClick={this.fetchNext}
-            prevClick={this.fetchPrev}
-            pageOffset={pageOffset}
-          />
+          {renderPagination}
         </Fragment>
       )
     }

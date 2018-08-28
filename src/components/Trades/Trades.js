@@ -141,6 +141,19 @@ class Trades extends PureComponent {
       )
     }
 
+    const renderPagination = (
+      <Pagination
+        type='trades'
+        dataLen={entries.length}
+        loading={pageLoading}
+        offset={offset}
+        jumpPage={jumpPage}
+        prevClick={this.fetchPrev}
+        nextClick={this.fetchNext}
+        pageOffset={pageOffset}
+      />
+    )
+
     let showContent
     if (loading) {
       showContent = (
@@ -162,16 +175,7 @@ class Trades extends PureComponent {
               {intl.formatMessage({ id: 'timeframe.download' })}
             </Button>
           </h4>
-          <Pagination
-            type='trades'
-            dataLen={entries.length}
-            loading={pageLoading}
-            offset={offset}
-            jumpPage={jumpPage}
-            prevClick={this.fetchPrev}
-            nextClick={this.fetchNext}
-            pageOffset={pageOffset}
-          />
+          {renderPagination}
           <Table
             className='bitfinex-table'
             numRows={numRows}
@@ -209,16 +213,7 @@ class Trades extends PureComponent {
               cellRenderer={mtsCellRenderer}
             />
           </Table>
-          <Pagination
-            type='trades'
-            dataLen={entries.length}
-            loading={pageLoading}
-            offset={offset}
-            jumpPage={jumpPage}
-            prevClick={this.fetchPrev}
-            nextClick={this.fetchNext}
-            pageOffset={pageOffset}
-          />
+          {renderPagination}
         </Fragment>
       )
     }
