@@ -3,6 +3,8 @@ import { injectIntl } from 'react-intl'
 import {
   Card,
   Elevation,
+  Intent,
+  MenuItem,
 } from '@blueprintjs/core'
 import {
   Cell,
@@ -10,6 +12,7 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
+import { Select } from '@blueprintjs/select'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
@@ -21,6 +24,7 @@ import queryConstants from 'state/query/constants'
 import {
   checkFetch,
   formatTime,
+  formatGetSymbolsPair,
   getCurrentEntries,
 } from 'state/utils'
 
@@ -30,10 +34,16 @@ const COLUMN_WIDTHS = [100, 80, 150, 100, 100, 100, 100, 150, 200]
 const LIMIT = queryConstants.DEFAULT_ORDERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_ORDERS_PAGE_SIZE
 const TYPE = queryConstants.MENU_ORDERS
+const ALL = {
+  name: 'ALL',
+  value: '',
+}
 
 class Orders extends PureComponent {
   constructor(props) {
     super(props)
+    this.handlers = {}
+    this.handleClick = this.handleClick.bind(this)
     this.fetchPrev = this.fetchPrev.bind(this)
     this.fetchNext = this.fetchNext.bind(this)
   }
@@ -49,6 +59,16 @@ class Orders extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
+  handleClick(pair) {
+    if (!this.handlers[pair]) {
+      this.handlers[pair] = () => {
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.setTargetPair(pair === ALL.value ? '' : pair)
+      }
+    }
+    return this.handlers[pair]
+  }
+
   fetchPrev() {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevOrders()
@@ -61,17 +81,31 @@ class Orders extends PureComponent {
 
   render() {
     const {
+      existPairs,
       offset,
       pageOffset,
       pageLoading,
+      pairs,
       entries,
       handleClickExport,
       intl,
       jumpPage,
       loading,
       refresh,
+      targetPair,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
+    const formatedPairs = pairs.map(pair => ({
+      name: formatGetSymbolsPair(pair),
+      value: pair,
+    }))
+    const formatedExistPairs = existPairs.map(pair => ({
+      name: formatGetSymbolsPair(pair),
+      value: pair,
+    }))
+    const pairList = pairs ? [ALL, ...formatedPairs] : [ALL, ...formatedExistPairs]
+    // eslint-disable-next-line react/destructuring-assignment
+    const currentPair = targetPair || ALL.value
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
@@ -182,6 +216,48 @@ class Orders extends PureComponent {
       />
     )
 
+    const renderPair = (pair, { modifiers }) => {
+      if (!modifiers.matchesPredicate) {
+        return null
+      }
+      const isCurrent = currentPair === pair.value
+      const className = (pair.value === '' || existPairs.includes(pair.value)) && !isCurrent
+        ? 'bitfinex-queried-symbol' : ''
+
+      return (
+        <MenuItem
+          className={className}
+          active={modifiers.active}
+          intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
+          disabled={modifiers.disabled}
+          key={pair.value}
+          onClick={this.handleClick(pair.value)}
+          text={pair.name}
+        />
+      )
+    }
+
+    const filterPair = (query, pair) => pair.name.toLowerCase().indexOf(query.toLowerCase()) >= 0
+
+    const renderPairSelector = (
+      <Fragment>
+          &nbsp;
+        <Select
+          disabled={pairs.length === 0}
+          items={pairList}
+          itemRenderer={renderPair}
+          itemPredicate={filterPair}
+          onItemSelect={this.handleClick}
+        >
+          <Button
+            text={formatGetSymbolsPair(currentPair)}
+            rightIcon='caret-down'
+            disabled={pairs.length === 0}
+          />
+        </Select>
+      </Fragment>
+    )
+
     let showContent
     if (loading) {
       showContent = (
@@ -189,7 +265,15 @@ class Orders extends PureComponent {
       )
     } else if (numRows === 0) {
       showContent = (
-        <NoData title='orders.title' />
+        <Fragment>
+          <h4>
+            {intl.formatMessage({ id: 'orders.title' })}
+            &nbsp;
+            <TimeRange />
+            {renderPairSelector}
+          </h4>
+          <NoData />
+        </Fragment>
       )
     } else {
       showContent = (
@@ -198,6 +282,7 @@ class Orders extends PureComponent {
             {intl.formatMessage({ id: 'orders.title' })}
             &nbsp;
             <TimeRange />
+            {renderPairSelector}
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;

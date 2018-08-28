@@ -30,8 +30,15 @@ export function formatDate(mts) {
   return `${MONTH_SYM[date.getMonth()]} ${_padStart(date.getDate(), 2, 0)} ${date.getFullYear()}`
 }
 
-export function formatPair(symbol) {
-  return `${symbol.slice(1, 4)}/${symbol.slice(4, 7)}`
+export function formatPair(pair) {
+  return `${pair.slice(1, 4)}/${pair.slice(4, 7)}`
+}
+
+export function formatGetSymbolsPair(pair) {
+  if (!pair) {
+    return 'ALL'
+  }
+  return `${pair.slice(0, 3).toUpperCase()}/${pair.slice(3, 6).toUpperCase()}`
 }
 
 const TYPE_WHITELIST = [
@@ -98,6 +105,7 @@ export function getSideMsg(side) {
 export default {
   checkFetch,
   formatDate,
+  formatGetSymbolsPair,
   formatPair,
   formatTime,
   getCurrentEntries,

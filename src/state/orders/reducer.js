@@ -101,10 +101,12 @@ const initialState = {
     }, */
   ],
   dataReceived: false,
+  existPairs: [],
   smallestMts: 0,
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
   pageLoading: false,
+  targetPair: '',
 }
 
 const LIMIT = queryTypes.DEFAULT_ORDERS_QUERY_LIMIT
@@ -114,8 +116,13 @@ export function ordersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_ORDERS: {
       const result = action.payload
+      const { existPairs } = state
       let smallestMts
       const entries = result.map((entry) => {
+        // save new pair to existPairs list
+        if (existPairs.indexOf(entry.pair) === -1) {
+          existPairs.push(entry.pair)
+        }
         // log smallest mts
         if (!smallestMts || smallestMts > entry.mtsUpdate) {
           smallestMts = entry.mtsUpdate
@@ -144,6 +151,7 @@ export function ordersReducer(state = initialState, action) {
       return {
         ...state,
         entries: [...state.entries, ...entries],
+        existPairs: existPairs.sort(),
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,
@@ -190,8 +198,19 @@ export function ordersReducer(state = initialState, action) {
         pageOffset: totalOffset - currentOffset,
       }
     }
+    case types.SET_PAIR:
+    return {
+      ...initialState,
+      targetPair: action.payload,
+      existPairs: state.existPairs,
+    }
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
+      return {
+        ...initialState,
+        targetPair: state.targetPair,
+        existPairs: state.existPairs,
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {
