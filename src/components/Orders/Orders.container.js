@@ -22,7 +22,7 @@ const mapStateToProps = (state = {}) => ({
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   pairs: getPairs(state),
-  targetPair: getTargetPair(state)
+  targetPair: getTargetPair(state),
 })
 
 const mapDispatchToProps = dispatch => ({

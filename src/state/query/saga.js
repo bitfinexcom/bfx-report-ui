@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 import _omit from 'lodash/omit'
 
-import { getUrlParameter, postJsonfetch } from 'state/utils'
+import { formatRawPairToSymbol, getUrlParameter, postJsonfetch } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { getCurrentSymbol } from 'state/ledgers/selectors'
@@ -17,7 +17,6 @@ import { platform } from 'var/config'
 import { getQuery, getTimeFrame } from './selectors'
 import actions from './actions'
 import types from './constants'
-import { formatRawPairToSymbol } from '../utils';
 
 const {
   MENU_FCREDIT,
@@ -79,7 +78,7 @@ function checkEmail(auth) {
 }
 
 function getSelector(target) {
-  switch(target) {
+  switch (target) {
     case MENU_LEDGERS:
       return getCurrentSymbol
     case MENU_ORDERS:
@@ -90,7 +89,7 @@ function getSelector(target) {
 }
 
 function formatSymbol(target, sign) {
-  switch(target) {
+  switch (target) {
     case MENU_LEDGERS:
       return sign
     case MENU_ORDERS:
