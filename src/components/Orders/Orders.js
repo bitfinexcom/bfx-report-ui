@@ -61,7 +61,7 @@ class Orders extends PureComponent {
     if (!this.handlers[pair]) {
       this.handlers[pair] = () => {
         // eslint-disable-next-line react/destructuring-assignment
-        this.props.setTargetPair(pair === ALL.value ? '' : pair)
+        this.props.setTargetPair(pair === ALL ? '' : pair)
       }
     }
     return this.handlers[pair]
@@ -95,7 +95,7 @@ class Orders extends PureComponent {
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const pairList = pairs ? [ALL, ...pairs] : [ALL, ...existPairs]
     // eslint-disable-next-line react/destructuring-assignment
-    const currentPair = targetPair || ALL.value
+    const currentPair = targetPair || ALL
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
