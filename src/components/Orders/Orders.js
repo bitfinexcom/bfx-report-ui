@@ -221,7 +221,7 @@ class Orders extends PureComponent {
           intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
           disabled={modifiers.disabled}
           key={pair}
-          onClick={this.handleClick(pair.value)}
+          onClick={this.handleClick(pair)}
           text={formatPair(pair)}
         />
       )

@@ -41,6 +41,10 @@ export function formatPair(pair) {
   return `${pair.slice(0, 3).toUpperCase()}/${pair.slice(3, 6).toUpperCase()}`
 }
 
+export function formatRawPairToSymbol(pair) {
+  return `t${pair.toUpperCase()}`
+}
+
 const TYPE_WHITELIST = [
   'fcredit',
   'floan',
@@ -106,6 +110,7 @@ export default {
   checkFetch,
   formatDate,
   formatPair,
+  formatRawPairToSymbol,
   formatSymbolToPair,
   formatTime,
   getCurrentEntries,
