@@ -18,6 +18,9 @@ import actions from './actions'
 import types from './constants'
 
 const {
+  MENU_FCREDIT,
+  MENU_FLOAN,
+  MENU_FOFFER,
   MENU_LEDGERS,
   MENU_ORDERS,
   MENU_TRADES,
@@ -35,6 +38,15 @@ function getCSV(auth, query, target, symbol) {
   }
   let method = ''
   switch (target) {
+    case MENU_FCREDIT:
+      method = 'getFundingCreditHistoryCsv'
+      break
+    case MENU_FLOAN:
+      method = 'getFundingLoanHistoryCsv'
+      break
+    case MENU_FOFFER:
+      method = 'getFundingOfferHistoryCsv'
+      break
     case MENU_ORDERS:
       method = 'getOrdersCsv'
       break

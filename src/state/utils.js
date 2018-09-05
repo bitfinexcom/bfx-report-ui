@@ -35,6 +35,9 @@ export function formatPair(symbol) {
 }
 
 const TYPE_WHITELIST = [
+  'fcredit',
+  'floan',
+  'foffer',
   'ledgers',
   'movements',
   'orders',

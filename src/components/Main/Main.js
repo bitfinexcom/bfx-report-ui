@@ -6,6 +6,9 @@ import {
   MenuItem,
 } from '@blueprintjs/core'
 
+import FundingCreditHistory from 'components/FundingCreditHistory'
+import FundingLoanHistory from 'components/FundingLoanHistory'
+import FundingOfferHistory from 'components/FundingOfferHistory'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
@@ -18,6 +21,9 @@ import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
 
 const {
+  MENU_FCREDIT,
+  MENU_FLOAN,
+  MENU_FOFFER,
   MENU_LEDGERS,
   MENU_ORDERS,
   MENU_TRADES,
@@ -26,6 +32,9 @@ const {
 } = queryType
 
 const ICON = {
+  fcredit: 'book',
+  floan: 'book',
+  foffer: 'book',
   ledgers: 'book',
   orders: 'flows',
   trades: 'exchange',
@@ -36,6 +45,9 @@ const ICON = {
 class Main extends PureComponent {
   constructor(props) {
     super(props)
+    this.handleClickFCredit = this.handleClick.bind(this, MENU_FCREDIT)
+    this.handleClickFLoan = this.handleClick.bind(this, MENU_FLOAN)
+    this.handleClickFOffer = this.handleClick.bind(this, MENU_FOFFER)
     this.handleClickLedgers = this.handleClick.bind(this, MENU_LEDGERS)
     this.handleClickOrders = this.handleClick.bind(this, MENU_ORDERS)
     this.handleClickTrades = this.handleClick.bind(this, MENU_TRADES)
@@ -116,6 +128,15 @@ class Main extends PureComponent {
     } = this.state
     let content
     switch (target) {
+      case MENU_FCREDIT:
+        content = (<FundingCreditHistory handleClickExport={this.handleClickExport} />)
+        break
+      case MENU_FOFFER:
+        content = (<FundingOfferHistory handleClickExport={this.handleClickExport} />)
+        break
+      case MENU_FLOAN:
+        content = (<FundingLoanHistory handleClickExport={this.handleClickExport} />)
+        break
       case MENU_TRADES:
         content = (<Trades handleClickExport={this.handleClickExport} />)
         break
@@ -164,6 +185,25 @@ class Main extends PureComponent {
           text={intl.formatMessage({ id: 'withdrawals.title' })}
           onClick={this.handleClickWithdrawals}
           active={target === MENU_WITHDRAWALS}
+        />
+        <MenuDivider />
+        <MenuItem
+          icon={ICON[MENU_FOFFER]}
+          text={intl.formatMessage({ id: 'foffer.title' })}
+          onClick={this.handleClickFOffer}
+          active={target === MENU_FOFFER}
+        />
+        <MenuItem
+          icon={ICON[MENU_FLOAN]}
+          text={intl.formatMessage({ id: 'floan.title' })}
+          onClick={this.handleClickFLoan}
+          active={target === MENU_FLOAN}
+        />
+        <MenuItem
+          icon={ICON[MENU_FCREDIT]}
+          text={intl.formatMessage({ id: 'fcredit.title' })}
+          onClick={this.handleClickFCredit}
+          active={target === MENU_FCREDIT}
         />
       </Fragment>
     )
