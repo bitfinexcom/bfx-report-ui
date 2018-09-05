@@ -145,7 +145,7 @@ class FundingOfferHistory extends PureComponent {
     }
 
     const periodCellRenderer = (rowIndex) => {
-      const { period } = filteredData[rowIndex]
+      const period = `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'fcredit.column.period.days' })}`
       return (
         <Cell
           className='bitfinex-text-align-right'

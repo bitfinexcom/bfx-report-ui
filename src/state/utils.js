@@ -81,12 +81,24 @@ export function getUrlParameter(name) {
   return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
 }
 
+export function getSideMsg(side) {
+  if (side === 1) {
+    return 'provided'
+  } if (side === 0) {
+    return 'both'
+  } if (side === -1) {
+    return 'used'
+  }
+  return 'null'
+}
+
 export default {
   checkFetch,
   formatDate,
   formatPair,
   formatTime,
   getCurrentEntries,
+  getSideMsg,
   getUrlParameter,
   isValidateType,
   momentFormatter,
