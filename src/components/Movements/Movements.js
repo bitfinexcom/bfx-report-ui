@@ -28,7 +28,7 @@ import Inspector from './Inspector'
 
 // const TYPE_DEPOSITS = 'deposits'
 const TYPE_WITHDRAWALS = 'withdrawals'
-const COLUMN_WIDTHS = [80, 150, 125, 120, 400]
+const COLUMN_WIDTHS = [80, 150, 100, 125, 120, 400]
 const LIMIT = queryConstants.DEFAULT_MOVEMENTS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_MOVEMENTS_PAGE_SIZE
 
@@ -93,6 +93,15 @@ class Movements extends PureComponent {
           <TruncatedFormat>
             {mtsUpdated}
           </TruncatedFormat>
+        </Cell>
+      )
+    }
+
+    const currencyCellRenderer = (rowIndex) => {
+      const { currency } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={currency}>
+          {currency}
         </Cell>
       )
     }
@@ -185,6 +194,11 @@ class Movements extends PureComponent {
               id='mtsupdated'
               name={intl.formatMessage({ id: 'movements.column.updated' })}
               cellRenderer={mtsUpdatedCellRenderer}
+            />
+            <Column
+              id='currency'
+              name={intl.formatMessage({ id: 'movements.column.currency' })}
+              cellRenderer={currencyCellRenderer}
             />
             <Column
               id='status'

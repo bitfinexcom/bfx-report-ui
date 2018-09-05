@@ -28,7 +28,7 @@ import {
 
 import { propTypes, defaultProps } from './Ledgers.props'
 
-const COLUMN_WIDTHS = [500, 120, 120, 120, 150]
+const COLUMN_WIDTHS = [500, 100, 120, 120, 120, 150]
 const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
 const ALL = 'ALL'
@@ -99,6 +99,15 @@ class Ledgers extends PureComponent {
       return (
         <Cell tooltip={description}>
           {description}
+        </Cell>
+      )
+    }
+
+    const currencyCellRenderer = (rowIndex) => {
+      const { currency } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={currency}>
+          {currency}
         </Cell>
       )
     }
@@ -273,6 +282,11 @@ class Ledgers extends PureComponent {
               id='description'
               name={intl.formatMessage({ id: 'ledgers.column.description' })}
               cellRenderer={descriptionCellRenderer}
+            />
+            <Column
+              id='currency'
+              name={intl.formatMessage({ id: 'ledgers.column.currency' })}
+              cellRenderer={currencyCellRenderer}
             />
             <Column
               id='credit'
