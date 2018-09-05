@@ -102,7 +102,10 @@ class FundingLoanHistory extends PureComponent {
     const amountCellRenderer = (rowIndex) => {
       const { amount } = filteredData[rowIndex]
       return (
-        <Cell tooltip={amount}>
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={amount}
+        >
           {amount}
         </Cell>
       )
@@ -120,7 +123,10 @@ class FundingLoanHistory extends PureComponent {
     const rateCellRenderer = (rowIndex) => {
       const { rate } = filteredData[rowIndex]
       return (
-        <Cell tooltip={rate}>
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={rate}
+        >
           {rate}
         </Cell>
       )
@@ -129,7 +135,10 @@ class FundingLoanHistory extends PureComponent {
     const periodCellRenderer = (rowIndex) => {
       const { period } = filteredData[rowIndex]
       return (
-        <Cell tooltip={period}>
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={period}
+        >
           {period}
         </Cell>
       )
