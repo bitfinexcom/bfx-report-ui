@@ -20,6 +20,7 @@
   "nodata": "沒有相關資料。請試試其他時間範圍。",
   "ledgers.title": "餘額",
   "ledgers.column.description": "描述",
+  "ledgers.column.currency": "貨幣",
   "ledgers.column.time": "時間",
   "ledgers.column.credit": "借記",
   "ledgers.column.debit": "貸記",
@@ -28,6 +29,7 @@
   "deposits.title": "存款",
   "withdrawals.title": "提款",
   "movements.column.updated": "時間",
+  "movements.column.currency": "貨幣",
   "movements.column.amount": "數量",
   "movements.column.status": "狀態",
   "movements.column.destination": "去處",
@@ -72,5 +74,5 @@
   "status.fail": "{topic} 失敗 {detail}",
   "status.request.error": "{topic} 請求失敗 {detail}",
   "status.noid": "dev: the status action should contain the id param",
-  "symbols.title": "取得代幣資訊"
+  "symbols.title": "取得貨幣資訊"
 }
