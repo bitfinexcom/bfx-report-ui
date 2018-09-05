@@ -1,0 +1,121 @@
+import queryTypes from 'state/query/constants'
+import authTypes from 'state/auth/constants'
+
+import types from './constants'
+
+const initialState = {
+  entries: [],
+  dataReceived: false,
+  smallestMts: 0,
+  offset: 0, // end of current offset
+  pageOffset: 0, // start of current page
+  pageLoading: false,
+}
+
+const LIMIT = queryTypes.DEFAULT_FOFFER_QUERY_LIMIT
+const PAGE_SIZE = queryTypes.DEFAULT_FOFFER_PAGE_SIZE
+
+export function fundingOfferHistoryReducer(state = initialState, action) {
+  switch (action.type) {
+    case types.UPDATE_FOFFER: {
+      const result = action.payload
+      let smallestMts
+      const entries = result.map((entry) => {
+        const {
+          amount,
+          amountOrig,
+          flags,
+          hidden,
+          id,
+          mtsCreate,
+          mtsUpdate,
+          notify,
+          period,
+          rate,
+          rateReal,
+          renew,
+          status,
+          symbol,
+          type,
+        } = entry
+        // log smallest mts
+        if (!smallestMts || smallestMts > mtsUpdate) {
+          smallestMts = mtsUpdate
+        }
+        return {
+          id,
+          symbol: symbol.slice(1),
+          mtsCreate,
+          mtsUpdate,
+          amount,
+          amountOrig,
+          type,
+          flags,
+          status,
+          rate,
+          period,
+          notify,
+          hidden,
+          renew,
+          rateReal,
+        }
+      })
+      return {
+        ...state,
+        entries: [...state.entries, ...entries],
+        dataReceived: true,
+        smallestMts,
+        offset: state.offset + entries.length,
+        pageOffset: 0,
+        pageLoading: false,
+      }
+    }
+    case types.FETCH_FAIL:
+      return {
+        ...state,
+        pageLoading: false,
+      }
+    case types.FETCH_NEXT_FOFFER:
+      return (state.entries.length - LIMIT > state.offset)
+        ? {
+          ...state,
+          offset: state.offset + LIMIT,
+          pageOffset: 0,
+        } : {
+          ...state,
+          pageLoading: true,
+        }
+    case types.FETCH_PREV_FOFFER:
+      return {
+        ...state,
+        offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
+        pageOffset: 0,
+      }
+    case types.JUMP_FOFFER_PAGE: {
+      const page = action.payload
+      const totalOffset = (page - 1) * PAGE_SIZE
+      const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
+      if (totalOffset < LIMIT) {
+        const baseOffset = Math.ceil(page / LIMIT * PAGE_SIZE) * LIMIT
+        return {
+          ...state,
+          offset: state.offset < baseOffset ? state.offset : baseOffset,
+          pageOffset: totalOffset - currentOffset,
+        }
+      }
+      return {
+        ...state,
+        offset: currentOffset + LIMIT,
+        pageOffset: totalOffset - currentOffset,
+      }
+    }
+    case queryTypes.SET_TIME_RANGE:
+    case authTypes.LOGOUT:
+      return initialState
+    default: {
+      return state
+    }
+  }
+}
+
+export default fundingOfferHistoryReducer
