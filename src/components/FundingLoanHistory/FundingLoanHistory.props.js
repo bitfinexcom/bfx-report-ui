@@ -8,11 +8,10 @@ const FLOAN_ENTRIES_PROPS = PropTypes.shape({
   amount: PropTypes.number.isRequired,
   status: PropTypes.string,
   rate: PropTypes.number,
-  period: PropTypes.string,
+  period: PropTypes.number,
   mtsUpdate: PropTypes.number.isRequired,
-  mtsOpening: PropTypes.number.isRequired,
-  mtsLastPayout: PropTypes.number.isRequired,
-  noClose: PropTypes.bool,
+  mtsOpening: PropTypes.number,
+  mtsLastPayout: PropTypes.number,
 })
 
 export const propTypes = {

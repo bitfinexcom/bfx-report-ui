@@ -21,11 +21,12 @@ import {
   checkFetch,
   formatTime,
   getCurrentEntries,
+  getSideMsg,
 } from 'state/utils'
 
 import { propTypes, defaultProps } from './FundingLoanHistory.props'
 
-const COLUMN_WIDTHS = [80, 100, 50, 80, 100, 150, 80, 150, 150, 80, 150]
+const COLUMN_WIDTHS = [80, 100, 80, 100, 150, 130, 80, 150, 150, 150]
 const LIMIT = queryConstants.DEFAULT_FLOAN_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_FLOAN_PAGE_SIZE
 const TYPE = queryConstants.MENU_FLOAN
@@ -91,7 +92,7 @@ class FundingLoanHistory extends PureComponent {
     }
 
     const sideCellRenderer = (rowIndex) => {
-      const { side } = filteredData[rowIndex]
+      const side = intl.formatMessage({ id: `floan.side.${getSideMsg(filteredData[rowIndex].side)}` })
       return (
         <Cell tooltip={side}>
           {side}
@@ -133,7 +134,7 @@ class FundingLoanHistory extends PureComponent {
     }
 
     const periodCellRenderer = (rowIndex) => {
-      const { period } = filteredData[rowIndex]
+      const period = `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'floan.column.period.days' })}`
       return (
         <Cell
           className='bitfinex-text-align-right'
@@ -162,15 +163,6 @@ class FundingLoanHistory extends PureComponent {
           <TruncatedFormat>
             {mtsLastPayout}
           </TruncatedFormat>
-        </Cell>
-      )
-    }
-
-    const noCloseCellRenderer = (rowIndex) => {
-      const { noClose } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={noClose}>
-          {noClose}
         </Cell>
       )
     }
@@ -271,11 +263,6 @@ class FundingLoanHistory extends PureComponent {
               id='mtsLastPayout'
               name={intl.formatMessage({ id: 'floan.column.lastpayout' })}
               cellRenderer={mtsLastPayoutCellRenderer}
-            />
-            <Column
-              id='noclose'
-              name={intl.formatMessage({ id: 'floan.column.noclose' })}
-              cellRenderer={noCloseCellRenderer}
             />
             <Column
               id='mtsUpdate'
