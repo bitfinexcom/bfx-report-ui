@@ -105,7 +105,7 @@ class Header extends PureComponent {
                 <span>
                   {intl.formatMessage({ id: 'header.help' })}
                 </span>
-)}
+              )}
               position={Position.LEFT}
               usePortal={false}
             >
