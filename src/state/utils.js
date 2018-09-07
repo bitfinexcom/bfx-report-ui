@@ -82,14 +82,17 @@ export function getUrlParameter(name) {
 }
 
 export function getSideMsg(side) {
+  let msg
   if (side === 1) {
-    return 'provided'
-  } if (side === 0) {
-    return 'both'
-  } if (side === -1) {
-    return 'used'
+    msg = 'provided'
+  } else if (side === 0) {
+    msg = 'both'
+  } else if (side === -1) {
+    msg = 'taken'
+  } else {
+    msg = 'null'
   }
-  return 'null'
+  return msg
 }
 
 export default {
