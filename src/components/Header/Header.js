@@ -1,8 +1,12 @@
 import React, { Fragment, PureComponent } from 'react'
+import { injectIntl } from 'react-intl'
 import {
+  Button,
   Navbar,
   NavbarGroup,
   NavbarHeading,
+  Position,
+  Tooltip,
 } from '@blueprintjs/core'
 
 import Status from 'components/Status'
@@ -18,6 +22,11 @@ import mDarkLogo from './mobile_logo_dark.svg'
 import mLightLogo from './mobile_logo_light.svg'
 
 class Header extends PureComponent {
+  static handleHelp(e) {
+    e.preventDefault()
+    window.open('https://support.bitfinex.com/hc/en-us/articles/360008951853', '_blank')
+  }
+
   static propTypes = propTypes
 
   static defaultProps = defaultProps
@@ -49,7 +58,7 @@ class Header extends PureComponent {
   }
 
   render() {
-    const { authIsShown, authStatus } = this.props
+    const { authIsShown, authStatus, intl } = this.props
     const { isPrefOpen } = this.state
 
     const isLogin = !authIsShown && authStatus === true
@@ -91,6 +100,22 @@ class Header extends PureComponent {
             </NavbarHeading>
           </NavbarGroup>
           <NavbarGroup align='right'>
+            <Tooltip
+              content={(
+                <span>
+                  {intl.formatMessage({ id: 'header.help' })}
+                </span>
+)}
+              position={Position.LEFT}
+              usePortal={false}
+            >
+              <Button
+                className='bitfinex-help'
+                minimal
+                icon='help'
+                onClick={Header.handleHelp}
+              />
+            </Tooltip>
             {renderMenu}
           </NavbarGroup>
         </Navbar>
@@ -106,4 +131,4 @@ class Header extends PureComponent {
   }
 }
 
-export default Header
+export default injectIntl(Header)
