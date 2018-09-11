@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
   fetchNextTrades: () => dispatch(actions.fetchNextTrades()),
   fetchPrevTrades: () => dispatch(actions.fetchPrevTrades()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
+  refresh: () => dispatch(actions.refresh()),
 })
 
 const TradesContainer = connect(mapStateToProps, mapDispatchToProps)(Trades)

@@ -8,7 +8,7 @@ import {
 } from '@blueprintjs/core'
 
 import { formatDate } from 'state/utils'
-import Loading from 'components/Loading'
+import Loading from 'ui/Loading'
 
 import { propTypes, defaultProps } from './ExportDialog.props'
 

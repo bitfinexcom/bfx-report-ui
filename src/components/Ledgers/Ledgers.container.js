@@ -29,6 +29,7 @@ const mapDispatchToProps = dispatch => ({
   fetchNextLedgers: () => dispatch(actions.fetchNextLedgers()),
   fetchPrevLedgers: () => dispatch(actions.fetchPrevLedgers()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
+  refresh: () => dispatch(actions.refresh()),
   setCurrentSymbol: symbol => dispatch(actions.setCurrentSymbol(symbol)),
 })
 

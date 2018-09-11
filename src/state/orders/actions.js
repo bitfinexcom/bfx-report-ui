@@ -50,6 +50,15 @@ export function jumpPage(payload) {
 }
 
 /**
+ * Create an action to refresh orders.
+ */
+export function refresh() {
+  return {
+    type: types.REFRESH,
+  }
+}
+
+/**
  * Create an action to update Orders.
  * @param {Object[]} payload data set
  */
@@ -66,5 +75,6 @@ export default {
   fetchNextOrders,
   fetchPrevOrders,
   jumpPage,
+  refresh,
   updateOrders,
 }

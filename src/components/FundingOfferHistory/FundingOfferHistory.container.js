@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
   fetchNextFOffer: () => dispatch(actions.fetchNextFOffer()),
   fetchPrevFOffer: () => dispatch(actions.fetchPrevFOffer()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
+  refresh: () => dispatch(actions.refresh()),
 })
 
 const FundingOfferHistoryContainer = connect(mapStateToProps, mapDispatchToProps)(FundingOfferHistory)

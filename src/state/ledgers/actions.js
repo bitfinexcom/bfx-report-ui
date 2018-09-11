@@ -50,6 +50,15 @@ export function jumpPage(payload) {
 }
 
 /**
+ * Create an action to refresh ledgers.
+ */
+export function refresh() {
+  return {
+    type: types.REFRESH,
+  }
+}
+
+/**
  * Create an action to update Ledgers.
  * @param {Object[]} payload data set
  */
@@ -77,6 +86,7 @@ export default {
   fetchNextLedgers,
   fetchPrevLedgers,
   jumpPage,
+  refresh,
   setCurrentSymbol,
   updateLedgers,
 }

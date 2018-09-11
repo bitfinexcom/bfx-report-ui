@@ -50,6 +50,15 @@ export function jumpPage(payload) {
 }
 
 /**
+ * Create an action to refresh funding offer history.
+ */
+export function refresh() {
+  return {
+    type: types.REFRESH,
+  }
+}
+
+/**
  * Create an action to update funding offer history.
  * @param {Object[]} payload data set
  */
@@ -66,5 +75,6 @@ export default {
   fetchNextFOffer,
   fetchPrevFOffer,
   jumpPage,
+  refresh,
   updateFOffer,
 }

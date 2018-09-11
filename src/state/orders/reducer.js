@@ -190,6 +190,7 @@ export function ordersReducer(state = initialState, action) {
         pageOffset: totalOffset - currentOffset,
       }
     }
+    case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
     case authTypes.LOGOUT:
       return initialState

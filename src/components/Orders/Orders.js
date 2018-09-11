@@ -1,7 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
-  Button,
   Card,
   Elevation,
 } from '@blueprintjs/core'
@@ -12,10 +11,12 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import Loading from 'components/Loading'
-import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import Loading from 'ui/Loading'
+import NoData from 'ui/NoData'
+import ExportButton from 'ui/ExportButton'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -28,6 +29,7 @@ import { propTypes, defaultProps } from './Orders.props'
 const COLUMN_WIDTHS = [100, 80, 150, 100, 100, 100, 100, 150, 200]
 const LIMIT = queryConstants.DEFAULT_ORDERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_ORDERS_PAGE_SIZE
+const TYPE = queryConstants.MENU_ORDERS
 
 class Orders extends PureComponent {
   constructor(props) {
@@ -44,7 +46,7 @@ class Orders extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, 'orders')
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   fetchPrev() {
@@ -67,6 +69,7 @@ class Orders extends PureComponent {
       intl,
       jumpPage,
       loading,
+      refresh,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
@@ -168,7 +171,7 @@ class Orders extends PureComponent {
 
     const renderPagination = (
       <Pagination
-        type='orders'
+        type={TYPE}
         dataLen={entries.length}
         loading={pageLoading}
         offset={offset}
@@ -196,9 +199,9 @@ class Orders extends PureComponent {
             &nbsp;
             <TimeRange />
             &nbsp;
-            <Button icon='cloud-download' onClick={handleClickExport}>
-              {intl.formatMessage({ id: 'timeframe.download' })}
-            </Button>
+            <ExportButton handleClickExport={handleClickExport} />
+            &nbsp;
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
           <Table

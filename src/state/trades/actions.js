@@ -50,6 +50,15 @@ export function jumpPage(payload) {
 }
 
 /**
+ * Create an action to refresh trades.
+ */
+export function refresh() {
+  return {
+    type: types.REFRESH,
+  }
+}
+
+/**
  * Create an action to update Trades.
  * @param {Object[]} payload data set
  */
@@ -66,5 +75,6 @@ export default {
   fetchNextTrades,
   fetchPrevTrades,
   jumpPage,
+  refresh,
   updateTrades,
 }

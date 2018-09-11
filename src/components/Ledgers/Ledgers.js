@@ -15,10 +15,12 @@ import {
 } from '@blueprintjs/table'
 import { Select } from '@blueprintjs/select'
 
-import Loading from 'components/Loading'
-import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import Loading from 'ui/Loading'
+import NoData from 'ui/NoData'
+import ExportButton from 'ui/ExportButton'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -31,6 +33,7 @@ import { propTypes, defaultProps } from './Ledgers.props'
 const COLUMN_WIDTHS = [500, 100, 120, 120, 120, 150]
 const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
+const TYPE = queryConstants.MENU_LEDGERS
 const ALL = 'ALL'
 const WILD_CARD = ['', ALL]
 
@@ -51,7 +54,7 @@ class Ledgers extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, 'ledgers')
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   handleClick(symbol) {
@@ -87,6 +90,7 @@ class Ledgers extends PureComponent {
       intl,
       jumpPage,
       loading,
+      refresh,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const currencyList = coins ? [ALL, ...coins] : [ALL, ...currencies]
@@ -230,7 +234,7 @@ class Ledgers extends PureComponent {
 
     const renderPagination = (
       <Pagination
-        type='ledgers'
+        type={TYPE}
         dataLen={entries.length}
         loading={pageLoading}
         offset={offset}
@@ -267,9 +271,9 @@ class Ledgers extends PureComponent {
             <TimeRange />
             {renderSymbolSelector}
             &nbsp;
-            <Button icon='cloud-download' onClick={handleClickExport}>
-              {intl.formatMessage({ id: 'timeframe.download' })}
-            </Button>
+            <ExportButton handleClickExport={handleClickExport} />
+            &nbsp;
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
           <Table

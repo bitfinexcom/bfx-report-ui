@@ -1,7 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
-  Button,
   Card,
   Elevation,
 } from '@blueprintjs/core'
@@ -12,10 +11,12 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import Loading from 'components/Loading'
-import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import Loading from 'ui/Loading'
+import NoData from 'ui/NoData'
+import ExportButton from 'ui/ExportButton'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -27,7 +28,7 @@ import { propTypes, defaultProps } from './Movements.props'
 import Inspector from './Inspector'
 
 // const TYPE_DEPOSITS = 'deposits'
-const TYPE_WITHDRAWALS = 'withdrawals'
+const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
 const COLUMN_WIDTHS = [80, 150, 100, 125, 120, 400]
 const LIMIT = queryConstants.DEFAULT_MOVEMENTS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_MOVEMENTS_PAGE_SIZE
@@ -71,6 +72,7 @@ class Movements extends PureComponent {
       jumpPage,
       type,
       loading,
+      refresh,
     } = this.props
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
@@ -174,9 +176,9 @@ class Movements extends PureComponent {
             &nbsp;
             <TimeRange />
             &nbsp;
-            <Button icon='cloud-download' onClick={handleClickExport}>
-              {intl.formatMessage({ id: 'timeframe.download' })}
-            </Button>
+            <ExportButton handleClickExport={handleClickExport} />
+            &nbsp;
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
           <Table
