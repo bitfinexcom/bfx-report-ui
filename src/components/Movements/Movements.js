@@ -33,7 +33,6 @@ const COLUMN_WIDTHS = [80, 150, 100, 125, 120, 400]
 const LIMIT = queryConstants.DEFAULT_MOVEMENTS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_MOVEMENTS_PAGE_SIZE
 
-
 class Movements extends PureComponent {
   constructor(props) {
     super(props)
