@@ -10,7 +10,7 @@ import { propTypes, defaultProps } from './Status.props'
 /** Singleton toaster instance. */
 export const AppToaster = Toaster.create({
   className: 'bitfinex-toaster',
-  position: Position.TOP,
+  position: Position.BOTTOM_RIGHT,
 })
 
 export const Status = ({
