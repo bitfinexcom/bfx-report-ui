@@ -1,7 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
-  Button,
   Card,
   Elevation,
 } from '@blueprintjs/core'
@@ -12,10 +11,11 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import Loading from 'components/Loading'
-import NoData from 'components/NoData'
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import Loading from 'ui/Loading'
+import NoData from 'ui/NoData'
+import ExportButton from 'ui/ExportButton'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -28,6 +28,7 @@ import { propTypes, defaultProps } from './Trades.props'
 const COLUMN_WIDTHS = [85, 80, 125, 125, 125, 150]
 const LIMIT = queryConstants.DEFAULT_TRADES_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_TRADES_PAGE_SIZE
+const TYPE = queryConstants.MENU_TRADES
 
 class Trades extends PureComponent {
   constructor(props) {
@@ -44,7 +45,7 @@ class Trades extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, 'trades')
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   fetchPrev() {
@@ -143,7 +144,7 @@ class Trades extends PureComponent {
 
     const renderPagination = (
       <Pagination
-        type='trades'
+        type={TYPE}
         dataLen={entries.length}
         loading={pageLoading}
         offset={offset}
@@ -171,9 +172,7 @@ class Trades extends PureComponent {
             &nbsp;
             <TimeRange />
             &nbsp;
-            <Button icon='cloud-download' onClick={handleClickExport}>
-              {intl.formatMessage({ id: 'timeframe.download' })}
-            </Button>
+            <ExportButton handleClickExport={handleClickExport} />
           </h4>
           {renderPagination}
           <Table
