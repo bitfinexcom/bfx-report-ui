@@ -16,6 +16,7 @@ import TimeRange from 'components/TimeRange'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import ExportButton from 'ui/ExportButton'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -72,6 +73,7 @@ class Movements extends PureComponent {
       jumpPage,
       type,
       loading,
+      refresh,
     } = this.props
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
@@ -176,6 +178,8 @@ class Movements extends PureComponent {
             <TimeRange />
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
+            &nbsp;
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
           <Table

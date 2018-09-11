@@ -178,7 +178,13 @@ export function ledgersReducer(state = initialState, action) {
         currentSymbol: action.payload,
         currencies: state.currencies,
       }
+    case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
+      return {
+        ...initialState,
+        currentSymbol: state.currentSymbol,
+        currencies: state.currencies,
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {

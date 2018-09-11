@@ -50,6 +50,15 @@ export function jumpPage(payload) {
 }
 
 /**
+ * Create an action to refresh movements.
+ */
+export function refresh() {
+  return {
+    type: types.REFRESH,
+  }
+}
+
+/**
  * Create an action to update Movements.
  * @param {Object[]} payload data set
  */
@@ -66,5 +75,6 @@ export default {
   fetchNextMovements,
   fetchPrevMovements,
   jumpPage,
+  refresh,
   updateMovements,
 }

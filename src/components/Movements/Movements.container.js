@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
   fetchNextMovements: () => dispatch(actions.fetchNextMovements()),
   fetchPrevMovements: () => dispatch(actions.fetchPrevMovements()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
+  refresh: () => dispatch(actions.refresh()),
 })
 
 const MovementsContainer = connect(mapStateToProps, mapDispatchToProps)(Movements)

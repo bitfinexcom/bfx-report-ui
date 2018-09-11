@@ -26,6 +26,7 @@ export const propTypes = {
   loading: PropTypes.bool.isRequired,
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
+  refresh: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
@@ -39,4 +40,5 @@ export const defaultProps = {
   loading: true,
   pageOffset: 0,
   pageLoading: false,
+  refresh: () => {},
 }

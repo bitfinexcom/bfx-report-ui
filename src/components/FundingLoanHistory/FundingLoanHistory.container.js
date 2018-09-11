@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
   fetchNextFLoan: () => dispatch(actions.fetchNextFLoan()),
   fetchPrevFLoan: () => dispatch(actions.fetchPrevFLoan()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
+  refresh: () => dispatch(actions.refresh()),
 })
 
 const FundingLoanHistoryContainer = connect(mapStateToProps, mapDispatchToProps)(FundingLoanHistory)

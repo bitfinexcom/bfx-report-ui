@@ -97,6 +97,7 @@
   "timeframe.download.send": "期間的{intlType}資料，並寄送至Email地址 {email}。",
   "timeframe.download.store": "期間的{intlType}資料，並儲存至本地資料夾。",
   "timeframe.download.export": "匯出",
+  "timeframe.refresh": "重新載入",
   "timeframe.download.cancel": "取消",
   "timeframe.download.status.local": "已產生{topic}的csv檔，請查看您本地的'csv'資料夾。",
   "timeframe.download.status.email": "正在生成您的 CSV 格式報告。生成後將立即透過 Email 送出。",

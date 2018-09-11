@@ -97,6 +97,7 @@
   "timeframe.download.send": "and send to Email {email} .",
   "timeframe.download.store": "and store to your local folder.",
   "timeframe.download.export": "Export",
+  "timeframe.refresh": "Refresh",
   "timeframe.download.cancel": "Cancel",
   "timeframe.download.status.local": "{topic} csv generated, please check your local 'csv' folder",
   "timeframe.download.status.email": "Generating your CSV report, we'll send it to you via email as soon as it's ready...",

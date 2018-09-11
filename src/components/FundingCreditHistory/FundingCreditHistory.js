@@ -16,6 +16,7 @@ import TimeRange from 'components/TimeRange'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import ExportButton from 'ui/ExportButton'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -69,6 +70,7 @@ class FundingCreditHistory extends PureComponent {
       intl,
       jumpPage,
       loading,
+      refresh,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
@@ -218,6 +220,8 @@ class FundingCreditHistory extends PureComponent {
             <TimeRange />
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
+            &nbsp;
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
           <Table

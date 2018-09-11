@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => ({
   fetchNextOrders: () => dispatch(actions.fetchNextOrders()),
   fetchPrevOrders: () => dispatch(actions.fetchPrevOrders()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
+  refresh: () => dispatch(actions.refresh()),
 })
 
 const OrdersContainer = connect(mapStateToProps, mapDispatchToProps)(Orders)
