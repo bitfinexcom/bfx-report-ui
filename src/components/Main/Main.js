@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
+import { Route, Switch } from 'react-router-dom'
 import { injectIntl } from 'react-intl'
 import {
   Menu,
@@ -31,15 +32,51 @@ const {
   MENU_WITHDRAWALS,
 } = queryType
 
-const ICON = {
-  fcredit: 'book',
-  floan: 'book',
-  foffer: 'book',
-  ledgers: 'book',
-  orders: 'flows',
-  trades: 'exchange',
-  deposits: 'add-to-folder',
-  withdrawals: 'folder-shared-open',
+const MAPPING = {
+  [MENU_FCREDIT]: {
+    icon: 'book',
+    path: '/funding_credit_history',
+  },
+  [MENU_FLOAN]: {
+    icon: 'book',
+    path: '/funding_loan_history',
+  },
+  [MENU_FOFFER]: {
+    icon: 'book',
+    path: '/funding_offer_history',
+  },
+  [MENU_LEDGERS]: {
+    icon: 'book',
+    path: '/ledgers',
+  },
+  [MENU_ORDERS]: {
+    icon: 'flows',
+    path: '/orders',
+  },
+  [MENU_TRADES]: {
+    icon: 'exchange',
+    path: '/trades',
+  },
+  [MENU_DEPOSITS]: {
+    icon: 'add-to-folder',
+    path: '/deposits',
+  },
+  [MENU_WITHDRAWALS]: {
+    icon: 'folder-shared-open',
+    path: '/withdrawals',
+  },
+}
+
+const PATHMAP = {
+  [MAPPING[MENU_FCREDIT].path]: MENU_FCREDIT,
+  [MAPPING[MENU_FLOAN].path]: MENU_FLOAN,
+  [MAPPING[MENU_FOFFER].path]: MENU_FOFFER,
+  [MAPPING[MENU_LEDGERS].path]: MENU_LEDGERS,
+  [MAPPING[MENU_DEPOSITS].path]: MENU_DEPOSITS,
+  [MAPPING[MENU_ORDERS].path]: MENU_ORDERS,
+  [MAPPING[MENU_TRADES].path]: MENU_TRADES,
+  [MAPPING[MENU_DEPOSITS].path]: MENU_DEPOSITS,
+  [MAPPING[MENU_WITHDRAWALS].path]: MENU_WITHDRAWALS,
 }
 
 class Main extends PureComponent {
@@ -63,7 +100,6 @@ class Main extends PureComponent {
   }
 
   state = {
-    target: MENU_LEDGERS,
     isCustomOpen: false,
     isExportOpen: false,
     startDate: null,
@@ -71,7 +107,8 @@ class Main extends PureComponent {
   }
 
   handleClick(target) {
-    this.setState({ target })
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.history.push(MAPPING[target].path)
   }
 
   handleClickCustom(e) {
@@ -118,89 +155,67 @@ class Main extends PureComponent {
   }
 
   render() {
-    const { authStatus, authIsShown, intl } = this.props
+    const {
+      authStatus,
+      authIsShown,
+      intl,
+      location,
+    } = this.props
     const {
       endDate,
       isCustomOpen,
       isExportOpen,
       startDate,
-      target,
     } = this.state
-    let content
-    switch (target) {
-      case MENU_FCREDIT:
-        content = (<FundingCreditHistory handleClickExport={this.handleClickExport} />)
-        break
-      case MENU_FOFFER:
-        content = (<FundingOfferHistory handleClickExport={this.handleClickExport} />)
-        break
-      case MENU_FLOAN:
-        content = (<FundingLoanHistory handleClickExport={this.handleClickExport} />)
-        break
-      case MENU_TRADES:
-        content = (<Trades handleClickExport={this.handleClickExport} />)
-        break
-      case MENU_ORDERS:
-        content = (<Orders handleClickExport={this.handleClickExport} />)
-        break
-      case MENU_DEPOSITS:
-        content = (<Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />)
-        break
-      case MENU_WITHDRAWALS:
-        content = (<Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />)
-        break
-      case MENU_LEDGERS:
-      default:
-        content = (<Ledgers handleClickExport={this.handleClickExport} />)
-        break
-    }
+    const target = PATHMAP[location.pathname]
+
     const sideMenuItems = (
       <Fragment>
         <MenuItem
-          icon={ICON[MENU_LEDGERS]}
+          icon={MAPPING[MENU_LEDGERS].icon}
           text={intl.formatMessage({ id: 'ledgers.title' })}
           onClick={this.handleClickLedgers}
           active={target === MENU_LEDGERS}
         />
         <MenuItem
-          icon={ICON[MENU_TRADES]}
+          icon={MAPPING[MENU_TRADES].icon}
           text={intl.formatMessage({ id: 'trades.title' })}
           onClick={this.handleClickTrades}
           active={target === MENU_TRADES}
         />
         <MenuItem
-          icon={ICON[MENU_ORDERS]}
+          icon={MAPPING[MENU_ORDERS].icon}
           text={intl.formatMessage({ id: 'orders.title' })}
           onClick={this.handleClickOrders}
           active={target === MENU_ORDERS}
         />
         <MenuItem
-          icon={ICON[MENU_DEPOSITS]}
+          icon={MAPPING[MENU_DEPOSITS].icon}
           text={intl.formatMessage({ id: 'deposits.title' })}
           onClick={this.handleClickDeposits}
           active={target === MENU_DEPOSITS}
         />
         <MenuItem
-          icon={ICON[MENU_WITHDRAWALS]}
+          icon={MAPPING[MENU_WITHDRAWALS].icon}
           text={intl.formatMessage({ id: 'withdrawals.title' })}
           onClick={this.handleClickWithdrawals}
           active={target === MENU_WITHDRAWALS}
         />
         <MenuDivider />
         <MenuItem
-          icon={ICON[MENU_FOFFER]}
+          icon={MAPPING[MENU_FOFFER].icon}
           text={intl.formatMessage({ id: 'foffer.title' })}
           onClick={this.handleClickFOffer}
           active={target === MENU_FOFFER}
         />
         <MenuItem
-          icon={ICON[MENU_FLOAN]}
+          icon={MAPPING[MENU_FLOAN].icon}
           text={intl.formatMessage({ id: 'floan.title' })}
           onClick={this.handleClickFLoan}
           active={target === MENU_FLOAN}
         />
         <MenuItem
-          icon={ICON[MENU_FCREDIT]}
+          icon={MAPPING[MENU_FCREDIT].icon}
           text={intl.formatMessage({ id: 'fcredit.title' })}
           onClick={this.handleClickFCredit}
           active={target === MENU_FCREDIT}
@@ -219,7 +234,7 @@ class Main extends PureComponent {
           <Timeframe handleClickCustom={this.handleClickCustom} />
           <MenuDivider />
           <MenuItem
-            icon={ICON[target]}
+            icon={MAPPING[target].icon}
             text={intl.formatMessage({ id: `${target}.title` })}
             className='bitfinex-dropdown'
           >
@@ -227,7 +242,45 @@ class Main extends PureComponent {
           </MenuItem>
         </Menu>
         <div className='col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-10'>
-          {content}
+          <Switch>
+            <Route
+              exact
+              path='/'
+              component={() => <Ledgers handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={MAPPING[MENU_LEDGERS].path}
+              component={() => <Ledgers handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={MAPPING[MENU_TRADES].path}
+              component={() => <Trades handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={MAPPING[MENU_ORDERS].path}
+              component={() => <Orders handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={MAPPING[MENU_DEPOSITS].path}
+              component={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={MAPPING[MENU_WITHDRAWALS].path}
+              component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={MAPPING[MENU_FCREDIT].path}
+              component={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={MAPPING[MENU_FLOAN].path}
+              component={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={MAPPING[MENU_FOFFER].path}
+              component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+            />
+          </Switch>
         </div>
         <CustomDialog
           type={target}
