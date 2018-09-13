@@ -220,11 +220,11 @@ export function ordersReducer(state = initialState, action) {
       }
     }
     case types.SET_PAIR:
-    return {
-      ...initialState,
-      targetPair: action.payload,
-      existPairs: state.existPairs,
-    }
+      return {
+        ...initialState,
+        targetPair: action.payload,
+        existPairs: state.existPairs,
+      }
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
       return {

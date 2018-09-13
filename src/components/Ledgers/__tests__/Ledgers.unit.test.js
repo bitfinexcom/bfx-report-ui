@@ -77,7 +77,7 @@ test('renders without crashing with data', () => {
   renderWithIntl(<Ledgers
     loading={false}
     entries={ENTRIES}
-    handleClickExport={()=>{}}
+    handleClickExport={() => {}}
   />, div)
   ReactDOM.unmountComponentAtNode(div)
 })
@@ -92,7 +92,7 @@ test('render no data correctly', () => {
   const component = rendererCreateWithIntl(<Ledgers
     loading={false}
     entries={NO_ENTRY}
-    handleClickExport={()=>{}}
+    handleClickExport={() => {}}
   />)
   const tree = component.toJSON()
   expect(tree).toMatchSnapshot()
