@@ -4,10 +4,14 @@
 
 Orders shows orders related data by date. Contain sections `Export button`, `Table`, `Pagination`.
 
+Navigate to `/orders` will open this view.
+
 ## UI
 
 1. The panel has title named `Orders`(translate).
 1. The panel has a `Export`(translate) button with `cloud-download` icon besides the panel title.
+1. The panel has a `Refresh`(translate) button with `refresh` icon besides the panel title.
+    1. Click the icon will re-fetch the data.
 1. The panel show loading animation when load new data.
 1. The panel shows `No related data in this time range. You can try another time range.`(translate) when no data is fetched.
 1. The panel shows a table when data is ready.
