@@ -167,7 +167,7 @@ class Main extends PureComponent {
       isExportOpen,
       startDate,
     } = this.state
-    const target = PATHMAP[location.pathname]
+    const target = PATHMAP[location.pathname] || MENU_LEDGERS
 
     const sideMenuItems = (
       <Fragment>
