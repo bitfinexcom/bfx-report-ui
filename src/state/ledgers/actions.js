@@ -70,10 +70,10 @@ export function updateLedgers(payload) {
 }
 
 /**
- * Create an action to set current symbol.
+ * Create an action to set target symbol.
  * @param {string}  symbol symbol
  */
-export function setCurrentSymbol(symbol) {
+export function setTargetSymbol(symbol) {
   return {
     type: types.SET_SYMBOL,
     payload: symbol,
@@ -87,6 +87,6 @@ export default {
   fetchPrevLedgers,
   jumpPage,
   refresh,
-  setCurrentSymbol,
+  setTargetSymbol,
   updateLedgers,
 }

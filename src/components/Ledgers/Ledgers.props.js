@@ -11,10 +11,9 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   coins: PropTypes.arrayOf(PropTypes.string),
-  currencies: PropTypes.arrayOf(PropTypes.string),
-  currentSymbol: PropTypes.string,
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(LEDGERS_ENTRIES_PROPS).isRequired,
+  existCoins: PropTypes.arrayOf(PropTypes.string),
   fetchLedgers: PropTypes.func.isRequired,
   fetchNextLedgers: PropTypes.func.isRequired,
   fetchPrevLedgers: PropTypes.func.isRequired,
@@ -24,14 +23,15 @@ export const propTypes = {
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  setCurrentSymbol: PropTypes.func.isRequired,
+  setTargetSymbol: PropTypes.func.isRequired,
+  targetSymbol: PropTypes.string,
 }
 
 export const defaultProps = {
   coins: [],
-  currencies: [],
   offset: 0,
   entries: [],
+  existCoins: [],
   fetchLedgers: () => {},
   fetchNextLedgers: () => {},
   fetchPrevLedgers: () => {},
@@ -41,5 +41,5 @@ export const defaultProps = {
   pageOffset: 0,
   pageLoading: false,
   refresh: () => {},
-  setCurrentSymbol: () => {},
+  setTargetSymbol: () => {},
 }

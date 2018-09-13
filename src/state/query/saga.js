@@ -9,7 +9,7 @@ import _omit from 'lodash/omit'
 import { formatRawPairToSymbol, getUrlParameter, postJsonfetch } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
-import { getCurrentSymbol } from 'state/ledgers/selectors'
+import { getTargetSymbol } from 'state/ledgers/selectors'
 import { getTargetPair } from 'state/orders/selectors'
 
 import { platform } from 'var/config'
@@ -80,7 +80,7 @@ function checkEmail(auth) {
 function getSelector(target) {
   switch (target) {
     case MENU_LEDGERS:
-      return getCurrentSymbol
+      return getTargetSymbol
     case MENU_ORDERS:
       return getTargetPair
     default:

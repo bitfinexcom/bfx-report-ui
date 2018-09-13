@@ -14,12 +14,12 @@ import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
-import { getCurrentSymbol, getLedgers } from './selectors'
+import { getTargetSymbol, getLedgers } from './selectors'
 
-function getReqLedgers(auth, query, currentSymbol, smallestMts) {
+function getReqLedgers(auth, query, targetSymbol, smallestMts) {
   const params = getTimeFrame(query, 'ledgers', smallestMts)
-  if (currentSymbol) {
-    params.symbol = currentSymbol
+  if (targetSymbol) {
+    params.symbol = targetSymbol
   }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
@@ -30,10 +30,10 @@ function getReqLedgers(auth, query, currentSymbol, smallestMts) {
 
 function* fetchLedgers() {
   try {
-    const currentSymbol = yield select(getCurrentSymbol)
+    const targetSymbol = yield select(getTargetSymbol)
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqLedgers, auth, query, currentSymbol, 0)
+    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbol, 0)
     yield put(actions.updateLedgers(result))
 
     if (error) {
@@ -57,7 +57,7 @@ const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
 function* fetchNextLedgers() {
   try {
     const {
-      currentSymbol,
+      targetSymbol,
       offset,
       entries,
       smallestMts,
@@ -68,7 +68,7 @@ function* fetchNextLedgers() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqLedgers, auth, query, currentSymbol, smallestMts)
+    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbol, smallestMts)
     yield put(actions.updateLedgers(result))
 
     if (error) {

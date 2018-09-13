@@ -7,25 +7,32 @@ exports[`render loading correctly 1`] = `
   <h4>
     Ledgers
   </h4>
-  <svg
+  <div
     className="bp3-spinner"
-    height={24}
-    strokeWidth={16}
-    viewBox="0 0 100 100"
-    width={24}
   >
-    <path
-      className="bp3-spinner-track"
-      d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"
-    />
-    <path
-      className="bp3-spinner-head"
-      d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"
-      pathLength={280}
-      strokeDasharray="280 280"
-      strokeDashoffset={210}
-    />
-  </svg>
+    <span
+      className="bp3-spinner-animation"
+    >
+      <svg
+        height={24}
+        strokeWidth={16}
+        viewBox="0 0 100 100"
+        width={24}
+      >
+        <path
+          className="bp3-spinner-track"
+          d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"
+        />
+        <path
+          className="bp3-spinner-head"
+          d="M 50,50 m 0,-44.5 a 44.5,44.5 0 1 1 0,89 a 44.5,44.5 0 1 1 0,-89"
+          pathLength={280}
+          strokeDasharray="280 280"
+          strokeDashoffset={210}
+        />
+      </svg>
+    </span>
+  </div>
 </div>
 `;
 

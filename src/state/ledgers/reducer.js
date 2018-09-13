@@ -68,7 +68,7 @@ import types from './constants'
 }
 */
 const initialState = {
-  currencies: [],
+  existCoins: [],
   entries: [
     /* {
       id: 131919156,
@@ -87,7 +87,7 @@ const initialState = {
       description: 'Transfer of 5000.885 USD from wallet Exchange to Deposit on wallet funding',
     }, */
   ],
-  currentSymbol: '',
+  targetSymbol: '',
   dataReceived: false,
   smallestMts: 0,
   offset: 0, // end of current offset
@@ -102,12 +102,12 @@ export function ledgersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_LEDGERS: {
       const result = action.payload
-      const { currencies } = state
+      const { existCoins } = state
       let smallestMts
       const entries = result.map((entry) => {
-        // save new symbol to currencies list
-        if (currencies.indexOf(entry.currency) === -1) {
-          currencies.push(entry.currency)
+        // save new symbol to existCoins list
+        if (existCoins.indexOf(entry.currency) === -1) {
+          existCoins.push(entry.currency)
         }
         // log smallest mts
         if (!smallestMts || smallestMts > entry.mts) {
@@ -125,7 +125,7 @@ export function ledgersReducer(state = initialState, action) {
       return {
         ...state,
         entries: [...state.entries, ...entries],
-        currencies: currencies.sort(),
+        existCoins: existCoins.sort(),
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,
@@ -175,15 +175,15 @@ export function ledgersReducer(state = initialState, action) {
     case types.SET_SYMBOL:
       return {
         ...initialState,
-        currentSymbol: action.payload,
-        currencies: state.currencies,
+        targetSymbol: action.payload,
+        existCoins: state.existCoins,
       }
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
       return {
         ...initialState,
-        currentSymbol: state.currentSymbol,
-        currencies: state.currencies,
+        targetSymbol: state.targetSymbol,
+        existCoins: state.existCoins,
       }
     case authTypes.LOGOUT:
       return initialState

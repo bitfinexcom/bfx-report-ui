@@ -61,7 +61,7 @@ class Ledgers extends PureComponent {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
         // eslint-disable-next-line react/destructuring-assignment
-        this.props.setCurrentSymbol(symbol === ALL ? '' : symbol)
+        this.props.setTargetSymbol(symbol === ALL ? '' : symbol)
       }
     }
     return this.handlers[symbol]
@@ -83,9 +83,9 @@ class Ledgers extends PureComponent {
       offset,
       pageOffset,
       pageLoading,
-      currencies,
-      currentSymbol,
+      targetSymbol,
       entries,
+      existCoins,
       handleClickExport,
       intl,
       jumpPage,
@@ -93,9 +93,9 @@ class Ledgers extends PureComponent {
       refresh,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const currencyList = coins ? [ALL, ...coins] : [ALL, ...currencies]
+    const currencyList = coins ? [ALL, ...coins] : [ALL, ...existCoins]
     // eslint-disable-next-line react/destructuring-assignment
-    const currentCurrency = currentSymbol || ALL
+    const currentCurrency = targetSymbol || ALL
     const numRows = filteredData.length
 
     const descriptionCellRenderer = (rowIndex) => {
@@ -132,7 +132,7 @@ class Ledgers extends PureComponent {
       const show = parseFloat(amount) > 0
       const showAmount = show ? amount : ''
       // eslint-disable-next-line react/destructuring-assignment
-      const showCurrency = show && WILD_CARD.includes(currentSymbol) ? (
+      const showCurrency = show && WILD_CARD.includes(targetSymbol) ? (
         <Fragment>
           &nbsp;
           <span className='bitfinex-show-soft'>
@@ -157,7 +157,7 @@ class Ledgers extends PureComponent {
       const show = parseFloat(amount) < 0
       const showAmount = show ? Math.abs(amount) : ''
       // eslint-disable-next-line react/destructuring-assignment
-      const showCurrency = show && WILD_CARD.includes(currentSymbol) ? (
+      const showCurrency = show && WILD_CARD.includes(targetSymbol) ? (
         <Fragment>
           &nbsp;
           <span className='bitfinex-show-soft'>
@@ -195,7 +195,7 @@ class Ledgers extends PureComponent {
         return null
       }
       const isCurrent = currentCurrency === symbol
-      const className = (WILD_CARD.includes(symbol) || currencies.includes(symbol)) && !isCurrent
+      const className = (WILD_CARD.includes(symbol) || existCoins.includes(symbol)) && !isCurrent
         ? 'bitfinex-queried-symbol' : ''
 
       return (
