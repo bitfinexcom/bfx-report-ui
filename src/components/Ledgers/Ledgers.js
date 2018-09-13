@@ -93,9 +93,9 @@ class Ledgers extends PureComponent {
       refresh,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const currencyList = coins ? [ALL, ...coins] : [ALL, ...existCoins]
+    const coinList = coins ? [ALL, ...coins] : [ALL, ...existCoins]
     // eslint-disable-next-line react/destructuring-assignment
-    const currentCurrency = targetSymbol || ALL
+    const currentCoin = targetSymbol || ALL
     const numRows = filteredData.length
 
     const descriptionCellRenderer = (rowIndex) => {
@@ -194,7 +194,7 @@ class Ledgers extends PureComponent {
       if (!modifiers.matchesPredicate) {
         return null
       }
-      const isCurrent = currentCurrency === symbol
+      const isCurrent = currentCoin === symbol
       const className = (WILD_CARD.includes(symbol) || existCoins.includes(symbol)) && !isCurrent
         ? 'bitfinex-queried-symbol' : ''
 
@@ -218,13 +218,13 @@ class Ledgers extends PureComponent {
           &nbsp;
         <Select
           disabled={coins.length === 0}
-          items={currencyList}
+          items={coinList}
           itemRenderer={renderSymbol}
           itemPredicate={filterSymbol}
           onItemSelect={this.handleClick}
         >
           <Button
-            text={currentCurrency}
+            text={currentCoin}
             rightIcon='caret-down'
             disabled={coins.length === 0}
           />
