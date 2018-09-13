@@ -25,3 +25,5 @@ The headers contain logo banner at the left side and the function menu at the ri
         1. `Logout`
             1. Click to logout
             1. Will logout user and show the login dialog
+1. A help icon is shown at the left of above menu.
+    1. Click the icon will open a url in a new window.
