@@ -13,6 +13,7 @@ const ORDERS_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(ORDERS_ENTRIES_PROPS).isRequired,
+  existingPairs: PropTypes.arrayOf(PropTypes.string),
   fetchOrders: PropTypes.func.isRequired,
   fetchNextOrders: PropTypes.func.isRequired,
   fetchPrevOrders: PropTypes.func.isRequired,
@@ -21,12 +22,16 @@ export const propTypes = {
   loading: PropTypes.bool.isRequired,
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
+  pairs: PropTypes.arrayOf(PropTypes.string),
   refresh: PropTypes.func.isRequired,
+  targetPair: PropTypes.string,
+  setTargetPair: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
   offset: 0,
   entries: [],
+  existingPairs: [],
   fetchOrders: () => {},
   fetchNextOrders: () => {},
   fetchPrevOrders: () => {},
@@ -35,5 +40,8 @@ export const defaultProps = {
   loading: true,
   pageOffset: 0,
   pageLoading: false,
+  pairs: [],
   refresh: () => {},
+  setTargetPair: () => {},
+  targetPair: '',
 }

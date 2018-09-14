@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
-import { formatPair } from 'state/utils'
+import { formatSymbolToPair } from 'state/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 
@@ -95,7 +95,7 @@ export function tradesReducer(state = initialState, action) {
         }
         return {
           id: entry.id,
-          pair: formatPair(entry.pair),
+          pair: formatSymbolToPair(entry.pair),
           mtsCreate: entry.mtsCreate,
           orderID: entry.orderID,
           execAmount: entry.execAmount,

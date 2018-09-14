@@ -74,7 +74,11 @@ test('renders without crashing', () => {
 
 test('renders without crashing with data', () => {
   const div = document.createElement('div')
-  renderWithIntl(<Ledgers loading={false} entries={ENTRIES} />, div)
+  renderWithIntl(<Ledgers
+    loading={false}
+    entries={ENTRIES}
+    handleClickExport={() => {}}
+  />, div)
   ReactDOM.unmountComponentAtNode(div)
 })
 
@@ -85,7 +89,11 @@ test('render loading correctly', () => {
 })
 
 test('render no data correctly', () => {
-  const component = rendererCreateWithIntl(<Ledgers loading={false} entries={NO_ENTRY} />)
+  const component = rendererCreateWithIntl(<Ledgers
+    loading={false}
+    entries={NO_ENTRY}
+    handleClickExport={() => {}}
+  />)
   const tree = component.toJSON()
   expect(tree).toMatchSnapshot()
 })

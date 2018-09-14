@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
-import { formatPair } from 'state/utils'
+import { formatSymbolToPair } from 'state/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 
@@ -101,10 +101,12 @@ const initialState = {
     }, */
   ],
   dataReceived: false,
+  existingPairs: [],
   smallestMts: 0,
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
   pageLoading: false,
+  targetPair: '',
 }
 
 const LIMIT = queryTypes.DEFAULT_ORDERS_QUERY_LIMIT
@@ -114,36 +116,64 @@ export function ordersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_ORDERS: {
       const result = action.payload
+      const { existingPairs } = state
       let smallestMts
+      const updatePairs = [...existingPairs]
       const entries = result.map((entry) => {
+        const {
+          amount,
+          amountOrig,
+          cid,
+          flags,
+          gid,
+          id,
+          mtsCreate,
+          mtsUpdate,
+          notify,
+          placedId,
+          price,
+          priceAvg,
+          priceAuxLimit,
+          priceTrailing,
+          status,
+          symbol,
+          type,
+          typePrev,
+        } = entry
+        const pair = `${symbol.slice(1, 7).toLowerCase()}`
+        // save new pair to updatePairs list
+        if (updatePairs.indexOf(pair) === -1) {
+          updatePairs.push(pair)
+        }
         // log smallest mts
-        if (!smallestMts || smallestMts > entry.mtsUpdate) {
-          smallestMts = entry.mtsUpdate
+        if (!smallestMts || smallestMts > mtsUpdate) {
+          smallestMts = mtsUpdate
         }
         return {
-          id: entry.id,
-          gid: entry.gid,
-          cid: entry.cid,
-          pair: formatPair(entry.symbol),
-          mtsCreate: entry.mtsCreate,
-          mtsUpdate: entry.mtsUpdate,
-          amount: entry.amount,
-          amountOrig: entry.amountOrig,
-          type: entry.type,
-          typePrev: entry.typePrev,
-          flags: entry.flags,
-          status: entry.status,
-          price: entry.price,
-          priceAvg: entry.priceAvg,
-          priceTrailing: entry.priceTrailing,
-          priceAuxLimit: entry.priceAuxLimit,
-          notify: entry.notify,
-          placedId: entry.placedId,
+          id,
+          gid,
+          cid,
+          pair: formatSymbolToPair(symbol),
+          mtsCreate,
+          mtsUpdate,
+          amount,
+          amountOrig,
+          type,
+          typePrev,
+          flags,
+          status,
+          price,
+          priceAvg,
+          priceTrailing,
+          priceAuxLimit,
+          notify,
+          placedId,
         }
       })
       return {
         ...state,
         entries: [...state.entries, ...entries],
+        existingPairs: updatePairs.sort(),
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,
@@ -190,8 +220,19 @@ export function ordersReducer(state = initialState, action) {
         pageOffset: totalOffset - currentOffset,
       }
     }
+    case types.SET_PAIR:
+      return {
+        ...initialState,
+        targetPair: action.payload,
+        existingPairs: state.existingPairs,
+      }
+    // existingPairs should be re-calc in new time range
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
+      return {
+        ...initialState,
+        targetPair: state.targetPair,
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {

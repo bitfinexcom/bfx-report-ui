@@ -3,25 +3,25 @@ import { connect } from 'react-redux'
 import actions from 'state/ledgers/actions'
 import { getCoins } from 'state/symbols/selectors'
 import {
-  getCurencies,
-  getCurrentSymbol,
   getDataReceived,
   getEntries,
+  getExistingCoins,
   getOffset,
   getPageLoading,
   getPageOffset,
+  getTargetSymbol,
 } from 'state/ledgers/selectors'
 import Ledgers from './Ledgers'
 
 const mapStateToProps = (state = {}) => ({
   coins: getCoins(state),
   offset: getOffset(state),
-  currencies: getCurencies(state),
-  currentSymbol: getCurrentSymbol(state),
   entries: getEntries(state),
+  existingCoins: getExistingCoins(state),
   loading: !getDataReceived(state),
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
+  targetSymbol: getTargetSymbol(state),
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -30,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
   fetchPrevLedgers: () => dispatch(actions.fetchPrevLedgers()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
   refresh: () => dispatch(actions.refresh()),
-  setCurrentSymbol: symbol => dispatch(actions.setCurrentSymbol(symbol)),
+  setTargetSymbol: symbol => dispatch(actions.setTargetSymbol(symbol)),
 })
 
 const LedgersContainer = connect(mapStateToProps, mapDispatchToProps)(Ledgers)

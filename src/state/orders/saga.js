@@ -5,7 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { postJsonfetch } from 'state/utils'
+import { formatRawPairToSymbol, postJsonfetch } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -14,10 +14,13 @@ import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
-import { getOrders } from './selectors'
+import { getOrders, getTargetPair } from './selectors'
 
-function getReqOrders(auth, query, smallestMts) {
+function getReqOrders(auth, query, targetPair, smallestMts) {
   const params = getTimeFrame(query, 'orders', smallestMts)
+  if (targetPair) {
+    params.symbol = formatRawPairToSymbol(targetPair)
+  }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getOrders',
@@ -27,9 +30,10 @@ function getReqOrders(auth, query, smallestMts) {
 
 function* fetchOrders() {
   try {
+    const targetPair = yield select(getTargetPair)
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqOrders, auth, query, 0)
+    const { result = [], error } = yield call(getReqOrders, auth, query, targetPair, 0)
     yield put(actions.updateOrders(result))
 
     if (error) {
@@ -52,14 +56,19 @@ const LIMIT = queryTypes.DEFAULT_ORDERS_QUERY_LIMIT
 
 function* fetchNextOrders() {
   try {
-    const { offset, entries, smallestMts } = yield select(getOrders)
+    const {
+      offset,
+      entries,
+      smallestMts,
+      targetPair,
+    } = yield select(getOrders)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqOrders, auth, query, smallestMts)
+    const { result = [], error } = yield call(getReqOrders, auth, query, targetPair, smallestMts)
     yield put(actions.updateOrders(result))
 
     if (error) {

@@ -6,10 +6,11 @@ import {
 } from 'redux-saga/effects'
 import _omit from 'lodash/omit'
 
-import { getUrlParameter, postJsonfetch } from 'state/utils'
+import { formatRawPairToSymbol, getUrlParameter, postJsonfetch } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
-import { getCurrentSymbol } from 'state/ledgers/selectors'
+import { getTargetSymbol } from 'state/ledgers/selectors'
+import { getTargetPair } from 'state/orders/selectors'
 
 import { platform } from 'var/config'
 
@@ -76,13 +77,35 @@ function checkEmail(auth) {
   })
 }
 
+function getSelector(target) {
+  switch (target) {
+    case MENU_LEDGERS:
+      return getTargetSymbol
+    case MENU_ORDERS:
+      return getTargetPair
+    default:
+      return ''
+  }
+}
+
+function formatSymbol(target, sign) {
+  switch (target) {
+    case MENU_LEDGERS:
+      return sign
+    case MENU_ORDERS:
+      return formatRawPairToSymbol(sign)
+    default:
+      return ''
+  }
+}
+
 function* exportCSV({ payload: target }) {
   try {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const symbol = target === MENU_LEDGERS
-      ? yield select(getCurrentSymbol) : ''
-    const { result, error } = yield call(getCSV, auth, query, target, symbol)
+    const selector = getSelector(target)
+    const sign = selector ? yield select(selector) : ''
+    const { result, error } = yield call(getCSV, auth, query, target, formatSymbol(sign))
     if (result) {
       if (result.isSendEmail) {
         yield put(updateSuccessStatus({

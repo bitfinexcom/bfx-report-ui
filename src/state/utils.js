@@ -30,8 +30,22 @@ export function formatDate(mts) {
   return `${MONTH_SYM[date.getMonth()]} ${_padStart(date.getDate(), 2, 0)} ${date.getFullYear()}`
 }
 
-export function formatPair(symbol) {
+// tBTCUSD -> BTC/USD
+export function formatSymbolToPair(symbol) {
   return `${symbol.slice(1, 4)}/${symbol.slice(4, 7)}`
+}
+
+// btcusd -> BTC/USD
+export function formatPair(pair) {
+  if (!pair || pair === 'ALL') {
+    return 'ALL'
+  }
+  return `${pair.slice(0, 3).toUpperCase()}/${pair.slice(3, 6).toUpperCase()}`
+}
+
+// btcusd -> tBTCUSD
+export function formatRawPairToSymbol(pair) {
+  return `t${pair.toUpperCase()}`
 }
 
 const TYPE_WHITELIST = [
@@ -99,6 +113,8 @@ export default {
   checkFetch,
   formatDate,
   formatPair,
+  formatRawPairToSymbol,
+  formatSymbolToPair,
   formatTime,
   getCurrentEntries,
   getSideMsg,
