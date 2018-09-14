@@ -179,12 +179,12 @@ export function ledgersReducer(state = initialState, action) {
         targetSymbol: action.payload,
         existingCoins: state.existingCoins,
       }
+    // existingCoins should be re-calc in new time range
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
       return {
         ...initialState,
         targetSymbol: state.targetSymbol,
-        existingCoins: state.existingCoins,
       }
     case authTypes.LOGOUT:
       return initialState

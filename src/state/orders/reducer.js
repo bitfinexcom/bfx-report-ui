@@ -226,12 +226,12 @@ export function ordersReducer(state = initialState, action) {
         targetPair: action.payload,
         existingPairs: state.existingPairs,
       }
+    // existingPairs should be re-calc in new time range
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
       return {
         ...initialState,
         targetPair: state.targetPair,
-        existingPairs: state.existingPairs,
       }
     case authTypes.LOGOUT:
       return initialState
