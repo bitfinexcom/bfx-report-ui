@@ -5,7 +5,7 @@ import { getCoins } from 'state/symbols/selectors'
 import {
   getDataReceived,
   getEntries,
-  getExistCoins,
+  getExistingCoins,
   getOffset,
   getPageLoading,
   getPageOffset,
@@ -17,7 +17,7 @@ const mapStateToProps = (state = {}) => ({
   coins: getCoins(state),
   offset: getOffset(state),
   entries: getEntries(state),
-  existCoins: getExistCoins(state),
+  existingCoins: getExistingCoins(state),
   loading: !getDataReceived(state),
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),

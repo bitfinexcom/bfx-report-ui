@@ -85,7 +85,7 @@ class Ledgers extends PureComponent {
       pageLoading,
       targetSymbol,
       entries,
-      existCoins,
+      existingCoins,
       handleClickExport,
       intl,
       jumpPage,
@@ -93,7 +93,7 @@ class Ledgers extends PureComponent {
       refresh,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const coinList = coins ? [ALL, ...coins] : [ALL, ...existCoins]
+    const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
     // eslint-disable-next-line react/destructuring-assignment
     const currentCoin = targetSymbol || ALL
     const numRows = filteredData.length
@@ -195,7 +195,7 @@ class Ledgers extends PureComponent {
         return null
       }
       const isCurrent = currentCoin === symbol
-      const className = (WILD_CARD.includes(symbol) || existCoins.includes(symbol)) && !isCurrent
+      const className = (WILD_CARD.includes(symbol) || existingCoins.includes(symbol)) && !isCurrent
         ? 'bitfinex-queried-symbol' : ''
 
       return (

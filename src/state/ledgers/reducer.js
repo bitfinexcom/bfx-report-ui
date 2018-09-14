@@ -68,7 +68,7 @@ import types from './constants'
 }
 */
 const initialState = {
-  existCoins: [],
+  existingCoins: [],
   entries: [
     /* {
       id: 131919156,
@@ -102,12 +102,13 @@ export function ledgersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_LEDGERS: {
       const result = action.payload
-      const { existCoins } = state
+      const { existingCoins } = state
       let smallestMts
+      const updateCoins = [...existingCoins]
       const entries = result.map((entry) => {
-        // save new symbol to existCoins list
-        if (existCoins.indexOf(entry.currency) === -1) {
-          existCoins.push(entry.currency)
+        // save new symbol to existingCoins list
+        if (updateCoins.indexOf(entry.currency) === -1) {
+          updateCoins.push(entry.currency)
         }
         // log smallest mts
         if (!smallestMts || smallestMts > entry.mts) {
@@ -125,7 +126,7 @@ export function ledgersReducer(state = initialState, action) {
       return {
         ...state,
         entries: [...state.entries, ...entries],
-        existCoins: existCoins.sort(),
+        existingCoins: updateCoins.sort(),
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,
@@ -176,14 +177,14 @@ export function ledgersReducer(state = initialState, action) {
       return {
         ...initialState,
         targetSymbol: action.payload,
-        existCoins: state.existCoins,
+        existingCoins: state.existingCoins,
       }
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
       return {
         ...initialState,
         targetSymbol: state.targetSymbol,
-        existCoins: state.existCoins,
+        existingCoins: state.existingCoins,
       }
     case authTypes.LOGOUT:
       return initialState
