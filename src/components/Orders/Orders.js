@@ -261,7 +261,6 @@ class Orders extends PureComponent {
             {intl.formatMessage({ id: 'orders.title' })}
             &nbsp;
             <TimeRange />
-            {renderPairSelector}
           </h4>
           <NoData />
         </Fragment>

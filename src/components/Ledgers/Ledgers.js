@@ -257,7 +257,6 @@ class Ledgers extends PureComponent {
             {intl.formatMessage({ id: 'ledgers.title' })}
             &nbsp;
             <TimeRange />
-            {renderSymbolSelector}
           </h4>
           <NoData />
         </Fragment>
