@@ -106,7 +106,7 @@ export function ledgersReducer(state = initialState, action) {
       let smallestMts
       const updateCoins = [...existingCoins]
       const entries = result.map((entry) => {
-        // save new symbol to existingCoins list
+        // save new symbol to updateCoins list
         if (updateCoins.indexOf(entry.currency) === -1) {
           updateCoins.push(entry.currency)
         }

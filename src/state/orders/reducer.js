@@ -141,7 +141,7 @@ export function ordersReducer(state = initialState, action) {
           typePrev,
         } = entry
         const pair = `${symbol.slice(1, 7).toLowerCase()}`
-        // save new pair to existPairs list
+        // save new pair to updatePairs list
         if (updatePairs.indexOf(pair) === -1) {
           updatePairs.push(pair)
         }
