@@ -5,7 +5,7 @@ import { getPairs } from 'state/symbols/selectors'
 import {
   getDataReceived,
   getEntries,
-  getExistPairs,
+  getExistingPairs,
   getOffset,
   getPageLoading,
   getPageOffset,
@@ -17,7 +17,7 @@ import Orders from './Orders'
 const mapStateToProps = (state = {}) => ({
   offset: getOffset(state),
   entries: getEntries(state),
-  existPairs: getExistPairs(state),
+  existingPairs: getExistingPairs(state),
   loading: !getDataReceived(state),
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),

@@ -80,7 +80,7 @@ class Orders extends PureComponent {
 
   render() {
     const {
-      existPairs,
+      existingPairs,
       offset,
       pageOffset,
       pageLoading,
@@ -94,7 +94,7 @@ class Orders extends PureComponent {
       targetPair,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const pairList = pairs ? [ALL, ...pairs] : [ALL, ...existPairs]
+    const pairList = pairs ? [ALL, ...pairs] : [ALL, ...existingPairs]
     // eslint-disable-next-line react/destructuring-assignment
     const currentPair = targetPair || ALL
     const numRows = filteredData.length
@@ -212,7 +212,7 @@ class Orders extends PureComponent {
         return null
       }
       const isCurrent = currentPair === pair
-      const className = (WILD_CARD.includes(pair) || existPairs.includes(pair)) && !isCurrent
+      const className = (WILD_CARD.includes(pair) || existingPairs.includes(pair)) && !isCurrent
         ? 'bitfinex-queried-symbol' : ''
 
       return (
@@ -261,6 +261,7 @@ class Orders extends PureComponent {
             {intl.formatMessage({ id: 'orders.title' })}
             &nbsp;
             <TimeRange />
+            {renderPairSelector}
           </h4>
           <NoData />
         </Fragment>

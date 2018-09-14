@@ -13,7 +13,7 @@ const ORDERS_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(ORDERS_ENTRIES_PROPS).isRequired,
-  existPairs: PropTypes.arrayOf(PropTypes.string),
+  existingPairs: PropTypes.arrayOf(PropTypes.string),
   fetchOrders: PropTypes.func.isRequired,
   fetchNextOrders: PropTypes.func.isRequired,
   fetchPrevOrders: PropTypes.func.isRequired,
@@ -31,7 +31,7 @@ export const propTypes = {
 export const defaultProps = {
   offset: 0,
   entries: [],
-  existPairs: [],
+  existingPairs: [],
   fetchOrders: () => {},
   fetchNextOrders: () => {},
   fetchPrevOrders: () => {},

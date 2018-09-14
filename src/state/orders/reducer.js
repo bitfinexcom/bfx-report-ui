@@ -101,7 +101,7 @@ const initialState = {
     }, */
   ],
   dataReceived: false,
-  existPairs: [],
+  existingPairs: [],
   smallestMts: 0,
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
@@ -116,8 +116,9 @@ export function ordersReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_ORDERS: {
       const result = action.payload
-      const { existPairs } = state
+      const { existingPairs } = state
       let smallestMts
+      const updatePairs = [...existingPairs]
       const entries = result.map((entry) => {
         const {
           amount,
@@ -141,8 +142,8 @@ export function ordersReducer(state = initialState, action) {
         } = entry
         const pair = `${symbol.slice(1, 7).toLowerCase()}`
         // save new pair to existPairs list
-        if (existPairs.indexOf(pair) === -1) {
-          existPairs.push(pair)
+        if (updatePairs.indexOf(pair) === -1) {
+          updatePairs.push(pair)
         }
         // log smallest mts
         if (!smallestMts || smallestMts > mtsUpdate) {
@@ -172,7 +173,7 @@ export function ordersReducer(state = initialState, action) {
       return {
         ...state,
         entries: [...state.entries, ...entries],
-        existPairs: existPairs.sort(),
+        existingPairs: updatePairs.sort(),
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,
@@ -223,14 +224,14 @@ export function ordersReducer(state = initialState, action) {
       return {
         ...initialState,
         targetPair: action.payload,
-        existPairs: state.existPairs,
+        existingPairs: state.existingPairs,
       }
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
       return {
         ...initialState,
         targetPair: state.targetPair,
-        existPairs: state.existPairs,
+        existingPairs: state.existingPairs,
       }
     case authTypes.LOGOUT:
       return initialState
