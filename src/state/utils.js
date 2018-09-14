@@ -89,12 +89,6 @@ export function momentFormatter(format) {
   }
 }
 
-export function getUrlParameter(name) {
-  const regex = new RegExp(`[\\?&]${name}=([^&#]*)`)
-  const results = regex.exec(window.location.search)
-  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '))
-}
-
 export function getSideMsg(side) {
   let msg
   if (side === 1) {
@@ -118,7 +112,6 @@ export default {
   formatTime,
   getCurrentEntries,
   getSideMsg,
-  getUrlParameter,
   isValidateType,
   momentFormatter,
   postJsonfetch,
