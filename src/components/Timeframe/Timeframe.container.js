@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import { getQuery, getTimeFrame, getTimeRange } from 'state/query/selectors'
 import { setTimeRange } from 'state/query/actions'
@@ -18,6 +19,6 @@ const mapDispatchToProps = dispatch => ({
   setTimeRange: (rangeType, start, end) => dispatch(setTimeRange(rangeType, start, end)),
 })
 
-const TimeframeContainer = connect(mapStateToProps, mapDispatchToProps)(Timeframe)
+const TimeframeContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Timeframe))
 
 export default TimeframeContainer

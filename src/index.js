@@ -34,7 +34,7 @@ ReactDOM.render(
 window.addEventListener('load', function handler() {
   const parsed = queryString.parse(window.location.search)
   const { authToken, range } = parsed
-  if (range) {
+  if (range.indexOf('-') > -1) {
     const [startStr, endStr] = range.split('-')
     store.dispatch(setCustomTimeRange(parseInt(startStr, 10), parseInt(endStr, 10)))
   }
