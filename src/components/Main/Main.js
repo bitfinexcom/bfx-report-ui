@@ -107,8 +107,8 @@ class Main extends PureComponent {
   }
 
   handleClick(target) {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.history.push(MAPPING[target].path)
+    const { history } = this.props
+    history.push(MAPPING[target].path + history.location.search)
   }
 
   handleClickCustom(e) {
