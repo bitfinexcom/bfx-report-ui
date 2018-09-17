@@ -131,9 +131,9 @@ class Main extends PureComponent {
 
   startQuery() {
     const { startDate, endDate } = this.state
-    const { setTimeRange } = this.props
+    const { setCustomTimeRange } = this.props
     if (startDate !== null && endDate !== null) {
-      setTimeRange(queryType.TIME_RANGE_CUSTOM, startDate.getTime(), endDate.getTime())
+      setCustomTimeRange(startDate.getTime(), endDate.getTime())
     }
     this.setState({ isCustomOpen: false })
   }

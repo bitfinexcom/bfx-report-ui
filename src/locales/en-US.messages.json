@@ -101,6 +101,7 @@
   "timeframe.download.cancel": "Cancel",
   "timeframe.download.status.local": "{topic} csv generated, please check your local 'csv' folder",
   "timeframe.download.status.email": "Generating your CSV report, we'll send it to you via email as soon as it's ready...",
+  "timeframe.custom-timerange": "Custom time range",
   "timeframe.24h": "Last 24 hours",
   "timeframe.yesterday": "Yesterday",
   "timeframe.2w": "Last 2 weeks",

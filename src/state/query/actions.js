@@ -1,3 +1,4 @@
+import { updateErrorStatus } from 'state/status/actions'
 import types from './constants'
 
 /**
@@ -39,6 +40,27 @@ export function setTimeRange(rangeType, start, end) {
   }
 }
 
+function isValidTimeStamp(n) {
+  return (`${n}`).length === 13
+    && (new Date(n)).getTime() === n
+}
+
+/**
+ * Create an action to custom time range.
+ * @param {integer} start start time in milliseconds
+ * @param {integer} end end time in milliseconds
+ */
+export function setCustomTimeRange(start, end) {
+  if (isValidTimeStamp(start) && isValidTimeStamp(end)) {
+    return setTimeRange(types.TIME_RANGE_CUSTOM, start, end)
+  }
+  return updateErrorStatus({
+    id: 'status.fail',
+    topic: 'timeframe.custom-timerange',
+    detail: `with wrong format ${start}-${end}`,
+  })
+}
+
 /**
  * Create an action to export CSV.
  * @param {string} target export type
@@ -74,6 +96,7 @@ export default {
   exportCsv,
   exportReady,
   prepareExport,
+  setCustomTimeRange,
   setQueryLimit,
   setTimeType,
   setTimeRange,

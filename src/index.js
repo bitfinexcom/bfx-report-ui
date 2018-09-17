@@ -16,6 +16,7 @@ import '@blueprintjs/select/lib/css/blueprint-select.css'
 
 import { persistor, store } from 'state/store'
 import { checkAuthWithToken } from 'state/auth/actions'
+import { setCustomTimeRange } from 'state/query/actions'
 import { platform } from 'var/config'
 import 'styles/index.css'
 
@@ -32,7 +33,11 @@ ReactDOM.render(
 
 window.addEventListener('load', function handler() {
   const parsed = queryString.parse(window.location.search)
-  const { authToken } = parsed
+  const { authToken, range } = parsed
+  if (range) {
+    const [startStr, endStr] = range.split('-')
+    store.dispatch(setCustomTimeRange(parseInt(startStr, 10), parseInt(endStr, 10)))
+  }
   if (authToken) {
     window.removeEventListener('load', handler)
     // remove authToken param from url but keep others
