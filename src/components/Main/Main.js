@@ -108,6 +108,7 @@ class Main extends PureComponent {
 
   handleClick(target) {
     const { history } = this.props
+    // remove url params
     history.push(MAPPING[target].path + history.location.search)
   }
 

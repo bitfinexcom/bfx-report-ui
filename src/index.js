@@ -35,8 +35,8 @@ window.addEventListener('load', function handler() {
   const { authToken } = parsed
   if (authToken) {
     window.removeEventListener('load', handler)
-    const params = _omit(parsed, 'authToken')
     // remove authToken param from url but keep others
+    const params = _omit(parsed, 'authToken')
     window.history.pushState(null, null,
       window.location.href.replace(
         window.location.search,
