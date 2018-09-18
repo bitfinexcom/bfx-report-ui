@@ -27,7 +27,7 @@ class Timeframe extends PureComponent {
     if (timeRange === constants.TIME_RANGE_CUSTOM) {
       const parsed = queryString.parse(window.location.search)
       const { range } = parsed
-      const [startStr, endStr] = range.split('-')
+      const [startStr, endStr] = range ? range.split('-') : [undefined, undefined]
       if (`${start}` !== startStr || `${end}` !== endStr) {
         const params = Object.assign(
           parsed,
