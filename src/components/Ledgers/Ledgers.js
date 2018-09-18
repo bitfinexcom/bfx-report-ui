@@ -1,11 +1,8 @@
 import React, { PureComponent, Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
-  Button,
   Card,
   Elevation,
-  Intent,
-  MenuItem,
 } from '@blueprintjs/core'
 import {
   Cell,
@@ -13,7 +10,6 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
-import { Select } from '@blueprintjs/select'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
@@ -21,6 +17,7 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
+import SymbolSelector from 'ui/SymbolSelector'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -190,45 +187,17 @@ class Ledgers extends PureComponent {
       )
     }
 
-    const renderSymbol = (symbol, { modifiers }) => {
-      if (!modifiers.matchesPredicate) {
-        return null
-      }
-      const isCurrent = currentCoin === symbol
-      const className = (WILD_CARD.includes(symbol) || existingCoins.includes(symbol)) && !isCurrent
-        ? 'bitfinex-queried-symbol' : ''
-
-      return (
-        <MenuItem
-          className={className}
-          active={modifiers.active}
-          intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-          disabled={modifiers.disabled}
-          key={symbol}
-          onClick={this.handleClick(symbol)}
-          text={symbol}
-        />
-      )
-    }
-
-    const filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
-
     const renderSymbolSelector = (
       <Fragment>
-          &nbsp;
-        <Select
-          disabled={coins.length === 0}
-          items={coinList}
-          itemRenderer={renderSymbol}
-          itemPredicate={filterSymbol}
-          onItemSelect={this.handleClick}
-        >
-          <Button
-            text={currentCoin}
-            rightIcon='caret-down'
-            disabled={coins.length === 0}
-          />
-        </Select>
+        &nbsp;
+        <SymbolSelector
+          coinList={coinList}
+          coins={coins}
+          currentCoin={currentCoin}
+          existingCoins={existingCoins}
+          onSymbolSelect={this.handleClick}
+          wildCard={WILD_CARD}
+        />
       </Fragment>
     )
 
