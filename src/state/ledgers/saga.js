@@ -57,10 +57,10 @@ const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
 function* fetchNextLedgers() {
   try {
     const {
-      targetSymbol,
-      offset,
       entries,
+      offset,
       smallestMts,
+      targetSymbol,
     } = yield select(getLedgers)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {

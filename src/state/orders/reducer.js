@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
-import { formatSymbolToPair } from 'state/utils'
+import { formatInternalPair, formatSymbolToPair } from 'state/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 
@@ -79,6 +79,8 @@ import types from './constants'
 }
  */
 const initialState = {
+  dataReceived: false,
+  existingPairs: [],
   entries: [
     /* {
       gid: '',
@@ -100,8 +102,6 @@ const initialState = {
       placedId: '',
     }, */
   ],
-  dataReceived: false,
-  existingPairs: [],
   smallestMts: 0,
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
@@ -117,8 +117,8 @@ export function ordersReducer(state = initialState, action) {
     case types.UPDATE_ORDERS: {
       const result = action.payload
       const { existingPairs } = state
-      let smallestMts
       const updatePairs = [...existingPairs]
+      let smallestMts
       const entries = result.map((entry) => {
         const {
           amount,
@@ -140,10 +140,10 @@ export function ordersReducer(state = initialState, action) {
           type,
           typePrev,
         } = entry
-        const pair = `${symbol.slice(1, 7).toLowerCase()}`
+        const internalPair = formatInternalPair(symbol)
         // save new pair to updatePairs list
-        if (updatePairs.indexOf(pair) === -1) {
-          updatePairs.push(pair)
+        if (updatePairs.indexOf(internalPair) === -1) {
+          updatePairs.push(internalPair)
         }
         // log smallest mts
         if (!smallestMts || smallestMts > mtsUpdate) {
