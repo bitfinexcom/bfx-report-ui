@@ -5,7 +5,6 @@ import {
   Intent,
   MenuItem,
 } from '@blueprintjs/core'
-
 import { Select } from '@blueprintjs/select'
 
 class SymbolSelector extends PureComponent {
