@@ -1,11 +1,8 @@
 import React, { Fragment, PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
-  Button,
   Card,
   Elevation,
-  Intent,
-  MenuItem,
 } from '@blueprintjs/core'
 import {
   Cell,
@@ -13,7 +10,6 @@ import {
   Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
-import { Select } from '@blueprintjs/select'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
@@ -21,11 +17,11 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
+import PairSelector from 'ui/PairSelector'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
   formatTime,
-  formatPair,
   getCurrentEntries,
 } from 'state/utils'
 
@@ -207,45 +203,17 @@ class Orders extends PureComponent {
       />
     )
 
-    const renderPair = (pair, { modifiers }) => {
-      if (!modifiers.matchesPredicate) {
-        return null
-      }
-      const isCurrent = currentPair === pair
-      const className = (WILD_CARD.includes(pair) || existingPairs.includes(pair)) && !isCurrent
-        ? 'bitfinex-queried-symbol' : ''
-
-      return (
-        <MenuItem
-          className={className}
-          active={modifiers.active}
-          intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-          disabled={modifiers.disabled}
-          key={pair}
-          onClick={this.handleClick(pair)}
-          text={formatPair(pair)}
-        />
-      )
-    }
-
-    const filterPair = (query, pair) => pair.toLowerCase().indexOf(query.replace('/', '').toLowerCase()) >= 0
-
     const renderPairSelector = (
       <Fragment>
           &nbsp;
-        <Select
-          disabled={pairs.length === 0}
-          items={pairList}
-          itemRenderer={renderPair}
-          itemPredicate={filterPair}
-          onItemSelect={this.handleClick}
-        >
-          <Button
-            text={formatPair(currentPair)}
-            rightIcon='caret-down'
-            disabled={pairs.length === 0}
-          />
-        </Select>
+        <PairSelector
+          currentPair={currentPair}
+          existingPairs={existingPairs}
+          onPairSelect={this.handleClick}
+          pairList={pairList}
+          pairs={pairs}
+          wildCard={WILD_CARD}
+        />
       </Fragment>
     )
 
