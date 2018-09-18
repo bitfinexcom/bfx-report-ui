@@ -5,7 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { postJsonfetch } from 'state/utils'
+import { formatRawPairToSymbol, postJsonfetch } from 'state/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -14,10 +14,13 @@ import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
-import { getTrades } from './selectors'
+import { getTrades, getTargetPair } from './selectors'
 
-function getReqTrades(auth, query, smallestMts) {
+function getReqTrades(auth, query, targetPair, smallestMts) {
   const params = getTimeFrame(query, 'trades', smallestMts)
+  if (targetPair) {
+    params.symbol = formatRawPairToSymbol(targetPair)
+  }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getTrades',
@@ -27,9 +30,10 @@ function getReqTrades(auth, query, smallestMts) {
 
 function* fetchTrades() {
   try {
+    const targetPair = yield select(getTargetPair)
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqTrades, auth, query, 0)
+    const { result = [], error } = yield call(getReqTrades, auth, query, targetPair, 0)
     yield put(actions.updateTrades(result))
 
     if (error) {
@@ -52,15 +56,19 @@ const LIMIT = queryTypes.DEFAULT_TRADES_QUERY_LIMIT
 
 function* fetchNextTrades() {
   try {
-    const trades = yield select(getTrades)
-    const { offset, entries, smallestMts } = trades
+    const {
+      offset,
+      entries,
+      smallestMts,
+      targetPair,
+    } = yield select(getTrades)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqTrades, auth, query, smallestMts)
+    const { result = [], error } = yield call(getReqTrades, auth, query, targetPair, smallestMts)
     yield put(actions.updateTrades(result))
 
     if (error) {

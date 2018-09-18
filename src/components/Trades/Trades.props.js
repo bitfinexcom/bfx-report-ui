@@ -13,6 +13,7 @@ const TRADES_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(TRADES_ENTRIES_PROPS).isRequired,
+  existingPairs: PropTypes.arrayOf(PropTypes.string),
   fetchTrades: PropTypes.func.isRequired,
   fetchNextTrades: PropTypes.func.isRequired,
   fetchPrevTrades: PropTypes.func.isRequired,
@@ -22,11 +23,14 @@ export const propTypes = {
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
+  targetPair: PropTypes.string,
+  setTargetPair: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
   offset: 0,
   entries: [],
+  existingPairs: [],
   fetchTrades: () => {},
   fetchNextTrades: () => {},
   fetchPrevTrades: () => {},
@@ -36,4 +40,6 @@ export const defaultProps = {
   pageOffset: 0,
   pageLoading: false,
   refresh: () => {},
+  setTargetPair: () => {},
+  targetPair: '',
 }
