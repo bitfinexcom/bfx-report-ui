@@ -1,5 +1,7 @@
 import { updateErrorStatus } from 'state/status/actions'
+
 import types from './constants'
+import { isValidTimeStamp } from './utils'
 
 /**
  * Create an action to set query limit.
@@ -38,11 +40,6 @@ export function setTimeRange(rangeType, start, end) {
       end,
     },
   }
-}
-
-function isValidTimeStamp(n) {
-  return (`${n}`).length === 13
-    && (new Date(n)).getTime() === n
 }
 
 /**
