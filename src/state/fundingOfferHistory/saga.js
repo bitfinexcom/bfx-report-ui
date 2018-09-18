@@ -14,10 +14,13 @@ import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
-import { getFundingOfferHistory } from './selectors'
+import { getTargetSymbol, getFundingOfferHistory } from './selectors'
 
-function getReqFOffer(auth, query, smallestMts) {
+function getReqFOffer(auth, query, targetSymbol, smallestMts) {
   const params = getTimeFrame(query, 'foffer', smallestMts)
+  if (targetSymbol) {
+    params.symbol = targetSymbol
+  }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getFundingOfferHistory',
@@ -27,9 +30,10 @@ function getReqFOffer(auth, query, smallestMts) {
 
 function* fetchFOffer() {
   try {
+    const targetSymbol = yield select(getTargetSymbol)
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFOffer, auth, query, 0)
+    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbol, 0)
     yield put(actions.updateFOffer(result))
 
     if (error) {
@@ -52,14 +56,19 @@ const LIMIT = queryTypes.DEFAULT_FOFFER_QUERY_LIMIT
 
 function* fetchNextFOffer() {
   try {
-    const { offset, entries, smallestMts } = yield select(getFundingOfferHistory)
+    const {
+      offset,
+      entries,
+      smallestMts,
+      targetSymbol,
+    } = yield select(getFundingOfferHistory)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFOffer, auth, query, smallestMts)
+    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbol, smallestMts)
     yield put(actions.updateFOffer(result))
 
     if (error) {
