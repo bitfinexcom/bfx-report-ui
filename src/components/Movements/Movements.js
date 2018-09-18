@@ -17,6 +17,7 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
+import SymbolSelector from 'ui/SymbolSelector'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -32,10 +33,14 @@ const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
 const COLUMN_WIDTHS = [80, 150, 100, 125, 120, 400]
 const LIMIT = queryConstants.DEFAULT_MOVEMENTS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_MOVEMENTS_PAGE_SIZE
+const ALL = 'ALL'
+const WILD_CARD = ['', ALL]
 
 class Movements extends PureComponent {
   constructor(props) {
     super(props)
+    this.handlers = {}
+    this.handleClick = this.handleClick.bind(this)
     this.fetchPrev = this.fetchPrev.bind(this)
     this.fetchNext = this.fetchNext.bind(this)
   }
@@ -51,6 +56,16 @@ class Movements extends PureComponent {
     checkFetch(prevProps, this.props, 'movements')
   }
 
+  handleClick(symbol) {
+    if (!this.handlers[symbol]) {
+      this.handlers[symbol] = () => {
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.setTargetSymbol(symbol === ALL ? '' : symbol)
+      }
+    }
+    return this.handlers[symbol]
+  }
+
   fetchPrev() {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevMovements()
@@ -63,10 +78,13 @@ class Movements extends PureComponent {
 
   render() {
     const {
+      coins,
       offset,
       pageOffset,
       pageLoading,
+      targetSymbol,
       entries,
+      existingCoins,
       handleClickExport,
       intl,
       jumpPage,
@@ -77,6 +95,8 @@ class Movements extends PureComponent {
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
+    const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
+    const currentCoin = targetSymbol || ALL
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
@@ -145,6 +165,20 @@ class Movements extends PureComponent {
       )
     }
 
+    const renderSymbolSelector = (
+      <Fragment>
+        &nbsp;
+        <SymbolSelector
+          coinList={coinList}
+          coins={coins}
+          currentCoin={currentCoin}
+          existingCoins={existingCoins}
+          onSymbolSelect={this.handleClick}
+          wildCard={WILD_CARD}
+        />
+      </Fragment>
+    )
+
     const renderPagination = (
       <Pagination
         type='movements'
@@ -166,7 +200,15 @@ class Movements extends PureComponent {
       )
     } else if (numRows === 0) {
       showContent = (
-        <NoData title={titleMsgId} />
+        <Fragment>
+          <h4>
+            {intl.formatMessage({ id: titleMsgId })}
+            &nbsp;
+            <TimeRange />
+            {renderSymbolSelector}
+          </h4>
+          <NoData />
+        </Fragment>
       )
     } else {
       showContent = (
@@ -175,6 +217,7 @@ class Movements extends PureComponent {
             {intl.formatMessage({ id: titleMsgId })}
             &nbsp;
             <TimeRange />
+            {renderSymbolSelector}
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;

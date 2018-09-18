@@ -14,10 +14,13 @@ import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
-import { getMovements } from './selectors'
+import { getTargetSymbol, getMovements } from './selectors'
 
-function getReqMovements(auth, query, smallestMts) {
+function getReqMovements(auth, query, targetSymbol, smallestMts) {
   const params = getTimeFrame(query, 'movements', smallestMts)
+  if (targetSymbol) {
+    params.symbol = targetSymbol
+  }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getMovements',
@@ -27,9 +30,10 @@ function getReqMovements(auth, query, smallestMts) {
 
 function* fetchMovements() {
   try {
+    const targetSymbol = yield select(getTargetSymbol)
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqMovements, auth, query, 0)
+    const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbol, 0)
     yield put(actions.updateMovements(result))
 
     if (error) {
@@ -52,14 +56,19 @@ const LIMIT = queryTypes.DEFAULT_MOVEMENTS_QUERY_LIMIT
 
 function* fetchNextMovements() {
   try {
-    const { offset, entries, smallestMts } = yield select(getMovements)
+    const {
+      entries,
+      offset,
+      smallestMts,
+      targetSymbol,
+    } = yield select(getMovements)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqMovements, auth, query, smallestMts)
+    const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbol, smallestMts)
     yield put(actions.updateMovements(result))
 
     if (error) {
