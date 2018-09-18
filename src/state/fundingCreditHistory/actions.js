@@ -69,6 +69,17 @@ export function updateFCredit(payload) {
   }
 }
 
+/**
+ * Create an action to set target symbol.
+ * @param {string} symbol symbol
+ */
+export function setTargetSymbol(symbol) {
+  return {
+    type: types.SET_SYMBOL,
+    payload: symbol,
+  }
+}
+
 export default {
   fetchFail,
   fetchFCredit,
@@ -76,5 +87,6 @@ export default {
   fetchPrevFCredit,
   jumpPage,
   refresh,
+  setTargetSymbol,
   updateFCredit,
 }

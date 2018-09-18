@@ -1,5 +1,7 @@
 export const getFundingCreditHistory = state => state.fcredit
 
+export const getExistingCoins = state => getFundingCreditHistory(state).existingCoins
+export const getTargetSymbol = state => getFundingCreditHistory(state).targetSymbol
 export const getDataReceived = state => getFundingCreditHistory(state).dataReceived
 export const getEntries = state => getFundingCreditHistory(state).entries
 export const getOffset = state => getFundingCreditHistory(state).offset
@@ -9,8 +11,10 @@ export const getPageOffset = state => getFundingCreditHistory(state).pageOffset
 export default {
   getDataReceived,
   getEntries,
+  getExistingCoins,
   getFundingCreditHistory,
   getOffset,
   getPageLoading,
   getPageOffset,
+  getTargetSymbol,
 }

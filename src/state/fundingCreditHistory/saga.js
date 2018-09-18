@@ -14,10 +14,13 @@ import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
-import { getFundingCreditHistory } from './selectors'
+import { getTargetSymbol, getFundingCreditHistory } from './selectors'
 
-function getReqFCredit(auth, query, smallestMts) {
+function getReqFCredit(auth, query, targetSymbol, smallestMts) {
   const params = getTimeFrame(query, 'fundingCreditHistory', smallestMts)
+  if (targetSymbol) {
+    params.symbol = targetSymbol
+  }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getFundingCreditHistory',
@@ -27,9 +30,10 @@ function getReqFCredit(auth, query, smallestMts) {
 
 function* fetchFCredit() {
   try {
+    const targetSymbol = yield select(getTargetSymbol)
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFCredit, auth, query, 0)
+    const { result = [], error } = yield call(getReqFCredit, auth, query, targetSymbol, 0)
     yield put(actions.updateFCredit(result))
 
     if (error) {
@@ -52,14 +56,19 @@ const LIMIT = queryTypes.DEFAULT_FCREDIT_QUERY_LIMIT
 
 function* fetchNextFCredit() {
   try {
-    const { offset, entries, smallestMts } = yield select(getFundingCreditHistory)
+    const {
+      offset,
+      entries,
+      smallestMts,
+      targetSymbol,
+    } = yield select(getFundingCreditHistory)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFCredit, auth, query, smallestMts)
+    const { result = [], error } = yield call(getReqFCredit, auth, query, targetSymbol, smallestMts)
     yield put(actions.updateFCredit(result))
 
     if (error) {

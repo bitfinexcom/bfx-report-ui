@@ -16,8 +16,10 @@ const FCREDIT_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  coins: PropTypes.arrayOf(PropTypes.string),
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(FCREDIT_ENTRIES_PROPS).isRequired,
+  existingCoins: PropTypes.arrayOf(PropTypes.string),
   fetchFcredit: PropTypes.func.isRequired,
   fetchNextFCredit: PropTypes.func.isRequired,
   fetchPrevFCredit: PropTypes.func.isRequired,
@@ -27,11 +29,15 @@ export const propTypes = {
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
+  setTargetSymbol: PropTypes.func.isRequired,
+  targetSymbol: PropTypes.string,
 }
 
 export const defaultProps = {
+  coins: [],
   offset: 0,
   entries: [],
+  existingCoins: [],
   fetchFcredit: () => {},
   fetchNextFCredit: () => {},
   fetchPrevFCredit: () => {},
@@ -41,4 +47,5 @@ export const defaultProps = {
   pageOffset: 0,
   pageLoading: false,
   refresh: () => {},
+  setTargetSymbol: () => {},
 }
