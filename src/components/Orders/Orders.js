@@ -91,7 +91,6 @@ class Orders extends PureComponent {
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const pairList = pairs ? [ALL, ...pairs] : [ALL, ...existingPairs]
-    // eslint-disable-next-line react/destructuring-assignment
     const currentPair = targetPair || ALL
     const numRows = filteredData.length
 

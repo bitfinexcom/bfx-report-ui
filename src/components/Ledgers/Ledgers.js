@@ -91,7 +91,6 @@ class Ledgers extends PureComponent {
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
-    // eslint-disable-next-line react/destructuring-assignment
     const currentCoin = targetSymbol || ALL
     const numRows = filteredData.length
 
