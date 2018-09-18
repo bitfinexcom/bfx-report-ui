@@ -71,7 +71,7 @@ export function updateLedgers(payload) {
 
 /**
  * Create an action to set target symbol.
- * @param {string}  symbol symbol
+ * @param {string} symbol symbol
  */
 export function setTargetSymbol(symbol) {
   return {

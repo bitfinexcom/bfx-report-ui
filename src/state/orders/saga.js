@@ -93,6 +93,7 @@ function* fetchOrdersFail({ payload }) {
 
 export default function* ordersSaga() {
   yield takeLatest(types.FETCH_ORDERS, fetchOrders)
+  yield takeLatest(types.SET_PAIR, fetchOrders)
   yield takeLatest(types.FETCH_NEXT_ORDERS, fetchNextOrders)
   yield takeLatest(types.FETCH_FAIL, fetchOrdersFail)
 }
