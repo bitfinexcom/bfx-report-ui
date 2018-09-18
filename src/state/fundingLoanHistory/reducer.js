@@ -4,12 +4,14 @@ import authTypes from 'state/auth/constants'
 import types from './constants'
 
 const initialState = {
-  entries: [],
   dataReceived: false,
-  smallestMts: 0,
+  entries: [],
+  existingCoins: [],
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
   pageLoading: false,
+  smallestMts: 0,
+  targetSymbol: '',
 }
 
 const LIMIT = queryTypes.DEFAULT_FLOAN_QUERY_LIMIT
@@ -19,6 +21,8 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_FLOAN: {
       const result = action.payload
+      const { existingCoins } = state
+      const updateCoins = [...existingCoins]
       let smallestMts
       const entries = result.map((entry) => {
         const {
@@ -40,6 +44,10 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
           status,
           symbol,
         } = entry
+        // save new symbol to updateCoins list
+        if (updateCoins.indexOf(symbol) === -1) {
+          updateCoins.push(symbol)
+        }
         // log smallest mts
         if (!smallestMts || smallestMts > mtsUpdate) {
           smallestMts = mtsUpdate
@@ -67,6 +75,7 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
       return {
         ...state,
         entries: [...state.entries, ...entries],
+        existingCoins: updateCoins.sort(),
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,
@@ -113,8 +122,19 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
         pageOffset: totalOffset - currentOffset,
       }
     }
+    case types.SET_SYMBOL:
+      return {
+        ...initialState,
+        targetSymbol: action.payload,
+        existingCoins: state.existingCoins,
+      }
+    // existingCoins should be re-calc in new time range
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
+      return {
+        ...initialState,
+        targetSymbol: state.targetSymbol,
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {
