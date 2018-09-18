@@ -4,9 +4,10 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+import queryString from 'query-string'
 import _omit from 'lodash/omit'
 
-import { formatRawPairToSymbol, getUrlParameter, postJsonfetch } from 'state/utils'
+import { formatRawPairToSymbol, postJsonfetch } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { getTargetSymbol } from 'state/ledgers/selectors'
@@ -140,7 +141,7 @@ function* prepareExport() {
   try {
     const auth = yield select(selectAuth)
     const { result, error } = yield call(checkEmail, auth)
-    const reportEmail = getUrlParameter('reportEmail')
+    const { reportEmail } = queryString.parse(window.location.search)
     // send email get from the URL when possible
     if (reportEmail && result) {
       yield put(actions.exportReady(reportEmail))

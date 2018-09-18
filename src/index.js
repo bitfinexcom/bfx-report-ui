@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { FocusStyleManager } from '@blueprintjs/core'
 import { PersistGate } from 'redux-persist/integration/react'
+import queryString from 'query-string'
+import _omit from 'lodash/omit'
 
 import 'normalize.css/normalize.css'
 import 'flexboxgrid2/flexboxgrid2.css'
@@ -14,7 +16,7 @@ import '@blueprintjs/select/lib/css/blueprint-select.css'
 
 import { persistor, store } from 'state/store'
 import { checkAuthWithToken } from 'state/auth/actions'
-import { getUrlParameter } from 'state/utils'
+import { setCustomTimeRange } from 'state/query/actions'
 import { platform } from 'var/config'
 import 'styles/index.css'
 
@@ -30,12 +32,22 @@ ReactDOM.render(
 )
 
 window.addEventListener('load', function handler() {
-  const token = getUrlParameter('authToken')
-  if (token) {
+  const parsed = queryString.parse(window.location.search)
+  const { authToken, range } = parsed
+  if (range && range.indexOf('-') > -1) {
+    const [startStr, endStr] = range.split('-')
+    store.dispatch(setCustomTimeRange(parseInt(startStr, 10), parseInt(endStr, 10)))
+  }
+  if (authToken) {
     window.removeEventListener('load', handler)
-    // remove url params
-    window.history.pushState(null, null, window.location.href.replace(window.location.search, ''))
-    store.dispatch(checkAuthWithToken(token))
+    // remove authToken param from url but keep others
+    const params = _omit(parsed, 'authToken')
+    window.history.pushState(null, null,
+      window.location.href.replace(
+        window.location.search,
+        `?${queryString.stringify(params, { encode: false })}`,
+      ))
+    store.dispatch(checkAuthWithToken(authToken))
   }
 
   // eslint-disable-next-line no-console

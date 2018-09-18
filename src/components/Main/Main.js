@@ -107,8 +107,9 @@ class Main extends PureComponent {
   }
 
   handleClick(target) {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.history.push(MAPPING[target].path)
+    const { history } = this.props
+    // remove url params
+    history.push(MAPPING[target].path + history.location.search)
   }
 
   handleClickCustom(e) {
@@ -130,9 +131,9 @@ class Main extends PureComponent {
 
   startQuery() {
     const { startDate, endDate } = this.state
-    const { setTimeRange } = this.props
+    const { setCustomTimeRange } = this.props
     if (startDate !== null && endDate !== null) {
-      setTimeRange(queryType.TIME_RANGE_CUSTOM, startDate.getTime(), endDate.getTime())
+      setCustomTimeRange(startDate.getTime(), endDate.getTime())
     }
     this.setState({ isCustomOpen: false })
   }

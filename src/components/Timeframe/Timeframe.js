@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import { MenuItem } from '@blueprintjs/core'
+import queryString from 'query-string'
 
 import constants from 'state/query/constants'
 import { formatDate } from 'state/utils'
@@ -16,6 +17,25 @@ class Timeframe extends PureComponent {
     this.handleClickMonthToDate = this.handleClick.bind(this, constants.TIME_RANGE_MONTH_TO_DATE)
     this.handleClickPastMonth = this.handleClick.bind(this, constants.TIME_RANGE_PAST_MONTH)
     this.handleClickPast3Month = this.handleClick.bind(this, constants.TIME_RANGE_PAST_3MONTH)
+  }
+
+  componentDidUpdate() {
+    const {
+      timeRange, start, end, location, history,
+    } = this.props
+    // only update query param when its set in custom time range
+    if (timeRange === constants.TIME_RANGE_CUSTOM) {
+      const parsed = queryString.parse(window.location.search)
+      const { range } = parsed
+      const [startStr, endStr] = range ? range.split('-') : [undefined, undefined]
+      if (`${start}` !== startStr || `${end}` !== endStr) {
+        const params = Object.assign(
+          parsed,
+          { range: `${start}-${end}` },
+        )
+        history.push(`${location.pathname}?${queryString.stringify(params, { encode: false })}`)
+      }
+    }
   }
 
   handleClick(rangeType, e) {

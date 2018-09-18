@@ -6,7 +6,7 @@ export const propTypes = {
   authStatus: PropTypes.bool,
   exportCsv: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
-  setTimeRange: PropTypes.func.isRequired,
+  setCustomTimeRange: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
