@@ -17,6 +17,7 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
+import PairSelector from 'ui/PairSelector'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -30,10 +31,14 @@ const COLUMN_WIDTHS = [85, 80, 125, 125, 125, 150]
 const LIMIT = queryConstants.DEFAULT_TRADES_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_TRADES_PAGE_SIZE
 const TYPE = queryConstants.MENU_TRADES
+const ALL = 'ALL'
+const WILD_CARD = ['', ALL]
 
 class Trades extends PureComponent {
   constructor(props) {
     super(props)
+    this.handlers = {}
+    this.handleClick = this.handleClick.bind(this)
     this.fetchPrev = this.fetchPrev.bind(this)
     this.fetchNext = this.fetchNext.bind(this)
   }
@@ -49,6 +54,16 @@ class Trades extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
+  handleClick(pair) {
+    if (!this.handlers[pair]) {
+      this.handlers[pair] = () => {
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.setTargetPair(pair === ALL ? '' : pair)
+      }
+    }
+    return this.handlers[pair]
+  }
+
   fetchPrev() {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevTrades()
@@ -61,17 +76,22 @@ class Trades extends PureComponent {
 
   render() {
     const {
+      existingPairs,
       offset,
       pageOffset,
       pageLoading,
+      pairs,
       entries,
       handleClickExport,
       intl,
       jumpPage,
       loading,
       refresh,
+      targetPair,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
+    const pairList = pairs ? [ALL, ...pairs] : [ALL, ...existingPairs]
+    const currentPair = targetPair || ALL
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
@@ -157,6 +177,20 @@ class Trades extends PureComponent {
       />
     )
 
+    const renderPairSelector = (
+      <Fragment>
+        &nbsp;
+        <PairSelector
+          currentPair={currentPair}
+          existingPairs={existingPairs}
+          onPairSelect={this.handleClick}
+          pairList={pairList}
+          pairs={pairs}
+          wildCard={WILD_CARD}
+        />
+      </Fragment>
+    )
+
     let showContent
     if (loading) {
       showContent = (
@@ -164,7 +198,15 @@ class Trades extends PureComponent {
       )
     } else if (numRows === 0) {
       showContent = (
-        <NoData title='trades.title' />
+        <Fragment>
+          <h4>
+            {intl.formatMessage({ id: 'trades.title' })}
+            &nbsp;
+            <TimeRange />
+            {renderPairSelector}
+          </h4>
+          <NoData />
+        </Fragment>
       )
     } else {
       showContent = (
@@ -173,6 +215,7 @@ class Trades extends PureComponent {
             {intl.formatMessage({ id: 'trades.title' })}
             &nbsp;
             <TimeRange />
+            {renderPairSelector}
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;

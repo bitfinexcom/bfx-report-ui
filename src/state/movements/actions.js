@@ -69,6 +69,17 @@ export function updateMovements(payload) {
   }
 }
 
+/**
+ * Create an action to set target symbol.
+ * @param {string} symbol symbol
+ */
+export function setTargetSymbol(symbol) {
+  return {
+    type: types.SET_SYMBOL,
+    payload: symbol,
+  }
+}
+
 export default {
   fetchFail,
   fetchMovements,
@@ -76,5 +87,6 @@ export default {
   fetchPrevMovements,
   jumpPage,
   refresh,
+  setTargetSymbol,
   updateMovements,
 }

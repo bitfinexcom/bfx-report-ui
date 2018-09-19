@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
-import { formatSymbolToPair } from 'state/utils'
+import { formatInternalPair, formatSymbolToPair } from 'state/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 
@@ -58,6 +58,7 @@ import types from './constants'
 }
  */
 const initialState = {
+  dataReceived: false,
   entries: [
     /* {
       id: 24178707,
@@ -73,11 +74,12 @@ const initialState = {
       feeCurrency: "BTC"
     }, */
   ],
-  dataReceived: false,
+  existingPairs: [],
   smallestMts: 0,
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
   pageLoading: false,
+  targetPair: '',
 }
 
 const LIMIT = queryTypes.DEFAULT_TRADES_QUERY_LIMIT
@@ -87,29 +89,50 @@ export function tradesReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_TRADES: {
       const result = action.payload
+      const { existingPairs } = state
+      const updatePairs = [...existingPairs]
       let smallestMts
       const entries = result.map((entry) => {
+        const {
+          execAmount,
+          execPrice,
+          fee,
+          feeCurrency,
+          id,
+          pair,
+          maker,
+          mtsCreate,
+          orderID,
+          orderPrice,
+          orderType,
+        } = entry
+        const internalPair = formatInternalPair(pair)
+        // save new pair to updatePairs list
+        if (updatePairs.indexOf(internalPair) === -1) {
+          updatePairs.push(internalPair)
+        }
         // log smallest mts
-        if (!smallestMts || smallestMts > entry.mtsCreate) {
-          smallestMts = entry.mtsCreate
+        if (!smallestMts || smallestMts > mtsCreate) {
+          smallestMts = mtsCreate
         }
         return {
-          id: entry.id,
-          pair: formatSymbolToPair(entry.pair),
-          mtsCreate: entry.mtsCreate,
-          orderID: entry.orderID,
-          execAmount: entry.execAmount,
-          execPrice: entry.execPrice,
-          orderType: entry.orderType,
-          orderPrice: entry.orderPrice,
-          maker: entry.maker,
-          fee: Math.abs(entry.fee),
-          feeCurrency: entry.feeCurrency,
+          id,
+          pair: formatSymbolToPair(pair),
+          mtsCreate,
+          orderID,
+          execAmount,
+          execPrice,
+          orderType,
+          orderPrice,
+          maker,
+          fee: Math.abs(fee),
+          feeCurrency,
         }
       })
       return {
         ...state,
         entries: [...state.entries, ...entries],
+        existingPairs: updatePairs.sort(),
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,
@@ -156,8 +179,19 @@ export function tradesReducer(state = initialState, action) {
         pageOffset: totalOffset - currentOffset,
       }
     }
+    case types.SET_PAIR:
+      return {
+        ...initialState,
+        targetPair: action.payload,
+        existingPairs: state.existingPairs,
+      }
+    // existingPairs should be re-calc in new time range
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
+      return {
+        ...initialState,
+        targetPair: state.targetPair,
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {

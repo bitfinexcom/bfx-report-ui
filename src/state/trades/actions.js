@@ -69,6 +69,18 @@ export function updateTrades(payload) {
   }
 }
 
+
+/**
+ * Create an action to set current pair.
+ * @param {string} pair pair
+ */
+export function setTargetPair(pair) {
+  return {
+    type: types.SET_PAIR,
+    payload: pair,
+  }
+}
+
 export default {
   fetchFail,
   fetchTrades,
@@ -76,5 +88,6 @@ export default {
   fetchPrevTrades,
   jumpPage,
   refresh,
+  setTargetPair,
   updateTrades,
 }

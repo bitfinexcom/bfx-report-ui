@@ -17,6 +17,7 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
+import SymbolSelector from 'ui/SymbolSelector'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -30,10 +31,14 @@ const COLUMN_WIDTHS = [80, 100, 100, 150, 100, 200, 150, 80, 150]
 const LIMIT = queryConstants.DEFAULT_FOFFER_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_FOFFER_PAGE_SIZE
 const TYPE = queryConstants.MENU_FOFFER
+const ALL = 'ALL'
+const WILD_CARD = ['', ALL]
 
 class FundingOfferHistory extends PureComponent {
   constructor(props) {
     super(props)
+    this.handlers = {}
+    this.handleClick = this.handleClick.bind(this)
     this.fetchPrev = this.fetchPrev.bind(this)
     this.fetchNext = this.fetchNext.bind(this)
   }
@@ -49,6 +54,16 @@ class FundingOfferHistory extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
+  handleClick(symbol) {
+    if (!this.handlers[symbol]) {
+      this.handlers[symbol] = () => {
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.setTargetSymbol(symbol === ALL ? '' : symbol)
+      }
+    }
+    return this.handlers[symbol]
+  }
+
   fetchPrev() {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevFOffer()
@@ -61,10 +76,13 @@ class FundingOfferHistory extends PureComponent {
 
   render() {
     const {
+      coins,
       offset,
       pageOffset,
       pageLoading,
+      targetSymbol,
       entries,
+      existingCoins,
       handleClickExport,
       intl,
       jumpPage,
@@ -72,6 +90,8 @@ class FundingOfferHistory extends PureComponent {
       refresh,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
+    const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
+    const currentCoin = targetSymbol || ALL
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
@@ -169,6 +189,20 @@ class FundingOfferHistory extends PureComponent {
       )
     }
 
+    const renderSymbolSelector = (
+      <Fragment>
+        &nbsp;
+        <SymbolSelector
+          coinList={coinList}
+          coins={coins}
+          currentCoin={currentCoin}
+          existingCoins={existingCoins}
+          onSymbolSelect={this.handleClick}
+          wildCard={WILD_CARD}
+        />
+      </Fragment>
+    )
+
     const renderPagination = (
       <Pagination
         type={TYPE}
@@ -189,7 +223,15 @@ class FundingOfferHistory extends PureComponent {
       )
     } else if (numRows === 0) {
       showContent = (
-        <NoData title='foffer.title' />
+        <Fragment>
+          <h4>
+            {intl.formatMessage({ id: 'foffer.title' })}
+            &nbsp;
+            <TimeRange />
+            {renderSymbolSelector}
+          </h4>
+          <NoData />
+        </Fragment>
       )
     } else {
       showContent = (
@@ -198,6 +240,7 @@ class FundingOfferHistory extends PureComponent {
             {intl.formatMessage({ id: 'foffer.title' })}
             &nbsp;
             <TimeRange />
+            {renderSymbolSelector}
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;

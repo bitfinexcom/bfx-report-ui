@@ -51,6 +51,7 @@ import types from './constants'
 }
  */
 const initialState = {
+  dataReceived: false,
   entries: [
     /* {
       currency: 'ETH',
@@ -64,11 +65,12 @@ const initialState = {
       transactionId: '',
     }, */
   ],
-  dataReceived: false,
-  smallestMts: 0,
+  existingCoins: [],
   offset: 0, // end of current offset
-  pageOffset: 0, // start of current page
   pageLoading: false,
+  pageOffset: 0, // start of current page
+  smallestMts: 0,
+  targetSymbol: '',
 }
 
 const LIMIT = queryTypes.DEFAULT_MOVEMENTS_QUERY_LIMIT
@@ -78,28 +80,47 @@ export function movementsReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_MOVEMENTS: {
       const result = action.payload
+      const { existingCoins } = state
+      const updateCoins = [...existingCoins]
       let smallestMts
       const entries = result.map((entry) => {
+        const {
+          amount,
+          currency,
+          currencyName,
+          destinationAddress,
+          fees,
+          id,
+          mtsStarted,
+          mtsUpdated,
+          status,
+          transactionId,
+        } = entry
+        // save new symbol to updateCoins list
+        if (updateCoins.indexOf(currency) === -1) {
+          updateCoins.push(currency)
+        }
         // log smallest mts
-        if (!smallestMts || smallestMts > entry.mtsUpdated) {
-          smallestMts = entry.mtsUpdated
+        if (!smallestMts || smallestMts > mtsUpdated) {
+          smallestMts = mtsUpdated
         }
         return {
-          id: entry.id,
-          currency: entry.currency,
-          currencyName: entry.currencyName,
-          mtsStarted: entry.mtsStarted,
-          mtsUpdated: entry.mtsUpdated,
-          status: entry.status,
-          amount: entry.amount,
-          fees: entry.fees,
-          destinationAddress: entry.destinationAddress,
-          transactionId: entry.transactionId,
+          id,
+          currency,
+          currencyName,
+          mtsStarted,
+          mtsUpdated,
+          status,
+          amount,
+          fees,
+          destinationAddress,
+          transactionId,
         }
       })
       return {
         ...state,
         entries: [...state.entries, ...entries],
+        existingCoins: updateCoins.sort(),
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,
@@ -146,8 +167,19 @@ export function movementsReducer(state = initialState, action) {
         pageOffset: totalOffset - currentOffset,
       }
     }
+    case types.SET_SYMBOL:
+      return {
+        ...initialState,
+        targetSymbol: action.payload,
+        existingCoins: state.existingCoins,
+      }
+    // existingCoins should be re-calc in new time range
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
+      return {
+        ...initialState,
+        targetSymbol: state.targetSymbol,
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {

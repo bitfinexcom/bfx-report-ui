@@ -14,10 +14,13 @@ import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
-import { getFundingLoanHistory } from './selectors'
+import { getTargetSymbol, getFundingLoanHistory } from './selectors'
 
-function getReqFLoan(auth, query, smallestMts) {
+function getReqFLoan(auth, query, targetSymbol, smallestMts) {
   const params = getTimeFrame(query, 'floan', smallestMts)
+  if (targetSymbol) {
+    params.symbol = targetSymbol
+  }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method: 'getFundingLoanHistory',
@@ -27,9 +30,10 @@ function getReqFLoan(auth, query, smallestMts) {
 
 function* fetchFLoan() {
   try {
+    const targetSymbol = yield select(getTargetSymbol)
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFLoan, auth, query, 0)
+    const { result = [], error } = yield call(getReqFLoan, auth, query, targetSymbol, 0)
     yield put(actions.updateFLoan(result))
 
     if (error) {
@@ -52,14 +56,19 @@ const LIMIT = queryTypes.DEFAULT_FLOAN_QUERY_LIMIT
 
 function* fetchNextFLoan() {
   try {
-    const { offset, entries, smallestMts } = yield select(getFundingLoanHistory)
+    const {
+      offset,
+      entries,
+      smallestMts,
+      targetSymbol,
+    } = yield select(getFundingLoanHistory)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFLoan, auth, query, smallestMts)
+    const { result = [], error } = yield call(getReqFLoan, auth, query, targetSymbol, smallestMts)
     yield put(actions.updateFLoan(result))
 
     if (error) {
