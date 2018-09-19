@@ -68,7 +68,7 @@ import types from './constants'
 }
 */
 const initialState = {
-  existingCoins: [],
+  dataReceived: false,
   entries: [
     /* {
       id: 131919156,
@@ -87,12 +87,12 @@ const initialState = {
       description: 'Transfer of 5000.885 USD from wallet Exchange to Deposit on wallet funding',
     }, */
   ],
-  targetSymbol: '',
-  dataReceived: false,
-  smallestMts: 0,
+  existingCoins: [],
   offset: 0, // end of current offset
-  pageOffset: 0, // start of current page
   pageLoading: false,
+  pageOffset: 0, // start of current page
+  smallestMts: 0,
+  targetSymbol: '',
 }
 
 const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
@@ -103,24 +103,32 @@ export function ledgersReducer(state = initialState, action) {
     case types.UPDATE_LEDGERS: {
       const result = action.payload
       const { existingCoins } = state
-      let smallestMts
       const updateCoins = [...existingCoins]
+      let smallestMts
       const entries = result.map((entry) => {
+        const {
+          amount,
+          balance,
+          currency,
+          description,
+          id,
+          mts,
+        } = entry
         // save new symbol to updateCoins list
-        if (updateCoins.indexOf(entry.currency) === -1) {
-          updateCoins.push(entry.currency)
+        if (updateCoins.indexOf(currency) === -1) {
+          updateCoins.push(currency)
         }
         // log smallest mts
-        if (!smallestMts || smallestMts > entry.mts) {
-          smallestMts = entry.mts
+        if (!smallestMts || smallestMts > mts) {
+          smallestMts = mts
         }
         return {
-          id: entry.id,
-          currency: entry.currency,
-          mts: entry.mts,
-          amount: entry.amount,
-          balance: entry.balance,
-          description: entry.description,
+          id,
+          currency,
+          mts,
+          amount,
+          balance,
+          description,
         }
       })
       return {

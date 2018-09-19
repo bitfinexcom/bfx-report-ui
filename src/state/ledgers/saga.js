@@ -57,10 +57,10 @@ const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
 function* fetchNextLedgers() {
   try {
     const {
-      targetSymbol,
-      offset,
       entries,
+      offset,
       smallestMts,
+      targetSymbol,
     } = yield select(getLedgers)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -93,7 +93,6 @@ function* fetchLedgersFail({ payload }) {
 
 export default function* ledgersSaga() {
   yield takeLatest(types.FETCH_LEDGERS, fetchLedgers)
-  yield takeLatest(types.SET_SYMBOL, fetchLedgers)
   yield takeLatest(types.FETCH_NEXT_LEDGERS, fetchNextLedgers)
   yield takeLatest(types.FETCH_FAIL, fetchLedgersFail)
 }

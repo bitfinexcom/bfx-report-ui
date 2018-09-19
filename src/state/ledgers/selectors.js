@@ -9,12 +9,12 @@ export const getPageLoading = state => getLedgers(state).pageLoading
 export const getPageOffset = state => getLedgers(state).pageOffset
 
 export default {
-  getExistingCoins,
-  getTargetSymbol,
   getDataReceived,
   getEntries,
+  getExistingCoins,
   getLedgers,
   getOffset,
   getPageLoading,
   getPageOffset,
+  getTargetSymbol,
 }

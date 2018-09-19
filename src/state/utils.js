@@ -30,6 +30,11 @@ export function formatDate(mts) {
   return `${MONTH_SYM[date.getMonth()]} ${_padStart(date.getDate(), 2, 0)} ${date.getFullYear()}`
 }
 
+// tBTCUSD -> btcusd
+export function formatInternalPair(symbol) {
+  return `${symbol.slice(1).toLowerCase()}`
+}
+
 // tBTCUSD -> BTC/USD
 export function formatSymbolToPair(symbol) {
   return `${symbol.slice(1, 4)}/${symbol.slice(4, 7)}`
@@ -106,6 +111,7 @@ export function getSideMsg(side) {
 export default {
   checkFetch,
   formatDate,
+  formatInternalPair,
   formatPair,
   formatRawPairToSymbol,
   formatSymbolToPair,
