@@ -44,9 +44,22 @@ export function setTheme(theme) {
   }
 }
 
+
+/**
+ * Create an action to store menu mode.
+ * @param {string} mode
+ */
+export function setMenuMode(mode) {
+  return {
+    type: types.SET_MENU_MODE,
+    payload: mode,
+  }
+}
+
 export default {
   setApiKey,
   setApiSecret,
   setLang,
+  setMenuMode,
   setTheme,
 }

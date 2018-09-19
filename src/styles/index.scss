@@ -40,12 +40,16 @@ div.bitfinex-auth {
 .bitfinex-logo-light,
 .bitfinex-logo-dark {
   width: 176px;
+  position: absolute;
+  top: 14px;
 }
 
 /* small screen logo */
 .bitfinex-logo-m-light,
 .bitfinex-logo-m-dark {
   width: 79px;
+  position: absolute;
+  top: 16px;
 }
 
 body.#{$ns}-dark .bitfinex-logo-light,
@@ -53,6 +57,11 @@ body.#{$ns}-light .bitfinex-logo-dark,
 body.#{$ns}-dark .bitfinex-logo-m-light,
 body.#{$ns}-light .bitfinex-logo-m-dark {
   display: none;
+}
+
+.bitfinex-compact-menu.#{$ns}-menu {
+  min-width: 40px;
+  width: 40px;
 }
 
 .bitfinex-queried-symbol {

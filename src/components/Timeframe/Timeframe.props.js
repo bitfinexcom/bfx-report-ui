@@ -5,10 +5,12 @@ export const propTypes = {
   intl: intlShape.isRequired,
   start: PropTypes.number,
   end: PropTypes.number,
+  menuMode: PropTypes.string,
 }
 
 export const defaultProps = {
   intl: {},
   start: 0,
   end: 0,
+  menuMode: '',
 }

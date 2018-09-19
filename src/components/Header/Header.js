@@ -13,6 +13,7 @@ import Status from 'components/Status'
 import LangMenu from 'components/LangMenu'
 import PrefMenu from 'components/PrefMenu'
 import PrefDialog from 'components/PrefDialog'
+import baseType from 'state/base/constants'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Header.props'
@@ -36,6 +37,7 @@ class Header extends PureComponent {
     this.authLogout = this.authLogout.bind(this)
     this.handleClickPref = this.handleClickPref.bind(this)
     this.handlePrefDialogClose = this.handlePrefDialogClose.bind(this)
+    this.handleToggleMenu = this.handleToggleMenu.bind(this)
   }
 
   state = {
@@ -57,11 +59,25 @@ class Header extends PureComponent {
     this.setState({ isPrefOpen: false })
   }
 
+  handleToggleMenu(e) {
+    e.preventDefault()
+    const { menuMode, setMenuMode } = this.props
+    const { MENU_MODE_ICON, MENU_MODE_NORMAL } = baseType
+    const mode = menuMode === MENU_MODE_ICON ? MENU_MODE_NORMAL : MENU_MODE_ICON
+    setMenuMode(mode)
+  }
+
   render() {
     const { authIsShown, authStatus, intl } = this.props
     const { isPrefOpen } = this.state
 
     const isLogin = !authIsShown && authStatus === true
+    const renderToggleMenu = isLogin ? (
+      <Fragment>
+        <Button minimal icon='menu' onClick={this.handleToggleMenu} />
+         &nbsp;
+      </Fragment>
+    ) : null
     const renderMenu = isLogin ? (
       <PrefMenu
         isLogin={isLogin}
@@ -77,6 +93,7 @@ class Header extends PureComponent {
         <Navbar fixedToTop>
           <NavbarGroup align='left'>
             <NavbarHeading>
+              {renderToggleMenu}
               <img
                 alt={platform.Name}
                 src={darkLogo}

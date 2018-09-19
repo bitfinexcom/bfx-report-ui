@@ -6,6 +6,8 @@ export const propTypes = {
   authStatus: PropTypes.bool,
   intl: intlShape.isRequired,
   logout: PropTypes.func.isRequired,
+  menuMode: PropTypes.string,
+  setMenuMode: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
@@ -13,4 +15,5 @@ export const defaultProps = {
   authStatus: false,
   intl: {},
   logout: () => {},
+  menuMode: '',
 }
