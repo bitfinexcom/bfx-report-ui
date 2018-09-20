@@ -95,7 +95,7 @@ class Header extends PureComponent {
       <Fragment>
         <Popover
           className='hidden-lg hidden-xl'
-          interactionKind={PopoverInteractionKind.HOVER}
+          interactionKind={PopoverInteractionKind.CLICK}
           position={Position.BOTTOM}
           content={(
             <ToggleMenu
