@@ -17,6 +17,7 @@ import Trades from 'components/Trades'
 import Timeframe from 'components/Timeframe'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
+import { MAPPING, PATHMAP } from 'state/query/utils'
 
 import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
@@ -31,53 +32,6 @@ const {
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
 } = queryType
-
-const MAPPING = {
-  [MENU_FCREDIT]: {
-    icon: 'book',
-    path: '/funding_credit_history',
-  },
-  [MENU_FLOAN]: {
-    icon: 'book',
-    path: '/funding_loan_history',
-  },
-  [MENU_FOFFER]: {
-    icon: 'book',
-    path: '/funding_offer_history',
-  },
-  [MENU_LEDGERS]: {
-    icon: 'book',
-    path: '/ledgers',
-  },
-  [MENU_ORDERS]: {
-    icon: 'flows',
-    path: '/orders',
-  },
-  [MENU_TRADES]: {
-    icon: 'exchange',
-    path: '/trades',
-  },
-  [MENU_DEPOSITS]: {
-    icon: 'add-to-folder',
-    path: '/deposits',
-  },
-  [MENU_WITHDRAWALS]: {
-    icon: 'folder-shared-open',
-    path: '/withdrawals',
-  },
-}
-
-const PATHMAP = {
-  [MAPPING[MENU_FCREDIT].path]: MENU_FCREDIT,
-  [MAPPING[MENU_FLOAN].path]: MENU_FLOAN,
-  [MAPPING[MENU_FOFFER].path]: MENU_FOFFER,
-  [MAPPING[MENU_LEDGERS].path]: MENU_LEDGERS,
-  [MAPPING[MENU_DEPOSITS].path]: MENU_DEPOSITS,
-  [MAPPING[MENU_ORDERS].path]: MENU_ORDERS,
-  [MAPPING[MENU_TRADES].path]: MENU_TRADES,
-  [MAPPING[MENU_DEPOSITS].path]: MENU_DEPOSITS,
-  [MAPPING[MENU_WITHDRAWALS].path]: MENU_WITHDRAWALS,
-}
 
 class Main extends PureComponent {
   constructor(props) {
