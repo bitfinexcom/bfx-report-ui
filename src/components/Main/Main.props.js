@@ -32,6 +32,7 @@ export const customDialogDefaultProps = {
 
 export const ToggleMenuPropTypes = {
   handleClickCustom: PropTypes.func.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   intl: intlShape.isRequired,
   menuMode: PropTypes.string,
   target: PropTypes.string.isRequired,

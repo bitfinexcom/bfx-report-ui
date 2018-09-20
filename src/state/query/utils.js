@@ -19,15 +19,15 @@ export function isValidTimeStamp(n) {
 export const MAPPING = {
   [MENU_FCREDIT]: {
     icon: 'book',
-    path: '/funding_credit_history',
+    path: '/credits',
   },
   [MENU_FLOAN]: {
     icon: 'book',
-    path: '/funding_loan_history',
+    path: '/loans',
   },
   [MENU_FOFFER]: {
     icon: 'book',
-    path: '/funding_offer_history',
+    path: '/offers',
   },
   [MENU_LEDGERS]: {
     icon: 'book',
