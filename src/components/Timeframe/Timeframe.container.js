@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { getQuery, getTimeFrame, getTimeRange } from 'state/query/selectors'
-import { getMenuMode } from 'state/base/selectors'
 import { setTimeRange } from 'state/query/actions'
 
 import Timeframe from './Timeframe'
@@ -13,7 +12,6 @@ function mapStateToProps(state = {}) {
     start,
     end,
     timeRange: getTimeRange(state),
-    menuMode: getMenuMode(state),
   }
 }
 

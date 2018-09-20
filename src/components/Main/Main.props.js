@@ -6,7 +6,9 @@ export const propTypes = {
   authStatus: PropTypes.bool,
   exportCsv: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
-  setTimeRange: PropTypes.func.isRequired,
+  isCustomOpen: PropTypes.bool,
+  setTimeRange: PropTypes.func,
+  showCustomDialog: PropTypes.func,
 }
 
 export const defaultProps = {
@@ -27,18 +29,5 @@ export const customDialogPropTypes = {
 }
 
 export const customDialogDefaultProps = {
-  menuMode: '',
-}
-
-export const ToggleMenuPropTypes = {
-  handleClickCustom: PropTypes.func.isRequired,
-  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
-  intl: intlShape.isRequired,
-  menuMode: PropTypes.string,
-  target: PropTypes.string.isRequired,
-  MAPPING: PropTypes,
-}
-
-export const ToggleMenuDefaultProps = {
   menuMode: '',
 }

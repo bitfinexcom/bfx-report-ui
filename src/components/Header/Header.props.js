@@ -8,6 +8,7 @@ export const propTypes = {
   logout: PropTypes.func.isRequired,
   menuMode: PropTypes.string,
   setMenuMode: PropTypes.func.isRequired,
+  showCustomDialog: PropTypes.func,
 }
 
 export const defaultProps = {
@@ -16,4 +17,5 @@ export const defaultProps = {
   intl: {},
   logout: () => {},
   menuMode: '',
+  showCustomDialog: () => {},
 }

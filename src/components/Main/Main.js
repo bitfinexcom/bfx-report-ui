@@ -12,10 +12,10 @@ import Trades from 'components/Trades'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
 import { MAPPING, PATHMAP } from 'state/query/utils'
+import ToggleMenu from 'ui/ToggleMenu'
 
 import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
-import ToggleMenu from './ToggleMenu'
 
 const {
   MENU_FCREDIT,
@@ -41,7 +41,6 @@ class Main extends PureComponent {
   }
 
   state = {
-    isCustomOpen: false,
     isExportOpen: false,
     startDate: null,
     endDate: new Date(),
@@ -55,12 +54,14 @@ class Main extends PureComponent {
 
   handleClickCustom(e) {
     e.preventDefault()
-    this.setState({ isCustomOpen: true })
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.showCustomDialog(true)
   }
 
   handleCustomDialogClose(e) {
     e.preventDefault()
-    this.setState({ isCustomOpen: false })
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.showCustomDialog(false)
   }
 
   handleRangeChange(range) {
@@ -72,11 +73,11 @@ class Main extends PureComponent {
 
   startQuery() {
     const { startDate, endDate } = this.state
-    const { setCustomTimeRange } = this.props
+    const { setCustomTimeRange, showCustomDialog } = this.props
     if (startDate !== null && endDate !== null) {
       setCustomTimeRange(startDate.getTime(), endDate.getTime())
     }
-    this.setState({ isCustomOpen: false })
+    showCustomDialog(false)
   }
 
   handleClickExport() {
@@ -102,12 +103,12 @@ class Main extends PureComponent {
       authIsShown,
       history,
       intl,
+      isCustomOpen,
       location,
       menuMode,
     } = this.props
     const {
       endDate,
-      isCustomOpen,
       isExportOpen,
       startDate,
     } = this.state
