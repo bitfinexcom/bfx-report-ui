@@ -42,10 +42,12 @@ window.addEventListener('load', function handler() {
     window.removeEventListener('load', handler)
     // remove authToken param from url but keep others
     const params = _omit(parsed, 'authToken')
+    const queries = queryString.stringify(params, { encode: false })
+    const queryParams = queries ? `?${queries}` : ''
     window.history.pushState(null, null,
       window.location.href.replace(
         window.location.search,
-        `?${queryString.stringify(params, { encode: false })}`,
+        queryParams,
       ))
     store.dispatch(checkAuthWithToken(authToken))
   }
