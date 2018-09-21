@@ -14,7 +14,7 @@ import types from './constants'
             "_eventsCount": 0,
             "_fields": {
                 "id": 0,
-                "pair": 1,
+                "symbol": 1,
                 "mtsCreate": 2,
                 "orderID": 3,
                 "execAmount": 4,
@@ -30,7 +30,7 @@ import types from './constants'
             ],
             "_fieldKeys": [
                 "id",
-                "pair",
+                "symbol",
                 "mtsCreate",
                 "orderID",
                 "execAmount",
@@ -42,7 +42,7 @@ import types from './constants'
                 "feeCurrency"
             ],
             "id": 24178707,
-            "pair": "tBTCUSD",
+            "symbol": "tBTCUSD",
             "mtsCreate": 1529942518000,
             "orderID": 1149732562,
             "execAmount": 0.00026691,
@@ -99,14 +99,14 @@ export function tradesReducer(state = initialState, action) {
           fee,
           feeCurrency,
           id,
-          pair,
+          symbol,
           maker,
           mtsCreate,
           orderID,
           orderPrice,
           orderType,
         } = entry
-        const internalPair = formatInternalPair(pair)
+        const internalPair = formatInternalPair(symbol)
         // save new pair to updatePairs list
         if (updatePairs.indexOf(internalPair) === -1) {
           updatePairs.push(internalPair)
@@ -117,7 +117,7 @@ export function tradesReducer(state = initialState, action) {
         }
         return {
           id,
-          pair: formatSymbolToPair(pair),
+          pair: formatSymbolToPair(symbol),
           mtsCreate,
           orderID,
           execAmount,
