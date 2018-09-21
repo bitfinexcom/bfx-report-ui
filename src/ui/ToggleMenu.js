@@ -108,14 +108,16 @@ class ToggleMenu extends PureComponent {
       </Fragment>
     )
 
+    let content
+
     if (menuMode === baseType.MENU_MODE_HOVER) {
-      return (
+      content = (
         <Menu large>
           {renderNormalMenu}
         </Menu>
       )
-    } if (menuMode === baseType.MENU_MODE_ICON) {
-      return (
+    } else if (menuMode === baseType.MENU_MODE_ICON) {
+      content = (
         <Menu large className='bitfinex-compact-menu hidden-xs hidden-sm hidden-md'>
           <Timeframe
             handleClickCustom={handleClickCustom}
@@ -181,12 +183,15 @@ class ToggleMenu extends PureComponent {
           />
         </Menu>
       )
+    } else {
+      content = (
+        <Menu large className='hidden-xs hidden-sm hidden-md col-lg-1 col-xl-2'>
+          {renderNormalMenu}
+        </Menu>
+      )
     }
-    return (
-      <Menu large className='hidden-xs hidden-sm hidden-md col-lg-1 col-xl-2'>
-        {renderNormalMenu}
-      </Menu>
-    )
+
+    return content
   }
 }
 
