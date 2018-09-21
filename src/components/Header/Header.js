@@ -5,6 +5,8 @@ import {
   Navbar,
   NavbarGroup,
   NavbarHeading,
+  Popover,
+  PopoverInteractionKind,
   Position,
   Tooltip,
 } from '@blueprintjs/core'
@@ -13,6 +15,10 @@ import Status from 'components/Status'
 import LangMenu from 'components/LangMenu'
 import PrefMenu from 'components/PrefMenu'
 import PrefDialog from 'components/PrefDialog'
+import ToggleMenu from 'ui/ToggleMenu'
+import baseType from 'state/base/constants'
+import queryType from 'state/query/constants'
+import { PATHMAP } from 'state/query/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Header.props'
@@ -35,7 +41,9 @@ class Header extends PureComponent {
     super(props)
     this.authLogout = this.authLogout.bind(this)
     this.handleClickPref = this.handleClickPref.bind(this)
+    this.handleClickCustom = this.handleClickCustom.bind(this)
     this.handlePrefDialogClose = this.handlePrefDialogClose.bind(this)
+    this.handleToggleMenu = this.handleToggleMenu.bind(this)
   }
 
   state = {
@@ -52,16 +60,68 @@ class Header extends PureComponent {
     this.setState({ isPrefOpen: true })
   }
 
+  handleClickCustom(e) {
+    e.preventDefault()
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.showCustomDialog(true)
+  }
+
   handlePrefDialogClose(e) {
     e.preventDefault()
     this.setState({ isPrefOpen: false })
   }
 
+  handleToggleMenu(e) {
+    e.preventDefault()
+    const { menuMode, setMenuMode } = this.props
+    const { MENU_MODE_ICON, MENU_MODE_NORMAL } = baseType
+    const mode = menuMode === MENU_MODE_ICON ? MENU_MODE_NORMAL : MENU_MODE_ICON
+    setMenuMode(mode)
+  }
+
   render() {
-    const { authIsShown, authStatus, intl } = this.props
+    const {
+      authIsShown,
+      authStatus,
+      history,
+      intl,
+      location,
+    } = this.props
     const { isPrefOpen } = this.state
 
+    const target = PATHMAP[location.pathname] || queryType.MENU_LEDGERS
     const isLogin = !authIsShown && authStatus === true
+    const renderToggleMenu = isLogin ? (
+      <Fragment>
+        <Popover
+          className='hidden-lg hidden-xl'
+          interactionKind={PopoverInteractionKind.CLICK}
+          position={Position.BOTTOM}
+          content={(
+            <ToggleMenu
+              target={target}
+              handleClickCustom={this.handleClickCustom}
+              history={history}
+              intl={intl}
+              menuMode={baseType.MENU_MODE_HOVER}
+            />
+          )}
+        >
+          <Button
+            minimal
+            icon='menu'
+          />
+        </Popover>
+        <span className='hidden-xs hidden-sm hidden-md'>
+          <Button
+            minimal
+            icon='menu'
+            onClick={this.handleToggleMenu}
+          />
+        </span>
+        &nbsp;
+      </Fragment>
+    ) : null
     const renderMenu = isLogin ? (
       <PrefMenu
         isLogin={isLogin}
@@ -77,6 +137,7 @@ class Header extends PureComponent {
         <Navbar fixedToTop>
           <NavbarGroup align='left'>
             <NavbarHeading>
+              {renderToggleMenu}
               <img
                 alt={platform.Name}
                 src={darkLogo}

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import PropTypes from 'prop-types'
+import { injectIntl, intlShape } from 'react-intl'
 import {
   Button,
   Classes,
@@ -9,8 +10,6 @@ import {
 import { DateRangeInput } from '@blueprintjs/datetime'
 
 import { momentFormatter } from 'state/utils'
-
-import { customDialogPropTypes, customDialogDefaultProps } from './Main.props'
 
 const DATE_FORMAT = momentFormatter('YYYY-MM-DD HH:mm:ss')
 
@@ -64,7 +63,19 @@ class CustomDialog extends PureComponent {
   }
 }
 
-CustomDialog.propTypes = customDialogPropTypes
-CustomDialog.defaultProps = customDialogDefaultProps
+CustomDialog.propTypes = {
+  handleCustomDialogClose: PropTypes.func.isRequired,
+  handleRangeChange: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
+  isCustomOpen: PropTypes.bool.isRequired,
+  startQuery: PropTypes.func.isRequired,
+  startDate: PropTypes.instanceOf(Date),
+  endDate: PropTypes.instanceOf(Date),
+}
+
+CustomDialog.defaultProps = {
+  startDate: null,
+  endDate: null,
+}
 
 export default injectIntl(CustomDialog)

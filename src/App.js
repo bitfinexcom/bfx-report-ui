@@ -15,13 +15,13 @@ function App() {
 
   return (
     <IntlProvider locale={locale.locale} messages={locale.messages}>
-      <div className='container-fluid'>
-        <Header />
-        <Auth />
-        <Router history={history}>
+      <Router history={history}>
+        <div className='container-fluid'>
+          <Header />
+          <Auth />
           <Main />
-        </Router>
-      </div>
+        </div>
+      </Router>
     </IntlProvider>
   )
 }

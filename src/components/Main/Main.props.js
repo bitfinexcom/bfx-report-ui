@@ -6,7 +6,9 @@ export const propTypes = {
   authStatus: PropTypes.bool,
   exportCsv: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
-  setCustomTimeRange: PropTypes.func.isRequired,
+  isCustomOpen: PropTypes.bool,
+  setTimeRange: PropTypes.func,
+  showCustomDialog: PropTypes.func,
 }
 
 export const defaultProps = {
@@ -20,10 +22,12 @@ export const customDialogPropTypes = {
   handleRangeChange: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   isCustomOpen: PropTypes.bool.isRequired,
+  menuMode: PropTypes.string,
   startQuery: PropTypes.func.isRequired,
   startDate: PropTypes.instanceOf(Date),
   endDate: PropTypes.instanceOf(Date),
 }
 
 export const customDialogDefaultProps = {
+  menuMode: '',
 }

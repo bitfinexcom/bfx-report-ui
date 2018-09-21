@@ -4,6 +4,7 @@ import { MenuItem } from '@blueprintjs/core'
 import queryString from 'query-string'
 
 import constants from 'state/query/constants'
+import baseType from 'state/base/constants'
 import { formatDate } from 'state/utils'
 
 import { propTypes, defaultProps } from './Timeframe.props'
@@ -49,10 +50,54 @@ class Timeframe extends PureComponent {
       end,
       handleClickCustom,
       intl,
+      menuMode,
       start,
       timeRange,
     } = this.props
-    return (
+    return menuMode === baseType.MENU_MODE_ICON ? (
+      <MenuItem
+        icon='calendar'
+        text=''
+        title={`${formatDate(start)} — ${formatDate(end)}`}
+        className='bitfinex-dropdown'
+      >
+        <MenuItem
+          text={intl.formatMessage({ id: 'timeframe.24h' })}
+          onClick={this.handleClick24H}
+          active={timeRange === constants.TIME_RANGE_LAST_24HOURS}
+        />
+        <MenuItem
+          text={intl.formatMessage({ id: 'timeframe.yesterday' })}
+          onClick={this.handleClickYesterday}
+          active={timeRange === constants.TIME_RANGE_YESTERDAY}
+        />
+        <MenuItem
+          text={intl.formatMessage({ id: 'timeframe.2w' })}
+          onClick={this.handleClickLast2Weeks}
+          active={timeRange === constants.TIME_RANGE_LAST_2WEEKS}
+        />
+        <MenuItem
+          text={intl.formatMessage({ id: 'timeframe.month_to_date' })}
+          onClick={this.handleClickMonthToDate}
+          active={timeRange === constants.TIME_RANGE_MONTH_TO_DATE}
+        />
+        <MenuItem
+          text={intl.formatMessage({ id: 'timeframe.past_month' })}
+          onClick={this.handleClickPastMonth}
+          active={timeRange === constants.TIME_RANGE_PAST_MONTH}
+        />
+        <MenuItem
+          text={intl.formatMessage({ id: 'timeframe.past_3m' })}
+          onClick={this.handleClickPast3Month}
+          active={timeRange === constants.TIME_RANGE_PAST_3MONTH}
+        />
+        <MenuItem
+          text={intl.formatMessage({ id: 'timeframe.custom' })}
+          onClick={handleClickCustom}
+          active={timeRange === constants.TIME_RANGE_CUSTOM}
+        />
+      </MenuItem>
+    ) : (
       <MenuItem
         icon='calendar'
         text={`${formatDate(start)} — ${formatDate(end)}`}

@@ -5,6 +5,7 @@ const initialState = {
   apiKey: '',
   apiSecret: '',
   locale: 'en',
+  menuMode: types.MENU_MODE_NORMAL,
   theme: 'bp3_dark',
 }
 
@@ -29,6 +30,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         theme: action.payload,
+      }
+    case types.SET_MENU_MODE:
+      return {
+        ...state,
+        menuMode: action.payload,
       }
     default:
       return state

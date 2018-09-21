@@ -1,0 +1,3 @@
+export default {
+  SHOW_CUSTOM_DIALOG: 'BITFINEX/CUSTOM_DIALOG/SHOW',
+}
