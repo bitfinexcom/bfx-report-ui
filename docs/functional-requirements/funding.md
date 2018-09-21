@@ -2,11 +2,11 @@
 
 Shows funding credit/loan/offer hisotry related data by date. Contain sections `Export button`, `Table`, `Pagination`.
 
-Navigate to `/funding_credit_history` will open funding credit history view.
+Navigate to `/credits` will open funding credit history view.
 
-Navigate to `/funding_loan_history` will open funding loan history view.
+Navigate to `/loans` will open funding loan history view.
 
-Navigate to `/funding_offer_history` will open funding offer history view.
+Navigate to `/offers` will open funding offer history view.
 
 ## UI
 

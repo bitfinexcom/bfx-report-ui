@@ -4,6 +4,8 @@
 
 Allow user to select the start and end range by date and time.
 
+Pass query param `?range={start time}-{end time}` in url before login will auto set to the specific time range. The time format is 13 digits in milliseconds.
+
 ## UI
 
 1. Shows current query range at top of the Side Menu.
@@ -21,10 +23,11 @@ Allow user to select the start and end range by date and time.
 
 When Custom Time Range dialog is shown:
 
-1. The dialog has tilte `Select Query Range`(translate).
+1. The dialog has title `Select Query Range`(translate).
 1. The dialog has a close icon at top right, click it will close the dialog.
 1. The dialog contain `startDate` and `endDate` input fields.
     1. tap these field will pop the date selector.
 1. The dialog has a `View`(translate) button at the bottom of dialog.
     1. The button is disabled if `startDate` or `endDate` field doesn't entered
     1. Click the button will save current custom query and close the dialog.
+    1. The `?range={start time}-{end time}` query param will be shown in url. The time format is 13 digits in milliseconds.
