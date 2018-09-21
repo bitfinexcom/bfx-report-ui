@@ -19,7 +19,7 @@ import { getTargetSymbol, getFundingLoanHistory } from './selectors'
 function getReqFLoan(auth, query, targetSymbol, smallestMts) {
   const params = getTimeFrame(query, 'floan', smallestMts)
   if (targetSymbol) {
-    params.symbol = targetSymbol
+    params.symbol = `f${targetSymbol}`
   }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,

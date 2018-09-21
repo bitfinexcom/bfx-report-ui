@@ -19,7 +19,7 @@ import { getTargetSymbol, getFundingCreditHistory } from './selectors'
 function getReqFCredit(auth, query, targetSymbol, smallestMts) {
   const params = getTimeFrame(query, 'fundingCreditHistory', smallestMts)
   if (targetSymbol) {
-    params.symbol = targetSymbol
+    params.symbol = `f${targetSymbol}`
   }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
