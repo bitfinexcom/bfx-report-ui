@@ -19,7 +19,7 @@ import { getTargetSymbol, getFundingOfferHistory } from './selectors'
 function getReqFOffer(auth, query, targetSymbol, smallestMts) {
   const params = getTimeFrame(query, 'foffer', smallestMts)
   if (targetSymbol) {
-    params.symbol = targetSymbol
+    params.symbol = `f${targetSymbol}`
   }
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
