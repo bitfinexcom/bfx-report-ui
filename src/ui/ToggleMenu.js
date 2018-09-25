@@ -10,7 +10,7 @@ import {
 import Timeframe from 'components/Timeframe'
 import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
-import { MAPPING } from 'state/query/utils'
+import { getIcon, getPath } from 'state/query/utils'
 
 const {
   MENU_FCREDIT,
@@ -38,7 +38,7 @@ class ToggleMenu extends PureComponent {
 
   handleClick(target) {
     const { history } = this.props
-    history.push(MAPPING[target].path)
+    history.push(getPath(target))
   }
 
   render() {
@@ -57,50 +57,50 @@ class ToggleMenu extends PureComponent {
         />
         <MenuDivider />
         <MenuItem
-          icon={MAPPING[MENU_LEDGERS].icon}
+          icon={getIcon(MENU_LEDGERS)}
           text={intl.formatMessage({ id: 'ledgers.title' })}
           onClick={this.handleClickLedgers}
           active={target === MENU_LEDGERS}
         />
         <MenuItem
-          icon={MAPPING[MENU_TRADES].icon}
+          icon={getIcon(MENU_TRADES)}
           text={intl.formatMessage({ id: 'trades.title' })}
           onClick={this.handleClickTrades}
           active={target === MENU_TRADES}
         />
         <MenuItem
-          icon={MAPPING[MENU_ORDERS].icon}
+          icon={getIcon(MENU_ORDERS)}
           text={intl.formatMessage({ id: 'orders.title' })}
           onClick={this.handleClickOrders}
           active={target === MENU_ORDERS}
         />
         <MenuItem
-          icon={MAPPING[MENU_DEPOSITS].icon}
+          icon={getIcon(MENU_DEPOSITS)}
           text={intl.formatMessage({ id: 'deposits.title' })}
           onClick={this.handleClickDeposits}
           active={target === MENU_DEPOSITS}
         />
         <MenuItem
-          icon={MAPPING[MENU_WITHDRAWALS].icon}
+          icon={getIcon(MENU_WITHDRAWALS)}
           text={intl.formatMessage({ id: 'withdrawals.title' })}
           onClick={this.handleClickWithdrawals}
           active={target === MENU_WITHDRAWALS}
         />
         <MenuDivider />
         <MenuItem
-          icon={MAPPING[MENU_FOFFER].icon}
+          icon={getIcon(MENU_FOFFER)}
           text={intl.formatMessage({ id: 'foffer.title' })}
           onClick={this.handleClickFOffer}
           active={target === MENU_FOFFER}
         />
         <MenuItem
-          icon={MAPPING[MENU_FLOAN].icon}
+          icon={getIcon(MENU_FLOAN)}
           text={intl.formatMessage({ id: 'floan.title' })}
           onClick={this.handleClickFLoan}
           active={target === MENU_FLOAN}
         />
         <MenuItem
-          icon={MAPPING[MENU_FCREDIT].icon}
+          icon={getIcon(MENU_FCREDIT)}
           text={intl.formatMessage({ id: 'fcredit.title' })}
           onClick={this.handleClickFCredit}
           active={target === MENU_FCREDIT}
@@ -125,35 +125,35 @@ class ToggleMenu extends PureComponent {
           />
           <MenuDivider />
           <MenuItem
-            icon={MAPPING[MENU_LEDGERS].icon}
+            icon={getIcon(MENU_LEDGERS)}
             text=''
             title={intl.formatMessage({ id: 'ledgers.title' })}
             onClick={this.handleClickLedgers}
             active={target === MENU_LEDGERS}
           />
           <MenuItem
-            icon={MAPPING[MENU_TRADES].icon}
+            icon={getIcon(MENU_TRADES)}
             text=''
             title={intl.formatMessage({ id: 'trades.title' })}
             onClick={this.handleClickTrades}
             active={target === MENU_TRADES}
           />
           <MenuItem
-            icon={MAPPING[MENU_ORDERS].icon}
+            icon={getIcon(MENU_ORDERS)}
             text=''
             title={intl.formatMessage({ id: 'orders.title' })}
             onClick={this.handleClickOrders}
             active={target === MENU_ORDERS}
           />
           <MenuItem
-            icon={MAPPING[MENU_DEPOSITS].icon}
+            icon={getIcon(MENU_DEPOSITS)}
             text=''
             title={intl.formatMessage({ id: 'deposits.title' })}
             onClick={this.handleClickDeposits}
             active={target === MENU_DEPOSITS}
           />
           <MenuItem
-            icon={MAPPING[MENU_WITHDRAWALS].icon}
+            icon={getIcon(MENU_WITHDRAWALS)}
             text=''
             title={intl.formatMessage({ id: 'withdrawals.title' })}
             onClick={this.handleClickWithdrawals}
@@ -161,21 +161,21 @@ class ToggleMenu extends PureComponent {
           />
           <MenuDivider />
           <MenuItem
-            icon={MAPPING[MENU_FOFFER].icon}
+            icon={getIcon(MENU_FOFFER)}
             text=''
             title={intl.formatMessage({ id: 'foffer.title' })}
             onClick={this.handleClickFOffer}
             active={target === MENU_FOFFER}
           />
           <MenuItem
-            icon={MAPPING[MENU_FLOAN].icon}
+            icon={getIcon(MENU_FLOAN)}
             text=''
             title={intl.formatMessage({ id: 'floan.title' })}
             onClick={this.handleClickFLoan}
             active={target === MENU_FLOAN}
           />
           <MenuItem
-            icon={MAPPING[MENU_FCREDIT].icon}
+            icon={getIcon(MENU_FCREDIT)}
             text=''
             title={intl.formatMessage({ id: 'fcredit.title' })}
             onClick={this.handleClickFCredit}

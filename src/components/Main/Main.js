@@ -11,7 +11,7 @@ import Orders from 'components/Orders'
 import Trades from 'components/Trades'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
-import { MAPPING, PATHMAP } from 'state/query/utils'
+import { getPath, getTraget } from 'state/query/utils'
 import ToggleMenu from 'ui/ToggleMenu'
 
 import { propTypes, defaultProps } from './Main.props'
@@ -49,7 +49,7 @@ class Main extends PureComponent {
   handleClick(target) {
     const { history } = this.props
     // remove url params
-    history.push(MAPPING[target].path + history.location.search)
+    history.push(getPath(target) + history.location.search)
   }
 
   handleClickCustom(e) {
@@ -92,8 +92,9 @@ class Main extends PureComponent {
   }
 
   startExport() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.exportCsv(this.state.target)
+    const { location, exportCsv } = this.props
+    const target = getTraget(location.pathname)
+    exportCsv(target)
     this.setState({ isExportOpen: false })
   }
 
@@ -112,7 +113,7 @@ class Main extends PureComponent {
       isExportOpen,
       startDate,
     } = this.state
-    const target = PATHMAP[location.pathname] || MENU_LEDGERS
+    const target = getTraget(location.pathname)
 
     return authStatus && !authIsShown ? (
       <div className='row'>
@@ -131,35 +132,35 @@ class Main extends PureComponent {
               component={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
-              path={MAPPING[MENU_LEDGERS].path}
+              path={getPath(MENU_LEDGERS)}
               component={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
-              path={MAPPING[MENU_TRADES].path}
+              path={getPath(MENU_TRADES)}
               component={() => <Trades handleClickExport={this.handleClickExport} />}
             />
             <Route
-              path={MAPPING[MENU_ORDERS].path}
+              path={getPath(MENU_ORDERS)}
               component={() => <Orders handleClickExport={this.handleClickExport} />}
             />
             <Route
-              path={MAPPING[MENU_DEPOSITS].path}
+              path={getPath(MENU_DEPOSITS)}
               component={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
             />
             <Route
-              path={MAPPING[MENU_WITHDRAWALS].path}
+              path={getPath(MENU_WITHDRAWALS)}
               component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
             />
             <Route
-              path={MAPPING[MENU_FCREDIT].path}
+              path={getPath(MENU_FCREDIT)}
               component={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
-              path={MAPPING[MENU_FLOAN].path}
+              path={getPath(MENU_FLOAN)}
               component={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
-              path={MAPPING[MENU_FOFFER].path}
+              path={getPath(MENU_FOFFER)}
               component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
             />
           </Switch>
