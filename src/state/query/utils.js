@@ -16,7 +16,7 @@ export function isValidTimeStamp(n) {
     && (new Date(n)).getTime() === n
 }
 
-export const MAPPING = {
+const MAPPING = {
   [MENU_FCREDIT]: {
     icon: 'book',
     path: '/credits',
@@ -51,7 +51,7 @@ export const MAPPING = {
   },
 }
 
-export const PATHMAP = {
+const PATHMAP = {
   [MAPPING[MENU_FCREDIT].path]: MENU_FCREDIT,
   [MAPPING[MENU_FLOAN].path]: MENU_FLOAN,
   [MAPPING[MENU_FOFFER].path]: MENU_FOFFER,
@@ -67,9 +67,17 @@ export function getTraget(link) {
   return PATHMAP[link] || MENU_LEDGERS
 }
 
+export function getIcon(target) {
+  return MAPPING[target].icon
+}
+
+export function getPath(target) {
+  return MAPPING[target].path
+}
+
 export default {
+  getIcon,
+  getPath,
   getTraget,
   isValidTimeStamp,
-  MAPPING,
-  PATHMAP,
 }
