@@ -11,6 +11,7 @@
   "theme.light": "Light",
   "theme.dark": "Dark",
   "auth.auth": "Auth",
+  "auth.title": "Please Login",
   "auth.enterAPIKey": "Enter API Key:",
   "auth.enterAPISecret": "Enter API Secret:",
   "auth.checkAuth": "Check Auth",

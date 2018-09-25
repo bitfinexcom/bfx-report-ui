@@ -48,14 +48,13 @@ class Auth extends PureComponent {
       intl,
       isShown,
     } = this.props
-
     return platform.showAuthPage && isShown ? (
       <div className='row'>
         <Dialog
-          title='Please Login'
+          title={intl.formatMessage({ id: 'auth.title' })}
           isCloseButtonShown={false}
         >
-          <div className='bitfinex-auth'>
+          <div className={`${Classes.DIALOG_BODY} bitfinex-auth`}>
             <img
               alt={platform.Name}
               src={darkLogo}

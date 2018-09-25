@@ -11,6 +11,7 @@
   "theme.light": "白",
   "theme.dark": "黑",
   "auth.auth": "驗證",
+  "auth.title": "請先登入",
   "auth.enterAPIKey": "輸入 API Key:",
   "auth.enterAPISecret": "輸入 API Secret:",
   "auth.checkAuth": "開始驗證",
