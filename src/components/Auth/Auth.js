@@ -52,6 +52,7 @@ class Auth extends PureComponent {
       <div className='row'>
         <Dialog
           title={intl.formatMessage({ id: 'auth.title' })}
+          isOpen
           isCloseButtonShown={false}
         >
           <div className={`${Classes.DIALOG_BODY} bitfinex-auth`}>
@@ -86,18 +87,18 @@ class Auth extends PureComponent {
               value={apiSecret}
               onChange={this.handleChange}
             />
-            <div className={Classes.DIALOG_FOOTER}>
-              <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                <Button
-                  name='check'
-                  icon='key'
-                  intent={Intent.SUCCESS}
-                  onClick={this.handleClick}
-                  disabled={!apiKey || !apiSecret}
-                >
-                  {intl.formatMessage({ id: 'auth.checkAuth' })}
-                </Button>
-              </div>
+          </div>
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <Button
+                name='check'
+                icon='key'
+                intent={Intent.SUCCESS}
+                onClick={this.handleClick}
+                disabled={!apiKey || !apiSecret}
+              >
+                {intl.formatMessage({ id: 'auth.checkAuth' })}
+              </Button>
             </div>
           </div>
         </Dialog>
