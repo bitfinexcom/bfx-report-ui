@@ -63,14 +63,17 @@ const PATHMAP = {
   [MAPPING[MENU_WITHDRAWALS].path]: MENU_WITHDRAWALS,
 }
 
+// get target from /link
 export function getTraget(link) {
   return PATHMAP[link] || MENU_LEDGERS
 }
 
+// get icon from target
 export function getIcon(target) {
   return MAPPING[target].icon
 }
 
+// get path from target
 export function getPath(target) {
   return MAPPING[target].path
 }
