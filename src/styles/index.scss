@@ -11,8 +11,22 @@ body.#{$ns}-dark {
 }
 
 div.bitfinex-auth {
-  text-align: center;
   margin-top: 10px;
+  font-size: 14px;
+  padding: 10px;
+  flex-direction: column;
+  display: flex;
+
+  > .bitfinex-logo-light,
+  > .bitfinex-logo-dark {
+    position: relative;
+    width: 250px;
+    margin: 0 auto 40px;
+  }
+
+  > .#{$ns}-callout {
+    margin: 0 auto 24px;
+  }
 }
 
 /* status close button */
