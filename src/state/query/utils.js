@@ -63,7 +63,12 @@ export const PATHMAP = {
   [MAPPING[MENU_WITHDRAWALS].path]: MENU_WITHDRAWALS,
 }
 
+export function getTraget(link) {
+  return PATHMAP[link] || MENU_LEDGERS
+}
+
 export default {
+  getTraget,
   isValidTimeStamp,
   MAPPING,
   PATHMAP,

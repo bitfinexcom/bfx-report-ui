@@ -11,7 +11,7 @@ import Orders from 'components/Orders'
 import Trades from 'components/Trades'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
-import { MAPPING, PATHMAP } from 'state/query/utils'
+import { getTraget, MAPPING } from 'state/query/utils'
 import ToggleMenu from 'ui/ToggleMenu'
 
 import { propTypes, defaultProps } from './Main.props'
@@ -92,8 +92,9 @@ class Main extends PureComponent {
   }
 
   startExport() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.exportCsv(this.state.target)
+    const { location, exportCsv } = this.props
+    const target = getTraget(location.pathname)
+    exportCsv(target)
     this.setState({ isExportOpen: false })
   }
 
@@ -112,7 +113,7 @@ class Main extends PureComponent {
       isExportOpen,
       startDate,
     } = this.state
-    const target = PATHMAP[location.pathname] || MENU_LEDGERS
+    const target = getTraget(location.pathname)
 
     return authStatus && !authIsShown ? (
       <div className='row'>

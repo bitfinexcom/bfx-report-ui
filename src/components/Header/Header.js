@@ -17,8 +17,7 @@ import PrefMenu from 'components/PrefMenu'
 import PrefDialog from 'components/PrefDialog'
 import ToggleMenu from 'ui/ToggleMenu'
 import baseType from 'state/base/constants'
-import queryType from 'state/query/constants'
-import { PATHMAP } from 'state/query/utils'
+import { getTraget } from 'state/query/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Header.props'
@@ -89,7 +88,7 @@ class Header extends PureComponent {
     } = this.props
     const { isPrefOpen } = this.state
 
-    const target = PATHMAP[location.pathname] || queryType.MENU_LEDGERS
+    const target = getTraget(location.pathname)
     const isLogin = !authIsShown && authStatus === true
     const renderToggleMenu = isLogin ? (
       <Fragment>
