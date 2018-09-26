@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { injectIntl } from 'react-intl'
+import classNames from 'classnames'
 
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
@@ -11,6 +12,7 @@ import Orders from 'components/Orders'
 import Trades from 'components/Trades'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
+import baseType from 'state/base/constants'
 import { getPath, getTraget } from 'state/query/utils'
 import ToggleMenu from 'ui/ToggleMenu'
 
@@ -115,6 +117,21 @@ class Main extends PureComponent {
     } = this.state
     const target = getTraget(location.pathname)
 
+    const datasetClass = menuMode === baseType.MENU_MODE_ICON
+      ? classNames(
+        'col-xs-12',
+        'col-sm-12',
+        'col-md-12',
+        'col-lg-11',
+        'col-xl-11',
+      ) : classNames(
+        'col-xs-12',
+        'col-sm-12',
+        'col-md-12',
+        'col-lg-9',
+        'col-xl-10',
+      )
+
     return authStatus && !authIsShown ? (
       <div className='row'>
         <ToggleMenu
@@ -124,7 +141,7 @@ class Main extends PureComponent {
           intl={intl}
           menuMode={menuMode}
         />
-        <div className='col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-10'>
+        <div className={datasetClass}>
           <Switch>
             <Route
               exact
