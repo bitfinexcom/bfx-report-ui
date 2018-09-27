@@ -17,8 +17,8 @@ export function postJsonfetch(url, bodyJson) {
     .then(data => data)
 }
 
-export function createFetchCall(method, auth = null, params = null) {
-  return () => postJsonfetch(`${platform.API_URL}/get-data`, {
+export function makeFetchCall(method, auth = null, params = null) {
+  return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method,
     params,
@@ -120,7 +120,7 @@ export function getSideMsg(side) {
 
 export default {
   checkFetch,
-  createFetchCall,
+  makeFetchCall,
   formatDate,
   formatInternalPair,
   formatPair,

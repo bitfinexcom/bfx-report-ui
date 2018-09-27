@@ -5,7 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { createFetchCall } from 'state/utils'
+import { makeFetchCall } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -20,7 +20,7 @@ function getReqLedgers(auth, query, targetSymbol, smallestMts) {
   if (targetSymbol) {
     params.symbol = targetSymbol
   }
-  return createFetchCall('getLedgers', auth, params)
+  return makeFetchCall('getLedgers', auth, params)
 }
 
 function* fetchLedgers() {

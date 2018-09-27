@@ -6,19 +6,15 @@ import {
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
-import { postJsonfetch } from 'state/utils'
+import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import types from 'state/auth/constants'
 import { selectAuth } from 'state/auth/selectors'
-import { platform } from 'var/config'
 
 import actions from './actions'
 
 function getSymbols(auth) {
-  return postJsonfetch(`${platform.API_URL}/get-data`, {
-    auth,
-    method: 'getSymbols',
-  })
+  return makeFetchCall('getSymbols', auth)
 }
 
 function* fetchSymbols({ payload: success }) {

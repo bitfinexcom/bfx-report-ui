@@ -7,7 +7,7 @@ import {
 import queryString from 'query-string'
 import _omit from 'lodash/omit'
 
-import { formatRawPairToSymbol, postJsonfetch } from 'state/utils'
+import { formatRawPairToSymbol, makeFetchCall, postJsonfetch } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { getTargetSymbol } from 'state/ledgers/selectors'
@@ -65,11 +65,7 @@ function getCSV(auth, query, target, symbol) {
       break
   }
 
-  return postJsonfetch(`${platform.API_URL}/get-data`, {
-    auth,
-    method,
-    params,
-  })
+  return makeFetchCall(method, auth, params)
 }
 
 function checkEmail(auth) {

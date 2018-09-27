@@ -5,7 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { formatRawPairToSymbol, createFetchCall } from 'state/utils'
+import { formatRawPairToSymbol, makeFetchCall } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -20,7 +20,7 @@ function getReqOrders(auth, query, targetPair, smallestMts) {
   if (targetPair) {
     params.symbol = formatRawPairToSymbol(targetPair)
   }
-  return createFetchCall('getOrders', auth, params)
+  return makeFetchCall('getOrders', auth, params)
 }
 
 function* fetchOrders() {
