@@ -5,12 +5,11 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { postJsonfetch } from 'state/utils'
+import { makeFetchCall } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
@@ -21,11 +20,7 @@ function getReqFOffer(auth, query, targetSymbol, smallestMts) {
   if (targetSymbol) {
     params.symbol = `f${targetSymbol}`
   }
-  return postJsonfetch(`${platform.API_URL}/get-data`, {
-    auth,
-    method: 'getFundingOfferHistory',
-    params,
-  })
+  return makeFetchCall('getFundingOfferHistory', auth, params)
 }
 
 function* fetchFOffer() {

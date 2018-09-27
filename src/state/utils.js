@@ -1,6 +1,8 @@
 import _padStart from 'lodash/padStart'
 import moment from 'moment'
 
+import { platform } from 'var/config'
+
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
     method: 'POST',
@@ -13,6 +15,14 @@ export function postJsonfetch(url, bodyJson) {
     .then(response => response.json())
     .catch(error => error)
     .then(data => data)
+}
+
+export function makeFetchCall(method, auth = null, params = null) {
+  return postJsonfetch(`${platform.API_URL}/get-data`, {
+    auth,
+    method,
+    params,
+  })
 }
 
 export function formatTime(mts) {
@@ -110,6 +120,7 @@ export function getSideMsg(side) {
 
 export default {
   checkFetch,
+  makeFetchCall,
   formatDate,
   formatInternalPair,
   formatPair,

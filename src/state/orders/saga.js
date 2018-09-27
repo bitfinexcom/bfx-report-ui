@@ -5,12 +5,11 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { formatRawPairToSymbol, postJsonfetch } from 'state/utils'
+import { formatRawPairToSymbol, makeFetchCall } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
@@ -21,11 +20,7 @@ function getReqOrders(auth, query, targetPair, smallestMts) {
   if (targetPair) {
     params.symbol = formatRawPairToSymbol(targetPair)
   }
-  return postJsonfetch(`${platform.API_URL}/get-data`, {
-    auth,
-    method: 'getOrders',
-    params,
-  })
+  return makeFetchCall('getOrders', auth, params)
 }
 
 function* fetchOrders() {
