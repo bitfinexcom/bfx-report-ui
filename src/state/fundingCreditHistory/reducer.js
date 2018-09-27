@@ -45,9 +45,10 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           status,
           symbol,
         } = entry
+        const currentSymbol = symbol.slice(1)
         // save new symbol to updateCoins list
-        if (updateCoins.indexOf(symbol) === -1) {
-          updateCoins.push(symbol)
+        if (updateCoins.indexOf(currentSymbol) === -1) {
+          updateCoins.push(currentSymbol)
         }
         // log smallest mts
         if (!smallestMts || smallestMts > mtsUpdate) {
@@ -55,7 +56,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
         }
         return {
           id,
-          symbol: symbol.slice(1),
+          symbol: currentSymbol,
           side,
           mtsCreate,
           mtsUpdate,
