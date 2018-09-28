@@ -119,5 +119,16 @@
   "status.fail": "{topic} 失敗 {detail}",
   "status.request.error": "{topic} 請求失敗 {detail}",
   "status.noid": "dev: the status action should contain the id param",
-  "symbols.title": "取得貨幣資訊"
+  "symbols.title": "取得貨幣資訊",
+  "sync.title": "同步",
+  "sync.switch-mode": "切換同步模式",
+  "sync.message.canceled": "已取消上次的同步監測",
+  "sync.online": "目前為連線查詢模式。點擊切換到離線查詢模式",
+  "sync.offline": "目前離線查詢模式。點擊切換到連線查詢模式",
+  "sync.insync": "目前為連線查詢模式。點擊停止同步",
+  "sync.description": "我們即將將您的資料快取到本地中。一旦同步完成您將可以離線查詢您的資料。在同步期間您依然可以繼續連線查詢。",
+  "sync.sync-description": "資料正在同步到本地中。您希望停止同步並繼續使用連線查詢模式嗎？",
+  "sync.close": "取消",
+  "sync.start": "開始同步",
+  "sync.stop-sync": "停止同步"
 }

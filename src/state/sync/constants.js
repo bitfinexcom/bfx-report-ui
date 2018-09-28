@@ -1,0 +1,8 @@
+export default {
+  MODE_ONLINE: 'online',
+  MODE_OFFLINE: 'offline',
+  MODE_SYNCING: 'syncing',
+  SET_SYNC_MODE: 'BITFINEX/SYNC/MODE',
+  START_SYNCING: 'BITFINEX/SYNC/START',
+  STOP_SYNCING: 'BITFINEX/SYNC/STOP',
+}

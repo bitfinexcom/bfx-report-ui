@@ -1,5 +1,7 @@
 import { fork } from 'redux-saga/effects'
 
+import { platform } from 'var/config'
+
 import authSaga from './auth/saga'
 import baseSaga from './base/saga'
 import fcreditSaga from './fundingCreditHistory/saga'
@@ -11,6 +13,7 @@ import ordersSaga from './orders/saga'
 import querySaga from './query/saga'
 import tradesSaga from './trades/saga'
 import symbolsSaga from './symbols/saga'
+import syncSaga from './sync/saga'
 
 export default function* rootSaga() {
   yield fork(authSaga)
@@ -24,4 +27,7 @@ export default function* rootSaga() {
   yield fork(querySaga)
   yield fork(symbolsSaga)
   yield fork(tradesSaga)
+  if (platform.showSyncMode) {
+    yield fork(syncSaga)
+  }
 }
