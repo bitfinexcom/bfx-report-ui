@@ -76,6 +76,14 @@ The hosted version of report (https://report.bitfinex.com) will not allow access
 
 https://report.bitfinex.com will be only accessible starting from https://www.bitfinex.com/report that will redirect the user to https://report.bitfinex.com/?authToken=pub:api:<token string>
 
+## Offline Query Mode (Sync Mode)
+
+Bfx-report support sync user data to local machine and query offline. To enable that you need
+1. set `"syncMode": true` in report-ui/config/service.report.json
+2. set `showSyncMode: true,` in bfx-report-ui/src/var/config.js
+
+Then run `npm start` and you will see the extra sync status button at top right side of the header.
+
 ## 3rd party libraries
 
 * react/redux/redux-saga for core architecture
