@@ -30,7 +30,7 @@ const platforms = {
     API_URL: 'http://localhost:31339/api',
     KEY_URL: 'https://www.bitfinex.com/api',
     showAuthPage: true,
-    showSyncMode: true,
+    showSyncMode: false,
   },
 }
 
