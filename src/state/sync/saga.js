@@ -28,6 +28,14 @@ const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
 const disableScheduler = auth => makeFetchCall('disableScheduler', auth)
 const logout = auth => makeFetchCall('logout', auth)
 
+function updateSyncErrorStatus(msg) {
+  return updateErrorStatus({
+    id: 'status.fail',
+    topic: 'sync.title',
+    detail: msg,
+  })
+}
+
 function* startSyncing() {
   const auth = yield select(selectAuth)
   const { result, error } = yield call(login, auth)
@@ -41,19 +49,11 @@ function* startSyncing() {
       yield put(actions.setSyncMode(types.MODE_SYNCING))
     }
     if (schedulerError) {
-      yield put(updateErrorStatus({
-        id: 'status.fail',
-        topic: 'sync.title',
-        detail: 'during enableScheduler',
-      }))
+      yield put(updateSyncErrorStatus('during enableScheduler'))
     }
   }
   if (error) {
-    yield put(updateErrorStatus({
-      id: 'status.fail',
-      topic: 'sync.title',
-      detail: 'during login',
-    }))
+    yield put(updateSyncErrorStatus('during login'))
   }
 }
 
@@ -73,18 +73,10 @@ function* stopSyncing() {
   }
 
   if (disSchedulerError) {
-    yield put(updateErrorStatus({
-      id: 'status.fail',
-      topic: 'sync.title',
-      detail: 'during disableScheduler',
-    }))
+    yield put(updateSyncErrorStatus('during disableScheduler'))
   }
   if (syncModeError) {
-    yield put(updateErrorStatus({
-      id: 'status.fail',
-      topic: 'sync.title',
-      detail: 'during disableSyncMode',
-    }))
+    yield put(updateSyncErrorStatus('during disableSyncMode'))
   }
 }
 
@@ -122,19 +114,11 @@ function* syncWatcher(seconds) {
                 yield put(actions.setSyncMode(types.MODE_SYNCING))
               }
               if (schedulerError) {
-                yield put(updateErrorStatus({
-                  id: 'status.fail',
-                  topic: 'sync.title',
-                  detail: 'during enableScheduler',
-                }))
+                yield put(updateSyncErrorStatus('during enableScheduler'))
               }
             }
             if (error) {
-              yield put(updateErrorStatus({
-                id: 'status.fail',
-                topic: 'sync.title',
-                detail: 'during login',
-              }))
+              yield put(updateSyncErrorStatus('during login'))
             }
           }
         } else {
@@ -161,22 +145,4 @@ export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(queryTypes.UPDATE_AUTH_STATUS, syncWatcher)
-
-  // const monitor = yield call(syncMonitor)
-  // setInterval, () => {}, interval
-  // const interval = 5
-  // const channel = yield call(countdown, interval)
-  // yield takeEvery(channel, syncMonitor)
-  // try {
-  //   while (true) {
-  // take(END) will cause the saga to terminate by jumping to the finally block
-  // let seconds = yield take(channel)
-  // console.log(`countdown: ${seconds}`)
-
-  // if (seconds === 0) {
-
-  //   }
-  // } finally {
-  //   console.log('countdown terminated')
-  // }
 }
