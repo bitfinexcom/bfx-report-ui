@@ -19,9 +19,10 @@ import { getSyncMode } from './selectors'
 // const checkIsSyncMode = () => makeFetchCall('isSyncMode')
 const checkIsSyncModeWithDbData = () => makeFetchCall('isSyncModeWithDbData')
 const getSyncProgress = () => makeFetchCall('getSyncProgress')
+const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
 
 const login = auth => makeFetchCall('login', auth)
-const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
+// const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const enableScheduler = auth => makeFetchCall('enableScheduler', auth)
 
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
@@ -37,19 +38,25 @@ function updateSyncErrorStatus(msg) {
 }
 
 function* startSyncing() {
+  // eslint-disable-next-line
+  console.warn('start syncing')
   const auth = yield select(selectAuth)
   const { result, error } = yield call(login, auth)
-  console.warn(result, error)
   if (result) {
     yield delay(300)
-    // const { result: syncModeEnabled } = yield call(enableSyncMode, auth)
+    // const { result: syncModeSuccess, error: syncModeError } = yield call(enableSyncMode, auth)
+    const { result: syncModeSuccess, error: syncModeError } = yield call(disableSyncMode, auth)
+    yield delay(300)
     const { result: schedulerEnabled, error: schedulerError } = yield call(enableScheduler, auth)
-    if (schedulerEnabled) {
-      console.warn('syncing enabled')
+    // console.warn('syncMode enabled, schedule disabled', syncModeSuccess, schedulerEnabled)
+    if (schedulerEnabled && syncModeSuccess) {
       yield put(actions.setSyncMode(types.MODE_SYNCING))
     }
     if (schedulerError) {
       yield put(updateSyncErrorStatus('during enableScheduler'))
+    }
+    if (syncModeError) {
+      yield put(updateSyncErrorStatus('during disableSyncMode'))
     }
   }
   if (error) {
@@ -58,16 +65,17 @@ function* startSyncing() {
 }
 
 function* stopSyncing() {
+  // eslint-disable-next-line
+  console.warn('stop syncing')
   const auth = yield select(selectAuth)
+  yield delay(300)
   const { result: schedulerDisabled, error: disSchedulerError } = yield call(disableScheduler, auth)
   yield delay(300)
   const { result: syncModeDisabled, error: syncModeError } = yield call(disableSyncMode, auth)
   if (schedulerDisabled && syncModeDisabled) {
     yield delay(300)
     const { result } = yield call(logout, auth)
-    console.warn(result)
     if (result) {
-      console.warn('syncing disabled, switch to online mode')
       yield put(actions.setSyncMode(types.MODE_ONLINE))
     }
   }
@@ -80,57 +88,44 @@ function* stopSyncing() {
   }
 }
 
-function* syncWatcher(seconds) {
+function* syncWatcher() {
   try {
     while (true) {
       const authState = yield select(getAuthStatus)
       if (authState) {
         // const { result: isSyncMode, error: syncError } = yield call(checkIsSyncMode)
-        const { result: isSyncModeWithDbData } = yield call(checkIsSyncModeWithDbData)
+        const { result: isQueryWithDb } = yield call(checkIsSyncModeWithDbData)
         const syncMode = yield select(getSyncMode)
-        console.warn('isSyncModeWithDbData', isSyncModeWithDbData)
-        if (isSyncModeWithDbData) {
-          yield delay(200)
-          const { result: progress } = yield call(getSyncProgress)
-          console.warn('progress', progress)
+        yield delay(300)
+        const { result: progress, error: progressError } = yield call(getSyncProgress)
+        // eslint-disable-next-line
+        console.warn('queryWithDb, %, %Error', isSyncModeWithDbData, progress, progressError)
+        if (isQueryWithDb) {
           if (progress && progress === 100) {
             if (syncMode !== types.MODE_OFFLINE) {
               yield put(actions.setSyncMode(types.MODE_OFFLINE))
             }
           } else if (syncMode !== types.MODE_SYNCING) {
-            console.warn('try login')
-            const auth = yield select(selectAuth)
-            const { result, error } = yield call(login, auth)
-            if (result) {
-              console.warn('login stat', result, error)
-              yield delay(300)
-              const { result: syncModeEnabled, error: syncModeError } = yield call(enableSyncMode, auth)
-              console.warn('enable syncMode', syncModeEnabled, syncModeError)
-              yield delay(300)
-              const { result: schedulerEnabled, error: schedulerError } = yield call(enableScheduler, auth)
-              console.warn('enable scheduler', schedulerEnabled, schedulerError)
-              if (schedulerEnabled) {
-                console.warn('syncing enabled')
-                yield put(actions.setSyncMode(types.MODE_SYNCING))
-              }
-              if (schedulerError) {
-                yield put(updateSyncErrorStatus('during enableScheduler'))
-              }
+            yield put(actions.startSyncing())
+          }
+        } else if (progress !== false && progress !== 100) {
+          if (syncMode !== types.MODE_SYNCING) {
+            const { result: hasSched, error: schedError } = yield call(isSchedulerEnabled)
+            if (!hasSched) {
+              yield put(actions.startSyncing())
+            } else {
+              yield put(actions.setSyncMode(types.MODE_SYNCING))
             }
-            if (error) {
-              yield put(updateSyncErrorStatus('during login'))
+
+            if (schedError) {
+              yield put(updateSyncErrorStatus('during check isSchedulerEnabled'))
             }
           }
-        } else {
-          console.warn('online mode', syncMode)
-          if (syncMode !== types.MODE_ONLINE) {
-            console.warn('switch to online mode')
-            yield put(actions.setSyncMode(types.MODE_ONLINE))
-          }
+        } else if (syncMode !== types.MODE_ONLINE) {
+          yield put(actions.setSyncMode(types.MODE_ONLINE))
         }
       }
-      yield delay(5000)
-      console.log('countdown: 5s')
+      yield delay(5000) // check every 5s
     }
   } finally {
     if (yield cancelled()) {
