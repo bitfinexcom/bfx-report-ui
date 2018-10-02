@@ -6,6 +6,7 @@ const platforms = {
     API_URL: 'https://report.bitfinex.com/api',
     KEY_URL: 'https://www.bitfinex.com/api',
     showAuthPage: true,
+    showSyncMode: false,
   },
   ethfinex: {
     id: 'efx',
@@ -13,6 +14,7 @@ const platforms = {
     API_URL: 'https://report.ethfinex.com/api',
     KEY_URL: 'https://www.ethfinex.com/api',
     showAuthPage: true,
+    showSyncMode: false,
   },
   test: {
     id: 'test',
@@ -20,6 +22,7 @@ const platforms = {
     API_URL: 'https://test-report.bitfinex.com/api',
     KEY_URL: 'https://test.bitfinex.com/api',
     showAuthPage: true,
+    showSyncMode: false,
   },
   localhost: {
     id: 'local',
@@ -27,6 +30,7 @@ const platforms = {
     API_URL: 'http://localhost:31339/api',
     KEY_URL: 'https://www.bitfinex.com/api',
     showAuthPage: true,
+    showSyncMode: false,
   },
 }
 

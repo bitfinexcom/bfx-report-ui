@@ -14,6 +14,7 @@ import queryReducer from './query/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
 import symbolsReducer from './symbols/reducer'
+import syncReducer from './sync/reducer'
 import uiReducer from './ui/reducer'
 
 const PERSIST_WHITELIST = ['base']
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   trades: tradesReducer,
   status: statusReducer,
   symbols: symbolsReducer,
+  sync: syncReducer,
   ui: uiReducer,
 })
 

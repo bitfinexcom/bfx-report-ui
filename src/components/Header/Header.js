@@ -8,13 +8,13 @@ import {
   Popover,
   PopoverInteractionKind,
   Position,
-  Tooltip,
 } from '@blueprintjs/core'
 
 import Status from 'components/Status'
 import LangMenu from 'components/LangMenu'
 import PrefMenu from 'components/PrefMenu'
 import PrefDialog from 'components/PrefDialog'
+import SyncMode from 'components/SyncMode'
 import ToggleMenu from 'ui/ToggleMenu'
 import baseType from 'state/base/constants'
 import { getTraget } from 'state/query/utils'
@@ -25,13 +25,9 @@ import darkLogo from './logo3-dark-theme.svg'
 import lightLogo from './logo3-light-theme.svg'
 import mDarkLogo from './mobile_logo_dark.svg'
 import mLightLogo from './mobile_logo_light.svg'
+import HelpLink from './HelpLink'
 
 class Header extends PureComponent {
-  static handleHelp(e) {
-    e.preventDefault()
-    window.open('https://support.bitfinex.com/hc/en-us/articles/360008951853', '_blank')
-  }
-
   static propTypes = propTypes
 
   static defaultProps = defaultProps
@@ -130,6 +126,7 @@ class Header extends PureComponent {
     ) : (
       <LangMenu />
     )
+    const renderSyncMode = platform.showSyncMode ? (<SyncMode />) : null
 
     return (
       <Fragment>
@@ -160,22 +157,8 @@ class Header extends PureComponent {
             </NavbarHeading>
           </NavbarGroup>
           <NavbarGroup align='right'>
-            <Tooltip
-              content={(
-                <span>
-                  {intl.formatMessage({ id: 'header.help' })}
-                </span>
-              )}
-              position={Position.LEFT}
-              usePortal={false}
-            >
-              <Button
-                className='bitfinex-help'
-                minimal
-                icon='help'
-                onClick={Header.handleHelp}
-              />
-            </Tooltip>
+            <HelpLink />
+            {renderSyncMode}
             {renderMenu}
           </NavbarGroup>
         </Navbar>
