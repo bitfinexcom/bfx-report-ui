@@ -130,5 +130,6 @@
   "sync.sync-description": "Your data is syncing locally. Would you like to stop the sync process and keep in online query mode?",
   "sync.close": "Cancel",
   "sync.start": "Start Syncing",
-  "sync.stop-sync": "Stop Syncing"
+  "sync.stop-sync": "Stop Syncing",
+  "sync.go-offline": "Switching to offline query mode (query from db)"
 }

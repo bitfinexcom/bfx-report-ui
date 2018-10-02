@@ -130,5 +130,6 @@
   "sync.sync-description": "資料正在同步到本地中。您希望停止同步並繼續使用連線查詢模式嗎？",
   "sync.close": "取消",
   "sync.start": "開始同步",
-  "sync.stop-sync": "停止同步"
+  "sync.stop-sync": "停止同步",
+  "sync.go-offline": "切換至離線查詢模式"
 }

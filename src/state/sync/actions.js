@@ -29,7 +29,17 @@ export function stopSyncing() {
   }
 }
 
+/**
+ * Create an action to force query from DB.
+ */
+export function forceQueryFromDb() {
+  return {
+    type: types.FORCE_OFFLINE,
+  }
+}
+
 export default {
+  forceQueryFromDb,
   setSyncMode,
   startSyncing,
   stopSyncing,

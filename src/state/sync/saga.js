@@ -10,7 +10,7 @@ import { delay } from 'redux-saga'
 import { makeFetchCall } from 'state/utils'
 import { getAuthStatus, selectAuth } from 'state/auth/selectors'
 import queryTypes from 'state/auth/constants'
-import { updateErrorStatus } from 'state/status/actions'
+import { updateErrorStatus, updateStatus } from 'state/status/actions'
 
 import types from './constants'
 import actions from './actions'
@@ -22,7 +22,7 @@ const getSyncProgress = () => makeFetchCall('getSyncProgress')
 const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
 
 const login = auth => makeFetchCall('login', auth)
-// const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
+const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const enableScheduler = auth => makeFetchCall('enableScheduler', auth)
 
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
@@ -31,24 +31,21 @@ const logout = auth => makeFetchCall('logout', auth)
 
 function updateSyncErrorStatus(msg) {
   return updateErrorStatus({
-    id: 'status.fail',
+    id: 'status.request.error',
     topic: 'sync.title',
     detail: msg,
   })
 }
 
 function* startSyncing() {
-  // eslint-disable-next-line
-  console.warn('start syncing')
+  yield put(updateStatus({ id: 'sync.start' }))
   const auth = yield select(selectAuth)
   const { result, error } = yield call(login, auth)
   if (result) {
     yield delay(300)
-    // const { result: syncModeSuccess, error: syncModeError } = yield call(enableSyncMode, auth)
     const { result: syncModeSuccess, error: syncModeError } = yield call(disableSyncMode, auth)
     yield delay(300)
     const { result: schedulerEnabled, error: schedulerError } = yield call(enableScheduler, auth)
-    // console.warn('syncMode enabled, schedule disabled', syncModeSuccess, schedulerEnabled)
     if (schedulerEnabled && syncModeSuccess) {
       yield put(actions.setSyncMode(types.MODE_SYNCING))
     }
@@ -65,8 +62,7 @@ function* startSyncing() {
 }
 
 function* stopSyncing() {
-  // eslint-disable-next-line
-  console.warn('stop syncing')
+  yield put(updateStatus({ id: 'sync.stop-sync' }))
   const auth = yield select(selectAuth)
   yield delay(300)
   const { result: schedulerDisabled, error: disSchedulerError } = yield call(disableScheduler, auth)
@@ -88,6 +84,19 @@ function* stopSyncing() {
   }
 }
 
+function* forceQueryFromDb() {
+  yield put(updateStatus({ id: 'sync.go-offline' }))
+  yield delay(300)
+  const auth = yield select(selectAuth)
+  const { result, error } = yield call(enableSyncMode, auth)
+  if (result) {
+    yield put(actions.setSyncMode(types.MODE_OFFLINE))
+  }
+  if (error) {
+    yield put(updateSyncErrorStatus('during enableSyncMode'))
+  }
+}
+
 function* syncWatcher() {
   try {
     while (true) {
@@ -97,32 +106,51 @@ function* syncWatcher() {
         const { result: isQueryWithDb } = yield call(checkIsSyncModeWithDbData)
         const syncMode = yield select(getSyncMode)
         yield delay(300)
-        const { result: progress, error: progressError } = yield call(getSyncProgress)
-        // eslint-disable-next-line
-        console.warn('queryWithDb, %, %Error', isSyncModeWithDbData, progress, progressError)
+        const { result: progress } = yield call(getSyncProgress)
+        // console.warn('queryWithDb, %', isQueryWithDb, progress)
         if (isQueryWithDb) {
+          // when progress 100 => offline mode
           if (progress && progress === 100) {
             if (syncMode !== types.MODE_OFFLINE) {
-              yield put(actions.setSyncMode(types.MODE_OFFLINE))
+              yield put(actions.forceQueryFromDb())
             }
           } else if (syncMode !== types.MODE_SYNCING) {
             yield put(actions.startSyncing())
           }
-        } else if (progress !== false && progress !== 100) {
-          if (syncMode !== types.MODE_SYNCING) {
-            const { result: hasSched, error: schedError } = yield call(isSchedulerEnabled)
-            if (!hasSched) {
-              yield put(actions.startSyncing())
-            } else {
-              yield put(actions.setSyncMode(types.MODE_SYNCING))
-            }
+        } else {
+          switch (typeof progress) {
+            case 'number':
+              // when progress 0~99 => syncing mode
+              if (progress !== 100) {
+                if (syncMode !== types.MODE_SYNCING) {
+                  const { result: hasSched, error: schedError } = yield call(isSchedulerEnabled)
+                  if (!hasSched) {
+                    yield put(actions.startSyncing())
+                  } else {
+                    yield put(actions.setSyncMode(types.MODE_SYNCING))
+                  }
 
-            if (schedError) {
-              yield put(updateSyncErrorStatus('during check isSchedulerEnabled'))
-            }
+                  if (schedError) {
+                    yield put(updateSyncErrorStatus('during check isSchedulerEnabled'))
+                  }
+                }
+              } else { // when progress 100 => offline mode
+                yield put(actions.forceQueryFromDb())
+              }
+              break
+            // when progress false => online mode
+            case 'boolean':
+              if (syncMode !== types.MODE_ONLINE) {
+                yield put(actions.setSyncMode(types.MODE_ONLINE))
+              }
+              break
+            // when progress error => show notification and stop syncing
+            case 'string':
+            default:
+              yield put(updateSyncErrorStatus(progress))
+              yield put(actions.stopSyncing())
+              break
           }
-        } else if (syncMode !== types.MODE_ONLINE) {
-          yield put(actions.setSyncMode(types.MODE_ONLINE))
         }
       }
       yield delay(5000) // check every 5s
@@ -139,5 +167,6 @@ function* syncWatcher() {
 export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
+  yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
   yield takeLatest(queryTypes.UPDATE_AUTH_STATUS, syncWatcher)
 }
