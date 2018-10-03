@@ -18,7 +18,7 @@ export const InputKey = ({
     />
     <InputGroup
       id={name}
-      type='text'
+      type='password'
       name={name}
       placeholder={intl.formatMessage({ id: placeholder })}
       value={value}
