@@ -15,7 +15,7 @@ import '@blueprintjs/datetime/lib/css/blueprint-datetime.css'
 import '@blueprintjs/select/lib/css/blueprint-select.css'
 
 import { persistor, store } from 'state/store'
-import { checkAuthWithToken } from 'state/auth/actions'
+import { checkAuthWithToken, checkAuthWithLocalToken } from 'state/auth/actions'
 import { setCustomTimeRange } from 'state/query/actions'
 import { platform } from 'var/config'
 import 'styles/index.css'
@@ -50,6 +50,8 @@ window.addEventListener('load', function handler() {
         queryParams,
       ))
     store.dispatch(checkAuthWithToken(authToken))
+  } else if (!platform.showAuthPage) {
+    store.dispatch(checkAuthWithLocalToken())
   }
 
   // eslint-disable-next-line no-console

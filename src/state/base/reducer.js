@@ -1,3 +1,5 @@
+import authTypes from 'state/auth/constants'
+
 import types from './constants'
 
 // auth states are local cached
@@ -42,6 +44,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         menuMode: payload,
+      }
+    case authTypes.LOGOUT:
+      return {
+        ...state,
+        authToken: '',
       }
     default:
       return state

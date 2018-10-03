@@ -8,11 +8,12 @@ import {
 import { postJsonfetch } from 'state/utils'
 import { setAuthToken } from 'state/base/actions'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
-import { getBase } from 'state/base/selectors'
+import { selectAuth } from 'state/auth/selectors'
+import { getAuthToken } from 'state/base/selectors'
 import { platform } from 'var/config'
 
 import types from './constants'
-import { updateAuthStatus } from './actions'
+import actions from './actions'
 
 function getAuth(auth) {
   return postJsonfetch(`${platform.API_URL}/check-auth`, {
@@ -22,13 +23,10 @@ function getAuth(auth) {
 
 function* checkAuth() {
   try {
-    const base = yield select(getBase)
-    const data = yield call(getAuth, {
-      apiKey: base.apiKey,
-      apiSecret: base.apiSecret,
-    })
+    const auth = yield select(selectAuth)
+    const data = yield call(getAuth, auth)
     const { result = false, error } = data
-    yield put(updateAuthStatus(result))
+    yield put(actions.updateAuthStatus(result))
 
     if (result) {
       yield put(updateSuccessStatus({
@@ -57,24 +55,23 @@ function* checkAuth() {
 function* checkAuthWithToken({ payload: authToken }) {
   try {
     yield put(setAuthToken(authToken))
-    const data = yield call(getAuth, { authToken })
-    const { result = false, error } = data
-    yield put(updateAuthStatus(result))
+    yield put(actions.checkAuth())
+  } catch (fail) {
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'auth.auth',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
 
-    if (result) {
-      yield put(updateSuccessStatus({
-        id: 'status.success',
-        topic: 'auth.auth',
-        time: (new Date()).toLocaleString(),
-      }))
-    }
-
-    if (error) {
-      yield put(updateErrorStatus({
-        id: 'status.fail',
-        topic: 'auth.auth',
-        detail: JSON.stringify(error),
-      }))
+function* checkAuthWithLocalToken() {
+  try {
+    const authToken = yield select(getAuthToken)
+    if (authToken) {
+      yield put(actions.checkAuth())
+    } else {
+      yield put(updateErrorStatus({ id: 'auth.notoken' }))
     }
   } catch (fail) {
     yield put(updateErrorStatus({
@@ -88,4 +85,5 @@ function* checkAuthWithToken({ payload: authToken }) {
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.CHECK_AUTH_WITH_TOKEN, checkAuthWithToken)
+  yield takeLatest(types.CHECK_AUTH_WITH_LOCAL_TOKEN, checkAuthWithLocalToken)
 }

@@ -26,7 +26,7 @@ export function checkAuthWithToken(token) {
  */
 export function checkAuthWithLocalToken() {
   return {
-     type: types.CHECK_AUTH_WITH_LOCAL_TOKEN
+    type: types.CHECK_AUTH_WITH_LOCAL_TOKEN,
   }
 }
 

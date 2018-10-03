@@ -18,6 +18,7 @@
   "auth.auth.note1": "請先前往 ",
   "auth.auth.note2": " 取得唯讀的API金鑰與密鑰對。",
   "auth.required": "（必填）",
+  "auth.notoken": "驗證失敗，並未找到任何 authToken",
   "loading": "讀取中...",
   "nodata": "沒有相關資料。請試試其他時間範圍。",
   "fcredit.title": "信用融資（已使用）",
