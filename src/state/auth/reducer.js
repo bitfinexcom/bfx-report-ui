@@ -3,7 +3,7 @@ import types from './constants'
 const initialState = {
   // apiKey: '', // moved to state/base
   // apiSecret: '',
-  authToken: '',
+  // authToken: '',
   authStatus: null,
   isShown: true,
 }
@@ -20,11 +20,6 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         isShown: true,
-      }
-    case types.SET_AUTH_TOKEN:
-      return {
-        ...state,
-        authToken: action.payload,
       }
     case types.LOGOUT:
       return initialState

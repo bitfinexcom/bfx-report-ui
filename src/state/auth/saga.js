@@ -6,12 +6,13 @@ import {
 } from 'redux-saga/effects'
 
 import { postJsonfetch } from 'state/utils'
+import { setAuthToken } from 'state/base/actions'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { getBase } from 'state/base/selectors'
 import { platform } from 'var/config'
 
 import types from './constants'
-import { setAuthToken, updateAuthStatus } from './actions'
+import { updateAuthStatus } from './actions'
 
 function getAuth(auth) {
   return postJsonfetch(`${platform.API_URL}/check-auth`, {

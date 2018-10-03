@@ -4,37 +4,44 @@ import types from './constants'
 const initialState = {
   apiKey: '',
   apiSecret: '',
+  authToken: '',
   locale: 'en',
   menuMode: types.MENU_MODE_NORMAL,
   theme: 'bp3_dark',
 }
 
 export function baseReducer(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case types.SET_API_KEY:
       return {
         ...state,
-        apiKey: action.payload,
+        apiKey: payload,
       }
     case types.SET_API_SECRET:
       return {
         ...state,
-        apiSecret: action.payload,
+        apiSecret: payload,
+      }
+    case types.SET_AUTH_TOKEN:
+      return {
+        ...state,
+        authToken: payload,
       }
     case types.SET_LANG:
       return {
         ...state,
-        locale: action.payload,
+        locale: payload,
       }
     case types.SET_THEME:
       return {
         ...state,
-        theme: action.payload,
+        theme: payload,
       }
     case types.SET_MENU_MODE:
       return {
         ...state,
-        menuMode: action.payload,
+        menuMode: payload,
       }
     default:
       return state
