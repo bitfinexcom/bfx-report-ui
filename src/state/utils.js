@@ -59,8 +59,13 @@ export function formatPair(pair) {
 }
 
 // btcusd -> tBTCUSD
-export function formatRawPairToSymbol(pair) {
+export function formatRawPairToTPair(pair) {
   return `t${pair.toUpperCase()}`
+}
+
+// USD -> fUSD
+export function formatRawSymbolToFSymbol(symbol) {
+  return `f${symbol.toUpperCase()}`
 }
 
 const TYPE_WHITELIST = [
@@ -124,7 +129,8 @@ export default {
   formatDate,
   formatInternalPair,
   formatPair,
-  formatRawPairToSymbol,
+  formatRawPairToTPair,
+  formatRawSymbolToFSymbol,
   formatSymbolToPair,
   formatTime,
   getCurrentEntries,

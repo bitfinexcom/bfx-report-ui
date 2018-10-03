@@ -5,7 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { makeFetchCall } from 'state/utils'
+import { makeFetchCall, formatRawSymbolToFSymbol } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -18,7 +18,7 @@ import { getTargetSymbol, getFundingOfferHistory } from './selectors'
 function getReqFOffer(auth, query, targetSymbol, smallestMts) {
   const params = getTimeFrame(query, 'foffer', smallestMts)
   if (targetSymbol) {
-    params.symbol = `f${targetSymbol}`
+    params.symbol = formatRawSymbolToFSymbol(targetSymbol)
   }
   return makeFetchCall('getFundingOfferHistory', auth, params)
 }
