@@ -15,13 +15,15 @@ import { platform } from 'var/config'
 import types from './constants'
 import actions from './actions'
 
+const LOCAL_AUTHTOKEN = 'local'
+
 function getAuth(auth) {
   return postJsonfetch(`${platform.API_URL}/check-auth`, {
     auth,
   })
 }
 
-function* checkAuth() {
+function* checkAuth({ payload: flag }) {
   try {
     const auth = yield select(selectAuth)
     const data = yield call(getAuth, auth)
@@ -34,6 +36,10 @@ function* checkAuth() {
         topic: 'auth.auth',
         time: (new Date()).toLocaleString(),
       }))
+    }
+
+    if (result === false && flag === LOCAL_AUTHTOKEN) {
+      yield put(actions.logout())
     }
 
     if (error) {
@@ -69,7 +75,7 @@ function* checkAuthWithLocalToken() {
   try {
     const authToken = yield select(getAuthToken)
     if (authToken) {
-      yield put(actions.checkAuth())
+      yield put(actions.checkAuth(LOCAL_AUTHTOKEN))
     } else {
       yield put(updateErrorStatus({ id: 'auth.notoken' }))
     }

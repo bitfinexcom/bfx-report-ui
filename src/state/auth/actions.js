@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to check Auth state.
+ * @param {string} flag auth type
  */
-export function checkAuth() {
+export function checkAuth(flag) {
   return {
     type: types.CHECK_AUTH,
+    payload: flag,
   }
 }
 
