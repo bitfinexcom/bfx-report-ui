@@ -133,5 +133,6 @@
   "sync.close": "Cancel",
   "sync.start": "Start Syncing",
   "sync.stop-sync": "Stop Syncing",
-  "sync.go-offline": "Switching to offline query mode (query from db)"
+  "sync.go-offline": "Switching to offline query mode (query from db)",
+  "sync.logout": "Sync Stopped"
 }

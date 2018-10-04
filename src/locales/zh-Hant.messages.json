@@ -133,5 +133,6 @@
   "sync.close": "取消",
   "sync.start": "開始同步",
   "sync.stop-sync": "停止同步",
-  "sync.go-offline": "切換至離線查詢模式"
+  "sync.go-offline": "切換至離線查詢模式",
+  "sync.logout": "同步已停止"
 }
