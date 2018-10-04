@@ -5,6 +5,7 @@ import {
   Classes,
   Dialog,
   Position,
+  Spinner,
   Tooltip,
   Intent,
 } from '@blueprintjs/core'
@@ -71,6 +72,26 @@ class SyncMode extends PureComponent {
       syncMode,
     } = this.props
     const { isSyncDialogOpen } = this.state
+    const icon = getIcon(syncMode)
+
+    const renderButton = icon !== 'refresh'
+      ? (
+        <Button
+          className='bitfinex-help'
+          minimal
+          icon={icon}
+          onClick={this.handleToggleClick}
+        />
+      )
+      : (
+        <Button
+          className='bitfinex-help'
+          minimal
+          onClick={this.handleToggleClick}
+        >
+          <Spinner size={18} />
+        </Button>
+      )
     return (
       <Fragment>
         <Tooltip
@@ -82,15 +103,10 @@ class SyncMode extends PureComponent {
           position={Position.LEFT}
           usePortal={false}
         >
-          <Button
-            className='bitfinex-help'
-            minimal
-            icon={getIcon(syncMode)}
-            onClick={this.handleToggleClick}
-          />
+          {renderButton}
         </Tooltip>
         <Dialog
-          icon={getIcon(syncMode)}
+          icon={icon}
           isOpen={isSyncDialogOpen}
           onClose={this.handleDialogClose}
           title={intl.formatMessage({ id: 'sync.switch-mode' })}
