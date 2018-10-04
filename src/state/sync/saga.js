@@ -7,7 +7,7 @@ import {
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
-import { makeFetchCall } from 'state/utils'
+import { makeFetchCall, getAuth } from 'state/utils'
 import { getAuthStatus, selectAuth } from 'state/auth/selectors'
 import queryTypes from 'state/auth/constants'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
@@ -33,6 +33,8 @@ function updateSyncErrorStatus(msg) {
 function* startSyncing() {
   yield delay(300)
   const auth = yield select(selectAuth)
+  yield call(getAuth, auth)
+  yield delay(300)
   const { result, error } = yield call(syncNow, auth)
   if (result) {
     yield put(actions.setSyncMode(types.MODE_SYNCING))

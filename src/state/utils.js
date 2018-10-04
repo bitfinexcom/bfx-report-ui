@@ -24,8 +24,13 @@ export function makeFetchCall(method, auth = null, params = null) {
   })
 }
 
+export function getAuth(auth) {
+  return postJsonfetch(`${platform.API_URL}/check-auth`, {
+    auth,
+  })
+}
+
 export function formatTime(mts, timezone) {
-  // 18-07-06 02:08:02
   if (timezone) {
     return moment(mts, 'x').tz(timezone).format('YY-MM-DD HH:mm:ss')
   }
@@ -134,6 +139,7 @@ export default {
   formatRawSymbolToFSymbol,
   formatSymbolToPair,
   formatTime,
+  getAuth,
   getCurrentEntries,
   getSideMsg,
   isValidateType,
