@@ -16,7 +16,7 @@ import types from './constants'
 import actions from './actions'
 import { getSyncMode } from './selectors'
 
-const checkIsSyncModeWithDbData = () => makeFetchCall('isSyncModeWithDbData')
+const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
 const getSyncProgress = () => makeFetchCall('getSyncProgress')
 const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
 const syncNow = auth => makeFetchCall('syncNow', auth)
@@ -88,7 +88,8 @@ function* syncWatcher() {
     while (true) {
       const authState = yield select(getAuthStatus)
       if (authState) {
-        const { result: isQueryWithDb } = yield call(checkIsSyncModeWithDbData)
+        const auth = yield select(selectAuth)
+        const { result: isQueryWithDb } = yield call(checkIsSyncModeWithDbData, auth)
         // get current ui state
         const syncMode = yield select(getSyncMode)
         yield delay(300)
