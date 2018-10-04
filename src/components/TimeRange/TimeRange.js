@@ -9,10 +9,11 @@ class TimeRange extends PureComponent {
     const {
       end,
       start,
+      timezone,
     } = this.props
     return (
       <span className='bitfinex-show-soft bitfinex-timerange'>
-        {`${formatDate(start)} — ${formatDate(end)}`}
+        {`${formatDate(start, timezone)} — ${formatDate(end, timezone)}`}
       </span>
     )
   }
