@@ -12,6 +12,7 @@ const FLOAN_ENTRIES_PROPS = PropTypes.shape({
   mtsUpdate: PropTypes.number.isRequired,
   mtsOpening: PropTypes.number,
   mtsLastPayout: PropTypes.number,
+  timezone: PropTypes.string,
 })
 
 export const propTypes = {

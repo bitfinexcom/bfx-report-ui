@@ -11,6 +11,7 @@ const FOFFER_ENTRIES_PROPS = PropTypes.shape({
   rate: PropTypes.number,
   period: PropTypes.number,
   mtsUpdate: PropTypes.number.isRequired,
+  timezone: PropTypes.string,
 })
 
 export const propTypes = {
