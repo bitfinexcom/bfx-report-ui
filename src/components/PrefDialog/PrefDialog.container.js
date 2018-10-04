@@ -5,9 +5,9 @@ import { getTheme, getTimezone } from 'state/base/selectors'
 
 import PrefDialog from './PrefDialog'
 
-const mapStateToProps(state = {}) => ({
-    theme: getTheme(state),
-    timezone: getTimezone(state),
+const mapStateToProps = (state = {}) => ({
+  theme: getTheme(state),
+  timezone: getTimezone(state),
 })
 
 const mapDispatchToProps = dispatch => ({
