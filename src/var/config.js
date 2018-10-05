@@ -5,7 +5,7 @@ const platforms = {
     name: 'Bitfinex',
     API_URL: 'https://report.bitfinex.com/api',
     KEY_URL: 'https://www.bitfinex.com/api',
-    showAuthPage: true,
+    showAuthPage: false,
     showSyncMode: false,
   },
   ethfinex: {
@@ -13,7 +13,7 @@ const platforms = {
     name: 'Ethfinex',
     API_URL: 'https://report.ethfinex.com/api',
     KEY_URL: 'https://www.ethfinex.com/api',
-    showAuthPage: true,
+    showAuthPage: false,
     showSyncMode: false,
   },
   test: {
