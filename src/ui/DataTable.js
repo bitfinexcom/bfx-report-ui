@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { injectIntl, intlShape } from 'react-intl'
+import PropTypes from 'prop-types'
 import {
   Column,
   Table,
@@ -34,5 +35,22 @@ class DataTable extends PureComponent {
     )
   }
 }
+
+const TABLE_COLUMNS_PROPS = PropTypes.shape({
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  renderer: PropTypes.func.isRequired,
+  tooltip: PropTypes.func.isRequired,
+})
+
+DataTable.propTypes = {
+  intl: intlShape.isRequired,
+  numRows: PropTypes.number.isRequired,
+  columnWidths: PropTypes.arrayOf(PropTypes.number).isRequired,
+  tableColums: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
+}
+
+DataTable.defaultProps = {}
+
 
 export default injectIntl(DataTable)
