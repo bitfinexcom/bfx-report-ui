@@ -11,9 +11,10 @@ import {
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import DataTable from 'ui/DataTable'
+import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
 import SymbolSelector from 'ui/SymbolSelector'
 import queryConstants from 'state/query/constants'
@@ -23,7 +24,6 @@ import {
   getCurrentEntries,
 } from 'state/utils'
 
-import DataTable from 'ui/DataTable'
 
 import { propTypes, defaultProps } from './Ledgers.props'
 

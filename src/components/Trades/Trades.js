@@ -6,18 +6,17 @@ import {
 } from '@blueprintjs/core'
 import {
   Cell,
-  Column,
-  Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import DataTable from 'ui/DataTable'
+import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import ExportButton from 'ui/ExportButton'
-import RefreshButton from 'ui/RefreshButton'
 import PairSelector from 'ui/PairSelector'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -192,6 +191,48 @@ class Trades extends PureComponent {
       </Fragment>
     )
 
+    const tableColums = [
+      {
+        id: 'id',
+        name: 'column.id',
+        renderer: idCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].id,
+      },
+      {
+        id: 'pair',
+        name: 'trades.column.pair',
+        renderer: pairCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].pair,
+      },
+      {
+        id: 'amount',
+        name: 'trades.column.amount',
+        renderer: amountCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].amount,
+      },
+      {
+        id: 'price',
+        name: 'trades.column.price',
+        renderer: priceCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].price,
+      },
+      {
+        id: 'fee',
+        name: 'trades.column.fee',
+        renderer: feeCellRenderer,
+        tooltip: rowIndex => {
+          const { fee, feeCurrency } = filteredData[rowIndex]
+          return `${fee} ${feeCurrency}`
+        },
+      },
+      {
+        id: 'mts',
+        name: 'trades.column.time',
+        renderer: mtsCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsCreate),
+      },
+    ]
+
     let showContent
     if (loading) {
       showContent = (
@@ -223,43 +264,11 @@ class Trades extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
-          <Table
-            className='bitfinex-table'
+          <DataTable
             numRows={numRows}
-            enableRowHeader={false}
             columnWidths={COLUMN_WIDTHS}
-          >
-            <Column
-              id='id'
-              name='#'
-              cellRenderer={idCellRenderer}
-            />
-            <Column
-              id='pair'
-              name={intl.formatMessage({ id: 'trades.column.pair' })}
-              cellRenderer={pairCellRenderer}
-            />
-            <Column
-              id='amount'
-              name={intl.formatMessage({ id: 'trades.column.amount' })}
-              cellRenderer={amountCellRenderer}
-            />
-            <Column
-              id='price'
-              name={intl.formatMessage({ id: 'trades.column.price' })}
-              cellRenderer={priceCellRenderer}
-            />
-            <Column
-              id='fee'
-              name={intl.formatMessage({ id: 'trades.column.fee' })}
-              cellRenderer={feeCellRenderer}
-            />
-            <Column
-              id='mts'
-              name={intl.formatMessage({ id: 'trades.column.time' })}
-              cellRenderer={mtsCellRenderer}
-            />
-          </Table>
+            tableColums={tableColums}
+          />
           {renderPagination}
         </Fragment>
       )

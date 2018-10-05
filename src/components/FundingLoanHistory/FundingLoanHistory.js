@@ -6,16 +6,15 @@ import {
 } from '@blueprintjs/core'
 import {
   Cell,
-  Column,
-  Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import DataTable from 'ui/DataTable'
+import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
 import SymbolSelector from 'ui/SymbolSelector'
 import queryConstants from 'state/query/constants'
@@ -228,6 +227,70 @@ class FundingLoanHistory extends PureComponent {
       />
     )
 
+    const tableColums = [
+      {
+        id: 'id',
+        name: 'column.id',
+        renderer: idCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].id,
+      },
+      {
+        id: 'symbol',
+        name: 'floan.column.symbol',
+        renderer: symbolCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].symbol,
+      },
+      {
+        id: 'side',
+        name: 'floan.column.side',
+        renderer: sideCellRenderer,
+        tooltip: rowIndex => intl.formatMessage({ id: `floan.side.${getSideMsg(filteredData[rowIndex].side)}` }),
+      },
+      {
+        id: 'amount',
+        name: 'floan.column.amount',
+        renderer: amountCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].amount,
+      },
+      {
+        id: 'status',
+        name: 'floan.column.status',
+        renderer: statusCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].status,
+      },
+      {
+        id: 'rate',
+        name: 'floan.column.rate',
+        renderer: rateCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].rate,
+      },
+      {
+        id: 'period',
+        name: 'floan.column.period',
+        renderer: periodCellRenderer,
+        tooltip: rowIndex =>
+          `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'floan.column.period.days' })}`,
+      },
+      {
+        id: 'mtsOpening',
+        name: 'floan.column.opening',
+        renderer: mtsOpeningCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsOpening),
+      },
+      {
+        id: 'mtsLastPayout',
+        name: 'floan.column.lastpayout',
+        renderer: mtsLastPayoutCellRenderer,
+        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsLastPayout),
+      },
+      {
+        id: 'mtsUpdate',
+        name: 'floan.column.updated',
+        renderer: mtsUpdateCellRenderer,
+        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate),
+      },
+    ]
+
     let showContent
     if (loading) {
       showContent = (
@@ -259,63 +322,11 @@ class FundingLoanHistory extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
-          <Table
-            className='bitfinex-table'
+          <DataTable
             numRows={numRows}
-            enableRowHeader={false}
             columnWidths={COLUMN_WIDTHS}
-          >
-            <Column
-              id='id'
-              name='#'
-              cellRenderer={idCellRenderer}
-            />
-            <Column
-              id='symbol'
-              name={intl.formatMessage({ id: 'floan.column.symbol' })}
-              cellRenderer={symbolCellRenderer}
-            />
-            <Column
-              id='side'
-              name={intl.formatMessage({ id: 'floan.column.side' })}
-              cellRenderer={sideCellRenderer}
-            />
-            <Column
-              id='amount'
-              name={intl.formatMessage({ id: 'floan.column.amount' })}
-              cellRenderer={amountCellRenderer}
-            />
-            <Column
-              id='status'
-              name={intl.formatMessage({ id: 'floan.column.status' })}
-              cellRenderer={statusCellRenderer}
-            />
-            <Column
-              id='rate'
-              name={intl.formatMessage({ id: 'floan.column.rate' })}
-              cellRenderer={rateCellRenderer}
-            />
-            <Column
-              id='period'
-              name={intl.formatMessage({ id: 'floan.column.period' })}
-              cellRenderer={periodCellRenderer}
-            />
-            <Column
-              id='mtsOpening'
-              name={intl.formatMessage({ id: 'floan.column.opening' })}
-              cellRenderer={mtsOpeningCellRenderer}
-            />
-            <Column
-              id='mtsLastPayout'
-              name={intl.formatMessage({ id: 'floan.column.lastpayout' })}
-              cellRenderer={mtsLastPayoutCellRenderer}
-            />
-            <Column
-              id='mtsUpdate'
-              name={intl.formatMessage({ id: 'floan.column.updated' })}
-              cellRenderer={mtsUpdateCellRenderer}
-            />
-          </Table>
+            tableColums={tableColums}
+          />
           {renderPagination}
         </Fragment>
       )

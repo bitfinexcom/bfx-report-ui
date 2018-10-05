@@ -6,18 +6,17 @@ import {
 } from '@blueprintjs/core'
 import {
   Cell,
-  Column,
-  Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import DataTable from 'ui/DataTable'
+import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import ExportButton from 'ui/ExportButton'
-import RefreshButton from 'ui/RefreshButton'
 import PairSelector from 'ui/PairSelector'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import {
   checkFetch,
@@ -217,6 +216,63 @@ class Orders extends PureComponent {
       </Fragment>
     )
 
+    const tableColums = [
+      {
+        id: 'id',
+        name: 'column.id',
+        renderer: idCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].id,
+      },
+      {
+        id: 'symbol',
+        name: 'orders.column.pair',
+        renderer: pairCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].pair,
+      },
+      {
+        id: 'type',
+        name: 'orders.column.type',
+        renderer: typeCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].type,
+      },
+      {
+        id: 'amount',
+        name: 'orders.column.amount',
+        renderer: amountCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].amount,
+      },
+      {
+        id: 'amountOrig',
+        name: 'orders.column.amount-orig',
+        renderer: amountOrigCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].amountOrig,
+      },
+      {
+        id: 'price',
+        name: 'orders.column.price',
+        renderer: priceCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].price,
+      },
+      {
+        id: 'priceAvg',
+        name: 'orders.column.avgprice',
+        renderer: priceAvgCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].priceAvg,
+      },
+      {
+        id: 'mtsUpdate',
+        name: 'orders.column.update',
+        renderer: mtsUpdateCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate),
+      },
+      {
+        id: 'status',
+        name: 'orders.column.status',
+        renderer: statusCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].status,
+      },
+    ]
+
     let showContent
     if (loading) {
       showContent = (
@@ -248,58 +304,11 @@ class Orders extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
-          <Table
-            className='bitfinex-table'
+          <DataTable
             numRows={numRows}
-            enableRowHeader={false}
             columnWidths={COLUMN_WIDTHS}
-          >
-            <Column
-              id='id'
-              name='#'
-              cellRenderer={idCellRenderer}
-            />
-            <Column
-              id='symbol'
-              name={intl.formatMessage({ id: 'orders.column.pair' })}
-              cellRenderer={pairCellRenderer}
-            />
-            <Column
-              id='type'
-              name={intl.formatMessage({ id: 'orders.column.type' })}
-              cellRenderer={typeCellRenderer}
-            />
-            <Column
-              id='amount'
-              name={intl.formatMessage({ id: 'orders.column.amount' })}
-              cellRenderer={amountCellRenderer}
-            />
-            <Column
-              id='amountOrig'
-              name={intl.formatMessage({ id: 'orders.column.amount-orig' })}
-              cellRenderer={amountOrigCellRenderer}
-            />
-            <Column
-              id='price'
-              name={intl.formatMessage({ id: 'orders.column.price' })}
-              cellRenderer={priceCellRenderer}
-            />
-            <Column
-              id='priceAvg'
-              name={intl.formatMessage({ id: 'orders.column.avgprice' })}
-              cellRenderer={priceAvgCellRenderer}
-            />
-            <Column
-              id='mtsUpdate'
-              name={intl.formatMessage({ id: 'orders.column.update' })}
-              cellRenderer={mtsUpdateCellRenderer}
-            />
-            <Column
-              id='status'
-              name={intl.formatMessage({ id: 'orders.column.status' })}
-              cellRenderer={statusCellRenderer}
-            />
-          </Table>
+            tableColums={tableColums}
+          />
           {renderPagination}
         </Fragment>
       )
