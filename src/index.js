@@ -50,7 +50,7 @@ window.addEventListener('load', function handler() {
         queryParams,
       ))
     store.dispatch(checkAuthWithToken(authToken))
-  } else if (!platform.showAuthPage) {
+  } else {
     store.dispatch(checkAuthWithLocalToken())
   }
 
