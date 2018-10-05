@@ -5,7 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { formatRawPairToSymbol, makeFetchCall } from 'state/utils'
+import { formatRawPairToTPair, makeFetchCall } from 'state/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -18,7 +18,7 @@ import { getTrades, getTargetPair } from './selectors'
 function getReqTrades(auth, query, targetPair, smallestMts) {
   const params = getTimeFrame(query, 'trades', smallestMts)
   if (targetPair) {
-    params.symbol = formatRawPairToSymbol(targetPair)
+    params.symbol = formatRawPairToTPair(targetPair)
   }
   return makeFetchCall('getTrades', auth, params)
 }

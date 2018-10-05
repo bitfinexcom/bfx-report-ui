@@ -7,11 +7,21 @@ import {
 import queryString from 'query-string'
 import _omit from 'lodash/omit'
 
-import { formatRawPairToSymbol, makeFetchCall, postJsonfetch } from 'state/utils'
+import {
+  formatRawPairToTPair,
+  formatRawSymbolToFSymbol,
+  makeFetchCall,
+  postJsonfetch,
+} from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
-import { getTargetSymbol } from 'state/ledgers/selectors'
-import { getTargetPair } from 'state/orders/selectors'
+import { getTargetSymbol as getFCreditSymbol } from 'state/fundingCreditHistory/selectors'
+import { getTargetSymbol as getFLoanSymbol } from 'state/fundingLoanHistory/selectors'
+import { getTargetSymbol as getFOfferSymbol } from 'state/fundingOfferHistory/selectors'
+import { getTargetSymbol as getLedgersSymbol } from 'state/ledgers/selectors'
+import { getTargetSymbol as getMovementsSymbol } from 'state/movements/selectors'
+import { getTargetPair as getOrdersPair } from 'state/orders/selectors'
+import { getTargetPair as getTradesPair } from 'state/trades/selectors'
 
 import { platform } from 'var/config'
 
@@ -64,7 +74,6 @@ function getCSV(auth, query, target, symbol) {
       method = 'getLedgersCsv'
       break
   }
-
   return makeFetchCall(method, auth, params)
 }
 
@@ -76,10 +85,21 @@ function checkEmail(auth) {
 
 function getSelector(target) {
   switch (target) {
+    case MENU_FCREDIT:
+      return getFCreditSymbol
+    case MENU_FLOAN:
+      return getFLoanSymbol
+    case MENU_FOFFER:
+      return getFOfferSymbol
     case MENU_LEDGERS:
-      return getTargetSymbol
+      return getLedgersSymbol
     case MENU_ORDERS:
-      return getTargetPair
+      return getOrdersPair
+    case MENU_WITHDRAWALS:
+    case MENU_DEPOSITS:
+      return getMovementsSymbol
+    case MENU_TRADES:
+      return getTradesPair
     default:
       return ''
   }
@@ -88,9 +108,16 @@ function getSelector(target) {
 function formatSymbol(target, sign) {
   switch (target) {
     case MENU_LEDGERS:
+    case MENU_WITHDRAWALS:
+    case MENU_DEPOSITS:
       return sign
     case MENU_ORDERS:
-      return formatRawPairToSymbol(sign)
+    case MENU_TRADES:
+      return formatRawPairToTPair(sign)
+    case MENU_FCREDIT:
+    case MENU_FLOAN:
+    case MENU_FOFFER:
+      return formatRawSymbolToFSymbol(sign)
     default:
       return ''
   }
@@ -102,7 +129,7 @@ function* exportCSV({ payload: target }) {
     const query = yield select(getQuery)
     const selector = getSelector(target)
     const sign = selector ? yield select(selector) : ''
-    const { result, error } = yield call(getCSV, auth, query, target, formatSymbol(sign))
+    const { result, error } = yield call(getCSV, auth, query, target, formatSymbol(target, sign))
     if (result) {
       if (result.isSendEmail) {
         yield put(updateSuccessStatus({
