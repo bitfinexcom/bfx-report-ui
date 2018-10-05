@@ -263,7 +263,7 @@ class Orders extends PureComponent {
         id: 'mtsUpdate',
         name: 'orders.column.update',
         renderer: mtsUpdateCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
       },
       {
         id: 'status',

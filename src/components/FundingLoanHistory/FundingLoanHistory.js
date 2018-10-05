@@ -275,19 +275,19 @@ class FundingLoanHistory extends PureComponent {
         id: 'mtsOpening',
         name: 'floan.column.opening',
         renderer: mtsOpeningCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsOpening),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsOpening, timezone),
       },
       {
         id: 'mtsLastPayout',
         name: 'floan.column.lastpayout',
         renderer: mtsLastPayoutCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsLastPayout),
+        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsLastPayout, timezone),
       },
       {
         id: 'mtsUpdate',
         name: 'floan.column.updated',
         renderer: mtsUpdateCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate),
+        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate, timezone),
       },
     ]
 

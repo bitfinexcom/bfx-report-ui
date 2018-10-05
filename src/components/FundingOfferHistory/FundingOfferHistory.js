@@ -270,7 +270,7 @@ class FundingOfferHistory extends PureComponent {
         id: 'mtsUpdate',
         name: 'foffer.column.updated',
         renderer: mtsUpdateCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate),
+        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate, timezone),
       },
     ]
 

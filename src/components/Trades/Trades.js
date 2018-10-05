@@ -229,7 +229,7 @@ class Trades extends PureComponent {
         id: 'mts',
         name: 'trades.column.time',
         renderer: mtsCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsCreate),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsCreate, timezone),
       },
     ]
 

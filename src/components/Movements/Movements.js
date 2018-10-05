@@ -176,7 +176,7 @@ class Movements extends PureComponent {
         id: 'mtsupdated',
         name: 'movements.column.updated',
         renderer: mtsUpdatedCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdated),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdated, timezone),
       },
       {
         id: 'currency',

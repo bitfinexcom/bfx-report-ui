@@ -260,7 +260,7 @@ class Ledgers extends PureComponent {
         id: 'mts',
         name: 'ledgers.column.time',
         renderer: mtsCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mts),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mts, timezone),
       },
     ]
 

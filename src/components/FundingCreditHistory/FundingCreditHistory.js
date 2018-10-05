@@ -284,13 +284,13 @@ class FundingCreditHistory extends PureComponent {
         id: 'mtsOpening',
         name: 'fcredit.column.opening',
         renderer: mtsOpeningCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsOpening),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsOpening, timezone),
       },
       {
         id: 'mtsLastPayout',
         name: 'fcredit.column.lastpayout',
         renderer: mtsLastPayoutCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsLastPayout),
+        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsLastPayout, timezone),
       },
       {
         id: 'positionPair',
@@ -302,7 +302,7 @@ class FundingCreditHistory extends PureComponent {
         id: 'mtsUpdate',
         name: 'fcredit.column.updated',
         renderer: mtsUpdateCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate),
+        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate, timezone),
       },
     ]
 
