@@ -52,5 +52,4 @@ DataTable.propTypes = {
 
 DataTable.defaultProps = {}
 
-
 export default injectIntl(DataTable)
