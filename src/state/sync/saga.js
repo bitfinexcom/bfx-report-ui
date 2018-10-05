@@ -9,25 +9,20 @@ import { delay } from 'redux-saga'
 
 import { makeFetchCall } from 'state/utils'
 import { getAuthStatus, selectAuth } from 'state/auth/selectors'
-import queryTypes from 'state/auth/constants'
+import authTypes from 'state/auth/constants'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 
 import types from './constants'
 import actions from './actions'
 import { getSyncMode } from './selectors'
 
-// const checkIsSyncMode = () => makeFetchCall('isSyncMode')
-const checkIsSyncModeWithDbData = () => makeFetchCall('isSyncModeWithDbData')
+const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
 const getSyncProgress = () => makeFetchCall('getSyncProgress')
 const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
-
-const login = auth => makeFetchCall('login', auth)
-const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
-const enableScheduler = auth => makeFetchCall('enableScheduler', auth)
-
-const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
-const disableScheduler = auth => makeFetchCall('disableScheduler', auth)
+const syncNow = auth => makeFetchCall('syncNow', auth)
 const logout = auth => makeFetchCall('logout', auth)
+const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
+const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
 
 function updateSyncErrorStatus(msg) {
   return updateErrorStatus({
@@ -38,62 +33,53 @@ function updateSyncErrorStatus(msg) {
 }
 
 function* startSyncing() {
-  yield put(updateStatus({ id: 'sync.start' }))
+  yield delay(300)
   const auth = yield select(selectAuth)
-  const { result, error } = yield call(login, auth)
+  const { result, error } = yield call(enableSyncMode, auth)
   if (result) {
     yield delay(300)
-    const { result: syncModeSuccess, error: syncModeError } = yield call(disableSyncMode, auth)
-    yield delay(300)
-    const { result: schedulerEnabled, error: schedulerError } = yield call(enableScheduler, auth)
-    if (schedulerEnabled && syncModeSuccess) {
+    const { result: syncNowOk, error: syncNowError } = yield call(syncNow, auth)
+    if (syncNowOk) {
       yield put(actions.setSyncMode(types.MODE_SYNCING))
+      yield put(updateStatus({ id: 'sync.start' }))
     }
-    if (schedulerError) {
-      yield put(updateSyncErrorStatus('during enableScheduler'))
-    }
-    if (syncModeError) {
-      yield put(updateSyncErrorStatus('during disableSyncMode'))
+    if (syncNowError) {
+      yield put(updateSyncErrorStatus('during syncNow'))
     }
   }
   if (error) {
-    yield put(updateSyncErrorStatus('during login'))
+    yield put(updateSyncErrorStatus('during enableSyncMode'))
   }
 }
 
 function* stopSyncing() {
-  yield put(updateStatus({ id: 'sync.stop-sync' }))
+  yield delay(300)
   const auth = yield select(selectAuth)
-  yield delay(300)
-  const { result: schedulerDisabled, error: disSchedulerError } = yield call(disableScheduler, auth)
-  yield delay(300)
-  const { result: syncModeDisabled, error: syncModeError } = yield call(disableSyncMode, auth)
-  if (schedulerDisabled && syncModeDisabled) {
-    yield delay(300)
-    const { result } = yield call(logout, auth)
-    if (result) {
-      yield put(actions.setSyncMode(types.MODE_ONLINE))
-    }
+  const { result, error } = yield call(disableSyncMode, auth)
+  if (result) {
+    yield put(actions.setSyncMode(types.MODE_ONLINE))
+    yield put(updateStatus({ id: 'sync.stop-sync' }))
   }
-
-  if (disSchedulerError) {
-    yield put(updateSyncErrorStatus('during disableScheduler'))
-  }
-  if (syncModeError) {
+  if (error) {
     yield put(updateSyncErrorStatus('during disableSyncMode'))
   }
 }
 
 function* forceQueryFromDb() {
   yield put(updateStatus({ id: 'sync.go-offline' }))
+  yield put(actions.setSyncMode(types.MODE_OFFLINE))
+}
+
+function* syncLogout() {
   yield delay(300)
   const auth = yield select(selectAuth)
-  const { result, error } = yield call(enableSyncMode, auth)
+  const { result, error } = yield call(logout, auth)
   if (result) {
-    yield put(actions.setSyncMode(types.MODE_OFFLINE))
+    yield put(actions.setSyncMode(types.MODE_ONLINE))
+    yield put(updateStatus({ id: 'sync.logout' }))
   }
   if (error) {
-    yield put(updateSyncErrorStatus('during enableSyncMode'))
+    yield put(updateSyncErrorStatus('during logout'))
   }
 }
 
@@ -102,8 +88,9 @@ function* syncWatcher() {
     while (true) {
       const authState = yield select(getAuthStatus)
       if (authState) {
-        // const { result: isSyncMode, error: syncError } = yield call(checkIsSyncMode)
-        const { result: isQueryWithDb } = yield call(checkIsSyncModeWithDbData)
+        const auth = yield select(selectAuth)
+        const { result: isQueryWithDb } = yield call(checkIsSyncModeWithDbData, auth)
+        // get current ui state
         const syncMode = yield select(getSyncMode)
         yield delay(300)
         const { result: progress } = yield call(getSyncProgress)
@@ -134,8 +121,6 @@ function* syncWatcher() {
                     yield put(updateSyncErrorStatus('during check isSchedulerEnabled'))
                   }
                 }
-              } else { // when progress 100 => offline mode
-                yield put(actions.forceQueryFromDb())
               }
               break
             // when progress false => online mode
@@ -168,5 +153,6 @@ export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
-  yield takeLatest(queryTypes.UPDATE_AUTH_STATUS, syncWatcher)
+  yield takeLatest(authTypes.UPDATE_AUTH_STATUS, syncWatcher)
+  yield takeLatest(authTypes.LOGOUT, syncLogout)
 }

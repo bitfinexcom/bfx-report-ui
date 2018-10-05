@@ -5,23 +5,16 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { postJsonfetch } from 'state/utils'
 import { setAuthToken } from 'state/base/actions'
-import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { getAuthToken } from 'state/base/selectors'
-import { platform } from 'var/config'
+import { getAuth } from 'state/utils'
+import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 
 import types from './constants'
 import actions from './actions'
 
 const LOCAL_AUTHTOKEN = 'local'
-
-function getAuth(auth) {
-  return postJsonfetch(`${platform.API_URL}/check-auth`, {
-    auth,
-  })
-}
 
 function* checkAuth({ payload: flag }) {
   try {
