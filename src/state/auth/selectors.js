@@ -1,9 +1,8 @@
-import { getApiKey, getApiSecret } from 'state/base/selectors'
+import { getApiKey, getApiSecret, getAuthToken } from 'state/base/selectors'
 
 const getAuth = state => state.auth
 
 export const getAuthStatus = state => getAuth(state).authStatus
-export const getAuthToken = state => getAuth(state).authToken
 export const getIsShown = state => getAuth(state).isShown
 
 export function selectAuth(state) {

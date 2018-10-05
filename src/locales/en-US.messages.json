@@ -19,6 +19,7 @@
   "auth.auth.note1": "Visit ",
   "auth.auth.note2": " to get the readonly API key and secret pair.",
   "auth.required": "(required)",
+  "auth.notoken": "Auth fail due to not found any authToken",
   "loading": "Loading...",
   "nodata": "No related data in this time range. You can try another time range.",
   "fcredit.title": "Funding Credit (Used)",

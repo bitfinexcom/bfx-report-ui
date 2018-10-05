@@ -23,6 +23,17 @@ export function setApiSecret(secret) {
 }
 
 /**
+ * Create an action to store Auth Token.
+ * @param {string} token
+ */
+export function setAuthToken(token) {
+  return {
+    type: types.SET_AUTH_TOKEN,
+    payload: token,
+  }
+}
+
+/**
  * Create an action to store default language.
  * @param {string} lang
  */
@@ -69,6 +80,7 @@ export function setTimezone(timezone) {
 export default {
   setApiKey,
   setApiSecret,
+  setAuthToken,
   setLang,
   setMenuMode,
   setTheme,

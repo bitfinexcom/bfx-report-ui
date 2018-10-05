@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to check Auth state.
+ * @param {string} flag auth type
  */
-export function checkAuth() {
+export function checkAuth(flag) {
   return {
     type: types.CHECK_AUTH,
+    payload: flag,
   }
 }
 
@@ -17,6 +19,16 @@ export function checkAuthWithToken(token) {
   return {
     type: types.CHECK_AUTH_WITH_TOKEN,
     payload: token,
+  }
+}
+
+/**
+ * Create an action to check Auth state with local stored authToken.
+ * @param {string} auth token
+ */
+export function checkAuthWithLocalToken() {
+  return {
+    type: types.CHECK_AUTH_WITH_LOCAL_TOKEN,
   }
 }
 
@@ -49,22 +61,11 @@ export function updateAuthStatus(result) {
   }
 }
 
-/**
- * Create an action to store Auth Token.
- * @param {string} token
- */
-export function setAuthToken(token) {
-  return {
-    type: types.SET_AUTH_TOKEN,
-    payload: token,
-  }
-}
-
 export default {
   checkAuth,
   checkAuthWithToken,
+  checkAuthWithLocalToken,
   logout,
-  setAuthToken,
   showAuth,
   updateAuthStatus,
 }
