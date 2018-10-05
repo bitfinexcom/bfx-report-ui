@@ -89,6 +89,7 @@ class FundingLoanHistory extends PureComponent {
       jumpPage,
       loading,
       refresh,
+      timezone,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
@@ -168,7 +169,7 @@ class FundingLoanHistory extends PureComponent {
     }
 
     const mtsOpeningCellRenderer = (rowIndex) => {
-      const mtsOpening = formatTime(filteredData[rowIndex].mtsOpening)
+      const mtsOpening = formatTime(filteredData[rowIndex].mtsOpening, timezone)
       return (
         <Cell tooltip={mtsOpening}>
           <TruncatedFormat>
@@ -179,7 +180,7 @@ class FundingLoanHistory extends PureComponent {
     }
 
     const mtsLastPayoutCellRenderer = (rowIndex) => {
-      const mtsLastPayout = formatTime(filteredData[rowIndex].mtsLastPayout)
+      const mtsLastPayout = formatTime(filteredData[rowIndex].mtsLastPayout, timezone)
       return (
         <Cell tooltip={mtsLastPayout}>
           <TruncatedFormat>
@@ -190,7 +191,7 @@ class FundingLoanHistory extends PureComponent {
     }
 
     const mtsUpdateCellRenderer = (rowIndex) => {
-      const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate)
+      const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
       return (
         <Cell tooltip={mtsUpdate}>
           <TruncatedFormat>

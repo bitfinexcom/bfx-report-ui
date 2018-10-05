@@ -3,10 +3,12 @@ import { intlShape } from 'react-intl'
 
 export const propTypes = {
   intl: intlShape.isRequired,
-  setLang: PropTypes.func.isRequired,
+  setTheme: PropTypes.func.isRequired,
+  setTimeZone: PropTypes.func.isRequired,
+  theme: PropTypes.string,
+  timezone: PropTypes.string,
 }
 
 export const defaultProps = {
   intl: {},
-  setLang: () => {},
 }

@@ -24,18 +24,19 @@ class ExportDialog extends PureComponent {
       start,
       startExport,
       type,
+      timezone,
     } = this.props
     if (!isExportOpen) {
       return null
     }
-
+    const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
     const intlType = intl.formatMessage({ id: `${type}.title` })
     const renderMessage = !email ? (
       <Fragment>
         {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
-          {`${formatDate(start)} — ${formatDate(end)}`}
+          {timeSpan}
         </span>
         &nbsp;
         {intl.formatMessage({ id: 'timeframe.download.store' }, { intlType })}
@@ -45,7 +46,7 @@ class ExportDialog extends PureComponent {
         {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
-          {`${formatDate(start)} — ${formatDate(end)}`}
+          {timeSpan}
         </span>
         &nbsp;
         {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}

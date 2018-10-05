@@ -8,6 +8,7 @@ import {
   ButtonGroup,
   Intent,
 } from '@blueprintjs/core'
+import { TimezonePicker } from '@blueprintjs/timezone'
 
 import LangMenu from 'components/LangMenu'
 
@@ -31,6 +32,14 @@ const xsClasses = classNames(
   'hidden-xl',
 )
 
+const fieldClasses = classNames(
+  'col-xs-12',
+  'col-sm-9',
+  'col-md-9',
+  'col-lg-9',
+  'col-xl-9',
+)
+
 class PrefDialog extends PureComponent {
   static propTypes = propTypes
 
@@ -40,6 +49,7 @@ class PrefDialog extends PureComponent {
     super(props)
     this.switchDark = this.switchTheme.bind(this, 'bp3-dark')
     this.switchLight = this.switchTheme.bind(this, 'bp3-light')
+    this.handleTimezoneChange = this.handleTimezoneChange.bind(this)
   }
 
   switchTheme(theme, e) {
@@ -48,12 +58,18 @@ class PrefDialog extends PureComponent {
     this.props.setTheme(theme)
   }
 
+  handleTimezoneChange(timezone) {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.setTimeZone(timezone)
+  }
+
   render() {
     const {
       handlePrefDialogClose,
       intl,
       isPrefOpen,
       theme,
+      timezone,
     } = this.props
     if (!isPrefOpen) {
       return null
@@ -79,7 +95,7 @@ class PrefDialog extends PureComponent {
             <div className={xsClasses}>
               {intl.formatMessage({ id: 'preferences.language' })}
             </div>
-            <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9 col-xl-9'>
+            <div className={fieldClasses}>
               <LangMenu />
             </div>
           </div>
@@ -90,7 +106,7 @@ class PrefDialog extends PureComponent {
             <div className={xsClasses}>
               {intl.formatMessage({ id: 'preferences.theme' })}
             </div>
-            <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9 col-xl-9'>
+            <div className={fieldClasses}>
               <ButtonGroup>
                 <Button
                   name='light'
@@ -105,6 +121,21 @@ class PrefDialog extends PureComponent {
                   intent={theme.includes('dark') ? Intent.PRIMARY : undefined}
                 />
               </ButtonGroup>
+            </div>
+          </div>
+          <div className='row'>
+            <div className={descClasses}>
+              {intl.formatMessage({ id: 'preferences.timezone' })}
+            </div>
+            <div className={xsClasses}>
+              {intl.formatMessage({ id: 'preferences.timezone' })}
+            </div>
+            <div className={fieldClasses}>
+              <TimezonePicker
+                showLocalTimezone
+                value={timezone}
+                onChange={this.handleTimezoneChange}
+              />
             </div>
           </div>
         </div>

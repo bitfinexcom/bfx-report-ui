@@ -88,6 +88,7 @@ class FundingOfferHistory extends PureComponent {
       jumpPage,
       loading,
       refresh,
+      timezone,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
@@ -179,7 +180,7 @@ class FundingOfferHistory extends PureComponent {
     }
 
     const mtsUpdateCellRenderer = (rowIndex) => {
-      const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate)
+      const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
       return (
         <Cell tooltip={mtsUpdate}>
           <TruncatedFormat>

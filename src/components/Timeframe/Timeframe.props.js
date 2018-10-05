@@ -6,6 +6,7 @@ export const propTypes = {
   start: PropTypes.number,
   end: PropTypes.number,
   menuMode: PropTypes.string,
+  timezone: PropTypes.string,
 }
 
 export const defaultProps = {
@@ -13,4 +14,5 @@ export const defaultProps = {
   start: 0,
   end: 0,
   menuMode: '',
+  timezone: '',
 }

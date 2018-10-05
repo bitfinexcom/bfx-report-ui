@@ -88,6 +88,7 @@ class Trades extends PureComponent {
       loading,
       refresh,
       targetPair,
+      timezone,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const pairList = pairs ? [ALL, ...pairs] : [ALL, ...existingPairs]
@@ -154,7 +155,7 @@ class Trades extends PureComponent {
     }
 
     const mtsCellRenderer = (rowIndex) => {
-      const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate)
+      const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate, timezone)
       return (
         <Cell tooltip={mtsCreate}>
           <TruncatedFormat>

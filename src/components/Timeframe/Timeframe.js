@@ -53,12 +53,14 @@ class Timeframe extends PureComponent {
       menuMode,
       start,
       timeRange,
+      timezone,
     } = this.props
+    const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
     return menuMode === baseType.MENU_MODE_ICON ? (
       <MenuItem
         icon='calendar'
         text=''
-        title={`${formatDate(start)} — ${formatDate(end)}`}
+        title={timeSpan}
         className='bitfinex-dropdown'
       >
         <MenuItem
@@ -100,7 +102,7 @@ class Timeframe extends PureComponent {
     ) : (
       <MenuItem
         icon='calendar'
-        text={`${formatDate(start)} — ${formatDate(end)}`}
+        text={timeSpan}
         className='bitfinex-dropdown'
       >
         <MenuItem

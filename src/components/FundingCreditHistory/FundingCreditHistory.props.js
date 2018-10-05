@@ -13,6 +13,7 @@ const FCREDIT_ENTRIES_PROPS = PropTypes.shape({
   mtsOpening: PropTypes.number,
   mtsLastPayout: PropTypes.number,
   positionPair: PropTypes.string,
+  timezone: PropTypes.string,
 })
 
 export const propTypes = {

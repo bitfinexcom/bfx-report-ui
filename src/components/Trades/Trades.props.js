@@ -8,6 +8,7 @@ const TRADES_ENTRIES_PROPS = PropTypes.shape({
   execPrice: PropTypes.number.isRequired,
   fee: PropTypes.number,
   feeCurrency: PropTypes.string,
+  timezone: PropTypes.string,
 })
 
 export const propTypes = {

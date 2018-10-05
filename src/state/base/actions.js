@@ -44,7 +44,6 @@ export function setTheme(theme) {
   }
 }
 
-
 /**
  * Create an action to store menu mode.
  * @param {string} mode
@@ -56,10 +55,22 @@ export function setMenuMode(mode) {
   }
 }
 
+/**
+ * Create an action to store timezone.
+ * @param {string} timezone
+ */
+export function setTimezone(timezone) {
+  return {
+    type: types.SET_TIMEZONE,
+    payload: timezone,
+  }
+}
+
 export default {
   setApiKey,
   setApiSecret,
   setLang,
   setMenuMode,
   setTheme,
+  setTimezone,
 }
