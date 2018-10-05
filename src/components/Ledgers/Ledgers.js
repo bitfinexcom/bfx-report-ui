@@ -6,8 +6,6 @@ import {
 } from '@blueprintjs/core'
 import {
   Cell,
-  Column,
-  Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
 
@@ -24,6 +22,8 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
+
+import DataTable from 'ui/DataTable'
 
 import { propTypes, defaultProps } from './Ledgers.props'
 
@@ -214,6 +214,56 @@ class Ledgers extends PureComponent {
       />
     )
 
+    const tableColums = [
+      {
+        id: 'description',
+        name: 'ledgers.column.description',
+        renderer: descriptionCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].description,
+      },
+      {
+        id: 'currency',
+        name: 'ledgers.column.currency',
+        renderer: currencyCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].currency,
+      },
+      {
+        id: 'credit',
+        name: 'ledgers.column.credit',
+        renderer: creditCellRenderer,
+        tooltip: (rowIndex) => {
+          const { amount, currency } = filteredData[rowIndex]
+          const show = parseFloat(amount) > 0
+          return show ? `${amount} ${currency}` : ''
+        },
+      },
+      {
+        id: 'debit',
+        name: 'ledgers.column.debit',
+        renderer: debitCellRenderer,
+        tooltip: (rowIndex) => {
+          const { amount, currency } = filteredData[rowIndex]
+          const show = parseFloat(amount) < 0
+          return show ? `${amount} ${currency}` : ''
+        },
+      },
+      {
+        id: 'balance',
+        name: 'ledgers.column.balance',
+        renderer: balanceCellRenderer,
+        tooltip: (rowIndex) => {
+          const { balance, currency } = filteredData[rowIndex]
+          return `${balance} ${currency}`
+        },
+      },
+      {
+        id: 'mts',
+        name: 'ledgers.column.time',
+        renderer: mtsCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mts),
+      },
+    ]
+
     let showContent
     if (loading) {
       showContent = (
@@ -245,43 +295,11 @@ class Ledgers extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
-          <Table
-            className='bitfinex-table'
+          <DataTable
             numRows={numRows}
-            enableRowHeader={false}
             columnWidths={COLUMN_WIDTHS}
-          >
-            <Column
-              id='description'
-              name={intl.formatMessage({ id: 'ledgers.column.description' })}
-              cellRenderer={descriptionCellRenderer}
-            />
-            <Column
-              id='currency'
-              name={intl.formatMessage({ id: 'ledgers.column.currency' })}
-              cellRenderer={currencyCellRenderer}
-            />
-            <Column
-              id='credit'
-              name={intl.formatMessage({ id: 'ledgers.column.credit' })}
-              cellRenderer={creditCellRenderer}
-            />
-            <Column
-              id='debit'
-              name={intl.formatMessage({ id: 'ledgers.column.debit' })}
-              cellRenderer={debitCellRenderer}
-            />
-            <Column
-              id='balance'
-              name={intl.formatMessage({ id: 'ledgers.column.balance' })}
-              cellRenderer={balanceCellRenderer}
-            />
-            <Column
-              id='mts'
-              name={intl.formatMessage({ id: 'ledgers.column.time' })}
-              cellRenderer={mtsCellRenderer}
-            />
-          </Table>
+            tableColums={tableColums}
+          />
           {renderPagination}
         </Fragment>
       )
