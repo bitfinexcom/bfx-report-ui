@@ -268,8 +268,10 @@ class FundingLoanHistory extends PureComponent {
         id: 'period',
         name: 'floan.column.period',
         renderer: periodCellRenderer,
-        tooltip: rowIndex =>
-          `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'floan.column.period.days' })}`,
+        tooltip: (rowIndex) => {
+          const days = intl.formatMessage({ id: 'floan.column.period.days' })
+          return `${filteredData[rowIndex].period} ${days}`
+        },
       },
       {
         id: 'mtsOpening',
@@ -281,13 +283,13 @@ class FundingLoanHistory extends PureComponent {
         id: 'mtsLastPayout',
         name: 'floan.column.lastpayout',
         renderer: mtsLastPayoutCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsLastPayout, timezone),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsLastPayout, timezone),
       },
       {
         id: 'mtsUpdate',
         name: 'floan.column.updated',
         renderer: mtsUpdateCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
       },
     ]
 

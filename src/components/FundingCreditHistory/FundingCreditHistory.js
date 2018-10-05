@@ -277,8 +277,10 @@ class FundingCreditHistory extends PureComponent {
         id: 'period',
         name: 'fcredit.column.period',
         renderer: periodCellRenderer,
-        tooltip: rowIndex =>
-          `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'fcredit.column.period.days' })}`,
+        tooltip: (rowIndex) => {
+          const days = intl.formatMessage({ id: 'fcredit.column.period.days' })
+          return `${filteredData[rowIndex].period} ${days}`
+        },
       },
       {
         id: 'mtsOpening',
@@ -290,19 +292,19 @@ class FundingCreditHistory extends PureComponent {
         id: 'mtsLastPayout',
         name: 'fcredit.column.lastpayout',
         renderer: mtsLastPayoutCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsLastPayout, timezone),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsLastPayout, timezone),
       },
       {
         id: 'positionPair',
         name: 'fcredit.column.positionpair',
         renderer: positionPairCellRenderer,
-        tooltip: rowIndex =>filteredData[rowIndex].positionPair,
+        tooltip: rowIndex => filteredData[rowIndex].positionPair,
       },
       {
         id: 'mtsUpdate',
         name: 'fcredit.column.updated',
         renderer: mtsUpdateCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
       },
     ]
 

@@ -220,7 +220,7 @@ class Trades extends PureComponent {
         id: 'fee',
         name: 'trades.column.fee',
         renderer: feeCellRenderer,
-        tooltip: rowIndex => {
+        tooltip: (rowIndex) => {
           const { fee, feeCurrency } = filteredData[rowIndex]
           return `${fee} ${feeCurrency}`
         },

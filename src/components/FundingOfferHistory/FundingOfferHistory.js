@@ -263,14 +263,16 @@ class FundingOfferHistory extends PureComponent {
         id: 'period',
         name: 'foffer.column.period',
         renderer: periodCellRenderer,
-        tooltip: rowIndex =>
-          `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'foffer.column.period.days' })}`,
+        tooltip: (rowIndex) => {
+          const days = intl.formatMessage({ id: 'foffer.column.period.days' })
+          return `${filteredData[rowIndex].period} ${days}`
+        },
       },
       {
         id: 'mtsUpdate',
         name: 'foffer.column.updated',
         renderer: mtsUpdateCellRenderer,
-        tooltip: rowIndex =>  formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
       },
     ]
 
