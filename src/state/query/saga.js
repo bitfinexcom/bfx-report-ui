@@ -22,6 +22,7 @@ import { getTargetSymbol as getLedgersSymbol } from 'state/ledgers/selectors'
 import { getTargetSymbol as getMovementsSymbol } from 'state/movements/selectors'
 import { getTargetPair as getOrdersPair } from 'state/orders/selectors'
 import { getTargetPair as getTradesPair } from 'state/trades/selectors'
+import { getTimezone } from 'state/base/selectors'
 
 import { platform } from 'var/config'
 
@@ -40,13 +41,16 @@ const {
   MENU_WITHDRAWALS,
 } = types
 
-function getCSV(auth, query, target, symbol) {
+function getCSV(auth, query, target, symbol, timezone) {
   const params = _omit(getTimeFrame(query, target), 'limit')
   if (query.email) {
     params.email = query.email
   }
   if (symbol) {
     params.symbol = symbol
+  }
+  if (timezone) {
+    params.timezone = timezone
   }
   let method = ''
   switch (target) {
@@ -127,9 +131,10 @@ function* exportCSV({ payload: target }) {
   try {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
+    const timezone = yield select(getTimezone)
     const selector = getSelector(target)
     const sign = selector ? yield select(selector) : ''
-    const { result, error } = yield call(getCSV, auth, query, target, formatSymbol(target, sign))
+    const { result, error } = yield call(getCSV, auth, query, target, formatSymbol(target, sign), timezone)
     if (result) {
       if (result.isSendEmail) {
         yield put(updateSuccessStatus({
