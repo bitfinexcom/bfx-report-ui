@@ -8,6 +8,7 @@ const TRADES_ENTRIES_PROPS = PropTypes.shape({
   fee: PropTypes.number,
   feeCurrency: PropTypes.string,
   mtsCreate: PropTypes.number.isRequired,
+  orderID: PropTypes.number.isRequired,
 })
 
 export const propTypes = {
