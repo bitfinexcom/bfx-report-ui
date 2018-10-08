@@ -106,6 +106,10 @@ function getSelector(target) {
 }
 
 function formatSymbol(target, sign) {
+  // return directly if no sign
+  if (!sign) {
+    return ''
+  }
   switch (target) {
     case MENU_LEDGERS:
     case MENU_WITHDRAWALS:
