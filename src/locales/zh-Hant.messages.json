@@ -21,6 +21,7 @@
   "auth.required": "（必填）",
   "loading": "讀取中...",
   "nodata": "沒有相關資料。請試試其他時間範圍。",
+  "column.id": "#",
   "fcredit.title": "信用融資（已使用）",
   "fcredit.column.symbol": "貨幣",
   "fcredit.column.side": "SIDE",

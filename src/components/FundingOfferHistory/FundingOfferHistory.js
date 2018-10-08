@@ -6,16 +6,15 @@ import {
 } from '@blueprintjs/core'
 import {
   Cell,
-  Column,
-  Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import DataTable from 'ui/DataTable'
+import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
 import SymbolSelector from 'ui/SymbolSelector'
 import queryConstants from 'state/query/constants'
@@ -168,7 +167,7 @@ class FundingOfferHistory extends PureComponent {
     }
 
     const periodCellRenderer = (rowIndex) => {
-      const period = `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'fcredit.column.period.days' })}`
+      const period = `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'foffer.column.period.days' })}`
       return (
         <Cell
           className='bitfinex-text-align-right'
@@ -217,6 +216,66 @@ class FundingOfferHistory extends PureComponent {
       />
     )
 
+    const tableColums = [
+      {
+        id: 'id',
+        name: 'column.id',
+        renderer: idCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].id,
+      },
+      {
+        id: 'symbol',
+        name: 'foffer.column.symbol',
+        renderer: symbolCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].symbol,
+      },
+      {
+        id: 'amount',
+        name: 'foffer.column.amount',
+        renderer: amountCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].amount,
+      },
+      {
+        id: 'amountorig',
+        name: 'foffer.column.amount-orig',
+        renderer: amountOrigCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].amountOrig,
+      },
+      {
+        id: 'type',
+        name: 'foffer.column.type',
+        renderer: typeCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].type,
+      },
+      {
+        id: 'status',
+        name: 'foffer.column.status',
+        renderer: statusCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].status,
+      },
+      {
+        id: 'rate',
+        name: 'foffer.column.rate',
+        renderer: rateCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].rate,
+      },
+      {
+        id: 'period',
+        name: 'foffer.column.period',
+        renderer: periodCellRenderer,
+        tooltip: (rowIndex) => {
+          const days = intl.formatMessage({ id: 'foffer.column.period.days' })
+          return `${filteredData[rowIndex].period} ${days}`
+        },
+      },
+      {
+        id: 'mtsUpdate',
+        name: 'foffer.column.updated',
+        renderer: mtsUpdateCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      },
+    ]
+
     let showContent
     if (loading) {
       showContent = (
@@ -248,58 +307,11 @@ class FundingOfferHistory extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
-          <Table
-            className='bitfinex-table'
+          <DataTable
             numRows={numRows}
-            enableRowHeader={false}
             columnWidths={COLUMN_WIDTHS}
-          >
-            <Column
-              id='id'
-              name='#'
-              cellRenderer={idCellRenderer}
-            />
-            <Column
-              id='symbol'
-              name={intl.formatMessage({ id: 'foffer.column.symbol' })}
-              cellRenderer={symbolCellRenderer}
-            />
-            <Column
-              id='amount'
-              name={intl.formatMessage({ id: 'foffer.column.amount' })}
-              cellRenderer={amountCellRenderer}
-            />
-            <Column
-              id='amountorig'
-              name={intl.formatMessage({ id: 'foffer.column.amount-orig' })}
-              cellRenderer={amountOrigCellRenderer}
-            />
-            <Column
-              id='type'
-              name={intl.formatMessage({ id: 'foffer.column.type' })}
-              cellRenderer={typeCellRenderer}
-            />
-            <Column
-              id='status'
-              name={intl.formatMessage({ id: 'foffer.column.status' })}
-              cellRenderer={statusCellRenderer}
-            />
-            <Column
-              id='rate'
-              name={intl.formatMessage({ id: 'foffer.column.rate' })}
-              cellRenderer={rateCellRenderer}
-            />
-            <Column
-              id='period'
-              name={intl.formatMessage({ id: 'foffer.column.period' })}
-              cellRenderer={periodCellRenderer}
-            />
-            <Column
-              id='mtsUpdate'
-              name={intl.formatMessage({ id: 'foffer.column.updated' })}
-              cellRenderer={mtsUpdateCellRenderer}
-            />
-          </Table>
+            tableColums={tableColums}
+          />
           {renderPagination}
         </Fragment>
       )

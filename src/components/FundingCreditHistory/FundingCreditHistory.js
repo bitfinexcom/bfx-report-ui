@@ -6,16 +6,15 @@ import {
 } from '@blueprintjs/core'
 import {
   Cell,
-  Column,
-  Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import DataTable from 'ui/DataTable'
+import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
 import SymbolSelector from 'ui/SymbolSelector'
 import queryConstants from 'state/query/constants'
@@ -237,6 +236,78 @@ class FundingCreditHistory extends PureComponent {
       />
     )
 
+    const tableColums = [
+      {
+        id: 'id',
+        name: 'column.id',
+        renderer: idCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].id,
+      },
+      {
+        id: 'symbol',
+        name: 'fcredit.column.symbol',
+        renderer: symbolCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].symbol,
+      },
+      {
+        id: 'side',
+        name: 'fcredit.column.side',
+        renderer: sideCellRenderer,
+        tooltip: rowIndex => intl.formatMessage({ id: `fcredit.side.${getSideMsg(filteredData[rowIndex].side)}` }),
+      },
+      {
+        id: 'amount',
+        name: 'fcredit.column.amount',
+        renderer: amountCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].amount,
+      },
+      {
+        id: 'status',
+        name: 'fcredit.column.status',
+        renderer: statusCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].status,
+      },
+      {
+        id: 'rate',
+        name: 'fcredit.column.rate',
+        renderer: rateCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].rate,
+      },
+      {
+        id: 'period',
+        name: 'fcredit.column.period',
+        renderer: periodCellRenderer,
+        tooltip: (rowIndex) => {
+          const days = intl.formatMessage({ id: 'fcredit.column.period.days' })
+          return `${filteredData[rowIndex].period} ${days}`
+        },
+      },
+      {
+        id: 'mtsOpening',
+        name: 'fcredit.column.opening',
+        renderer: mtsOpeningCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsOpening, timezone),
+      },
+      {
+        id: 'mtsLastPayout',
+        name: 'fcredit.column.lastpayout',
+        renderer: mtsLastPayoutCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsLastPayout, timezone),
+      },
+      {
+        id: 'positionPair',
+        name: 'fcredit.column.positionpair',
+        renderer: positionPairCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].positionPair,
+      },
+      {
+        id: 'mtsUpdate',
+        name: 'fcredit.column.updated',
+        renderer: mtsUpdateCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      },
+    ]
+
     let showContent
     if (loading) {
       showContent = (
@@ -268,68 +339,11 @@ class FundingCreditHistory extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
-          <Table
-            className='bitfinex-table'
+          <DataTable
             numRows={numRows}
-            enableRowHeader={false}
             columnWidths={COLUMN_WIDTHS}
-          >
-            <Column
-              id='id'
-              name='#'
-              cellRenderer={idCellRenderer}
-            />
-            <Column
-              id='symbol'
-              name={intl.formatMessage({ id: 'fcredit.column.symbol' })}
-              cellRenderer={symbolCellRenderer}
-            />
-            <Column
-              id='side'
-              name={intl.formatMessage({ id: 'fcredit.column.side' })}
-              cellRenderer={sideCellRenderer}
-            />
-            <Column
-              id='amount'
-              name={intl.formatMessage({ id: 'fcredit.column.amount' })}
-              cellRenderer={amountCellRenderer}
-            />
-            <Column
-              id='status'
-              name={intl.formatMessage({ id: 'fcredit.column.status' })}
-              cellRenderer={statusCellRenderer}
-            />
-            <Column
-              id='rate'
-              name={intl.formatMessage({ id: 'fcredit.column.rate' })}
-              cellRenderer={rateCellRenderer}
-            />
-            <Column
-              id='period'
-              name={intl.formatMessage({ id: 'fcredit.column.period' })}
-              cellRenderer={periodCellRenderer}
-            />
-            <Column
-              id='mtsOpening'
-              name={intl.formatMessage({ id: 'fcredit.column.opening' })}
-              cellRenderer={mtsOpeningCellRenderer}
-            />
-            <Column
-              id='mtsLastPayout'
-              name={intl.formatMessage({ id: 'fcredit.column.lastpayout' })}
-              cellRenderer={mtsLastPayoutCellRenderer}
-            />
-            <Column
-              id='positionPair'
-              name={intl.formatMessage({ id: 'fcredit.column.positionpair' })}
-              cellRenderer={positionPairCellRenderer}
-            />
-            <Column
-              id='mtsUpdate'
-              name={intl.formatMessage({ id: 'fcredit.column.updated' })}
-              cellRenderer={mtsUpdateCellRenderer}
-            />
-          </Table>
+            tableColums={tableColums}
+          />
           {renderPagination}
         </Fragment>
       )

@@ -21,6 +21,7 @@
   "auth.required": "(required)",
   "loading": "Loading...",
   "nodata": "No related data in this time range. You can try another time range.",
+  "column.id": "#",
   "fcredit.title": "Funding Credit (Used)",
   "fcredit.column.symbol": "CURRENCY",
   "fcredit.column.side": "SIDE",

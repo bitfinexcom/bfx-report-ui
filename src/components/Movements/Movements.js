@@ -6,16 +6,15 @@ import {
 } from '@blueprintjs/core'
 import {
   Cell,
-  Column,
-  Table,
   TruncatedFormat,
 } from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import DataTable from 'ui/DataTable'
+import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
 import SymbolSelector from 'ui/SymbolSelector'
 import queryConstants from 'state/query/constants'
@@ -166,6 +165,48 @@ class Movements extends PureComponent {
       )
     }
 
+    const tableColums = [
+      {
+        id: 'id',
+        name: 'column.id',
+        renderer: idCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].id,
+      },
+      {
+        id: 'mtsupdated',
+        name: 'movements.column.updated',
+        renderer: mtsUpdatedCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdated, timezone),
+      },
+      {
+        id: 'currency',
+        name: 'movements.column.currency',
+        renderer: currencyCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].currency,
+      },
+      {
+        id: 'status',
+        name: 'movements.column.status',
+        renderer: statusCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].status,
+      },
+      {
+        id: 'amount',
+        name: 'movements.column.amount',
+        renderer: amountCellRenderer,
+        tooltip: (rowIndex) => {
+          const { amount, currency } = filteredData[rowIndex]
+          return `${amount} ${currency}`
+        },
+      },
+      {
+        id: 'destination',
+        name: 'movements.column.destination',
+        renderer: destinationCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].destinationAddress,
+      },
+    ]
+
     const renderSymbolSelector = (
       <Fragment>
         &nbsp;
@@ -225,43 +266,11 @@ class Movements extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}
-          <Table
-            className='bitfinex-table'
+          <DataTable
             numRows={numRows}
-            enableRowHeader={false}
             columnWidths={COLUMN_WIDTHS}
-          >
-            <Column
-              id='id'
-              name='#'
-              cellRenderer={idCellRenderer}
-            />
-            <Column
-              id='mtsupdated'
-              name={intl.formatMessage({ id: 'movements.column.updated' })}
-              cellRenderer={mtsUpdatedCellRenderer}
-            />
-            <Column
-              id='currency'
-              name={intl.formatMessage({ id: 'movements.column.currency' })}
-              cellRenderer={currencyCellRenderer}
-            />
-            <Column
-              id='status'
-              name={intl.formatMessage({ id: 'movements.column.status' })}
-              cellRenderer={statusCellRenderer}
-            />
-            <Column
-              id='amount'
-              name={intl.formatMessage({ id: 'movements.column.amount' })}
-              cellRenderer={amountCellRenderer}
-            />
-            <Column
-              id='destination'
-              name={intl.formatMessage({ id: 'movements.column.destination' })}
-              cellRenderer={destinationCellRenderer}
-            />
-          </Table>
+            tableColums={tableColums}
+          />
           {renderPagination}
         </Fragment>
       )
