@@ -3,12 +3,12 @@ import { intlShape } from 'react-intl'
 
 const TRADES_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  mtsCreate: PropTypes.number.isRequired,
   execAmount: PropTypes.number.isRequired,
   execPrice: PropTypes.number.isRequired,
   fee: PropTypes.number,
   feeCurrency: PropTypes.string,
-  timezone: PropTypes.string,
+  mtsCreate: PropTypes.number.isRequired,
+  orderID: PropTypes.number.isRequired,
 })
 
 export const propTypes = {
@@ -24,8 +24,9 @@ export const propTypes = {
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  targetPair: PropTypes.string,
   setTargetPair: PropTypes.func.isRequired,
+  targetPair: PropTypes.string,
+  timezone: PropTypes.string,
 }
 
 export const defaultProps = {

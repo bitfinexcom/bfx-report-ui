@@ -26,7 +26,7 @@ import {
 
 import { propTypes, defaultProps } from './Trades.props'
 
-const COLUMN_WIDTHS = [85, 80, 125, 125, 125, 150]
+const COLUMN_WIDTHS = [85, 100, 80, 125, 125, 125, 150]
 const LIMIT = queryConstants.DEFAULT_TRADES_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_TRADES_PAGE_SIZE
 const TYPE = queryConstants.MENU_TRADES
@@ -99,6 +99,15 @@ class Trades extends PureComponent {
       return (
         <Cell tooltip={id}>
           {id}
+        </Cell>
+      )
+    }
+
+    const orderidCellRenderer = (rowIndex) => {
+      const { orderID } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={orderID}>
+          {orderID}
         </Cell>
       )
     }
@@ -199,6 +208,12 @@ class Trades extends PureComponent {
         tooltip: rowIndex => filteredData[rowIndex].id,
       },
       {
+        id: 'order_id',
+        name: 'trades.column.orderid',
+        renderer: orderidCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].orderID,
+      },
+      {
         id: 'pair',
         name: 'trades.column.pair',
         renderer: pairCellRenderer,
@@ -208,13 +223,13 @@ class Trades extends PureComponent {
         id: 'amount',
         name: 'trades.column.amount',
         renderer: amountCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].amount,
+        tooltip: rowIndex => filteredData[rowIndex].execAmount,
       },
       {
         id: 'price',
         name: 'trades.column.price',
         renderer: priceCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].price,
+        tooltip: rowIndex => filteredData[rowIndex].execPrice,
       },
       {
         id: 'fee',

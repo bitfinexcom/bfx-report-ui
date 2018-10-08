@@ -113,6 +113,7 @@ export function ledgersReducer(state = initialState, action) {
           description,
           id,
           mts,
+          wallet,
         } = entry
         // save new symbol to updateCoins list
         if (updateCoins.indexOf(currency) === -1) {
@@ -129,6 +130,7 @@ export function ledgersReducer(state = initialState, action) {
           amount,
           balance,
           description,
+          wallet,
         }
       })
       return {

@@ -9,7 +9,6 @@ const MOVEMENTS_ENTRIES_PROPS = PropTypes.shape({
   status: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
   destinationAddress: PropTypes.string,
-  timezone: PropTypes.string,
 })
 
 export const propTypes = {
@@ -28,6 +27,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   setTargetSymbol: PropTypes.func.isRequired,
   targetSymbol: PropTypes.string,
+  timezone: PropTypes.string,
 }
 
 export const defaultProps = {
