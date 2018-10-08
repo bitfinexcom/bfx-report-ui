@@ -4,17 +4,21 @@ import types from './constants'
 
 const initialState = {
   coins: [],
+  currencies: {},
   pairs: [],
 }
 
 export function symbolsReducer(state = initialState, action) {
   switch (action.type) {
     case types.UPDATE_SYMBOLS: {
-      const { coins, pairs } = action.payload
+      const { currencies, pairs } = action.payload
+      const dict = {}
+      currencies.forEach(arr => dict[arr[0].toUpperCase()] = arr[1])
       return {
         ...state,
-        coins: coins.sort().map(sym => sym.toUpperCase()),
-        pairs: pairs.sort(),
+        coins: (currencies && currencies.map(arr => arr[0].toUpperCase()).sort()) || [],
+        currencies: dict,
+        pairs: (pairs && pairs.sort()) || [],
       }
     }
     case authTypes.LOGOUT:

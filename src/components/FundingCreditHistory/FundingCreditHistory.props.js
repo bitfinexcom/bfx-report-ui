@@ -18,6 +18,7 @@ const FCREDIT_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   coins: PropTypes.arrayOf(PropTypes.string),
+  currencies: PropTypes.objectOf(PropTypes.string),
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(FCREDIT_ENTRIES_PROPS).isRequired,
   existingCoins: PropTypes.arrayOf(PropTypes.string),

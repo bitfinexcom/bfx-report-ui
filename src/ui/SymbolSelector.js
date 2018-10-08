@@ -12,6 +12,7 @@ class SymbolSelector extends PureComponent {
     const {
       coinList,
       coins,
+      currencies,
       currentCoin,
       existingCoins,
       onSymbolSelect,
@@ -35,6 +36,7 @@ class SymbolSelector extends PureComponent {
           key={symbol}
           onClick={onSymbolSelect(symbol)}
           text={symbol}
+          label={currencies[symbol]}
         />
       )
     }
@@ -61,6 +63,7 @@ class SymbolSelector extends PureComponent {
 
 SymbolSelector.propTypes = {
   coins: PropTypes.arrayOf(PropTypes.string),
+  currencies: PropTypes.objectOf(PropTypes.string),
   coinList: PropTypes.arrayOf(PropTypes.string),
   currentCoin: PropTypes.string.isRequired,
   existingCoins: PropTypes.arrayOf(PropTypes.string),
@@ -69,6 +72,7 @@ SymbolSelector.propTypes = {
 }
 SymbolSelector.defaultProps = {
   coins: [],
+  currencies: {},
   coinList: [],
   existingCoins: [],
   wildCard: [],

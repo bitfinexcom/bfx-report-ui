@@ -76,6 +76,7 @@ class FundingOfferHistory extends PureComponent {
   render() {
     const {
       coins,
+      currencies,
       offset,
       pageOffset,
       pageLoading,
@@ -195,6 +196,7 @@ class FundingOfferHistory extends PureComponent {
         <SymbolSelector
           coinList={coinList}
           coins={coins}
+          currencies={currencies}
           currentCoin={currentCoin}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}

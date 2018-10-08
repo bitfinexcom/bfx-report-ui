@@ -78,6 +78,7 @@ class Movements extends PureComponent {
   render() {
     const {
       coins,
+      currencies,
       offset,
       pageOffset,
       pageLoading,
@@ -213,6 +214,7 @@ class Movements extends PureComponent {
         <SymbolSelector
           coinList={coinList}
           coins={coins}
+          currencies={currencies}
           currentCoin={currentCoin}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
