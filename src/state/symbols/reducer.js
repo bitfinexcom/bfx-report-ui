@@ -14,7 +14,7 @@ export function symbolsReducer(state = initialState, action) {
       const { currencies, pairs } = action.payload
       const coins = []
       const dict = {}
-      currencies.forEach(([id, name]) => {
+      currencies.forEach(({ id, name }) => {
         dict[id.toUpperCase()] = name
         coins.push(id.toUpperCase())
       })
