@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import actions from 'state/fundingCreditHistory/actions'
 import { getTimezone } from 'state/base/selectors'
-import { getCoins } from 'state/symbols/selectors'
+import { getCoins, getCurrencies } from 'state/symbols/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -17,6 +17,7 @@ import FundingCreditHistory from './FundingCreditHistory'
 
 const mapStateToProps = (state = {}) => ({
   coins: getCoins(state),
+  currencies: getCurrencies(state),
   offset: getOffset(state),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),

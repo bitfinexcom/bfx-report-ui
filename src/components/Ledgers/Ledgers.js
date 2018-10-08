@@ -76,6 +76,7 @@ class Ledgers extends PureComponent {
   render() {
     const {
       coins,
+      currencies,
       offset,
       pageOffset,
       pageLoading,
@@ -201,6 +202,7 @@ class Ledgers extends PureComponent {
         <SymbolSelector
           coinList={coinList}
           coins={coins}
+          currencies={currencies}
           currentCoin={currentCoin}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
