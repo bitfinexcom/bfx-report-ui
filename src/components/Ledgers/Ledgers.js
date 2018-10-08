@@ -24,10 +24,9 @@ import {
   getCurrentEntries,
 } from 'state/utils'
 
-
 import { propTypes, defaultProps } from './Ledgers.props'
 
-const COLUMN_WIDTHS = [500, 100, 120, 120, 120, 150]
+const COLUMN_WIDTHS = [500, 80, 100, 120, 120, 120, 150]
 const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
 const TYPE = queryConstants.MENU_LEDGERS
@@ -100,6 +99,15 @@ class Ledgers extends PureComponent {
       return (
         <Cell tooltip={description}>
           {description}
+        </Cell>
+      )
+    }
+
+    const walletCellRenderer = (rowIndex) => {
+      const { wallet } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={wallet}>
+          {wallet}
         </Cell>
       )
     }
@@ -220,6 +228,12 @@ class Ledgers extends PureComponent {
         name: 'ledgers.column.description',
         renderer: descriptionCellRenderer,
         tooltip: rowIndex => filteredData[rowIndex].description,
+      },
+      {
+        id: 'wallet',
+        name: 'ledgers.column.wallet',
+        renderer: walletCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].wallet,
       },
       {
         id: 'currency',

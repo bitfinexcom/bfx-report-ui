@@ -66,6 +66,7 @@
   "foffer.column.updated": "日期",
   "ledgers.title": "餘額",
   "ledgers.column.description": "描述",
+  "ledgers.column.wallet": "錢包",
   "ledgers.column.currency": "貨幣",
   "ledgers.column.time": "時間",
   "ledgers.column.credit": "借記",

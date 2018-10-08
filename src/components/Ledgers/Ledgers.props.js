@@ -3,11 +3,12 @@ import { intlShape } from 'react-intl'
 
 const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  currency: PropTypes.string.isRequired,
-  mts: PropTypes.number.isRequired,
   amount: PropTypes.number.isRequired,
   balance: PropTypes.number.isRequired,
-  timezone: PropTypes.string,
+  currency: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  mts: PropTypes.number.isRequired,
+  wallet: PropTypes.string.isRequired,
 })
 
 export const propTypes = {
@@ -26,6 +27,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   setTargetSymbol: PropTypes.func.isRequired,
   targetSymbol: PropTypes.string,
+  timezone: PropTypes.string,
 }
 
 export const defaultProps = {

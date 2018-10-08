@@ -66,6 +66,7 @@
   "foffer.column.updated": "DATE",
   "ledgers.title": "Ledgers",
   "ledgers.column.description": "DESCRIPTION",
+  "ledgers.column.wallet": "WALLET",
   "ledgers.column.currency": "CURRENCY",
   "ledgers.column.time": "DATE",
   "ledgers.column.credit": "CREDIT",
