@@ -13,7 +13,9 @@ export function symbolsReducer(state = initialState, action) {
     case types.UPDATE_SYMBOLS: {
       const { currencies, pairs } = action.payload
       const dict = {}
-      currencies.forEach(arr => dict[arr[0].toUpperCase()] = arr[1])
+      currencies.forEach(([id, name]) => {
+        dict[id.toUpperCase()] = name
+      })
       return {
         ...state,
         coins: (currencies && currencies.map(arr => arr[0].toUpperCase()).sort()) || [],
