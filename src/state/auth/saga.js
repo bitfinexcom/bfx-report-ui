@@ -69,8 +69,6 @@ function* checkAuthWithLocalToken() {
     const authToken = yield select(getAuthToken)
     if (authToken) {
       yield put(actions.checkAuth(LOCAL_AUTHTOKEN))
-    } else {
-      yield put(updateErrorStatus({ id: 'auth.notoken' }))
     }
   } catch (fail) {
     yield put(updateErrorStatus({
