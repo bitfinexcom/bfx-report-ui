@@ -10,6 +10,7 @@ import _omit from 'lodash/omit'
 import {
   formatRawPairToTPair,
   formatRawSymbolToFSymbol,
+  getDefaultTimezone,
   makeFetchCall,
   postJsonfetch,
 } from 'state/utils'
@@ -49,9 +50,7 @@ function getCSV(auth, query, target, symbol, timezone) {
   if (symbol) {
     params.symbol = symbol
   }
-  if (timezone) {
-    params.timezone = timezone
-  }
+  params.timezone = timezone || getDefaultTimezone()
   let method = ''
   switch (target) {
     case MENU_FCREDIT:
