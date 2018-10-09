@@ -26,7 +26,7 @@ import {
 
 import { propTypes, defaultProps } from './Ledgers.props'
 
-const COLUMN_WIDTHS = [500, 80, 100, 120, 120, 120, 150]
+const COLUMN_WIDTHS = [500, 100, 120, 120, 150, 80]
 const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
 const TYPE = queryConstants.MENU_LEDGERS
@@ -133,12 +133,10 @@ class Ledgers extends PureComponent {
       )
     }
 
-    const creditCellRenderer = (rowIndex) => {
+    const amountCellRenderer = (rowIndex) => {
       const { amount, currency } = filteredData[rowIndex]
-      const show = parseFloat(amount) > 0
-      const showAmount = show ? amount : ''
       // eslint-disable-next-line react/destructuring-assignment
-      const showCurrency = show && WILD_CARD.includes(targetSymbol) ? (
+      const showCurrency = WILD_CARD.includes(targetSymbol) ? (
         <Fragment>
           &nbsp;
           <span className='bitfinex-show-soft'>
@@ -146,38 +144,16 @@ class Ledgers extends PureComponent {
           </span>
         </Fragment>
       ) : ''
-      const tooltip = show ? `${amount} ${currency}` : undefined
+      const classes = parseFloat(amount) > 0
+        ? 'bitfinex-green-text bitfinex-text-align-right'
+        : 'bitfinex-red-text bitfinex-text-align-right'
+      const tooltip = `${amount} ${currency}`
       return (
         <Cell
-          className='bitfinex-green-text bitfinex-text-align-right'
+          className={classes}
           tooltip={tooltip}
         >
-          {showAmount}
-          {showCurrency}
-        </Cell>
-      )
-    }
-
-    const debitCellRenderer = (rowIndex) => {
-      const { amount, currency } = filteredData[rowIndex]
-      const show = parseFloat(amount) < 0
-      const showAmount = show ? Math.abs(amount) : ''
-      // eslint-disable-next-line react/destructuring-assignment
-      const showCurrency = show && WILD_CARD.includes(targetSymbol) ? (
-        <Fragment>
-          &nbsp;
-          <span className='bitfinex-show-soft'>
-            {currency}
-          </span>
-        </Fragment>
-      ) : ''
-      const tooltip = show ? `${Math.abs(amount)} ${currency}` : undefined
-      return (
-        <Cell
-          className='bitfinex-red-text bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          {showAmount}
+          {amount}
           {showCurrency}
         </Cell>
       )
@@ -232,35 +208,18 @@ class Ledgers extends PureComponent {
         tooltip: rowIndex => filteredData[rowIndex].description,
       },
       {
-        id: 'wallet',
-        name: 'ledgers.column.wallet',
-        renderer: walletCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].wallet,
-      },
-      {
         id: 'currency',
         name: 'ledgers.column.currency',
         renderer: currencyCellRenderer,
         tooltip: rowIndex => filteredData[rowIndex].currency,
       },
       {
-        id: 'credit',
-        name: 'ledgers.column.credit',
-        renderer: creditCellRenderer,
+        id: 'amount',
+        name: 'ledgers.column.amount',
+        renderer: amountCellRenderer,
         tooltip: (rowIndex) => {
           const { amount, currency } = filteredData[rowIndex]
-          const show = parseFloat(amount) > 0
-          return show ? `${amount} ${currency}` : ''
-        },
-      },
-      {
-        id: 'debit',
-        name: 'ledgers.column.debit',
-        renderer: debitCellRenderer,
-        tooltip: (rowIndex) => {
-          const { amount, currency } = filteredData[rowIndex]
-          const show = parseFloat(amount) < 0
-          return show ? `${amount} ${currency}` : ''
+          return `${amount} ${currency}`
         },
       },
       {
@@ -277,6 +236,12 @@ class Ledgers extends PureComponent {
         name: 'ledgers.column.time',
         renderer: mtsCellRenderer,
         tooltip: rowIndex => formatTime(filteredData[rowIndex].mts, timezone),
+      },
+      {
+        id: 'wallet',
+        name: 'ledgers.column.wallet',
+        renderer: walletCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].wallet,
       },
     ]
 
