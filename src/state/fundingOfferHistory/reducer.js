@@ -28,6 +28,7 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
         const {
           amount,
           amountExecuted,
+          amountOrig,
           flags,
           hidden,
           id,
@@ -58,6 +59,7 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
           mtsUpdate,
           amount,
           amountExecuted,
+          amountOrig,
           type,
           flags,
           status,

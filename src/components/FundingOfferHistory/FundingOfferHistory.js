@@ -114,13 +114,13 @@ class FundingOfferHistory extends PureComponent {
     }
 
     const amountCellRenderer = (rowIndex) => {
-      const { amount } = filteredData[rowIndex]
+      const { amountOrig } = filteredData[rowIndex]
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={amount}
+          tooltip={amountOrig}
         >
-          {amount}
+          {amountOrig}
         </Cell>
       )
     }
@@ -235,7 +235,7 @@ class FundingOfferHistory extends PureComponent {
         id: 'amount',
         name: 'foffer.column.amount',
         renderer: amountCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].amount,
+        tooltip: rowIndex => filteredData[rowIndex].amountOrig,
       },
       {
         id: 'amountExecuted',

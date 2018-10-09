@@ -123,6 +123,7 @@ export function ordersReducer(state = initialState, action) {
         const {
           amount,
           amountExecuted,
+          amountOrig,
           cid,
           flags,
           gid,
@@ -158,6 +159,7 @@ export function ordersReducer(state = initialState, action) {
           mtsUpdate,
           amount,
           amountExecuted,
+          amountOrig,
           type,
           typePrev,
           flags,
