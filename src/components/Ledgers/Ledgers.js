@@ -321,7 +321,7 @@ class Ledgers extends PureComponent {
       )
     }
     return (
-      <Card interactive elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         {showContent}
       </Card>
     )
