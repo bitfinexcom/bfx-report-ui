@@ -27,6 +27,7 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
       const entries = result.map((entry) => {
         const {
           amount,
+          amountExecuted,
           amountOrig,
           flags,
           hidden,
@@ -57,6 +58,7 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
           mtsCreate,
           mtsUpdate,
           amount,
+          amountExecuted,
           amountOrig,
           type,
           flags,

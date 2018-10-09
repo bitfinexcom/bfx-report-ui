@@ -2,12 +2,15 @@ import PropTypes from 'prop-types'
 import { intlShape } from 'react-intl'
 
 const ORDERS_ENTRIES_PROPS = PropTypes.shape({
+  amountOrig: PropTypes.number.isRequired,
+  amountExecuted: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
-  pair: PropTypes.string.isRequired,
   mtsUpdate: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
+  pair: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   priceAvg: PropTypes.number.isRequired,
+  status: PropTypes.string,
+  type: PropTypes.string.isRequired,
 })
 
 export const propTypes = {

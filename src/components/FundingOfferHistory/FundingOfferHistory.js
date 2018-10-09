@@ -114,18 +114,6 @@ class FundingOfferHistory extends PureComponent {
     }
 
     const amountCellRenderer = (rowIndex) => {
-      const { amount } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={amount}
-        >
-          {amount}
-        </Cell>
-      )
-    }
-
-    const amountOrigCellRenderer = (rowIndex) => {
       const { amountOrig } = filteredData[rowIndex]
       return (
         <Cell
@@ -133,6 +121,18 @@ class FundingOfferHistory extends PureComponent {
           tooltip={amountOrig}
         >
           {amountOrig}
+        </Cell>
+      )
+    }
+
+    const amountExecutedCellRenderer = (rowIndex) => {
+      const { amountExecuted } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={amountExecuted}
+        >
+          {amountExecuted}
         </Cell>
       )
     }
@@ -235,13 +235,13 @@ class FundingOfferHistory extends PureComponent {
         id: 'amount',
         name: 'foffer.column.amount',
         renderer: amountCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].amount,
+        tooltip: rowIndex => filteredData[rowIndex].amountOrig,
       },
       {
-        id: 'amountorig',
-        name: 'foffer.column.amount-orig',
-        renderer: amountOrigCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].amountOrig,
+        id: 'amountExecuted',
+        name: 'foffer.column.amount-exe',
+        renderer: amountExecutedCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].amountExecuted,
       },
       {
         id: 'type',
