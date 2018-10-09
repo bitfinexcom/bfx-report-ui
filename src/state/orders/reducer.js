@@ -122,7 +122,7 @@ export function ordersReducer(state = initialState, action) {
       const entries = result.map((entry) => {
         const {
           amount,
-          amountOrig,
+          amountExecuted,
           cid,
           flags,
           gid,
@@ -157,7 +157,7 @@ export function ordersReducer(state = initialState, action) {
           mtsCreate,
           mtsUpdate,
           amount,
-          amountOrig,
+          amountExecuted,
           type,
           typePrev,
           flags,

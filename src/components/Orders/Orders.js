@@ -121,14 +121,14 @@ class Orders extends PureComponent {
       )
     }
 
-    const amountOrigCellRenderer = (rowIndex) => {
-      const { amountOrig } = filteredData[rowIndex]
+    const amountExecutedCellRenderer = (rowIndex) => {
+      const { amountExecuted } = filteredData[rowIndex]
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={amountOrig}
+          tooltip={amountExecuted}
         >
-          {amountOrig}
+          {amountExecuted}
         </Cell>
       )
     }
@@ -242,10 +242,10 @@ class Orders extends PureComponent {
         tooltip: rowIndex => filteredData[rowIndex].amount,
       },
       {
-        id: 'amountOrig',
-        name: 'orders.column.amount-orig',
-        renderer: amountOrigCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].amountOrig,
+        id: 'amountExecuted',
+        name: 'orders.column.amount-exe',
+        renderer: amountExecutedCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].amountExecuted,
       },
       {
         id: 'price',
