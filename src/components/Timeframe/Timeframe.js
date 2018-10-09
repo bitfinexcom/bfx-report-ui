@@ -12,7 +12,6 @@ import { propTypes, defaultProps } from './Timeframe.props'
 const TIME_FRAMES_POPOVER_PROPS = {
   hoverCloseDelay: 400,
   // otherwise there's a "submenu item click" weird problem see
-  // https://bitfinex.slack.com/archives/GAVNZP4RF/p1539069672000100
   // https://github.com/palantir/blueprint/issues/3010
   captureDismiss: true,
 }
