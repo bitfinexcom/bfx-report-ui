@@ -56,7 +56,7 @@
   "foffer.title": "Funding Offers",
   "foffer.column.symbol": "CURRENCY",
   "foffer.column.amount": "AMOUNT",
-  "foffer.column.amount-orig": "ORIGINAL AMOUNT",
+  "foffer.column.amount-exe": "EXECUTED AMOUNT",
   "foffer.column.type": "TYPE",
   "foffer.column.status": "STATUS",
   "foffer.column.rate": "RATE(% PER DAY)",

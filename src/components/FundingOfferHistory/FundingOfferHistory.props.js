@@ -5,7 +5,7 @@ const FOFFER_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
   symbol: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
-  amountOrig: PropTypes.number.isRequired,
+  amountExecuted: PropTypes.number.isRequired,
   type: PropTypes.string,
   status: PropTypes.string,
   rate: PropTypes.number,
