@@ -169,22 +169,24 @@ class FundingCreditHistory extends PureComponent {
     }
 
     const mtsOpeningCellRenderer = (rowIndex) => {
-      const mtsOpening = formatTime(filteredData[rowIndex].mtsOpening, timezone)
+      const { mtsOpening } = filteredData[rowIndex]
+      const opening = mtsOpening ? formatTime(mtsOpening, timezone) : ''
       return (
-        <Cell tooltip={mtsOpening}>
+        <Cell tooltip={opening}>
           <TruncatedFormat>
-            {mtsOpening}
+            {opening}
           </TruncatedFormat>
         </Cell>
       )
     }
 
     const mtsLastPayoutCellRenderer = (rowIndex) => {
-      const mtsLastPayout = formatTime(filteredData[rowIndex].mtsLastPayout, timezone)
+      const { mtsLastPayout } = filteredData[rowIndex]
+      const payout = mtsLastPayout ? formatTime(mtsLastPayout, timezone) : ''
       return (
-        <Cell tooltip={mtsLastPayout}>
+        <Cell tooltip={payout}>
           <TruncatedFormat>
-            {mtsLastPayout}
+            {payout}
           </TruncatedFormat>
         </Cell>
       )
@@ -288,13 +290,19 @@ class FundingCreditHistory extends PureComponent {
         id: 'mtsOpening',
         name: 'fcredit.column.opening',
         renderer: mtsOpeningCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsOpening, timezone),
+        tooltip: (rowIndex) => {
+          const { mtsOpening } = filteredData[rowIndex]
+          return mtsOpening ? formatTime(mtsOpening, timezone) : ''
+        },
       },
       {
         id: 'mtsLastPayout',
         name: 'fcredit.column.lastpayout',
         renderer: mtsLastPayoutCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsLastPayout, timezone),
+        tooltip: (rowIndex) => {
+          const { mtsLastPayout } = filteredData[rowIndex]
+          return mtsLastPayout ? formatTime(mtsLastPayout, timezone) : ''
+        },
       },
       {
         id: 'positionPair',
