@@ -9,6 +9,14 @@ import { formatDate } from 'state/utils'
 
 import { propTypes, defaultProps } from './Timeframe.props'
 
+const TIME_FRAMES_POPOVER_PROPS = {
+  hoverCloseDelay: 400,
+  // otherwise there's a "submenu item click" weird problem see
+  // https://bitfinex.slack.com/archives/GAVNZP4RF/p1539069672000100
+  // https://github.com/palantir/blueprint/issues/3010
+  captureDismiss: true,
+}
+
 class Timeframe extends PureComponent {
   constructor(props) {
     super(props)
@@ -62,6 +70,7 @@ class Timeframe extends PureComponent {
         text=''
         title={timeSpan}
         className='bitfinex-dropdown'
+        popoverProps={TIME_FRAMES_POPOVER_PROPS}
       >
         <MenuItem
           text={intl.formatMessage({ id: 'timeframe.24h' })}
@@ -104,6 +113,7 @@ class Timeframe extends PureComponent {
         icon='calendar'
         text={timeSpan}
         className='bitfinex-dropdown'
+        popoverProps={TIME_FRAMES_POPOVER_PROPS}
       >
         <MenuItem
           text={intl.formatMessage({ id: 'timeframe.24h' })}
