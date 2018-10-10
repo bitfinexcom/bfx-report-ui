@@ -38,7 +38,7 @@ class ToggleMenu extends PureComponent {
 
   handleClick(target) {
     const { history } = this.props
-    history.push(getPath(target))
+    history.push(getPath(target) + history.location.search)
   }
 
   render() {
