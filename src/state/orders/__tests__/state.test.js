@@ -9,7 +9,7 @@ const initBlockState = {
   pageLoading: false,
   pageOffset: 0,
   smallestMts: 0,
-  targetPair: "",
+  targetPair: '',
 }
 
 describe('ledger state', () => {
