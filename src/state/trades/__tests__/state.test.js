@@ -2,12 +2,14 @@ import actions from '../actions'
 import reducer from '../reducer'
 
 const initBlockState = {
-  entries: [],
   dataReceived: false,
-  smallestMts: 0,
+  entries: [],
+  existingPairs: [],
   offset: 0,
-  pageOffset: 0,
   pageLoading: false,
+  pageOffset: 0,
+  smallestMts: 0,
+  targetPair: '',
 }
 
 describe('ledger state', () => {
