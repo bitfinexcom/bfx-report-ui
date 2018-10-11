@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment from 'moment-timezone'
 
 import { platform } from 'var/config'
 
@@ -115,6 +115,10 @@ export function momentFormatter(format) {
   }
 }
 
+export function getDefaultTimezone() {
+  return moment.tz.guess()
+}
+
 export function getSideMsg(side) {
   let msg
   if (side === 1) {
@@ -141,6 +145,7 @@ export default {
   formatTime,
   getAuth,
   getCurrentEntries,
+  getDefaultTimezone,
   getSideMsg,
   isValidateType,
   momentFormatter,
