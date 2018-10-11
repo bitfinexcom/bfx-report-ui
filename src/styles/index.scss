@@ -53,16 +53,16 @@ div.bitfinex-auth {
 .bitfinex-logo-light,
 .bitfinex-logo-dark {
   width: 176px;
-  position: absolute;
-  top: 14px;
+  position: relative;
+  top: 5px;
 }
 
 /* small screen logo */
 .bitfinex-logo-m-light,
 .bitfinex-logo-m-dark {
   width: 79px;
-  position: absolute;
-  top: 16px;
+  position: relative;
+  top: 3px;
 }
 
 body.#{$ns}-dark .bitfinex-logo-light,

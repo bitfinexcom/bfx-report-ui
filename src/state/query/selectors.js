@@ -6,6 +6,7 @@ export const getQuery = state => state.query
 
 export const getTimeRange = state => getQuery(state).timeRange
 export const getEmail = state => getQuery(state).email
+export const getExportEmail = state => getQuery(state).exportEmail
 export const getPrepareExport = state => getQuery(state).prepareExport
 
 /**
@@ -66,6 +67,7 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
 
 export default {
   getEmail,
+  getExportEmail,
   getPrepareExport,
   getQuery,
   getTimeFrame,

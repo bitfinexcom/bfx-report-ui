@@ -8,8 +8,9 @@ import {
 import { setAuthToken } from 'state/base/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { getAuthToken } from 'state/base/selectors'
-import { getAuth } from 'state/utils'
+import { getAuth, checkEmail } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { setOwnerEmail } from 'state/query/actions'
 
 import types from './constants'
 import actions from './actions'
@@ -21,15 +22,28 @@ function* checkAuth({ payload: flag }) {
     const auth = yield select(selectAuth)
     const data = yield call(getAuth, auth)
     const { result = false, error } = data
-    yield put(actions.updateAuthStatus(result))
-
     if (result) {
       yield put(updateSuccessStatus({
         id: 'status.success',
         topic: 'auth.auth',
         time: (new Date()).toLocaleString(),
       }))
+
+      // get owner email
+      const { ownerEmail, emailError } = yield call(checkEmail, auth)
+      if (ownerEmail) {
+        yield put(setOwnerEmail(ownerEmail))
+      }
+
+      if (emailError) {
+        yield put(updateErrorStatus({
+          id: 'status.fail',
+          topic: 'auth.auth',
+          detail: JSON.stringify(error),
+        }))
+      }
     }
+    yield put(actions.updateAuthStatus(result))
 
     if (result === false && flag === LOCAL_AUTHTOKEN) {
       yield put(actions.logout())

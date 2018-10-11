@@ -30,6 +30,12 @@ export function getAuth(auth) {
   })
 }
 
+export function checkEmail(auth) {
+  return postJsonfetch(`${platform.API_URL}/check-stored-locally`, {
+    auth,
+  })
+}
+
 export function formatTime(mts, timezone) {
   if (timezone) {
     return moment(mts, 'x').tz(timezone).format('YY-MM-DD HH:mm:ss')
@@ -131,6 +137,7 @@ export function getSideMsg(side) {
 
 export default {
   checkFetch,
+  checkEmail,
   makeFetchCall,
   formatDate,
   formatInternalPair,

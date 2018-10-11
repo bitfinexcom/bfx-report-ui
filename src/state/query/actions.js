@@ -79,20 +79,32 @@ export function prepareExport() {
 }
 
 /**
- * Create an action to export CSV.
- * @param {boolean | string} payload return false or the email address
+ * Create an action to set owner email.
+ * @param {boolean | string} email return false or the email address
  */
-export function exportReady(payload) {
+export function setOwnerEmail(email) {
   return {
-    type: types.EXPORT_READY,
-    payload,
+    type: types.SET_OWNER_EMAIL,
+    payload: email,
+  }
+}
+
+/**
+ * Create an action to set sender email.
+ * @param {boolean | string} email return false or the email address
+ */
+export function setExportEmail(email) {
+  return {
+    type: types.SET_EXPORT_EMAIL,
+    payload: email,
   }
 }
 
 export default {
   exportCsv,
-  exportReady,
   prepareExport,
+  setExportEmail,
+  setOwnerEmail,
   setCustomTimeRange,
   setQueryLimit,
   setTimeType,
