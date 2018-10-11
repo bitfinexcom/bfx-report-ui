@@ -219,8 +219,8 @@ TEST_CASES.forEach((entry) => {
     const tree = component.toJSON()
     expect(tree).toMatchSnapshot()
     // placeholder
-    expect(tree.children[3].props.placeholder).toEqual(entry.placeholder)
+    expect(tree.children[0].children[3].props.placeholder).toEqual(entry.placeholder)
     // total pages
-    expect(tree.children[6]).toEqual(entry.totalPages)
+    expect(tree.children[0].children[6]).toEqual(entry.totalPages)
   })
 })

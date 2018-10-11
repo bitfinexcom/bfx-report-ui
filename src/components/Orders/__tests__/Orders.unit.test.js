@@ -17,6 +17,7 @@ const ENTRIES = [
     mtsUpdate: 1529941979000,
     amount: 0,
     amountOrig: -0.2,
+    amountExecuted: -0.2,
     type: 'EXCHANGE LIMIT',
     typePrev: null,
     flags: '0',
@@ -37,6 +38,7 @@ const ENTRIES = [
     mtsUpdate: 1529576031000,
     amount: 0,
     amountOrig: 0.2,
+    amountExecuted: 0.2,
     type: 'EXCHANGE LIMIT',
     typePrev: null,
     flags: '0',
@@ -57,6 +59,7 @@ const ENTRIES = [
     mtsUpdate: 1529575757000,
     amount: 0,
     amountOrig: -0.5,
+    amountExecuted: -0.5,
     type: 'EXCHANGE LIMIT',
     typePrev: null,
     flags: '0',
@@ -77,6 +80,7 @@ const ENTRIES = [
     mtsUpdate: 1529575721000,
     amount: 0,
     amountOrig: 0.4,
+    amountExecuted: 0.4,
     type: 'EXCHANGE LIMIT',
     typePrev: null,
     flags: '0',
@@ -97,6 +101,7 @@ const ENTRIES = [
     mtsUpdate: 1529549557000,
     amount: 0.2,
     amountOrig: 0.2,
+    amountExecuted: 0.2,
     type: 'EXCHANGE LIMIT',
     typePrev: null,
     flags: '0',
@@ -117,6 +122,7 @@ const ENTRIES = [
     mtsUpdate: 1529549554000,
     amount: -0.07400001,
     amountOrig: -0.07400001,
+    amountExecuted: 0,
     type: 'EXCHANGE LIMIT',
     typePrev: null,
     flags: '0',
@@ -137,6 +143,7 @@ const ENTRIES = [
     mtsUpdate: 1529549265000,
     amount: -0.003,
     amountOrig: -0.023,
+    amountExecuted: 0,
     type: 'EXCHANGE LIMIT',
     typePrev: null,
     flags: '0',
@@ -157,6 +164,7 @@ const ENTRIES = [
     mtsUpdate: 1529549259000,
     amount: 1,
     amountOrig: 1,
+    amountExecuted: 0,
     type: 'EXCHANGE LIMIT',
     typePrev: null,
     flags: '0',
@@ -177,6 +185,7 @@ const ENTRIES = [
     mtsUpdate: 1527625559000,
     amount: 0,
     amountOrig: -1,
+    amountExecuted: -1,
     type: 'EXCHANGE LIMIT',
     typePrev: null,
     flags: 0,
@@ -198,7 +207,11 @@ test('renders without crashing', () => {
 
 test('renders without crashing with data', () => {
   const div = document.createElement('div')
-  renderWithIntl(<Orders loading={false} entries={ENTRIES} />, div)
+  renderWithIntl(<Orders
+    loading={false}
+    entries={ENTRIES}
+    handleClickExport={() => {}}
+  />, div)
   ReactDOM.unmountComponentAtNode(div)
 })
 

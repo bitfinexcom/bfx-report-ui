@@ -122,7 +122,11 @@ test('renders without crashing', () => {
 
 test('renders without crashing with data', () => {
   const div = document.createElement('div')
-  renderWithIntl(<Trades loading={false} entries={ENTRIES} />, div)
+  renderWithIntl(<Trades
+    loading={false}
+    entries={ENTRIES}
+    handleClickExport={() => {}}
+  />, div)
   ReactDOM.unmountComponentAtNode(div)
 })
 
