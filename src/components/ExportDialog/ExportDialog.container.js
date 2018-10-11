@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { getTimezone } from 'state/base/selectors'
 import {
-  getEmail,
+  getExportEmail,
   getPrepareExport,
   getQuery,
   getTimeFrame,
@@ -12,7 +12,7 @@ import ExportDialog from './ExportDialog'
 
 const mapStateToProps = (state = {}) => ({
   ...getTimeFrame(getQuery(state)),
-  email: getEmail(state),
+  email: getExportEmail(state),
   loading: getPrepareExport(state),
   timezone: getTimezone(state),
 })

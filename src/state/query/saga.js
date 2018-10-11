@@ -12,7 +12,6 @@ import {
   formatRawSymbolToFSymbol,
   getDefaultTimezone,
   makeFetchCall,
-  postJsonfetch,
 } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
@@ -25,9 +24,7 @@ import { getTargetPair as getOrdersPair } from 'state/orders/selectors'
 import { getTargetPair as getTradesPair } from 'state/trades/selectors'
 import { getTimezone } from 'state/base/selectors'
 
-import { platform } from 'var/config'
-
-import { getQuery, getTimeFrame } from './selectors'
+import { getEmail, getQuery, getTimeFrame } from './selectors'
 import actions from './actions'
 import types from './constants'
 
@@ -44,8 +41,8 @@ const {
 
 function getCSV(auth, query, target, symbol, timezone) {
   const params = _omit(getTimeFrame(query, target), 'limit')
-  if (query.email) {
-    params.email = query.email
+  if (query.exportEmail) {
+    params.email = query.exportEmail
   }
   if (symbol) {
     params.symbol = symbol
@@ -78,12 +75,6 @@ function getCSV(auth, query, target, symbol, timezone) {
       break
   }
   return makeFetchCall(method, auth, params)
-}
-
-function checkEmail(auth) {
-  return postJsonfetch(`${platform.API_URL}/check-stored-locally`, {
-    auth,
-  })
 }
 
 function getSelector(target) {
@@ -170,25 +161,18 @@ function* exportCSV({ payload: target }) {
 
 function* prepareExport() {
   try {
-    const auth = yield select(selectAuth)
-    const { result, error } = yield call(checkEmail, auth)
+    // owner email now get while first auth-check
+    const result = yield select(getEmail)
+    // export email
     const { reportEmail } = queryString.parse(window.location.search)
     // send email get from the URL when possible
     if (reportEmail && result) {
-      yield put(actions.exportReady(reportEmail))
+      yield put(actions.setExportEmail(reportEmail))
     } else {
-      yield put(actions.exportReady(result))
-    }
-
-    if (error) {
-      yield put(updateErrorStatus({
-        id: 'status.fail',
-        topic: 'timeframe.download.query',
-        detail: JSON.stringify(error),
-      }))
+      yield put(actions.setExportEmail(result))
     }
   } catch (fail) {
-    yield put(actions.exportReady(false))
+    yield put(actions.setExportEmail(false))
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'timeframe.download.query',

@@ -4,6 +4,7 @@ import types from './constants'
 
 const initialState = {
   email: '',
+  exportEmail: '',
   prepareExport: false,
   queryLimit: types.DEFAULT_QUERY_LIMIT,
   timeRange: types.DEFAULT_RANGE,
@@ -34,12 +35,19 @@ export function queryReducer(state = initialState, action) {
         ...state,
         prepareExport: true,
       }
-    case types.EXPORT_READY: {
-      const email = action.payload === false ? '' : action.payload
+    case types.SET_OWNER_EMAIL: {
+      const email = payload || ''
+      return {
+        ...state,
+        email,
+      }
+    }
+    case types.SET_EXPORT_EMAIL: {
+      const exportEmail = payload || ''
       return {
         ...state,
         prepareExport: false,
-        email,
+        exportEmail,
       }
     }
     case authTypes.LOGOUT:

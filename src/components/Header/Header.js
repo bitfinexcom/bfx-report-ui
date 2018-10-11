@@ -78,6 +78,7 @@ class Header extends PureComponent {
     const {
       authIsShown,
       authStatus,
+      email,
       history,
       intl,
       location,
@@ -126,6 +127,13 @@ class Header extends PureComponent {
     ) : (
       <LangMenu />
     )
+    const renderEmail = email ? (
+      <Fragment>
+        &nbsp;
+        <span className='bitfinex-show-soft'>{email}</span>
+      </Fragment>
+    ) : null
+
     const renderSyncMode = platform.showSyncMode ? (<SyncMode />) : null
 
     return (
@@ -154,6 +162,7 @@ class Header extends PureComponent {
                 src={mLightLogo}
                 className='bitfinex-logo-m-light hidden-xl hidden-lg hidden-md'
               />
+              {renderEmail}
             </NavbarHeading>
           </NavbarGroup>
           <NavbarGroup align='right'>
