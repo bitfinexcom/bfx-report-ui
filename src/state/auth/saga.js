@@ -30,7 +30,7 @@ function* checkAuth({ payload: flag }) {
       }))
 
       // get owner email
-      const { ownerEmail, emailError } = yield call(checkEmail, auth)
+      const { result: ownerEmail, error: emailError } = yield call(checkEmail, auth)
       if (ownerEmail) {
         yield put(setOwnerEmail(ownerEmail))
       }
