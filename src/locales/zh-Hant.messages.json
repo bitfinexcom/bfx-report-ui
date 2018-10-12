@@ -9,6 +9,7 @@
   "preferences.language": "語言:",
   "preferences.theme": "佈景主題:",
   "preferences.timezone": "時區:",
+  "preferences.dateformat": "日期格式:",
   "theme.light": "白",
   "theme.dark": "黑",
   "auth.auth": "驗證",

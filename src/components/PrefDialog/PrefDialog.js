@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
-import classNames from 'classnames'
 import {
   Button,
   Classes,
@@ -11,34 +10,9 @@ import {
 import { TimezonePicker } from '@blueprintjs/timezone'
 
 import LangMenu from 'components/LangMenu'
+import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './PrefDialog.props'
-
-const descClasses = classNames(
-  'bitfinex-preferences-desc',
-  'bitfinex-text-align-right',
-  'hidden-xs',
-  'col-sm-3',
-  'col-md-3',
-  'col-lg-3',
-  'col-xl-3',
-)
-
-const xsClasses = classNames(
-  'col-xs-12',
-  'hidden-sm',
-  'hidden-md',
-  'hidden-lg',
-  'hidden-xl',
-)
-
-const fieldClasses = classNames(
-  'col-xs-12',
-  'col-sm-9',
-  'col-md-9',
-  'col-lg-9',
-  'col-xl-9',
-)
 
 class PrefDialog extends PureComponent {
   static propTypes = propTypes
@@ -89,24 +63,24 @@ class PrefDialog extends PureComponent {
       >
         <div className={Classes.DIALOG_BODY}>
           <div className='row'>
-            <div className={descClasses}>
+            <div className={dialogDescStyle}>
               {intl.formatMessage({ id: 'preferences.language' })}
             </div>
-            <div className={xsClasses}>
+            <div className={dialogSmallDescStyle}>
               {intl.formatMessage({ id: 'preferences.language' })}
             </div>
-            <div className={fieldClasses}>
+            <div className={dialogFieldStyle}>
               <LangMenu />
             </div>
           </div>
           <div className='row'>
-            <div className={descClasses}>
+            <div className={dialogDescStyle}>
               {intl.formatMessage({ id: 'preferences.theme' })}
             </div>
-            <div className={xsClasses}>
+            <div className={dialogSmallDescStyle}>
               {intl.formatMessage({ id: 'preferences.theme' })}
             </div>
-            <div className={fieldClasses}>
+            <div className={dialogFieldStyle}>
               <ButtonGroup>
                 <Button
                   name='light'
@@ -124,13 +98,13 @@ class PrefDialog extends PureComponent {
             </div>
           </div>
           <div className='row'>
-            <div className={descClasses}>
+            <div className={dialogDescStyle}>
               {intl.formatMessage({ id: 'preferences.timezone' })}
             </div>
-            <div className={xsClasses}>
+            <div className={dialogSmallDescStyle}>
               {intl.formatMessage({ id: 'preferences.timezone' })}
             </div>
-            <div className={fieldClasses}>
+            <div className={dialogFieldStyle}>
               <TimezonePicker
                 showLocalTimezone
                 value={timezone}

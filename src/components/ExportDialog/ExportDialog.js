@@ -9,6 +9,8 @@ import {
 
 import { formatDate } from 'state/utils'
 import Loading from 'ui/Loading'
+import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
+import DateFormatSelector from 'components/DateFormatSelector'
 
 import { propTypes, defaultProps } from './ExportDialog.props'
 
@@ -32,7 +34,7 @@ class ExportDialog extends PureComponent {
     const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
     const intlType = intl.formatMessage({ id: `${type}.title` })
     const renderMessage = !email ? (
-      <Fragment>
+      <p>
         {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
@@ -40,9 +42,9 @@ class ExportDialog extends PureComponent {
         </span>
         &nbsp;
         {intl.formatMessage({ id: 'timeframe.download.store' }, { intlType })}
-      </Fragment>
+      </p>
     ) : (
-      <Fragment>
+      <p>
         {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
@@ -50,7 +52,7 @@ class ExportDialog extends PureComponent {
         </span>
         &nbsp;
         {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}
-      </Fragment>
+      </p>
     )
     const renderContent = loading
       ? (
@@ -65,6 +67,18 @@ class ExportDialog extends PureComponent {
         <Fragment>
           <div className={Classes.DIALOG_BODY}>
             {renderMessage}
+            <br />
+            <div className='row'>
+              <div className={dialogDescStyle}>
+                {intl.formatMessage({ id: 'preferences.dateformat' })}
+              </div>
+              <div className={dialogSmallDescStyle}>
+                {intl.formatMessage({ id: 'preferences.dateformat' })}
+              </div>
+              <div className={dialogFieldStyle}>
+                <DateFormatSelector />
+              </div>
+            </div>
           </div>
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
