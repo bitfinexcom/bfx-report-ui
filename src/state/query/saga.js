@@ -10,7 +10,6 @@ import _omit from 'lodash/omit'
 import {
   formatRawPairToTPair,
   formatRawSymbolToFSymbol,
-  getDefaultTimezone,
   makeFetchCall,
 } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
@@ -22,7 +21,7 @@ import { getTargetSymbol as getLedgersSymbol } from 'state/ledgers/selectors'
 import { getTargetSymbol as getMovementsSymbol } from 'state/movements/selectors'
 import { getTargetPair as getOrdersPair } from 'state/orders/selectors'
 import { getTargetPair as getTradesPair } from 'state/trades/selectors'
-import { getTimezone } from 'state/base/selectors'
+import { getTimezone, getDateFormat } from 'state/base/selectors'
 
 import { getEmail, getQuery, getTimeFrame } from './selectors'
 import actions from './actions'
@@ -39,15 +38,16 @@ const {
   MENU_WITHDRAWALS,
 } = types
 
-function getCSV(auth, query, target, symbol, timezone) {
+function getCSV(auth, query, target, options) {
   const params = _omit(getTimeFrame(query, target), 'limit')
   if (query.exportEmail) {
     params.email = query.exportEmail
   }
-  if (symbol) {
-    params.symbol = symbol
+  if (options.symbol) {
+    params.symbol = options.symbol
   }
-  params.timezone = timezone || getDefaultTimezone()
+  params.timezone = options.timezone
+  params.dateFormat = options.dateFormat
   let method = ''
   switch (target) {
     case MENU_FCREDIT:
@@ -123,12 +123,15 @@ function formatSymbol(target, sign) {
 
 function* exportCSV({ payload: target }) {
   try {
+    const options = {}
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const timezone = yield select(getTimezone)
+    options.timezone = yield select(getTimezone)
+    options.dateFormat = yield select(getDateFormat)
     const selector = getSelector(target)
     const sign = selector ? yield select(selector) : ''
-    const { result, error } = yield call(getCSV, auth, query, target, formatSymbol(target, sign), timezone)
+    options.symbol = formatSymbol(target, sign)
+    const { result, error } = yield call(getCSV, auth, query, target, options)
     if (result) {
       if (result.isSendEmail) {
         yield put(updateSuccessStatus({

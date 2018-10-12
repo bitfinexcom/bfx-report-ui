@@ -31,7 +31,7 @@ class LangMenu extends PureComponent {
 
   render() {
     const { intl, locale } = this.props
-    const langContent = (
+    const options = (
       <Menu>
         <MenuItem
           text={intl.formatMessage({ id: 'header.lang.en' })}
@@ -47,8 +47,8 @@ class LangMenu extends PureComponent {
     )
     return (
       <Popover
-        content={langContent}
-        interactionKind={PopoverInteractionKind.HOVER}
+        content={options}
+        interactionKind={PopoverInteractionKind.CLICK}
         position={Position.BOTTOM}
       >
         <Button

@@ -77,10 +77,22 @@ export function setTimezone(timezone) {
   }
 }
 
+/**
+ * Create an action to store date format.
+ * @param {string} format date format
+ */
+export function setDateFormat(format) {
+  return {
+    type: types.SET_DATE_FORMAT,
+    payload: format,
+  }
+}
+
 export default {
   setApiKey,
   setApiSecret,
   setAuthToken,
+  setDateFormat,
   setLang,
   setMenuMode,
   setTheme,
