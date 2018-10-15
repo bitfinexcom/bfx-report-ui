@@ -18,6 +18,7 @@ Navigate to `/deposits` or `/withdrawals`will open this view.
 1. The tables shows several columns:
     1. `#` id
     1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
+    1. `CURRENCY`(translate)
     1. `STATUS`(translate)
     1. `AMOUNT`(translate), the number is left aligned.
     1. `DESTINATION`(translate)

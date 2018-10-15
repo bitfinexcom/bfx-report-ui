@@ -17,13 +17,13 @@ Navigate to `/orders` will open this view.
 1. The panel shows a table when data is ready.
 1. The tables shows several columns:
     1. `#` id
-    1. `SYMBOL`(translate)
+    1. `PAIR`(translate)
     1. `TYPE`(translate)
     1. `AMOUNT`(translate), the number is left aligned.
-    1. `AMOUNT ORIGIN`(translate), the number is left aligned.
+    1. `EXECUTED AMOUNT`(translate), the number is left aligned.
     1. `PRICE`(translate), the number is left aligned.
-    1. `AVERAGE PRICE`(translate), the number is left aligned.
-    1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
+    1. `AVERAGE EXECUTED PRICE`(translate), the number is left aligned.
+    1. `UPDATE`(translate), the date format looks like `18-08-09 09:36:41`.
     1. `STATUS`(translate)
 1. Should show tooltip when mouse hover any contents in table cell
 1. The pagination bar is shown at the top and the bottom of the table.

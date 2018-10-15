@@ -15,9 +15,11 @@ Let user type api key and secret to login.
 1. An input field to enter API key.
     1. With a title `Enter API Key: (required)`(translate)
     1. The api key is persist for convinience
+    1. The field type is password (hidden with *)
 1. An input field to enter API secret.
     1. With a title `Enter API Secret: (required)`(translate)
     1. The api secret is persist for convinience
+    1. The field type is password (hidden with *)
 1. A Button `Check Auth`(translate) for login
     1. The button will disabled when api key or api secret field is not entered
     1. Click the button will trigger the login procedure.

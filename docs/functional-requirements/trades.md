@@ -17,6 +17,7 @@ Navigate to `/trades` will open this view.
 1. The panel shows a table when data is ready.
 1. The tables shows several columns:
     1. `#` id
+    1. `ORDER ID`(translate)
     1. `PAIR`(translate)
     1. `AMOUNT`(translate), the number is left aligned.
     1. `PRICE`(translate), the number is left aligned.
