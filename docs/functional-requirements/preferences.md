@@ -9,7 +9,7 @@ Let user set preferred language, theme etc.
 1. The dialog has title `Preferences`(translate).
 1. The dialog has a close icon at top right, click it will close the dialog.
 1. The dialog shows language selection menu.
-    1. Hover on the menu will popup the menu selector automatically.
+    1. Click on the menu will popup the menu selector.
     1. The menu lists all support languages:
         1. English
         2. Chinese (Traditional)

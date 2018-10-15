@@ -25,7 +25,6 @@ Navigate to `/offers` will open funding offer history view.
     1. `STATUS`(translate),
     1. `RATE(% PER DAY)`(translate),
     1. `PERIOD`(translate),
-    1. `Day(s)`(translate),
     1. `OPENED`(translate), the date format looks like `18-08-09 09:36:41`.
     1. `CLOSED`(translate), the date format looks like `18-08-09 09:36:41`.
     1. `POSITION PAIR`(translate)
@@ -38,7 +37,6 @@ Navigate to `/offers` will open funding offer history view.
     1. `STATUS`(translate),
     1. `RATE(% PER DAY)`(translate),
     1. `PERIOD`(translate),
-    1. `Day(s)`(translate),
     1. `OPENED`(translate), the date format looks like `18-08-09 09:36:41`.
     1. `CLOSED`(translate), the date format looks like `18-08-09 09:36:41`.
     1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
@@ -46,12 +44,11 @@ Navigate to `/offers` will open funding offer history view.
     1. `#` id
     1. `CURRENCY`(translate)
     1. `AMOUNT`(translate), the number is left aligned.
-    1. `ORIGINAL AMOUNT`(translate), the number is left aligned.
+    1. `EXECUTED AMOUNT`(translate), the number is left aligned.
     1. `TYPE`(translate),
     1. `STATUS`(translate),
     1. `RATE(% PER DAY)`(translate),
     1. `PERIOD`(translate),
-    1. `Day(s)`(translate),
     1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
 1. Should show tooltip when mouse hover any contents in table cell
 1. The pagination bar is shown at the top and the bottom of the table.

@@ -22,10 +22,11 @@ Navigate to `/ledgers` will open this view.
     1. Symbols appeared in current queried data is shown with a different color.
 1. The tables shows several columns:
     1. `DESCRIPTION`(translate)
-    1. `CREDIT`(translate), the number is left aligned.
-    1. `DEBIT`(translate), the number is left aligned.
+    1. `CURRENCY`(translate)
+    1. `AMOUNT`(translate), the number is left aligned.
     1. `BALANCE`(translate), the number is left aligned.
     1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
+    1. `WALLET`(translate), one of `exchange`, `funding`, or `margin` wallet
 1. Should show tooltip when mouse hover any contents in table cell
 1. The pagination bar is shown at the top and the bottom of the table.
     1. The query limit is 5000 entries at once.
