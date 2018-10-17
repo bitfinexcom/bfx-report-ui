@@ -14,12 +14,16 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         authStatus: action.payload,
-        isShown: !action.payload,
       }
     case types.SHOW_AUTH:
       return {
         ...state,
         isShown: true,
+      }
+    case types.HIDE_AUTH:
+      return {
+        ...state,
+        isShown: false,
       }
     case types.LOGOUT:
       return initialState

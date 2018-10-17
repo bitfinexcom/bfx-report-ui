@@ -4,6 +4,7 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 
 import { setAuthToken } from 'state/base/actions'
 import { selectAuth } from 'state/auth/selectors'
@@ -11,6 +12,7 @@ import { getAuthToken } from 'state/base/selectors'
 import { getAuth, checkEmail } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { setOwnerEmail } from 'state/query/actions'
+import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
@@ -30,6 +32,7 @@ function* checkAuth({ payload: flag }) {
       }))
 
       // get owner email
+      yield delay(300)
       const { result: ownerEmail, error: emailError } = yield call(checkEmail, auth)
       if (ownerEmail) {
         yield put(setOwnerEmail(ownerEmail))
@@ -41,6 +44,11 @@ function* checkAuth({ payload: flag }) {
           topic: 'auth.auth',
           detail: JSON.stringify(error),
         }))
+      }
+
+      // non sync mode
+      if (!platform.showSyncMode) {
+        yield put(actions.hideAuth())
       }
     }
     yield put(actions.updateAuthStatus(result))
