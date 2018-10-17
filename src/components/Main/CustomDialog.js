@@ -38,6 +38,7 @@ class CustomDialog extends PureComponent {
       >
         <div className={Classes.DIALOG_BODY}>
           <DateRangeInput
+            className='hidden-xs col-sm-12 col-md-12 col-lg-12 col-xl-12'
             allowSingleDayRange
             closeOnSelection
             formatDate={DATE_FORMAT.formatDate}
@@ -45,6 +46,19 @@ class CustomDialog extends PureComponent {
             onChange={handleRangeChange}
             value={[startDate, endDate]}
             maxDate={new Date()}
+            placeholder={intl.formatMessage({ id: 'timeframe.start-date-placeholder' })}
+          />
+          <DateRangeInput
+            className='col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl'
+            allowSingleDayRange
+            closeOnSelection
+            formatDate={DATE_FORMAT.formatDate}
+            parseDate={DATE_FORMAT.parseDate}
+            onChange={handleRangeChange}
+            value={[startDate, endDate]}
+            maxDate={new Date()}
+            placeholder={intl.formatMessage({ id: 'timeframe.start-date-placeholder' })}
+            shortcuts={false}
           />
         </div>
         <div className={Classes.DIALOG_FOOTER}>
