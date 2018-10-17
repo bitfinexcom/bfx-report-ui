@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
-import { MenuItem } from '@blueprintjs/core'
+import { MenuItem, PopoverInteractionKind } from '@blueprintjs/core'
 import queryString from 'query-string'
 
 import constants from 'state/query/constants'
@@ -10,10 +10,7 @@ import { formatDate } from 'state/utils'
 import { propTypes, defaultProps } from './Timeframe.props'
 
 const TIME_FRAMES_POPOVER_PROPS = {
-  hoverCloseDelay: 400,
-  // otherwise there's a "submenu item click" weird problem see
-  // https://github.com/palantir/blueprint/issues/3010
-  captureDismiss: true,
+  interactionKind: PopoverInteractionKind.CLICK,
 }
 
 class Timeframe extends PureComponent {
