@@ -8,8 +8,9 @@ import {
 import { delay } from 'redux-saga'
 
 import { makeFetchCall } from 'state/utils'
-import { getAuthStatus, selectAuth } from 'state/auth/selectors'
+import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
 import authTypes from 'state/auth/constants'
+import { hideAuth } from 'state/auth/actions'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 
 import types from './constants'
@@ -87,6 +88,7 @@ function* syncWatcher() {
   try {
     while (true) {
       const authState = yield select(getAuthStatus)
+      const isShownAuth = yield select(getIsShown)
       if (authState) {
         const auth = yield select(selectAuth)
         const { result: isQueryWithDb } = yield call(checkIsSyncModeWithDbData, auth)
@@ -136,6 +138,9 @@ function* syncWatcher() {
               yield put(actions.stopSyncing())
               break
           }
+        }
+        if (isShownAuth) {
+          yield put(hideAuth())
         }
       }
       yield delay(5000) // check every 5s

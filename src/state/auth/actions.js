@@ -42,6 +42,15 @@ export function showAuth() {
 }
 
 /**
+ * Create an action to hide auth dialog.
+ */
+export function hideAuth() {
+  return {
+    type: types.HIDE_AUTH,
+  }
+}
+
+/**
  * Create an action to logout.
  */
 export function logout() {
@@ -67,5 +76,6 @@ export default {
   checkAuthWithLocalToken,
   logout,
   showAuth,
+  hideAuth,
   updateAuthStatus,
 }
