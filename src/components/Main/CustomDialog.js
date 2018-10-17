@@ -6,6 +6,7 @@ import {
   Classes,
   Dialog,
   Intent,
+  Position,
 } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
 
@@ -59,6 +60,9 @@ class CustomDialog extends PureComponent {
             maxDate={new Date()}
             placeholder={intl.formatMessage({ id: 'timeframe.start-date-placeholder' })}
             shortcuts={false}
+            popoverProps={{
+              position: Position.TOP,
+            }}
           />
         </div>
         <div className={Classes.DIALOG_FOOTER}>
