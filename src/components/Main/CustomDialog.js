@@ -6,14 +6,22 @@ import {
   Classes,
   Dialog,
   Intent,
+  Position,
 } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
 
 import { momentFormatter } from 'state/utils'
 
 const DATE_FORMAT = momentFormatter('YYYY-MM-DD HH:mm:ss')
+const SMALL_DATE_RANGE_POPOVER_PROPS = {
+  position: Position.TOP,
+}
 
 class CustomDialog extends PureComponent {
+  componentDidMount() {
+    this.maxDate = new Date()
+  }
+
   render() {
     const {
       handleCustomDialogClose,
@@ -24,6 +32,17 @@ class CustomDialog extends PureComponent {
       startDate,
       endDate,
     } = this.props
+    const commonDateRangeProps = {
+      allowSingleDayRange: true,
+      closeOnSelection: true,
+      formatDate: DATE_FORMAT.formatDate,
+      parseDate: DATE_FORMAT.parseDate,
+      onChange: handleRangeChange,
+      value: [startDate, endDate],
+      maxDate: this.maxDate,
+      placeholder: intl.formatMessage({ id: 'timeframe.start-date-placeholder' }),
+    }
+
     return isCustomOpen ? (
       <Dialog
         icon='calendar'
@@ -38,13 +57,14 @@ class CustomDialog extends PureComponent {
       >
         <div className={Classes.DIALOG_BODY}>
           <DateRangeInput
-            allowSingleDayRange
-            closeOnSelection
-            formatDate={DATE_FORMAT.formatDate}
-            parseDate={DATE_FORMAT.parseDate}
-            onChange={handleRangeChange}
-            value={[startDate, endDate]}
-            maxDate={new Date()}
+            {...commonDateRangeProps}
+            className='hidden-xs col-sm-12 col-md-12 col-lg-12 col-xl-12'
+          />
+          <DateRangeInput
+            {...commonDateRangeProps}
+            className='col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl'
+            shortcuts={false}
+            popoverProps={SMALL_DATE_RANGE_POPOVER_PROPS}
           />
         </div>
         <div className={Classes.DIALOG_FOOTER}>

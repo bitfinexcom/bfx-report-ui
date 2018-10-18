@@ -116,6 +116,7 @@
   "timeframe.custom": "Custom",
   "timeframe.custom.title": "Select Query Range",
   "timeframe.custom.view" : "View",
+  "timeframe.start-date-placeholder": "Start Date Time",
   "pagination.page": "Page",
   "pagination.of": "of",
   "pagination.loading": "loading...",
