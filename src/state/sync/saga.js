@@ -35,6 +35,7 @@ function updateSyncErrorStatus(msg) {
 
 function* startSyncing() {
   yield delay(300)
+  const isShownAuth = yield select(getIsShown)
   const auth = yield select(selectAuth)
   const { result, error } = yield call(enableSyncMode, auth)
   if (result) {
@@ -42,6 +43,9 @@ function* startSyncing() {
     const { result: syncNowOk, error: syncNowError } = yield call(syncNow, auth)
     if (syncNowOk) {
       yield put(actions.setSyncMode(types.MODE_SYNCING))
+      if (isShownAuth) {
+        yield put(hideAuth())
+      }
       yield put(updateStatus({ id: 'sync.start' }))
     }
     if (syncNowError) {
@@ -67,8 +71,12 @@ function* stopSyncing() {
 }
 
 function* forceQueryFromDb() {
-  yield put(updateStatus({ id: 'sync.go-offline' }))
+  const isShownAuth = yield select(getIsShown)
   yield put(actions.setSyncMode(types.MODE_OFFLINE))
+  if (isShownAuth) {
+    yield put(hideAuth())
+  }
+  yield put(updateStatus({ id: 'sync.go-offline' }))
 }
 
 function* syncLogout() {
@@ -117,6 +125,9 @@ function* syncWatcher() {
                     yield put(actions.startSyncing())
                   } else {
                     yield put(actions.setSyncMode(types.MODE_SYNCING))
+                    if (isShownAuth) {
+                      yield put(hideAuth())
+                    }
                   }
 
                   if (schedError) {
@@ -129,18 +140,20 @@ function* syncWatcher() {
             case 'boolean':
               if (syncMode !== types.MODE_ONLINE) {
                 yield put(actions.setSyncMode(types.MODE_ONLINE))
+                if (isShownAuth) {
+                  yield put(hideAuth())
+                }
               }
               break
-            // when progress error => show notification and stop syncing
+            // when progress error after the main page is shown => show notification and stop syncing
             case 'string':
             default:
-              yield put(updateSyncErrorStatus(progress))
-              yield put(actions.stopSyncing())
+              if (!isShownAuth) {
+                yield put(updateSyncErrorStatus(progress))
+                yield put(actions.stopSyncing())
+              }
               break
           }
-        }
-        if (isShownAuth) {
-          yield put(hideAuth())
         }
       }
       yield delay(5000) // check every 5s
