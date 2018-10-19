@@ -100,9 +100,13 @@ function* syncWatcher() {
         const { result: progress } = yield call(getSyncProgress)
         // console.warn('queryWithDb, %', isQueryWithDb, progress)
         if (isQueryWithDb) {
-          // when progress 100 => offline mode
-          if (progress && progress === 100) {
-            if (syncMode !== types.MODE_OFFLINE) {
+          if (progress) {
+            // go offline when progress return result
+            // "Error: The server https://{url} is not available", which means no internet connection
+            if (progress.startsWith('Error: The server')) {
+              yield put(actions.setSyncMode(types.MODE_OFFLINE))
+            // go offline with notification when progress 100
+            } else if ((progress === 100 && syncMode !== types.MODE_OFFLINE)) {
               yield put(actions.forceQueryFromDb())
             }
           } else if (syncMode !== types.MODE_SYNCING) {
