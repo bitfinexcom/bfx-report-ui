@@ -103,7 +103,7 @@ function* syncWatcher() {
           if (progress) {
             // go offline when progress return result
             // "Error: The server https://{url} is not available", which means no internet connection
-            if (progress.startsWith('Error: The server')) {
+            if (typeof progress === 'string' && progress.startsWith('Error: The server')) {
               yield put(actions.setSyncMode(types.MODE_OFFLINE))
             // go offline with notification when progress 100
             } else if ((progress === 100 && syncMode !== types.MODE_OFFLINE)) {
