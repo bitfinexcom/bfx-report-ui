@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import authActions from 'state/auth/actions'
 import baseActions from 'state/base/actions'
-import { getAuthStatus, getIsShown } from 'state/auth/selectors'
+import { getAuthStatus, getIsLoading, getIsShown } from 'state/auth/selectors'
 import { getApiKey, getApiSecret } from 'state/base/selectors'
 
 import Auth from './Auth'
@@ -12,6 +12,7 @@ const mapStateToProps = (state = {}) => ({
   apiSecret: getApiSecret(state),
   isShown: getIsShown(state),
   authStatus: getAuthStatus(state),
+  loading: getIsLoading(state),
 })
 
 const mapDispatchToProps = dispatch => ({

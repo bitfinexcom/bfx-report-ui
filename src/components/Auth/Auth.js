@@ -47,6 +47,7 @@ class Auth extends PureComponent {
       apiSecret,
       intl,
       isShown,
+      loading,
     } = this.props
     return platform.showAuthPage && isShown ? (
       <div className='row'>
@@ -95,7 +96,8 @@ class Auth extends PureComponent {
                 icon='key'
                 intent={Intent.SUCCESS}
                 onClick={this.handleClick}
-                disabled={!apiKey || !apiSecret}
+                disabled={!apiKey || !apiSecret || loading}
+                loading={loading}
               >
                 {intl.formatMessage({ id: 'auth.checkAuth' })}
               </Button>

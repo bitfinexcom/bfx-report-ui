@@ -8,6 +8,7 @@ export const propTypes = {
   checkAuth: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   isShown: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   setKey: PropTypes.func.isRequired,
   setSecret: PropTypes.func.isRequired,
 }
@@ -19,6 +20,7 @@ export const defaultProps = {
   checkAuth: () => {},
   intl: {},
   isShown: false,
+  loading: false,
   setKey: () => {},
   setSecret: () => {},
 }
