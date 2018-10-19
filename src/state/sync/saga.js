@@ -35,22 +35,11 @@ function updateSyncErrorStatus(msg) {
 
 function* startSyncing() {
   yield delay(300)
-  const isShownAuth = yield select(getIsShown)
   const auth = yield select(selectAuth)
   const { result, error } = yield call(enableSyncMode, auth)
   if (result) {
-    yield delay(300)
-    const { result: syncNowOk, error: syncNowError } = yield call(syncNow, auth)
-    if (syncNowOk) {
-      yield put(actions.setSyncMode(types.MODE_SYNCING))
-      if (isShownAuth) {
-        yield put(hideAuth())
-      }
-      yield put(updateStatus({ id: 'sync.start' }))
-    }
-    if (syncNowError) {
-      yield put(updateSyncErrorStatus('during syncNow'))
-    }
+    yield put(actions.setSyncMode(types.MODE_SYNCING))
+    yield put(updateStatus({ id: 'sync.start' }))
   }
   if (error) {
     yield put(updateSyncErrorStatus('during enableSyncMode'))
@@ -71,11 +60,7 @@ function* stopSyncing() {
 }
 
 function* forceQueryFromDb() {
-  const isShownAuth = yield select(getIsShown)
   yield put(actions.setSyncMode(types.MODE_OFFLINE))
-  if (isShownAuth) {
-    yield put(hideAuth())
-  }
   yield put(updateStatus({ id: 'sync.go-offline' }))
 }
 
@@ -97,8 +82,17 @@ function* syncWatcher() {
     while (true) {
       const authState = yield select(getAuthStatus)
       const isShownAuth = yield select(getIsShown)
-      if (authState) {
-        const auth = yield select(selectAuth)
+      const auth = yield select(selectAuth)
+      if (authState && isShownAuth) {
+        const { result, error } = yield call(syncNow, auth)
+        if (result) {
+          yield put(hideAuth())
+        }
+        if (error) {
+          yield put(updateSyncErrorStatus('during syncNow'))
+        }
+      }
+      if (authState && !isShownAuth) {
         const { result: isQueryWithDb } = yield call(checkIsSyncModeWithDbData, auth)
         // get current ui state
         const syncMode = yield select(getSyncMode)
@@ -106,9 +100,13 @@ function* syncWatcher() {
         const { result: progress } = yield call(getSyncProgress)
         // console.warn('queryWithDb, %', isQueryWithDb, progress)
         if (isQueryWithDb) {
-          // when progress 100 => offline mode
-          if (progress && progress === 100) {
-            if (syncMode !== types.MODE_OFFLINE) {
+          if (progress) {
+            // go offline when progress return result
+            // "Error: The server https://{url} is not available", which means no internet connection
+            if (progress.startsWith('Error: The server')) {
+              yield put(actions.setSyncMode(types.MODE_OFFLINE))
+            // go offline with notification when progress 100
+            } else if ((progress === 100 && syncMode !== types.MODE_OFFLINE)) {
               yield put(actions.forceQueryFromDb())
             }
           } else if (syncMode !== types.MODE_SYNCING) {
@@ -125,9 +123,6 @@ function* syncWatcher() {
                     yield put(actions.startSyncing())
                   } else {
                     yield put(actions.setSyncMode(types.MODE_SYNCING))
-                    if (isShownAuth) {
-                      yield put(hideAuth())
-                    }
                   }
 
                   if (schedError) {
@@ -140,18 +135,13 @@ function* syncWatcher() {
             case 'boolean':
               if (syncMode !== types.MODE_ONLINE) {
                 yield put(actions.setSyncMode(types.MODE_ONLINE))
-                if (isShownAuth) {
-                  yield put(hideAuth())
-                }
               }
               break
             // when progress error after the main page is shown => show notification and stop syncing
             case 'string':
             default:
-              if (!isShownAuth) {
-                yield put(updateSyncErrorStatus(progress))
-                yield put(actions.stopSyncing())
-              }
+              yield put(updateSyncErrorStatus(progress))
+              yield put(actions.stopSyncing())
               break
           }
         }
