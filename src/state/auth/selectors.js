@@ -4,6 +4,7 @@ const getAuth = state => state.auth
 
 export const getAuthStatus = state => getAuth(state).authStatus
 export const getIsShown = state => getAuth(state).isShown
+export const getIsLoading = state => getAuth(state).loading
 
 export function selectAuth(state) {
   return getAuthToken(state)
@@ -18,6 +19,7 @@ export function selectAuth(state) {
 
 export default {
   getAuthStatus,
+  getIsLoading,
   getIsShown,
   selectAuth,
 }
