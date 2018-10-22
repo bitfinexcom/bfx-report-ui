@@ -11,6 +11,15 @@ export function showCustomDialog(show) {
   }
 }
 
+/**
+ * Create an action to handle document loaded event.
+ */
+export function uiLoaded() {
+  return {
+    type: types.UI_LOADED,
+  }
+}
+
 export default {
   showCustomDialog,
 }
