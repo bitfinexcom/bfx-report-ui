@@ -6,10 +6,10 @@ import {
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
-import { setAuthToken } from 'state/base/actions'
+import { setAuthToken, setTimezone } from 'state/base/actions'
 import { selectAuth } from 'state/auth/selectors'
-import { getAuthToken } from 'state/base/selectors'
-import { getAuth, checkEmail } from 'state/utils'
+import { getAuthToken, getTimezone } from 'state/base/selectors'
+import { getAuth, checkEmail, makeFetchCall } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { setOwnerEmail } from 'state/query/actions'
 import { platform } from 'var/config'
@@ -18,6 +18,10 @@ import types from './constants'
 import actions from './actions'
 
 const LOCAL_AUTHTOKEN = 'local'
+
+function getUsersTimeConf(auth) {
+  return makeFetchCall('getUsersTimeConf', auth)
+}
 
 function* checkAuth({ payload: flag }) {
   try {
@@ -42,8 +46,26 @@ function* checkAuth({ payload: flag }) {
         yield put(updateErrorStatus({
           id: 'status.fail',
           topic: 'auth.auth',
-          detail: JSON.stringify(error),
+          detail: JSON.stringify(emailError),
         }))
+      }
+
+      // get default timezone
+      const currentTimezone = yield select(getTimezone)
+      if (!currentTimezone) {
+        yield delay(300)
+        const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
+        if (tz) {
+          yield put(setTimezone(tz.timezoneName))
+        }
+
+        if (tzError) {
+          yield put(updateErrorStatus({
+            id: 'status.fail',
+            topic: 'auth.auth',
+            detail: JSON.stringify(tzError),
+          }))
+        }
       }
 
       // non sync mode
