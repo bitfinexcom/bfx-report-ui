@@ -14,6 +14,7 @@ import querySaga from './query/saga'
 import tradesSaga from './trades/saga'
 import symbolsSaga from './symbols/saga'
 import syncSaga from './sync/saga'
+import uiSaga from './ui/saga'
 
 export default function* rootSaga() {
   yield fork(authSaga)
@@ -27,6 +28,7 @@ export default function* rootSaga() {
   yield fork(querySaga)
   yield fork(symbolsSaga)
   yield fork(tradesSaga)
+  yield fork(uiSaga)
   if (platform.showSyncMode) {
     yield fork(syncSaga)
   }
