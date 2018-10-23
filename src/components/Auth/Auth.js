@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
@@ -6,6 +6,7 @@ import {
   Classes,
   Dialog,
   Intent,
+  NonIdealState,
 } from '@blueprintjs/core'
 
 import { platform } from 'var/config'
@@ -49,7 +50,7 @@ class Auth extends PureComponent {
       isShown,
       loading,
     } = this.props
-    return platform.showAuthPage && isShown ? (
+    const renderAuth = platform.showAuthPage ? (
       <div className='row'>
         <Dialog
           title={intl.formatMessage({ id: 'auth.title' })}
@@ -105,7 +106,19 @@ class Auth extends PureComponent {
           </div>
         </Dialog>
       </div>
-    ) : ''
+    ) : (
+      <NonIdealState
+        className='bitfinex-auth-nonideal'
+        icon='key'
+        title={intl.formatMessage({ id: 'auth.nonideal.title' })}
+        description={intl.formatMessage({ id: 'auth.nonideal.description' })}
+      />
+    )
+    return isShown ? (
+      <Fragment>
+        {renderAuth}
+      </Fragment>
+    ) : null
   }
 }
 
