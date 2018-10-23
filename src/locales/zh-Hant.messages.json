@@ -20,6 +20,8 @@
   "auth.auth.note1": "請先前往 ",
   "auth.auth.note2": " 取得唯讀的API金鑰與密鑰對。",
   "auth.required": "（必填）",
+  "auth.nonideal.title": "報告 2.0",
+  "auth.nonideal.description": "使用令牌登入報告...",
   "loading": "讀取中...",
   "nodata": "沒有相關資料。請試試其他時間範圍。",
   "column.id": "#",

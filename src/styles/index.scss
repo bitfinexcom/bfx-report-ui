@@ -28,6 +28,10 @@ div.bitfinex-auth {
   }
 }
 
+.bitfinex-auth-nonideal {
+  margin-top: 30px;
+}
+
 /* status close button */
 .#{$ns}-callout.#{$ns}-callout-icon .#{$ns}-icon.bitfinex-status-close {
   position: absolute;
