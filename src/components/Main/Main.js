@@ -18,6 +18,7 @@ import ToggleMenu from 'ui/ToggleMenu'
 
 import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
+import PublicTrades from '../PublicTrades/PublicTrades'
 
 const {
   MENU_FCREDIT,
@@ -28,6 +29,7 @@ const {
   MENU_TRADES,
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
+  MENU_PUBLIC_TRADES,
 } = queryType
 
 class Main extends PureComponent {
@@ -179,6 +181,10 @@ class Main extends PureComponent {
             <Route
               path={getPath(MENU_FOFFER)}
               component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={getPath(MENU_PUBLIC_TRADES)}
+              component={() => <PublicTrades handleClickExport={this.handleClickExport} />}
             />
           </Switch>
         </div>

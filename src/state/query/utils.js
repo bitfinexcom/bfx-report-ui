@@ -9,6 +9,7 @@ const {
   MENU_TRADES,
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
+  MENU_PUBLIC_TRADES,
 } = queryType
 
 export function isValidTimeStamp(n) {
@@ -49,6 +50,10 @@ const MAPPING = {
     icon: 'folder-shared-open',
     path: '/withdrawals',
   },
+  [MENU_PUBLIC_TRADES]: {
+    icon: 'exchange',
+    path: '/trade_history',
+  },
 }
 
 const PATHMAP = {
@@ -61,6 +66,7 @@ const PATHMAP = {
   [MAPPING[MENU_TRADES].path]: MENU_TRADES,
   [MAPPING[MENU_DEPOSITS].path]: MENU_DEPOSITS,
   [MAPPING[MENU_WITHDRAWALS].path]: MENU_WITHDRAWALS,
+  [MAPPING[MENU_PUBLIC_TRADES].path]: MENU_PUBLIC_TRADES,
 }
 
 // get target from /link

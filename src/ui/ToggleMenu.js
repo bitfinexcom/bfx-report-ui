@@ -21,6 +21,7 @@ const {
   MENU_TRADES,
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
+  MENU_PUBLIC_TRADES,
 } = queryType
 
 class ToggleMenu extends PureComponent {
@@ -34,6 +35,7 @@ class ToggleMenu extends PureComponent {
     this.handleClickTrades = this.handleClick.bind(this, MENU_TRADES)
     this.handleClickDeposits = this.handleClick.bind(this, MENU_DEPOSITS)
     this.handleClickWithdrawals = this.handleClick.bind(this, MENU_WITHDRAWALS)
+    this.handleClickPublicTrades = this.handleClick.bind(this, MENU_PUBLIC_TRADES)
   }
 
   handleClick(target) {
@@ -104,6 +106,13 @@ class ToggleMenu extends PureComponent {
           text={intl.formatMessage({ id: 'fcredit.title' })}
           onClick={this.handleClickFCredit}
           active={target === MENU_FCREDIT}
+        />
+        <MenuDivider />
+        <MenuItem
+          icon={getIcon(MENU_PUBLIC_TRADES)}
+          text={intl.formatMessage({ id: 'publictrades.title' })}
+          onClick={this.handleClickPublicTrades}
+          active={target === MENU_PUBLIC_TRADES}
         />
       </Fragment>
     )
@@ -180,6 +189,14 @@ class ToggleMenu extends PureComponent {
             title={intl.formatMessage({ id: 'fcredit.title' })}
             onClick={this.handleClickFCredit}
             active={target === MENU_FCREDIT}
+          />
+          <MenuDivider />
+          <MenuItem
+            icon={getIcon(MENU_PUBLIC_TRADES)}
+            text=''
+            title={intl.formatMessage({ id: 'publictrades.title' })}
+            onClick={this.handleClickPublicTrades}
+            active={target === MENU_PUBLIC_TRADES}
           />
         </Menu>
       )
