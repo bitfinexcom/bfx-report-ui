@@ -8,7 +8,10 @@ const FOFFER_ENTRIES_PROPS = PropTypes.shape({
   amountExecuted: PropTypes.number.isRequired,
   type: PropTypes.string,
   status: PropTypes.string,
-  rate: PropTypes.number,
+  rate: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   period: PropTypes.number,
   mtsUpdate: PropTypes.number.isRequired,
 })
