@@ -9,9 +9,10 @@ const initialState = {
 }
 
 export function symbolsReducer(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case types.UPDATE_SYMBOLS: {
-      const { currencies, pairs } = action.payload
+      const { currencies, pairs } = payload
       const coins = []
       const dict = {}
       currencies.forEach(({ id, name }) => {

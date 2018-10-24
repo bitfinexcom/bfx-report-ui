@@ -8,24 +8,25 @@ const initialState = {
 }
 
 export function statusReducer(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case types.UPDATE_STATUS:
       return {
         ...state,
         intent: Intent.PRIMARY,
-        msg: action.payload,
+        msg: payload,
       }
     case types.UPDATE_SUCCESS_STATUS:
       return {
         ...state,
         intent: Intent.SUCCESS,
-        msg: action.payload,
+        msg: payload,
       }
     case types.UPDATE_ERROR_STATUS:
       return {
         ...state,
         intent: Intent.DANGER,
-        msg: action.payload,
+        msg: payload,
       }
     case types.CLEAR_STATUS:
       return initialState
