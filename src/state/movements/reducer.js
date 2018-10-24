@@ -77,13 +77,13 @@ const LIMIT = queryTypes.DEFAULT_MOVEMENTS_QUERY_LIMIT
 const PAGE_SIZE = queryTypes.DEFAULT_MOVEMENTS_PAGE_SIZE
 
 export function movementsReducer(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case types.UPDATE_MOVEMENTS: {
-      const result = action.payload
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
       let smallestMts
-      const entries = result.map((entry) => {
+      const entries = payload.map((entry) => {
         const {
           amount,
           currency,
@@ -150,7 +150,7 @@ export function movementsReducer(state = initialState, action) {
         pageOffset: 0,
       }
     case types.JUMP_MOVEMENTS_PAGE: {
-      const page = action.payload
+      const page = payload
       const totalOffset = (page - 1) * PAGE_SIZE
       const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
       if (totalOffset < LIMIT) {
@@ -170,7 +170,7 @@ export function movementsReducer(state = initialState, action) {
     case types.SET_SYMBOL:
       return {
         ...initialState,
-        targetSymbol: action.payload,
+        targetSymbol: payload,
         existingCoins: state.existingCoins,
       }
     // existingCoins should be re-calc in new time range

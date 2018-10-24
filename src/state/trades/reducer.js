@@ -86,13 +86,13 @@ const LIMIT = queryTypes.DEFAULT_TRADES_QUERY_LIMIT
 const PAGE_SIZE = queryTypes.DEFAULT_TRADES_PAGE_SIZE
 
 export function tradesReducer(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case types.UPDATE_TRADES: {
-      const result = action.payload
       const { existingPairs } = state
       const updatePairs = [...existingPairs]
       let smallestMts
-      const entries = result.map((entry) => {
+      const entries = payload.map((entry) => {
         const {
           execAmount,
           execPrice,
@@ -162,7 +162,7 @@ export function tradesReducer(state = initialState, action) {
         pageOffset: 0,
       }
     case types.JUMP_TRADES_PAGE: {
-      const page = action.payload
+      const page = payload
       const totalOffset = (page - 1) * PAGE_SIZE
       const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
       if (totalOffset < LIMIT) {
@@ -182,7 +182,7 @@ export function tradesReducer(state = initialState, action) {
     case types.SET_PAIR:
       return {
         ...initialState,
-        targetPair: action.payload,
+        targetPair: payload,
         existingPairs: state.existingPairs,
       }
     // existingPairs should be re-calc in new time range
