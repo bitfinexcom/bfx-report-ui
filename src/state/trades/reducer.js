@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
-import { formatInternalPair, formatSymbolToPair } from 'state/utils'
+import { formatInternalPair, formatSymbolToPair } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 

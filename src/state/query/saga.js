@@ -7,11 +7,8 @@ import {
 import queryString from 'query-string'
 import _omit from 'lodash/omit'
 
-import {
-  formatRawPairToTPair,
-  formatRawSymbolToFSymbol,
-  makeFetchCall,
-} from 'state/utils'
+import { makeFetchCall } from 'state/utils'
+import { formatRawPairToTPair, formatRawSymbolToFSymbol } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { getTargetSymbol as getFCreditSymbol } from 'state/fundingCreditHistory/selectors'
