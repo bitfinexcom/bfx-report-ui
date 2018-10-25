@@ -9,6 +9,7 @@ import FundingOfferHistory from 'components/FundingOfferHistory'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
+import PublicTrades from 'components/PublicTrades'
 import Trades from 'components/Trades'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
@@ -18,7 +19,6 @@ import ToggleMenu from 'ui/ToggleMenu'
 
 import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
-import PublicTrades from '../PublicTrades/PublicTrades'
 
 const {
   MENU_FCREDIT,

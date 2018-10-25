@@ -1,4 +1,3 @@
-import { formatInternalPair, formatSymbolToPair } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 
@@ -7,7 +6,6 @@ import types from './constants'
 const initialState = {
   dataReceived: false,
   entries: [],
-  existingPairs: [],
   smallestMts: 0,
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
@@ -19,43 +17,32 @@ const LIMIT = queryTypes.DEFAULT_PUBLIC_TRADES_QUERY_LIMIT
 const PAGE_SIZE = queryTypes.DEFAULT_PUBLIC_TRADES_PAGE_SIZE
 
 export function publicTradesReducer(state = initialState, action) {
-  const { actionType, payload } = action
+  const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_PUBLIC_TRADES: {
-      const { existingPairs } = state
-      const updatePairs = [...existingPairs]
       let smallestMts
       const entries = payload.map((entry) => {
         const {
-          execAmount,
-          execPrice,
+          amount,
+          price,
           id,
-          symbol,
-          mtsCreate,
-          type,
+          mts,
         } = entry
-        const internalPair = formatInternalPair(symbol)
-        // save new pair to updatePairs list
-        if (updatePairs.indexOf(internalPair) === -1) {
-          updatePairs.push(internalPair)
-        }
         // log smallest mts
-        if (!smallestMts || smallestMts > mtsCreate) {
-          smallestMts = mtsCreate
+        if (!smallestMts || smallestMts > mts) {
+          smallestMts = mts
         }
         return {
           id,
-          pair: formatSymbolToPair(symbol),
-          mtsCreate,
-          execAmount,
-          execPrice,
-          type,
+          mts,
+          amount,
+          price,
+          type: parseFloat(amount) > 0 ? 'BUY' : 'SELL',
         }
       })
       return {
         ...state,
         entries: [...state.entries, ...entries],
-        existingPairs: updatePairs.sort(),
         dataReceived: true,
         smallestMts,
         offset: state.offset + entries.length,

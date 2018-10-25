@@ -23,6 +23,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
+import { formatPair } from 'state/symbols/utils'
 
 import { propTypes, defaultProps } from './PublicTrades.props'
 
@@ -74,7 +75,6 @@ class PublicTrades extends PureComponent {
 
   render() {
     const {
-      existingPairs,
       offset,
       pageOffset,
       pageLoading,
@@ -89,8 +89,9 @@ class PublicTrades extends PureComponent {
       timezone,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const pairList = pairs || existingPairs
+    const pairList = pairs
     const currentPair = targetPair || 'btcusd'
+    const formatedCurrentPair = formatPair(targetPair)
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
@@ -103,57 +104,60 @@ class PublicTrades extends PureComponent {
     }
 
     const mtsCellRenderer = (rowIndex) => {
-      const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate, timezone)
+      const mts = formatTime(filteredData[rowIndex].mts, timezone)
       return (
-        <Cell tooltip={mtsCreate}>
+        <Cell tooltip={mts}>
           <TruncatedFormat>
-            {mtsCreate}
+            {mts}
           </TruncatedFormat>
         </Cell>
       )
     }
 
     const typeCellRenderer = (rowIndex) => {
-      const { type } = filteredData[rowIndex]
+      const { type, amount } = filteredData[rowIndex]
+      const classes = parseFloat(amount) > 0
+        ? 'bitfinex-green-text bitfinex-text-align-right'
+        : 'bitfinex-red-text bitfinex-text-align-right'
       return (
-        <Cell tooltip={type}>
+        <Cell
+          className={classes}
+          tooltip={type}
+        >
           {type}
         </Cell>
       )
     }
 
     const priceCellRenderer = (rowIndex) => {
-      const { execPrice } = filteredData[rowIndex]
+      const { price } = filteredData[rowIndex]
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={execPrice}
+          tooltip={price}
         >
-          {execPrice}
+          {price}
         </Cell>
       )
     }
 
     const amountCellRenderer = (rowIndex) => {
-      const { execAmount } = filteredData[rowIndex]
+      const { amount } = filteredData[rowIndex]
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={execAmount}
+          tooltip={amount}
         >
-          {execAmount}
+          {amount}
         </Cell>
       )
     }
 
-    const pairCellRenderer = (rowIndex) => {
-      const { pair } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={pair}>
-          {pair}
-        </Cell>
-      )
-    }
+    const pairCellRenderer = () => (
+      <Cell tooltip={formatedCurrentPair}>
+        {formatedCurrentPair}
+      </Cell>
+    )
 
     const renderPagination = (
       <Pagination
@@ -173,7 +177,7 @@ class PublicTrades extends PureComponent {
         &nbsp;
         <PairSelector
           currentPair={currentPair}
-          existingPairs={existingPairs}
+          existingPairs={[]}
           onPairSelect={this.handleClick}
           pairList={pairList}
           pairs={pairs}
@@ -193,7 +197,7 @@ class PublicTrades extends PureComponent {
         id: 'mts',
         name: 'publictrades.column.time',
         renderer: mtsCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsCreate, timezone),
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mts, timezone),
       },
       {
         id: 'type',
@@ -205,19 +209,19 @@ class PublicTrades extends PureComponent {
         id: 'price',
         name: 'publictrades.column.price',
         renderer: priceCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].execPrice,
+        tooltip: rowIndex => filteredData[rowIndex].price,
       },
       {
         id: 'amount',
         name: 'publictrades.column.amount',
         renderer: amountCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].execAmount,
+        tooltip: rowIndex => filteredData[rowIndex].amount,
       },
       {
         id: 'pair',
         name: 'publictrades.column.pair',
         renderer: pairCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].pair,
+        tooltip: () => formatedCurrentPair,
       },
     ]
 

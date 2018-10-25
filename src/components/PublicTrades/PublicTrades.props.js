@@ -3,18 +3,15 @@ import { intlShape } from 'react-intl'
 
 const PUBLIC_TRADES_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  execAmount: PropTypes.number.isRequired,
-  execPrice: PropTypes.number.isRequired,
-  fee: PropTypes.number,
-  feeCurrency: PropTypes.string,
-  mtsCreate: PropTypes.number.isRequired,
-  orderID: PropTypes.number.isRequired,
+  amount: PropTypes.number.isRequired,
+  price: PropTypes.number.isRequired,
+  mts: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
 })
 
 export const propTypes = {
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(PUBLIC_TRADES_ENTRIES_PROPS).isRequired,
-  existingPairs: PropTypes.arrayOf(PropTypes.string),
   fetchPublicTrades: PropTypes.func.isRequired,
   fetchNext: PropTypes.func.isRequired,
   fetchPrev: PropTypes.func.isRequired,
@@ -32,7 +29,6 @@ export const propTypes = {
 export const defaultProps = {
   offset: 0,
   entries: [],
-  existingPairs: [],
   fetchPublicTrades: () => {},
   fetchNext: () => {},
   fetchPrev: () => {},
