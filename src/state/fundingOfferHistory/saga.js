@@ -5,7 +5,8 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { makeFetchCall, formatRawSymbolToFSymbol } from 'state/utils'
+import { makeFetchCall } from 'state/utils'
+import { formatRawSymbolToFSymbol } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'

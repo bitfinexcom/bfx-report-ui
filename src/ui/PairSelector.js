@@ -7,7 +7,7 @@ import {
 } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
 
-import { formatPair } from 'state/utils'
+import { formatPair } from 'state/symbols/utils'
 
 class PairSelector extends PureComponent {
   render() {
