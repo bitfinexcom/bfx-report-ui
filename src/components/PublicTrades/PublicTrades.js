@@ -117,8 +117,8 @@ class PublicTrades extends PureComponent {
     const typeCellRenderer = (rowIndex) => {
       const { type, amount } = filteredData[rowIndex]
       const classes = parseFloat(amount) > 0
-        ? 'bitfinex-green-text bitfinex-text-align-right'
-        : 'bitfinex-red-text bitfinex-text-align-right'
+        ? 'bitfinex-green-text'
+        : 'bitfinex-red-text'
       return (
         <Cell
           className={classes}
@@ -130,10 +130,13 @@ class PublicTrades extends PureComponent {
     }
 
     const priceCellRenderer = (rowIndex) => {
-      const { price } = filteredData[rowIndex]
+      const { price, amount } = filteredData[rowIndex]
+      const classes = parseFloat(amount) > 0
+        ? 'bitfinex-green-text bitfinex-text-align-right'
+        : 'bitfinex-red-text bitfinex-text-align-right'
       return (
         <Cell
-          className='bitfinex-text-align-right'
+          className={classes}
           tooltip={price}
         >
           {price}
