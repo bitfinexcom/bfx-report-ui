@@ -7,7 +7,10 @@ const FCREDIT_ENTRIES_PROPS = PropTypes.shape({
   side: PropTypes.number.isRequired,
   amount: PropTypes.number.isRequired,
   status: PropTypes.string,
-  rate: PropTypes.number,
+  rate: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   period: PropTypes.number,
   mtsUpdate: PropTypes.number.isRequired,
   mtsOpening: PropTypes.number,
