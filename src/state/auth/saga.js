@@ -19,9 +19,12 @@ import actions from './actions'
 
 const LOCAL_AUTHTOKEN = 'local'
 
-function getUsersTimeConf(auth) {
-  return makeFetchCall('getUsersTimeConf', auth)
-}
+const getUsersTimeConf = auth => makeFetchCall('getUsersTimeConf', auth)
+const updateSyncErrorStatus = msg => updateErrorStatus({
+  id: 'status.request.error',
+  topic: 'auth.auth',
+  detail: JSON.stringify(msg),
+})
 
 function* checkAuth({ payload: flag }) {
   try {
@@ -43,33 +46,25 @@ function* checkAuth({ payload: flag }) {
       }
 
       if (emailError) {
-        yield put(updateErrorStatus({
-          id: 'status.fail',
-          topic: 'auth.auth',
-          detail: JSON.stringify(emailError),
-        }))
-      }
-
-      // get default timezone
-      const currentTimezone = yield select(getTimezone)
-      if (!currentTimezone) {
-        yield delay(300)
-        const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
-        if (tz) {
-          yield put(setTimezone(tz.timezoneName))
-        }
-
-        if (tzError) {
-          yield put(updateErrorStatus({
-            id: 'status.fail',
-            topic: 'auth.auth',
-            detail: JSON.stringify(tzError),
-          }))
-        }
+        yield put(updateSyncErrorStatus(emailError))
       }
 
       // non sync mode
       if (!platform.showSyncMode) {
+        // get default timezone
+        const currentTimezone = yield select(getTimezone)
+        if (!currentTimezone) {
+          yield delay(300)
+          const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
+          if (tz) {
+            yield put(setTimezone(tz.timezoneName))
+          }
+
+          if (tzError) {
+            yield put(updateSyncErrorStatus(tzError))
+          }
+        }
+
         yield put(actions.hideAuth())
       }
     }
@@ -87,11 +82,7 @@ function* checkAuth({ payload: flag }) {
       }))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
-      id: 'status.request.error',
-      topic: 'auth.auth',
-      detail: JSON.stringify(fail),
-    }))
+    yield put(updateSyncErrorStatus(fail))
   }
 }
 
@@ -100,11 +91,7 @@ function* checkAuthWithToken({ payload: authToken }) {
     yield put(setAuthToken(authToken))
     yield put(actions.checkAuth())
   } catch (fail) {
-    yield put(updateErrorStatus({
-      id: 'status.request.error',
-      topic: 'auth.auth',
-      detail: JSON.stringify(fail),
-    }))
+    yield put(updateSyncErrorStatus(fail))
   }
 }
 
@@ -115,11 +102,7 @@ function* checkAuthWithLocalToken() {
       yield put(actions.checkAuth(LOCAL_AUTHTOKEN))
     }
   } catch (fail) {
-    yield put(updateErrorStatus({
-      id: 'status.request.error',
-      topic: 'auth.auth',
-      detail: JSON.stringify(fail),
-    }))
+    yield put(updateSyncErrorStatus(fail))
   }
 }
 
