@@ -145,7 +145,7 @@ class PublicTrades extends PureComponent {
     }
 
     const amountCellRenderer = (rowIndex) => {
-      const { amount } = filteredData[rowIndex]
+      const amount = Math.abs(filteredData[rowIndex].amount)
       return (
         <Cell
           className='bitfinex-text-align-right'
