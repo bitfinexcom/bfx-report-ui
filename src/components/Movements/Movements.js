@@ -11,6 +11,7 @@ import {
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
+import Explorer from 'components/Explorer'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
@@ -25,7 +26,6 @@ import {
 } from 'state/utils'
 
 import { propTypes, defaultProps } from './Movements.props'
-import Inspector from './Inspector'
 
 // const TYPE_DEPOSITS = 'deposits'
 const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
@@ -161,7 +161,7 @@ class Movements extends PureComponent {
         <Cell tooltip={destinationAddress}>
           {destinationAddress}
           &nbsp;
-          <Inspector currency={currency} destinationAddress={destinationAddress} />
+          <Explorer currency={currency} destinationAddress={destinationAddress} />
         </Cell>
       )
     }

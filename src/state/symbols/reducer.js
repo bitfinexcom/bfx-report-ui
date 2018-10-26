@@ -5,6 +5,7 @@ import types from './constants'
 const initialState = {
   coins: [],
   currencies: {},
+  explorers: {},
   pairs: [],
 }
 
@@ -15,14 +16,18 @@ export function symbolsReducer(state = initialState, action) {
       const { currencies, pairs } = payload
       const coins = []
       const dict = {}
-      currencies.forEach(({ id, name }) => {
-        dict[id.toUpperCase()] = name
-        coins.push(id.toUpperCase())
+      const explorersDict = {}
+      currencies.forEach(({ id, name, explorer }) => {
+        const cid = id.toUpperCase()
+        dict[cid] = name
+        explorersDict[cid] = explorer
+        coins.push(cid)
       })
       return {
         ...state,
         coins: coins.sort(),
         currencies: dict,
+        explorers: explorersDict,
         pairs: (pairs && pairs.sort()) || [],
       }
     }
