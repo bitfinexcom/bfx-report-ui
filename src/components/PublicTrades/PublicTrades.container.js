@@ -26,7 +26,7 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchPublicTrades: () => dispatch(actions.fetchPublicTrades()),
+  fetchPublic_trades: () => dispatch(actions.fetchPublicTrades()),
   fetchNext: () => dispatch(actions.fetchNextPublicTrades()),
   fetchPrev: () => dispatch(actions.fetchPrevPublicTrades()),
   jumpPage: page => dispatch(actions.jumpPage(page)),

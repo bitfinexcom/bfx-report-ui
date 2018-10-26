@@ -93,9 +93,7 @@ export function publicTradesReducer(state = initialState, action) {
       return {
         ...initialState,
         targetPair: payload,
-        existingPairs: state.existingPairs,
       }
-    // existingPairs should be re-calc in new time range
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
       return {

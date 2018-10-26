@@ -43,9 +43,9 @@ class PublicTrades extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchPublicTrades } = this.props
+    const { loading, fetchPublic_trades } = this.props
     if (loading) {
-      fetchPublicTrades()
+      fetchPublic_trades()
     }
   }
 
