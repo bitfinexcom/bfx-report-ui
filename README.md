@@ -10,10 +10,17 @@ Check `docs/` folder for more details.
 
 Refer the first 2 steps from `bfx-report` project.
 
-1. Clone `bfx-report` project and npm install.
+1. Clone `bfx-report` project and do npm install.
 
 ```
 git clone https://github.com/bitfinexcom/bfx-report.git
+npm install
+```
+
+If you have installed `bfx-report` before, you might need to clean the npm cache to get the latest dependecy modules.
+
+```
+npm cache clean --force
 npm install
 ```
 

@@ -60,6 +60,7 @@ const TYPE_WHITELIST = [
   'movements',
   'orders',
   'trades',
+  'publictrades',
 ]
 
 export function isValidateType(type) {
