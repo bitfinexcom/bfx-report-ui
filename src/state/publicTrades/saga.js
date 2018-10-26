@@ -17,7 +17,7 @@ import actions from './actions'
 import { getPublicTrades, getTargetPair } from './selectors'
 
 function getReqPublicTrades(auth, query, targetPair, smallestMts) {
-  const params = getTimeFrame(query, 'public_trades', smallestMts)
+  const params = getTimeFrame(query, 'publictrades', smallestMts)
   if (targetPair) {
     params.symbol = formatRawPairToTPair(targetPair)
   }
@@ -48,7 +48,7 @@ function* fetchPublicTrades() {
   }
 }
 
-const LIMIT = queryTypes.DEFAULT_PUBLIC_TRADES_QUERY_LIMIT
+const LIMIT = queryTypes.DEFAULT_PUBLICTRADES_QUERY_LIMIT
 
 function* fetchNextPublicTrades() {
   try {

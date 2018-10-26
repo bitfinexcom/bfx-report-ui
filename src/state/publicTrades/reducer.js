@@ -13,8 +13,8 @@ const initialState = {
   targetPair: 'btcusd',
 }
 
-const LIMIT = queryTypes.DEFAULT_PUBLIC_TRADES_QUERY_LIMIT
-const PAGE_SIZE = queryTypes.DEFAULT_PUBLIC_TRADES_PAGE_SIZE
+const LIMIT = queryTypes.DEFAULT_PUBLICTRADES_QUERY_LIMIT
+const PAGE_SIZE = queryTypes.DEFAULT_PUBLICTRADES_PAGE_SIZE
 
 export function publicTradesReducer(state = initialState, action) {
   const { type: actionType, payload } = action

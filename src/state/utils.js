@@ -60,7 +60,7 @@ const TYPE_WHITELIST = [
   'movements',
   'orders',
   'trades',
-  'public_trades',
+  'publictrades',
 ]
 
 export function isValidateType(type) {
@@ -68,7 +68,7 @@ export function isValidateType(type) {
 }
 
 export function checkFetch(prevProps, props, type) {
-  if (!isValidateType(type)) {console.warn('not valid')
+  if (!isValidateType(type)) {
     return
   }
   const { loading: prevLoading } = prevProps

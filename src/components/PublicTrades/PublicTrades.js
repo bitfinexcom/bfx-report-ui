@@ -28,8 +28,8 @@ import { formatPair } from 'state/symbols/utils'
 import { propTypes, defaultProps } from './PublicTrades.props'
 
 const COLUMN_WIDTHS = [85, 150, 80, 125, 125, 100]
-const LIMIT = queryConstants.DEFAULT_PUBLIC_TRADES_QUERY_LIMIT
-const PAGE_SIZE = queryConstants.DEFAULT_PUBLIC_TRADES_PAGE_SIZE
+const LIMIT = queryConstants.DEFAULT_PUBLICTRADES_QUERY_LIMIT
+const PAGE_SIZE = queryConstants.DEFAULT_PUBLICTRADES_PAGE_SIZE
 const TYPE = queryConstants.MENU_PUBLIC_TRADES
 const WILD_CARD = ['']
 
@@ -43,9 +43,9 @@ class PublicTrades extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchPublic_trades } = this.props
+    const { loading, fetchPublictrades } = this.props
     if (loading) {
-      fetchPublic_trades()
+      fetchPublictrades()
     }
   }
 
