@@ -8,9 +8,11 @@ import {
 import { delay } from 'redux-saga'
 
 import { makeFetchCall } from 'state/utils'
-import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
-import authTypes from 'state/auth/constants'
 import { hideAuth } from 'state/auth/actions'
+import authTypes from 'state/auth/constants'
+import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
+import { setTimezone } from 'state/base/actions'
+import { getTimezone } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 
 import types from './constants'
@@ -24,14 +26,12 @@ const syncNow = auth => makeFetchCall('syncNow', auth)
 const logout = auth => makeFetchCall('logout', auth)
 const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
-
-function updateSyncErrorStatus(msg) {
-  return updateErrorStatus({
-    id: 'status.request.error',
-    topic: 'sync.title',
-    detail: msg,
-  })
-}
+const getUsersTimeConf = auth => makeFetchCall('getUsersTimeConf', auth)
+const updateSyncErrorStatus = msg => updateErrorStatus({
+  id: 'status.request.error',
+  topic: 'sync.title',
+  detail: msg,
+})
 
 function* startSyncing() {
   yield delay(300)
@@ -86,6 +86,20 @@ function* syncWatcher() {
       if (authState && isShownAuth) {
         const { result, error } = yield call(syncNow, auth)
         if (result) {
+          // get default timezone
+          const currentTimezone = yield select(getTimezone)
+          if (!currentTimezone) {
+            yield delay(300)
+            const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
+            if (tz) {
+              yield put(setTimezone(tz.timezoneName))
+            }
+
+            if (tzError) {
+              yield put(updateSyncErrorStatus(JSON.stringify(tzError)))
+            }
+          }
+
           yield put(hideAuth())
         }
         if (error) {
