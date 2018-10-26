@@ -12,7 +12,7 @@ const PUBLIC_TRADES_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(PUBLIC_TRADES_ENTRIES_PROPS).isRequired,
-  fetchPublicTrades: PropTypes.func.isRequired,
+  fetchPublictrades: PropTypes.func.isRequired,
   fetchNext: PropTypes.func.isRequired,
   fetchPrev: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
@@ -29,7 +29,7 @@ export const propTypes = {
 export const defaultProps = {
   offset: 0,
   entries: [],
-  fetchPublicTrades: () => {},
+  fetchPublictrades: () => {},
   fetchNext: () => {},
   fetchPrev: () => {},
   intl: {},
