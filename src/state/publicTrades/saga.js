@@ -71,7 +71,7 @@ function* fetchNextPublicTrades() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqPublicTrades, auth, query, targetPair, smallestMts)
-    yield put(actions.updateTrades(result))
+    yield put(actions.updatePublicTrades(result))
 
     if (error) {
       yield put(actions.fetchFail({
