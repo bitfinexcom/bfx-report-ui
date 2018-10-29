@@ -17,7 +17,7 @@ import actions from './actions'
 import { getTargetSymbol, getFundingOfferHistory } from './selectors'
 
 function getReqFOffer(auth, query, targetSymbol, smallestMts) {
-  const params = getTimeFrame(query, 'foffer', smallestMts)
+  const params = getTimeFrame(query, queryTypes.MENU_FOFFER, smallestMts)
   if (targetSymbol) {
     params.symbol = formatRawSymbolToFSymbol(targetSymbol)
   }

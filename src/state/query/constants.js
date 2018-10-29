@@ -6,6 +6,7 @@ export default {
   MENU_ORDERS: 'orders',
   MENU_TRADES: 'trades',
   MENU_DEPOSITS: 'deposits',
+  MENU_MOVEMENTS: 'movements',
   MENU_WITHDRAWALS: 'withdrawals',
   MENU_PUBLIC_TRADES: 'publictrades',
   TIME_TYPE_UTC: 'utc',

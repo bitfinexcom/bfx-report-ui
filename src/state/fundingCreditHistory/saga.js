@@ -17,7 +17,7 @@ import actions from './actions'
 import { getTargetSymbol, getFundingCreditHistory } from './selectors'
 
 function getReqFCredit(auth, query, targetSymbol, smallestMts) {
-  const params = getTimeFrame(query, 'fundingCreditHistory', smallestMts)
+  const params = getTimeFrame(query, queryTypes.MENU_FCREDIT, smallestMts)
   if (targetSymbol) {
     params.symbol = formatRawSymbolToFSymbol(targetSymbol)
   }

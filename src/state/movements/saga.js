@@ -16,7 +16,7 @@ import actions from './actions'
 import { getTargetSymbol, getMovements } from './selectors'
 
 function getReqMovements(auth, query, targetSymbol, smallestMts) {
-  const params = getTimeFrame(query, 'movements', smallestMts)
+  const params = getTimeFrame(query, queryTypes.MENU_MOVEMENTS, smallestMts)
   if (targetSymbol) {
     params.symbol = targetSymbol
   }
