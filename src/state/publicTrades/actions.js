@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch public Trades data.
+ * @param {string} pair pair param from url
  */
-export function fetchPublicTrades() {
+export function fetchPublicTrades(pair) {
   return {
     type: types.FETCH_PUBLIC_TRADES,
+    payload: pair,
   }
 }
 

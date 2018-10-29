@@ -24,9 +24,14 @@ function getReqPublicTrades(auth, query, targetPair, smallestMts) {
   return makeFetchCall('getPublicTrades', auth, params)
 }
 
-function* fetchPublicTrades() {
+function* fetchPublicTrades({ payload }) {
   try {
+    const urlPair = payload && payload.toLowerCase()
     const targetPair = yield select(getTargetPair)
+    // set pair from url
+    if (urlPair && urlPair !== targetPair) {
+      yield put(actions.setTargetPair(urlPair))
+    }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqPublicTrades, auth, query, targetPair, 0)
