@@ -65,8 +65,12 @@ function getCSV(auth, query, target, options) {
       method = 'getTradesCsv'
       break
     case MENU_WITHDRAWALS:
+      method = 'getMovementsCsv'
+      params.isWithdrawals = true
+      break
     case MENU_DEPOSITS:
       method = 'getMovementsCsv'
+      params.isDeposits = true
       break
     case MENU_PUBLIC_TRADES:
       method = 'getPublicTradesCsv'
