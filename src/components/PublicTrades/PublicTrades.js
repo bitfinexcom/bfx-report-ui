@@ -60,7 +60,7 @@ class PublicTrades extends PureComponent {
       this.handlers[pair] = () => {
         const { history, setTargetPair } = this.props
         // show select pair in url
-        history.push(getPath(TYPE) + `/${pair.toUpperCase()}` + history.location.search)
+        history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${history.location.search}`)
         setTargetPair(pair)
       }
     }
