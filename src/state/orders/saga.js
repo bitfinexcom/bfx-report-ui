@@ -17,7 +17,7 @@ import actions from './actions'
 import { getOrders, getTargetPair } from './selectors'
 
 function getReqOrders(auth, query, targetPair, smallestMts) {
-  const params = getTimeFrame(query, 'orders', smallestMts)
+  const params = getTimeFrame(query, queryTypes.MENU_ORDERS, smallestMts)
   if (targetPair) {
     params.symbol = formatRawPairToTPair(targetPair)
   }

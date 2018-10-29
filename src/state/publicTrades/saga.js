@@ -17,7 +17,7 @@ import actions from './actions'
 import { getPublicTrades, getTargetPair } from './selectors'
 
 function getReqPublicTrades(auth, query, targetPair, smallestMts) {
-  const params = getTimeFrame(query, 'publictrades', smallestMts)
+  const params = getTimeFrame(query, queryTypes.MENU_PUBLIC_TRADES, smallestMts)
   if (targetPair) {
     params.symbol = formatRawPairToTPair(targetPair)
   }

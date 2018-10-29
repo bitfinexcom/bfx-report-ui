@@ -17,7 +17,7 @@ import actions from './actions'
 import { getTargetSymbol, getFundingLoanHistory } from './selectors'
 
 function getReqFLoan(auth, query, targetSymbol, smallestMts) {
-  const params = getTimeFrame(query, 'floan', smallestMts)
+  const params = getTimeFrame(query, queryTypes.MENU_FLOAN, smallestMts)
   if (targetSymbol) {
     params.symbol = formatRawSymbolToFSymbol(targetSymbol)
   }

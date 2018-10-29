@@ -16,7 +16,7 @@ import actions from './actions'
 import { getTargetSymbol, getLedgers } from './selectors'
 
 function getReqLedgers(auth, query, targetSymbol, smallestMts) {
-  const params = getTimeFrame(query, 'ledgers', smallestMts)
+  const params = getTimeFrame(query, queryTypes.MENU_LEDGERS, smallestMts)
   if (targetSymbol) {
     params.symbol = targetSymbol
   }
