@@ -14,7 +14,7 @@ import Trades from 'components/Trades'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
-import { getPath, getTraget } from 'state/query/utils'
+import { getPath, getTarget } from 'state/query/utils'
 import ToggleMenu from 'ui/ToggleMenu'
 
 import { propTypes, defaultProps } from './Main.props'
@@ -97,7 +97,7 @@ class Main extends PureComponent {
 
   startExport() {
     const { location, exportCsv } = this.props
-    const target = getTraget(location.pathname)
+    const target = getTarget(location.pathname)
     exportCsv(target)
     this.setState({ isExportOpen: false })
   }
@@ -117,7 +117,7 @@ class Main extends PureComponent {
       isExportOpen,
       startDate,
     } = this.state
-    const target = getTraget(location.pathname)
+    const target = getTarget(location.pathname)
 
     const datasetClass = menuMode === baseType.MENU_MODE_ICON
       ? classNames(

@@ -17,7 +17,7 @@ import PrefDialog from 'components/PrefDialog'
 import SyncMode from 'components/SyncMode'
 import ToggleMenu from 'ui/ToggleMenu'
 import baseType from 'state/base/constants'
-import { getTraget } from 'state/query/utils'
+import { getTarget } from 'state/query/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Header.props'
@@ -85,7 +85,7 @@ class Header extends PureComponent {
     } = this.props
     const { isPrefOpen } = this.state
 
-    const target = getTraget(location.pathname)
+    const target = getTarget(location.pathname)
     const isLogin = !authIsShown && authStatus === true
     const renderToggleMenu = isLogin ? (
       <Fragment>

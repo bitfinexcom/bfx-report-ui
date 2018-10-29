@@ -74,7 +74,7 @@ const PATHMAP = {
 // /target?params=
 // /target/BTCUSD
 // /target/BTCUSD?params=
-export function getTraget(link) {
+export function getTarget(link) {
   let baseLink = link
   if (link.slice(1).indexOf('/') > -1) {
     const parts = link.split('/')
@@ -96,6 +96,6 @@ export function getPath(target) {
 export default {
   getIcon,
   getPath,
-  getTraget,
+  getTarget,
   isValidTimeStamp,
 }
