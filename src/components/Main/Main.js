@@ -14,7 +14,7 @@ import Trades from 'components/Trades'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
-import { getPath, getTraget } from 'state/query/utils'
+import { getPath, getTarget } from 'state/query/utils'
 import ToggleMenu from 'ui/ToggleMenu'
 
 import { propTypes, defaultProps } from './Main.props'
@@ -53,7 +53,7 @@ class Main extends PureComponent {
   handleClick(target) {
     const { history } = this.props
     // remove url params
-    history.push(getPath(target) + history.location.search)
+    history.push(`${getPath(target)}${history.location.search}`)
   }
 
   handleClickCustom(e) {
@@ -97,7 +97,7 @@ class Main extends PureComponent {
 
   startExport() {
     const { location, exportCsv } = this.props
-    const target = getTraget(location.pathname)
+    const target = getTarget(location.pathname)
     exportCsv(target)
     this.setState({ isExportOpen: false })
   }
@@ -117,7 +117,7 @@ class Main extends PureComponent {
       isExportOpen,
       startDate,
     } = this.state
-    const target = getTraget(location.pathname)
+    const target = getTarget(location.pathname)
 
     const datasetClass = menuMode === baseType.MENU_MODE_ICON
       ? classNames(
@@ -183,7 +183,12 @@ class Main extends PureComponent {
               component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
+              exact
               path={getPath(MENU_PUBLIC_TRADES)}
+              component={() => <PublicTrades handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_PUBLIC_TRADES)}/:pair`}
               component={() => <PublicTrades handleClickExport={this.handleClickExport} />}
             />
           </Switch>

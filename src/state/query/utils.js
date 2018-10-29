@@ -69,9 +69,18 @@ const PATHMAP = {
   [MAPPING[MENU_PUBLIC_TRADES].path]: MENU_PUBLIC_TRADES,
 }
 
-// get target from /link
-export function getTraget(link) {
-  return PATHMAP[link] || MENU_LEDGERS
+// get target from the following link syntax
+// /target
+// /target?params=
+// /target/BTCUSD
+// /target/BTCUSD?params=
+export function getTarget(link) {
+  let baseLink = link
+  if (link.slice(1).indexOf('/') > -1) {
+    const parts = link.split('/')
+    baseLink = link.replace(`/${parts[parts.length - 1]}`, '')
+  }
+  return PATHMAP[baseLink] || MENU_LEDGERS
 }
 
 // get icon from target
@@ -87,6 +96,6 @@ export function getPath(target) {
 export default {
   getIcon,
   getPath,
-  getTraget,
+  getTarget,
   isValidTimeStamp,
 }

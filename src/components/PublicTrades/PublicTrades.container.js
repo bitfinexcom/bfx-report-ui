@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import actions from 'state/publicTrades/actions'
 import { getTimezone } from 'state/base/selectors'
@@ -26,7 +27,7 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchPublictrades: () => dispatch(actions.fetchPublicTrades()),
+  fetchPublictrades: pair => dispatch(actions.fetchPublicTrades(pair)),
   fetchNext: () => dispatch(actions.fetchNextPublicTrades()),
   fetchPrev: () => dispatch(actions.fetchPrevPublicTrades()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
@@ -34,6 +35,6 @@ const mapDispatchToProps = dispatch => ({
   setTargetPair: pair => dispatch(actions.setTargetPair(pair)),
 })
 
-const PublicTradesContainer = connect(mapStateToProps, mapDispatchToProps)(PublicTrades)
+const PublicTradesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(PublicTrades))
 
 export default PublicTradesContainer
