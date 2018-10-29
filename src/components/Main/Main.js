@@ -53,7 +53,7 @@ class Main extends PureComponent {
   handleClick(target) {
     const { history } = this.props
     // remove url params
-    history.push(getPath(target) + history.location.search)
+    history.push(`${getPath(target)}${history.location.search}`)
   }
 
   handleClickCustom(e) {
