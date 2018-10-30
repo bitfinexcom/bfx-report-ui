@@ -29,8 +29,7 @@ const updateSyncErrorStatus = msg => updateErrorStatus({
 function* checkAuth({ payload: flag }) {
   try {
     const auth = yield select(selectAuth)
-    const data = yield call(getAuth, auth)
-    const { result = false, error } = data
+    const { result = false, error } = yield call(getAuth, auth)
     if (result) {
       yield put(updateSuccessStatus({
         id: 'status.success',

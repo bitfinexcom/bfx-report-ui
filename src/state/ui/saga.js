@@ -1,13 +1,13 @@
 import { put, takeLatest } from 'redux-saga/effects'
-import queryString from 'query-string'
-import _omit from 'lodash/omit'
 
 import { checkAuthWithToken, checkAuthWithLocalToken } from 'state/auth/actions'
 import { setCustomTimeRange } from 'state/query/actions'
+import { getParsedUrlParams, getNoAuthTokenUrlString } from 'state/utils'
+
 import types from './constants'
 
 function* uiLoaded() {
-  const parsed = queryString.parse(window.location.search)
+  const parsed = getParsedUrlParams(window.location.search)
   const { authToken, range } = parsed
   // handle custom time range
   if (range && range.indexOf('-') > -1) {
@@ -16,14 +16,10 @@ function* uiLoaded() {
   }
   // handle authToken
   if (authToken) {
-    // remove authToken param from url but keep others
-    const params = _omit(parsed, 'authToken')
-    const queries = queryString.stringify(params, { encode: false })
-    const queryParams = queries ? `?${queries}` : ''
     window.history.pushState(null, null,
       window.location.href.replace(
         window.location.search,
-        queryParams,
+        getNoAuthTokenUrlString(window.location.search),
       ))
     yield put(checkAuthWithToken(authToken))
   } else {

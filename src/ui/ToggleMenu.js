@@ -11,6 +11,7 @@ import Timeframe from 'components/Timeframe'
 import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
 import { getIcon, getPath } from 'state/query/utils'
+import { getNoAuthTokenUrlString } from 'state/utils'
 
 const {
   MENU_FCREDIT,
@@ -40,7 +41,7 @@ class ToggleMenu extends PureComponent {
 
   handleClick(target) {
     const { history } = this.props
-    history.push(`${getPath(target)}${history.location.search}`)
+    history.push(`${getPath(target)}${getNoAuthTokenUrlString(history.location.search)}`)
   }
 
   render() {
