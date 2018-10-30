@@ -1,6 +1,6 @@
 {
   "name": "bfx-report-ui",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Report page to overview the user actions in Bitfinex and download related csv files",
   "repository": {
     "type": "git",
