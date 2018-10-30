@@ -52,7 +52,7 @@ const MAPPING = {
   },
   [MENU_PUBLIC_TRADES]: {
     icon: 'exchange',
-    path: '/trade_history',
+    path: '/pub_trades',
   },
 }
 
