@@ -1,4 +1,6 @@
 import moment from 'moment'
+import queryString from 'query-string'
+import _omit from 'lodash/omit'
 
 import { platform } from 'var/config'
 
@@ -108,6 +110,18 @@ export function getSideMsg(side) {
   return msg
 }
 
+export function getParsedUrlParams(searchUrl) {
+  return queryString.parse(searchUrl)
+}
+
+// remove authToken param from url but keep others
+export function getNoAuthTokenUrlString(searchUrl) {
+  const parsed = queryString.parse(searchUrl)
+  const params = _omit(parsed, 'authToken')
+  const queries = queryString.stringify(params, { encode: false })
+  return queries ? `?${queries}` : ''
+}
+
 export default {
   checkFetch,
   checkEmail,
@@ -116,6 +130,8 @@ export default {
   formatTime,
   getAuth,
   getCurrentEntries,
+  getNoAuthTokenUrlString,
+  getParsedUrlParams,
   getSideMsg,
   isValidateType,
   momentFormatter,

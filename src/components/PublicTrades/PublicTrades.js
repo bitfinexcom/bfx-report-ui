@@ -23,6 +23,7 @@ import {
   checkFetch,
   formatTime,
   getCurrentEntries,
+  getNoAuthTokenUrlString,
 } from 'state/utils'
 import { formatPair } from 'state/symbols/utils'
 
@@ -60,7 +61,7 @@ class PublicTrades extends PureComponent {
       this.handlers[pair] = () => {
         const { history, setTargetPair } = this.props
         // show select pair in url
-        history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${history.location.search}`)
+        history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${getNoAuthTokenUrlString(history.location.search)}`)
         setTargetPair(pair)
       }
     }
