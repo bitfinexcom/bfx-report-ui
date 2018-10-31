@@ -3,11 +3,11 @@ import React from 'react'
 import { propTypes, defaultProps } from './Explorer.props'
 
 export const Explorer = ({ currency, destinationAddress, explorers }) => {
-  const target = explorers[currency]
-  return target ? (
+  const [name, link] = explorers[currency]
+  return name && link ? (
     <span className='bitfinex-show-soft'>
-      <a href={target[1].replace('VAL', destinationAddress)} target='_blank' rel='noopener noreferrer'>
-        {target[0]}
+      <a href={link.replace('VAL', destinationAddress)} target='_blank' rel='noopener noreferrer'>
+        {name}
       </a>
     </span>
   ) : null
