@@ -155,7 +155,12 @@ class Main extends PureComponent {
               component={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
+              exact
               path={getPath(MENU_TRADES)}
+              component={() => <Trades handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_TRADES)}/:pair`}
               component={() => <Trades handleClickExport={this.handleClickExport} />}
             />
             <Route

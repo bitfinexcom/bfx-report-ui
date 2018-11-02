@@ -18,6 +18,7 @@ import NoData from 'ui/NoData'
 import PairSelector from 'ui/PairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
+import { getPath } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
@@ -43,9 +44,10 @@ class Trades extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchTrades } = this.props
+    const { loading, fetchTrades, match } = this.props
     if (loading) {
-      fetchTrades()
+      const pair = (match.params && match.params.pair) || ''
+      fetchTrades(pair)
     }
   }
 
@@ -56,8 +58,15 @@ class Trades extends PureComponent {
   handleClick(pair) {
     if (!this.handlers[pair]) {
       this.handlers[pair] = () => {
-        // eslint-disable-next-line react/destructuring-assignment
-        this.props.setTargetPair(pair === ALL ? '' : pair)
+        const { history, setTargetPair } = this.props
+        // show select pair in url
+        if (pair === ALL) {
+          history.push(`${getPath(TYPE)}${history.location.search}`)
+          setTargetPair('')
+        } else {
+          history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${history.location.search}`)
+          setTargetPair(pair)
+        }
       }
     }
     return this.handlers[pair]
