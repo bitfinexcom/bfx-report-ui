@@ -24,9 +24,15 @@ function getReqTrades(auth, query, targetPair, smallestMts) {
   return makeFetchCall('getTrades', auth, params)
 }
 
-function* fetchTrades() {
+function* fetchTrades({ payload: pair }) {
   try {
-    const targetPair = yield select(getTargetPair)
+    const urlPair = pair && pair.toLowerCase()
+    let targetPair = yield select(getTargetPair)
+    // set pair from url
+    if (urlPair && urlPair !== targetPair) {
+      yield put(actions.setTargetPair(urlPair))
+      targetPair = urlPair
+    }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqTrades, auth, query, targetPair, 0)
