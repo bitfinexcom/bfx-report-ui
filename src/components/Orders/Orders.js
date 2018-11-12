@@ -136,9 +136,12 @@ class Orders extends PureComponent {
 
     const amountCellRenderer = (rowIndex) => {
       const { amountOrig } = filteredData[rowIndex]
+      const classes = parseFloat(amountOrig) > 0
+        ? 'bitfinex-green-text bitfinex-text-align-right'
+        : 'bitfinex-red-text bitfinex-text-align-right'
       return (
         <Cell
-          className='bitfinex-text-align-right'
+          className={classes}
           tooltip={amountOrig}
         >
           {amountOrig}

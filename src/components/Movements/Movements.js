@@ -133,16 +133,15 @@ class Movements extends PureComponent {
     const amountCellRenderer = (rowIndex) => {
       const { amount, currency } = filteredData[rowIndex]
       const tooltip = `${amount} ${currency}`
+      const classes = parseFloat(amount) > 0
+        ? 'bitfinex-green-text bitfinex-text-align-right'
+        : 'bitfinex-red-text bitfinex-text-align-right'
       return (
         <Cell
-          className='bitfinex-text-align-right'
+          className={classes}
           tooltip={tooltip}
         >
           {amount}
-          &nbsp;
-          <span className='bitfinex-show-soft'>
-            {currency}
-          </span>
         </Cell>
       )
     }
