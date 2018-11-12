@@ -88,6 +88,7 @@
   "orders.column.amount-exe": "執行金額",
   "orders.column.price": "價格",
   "orders.column.avgprice": "平均執行價格",
+  "orders.column.create": "建立",
   "orders.column.update": "更新",
   "orders.column.status": "狀態",
   "publictrades.title": "公開交易",
