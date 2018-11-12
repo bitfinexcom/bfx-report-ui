@@ -88,6 +88,7 @@
   "orders.column.amount-exe": "EXECUTED AMOUNT",
   "orders.column.price": "PRICE",
   "orders.column.avgprice": "AVERAGE EXECUTION PRICE",
+  "orders.column.create": "CREATE",
   "orders.column.update": "UPDATE",
   "orders.column.status": "STATUS",
   "publictrades.title": "Public Trades",

@@ -26,7 +26,7 @@ import {
 
 import { propTypes, defaultProps } from './Orders.props'
 
-const COLUMN_WIDTHS = [100, 80, 150, 100, 100, 100, 100, 150, 200]
+const COLUMN_WIDTHS = [100, 80, 150, 100, 100, 100, 100, 150, 150, 200]
 const LIMIT = queryConstants.DEFAULT_ORDERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_ORDERS_PAGE_SIZE
 const TYPE = queryConstants.MENU_ORDERS
@@ -169,6 +169,17 @@ class Orders extends PureComponent {
       )
     }
 
+    const mtsCreateCellRenderer = (rowIndex) => {
+      const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate, timezone)
+      return (
+        <Cell tooltip={mtsCreate}>
+          <TruncatedFormat>
+            {mtsCreate}
+          </TruncatedFormat>
+        </Cell>
+      )
+    }
+
     const mtsUpdateCellRenderer = (rowIndex) => {
       const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
       return (
@@ -258,6 +269,12 @@ class Orders extends PureComponent {
         name: 'orders.column.avgprice',
         renderer: priceAvgCellRenderer,
         tooltip: rowIndex => filteredData[rowIndex].priceAvg,
+      },
+      {
+        id: 'mtsCreate',
+        name: 'orders.column.create',
+        renderer: mtsCreateCellRenderer,
+        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsCreate, timezone),
       },
       {
         id: 'mtsUpdate',
