@@ -91,6 +91,12 @@ Bfx-report support sync user data to local machine and query offline. To enable 
 
 Then run `npm start` and you will see the extra sync status button at top right side of the header.
 
+## Configure for Ethfinex
+
+1. set `export REACT_APP_PLATFORM=ethfinex` in env variables instead
+
+You'll noticed `hideSwitchTheme` is set to true in `var/config.js` because Ethfinex does not have dark/light theming.
+
 ## 3rd party libraries
 
 * react/redux/redux-saga for core architecture

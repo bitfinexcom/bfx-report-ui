@@ -15,6 +15,7 @@ const platforms = {
     KEY_URL: 'https://www.ethfinex.com/api',
     showAuthPage: false,
     showSyncMode: false,
+    hideSwitchTheme: true,
   },
   test: {
     id: 'test',
