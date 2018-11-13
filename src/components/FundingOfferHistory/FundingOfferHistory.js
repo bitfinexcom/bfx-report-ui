@@ -8,6 +8,7 @@ import {
   Cell,
   TruncatedFormat,
 } from '@blueprintjs/table'
+import classNames from 'classnames'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
@@ -129,8 +130,8 @@ class FundingOfferHistory extends PureComponent {
     const amountExecutedCellRenderer = (rowIndex) => {
       const { amountExecuted } = filteredData[rowIndex]
       const classes = parseFloat(amountExecuted) > 0
-        ? 'bitfinex-green-text bitfinex-text-align-right'
-        : 'bitfinex-red-text bitfinex-text-align-right'
+        ? classNames('bitfinex-green-text', 'bitfinex-text-align-right')
+        : classNames('bitfinex-red-text', 'bitfinex-text-align-right')
       return (
         <Cell
           className={classes}

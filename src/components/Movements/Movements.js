@@ -8,6 +8,7 @@ import {
   Cell,
   TruncatedFormat,
 } from '@blueprintjs/table'
+import classNames from 'classnames'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
@@ -134,8 +135,8 @@ class Movements extends PureComponent {
       const { amount, currency } = filteredData[rowIndex]
       const tooltip = `${amount} ${currency}`
       const classes = parseFloat(amount) > 0
-        ? 'bitfinex-green-text bitfinex-text-align-right'
-        : 'bitfinex-red-text bitfinex-text-align-right'
+        ? classNames('bitfinex-green-text', 'bitfinex-text-align-right')
+        : classNames('bitfinex-red-text', 'bitfinex-text-align-right')
       return (
         <Cell
           className={classes}
