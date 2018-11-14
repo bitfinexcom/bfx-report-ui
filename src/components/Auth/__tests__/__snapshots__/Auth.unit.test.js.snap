@@ -139,4 +139,4 @@ exports[`render correctly 1`] = `
 </div>
 `;
 
-exports[`render correctly while hidden 1`] = `""`;
+exports[`render correctly while hidden 1`] = `null`;
