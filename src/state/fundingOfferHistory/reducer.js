@@ -12,6 +12,7 @@ const initialState = {
   pageLoading: false,
   smallestMts: 0,
   targetSymbol: '',
+  nextPage: false,
 }
 
 const LIMIT = queryTypes.DEFAULT_FOFFER_QUERY_LIMIT
@@ -21,10 +22,11 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_FOFFER: {
+      const { res, nextPage } = payload
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
       let smallestMts
-      const entries = payload.map((entry) => {
+      const entries = res.map((entry) => {
         const {
           amount,
           amountExecuted,
@@ -80,6 +82,7 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,
+        nextPage,
       }
     }
     case types.FETCH_FAIL:

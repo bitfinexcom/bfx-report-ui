@@ -89,6 +89,7 @@ class Ledgers extends PureComponent {
       loading,
       refresh,
       timezone,
+      nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
@@ -197,6 +198,7 @@ class Ledgers extends PureComponent {
         nextClick={this.fetchNext}
         prevClick={this.fetchPrev}
         pageOffset={pageOffset}
+        nextPage={nextPage}
       />
     )
 

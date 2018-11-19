@@ -10,6 +10,7 @@ const initBlockState = {
   offset: 0,
   pageOffset: 0,
   pageLoading: false,
+  nextPage: false,
 }
 
 describe('ledger state', () => {

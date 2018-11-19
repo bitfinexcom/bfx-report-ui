@@ -11,6 +11,7 @@ import {
   getPageLoading,
   getPageOffset,
   getTargetSymbol,
+  getNextPage,
 } from 'state/fundingOfferHistory/selectors'
 
 import FundingOfferHistory from './FundingOfferHistory'
@@ -26,6 +27,7 @@ const mapStateToProps = (state = {}) => ({
   pageLoading: getPageLoading(state),
   targetSymbol: getTargetSymbol(state),
   timezone: getTimezone(state),
+  nextPage: getNextPage(state),
 })
 
 const mapDispatchToProps = dispatch => ({

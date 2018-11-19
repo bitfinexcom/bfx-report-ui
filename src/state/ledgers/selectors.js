@@ -7,12 +7,14 @@ export const getEntries = state => getLedgers(state).entries
 export const getOffset = state => getLedgers(state).offset
 export const getPageLoading = state => getLedgers(state).pageLoading
 export const getPageOffset = state => getLedgers(state).pageOffset
+export const getNextPage = state => getLedgers(state).nextPage
 
 export default {
   getDataReceived,
   getEntries,
   getExistingCoins,
   getLedgers,
+  getNextPage,
   getOffset,
   getPageLoading,
   getPageOffset,

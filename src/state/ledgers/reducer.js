@@ -4,95 +4,16 @@ import authTypes from 'state/auth/constants'
 
 import types from './constants'
 
-/*
-{
-    "result": [
-        {
-            "domain": null,
-            "_events": {},
-            "_eventsCount": 0,
-            "_fields": {
-                "id": 0,
-                "currency": 1,
-                "mts": 3,
-                "amount": 5,
-                "balance": 6,
-                "description": 8
-            },
-            "_boolFields": [],
-            "_fieldKeys": [
-                "id",
-                "currency",
-                "mts",
-                "amount",
-                "balance",
-                "description"
-            ],
-            "id": 131916849,
-            "currency": "USD",
-            "mts": 1527625475000,
-            "amount": 91.8,
-            "balance": 20091.8,
-            "description": "Exchange 0.09 BTC for USD @ 1020.0 on wallet exchange"
-        },
-        {
-            "domain": null,
-            "_events": {},
-            "_eventsCount": 0,
-            "_fields": {
-                "id": 0,
-                "currency": 1,
-                "mts": 3,
-                "amount": 5,
-                "balance": 6,
-                "description": 8
-            },
-            "_boolFields": [],
-            "_fieldKeys": [
-                "id",
-                "currency",
-                "mts",
-                "amount",
-                "balance",
-                "description"
-            ],
-            "id": 131916850,
-            "currency": "BTC",
-            "mts": 1527625475000,
-            "amount": -0.09,
-            "balance": 19.91,
-            "description": "Exchange 0.09 BTC for USD @ 1020.0 on wallet exchange"
-        }
-    ],
-    "id": 5
-}
-*/
 const initialState = {
   dataReceived: false,
-  entries: [
-    /* {
-      id: 131919156,
-      currency: 'USD',
-      mts: 1528335001000,
-      amount: 17.18587619,
-      balance: 5018.07087619,
-      description: 'Margin Funding Payment on wallet funding',
-    },
-    {
-      id: 131918375,
-      currency: 'USD',
-      mts: 1528274257000,
-      amount: 5000.885,
-      balance: 5000.885,
-      description: 'Transfer of 5000.885 USD from wallet Exchange to Deposit on wallet funding',
-    }, */
-  ],
+  entries: [],
   existingCoins: [],
   offset: 0, // end of current offset
   pageLoading: false,
   pageOffset: 0, // start of current page
   smallestMts: 0,
   targetSymbol: '',
+  nextPage: false,
 }
 
 const LIMIT = queryTypes.DEFAULT_LEDGERS_QUERY_LIMIT
@@ -102,10 +23,11 @@ export function ledgersReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_LEDGERS: {
+      const { res, nextPage } = payload
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
       let smallestMts
-      const entries = payload.map((entry) => {
+      const entries = res.map((entry) => {
         const {
           amount,
           balance,
@@ -142,6 +64,7 @@ export function ledgersReducer(state = initialState, action) {
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,
+        nextPage,
       }
     }
     case types.FETCH_FAIL:

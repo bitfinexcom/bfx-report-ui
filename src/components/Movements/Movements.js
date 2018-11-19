@@ -92,6 +92,7 @@ class Movements extends PureComponent {
       loading,
       refresh,
       timezone,
+      nextPage,
     } = this.props
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
@@ -233,6 +234,7 @@ class Movements extends PureComponent {
         prevClick={this.fetchPrev}
         nextClick={this.fetchNext}
         pageOffset={pageOffset}
+        nextPage={nextPage}
       />
     )
 

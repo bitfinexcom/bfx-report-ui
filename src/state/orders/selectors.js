@@ -7,11 +7,13 @@ export const getOffset = state => getOrders(state).offset
 export const getPageLoading = state => getOrders(state).pageLoading
 export const getPageOffset = state => getOrders(state).pageOffset
 export const getTargetPair = state => getOrders(state).targetPair
+export const getNextPage = state => getOrders(state).nextPage
 
 export default {
   getDataReceived,
   getEntries,
   getExistingPairs,
+  getNextPage,
   getOffset,
   getOrders,
   getPageLoading,

@@ -11,6 +11,7 @@ import {
   getPageLoading,
   getPageOffset,
   getTargetPair,
+  getNextPage,
 } from 'state/orders/selectors'
 
 import Orders from './Orders'
@@ -25,6 +26,7 @@ const mapStateToProps = (state = {}) => ({
   pairs: getPairs(state),
   targetPair: getTargetPair(state),
   timezone: getTimezone(state),
+  nextPage: getNextPage(state),
 })
 
 const mapDispatchToProps = dispatch => ({

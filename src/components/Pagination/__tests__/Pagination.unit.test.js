@@ -91,6 +91,7 @@ const TEST_CASES = [
     pageOffset: 0,
     placeholder: 1,
     totalPages: '25',
+    nextPage: true,
   },
   {
     title: 'render correctly in 26 of 26 pages',
@@ -127,6 +128,7 @@ const TEST_CASES = [
     pageOffset: 0,
     placeholder: 26,
     totalPages: '50',
+    nextPage: true,
   },
   {
     title: 'render correctly in 51 of 51 pages',
@@ -181,6 +183,7 @@ const TEST_CASES = [
     pageOffset: 0,
     placeholder: 1,
     totalPages: '10',
+    nextPage: true,
   },
   {
     title: 'render trades correctly in 11 of 12 pages',
@@ -214,6 +217,7 @@ TEST_CASES.forEach((entry) => {
         dataLen={entry.dataLen}
         offset={entry.offset}
         pageOffset={entry.pageOffset}
+        nextPage={entry.nextPage || false}
       />,
     )
     const tree = component.toJSON()

@@ -12,6 +12,7 @@ import {
   getPageLoading,
   getPageOffset,
   getTargetPair,
+  getNextPage,
 } from 'state/trades/selectors'
 
 import Trades from './Trades'
@@ -26,6 +27,7 @@ const mapStateToProps = (state = {}) => ({
   pairs: getPairs(state),
   targetPair: getTargetPair(state),
   timezone: getTimezone(state),
+  nextPage: getNextPage(state),
 })
 
 const mapDispatchToProps = dispatch => ({

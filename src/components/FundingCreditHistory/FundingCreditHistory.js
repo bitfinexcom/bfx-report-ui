@@ -90,6 +90,7 @@ class FundingCreditHistory extends PureComponent {
       loading,
       refresh,
       timezone,
+      nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
@@ -237,6 +238,7 @@ class FundingCreditHistory extends PureComponent {
         prevClick={this.fetchPrev}
         nextClick={this.fetchNext}
         pageOffset={pageOffset}
+        nextPage={nextPage}
       />
     )
 
