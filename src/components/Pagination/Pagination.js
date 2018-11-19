@@ -152,6 +152,7 @@ Pagination.propTypes = {
   prevClick: PropTypes.func,
   pageOffset: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
+  nextPage: PropTypes.bool,
 }
 
 Pagination.defaultProps = {
@@ -159,6 +160,7 @@ Pagination.defaultProps = {
   nextClick: () => {},
   prevClick: () => {},
   loading: false,
+  nextPage: false,
 }
 
 export default injectIntl(Pagination)
