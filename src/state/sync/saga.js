@@ -20,7 +20,7 @@ import actions from './actions'
 import { getSyncMode } from './selectors'
 
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
-const getSyncProgress = () => makeFetchCall('getSyncProgress')
+const getSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
 const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
 const syncNow = auth => makeFetchCall('syncNow', auth)
 const logout = auth => makeFetchCall('logout', auth)
@@ -111,7 +111,7 @@ function* syncWatcher() {
         // get current ui state
         const syncMode = yield select(getSyncMode)
         yield delay(300)
-        const { result: progress } = yield call(getSyncProgress)
+        const { result: progress } = yield call(getSyncProgress, auth)
         // console.warn('queryWithDb, %', isQueryWithDb, progress)
         if (isQueryWithDb) {
           if (progress) {
