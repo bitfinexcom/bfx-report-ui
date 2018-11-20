@@ -47,6 +47,7 @@ function getCSV(auth, query, target, options) {
   }
   params.timezone = options.timezone
   params.dateFormat = options.dateFormat
+  params.milliseconds = options.milliseconds
   let method = ''
   switch (target) {
     case MENU_FCREDIT:
