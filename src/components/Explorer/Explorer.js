@@ -2,7 +2,10 @@ import React from 'react'
 
 import { propTypes, defaultProps } from './Explorer.props'
 
-export const Explorer = ({ currency, destinationAddress, explorers }) => {
+export const Explorer = ({ currency, destinationAddress, explorers = {} }) => {
+  if (!explorers[currency]) {
+    return null
+  }
   const [name, link] = explorers[currency]
   return name && link ? (
     <span className='bitfinex-show-soft'>
