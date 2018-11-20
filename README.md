@@ -53,7 +53,7 @@ npm install
 
     ```
     export NODE_PATH=src/
-    export PUBLIC_URL=./
+    export PUBLIC_URL=/
     export REACT_APP_PLATFORM=localhost
     ```
 
@@ -95,7 +95,13 @@ Then run `npm start` and you will see the extra sync status button at top right 
 
 1. set `export REACT_APP_PLATFORM=ethfinex` in env variables instead
 
-You'll noticed `hideSwitchTheme` is set to true in `var/config.js` because Ethfinex does not have dark/light theming.
+You'll be noticed `hideSwitchTheme` is set to true in `var/config.js` because Ethfinex does not have dark/light theming.
+
+Then run the following command to apply the Ethfinex related patch
+
+```sh
+git apply scripts/ethfinex-lize.patch
+```
 
 ## 3rd party libraries
 

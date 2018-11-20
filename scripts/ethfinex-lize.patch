@@ -1,0 +1,214 @@
+From 0d6ec90a11182cbc1179589216f9a8f2c93b8f15 Mon Sep 17 00:00:00 2001
+From: gasolin <gasolin@gmail.com>
+Date: Wed, 14 Nov 2018 00:33:01 +0800
+Subject: [PATCH] ethfinex-lize
+
+---
+ public/efx-favicon.png                     | Bin 0 -> 3972 bytes
+ public/index.html                          |   4 +--
+ src/components/Header/logo3-dark-theme.svg |  42 ++++++++++++++++-------------
+ src/components/Header/mobile_logo_dark.svg |  36 ++++++++++++++-----------
+ 4 files changed, 46 insertions(+), 36 deletions(-)
+ create mode 100644 public/efx-favicon.png
+
+diff --git a/public/efx-favicon.png b/public/efx-favicon.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..4cc47e425809fa67952b0c16cad16eb2ad8d9846
+GIT binary patch
+literal 3972
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/public/index.html b/public/index.html
+index 7fc7b9c..3f4cc8d 100644
+--- a/public/index.html
++++ b/public/index.html
+@@ -3,7 +3,7 @@
+   <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
++    <link rel="shortcut icon" href="%PUBLIC_URL%/efx-favicon.png">
+     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+     <!--
+       Notice the use of %PUBLIC_URL% in the tags above.
+@@ -14,7 +14,7 @@
+       work correctly both with client-side routing and a non-root public URL.
+       Learn how to configure a non-root public URL by running `npm run build`.
+     -->
+-    <title>Bitfinex Reports</title>
++    <title>Ethfinex Reports</title>
+   </head>
+   <body class="bp3-dark">
+     <noscript>
+diff --git a/src/components/Header/logo3-dark-theme.svg b/src/components/Header/logo3-dark-theme.svg
+index a155bae..dbb850f 100644
+--- a/src/components/Header/logo3-dark-theme.svg
++++ b/src/components/Header/logo3-dark-theme.svg
+@@ -1,18 +1,24 @@
+-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+-<svg width="893px" height="103px" viewBox="0 0 893 103" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+-    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+-    <title>logo</title>
+-    <desc>Created with Sketch.</desc>
+-    <defs></defs>
+-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+-        <g id="logo" transform="translate(-129.395811, -936.000000)">
+-            <g id="logo-w-bg-on-dark" transform="translate(0.000000, 849.000000)">
+-                <g id="logo" transform="translate(130.000000, 87.000000)">
+-                    <path d="M791.935937,88.4135243 C796.731331,93.4918278 823.070774,117.831527 864.413656,89.5834029 C894.308801,66.302031 893.561944,15.8269686 890.690031,0.584439406 C889.689549,2.80273764 854.965427,78.8437859 791.935937,88.4135243 Z M890.686008,0.571537937 C890.319828,0.420271027 851.858339,-4.82344439 813.836016,19.6658705 C790.225422,34.8729172 787.104395,57.1300836 788.181651,71.9609768 C843.454747,65.7756204 889.43219,2.3153692 890.686008,0.571537937 Z" id="Path-1-Copy-9" fill="#97C554"></path>
+-                    <path d="M890.686008,0.571537937 C890.319828,0.420271027 851.858339,-4.82344439 813.836016,19.6658705 C790.225422,34.8729172 787.104395,57.1300836 788.181651,71.9609768 C843.454747,65.7756204 889.43219,2.3153692 890.686008,0.571537937 Z" id="Path-1-Copy-8" fill="#709B30"></path>
+-                    <path d="M61.659,85.445 L18.603,85.445 L18.603,62.513 L61.659,62.513 C72.423,62.513 77.922,67.661 77.922,74.33 C77.922,80.765 72.54,85.445 61.659,85.445 L61.659,85.445 Z M60.255,50.228 L18.603,50.228 L18.603,30.923 L60.255,30.923 C71.604,30.923 76.05,34.901 76.05,40.4 C76.05,45.431 70.902,50.228 60.255,50.228 L60.255,50.228 Z M71.253,56.078 C89.388,55.493 95.94,46.484 95.94,36.656 C95.94,25.892 87.399,17 66.573,17 L0,17 L0,99.134 L68.562,99.134 C85.644,99.134 98.397,91.997 98.397,76.67 C98.397,65.789 91.26,56.546 71.253,56.078 L71.253,56.078 Z M120.369,17 L120.369,99.134 L138.972,99.134 L138.972,17 L120.369,17 Z M214.412999,32.561 L255.362999,32.561 L255.362999,17 L154.859999,17 L154.859999,32.561 L195.809999,32.561 L195.809999,99.134 L214.412999,99.134 L214.412999,32.561 Z M271.250999,17 L271.250999,99.134 L289.853999,99.134 L289.853999,67.076 L333.494999,67.076 L333.494999,53.621 L289.853999,53.621 L289.853999,31.157 L360.755999,31.157 L360.755999,17 L271.250999,17 Z M375.824998,17 L375.824998,99.134 L394.427998,99.134 L394.427998,17 L375.824998,17 Z M438.044998,37.007 L499.703998,99.134 L520.763998,99.134 L520.763998,17 L502.394998,17 L502.394998,76.202 L443.192998,17 L419.558998,17 L419.558998,99.134 L438.044998,99.134 L438.044998,37.007 Z M545.894998,17 L545.894998,99.134 L636.920998,99.134 L636.920998,85.328 L564.497998,85.328 L564.497998,62.747 L607.904998,62.747 L607.904998,49.994 L564.497998,49.994 L564.497998,31.157 L636.920998,31.157 L636.920998,17 L545.894998,17 Z M761.501997,17 L736.931997,17 L705.575997,45.899 L674.453997,17 L649.532997,17 L693.290997,57.482 L647.894997,99.134 L672.464997,99.134 L705.341997,68.831 L738.101997,99.134 L763.139997,99.134 L717.626997,57.365 L761.501997,17 Z" id="BITFINEX-Copy-3" fill="#DDDDDD"></path>
+-                </g>
+-            </g>
+-        </g>
+-    </g>
+-</svg>
+\ No newline at end of file
++<?xml version="1.0" encoding="utf-8"?>
++<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
++<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
++<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
++	 viewBox="0 0 893 103" enable-background="new 0 0 893 103" xml:space="preserve">
++<title>logo</title>
++<desc>Created with Sketch.</desc>
++<g>
++	<path fill="#FFFFFF" d="M128.432,57.016H89.543v29.001H135v13.267H73.093V4.602h61.451v13.264h-45v26.142h38.889V57.016z"/>
++	<path fill="#FFFFFF" d="M218.103,17.866h-29.521v81.417h-16.321V17.866h-29.262V4.602h75.104V17.866z"/>
++	<path fill="#FFFFFF" d="M305.697,99.283h-16.388V57.274h-42.333v42.009h-16.451V4.602h16.451v39.406h42.333V4.602h16.388V99.283z"
++		/>
++	<path fill="#FFFFFF" d="M379.701,59.293h-38.108v39.99h-16.45V4.602h60.153v13.264h-43.703v28.16h38.108V59.293z"/>
++	<path fill="#FFFFFF" d="M415.663,99.283h-16.388V4.602h16.388V99.283z"/>
++	<path fill="#FFFFFF" d="M510.989,99.283h-16.454l-42.202-67.174v67.174h-16.45V4.602h16.45l42.336,67.433V4.602h16.32V99.283z"/>
++	<path fill="#FFFFFF" d="M585.781,57.016h-38.892v29.001h45.454v13.267h-61.909V4.602h61.452v13.264h-44.997v26.142h38.892V57.016z"
++		/>
++	<path fill="#FFFFFF" d="M638.314,38.808l19.902-34.206h18.99l-28.613,46.951l29.256,47.73h-19.176l-20.359-34.728l-20.411,34.728
++		h-19.124l29.33-47.73L599.433,4.602h18.987L638.314,38.808z"/>
++</g>
++<polygon fill="#B3B7CE" points="824.011,52.863 807.735,29.653 824.323,8.431 852.974,52.461 804.799,97.269 800.385,97.269 "/>
++<polygon fill="#B3B7CE" points="731.558,52.863 747.833,29.653 731.253,8.431 702.604,52.461 755.184,97.269 759.598,97.269 "/>
++<polygon fill="#9B9EBD" points="741.987,52.863 778.55,2.988 815.105,52.865 792.776,97.269 766.795,97.269 "/>
++</svg>
+diff --git a/src/components/Header/mobile_logo_dark.svg b/src/components/Header/mobile_logo_dark.svg
+index 685f1fb..53fa133 100644
+--- a/src/components/Header/mobile_logo_dark.svg
++++ b/src/components/Header/mobile_logo_dark.svg
+@@ -1,16 +1,20 @@
+-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+-<svg width="138px" height="30px" viewBox="0 0 138 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+-    <!-- Generator: Sketch 3.5.2 (25235) - http://www.bohemiancoding.com/sketch -->
+-    <title>logo</title>
+-    <desc>Created with Sketch.</desc>
+-    <defs></defs>
+-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+-        <g id="New" sketch:type="MSLayerGroup" transform="translate(-33.000000, -156.000000)">
+-            <g id="logo" transform="translate(33.000000, 156.000000)" sketch:type="MSShapeGroup">
+-                <path d="M108.833345,25.7515119 C110.231106,27.2306295 117.908522,34.3198623 129.959137,26.0922533 C138.672969,19.3112712 138.455275,4.60979669 137.618171,0.17022507 C137.32655,0.816331351 127.205169,22.9642095 108.833345,25.7515119 Z M137.616998,0.16646736 C137.510264,0.122409037 126.299516,-1.40488672 115.216776,5.72792344 C108.334764,10.1571603 107.425048,16.6398302 107.739046,20.9595078 C123.850038,19.1579477 137.251535,0.674379379 137.616998,0.16646736 Z" id="Path-1-Copy-7" fill="#97C554"></path>
+-                <path d="M137.616998,0.16646736 C137.510264,0.122409037 126.299516,-1.40488672 115.216776,5.72792344 C108.334764,10.1571603 107.425048,16.6398302 107.739046,20.9595078 C123.850038,19.1579477 137.251535,0.674379379 137.616998,0.16646736 Z" id="Path-1-Copy-6" fill="#709B30"></path>
+-                <path d="M17.9723543,24.8868932 L5.4223991,24.8868932 L5.4223991,18.2076699 L17.9723543,18.2076699 C21.109843,18.2076699 22.7126906,19.7070874 22.7126906,21.6495146 C22.7126906,23.5237864 21.1439462,24.8868932 17.9723543,24.8868932 L17.9723543,24.8868932 Z M17.5631166,14.6295146 L5.4223991,14.6295146 L5.4223991,9.00669903 L17.5631166,9.00669903 C20.8711211,9.00669903 22.1670404,10.1653398 22.1670404,11.7669903 C22.1670404,13.2323301 20.6665022,14.6295146 17.5631166,14.6295146 L17.5631166,14.6295146 Z M20.7688117,16.3333981 C26.0547982,16.1630097 27.964574,13.5390291 27.964574,10.6765049 C27.964574,7.54135922 25.4750448,4.95145631 19.4046861,4.95145631 L0,4.95145631 L0,28.8739806 L19.9844395,28.8739806 C24.9634978,28.8739806 28.6807399,26.7952427 28.6807399,22.331068 C28.6807399,19.1618447 26.6004484,16.4697087 20.7688117,16.3333981 L20.7688117,16.3333981 Z M36.0641925,4.95145631 L36.0641925,28.8739806 L41.4865916,28.8739806 L41.4865916,19.536699 L54.2070624,19.536699 L54.2070624,15.617767 L41.4865916,15.617767 L41.4865916,9.07485437 L62.1530938,9.07485437 L62.1530938,4.95145631 L36.0641925,4.95145631 Z M97.9624656,4.95145631 L90.8008064,4.95145631 L81.6611651,13.3686408 L72.5897302,4.95145631 L65.3257616,4.95145631 L78.0803355,16.7423301 L64.8483176,28.8739806 L72.0099768,28.8739806 L81.5929589,20.0478641 L91.1418378,28.8739806 L98.4399095,28.8739806 L85.1737885,16.7082524 L97.9624656,4.95145631 Z" id="BITFINEX-Copy-2" fill="#FFFFFF"></path>
+-            </g>
+-        </g>
+-    </g>
+-</svg>
+\ No newline at end of file
++<?xml version="1.0" encoding="utf-8"?>
++<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
++<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
++<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
++	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="138px" height="30px"
++	 viewBox="0 0 138 30" enable-background="new 0 0 138 30" xml:space="preserve">
++<title>logo</title>
++<desc>Created with Sketch.</desc>
++<g>
++	<g>
++		<path fill="#FFFFFF" d="M20.747,16.351H8.978v8.774h13.755v4.015H4V0.489h18.596v4.014H8.978v7.91h11.769V16.351z"/>
++		<path fill="#FFFFFF" d="M46.454,17.038H34.922V29.14h-4.978V0.489h18.202v4.014H34.922v8.521h11.532V17.038z"/>
++		<path fill="#FFFFFF" d="M66.837,10.839l6.021-10.35h5.746l-8.658,14.208l8.855,14.442h-5.805l-6.159-10.509L60.658,29.14h-5.785
++			l8.874-14.442L55.07,0.489h5.747L66.837,10.839z"/>
++	</g>
++	<polygon fill="#74778F" points="126.805,15.093 121.879,8.071 126.9,1.647 135.568,14.971 120.99,28.53 119.654,28.53 	"/>
++	<polygon fill="#74778F" points="98.826,15.093 103.752,8.071 98.734,1.647 90.064,14.971 105.977,28.53 107.312,28.53 	"/>
++	<polygon fill="#9B9EBD" points="101.984,15.093 113.047,0 124.109,15.094 117.352,28.53 109.49,28.53 	"/>
++</g>
++</svg>
+-- 
+2.7.4
+
