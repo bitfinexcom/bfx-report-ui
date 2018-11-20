@@ -8,7 +8,7 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
   currency: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   mts: PropTypes.number.isRequired,
-  wallet: PropTypes.string.isRequired,
+  wallet: PropTypes.string,
 })
 
 export const propTypes = {
