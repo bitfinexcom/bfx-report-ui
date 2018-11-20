@@ -12,6 +12,7 @@ const initialState = {
   pageLoading: false,
   smallestMts: 0,
   targetSymbol: '',
+  nextPage: false,
 }
 
 const LIMIT = queryTypes.DEFAULT_FLOAN_QUERY_LIMIT
@@ -21,10 +22,11 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_FLOAN: {
+      const { res, nextPage } = payload
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
       let smallestMts
-      const entries = payload.map((entry) => {
+      const entries = res.map((entry) => {
         const {
           amount,
           flags,
@@ -82,6 +84,7 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,
+        nextPage,
       }
     }
     case types.FETCH_FAIL:

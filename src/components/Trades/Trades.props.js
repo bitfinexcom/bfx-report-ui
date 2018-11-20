@@ -27,6 +27,7 @@ export const propTypes = {
   setTargetPair: PropTypes.func.isRequired,
   targetPair: PropTypes.string,
   timezone: PropTypes.string,
+  nextPage: PropTypes.bool,
 }
 
 export const defaultProps = {
@@ -44,4 +45,5 @@ export const defaultProps = {
   refresh: () => {},
   setTargetPair: () => {},
   targetPair: '',
+  nextPage: false,
 }

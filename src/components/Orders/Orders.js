@@ -88,6 +88,7 @@ class Orders extends PureComponent {
       refresh,
       targetPair,
       timezone,
+      nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const pairList = pairs ? [ALL, ...pairs] : [ALL, ...existingPairs]
@@ -210,6 +211,7 @@ class Orders extends PureComponent {
         prevClick={this.fetchPrev}
         nextClick={this.fetchNext}
         pageOffset={pageOffset}
+        nextPage={nextPage}
       />
     )
 

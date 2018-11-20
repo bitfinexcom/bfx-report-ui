@@ -36,6 +36,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   setTargetSymbol: PropTypes.func.isRequired,
   targetSymbol: PropTypes.string,
+  nextPage: PropTypes.bool,
 }
 
 export const defaultProps = {
@@ -53,4 +54,5 @@ export const defaultProps = {
   pageLoading: false,
   refresh: () => {},
   setTargetSymbol: () => {},
+  nextPage: false,
 }

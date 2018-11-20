@@ -8,7 +8,7 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
   currency: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   mts: PropTypes.number.isRequired,
-  wallet: PropTypes.string.isRequired,
+  wallet: PropTypes.string,
 })
 
 export const propTypes = {
@@ -29,6 +29,7 @@ export const propTypes = {
   setTargetSymbol: PropTypes.func.isRequired,
   targetSymbol: PropTypes.string,
   timezone: PropTypes.string,
+  nextPage: PropTypes.bool,
 }
 
 export const defaultProps = {
@@ -46,4 +47,5 @@ export const defaultProps = {
   pageLoading: false,
   refresh: () => {},
   setTargetSymbol: () => {},
+  nextPage: false,
 }

@@ -7,11 +7,13 @@ export const getOffset = state => getTrades(state).offset
 export const getPageLoading = state => getTrades(state).pageLoading
 export const getPageOffset = state => getTrades(state).pageOffset
 export const getTargetPair = state => getTrades(state).targetPair
+export const getNextPage = state => getTrades(state).nextPage
 
 export default {
   getDataReceived,
   getEntries,
   getExistingPairs,
+  getNextPage,
   getOffset,
   getPageLoading,
   getPageOffset,

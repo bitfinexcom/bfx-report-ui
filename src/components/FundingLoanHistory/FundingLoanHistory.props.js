@@ -35,6 +35,7 @@ export const propTypes = {
   setTargetSymbol: PropTypes.func.isRequired,
   targetSymbol: PropTypes.string,
   timezone: PropTypes.string,
+  nextPage: PropTypes.bool,
 }
 
 export const defaultProps = {
@@ -52,4 +53,5 @@ export const defaultProps = {
   pageLoading: false,
   refresh: () => {},
   setTargetSymbol: () => {},
+  nextPage: false,
 }

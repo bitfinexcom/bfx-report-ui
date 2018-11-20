@@ -11,6 +11,7 @@ const initialState = {
   pageOffset: 0, // start of current page
   pageLoading: false,
   targetPair: 'btcusd',
+  nextPage: false,
 }
 
 const LIMIT = queryTypes.DEFAULT_PUBLICTRADES_QUERY_LIMIT
@@ -20,8 +21,9 @@ export function publicTradesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_PUBLIC_TRADES: {
+      const { res, nextPage } = payload
       let smallestMts
-      const entries = payload.map((entry) => {
+      const entries = res.map((entry) => {
         const {
           amount,
           price,
@@ -48,6 +50,7 @@ export function publicTradesReducer(state = initialState, action) {
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,
+        nextPage,
       }
     }
     case types.FETCH_FAIL:

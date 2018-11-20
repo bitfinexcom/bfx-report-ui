@@ -55,6 +55,7 @@ class Pagination extends PureComponent {
       nextClick,
       prevClick,
       pageOffset,
+      nextPage = false,
     } = this.props
     if (!isValidateType(type)) {
       return ''
@@ -63,7 +64,6 @@ class Pagination extends PureComponent {
     const PAGE_SIZE = queryConstants[`DEFAULT_${type.toUpperCase()}_PAGE_SIZE`]
     const PAGE_GAP = LIMIT / PAGE_SIZE
     const pageLen = Math.ceil(dataLen / PAGE_SIZE)
-    const nextCondition = dataLen % LIMIT !== 0 && dataLen - LIMIT < offset
     const prevCondition = offset <= LIMIT
     let pageBase
     if (offset < LIMIT) {
@@ -76,7 +76,7 @@ class Pagination extends PureComponent {
     const currentPageBase = (pageBase % PAGE_GAP === 0)
       ? pageBase + 1 : pageBase
     const currentPage = currentPageBase + pageOffset / PAGE_SIZE
-    const renderRestDots = !nextCondition ? (
+    const renderRestDots = nextPage ? (
       <Fragment>
         <span>
           +
@@ -133,7 +133,7 @@ class Pagination extends PureComponent {
             minimal
             rightIcon='double-chevron-right'
             onClick={nextClick}
-            disabled={nextCondition || loading}
+            disabled={!nextPage || loading}
           />
           {renderLoading}
         </div>
@@ -152,6 +152,7 @@ Pagination.propTypes = {
   prevClick: PropTypes.func,
   pageOffset: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
+  nextPage: PropTypes.bool,
 }
 
 Pagination.defaultProps = {
@@ -159,6 +160,7 @@ Pagination.defaultProps = {
   nextClick: () => {},
   prevClick: () => {},
   loading: false,
+  nextPage: false,
 }
 
 export default injectIntl(Pagination)

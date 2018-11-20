@@ -5,81 +5,16 @@ import authTypes from 'state/auth/constants'
 
 import types from './constants'
 
-/*
-{
-    "result": [
-        {
-            "domain": null,
-            "_events": {},
-            "_eventsCount": 0,
-            "_fields": {
-                "id": 0,
-                "symbol": 1,
-                "mtsCreate": 2,
-                "orderID": 3,
-                "execAmount": 4,
-                "execPrice": 5,
-                "orderType": 6,
-                "orderPrice": 7,
-                "maker": 8,
-                "fee": 9,
-                "feeCurrency": 10
-            },
-            "_boolFields": [
-                "maker"
-            ],
-            "_fieldKeys": [
-                "id",
-                "symbol",
-                "mtsCreate",
-                "orderID",
-                "execAmount",
-                "execPrice",
-                "orderType",
-                "orderPrice",
-                "maker",
-                "fee",
-                "feeCurrency"
-            ],
-            "id": 24178707,
-            "symbol": "tBTCUSD",
-            "mtsCreate": 1529942518000,
-            "orderID": 1149732562,
-            "execAmount": 0.00026691,
-            "execPrice": 18037,
-            "orderType": null,
-            "orderPrice": null,
-            "maker": null,
-            "fee": -2.7e-7,
-            "feeCurrency": "BTC"
-        }
-    ],
-    "id": null
-}
- */
 const initialState = {
   dataReceived: false,
-  entries: [
-    /* {
-      id: 24178707,
-      pair: "BTC/USD",
-      mtsCreate: 1529942518000,
-      orderID: 1149732562,
-      execAmount: 0.00026691,
-      execPrice: 18037,
-      orderType: null,
-      orderPrice: null,
-      maker: null,
-      fee: -2.7e-7,
-      feeCurrency: "BTC"
-    }, */
-  ],
+  entries: [],
   existingPairs: [],
   smallestMts: 0,
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
   pageLoading: false,
   targetPair: '',
+  nextPage: false,
 }
 
 const LIMIT = queryTypes.DEFAULT_TRADES_QUERY_LIMIT
@@ -89,10 +24,11 @@ export function tradesReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_TRADES: {
+      const { res, nextPage } = payload
       const { existingPairs } = state
       const updatePairs = [...existingPairs]
       let smallestMts
-      const entries = payload.map((entry) => {
+      const entries = res.map((entry) => {
         const {
           execAmount,
           execPrice,
@@ -138,6 +74,7 @@ export function tradesReducer(state = initialState, action) {
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,
+        nextPage,
       }
     }
     case types.FETCH_FAIL:
