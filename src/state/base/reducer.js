@@ -12,6 +12,7 @@ const initialState = {
   theme: 'bp3_dark',
   timezone: '',
   dateFormat: types.DATE_FORMATS[0],
+  milliseconds: false,
 }
 
 export function baseReducer(state = initialState, action) {
@@ -61,6 +62,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         dateFormat: payload,
+      }
+    case types.SHOW_MILLISECONDS:
+      return {
+        ...state,
+        milliseconds: payload,
       }
     default:
       return state

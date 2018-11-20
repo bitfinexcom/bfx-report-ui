@@ -88,6 +88,17 @@ export function setDateFormat(format) {
   }
 }
 
+/**
+ * Create an action to store if need to show milliseconds.
+ * @param {boolean} show
+ */
+export function showMilliseconds(show) {
+  return {
+    type: types.SHOW_MILLISECONDS,
+    payload: show,
+  }
+}
+
 export default {
   setApiKey,
   setApiSecret,
@@ -97,4 +108,5 @@ export default {
   setMenuMode,
   setTheme,
   setTimezone,
+  showMilliseconds,
 }

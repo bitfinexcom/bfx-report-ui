@@ -4,10 +4,10 @@ export const dialogDescStyle = classNames(
   'bitfinex-preferences-desc',
   'bitfinex-text-align-right',
   'hidden-xs',
-  'col-sm-3',
-  'col-md-3',
-  'col-lg-3',
-  'col-xl-3',
+  'col-sm-4',
+  'col-md-4',
+  'col-lg-4',
+  'col-xl-4',
 )
 
 export const dialogSmallDescStyle = classNames(
@@ -20,10 +20,10 @@ export const dialogSmallDescStyle = classNames(
 
 export const dialogFieldStyle = classNames(
   'col-xs-12',
-  'col-sm-9',
-  'col-md-9',
-  'col-lg-9',
-  'col-xl-9',
+  'col-sm-8',
+  'col-md-8',
+  'col-lg-8',
+  'col-xl-8',
 )
 
 export default {

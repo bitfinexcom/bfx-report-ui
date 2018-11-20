@@ -10,6 +10,7 @@ import {
 import { formatDate } from 'state/utils'
 import Loading from 'ui/Loading'
 import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
+import ShowMilliseconds from 'ui/ShowMilliseconds'
 import DateFormatSelector from 'components/DateFormatSelector'
 
 import { propTypes, defaultProps } from './ExportDialog.props'
@@ -54,6 +55,7 @@ class ExportDialog extends PureComponent {
         {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}
       </p>
     )
+    const checkboxFieldStyle = `${dialogFieldStyle} bitfinex-pref-checkbox`
     const renderContent = loading
       ? (
         <Fragment>
@@ -77,6 +79,17 @@ class ExportDialog extends PureComponent {
               </div>
               <div className={dialogFieldStyle}>
                 <DateFormatSelector />
+              </div>
+            </div>
+            <div className='row'>
+              <div className={dialogDescStyle}>
+                {intl.formatMessage({ id: 'preferences.milliseconds' })}
+              </div>
+              <div className={dialogSmallDescStyle}>
+                {intl.formatMessage({ id: 'preferences.milliseconds' })}
+              </div>
+              <div className={checkboxFieldStyle}>
+                <ShowMilliseconds />
               </div>
             </div>
           </div>
