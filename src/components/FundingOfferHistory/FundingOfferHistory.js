@@ -23,7 +23,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
-import { amoutStyle } from 'ui/utils'
+import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './FundingOfferHistory.props'
 
@@ -129,7 +129,7 @@ class FundingOfferHistory extends PureComponent {
 
     const amountExecutedCellRenderer = (rowIndex) => {
       const { amountExecuted } = filteredData[rowIndex]
-      const classes = amoutStyle(amountExecuted)
+      const classes = amountStyle(amountExecuted)
       return (
         <Cell
           className={classes}

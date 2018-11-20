@@ -24,7 +24,7 @@ import {
   getCurrentEntries,
   getSideMsg,
 } from 'state/utils'
-import { amoutStyle } from 'ui/utils'
+import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './FundingLoanHistory.props'
 
@@ -127,7 +127,7 @@ class FundingLoanHistory extends PureComponent {
 
     const amountCellRenderer = (rowIndex) => {
       const { amount } = filteredData[rowIndex]
-      const classes = amoutStyle(amount)
+      const classes = amountStyle(amount)
       return (
         <Cell
           className={classes}

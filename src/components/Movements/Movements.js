@@ -24,7 +24,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
-import { amoutStyle } from 'ui/utils'
+import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Movements.props'
 
@@ -134,7 +134,7 @@ class Movements extends PureComponent {
     const amountCellRenderer = (rowIndex) => {
       const { amount, currency } = filteredData[rowIndex]
       const tooltip = `${amount} ${currency}`
-      const classes = amoutStyle(amount)
+      const classes = amountStyle(amount)
       return (
         <Cell
           className={classes}

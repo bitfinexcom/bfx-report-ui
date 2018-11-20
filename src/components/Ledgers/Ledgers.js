@@ -23,7 +23,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
-import { amoutStyle } from 'ui/utils'
+import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Ledgers.props'
 
@@ -146,7 +146,7 @@ class Ledgers extends PureComponent {
           </span>
         </Fragment>
       ) : ''
-      const classes = amoutStyle(amount)
+      const classes = amountStyle(amount)
       const tooltip = `${amount} ${currency}`
       return (
         <Cell
