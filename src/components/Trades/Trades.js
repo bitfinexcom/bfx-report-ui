@@ -8,7 +8,6 @@ import {
   Cell,
   TruncatedFormat,
 } from '@blueprintjs/table'
-import classNames from 'classnames'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'components/TimeRange'
@@ -25,6 +24,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
+import { amoutStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Trades.props'
 
@@ -134,9 +134,7 @@ class Trades extends PureComponent {
 
     const amountCellRenderer = (rowIndex) => {
       const { execAmount } = filteredData[rowIndex]
-      const classes = parseFloat(execAmount) > 0
-        ? classNames('bitfinex-green-text', 'bitfinex-text-align-right')
-        : classNames('bitfinex-red-text', 'bitfinex-text-align-right')
+      const classes = amoutStyle(execAmount)
       return (
         <Cell
           className={classes}

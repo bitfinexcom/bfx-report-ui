@@ -26,7 +26,16 @@ export const dialogFieldStyle = classNames(
   'col-xl-8',
 )
 
+export const amoutStyle = (amount) => {
+  const val = parseFloat(amount)
+  return classNames('bitfinex-text-align-right', {
+    'bitfinex-green-text': val > 0,
+    'bitfinex-red-text': val < 0,
+  })
+}
+
 export default {
+  amoutStyle,
   dialogDescStyle,
   dialogFieldStyle,
   dialogSmallDescStyle,

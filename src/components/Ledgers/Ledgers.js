@@ -23,6 +23,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
+import { amoutStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Ledgers.props'
 
@@ -145,9 +146,7 @@ class Ledgers extends PureComponent {
           </span>
         </Fragment>
       ) : ''
-      const classes = parseFloat(amount) > 0
-        ? 'bitfinex-green-text bitfinex-text-align-right'
-        : 'bitfinex-red-text bitfinex-text-align-right'
+      const classes = amoutStyle(amount)
       const tooltip = `${amount} ${currency}`
       return (
         <Cell
