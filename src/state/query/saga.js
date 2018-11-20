@@ -18,7 +18,7 @@ import { getTargetSymbol as getLedgersSymbol } from 'state/ledgers/selectors'
 import { getTargetSymbol as getMovementsSymbol } from 'state/movements/selectors'
 import { getTargetPair as getOrdersPair } from 'state/orders/selectors'
 import { getTargetPair as getTradesPair } from 'state/trades/selectors'
-import { getTimezone, getDateFormat } from 'state/base/selectors'
+import { getTimezone, getDateFormat, getShowMilliseconds } from 'state/base/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 
 import { getEmail, getQuery, getTimeFrame } from './selectors'
@@ -137,6 +137,7 @@ function* exportCSV({ payload: target }) {
     const query = yield select(getQuery)
     options.timezone = yield select(getTimezone)
     options.dateFormat = yield select(getDateFormat)
+    options.milliseconds = yield select(getShowMilliseconds)
     const selector = getSelector(target)
     const sign = selector ? yield select(selector) : ''
     options.symbol = formatSymbol(target, sign)

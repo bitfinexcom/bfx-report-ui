@@ -10,6 +10,7 @@
   "preferences.theme": "Theme:",
   "preferences.timezone": "Timezone:",
   "preferences.dateformat": "Date Format:",
+  "preferences.milliseconds": "Display Milliseconds:",
   "theme.light": "Light",
   "theme.dark": "Dark",
   "auth.auth": "Auth",

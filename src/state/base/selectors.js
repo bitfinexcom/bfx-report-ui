@@ -10,6 +10,7 @@ export const getMenuMode = state => getBase(state).menuMode
 export const getTheme = state => getBase(state).theme
 export const getTimezone = state => getBase(state).timezone
 export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FORMATS[0]
+export const getShowMilliseconds = state => getBase(state).milliseconds || false
 
 export default {
   getBase,
@@ -19,6 +20,7 @@ export default {
   getDateFormat,
   getLocale,
   getMenuMode,
+  getShowMilliseconds,
   getTheme,
   getTimezone,
 }
