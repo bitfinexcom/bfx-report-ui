@@ -9,6 +9,7 @@ import {
 } from '@blueprintjs/core'
 import { TimezonePicker } from '@blueprintjs/timezone'
 
+import { platform } from 'var/config'
 import LangMenu from 'components/LangMenu'
 import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
 
@@ -49,6 +50,33 @@ class PrefDialog extends PureComponent {
       return null
     }
 
+    const renderThemeSwitcher = platform.hideSwitchTheme ? null : (
+      <div className='row'>
+        <div className={dialogDescStyle}>
+          {intl.formatMessage({ id: 'preferences.theme' })}
+        </div>
+        <div className={dialogSmallDescStyle}>
+          {intl.formatMessage({ id: 'preferences.theme' })}
+        </div>
+        <div className={dialogFieldStyle}>
+          <ButtonGroup>
+            <Button
+              name='light'
+              text={intl.formatMessage({ id: 'theme.light' })}
+              onClick={this.switchLight}
+              intent={theme.includes('light') ? Intent.PRIMARY : undefined}
+            />
+            <Button
+              name='dark'
+              text={intl.formatMessage({ id: 'theme.dark' })}
+              onClick={this.switchDark}
+              intent={theme.includes('dark') ? Intent.PRIMARY : undefined}
+            />
+          </ButtonGroup>
+        </div>
+      </div>
+    )
+
     return (
       <Dialog
         icon='person'
@@ -73,30 +101,7 @@ class PrefDialog extends PureComponent {
               <LangMenu />
             </div>
           </div>
-          <div className='row'>
-            <div className={dialogDescStyle}>
-              {intl.formatMessage({ id: 'preferences.theme' })}
-            </div>
-            <div className={dialogSmallDescStyle}>
-              {intl.formatMessage({ id: 'preferences.theme' })}
-            </div>
-            <div className={dialogFieldStyle}>
-              <ButtonGroup>
-                <Button
-                  name='light'
-                  text={intl.formatMessage({ id: 'theme.light' })}
-                  onClick={this.switchLight}
-                  intent={theme.includes('light') ? Intent.PRIMARY : undefined}
-                />
-                <Button
-                  name='dark'
-                  text={intl.formatMessage({ id: 'theme.dark' })}
-                  onClick={this.switchDark}
-                  intent={theme.includes('dark') ? Intent.PRIMARY : undefined}
-                />
-              </ButtonGroup>
-            </div>
-          </div>
+          {renderThemeSwitcher}
           <div className='row'>
             <div className={dialogDescStyle}>
               {intl.formatMessage({ id: 'preferences.timezone' })}
