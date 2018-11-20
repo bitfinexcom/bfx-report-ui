@@ -24,9 +24,15 @@ function getReqOrders(auth, query, targetPair, smallestMts) {
   return makeFetchCall('getOrders', auth, params)
 }
 
-function* fetchOrders() {
+function* fetchOrders({ payload: pair }) {
   try {
-    const targetPair = yield select(getTargetPair)
+    const urlPair = pair && pair.toLowerCase()
+    let targetPair = yield select(getTargetPair)
+    // set pair from url
+    if (urlPair && urlPair !== targetPair) {
+      yield put(actions.setTargetPair(urlPair))
+      targetPair = urlPair
+    }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqOrders, auth, query, targetPair, 0)
