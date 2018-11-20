@@ -23,6 +23,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
+import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Orders.props'
 
@@ -124,9 +125,10 @@ class Orders extends PureComponent {
 
     const amountExecutedCellRenderer = (rowIndex) => {
       const { amountExecuted } = filteredData[rowIndex]
+      const classes = amountStyle(amountExecuted)
       return (
         <Cell
-          className='bitfinex-text-align-right'
+          className={classes}
           tooltip={amountExecuted}
         >
           {amountExecuted}

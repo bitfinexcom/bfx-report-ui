@@ -24,6 +24,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
+import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Trades.props'
 
@@ -133,9 +134,10 @@ class Trades extends PureComponent {
 
     const amountCellRenderer = (rowIndex) => {
       const { execAmount } = filteredData[rowIndex]
+      const classes = amountStyle(execAmount)
       return (
         <Cell
-          className='bitfinex-text-align-right'
+          className={classes}
           tooltip={execAmount}
         >
           {execAmount}

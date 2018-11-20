@@ -24,6 +24,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
+import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Movements.props'
 
@@ -133,16 +134,13 @@ class Movements extends PureComponent {
     const amountCellRenderer = (rowIndex) => {
       const { amount, currency } = filteredData[rowIndex]
       const tooltip = `${amount} ${currency}`
+      const classes = amountStyle(amount)
       return (
         <Cell
-          className='bitfinex-text-align-right'
+          className={classes}
           tooltip={tooltip}
         >
           {amount}
-          &nbsp;
-          <span className='bitfinex-show-soft'>
-            {currency}
-          </span>
         </Cell>
       )
     }
