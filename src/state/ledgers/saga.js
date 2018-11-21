@@ -23,9 +23,15 @@ function getReqLedgers(auth, query, targetSymbol, smallestMts) {
   return makeFetchCall('getLedgers', auth, params)
 }
 
-function* fetchLedgers() {
+function* fetchLedgers({ payload: symbol }) {
   try {
-    const targetSymbol = yield select(getTargetSymbol)
+    const urlSymbol = symbol && symbol.toUpperCase()
+    let targetSymbol = yield select(getTargetSymbol)
+    // set pair from url
+    if (urlSymbol && urlSymbol !== targetSymbol) {
+      yield put(actions.setTargetSymbol(urlSymbol))
+      targetSymbol = urlSymbol
+    }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbol, 0)
