@@ -27,7 +27,7 @@ function* fetchLedgers({ payload: symbol }) {
   try {
     const urlSymbol = symbol && symbol.toUpperCase()
     let targetSymbol = yield select(getTargetSymbol)
-    // set pair from url
+    // set symbol from url
     if (urlSymbol && urlSymbol !== targetSymbol) {
       yield put(actions.setTargetSymbol(urlSymbol))
       targetSymbol = urlSymbol
