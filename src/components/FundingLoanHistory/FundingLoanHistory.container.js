@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import actions from 'state/fundingLoanHistory/actions'
 import { getTimezone } from 'state/base/selectors'
@@ -31,7 +32,7 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchFloan: () => dispatch(actions.fetchFLoan()),
+  fetchFloan: symbol => dispatch(actions.fetchFLoan(symbol)),
   fetchNextFLoan: () => dispatch(actions.fetchNextFLoan()),
   fetchPrevFLoan: () => dispatch(actions.fetchPrevFLoan()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
@@ -39,6 +40,6 @@ const mapDispatchToProps = dispatch => ({
   setTargetSymbol: symbol => dispatch(actions.setTargetSymbol(symbol)),
 })
 
-const FundingLoanHistoryContainer = connect(mapStateToProps, mapDispatchToProps)(FundingLoanHistory)
+const FundingLoanHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FundingLoanHistory))
 
 export default FundingLoanHistoryContainer

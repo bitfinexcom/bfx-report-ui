@@ -24,9 +24,15 @@ function getReqFCredit(auth, query, targetSymbol, smallestMts) {
   return makeFetchCall('getFundingCreditHistory', auth, params)
 }
 
-function* fetchFCredit() {
+function* fetchFCredit({ payload: symbol }) {
   try {
-    const targetSymbol = yield select(getTargetSymbol)
+    const urlSymbol = symbol && symbol.toUpperCase()
+    let targetSymbol = yield select(getTargetSymbol)
+    // set symbol from url
+    if (urlSymbol && urlSymbol !== targetSymbol) {
+      yield put(actions.setTargetSymbol(urlSymbol))
+      targetSymbol = urlSymbol
+    }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqFCredit, auth, query, targetSymbol, 0)

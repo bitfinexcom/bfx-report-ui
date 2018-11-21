@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import actions from 'state/fundingOfferHistory/actions'
 import { getTimezone } from 'state/base/selectors'
@@ -31,7 +32,7 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchFoffer: () => dispatch(actions.fetchFOffer()),
+  fetchFoffer: symbol => dispatch(actions.fetchFOffer(symbol)),
   fetchNextFOffer: () => dispatch(actions.fetchNextFOffer()),
   fetchPrevFOffer: () => dispatch(actions.fetchPrevFOffer()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
@@ -39,6 +40,6 @@ const mapDispatchToProps = dispatch => ({
   setTargetSymbol: symbol => dispatch(actions.setTargetSymbol(symbol)),
 })
 
-const FundingOfferHistoryContainer = connect(mapStateToProps, mapDispatchToProps)(FundingOfferHistory)
+const FundingOfferHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FundingOfferHistory))
 
 export default FundingOfferHistoryContainer

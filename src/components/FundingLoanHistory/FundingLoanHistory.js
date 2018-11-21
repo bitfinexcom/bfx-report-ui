@@ -18,6 +18,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import SymbolSelector from 'ui/SymbolSelector'
 import queryConstants from 'state/query/constants'
+import { getPath } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
@@ -45,9 +46,10 @@ class FundingLoanHistory extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchFloan } = this.props
+    const { loading, fetchFloan, match } = this.props
     if (loading) {
-      fetchFloan()
+      const symbol = (match.params && match.params.symbol) || ''
+      fetchFloan(symbol)
     }
   }
 
@@ -58,8 +60,15 @@ class FundingLoanHistory extends PureComponent {
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
-        // eslint-disable-next-line react/destructuring-assignment
-        this.props.setTargetSymbol(symbol === ALL ? '' : symbol)
+        const { history, setTargetSymbol } = this.props
+        // show select symbol in url
+        if (symbol === ALL) {
+          history.push(`${getPath(TYPE)}${history.location.search}`)
+          setTargetSymbol('')
+        } else {
+          history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${history.location.search}`)
+          setTargetSymbol(symbol)
+        }
       }
     }
     return this.handlers[symbol]

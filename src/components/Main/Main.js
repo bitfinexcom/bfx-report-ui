@@ -196,15 +196,30 @@ class Main extends PureComponent {
               component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
             />
             <Route
+              exact
               path={getPath(MENU_FCREDIT)}
               component={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
+              path={`${getPath(MENU_FCREDIT)}/:symbol`}
+              component={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
               path={getPath(MENU_FLOAN)}
               component={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
+              path={`${getPath(MENU_FLOAN)}/:symbol`}
+              component={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
               path={getPath(MENU_FOFFER)}
+              component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_FOFFER)}/:symbol`}
               component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
