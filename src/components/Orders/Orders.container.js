@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import actions from 'state/orders/actions'
 import { getTimezone } from 'state/base/selectors'
@@ -30,7 +31,7 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchOrders: () => dispatch(actions.fetchOrders()),
+  fetchOrders: pair => dispatch(actions.fetchOrders(pair)),
   fetchNextOrders: () => dispatch(actions.fetchNextOrders()),
   fetchPrevOrders: () => dispatch(actions.fetchPrevOrders()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
@@ -38,6 +39,6 @@ const mapDispatchToProps = dispatch => ({
   setTargetPair: pair => dispatch(actions.setTargetPair(pair)),
 })
 
-const OrdersContainer = connect(mapStateToProps, mapDispatchToProps)(Orders)
+const OrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Orders))
 
 export default OrdersContainer

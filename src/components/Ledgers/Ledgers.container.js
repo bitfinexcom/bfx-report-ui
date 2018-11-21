@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import actions from 'state/ledgers/actions'
 import { getTimezone } from 'state/base/selectors'
@@ -31,7 +32,7 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchLedgers: () => dispatch(actions.fetchLedgers()),
+  fetchLedgers: symbol => dispatch(actions.fetchLedgers(symbol)),
   fetchNextLedgers: () => dispatch(actions.fetchNextLedgers()),
   fetchPrevLedgers: () => dispatch(actions.fetchPrevLedgers()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
@@ -39,6 +40,6 @@ const mapDispatchToProps = dispatch => ({
   setTargetSymbol: symbol => dispatch(actions.setTargetSymbol(symbol)),
 })
 
-const LedgersContainer = connect(mapStateToProps, mapDispatchToProps)(Ledgers)
+const LedgersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Ledgers))
 
 export default LedgersContainer

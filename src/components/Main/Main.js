@@ -151,7 +151,12 @@ class Main extends PureComponent {
               component={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
+              exact
               path={getPath(MENU_LEDGERS)}
+              component={() => <Ledgers handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_LEDGERS)}/:symbol`}
               component={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
@@ -164,27 +169,57 @@ class Main extends PureComponent {
               component={() => <Trades handleClickExport={this.handleClickExport} />}
             />
             <Route
+              exact
               path={getPath(MENU_ORDERS)}
               component={() => <Orders handleClickExport={this.handleClickExport} />}
             />
             <Route
+              path={`${getPath(MENU_ORDERS)}/:pair`}
+              component={() => <Orders handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
               path={getPath(MENU_DEPOSITS)}
               component={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
             />
             <Route
+              path={`${getPath(MENU_DEPOSITS)}/:symbol`}
+              component={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
               path={getPath(MENU_WITHDRAWALS)}
               component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
             />
             <Route
+              path={`${getPath(MENU_WITHDRAWALS)}/:symbol`}
+              component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
               path={getPath(MENU_FCREDIT)}
               component={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
+              path={`${getPath(MENU_FCREDIT)}/:symbol`}
+              component={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
               path={getPath(MENU_FLOAN)}
               component={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
+              path={`${getPath(MENU_FLOAN)}/:symbol`}
+              component={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
               path={getPath(MENU_FOFFER)}
+              component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_FOFFER)}/:symbol`}
               component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
             />
             <Route

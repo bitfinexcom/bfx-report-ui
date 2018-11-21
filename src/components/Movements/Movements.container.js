@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import actions from 'state/movements/actions'
 import { getTimezone } from 'state/base/selectors'
@@ -31,7 +32,7 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchMovements: () => dispatch(actions.fetchMovements()),
+  fetchMovements: symbol => dispatch(actions.fetchMovements(symbol)),
   fetchNextMovements: () => dispatch(actions.fetchNextMovements()),
   fetchPrevMovements: () => dispatch(actions.fetchPrevMovements()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
@@ -39,6 +40,6 @@ const mapDispatchToProps = dispatch => ({
   setTargetSymbol: symbol => dispatch(actions.setTargetSymbol(symbol)),
 })
 
-const MovementsContainer = connect(mapStateToProps, mapDispatchToProps)(Movements)
+const MovementsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Movements))
 
 export default MovementsContainer

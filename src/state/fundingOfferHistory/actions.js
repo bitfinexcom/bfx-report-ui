@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch funding offer history data.
+ * @param {string} symbol symbol param from url
  */
-export function fetchFOffer() {
+export function fetchFOffer(symbol) {
   return {
     type: types.FETCH_FOFFER,
+    payload: symbol,
   }
 }
 
