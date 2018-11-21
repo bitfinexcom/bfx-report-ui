@@ -178,11 +178,21 @@ class Main extends PureComponent {
               component={() => <Orders handleClickExport={this.handleClickExport} />}
             />
             <Route
+              exact
               path={getPath(MENU_DEPOSITS)}
               component={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
             />
             <Route
+              path={`${getPath(MENU_DEPOSITS)}/:symbol`}
+              component={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
               path={getPath(MENU_WITHDRAWALS)}
+              component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_WITHDRAWALS)}/:symbol`}
               component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
             />
             <Route

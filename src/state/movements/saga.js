@@ -23,9 +23,15 @@ function getReqMovements(auth, query, targetSymbol, smallestMts) {
   return makeFetchCall('getMovements', auth, params)
 }
 
-function* fetchMovements() {
+function* fetchMovements({ payload: symbol }) {
   try {
-    const targetSymbol = yield select(getTargetSymbol)
+    const urlSymbol = symbol && symbol.toUpperCase()
+    let targetSymbol = yield select(getTargetSymbol)
+    // set pair from url
+    if (urlSymbol && urlSymbol !== targetSymbol) {
+      yield put(actions.setTargetSymbol(urlSymbol))
+      targetSymbol = urlSymbol
+    }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbol, 0)
