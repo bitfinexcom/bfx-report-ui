@@ -16,7 +16,7 @@ import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
-import SymbolSelector from 'ui/SymbolSelector'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import {
@@ -102,8 +102,8 @@ class Ledgers extends PureComponent {
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
-    const currentCoin = targetSymbol || ALL
+    const coinList = coins || existingCoins
+    const currentFilters = targetSymbol ? [targetSymbol] : []
     const numRows = filteredData.length
 
     const descriptionCellRenderer = (rowIndex) => {
@@ -184,14 +184,14 @@ class Ledgers extends PureComponent {
     const renderSymbolSelector = (
       <Fragment>
         &nbsp;
-        <SymbolSelector
+        <MultiSymbolSelector
           coinList={coinList}
           coins={coins}
           currencies={currencies}
-          currentCoin={currentCoin}
+          currentFilters={currentFilters}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
-          wildCard={WILD_CARD}
+          type='symbol'
         />
       </Fragment>
     )
