@@ -10,6 +10,7 @@ import {
 } from '@blueprintjs/core'
 
 import { platform } from 'var/config'
+// eslint-disable-next-line import/no-unresolved
 import darkLogo from 'components/Header/logo3-dark-theme.svg'
 import lightLogo from 'components/Header//logo3-light-theme.svg'
 

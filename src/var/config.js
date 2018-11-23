@@ -1,16 +1,12 @@
 // Static config files to tune components
 const platforms = {
   bitfinex: {
-    id: 'bfx',
-    name: 'Bitfinex',
     API_URL: 'https://report.bitfinex.com/api',
     KEY_URL: 'https://www.bitfinex.com/api',
     showAuthPage: false,
     showSyncMode: false,
   },
   ethfinex: {
-    id: 'efx',
-    name: 'Ethfinex',
     API_URL: 'https://report.ethfinex.com/api',
     KEY_URL: 'https://www.ethfinex.com/api',
     showAuthPage: false,
@@ -18,16 +14,12 @@ const platforms = {
     hideSwitchTheme: true,
   },
   test: {
-    id: 'test',
-    name: 'Bitfinex Test',
     API_URL: 'https://test-report.bitfinex.com/api',
     KEY_URL: 'https://test.bitfinex.com/api',
     showAuthPage: true,
     showSyncMode: false,
   },
   localhost: {
-    id: 'local',
-    name: 'Local',
     API_URL: 'http://localhost:31339/api',
     KEY_URL: 'https://www.bitfinex.com/api',
     showAuthPage: true,

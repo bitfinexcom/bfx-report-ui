@@ -53,8 +53,10 @@ npm install
 
     ```
     export NODE_PATH=src/
-    export PUBLIC_URL=./
+    export PUBLIC_URL=/
     export REACT_APP_PLATFORM=localhost
+    export REACT_APP_TITLE=Bitfinex Reports
+    export REACT_APP_LOGO_PATH=favicon.ico
     ```
 
     `NODE_PATH` is used to support absolute import local package instead of relative import.
@@ -95,7 +97,9 @@ Then run `npm start` and you will see the extra sync status button at top right 
 
 1. set `export REACT_APP_PLATFORM=ethfinex` in env variables instead
 
-You'll noticed `hideSwitchTheme` is set to true in `var/config.js` because Ethfinex does not have dark/light theming.
+You'll be noticed `hideSwitchTheme` is set to true in `var/config.js` because Ethfinex does not have dark/light theming.
+
+And rename `.env-ethfinex` to `.env` to setup Ethfinex related params.
 
 ## 3rd party libraries
 
