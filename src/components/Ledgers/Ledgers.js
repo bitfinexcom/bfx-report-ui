@@ -32,8 +32,6 @@ const COLUMN_WIDTHS = [500, 100, 120, 120, 150, 80]
 const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
 const TYPE = queryConstants.MENU_LEDGERS
-const ALL = 'ALL'
-const WILD_CARD = ['', ALL]
 
 class Ledgers extends PureComponent {
   constructor(props) {
@@ -59,15 +57,16 @@ class Ledgers extends PureComponent {
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
-        const { history, setTargetSymbol } = this.props
+        const { history, addTargetSymbol } = this.props
         // show select symbol in url
-        if (symbol === ALL) {
-          history.push(`${getPath(TYPE)}${history.location.search}`)
-          setTargetSymbol('')
-        } else {
+        // if (symbol === ALL) {
+          //   history.push(`${getPath(TYPE)}${history.location.search}`)
+          //   // setTargetSymbol('')
+          // } else {
+          // TODO form the right url
           history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${history.location.search}`)
-          setTargetSymbol(symbol)
-        }
+          addTargetSymbol(symbol)
+        // }
       }
     }
     return this.handlers[symbol]
@@ -90,7 +89,7 @@ class Ledgers extends PureComponent {
       offset,
       pageOffset,
       pageLoading,
-      targetSymbol,
+      targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
@@ -98,12 +97,12 @@ class Ledgers extends PureComponent {
       jumpPage,
       loading,
       refresh,
+      removeTargetSymbol,
       timezone,
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const coinList = coins || existingCoins
-    const currentFilters = targetSymbol ? [targetSymbol] : []
     const numRows = filteredData.length
 
     const descriptionCellRenderer = (rowIndex) => {
@@ -146,15 +145,6 @@ class Ledgers extends PureComponent {
 
     const amountCellRenderer = (rowIndex) => {
       const { amount, currency } = filteredData[rowIndex]
-      // eslint-disable-next-line react/destructuring-assignment
-      const showCurrency = WILD_CARD.includes(targetSymbol) ? (
-        <Fragment>
-          &nbsp;
-          <span className='bitfinex-show-soft'>
-            {currency}
-          </span>
-        </Fragment>
-      ) : ''
       const classes = amountStyle(amount)
       const tooltip = `${amount} ${currency}`
       return (
@@ -163,7 +153,6 @@ class Ledgers extends PureComponent {
           tooltip={tooltip}
         >
           {amount}
-          {showCurrency}
         </Cell>
       )
     }
@@ -188,10 +177,11 @@ class Ledgers extends PureComponent {
           coinList={coinList}
           coins={coins}
           currencies={currencies}
-          currentFilters={currentFilters}
+          currentFilters={targetSymbols}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
-          type='symbol'
+          removeTargetSymbol={removeTargetSymbol}
+          type={TYPE}
         />
       </Fragment>
     )

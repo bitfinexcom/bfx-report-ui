@@ -21,38 +21,47 @@ const MAPPING = {
   [MENU_FCREDIT]: {
     icon: 'book',
     path: '/credits',
+    filterType: 'symbol',
   },
   [MENU_FLOAN]: {
     icon: 'book',
     path: '/loans',
+    filterType: 'symbol',
   },
   [MENU_FOFFER]: {
     icon: 'book',
     path: '/offers',
+    filterType: 'symbol',
   },
   [MENU_LEDGERS]: {
     icon: 'book',
     path: '/ledgers',
+    filterType: 'symbol',
   },
   [MENU_ORDERS]: {
     icon: 'flows',
     path: '/orders',
+    filterType: 'pair',
   },
   [MENU_TRADES]: {
     icon: 'exchange',
     path: '/trades',
+    filterType: 'pair',
   },
   [MENU_DEPOSITS]: {
     icon: 'add-to-folder',
     path: '/deposits',
+    filterType: 'symbol',
   },
   [MENU_WITHDRAWALS]: {
     icon: 'folder-shared-open',
     path: '/withdrawals',
+    filterType: 'symbol',
   },
   [MENU_PUBLIC_TRADES]: {
     icon: 'exchange',
     path: '/pub_trades',
+    filterType: 'pair',
   },
 }
 
@@ -93,8 +102,13 @@ export function getPath(target) {
   return MAPPING[target].path
 }
 
+export function getFilterType(target) {
+  return MAPPING[target].filterType
+}
+
 export default {
   getIcon,
+  getFilterType,
   getPath,
   getTarget,
   isValidTimeStamp,

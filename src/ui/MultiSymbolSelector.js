@@ -7,7 +7,18 @@ import {
 } from '@blueprintjs/core'
 import { MultiSelect } from '@blueprintjs/select'
 
+import { getFilterType } from 'state/query/utils'
 class MultiSymbolSelector extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.handleTagRemove = this.handleTagRemove.bind(this)
+  }
+
+  handleTagRemove(tag, index) {
+    const { removeTargetSymbol } = this.props
+    removeTargetSymbol(tag)
+  }
+
   render() {
     const {
       coinList,
@@ -17,7 +28,7 @@ class MultiSymbolSelector extends PureComponent {
       existingCoins,
       intl,
       onSymbolSelect,
-      type = 'symbol',
+      type,
     } = this.props
 
     const renderSymbol = (symbol, { modifiers }) => {
@@ -45,7 +56,7 @@ class MultiSymbolSelector extends PureComponent {
     const filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
     const renderTag = coin => coin
 
-    const title = `selector.${type}.filter`
+    const title = `selector.${getFilterType(type)}.filter`
     return (
       <MultiSelect
         className='bitfinex-multi-select'
@@ -56,7 +67,7 @@ class MultiSymbolSelector extends PureComponent {
         itemPredicate={filterSymbol}
         onItemSelect={onSymbolSelect}
         popoverProps={{ minimal: true }}
-        tagProps={{ minimal: true }}
+        tagInputProps = {{ tagProps: { minimal: true }, onRemove: this.handleTagRemove }}
         tagRenderer={renderTag}
         selectedItems={currentFilters}
       />
@@ -72,6 +83,7 @@ MultiSymbolSelector.propTypes = {
   existingCoins: PropTypes.arrayOf(PropTypes.string),
   intl: intlShape.isRequired,
   onSymbolSelect: PropTypes.func.isRequired,
+  removeTargetSymbol: PropTypes.func.isRequired,
   type: PropTypes.string,
 }
 MultiSymbolSelector.defaultProps = {
@@ -80,7 +92,7 @@ MultiSymbolSelector.defaultProps = {
   coinList: [],
   currentFilters: [],
   existingCoins: [],
-  type: 'symbol',
+  type: '',
 }
 
 export default injectIntl(MultiSymbolSelector)
