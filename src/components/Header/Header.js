@@ -11,10 +11,10 @@ import {
 } from '@blueprintjs/core'
 
 import Status from 'components/Status'
-import LangMenu from 'components/LangMenu'
 import PrefMenu from 'components/PrefMenu'
 import PrefDialog from 'components/PrefDialog'
 import SyncMode from 'components/SyncMode'
+import LangMenu from 'ui/LangMenu'
 import ToggleMenu from 'ui/ToggleMenu'
 import baseType from 'state/base/constants'
 import { getTarget } from 'state/query/utils'

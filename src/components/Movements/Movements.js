@@ -10,8 +10,8 @@ import {
 } from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
-import TimeRange from 'components/TimeRange'
-import Explorer from 'components/Explorer'
+import TimeRange from 'ui/TimeRange'
+import Explorer from 'ui/Explorer'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
