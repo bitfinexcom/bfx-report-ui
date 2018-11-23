@@ -11,7 +11,7 @@ import {
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'ui/TimeRange'
-import Explorer from 'components/Explorer'
+import Explorer from 'ui/Explorer'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
