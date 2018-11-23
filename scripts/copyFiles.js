@@ -41,9 +41,10 @@ const filesMap = {
 }
 
 const copyFile = (source, destination) => {
-  console.warn(`Copying file from ${source} to ${destination}`)
-  const template = fs.readFileSync(source, 'utf8')
-  fs.writeFileSync(destination, template, 'utf8')
+  fs.copyFile(source, destination, (err) => {
+    if (err) throw err;
+    console.log(`Copying file from ${source} to ${destination}`)
+  });
 }
 
 filesMap[platform].forEach(pair => {
