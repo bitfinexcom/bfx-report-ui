@@ -10,7 +10,7 @@ import {
 import { TimezonePicker } from '@blueprintjs/timezone'
 
 import { platform } from 'var/config'
-import LangMenu from 'components/LangMenu'
+import LangMenu from 'ui/LangMenu'
 import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './PrefDialog.props'
