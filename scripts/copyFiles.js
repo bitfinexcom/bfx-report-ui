@@ -1,5 +1,10 @@
 const fs = require('fs')
 
+if (!process.env.REACT_APP_PLATFORM) {
+  console.error('>>> REACT_APP_PLATFORM IS REQUIRED')
+  console.error('>>> Make sure you have exported the related env variables\n\n')
+}
+
 const platform = ['localhost', 'bitfinex'].includes(process.env.REACT_APP_PLATFORM)
   ? 'bitfinex'
   : process.env.REACT_APP_PLATFORM
@@ -36,7 +41,7 @@ const filesMap = {
 }
 
 const copyFile = (source, destination) => {
-  console.log(`Copying file from ${source} to ${destination}`)
+  console.warn(`Copying file from ${source} to ${destination}`)
   const template = fs.readFileSync(source, 'utf8')
   fs.writeFileSync(destination, template, 'utf8')
 }

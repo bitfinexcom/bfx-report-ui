@@ -99,7 +99,17 @@ Then run `npm start` and you will see the extra sync status button at top right 
 
 You'll be noticed `hideSwitchTheme` is set to true in `var/config.js` because Ethfinex does not have dark/light theming.
 
-And rename `.env-ethfinex` to `.env` to setup Ethfinex related params.
+Also need to set up related env variables:
+
+```
+NODE_PATH=src/
+PUBLIC_URL=/
+REACT_APP_PLATFORM=ethfinex
+REACT_APP_TITLE=Ethfinex Reports
+REACT_APP_LOGO_PATH=favicon.png
+```
+
+We can custom what files need to copy into the project through edit the `scripts/copyFiles` script.
 
 ## 3rd party libraries
 
