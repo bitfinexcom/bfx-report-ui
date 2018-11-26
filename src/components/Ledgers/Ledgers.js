@@ -40,6 +40,7 @@ class Ledgers extends PureComponent {
     this.handleClick = this.handleClick.bind(this)
     this.fetchPrev = this.fetchPrev.bind(this)
     this.fetchNext = this.fetchNext.bind(this)
+    this.handleTagRemove = this.handleTagRemove.bind(this)
   }
 
   componentDidMount() {
@@ -72,6 +73,11 @@ class Ledgers extends PureComponent {
     return this.handlers[symbol]
   }
 
+  handleTagRemove(tag) {
+    const { removeTargetSymbol } = this.props
+    removeTargetSymbol(tag)
+  }
+
   fetchPrev() {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.fetchPrevLedgers()
@@ -97,7 +103,6 @@ class Ledgers extends PureComponent {
       jumpPage,
       loading,
       refresh,
-      removeTargetSymbol,
       timezone,
       nextPage,
     } = this.props
@@ -180,7 +185,7 @@ class Ledgers extends PureComponent {
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
-          removeTargetSymbol={removeTargetSymbol}
+          handleTagRemove={this.handleTagRemove}
           type={TYPE}
         />
       </Fragment>

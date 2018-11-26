@@ -8,17 +8,8 @@ import {
 import { MultiSelect } from '@blueprintjs/select'
 
 import { getFilterType } from 'state/query/utils'
+
 class MultiSymbolSelector extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-  }
-
-  handleTagRemove(tag, index) {
-    const { removeTargetSymbol } = this.props
-    removeTargetSymbol(tag)
-  }
-
   render() {
     const {
       coinList,
@@ -26,6 +17,7 @@ class MultiSymbolSelector extends PureComponent {
       currencies,
       currentFilters,
       existingCoins,
+      handleTagRemove,
       intl,
       onSymbolSelect,
       type,
@@ -67,7 +59,7 @@ class MultiSymbolSelector extends PureComponent {
         itemPredicate={filterSymbol}
         onItemSelect={onSymbolSelect}
         popoverProps={{ minimal: true }}
-        tagInputProps = {{ tagProps: { minimal: true }, onRemove: this.handleTagRemove }}
+        tagInputProps={{ tagProps: { minimal: true }, onRemove: handleTagRemove }}
         tagRenderer={renderTag}
         selectedItems={currentFilters}
       />
@@ -81,9 +73,9 @@ MultiSymbolSelector.propTypes = {
   coinList: PropTypes.arrayOf(PropTypes.string),
   currentFilters: PropTypes.arrayOf(PropTypes.string),
   existingCoins: PropTypes.arrayOf(PropTypes.string),
+  handleTagRemove: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   onSymbolSelect: PropTypes.func.isRequired,
-  removeTargetSymbol: PropTypes.func.isRequired,
   type: PropTypes.string,
 }
 MultiSymbolSelector.defaultProps = {
