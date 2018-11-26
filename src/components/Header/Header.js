@@ -21,8 +21,10 @@ import { getTarget } from 'state/query/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Header.props'
+// eslint-disable-next-line import/no-unresolved
 import darkLogo from './logo3-dark-theme.svg'
 import lightLogo from './logo3-light-theme.svg'
+// eslint-disable-next-line import/no-unresolved
 import mDarkLogo from './mobile_logo_dark.svg'
 import mLightLogo from './mobile_logo_light.svg'
 import HelpLink from './HelpLink'

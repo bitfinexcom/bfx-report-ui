@@ -1,6 +1,6 @@
 {
   "name": "bfx-report-ui",
-  "version": "2.3.7",
+  "version": "2.4.0",
   "description": "Report page to overview the user actions in Bitfinex and download related csv files",
   "repository": {
     "type": "git",
@@ -55,10 +55,11 @@
     "react-test-renderer": "^16.6.3"
   },
   "scripts": {
+    "prepare": "node scripts/copyFiles",
     "build-sass": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-sass": "npm run build-sass && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "start": "npm run build-sass && react-scripts start",
-    "build": "npm run build-sass && react-scripts build",
+    "start": "npm run prepare && npm run build-sass && react-scripts start",
+    "build": "npm run prepare && npm run build-sass && react-scripts build",
     "test": "react-scripts test --env=jsdom --modulePaths=src",
     "lint": "eslint src --ignore-path .gitignore",
     "lintFix": "eslint src --fix --ignore-path .gitignore",
