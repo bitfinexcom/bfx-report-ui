@@ -24,6 +24,7 @@ import {
   formatTime,
   getCurrentEntries,
 } from 'state/utils'
+import { getSymbolsURL } from 'state/symbols/utils'
 import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Ledgers.props'
@@ -58,24 +59,29 @@ class Ledgers extends PureComponent {
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
-        const { history, addTargetSymbol } = this.props
-        // show select symbol in url
-        // if (symbol === ALL) {
-          //   history.push(`${getPath(TYPE)}${history.location.search}`)
-          //   // setTargetSymbol('')
-          // } else {
-          // TODO form the right url
-          history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${history.location.search}`)
+        const { history, addTargetSymbol, targetSymbols } = this.props
+        if (!targetSymbols.includes(symbol)) {
+          const symbols = [...targetSymbols, symbol]
+          history.push(`${getPath(TYPE)}/${getSymbolsURL(symbols)}${history.location.search}`)
           addTargetSymbol(symbol)
-        // }
+        }
       }
     }
     return this.handlers[symbol]
   }
 
   handleTagRemove(tag) {
-    const { removeTargetSymbol } = this.props
-    removeTargetSymbol(tag)
+    const { history, removeTargetSymbol, targetSymbols } = this.props
+    if (targetSymbols.includes(tag)) {
+      // show no select symbol in url
+      if (targetSymbols.length === 1) {
+        history.push(`${getPath(TYPE)}${history.location.search}`)
+      } else {
+        const symbols = targetSymbols.filter(symbol => symbol !== tag)
+        history.push(`${getPath(TYPE)}/${getSymbolsURL(symbols)}${history.location.search}`)
+      }
+      removeTargetSymbol(tag)
+    }
   }
 
   fetchPrev() {

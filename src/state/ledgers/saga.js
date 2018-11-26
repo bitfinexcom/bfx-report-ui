@@ -10,6 +10,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -19,7 +20,7 @@ function getReqLedgers(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, queryTypes.MENU_LEDGERS, smallestMts)
   if (targetSymbols.length === 1) {
     params.symbol = targetSymbols[0]
-  } else if (targetSymbols.length > 1) { console.warn('has symbols', targetSymbols)
+  } else if (targetSymbols.length > 1) {
     params.symbol = targetSymbols
   }
   return makeFetchCall('getLedgers', auth, params)
@@ -27,14 +28,15 @@ function getReqLedgers(auth, query, targetSymbols, smallestMts) {
 
 function* fetchLedgers({ payload: symbol }) {
   try {
-    const urlSymbols = symbol && symbol.toUpperCase()
     let targetSymbols = yield select(getTargetSymbols)
-    // TODO: deal urlSymbols
+    const symbolsUrl = getSymbolsURL(targetSymbols)
     // set symbol from url
-    if (urlSymbols && urlSymbols !== targetSymbols) {
-      //yield put(actions.setTargetSymbols([urlSymbols]))
-      targetSymbols = [urlSymbols]
+    if (symbol && symbol !== symbolsUrl) {
+      targetSymbols = getSymbolsFromUrlParam(symbol)
+      yield put(actions.setTargetSymbols(targetSymbols))
     }
+    // TODO: remove once backend is ready
+    targetSymbols = targetSymbols.length > 0 ? targetSymbols[targetSymbols.length - 1] : []
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, 0)
