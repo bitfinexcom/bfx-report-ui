@@ -1,5 +1,28 @@
 const fs = require('fs')
 
+function hasEnv() {
+  const ENVS = [
+    'NODE_PATH',
+    'PUBLIC_URL',
+    'REACT_APP_PLATFORM',
+    'REACT_APP_TITLE',
+    'REACT_APP_LOGO_PATH',
+  ]
+  let result = true
+  console.log('=========================')
+  ENVS.forEach(env => {
+    if (!process.env.hasOwnProperty(env)) {
+      result = false
+      console.error(`>>> ${env} IS REQUIRED`)
+      console.error('>>> Make sure you have exported the related env variables\n\n')
+    } else {
+      console.error(`Get ${env} as ${process.env[env]}`)
+    }
+  })
+  console.log('=========================')
+  return result
+}
+
 if (!process.env.REACT_APP_PLATFORM) {
   console.error('>>> REACT_APP_PLATFORM IS REQUIRED')
   console.error('>>> Make sure you have exported the related env variables\n\n')
@@ -47,6 +70,8 @@ const copyFile = (source, destination) => {
   });
 }
 
-filesMap[platform].forEach(pair => {
-  copyFile(pair.source, pair.destination)
-})
+if (hasEnv()) {
+  filesMap[platform].forEach(pair => {
+    copyFile(pair.source, pair.destination)
+  })
+}
