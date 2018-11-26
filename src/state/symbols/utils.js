@@ -33,9 +33,8 @@ export function getSymbolsURL(symbols) {
 export function getSymbolsFromUrlParam(param) {
   if (param.indexOf(',') > -1) {
     return param.split(',').map(symbol => symbol.toUpperCase())
-  } else {
-    return [param.toUpperCase()]
   }
+  return [param.toUpperCase()]
 }
 
 // btcusd -> tBTCUSD

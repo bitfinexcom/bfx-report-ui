@@ -23,6 +23,10 @@ function getReqLedgers(auth, query, targetSymbols, smallestMts) {
   } else if (targetSymbols.length > 1) {
     params.symbol = targetSymbols
   }
+  // TODO: use this once the backend is ready
+  // if (targetSymbols.length > 0) {
+  //   params.symbol = targetSymbols
+  // }
   return makeFetchCall('getLedgers', auth, params)
 }
 
