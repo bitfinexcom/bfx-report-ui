@@ -5,7 +5,7 @@ if (!process.env.REACT_APP_PLATFORM) {
   console.error('>>> Make sure you have exported the related env variables\n\n')
 }
 
-const platform = ['localhost', 'bitfinex'].includes(process.env.REACT_APP_PLATFORM)
+const platform = ['localhost', 'test', 'bitfinex'].includes(process.env.REACT_APP_PLATFORM)
   ? 'bitfinex'
   : process.env.REACT_APP_PLATFORM
 
