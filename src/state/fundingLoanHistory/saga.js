@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbolToFSymbol } from 'state/symbols/utils'
+import { formatRawSymbolToFSymbol, getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -14,28 +14,28 @@ import queryTypes from 'state/query/constants'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetSymbol, getFundingLoanHistory } from './selectors'
+import { getTargetSymbols, getFundingLoanHistory } from './selectors'
 
-function getReqFLoan(auth, query, targetSymbol, smallestMts) {
+function getReqFLoan(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, queryTypes.MENU_FLOAN, smallestMts)
-  if (targetSymbol) {
-    params.symbol = formatRawSymbolToFSymbol(targetSymbol)
+  if (targetSymbols.length > 0) {
+    params.symbol = formatRawSymbolToFSymbol(targetSymbols)
   }
   return makeFetchCall('getFundingLoanHistory', auth, params)
 }
 
 function* fetchFLoan({ payload: symbol }) {
   try {
-    const urlSymbol = symbol && symbol.toUpperCase()
-    let targetSymbol = yield select(getTargetSymbol)
+    let targetSymbols = yield select(getTargetSymbols)
+    const symbolsUrl = getSymbolsURL(targetSymbols)
     // set symbol from url
-    if (urlSymbol && urlSymbol !== targetSymbol) {
-      yield put(actions.setTargetSymbol(urlSymbol))
-      targetSymbol = urlSymbol
+    if (symbol && symbol !== symbolsUrl) {
+      targetSymbols = getSymbolsFromUrlParam(symbol)
+      yield put(actions.setTargetSymbols(targetSymbols))
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFLoan, auth, query, targetSymbol, 0)
+    const { result = [], error } = yield call(getReqFLoan, auth, query, targetSymbols, 0)
     yield put(actions.updateFLoan(result))
 
     if (error) {

@@ -1,7 +1,7 @@
 export const getFundingLoanHistory = state => state.floan
 
 export const getExistingCoins = state => getFundingLoanHistory(state).existingCoins
-export const getTargetSymbol = state => getFundingLoanHistory(state).targetSymbol
+export const getTargetSymbols = state => getFundingLoanHistory(state).targetSymbols
 export const getDataReceived = state => getFundingLoanHistory(state).dataReceived
 export const getEntries = state => getFundingLoanHistory(state).entries
 export const getOffset = state => getFundingLoanHistory(state).offset
@@ -18,5 +18,5 @@ export default {
   getOffset,
   getPageLoading,
   getPageOffset,
-  getTargetSymbol,
+  getTargetSymbols,
 }

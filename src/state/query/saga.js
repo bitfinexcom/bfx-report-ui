@@ -11,9 +11,9 @@ import { makeFetchCall } from 'state/utils'
 import { formatRawPairToTPair, formatRawSymbolToFSymbol } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
-import { getTargetSymbol as getFCreditSymbol } from 'state/fundingCreditHistory/selectors'
-import { getTargetSymbol as getFLoanSymbol } from 'state/fundingLoanHistory/selectors'
-import { getTargetSymbol as getFOfferSymbol } from 'state/fundingOfferHistory/selectors'
+import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
+import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
+import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
 import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
 import { getTargetPair as getOrdersPair } from 'state/orders/selectors'
@@ -87,11 +87,11 @@ function getCSV(auth, query, target, options) {
 function getSelector(target) {
   switch (target) {
     case MENU_FCREDIT:
-      return getFCreditSymbol
+      return getFCreditSymbols
     case MENU_FLOAN:
-      return getFLoanSymbol
+      return getFLoanSymbols
     case MENU_FOFFER:
-      return getFOfferSymbol
+      return getFOfferSymbols
     case MENU_LEDGERS:
       return getLedgersSymbols
     case MENU_ORDERS:

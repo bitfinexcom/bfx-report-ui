@@ -20,8 +20,7 @@ const FCREDIT_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
-  coins: PropTypes.arrayOf(PropTypes.string),
-  currencies: PropTypes.objectOf(PropTypes.string),
+  addTargetSymbol: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(FCREDIT_ENTRIES_PROPS).isRequired,
   existingCoins: PropTypes.arrayOf(PropTypes.string),
@@ -34,8 +33,8 @@ export const propTypes = {
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  setTargetSymbol: PropTypes.func.isRequired,
-  targetSymbol: PropTypes.string,
+  removeTargetSymbol: PropTypes.func.isRequired,
+  targetSymbols: PropTypes.arrayOf(PropTypes.string),
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,
@@ -43,7 +42,7 @@ export const propTypes = {
 }
 
 export const defaultProps = {
-  coins: [],
+  addTargetSymbol: () => {},
   offset: 0,
   entries: [],
   existingCoins: [],
@@ -56,6 +55,7 @@ export const defaultProps = {
   pageOffset: 0,
   pageLoading: false,
   refresh: () => {},
-  setTargetSymbol: () => {},
+  removeTargetSymbol: () => {},
+  targetSymbols: [],
   nextPage: false,
 }

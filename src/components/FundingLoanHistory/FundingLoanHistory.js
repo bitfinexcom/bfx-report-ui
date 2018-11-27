@@ -16,12 +16,12 @@ import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
-import SymbolSelector from 'ui/SymbolSelector'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
+  generateUrl,
   getCurrentEntries,
   getSideMsg,
 } from 'state/utils'
@@ -33,14 +33,13 @@ const COLUMN_WIDTHS = [80, 100, 80, 100, 150, 130, 80, 150, 150, 150]
 const LIMIT = queryConstants.DEFAULT_FLOAN_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_FLOAN_PAGE_SIZE
 const TYPE = queryConstants.MENU_FLOAN
-const ALL = 'ALL'
-const WILD_CARD = ['', ALL]
 
 class FundingLoanHistory extends PureComponent {
   constructor(props) {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
+    this.handleTagRemove = this.handleTagRemove.bind(this)
   }
 
   componentDidMount() {
@@ -58,30 +57,36 @@ class FundingLoanHistory extends PureComponent {
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
-        const { history, setTargetSymbol } = this.props
-        // show select symbol in url
-        if (symbol === ALL) {
-          history.push(`${getPath(TYPE)}${history.location.search}`)
-          setTargetSymbol('')
-        } else {
-          history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${history.location.search}`)
-          setTargetSymbol(symbol)
+        const { history, addTargetSymbol, targetSymbols } = this.props
+        if (!targetSymbols.includes(symbol)) {
+          history.push(generateUrl(TYPE, history.location.search, [...targetSymbols, symbol]))
+          addTargetSymbol(symbol)
         }
       }
     }
     return this.handlers[symbol]
   }
 
+  handleTagRemove(tag) {
+    const { history, removeTargetSymbol, targetSymbols } = this.props
+    if (targetSymbols.includes(tag)) {
+      if (targetSymbols.length === 1) { // show no select symbol in url
+        history.push(generateUrl(TYPE, history.location.search))
+      } else {
+        history.push(generateUrl(TYPE, history.location.search, targetSymbols.filter(symbol => symbol !== tag)))
+      }
+      removeTargetSymbol(tag)
+    }
+  }
+
   render() {
     const {
-      coins,
-      currencies,
       fetchNext,
       fetchPrev,
       offset,
       pageOffset,
       pageLoading,
-      targetSymbol,
+      targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
@@ -93,8 +98,6 @@ class FundingLoanHistory extends PureComponent {
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
-    const currentCoin = targetSymbol || ALL
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
@@ -208,14 +211,12 @@ class FundingLoanHistory extends PureComponent {
     const renderSymbolSelector = (
       <Fragment>
         &nbsp;
-        <SymbolSelector
-          coinList={coinList}
-          coins={coins}
-          currencies={currencies}
-          currentCoin={currentCoin}
+        <MultiSymbolSelector
+          currentFilters={targetSymbols}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
-          wildCard={WILD_CARD}
+          handleTagRemove={this.handleTagRemove}
+          type={TYPE}
         />
       </Fragment>
     )
