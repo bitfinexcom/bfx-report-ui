@@ -74,8 +74,7 @@ class Ledgers extends PureComponent {
       if (targetSymbols.length === 1) { // show no select symbol in url
         history.push(generateUrl(TYPE, history.location.search))
       } else {
-        const symbols = targetSymbols.filter(symbol => symbol !== tag)
-        history.push(generateUrl(TYPE, history.location.search, symbols))
+        history.push(generateUrl(TYPE, history.location.search, targetSymbols.filter(symbol => symbol !== tag)))
       }
       removeTargetSymbol(tag)
     }
