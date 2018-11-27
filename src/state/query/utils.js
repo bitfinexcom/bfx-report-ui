@@ -10,7 +10,31 @@ const {
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
   MENU_PUBLIC_TRADES,
+  MENU_MOVEMENTS,
 } = queryType
+
+export const TYPE_WHITELIST = [
+  MENU_FCREDIT,
+  MENU_FLOAN,
+  MENU_FOFFER,
+  MENU_LEDGERS,
+  MENU_MOVEMENTS,
+  MENU_ORDERS,
+  MENU_TRADES,
+  MENU_PUBLIC_TRADES,
+]
+
+export const ROUTE_WHITELIST = [
+  MENU_FCREDIT,
+  MENU_FLOAN,
+  MENU_FOFFER,
+  MENU_LEDGERS,
+  MENU_ORDERS,
+  MENU_TRADES,
+  MENU_DEPOSITS,
+  MENU_WITHDRAWALS,
+  MENU_PUBLIC_TRADES,
+]
 
 export function isValidTimeStamp(n) {
   return (`${n}`).length === 13
@@ -112,4 +136,6 @@ export default {
   getPath,
   getTarget,
   isValidTimeStamp,
+  ROUTE_WHITELIST,
+  TYPE_WHITELIST,
 }

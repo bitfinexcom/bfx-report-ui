@@ -73,22 +73,46 @@ export function updateMovements(payload) {
 
 /**
  * Create an action to set target symbol.
+ * @param {string[]} symbols symbols
+ */
+export function setTargetSymbols(symbols) {
+  return {
+    type: types.SET_SYMBOLS,
+    payload: symbols,
+  }
+}
+
+/**
+ * Create an action to add target symbol.
  * @param {string} symbol symbol
  */
-export function setTargetSymbol(symbol) {
+export function addTargetSymbol(symbol) {
   return {
-    type: types.SET_SYMBOL,
+    type: types.ADD_SYMBOL,
+    payload: symbol,
+  }
+}
+
+/**
+ * Create an action to remove target symbol.
+ * @param {string} symbol symbol
+ */
+export function removeTargetSymbol(symbol) {
+  return {
+    type: types.REMOVE_SYMBOL,
     payload: symbol,
   }
 }
 
 export default {
+  addTargetSymbol,
   fetchFail,
   fetchMovements,
   fetchNextMovements,
   fetchPrevMovements,
   jumpPage,
   refresh,
-  setTargetSymbol,
+  removeTargetSymbol,
+  setTargetSymbols,
   updateMovements,
 }
