@@ -16,13 +16,13 @@ import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
-import SymbolSelector from 'ui/SymbolSelector'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
   getCurrentEntries,
+  generateUrl,
 } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
@@ -32,8 +32,6 @@ const COLUMN_WIDTHS = [500, 100, 120, 120, 150, 80]
 const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
 const TYPE = queryConstants.MENU_LEDGERS
-const ALL = 'ALL'
-const WILD_CARD = ['', ALL]
 
 class Ledgers extends PureComponent {
   constructor(props) {
@@ -42,6 +40,7 @@ class Ledgers extends PureComponent {
     this.handleClick = this.handleClick.bind(this)
     this.fetchPrev = this.fetchPrev.bind(this)
     this.fetchNext = this.fetchNext.bind(this)
+    this.handleTagRemove = this.handleTagRemove.bind(this)
   }
 
   componentDidMount() {
@@ -59,18 +58,26 @@ class Ledgers extends PureComponent {
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
-        const { history, setTargetSymbol } = this.props
-        // show select symbol in url
-        if (symbol === ALL) {
-          history.push(`${getPath(TYPE)}${history.location.search}`)
-          setTargetSymbol('')
-        } else {
-          history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${history.location.search}`)
-          setTargetSymbol(symbol)
+        const { history, addTargetSymbol, targetSymbols } = this.props
+        if (!targetSymbols.includes(symbol)) {
+          history.push(generateUrl(TYPE, history.location.search, [...targetSymbols, symbol]))
+          addTargetSymbol(symbol)
         }
       }
     }
     return this.handlers[symbol]
+  }
+
+  handleTagRemove(tag) {
+    const { history, removeTargetSymbol, targetSymbols } = this.props
+    if (targetSymbols.includes(tag)) {
+      if (targetSymbols.length === 1) { // show no select symbol in url
+        history.push(generateUrl(TYPE, history.location.search))
+      } else {
+        history.push(generateUrl(TYPE, history.location.search, targetSymbols.filter(symbol => symbol !== tag)))
+      }
+      removeTargetSymbol(tag)
+    }
   }
 
   fetchPrev() {
@@ -85,12 +92,10 @@ class Ledgers extends PureComponent {
 
   render() {
     const {
-      coins,
-      currencies,
       offset,
       pageOffset,
       pageLoading,
-      targetSymbol,
+      targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
@@ -102,8 +107,6 @@ class Ledgers extends PureComponent {
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
-    const currentCoin = targetSymbol || ALL
     const numRows = filteredData.length
 
     const descriptionCellRenderer = (rowIndex) => {
@@ -146,15 +149,6 @@ class Ledgers extends PureComponent {
 
     const amountCellRenderer = (rowIndex) => {
       const { amount, currency } = filteredData[rowIndex]
-      // eslint-disable-next-line react/destructuring-assignment
-      const showCurrency = WILD_CARD.includes(targetSymbol) ? (
-        <Fragment>
-          &nbsp;
-          <span className='bitfinex-show-soft'>
-            {currency}
-          </span>
-        </Fragment>
-      ) : ''
       const classes = amountStyle(amount)
       const tooltip = `${amount} ${currency}`
       return (
@@ -163,7 +157,6 @@ class Ledgers extends PureComponent {
           tooltip={tooltip}
         >
           {amount}
-          {showCurrency}
         </Cell>
       )
     }
@@ -184,14 +177,12 @@ class Ledgers extends PureComponent {
     const renderSymbolSelector = (
       <Fragment>
         &nbsp;
-        <SymbolSelector
-          coinList={coinList}
-          coins={coins}
-          currencies={currencies}
-          currentCoin={currentCoin}
+        <MultiSymbolSelector
+          currentFilters={targetSymbols}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
-          wildCard={WILD_CARD}
+          handleTagRemove={this.handleTagRemove}
+          type={TYPE}
         />
       </Fragment>
     )

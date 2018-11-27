@@ -10,31 +10,32 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetSymbol, getLedgers } from './selectors'
+import { getTargetSymbols, getLedgers } from './selectors'
 
-function getReqLedgers(auth, query, targetSymbol, smallestMts) {
+function getReqLedgers(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, queryTypes.MENU_LEDGERS, smallestMts)
-  if (targetSymbol) {
-    params.symbol = targetSymbol
+  if (targetSymbols.length > 0) {
+    params.symbol = targetSymbols
   }
   return makeFetchCall('getLedgers', auth, params)
 }
 
 function* fetchLedgers({ payload: symbol }) {
   try {
-    const urlSymbol = symbol && symbol.toUpperCase()
-    let targetSymbol = yield select(getTargetSymbol)
+    let targetSymbols = yield select(getTargetSymbols)
+    const symbolsUrl = getSymbolsURL(targetSymbols)
     // set symbol from url
-    if (urlSymbol && urlSymbol !== targetSymbol) {
-      yield put(actions.setTargetSymbol(urlSymbol))
-      targetSymbol = urlSymbol
+    if (symbol && symbol !== symbolsUrl) {
+      targetSymbols = getSymbolsFromUrlParam(symbol)
+      yield put(actions.setTargetSymbols(targetSymbols))
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbol, 0)
+    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, 0)
     yield put(actions.updateLedgers(result))
 
     if (error) {

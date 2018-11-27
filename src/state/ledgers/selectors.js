@@ -1,7 +1,7 @@
 export const getLedgers = state => state.ledgers
 
 export const getExistingCoins = state => getLedgers(state).existingCoins
-export const getTargetSymbol = state => getLedgers(state).targetSymbol
+export const getTargetSymbols = state => getLedgers(state).targetSymbols
 export const getDataReceived = state => getLedgers(state).dataReceived
 export const getEntries = state => getLedgers(state).entries
 export const getOffset = state => getLedgers(state).offset
@@ -18,5 +18,5 @@ export default {
   getOffset,
   getPageLoading,
   getPageOffset,
-  getTargetSymbol,
+  getTargetSymbols,
 }
