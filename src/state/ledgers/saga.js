@@ -18,15 +18,9 @@ import { getTargetSymbols, getLedgers } from './selectors'
 
 function getReqLedgers(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, queryTypes.MENU_LEDGERS, smallestMts)
-  if (targetSymbols.length === 1) {
-    params.symbol = targetSymbols[0]
-  } else if (targetSymbols.length > 1) {
+  if (targetSymbols.length > 0) {
     params.symbol = targetSymbols
   }
-  // TODO: use this once the backend is ready
-  // if (targetSymbols.length > 0) {
-  //   params.symbol = targetSymbols
-  // }
   return makeFetchCall('getLedgers', auth, params)
 }
 
@@ -39,8 +33,6 @@ function* fetchLedgers({ payload: symbol }) {
       targetSymbols = getSymbolsFromUrlParam(symbol)
       yield put(actions.setTargetSymbols(targetSymbols))
     }
-    // TODO: remove once backend is ready
-    targetSymbols = targetSymbols.length > 0 ? targetSymbols[targetSymbols.length - 1] : []
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, 0)

@@ -14,7 +14,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { getTargetSymbol as getFCreditSymbol } from 'state/fundingCreditHistory/selectors'
 import { getTargetSymbol as getFLoanSymbol } from 'state/fundingLoanHistory/selectors'
 import { getTargetSymbol as getFOfferSymbol } from 'state/fundingOfferHistory/selectors'
-import { getTargetSymbols as getLedgersSymbol } from 'state/ledgers/selectors'
+import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
 import { getTargetSymbol as getMovementsSymbol } from 'state/movements/selectors'
 import { getTargetPair as getOrdersPair } from 'state/orders/selectors'
 import { getTargetPair as getTradesPair } from 'state/trades/selectors'
@@ -93,7 +93,7 @@ function getSelector(target) {
     case MENU_FOFFER:
       return getFOfferSymbol
     case MENU_LEDGERS:
-      return getLedgersSymbol
+      return getLedgersSymbols
     case MENU_ORDERS:
       return getOrdersPair
     case MENU_WITHDRAWALS:
