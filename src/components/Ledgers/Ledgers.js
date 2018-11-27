@@ -77,6 +77,7 @@ class Ledgers extends PureComponent {
       removeTargetSymbol(tag)
     }
   }
+
   render() {
     const {
       fetchNext,
