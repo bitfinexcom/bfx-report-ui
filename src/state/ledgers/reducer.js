@@ -107,17 +107,21 @@ export function ledgersReducer(state = initialState, action) {
       }
     }
     case types.ADD_SYMBOL:
-      return state.targetSymbols.includes(payload) ? state : {
-        ...initialState,
-        targetSymbols: [...state.targetSymbols, payload],
-        existingCoins: state.existingCoins,
-      }
+      return state.targetSymbols.includes(payload)
+        ? state
+        : {
+          ...initialState,
+          targetSymbols: [...state.targetSymbols, payload],
+          existingCoins: state.existingCoins,
+        }
     case types.REMOVE_SYMBOL:
-      return (state.targetSymbols.includes(payload)) ? {
-        ...initialState,
-        targetSymbols: state.targetSymbols.filter(symbol => symbol !== payload),
-        existingCoins: state.existingCoins,
-      } : state
+      return (state.targetSymbols.includes(payload))
+        ? {
+          ...initialState,
+          targetSymbols: state.targetSymbols.filter(symbol => symbol !== payload),
+          existingCoins: state.existingCoins,
+        }
+        : state
     case types.SET_SYMBOLS:
       return {
         ...initialState,
