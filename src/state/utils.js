@@ -3,6 +3,8 @@ import queryString from 'query-string'
 import _omit from 'lodash/omit'
 
 import { platform } from 'var/config'
+import { getPath } from 'state/query/utils'
+import { getSymbolsURL } from 'state/symbols/utils'
 
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
@@ -122,6 +124,18 @@ export function getNoAuthTokenUrlString(searchUrl) {
   return queries ? `?${queries}` : ''
 }
 
+// genereate url with route and params
+export function generateUrl(type, params, symbols) {
+  if (!isValidateType(type)) {
+    // eslint-disable-next-line no-console
+    console.error('Unsupport type')
+    return ''
+  }
+  return symbols
+    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
+    : `${getPath(type)}${params}`
+}
+
 export default {
   checkFetch,
   checkEmail,
@@ -133,6 +147,7 @@ export default {
   getNoAuthTokenUrlString,
   getParsedUrlParams,
   getSideMsg,
+  generateUrl,
   isValidateType,
   momentFormatter,
   postJsonfetch,

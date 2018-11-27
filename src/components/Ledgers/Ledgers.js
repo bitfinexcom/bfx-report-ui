@@ -18,13 +18,12 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
   getCurrentEntries,
+  generateUrl,
 } from 'state/utils'
-import { getSymbolsURL } from 'state/symbols/utils'
 import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Ledgers.props'
@@ -61,8 +60,7 @@ class Ledgers extends PureComponent {
       this.handlers[symbol] = () => {
         const { history, addTargetSymbol, targetSymbols } = this.props
         if (!targetSymbols.includes(symbol)) {
-          const symbols = [...targetSymbols, symbol]
-          history.push(`${getPath(TYPE)}/${getSymbolsURL(symbols)}${history.location.search}`)
+          history.push(generateUrl(TYPE, history.location.search, [...targetSymbols, symbol]))
           addTargetSymbol(symbol)
         }
       }
@@ -75,10 +73,10 @@ class Ledgers extends PureComponent {
     if (targetSymbols.includes(tag)) {
       // show no select symbol in url
       if (targetSymbols.length === 1) {
-        history.push(`${getPath(TYPE)}${history.location.search}`)
+        history.push(generateUrl(TYPE, history.location.search))
       } else {
         const symbols = targetSymbols.filter(symbol => symbol !== tag)
-        history.push(`${getPath(TYPE)}/${getSymbolsURL(symbols)}${history.location.search}`)
+        history.push(generateUrl(TYPE, history.location.search, symbols))
       }
       removeTargetSymbol(tag)
     }
