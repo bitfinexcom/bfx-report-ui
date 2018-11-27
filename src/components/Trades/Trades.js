@@ -40,8 +40,6 @@ class Trades extends PureComponent {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
-    this.fetchPrev = this.fetchPrev.bind(this)
-    this.fetchNext = this.fetchNext.bind(this)
   }
 
   componentDidMount() {
@@ -73,19 +71,11 @@ class Trades extends PureComponent {
     return this.handlers[pair]
   }
 
-  fetchPrev() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchPrevTrades()
-  }
-
-  fetchNext() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchNextTrades()
-  }
-
   render() {
     const {
       existingPairs,
+      fetchNext,
+      fetchPrev,
       offset,
       pageOffset,
       pageLoading,
@@ -192,8 +182,8 @@ class Trades extends PureComponent {
         loading={pageLoading}
         offset={offset}
         jumpPage={jumpPage}
-        prevClick={this.fetchPrev}
-        nextClick={this.fetchNext}
+        prevClick={fetchPrev}
+        nextClick={fetchNext}
         pageOffset={pageOffset}
         nextPage={nextPage}
       />

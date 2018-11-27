@@ -33,8 +33,8 @@ const mapStateToProps = (state = {}) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchFoffer: symbol => dispatch(actions.fetchFOffer(symbol)),
-  fetchNextFOffer: () => dispatch(actions.fetchNextFOffer()),
-  fetchPrevFOffer: () => dispatch(actions.fetchPrevFOffer()),
+  fetchNext: () => dispatch(actions.fetchNextFOffer()),
+  fetchPrev: () => dispatch(actions.fetchPrevFOffer()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
   refresh: () => dispatch(actions.refresh()),
   setTargetSymbol: symbol => dispatch(actions.setTargetSymbol(symbol)),

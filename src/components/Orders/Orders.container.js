@@ -32,8 +32,8 @@ const mapStateToProps = (state = {}) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchOrders: pair => dispatch(actions.fetchOrders(pair)),
-  fetchNextOrders: () => dispatch(actions.fetchNextOrders()),
-  fetchPrevOrders: () => dispatch(actions.fetchPrevOrders()),
+  fetchNext: () => dispatch(actions.fetchNextOrders()),
+  fetchPrev: () => dispatch(actions.fetchPrevOrders()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
   refresh: () => dispatch(actions.refresh()),
   setTargetPair: pair => dispatch(actions.setTargetPair(pair)),

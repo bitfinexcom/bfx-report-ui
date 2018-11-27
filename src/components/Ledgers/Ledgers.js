@@ -38,8 +38,6 @@ class Ledgers extends PureComponent {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
-    this.fetchPrev = this.fetchPrev.bind(this)
-    this.fetchNext = this.fetchNext.bind(this)
     this.handleTagRemove = this.handleTagRemove.bind(this)
   }
 
@@ -79,19 +77,10 @@ class Ledgers extends PureComponent {
       removeTargetSymbol(tag)
     }
   }
-
-  fetchPrev() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchPrevLedgers()
-  }
-
-  fetchNext() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchNextLedgers()
-  }
-
   render() {
     const {
+      fetchNext,
+      fetchPrev,
       offset,
       pageOffset,
       pageLoading,
@@ -194,8 +183,8 @@ class Ledgers extends PureComponent {
         loading={pageLoading}
         offset={offset}
         jumpPage={jumpPage}
-        nextClick={this.fetchNext}
-        prevClick={this.fetchPrev}
+        nextClick={fetchNext}
+        prevClick={fetchPrev}
         pageOffset={pageOffset}
         nextPage={nextPage}
       />

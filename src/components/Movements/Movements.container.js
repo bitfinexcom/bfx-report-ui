@@ -33,8 +33,8 @@ const mapStateToProps = (state = {}) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchMovements: symbol => dispatch(actions.fetchMovements(symbol)),
-  fetchNextMovements: () => dispatch(actions.fetchNextMovements()),
-  fetchPrevMovements: () => dispatch(actions.fetchPrevMovements()),
+  fetchNext: () => dispatch(actions.fetchNextMovements()),
+  fetchPrev: () => dispatch(actions.fetchPrevMovements()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
   refresh: () => dispatch(actions.refresh()),
   setTargetSymbol: symbol => dispatch(actions.setTargetSymbol(symbol)),
