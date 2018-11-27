@@ -122,7 +122,7 @@
   "timeframe.2w": "Last 2 weeks",
   "timeframe.month_to_date": "Month to date",
   "timeframe.past_month": "Past month",
-  "timeframe.past_3m": "Past 3 month",
+  "timeframe.past_3m": "Past 3 months",
   "timeframe.custom": "Custom",
   "timeframe.custom.title": "Select Query Range",
   "timeframe.custom.view" : "View",
