@@ -29,7 +29,10 @@ export const propTypes = {
   setTargetSymbol: PropTypes.func.isRequired,
   targetSymbol: PropTypes.string,
   timezone: PropTypes.string,
-  nextPage: PropTypes.bool,
+  nextPage: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
 }
 
 export const defaultProps = {

@@ -28,7 +28,10 @@ export const propTypes = {
   removeTargetSymbol: PropTypes.func.isRequired,
   targetSymbols: PropTypes.arrayOf(PropTypes.string),
   timezone: PropTypes.string,
-  nextPage: PropTypes.bool,
+  nextPage: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
 }
 
 export const defaultProps = {

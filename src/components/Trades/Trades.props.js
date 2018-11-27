@@ -27,7 +27,10 @@ export const propTypes = {
   setTargetPair: PropTypes.func.isRequired,
   targetPair: PropTypes.string,
   timezone: PropTypes.string,
-  nextPage: PropTypes.bool,
+  nextPage: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
 }
 
 export const defaultProps = {
