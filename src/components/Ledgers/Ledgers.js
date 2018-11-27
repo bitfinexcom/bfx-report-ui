@@ -71,8 +71,7 @@ class Ledgers extends PureComponent {
   handleTagRemove(tag) {
     const { history, removeTargetSymbol, targetSymbols } = this.props
     if (targetSymbols.includes(tag)) {
-      // show no select symbol in url
-      if (targetSymbols.length === 1) {
+      if (targetSymbols.length === 1) { // show no select symbol in url
         history.push(generateUrl(TYPE, history.location.search))
       } else {
         const symbols = targetSymbols.filter(symbol => symbol !== tag)
