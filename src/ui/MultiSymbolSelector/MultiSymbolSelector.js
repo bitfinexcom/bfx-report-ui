@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
-import { injectIntl, intlShape } from 'react-intl'
-import PropTypes from 'prop-types'
+import { injectIntl } from 'react-intl'
 import {
   Intent,
   MenuItem,
@@ -9,10 +8,11 @@ import { MultiSelect } from '@blueprintjs/select'
 
 import { getFilterType } from 'state/query/utils'
 
+import { propTypes, defaultProps } from './MultiSymbolSelector.props'
+
 class MultiSymbolSelector extends PureComponent {
   render() {
     const {
-      coinList,
       coins,
       currencies,
       currentFilters,
@@ -54,7 +54,7 @@ class MultiSymbolSelector extends PureComponent {
         className='bitfinex-multi-select'
         disabled={coins.length === 0}
         placeholder={intl.formatMessage({ id: title })}
-        items={coinList}
+        items={coins || existingCoins}
         itemRenderer={renderSymbol}
         itemPredicate={filterSymbol}
         onItemSelect={onSymbolSelect}
@@ -67,24 +67,7 @@ class MultiSymbolSelector extends PureComponent {
   }
 }
 
-MultiSymbolSelector.propTypes = {
-  coins: PropTypes.arrayOf(PropTypes.string),
-  currencies: PropTypes.objectOf(PropTypes.string),
-  coinList: PropTypes.arrayOf(PropTypes.string),
-  currentFilters: PropTypes.arrayOf(PropTypes.string),
-  existingCoins: PropTypes.arrayOf(PropTypes.string),
-  handleTagRemove: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
-  onSymbolSelect: PropTypes.func.isRequired,
-  type: PropTypes.string,
-}
-MultiSymbolSelector.defaultProps = {
-  coins: [],
-  currencies: {},
-  coinList: [],
-  currentFilters: [],
-  existingCoins: [],
-  type: '',
-}
+MultiSymbolSelector.propTypes = propTypes
+MultiSymbolSelector.defaultProps = defaultProps
 
 export default injectIntl(MultiSymbolSelector)

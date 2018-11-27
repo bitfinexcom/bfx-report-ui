@@ -13,8 +13,6 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   addTargetSymbol: PropTypes.func.isRequired,
-  coins: PropTypes.arrayOf(PropTypes.string),
-  currencies: PropTypes.objectOf(PropTypes.string),
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(LEDGERS_ENTRIES_PROPS).isRequired,
   existingCoins: PropTypes.arrayOf(PropTypes.string),
@@ -35,7 +33,6 @@ export const propTypes = {
 
 export const defaultProps = {
   addTargetSymbol: () => {},
-  coins: [],
   offset: 0,
   entries: [],
   existingCoins: [],

@@ -93,8 +93,6 @@ class Ledgers extends PureComponent {
 
   render() {
     const {
-      coins,
-      currencies,
       offset,
       pageOffset,
       pageLoading,
@@ -110,7 +108,6 @@ class Ledgers extends PureComponent {
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const coinList = coins || existingCoins
     const numRows = filteredData.length
 
     const descriptionCellRenderer = (rowIndex) => {
@@ -182,9 +179,6 @@ class Ledgers extends PureComponent {
       <Fragment>
         &nbsp;
         <MultiSymbolSelector
-          coinList={coinList}
-          coins={coins}
-          currencies={currencies}
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
