@@ -61,8 +61,8 @@
     "start": "npm run prepare && npm run build-sass && react-scripts start",
     "build": "npm run prepare && npm run build-sass && react-scripts build",
     "test": "react-scripts test --env=jsdom --modulePaths=src",
-    "lint": "eslint src --ignore-path .gitignore",
-    "lintFix": "eslint src --fix --ignore-path .gitignore",
+    "lint": "eslint src scripts --ignore-path .gitignore",
+    "lintFix": "eslint src scripts --fix --ignore-path .gitignore",
     "prepush": "npm run lint"
   }
 }

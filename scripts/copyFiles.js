@@ -1,32 +1,27 @@
 const fs = require('fs')
 
-function hasEnv() {
-  const ENVS = [
-    'NODE_PATH',
-    'PUBLIC_URL',
-    'REACT_APP_PLATFORM',
-    'REACT_APP_TITLE',
-    'REACT_APP_LOGO_PATH',
-  ]
-  let result = true
-  console.log('=========================')
-  ENVS.forEach(env => {
-    if (!process.env.hasOwnProperty(env)) {
-      result = false
-      console.error(`>>> ${env} IS REQUIRED`)
-      console.error('>>> Make sure you have exported the related env variables\n\n')
-    } else {
-      console.error(`Get ${env} as ${process.env[env]}`)
-    }
-  })
-  console.log('=========================')
-  return result
+const REQUIRED_ENVS = [
+  'NODE_PATH',
+  'PUBLIC_URL',
+  'REACT_APP_PLATFORM',
+  'REACT_APP_TITLE',
+  'REACT_APP_LOGO_PATH',
+]
+
+const exitWithErrorMessage = (errorMessage) => {
+  // eslint-disable-next-line no-console
+  console.error(`\x1b[31m${errorMessage}\n`)
+  process.exit(1)
 }
 
-if (!process.env.REACT_APP_PLATFORM) {
-  console.error('>>> REACT_APP_PLATFORM IS REQUIRED')
-  console.error('>>> Make sure you have exported the related env variables\n\n')
-}
+REQUIRED_ENVS.forEach((env) => {
+  if (!process.env[env]) {
+    exitWithErrorMessage(
+      `Expected environment variable ${env} to be set.
+      See README.md for the details.`,
+    )
+  }
+})
 
 const platform = ['localhost', 'test', 'bitfinex'].includes(process.env.REACT_APP_PLATFORM)
   ? 'bitfinex'
@@ -60,18 +55,17 @@ const filesMap = {
       source: 'scripts/template/ethfinex-favicon.png',
       destination: 'public/favicon.png',
     },
-  ]
+  ],
 }
 
 const copyFile = (source, destination) => {
   fs.copyFile(source, destination, (err) => {
-    if (err) throw err;
+    if (err) throw err
+    // eslint-disable-next-line no-console
     console.log(`Copying file from ${source} to ${destination}`)
-  });
-}
-
-if (hasEnv()) {
-  filesMap[platform].forEach(pair => {
-    copyFile(pair.source, pair.destination)
   })
 }
+
+filesMap[platform].forEach((pair) => {
+  copyFile(pair.source, pair.destination)
+})
