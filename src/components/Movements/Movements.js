@@ -58,7 +58,12 @@ class Movements extends PureComponent {
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
-        const { history, addTargetSymbol, targetSymbols, type } = this.props
+        const {
+          addTargetSymbol,
+          history,
+          targetSymbols,
+          type,
+        } = this.props
         if (!targetSymbols.includes(symbol)) {
           history.push(generateUrl(type, history.location.search, [...targetSymbols, symbol]))
           addTargetSymbol(symbol)
@@ -69,7 +74,12 @@ class Movements extends PureComponent {
   }
 
   handleTagRemove(tag) {
-    const { history, removeTargetSymbol, targetSymbols, type } = this.props
+    const {
+      history,
+      removeTargetSymbol,
+      targetSymbols,
+      type,
+    } = this.props
     if (targetSymbols.includes(tag)) {
       if (targetSymbols.length === 1) { // show no select symbol in url
         history.push(generateUrl(type, history.location.search))
