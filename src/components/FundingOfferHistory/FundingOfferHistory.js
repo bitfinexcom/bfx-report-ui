@@ -40,8 +40,6 @@ class FundingOfferHistory extends PureComponent {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
-    this.fetchPrev = this.fetchPrev.bind(this)
-    this.fetchNext = this.fetchNext.bind(this)
   }
 
   componentDidMount() {
@@ -73,20 +71,12 @@ class FundingOfferHistory extends PureComponent {
     return this.handlers[symbol]
   }
 
-  fetchPrev() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchPrevFOffer()
-  }
-
-  fetchNext() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.fetchNextFOffer()
-  }
-
   render() {
     const {
       coins,
       currencies,
+      fetchNext,
+      fetchPrev,
       offset,
       pageOffset,
       pageLoading,
@@ -224,8 +214,8 @@ class FundingOfferHistory extends PureComponent {
         loading={pageLoading}
         offset={offset}
         jumpPage={jumpPage}
-        prevClick={this.fetchPrev}
-        nextClick={this.fetchNext}
+        prevClick={fetchPrev}
+        nextClick={fetchNext}
         pageOffset={pageOffset}
         nextPage={nextPage}
       />
