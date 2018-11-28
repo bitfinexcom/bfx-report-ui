@@ -62,7 +62,7 @@ function* fetchNextFCredit() {
       offset,
       entries,
       smallestMts,
-      targetSymbol,
+      targetSymbols,
     } = yield select(getFundingCreditHistory)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -70,7 +70,7 @@ function* fetchNextFCredit() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFCredit, auth, query, targetSymbol, smallestMts)
+    const { result = [], error } = yield call(getReqFCredit, auth, query, targetSymbols, smallestMts)
     yield put(actions.updateFCredit(result))
 
     if (error) {

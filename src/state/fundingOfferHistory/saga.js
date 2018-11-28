@@ -62,7 +62,7 @@ function* fetchNextFOffer() {
       offset,
       entries,
       smallestMts,
-      targetSymbol,
+      targetSymbols,
     } = yield select(getFundingOfferHistory)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -70,7 +70,7 @@ function* fetchNextFOffer() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbol, smallestMts)
+    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbols, smallestMts)
     yield put(actions.updateFOffer(result))
 
     if (error) {

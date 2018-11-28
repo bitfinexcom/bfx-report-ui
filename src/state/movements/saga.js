@@ -62,7 +62,7 @@ function* fetchNextMovements() {
       entries,
       offset,
       smallestMts,
-      targetSymbol,
+      targetSymbols,
     } = yield select(getMovements)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -70,7 +70,7 @@ function* fetchNextMovements() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbol, smallestMts)
+    const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbols, smallestMts)
     yield put(actions.updateMovements(result))
 
     if (error) {

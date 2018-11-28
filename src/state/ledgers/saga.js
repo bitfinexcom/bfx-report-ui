@@ -62,7 +62,7 @@ function* fetchNextLedgers() {
       entries,
       offset,
       smallestMts,
-      targetSymbol,
+      targetSymbols,
     } = yield select(getLedgers)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -70,7 +70,7 @@ function* fetchNextLedgers() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbol, smallestMts)
+    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, smallestMts)
     yield put(actions.updateLedgers(result))
 
     if (error) {

@@ -62,7 +62,7 @@ function* fetchNextFLoan() {
       offset,
       entries,
       smallestMts,
-      targetSymbol,
+      targetSymbols,
     } = yield select(getFundingLoanHistory)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -70,7 +70,7 @@ function* fetchNextFLoan() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFLoan, auth, query, targetSymbol, smallestMts)
+    const { result = [], error } = yield call(getReqFLoan, auth, query, targetSymbols, smallestMts)
     yield put(actions.updateFLoan(result))
 
     if (error) {
