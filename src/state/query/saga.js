@@ -141,7 +141,13 @@ function* exportCSV({ payload: target }) {
     options.milliseconds = yield select(getShowMilliseconds)
     const selector = getSelector(target)
     const sign = selector ? yield select(selector) : ''
-    options.symbol = formatSymbol(target, sign)
+    // pass symbol when exist
+    const symbol = formatSymbol(target, sign)
+    if ((Array.isArray(symbol) && symbol > 0)
+      || (typeof symbol === 'string' && symbol !== '')) {
+      options.symbol = symbol
+    }
+
     const { result, error } = yield call(getCSV, auth, query, target, options)
     if (result) {
       if (result.isSendEmail) {
