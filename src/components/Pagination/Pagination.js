@@ -152,7 +152,10 @@ Pagination.propTypes = {
   prevClick: PropTypes.func,
   pageOffset: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
-  nextPage: PropTypes.bool,
+  nextPage: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
 }
 
 Pagination.defaultProps = {

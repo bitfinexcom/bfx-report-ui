@@ -36,7 +36,10 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   setTargetSymbol: PropTypes.func.isRequired,
   targetSymbol: PropTypes.string,
-  nextPage: PropTypes.bool,
+  nextPage: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
 }
 
 export const defaultProps = {
