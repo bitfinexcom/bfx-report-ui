@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawPairToTPair } from 'state/symbols/utils'
+import { formatRawPairToTPair, getSymbolsURL, getPairsFromUrlParam } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -14,28 +14,28 @@ import queryTypes from 'state/query/constants'
 
 import types from './constants'
 import actions from './actions'
-import { getTrades, getTargetPair } from './selectors'
+import { getTrades, getTargetPairs } from './selectors'
 
-function getReqTrades(auth, query, targetPair, smallestMts) {
+function getReqTrades(auth, query, targetPairs, smallestMts) {
   const params = getTimeFrame(query, queryTypes.MENU_TRADES, smallestMts)
-  if (targetPair) {
-    params.symbol = formatRawPairToTPair(targetPair)
+  if (targetPairs.length > 0) {
+    params.symbol = formatRawPairToTPair(targetPairs)
   }
   return makeFetchCall('getTrades', auth, params)
 }
 
 function* fetchTrades({ payload: pair }) {
   try {
-    const urlPair = pair && pair.toLowerCase()
-    let targetPair = yield select(getTargetPair)
+    let targetPairs = yield select(getTargetPairs)
+    const pairsUrl = getSymbolsURL(targetPairs)
     // set pair from url
-    if (urlPair && urlPair !== targetPair) {
-      yield put(actions.setTargetPair(urlPair))
-      targetPair = urlPair
+    if (pair && pair !== pairsUrl) {
+      targetPairs = getPairsFromUrlParam(pair)
+      yield put(actions.setTargetPairs(targetPairs))
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqTrades, auth, query, targetPair, 0)
+    const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, 0)
     yield put(actions.updateTrades(result))
 
     if (error) {
@@ -62,7 +62,7 @@ function* fetchNextTrades() {
       offset,
       entries,
       smallestMts,
-      targetPair,
+      targetPairs,
     } = yield select(getTrades)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -70,7 +70,7 @@ function* fetchNextTrades() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqTrades, auth, query, targetPair, smallestMts)
+    const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, smallestMts)
     yield put(actions.updateTrades(result))
 
     if (error) {

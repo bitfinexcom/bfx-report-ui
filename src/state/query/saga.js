@@ -16,8 +16,8 @@ import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/se
 import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
 import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
-import { getTargetPair as getOrdersPair } from 'state/orders/selectors'
-import { getTargetPair as getTradesPair } from 'state/trades/selectors'
+import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
+import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
 import { getTimezone, getDateFormat, getShowMilliseconds } from 'state/base/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 
@@ -95,12 +95,12 @@ function getSelector(target) {
     case MENU_LEDGERS:
       return getLedgersSymbols
     case MENU_ORDERS:
-      return getOrdersPair
+      return getOrdersPairs
     case MENU_WITHDRAWALS:
     case MENU_DEPOSITS:
       return getMovementsSymbols
     case MENU_TRADES:
-      return getTradesPair
+      return getTradesPairs
     case MENU_PUBLIC_TRADES:
       return getPublicTradesPair
     default:
