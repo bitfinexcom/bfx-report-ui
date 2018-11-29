@@ -77,6 +77,26 @@ export function checkFetch(prevProps, props, type) {
   }
 }
 
+export function handleAddSymbolFilter(type, symbol, props) {
+  const { history, addTargetSymbol, targetSymbols } = props
+  if (!targetSymbols.includes(symbol)) {
+    history.push(generateUrl(type, history.location.search, [...targetSymbols, symbol]))
+    addTargetSymbol(symbol)
+  }
+}
+
+export function handleRemoveSymbolFilter(type, tag, props) {
+  const { history, removeTargetSymbol, targetSymbols } = props
+  if (targetSymbols.includes(tag)) {
+    if (targetSymbols.length === 1) { // show no select symbol in url
+      history.push(generateUrl(type, history.location.search))
+    } else {
+      history.push(generateUrl(type, history.location.search, targetSymbols.filter(symbol => symbol !== tag)))
+    }
+    removeTargetSymbol(tag)
+  }
+}
+
 export function getCurrentEntries(entries, offset, limit, pageOffset, pageSize) {
   return offset < limit
     ? entries.slice(pageOffset, pageOffset + pageSize)

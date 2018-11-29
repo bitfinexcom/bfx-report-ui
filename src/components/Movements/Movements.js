@@ -23,7 +23,8 @@ import {
   checkFetch,
   formatTime,
   getCurrentEntries,
-  generateUrl,
+  handleAddSymbolFilter,
+  handleRemoveSymbolFilter,
 } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
@@ -58,36 +59,16 @@ class Movements extends PureComponent {
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
-        const {
-          addTargetSymbol,
-          history,
-          targetSymbols,
-          type,
-        } = this.props
-        if (!targetSymbols.includes(symbol)) {
-          history.push(generateUrl(type, history.location.search, [...targetSymbols, symbol]))
-          addTargetSymbol(symbol)
-        }
+        const { type } = this.props
+        handleAddSymbolFilter(type, symbol, this.props)
       }
     }
     return this.handlers[symbol]
   }
 
   handleTagRemove(tag) {
-    const {
-      history,
-      removeTargetSymbol,
-      targetSymbols,
-      type,
-    } = this.props
-    if (targetSymbols.includes(tag)) {
-      if (targetSymbols.length === 1) { // show no select symbol in url
-        history.push(generateUrl(type, history.location.search))
-      } else {
-        history.push(generateUrl(type, history.location.search, targetSymbols.filter(symbol => symbol !== tag)))
-      }
-      removeTargetSymbol(tag)
-    }
+    const { type } = this.props
+    handleRemoveSymbolFilter(type, tag, this.props)
   }
 
   render() {

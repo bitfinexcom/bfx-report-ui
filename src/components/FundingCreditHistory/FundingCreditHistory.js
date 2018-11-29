@@ -21,9 +21,10 @@ import queryConstants from 'state/query/constants'
 import {
   checkFetch,
   formatTime,
-  generateUrl,
   getCurrentEntries,
   getSideMsg,
+  handleAddSymbolFilter,
+  handleRemoveSymbolFilter,
 } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
@@ -56,27 +57,13 @@ class FundingCreditHistory extends PureComponent {
 
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
-      this.handlers[symbol] = () => {
-        const { history, addTargetSymbol, targetSymbols } = this.props
-        if (!targetSymbols.includes(symbol)) {
-          history.push(generateUrl(TYPE, history.location.search, [...targetSymbols, symbol]))
-          addTargetSymbol(symbol)
-        }
-      }
+      this.handlers[symbol] = () => handleAddSymbolFilter(TYPE, symbol, this.props)
     }
     return this.handlers[symbol]
   }
 
   handleTagRemove(tag) {
-    const { history, removeTargetSymbol, targetSymbols } = this.props
-    if (targetSymbols.includes(tag)) {
-      if (targetSymbols.length === 1) { // show no select symbol in url
-        history.push(generateUrl(TYPE, history.location.search))
-      } else {
-        history.push(generateUrl(TYPE, history.location.search, targetSymbols.filter(symbol => symbol !== tag)))
-      }
-      removeTargetSymbol(tag)
-    }
+    handleRemoveSymbolFilter(TYPE, tag, this.props)
   }
 
   render() {
