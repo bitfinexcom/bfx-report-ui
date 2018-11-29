@@ -22,9 +22,9 @@ import {
   checkFetch,
   formatTime,
   getCurrentEntries,
-  generateUrl,
+  handleAddPairFilter,
+  handleRemovePairFilter,
 } from 'state/utils'
-import { parsePairTag } from 'state/symbols/utils'
 import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Trades.props'
@@ -56,28 +56,13 @@ class Trades extends PureComponent {
 
   handleClick(pair) {
     if (!this.handlers[pair]) {
-      this.handlers[pair] = () => {
-        const { history, addTargetPair, targetPairs } = this.props
-        if (!targetPairs.includes(pair)) {
-          history.push(generateUrl(TYPE, history.location.search, [...targetPairs, pair]))
-          addTargetPair(pair)
-        }
-      }
+      this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
     }
     return this.handlers[pair]
   }
 
   handleTagRemove(tag) {
-    const { history, removeTargetPair, targetPairs } = this.props
-    const parsedTag = parsePairTag(tag)
-    if (targetPairs.includes(parsedTag)) {
-      if (targetPairs.length === 1) { // show no select symbol in url
-        history.push(generateUrl(TYPE, history.location.search))
-      } else {
-        history.push(generateUrl(TYPE, history.location.search, targetPairs.filter(pair => pair !== parsedTag)))
-      }
-      removeTargetPair(parsedTag)
-    }
+    handleRemovePairFilter(TYPE, tag, this.props)
   }
 
   render() {
