@@ -77,6 +77,18 @@ export function checkFetch(prevProps, props, type) {
   }
 }
 
+// genereate url with route and params
+export function generateUrl(type, params, symbols) {
+  if (!isValidRouteType(type)) {
+    // eslint-disable-next-line no-console
+    console.error('Unsupport route type ', type)
+    return ''
+  }
+  return symbols
+    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
+    : `${getPath(type)}${params}`
+}
+
 export function handleAddSymbolFilter(type, symbol, props) {
   const { history, addTargetSymbol, targetSymbols } = props
   if (!targetSymbols.includes(symbol)) {
@@ -135,18 +147,6 @@ export function getNoAuthTokenUrlString(searchUrl) {
   const params = _omit(parsed, 'authToken')
   const queries = queryString.stringify(params, { encode: false })
   return queries ? `?${queries}` : ''
-}
-
-// genereate url with route and params
-export function generateUrl(type, params, symbols) {
-  if (!isValidRouteType(type)) {
-    // eslint-disable-next-line no-console
-    console.error('Unsupport route type ', type)
-    return ''
-  }
-  return symbols
-    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
-    : `${getPath(type)}${params}`
 }
 
 export default {
