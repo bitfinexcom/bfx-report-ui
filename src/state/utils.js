@@ -161,6 +161,8 @@ export default {
   getParsedUrlParams,
   getSideMsg,
   generateUrl,
+  handleAddSymbolFilter,
+  handleRemoveSymbolFilter,
   isValidateType,
   momentFormatter,
   postJsonfetch,
