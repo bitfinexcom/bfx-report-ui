@@ -53,7 +53,9 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           updateCoins.push(currentSymbol)
         }
         // log smallest mts
-        if (!smallestMts || smallestMts > mtsUpdate) {
+        if (nextPage === false
+          && (!smallestMts || smallestMts > mtsUpdate)
+        ) {
           smallestMts = mtsUpdate
         }
         return {
@@ -82,7 +84,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
         dataReceived: true,
-        smallestMts,
+        smallestMts: nextPage !== false ? nextPage : smallestMts,
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,

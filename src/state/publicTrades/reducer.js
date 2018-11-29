@@ -31,7 +31,9 @@ export function publicTradesReducer(state = initialState, action) {
           mts,
         } = entry
         // log smallest mts
-        if (!smallestMts || smallestMts > mts) {
+        if (nextPage === false
+          && (!smallestMts || smallestMts > mts)
+        ) {
           smallestMts = mts
         }
         return {
@@ -46,7 +48,7 @@ export function publicTradesReducer(state = initialState, action) {
         ...state,
         entries: [...state.entries, ...entries],
         dataReceived: true,
-        smallestMts,
+        smallestMts: nextPage !== false ? nextPage : smallestMts,
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,
