@@ -45,7 +45,9 @@ export function movementsReducer(state = initialState, action) {
           updateCoins.push(currency)
         }
         // log smallest mts
-        if (!smallestMts || smallestMts > mtsUpdated) {
+        if (nextPage === false
+          && (!smallestMts || smallestMts > mtsUpdated)
+        ) {
           smallestMts = mtsUpdated
         }
         return {
@@ -66,7 +68,7 @@ export function movementsReducer(state = initialState, action) {
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
         dataReceived: true,
-        smallestMts,
+        smallestMts: nextPage !== false ? nextPage : smallestMts,
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,

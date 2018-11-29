@@ -48,7 +48,9 @@ export function tradesReducer(state = initialState, action) {
           updatePairs.push(internalPair)
         }
         // log smallest mts
-        if (!smallestMts || smallestMts > mtsCreate) {
+        if (nextPage === false
+          && (!smallestMts || smallestMts > mtsCreate)
+        ) {
           smallestMts = mtsCreate
         }
         return {
@@ -70,7 +72,7 @@ export function tradesReducer(state = initialState, action) {
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
         dataReceived: true,
-        smallestMts,
+        smallestMts: nextPage !== false ? nextPage : smallestMts,
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,
