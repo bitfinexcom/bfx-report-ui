@@ -10,31 +10,32 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetSymbol, getMovements } from './selectors'
+import { getTargetSymbols, getMovements } from './selectors'
 
-function getReqMovements(auth, query, targetSymbol, smallestMts) {
+function getReqMovements(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, queryTypes.MENU_MOVEMENTS, smallestMts)
-  if (targetSymbol) {
-    params.symbol = targetSymbol
+  if (targetSymbols.length > 0) {
+    params.symbol = targetSymbols
   }
   return makeFetchCall('getMovements', auth, params)
 }
 
 function* fetchMovements({ payload: symbol }) {
   try {
-    const urlSymbol = symbol && symbol.toUpperCase()
-    let targetSymbol = yield select(getTargetSymbol)
+    let targetSymbols = yield select(getTargetSymbols)
+    const symbolsUrl = getSymbolsURL(targetSymbols)
     // set symbol from url
-    if (urlSymbol && urlSymbol !== targetSymbol) {
-      yield put(actions.setTargetSymbol(urlSymbol))
-      targetSymbol = urlSymbol
+    if (symbol && symbol !== symbolsUrl) {
+      targetSymbols = getSymbolsFromUrlParam(symbol)
+      yield put(actions.setTargetSymbols(targetSymbols))
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbol, 0)
+    const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbols, 0)
     yield put(actions.updateMovements(result))
 
     if (error) {
@@ -61,7 +62,7 @@ function* fetchNextMovements() {
       entries,
       offset,
       smallestMts,
-      targetSymbol,
+      targetSymbols,
     } = yield select(getMovements)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -69,7 +70,7 @@ function* fetchNextMovements() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbol, smallestMts)
+    const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbols, smallestMts)
     yield put(actions.updateMovements(result))
 
     if (error) {

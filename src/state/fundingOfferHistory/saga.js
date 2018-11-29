@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbolToFSymbol } from 'state/symbols/utils'
+import { formatRawSymbolToFSymbol, getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -14,28 +14,28 @@ import queryTypes from 'state/query/constants'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetSymbol, getFundingOfferHistory } from './selectors'
+import { getTargetSymbols, getFundingOfferHistory } from './selectors'
 
-function getReqFOffer(auth, query, targetSymbol, smallestMts) {
+function getReqFOffer(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, queryTypes.MENU_FOFFER, smallestMts)
-  if (targetSymbol) {
-    params.symbol = formatRawSymbolToFSymbol(targetSymbol)
+  if (targetSymbols.length > 0) {
+    params.symbol = formatRawSymbolToFSymbol(targetSymbols)
   }
   return makeFetchCall('getFundingOfferHistory', auth, params)
 }
 
 function* fetchFOffer({ payload: symbol }) {
   try {
-    const urlSymbol = symbol && symbol.toUpperCase()
-    let targetSymbol = yield select(getTargetSymbol)
+    let targetSymbols = yield select(getTargetSymbols)
+    const symbolsUrl = getSymbolsURL(targetSymbols)
     // set symbol from url
-    if (urlSymbol && urlSymbol !== targetSymbol) {
-      yield put(actions.setTargetSymbol(urlSymbol))
-      targetSymbol = urlSymbol
+    if (symbol && symbol !== symbolsUrl) {
+      targetSymbols = getSymbolsFromUrlParam(symbol)
+      yield put(actions.setTargetSymbols(targetSymbols))
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbol, 0)
+    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbols, 0)
     yield put(actions.updateFOffer(result))
 
     if (error) {
@@ -62,7 +62,7 @@ function* fetchNextFOffer() {
       offset,
       entries,
       smallestMts,
-      targetSymbol,
+      targetSymbols,
     } = yield select(getFundingOfferHistory)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -70,7 +70,7 @@ function* fetchNextFOffer() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbol, smallestMts)
+    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbols, smallestMts)
     yield put(actions.updateFOffer(result))
 
     if (error) {

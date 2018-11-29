@@ -43,8 +43,16 @@ export function formatRawPairToTPair(pair) {
 }
 
 // USD -> fUSD
-export function formatRawSymbolToFSymbol(symbol) {
-  return `f${symbol.toUpperCase()}`
+// ['USD'] -> 'fUSD'
+// ['USD', 'BTC'] -> ['fUSD', 'fBTC']
+export function formatRawSymbolToFSymbol(symbols) {
+  if (Array.isArray(symbols) && symbols.length > 0) {
+    if (symbols.length === 1) {
+      return `f${symbols[0].toUpperCase()}`
+    }
+    return symbols.map(symbol => `f${symbol.toUpperCase()}`)
+  }
+  return `f${symbols.toUpperCase()}`
 }
 
 export default {

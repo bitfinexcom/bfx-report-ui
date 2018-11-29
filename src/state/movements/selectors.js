@@ -1,7 +1,7 @@
 export const getMovements = state => state.movements
 
 export const getExistingCoins = state => getMovements(state).existingCoins
-export const getTargetSymbol = state => getMovements(state).targetSymbol
+export const getTargetSymbols = state => getMovements(state).targetSymbols
 export const getDataReceived = state => getMovements(state).dataReceived
 export const getEntries = state => getMovements(state).entries
 export const getOffset = state => getMovements(state).offset
@@ -18,5 +18,5 @@ export default {
   getOffset,
   getPageLoading,
   getPageOffset,
-  getTargetSymbol,
+  getTargetSymbols,
 }

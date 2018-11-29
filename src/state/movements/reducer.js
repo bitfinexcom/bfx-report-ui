@@ -12,7 +12,7 @@ const initialState = {
   pageLoading: false,
   pageOffset: 0, // start of current page
   smallestMts: 0,
-  targetSymbol: '',
+  targetSymbols: [],
   nextPage: false,
 }
 
@@ -112,10 +112,26 @@ export function movementsReducer(state = initialState, action) {
         pageOffset: totalOffset - currentOffset,
       }
     }
-    case types.SET_SYMBOL:
+    case types.ADD_SYMBOL:
+      return state.targetSymbols.includes(payload)
+        ? state
+        : {
+          ...initialState,
+          targetSymbols: [...state.targetSymbols, payload],
+          existingCoins: state.existingCoins,
+        }
+    case types.REMOVE_SYMBOL:
+      return (state.targetSymbols.includes(payload))
+        ? {
+          ...initialState,
+          targetSymbols: state.targetSymbols.filter(symbol => symbol !== payload),
+          existingCoins: state.existingCoins,
+        }
+        : state
+    case types.SET_SYMBOLS:
       return {
         ...initialState,
-        targetSymbol: payload,
+        targetSymbols: payload,
         existingCoins: state.existingCoins,
       }
     // existingCoins should be re-calc in new time range
@@ -123,7 +139,7 @@ export function movementsReducer(state = initialState, action) {
     case queryTypes.SET_TIME_RANGE:
       return {
         ...initialState,
-        targetSymbol: state.targetSymbol,
+        targetSymbols: state.targetSymbols,
       }
     case authTypes.LOGOUT:
       return initialState

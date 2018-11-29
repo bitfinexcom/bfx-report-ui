@@ -17,13 +17,14 @@ import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
-import SymbolSelector from 'ui/SymbolSelector'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
   getCurrentEntries,
+  handleAddSymbolFilter,
+  handleRemoveSymbolFilter,
 } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
@@ -34,14 +35,13 @@ const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
 const COLUMN_WIDTHS = [80, 150, 100, 125, 120, 400]
 const LIMIT = queryConstants.DEFAULT_MOVEMENTS_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_MOVEMENTS_PAGE_SIZE
-const ALL = 'ALL'
-const WILD_CARD = ['', ALL]
 
 class Movements extends PureComponent {
   constructor(props) {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
+    this.handleTagRemove = this.handleTagRemove.bind(this)
   }
 
   componentDidMount() {
@@ -59,30 +59,26 @@ class Movements extends PureComponent {
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
-        const { history, setTargetSymbol, type } = this.props
-        // show select symbol in url
-        if (symbol === ALL) {
-          history.push(`${getPath(type)}${history.location.search}`)
-          setTargetSymbol('')
-        } else {
-          history.push(`${getPath(type)}/${symbol.toUpperCase()}${history.location.search}`)
-          setTargetSymbol(symbol)
-        }
+        const { type } = this.props
+        handleAddSymbolFilter(type, symbol, this.props)
       }
     }
     return this.handlers[symbol]
   }
 
+  handleTagRemove(tag) {
+    const { type } = this.props
+    handleRemoveSymbolFilter(type, tag, this.props)
+  }
+
   render() {
     const {
-      coins,
-      currencies,
       fetchNext,
       fetchPrev,
       offset,
       pageOffset,
       pageLoading,
-      targetSymbol,
+      targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
@@ -97,8 +93,6 @@ class Movements extends PureComponent {
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
-    const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
-    const currentCoin = targetSymbol || ALL
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
@@ -209,14 +203,12 @@ class Movements extends PureComponent {
     const renderSymbolSelector = (
       <Fragment>
         &nbsp;
-        <SymbolSelector
-          coinList={coinList}
-          coins={coins}
-          currencies={currencies}
-          currentCoin={currentCoin}
+        <MultiSymbolSelector
+          currentFilters={targetSymbols}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
-          wildCard={WILD_CARD}
+          handleTagRemove={this.handleTagRemove}
+          type={type}
         />
       </Fragment>
     )

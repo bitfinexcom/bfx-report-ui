@@ -16,13 +16,14 @@ import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
-import SymbolSelector from 'ui/SymbolSelector'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
   getCurrentEntries,
+  handleAddSymbolFilter,
+  handleRemoveSymbolFilter,
 } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
@@ -32,14 +33,13 @@ const COLUMN_WIDTHS = [80, 100, 100, 150, 100, 200, 150, 80, 150]
 const LIMIT = queryConstants.DEFAULT_FOFFER_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_FOFFER_PAGE_SIZE
 const TYPE = queryConstants.MENU_FOFFER
-const ALL = 'ALL'
-const WILD_CARD = ['', ALL]
 
 class FundingOfferHistory extends PureComponent {
   constructor(props) {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
+    this.handleTagRemove = this.handleTagRemove.bind(this)
   }
 
   componentDidMount() {
@@ -56,31 +56,23 @@ class FundingOfferHistory extends PureComponent {
 
   handleClick(symbol) {
     if (!this.handlers[symbol]) {
-      this.handlers[symbol] = () => {
-        const { history, setTargetSymbol } = this.props
-        // show select symbol in url
-        if (symbol === ALL) {
-          history.push(`${getPath(TYPE)}${history.location.search}`)
-          setTargetSymbol('')
-        } else {
-          history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${history.location.search}`)
-          setTargetSymbol(symbol)
-        }
-      }
+      this.handlers[symbol] = () => handleAddSymbolFilter(TYPE, symbol, this.props)
     }
     return this.handlers[symbol]
   }
 
+  handleTagRemove(tag) {
+    handleRemoveSymbolFilter(TYPE, tag, this.props)
+  }
+
   render() {
     const {
-      coins,
-      currencies,
       fetchNext,
       fetchPrev,
       offset,
       pageOffset,
       pageLoading,
-      targetSymbol,
+      targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
@@ -92,8 +84,6 @@ class FundingOfferHistory extends PureComponent {
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const coinList = coins ? [ALL, ...coins] : [ALL, ...existingCoins]
-    const currentCoin = targetSymbol || ALL
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
@@ -195,14 +185,12 @@ class FundingOfferHistory extends PureComponent {
     const renderSymbolSelector = (
       <Fragment>
         &nbsp;
-        <SymbolSelector
-          coinList={coinList}
-          coins={coins}
-          currencies={currencies}
-          currentCoin={currentCoin}
+        <MultiSymbolSelector
+          currentFilters={targetSymbols}
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
-          wildCard={WILD_CARD}
+          handleTagRemove={this.handleTagRemove}
+          type={TYPE}
         />
       </Fragment>
     )

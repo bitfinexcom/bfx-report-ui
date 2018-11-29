@@ -3,7 +3,7 @@ import queryString from 'query-string'
 import _omit from 'lodash/omit'
 
 import { platform } from 'var/config'
-import { getPath } from 'state/query/utils'
+import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import { getSymbolsURL } from 'state/symbols/utils'
 
 export function postJsonfetch(url, bodyJson) {
@@ -56,19 +56,12 @@ export function formatDate(mts, timezone) {
   return moment(mts, 'x').format('MMM DD YYYY').toUpperCase()
 }
 
-const TYPE_WHITELIST = [
-  'fcredit',
-  'floan',
-  'foffer',
-  'ledgers',
-  'movements',
-  'orders',
-  'trades',
-  'publictrades',
-]
-
 export function isValidateType(type) {
   return TYPE_WHITELIST.includes(type)
+}
+
+export function isValidRouteType(type) {
+  return ROUTE_WHITELIST.includes(type)
 }
 
 export function checkFetch(prevProps, props, type) {
@@ -81,6 +74,38 @@ export function checkFetch(prevProps, props, type) {
   const fetch = props[`fetch${type.charAt(0).toUpperCase() + type.slice(1)}`]
   if (loading && loading !== prevLoading) {
     fetch()
+  }
+}
+
+// genereate url with route and params
+export function generateUrl(type, params, symbols) {
+  if (!isValidRouteType(type)) {
+    // eslint-disable-next-line no-console
+    console.error('Unsupport route type ', type)
+    return ''
+  }
+  return symbols
+    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
+    : `${getPath(type)}${params}`
+}
+
+export function handleAddSymbolFilter(type, symbol, props) {
+  const { history, addTargetSymbol, targetSymbols } = props
+  if (!targetSymbols.includes(symbol)) {
+    history.push(generateUrl(type, history.location.search, [...targetSymbols, symbol]))
+    addTargetSymbol(symbol)
+  }
+}
+
+export function handleRemoveSymbolFilter(type, tag, props) {
+  const { history, removeTargetSymbol, targetSymbols } = props
+  if (targetSymbols.includes(tag)) {
+    if (targetSymbols.length === 1) { // show no select symbol in url
+      history.push(generateUrl(type, history.location.search))
+    } else {
+      history.push(generateUrl(type, history.location.search, targetSymbols.filter(symbol => symbol !== tag)))
+    }
+    removeTargetSymbol(tag)
   }
 }
 
@@ -124,18 +149,6 @@ export function getNoAuthTokenUrlString(searchUrl) {
   return queries ? `?${queries}` : ''
 }
 
-// genereate url with route and params
-export function generateUrl(type, params, symbols) {
-  if (!isValidateType(type)) {
-    // eslint-disable-next-line no-console
-    console.error('Unsupport type')
-    return ''
-  }
-  return symbols
-    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
-    : `${getPath(type)}${params}`
-}
-
 export default {
   checkFetch,
   checkEmail,
@@ -148,6 +161,8 @@ export default {
   getParsedUrlParams,
   getSideMsg,
   generateUrl,
+  handleAddSymbolFilter,
+  handleRemoveSymbolFilter,
   isValidateType,
   momentFormatter,
   postJsonfetch,
