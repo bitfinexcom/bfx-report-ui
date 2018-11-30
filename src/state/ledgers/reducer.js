@@ -62,7 +62,7 @@ export function ledgersReducer(state = initialState, action) {
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
         dataReceived: true,
-        smallestMts: nextPage !== false ? nextPage : smallestMts,
+        smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,

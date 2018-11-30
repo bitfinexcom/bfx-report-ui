@@ -72,7 +72,7 @@ export function tradesReducer(state = initialState, action) {
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
         dataReceived: true,
-        smallestMts: nextPage !== false ? nextPage : smallestMts,
+        smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
         offset: state.offset + entries.length,
         pageOffset: 0,
         pageLoading: false,
