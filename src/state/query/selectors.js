@@ -60,7 +60,7 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
   }
   return {
     start,
-    end: smallestMts > 0 ? smallestMts - 1 : end,
+    end: smallestMts > 0 ? smallestMts : end,
     limit,
   }
 }
