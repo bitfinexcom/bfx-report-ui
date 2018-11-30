@@ -9,7 +9,7 @@ const initBlockState = {
   pageLoading: false,
   pageOffset: 0,
   smallestMts: 0,
-  targetSymbol: '',
+  targetSymbols: [],
   nextPage: false,
 }
 

@@ -4,7 +4,7 @@ import reducer from '../reducer'
 const initBlockState = {
   existingCoins: [],
   entries: [],
-  targetSymbol: '',
+  targetSymbols: [],
   dataReceived: false,
   smallestMts: 0,
   offset: 0,

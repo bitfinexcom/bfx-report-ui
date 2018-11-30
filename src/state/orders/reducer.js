@@ -13,7 +13,7 @@ const initialState = {
   offset: 0, // end of current offset
   pageOffset: 0, // start of current page
   pageLoading: false,
-  targetPair: '',
+  targetPairs: [],
   nextPage: false,
 }
 
@@ -134,10 +134,26 @@ export function ordersReducer(state = initialState, action) {
         pageOffset: totalOffset - currentOffset,
       }
     }
-    case types.SET_PAIR:
+    case types.ADD_PAIR:
+      return state.targetPairs.includes(payload)
+        ? state
+        : {
+          ...initialState,
+          targetPairs: [...state.targetPairs, payload],
+          existingPairs: state.existingPairs,
+        }
+    case types.REMOVE_PAIR:
+      return (state.targetPairs.includes(payload))
+        ? {
+          ...initialState,
+          targetPairs: state.targetPairs.filter(pair => pair !== payload),
+          existingPairs: state.existingPairs,
+        }
+        : state
+    case types.SET_PAIRS:
       return {
         ...initialState,
-        targetPair: payload,
+        targetPairs: payload,
         existingPairs: state.existingPairs,
       }
     // existingPairs should be re-calc in new time range
@@ -145,7 +161,7 @@ export function ordersReducer(state = initialState, action) {
     case queryTypes.SET_TIME_RANGE:
       return {
         ...initialState,
-        targetPair: state.targetPair,
+        targetPairs: state.targetPairs,
       }
     case authTypes.LOGOUT:
       return initialState

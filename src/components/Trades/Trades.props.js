@@ -12,6 +12,7 @@ const TRADES_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  addTargetPair: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(TRADES_ENTRIES_PROPS).isRequired,
   existingPairs: PropTypes.arrayOf(PropTypes.string),
@@ -24,8 +25,8 @@ export const propTypes = {
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  setTargetPair: PropTypes.func.isRequired,
-  targetPair: PropTypes.string,
+  removeTargetPair: PropTypes.func.isRequired,
+  targetPair: PropTypes.arrayOf(PropTypes.string),
   timezone: PropTypes.string,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
@@ -34,6 +35,7 @@ export const propTypes = {
 }
 
 export const defaultProps = {
+  addTargetPair: () => {},
   offset: 0,
   entries: [],
   existingPairs: [],
@@ -46,7 +48,7 @@ export const defaultProps = {
   pageOffset: 0,
   pageLoading: false,
   refresh: () => {},
-  setTargetPair: () => {},
-  targetPair: '',
+  removeTargetPair: () => {},
+  targetPairs: [],
   nextPage: false,
 }

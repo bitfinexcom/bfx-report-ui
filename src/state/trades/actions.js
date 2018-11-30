@@ -74,22 +74,46 @@ export function updateTrades(payload) {
 
 /**
  * Create an action to set current pair.
+ * @param {string[]} pairs pairs
+ */
+export function setTargetPairs(pairs) {
+  return {
+    type: types.SET_PAIRS,
+    payload: pairs,
+  }
+}
+
+/**
+ * Create an action to add target pair.
  * @param {string} pair pair
  */
-export function setTargetPair(pair) {
+export function addTargetPair(pair) {
   return {
-    type: types.SET_PAIR,
+    type: types.ADD_PAIR,
+    payload: pair,
+  }
+}
+
+/**
+ * Create an action to remove target pair.
+ * @param {string} pair pair
+ */
+export function removeTargetPair(pair) {
+  return {
+    type: types.REMOVE_PAIR,
     payload: pair,
   }
 }
 
 export default {
+  addTargetPair,
   fetchFail,
   fetchTrades,
   fetchNextTrades,
   fetchPrevTrades,
   jumpPage,
   refresh,
-  setTargetPair,
+  setTargetPairs,
+  removeTargetPair,
   updateTrades,
 }

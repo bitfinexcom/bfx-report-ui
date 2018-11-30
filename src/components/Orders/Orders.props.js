@@ -14,6 +14,7 @@ const ORDERS_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  addTargetPair: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(ORDERS_ENTRIES_PROPS).isRequired,
   existingPairs: PropTypes.arrayOf(PropTypes.string),
@@ -27,8 +28,8 @@ export const propTypes = {
   pageLoading: PropTypes.bool.isRequired,
   pairs: PropTypes.arrayOf(PropTypes.string),
   refresh: PropTypes.func.isRequired,
-  setTargetPair: PropTypes.func.isRequired,
-  targetPair: PropTypes.string,
+  removeTargetPair: PropTypes.func.isRequired,
+  targetPairs: PropTypes.arrayOf(PropTypes.string),
   timezone: PropTypes.string,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
@@ -37,6 +38,7 @@ export const propTypes = {
 }
 
 export const defaultProps = {
+  addTargetPair: () => {},
   offset: 0,
   entries: [],
   existingPairs: [],
@@ -50,7 +52,7 @@ export const defaultProps = {
   pageLoading: false,
   pairs: [],
   refresh: () => {},
-  setTargetPair: () => {},
-  targetPair: '',
+  removeTargetPair: () => {},
+  targetPairs: '',
   nextPage: false,
 }

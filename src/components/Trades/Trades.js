@@ -15,14 +15,15 @@ import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import PairSelector from 'ui/PairSelector'
+import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
   getCurrentEntries,
+  handleAddPairFilter,
+  handleRemovePairFilter,
 } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
@@ -32,14 +33,13 @@ const COLUMN_WIDTHS = [85, 100, 80, 125, 125, 125, 150]
 const LIMIT = queryConstants.DEFAULT_TRADES_QUERY_LIMIT
 const PAGE_SIZE = queryConstants.DEFAULT_TRADES_PAGE_SIZE
 const TYPE = queryConstants.MENU_TRADES
-const ALL = 'ALL'
-const WILD_CARD = ['', ALL]
 
 class Trades extends PureComponent {
   constructor(props) {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
+    this.handleTagRemove = this.handleTagRemove.bind(this)
   }
 
   componentDidMount() {
@@ -56,19 +56,13 @@ class Trades extends PureComponent {
 
   handleClick(pair) {
     if (!this.handlers[pair]) {
-      this.handlers[pair] = () => {
-        const { history, setTargetPair } = this.props
-        // show select pair in url
-        if (pair === ALL) {
-          history.push(`${getPath(TYPE)}${history.location.search}`)
-          setTargetPair('')
-        } else {
-          history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${history.location.search}`)
-          setTargetPair(pair)
-        }
-      }
+      this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
     }
     return this.handlers[pair]
+  }
+
+  handleTagRemove(tag) {
+    handleRemovePairFilter(TYPE, tag, this.props)
   }
 
   render() {
@@ -79,20 +73,17 @@ class Trades extends PureComponent {
       offset,
       pageOffset,
       pageLoading,
-      pairs,
       entries,
       handleClickExport,
       intl,
       jumpPage,
       loading,
       refresh,
-      targetPair,
+      targetPairs,
       timezone,
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const pairList = pairs ? [ALL, ...pairs] : [ALL, ...existingPairs]
-    const currentPair = targetPair || ALL
     const numRows = filteredData.length
 
     const idCellRenderer = (rowIndex) => {
@@ -192,13 +183,11 @@ class Trades extends PureComponent {
     const renderPairSelector = (
       <Fragment>
         &nbsp;
-        <PairSelector
-          currentPair={currentPair}
+        <MultiPairSelector
+          currentFilters={targetPairs}
           existingPairs={existingPairs}
           onPairSelect={this.handleClick}
-          pairList={pairList}
-          pairs={pairs}
-          wildCard={WILD_CARD}
+          handleTagRemove={this.handleTagRemove}
         />
       </Fragment>
     )

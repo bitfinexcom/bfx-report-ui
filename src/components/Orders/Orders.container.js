@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 
 import actions from 'state/orders/actions'
 import { getTimezone } from 'state/base/selectors'
-import { getPairs } from 'state/symbols/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -11,7 +10,7 @@ import {
   getOffset,
   getPageLoading,
   getPageOffset,
-  getTargetPair,
+  getTargetPairs,
   getNextPage,
 } from 'state/orders/selectors'
 
@@ -24,8 +23,7 @@ const mapStateToProps = (state = {}) => ({
   loading: !getDataReceived(state),
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
-  pairs: getPairs(state),
-  targetPair: getTargetPair(state),
+  targetPairs: getTargetPairs(state),
   timezone: getTimezone(state),
   nextPage: getNextPage(state),
 })
@@ -36,7 +34,8 @@ const mapDispatchToProps = dispatch => ({
   fetchPrev: () => dispatch(actions.fetchPrevOrders()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
   refresh: () => dispatch(actions.refresh()),
-  setTargetPair: pair => dispatch(actions.setTargetPair(pair)),
+  addTargetPair: pair => dispatch(actions.addTargetPair(pair)),
+  removeTargetPair: pair => dispatch(actions.removeTargetPair(pair)),
 })
 
 const OrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Orders))

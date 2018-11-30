@@ -6,7 +6,7 @@ export const getExistingPairs = state => getTrades(state).existingPairs
 export const getOffset = state => getTrades(state).offset
 export const getPageLoading = state => getTrades(state).pageLoading
 export const getPageOffset = state => getTrades(state).pageOffset
-export const getTargetPair = state => getTrades(state).targetPair
+export const getTargetPairs = state => getTrades(state).targetPairs
 export const getNextPage = state => getTrades(state).nextPage
 
 export default {
@@ -17,6 +17,6 @@ export default {
   getOffset,
   getPageLoading,
   getPageOffset,
-  getTargetPair,
+  getTargetPairs,
   getTrades,
 }

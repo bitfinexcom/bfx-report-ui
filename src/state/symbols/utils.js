@@ -16,6 +16,11 @@ export function formatPair(pair) {
   return `${pair.slice(0, 3).toUpperCase()}/${pair.slice(3, 6).toUpperCase()}`
 }
 
+// BTC/USD -> btcusd
+export function parsePairTag(tag) {
+  return tag.split('/').join('').toLowerCase()
+}
+
 // ['usd', 'etc'] -> USD,ETC
 export function getSymbolsURL(symbols) {
   if (Array.isArray(symbols) && symbols.length > 0) {
@@ -37,9 +42,27 @@ export function getSymbolsFromUrlParam(param) {
   return [param.toUpperCase()]
 }
 
+// BTCUSD,ETHUSD -> ['btcusd', 'etcusd']
+// btcusd,ethusd -> ['btcusd', 'ethusd']
+// btcusd -> ['btcusd']
+export function getPairsFromUrlParam(param) {
+  if (param.indexOf(',') > -1) {
+    return param.split(',').map(pair => pair.toLowerCase())
+  }
+  return [param.toLowerCase()]
+}
+
 // btcusd -> tBTCUSD
-export function formatRawPairToTPair(pair) {
-  return `t${pair.toUpperCase()}`
+// ['btcusd'] -> 'tBTCUSD'
+// ['btcusd', 'ethusd'] -> ['tBTCUSD', 'tETHUSD']
+export function formatRawPairToTPair(pairs) {
+  if (Array.isArray(pairs) && pairs.length > 0) {
+    if (pairs.length === 1) {
+      return `t${pairs[0].toUpperCase()}`
+    }
+    return pairs.map(pair => `t${pair.toUpperCase()}`)
+  }
+  return `t${pairs.toUpperCase()}`
 }
 
 // USD -> fUSD
@@ -61,6 +84,8 @@ export default {
   formatRawPairToTPair,
   formatRawSymbolToFSymbol,
   formatSymbolToPair,
+  getPairsFromUrlParam,
   getSymbolsURL,
   getSymbolsFromUrlParam,
+  parsePairTag,
 }
