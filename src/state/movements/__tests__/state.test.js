@@ -2,6 +2,7 @@ import actions from '../actions'
 import reducer from '../reducer'
 
 const initBlockState = {
+  currentEntriesSize: 0,
   dataReceived: false,
   entries: [],
   existingCoins: [],

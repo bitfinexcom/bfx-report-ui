@@ -64,7 +64,6 @@ class Pagination extends PureComponent {
     const PAGE_SIZE = getPageSize(type)
     const PAGE_GAP = LIMIT / PAGE_SIZE
     const pageLen = Math.ceil(dataLen / PAGE_SIZE)
-    const prevCondition = offset <= LIMIT
     let pageBase
     if (offset < LIMIT) {
       pageBase = 0
@@ -102,7 +101,7 @@ class Pagination extends PureComponent {
             minimal
             icon='double-chevron-left'
             onClick={prevClick}
-            disabled={prevCondition || loading}
+            disabled={offset <= LIMIT || loading}
           />
           <Button
             minimal

@@ -78,9 +78,10 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
       })
       return {
         ...state,
+        currentEntriesSize: entries.length,
+        dataReceived: true,
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
-        dataReceived: true,
         smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
         offset: state.offset + entries.length,
         pageOffset: 0,

@@ -3,13 +3,14 @@ import { getQueryLimit, getPageSize } from 'state/query/utils'
 /* init states */
 export const paginateState = {
   offset: 0, // end of current offset
-  pageOffset: 0, // start of current page
+  pageOffset: 0, // start of current page, is used by jumpPage
 }
 
 export const baseState = {
   ...paginateState,
   dataReceived: false,
   entries: [],
+  currentEntriesSize: 0,
   pageLoading: false,
   smallestMts: 0,
   nextPage: false,
@@ -33,7 +34,7 @@ export function fetchNext(type, state) {
   return (state.entries.length - LIMIT >= state.offset)
     ? {
       ...state,
-      offset: state.offset + LIMIT,
+      offset: state.offset + state.currentEntriesSize,
       pageOffset: 0,
     } : {
       ...state,

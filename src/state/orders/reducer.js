@@ -82,9 +82,10 @@ export function ordersReducer(state = initialState, action) {
       })
       return {
         ...state,
+        currentEntriesSize: entries.length,
+        dataReceived: true,
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
-        dataReceived: true,
         smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
         offset: state.offset + entries.length,
         pageOffset: 0,

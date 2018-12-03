@@ -45,8 +45,9 @@ export function publicTradesReducer(state = initialState, action) {
       })
       return {
         ...state,
-        entries: [...state.entries, ...entries],
+        currentEntriesSize: entries.length,
         dataReceived: true,
+        entries: [...state.entries, ...entries],
         smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
         offset: state.offset + entries.length,
         pageOffset: 0,
