@@ -1,5 +1,10 @@
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
+import {
+  fetchNext,
+  fetchPrev,
+  jumpPage,
+} from 'state/reducers.helper'
 
 import types from './constants'
 
@@ -14,8 +19,7 @@ const initialState = {
   nextPage: false,
 }
 
-const LIMIT = queryTypes.DEFAULT_PUBLICTRADES_QUERY_LIMIT
-const PAGE_SIZE = queryTypes.DEFAULT_PUBLICTRADES_PAGE_SIZE
+const TYPE = queryTypes.MENU_PUBLIC_TRADES
 
 export function publicTradesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
@@ -61,39 +65,11 @@ export function publicTradesReducer(state = initialState, action) {
         pageLoading: false,
       }
     case types.FETCH_NEXT_PUBLIC_TRADES:
-      return (state.entries.length - LIMIT >= state.offset)
-        ? {
-          ...state,
-          offset: state.offset + LIMIT,
-          pageOffset: 0,
-        } : {
-          ...state,
-          pageLoading: true,
-        }
+      return fetchNext(TYPE, state)
     case types.FETCH_PREV_PUBLIC_TRADES:
-      return {
-        ...state,
-        offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
-        pageOffset: 0,
-      }
-    case types.JUMP_PUBLIC_TRADES_PAGE: {
-      const page = payload
-      const totalOffset = (page - 1) * PAGE_SIZE
-      const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
-      if (totalOffset < LIMIT) {
-        const baseOffset = Math.ceil(page / LIMIT * PAGE_SIZE) * LIMIT
-        return {
-          ...state,
-          offset: state.offset < baseOffset ? state.offset : baseOffset,
-          pageOffset: totalOffset - currentOffset,
-        }
-      }
-      return {
-        ...state,
-        offset: currentOffset + LIMIT,
-        pageOffset: totalOffset - currentOffset,
-      }
-    }
+      return fetchPrev(TYPE, state)
+    case types.JUMP_PUBLIC_TRADES_PAGE:
+      return jumpPage(TYPE, state, payload)
     case types.SET_PAIR:
       return {
         ...initialState,
