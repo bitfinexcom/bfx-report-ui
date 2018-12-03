@@ -18,6 +18,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
@@ -30,9 +31,9 @@ import { amountStyle } from 'ui/utils'
 import { propTypes, defaultProps } from './FundingOfferHistory.props'
 
 const COLUMN_WIDTHS = [80, 100, 100, 150, 100, 200, 150, 80, 150]
-const LIMIT = queryConstants.DEFAULT_FOFFER_QUERY_LIMIT
-const PAGE_SIZE = queryConstants.DEFAULT_FOFFER_PAGE_SIZE
 const TYPE = queryConstants.MENU_FOFFER
+const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 class FundingOfferHistory extends PureComponent {
   constructor(props) {

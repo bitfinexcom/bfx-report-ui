@@ -18,6 +18,7 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
@@ -30,9 +31,9 @@ import { amountStyle } from 'ui/utils'
 import { propTypes, defaultProps } from './Trades.props'
 
 const COLUMN_WIDTHS = [85, 100, 80, 125, 125, 125, 150]
-const LIMIT = queryConstants.DEFAULT_TRADES_QUERY_LIMIT
-const PAGE_SIZE = queryConstants.DEFAULT_TRADES_PAGE_SIZE
 const TYPE = queryConstants.MENU_TRADES
+const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 class Trades extends PureComponent {
   constructor(props) {

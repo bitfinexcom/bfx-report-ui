@@ -11,13 +11,17 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getQueryLimit } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
 import { getTargetSymbols, getFundingOfferHistory } from './selectors'
 
+const TYPE = queryTypes.MENU_FOFFER
+const LIMIT = getQueryLimit(TYPE)
+
 function getReqFOffer(auth, query, targetSymbols, smallestMts) {
-  const params = getTimeFrame(query, queryTypes.MENU_FOFFER, smallestMts)
+  const params = getTimeFrame(query, TYPE, smallestMts)
   if (targetSymbols.length > 0) {
     params.symbol = formatRawSymbolToFSymbol(targetSymbols)
   }
@@ -53,8 +57,6 @@ function* fetchFOffer({ payload: symbol }) {
     }))
   }
 }
-
-const LIMIT = queryTypes.DEFAULT_FOFFER_QUERY_LIMIT
 
 function* fetchNextFOffer() {
   try {

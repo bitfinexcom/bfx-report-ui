@@ -105,6 +105,10 @@ const MAPPING = {
     queryLimit: 1000,
     pageSize: 200,
   },
+  [MENU_MOVEMENTS]: {
+    queryLimit: 1000,
+    pageSize: 200,
+  }
 }
 
 const PATHMAP = {

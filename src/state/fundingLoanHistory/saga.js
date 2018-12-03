@@ -11,13 +11,17 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getQueryLimit } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
 import { getTargetSymbols, getFundingLoanHistory } from './selectors'
 
+const TYPE = queryTypes.MENU_FLOAN
+const LIMIT = getQueryLimit(TYPE)
+
 function getReqFLoan(auth, query, targetSymbols, smallestMts) {
-  const params = getTimeFrame(query, queryTypes.MENU_FLOAN, smallestMts)
+  const params = getTimeFrame(query, TYPE, smallestMts)
   if (targetSymbols.length > 0) {
     params.symbol = formatRawSymbolToFSymbol(targetSymbols)
   }
@@ -53,8 +57,6 @@ function* fetchFLoan({ payload: symbol }) {
     }))
   }
 }
-
-const LIMIT = queryTypes.DEFAULT_FLOAN_QUERY_LIMIT
 
 function* fetchNextFLoan() {
   try {

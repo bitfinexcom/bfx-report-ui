@@ -21,8 +21,7 @@ const initialState = {
   nextPage: false,
 }
 
-// we treat withdrawals and deposits in the same way
-const TYPE = queryTypes.MENU_WITHDRAWALS
+const TYPE = queryTypes.MENU_MOVEMENTS
 
 export function movementsReducer(state = initialState, action) {
   const { type, payload } = action

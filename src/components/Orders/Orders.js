@@ -18,6 +18,7 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
@@ -30,9 +31,9 @@ import { amountStyle } from 'ui/utils'
 import { propTypes, defaultProps } from './Orders.props'
 
 const COLUMN_WIDTHS = [100, 80, 150, 100, 100, 100, 100, 150, 150, 200]
-const LIMIT = queryConstants.DEFAULT_ORDERS_QUERY_LIMIT
-const PAGE_SIZE = queryConstants.DEFAULT_ORDERS_PAGE_SIZE
 const TYPE = queryConstants.MENU_ORDERS
+const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 class Orders extends PureComponent {
   constructor(props) {
