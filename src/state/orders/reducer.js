@@ -3,6 +3,7 @@ import { formatInternalPair, formatSymbolToPair } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
+  basePairState,
   fetchNext,
   fetchPrev,
   jumpPage,
@@ -11,15 +12,7 @@ import {
 import types from './constants'
 
 const initialState = {
-  dataReceived: false,
-  existingPairs: [],
-  entries: [],
-  smallestMts: 0,
-  offset: 0, // end of current offset
-  pageOffset: 0, // start of current page
-  pageLoading: false,
-  targetPairs: [],
-  nextPage: false,
+  ...basePairState,
 }
 
 const TYPE = queryTypes.MENU_ORDERS

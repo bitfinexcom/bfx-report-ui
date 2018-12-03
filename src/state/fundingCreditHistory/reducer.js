@@ -1,6 +1,7 @@
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
+  baseSymbolState,
   fetchNext,
   fetchPrev,
   jumpPage,
@@ -9,15 +10,7 @@ import {
 import types from './constants'
 
 const initialState = {
-  dataReceived: false,
-  entries: [],
-  existingCoins: [],
-  offset: 0, // end of current offset
-  pageOffset: 0, // start of current page
-  pageLoading: false,
-  smallestMts: 0,
-  targetSymbols: [],
-  nextPage: false,
+  ...baseSymbolState,
 }
 
 const TYPE = queryTypes.MENU_FCREDIT
