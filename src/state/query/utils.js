@@ -106,8 +106,8 @@ const MAPPING = {
     pageSize: 200,
   },
   [MENU_MOVEMENTS]: {
-    queryLimit: 1000,
-    pageSize: 200,
+    queryLimit: 25,
+    pageSize: 25,
   },
 }
 
