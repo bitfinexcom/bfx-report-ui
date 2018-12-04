@@ -152,9 +152,11 @@ class Movements extends PureComponent {
       const { currency, destinationAddress } = filteredData[rowIndex]
       return (
         <Cell tooltip={destinationAddress}>
-          {destinationAddress}
-          &nbsp;
-          <Explorer currency={currency} destinationAddress={destinationAddress} />
+          <Fragment>
+            {destinationAddress}
+            &nbsp;
+            <Explorer currency={currency} destinationAddress={destinationAddress} />
+          </Fragment>
         </Cell>
       )
     }

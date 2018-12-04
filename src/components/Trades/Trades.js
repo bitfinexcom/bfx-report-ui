@@ -147,11 +147,13 @@ class Trades extends PureComponent {
           className='bitfinex-text-align-right'
           tooltip={tooltip}
         >
-          {fee}
-          &nbsp;
-          <span className='bitfinex-show-soft'>
-            {feeCurrency}
-          </span>
+          <Fragment>
+            {fee}
+            &nbsp;
+            <span className='bitfinex-show-soft'>
+              {feeCurrency}
+            </span>
+          </Fragment>
         </Cell>
       )
     }
