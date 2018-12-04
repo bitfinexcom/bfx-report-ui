@@ -4,7 +4,7 @@ import { injectIntl, intlShape } from 'react-intl'
 import { Button, Spinner } from '@blueprintjs/core'
 
 import { isValidateType } from 'state/utils'
-import queryConstants from 'state/query/constants'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 
 class Pagination extends PureComponent {
   constructor(props) {
@@ -60,8 +60,8 @@ class Pagination extends PureComponent {
     if (!isValidateType(type)) {
       return ''
     }
-    const LIMIT = queryConstants[`DEFAULT_${type.toUpperCase()}_QUERY_LIMIT`]
-    const PAGE_SIZE = queryConstants[`DEFAULT_${type.toUpperCase()}_PAGE_SIZE`]
+    const LIMIT = getQueryLimit(type)
+    const PAGE_SIZE = getPageSize(type)
     const PAGE_GAP = LIMIT / PAGE_SIZE
     const pageLen = Math.ceil(dataLen / PAGE_SIZE)
     const prevCondition = offset <= LIMIT

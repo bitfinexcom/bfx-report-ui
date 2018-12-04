@@ -46,46 +46,68 @@ const MAPPING = {
     icon: 'book',
     path: '/credits',
     filterType: 'symbol',
+    queryLimit: 5000,
+    pageSize: 200,
   },
   [MENU_FLOAN]: {
     icon: 'book',
     path: '/loans',
     filterType: 'symbol',
+    queryLimit: 5000,
+    pageSize: 200,
   },
   [MENU_FOFFER]: {
     icon: 'book',
     path: '/offers',
     filterType: 'symbol',
+    queryLimit: 5000,
+    pageSize: 200,
   },
   [MENU_LEDGERS]: {
     icon: 'book',
     path: '/ledgers',
     filterType: 'symbol',
+    queryLimit: 5000,
+    pageSize: 200,
   },
   [MENU_ORDERS]: {
     icon: 'flows',
     path: '/orders',
     filterType: 'pair',
+    queryLimit: 5000,
+    pageSize: 200,
   },
   [MENU_TRADES]: {
     icon: 'exchange',
     path: '/trades',
     filterType: 'pair',
+    queryLimit: 1500,
+    pageSize: 150,
   },
   [MENU_DEPOSITS]: {
     icon: 'add-to-folder',
     path: '/deposits',
     filterType: 'symbol',
+    queryLimit: 25,
+    pageSize: 25,
   },
   [MENU_WITHDRAWALS]: {
     icon: 'folder-shared-open',
     path: '/withdrawals',
     filterType: 'symbol',
+    queryLimit: 25,
+    pageSize: 25,
   },
   [MENU_PUBLIC_TRADES]: {
     icon: 'exchange',
     path: '/pub_trades',
     filterType: 'pair',
+    queryLimit: 1000,
+    pageSize: 200,
+  },
+  [MENU_MOVEMENTS]: {
+    queryLimit: 25,
+    pageSize: 25,
   },
 }
 
@@ -130,10 +152,20 @@ export function getFilterType(target) {
   return MAPPING[target].filterType
 }
 
+export function getQueryLimit(target) {
+  return MAPPING[target].queryLimit
+}
+
+export function getPageSize(target) {
+  return MAPPING[target].pageSize
+}
+
 export default {
   getIcon,
   getFilterType,
+  getPageSize,
   getPath,
+  getQueryLimit,
   getTarget,
   isValidTimeStamp,
   ROUTE_WHITELIST,

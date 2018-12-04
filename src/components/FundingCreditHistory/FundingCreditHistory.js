@@ -18,6 +18,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
@@ -31,9 +32,9 @@ import { amountStyle } from 'ui/utils'
 import { propTypes, defaultProps } from './FundingCreditHistory.props'
 
 const COLUMN_WIDTHS = [80, 100, 100, 100, 150, 150, 100, 150, 150, 130, 150]
-const LIMIT = queryConstants.DEFAULT_FCREDIT_QUERY_LIMIT
-const PAGE_SIZE = queryConstants.DEFAULT_FCREDIT_PAGE_SIZE
 const TYPE = queryConstants.MENU_FCREDIT
+const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 class FundingCreditHistory extends PureComponent {
   constructor(props) {

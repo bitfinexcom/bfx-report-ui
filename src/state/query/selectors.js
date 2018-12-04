@@ -1,5 +1,6 @@
 import { isValidateType } from 'state/utils'
 
+import { getQueryLimit } from './utils'
 import constants from './constants'
 
 export const getQuery = state => state.query
@@ -19,8 +20,7 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
   let TIME_SHIFT
   let start
   let end = now
-  const limit = isValidateType(type)
-    ? constants[`DEFAULT_${type.toUpperCase()}_QUERY_LIMIT`] : constants.DEFAULT_QUERY_LIMIT
+  const limit = isValidateType(type) ? getQueryLimit(type) : constants.DEFAULT_QUERY_LIMIT
   switch (state.timeRange) {
     case constants.TIME_RANGE_LAST_24HOURS:
       TIME_SHIFT = 1000 * 60 * 60 * 24 // 24 hours

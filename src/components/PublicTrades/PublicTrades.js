@@ -18,7 +18,7 @@ import NoData from 'ui/NoData'
 import PairSelector from 'ui/PairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
+import { getQueryLimit, getPageSize, getPath } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
@@ -30,9 +30,9 @@ import { formatPair } from 'state/symbols/utils'
 import { propTypes, defaultProps } from './PublicTrades.props'
 
 const COLUMN_WIDTHS = [85, 150, 80, 125, 125, 100]
-const LIMIT = queryConstants.DEFAULT_PUBLICTRADES_QUERY_LIMIT
-const PAGE_SIZE = queryConstants.DEFAULT_PUBLICTRADES_PAGE_SIZE
 const TYPE = queryConstants.MENU_PUBLIC_TRADES
+const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 const WILD_CARD = ['']
 
 class PublicTrades extends PureComponent {

@@ -19,6 +19,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
@@ -30,11 +31,11 @@ import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Movements.props'
 
-// const TYPE_DEPOSITS = 'deposits'
 const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
 const COLUMN_WIDTHS = [80, 150, 100, 125, 120, 400]
-const LIMIT = queryConstants.DEFAULT_MOVEMENTS_QUERY_LIMIT
-const PAGE_SIZE = queryConstants.DEFAULT_MOVEMENTS_PAGE_SIZE
+// we treat withdrawals and deposits in the same way
+const LIMIT = getQueryLimit(queryConstants.MENU_MOVEMENTS)
+const PAGE_SIZE = getPageSize(queryConstants.MENU_MOVEMENTS)
 
 class Movements extends PureComponent {
   constructor(props) {

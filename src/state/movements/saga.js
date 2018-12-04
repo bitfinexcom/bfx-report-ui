@@ -10,14 +10,18 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getQueryLimit } from 'state/query/utils'
 import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
 import { getTargetSymbols, getMovements } from './selectors'
 
+const TYPE = queryTypes.MENU_MOVEMENTS
+const LIMIT = getQueryLimit(TYPE)
+
 function getReqMovements(auth, query, targetSymbols, smallestMts) {
-  const params = getTimeFrame(query, queryTypes.MENU_MOVEMENTS, smallestMts)
+  const params = getTimeFrame(query, TYPE, smallestMts)
   if (targetSymbols.length > 0) {
     params.symbol = targetSymbols
   }
@@ -53,8 +57,6 @@ function* fetchMovements({ payload: symbol }) {
     }))
   }
 }
-
-const LIMIT = queryTypes.DEFAULT_MOVEMENTS_QUERY_LIMIT
 
 function* fetchNextMovements() {
   try {

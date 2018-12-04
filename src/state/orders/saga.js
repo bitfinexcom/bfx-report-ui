@@ -11,13 +11,17 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getQueryLimit } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
 import { getOrders, getTargetPairs } from './selectors'
 
+const TYPE = queryTypes.MENU_ORDERS
+const LIMIT = getQueryLimit(TYPE)
+
 function getReqOrders(auth, query, targetPairs, smallestMts) {
-  const params = getTimeFrame(query, queryTypes.MENU_ORDERS, smallestMts)
+  const params = getTimeFrame(query, TYPE, smallestMts)
   if (targetPairs.length > 0) {
     params.symbol = formatRawPairToTPair(targetPairs)
   }
@@ -53,8 +57,6 @@ function* fetchOrders({ payload: pair }) {
     }))
   }
 }
-
-const LIMIT = queryTypes.DEFAULT_ORDERS_QUERY_LIMIT
 
 function* fetchNextOrders() {
   try {

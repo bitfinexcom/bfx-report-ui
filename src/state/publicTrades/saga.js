@@ -11,13 +11,17 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getQueryLimit } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
 import { getPublicTrades, getTargetPair } from './selectors'
 
+const TYPE = queryTypes.MENU_PUBLIC_TRADES
+const LIMIT = getQueryLimit(TYPE)
+
 function getReqPublicTrades(auth, query, targetPair, smallestMts) {
-  const params = getTimeFrame(query, queryTypes.MENU_PUBLIC_TRADES, smallestMts)
+  const params = getTimeFrame(query, TYPE, smallestMts)
   if (targetPair) {
     params.symbol = formatRawPairToTPair(targetPair)
   }
@@ -53,8 +57,6 @@ function* fetchPublicTrades({ payload: pair }) {
     }))
   }
 }
-
-const LIMIT = queryTypes.DEFAULT_PUBLICTRADES_QUERY_LIMIT
 
 function* fetchNextPublicTrades() {
   try {

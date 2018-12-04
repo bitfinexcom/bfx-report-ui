@@ -18,6 +18,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   formatTime,
@@ -30,9 +31,9 @@ import { amountStyle } from 'ui/utils'
 import { propTypes, defaultProps } from './Ledgers.props'
 
 const COLUMN_WIDTHS = [500, 100, 120, 120, 150, 80]
-const LIMIT = queryConstants.DEFAULT_LEDGERS_QUERY_LIMIT
-const PAGE_SIZE = queryConstants.DEFAULT_LEDGERS_PAGE_SIZE
 const TYPE = queryConstants.MENU_LEDGERS
+const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 class Ledgers extends PureComponent {
   constructor(props) {
