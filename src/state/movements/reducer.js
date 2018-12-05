@@ -2,10 +2,15 @@
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
+  addSymbol,
   baseSymbolState,
+  fetchFail,
   fetchNext,
   fetchPrev,
   jumpPage,
+  removeSymbol,
+  setSymbols,
+  setTimeRange,
 } from 'state/reducers.helper'
 
 import types from './constants'
@@ -74,45 +79,22 @@ export function movementsReducer(state = initialState, action) {
       }
     }
     case types.FETCH_FAIL:
-      return {
-        ...state,
-        pageLoading: false,
-      }
+      return fetchFail(state)
     case types.FETCH_NEXT_MOVEMENTS:
       return fetchNext(TYPE, state)
     case types.FETCH_PREV_MOVEMENTS:
       return fetchPrev(TYPE, state)
     case types.JUMP_MOVEMENTS_PAGE:
       return jumpPage(TYPE, state, payload)
-    case types.ADD_SYMBOL:
-      return state.targetSymbols.includes(payload)
-        ? state
-        : {
-          ...initialState,
-          targetSymbols: [...state.targetSymbols, payload],
-          existingCoins: state.existingCoins,
-        }
+      case types.ADD_SYMBOL:
+      return addSymbol(state, payload, initialState)
     case types.REMOVE_SYMBOL:
-      return (state.targetSymbols.includes(payload))
-        ? {
-          ...initialState,
-          targetSymbols: state.targetSymbols.filter(symbol => symbol !== payload),
-          existingCoins: state.existingCoins,
-        }
-        : state
+      return removeSymbol(state, payload, initialState)
     case types.SET_SYMBOLS:
-      return {
-        ...initialState,
-        targetSymbols: payload,
-        existingCoins: state.existingCoins,
-      }
-    // existingCoins should be re-calc in new time range
+      return setSymbols(state, payload, initialState)
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
-      return {
-        ...initialState,
-        targetSymbols: state.targetSymbols,
-      }
+      return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:
       return initialState
     default: {

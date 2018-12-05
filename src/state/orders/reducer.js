@@ -3,10 +3,15 @@ import { formatInternalPair, formatSymbolToPair } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
+  addPair,
   basePairState,
+  fetchFail,
   fetchNext,
   fetchPrev,
   jumpPage,
+  removePair,
+  setPairs,
+  setTimeRange,
 } from 'state/reducers.helper'
 
 import types from './constants'
@@ -94,10 +99,7 @@ export function ordersReducer(state = initialState, action) {
       }
     }
     case types.FETCH_FAIL:
-      return {
-        ...state,
-        pageLoading: false,
-      }
+      return fetchFail(state)
     case types.FETCH_NEXT_ORDERS:
       return fetchNext(TYPE, state)
     case types.FETCH_PREV_ORDERS:
@@ -105,34 +107,14 @@ export function ordersReducer(state = initialState, action) {
     case types.JUMP_ORDERS_PAGE:
       return jumpPage(TYPE, state, payload)
     case types.ADD_PAIR:
-      return state.targetPairs.includes(payload)
-        ? state
-        : {
-          ...initialState,
-          targetPairs: [...state.targetPairs, payload],
-          existingPairs: state.existingPairs,
-        }
+      return addPair(state, payload, initialState)
     case types.REMOVE_PAIR:
-      return (state.targetPairs.includes(payload))
-        ? {
-          ...initialState,
-          targetPairs: state.targetPairs.filter(pair => pair !== payload),
-          existingPairs: state.existingPairs,
-        }
-        : state
+      return removePair(state, payload, initialState)
     case types.SET_PAIRS:
-      return {
-        ...initialState,
-        targetPairs: payload,
-        existingPairs: state.existingPairs,
-      }
-    // existingPairs should be re-calc in new time range
+      return setPairs(state, payload, initialState)
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
-      return {
-        ...initialState,
-        targetPairs: state.targetPairs,
-      }
+      return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:
       return initialState
     default: {
