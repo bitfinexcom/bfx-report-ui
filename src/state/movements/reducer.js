@@ -86,7 +86,7 @@ export function movementsReducer(state = initialState, action) {
       return fetchPrev(TYPE, state)
     case types.JUMP_MOVEMENTS_PAGE:
       return jumpPage(TYPE, state, payload)
-      case types.ADD_SYMBOL:
+    case types.ADD_SYMBOL:
       return addSymbol(state, payload, initialState)
     case types.REMOVE_SYMBOL:
       return removeSymbol(state, payload, initialState)
