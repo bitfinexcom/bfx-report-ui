@@ -1,7 +1,9 @@
+// https://docs.bitfinex.com/v2/reference#rest-public-trades
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
   baseState,
+  fetchFail,
   fetchNext,
   fetchPrev,
   jumpPage,
@@ -56,10 +58,7 @@ export function publicTradesReducer(state = initialState, action) {
       }
     }
     case types.FETCH_FAIL:
-      return {
-        ...state,
-        pageLoading: false,
-      }
+      return fetchFail(state)
     case types.FETCH_NEXT_PUBLIC_TRADES:
       return fetchNext(TYPE, state)
     case types.FETCH_PREV_PUBLIC_TRADES:
