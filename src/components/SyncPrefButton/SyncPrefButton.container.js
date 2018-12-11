@@ -8,13 +8,12 @@ import SyncPrefButton from './SyncPrefButton'
 
 const mapStateToProps = (state = {}) => {
   const { start } = getTimeFrame(getQuery(state))
-  console.warn(start)
   let pairs = getSyncPairs(state)
   if (pairs.length === 0) {
     pairs = ['btcusd']
   }
   return {
-    syncPairs: pairs, // getSyncPairs(state) || ['btcusd'],
+    syncPairs: pairs,
     startTime: getStartTime(state) || new Date(start),
   }
 }
