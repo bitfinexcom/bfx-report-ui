@@ -27,6 +27,8 @@ const logout = auth => makeFetchCall('logout', auth)
 const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
 const getUsersTimeConf = auth => makeFetchCall('getUsersTimeConf', auth)
+const getPublicTradesConf = auth => makeFetchCall('getPublicTradesConf', auth)
+const editPublicTradesConf = (auth, params) => makeFetchCall('editPublicTradesConf', auth, params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -77,6 +79,25 @@ function* syncLogout() {
   }
 }
 
+function* setSyncPref({ payload }) {
+  const { pairs, startTime } = payload
+
+  const auth = yield select(selectAuth)
+  const params = (pairs.length === 1)
+    ? {
+      symbol: pairs[0],
+      start: startTime,
+    }
+    : pairs.map(symbol => ({
+      symbol,
+      start: startTime,
+    }))
+  const { error } = yield call(editPublicTradesConf, auth, params)
+  if (error) {
+    yield put(updateSyncErrorStatus('during editPublicTradesConf'))
+  }
+}
+
 function* syncWatcher() {
   try {
     while (true) {
@@ -98,6 +119,18 @@ function* syncWatcher() {
             if (tzError) {
               yield put(updateSyncErrorStatus(JSON.stringify(tzError)))
             }
+          }
+
+          // get syncPref
+          const { result: syncPrefResult, error: syncPrefError } = yield call(getPublicTradesConf, auth)
+          if (syncPrefResult && syncPrefResult.length > 0) {
+            yield put(actions.setPref(
+              syncPrefResult.map(data => data.symbol),
+              syncPrefResult[0].start,
+            ))
+          }
+          if (syncPrefError) {
+            yield put(updateSyncErrorStatus('during editPublicTradesConf'))
           }
 
           yield put(hideAuth())
@@ -175,6 +208,7 @@ export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
+  yield takeLatest(types.SET_PREF, setSyncPref)
   yield takeLatest(authTypes.UPDATE_AUTH_STATUS, syncWatcher)
   yield takeLatest(authTypes.LOGOUT, syncLogout)
 }
