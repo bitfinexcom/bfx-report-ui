@@ -8,7 +8,7 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
-import { DateInput } from "@blueprintjs/datetime";
+import { DateInput } from '@blueprintjs/datetime'
 
 import MultiPairSelector from 'ui/MultiPairSelector'
 import { parsePairTag } from 'state/symbols/utils'
@@ -48,9 +48,10 @@ class SyncPrefButton extends PureComponent {
     if (prevState.tempPairs.length === 0 || prevState.tempTime === undefined) {
       return {
         tempPairs: nextProps.syncPairs,
-        tempTime: nextProps.startTime,
+        tempTime: new Date(nextProps.startTime),
       }
     }
+    return {}
   }
 
   handleOpen(e) {
@@ -67,7 +68,7 @@ class SyncPrefButton extends PureComponent {
     return () => {
       const { tempPairs } = this.state
       if (!tempPairs.includes(pair)) {
-        this.setState( { tempPairs: [...tempPairs, pair] })
+        this.setState({ tempPairs: [...tempPairs, pair] })
       }
     }
   }
@@ -77,7 +78,7 @@ class SyncPrefButton extends PureComponent {
     const parsedTag = parsePairTag(tag)
     if (tempPairs.includes(parsedTag)) {
       const pairs = tempPairs.filter(pair => pair !== parsedTag)
-      this.setState( { tempPairs: pairs })
+      this.setState({ tempPairs: pairs })
     }
   }
 
@@ -87,6 +88,7 @@ class SyncPrefButton extends PureComponent {
 
   handleApply() {
     const { tempPairs, tempTime } = this.state
+    // eslint-disable-next-line react/destructuring-assignment
     this.props.setPairs(tempPairs, tempTime)
     this.setState({ isOpen: false })
   }
@@ -100,6 +102,7 @@ class SyncPrefButton extends PureComponent {
     const {
       isOpen,
       tempPairs,
+      tempTime,
     } = this.state
     return platform.showSyncMode
       ? (
@@ -162,7 +165,7 @@ class SyncPrefButton extends PureComponent {
                     formatDate={DATE_FORMAT.formatDate}
                     parseDate={DATE_FORMAT.parseDate}
                     onChange={this.handleDateChange}
-                    value={this.state.tempTime}
+                    value={tempTime}
                   />
                 </div>
               </div>

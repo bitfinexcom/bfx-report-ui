@@ -255,7 +255,7 @@ class PublicTrades extends PureComponent {
             &nbsp;
             <TimeRange />
             {renderPairSelector}
-            <SyncPrefButton/>
+            <SyncPrefButton />
           </h4>
           <NoData />
         </Fragment>
@@ -272,7 +272,7 @@ class PublicTrades extends PureComponent {
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;
             <RefreshButton handleClickRefresh={refresh} />
-            <SyncPrefButton/>
+            <SyncPrefButton />
           </h4>
           {renderPagination}
           <DataTable

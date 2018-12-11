@@ -4,14 +4,14 @@ import { intlShape } from 'react-intl'
 export const propTypes = {
   intl: intlShape.isRequired,
   syncPairs: PropTypes.arrayOf(String),
-  startTime: PropTypes.instanceOf(Date),
+  startTime: PropTypes.number,
   setPairs: PropTypes.func.isRequired,
   textOnly: PropTypes.bool,
 }
 
 export const defaultProps = {
   syncPairs: [],
-  startTime: undefined,
+  startTime: 0,
   setPairs: () => {},
   textOnly: false,
 }

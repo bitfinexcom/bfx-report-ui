@@ -14,13 +14,13 @@ const mapStateToProps = (state = {}) => {
     pairs = ['btcusd']
   }
   return {
-    syncPairs: pairs,//getSyncPairs(state) || ['btcusd'],
+    syncPairs: pairs, // getSyncPairs(state) || ['btcusd'],
     startTime: getStartTime(state) || new Date(start),
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  setPairs: (pair, startTime) => dispatch(actions.setPref(pair, startTime)),
+  setPairs: (pair, startTime) => dispatch(actions.setPref(pair, startTime.getTime())),
 })
 
 const SyncPrefButtonContainer = connect(mapStateToProps, mapDispatchToProps)(SyncPrefButton)
