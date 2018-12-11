@@ -62,7 +62,7 @@ export function formatRawPairToTPair(pairs) {
     }
     return pairs.map(pair => `t${pair.toUpperCase()}`)
   }
-  return pairs.length < 7 ? `t${pairs.toUpperCase()}` : pairs
+  return `t${pairs.toUpperCase()}`
 }
 
 // USD -> fUSD
