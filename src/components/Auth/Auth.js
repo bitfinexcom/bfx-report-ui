@@ -109,7 +109,7 @@ class Auth extends PureComponent {
       </div>
     ) : (
       <NonIdealState
-        className='bitfinex-auth-nonideal'
+        className='bitfinex-nonideal'
         icon='key'
         title={intl.formatMessage({ id: 'auth.nonideal.title' })}
         description={intl.formatMessage({ id: 'auth.nonideal.description' })}

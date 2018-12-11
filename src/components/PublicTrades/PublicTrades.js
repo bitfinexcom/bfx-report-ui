@@ -3,6 +3,7 @@ import { injectIntl } from 'react-intl'
 import {
   Card,
   Elevation,
+  NonIdealState,
 } from '@blueprintjs/core'
 import {
   Cell,
@@ -10,6 +11,7 @@ import {
 } from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
+import SyncPrefButton from 'components/SyncPrefButton'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -26,6 +28,7 @@ import {
   getNoAuthTokenUrlString,
 } from 'state/utils'
 import { formatPair } from 'state/symbols/utils'
+import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './PublicTrades.props'
 
@@ -70,6 +73,7 @@ class PublicTrades extends PureComponent {
     const {
       fetchNext,
       fetchPrev,
+      hasSyncPref,
       offset,
       pageOffset,
       pageLoading,
@@ -84,6 +88,19 @@ class PublicTrades extends PureComponent {
       timezone,
       nextPage,
     } = this.props
+    if (platform.showSyncMode && !hasSyncPref) {
+      return (
+        <NonIdealState
+          className='bitfinex-nonideal'
+          icon='issue-new'
+          title={intl.formatMessage({ id: 'preferences.sync.notset' })}
+          description={intl.formatMessage({ id: 'preferences.sync.description' })}
+        >
+          <SyncPrefButton textOnly />
+        </NonIdealState>
+      )
+    }
+
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const pairList = pairs
     const currentPair = targetPair || 'btcusd'
@@ -238,6 +255,7 @@ class PublicTrades extends PureComponent {
             &nbsp;
             <TimeRange />
             {renderPairSelector}
+            <SyncPrefButton/>
           </h4>
           <NoData />
         </Fragment>
@@ -254,6 +272,7 @@ class PublicTrades extends PureComponent {
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;
             <RefreshButton handleClickRefresh={refresh} />
+            <SyncPrefButton/>
           </h4>
           {renderPagination}
           <DataTable

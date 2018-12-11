@@ -38,8 +38,24 @@ export function forceQueryFromDb() {
   }
 }
 
+/**
+ * Create an action to set preferences.
+ * @param {string[]} pairs pairs
+ * @param {numeric} startTime start time in milliseconds
+ */
+export function setPref(pairs, startTime) {
+  return {
+    type: types.SET_PREF,
+    payload: {
+      pairs,
+      startTime,
+    },
+  }
+}
+
 export default {
   forceQueryFromDb,
+  setPref,
   setSyncMode,
   startSyncing,
   stopSyncing,

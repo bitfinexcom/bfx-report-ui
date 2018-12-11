@@ -2,6 +2,8 @@ import types from './constants'
 
 const initialState = {
   syncMode: types.MODE_ONLINE,
+  syncPairs: [],
+  startTime: undefined,
 }
 
 export function syncReducer(state = initialState, action) {
@@ -11,6 +13,14 @@ export function syncReducer(state = initialState, action) {
       return {
         ...state,
         syncMode: payload,
+      }
+    }
+    case types.SET_PREF: {
+      const { pairs: syncPairs, startTime } = payload
+      return {
+        ...initialState,
+        syncPairs,
+        startTime,
       }
     }
     default: {

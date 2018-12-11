@@ -10,9 +10,8 @@ import {
 } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
 
-import { momentFormatter } from 'state/utils'
+import { DATE_FORMAT } from 'state/utils'
 
-const DATE_FORMAT = momentFormatter('YYYY-MM-DD HH:mm:ss')
 const SMALL_DATE_RANGE_POPOVER_PROPS = {
   position: Position.TOP,
 }
