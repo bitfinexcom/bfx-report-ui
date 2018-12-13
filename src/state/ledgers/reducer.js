@@ -25,6 +25,12 @@ export function ledgersReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_LEDGERS: {
+      if (!payload) {
+        return {
+          ...state,
+          dataReceived: true,
+        }
+      }
       const { res, nextPage } = payload
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
