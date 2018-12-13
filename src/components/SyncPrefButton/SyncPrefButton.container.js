@@ -15,7 +15,7 @@ const mapStateToProps = (state = {}) => {
   }
   return {
     syncPairs: pairs,
-    startTime: getStartTime(state) || new Date(start),
+    startTime: getStartTime(state) || new Date(start).getTime(),
   }
 }
 
