@@ -88,9 +88,10 @@ class SyncPrefButton extends PureComponent {
 
   handleApply() {
     const { tempPairs, tempTime } = this.state
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.setPairs(tempPairs, tempTime)
+    const { logout, setSyncPref } = this.props
+    setSyncPref(tempPairs, tempTime)
     this.setState({ isOpen: false })
+    logout()
   }
 
   render() {
@@ -120,7 +121,7 @@ class SyncPrefButton extends PureComponent {
             <Button
               icon={textOnly ? null : ICON}
               onClick={this.handleOpen}
-              intent={Intent.SUCCESS}
+              intent={Intent.PRIMARY}
             >
               {textOnly ? intl.formatMessage({ id: 'preferences.sync.title' }) : ''}
             </Button>
@@ -172,12 +173,23 @@ class SyncPrefButton extends PureComponent {
             </div>
             <div className={Classes.DIALOG_FOOTER}>
               <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                <Button
-                  onClick={this.handleApply}
-                  intent={Intent.PRIMARY}
+                <Tooltip
+                  content={(
+                    <span>
+                      {intl.formatMessage({ id: 'preferences.sync.apply.tooltip' })}
+                    </span>
+                    )}
+                  position={Position.TOP}
+                  usePortal={false}
                 >
-                  {intl.formatMessage({ id: 'preferences.sync.apply' })}
-                </Button>
+                  <Button
+                    onClick={this.handleApply}
+                    intent={Intent.PRIMARY}
+                    disabled={(tempPairs.length === 0 || tempTime === undefined)}
+                  >
+                    {intl.formatMessage({ id: 'preferences.sync.apply' })}
+                  </Button>
+                </Tooltip>
                 <Button onClick={this.handleClose}>
                   {intl.formatMessage({ id: 'preferences.close' })}
                 </Button>

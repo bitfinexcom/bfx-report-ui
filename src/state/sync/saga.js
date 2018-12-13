@@ -80,7 +80,7 @@ function* syncLogout() {
   }
 }
 
-function* setSyncPref({ payload }) {
+function* editSyncPref({ payload }) {
   const { pairs, startTime } = payload
 
   const auth = yield select(selectAuth)
@@ -125,7 +125,7 @@ function* syncWatcher() {
           // get syncPref
           const { result: syncPrefResult, error: syncPrefError } = yield call(getPublicTradesConf, auth)
           if (syncPrefResult && syncPrefResult.length > 0) {
-            yield put(actions.setPref(
+            yield put(actions.setSyncPref(
               syncPrefResult.map(data => formatInternalPair(data.symbol)),
               syncPrefResult[0].start,
             ))
@@ -209,7 +209,7 @@ export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
-  yield takeLatest(types.SET_PREF, setSyncPref)
+  yield takeLatest(types.SET_PREF, editSyncPref)
   yield takeLatest(authTypes.UPDATE_AUTH_STATUS, syncWatcher)
   yield takeLatest(authTypes.LOGOUT, syncLogout)
 }

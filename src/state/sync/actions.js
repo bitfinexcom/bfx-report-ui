@@ -43,7 +43,7 @@ export function forceQueryFromDb() {
  * @param {string[]} pairs pairs
  * @param {numeric} startTime start time in milliseconds
  */
-export function setPref(pairs, startTime) {
+export function setSyncPref(pairs, startTime) {
   return {
     type: types.SET_PREF,
     payload: {
@@ -55,7 +55,7 @@ export function setPref(pairs, startTime) {
 
 export default {
   forceQueryFromDb,
-  setPref,
+  setSyncPref,
   setSyncMode,
   startSyncing,
   stopSyncing,

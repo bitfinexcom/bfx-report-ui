@@ -17,6 +17,7 @@
   "preferences.sync.pairs": "暫存代幣對",
   "preferences.sync.starttime": "起始時間",
   "preferences.sync.apply": "確認",
+  "preferences.sync.apply.tooltip": "確認後需要重新登入才會生效。",
   "theme.light": "白",
   "theme.dark": "黑",
   "auth.auth": "驗證",

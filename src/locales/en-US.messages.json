@@ -18,6 +18,7 @@
   "preferences.sync.pairs": "Offline Pairs",
   "preferences.sync.starttime": "Start Time",
   "preferences.sync.apply": "Apply",
+  "preferences.sync.apply.tooltip": "After apply, you needs to login again to take effect.",
   "theme.light": "Light",
   "theme.dark": "Dark",
   "auth.auth": "Auth",
