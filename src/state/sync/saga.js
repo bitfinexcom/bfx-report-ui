@@ -14,6 +14,7 @@ import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
+import { formatInternalPair, formatRawPairToTPair } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -27,6 +28,8 @@ const logout = auth => makeFetchCall('logout', auth)
 const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
 const getUsersTimeConf = auth => makeFetchCall('getUsersTimeConf', auth)
+const getPublicTradesConf = auth => makeFetchCall('getPublicTradesConf', auth)
+const editPublicTradesConf = (auth, params) => makeFetchCall('editPublicTradesConf', auth, params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -77,6 +80,25 @@ function* syncLogout() {
   }
 }
 
+function* editSyncPref({ payload }) {
+  const { pairs, startTime } = payload
+
+  const auth = yield select(selectAuth)
+  const params = (pairs.length === 1)
+    ? {
+      symbol: formatRawPairToTPair(pairs[0]),
+      start: startTime,
+    }
+    : pairs.map(symbol => ({
+      symbol: formatRawPairToTPair(symbol),
+      start: startTime,
+    }))
+  const { error } = yield call(editPublicTradesConf, auth, params)
+  if (error) {
+    yield put(updateSyncErrorStatus('during editPublicTradesConf'))
+  }
+}
+
 function* syncWatcher() {
   try {
     while (true) {
@@ -98,6 +120,18 @@ function* syncWatcher() {
             if (tzError) {
               yield put(updateSyncErrorStatus(JSON.stringify(tzError)))
             }
+          }
+
+          // get syncPref
+          const { result: syncPrefResult, error: syncPrefError } = yield call(getPublicTradesConf, auth)
+          if (syncPrefResult && syncPrefResult.length > 0) {
+            yield put(actions.setSyncPref(
+              syncPrefResult.map(data => formatInternalPair(data.symbol)),
+              syncPrefResult[0].start,
+            ))
+          }
+          if (syncPrefError) {
+            yield put(updateSyncErrorStatus('during editPublicTradesConf'))
           }
 
           yield put(hideAuth())
@@ -175,6 +209,7 @@ export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
+  yield takeLatest(types.SET_PREF, editSyncPref)
   yield takeLatest(authTypes.UPDATE_AUTH_STATUS, syncWatcher)
   yield takeLatest(authTypes.LOGOUT, syncLogout)
 }

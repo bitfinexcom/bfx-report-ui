@@ -26,6 +26,12 @@ export function ordersReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_ORDERS: {
+      if (!payload) {
+        return {
+          ...state,
+          dataReceived: true,
+        }
+      }
       const { res, nextPage } = payload
       const { existingPairs } = state
       const updatePairs = [...existingPairs]

@@ -22,6 +22,12 @@ export function publicTradesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_PUBLIC_TRADES: {
+      if (!payload) {
+        return {
+          ...state,
+          dataReceived: true,
+        }
+      }
       const { res, nextPage } = payload
       let smallestMts
       const entries = res.map((entry) => {

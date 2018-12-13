@@ -144,6 +144,8 @@ export function momentFormatter(format) {
   }
 }
 
+export const DATE_FORMAT = momentFormatter('YYYY-MM-DD HH:mm:ss')
+
 export function getSideMsg(side) {
   let msg
   if (side === 1) {
@@ -173,6 +175,7 @@ export function getNoAuthTokenUrlString(searchUrl) {
 export default {
   checkFetch,
   checkEmail,
+  DATE_FORMAT,
   makeFetchCall,
   formatDate,
   formatTime,

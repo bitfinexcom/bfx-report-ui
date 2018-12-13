@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import actions from 'state/publicTrades/actions'
 import { getTimezone } from 'state/base/selectors'
 import { getPairs } from 'state/symbols/selectors'
+import { hasSyncPref } from 'state/sync/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -19,6 +20,7 @@ import PublicTrades from './PublicTrades'
 const mapStateToProps = (state = {}) => ({
   offset: getOffset(state),
   entries: getEntries(state),
+  hasSyncPref: hasSyncPref(state),
   loading: !getDataReceived(state),
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
