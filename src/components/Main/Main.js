@@ -35,12 +35,12 @@ const {
 class Main extends PureComponent {
   constructor(props) {
     super(props)
-    this.handleClickCustom = this.handleClickCustom.bind(this)
-    this.handleCustomDialogClose = this.handleCustomDialogClose.bind(this)
+    this.handleClickCustom = this.handleCustomDialog.bind(this, true)
+    this.handleCustomDialogClose = this.handleCustomDialog.bind(this, false)
     this.handleRangeChange = this.handleRangeChange.bind(this)
     this.startQuery = this.startQuery.bind(this)
-    this.handleClickExport = this.handleClickExport.bind(this)
-    this.handleExportDialogClose = this.handleExportDialogClose.bind(this)
+    this.handleClickExport = this.handleExportDialog.bind(this, true)
+    this.handleExportDialogClose = this.handleExportDialog.bind(this, false)
     this.startExport = this.startExport.bind(this)
   }
 
@@ -56,16 +56,10 @@ class Main extends PureComponent {
     history.push(`${getPath(target)}${history.location.search}`)
   }
 
-  handleClickCustom(e) {
+  handleCustomDialog(show, e) {
     e.preventDefault()
     // eslint-disable-next-line react/destructuring-assignment
-    this.props.showCustomDialog(true)
-  }
-
-  handleCustomDialogClose(e) {
-    e.preventDefault()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.showCustomDialog(false)
+    this.props.showCustomDialog(show)
   }
 
   handleRangeChange(range) {
@@ -84,15 +78,13 @@ class Main extends PureComponent {
     showCustomDialog(false)
   }
 
-  handleClickExport() {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.prepareExport()
-    this.setState({ isExportOpen: true })
-  }
-
-  handleExportDialogClose(e) {
+  handleExportDialog(show, e) {
     e.preventDefault()
-    this.setState({ isExportOpen: false })
+    if (show) {
+      // eslint-disable-next-line react/destructuring-assignment
+      this.props.prepareExport()
+    }
+    this.setState({ isExportOpen: show })
   }
 
   startExport() {

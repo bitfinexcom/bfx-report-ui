@@ -22,20 +22,20 @@ export const TYPE_WHITELIST = [
   MENU_LEDGERS,
   MENU_MOVEMENTS,
   MENU_ORDERS,
-  MENU_TRADES,
   MENU_PUBLIC_TRADES,
+  MENU_TRADES,
 ]
 
 export const ROUTE_WHITELIST = [
+  MENU_DEPOSITS,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_LEDGERS,
   MENU_ORDERS,
-  MENU_TRADES,
-  MENU_DEPOSITS,
-  MENU_WITHDRAWALS,
   MENU_PUBLIC_TRADES,
+  MENU_TRADES,
+  MENU_WITHDRAWALS,
 ]
 
 export function isValidTimeStamp(n) {
@@ -43,6 +43,10 @@ export function isValidTimeStamp(n) {
     && (new Date(n)).getTime() === n
 }
 
+/*
+ * Mapping of each page's metadata
+ * The queryLimit / pageSize MUST be divisible
+ */
 const MAPPING = {
   [MENU_FCREDIT]: {
     icon: 'book',
@@ -114,18 +118,10 @@ const MAPPING = {
   },
 }
 
-const PATHMAP = {
-  [MAPPING[MENU_FCREDIT].path]: MENU_FCREDIT,
-  [MAPPING[MENU_FLOAN].path]: MENU_FLOAN,
-  [MAPPING[MENU_FOFFER].path]: MENU_FOFFER,
-  [MAPPING[MENU_LEDGERS].path]: MENU_LEDGERS,
-  [MAPPING[MENU_DEPOSITS].path]: MENU_DEPOSITS,
-  [MAPPING[MENU_ORDERS].path]: MENU_ORDERS,
-  [MAPPING[MENU_TRADES].path]: MENU_TRADES,
-  [MAPPING[MENU_DEPOSITS].path]: MENU_DEPOSITS,
-  [MAPPING[MENU_WITHDRAWALS].path]: MENU_WITHDRAWALS,
-  [MAPPING[MENU_PUBLIC_TRADES].path]: MENU_PUBLIC_TRADES,
-}
+const PATHMAP = {}
+ROUTE_WHITELIST.forEach((key) => {
+  PATHMAP[MAPPING[key].path] = key
+})
 
 // get target from the following link syntax
 // /target
