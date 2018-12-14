@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import actions from 'state/sync/actions'
 import authActions from 'state/auth/actions'
-import { getStartTime, getSyncPairs } from 'state/sync/selectors'
+import { getStartTime, getSyncMode, getSyncPairs } from 'state/sync/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 
 import SyncPrefButton from './SyncPrefButton'
@@ -14,6 +14,7 @@ const mapStateToProps = (state = {}) => {
     pairs = ['btcusd']
   }
   return {
+    syncMode: getSyncMode(state),
     syncPairs: pairs,
     startTime: getStartTime(state) || new Date(start).getTime(),
   }

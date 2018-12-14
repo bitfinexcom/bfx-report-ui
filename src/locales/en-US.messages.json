@@ -19,6 +19,7 @@
   "preferences.sync.starttime": "Start Time",
   "preferences.sync.apply": "Apply",
   "preferences.sync.apply.tooltip": "After apply, you needs to login again to take effect.",
+  "preferences.sync.insync-warning": "Can't apply during syncing. Please wait until syncing is done.",
   "theme.light": "Light",
   "theme.dark": "Dark",
   "auth.auth": "Auth",
