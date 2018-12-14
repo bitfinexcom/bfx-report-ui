@@ -1,24 +1,22 @@
 import PropTypes from 'prop-types'
 import { intlShape } from 'react-intl'
 
-const ORDERS_ENTRIES_PROPS = PropTypes.shape({
-  amountOrig: PropTypes.number,
-  amountExecuted: PropTypes.number.isRequired,
-  id: PropTypes.number.isRequired,
+const POSITIONS_ENTRIES_PROPS = PropTypes.shape({
+  amount: PropTypes.number,
+  basesPrice: PropTypes.number,
+  marginFunding: PropTypes.number,
+  marginFundingType: PropTypes.number,
   mtsUpdate: PropTypes.number.isRequired,
   pair: PropTypes.string.isRequired,
-  price: PropTypes.number,
-  priceAvg: PropTypes.number,
-  status: PropTypes.string,
-  type: PropTypes.string.isRequired,
+  pl: PropTypes.number,
+  plPerc: PropTypes.number,
+  priceLiq: PropTypes.number,
 })
 
 export const propTypes = {
-  addTargetPair: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,
-  entries: PropTypes.arrayOf(ORDERS_ENTRIES_PROPS).isRequired,
-  existingPairs: PropTypes.arrayOf(PropTypes.string),
-  fetchOrders: PropTypes.func.isRequired,
+  entries: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
+  fetchPositions: PropTypes.func.isRequired,
   fetchNext: PropTypes.func.isRequired,
   fetchPrev: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
@@ -26,10 +24,7 @@ export const propTypes = {
   loading: PropTypes.bool.isRequired,
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
-  pairs: PropTypes.arrayOf(PropTypes.string),
   refresh: PropTypes.func.isRequired,
-  removeTargetPair: PropTypes.func.isRequired,
-  targetPairs: PropTypes.arrayOf(PropTypes.string),
   timezone: PropTypes.string,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
@@ -38,11 +33,9 @@ export const propTypes = {
 }
 
 export const defaultProps = {
-  addTargetPair: () => {},
   offset: 0,
   entries: [],
-  existingPairs: [],
-  fetchOrders: () => {},
+  fetchPositions: () => {},
   fetchNext: () => {},
   fetchPrev: () => {},
   intl: {},
@@ -50,9 +43,6 @@ export const defaultProps = {
   loading: true,
   pageOffset: 0,
   pageLoading: false,
-  pairs: [],
   refresh: () => {},
-  removeTargetPair: () => {},
-  targetPairs: '',
   nextPage: false,
 }

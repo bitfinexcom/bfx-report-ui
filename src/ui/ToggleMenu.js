@@ -14,15 +14,16 @@ import { getIcon, getPath } from 'state/query/utils'
 import { getNoAuthTokenUrlString } from 'state/utils'
 
 const {
+  MENU_DEPOSITS,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_LEDGERS,
   MENU_ORDERS,
   MENU_TRADES,
-  MENU_DEPOSITS,
-  MENU_WITHDRAWALS,
+  MENU_POSITIONS,
   MENU_PUBLIC_TRADES,
+  MENU_WITHDRAWALS,
 } = queryType
 
 class ToggleMenu extends PureComponent {
@@ -37,6 +38,7 @@ class ToggleMenu extends PureComponent {
     this.handleClickDeposits = this.handleClick.bind(this, MENU_DEPOSITS)
     this.handleClickWithdrawals = this.handleClick.bind(this, MENU_WITHDRAWALS)
     this.handleClickPublicTrades = this.handleClick.bind(this, MENU_PUBLIC_TRADES)
+    this.handleClickPositions = this.handleClick.bind(this, MENU_POSITIONS)
   }
 
   handleClick(target) {
@@ -88,6 +90,12 @@ class ToggleMenu extends PureComponent {
           text={intl.formatMessage({ id: 'withdrawals.title' })}
           onClick={this.handleClickWithdrawals}
           active={target === MENU_WITHDRAWALS}
+        />
+        <MenuItem
+          icon={getIcon(MENU_POSITIONS)}
+          text={intl.formatMessage({ id: 'positions.title' })}
+          onClick={this.handleClickPositions}
+          active={target === MENU_POSITIONS}
         />
         <MenuDivider />
         <MenuItem
