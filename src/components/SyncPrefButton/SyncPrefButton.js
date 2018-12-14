@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { injectIntl } from 'react-intl'
 import {
   Button,
+  Callout,
   Classes,
   Dialog,
   Intent,
@@ -9,9 +10,9 @@ import {
   Tooltip,
 } from '@blueprintjs/core'
 import { DateInput } from '@blueprintjs/datetime'
-
 import MultiPairSelector from 'ui/MultiPairSelector'
 import { parsePairTag } from 'state/symbols/utils'
+import mode from 'state/sync/constants'
 import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
 import { DATE_FORMAT } from 'state/utils'
 import { platform } from 'var/config'
@@ -51,7 +52,7 @@ class SyncPrefButton extends PureComponent {
         tempTime: new Date(nextProps.startTime),
       }
     }
-    return {}
+    return null
   }
 
   handleOpen(e) {
@@ -98,6 +99,7 @@ class SyncPrefButton extends PureComponent {
     const {
       intl,
       textOnly,
+      syncMode,
       syncPairs,
     } = this.props
     const {
@@ -105,6 +107,16 @@ class SyncPrefButton extends PureComponent {
       tempPairs,
       tempTime,
     } = this.state
+    const renderInSyncWarning = syncMode === mode.MODE_SYNCING
+      ? (
+        <Fragment>
+          <Callout intent={Intent.WARNING}>
+            {intl.formatMessage({ id: 'preferences.sync.insync-warning' })}
+          </Callout>
+          <br />
+        </Fragment>
+      )
+      : null
     return platform.showSyncMode
       ? (
         <Fragment>
@@ -138,6 +150,7 @@ class SyncPrefButton extends PureComponent {
             isOpen={isOpen}
           >
             <div className={Classes.DIALOG_BODY}>
+              {renderInSyncWarning}
               <div className='row'>
                 <div className={dialogDescStyle}>
                   {intl.formatMessage({ id: 'preferences.sync.pairs' })}
@@ -185,7 +198,11 @@ class SyncPrefButton extends PureComponent {
                   <Button
                     onClick={this.handleApply}
                     intent={Intent.PRIMARY}
-                    disabled={(tempPairs.length === 0 || tempTime === undefined)}
+                    disabled={(
+                      syncMode === mode.MODE_SYNCING
+                      || tempPairs.length === 0
+                      || tempTime === undefined
+                    )}
                   >
                     {intl.formatMessage({ id: 'preferences.sync.apply' })}
                   </Button>

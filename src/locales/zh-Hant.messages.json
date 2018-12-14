@@ -18,6 +18,7 @@
   "preferences.sync.starttime": "起始時間",
   "preferences.sync.apply": "確認",
   "preferences.sync.apply.tooltip": "確認後需要重新登入才會生效。",
+  "preferences.sync.insync-warning": "同步時無法確認設定。請等到同步完成後再按確認。",
   "theme.light": "白",
   "theme.dark": "黑",
   "auth.auth": "驗證",
