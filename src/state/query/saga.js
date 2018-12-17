@@ -20,6 +20,7 @@ import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
 import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
 import { getTimezone, getDateFormat, getShowMilliseconds } from 'state/base/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
+import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 
 import { getEmail, getQuery, getTimeFrame } from './selectors'
 import actions from './actions'
@@ -34,6 +35,7 @@ const {
   MENU_TRADES,
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
+  MENU_POSITIONS,
   MENU_PUBLIC_TRADES,
 } = types
 
@@ -73,6 +75,9 @@ function getCSV(auth, query, target, options) {
       method = 'getMovementsCsv'
       params.isDeposits = true
       break
+    case MENU_POSITIONS:
+      method = 'getPositionsHistoryCsv'
+      break
     case MENU_PUBLIC_TRADES:
       method = 'getPublicTradesCsv'
       break
@@ -101,6 +106,8 @@ function getSelector(target) {
       return getMovementsSymbols
     case MENU_TRADES:
       return getTradesPairs
+    case MENU_POSITIONS:
+      return getPositionsPairs
     case MENU_PUBLIC_TRADES:
       return getPublicTradesPair
     default:
@@ -120,6 +127,7 @@ function formatSymbol(target, sign) {
       return sign
     case MENU_ORDERS:
     case MENU_TRADES:
+    case MENU_POSITIONS:
     case MENU_PUBLIC_TRADES:
       return formatRawPairToTPair(sign)
     case MENU_FCREDIT:
