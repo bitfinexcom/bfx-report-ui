@@ -7,11 +7,11 @@ import {
   getDataReceived,
   getEntries,
   getExistingPairs,
+  getNextPage,
   getOffset,
   getPageLoading,
   getPageOffset,
   getTargetPairs,
-  getNextPage,
 } from 'state/orders/selectors'
 
 import Orders from './Orders'

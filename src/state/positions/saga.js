@@ -8,6 +8,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { formatRawPairToTPair, getSymbolsURL, getPairsFromUrlParam } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -16,21 +17,31 @@ import { getQueryLimit } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
-import { getPositions } from './selectors'
+import { getPositions, getTargetPairs } from './selectors'
 
 const TYPE = queryTypes.MENU_POSITIONS
 const LIMIT = getQueryLimit(TYPE)
 
-function getReqPositions(auth, query, smallestMts) {
+function getReqPositions(auth, query, targetPairs, smallestMts) {
   const params = getTimeFrame(query, TYPE, smallestMts)
+  if (targetPairs.length > 0) {
+    params.symbol = formatRawPairToTPair(targetPairs)
+  }
   return makeFetchCall('getPositionsHistory', auth, params)
 }
 
-function* fetchPositions() {
+function* fetchPositions({ payload: pair }) {
   try {
+    let targetPairs = yield select(getTargetPairs)
+    const pairsUrl = getSymbolsURL(targetPairs)
+    // set pair from url
+    if (pair && pair !== pairsUrl) {
+      targetPairs = getPairsFromUrlParam(pair)
+      yield put(actions.setTargetPairs(targetPairs))
+    }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqPositions, auth, query, 0)
+    const { result = [], error } = yield call(getReqPositions, auth, query, targetPairs, 0)
     yield put(actions.updatePositions(result))
 
     if (error) {
@@ -55,6 +66,7 @@ function* fetchNextPositions() {
       offset,
       entries,
       smallestMts,
+      targetPairs,
     } = yield select(getPositions)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
@@ -62,7 +74,7 @@ function* fetchNextPositions() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqPositions, auth, query, smallestMts)
+    const { result = [], error } = yield call(getReqPositions, auth, query, targetPairs, smallestMts)
     yield put(actions.updatePositions(result))
 
     if (error) {

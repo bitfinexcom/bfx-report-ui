@@ -15,6 +15,7 @@ import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
@@ -23,21 +24,31 @@ import {
   checkFetch,
   formatTime,
   getCurrentEntries,
+  handleAddPairFilter,
+  handleRemovePairFilter,
 } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Positions.props'
 
-const COLUMN_WIDTHS = [100, 100, 100, 100, 100, 100, 100, 100, 150]
+const COLUMN_WIDTHS = [80, 100, 100, 100, 100, 100, 150, 150, 150]
 const TYPE = queryConstants.MENU_POSITIONS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Positions extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.handlers = {}
+    this.handleClick = this.handleClick.bind(this)
+    this.handleTagRemove = this.handleTagRemove.bind(this)
+  }
+
   componentDidMount() {
-    const { loading, fetchPositions } = this.props
+    const { loading, fetchPositions, match } = this.props
     if (loading) {
-      fetchPositions()
+      const pair = (match.params && match.params.pair) || ''
+      fetchPositions(pair)
     }
   }
 
@@ -45,8 +56,20 @@ class Positions extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
+  handleClick(pair) {
+    if (!this.handlers[pair]) {
+      this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
+    }
+    return this.handlers[pair]
+  }
+
+  handleTagRemove(tag) {
+    handleRemovePairFilter(TYPE, tag, this.props)
+  }
+
   render() {
     const {
+      existingPairs,
       fetchNext,
       fetchPrev,
       offset,
@@ -58,6 +81,7 @@ class Positions extends PureComponent {
       jumpPage,
       loading,
       refresh,
+      targetPairs,
       timezone,
       nextPage,
     } = this.props
@@ -65,10 +89,10 @@ class Positions extends PureComponent {
     const numRows = filteredData.length
 
     const pairCellRenderer = (rowIndex) => {
-      const formatedCurrentPair = formatPair(filteredData[rowIndex].pair)
+      const { pair } = filteredData[rowIndex]
       return (
-        <Cell tooltip={formatedCurrentPair}>
-          {formatedCurrentPair}
+        <Cell tooltip={pair}>
+          {pair}
         </Cell>
       )
     }
@@ -99,7 +123,7 @@ class Positions extends PureComponent {
     }
 
     const priceLiqCellRenderer = (rowIndex) => {
-      const price = filteredData[rowIndex].priceLiq
+      const price = filteredData[rowIndex].liquidationPrice
       return (
         <Cell
           className='bitfinex-text-align-right'
@@ -185,6 +209,18 @@ class Positions extends PureComponent {
       />
     )
 
+    const renderPairSelector = (
+      <Fragment>
+          &nbsp;
+        <MultiPairSelector
+          currentFilters={targetPairs}
+          existingPairs={existingPairs}
+          onPairSelect={this.handleClick}
+          handleTagRemove={this.handleTagRemove}
+        />
+      </Fragment>
+    )
+
     const tableColums = [
       {
         id: 'pair',
@@ -208,7 +244,7 @@ class Positions extends PureComponent {
         id: 'priceLiq',
         name: 'positions.column.liq-price',
         renderer: priceLiqCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].priceLiq,
+        tooltip: rowIndex => filteredData[rowIndex].liquidationPrice,
       },
       {
         id: 'pl',
@@ -254,6 +290,7 @@ class Positions extends PureComponent {
             {intl.formatMessage({ id: 'positions.title' })}
             &nbsp;
             <TimeRange />
+            {renderPairSelector}
           </h4>
           <NoData />
         </Fragment>
@@ -265,6 +302,7 @@ class Positions extends PureComponent {
             {intl.formatMessage({ id: 'positions.title' })}
             &nbsp;
             <TimeRange />
+            {renderPairSelector}
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;
