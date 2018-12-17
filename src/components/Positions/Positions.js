@@ -81,6 +81,7 @@ class Positions extends PureComponent {
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
+    const tableColums = getColumns({ filteredData, intl, timezone })
 
     const renderPagination = (
       <Pagination
@@ -107,8 +108,6 @@ class Positions extends PureComponent {
         />
       </Fragment>
     )
-
-    const tableColums = getColumns({ filteredData, intl, timezone })
 
     let showContent
     if (loading) {
