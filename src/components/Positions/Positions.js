@@ -31,7 +31,7 @@ import { amountStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Positions.props'
 
-const COLUMN_WIDTHS = [80, 100, 100, 100, 100, 100, 150, 150, 150]
+const COLUMN_WIDTHS = [100, 80, 100, 100, 100, 100, 100, 150, 150, 150]
 const TYPE = queryConstants.MENU_POSITIONS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
@@ -87,6 +87,15 @@ class Positions extends PureComponent {
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
+
+    const idCellRenderer = (rowIndex) => {
+      const { id } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={id}>
+          {id}
+        </Cell>
+      )
+    }
 
     const pairCellRenderer = (rowIndex) => {
       const { pair } = filteredData[rowIndex]
@@ -222,6 +231,12 @@ class Positions extends PureComponent {
     )
 
     const tableColums = [
+      {
+        id: 'id',
+        name: 'column.id',
+        renderer: idCellRenderer,
+        tooltip: rowIndex => filteredData[rowIndex].id,
+      },
       {
         id: 'pair',
         name: 'positions.column.pair',
