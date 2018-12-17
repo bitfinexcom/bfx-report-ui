@@ -4,10 +4,6 @@ import {
   Card,
   Elevation,
 } from '@blueprintjs/core'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'ui/TimeRange'
@@ -21,13 +17,12 @@ import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
-  formatTime,
   getCurrentEntries,
   handleAddPairFilter,
   handleRemovePairFilter,
 } from 'state/utils'
-import { amountStyle } from 'ui/utils'
 
+import getColumns from './Trades.columns'
 import { propTypes, defaultProps } from './Trades.props'
 
 const COLUMN_WIDTHS = [85, 100, 80, 125, 125, 125, 150]
@@ -86,88 +81,7 @@ class Trades extends PureComponent {
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-
-    const idCellRenderer = (rowIndex) => {
-      const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={id}>
-          {id}
-        </Cell>
-      )
-    }
-
-    const orderidCellRenderer = (rowIndex) => {
-      const { orderID } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={orderID}>
-          {orderID}
-        </Cell>
-      )
-    }
-
-    const pairCellRenderer = (rowIndex) => {
-      const { pair } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={pair}>
-          {pair}
-        </Cell>
-      )
-    }
-
-    const amountCellRenderer = (rowIndex) => {
-      const { execAmount } = filteredData[rowIndex]
-      const classes = amountStyle(execAmount)
-      return (
-        <Cell
-          className={classes}
-          tooltip={execAmount}
-        >
-          {execAmount}
-        </Cell>
-      )
-    }
-
-    const priceCellRenderer = (rowIndex) => {
-      const { execPrice } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={execPrice}
-        >
-          {execPrice}
-        </Cell>
-      )
-    }
-
-    const feeCellRenderer = (rowIndex) => {
-      const { fee, feeCurrency } = filteredData[rowIndex]
-      const tooltip = `${fee} ${feeCurrency}`
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          <Fragment>
-            {fee}
-            &nbsp;
-            <span className='bitfinex-show-soft'>
-              {feeCurrency}
-            </span>
-          </Fragment>
-        </Cell>
-      )
-    }
-
-    const mtsCellRenderer = (rowIndex) => {
-      const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate, timezone)
-      return (
-        <Cell tooltip={mtsCreate}>
-          <TruncatedFormat>
-            {mtsCreate}
-          </TruncatedFormat>
-        </Cell>
-      )
-    }
+    const tableColums = getColumns({ filteredData, timezone })
 
     const renderPagination = (
       <Pagination
@@ -194,54 +108,6 @@ class Trades extends PureComponent {
         />
       </Fragment>
     )
-
-    const tableColums = [
-      {
-        id: 'id',
-        name: 'column.id',
-        renderer: idCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].id,
-      },
-      {
-        id: 'order_id',
-        name: 'trades.column.orderid',
-        renderer: orderidCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].orderID,
-      },
-      {
-        id: 'pair',
-        name: 'trades.column.pair',
-        renderer: pairCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].pair,
-      },
-      {
-        id: 'amount',
-        name: 'trades.column.amount',
-        renderer: amountCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].execAmount,
-      },
-      {
-        id: 'price',
-        name: 'trades.column.price',
-        renderer: priceCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].execPrice,
-      },
-      {
-        id: 'fee',
-        name: 'trades.column.fee',
-        renderer: feeCellRenderer,
-        tooltip: (rowIndex) => {
-          const { fee, feeCurrency } = filteredData[rowIndex]
-          return `${fee} ${feeCurrency}`
-        },
-      },
-      {
-        id: 'mts',
-        name: 'trades.column.time',
-        renderer: mtsCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsCreate, timezone),
-      },
-    ]
 
     let showContent
     if (loading) {
