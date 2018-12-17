@@ -5,10 +5,6 @@ import {
   Elevation,
   NonIdealState,
 } from '@blueprintjs/core'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import SyncPrefButton from 'components/SyncPrefButton'
@@ -23,13 +19,12 @@ import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize, getPath } from 'state/query/utils'
 import {
   checkFetch,
-  formatTime,
   getCurrentEntries,
   getNoAuthTokenUrlString,
 } from 'state/utils'
-import { formatPair } from 'state/symbols/utils'
 import { platform } from 'var/config'
 
+import getColumns from './PublicTrades.columns'
 import { propTypes, defaultProps } from './PublicTrades.props'
 
 const COLUMN_WIDTHS = [85, 150, 80, 125, 125, 100]
@@ -104,76 +99,8 @@ class PublicTrades extends PureComponent {
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const pairList = pairs
     const currentPair = targetPair || 'btcusd'
-    const formatedCurrentPair = formatPair(targetPair)
     const numRows = filteredData.length
-
-    const idCellRenderer = (rowIndex) => {
-      const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={id}>
-          {id}
-        </Cell>
-      )
-    }
-
-    const mtsCellRenderer = (rowIndex) => {
-      const mts = formatTime(filteredData[rowIndex].mts, timezone)
-      return (
-        <Cell tooltip={mts}>
-          <TruncatedFormat>
-            {mts}
-          </TruncatedFormat>
-        </Cell>
-      )
-    }
-
-    const typeCellRenderer = (rowIndex) => {
-      const { type, amount } = filteredData[rowIndex]
-      const classes = parseFloat(amount) > 0
-        ? 'bitfinex-green-text'
-        : 'bitfinex-red-text'
-      return (
-        <Cell
-          className={classes}
-          tooltip={type}
-        >
-          {type}
-        </Cell>
-      )
-    }
-
-    const priceCellRenderer = (rowIndex) => {
-      const { price, amount } = filteredData[rowIndex]
-      const classes = parseFloat(amount) > 0
-        ? 'bitfinex-green-text bitfinex-text-align-right'
-        : 'bitfinex-red-text bitfinex-text-align-right'
-      return (
-        <Cell
-          className={classes}
-          tooltip={price}
-        >
-          {price}
-        </Cell>
-      )
-    }
-
-    const amountCellRenderer = (rowIndex) => {
-      const amount = Math.abs(filteredData[rowIndex].amount)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={amount}
-        >
-          {amount}
-        </Cell>
-      )
-    }
-
-    const pairCellRenderer = () => (
-      <Cell tooltip={formatedCurrentPair}>
-        {formatedCurrentPair}
-      </Cell>
-    )
+    const tableColums = getColumns({ filteredData, targetPair, timezone })
 
     const renderPagination = (
       <Pagination
@@ -202,45 +129,6 @@ class PublicTrades extends PureComponent {
         />
       </Fragment>
     )
-
-    const tableColums = [
-      {
-        id: 'id',
-        name: 'column.id',
-        renderer: idCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].id,
-      },
-      {
-        id: 'mts',
-        name: 'publictrades.column.time',
-        renderer: mtsCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mts, timezone),
-      },
-      {
-        id: 'type',
-        name: 'publictrades.column.type',
-        renderer: typeCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].type,
-      },
-      {
-        id: 'price',
-        name: 'publictrades.column.price',
-        renderer: priceCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].price,
-      },
-      {
-        id: 'amount',
-        name: 'publictrades.column.amount',
-        renderer: amountCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].amount,
-      },
-      {
-        id: 'pair',
-        name: 'publictrades.column.pair',
-        renderer: pairCellRenderer,
-        tooltip: () => formatedCurrentPair,
-      },
-    ]
 
     let showContent
     if (loading) {
