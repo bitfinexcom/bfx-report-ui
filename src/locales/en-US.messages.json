@@ -112,6 +112,7 @@
   "positions.column.swap-type": "FUNDING TYPE",
   "positions.column.update": "UPDATED",
   "positions.swap.daily": "Daily",
+  "positions.swap.term": "Term",
   "publictrades.title": "Public Trades",
   "publictrades.column.time": "TIME",
   "publictrades.column.type": "TYPE",

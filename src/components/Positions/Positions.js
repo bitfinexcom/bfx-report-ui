@@ -183,11 +183,10 @@ class Positions extends PureComponent {
 
     const marginFundingTypeCellRenderer = (rowIndex) => {
       const swapType = filteredData[rowIndex].marginFundingType
+        ? intl.formatMessage({ id: 'positions.swap.daily' })
+        : intl.formatMessage({ id: 'positions.swap.term' })
       return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={swapType}
-        >
+        <Cell tooltip={swapType}>
           {swapType}
         </Cell>
       )
@@ -283,7 +282,9 @@ class Positions extends PureComponent {
         id: 'swapType',
         name: 'positions.column.swap-type',
         renderer: marginFundingTypeCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].marginFundingType,
+        tooltip: rowIndex => (filteredData[rowIndex].marginFundingType
+          ? intl.formatMessage({ id: 'positions.swap.daily' })
+          : intl.formatMessage({ id: 'positions.swap.term' })),
       },
       {
         id: 'mtsUpdate',

@@ -1,3 +1,4 @@
+// data format https://github.com/bitfinexcom/bfx-api-node-models/blob/master/lib/position_hist.js
 import { formatInternalPair, formatSymbolToPair } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
