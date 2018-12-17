@@ -20,7 +20,7 @@ Navigate to `/positions` will open this view.
     1. `PAIR`(translate)
     1. `AMOUNT`(translate), the number is left aligned.
     1. `BAE PRICE`(translate), the number is left aligned.
-    1. `LIQ`(translate), the number is left aligned.
+    1. `LIQ PRICE`(translate), the number is left aligned.
     1. `P/L`(translate), the number is left aligned.
     1. `P/L%`(translate), the number is left aligned.
     1. `FUNDING COST`(translate), the number is left aligned.
