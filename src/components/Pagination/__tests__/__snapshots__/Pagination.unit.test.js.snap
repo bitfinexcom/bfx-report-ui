@@ -10,7 +10,6 @@ exports[`render correctly in 1 of 1 page 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -22,7 +21,6 @@ exports[`render correctly in 1 of 1 page 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -40,7 +38,6 @@ exports[`render correctly in 1 of 1 page 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -52,7 +49,6 @@ exports[`render correctly in 1 of 1 page 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -82,7 +78,6 @@ exports[`render correctly in 1 of 1 page 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -94,7 +89,6 @@ exports[`render correctly in 1 of 1 page 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -112,7 +106,6 @@ exports[`render correctly in 1 of 1 page 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -124,7 +117,6 @@ exports[`render correctly in 1 of 1 page 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -153,7 +145,6 @@ exports[`render correctly in 1 of 2 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -165,7 +156,6 @@ exports[`render correctly in 1 of 2 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -183,7 +173,6 @@ exports[`render correctly in 1 of 2 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -195,7 +184,6 @@ exports[`render correctly in 1 of 2 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -224,11 +212,9 @@ exports[`render correctly in 1 of 2 pages 1`] = `
     
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -237,7 +223,6 @@ exports[`render correctly in 1 of 2 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -255,7 +240,6 @@ exports[`render correctly in 1 of 2 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -267,7 +251,6 @@ exports[`render correctly in 1 of 2 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -296,7 +279,6 @@ exports[`render correctly in 1 of 25 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -308,7 +290,6 @@ exports[`render correctly in 1 of 25 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -326,7 +307,6 @@ exports[`render correctly in 1 of 25 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -338,7 +318,6 @@ exports[`render correctly in 1 of 25 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -370,11 +349,9 @@ exports[`render correctly in 1 of 25 pages 1`] = `
      
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -383,7 +360,6 @@ exports[`render correctly in 1 of 25 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -400,11 +376,9 @@ exports[`render correctly in 1 of 25 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -413,7 +387,6 @@ exports[`render correctly in 1 of 25 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -442,7 +415,6 @@ exports[`render correctly in 2 of 2 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -454,7 +426,6 @@ exports[`render correctly in 2 of 2 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -471,11 +442,9 @@ exports[`render correctly in 2 of 2 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -484,7 +453,6 @@ exports[`render correctly in 2 of 2 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -514,7 +482,6 @@ exports[`render correctly in 2 of 2 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -526,7 +493,6 @@ exports[`render correctly in 2 of 2 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -544,7 +510,6 @@ exports[`render correctly in 2 of 2 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -556,7 +521,6 @@ exports[`render correctly in 2 of 2 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -585,7 +549,6 @@ exports[`render correctly in 3 of 4 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -597,7 +560,6 @@ exports[`render correctly in 3 of 4 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -614,11 +576,9 @@ exports[`render correctly in 3 of 4 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -627,7 +587,6 @@ exports[`render correctly in 3 of 4 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -656,11 +615,9 @@ exports[`render correctly in 3 of 4 pages 1`] = `
     
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -669,7 +626,6 @@ exports[`render correctly in 3 of 4 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -687,7 +643,6 @@ exports[`render correctly in 3 of 4 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -699,7 +654,6 @@ exports[`render correctly in 3 of 4 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -728,7 +682,6 @@ exports[`render correctly in 24 of 25 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -740,7 +693,6 @@ exports[`render correctly in 24 of 25 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -757,11 +709,9 @@ exports[`render correctly in 24 of 25 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -770,7 +720,6 @@ exports[`render correctly in 24 of 25 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -799,11 +748,9 @@ exports[`render correctly in 24 of 25 pages 1`] = `
     
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -812,7 +759,6 @@ exports[`render correctly in 24 of 25 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -830,7 +776,6 @@ exports[`render correctly in 24 of 25 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -842,7 +787,6 @@ exports[`render correctly in 24 of 25 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -871,7 +815,6 @@ exports[`render correctly in 25 of 25 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -883,7 +826,6 @@ exports[`render correctly in 25 of 25 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -900,11 +842,9 @@ exports[`render correctly in 25 of 25 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -913,7 +853,6 @@ exports[`render correctly in 25 of 25 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -943,7 +882,6 @@ exports[`render correctly in 25 of 25 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -955,7 +893,6 @@ exports[`render correctly in 25 of 25 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -973,7 +910,6 @@ exports[`render correctly in 25 of 25 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -985,7 +921,6 @@ exports[`render correctly in 25 of 25 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1013,11 +948,9 @@ exports[`render correctly in 26 of 26 pages 1`] = `
   >
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1026,7 +959,6 @@ exports[`render correctly in 26 of 26 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1043,11 +975,9 @@ exports[`render correctly in 26 of 26 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1056,7 +986,6 @@ exports[`render correctly in 26 of 26 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1086,7 +1015,6 @@ exports[`render correctly in 26 of 26 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1098,7 +1026,6 @@ exports[`render correctly in 26 of 26 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1116,7 +1043,6 @@ exports[`render correctly in 26 of 26 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1128,7 +1054,6 @@ exports[`render correctly in 26 of 26 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1156,11 +1081,9 @@ exports[`render correctly in 26 of 28 pages 1`] = `
   >
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1169,7 +1092,6 @@ exports[`render correctly in 26 of 28 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1186,11 +1108,9 @@ exports[`render correctly in 26 of 28 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1199,7 +1119,6 @@ exports[`render correctly in 26 of 28 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1228,11 +1147,9 @@ exports[`render correctly in 26 of 28 pages 1`] = `
     
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1241,7 +1158,6 @@ exports[`render correctly in 26 of 28 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1259,7 +1175,6 @@ exports[`render correctly in 26 of 28 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1271,7 +1186,6 @@ exports[`render correctly in 26 of 28 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1299,11 +1213,9 @@ exports[`render correctly in 26 of 50 pages 1`] = `
   >
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1312,7 +1224,6 @@ exports[`render correctly in 26 of 50 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1329,11 +1240,9 @@ exports[`render correctly in 26 of 50 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1342,7 +1251,6 @@ exports[`render correctly in 26 of 50 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1374,11 +1282,9 @@ exports[`render correctly in 26 of 50 pages 1`] = `
      
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1387,7 +1293,6 @@ exports[`render correctly in 26 of 50 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1404,11 +1309,9 @@ exports[`render correctly in 26 of 50 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1417,7 +1320,6 @@ exports[`render correctly in 26 of 50 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1445,11 +1347,9 @@ exports[`render correctly in 27 of 28 pages 1`] = `
   >
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1458,7 +1358,6 @@ exports[`render correctly in 27 of 28 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1475,11 +1374,9 @@ exports[`render correctly in 27 of 28 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1488,7 +1385,6 @@ exports[`render correctly in 27 of 28 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1517,11 +1413,9 @@ exports[`render correctly in 27 of 28 pages 1`] = `
     
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1530,7 +1424,6 @@ exports[`render correctly in 27 of 28 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1548,7 +1441,6 @@ exports[`render correctly in 27 of 28 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1560,7 +1452,6 @@ exports[`render correctly in 27 of 28 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1588,11 +1479,9 @@ exports[`render correctly in 51 of 51 pages 1`] = `
   >
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1601,7 +1490,6 @@ exports[`render correctly in 51 of 51 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1618,11 +1506,9 @@ exports[`render correctly in 51 of 51 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -1631,7 +1517,6 @@ exports[`render correctly in 51 of 51 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1661,7 +1546,6 @@ exports[`render correctly in 51 of 51 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1673,7 +1557,6 @@ exports[`render correctly in 51 of 51 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1691,7 +1574,6 @@ exports[`render correctly in 51 of 51 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1703,7 +1585,6 @@ exports[`render correctly in 51 of 51 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1732,7 +1613,6 @@ exports[`render correctly with 1 entry 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1744,7 +1624,6 @@ exports[`render correctly with 1 entry 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1762,7 +1641,6 @@ exports[`render correctly with 1 entry 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1774,7 +1652,6 @@ exports[`render correctly with 1 entry 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1804,7 +1681,6 @@ exports[`render correctly with 1 entry 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1816,7 +1692,6 @@ exports[`render correctly with 1 entry 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1834,7 +1709,6 @@ exports[`render correctly with 1 entry 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1846,7 +1720,6 @@ exports[`render correctly with 1 entry 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1875,7 +1748,6 @@ exports[`render correctly with 35 entry 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1887,7 +1759,6 @@ exports[`render correctly with 35 entry 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1905,7 +1776,6 @@ exports[`render correctly with 35 entry 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1917,7 +1787,6 @@ exports[`render correctly with 35 entry 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1947,7 +1816,6 @@ exports[`render correctly with 35 entry 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1959,7 +1827,6 @@ exports[`render correctly with 35 entry 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -1977,7 +1844,6 @@ exports[`render correctly with 35 entry 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -1989,7 +1855,6 @@ exports[`render correctly with 35 entry 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2018,7 +1883,6 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2030,7 +1894,6 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2048,7 +1911,6 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2060,7 +1922,6 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2090,7 +1951,6 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2102,7 +1962,6 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2120,7 +1979,6 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2132,7 +1990,6 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2161,7 +2018,6 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2173,7 +2029,6 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2191,7 +2046,6 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2203,7 +2057,6 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2232,11 +2085,9 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
     
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -2245,7 +2096,6 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2263,7 +2113,6 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2275,7 +2124,6 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2304,7 +2152,6 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2316,7 +2163,6 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2333,11 +2179,9 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -2346,7 +2190,6 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2376,7 +2219,6 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2388,7 +2230,6 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2406,7 +2247,6 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2418,7 +2258,6 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2447,7 +2286,6 @@ exports[`render trades correctly in 1 of 10 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2459,7 +2297,6 @@ exports[`render trades correctly in 1 of 10 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2477,7 +2314,6 @@ exports[`render trades correctly in 1 of 10 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2489,7 +2325,6 @@ exports[`render trades correctly in 1 of 10 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2521,11 +2356,9 @@ exports[`render trades correctly in 1 of 10 pages 1`] = `
      
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -2534,7 +2367,6 @@ exports[`render trades correctly in 1 of 10 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2551,11 +2383,9 @@ exports[`render trades correctly in 1 of 10 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -2564,7 +2394,6 @@ exports[`render trades correctly in 1 of 10 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2593,7 +2422,6 @@ exports[`render trades correctly in 10 of 10 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2605,7 +2433,6 @@ exports[`render trades correctly in 10 of 10 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2622,11 +2449,9 @@ exports[`render trades correctly in 10 of 10 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -2635,7 +2460,6 @@ exports[`render trades correctly in 10 of 10 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2665,7 +2489,6 @@ exports[`render trades correctly in 10 of 10 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2677,7 +2500,6 @@ exports[`render trades correctly in 10 of 10 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2695,7 +2517,6 @@ exports[`render trades correctly in 10 of 10 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2707,7 +2528,6 @@ exports[`render trades correctly in 10 of 10 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2735,11 +2555,9 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
   >
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -2748,7 +2566,6 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2765,11 +2582,9 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
     </button>
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -2778,7 +2593,6 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
       >
         <svg
           data-icon="chevron-left"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2807,11 +2621,9 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
     
     <button
       className="bp3-button bp3-minimal"
-      disabled={undefined}
       onClick={[Function]}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
-      tabIndex={undefined}
       type="button"
     >
       <span
@@ -2820,7 +2632,6 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
       >
         <svg
           data-icon="chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}
@@ -2838,7 +2649,6 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
     <button
       className="bp3-button bp3-disabled bp3-minimal"
       disabled={true}
-      onClick={undefined}
       onKeyDown={[Function]}
       onKeyUp={[Function]}
       tabIndex={-1}
@@ -2850,7 +2660,6 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
       >
         <svg
           data-icon="double-chevron-right"
-          fill={undefined}
           height={16}
           viewBox="0 0 16 16"
           width={16}

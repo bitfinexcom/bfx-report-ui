@@ -14,7 +14,7 @@ import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
-import { formatInternalPair, formatRawPairToTPair } from 'state/symbols/utils'
+import { formatInternalPair, formatRawSymbols } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -86,11 +86,11 @@ function* editSyncPref({ payload }) {
   const auth = yield select(selectAuth)
   const params = (pairs.length === 1)
     ? {
-      symbol: formatRawPairToTPair(pairs[0]),
+      symbol: formatRawSymbols(pairs[0]),
       start: startTime,
     }
     : pairs.map(symbol => ({
-      symbol: formatRawPairToTPair(symbol),
+      symbol: formatRawSymbols(symbol),
       start: startTime,
     }))
   const { error } = yield call(editPublicTradesConf, auth, params)

@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbolToFSymbol, getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
+import { formatRawSymbols, getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -23,7 +23,7 @@ const LIMIT = getQueryLimit(TYPE)
 function getReqFOffer(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, TYPE, smallestMts)
   if (targetSymbols.length > 0) {
-    params.symbol = formatRawSymbolToFSymbol(targetSymbols)
+    params.symbol = formatRawSymbols(targetSymbols)
   }
   return makeFetchCall('getFundingOfferHistory', auth, params)
 }
