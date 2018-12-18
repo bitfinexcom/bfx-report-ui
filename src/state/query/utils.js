@@ -117,7 +117,7 @@ const MAPPING = {
   [MENU_POSITIONS]: {
     icon: 'exchange',
     path: '/positions',
-    filterType: undefined,
+    filterType: FILTER_PAIR,
     queryLimit: 500,
     pageSize: 125,
   },
