@@ -5,10 +5,10 @@ const table = {
   QTUM: 'QTM',
   QASH: 'QSH',
   YOYO: 'YYW',
-  YOYOW: 'YYW'
+  YOYOW: 'YYW',
 }
 
-function toRegularPair (symbol) {
+function toRegularPair(symbol) {
   return table[symbol] || symbol.slice(0, 3)
 }
 
@@ -21,21 +21,21 @@ function toRegularPair (symbol) {
  * ex. BTC:IOTA -> tBTCIOT
  * ex. USD -> fUSD
  */
-export function addPrefix (symbol = '') {
-  symbol += ''
-  const first = symbol.charAt(0)
+export function addPrefix(symbol = '') {
+  const sym = `${symbol}`
+  const first = sym.charAt(0)
   // already okay
   if (first === 't' || first === 'f') {
-    return symbol
+    return sym
   }
   // pretty pair ex. BTC:IOTA
-  if (symbol.indexOf(':') > -1) {
-    symbol = symbol
+  const s = (sym.indexOf(':') > -1)
+    ? sym
       .split(':')
-      .map(s => toRegularPair(s))
+      .map(p => toRegularPair(p))
       .join()
-  }
-  const s = symbol.toUpperCase()
+      .toUpperCase()
+    : sym.toUpperCase()
 
   switch (s.length) {
     case 6:
@@ -79,9 +79,7 @@ const lastInPair = (pair, uppercase = true) => {
   return uppercase ? last.toUpperCase() : last.toLowerCase()
 }
 
-const getSplitPair = (pair, uppercase = true) => {
-  return [firstInPair(pair, uppercase), lastInPair(pair, uppercase)]
-}
+const getSplitPair = (pair, uppercase = true) => [firstInPair(pair, uppercase), lastInPair(pair, uppercase)]
 
 // tBTCUSD -> btcusd
 export function formatInternalPair(symbol) {

@@ -48,7 +48,7 @@ describe('pair convertion', () => {
   })
 
   it('getPairsFromUrlParam BTCUSD,ETHUSD -> [\'btcusd\', \'etcusd\']', () => {
-   expect(getPairsFromUrlParam('btcusd,ethusd')).toEqual(['btcusd', 'ethusd'])
+    expect(getPairsFromUrlParam('btcusd,ethusd')).toEqual(['btcusd', 'ethusd'])
     expect(getPairsFromUrlParam('BTCUSD,ethusd')).toEqual(['btcusd', 'ethusd'])
     expect(getPairsFromUrlParam('BTCUSD,ETHUSD')).toEqual(['btcusd', 'ethusd'])
   })
@@ -85,7 +85,7 @@ describe('symbol convertion', () => {
 describe('trading/funding symbols convertion', () => {
   it('formatRawSymbols btcusd -> tBTCUSD', () => {
     expect(formatRawSymbols('btcusd')).toEqual('tBTCUSD')
-   expect(formatRawSymbols('BTCUSD')).toEqual('tBTCUSD')
+    expect(formatRawSymbols('BTCUSD')).toEqual('tBTCUSD')
   })
 
   it('formatRawSymbols [\'btcusd\'] -> tBTCUSD', () => {
