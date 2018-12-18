@@ -1,14 +1,15 @@
 export default {
+  MENU_DEPOSITS: 'deposits',
   MENU_FCREDIT: 'fcredit',
   MENU_FLOAN: 'floan',
   MENU_FOFFER: 'foffer',
   MENU_LEDGERS: 'ledgers',
+  MENU_MOVEMENTS: 'movements',
   MENU_ORDERS: 'orders',
   MENU_TRADES: 'trades',
-  MENU_DEPOSITS: 'deposits',
-  MENU_MOVEMENTS: 'movements',
-  MENU_WITHDRAWALS: 'withdrawals',
+  MENU_POSITIONS: 'positions',
   MENU_PUBLIC_TRADES: 'publictrades',
+  MENU_WITHDRAWALS: 'withdrawals',
   TIME_TYPE_UTC: 'utc',
   TIME_TYPE_LOCALTIME: 'local',
   VALID_QUERY_RANGE: 7776000, // 3 month

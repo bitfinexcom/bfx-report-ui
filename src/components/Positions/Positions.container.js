@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/orders/actions'
+import actions from 'state/positions/actions'
 import { getTimezone } from 'state/base/selectors'
 import {
   getDataReceived,
@@ -12,9 +12,9 @@ import {
   getPageLoading,
   getPageOffset,
   getTargetPairs,
-} from 'state/orders/selectors'
+} from 'state/positions/selectors'
 
-import Orders from './Orders'
+import Positions from './Positions'
 
 const mapStateToProps = (state = {}) => ({
   offset: getOffset(state),
@@ -29,15 +29,15 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchOrders: pair => dispatch(actions.fetchOrders(pair)),
-  fetchNext: () => dispatch(actions.fetchNextOrders()),
-  fetchPrev: () => dispatch(actions.fetchPrevOrders()),
+  fetchPositions: pair => dispatch(actions.fetchPositions(pair)),
+  fetchNext: () => dispatch(actions.fetchNextPositions()),
+  fetchPrev: () => dispatch(actions.fetchPrevPositions()),
   jumpPage: page => dispatch(actions.jumpPage(page)),
   refresh: () => dispatch(actions.refresh()),
   addTargetPair: pair => dispatch(actions.addTargetPair(pair)),
   removeTargetPair: pair => dispatch(actions.removeTargetPair(pair)),
 })
 
-const OrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Orders))
+const PositionsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Positions))
 
-export default OrdersContainer
+export default PositionsContainer

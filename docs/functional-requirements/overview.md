@@ -21,7 +21,7 @@ The sidemenu list major contents and the current query time range. Allow user to
 
 ### Panel
 
-Current available panels are `Ledgers, Trades, Orders, Deposits, Withdrawals, Offers, Loans, Credits`.
+Current available panels are `Ledgers, Trades, Orders, Deposits, Withdrawals, Positions, Offers, Loans, Credits`.
 
 ### Auth Dialog
 

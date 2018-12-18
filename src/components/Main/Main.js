@@ -9,6 +9,7 @@ import FundingOfferHistory from 'components/FundingOfferHistory'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
+import Positions from 'components/Positions'
 import PublicTrades from 'components/PublicTrades'
 import Trades from 'components/Trades'
 import ExportDialog from 'components/ExportDialog'
@@ -30,6 +31,7 @@ const {
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
   MENU_PUBLIC_TRADES,
+  MENU_POSITIONS,
 } = queryType
 
 class Main extends PureComponent {
@@ -222,6 +224,15 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_PUBLIC_TRADES)}/:pair`}
               component={() => <PublicTrades handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_POSITIONS)}
+              component={() => <Positions handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_POSITIONS)}/:pair`}
+              component={() => <Positions handleClickExport={this.handleClickExport} />}
             />
           </Switch>
         </div>
