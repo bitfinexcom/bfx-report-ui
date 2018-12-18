@@ -4,10 +4,6 @@ import {
   Card,
   Elevation,
 } from '@blueprintjs/core'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'ui/TimeRange'
@@ -21,13 +17,12 @@ import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
-  formatTime,
   handleAddSymbolFilter,
   handleRemoveSymbolFilter,
   getCurrentEntries,
 } from 'state/utils'
-import { amountStyle } from 'ui/utils'
 
+import getColumns from './Ledgers.columns'
 import { propTypes, defaultProps } from './Ledgers.props'
 
 const COLUMN_WIDTHS = [500, 100, 120, 120, 150, 80]
@@ -86,71 +81,7 @@ class Ledgers extends PureComponent {
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-
-    const descriptionCellRenderer = (rowIndex) => {
-      const { description } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={description}>
-          {description}
-        </Cell>
-      )
-    }
-
-    const walletCellRenderer = (rowIndex) => {
-      const { wallet } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={wallet}>
-          {wallet}
-        </Cell>
-      )
-    }
-
-    const currencyCellRenderer = (rowIndex) => {
-      const { currency } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={currency}>
-          {currency}
-        </Cell>
-      )
-    }
-
-    const mtsCellRenderer = (rowIndex) => {
-      const mts = formatTime(filteredData[rowIndex].mts, timezone)
-      return (
-        <Cell tooltip={mts}>
-          <TruncatedFormat>
-            {mts}
-          </TruncatedFormat>
-        </Cell>
-      )
-    }
-
-    const amountCellRenderer = (rowIndex) => {
-      const { amount, currency } = filteredData[rowIndex]
-      const classes = amountStyle(amount)
-      const tooltip = `${amount} ${currency}`
-      return (
-        <Cell
-          className={classes}
-          tooltip={tooltip}
-        >
-          {amount}
-        </Cell>
-      )
-    }
-
-    const balanceCellRenderer = (rowIndex) => {
-      const { balance, currency } = filteredData[rowIndex]
-      const tooltip = `${balance} ${currency}`
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          {balance}
-        </Cell>
-      )
-    }
+    const tableColums = getColumns({ filteredData, timezone })
 
     const renderSymbolSelector = (
       <Fragment>
@@ -178,51 +109,6 @@ class Ledgers extends PureComponent {
         nextPage={nextPage}
       />
     )
-
-    const tableColums = [
-      {
-        id: 'description',
-        name: 'ledgers.column.description',
-        renderer: descriptionCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].description,
-      },
-      {
-        id: 'currency',
-        name: 'ledgers.column.currency',
-        renderer: currencyCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].currency,
-      },
-      {
-        id: 'amount',
-        name: 'ledgers.column.amount',
-        renderer: amountCellRenderer,
-        tooltip: (rowIndex) => {
-          const { amount, currency } = filteredData[rowIndex]
-          return `${amount} ${currency}`
-        },
-      },
-      {
-        id: 'balance',
-        name: 'ledgers.column.balance',
-        renderer: balanceCellRenderer,
-        tooltip: (rowIndex) => {
-          const { balance, currency } = filteredData[rowIndex]
-          return `${balance} ${currency}`
-        },
-      },
-      {
-        id: 'mts',
-        name: 'ledgers.column.time',
-        renderer: mtsCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mts, timezone),
-      },
-      {
-        id: 'wallet',
-        name: 'ledgers.column.wallet',
-        renderer: walletCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].wallet,
-      },
-    ]
 
     let showContent
     if (loading) {

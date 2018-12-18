@@ -4,14 +4,9 @@ import {
   Card,
   Elevation,
 } from '@blueprintjs/core'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
 
 import Pagination from 'components/Pagination'
 import TimeRange from 'ui/TimeRange'
-import Explorer from 'ui/Explorer'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
@@ -22,13 +17,12 @@ import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
-  formatTime,
   getCurrentEntries,
   handleAddSymbolFilter,
   handleRemoveSymbolFilter,
 } from 'state/utils'
-import { amountStyle } from 'ui/utils'
 
+import getColumns from './Movements.columns'
 import { propTypes, defaultProps } from './Movements.props'
 
 const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
@@ -95,113 +89,7 @@ class Movements extends PureComponent {
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
     const numRows = filteredData.length
-
-    const idCellRenderer = (rowIndex) => {
-      const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={id}>
-          {id}
-        </Cell>
-      )
-    }
-
-    const mtsUpdatedCellRenderer = (rowIndex) => {
-      const mtsUpdated = formatTime(filteredData[rowIndex].mtsUpdated, timezone)
-      return (
-        <Cell tooltip={mtsUpdated}>
-          <TruncatedFormat>
-            {mtsUpdated}
-          </TruncatedFormat>
-        </Cell>
-      )
-    }
-
-    const currencyCellRenderer = (rowIndex) => {
-      const { currency } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={currency}>
-          {currency}
-        </Cell>
-      )
-    }
-
-    const amountCellRenderer = (rowIndex) => {
-      const { amount, currency } = filteredData[rowIndex]
-      const tooltip = `${amount} ${currency}`
-      const classes = amountStyle(amount)
-      return (
-        <Cell
-          className={classes}
-          tooltip={tooltip}
-        >
-          {amount}
-        </Cell>
-      )
-    }
-
-    const statusCellRenderer = (rowIndex) => {
-      const { status } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={status}>
-          {status}
-        </Cell>
-      )
-    }
-
-    const destinationCellRenderer = (rowIndex) => {
-      const { currency, destinationAddress } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={destinationAddress}>
-          <Fragment>
-            {destinationAddress}
-            &nbsp;
-            <Explorer currency={currency} destinationAddress={destinationAddress} />
-          </Fragment>
-        </Cell>
-      )
-    }
-
-    const tableColums = [
-      {
-        id: 'id',
-        name: 'column.id',
-        renderer: idCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].id,
-      },
-      {
-        id: 'mtsupdated',
-        name: 'movements.column.updated',
-        renderer: mtsUpdatedCellRenderer,
-        tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdated, timezone),
-      },
-      {
-        id: 'currency',
-        name: 'movements.column.currency',
-        renderer: currencyCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].currency,
-      },
-      {
-        id: 'status',
-        name: 'movements.column.status',
-        renderer: statusCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].status,
-      },
-      {
-        id: 'amount',
-        name: 'movements.column.amount',
-        renderer: amountCellRenderer,
-        tooltip: (rowIndex) => {
-          const { amount, currency } = filteredData[rowIndex]
-          return `${amount} ${currency}`
-        },
-      },
-      {
-        id: 'destination',
-        name: 'movements.column.destination',
-        renderer: destinationCellRenderer,
-        tooltip: rowIndex => filteredData[rowIndex].destinationAddress,
-      },
-    ]
+    const tableColums = getColumns({ filteredData, intl, timezone })
 
     const renderSymbolSelector = (
       <Fragment>
