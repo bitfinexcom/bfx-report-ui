@@ -8,7 +8,7 @@ import queryString from 'query-string'
 import _omit from 'lodash/omit'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawPairToTPair, formatRawSymbolToFSymbol } from 'state/symbols/utils'
+import { formatRawSymbols } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
@@ -129,11 +129,10 @@ function formatSymbol(target, sign) {
     case MENU_TRADES:
     case MENU_POSITIONS:
     case MENU_PUBLIC_TRADES:
-      return formatRawPairToTPair(sign)
     case MENU_FCREDIT:
     case MENU_FLOAN:
     case MENU_FOFFER:
-      return formatRawSymbolToFSymbol(sign)
+      return formatRawSymbols(sign)
     default:
       return ''
   }
