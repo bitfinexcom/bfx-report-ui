@@ -215,6 +215,13 @@ class ToggleMenu extends PureComponent {
             onClick={this.handleClickPublicTrades}
             active={target === MENU_PUBLIC_TRADES}
           />
+          <MenuItem
+            icon={getIcon(MENU_TICKERS)}
+            text=''
+            title={intl.formatMessage({ id: 'tickers.title' })}
+            onClick={this.handleClickTickers}
+            active={target === MENU_TICKERS}
+          />
         </Menu>
       )
     } else {
