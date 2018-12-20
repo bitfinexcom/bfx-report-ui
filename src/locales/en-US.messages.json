@@ -110,6 +110,7 @@
   "positions.column.plperc": "P/L%",
   "positions.column.swap": "FUNDING COST",
   "positions.column.swap-type": "FUNDING TYPE",
+  "positions.column.status": "STATUS",
   "positions.column.update": "UPDATED",
   "positions.swap.daily": "Daily",
   "positions.swap.term": "Term",

@@ -161,6 +161,19 @@ export default function getColumns(props) {
       tooltip: rowIndex => showType(filteredData[rowIndex].marginFundingType),
     },
     {
+      id: 'status',
+      name: 'positions.column.status',
+      renderer: (rowIndex) => {
+        const { status } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={status}>
+            {status}
+          </Cell>
+        )
+      },
+      tooltip: rowIndex => filteredData[rowIndex].status,
+    },
+    {
       id: 'mtsUpdate',
       name: 'positions.column.update',
       renderer: (rowIndex) => {

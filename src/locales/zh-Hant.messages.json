@@ -115,6 +115,7 @@
   "positions.column.plperc": "損益%",
   "positions.column.swap": "互換成本",
   "positions.column.swap-type": "互換類型",
+  "positions.column.status": "狀態",
   "positions.column.update": "更新",
   "positions.swap.daily": "每日",
   "positions.swap.term": "條件",
