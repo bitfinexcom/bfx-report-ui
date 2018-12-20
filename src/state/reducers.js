@@ -13,6 +13,7 @@ import ordersReducer from './orders/reducer'
 import positionsReducer from './positions/reducer'
 import publicTradesReducer from './publicTrades/reducer'
 import queryReducer from './query/reducer'
+import tickersReducer from './tickers/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
 import symbolsReducer from './symbols/reducer'
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   positions: positionsReducer,
   publicTrades: publicTradesReducer,
   query: queryReducer,
+  tickers: tickersReducer,
   trades: tradesReducer,
   status: statusReducer,
   symbols: symbolsReducer,
