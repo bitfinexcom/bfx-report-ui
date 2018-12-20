@@ -14,6 +14,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      width: 85,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -27,6 +28,7 @@ export default function getColumns(props) {
     {
       id: 'order_id',
       name: 'trades.column.orderid',
+      width: 100,
       renderer: (rowIndex) => {
         const { orderID } = filteredData[rowIndex]
         return (
@@ -40,6 +42,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'trades.column.pair',
+      width: 80,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -53,6 +56,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'trades.column.amount',
+      width: 125,
       renderer: (rowIndex) => {
         const { execAmount } = filteredData[rowIndex]
         const classes = amountStyle(execAmount)
@@ -70,6 +74,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'trades.column.price',
+      width: 125,
       renderer: (rowIndex) => {
         const { execPrice } = filteredData[rowIndex]
         return (
@@ -86,6 +91,7 @@ export default function getColumns(props) {
     {
       id: 'fee',
       name: 'trades.column.fee',
+      width: 125,
       renderer: (rowIndex) => {
         const { fee, feeCurrency } = filteredData[rowIndex]
         const tooltip = `${fee} ${feeCurrency}`
@@ -112,6 +118,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       name: 'trades.column.time',
+      width: 150,
       renderer: (rowIndex) => {
         const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate, timezone)
         return (

@@ -14,6 +14,7 @@ export default function getColumns(props) {
     {
       id: 'description',
       name: 'ledgers.column.description',
+      width: 500,
       renderer: (rowIndex) => {
         const { description } = filteredData[rowIndex]
         return (
@@ -27,6 +28,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'ledgers.column.currency',
+      width: 100,
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
@@ -40,6 +42,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'ledgers.column.amount',
+      width: 120,
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         const classes = amountStyle(amount)
@@ -61,6 +64,7 @@ export default function getColumns(props) {
     {
       id: 'balance',
       name: 'ledgers.column.balance',
+      width: 120,
       renderer: (rowIndex) => {
         const { balance, currency } = filteredData[rowIndex]
         const tooltip = `${balance} ${currency}`
@@ -81,6 +85,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       name: 'ledgers.column.time',
+      width: 150,
       renderer: (rowIndex) => {
         const mts = formatTime(filteredData[rowIndex].mts, timezone)
         return (
@@ -96,6 +101,7 @@ export default function getColumns(props) {
     {
       id: 'wallet',
       name: 'ledgers.column.wallet',
+      width: 80,
       renderer: (rowIndex) => {
         const { wallet } = filteredData[rowIndex]
         return (

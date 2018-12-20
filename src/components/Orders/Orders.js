@@ -25,7 +25,6 @@ import {
 import getColumns from './Orders.columns'
 import { propTypes, defaultProps } from './Orders.props'
 
-const COLUMN_WIDTHS = [100, 80, 150, 100, 100, 100, 100, 150, 150, 200]
 const TYPE = queryConstants.MENU_ORDERS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
@@ -142,7 +141,6 @@ class Orders extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            columnWidths={COLUMN_WIDTHS}
             tableColums={tableColums}
           />
           {renderPagination}

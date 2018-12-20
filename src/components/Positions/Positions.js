@@ -25,7 +25,6 @@ import {
 import getColumns from './Positions.columns'
 import { propTypes, defaultProps } from './Positions.props'
 
-const COLUMN_WIDTHS = [100, 80, 100, 100, 100, 100, 100, 150, 120, 100, 150]
 const TYPE = queryConstants.MENU_POSITIONS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
@@ -142,7 +141,6 @@ class Positions extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            columnWidths={COLUMN_WIDTHS}
             tableColums={tableColums}
           />
           {renderPagination}

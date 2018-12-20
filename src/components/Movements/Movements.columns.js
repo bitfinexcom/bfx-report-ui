@@ -15,6 +15,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      width: 80,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -28,6 +29,7 @@ export default function getColumns(props) {
     {
       id: 'mtsupdated',
       name: 'movements.column.updated',
+      width: 150,
       renderer: (rowIndex) => {
         const mtsUpdated = formatTime(filteredData[rowIndex].mtsUpdated, timezone)
         return (
@@ -43,6 +45,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'movements.column.currency',
+      width: 100,
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
@@ -56,6 +59,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'movements.column.status',
+      width: 125,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -69,6 +73,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'movements.column.amount',
+      width: 120,
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         const tooltip = `${amount} ${currency}`
@@ -90,6 +95,7 @@ export default function getColumns(props) {
     {
       id: 'destination',
       name: 'movements.column.destination',
+      width: 400,
       renderer: (rowIndex) => {
         const { currency, destinationAddress } = filteredData[rowIndex]
         return (

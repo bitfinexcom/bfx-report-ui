@@ -25,7 +25,6 @@ import {
 import getColumns from './FundingLoanHistory.columns'
 import { propTypes, defaultProps } from './FundingLoanHistory.props'
 
-const COLUMN_WIDTHS = [80, 100, 80, 100, 150, 130, 80, 150, 150, 150]
 const TYPE = queryConstants.MENU_FLOAN
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
@@ -143,7 +142,6 @@ class FundingLoanHistory extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            columnWidths={COLUMN_WIDTHS}
             tableColums={tableColums}
           />
           {renderPagination}

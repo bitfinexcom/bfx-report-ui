@@ -15,6 +15,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      width: 85,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -28,6 +29,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       name: 'publictrades.column.time',
+      width: 150,
       renderer: (rowIndex) => {
         const mts = formatTime(filteredData[rowIndex].mts, timezone)
         return (
@@ -43,6 +45,7 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'publictrades.column.type',
+      width: 80,
       renderer: (rowIndex) => {
         const { type, amount } = filteredData[rowIndex]
         const classes = amountStyle(amount)
@@ -60,6 +63,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'publictrades.column.price',
+      width: 125,
       renderer: (rowIndex) => {
         const { price, amount } = filteredData[rowIndex]
         const classes = amountStyle(amount)
@@ -77,6 +81,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'publictrades.column.amount',
+      width: 125,
       renderer: (rowIndex) => {
         const amount = Math.abs(filteredData[rowIndex].amount)
         return (
@@ -93,6 +98,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'publictrades.column.pair',
+      width: 100,
       renderer: () => {
         const formatedCurrentPair = formatPair(targetPair)
         return (

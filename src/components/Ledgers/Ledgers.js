@@ -25,7 +25,6 @@ import {
 import getColumns from './Ledgers.columns'
 import { propTypes, defaultProps } from './Ledgers.props'
 
-const COLUMN_WIDTHS = [500, 100, 120, 120, 150, 80]
 const TYPE = queryConstants.MENU_LEDGERS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
@@ -143,7 +142,6 @@ class Ledgers extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            columnWidths={COLUMN_WIDTHS}
             tableColums={tableColums}
           />
           {renderPagination}

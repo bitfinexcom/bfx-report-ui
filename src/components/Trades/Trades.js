@@ -25,7 +25,6 @@ import {
 import getColumns from './Trades.columns'
 import { propTypes, defaultProps } from './Trades.props'
 
-const COLUMN_WIDTHS = [85, 100, 80, 125, 125, 125, 150]
 const TYPE = queryConstants.MENU_TRADES
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
@@ -142,7 +141,6 @@ class Trades extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            columnWidths={COLUMN_WIDTHS}
             tableColums={tableColums}
           />
           {renderPagination}

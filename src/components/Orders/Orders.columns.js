@@ -14,6 +14,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      width: 100,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -27,6 +28,7 @@ export default function getColumns(props) {
     {
       id: 'symbol',
       name: 'orders.column.pair',
+      width: 80,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -40,6 +42,7 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'orders.column.type',
+      width: 150,
       renderer: (rowIndex) => {
         const { type } = filteredData[rowIndex]
         return (
@@ -53,6 +56,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'orders.column.amount',
+      width: 100,
       renderer: (rowIndex) => {
         const { amountOrig } = filteredData[rowIndex]
         return (
@@ -69,6 +73,7 @@ export default function getColumns(props) {
     {
       id: 'amountExecuted',
       name: 'orders.column.amount-exe',
+      width: 100,
       renderer: (rowIndex) => {
         const { amountExecuted } = filteredData[rowIndex]
         const classes = amountStyle(amountExecuted)
@@ -86,6 +91,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'orders.column.price',
+      width: 100,
       renderer: (rowIndex) => {
         const { price } = filteredData[rowIndex]
         return (
@@ -102,6 +108,7 @@ export default function getColumns(props) {
     {
       id: 'priceAvg',
       name: 'orders.column.avgprice',
+      width: 100,
       renderer: (rowIndex) => {
         const { priceAvg } = filteredData[rowIndex]
         return (
@@ -118,6 +125,7 @@ export default function getColumns(props) {
     {
       id: 'mtsCreate',
       name: 'orders.column.create',
+      width: 150,
       renderer: (rowIndex) => {
         const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate, timezone)
         return (
@@ -133,6 +141,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       name: 'orders.column.update',
+      width: 150,
       renderer: (rowIndex) => {
         const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
         return (
@@ -148,6 +157,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'orders.column.status',
+      width: 200,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
