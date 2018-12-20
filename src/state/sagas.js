@@ -13,6 +13,7 @@ import ordersSaga from './orders/saga'
 import positionsSaga from './positions/saga'
 import publicTradesSaga from './publicTrades/saga'
 import querySaga from './query/saga'
+import tickersSaga from './tickers/saga'
 import tradesSaga from './trades/saga'
 import symbolsSaga from './symbols/saga'
 import syncSaga from './sync/saga'
@@ -31,6 +32,7 @@ export default function* rootSaga() {
   yield fork(publicTradesSaga)
   yield fork(querySaga)
   yield fork(symbolsSaga)
+  yield fork(tickersSaga)
   yield fork(tradesSaga)
   yield fork(uiSaga)
   if (platform.showSyncMode) {

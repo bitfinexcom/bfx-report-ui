@@ -17,6 +17,7 @@ import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/
 import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
+import { getTargetPairs as getTickersPairs } from 'state/tickers/selectors'
 import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
 import { getTimezone, getDateFormat, getShowMilliseconds } from 'state/base/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
@@ -32,6 +33,7 @@ const {
   MENU_FOFFER,
   MENU_LEDGERS,
   MENU_ORDERS,
+  MENU_TICKERS,
   MENU_TRADES,
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
@@ -63,6 +65,9 @@ function getCSV(auth, query, target, options) {
       break
     case MENU_ORDERS:
       method = 'getOrdersCsv'
+      break
+    case MENU_TICKERS:
+      method = 'getTickersHistoryCsv'
       break
     case MENU_TRADES:
       method = 'getTradesCsv'
@@ -104,6 +109,8 @@ function getSelector(target) {
     case MENU_WITHDRAWALS:
     case MENU_DEPOSITS:
       return getMovementsSymbols
+    case MENU_TICKERS:
+      return getTickersPairs
     case MENU_TRADES:
       return getTradesPairs
     case MENU_POSITIONS:
@@ -126,6 +133,7 @@ function formatSymbol(target, sign) {
     case MENU_DEPOSITS:
       return sign
     case MENU_ORDERS:
+    case MENU_TICKERS:
     case MENU_TRADES:
     case MENU_POSITIONS:
     case MENU_PUBLIC_TRADES:

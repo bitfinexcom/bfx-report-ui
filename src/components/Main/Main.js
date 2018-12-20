@@ -11,6 +11,7 @@ import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import Positions from 'components/Positions'
 import PublicTrades from 'components/PublicTrades'
+import Tickers from 'components/Tickers'
 import Trades from 'components/Trades'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
@@ -32,6 +33,7 @@ const {
   MENU_WITHDRAWALS,
   MENU_PUBLIC_TRADES,
   MENU_POSITIONS,
+  MENU_TICKERS,
 } = queryType
 
 class Main extends PureComponent {
@@ -224,6 +226,15 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_PUBLIC_TRADES)}/:pair`}
               component={() => <PublicTrades handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_TICKERS)}
+              component={() => <Tickers handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_TICKERS)}/:pair`}
+              component={() => <Tickers handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact

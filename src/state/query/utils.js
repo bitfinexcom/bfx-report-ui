@@ -12,6 +12,7 @@ const {
   MENU_ORDERS,
   MENU_POSITIONS,
   MENU_PUBLIC_TRADES,
+  MENU_TICKERS,
   MENU_TRADES,
   MENU_WITHDRAWALS,
 } = queryType
@@ -25,6 +26,7 @@ export const TYPE_WHITELIST = [
   MENU_ORDERS,
   MENU_POSITIONS,
   MENU_PUBLIC_TRADES,
+  MENU_TICKERS,
   MENU_TRADES,
 ]
 
@@ -37,6 +39,7 @@ export const ROUTE_WHITELIST = [
   MENU_ORDERS,
   MENU_POSITIONS,
   MENU_PUBLIC_TRADES,
+  MENU_TICKERS,
   MENU_TRADES,
   MENU_WITHDRAWALS,
 ]
@@ -85,6 +88,13 @@ const MAPPING = {
     filterType: FILTER_PAIR,
     queryLimit: 5000,
     pageSize: 200,
+  },
+  [MENU_TICKERS]: {
+    icon: 'property',
+    path: '/tickers',
+    filterType: FILTER_PAIR,
+    queryLimit: 2500,
+    pageSize: 125,
   },
   [MENU_TRADES]: {
     icon: 'exchange',

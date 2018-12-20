@@ -20,6 +20,7 @@ const {
   MENU_FOFFER,
   MENU_LEDGERS,
   MENU_ORDERS,
+  MENU_TICKERS,
   MENU_TRADES,
   MENU_POSITIONS,
   MENU_PUBLIC_TRADES,
@@ -39,6 +40,7 @@ class ToggleMenu extends PureComponent {
     this.handleClickWithdrawals = this.handleClick.bind(this, MENU_WITHDRAWALS)
     this.handleClickPublicTrades = this.handleClick.bind(this, MENU_PUBLIC_TRADES)
     this.handleClickPositions = this.handleClick.bind(this, MENU_POSITIONS)
+    this.handleClickTickers = this.handleClick.bind(this, MENU_TICKERS)
   }
 
   handleClick(target) {
@@ -122,6 +124,12 @@ class ToggleMenu extends PureComponent {
           text={intl.formatMessage({ id: 'publictrades.title' })}
           onClick={this.handleClickPublicTrades}
           active={target === MENU_PUBLIC_TRADES}
+        />
+        <MenuItem
+          icon={getIcon(MENU_TICKERS)}
+          text={intl.formatMessage({ id: 'tickers.title' })}
+          onClick={this.handleClickTickers}
+          active={target === MENU_TICKERS}
         />
       </Fragment>
     )
