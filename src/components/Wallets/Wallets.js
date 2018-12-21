@@ -40,7 +40,7 @@ class Wallets extends PureComponent {
     const { loading, fetchWallets } = this.props
     const { timestamp } = this.state
     if (loading) {
-      fetchWallets(timestamp)
+      fetchWallets(timestamp.getTime())
     }
   }
 
@@ -115,7 +115,7 @@ class Wallets extends PureComponent {
             &nbsp;
             {renderTimeSelection}
             &nbsp;
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton handleClickExport={handleClickExport} timestamp={timestamp}/>
             &nbsp;
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
@@ -134,7 +134,7 @@ class Wallets extends PureComponent {
             tableColums={marginColums}
           />
           <h4>
-          {intl.formatMessage({ id: 'wallets.title.Funding' })}
+          {intl.formatMessage({ id: 'wallets.title.funding' })}
           </h4>
           <DataTable
             numRows={fundingRows}
