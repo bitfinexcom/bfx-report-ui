@@ -11,6 +11,13 @@ export function fetchWallets(timestamp) {
   }
 }
 
+export function setTimestamp(timestamp) {
+  return {
+    type: types.SET_TIMESTAMP,
+    payload: timestamp
+  }
+}
+
 /**
  * Create an action to note fetch fail.
  * @param {number} payload fail message
@@ -46,5 +53,6 @@ export default {
   fetchFail,
   fetchWallets,
   refresh,
+  setTimestamp,
   updateWallets,
 }

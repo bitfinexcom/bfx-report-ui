@@ -21,6 +21,9 @@ function getReqWallets(auth, end) {
 
 function* fetchWallets({ payload: end }) {
   try {
+    // save current query time in state for csv export reference
+    yield put(actions.setTimestamp(end))
+
     const auth = yield select(selectAuth)
     const { result = [], error } = yield call(getReqWallets, auth, end)
     yield put(actions.updateWallets(result))

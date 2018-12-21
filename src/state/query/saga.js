@@ -22,6 +22,7 @@ import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
 import { getTimezone, getDateFormat, getShowMilliseconds } from 'state/base/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
+import { getTimestamp } from 'state/wallets/selectors'
 
 import { getEmail, getQuery, getTimeFrame } from './selectors'
 import actions from './actions'
@@ -36,9 +37,10 @@ const {
   MENU_TICKERS,
   MENU_TRADES,
   MENU_DEPOSITS,
-  MENU_WITHDRAWALS,
   MENU_POSITIONS,
   MENU_PUBLIC_TRADES,
+  MENU_WALLETS,
+  MENU_WITHDRAWALS,
 } = types
 
 function getCSV(auth, query, target, options) {
@@ -48,6 +50,9 @@ function getCSV(auth, query, target, options) {
   }
   if (options.symbol) {
     params.symbol = options.symbol
+  }
+  if (options.end) { // for wallets
+    params.end = options.end
   }
   params.timezone = options.timezone
   params.dateFormat = options.dateFormat
@@ -86,6 +91,9 @@ function getCSV(auth, query, target, options) {
     case MENU_PUBLIC_TRADES:
       method = 'getPublicTradesCsv'
       break
+    case MENU_WALLETS:
+      method = 'getWalletsCsv'
+      break
     case MENU_LEDGERS:
     default:
       method = 'getLedgersCsv'
@@ -117,6 +125,8 @@ function getSelector(target) {
       return getPositionsPairs
     case MENU_PUBLIC_TRADES:
       return getPublicTradesPair
+    case MENU_WALLETS:
+      return getTimestamp
     default:
       return ''
   }
@@ -156,11 +166,17 @@ function* exportCSV({ payload: target }) {
     options.milliseconds = yield select(getShowMilliseconds)
     const selector = getSelector(target)
     const sign = selector ? yield select(selector) : ''
-    // pass symbol when exist
-    const symbol = formatSymbol(target, sign)
-    if ((Array.isArray(symbol) && symbol > 0)
-      || (typeof symbol === 'string' && symbol !== '')) {
-      options.symbol = symbol
+    if (target === MENU_WALLETS) {
+      if (sign) {
+      options.end = sign
+      }
+    } else {
+      // pass symbol when exist
+      const symbol = formatSymbol(target, sign)
+      if ((Array.isArray(symbol) && symbol > 0)
+        || (typeof symbol === 'string' && symbol !== '')) {
+        options.symbol = symbol
+      }
     }
 
     const { result, error } = yield call(getCSV, auth, query, target, options)

@@ -6,6 +6,7 @@ import types from './constants'
 const initialState = {
   dataReceived: false,
   entries: [],
+  timestamp: undefined,
 }
 
 export function walletsReducer(state = initialState, action) {
@@ -40,6 +41,11 @@ export function walletsReducer(state = initialState, action) {
         entries: entries,
       }
     }
+    case types.SET_TIMESTAMP:
+      return {
+        ...state,
+        timestamp: payload,
+      }
     case types.FETCH_FAIL:
       return state
     case types.REFRESH:
