@@ -74,7 +74,7 @@ class Wallets extends PureComponent {
     const exchangeColums = getColumns({ filteredData: exchangeData })
     const marginColums = getColumns({ filteredData: marginData })
     const fundingColums = getColumns({ filteredData: fundingData })
-    const numRows = exchangeData.length
+    const exchangeRows = exchangeData.length
     const marginRows = marginData.length
     const fundingRows = fundingData.length
 
@@ -94,7 +94,7 @@ class Wallets extends PureComponent {
       showContent = (
         <Loading title='wallets.title' />
       )
-    } else if (numRows === 0) {
+    } else if (exchangeRows === 0 && marginRows === 0 && fundingRows === 0) {
       showContent = (
         <Fragment>
           <h4>
@@ -123,7 +123,7 @@ class Wallets extends PureComponent {
             {intl.formatMessage({ id: 'wallets.title.exchange' })}
           </h4>
           <DataTable
-            numRows={numRows}
+            numRows={exchangeRows}
             tableColums={exchangeColums}
           />
           <h4>
