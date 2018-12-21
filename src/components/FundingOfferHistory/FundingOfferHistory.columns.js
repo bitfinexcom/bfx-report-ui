@@ -14,6 +14,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      width: 80,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -27,6 +28,7 @@ export default function getColumns(props) {
     {
       id: 'symbol',
       name: 'foffer.column.symbol',
+      width: 100,
       renderer: (rowIndex) => {
         const { symbol } = filteredData[rowIndex]
         return (
@@ -40,6 +42,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'foffer.column.amount',
+      width: 100,
       renderer: (rowIndex) => {
         const { amountOrig } = filteredData[rowIndex]
         return (
@@ -56,6 +59,7 @@ export default function getColumns(props) {
     {
       id: 'amountExecuted',
       name: 'foffer.column.amount-exe',
+      width: 150,
       renderer: (rowIndex) => {
         const { amountExecuted } = filteredData[rowIndex]
         const classes = amountStyle(amountExecuted)
@@ -73,6 +77,7 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'foffer.column.type',
+      width: 100,
       renderer: (rowIndex) => {
         const { type } = filteredData[rowIndex]
         return (
@@ -86,6 +91,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'foffer.column.status',
+      width: 200,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -99,6 +105,7 @@ export default function getColumns(props) {
     {
       id: 'rate',
       name: 'foffer.column.rate',
+      width: 150,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
         return (
@@ -115,6 +122,7 @@ export default function getColumns(props) {
     {
       id: 'period',
       name: 'foffer.column.period',
+      width: 80,
       renderer: (rowIndex) => {
         const period = `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'foffer.column.period.days' })}`
         return (
@@ -134,6 +142,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       name: 'foffer.column.updated',
+      width: 150,
       renderer: (rowIndex) => {
         const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
         return (

@@ -26,7 +26,6 @@ import getColumns from './Movements.columns'
 import { propTypes, defaultProps } from './Movements.props'
 
 const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
-const COLUMN_WIDTHS = [80, 150, 100, 125, 120, 400]
 // we treat withdrawals and deposits in the same way
 const LIMIT = getQueryLimit(queryConstants.MENU_MOVEMENTS)
 const PAGE_SIZE = getPageSize(queryConstants.MENU_MOVEMENTS)
@@ -152,7 +151,6 @@ class Movements extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            columnWidths={COLUMN_WIDTHS}
             tableColums={tableColums}
           />
           {renderPagination}

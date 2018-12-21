@@ -11,9 +11,10 @@ class DataTable extends PureComponent {
     const {
       intl,
       numRows,
-      columnWidths,
       tableColums,
     } = this.props
+    const columnWidths = tableColums.map(column => column.width)
+
     return (
       <Table
         className='bitfinex-table'
@@ -41,12 +42,12 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
   name: PropTypes.string.isRequired,
   renderer: PropTypes.func.isRequired,
   tooltip: PropTypes.func.isRequired,
+  width: PropTypes.number.isRequired,
 })
 
 DataTable.propTypes = {
   intl: intlShape.isRequired,
   numRows: PropTypes.number.isRequired,
-  columnWidths: PropTypes.arrayOf(PropTypes.number).isRequired,
   tableColums: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
 }
 

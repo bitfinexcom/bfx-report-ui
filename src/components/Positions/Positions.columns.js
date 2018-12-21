@@ -25,6 +25,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      width: 100,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -38,6 +39,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'positions.column.pair',
+      width: 80,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -51,6 +53,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'positions.column.amount',
+      width: 100,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         const classes = amountStyle(amount)
@@ -68,6 +71,7 @@ export default function getColumns(props) {
     {
       id: 'basesPrice',
       name: 'positions.column.base-price',
+      width: 100,
       renderer: (rowIndex) => {
         const price = filteredData[rowIndex].basePrice
         return (
@@ -84,6 +88,7 @@ export default function getColumns(props) {
     {
       id: 'priceLiq',
       name: 'positions.column.liq-price',
+      width: 100,
       renderer: (rowIndex) => {
         const price = filteredData[rowIndex].liquidationPrice
         return (
@@ -100,6 +105,7 @@ export default function getColumns(props) {
     {
       id: 'pl',
       name: 'positions.column.pl',
+      width: 100,
       renderer: (rowIndex) => {
         const { pl } = filteredData[rowIndex]
         const classes = amountStyle(pl)
@@ -117,6 +123,7 @@ export default function getColumns(props) {
     {
       id: 'plperc',
       name: 'positions.column.plperc',
+      width: 100,
       renderer: (rowIndex) => {
         const { plPerc } = filteredData[rowIndex]
         const classes = amountStyle(plPerc)
@@ -134,6 +141,7 @@ export default function getColumns(props) {
     {
       id: 'swap',
       name: 'positions.column.swap',
+      width: 150,
       renderer: (rowIndex) => {
         const swap = filteredData[rowIndex].marginFunding
         return (
@@ -150,6 +158,7 @@ export default function getColumns(props) {
     {
       id: 'swapType',
       name: 'positions.column.swap-type',
+      width: 150,
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex].marginFundingType)
         return (
@@ -176,6 +185,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       name: 'positions.column.update',
+      width: 150,
       renderer: (rowIndex) => {
         const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
         return (

@@ -25,7 +25,6 @@ import {
 import getColumns from './Tickers.columns'
 import { propTypes, defaultProps } from './Tickers.props'
 
-const COLUMN_WIDTHS = [80, 100, 100, 200]
 const TYPE = queryConstants.MENU_TICKERS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
@@ -142,7 +141,6 @@ class Tickers extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            columnWidths={COLUMN_WIDTHS}
             tableColums={tableColums}
           />
           {renderPagination}
