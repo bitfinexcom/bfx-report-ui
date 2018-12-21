@@ -115,7 +115,7 @@ class Wallets extends PureComponent {
             &nbsp;
             {renderTimeSelection}
             &nbsp;
-            <ExportButton handleClickExport={handleClickExport} timestamp={timestamp}/>
+            <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
             &nbsp;
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
@@ -127,14 +127,14 @@ class Wallets extends PureComponent {
             tableColums={exchangeColums}
           />
           <h4>
-          {intl.formatMessage({ id: 'wallets.title.margin' })}
+            {intl.formatMessage({ id: 'wallets.title.margin' })}
           </h4>
           <DataTable
             numRows={marginRows}
             tableColums={marginColums}
           />
           <h4>
-          {intl.formatMessage({ id: 'wallets.title.funding' })}
+            {intl.formatMessage({ id: 'wallets.title.funding' })}
           </h4>
           <DataTable
             numRows={fundingRows}

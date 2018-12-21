@@ -38,7 +38,7 @@ export function walletsReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
-        entries: entries,
+        entries,
       }
     }
     case types.SET_TIMESTAMP:

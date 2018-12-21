@@ -168,7 +168,7 @@ function* exportCSV({ payload: target }) {
     const sign = selector ? yield select(selector) : ''
     if (target === MENU_WALLETS) {
       if (sign) {
-      options.end = sign
+        options.end = sign
       }
     } else {
       // pass symbol when exist

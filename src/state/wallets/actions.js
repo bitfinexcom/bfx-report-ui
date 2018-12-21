@@ -14,7 +14,7 @@ export function fetchWallets(timestamp) {
 export function setTimestamp(timestamp) {
   return {
     type: types.SET_TIMESTAMP,
-    payload: timestamp
+    payload: timestamp,
   }
 }
 
