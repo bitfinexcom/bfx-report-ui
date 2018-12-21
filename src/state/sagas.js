@@ -18,6 +18,7 @@ import tradesSaga from './trades/saga'
 import symbolsSaga from './symbols/saga'
 import syncSaga from './sync/saga'
 import uiSaga from './ui/saga'
+import walletsSaga from './wallets/saga'
 
 export default function* rootSaga() {
   yield fork(authSaga)
@@ -35,6 +36,7 @@ export default function* rootSaga() {
   yield fork(tickersSaga)
   yield fork(tradesSaga)
   yield fork(uiSaga)
+  yield fork(walletsSaga)
   if (platform.showSyncMode) {
     yield fork(syncSaga)
   }

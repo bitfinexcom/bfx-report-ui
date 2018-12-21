@@ -19,6 +19,7 @@ import statusReducer from './status/reducer'
 import symbolsReducer from './symbols/reducer'
 import syncReducer from './sync/reducer'
 import uiReducer from './ui/reducer'
+import walletsReducer from './wallets/reducer'
 
 const PERSIST_WHITELIST = ['base']
 const PERSIST_DEBUG = false
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
   symbols: symbolsReducer,
   sync: syncReducer,
   ui: uiReducer,
+  wallets: walletsReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

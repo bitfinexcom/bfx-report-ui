@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import { getTimezone } from 'state/base/selectors'
 import {
@@ -7,6 +8,7 @@ import {
   getQuery,
   getTimeFrame,
 } from 'state/query/selectors'
+import { getTimestamp } from 'state/wallets/selectors'
 
 import ExportDialog from './ExportDialog'
 
@@ -15,8 +17,9 @@ const mapStateToProps = (state = {}) => ({
   email: getExportEmail(state),
   loading: getPrepareExport(state),
   timezone: getTimezone(state),
+  timestamp: getTimestamp(state),
 })
 
-const ExportDialogContainer = connect(mapStateToProps)(ExportDialog)
+const ExportDialogContainer = withRouter(connect(mapStateToProps)(ExportDialog))
 
 export default ExportDialogContainer

@@ -27,4 +27,4 @@ Navigate to `/trades` will open this view.
 1. The pagination bar is shown at the top and the bottom of the table.
     1. The query limit is 1500 entries at once.
     1. The table shows 150 entries per page.
-    1. should work similar to ledgers
+    1. should work similar to orders

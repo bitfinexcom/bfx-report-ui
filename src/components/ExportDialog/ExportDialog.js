@@ -7,11 +7,13 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import { formatDate } from 'state/utils'
+import DateFormatSelector from 'components/DateFormatSelector'
 import Loading from 'ui/Loading'
 import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
-import DateFormatSelector from 'components/DateFormatSelector'
+import { formatDate, formatTime } from 'state/utils'
+import { getTarget } from 'state/query/utils'
+import queryConstants from 'state/query/constants'
 
 import { propTypes, defaultProps } from './ExportDialog.props'
 
@@ -27,11 +29,15 @@ class ExportDialog extends PureComponent {
       start,
       startExport,
       type,
+      timestamp,
       timezone,
+      location,
     } = this.props
     if (!isExportOpen) {
       return null
     }
+    const isWallets = location && location.pathname && getTarget(location.pathname) === queryConstants.MENU_WALLETS
+    const datetime = timestamp && formatTime(timestamp, timezone, true)
     const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
     const intlType = intl.formatMessage({ id: `${type}.title` })
     const renderMessage = !email ? (
@@ -39,7 +45,7 @@ class ExportDialog extends PureComponent {
         {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
-          {timeSpan}
+          {isWallets ? datetime : timeSpan}
         </span>
         &nbsp;
         {intl.formatMessage({ id: 'timeframe.download.store' }, { intlType })}
@@ -49,7 +55,7 @@ class ExportDialog extends PureComponent {
         {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
-          {timeSpan}
+          {isWallets ? datetime : timeSpan}
         </span>
         &nbsp;
         {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}
