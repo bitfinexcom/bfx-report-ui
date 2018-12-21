@@ -10,6 +10,7 @@ export default {
   MENU_TRADES: 'trades',
   MENU_POSITIONS: 'positions',
   MENU_PUBLIC_TRADES: 'publictrades',
+  MENU_WALLETS: 'wallets',
   MENU_WITHDRAWALS: 'withdrawals',
   TIME_TYPE_UTC: 'utc',
   TIME_TYPE_LOCALTIME: 'local',
@@ -33,4 +34,7 @@ export default {
   SET_EXPORT_EMAIL: 'BITFINEX/EMAIL/EXPORT',
   FILTER_PAIR: 'pair',
   FILTER_SYMBOL: 'symbol',
+  WALLET_EXCHANGE: 'exchange',
+  WALLET_MARGIN: 'margin',
+  WALLET_FUNDING: 'funding',
 }

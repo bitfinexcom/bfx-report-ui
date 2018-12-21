@@ -14,6 +14,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_TRADES,
+  MENU_WALLETS,
   MENU_WITHDRAWALS,
 } = queryType
 
@@ -28,6 +29,7 @@ export const TYPE_WHITELIST = [
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_TRADES,
+  MENU_WALLETS,
 ]
 
 export const ROUTE_WHITELIST = [
@@ -41,6 +43,7 @@ export const ROUTE_WHITELIST = [
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_TRADES,
+  MENU_WALLETS,
   MENU_WITHDRAWALS,
 ]
 
@@ -135,6 +138,10 @@ const MAPPING = {
     filterType: FILTER_SYMBOL,
     queryLimit: 25,
     pageSize: 25,
+  },
+  [MENU_WALLETS]: {
+    icon: 'dollar',
+    path: '/wallets',
   },
 }
 

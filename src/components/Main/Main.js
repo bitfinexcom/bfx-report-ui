@@ -13,6 +13,7 @@ import Positions from 'components/Positions'
 import PublicTrades from 'components/PublicTrades'
 import Tickers from 'components/Tickers'
 import Trades from 'components/Trades'
+import Wallets from 'components/Wallets'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
@@ -34,6 +35,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_POSITIONS,
   MENU_TICKERS,
+  MENU_WALLETS,
 } = queryType
 
 class Main extends PureComponent {
@@ -244,6 +246,11 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_POSITIONS)}/:pair`}
               component={() => <Positions handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_WALLETS)}
+              component={() => <Wallets handleClickExport={this.handleClickExport} />}
             />
           </Switch>
         </div>

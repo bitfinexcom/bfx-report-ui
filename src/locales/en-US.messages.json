@@ -176,5 +176,14 @@
   "sync.start": "Start Syncing",
   "sync.stop-sync": "Stop Syncing",
   "sync.go-offline": "Switching to offline query mode (query from db)",
-  "sync.logout": "Sync Stopped"
+  "sync.logout": "Sync Stopped",
+  "wallets.title": "Wallets",
+  "wallets.title.exchange": "Exchange",
+  "wallets.title.margin": "Margin",
+  "wallets.title.funding": "Funding",
+  "wallets.nodata": "No related data in this date time. You can try another date time.",
+  "wallets.column.currency": "CURRENCY",
+  "wallets.column.balance": "BALANCE",
+  "wallets.column.unsettled-interest": "UNSETTLED INTEREST",
+  "wallets.column.balance-available": "BALANCE AVAILABLE"
 }
