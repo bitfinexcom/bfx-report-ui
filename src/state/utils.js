@@ -40,11 +40,12 @@ export function checkEmail(auth) {
   })
 }
 
-export function formatTime(mts, timezone) {
+export function formatTime(mts, timezone, full) {
+  const format = full ? 'YYYY-MM-DD HH:mm:ss' : 'YY-MM-DD HH:mm:ss'
   if (timezone) {
-    return moment(mts, 'x').tz(timezone).format('YY-MM-DD HH:mm:ss')
+    return moment(mts, 'x').tz(timezone).format(format)
   }
-  return moment(mts, 'x').format('YY-MM-DD HH:mm:ss')
+  return moment(mts, 'x').format(format)
 }
 
 export function formatDate(mts, timezone) {
