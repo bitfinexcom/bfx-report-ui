@@ -101,6 +101,8 @@
   "orders.column.create": "CREATED",
   "orders.column.update": "UPDATED",
   "orders.column.status": "STATUS",
+  "paudit.title": "Positions Audit",
+  "paudit.input.ids": "positions ID",
   "positions.title": "Positions",
   "positions.column.pair": "PAIR",
   "positions.column.amount": "AMOUNT",

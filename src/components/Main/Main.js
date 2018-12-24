@@ -10,6 +10,7 @@ import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import Positions from 'components/Positions'
+import PositionsAudit from 'components/PositionsAudit'
 import PublicTrades from 'components/PublicTrades'
 import Tickers from 'components/Tickers'
 import Trades from 'components/Trades'
@@ -32,8 +33,9 @@ const {
   MENU_TRADES,
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
-  MENU_PUBLIC_TRADES,
   MENU_POSITIONS,
+  MENU_POSITIONS_AUDIT,
+  MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_WALLETS,
 } = queryType
@@ -237,6 +239,15 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_TICKERS)}/:pair`}
               component={() => <Tickers handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_POSITIONS_AUDIT)}
+              component={() => <PositionsAudit handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}
+              component={() => <PositionsAudit handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact

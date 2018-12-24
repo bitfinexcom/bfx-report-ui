@@ -10,6 +10,7 @@ import fundingOfferHistoryReducer from './fundingOfferHistory/reducer'
 import ledgersReducer from './ledgers/reducer'
 import movementsReducer from './movements/reducer'
 import ordersReducer from './orders/reducer'
+import positionsAuditReducer from './audit/reducer'
 import positionsReducer from './positions/reducer'
 import publicTradesReducer from './publicTrades/reducer'
 import queryReducer from './query/reducer'
@@ -31,6 +32,7 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
+  audit: positionsAuditReducer,
   auth: authReducer,
   base: baseReducer,
   fcredit: fundingCreditHistoryReducer,

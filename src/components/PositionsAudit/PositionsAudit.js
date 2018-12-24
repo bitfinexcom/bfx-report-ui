@@ -11,43 +11,29 @@ import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import {
-  getQueryLimit,
-  getPath,
-  getPageSize,
-} from 'state/query/utils'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  getNoAuthTokenUrlString,
-  handleAddPairFilter,
-  handleRemovePairFilter,
 } from 'state/utils'
 
-import getColumns from './Positions.columns'
-import { propTypes, defaultProps } from './Positions.props'
+import getColumns from 'components/Positions/Positions.columns'
+import { propTypes, defaultProps } from './PositionsAudit.props'
 
-const TYPE = queryConstants.MENU_POSITIONS
+const TYPE = queryConstants.MENU_POSITIONS_AUDIT
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-class Positions extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-    this.jumpToPositionsAudit = this.jumpToPositionsAudit.bind(this)
-  }
-
+class PositionsAudit extends PureComponent {
   componentDidMount() {
-    const { loading, fetchPositions, match } = this.props
+    const { loading, fetchPaudit, match } = this.props
     if (loading) {
-      const pair = (match.params && match.params.pair) || ''
-      fetchPositions(pair)
+      const id = (match.params && match.params.id)
+      if (id) {
+        fetchPaudit(id)
+      }
     }
   }
 
@@ -55,29 +41,10 @@ class Positions extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(pair) {
-    if (!this.handlers[pair]) {
-      this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
-    }
-    return this.handlers[pair]
-  }
-
-  handleTagRemove(tag) {
-    handleRemovePairFilter(TYPE, tag, this.props)
-  }
-
-  jumpToPositionsAudit(e) {
-    e.preventDefault()
-    const { history } = this.props
-    const id = e.target.getAttribute('value')
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/`
-      + `${id}/${getNoAuthTokenUrlString(history.location.search)}`)
-  }
-
   render() {
     const {
-      existingPairs,
       fetchNext,
+      fetchPaudit,
       fetchPrev,
       offset,
       pageOffset,
@@ -88,19 +55,21 @@ class Positions extends PureComponent {
       jumpPage,
       loading,
       refresh,
-      targetPairs,
+      targetIds,
       timezone,
       nextPage,
+      match,
     } = this.props
+    // workaround for withRouter doesn't trigger update when param is changed
+    // could fix by using context API instead of withRouter
+    // https://github.com/ReactTraining/react-router/pull/6159
+    const urlIds = match.params && match.params.id
+    if (urlIds && urlIds !== targetIds.join(',')) {
+      fetchPaudit(urlIds)
+    }
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-    const tableColums = getColumns({
-      target: TYPE,
-      filteredData,
-      intl,
-      onIdClick: this.jumpToPositionsAudit,
-      timezone,
-    })
+    const tableColums = getColumns({ filteredData, intl, timezone })
 
     const renderPagination = (
       <Pagination
@@ -116,31 +85,18 @@ class Positions extends PureComponent {
       />
     )
 
-    const renderPairSelector = (
-      <Fragment>
-          &nbsp;
-        <MultiPairSelector
-          currentFilters={targetPairs}
-          existingPairs={existingPairs}
-          onPairSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
-        />
-      </Fragment>
-    )
-
     let showContent
     if (loading) {
       showContent = (
-        <Loading title='positions.title' />
+        <Loading title='paudit.title' />
       )
     } else if (numRows === 0) {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'positions.title' })}
+            {intl.formatMessage({ id: 'paudit.title' })}
             &nbsp;
             <TimeRange />
-            {renderPairSelector}
           </h4>
           <NoData />
         </Fragment>
@@ -149,10 +105,9 @@ class Positions extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'positions.title' })}
+            {intl.formatMessage({ id: 'paudit.title' })}
             &nbsp;
             <TimeRange />
-            {renderPairSelector}
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;
@@ -176,7 +131,7 @@ class Positions extends PureComponent {
   }
 }
 
-Positions.propTypes = propTypes
-Positions.defaultProps = defaultProps
+PositionsAudit.propTypes = propTypes
+PositionsAudit.defaultProps = defaultProps
 
-export default injectIntl(Positions)
+export default injectIntl(PositionsAudit)
