@@ -71,7 +71,7 @@ class Positions extends PureComponent {
     const { history } = this.props
     const id = e.target.getAttribute('value')
     history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/`
-      + `${id}/${getNoAuthTokenUrlString(history.location.search)}`)
+      + `${id}${getNoAuthTokenUrlString(history.location.search)}`)
   }
 
   render() {
