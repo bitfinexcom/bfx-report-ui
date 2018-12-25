@@ -23,6 +23,7 @@ import { getTimezone, getDateFormat, getShowMilliseconds } from 'state/base/sele
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
+import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 
 import { getEmail, getQuery, getTimeFrame } from './selectors'
 import actions from './actions'
@@ -38,6 +39,7 @@ const {
   MENU_TRADES,
   MENU_DEPOSITS,
   MENU_POSITIONS,
+  MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_TRADES,
   MENU_WALLETS,
   MENU_WITHDRAWALS,
@@ -53,6 +55,9 @@ function getCSV(auth, query, target, options) {
   }
   if (options.end) { // for wallets
     params.end = options.end
+  }
+  if (options.id) { // for positions audit
+    params.id = options.id
   }
   params.timezone = options.timezone
   params.dateFormat = options.dateFormat
@@ -87,6 +92,9 @@ function getCSV(auth, query, target, options) {
       break
     case MENU_POSITIONS:
       method = 'getPositionsHistoryCsv'
+      break
+    case MENU_POSITIONS_AUDIT:
+      method = 'getPositionsAuditCsv'
       break
     case MENU_PUBLIC_TRADES:
       method = 'getPublicTradesCsv'
@@ -123,6 +131,8 @@ function getSelector(target) {
       return getTradesPairs
     case MENU_POSITIONS:
       return getPositionsPairs
+    case MENU_POSITIONS_AUDIT:
+      return getPositionsIds
     case MENU_PUBLIC_TRADES:
       return getPublicTradesPair
     case MENU_WALLETS:
@@ -166,17 +176,20 @@ function* exportCSV({ payload: target }) {
     options.milliseconds = yield select(getShowMilliseconds)
     const selector = getSelector(target)
     const sign = selector ? yield select(selector) : ''
-    if (target === MENU_WALLETS) {
-      if (sign) {
-        options.end = sign
-      }
-    } else {
-      // pass symbol when exist
-      const symbol = formatSymbol(target, sign)
-      if ((Array.isArray(symbol) && symbol > 0)
-        || (typeof symbol === 'string' && symbol !== '')) {
-        options.symbol = symbol
-      }
+    switch(target) {
+      case MENU_WALLETS:
+        options.end = sign || undefined
+        break
+      case MENU_POSITIONS_AUDIT:
+        options.id = sign || undefined
+        break
+      default:
+        const symbol = formatSymbol(target, sign)
+        if ((Array.isArray(symbol) && symbol > 0)
+          || (typeof symbol === 'string' && symbol !== '')) {
+          options.symbol = symbol
+        }
+        break
     }
 
     const { result, error } = yield call(getCSV, auth, query, target, options)
