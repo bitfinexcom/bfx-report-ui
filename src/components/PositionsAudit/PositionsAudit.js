@@ -1,8 +1,11 @@
 import React, { Fragment, PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
+  Button,
   Card,
   Elevation,
+  Intent,
+  NonIdealState,
 } from '@blueprintjs/core'
 
 import Pagination from 'components/Pagination'
@@ -13,10 +16,15 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import {
+  getQueryLimit,
+  getPageSize,
+  getPath,
+} from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
+  getNoAuthTokenUrlString,
 } from 'state/utils'
 
 import getColumns from 'components/Positions/Positions.columns'
@@ -27,6 +35,11 @@ const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class PositionsAudit extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.jumpToPositions = this.jumpToPositions.bind(this)
+  }
+
   componentDidMount() {
     const { loading, fetchPaudit, match } = this.props
     if (loading) {
@@ -41,25 +54,49 @@ class PositionsAudit extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
+  jumpToPositions(e) {
+    e.preventDefault()
+    const { history } = this.props
+    history.push(`${getPath(queryConstants.MENU_POSITIONS)}${getNoAuthTokenUrlString(history.location.search)}`)
+  }
+
   render() {
     const {
+      entries,
       fetchNext,
       fetchPaudit,
       fetchPrev,
-      offset,
-      pageOffset,
-      pageLoading,
-      entries,
       handleClickExport,
       intl,
       jumpPage,
       loading,
+      match,
+      nextPage,
+      noid,
+      offset,
+      pageOffset,
+      pageLoading,
       refresh,
       targetIds,
       timezone,
-      nextPage,
-      match,
     } = this.props
+    if (noid) {
+      return (
+        <NonIdealState
+          className='bitfinex-nonideal'
+          icon='numbered-list'
+          title={intl.formatMessage({ id: 'paudit.noid' })}
+          description={intl.formatMessage({ id: 'paudit.noid.description' })}
+        >
+          <Button
+            intent={Intent.PRIMARY}
+            onClick={this.jumpToPositions}
+          >
+            {intl.formatMessage({ id: 'positions.title' })}
+          </Button>
+        </NonIdealState>
+      )
+    }
     // workaround for withRouter doesn't trigger update when param is changed
     // could fix by using context API instead of withRouter
     // https://github.com/ReactTraining/react-router/pull/6159

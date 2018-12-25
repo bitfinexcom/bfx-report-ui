@@ -243,7 +243,7 @@ class Main extends PureComponent {
             <Route
               exact
               path={getPath(MENU_POSITIONS_AUDIT)}
-              component={() => <PositionsAudit handleClickExport={this.handleClickExport} />}
+              component={() => <PositionsAudit handleClickExport={this.handleClickExport} noid />}
             />
             <Route
               path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}
