@@ -1,6 +1,7 @@
 import queryType from './constants'
 
 const {
+  FILTER_ID,
   FILTER_PAIR,
   FILTER_SYMBOL,
   MENU_DEPOSITS,
@@ -11,6 +12,7 @@ const {
   MENU_MOVEMENTS,
   MENU_ORDERS,
   MENU_POSITIONS,
+  MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_TRADES,
@@ -26,6 +28,7 @@ export const TYPE_WHITELIST = [
   MENU_MOVEMENTS,
   MENU_ORDERS,
   MENU_POSITIONS,
+  MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_TRADES,
@@ -40,6 +43,7 @@ export const ROUTE_WHITELIST = [
   MENU_LEDGERS,
   MENU_ORDERS,
   MENU_POSITIONS,
+  MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_TRADES,
@@ -128,10 +132,17 @@ const MAPPING = {
     pageSize: 200,
   },
   [MENU_POSITIONS]: {
-    icon: 'exchange',
+    icon: 'numbered-list',
     path: '/positions',
     filterType: FILTER_PAIR,
     queryLimit: 500,
+    pageSize: 125,
+  },
+  [MENU_POSITIONS_AUDIT]: {
+    icon: 'numbered-list',
+    path: '/positions_audit',
+    filterType: FILTER_ID,
+    queryLimit: 1250,
     pageSize: 125,
   },
   [MENU_MOVEMENTS]: {

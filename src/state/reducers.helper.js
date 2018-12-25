@@ -38,15 +38,24 @@ export function fetchFail(state) {
 
 // existingCoins/existingPairs should be re-calc in new time range
 export function setTimeRange(type, state, initialState) {
-  return getFilterType(type) === queryTypes.FILTER_SYMBOL
-    ? {
-      ...initialState,
-      targetSymbol: state.targetSymbol,
-    }
-    : {
-      ...initialState,
-      targetPair: state.targetPair,
-    }
+  switch (getFilterType(type)) {
+    case queryTypes.FILTER_SYMBOL:
+      return {
+        ...initialState,
+        targetSymbols: state.targetSymbols,
+      }
+    case queryTypes.FILTER_ID:
+      return {
+        ...initialState,
+        targetIds: state.targetIds,
+      }
+    case queryTypes.FILTER_PAIR:
+    default:
+      return {
+        ...initialState,
+        targetPairs: state.targetPairs,
+      }
+  }
 }
 
 /* pagination */

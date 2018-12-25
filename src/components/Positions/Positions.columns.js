@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import {
   Cell,
@@ -6,12 +6,15 @@ import {
 } from '@blueprintjs/table'
 
 import { formatTime } from 'state/utils'
+import queryConstants from 'state/query/constants'
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
   const {
     filteredData,
     intl,
+    onIdClick,
+    target,
     timezone,
   } = props
 
@@ -28,11 +31,21 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={id}>
-            {id}
-          </Cell>
-        )
+        /* eslint-disable jsx-a11y/anchor-is-valid */
+        return target === queryConstants.MENU_POSITIONS
+          ? (
+            <Cell tooltip={id}>
+              <Fragment>
+                <a href='#' onClick={onIdClick} value={id}>{id}</a>
+              </Fragment>
+            </Cell>
+          )
+          : (
+            <Cell tooltip={id}>
+              {id}
+            </Cell>
+          )
+        /* eslint-enable jsx-a11y/anchor-is-valid */
       },
       tooltip: rowIndex => filteredData[rowIndex].id,
     },
@@ -172,6 +185,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'positions.column.status',
+      width: 100,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (

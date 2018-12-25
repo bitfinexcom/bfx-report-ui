@@ -11,6 +11,7 @@ import ledgersSaga from './ledgers/saga'
 import movementsSaga from './movements/saga'
 import ordersSaga from './orders/saga'
 import positionsSaga from './positions/saga'
+import positionsAuditSaga from './audit/saga'
 import publicTradesSaga from './publicTrades/saga'
 import querySaga from './query/saga'
 import tickersSaga from './tickers/saga'
@@ -30,6 +31,7 @@ export default function* rootSaga() {
   yield fork(movementsSaga)
   yield fork(ordersSaga)
   yield fork(positionsSaga)
+  yield fork(positionsAuditSaga)
   yield fork(publicTradesSaga)
   yield fork(querySaga)
   yield fork(symbolsSaga)
