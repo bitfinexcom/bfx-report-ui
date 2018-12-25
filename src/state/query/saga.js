@@ -176,20 +176,21 @@ function* exportCSV({ payload: target }) {
     options.milliseconds = yield select(getShowMilliseconds)
     const selector = getSelector(target)
     const sign = selector ? yield select(selector) : ''
-    switch(target) {
+    switch (target) {
       case MENU_WALLETS:
         options.end = sign || undefined
         break
       case MENU_POSITIONS_AUDIT:
         options.id = sign || undefined
         break
-      default:
+      default: {
         const symbol = formatSymbol(target, sign)
         if ((Array.isArray(symbol) && symbol > 0)
           || (typeof symbol === 'string' && symbol !== '')) {
           options.symbol = symbol
         }
         break
+      }
     }
 
     const { result, error } = yield call(getCSV, auth, query, target, options)
