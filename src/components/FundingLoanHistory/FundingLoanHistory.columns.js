@@ -117,7 +117,8 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'floan.column.period.days' })}`,
+      copyText: rowIndex => `${filteredData[rowIndex].period} `
+        + `${intl.formatMessage({ id: 'floan.column.period.days' })}`,
     },
     {
       id: 'mtsOpening',
