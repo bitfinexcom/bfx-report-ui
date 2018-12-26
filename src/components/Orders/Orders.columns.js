@@ -22,7 +22,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'symbol',
@@ -36,7 +36,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].pair,
+      copyText: rowIndex => filteredData[rowIndex].pair,
     },
     {
       id: 'type',
@@ -50,7 +50,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].type,
+      copyText: rowIndex => filteredData[rowIndex].type,
     },
     {
       id: 'amount',
@@ -67,7 +67,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amountOrig,
+      copyText: rowIndex => filteredData[rowIndex].amountOrig,
     },
     {
       id: 'amountExecuted',
@@ -85,7 +85,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amountExecuted,
+      copyText: rowIndex => filteredData[rowIndex].amountExecuted,
     },
     {
       id: 'price',
@@ -102,7 +102,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].price,
+      copyText: rowIndex => filteredData[rowIndex].price,
     },
     {
       id: 'priceAvg',
@@ -119,7 +119,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].priceAvg,
+      copyText: rowIndex => filteredData[rowIndex].priceAvg,
     },
     {
       id: 'mtsCreate',
@@ -135,7 +135,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => getFullTime(filteredData[rowIndex].mtsCreate),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsCreate),
     },
     {
       id: 'mtsUpdate',
@@ -151,7 +151,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
     {
       id: 'status',
@@ -165,7 +165,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].status,
+      copyText: rowIndex => filteredData[rowIndex].status,
     },
   ]
 }

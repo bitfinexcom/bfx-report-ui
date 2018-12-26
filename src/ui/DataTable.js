@@ -22,7 +22,7 @@ class DataTable extends PureComponent {
         enableRowHeader={false}
         columnWidths={columnWidths}
         enableFocusedCell
-        getCellClipboardData={(row, col) => navigator.clipboard.writeText(tableColums[col].tooltip(row))}
+        getCellClipboardData={(row, col) => navigator.clipboard.writeText(tableColums[col].copyText(row))}
       >
         {tableColums.map(column => (
           <Column

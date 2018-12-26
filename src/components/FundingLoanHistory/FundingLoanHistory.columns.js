@@ -23,7 +23,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'symbol',
@@ -37,7 +37,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].symbol,
+      copyText: rowIndex => filteredData[rowIndex].symbol,
     },
     {
       id: 'side',
@@ -51,7 +51,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => intl.formatMessage({ id: `floan.side.${getSideMsg(filteredData[rowIndex].side)}` }),
+      copyText: rowIndex => intl.formatMessage({ id: `floan.side.${getSideMsg(filteredData[rowIndex].side)}` }),
     },
     {
       id: 'amount',
@@ -69,7 +69,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amount,
+      copyText: rowIndex => filteredData[rowIndex].amount,
     },
     {
       id: 'status',
@@ -83,7 +83,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].status,
+      copyText: rowIndex => filteredData[rowIndex].status,
     },
     {
       id: 'rate',
@@ -100,7 +100,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].rate,
+      copyText: rowIndex => filteredData[rowIndex].rate,
     },
     {
       id: 'period',
@@ -117,7 +117,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'floan.column.period.days' })}`,
+      copyText: rowIndex => `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'floan.column.period.days' })}`,
     },
     {
       id: 'mtsOpening',
@@ -134,7 +134,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: (rowIndex) => {
+      copyText: (rowIndex) => {
         const { mtsOpening } = filteredData[rowIndex]
         return mtsOpening ? formatTime(mtsOpening, timezone) : ''
       },
@@ -154,7 +154,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: (rowIndex) => {
+      copyText: (rowIndex) => {
         const { mtsLastPayout } = filteredData[rowIndex]
         return mtsLastPayout ? formatTime(mtsLastPayout, timezone) : ''
       },
@@ -173,7 +173,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      copyText: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
     },
   ]
 }

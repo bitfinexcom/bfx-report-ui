@@ -20,7 +20,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].pair,
+      copyText: rowIndex => filteredData[rowIndex].pair,
     },
     {
       id: 'bid',
@@ -37,7 +37,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].bid,
+      copyText: rowIndex => filteredData[rowIndex].bid,
     },
     {
       id: 'ask',
@@ -54,7 +54,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].ask,
+      copyText: rowIndex => filteredData[rowIndex].ask,
     },
     {
       id: 'mtsUpdate',
@@ -70,7 +70,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
   ]
 }

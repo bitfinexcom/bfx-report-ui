@@ -23,7 +23,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'mtsupdated',
@@ -39,7 +39,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
     },
     {
       id: 'currency',
@@ -53,7 +53,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].currency,
+      copyText: rowIndex => filteredData[rowIndex].currency,
     },
     {
       id: 'status',
@@ -67,7 +67,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].status,
+      copyText: rowIndex => filteredData[rowIndex].status,
     },
     {
       id: 'amount',
@@ -86,7 +86,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: (rowIndex) => {
+      copyText: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         return `${amount} ${currency}`
       },
@@ -107,7 +107,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].destinationAddress,
+      copyText: rowIndex => filteredData[rowIndex].destinationAddress,
     },
   ]
 }

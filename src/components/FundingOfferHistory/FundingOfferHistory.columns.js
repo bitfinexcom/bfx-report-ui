@@ -23,7 +23,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'symbol',
@@ -37,7 +37,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].symbol,
+      copyText: rowIndex => filteredData[rowIndex].symbol,
     },
     {
       id: 'amount',
@@ -54,7 +54,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amountOrig,
+      copyText: rowIndex => filteredData[rowIndex].amountOrig,
     },
     {
       id: 'amountExecuted',
@@ -72,7 +72,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amountExecuted,
+      copyText: rowIndex => filteredData[rowIndex].amountExecuted,
     },
     {
       id: 'type',
@@ -86,7 +86,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].type,
+      copyText: rowIndex => filteredData[rowIndex].type,
     },
     {
       id: 'status',
@@ -100,7 +100,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].status,
+      copyText: rowIndex => filteredData[rowIndex].status,
     },
     {
       id: 'rate',
@@ -117,7 +117,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].rate,
+      copyText: rowIndex => filteredData[rowIndex].rate,
     },
     {
       id: 'period',
@@ -134,7 +134,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: (rowIndex) => {
+      copyText: (rowIndex) => {
         const days = intl.formatMessage({ id: 'foffer.column.period.days' })
         return `${filteredData[rowIndex].period} ${days}`
       },
@@ -153,7 +153,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      copyText: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
     },
   ]
 }
