@@ -5,7 +5,6 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatTime } from 'state/utils'
 import queryConstants from 'state/query/constants'
 import { amountStyle } from 'ui/utils'
 
@@ -15,7 +14,7 @@ export default function getColumns(props) {
     intl,
     onIdClick,
     target,
-    timezone,
+    getFullTime,
   } = props
 
   function showType(swapType) {
@@ -201,16 +200,16 @@ export default function getColumns(props) {
       name: 'positions.column.update',
       width: 150,
       renderer: (rowIndex) => {
-        const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={mtsUpdate}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsUpdate}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      tooltip: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
   ]
 }

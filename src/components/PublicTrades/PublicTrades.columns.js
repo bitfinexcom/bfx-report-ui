@@ -5,11 +5,10 @@ import {
 } from '@blueprintjs/table'
 
 import { amountStyle } from 'ui/utils'
-import { formatTime } from 'state/utils'
 import { formatPair } from 'state/symbols/utils'
 
 export default function getColumns(props) {
-  const { filteredData, targetPair, timezone } = props
+  const { filteredData, targetPair, getFullTime } = props
 
   return [
     {
@@ -31,16 +30,16 @@ export default function getColumns(props) {
       name: 'publictrades.column.time',
       width: 150,
       renderer: (rowIndex) => {
-        const mts = formatTime(filteredData[rowIndex].mts, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
-          <Cell tooltip={mts}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mts}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mts, timezone),
+      tooltip: rowIndex => getFullTime(filteredData[rowIndex].mts),
     },
     {
       id: 'type',

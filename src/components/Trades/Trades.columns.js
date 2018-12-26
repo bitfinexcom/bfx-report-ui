@@ -4,11 +4,10 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatTime } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { filteredData, timezone } = props
+  const { filteredData, getFullTime } = props
 
   return [
     {
@@ -120,16 +119,16 @@ export default function getColumns(props) {
       name: 'trades.column.time',
       width: 150,
       renderer: (rowIndex) => {
-        const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (
-          <Cell tooltip={mtsCreate}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsCreate}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsCreate, timezone),
+      tooltip: rowIndex => getFullTime(filteredData[rowIndex].mtsCreate),
     },
   ]
 }

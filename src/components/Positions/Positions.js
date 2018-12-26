@@ -79,6 +79,7 @@ class Positions extends PureComponent {
       existingPairs,
       fetchNext,
       fetchPrev,
+      getFullTime,
       offset,
       pageOffset,
       pageLoading,
@@ -89,7 +90,6 @@ class Positions extends PureComponent {
       loading,
       refresh,
       targetPairs,
-      timezone,
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
@@ -99,7 +99,7 @@ class Positions extends PureComponent {
       filteredData,
       intl,
       onIdClick: this.jumpToPositionsAudit,
-      timezone,
+      getFullTime,
     })
 
     const renderPagination = (

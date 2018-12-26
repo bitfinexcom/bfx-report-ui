@@ -65,6 +65,7 @@ class Trades extends PureComponent {
       existingPairs,
       fetchNext,
       fetchPrev,
+      getFullTime,
       offset,
       pageOffset,
       pageLoading,
@@ -75,12 +76,11 @@ class Trades extends PureComponent {
       loading,
       refresh,
       targetPairs,
-      timezone,
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-    const tableColums = getColumns({ filteredData, timezone })
+    const tableColums = getColumns({ filteredData, getFullTime })
 
     const renderPagination = (
       <Pagination

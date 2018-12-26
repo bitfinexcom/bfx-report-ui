@@ -67,28 +67,28 @@ class Movements extends PureComponent {
 
   render() {
     const {
-      fetchNext,
-      fetchPrev,
-      offset,
-      pageOffset,
-      pageLoading,
-      targetSymbols,
       entries,
       existingCoins,
+      fetchNext,
+      fetchPrev,
+      getFullTime,
       handleClickExport,
       intl,
       jumpPage,
-      type,
       loading,
-      refresh,
-      timezone,
       nextPage,
+      offset,
+      pageOffset,
+      pageLoading,
+      refresh,
+      targetSymbols,
+      type,
     } = this.props
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
     const numRows = filteredData.length
-    const tableColums = getColumns({ filteredData, intl, timezone })
+    const tableColums = getColumns({ filteredData, intl, getFullTime })
 
     const renderSymbolSelector = (
       <Fragment>

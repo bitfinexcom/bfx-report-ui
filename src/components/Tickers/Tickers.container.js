@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import actions from 'state/tickers/actions'
-import { getTimezone } from 'state/base/selectors'
+import { getFullTime } from 'state/base/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -17,15 +17,15 @@ import {
 import Tickers from './Tickers'
 
 const mapStateToProps = (state = {}) => ({
-  offset: getOffset(state),
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
+  getFullTime: getFullTime(state),
   loading: !getDataReceived(state),
+  nextPage: getNextPage(state),
+  offset: getOffset(state),
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
-  timezone: getTimezone(state),
-  nextPage: getNextPage(state),
 })
 
 const mapDispatchToProps = dispatch => ({

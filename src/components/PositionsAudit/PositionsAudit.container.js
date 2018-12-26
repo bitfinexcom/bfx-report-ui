@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import actions from 'state/audit/actions'
-import { getTimezone } from 'state/base/selectors'
+import { getFullTime } from 'state/base/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -16,14 +16,14 @@ import {
 import PositionsAudit from './PositionsAudit'
 
 const mapStateToProps = (state = {}) => ({
-  offset: getOffset(state),
   entries: getEntries(state),
+  getFullTime: getFullTime(state),
   loading: !getDataReceived(state),
+  nextPage: getNextPage(state),
+  offset: getOffset(state),
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   targetIds: getTargetIds(state),
-  timezone: getTimezone(state),
-  nextPage: getNextPage(state),
 })
 
 const mapDispatchToProps = dispatch => ({

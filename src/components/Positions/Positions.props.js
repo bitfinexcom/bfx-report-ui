@@ -21,6 +21,7 @@ export const propTypes = {
   fetchNext: PropTypes.func.isRequired,
   fetchPositions: PropTypes.func.isRequired,
   fetchPrev: PropTypes.func.isRequired,
+  getFullTime: PropTypes.func,
   intl: intlShape.isRequired,
   jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -29,7 +30,6 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   removeTargetPair: PropTypes.func.isRequired,
   targetPairs: PropTypes.arrayOf(PropTypes.string),
-  timezone: PropTypes.string,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,
@@ -44,6 +44,7 @@ export const defaultProps = {
   fetchNext: () => {},
   fetchPrev: () => {},
   fetchPositions: () => {},
+  getFullTime: () => {},
   intl: {},
   jumpPage: () => {},
   loading: true,
