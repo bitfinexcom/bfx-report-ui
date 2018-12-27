@@ -4,12 +4,11 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatTime } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 import Explorer from 'ui/Explorer'
 
 export default function getColumns(props) {
-  const { filteredData, timezone } = props
+  const { filteredData, getFullTime } = props
 
   return [
     {
@@ -24,23 +23,23 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'mtsupdated',
       name: 'movements.column.updated',
       width: 150,
       renderer: (rowIndex) => {
-        const mtsUpdated = formatTime(filteredData[rowIndex].mtsUpdated, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
         return (
-          <Cell tooltip={mtsUpdated}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsUpdated}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdated, timezone),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
     },
     {
       id: 'currency',
@@ -54,7 +53,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].currency,
+      copyText: rowIndex => filteredData[rowIndex].currency,
     },
     {
       id: 'status',
@@ -68,7 +67,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].status,
+      copyText: rowIndex => filteredData[rowIndex].status,
     },
     {
       id: 'amount',
@@ -87,7 +86,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: (rowIndex) => {
+      copyText: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         return `${amount} ${currency}`
       },
@@ -108,7 +107,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].destinationAddress,
+      copyText: rowIndex => filteredData[rowIndex].destinationAddress,
     },
   ]
 }

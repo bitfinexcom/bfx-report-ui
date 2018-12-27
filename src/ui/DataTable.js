@@ -22,7 +22,7 @@ class DataTable extends PureComponent {
         enableRowHeader={false}
         columnWidths={columnWidths}
         enableFocusedCell
-        getCellClipboardData={(row, col) => navigator.clipboard.writeText(tableColums[col].tooltip(row))}
+        getCellClipboardData={(row, col) => navigator.clipboard.writeText(tableColums[col].copyText(row))}
       >
         {tableColums.map(column => (
           <Column
@@ -41,7 +41,7 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   renderer: PropTypes.func.isRequired,
-  tooltip: PropTypes.func.isRequired,
+  copyText: PropTypes.func.isRequired,
   width: PropTypes.number.isRequired,
 })
 

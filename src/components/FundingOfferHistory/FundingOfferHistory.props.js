@@ -24,6 +24,7 @@ export const propTypes = {
   fetchFoffer: PropTypes.func.isRequired,
   fetchNext: PropTypes.func.isRequired,
   fetchPrev: PropTypes.func.isRequired,
+  getFullTime: PropTypes.func,
   intl: intlShape.isRequired,
   jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -32,7 +33,6 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   removeTargetSymbol: PropTypes.func.isRequired,
   targetSymbols: PropTypes.arrayOf(PropTypes.string),
-  timezone: PropTypes.string,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,
@@ -47,6 +47,7 @@ export const defaultProps = {
   fetchFoffer: () => {},
   fetchNext: () => {},
   fetchPrev: () => {},
+  getFullTime: () => {},
   intl: {},
   jumpPage: () => {},
   loading: true,

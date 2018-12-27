@@ -67,6 +67,7 @@ class PublicTrades extends PureComponent {
     const {
       fetchNext,
       fetchPrev,
+      getFullTime,
       hasSyncPref,
       offset,
       pageOffset,
@@ -79,7 +80,6 @@ class PublicTrades extends PureComponent {
       loading,
       refresh,
       targetPair,
-      timezone,
       nextPage,
     } = this.props
     if (platform.showSyncMode && !hasSyncPref) {
@@ -99,7 +99,7 @@ class PublicTrades extends PureComponent {
     const pairList = pairs
     const currentPair = targetPair || 'btcusd'
     const numRows = filteredData.length
-    const tableColums = getColumns({ filteredData, targetPair, timezone })
+    const tableColums = getColumns({ filteredData, targetPair, getFullTime })
 
     const renderPagination = (
       <Pagination

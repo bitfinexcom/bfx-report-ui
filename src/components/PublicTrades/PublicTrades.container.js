@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import actions from 'state/publicTrades/actions'
-import { getTimezone } from 'state/base/selectors'
+import { getFullTime } from 'state/base/selectors'
 import { getPairs } from 'state/symbols/selectors'
 import { hasSyncPref } from 'state/sync/selectors'
 import {
@@ -18,16 +18,16 @@ import {
 import PublicTrades from './PublicTrades'
 
 const mapStateToProps = (state = {}) => ({
-  offset: getOffset(state),
   entries: getEntries(state),
+  getFullTime: getFullTime(state),
   hasSyncPref: hasSyncPref(state),
   loading: !getDataReceived(state),
+  nextPage: getNextPage(state),
+  offset: getOffset(state),
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   pairs: getPairs(state),
   targetPair: getTargetPair(state),
-  timezone: getTimezone(state),
-  nextPage: getNextPage(state),
 })
 
 const mapDispatchToProps = dispatch => ({

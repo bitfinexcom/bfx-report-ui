@@ -4,10 +4,8 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatTime } from 'state/utils'
-
 export default function getColumns(props) {
-  const { filteredData, timezone } = props
+  const { filteredData, getFullTime } = props
 
   return [
     {
@@ -22,7 +20,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].pair,
+      copyText: rowIndex => filteredData[rowIndex].pair,
     },
     {
       id: 'bid',
@@ -39,7 +37,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].bid,
+      copyText: rowIndex => filteredData[rowIndex].bid,
     },
     {
       id: 'ask',
@@ -56,23 +54,23 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].ask,
+      copyText: rowIndex => filteredData[rowIndex].ask,
     },
     {
       id: 'mtsUpdate',
       name: 'tickers.column.time',
       width: 200,
       renderer: (rowIndex) => {
-        const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={mtsUpdate}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsUpdate}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
   ]
 }

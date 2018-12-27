@@ -4,11 +4,10 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatTime } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { filteredData, timezone } = props
+  const { filteredData, getFullTime } = props
 
   return [
     {
@@ -23,7 +22,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'order_id',
@@ -37,7 +36,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].orderID,
+      copyText: rowIndex => filteredData[rowIndex].orderID,
     },
     {
       id: 'pair',
@@ -51,7 +50,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].pair,
+      copyText: rowIndex => filteredData[rowIndex].pair,
     },
     {
       id: 'amount',
@@ -69,7 +68,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].execAmount,
+      copyText: rowIndex => filteredData[rowIndex].execAmount,
     },
     {
       id: 'price',
@@ -86,7 +85,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].execPrice,
+      copyText: rowIndex => filteredData[rowIndex].execPrice,
     },
     {
       id: 'fee',
@@ -110,7 +109,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: (rowIndex) => {
+      copyText: (rowIndex) => {
         const { fee, feeCurrency } = filteredData[rowIndex]
         return `${fee} ${feeCurrency}`
       },
@@ -120,16 +119,16 @@ export default function getColumns(props) {
       name: 'trades.column.time',
       width: 150,
       renderer: (rowIndex) => {
-        const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (
-          <Cell tooltip={mtsCreate}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsCreate}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsCreate, timezone),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsCreate),
     },
   ]
 }

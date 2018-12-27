@@ -4,11 +4,11 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatTime, getSideMsg } from 'state/utils'
+import { getSideMsg } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { filteredData, intl, timezone } = props
+  const { filteredData, intl, getFullTime } = props
 
   return [
     {
@@ -23,7 +23,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'symbol',
@@ -37,7 +37,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].symbol,
+      copyText: rowIndex => filteredData[rowIndex].symbol,
     },
     {
       id: 'side',
@@ -51,7 +51,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => intl.formatMessage({ id: `floan.side.${getSideMsg(filteredData[rowIndex].side)}` }),
+      copyText: rowIndex => intl.formatMessage({ id: `floan.side.${getSideMsg(filteredData[rowIndex].side)}` }),
     },
     {
       id: 'amount',
@@ -69,7 +69,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amount,
+      copyText: rowIndex => filteredData[rowIndex].amount,
     },
     {
       id: 'status',
@@ -83,7 +83,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].status,
+      copyText: rowIndex => filteredData[rowIndex].status,
     },
     {
       id: 'rate',
@@ -100,7 +100,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].rate,
+      copyText: rowIndex => filteredData[rowIndex].rate,
     },
     {
       id: 'period',
@@ -117,63 +117,56 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'floan.column.period.days' })}`,
+      copyText: rowIndex => `${filteredData[rowIndex].period} `
+        + `${intl.formatMessage({ id: 'floan.column.period.days' })}`,
     },
     {
       id: 'mtsOpening',
       name: 'floan.column.opening',
       width: 150,
       renderer: (rowIndex) => {
-        const { mtsOpening } = filteredData[rowIndex]
-        const opening = mtsOpening ? formatTime(mtsOpening, timezone) : ''
+        const timestamp = getFullTime(filteredData[rowIndex].mtsOpening)
         return (
-          <Cell tooltip={opening}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {opening}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: (rowIndex) => {
-        const { mtsOpening } = filteredData[rowIndex]
-        return mtsOpening ? formatTime(mtsOpening, timezone) : ''
-      },
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsOpening),
     },
     {
       id: 'mtsLastPayout',
       name: 'floan.column.lastpayout',
       width: 150,
       renderer: (rowIndex) => {
-        const { mtsLastPayout } = filteredData[rowIndex]
-        const payout = mtsLastPayout ? formatTime(mtsLastPayout, timezone) : ''
+        const timestamp = getFullTime(filteredData[rowIndex].mtsLastPayout)
         return (
-          <Cell tooltip={payout}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {payout}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: (rowIndex) => {
-        const { mtsLastPayout } = filteredData[rowIndex]
-        return mtsLastPayout ? formatTime(mtsLastPayout, timezone) : ''
-      },
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsLastPayout),
     },
     {
       id: 'mtsUpdate',
       name: 'floan.column.updated',
       width: 150,
       renderer: (rowIndex) => {
-        const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={mtsUpdate}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsUpdate}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
   ]
 }

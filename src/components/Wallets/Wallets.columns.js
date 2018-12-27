@@ -17,7 +17,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].currency,
+      copyText: rowIndex => filteredData[rowIndex].currency,
     },
     {
       id: 'balance',
@@ -34,7 +34,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].balance,
+      copyText: rowIndex => filteredData[rowIndex].balance,
     },
     {
       id: 'unsettledInterest',
@@ -51,7 +51,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].unsettledInterest,
+      copyText: rowIndex => filteredData[rowIndex].unsettledInterest,
     },
     {
       id: 'balanceAvailable',
@@ -65,7 +65,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].balanceAvailable,
+      copyText: rowIndex => filteredData[rowIndex].balanceAvailable,
     },
   ]
 }

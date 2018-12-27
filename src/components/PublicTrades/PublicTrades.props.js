@@ -15,6 +15,7 @@ export const propTypes = {
   fetchPublictrades: PropTypes.func.isRequired,
   fetchNext: PropTypes.func.isRequired,
   fetchPrev: PropTypes.func.isRequired,
+  getFullTime: PropTypes.func,
   hasSyncPref: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
   jumpPage: PropTypes.func.isRequired,
@@ -24,7 +25,6 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   setTargetPair: PropTypes.func.isRequired,
   targetPair: PropTypes.string,
-  timezone: PropTypes.string,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,
@@ -37,6 +37,7 @@ export const defaultProps = {
   fetchPublictrades: () => {},
   fetchNext: () => {},
   fetchPrev: () => {},
+  getFullTime: () => {},
   hasSyncPref: false,
   intl: {},
   jumpPage: () => {},

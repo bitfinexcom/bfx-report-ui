@@ -64,6 +64,7 @@ class Ledgers extends PureComponent {
     const {
       fetchNext,
       fetchPrev,
+      getFullTime,
       offset,
       pageOffset,
       pageLoading,
@@ -75,12 +76,11 @@ class Ledgers extends PureComponent {
       jumpPage,
       loading,
       refresh,
-      timezone,
       nextPage,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-    const tableColums = getColumns({ filteredData, timezone })
+    const tableColums = getColumns({ filteredData, getFullTime })
 
     const renderSymbolSelector = (
       <Fragment>

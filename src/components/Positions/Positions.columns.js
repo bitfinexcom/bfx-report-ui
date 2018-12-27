@@ -5,7 +5,6 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatTime } from 'state/utils'
 import queryConstants from 'state/query/constants'
 import { amountStyle } from 'ui/utils'
 
@@ -15,7 +14,7 @@ export default function getColumns(props) {
     intl,
     onIdClick,
     target,
-    timezone,
+    getFullTime,
   } = props
 
   function showType(swapType) {
@@ -47,7 +46,7 @@ export default function getColumns(props) {
           )
         /* eslint-enable jsx-a11y/anchor-is-valid */
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'pair',
@@ -61,7 +60,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].pair,
+      copyText: rowIndex => filteredData[rowIndex].pair,
     },
     {
       id: 'amount',
@@ -79,7 +78,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amount,
+      copyText: rowIndex => filteredData[rowIndex].amount,
     },
     {
       id: 'basesPrice',
@@ -96,7 +95,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].basesPrice,
+      copyText: rowIndex => filteredData[rowIndex].basesPrice,
     },
     {
       id: 'priceLiq',
@@ -113,7 +112,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].liquidationPrice,
+      copyText: rowIndex => filteredData[rowIndex].liquidationPrice,
     },
     {
       id: 'pl',
@@ -131,7 +130,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].pl,
+      copyText: rowIndex => filteredData[rowIndex].pl,
     },
     {
       id: 'plperc',
@@ -149,7 +148,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].plPerc,
+      copyText: rowIndex => filteredData[rowIndex].plPerc,
     },
     {
       id: 'swap',
@@ -166,7 +165,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].marginFunding,
+      copyText: rowIndex => filteredData[rowIndex].marginFunding,
     },
     {
       id: 'swapType',
@@ -180,7 +179,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => showType(filteredData[rowIndex].marginFundingType),
+      copyText: rowIndex => showType(filteredData[rowIndex].marginFundingType),
     },
     {
       id: 'status',
@@ -194,23 +193,23 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].status,
+      copyText: rowIndex => filteredData[rowIndex].status,
     },
     {
       id: 'mtsUpdate',
       name: 'positions.column.update',
       width: 150,
       renderer: (rowIndex) => {
-        const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={mtsUpdate}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsUpdate}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
   ]
 }

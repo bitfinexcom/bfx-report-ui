@@ -4,11 +4,10 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatTime } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { filteredData, timezone } = props
+  const { filteredData, getFullTime } = props
 
   return [
     {
@@ -23,7 +22,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'symbol',
@@ -37,7 +36,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].pair,
+      copyText: rowIndex => filteredData[rowIndex].pair,
     },
     {
       id: 'type',
@@ -51,7 +50,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].type,
+      copyText: rowIndex => filteredData[rowIndex].type,
     },
     {
       id: 'amount',
@@ -68,7 +67,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amountOrig,
+      copyText: rowIndex => filteredData[rowIndex].amountOrig,
     },
     {
       id: 'amountExecuted',
@@ -86,7 +85,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amountExecuted,
+      copyText: rowIndex => filteredData[rowIndex].amountExecuted,
     },
     {
       id: 'price',
@@ -103,7 +102,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].price,
+      copyText: rowIndex => filteredData[rowIndex].price,
     },
     {
       id: 'priceAvg',
@@ -120,39 +119,39 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].priceAvg,
+      copyText: rowIndex => filteredData[rowIndex].priceAvg,
     },
     {
       id: 'mtsCreate',
       name: 'orders.column.create',
       width: 150,
       renderer: (rowIndex) => {
-        const mtsCreate = formatTime(filteredData[rowIndex].mtsCreate, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (
-          <Cell tooltip={mtsCreate}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsCreate}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsCreate, timezone),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsCreate),
     },
     {
       id: 'mtsUpdate',
       name: 'orders.column.update',
       width: 150,
       renderer: (rowIndex) => {
-        const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={mtsUpdate}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsUpdate}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
     {
       id: 'status',
@@ -166,7 +165,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].status,
+      copyText: rowIndex => filteredData[rowIndex].status,
     },
   ]
 }

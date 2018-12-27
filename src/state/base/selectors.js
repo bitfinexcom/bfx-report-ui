@@ -1,3 +1,5 @@
+import { formatTime } from 'state/utils'
+
 import types from './constants'
 
 export const getBase = state => state.base
@@ -11,6 +13,7 @@ export const getTheme = state => getBase(state).theme
 export const getTimezone = state => getBase(state).timezone
 export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FORMATS[0]
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
+export const getFullTime = state => mts => (mts ? formatTime(mts, getTimezone(state)) : '')
 
 export default {
   getBase,
@@ -18,6 +21,7 @@ export default {
   getApiSecret,
   getAuthToken,
   getDateFormat,
+  getFullTime,
   getLocale,
   getMenuMode,
   getShowMilliseconds,

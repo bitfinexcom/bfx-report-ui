@@ -5,11 +5,10 @@ import {
 } from '@blueprintjs/table'
 
 import { amountStyle } from 'ui/utils'
-import { formatTime } from 'state/utils'
 import { formatPair } from 'state/symbols/utils'
 
 export default function getColumns(props) {
-  const { filteredData, targetPair, timezone } = props
+  const { filteredData, targetPair, getFullTime } = props
 
   return [
     {
@@ -24,23 +23,23 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].id,
+      copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
       id: 'mts',
       name: 'publictrades.column.time',
       width: 150,
       renderer: (rowIndex) => {
-        const mts = formatTime(filteredData[rowIndex].mts, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
-          <Cell tooltip={mts}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mts}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      tooltip: rowIndex => formatTime(filteredData[rowIndex].mts, timezone),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mts),
     },
     {
       id: 'type',
@@ -58,7 +57,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].type,
+      copyText: rowIndex => filteredData[rowIndex].type,
     },
     {
       id: 'price',
@@ -76,7 +75,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].price,
+      copyText: rowIndex => filteredData[rowIndex].price,
     },
     {
       id: 'amount',
@@ -93,7 +92,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: rowIndex => filteredData[rowIndex].amount,
+      copyText: rowIndex => filteredData[rowIndex].amount,
     },
     {
       id: 'pair',
@@ -107,7 +106,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      tooltip: () => formatPair(targetPair),
+      copyText: () => formatPair(targetPair),
     },
   ]
 }
