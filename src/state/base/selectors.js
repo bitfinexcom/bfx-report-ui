@@ -1,4 +1,4 @@
-import { formatTime } from 'state/utils'
+import { formatTime, timeOffset } from 'state/utils'
 
 import types from './constants'
 
@@ -14,6 +14,7 @@ export const getTimezone = state => getBase(state).timezone
 export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FORMATS[0]
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
 export const getFullTime = state => mts => (mts ? formatTime(mts, getTimezone(state)) : '')
+export const getTimeOffset = state => timeOffset(getTimezone(state))
 
 export default {
   getBase,
@@ -26,5 +27,6 @@ export default {
   getMenuMode,
   getShowMilliseconds,
   getTheme,
+  getTimeOffset,
   getTimezone,
 }

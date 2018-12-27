@@ -25,6 +25,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   setTargetPair: PropTypes.func.isRequired,
   targetPair: PropTypes.string,
+  timeOffset: PropTypes.string.isRequired,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,

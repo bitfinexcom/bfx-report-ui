@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import actions from 'state/ledgers/actions'
-import { getFullTime } from 'state/base/selectors'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -26,6 +26,7 @@ const mapStateToProps = (state = {}) => ({
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
+  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = dispatch => ({

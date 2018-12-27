@@ -11,10 +11,11 @@ import { amountStyle } from 'ui/utils'
 export default function getColumns(props) {
   const {
     filteredData,
+    getFullTime,
     intl,
     onIdClick,
     target,
-    getFullTime,
+    timeOffset,
   } = props
 
   function showType(swapType) {
@@ -197,7 +198,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      name: 'positions.column.update',
+      nameStr: `${intl.formatMessage({ id: 'positions.column.update' })} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

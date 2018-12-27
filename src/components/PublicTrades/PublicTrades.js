@@ -81,6 +81,7 @@ class PublicTrades extends PureComponent {
       refresh,
       targetPair,
       nextPage,
+      timeOffset,
     } = this.props
     if (platform.showSyncMode && !hasSyncPref) {
       return (
@@ -99,7 +100,13 @@ class PublicTrades extends PureComponent {
     const pairList = pairs
     const currentPair = targetPair || 'btcusd'
     const numRows = filteredData.length
-    const tableColums = getColumns({ filteredData, targetPair, getFullTime })
+    const tableColums = getColumns({
+      filteredData,
+      getFullTime,
+      intl,
+      targetPair,
+      timeOffset,
+    })
 
     const renderPagination = (
       <Pagination

@@ -79,6 +79,7 @@ class PositionsAudit extends PureComponent {
       pageLoading,
       refresh,
       targetIds,
+      timeOffset,
     } = this.props
     if (noid) {
       return (
@@ -106,7 +107,12 @@ class PositionsAudit extends PureComponent {
     }
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-    const tableColums = getColumns({ filteredData, intl, getFullTime })
+    const tableColums = getColumns({
+      filteredData,
+      getFullTime,
+      intl,
+      timeOffset,
+    })
 
     const renderPagination = (
       <Pagination

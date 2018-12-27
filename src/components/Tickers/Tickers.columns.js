@@ -5,7 +5,12 @@ import {
 } from '@blueprintjs/table'
 
 export default function getColumns(props) {
-  const { filteredData, getFullTime } = props
+  const {
+    filteredData,
+    getFullTime,
+    intl,
+    timeOffset,
+  } = props
 
   return [
     {
@@ -58,7 +63,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      name: 'tickers.column.time',
+      nameStr: `${intl.formatMessage({ id: 'tickers.column.time' })} (${timeOffset})`,
       width: 200,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

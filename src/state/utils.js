@@ -1,6 +1,7 @@
-import moment from 'moment'
+import moment from 'moment-timezone'
 import queryString from 'query-string'
 import _omit from 'lodash/omit'
+import memoizeOne from 'memoize-one'
 
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
@@ -55,6 +56,12 @@ export function formatDate(mts, timezone) {
       .toUpperCase()
   }
   return moment(mts, 'x').format('MMM DD YYYY').toUpperCase()
+}
+
+export function timeOffset(timezone) {
+  return timezone
+    ? moment.tz(timezone).format('Z')
+    : moment.tz(moment.tz.guess()).format('Z')
 }
 
 export function isValidateType(type) {
@@ -193,4 +200,5 @@ export default {
   isValidateType,
   momentFormatter,
   postJsonfetch,
+  timeOffset: memoizeOne(timeOffset),
 }

@@ -34,6 +34,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   removeTargetSymbol: PropTypes.func.isRequired,
   targetSymbols: PropTypes.arrayOf(PropTypes.string),
+  timeOffset: PropTypes.string.isRequired,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,

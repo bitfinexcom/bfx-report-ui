@@ -7,7 +7,12 @@ import {
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { filteredData, getFullTime } = props
+  const {
+    filteredData,
+    getFullTime,
+    intl,
+    timeOffset,
+  } = props
 
   return [
     {
@@ -123,7 +128,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsCreate',
-      name: 'orders.column.create',
+      nameStr: `${intl.formatMessage({ id: 'orders.column.create' })} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
@@ -139,7 +144,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      name: 'orders.column.update',
+      nameStr: `${intl.formatMessage({ id: 'orders.column.update' })} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

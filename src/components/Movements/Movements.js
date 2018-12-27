@@ -82,13 +82,19 @@ class Movements extends PureComponent {
       pageLoading,
       refresh,
       targetSymbols,
+      timeOffset,
       type,
     } = this.props
     const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
     const numRows = filteredData.length
-    const tableColums = getColumns({ filteredData, intl, getFullTime })
+    const tableColums = getColumns({
+      filteredData,
+      getFullTime,
+      intl,
+      timeOffset,
+    })
 
     const renderSymbolSelector = (
       <Fragment>

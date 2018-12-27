@@ -8,7 +8,12 @@ import { amountStyle } from 'ui/utils'
 import Explorer from 'ui/Explorer'
 
 export default function getColumns(props) {
-  const { filteredData, getFullTime } = props
+  const {
+    filteredData,
+    getFullTime,
+    intl,
+    timeOffset,
+  } = props
 
   return [
     {
@@ -27,7 +32,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsupdated',
-      name: 'movements.column.updated',
+      nameStr: `${intl.formatMessage({ id: 'movements.column.updated' })} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)

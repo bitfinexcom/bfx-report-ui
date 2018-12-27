@@ -8,7 +8,13 @@ import { amountStyle } from 'ui/utils'
 import { formatPair } from 'state/symbols/utils'
 
 export default function getColumns(props) {
-  const { filteredData, targetPair, getFullTime } = props
+  const {
+    filteredData,
+    getFullTime,
+    intl,
+    targetPair,
+    timeOffset,
+  } = props
 
   return [
     {
@@ -27,7 +33,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
-      name: 'publictrades.column.time',
+      nameStr: `${intl.formatMessage({ id: 'publictrades.column.time' })} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
