@@ -16,7 +16,6 @@ const FCREDIT_ENTRIES_PROPS = PropTypes.shape({
   mtsOpening: PropTypes.number,
   mtsLastPayout: PropTypes.number,
   positionPair: PropTypes.string,
-  timezone: PropTypes.string,
 })
 
 export const propTypes = {
@@ -27,6 +26,7 @@ export const propTypes = {
   fetchFcredit: PropTypes.func.isRequired,
   fetchNext: PropTypes.func.isRequired,
   fetchPrev: PropTypes.func.isRequired,
+  getFullTime: PropTypes.func,
   intl: intlShape.isRequired,
   jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -49,6 +49,7 @@ export const defaultProps = {
   fetchFcredit: () => {},
   fetchNext: () => {},
   fetchPrev: () => {},
+  getFullTime: () => {},
   intl: {},
   jumpPage: () => {},
   loading: true,

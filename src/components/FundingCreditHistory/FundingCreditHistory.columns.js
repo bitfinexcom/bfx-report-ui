@@ -4,11 +4,11 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatTime, getSideMsg } from 'state/utils'
+import { getSideMsg } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { filteredData, intl, timezone } = props
+  const { filteredData, intl, getFullTime } = props
 
   return [
     {
@@ -127,40 +127,32 @@ export default function getColumns(props) {
       name: 'fcredit.column.opening',
       width: 150,
       renderer: (rowIndex) => {
-        const { mtsOpening } = filteredData[rowIndex]
-        const opening = mtsOpening ? formatTime(mtsOpening, timezone) : ''
+        const timestamp = getFullTime(filteredData[rowIndex].mtsOpening)
         return (
-          <Cell tooltip={opening}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {opening}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      copyText: (rowIndex) => {
-        const { mtsOpening } = filteredData[rowIndex]
-        return mtsOpening ? formatTime(mtsOpening, timezone) : ''
-      },
+      copyText: (rowIndex) => getFullTime(filteredData[rowIndex].mtsOpening),
     },
     {
       id: 'mtsLastPayout',
       name: 'fcredit.column.lastpayout',
       width: 150,
       renderer: (rowIndex) => {
-        const { mtsLastPayout } = filteredData[rowIndex]
-        const payout = mtsLastPayout ? formatTime(mtsLastPayout, timezone) : ''
+        const timestamp = getFullTime(filteredData[rowIndex].mtsLastPayout)
         return (
-          <Cell tooltip={payout}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {payout}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      copyText: (rowIndex) => {
-        const { mtsLastPayout } = filteredData[rowIndex]
-        return mtsLastPayout ? formatTime(mtsLastPayout, timezone) : ''
-      },
+      copyText: (rowIndex) => getFullTime(filteredData[rowIndex].mtsLastPayout),
     },
     {
       id: 'positionPair',
@@ -181,16 +173,16 @@ export default function getColumns(props) {
       name: 'fcredit.column.updated',
       width: 150,
       renderer: (rowIndex) => {
-        const mtsUpdate = formatTime(filteredData[rowIndex].mtsUpdate, timezone)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={mtsUpdate}>
+          <Cell tooltip={timestamp}>
             <TruncatedFormat>
-              {mtsUpdate}
+              {timestamp}
             </TruncatedFormat>
           </Cell>
         )
       },
-      copyText: rowIndex => formatTime(filteredData[rowIndex].mtsUpdate, timezone),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
   ]
 }
