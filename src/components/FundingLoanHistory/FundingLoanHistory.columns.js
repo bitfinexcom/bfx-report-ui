@@ -134,7 +134,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: (rowIndex) => getFullTime(filteredData[rowIndex].mtsOpening),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsOpening),
     },
     {
       id: 'mtsLastPayout',
@@ -150,7 +150,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: (rowIndex) => getFullTime(filteredData[rowIndex].mtsLastPayout),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsLastPayout),
     },
     {
       id: 'mtsUpdate',

@@ -26,7 +26,6 @@ const mapStateToProps = (state = {}) => ({
   pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
-  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = dispatch => ({
