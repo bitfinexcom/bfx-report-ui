@@ -77,10 +77,16 @@ class Orders extends PureComponent {
       targetPairs,
       getFullTime,
       nextPage,
+      timeOffset,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-    const tableColums = getColumns({ filteredData, getFullTime })
+    const tableColums = getColumns({
+      filteredData,
+      getFullTime,
+      intl,
+      timeOffset,
+    })
 
     const renderPagination = (
       <Pagination

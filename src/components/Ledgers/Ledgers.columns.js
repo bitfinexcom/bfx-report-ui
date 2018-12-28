@@ -7,7 +7,12 @@ import {
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { filteredData, getFullTime } = props
+  const {
+    filteredData,
+    getFullTime,
+    intl,
+    timeOffset,
+  } = props
 
   return [
     {
@@ -83,7 +88,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
-      name: 'ledgers.column.time',
+      nameStr: `${intl.formatMessage({ id: 'ledgers.column.time' })} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)

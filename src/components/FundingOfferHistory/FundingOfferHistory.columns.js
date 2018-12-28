@@ -7,7 +7,12 @@ import {
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { filteredData, intl, getFullTime } = props
+  const {
+    filteredData,
+    getFullTime,
+    intl,
+    timeOffset,
+  } = props
 
   return [
     {
@@ -140,7 +145,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      name: 'foffer.column.updated',
+      nameStr: `${intl.formatMessage({ id: 'foffer.column.updated' })} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

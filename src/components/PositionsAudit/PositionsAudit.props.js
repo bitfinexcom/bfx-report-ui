@@ -30,6 +30,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   removeTargetId: PropTypes.func.isRequired,
   targetIds: PropTypes.arrayOf(PropTypes.number),
+  timeOffset: PropTypes.string.isRequired,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,

@@ -28,7 +28,7 @@ class DataTable extends PureComponent {
           <Column
             key={column.id}
             id={column.id}
-            name={intl.formatMessage({ id: column.name })}
+            name={column.nameStr ? column.nameStr : intl.formatMessage({ id: column.name })}
             cellRenderer={column.renderer}
           />
         ))}
@@ -39,7 +39,8 @@ class DataTable extends PureComponent {
 
 const TABLE_COLUMNS_PROPS = PropTypes.shape({
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  nameStr: PropTypes.string,
   renderer: PropTypes.func.isRequired,
   copyText: PropTypes.func.isRequired,
   width: PropTypes.number.isRequired,

@@ -31,6 +31,7 @@ export const propTypes = {
   removeTargetPair: PropTypes.func.isRequired,
   targetPairs: PropTypes.arrayOf(PropTypes.string),
   getFullTime: PropTypes.func,
+  timeOffset: PropTypes.string.isRequired,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,

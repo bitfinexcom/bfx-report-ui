@@ -91,15 +91,17 @@ class Positions extends PureComponent {
       refresh,
       targetPairs,
       nextPage,
+      timeOffset,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
     const tableColums = getColumns({
       target: TYPE,
       filteredData,
+      getFullTime,
       intl,
       onIdClick: this.jumpToPositionsAudit,
-      getFullTime,
+      timeOffset,
     })
 
     const renderPagination = (

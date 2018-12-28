@@ -8,7 +8,12 @@ import { getSideMsg } from 'state/utils'
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { filteredData, intl, getFullTime } = props
+  const {
+    filteredData,
+    getFullTime,
+    intl,
+    timeOffset,
+  } = props
 
   return [
     {
@@ -154,7 +159,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      name: 'floan.column.updated',
+      nameStr: `${intl.formatMessage({ id: 'floan.column.updated' })} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

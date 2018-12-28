@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import actions from 'state/publicTrades/actions'
-import { getFullTime } from 'state/base/selectors'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getPairs } from 'state/symbols/selectors'
 import { hasSyncPref } from 'state/sync/selectors'
 import {
@@ -28,6 +28,7 @@ const mapStateToProps = (state = {}) => ({
   pageLoading: getPageLoading(state),
   pairs: getPairs(state),
   targetPair: getTargetPair(state),
+  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = dispatch => ({
