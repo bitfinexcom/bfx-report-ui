@@ -48,8 +48,13 @@ export function checkEmail(auth) {
  *   set `milliseconds: true` to show milliseconds;
  *   set `dateFormat: 'YY-MM-DD` to custom the date format.
  */
-export function formatTime(mts, { dateFormat, full, milliseconds, timezone }) {
-  const baseFormat = dateFormat ? dateFormat : 'YY-MM-DD HH:mm:ss'
+export function formatTime(mts, {
+  dateFormat,
+  full,
+  milliseconds,
+  timezone,
+}) {
+  const baseFormat = dateFormat || 'YY-MM-DD HH:mm:ss'
   const normalFormat = full ? baseFormat.replace('YY', 'YYYY') : baseFormat
   const format = milliseconds ? `${normalFormat} SSS` : normalFormat
   return timezone
