@@ -26,6 +26,15 @@ export const dialogFieldStyle = classNames(
   'col-xl-8',
 )
 
+export const checkboxFieldStyle = classNames(
+  'col-xs-12',
+  'col-sm-8',
+  'col-md-8',
+  'col-lg-8',
+  'col-xl-8',
+  'bitfinex-pref-checkbox',
+)
+
 export const amountStyle = (amount) => {
   const val = parseFloat(amount)
   return classNames('bitfinex-text-align-right', {
@@ -36,6 +45,7 @@ export const amountStyle = (amount) => {
 
 export default {
   amountStyle,
+  checkboxFieldStyle,
   dialogDescStyle,
   dialogFieldStyle,
   dialogSmallDescStyle,

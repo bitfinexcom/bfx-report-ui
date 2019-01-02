@@ -7,11 +7,16 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import DateFormatSelector from 'components/DateFormatSelector'
+import DateFormatSelector from 'ui/DateFormatSelector'
 import Loading from 'ui/Loading'
-import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
+import {
+  checkboxFieldStyle,
+  dialogDescStyle,
+  dialogFieldStyle,
+  dialogSmallDescStyle,
+} from 'ui/utils'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
-import { formatDate, formatTime } from 'state/utils'
+import { formatDate } from 'state/utils'
 import { getTarget } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
@@ -22,6 +27,7 @@ class ExportDialog extends PureComponent {
     const {
       email,
       end,
+      getFullTime,
       handleExportDialogClose,
       intl,
       isExportOpen,
@@ -37,7 +43,7 @@ class ExportDialog extends PureComponent {
       return null
     }
     const isWallets = location && location.pathname && getTarget(location.pathname) === queryConstants.MENU_WALLETS
-    const datetime = timestamp && formatTime(timestamp, timezone, true)
+    const datetime = getFullTime(timestamp, true)
     const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
     const intlType = intl.formatMessage({ id: `${type}.title` })
     const renderMessage = !email ? (
@@ -61,7 +67,6 @@ class ExportDialog extends PureComponent {
         {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}
       </p>
     )
-    const checkboxFieldStyle = `${dialogFieldStyle} bitfinex-pref-checkbox`
     const renderContent = loading
       ? (
         <Fragment>

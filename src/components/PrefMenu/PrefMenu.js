@@ -9,6 +9,7 @@ import {
   PopoverInteractionKind,
   Position,
 } from '@blueprintjs/core'
+
 import { propTypes, defaultProps } from './PrefMenu.props'
 
 class PrefMenu extends PureComponent {
