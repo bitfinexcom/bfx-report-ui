@@ -10,8 +10,15 @@ import {
 import { TimezonePicker } from '@blueprintjs/timezone'
 
 import { platform } from 'var/config'
+import DateFormatSelector from 'ui/DateFormatSelector'
 import LangMenu from 'ui/LangMenu'
-import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
+import ShowMilliseconds from 'ui/ShowMilliseconds'
+import {
+  checkboxFieldStyle,
+  dialogDescStyle,
+  dialogFieldStyle,
+  dialogSmallDescStyle,
+} from 'ui/utils'
 
 import { propTypes, defaultProps } from './PrefDialog.props'
 
@@ -115,6 +122,28 @@ class PrefDialog extends PureComponent {
                 value={timezone}
                 onChange={this.handleTimezoneChange}
               />
+            </div>
+          </div>
+          <div className='row'>
+            <div className={dialogDescStyle}>
+              {intl.formatMessage({ id: 'preferences.dateformat' })}
+            </div>
+            <div className={dialogSmallDescStyle}>
+              {intl.formatMessage({ id: 'preferences.dateformat' })}
+            </div>
+            <div className={dialogFieldStyle}>
+              <DateFormatSelector />
+            </div>
+          </div>
+          <div className='row'>
+            <div className={dialogDescStyle}>
+              {intl.formatMessage({ id: 'preferences.milliseconds' })}
+            </div>
+            <div className={dialogSmallDescStyle}>
+              {intl.formatMessage({ id: 'preferences.milliseconds' })}
+            </div>
+            <div className={checkboxFieldStyle}>
+              <ShowMilliseconds />
             </div>
           </div>
         </div>

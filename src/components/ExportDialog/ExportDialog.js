@@ -7,9 +7,14 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import DateFormatSelector from 'components/DateFormatSelector'
+import DateFormatSelector from 'ui/DateFormatSelector'
 import Loading from 'ui/Loading'
-import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
+import {
+  checkboxFieldStyle,
+  dialogDescStyle,
+  dialogFieldStyle,
+  dialogSmallDescStyle,
+} from 'ui/utils'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
 import { formatDate, formatTime } from 'state/utils'
 import { getTarget } from 'state/query/utils'
@@ -61,7 +66,6 @@ class ExportDialog extends PureComponent {
         {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}
       </p>
     )
-    const checkboxFieldStyle = `${dialogFieldStyle} bitfinex-pref-checkbox`
     const renderContent = loading
       ? (
         <Fragment>
