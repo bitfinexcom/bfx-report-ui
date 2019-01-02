@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { getTimezone } from 'state/base/selectors'
+import { getFullTime, getTimezone } from 'state/base/selectors'
 import {
   getExportEmail,
   getPrepareExport,
@@ -15,6 +15,7 @@ import ExportDialog from './ExportDialog'
 const mapStateToProps = (state = {}) => ({
   ...getTimeFrame(getQuery(state)),
   email: getExportEmail(state),
+  getFullTime: getFullTime(state),
   loading: getPrepareExport(state),
   timezone: getTimezone(state),
   timestamp: getTimestamp(state),

@@ -40,11 +40,16 @@ export function checkEmail(auth) {
     auth,
   })
 }
-
-export function formatTime(mts, timezone, full) {
-  const format = full ? 'YYYY-MM-DD HH:mm:ss' : 'YY-MM-DD HH:mm:ss'
-  if (timezone) {
-    return moment(mts, 'x').tz(timezone).format(format)
+/**
+ * Format time.
+ * @param {number} mts timestamp
+ * @param {Object} options pass `timezone` to format time with the right timezone;
+ *   set `full: true` to show 4 digits year.
+ */
+export function formatTime(mts, options) {
+  const format = options.full ? 'YYYY-MM-DD HH:mm:ss' : 'YY-MM-DD HH:mm:ss'
+  if (options.timezone) {
+    return moment(mts, 'x').tz(options.timezone).format(format)
   }
   return moment(mts, 'x').format(format)
 }
