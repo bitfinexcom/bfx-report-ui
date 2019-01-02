@@ -54,7 +54,9 @@ export function formatTime(mts, {
   milliseconds,
   timezone,
 }) {
-  const baseFormat = dateFormat ? `${dateFormat} HH:mm:ss` || 'YY-MM-DD HH:mm:ss'
+  const baseFormat = dateFormat
+    ? `${dateFormat} HH:mm:ss`
+    : 'YY-MM-DD HH:mm:ss'
   const normalFormat = full ? baseFormat.replace('YY', 'YYYY') : baseFormat
   const format = milliseconds ? `${normalFormat} SSS` : normalFormat
   return timezone
