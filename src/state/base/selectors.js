@@ -15,6 +15,8 @@ export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FO
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
 export const getFullTime = state => (mts, full) => (mts ? formatTime(mts, {
   timezone: getTimezone(state),
+  dateFormat: getDateFormat(state),
+  milliseconds: getShowMilliseconds(state),
   full,
 }) : '')
 export const getTimeOffset = state => timeOffset(getTimezone(state))

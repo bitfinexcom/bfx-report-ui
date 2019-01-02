@@ -16,7 +16,7 @@ import {
   dialogSmallDescStyle,
 } from 'ui/utils'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
-import { formatDate, formatTime } from 'state/utils'
+import { formatDate } from 'state/utils'
 import { getTarget } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 

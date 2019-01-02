@@ -44,14 +44,17 @@ export function checkEmail(auth) {
  * Format time.
  * @param {number} mts timestamp
  * @param {Object} options pass `timezone` to format time with the right timezone;
- *   set `full: true` to show 4 digits year.
+ *   set `full: true` to show 4 digits year;
+ *   set `milliseconds: true` to show milliseconds;
+ *   set `dateFormat: 'YY-MM-DD` to custom the date format.
  */
-export function formatTime(mts, options) {
-  const format = options.full ? 'YYYY-MM-DD HH:mm:ss' : 'YY-MM-DD HH:mm:ss'
-  if (options.timezone) {
-    return moment(mts, 'x').tz(options.timezone).format(format)
-  }
-  return moment(mts, 'x').format(format)
+export function formatTime(mts, { dateFormat, full, milliseconds, timezone }) {
+  const baseFormat = dateFormat ? dateFormat : 'YY-MM-DD HH:mm:ss'
+  const normalFormat = full ? baseFormat.replace('YY', 'YYYY') : baseFormat
+  const format = milliseconds ? `${normalFormat} SSS` : normalFormat
+  return timezone
+    ? moment(mts, 'x').tz(timezone).format(format)
+    : moment(mts, 'x').format(format)
 }
 
 export function formatDate(mts, timezone) {
