@@ -43,7 +43,7 @@ export function walletsReducer(state = initialState, action) {
     }
     case types.SET_TIMESTAMP:
       return {
-        ...state,
+        ...initialState,
         timestamp: payload,
       }
     case types.FETCH_FAIL:
