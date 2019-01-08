@@ -180,7 +180,7 @@
   "sync.stop-sync": "停止同步",
   "sync.go-offline": "切換至離線查詢模式",
   "sync.logout": "同步已停止",
-  "wallets.title": "錢包",
+  "wallets.title": "錢包(Beta)",
   "wallets.title.exchange": "交易",
   "wallets.title.margin": "保證金",
   "wallets.title.funding": "融資",

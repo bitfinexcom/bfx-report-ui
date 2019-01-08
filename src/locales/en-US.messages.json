@@ -181,7 +181,7 @@
   "sync.stop-sync": "Stop Syncing",
   "sync.go-offline": "Switching to offline query mode (query from db)",
   "sync.logout": "Sync Stopped",
-  "wallets.title": "Wallets",
+  "wallets.title": "Wallets (Beta)",
   "wallets.title.exchange": "Exchange",
   "wallets.title.margin": "Margin",
   "wallets.title.funding": "Funding",
