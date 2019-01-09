@@ -1,8 +1,10 @@
 import React, { Fragment, PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
+  Button,
   Card,
   Elevation,
+  Intent,
 } from '@blueprintjs/core'
 import { DateInput } from '@blueprintjs/datetime'
 
@@ -30,6 +32,7 @@ class Wallets extends PureComponent {
   constructor(props) {
     super(props)
     this.handleDateChange = this.handleDateChange.bind(this)
+    this.handleQuery = this.handleQuery.bind(this)
   }
 
   state = {
@@ -49,18 +52,22 @@ class Wallets extends PureComponent {
   }
 
   handleDateChange(time) {
-    const { debouncedFetchWallets } = this.props
     const end = time && time.getTime()
     if (isValidTimeStamp(end)) {
       this.setState({ timestamp: time })
-      // onChange will trigger everytime when value is changed,
-      // but we only need fetch once user is settled
-      debouncedFetchWallets(end)
     }
+  }
+
+  handleQuery(e) {
+    e.preventDefault()
+    const { setTimestamp } = this.props
+    const { timestamp } = this.state
+    setTimestamp(timestamp.getTime())
   }
 
   render() {
     const {
+      currentTime,
       entries,
       handleClickExport,
       intl,
@@ -77,17 +84,27 @@ class Wallets extends PureComponent {
     const exchangeRows = exchangeData.length
     const marginRows = marginData.length
     const fundingRows = fundingData.length
+    const hasNewTime = currentTime !== timestamp.getTime()
 
     const renderTimeSelection = (
-      <DateInput
-        formatDate={DATE_FORMAT.formatDate}
-        parseDate={DATE_FORMAT.parseDate}
-        onChange={this.handleDateChange}
-        value={timestamp}
-        timePrecision='second'
-        todayButtonText='Now'
-        showActionsBar
-      />
+      <Fragment>
+        <DateInput
+          formatDate={DATE_FORMAT.formatDate}
+          parseDate={DATE_FORMAT.parseDate}
+          onChange={this.handleDateChange}
+          value={timestamp}
+          timePrecision='second'
+          todayButtonText='Now'
+          showActionsBar
+        />
+        <Button
+          onClick={this.handleQuery}
+          intent={hasNewTime ? Intent.PRIMARY : null}
+          disabled={!hasNewTime}
+        >
+          {intl.formatMessage({ id: 'wallets.query'})}
+        </Button>
+      </Fragment>
     )
     let showContent
     if (loading) {
