@@ -185,6 +185,7 @@
   "wallets.title.exchange": "Exchange",
   "wallets.title.margin": "Margin",
   "wallets.title.funding": "Funding",
+  "wallets.query": "Query",
   "wallets.nodata": "No related data in this date time. You can try another date time.",
   "wallets.column.currency": "CURRENCY",
   "wallets.column.balance": "BALANCE",

@@ -1,8 +1,10 @@
 import React, { Fragment, PureComponent } from 'react'
 import { injectIntl } from 'react-intl'
 import {
+  Button,
   Card,
   Elevation,
+  Intent,
 } from '@blueprintjs/core'
 import { DateInput } from '@blueprintjs/datetime'
 
@@ -12,55 +14,64 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import queryConstants from 'state/query/constants'
-import { checkFetch, DATE_FORMAT } from 'state/utils'
+import { DATE_FORMAT } from 'state/utils'
 import { isValidTimeStamp } from 'state/query/utils'
 
 import getColumns from './Wallets.columns'
 import { propTypes, defaultProps } from './Wallets.props'
 
 const {
-  MENU_WALLETS,
   WALLET_EXCHANGE,
   WALLET_MARGIN,
   WALLET_FUNDING,
 } = queryConstants
-const TYPE = MENU_WALLETS
 
 class Wallets extends PureComponent {
   constructor(props) {
     super(props)
     this.handleDateChange = this.handleDateChange.bind(this)
+    this.handleQuery = this.handleQuery.bind(this)
   }
 
   state = {
-    timestamp: new Date(),
+    timestamp: null,
   }
 
   componentDidMount() {
     const { loading, fetchWallets } = this.props
-    const { timestamp } = this.state
     if (loading) {
-      fetchWallets(timestamp.getTime())
+      fetchWallets()
     }
   }
 
   componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
+    const { loading: prevLoading } = prevProps
+    const { loading, fetchWallets } = this.props
+    const { timestamp } = this.state
+    const time = timestamp ? timestamp.getTime() : null
+    if (loading && loading !== prevLoading) {
+      fetchWallets(time)
+    }
   }
 
   handleDateChange(time) {
-    const { debouncedFetchWallets } = this.props
     const end = time && time.getTime()
-    if (isValidTimeStamp(end)) {
+    if (isValidTimeStamp(end) || time === null) {
       this.setState({ timestamp: time })
-      // onChange will trigger everytime when value is changed,
-      // but we only need fetch once user is settled
-      debouncedFetchWallets(end)
     }
+  }
+
+  handleQuery(e) {
+    e.preventDefault()
+    const { setTimestamp } = this.props
+    const { timestamp } = this.state
+    const time = timestamp ? timestamp.getTime() : null
+    setTimestamp(time)
   }
 
   render() {
     const {
+      currentTime,
       entries,
       handleClickExport,
       intl,
@@ -77,17 +88,25 @@ class Wallets extends PureComponent {
     const exchangeRows = exchangeData.length
     const marginRows = marginData.length
     const fundingRows = fundingData.length
+    const hasNewTime = timestamp && currentTime !== timestamp.getTime()
 
     const renderTimeSelection = (
-      <DateInput
-        formatDate={DATE_FORMAT.formatDate}
-        parseDate={DATE_FORMAT.parseDate}
-        onChange={this.handleDateChange}
-        value={timestamp}
-        timePrecision='second'
-        todayButtonText='Now'
-        showActionsBar
-      />
+      <Fragment>
+        <DateInput
+          formatDate={DATE_FORMAT.formatDate}
+          parseDate={DATE_FORMAT.parseDate}
+          onChange={this.handleDateChange}
+          value={timestamp}
+          timePrecision='second'
+        />
+        <Button
+          onClick={this.handleQuery}
+          intent={hasNewTime ? Intent.PRIMARY : null}
+          disabled={!hasNewTime}
+        >
+          {intl.formatMessage({ id: 'wallets.query' })}
+        </Button>
+      </Fragment>
     )
     let showContent
     if (loading) {

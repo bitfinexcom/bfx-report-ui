@@ -49,6 +49,10 @@ export function walletsReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return state
     case types.REFRESH:
+      return {
+        ...initialState,
+        timestamp: state.timestamp,
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {

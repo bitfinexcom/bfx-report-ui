@@ -9,19 +9,21 @@ const WALLETS_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  currentTime: PropTypes.number,
   entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
-  debouncedFetchWallets: PropTypes.func.isRequired,
   fetchWallets: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   loading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
+  setTimestamp: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
+  currentTime: 0,
   entries: [],
-  debouncedFetchWallets: () => {},
   fetchWallets: () => {},
   intl: {},
   loading: true,
   refresh: () => {},
+  setTimestamp: () => {},
 }
