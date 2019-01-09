@@ -104,7 +104,7 @@ class Wallets extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {intl.formatMessage({ id: 'wallets.query'})}
+          {intl.formatMessage({ id: 'wallets.query' })}
         </Button>
       </Fragment>
     )
