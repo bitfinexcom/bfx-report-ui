@@ -101,7 +101,7 @@ const MAPPING = {
     path: '/tickers',
     filterType: FILTER_PAIR,
     queryLimit: 250,
-    pageSize: 250,
+    pageSize: 125,
   },
   [MENU_TRADES]: {
     icon: 'exchange',
