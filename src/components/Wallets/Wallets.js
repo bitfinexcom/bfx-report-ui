@@ -14,19 +14,17 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import queryConstants from 'state/query/constants'
-import { checkFetch, DATE_FORMAT } from 'state/utils'
+import { DATE_FORMAT } from 'state/utils'
 import { isValidTimeStamp } from 'state/query/utils'
 
 import getColumns from './Wallets.columns'
 import { propTypes, defaultProps } from './Wallets.props'
 
 const {
-  MENU_WALLETS,
   WALLET_EXCHANGE,
   WALLET_MARGIN,
   WALLET_FUNDING,
 } = queryConstants
-const TYPE = MENU_WALLETS
 
 class Wallets extends PureComponent {
   constructor(props) {
@@ -36,24 +34,29 @@ class Wallets extends PureComponent {
   }
 
   state = {
-    timestamp: new Date(),
+    timestamp: null,
   }
 
   componentDidMount() {
     const { loading, fetchWallets } = this.props
-    const { timestamp } = this.state
     if (loading) {
-      fetchWallets(timestamp.getTime())
+      fetchWallets()
     }
   }
 
   componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
+    const { loading: prevLoading } = prevProps
+    const { loading, fetchWallets } = this.props
+    const { timestamp } = this.state
+    const time = timestamp ? timestamp.getTime() : null
+    if (loading && loading !== prevLoading) {
+      fetchWallets(time)
+    }
   }
 
   handleDateChange(time) {
     const end = time && time.getTime()
-    if (isValidTimeStamp(end)) {
+    if (isValidTimeStamp(end) || time === null) {
       this.setState({ timestamp: time })
     }
   }
@@ -62,7 +65,8 @@ class Wallets extends PureComponent {
     e.preventDefault()
     const { setTimestamp } = this.props
     const { timestamp } = this.state
-    setTimestamp(timestamp.getTime())
+    const time = timestamp ? timestamp.getTime() : null
+    setTimestamp(time)
   }
 
   render() {
@@ -84,7 +88,7 @@ class Wallets extends PureComponent {
     const exchangeRows = exchangeData.length
     const marginRows = marginData.length
     const fundingRows = fundingData.length
-    const hasNewTime = currentTime !== timestamp.getTime()
+    const hasNewTime = timestamp && currentTime !== timestamp.getTime()
 
     const renderTimeSelection = (
       <Fragment>
@@ -94,8 +98,6 @@ class Wallets extends PureComponent {
           onChange={this.handleDateChange}
           value={timestamp}
           timePrecision='second'
-          todayButtonText='Now'
-          showActionsBar
         />
         <Button
           onClick={this.handleQuery}

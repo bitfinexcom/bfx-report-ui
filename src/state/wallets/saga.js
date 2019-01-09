@@ -13,9 +13,7 @@ import types from './constants'
 import actions from './actions'
 
 function getReqWallets(auth, end) {
-  const params = {
-    end: end || new Date().getTime(),
-  }
+  const params = end ? { end } : {}
   return makeFetchCall('getWallets', auth, params)
 }
 
