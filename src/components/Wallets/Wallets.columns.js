@@ -36,36 +36,5 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => filteredData[rowIndex].balance,
     },
-    {
-      id: 'unsettledInterest',
-      name: 'wallets.column.unsettled-interest',
-      width: 180,
-      renderer: (rowIndex) => {
-        const { unsettledInterest } = filteredData[rowIndex]
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={unsettledInterest}
-          >
-            {unsettledInterest}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].unsettledInterest,
-    },
-    {
-      id: 'balanceAvailable',
-      name: 'wallets.column.balance-available',
-      width: 200,
-      renderer: (rowIndex) => {
-        const { balanceAvailable } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={balanceAvailable}>
-            {balanceAvailable}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].balanceAvailable,
-    },
   ]
 }
