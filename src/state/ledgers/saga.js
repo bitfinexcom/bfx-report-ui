@@ -7,10 +7,9 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit } from 'state/query/utils'
 import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 
 import types from './constants'
@@ -18,12 +17,14 @@ import actions from './actions'
 import { getTargetSymbols, getLedgers } from './selectors'
 
 const TYPE = queryTypes.MENU_LEDGERS
-const LIMIT = getQueryLimit(TYPE)
 
-function getReqLedgers(auth, query, targetSymbols, smallestMts) {
-  const params = getTimeFrame(query, TYPE, smallestMts)
+function getReqLedgers(auth, query, targetSymbols, smallestMts, queryLimit) {
+  const params = getTimeFrame(query, smallestMts)
   if (targetSymbols.length > 0) {
     params.symbol = targetSymbols
+  }
+  if (queryLimit) {
+    params.limit = queryLimit
   }
   return makeFetchCall('getLedgers', auth, params)
 }
@@ -39,7 +40,9 @@ function* fetchLedgers({ payload: symbol }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, 0)
+    const getQueryLimit = yield select(getTargetQueryLimit)
+    const queryLimit = getQueryLimit(TYPE)
+    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, 0, queryLimit)
     yield put(actions.updateLedgers(result))
 
     if (error) {
@@ -66,13 +69,15 @@ function* fetchNextLedgers() {
       smallestMts,
       targetSymbols,
     } = yield select(getLedgers)
+    const getQueryLimit = yield select(getTargetQueryLimit)
+    const queryLimit = getQueryLimit(TYPE)
     // data exist, no need to fetch again
-    if (entries.length - LIMIT >= offset) {
+    if (entries.length - queryLimit >= offset) {
       return
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, smallestMts)
+    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, smallestMts, queryLimit)
     yield put(actions.updateLedgers(result))
 
     if (error) {

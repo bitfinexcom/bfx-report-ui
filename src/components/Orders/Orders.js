@@ -14,7 +14,7 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
@@ -26,7 +26,6 @@ import getColumns from './Orders.columns'
 import { propTypes, defaultProps } from './Orders.props'
 
 const TYPE = queryConstants.MENU_ORDERS
-const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Orders extends PureComponent {
@@ -65,6 +64,7 @@ class Orders extends PureComponent {
       existingPairs,
       fetchNext,
       fetchPrev,
+      getQueryLimit,
       offset,
       pageOffset,
       pageLoading,
@@ -79,6 +79,7 @@ class Orders extends PureComponent {
       nextPage,
       timeOffset,
     } = this.props
+    const LIMIT = getQueryLimit(TYPE)
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
     const tableColums = getColumns({

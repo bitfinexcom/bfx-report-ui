@@ -14,7 +14,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   handleAddSymbolFilter,
@@ -26,7 +26,6 @@ import getColumns from './Ledgers.columns'
 import { propTypes, defaultProps } from './Ledgers.props'
 
 const TYPE = queryConstants.MENU_LEDGERS
-const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Ledgers extends PureComponent {
@@ -65,6 +64,7 @@ class Ledgers extends PureComponent {
       fetchNext,
       fetchPrev,
       getFullTime,
+      getQueryLimit,
       offset,
       pageOffset,
       pageLoading,
@@ -79,6 +79,7 @@ class Ledgers extends PureComponent {
       nextPage,
       timeOffset,
     } = this.props
+    const LIMIT = getQueryLimit(TYPE)
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
     const tableColums = getColumns({

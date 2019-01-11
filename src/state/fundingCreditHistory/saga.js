@@ -21,7 +21,8 @@ const TYPE = queryTypes.MENU_FCREDIT
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqFCredit(auth, query, targetSymbols, smallestMts) {
-  const params = getTimeFrame(query, TYPE, smallestMts)
+  const params = getTimeFrame(query, smallestMts)
+  params.limit = LIMIT
   if (targetSymbols.length > 0) {
     params.symbol = formatRawSymbols(targetSymbols)
   }

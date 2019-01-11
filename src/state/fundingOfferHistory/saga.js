@@ -21,7 +21,8 @@ const TYPE = queryTypes.MENU_FOFFER
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqFOffer(auth, query, targetSymbols, smallestMts) {
-  const params = getTimeFrame(query, TYPE, smallestMts)
+  const params = getTimeFrame(query, smallestMts)
+  params.limit = LIMIT
   if (targetSymbols.length > 0) {
     params.symbol = formatRawSymbols(targetSymbols)
   }

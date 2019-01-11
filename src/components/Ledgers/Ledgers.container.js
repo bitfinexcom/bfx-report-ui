@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import actions from 'state/ledgers/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getTargetQueryLimit } from 'state/query/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -27,6 +28,7 @@ const mapStateToProps = (state = {}) => ({
   pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
   timeOffset: getTimeOffset(state),
+  getQueryLimit: getTargetQueryLimit(state),
 })
 
 const mapDispatchToProps = dispatch => ({

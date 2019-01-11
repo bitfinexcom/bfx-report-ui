@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import actions from 'state/trades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getTargetQueryLimit } from 'state/query/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -20,6 +21,7 @@ const mapStateToProps = (state = {}) => ({
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
+  getQueryLimit: getTargetQueryLimit(state),
   loading: !getDataReceived(state),
   nextPage: getNextPage(state),
   offset: getOffset(state),

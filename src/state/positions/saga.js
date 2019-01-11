@@ -23,7 +23,8 @@ const TYPE = queryTypes.MENU_POSITIONS
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqPositions(auth, query, targetPairs, smallestMts) {
-  const params = getTimeFrame(query, TYPE, smallestMts)
+  const params = getTimeFrame(query, smallestMts)
+  params.limit = LIMIT
   if (targetPairs.length > 0) {
     params.symbol = formatRawSymbols(targetPairs)
   }

@@ -21,7 +21,8 @@ const TYPE = queryTypes.MENU_PUBLIC_TRADES
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqPublicTrades(auth, query, targetPair, smallestMts) {
-  const params = getTimeFrame(query, TYPE, smallestMts)
+  const params = getTimeFrame(query, smallestMts)
+  params.limit = LIMIT
   if (targetPair) {
     params.symbol = formatRawSymbols(targetPair)
   }

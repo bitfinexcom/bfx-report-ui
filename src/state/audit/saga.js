@@ -22,7 +22,8 @@ const TYPE = queryTypes.MENU_POSITIONS_AUDIT
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqPositionsAudit(auth, query, targetIds, smallestMts) {
-  const params = getTimeFrame(query, TYPE, smallestMts)
+  const params = getTimeFrame(query, smallestMts)
+  params.limit = LIMIT
   if (targetIds) {
     params.id = targetIds.map(id => parseInt(id, 10))
     return makeFetchCall('getPositionsAudit', auth, params)

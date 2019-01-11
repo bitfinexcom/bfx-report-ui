@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
 import { formatInternalPair, formatSymbolToPair } from 'state/symbols/utils'
+import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -11,6 +12,7 @@ import {
   jumpPage,
   removePair,
   setPairs,
+  setQueryLimit,
   setTimeRange,
 } from 'state/reducers.helper'
 
@@ -119,6 +121,8 @@ export function ordersReducer(state = initialState, action) {
     case types.SET_PAIRS:
       return setPairs(state, payload, initialState)
     case types.REFRESH:
+    case baseTypes.SET_QUERY_LIMIT:
+      return setQueryLimit(TYPE, state, initialState)
     case queryTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:
