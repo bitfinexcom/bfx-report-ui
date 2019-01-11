@@ -5,7 +5,6 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import queryString from 'query-string'
-import _omit from 'lodash/omit'
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols } from 'state/symbols/utils'
@@ -25,7 +24,12 @@ import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 
-import { getEmail, getQuery, getTimeFrame } from './selectors'
+import {
+  getEmail,
+  getQuery,
+  getTargetQueryLimit,
+  getTimeFrame,
+} from './selectors'
 import actions from './actions'
 import types from './constants'
 
@@ -46,7 +50,10 @@ const {
 } = types
 
 function getCSV(auth, query, target, options) {
-  const params = _omit(getTimeFrame(query, target), 'limit')
+  const params = getTimeFrame(query, target)
+  if (options.limit) {
+    params.limit = options.limit
+  }
   if (query.exportEmail) {
     params.email = query.exportEmail
   }
@@ -171,6 +178,8 @@ function* exportCSV({ payload: target }) {
     const options = {}
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
+    const getQueryLimit = yield select(getTargetQueryLimit)
+    options.limit = getQueryLimit(target)
     options.timezone = yield select(getTimezone)
     options.dateFormat = yield select(getDateFormat)
     options.milliseconds = yield select(getShowMilliseconds)
