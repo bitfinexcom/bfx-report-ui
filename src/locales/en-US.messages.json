@@ -186,7 +186,8 @@
   "wallets.title.margin": "Margin",
   "wallets.title.funding": "Funding",
   "wallets.query": "Query",
+  "wallets.query.tooltip": "Select a time to query the wallets snapshot",
   "wallets.nodata": "No related data in this date time. You can try another date time.",
   "wallets.column.currency": "CURRENCY",
-  "wallets.column.balance": "BALANCE",
+  "wallets.column.balance": "BALANCE"
 }

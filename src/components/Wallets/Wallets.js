@@ -5,6 +5,8 @@ import {
   Card,
   Elevation,
   Intent,
+  Position,
+  Tooltip,
 } from '@blueprintjs/core'
 import { DateInput } from '@blueprintjs/datetime'
 
@@ -92,13 +94,23 @@ class Wallets extends PureComponent {
 
     const renderTimeSelection = (
       <Fragment>
-        <DateInput
-          formatDate={DATE_FORMAT.formatDate}
-          parseDate={DATE_FORMAT.parseDate}
-          onChange={this.handleDateChange}
-          value={timestamp}
-          timePrecision='second'
-        />
+        <Tooltip
+          content={(
+            <span>
+              {intl.formatMessage({ id: 'wallets.query.tooltip' })}
+            </span>
+          )}
+          position={Position.TOP}
+          usePortal
+        >
+          <DateInput
+            formatDate={DATE_FORMAT.formatDate}
+            parseDate={DATE_FORMAT.parseDate}
+            onChange={this.handleDateChange}
+            value={timestamp}
+            timePrecision='second'
+          />
+        </Tooltip>
         <Button
           onClick={this.handleQuery}
           intent={hasNewTime ? Intent.PRIMARY : null}
