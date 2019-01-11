@@ -189,6 +189,4 @@
   "wallets.nodata": "No related data in this date time. You can try another date time.",
   "wallets.column.currency": "CURRENCY",
   "wallets.column.balance": "BALANCE",
-  "wallets.column.unsettled-interest": "UNSETTLED INTEREST",
-  "wallets.column.balance-available": "BALANCE AVAILABLE"
 }

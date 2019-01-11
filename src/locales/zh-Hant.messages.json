@@ -188,6 +188,4 @@
   "wallets.nodata": "沒有相關資料。請嘗試選擇其他時間。",
   "wallets.column.currency": "貨幣",
   "wallets.column.balance": "餘額",
-  "wallets.column.unsettled-interest": "UNSETTLED INTEREST",
-  "wallets.column.balance-available": "BALANCE AVAILABLE"
 }
