@@ -1,10 +1,12 @@
 import React, { createRef, Fragment, PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { injectIntl, intlShape } from 'react-intl'
+import { injectIntl } from 'react-intl'
 import { Button, Spinner } from '@blueprintjs/core'
 
+import QueryLimitSelector from 'ui/QueryLimitSelector'
 import { isValidateType } from 'state/utils'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { canChangeQueryLimit, getPageSize } from 'state/query/utils'
+
+import { propTypes, defaultProps } from './Pagination.props'
 
 class Pagination extends PureComponent {
   constructor(props) {
@@ -49,6 +51,7 @@ class Pagination extends PureComponent {
     const {
       type,
       dataLen,
+      getQueryLimit,
       intl,
       loading,
       offset,
@@ -94,6 +97,14 @@ class Pagination extends PureComponent {
       </Fragment>
     ) : undefined
 
+    const renderQueryLimitSelector = canChangeQueryLimit(type)
+      ? (
+        <QueryLimitSelector
+          target={type}
+        />
+      )
+      : undefined
+
     return (
       <div className='row center-xs'>
         <div className='bitfinex-pagination-group col-xs-12 col-sm-6'>
@@ -134,6 +145,7 @@ class Pagination extends PureComponent {
             onClick={nextClick}
             disabled={!nextPage || loading}
           />
+          {renderQueryLimitSelector}
           {renderLoading}
         </div>
       </div>
@@ -141,28 +153,7 @@ class Pagination extends PureComponent {
   }
 }
 
-Pagination.propTypes = {
-  dataLen: PropTypes.number.isRequired,
-  loading: PropTypes.bool,
-  intl: intlShape.isRequired,
-  jumpPage: PropTypes.func,
-  offset: PropTypes.number.isRequired,
-  nextClick: PropTypes.func,
-  prevClick: PropTypes.func,
-  pageOffset: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  nextPage: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.bool,
-  ]),
-}
-
-Pagination.defaultProps = {
-  jumpPage: () => {},
-  nextClick: () => {},
-  prevClick: () => {},
-  loading: false,
-  nextPage: false,
-}
+Pagination.propTypes = propTypes
+Pagination.defaultProps = defaultProps
 
 export default injectIntl(Pagination)
