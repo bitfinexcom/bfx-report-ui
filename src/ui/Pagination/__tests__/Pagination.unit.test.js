@@ -7,11 +7,13 @@ import {
 
 import types from 'state/query/constants'
 
-import Pagination from '../Pagination.js'
+import Pagination from '../Pagination'
 
-jest.mock('ui/QueryLimitSelector', () => ()=> <div id="mockQueryLimitSelector">
+jest.mock('ui/QueryLimitSelector', () => () => (
+  <div id='mockQueryLimitSelector'>
    QueryLimitSelector
-</div>)
+  </div>
+))
 
 const GET_DEFAULT_QUERY_LIMIT = () => 500
 const MOCK_DEFAULT_TYPE = types.MENU_PUBLIC_TRADES
