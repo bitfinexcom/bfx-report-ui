@@ -46,7 +46,7 @@ export function fetchPrevOrders(queryLimit) {
 
 /**
  * Create an action to jump to a specific Orders page.
- * @param {number} payload page number
+ * @param {number} page page number
  * @param {number} queryLimit query limit
  */
 export function jumpPage(page, queryLimit) {

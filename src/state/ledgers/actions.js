@@ -46,7 +46,8 @@ export function fetchPrevLedgers(queryLimit) {
 
 /**
  * Create an action to jump to a specific Ledgers page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
 export function jumpPage(page, queryLimit) {
   return {
