@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next Tickers data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextTickers() {
+export function fetchNextTickers(queryLimit) {
   return {
     type: types.FETCH_NEXT_TICKERS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev Tickers data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevTickers() {
+export function fetchPrevTickers(queryLimit) {
   return {
     type: types.FETCH_PREV_TICKERS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific Tickers page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_TICKERS_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

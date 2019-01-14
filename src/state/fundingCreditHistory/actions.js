@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next funding credit history data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextFCredit() {
+export function fetchNextFCredit(queryLimit) {
   return {
     type: types.FETCH_NEXT_FCREDIT,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev funding credit history data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevFCredit() {
+export function fetchPrevFCredit(queryLimit) {
   return {
     type: types.FETCH_PREV_FCREDIT,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific funding credit history page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_FCREDIT_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

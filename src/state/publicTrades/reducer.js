@@ -66,9 +66,9 @@ export function publicTradesReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.FETCH_NEXT_PUBLIC_TRADES:
-      return fetchNext(TYPE, state)
+      return fetchNext(TYPE, state, payload)
     case types.FETCH_PREV_PUBLIC_TRADES:
-      return fetchPrev(TYPE, state)
+      return fetchPrev(TYPE, state, payload)
     case types.JUMP_PUBLIC_TRADES_PAGE:
       return jumpPage(TYPE, state, payload)
     case types.SET_PAIR:

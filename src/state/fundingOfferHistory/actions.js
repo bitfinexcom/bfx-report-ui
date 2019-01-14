@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next funding offer history data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextFOffer() {
+export function fetchNextFOffer(queryLimit) {
   return {
     type: types.FETCH_NEXT_FOFFER,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev funding offer history data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevFOffer() {
+export function fetchPrevFOffer(queryLimit) {
   return {
     type: types.FETCH_PREV_FOFFER,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific funding offer history page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_FOFFER_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

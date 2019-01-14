@@ -104,9 +104,9 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.FETCH_NEXT_FCREDIT:
-      return fetchNext(TYPE, state)
+      return fetchNext(TYPE, state, payload)
     case types.FETCH_PREV_FCREDIT:
-      return fetchPrev(TYPE, state)
+      return fetchPrev(TYPE, state, payload)
     case types.JUMP_FCREDIT_PAGE:
       return jumpPage(TYPE, state, payload)
     case types.ADD_SYMBOL:

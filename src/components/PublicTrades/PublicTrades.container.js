@@ -33,9 +33,9 @@ const mapStateToProps = (state = {}) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchPublictrades: pair => dispatch(actions.fetchPublicTrades(pair)),
-  fetchNext: () => dispatch(actions.fetchNextPublicTrades()),
-  fetchPrev: () => dispatch(actions.fetchPrevPublicTrades()),
-  jumpPage: page => dispatch(actions.jumpPage(page)),
+  fetchNext: queryLimit => dispatch(actions.fetchNextPublicTrades(queryLimit)),
+  fetchPrev: queryLimit => dispatch(actions.fetchPrevPublicTrades(queryLimit)),
+  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
   refresh: () => dispatch(actions.refresh()),
   setTargetPair: pair => dispatch(actions.setTargetPair(pair)),
 })

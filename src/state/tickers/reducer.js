@@ -78,9 +78,9 @@ export function TickersReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.FETCH_NEXT_TICKERS:
-      return fetchNext(TYPE, state)
+      return fetchNext(TYPE, state, payload)
     case types.FETCH_PREV_TICKERS:
-      return fetchPrev(TYPE, state)
+      return fetchPrev(TYPE, state, payload)
     case types.JUMP_TICKERS_PAGE:
       return jumpPage(TYPE, state, payload)
     case types.ADD_PAIR:
