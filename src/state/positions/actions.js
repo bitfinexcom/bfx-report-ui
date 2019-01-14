@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next Positions data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextPositions() {
+export function fetchNextPositions(queryLimit) {
   return {
     type: types.FETCH_NEXT_POSITIONS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev Positions data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevPositions() {
+export function fetchPrevPositions(queryLimit) {
   return {
     type: types.FETCH_PREV_POSITIONS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific Positions page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_POSITIONS_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

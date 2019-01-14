@@ -94,11 +94,11 @@ export function positionsReducer(state = initialState, action) {
     }
     case types.FETCH_FAIL:
       return fetchFail(state)
-    case types.FETCH_NEXT_ORDERS:
-      return fetchNext(TYPE, state)
-    case types.FETCH_PREV_ORDERS:
-      return fetchPrev(TYPE, state)
-    case types.JUMP_ORDERS_PAGE:
+    case types.FETCH_NEXT_POSITIONS:
+      return fetchNext(TYPE, state, payload)
+    case types.FETCH_PREV_POSITIONS:
+      return fetchPrev(TYPE, state, payload)
+    case types.JUMP_POSITIONS_PAGE:
       return jumpPage(TYPE, state, payload)
     case types.ADD_PAIR:
       return addPair(state, payload, initialState)
