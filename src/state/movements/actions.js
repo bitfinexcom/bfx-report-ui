@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next Movements data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextMovements() {
+export function fetchNextMovements(queryLimit) {
   return {
     type: types.FETCH_NEXT_MOVEMENTS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev Movements data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevMovements() {
+export function fetchPrevMovements(queryLimit) {
   return {
     type: types.FETCH_PREV_MOVEMENTS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific Movements page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_MOVEMENTS_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 
