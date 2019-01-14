@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { injectIntl } from 'react-intl'
 import {
   Button,
   Intent,
@@ -7,6 +8,7 @@ import {
   Popover,
   PopoverInteractionKind,
   Position,
+  Tooltip,
 } from '@blueprintjs/core'
 
 import { propTypes, defaultProps } from './QueryLimitSelector.props'
@@ -26,6 +28,7 @@ class QueryLimitSelector extends PureComponent {
   render() {
     const {
       getQueryLimit,
+      intl,
       target,
     } = this.props
     const queryLimit = getQueryLimit(target)
@@ -52,16 +55,25 @@ class QueryLimitSelector extends PureComponent {
       </Menu>
     )
     return (
-      <Popover
-        content={options}
-        interactionKind={PopoverInteractionKind.CLICK}
-        position={Position.BOTTOM}
+      <Tooltip
+        content={(
+          <span>
+            {intl.formatMessage({ id: 'pagination.querylimit.tooltip' })}
+          </span>
+        )}
+        usePortal
       >
-        <Button
-          rightIcon='caret-down'
-          text={queryLimit}
-        />
-      </Popover>
+        <Popover
+          content={options}
+          interactionKind={PopoverInteractionKind.CLICK}
+          position={Position.BOTTOM}
+        >
+          <Button
+            rightIcon='caret-down'
+            text={queryLimit}
+          />
+        </Popover>
+      </Tooltip>
     )
   }
 }
@@ -69,4 +81,4 @@ class QueryLimitSelector extends PureComponent {
 QueryLimitSelector.propTypes = propTypes
 QueryLimitSelector.defaultProps = defaultProps
 
-export default QueryLimitSelector
+export default injectIntl(QueryLimitSelector)
