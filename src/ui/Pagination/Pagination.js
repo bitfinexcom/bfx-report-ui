@@ -15,6 +15,7 @@ class Pagination extends PureComponent {
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.backward = this.backward.bind(this)
     this.forward = this.forward.bind(this)
+    this.fetchNext = this.fetchNext.bind(this)
     this.pageInput = createRef()
   }
 
@@ -28,23 +29,32 @@ class Pagination extends PureComponent {
 
   handleKeyPress(event) {
     if (event.key === 'Enter') {
+      const { getQueryLimit, jumpPage, type } = this.props
+      const LIMIT = getQueryLimit(type)
       const pageLen = parseInt(this.pageInput.current.dataset.pagelen || 1, 10)
       const page = Math.abs(parseInt(this.pageInput.current.value || 1, 10))
-      // eslint-disable-next-line react/destructuring-assignment
-      this.props.jumpPage(page < pageLen ? page : pageLen)
+      jumpPage(page < pageLen ? page : pageLen, LIMIT)
     }
   }
 
   backward() {
+    const { getQueryLimit, jumpPage, type } = this.props
     const page = this.getCurrentPage()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.jumpPage(page - 1)
+    const LIMIT = getQueryLimit(type)
+    jumpPage(page - 1, LIMIT)
   }
 
   forward() {
+    const { getQueryLimit, jumpPage, type } = this.props
     const page = this.getCurrentPage()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.jumpPage(page + 1)
+    const LIMIT = getQueryLimit(type)
+    jumpPage(page + 1, LIMIT)
+  }
+
+  fetchNext() {
+    const { getQueryLimit, nextClick, type } = this.props
+    const LIMIT = getQueryLimit(type)
+    nextClick(LIMIT)
   }
 
   render() {
@@ -55,7 +65,6 @@ class Pagination extends PureComponent {
       intl,
       loading,
       offset,
-      nextClick,
       prevClick,
       pageOffset,
       nextPage = false,
@@ -142,7 +151,7 @@ class Pagination extends PureComponent {
           <Button
             minimal
             rightIcon='double-chevron-right'
-            onClick={nextClick}
+            onClick={this.fetchNext}
             disabled={!nextPage || loading}
           />
           {renderQueryLimitSelector}

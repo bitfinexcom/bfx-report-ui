@@ -13,6 +13,7 @@ const initBlockState = {
   targetPairs: [],
   nextPage: false,
 }
+const LIMIT = 5000
 
 describe('ledger state', () => {
   it('should return the initial state', () => {
@@ -27,11 +28,11 @@ describe('ledger state', () => {
         offset: 300,
         pageOffset: 0,
       },
-      actions.jumpPage(2),
+      actions.jumpPage(2, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 300,
-      pageOffset: 200,
+      pageOffset: 125,
     })
 
     // jump from p1 to p2
@@ -41,79 +42,79 @@ describe('ledger state', () => {
         offset: 5000,
         pageOffset: 0,
       },
-      actions.jumpPage(2),
+      actions.jumpPage(2, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 5000,
-      pageOffset: 200,
+      pageOffset: 125,
     })
-  })
 
-  // jump from p1 to p25
-  expect(reducer(
-    {
+    // jump from p1 to p40
+    expect(reducer(
+      {
+        ...initBlockState,
+        offset: 5000,
+        pageOffset: 0,
+      },
+      actions.jumpPage(40, LIMIT),
+    )).toEqual({
       ...initBlockState,
       offset: 5000,
-      pageOffset: 0,
-    },
-    actions.jumpPage(25),
-  )).toEqual({
-    ...initBlockState,
-    offset: 5000,
-    pageOffset: 4800,
-  })
+      pageOffset: 4875,
+    })
 
-  // jump from p25 to p24
-  expect(reducer(
-    {
+    // jump from p40 to p39
+    expect(reducer(
+      {
+        ...initBlockState,
+        offset: 5000,
+        pageOffset: 4875,
+      },
+      actions.jumpPage(39, LIMIT),
+    )).toEqual({
       ...initBlockState,
       offset: 5000,
-      pageOffset: 4800,
-    },
-    actions.jumpPage(24),
-  )).toEqual({
-    ...initBlockState,
-    offset: 5000,
-    pageOffset: 4600,
+      pageOffset: 4750,
+    })
   })
 
   it('should handle jump page > LIMIT correctly', () => {
-    // jump from p26 to p27
+    // jump from p41 to p42
     expect(reducer(
       {
         ...initBlockState,
         offset: 10000,
         pageOffset: 0,
       },
-      actions.jumpPage(27),
+      actions.jumpPage(42, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 10000,
-      pageOffset: 200,
+      pageOffset: 125,
     })
 
-    // jump from p26 to p50
+    // jump from p41 to p80
     expect(reducer(
       {
         ...initBlockState,
         offset: 10000,
         pageOffset: 0,
       },
-      actions.jumpPage(50),
+      actions.jumpPage(80, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 10000,
-      pageOffset: 4800,
+      pageOffset: 4875,
     })
 
-    // jump from p50 to p26
+    // jump from p80 to p41
     expect(reducer(
       {
         ...initBlockState,
         offset: 10000,
-        pageOffset: 4800,
+        pageOffset: 4875,
       },
-      actions.jumpPage(26),
+      actions.jumpPage(41, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 10000,
@@ -122,42 +123,42 @@ describe('ledger state', () => {
   })
 
   it('should handle jump page > 2 * LIMIT correctly', () => {
-    // jump from p51 to p52
+    // jump from p81 to p82
     expect(reducer(
       {
         ...initBlockState,
         offset: 15000,
         pageOffset: 0,
       },
-      actions.jumpPage(52),
+      actions.jumpPage(82, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 15000,
-      pageOffset: 200,
+      pageOffset: 125,
     })
 
-    // jump from p51 to p75
+    // jump from p81 to p120
     expect(reducer(
       {
         ...initBlockState,
         offset: 15000,
         pageOffset: 0,
       },
-      actions.jumpPage(75),
+      actions.jumpPage(120, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 15000,
-      pageOffset: 4800,
+      pageOffset: 4875,
     })
 
-    // jump from p75 to p51
+    // jump from p120 to p81
     expect(reducer(
       {
         ...initBlockState,
         offset: 15000,
-        pageOffset: 4800,
+        pageOffset: 4875,
       },
-      actions.jumpPage(51),
+      actions.jumpPage(81, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 15000,
@@ -166,28 +167,28 @@ describe('ledger state', () => {
   })
 
   it('should handle prev page correctly', () => {
-    // jump from p26 to p1
+    // jump from p41 to p1
     expect(reducer(
       {
         ...initBlockState,
         offset: 10000,
         pageOffset: 0,
       },
-      actions.fetchPrevOrders(),
+      actions.fetchPrevOrders(LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 5000,
       pageOffset: 0,
     })
 
-    // jump from p75 to p26
+    // jump from p120 to p81
     expect(reducer(
       {
         ...initBlockState,
         offset: 15000,
-        pageOffset: 4800,
+        pageOffset: 4875,
       },
-      actions.fetchPrevOrders(),
+      actions.fetchPrevOrders(LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 10000,
@@ -196,32 +197,32 @@ describe('ledger state', () => {
   })
 
   it('should handle jump page across the LIMIT correctly', () => {
-    // jump from p26 to p25
+    // jump from p41 to p40
     expect(reducer(
       {
         ...initBlockState,
         offset: 10000,
         pageOffset: 0,
       },
-      actions.jumpPage(25),
+      actions.jumpPage(40, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 5000,
-      pageOffset: 4800,
+      pageOffset: 4875,
     })
-  })
 
-  // jump from p51 to p50
-  expect(reducer(
-    {
+    // jump from p81 to p80
+    expect(reducer(
+      {
+        ...initBlockState,
+        offset: 15000,
+        pageOffset: 0,
+      },
+      actions.jumpPage(80, LIMIT),
+    )).toEqual({
       ...initBlockState,
-      offset: 15000,
-      pageOffset: 0,
-    },
-    actions.jumpPage(50),
-  )).toEqual({
-    ...initBlockState,
-    offset: 10000,
-    pageOffset: 4800,
+      offset: 10000,
+      pageOffset: 4875,
+    })
   })
 })

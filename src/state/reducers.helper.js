@@ -1,6 +1,5 @@
 import queryTypes from 'state/query/constants'
 import { getFilterType, getPageSize } from 'state/query/utils'
-import { getTargetQueryLimit } from 'state/query/selectors'
 
 /* init states */
 export const paginateState = {
@@ -60,8 +59,7 @@ export function setTimeRange(type, state, initialState) {
 }
 
 /* pagination */
-export function fetchNext(type, state) {
-  const LIMIT = getTargetQueryLimit(type)
+export function fetchNext(type, state, LIMIT) {
   return (state.entries.length - LIMIT >= state.offset)
     ? {
       ...state,
@@ -73,8 +71,7 @@ export function fetchNext(type, state) {
     }
 }
 
-export function fetchPrev(type, state) {
-  const LIMIT = getTargetQueryLimit(type)
+export function fetchPrev(type, state, LIMIT) {
   return {
     ...state,
     offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
@@ -82,8 +79,8 @@ export function fetchPrev(type, state) {
   }
 }
 
-export function jumpPage(type, state, page) {
-  const LIMIT = getTargetQueryLimit(type)
+export function jumpPage(type, state, payload) {
+  const { page, queryLimit: LIMIT } = payload
   const PAGE_SIZE = getPageSize(type)
   const totalOffset = (page - 1) * PAGE_SIZE
   const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT

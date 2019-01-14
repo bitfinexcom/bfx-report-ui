@@ -13,7 +13,7 @@ export const getTheme = state => getBase(state).theme
 export const getTimezone = state => getBase(state).timezone
 export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FORMATS[0]
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
-export const getBaseQueryLimit = state => getBase(state).queryLimit || 125
+export const getBaseQueryLimit = state => getBase(state).queryLimit || types.DEFAULT_BASE_QUERY_LIMIT
 
 export const getFullTime = state => (mts, full) => (mts ? formatTime(mts, {
   timezone: getTimezone(state),

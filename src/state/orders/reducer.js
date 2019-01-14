@@ -109,9 +109,9 @@ export function ordersReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.FETCH_NEXT_ORDERS:
-      return fetchNext(TYPE, state)
+      return fetchNext(TYPE, state, payload)
     case types.FETCH_PREV_ORDERS:
-      return fetchPrev(TYPE, state)
+      return fetchPrev(TYPE, state, payload)
     case types.JUMP_ORDERS_PAGE:
       return jumpPage(TYPE, state, payload)
     case types.ADD_PAIR:

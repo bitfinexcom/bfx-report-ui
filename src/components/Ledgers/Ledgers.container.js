@@ -33,9 +33,9 @@ const mapStateToProps = (state = {}) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchLedgers: symbol => dispatch(actions.fetchLedgers(symbol)),
-  fetchNext: () => dispatch(actions.fetchNextLedgers()),
-  fetchPrev: () => dispatch(actions.fetchPrevLedgers()),
-  jumpPage: page => dispatch(actions.jumpPage(page)),
+  fetchNext: queryLimit => dispatch(actions.fetchNextLedgers(queryLimit)),
+  fetchPrev: queryLimit => dispatch(actions.fetchPrevLedgers(queryLimit)),
+  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
   refresh: () => dispatch(actions.refresh()),
   addTargetSymbol: symbol => dispatch(actions.addTargetSymbol(symbol)),
   removeTargetSymbol: symbol => dispatch(actions.removeTargetSymbol(symbol)),

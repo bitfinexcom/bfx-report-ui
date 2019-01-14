@@ -86,14 +86,14 @@ const MAPPING = {
     icon: 'book',
     path: '/ledgers',
     filterType: FILTER_SYMBOL,
-    // queryLimit: 250,
+    // queryLimit: 125,
     pageSize: 125,
   },
   [MENU_ORDERS]: {
     icon: 'flows',
     path: '/orders',
     filterType: FILTER_PAIR,
-    // queryLimit: 250,
+    // queryLimit: 125,
     pageSize: 125,
   },
   [MENU_TICKERS]: {
@@ -107,7 +107,7 @@ const MAPPING = {
     icon: 'exchange',
     path: '/trades',
     filterType: FILTER_PAIR,
-    // queryLimit: 500,
+    // queryLimit: 125,
     pageSize: 125,
   },
   [MENU_DEPOSITS]: {
