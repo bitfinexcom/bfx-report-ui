@@ -5,11 +5,16 @@ import {
   rendererCreateWithIntl,
 } from 'tests/helper'
 
-import Pagination from '../Pagination'
+import types from 'state/query/constants'
 
-const TYPE_LEDGERS = 'ledgers'
-const TYPE_TRADES = 'trades'
-const MOCK_DEFAULT_TYPE = TYPE_LEDGERS
+import Pagination from '../Pagination.js'
+
+jest.mock('ui/QueryLimitSelector', () => ()=> <div id="mockQueryLimitSelector">
+   QueryLimitSelector
+</div>)
+
+const GET_DEFAULT_QUERY_LIMIT = () => 500
+const MOCK_DEFAULT_TYPE = types.MENU_PUBLIC_TRADES
 const TEST_CASES = [
   {
     title: 'render correctly with 1 entry',
@@ -32,8 +37,8 @@ const TEST_CASES = [
   {
     title: 'render correctly in 1 of 1 page',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 199,
-    offset: 199,
+    dataLen: 124,
+    offset: 124,
     pageOffset: 0,
     placeholder: 1,
     totalPages: '1',
@@ -41,8 +46,8 @@ const TEST_CASES = [
   {
     title: 'render correctly in 1 of 2 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 350,
-    offset: 350,
+    dataLen: 200,
+    offset: 200,
     pageOffset: 0,
     placeholder: 1,
     totalPages: '2',
@@ -50,98 +55,89 @@ const TEST_CASES = [
   {
     title: 'render correctly in 2 of 2 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 350,
-    offset: 350,
-    pageOffset: 200,
+    dataLen: 200,
+    offset: 200,
+    pageOffset: 125,
     placeholder: 2,
     totalPages: '2',
   },
   {
     title: 'render correctly in 3 of 4 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 650,
-    offset: 650,
-    pageOffset: 400,
+    dataLen: 400,
+    offset: 400,
+    pageOffset: 250,
     placeholder: 3,
     totalPages: '4',
   },
   {
-    title: 'render correctly in 24 of 25 pages',
+    title: 'render correctly in 4 of 4 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 4850,
-    offset: 4850,
-    pageOffset: 4600,
-    placeholder: 24,
-    totalPages: '25',
+    dataLen: 450,
+    offset: 450,
+    pageOffset: 375,
+    placeholder: 4,
+    totalPages: '4',
   },
   {
-    title: 'render correctly in 25 of 25 pages',
+    title: 'render correctly in 1 of 4 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 4850,
-    offset: 4850,
-    pageOffset: 4800,
-    placeholder: 25,
-    totalPages: '25',
-  },
-  {
-    title: 'render correctly in 1 of 25 pages',
-    type: MOCK_DEFAULT_TYPE,
-    dataLen: 5000,
-    offset: 5000,
+    dataLen: 500,
+    offset: 500,
     pageOffset: 0,
     placeholder: 1,
-    totalPages: '25',
+    totalPages: '4',
     nextPage: true,
   },
   {
-    title: 'render correctly in 26 of 26 pages',
+    title: 'render correctly in 5 of 5 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 5100,
-    offset: 5100,
+    dataLen: 510,
+    offset: 510,
     pageOffset: 0,
-    placeholder: 26,
-    totalPages: '26',
+    placeholder: 5,
+    totalPages: '5',
   },
   {
-    title: 'render correctly in 26 of 28 pages',
+    title: 'render correctly in 5 of 7 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 5500,
-    offset: 5500,
+    dataLen: 850,
+    offset: 850,
     pageOffset: 0,
-    placeholder: 26,
-    totalPages: '28',
+    placeholder: 5,
+    totalPages: '7',
   },
   {
-    title: 'render correctly in 27 of 28 pages',
+    title: 'render correctly in 6 of 7 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 5500,
-    offset: 5500,
-    pageOffset: 200,
-    placeholder: 27,
-    totalPages: '28',
+    dataLen: 850,
+    offset: 850,
+    pageOffset: 125,
+    placeholder: 6,
+    totalPages: '7',
   },
   {
-    title: 'render correctly in 26 of 50 pages',
+    title: 'render correctly in 5 of 8 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 10000,
-    offset: 10000,
+    dataLen: 1000,
+    offset: 1000,
     pageOffset: 0,
-    placeholder: 26,
-    totalPages: '50',
+    placeholder: 5,
+    totalPages: '8',
     nextPage: true,
   },
   {
-    title: 'render correctly in 51 of 51 pages',
+    title: 'render correctly in 9 of 9 pages',
     type: MOCK_DEFAULT_TYPE,
-    dataLen: 10100,
-    offset: 10100,
+    dataLen: 1100,
+    offset: 1100,
     pageOffset: 0,
-    placeholder: 51,
-    totalPages: '51',
+    placeholder: 9,
+    totalPages: '9',
   },
   {
     title: 'render trades correctly in 1 of 1 pages',
-    type: TYPE_TRADES,
+    type: types.MENU_TRADES,
     dataLen: 1,
     offset: 1,
     pageOffset: 0,
@@ -150,7 +146,7 @@ const TEST_CASES = [
   },
   {
     title: 'render trades correctly in 1 of 2 pages',
-    type: TYPE_TRADES,
+    type: types.MENU_TRADES,
     dataLen: 151,
     offset: 151,
     pageOffset: 0,
@@ -159,38 +155,38 @@ const TEST_CASES = [
   },
   {
     title: 'render trades correctly in 1 of 2 pages',
-    type: TYPE_TRADES,
+    type: types.MENU_TRADES,
     dataLen: 151,
     offset: 151,
-    pageOffset: 150,
+    pageOffset: 125,
     placeholder: 2,
     totalPages: '2',
   },
   {
-    title: 'render trades correctly in 10 of 10 pages',
-    type: TYPE_TRADES,
+    title: 'render trades correctly in 12 of 12 pages',
+    type: types.MENU_TRADES,
     dataLen: 1480,
     offset: 1480,
-    pageOffset: 1350,
-    placeholder: 10,
-    totalPages: '10',
+    pageOffset: 375,
+    placeholder: 12,
+    totalPages: '12',
   },
   {
-    title: 'render trades correctly in 1 of 10 pages',
-    type: TYPE_TRADES,
+    title: 'render trades correctly in 1 of 12 pages',
+    type: types.MENU_TRADES,
     dataLen: 1500,
-    offset: 1500,
+    offset: 0,
     pageOffset: 0,
     placeholder: 1,
-    totalPages: '10',
+    totalPages: '12',
     nextPage: true,
   },
   {
     title: 'render trades correctly in 11 of 12 pages',
-    type: TYPE_TRADES,
-    dataLen: 1700,
-    offset: 1700,
-    pageOffset: 0,
+    type: types.MENU_TRADES,
+    dataLen: 1480,
+    offset: 1480,
+    pageOffset: 250,
     placeholder: 11,
     totalPages: '12',
   },
@@ -204,6 +200,7 @@ test('renders without crashing', () => {
       dataLen={1}
       offset={1}
       pageOffset={0}
+      getQueryLimit={GET_DEFAULT_QUERY_LIMIT}
     />, div,
   )
   ReactDOM.unmountComponentAtNode(div)
@@ -218,6 +215,7 @@ TEST_CASES.forEach((entry) => {
         offset={entry.offset}
         pageOffset={entry.pageOffset}
         nextPage={entry.nextPage || false}
+        getQueryLimit={GET_DEFAULT_QUERY_LIMIT}
       />,
     )
     const tree = component.toJSON()
