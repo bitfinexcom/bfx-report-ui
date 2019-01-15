@@ -79,8 +79,8 @@ class Ledgers extends PureComponent {
       nextPage,
       timeOffset,
     } = this.props
-    const LIMIT = getQueryLimit(TYPE)
-    const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
+    const limit = getQueryLimit(TYPE)
+    const filteredData = getCurrentEntries(entries, offset, limit, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
     const tableColums = getColumns({
       filteredData,

@@ -30,31 +30,31 @@ class Pagination extends PureComponent {
   handleKeyPress(event) {
     if (event.key === 'Enter') {
       const { getQueryLimit, jumpPage, type } = this.props
-      const LIMIT = getQueryLimit(type)
+      const limit = getQueryLimit(type)
       const pageLen = parseInt(this.pageInput.current.dataset.pagelen || 1, 10)
       const page = Math.abs(parseInt(this.pageInput.current.value || 1, 10))
-      jumpPage(page < pageLen ? page : pageLen, LIMIT)
+      jumpPage(page < pageLen ? page : pageLen, limit)
     }
   }
 
   backward() {
     const { getQueryLimit, jumpPage, type } = this.props
     const page = this.getCurrentPage()
-    const LIMIT = getQueryLimit(type)
-    jumpPage(page - 1, LIMIT)
+    const limit = getQueryLimit(type)
+    jumpPage(page - 1, limit)
   }
 
   forward() {
     const { getQueryLimit, jumpPage, type } = this.props
     const page = this.getCurrentPage()
-    const LIMIT = getQueryLimit(type)
-    jumpPage(page + 1, LIMIT)
+    const limit = getQueryLimit(type)
+    jumpPage(page + 1, limit)
   }
 
   fetchNext() {
     const { getQueryLimit, nextClick, type } = this.props
-    const LIMIT = getQueryLimit(type)
-    nextClick(LIMIT)
+    const limit = getQueryLimit(type)
+    nextClick(limit)
   }
 
   render() {
