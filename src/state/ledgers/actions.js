@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next Ledgers data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextLedgers() {
+export function fetchNextLedgers(queryLimit) {
   return {
     type: types.FETCH_NEXT_LEDGERS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev Ledgers data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevLedgers() {
+export function fetchPrevLedgers(queryLimit) {
   return {
     type: types.FETCH_PREV_LEDGERS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific Ledgers page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_LEDGERS_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

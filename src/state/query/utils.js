@@ -65,35 +65,35 @@ const MAPPING = {
     icon: 'book',
     path: '/credits',
     filterType: FILTER_SYMBOL,
-    queryLimit: 100,
-    pageSize: 100,
+    queryLimit: 500,
+    pageSize: 125,
   },
   [MENU_FLOAN]: {
     icon: 'book',
     path: '/loans',
     filterType: FILTER_SYMBOL,
-    queryLimit: 100,
-    pageSize: 100,
+    queryLimit: 500,
+    pageSize: 125,
   },
   [MENU_FOFFER]: {
     icon: 'book',
     path: '/offers',
     filterType: FILTER_SYMBOL,
-    queryLimit: 100,
-    pageSize: 100,
+    queryLimit: 500,
+    pageSize: 125,
   },
   [MENU_LEDGERS]: {
     icon: 'book',
     path: '/ledgers',
     filterType: FILTER_SYMBOL,
-    queryLimit: 250,
+    // queryLimit: 500,
     pageSize: 125,
   },
   [MENU_ORDERS]: {
     icon: 'flows',
     path: '/orders',
     filterType: FILTER_PAIR,
-    queryLimit: 250,
+    // queryLimit: 500,
     pageSize: 125,
   },
   [MENU_TICKERS]: {
@@ -107,7 +107,7 @@ const MAPPING = {
     icon: 'exchange',
     path: '/trades',
     filterType: FILTER_PAIR,
-    queryLimit: 500,
+    // queryLimit: 1000,
     pageSize: 125,
   },
   [MENU_DEPOSITS]: {
@@ -128,22 +128,22 @@ const MAPPING = {
     icon: 'exchange',
     path: '/pub_trades',
     filterType: FILTER_PAIR,
-    queryLimit: 500,
+    queryLimit: 5000,
     pageSize: 125,
   },
   [MENU_POSITIONS]: {
     icon: 'numbered-list',
     path: '/positions',
     filterType: FILTER_PAIR,
-    queryLimit: 25,
+    queryLimit: 50,
     pageSize: 25,
   },
   [MENU_POSITIONS_AUDIT]: {
     icon: 'numbered-list',
     path: '/positions_audit',
     filterType: FILTER_ID,
-    queryLimit: 100,
-    pageSize: 100,
+    queryLimit: 250,
+    pageSize: 125,
   },
   [MENU_MOVEMENTS]: {
     filterType: FILTER_SYMBOL,
@@ -153,6 +153,7 @@ const MAPPING = {
   [MENU_WALLETS]: {
     icon: 'dollar',
     path: '/wallets',
+    // queryLimit: 100,
   },
 }
 
@@ -160,6 +161,11 @@ const PATHMAP = {}
 ROUTE_WHITELIST.forEach((key) => {
   PATHMAP[MAPPING[key].path] = key
 })
+
+function error(target, action) {
+  // eslint-disable-next-line no-console
+  console.error(`${target}'s ${action} param is not defined`)
+}
 
 // get target from the following link syntax
 // /target
@@ -177,27 +183,57 @@ export function getTarget(link) {
 
 // get icon from target
 export function getIcon(target) {
-  return MAPPING[target].icon
+  const { icon } = MAPPING[target]
+  if (icon) {
+    return icon
+  }
+  error(target, 'icon')
+  return ''
 }
 
 // get path from target
 export function getPath(target) {
-  return MAPPING[target].path
+  const { path } = MAPPING[target]
+  if (path) {
+    return path
+  }
+  error(target, 'path')
+  return ''
 }
 
 export function getFilterType(target) {
-  return MAPPING[target].filterType
+  const { filterType } = MAPPING[target]
+  if (filterType) {
+    return filterType
+  }
+  error(target, 'filterType')
+  return ''
 }
 
 export function getQueryLimit(target) {
-  return MAPPING[target].queryLimit
+  const { queryLimit } = MAPPING[target]
+  if (queryLimit) {
+    return queryLimit
+  }
+  error(target, 'queryLimit')
+  return 0
 }
 
 export function getPageSize(target) {
-  return MAPPING[target].pageSize
+  const { pageSize } = MAPPING[target]
+  if (pageSize) {
+    return pageSize
+  }
+  error(target, 'pageSize')
+  return 0
+}
+
+export function canChangeQueryLimit(target) {
+  return [MENU_LEDGERS, MENU_ORDERS, MENU_TRADES].includes(target)
 }
 
 export default {
+  canChangeQueryLimit,
   getIcon,
   getFilterType,
   getPageSize,

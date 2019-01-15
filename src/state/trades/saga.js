@@ -7,23 +7,23 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, getSymbolsURL, getPairsFromUrlParam } from 'state/symbols/utils'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
 import { getTrades, getTargetPairs } from './selectors'
 
 const TYPE = queryTypes.MENU_TRADES
-const LIMIT = getQueryLimit(TYPE)
-
-function getReqTrades(auth, query, targetPairs, smallestMts) {
-  const params = getTimeFrame(query, TYPE, smallestMts)
+function getReqTrades(auth, query, targetPairs, smallestMts, queryLimit) {
+  const params = getTimeFrame(query, smallestMts)
   if (targetPairs.length > 0) {
     params.symbol = formatRawSymbols(targetPairs)
+  }
+  if (queryLimit) {
+    params.limit = queryLimit
   }
   return makeFetchCall('getTrades', auth, params)
 }
@@ -39,7 +39,9 @@ function* fetchTrades({ payload: pair }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, 0)
+    const getQueryLimit = yield select(getTargetQueryLimit)
+    const queryLimit = getQueryLimit(TYPE)
+    const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, 0, queryLimit)
     yield put(actions.updateTrades(result))
 
     if (error) {
@@ -66,13 +68,15 @@ function* fetchNextTrades() {
       smallestMts,
       targetPairs,
     } = yield select(getTrades)
+    const getQueryLimit = yield select(getTargetQueryLimit)
+    const queryLimit = getQueryLimit(TYPE)
     // data exist, no need to fetch again
-    if (entries.length - LIMIT >= offset) {
+    if (entries.length - queryLimit >= offset) {
       return
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, smallestMts)
+    const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, smallestMts, queryLimit)
     yield put(actions.updateTrades(result))
 
     if (error) {

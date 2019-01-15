@@ -21,7 +21,8 @@ const TYPE = queryTypes.MENU_TICKERS
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqTickers(auth, query, targetPairs, smallestMts) {
-  const params = getTimeFrame(query, TYPE, smallestMts)
+  const params = getTimeFrame(query, smallestMts)
+  params.limit = LIMIT
   if (targetPairs.length > 0) {
     params.symbol = formatRawSymbols(targetPairs)
   }

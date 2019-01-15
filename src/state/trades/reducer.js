@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
 import { formatInternalPair, formatSymbolToPair } from 'state/symbols/utils'
+import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -11,6 +12,7 @@ import {
   jumpPage,
   removePair,
   setPairs,
+  setQueryLimit,
   setTimeRange,
 } from 'state/reducers.helper'
 
@@ -85,9 +87,9 @@ export function tradesReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.FETCH_NEXT_TRADES:
-      return fetchNext(TYPE, state)
+      return fetchNext(TYPE, state, payload)
     case types.FETCH_PREV_TRADES:
-      return fetchPrev(TYPE, state)
+      return fetchPrev(TYPE, state, payload)
     case types.JUMP_TRADES_PAGE:
       return jumpPage(TYPE, state, payload)
     case types.ADD_PAIR:
@@ -97,6 +99,8 @@ export function tradesReducer(state = initialState, action) {
     case types.SET_PAIRS:
       return setPairs(state, payload, initialState)
     case types.REFRESH:
+    case baseTypes.SET_QUERY_LIMIT:
+      return setQueryLimit(TYPE, state, initialState)
     case queryTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:

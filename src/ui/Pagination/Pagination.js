@@ -1,10 +1,12 @@
 import React, { createRef, Fragment, PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { injectIntl, intlShape } from 'react-intl'
+import { injectIntl } from 'react-intl'
 import { Button, Spinner } from '@blueprintjs/core'
 
+import QueryLimitSelector from 'ui/QueryLimitSelector'
 import { isValidateType } from 'state/utils'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { canChangeQueryLimit, getPageSize } from 'state/query/utils'
+
+import { propTypes, defaultProps } from './Pagination.props'
 
 class Pagination extends PureComponent {
   constructor(props) {
@@ -13,6 +15,7 @@ class Pagination extends PureComponent {
     this.handleKeyPress = this.handleKeyPress.bind(this)
     this.backward = this.backward.bind(this)
     this.forward = this.forward.bind(this)
+    this.fetchNext = this.fetchNext.bind(this)
     this.pageInput = createRef()
   }
 
@@ -26,33 +29,42 @@ class Pagination extends PureComponent {
 
   handleKeyPress(event) {
     if (event.key === 'Enter') {
+      const { getQueryLimit, jumpPage, type } = this.props
+      const limit = getQueryLimit(type)
       const pageLen = parseInt(this.pageInput.current.dataset.pagelen || 1, 10)
       const page = Math.abs(parseInt(this.pageInput.current.value || 1, 10))
-      // eslint-disable-next-line react/destructuring-assignment
-      this.props.jumpPage(page < pageLen ? page : pageLen)
+      jumpPage(page < pageLen ? page : pageLen, limit)
     }
   }
 
   backward() {
+    const { getQueryLimit, jumpPage, type } = this.props
     const page = this.getCurrentPage()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.jumpPage(page - 1)
+    const limit = getQueryLimit(type)
+    jumpPage(page - 1, limit)
   }
 
   forward() {
+    const { getQueryLimit, jumpPage, type } = this.props
     const page = this.getCurrentPage()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.jumpPage(page + 1)
+    const limit = getQueryLimit(type)
+    jumpPage(page + 1, limit)
+  }
+
+  fetchNext() {
+    const { getQueryLimit, nextClick, type } = this.props
+    const limit = getQueryLimit(type)
+    nextClick(limit)
   }
 
   render() {
     const {
       type,
       dataLen,
+      getQueryLimit,
       intl,
       loading,
       offset,
-      nextClick,
       prevClick,
       pageOffset,
       nextPage = false,
@@ -94,6 +106,14 @@ class Pagination extends PureComponent {
       </Fragment>
     ) : undefined
 
+    const renderQueryLimitSelector = canChangeQueryLimit(type)
+      ? (
+        <QueryLimitSelector
+          target={type}
+        />
+      )
+      : undefined
+
     return (
       <div className='row center-xs'>
         <div className='bitfinex-pagination-group col-xs-12 col-sm-6'>
@@ -131,9 +151,10 @@ class Pagination extends PureComponent {
           <Button
             minimal
             rightIcon='double-chevron-right'
-            onClick={nextClick}
+            onClick={this.fetchNext}
             disabled={!nextPage || loading}
           />
+          {renderQueryLimitSelector}
           {renderLoading}
         </div>
       </div>
@@ -141,28 +162,7 @@ class Pagination extends PureComponent {
   }
 }
 
-Pagination.propTypes = {
-  dataLen: PropTypes.number.isRequired,
-  loading: PropTypes.bool,
-  intl: intlShape.isRequired,
-  jumpPage: PropTypes.func,
-  offset: PropTypes.number.isRequired,
-  nextClick: PropTypes.func,
-  prevClick: PropTypes.func,
-  pageOffset: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
-  nextPage: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.bool,
-  ]),
-}
-
-Pagination.defaultProps = {
-  jumpPage: () => {},
-  nextClick: () => {},
-  prevClick: () => {},
-  loading: false,
-  nextPage: false,
-}
+Pagination.propTypes = propTypes
+Pagination.defaultProps = defaultProps
 
 export default injectIntl(Pagination)

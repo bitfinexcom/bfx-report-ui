@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next public Trades data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextPublicTrades() {
+export function fetchNextPublicTrades(queryLimit) {
   return {
     type: types.FETCH_NEXT_PUBLIC_TRADES,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev public Trades data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevPublicTrades() {
+export function fetchPrevPublicTrades(queryLimit) {
   return {
     type: types.FETCH_PREV_PUBLIC_TRADES,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific public Trades page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_PUBLIC_TRADES_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

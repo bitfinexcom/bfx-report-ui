@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import actions from 'state/ledgers/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getTargetQueryLimit } from 'state/query/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -27,13 +28,14 @@ const mapStateToProps = (state = {}) => ({
   pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
   timeOffset: getTimeOffset(state),
+  getQueryLimit: getTargetQueryLimit(state),
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchLedgers: symbol => dispatch(actions.fetchLedgers(symbol)),
-  fetchNext: () => dispatch(actions.fetchNextLedgers()),
-  fetchPrev: () => dispatch(actions.fetchPrevLedgers()),
-  jumpPage: page => dispatch(actions.jumpPage(page)),
+  fetchNext: queryLimit => dispatch(actions.fetchNextLedgers(queryLimit)),
+  fetchPrev: queryLimit => dispatch(actions.fetchPrevLedgers(queryLimit)),
+  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
   refresh: () => dispatch(actions.refresh()),
   addTargetSymbol: symbol => dispatch(actions.addTargetSymbol(symbol)),
   removeTargetSymbol: symbol => dispatch(actions.removeTargetSymbol(symbol)),

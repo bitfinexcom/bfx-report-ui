@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next Trades data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextTrades() {
+export function fetchNextTrades(queryLimit) {
   return {
     type: types.FETCH_NEXT_TRADES,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev Trades data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevTrades() {
+export function fetchPrevTrades(queryLimit) {
   return {
     type: types.FETCH_PREV_TRADES,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific Trades page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_TRADES_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

@@ -5,7 +5,7 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
-import Pagination from 'components/Pagination'
+import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'

@@ -87,9 +87,9 @@ export function movementsReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.FETCH_NEXT_MOVEMENTS:
-      return fetchNext(TYPE, state)
+      return fetchNext(TYPE, state, payload)
     case types.FETCH_PREV_MOVEMENTS:
-      return fetchPrev(TYPE, state)
+      return fetchPrev(TYPE, state, payload)
     case types.JUMP_MOVEMENTS_PAGE:
       return jumpPage(TYPE, state, payload)
     case types.ADD_SYMBOL:

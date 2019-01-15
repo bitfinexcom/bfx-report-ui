@@ -1,7 +1,17 @@
-import { isValidateType } from 'state/utils'
+import { getBaseQueryLimit } from 'state/base/selectors'
 
-import { getQueryLimit } from './utils'
+import { canChangeQueryLimit, getQueryLimit } from './utils'
 import constants from './constants'
+
+const {
+  TIME_RANGE_LAST_24HOURS,
+  TIME_RANGE_YESTERDAY,
+  TIME_RANGE_MONTH_TO_DATE,
+  TIME_RANGE_PAST_MONTH,
+  TIME_RANGE_PAST_3MONTH,
+  TIME_RANGE_CUSTOM,
+  TIME_RANGE_LAST_2WEEKS,
+} = constants
 
 export const getQuery = state => state.query
 
@@ -9,50 +19,57 @@ export const getTimeRange = state => getQuery(state).timeRange
 export const getEmail = state => getQuery(state).email
 export const getExportEmail = state => getQuery(state).exportEmail
 export const getPrepareExport = state => getQuery(state).prepareExport
+/**
+ * Selector to return query limit by type.
+ * Some section allow user custom query limit.
+ * @param {object} state query state
+ */
+export const getTargetQueryLimit = state => target => (canChangeQueryLimit(target)
+  ? getBaseQueryLimit(state)
+  : getQueryLimit(target))
 
 /**
  * Selector to return query range (in milliseconds) and limit.
  * @param {object} state query state
  */
-export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
+export function getTimeFrame(state = {}, smallestMts = 0) {
   const date = new Date()
   const now = date.getTime()
   let TIME_SHIFT
   let start
   let end = now
-  const limit = isValidateType(type) ? getQueryLimit(type) : constants.DEFAULT_QUERY_LIMIT
   switch (state.timeRange) {
-    case constants.TIME_RANGE_LAST_24HOURS:
+    case TIME_RANGE_LAST_24HOURS:
       TIME_SHIFT = 1000 * 60 * 60 * 24 // 24 hours
       start = now - TIME_SHIFT
       break
-    case constants.TIME_RANGE_YESTERDAY:
+    case TIME_RANGE_YESTERDAY:
       date.setDate(date.getDate() - 1)
       date.setHours(0, 0)
       date.setMinutes(0, 0)
       start = date.getTime()
       break
-    case constants.TIME_RANGE_MONTH_TO_DATE:
+    case TIME_RANGE_MONTH_TO_DATE:
       date.setDate(1)
       date.setHours(0, 0)
       date.setMinutes(0, 0)
       start = date.getTime()
       break
-    case constants.TIME_RANGE_PAST_MONTH:
+    case TIME_RANGE_PAST_MONTH:
       date.setMonth(date.getMonth() - 1)
       start = date.getTime()
       break
-    case constants.TIME_RANGE_PAST_3MONTH:
+    case TIME_RANGE_PAST_3MONTH:
       date.setMonth(date.getMonth() - 3)
       start = date.getTime()
       break
-    case constants.TIME_RANGE_CUSTOM:
+    case TIME_RANGE_CUSTOM:
       /* eslint-disable prefer-destructuring */
       start = state.start
       end = state.end
       /* eslint-enable prefer-destructuring */
       break
-    case constants.TIME_RANGE_LAST_2WEEKS:
+    case TIME_RANGE_LAST_2WEEKS:
     default:
       TIME_SHIFT = 1000 * 60 * 60 * 24 * 7 * 2 // 2 weeks
       start = now - TIME_SHIFT
@@ -61,7 +78,6 @@ export function getTimeFrame(state = {}, type = '', smallestMts = 0) {
   return {
     start,
     end: smallestMts > 0 ? smallestMts : end,
-    limit,
   }
 }
 
@@ -70,6 +86,7 @@ export default {
   getExportEmail,
   getPrepareExport,
   getQuery,
+  getTargetQueryLimit,
   getTimeFrame,
   getTimeRange,
 }

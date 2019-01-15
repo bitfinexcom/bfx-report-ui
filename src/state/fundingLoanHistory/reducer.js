@@ -102,9 +102,9 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.FETCH_NEXT_FLOAN:
-      return fetchNext(TYPE, state)
+      return fetchNext(TYPE, state, payload)
     case types.FETCH_PREV_FLOAN:
-      return fetchPrev(TYPE, state)
+      return fetchPrev(TYPE, state, payload)
     case types.JUMP_FLOAN_PAGE:
       return jumpPage(TYPE, state, payload)
     case types.ADD_SYMBOL:

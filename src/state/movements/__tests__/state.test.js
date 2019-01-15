@@ -13,6 +13,7 @@ const initBlockState = {
   targetSymbols: [],
   nextPage: false,
 }
+const LIMIT = 25
 
 describe('ledger state', () => {
   it('should return the initial state', () => {
@@ -27,7 +28,7 @@ describe('ledger state', () => {
         offset: 25,
         pageOffset: 0,
       },
-      actions.jumpPage(2),
+      actions.jumpPage(2, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 50,
@@ -43,7 +44,7 @@ describe('ledger state', () => {
         offset: 50,
         pageOffset: 0,
       },
-      actions.fetchPrevMovements(),
+      actions.fetchPrevMovements(LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 25,
@@ -57,7 +58,7 @@ describe('ledger state', () => {
         offset: 75,
         pageOffset: 0,
       },
-      actions.fetchPrevMovements(),
+      actions.fetchPrevMovements(LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 50,
@@ -73,7 +74,7 @@ describe('ledger state', () => {
         offset: 50,
         pageOffset: 0,
       },
-      actions.jumpPage(1),
+      actions.jumpPage(1, LIMIT),
     )).toEqual({
       ...initBlockState,
       offset: 25,
@@ -88,7 +89,7 @@ describe('ledger state', () => {
       offset: 75,
       pageOffset: 0,
     },
-    actions.jumpPage(2),
+    actions.jumpPage(2, LIMIT),
   )).toEqual({
     ...initBlockState,
     offset: 50,

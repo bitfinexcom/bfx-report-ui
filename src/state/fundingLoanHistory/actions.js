@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next funding loan history data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextFLoan() {
+export function fetchNextFLoan(queryLimit) {
   return {
     type: types.FETCH_NEXT_FLOAN,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev funding loan history data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevFLoan() {
+export function fetchPrevFLoan(queryLimit) {
   return {
     type: types.FETCH_PREV_FLOAN,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific funding loan history page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_FLOAN_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

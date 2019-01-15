@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next Orders data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextOrders() {
+export function fetchNextOrders(queryLimit) {
   return {
     type: types.FETCH_NEXT_ORDERS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev Orders data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevOrders() {
+export function fetchPrevOrders(queryLimit) {
   return {
     type: types.FETCH_PREV_ORDERS,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific Orders page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_ORDERS_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

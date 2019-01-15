@@ -161,6 +161,7 @@
   "pagination.page": "Page",
   "pagination.of": "of",
   "pagination.loading": "loading...",
+  "pagination.querylimit.tooltip": "Choose the size per query. The Larger size will take longer query time",
   "selector.symbol.filter": "Symbol Filter",
   "selector.pair.filter": "Pair Filter",
   "status.success": "{topic} Success at {time}",

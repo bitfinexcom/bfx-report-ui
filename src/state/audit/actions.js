@@ -24,30 +24,38 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to fetch next Positions Audit data.
+ * @param {number} queryLimit query limit
  */
-export function fetchNextPAudit() {
+export function fetchNextPAudit(queryLimit) {
   return {
     type: types.FETCH_NEXT_PAUDIT,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to fetch prev Positions Audit data.
+ * @param {number} queryLimit query limit
  */
-export function fetchPrevPAudit() {
+export function fetchPrevPAudit(queryLimit) {
   return {
     type: types.FETCH_PREV_PAUDIT,
+    payload: queryLimit,
   }
 }
 
 /**
  * Create an action to jump to a specific Positions Audit page.
- * @param {number} payload page number
+ * @param {number} page page number
+ * @param {number} queryLimit query limit
  */
-export function jumpPage(payload) {
+export function jumpPage(page, queryLimit) {
   return {
     type: types.JUMP_PAUDIT_PAGE,
-    payload,
+    payload: {
+      page,
+      queryLimit,
+    },
   }
 }
 

@@ -7,11 +7,12 @@ const initialState = {
   apiKey: '',
   apiSecret: '',
   authToken: '',
+  dateFormat: types.DATE_FORMATS[0],
   locale: 'en',
   menuMode: types.MENU_MODE_NORMAL,
+  queryLimit: 0,
   theme: 'bp3_dark',
   timezone: '',
-  dateFormat: types.DATE_FORMATS[0],
   milliseconds: false,
 }
 
@@ -67,6 +68,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         milliseconds: payload,
+      }
+    case types.SET_QUERY_LIMIT:
+      return {
+        ...state,
+        queryLimit: payload,
       }
     default:
       return state

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import actions from 'state/orders/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getTargetQueryLimit } from 'state/query/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -20,6 +21,7 @@ const mapStateToProps = (state = {}) => ({
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
+  getQueryLimit: getTargetQueryLimit(state),
   loading: !getDataReceived(state),
   nextPage: getNextPage(state),
   offset: getOffset(state),
@@ -32,9 +34,9 @@ const mapStateToProps = (state = {}) => ({
 const mapDispatchToProps = dispatch => ({
   addTargetPair: pair => dispatch(actions.addTargetPair(pair)),
   fetchOrders: pair => dispatch(actions.fetchOrders(pair)),
-  fetchNext: () => dispatch(actions.fetchNextOrders()),
-  fetchPrev: () => dispatch(actions.fetchPrevOrders()),
-  jumpPage: page => dispatch(actions.jumpPage(page)),
+  fetchNext: queryLimit => dispatch(actions.fetchNextOrders(queryLimit)),
+  fetchPrev: queryLimit => dispatch(actions.fetchPrevOrders(queryLimit)),
+  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
   refresh: () => dispatch(actions.refresh()),
   removeTargetPair: pair => dispatch(actions.removeTargetPair(pair)),
 })
