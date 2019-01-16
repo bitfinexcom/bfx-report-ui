@@ -89,6 +89,7 @@
   "movements.column.updated": "DATE",
   "movements.column.currency": "CURRENCY",
   "movements.column.amount": "AMOUNT",
+  "movements.column.fees": "FEES",
   "movements.column.status": "STATUS",
   "movements.column.destination": "DESTINATION",
   "orders.title": "Orders",

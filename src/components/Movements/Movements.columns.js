@@ -97,6 +97,28 @@ export default function getColumns(props) {
       },
     },
     {
+      id: 'fees',
+      name: 'movements.column.fees',
+      width: 80,
+      renderer: (rowIndex) => {
+        const { fees, currency } = filteredData[rowIndex]
+        const tooltip = `${fees} ${currency}`
+        const classes = amountStyle(fees)
+        return (
+          <Cell
+            className={classes}
+            tooltip={tooltip}
+          >
+            {fees}
+          </Cell>
+        )
+      },
+      copyText: (rowIndex) => {
+        const { fees, currency } = filteredData[rowIndex]
+        return `${fees} ${currency}`
+      },
+    },
+    {
       id: 'destination',
       name: 'movements.column.destination',
       width: 400,
