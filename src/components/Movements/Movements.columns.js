@@ -113,10 +113,10 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => {
+      copyText: (rowIndex) => {
         const { fees, currency } = filteredData[rowIndex]
         return `${fees} ${currency}`
-      }
+      },
     },
     {
       id: 'destination',
