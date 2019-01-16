@@ -88,6 +88,7 @@
   "movements.column.updated": "時間",
   "movements.column.currency": "貨幣",
   "movements.column.amount": "數量",
+  "movements.column.fees": "費用",
   "movements.column.status": "狀態",
   "movements.column.destination": "去處",
   "orders.title": "訂單",
