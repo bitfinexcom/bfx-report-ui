@@ -8,7 +8,7 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
-import { DateInput } from '@blueprintjs/datetime'
+import { DateInput, TimePrecision } from '@blueprintjs/datetime'
 
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
@@ -18,6 +18,7 @@ import DataTable from 'ui/DataTable'
 import queryConstants from 'state/query/constants'
 import { DATE_FORMAT } from 'state/utils'
 import { isValidTimeStamp } from 'state/query/utils'
+import { platform } from 'var/config'
 
 import getColumns from './Wallets.columns'
 import { propTypes, defaultProps } from './Wallets.props'
@@ -91,6 +92,7 @@ class Wallets extends PureComponent {
     const marginRows = marginData.length
     const fundingRows = fundingData.length
     const hasNewTime = timestamp && currentTime !== timestamp.getTime()
+    const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
 
     const renderTimeSelection = (
       <Fragment>
@@ -108,7 +110,7 @@ class Wallets extends PureComponent {
             parseDate={DATE_FORMAT.parseDate}
             onChange={this.handleDateChange}
             value={timestamp}
-            timePrecision='second'
+            timePrecision={timePrecision}
           />
         </Tooltip>
         <Button
