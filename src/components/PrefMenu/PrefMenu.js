@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Menu,
@@ -10,6 +10,8 @@ import {
   Position,
 } from '@blueprintjs/core'
 
+import { LANGUAGES } from 'locales/i18n'
+
 import { propTypes, defaultProps } from './PrefMenu.props'
 
 class PrefMenu extends PureComponent {
@@ -19,8 +21,8 @@ class PrefMenu extends PureComponent {
 
   constructor(props) {
     super(props)
-    this.switchEn = this.switchLang.bind(this, 'en')
-    this.switchTw = this.switchLang.bind(this, 'tw')
+    this.switchEn = this.switchLang.bind(this, LANGUAGES.en)
+    this.switchTw = this.switchLang.bind(this, LANGUAGES.tw)
   }
 
   switchLang(lang, e) {
@@ -31,17 +33,17 @@ class PrefMenu extends PureComponent {
 
   render() {
     const {
-      intl, isLogin, handleClickPref, handleLogout,
+      isLogin, handleClickPref, handleLogout, t,
     } = this.props
     const langContent = (
       <Menu>
         <MenuItem
-          text={intl.formatMessage({ id: 'header.preferences' })}
+          text={t('header.preferences')}
           onClick={handleClickPref}
         />
         <MenuDivider />
         <MenuItem
-          text={intl.formatMessage({ id: 'header.logout' })}
+          text={t('header.logout')}
           onClick={handleLogout}
           disabled={!isLogin}
         />
@@ -62,4 +64,4 @@ class PrefMenu extends PureComponent {
   }
 }
 
-export default injectIntl(PrefMenu)
+export default withNamespaces('translations')(PrefMenu)
