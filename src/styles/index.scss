@@ -10,6 +10,10 @@ body.#{$ns}-dark {
   background-color: #394b59;
 }
 
+body.#{$ns}-light {
+  background-color: #fff;
+}
+
 div.bitfinex-auth {
   margin-top: 10px;
   font-size: 14px;
