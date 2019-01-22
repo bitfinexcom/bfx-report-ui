@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { injectIntl, intlShape } from 'react-intl'
+import PropTypes from 'prop-types'
+import { withNamespaces } from 'react-i18next'
 
 import {
   Button,
@@ -9,7 +10,7 @@ import {
 
 class HelpLink extends PureComponent {
   static propTypes = {
-    intl: intlShape.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   static handleHelp(e) {
@@ -18,12 +19,12 @@ class HelpLink extends PureComponent {
   }
 
   render() {
-    const { intl } = this.props
+    const { t } = this.props
     return (
       <Tooltip
         content={(
           <span>
-            {intl.formatMessage({ id: 'header.help' })}
+            {t('header.help')}
           </span>
         )}
         position={Position.LEFT}
@@ -40,4 +41,4 @@ class HelpLink extends PureComponent {
   }
 }
 
-export default injectIntl(HelpLink)
+export default withNamespaces('translations')(HelpLink)

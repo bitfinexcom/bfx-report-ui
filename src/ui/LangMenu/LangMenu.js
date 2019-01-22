@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Intent,
@@ -30,16 +30,16 @@ class LangMenu extends PureComponent {
   }
 
   render() {
-    const { intl, locale } = this.props
+    const { locale, t } = this.props
     const options = (
       <Menu>
         <MenuItem
-          text={intl.formatMessage({ id: 'header.lang.en' })}
+          text={t('header.lang.en')}
           onClick={this.switchEn}
           intent={locale === 'en' ? Intent.PRIMARY : undefined}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'header.lang.tw' })}
+          text={t('header.lang.tw')}
           onClick={this.switchTw}
           intent={locale === 'tw' ? Intent.PRIMARY : undefined}
         />
@@ -53,11 +53,11 @@ class LangMenu extends PureComponent {
       >
         <Button
           rightIcon='caret-down'
-          text={intl.formatMessage({ id: `header.lang.${locale}` })}
+          text={t(`header.lang.${locale}`)}
         />
       </Popover>
     )
   }
 }
 
-export default injectIntl(LangMenu)
+export default withNamespaces('translations')(LangMenu)

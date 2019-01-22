@@ -5,8 +5,10 @@ import {
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
+import i18n, { LANGUAGES } from 'locales/i18n'
+
 import types from './constants'
-import { getTheme } from './selectors'
+import { getLocale, getTheme } from './selectors'
 
 function* updateTheme() {
   const theme = yield select(getTheme)
@@ -17,7 +19,8 @@ const WAIT_INTERVAL = 500
 
 function* updateLang() {
   yield call(delay, WAIT_INTERVAL)
-  window.location.reload()
+  const locale = yield select(getLocale)
+  i18n.changeLanguage(LANGUAGES[locale])
 }
 
 export default function* baseSaga() {

@@ -1,6 +1,8 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { injectIntl, intlShape } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
+
 import {
   Menu,
   MenuDivider,
@@ -58,6 +60,7 @@ class ToggleMenu extends PureComponent {
       intl,
       menuMode,
       target,
+      t,
     } = this.props
 
     const renderNormalMenu = (
@@ -69,13 +72,13 @@ class ToggleMenu extends PureComponent {
         <MenuDivider />
         <MenuItem
           icon={getIcon(MENU_LEDGERS)}
-          text={intl.formatMessage({ id: 'ledgers.title' })}
+          text={t('ledgers.title')}
           onClick={this.handleClickLedgers}
           active={target === MENU_LEDGERS}
         />
         <MenuItem
           icon={getIcon(MENU_TRADES)}
-          text={intl.formatMessage({ id: 'trades.title' })}
+          text={t('trades.title')}
           onClick={this.handleClickTrades}
           active={target === MENU_TRADES}
         />
@@ -278,6 +281,7 @@ ToggleMenu.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   intl: intlShape.isRequired,
   menuMode: PropTypes.string,
+  t: PropTypes.func.isRequired,
   target: PropTypes.string.isRequired,
 }
 
@@ -285,4 +289,4 @@ ToggleMenu.defaultProps = {
   menuMode: '',
 }
 
-export default injectIntl(ToggleMenu)
+export default injectIntl(withNamespaces('translations')(ToggleMenu))

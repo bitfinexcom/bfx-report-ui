@@ -1,5 +1,4 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
 import {
   Button,
   Navbar,
@@ -82,7 +81,6 @@ class Header extends PureComponent {
       authStatus,
       email,
       history,
-      intl,
       location,
     } = this.props
     const { isPrefOpen } = this.state
@@ -100,7 +98,6 @@ class Header extends PureComponent {
               target={target}
               handleClickCustom={this.handleClickCustom}
               history={history}
-              intl={intl}
               menuMode={baseType.MENU_MODE_HOVER}
             />
           )}
@@ -185,4 +182,4 @@ class Header extends PureComponent {
   }
 }
 
-export default injectIntl(Header)
+export default Header
