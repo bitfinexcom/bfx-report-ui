@@ -1,5 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects'
 
+import { updateTheme } from 'state/base/actions'
 import { checkAuthWithToken, checkAuthWithLocalToken } from 'state/auth/actions'
 import { setCustomTimeRange } from 'state/query/actions'
 import { getParsedUrlParams, getNoAuthTokenUrlString } from 'state/utils'
@@ -7,6 +8,9 @@ import { getParsedUrlParams, getNoAuthTokenUrlString } from 'state/utils'
 import types from './constants'
 
 function* uiLoaded() {
+  // update theme from pref
+  yield put(updateTheme())
+
   const parsed = getParsedUrlParams(window.location.search)
   const { authToken, range } = parsed
   // handle custom time range
