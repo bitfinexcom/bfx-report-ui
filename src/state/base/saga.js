@@ -22,5 +22,6 @@ function* updateLang() {
 
 export default function* baseSaga() {
   yield takeLatest(types.SET_THEME, updateTheme)
+  yield takeLatest(types.UPDATE_THEME, updateTheme)
   yield takeLatest(types.SET_LANG, updateLang)
 }

@@ -56,6 +56,15 @@ export function setTheme(theme) {
 }
 
 /**
+ * Create an action to update theme.
+ */
+export function updateTheme() {
+  return {
+    type: types.UPDATE_THEME,
+  }
+}
+
+/**
  * Create an action to store menu mode.
  * @param {string} mode
  */
@@ -121,4 +130,5 @@ export default {
   setTheme,
   setTimezone,
   showMilliseconds,
+  updateTheme,
 }
