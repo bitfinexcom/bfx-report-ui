@@ -3,8 +3,8 @@
 // refer https://github.com/bitfinexcom/bfxuilib/blob/master/functions/i18n.spa.js
 
 import i18n from 'i18next'
-import Backend from 'i18next-xhr-backend'
-import LanguageDetector from 'i18next-browser-languagedetector'
+import backend from 'i18next-xhr-backend'
+import detector from 'i18next-browser-languagedetector'
 import { reactI18nextModule } from 'react-i18next'
 
 export const LANGUAGES = {
@@ -17,8 +17,8 @@ export const LANGUAGES = {
 const { NODE_ENV } = process.env
 
 i18n
-  .use(Backend)
-  .use(LanguageDetector)
+  .use(detector)
+  .use(backend)
   .use(reactI18nextModule)
   .init({
     backend: {
@@ -35,7 +35,7 @@ i18n
       console.warn(`Missing translation for ${key}`)
       return key
     },
-
+    // use en if detected lng is not available
     fallbackLng: LANGUAGES.en,
 
     ns: ['translations'],
@@ -46,6 +46,12 @@ i18n
     react: {
       wait: true,
     },
+
+    interpolation: {
+      escapeValue: false, // react already safes from xss
+    },
+    // send not translated keys to endpoint
+    saveMissing: (NODE_ENV === 'development'),
 
     // react: {
     //   wait: false,
