@@ -9,7 +9,7 @@ export const getApiSecret = state => getBase(state).apiSecret
 export const getAuthToken = state => getBase(state).authToken
 export const getLocale = state => getBase(state).locale
 export const getMenuMode = state => getBase(state).menuMode
-export const getTheme = state => getBase(state).theme
+export const getTheme = state => getBase(state).theme || types.DEFAULT_THEME
 export const getTimezone = state => getBase(state).timezone
 export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FORMATS[0]
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
