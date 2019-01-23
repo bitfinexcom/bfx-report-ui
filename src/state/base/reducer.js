@@ -11,7 +11,7 @@ const initialState = {
   locale: 'en',
   menuMode: types.MENU_MODE_NORMAL,
   queryLimit: 0,
-  theme: 'bp3_dark',
+  theme: types.DEFAULT_THEME,
   timezone: '',
   milliseconds: false,
 }
