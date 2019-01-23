@@ -10,7 +10,9 @@ import { getTheme } from './selectors'
 
 function* updateTheme() {
   const theme = yield select(getTheme)
-  document.body.className = theme
+  // .replace is the temp fix for the wrong default value
+  // could be removed later
+  document.body.className = theme.replace('_', '-')
 }
 
 const WAIT_INTERVAL = 500
