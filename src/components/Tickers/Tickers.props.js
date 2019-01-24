@@ -31,6 +31,7 @@ export const propTypes = {
     PropTypes.number,
     PropTypes.bool,
   ]),
+  updateErrorStatus: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
@@ -52,4 +53,5 @@ export const defaultProps = {
   removeTargetPair: () => {},
   targetPairs: '',
   nextPage: false,
+  updateErrorStatus: () => {},
 }
