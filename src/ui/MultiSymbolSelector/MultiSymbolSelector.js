@@ -62,6 +62,7 @@ class MultiSymbolSelector extends PureComponent {
         tagInputProps={{ tagProps: { minimal: true }, onRemove: handleTagRemove }}
         tagRenderer={renderTag}
         selectedItems={currentFilters}
+        resetOnSelect
       />
     )
   }
