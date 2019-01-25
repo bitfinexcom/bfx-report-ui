@@ -129,6 +129,7 @@
   "tickers.column.ask": "賣價",
   "tickers.column.bid": "買價",
   "tickers.column.time": "時間",
+  "tickers.minlength": "牌價中至少需保留1組交易對",
   "trades.title": "交易",
   "trades.column.orderid": "訂單 ID",
   "trades.column.time": "時間",

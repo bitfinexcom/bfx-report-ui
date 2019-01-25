@@ -57,7 +57,12 @@ class Tickers extends PureComponent {
   }
 
   handleTagRemove(tag) {
-    handleRemovePairFilter(TYPE, tag, this.props)
+    const { targetPairs, updateErrorStatus } = this.props
+    if (targetPairs.length === 1) {
+      updateErrorStatus({ id: 'tickers.minlength' })
+    } else {
+      handleRemovePairFilter(TYPE, tag, this.props)
+    }
   }
 
   render() {

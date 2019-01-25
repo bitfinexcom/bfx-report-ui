@@ -130,6 +130,7 @@
   "tickers.column.ask": "ASK",
   "tickers.column.bid": "BID",
   "tickers.column.time": "Time",
+  "tickers.minlength": "Should keep at least 1 pair in the tickers query field",
   "trades.title": "Trades",
   "trades.column.orderid": "ORDER ID",
   "trades.column.time": "DATE",

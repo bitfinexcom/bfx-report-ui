@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import actions from 'state/tickers/actions'
+import { updateErrorStatus } from 'state/status/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getDataReceived,
@@ -37,6 +38,7 @@ const mapDispatchToProps = dispatch => ({
   refresh: () => dispatch(actions.refresh()),
   addTargetPair: pair => dispatch(actions.addTargetPair(pair)),
   removeTargetPair: pair => dispatch(actions.removeTargetPair(pair)),
+  updateErrorStatus: msg => dispatch(updateErrorStatus(msg)),
 })
 
 const TickersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Tickers))
