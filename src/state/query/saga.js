@@ -194,7 +194,7 @@ function* exportCSV({ payload: target }) {
         break
       default: {
         const symbol = formatSymbol(target, sign)
-        if ((Array.isArray(symbol) && symbol > 0)
+        if ((Array.isArray(symbol) && symbol.length > 0)
           || (typeof symbol === 'string' && symbol !== '')) {
           options.symbol = symbol
         }
