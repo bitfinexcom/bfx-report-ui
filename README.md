@@ -26,14 +26,13 @@ npm install
 
 2. Copy all `config/**/*.json.example` to `config/**/*.json`
 
-3. Run a the backend with commands
+3. Run the grenache worker with commands
 
-    manually run the 4 servers (in different terminal)
+    manually run the 3 servers (in different terminal)
 
     ```
     grape --dp 20001 --aph 30001 --bn '127.0.0.1:20002'
     grape --dp 20002 --aph 40001 --bn '127.0.0.1:20001'
-    npm run startWorker
     npm run start
     ```
 
@@ -41,7 +40,26 @@ npm install
 
     `npm i -g grenache-grape`
 
-4. Clone `bfx-report-ui` project
+4. Pull up the `bfx-report-express` submodule last changes and do npm install
+
+```
+git submodule sync
+git submodule update --init --recursive
+git pull --recurse-submodules
+git submodule update --remote
+cd bfx-report-express
+npm install
+```
+
+5. Copy all `config/**/*.json.example` to `config/**/*.json`
+
+6. Run the express server with commands
+
+```
+npm run start
+```
+
+7. Clone `bfx-report-ui` project
 
     ```
     git clone https://github.com/bitfinexcom/bfx-report-ui.git
@@ -49,7 +67,7 @@ npm install
     npm install
     ```
 
-5. set up env variables to run locally:
+8. set up env variables to run locally:
 
     ```
     export NODE_PATH=src/
@@ -63,7 +81,7 @@ npm install
     `PUBLIC_URL` is used to define default import path in `public/index.html`.
     `REACT_APP_PLATFORM` is used to select the right set for site title, api endpoint and more configs.
 
-6. start the report-ui
+9. start the report-ui
 
     ```
     npm run start
