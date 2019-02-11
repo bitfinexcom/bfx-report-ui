@@ -16,16 +16,18 @@
     "timezone": "Timezone:",
     "dateformat": "Date Format:",
     "milliseconds": "Display Milliseconds:",
+    "sync": {
+      "title": "Sync preferences",
+      "notset": "Sync preferences are not set yet",
+      "description": "To access Public Trades offline, you need to setup offline available pairs and the start query time.",
+      "setup": "Setup Sync preferences",
+      "pairs": "Offline Pairs",
+      "starttime": "Start Time",
+      "apply": "Apply",
+      "apply.tooltip": "After apply, you needs to login again to take effect.",
+      "insync-warning": "Can't apply during syncing. Please wait until syncing is done.",
+    }
   },
-  "preferences.sync.title": "Sync preferences",
-  "preferences.sync.notset": "Sync preferences are not set yet",
-  "preferences.sync.description": "To access Public Trades offline, you need to setup offline available pairs and the start query time.",
-  "preferences.sync.setup": "Setup Sync preferences",
-  "preferences.sync.pairs": "Offline Pairs",
-  "preferences.sync.starttime": "Start Time",
-  "preferences.sync.apply": "Apply",
-  "preferences.sync.apply.tooltip": "After apply, you needs to login again to take effect.",
-  "preferences.sync.insync-warning": "Can't apply during syncing. Please wait until syncing is done.",
   "theme": {
     "light": "Light",
     "dark": "Dark"
@@ -134,12 +136,16 @@
   "positions.column.update": "UPDATED",
   "positions.swap.daily": "Daily",
   "positions.swap.term": "Term",
-  "publictrades.title": "Public Trades",
-  "publictrades.column.time": "TIME",
-  "publictrades.column.type": "TYPE",
-  "publictrades.column.price": "PRICE",
-  "publictrades.column.amount": "AMOUNT",
-  "publictrades.column.pair": "PAIR",
+  "publictrades":{
+    "title": "Public Trades",
+    "column": {
+      "time": "TIME",
+      "type": "TYPE",
+      "price": "PRICE",
+      "amount": "AMOUNT",
+      "pair": "PAIR"
+    }
+  },
   "tickers.title": "Tickers",
   "tickers.column.pair": "PAIR",
   "tickers.column.ask": "ASK",

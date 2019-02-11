@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Callout,
@@ -97,10 +97,10 @@ class SyncPrefButton extends PureComponent {
 
   render() {
     const {
-      intl,
-      textOnly,
       syncMode,
       syncPairs,
+      t,
+      textOnly,
     } = this.props
     const {
       isOpen,
@@ -111,7 +111,7 @@ class SyncPrefButton extends PureComponent {
       ? (
         <Fragment>
           <Callout intent={Intent.WARNING}>
-            {intl.formatMessage({ id: 'preferences.sync.insync-warning' })}
+            {t('preferences.sync.insync-warning')}
           </Callout>
           <br />
         </Fragment>
@@ -124,7 +124,7 @@ class SyncPrefButton extends PureComponent {
           <Tooltip
             content={(
               <span>
-                {intl.formatMessage({ id: 'preferences.sync.title' })}
+                {t('preferences.sync.title')}
               </span>
               )}
             position={Position.TOP}
@@ -135,13 +135,13 @@ class SyncPrefButton extends PureComponent {
               onClick={this.handleOpen}
               intent={Intent.PRIMARY}
             >
-              {textOnly ? intl.formatMessage({ id: 'preferences.sync.title' }) : ''}
+              {textOnly ? t('preferences.sync.title') : ''}
             </Button>
           </Tooltip>
           <Dialog
             icon={ICON}
             onClose={this.handleClose}
-            title={intl.formatMessage({ id: 'preferences.sync.title' })}
+            title={t('preferences.sync.title')}
             autoFocus
             canEscapeKeyClose
             canOutsideClickClose
@@ -153,10 +153,10 @@ class SyncPrefButton extends PureComponent {
               {renderInSyncWarning}
               <div className='row'>
                 <div className={dialogDescStyle}>
-                  {intl.formatMessage({ id: 'preferences.sync.pairs' })}
+                  {t('preferences.sync.pairs')}
                 </div>
                 <div className={dialogSmallDescStyle}>
-                  {intl.formatMessage({ id: 'preferences.sync.pairs' })}
+                  {t('preferences.sync.pairs')}
                 </div>
                 <div className={dialogFieldStyle}>
                   <MultiPairSelector
@@ -169,10 +169,10 @@ class SyncPrefButton extends PureComponent {
               </div>
               <div className='row'>
                 <div className={dialogDescStyle}>
-                  {intl.formatMessage({ id: 'preferences.sync.starttime' })}
+                  {t('preferences.sync.starttime')}
                 </div>
                 <div className={dialogSmallDescStyle}>
-                  {intl.formatMessage({ id: 'preferences.sync.starttime' })}
+                  {t('preferences.sync.starttime')}
                 </div>
                 <div className={dialogFieldStyle}>
                   <DateInput
@@ -189,7 +189,7 @@ class SyncPrefButton extends PureComponent {
                 <Tooltip
                   content={(
                     <span>
-                      {intl.formatMessage({ id: 'preferences.sync.apply.tooltip' })}
+                      {t('preferences.sync.apply.tooltip')}
                     </span>
                     )}
                   position={Position.TOP}
@@ -204,11 +204,11 @@ class SyncPrefButton extends PureComponent {
                       || tempTime === undefined
                     )}
                   >
-                    {intl.formatMessage({ id: 'preferences.sync.apply' })}
+                    {t('preferences.sync.apply')}
                   </Button>
                 </Tooltip>
                 <Button onClick={this.handleClose}>
-                  {intl.formatMessage({ id: 'preferences.close' })}
+                  {t('preferences.close')}
                 </Button>
               </div>
             </div>
@@ -219,4 +219,4 @@ class SyncPrefButton extends PureComponent {
   }
 }
 
-export default injectIntl(SyncPrefButton)
+export default withNamespaces('translations')(SyncPrefButton)
