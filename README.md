@@ -28,7 +28,7 @@ npm install
 
 1.2. Run the grenache worker with commands
 
-    manually run the 3 servers (in different terminal)
+manually run the 3 servers (in different terminal)
 
     ```
     grape --dp 20001 --aph 30001 --bn '127.0.0.1:20002'
@@ -36,7 +36,7 @@ npm install
     npm run start
     ```
 
-    If grape command is not available, install  `grenache-grape` globally via
+If grape command is not available, install  `grenache-grape` globally via
 
     `npm i -g grenache-grape`
 
@@ -77,9 +77,9 @@ npm run start
     export REACT_APP_LOGO_PATH=favicon.ico
     ```
 
-    `NODE_PATH` is used to support absolute import local package instead of relative import.
-    `PUBLIC_URL` is used to define default import path in `public/index.html`.
-    `REACT_APP_PLATFORM` is used to select the right set for site title, api endpoint and more configs.
+`NODE_PATH` is used to support absolute import local package instead of relative import.
+`PUBLIC_URL` is used to define default import path in `public/index.html`.
+`REACT_APP_PLATFORM` is used to select the right set for site title, api endpoint and more configs.
 
 2.3. start the report-ui
 
@@ -87,7 +87,7 @@ npm run start
     npm run start
     ```
 
-    Make sure you have access permission to test with the staging server/API.
+Make sure you have access permission to test with the staging server/API.
 
 ## Web Token authentication
 
