@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { intlShape } from 'react-intl'
 
 export const propTypes = {
   coins: PropTypes.arrayOf(PropTypes.string),
@@ -7,9 +6,8 @@ export const propTypes = {
   currentFilters: PropTypes.arrayOf(PropTypes.string),
   existingCoins: PropTypes.arrayOf(PropTypes.string),
   handleTagRemove: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
   onSymbolSelect: PropTypes.func.isRequired,
-  type: PropTypes.string,
+  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
@@ -17,5 +15,4 @@ export const defaultProps = {
   currencies: {},
   currentFilters: [],
   existingCoins: [],
-  type: '',
 }

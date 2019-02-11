@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Intent,
   MenuItem,
@@ -16,9 +16,9 @@ class MultiPairSelector extends PureComponent {
       currentFilters,
       existingPairs,
       handleTagRemove,
-      intl,
       onPairSelect,
       pairs,
+      t,
     } = this.props
 
     const renderPair = (pair, { modifiers }) => {
@@ -49,7 +49,7 @@ class MultiPairSelector extends PureComponent {
       <MultiSelect
         className='bitfinex-multi-select'
         disabled={pairs.length === 0}
-        placeholder={intl.formatMessage({ id: 'selector.pair.filter' })}
+        placeholder={t('selector.filter.pair')}
         items={pairs || existingPairs}
         itemRenderer={renderPair}
         itemPredicate={filterPair}
@@ -67,4 +67,4 @@ class MultiPairSelector extends PureComponent {
 MultiPairSelector.propTypes = propTypes
 MultiPairSelector.defaultProps = defaultProps
 
-export default injectIntl(MultiPairSelector)
+export default withNamespaces('translations')(MultiPairSelector)

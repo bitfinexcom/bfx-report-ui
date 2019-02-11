@@ -142,8 +142,6 @@
   "pagination.of": "/",
   "pagination.loading": "查詢中...",
   "pagination.querylimit.tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間",
-  "selector.symbol.filter": "代幣過濾器",
-  "selector.pair.filter": "代幣對過濾器",
   "status.success": "於 {time} {topic}成功",
   "status.fail": "{topic} 失敗 {detail}",
   "status.request.error": "{topic} 請求失敗 {detail}",

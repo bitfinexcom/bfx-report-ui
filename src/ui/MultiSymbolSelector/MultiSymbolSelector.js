@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Intent,
   MenuItem,
 } from '@blueprintjs/core'
 import { MultiSelect } from '@blueprintjs/select'
-
-import { getFilterType } from 'state/query/utils'
 
 import { propTypes, defaultProps } from './MultiSymbolSelector.props'
 
@@ -18,9 +16,8 @@ class MultiSymbolSelector extends PureComponent {
       currentFilters,
       existingCoins,
       handleTagRemove,
-      intl,
       onSymbolSelect,
-      type,
+      t,
     } = this.props
 
     const renderSymbol = (symbol, { modifiers }) => {
@@ -48,12 +45,11 @@ class MultiSymbolSelector extends PureComponent {
     const filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
     const renderTag = coin => coin
 
-    const title = `selector.${getFilterType(type)}.filter`
     return (
       <MultiSelect
         className='bitfinex-multi-select'
         disabled={coins.length === 0}
-        placeholder={intl.formatMessage({ id: title })}
+        placeholder={t('selector.filter.symbol')}
         items={coins || existingCoins}
         itemRenderer={renderSymbol}
         itemPredicate={filterSymbol}
@@ -71,4 +67,4 @@ class MultiSymbolSelector extends PureComponent {
 MultiSymbolSelector.propTypes = propTypes
 MultiSymbolSelector.defaultProps = defaultProps
 
-export default injectIntl(MultiSymbolSelector)
+export default withNamespaces('translations')(MultiSymbolSelector)
