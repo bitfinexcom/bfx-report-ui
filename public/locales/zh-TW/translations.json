@@ -29,16 +29,20 @@
     "light": "白",
     "dark": "黑"
   },
-  "auth.auth": "驗證",
-  "auth.title": "請先登入",
-  "auth.enterAPIKey": "輸入 API Key:",
-  "auth.enterAPISecret": "輸入 API Secret:",
-  "auth.checkAuth": "開始驗證",
-  "auth.auth.note1": "請先前往 ",
-  "auth.auth.note2": " 取得唯讀的API金鑰與密鑰對。",
-  "auth.required": "（必填）",
-  "auth.nonideal.title": "報告 2.0",
-  "auth.nonideal.description": "使用令牌登入報告...",
+  "auth": {
+    "auth": "驗證",
+    "title": "請先登入",
+    "enterAPIKey": "輸入 API Key:",
+    "enterAPISecret": "輸入 API Secret:",
+    "checkAuth": "開始驗證",
+    "note1": "請先前往 ",
+    "note2": " 取得唯讀的API金鑰與密鑰對。",
+    "required": "（必填）",
+    "nonideal": {
+      "title": "報告 2.0",
+      "description": "使用令牌登入報告..."
+    }
+  },
   "loading": "讀取中...",
   "nodata": "沒有相關資料。請試試其他時間範圍。",
   "column.id": "#",

@@ -30,16 +30,20 @@
     "light": "Light",
     "dark": "Dark"
   },
-  "auth.auth": "Auth",
-  "auth.title": "Please Login",
-  "auth.enterAPIKey": "Enter API Key:",
-  "auth.enterAPISecret": "Enter API Secret:",
-  "auth.checkAuth": "Check Auth",
-  "auth.auth.note1": "Visit ",
-  "auth.auth.note2": " to get the readonly API key and secret pair.",
-  "auth.required": "(required)",
-  "auth.nonideal.title": "Reports 2.0",
-  "auth.nonideal.description": "Login to Reports with token...",
+  "auth": {
+    "auth": "Auth",
+    "title": "Please Login",
+    "enterAPIKey": "Enter API Key:",
+    "enterAPISecret": "Enter API Secret:",
+    "checkAuth": "Check Auth",
+    "note1": "Visit ",
+    "note2": " to get the readonly API key and secret pair.",
+    "required": "(required)",
+    "nonideal":{
+      "title": "Reports 2.0",
+      "description": "Login to Reports with token..."
+    }
+  },
   "loading": "Loading...",
   "nodata": "No related data in this time range. You can try another time range.",
   "column.id": "#",
