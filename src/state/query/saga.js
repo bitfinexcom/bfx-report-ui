@@ -220,14 +220,14 @@ function* exportCSV({ payload: target }) {
     if (error) {
       yield put(updateErrorStatus({
         id: 'status.fail',
-        topic: 'timeframe.download',
+        topic: 'timeframe.download.export',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
     yield put(updateErrorStatus({
       id: 'status.request.error',
-      topic: 'timeframe.download',
+      topic: 'timeframe.download.export',
       detail: JSON.stringify(fail),
     }))
   }

@@ -1,9 +1,5 @@
 {
   "header.logout": "Logout",
-  "header.lang.en": "English",
-  "header.lang.tw": "中文 (繁體)",
-  "header.preferences": "Preferences",
-  "header.help": "Help",
   "preferences.title": "Preferences",
   "preferences.close": "Close",
   "preferences.language": "Language:",
