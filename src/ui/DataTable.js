@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { injectIntl, intlShape } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import PropTypes from 'prop-types'
 import {
   Column,
@@ -9,8 +9,8 @@ import {
 class DataTable extends PureComponent {
   render() {
     const {
-      intl,
       numRows,
+      t,
       tableColums,
     } = this.props
     const columnWidths = tableColums.map(column => column.width)
@@ -28,7 +28,7 @@ class DataTable extends PureComponent {
           <Column
             key={column.id}
             id={column.id}
-            name={column.nameStr ? column.nameStr : intl.formatMessage({ id: column.name })}
+            name={column.nameStr ? column.nameStr : t(column.name)}
             cellRenderer={column.renderer}
           />
         ))}
@@ -47,11 +47,11 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
 })
 
 DataTable.propTypes = {
-  intl: intlShape.isRequired,
   numRows: PropTypes.number.isRequired,
+  t: PropTypes.func.isRequired,
   tableColums: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
 }
 
 DataTable.defaultProps = {}
 
-export default injectIntl(DataTable)
+export default withNamespaces('translations')(DataTable)

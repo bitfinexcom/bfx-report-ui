@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { intlShape } from 'react-intl'
 
 const POSITIONS_ENTRIES_PROPS = PropTypes.shape({
   amount: PropTypes.number,
@@ -22,13 +21,13 @@ export const propTypes = {
   fetchPositions: PropTypes.func.isRequired,
   fetchPrev: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
-  intl: intlShape.isRequired,
   jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   removeTargetPair: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
   targetPairs: PropTypes.arrayOf(PropTypes.string),
   timeOffset: PropTypes.string.isRequired,
   nextPage: PropTypes.oneOfType([
@@ -46,7 +45,6 @@ export const defaultProps = {
   fetchPrev: () => {},
   fetchPositions: () => {},
   getFullTime: () => {},
-  intl: {},
   jumpPage: () => {},
   loading: true,
   pageOffset: 0,

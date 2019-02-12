@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -71,10 +71,10 @@ class Trades extends PureComponent {
       pageLoading,
       entries,
       handleClickExport,
-      intl,
       jumpPage,
       loading,
       refresh,
+      t,
       targetPairs,
       nextPage,
       timeOffset,
@@ -85,7 +85,7 @@ class Trades extends PureComponent {
     const tableColums = getColumns({
       filteredData,
       getFullTime,
-      intl,
+      t,
       timeOffset,
     })
 
@@ -124,7 +124,7 @@ class Trades extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'trades.title' })}
+            {t('trades.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -136,7 +136,7 @@ class Trades extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'trades.title' })}
+            {t('trades.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -166,4 +166,4 @@ class Trades extends PureComponent {
 Trades.propTypes = propTypes
 Trades.defaultProps = defaultProps
 
-export default injectIntl(Trades)
+export default withNamespaces('translations')(Trades)

@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Callout,
@@ -47,14 +47,14 @@ class Auth extends PureComponent {
     const {
       apiKey,
       apiSecret,
-      intl,
       isShown,
       loading,
+      t,
     } = this.props
     const renderAuth = platform.showAuthPage ? (
       <div className='row'>
         <Dialog
-          title={intl.formatMessage({ id: 'auth.title' })}
+          title={t('auth.title')}
           isOpen
           isCloseButtonShown={false}
         >
@@ -70,11 +70,11 @@ class Auth extends PureComponent {
               className='bitfinex-logo-light'
             />
             <Callout>
-              {intl.formatMessage({ id: 'auth.auth.note1' })}
+              {t('auth.note1')}
               <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>
                 {platform.KEY_URL}
               </a>
-              {intl.formatMessage({ id: 'auth.auth.note2' })}
+              {t('auth.note2')}
             </Callout>
             <InputKey
               label='auth.enterAPIKey'
@@ -101,7 +101,7 @@ class Auth extends PureComponent {
                 disabled={!apiKey || !apiSecret || loading}
                 loading={loading}
               >
-                {intl.formatMessage({ id: 'auth.checkAuth' })}
+                {t('auth.checkAuth')}
               </Button>
             </div>
           </div>
@@ -111,8 +111,8 @@ class Auth extends PureComponent {
       <NonIdealState
         className='bitfinex-nonideal'
         icon='key'
-        title={intl.formatMessage({ id: 'auth.nonideal.title' })}
-        description={intl.formatMessage({ id: 'auth.nonideal.description' })}
+        title={t('auth.nonideal.title')}
+        description={t('auth.nonideal.description')}
       />
     )
     return isShown ? (
@@ -123,4 +123,4 @@ class Auth extends PureComponent {
   }
 }
 
-export default injectIntl(Auth)
+export default withNamespaces('translations')(Auth)

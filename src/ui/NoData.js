@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react'
-import { injectIntl, intlShape } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import PropTypes from 'prop-types'
 
-export const NoData = ({ intl, title, descId }) => {
+export const NoData = ({ descId, t, title }) => {
   const renderTitle = title ? (
     <h4>
-      {intl.formatMessage({ id: title })}
+      {t(title)}
     </h4>
   ) : ''
   const id = descId || 'nodata'
@@ -13,7 +13,7 @@ export const NoData = ({ intl, title, descId }) => {
     <Fragment>
       {renderTitle}
       <div>
-        {intl.formatMessage({ id })}
+        {t(id)}
       </div>
     </Fragment>
   )
@@ -21,7 +21,7 @@ export const NoData = ({ intl, title, descId }) => {
 
 NoData.propTypes = {
   descId: PropTypes.string,
-  intl: intlShape.isRequired,
+  t: PropTypes.func.isRequired,
   title: PropTypes.string,
 }
 
@@ -30,4 +30,4 @@ NoData.defaultProps = {
   title: '',
 }
 
-export default injectIntl(NoData)
+export default withNamespaces('translations')(NoData)

@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -72,11 +72,11 @@ class Ledgers extends PureComponent {
       entries,
       existingCoins,
       handleClickExport,
-      intl,
       jumpPage,
       loading,
       refresh,
       nextPage,
+      t,
       timeOffset,
     } = this.props
     const limit = getQueryLimit(TYPE)
@@ -85,7 +85,7 @@ class Ledgers extends PureComponent {
     const tableColums = getColumns({
       filteredData,
       getFullTime,
-      intl,
+      t,
       timeOffset,
     })
 
@@ -97,7 +97,6 @@ class Ledgers extends PureComponent {
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
           handleTagRemove={this.handleTagRemove}
-          type={TYPE}
         />
       </Fragment>
     )
@@ -125,7 +124,7 @@ class Ledgers extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'ledgers.title' })}
+            {t('ledgers.title')}
             &nbsp;
             <TimeRange />
             {renderSymbolSelector}
@@ -137,7 +136,7 @@ class Ledgers extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'ledgers.title' })}
+            {t('ledgers.title')}
             &nbsp;
             <TimeRange />
             {renderSymbolSelector}
@@ -166,4 +165,4 @@ class Ledgers extends PureComponent {
 Ledgers.propTypes = propTypes
 Ledgers.defaultProps = defaultProps
 
-export default injectIntl(Ledgers)
+export default withNamespaces('translations')(Ledgers)

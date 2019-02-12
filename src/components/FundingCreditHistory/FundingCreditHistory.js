@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -72,11 +72,11 @@ class FundingCreditHistory extends PureComponent {
       entries,
       existingCoins,
       handleClickExport,
-      intl,
       jumpPage,
       loading,
       refresh,
       nextPage,
+      t,
       timeOffset,
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
@@ -84,7 +84,7 @@ class FundingCreditHistory extends PureComponent {
     const tableColums = getColumns({
       filteredData,
       getFullTime,
-      intl,
+      t,
       timeOffset,
     })
 
@@ -96,7 +96,6 @@ class FundingCreditHistory extends PureComponent {
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
           handleTagRemove={this.handleTagRemove}
-          type={TYPE}
         />
       </Fragment>
     )
@@ -124,7 +123,7 @@ class FundingCreditHistory extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'fcredit.title' })}
+            {t('fcredit.title')}
             &nbsp;
             <TimeRange />
             {renderSymbolSelector}
@@ -136,7 +135,7 @@ class FundingCreditHistory extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'fcredit.title' })}
+            {t('fcredit.title')}
             &nbsp;
             <TimeRange />
             {renderSymbolSelector}
@@ -166,4 +165,4 @@ class FundingCreditHistory extends PureComponent {
 FundingCreditHistory.propTypes = propTypes
 FundingCreditHistory.defaultProps = defaultProps
 
-export default injectIntl(FundingCreditHistory)
+export default withNamespaces('translations')(FundingCreditHistory)

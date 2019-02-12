@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -70,13 +70,13 @@ class Orders extends PureComponent {
       pageLoading,
       entries,
       handleClickExport,
-      intl,
       jumpPage,
       loading,
       refresh,
       targetPairs,
       getFullTime,
       nextPage,
+      t,
       timeOffset,
     } = this.props
     const limit = getQueryLimit(TYPE)
@@ -85,7 +85,7 @@ class Orders extends PureComponent {
     const tableColums = getColumns({
       filteredData,
       getFullTime,
-      intl,
+      t,
       timeOffset,
     })
 
@@ -124,7 +124,7 @@ class Orders extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'orders.title' })}
+            {t('orders.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -136,7 +136,7 @@ class Orders extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'orders.title' })}
+            {t('orders.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -166,4 +166,4 @@ class Orders extends PureComponent {
 Orders.propTypes = propTypes
 Orders.defaultProps = defaultProps
 
-export default injectIntl(Orders)
+export default withNamespaces('translations')(Orders)

@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -68,8 +68,8 @@ class SyncMode extends PureComponent {
 
   render() {
     const {
-      intl,
       syncMode,
+      t,
     } = this.props
     const { isSyncDialogOpen } = this.state
     const icon = getIcon(syncMode)
@@ -97,7 +97,7 @@ class SyncMode extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {intl.formatMessage({ id: getTooltipMessageId(syncMode) })}
+              {t(getTooltipMessageId(syncMode))}
             </span>
           )}
           position={Position.LEFT}
@@ -109,7 +109,7 @@ class SyncMode extends PureComponent {
           icon={icon}
           isOpen={isSyncDialogOpen}
           onClose={this.handleDialogClose}
-          title={intl.formatMessage({ id: 'sync.switch-mode' })}
+          title={t('sync.switch-mode')}
           autoFocus
           canEscapeKeyClose={false}
           canOutsideClickClose={false}
@@ -118,21 +118,21 @@ class SyncMode extends PureComponent {
         >
           <div className={Classes.DIALOG_BODY}>
             { syncMode === MODE_ONLINE
-              ? intl.formatMessage({ id: 'sync.description' })
-              : intl.formatMessage({ id: 'sync.sync-description' }) }
+              ? t('sync.description')
+              : t('sync.sync-description') }
           </div>
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <Button onClick={this.handleDialogClose}>
-                {intl.formatMessage({ id: 'sync.close' })}
+                {t('sync.close')}
               </Button>
               <Button
                 intent={Intent.PRIMARY}
                 onClick={this.startAction}
               >
                 { syncMode === MODE_ONLINE
-                  ? intl.formatMessage({ id: 'sync.start' })
-                  : intl.formatMessage({ id: 'sync.stop-sync' }) }
+                  ? t('sync.start')
+                  : t('sync.stop-sync') }
               </Button>
             </div>
           </div>
@@ -142,4 +142,4 @@ class SyncMode extends PureComponent {
   }
 }
 
-export default injectIntl(SyncMode)
+export default withNamespaces('translations')(SyncMode)

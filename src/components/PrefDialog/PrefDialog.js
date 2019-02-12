@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -48,8 +48,8 @@ class PrefDialog extends PureComponent {
   render() {
     const {
       handlePrefDialogClose,
-      intl,
       isPrefOpen,
+      t,
       theme,
       timezone,
     } = this.props
@@ -60,22 +60,22 @@ class PrefDialog extends PureComponent {
     const renderThemeSwitcher = platform.hideSwitchTheme ? null : (
       <div className='row'>
         <div className={dialogDescStyle}>
-          {intl.formatMessage({ id: 'preferences.theme' })}
+          {t('preferences.theme')}
         </div>
         <div className={dialogSmallDescStyle}>
-          {intl.formatMessage({ id: 'preferences.theme' })}
+          {t('preferences.theme')}
         </div>
         <div className={dialogFieldStyle}>
           <ButtonGroup>
             <Button
               name='light'
-              text={intl.formatMessage({ id: 'theme.light' })}
+              text={t('theme.light')}
               onClick={this.switchLight}
               intent={theme.includes('light') ? Intent.PRIMARY : undefined}
             />
             <Button
               name='dark'
-              text={intl.formatMessage({ id: 'theme.dark' })}
+              text={t('theme.dark')}
               onClick={this.switchDark}
               intent={theme.includes('dark') ? Intent.PRIMARY : undefined}
             />
@@ -88,7 +88,7 @@ class PrefDialog extends PureComponent {
       <Dialog
         icon='person'
         onClose={handlePrefDialogClose}
-        title={intl.formatMessage({ id: 'preferences.title' })}
+        title={t('preferences.title')}
         autoFocus
         canEscapeKeyClose
         canOutsideClickClose
@@ -99,10 +99,10 @@ class PrefDialog extends PureComponent {
         <div className={Classes.DIALOG_BODY}>
           <div className='row'>
             <div className={dialogDescStyle}>
-              {intl.formatMessage({ id: 'preferences.language' })}
+              {t('preferences.language')}
             </div>
             <div className={dialogSmallDescStyle}>
-              {intl.formatMessage({ id: 'preferences.language' })}
+              {t('preferences.language')}
             </div>
             <div className={dialogFieldStyle}>
               <LangMenu />
@@ -111,10 +111,10 @@ class PrefDialog extends PureComponent {
           {renderThemeSwitcher}
           <div className='row'>
             <div className={dialogDescStyle}>
-              {intl.formatMessage({ id: 'preferences.timezone' })}
+              {t('preferences.timezone')}
             </div>
             <div className={dialogSmallDescStyle}>
-              {intl.formatMessage({ id: 'preferences.timezone' })}
+              {t('preferences.timezone')}
             </div>
             <div className={dialogFieldStyle}>
               <TimezonePicker
@@ -126,10 +126,10 @@ class PrefDialog extends PureComponent {
           </div>
           <div className='row'>
             <div className={dialogDescStyle}>
-              {intl.formatMessage({ id: 'preferences.dateformat' })}
+              {t('preferences.dateformat')}
             </div>
             <div className={dialogSmallDescStyle}>
-              {intl.formatMessage({ id: 'preferences.dateformat' })}
+              {t('preferences.dateformat')}
             </div>
             <div className={dialogFieldStyle}>
               <DateFormatSelector />
@@ -137,10 +137,10 @@ class PrefDialog extends PureComponent {
           </div>
           <div className='row'>
             <div className={dialogDescStyle}>
-              {intl.formatMessage({ id: 'preferences.milliseconds' })}
+              {t('preferences.milliseconds')}
             </div>
             <div className={dialogSmallDescStyle}>
-              {intl.formatMessage({ id: 'preferences.milliseconds' })}
+              {t('preferences.milliseconds')}
             </div>
             <div className={checkboxFieldStyle}>
               <ShowMilliseconds />
@@ -150,7 +150,7 @@ class PrefDialog extends PureComponent {
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
             <Button onClick={handlePrefDialogClose}>
-              {intl.formatMessage({ id: 'preferences.close' })}
+              {t('preferences.close')}
             </Button>
           </div>
         </div>
@@ -159,4 +159,4 @@ class PrefDialog extends PureComponent {
   }
 }
 
-export default injectIntl(PrefDialog)
+export default withNamespaces('translations')(PrefDialog)

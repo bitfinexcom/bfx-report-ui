@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -29,11 +29,11 @@ class ExportDialog extends PureComponent {
       end,
       getFullTime,
       handleExportDialogClose,
-      intl,
       isExportOpen,
       loading,
       start,
       startExport,
+      t,
       type,
       timestamp,
       timezone,
@@ -45,26 +45,26 @@ class ExportDialog extends PureComponent {
     const isWallets = location && location.pathname && getTarget(location.pathname) === queryConstants.MENU_WALLETS
     const datetime = getFullTime(timestamp, true)
     const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
-    const intlType = intl.formatMessage({ id: `${type}.title` })
+    const intlType = t(`${type}.title`)
     const renderMessage = !email ? (
       <p>
-        {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
+        {t('timeframe.download.prepare', { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
           {isWallets ? datetime : timeSpan}
         </span>
         &nbsp;
-        {intl.formatMessage({ id: 'timeframe.download.store' }, { intlType })}
+        {t('timeframe.download.store', { intlType })}
       </p>
     ) : (
       <p>
-        {intl.formatMessage({ id: 'timeframe.download.prepare' }, { intlType })}
+        {t('timeframe.download.prepare', { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
           {isWallets ? datetime : timeSpan}
         </span>
         &nbsp;
-        {intl.formatMessage({ id: 'timeframe.download.send' }, { intlType, email })}
+        {t('timeframe.download.send', { intlType, email })}
       </p>
     )
     const renderContent = loading
@@ -83,10 +83,10 @@ class ExportDialog extends PureComponent {
             <br />
             <div className='row'>
               <div className={dialogDescStyle}>
-                {intl.formatMessage({ id: 'preferences.dateformat' })}
+                {t('preferences.dateformat')}
               </div>
               <div className={dialogSmallDescStyle}>
-                {intl.formatMessage({ id: 'preferences.dateformat' })}
+                {t('preferences.dateformat')}
               </div>
               <div className={dialogFieldStyle}>
                 <DateFormatSelector />
@@ -94,10 +94,10 @@ class ExportDialog extends PureComponent {
             </div>
             <div className='row'>
               <div className={dialogDescStyle}>
-                {intl.formatMessage({ id: 'preferences.milliseconds' })}
+                {t('preferences.milliseconds')}
               </div>
               <div className={dialogSmallDescStyle}>
-                {intl.formatMessage({ id: 'preferences.milliseconds' })}
+                {t('preferences.milliseconds')}
               </div>
               <div className={checkboxFieldStyle}>
                 <ShowMilliseconds />
@@ -107,13 +107,13 @@ class ExportDialog extends PureComponent {
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <Button onClick={handleExportDialogClose}>
-                {intl.formatMessage({ id: 'timeframe.download.cancel' })}
+                {t('timeframe.download.cancel')}
               </Button>
               <Button
                 intent={Intent.PRIMARY}
                 onClick={startExport}
               >
-                {intl.formatMessage({ id: 'timeframe.download.export' })}
+                {t('timeframe.download.export')}
               </Button>
             </div>
           </div>
@@ -124,7 +124,7 @@ class ExportDialog extends PureComponent {
       <Dialog
         icon='cloud-download'
         onClose={handleExportDialogClose}
-        title={intl.formatMessage({ id: 'timeframe.download.title' })}
+        title={t('timeframe.download.title')}
         autoFocus
         canEscapeKeyClose
         canOutsideClickClose
@@ -141,4 +141,4 @@ class ExportDialog extends PureComponent {
 ExportDialog.propTypes = propTypes
 ExportDialog.defaultProps = defaultProps
 
-export default injectIntl(ExportDialog)
+export default withNamespaces('translations')(ExportDialog)

@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -75,10 +75,10 @@ class PublicTrades extends PureComponent {
       pairs,
       entries,
       handleClickExport,
-      intl,
       jumpPage,
       loading,
       refresh,
+      t,
       targetPair,
       nextPage,
       timeOffset,
@@ -88,8 +88,8 @@ class PublicTrades extends PureComponent {
         <NonIdealState
           className='bitfinex-nonideal'
           icon='issue-new'
-          title={intl.formatMessage({ id: 'preferences.sync.notset' })}
-          description={intl.formatMessage({ id: 'preferences.sync.description' })}
+          title={t('preferences.sync.notset')}
+          description={t('preferences.sync.description')}
         >
           <SyncPrefButton textOnly />
         </NonIdealState>
@@ -103,7 +103,7 @@ class PublicTrades extends PureComponent {
     const tableColums = getColumns({
       filteredData,
       getFullTime,
-      intl,
+      t,
       targetPair,
       timeOffset,
     })
@@ -145,7 +145,7 @@ class PublicTrades extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'publictrades.title' })}
+            {t('publictrades.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -158,7 +158,7 @@ class PublicTrades extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'publictrades.title' })}
+            {t('publictrades.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -189,4 +189,4 @@ class PublicTrades extends PureComponent {
 PublicTrades.propTypes = propTypes
 PublicTrades.defaultProps = defaultProps
 
-export default injectIntl(PublicTrades)
+export default withNamespaces('translations')(PublicTrades)

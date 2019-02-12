@@ -10,7 +10,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
-    intl,
+    t,
     timeOffset,
   } = props
 
@@ -128,7 +128,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsCreate',
-      nameStr: `${intl.formatMessage({ id: 'orders.column.create' })} (${timeOffset})`,
+      nameStr: `${t('orders.column.create')} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
@@ -144,7 +144,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${intl.formatMessage({ id: 'orders.column.update' })} (${timeOffset})`,
+      nameStr: `${t('orders.column.update')} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

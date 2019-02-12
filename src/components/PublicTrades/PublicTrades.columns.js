@@ -11,7 +11,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
-    intl,
+    t,
     targetPair,
     timeOffset,
   } = props
@@ -33,7 +33,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
-      nameStr: `${intl.formatMessage({ id: 'publictrades.column.time' })} (${timeOffset})`,
+      nameStr: `${t('publictrades.column.time')} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)

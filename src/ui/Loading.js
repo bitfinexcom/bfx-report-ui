@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
-import { injectIntl, intlShape } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { Spinner } from '@blueprintjs/core'
 
-export const Loading = ({ intl, title }) => {
+export const Loading = ({ t, title }) => {
   const renderTitle = title ? (
     <h4>
-      {intl.formatMessage({ id: title })}
+      {t(title)}
     </h4>
   ) : ''
   return (
@@ -18,7 +18,7 @@ export const Loading = ({ intl, title }) => {
 }
 
 Loading.propTypes = {
-  intl: intlShape.isRequired,
+  t: PropTypes.func.isRequired,
   title: PropTypes.string,
 }
 
@@ -26,4 +26,4 @@ Loading.defaultProps = {
   title: '',
 }
 
-export default injectIntl(Loading)
+export default withNamespaces('translations')(Loading)

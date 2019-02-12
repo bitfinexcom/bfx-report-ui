@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Intent,
@@ -28,7 +28,7 @@ class QueryLimitSelector extends PureComponent {
   render() {
     const {
       getQueryLimit,
-      intl,
+      t,
       target,
     } = this.props
     const queryLimit = getQueryLimit(target)
@@ -58,7 +58,7 @@ class QueryLimitSelector extends PureComponent {
       <Tooltip
         content={(
           <span>
-            {intl.formatMessage({ id: 'pagination.querylimit.tooltip' })}
+            {t('querylimit.tooltip')}
           </span>
         )}
         usePortal
@@ -81,4 +81,4 @@ class QueryLimitSelector extends PureComponent {
 QueryLimitSelector.propTypes = propTypes
 QueryLimitSelector.defaultProps = defaultProps
 
-export default injectIntl(QueryLimitSelector)
+export default withNamespaces('translations')(QueryLimitSelector)

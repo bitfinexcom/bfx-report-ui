@@ -1,0 +1,300 @@
+{
+  "auth": {
+    "auth": "Auth",
+    "title": "Please Login",
+    "enterAPIKey": "Enter API Key:",
+    "enterAPISecret": "Enter API Secret:",
+    "checkAuth": "Check Auth",
+    "note1": "Visit ",
+    "note2": " to get the readonly API key and secret pair.",
+    "required": "(required)",
+    "nonideal":{
+      "title": "Reports 2.0",
+      "description": "Login to Reports with token..."
+    }
+  },
+  "column":{
+    "id": "#"
+  },
+  "deposits": {
+    "title": "Deposits"
+  },
+  "fcredit": {
+    "title": "Funding Credit (Used)",
+    "column": {
+      "symbol": "CURRENCY",
+      "side": "SIDE",
+      "amount": "AMOUNT",
+      "status": "STATUS",
+      "rate": "RATE",
+      "period": "PERIOD",
+      "days": "Day(s)",
+      "opening": "OPENED",
+      "lastpayout": "CLOSED",
+      "positionpair": "POSITION PAIR",
+      "updated": "DATE"
+    },
+    "side": {
+      "provided": "PROVIDED",
+      "taken": "TAKEN",
+      "both": "BOTH",
+      "null": "null"
+    }
+  },
+  "floan": {
+    "title": "Funding Loans (Unused)",
+    "column": {
+      "symbol": "CURRENCY",
+      "side": "SIDE",
+      "amount": "AMOUNT",
+      "status": "STATUS",
+      "rate": "RATE",
+      "period": "PERIOD",
+      "days": "Day(s)",
+      "opening": "OPENED",
+      "lastpayout": "CLOSED",
+      "updated": "DATE"
+    },
+    "side": {
+      "provided": "PROVIDED",
+      "taken": "TAKEN",
+      "both": "BOTH",
+      "null": "null"
+    }
+  },
+  "foffer": {
+    "title": "Funding Offers",
+    "column": {
+      "symbol": "CURRENCY",
+      "amount": "AMOUNT",
+      "amount-exe": "EXECUTED AMOUNT",
+      "type": "TYPE",
+      "status": "STATUS",
+      "rate": "RATE",
+      "period": "PERIOD",
+      "days": "Day(s)",
+      "updated": "DATE"
+    }
+  },
+  "header": {
+    "logout": "Logout",
+    "lang": {
+      "en": "English",
+      "tw": "中文 (繁體)"
+    },
+    "preferences": "Preferences",
+    "help": "Help"
+  },
+  "ledgers":{
+    "title": "Ledgers",
+    "column":{
+      "description": "DESCRIPTION",
+      "wallet": "WALLET",
+      "currency": "CURRENCY",
+      "time": "DATE",
+      "amount": "AMOUNT",
+      "balance": "BALANCE"
+    }
+  },
+  "loading": "Loading...",
+  "movements": {
+    "title": "Movements",
+    "column": {
+      "updated": "DATE",
+      "currency": "CURRENCY",
+      "amount": "AMOUNT",
+      "fees": "FEES",
+      "status": "STATUS",
+      "destination": "DESTINATION"
+    }
+  },
+  "nodata": "No related data in this time range. You can try another time range.",
+  "orders": {
+    "title": "Orders",
+    "column": {
+      "pair": "PAIR",
+      "type": "TYPE",
+      "amount": "AMOUNT",
+      "amount-exe": "EXECUTED AMOUNT",
+      "price": "PRICE",
+      "avgprice": "AVERAGE EXECUTION PRICE",
+      "create": "CREATED",
+      "update": "UPDATED",
+      "status": "STATUS"
+    }
+  },
+  "pagination": {
+    "page": "Page",
+    "of": "of",
+    "loading": "loading..."
+  },
+  "paudit": {
+    "title": "Positions Audit",
+    "input": {
+      "ids": "positions ID"
+    },
+    "noid": {
+      "title": "No Positions ID",
+      "noid.description": "Please select from the Positions page to query the Positions changelog by ID."
+    }
+  },
+  "positions": {
+    "title": "Positions",
+    "column": {
+      "pair": "PAIR",
+      "amount": "AMOUNT",
+      "base-price": "BASE PRICE",
+      "liq-price": "LIQ PRICE",
+      "pl": "P/L",
+      "plperc": "P/L%",
+      "swap": "FUNDING COST",
+      "swap-type": "FUNDING TYPE",
+      "status": "STATUS",
+      "update": "UPDATED"
+    },
+    "swap": {
+      "daily": "Daily",
+      "term": "Term"
+    }
+  },
+  "preferences":{
+    "title": "Preferences",
+    "close": "Close",
+    "language": "Language:",
+    "theme": "Theme:",
+    "timezone": "Timezone:",
+    "dateformat": "Date Format:",
+    "milliseconds": "Display Milliseconds:",
+    "sync": {
+      "title": "Sync preferences",
+      "notset": "Sync preferences are not set yet",
+      "description": "To access Public Trades offline, you need to setup offline available pairs and the start query time.",
+      "setup": "Setup Sync preferences",
+      "pairs": "Offline Pairs",
+      "starttime": "Start Time",
+      "apply": "Apply",
+      "apply.tooltip": "After apply, you needs to login again to take effect.",
+      "insync-warning": "Can't apply during syncing. Please wait until syncing is done."
+    }
+  },
+  "publictrades":{
+    "title": "Public Trades",
+    "column": {
+      "time": "TIME",
+      "type": "TYPE",
+      "price": "PRICE",
+      "amount": "AMOUNT",
+      "pair": "PAIR"
+    }
+  },
+  "querylimit": {
+    "tooltip": "Choose the size per query. The Larger size will take longer query time"
+  },
+  "selector": {
+    "filter": {
+      "symbol": "Symbol Filter",
+      "pair": "Pair Filter"
+    }
+  },
+  "status": {
+    "success": "{{topic}} Success at {{time}}",
+    "fail": "{{topic}} fail {{detail}}",
+    "noid": "dev: the status action should contain the id param",
+    "request": {
+      "error": "{{topic}} request fail {{detail}}"
+    }
+  },
+  "symbols": {
+    "title": "Get symbols"
+  },
+  "sync": {
+    "title": "Sync",
+    "switch-mode": "Switch Sync Mode",
+    "online": "Currently query online. Click to switch to offline query mode",
+    "offline": "Currently query offline. Click to switch to online query mode",
+    "insync": "Currently query online. Click to pulse the sync procedure",
+    "description": "We'll start caching your data locally. Once syncing is complete, you can query locally in offline mode. You can still query online during sync.",
+    "sync-description": "Your data is syncing locally. Would you like to stop the sync process and keep in online query mode?",
+    "close": "Cancel",
+    "start": "Start Syncing",
+    "stop-sync": "Stop Syncing",
+    "go-offline": "Switching to offline query mode (query from db)",
+    "logout": "Sync Stopped",
+    "message": {
+      "canceled": "Canceled old Sync Watcher"
+    }
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "tickers": {
+    "title": "Tickers",
+    "column": {
+      "pair": "PAIR",
+      "ask": "ASK",
+      "bid": "BID",
+      "time": "Time"
+    }
+  },
+  "timeframe": {
+    "custom": {
+      "title": "Select Query Range",
+      "view" : "View"
+    },
+    "download": {
+      "query": "Prepare Export",
+      "title": "Export CSV",
+      "prepare": "Bitfinex will prepare your {{intlType}} data during",
+      "send": "and send to Email {{email}} .",
+      "store": "and store to your local folder.",
+      "export": "Export",
+      "cancel": "Cancel",
+      "status": {
+        "local": "{{topic}} csv generated, please check your local 'csv' folder",
+        "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
+      }
+    },
+    "refresh": "Refresh",
+    "custom-timerange": "Custom time range",
+    "24h": "Last 24 hours",
+    "yesterday": "Yesterday",
+    "2w": "Last 2 weeks",
+    "month_to_date": "Month to date",
+    "past_month": "Past month",
+    "past_3m": "Past 3 months",
+    "custom_time": "Custom",
+    "start-date-placeholder": "Start Date Time"
+  },
+  "trades": {
+    "title": "Trades",
+    "column": {
+      "orderid": "ORDER ID",
+      "time": "DATE",
+      "pair": "PAIR",
+      "amount": "AMOUNT",
+      "price": "PRICE",
+      "fee": "FEE"
+    }
+  },
+  "wallets": {
+    "title": "Wallets (Beta)",
+    "column": {
+      "currency": "CURRENCY",
+      "balance": "BALANCE"
+    },
+    "header": {
+      "exchange": "Exchange",
+      "margin": "Margin",
+      "funding": "Funding"
+    },
+    "nodata": "No related data in this date time. You can try another date time.",
+    "query": {
+      "title": "Query",
+      "tooltip": "Select a time to query the wallets snapshot"
+    }
+  },
+  "withdrawals": {
+    "title": "Withdrawals"
+  }
+}

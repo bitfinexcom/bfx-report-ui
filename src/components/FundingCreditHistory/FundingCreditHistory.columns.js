@@ -11,7 +11,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
-    intl,
+    t,
     timeOffset,
   } = props
 
@@ -49,14 +49,14 @@ export default function getColumns(props) {
       name: 'fcredit.column.side',
       width: 100,
       renderer: (rowIndex) => {
-        const side = intl.formatMessage({ id: `fcredit.side.${getSideMsg(filteredData[rowIndex].side)}` })
+        const side = t(`fcredit.side.${getSideMsg(filteredData[rowIndex].side)}`)
         return (
           <Cell tooltip={side}>
             {side}
           </Cell>
         )
       },
-      copyText: rowIndex => intl.formatMessage({ id: `fcredit.side.${getSideMsg(filteredData[rowIndex].side)}` }),
+      copyText: rowIndex => t(`fcredit.side.${getSideMsg(filteredData[rowIndex].side)}`),
     },
     {
       id: 'amount',
@@ -112,7 +112,7 @@ export default function getColumns(props) {
       name: 'fcredit.column.period',
       width: 100,
       renderer: (rowIndex) => {
-        const period = `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'fcredit.column.period.days' })}`
+        const period = `${filteredData[rowIndex].period} ${t('fcredit.column.days')}`
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -123,7 +123,7 @@ export default function getColumns(props) {
         )
       },
       copyText: (rowIndex) => {
-        const days = intl.formatMessage({ id: 'fcredit.column.period.days' })
+        const days = t('fcredit.column.days')
         return `${filteredData[rowIndex].period} ${days}`
       },
     },
@@ -175,7 +175,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${intl.formatMessage({ id: 'fcredit.column.updated' })} (${timeOffset})`,
+      nameStr: `${t('fcredit.column.updated')} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   FormGroup,
   InputGroup,
@@ -8,19 +8,19 @@ import {
 import { inputKeyPropTypes, inputKeyDefaultProps } from './Auth.props'
 
 export const InputKey = ({
-  intl, label, onChange, name, placeholder, value,
+  t, label, onChange, name, placeholder, value,
 }) => (
   <Fragment>
     <FormGroup
-      label={intl.formatMessage({ id: label })}
+      label={t(label)}
       labelFor={name}
-      labelInfo={intl.formatMessage({ id: 'auth.required' })}
+      labelInfo={t('auth.required')}
     />
     <InputGroup
       id={name}
       type='password'
       name={name}
-      placeholder={intl.formatMessage({ id: placeholder })}
+      placeholder={t(placeholder)}
       value={value}
       onChange={onChange}
     />
@@ -31,4 +31,4 @@ export const InputKey = ({
 InputKey.propTypes = inputKeyPropTypes
 InputKey.defaultProps = inputKeyDefaultProps
 
-export default injectIntl(InputKey)
+export default withNamespaces('translations')(InputKey)

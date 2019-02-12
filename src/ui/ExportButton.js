@@ -1,19 +1,19 @@
 import React from 'react'
-import { injectIntl, intlShape } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { Button } from '@blueprintjs/core'
 
-const ExportButton = ({ intl, handleClickExport }) => (
+const ExportButton = ({ handleClickExport, t }) => (
   <Button icon='cloud-download' onClick={handleClickExport}>
-    {intl.formatMessage({ id: 'timeframe.download' })}
+    {t('timeframe.download.export')}
   </Button>
 )
 
 ExportButton.propTypes = {
-  intl: intlShape.isRequired,
   handleClickExport: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 ExportButton.defaultProps = {}
 
-export default injectIntl(ExportButton)
+export default withNamespaces('translations')(ExportButton)

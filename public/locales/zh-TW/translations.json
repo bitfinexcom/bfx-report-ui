@@ -1,0 +1,299 @@
+{
+  "auth": {
+    "auth": "驗證",
+    "title": "請先登入",
+    "enterAPIKey": "輸入 API Key:",
+    "enterAPISecret": "輸入 API Secret:",
+    "checkAuth": "開始驗證",
+    "note1": "請先前往 ",
+    "note2": " 取得唯讀的API金鑰與密鑰對。",
+    "required": "（必填）",
+    "nonideal": {
+      "title": "報告 2.0",
+      "description": "使用令牌登入報告..."
+    }
+  },
+  "column":{
+    "id": "#"
+  },
+  "deposits": {
+    "title": "存款"
+  },
+  "fcredit": {
+    "title": "信用融資（已使用）",
+    "column": {
+      "symbol": "貨幣",
+      "side": "SIDE",
+      "amount": "數量",
+      "status": "狀態",
+      "rate": "利率",
+      "period": "期間",
+      "days": "天",
+      "opening": "開始",
+      "lastpayout": "結束",
+      "positionpair": "POSITION PAIR",
+      "updated": "日期"
+    },
+    "side": {
+      "provided": "PROVIDED",
+      "taken": "TAKEN",
+      "both": "BOTH",
+      "null": "null"
+    }
+  },
+  "floan": {
+    "title": "提供的融資（未使用）",
+    "column": {
+      "symbol": "貨幣",
+      "side": "SIDE",
+      "amount": "數量",
+      "status": "狀態",
+      "rate": "利率",
+      "period": "期間",
+      "days": "天",
+      "opening": "開始",
+      "lastpayout": "結束",
+      "updated": "日期"
+    },
+    "side": {
+      "provided": "PROVIDED",
+      "taken": "TAKEN",
+      "both": "BOTH",
+      "null": "null"
+    }
+  },
+  "foffer": {
+    "title": "保證金融資報價",
+    "column": {
+      "symbol": "貨幣",
+      "amount": "數量",
+      "amount-exe": "執行數量",
+      "type": "類型",
+      "status": "狀態",
+      "rate": "利率",
+      "period": "期間",
+      "days": "天",
+      "updated": "日期"
+    }
+  },
+  "header": {
+    "logout": "登出",
+    "lang": {
+      "en": "English",
+      "tw": "中文 (繁體)"
+    },
+    "preferences": "偏好設定",
+    "help": "說明"
+  },
+  "ledgers": {
+    "title": "餘額",
+    "column":{
+      "description": "描述",
+      "wallet": "錢包",
+      "currency": "貨幣",
+      "time": "時間",
+      "amount": "數量",
+      "balance": "金額"
+    }
+  },
+  "loading": "讀取中...",
+  "movements": {
+    "title": "活動",
+    "column": {
+      "updated": "時間",
+      "currency": "貨幣",
+      "amount": "數量",
+      "fees": "費用",
+      "status": "狀態",
+      "destination": "去處"
+    }
+  },
+  "nodata": "沒有相關資料。請試試其他時間範圍。",
+  "orders": {
+    "title": "訂單",
+    "column": {
+      "pair": "對",
+      "type": "類型",
+      "amount": "數量",
+      "amount-exe": "執行數量",
+      "price": "價格",
+      "avgprice": "平均執行價格",
+      "create": "建立",
+      "update": "更新",
+      "status": "狀態"
+    }
+  },
+  "pagination": {
+    "page": "頁數",
+    "of": "/",
+    "loading": "查詢中..."
+  },
+  "paudit": {
+    "title": "倉位驗證",
+    "input": {
+      "ids": "倉位 ID"
+    },
+    "noid": {
+      "title": "未指定倉位 ID",
+      "description": "欲查看倉位變更紀錄，可先從倉位頁面選取ID"
+    }
+  },
+  "positions": {
+    "title": "倉位",
+    "column": {
+      "pair": "對",
+      "amount": "數量",
+      "base-price": "基價",
+      "liq-price": "清算價格",
+      "pl": "損益",
+      "plperc": "損益%",
+      "swap": "互換成本",
+      "swap-type": "互換類型",
+      "status": "狀態",
+      "update": "更新"
+    },
+    "swap": {
+      "daily": "每日",
+      "term": "條件"
+    }
+  },
+  "preferences": {
+    "title": "偏好設定",
+    "close": "關閉",
+    "language": "語言:",
+    "theme": "佈景主題:",
+    "timezone": "時區:",
+    "dateformat": "日期格式:",
+    "milliseconds": "顯示毫秒:",
+    "sync":{
+      "notset": "同步偏好尚未設定",
+      "description": "為了離線查詢公開交易，請先設定欲離線查詢的交易對與開始日期。",
+      "title": "同步偏好設定",
+      "pairs": "暫存代幣對",
+      "starttime": "起始時間",
+      "apply": "確認",
+      "apply.tooltip": "確認後需要重新登入才會生效。",
+      "insync-warning": "同步時無法確認設定。請等到同步完成後再按確認。"
+    }
+  },
+  "publictrades": {
+    "title": "公開交易",
+    "column": {
+      "time": "時間",
+      "type": "類型",
+      "price": "價格",
+      "amount": "數量",
+      "pair": "對"
+    }
+  },
+  "querylimit": {
+    "tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間"
+  },
+  "selector": {
+    "filter": {
+      "symbol": "代幣過濾器",
+      "pair": "代幣對過濾器"
+    }
+  },
+  "status":{
+    "success": "於 {{time}} {{topic}}成功",
+    "fail": "{{topic}} 失敗 {{detail}}",
+    "noid": "dev: the status action should contain the id param",
+    "request":{
+      "error": "{{topic}} 請求失敗 {{detail}}"
+    }
+  },
+  "symbols": {
+    "title": "取得貨幣資訊"
+  },
+  "sync": {
+    "title": "同步",
+    "switch-mode": "切換同步模式",
+    "online": "目前為連線查詢模式。點擊切換到離線查詢模式",
+    "offline": "目前離線查詢模式。點擊切換到連線查詢模式",
+    "insync": "目前為連線查詢模式。點擊停止同步",
+    "description": "我們即將將您的資料快取到本地中。一旦同步完成您將可以離線查詢您的資料。在同步期間您依然可以繼續連線查詢。",
+    "sync-description": "資料正在同步到本地中。您希望停止同步並繼續使用連線查詢模式嗎？",
+    "close": "取消",
+    "start": "開始同步",
+    "stop-sync": "停止同步",
+    "go-offline": "切換至離線查詢模式",
+    "logout": "同步已停止",
+    "message": {
+      "canceled": "已取消上次的同步監測"
+    }
+  },
+  "theme": {
+    "light": "白",
+    "dark": "黑"
+  },
+  "tickers": {
+    "title": "牌價",
+    "column": {
+      "pair": "對",
+      "ask": "賣價",
+      "bid": "買價",
+      "time": "時間"
+    }
+  },
+  "timeframe": {
+    "custom": {
+      "title": "選擇查詢時段",
+      "view" : "查詢"
+    },
+    "download": {
+      "query": "預備匯出",
+      "title": "匯出成CSV",
+      "prepare": "Bitfinex 將為您準備於",
+      "send": "期間的{{intlType}}資料，並寄送至Email地址 {{email}}。",
+      "store": "期間的{{intlType}}資料，並儲存至本地資料夾。",
+      "export": "匯出",
+      "cancel": "取消",
+      "status": {
+        "local": "已產生{{topic}}的csv檔，請查看您本地的'csv'資料夾。",
+        "email": "正在生成您的 CSV 格式報告。生成後將立即透過 Email 送出。"
+      }
+    },
+    "refresh": "重新載入",
+    "custom-timerange": "自訂時段",
+    "24h": "24 小時間",
+    "yesterday": "昨天",
+    "2w": "兩週間",
+    "month_to_date": "月初至今",
+    "past_month": "過去一個月",
+    "past_3m": "過去三個月",
+    "custom_time": "自訂",
+    "start-date-placeholder": "開始日期時間"
+  },
+  "trades": {
+    "title": "交易",
+    "column": {
+      "orderid": "訂單 ID",
+      "time": "時間",
+      "pair": "對",
+      "amount": "數量",
+      "price": "價格",
+      "fee": "手續費"
+    }
+  },
+  "wallets": {
+    "title": "錢包(Beta)",
+    "column": {
+      "currency": "貨幣",
+      "balance": "餘額"
+    },
+    "header": {
+      "exchange": "交易",
+      "margin": "保證金",
+      "funding": "融資"
+    },
+    "nodata": "沒有相關資料。請嘗試選擇其他時間。",
+    "query": {
+      "title": "查詢",
+      "tooltip": "選擇一個時間以查看過去時刻的錢包"
+    }
+  },
+  "withdrawals": {
+    "title": "提款"
+  }
+}

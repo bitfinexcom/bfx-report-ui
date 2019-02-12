@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Card,
@@ -68,7 +68,6 @@ class PositionsAudit extends PureComponent {
       fetchPrev,
       getFullTime,
       handleClickExport,
-      intl,
       jumpPage,
       loading,
       match,
@@ -78,6 +77,7 @@ class PositionsAudit extends PureComponent {
       pageOffset,
       pageLoading,
       refresh,
+      t,
       targetIds,
       timeOffset,
     } = this.props
@@ -86,14 +86,14 @@ class PositionsAudit extends PureComponent {
         <NonIdealState
           className='bitfinex-nonideal'
           icon='numbered-list'
-          title={intl.formatMessage({ id: 'paudit.noid' })}
-          description={intl.formatMessage({ id: 'paudit.noid.description' })}
+          title={t('paudit.noid.title')}
+          description={t('paudit.noid.description')}
         >
           <Button
             intent={Intent.PRIMARY}
             onClick={this.jumpToPositions}
           >
-            {intl.formatMessage({ id: 'positions.title' })}
+            {t('positions.title')}
           </Button>
         </NonIdealState>
       )
@@ -110,7 +110,7 @@ class PositionsAudit extends PureComponent {
     const tableColums = getColumns({
       filteredData,
       getFullTime,
-      intl,
+      t,
       timeOffset,
     })
 
@@ -137,7 +137,7 @@ class PositionsAudit extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'paudit.title' })}
+            {t('paudit.title')}
             &nbsp;
             <TimeRange />
           </h4>
@@ -148,7 +148,7 @@ class PositionsAudit extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'paudit.title' })}
+            {t('paudit.title')}
             &nbsp;
             <TimeRange />
             &nbsp;
@@ -177,4 +177,4 @@ class PositionsAudit extends PureComponent {
 PositionsAudit.propTypes = propTypes
 PositionsAudit.defaultProps = defaultProps
 
-export default injectIntl(PositionsAudit)
+export default withNamespaces('translations')(PositionsAudit)
