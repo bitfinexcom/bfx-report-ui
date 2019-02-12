@@ -197,10 +197,14 @@
       "pair": "代幣對過濾器"
     }
   },
-  "status.success": "於 {time} {topic}成功",
-  "status.fail": "{topic} 失敗 {detail}",
-  "status.request.error": "{topic} 請求失敗 {detail}",
-  "status.noid": "dev: the status action should contain the id param",
+  "status":{
+    "success": "於 {time} {topic}成功",
+    "fail": "{topic} 失敗 {detail}",
+    "noid": "dev: the status action should contain the id param",
+    "request":{
+      "error": "{topic} 請求失敗 {detail}"
+    }
+  },
   "symbols.title": "取得貨幣資訊",
   "sync.title": "同步",
   "sync.switch-mode": "切換同步模式",
