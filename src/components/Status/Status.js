@@ -1,4 +1,4 @@
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Toaster,
   Intent,
@@ -16,8 +16,8 @@ export const AppToaster = Toaster.create({
 export const Status = ({
   clearStatus,
   intent,
-  intl,
   msg = {},
+  t,
 }) => {
   if (!msg.id) {
     return ''
@@ -25,11 +25,11 @@ export const Status = ({
 
   const params = {
     ...msg,
-    topic: msg.topic ? intl.formatMessage({ id: msg.topic }) || msg.topic : undefined,
+    topic: msg.topic ? t(msg.topic) || msg.topic : undefined,
   }
   AppToaster.show({
     intent: intent || Intent.PRIMARY,
-    message: intl.formatMessage({ id: msg.id }, params),
+    message: t(msg.id, params),
     onDismiss: clearStatus,
     timeout: 10000, // 10s
   })
@@ -39,4 +39,4 @@ export const Status = ({
 Status.propTypes = propTypes
 Status.defaultProps = defaultProps
 
-export default injectIntl(Status)
+export default withNamespaces('translations')(Status)

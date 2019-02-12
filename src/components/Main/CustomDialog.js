@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { injectIntl, intlShape } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -23,13 +23,13 @@ class CustomDialog extends PureComponent {
 
   render() {
     const {
+      endDate,
       handleCustomDialogClose,
       handleRangeChange,
-      intl,
       isCustomOpen,
       startQuery,
       startDate,
-      endDate,
+      t,
     } = this.props
     const commonDateRangeProps = {
       allowSingleDayRange: true,
@@ -39,14 +39,14 @@ class CustomDialog extends PureComponent {
       onChange: handleRangeChange,
       value: [startDate, endDate],
       maxDate: this.maxDate,
-      placeholder: intl.formatMessage({ id: 'timeframe.start-date-placeholder' }),
+      placeholder: t('timeframe.start-date-placeholder'),
     }
 
     return isCustomOpen ? (
       <Dialog
         icon='calendar'
         onClose={handleCustomDialogClose}
-        title={intl.formatMessage({ id: 'timeframe.custom.title' })}
+        title={t('timeframe.custom.title')}
         autoFocus
         canEscapeKeyClose
         canOutsideClickClose
@@ -73,7 +73,7 @@ class CustomDialog extends PureComponent {
               onClick={startQuery}
               disabled={!startDate || !endDate}
             >
-              {intl.formatMessage({ id: 'timeframe.custom.view' })}
+              {t('timeframe.custom.view')}
             </Button>
           </div>
         </div>
@@ -85,7 +85,7 @@ class CustomDialog extends PureComponent {
 CustomDialog.propTypes = {
   handleCustomDialogClose: PropTypes.func.isRequired,
   handleRangeChange: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
+  t: PropTypes.func.isRequired,
   isCustomOpen: PropTypes.bool.isRequired,
   startQuery: PropTypes.func.isRequired,
   startDate: PropTypes.instanceOf(Date),
@@ -97,4 +97,4 @@ CustomDialog.defaultProps = {
   endDate: null,
 }
 
-export default injectIntl(CustomDialog)
+export default withNamespaces('translations')(CustomDialog)

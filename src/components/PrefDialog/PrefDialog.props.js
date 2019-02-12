@@ -8,6 +8,4 @@ export const propTypes = {
   timezone: PropTypes.string,
 }
 
-export const defaultProps = {
-  intl: {},
-}
+export const defaultProps = {}
