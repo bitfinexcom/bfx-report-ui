@@ -188,10 +188,14 @@
   "timeframe.custom.title": "Select Query Range",
   "timeframe.custom.view" : "View",
   "timeframe.start-date-placeholder": "Start Date Time",
-  "pagination.page": "Page",
-  "pagination.of": "of",
-  "pagination.loading": "loading...",
-  "pagination.querylimit.tooltip": "Choose the size per query. The Larger size will take longer query time",
+  "pagination": {
+    "page": "Page",
+    "of": "of",
+    "loading": "loading..."
+  },
+  "querylimit": {
+    "tooltip": "Choose the size per query. The Larger size will take longer query time"
+  },
   "selector": {
     "filter": {
       "symbol": "Symbol Filter",

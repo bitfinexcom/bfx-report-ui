@@ -181,10 +181,14 @@
   "timeframe.custom.title": "選擇查詢時段",
   "timeframe.custom.view" : "查詢",
   "timeframe.start-date-placeholder": "開始日期時間",
-  "pagination.page": "頁數",
-  "pagination.of": "/",
-  "pagination.loading": "查詢中...",
-  "pagination.querylimit.tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間",
+  "pagination": {
+    "page": "頁數",
+    "of": "/",
+    "loading": "查詢中..."
+  },
+  "querylimit": {
+    "tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間"
+  },
   "selector": {
     "filter": {
       "symbol": "代幣過濾器",

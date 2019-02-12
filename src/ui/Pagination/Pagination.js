@@ -1,5 +1,5 @@
 import React, { createRef, Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import { Button, Spinner } from '@blueprintjs/core'
 
 import QueryLimitSelector from 'ui/QueryLimitSelector'
@@ -59,15 +59,15 @@ class Pagination extends PureComponent {
 
   render() {
     const {
-      type,
       dataLen,
       getQueryLimit,
-      intl,
       loading,
+      nextPage = false,
       offset,
       prevClick,
       pageOffset,
-      nextPage = false,
+      t,
+      type,
     } = this.props
     if (!isValidateType(type)) {
       return ''
@@ -101,7 +101,7 @@ class Pagination extends PureComponent {
         <Spinner size={5} />
         &nbsp;
         <span className='bitfinex-show-soft'>
-          {intl.formatMessage({ id: 'pagination.loading' })}
+          {t('pagination.loading')}
         </span>
       </Fragment>
     ) : undefined
@@ -129,7 +129,7 @@ class Pagination extends PureComponent {
             onClick={this.backward}
             disabled={currentPage - 1 === 0 || loading}
           />
-          {intl.formatMessage({ id: 'pagination.page' })}
+          {t('pagination.page')}
           <input
             className='bitfinex-page-input'
             ref={this.pageInput}
@@ -138,7 +138,7 @@ class Pagination extends PureComponent {
             data-pagelen={pageLen}
             disabled={loading}
           />
-          {intl.formatMessage({ id: 'pagination.of' })}
+          {t('pagination.of')}
           &nbsp;
           {pageLen}
           {renderRestDots}
@@ -165,4 +165,4 @@ class Pagination extends PureComponent {
 Pagination.propTypes = propTypes
 Pagination.defaultProps = defaultProps
 
-export default injectIntl(Pagination)
+export default withNamespaces('translations')(Pagination)
