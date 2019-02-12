@@ -10,7 +10,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
-    intl,
+    t,
     timeOffset,
   } = props
 
@@ -128,7 +128,7 @@ export default function getColumns(props) {
       name: 'foffer.column.period',
       width: 80,
       renderer: (rowIndex) => {
-        const period = `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'foffer.column.period.days' })}`
+        const period = `${filteredData[rowIndex].period} ${t('foffer.column.period.days')}`
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -139,13 +139,13 @@ export default function getColumns(props) {
         )
       },
       copyText: (rowIndex) => {
-        const days = intl.formatMessage({ id: 'foffer.column.period.days' })
+        const days = t('foffer.column.period.days')
         return `${filteredData[rowIndex].period} ${days}`
       },
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${intl.formatMessage({ id: 'foffer.column.updated' })} (${timeOffset})`,
+      nameStr: `${t('foffer.column.updated')} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

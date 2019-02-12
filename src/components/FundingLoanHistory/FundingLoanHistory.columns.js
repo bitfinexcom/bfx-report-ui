@@ -11,7 +11,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
-    intl,
+    t,
     timeOffset,
   } = props
 
@@ -49,14 +49,14 @@ export default function getColumns(props) {
       name: 'floan.column.side',
       width: 80,
       renderer: (rowIndex) => {
-        const side = intl.formatMessage({ id: `floan.side.${getSideMsg(filteredData[rowIndex].side)}` })
+        const side = t(`floan.side.${getSideMsg(filteredData[rowIndex].side)}`)
         return (
           <Cell tooltip={side}>
             {side}
           </Cell>
         )
       },
-      copyText: rowIndex => intl.formatMessage({ id: `floan.side.${getSideMsg(filteredData[rowIndex].side)}` }),
+      copyText: rowIndex => t(`floan.side.${getSideMsg(filteredData[rowIndex].side)}`),
     },
     {
       id: 'amount',
@@ -112,7 +112,7 @@ export default function getColumns(props) {
       name: 'floan.column.period',
       width: 80,
       renderer: (rowIndex) => {
-        const period = `${filteredData[rowIndex].period} ${intl.formatMessage({ id: 'floan.column.period.days' })}`
+        const period = `${filteredData[rowIndex].period} ${t('floan.column.period.days')}`
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -123,7 +123,7 @@ export default function getColumns(props) {
         )
       },
       copyText: rowIndex => `${filteredData[rowIndex].period} `
-        + `${intl.formatMessage({ id: 'floan.column.period.days' })}`,
+        + `${t('floan.column.period.days')}`,
     },
     {
       id: 'mtsOpening',
@@ -159,7 +159,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${intl.formatMessage({ id: 'floan.column.updated' })} (${timeOffset})`,
+      nameStr: `${t('floan.column.updated')} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

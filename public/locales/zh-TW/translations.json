@@ -16,6 +16,63 @@
   "column":{
     "id": "#"
   },
+  "fcredit": {
+    "title": "信用融資（已使用）",
+    "column": {
+      "symbol": "貨幣",
+      "side": "SIDE",
+      "amount": "數量",
+      "status": "狀態",
+      "rate": "利率",
+      "period": "期間",
+      "period.days": "天",
+      "opening": "開始",
+      "lastpayout": "結束",
+      "positionpair": "POSITION PAIR",
+      "updated": "日期"
+    },
+    "side": {
+      "provided": "PROVIDED",
+      "taken": "TAKEN",
+      "both": "BOTH",
+      "null": "null"
+    }
+  },
+  "floan": {
+    "title": "提供的融資（未使用）",
+    "column": {
+      "symbol": "貨幣",
+      "side": "SIDE",
+      "amount": "數量",
+      "status": "狀態",
+      "rate": "利率",
+      "period": "期間",
+      "period.days": "天",
+      "opening": "開始",
+      "lastpayout": "結束",
+      "updated": "日期"
+    },
+    "side": {
+      "provided": "PROVIDED",
+      "taken": "TAKEN",
+      "both": "BOTH",
+      "null": "null"
+    }
+  },
+  "foffer": {
+    "title": "保證金融資報價",
+    "column": {
+      "symbol": "貨幣",
+      "amount": "數量",
+      "amount-exe": "執行數量",
+      "type": "類型",
+      "status": "狀態",
+      "rate": "利率",
+      "period": "期間",
+      "period.days": "天",
+      "updated": "日期"
+    }
+  },
   "header": {
     "logout": "登出",
     "lang": {
@@ -36,6 +93,8 @@
       "balance": "金額"
     }
   },
+  "loading": "讀取中...",
+  "nodata": "沒有相關資料。請試試其他時間範圍。",
   "pagination": {
     "page": "頁數",
     "of": "/",
@@ -120,49 +179,6 @@
     "customtime": "自訂",
     "start-date-placeholder": "開始日期時間"
   },
-  "loading": "讀取中...",
-  "nodata": "沒有相關資料。請試試其他時間範圍。",
-  "fcredit.title": "信用融資（已使用）",
-  "fcredit.column.symbol": "貨幣",
-  "fcredit.column.side": "SIDE",
-  "fcredit.side.provided": "PROVIDED",
-  "fcredit.side.taken": "TAKEN",
-  "fcredit.side.both": "BOTH",
-  "fcredit.side.null": "null",
-  "fcredit.column.amount": "數量",
-  "fcredit.column.status": "狀態",
-  "fcredit.column.rate": "利率",
-  "fcredit.column.period": "期間",
-  "fcredit.column.period.days": "天",
-  "fcredit.column.opening": "開始",
-  "fcredit.column.lastpayout": "結束",
-  "fcredit.column.positionpair": "POSITION PAIR",
-  "fcredit.column.updated": "日期",
-  "floan.title": "提供的融資（未使用）",
-  "floan.column.symbol": "貨幣",
-  "floan.column.side": "SIDE",
-  "floan.side.provided": "PROVIDED",
-  "floan.side.taken": "TAKEN",
-  "floan.side.both": "BOTH",
-  "floan.side.null": "null",
-  "floan.column.amount": "數量",
-  "floan.column.status": "狀態",
-  "floan.column.rate": "利率",
-  "floan.column.period": "期間",
-  "floan.column.period.days": "天",
-  "floan.column.opening": "開始",
-  "floan.column.lastpayout": "結束",
-  "floan.column.updated": "日期",
-  "foffer.title": "保證金融資報價",
-  "foffer.column.symbol": "貨幣",
-  "foffer.column.amount": "數量",
-  "foffer.column.amount-exe": "執行數量",
-  "foffer.column.type": "類型",
-  "foffer.column.status": "狀態",
-  "foffer.column.rate": "利率",
-  "foffer.column.period": "期間",
-  "foffer.column.period.days": "天",
-  "foffer.column.updated": "日期",
   "movements.title": "活動",
   "deposits.title": "存款",
   "withdrawals.title": "提款",
