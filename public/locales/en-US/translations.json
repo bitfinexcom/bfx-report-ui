@@ -162,6 +162,10 @@
   "trades.column.price": "PRICE",
   "trades.column.fee": "FEE",
   "timeframe": {
+    "custom": {
+      "title": "Select Query Range",
+      "view" : "View"
+    },
     "download": {
       "query": "Prepare Export",
       "title": "Export CSV",
@@ -182,12 +186,10 @@
     "2w": "Last 2 weeks",
     "month_to_date": "Month to date",
     "past_month": "Past month",
-    "past_3m": "Past 3 months"
+    "past_3m": "Past 3 months",
+    "customtime": "Custom",
+    "start-date-placeholder": "Start Date Time"
   },
-  "timeframe.custom": "Custom",
-  "timeframe.custom.title": "Select Query Range",
-  "timeframe.custom.view" : "View",
-  "timeframe.start-date-placeholder": "Start Date Time",
   "pagination": {
     "page": "Page",
     "of": "of",

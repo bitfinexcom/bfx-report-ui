@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import { MenuItem, PopoverInteractionKind } from '@blueprintjs/core'
 import queryString from 'query-string'
 
@@ -53,9 +53,9 @@ class Timeframe extends PureComponent {
     const {
       end,
       handleClickCustom,
-      intl,
       menuMode,
       start,
+      t,
       timeRange,
       timezone,
     } = this.props
@@ -69,37 +69,37 @@ class Timeframe extends PureComponent {
         popoverProps={TIME_FRAMES_POPOVER_PROPS}
       >
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.24h' })}
+          text={t('timeframe.24h')}
           onClick={this.handleClick24H}
           active={timeRange === constants.TIME_RANGE_LAST_24HOURS}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.yesterday' })}
+          text={t('timeframe.yesterday')}
           onClick={this.handleClickYesterday}
           active={timeRange === constants.TIME_RANGE_YESTERDAY}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.2w' })}
+          text={t('timeframe.2w')}
           onClick={this.handleClickLast2Weeks}
           active={timeRange === constants.TIME_RANGE_LAST_2WEEKS}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.month_to_date' })}
+          text={t('timeframe.month_to_date')}
           onClick={this.handleClickMonthToDate}
           active={timeRange === constants.TIME_RANGE_MONTH_TO_DATE}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.past_month' })}
+          text={t('timeframe.past_month')}
           onClick={this.handleClickPastMonth}
           active={timeRange === constants.TIME_RANGE_PAST_MONTH}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.past_3m' })}
+          text={t('timeframe.past_3m')}
           onClick={this.handleClickPast3Month}
           active={timeRange === constants.TIME_RANGE_PAST_3MONTH}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.custom' })}
+          text={t('timeframe.customtime')}
           onClick={handleClickCustom}
           active={timeRange === constants.TIME_RANGE_CUSTOM}
         />
@@ -112,37 +112,37 @@ class Timeframe extends PureComponent {
         popoverProps={TIME_FRAMES_POPOVER_PROPS}
       >
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.24h' })}
+          text={t('timeframe.24h')}
           onClick={this.handleClick24H}
           active={timeRange === constants.TIME_RANGE_LAST_24HOURS}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.yesterday' })}
+          text={t('timeframe.yesterday')}
           onClick={this.handleClickYesterday}
           active={timeRange === constants.TIME_RANGE_YESTERDAY}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.2w' })}
+          text={t('timeframe.2w')}
           onClick={this.handleClickLast2Weeks}
           active={timeRange === constants.TIME_RANGE_LAST_2WEEKS}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.month_to_date' })}
+          text={t('timeframe.month_to_date')}
           onClick={this.handleClickMonthToDate}
           active={timeRange === constants.TIME_RANGE_MONTH_TO_DATE}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.past_month' })}
+          text={t('timeframe.past_month')}
           onClick={this.handleClickPastMonth}
           active={timeRange === constants.TIME_RANGE_PAST_MONTH}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.past_3m' })}
+          text={t('timeframe.past_3m')}
           onClick={this.handleClickPast3Month}
           active={timeRange === constants.TIME_RANGE_PAST_3MONTH}
         />
         <MenuItem
-          text={intl.formatMessage({ id: 'timeframe.custom' })}
+          text={t('timeframe.custom')}
           onClick={handleClickCustom}
           active={timeRange === constants.TIME_RANGE_CUSTOM}
         />
@@ -154,4 +154,4 @@ class Timeframe extends PureComponent {
 Timeframe.propTypes = propTypes
 Timeframe.defaultProps = defaultProps
 
-export default injectIntl(Timeframe)
+export default withNamespaces('translations')(Timeframe)

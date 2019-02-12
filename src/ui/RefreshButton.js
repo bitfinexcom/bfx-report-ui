@@ -1,5 +1,4 @@
 import React from 'react'
-import { injectIntl, intlShape } from 'react-intl'
 import PropTypes from 'prop-types'
 import {
   Button,
@@ -7,11 +6,11 @@ import {
   Tooltip,
 } from '@blueprintjs/core'
 
-const RefreshButton = ({ intl, handleClickRefresh }) => (
+const RefreshButton = ({ handleClickRefresh, t }) => (
   <Tooltip
     content={(
       <span>
-        {intl.formatMessage({ id: 'timeframe.refresh' })}
+        {t('timeframe.refresh')}
       </span>
       )}
     position={Position.TOP}
@@ -25,10 +24,10 @@ const RefreshButton = ({ intl, handleClickRefresh }) => (
 )
 
 RefreshButton.propTypes = {
-  intl: intlShape.isRequired,
   handleClickRefresh: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 RefreshButton.defaultProps = {}
 
-export default injectIntl(RefreshButton)
+export default withNamespaces('translations')(RefreshButton)

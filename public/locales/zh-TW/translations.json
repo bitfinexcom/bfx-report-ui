@@ -155,6 +155,10 @@
   "trades.column.price": "價格",
   "trades.column.fee": "手續費",
   "timeframe": {
+    "custom": {
+      "title": "選擇查詢時段",
+      "view" : "查詢"
+    },
     "download": {
       "query": "預備匯出",
       "title": "匯出成CSV",
@@ -175,12 +179,10 @@
     "2w": "兩週間",
     "month_to_date": "月初至今",
     "past_month": "過去一個月",
-    "past_3m": "過去三個月"
+    "past_3m": "過去三個月",
+    "customtime": "自訂",
+    "start-date-placeholder": "開始日期時間"
   },
-  "timeframe.custom": "自訂",
-  "timeframe.custom.title": "選擇查詢時段",
-  "timeframe.custom.view" : "查詢",
-  "timeframe.start-date-placeholder": "開始日期時間",
   "pagination": {
     "page": "頁數",
     "of": "/",
