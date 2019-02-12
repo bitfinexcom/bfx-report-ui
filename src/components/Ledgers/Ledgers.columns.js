@@ -10,7 +10,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
-    intl,
+    t,
     timeOffset,
   } = props
 
@@ -88,7 +88,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
-      nameStr: `${intl.formatMessage({ id: 'ledgers.column.time' })} (${timeOffset})`,
+      nameStr: `${t('ledgers.column.time')} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)

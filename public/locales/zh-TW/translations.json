@@ -1,4 +1,21 @@
 {
+  "auth": {
+    "auth": "驗證",
+    "title": "請先登入",
+    "enterAPIKey": "輸入 API Key:",
+    "enterAPISecret": "輸入 API Secret:",
+    "checkAuth": "開始驗證",
+    "note1": "請先前往 ",
+    "note2": " 取得唯讀的API金鑰與密鑰對。",
+    "required": "（必填）",
+    "nonideal": {
+      "title": "報告 2.0",
+      "description": "使用令牌登入報告..."
+    }
+  },
+  "column":{
+    "id": "#"
+  },
   "header": {
     "logout": "登出",
     "lang": {
@@ -7,6 +24,22 @@
     },
     "preferences": "偏好設定",
     "help": "說明"
+  },
+  "ledgers": {
+    "title": "餘額",
+    "column":{
+      "description": "描述",
+      "wallet": "錢包",
+      "currency": "貨幣",
+      "time": "時間",
+      "amount": "數量",
+      "balance": "金額"
+    }
+  },
+  "pagination": {
+    "page": "頁數",
+    "of": "/",
+    "loading": "查詢中..."
   },
   "preferences": {
     "title": "偏好設定",
@@ -27,27 +60,68 @@
       "insync-warning": "同步時無法確認設定。請等到同步完成後再按確認。",
     }
   },
+  "publictrades": {
+    "title": "公開交易",
+    "column": {
+      "time": "時間",
+      "type": "類型",
+      "price": "價格",
+      "amount": "數量",
+      "pair": "對"
+    }
+  },
+  "querylimit": {
+    "tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間"
+  },
+  "selector": {
+    "filter": {
+      "symbol": "代幣過濾器",
+      "pair": "代幣對過濾器"
+    }
+  },
+  "status":{
+    "success": "於 {time} {topic}成功",
+    "fail": "{topic} 失敗 {detail}",
+    "noid": "dev: the status action should contain the id param",
+    "request":{
+      "error": "{topic} 請求失敗 {detail}"
+    }
+  },
   "theme": {
     "light": "白",
     "dark": "黑"
   },
-  "auth": {
-    "auth": "驗證",
-    "title": "請先登入",
-    "enterAPIKey": "輸入 API Key:",
-    "enterAPISecret": "輸入 API Secret:",
-    "checkAuth": "開始驗證",
-    "note1": "請先前往 ",
-    "note2": " 取得唯讀的API金鑰與密鑰對。",
-    "required": "（必填）",
-    "nonideal": {
-      "title": "報告 2.0",
-      "description": "使用令牌登入報告..."
-    }
+  "timeframe": {
+    "custom": {
+      "title": "選擇查詢時段",
+      "view" : "查詢"
+    },
+    "download": {
+      "query": "預備匯出",
+      "title": "匯出成CSV",
+      "prepare": "Bitfinex 將為您準備於",
+      "send": "期間的{{intlType}}資料，並寄送至Email地址 {{email}}。",
+      "store": "期間的{{intlType}}資料，並儲存至本地資料夾。",
+      "export": "匯出",
+      "cancel": "取消",
+      "status": {
+        "local": "已產生{{topic}}的csv檔，請查看您本地的'csv'資料夾。",
+        "email": "正在生成您的 CSV 格式報告。生成後將立即透過 Email 送出。"
+      }
+    },
+    "refresh": "重新載入",
+    "custom-timerange": "自訂時段",
+    "24h": "24 小時間",
+    "yesterday": "昨天",
+    "2w": "兩週間",
+    "month_to_date": "月初至今",
+    "past_month": "過去一個月",
+    "past_3m": "過去三個月",
+    "customtime": "自訂",
+    "start-date-placeholder": "開始日期時間"
   },
   "loading": "讀取中...",
   "nodata": "沒有相關資料。請試試其他時間範圍。",
-  "column.id": "#",
   "fcredit.title": "信用融資（已使用）",
   "fcredit.column.symbol": "貨幣",
   "fcredit.column.side": "SIDE",
@@ -89,13 +163,6 @@
   "foffer.column.period": "期間",
   "foffer.column.period.days": "天",
   "foffer.column.updated": "日期",
-  "ledgers.title": "餘額",
-  "ledgers.column.description": "描述",
-  "ledgers.column.wallet": "錢包",
-  "ledgers.column.currency": "貨幣",
-  "ledgers.column.time": "時間",
-  "ledgers.column.amount": "數量",
-  "ledgers.column.balance": "金額",
   "movements.title": "活動",
   "deposits.title": "存款",
   "withdrawals.title": "提款",
@@ -119,16 +186,6 @@
   "paudit.input.ids": "倉位 ID",
   "paudit.noid": "未指定倉位 ID",
   "paudit.noid.description": "欲查看倉位變更紀錄，可先從倉位頁面選取ID",
-  "publictrades": {
-    "title": "公開交易",
-    "column": {
-      "time": "時間",
-      "type": "類型",
-      "price": "價格",
-      "amount": "數量",
-      "pair": "對"
-    }
-  },
   "positions.title": "倉位",
   "positions.column.pair": "對",
   "positions.column.amount": "數量",
@@ -154,57 +211,6 @@
   "trades.column.amount": "數量",
   "trades.column.price": "價格",
   "trades.column.fee": "手續費",
-  "timeframe": {
-    "custom": {
-      "title": "選擇查詢時段",
-      "view" : "查詢"
-    },
-    "download": {
-      "query": "預備匯出",
-      "title": "匯出成CSV",
-      "prepare": "Bitfinex 將為您準備於",
-      "send": "期間的{{intlType}}資料，並寄送至Email地址 {{email}}。",
-      "store": "期間的{{intlType}}資料，並儲存至本地資料夾。",
-      "export": "匯出",
-      "cancel": "取消",
-      "status": {
-        "local": "已產生{{topic}}的csv檔，請查看您本地的'csv'資料夾。",
-        "email": "正在生成您的 CSV 格式報告。生成後將立即透過 Email 送出。"
-      }
-    },
-    "refresh": "重新載入",
-    "custom-timerange": "自訂時段",
-    "24h": "24 小時間",
-    "yesterday": "昨天",
-    "2w": "兩週間",
-    "month_to_date": "月初至今",
-    "past_month": "過去一個月",
-    "past_3m": "過去三個月",
-    "customtime": "自訂",
-    "start-date-placeholder": "開始日期時間"
-  },
-  "pagination": {
-    "page": "頁數",
-    "of": "/",
-    "loading": "查詢中..."
-  },
-  "querylimit": {
-    "tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間"
-  },
-  "selector": {
-    "filter": {
-      "symbol": "代幣過濾器",
-      "pair": "代幣對過濾器"
-    }
-  },
-  "status":{
-    "success": "於 {time} {topic}成功",
-    "fail": "{topic} 失敗 {detail}",
-    "noid": "dev: the status action should contain the id param",
-    "request":{
-      "error": "{topic} 請求失敗 {detail}"
-    }
-  },
   "symbols.title": "取得貨幣資訊",
   "sync.title": "同步",
   "sync.switch-mode": "切換同步模式",

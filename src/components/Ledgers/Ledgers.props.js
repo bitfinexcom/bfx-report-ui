@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { intlShape } from 'react-intl'
 
 const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
@@ -21,13 +20,13 @@ export const propTypes = {
   fetchPrev: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
   getQueryLimit: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
   jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   pageOffset: PropTypes.number.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   removeTargetSymbol: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
   targetSymbols: PropTypes.arrayOf(PropTypes.string),
   timeOffset: PropTypes.string.isRequired,
   nextPage: PropTypes.oneOfType([
@@ -46,7 +45,6 @@ export const defaultProps = {
   fetchPrev: () => {},
   getFullTime: () => {},
   getQueryLimit: () => {},
-  intl: {},
   jumpPage: () => {},
   loading: true,
   pageOffset: 0,
