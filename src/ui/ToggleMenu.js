@@ -184,14 +184,14 @@ class ToggleMenu extends PureComponent {
           <MenuItem
             icon={getIcon(MENU_ORDERS)}
             text=''
-            title={('orders.title')}
+            title={t('orders.title')}
             onClick={this.handleClickOrders}
             active={target === MENU_ORDERS}
           />
           <MenuItem
             icon={getIcon(MENU_DEPOSITS)}
             text=''
-            title={('deposits.title')}
+            title={t('deposits.title')}
             onClick={this.handleClickDeposits}
             active={target === MENU_DEPOSITS}
           />
