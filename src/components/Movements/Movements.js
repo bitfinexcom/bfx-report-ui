@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -73,7 +73,6 @@ class Movements extends PureComponent {
       fetchPrev,
       getFullTime,
       handleClickExport,
-      intl,
       jumpPage,
       loading,
       nextPage,
@@ -81,6 +80,7 @@ class Movements extends PureComponent {
       pageOffset,
       pageLoading,
       refresh,
+      t,
       targetSymbols,
       timeOffset,
       type,
@@ -92,7 +92,7 @@ class Movements extends PureComponent {
     const tableColums = getColumns({
       filteredData,
       getFullTime,
-      intl,
+      t,
       timeOffset,
     })
 
@@ -133,7 +133,7 @@ class Movements extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: titleMsgId })}
+            {t(titleMsgId)}
             &nbsp;
             <TimeRange />
             {renderSymbolSelector}
@@ -145,7 +145,7 @@ class Movements extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: titleMsgId })}
+            {t(titleMsgId)}
             &nbsp;
             <TimeRange />
             {renderSymbolSelector}
@@ -174,4 +174,4 @@ class Movements extends PureComponent {
 Movements.propTypes = propTypes
 Movements.defaultProps = defaultProps
 
-export default injectIntl(Movements)
+export default withNamespaces('translations')(Movements)

@@ -16,6 +16,9 @@
   "column":{
     "id": "#"
   },
+  "deposits": {
+    "title": "存款"
+  },
   "fcredit": {
     "title": "信用融資（已使用）",
     "column": {
@@ -94,6 +97,17 @@
     }
   },
   "loading": "讀取中...",
+  "movements": {
+    "title": "活動",
+    "column": {
+      "updated": "時間",
+      "currency": "貨幣",
+      "amount": "數量",
+      "fees": "費用",
+      "status": "狀態",
+      "destination": "去處"
+    }
+  },
   "nodata": "沒有相關資料。請試試其他時間範圍。",
   "pagination": {
     "page": "頁數",
@@ -146,6 +160,9 @@
       "error": "{topic} 請求失敗 {detail}"
     }
   },
+  "symbols": {
+    "title": "取得貨幣資訊"
+  },
   "theme": {
     "light": "白",
     "dark": "黑"
@@ -179,15 +196,9 @@
     "customtime": "自訂",
     "start-date-placeholder": "開始日期時間"
   },
-  "movements.title": "活動",
-  "deposits.title": "存款",
-  "withdrawals.title": "提款",
-  "movements.column.updated": "時間",
-  "movements.column.currency": "貨幣",
-  "movements.column.amount": "數量",
-  "movements.column.fees": "費用",
-  "movements.column.status": "狀態",
-  "movements.column.destination": "去處",
+  "withdrawals": {
+    "title": "提款"
+  },
   "orders.title": "訂單",
   "orders.column.pair": "對",
   "orders.column.type": "類型",
@@ -227,7 +238,6 @@
   "trades.column.amount": "數量",
   "trades.column.price": "價格",
   "trades.column.fee": "手續費",
-  "symbols.title": "取得貨幣資訊",
   "sync.title": "同步",
   "sync.switch-mode": "切換同步模式",
   "sync.message.canceled": "已取消上次的同步監測",

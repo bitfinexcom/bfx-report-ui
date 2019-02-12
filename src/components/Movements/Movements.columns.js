@@ -11,7 +11,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
-    intl,
+    t,
     timeOffset,
   } = props
 
@@ -32,7 +32,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsupdated',
-      nameStr: `${intl.formatMessage({ id: 'movements.column.updated' })} (${timeOffset})`,
+      nameStr: `${t('movements.column.updated')} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)

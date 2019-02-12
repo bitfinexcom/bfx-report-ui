@@ -16,6 +16,9 @@
   "column":{
     "id": "#"
   },
+  "deposits": {
+    "title": "Deposits"
+  },
   "fcredit": {
     "title": "Funding Credit (Used)",
     "column": {
@@ -94,6 +97,17 @@
     }
   },
   "loading": "Loading...",
+  "movements": {
+    "title": "Movements",
+    "column": {
+      "updated": "DATE",
+      "currency": "CURRENCY",
+      "amount": "AMOUNT",
+      "fees": "FEES",
+      "status": "STATUS",
+      "destination": "DESTINATION"
+    }
+  },
   "nodata": "No related data in this time range. You can try another time range.",
   "preferences":{
     "title": "Preferences",
@@ -176,19 +190,16 @@
       "error": "{topic} request fail {detail}"
     }
   },
+  "symbols": {
+    "title": "Get symbols"
+  },
   "theme": {
     "light": "Light",
     "dark": "Dark"
   },
-  "movements.title": "Movements",
-  "deposits.title": "Deposits",
-  "withdrawals.title": "Withdrawals",
-  "movements.column.updated": "DATE",
-  "movements.column.currency": "CURRENCY",
-  "movements.column.amount": "AMOUNT",
-  "movements.column.fees": "FEES",
-  "movements.column.status": "STATUS",
-  "movements.column.destination": "DESTINATION",
+  "withdrawals": {
+    "title": "Withdrawals"
+  },
   "orders.title": "Orders",
   "orders.column.pair": "PAIR",
   "orders.column.type": "TYPE",
@@ -231,7 +242,6 @@
   "trades.column.amount": "AMOUNT",
   "trades.column.price": "PRICE",
   "trades.column.fee": "FEE",
-  "symbols.title": "Get symbols",
   "sync.title": "Sync",
   "sync.switch-mode": "Switch Sync Mode",
   "sync.message.canceled": "Canceled old Sync Watcher",
