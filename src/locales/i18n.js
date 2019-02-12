@@ -17,8 +17,8 @@ export const LANGUAGES = {
 const { NODE_ENV } = process.env
 
 i18n
-  .use(detector)
   .use(backend)
+  .use(detector)
   .use(reactI18nextModule)
   .init({
     backend: {
@@ -45,6 +45,9 @@ i18n
 
     react: {
       wait: true,
+      //   bindI18n: 'languageChanged loaded',
+      //   bindStore: 'added removed',
+      //   nsMode: 'default'
     },
 
     interpolation: {
@@ -52,13 +55,6 @@ i18n
     },
     // send not translated keys to endpoint
     saveMissing: (NODE_ENV === 'development'),
-
-    // react: {
-    //   wait: false,
-    //   bindI18n: 'languageChanged loaded',
-    //   bindStore: 'added removed',
-    //   nsMode: 'default'
-    // }
   })
 
 export default i18n

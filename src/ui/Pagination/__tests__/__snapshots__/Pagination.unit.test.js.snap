@@ -63,7 +63,7 @@ exports[`render correctly in 1 of 1 page 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={1}
@@ -71,7 +71,7 @@ exports[`render correctly in 1 of 1 page 1`] = `
       onKeyPress={[Function]}
       placeholder={1}
     />
-    of
+    pagination.of
      
     1
     
@@ -198,7 +198,7 @@ exports[`render correctly in 1 of 2 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={2}
@@ -206,7 +206,7 @@ exports[`render correctly in 1 of 2 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={1}
     />
-    of
+    pagination.of
      
     2
     
@@ -332,7 +332,7 @@ exports[`render correctly in 1 of 4 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={4}
@@ -340,7 +340,7 @@ exports[`render correctly in 1 of 4 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={1}
     />
-    of
+    pagination.of
      
     4
     <span>
@@ -467,7 +467,7 @@ exports[`render correctly in 2 of 2 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={2}
@@ -475,7 +475,7 @@ exports[`render correctly in 2 of 2 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={2}
     />
-    of
+    pagination.of
      
     2
     
@@ -601,7 +601,7 @@ exports[`render correctly in 3 of 4 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={4}
@@ -609,7 +609,7 @@ exports[`render correctly in 3 of 4 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={3}
     />
-    of
+    pagination.of
      
     4
     
@@ -734,7 +734,7 @@ exports[`render correctly in 4 of 4 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={4}
@@ -742,7 +742,7 @@ exports[`render correctly in 4 of 4 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={4}
     />
-    of
+    pagination.of
      
     4
     
@@ -867,7 +867,7 @@ exports[`render correctly in 5 of 5 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={5}
@@ -875,7 +875,7 @@ exports[`render correctly in 5 of 5 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={5}
     />
-    of
+    pagination.of
      
     5
     
@@ -1000,7 +1000,7 @@ exports[`render correctly in 5 of 7 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={7}
@@ -1008,7 +1008,7 @@ exports[`render correctly in 5 of 7 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={5}
     />
-    of
+    pagination.of
      
     7
     
@@ -1132,7 +1132,7 @@ exports[`render correctly in 5 of 8 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={8}
@@ -1140,7 +1140,7 @@ exports[`render correctly in 5 of 8 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={5}
     />
-    of
+    pagination.of
      
     8
     <span>
@@ -1266,7 +1266,7 @@ exports[`render correctly in 6 of 7 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={7}
@@ -1274,7 +1274,7 @@ exports[`render correctly in 6 of 7 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={6}
     />
-    of
+    pagination.of
      
     7
     
@@ -1398,7 +1398,7 @@ exports[`render correctly in 9 of 9 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={9}
@@ -1406,7 +1406,7 @@ exports[`render correctly in 9 of 9 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={9}
     />
-    of
+    pagination.of
      
     9
     
@@ -1533,7 +1533,7 @@ exports[`render correctly with 1 entry 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={1}
@@ -1541,7 +1541,7 @@ exports[`render correctly with 1 entry 1`] = `
       onKeyPress={[Function]}
       placeholder={1}
     />
-    of
+    pagination.of
      
     1
     
@@ -1668,7 +1668,7 @@ exports[`render correctly with 35 entry 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={1}
@@ -1676,7 +1676,7 @@ exports[`render correctly with 35 entry 1`] = `
       onKeyPress={[Function]}
       placeholder={1}
     />
-    of
+    pagination.of
      
     1
     
@@ -1803,7 +1803,7 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={1}
@@ -1811,7 +1811,7 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={1}
     />
-    of
+    pagination.of
      
     1
     
@@ -1943,7 +1943,7 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={2}
@@ -1951,7 +1951,7 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={1}
     />
-    of
+    pagination.of
      
     2
     
@@ -2081,7 +2081,7 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={2}
@@ -2089,7 +2089,7 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
       onKeyPress={[Function]}
       placeholder={2}
     />
-    of
+    pagination.of
      
     2
     
@@ -2221,7 +2221,7 @@ exports[`render trades correctly in 1 of 12 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={12}
@@ -2229,7 +2229,7 @@ exports[`render trades correctly in 1 of 12 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={1}
     />
-    of
+    pagination.of
      
     12
     <span>
@@ -2360,7 +2360,7 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={12}
@@ -2368,7 +2368,7 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={11}
     />
-    of
+    pagination.of
      
     12
     
@@ -2497,7 +2497,7 @@ exports[`render trades correctly in 12 of 12 pages 1`] = `
         </svg>
       </span>
     </button>
-    Page
+    pagination.page
     <input
       className="bitfinex-page-input"
       data-pagelen={12}
@@ -2505,7 +2505,7 @@ exports[`render trades correctly in 12 of 12 pages 1`] = `
       onKeyPress={[Function]}
       placeholder={12}
     />
-    of
+    pagination.of
      
     12
     

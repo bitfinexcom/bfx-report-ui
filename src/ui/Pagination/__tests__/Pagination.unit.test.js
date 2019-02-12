@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {
-  renderWithIntl,
-  rendererCreateWithIntl,
-} from 'tests/helper'
+import { mount } from 'enzyme'
 
+import { rendererCreateWithIntl } from 'tests/helper'
 import types from 'state/query/constants'
 
 import Pagination from '../Pagination'
@@ -196,7 +194,7 @@ const TEST_CASES = [
 
 test('renders without crashing', () => {
   const div = document.createElement('div')
-  renderWithIntl(
+  mount(
     <Pagination
       type={MOCK_DEFAULT_TYPE}
       dataLen={1}
