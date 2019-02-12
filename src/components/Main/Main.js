@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { injectIntl } from 'react-intl'
 import classNames from 'classnames'
 
 import FundingCreditHistory from 'components/FundingCreditHistory'
@@ -107,7 +106,6 @@ class Main extends PureComponent {
       authStatus,
       authIsShown,
       history,
-      intl,
       isCustomOpen,
       location,
       menuMode,
@@ -140,7 +138,6 @@ class Main extends PureComponent {
           target={target}
           handleClickCustom={this.handleClickCustom}
           history={history}
-          intl={intl}
           menuMode={menuMode}
         />
         <div className={datasetClass}>
@@ -288,4 +285,4 @@ class Main extends PureComponent {
 Main.propTypes = propTypes
 Main.defaultProps = defaultProps
 
-export default injectIntl(Main)
+export default Main

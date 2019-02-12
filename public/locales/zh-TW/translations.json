@@ -128,6 +128,35 @@
     "of": "/",
     "loading": "查詢中..."
   },
+  "paudit": {
+    "title": "倉位驗證",
+    "input": {
+      "ids": "倉位 ID"
+    },
+    "noid": {
+      "title": "未指定倉位 ID",
+      "description": "欲查看倉位變更紀錄，可先從倉位頁面選取ID"
+    }
+  },
+  "positions": {
+    "title": "倉位",
+    "column": {
+      "pair": "對",
+      "amount": "數量",
+      "base-price": "基價",
+      "liq-price": "清算價格",
+      "pl": "損益",
+      "plperc": "損益%",
+      "swap": "互換成本",
+      "swap-type": "互換類型",
+      "status": "狀態",
+      "update": "更新"
+    },
+    "swap": {
+      "daily": "每日",
+      "term": "條件"
+    }
+  },
   "preferences": {
     "title": "偏好設定",
     "close": "關閉",
@@ -177,6 +206,23 @@
   "symbols": {
     "title": "取得貨幣資訊"
   },
+  "sync": {
+    "title": "同步",
+    "switch-mode": "切換同步模式",
+    "online": "目前為連線查詢模式。點擊切換到離線查詢模式",
+    "offline": "目前離線查詢模式。點擊切換到連線查詢模式",
+    "insync": "目前為連線查詢模式。點擊停止同步",
+    "description": "我們即將將您的資料快取到本地中。一旦同步完成您將可以離線查詢您的資料。在同步期間您依然可以繼續連線查詢。",
+    "sync-description": "資料正在同步到本地中。您希望停止同步並繼續使用連線查詢模式嗎？",
+    "close": "取消",
+    "start": "開始同步",
+    "stop-sync": "停止同步",
+    "go-offline": "切換至離線查詢模式",
+    "logout": "同步已停止",
+    "message": {
+      "canceled": "已取消上次的同步監測"
+    }
+  },
   "theme": {
     "light": "白",
     "dark": "黑"
@@ -213,23 +259,6 @@
   "withdrawals": {
     "title": "提款"
   },
-  "paudit.title": "倉位驗證",
-  "paudit.input.ids": "倉位 ID",
-  "paudit.noid": "未指定倉位 ID",
-  "paudit.noid.description": "欲查看倉位變更紀錄，可先從倉位頁面選取ID",
-  "positions.title": "倉位",
-  "positions.column.pair": "對",
-  "positions.column.amount": "數量",
-  "positions.column.base-price": "基價",
-  "positions.column.liq-price": "清算價格",
-  "positions.column.pl": "損益",
-  "positions.column.plperc": "損益%",
-  "positions.column.swap": "互換成本",
-  "positions.column.swap-type": "互換類型",
-  "positions.column.status": "狀態",
-  "positions.column.update": "更新",
-  "positions.swap.daily": "每日",
-  "positions.swap.term": "條件",
   "tickers.title": "牌價",
   "tickers.column.pair": "對",
   "tickers.column.ask": "賣價",
@@ -242,19 +271,6 @@
   "trades.column.amount": "數量",
   "trades.column.price": "價格",
   "trades.column.fee": "手續費",
-  "sync.title": "同步",
-  "sync.switch-mode": "切換同步模式",
-  "sync.message.canceled": "已取消上次的同步監測",
-  "sync.online": "目前為連線查詢模式。點擊切換到離線查詢模式",
-  "sync.offline": "目前離線查詢模式。點擊切換到連線查詢模式",
-  "sync.insync": "目前為連線查詢模式。點擊停止同步",
-  "sync.description": "我們即將將您的資料快取到本地中。一旦同步完成您將可以離線查詢您的資料。在同步期間您依然可以繼續連線查詢。",
-  "sync.sync-description": "資料正在同步到本地中。您希望停止同步並繼續使用連線查詢模式嗎？",
-  "sync.close": "取消",
-  "sync.start": "開始同步",
-  "sync.stop-sync": "停止同步",
-  "sync.go-offline": "切換至離線查詢模式",
-  "sync.logout": "同步已停止",
   "wallets.title": "錢包(Beta)",
   "wallets.title.exchange": "交易",
   "wallets.title.margin": "保證金",

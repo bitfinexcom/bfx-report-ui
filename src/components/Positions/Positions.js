@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -85,10 +85,10 @@ class Positions extends PureComponent {
       pageLoading,
       entries,
       handleClickExport,
-      intl,
       jumpPage,
       loading,
       refresh,
+      t,
       targetPairs,
       nextPage,
       timeOffset,
@@ -99,7 +99,7 @@ class Positions extends PureComponent {
       target: TYPE,
       filteredData,
       getFullTime,
-      intl,
+      t,
       onIdClick: this.jumpToPositionsAudit,
       timeOffset,
     })
@@ -139,7 +139,7 @@ class Positions extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'positions.title' })}
+            {t('positions.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -151,7 +151,7 @@ class Positions extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'positions.title' })}
+            {t('positions.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -181,4 +181,4 @@ class Positions extends PureComponent {
 Positions.propTypes = propTypes
 Positions.defaultProps = defaultProps
 
-export default injectIntl(Positions)
+export default withNamespaces('translations')(Positions)

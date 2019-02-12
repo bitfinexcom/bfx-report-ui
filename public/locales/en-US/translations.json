@@ -128,6 +128,35 @@
     "of": "of",
     "loading": "loading..."
   },
+  "paudit": {
+    "title": "Positions Audit",
+    "input": {
+      "ids": "positions ID",
+    },
+    "noid": {
+      "title": "No Positions ID",
+      "noid.description": "Please select from the Positions page to query the Positions changelog by ID."
+    }
+  },
+  "positions": {
+    "title": "Positions",
+    "column": {
+      "pair": "PAIR",
+      "amount": "AMOUNT",
+      "base-price": "BASE PRICE",
+      "liq-price": "LIQ PRICE",
+      "pl": "P/L",
+      "plperc": "P/L%",
+      "swap": "FUNDING COST",
+      "swap-type": "FUNDING TYPE",
+      "status": "STATUS",
+      "update": "UPDATED"
+    },
+    "swap": {
+      "daily": "Daily",
+      "term": "Term"
+    }
+  },
   "preferences":{
     "title": "Preferences",
     "close": "Close",
@@ -178,6 +207,23 @@
   "symbols": {
     "title": "Get symbols"
   },
+  "sync": {
+    "title": "Sync",
+    "switch-mode": "Switch Sync Mode",
+    "online": "Currently query online. Click to switch to offline query mode",
+    "offline": "Currently query offline. Click to switch to online query mode",
+    "insync": "Currently query online. Click to pulse the sync procedure",
+    "description": "We'll start caching your data locally. Once syncing is complete, you can query locally in offline mode. You can still query online during sync.",
+    "sync-description": "Your data is syncing locally. Would you like to stop the sync process and keep in online query mode?",
+    "close": "Cancel",
+    "start": "Start Syncing",
+    "stop-sync": "Stop Syncing",
+    "go-offline": "Switching to offline query mode (query from db)",
+    "logout": "Sync Stopped",
+    "message": {
+      "canceled": "Canceled old Sync Watcher"
+    }
+  },
   "theme": {
     "light": "Light",
     "dark": "Dark"
@@ -214,23 +260,6 @@
   "withdrawals": {
     "title": "Withdrawals"
   },
-  "paudit.title": "Positions Audit",
-  "paudit.input.ids": "positions ID",
-  "paudit.noid": "No Positions ID",
-  "paudit.noid.description": "Please select from the Positions page to query the Positions changelog by ID.",
-  "positions.title": "Positions",
-  "positions.column.pair": "PAIR",
-  "positions.column.amount": "AMOUNT",
-  "positions.column.base-price": "BASE PRICE",
-  "positions.column.liq-price": "LIQ PRICE",
-  "positions.column.pl": "P/L",
-  "positions.column.plperc": "P/L%",
-  "positions.column.swap": "FUNDING COST",
-  "positions.column.swap-type": "FUNDING TYPE",
-  "positions.column.status": "STATUS",
-  "positions.column.update": "UPDATED",
-  "positions.swap.daily": "Daily",
-  "positions.swap.term": "Term",
   "tickers.title": "Tickers",
   "tickers.column.pair": "PAIR",
   "tickers.column.ask": "ASK",
@@ -246,19 +275,6 @@
   "trades.column.amount": "AMOUNT",
   "trades.column.price": "PRICE",
   "trades.column.fee": "FEE",
-  "sync.title": "Sync",
-  "sync.switch-mode": "Switch Sync Mode",
-  "sync.message.canceled": "Canceled old Sync Watcher",
-  "sync.online": "Currently query online. Click to switch to offline query mode",
-  "sync.offline": "Currently query offline. Click to switch to online query mode",
-  "sync.insync": "Currently query online. Click to pulse the sync procedure",
-  "sync.description": "We'll start caching your data locally. Once syncing is complete, you can query locally in offline mode. You can still query online during sync.",
-  "sync.sync-description": "Your data is syncing locally. Would you like to stop the sync process and keep in online query mode?",
-  "sync.close": "Cancel",
-  "sync.start": "Start Syncing",
-  "sync.stop-sync": "Stop Syncing",
-  "sync.go-offline": "Switching to offline query mode (query from db)",
-  "sync.logout": "Sync Stopped",
   "wallets.title": "Wallets (Beta)",
   "wallets.title.exchange": "Exchange",
   "wallets.title.margin": "Margin",

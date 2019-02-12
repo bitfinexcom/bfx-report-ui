@@ -12,7 +12,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
-    intl,
+    t,
     onIdClick,
     target,
     timeOffset,
@@ -20,8 +20,8 @@ export default function getColumns(props) {
 
   function showType(swapType) {
     return swapType
-      ? intl.formatMessage({ id: 'positions.swap.daily' })
-      : intl.formatMessage({ id: 'positions.swap.term' })
+      ? t('positions.swap.daily')
+      : t('positions.swap.term')
   }
 
   return [
@@ -198,7 +198,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${intl.formatMessage({ id: 'positions.column.update' })} (${timeOffset})`,
+      nameStr: `${t('positions.column.update')} (${timeOffset})`,
       width: 150,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
