@@ -28,7 +28,7 @@
       "status": "狀態",
       "rate": "利率",
       "period": "期間",
-      "period.days": "天",
+      "days": "天",
       "opening": "開始",
       "lastpayout": "結束",
       "positionpair": "POSITION PAIR",
@@ -50,7 +50,7 @@
       "status": "狀態",
       "rate": "利率",
       "period": "期間",
-      "period.days": "天",
+      "days": "天",
       "opening": "開始",
       "lastpayout": "結束",
       "updated": "日期"
@@ -72,7 +72,7 @@
       "status": "狀態",
       "rate": "利率",
       "period": "期間",
-      "period.days": "天",
+      "days": "天",
       "updated": "日期"
     }
   },
@@ -173,7 +173,7 @@
       "starttime": "起始時間",
       "apply": "確認",
       "apply.tooltip": "確認後需要重新登入才會生效。",
-      "insync-warning": "同步時無法確認設定。請等到同步完成後再按確認。",
+      "insync-warning": "同步時無法確認設定。請等到同步完成後再按確認。"
     }
   },
   "publictrades": {
@@ -196,11 +196,11 @@
     }
   },
   "status":{
-    "success": "於 {time} {topic}成功",
-    "fail": "{topic} 失敗 {detail}",
+    "success": "於 {{time}} {{topic}}成功",
+    "fail": "{{topic}} 失敗 {{detail}}",
     "noid": "dev: the status action should contain the id param",
     "request":{
-      "error": "{topic} 請求失敗 {detail}"
+      "error": "{{topic}} 請求失敗 {{detail}}"
     }
   },
   "symbols": {
@@ -262,7 +262,7 @@
     "month_to_date": "月初至今",
     "past_month": "過去一個月",
     "past_3m": "過去三個月",
-    "customtime": "自訂",
+    "custom_time": "自訂",
     "start-date-placeholder": "開始日期時間"
   },
   "trades": {

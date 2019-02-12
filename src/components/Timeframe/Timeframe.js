@@ -99,7 +99,7 @@ class Timeframe extends PureComponent {
           active={timeRange === constants.TIME_RANGE_PAST_3MONTH}
         />
         <MenuItem
-          text={t('timeframe.customtime')}
+          text={t('timeframe.custom_time')}
           onClick={handleClickCustom}
           active={timeRange === constants.TIME_RANGE_CUSTOM}
         />
@@ -142,7 +142,7 @@ class Timeframe extends PureComponent {
           active={timeRange === constants.TIME_RANGE_PAST_3MONTH}
         />
         <MenuItem
-          text={t('timeframe.custom')}
+          text={t('timeframe.custom_time')}
           onClick={handleClickCustom}
           active={timeRange === constants.TIME_RANGE_CUSTOM}
         />

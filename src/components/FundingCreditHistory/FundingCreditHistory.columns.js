@@ -112,7 +112,7 @@ export default function getColumns(props) {
       name: 'fcredit.column.period',
       width: 100,
       renderer: (rowIndex) => {
-        const period = `${filteredData[rowIndex].period} ${t('fcredit.column.period.days')}`
+        const period = `${filteredData[rowIndex].period} ${t('fcredit.column.days')}`
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -123,7 +123,7 @@ export default function getColumns(props) {
         )
       },
       copyText: (rowIndex) => {
-        const days = t('fcredit.column.period.days')
+        const days = t('fcredit.column.days')
         return `${filteredData[rowIndex].period} ${days}`
       },
     },

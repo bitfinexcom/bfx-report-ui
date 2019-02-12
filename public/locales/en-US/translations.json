@@ -28,7 +28,7 @@
       "status": "STATUS",
       "rate": "RATE",
       "period": "PERIOD",
-      "period.days": "Day(s)",
+      "days": "Day(s)",
       "opening": "OPENED",
       "lastpayout": "CLOSED",
       "positionpair": "POSITION PAIR",
@@ -50,7 +50,7 @@
       "status": "STATUS",
       "rate": "RATE",
       "period": "PERIOD",
-      "period.days": "Day(s)",
+      "days": "Day(s)",
       "opening": "OPENED",
       "lastpayout": "CLOSED",
       "updated": "DATE"
@@ -72,7 +72,7 @@
       "status": "STATUS",
       "rate": "RATE",
       "period": "PERIOD",
-      "period.days": "Day(s)",
+      "days": "Day(s)",
       "updated": "DATE"
     }
   },
@@ -131,7 +131,7 @@
   "paudit": {
     "title": "Positions Audit",
     "input": {
-      "ids": "positions ID",
+      "ids": "positions ID"
     },
     "noid": {
       "title": "No Positions ID",
@@ -174,7 +174,7 @@
       "starttime": "Start Time",
       "apply": "Apply",
       "apply.tooltip": "After apply, you needs to login again to take effect.",
-      "insync-warning": "Can't apply during syncing. Please wait until syncing is done.",
+      "insync-warning": "Can't apply during syncing. Please wait until syncing is done."
     }
   },
   "publictrades":{
@@ -197,11 +197,11 @@
     }
   },
   "status": {
-    "success": "{topic} Success at {time}",
-    "fail": "{topic} fail {detail}",
+    "success": "{{topic}} Success at {{time}}",
+    "fail": "{{topic}} fail {{detail}}",
     "noid": "dev: the status action should contain the id param",
     "request": {
-      "error": "{topic} request fail {detail}"
+      "error": "{{topic}} request fail {{detail}}"
     }
   },
   "symbols": {
@@ -263,7 +263,7 @@
     "month_to_date": "Month to date",
     "past_month": "Past month",
     "past_3m": "Past 3 months",
-    "customtime": "Custom",
+    "custom_time": "Custom",
     "start-date-placeholder": "Start Date Time"
   },
   "trades": {

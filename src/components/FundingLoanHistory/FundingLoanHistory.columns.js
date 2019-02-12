@@ -112,7 +112,7 @@ export default function getColumns(props) {
       name: 'floan.column.period',
       width: 80,
       renderer: (rowIndex) => {
-        const period = `${filteredData[rowIndex].period} ${t('floan.column.period.days')}`
+        const period = `${filteredData[rowIndex].period} ${t('floan.column.days')}`
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -123,7 +123,7 @@ export default function getColumns(props) {
         )
       },
       copyText: rowIndex => `${filteredData[rowIndex].period} `
-        + `${t('floan.column.period.days')}`,
+        + `${t('floan.column.days')}`,
     },
     {
       id: 'mtsOpening',
