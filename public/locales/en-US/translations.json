@@ -109,6 +109,25 @@
     }
   },
   "nodata": "No related data in this time range. You can try another time range.",
+  "orders": {
+    "title": "Orders",
+    "column": {
+      "pair": "PAIR",
+      "type": "TYPE",
+      "amount": "AMOUNT",
+      "amount-exe": "EXECUTED AMOUNT",
+      "price": "PRICE",
+      "avgprice": "AVERAGE EXECUTION PRICE",
+      "create": "CREATED",
+      "update": "UPDATED",
+      "status": "STATUS"
+    }
+  },
+  "pagination": {
+    "page": "Page",
+    "of": "of",
+    "loading": "loading..."
+  },
   "preferences":{
     "title": "Preferences",
     "close": "Close",
@@ -139,6 +158,30 @@
       "pair": "PAIR"
     }
   },
+  "querylimit": {
+    "tooltip": "Choose the size per query. The Larger size will take longer query time"
+  },
+  "selector": {
+    "filter": {
+      "symbol": "Symbol Filter",
+      "pair": "Pair Filter"
+    }
+  },
+  "status": {
+    "success": "{topic} Success at {time}",
+    "fail": "{topic} fail {detail}",
+    "noid": "dev: the status action should contain the id param",
+    "request": {
+      "error": "{topic} request fail {detail}"
+    }
+  },
+  "symbols": {
+    "title": "Get symbols"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark"
+  },
   "timeframe": {
     "custom": {
       "title": "Select Query Range",
@@ -168,48 +211,9 @@
     "customtime": "Custom",
     "start-date-placeholder": "Start Date Time"
   },
-  "pagination": {
-    "page": "Page",
-    "of": "of",
-    "loading": "loading..."
-  },
-  "querylimit": {
-    "tooltip": "Choose the size per query. The Larger size will take longer query time"
-  },
-  "selector": {
-    "filter": {
-      "symbol": "Symbol Filter",
-      "pair": "Pair Filter"
-    }
-  },
-  "status": {
-    "success": "{topic} Success at {time}",
-    "fail": "{topic} fail {detail}",
-    "noid": "dev: the status action should contain the id param",
-    "request": {
-      "error": "{topic} request fail {detail}"
-    }
-  },
-  "symbols": {
-    "title": "Get symbols"
-  },
-  "theme": {
-    "light": "Light",
-    "dark": "Dark"
-  },
   "withdrawals": {
     "title": "Withdrawals"
   },
-  "orders.title": "Orders",
-  "orders.column.pair": "PAIR",
-  "orders.column.type": "TYPE",
-  "orders.column.amount": "AMOUNT",
-  "orders.column.amount-exe": "EXECUTED AMOUNT",
-  "orders.column.price": "PRICE",
-  "orders.column.avgprice": "AVERAGE EXECUTION PRICE",
-  "orders.column.create": "CREATED",
-  "orders.column.update": "UPDATED",
-  "orders.column.status": "STATUS",
   "paudit.title": "Positions Audit",
   "paudit.input.ids": "positions ID",
   "paudit.noid": "No Positions ID",

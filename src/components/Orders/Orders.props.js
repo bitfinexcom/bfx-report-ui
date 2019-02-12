@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { intlShape } from 'react-intl'
 
 const ORDERS_ENTRIES_PROPS = PropTypes.shape({
   amountOrig: PropTypes.number,
@@ -22,7 +21,6 @@ export const propTypes = {
   fetchNext: PropTypes.func.isRequired,
   fetchPrev: PropTypes.func.isRequired,
   getQueryLimit: PropTypes.func.isRequired,
-  intl: intlShape.isRequired,
   jumpPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   pageOffset: PropTypes.number.isRequired,
@@ -30,6 +28,7 @@ export const propTypes = {
   pairs: PropTypes.arrayOf(PropTypes.string),
   refresh: PropTypes.func.isRequired,
   removeTargetPair: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
   targetPairs: PropTypes.arrayOf(PropTypes.string),
   getFullTime: PropTypes.func,
   timeOffset: PropTypes.string.isRequired,
@@ -49,7 +48,6 @@ export const defaultProps = {
   fetchPrev: () => {},
   getFullTime: () => {},
   getQueryLimit: () => {},
-  intl: {},
   jumpPage: () => {},
   loading: true,
   pageOffset: 0,

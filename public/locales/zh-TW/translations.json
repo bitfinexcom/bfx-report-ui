@@ -109,6 +109,20 @@
     }
   },
   "nodata": "沒有相關資料。請試試其他時間範圍。",
+  "orders": {
+    "title": "訂單",
+    "column": {
+      "pair": "對",
+      "type": "類型",
+      "amount": "數量",
+      "amount-exe": "執行數量",
+      "price": "價格",
+      "avgprice": "平均執行價格",
+      "create": "建立",
+      "update": "更新",
+      "status": "狀態"
+    }
+  },
   "pagination": {
     "page": "頁數",
     "of": "/",
@@ -199,16 +213,6 @@
   "withdrawals": {
     "title": "提款"
   },
-  "orders.title": "訂單",
-  "orders.column.pair": "對",
-  "orders.column.type": "類型",
-  "orders.column.amount": "數量",
-  "orders.column.amount-exe": "執行數量",
-  "orders.column.price": "價格",
-  "orders.column.avgprice": "平均執行價格",
-  "orders.column.create": "建立",
-  "orders.column.update": "更新",
-  "orders.column.status": "狀態",
   "paudit.title": "倉位驗證",
   "paudit.input.ids": "倉位 ID",
   "paudit.noid": "未指定倉位 ID",

@@ -104,7 +104,6 @@ class Movements extends PureComponent {
           existingCoins={existingCoins}
           onSymbolSelect={this.handleClick}
           handleTagRemove={this.handleTagRemove}
-          type={type}
         />
       </Fragment>
     )
