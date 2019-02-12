@@ -8,7 +8,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
-    intl,
+    t,
     timeOffset,
   } = props
 
@@ -63,7 +63,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${intl.formatMessage({ id: 'tickers.column.time' })} (${timeOffset})`,
+      nameStr: `${t('tickers.column.time')} (${timeOffset})`,
       width: 200,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

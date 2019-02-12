@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -76,10 +76,10 @@ class Tickers extends PureComponent {
       pageLoading,
       entries,
       handleClickExport,
-      intl,
       jumpPage,
       loading,
       refresh,
+      t,
       targetPairs,
       nextPage,
       timeOffset,
@@ -89,7 +89,7 @@ class Tickers extends PureComponent {
     const tableColums = getColumns({
       filteredData,
       getFullTime,
-      intl,
+      t,
       timeOffset,
     })
 
@@ -128,7 +128,7 @@ class Tickers extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'tickers.title' })}
+            {t('tickers.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -140,7 +140,7 @@ class Tickers extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'tickers.title' })}
+            {t('tickers.title')}
             &nbsp;
             <TimeRange />
             {renderPairSelector}
@@ -170,4 +170,4 @@ class Tickers extends PureComponent {
 Tickers.propTypes = propTypes
 Tickers.defaultProps = defaultProps
 
-export default injectIntl(Tickers)
+export default withNamespaces('translations')(Tickers)

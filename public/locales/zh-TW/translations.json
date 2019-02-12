@@ -227,6 +227,15 @@
     "light": "白",
     "dark": "黑"
   },
+  "tickers": {
+    "title": "牌價",
+    "column": {
+      "pair": "對",
+      "ask": "賣價",
+      "bid": "買價",
+      "time": "時間"
+    }
+  },
   "timeframe": {
     "custom": {
       "title": "選擇查詢時段",
@@ -256,28 +265,35 @@
     "customtime": "自訂",
     "start-date-placeholder": "開始日期時間"
   },
+  "trades": {
+    "title": "交易",
+    "column": {
+      "orderid": "訂單 ID",
+      "time": "時間",
+      "pair": "對",
+      "amount": "數量",
+      "price": "價格",
+      "fee": "手續費"
+    }
+  },
+  "wallets": {
+    "title": "錢包(Beta)",
+    "column": {
+      "currency": "貨幣",
+      "balance": "餘額"
+    },
+    "header": {
+      "exchange": "交易",
+      "margin": "保證金",
+      "funding": "融資"
+    },
+    "nodata": "沒有相關資料。請嘗試選擇其他時間。",
+    "query": {
+      "title": "查詢",
+      "tooltip": "選擇一個時間以查看過去時刻的錢包"
+    }
+  },
   "withdrawals": {
     "title": "提款"
-  },
-  "tickers.title": "牌價",
-  "tickers.column.pair": "對",
-  "tickers.column.ask": "賣價",
-  "tickers.column.bid": "買價",
-  "tickers.column.time": "時間",
-  "trades.title": "交易",
-  "trades.column.orderid": "訂單 ID",
-  "trades.column.time": "時間",
-  "trades.column.pair": "對",
-  "trades.column.amount": "數量",
-  "trades.column.price": "價格",
-  "trades.column.fee": "手續費",
-  "wallets.title": "錢包(Beta)",
-  "wallets.title.exchange": "交易",
-  "wallets.title.margin": "保證金",
-  "wallets.title.funding": "融資",
-  "wallets.query": "查詢",
-  "wallets.query.tooltip": "選擇一個時間以查看過去時刻的錢包",
-  "wallets.nodata": "沒有相關資料。請嘗試選擇其他時間。",
-  "wallets.column.currency": "貨幣",
-  "wallets.column.balance": "餘額"
+  }
 }

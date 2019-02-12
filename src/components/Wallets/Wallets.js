@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { injectIntl } from 'react-intl'
+import { withNamespaces } from 'react-i18next'
 import {
   Button,
   Card,
@@ -77,9 +77,9 @@ class Wallets extends PureComponent {
       currentTime,
       entries,
       handleClickExport,
-      intl,
       loading,
       refresh,
+      t,
     } = this.props
     const { timestamp } = this.state
     const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
@@ -99,7 +99,7 @@ class Wallets extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {intl.formatMessage({ id: 'wallets.query.tooltip' })}
+              {t('wallets.query.tooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -118,7 +118,7 @@ class Wallets extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {intl.formatMessage({ id: 'wallets.query' })}
+          {t('wallets.query')}
         </Button>
       </Fragment>
     )
@@ -131,7 +131,7 @@ class Wallets extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'wallets.title' })}
+            {t('wallets.title')}
             &nbsp;
             {renderTimeSelection}
             &nbsp;
@@ -144,7 +144,7 @@ class Wallets extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {intl.formatMessage({ id: 'wallets.title' })}
+            {t('wallets.title')}
             &nbsp;
             {renderTimeSelection}
             &nbsp;
@@ -153,21 +153,21 @@ class Wallets extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <h4>
-            {intl.formatMessage({ id: 'wallets.title.exchange' })}
+            {t('wallets.header.exchange')}
           </h4>
           <DataTable
             numRows={exchangeRows}
             tableColums={exchangeColums}
           />
           <h4>
-            {intl.formatMessage({ id: 'wallets.title.margin' })}
+            {t('wallets.header.margin')}
           </h4>
           <DataTable
             numRows={marginRows}
             tableColums={marginColums}
           />
           <h4>
-            {intl.formatMessage({ id: 'wallets.title.funding' })}
+            {t('wallets.header.funding')}
           </h4>
           <DataTable
             numRows={fundingRows}
@@ -188,4 +188,4 @@ class Wallets extends PureComponent {
 Wallets.propTypes = propTypes
 Wallets.defaultProps = defaultProps
 
-export default injectIntl(Wallets)
+export default withNamespaces('translations')(Wallets)

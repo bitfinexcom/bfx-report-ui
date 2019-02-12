@@ -228,6 +228,15 @@
     "light": "Light",
     "dark": "Dark"
   },
+  "tickers": {
+    "title": "Tickers",
+    "column": {
+      "pair": "PAIR",
+      "ask": "ASK",
+      "bid": "BID",
+      "time": "Time"
+    }
+  },
   "timeframe": {
     "custom": {
       "title": "Select Query Range",
@@ -257,31 +266,35 @@
     "customtime": "Custom",
     "start-date-placeholder": "Start Date Time"
   },
+  "trades": {
+    "title": "Trades",
+    "column": {
+      "orderid": "ORDER ID",
+      "time": "DATE",
+      "pair": "PAIR",
+      "amount": "AMOUNT",
+      "price": "PRICE",
+      "fee": "FEE"
+    }
+  },
+  "wallets": {
+    "title": "Wallets (Beta)",
+    "column": {
+      "currency": "CURRENCY",
+      "balance": "BALANCE"
+    },
+    "header": {
+      "exchange": "Exchange",
+      "margin": "Margin",
+      "funding": "Funding"
+    },
+    "nodata": "No related data in this date time. You can try another date time.",
+    "query": {
+      "title": "Query",
+      "tooltip": "Select a time to query the wallets snapshot"
+    }
+  },
   "withdrawals": {
     "title": "Withdrawals"
-  },
-  "tickers.title": "Tickers",
-  "tickers.column.pair": "PAIR",
-  "tickers.column.ask": "ASK",
-  "tickers.column.bid": "BID",
-  "tickers.column.time": "Time",
-  "trades": {
-    "title": "Trades"
-  },
-  "trades.title": "Trades",
-  "trades.column.orderid": "ORDER ID",
-  "trades.column.time": "DATE",
-  "trades.column.pair": "PAIR",
-  "trades.column.amount": "AMOUNT",
-  "trades.column.price": "PRICE",
-  "trades.column.fee": "FEE",
-  "wallets.title": "Wallets (Beta)",
-  "wallets.title.exchange": "Exchange",
-  "wallets.title.margin": "Margin",
-  "wallets.title.funding": "Funding",
-  "wallets.query": "Query",
-  "wallets.query.tooltip": "Select a time to query the wallets snapshot",
-  "wallets.nodata": "No related data in this date time. You can try another date time.",
-  "wallets.column.currency": "CURRENCY",
-  "wallets.column.balance": "BALANCE"
+  }
 }
