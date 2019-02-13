@@ -80,19 +80,19 @@ describe('ledger state', () => {
       offset: 25,
       pageOffset: 0,
     })
-  })
 
-  // jump from p3 to p2
-  expect(reducer(
-    {
+    // jump from p3 to p2
+    expect(reducer(
+      {
+        ...initBlockState,
+        offset: 75,
+        pageOffset: 0,
+      },
+      actions.jumpPage(2, LIMIT),
+    )).toEqual({
       ...initBlockState,
-      offset: 75,
+      offset: 50,
       pageOffset: 0,
-    },
-    actions.jumpPage(2, LIMIT),
-  )).toEqual({
-    ...initBlockState,
-    offset: 50,
-    pageOffset: 0,
+    })
   })
 })

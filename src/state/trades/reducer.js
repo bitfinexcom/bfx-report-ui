@@ -28,7 +28,8 @@ export function tradesReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_TRADES: {
-      const { res, nextPage } = payload
+      const { data, limit, pageSize } = payload
+      const { res, nextPage } = data
       const { existingPairs } = state
       const updatePairs = [...existingPairs]
       let smallestMts
@@ -71,6 +72,7 @@ export function tradesReducer(state = initialState, action) {
           feeCurrency,
         }
       })
+      let [offset, pageOffset] = getPageOffset(state, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,
@@ -78,8 +80,8 @@ export function tradesReducer(state = initialState, action) {
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
         smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-        offset: state.offset + entries.length,
-        pageOffset: 0,
+        offset,
+        pageOffset,
         pageLoading: false,
         nextPage,
       }

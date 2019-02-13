@@ -11,6 +11,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getPageSize } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -42,8 +43,9 @@ function* fetchOrders({ payload: pair }) {
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
+    const pageSize = getPageSize(TYPE)
     const { result = [], error } = yield call(getReqOrders, auth, query, targetPairs, 0, queryLimit)
-    yield put(actions.updateOrders(result))
+    yield put(actions.updateOrders(result, queryLimit, pageSize))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -71,6 +73,7 @@ function* fetchNextOrders() {
     } = yield select(getOrders)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
+    const pageSize = getPageSize(TYPE)
     // data exist, no need to fetch again
     if (entries.length - queryLimit >= offset) {
       return
@@ -78,7 +81,7 @@ function* fetchNextOrders() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqOrders, auth, query, targetPairs, smallestMts, queryLimit)
-    yield put(actions.updateOrders(result))
+    yield put(actions.updateOrders(result, queryLimit, pageSize))
 
     if (error) {
       yield put(actions.fetchFail({
