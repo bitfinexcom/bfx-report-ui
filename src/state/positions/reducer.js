@@ -8,6 +8,7 @@ import {
   fetchFail,
   fetchNext,
   fetchPrev,
+  getPageOffset,
   jumpPage,
   removePair,
   setPairs,
@@ -32,7 +33,8 @@ export function positionsReducer(state = initialState, action) {
           dataReceived: true,
         }
       }
-      const { res, nextPage } = payload
+      const { data, limit, pageSize } = payload
+      const { res, nextPage } = data
       const { existingPairs } = state
       const updatePairs = [...existingPairs]
       let smallestMts
@@ -79,6 +81,7 @@ export function positionsReducer(state = initialState, action) {
           status,
         }
       })
+      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,
@@ -86,8 +89,8 @@ export function positionsReducer(state = initialState, action) {
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
         smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-        offset: state.offset + entries.length,
-        pageOffset: 0,
+        offset,
+        pageOffset,
         pageLoading: false,
         nextPage,
       }

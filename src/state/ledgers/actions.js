@@ -70,12 +70,18 @@ export function refresh() {
 
 /**
  * Create an action to update Ledgers.
- * @param {Object[]} payload data set
+ * @param {Object[]} data data set
+ * @param {number} limit query limit
+ * @param {number} pageSize page size
  */
-export function updateLedgers(payload) {
+export function updateLedgers(data, limit, pageSize) {
   return {
     type: types.UPDATE_LEDGERS,
-    payload,
+    payload: {
+      data,
+      limit,
+      pageSize,
+    },
   }
 }
 

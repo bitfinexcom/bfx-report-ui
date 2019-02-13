@@ -11,7 +11,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit } from 'state/query/utils'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -19,6 +19,7 @@ import { getTargetSymbols, getFundingCreditHistory } from './selectors'
 
 const TYPE = queryTypes.MENU_FCREDIT
 const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqFCredit(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, smallestMts)
@@ -41,7 +42,7 @@ function* fetchFCredit({ payload: symbol }) {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqFCredit, auth, query, targetSymbols, 0)
-    yield put(actions.updateFCredit(result))
+    yield put(actions.updateFCredit(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -74,7 +75,7 @@ function* fetchNextFCredit() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqFCredit, auth, query, targetSymbols, smallestMts)
-    yield put(actions.updateFCredit(result))
+    yield put(actions.updateFCredit(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({

@@ -70,12 +70,18 @@ export function refresh() {
 
 /**
  * Create an action to update funding offer history.
- * @param {Object[]} payload data set
+ * @param {Object[]} data data set
+ * @param {number} limit query limit
+ * @param {number} pageSize page size
  */
-export function updateFOffer(payload) {
+export function updateFOffer(data, limit, pageSize) {
   return {
     type: types.UPDATE_FOFFER,
-    payload,
+    payload: {
+      data,
+      limit,
+      pageSize,
+    },
   }
 }
 

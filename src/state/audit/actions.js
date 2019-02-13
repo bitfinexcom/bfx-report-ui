@@ -70,12 +70,18 @@ export function refresh() {
 
 /**
  * Create an action to update Positions Audit.
- * @param {Object[]} payload data set
+ * @param {Object[]} data data set
+ * @param {number} limit query limit
+ * @param {number} pageSize page size
  */
-export function updatePAudit(payload) {
+export function updatePAudit(data, limit, pageSize) {
   return {
     type: types.UPDATE_PAUDIT,
-    payload,
+    payload: {
+      data,
+      limit,
+      pageSize,
+    },
   }
 }
 

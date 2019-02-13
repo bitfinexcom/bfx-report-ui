@@ -59,6 +59,19 @@ export function setTimeRange(type, state, initialState) {
 }
 
 /* pagination */
+export function getPageOffset(state, entries, limit, pageSize) {
+  // show current page instead of the next page
+  return (state.offset % limit !== 0)
+    ? [
+      (Math.floor(state.offset / limit) + 1) * limit,
+      limit - pageSize, // current last page
+    ]
+    : [
+      state.offset + entries.length,
+      0,
+    ]
+}
+
 export function fetchNext(type, state, LIMIT) {
   return (state.entries.length - LIMIT >= state.offset)
     ? {
@@ -176,6 +189,7 @@ export default {
   fetchFail,
   fetchNext,
   fetchPrev,
+  getPageOffset,
   jumpPage,
   paginateState,
   removePair,

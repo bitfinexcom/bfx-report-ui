@@ -7,6 +7,7 @@ import {
   fetchFail,
   fetchNext,
   fetchPrev,
+  getPageOffset,
   jumpPage,
   removeSymbol,
   setSymbols,
@@ -31,7 +32,8 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
           dataReceived: true,
         }
       }
-      const { res, nextPage } = payload
+      const { data, limit, pageSize } = payload
+      const { res, nextPage } = data
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
       let smallestMts
@@ -84,6 +86,7 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
           rateReal,
         }
       })
+      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,
@@ -91,8 +94,8 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
         smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-        offset: state.offset + entries.length,
-        pageOffset: 0,
+        offset,
+        pageOffset,
         pageLoading: false,
         nextPage,
       }

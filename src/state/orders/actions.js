@@ -70,12 +70,18 @@ export function refresh() {
 
 /**
  * Create an action to update Orders.
- * @param {Object[]} payload data set
+ * @param {Object[]} data data set
+ * @param {number} limit query limit
+ * @param {number} pageSize page size
  */
-export function updateOrders(payload) {
+export function updateOrders(data, limit, pageSize) {
   return {
     type: types.UPDATE_ORDERS,
-    payload,
+    payload: {
+      data,
+      limit,
+      pageSize,
+    },
   }
 }
 

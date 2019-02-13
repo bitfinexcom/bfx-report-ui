@@ -11,12 +11,14 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
+import { getPageSize } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
 import { getOrders, getTargetPairs } from './selectors'
 
 const TYPE = queryTypes.MENU_ORDERS
+const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqOrders(auth, query, targetPairs, smallestMts, queryLimit) {
   const params = getTimeFrame(query, smallestMts)
@@ -43,7 +45,7 @@ function* fetchOrders({ payload: pair }) {
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
     const { result = [], error } = yield call(getReqOrders, auth, query, targetPairs, 0, queryLimit)
-    yield put(actions.updateOrders(result))
+    yield put(actions.updateOrders(result, queryLimit, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -78,7 +80,7 @@ function* fetchNextOrders() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqOrders, auth, query, targetPairs, smallestMts, queryLimit)
-    yield put(actions.updateOrders(result))
+    yield put(actions.updateOrders(result, queryLimit, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({

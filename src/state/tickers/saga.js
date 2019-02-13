@@ -11,7 +11,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit } from 'state/query/utils'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -19,6 +19,7 @@ import { getTickers, getTargetPairs } from './selectors'
 
 const TYPE = queryTypes.MENU_TICKERS
 const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqTickers(auth, query, targetPairs, smallestMts) {
   const params = getTimeFrame(query, smallestMts)
@@ -41,7 +42,7 @@ function* fetchTickers({ payload: pair }) {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqTickers, auth, query, targetPairs, 0)
-    yield put(actions.updateTickers(result))
+    yield put(actions.updateTickers(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -74,7 +75,7 @@ function* fetchNextTickers() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqTickers, auth, query, targetPairs, smallestMts)
-    yield put(actions.updateTickers(result))
+    yield put(actions.updateTickers(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({

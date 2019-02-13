@@ -10,7 +10,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit } from 'state/query/utils'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 
 import types from './constants'
@@ -19,6 +19,7 @@ import { getTargetSymbols, getMovements } from './selectors'
 
 const TYPE = queryTypes.MENU_MOVEMENTS
 const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqMovements(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, smallestMts)
@@ -41,7 +42,7 @@ function* fetchMovements({ payload: symbol }) {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbols, 0)
-    yield put(actions.updateMovements(result))
+    yield put(actions.updateMovements(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -74,7 +75,7 @@ function* fetchNextMovements() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqMovements, auth, query, targetSymbols, smallestMts)
-    yield put(actions.updateMovements(result))
+    yield put(actions.updateMovements(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({
