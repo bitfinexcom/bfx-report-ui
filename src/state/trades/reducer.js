@@ -9,6 +9,7 @@ import {
   fetchFail,
   fetchNext,
   fetchPrev,
+  getPageOffset,
   jumpPage,
   removePair,
   setPairs,
@@ -72,7 +73,7 @@ export function tradesReducer(state = initialState, action) {
           feeCurrency,
         }
       })
-      let [offset, pageOffset] = getPageOffset(state, limit, pageSize)
+      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,

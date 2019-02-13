@@ -12,7 +12,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit } from 'state/query/utils'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -20,6 +20,7 @@ import { getPositionsAudit, getTargetIds } from './selectors'
 
 const TYPE = queryTypes.MENU_POSITIONS_AUDIT
 const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqPositionsAudit(auth, query, targetIds, smallestMts) {
   const params = getTimeFrame(query, smallestMts)
@@ -48,7 +49,7 @@ function* fetchPositionsAudit({ payload: ids }) {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqPositionsAudit, auth, query, targetIds, 0)
-    yield put(actions.updatePAudit(result))
+    yield put(actions.updatePAudit(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -81,7 +82,7 @@ function* fetchNextPositionsAudit() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqPositionsAudit, auth, query, targetIds, smallestMts)
-    yield put(actions.updatePAudit(result))
+    yield put(actions.updatePAudit(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({

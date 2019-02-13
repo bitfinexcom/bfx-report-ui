@@ -18,6 +18,8 @@ import actions from './actions'
 import { getTrades, getTargetPairs } from './selectors'
 
 const TYPE = queryTypes.MENU_TRADES
+const PAGE_SIZE = getPageSize(TYPE)
+
 function getReqTrades(auth, query, targetPairs, smallestMts, queryLimit) {
   const params = getTimeFrame(query, smallestMts)
   if (targetPairs.length > 0) {
@@ -42,9 +44,8 @@ function* fetchTrades({ payload: pair }) {
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const pageSize = getPageSize(TYPE)
     const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, 0, queryLimit)
-    yield put(actions.updateTrades(result, queryLimit, pageSize))
+    yield put(actions.updateTrades(result, queryLimit, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -72,7 +73,6 @@ function* fetchNextTrades() {
     } = yield select(getTrades)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const pageSize = getPageSize(TYPE)
     // data exist, no need to fetch again
     if (entries.length - queryLimit >= offset) {
       return
@@ -80,7 +80,7 @@ function* fetchNextTrades() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, smallestMts, queryLimit)
-    yield put(actions.updateTrades(result, queryLimit, pageSize))
+    yield put(actions.updateTrades(result, queryLimit, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({

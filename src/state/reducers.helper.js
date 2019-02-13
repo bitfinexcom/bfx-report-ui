@@ -59,16 +59,16 @@ export function setTimeRange(type, state, initialState) {
 }
 
 /* pagination */
-export function getPageOffset(state, limit, pageSize) {
+export function getPageOffset(state, entries, limit, pageSize) {
   // show current page instead of the next page
   return (state.offset % limit !== 0)
     ? [
       (Math.floor(state.offset / limit) + 1) * limit,
-      limit - pageSize // current last page
+      limit - pageSize, // current last page
     ]
     : [
       state.offset + entries.length,
-      0
+      0,
     ]
 }
 

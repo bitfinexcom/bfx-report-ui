@@ -70,12 +70,18 @@ export function refresh() {
 
 /**
  * Create an action to update Tickers.
- * @param {Object[]} payload data set
+ * @param {Object[]} data data set
+ * @param {number} limit query limit
+ * @param {number} pageSize page size
  */
-export function updateTickers(payload) {
+export function updateTickers(data, limit, pageSize) {
   return {
     type: types.UPDATE_TICKERS,
-    payload,
+    payload: {
+      data,
+      limit,
+      pageSize,
+    },
   }
 }
 

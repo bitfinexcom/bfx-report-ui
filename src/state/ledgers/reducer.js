@@ -69,7 +69,7 @@ export function ledgersReducer(state = initialState, action) {
           wallet,
         }
       })
-      let [offset, pageOffset] = getPageOffset(state, limit, pageSize)
+      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,

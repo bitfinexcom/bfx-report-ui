@@ -18,6 +18,7 @@ import actions from './actions'
 import { getTargetSymbols, getLedgers } from './selectors'
 
 const TYPE = queryTypes.MENU_LEDGERS
+const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqLedgers(auth, query, targetSymbols, smallestMts, queryLimit) {
   const params = getTimeFrame(query, smallestMts)
@@ -43,9 +44,8 @@ function* fetchLedgers({ payload: symbol }) {
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const pageSize = getPageSize(TYPE)
     const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, 0, queryLimit)
-    yield put(actions.updateLedgers(result, queryLimit, pageSize))
+    yield put(actions.updateLedgers(result, queryLimit, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -73,7 +73,6 @@ function* fetchNextLedgers() {
     } = yield select(getLedgers)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const pageSize = getPageSize(TYPE)
     // data exist, no need to fetch again
     if (entries.length - queryLimit >= offset) {
       return
@@ -81,7 +80,7 @@ function* fetchNextLedgers() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, smallestMts, queryLimit)
-    yield put(actions.updateLedgers(result, queryLimit, pageSize))
+    yield put(actions.updateLedgers(result, queryLimit, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({

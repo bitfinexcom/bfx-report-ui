@@ -11,7 +11,7 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit } from 'state/query/utils'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -19,6 +19,7 @@ import { getPublicTrades, getTargetPair } from './selectors'
 
 const TYPE = queryTypes.MENU_PUBLIC_TRADES
 const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqPublicTrades(auth, query, targetPair, smallestMts) {
   const params = getTimeFrame(query, smallestMts)
@@ -41,7 +42,7 @@ function* fetchPublicTrades({ payload: pair }) {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqPublicTrades, auth, query, targetPair, 0)
-    yield put(actions.updatePublicTrades(result))
+    yield put(actions.updatePublicTrades(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -74,7 +75,7 @@ function* fetchNextPublicTrades() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result = [], error } = yield call(getReqPublicTrades, auth, query, targetPair, smallestMts)
-    yield put(actions.updatePublicTrades(result))
+    yield put(actions.updatePublicTrades(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({

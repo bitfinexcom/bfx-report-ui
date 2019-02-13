@@ -9,6 +9,7 @@ import {
   fetchFail,
   fetchNext,
   fetchPrev,
+  getPageOffset,
   jumpPage,
   removePair,
   setPairs,
@@ -94,7 +95,7 @@ export function ordersReducer(state = initialState, action) {
           placedId,
         }
       })
-      let [offset, pageOffset] = getPageOffset(state, limit, pageSize)
+      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,

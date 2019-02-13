@@ -70,12 +70,18 @@ export function refresh() {
 
 /**
  * Create an action to update funding credit history.
- * @param {Object[]} payload data set
+ * @param {Object[]} data data set
+ * @param {number} limit query limit
+ * @param {number} pageSize page size
  */
-export function updateFCredit(payload) {
+export function updateFCredit(data, limit, pageSize) {
   return {
     type: types.UPDATE_FCREDIT,
-    payload,
+    payload: {
+      data,
+      limit,
+      pageSize,
+    },
   }
 }
 

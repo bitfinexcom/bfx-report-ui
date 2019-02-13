@@ -70,12 +70,18 @@ export function refresh() {
 
 /**
  * Create an action to update funding loan history.
- * @param {Object[]} payload data set
+ * @param {Object[]} data data set
+ * @param {number} limit query limit
+ * @param {number} pageSize page size
  */
-export function updateFLoan(payload) {
+export function updateFLoan(data, limit, pageSize) {
   return {
     type: types.UPDATE_FLOAN,
-    payload,
+    payload: {
+      data,
+      limit,
+      pageSize,
+    },
   }
 }
 

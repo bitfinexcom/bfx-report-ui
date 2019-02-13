@@ -7,6 +7,7 @@ import {
   fetchFail,
   fetchNext,
   fetchPrev,
+  getPageOffset,
   jumpPage,
   setTimeRange,
 } from 'state/reducers.helper'
@@ -30,7 +31,8 @@ export function positionsAuditReducer(state = initialState, action) {
           dataReceived: true,
         }
       }
-      const { res, nextPage } = payload
+      const { data, limit, pageSize } = payload
+      const { res, nextPage } = data
       let smallestMts
       const entries = res.map((entry) => {
         const {
@@ -70,14 +72,15 @@ export function positionsAuditReducer(state = initialState, action) {
           status,
         }
       })
+      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,
         dataReceived: true,
         entries: [...state.entries, ...entries],
         smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-        offset: state.offset + entries.length,
-        pageOffset: 0,
+        offset,
+        pageOffset,
         pageLoading: false,
         nextPage,
       }
