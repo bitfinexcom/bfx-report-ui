@@ -108,8 +108,8 @@ export function generateUrl(type, params, symbols) {
     return ''
   }
   return symbols
-    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
-    : `${getPath(type)}${params}`
+    ? `${getPath(type)}/${getSymbolsURL(symbols)}${getNoAuthTokenUrlString(params)}`
+    : `${getPath(type)}${getNoAuthTokenUrlString(params)}`
 }
 
 export function handleAddSymbolFilter(type, symbol, props) {
