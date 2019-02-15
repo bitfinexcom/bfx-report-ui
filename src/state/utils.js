@@ -107,9 +107,10 @@ export function generateUrl(type, params, symbols) {
     console.error('Unsupport route type ', type)
     return ''
   }
+  const noAuthTokenParams = getNoAuthTokenUrlString(params)
   return symbols
-    ? `${getPath(type)}/${getSymbolsURL(symbols)}${getNoAuthTokenUrlString(params)}`
-    : `${getPath(type)}${getNoAuthTokenUrlString(params)}`
+    ? `${getPath(type)}/${getSymbolsURL(symbols)}${noAuthTokenParams}`
+    : `${getPath(type)}${noAuthTokenParams}`
 }
 
 export function handleAddSymbolFilter(type, symbol, props) {
