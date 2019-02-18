@@ -35,6 +35,18 @@ describe('pair convertion', () => {
     expect(formatPair('ethusd')).toEqual('ETH/USD')
   })
 
+  it('formatPair trxusd -> TRX/USD', () => {
+    expect(formatPair('trxusd')).toEqual('TRX/USD')
+  })
+
+  it('formatPair trxbtc -> TRX/BTC', () => {
+    expect(formatPair('trxbtc')).toEqual('TRX/BTC')
+  })
+
+  it('formatPair tknusd -> TKN/USD', () => {
+    expect(formatPair('tknusd')).toEqual('TKN/USD')
+  })
+
   it('formatPair ALL -> ALL', () => {
     expect(formatPair('ALL')).toEqual('ALL')
   })

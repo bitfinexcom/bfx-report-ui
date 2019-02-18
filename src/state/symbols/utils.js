@@ -62,7 +62,7 @@ export function addPrefix(symbol = '') {
  */
 const removePrefix = (symbol = '') => {
   const s = symbol.charAt(0)
-  return (s === 't' || s === 'f')
+  return (symbol.length > 6 && (s === 't' || s === 'f'))
     ? symbol.substring(1).toUpperCase()
     : symbol.toUpperCase()
 }
