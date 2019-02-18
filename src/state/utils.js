@@ -100,6 +100,14 @@ export function checkFetch(prevProps, props, type) {
   }
 }
 
+// remove authToken param from url but keep others
+export function getNoAuthTokenUrlString(searchUrl) {
+  const parsed = queryString.parse(searchUrl)
+  const params = _omit(parsed, 'authToken')
+  const queries = queryString.stringify(params, { encode: false })
+  return queries ? `?${queries}` : ''
+}
+
 // genereate url with route and params
 export function generateUrl(type, params, symbols) {
   if (!isValidRouteType(type)) {
@@ -107,9 +115,10 @@ export function generateUrl(type, params, symbols) {
     console.error('Unsupport route type ', type)
     return ''
   }
+  const noAuthTokenParams = getNoAuthTokenUrlString(params)
   return symbols
-    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
-    : `${getPath(type)}${params}`
+    ? `${getPath(type)}/${getSymbolsURL(symbols)}${noAuthTokenParams}`
+    : `${getPath(type)}${noAuthTokenParams}`
 }
 
 export function handleAddSymbolFilter(type, symbol, props) {
@@ -185,14 +194,6 @@ export function getSideMsg(side) {
 
 export function getParsedUrlParams(searchUrl) {
   return queryString.parse(searchUrl)
-}
-
-// remove authToken param from url but keep others
-export function getNoAuthTokenUrlString(searchUrl) {
-  const parsed = queryString.parse(searchUrl)
-  const params = _omit(parsed, 'authToken')
-  const queries = queryString.stringify(params, { encode: false })
-  return queries ? `?${queries}` : ''
 }
 
 export default {
