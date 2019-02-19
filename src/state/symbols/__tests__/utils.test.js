@@ -100,9 +100,24 @@ describe('trading/funding symbols convertion', () => {
     expect(formatRawSymbols('BTCUSD')).toEqual('tBTCUSD')
   })
 
+  it('formatRawSymbols trxusd -> tTRXUSD', () => {
+    expect(formatRawSymbols('trxusd')).toEqual('tTRXUSD')
+    expect(formatRawSymbols('TRXUSD')).toEqual('tTRXUSD')
+  })
+
+  it('formatRawSymbols funusd -> tFUNUSD', () => {
+    expect(formatRawSymbols('funusd')).toEqual('tFUNUSD')
+    expect(formatRawSymbols('FUNUSD')).toEqual('tFUNUSD')
+  })
+
   it('formatRawSymbols [\'btcusd\'] -> tBTCUSD', () => {
     expect(formatRawSymbols(['btcusd'])).toEqual('tBTCUSD')
     expect(formatRawSymbols(['BTCUSD'])).toEqual('tBTCUSD')
+  })
+
+  it('formatRawSymbols [\'trxusd\'] -> tTRXUSD', () => {
+    expect(formatRawSymbols(['trxusd'])).toEqual('tTRXUSD')
+    expect(formatRawSymbols(['TRXUSD'])).toEqual('tTRXUSD')
   })
 
   it('formatRawSymbols [\'btcusd\', \'ethusd\'] -> [\'tBTCUSD\', \'tETHUSD\']', () => {
@@ -111,8 +126,22 @@ describe('trading/funding symbols convertion', () => {
     expect(formatRawSymbols(['BTCUSD', 'ETHUSD'])).toEqual(['tBTCUSD', 'tETHUSD'])
   })
 
+  it('formatRawSymbols [\'trxusd\', \'funusd\'] -> [\'tTRXUSD\', \'tFUNUSD\']', () => {
+    expect(formatRawSymbols(['trxusd', 'funusd'])).toEqual(['tTRXUSD', 'tFUNUSD'])
+    expect(formatRawSymbols(['TRXUSD', 'funusd'])).toEqual(['tTRXUSD', 'tFUNUSD'])
+    expect(formatRawSymbols(['TRXUSD', 'FUNUSD'])).toEqual(['tTRXUSD', 'tFUNUSD'])
+  })
+
   it('formatRawSymbols USD -> fUSD', () => {
     expect(formatRawSymbols('USD')).toEqual('fUSD')
+  })
+
+  it('formatRawSymbols TRX -> fTRX', () => {
+    expect(formatRawSymbols('TRX')).toEqual('fTRX')
+  })
+
+  it('formatRawSymbols FUN -> fFUN', () => {
+    expect(formatRawSymbols('FUN')).toEqual('fFUN')
   })
 
   it('formatRawSymbols [\'USD\'] -> fUSD', () => {

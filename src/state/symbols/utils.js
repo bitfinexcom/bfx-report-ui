@@ -25,7 +25,8 @@ export function addPrefix(symbol = '') {
   const sym = `${symbol}`
   const first = sym.charAt(0)
   // already okay
-  if (first === 't' || first === 'f') {
+  if ((sym.length === 4 || sym.length === 7)
+    && (first === 't' || first === 'f')) {
     return sym
   }
   // pretty pair ex. BTC:IOTA
