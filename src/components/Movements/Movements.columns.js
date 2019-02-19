@@ -136,5 +136,19 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => filteredData[rowIndex].destinationAddress,
     },
+    {
+      id: 'transid',
+      name: 'movements.column.transactionId',
+      width: 80,
+      renderer: (rowIndex) => {
+        const { transactionId } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={transactionId}>
+            {transactionId}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].transactionId,
+    },
   ]
 }
