@@ -105,7 +105,8 @@
       "amount": "數量",
       "fees": "費用",
       "status": "狀態",
-      "destination": "去處"
+      "destination": "去處",
+      "transactionId": "交易編號"
     }
   },
   "nodata": "沒有相關資料。請試試其他時間範圍。",

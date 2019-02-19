@@ -105,7 +105,8 @@
       "amount": "AMOUNT",
       "fees": "FEES",
       "status": "STATUS",
-      "destination": "DESTINATION"
+      "destination": "DESTINATION",
+      "transactionId": "TRANSACTION ID"
     }
   },
   "nodata": "No related data in this time range. You can try another time range.",
