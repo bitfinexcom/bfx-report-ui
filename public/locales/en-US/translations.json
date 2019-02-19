@@ -30,7 +30,7 @@
       "period": "PERIOD",
       "days": "Day(s)",
       "opening": "OPENED",
-      "lastpayout": "CLOSED",
+      "lastpayout": "LAST PAYOUT",
       "positionpair": "POSITION PAIR",
       "updated": "DATE"
     },
@@ -136,7 +136,7 @@
     },
     "noid": {
       "title": "No Positions ID",
-      "noid.description": "Please select from the Positions page to query the Positions changelog by ID."
+      "description": "Please select from the Positions page to query the Positions changelog by ID."
     }
   },
   "positions": {
