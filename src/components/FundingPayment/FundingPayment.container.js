@@ -13,7 +13,7 @@ import {
   getPageOffset,
   getTargetSymbols,
   getNextPage,
-} from 'state/ledgers/selectors'
+} from 'state/fundingPayment/selectors'
 
 import FundingPayment from './FundingPayment'
 

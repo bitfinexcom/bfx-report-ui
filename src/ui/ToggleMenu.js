@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { withNamespaces } from 'react-i18next'
-
 import {
   Menu,
   MenuDivider,
@@ -13,6 +12,7 @@ import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
 import { getIcon, getPath } from 'state/query/utils'
 import { getNoAuthTokenUrlString } from 'state/utils'
+import { platform } from 'var/config'
 
 const {
   MENU_DEPOSITS,
@@ -149,13 +149,15 @@ class ToggleMenu extends PureComponent {
           onClick={this.handleClickFCredit}
           active={target === MENU_FCREDIT}
         />
-        <MenuItem
-          icon={getIcon(MENU_FPAYMENT)}
-          text={isIconMode ? '' : t('fpayment.title')}
-          title={isIconMode ? t('fpayment.title') : ''}
-          onClick={this.handleClickFPayment}
-          active={target === MENU_FPAYMENT}
-        />
+        {platform.showSyncMode ? (
+          <MenuItem
+            icon={getIcon(MENU_FPAYMENT)}
+            text={isIconMode ? '' : t('fpayment.title')}
+            title={isIconMode ? t('fpayment.title') : ''}
+            onClick={this.handleClickFPayment}
+            active={target === MENU_FPAYMENT}
+          />
+        ) : undefined}
         <MenuDivider />
         <MenuItem
           icon={getIcon(MENU_PUBLIC_TRADES)}
@@ -185,11 +187,6 @@ class ToggleMenu extends PureComponent {
     } else if (menuMode === baseType.MENU_MODE_ICON) {
       content = (
         <Menu large className='bitfinex-compact-menu hidden-xs hidden-sm hidden-md'>
-          <Timeframe
-            handleClickCustom={handleClickCustom}
-            menuMode={menuMode}
-          />
-          <MenuDivider />
           {renderMenu}
         </Menu>
       )

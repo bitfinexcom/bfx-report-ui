@@ -239,7 +239,12 @@ export function getPageSize(target) {
 }
 
 export function canChangeQueryLimit(target) {
-  return [MENU_LEDGERS, MENU_ORDERS, MENU_TRADES].includes(target)
+  return [
+    MENU_LEDGERS,
+    MENU_ORDERS,
+    MENU_TRADES,
+    MENU_FPAYMENT,
+  ].includes(target)
 }
 
 export default {
