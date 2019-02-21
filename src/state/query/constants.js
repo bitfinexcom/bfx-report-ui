@@ -3,6 +3,7 @@ export default {
   MENU_FCREDIT: 'fcredit',
   MENU_FLOAN: 'floan',
   MENU_FOFFER: 'foffer',
+  MENU_FPAYMENT: 'fpayment',
   MENU_LEDGERS: 'ledgers',
   MENU_MOVEMENTS: 'movements',
   MENU_ORDERS: 'orders',

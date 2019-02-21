@@ -76,6 +76,9 @@
       "updated": "DATE"
     }
   },
+  "fpayment": {
+    "title": "Funding Payment"
+  },
   "header": {
     "logout": "Logout",
     "lang": {

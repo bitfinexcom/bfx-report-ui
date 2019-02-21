@@ -27,6 +27,7 @@ const {
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
+  MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_ORDERS,
   MENU_TRADES,
@@ -218,6 +219,20 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_FOFFER)}/:symbol`}
               component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path='/'
+              component={() => <Ledgers type={MENU_FPAYMENT} handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_FPAYMENT)}
+              component={() => <Ledgers type={MENU_FPAYMENT} handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_FPAYMENT)}/:symbol`}
+              component={() => <Ledgers type={MENU_FPAYMENT} handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact

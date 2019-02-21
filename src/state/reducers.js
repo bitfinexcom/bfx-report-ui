@@ -2,11 +2,14 @@ import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
+import { platform } from 'var/config'
+
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
 import fundingLoanHistoryReducer from './fundingLoanHistory/reducer'
 import fundingOfferHistoryReducer from './fundingOfferHistory/reducer'
+import fundingPaymentReducer from './fundingPayment/reducer'
 import ledgersReducer from './ledgers/reducer'
 import movementsReducer from './movements/reducer'
 import ordersReducer from './orders/reducer'
@@ -31,7 +34,7 @@ const persistConfig = {
   debug: PERSIST_DEBUG,
 }
 
-const rootReducer = combineReducers({
+const BASE_REDUCERS = {
   audit: positionsAuditReducer,
   auth: authReducer,
   base: baseReducer,
@@ -48,10 +51,19 @@ const rootReducer = combineReducers({
   trades: tradesReducer,
   status: statusReducer,
   symbols: symbolsReducer,
-  sync: syncReducer,
   ui: uiReducer,
   wallets: walletsReducer,
-})
+}
+
+const REDUCERS = platform.showSyncMode
+  ? {
+    ...BASE_REDUCERS,
+    fpayment: fundingPaymentReducer,
+    sync: syncReducer,
+  }
+  : BASE_REDUCERS
+
+const rootReducer = combineReducers(REDUCERS)
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

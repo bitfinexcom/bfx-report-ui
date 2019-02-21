@@ -19,6 +19,7 @@ const {
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
+  MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_ORDERS,
   MENU_TICKERS,
@@ -36,6 +37,7 @@ class ToggleMenu extends PureComponent {
     this.handleClickFCredit = this.handleClick.bind(this, MENU_FCREDIT)
     this.handleClickFLoan = this.handleClick.bind(this, MENU_FLOAN)
     this.handleClickFOffer = this.handleClick.bind(this, MENU_FOFFER)
+    this.handleClickFPayment = this.handleClick.bind(this, MENU_FPAYMENT)
     this.handleClickLedgers = this.handleClick.bind(this, MENU_LEDGERS)
     this.handleClickOrders = this.handleClick.bind(this, MENU_ORDERS)
     this.handleClickTrades = this.handleClick.bind(this, MENU_TRADES)
@@ -60,8 +62,9 @@ class ToggleMenu extends PureComponent {
       target,
       t,
     } = this.props
+    const isIconMode = menuMode === baseType.MENU_MODE_ICON
 
-    const renderNormalMenu = (
+    const renderMenu = (
       <Fragment>
         <Timeframe
           handleClickCustom={handleClickCustom}
@@ -70,81 +73,101 @@ class ToggleMenu extends PureComponent {
         <MenuDivider />
         <MenuItem
           icon={getIcon(MENU_LEDGERS)}
-          text={t('ledgers.title')}
+          text={isIconMode ? '' : t('ledgers.title')}
+          title={isIconMode ? t('ledgers.title') : ''}
           onClick={this.handleClickLedgers}
           active={target === MENU_LEDGERS}
         />
         <MenuItem
           icon={getIcon(MENU_TRADES)}
-          text={t('trades.title')}
+          text={isIconMode ? '' : t('trades.title')}
+          title={isIconMode ? t('trades.title') : ''}
           onClick={this.handleClickTrades}
           active={target === MENU_TRADES}
         />
         <MenuItem
           icon={getIcon(MENU_ORDERS)}
-          text={t('orders.title')}
+          text={isIconMode ? '' : t('orders.title')}
+          title={isIconMode ? t('orders.title') : ''}
           onClick={this.handleClickOrders}
           active={target === MENU_ORDERS}
         />
         <MenuItem
           icon={getIcon(MENU_DEPOSITS)}
-          text={t('deposits.title')}
+          text={isIconMode ? '' : t('deposits.title')}
+          title={isIconMode ? t('deposits.title') : ''}
           onClick={this.handleClickDeposits}
           active={target === MENU_DEPOSITS}
         />
         <MenuItem
           icon={getIcon(MENU_WITHDRAWALS)}
-          text={t('withdrawals.title')}
+          text={isIconMode ? '' : t('withdrawals.title')}
+          title={isIconMode ? t('withdrawals.title') : ''}
           onClick={this.handleClickWithdrawals}
           active={target === MENU_WITHDRAWALS}
         />
         <MenuItem
           icon={getIcon(MENU_POSITIONS)}
-          text={t('positions.title')}
+          text={isIconMode ? '' : t('positions.title')}
+          title={isIconMode ? t('positions.title') : ''}
           onClick={this.handleClickPositions}
           active={target === MENU_POSITIONS}
         />
         <MenuItem
           icon={getIcon(MENU_POSITIONS_AUDIT)}
-          text={t('paudit.title')}
+          text={isIconMode ? '' : t('paudit.title')}
+          title={isIconMode ? t('paudit.title') : ''}
           onClick={this.handleClickPositionsAudit}
           active={target === MENU_POSITIONS_AUDIT}
         />
         <MenuItem
           icon={getIcon(MENU_WALLETS)}
-          text={t('wallets.title')}
+          text={isIconMode ? '' : t('wallets.title')}
+          title={isIconMode ? t('wallets.title') : ''}
           onClick={this.handleClickWallets}
           active={target === MENU_WALLETS}
         />
         <MenuDivider />
         <MenuItem
           icon={getIcon(MENU_FOFFER)}
-          text={t('foffer.title')}
+          text={isIconMode ? '' : t('foffer.title')}
+          title={isIconMode ? t('foffer.title') : ''}
           onClick={this.handleClickFOffer}
           active={target === MENU_FOFFER}
         />
         <MenuItem
           icon={getIcon(MENU_FLOAN)}
-          text={t('floan.title')}
+          text={isIconMode ? '' : t('floan.title')}
+          title={isIconMode ? t('floan.title') : ''}
           onClick={this.handleClickFLoan}
           active={target === MENU_FLOAN}
         />
         <MenuItem
           icon={getIcon(MENU_FCREDIT)}
-          text={t('fcredit.title')}
+          text={isIconMode ? '' : t('fcredit.title')}
+          title={isIconMode ? t('fcredit.title') : ''}
           onClick={this.handleClickFCredit}
           active={target === MENU_FCREDIT}
+        />
+        <MenuItem
+          icon={getIcon(MENU_FPAYMENT)}
+          text={isIconMode ? '' : t('fpayment.title')}
+          title={isIconMode ? t('fpayment.title') : ''}
+          onClick={this.handleClickFPayment}
+          active={target === MENU_FPAYMENT}
         />
         <MenuDivider />
         <MenuItem
           icon={getIcon(MENU_PUBLIC_TRADES)}
-          text={t('publictrades.title')}
+          text={isIconMode ? '' : t('publictrades.title')}
+          title={isIconMode ? t('publictrades.title') : ''}
           onClick={this.handleClickPublicTrades}
           active={target === MENU_PUBLIC_TRADES}
         />
         <MenuItem
           icon={getIcon(MENU_TICKERS)}
-          text={t('tickers.title')}
+          text={isIconMode ? '' : t('tickers.title')}
+          title={isIconMode ? t('tickers.title') : ''}
           onClick={this.handleClickTickers}
           active={target === MENU_TICKERS}
         />
@@ -156,7 +179,7 @@ class ToggleMenu extends PureComponent {
     if (menuMode === baseType.MENU_MODE_HOVER) {
       content = (
         <Menu large>
-          {renderNormalMenu}
+          {renderMenu}
         </Menu>
       )
     } else if (menuMode === baseType.MENU_MODE_ICON) {
@@ -167,105 +190,13 @@ class ToggleMenu extends PureComponent {
             menuMode={menuMode}
           />
           <MenuDivider />
-          <MenuItem
-            icon={getIcon(MENU_LEDGERS)}
-            text=''
-            title={t('ledgers.title')}
-            onClick={this.handleClickLedgers}
-            active={target === MENU_LEDGERS}
-          />
-          <MenuItem
-            icon={getIcon(MENU_TRADES)}
-            text=''
-            title={t('trades.title')}
-            onClick={this.handleClickTrades}
-            active={target === MENU_TRADES}
-          />
-          <MenuItem
-            icon={getIcon(MENU_ORDERS)}
-            text=''
-            title={t('orders.title')}
-            onClick={this.handleClickOrders}
-            active={target === MENU_ORDERS}
-          />
-          <MenuItem
-            icon={getIcon(MENU_DEPOSITS)}
-            text=''
-            title={t('deposits.title')}
-            onClick={this.handleClickDeposits}
-            active={target === MENU_DEPOSITS}
-          />
-          <MenuItem
-            icon={getIcon(MENU_WITHDRAWALS)}
-            text=''
-            title={t('withdrawals.title')}
-            onClick={this.handleClickWithdrawals}
-            active={target === MENU_WITHDRAWALS}
-          />
-          <MenuItem
-            icon={getIcon(MENU_POSITIONS)}
-            text=''
-            title={t('positions.title')}
-            onClick={this.handleClickPositions}
-            active={target === MENU_POSITIONS}
-          />
-          <MenuItem
-            icon={getIcon(MENU_POSITIONS_AUDIT)}
-            text=''
-            title={t('paudit.title')}
-            onClick={this.handleClickPositionsAudit}
-            active={target === MENU_POSITIONS_AUDIT}
-          />
-          <MenuItem
-            icon={getIcon(MENU_WALLETS)}
-            text=''
-            title={t('wallets.title')}
-            onClick={this.handleClickWallets}
-            active={target === MENU_WALLETS}
-          />
-          <MenuDivider />
-          <MenuItem
-            icon={getIcon(MENU_FOFFER)}
-            text=''
-            title={t('foffer.title')}
-            onClick={this.handleClickFOffer}
-            active={target === MENU_FOFFER}
-          />
-          <MenuItem
-            icon={getIcon(MENU_FLOAN)}
-            text=''
-            title={t('floan.title')}
-            onClick={this.handleClickFLoan}
-            active={target === MENU_FLOAN}
-          />
-          <MenuItem
-            icon={getIcon(MENU_FCREDIT)}
-            text=''
-            title={t('fcredit.title')}
-            onClick={this.handleClickFCredit}
-            active={target === MENU_FCREDIT}
-          />
-          <MenuDivider />
-          <MenuItem
-            icon={getIcon(MENU_PUBLIC_TRADES)}
-            text=''
-            title={t('publictrades.title')}
-            onClick={this.handleClickPublicTrades}
-            active={target === MENU_PUBLIC_TRADES}
-          />
-          <MenuItem
-            icon={getIcon(MENU_TICKERS)}
-            text=''
-            title={t('tickers.title')}
-            onClick={this.handleClickTickers}
-            active={target === MENU_TICKERS}
-          />
+          {renderMenu}
         </Menu>
       )
     } else {
       content = (
         <Menu large className='hidden-xs hidden-sm hidden-md col-lg-1 col-xl-2'>
-          {renderNormalMenu}
+          {renderMenu}
         </Menu>
       )
     }
