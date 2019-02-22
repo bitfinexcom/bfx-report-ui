@@ -76,6 +76,9 @@
       "updated": "日期"
     }
   },
+  "fpayment": {
+    "title": "融資付款"
+  },
   "header": {
     "logout": "登出",
     "lang": {

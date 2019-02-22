@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
+import FundingPayment from 'components/FundingPayment'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
@@ -27,6 +28,7 @@ const {
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
+  MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_ORDERS,
   MENU_TRADES,
@@ -218,6 +220,20 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_FOFFER)}/:symbol`}
               component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path='/'
+              component={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_FPAYMENT)}
+              component={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_FPAYMENT)}/:symbol`}
+              component={() => <FundingPayment handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact

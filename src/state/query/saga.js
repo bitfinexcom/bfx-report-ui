@@ -13,6 +13,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
 import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
 import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
+import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/selectors'
 import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
@@ -37,6 +38,7 @@ const {
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
+  MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_ORDERS,
   MENU_TICKERS,
@@ -79,6 +81,10 @@ function getCSV(auth, query, target, options) {
       break
     case MENU_FOFFER:
       method = 'getFundingOfferHistoryCsv'
+      break
+    case MENU_FPAYMENT:
+      method = 'getLedgersCsv'
+      params.isMarginFundingPayment = true
       break
     case MENU_ORDERS:
       method = 'getOrdersCsv'
@@ -125,6 +131,8 @@ function getSelector(target) {
       return getFLoanSymbols
     case MENU_FOFFER:
       return getFOfferSymbols
+    case MENU_FPAYMENT:
+      return getFPaymentSymbols
     case MENU_LEDGERS:
       return getLedgersSymbols
     case MENU_ORDERS:
@@ -158,6 +166,7 @@ function formatSymbol(target, sign) {
     case MENU_LEDGERS:
     case MENU_WITHDRAWALS:
     case MENU_DEPOSITS:
+    case MENU_FPAYMENT:
       return sign
     case MENU_ORDERS:
     case MENU_TICKERS:

@@ -7,6 +7,7 @@ import baseSaga from './base/saga'
 import fcreditSaga from './fundingCreditHistory/saga'
 import floanSaga from './fundingLoanHistory/saga'
 import fofferSaga from './fundingOfferHistory/saga'
+import fpaymentSaga from './fundingPayment/saga'
 import ledgersSaga from './ledgers/saga'
 import movementsSaga from './movements/saga'
 import ordersSaga from './orders/saga'
@@ -41,5 +42,6 @@ export default function* rootSaga() {
   yield fork(walletsSaga)
   if (platform.showSyncMode) {
     yield fork(syncSaga)
+    yield fork(fpaymentSaga)
   }
 }
