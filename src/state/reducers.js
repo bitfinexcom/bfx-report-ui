@@ -24,6 +24,7 @@ import symbolsReducer from './symbols/reducer'
 import syncReducer from './sync/reducer'
 import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
+import withdrawalsReducer from './withdrawals/reducer'
 
 const PERSIST_WHITELIST = ['base']
 const PERSIST_DEBUG = false
@@ -53,6 +54,7 @@ const BASE_REDUCERS = {
   symbols: symbolsReducer,
   ui: uiReducer,
   wallets: walletsReducer,
+  withdrawals: withdrawalsReducer,
 }
 
 const REDUCERS = platform.showSyncMode

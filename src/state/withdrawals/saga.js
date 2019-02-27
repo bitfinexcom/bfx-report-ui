@@ -15,7 +15,7 @@ import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetSymbols, getMovements } from './selectors'
+import { getTargetSymbols, getWithdrawals } from './selectors'
 
 const TYPE = queryTypes.MENU_MOVEMENTS
 const LIMIT = getQueryLimit(TYPE)
@@ -24,7 +24,7 @@ const PAGE_SIZE = getPageSize(TYPE)
 function getReqMovements(auth, query, targetSymbols, smallestMts) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
-  params.isDeposits = true
+  params.isWithdrawals = true
   if (targetSymbols.length > 0) {
     params.symbol = targetSymbols
   }
@@ -68,7 +68,7 @@ function* fetchNextMovements() {
       offset,
       smallestMts,
       targetSymbols,
-    } = yield select(getMovements)
+    } = yield select(getWithdrawals)
     // data exist, no need to fetch again
     if (entries.length - LIMIT >= offset) {
       return
@@ -98,8 +98,8 @@ function* fetchMovementsFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
-export default function* movementsSaga() {
-  yield takeLatest(types.FETCH_MOVEMENTS, fetchMovements)
-  yield takeLatest(types.FETCH_NEXT_MOVEMENTS, fetchNextMovements)
+export default function* withdrawalsSaga() {
+  yield takeLatest(types.FETCH_WITHDRAWALS, fetchMovements)
+  yield takeLatest(types.FETCH_NEXT_WITHDRAWALS, fetchNextMovements)
   yield takeLatest(types.FETCH_FAIL, fetchMovementsFail)
 }

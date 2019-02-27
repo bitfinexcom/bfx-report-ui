@@ -15,6 +15,7 @@ import PublicTrades from 'components/PublicTrades'
 import Tickers from 'components/Tickers'
 import Trades from 'components/Trades'
 import Wallets from 'components/Wallets'
+import Withdrawals from 'components/Withdrawals'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
@@ -188,11 +189,11 @@ class Main extends PureComponent {
             <Route
               exact
               path={getPath(MENU_WITHDRAWALS)}
-              component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
+              component={() => <Withdrawals type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_WITHDRAWALS)}/:symbol`}
-              component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
+              component={() => <Withdrawals type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact

@@ -16,6 +16,7 @@ import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/
 import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/selectors'
 import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
+import { getTargetSymbols as getWithdrawalsSymbols } from 'state/withdrawals/selectors'
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
 import { getTargetPairs as getTickersPairs } from 'state/tickers/selectors'
 import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
@@ -137,7 +138,6 @@ function getSelector(target) {
       return getLedgersSymbols
     case MENU_ORDERS:
       return getOrdersPairs
-    case MENU_WITHDRAWALS:
     case MENU_DEPOSITS:
       return getMovementsSymbols
     case MENU_TICKERS:
@@ -152,6 +152,8 @@ function getSelector(target) {
       return getPublicTradesPair
     case MENU_WALLETS:
       return getTimestamp
+    case MENU_WITHDRAWALS:
+      return getWithdrawalsSymbols
     default:
       return ''
   }

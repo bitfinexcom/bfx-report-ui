@@ -72,8 +72,8 @@ export function getPageOffset(state, entries, limit, pageSize) {
     ]
 }
 
-export function fetchNext(type, state, LIMIT) {
-  return (state.entries.length - LIMIT >= state.offset)
+export function fetchNext(type, state, limit) {
+  return (state.entries.length - limit >= state.offset)
     ? {
       ...state,
       offset: state.offset + state.currentEntriesSize,
@@ -84,21 +84,21 @@ export function fetchNext(type, state, LIMIT) {
     }
 }
 
-export function fetchPrev(type, state, LIMIT) {
+export function fetchPrev(type, state, limit) {
   return {
     ...state,
-    offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
+    offset: state.offset >= limit ? state.offset - limit : 0,
     pageOffset: 0,
   }
 }
 
 export function jumpPage(type, state, payload) {
-  const { page, queryLimit: LIMIT } = payload
-  const PAGE_SIZE = getPageSize(type)
-  const totalOffset = (page - 1) * PAGE_SIZE
-  const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
-  if (totalOffset < LIMIT) {
-    const baseOffset = Math.ceil(page / LIMIT * PAGE_SIZE) * LIMIT
+  const { page, queryLimit } = payload
+  const pageSize = getPageSize(type)
+  const totalOffset = (page - 1) * pageSize
+  const currentOffset = Math.floor(totalOffset / queryLimit) * queryLimit
+  if (totalOffset < queryLimit) {
+    const baseOffset = Math.ceil(page / queryLimit * pageSize) * queryLimit
     return {
       ...state,
       offset: state.offset < baseOffset ? state.offset : baseOffset,
@@ -107,7 +107,7 @@ export function jumpPage(type, state, payload) {
   }
   return {
     ...state,
-    offset: currentOffset + LIMIT,
+    offset: currentOffset + queryLimit,
     pageOffset: totalOffset - currentOffset,
   }
 }
