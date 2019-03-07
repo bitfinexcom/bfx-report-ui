@@ -14,6 +14,7 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -43,7 +44,8 @@ function* fetchPositions({ payload: pair }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqPositions, auth, query, targetPairs, 0)
+    const { result: resulto, error: erroro } = yield call(getReqPositions, auth, query, targetPairs, 0)
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, auth, query, targetPairs, 0)
     yield put(actions.updatePositions(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -76,7 +78,10 @@ function* fetchNextPositions() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqPositions, auth, query, targetPairs, smallestMts)
+    const { result: resulto, error: erroro } = yield call(getReqPositions, auth, query, targetPairs, smallestMts)
+    const { result = {}, error } = yield call(
+      fetchNext, resulto, erroro, getReqPositions, auth, query, targetPairs, smallestMts,
+    )
     yield put(actions.updatePositions(result, LIMIT, PAGE_SIZE))
 
     if (error) {

@@ -12,6 +12,7 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -41,7 +42,8 @@ function* fetchFCredit({ payload: symbol }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFCredit, auth, query, targetSymbols, 0)
+    const { result: resulto, error: erroro } = yield call(getReqFCredit, auth, query, targetSymbols, 0)
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFCredit, auth, query, targetSymbols, 0)
     yield put(actions.updateFCredit(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -74,7 +76,10 @@ function* fetchNextFCredit() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFCredit, auth, query, targetSymbols, smallestMts)
+    const { result: resulto, error: erroro } = yield call(getReqFCredit, auth, query, targetSymbols, smallestMts)
+    const { result = {}, error } = yield call(
+      fetchNext, resulto, erroro, getReqFCredit, auth, query, targetSymbols, smallestMts,
+    )
     yield put(actions.updateFCredit(result, LIMIT, PAGE_SIZE))
 
     if (error) {

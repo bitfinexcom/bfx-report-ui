@@ -12,6 +12,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
+import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -44,7 +45,10 @@ function* fetchTrades({ payload: pair }) {
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, 0, queryLimit)
+    const { result: resulto, error: erroro } = yield call(getReqTrades, auth, query, targetPairs, 0, queryLimit)
+    const { result = {}, error } = yield call(
+      fetchNext, resulto, erroro, getReqTrades, auth, query, targetPairs, 0, queryLimit,
+    )
     yield put(actions.updateTrades(result, queryLimit, PAGE_SIZE))
 
     if (error) {
@@ -79,7 +83,12 @@ function* fetchNextTrades() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqTrades, auth, query, targetPairs, smallestMts, queryLimit)
+    const { result: resulto, error: erroro } = yield call(
+      getReqTrades, auth, query, targetPairs, smallestMts, queryLimit,
+    )
+    const { result = {}, error } = yield call(
+      fetchNext, resulto, erroro, getReqTrades, auth, query, targetPairs, smallestMts, queryLimit,
+    )
     yield put(actions.updateTrades(result, queryLimit, PAGE_SIZE))
 
     if (error) {

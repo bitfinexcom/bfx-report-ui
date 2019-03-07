@@ -12,6 +12,7 @@ import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 import { getPageSize } from 'state/query/utils'
+import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -46,7 +47,10 @@ function* fetchFPayment({ payload: symbol }) {
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, 0, queryLimit)
+    const { result: resulto, error: erroro } = yield call(getReqLedgers, auth, query, targetSymbols, 0, queryLimit)
+    const { result = {}, error } = yield call(
+      fetchNext, resulto, erroro, getReqLedgers, auth, query, targetSymbols, 0, queryLimit,
+    )
     yield put(actions.updateFPayment(result, queryLimit, PAGE_SIZE))
 
     if (error) {
@@ -81,7 +85,12 @@ function* fetchNextFPayment() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqLedgers, auth, query, targetSymbols, smallestMts, queryLimit)
+    const { result: resulto, error: erroro } = yield call(
+      getReqLedgers, auth, query, targetSymbols, smallestMts, queryLimit,
+    )
+    const { result = {}, error } = yield call(
+      fetchNext, resulto, erroro, getReqLedgers, auth, query, targetSymbols, smallestMts, queryLimit,
+    )
     yield put(actions.updateFPayment(result, queryLimit, PAGE_SIZE))
 
     if (error) {
