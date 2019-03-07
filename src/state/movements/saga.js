@@ -22,7 +22,8 @@ const TYPE = queryTypes.MENU_MOVEMENTS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqMovements(auth, query, targetSymbols, smallestMts) {
+// make sure the first params is the `smallestMts` to be processed by fetchNext helper
+function getReqMovements(smallestMts, auth, query, targetSymbols) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetSymbols.length > 0) {
@@ -42,9 +43,9 @@ function* fetchMovements({ payload: symbol }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqMovements, auth, query, targetSymbols, 0)
+    const { result: resulto, error: erroro } = yield call(getReqMovements, 0, auth, query, targetSymbols)
     const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqMovements, auth, query, targetSymbols, 0,
+      fetchNext, resulto, erroro, getReqMovements, 0, auth, query, targetSymbols,
     )
     yield put(actions.updateMovements(result, LIMIT, PAGE_SIZE))
 
@@ -78,9 +79,9 @@ function* fetchNextMovements() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqMovements, auth, query, targetSymbols, smallestMts)
+    const { result: resulto, error: erroro } = yield call(getReqMovements, smallestMts, auth, query, targetSymbols)
     const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqMovements, auth, query, targetSymbols, smallestMts,
+      fetchNext, resulto, erroro, getReqMovements, smallestMts, auth, query, targetSymbols,
     )
     yield put(actions.updateMovements(result, LIMIT, PAGE_SIZE))
 

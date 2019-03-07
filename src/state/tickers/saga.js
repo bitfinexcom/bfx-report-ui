@@ -22,7 +22,8 @@ const TYPE = queryTypes.MENU_TICKERS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqTickers(auth, query, targetPairs, smallestMts) {
+// make sure the first params is the `smallestMts` to be processed by fetchNext helper
+function getReqTickers(smallestMts, auth, query, targetPairs) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetPairs.length > 0) {
@@ -42,8 +43,8 @@ function* fetchTickers({ payload: pair }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqTickers, auth, query, targetPairs, 0)
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTickers, auth, query, targetPairs, 0)
+    const { result: resulto, error: erroro } = yield call(getReqTickers, 0, auth, query, targetPairs)
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTickers, 0, auth, query, targetPairs)
     yield put(actions.updateTickers(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -76,9 +77,9 @@ function* fetchNextTickers() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqTickers, auth, query, targetPairs, smallestMts)
+    const { result: resulto, error: erroro } = yield call(getReqTickers, smallestMts, auth, query, targetPairs)
     const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqTickers, auth, query, targetPairs, smallestMts,
+      fetchNext, resulto, erroro, getReqTickers, smallestMts, auth, query, targetPairs,
     )
     yield put(actions.updateTickers(result, LIMIT, PAGE_SIZE))
 

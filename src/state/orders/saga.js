@@ -21,7 +21,8 @@ import { getOrders, getTargetPairs } from './selectors'
 const TYPE = queryTypes.MENU_ORDERS
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqOrders(auth, query, targetPairs, smallestMts, queryLimit) {
+// make sure the first params is the `smallestMts` to be processed by fetchNext helper
+function getReqOrders(smallestMts, auth, query, targetPairs, queryLimit) {
   const params = getTimeFrame(query, smallestMts)
   if (targetPairs.length > 0) {
     params.symbol = formatRawSymbols(targetPairs)
@@ -45,9 +46,9 @@ function* fetchOrders({ payload: pair }) {
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqOrders, auth, query, targetPairs, 0, queryLimit)
+    const { result: resulto, error: erroro } = yield call(getReqOrders, 0, auth, query, targetPairs, queryLimit)
     const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqOrders, auth, query, targetPairs, 0, queryLimit,
+      fetchNext, resulto, erroro, getReqOrders, 0, auth, query, targetPairs, queryLimit,
     )
     yield put(actions.updateOrders(result, queryLimit, PAGE_SIZE))
 
@@ -84,10 +85,10 @@ function* fetchNextOrders() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(
-      getReqOrders, auth, query, targetPairs, smallestMts, queryLimit,
+      getReqOrders, smallestMts, auth, query, targetPairs, queryLimit,
     )
     const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqOrders, auth, query, targetPairs, smallestMts, queryLimit,
+      fetchNext, resulto, erroro, getReqOrders, smallestMts, auth, query, targetPairs, queryLimit,
     )
     yield put(actions.updateOrders(result, queryLimit, PAGE_SIZE))
 

@@ -21,7 +21,8 @@ import { getTargetSymbols, getFPayment } from './selectors'
 const TYPE = queryTypes.MENU_FPAYMENT
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqLedgers(auth, query, targetSymbols, smallestMts, queryLimit) {
+// make sure the first params is the `smallestMts` to be processed by fetchNext helper
+function getReqLedgers(smallestMts, auth, query, targetSymbols, queryLimit) {
   const params = getTimeFrame(query, smallestMts)
   if (targetSymbols.length > 0) {
     params.symbol = targetSymbols
@@ -47,9 +48,9 @@ function* fetchFPayment({ payload: symbol }) {
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqLedgers, auth, query, targetSymbols, 0, queryLimit)
+    const { result: resulto, error: erroro } = yield call(getReqLedgers, 0, auth, query, targetSymbols, queryLimit)
     const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqLedgers, auth, query, targetSymbols, 0, queryLimit,
+      fetchNext, resulto, erroro, getReqLedgers, 0, auth, query, targetSymbols, queryLimit,
     )
     yield put(actions.updateFPayment(result, queryLimit, PAGE_SIZE))
 
@@ -86,10 +87,10 @@ function* fetchNextFPayment() {
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(
-      getReqLedgers, auth, query, targetSymbols, smallestMts, queryLimit,
+      getReqLedgers, smallestMts, auth, query, targetSymbols, queryLimit,
     )
     const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqLedgers, auth, query, targetSymbols, smallestMts, queryLimit,
+      fetchNext, resulto, erroro, getReqLedgers, smallestMts, auth, query, targetSymbols, queryLimit,
     )
     yield put(actions.updateFPayment(result, queryLimit, PAGE_SIZE))
 

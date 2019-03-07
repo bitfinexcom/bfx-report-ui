@@ -18,14 +18,14 @@ describe('Test fetchNext', () => {
   const hasNextResult = {
     result: {
       res: [],
-      nextPage: true,
+      nextPage: '12345678',
     },
     error: undefined,
   }
   const func = () => {}
 
   it('Test Normal Case', () => {
-    const generator = cloneableGenerator(fetchNext)(normalResult.result, normalResult.error, func, 'some', 'params')
+    const generator = cloneableGenerator(fetchNext)(normalResult.result, normalResult.error, func, 0, 'some', 'params')
     const gen = generator.clone()
 
     expect(gen.next().value).toEqual(normalResult)
@@ -33,7 +33,7 @@ describe('Test fetchNext', () => {
   })
 
   it('Test Error Case', () => {
-    const generator = cloneableGenerator(fetchNext)(errorResult.result, errorResult.error, func, 'some', 'params')
+    const generator = cloneableGenerator(fetchNext)(errorResult.result, errorResult.error, func, 0, 'some', 'params')
     const gen = generator.clone()
 
     expect(gen.next().value).toEqual(errorResult)
@@ -41,34 +41,41 @@ describe('Test fetchNext', () => {
   })
 
   it('Test 1st no data Case', () => {
-    const generator = cloneableGenerator(fetchNext)(hasNextResult.result, hasNextResult.error, func, 'some', 'params')
+    const generator = cloneableGenerator(fetchNext)(
+      hasNextResult.result, hasNextResult.error, func, 0, 'some', 'params',
+    )
     const gen = generator.clone()
 
-    expect(gen.next().value).toEqual(call(func, 'some', 'params'))
+    expect(gen.next().value).toEqual(call(func, hasNextResult.result.nextPage, 'some', 'params'))
     expect(gen.next(normalResult).value)
-      .toEqual(call(fetchNext, normalResult.result, normalResult.error, func, 'some', 'params'))
+      .toEqual(call(fetchNext, normalResult.result, normalResult.error, func,
+        hasNextResult.result.nextPage, 'some', 'params'))
     expect(gen.next().done).toEqual(true)
   })
 
   it('Test 1st and 2nd no data Case', () => {
-    const generator = cloneableGenerator(fetchNext)(hasNextResult.result, hasNextResult.error, func, 'some', 'params')
+    const generator = cloneableGenerator(fetchNext)(
+      hasNextResult.result, hasNextResult.error, func, 0, 'some', 'params',
+    )
     const gen = generator.clone()
 
-    expect(gen.next().value).toEqual(call(func, 'some', 'params'))
+    expect(gen.next().value).toEqual(call(func, hasNextResult.result.nextPage, 'some', 'params'))
     expect(gen.next(hasNextResult).value)
-      .toEqual(call(fetchNext, hasNextResult.result, hasNextResult.error, func, 'some', 'params'))
+      .toEqual(call(fetchNext, hasNextResult.result, hasNextResult.error, func,
+        hasNextResult.result.nextPage, 'some', 'params'))
     expect(gen.next().done).toEqual(true)
   })
 
   it('Test pass more params Case', () => {
     const generator = cloneableGenerator(fetchNext)(
-      hasNextResult.result, hasNextResult.error, func, 'some', 'more', 'params',
+      hasNextResult.result, hasNextResult.error, func, 0, 'some', 'more', 'params',
     )
     const gen = generator.clone()
 
-    expect(gen.next().value).toEqual(call(func, 'some', 'more', 'params'))
+    expect(gen.next().value).toEqual(call(func, hasNextResult.result.nextPage, 'some', 'more', 'params'))
     expect(gen.next(normalResult).value)
-      .toEqual(call(fetchNext, normalResult.result, normalResult.error, func, 'some', 'more', 'params'))
+      .toEqual(call(fetchNext, normalResult.result, normalResult.error, func,
+        hasNextResult.result.nextPage, 'some', 'more', 'params'))
     expect(gen.next().done).toEqual(true)
   })
 })
