@@ -45,7 +45,6 @@ class ToggleMenu extends PureComponent {
     this.handleClickWithdrawals = this.handleClick.bind(this, MENU_WITHDRAWALS)
     this.handleClickPublicTrades = this.handleClick.bind(this, MENU_PUBLIC_TRADES)
     this.handleClickPositions = this.handleClick.bind(this, MENU_POSITIONS)
-    this.handleClickPositionsAudit = this.handleClick.bind(this, MENU_POSITIONS_AUDIT)
     this.handleClickTickers = this.handleClick.bind(this, MENU_TICKERS)
     this.handleClickWallets = this.handleClick.bind(this, MENU_WALLETS)
   }
@@ -111,14 +110,7 @@ class ToggleMenu extends PureComponent {
           text={isIconMode ? '' : t('positions.title')}
           title={isIconMode ? t('positions.title') : ''}
           onClick={this.handleClickPositions}
-          active={target === MENU_POSITIONS}
-        />
-        <MenuItem
-          icon={getIcon(MENU_POSITIONS_AUDIT)}
-          text={isIconMode ? '' : t('paudit.title')}
-          title={isIconMode ? t('paudit.title') : ''}
-          onClick={this.handleClickPositionsAudit}
-          active={target === MENU_POSITIONS_AUDIT}
+          active={target === MENU_POSITIONS || target === MENU_POSITIONS_AUDIT}
         />
         <MenuItem
           icon={getIcon(MENU_WALLETS)}
