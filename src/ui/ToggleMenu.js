@@ -25,6 +25,7 @@ const {
   MENU_TICKERS,
   MENU_TRADES,
   MENU_POSITIONS,
+  MENU_POSITIONS_ACTIVE,
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_TRADES,
   MENU_WITHDRAWALS,
@@ -110,7 +111,9 @@ class ToggleMenu extends PureComponent {
           text={isIconMode ? '' : t('positions.title')}
           title={isIconMode ? t('positions.title') : ''}
           onClick={this.handleClickPositions}
-          active={target === MENU_POSITIONS || target === MENU_POSITIONS_AUDIT}
+          active={target === MENU_POSITIONS
+            || target === MENU_POSITIONS_AUDIT
+            || target === MENU_POSITIONS_ACTIVE}
         />
         <MenuItem
           icon={getIcon(MENU_WALLETS)}

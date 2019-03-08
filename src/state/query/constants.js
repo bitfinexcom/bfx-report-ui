@@ -10,6 +10,7 @@ export default {
   MENU_TICKERS: 'tickers',
   MENU_TRADES: 'trades',
   MENU_POSITIONS: 'positions',
+  MENU_POSITIONS_ACTIVE: 'activepositions',
   MENU_POSITIONS_AUDIT: 'paudit',
   MENU_PUBLIC_TRADES: 'publictrades',
   MENU_WALLETS: 'wallets',

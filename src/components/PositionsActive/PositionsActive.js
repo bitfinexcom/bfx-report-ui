@@ -29,21 +29,21 @@ import {
   handleRemovePairFilter,
 } from 'state/utils'
 
-import getColumns from './Positions.columns'
-import { propTypes, defaultProps } from './Positions.props'
+import getColumns from 'components/Positions/Positions.columns'
+import { propTypes, defaultProps } from 'components/Positions/Positions.props'
 
-const TYPE = queryConstants.MENU_POSITIONS
+const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-class Positions extends PureComponent {
+class PositionsActive extends PureComponent {
   constructor(props) {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
     this.handleTagRemove = this.handleTagRemove.bind(this)
     this.jumpToPositionsAudit = this.jumpToPositionsAudit.bind(this)
-    this.jumpToActivePositions = this.jumpToActivePositions.bind(this)
+    this.jumpToPositions = this.jumpToPositions.bind(this)
   }
 
   componentDidMount() {
@@ -77,10 +77,10 @@ class Positions extends PureComponent {
       + `${id}${getNoAuthTokenUrlString(history.location.search)}`)
   }
 
-  jumpToActivePositions(e) {
+  jumpToPositions(e) {
     e.preventDefault()
     const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_ACTIVE)}/`
+    history.push(`${getPath(queryConstants.MENU_POSITIONS)}/`
       + `${getNoAuthTokenUrlString(history.location.search)}`)
   }
 
@@ -142,8 +142,8 @@ class Positions extends PureComponent {
 
     const renderButtonGroup = (
       <ButtonGroup>
-        <Button active>{t('positions.closed')}</Button>
-        <Button onClick={this.jumpToActivePositions}>{t('positions.active')}</Button>
+        <Button onClick={this.jumpToPositions}>{t('positions.closed')}</Button>
+        <Button active>{t('positions.active')}</Button>
       </ButtonGroup>
     )
 
@@ -197,7 +197,7 @@ class Positions extends PureComponent {
   }
 }
 
-Positions.propTypes = propTypes
-Positions.defaultProps = defaultProps
+PositionsActive.propTypes = propTypes
+PositionsActive.defaultProps = defaultProps
 
-export default withNamespaces('translations')(Positions)
+export default withNamespaces('translations')(PositionsActive)

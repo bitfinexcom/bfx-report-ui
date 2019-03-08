@@ -5,7 +5,6 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import queryConstants from 'state/query/constants'
 import { amountStyle } from 'ui/utils'
 
 export default function getColumns(props) {
@@ -14,7 +13,6 @@ export default function getColumns(props) {
     getFullTime,
     t,
     onIdClick,
-    target,
     timeOffset,
   } = props
 
@@ -32,19 +30,13 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         /* eslint-disable jsx-a11y/anchor-is-valid */
-        return target === queryConstants.MENU_POSITIONS
-          ? (
-            <Cell tooltip={id}>
-              <Fragment>
-                <a href='#' onClick={onIdClick} value={id}>{id}</a>
-              </Fragment>
-            </Cell>
-          )
-          : (
-            <Cell tooltip={id}>
-              {id}
-            </Cell>
-          )
+        return (
+          <Cell tooltip={id}>
+            <Fragment>
+              <a href='#' onClick={onIdClick} value={id}>{id}</a>
+            </Fragment>
+          </Cell>
+        )
         /* eslint-enable jsx-a11y/anchor-is-valid */
       },
       copyText: rowIndex => filteredData[rowIndex].id,
