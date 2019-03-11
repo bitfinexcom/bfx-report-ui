@@ -145,7 +145,7 @@
   "positions": {
     "title": "倉位",
     "active": "活躍",
-    "closed": "完成",
+    "closed": "已關閉",
     "column": {
       "pair": "對",
       "amount": "數量",
