@@ -23,8 +23,12 @@ const TYPE = queryTypes.MENU_POSITIONS_AUDIT
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-// make sure the first params is the `smallestMts` to be processed by fetchNext helper
-function getReqPositionsAudit(smallestMts, auth, query, targetIds) {
+function getReqPositionsAudit({
+  smallestMts,
+  auth,
+  query,
+  targetIds,
+}) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetIds) {
@@ -50,10 +54,18 @@ function* fetchPositionsAudit({ payload: ids }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, 0, auth, query, targetIds)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqPositionsAudit, 0, auth, query, targetIds,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetIds,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositionsAudit, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetIds,
+    })
     yield put(actions.updatePAudit(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -86,10 +98,18 @@ function* fetchNextPositionsAudit() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, smallestMts, auth, query, targetIds)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqPositionsAudit, smallestMts, auth, query, targetIds,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, {
+      smallestMts,
+      auth,
+      query,
+      targetIds,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositionsAudit, {
+      smallestMts,
+      auth,
+      query,
+      targetIds,
+    })
     yield put(actions.updatePAudit(result, LIMIT, PAGE_SIZE))
 
     if (error) {

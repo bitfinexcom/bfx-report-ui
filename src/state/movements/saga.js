@@ -22,8 +22,12 @@ const TYPE = queryTypes.MENU_MOVEMENTS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-// make sure the first params is the `smallestMts` to be processed by fetchNext helper
-function getReqMovements(smallestMts, auth, query, targetSymbols) {
+function getReqMovements({
+  smallestMts,
+  auth,
+  query,
+  targetSymbols,
+}) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetSymbols.length > 0) {
@@ -43,10 +47,18 @@ function* fetchMovements({ payload: symbol }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqMovements, 0, auth, query, targetSymbols)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqMovements, 0, auth, query, targetSymbols,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqMovements, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqMovements, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+    })
     yield put(actions.updateMovements(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -79,10 +91,18 @@ function* fetchNextMovements() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqMovements, smallestMts, auth, query, targetSymbols)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqMovements, smallestMts, auth, query, targetSymbols,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqMovements, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqMovements, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+    })
     yield put(actions.updateMovements(result, LIMIT, PAGE_SIZE))
 
     if (error) {

@@ -22,8 +22,12 @@ const TYPE = queryTypes.MENU_PUBLIC_TRADES
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-// make sure the first params is the `smallestMts` to be processed by fetchNext helper
-function getReqPublicTrades(smallestMts, auth, query, targetPair) {
+function getReqPublicTrades({
+  smallestMts,
+  auth,
+  query,
+  targetPair,
+}) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetPair) {
@@ -43,10 +47,18 @@ function* fetchPublicTrades({ payload: pair }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqPublicTrades, 0, auth, query, targetPair)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqPublicTrades, 0, auth, query, targetPair,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqPublicTrades, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetPair,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicTrades, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetPair,
+    })
     yield put(actions.updatePublicTrades(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -79,10 +91,18 @@ function* fetchNextPublicTrades() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqPublicTrades, smallestMts, auth, query, targetPair)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqPublicTrades, smallestMts, auth, query, targetPair,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqPublicTrades, {
+      smallestMts,
+      auth,
+      query,
+      targetPair,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicTrades, {
+      smallestMts,
+      auth,
+      query,
+      targetPair,
+    })
     yield put(actions.updatePublicTrades(result, LIMIT, PAGE_SIZE))
 
     if (error) {

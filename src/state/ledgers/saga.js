@@ -21,8 +21,13 @@ import { getTargetSymbols, getLedgers } from './selectors'
 const TYPE = queryTypes.MENU_LEDGERS
 const PAGE_SIZE = getPageSize(TYPE)
 
-// make sure the first params is the `smallestMts` to be processed by fetchNext helper
-function getReqLedgers(smallestMts, auth, query, targetSymbols, queryLimit) {
+function getReqLedgers({
+  smallestMts,
+  auth,
+  query,
+  targetSymbols,
+  queryLimit,
+}) {
   const params = getTimeFrame(query, smallestMts)
   if (targetSymbols.length > 0) {
     params.symbol = targetSymbols
@@ -46,10 +51,20 @@ function* fetchLedgers({ payload: symbol }) {
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqLedgers, 0, auth, query, targetSymbols, queryLimit)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqLedgers, 0, auth, query, targetSymbols, queryLimit,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqLedgers, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+      queryLimit,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqLedgers, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+      queryLimit,
+    })
     yield put(actions.updateLedgers(result, queryLimit, PAGE_SIZE))
 
     if (error) {
@@ -84,12 +99,20 @@ function* fetchNextLedgers() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto = {}, error: erroro } = yield call(
-      getReqLedgers, smallestMts, auth, query, targetSymbols, queryLimit,
-    )
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqLedgers, smallestMts, auth, query, targetSymbols, queryLimit,
-    )
+    const { result: resulto = {}, error: erroro } = yield call(getReqLedgers, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+      queryLimit,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqLedgers, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+      queryLimit,
+    })
     yield put(actions.updateLedgers(result, queryLimit, PAGE_SIZE))
 
     if (error) {

@@ -24,8 +24,12 @@ const TYPE = queryTypes.MENU_POSITIONS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-// make sure the first params is the `smallestMts` to be processed by fetchNext helper
-function getReqPositions(smallestMts, auth, query, targetPairs) {
+function getReqPositions({
+  smallestMts,
+  auth,
+  query,
+  targetPairs,
+}) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetPairs.length > 0) {
@@ -45,8 +49,18 @@ function* fetchPositions({ payload: pair }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqPositions, 0, auth, query, targetPairs)
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, 0, auth, query, targetPairs)
+    const { result: resulto, error: erroro } = yield call(getReqPositions, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetPairs,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetPairs,
+    })
     yield put(actions.updatePositions(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -79,10 +93,18 @@ function* fetchNextPositions() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqPositions, smallestMts, auth, query, targetPairs)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqPositions, smallestMts, auth, query, targetPairs,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqPositions, {
+      smallestMts,
+      auth,
+      query,
+      targetPairs,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, {
+      smallestMts,
+      auth,
+      query,
+      targetPairs,
+    })
     yield put(actions.updatePositions(result, LIMIT, PAGE_SIZE))
 
     if (error) {

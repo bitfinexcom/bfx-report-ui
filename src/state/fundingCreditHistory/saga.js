@@ -22,8 +22,12 @@ const TYPE = queryTypes.MENU_FCREDIT
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-// make sure the first params is the `smallestMts` to be processed by fetchNext helper
-function getReqFCredit(smallestMts, auth, query, targetSymbols) {
+function getReqFCredit({
+  smallestMts,
+  auth,
+  query,
+  targetSymbols,
+}) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetSymbols.length > 0) {
@@ -43,8 +47,18 @@ function* fetchFCredit({ payload: symbol }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqFCredit, 0, auth, query, targetSymbols)
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFCredit, 0, auth, query, targetSymbols)
+    const { result: resulto, error: erroro } = yield call(getReqFCredit, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFCredit, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+    })
     yield put(actions.updateFCredit(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -77,10 +91,18 @@ function* fetchNextFCredit() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqFCredit, smallestMts, auth, query, targetSymbols)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqFCredit, smallestMts, auth, query, targetSymbols,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqFCredit, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFCredit, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+    })
     yield put(actions.updateFCredit(result, LIMIT, PAGE_SIZE))
 
     if (error) {

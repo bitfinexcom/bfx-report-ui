@@ -21,8 +21,13 @@ import { getTrades, getTargetPairs } from './selectors'
 const TYPE = queryTypes.MENU_TRADES
 const PAGE_SIZE = getPageSize(TYPE)
 
-// make sure the first params is the `smallestMts` to be processed by fetchNext helper
-function getReqTrades(smallestMts, auth, query, targetPairs, queryLimit) {
+function getReqTrades({
+  smallestMts,
+  auth,
+  query,
+  targetPairs,
+  queryLimit,
+}) {
   const params = getTimeFrame(query, smallestMts)
   if (targetPairs.length > 0) {
     params.symbol = formatRawSymbols(targetPairs)
@@ -46,10 +51,20 @@ function* fetchTrades({ payload: pair }) {
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqTrades, 0, auth, query, targetPairs, queryLimit)
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqTrades, 0, auth, query, targetPairs, queryLimit,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqTrades, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetPairs,
+      queryLimit,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTrades, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetPairs,
+      queryLimit,
+    })
     yield put(actions.updateTrades(result, queryLimit, PAGE_SIZE))
 
     if (error) {
@@ -84,12 +99,20 @@ function* fetchNextTrades() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(
-      getReqTrades, smallestMts, auth, query, targetPairs, queryLimit,
-    )
-    const { result = {}, error } = yield call(
-      fetchNext, resulto, erroro, getReqTrades, smallestMts, auth, query, targetPairs, queryLimit,
-    )
+    const { result: resulto, error: erroro } = yield call(getReqTrades, {
+      smallestMts,
+      auth,
+      query,
+      targetPairs,
+      queryLimit,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTrades, {
+      smallestMts,
+      auth,
+      query,
+      targetPairs,
+      queryLimit,
+    })
     yield put(actions.updateTrades(result, queryLimit, PAGE_SIZE))
 
     if (error) {
