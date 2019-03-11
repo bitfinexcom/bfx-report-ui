@@ -12,6 +12,7 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -21,7 +22,12 @@ const TYPE = queryTypes.MENU_FOFFER
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqFOffer(auth, query, targetSymbols, smallestMts) {
+function getReqFOffer({
+  smallestMts,
+  auth,
+  query,
+  targetSymbols,
+}) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetSymbols.length > 0) {
@@ -41,7 +47,18 @@ function* fetchFOffer({ payload: symbol }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbols, 0)
+    const { result: resulto, error: erroro } = yield call(getReqFOffer, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFOffer, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+    })
     yield put(actions.updateFOffer(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -74,7 +91,18 @@ function* fetchNextFOffer() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFOffer, auth, query, targetSymbols, smallestMts)
+    const { result: resulto, error: erroro } = yield call(getReqFOffer, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFOffer, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+    })
     yield put(actions.updateFOffer(result, LIMIT, PAGE_SIZE))
 
     if (error) {

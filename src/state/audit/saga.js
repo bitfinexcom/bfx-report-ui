@@ -13,6 +13,7 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -22,7 +23,12 @@ const TYPE = queryTypes.MENU_POSITIONS_AUDIT
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqPositionsAudit(auth, query, targetIds, smallestMts) {
+function getReqPositionsAudit({
+  smallestMts,
+  auth,
+  query,
+  targetIds,
+}) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetIds) {
@@ -48,7 +54,18 @@ function* fetchPositionsAudit({ payload: ids }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqPositionsAudit, auth, query, targetIds, 0)
+    const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetIds,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositionsAudit, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetIds,
+    })
     yield put(actions.updatePAudit(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -81,7 +98,18 @@ function* fetchNextPositionsAudit() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqPositionsAudit, auth, query, targetIds, smallestMts)
+    const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, {
+      smallestMts,
+      auth,
+      query,
+      targetIds,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositionsAudit, {
+      smallestMts,
+      auth,
+      query,
+      targetIds,
+    })
     yield put(actions.updatePAudit(result, LIMIT, PAGE_SIZE))
 
     if (error) {

@@ -12,6 +12,7 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -21,7 +22,12 @@ const TYPE = queryTypes.MENU_FLOAN
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqFLoan(auth, query, targetSymbols, smallestMts) {
+function getReqFLoan({
+  smallestMts,
+  auth,
+  query,
+  targetSymbols,
+}) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetSymbols.length > 0) {
@@ -41,7 +47,18 @@ function* fetchFLoan({ payload: symbol }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFLoan, auth, query, targetSymbols, 0)
+    const { result: resulto, error: erroro } = yield call(getReqFLoan, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFLoan, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetSymbols,
+    })
     yield put(actions.updateFLoan(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -74,7 +91,18 @@ function* fetchNextFLoan() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqFLoan, auth, query, targetSymbols, smallestMts)
+    const { result: resulto, error: erroro } = yield call(getReqFLoan, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFLoan, {
+      smallestMts,
+      auth,
+      query,
+      targetSymbols,
+    })
     yield put(actions.updateFLoan(result, LIMIT, PAGE_SIZE))
 
     if (error) {

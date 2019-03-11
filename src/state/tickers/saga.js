@@ -12,6 +12,7 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -21,7 +22,12 @@ const TYPE = queryTypes.MENU_TICKERS
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqTickers(auth, query, targetPairs, smallestMts) {
+function getReqTickers({
+  smallestMts,
+  auth,
+  query,
+  targetPairs,
+}) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetPairs.length > 0) {
@@ -41,7 +47,18 @@ function* fetchTickers({ payload: pair }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqTickers, auth, query, targetPairs, 0)
+    const { result: resulto, error: erroro } = yield call(getReqTickers, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetPairs,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTickers, {
+      smallestMts: 0,
+      auth,
+      query,
+      targetPairs,
+    })
     yield put(actions.updateTickers(result, LIMIT, PAGE_SIZE))
 
     if (error) {
@@ -74,7 +91,18 @@ function* fetchNextTickers() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result = [], error } = yield call(getReqTickers, auth, query, targetPairs, smallestMts)
+    const { result: resulto, error: erroro } = yield call(getReqTickers, {
+      smallestMts,
+      auth,
+      query,
+      targetPairs,
+    })
+    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTickers, {
+      smallestMts,
+      auth,
+      query,
+      targetPairs,
+    })
     yield put(actions.updateTickers(result, LIMIT, PAGE_SIZE))
 
     if (error) {
