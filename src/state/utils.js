@@ -168,15 +168,21 @@ export function getCurrentEntries(entries, offset, limit, pageOffset, pageSize) 
     : entries.slice(offset + pageOffset - limit, offset + pageOffset - limit + pageSize)
 }
 
-export function momentFormatter(format) {
-  return {
-    formatDate: date => moment(date).format(format),
-    parseDate: str => moment(str, format).toDate(),
-    placeholder: `${format} (moment)`,
-  }
+export function momentFormatter(format, timezone) {
+  return timezone
+    ? {
+      formatDate: date => moment.tz(date, timezone).format(format),
+      parseDate: str => moment.tz(str, format, timezone).toDate(),
+      placeholder: `${format} (moment)`,
+    }
+    : {
+      formatDate: date => moment(date).format(format),
+      parseDate: str => moment(str, format).toDate(),
+      placeholder: `${format} (moment)`,
+    }
 }
 
-export const DATE_FORMAT = momentFormatter('YYYY-MM-DD HH:mm:ss')
+export const DEFAULT_DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
 export function getSideMsg(side) {
   let msg
@@ -199,7 +205,7 @@ export function getParsedUrlParams(searchUrl) {
 export default {
   checkFetch,
   checkEmail,
-  DATE_FORMAT,
+  DEFAULT_DATETIME_FORMAT,
   makeFetchCall,
   formatDate,
   formatTime,

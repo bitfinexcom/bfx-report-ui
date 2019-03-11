@@ -15,6 +15,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   setTimestamp: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  timezone: PropTypes.string,
 }
 
 export const defaultProps = {
@@ -24,4 +25,5 @@ export const defaultProps = {
   loading: true,
   refresh: () => {},
   setTimestamp: () => {},
+  timezone: '',
 }

@@ -14,7 +14,7 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import { parsePairTag } from 'state/symbols/utils'
 import mode from 'state/sync/constants'
 import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
-import { DATE_FORMAT } from 'state/utils'
+import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './SyncPrefButton.props'
@@ -101,12 +101,14 @@ class SyncPrefButton extends PureComponent {
       syncPairs,
       t,
       textOnly,
+      timezone,
     } = this.props
     const {
       isOpen,
       tempPairs,
       tempTime,
     } = this.state
+    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
     const renderInSyncWarning = syncMode === mode.MODE_SYNCING
       ? (
         <Fragment>
@@ -176,8 +178,8 @@ class SyncPrefButton extends PureComponent {
                 </div>
                 <div className={dialogFieldStyle}>
                   <DateInput
-                    formatDate={DATE_FORMAT.formatDate}
-                    parseDate={DATE_FORMAT.parseDate}
+                    formatDate={formatDate}
+                    parseDate={parseDate}
                     onChange={this.handleDateChange}
                     value={tempTime}
                   />

@@ -10,7 +10,7 @@ import {
 } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
 
-import { DATE_FORMAT } from 'state/utils'
+import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
 
 const SMALL_DATE_RANGE_POPOVER_PROPS = {
   position: Position.TOP,
@@ -30,12 +30,14 @@ class CustomDialog extends PureComponent {
       startQuery,
       startDate,
       t,
+      timezone,
     } = this.props
+    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
     const commonDateRangeProps = {
       allowSingleDayRange: true,
       closeOnSelection: true,
-      formatDate: DATE_FORMAT.formatDate,
-      parseDate: DATE_FORMAT.parseDate,
+      formatDate,
+      parseDate,
       onChange: handleRangeChange,
       value: [startDate, endDate],
       maxDate: this.maxDate,
@@ -89,12 +91,14 @@ CustomDialog.propTypes = {
   isCustomOpen: PropTypes.bool.isRequired,
   startQuery: PropTypes.func.isRequired,
   startDate: PropTypes.instanceOf(Date),
+  timezone: PropTypes.string,
   endDate: PropTypes.instanceOf(Date),
 }
 
 CustomDialog.defaultProps = {
   startDate: null,
   endDate: null,
+  timezone: '',
 }
 
 export default withNamespaces('translations')(CustomDialog)

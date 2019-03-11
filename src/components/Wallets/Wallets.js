@@ -16,7 +16,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import queryConstants from 'state/query/constants'
-import { DATE_FORMAT } from 'state/utils'
+import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
 import { isValidTimeStamp } from 'state/query/utils'
 import { platform } from 'var/config'
 
@@ -80,6 +80,7 @@ class Wallets extends PureComponent {
       loading,
       refresh,
       t,
+      timezone,
     } = this.props
     const { timestamp } = this.state
     const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
@@ -93,6 +94,7 @@ class Wallets extends PureComponent {
     const fundingRows = fundingData.length
     const hasNewTime = timestamp && currentTime !== timestamp.getTime()
     const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
+    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
 
     const renderTimeSelection = (
       <Fragment>
@@ -106,8 +108,8 @@ class Wallets extends PureComponent {
           usePortal
         >
           <DateInput
-            formatDate={DATE_FORMAT.formatDate}
-            parseDate={DATE_FORMAT.parseDate}
+            formatDate={formatDate}
+            parseDate={parseDate}
             onChange={this.handleDateChange}
             value={timestamp}
             timePrecision={timePrecision}
