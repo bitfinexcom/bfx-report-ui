@@ -80,7 +80,7 @@ class Positions extends PureComponent {
   jumpToActivePositions(e) {
     e.preventDefault()
     const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_ACTIVE)}/`
+    history.push(`${getPath(queryConstants.MENU_POSITIONS_ACTIVE)}`
       + `${getNoAuthTokenUrlString(history.location.search)}`)
   }
 

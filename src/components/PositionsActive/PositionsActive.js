@@ -47,10 +47,10 @@ class PositionsActive extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchPositions, match } = this.props
+    const { loading, fetchApositions, match } = this.props
     if (loading) {
       const pair = (match.params && match.params.pair) || ''
-      fetchPositions(pair)
+      fetchApositions(pair)
     }
   }
 
@@ -136,6 +136,7 @@ class PositionsActive extends PureComponent {
           existingPairs={existingPairs}
           onPairSelect={this.handleClick}
           handleTagRemove={this.handleTagRemove}
+          disabled
         />
       </Fragment>
     )

@@ -266,12 +266,7 @@ class Main extends PureComponent {
               component={() => <PositionsAudit handleClickExport={this.handleClickExport} />}
             />
             <Route
-              exact
               path={getPath(MENU_POSITIONS_ACTIVE)}
-              component={() => <PositionsActive handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_POSITIONS_ACTIVE)}/:pair`}
               component={() => <PositionsActive handleClickExport={this.handleClickExport} />}
             />
             <Route
