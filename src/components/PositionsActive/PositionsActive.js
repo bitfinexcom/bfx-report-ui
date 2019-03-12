@@ -8,12 +8,10 @@ import {
 } from '@blueprintjs/core'
 
 import Pagination from 'ui/Pagination'
-import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import {
@@ -29,28 +27,28 @@ import {
   handleRemovePairFilter,
 } from 'state/utils'
 
-import getColumns from './Positions.columns'
-import { propTypes, defaultProps } from './Positions.props'
+import getColumns from 'components/Positions/Positions.columns'
+import { propTypes, defaultProps } from 'components/Positions/Positions.props'
 
-const TYPE = queryConstants.MENU_POSITIONS
+const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-class Positions extends PureComponent {
+class PositionsActive extends PureComponent {
   constructor(props) {
     super(props)
     this.handlers = {}
     this.handleClick = this.handleClick.bind(this)
     this.handleTagRemove = this.handleTagRemove.bind(this)
     this.jumpToPositionsAudit = this.jumpToPositionsAudit.bind(this)
-    this.jumpToActivePositions = this.jumpToActivePositions.bind(this)
+    this.jumpToPositions = this.jumpToPositions.bind(this)
   }
 
   componentDidMount() {
-    const { loading, fetchPositions, match } = this.props
+    const { loading, fetchActivepositions, match } = this.props
     if (loading) {
       const pair = (match.params && match.params.pair) || ''
-      fetchPositions(pair)
+      fetchActivepositions(pair)
     }
   }
 
@@ -77,16 +75,15 @@ class Positions extends PureComponent {
       + `${id}${getNoAuthTokenUrlString(history.location.search)}`)
   }
 
-  jumpToActivePositions(e) {
+  jumpToPositions(e) {
     e.preventDefault()
     const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_ACTIVE)}`
+    history.push(`${getPath(queryConstants.MENU_POSITIONS)}/`
       + `${getNoAuthTokenUrlString(history.location.search)}`)
   }
 
   render() {
     const {
-      existingPairs,
       fetchNext,
       fetchPrev,
       getFullTime,
@@ -99,7 +96,6 @@ class Positions extends PureComponent {
       loading,
       refresh,
       t,
-      targetPairs,
       nextPage,
       timeOffset,
     } = this.props
@@ -128,22 +124,10 @@ class Positions extends PureComponent {
       />
     )
 
-    const renderPairSelector = (
-      <Fragment>
-          &nbsp;
-        <MultiPairSelector
-          currentFilters={targetPairs}
-          existingPairs={existingPairs}
-          onPairSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
-        />
-      </Fragment>
-    )
-
     const renderButtonGroup = (
       <ButtonGroup>
-        <Button active>{t('positions.closed')}</Button>
-        <Button onClick={this.jumpToActivePositions}>{t('positions.active')}</Button>
+        <Button onClick={this.jumpToPositions}>{t('positions.closed')}</Button>
+        <Button active>{t('positions.active')}</Button>
       </ButtonGroup>
     )
 
@@ -157,9 +141,6 @@ class Positions extends PureComponent {
         <Fragment>
           <h4>
             {t('positions.title')}
-            &nbsp;
-            <TimeRange />
-            {renderPairSelector}
           </h4>
           {renderButtonGroup}
           <br />
@@ -172,9 +153,6 @@ class Positions extends PureComponent {
         <Fragment>
           <h4>
             {t('positions.title')}
-            &nbsp;
-            <TimeRange />
-            {renderPairSelector}
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;
@@ -199,7 +177,7 @@ class Positions extends PureComponent {
   }
 }
 
-Positions.propTypes = propTypes
-Positions.defaultProps = defaultProps
+PositionsActive.propTypes = propTypes
+PositionsActive.defaultProps = defaultProps
 
-export default withNamespaces('translations')(Positions)
+export default withNamespaces('translations')(PositionsActive)

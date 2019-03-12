@@ -1,4 +1,7 @@
 {
+  "activepositions": {
+    "title": "Active Positions"
+  },
   "auth": {
     "auth": "Auth",
     "title": "Please Login",
@@ -144,6 +147,8 @@
   },
   "positions": {
     "title": "Positions",
+    "active": "Active",
+    "closed": "Closed",
     "column": {
       "pair": "PAIR",
       "amount": "AMOUNT",

@@ -1,4 +1,7 @@
 {
+  "activepositions": {
+    "title": "活躍的倉位"
+  },
   "auth": {
     "auth": "驗證",
     "title": "請先登入",
@@ -144,6 +147,8 @@
   },
   "positions": {
     "title": "倉位",
+    "active": "活躍",
+    "closed": "已關閉",
     "column": {
       "pair": "對",
       "amount": "數量",

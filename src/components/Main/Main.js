@@ -10,6 +10,7 @@ import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import Positions from 'components/Positions'
+import PositionsActive from 'components/PositionsActive'
 import PositionsAudit from 'components/PositionsAudit'
 import PublicTrades from 'components/PublicTrades'
 import Tickers from 'components/Tickers'
@@ -35,6 +36,7 @@ const {
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
   MENU_POSITIONS,
+  MENU_POSITIONS_ACTIVE,
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
@@ -262,6 +264,10 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}
               component={() => <PositionsAudit handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={getPath(MENU_POSITIONS_ACTIVE)}
+              component={() => <PositionsActive handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
