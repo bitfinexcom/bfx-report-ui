@@ -1,4 +1,7 @@
 {
+  "activepositions": {
+    "title": "Active Positions"
+  },
   "auth": {
     "auth": "Auth",
     "title": "Please Login",

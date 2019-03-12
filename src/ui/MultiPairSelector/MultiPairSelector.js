@@ -14,7 +14,6 @@ class MultiPairSelector extends PureComponent {
   render() {
     const {
       currentFilters,
-      disabled,
       existingPairs,
       handleTagRemove,
       onPairSelect,
@@ -49,7 +48,7 @@ class MultiPairSelector extends PureComponent {
     return (
       <MultiSelect
         className='bitfinex-multi-select'
-        disabled={pairs.length === 0 || disabled}
+        disabled={pairs.length === 0}
         placeholder={t('selector.filter.pair')}
         items={pairs || existingPairs}
         itemRenderer={renderPair}

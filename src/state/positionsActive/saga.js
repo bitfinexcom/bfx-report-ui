@@ -7,13 +7,12 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbols, getSymbolsURL, getPairsFromUrlParam } from 'state/symbols/utils'
+import { getSymbolsURL, getPairsFromUrlParam } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getQuery } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
-import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -23,15 +22,8 @@ const TYPE = queryTypes.MENU_POSITIONS_ACTIVE
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqPositions({
-  smallestMts, auth, query, targetPairs,
-}) {
-  const params = getTimeFrame(query, smallestMts)
-  params.limit = LIMIT
-  if (targetPairs.length > 0) {
-    params.symbol = formatRawSymbols(targetPairs)
-  }
-  return makeFetchCall('getActivePositions', auth, params)
+function getReqPositions({ auth }) {
+  return makeFetchCall('getActivePositions', auth)
 }
 
 function* fetchPositions({ payload: pair }) {
@@ -45,20 +37,13 @@ function* fetchPositions({ payload: pair }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqPositions, {
+    const { result, error } = yield call(getReqPositions, {
       smallestMts: 0,
       auth,
       query,
       targetPairs,
     })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, {
-      smallestMts: 0,
-      auth,
-      query,
-      targetPairs,
-    })
-    yield put(actions.updatePositions(result, LIMIT, PAGE_SIZE))
-
+    yield put(actions.updateAPositions(result, LIMIT, PAGE_SIZE))
     if (error) {
       yield put(actions.fetchFail({
         id: 'status.fail',
@@ -89,19 +74,13 @@ function* fetchNextPositions() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqPositions, {
+    const { result, error } = yield call(getReqPositions, {
       smallestMts,
       auth,
       query,
       targetPairs,
     })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, {
-      smallestMts,
-      auth,
-      query,
-      targetPairs,
-    })
-    yield put(actions.updatePositions(result, LIMIT, PAGE_SIZE))
+    yield put(actions.updateAPositions(result, LIMIT, PAGE_SIZE))
 
     if (error) {
       yield put(actions.fetchFail({

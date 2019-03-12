@@ -1,4 +1,7 @@
 {
+  "activepositions": {
+    "title": "活躍的倉位"
+  },
   "auth": {
     "auth": "驗證",
     "title": "請先登入",

@@ -33,8 +33,7 @@ export function positionsActiveReducer(state = initialState, action) {
           dataReceived: true,
         }
       }
-      const { data, limit, pageSize } = payload
-      const { res, nextPage } = data
+      const { data: res, limit, pageSize } = payload
       const { existingPairs } = state
       const updatePairs = [...existingPairs]
       let smallestMts
@@ -60,9 +59,7 @@ export function positionsActiveReducer(state = initialState, action) {
           updatePairs.push(internalPair)
         }
         // log smallest mts
-        if (nextPage === false
-          && (!smallestMts || smallestMts > mtsUpdate)
-        ) {
+        if (!smallestMts || smallestMts > mtsUpdate) {
           smallestMts = mtsUpdate
         }
         return {
@@ -88,11 +85,10 @@ export function positionsActiveReducer(state = initialState, action) {
         dataReceived: true,
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
-        smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
+        smallestMts: smallestMts - 1,
         offset,
         pageOffset,
         pageLoading: false,
-        nextPage,
       }
     }
     case types.FETCH_FAIL:

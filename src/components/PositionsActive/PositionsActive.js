@@ -8,12 +8,10 @@ import {
 } from '@blueprintjs/core'
 
 import Pagination from 'ui/Pagination'
-import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import {
@@ -47,10 +45,10 @@ class PositionsActive extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchApositions, match } = this.props
+    const { loading, fetchActivepositions, match } = this.props
     if (loading) {
       const pair = (match.params && match.params.pair) || ''
-      fetchApositions(pair)
+      fetchActivepositions(pair)
     }
   }
 
@@ -86,7 +84,6 @@ class PositionsActive extends PureComponent {
 
   render() {
     const {
-      existingPairs,
       fetchNext,
       fetchPrev,
       getFullTime,
@@ -99,7 +96,6 @@ class PositionsActive extends PureComponent {
       loading,
       refresh,
       t,
-      targetPairs,
       nextPage,
       timeOffset,
     } = this.props
@@ -128,19 +124,6 @@ class PositionsActive extends PureComponent {
       />
     )
 
-    const renderPairSelector = (
-      <Fragment>
-          &nbsp;
-        <MultiPairSelector
-          currentFilters={targetPairs}
-          existingPairs={existingPairs}
-          onPairSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
-          disabled
-        />
-      </Fragment>
-    )
-
     const renderButtonGroup = (
       <ButtonGroup>
         <Button onClick={this.jumpToPositions}>{t('positions.closed')}</Button>
@@ -158,11 +141,10 @@ class PositionsActive extends PureComponent {
         <Fragment>
           <h4>
             {t('positions.title')}
-            &nbsp;
-            <TimeRange />
-            {renderPairSelector}
           </h4>
           {renderButtonGroup}
+          <br />
+          <br />
           <NoData />
         </Fragment>
       )
@@ -171,9 +153,6 @@ class PositionsActive extends PureComponent {
         <Fragment>
           <h4>
             {t('positions.title')}
-            &nbsp;
-            <TimeRange />
-            {renderPairSelector}
             &nbsp;
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;

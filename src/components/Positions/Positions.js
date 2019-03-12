@@ -162,6 +162,8 @@ class Positions extends PureComponent {
             {renderPairSelector}
           </h4>
           {renderButtonGroup}
+          <br />
+          <br />
           <NoData />
         </Fragment>
       )
