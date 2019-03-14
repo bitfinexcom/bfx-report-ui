@@ -19,6 +19,7 @@
   "column":{
     "id": "#"
   },
+  "copy": "Copy",
   "deposits": {
     "title": "Deposits"
   },

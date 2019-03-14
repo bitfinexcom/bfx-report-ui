@@ -1,12 +1,30 @@
 import React, { PureComponent } from 'react'
 import { withNamespaces } from 'react-i18next'
 import PropTypes from 'prop-types'
+import { Menu } from '@blueprintjs/core'
 import {
   Column,
   Table,
+  CopyCellsMenuItem,
 } from '@blueprintjs/table'
 
 class DataTable extends PureComponent {
+  getCellData = (rowIndex, columnIndex) => {
+    const { tableColums } = this.props
+
+    return tableColums[columnIndex].copyText(rowIndex)
+  }
+
+  renderBodyContextMenu = (context) => {
+    const { t } = this.props
+
+    return (
+      <Menu>
+        <CopyCellsMenuItem context={context} getCellData={this.getCellData} text={t('copy')} />
+      </Menu>
+    )
+  }
+
   render() {
     const {
       numRows,
@@ -23,6 +41,7 @@ class DataTable extends PureComponent {
         columnWidths={columnWidths}
         enableFocusedCell
         getCellClipboardData={(row, col) => navigator.clipboard.writeText(tableColums[col].copyText(row))}
+        bodyContextMenuRenderer={this.renderBodyContextMenu}
       >
         {tableColums.map(column => (
           <Column
