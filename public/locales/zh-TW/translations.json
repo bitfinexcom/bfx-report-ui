@@ -19,6 +19,7 @@
   "column":{
     "id": "#"
   },
+  "copy": "複製",
   "deposits": {
     "title": "存款"
   },
