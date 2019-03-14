@@ -1,4 +1,5 @@
 const fs = require('fs')
+require('dotenv').load()
 
 const REQUIRED_ENVS = [
   'NODE_PATH',
