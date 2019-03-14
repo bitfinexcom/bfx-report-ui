@@ -35,8 +35,6 @@ const mapDispatchToProps = dispatch => ({
   fetchPrev: queryLimit => dispatch(actions.fetchPrevAPositions(queryLimit)),
   jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
   refresh: () => dispatch(actions.refresh()),
-  addTargetPair: pair => dispatch(actions.addTargetPair(pair)),
-  removeTargetPair: pair => dispatch(actions.removeTargetPair(pair)),
 })
 
 const PositionsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(PositionsActive))
