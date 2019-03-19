@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -141,4 +141,4 @@ class ExportDialog extends PureComponent {
 ExportDialog.propTypes = propTypes
 ExportDialog.defaultProps = defaultProps
 
-export default withNamespaces('translations')(ExportDialog)
+export default withTranslation('translations')(ExportDialog)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { Button } from '@blueprintjs/core'
 
@@ -16,4 +16,4 @@ ExportButton.propTypes = {
 
 ExportButton.defaultProps = {}
 
-export default withNamespaces('translations')(ExportButton)
+export default withTranslation('translations')(ExportButton)

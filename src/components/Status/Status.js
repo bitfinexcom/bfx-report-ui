@@ -1,4 +1,4 @@
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Toaster,
   Intent,
@@ -39,4 +39,4 @@ export const Status = ({
 Status.propTypes = propTypes
 Status.defaultProps = defaultProps
 
-export default withNamespaces('translations')(Status)
+export default withTranslation('translations')(Status)

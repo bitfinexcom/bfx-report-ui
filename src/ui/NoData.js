@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 
 export const NoData = ({ descId, t, title }) => {
@@ -30,4 +30,4 @@ NoData.defaultProps = {
   title: '',
 }
 
-export default withNamespaces('translations')(NoData)
+export default withTranslation('translations')(NoData)

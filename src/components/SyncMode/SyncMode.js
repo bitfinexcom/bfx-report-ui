@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -142,4 +142,4 @@ class SyncMode extends PureComponent {
   }
 }
 
-export default withNamespaces('translations')(SyncMode)
+export default withTranslation('translations')(SyncMode)

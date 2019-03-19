@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   FormGroup,
   InputGroup,
@@ -31,4 +31,4 @@ export const InputKey = ({
 InputKey.propTypes = inputKeyPropTypes
 InputKey.defaultProps = inputKeyDefaultProps
 
-export default withNamespaces('translations')(InputKey)
+export default withTranslation('translations')(InputKey)

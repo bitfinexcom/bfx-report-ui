@@ -1,5 +1,5 @@
 import React, { createRef, Fragment, PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Button, Spinner } from '@blueprintjs/core'
 
 import QueryLimitSelector from 'ui/QueryLimitSelector'
@@ -165,4 +165,4 @@ class Pagination extends PureComponent {
 Pagination.propTypes = propTypes
 Pagination.defaultProps = defaultProps
 
-export default withNamespaces('translations')(Pagination)
+export default withTranslation('translations')(Pagination)

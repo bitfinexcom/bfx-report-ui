@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -173,4 +173,4 @@ class Movements extends PureComponent {
 Movements.propTypes = propTypes
 Movements.defaultProps = defaultProps
 
-export default withNamespaces('translations')(Movements)
+export default withTranslation('translations')(Movements)

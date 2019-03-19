@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Button,
   ButtonGroup,
@@ -180,4 +180,4 @@ class PositionsActive extends PureComponent {
 PositionsActive.propTypes = propTypes
 PositionsActive.defaultProps = defaultProps
 
-export default withNamespaces('translations')(PositionsActive)
+export default withTranslation('translations')(PositionsActive)

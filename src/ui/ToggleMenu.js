@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Menu,
   MenuDivider,
@@ -209,4 +209,4 @@ ToggleMenu.defaultProps = {
   menuMode: '',
 }
 
-export default withNamespaces('translations')(ToggleMenu)
+export default withTranslation('translations')(ToggleMenu)

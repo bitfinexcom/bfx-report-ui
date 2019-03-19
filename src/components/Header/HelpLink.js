@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 
 import {
   Button,
@@ -41,4 +41,4 @@ class HelpLink extends PureComponent {
   }
 }
 
-export default withNamespaces('translations')(HelpLink)
+export default withTranslation('translations')(HelpLink)

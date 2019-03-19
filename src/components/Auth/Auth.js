@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Button,
   Callout,
@@ -123,4 +123,4 @@ class Auth extends PureComponent {
   }
 }
 
-export default withNamespaces('translations')(Auth)
+export default withTranslation('translations')(Auth)

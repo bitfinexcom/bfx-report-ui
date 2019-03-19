@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { Spinner } from '@blueprintjs/core'
 
@@ -26,4 +26,4 @@ Loading.defaultProps = {
   title: '',
 }
 
-export default withNamespaces('translations')(Loading)
+export default withTranslation('translations')(Loading)
