@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Intent,
   MenuItem,
@@ -67,4 +67,4 @@ class MultiPairSelector extends PureComponent {
 MultiPairSelector.propTypes = propTypes
 MultiPairSelector.defaultProps = defaultProps
 
-export default withNamespaces('translations')(MultiPairSelector)
+export default withTranslation('translations')(MultiPairSelector)

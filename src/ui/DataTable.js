@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { Menu } from '@blueprintjs/core'
 import {
@@ -73,4 +73,4 @@ DataTable.propTypes = {
 
 DataTable.defaultProps = {}
 
-export default withNamespaces('translations')(DataTable)
+export default withTranslation('translations')(DataTable)

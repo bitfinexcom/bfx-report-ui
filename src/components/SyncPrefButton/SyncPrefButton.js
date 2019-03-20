@@ -1,5 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Button,
   Callout,
@@ -221,4 +221,4 @@ class SyncPrefButton extends PureComponent {
   }
 }
 
-export default withNamespaces('translations')(SyncPrefButton)
+export default withTranslation('translations')(SyncPrefButton)

@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -165,4 +165,4 @@ class FundingCreditHistory extends PureComponent {
 FundingCreditHistory.propTypes = propTypes
 FundingCreditHistory.defaultProps = defaultProps
 
-export default withNamespaces('translations')(FundingCreditHistory)
+export default withTranslation('translations')(FundingCreditHistory)

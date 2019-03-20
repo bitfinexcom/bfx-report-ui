@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Button,
   Menu,
@@ -64,4 +64,4 @@ class PrefMenu extends PureComponent {
   }
 }
 
-export default withNamespaces('translations')(PrefMenu)
+export default withTranslation('translations')(PrefMenu)

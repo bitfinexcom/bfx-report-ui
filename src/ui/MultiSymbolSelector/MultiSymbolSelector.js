@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Intent,
   MenuItem,
@@ -67,4 +67,4 @@ class MultiSymbolSelector extends PureComponent {
 MultiSymbolSelector.propTypes = propTypes
 MultiSymbolSelector.defaultProps = defaultProps
 
-export default withNamespaces('translations')(MultiSymbolSelector)
+export default withTranslation('translations')(MultiSymbolSelector)

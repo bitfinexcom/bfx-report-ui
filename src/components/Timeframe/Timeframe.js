@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { MenuItem, PopoverInteractionKind } from '@blueprintjs/core'
 import queryString from 'query-string'
 
@@ -154,4 +154,4 @@ class Timeframe extends PureComponent {
 Timeframe.propTypes = propTypes
 Timeframe.defaultProps = defaultProps
 
-export default withNamespaces('translations')(Timeframe)
+export default withTranslation('translations')(Timeframe)

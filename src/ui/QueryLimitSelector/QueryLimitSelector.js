@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Button,
   Intent,
@@ -81,4 +81,4 @@ class QueryLimitSelector extends PureComponent {
 QueryLimitSelector.propTypes = propTypes
 QueryLimitSelector.defaultProps = defaultProps
 
-export default withNamespaces('translations')(QueryLimitSelector)
+export default withTranslation('translations')(QueryLimitSelector)

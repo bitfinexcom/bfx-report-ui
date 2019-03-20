@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -170,4 +170,4 @@ class Tickers extends PureComponent {
 Tickers.propTypes = propTypes
 Tickers.defaultProps = defaultProps
 
-export default withNamespaces('translations')(Tickers)
+export default withTranslation('translations')(Tickers)

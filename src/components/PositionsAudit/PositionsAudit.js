@@ -1,5 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { withNamespaces } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   Button,
   Card,
@@ -177,4 +177,4 @@ class PositionsAudit extends PureComponent {
 PositionsAudit.propTypes = propTypes
 PositionsAudit.defaultProps = defaultProps
 
-export default withNamespaces('translations')(PositionsAudit)
+export default withTranslation('translations')(PositionsAudit)
