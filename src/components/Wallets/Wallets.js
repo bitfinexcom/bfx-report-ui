@@ -120,7 +120,7 @@ class Wallets extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('wallets.query')}
+          {t('wallets.query.title')}
         </Button>
       </Fragment>
     )
