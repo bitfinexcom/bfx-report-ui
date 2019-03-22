@@ -4,7 +4,8 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { amountStyle } from 'ui/utils'
+import { amountStyle, insertIf, fixFloat } from 'ui/utils'
+import { platform } from 'var/config'
 
 export default function getColumns(props) {
   const {
@@ -65,6 +66,31 @@ export default function getColumns(props) {
         return `${amount} ${currency}`
       },
     },
+    ...insertIf(platform.showFrameworkMode, (
+      {
+        id: 'amountUsd',
+        name: 'ledgers.column.amountUsd',
+        width: 120,
+        renderer: (rowIndex) => {
+          const { amountUsd } = filteredData[rowIndex]
+          const classes = amountStyle(amountUsd)
+          const fixedAmountUsd = fixFloat(amountUsd)
+          const tooltip = `${fixedAmountUsd} ${t('column.usd')}`
+          return (
+            <Cell
+              className={classes}
+              tooltip={tooltip}
+            >
+              {fixedAmountUsd}
+            </Cell>
+          )
+        },
+        copyText: (rowIndex) => {
+          const { amountUsd } = filteredData[rowIndex]
+          return `${fixFloat(amountUsd)} ${t('column.usd')}`
+        },
+      }
+    )),
     {
       id: 'balance',
       name: 'ledgers.column.balance',
@@ -86,6 +112,30 @@ export default function getColumns(props) {
         return `${balance} ${currency}`
       },
     },
+    ...insertIf(platform.showFrameworkMode, (
+      {
+        id: 'balanceUsd',
+        name: 'ledgers.column.balanceUsd',
+        width: 125,
+        renderer: (rowIndex) => {
+          const { balanceUsd } = filteredData[rowIndex]
+          const fixedBalanceUsd = fixFloat(balanceUsd)
+          const tooltip = `${fixedBalanceUsd} ${t('column.usd')}`
+          return (
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={tooltip}
+            >
+              {fixedBalanceUsd}
+            </Cell>
+          )
+        },
+        copyText: (rowIndex) => {
+          const { balanceUsd } = filteredData[rowIndex]
+          return `${fixFloat(balanceUsd)} ${t('column.usd')}`
+        },
+      }
+    )),
     {
       id: 'mts',
       nameStr: `${t('ledgers.column.time')} (${timeOffset})`,

@@ -24,7 +24,9 @@ Navigate to `/ledgers` will open this view.
     1. `DESCRIPTION`(translate)
     1. `CURRENCY`(translate)
     1. `AMOUNT`(translate), the number is left aligned.
+    1. `AMOUNT (USD)`(translate), the number is left aligned. Framework mode only.
     1. `BALANCE`(translate), the number is left aligned.
+    1. `BALANCE (USD)`(translate), the number is left aligned. Framework mode only.
     1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
     1. `WALLET`(translate), one of `exchange`, `funding`, or `margin` wallet
 1. Should show tooltip when mouse hover any contents in table cell

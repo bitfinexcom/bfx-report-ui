@@ -1,8 +1,11 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
+import { insertIf, fixFloat } from 'ui/utils'
+import { platform } from 'var/config'
+
 export default function getColumns(props) {
-  const { filteredData } = props
+  const { filteredData, t } = props
 
   return [
     {
@@ -36,5 +39,28 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => filteredData[rowIndex].balance,
     },
+    ...insertIf(platform.showFrameworkMode, (
+      {
+        id: 'balanceUsd',
+        name: 'wallets.column.balanceUsd',
+        width: 200,
+        renderer: (rowIndex) => {
+          const { balanceUsd } = filteredData[rowIndex]
+          const fixedBalanceUsd = fixFloat(balanceUsd)
+          return (
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={fixedBalanceUsd}
+            >
+              {fixedBalanceUsd}
+            </Cell>
+          )
+        },
+        copyText: (rowIndex) => {
+          const { balanceUsd } = filteredData[rowIndex]
+          return `${fixFloat(balanceUsd)} ${t('column.usd')}`
+        },
+      }
+    )),
   ]
 }

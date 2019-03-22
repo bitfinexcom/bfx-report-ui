@@ -17,7 +17,8 @@
     }
   },
   "column":{
-    "id": "#"
+    "id": "#",
+    "usd": "USD"
   },
   "copy": "Copy",
   "deposits": {
@@ -100,7 +101,9 @@
       "currency": "CURRENCY",
       "time": "DATE",
       "amount": "AMOUNT",
-      "balance": "BALANCE"
+      "amountUsd": "AMOUNT (USD)",
+      "balance": "BALANCE",
+      "balanceUsd": "BALANCE (USD)"
     }
   },
   "loading": "Loading...",
@@ -291,7 +294,8 @@
     "title": "Wallets (Beta)",
     "column": {
       "currency": "CURRENCY",
-      "balance": "BALANCE"
+      "balance": "BALANCE",
+      "balanceUsd": "BALANCE (USD)"
     },
     "header": {
       "exchange": "Exchange",

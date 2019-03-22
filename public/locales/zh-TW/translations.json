@@ -17,7 +17,8 @@
     }
   },
   "column":{
-    "id": "#"
+    "id": "#",
+    "usd": "美元"
   },
   "copy": "複製",
   "deposits": {
@@ -100,7 +101,9 @@
       "currency": "貨幣",
       "time": "時間",
       "amount": "數量",
-      "balance": "金額"
+      "amountUsd": "數量(美元)",
+      "balance": "金額",
+      "balanceUsd": "金額(美元)"
     }
   },
   "loading": "讀取中...",
@@ -290,7 +293,8 @@
     "title": "錢包(Beta)",
     "column": {
       "currency": "貨幣",
-      "balance": "餘額"
+      "balance": "餘額",
+      "balanceUsd": "餘額(美元)"
     },
     "header": {
       "exchange": "交易",

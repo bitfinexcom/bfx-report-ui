@@ -21,6 +21,7 @@ Navigate to `/wallets` will open this view.
 1. The tables shows several columns:
     1. `CURRENCY`(translate)
     1. `BALANCE`(translate), the number is left aligned.
+    1. `BALANCE (USD)`(translate), the number is left aligned. Framework mode only.
     1. `UNSETTLED INTEREST`(translate), the number is left aligned.
     1. `BALANCE AVAILABLE`(translate), the number is left aligned.
 1. Should show tooltip when mouse hover any contents in table cell
