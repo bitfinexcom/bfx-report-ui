@@ -206,7 +206,7 @@ class SyncPrefButton extends PureComponent {
                       || tempTime === undefined
                     )}
                   >
-                    {t('preferences.sync.apply')}
+                    {t('preferences.sync.btn-apply')}
                   </Button>
                 </Tooltip>
                 <Button onClick={this.handleClose}>
