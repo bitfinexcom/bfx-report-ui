@@ -181,7 +181,7 @@
       "title": "同步偏好設定",
       "pairs": "暫存代幣對",
       "starttime": "起始時間",
-      "apply": "確認",
+      "btn-apply": "確認",
       "apply.tooltip": "確認後需要重新登入才會生效。",
       "insync-warning": "同步時無法確認設定。請等到同步完成後再按確認。"
     }

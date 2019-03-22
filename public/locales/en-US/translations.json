@@ -182,7 +182,7 @@
       "setup": "Setup Sync preferences",
       "pairs": "Offline Pairs",
       "starttime": "Start Time",
-      "apply": "Apply",
+      "btn-apply": "Apply",
       "apply.tooltip": "After apply, you needs to login again to take effect.",
       "insync-warning": "Can't apply during syncing. Please wait until syncing is done."
     }
