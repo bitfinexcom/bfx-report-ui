@@ -39,10 +39,17 @@ class Movements extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchMovements, match } = this.props
+    const {
+      loading,
+      fetchMovements,
+      match,
+      jumpPage,
+    } = this.props
     if (loading) {
       const symbol = (match.params && match.params.symbol) || ''
       fetchMovements(symbol)
+    } else {
+      jumpPage(0, 25)
     }
   }
 
@@ -128,7 +135,7 @@ class Movements extends PureComponent {
       showContent = (
         <Loading title={titleMsgId} />
       )
-    } else if (numRows === 0) {
+    } else if (currentEntries.length === 0) {
       showContent = (
         <Fragment>
           <h4>
