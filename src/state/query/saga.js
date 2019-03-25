@@ -20,6 +20,7 @@ import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
 import { getTargetPairs as getTickersPairs } from 'state/tickers/selectors'
 import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
 import { getTimezone, getDateFormat, getShowMilliseconds } from 'state/base/selectors'
+import { getTargetSymbol as getPublicTradesSymbol } from 'state/publicFunding/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTargetPairs as getActivePositionsPairs } from 'state/positionsActive/selectors'
@@ -48,6 +49,7 @@ const {
   MENU_POSITIONS,
   MENU_POSITIONS_ACTIVE,
   MENU_POSITIONS_AUDIT,
+  MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_WALLETS,
   MENU_WITHDRAWALS,
@@ -114,6 +116,9 @@ function getCSV(auth, query, target, options) {
     case MENU_POSITIONS_AUDIT:
       method = 'getPositionsAuditCsv'
       break
+    case MENU_PUBLIC_FUNDING:
+      method = 'getPublicTradesCsv'
+      break
     case MENU_PUBLIC_TRADES:
       method = 'getPublicTradesCsv'
       break
@@ -155,6 +160,8 @@ function getSelector(target) {
       return getActivePositionsPairs
     case MENU_POSITIONS_AUDIT:
       return getPositionsIds
+    case MENU_PUBLIC_FUNDING:
+      return getPublicTradesSymbol
     case MENU_PUBLIC_TRADES:
       return getPublicTradesPair
     case MENU_WALLETS:
@@ -175,6 +182,8 @@ function formatSymbol(target, sign) {
     case MENU_DEPOSITS:
     case MENU_FPAYMENT:
       return sign
+    case MENU_PUBLIC_FUNDING:
+      return `f${sign.toUpperCase()}`
     case MENU_ORDERS:
     case MENU_TICKERS:
     case MENU_TRADES:

@@ -18,6 +18,7 @@ test('Can get right query limit via getQueryLimit', () => {
   expect(ql(queryTypes.MENU_POSITIONS)).toEqual(50)
   expect(ql(queryTypes.MENU_POSITIONS_ACTIVE)).toEqual(50)
   expect(ql(queryTypes.MENU_POSITIONS_AUDIT)).toEqual(250)
+  expect(ql(queryTypes.MENU_PUBLIC_FUNDING)).toEqual(5000)
   expect(ql(queryTypes.MENU_PUBLIC_TRADES)).toEqual(5000)
   expect(ql(queryTypes.MENU_DEPOSITS)).toEqual(25)
   expect(ql(queryTypes.MENU_WITHDRAWALS)).toEqual(25)

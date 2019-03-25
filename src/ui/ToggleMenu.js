@@ -27,6 +27,7 @@ const {
   MENU_POSITIONS,
   MENU_POSITIONS_ACTIVE,
   MENU_POSITIONS_AUDIT,
+  MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_WITHDRAWALS,
   MENU_WALLETS,
@@ -44,6 +45,7 @@ class ToggleMenu extends PureComponent {
     this.handleClickTrades = this.handleClick.bind(this, MENU_TRADES)
     this.handleClickDeposits = this.handleClick.bind(this, MENU_DEPOSITS)
     this.handleClickWithdrawals = this.handleClick.bind(this, MENU_WITHDRAWALS)
+    this.handleClickPublicFunding = this.handleClick.bind(this, MENU_PUBLIC_FUNDING)
     this.handleClickPublicTrades = this.handleClick.bind(this, MENU_PUBLIC_TRADES)
     this.handleClickPositions = this.handleClick.bind(this, MENU_POSITIONS)
     this.handleClickTickers = this.handleClick.bind(this, MENU_TICKERS)
@@ -160,6 +162,13 @@ class ToggleMenu extends PureComponent {
           title={isIconMode ? t('publictrades.title') : ''}
           onClick={this.handleClickPublicTrades}
           active={target === MENU_PUBLIC_TRADES}
+        />
+        <MenuItem
+          icon={getIcon(MENU_PUBLIC_FUNDING)}
+          text={isIconMode ? '' : t('publicfunding.title')}
+          title={isIconMode ? t('publicfunding.title') : ''}
+          onClick={this.handleClickPublicFunding}
+          active={target === MENU_PUBLIC_FUNDING}
         />
         <MenuItem
           icon={getIcon(MENU_TICKERS)}

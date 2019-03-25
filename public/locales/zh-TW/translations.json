@@ -186,6 +186,17 @@
       "insync-warning": "同步時無法確認設定。請等到同步完成後再按確認。"
     }
   },
+  "publicfunding": {
+    "title": "公開融資",
+    "column": {
+      "time": "時間",
+      "amount": "數量",
+      "rate": "利率",
+      "period": "期間",
+      "currency": "貨幣",
+      "days": "天"
+    }
+  },
   "publictrades": {
     "title": "公開交易",
     "column": {
