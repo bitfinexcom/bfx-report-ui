@@ -12,6 +12,7 @@ export default {
   MENU_POSITIONS: 'positions',
   MENU_POSITIONS_ACTIVE: 'activepositions',
   MENU_POSITIONS_AUDIT: 'paudit',
+  MENU_PUBLIC_FUNDING: 'publicfunding',
   MENU_PUBLIC_TRADES: 'publictrades',
   MENU_WALLETS: 'wallets',
   MENU_WITHDRAWALS: 'withdrawals',

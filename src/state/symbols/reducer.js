@@ -3,10 +3,10 @@ import authTypes from 'state/auth/constants'
 import types from './constants'
 
 const initialState = {
-  coins: [],
-  currencies: {},
-  explorers: {},
-  pairs: [],
+  coins: [], // symbol
+  currencies: {}, // full name
+  explorers: {}, // symbol explorer
+  pairs: [], // pair
 }
 
 export function symbolsReducer(state = initialState, action) {

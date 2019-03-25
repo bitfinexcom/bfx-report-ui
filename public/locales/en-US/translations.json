@@ -187,6 +187,17 @@
       "insync-warning": "Can't apply during syncing. Please wait until syncing is done."
     }
   },
+  "publicfunding": {
+    "title": "Public Funding",
+    "column": {
+      "time": "TIME",
+      "amount": "AMOUNT",
+      "rate": "RATE",
+      "period": "PERIOD",
+      "currency": "CURRENCY",
+      "days": "Day(s)"
+    }
+  },
   "publictrades":{
     "title": "Public Trades",
     "column": {

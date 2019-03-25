@@ -52,7 +52,7 @@ class SymbolSelector extends PureComponent {
         onItemSelect={onSymbolSelect}
       >
         <Button
-          text={currentCoin}
+          text={currentCoin.toUpperCase()}
           rightIcon='caret-down'
           disabled={coins.length === 0}
         />

@@ -12,6 +12,7 @@ import Orders from 'components/Orders'
 import Positions from 'components/Positions'
 import PositionsActive from 'components/PositionsActive'
 import PositionsAudit from 'components/PositionsAudit'
+import PublicFunding from 'components/PublicFunding'
 import PublicTrades from 'components/PublicTrades'
 import Tickers from 'components/Tickers'
 import Trades from 'components/Trades'
@@ -38,6 +39,7 @@ const {
   MENU_POSITIONS,
   MENU_POSITIONS_ACTIVE,
   MENU_POSITIONS_AUDIT,
+  MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_WALLETS,
@@ -237,6 +239,15 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_FPAYMENT)}/:symbol`}
               component={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_PUBLIC_FUNDING)}
+              component={() => <PublicFunding handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_PUBLIC_FUNDING)}/:symbol`}
+              component={() => <PublicFunding handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
