@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
-import { formatInternalPair, formatSymbolToPair } from 'state/symbols/utils'
+import { formatInternalSymbol, formatSymbolToPair } from 'state/symbols/utils'
 import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
@@ -48,7 +48,7 @@ export function tradesReducer(state = initialState, action) {
           orderPrice,
           orderType,
         } = entry
-        const internalPair = formatInternalPair(symbol)
+        const internalPair = formatInternalSymbol(symbol)
         // save new pair to updatePairs list
         if (updatePairs.indexOf(internalPair) === -1) {
           updatePairs.push(internalPair)

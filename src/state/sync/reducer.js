@@ -3,6 +3,7 @@ import types from './constants'
 const initialState = {
   syncMode: types.MODE_ONLINE,
   syncPairs: [],
+  syncSymbols: [],
   startTime: undefined,
 }
 
@@ -20,6 +21,14 @@ export function syncReducer(state = initialState, action) {
       return {
         ...initialState,
         syncPairs,
+        startTime,
+      }
+    }
+    case types.SET_SYMBOL_PREF: {
+      const { symbols: syncSymbols, startTime } = payload
+      return {
+        ...initialState,
+        syncSymbols,
         startTime,
       }
     }

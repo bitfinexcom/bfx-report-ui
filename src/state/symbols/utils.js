@@ -63,7 +63,8 @@ export function addPrefix(symbol = '') {
  */
 const removePrefix = (symbol = '') => {
   const s = symbol.charAt(0)
-  return (symbol.length > 6 && (s === 't' || s === 'f'))
+  return (symbol.length > 6 && s === 't')
+    || (symbol.length > 3 && s === 'f')
     ? symbol.substring(1).toUpperCase()
     : symbol.toUpperCase()
 }
@@ -83,7 +84,8 @@ const lastInPair = (pair, uppercase = true) => {
 const getSplitPair = (pair, uppercase = true) => [firstInPair(pair, uppercase), lastInPair(pair, uppercase)]
 
 // tBTCUSD -> btcusd
-export function formatInternalPair(symbol) {
+// fUSD -> usd
+export function formatInternalSymbol(symbol) {
   return removePrefix(symbol).toLowerCase()
 }
 
@@ -156,7 +158,7 @@ export function formatRawSymbols(symbols) {
 }
 
 export default {
-  formatInternalPair,
+  formatInternalSymbol,
   formatPair,
   formatRawSymbols,
   formatSymbolToPair,
