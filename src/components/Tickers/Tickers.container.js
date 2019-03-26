@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import actions from 'state/tickers/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { hasSyncPref } from 'state/sync/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -21,6 +22,7 @@ const mapStateToProps = (state = {}) => ({
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
+  hasSyncPref: hasSyncPref(state),
   loading: !getDataReceived(state),
   nextPage: getNextPage(state),
   offset: getOffset(state),
