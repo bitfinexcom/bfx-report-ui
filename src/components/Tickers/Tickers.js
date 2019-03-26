@@ -3,11 +3,11 @@ import { withTranslation } from 'react-i18next'
 import {
   Card,
   Elevation,
-  NonIdealState,
 } from '@blueprintjs/core'
 
 import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
+import SyncNotSetYet from 'ui/SyncNotSetYet'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -90,14 +90,7 @@ class Tickers extends PureComponent {
     } = this.props
     if (platform.showSyncMode && !hasSyncPref) {
       return (
-        <NonIdealState
-          className='bitfinex-nonideal'
-          icon='issue-new'
-          title={t('preferences.sync.notset')}
-          description={t('preferences.sync.description')}
-        >
-          <SyncPrefButton textOnly />
-        </NonIdealState>
+        <SyncNotSetYet />
       )
     }
 
