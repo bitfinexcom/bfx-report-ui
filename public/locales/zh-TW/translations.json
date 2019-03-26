@@ -177,12 +177,12 @@
     "milliseconds": "顯示毫秒:",
     "sync":{
       "notset": "同步偏好尚未設定",
-      "description": "為了離線查詢公開交易，請先設定欲離線查詢的交易對與開始日期。",
+      "description": "為了離線查詢公開交易與牌價，請先設定欲離線查詢的交易對與開始日期。",
       "title": "同步偏好設定",
       "pairs": "暫存代幣對",
       "starttime": "起始時間",
       "btn-apply": "確認",
-      "apply.tooltip": "確認後需要重新登入才會生效。",
+      "apply-tooltip": "確認後需要重新登入才會生效。",
       "insync-warning": "同步時無法確認設定。請等到同步完成後再按確認。"
     }
   },

@@ -89,10 +89,9 @@ class SyncPrefButton extends PureComponent {
 
   handleApply() {
     const { tempPairs, tempTime } = this.state
-    const { logout, setSyncPref } = this.props
-    setSyncPref(tempPairs, tempTime)
+    const { setSyncPref } = this.props
     this.setState({ isOpen: false })
-    logout()
+    setSyncPref(tempPairs, tempTime, true)
   }
 
   render() {
@@ -191,7 +190,7 @@ class SyncPrefButton extends PureComponent {
                 <Tooltip
                   content={(
                     <span>
-                      {t('preferences.sync.apply.tooltip')}
+                      {t('preferences.sync.apply-tooltip')}
                     </span>
                     )}
                   position={Position.TOP}

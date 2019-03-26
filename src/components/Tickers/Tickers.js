@@ -6,6 +6,8 @@ import {
 } from '@blueprintjs/core'
 
 import Pagination from 'ui/Pagination'
+import SyncPrefButton from 'ui/SyncPrefButton'
+import SyncNotSetYet from 'ui/SyncNotSetYet'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -21,6 +23,7 @@ import {
   handleAddPairFilter,
   handleRemovePairFilter,
 } from 'state/utils'
+import { platform } from 'var/config'
 
 import getColumns from './Tickers.columns'
 import { propTypes, defaultProps } from './Tickers.props'
@@ -71,6 +74,7 @@ class Tickers extends PureComponent {
       fetchNext,
       fetchPrev,
       getFullTime,
+      hasSyncPref,
       offset,
       pageOffset,
       pageLoading,
@@ -84,6 +88,12 @@ class Tickers extends PureComponent {
       nextPage,
       timeOffset,
     } = this.props
+    if (platform.showSyncMode && !hasSyncPref) {
+      return (
+        <SyncNotSetYet />
+      )
+    }
+
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
     const tableColums = getColumns({
@@ -132,6 +142,7 @@ class Tickers extends PureComponent {
             &nbsp;
             <TimeRange />
             {renderPairSelector}
+            <SyncPrefButton />
           </h4>
           <NoData />
         </Fragment>
@@ -148,6 +159,7 @@ class Tickers extends PureComponent {
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;
             <RefreshButton handleClickRefresh={refresh} />
+            <SyncPrefButton />
           </h4>
           {renderPagination}
           <DataTable

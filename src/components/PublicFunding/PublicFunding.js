@@ -7,7 +7,7 @@ import {
 } from '@blueprintjs/core'
 
 import Pagination from 'ui/Pagination'
-import SyncPrefButton from 'components/SyncPrefButton'
+import SyncPrefButton from 'ui/SyncPrefButton'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
