@@ -4,7 +4,7 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { amountStyle, insertIf, fixFloat } from 'ui/utils'
+import { amountStyle, insertIf, fixedFloat } from 'ui/utils'
 import { platform } from 'var/config'
 
 export default function getColumns(props) {
@@ -74,7 +74,7 @@ export default function getColumns(props) {
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
           const classes = amountStyle(amountUsd)
-          const fixedAmountUsd = fixFloat(amountUsd)
+          const fixedAmountUsd = fixedFloat(amountUsd)
           const tooltip = `${fixedAmountUsd} ${t('column.usd')}`
           return (
             <Cell
@@ -87,7 +87,7 @@ export default function getColumns(props) {
         },
         copyText: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
-          return `${fixFloat(amountUsd)} ${t('column.usd')}`
+          return `${fixedFloat(amountUsd)} ${t('column.usd')}`
         },
       }
     )),
@@ -119,7 +119,7 @@ export default function getColumns(props) {
         width: 125,
         renderer: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]
-          const fixedBalanceUsd = fixFloat(balanceUsd)
+          const fixedBalanceUsd = fixedFloat(balanceUsd)
           const tooltip = `${fixedBalanceUsd} ${t('column.usd')}`
           return (
             <Cell
@@ -132,7 +132,7 @@ export default function getColumns(props) {
         },
         copyText: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]
-          return `${fixFloat(balanceUsd)} ${t('column.usd')}`
+          return `${fixedFloat(balanceUsd)} ${t('column.usd')}`
         },
       }
     )),

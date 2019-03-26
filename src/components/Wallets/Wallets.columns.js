@@ -1,7 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { insertIf, fixFloat } from 'ui/utils'
+import { insertIf, fixedFloat } from 'ui/utils'
 import { platform } from 'var/config'
 
 export default function getColumns(props) {
@@ -46,7 +46,7 @@ export default function getColumns(props) {
         width: 200,
         renderer: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]
-          const fixedBalanceUsd = fixFloat(balanceUsd)
+          const fixedBalanceUsd = fixedFloat(balanceUsd)
           return (
             <Cell
               className='bitfinex-text-align-right'
@@ -58,7 +58,7 @@ export default function getColumns(props) {
         },
         copyText: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]
-          return `${fixFloat(balanceUsd)} ${t('column.usd')}`
+          return `${fixedFloat(balanceUsd)} ${t('column.usd')}`
         },
       }
     )),
