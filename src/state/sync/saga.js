@@ -8,7 +8,7 @@ import {
 import { delay } from 'redux-saga'
 
 import { makeFetchCall } from 'state/utils'
-import { hideAuth } from 'state/auth/actions'
+import { hideAuth, logout as logoutAction } from 'state/auth/actions'
 import authTypes from 'state/auth/constants'
 import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
 import { setTimezone } from 'state/base/actions'
@@ -30,6 +30,8 @@ const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
 const getUsersTimeConf = auth => makeFetchCall('getUsersTimeConf', auth)
 const getPublicTradesConf = auth => makeFetchCall('getPublicTradesConf', auth)
 const editPublicTradesConf = (auth, params) => makeFetchCall('editPublicTradesConf', auth, params)
+// const getTickersHistoryConf = auth => makeFetchCall('getTickersHistoryConf', auth)
+const editTickersHistoryConf = (auth, params) => makeFetchCall('editTickersHistoryConf', auth, params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -81,7 +83,7 @@ function* syncLogout() {
 }
 
 function* editSyncPref({ payload }) {
-  const { pairs, startTime } = payload
+  const { pairs, startTime, logout: logoutFlag } = payload
 
   const auth = yield select(selectAuth)
   const params = (pairs.length === 1)
@@ -96,6 +98,13 @@ function* editSyncPref({ payload }) {
   const { error } = yield call(editPublicTradesConf, auth, params)
   if (error) {
     yield put(updateSyncErrorStatus('during editPublicTradesConf'))
+  }
+  const { error: tickersConfError } = yield call(editTickersHistoryConf, auth, params)
+  if (tickersConfError) {
+    yield put(updateSyncErrorStatus('during editTickersHistoryConf'))
+  }
+  if (logoutFlag) {
+    yield put(logoutAction())
   }
 }
 
@@ -153,7 +162,7 @@ function* syncWatcher() {
             // "Error: The server https://{url} is not available", which means no internet connection
             if (typeof progress === 'string' && progress.startsWith('Error: The server')) {
               yield put(actions.setSyncMode(types.MODE_OFFLINE))
-            // go offline with notification when progress 100
+              // go offline with notification when progress 100
             } else if ((progress === 100 && syncMode !== types.MODE_OFFLINE)) {
               yield put(actions.forceQueryFromDb())
             }

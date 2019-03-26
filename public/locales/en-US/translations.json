@@ -183,7 +183,7 @@
       "pairs": "Offline Pairs",
       "starttime": "Start Time",
       "btn-apply": "Apply",
-      "apply.tooltip": "After apply, you needs to login again to take effect.",
+      "apply-tooltip": "After apply, you needs to login again to take effect.",
       "insync-warning": "Can't apply during syncing. Please wait until syncing is done."
     }
   },

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 
 export const propTypes = {
-  logout: PropTypes.func.isRequired,
   syncPairs: PropTypes.arrayOf(String),
   startTime: PropTypes.number,
   setPairs: PropTypes.func.isRequired,

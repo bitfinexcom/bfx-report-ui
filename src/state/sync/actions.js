@@ -42,13 +42,15 @@ export function forceQueryFromDb() {
  * Create an action to set preferences.
  * @param {string[]} pairs pairs
  * @param {numeric} startTime start time in milliseconds
+ * @param {boolean} logout logout after set pref
  */
-export function setSyncPref(pairs, startTime) {
+export function setSyncPref(pairs, startTime, logout) {
   return {
     type: types.SET_PREF,
     payload: {
       pairs,
       startTime,
+      logout,
     },
   }
 }
