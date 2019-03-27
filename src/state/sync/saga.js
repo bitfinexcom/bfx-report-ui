@@ -14,7 +14,7 @@ import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
-import { formatInternalSymbol, formatRawSymbols } from 'state/symbols/utils'
+import { formatInternalSymbol, formatRawSymbols, isPair, isSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -171,8 +171,8 @@ function* syncWatcher() {
           const { result: syncPrefResult, error: syncPrefError } = yield call(getPublicTradesConf, auth)
           if (syncPrefResult && syncPrefResult.length > 0) {
             const format = data => formatInternalSymbol(data.symbol)
-            const pairs = syncPrefResult.filter(data => data.symbol.length > 6 && data.symbol[0] === 't')
-            const symbols = syncPrefResult.filter(data => data.symbol.length > 3 && data.symbol[0] === 'f')
+            const pairs = syncPrefResult.filter(data => isPair(data.symbol))
+            const symbols = syncPrefResult.filter(data => isSymbol(data.symbol))
             if (pairs.length > 0) {
               yield put(actions.setSyncPref(
                 pairs.map(data => format(data)),

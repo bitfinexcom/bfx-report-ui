@@ -53,6 +53,14 @@ export function addPrefix(symbol = '') {
   }
 }
 
+export function isPair(symbol = '') {
+  return symbol.length > 6 && symbol.charAt(0) === 't'
+}
+
+export function isSymbol(symbol = '') {
+  return symbol.length > 3 && symbol.charAt(0) === 'f'
+}
+
 /**
  * Removes the prefix from the provided symbol.
  * @param symbol {String}
@@ -62,9 +70,7 @@ export function addPrefix(symbol = '') {
  * ex. fUSD -> USD
  */
 const removePrefix = (symbol = '') => {
-  const s = symbol.charAt(0)
-  return (symbol.length > 6 && s === 't')
-    || (symbol.length > 3 && s === 'f')
+  return isSymbol(symbol) || isPair(symbol)
     ? symbol.substring(1).toUpperCase()
     : symbol.toUpperCase()
 }
@@ -165,5 +171,7 @@ export default {
   getPairsFromUrlParam,
   getSymbolsURL,
   getSymbolsFromUrlParam,
+  isPair,
+  isSymbol,
   parsePairTag,
 }
