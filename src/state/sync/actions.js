@@ -55,10 +55,28 @@ export function setSyncPref(pairs, startTime, logout) {
   }
 }
 
+/**
+ * Create an action to set symbol preferences.
+ * @param {string[]} symbols symbols
+ * @param {numeric} startTime start time in milliseconds
+ * @param {boolean} logout logout after set pref
+ */
+export function setSyncSymbolPref(symbols, startTime, logout) {
+  return {
+    type: types.SET_SYMBOL_PREF,
+    payload: {
+      symbols,
+      startTime,
+      logout,
+    },
+  }
+}
+
 export default {
   forceQueryFromDb,
-  setSyncPref,
   setSyncMode,
+  setSyncPref,
+  setSyncSymbolPref,
   startSyncing,
   stopSyncing,
 }

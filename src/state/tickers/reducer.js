@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#TICKERS-history
-import { formatInternalPair, formatSymbolToPair } from 'state/symbols/utils'
+import { formatInternalSymbol, formatSymbolToPair } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -46,7 +46,7 @@ export function TickersReducer(state = initialState, action) {
           mtsUpdate,
           symbol,
         } = entry
-        const internalPair = formatInternalPair(symbol)
+        const internalPair = formatInternalSymbol(symbol)
         // save new pair to updatePairs list
         if (updatePairs.indexOf(internalPair) === -1) {
           updatePairs.push(internalPair)

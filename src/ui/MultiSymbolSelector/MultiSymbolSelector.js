@@ -43,7 +43,7 @@ class MultiSymbolSelector extends PureComponent {
     }
 
     const filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
-    const renderTag = coin => coin
+    const renderTag = coin => coin.toUpperCase()
 
     return (
       <MultiSelect

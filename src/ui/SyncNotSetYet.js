@@ -4,18 +4,21 @@ import { withTranslation } from 'react-i18next'
 import { NonIdealState } from '@blueprintjs/core'
 
 import SyncPrefButton from 'ui/SyncPrefButton'
+import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
 
 class SyncNotSetYet extends PureComponent {
   render() {
-    const { t } = this.props
+    const { t, acceptSymbol } = this.props
     return (
       <NonIdealState
         className='bitfinex-nonideal'
         icon='issue-new'
         title={t('preferences.sync.notset')}
-        description={t('preferences.sync.description')}
+        description={acceptSymbol ? t('preferences.sync.symbol-description') : t('preferences.sync.description')}
       >
-        <SyncPrefButton textOnly />
+        {
+        acceptSymbol ? <SyncSymbolPrefButton textOnly /> : <SyncPrefButton textOnly />
+      }
       </NonIdealState>
     )
   }
@@ -23,7 +26,11 @@ class SyncNotSetYet extends PureComponent {
 
 SyncNotSetYet.propTypes = {
   t: PropTypes.func.isRequired,
+  acceptSymbol: PropTypes.bool,
 }
-SyncNotSetYet.defaultProps = {}
+
+SyncNotSetYet.defaultProps = {
+  acceptSymbol: false,
+}
 
 export default withTranslation('translations')(SyncNotSetYet)

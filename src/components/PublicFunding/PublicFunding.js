@@ -3,11 +3,11 @@ import { withTranslation } from 'react-i18next'
 import {
   Card,
   Elevation,
-  NonIdealState,
 } from '@blueprintjs/core'
 
 import Pagination from 'ui/Pagination'
-import SyncPrefButton from 'ui/SyncPrefButton'
+import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
+import SyncNotSetYet from 'ui/SyncNotSetYet'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -86,14 +86,7 @@ class PublicFunding extends PureComponent {
     } = this.props
     if (platform.showSyncMode && !hasSyncPref) {
       return (
-        <NonIdealState
-          className='bitfinex-nonideal'
-          icon='issue-new'
-          title={t('preferences.sync.notset')}
-          description={t('preferences.sync.description')}
-        >
-          <SyncPrefButton textOnly />
-        </NonIdealState>
+        <SyncNotSetYet acceptSymbol />
       )
     }
 
@@ -150,7 +143,7 @@ class PublicFunding extends PureComponent {
             &nbsp;
             <TimeRange />
             {renderPairSelector}
-            <SyncPrefButton />
+            <SyncSymbolPrefButton />
           </h4>
           <NoData />
         </Fragment>
@@ -167,7 +160,7 @@ class PublicFunding extends PureComponent {
             <ExportButton handleClickExport={handleClickExport} />
             &nbsp;
             <RefreshButton handleClickRefresh={refresh} />
-            <SyncPrefButton />
+            <SyncSymbolPrefButton />
           </h4>
           {renderPagination}
           <DataTable

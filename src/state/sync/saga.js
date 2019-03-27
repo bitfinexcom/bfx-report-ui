@@ -14,11 +14,16 @@ import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
-import { formatInternalPair, formatRawSymbols } from 'state/symbols/utils'
+import {
+  formatInternalSymbol,
+  formatRawSymbols,
+  isPair,
+  isSymbol,
+} from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
-import { getSyncMode } from './selectors'
+import { getSyncMode, getSyncSymbols, getSyncPairs } from './selectors'
 
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
 const getSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
@@ -86,15 +91,22 @@ function* editSyncPref({ payload }) {
   const { pairs, startTime, logout: logoutFlag } = payload
 
   const auth = yield select(selectAuth)
+  const symbols = yield select(getSyncSymbols)
   const params = (pairs.length === 1)
     ? {
       symbol: formatRawSymbols(pairs[0]),
       start: startTime,
     }
-    : pairs.map(symbol => ({
-      symbol: formatRawSymbols(symbol),
-      start: startTime,
-    }))
+    : [
+      ...pairs.map(symbol => ({
+        symbol: formatRawSymbols(symbol),
+        start: startTime,
+      })),
+      ...symbols.map(symbol => ({
+        symbol: formatRawSymbols(symbol),
+        start: startTime,
+      })),
+    ]
   const { error } = yield call(editPublicTradesConf, auth, params)
   if (error) {
     yield put(updateSyncErrorStatus('during editPublicTradesConf'))
@@ -102,6 +114,35 @@ function* editSyncPref({ payload }) {
   const { error: tickersConfError } = yield call(editTickersHistoryConf, auth, params)
   if (tickersConfError) {
     yield put(updateSyncErrorStatus('during editTickersHistoryConf'))
+  }
+  if (logoutFlag) {
+    yield put(logoutAction())
+  }
+}
+
+function* editSyncSymbolPref({ payload }) {
+  const { symbols, startTime, logout: logoutFlag } = payload
+
+  const auth = yield select(selectAuth)
+  const pairs = yield select(getSyncPairs)
+  const params = (symbols.length === 1)
+    ? {
+      symbol: formatRawSymbols(symbols[0]),
+      start: startTime,
+    }
+    : [
+      ...pairs.map(symbol => ({
+        symbol: formatRawSymbols(symbol),
+        start: startTime,
+      })),
+      ...symbols.map(symbol => ({
+        symbol: formatRawSymbols(symbol),
+        start: startTime,
+      })),
+    ]
+  const { error } = yield call(editPublicTradesConf, auth, params)
+  if (error) {
+    yield put(updateSyncErrorStatus('during editPublicTradesConf'))
   }
   if (logoutFlag) {
     yield put(logoutAction())
@@ -134,10 +175,21 @@ function* syncWatcher() {
           // get syncPref
           const { result: syncPrefResult, error: syncPrefError } = yield call(getPublicTradesConf, auth)
           if (syncPrefResult && syncPrefResult.length > 0) {
-            yield put(actions.setSyncPref(
-              syncPrefResult.map(data => formatInternalPair(data.symbol)),
-              syncPrefResult[0].start,
-            ))
+            const format = data => formatInternalSymbol(data.symbol)
+            const pairs = syncPrefResult.filter(data => isPair(data.symbol))
+            const symbols = syncPrefResult.filter(data => isSymbol(data.symbol))
+            if (pairs.length > 0) {
+              yield put(actions.setSyncPref(
+                pairs.map(data => format(data)),
+                syncPrefResult[0].start,
+              ))
+            }
+            if (symbols.length > 0) {
+              yield put(actions.setSyncSymbolPref(
+                symbols.map(data => format(data)),
+                syncPrefResult[0].start,
+              ))
+            }
           }
           if (syncPrefError) {
             yield put(updateSyncErrorStatus('during editPublicTradesConf'))
@@ -219,6 +271,7 @@ export default function* syncSaga() {
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
   yield takeLatest(types.SET_PREF, editSyncPref)
+  yield takeLatest(types.SET_SYMBOL_PREF, editSyncSymbolPref)
   yield takeLatest(authTypes.UPDATE_AUTH_STATUS, syncWatcher)
   yield takeLatest(authTypes.LOGOUT, syncLogout)
 }

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import actions from 'state/publicFunding/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getCoins, getCurrencies } from 'state/symbols/selectors'
-import { hasSyncPref } from 'state/sync/selectors'
+import { hasSyncSymbolsPref } from 'state/sync/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -22,7 +22,7 @@ const mapStateToProps = (state = {}) => ({
   currencies: getCurrencies(state),
   entries: getEntries(state),
   getFullTime: getFullTime(state),
-  hasSyncPref: hasSyncPref(state),
+  hasSyncPref: hasSyncSymbolsPref(state),
   loading: !getDataReceived(state),
   nextPage: getNextPage(state),
   offset: getOffset(state),

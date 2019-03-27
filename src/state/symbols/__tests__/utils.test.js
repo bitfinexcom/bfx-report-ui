@@ -1,5 +1,5 @@
 import {
-  formatInternalPair,
+  formatInternalSymbol,
   formatSymbolToPair,
   formatPair,
   parsePairTag,
@@ -10,12 +10,16 @@ import {
 } from '../utils'
 
 describe('pair convertion', () => {
-  it('formatInternalPair tBTCUSD -> btcusd', () => {
-    expect(formatInternalPair('tBTCUSD')).toEqual('btcusd')
+  it('formatInternalSymbol tBTCUSD -> btcusd', () => {
+    expect(formatInternalSymbol('tBTCUSD')).toEqual('btcusd')
   })
 
-  it('formatInternalPair tETHUSD -> ethusd', () => {
-    expect(formatInternalPair('tETHUSD')).toEqual('ethusd')
+  it('formatInternalSymbol tETHUSD -> ethusd', () => {
+    expect(formatInternalSymbol('tETHUSD')).toEqual('ethusd')
+  })
+
+  it('formatInternalSymbol fUSD -> usd', () => {
+    expect(formatInternalSymbol('fUSD')).toEqual('usd')
   })
 
   it('formatSymbolToPair tBTCUSD -> BTC/USD', () => {

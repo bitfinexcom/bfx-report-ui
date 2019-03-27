@@ -53,6 +53,14 @@ export function addPrefix(symbol = '') {
   }
 }
 
+export function isPair(symbol = '') {
+  return symbol.length > 6 && symbol.charAt(0) === 't'
+}
+
+export function isSymbol(symbol = '') {
+  return symbol.length > 3 && symbol.charAt(0) === 'f'
+}
+
 /**
  * Removes the prefix from the provided symbol.
  * @param symbol {String}
@@ -61,12 +69,9 @@ export function addPrefix(symbol = '') {
  * ex. tBTCUSD -> BTCUSD
  * ex. fUSD -> USD
  */
-const removePrefix = (symbol = '') => {
-  const s = symbol.charAt(0)
-  return (symbol.length > 6 && (s === 't' || s === 'f'))
-    ? symbol.substring(1).toUpperCase()
-    : symbol.toUpperCase()
-}
+const removePrefix = (symbol = '') => (isSymbol(symbol) || isPair(symbol)
+  ? symbol.substring(1).toUpperCase()
+  : symbol.toUpperCase())
 
 const firstInPair = (pair, uppercase = true) => {
   const spliter = pair.indexOf(':') > -1 ? ':' : '/'
@@ -83,7 +88,8 @@ const lastInPair = (pair, uppercase = true) => {
 const getSplitPair = (pair, uppercase = true) => [firstInPair(pair, uppercase), lastInPair(pair, uppercase)]
 
 // tBTCUSD -> btcusd
-export function formatInternalPair(symbol) {
+// fUSD -> usd
+export function formatInternalSymbol(symbol) {
   return removePrefix(symbol).toLowerCase()
 }
 
@@ -156,12 +162,14 @@ export function formatRawSymbols(symbols) {
 }
 
 export default {
-  formatInternalPair,
+  formatInternalSymbol,
   formatPair,
   formatRawSymbols,
   formatSymbolToPair,
   getPairsFromUrlParam,
   getSymbolsURL,
   getSymbolsFromUrlParam,
+  isPair,
+  isSymbol,
   parsePairTag,
 }
