@@ -1,4 +1,4 @@
-const fs = require('fs')
+const shell = require('shelljs')
 require('dotenv').config()
 
 const REQUIRED_ENVS = [
@@ -59,14 +59,11 @@ const filesMap = {
   ],
 }
 
-const copyFile = (source, destination) => {
-  fs.copyFile(source, destination, (err) => {
-    if (err) throw err
-    // eslint-disable-next-line no-console
-    console.log(`Copying file from ${source} to ${destination}`)
-  })
-}
-
 filesMap[platform].forEach((pair) => {
-  copyFile(pair.source, pair.destination)
+  // eslint-disable-next-line no-console
+  console.log(`Copying file from ${pair.source} to ${pair.destination}`)
+  const result = shell.cp(pair.source, pair.destination)
+  if (result.code === 1) {
+    throw result.stderr
+  }
 })
