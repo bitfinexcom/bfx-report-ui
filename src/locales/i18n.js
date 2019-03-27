@@ -3,9 +3,9 @@
 // refer https://github.com/bitfinexcom/bfxuilib/blob/master/functions/i18n.spa.js
 
 import i18n from 'i18next'
-import backend from 'i18next-chained-backend';
-import LocalStorageBackend from 'i18next-localstorage-backend'; // primary use cache
-import XHR from 'i18next-xhr-backend'; // fallback xhr load
+import backend from 'i18next-chained-backend'
+import LocalStorageBackend from 'i18next-localstorage-backend' // primary use cache
+import XHR from 'i18next-xhr-backend' // fallback xhr load
 import detector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
@@ -27,20 +27,20 @@ i18n
   .init({
     backend: {
       backends: [
-        LocalStorageBackend,  // primary
-        XHR                   // fallback
+        LocalStorageBackend, // primary
+        XHR, // fallback
       ],
       backendOptions: [{
         prefix: 'i18next_res_', // prefix for stored languages
-        expirationTime: 7*24*60*60*1000, // expiration
+        expirationTime: 7 * 24 * 60 * 60 * 1000, // expiration
         versions: {
           'en-US': version,
           'zh-TW': version,
         }, // language versions
-        store: window.localStorage
+        store: window.localStorage,
       }, {
-        loadPath: '/locales/{{lng}}/{{ns}}.json'
-      }]
+        loadPath: '/locales/{{lng}}/{{ns}}.json',
+      }],
     },
 
     detection: {

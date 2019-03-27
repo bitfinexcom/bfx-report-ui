@@ -1,4 +1,4 @@
-var shell = require('shelljs');
+const shell = require('shelljs')
 require('dotenv').config()
 
 const REQUIRED_ENVS = [
@@ -59,11 +59,11 @@ const filesMap = {
   ],
 }
 
-filesMap[platform].forEach(pair => {
+filesMap[platform].forEach((pair) => {
   // eslint-disable-next-line no-console
   console.log(`Copying file from ${pair.source} to ${pair.destination}`)
   const result = shell.cp(pair.source, pair.destination)
-  if(result.code === 1) {
+  if (result.code === 1) {
     throw result.stderr
   }
 })
