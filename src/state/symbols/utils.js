@@ -69,11 +69,9 @@ export function isSymbol(symbol = '') {
  * ex. tBTCUSD -> BTCUSD
  * ex. fUSD -> USD
  */
-const removePrefix = (symbol = '') => {
-  return isSymbol(symbol) || isPair(symbol)
-    ? symbol.substring(1).toUpperCase()
-    : symbol.toUpperCase()
-}
+const removePrefix = (symbol = '') => (isSymbol(symbol) || isPair(symbol)
+  ? symbol.substring(1).toUpperCase()
+  : symbol.toUpperCase())
 
 const firstInPair = (pair, uppercase = true) => {
   const spliter = pair.indexOf(':') > -1 ? ':' : '/'

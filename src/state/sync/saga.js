@@ -14,7 +14,12 @@ import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
-import { formatInternalSymbol, formatRawSymbols, isPair, isSymbol } from 'state/symbols/utils'
+import {
+  formatInternalSymbol,
+  formatRawSymbols,
+  isPair,
+  isSymbol,
+} from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
