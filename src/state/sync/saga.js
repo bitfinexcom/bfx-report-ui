@@ -171,8 +171,8 @@ function* syncWatcher() {
           const { result: syncPrefResult, error: syncPrefError } = yield call(getPublicTradesConf, auth)
           if (syncPrefResult && syncPrefResult.length > 0) {
             const format = data => formatInternalSymbol(data.symbol)
-            const pairs = syncPrefResult.filter(data => data.length > 6 && data[0] === 't')
-            const symbols = syncPrefResult.filter(data => data.length > 3 && data[0] === 'f')
+            const pairs = syncPrefResult.filter(data => data.symbol.length > 6 && data.symbol[0] === 't')
+            const symbols = syncPrefResult.filter(data => data.symbol.length > 3 && data.symbol[0] === 'f')
             if (pairs.length > 0) {
               yield put(actions.setSyncPref(
                 pairs.map(data => format(data)),
