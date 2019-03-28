@@ -24,11 +24,13 @@ export function walletsReducer(state = initialState, action) {
           type,
           currency,
           balance,
+          balanceUsd,
         } = entry
         return {
           type,
           currency,
           balance,
+          balanceUsd,
         }
       }).sort((a, b) => a.currency.localeCompare(b.currency))
       return {

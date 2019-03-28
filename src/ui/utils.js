@@ -43,7 +43,13 @@ export const amountStyle = (amount) => {
   })
 }
 
+export const insertIf = (condition, ...elements) => (condition ? elements : [])
+
+export const fixedFloat = val => val && val.toFixed(2)
+
 export default {
+  fixedFloat,
+  insertIf,
   amountStyle,
   checkboxFieldStyle,
   dialogDescStyle,

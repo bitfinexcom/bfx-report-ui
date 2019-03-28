@@ -42,7 +42,9 @@ export function ledgersReducer(state = initialState, action) {
       const entries = res.map((entry) => {
         const {
           amount,
+          amountUsd,
           balance,
+          balanceUsd,
           currency,
           description,
           id,
@@ -64,7 +66,9 @@ export function ledgersReducer(state = initialState, action) {
           currency,
           mts,
           amount,
+          amountUsd,
           balance,
+          balanceUsd,
           description,
           wallet,
         }
