@@ -4,11 +4,13 @@
 
 Positions shows positions history related data by date. Contain sections `Export button`, `Table`, `Pagination`.
 
-Navigate to `/positions` will open this view.
+Navigate to `/positions` or `/activepositions` will open this view.
+
 
 ## UI
 
 1. The panel has title named `Positions`(translate).
+1. The panel has a group button named `Closed/Active`(translate) denotes the current dataset.
 1. The panel has a `Export`(translate) button with `cloud-download` icon besides the panel title.
 1. The panel has a `Refresh`(translate) button with `refresh` icon besides the panel title.
     1. Click the icon will re-fetch the data.
