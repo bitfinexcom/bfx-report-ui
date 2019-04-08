@@ -131,6 +131,7 @@ class ExportDialog extends PureComponent {
                       currentTargets={currentTargets}
                       onTargetSelect={this.onTargetSelect}
                       handleTagRemove={this.handleTagRemove}
+                      target={type}
                     />
                   </div>
                 </div>
@@ -166,7 +167,7 @@ class ExportDialog extends PureComponent {
               </Button>
               <Button
                 intent={Intent.PRIMARY}
-                disabled={currentTargets.length === 0}
+                disabled={queryConstants.MENU_POSITIONS_AUDIT !== type && currentTargets.length === 0}
                 onClick={startExport(queryConstants.MENU_POSITIONS_AUDIT !== type
                   ? currentTargets : [queryConstants.MENU_POSITIONS_AUDIT])}
               >

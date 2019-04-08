@@ -7,6 +7,15 @@ import { MultiSelect } from '@blueprintjs/select'
 import { ORDERED_TARGETS } from 'state/query/utils'
 
 class ExportTargetsSelector extends PureComponent {
+  componentDidMount() {
+    const {
+      target,
+      onTargetSelect,
+    } = this.props
+    // put current dataset into currentTargets
+    onTargetSelect(target)()
+  }
+
   render() {
     const {
       currentTargets,
@@ -56,6 +65,7 @@ ExportTargetsSelector.propTypes = {
   handleTagRemove: PropTypes.func.isRequired,
   onTargetSelect: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  target: PropTypes.string.isRequired,
 }
 ExportTargetsSelector.defaultProps = {
   currentTargets: [],
