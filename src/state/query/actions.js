@@ -60,12 +60,12 @@ export function setCustomTimeRange(start, end) {
 
 /**
  * Create an action to export CSV.
- * @param {string} target export type
+ * @param {string[]} targets array of export types
  */
-export function exportCsv(target) {
+export function exportCsv(targets) {
   return {
     type: types.EXPORT_CSV,
-    payload: target,
+    payload: targets,
   }
 }
 

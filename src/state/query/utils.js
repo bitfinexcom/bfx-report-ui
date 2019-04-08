@@ -60,6 +60,26 @@ export const ROUTE_WHITELIST = [
   MENU_WITHDRAWALS,
 ]
 
+// Should keep the order, which used in ExportTargetsSelector
+export const ORDERED_TARGETS = [
+  MENU_LEDGERS,
+  MENU_TRADES,
+  MENU_ORDERS,
+  MENU_DEPOSITS,
+  MENU_WITHDRAWALS,
+  MENU_POSITIONS,
+  MENU_POSITIONS_ACTIVE,
+  // MENU_POSITIONS_AUDIT,
+  MENU_WALLETS,
+  MENU_FOFFER,
+  MENU_FLOAN,
+  MENU_FCREDIT,
+  MENU_FPAYMENT,
+  MENU_PUBLIC_TRADES,
+  MENU_PUBLIC_FUNDING,
+  MENU_TICKERS,
+]
+
 export function isValidTimeStamp(n) {
   return (`${n}`).length === 13
     && (new Date(n)).getTime() === n
@@ -276,6 +296,7 @@ export default {
   getQueryLimit,
   getTarget,
   isValidTimeStamp,
+  ORDERED_TARGETS,
   ROUTE_WHITELIST,
   TYPE_WHITELIST,
 }
