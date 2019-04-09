@@ -20,9 +20,43 @@ import { formatDate } from 'state/utils'
 import { getTarget } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
+import ExportTargetsSelector from './ExportTargetsSelector'
 import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.handlers = {}
+    this.onTargetSelect = this.onTargetSelect.bind(this)
+    this.handleTagRemove = this.handleTagRemove.bind(this)
+    this.state = {
+      currentTargets: [],
+    }
+  }
+
+  onTargetSelect(target) {
+    if (!this.handlers[target]) {
+      this.handlers[target] = () => {
+        const { currentTargets } = this.state
+        if (!currentTargets.includes(target)) {
+          this.setState({ currentTargets: [...currentTargets, target] })
+        }
+      }
+    }
+    return this.handlers[target]
+  }
+
+  handleTagRemove(tag, idx) {
+    const { currentTargets } = this.state
+    const { t } = this.props
+
+    if (t(`${currentTargets[idx]}.title`) === tag) {
+      if (currentTargets.length !== 1) { // should keep at least 1 item
+        this.setState({ currentTargets: currentTargets.filter((_, i) => i !== idx) })
+      }
+    }
+  }
+
   render() {
     const {
       email,
@@ -39,6 +73,7 @@ class ExportDialog extends PureComponent {
       timezone,
       location,
     } = this.props
+    const { currentTargets } = this.state
     if (!isExportOpen) {
       return null
     }
@@ -48,23 +83,23 @@ class ExportDialog extends PureComponent {
     const intlType = t(`${type}.title`)
     const renderMessage = !email ? (
       <p>
-        {t('timeframe.download.prepare', { intlType })}
+        {t('download.prepare', { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
           {isWallets ? datetime : timeSpan}
         </span>
         &nbsp;
-        {t('timeframe.download.store', { intlType })}
+        {t('download.store', { intlType })}
       </p>
     ) : (
       <p>
-        {t('timeframe.download.prepare', { intlType })}
+        {t('download.prepare', { intlType })}
         &nbsp;
         <span className='bitfinex-show-soft'>
           {isWallets ? datetime : timeSpan}
         </span>
         &nbsp;
-        {t('timeframe.download.send', { intlType, email })}
+        {t('download.send', { intlType, email })}
       </p>
     )
     const renderContent = loading
@@ -81,6 +116,27 @@ class ExportDialog extends PureComponent {
           <div className={Classes.DIALOG_BODY}>
             {renderMessage}
             <br />
+            {
+              queryConstants.MENU_POSITIONS_AUDIT !== type
+              && (
+                <div className='row'>
+                  <div className={dialogDescStyle}>
+                    {t('download.targets')}
+                  </div>
+                  <div className={dialogSmallDescStyle}>
+                    {t('download.targets')}
+                  </div>
+                  <div className={checkboxFieldStyle}>
+                    <ExportTargetsSelector
+                      currentTargets={currentTargets}
+                      onTargetSelect={this.onTargetSelect}
+                      handleTagRemove={this.handleTagRemove}
+                      target={type}
+                    />
+                  </div>
+                </div>
+              )
+            }
             <div className='row'>
               <div className={dialogDescStyle}>
                 {t('preferences.dateformat')}
@@ -107,13 +163,15 @@ class ExportDialog extends PureComponent {
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <Button onClick={handleExportDialogClose}>
-                {t('timeframe.download.cancel')}
+                {t('download.cancel')}
               </Button>
               <Button
                 intent={Intent.PRIMARY}
-                onClick={startExport}
+                disabled={queryConstants.MENU_POSITIONS_AUDIT !== type && currentTargets.length === 0}
+                onClick={startExport(queryConstants.MENU_POSITIONS_AUDIT !== type
+                  ? currentTargets : [queryConstants.MENU_POSITIONS_AUDIT])}
               >
-                {t('timeframe.download.export')}
+                {t('download.export')}
               </Button>
             </div>
           </div>
@@ -124,7 +182,7 @@ class ExportDialog extends PureComponent {
       <Dialog
         icon='cloud-download'
         onClose={handleExportDialogClose}
-        title={t('timeframe.download.title')}
+        title={t('download.title')}
         autoFocus
         canEscapeKeyClose
         canOutsideClickClose

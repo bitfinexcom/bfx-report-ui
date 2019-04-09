@@ -18,7 +18,7 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  exportCsv: target => dispatch(exportCsv(target)),
+  exportCsv: targets => dispatch(exportCsv(targets)),
   prepareExport: () => dispatch(prepareExport()),
   setCustomTimeRange: (start, end) => dispatch(setCustomTimeRange(start, end)),
   showCustomDialog: show => dispatch(showCustomDialog(show)),

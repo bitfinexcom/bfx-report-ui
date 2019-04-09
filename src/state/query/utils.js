@@ -1,3 +1,5 @@
+import { platform } from 'var/config'
+
 import queryType from './constants'
 
 const {
@@ -58,6 +60,40 @@ export const ROUTE_WHITELIST = [
   MENU_TRADES,
   MENU_WALLETS,
   MENU_WITHDRAWALS,
+]
+
+// Should keep the order, which used in ExportTargetsSelector
+const BASIC_TARGETS = [
+  MENU_LEDGERS,
+  MENU_TRADES,
+  MENU_ORDERS,
+  MENU_DEPOSITS,
+  MENU_WITHDRAWALS,
+  MENU_POSITIONS,
+  MENU_POSITIONS_ACTIVE,
+  // MENU_POSITIONS_AUDIT,
+  MENU_WALLETS,
+]
+// MENU_FPAYMENT only for sync mode
+const FUNDING_TARGETS = platform.showSyncMode ? [
+  MENU_FOFFER,
+  MENU_FLOAN,
+  MENU_FCREDIT,
+  MENU_FPAYMENT,
+] : [
+  MENU_FOFFER,
+  MENU_FLOAN,
+  MENU_FCREDIT,
+]
+const PUBLIC_TARGETS = [
+  MENU_PUBLIC_TRADES,
+  MENU_PUBLIC_FUNDING,
+  MENU_TICKERS,
+]
+export const ORDERED_TARGETS = [
+  ...BASIC_TARGETS,
+  ...FUNDING_TARGETS,
+  ...PUBLIC_TARGETS,
 ]
 
 export function isValidTimeStamp(n) {
@@ -276,6 +312,7 @@ export default {
   getQueryLimit,
   getTarget,
   isValidTimeStamp,
+  ORDERED_TARGETS,
   ROUTE_WHITELIST,
   TYPE_WHITELIST,
 }

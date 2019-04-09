@@ -5,7 +5,7 @@ import { Button } from '@blueprintjs/core'
 
 const ExportButton = ({ handleClickExport, t }) => (
   <Button icon='cloud-download' onClick={handleClickExport}>
-    {t('timeframe.download.export')}
+    {t('download.export')}
   </Button>
 )
 
