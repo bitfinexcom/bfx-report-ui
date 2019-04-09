@@ -1,12 +1,14 @@
 # Funding Credit/Loan/Offer
 
-Shows funding credit/loan/offer hisotry related data by date. Contain sections `Export button`, `Table`, `Pagination`.
+Shows funding credit/loan/offer/payments hisotry related data by date. Contain sections `Export button`, `Table`, `Pagination`.
 
 Navigate to `/credits` will open funding credit history view.
 
 Navigate to `/loans` will open funding loan history view.
 
 Navigate to `/offers` will open funding offer history view.
+
+Navigate to `/payments` will open funding payments history view. (only shown in sync mode)
 
 ## UI
 
@@ -50,6 +52,15 @@ Navigate to `/offers` will open funding offer history view.
     1. `RATE(% PER DAY)`(translate),
     1. `PERIOD`(translate),
     1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
+1. The payment tables shows several columns: (same as ledgers columns)
+    1. `DESCRIPTION`(translate)
+    1. `CURRENCY`(translate)
+    1. `AMOUNT`(translate), the number is left aligned.
+    1. `AMOUNT (USD)`(translate), the number is left aligned. Framework mode only.
+    1. `BALANCE`(translate), the number is left aligned.
+    1. `BALANCE (USD)`(translate), the number is left aligned. Framework mode only.
+    1. `DATE`(translate), the date format looks like `18-08-09 09:36:41`.
+    1. `WALLET`(translate), one of `exchange`, `funding`, or `margin` wallet
 1. Should show tooltip when mouse hover any contents in table cell
 1. The pagination bar is shown at the top and the bottom of the table.
     1. The query limit is 5000 entries at once.
