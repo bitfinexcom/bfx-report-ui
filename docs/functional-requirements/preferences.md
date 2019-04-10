@@ -21,4 +21,7 @@ Let user set preferred language, theme etc.
     1. Click a theme button will switch the current theme.
     1. Shows `Theme:`(translate) at left  in normal screen.
     1. Shows `Theme:`(translate) above the goupbutton in extra small screen.
+1. The dialog shows the Timezone selector.
+1. The dialog shows the date format selector.
+1. The dialog shows `Display Milliseconds`(translate) checkbox.
 1. The dialog has a `Close`(translate) button at the bottom of dialog.

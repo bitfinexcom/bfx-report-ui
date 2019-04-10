@@ -1,14 +1,14 @@
-# Public Trades
+# Public Funding
 
 ## Overview
 
-Public Trades shows public trades related data by date. Contain sections `Export button`, `Table`, `Pagination`.
+Public Funding shows public funding related data by date. Contain sections `Export button`, `Table`, `Pagination`.
 
-Navigate to `/pub_trades` will open this view.
+Navigate to `/pub_trades_funding` will open this view.
 
 ## UI
 
-1. The panel has title named `Public Trades`(translate).
+1. The panel has title named `Public Funding`(translate).
 1. The panel has a `Export`(translate) button with `cloud-download` icon besides the panel title.
 1. The panel has a `Refresh`(translate) button with `refresh` icon besides the panel title.
     1. Click the icon will re-fetch the data.
@@ -18,10 +18,10 @@ Navigate to `/pub_trades` will open this view.
 1. The tables shows several columns:
     1. `#` id
     1. `TIME`(translate), the date format looks like `18-08-09 09:36:41`.
-    1. `TYPE`(translate)
-    1. `PRICE`(translate), the number is left aligned.
     1. `AMOUNT`(translate), the number is left aligned.
-    1. `PAIR`(translate)
+    1. `RATE`(translate), the number is left aligned.
+    1. `PERIOD`(translate), days
+    1. `CURRENCY`(translate)
 1. Should show tooltip when mouse hover any contents in table cell
 1. The pagination bar is shown at the top and the bottom of the table.
     1. The query limit is 1000 entries at once.

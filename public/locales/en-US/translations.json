@@ -24,6 +24,20 @@
   "deposits": {
     "title": "Deposits"
   },
+  "download": {
+    "query": "Prepare Export",
+    "title": "Export CSV",
+    "prepare": "Bitfinex will prepare your data during",
+    "send": "and send to Email {{email}} .",
+    "store": "and store to your local folder.",
+    "export": "Export",
+    "cancel": "Cancel",
+    "status": {
+      "local": "{{topic}} csv generated, please check your local 'csv' folder",
+      "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
+    },
+    "targets": "Data to export"
+  },
   "fcredit": {
     "title": "Funding Credit (Used)",
     "column": {
@@ -267,19 +281,6 @@
     "custom": {
       "title": "Select Query Range",
       "view" : "View"
-    },
-    "download": {
-      "query": "Prepare Export",
-      "title": "Export CSV",
-      "prepare": "Bitfinex will prepare your {{intlType}} data during",
-      "send": "and send to Email {{email}} .",
-      "store": "and store to your local folder.",
-      "export": "Export",
-      "cancel": "Cancel",
-      "status": {
-        "local": "{{topic}} csv generated, please check your local 'csv' folder",
-        "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
-      }
     },
     "refresh": "Refresh",
     "custom-timerange": "Custom time range",

@@ -55,82 +55,33 @@ const {
   MENU_WITHDRAWALS,
 } = types
 
-function getCSV(auth, query, target, options) {
-  const params = getTimeFrame(query, target)
-  if (options.limit) {
-    params.limit = options.limit
+/**
+ {
+  "auth": {
+      "apiKey": "fake",
+      "apiSecret": "fake"
+  },
+  "method": "getMultipleCsv",
+  "params": {
+      "email": "fake@email.fake",
+      "multiExport": [
+          {
+              "method": "getTradesCsv",
+              "symbol": "tBTCUSD",
+              "end": 1546765168000
+          },
+          {
+              "method": "getLedgersCsv",
+              "symbol": "BTC",
+              "end": 1546765168000,
+              "timezone": "America/Los_Angeles"
+          }
+      ]
   }
-  if (query.exportEmail) {
-    params.email = query.exportEmail
-  }
-  if (options.symbol) {
-    params.symbol = options.symbol
-  }
-  if (options.end) { // for wallets
-    params.end = options.end
-  }
-  if (options.id) { // for positions audit
-    params.id = options.id
-  }
-  params.timezone = options.timezone
-  params.dateFormat = options.dateFormat
-  params.milliseconds = options.milliseconds
-  let method = ''
-  switch (target) {
-    case MENU_FCREDIT:
-      method = 'getFundingCreditHistoryCsv'
-      break
-    case MENU_FLOAN:
-      method = 'getFundingLoanHistoryCsv'
-      break
-    case MENU_FOFFER:
-      method = 'getFundingOfferHistoryCsv'
-      break
-    case MENU_FPAYMENT:
-      method = 'getLedgersCsv'
-      params.isMarginFundingPayment = true
-      break
-    case MENU_ORDERS:
-      method = 'getOrdersCsv'
-      break
-    case MENU_TICKERS:
-      method = 'getTickersHistoryCsv'
-      break
-    case MENU_TRADES:
-      method = 'getTradesCsv'
-      break
-    case MENU_WITHDRAWALS:
-      method = 'getMovementsCsv'
-      params.isWithdrawals = true
-      break
-    case MENU_DEPOSITS:
-      method = 'getMovementsCsv'
-      params.isDeposits = true
-      break
-    case MENU_POSITIONS:
-      method = 'getPositionsHistoryCsv'
-      break
-    case MENU_POSITIONS_ACTIVE:
-      method = 'getActivePositionsCsv'
-      break
-    case MENU_POSITIONS_AUDIT:
-      method = 'getPositionsAuditCsv'
-      break
-    case MENU_PUBLIC_FUNDING:
-      method = 'getPublicTradesCsv'
-      break
-    case MENU_PUBLIC_TRADES:
-      method = 'getPublicTradesCsv'
-      break
-    case MENU_WALLETS:
-      method = 'getWalletsCsv'
-      break
-    case MENU_LEDGERS:
-    default:
-      method = 'getLedgersCsv'
-      break
-  }
-  return makeFetchCall(method, auth, params)
+}
+*/
+function getMultipleCsv(auth, params) {
+  return makeFetchCall('getMultipleCsv', auth, params)
 }
 
 function getSelector(target) {
@@ -199,46 +150,113 @@ function formatSymbol(target, sign) {
   }
 }
 
-function* exportCSV({ payload: target }) {
+function* exportCSV({ payload: targets }) {
   try {
-    const options = {}
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
-    const getQueryLimit = yield select(getTargetQueryLimit)
-    options.limit = getQueryLimit(target)
-    options.timezone = yield select(getTimezone)
-    options.dateFormat = yield select(getDateFormat)
-    options.milliseconds = yield select(getShowMilliseconds)
-    const selector = getSelector(target)
-    const sign = selector ? yield select(selector) : ''
-    switch (target) {
-      case MENU_WALLETS:
-        options.end = sign || undefined
-        break
-      case MENU_POSITIONS_AUDIT:
-        options.id = sign || undefined
-        break
-      default: {
-        const symbol = formatSymbol(target, sign)
-        if ((Array.isArray(symbol) && symbol.length > 0)
-          || (typeof symbol === 'string' && symbol !== '')) {
-          options.symbol = symbol
-        }
-        break
+    const multiExport = []
+    // eslint-disable-next-line no-restricted-syntax
+    for (const target of targets) {
+      const options = getTimeFrame(query, target)
+      if (target !== MENU_WALLETS) {
+        const getQueryLimit = yield select(getTargetQueryLimit)
+        options.limit = getQueryLimit(target)
       }
+      options.timezone = yield select(getTimezone)
+      options.dateFormat = yield select(getDateFormat)
+      options.milliseconds = yield select(getShowMilliseconds)
+      const selector = getSelector(target)
+      const sign = selector ? yield select(selector) : ''
+      switch (target) {
+        case MENU_WALLETS:
+          options.end = sign || undefined
+          break
+        case MENU_POSITIONS_AUDIT:
+          options.id = sign || undefined
+          break
+        default: {
+          const symbol = formatSymbol(target, sign)
+          if ((Array.isArray(symbol) && symbol.length > 0)
+            || (typeof symbol === 'string' && symbol !== '')) {
+            options.symbol = symbol
+          }
+          break
+        }
+      }
+      switch (target) {
+        case MENU_FCREDIT:
+          options.method = 'getFundingCreditHistoryCsv'
+          break
+        case MENU_FLOAN:
+          options.method = 'getFundingLoanHistoryCsv'
+          break
+        case MENU_FOFFER:
+          options.method = 'getFundingOfferHistoryCsv'
+          break
+        case MENU_FPAYMENT:
+          options.method = 'getLedgersCsv'
+          options.isMarginFundingPayment = true
+          break
+        case MENU_ORDERS:
+          options.method = 'getOrdersCsv'
+          break
+        case MENU_TICKERS:
+          options.method = 'getTickersHistoryCsv'
+          break
+        case MENU_TRADES:
+          options.method = 'getTradesCsv'
+          break
+        case MENU_WITHDRAWALS:
+          options.method = 'getMovementsCsv'
+          options.isWithdrawals = true
+          break
+        case MENU_DEPOSITS:
+          options.method = 'getMovementsCsv'
+          options.isDeposits = true
+          break
+        case MENU_POSITIONS:
+          options.method = 'getPositionsHistoryCsv'
+          break
+        case MENU_POSITIONS_ACTIVE:
+          options.method = 'getActivePositionsCsv'
+          break
+        case MENU_POSITIONS_AUDIT:
+          options.method = 'getPositionsAuditCsv'
+          break
+        case MENU_PUBLIC_FUNDING:
+          options.method = 'getPublicTradesCsv'
+          break
+        case MENU_PUBLIC_TRADES:
+          options.method = 'getPublicTradesCsv'
+          break
+        case MENU_WALLETS:
+          options.method = 'getWalletsCsv'
+          break
+        case MENU_LEDGERS:
+        default:
+          options.method = 'getLedgersCsv'
+          break
+      }
+      multiExport.push(options)
     }
 
-    const { result, error } = yield call(getCSV, auth, query, target, options)
+    const params = {
+      multiExport,
+    }
+    if (query.exportEmail) {
+      params.email = query.exportEmail
+    }
+    const { result, error } = yield call(getMultipleCsv, auth, params)
     if (result) {
       if (result.isSendEmail) {
         yield put(updateSuccessStatus({
-          id: 'timeframe.download.status.email',
-          topic: `${target}.title`,
+          id: 'download.status.email',
+          topic: 'download.export',
         }))
       } else if (result.isSaveLocaly) {
         yield put(updateSuccessStatus({
-          id: 'timeframe.download.status.local',
-          topic: `${target}.title`,
+          id: 'download.status.local',
+          topic: 'download.export',
         }))
       }
     }
@@ -246,14 +264,14 @@ function* exportCSV({ payload: target }) {
     if (error) {
       yield put(updateErrorStatus({
         id: 'status.fail',
-        topic: 'timeframe.download.export',
+        topic: 'download.export',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
     yield put(updateErrorStatus({
       id: 'status.request.error',
-      topic: 'timeframe.download.export',
+      topic: 'download.export',
       detail: JSON.stringify(fail),
     }))
   }
@@ -275,7 +293,7 @@ function* prepareExport() {
     yield put(actions.setExportEmail(false))
     yield put(updateErrorStatus({
       id: 'status.request.error',
-      topic: 'timeframe.download.query',
+      topic: 'download.query',
       detail: JSON.stringify(fail),
     }))
   }

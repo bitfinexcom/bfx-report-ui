@@ -100,11 +100,12 @@ class Main extends PureComponent {
     this.setState({ isExportOpen: show })
   }
 
-  startExport() {
-    const { location, exportCsv } = this.props
-    const target = getTarget(location.pathname)
-    exportCsv(target)
-    this.setState({ isExportOpen: false })
+  startExport(currentTargets) {
+    const { exportCsv } = this.props
+    return () => {
+      exportCsv(currentTargets)
+      this.setState({ isExportOpen: false })
+    }
   }
 
   render() {
