@@ -2,9 +2,7 @@ import PropTypes from 'prop-types'
 
 const WALLETS_ENTRIES_PROPS = PropTypes.shape({
   currency: PropTypes.string.isRequired,
-  balance: PropTypes.number.isRequired,
-  unsettledInterest: PropTypes.number,
-  balanceAvailable: PropTypes.number,
+  balanceUsd: PropTypes.number,
 })
 
 export const propTypes = {

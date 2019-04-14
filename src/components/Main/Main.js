@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import classNames from 'classnames'
 
+import ConcentrationRisk from 'components/ConcentrationRisk'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
@@ -27,6 +28,7 @@ import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
 
 const {
+  MENU_CONCENTRATION_RISK,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -294,6 +296,11 @@ class Main extends PureComponent {
               exact
               path={getPath(MENU_WALLETS)}
               component={() => <Wallets handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_CONCENTRATION_RISK)}
+              component={() => <ConcentrationRisk handleClickExport={this.handleClickExport} />}
             />
           </Switch>
         </div>

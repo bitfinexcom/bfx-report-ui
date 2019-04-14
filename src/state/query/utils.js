@@ -6,6 +6,7 @@ const {
   FILTER_ID,
   FILTER_PAIR,
   FILTER_SYMBOL,
+  MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_FCREDIT,
   MENU_FLOAN,
@@ -26,6 +27,7 @@ const {
 } = queryType
 
 export const TYPE_WHITELIST = [
+  MENU_CONCENTRATION_RISK,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -44,6 +46,7 @@ export const TYPE_WHITELIST = [
 ]
 
 export const ROUTE_WHITELIST = [
+  MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_FCREDIT,
   MENU_FLOAN,
@@ -106,6 +109,10 @@ export function isValidTimeStamp(n) {
  * The queryLimit / pageSize MUST be divisible
  */
 const MAPPING = {
+  [MENU_CONCENTRATION_RISK]: {
+    icon: 'chart',
+    path: '/concentration_risk',
+  },
   [MENU_FCREDIT]: {
     icon: 'book',
     path: '/credits',

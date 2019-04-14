@@ -1,0 +1,23 @@
+.concentration-risk-data {
+  display: flex;
+
+  .bitfinex-table {
+    width: fit-content;
+    flex-shrink: 0;
+  }
+
+  &-chart {
+    width: 100%;
+
+    .recharts-wrapper {
+      margin: 0 auto;
+    }
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .concentration-risk-data {
+    flex-wrap: wrap;
+  }
+}
+

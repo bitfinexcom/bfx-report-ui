@@ -20,6 +20,18 @@
     "id": "#",
     "usd": "USD"
   },
+  "concentrationrisk": {
+    "title": "Concentration Risk",
+    "nodata": "No related data in this date time. You can try another date time.",
+    "query": {
+      "title": "Query",
+      "tooltip": "Select a time to query the wallets snapshot"
+    },
+    "column": {
+      "currency": "CURRENCY",
+      "balanceUsd": "BALANCE (USD)"
+    }
+  },
   "copy": "Copy",
   "deposits": {
     "title": "Deposits"

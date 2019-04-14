@@ -20,6 +20,18 @@
     "id": "#",
     "usd": "美元"
   },
+  "concentrationrisk": {
+    "title": "Concentration Risk",
+    "nodata": "沒有相關資料。請嘗試選擇其他時間。",
+    "query": {
+      "title": "查詢",
+      "tooltip": "選擇一個時間以查看過去時刻的錢包"
+    },
+    "column": {
+      "currency": "貨幣",
+      "balanceUsd": "餘額(美元)"
+    }
+  },
   "copy": "複製",
   "deposits": {
     "title": "存款"

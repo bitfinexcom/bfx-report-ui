@@ -15,6 +15,7 @@ import { getNoAuthTokenUrlString } from 'state/utils'
 import { platform } from 'var/config'
 
 const {
+  MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_FCREDIT,
   MENU_FLOAN,
@@ -50,6 +51,7 @@ class ToggleMenu extends PureComponent {
     this.handleClickPositions = this.handleClick.bind(this, MENU_POSITIONS)
     this.handleClickTickers = this.handleClick.bind(this, MENU_TICKERS)
     this.handleClickWallets = this.handleClick.bind(this, MENU_WALLETS)
+    this.handleClickConcentrationRisk = this.handleClick.bind(this, MENU_CONCENTRATION_RISK)
   }
 
   handleClick(target) {
@@ -176,6 +178,14 @@ class ToggleMenu extends PureComponent {
           title={isIconMode ? t('tickers.title') : ''}
           onClick={this.handleClickTickers}
           active={target === MENU_TICKERS}
+        />
+        <MenuDivider />
+        <MenuItem
+          icon={getIcon(MENU_CONCENTRATION_RISK)}
+          text={isIconMode ? '' : t('concentrationrisk.title')}
+          title={isIconMode ? t('concentrationrisk.title') : ''}
+          onClick={this.handleClickConcentrationRisk}
+          active={target === MENU_CONCENTRATION_RISK}
         />
       </Fragment>
     )

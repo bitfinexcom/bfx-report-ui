@@ -1,4 +1,5 @@
 export default {
+  MENU_CONCENTRATION_RISK: 'concentrationrisk',
   MENU_DEPOSITS: 'deposits',
   MENU_FCREDIT: 'fcredit',
   MENU_FLOAN: 'floan',

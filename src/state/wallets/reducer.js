@@ -6,7 +6,7 @@ import types from './constants'
 const initialState = {
   dataReceived: false,
   entries: [],
-  timestamp: undefined,
+  timestamp: null,
 }
 
 export function walletsReducer(state = initialState, action) {
