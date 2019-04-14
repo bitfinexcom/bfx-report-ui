@@ -16,7 +16,7 @@ import '@blueprintjs/timezone/lib/css/blueprint-timezone.css'
 import { persistor, store } from 'state/store'
 import { platform } from 'var/config'
 import { uiLoaded } from 'state/ui/actions'
-import 'styles/index.css'
+import 'styles/index.scss'
 
 import App from './App'
 import { version } from '../package.json'
