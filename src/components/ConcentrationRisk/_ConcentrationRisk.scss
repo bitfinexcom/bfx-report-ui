@@ -11,6 +11,12 @@
 
     .recharts-wrapper {
       margin: 0 auto;
+
+      .recharts-legend-item {
+        svg {
+          margin-bottom: 3px;
+        }
+      }
     }
   }
 }

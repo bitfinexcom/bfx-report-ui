@@ -23,6 +23,7 @@ const {
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
+  MENU_WIN_LOSS,
   MENU_WITHDRAWALS,
 } = queryType
 
@@ -62,6 +63,7 @@ export const ROUTE_WHITELIST = [
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
+  MENU_WIN_LOSS,
   MENU_WITHDRAWALS,
 ]
 
@@ -175,6 +177,10 @@ const MAPPING = {
     filterType: FILTER_SYMBOL,
     queryLimit: 25,
     pageSize: 25,
+  },
+  [MENU_WIN_LOSS]: {
+    icon: 'chart',
+    path: '/average_win_loss',
   },
   [MENU_WITHDRAWALS]: {
     icon: 'folder-shared-open',

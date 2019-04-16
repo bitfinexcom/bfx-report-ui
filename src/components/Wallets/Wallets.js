@@ -37,7 +37,7 @@ class Wallets extends PureComponent {
     this.handleQuery = this.handleQuery.bind(this)
 
     this.state = {
-      timestamp: currentTime && new Date(currentTime),
+      timestamp: currentTime ? new Date(currentTime) : null,
     }
   }
 
@@ -93,7 +93,7 @@ class Wallets extends PureComponent {
     const exchangeRows = exchangeData.length
     const marginRows = marginData.length
     const fundingRows = fundingData.length
-    const hasNewTime = timestamp && currentTime !== timestamp.getTime()
+    const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
     const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
     const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
 

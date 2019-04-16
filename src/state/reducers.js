@@ -19,6 +19,7 @@ import positionsReducer from './positions/reducer'
 import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
 import queryReducer from './query/reducer'
+import riskReducer from './risk/reducer'
 import tickersReducer from './tickers/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
@@ -51,6 +52,7 @@ const BASE_REDUCERS = {
   publicFunding: publicFundingReducer,
   publicTrades: publicTradesReducer,
   query: queryReducer,
+  risk: riskReducer,
   tickers: tickersReducer,
   trades: tradesReducer,
   status: statusReducer,

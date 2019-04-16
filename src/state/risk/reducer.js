@@ -1,4 +1,3 @@
-// https://docs.bitfinex.com/v2/reference#rest-auth-wallets
 import authTypes from 'state/auth/constants'
 
 import types from './constants'
@@ -6,50 +5,41 @@ import types from './constants'
 const initialState = {
   dataReceived: false,
   entries: [],
-  timestamp: undefined,
+  startDate: undefined,
+  endDate: undefined,
+  timeframe: 'day',
+  skip: undefined,
 }
 
-export function walletsReducer(state = initialState, action) {
+export function riskReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
-    case types.UPDATE_WALLETS: {
+    case types.UPDATE_RISK: {
       if (!payload) {
         return {
           ...state,
           dataReceived: true,
         }
       }
-      const entries = payload.map((entry) => {
-        const {
-          type,
-          currency,
-          balance,
-          balanceUsd,
-        } = entry
-        return {
-          type,
-          currency,
-          balance,
-          balanceUsd,
-        }
-      }).sort((a, b) => a.currency.localeCompare(b.currency))
       return {
         ...state,
         dataReceived: true,
-        entries,
+        entries: payload,
       }
     }
-    case types.SET_TIMESTAMP:
+    case types.SET_PARAMS:
       return {
         ...initialState,
-        timestamp: payload,
+        ...payload,
       }
     case types.FETCH_FAIL:
       return state
     case types.REFRESH:
       return {
         ...initialState,
-        timestamp: state.timestamp,
+        start: state.start,
+        end: state.end,
+        timeframe: state.timeframe,
       }
     case authTypes.LOGOUT:
       return initialState
@@ -59,4 +49,4 @@ export function walletsReducer(state = initialState, action) {
   }
 }
 
-export default walletsReducer
+export default riskReducer

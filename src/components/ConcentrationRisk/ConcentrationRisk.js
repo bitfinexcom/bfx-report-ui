@@ -12,7 +12,6 @@ import { DateInput, TimePrecision } from '@blueprintjs/datetime'
 import _keys from 'lodash/keys'
 import _sortBy from 'lodash/sortBy'
 
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
@@ -33,7 +32,7 @@ class ConcentrationRisk extends PureComponent {
     this.handleQuery = this.handleQuery.bind(this)
 
     this.state = {
-      timestamp: currentTime && new Date(currentTime),
+      timestamp: currentTime ? new Date(currentTime) : null,
     }
   }
 
@@ -75,7 +74,7 @@ class ConcentrationRisk extends PureComponent {
     }))
 
     return {
-      tableData: _sortBy(tableData, ['balanceUsd']),
+      tableData: _sortBy(tableData, ['balanceUsd']).reverse(),
       chartData,
     }
   }
@@ -99,14 +98,13 @@ class ConcentrationRisk extends PureComponent {
     const {
       currentTime,
       entries,
-      handleClickExport,
       loading,
       refresh,
       t,
       timezone,
     } = this.props
     const { timestamp } = this.state
-    const hasNewTime = timestamp && currentTime !== timestamp.getTime()
+    const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
     const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
     const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
 
@@ -172,8 +170,6 @@ class ConcentrationRisk extends PureComponent {
             {t('concentrationrisk.title')}
             &nbsp;
             {renderTimeSelection}
-            &nbsp;
-            <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
             &nbsp;
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

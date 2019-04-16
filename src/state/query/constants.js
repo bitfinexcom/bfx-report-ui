@@ -16,6 +16,7 @@ export default {
   MENU_PUBLIC_FUNDING: 'publicfunding',
   MENU_PUBLIC_TRADES: 'publictrades',
   MENU_WALLETS: 'wallets',
+  MENU_WIN_LOSS: 'winloss',
   MENU_WITHDRAWALS: 'withdrawals',
   TIME_TYPE_UTC: 'utc',
   TIME_TYPE_LOCALTIME: 'local',

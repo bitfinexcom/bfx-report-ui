@@ -16,6 +16,14 @@
       "description": "Login to Reports with token..."
     }
   },
+  "averagewinloss": {
+    "title": "Average Win/Loss",
+    "query": {
+      "title": "Query",
+      "startDateTooltip": "Select a start time",
+      "endDateTooltip": "Select end time"
+    }
+  },
   "column":{
     "id": "#",
     "usd": "USD"
@@ -294,16 +302,19 @@
       "title": "Select Query Range",
       "view" : "View"
     },
+    "day": "Day",
     "refresh": "Refresh",
     "custom-timerange": "Custom time range",
     "24h": "Last 24 hours",
     "yesterday": "Yesterday",
     "2w": "Last 2 weeks",
+    "month": "Month",
     "month_to_date": "Month to date",
     "past_month": "Past month",
     "past_3m": "Past 3 months",
     "custom_time": "Custom",
-    "start-date-placeholder": "Start Date Time"
+    "start-date-placeholder": "Start Date Time",
+    "year": "Year"
   },
   "trades": {
     "title": "Trades",

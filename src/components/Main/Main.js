@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import classNames from 'classnames'
 
+import AverageWinLoss from 'components/AverageWinLoss'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
@@ -45,6 +46,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_WALLETS,
+  MENU_WIN_LOSS,
 } = queryType
 
 class Main extends PureComponent {
@@ -299,8 +301,13 @@ class Main extends PureComponent {
             />
             <Route
               exact
+              path={getPath(MENU_WIN_LOSS)}
+              component={AverageWinLoss}
+            />
+            <Route
+              exact
               path={getPath(MENU_CONCENTRATION_RISK)}
-              component={() => <ConcentrationRisk handleClickExport={this.handleClickExport} />}
+              component={ConcentrationRisk}
             />
           </Switch>
         </div>

@@ -293,16 +293,19 @@
       "title": "選擇查詢時段",
       "view" : "查詢"
     },
+    "day": "Day",
     "refresh": "重新載入",
     "custom-timerange": "自訂時段",
     "24h": "24 小時間",
     "yesterday": "昨天",
     "2w": "兩週間",
+    "month": "Month",
     "month_to_date": "月初至今",
     "past_month": "過去一個月",
     "past_3m": "過去三個月",
     "custom_time": "自訂",
-    "start-date-placeholder": "開始日期時間"
+    "start-date-placeholder": "開始日期時間",
+    "year": "Year"
   },
   "trades": {
     "title": "交易",
