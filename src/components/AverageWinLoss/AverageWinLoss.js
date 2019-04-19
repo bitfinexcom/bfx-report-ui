@@ -6,10 +6,12 @@ import {
   Elevation, Intent, Position, Tooltip,
 } from '@blueprintjs/core'
 import { DateInput, TimePrecision } from '@blueprintjs/datetime'
+import _sortBy from 'lodash/sortBy'
 
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import TimeframeSelector from 'ui/TimeframeSelector'
+import LineChart from 'ui/LineChart'
+import TimeframeSelector from 'ui/TimeframeSelector/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 import {
@@ -18,6 +20,9 @@ import {
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './AverageWinLoss.props'
+import parseChartData from './AverageWinLoss.helpers'
+
+const CURRENCIES = ['USD', 'JPY', 'EUR', 'GBP']
 
 class AverageWinLoss extends PureComponent {
   constructor(props) {
@@ -100,6 +105,11 @@ class AverageWinLoss extends PureComponent {
     const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
     const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
 
+    const chartData = parseChartData({
+      data: _sortBy(entries, ['mts']),
+      timeframe,
+    })
+
     const renderTimeSelection = (
       <Fragment>
         <Tooltip
@@ -177,7 +187,10 @@ class AverageWinLoss extends PureComponent {
             &nbsp;
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          {/* Chart */}
+          <LineChart
+            data={chartData}
+            dataKeys={CURRENCIES}
+          />
         </Fragment>
       )
     }

@@ -3,11 +3,7 @@ import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { HTMLSelect } from '@blueprintjs/core'
 
-const TIMEFRAMES = [
-  'day',
-  'month',
-  'year',
-]
+import timeframeConstants from './constants'
 
 class TimeframeSelector extends PureComponent {
   onChange = (e) => {
@@ -24,7 +20,9 @@ class TimeframeSelector extends PureComponent {
         value={currentTimeframe}
         onChange={this.onChange}
       >
-        {TIMEFRAMES.map(timeframe => <option key={timeframe} value={timeframe}>{t(`timeframe.${timeframe}`)}</option>)}
+        <option key={timeframeConstants.DAY} value={timeframeConstants.DAY}>{t('timeframe.day')}</option>
+        <option key={timeframeConstants.MONTH} value={timeframeConstants.MONTH}>{t('timeframe.month')}</option>
+        <option key={timeframeConstants.YEAR} value={timeframeConstants.YEAR}>{t('timeframe.year')}</option>
       </HTMLSelect>
     )
   }
