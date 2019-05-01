@@ -8,6 +8,7 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
+import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
 import actions from './actions'
@@ -21,8 +22,14 @@ function getReqRisk({
   return makeFetchCall('getRisk', auth, { start, end, timeframe })
 }
 
+/* eslint-disable-next-line consistent-return */
 function* fetchRisk({ payload }) {
   try {
+    const shouldProceed = yield call(frameworkCheck)
+    if (!shouldProceed) {
+      // stop loading for first request
+      return yield put(actions.updateRisk())
+    }
     // save current query params in state for csv export reference and toggle loading
     yield put(actions.setParams(payload))
 

@@ -8,6 +8,7 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
+import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
 import actions from './actions'
@@ -17,8 +18,14 @@ function getReqWallets(auth, end) {
   return makeFetchCall('getWallets', auth, params)
 }
 
+/* eslint-disable-next-line consistent-return */
 function* fetchWallets({ payload: end }) {
   try {
+    const shouldProceed = yield call(frameworkCheck)
+    if (!shouldProceed) {
+      // stop loading for first request
+      return yield put(actions.updateWallets())
+    }
     // save current query time in state for csv export reference
     yield put(actions.setTimestamp(end))
 
@@ -48,5 +55,6 @@ function* fetchWalletsFail({ payload }) {
 
 export default function* walletsSaga() {
   yield takeLatest(types.FETCH_WALLETS, fetchWallets)
+  yield takeLatest(types.REFRESH, fetchWallets)
   yield takeLatest(types.FETCH_FAIL, fetchWalletsFail)
 }

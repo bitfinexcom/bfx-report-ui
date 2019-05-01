@@ -21,7 +21,6 @@ const mapStateToProps = (state = {}) => ({
 const mapDispatchToProps = dispatch => ({
   fetchWallets: time => dispatch(actions.fetchWallets(time)),
   refresh: () => dispatch(actions.refresh()),
-  setTimestamp: time => dispatch(actions.setTimestamp(time)),
 })
 
 const WalletsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Wallets))

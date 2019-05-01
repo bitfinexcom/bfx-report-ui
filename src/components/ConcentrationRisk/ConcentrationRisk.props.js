@@ -11,7 +11,6 @@ export const propTypes = {
   fetchWallets: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  setTimestamp: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   timezone: PropTypes.string,
 }
@@ -22,6 +21,5 @@ export const defaultProps = {
   fetchWallets: () => {},
   loading: true,
   refresh: () => {},
-  setTimestamp: () => {},
   timezone: '',
 }

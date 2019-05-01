@@ -48,20 +48,6 @@ class AverageWinLoss extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { loading: prevLoading } = prevProps
-    const { loading, fetchRisk } = this.props
-    const { start, end, timeframe } = this.state
-    if (loading && loading !== prevLoading) {
-      const params = {
-        start: start ? start.getTime() : null,
-        end: end ? end.getTime() : null,
-        timeframe,
-      }
-      fetchRisk(params)
-    }
-  }
-
   handleDateChange(input, time) {
     const end = time && time.getTime()
     if (isValidTimeStamp(end) || time === null) {
@@ -70,14 +56,14 @@ class AverageWinLoss extends PureComponent {
   }
 
   handleQuery() {
-    const { setParams } = this.props
+    const { fetchRisk } = this.props
     const { start, end, timeframe } = this.state
     const params = {
       start: start ? start.getTime() : undefined,
       end: end ? end.getTime() : undefined,
       timeframe,
     }
-    setParams(params)
+    fetchRisk(params)
   }
 
   handleTimeframeChange(timeframe) {
@@ -95,6 +81,7 @@ class AverageWinLoss extends PureComponent {
   render() {
     const {
       entries,
+      params: { timeframe: currTimeframe },
       loading,
       refresh,
       t,
@@ -107,7 +94,7 @@ class AverageWinLoss extends PureComponent {
 
     const chartData = parseChartData({
       data: _sortBy(entries, ['mts']),
-      timeframe,
+      timeframe: currTimeframe,
     })
 
     const renderTimeSelection = (

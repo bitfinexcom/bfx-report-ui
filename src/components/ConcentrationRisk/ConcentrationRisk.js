@@ -43,16 +43,6 @@ class ConcentrationRisk extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { loading: prevLoading } = prevProps
-    const { loading, fetchWallets } = this.props
-    const { timestamp } = this.state
-    const time = timestamp ? timestamp.getTime() : null
-    if (loading && loading !== prevLoading) {
-      fetchWallets(time)
-    }
-  }
-
   parseData = (filteredData) => {
     const summaryData = filteredData.reduce((acc, entry) => {
       const { currency, balanceUsd } = entry
@@ -88,10 +78,10 @@ class ConcentrationRisk extends PureComponent {
 
   handleQuery(e) {
     e.preventDefault()
-    const { setTimestamp } = this.props
+    const { fetchWallets } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
-    setTimestamp(time)
+    fetchWallets(time)
   }
 
   render() {

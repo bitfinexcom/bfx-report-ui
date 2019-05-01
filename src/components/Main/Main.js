@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 import AverageWinLoss from 'components/AverageWinLoss'
 import ConcentrationRisk from 'components/ConcentrationRisk'
+import FrameworkDialog from 'components/FrameworkDialog'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
@@ -118,6 +119,7 @@ class Main extends PureComponent {
       authIsShown,
       history,
       isCustomOpen,
+      isFrameworkOpen,
       location,
       menuMode,
       timezone,
@@ -157,16 +159,16 @@ class Main extends PureComponent {
             <Route
               exact
               path='/'
-              component={() => <Ledgers handleClickExport={this.handleClickExport} />}
+              render={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_LEDGERS)}
-              component={() => <Ledgers handleClickExport={this.handleClickExport} />}
+              render={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_LEDGERS)}/:symbol`}
-              component={() => <Ledgers handleClickExport={this.handleClickExport} />}
+              render={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
@@ -297,7 +299,7 @@ class Main extends PureComponent {
             <Route
               exact
               path={getPath(MENU_WALLETS)}
-              component={() => <Wallets handleClickExport={this.handleClickExport} />}
+              render={() => <Wallets handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
@@ -327,6 +329,7 @@ class Main extends PureComponent {
           handleExportDialogClose={this.handleExportDialogClose}
           startExport={this.startExport}
         />
+        <FrameworkDialog isFrameworkOpen={isFrameworkOpen} />
       </div>
     ) : ''
   }

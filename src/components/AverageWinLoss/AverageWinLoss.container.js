@@ -18,7 +18,6 @@ const mapStateToProps = (state = {}) => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchRisk: params => dispatch(actions.fetchRisk(params)),
-  setParams: params => dispatch(actions.setParams(params)),
   refresh: () => dispatch(actions.refresh()),
 })
 

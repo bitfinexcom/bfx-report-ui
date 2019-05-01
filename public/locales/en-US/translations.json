@@ -118,6 +118,12 @@
   "fpayment": {
     "title": "Funding Payment"
   },
+  "framework": {
+    "title": "Please wait until sync is completed",
+    "proceed": "Proceed anyway",
+    "cancel": "Cancel",
+    "notagain": "Don't show this message again"
+  },
   "header": {
     "logout": "Logout",
     "lang": {

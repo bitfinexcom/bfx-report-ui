@@ -31,7 +31,7 @@ const platforms = {
     HOME_URL: 'http://localhost:3000',
     showAuthPage: true,
     showSyncMode: true,
-    showFrameworkMode: true,
+    showFrameworkMode: false,
   },
 }
 

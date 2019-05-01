@@ -2,6 +2,7 @@ import types from './constants'
 
 const initialState = {
   isCustomDialogOpen: false,
+  isFrameworkDialogOpen: false,
 }
 
 export function uiReducer(state = initialState, action) {
@@ -11,6 +12,11 @@ export function uiReducer(state = initialState, action) {
       return {
         ...state,
         isCustomDialogOpen: payload,
+      }
+    case types.TOGGLE_FRAMEWORK_DIALOG:
+      return {
+        ...state,
+        isFrameworkDialogOpen: !state.isFrameworkDialogOpen,
       }
     default: {
       return state

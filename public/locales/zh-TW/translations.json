@@ -110,6 +110,12 @@
   "fpayment": {
     "title": "融資付款"
   },
+  "framework": {
+    "title": "Please wait until sync is completed",
+    "proceed": "Proceed anyway",
+    "cancel": "Cancel",
+    "notagain": "Don't show this message again"
+  },
   "header": {
     "logout": "登出",
     "lang": {

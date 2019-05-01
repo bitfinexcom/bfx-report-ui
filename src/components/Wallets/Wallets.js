@@ -48,16 +48,6 @@ class Wallets extends PureComponent {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { loading: prevLoading } = prevProps
-    const { loading, fetchWallets } = this.props
-    const { timestamp } = this.state
-    const time = timestamp ? timestamp.getTime() : null
-    if (loading && loading !== prevLoading) {
-      fetchWallets(time)
-    }
-  }
-
   handleDateChange(time) {
     const end = time && time.getTime()
     if (isValidTimeStamp(end) || time === null) {
@@ -67,10 +57,10 @@ class Wallets extends PureComponent {
 
   handleQuery(e) {
     e.preventDefault()
-    const { setTimestamp } = this.props
+    const { fetchWallets } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
-    setTimestamp(time)
+    fetchWallets(time)
   }
 
   render() {

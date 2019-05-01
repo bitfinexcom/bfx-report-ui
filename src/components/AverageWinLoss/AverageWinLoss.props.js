@@ -10,7 +10,6 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
-  setParams: PropTypes.func.isRequired,
   fetchRisk: PropTypes.func.isRequired,
 }
 
@@ -19,6 +18,5 @@ export const defaultProps = {
   loading: true,
   refresh: () => {},
   params: {},
-  setParams: () => {},
   fetchRisk: () => {},
 }
