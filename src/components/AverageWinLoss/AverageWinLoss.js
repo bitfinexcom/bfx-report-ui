@@ -27,11 +27,6 @@ const CURRENCIES = ['USD', 'JPY', 'EUR', 'GBP']
 class AverageWinLoss extends PureComponent {
   constructor(props) {
     super(props)
-    this.handleStartDateChange = this.handleDateChange.bind(this, 'start')
-    this.handleEndDateChange = this.handleDateChange.bind(this, 'end')
-    this.handleTimeframeChange = this.handleTimeframeChange.bind(this)
-    this.handleQuery = this.handleQuery.bind(this)
-    this.hasNewTime = this.hasNewTime.bind(this)
 
     const { params: { start, end, timeframe } } = props
     this.state = {
@@ -48,14 +43,14 @@ class AverageWinLoss extends PureComponent {
     }
   }
 
-  handleDateChange(input, time) {
-    const end = time && time.getTime()
-    if (isValidTimeStamp(end) || time === null) {
+  handleDateChange = (input, time) => {
+    const timestamp = time && time.getTime()
+    if (isValidTimeStamp(timestamp) || time === null) {
       this.setState({ [input]: time || null })
     }
   }
 
-  handleQuery() {
+  handleQuery = () => {
     const { fetchRisk } = this.props
     const { start, end, timeframe } = this.state
     const params = {
@@ -66,11 +61,11 @@ class AverageWinLoss extends PureComponent {
     fetchRisk(params)
   }
 
-  handleTimeframeChange(timeframe) {
+  handleTimeframeChange = (timeframe) => {
     this.setState({ timeframe })
   }
 
-  hasNewTime() {
+  hasNewTime = () => {
     const { params } = this.props
     const { start: currStart, end: currEnd, timeframe: currTimeframe } = params
     const { start, end, timeframe } = this.state
@@ -110,7 +105,7 @@ class AverageWinLoss extends PureComponent {
           <DateInput
             formatDate={formatDate}
             parseDate={parseDate}
-            onChange={this.handleStartDateChange}
+            onChange={date => this.handleDateChange('start', date)}
             value={start}
             timePrecision={timePrecision}
           />
@@ -127,7 +122,7 @@ class AverageWinLoss extends PureComponent {
           <DateInput
             formatDate={formatDate}
             parseDate={parseDate}
-            onChange={this.handleEndDateChange}
+            onChange={date => this.handleDateChange('end', date)}
             value={end}
             timePrecision={timePrecision}
           />

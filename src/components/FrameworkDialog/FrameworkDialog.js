@@ -13,16 +13,8 @@ import mode from 'state/sync/constants'
 import { propTypes, defaultProps } from './FrameworkDialog.props'
 
 class FrameworkDialog extends PureComponent {
-  constructor() {
-    super()
-
-    this.state = {
-      isFrameworkDialogDisabled: false,
-    }
-
-    this.handleCancel = this.handleProceed.bind(this, false)
-    this.handleProceed = this.handleProceed.bind(this, true)
-    this.handleChange = this.handleChange.bind(this)
+  state = {
+    isFrameworkDialogDisabled: false,
   }
 
   componentDidUpdate(prevProps) {
@@ -32,7 +24,7 @@ class FrameworkDialog extends PureComponent {
     }
   }
 
-  handleProceed(shouldProceed) {
+  handleProceed = (shouldProceed) => {
     const { toggleDialog, proceedRequest } = this.props
     const { isFrameworkDialogDisabled } = this.state
 
@@ -44,7 +36,7 @@ class FrameworkDialog extends PureComponent {
     toggleDialog()
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     const { checked } = e.target
     this.setState({
       isFrameworkDialogDisabled: checked,
@@ -61,7 +53,7 @@ class FrameworkDialog extends PureComponent {
     return (
       <Dialog
         icon={IconNames.CONFIRM}
-        onClose={this.handleCancel}
+        onClose={() => this.handleProceed(false)}
         title={t('framework.title')}
         autoFocus
         canEscapeKeyClose
@@ -80,10 +72,10 @@ class FrameworkDialog extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <Button onClick={this.handleCancel}>
+            <Button onClick={() => this.handleProceed(false)}>
               {t('framework.cancel')}
             </Button>
-            <Button intent={Intent.PRIMARY} onClick={this.handleProceed}>
+            <Button intent={Intent.PRIMARY} onClick={() => this.handleProceed(true)}>
               {t('framework.proceed')}
             </Button>
           </div>
