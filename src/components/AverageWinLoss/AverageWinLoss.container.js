@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/risk/actions'
+import actions from 'state/winLoss/actions'
 import {
   getDataReceived,
   getEntries,
   getParams,
-} from 'state/risk/selectors'
+} from 'state/winLoss/selectors'
 
 import AverageWinLoss from './AverageWinLoss'
 
@@ -17,7 +17,7 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchRisk: params => dispatch(actions.fetchRisk(params)),
+  fetchWinLoss: params => dispatch(actions.fetchWinLoss(params)),
   refresh: () => dispatch(actions.refresh()),
 })
 

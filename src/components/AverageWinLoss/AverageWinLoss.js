@@ -26,7 +26,6 @@ import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './AverageWinLoss.props'
 
-
 class AverageWinLoss extends PureComponent {
   constructor(props) {
     super(props)
@@ -40,9 +39,9 @@ class AverageWinLoss extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchRisk, params } = this.props
+    const { loading, fetchWinLoss, params } = this.props
     if (loading) {
-      fetchRisk(params)
+      fetchWinLoss(params)
     }
   }
 
@@ -54,14 +53,14 @@ class AverageWinLoss extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchRisk } = this.props
+    const { fetchWinLoss } = this.props
     const { start, end, timeframe } = this.state
     const params = {
       start: start ? start.getTime() : undefined,
       end: end ? end.getTime() : undefined,
       timeframe,
     }
-    fetchRisk(params)
+    fetchWinLoss(params)
   }
 
   handleTimeframeChange = (timeframe) => {

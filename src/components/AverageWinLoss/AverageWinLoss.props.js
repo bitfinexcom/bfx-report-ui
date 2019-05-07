@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types'
 
-const RISK_ENTRIES_PROPS = PropTypes.shape({
+const WIN_LOSS_ENTRIES_PROPS = PropTypes.shape({
   mts: PropTypes.number.isRequired,
 })
 
 export const propTypes = {
-  entries: PropTypes.arrayOf(RISK_ENTRIES_PROPS).isRequired,
+  entries: PropTypes.arrayOf(WIN_LOSS_ENTRIES_PROPS).isRequired,
   loading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
-  fetchRisk: PropTypes.func.isRequired,
+  fetchWinLoss: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
@@ -18,5 +18,5 @@ export const defaultProps = {
   loading: true,
   refresh: () => {},
   params: {},
-  fetchRisk: () => {},
+  fetchWinLoss: () => {},
 }

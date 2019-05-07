@@ -20,7 +20,6 @@ import positionsReducer from './positions/reducer'
 import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
 import queryReducer from './query/reducer'
-import riskReducer from './risk/reducer'
 import tickersReducer from './tickers/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
@@ -28,6 +27,7 @@ import symbolsReducer from './symbols/reducer'
 import syncReducer from './sync/reducer'
 import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
+import winLossReducer from './winLoss/reducer'
 
 const PERSIST_WHITELIST = ['base']
 const PERSIST_DEBUG = false
@@ -68,7 +68,7 @@ const SYNC_REDUCERS = {
 
 const FRAMEWORK_REDUCERS = {
   balance: accountBalanceReducer,
-  risk: riskReducer,
+  winLoss: winLossReducer,
 }
 
 const REDUCERS = {
