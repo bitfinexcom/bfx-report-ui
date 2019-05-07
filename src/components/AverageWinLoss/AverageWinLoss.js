@@ -69,8 +69,10 @@ class AverageWinLoss extends PureComponent {
     const { params } = this.props
     const { start: currStart, end: currEnd, timeframe: currTimeframe } = params
     const { start, end, timeframe } = this.state
-    return (start ? start.getTime() !== currStart : !!start !== !!currStart)
-      || (end ? end.getTime() !== currEnd : !!end !== !!currEnd) || (timeframe !== currTimeframe)
+    const isDiffStart = start ? start.getTime() !== currStart : !!start !== !!currStart
+    const isDiffEnd = end ? end.getTime() !== currEnd : !!end !== !!currEnd
+    const isDiffTimeframe = timeframe !== currTimeframe
+    return isDiffStart || isDiffEnd || isDiffTimeframe
   }
 
   render() {
