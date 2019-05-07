@@ -15,6 +15,7 @@ import { getNoAuthTokenUrlString } from 'state/utils'
 import { platform } from 'var/config'
 
 const {
+  MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_FCREDIT,
   MENU_FLOAN,
@@ -29,6 +30,7 @@ const {
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
+  MENU_WIN_LOSS,
   MENU_WITHDRAWALS,
   MENU_WALLETS,
 } = queryType
@@ -50,6 +52,8 @@ class ToggleMenu extends PureComponent {
     this.handleClickPositions = this.handleClick.bind(this, MENU_POSITIONS)
     this.handleClickTickers = this.handleClick.bind(this, MENU_TICKERS)
     this.handleClickWallets = this.handleClick.bind(this, MENU_WALLETS)
+    this.handleClickWinLoss = this.handleClick.bind(this, MENU_WIN_LOSS)
+    this.handleClickConcentrationRisk = this.handleClick.bind(this, MENU_CONCENTRATION_RISK)
   }
 
   handleClick(target) {
@@ -177,6 +181,25 @@ class ToggleMenu extends PureComponent {
           onClick={this.handleClickTickers}
           active={target === MENU_TICKERS}
         />
+        {platform.showFrameworkMode ? (
+          <Fragment>
+            <MenuDivider />
+            <MenuItem
+              icon={getIcon(MENU_WIN_LOSS)}
+              text={isIconMode ? '' : t('averagewinloss.title')}
+              title={isIconMode ? t('averagewinloss.title') : ''}
+              onClick={this.handleClickWinLoss}
+              active={target === MENU_WIN_LOSS}
+            />
+            <MenuItem
+              icon={getIcon(MENU_CONCENTRATION_RISK)}
+              text={isIconMode ? '' : t('concentrationrisk.title')}
+              title={isIconMode ? t('concentrationrisk.title') : ''}
+              onClick={this.handleClickConcentrationRisk}
+              active={target === MENU_CONCENTRATION_RISK}
+            />
+          </Fragment>
+        ) : undefined}
       </Fragment>
     )
 

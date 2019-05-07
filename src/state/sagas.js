@@ -17,6 +17,7 @@ import positionsAuditSaga from './audit/saga'
 import publicFundingSaga from './publicFunding/saga'
 import publicTradesSaga from './publicTrades/saga'
 import querySaga from './query/saga'
+import riskSaga from './risk/saga'
 import tickersSaga from './tickers/saga'
 import tradesSaga from './trades/saga'
 import symbolsSaga from './symbols/saga'
@@ -47,5 +48,8 @@ export default function* rootSaga() {
   if (platform.showSyncMode) {
     yield fork(syncSaga)
     yield fork(fpaymentSaga)
+  }
+  if (platform.showFrameworkMode) {
+    yield fork(riskSaga)
   }
 }

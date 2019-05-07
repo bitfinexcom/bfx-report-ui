@@ -1,4 +1,6 @@
 @import "./variables.scss";
+@import "components/ConcentrationRisk/_ConcentrationRisk.scss";
+@import "ui/LineChart/_LineChart.scss";
 
 body {
   margin: 0;
@@ -148,6 +150,11 @@ body.#{$ns}-light .bitfinex-red-text > div {
 
 .bitfinex-pref-checkbox {
   margin-top: 6px;
+}
+
+.bitfinex-framework-checkbox {
+  margin-top: 5px;
+  margin-bottom: -4px;
 }
 
 div.bp3-multi-select {

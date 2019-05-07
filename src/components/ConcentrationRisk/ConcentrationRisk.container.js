@@ -9,7 +9,7 @@ import {
 } from 'state/wallets/selectors'
 import { getTimezone } from 'state/base/selectors'
 
-import Wallets from './Wallets'
+import ConcentrationRisk from './ConcentrationRisk'
 
 const mapStateToProps = (state = {}) => ({
   currentTime: getTimestamp(state),
@@ -23,6 +23,6 @@ const mapDispatchToProps = dispatch => ({
   refresh: () => dispatch(actions.refresh()),
 })
 
-const WalletsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Wallets))
+const ConcentrationRiskContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ConcentrationRisk))
 
-export default WalletsContainer
+export default ConcentrationRiskContainer

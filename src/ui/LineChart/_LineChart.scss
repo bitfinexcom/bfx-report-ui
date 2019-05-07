@@ -1,0 +1,29 @@
+.line-chart {
+  width: 100%;
+  height: 100%;
+
+  .recharts {
+    &-wrapper {
+      margin: 0 auto;
+    }
+
+    &-default-legend {
+      margin-left: 67px !important;
+    }
+
+    &-tooltip {
+      &-cursor {
+        fill: white;
+        opacity: 0.05;
+      }
+
+      &-label {
+        color: black;
+      }
+    }
+
+    &-surface {
+      margin-bottom: 3px;
+    }
+  }
+}

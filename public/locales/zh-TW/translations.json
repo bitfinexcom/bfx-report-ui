@@ -20,6 +20,18 @@
     "id": "#",
     "usd": "美元"
   },
+  "concentrationrisk": {
+    "title": "Concentration Risk",
+    "nodata": "沒有相關資料。請嘗試選擇其他時間。",
+    "query": {
+      "title": "查詢",
+      "tooltip": "選擇一個時間以查看過去時刻的錢包"
+    },
+    "column": {
+      "currency": "貨幣",
+      "balanceUsd": "餘額(美元)"
+    }
+  },
   "copy": "複製",
   "deposits": {
     "title": "存款"
@@ -97,6 +109,12 @@
   },
   "fpayment": {
     "title": "融資付款"
+  },
+  "framework": {
+    "title": "Please wait until sync is completed",
+    "proceed": "Proceed anyway",
+    "cancel": "Cancel",
+    "notagain": "Don't show this message again"
   },
   "header": {
     "logout": "登出",
@@ -281,16 +299,19 @@
       "title": "選擇查詢時段",
       "view" : "查詢"
     },
+    "day": "Day",
     "refresh": "重新載入",
     "custom-timerange": "自訂時段",
     "24h": "24 小時間",
     "yesterday": "昨天",
     "2w": "兩週間",
+    "month": "Month",
     "month_to_date": "月初至今",
     "past_month": "過去一個月",
     "past_3m": "過去三個月",
     "custom_time": "自訂",
-    "start-date-placeholder": "開始日期時間"
+    "start-date-placeholder": "開始日期時間",
+    "year": "Year"
   },
   "trades": {
     "title": "交易",

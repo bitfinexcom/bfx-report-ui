@@ -6,6 +6,7 @@ const {
   FILTER_ID,
   FILTER_PAIR,
   FILTER_SYMBOL,
+  MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_FCREDIT,
   MENU_FLOAN,
@@ -22,10 +23,12 @@ const {
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
+  MENU_WIN_LOSS,
   MENU_WITHDRAWALS,
 } = queryType
 
 export const TYPE_WHITELIST = [
+  MENU_CONCENTRATION_RISK,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -44,6 +47,7 @@ export const TYPE_WHITELIST = [
 ]
 
 export const ROUTE_WHITELIST = [
+  MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_FCREDIT,
   MENU_FLOAN,
@@ -59,6 +63,7 @@ export const ROUTE_WHITELIST = [
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
+  MENU_WIN_LOSS,
   MENU_WITHDRAWALS,
 ]
 
@@ -106,6 +111,10 @@ export function isValidTimeStamp(n) {
  * The queryLimit / pageSize MUST be divisible
  */
 const MAPPING = {
+  [MENU_CONCENTRATION_RISK]: {
+    icon: 'chart',
+    path: '/concentration_risk',
+  },
   [MENU_FCREDIT]: {
     icon: 'book',
     path: '/credits',
@@ -168,6 +177,10 @@ const MAPPING = {
     filterType: FILTER_SYMBOL,
     queryLimit: 25,
     pageSize: 25,
+  },
+  [MENU_WIN_LOSS]: {
+    icon: 'chart',
+    path: '/average_win_loss',
   },
   [MENU_WITHDRAWALS]: {
     icon: 'folder-shared-open',

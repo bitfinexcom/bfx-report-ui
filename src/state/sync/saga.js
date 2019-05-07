@@ -1,5 +1,6 @@
 import {
   call,
+  all,
   cancelled,
   put,
   select,
@@ -67,6 +68,21 @@ function* stopSyncing() {
   if (error) {
     yield put(updateSyncErrorStatus('during disableSyncMode'))
   }
+}
+
+export function* isSynched() {
+  const auth = yield select(selectAuth)
+  const [{ result: isQueryWithDb, error }, { result: syncProgress, error: progressError }] = yield all([
+    call(checkIsSyncModeWithDbData, auth),
+    call(getSyncProgress, auth),
+  ])
+  if (isQueryWithDb && Number.isInteger(syncProgress) && syncProgress === 100) {
+    return true
+  }
+  if (error || progressError) {
+    yield put(updateSyncErrorStatus('during isSynching'))
+  }
+  return false
 }
 
 function* forceQueryFromDb() {

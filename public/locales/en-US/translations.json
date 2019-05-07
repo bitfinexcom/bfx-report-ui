@@ -16,9 +16,29 @@
       "description": "Login to Reports with token..."
     }
   },
+  "averagewinloss": {
+    "title": "Average Win/Loss",
+    "query": {
+      "title": "Query",
+      "startDateTooltip": "Select a start time",
+      "endDateTooltip": "Select end time"
+    }
+  },
   "column":{
     "id": "#",
     "usd": "USD"
+  },
+  "concentrationrisk": {
+    "title": "Concentration Risk",
+    "nodata": "No related data in this date time. You can try another date time.",
+    "query": {
+      "title": "Query",
+      "tooltip": "Select a time to query the wallets snapshot"
+    },
+    "column": {
+      "currency": "CURRENCY",
+      "balanceUsd": "BALANCE (USD)"
+    }
   },
   "copy": "Copy",
   "deposits": {
@@ -97,6 +117,12 @@
   },
   "fpayment": {
     "title": "Funding Payment"
+  },
+  "framework": {
+    "title": "Please wait until sync is completed",
+    "proceed": "Proceed anyway",
+    "cancel": "Cancel",
+    "notagain": "Don't show this message again"
   },
   "header": {
     "logout": "Logout",
@@ -282,16 +308,19 @@
       "title": "Select Query Range",
       "view" : "View"
     },
+    "day": "Day",
     "refresh": "Refresh",
     "custom-timerange": "Custom time range",
     "24h": "Last 24 hours",
     "yesterday": "Yesterday",
     "2w": "Last 2 weeks",
+    "month": "Month",
     "month_to_date": "Month to date",
     "past_month": "Past month",
     "past_3m": "Past 3 months",
     "custom_time": "Custom",
-    "start-date-placeholder": "Start Date Time"
+    "start-date-placeholder": "Start Date Time",
+    "year": "Year"
   },
   "trades": {
     "title": "Trades",

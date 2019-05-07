@@ -2,6 +2,9 @@ import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import classNames from 'classnames'
 
+import AverageWinLoss from 'components/AverageWinLoss'
+import ConcentrationRisk from 'components/ConcentrationRisk'
+import FrameworkDialog from 'components/FrameworkDialog'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
@@ -27,6 +30,7 @@ import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
 
 const {
+  MENU_CONCENTRATION_RISK,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -43,6 +47,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_TICKERS,
   MENU_WALLETS,
+  MENU_WIN_LOSS,
 } = queryType
 
 class Main extends PureComponent {
@@ -114,6 +119,7 @@ class Main extends PureComponent {
       authIsShown,
       history,
       isCustomOpen,
+      isFrameworkOpen,
       location,
       menuMode,
       timezone,
@@ -153,16 +159,16 @@ class Main extends PureComponent {
             <Route
               exact
               path='/'
-              component={() => <Ledgers handleClickExport={this.handleClickExport} />}
+              render={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_LEDGERS)}
-              component={() => <Ledgers handleClickExport={this.handleClickExport} />}
+              render={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_LEDGERS)}/:symbol`}
-              component={() => <Ledgers handleClickExport={this.handleClickExport} />}
+              render={() => <Ledgers handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
@@ -293,7 +299,17 @@ class Main extends PureComponent {
             <Route
               exact
               path={getPath(MENU_WALLETS)}
-              component={() => <Wallets handleClickExport={this.handleClickExport} />}
+              render={() => <Wallets handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_WIN_LOSS)}
+              component={AverageWinLoss}
+            />
+            <Route
+              exact
+              path={getPath(MENU_CONCENTRATION_RISK)}
+              component={ConcentrationRisk}
             />
           </Switch>
         </div>
@@ -313,6 +329,7 @@ class Main extends PureComponent {
           handleExportDialogClose={this.handleExportDialogClose}
           startExport={this.startExport}
         />
+        <FrameworkDialog isFrameworkOpen={isFrameworkOpen} />
       </div>
     ) : ''
   }

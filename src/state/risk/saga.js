@@ -13,48 +13,51 @@ import { frameworkCheck } from 'state/ui/saga'
 import types from './constants'
 import actions from './actions'
 
-function getReqWallets(auth, end) {
-  const params = end ? { end } : {}
-  return makeFetchCall('getWallets', auth, params)
+function getReqRisk({
+  start,
+  end,
+  timeframe,
+  auth,
+}) {
+  return makeFetchCall('getRisk', auth, { start, end, timeframe })
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchWallets({ payload: end }) {
+function* fetchRisk({ payload }) {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
       // stop loading for first request
-      return yield put(actions.updateWallets())
+      return yield put(actions.updateRisk())
     }
-    // save current query time in state for csv export reference
-    yield put(actions.setTimestamp(end))
+    // save current query params in state for csv export reference and toggle loading
+    yield put(actions.setParams(payload))
 
     const auth = yield select(selectAuth)
-    const { result = [], error } = yield call(getReqWallets, auth, end)
-    yield put(actions.updateWallets(result))
+    const { result = [], error } = yield call(getReqRisk, { auth, ...payload })
+    yield put(actions.updateRisk(result))
 
     if (error) {
       yield put(actions.fetchFail({
         id: 'status.fail',
-        topic: 'wallets.title',
+        topic: 'averagewinloss.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
       id: 'status.request.error',
-      topic: 'wallets.title',
+      topic: 'averagewinloss.title',
       detail: JSON.stringify(fail),
     }))
   }
 }
 
-function* fetchWalletsFail({ payload }) {
+function* fetchRiskFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
-export default function* walletsSaga() {
-  yield takeLatest(types.FETCH_WALLETS, fetchWallets)
-  yield takeLatest(types.REFRESH, fetchWallets)
-  yield takeLatest(types.FETCH_FAIL, fetchWalletsFail)
+export default function* riskSaga() {
+  yield takeLatest(types.FETCH_RISK, fetchRisk)
+  yield takeLatest(types.FETCH_FAIL, fetchRiskFail)
 }

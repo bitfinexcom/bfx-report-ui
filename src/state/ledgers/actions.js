@@ -77,11 +77,13 @@ export function refresh() {
 export function updateLedgers(data, limit, pageSize) {
   return {
     type: types.UPDATE_LEDGERS,
-    payload: {
-      data,
-      limit,
-      pageSize,
-    },
+    payload: (data || limit || pageSize)
+      ? {
+        data,
+        limit,
+        pageSize,
+      }
+      : undefined,
   }
 }
 

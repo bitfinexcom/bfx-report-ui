@@ -14,6 +14,8 @@ import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
 import { getPageSize } from 'state/query/utils'
 import { fetchNext } from 'state/sagas.helper'
 
+import { frameworkCheck } from 'state/ui/saga'
+
 import types from './constants'
 import actions from './actions'
 import { getTargetSymbols, getLedgers } from './selectors'
@@ -38,8 +40,14 @@ function getReqLedgers({
   return makeFetchCall('getLedgers', auth, params)
 }
 
+/* eslint-disable-next-line consistent-return */
 function* fetchLedgers({ payload: symbol }) {
   try {
+    const shouldProceed = yield call(frameworkCheck)
+    if (!shouldProceed) {
+      // stop loading for first request
+      return yield put(actions.updateLedgers())
+    }
     let targetSymbols = yield select(getTargetSymbols)
     const symbolsUrl = getSymbolsURL(targetSymbols)
     // set symbol from url
