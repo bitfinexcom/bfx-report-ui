@@ -12,10 +12,10 @@ const initialState = {
   skip: undefined,
 }
 
-export function riskReducer(state = initialState, action) {
+export function balanceReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
-    case types.UPDATE_RISK: {
+    case types.UPDATE_BALANCE: {
       if (!payload) {
         return {
           ...state,
@@ -50,4 +50,4 @@ export function riskReducer(state = initialState, action) {
   }
 }
 
-export default riskReducer
+export default balanceReducer

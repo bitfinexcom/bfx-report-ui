@@ -6,6 +6,7 @@ const {
   FILTER_ID,
   FILTER_PAIR,
   FILTER_SYMBOL,
+  MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_FCREDIT,
@@ -28,6 +29,7 @@ const {
 } = queryType
 
 export const TYPE_WHITELIST = [
+  MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
   MENU_FCREDIT,
   MENU_FLOAN,
@@ -44,9 +46,11 @@ export const TYPE_WHITELIST = [
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
+  MENU_WIN_LOSS,
 ]
 
 export const ROUTE_WHITELIST = [
+  MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_FCREDIT,
@@ -111,6 +115,10 @@ export function isValidTimeStamp(n) {
  * The queryLimit / pageSize MUST be divisible
  */
 const MAPPING = {
+  [MENU_ACCOUNT_BALANCE]: {
+    icon: 'chart',
+    path: '/account_balance',
+  },
   [MENU_CONCENTRATION_RISK]: {
     icon: 'chart',
     path: '/concentration_risk',

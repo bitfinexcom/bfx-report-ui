@@ -2,6 +2,7 @@ import { fork } from 'redux-saga/effects'
 
 import { platform } from 'var/config'
 
+import accountBalanceSaga from './accountBalance/saga'
 import authSaga from './auth/saga'
 import baseSaga from './base/saga'
 import fcreditSaga from './fundingCreditHistory/saga'
@@ -50,6 +51,7 @@ export default function* rootSaga() {
     yield fork(fpaymentSaga)
   }
   if (platform.showFrameworkMode) {
+    yield fork(accountBalanceSaga)
     yield fork(riskSaga)
   }
 }

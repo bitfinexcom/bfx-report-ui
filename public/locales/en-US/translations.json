@@ -1,4 +1,12 @@
 {
+  "accountbalance": {
+    "title": "Account Balance",
+    "query": {
+      "title": "Query",
+      "startDateTooltip": "Select a start time",
+      "endDateTooltip": "Select end time"
+    }
+  },
   "activepositions": {
     "title": "Active Positions"
   },

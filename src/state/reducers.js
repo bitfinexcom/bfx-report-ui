@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'
 
 import { platform } from 'var/config'
 
+import accountBalanceReducer from './accountBalance/reducer'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
@@ -52,7 +53,6 @@ const BASE_REDUCERS = {
   publicFunding: publicFundingReducer,
   publicTrades: publicTradesReducer,
   query: queryReducer,
-  risk: riskReducer,
   tickers: tickersReducer,
   trades: tradesReducer,
   status: statusReducer,
@@ -61,13 +61,21 @@ const BASE_REDUCERS = {
   wallets: walletsReducer,
 }
 
-const REDUCERS = platform.showSyncMode
-  ? {
-    ...BASE_REDUCERS,
-    fpayment: fundingPaymentReducer,
-    sync: syncReducer,
-  }
-  : BASE_REDUCERS
+const SYNC_REDUCERS = {
+  fpayment: fundingPaymentReducer,
+  sync: syncReducer,
+}
+
+const FRAMEWORK_REDUCERS = {
+  balance: accountBalanceReducer,
+  risk: riskReducer,
+}
+
+const REDUCERS = {
+  ...BASE_REDUCERS,
+  ...(platform.showSyncMode ? SYNC_REDUCERS : {}),
+  ...(platform.showFrameworkMode ? FRAMEWORK_REDUCERS : {}),
+}
 
 const rootReducer = combineReducers(REDUCERS)
 
