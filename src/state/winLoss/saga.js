@@ -13,29 +13,29 @@ import { frameworkCheck } from 'state/ui/saga'
 import types from './constants'
 import actions from './actions'
 
-function getReqRisk({
+function getReqWinLoss({
   start,
   end,
   timeframe,
   auth,
 }) {
-  return makeFetchCall('getRisk', auth, { start, end, timeframe })
+  return makeFetchCall('getWinLoss', auth, { start, end, timeframe })
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchRisk({ payload }) {
+function* fetchWinLoss({ payload }) {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
       // stop loading for first request
-      return yield put(actions.updateRisk())
+      return yield put(actions.updateWinLoss())
     }
     // save current query params in state for csv export reference and toggle loading
     yield put(actions.setParams(payload))
 
     const auth = yield select(selectAuth)
-    const { result = [], error } = yield call(getReqRisk, { auth, ...payload })
-    yield put(actions.updateRisk(result))
+    const { result = [], error } = yield call(getReqWinLoss, { auth, ...payload })
+    yield put(actions.updateWinLoss(result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -53,11 +53,11 @@ function* fetchRisk({ payload }) {
   }
 }
 
-function* fetchRiskFail({ payload }) {
+function* fetchWinLossFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
-export default function* riskSaga() {
-  yield takeLatest(types.FETCH_RISK, fetchRisk)
-  yield takeLatest(types.FETCH_FAIL, fetchRiskFail)
+export default function* winLossSaga() {
+  yield takeLatest(types.FETCH_WIN_LOSS, fetchWinLoss)
+  yield takeLatest(types.FETCH_FAIL, fetchWinLossFail)
 }

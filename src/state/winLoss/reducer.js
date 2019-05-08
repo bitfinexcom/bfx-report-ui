@@ -1,4 +1,5 @@
 import authTypes from 'state/auth/constants'
+import timeframeConstants from 'ui/TimeframeSelector/constants'
 
 import types from './constants'
 
@@ -7,14 +8,14 @@ const initialState = {
   entries: [],
   startDate: undefined,
   endDate: undefined,
-  timeframe: 'day',
+  timeframe: timeframeConstants.DAY,
   skip: undefined,
 }
 
-export function riskReducer(state = initialState, action) {
+export function winLossReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
-    case types.UPDATE_RISK: {
+    case types.UPDATE_WIN_LOSS: {
       if (!payload) {
         return {
           ...state,
@@ -49,4 +50,4 @@ export function riskReducer(state = initialState, action) {
   }
 }
 
-export default riskReducer
+export default winLossReducer

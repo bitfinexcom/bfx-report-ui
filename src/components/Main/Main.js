@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import classNames from 'classnames'
 
+import AccountBalance from 'components/AccountBalance'
 import AverageWinLoss from 'components/AverageWinLoss'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import FrameworkDialog from 'components/FrameworkDialog'
@@ -25,11 +26,13 @@ import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
 import { getPath, getTarget } from 'state/query/utils'
 import ToggleMenu from 'ui/ToggleMenu'
+import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Main.props'
 import CustomDialog from './CustomDialog'
 
 const {
+  MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
   MENU_FCREDIT,
   MENU_FLOAN,
@@ -301,16 +304,25 @@ class Main extends PureComponent {
               path={getPath(MENU_WALLETS)}
               render={() => <Wallets handleClickExport={this.handleClickExport} />}
             />
-            <Route
-              exact
-              path={getPath(MENU_WIN_LOSS)}
-              component={AverageWinLoss}
-            />
-            <Route
-              exact
-              path={getPath(MENU_CONCENTRATION_RISK)}
-              component={ConcentrationRisk}
-            />
+            {platform.showFrameworkMode && (
+              <Fragment>
+                <Route
+                  exact
+                  path={getPath(MENU_ACCOUNT_BALANCE)}
+                  component={AccountBalance}
+                />
+                <Route
+                  exact
+                  path={getPath(MENU_WIN_LOSS)}
+                  component={AverageWinLoss}
+                />
+                <Route
+                  exact
+                  path={getPath(MENU_CONCENTRATION_RISK)}
+                  component={ConcentrationRisk}
+                />
+              </Fragment>
+            )}
           </Switch>
         </div>
         <CustomDialog

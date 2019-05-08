@@ -24,9 +24,9 @@ import {
 } from 'state/utils'
 import { platform } from 'var/config'
 
-import { propTypes, defaultProps } from './AverageWinLoss.props'
+import { propTypes, defaultProps } from './AccountBalance.props'
 
-class AverageWinLoss extends PureComponent {
+class AccountBalance extends PureComponent {
   constructor(props) {
     super(props)
 
@@ -39,9 +39,9 @@ class AverageWinLoss extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchWinLoss, params } = this.props
+    const { loading, fetchBalance, params } = this.props
     if (loading) {
-      fetchWinLoss(params)
+      fetchBalance(params)
     }
   }
 
@@ -53,14 +53,14 @@ class AverageWinLoss extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchWinLoss } = this.props
+    const { fetchBalance } = this.props
     const { start, end, timeframe } = this.state
     const params = {
       start: start ? start.getTime() : undefined,
       end: end ? end.getTime() : undefined,
       timeframe,
     }
-    fetchWinLoss(params)
+    fetchBalance(params)
   }
 
   handleTimeframeChange = (timeframe) => {
@@ -101,7 +101,7 @@ class AverageWinLoss extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('averagewinloss.query.startDateTooltip')}
+              {t('accountbalance.query.startDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -118,7 +118,7 @@ class AverageWinLoss extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('averagewinloss.query.endDateTooltip')}
+              {t('accountbalance.query.endDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -142,7 +142,7 @@ class AverageWinLoss extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('averagewinloss.query.title')}
+          {t('accountbalance.query.title')}
         </Button>
       </Fragment>
     )
@@ -150,13 +150,13 @@ class AverageWinLoss extends PureComponent {
     let showContent
     if (loading) {
       showContent = (
-        <Loading title='averagewinloss.title' />
+        <Loading title='accountbalance.title' />
       )
     } else if (!entries.length) { // if no data
       showContent = (
         <Fragment>
           <h4>
-            {t('averagewinloss.title')}
+            {t('accountbalance.title')}
             &nbsp;
             {renderTimeSelection}
           </h4>
@@ -167,7 +167,7 @@ class AverageWinLoss extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {t('averagewinloss.title')}
+            {t('accountbalance.title')}
             &nbsp;
             {renderTimeSelection}
             &nbsp;
@@ -188,7 +188,7 @@ class AverageWinLoss extends PureComponent {
   }
 }
 
-AverageWinLoss.propTypes = propTypes
-AverageWinLoss.defaultProps = defaultProps
+AccountBalance.propTypes = propTypes
+AccountBalance.defaultProps = defaultProps
 
-export default withTranslation('translations')(AverageWinLoss)
+export default withTranslation('translations')(AccountBalance)

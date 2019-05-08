@@ -15,6 +15,7 @@ import { getNoAuthTokenUrlString } from 'state/utils'
 import { platform } from 'var/config'
 
 const {
+  MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_FCREDIT,
@@ -52,6 +53,7 @@ class ToggleMenu extends PureComponent {
     this.handleClickPositions = this.handleClick.bind(this, MENU_POSITIONS)
     this.handleClickTickers = this.handleClick.bind(this, MENU_TICKERS)
     this.handleClickWallets = this.handleClick.bind(this, MENU_WALLETS)
+    this.handleClickAccountBalance = this.handleClick.bind(this, MENU_ACCOUNT_BALANCE)
     this.handleClickWinLoss = this.handleClick.bind(this, MENU_WIN_LOSS)
     this.handleClickConcentrationRisk = this.handleClick.bind(this, MENU_CONCENTRATION_RISK)
   }
@@ -184,6 +186,13 @@ class ToggleMenu extends PureComponent {
         {platform.showFrameworkMode ? (
           <Fragment>
             <MenuDivider />
+            <MenuItem
+              icon={getIcon(MENU_ACCOUNT_BALANCE)}
+              text={isIconMode ? '' : t('accountbalance.title')}
+              title={isIconMode ? t('accountbalance.title') : ''}
+              onClick={this.handleClickAccountBalance}
+              active={target === MENU_ACCOUNT_BALANCE}
+            />
             <MenuItem
               icon={getIcon(MENU_WIN_LOSS)}
               text={isIconMode ? '' : t('averagewinloss.title')}

@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'
 
 import { platform } from 'var/config'
 
+import accountBalanceReducer from './accountBalance/reducer'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
@@ -19,7 +20,6 @@ import positionsReducer from './positions/reducer'
 import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
 import queryReducer from './query/reducer'
-import riskReducer from './risk/reducer'
 import tickersReducer from './tickers/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
@@ -27,6 +27,7 @@ import symbolsReducer from './symbols/reducer'
 import syncReducer from './sync/reducer'
 import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
+import winLossReducer from './winLoss/reducer'
 
 const PERSIST_WHITELIST = ['base']
 const PERSIST_DEBUG = false
@@ -52,7 +53,6 @@ const BASE_REDUCERS = {
   publicFunding: publicFundingReducer,
   publicTrades: publicTradesReducer,
   query: queryReducer,
-  risk: riskReducer,
   tickers: tickersReducer,
   trades: tradesReducer,
   status: statusReducer,
@@ -61,13 +61,21 @@ const BASE_REDUCERS = {
   wallets: walletsReducer,
 }
 
-const REDUCERS = platform.showSyncMode
-  ? {
-    ...BASE_REDUCERS,
-    fpayment: fundingPaymentReducer,
-    sync: syncReducer,
-  }
-  : BASE_REDUCERS
+const SYNC_REDUCERS = {
+  fpayment: fundingPaymentReducer,
+  sync: syncReducer,
+}
+
+const FRAMEWORK_REDUCERS = {
+  balance: accountBalanceReducer,
+  winLoss: winLossReducer,
+}
+
+const REDUCERS = {
+  ...BASE_REDUCERS,
+  ...(platform.showSyncMode ? SYNC_REDUCERS : {}),
+  ...(platform.showFrameworkMode ? FRAMEWORK_REDUCERS : {}),
+}
 
 const rootReducer = combineReducers(REDUCERS)
 

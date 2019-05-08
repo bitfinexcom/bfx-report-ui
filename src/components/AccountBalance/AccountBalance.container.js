@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/winLoss/actions'
+import actions from 'state/accountBalance/actions'
 import {
   getDataReceived,
   getEntries,
   getParams,
-} from 'state/winLoss/selectors'
+} from 'state/accountBalance/selectors'
 
-import AverageWinLoss from './AverageWinLoss'
+import AccountBalance from './AccountBalance'
 
 const mapStateToProps = (state = {}) => ({
   entries: getEntries(state),
@@ -17,10 +17,10 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchWinLoss: params => dispatch(actions.fetchWinLoss(params)),
+  fetchBalance: params => dispatch(actions.fetchBalance(params)),
   refresh: () => dispatch(actions.refresh()),
 })
 
-const AverageWinLossContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AverageWinLoss))
+const AccountBalanceContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AccountBalance))
 
-export default AverageWinLossContainer
+export default AccountBalanceContainer

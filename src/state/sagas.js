@@ -2,6 +2,7 @@ import { fork } from 'redux-saga/effects'
 
 import { platform } from 'var/config'
 
+import accountBalanceSaga from './accountBalance/saga'
 import authSaga from './auth/saga'
 import baseSaga from './base/saga'
 import fcreditSaga from './fundingCreditHistory/saga'
@@ -17,13 +18,13 @@ import positionsAuditSaga from './audit/saga'
 import publicFundingSaga from './publicFunding/saga'
 import publicTradesSaga from './publicTrades/saga'
 import querySaga from './query/saga'
-import riskSaga from './risk/saga'
 import tickersSaga from './tickers/saga'
 import tradesSaga from './trades/saga'
 import symbolsSaga from './symbols/saga'
 import syncSaga from './sync/saga'
 import uiSaga from './ui/saga'
 import walletsSaga from './wallets/saga'
+import winLossSaga from './winLoss/saga'
 
 export default function* rootSaga() {
   yield fork(authSaga)
@@ -50,6 +51,7 @@ export default function* rootSaga() {
     yield fork(fpaymentSaga)
   }
   if (platform.showFrameworkMode) {
-    yield fork(riskSaga)
+    yield fork(accountBalanceSaga)
+    yield fork(winLossSaga)
   }
 }
