@@ -7,6 +7,7 @@ import {
   getEntries,
   getParams,
 } from 'state/winLoss/selectors'
+import { getTimezone } from 'state/base/selectors'
 
 import AverageWinLoss from './AverageWinLoss'
 
@@ -14,6 +15,7 @@ const mapStateToProps = (state = {}) => ({
   entries: getEntries(state),
   params: getParams(state),
   loading: !getDataReceived(state),
+  timezone: getTimezone(state),
 })
 
 const mapDispatchToProps = dispatch => ({
