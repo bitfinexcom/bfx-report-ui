@@ -33,8 +33,6 @@ class Wallets extends PureComponent {
   constructor(props) {
     super(props)
     const { currentTime } = props
-    this.handleDateChange = this.handleDateChange.bind(this)
-    this.handleQuery = this.handleQuery.bind(this)
 
     this.state = {
       timestamp: currentTime ? new Date(currentTime) : null,
@@ -48,14 +46,14 @@ class Wallets extends PureComponent {
     }
   }
 
-  handleDateChange(time) {
+  handleDateChange = (time) => {
     const end = time && time.getTime()
     if (isValidTimeStamp(end) || time === null) {
       this.setState({ timestamp: time })
     }
   }
 
-  handleQuery(e) {
+  handleQuery = (e) => {
     e.preventDefault()
     const { fetchWallets } = this.props
     const { timestamp } = this.state

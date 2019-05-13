@@ -4,12 +4,7 @@ import { Checkbox } from '@blueprintjs/core'
 import { propTypes, defaultProps } from './ShowMilliseconds.props'
 
 class ShowMilliseconds extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange() {
+  handleChange = () => {
     const {
       milliseconds,
       showMilliseconds,

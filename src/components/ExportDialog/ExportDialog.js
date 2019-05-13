@@ -24,17 +24,12 @@ import ExportTargetsSelector from './ExportTargetsSelector'
 import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.onTargetSelect = this.onTargetSelect.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-    this.state = {
-      currentTargets: [],
-    }
+  handlers = {}
+  state = {
+    currentTargets: [],
   }
 
-  onTargetSelect(target) {
+  onTargetSelect = (target) => {
     if (!this.handlers[target]) {
       this.handlers[target] = () => {
         const { currentTargets } = this.state
@@ -46,7 +41,7 @@ class ExportDialog extends PureComponent {
     return this.handlers[target]
   }
 
-  handleTagRemove(tag, idx) {
+  handleTagRemove = (tag, idx) => {
     const { currentTargets } = this.state
     const { t } = this.props
 

@@ -29,12 +29,7 @@ const TYPE = queryConstants.MENU_TRADES
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Trades extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const { loading, fetchTrades, match } = this.props
@@ -48,14 +43,14 @@ class Trades extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(pair) {
+  handleClick = (pair) => {
     if (!this.handlers[pair]) {
       this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
     }
     return this.handlers[pair]
   }
 
-  handleTagRemove(tag) {
+  handleTagRemove = (tag) => {
     handleRemovePairFilter(TYPE, tag, this.props)
   }
 

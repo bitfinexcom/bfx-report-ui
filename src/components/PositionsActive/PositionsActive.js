@@ -35,14 +35,7 @@ const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class PositionsActive extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-    this.jumpToPositionsAudit = this.jumpToPositionsAudit.bind(this)
-    this.jumpToPositions = this.jumpToPositions.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const { loading, fetchActivepositions, match } = this.props
@@ -56,18 +49,18 @@ class PositionsActive extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(pair) {
+  handleClick = (pair) => {
     if (!this.handlers[pair]) {
       this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
     }
     return this.handlers[pair]
   }
 
-  handleTagRemove(tag) {
+  handleTagRemove = (tag) => {
     handleRemovePairFilter(TYPE, tag, this.props)
   }
 
-  jumpToPositionsAudit(e) {
+  jumpToPositionsAudit = (e) => {
     e.preventDefault()
     const { history } = this.props
     const id = e.target.getAttribute('value')
@@ -75,7 +68,7 @@ class PositionsActive extends PureComponent {
       + `${id}${getNoAuthTokenUrlString(history.location.search)}`)
   }
 
-  jumpToPositions(e) {
+  jumpToPositions = (e) => {
     e.preventDefault()
     const { history } = this.props
     history.push(`${getPath(queryConstants.MENU_POSITIONS)}`

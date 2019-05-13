@@ -14,12 +14,7 @@ import {
 import { propTypes, defaultProps } from './QueryLimitSelector.props'
 
 class QueryLimitSelector extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.onClick = this.onClick.bind(this)
-  }
-
-  onClick(e) {
+  onClick = (e) => {
     e.preventDefault()
     const { setQueryLimit } = this.props
     setQueryLimit(parseInt(e.currentTarget.getAttribute('value'), 10))

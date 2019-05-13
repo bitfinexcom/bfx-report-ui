@@ -32,12 +32,7 @@ const PAGE_SIZE = getPageSize(TYPE)
  * Funding Payment has the same state and columns as Ledgers
  */
 class FundingPayment extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const { loading, fetchFpayment, match } = this.props
@@ -51,14 +46,14 @@ class FundingPayment extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(symbol) {
+  handleClick = (symbol) => {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => handleAddSymbolFilter(TYPE, symbol, this.props)
     }
     return this.handlers[symbol]
   }
 
-  handleTagRemove(tag) {
+  handleTagRemove = (tag) => {
     handleRemoveSymbolFilter(TYPE, tag, this.props)
   }
 

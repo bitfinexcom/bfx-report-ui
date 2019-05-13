@@ -9,25 +9,18 @@ import { canChangeQueryLimit, getPageSize } from 'state/query/utils'
 import { propTypes, defaultProps } from './Pagination.props'
 
 class Pagination extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleKeyPress = this.handleKeyPress.bind(this)
-    this.backward = this.backward.bind(this)
-    this.forward = this.forward.bind(this)
-    this.fetchNext = this.fetchNext.bind(this)
-    this.pageInput = createRef()
-  }
+  handlers = {}
+  pageInput = createRef()
 
   componentDidUpdate() {
     this.pageInput.current.value = ''
   }
 
-  getCurrentPage() {
+  getCurrentPage = () => {
     return parseInt(this.pageInput.current.placeholder || 1, 10)
   }
 
-  handleKeyPress(event) {
+  handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       const { getQueryLimit, jumpPage, type } = this.props
       const limit = getQueryLimit(type)
@@ -37,21 +30,21 @@ class Pagination extends PureComponent {
     }
   }
 
-  backward() {
+  backward = () => {
     const { getQueryLimit, jumpPage, type } = this.props
     const page = this.getCurrentPage()
     const limit = getQueryLimit(type)
     jumpPage(page - 1, limit)
   }
 
-  forward() {
+  forward = () => {
     const { getQueryLimit, jumpPage, type } = this.props
     const page = this.getCurrentPage()
     const limit = getQueryLimit(type)
     jumpPage(page + 1, limit)
   }
 
-  fetchNext() {
+  fetchNext = () => {
     const { getQueryLimit, nextClick, type } = this.props
     const limit = getQueryLimit(type)
     nextClick(limit)

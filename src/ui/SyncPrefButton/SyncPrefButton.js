@@ -32,16 +32,6 @@ class SyncPrefButton extends PureComponent {
 
   static defaultProps = defaultProps
 
-  constructor(props) {
-    super(props)
-    this.handleClose = this.handleClose.bind(this)
-    this.handleOpen = this.handleOpen.bind(this)
-    this.addPair = this.addPair.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-    this.handleDateChange = this.handleDateChange.bind(this)
-    this.handleApply = this.handleApply.bind(this)
-  }
-
   state = initState
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -55,17 +45,17 @@ class SyncPrefButton extends PureComponent {
     return null
   }
 
-  handleOpen(e) {
+  handleOpen = (e) => {
     e.preventDefault()
     this.setState({ isOpen: true })
   }
 
-  handleClose(e) {
+  handleClose = (e) => {
     e.preventDefault()
     this.setState(initState)
   }
 
-  addPair(pair) {
+  addPair = (pair) => {
     return () => {
       const { tempPairs } = this.state
       if (!tempPairs.includes(pair)) {
@@ -74,7 +64,7 @@ class SyncPrefButton extends PureComponent {
     }
   }
 
-  handleTagRemove(tag) {
+  handleTagRemove = (tag) => {
     const { tempPairs } = this.state
     const parsedTag = parsePairTag(tag)
     if (tempPairs.includes(parsedTag)) {
@@ -83,11 +73,11 @@ class SyncPrefButton extends PureComponent {
     }
   }
 
-  handleDateChange(time) {
+  handleDateChange = (time) => {
     this.setState({ tempTime: time })
   }
 
-  handleApply() {
+  handleApply = () => {
     const { tempPairs, tempTime } = this.state
     const { setSyncPref } = this.props
     this.setState({ isOpen: false })

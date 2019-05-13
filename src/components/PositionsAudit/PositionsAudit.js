@@ -35,11 +35,6 @@ const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class PositionsAudit extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.jumpToPositions = this.jumpToPositions.bind(this)
-  }
-
   componentDidMount() {
     const { loading, fetchPaudit, match } = this.props
     if (loading) {
@@ -54,7 +49,7 @@ class PositionsAudit extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  jumpToPositions(e) {
+  jumpToPositions = (e) => {
     e.preventDefault()
     const { history } = this.props
     history.push(`${getPath(queryConstants.MENU_POSITIONS)}${getNoAuthTokenUrlString(history.location.search)}`)
