@@ -25,6 +25,7 @@ import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
   handlers = {}
+
   state = {
     currentTargets: [],
   }

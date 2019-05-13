@@ -55,6 +55,7 @@ class SyncPrefButton extends PureComponent {
     this.setState(initState)
   }
 
+  /* eslint-disable-next-line arrow-body-style */
   addPair = (pair) => {
     return () => {
       const { tempPairs } = this.state

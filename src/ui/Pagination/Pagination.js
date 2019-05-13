@@ -10,12 +10,14 @@ import { propTypes, defaultProps } from './Pagination.props'
 
 class Pagination extends PureComponent {
   handlers = {}
+
   pageInput = createRef()
 
   componentDidUpdate() {
     this.pageInput.current.value = ''
   }
 
+  /* eslint-disable-next-line arrow-body-style */
   getCurrentPage = () => {
     return parseInt(this.pageInput.current.placeholder || 1, 10)
   }

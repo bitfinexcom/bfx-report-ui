@@ -145,6 +145,8 @@ class ConcentrationRisk extends PureComponent {
             {t('concentrationrisk.title')}
             {' '}
             {renderTimeSelection}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData descId='concentrationrisk.nodata' />
         </Fragment>

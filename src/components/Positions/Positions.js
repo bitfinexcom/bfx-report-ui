@@ -123,7 +123,7 @@ class Positions extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-          {' '}
+        {' '}
         <MultiPairSelector
           currentFilters={targetPairs}
           existingPairs={existingPairs}

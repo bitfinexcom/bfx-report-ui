@@ -31,6 +31,7 @@ class SyncSymbolPrefButton extends PureComponent {
 
   static defaultProps = defaultProps
 
+
   state = initState
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -54,6 +55,7 @@ class SyncSymbolPrefButton extends PureComponent {
     this.setState(initState)
   }
 
+  /* eslint-disable-next-line arrow-body-style */
   addSymbol = (symbol) => {
     return () => {
       const { tempSymbols } = this.state
