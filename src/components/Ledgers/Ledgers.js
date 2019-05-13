@@ -91,7 +91,7 @@ class Ledgers extends PureComponent {
 
     const renderSymbolSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
@@ -125,7 +125,7 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {t('ledgers.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
           </h4>
@@ -137,12 +137,12 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {t('ledgers.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

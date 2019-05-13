@@ -119,7 +119,7 @@ class Tickers extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-          &nbsp;
+          {' '}
         <MultiPairSelector
           currentFilters={targetPairs}
           existingPairs={existingPairs}
@@ -139,7 +139,7 @@ class Tickers extends PureComponent {
         <Fragment>
           <h4>
             {t('tickers.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
             <SyncPrefButton />
@@ -152,12 +152,12 @@ class Tickers extends PureComponent {
         <Fragment>
           <h4>
             {t('tickers.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton />
           </h4>

@@ -90,7 +90,7 @@ class FundingCreditHistory extends PureComponent {
 
     const renderSymbolSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
@@ -124,7 +124,7 @@ class FundingCreditHistory extends PureComponent {
         <Fragment>
           <h4>
             {t('fcredit.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
           </h4>
@@ -136,12 +136,12 @@ class FundingCreditHistory extends PureComponent {
         <Fragment>
           <h4>
             {t('fcredit.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

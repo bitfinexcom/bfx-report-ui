@@ -125,9 +125,9 @@ class Wallets extends PureComponent {
         <Fragment>
           <h4>
             {t('wallets.title')}
-            &nbsp;
+            {' '}
             {renderTimeSelection}
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData descId='wallets.nodata' />
@@ -138,11 +138,11 @@ class Wallets extends PureComponent {
         <Fragment>
           <h4>
             {t('wallets.title')}
-            &nbsp;
+            {' '}
             {renderTimeSelection}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <h4>

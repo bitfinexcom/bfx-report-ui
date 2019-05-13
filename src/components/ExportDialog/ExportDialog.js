@@ -84,21 +84,21 @@ class ExportDialog extends PureComponent {
     const renderMessage = !email ? (
       <p>
         {t('download.prepare', { intlType })}
-        &nbsp;
+        {' '}
         <span className='bitfinex-show-soft'>
           {isWallets ? datetime : timeSpan}
         </span>
-        &nbsp;
+        {' '}
         {t('download.store', { intlType })}
       </p>
     ) : (
       <p>
         {t('download.prepare', { intlType })}
-        &nbsp;
+        {' '}
         <span className='bitfinex-show-soft'>
           {isWallets ? datetime : timeSpan}
         </span>
-        &nbsp;
+        {' '}
         {t('download.send', { intlType, email })}
       </p>
     )

@@ -117,7 +117,7 @@ class PublicFunding extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <SymbolSelector
           coinList={coins}
           coins={coins}
@@ -140,7 +140,7 @@ class PublicFunding extends PureComponent {
         <Fragment>
           <h4>
             {t('publicfunding.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
             <SyncSymbolPrefButton />
@@ -153,12 +153,12 @@ class PublicFunding extends PureComponent {
         <Fragment>
           <h4>
             {t('publicfunding.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncSymbolPrefButton />
           </h4>

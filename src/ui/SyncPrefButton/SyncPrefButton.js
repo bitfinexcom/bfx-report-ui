@@ -121,7 +121,7 @@ class SyncPrefButton extends PureComponent {
     return platform.showSyncMode
       ? (
         <Fragment>
-          &nbsp;
+          {' '}
           <Tooltip
             content={(
               <span>

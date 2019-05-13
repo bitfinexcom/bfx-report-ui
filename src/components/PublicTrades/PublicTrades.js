@@ -117,7 +117,7 @@ class PublicTrades extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <PairSelector
           currentPair={currentPair}
           existingPairs={[]}
@@ -139,7 +139,7 @@ class PublicTrades extends PureComponent {
         <Fragment>
           <h4>
             {t('publictrades.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
             <SyncPrefButton />
@@ -152,12 +152,12 @@ class PublicTrades extends PureComponent {
         <Fragment>
           <h4>
             {t('publictrades.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton />
           </h4>

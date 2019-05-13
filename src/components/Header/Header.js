@@ -114,7 +114,7 @@ class Header extends PureComponent {
             onClick={this.handleToggleMenu}
           />
         </span>
-        &nbsp;
+        {' '}
       </Fragment>
     ) : null
     const renderMenu = isLogin ? (
@@ -128,7 +128,7 @@ class Header extends PureComponent {
     )
     const renderEmail = email ? (
       <Fragment>
-        &nbsp;
+        {' '}
         <span className='bitfinex-show-soft'>{email}</span>
       </Fragment>
     ) : null

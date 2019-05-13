@@ -138,7 +138,7 @@ class PositionsAudit extends PureComponent {
         <Fragment>
           <h4>
             {t('paudit.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
           </h4>
           <NoData />
@@ -149,11 +149,11 @@ class PositionsAudit extends PureComponent {
         <Fragment>
           <h4>
             {t('paudit.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

@@ -130,7 +130,7 @@ class Positions extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-          &nbsp;
+          {' '}
         <MultiPairSelector
           currentFilters={targetPairs}
           existingPairs={existingPairs}
@@ -157,7 +157,7 @@ class Positions extends PureComponent {
         <Fragment>
           <h4>
             {t('positions.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
           </h4>
@@ -172,12 +172,12 @@ class Positions extends PureComponent {
         <Fragment>
           <h4>
             {t('positions.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderButtonGroup}

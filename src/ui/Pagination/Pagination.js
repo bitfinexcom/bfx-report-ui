@@ -92,14 +92,14 @@ class Pagination extends PureComponent {
         <span>
           +
         </span>
-        &nbsp;
+        {' '}
       </Fragment>
     ) : ''
 
     const renderLoading = loading ? (
       <Fragment>
         <Spinner size={5} />
-        &nbsp;
+        {' '}
         <span className='bitfinex-show-soft'>
           {t('pagination.loading')}
         </span>
@@ -139,7 +139,7 @@ class Pagination extends PureComponent {
             disabled={loading}
           />
           {t('pagination.of')}
-          &nbsp;
+          {' '}
           {pageLen}
           {renderRestDots}
           <Button

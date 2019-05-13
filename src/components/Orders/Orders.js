@@ -105,7 +105,7 @@ class Orders extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-          &nbsp;
+          {' '}
         <MultiPairSelector
           currentFilters={targetPairs}
           existingPairs={existingPairs}
@@ -125,7 +125,7 @@ class Orders extends PureComponent {
         <Fragment>
           <h4>
             {t('orders.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
           </h4>
@@ -137,12 +137,12 @@ class Orders extends PureComponent {
         <Fragment>
           <h4>
             {t('orders.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

@@ -153,9 +153,9 @@ class PositionsActive extends PureComponent {
         <Fragment>
           <h4>
             {t('positions.title')}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderButtonGroup}

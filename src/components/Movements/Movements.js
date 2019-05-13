@@ -105,7 +105,7 @@ class Movements extends PureComponent {
 
     const renderSymbolSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
@@ -140,7 +140,7 @@ class Movements extends PureComponent {
         <Fragment>
           <h4>
             {t(titleMsgId)}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
           </h4>
@@ -152,12 +152,12 @@ class Movements extends PureComponent {
         <Fragment>
           <h4>
             {t(titleMsgId)}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

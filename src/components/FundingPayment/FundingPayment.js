@@ -94,7 +94,7 @@ class FundingPayment extends PureComponent {
 
     const renderSymbolSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
@@ -128,7 +128,7 @@ class FundingPayment extends PureComponent {
         <Fragment>
           <h4>
             {t('fpayment.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
           </h4>
@@ -140,12 +140,12 @@ class FundingPayment extends PureComponent {
         <Fragment>
           <h4>
             {t('fpayment.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

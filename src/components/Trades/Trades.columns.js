@@ -106,7 +106,7 @@ export default function getColumns(props) {
           >
             <Fragment>
               {fee}
-              &nbsp;
+              {' '}
               <span className='bitfinex-show-soft'>
                 {feeCurrency}
               </span>
