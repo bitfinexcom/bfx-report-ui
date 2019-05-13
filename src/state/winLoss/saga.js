@@ -12,6 +12,7 @@ import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
 import actions from './actions'
+import selectors from './selectors'
 
 function getReqWinLoss({
   start,
@@ -53,11 +54,17 @@ function* fetchWinLoss({ payload }) {
   }
 }
 
+function* refreshWinLoss() {
+  const params = yield select(selectors.getParams)
+  yield call(fetchWinLoss, { payload: params })
+}
+
 function* fetchWinLossFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
 export default function* winLossSaga() {
   yield takeLatest(types.FETCH_WIN_LOSS, fetchWinLoss)
+  yield takeLatest(types.REFRESH, refreshWinLoss)
   yield takeLatest(types.FETCH_FAIL, fetchWinLossFail)
 }

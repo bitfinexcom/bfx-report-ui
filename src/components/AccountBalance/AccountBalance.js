@@ -152,7 +152,7 @@ class AccountBalance extends PureComponent {
       showContent = (
         <Loading title='accountbalance.title' />
       )
-    } else if (!entries.length) { // if no data
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>

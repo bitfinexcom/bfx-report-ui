@@ -12,6 +12,7 @@ import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
 import actions from './actions'
+import selectors from './selectors'
 
 function getReqBalance({
   start,
@@ -53,11 +54,17 @@ function* fetchAccountBalance({ payload }) {
   }
 }
 
+function* refreshAccountBalance() {
+  const params = yield select(selectors.getParams)
+  yield call(fetchAccountBalance, { payload: params })
+}
+
 function* fetchAccountBalanceFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
 export default function* accountBalanceSaga() {
   yield takeLatest(types.FETCH_BALANCE, fetchAccountBalance)
+  yield takeLatest(types.REFRESH, refreshAccountBalance)
   yield takeLatest(types.FETCH_FAIL, fetchAccountBalanceFail)
 }
