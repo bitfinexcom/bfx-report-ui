@@ -159,6 +159,8 @@ class AccountBalance extends PureComponent {
             {t('accountbalance.title')}
             {' '}
             {renderTimeSelection}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData />
         </Fragment>

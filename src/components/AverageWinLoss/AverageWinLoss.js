@@ -159,6 +159,8 @@ class AverageWinLoss extends PureComponent {
             {t('averagewinloss.title')}
             {' '}
             {renderTimeSelection}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData />
         </Fragment>
