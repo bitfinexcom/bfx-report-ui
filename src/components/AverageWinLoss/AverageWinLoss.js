@@ -152,7 +152,7 @@ class AverageWinLoss extends PureComponent {
       showContent = (
         <Loading title='averagewinloss.title' />
       )
-    } else if (!entries.length) { // if no data
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>

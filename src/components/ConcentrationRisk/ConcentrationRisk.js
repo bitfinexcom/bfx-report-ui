@@ -138,15 +138,13 @@ class ConcentrationRisk extends PureComponent {
       showContent = (
         <Loading title='concentrationrisk.title' />
       )
-    } else if (!chartData.length) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
             {t('concentrationrisk.title')}
             &nbsp;
             {renderTimeSelection}
-            &nbsp;
-            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData descId='concentrationrisk.nodata' />
         </Fragment>

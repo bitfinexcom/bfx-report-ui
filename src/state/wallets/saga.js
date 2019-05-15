@@ -12,6 +12,7 @@ import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
 import actions from './actions'
+import selectors from './selectors'
 
 function getReqWallets(auth, end) {
   const params = end ? { end } : {}
@@ -49,12 +50,17 @@ function* fetchWallets({ payload: end }) {
   }
 }
 
+function* refreshWallets() {
+  const timestamp = yield select(selectors.getTimestamp)
+  yield call(fetchWallets, { payload: timestamp })
+}
+
 function* fetchWalletsFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
 export default function* walletsSaga() {
   yield takeLatest(types.FETCH_WALLETS, fetchWallets)
-  yield takeLatest(types.REFRESH, fetchWallets)
+  yield takeLatest(types.REFRESH, refreshWallets)
   yield takeLatest(types.FETCH_FAIL, fetchWalletsFail)
 }
