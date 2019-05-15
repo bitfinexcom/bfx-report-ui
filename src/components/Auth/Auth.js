@@ -22,6 +22,14 @@ class Auth extends PureComponent {
 
   static defaultProps = defaultProps
 
+  componentWillMount() {
+    const { apiKey, apiSecret, checkAuth } = this.props
+    if (platform.autoAuth && apiKey && apiSecret) {
+      // eslint-disable-next-line react/destructuring-assignment
+      checkAuth()
+    }
+  }
+
   handleClick = () => {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.checkAuth()
