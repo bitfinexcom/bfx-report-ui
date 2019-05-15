@@ -33,12 +33,7 @@ const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Tickers extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const { loading, fetchTickers, match } = this.props
@@ -52,14 +47,14 @@ class Tickers extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(pair) {
+  handleClick = (pair) => {
     if (!this.handlers[pair]) {
       this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
     }
     return this.handlers[pair]
   }
 
-  handleTagRemove(tag) {
+  handleTagRemove = (tag) => {
     const { targetPairs, updateErrorStatus } = this.props
     if (targetPairs.length === 1) {
       updateErrorStatus({ id: 'tickers.minlength' })
@@ -119,7 +114,7 @@ class Tickers extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-          &nbsp;
+        {' '}
         <MultiPairSelector
           currentFilters={targetPairs}
           existingPairs={existingPairs}
@@ -139,7 +134,7 @@ class Tickers extends PureComponent {
         <Fragment>
           <h4>
             {t('tickers.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
             <SyncPrefButton />
@@ -152,12 +147,12 @@ class Tickers extends PureComponent {
         <Fragment>
           <h4>
             {t('tickers.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton />
           </h4>

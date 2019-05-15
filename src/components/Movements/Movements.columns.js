@@ -128,7 +128,7 @@ export default function getColumns(props) {
           <Cell tooltip={destinationAddress}>
             <Fragment>
               {destinationAddress}
-              &nbsp;
+              {' '}
               <Explorer currency={currency} destinationAddress={destinationAddress} />
             </Fragment>
           </Cell>

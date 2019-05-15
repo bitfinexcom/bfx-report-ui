@@ -31,16 +31,15 @@ class PrefDialog extends PureComponent {
     super(props)
     this.switchDark = this.switchTheme.bind(this, 'bp3-dark')
     this.switchLight = this.switchTheme.bind(this, 'bp3-light')
-    this.handleTimezoneChange = this.handleTimezoneChange.bind(this)
   }
 
-  switchTheme(theme, e) {
+  switchTheme = (theme, e) => {
     e.preventDefault()
     // eslint-disable-next-line react/destructuring-assignment
     this.props.setTheme(theme)
   }
 
-  handleTimezoneChange(timezone) {
+  handleTimezoneChange = (timezone) => {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.setTimeZone(timezone)
   }

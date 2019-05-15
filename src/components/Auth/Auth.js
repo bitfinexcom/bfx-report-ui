@@ -22,18 +22,12 @@ class Auth extends PureComponent {
 
   static defaultProps = defaultProps
 
-  constructor(props) {
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleClick() {
+  handleClick = () => {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.checkAuth()
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     const { setKey, setSecret } = this.props
     const { name, value } = event.target
     if (name === 'key') {

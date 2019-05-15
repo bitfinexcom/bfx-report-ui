@@ -29,12 +29,7 @@ const TYPE = queryConstants.MENU_ORDERS
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Orders extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const { loading, fetchOrders, match } = this.props
@@ -48,14 +43,14 @@ class Orders extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(pair) {
+  handleClick = (pair) => {
     if (!this.handlers[pair]) {
       this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
     }
     return this.handlers[pair]
   }
 
-  handleTagRemove(tag) {
+  handleTagRemove = (tag) => {
     handleRemovePairFilter(TYPE, tag, this.props)
   }
 
@@ -105,7 +100,7 @@ class Orders extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-          &nbsp;
+        {' '}
         <MultiPairSelector
           currentFilters={targetPairs}
           existingPairs={existingPairs}
@@ -125,7 +120,7 @@ class Orders extends PureComponent {
         <Fragment>
           <h4>
             {t('orders.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
           </h4>
@@ -137,12 +132,12 @@ class Orders extends PureComponent {
         <Fragment>
           <h4>
             {t('orders.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

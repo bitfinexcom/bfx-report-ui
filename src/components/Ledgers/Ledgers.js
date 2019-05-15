@@ -29,12 +29,7 @@ const TYPE = queryConstants.MENU_LEDGERS
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Ledgers extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const { loading, fetchLedgers, match } = this.props
@@ -48,14 +43,14 @@ class Ledgers extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(symbol) {
+  handleClick = (symbol) => {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => handleAddSymbolFilter(TYPE, symbol, this.props)
     }
     return this.handlers[symbol]
   }
 
-  handleTagRemove(tag) {
+  handleTagRemove = (tag) => {
     handleRemoveSymbolFilter(TYPE, tag, this.props)
   }
 
@@ -91,7 +86,7 @@ class Ledgers extends PureComponent {
 
     const renderSymbolSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
@@ -125,7 +120,7 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {t('ledgers.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
           </h4>
@@ -137,12 +132,12 @@ class Ledgers extends PureComponent {
         <Fragment>
           <h4>
             {t('ledgers.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

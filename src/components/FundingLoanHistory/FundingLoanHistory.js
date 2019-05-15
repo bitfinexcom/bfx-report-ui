@@ -30,12 +30,7 @@ const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class FundingLoanHistory extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const { loading, fetchFloan, match } = this.props
@@ -49,14 +44,14 @@ class FundingLoanHistory extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(symbol) {
+  handleClick = (symbol) => {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => handleAddSymbolFilter(TYPE, symbol, this.props)
     }
     return this.handlers[symbol]
   }
 
-  handleTagRemove(tag) {
+  handleTagRemove = (tag) => {
     handleRemoveSymbolFilter(TYPE, tag, this.props)
   }
 
@@ -90,7 +85,7 @@ class FundingLoanHistory extends PureComponent {
 
     const renderSymbolSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
@@ -124,7 +119,7 @@ class FundingLoanHistory extends PureComponent {
         <Fragment>
           <h4>
             {t('floan.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
           </h4>
@@ -136,12 +131,12 @@ class FundingLoanHistory extends PureComponent {
         <Fragment>
           <h4>
             {t('floan.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

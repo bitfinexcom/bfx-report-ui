@@ -31,12 +31,7 @@ const LIMIT = getQueryLimit(queryConstants.MENU_MOVEMENTS)
 const PAGE_SIZE = getPageSize(queryConstants.MENU_MOVEMENTS)
 
 class Movements extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-    this.handleTagRemove = this.handleTagRemove.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const {
@@ -57,7 +52,7 @@ class Movements extends PureComponent {
     checkFetch(prevProps, this.props, 'movements')
   }
 
-  handleClick(symbol) {
+  handleClick = (symbol) => {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
         const { type } = this.props
@@ -67,7 +62,7 @@ class Movements extends PureComponent {
     return this.handlers[symbol]
   }
 
-  handleTagRemove(tag) {
+  handleTagRemove = (tag) => {
     const { type } = this.props
     handleRemoveSymbolFilter(type, tag, this.props)
   }
@@ -105,7 +100,7 @@ class Movements extends PureComponent {
 
     const renderSymbolSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
@@ -140,7 +135,7 @@ class Movements extends PureComponent {
         <Fragment>
           <h4>
             {t(titleMsgId)}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
           </h4>
@@ -152,12 +147,12 @@ class Movements extends PureComponent {
         <Fragment>
           <h4>
             {t(titleMsgId)}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderSymbolSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

@@ -14,13 +14,9 @@ import types from 'state/base/constants'
 import { propTypes, defaultProps } from './DateFormatSelector.props'
 
 class DateFormatSelector extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-  }
+  handlers = {}
 
-  handleClick(format) {
+  handleClick = (format) => {
     if (!this.handlers[format]) {
       this.handlers[format] = () => {
         // eslint-disable-next-line react/destructuring-assignment

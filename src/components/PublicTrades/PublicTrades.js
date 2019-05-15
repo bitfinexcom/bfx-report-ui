@@ -33,11 +33,7 @@ const PAGE_SIZE = getPageSize(TYPE)
 const WILD_CARD = ['']
 
 class PublicTrades extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const { loading, fetchPublictrades, match } = this.props
@@ -51,7 +47,7 @@ class PublicTrades extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(pair) {
+  handleClick = (pair) => {
     if (!this.handlers[pair]) {
       this.handlers[pair] = () => {
         const { history, setTargetPair } = this.props
@@ -117,7 +113,7 @@ class PublicTrades extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <PairSelector
           currentPair={currentPair}
           existingPairs={[]}
@@ -139,7 +135,7 @@ class PublicTrades extends PureComponent {
         <Fragment>
           <h4>
             {t('publictrades.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
             <SyncPrefButton />
@@ -152,12 +148,12 @@ class PublicTrades extends PureComponent {
         <Fragment>
           <h4>
             {t('publictrades.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton />
           </h4>

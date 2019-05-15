@@ -58,11 +58,8 @@ class Main extends PureComponent {
     super(props)
     this.handleClickCustom = this.handleCustomDialog.bind(this, true)
     this.handleCustomDialogClose = this.handleCustomDialog.bind(this, false)
-    this.handleRangeChange = this.handleRangeChange.bind(this)
-    this.startQuery = this.startQuery.bind(this)
     this.handleClickExport = this.handleExportDialog.bind(this, true)
     this.handleExportDialogClose = this.handleExportDialog.bind(this, false)
-    this.startExport = this.startExport.bind(this)
   }
 
   state = {
@@ -71,26 +68,26 @@ class Main extends PureComponent {
     endDate: new Date(),
   }
 
-  handleClick(target) {
+  handleClick = (target) => {
     const { history } = this.props
     // remove url params
     history.push(`${getPath(target)}${history.location.search}`)
   }
 
-  handleCustomDialog(show, e) {
+  handleCustomDialog = (show, e) => {
     e.preventDefault()
     // eslint-disable-next-line react/destructuring-assignment
     this.props.showCustomDialog(show)
   }
 
-  handleRangeChange(range) {
+  handleRangeChange = (range) => {
     this.setState({
       startDate: range[0],
       endDate: range[1],
     })
   }
 
-  startQuery() {
+  startQuery = () => {
     const { startDate, endDate } = this.state
     const { setCustomTimeRange, showCustomDialog } = this.props
     if (startDate !== null && endDate !== null) {
@@ -99,7 +96,7 @@ class Main extends PureComponent {
     showCustomDialog(false)
   }
 
-  handleExportDialog(show, e) {
+  handleExportDialog = (show, e) => {
     e.preventDefault()
     if (show) {
       // eslint-disable-next-line react/destructuring-assignment
@@ -108,7 +105,7 @@ class Main extends PureComponent {
     this.setState({ isExportOpen: show })
   }
 
-  startExport(currentTargets) {
+  startExport = (currentTargets) => {
     const { exportCsv } = this.props
     return () => {
       exportCsv(currentTargets)

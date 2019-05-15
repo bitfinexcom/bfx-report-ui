@@ -33,11 +33,7 @@ const PAGE_SIZE = getPageSize(TYPE)
 const WILD_CARD = ['']
 
 class PublicFunding extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handlers = {}
-    this.handleClick = this.handleClick.bind(this)
-  }
+  handlers = {}
 
   componentDidMount() {
     const { loading, fetchPublicfunding, match } = this.props
@@ -51,7 +47,7 @@ class PublicFunding extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick(symbol) {
+  handleClick = (symbol) => {
     if (!this.handlers[symbol]) {
       this.handlers[symbol] = () => {
         const { history, setTargetSymbol } = this.props
@@ -117,7 +113,7 @@ class PublicFunding extends PureComponent {
 
     const renderPairSelector = (
       <Fragment>
-        &nbsp;
+        {' '}
         <SymbolSelector
           coinList={coins}
           coins={coins}
@@ -140,7 +136,7 @@ class PublicFunding extends PureComponent {
         <Fragment>
           <h4>
             {t('publicfunding.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
             <SyncSymbolPrefButton />
@@ -153,12 +149,12 @@ class PublicFunding extends PureComponent {
         <Fragment>
           <h4>
             {t('publicfunding.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
             {renderPairSelector}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncSymbolPrefButton />
           </h4>

@@ -35,11 +35,6 @@ const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class PositionsAudit extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.jumpToPositions = this.jumpToPositions.bind(this)
-  }
-
   componentDidMount() {
     const { loading, fetchPaudit, match } = this.props
     if (loading) {
@@ -54,7 +49,7 @@ class PositionsAudit extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  jumpToPositions(e) {
+  jumpToPositions = (e) => {
     e.preventDefault()
     const { history } = this.props
     history.push(`${getPath(queryConstants.MENU_POSITIONS)}${getNoAuthTokenUrlString(history.location.search)}`)
@@ -138,7 +133,7 @@ class PositionsAudit extends PureComponent {
         <Fragment>
           <h4>
             {t('paudit.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
           </h4>
           <NoData />
@@ -149,11 +144,11 @@ class PositionsAudit extends PureComponent {
         <Fragment>
           <h4>
             {t('paudit.title')}
-            &nbsp;
+            {' '}
             <TimeRange />
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderPagination}

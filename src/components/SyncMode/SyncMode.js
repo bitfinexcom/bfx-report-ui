@@ -26,18 +26,11 @@ class SyncMode extends PureComponent {
 
   static defaultProps = defaultProps
 
-  constructor(props) {
-    super(props)
-    this.handleToggleClick = this.handleToggleClick.bind(this)
-    this.handleDialogClose = this.handleDialogClose.bind(this)
-    this.startAction = this.startAction.bind(this)
-  }
-
   state = {
     isSyncDialogOpen: false,
   }
 
-  handleToggleClick(e) {
+  handleToggleClick = (e) => {
     e.preventDefault()
     const { syncMode, stopSyncing } = this.props
     if (syncMode !== MODE_OFFLINE) {
@@ -47,12 +40,12 @@ class SyncMode extends PureComponent {
     }
   }
 
-  handleDialogClose(e) {
+  handleDialogClose = (e) => {
     e.preventDefault()
     this.setState({ isSyncDialogOpen: false })
   }
 
-  startAction(e) {
+  startAction = (e) => {
     e.preventDefault()
     const { startSyncing, stopSyncing, syncMode } = this.props
     if (syncMode === MODE_ONLINE) {

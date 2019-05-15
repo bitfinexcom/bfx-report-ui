@@ -143,8 +143,10 @@ class ConcentrationRisk extends PureComponent {
         <Fragment>
           <h4>
             {t('concentrationrisk.title')}
-            &nbsp;
+            {' '}
             {renderTimeSelection}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData descId='concentrationrisk.nodata' />
         </Fragment>
@@ -154,9 +156,9 @@ class ConcentrationRisk extends PureComponent {
         <Fragment>
           <h4>
             {t('concentrationrisk.title')}
-            &nbsp;
+            {' '}
             {renderTimeSelection}
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <div className='concentration-risk-data'>

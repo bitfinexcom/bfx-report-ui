@@ -114,7 +114,7 @@ class AccountBalance extends PureComponent {
             timePrecision={timePrecision}
           />
         </Tooltip>
-        &nbsp;
+        {' '}
         <Tooltip
           content={(
             <span>
@@ -131,12 +131,12 @@ class AccountBalance extends PureComponent {
             timePrecision={timePrecision}
           />
         </Tooltip>
-        &nbsp;
+        {' '}
         <TimeframeSelector
           currentTimeframe={timeframe}
           onTimeframeSelect={this.handleTimeframeChange}
         />
-        &nbsp;
+        {' '}
         <Button
           onClick={this.handleQuery}
           intent={hasNewTime ? Intent.PRIMARY : null}
@@ -157,7 +157,7 @@ class AccountBalance extends PureComponent {
         <Fragment>
           <h4>
             {t('accountbalance.title')}
-            &nbsp;
+            {' '}
             {renderTimeSelection}
           </h4>
           <NoData />
@@ -168,9 +168,9 @@ class AccountBalance extends PureComponent {
         <Fragment>
           <h4>
             {t('accountbalance.title')}
-            &nbsp;
+            {' '}
             {renderTimeSelection}
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <LineChart

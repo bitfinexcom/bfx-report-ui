@@ -33,8 +33,6 @@ class Wallets extends PureComponent {
   constructor(props) {
     super(props)
     const { currentTime } = props
-    this.handleDateChange = this.handleDateChange.bind(this)
-    this.handleQuery = this.handleQuery.bind(this)
 
     this.state = {
       timestamp: currentTime ? new Date(currentTime) : null,
@@ -48,14 +46,14 @@ class Wallets extends PureComponent {
     }
   }
 
-  handleDateChange(time) {
+  handleDateChange = (time) => {
     const end = time && time.getTime()
     if (isValidTimeStamp(end) || time === null) {
       this.setState({ timestamp: time })
     }
   }
 
-  handleQuery(e) {
+  handleQuery = (e) => {
     e.preventDefault()
     const { fetchWallets } = this.props
     const { timestamp } = this.state
@@ -125,9 +123,9 @@ class Wallets extends PureComponent {
         <Fragment>
           <h4>
             {t('wallets.title')}
-            &nbsp;
+            {' '}
             {renderTimeSelection}
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData descId='wallets.nodata' />
@@ -138,11 +136,11 @@ class Wallets extends PureComponent {
         <Fragment>
           <h4>
             {t('wallets.title')}
-            &nbsp;
+            {' '}
             {renderTimeSelection}
-            &nbsp;
+            {' '}
             <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
-            &nbsp;
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <h4>

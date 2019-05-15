@@ -33,41 +33,32 @@ class Header extends PureComponent {
 
   static defaultProps = defaultProps
 
-  constructor(props) {
-    super(props)
-    this.authLogout = this.authLogout.bind(this)
-    this.handleClickPref = this.handleClickPref.bind(this)
-    this.handleClickCustom = this.handleClickCustom.bind(this)
-    this.handlePrefDialogClose = this.handlePrefDialogClose.bind(this)
-    this.handleToggleMenu = this.handleToggleMenu.bind(this)
-  }
-
   state = {
     isPrefOpen: false,
   }
 
-  authLogout() {
+  authLogout = () => {
     // eslint-disable-next-line react/destructuring-assignment
     this.props.logout()
   }
 
-  handleClickPref(e) {
+  handleClickPref = (e) => {
     e.preventDefault()
     this.setState({ isPrefOpen: true })
   }
 
-  handleClickCustom(e) {
+  handleClickCustom = (e) => {
     e.preventDefault()
     // eslint-disable-next-line react/destructuring-assignment
     this.props.showCustomDialog(true)
   }
 
-  handlePrefDialogClose(e) {
+  handlePrefDialogClose = (e) => {
     e.preventDefault()
     this.setState({ isPrefOpen: false })
   }
 
-  handleToggleMenu(e) {
+  handleToggleMenu = (e) => {
     e.preventDefault()
     const { menuMode, setMenuMode } = this.props
     const { MENU_MODE_ICON, MENU_MODE_NORMAL } = baseType
@@ -114,7 +105,7 @@ class Header extends PureComponent {
             onClick={this.handleToggleMenu}
           />
         </span>
-        &nbsp;
+        {' '}
       </Fragment>
     ) : null
     const renderMenu = isLogin ? (
@@ -128,7 +119,7 @@ class Header extends PureComponent {
     )
     const renderEmail = email ? (
       <Fragment>
-        &nbsp;
+        {' '}
         <span className='bitfinex-show-soft'>{email}</span>
       </Fragment>
     ) : null
