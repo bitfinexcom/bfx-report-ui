@@ -30,6 +30,7 @@ class LineChart extends React.PureComponent {
           stroke={COLORS[i]}
           strokeWidth={1.2}
           connectNulls
+          dot={false}
         />
       )
     })
@@ -54,7 +55,7 @@ class LineChart extends React.PureComponent {
             <YAxis stroke='#9e9494' />
             <Tooltip animationDuration={150} />
             <CartesianGrid stroke='#57636b' strokeDasharray='3 3' />
-            <Legend verticalAlign='top' wrapperStyle={{ paddingBottom: 15 }} />
+            <Legend verticalAlign='top' wrapperStyle={{ paddingBottom: 15 }} iconType='rect' />
             {this.getLines()}
           </Chart>
         </ResponsiveContainer>

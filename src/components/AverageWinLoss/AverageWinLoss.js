@@ -15,7 +15,6 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import LineChart from 'ui/Charts/LineChart'
 import parseChartData from 'ui/Charts/Charts.helpers'
-import { CURRENCIES } from 'ui/Charts/constants'
 import TimeframeSelector from 'ui/TimeframeSelector/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
@@ -91,7 +90,7 @@ class AverageWinLoss extends PureComponent {
     const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
     const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
 
-    const chartData = parseChartData({
+    const { chartData, presentCurrencies } = parseChartData({
       data: _sortBy(entries, ['mts']),
       timeframe: currTimeframe,
     })
@@ -177,7 +176,7 @@ class AverageWinLoss extends PureComponent {
           </h4>
           <LineChart
             data={chartData}
-            dataKeys={CURRENCIES}
+            dataKeys={presentCurrencies}
           />
         </Fragment>
       )
