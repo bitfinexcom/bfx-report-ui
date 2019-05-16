@@ -173,128 +173,128 @@ class Main extends PureComponent {
             <Route
               exact
               path={getPath(MENU_TRADES)}
-              component={() => <Trades handleClickExport={this.handleClickExport} />}
+              render={() => <Trades handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_TRADES)}/:pair`}
-              component={() => <Trades handleClickExport={this.handleClickExport} />}
+              render={() => <Trades handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_ORDERS)}
-              component={() => <Orders handleClickExport={this.handleClickExport} />}
+              render={() => <Orders handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_ORDERS)}/:pair`}
-              component={() => <Orders handleClickExport={this.handleClickExport} />}
+              render={() => <Orders handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_DEPOSITS)}
-              component={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
+              render={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_DEPOSITS)}/:symbol`}
-              component={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
+              render={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_WITHDRAWALS)}
-              component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
+              render={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_WITHDRAWALS)}/:symbol`}
-              component={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
+              render={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_FCREDIT)}
-              component={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
+              render={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_FCREDIT)}/:symbol`}
-              component={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
+              render={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_FLOAN)}
-              component={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
+              render={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_FLOAN)}/:symbol`}
-              component={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
+              render={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_FOFFER)}
-              component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+              render={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_FOFFER)}/:symbol`}
-              component={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+              render={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path='/'
-              component={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+              render={() => <FundingPayment handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_FPAYMENT)}
-              component={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+              render={() => <FundingPayment handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_FPAYMENT)}/:symbol`}
-              component={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+              render={() => <FundingPayment handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_PUBLIC_FUNDING)}
-              component={() => <PublicFunding handleClickExport={this.handleClickExport} />}
+              render={() => <PublicFunding handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_PUBLIC_FUNDING)}/:symbol`}
-              component={() => <PublicFunding handleClickExport={this.handleClickExport} />}
+              render={() => <PublicFunding handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_PUBLIC_TRADES)}
-              component={() => <PublicTrades handleClickExport={this.handleClickExport} />}
+              render={() => <PublicTrades handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_PUBLIC_TRADES)}/:pair`}
-              component={() => <PublicTrades handleClickExport={this.handleClickExport} />}
+              render={() => <PublicTrades handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_TICKERS)}
-              component={() => <Tickers handleClickExport={this.handleClickExport} />}
+              render={() => <Tickers handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_TICKERS)}/:pair`}
-              component={() => <Tickers handleClickExport={this.handleClickExport} />}
+              render={() => <Tickers handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_POSITIONS_AUDIT)}
-              component={() => <PositionsAudit handleClickExport={this.handleClickExport} noid />}
+              render={() => <PositionsAudit handleClickExport={this.handleClickExport} noid />}
             />
             <Route
               path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}
-              component={() => <PositionsAudit handleClickExport={this.handleClickExport} />}
+              render={() => <PositionsAudit handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={getPath(MENU_POSITIONS_ACTIVE)}
-              component={() => <PositionsActive handleClickExport={this.handleClickExport} />}
+              render={() => <PositionsActive handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact
               path={getPath(MENU_POSITIONS)}
-              component={() => <Positions handleClickExport={this.handleClickExport} />}
+              render={() => <Positions handleClickExport={this.handleClickExport} />}
             />
             <Route
               path={`${getPath(MENU_POSITIONS)}/:pair`}
-              component={() => <Positions handleClickExport={this.handleClickExport} />}
+              render={() => <Positions handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact

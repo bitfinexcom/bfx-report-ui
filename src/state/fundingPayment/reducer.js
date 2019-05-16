@@ -35,7 +35,7 @@ export function fpaymentReducer(state = initialState, action) {
         }
       }
       const { data, limit, pageSize } = payload
-      const { res, nextPage } = data
+      const { res = [], nextPage } = data
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
       let smallestMts
