@@ -5,6 +5,10 @@ import timeframeConstants from 'ui/TimeframeSelector/constants'
 import { CURRENCIES } from './constants'
 
 const formatTimestamp = (timestamp, timeframe) => {
+  if (!timestamp) {
+    return ''
+  }
+
   const date = moment(timestamp)
 
   switch (timeframe) {
@@ -19,17 +23,20 @@ const formatTimestamp = (timestamp, timeframe) => {
   }
 }
 
-const parseChartData = ({ data, timeframe, addStartingPoint = true }) => {
-  const startingPoint = CURRENCIES.reduce((acc, cur) => {
-    acc[cur] = 0
+const parseChartData = ({ data, timeframe }) => {
+  const presentCurrencies = CURRENCIES.reduce((acc, currency) => {
+    const isPresent = data.find(entry => entry[currency])
+    if (isPresent) {
+      acc.push(currency)
+    }
     return acc
-  }, {})
+  }, [])
 
   const chartData = data.map((entry) => {
     const { mts } = entry
 
-    const currenciesData = CURRENCIES.reduce((acc, cur) => {
-      acc[cur] = entry[cur] && entry[cur].toFixed(2)
+    const currenciesData = presentCurrencies.reduce((acc, cur) => {
+      acc[cur] = entry[cur] && +entry[cur].toFixed(2)
       return acc
     }, {})
 
@@ -39,9 +46,10 @@ const parseChartData = ({ data, timeframe, addStartingPoint = true }) => {
     }
   })
 
-  return addStartingPoint
-    ? [startingPoint, ...chartData]
-    : chartData
+  return {
+    chartData,
+    presentCurrencies,
+  }
 }
 
 export default parseChartData

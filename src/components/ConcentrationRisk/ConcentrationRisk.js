@@ -50,7 +50,6 @@ class ConcentrationRisk extends PureComponent {
       return acc
     }, {})
 
-    const balanceSumm = _keys(summaryData).reduce((acc, key) => acc + summaryData[key], 0)
     const tableData = _keys(summaryData).map(key => ({
       currency: key,
       balanceUsd: summaryData[key],
@@ -58,7 +57,7 @@ class ConcentrationRisk extends PureComponent {
 
     const chartData = tableData.map(({ currency, balanceUsd }) => ({
       name: currency,
-      value: balanceUsd * 100 / balanceSumm,
+      value: balanceUsd,
     }))
 
     return {
