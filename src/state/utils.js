@@ -131,6 +131,8 @@ export function handleAddSymbolFilter(type, symbol, props) {
 
 export function handleAddPairFilter(type, pair, props) {
   const { history, addTargetPair, targetPairs } = props
+  /* eslint-disable-next-line no-param-reassign */
+  pair = pair.toLowerCase()
   if (!targetPairs.includes(pair)) {
     history.push(generateUrl(type, history.location.search, [...targetPairs, pair]))
     addTargetPair(pair)

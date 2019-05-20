@@ -25,7 +25,7 @@ class MultiPairSelector extends PureComponent {
       if (!modifiers.matchesPredicate) {
         return null
       }
-      const isCurrent = currentFilters.includes(pair)
+      const isCurrent = currentFilters.map(currentPair => currentPair.toUpperCase()).includes(pair)
       const className = existingPairs.includes(pair) && !isCurrent
         ? 'bitfinex-queried-symbol' : ''
 
@@ -57,7 +57,7 @@ class MultiPairSelector extends PureComponent {
         popoverProps={{ minimal: true }}
         tagInputProps={{ tagProps: { minimal: true }, onRemove: handleTagRemove }}
         tagRenderer={renderTag}
-        selectedItems={currentFilters}
+        selectedItems={currentFilters.map(pair => pair.toLowerCase())}
         resetOnSelect
       />
     )
