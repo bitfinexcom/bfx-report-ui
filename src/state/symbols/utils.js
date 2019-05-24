@@ -12,12 +12,36 @@ function toRegularPair(symbol) {
   return table[symbol] || symbol.slice(0, 3)
 }
 
+const isFuture = symbol => symbol.toUpperCase().endsWith('F0')
+
+const isFuturePair = (symbol) => {
+  if (!symbol.includes(':')) {
+    return false
+  }
+
+  const spl = symbol.split(':')
+
+  return isFuture(spl[0]) || isFuture(spl[1])
+}
+
+const parseSymbol = (symbol) => {
+  if (!symbol.includes(':') || isFuturePair(symbol)) {
+    return symbol.toUpperCase()
+  }
+
+  return symbol.split(':')
+    .map(p => toRegularPair(p))
+    .join()
+    .toUpperCase()
+}
+
 /**
  * Obtains a symbol from a given pair with the corresponding prefix
  * @param symbol {String}
  * @returns {String}
  *
- * ex. BTCUSD -> tBTCUSD
+ * ex. BTC:USD -> tBTCUSD
+ * ex BTCF0:USDF0 -> tBTCF0:USDF0
  * ex. BTC:IOTA -> tBTCIOT
  * ex. USD -> fUSD
  */
@@ -29,23 +53,19 @@ export function addPrefix(symbol = '') {
     && (first === 't' || first === 'f')) {
     return sym
   }
-  // pretty pair ex. BTC:IOTA
-  const s = (sym.indexOf(':') > -1)
-    ? sym
-      .split(':')
-      .map(p => toRegularPair(p))
-      .join()
-      .toUpperCase()
-    : sym.toUpperCase()
+
+  const s = parseSymbol(sym)
 
   switch (s.length) {
     case 6:
     case 7:
     case 8:
+    case 11:
       return `t${s}`
 
     case 3:
     case 4:
+    case 5:
       return `f${s}`
 
     default:
