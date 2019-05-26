@@ -338,7 +338,7 @@ class Main extends PureComponent {
           handleExportDialogClose={this.handleExportDialogClose}
           startExport={this.startExport}
         />
-        <FrameworkDialog isFrameworkOpen={isFrameworkOpen} />
+        {platform.showFrameworkMode && <FrameworkDialog isFrameworkOpen={isFrameworkOpen} />}
       </div>
     ) : ''
   }
