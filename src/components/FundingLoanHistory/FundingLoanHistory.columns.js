@@ -5,7 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import { getSideMsg } from 'state/utils'
-import { amountStyle } from 'ui/utils'
+import { formatAmount, fixedFloat } from 'ui/utils'
 
 export default function getColumns(props) {
   const {
@@ -64,13 +64,9 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
-        const classes = amountStyle(amount)
         return (
-          <Cell
-            className={classes}
-            tooltip={amount}
-          >
-            {amount}
+          <Cell tooltip={fixedFloat(amount)}>
+            {formatAmount(amount)}
           </Cell>
         )
       },
@@ -96,12 +92,13 @@ export default function getColumns(props) {
       width: 130,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
+        const fixedRate = fixedFloat(rate)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={rate}
+            tooltip={fixedRate}
           >
-            {rate}
+            {fixedRate}
           </Cell>
         )
       },

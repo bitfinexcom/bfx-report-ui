@@ -6,7 +6,7 @@ import {
 } from '@blueprintjs/table'
 
 import queryConstants from 'state/query/constants'
-import { amountStyle } from 'ui/utils'
+import { formatAmount, fixedFloat } from 'ui/utils'
 
 const { MENU_POSITIONS_ACTIVE } = queryConstants
 
@@ -33,13 +33,14 @@ export default function getColumns(props) {
         name: 'positions.column.base-price',
         width: 100,
         renderer: (rowIndex) => {
-          const price = filteredData[rowIndex].basePrice
+          const { basePrice } = filteredData[rowIndex]
+          const fixedPrice = fixedFloat(basePrice)
           return (
             <Cell
               className='bitfinex-text-align-right'
-              tooltip={price}
+              tooltip={fixedPrice}
             >
-              {price}
+              {fixedPrice}
             </Cell>
           )
         },
@@ -50,13 +51,14 @@ export default function getColumns(props) {
         name: 'positions.column.liq-price',
         width: 100,
         renderer: (rowIndex) => {
-          const price = filteredData[rowIndex].liquidationPrice
+          const { liquidationPrice } = filteredData[rowIndex]
+          const fixedPrice = fixedFloat(liquidationPrice)
           return (
             <Cell
               className='bitfinex-text-align-right'
-              tooltip={price}
+              tooltip={fixedPrice}
             >
-              {price}
+              {fixedPrice}
             </Cell>
           )
         },
@@ -68,13 +70,9 @@ export default function getColumns(props) {
         width: 100,
         renderer: (rowIndex) => {
           const { pl } = filteredData[rowIndex]
-          const classes = amountStyle(pl)
           return (
-            <Cell
-              className={classes}
-              tooltip={pl}
-            >
-              {pl}
+            <Cell tooltip={fixedFloat(pl)}>
+              {formatAmount(pl)}
             </Cell>
           )
         },
@@ -86,13 +84,9 @@ export default function getColumns(props) {
         width: 100,
         renderer: (rowIndex) => {
           const { plPerc } = filteredData[rowIndex]
-          const classes = amountStyle(plPerc)
           return (
-            <Cell
-              className={classes}
-              tooltip={plPerc}
-            >
-              {plPerc}
+            <Cell tooltip={fixedFloat(plPerc)}>
+              {formatAmount(plPerc)}
             </Cell>
           )
         },
@@ -140,13 +134,9 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
-        const classes = amountStyle(amount)
         return (
-          <Cell
-            className={classes}
-            tooltip={amount}
-          >
-            {amount}
+          <Cell tooltip={fixedFloat(amount)}>
+            {formatAmount(amount)}
           </Cell>
         )
       },
@@ -158,13 +148,14 @@ export default function getColumns(props) {
       name: 'positions.column.swap',
       width: 150,
       renderer: (rowIndex) => {
-        const swap = filteredData[rowIndex].marginFunding
+        const { marginFunding } = filteredData[rowIndex]
+        const fixedSwap = fixedFloat(marginFunding)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={swap}
+            tooltip={fixedSwap}
           >
-            {swap}
+            {fixedSwap}
           </Cell>
         )
       },

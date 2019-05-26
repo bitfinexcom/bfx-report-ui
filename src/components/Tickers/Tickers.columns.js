@@ -4,6 +4,8 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
+import { fixedFloat } from 'ui/utils'
+
 export default function getColumns(props) {
   const {
     filteredData,
@@ -33,12 +35,13 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { bid } = filteredData[rowIndex]
+        const fixedBid = fixedFloat(bid)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={bid}
+            tooltip={fixedBid}
           >
-            {bid}
+            {fixedBid}
           </Cell>
         )
       },
@@ -50,12 +53,13 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { ask } = filteredData[rowIndex]
+        const fixedAsk = fixedFloat(ask)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={ask}
+            tooltip={fixedAsk}
           >
-            {ask}
+            {fixedAsk}
           </Cell>
         )
       },
