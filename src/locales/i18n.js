@@ -18,6 +18,14 @@ export const LANGUAGES = {
   tw: 'zh-TW',
 }
 
+// email templates language mapping
+export const LANGUAGES_MAP = {
+  en: 'en',
+  // ru: 'ru',
+  // cn: 'zh-CN',
+  tw: 'zh-TW',
+}
+
 const { NODE_ENV } = process.env
 
 i18n
