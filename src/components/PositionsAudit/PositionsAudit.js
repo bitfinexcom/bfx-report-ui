@@ -103,6 +103,7 @@ class PositionsAudit extends PureComponent {
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
     const tableColums = getColumns({
+      target: TYPE,
       filteredData,
       getFullTime,
       t,

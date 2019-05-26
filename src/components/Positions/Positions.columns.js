@@ -5,10 +5,14 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
+import queryConstants from 'state/query/constants'
 import { amountStyle } from 'ui/utils'
+
+const { MENU_POSITIONS_ACTIVE } = queryConstants
 
 export default function getColumns(props) {
   const {
+    target,
     filteredData,
     getFullTime,
     t,
@@ -21,6 +25,81 @@ export default function getColumns(props) {
       ? t('positions.swap.daily')
       : t('positions.swap.term')
   }
+
+  const ACTIVE_POSITIONS_COLS = (target === MENU_POSITIONS_ACTIVE)
+    ? [
+      {
+        id: 'basesPrice',
+        name: 'positions.column.base-price',
+        width: 100,
+        renderer: (rowIndex) => {
+          const price = filteredData[rowIndex].basePrice
+          return (
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={price}
+            >
+              {price}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].basesPrice,
+      },
+      {
+        id: 'priceLiq',
+        name: 'positions.column.liq-price',
+        width: 100,
+        renderer: (rowIndex) => {
+          const price = filteredData[rowIndex].liquidationPrice
+          return (
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={price}
+            >
+              {price}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].liquidationPrice,
+      },
+      {
+        id: 'pl',
+        name: 'positions.column.pl',
+        width: 100,
+        renderer: (rowIndex) => {
+          const { pl } = filteredData[rowIndex]
+          const classes = amountStyle(pl)
+          return (
+            <Cell
+              className={classes}
+              tooltip={pl}
+            >
+              {pl}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].pl,
+      },
+      {
+        id: 'plperc',
+        name: 'positions.column.plperc',
+        width: 100,
+        renderer: (rowIndex) => {
+          const { plPerc } = filteredData[rowIndex]
+          const classes = amountStyle(plPerc)
+          return (
+            <Cell
+              className={classes}
+              tooltip={plPerc}
+            >
+              {plPerc}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].plPerc,
+      },
+    ]
+    : []
 
   return [
     {
@@ -73,76 +152,7 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => filteredData[rowIndex].amount,
     },
-    {
-      id: 'basesPrice',
-      name: 'positions.column.base-price',
-      width: 100,
-      renderer: (rowIndex) => {
-        const price = filteredData[rowIndex].basePrice
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={price}
-          >
-            {price}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].basesPrice,
-    },
-    {
-      id: 'priceLiq',
-      name: 'positions.column.liq-price',
-      width: 100,
-      renderer: (rowIndex) => {
-        const price = filteredData[rowIndex].liquidationPrice
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={price}
-          >
-            {price}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].liquidationPrice,
-    },
-    {
-      id: 'pl',
-      name: 'positions.column.pl',
-      width: 100,
-      renderer: (rowIndex) => {
-        const { pl } = filteredData[rowIndex]
-        const classes = amountStyle(pl)
-        return (
-          <Cell
-            className={classes}
-            tooltip={pl}
-          >
-            {pl}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].pl,
-    },
-    {
-      id: 'plperc',
-      name: 'positions.column.plperc',
-      width: 100,
-      renderer: (rowIndex) => {
-        const { plPerc } = filteredData[rowIndex]
-        const classes = amountStyle(plPerc)
-        return (
-          <Cell
-            className={classes}
-            tooltip={plPerc}
-          >
-            {plPerc}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].plPerc,
-    },
+    ...ACTIVE_POSITIONS_COLS,
     {
       id: 'swap',
       name: 'positions.column.swap',
