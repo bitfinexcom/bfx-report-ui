@@ -341,7 +341,8 @@
     }
   },
   "wallets": {
-    "title": "錢包(Beta)",
+    "title": "錢包",
+    "title_beta": "錢包(Beta)",
     "column": {
       "currency": "貨幣",
       "balance": "餘額",

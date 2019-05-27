@@ -84,6 +84,7 @@ class Wallets extends PureComponent {
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
     const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
     const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
+    const walletsTitle = platform.showSyncMode ? 'wallets.title' : 'wallets.title_beta'
 
     const renderTimeSelection = (
       <Fragment>
@@ -116,13 +117,13 @@ class Wallets extends PureComponent {
     let showContent
     if (loading) {
       showContent = (
-        <Loading title='wallets.title' />
+        <Loading title={walletsTitle} />
       )
     } else if (exchangeRows === 0 && marginRows === 0 && fundingRows === 0) {
       showContent = (
         <Fragment>
           <h4>
-            {t('wallets.title')}
+            {t(walletsTitle)}
             {' '}
             {renderTimeSelection}
             {' '}
@@ -135,7 +136,7 @@ class Wallets extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {t('wallets.title')}
+            {t(walletsTitle)}
             {' '}
             {renderTimeSelection}
             {' '}

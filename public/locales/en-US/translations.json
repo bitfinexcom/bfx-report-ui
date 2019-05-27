@@ -342,7 +342,8 @@
     }
   },
   "wallets": {
-    "title": "Wallets (Beta)",
+    "title": "Wallets",
+    "title_beta": "Wallets (Beta)",
     "column": {
       "currency": "CURRENCY",
       "balance": "BALANCE",
