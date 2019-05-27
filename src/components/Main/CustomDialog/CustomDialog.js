@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
+import moment from 'moment-timezone'
 import {
   Button,
   Classes,
@@ -11,6 +11,8 @@ import {
 import { DateRangeInput } from '@blueprintjs/datetime'
 
 import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
+
+import { propTypes, defaultProps } from './CustomDialog.props'
 
 const SMALL_DATE_RANGE_POPOVER_PROPS = {
   position: Position.TOP,
@@ -64,11 +66,26 @@ class CustomDialog extends PureComponent {
     ]
   }
 
+  handleRangeChange = (range) => {
+    const { updateWarningStatus, handleRangeChange } = this.props
+    const [startDate] = range
+    const twoYearsPast = moment().add({ years: -2 })
+
+    if (twoYearsPast.isAfter(startDate)) {
+      updateWarningStatus({
+        id: 'status.warn',
+        topic: 'timeframe.range_limit',
+      })
+      return
+    }
+
+    handleRangeChange(range)
+  }
+
   render() {
     const {
       endDate,
       handleCustomDialogClose,
-      handleRangeChange,
       isCustomOpen,
       startQuery,
       startDate,
@@ -81,7 +98,7 @@ class CustomDialog extends PureComponent {
       closeOnSelection: true,
       formatDate,
       parseDate,
-      onChange: handleRangeChange,
+      onChange: this.handleRangeChange,
       value: [startDate, endDate],
       maxDate: this.maxDate,
       placeholder: t('timeframe.start-date-placeholder'),
@@ -128,21 +145,7 @@ class CustomDialog extends PureComponent {
   }
 }
 
-CustomDialog.propTypes = {
-  handleCustomDialogClose: PropTypes.func.isRequired,
-  handleRangeChange: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
-  isCustomOpen: PropTypes.bool.isRequired,
-  startQuery: PropTypes.func.isRequired,
-  startDate: PropTypes.instanceOf(Date),
-  timezone: PropTypes.string,
-  endDate: PropTypes.instanceOf(Date),
-}
-
-CustomDialog.defaultProps = {
-  startDate: null,
-  endDate: null,
-  timezone: '',
-}
+CustomDialog.propTypes = propTypes
+CustomDialog.defaultProps = defaultProps
 
 export default withTranslation('translations')(CustomDialog)

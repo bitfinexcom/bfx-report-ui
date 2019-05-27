@@ -22,6 +22,12 @@ export function statusReducer(state = initialState, action) {
         intent: Intent.SUCCESS,
         msg: payload,
       }
+    case types.UPDATE_WARNING_STATUS:
+      return {
+        ...state,
+        intent: Intent.WARNING,
+        msg: payload,
+      }
     case types.UPDATE_ERROR_STATUS:
       return {
         ...state,

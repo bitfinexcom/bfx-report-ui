@@ -46,6 +46,24 @@ export function updateSuccessStatus(msg) {
 }
 
 /**
+ * Create an action to update warning status.
+ * @param {Object} msg
+ */
+export function updateWarningStatus(msg) {
+  if (!msg.id) {
+    return {
+      type: types.UPDATE_WARNING_STATUS,
+      payload: { id: 'status.noid' },
+    }
+  }
+
+  return {
+    type: types.UPDATE_WARNING_STATUS,
+    payload: msg,
+  }
+}
+
+/**
  * Create an action to update error status.
  * @param {Object} msg
  */

@@ -272,6 +272,7 @@
   },
   "status": {
     "success": "{{topic}} Success at {{time}}",
+    "warn": "{{topic}}",
     "fail": "{{topic}} fail {{detail}}",
     "noid": "dev: the status action should contain the id param",
     "request": {
@@ -327,6 +328,7 @@
     "past_month": "Past month",
     "past_3m": "Past 3 months",
     "custom_time": "Custom",
+    "range_limit": "Queries more than two years behind the actual date are not allowed",
     "start-date-placeholder": "Start Date Time",
     "year": "Year"
   },
