@@ -179,7 +179,9 @@
       "avgprice": "AVERAGE EXECUTION PRICE",
       "create": "CREATED",
       "update": "UPDATED",
-      "status": "STATUS"
+      "status": "STATUS",
+      "pricetrail": "TRAILING PRICE",
+      "typeprev": "PREVIOUS ORDER TYPE"
     }
   },
   "pagination": {

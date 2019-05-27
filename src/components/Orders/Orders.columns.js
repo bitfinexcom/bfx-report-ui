@@ -171,5 +171,37 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => filteredData[rowIndex].status,
     },
+    {
+      id: 'priceTrailing',
+      name: 'orders.column.pricetrail',
+      width: 200,
+      renderer: (rowIndex) => {
+        const { priceTrailing } = filteredData[rowIndex]
+        const fixedPrice = fixedFloat(priceTrailing)
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedPrice}
+          >
+            {fixedPrice}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].priceTrailing,
+    },
+    {
+      id: 'typePrev',
+      name: 'orders.column.typeprev',
+      width: 200,
+      renderer: (rowIndex) => {
+        const { typePrev } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={typePrev}>
+            {typePrev}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].typePrev,
+    },
   ]
 }
