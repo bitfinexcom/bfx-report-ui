@@ -26,6 +26,7 @@ class CustomDialog extends PureComponent {
   createShortcut = (label, dateRange) => ({ dateRange, label, includeTime: true })
 
   createShortcuts = () => {
+    const { t } = this.props
     const today = new Date()
     const makeDate = (action) => {
       const returnVal = new Date()
@@ -54,15 +55,15 @@ class CustomDialog extends PureComponent {
     const lastYearEnd = new Date(today.getFullYear() - 1, 11, 31, 23, 59, 59)
 
     return [
-      this.createShortcut('Today', [todayStart, today]),
-      this.createShortcut('Yesterday', [yesterdayStart, yesterdayEnd]),
-      this.createShortcut('Past week', [oneWeekAgo, today]),
-      this.createShortcut('Past month', [oneMonthAgo, today]),
-      this.createShortcut('Past 3 months', [threeMonthsAgo, today]),
-      this.createShortcut('Past year', [oneYearAgo, today]),
-      this.createShortcut('Past 2 years', [twoYearsAgo, today]),
-      this.createShortcut(`${today.getFullYear()} year`, [currentYearStart, today]),
-      this.createShortcut(`${today.getFullYear() - 1} year`, [lastYearStart, lastYearEnd]),
+      this.createShortcut(t('timeframe.today'), [todayStart, today]),
+      this.createShortcut(t('timeframe.yesterday'), [yesterdayStart, yesterdayEnd]),
+      this.createShortcut(t('timeframe.past_week'), [oneWeekAgo, today]),
+      this.createShortcut(t('timeframe.past_month'), [oneMonthAgo, today]),
+      this.createShortcut(t('timeframe.past_3m'), [threeMonthsAgo, today]),
+      this.createShortcut(t('timeframe.past_year'), [oneYearAgo, today]),
+      this.createShortcut(t('timeframe.past_2y'), [twoYearsAgo, today]),
+      this.createShortcut(t('timeframe.custom_year', { year: today.getFullYear() }), [currentYearStart, today]),
+      this.createShortcut(t('timeframe.custom_year', { year: today.getFullYear() - 1 }), [lastYearStart, lastYearEnd]),
     ]
   }
 
