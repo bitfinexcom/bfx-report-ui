@@ -81,9 +81,10 @@ class Main extends PureComponent {
   }
 
   handleRangeChange = (range) => {
+    const [startDate, endDate] = range
     this.setState({
-      startDate: range[0],
-      endDate: range[1],
+      startDate,
+      endDate,
     })
   }
 

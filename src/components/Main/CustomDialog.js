@@ -21,6 +21,49 @@ class CustomDialog extends PureComponent {
     this.maxDate = new Date()
   }
 
+  createShortcut = (label, dateRange) => ({ dateRange, label, includeTime: true })
+
+  createShortcuts = () => {
+    const today = new Date()
+    const makeDate = (action) => {
+      const returnVal = new Date()
+      action(returnVal)
+      returnVal.setDate(returnVal.getDate() + 1)
+      return returnVal
+    }
+
+    const todayStart = new Date()
+    todayStart.setHours(0, 0, 0)
+    const yesterdayStart = makeDate((d) => {
+      d.setDate(d.getDate() - 2)
+      d.setHours(0, 0, 0)
+    })
+    const yesterdayEnd = makeDate((d) => {
+      d.setDate(d.getDate() - 2)
+      d.setHours(23, 59, 59)
+    })
+    const oneWeekAgo = makeDate(d => d.setDate(d.getDate() - 7))
+    const oneMonthAgo = makeDate(d => d.setMonth(d.getMonth() - 1))
+    const threeMonthsAgo = makeDate(d => d.setMonth(d.getMonth() - 3))
+    const oneYearAgo = makeDate(d => d.setFullYear(d.getFullYear() - 1))
+    const twoYearsAgo = makeDate(d => d.setFullYear(d.getFullYear() - 2))
+    const currentYearStart = new Date(today.getFullYear(), 0, 1)
+    const lastYearStart = new Date(today.getFullYear() - 1, 0, 1)
+    const lastYearEnd = new Date(today.getFullYear() - 1, 11, 31, 23, 59, 59)
+
+    return [
+      this.createShortcut('Today', [todayStart, today]),
+      this.createShortcut('Yesterday', [yesterdayStart, yesterdayEnd]),
+      this.createShortcut('Past week', [oneWeekAgo, today]),
+      this.createShortcut('Past month', [oneMonthAgo, today]),
+      this.createShortcut('Past 3 months', [threeMonthsAgo, today]),
+      this.createShortcut('Past year', [oneYearAgo, today]),
+      this.createShortcut('Past 2 years', [twoYearsAgo, today]),
+      this.createShortcut(`${today.getFullYear()} year`, [currentYearStart, today]),
+      this.createShortcut(`${today.getFullYear() - 1} year`, [lastYearStart, lastYearEnd]),
+    ]
+  }
+
   render() {
     const {
       endDate,
@@ -60,6 +103,7 @@ class CustomDialog extends PureComponent {
           <DateRangeInput
             {...commonDateRangeProps}
             className='hidden-xs col-sm-12 col-md-12 col-lg-12 col-xl-12'
+            shortcuts={this.createShortcuts()}
           />
           <DateRangeInput
             {...commonDateRangeProps}
