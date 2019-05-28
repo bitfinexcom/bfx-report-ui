@@ -19,10 +19,6 @@ const SMALL_DATE_RANGE_POPOVER_PROPS = {
 }
 
 class CustomDialog extends PureComponent {
-  componentDidMount() {
-    this.maxDate = new Date()
-  }
-
   createShortcut = (label, dateRange) => ({ dateRange, label, includeTime: true })
 
   createShortcuts = () => {
@@ -101,7 +97,7 @@ class CustomDialog extends PureComponent {
       parseDate,
       onChange: this.handleRangeChange,
       value: [startDate, endDate],
-      maxDate: this.maxDate,
+      maxDate: new Date(),
       placeholder: t('timeframe.start-date-placeholder'),
     }
 
