@@ -10,7 +10,6 @@ import { Select } from '@blueprintjs/select'
 class SymbolSelector extends PureComponent {
   render() {
     const {
-      coinList,
       coins,
       currencies,
       currentCoin,
@@ -34,7 +33,7 @@ class SymbolSelector extends PureComponent {
           intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
           disabled={modifiers.disabled}
           key={symbol}
-          onClick={onSymbolSelect(symbol)}
+          onClick={() => onSymbolSelect(symbol)}
           text={symbol}
           label={currencies[symbol]}
         />
@@ -45,8 +44,8 @@ class SymbolSelector extends PureComponent {
 
     return (
       <Select
-        disabled={coins.length === 0}
-        items={coinList}
+        disabled={!coins.length}
+        items={coins}
         itemRenderer={renderSymbol}
         itemPredicate={filterSymbol}
         onItemSelect={onSymbolSelect}
@@ -54,7 +53,7 @@ class SymbolSelector extends PureComponent {
         <Button
           text={currentCoin.toUpperCase()}
           rightIcon='caret-down'
-          disabled={coins.length === 0}
+          disabled={!coins.length}
         />
       </Select>
     )
@@ -64,7 +63,6 @@ class SymbolSelector extends PureComponent {
 SymbolSelector.propTypes = {
   coins: PropTypes.arrayOf(PropTypes.string),
   currencies: PropTypes.objectOf(PropTypes.string),
-  coinList: PropTypes.arrayOf(PropTypes.string),
   currentCoin: PropTypes.string.isRequired,
   existingCoins: PropTypes.arrayOf(PropTypes.string),
   onSymbolSelect: PropTypes.func.isRequired,
@@ -73,7 +71,6 @@ SymbolSelector.propTypes = {
 SymbolSelector.defaultProps = {
   coins: [],
   currencies: {},
-  coinList: [],
   existingCoins: [],
   wildCard: [],
 }

@@ -15,7 +15,6 @@ class PairSelector extends PureComponent {
       currentPair,
       existingPairs,
       onPairSelect,
-      pairList,
       pairs,
       wildCard,
     } = this.props
@@ -35,7 +34,7 @@ class PairSelector extends PureComponent {
           intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
           disabled={modifiers.disabled}
           key={pair}
-          onClick={onPairSelect(pair)}
+          onClick={() => onPairSelect(pair)}
           text={formatPair(pair)}
         />
       )
@@ -45,8 +44,8 @@ class PairSelector extends PureComponent {
 
     return (
       <Select
-        disabled={pairs.length === 0}
-        items={pairList}
+        disabled={!pairs.length}
+        items={pairs}
         itemRenderer={renderPair}
         itemPredicate={filterPair}
         onItemSelect={onPairSelect}
@@ -54,7 +53,7 @@ class PairSelector extends PureComponent {
         <Button
           text={formatPair(currentPair)}
           rightIcon='caret-down'
-          disabled={pairs.length === 0}
+          disabled={!pairs.length}
         />
       </Select>
     )
@@ -65,13 +64,11 @@ PairSelector.propTypes = {
   currentPair: PropTypes.string.isRequired,
   existingPairs: PropTypes.arrayOf(PropTypes.string),
   onPairSelect: PropTypes.func.isRequired,
-  pairList: PropTypes.arrayOf(PropTypes.string),
   pairs: PropTypes.arrayOf(PropTypes.string),
   wildCard: PropTypes.arrayOf(PropTypes.string),
 }
 PairSelector.defaultProps = {
   pairs: [],
-  pairList: [],
   existingPairs: [],
   wildCard: [],
 }

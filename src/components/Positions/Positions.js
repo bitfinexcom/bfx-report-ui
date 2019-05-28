@@ -25,8 +25,7 @@ import {
   checkFetch,
   getCurrentEntries,
   getNoAuthTokenUrlString,
-  handleAddPairFilter,
-  handleRemovePairFilter,
+  togglePair,
 } from 'state/utils'
 
 import getColumns from './Positions.columns'
@@ -37,8 +36,6 @@ const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Positions extends PureComponent {
-  handlers = {}
-
   componentDidMount() {
     const { loading, fetchPositions, match } = this.props
     if (loading) {
@@ -49,17 +46,6 @@ class Positions extends PureComponent {
 
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, TYPE)
-  }
-
-  handleClick = (pair) => {
-    if (!this.handlers[pair]) {
-      this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
-    }
-    return this.handlers[pair]
-  }
-
-  handleTagRemove = (tag) => {
-    handleRemovePairFilter(TYPE, tag, this.props)
   }
 
   jumpToPositionsAudit = (e) => {
@@ -127,8 +113,7 @@ class Positions extends PureComponent {
         <MultiPairSelector
           currentFilters={targetPairs}
           existingPairs={existingPairs}
-          onPairSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
+          togglePair={pair => togglePair(TYPE, this.props, pair)}
         />
       </Fragment>
     )

@@ -304,6 +304,7 @@
   },
   "tickers": {
     "title": "Tickers",
+    "minlength": "Should pick at least one pair",
     "column": {
       "pair": "PAIR",
       "ask": "ASK",

@@ -20,9 +20,9 @@ import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  handleAddPairFilter,
-  handleRemovePairFilter,
+  togglePair,
 } from 'state/utils'
+import { parsePairTag } from 'state/symbols/utils'
 import { platform } from 'var/config'
 
 import getColumns from './Tickers.columns'
@@ -33,8 +33,6 @@ const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Tickers extends PureComponent {
-  handlers = {}
-
   componentDidMount() {
     const { loading, fetchTickers, match } = this.props
     if (loading) {
@@ -47,19 +45,12 @@ class Tickers extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick = (pair) => {
-    if (!this.handlers[pair]) {
-      this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
-    }
-    return this.handlers[pair]
-  }
-
-  handleTagRemove = (tag) => {
+  togglePair = (pair) => {
     const { targetPairs, updateErrorStatus } = this.props
-    if (targetPairs.length === 1) {
+    if (targetPairs.length === 1 && targetPairs.includes(parsePairTag(pair))) {
       updateErrorStatus({ id: 'tickers.minlength' })
     } else {
-      handleRemovePairFilter(TYPE, tag, this.props)
+      togglePair(TYPE, this.props, pair)
     }
   }
 
@@ -118,8 +109,7 @@ class Tickers extends PureComponent {
         <MultiPairSelector
           currentFilters={targetPairs}
           existingPairs={existingPairs}
-          onPairSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
+          togglePair={this.togglePair}
         />
       </Fragment>
     )

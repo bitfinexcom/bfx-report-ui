@@ -17,8 +17,7 @@ import queryConstants from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
 import {
   checkFetch,
-  handleAddSymbolFilter,
-  handleRemoveSymbolFilter,
+  toggleSymbol,
   getCurrentEntries,
 } from 'state/utils'
 
@@ -32,8 +31,6 @@ const PAGE_SIZE = getPageSize(TYPE)
  * Funding Payment has the same state and columns as Ledgers
  */
 class FundingPayment extends PureComponent {
-  handlers = {}
-
   componentDidMount() {
     const { loading, fetchFpayment, match } = this.props
     if (loading) {
@@ -44,17 +41,6 @@ class FundingPayment extends PureComponent {
 
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, TYPE)
-  }
-
-  handleClick = (symbol) => {
-    if (!this.handlers[symbol]) {
-      this.handlers[symbol] = () => handleAddSymbolFilter(TYPE, symbol, this.props)
-    }
-    return this.handlers[symbol]
-  }
-
-  handleTagRemove = (tag) => {
-    handleRemoveSymbolFilter(TYPE, tag, this.props)
   }
 
   render() {
@@ -93,8 +79,7 @@ class FundingPayment extends PureComponent {
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
-          onSymbolSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
+          toggleSymbol={symbol => toggleSymbol(TYPE, this.props, symbol)}
         />
       </Fragment>
     )

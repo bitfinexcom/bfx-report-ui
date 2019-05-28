@@ -1,26 +1,16 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
-import { MenuItem } from '@blueprintjs/core'
+import { Intent, MenuItem } from '@blueprintjs/core'
 import { MultiSelect } from '@blueprintjs/select'
 
 import { ORDERED_TARGETS } from 'state/query/utils'
 
 class ExportTargetsSelector extends PureComponent {
-  componentDidMount() {
-    const {
-      target,
-      onTargetSelect,
-    } = this.props
-    // put current dataset into currentTargets
-    onTargetSelect(target)()
-  }
-
   render() {
     const {
       currentTargets,
-      handleTagRemove,
-      onTargetSelect,
+      toggleTarget,
       t,
     } = this.props
 
@@ -29,12 +19,15 @@ class ExportTargetsSelector extends PureComponent {
         return null
       }
 
+      const isCurrent = currentTargets.includes(item)
+
       return (
         <MenuItem
           active={modifiers.active}
+          intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
           disabled={modifiers.disabled}
           key={item}
-          onClick={onTargetSelect(item)}
+          onClick={() => toggleTarget(item)}
           text={t(`${item}.title`)}
         />
       )
@@ -49,9 +42,12 @@ class ExportTargetsSelector extends PureComponent {
         items={ORDERED_TARGETS}
         itemRenderer={renderTarget}
         itemPredicate={filterTarget}
-        onItemSelect={onTargetSelect}
+        onItemSelect={toggleTarget}
         popoverProps={{ minimal: true }}
-        tagInputProps={{ tagProps: { minimal: true }, onRemove: handleTagRemove }}
+        tagInputProps={{
+          tagProps: { minimal: true },
+          onRemove: (target, index) => toggleTarget(currentTargets[index]),
+        }}
         tagRenderer={renderTag}
         selectedItems={currentTargets}
         resetOnSelect
@@ -62,10 +58,8 @@ class ExportTargetsSelector extends PureComponent {
 
 ExportTargetsSelector.propTypes = {
   currentTargets: PropTypes.arrayOf(PropTypes.string),
-  handleTagRemove: PropTypes.func.isRequired,
-  onTargetSelect: PropTypes.func.isRequired,
+  toggleTarget: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  target: PropTypes.string.isRequired,
 }
 ExportTargetsSelector.defaultProps = {
   currentTargets: [],

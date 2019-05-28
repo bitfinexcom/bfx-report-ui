@@ -10,8 +10,8 @@ import SyncPrefButton from './SyncPrefButton'
 const mapStateToProps = (state = {}) => {
   const { start } = getTimeFrame(getQuery(state))
   let pairs = getSyncPairs(state)
-  if (pairs.length === 0) {
-    pairs = ['btcusd']
+  if (!pairs.length) {
+    pairs = ['BTCUSD']
   }
   return {
     syncMode: getSyncMode(state),

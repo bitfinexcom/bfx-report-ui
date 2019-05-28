@@ -33,8 +33,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 const WILD_CARD = ['']
 
 class PublicFunding extends PureComponent {
-  handlers = {}
-
   componentDidMount() {
     const { loading, fetchPublicfunding, match } = this.props
     if (loading) {
@@ -48,15 +46,12 @@ class PublicFunding extends PureComponent {
   }
 
   handleClick = (symbol) => {
-    if (!this.handlers[symbol]) {
-      this.handlers[symbol] = () => {
-        const { history, setTargetSymbol } = this.props
-        // show select symbol in url
-        history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${getNoAuthTokenUrlString(history.location.search)}`)
-        setTargetSymbol(symbol)
-      }
+    const { history, targetSymbol, setTargetSymbol } = this.props
+    if (symbol !== targetSymbol) {
+      // show select symbol in url
+      history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${getNoAuthTokenUrlString(history.location.search)}`)
+      setTargetSymbol(symbol)
     }
-    return this.handlers[symbol]
   }
 
   render() {
@@ -115,7 +110,6 @@ class PublicFunding extends PureComponent {
       <Fragment>
         {' '}
         <SymbolSelector
-          coinList={coins}
           coins={coins}
           currencies={currencies}
           currentCoin={currentSymbol}

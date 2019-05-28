@@ -121,6 +121,43 @@ export function generateUrl(type, params, symbols) {
     : `${getPath(type)}${noAuthTokenParams}`
 }
 
+export function toggleSymbol(type, props, symbol) {
+  const {
+    history, targetSymbols, addTargetSymbol, removeTargetSymbol,
+  } = props
+
+  if (targetSymbols.includes(symbol)) {
+    if (targetSymbols.length === 1) { // show no select symbol in url
+      history.push(generateUrl(type, history.location.search))
+    } else {
+      history.push(generateUrl(type, history.location.search, targetSymbols.filter(tag => symbol !== tag)))
+    }
+    removeTargetSymbol(symbol)
+  } else {
+    history.push(generateUrl(type, history.location.search, [...targetSymbols, symbol]))
+    addTargetSymbol(symbol)
+  }
+}
+
+export function togglePair(type, props, pair) {
+  const {
+    history, targetPairs, addTargetPair, removeTargetPair,
+  } = props
+  const parsedPair = parsePairTag(pair)
+  if (targetPairs.includes(parsedPair)) {
+    if (targetPairs.length === 1) { // show no select symbol in url
+      history.push(generateUrl(type, history.location.search))
+    } else {
+      const pairs = targetPairs.filter(targetPair => targetPair !== parsedPair)
+      history.push(generateUrl(type, history.location.search, pairs))
+    }
+    removeTargetPair(parsedPair)
+  } else {
+    history.push(generateUrl(type, history.location.search, [...targetPairs, parsedPair]))
+    addTargetPair(parsedPair)
+  }
+}
+
 export function handleAddSymbolFilter(type, symbol, props) {
   const { history, addTargetSymbol, targetSymbols } = props
   if (!targetSymbols.includes(symbol)) {

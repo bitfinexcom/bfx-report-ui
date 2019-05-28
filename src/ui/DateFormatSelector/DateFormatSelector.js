@@ -14,16 +14,11 @@ import types from 'state/base/constants'
 import { propTypes, defaultProps } from './DateFormatSelector.props'
 
 class DateFormatSelector extends PureComponent {
-  handlers = {}
-
   handleClick = (format) => {
-    if (!this.handlers[format]) {
-      this.handlers[format] = () => {
-        // eslint-disable-next-line react/destructuring-assignment
-        this.props.setDateFormat(format)
-      }
+    const { dateFormat, setDateFormat } = this.props
+    if (dateFormat !== format) {
+      setDateFormat(format)
     }
-    return this.handlers[format]
   }
 
   render() {
@@ -33,7 +28,7 @@ class DateFormatSelector extends PureComponent {
       <MenuItem
         key={item}
         text={item}
-        onClick={this.handleClick(item)}
+        onClick={() => this.handleClick(item)}
         intent={item === dateFormat ? Intent.PRIMARY : undefined}
       />
     ))

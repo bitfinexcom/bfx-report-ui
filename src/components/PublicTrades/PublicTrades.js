@@ -33,8 +33,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 const WILD_CARD = ['']
 
 class PublicTrades extends PureComponent {
-  handlers = {}
-
   componentDidMount() {
     const { loading, fetchPublictrades, match } = this.props
     if (loading) {
@@ -47,16 +45,13 @@ class PublicTrades extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick = (pair) => {
-    if (!this.handlers[pair]) {
-      this.handlers[pair] = () => {
-        const { history, setTargetPair } = this.props
-        // show select pair in url
-        history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${getNoAuthTokenUrlString(history.location.search)}`)
-        setTargetPair(pair)
-      }
+  handlePairSelect = (pair) => {
+    const { history, targetPair, setTargetPair } = this.props
+    if (pair !== targetPair) {
+      // show select pair in url
+      history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${getNoAuthTokenUrlString(history.location.search)}`)
+      setTargetPair(pair)
     }
-    return this.handlers[pair]
   }
 
   render() {
@@ -86,8 +81,7 @@ class PublicTrades extends PureComponent {
     }
 
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const pairList = pairs
-    const currentPair = targetPair || 'btcusd'
+    const currentPair = targetPair || 'BTCUSD'
     const numRows = filteredData.length
     const tableColums = getColumns({
       filteredData,
@@ -117,8 +111,7 @@ class PublicTrades extends PureComponent {
         <PairSelector
           currentPair={currentPair}
           existingPairs={[]}
-          onPairSelect={this.handleClick}
-          pairList={pairList}
+          onPairSelect={this.handlePairSelect}
           pairs={pairs}
           wildCard={WILD_CARD}
         />

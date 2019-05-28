@@ -24,32 +24,35 @@ import ExportTargetsSelector from './ExportTargetsSelector'
 import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
-  handlers = {}
+  constructor(props) {
+    super()
 
-  state = {
-    currentTargets: [],
-  }
-
-  onTargetSelect = (target) => {
-    if (!this.handlers[target]) {
-      this.handlers[target] = () => {
-        const { currentTargets } = this.state
-        if (!currentTargets.includes(target)) {
-          this.setState({ currentTargets: [...currentTargets, target] })
-        }
-      }
+    const { type } = props
+    this.state = {
+      currentTargets: [type],
     }
-    return this.handlers[target]
   }
 
-  handleTagRemove = (tag, idx) => {
-    const { currentTargets } = this.state
-    const { t } = this.props
+  componentWillReceiveProps(nextProps) {
+    const { type } = this.props
 
-    if (t(`${currentTargets[idx]}.title`) === tag) {
-      if (currentTargets.length !== 1) { // should keep at least 1 item
-        this.setState({ currentTargets: currentTargets.filter((_, i) => i !== idx) })
-      }
+    if (type !== nextProps.type) {
+      this.setState({
+        currentTargets: [nextProps.type],
+      })
+    }
+  }
+
+  toggleTarget = (target) => {
+    const { currentTargets } = this.state
+
+    if (!currentTargets.includes(target)) {
+      this.setState({ currentTargets: [...currentTargets, target] })
+      return
+    }
+
+    if (currentTargets.length !== 1) { // should keep at least 1 item
+      this.setState({ currentTargets: currentTargets.filter(currentTarget => currentTarget !== target) })
     }
   }
 
@@ -125,9 +128,7 @@ class ExportDialog extends PureComponent {
                   <div className={checkboxFieldStyle}>
                     <ExportTargetsSelector
                       currentTargets={currentTargets}
-                      onTargetSelect={this.onTargetSelect}
-                      handleTagRemove={this.handleTagRemove}
-                      target={type}
+                      toggleTarget={this.toggleTarget}
                     />
                   </div>
                 </div>
