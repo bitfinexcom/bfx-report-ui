@@ -24,23 +24,20 @@ import ExportTargetsSelector from './ExportTargetsSelector'
 import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
-  constructor(props) {
-    super()
-
-    const { type } = props
-    this.state = {
-      currentTargets: [type],
-    }
+  state = {
+    currentTargets: [],
+    type: '',
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { type } = this.props
-
-    if (type !== nextProps.type) {
-      this.setState({
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.type !== prevState.type) {
+      return {
         currentTargets: [nextProps.type],
-      })
+        type: nextProps.type,
+      }
     }
+
+    return null
   }
 
   toggleTarget = (target) => {
