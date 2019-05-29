@@ -181,17 +181,16 @@ export function momentFormatter(format, timezone) {
 export const DEFAULT_DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
 export function getSideMsg(side) {
-  let msg
-  if (side === 1) {
-    msg = 'provided'
-  } else if (side === 0) {
-    msg = 'both'
-  } else if (side === -1) {
-    msg = 'taken'
-  } else {
-    msg = 'null'
+  switch (side) {
+    case 1:
+      return 'provided'
+    case 0:
+      return 'both'
+    case -1:
+      return 'taken'
+    default:
+      return 'null'
   }
-  return msg
 }
 
 export function getParsedUrlParams(searchUrl) {
