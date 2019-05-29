@@ -158,49 +158,6 @@ export function togglePair(type, props, pair) {
   }
 }
 
-export function handleAddSymbolFilter(type, symbol, props) {
-  const { history, addTargetSymbol, targetSymbols } = props
-  if (!targetSymbols.includes(symbol)) {
-    history.push(generateUrl(type, history.location.search, [...targetSymbols, symbol]))
-    addTargetSymbol(symbol)
-  }
-}
-
-export function handleAddPairFilter(type, pair, props) {
-  const { history, addTargetPair, targetPairs } = props
-  /* eslint-disable-next-line no-param-reassign */
-  pair = pair.toLowerCase()
-  if (!targetPairs.includes(pair)) {
-    history.push(generateUrl(type, history.location.search, [...targetPairs, pair]))
-    addTargetPair(pair)
-  }
-}
-
-export function handleRemoveSymbolFilter(type, tag, props) {
-  const { history, removeTargetSymbol, targetSymbols } = props
-  if (targetSymbols.includes(tag)) {
-    if (targetSymbols.length === 1) { // show no select symbol in url
-      history.push(generateUrl(type, history.location.search))
-    } else {
-      history.push(generateUrl(type, history.location.search, targetSymbols.filter(symbol => symbol !== tag)))
-    }
-    removeTargetSymbol(tag)
-  }
-}
-
-export function handleRemovePairFilter(type, tag, props) {
-  const { history, removeTargetPair, targetPairs } = props
-  const parsedTag = parsePairTag(tag)
-  if (targetPairs.includes(parsedTag)) {
-    if (targetPairs.length === 1) { // show no select symbol in url
-      history.push(generateUrl(type, history.location.search))
-    } else {
-      history.push(generateUrl(type, history.location.search, targetPairs.filter(pair => pair !== parsedTag)))
-    }
-    removeTargetPair(parsedTag)
-  }
-}
-
 export function getCurrentEntries(entries, offset, limit, pageOffset, pageSize) {
   return offset < limit
     ? entries.slice(pageOffset, pageOffset + pageSize)
@@ -254,10 +211,6 @@ export default {
   getParsedUrlParams,
   getSideMsg,
   generateUrl,
-  handleAddPairFilter,
-  handleAddSymbolFilter,
-  handleRemovePairFilter,
-  handleRemoveSymbolFilter,
   isValidateType,
   momentFormatter,
   postJsonfetch,
