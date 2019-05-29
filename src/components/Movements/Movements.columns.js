@@ -4,7 +4,7 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { amountStyle } from 'ui/utils'
+import { formatAmount, fixedFloat } from 'ui/utils'
 import Explorer from 'ui/Explorer'
 
 export default function getColumns(props) {
@@ -80,14 +80,10 @@ export default function getColumns(props) {
       width: 120,
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
-        const tooltip = `${amount} ${currency}`
-        const classes = amountStyle(amount)
+        const tooltip = `${fixedFloat(amount)} ${currency}`
         return (
-          <Cell
-            className={classes}
-            tooltip={tooltip}
-          >
-            {amount}
+          <Cell tooltip={tooltip}>
+            {formatAmount(amount)}
           </Cell>
         )
       },
@@ -102,14 +98,10 @@ export default function getColumns(props) {
       width: 80,
       renderer: (rowIndex) => {
         const { fees, currency } = filteredData[rowIndex]
-        const tooltip = `${fees} ${currency}`
-        const classes = amountStyle(fees)
+        const tooltip = `${fixedFloat(fees)} ${currency}`
         return (
-          <Cell
-            className={classes}
-            tooltip={tooltip}
-          >
-            {fees}
+          <Cell tooltip={tooltip}>
+            {formatAmount(fees)}
           </Cell>
         )
       },

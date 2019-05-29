@@ -41,16 +41,12 @@ export function positionsReducer(state = initialState, action) {
       const entries = res.map((entry) => {
         const {
           amount,
-          basesPrice,
           id,
           leverage,
           marginFunding,
           marginFundingType,
           mtsCreate,
           mtsUpdate,
-          pl, // Profit & Loss
-          plPerc, // Profit & Loss Percentage
-          liquidationPrice, // Liquidation price
           status,
           symbol,
         } = entry
@@ -69,15 +65,11 @@ export function positionsReducer(state = initialState, action) {
           id,
           pair: formatSymbolToPair(symbol),
           amount,
-          basesPrice,
           leverage,
           marginFunding,
           marginFundingType,
           mtsCreate,
           mtsUpdate,
-          pl,
-          plPerc,
-          liquidationPrice,
           status,
         }
       })

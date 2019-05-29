@@ -101,20 +101,44 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
   padding-bottom: 8px;
 }
 
-body.#{$ns}-dark .bitfinex-green-text > div {
-  color: #7a9c4a;
+body.#{$ns}-dark {
+  .bitfinex-green-text, .bitfinex-green-text > div {
+    color: #7a9c4a;
+  }
+
+  .bitfinex-red-text, .bitfinex-red-text > div {
+    color: #aa6064;
+  }
+
+  .bitfinex-amount {
+    &.bitfinex-green-text > .bitfinex-amount-fraction {
+      color: #98a542;
+    }
+
+    &.bitfinex-red-text > .bitfinex-amount-fraction {
+      color: #b57074;
+    }
+  }
 }
 
-body.#{$ns}-dark .bitfinex-red-text > div {
-  color: #aa6064;
-}
+body.#{$ns}-light {
+  .bitfinex-green-text, .bitfinex-green-text > div {
+    color: #8bc040;
+  }
 
-body.#{$ns}-light .bitfinex-green-text > div {
-  color: #8bc040;
-}
+  .bitfinex-red-text, .bitfinex-red-text > div {
+    color: #de5f66;
+  }
 
-body.#{$ns}-light .bitfinex-red-text > div {
-  color: #de5f66;
+  .bitfinex-amount {
+    &.bitfinex-green-text > .bitfinex-amount-fraction {
+      color: #a4dc56;
+    }
+
+    &.bitfinex-red-text > .bitfinex-amount-fraction {
+      color: #fb7e85;
+    }
+  }
 }
 
 .bitfinex-text-align-right {

@@ -4,7 +4,7 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { amountStyle, insertIf, fixedFloat } from 'ui/utils'
+import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
 import { platform } from 'var/config'
 
 export default function getColumns(props) {
@@ -50,14 +50,10 @@ export default function getColumns(props) {
       width: 120,
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
-        const classes = amountStyle(amount)
-        const tooltip = `${amount} ${currency}`
+        const tooltip = `${fixedFloat(amount)} ${currency}`
         return (
-          <Cell
-            className={classes}
-            tooltip={tooltip}
-          >
-            {amount}
+          <Cell tooltip={tooltip}>
+            {formatAmount(amount)}
           </Cell>
         )
       },
@@ -73,15 +69,10 @@ export default function getColumns(props) {
         width: 120,
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
-          const classes = amountStyle(amountUsd)
-          const fixedAmountUsd = fixedFloat(amountUsd)
-          const tooltip = `${fixedAmountUsd} ${t('column.usd')}`
+          const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
           return (
-            <Cell
-              className={classes}
-              tooltip={tooltip}
-            >
-              {fixedAmountUsd}
+            <Cell tooltip={tooltip}>
+              {formatAmount(amountUsd)}
             </Cell>
           )
         },
@@ -97,13 +88,14 @@ export default function getColumns(props) {
       width: 120,
       renderer: (rowIndex) => {
         const { balance, currency } = filteredData[rowIndex]
-        const tooltip = `${balance} ${currency}`
+        const fixedBalance = fixedFloat(balance)
+        const tooltip = `${fixedBalance} ${currency}`
         return (
           <Cell
             className='bitfinex-text-align-right'
             tooltip={tooltip}
           >
-            {balance}
+            {fixedBalance}
           </Cell>
         )
       },

@@ -4,7 +4,7 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { amountStyle } from 'ui/utils'
+import { formatAmount, fixedFloat } from 'ui/utils'
 
 export default function getColumns(props) {
   const {
@@ -63,12 +63,13 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { amountOrig } = filteredData[rowIndex]
+        const fixedAmount = fixedFloat(amountOrig)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={amountOrig}
+            tooltip={fixedAmount}
           >
-            {amountOrig}
+            {fixedAmount}
           </Cell>
         )
       },
@@ -80,13 +81,9 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { amountExecuted } = filteredData[rowIndex]
-        const classes = amountStyle(amountExecuted)
         return (
-          <Cell
-            className={classes}
-            tooltip={amountExecuted}
-          >
-            {amountExecuted}
+          <Cell tooltip={fixedFloat(amountExecuted)}>
+            {formatAmount(amountExecuted)}
           </Cell>
         )
       },
@@ -98,12 +95,13 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { price } = filteredData[rowIndex]
+        const fixedPrice = fixedFloat(price)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={price}
+            tooltip={fixedPrice}
           >
-            {price}
+            {fixedPrice}
           </Cell>
         )
       },
@@ -115,12 +113,13 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { priceAvg } = filteredData[rowIndex]
+        const fixedPrice = fixedFloat(priceAvg)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={priceAvg}
+            tooltip={fixedPrice}
           >
-            {priceAvg}
+            {fixedPrice}
           </Cell>
         )
       },
@@ -171,6 +170,38 @@ export default function getColumns(props) {
         )
       },
       copyText: rowIndex => filteredData[rowIndex].status,
+    },
+    {
+      id: 'priceTrailing',
+      name: 'orders.column.pricetrail',
+      width: 200,
+      renderer: (rowIndex) => {
+        const { priceTrailing } = filteredData[rowIndex]
+        const fixedPrice = fixedFloat(priceTrailing)
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedPrice}
+          >
+            {fixedPrice}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].priceTrailing,
+    },
+    {
+      id: 'typePrev',
+      name: 'orders.column.typeprev',
+      width: 200,
+      renderer: (rowIndex) => {
+        const { typePrev } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={typePrev}>
+            {typePrev}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].typePrev,
     },
   ]
 }

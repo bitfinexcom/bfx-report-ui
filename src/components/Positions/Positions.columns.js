@@ -5,10 +5,14 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { amountStyle } from 'ui/utils'
+import queryConstants from 'state/query/constants'
+import { formatAmount, fixedFloat } from 'ui/utils'
+
+const { MENU_POSITIONS_ACTIVE } = queryConstants
 
 export default function getColumns(props) {
   const {
+    target,
     filteredData,
     getFullTime,
     t,
@@ -21,6 +25,75 @@ export default function getColumns(props) {
       ? t('positions.swap.daily')
       : t('positions.swap.term')
   }
+
+  const ACTIVE_POSITIONS_COLS = (target === MENU_POSITIONS_ACTIVE)
+    ? [
+      {
+        id: 'basesPrice',
+        name: 'positions.column.base-price',
+        width: 100,
+        renderer: (rowIndex) => {
+          const { basePrice } = filteredData[rowIndex]
+          const fixedPrice = fixedFloat(basePrice)
+          return (
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={fixedPrice}
+            >
+              {fixedPrice}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].basesPrice,
+      },
+      {
+        id: 'priceLiq',
+        name: 'positions.column.liq-price',
+        width: 100,
+        renderer: (rowIndex) => {
+          const { liquidationPrice } = filteredData[rowIndex]
+          const fixedPrice = fixedFloat(liquidationPrice)
+          return (
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={fixedPrice}
+            >
+              {fixedPrice}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].liquidationPrice,
+      },
+      {
+        id: 'pl',
+        name: 'positions.column.pl',
+        width: 100,
+        renderer: (rowIndex) => {
+          const { pl } = filteredData[rowIndex]
+          return (
+            <Cell tooltip={fixedFloat(pl)}>
+              {formatAmount(pl)}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].pl,
+      },
+      {
+        id: 'plperc',
+        name: 'positions.column.plperc',
+        width: 100,
+        renderer: (rowIndex) => {
+          const { plPerc } = filteredData[rowIndex]
+          return (
+            <Cell tooltip={fixedFloat(plPerc)}>
+              {formatAmount(plPerc)}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].plPerc,
+      },
+    ]
+    : []
 
   return [
     {
@@ -61,100 +134,28 @@ export default function getColumns(props) {
       width: 100,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
-        const classes = amountStyle(amount)
         return (
-          <Cell
-            className={classes}
-            tooltip={amount}
-          >
-            {amount}
+          <Cell tooltip={fixedFloat(amount)}>
+            {formatAmount(amount)}
           </Cell>
         )
       },
       copyText: rowIndex => filteredData[rowIndex].amount,
     },
-    {
-      id: 'basesPrice',
-      name: 'positions.column.base-price',
-      width: 100,
-      renderer: (rowIndex) => {
-        const price = filteredData[rowIndex].basePrice
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={price}
-          >
-            {price}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].basesPrice,
-    },
-    {
-      id: 'priceLiq',
-      name: 'positions.column.liq-price',
-      width: 100,
-      renderer: (rowIndex) => {
-        const price = filteredData[rowIndex].liquidationPrice
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={price}
-          >
-            {price}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].liquidationPrice,
-    },
-    {
-      id: 'pl',
-      name: 'positions.column.pl',
-      width: 100,
-      renderer: (rowIndex) => {
-        const { pl } = filteredData[rowIndex]
-        const classes = amountStyle(pl)
-        return (
-          <Cell
-            className={classes}
-            tooltip={pl}
-          >
-            {pl}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].pl,
-    },
-    {
-      id: 'plperc',
-      name: 'positions.column.plperc',
-      width: 100,
-      renderer: (rowIndex) => {
-        const { plPerc } = filteredData[rowIndex]
-        const classes = amountStyle(plPerc)
-        return (
-          <Cell
-            className={classes}
-            tooltip={plPerc}
-          >
-            {plPerc}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].plPerc,
-    },
+    ...ACTIVE_POSITIONS_COLS,
     {
       id: 'swap',
       name: 'positions.column.swap',
       width: 150,
       renderer: (rowIndex) => {
-        const swap = filteredData[rowIndex].marginFunding
+        const { marginFunding } = filteredData[rowIndex]
+        const fixedSwap = fixedFloat(marginFunding)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={swap}
+            tooltip={fixedSwap}
           >
-            {swap}
+            {fixedSwap}
           </Cell>
         )
       },

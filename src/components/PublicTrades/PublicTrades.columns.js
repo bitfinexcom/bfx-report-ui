@@ -4,7 +4,7 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { amountStyle } from 'ui/utils'
+import { formatAmount, fixedFloat, amountStyle } from 'ui/utils'
 import { formatPair } from 'state/symbols/utils'
 
 export default function getColumns(props) {
@@ -71,13 +71,12 @@ export default function getColumns(props) {
       width: 125,
       renderer: (rowIndex) => {
         const { price, amount } = filteredData[rowIndex]
-        const classes = amountStyle(amount)
+        const color = (amount > 0)
+          ? 'green'
+          : 'red'
         return (
-          <Cell
-            className={classes}
-            tooltip={price}
-          >
-            {price}
+          <Cell tooltip={fixedFloat(price)}>
+            {formatAmount(price, color)}
           </Cell>
         )
       },
@@ -88,13 +87,14 @@ export default function getColumns(props) {
       name: 'publictrades.column.amount',
       width: 125,
       renderer: (rowIndex) => {
-        const amount = Math.abs(filteredData[rowIndex].amount)
+        const { amount } = filteredData[rowIndex]
+        const fixedAmount = fixedFloat(Math.abs(amount))
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={amount}
+            tooltip={fixedAmount}
           >
-            {amount}
+            {fixedAmount}
           </Cell>
         )
       },

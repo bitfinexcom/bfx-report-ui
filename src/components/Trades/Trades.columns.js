@@ -4,7 +4,7 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { amountStyle } from 'ui/utils'
+import { formatAmount, fixedFloat } from 'ui/utils'
 
 export default function getColumns(props) {
   const {
@@ -63,13 +63,9 @@ export default function getColumns(props) {
       width: 125,
       renderer: (rowIndex) => {
         const { execAmount } = filteredData[rowIndex]
-        const classes = amountStyle(execAmount)
         return (
-          <Cell
-            className={classes}
-            tooltip={execAmount}
-          >
-            {execAmount}
+          <Cell tooltip={fixedFloat(execAmount)}>
+            {formatAmount(execAmount)}
           </Cell>
         )
       },
@@ -81,12 +77,13 @@ export default function getColumns(props) {
       width: 125,
       renderer: (rowIndex) => {
         const { execPrice } = filteredData[rowIndex]
+        const fixedPrice = fixedFloat(execPrice)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={execPrice}
+            tooltip={fixedPrice}
           >
-            {execPrice}
+            {fixedPrice}
           </Cell>
         )
       },
@@ -98,14 +95,15 @@ export default function getColumns(props) {
       width: 125,
       renderer: (rowIndex) => {
         const { fee, feeCurrency } = filteredData[rowIndex]
-        const tooltip = `${fee} ${feeCurrency}`
+        const fixedFee = fixedFloat(fee)
+        const tooltip = `${fixedFee} ${feeCurrency}`
         return (
           <Cell
             className='bitfinex-text-align-right'
             tooltip={tooltip}
           >
             <Fragment>
-              {fee}
+              {fixedFee}
               {' '}
               <span className='bitfinex-show-soft'>
                 {feeCurrency}

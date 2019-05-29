@@ -28,12 +28,13 @@ export default function getColumns(props) {
       width: 200,
       renderer: (rowIndex) => {
         const { balance } = filteredData[rowIndex]
+        const fixedBalance = fixedFloat(balance)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={balance}
+            tooltip={fixedBalance}
           >
-            {balance}
+            {fixedBalance}
           </Cell>
         )
       },

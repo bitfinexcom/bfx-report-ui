@@ -6,6 +6,7 @@ import {
 } from 'redux-saga/effects'
 import queryString from 'query-string'
 
+import { LANGUAGES_MAP } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
@@ -19,13 +20,15 @@ import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selecto
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
 import { getTargetPairs as getTickersPairs } from 'state/tickers/selectors'
 import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
-import { getTimezone, getDateFormat, getShowMilliseconds } from 'state/base/selectors'
 import { getTargetSymbol as getPublicTradesSymbol } from 'state/publicFunding/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTargetPairs as getActivePositionsPairs } from 'state/positionsActive/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
+import {
+  getTimezone, getDateFormat, getShowMilliseconds, getLocale,
+} from 'state/base/selectors'
 
 import {
   getEmail,
@@ -165,6 +168,8 @@ function* exportCSV({ payload: targets }) {
       options.timezone = yield select(getTimezone)
       options.dateFormat = yield select(getDateFormat)
       options.milliseconds = yield select(getShowMilliseconds)
+      const locale = yield select(getLocale)
+      options.language = LANGUAGES_MAP[locale]
       const selector = getSelector(target)
       const sign = selector ? yield select(selector) : ''
       switch (target) {
@@ -299,7 +304,7 @@ function* prepareExport() {
   }
 }
 
-export default function* tradesSaga() {
+export default function* exportSaga() {
   yield takeLatest(types.PREPARE_EXPORT, prepareExport)
   yield takeLatest(types.EXPORT_CSV, exportCSV)
 }
