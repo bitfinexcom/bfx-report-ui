@@ -5,8 +5,7 @@ export const propTypes = {
   currencies: PropTypes.objectOf(PropTypes.string),
   currentFilters: PropTypes.arrayOf(PropTypes.string),
   existingCoins: PropTypes.arrayOf(PropTypes.string),
-  handleTagRemove: PropTypes.func.isRequired,
-  onSymbolSelect: PropTypes.func.isRequired,
+  toggleSymbol: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 

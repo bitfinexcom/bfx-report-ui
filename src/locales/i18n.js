@@ -3,13 +3,9 @@
 // refer https://github.com/bitfinexcom/bfxuilib/blob/master/functions/i18n.spa.js
 
 import i18n from 'i18next'
-import backend from 'i18next-chained-backend'
-import LocalStorageBackend from 'i18next-localstorage-backend' // primary use cache
-import XHR from 'i18next-xhr-backend' // fallback xhr load
+import backend from 'i18next-xhr-backend'
 import detector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
-
-import { version } from '../../package.json'
 
 export const LANGUAGES = {
   en: 'en-US',
@@ -34,21 +30,7 @@ i18n
   .use(initReactI18next)
   .init({
     backend: {
-      backends: [
-        LocalStorageBackend, // primary
-        XHR, // fallback
-      ],
-      backendOptions: [{
-        prefix: 'i18next_res_', // prefix for stored languages
-        expirationTime: 7 * 24 * 60 * 60 * 1000, // expiration
-        versions: {
-          'en-US': version,
-          'zh-TW': version,
-        }, // language versions
-        store: window.localStorage,
-      }, {
-        loadPath: '/locales/{{lng}}/{{ns}}.json',
-      }],
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
 
     detection: {
@@ -57,8 +39,10 @@ i18n
     },
 
     parseMissingKeyHandler: (key) => {
-      // eslint-disable-next-line no-console
-      console.warn(`Missing translation for ${key}`)
+      if (i18n.isInitialized) {
+        // eslint-disable-next-line no-console
+        console.warn(`Missing translation for ${key}`)
+      }
       return key
     },
     // use en if detected lng is not available
@@ -80,8 +64,5 @@ i18n
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
-    // send not translated keys to endpoint
-    saveMissing: (NODE_ENV === 'development'),
   })
-
 export default i18n

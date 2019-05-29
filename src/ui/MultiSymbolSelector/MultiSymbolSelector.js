@@ -15,8 +15,7 @@ class MultiSymbolSelector extends PureComponent {
       currencies,
       currentFilters,
       existingCoins,
-      handleTagRemove,
-      onSymbolSelect,
+      toggleSymbol,
       t,
     } = this.props
 
@@ -35,7 +34,7 @@ class MultiSymbolSelector extends PureComponent {
           intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
           disabled={modifiers.disabled}
           key={symbol}
-          onClick={onSymbolSelect(symbol)}
+          onClick={() => toggleSymbol(symbol)}
           text={symbol}
           label={currencies[symbol]}
         />
@@ -53,9 +52,9 @@ class MultiSymbolSelector extends PureComponent {
         items={coins || existingCoins}
         itemRenderer={renderSymbol}
         itemPredicate={filterSymbol}
-        onItemSelect={onSymbolSelect}
+        onItemSelect={toggleSymbol}
         popoverProps={{ minimal: true }}
-        tagInputProps={{ tagProps: { minimal: true }, onRemove: handleTagRemove }}
+        tagInputProps={{ tagProps: { minimal: true }, onRemove: toggleSymbol }}
         tagRenderer={renderTag}
         selectedItems={currentFilters}
         resetOnSelect

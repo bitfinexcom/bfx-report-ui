@@ -6,7 +6,7 @@ import {
 } from '@blueprintjs/core'
 import { MultiSelect } from '@blueprintjs/select'
 
-import { formatPair } from 'state/symbols/utils'
+import { formatPair, parsePairTag } from 'state/symbols/utils'
 
 import { propTypes, defaultProps } from './MultiPairSelector.props'
 
@@ -15,8 +15,7 @@ class MultiPairSelector extends PureComponent {
     const {
       currentFilters,
       existingPairs,
-      handleTagRemove,
-      onPairSelect,
+      togglePair,
       pairs,
       t,
     } = this.props
@@ -36,7 +35,7 @@ class MultiPairSelector extends PureComponent {
           intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
           disabled={modifiers.disabled}
           key={pair}
-          onClick={onPairSelect(pair)}
+          onClick={() => togglePair(pair)}
           text={formatPair(pair)}
         />
       )
@@ -53,9 +52,9 @@ class MultiPairSelector extends PureComponent {
         items={pairs || existingPairs}
         itemRenderer={renderPair}
         itemPredicate={filterPair}
-        onItemSelect={onPairSelect}
+        onItemSelect={togglePair}
         popoverProps={{ minimal: true }}
-        tagInputProps={{ tagProps: { minimal: true }, onRemove: handleTagRemove }}
+        tagInputProps={{ tagProps: { minimal: true }, onRemove: pair => togglePair(parsePairTag(pair).toUpperCase()) }}
         tagRenderer={renderTag}
         selectedItems={currentFilters.map(pair => pair.toLowerCase())}
         resetOnSelect

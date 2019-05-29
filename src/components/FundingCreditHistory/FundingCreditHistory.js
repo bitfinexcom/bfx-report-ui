@@ -18,8 +18,7 @@ import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  handleAddSymbolFilter,
-  handleRemoveSymbolFilter,
+  toggleSymbol,
 } from 'state/utils'
 
 import { propTypes, defaultProps } from './FundingCreditHistory.props'
@@ -30,8 +29,6 @@ const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
 class FundingCreditHistory extends PureComponent {
-  handlers = {}
-
   componentDidMount() {
     const { loading, fetchFcredit, match } = this.props
     if (loading) {
@@ -42,17 +39,6 @@ class FundingCreditHistory extends PureComponent {
 
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, TYPE)
-  }
-
-  handleClick = (symbol) => {
-    if (!this.handlers[symbol]) {
-      this.handlers[symbol] = () => handleAddSymbolFilter(TYPE, symbol, this.props)
-    }
-    return this.handlers[symbol]
-  }
-
-  handleTagRemove = (tag) => {
-    handleRemoveSymbolFilter(TYPE, tag, this.props)
   }
 
   render() {
@@ -89,8 +75,7 @@ class FundingCreditHistory extends PureComponent {
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
-          onSymbolSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
+          toggleSymbol={symbol => toggleSymbol(TYPE, this.props, symbol)}
         />
       </Fragment>
     )

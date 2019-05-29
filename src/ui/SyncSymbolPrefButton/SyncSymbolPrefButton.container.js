@@ -10,8 +10,8 @@ import SyncSymbolPrefButton from './SyncSymbolPrefButton'
 const mapStateToProps = (state = {}) => {
   const { start } = getTimeFrame(getQuery(state))
   let symbols = getSyncSymbols(state)
-  if (symbols.length === 0) {
-    symbols = ['usd']
+  if (!symbols.length) {
+    symbols = ['USD']
   }
   return {
     syncMode: getSyncMode(state),

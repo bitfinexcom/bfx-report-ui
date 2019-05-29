@@ -38,7 +38,7 @@ class SyncSymbolPrefButton extends PureComponent {
     // fill init state from props
     if (prevState.tempSymbols.length === 0 || prevState.tempTime === undefined) {
       return {
-        tempSymbols: nextProps.syncSymbols,
+        tempSymbols: nextProps.syncSymbols.map(symbol => symbol.toUpperCase()),
         tempTime: new Date(nextProps.startTime),
       }
     }
@@ -55,22 +55,13 @@ class SyncSymbolPrefButton extends PureComponent {
     this.setState(initState)
   }
 
-  /* eslint-disable-next-line arrow-body-style */
-  addSymbol = (symbol) => {
-    return () => {
-      const { tempSymbols } = this.state
-      if (!tempSymbols.includes(symbol)) {
-        this.setState({ tempSymbols: [...tempSymbols, symbol] })
-      }
-    }
-  }
-
-  handleTagRemove = (tag) => {
+  toggleSymbol = (symbol) => {
     const { tempSymbols } = this.state
-    const parsedTag = tag.toLowerCase()
-    if (tempSymbols.includes(parsedTag)) {
-      const symbols = tempSymbols.filter(symbol => symbol !== parsedTag)
-      this.setState({ tempSymbols: symbols })
+
+    if (tempSymbols.includes(symbol)) {
+      this.setState({ tempSymbols: tempSymbols.filter(tag => tag !== symbol) })
+    } else {
+      this.setState({ tempSymbols: [...tempSymbols, symbol] })
     }
   }
 
@@ -154,6 +145,7 @@ class SyncSymbolPrefButton extends PureComponent {
                   <MultiSymbolSelector
                     currentFilters={tempSymbols}
                     existingCoins={syncSymbols}
+                    toggleSymbol={this.toggleSymbol}
                     onSymbolSelect={this.addSymbol}
                     handleTagRemove={this.handleTagRemove}
                   />

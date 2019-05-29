@@ -17,8 +17,7 @@ import queryConstants from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
 import {
   checkFetch,
-  handleAddSymbolFilter,
-  handleRemoveSymbolFilter,
+  toggleSymbol,
   getCurrentEntries,
 } from 'state/utils'
 
@@ -29,8 +28,6 @@ const TYPE = queryConstants.MENU_LEDGERS
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Ledgers extends PureComponent {
-  handlers = {}
-
   componentDidMount() {
     const { loading, fetchLedgers, match } = this.props
     if (loading) {
@@ -41,17 +38,6 @@ class Ledgers extends PureComponent {
 
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, TYPE)
-  }
-
-  handleClick = (symbol) => {
-    if (!this.handlers[symbol]) {
-      this.handlers[symbol] = () => handleAddSymbolFilter(TYPE, symbol, this.props)
-    }
-    return this.handlers[symbol]
-  }
-
-  handleTagRemove = (tag) => {
-    handleRemoveSymbolFilter(TYPE, tag, this.props)
   }
 
   render() {
@@ -90,8 +76,7 @@ class Ledgers extends PureComponent {
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
-          onSymbolSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
+          toggleSymbol={symbol => toggleSymbol(TYPE, this.props, symbol)}
         />
       </Fragment>
     )

@@ -18,8 +18,7 @@ import { getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  handleAddPairFilter,
-  handleRemovePairFilter,
+  togglePair,
 } from 'state/utils'
 
 import getColumns from './Orders.columns'
@@ -29,8 +28,6 @@ const TYPE = queryConstants.MENU_ORDERS
 const PAGE_SIZE = getPageSize(TYPE)
 
 class Orders extends PureComponent {
-  handlers = {}
-
   componentDidMount() {
     const { loading, fetchOrders, match } = this.props
     if (loading) {
@@ -41,17 +38,6 @@ class Orders extends PureComponent {
 
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, TYPE)
-  }
-
-  handleClick = (pair) => {
-    if (!this.handlers[pair]) {
-      this.handlers[pair] = () => handleAddPairFilter(TYPE, pair, this.props)
-    }
-    return this.handlers[pair]
-  }
-
-  handleTagRemove = (tag) => {
-    handleRemovePairFilter(TYPE, tag, this.props)
   }
 
   render() {
@@ -104,8 +90,7 @@ class Orders extends PureComponent {
         <MultiPairSelector
           currentFilters={targetPairs}
           existingPairs={existingPairs}
-          onPairSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
+          togglePair={pair => togglePair(TYPE, this.props, pair)}
         />
       </Fragment>
     )

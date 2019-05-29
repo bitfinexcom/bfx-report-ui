@@ -18,8 +18,7 @@ import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  handleAddSymbolFilter,
-  handleRemoveSymbolFilter,
+  toggleSymbol,
 } from 'state/utils'
 
 import getColumns from './Movements.columns'
@@ -31,8 +30,6 @@ const LIMIT = getQueryLimit(queryConstants.MENU_MOVEMENTS)
 const PAGE_SIZE = getPageSize(queryConstants.MENU_MOVEMENTS)
 
 class Movements extends PureComponent {
-  handlers = {}
-
   componentDidMount() {
     const {
       loading,
@@ -50,21 +47,6 @@ class Movements extends PureComponent {
 
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, 'movements')
-  }
-
-  handleClick = (symbol) => {
-    if (!this.handlers[symbol]) {
-      this.handlers[symbol] = () => {
-        const { type } = this.props
-        handleAddSymbolFilter(type, symbol, this.props)
-      }
-    }
-    return this.handlers[symbol]
-  }
-
-  handleTagRemove = (tag) => {
-    const { type } = this.props
-    handleRemoveSymbolFilter(type, tag, this.props)
   }
 
   render() {
@@ -104,8 +86,7 @@ class Movements extends PureComponent {
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
-          onSymbolSelect={this.handleClick}
-          handleTagRemove={this.handleTagRemove}
+          toggleSymbol={symbol => toggleSymbol(type, this.props, symbol)}
         />
       </Fragment>
     )

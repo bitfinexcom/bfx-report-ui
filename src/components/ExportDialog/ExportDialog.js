@@ -24,32 +24,32 @@ import ExportTargetsSelector from './ExportTargetsSelector'
 import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
-  handlers = {}
-
   state = {
     currentTargets: [],
+    type: '',
   }
 
-  onTargetSelect = (target) => {
-    if (!this.handlers[target]) {
-      this.handlers[target] = () => {
-        const { currentTargets } = this.state
-        if (!currentTargets.includes(target)) {
-          this.setState({ currentTargets: [...currentTargets, target] })
-        }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.type !== prevState.type) {
+      return {
+        currentTargets: [nextProps.type],
+        type: nextProps.type,
       }
     }
-    return this.handlers[target]
+
+    return null
   }
 
-  handleTagRemove = (tag, idx) => {
+  toggleTarget = (target) => {
     const { currentTargets } = this.state
-    const { t } = this.props
 
-    if (t(`${currentTargets[idx]}.title`) === tag) {
-      if (currentTargets.length !== 1) { // should keep at least 1 item
-        this.setState({ currentTargets: currentTargets.filter((_, i) => i !== idx) })
-      }
+    if (!currentTargets.includes(target)) {
+      this.setState({ currentTargets: [...currentTargets, target] })
+      return
+    }
+
+    if (currentTargets.length !== 1) { // should keep at least 1 item
+      this.setState({ currentTargets: currentTargets.filter(currentTarget => currentTarget !== target) })
     }
   }
 
@@ -125,9 +125,7 @@ class ExportDialog extends PureComponent {
                   <div className={checkboxFieldStyle}>
                     <ExportTargetsSelector
                       currentTargets={currentTargets}
-                      onTargetSelect={this.onTargetSelect}
-                      handleTagRemove={this.handleTagRemove}
-                      target={type}
+                      toggleTarget={this.toggleTarget}
                     />
                   </div>
                 </div>

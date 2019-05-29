@@ -11,7 +11,6 @@ import {
 } from '@blueprintjs/core'
 import { DateInput } from '@blueprintjs/datetime'
 import MultiPairSelector from 'ui/MultiPairSelector'
-import { parsePairTag } from 'state/symbols/utils'
 import mode from 'state/sync/constants'
 import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
 import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
@@ -38,7 +37,7 @@ class SyncPrefButton extends PureComponent {
     // fill init state from props
     if (prevState.tempPairs.length === 0 || prevState.tempTime === undefined) {
       return {
-        tempPairs: nextProps.syncPairs,
+        tempPairs: nextProps.syncPairs.map(pair => pair.toUpperCase()),
         tempTime: new Date(nextProps.startTime),
       }
     }
@@ -55,22 +54,13 @@ class SyncPrefButton extends PureComponent {
     this.setState(initState)
   }
 
-  /* eslint-disable-next-line arrow-body-style */
-  addPair = (pair) => {
-    return () => {
-      const { tempPairs } = this.state
-      if (!tempPairs.includes(pair)) {
-        this.setState({ tempPairs: [...tempPairs, pair] })
-      }
-    }
-  }
-
-  handleTagRemove = (tag) => {
+  togglePair = (pair) => {
     const { tempPairs } = this.state
-    const parsedTag = parsePairTag(tag)
-    if (tempPairs.includes(parsedTag)) {
-      const pairs = tempPairs.filter(pair => pair !== parsedTag)
+    if (tempPairs.includes(pair)) {
+      const pairs = tempPairs.filter(tempPair => tempPair !== pair)
       this.setState({ tempPairs: pairs })
+    } else {
+      this.setState({ tempPairs: [...tempPairs, pair] })
     }
   }
 
@@ -154,8 +144,7 @@ class SyncPrefButton extends PureComponent {
                   <MultiPairSelector
                     currentFilters={tempPairs}
                     existingPairs={syncPairs}
-                    onPairSelect={this.addPair}
-                    handleTagRemove={this.handleTagRemove}
+                    togglePair={this.togglePair}
                   />
                 </div>
               </div>

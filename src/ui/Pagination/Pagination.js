@@ -9,8 +9,6 @@ import { canChangeQueryLimit, getPageSize } from 'state/query/utils'
 import { propTypes, defaultProps } from './Pagination.props'
 
 class Pagination extends PureComponent {
-  handlers = {}
-
   pageInput = createRef()
 
   componentDidUpdate() {
