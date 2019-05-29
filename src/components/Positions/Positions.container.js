@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/positions/actions'
+import {
+  fetchPositions,
+  fetchNextPositions,
+  fetchPrevPositions,
+  jumpPage,
+  refresh,
+  addTargetPair,
+  removeTargetPair,
+} from 'state/positions/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getDataReceived,
@@ -29,15 +37,15 @@ const mapStateToProps = (state = {}) => ({
   timeOffset: getTimeOffset(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchPositions: pair => dispatch(actions.fetchPositions(pair)),
-  fetchNext: queryLimit => dispatch(actions.fetchNextPositions(queryLimit)),
-  fetchPrev: queryLimit => dispatch(actions.fetchPrevPositions(queryLimit)),
-  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
-  refresh: () => dispatch(actions.refresh()),
-  addTargetPair: pair => dispatch(actions.addTargetPair(pair)),
-  removeTargetPair: pair => dispatch(actions.removeTargetPair(pair)),
-})
+const mapDispatchToProps = {
+  fetchPositions,
+  fetchNext: fetchNextPositions,
+  fetchPrev: fetchPrevPositions,
+  jumpPage,
+  refresh,
+  addTargetPair,
+  removeTargetPair,
+}
 
 const PositionsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Positions))
 

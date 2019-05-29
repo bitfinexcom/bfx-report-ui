@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/ledgers/actions'
+import {
+  fetchLedgers,
+  fetchNextLedgers,
+  fetchPrevLedgers,
+  jumpPage,
+  refresh,
+  addTargetSymbol,
+  removeTargetSymbol,
+} from 'state/ledgers/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getTargetQueryLimit } from 'state/query/selectors'
 import {
@@ -31,15 +39,15 @@ const mapStateToProps = (state = {}) => ({
   getQueryLimit: getTargetQueryLimit(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchLedgers: symbol => dispatch(actions.fetchLedgers(symbol)),
-  fetchNext: queryLimit => dispatch(actions.fetchNextLedgers(queryLimit)),
-  fetchPrev: queryLimit => dispatch(actions.fetchPrevLedgers(queryLimit)),
-  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
-  refresh: () => dispatch(actions.refresh()),
-  addTargetSymbol: symbol => dispatch(actions.addTargetSymbol(symbol)),
-  removeTargetSymbol: symbol => dispatch(actions.removeTargetSymbol(symbol)),
-})
+const mapDispatchToProps = {
+  fetchLedgers,
+  fetchNext: fetchNextLedgers,
+  fetchPrev: fetchPrevLedgers,
+  jumpPage,
+  refresh,
+  addTargetSymbol,
+  removeTargetSymbol,
+}
 
 const LedgersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Ledgers))
 

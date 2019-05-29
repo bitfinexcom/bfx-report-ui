@@ -4,9 +4,9 @@ import { updateWarningStatus } from 'state/status/actions'
 
 import CustomDialog from './CustomDialog'
 
-const mapDispatchToProps = dispatch => ({
-  updateWarningStatus: msg => dispatch(updateWarningStatus(msg)),
-})
+const mapDispatchToProps = {
+  updateWarningStatus,
+}
 
 const CustomDialogContainer = connect(null, mapDispatchToProps)(CustomDialog)
 

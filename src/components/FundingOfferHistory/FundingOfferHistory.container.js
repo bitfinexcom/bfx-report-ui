@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/fundingOfferHistory/actions'
+import {
+  fetchFOffer,
+  fetchNextFOffer,
+  fetchPrevFOffer,
+  jumpPage,
+  refresh,
+  addTargetSymbol,
+  removeTargetSymbol,
+} from 'state/fundingOfferHistory/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getDataReceived,
@@ -29,15 +37,15 @@ const mapStateToProps = (state = {}) => ({
   timeOffset: getTimeOffset(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchFoffer: symbol => dispatch(actions.fetchFOffer(symbol)),
-  fetchNext: queryLimit => dispatch(actions.fetchNextFOffer(queryLimit)),
-  fetchPrev: queryLimit => dispatch(actions.fetchPrevFOffer(queryLimit)),
-  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
-  refresh: () => dispatch(actions.refresh()),
-  addTargetSymbol: symbol => dispatch(actions.addTargetSymbol(symbol)),
-  removeTargetSymbol: symbol => dispatch(actions.removeTargetSymbol(symbol)),
-})
+const mapDispatchToProps = {
+  fetchFoffer: fetchFOffer,
+  fetchNext: fetchNextFOffer,
+  fetchPrev: fetchPrevFOffer,
+  jumpPage,
+  refresh,
+  addTargetSymbol,
+  removeTargetSymbol,
+}
 
 const FundingOfferHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FundingOfferHistory))
 

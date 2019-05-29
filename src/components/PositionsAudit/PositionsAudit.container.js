@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/audit/actions'
+import {
+  fetchPAudit,
+  fetchNextPAudit,
+  fetchPrevPAudit,
+  jumpPage,
+  refresh,
+  addTargetId,
+  removeTargetId,
+} from 'state/audit/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getDataReceived,
@@ -27,15 +35,15 @@ const mapStateToProps = (state = {}) => ({
   timeOffset: getTimeOffset(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchPaudit: ids => dispatch(actions.fetchPAudit(ids)),
-  fetchNext: queryLimit => dispatch(actions.fetchNextPAudit(queryLimit)),
-  fetchPrev: queryLimit => dispatch(actions.fetchPrevPAudit(queryLimit)),
-  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
-  refresh: () => dispatch(actions.refresh()),
-  addTargetId: id => dispatch(actions.addTargetId(id)),
-  removeTargetId: id => dispatch(actions.removeTargetId(id)),
-})
+const mapDispatchToProps = {
+  fetchPaudit: fetchPAudit,
+  fetchNext: fetchNextPAudit,
+  fetchPrev: fetchPrevPAudit,
+  jumpPage,
+  refresh,
+  addTargetId,
+  removeTargetId,
+}
 
 const PositionsAuditContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(PositionsAudit))
 

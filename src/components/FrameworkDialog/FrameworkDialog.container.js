@@ -10,10 +10,10 @@ const mapStateToProps = (state = {}) => ({
   syncMode: getSyncMode(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  toggleDialog: () => dispatch(toggleFrameworkDialog()),
-  proceedRequest: options => dispatch(proceedFrameworkRequest(options)),
-})
+const mapDispatchToProps = {
+  toggleDialog: toggleFrameworkDialog,
+  proceedRequest: proceedFrameworkRequest,
+}
 
 const FrameworkDialogContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FrameworkDialog))
 

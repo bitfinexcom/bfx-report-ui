@@ -1,7 +1,14 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/publicFunding/actions'
+import {
+  fetchPublicFunding,
+  fetchNextPublicFunding,
+  fetchPrevPublicFunding,
+  jumpPage,
+  refresh,
+  setTargetSymbol,
+} from 'state/publicFunding/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getCoins, getCurrencies } from 'state/symbols/selectors'
 import { hasSyncSymbolsPref } from 'state/sync/selectors'
@@ -32,14 +39,14 @@ const mapStateToProps = (state = {}) => ({
   timeOffset: getTimeOffset(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchPublicfunding: symbol => dispatch(actions.fetchPublicFunding(symbol)),
-  fetchNext: queryLimit => dispatch(actions.fetchNextPublicFunding(queryLimit)),
-  fetchPrev: queryLimit => dispatch(actions.fetchPrevPublicFunding(queryLimit)),
-  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
-  refresh: () => dispatch(actions.refresh()),
-  setTargetSymbol: symbol => dispatch(actions.setTargetSymbol(symbol)),
-})
+const mapDispatchToProps = {
+  fetchPublicfunding: fetchPublicFunding,
+  fetchNext: fetchNextPublicFunding,
+  fetchPrev: fetchPrevPublicFunding,
+  jumpPage,
+  refresh,
+  setTargetSymbol,
+}
 
 const PublicFundingContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(PublicFunding))
 
