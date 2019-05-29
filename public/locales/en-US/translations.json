@@ -274,6 +274,7 @@
   },
   "status": {
     "success": "{{topic}} Success at {{time}}",
+    "warn": "{{topic}}",
     "fail": "{{topic}} fail {{detail}}",
     "noid": "dev: the status action should contain the id param",
     "request": {
@@ -320,7 +321,9 @@
     },
     "day": "Day",
     "refresh": "Refresh",
+    "custom_time": "Custom",
     "custom-timerange": "Custom time range",
+    "custom_year": "{{year}} year",
     "24h": "Last 24 hours",
     "yesterday": "Yesterday",
     "2w": "Last 2 weeks",
@@ -328,8 +331,12 @@
     "month_to_date": "Month to date",
     "past_month": "Past month",
     "past_3m": "Past 3 months",
-    "custom_time": "Custom",
+    "past_week": "Past week",
+    "past_year": "Past year",
+    "past_2y": "Past two years",
+    "range_limit": "Queries more than two years behind the actual date are not allowed",
     "start-date-placeholder": "Start Date Time",
+    "today": "Today",
     "year": "Year"
   },
   "trades": {
