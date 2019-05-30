@@ -1,5 +1,7 @@
 // https://docs.bitfinex.com/v2/reference#TICKERS-history
-import { formatInternalSymbol, formatSymbolToPair } from 'state/symbols/utils'
+import {
+  formatInternalSymbol, formatSymbolToPair, mapSymbol, mapPair,
+} from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -19,7 +21,7 @@ import types from './constants'
 
 const initialState = {
   ...basePairState,
-  targetPairs: ['btcusd'],
+  targetPairs: [mapPair('BTCUSD')],
 }
 
 const TYPE = queryTypes.MENU_TICKERS
@@ -46,7 +48,7 @@ export function TickersReducer(state = initialState, action) {
           mtsUpdate,
           symbol,
         } = entry
-        const internalPair = formatInternalSymbol(symbol)
+        const internalPair = mapPair(formatInternalSymbol(symbol))
         // save new pair to updatePairs list
         if (updatePairs.indexOf(internalPair) === -1) {
           updatePairs.push(internalPair)
@@ -61,7 +63,7 @@ export function TickersReducer(state = initialState, action) {
           ask,
           bid,
           mtsUpdate,
-          pair: formatSymbolToPair(symbol),
+          pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
         }
       })
       const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)

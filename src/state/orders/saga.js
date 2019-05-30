@@ -6,7 +6,9 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbols, getSymbolsURL, getPairsFromUrlParam } from 'state/symbols/utils'
+import {
+  formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
+} from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -29,8 +31,8 @@ function getReqOrders({
   queryLimit,
 }) {
   const params = getTimeFrame(query, smallestMts)
-  if (targetPairs.length > 0) {
-    params.symbol = formatRawSymbols(targetPairs)
+  if (targetPairs.length) {
+    params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
   if (queryLimit) {
     params.limit = queryLimit
@@ -44,7 +46,7 @@ function* fetchOrders({ payload: pair }) {
     const pairsUrl = getSymbolsURL(targetPairs)
     // set pair from url
     if (pair && pair !== pairsUrl) {
-      targetPairs = getPairsFromUrlParam(pair)
+      targetPairs = getPairsFromUrlParam(pair).map(mapPair)
       yield put(actions.setTargetPairs(targetPairs))
     }
     const auth = yield select(selectAuth)

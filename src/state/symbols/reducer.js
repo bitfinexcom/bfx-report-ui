@@ -1,6 +1,10 @@
+import _castArray from 'lodash/castArray'
+
 import authTypes from 'state/auth/constants'
+import { mapPair } from 'state/symbols/utils'
 
 import types from './constants'
+import { setSymbolMap } from './map'
 
 const initialState = {
   coins: [], // symbol
@@ -17,18 +21,34 @@ export function symbolsReducer(state = initialState, action) {
       const coins = []
       const dict = {}
       const explorersDict = {}
-      currencies.forEach(({ id, name, explorer }) => {
+      const symbolMapping = {}
+      currencies.forEach((currency) => {
+        const {
+          id, name, explorer, symbol,
+        } = currency
         const cid = id.toUpperCase()
-        dict[cid] = name
+        if (id === 'BAB') { // skip duplicate BAB/BCH
+          symbolMapping[cid] = 'BCH'
+          return
+        }
+        if (symbol) {
+          symbolMapping[cid] = symbol
+          explorersDict[symbol] = explorer
+          dict[symbol] = name
+          coins.push(symbol)
+          return
+        }
         explorersDict[cid] = explorer
+        dict[cid] = name
         coins.push(cid)
       })
+      setSymbolMap(symbolMapping)
       return {
         ...state,
         coins: coins.sort(),
         currencies: dict,
         explorers: explorersDict,
-        pairs: (pairs && pairs.sort()) || [],
+        pairs: _castArray(pairs).map(mapPair).sort(),
       }
     }
     case authTypes.LOGOUT:

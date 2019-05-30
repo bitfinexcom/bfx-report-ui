@@ -10,44 +10,41 @@ import { Select } from '@blueprintjs/select'
 import { formatPair } from 'state/symbols/utils'
 
 class PairSelector extends PureComponent {
-  render() {
-    const {
-      currentPair,
-      existingPairs,
-      onPairSelect,
-      pairs,
-      wildCard,
-    } = this.props
+  filterPair = (query, pair) => pair.indexOf(query.replace('/', '').toUpperCase()) >= 0
 
-    const renderPair = (pair, { modifiers }) => {
-      if (!modifiers.matchesPredicate) {
-        return null
-      }
-      const isCurrent = currentPair === pair
-      const className = (wildCard.includes(pair) || existingPairs.includes(pair)) && !isCurrent
-        ? 'bitfinex-queried-symbol' : ''
-
-      return (
-        <MenuItem
-          className={className}
-          active={modifiers.active}
-          intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-          disabled={modifiers.disabled}
-          key={pair}
-          onClick={() => onPairSelect(pair)}
-          text={formatPair(pair)}
-        />
-      )
+  renderPair = (pair, { modifiers }) => {
+    if (!modifiers.matchesPredicate) {
+      return null
     }
+    const {
+      currentPair, existingPairs, wildCard, onPairSelect,
+    } = this.props
+    const isCurrent = currentPair === pair
+    const className = (wildCard.includes(pair) || existingPairs.includes(pair)) && !isCurrent
+      ? 'bitfinex-queried-symbol' : ''
 
-    const filterPair = (query, pair) => pair.toLowerCase().indexOf(query.replace('/', '').toLowerCase()) >= 0
+    return (
+      <MenuItem
+        className={className}
+        active={modifiers.active}
+        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
+        disabled={modifiers.disabled}
+        key={pair}
+        onClick={() => onPairSelect(pair)}
+        text={formatPair(pair)}
+      />
+    )
+  }
+
+  render() {
+    const { currentPair, onPairSelect, pairs } = this.props
 
     return (
       <Select
         disabled={!pairs.length}
         items={pairs}
-        itemRenderer={renderPair}
-        itemPredicate={filterPair}
+        itemRenderer={this.renderPair}
+        itemPredicate={this.filterPair}
         onItemSelect={onPairSelect}
       >
         <Button

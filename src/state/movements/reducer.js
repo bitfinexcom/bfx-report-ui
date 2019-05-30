@@ -13,6 +13,7 @@ import {
   setSymbols,
   setTimeRange,
 } from 'state/reducers.helper'
+import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
@@ -50,19 +51,18 @@ export function movementsReducer(state = initialState, action) {
           status,
           transactionId,
         } = entry
+        const mappedCurrency = mapSymbol(currency)
         // save new symbol to updateCoins list
-        if (updateCoins.indexOf(currency) === -1) {
-          updateCoins.push(currency)
+        if (updateCoins.indexOf(mappedCurrency) === -1) {
+          updateCoins.push(mappedCurrency)
         }
         // log smallest mts
-        if (nextPage === false
-          && (!smallestMts || smallestMts > mtsUpdated)
-        ) {
+        if (nextPage === false && (!smallestMts || smallestMts > mtsUpdated)) {
           smallestMts = mtsUpdated
         }
         return {
           id,
-          currency,
+          currency: mappedCurrency,
           currencyName,
           mtsStarted,
           mtsUpdated,

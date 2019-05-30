@@ -9,53 +9,56 @@ import { MultiSelect } from '@blueprintjs/select'
 import { propTypes, defaultProps } from './MultiSymbolSelector.props'
 
 class MultiSymbolSelector extends PureComponent {
+  filterSymbol = (query, coin) => coin.indexOf(query.toUpperCase()) >= 0
+
+  renderSymbol = (symbol, { modifiers }) => {
+    if (!modifiers.matchesPredicate) {
+      return null
+    }
+    const {
+      currencies, currentFilters, existingCoins, toggleSymbol,
+    } = this.props
+
+    const isCurrent = currentFilters.includes(symbol)
+    const className = existingCoins.includes(symbol) && !isCurrent
+      ? 'bitfinex-queried-symbol'
+      : ''
+
+    return (
+      <MenuItem
+        className={className}
+        active={modifiers.active}
+        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
+        disabled={modifiers.disabled}
+        key={symbol}
+        onClick={() => toggleSymbol(symbol)}
+        text={symbol}
+        label={currencies[symbol]}
+      />
+    )
+  }
+
   render() {
     const {
       coins,
-      currencies,
       currentFilters,
       existingCoins,
       toggleSymbol,
       t,
     } = this.props
 
-    const renderSymbol = (symbol, { modifiers }) => {
-      if (!modifiers.matchesPredicate) {
-        return null
-      }
-      const isCurrent = currentFilters.includes(symbol)
-      const className = existingCoins.includes(symbol) && !isCurrent
-        ? 'bitfinex-queried-symbol' : ''
-
-      return (
-        <MenuItem
-          className={className}
-          active={modifiers.active}
-          intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-          disabled={modifiers.disabled}
-          key={symbol}
-          onClick={() => toggleSymbol(symbol)}
-          text={symbol}
-          label={currencies[symbol]}
-        />
-      )
-    }
-
-    const filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
-    const renderTag = coin => coin.toUpperCase()
-
     return (
       <MultiSelect
         className='bitfinex-multi-select'
-        disabled={coins.length === 0}
+        disabled={!coins.length}
         placeholder={t('selector.filter.symbol')}
         items={coins || existingCoins}
-        itemRenderer={renderSymbol}
-        itemPredicate={filterSymbol}
+        itemRenderer={this.renderSymbol}
+        itemPredicate={this.filterSymbol}
         onItemSelect={toggleSymbol}
         popoverProps={{ minimal: true }}
         tagInputProps={{ tagProps: { minimal: true }, onRemove: toggleSymbol }}
-        tagRenderer={renderTag}
+        tagRenderer={coin => coin}
         selectedItems={currentFilters}
         resetOnSelect
       />

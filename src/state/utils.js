@@ -5,7 +5,7 @@ import memoizeOne from 'memoize-one'
 
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
-import { getSymbolsURL, parsePairTag } from 'state/symbols/utils'
+import { getSymbolsURL, demapSymbols, demapPairs } from 'state/symbols/utils'
 
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
@@ -116,7 +116,7 @@ export function generateUrl(type, params, symbols) {
     return ''
   }
   const noAuthTokenParams = getNoAuthTokenUrlString(params)
-  return symbols
+  return (symbols && symbols.length)
     ? `${getPath(type)}/${getSymbolsURL(symbols)}${noAuthTokenParams}`
     : `${getPath(type)}${noAuthTokenParams}`
 }
@@ -126,36 +126,35 @@ export function toggleSymbol(type, props, symbol) {
     history, targetSymbols, addTargetSymbol, removeTargetSymbol,
   } = props
 
-  if (targetSymbols.includes(symbol)) {
-    if (targetSymbols.length === 1) { // show no select symbol in url
-      history.push(generateUrl(type, history.location.search))
-    } else {
-      history.push(generateUrl(type, history.location.search, targetSymbols.filter(tag => symbol !== tag)))
-    }
-    removeTargetSymbol(symbol)
-  } else {
-    history.push(generateUrl(type, history.location.search, [...targetSymbols, symbol]))
+  let nextSymbols
+
+  if (!targetSymbols.includes(symbol)) {
+    nextSymbols = [...targetSymbols, symbol]
     addTargetSymbol(symbol)
+  } else {
+    nextSymbols = targetSymbols.filter(tag => symbol !== tag)
+    removeTargetSymbol(symbol)
   }
+
+  history.push(generateUrl(type, history.location.search, demapSymbols(nextSymbols)))
 }
 
 export function togglePair(type, props, pair) {
   const {
     history, targetPairs, addTargetPair, removeTargetPair,
   } = props
-  const parsedPair = parsePairTag(pair)
-  if (targetPairs.includes(parsedPair)) {
-    if (targetPairs.length === 1) { // show no select symbol in url
-      history.push(generateUrl(type, history.location.search))
-    } else {
-      const pairs = targetPairs.filter(targetPair => targetPair !== parsedPair)
-      history.push(generateUrl(type, history.location.search, pairs))
-    }
-    removeTargetPair(parsedPair)
+
+  let nextPairs
+
+  if (!targetPairs.includes(pair)) {
+    nextPairs = [...targetPairs, pair]
+    addTargetPair(pair)
   } else {
-    history.push(generateUrl(type, history.location.search, [...targetPairs, parsedPair]))
-    addTargetPair(parsedPair)
+    nextPairs = targetPairs.filter(tag => pair !== tag)
+    removeTargetPair(pair)
   }
+
+  history.push(generateUrl(type, history.location.search, demapPairs(nextPairs)))
 }
 
 export function getCurrentEntries(entries, offset, limit, pageOffset, pageSize) {

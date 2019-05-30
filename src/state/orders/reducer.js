@@ -1,5 +1,7 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
-import { formatInternalSymbol, formatSymbolToPair } from 'state/symbols/utils'
+import {
+  formatInternalSymbol, formatSymbolToPair, mapSymbol, mapPair,
+} from 'state/symbols/utils'
 import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
@@ -62,22 +64,20 @@ export function ordersReducer(state = initialState, action) {
           type,
           typePrev,
         } = entry
-        const internalPair = formatInternalSymbol(symbol)
+        const internalPair = mapPair(formatInternalSymbol(symbol))
         // save new pair to updatePairs list
         if (updatePairs.indexOf(internalPair) === -1) {
           updatePairs.push(internalPair)
         }
         // log smallest mts
-        if (nextPage === false
-          && (!smallestMts || smallestMts > mtsUpdate)
-        ) {
+        if (nextPage === false && (!smallestMts || smallestMts > mtsUpdate)) {
           smallestMts = mtsUpdate
         }
         return {
           id,
           gid,
           cid,
-          pair: formatSymbolToPair(symbol),
+          pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
           mtsCreate,
           mtsUpdate,
           amount,

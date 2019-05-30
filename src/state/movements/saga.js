@@ -11,7 +11,9 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
-import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
+import {
+  getSymbolsURL, getSymbolsFromUrlParam, mapRequestSymbols, mapSymbol,
+} from 'state/symbols/utils'
 import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
@@ -30,8 +32,8 @@ function getReqMovements({
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
-  if (targetSymbols.length > 0) {
-    params.symbol = targetSymbols
+  if (targetSymbols.length) {
+    params.symbol = mapRequestSymbols(targetSymbols)
   }
   return makeFetchCall('getMovements', auth, params)
 }
@@ -42,7 +44,7 @@ function* fetchMovements({ payload: symbol }) {
     const symbolsUrl = getSymbolsURL(targetSymbols)
     // set symbol from url
     if (symbol && symbol !== symbolsUrl) {
-      targetSymbols = getSymbolsFromUrlParam(symbol)
+      targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
       yield put(actions.setTargetSymbols(targetSymbols))
     }
     const auth = yield select(selectAuth)

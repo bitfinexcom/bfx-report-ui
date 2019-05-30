@@ -6,7 +6,9 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbols, getSymbolsURL, getPairsFromUrlParam } from 'state/symbols/utils'
+import {
+  formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
+} from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -30,8 +32,8 @@ function getReqTickers({
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
-  if (targetPairs.length > 0) {
-    params.symbol = formatRawSymbols(targetPairs)
+  if (targetPairs.length) {
+    params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
   return makeFetchCall('getTickersHistory', auth, params)
 }
@@ -42,7 +44,7 @@ function* fetchTickers({ payload: pair }) {
     const pairsUrl = getSymbolsURL(targetPairs)
     // set pair from url
     if (pair && pair !== pairsUrl) {
-      targetPairs = getPairsFromUrlParam(pair)
+      targetPairs = getPairsFromUrlParam(pair).map(mapPair)
       yield put(actions.setTargetPairs(targetPairs))
     }
     const auth = yield select(selectAuth)

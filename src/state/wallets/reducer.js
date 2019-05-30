@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-wallets
 import authTypes from 'state/auth/constants'
+import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
@@ -28,7 +29,7 @@ export function walletsReducer(state = initialState, action) {
         } = entry
         return {
           type,
-          currency,
+          currency: mapSymbol(currency),
           balance,
           balanceUsd,
         }
