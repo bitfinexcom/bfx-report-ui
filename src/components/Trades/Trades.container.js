@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/trades/actions'
+import {
+  fetchTrades,
+  fetchNextTrades,
+  fetchPrevTrades,
+  jumpPage,
+  refresh,
+  addTargetPair,
+  removeTargetPair,
+} from 'state/trades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getTargetQueryLimit } from 'state/query/selectors'
 import {
@@ -31,15 +39,15 @@ const mapStateToProps = (state = {}) => ({
   timeOffset: getTimeOffset(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchTrades: pair => dispatch(actions.fetchTrades(pair)),
-  fetchNext: queryLimit => dispatch(actions.fetchNextTrades(queryLimit)),
-  fetchPrev: queryLimit => dispatch(actions.fetchPrevTrades(queryLimit)),
-  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
-  refresh: () => dispatch(actions.refresh()),
-  addTargetPair: pair => dispatch(actions.addTargetPair(pair)),
-  removeTargetPair: pair => dispatch(actions.removeTargetPair(pair)),
-})
+const mapDispatchToProps = {
+  fetchTrades,
+  fetchNext: fetchNextTrades,
+  fetchPrev: fetchPrevTrades,
+  jumpPage,
+  refresh,
+  addTargetPair,
+  removeTargetPair,
+}
 
 const TradesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Trades))
 

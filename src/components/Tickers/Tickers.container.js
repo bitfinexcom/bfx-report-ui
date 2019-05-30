@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/tickers/actions'
+import {
+  fetchTickers,
+  fetchNextTickers,
+  fetchPrevTickers,
+  jumpPage,
+  refresh,
+  addTargetPair,
+  removeTargetPair,
+} from 'state/tickers/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { hasSyncPref } from 'state/sync/selectors'
@@ -32,16 +40,16 @@ const mapStateToProps = (state = {}) => ({
   timeOffset: getTimeOffset(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchTickers: pair => dispatch(actions.fetchTickers(pair)),
-  fetchNext: queryLimit => dispatch(actions.fetchNextTickers(queryLimit)),
-  fetchPrev: queryLimit => dispatch(actions.fetchPrevTickers(queryLimit)),
-  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
-  refresh: () => dispatch(actions.refresh()),
-  addTargetPair: pair => dispatch(actions.addTargetPair(pair)),
-  removeTargetPair: pair => dispatch(actions.removeTargetPair(pair)),
-  updateErrorStatus: msg => dispatch(updateErrorStatus(msg)),
-})
+const mapDispatchToProps = {
+  fetchTickers,
+  fetchNext: fetchNextTickers,
+  fetchPrev: fetchPrevTickers,
+  jumpPage,
+  refresh,
+  addTargetPair,
+  removeTargetPair,
+  updateErrorStatus,
+}
 
 const TickersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Tickers))
 

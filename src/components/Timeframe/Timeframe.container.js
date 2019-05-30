@@ -17,9 +17,9 @@ function mapStateToProps(state = {}) {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setTimeRange: (rangeType, start, end) => dispatch(setTimeRange(rangeType, start, end)),
-})
+const mapDispatchToProps = {
+  setTimeRange,
+}
 
 const TimeframeContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Timeframe))
 

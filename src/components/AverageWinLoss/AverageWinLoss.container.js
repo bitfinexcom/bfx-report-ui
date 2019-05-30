@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/winLoss/actions'
+import { fetchWinLoss, refresh } from 'state/winLoss/actions'
 import {
   getDataReceived,
   getEntries,
@@ -18,10 +18,10 @@ const mapStateToProps = (state = {}) => ({
   timezone: getTimezone(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchWinLoss: params => dispatch(actions.fetchWinLoss(params)),
-  refresh: () => dispatch(actions.refresh()),
-})
+const mapDispatchToProps = {
+  fetchWinLoss,
+  refresh,
+}
 
 const AverageWinLossContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AverageWinLoss))
 

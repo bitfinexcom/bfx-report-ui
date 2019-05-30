@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/fundingPayment/actions'
+import {
+  fetchFPayment,
+  fetchNextFPayment,
+  fetchPrevFPayment,
+  jumpPage,
+  refresh,
+  addTargetSymbol,
+  removeTargetSymbol,
+} from 'state/fundingPayment/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getTargetQueryLimit } from 'state/query/selectors'
 import {
@@ -31,15 +39,15 @@ const mapStateToProps = (state = {}) => ({
   getQueryLimit: getTargetQueryLimit(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchFpayment: symbol => dispatch(actions.fetchFPayment(symbol)),
-  fetchNext: queryLimit => dispatch(actions.fetchNextFPayment(queryLimit)),
-  fetchPrev: queryLimit => dispatch(actions.fetchPrevFPayment(queryLimit)),
-  jumpPage: (page, queryLimit) => dispatch(actions.jumpPage(page, queryLimit)),
-  refresh: () => dispatch(actions.refresh()),
-  addTargetSymbol: symbol => dispatch(actions.addTargetSymbol(symbol)),
-  removeTargetSymbol: symbol => dispatch(actions.removeTargetSymbol(symbol)),
-})
+const mapDispatchToProps = {
+  fetchFpayment: fetchFPayment,
+  fetchNext: fetchNextFPayment,
+  fetchPrev: fetchPrevFPayment,
+  jumpPage,
+  refresh,
+  addTargetSymbol,
+  removeTargetSymbol,
+}
 
 const FundingPaymentContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FundingPayment))
 

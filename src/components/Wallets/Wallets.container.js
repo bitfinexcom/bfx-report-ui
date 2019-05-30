@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import actions from 'state/wallets/actions'
+import {
+  fetchWallets,
+  refresh,
+} from 'state/wallets/actions'
 import {
   getDataReceived,
   getEntries,
@@ -18,10 +21,10 @@ const mapStateToProps = (state = {}) => ({
   timezone: getTimezone(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchWallets: time => dispatch(actions.fetchWallets(time)),
-  refresh: () => dispatch(actions.refresh()),
-})
+const mapDispatchToProps = {
+  fetchWallets,
+  refresh,
+}
 
 const WalletsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Wallets))
 

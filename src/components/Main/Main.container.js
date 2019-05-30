@@ -18,12 +18,12 @@ const mapStateToProps = (state = {}) => ({
   timezone: getTimezone(state),
 })
 
-const mapDispatchToProps = dispatch => ({
-  exportCsv: targets => dispatch(exportCsv(targets)),
-  prepareExport: () => dispatch(prepareExport()),
-  setCustomTimeRange: (start, end) => dispatch(setCustomTimeRange(start, end)),
-  showCustomDialog: show => dispatch(showCustomDialog(show)),
-})
+const mapDispatchToProps = {
+  exportCsv,
+  prepareExport,
+  setCustomTimeRange,
+  showCustomDialog,
+}
 
 const MainContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Main))
 
