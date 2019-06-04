@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import {
   Button,
   Intent,
@@ -9,6 +8,9 @@ import {
   PopoverInteractionKind,
   Position,
 } from '@blueprintjs/core'
+import _keys from 'lodash/keys'
+
+import { LANGUAGE_NAMES } from 'locales/i18n'
 
 import { propTypes, defaultProps } from './LangMenu.props'
 
@@ -17,12 +19,6 @@ class LangMenu extends PureComponent {
 
   static defaultProps = defaultProps
 
-  constructor(props) {
-    super(props)
-    this.switchEn = this.switchLang.bind(this, 'en')
-    this.switchTw = this.switchLang.bind(this, 'tw')
-  }
-
   switchLang(lang, e) {
     e.preventDefault()
     // eslint-disable-next-line react/destructuring-assignment
@@ -30,19 +26,16 @@ class LangMenu extends PureComponent {
   }
 
   render() {
-    const { locale, t } = this.props
+    const { locale } = this.props
     const options = (
       <Menu>
-        <MenuItem
-          text={t('header.lang.en')}
-          onClick={this.switchEn}
-          intent={locale === 'en' ? Intent.PRIMARY : undefined}
-        />
-        <MenuItem
-          text={t('header.lang.tw')}
-          onClick={this.switchTw}
-          intent={locale === 'tw' ? Intent.PRIMARY : undefined}
-        />
+        {_keys(LANGUAGE_NAMES).map(language => (
+          <MenuItem
+            text={LANGUAGE_NAMES[language]}
+            onClick={e => this.switchLang(language, e)}
+            intent={locale === language ? Intent.PRIMARY : undefined}
+          />
+        ))}
       </Menu>
     )
     return (
@@ -53,11 +46,11 @@ class LangMenu extends PureComponent {
       >
         <Button
           rightIcon='caret-down'
-          text={t(`header.lang.${locale}`)}
+          text={LANGUAGE_NAMES[locale]}
         />
       </Popover>
     )
   }
 }
 
-export default withTranslation('translations')(LangMenu)
+export default LangMenu

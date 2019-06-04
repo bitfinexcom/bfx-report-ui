@@ -1,0 +1,372 @@
+{
+  "accountbalance": {
+    "title": "帐户余额",
+    "query": {
+      "title": "查询",
+      "startDateTooltip": "选择开始时间",
+      "endDateTooltip": "选择结束时间"
+    }
+  },
+  "activepositions": {
+    "title": "有效仓位"
+  },
+  "auth": {
+    "auth": "验证",
+    "title": "请登录",
+    "enterAPIKey": "输入 API 密钥：",
+    "enterAPISecret": "输入 API 密码：",
+    "checkAuth": "检查验证",
+    "note1": "访问",
+    "note2": "以获取随机的 API 密钥和密码对。",
+    "required": "(必需)",
+    "nonideal": {
+      "title": "Reports 2.0",
+      "description": "使用令牌登录 Reports…"
+    }
+  },
+  "averagewinloss": {
+    "title": "平均盈利/损失",
+    "query": {
+      "title": "查询",
+      "startDateTooltip": "选择开始时间",
+      "endDateTooltip": "选择结束时间"
+    }
+  },
+  "column": {
+    "id": "#",
+    "usd": "美元"
+  },
+  "concentrationrisk": {
+    "title": "集中风险",
+    "nodata": "此日期时间没有相关数据。您可以尝试其他日期时间。",
+    "query": {
+      "title": "查询",
+      "tooltip": "选择一个要查询钱包快照的时间"
+    },
+    "column": {
+      "currency": "货币",
+      "balanceUsd": "余额 (USD)"
+    }
+  },
+  "copy": "复制",
+  "deposits": {
+    "title": "存款"
+  },
+  "download": {
+    "query": "准备导出",
+    "title": "导出 CSV",
+    "prepare": "Bitfinex 将准备您在以下期间内的数据：",
+    "send": "，并发送到 {{email}}。",
+    "store": "，并存储到您的本地文件夹中。",
+    "export": "导出",
+    "cancel": "取消",
+    "status": {
+      "local": "已生成{{topic}} csv，请查看您本地的“csv”文件夹",
+      "email": "正在生成您的 CSV 报告，我们会在报告就绪后通过电子邮件发送给您…"
+    },
+    "targets": "要导出的数据"
+  },
+  "fcredit": {
+    "title": "融资额度（已使用）",
+    "column": {
+      "symbol": "货币",
+      "side": "方向",
+      "amount": "金额",
+      "status": "状态",
+      "rate": "利率",
+      "period": "期间",
+      "days": "天",
+      "opening": "已打开",
+      "lastpayout": "上一次支出",
+      "positionpair": "仓位对",
+      "updated": "日期"
+    },
+    "side": {
+      "provided": "已提供",
+      "taken": "已领取",
+      "both": "两者",
+      "null": "空"
+    }
+  },
+  "floan": {
+    "title": "融资贷款（未使用）",
+    "column": {
+      "symbol": "货币",
+      "side": "方向",
+      "amount": "金额",
+      "status": "状态",
+      "rate": "利率",
+      "period": "期间",
+      "days": "天",
+      "opening": "已打开",
+      "lastpayout": "上一次支出",
+      "updated": "日期"
+    },
+    "side": {
+      "provided": "已提供",
+      "taken": "已领取",
+      "both": "两者",
+      "null": "空"
+    }
+  },
+  "foffer": {
+    "title": "融资买入价和卖出价",
+    "column": {
+      "symbol": "货币",
+      "amount": "金额",
+      "amount-exe": "已执行的金额",
+      "type": "类型",
+      "status": "状态",
+      "rate": "利率",
+      "period": "期间",
+      "days": "天",
+      "updated": "日期"
+    }
+  },
+  "fpayment": {
+    "title": "融资付款"
+  },
+  "framework": {
+    "title": "请等待同步完成",
+    "proceed": "仍然继续",
+    "cancel": "取消",
+    "notagain": "不再显示此消息"
+  },
+  "header": {
+    "logout": "注销",
+    "preferences": "首选项",
+    "help": "帮助"
+  },
+  "ledgers": {
+    "title": "分类账",
+    "column": {
+      "description": "描述",
+      "wallet": "钱包",
+      "currency": "货币",
+      "time": "日期",
+      "amount": "金额",
+      "amountUsd": "金额 (USD)",
+      "balance": "余额",
+      "balanceUsd": "余额 (USD)"
+    }
+  },
+  "loading": "正在加载...",
+  "movements": {
+    "title": "移动",
+    "column": {
+      "updated": "日期",
+      "currency": "货币",
+      "amount": "金额",
+      "fees": "费用",
+      "status": "状态",
+      "destination": "目的地",
+      "transactionId": "交易 ID"
+    }
+  },
+  "nodata": "此时间范围没有相关数据。您可以尝试其他时间范围。",
+  "orders": {
+    "title": "订单",
+    "column": {
+      "pair": "货币对",
+      "type": "类型",
+      "amount": "金额",
+      "amount-exe": "已执行的金额",
+      "price": "价格",
+      "avgprice": "平均执行价格",
+      "create": "创建时间",
+      "update": "更新时间",
+      "status": "状态",
+      "pricetrail": "TRAILING PRICE",
+      "typeprev": "PREVIOUS ORDER TYPE"
+    }
+  },
+  "pagination": {
+    "page": "页码",
+    "of": "/",
+    "loading": "正在加载..."
+  },
+  "paudit": {
+    "title": "仓位审计",
+    "input": {
+      "ids": "仓位 ID"
+    },
+    "noid": {
+      "title": "无仓位 ID",
+      "description": "请从“仓位”页面中选择以按 ID 查询仓位日志记录。"
+    }
+  },
+  "positions": {
+    "title": "仓位",
+    "active": "活动",
+    "closed": "已结清",
+    "column": {
+      "pair": "货币对",
+      "amount": "金额",
+      "base-price": "基价",
+      "liq-price": "清算价格",
+      "pl": "损益",
+      "plperc": "损益 %",
+      "swap": "融资成本",
+      "swap-type": "融资类型",
+      "status": "状态",
+      "update": "更新时间"
+    },
+    "swap": {
+      "daily": "每日",
+      "term": "期限"
+    }
+  },
+  "preferences": {
+    "title": "首选项",
+    "close": "结清",
+    "language": "语言:",
+    "theme": "主题:",
+    "timezone": "时区:",
+    "dateformat": "日期格式:",
+    "milliseconds": "显示毫秒：",
+    "sync": {
+      "title": "同步首选项",
+      "notset": "尚未设置同步首选项",
+      "description": "要离线访问公开交易和牌价，您需要设置离线可用货币对和起始查询时间。",
+      "symbol-description": "要离线访问公开融资，您需要设置离线可用货币和起始查询时间。",
+      "setup": "设置同步首选项",
+      "symbols": "离线货币",
+      "pairs": "离线对",
+      "starttime": "开始时间",
+      "btn-apply": "应用",
+      "apply-tooltip": "应用后，您需要重新登录才能生效。",
+      "insync-warning": "无法在同步期间应用。请等待同步完成。"
+    }
+  },
+  "publicfunding": {
+    "title": "公开融资",
+    "column": {
+      "time": "时间",
+      "amount": "金额",
+      "rate": "利率",
+      "period": "期间",
+      "currency": "货币",
+      "days": "天"
+    }
+  },
+  "publictrades": {
+    "title": "公开交易",
+    "column": {
+      "time": "时间",
+      "type": "类型",
+      "price": "价格",
+      "amount": "金额",
+      "pair": "货币对"
+    }
+  },
+  "querylimit": {
+    "tooltip": "按查询选择大小，查询越大，时间越长。"
+  },
+  "selector": {
+    "filter": {
+      "symbol": "符号筛选器",
+      "pair": "货币对筛选器"
+    }
+  },
+  "status": {
+    "success": "{{topic}}在 {{time}} 成功",
+    "warn": "{{topic}}",
+    "fail": "{{topic}}失败{{detail}}",
+    "noid": "dev：状态操作应包含 id 参数",
+    "request": {
+      "error": "{{topic}}请求失败{{detail}}"
+    }
+  },
+  "symbols": {
+    "title": "获取符号"
+  },
+  "sync": {
+    "title": "同步",
+    "switch-mode": "切换同步模式",
+    "online": "当前为在线查询。单击可以切换到离线查询模式",
+    "offline": "当前为离线查询。单击可以切换到在线查询模式",
+    "insync": "当前为在线查询。单击可以加快同步过程",
+    "description": "我们将开始在本地缓存您的数据。在同步完成后，您可以在离线模式下进行本地查询。在同步期间，您仍然可以在线查询。",
+    "sync-description": "您的数据正在进行本地同步。想要停止同步过程并保持处于在线查询模式？",
+    "close": "取消",
+    "start": "开始同步",
+    "stop-sync": "停止同步",
+    "go-offline": "正在切换到离线查询模式（在数据库中查询）",
+    "logout": "已停止同步",
+    "message": {
+      "canceled": "已取消旧同步观察程序"
+    }
+  },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色"
+  },
+  "tickers": {
+    "title": "牌价",
+    "minlength": "应至少选择一个货币对",
+    "column": {
+      "pair": "货币对",
+      "ask": "委卖",
+      "bid": "委买",
+      "time": "时间"
+    }
+  },
+  "timeframe": {
+    "custom": {
+      "title": "选择查询范围",
+      "view": "查看"
+    },
+    "day": "天",
+    "refresh": "刷新",
+    "custom-timerange": "自定义时间范围",
+    "custom_time": "自定义",
+    "custom_year": "{{year}} year",
+    "24h": "过去 24 小时",
+    "yesterday": "昨天",
+    "2w": "过去 2 周",
+    "month": "月",
+    "month_to_date": "本月至今",
+    "past_month": "过去一个月",
+    "past_3m": "过去 3 个月",
+    "past_week": "Past week",
+    "past_year": "Past year",
+    "past_2y": "Past two years",
+    "range_limit": "Queries more than two years behind the actual date are not allowed",
+    "start-date-placeholder": "开始日期时间",
+    "today": "Today",
+    "year": "年"
+  },
+  "trades": {
+    "title": "交易",
+    "column": {
+      "orderid": "订单 ID",
+      "time": "时间",
+      "pair": "货币对",
+      "amount": "金额",
+      "price": "价格",
+      "fee": "费用"
+    }
+  },
+  "wallets": {
+    "title": "钱包",
+    "title_beta": "钱包 (Beta)",
+    "column": {
+      "currency": "货币",
+      "balance": "余额",
+      "balanceUsd": "余额 (USD)"
+    },
+    "header": {
+      "exchange": "交易所",
+      "margin": "保证金",
+      "funding": "融资"
+    },
+    "nodata": "No related data in this date time. You can try another date time.",
+    "query": {
+      "title": "查询",
+      "tooltip": "选择一个要查询钱包快照的时间"
+    }
+  },
+  "withdrawals": {
+    "title": "提款"
+  }
+}
