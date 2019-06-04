@@ -168,8 +168,6 @@ function* exportCSV({ payload: targets }) {
       options.timezone = yield select(getTimezone)
       options.dateFormat = yield select(getDateFormat)
       options.milliseconds = yield select(getShowMilliseconds)
-      const locale = yield select(getLocale)
-      options.language = LANGUAGES_MAP[locale]
       const selector = getSelector(target)
       const sign = selector ? yield select(selector) : ''
       switch (target) {
@@ -245,7 +243,9 @@ function* exportCSV({ payload: targets }) {
       multiExport.push(options)
     }
 
+    const locale = yield select(getLocale)
     const params = {
+      language: LANGUAGES_MAP[locale],
       multiExport,
     }
     if (query.exportEmail) {
