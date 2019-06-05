@@ -176,8 +176,8 @@
       "create": "创建时间",
       "update": "更新时间",
       "status": "状态",
-      "pricetrail": "TRAILING PRICE",
-      "typeprev": "PREVIOUS ORDER TYPE"
+      "pricetrail": "历史价格",
+      "typeprev": "先前订单类型"
     }
   },
   "pagination": {
@@ -320,7 +320,7 @@
     "refresh": "刷新",
     "custom-timerange": "自定义时间范围",
     "custom_time": "自定义",
-    "custom_year": "{{year}} year",
+    "custom_year": "{{year}}年",
     "24h": "过去 24 小时",
     "yesterday": "昨天",
     "2w": "过去 2 周",
@@ -328,12 +328,12 @@
     "month_to_date": "本月至今",
     "past_month": "过去一个月",
     "past_3m": "过去 3 个月",
-    "past_week": "Past week",
-    "past_year": "Past year",
-    "past_2y": "Past two years",
-    "range_limit": "Queries more than two years behind the actual date are not allowed",
+    "past_week": "上星期",
+    "past_year": "去年",
+    "past_2y": "过去两年",
+    "range_limit": "无法查询实际日期后两年以上的资讯",
     "start-date-placeholder": "开始日期时间",
-    "today": "Today",
+    "today": "今日",
     "year": "年"
   },
   "trades": {
@@ -360,7 +360,7 @@
       "margin": "保证金",
       "funding": "融资"
     },
-    "nodata": "No related data in this date time. You can try another date time.",
+    "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。",
     "query": {
       "title": "查询",
       "tooltip": "选择一个要查询钱包快照的时间"

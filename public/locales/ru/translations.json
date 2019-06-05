@@ -176,8 +176,8 @@
       "create": "СОЗДАНО",
       "update": "ОБНОВЛЕНО",
       "status": "СТАТУС",
-      "pricetrail": "TRAILING PRICE",
-      "typeprev": "PREVIOUS ORDER TYPE"
+      "pricetrail": "ТРЕЙЛИНГОВАЯ ЦЕНА",
+      "typeprev": "ПРЕДЫДУЩИЙ ТИП ОРДЕРА"
     }
   },
   "pagination": {
@@ -319,7 +319,7 @@
     "day": "День",
     "refresh": "Обновить",
     "custom-timerange": "Другой временной диапазон",
-    "custom_year": "{{year}} year",
+    "custom_year": "{{year}} год",
     "24h": "Последние 24 часа",
     "yesterday": "Вчера",
     "2w": "Последние 2 недели",
@@ -327,13 +327,13 @@
     "month_to_date": "С начала месяца",
     "past_month": "Прошлый месяц",
     "past_3m": "Прошлые 3 месяца",
-    "past_week": "Past week",
-    "past_year": "Past year",
-    "past_2y": "Past two years",
-    "range_limit": "Queries more than two years behind the actual date are not allowed",
+    "past_week": "Последняя неделя",
+    "past_year": "Последний год",
+    "past_2y": "Последние два года",
+    "range_limit": "Запросы более двухлетней давности от текущего дня невозможны",
     "custom_time": "Другое",
     "start-date-placeholder": "Начальная дата и время",
-    "today": "Today",
+    "today": "Сегодня",
     "year": "Год"
   },
   "trades": {
@@ -360,7 +360,7 @@
       "margin": "Маржинальное",
       "funding": "Обеспечение"
     },
-    "nodata": "No related data in this date time. You can try another date time.",
+    "nodata": "Нет данных за этот промежуток времени. Вы можете выбрать другой промежуток времени.",
     "query": {
       "title": "Запрос",
       "tooltip": "Выберите время для запроса снимка кошельков"
