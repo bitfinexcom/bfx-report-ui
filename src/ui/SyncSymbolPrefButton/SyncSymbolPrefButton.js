@@ -9,11 +9,11 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
-import { DateInput } from '@blueprintjs/datetime'
+
+import DateInput from 'ui/DateInput'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import mode from 'state/sync/constants'
 import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
-import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './SyncSymbolPrefButton.props'
@@ -82,14 +82,12 @@ class SyncSymbolPrefButton extends PureComponent {
       syncSymbols,
       t,
       textOnly,
-      timezone,
     } = this.props
     const {
       isOpen,
       tempSymbols,
       tempTime,
     } = this.state
-    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
     const renderInSyncWarning = syncMode === mode.MODE_SYNCING
       ? (
         <Fragment>
@@ -159,12 +157,7 @@ class SyncSymbolPrefButton extends PureComponent {
                   {t('preferences.sync.starttime')}
                 </div>
                 <div className={dialogFieldStyle}>
-                  <DateInput
-                    formatDate={formatDate}
-                    parseDate={parseDate}
-                    onChange={this.handleDateChange}
-                    value={tempTime}
-                  />
+                  <DateInput onChange={this.handleDateChange} value={tempTime} />
                 </div>
               </div>
             </div>

@@ -7,7 +7,6 @@ import {
   getEntries,
   getTimestamp,
 } from 'state/wallets/selectors'
-import { getTimezone } from 'state/base/selectors'
 
 import ConcentrationRisk from './ConcentrationRisk'
 
@@ -15,7 +14,6 @@ const mapStateToProps = (state = {}) => ({
   currentTime: getTimestamp(state),
   entries: getEntries(state),
   loading: !getDataReceived(state),
-  timezone: getTimezone(state),
 })
 
 const mapDispatchToProps = {

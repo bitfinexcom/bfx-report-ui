@@ -11,6 +11,7 @@ export const getLocale = state => getBase(state).locale
 export const getMenuMode = state => getBase(state).menuMode
 export const getTheme = state => getBase(state).theme || types.DEFAULT_THEME
 export const getTimezone = state => getBase(state).timezone
+export const getInputTimezone = state => getBase(state).inputTimezone
 export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FORMATS[0]
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
 export const getBaseQueryLimit = state => getBase(state).queryLimit || types.DEFAULT_BASE_QUERY_LIMIT
@@ -37,4 +38,5 @@ export default {
   getTheme,
   getTimeOffset,
   getTimezone,
+  getInputTimezone,
 }

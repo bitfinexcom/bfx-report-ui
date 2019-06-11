@@ -10,7 +10,6 @@ import {
   getEntries,
   getParams,
 } from 'state/accountBalance/selectors'
-import { getTimezone } from 'state/base/selectors'
 
 import AccountBalance from './AccountBalance'
 
@@ -18,7 +17,6 @@ const mapStateToProps = (state = {}) => ({
   entries: getEntries(state),
   params: getParams(state),
   loading: !getDataReceived(state),
-  timezone: getTimezone(state),
 })
 
 const mapDispatchToProps = {

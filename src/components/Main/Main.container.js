@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { exportCsv, prepareExport, setCustomTimeRange } from 'state/query/actions'
 import { showCustomDialog } from 'state/ui/actions'
 import { getAuthStatus, getIsShown } from 'state/auth/selectors'
-import { getMenuMode, getTimezone } from 'state/base/selectors'
+import { getMenuMode, getInputTimezone } from 'state/base/selectors'
 import { getIsCustomDialogOpen, getIsFrameworkDialogOpen } from 'state/ui/selectors'
 
 import Main from './Main'
@@ -15,7 +15,7 @@ const mapStateToProps = (state = {}) => ({
   menuMode: getMenuMode(state),
   isCustomOpen: getIsCustomDialogOpen(state),
   isFrameworkOpen: getIsFrameworkDialogOpen(state),
-  timezone: getTimezone(state),
+  inputTimezone: getInputTimezone(state),
 })
 
 const mapDispatchToProps = {

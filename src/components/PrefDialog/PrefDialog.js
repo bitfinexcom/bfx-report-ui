@@ -40,8 +40,13 @@ class PrefDialog extends PureComponent {
   }
 
   handleTimezoneChange = (timezone) => {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.setTimeZone(timezone)
+    const { setTimezone } = this.props
+    setTimezone(timezone)
+  }
+
+  handleInputTimezoneChange = (timezone) => {
+    const { setInputTimezone } = this.props
+    setInputTimezone(timezone)
   }
 
   render() {
@@ -51,6 +56,7 @@ class PrefDialog extends PureComponent {
       t,
       theme,
       timezone,
+      inputTimezone,
     } = this.props
     if (!isPrefOpen) {
       return null
@@ -120,6 +126,21 @@ class PrefDialog extends PureComponent {
                 showLocalTimezone
                 value={timezone}
                 onChange={this.handleTimezoneChange}
+              />
+            </div>
+          </div>
+          <div className='row'>
+            <div className={dialogDescStyle}>
+              {t('preferences.timezone-input')}
+            </div>
+            <div className={dialogSmallDescStyle}>
+              {t('preferences.timezone-input')}
+            </div>
+            <div className={dialogFieldStyle}>
+              <TimezonePicker
+                showLocalTimezone
+                value={inputTimezone}
+                onChange={this.handleInputTimezoneChange}
               />
             </div>
           </div>

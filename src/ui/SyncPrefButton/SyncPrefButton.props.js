@@ -6,7 +6,6 @@ export const propTypes = {
   setPairs: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   textOnly: PropTypes.bool,
-  timezone: PropTypes.string,
 }
 
 export const defaultProps = {
@@ -15,5 +14,4 @@ export const defaultProps = {
   startTime: 0,
   setPairs: () => {},
   textOnly: false,
-  timezone: '',
 }

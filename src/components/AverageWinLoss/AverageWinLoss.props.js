@@ -11,7 +11,6 @@ export const propTypes = {
   t: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
   fetchWinLoss: PropTypes.func.isRequired,
-  timezone: PropTypes.string,
 }
 
 export const defaultProps = {
@@ -20,5 +19,4 @@ export const defaultProps = {
   refresh: () => {},
   params: {},
   fetchWinLoss: () => {},
-  timezone: '',
 }

@@ -12,7 +12,8 @@ const initialState = {
   menuMode: types.MENU_MODE_NORMAL,
   queryLimit: 0,
   theme: types.DEFAULT_THEME,
-  timezone: '',
+  timezone: 'Etc/UTC',
+  inputTimezone: 'Etc/UTC',
   milliseconds: false,
 }
 
@@ -58,6 +59,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         timezone: payload,
+      }
+    case types.SET_DISPLAY_TIMEZONE:
+      return {
+        ...state,
+        inputTimezone: payload,
       }
     case types.SET_DATE_FORMAT:
       return {
