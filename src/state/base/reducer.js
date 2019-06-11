@@ -1,3 +1,4 @@
+import moment from 'moment-timezone'
 import authTypes from 'state/auth/constants'
 
 import types from './constants'
@@ -12,8 +13,8 @@ const initialState = {
   menuMode: types.MENU_MODE_NORMAL,
   queryLimit: 0,
   theme: types.DEFAULT_THEME,
-  timezone: 'Etc/UTC',
-  inputTimezone: 'Etc/UTC',
+  timezone: '',
+  inputTimezone: moment.tz.guess(),
   milliseconds: false,
 }
 

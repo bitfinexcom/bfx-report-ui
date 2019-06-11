@@ -17,9 +17,7 @@ class Timeframe extends PureComponent {
   constructor(props) {
     super(props)
     this.handleClick24H = this.handleClick.bind(this, constants.TIME_RANGE_LAST_24HOURS)
-    this.handleClickYesterday = this.handleClick.bind(this, constants.TIME_RANGE_YESTERDAY)
     this.handleClickLast2Weeks = this.handleClick.bind(this, constants.TIME_RANGE_LAST_2WEEKS)
-    this.handleClickMonthToDate = this.handleClick.bind(this, constants.TIME_RANGE_MONTH_TO_DATE)
     this.handleClickPastMonth = this.handleClick.bind(this, constants.TIME_RANGE_PAST_MONTH)
     this.handleClickPast3Month = this.handleClick.bind(this, constants.TIME_RANGE_PAST_3MONTH)
   }
@@ -30,7 +28,7 @@ class Timeframe extends PureComponent {
     } = this.props
     // only update query param when its set in custom time range
     if (timeRange === constants.TIME_RANGE_CUSTOM) {
-      const parsed = queryString.parse(window.location.search)
+      const parsed = queryString.parse(location.search)
       const { range } = parsed
       const [startStr, endStr] = range ? range.split('-') : [undefined, undefined]
       if (`${start}` !== startStr || `${end}` !== endStr) {
@@ -43,8 +41,16 @@ class Timeframe extends PureComponent {
     }
   }
 
+  resetRangeQuery = () => {
+    const { location, history } = this.props
+    const parsed = queryString.parse(location.search)
+    const { range, ...params } = parsed
+    history.push(`${location.pathname}?${queryString.stringify(params, { encode: false })}`)
+  }
+
   handleClick(rangeType, e) {
     e.preventDefault()
+    this.resetRangeQuery()
     // eslint-disable-next-line react/destructuring-assignment
     this.props.setTimeRange(rangeType)
   }
@@ -60,11 +66,12 @@ class Timeframe extends PureComponent {
       timezone,
     } = this.props
     const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
-    return menuMode === baseType.MENU_MODE_ICON ? (
+
+    return (
       <MenuItem
         icon='calendar'
-        text=''
-        title={timeSpan}
+        text={menuMode === baseType.MENU_MODE_ICON ? '' : timeSpan}
+        title={menuMode === baseType.MENU_MODE_ICON ? timeSpan : undefined}
         className='bitfinex-dropdown'
         popoverProps={TIME_FRAMES_POPOVER_PROPS}
       >
@@ -74,62 +81,9 @@ class Timeframe extends PureComponent {
           active={timeRange === constants.TIME_RANGE_LAST_24HOURS}
         />
         <MenuItem
-          text={t('timeframe.yesterday')}
-          onClick={this.handleClickYesterday}
-          active={timeRange === constants.TIME_RANGE_YESTERDAY}
-        />
-        <MenuItem
           text={t('timeframe.2w')}
           onClick={this.handleClickLast2Weeks}
           active={timeRange === constants.TIME_RANGE_LAST_2WEEKS}
-        />
-        <MenuItem
-          text={t('timeframe.month_to_date')}
-          onClick={this.handleClickMonthToDate}
-          active={timeRange === constants.TIME_RANGE_MONTH_TO_DATE}
-        />
-        <MenuItem
-          text={t('timeframe.past_month')}
-          onClick={this.handleClickPastMonth}
-          active={timeRange === constants.TIME_RANGE_PAST_MONTH}
-        />
-        <MenuItem
-          text={t('timeframe.past_3m')}
-          onClick={this.handleClickPast3Month}
-          active={timeRange === constants.TIME_RANGE_PAST_3MONTH}
-        />
-        <MenuItem
-          text={t('timeframe.custom_time')}
-          onClick={handleClickCustom}
-          active={timeRange === constants.TIME_RANGE_CUSTOM}
-        />
-      </MenuItem>
-    ) : (
-      <MenuItem
-        icon='calendar'
-        text={timeSpan}
-        className='bitfinex-dropdown'
-        popoverProps={TIME_FRAMES_POPOVER_PROPS}
-      >
-        <MenuItem
-          text={t('timeframe.24h')}
-          onClick={this.handleClick24H}
-          active={timeRange === constants.TIME_RANGE_LAST_24HOURS}
-        />
-        <MenuItem
-          text={t('timeframe.yesterday')}
-          onClick={this.handleClickYesterday}
-          active={timeRange === constants.TIME_RANGE_YESTERDAY}
-        />
-        <MenuItem
-          text={t('timeframe.2w')}
-          onClick={this.handleClickLast2Weeks}
-          active={timeRange === constants.TIME_RANGE_LAST_2WEEKS}
-        />
-        <MenuItem
-          text={t('timeframe.month_to_date')}
-          onClick={this.handleClickMonthToDate}
-          active={timeRange === constants.TIME_RANGE_MONTH_TO_DATE}
         />
         <MenuItem
           text={t('timeframe.past_month')}
