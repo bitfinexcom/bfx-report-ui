@@ -4,7 +4,6 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
@@ -24,9 +23,7 @@ function* fetchSymbols({ payload: success }) {
 
   try {
     const auth = yield select(selectAuth)
-    yield call(delay, 1000)
-    const allsymbols = yield call(getSymbols, auth)
-    const { result, error } = allsymbols
+    const { result, error } = yield call(getSymbols, auth)
     if (result) {
       yield put(actions.updateSymbols(result))
     }

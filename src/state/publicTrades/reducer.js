@@ -9,12 +9,13 @@ import {
   getPageOffset,
   jumpPage,
 } from 'state/reducers.helper'
+import { mapPair } from 'state/symbols/utils'
 
 import types from './constants'
 
 const initialState = {
   ...baseState,
-  targetPair: 'BTCUSD',
+  targetPair: mapPair('BTCUSD'),
 }
 
 const TYPE = queryTypes.MENU_PUBLIC_TRADES

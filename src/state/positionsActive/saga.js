@@ -7,7 +7,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getSymbolsURL, getPairsFromUrlParam } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -16,7 +15,7 @@ import { getQueryLimit, getPageSize } from 'state/query/utils'
 
 import types from './constants'
 import actions from './actions'
-import { getActivePositions, getTargetPairs } from './selectors'
+import { getActivePositions } from './selectors'
 
 const TYPE = queryTypes.MENU_POSITIONS_ACTIVE
 const LIMIT = getQueryLimit(TYPE)
@@ -26,23 +25,10 @@ function getReqPositions({ auth }) {
   return makeFetchCall('getActivePositions', auth)
 }
 
-function* fetchPositions({ payload: pair }) {
+function* fetchPositions() {
   try {
-    let targetPairs = yield select(getTargetPairs)
-    const pairsUrl = getSymbolsURL(targetPairs)
-    // set pair from url
-    if (pair && pair !== pairsUrl) {
-      targetPairs = getPairsFromUrlParam(pair)
-      yield put(actions.setTargetPairs(targetPairs))
-    }
     const auth = yield select(selectAuth)
-    const query = yield select(getQuery)
-    const { result, error } = yield call(getReqPositions, {
-      smallestMts: 0,
-      auth,
-      query,
-      targetPairs,
-    })
+    const { result, error } = yield call(getReqPositions, { auth })
     yield put(actions.updateAPositions(result, LIMIT, PAGE_SIZE))
     if (error) {
       yield put(actions.fetchFail({

@@ -6,7 +6,9 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbols, getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
+import {
+  formatRawSymbols, getSymbolsURL, getSymbolsFromUrlParam, mapRequestSymbols, mapSymbol,
+} from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -30,8 +32,8 @@ function getReqFLoan({
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
-  if (targetSymbols.length > 0) {
-    params.symbol = formatRawSymbols(targetSymbols)
+  if (targetSymbols.length) {
+    params.symbol = formatRawSymbols(mapRequestSymbols(targetSymbols))
   }
   return makeFetchCall('getFundingLoanHistory', auth, params)
 }
@@ -42,7 +44,7 @@ function* fetchFLoan({ payload: symbol }) {
     const symbolsUrl = getSymbolsURL(targetSymbols)
     // set symbol from url
     if (symbol && symbol !== symbolsUrl) {
-      targetSymbols = getSymbolsFromUrlParam(symbol)
+      targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
       yield put(actions.setTargetSymbols(targetSymbols))
     }
     const auth = yield select(selectAuth)

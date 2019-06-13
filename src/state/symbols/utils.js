@@ -1,3 +1,6 @@
+import _castArray from 'lodash/castArray'
+import symbolMap from './map'
+
 const table = {
   IOTA: 'IOT',
   DATA: 'DAT',
@@ -93,25 +96,21 @@ const removePrefix = (symbol = '') => (isSymbol(symbol) || isPair(symbol)
   ? symbol.substring(1).toUpperCase()
   : symbol.toUpperCase())
 
-const firstInPair = (pair, uppercase = true) => {
+const firstInPair = (pair) => {
   const spliter = pair.indexOf(':') > -1 ? ':' : '/'
-  const first = pair.length > 6 ? pair.split(spliter)[0] : pair.substr(0, 3)
-  return uppercase ? first.toUpperCase() : first.toLowerCase()
+  return pair.length > 6 ? pair.split(spliter)[0] : pair.substr(0, 3)
 }
 
-const lastInPair = (pair, uppercase = true) => {
+const lastInPair = (pair) => {
   const spliter = pair.indexOf(':') > -1 ? ':' : '/'
-  const last = pair.length > 6 ? pair.split(spliter)[1] : pair.substr(3, 6)
-  return uppercase ? last.toUpperCase() : last.toLowerCase()
+  return pair.length > 6 ? pair.split(spliter)[1] : pair.substr(3, 6)
 }
 
-const getSplitPair = (pair, uppercase = true) => [firstInPair(pair, uppercase), lastInPair(pair, uppercase)]
+const getSplitPair = pair => [firstInPair(pair), lastInPair(pair)]
 
-// tBTCUSD -> btcusd
-// fUSD -> usd
-export function formatInternalSymbol(symbol) {
-  return removePrefix(symbol).toLowerCase()
-}
+// tBTCUSD -> BTCUSD
+// fUSD -> USD
+export const formatInternalSymbol = symbol => removePrefix(symbol)
 
 // tBTCUSD -> BTC/USD
 export function formatSymbolToPair(symbol) {
@@ -119,7 +118,7 @@ export function formatSymbolToPair(symbol) {
   return `${first}/${last}`
 }
 
-// btcusd -> BTC/USD
+// BTCUSD -> BTC/USD
 export function formatPair(pair) {
   if (!pair || pair === 'ALL') {
     return 'ALL'
@@ -127,16 +126,16 @@ export function formatPair(pair) {
   return formatSymbolToPair(pair)
 }
 
-// BTC/USD -> btcusd
+// BTC/USD -> BTCUSD
 export function parsePairTag(tag) {
-  const [first, last] = getSplitPair(tag, false)
+  const [first, last] = getSplitPair(tag)
   return `${first}${last}`
 }
 
 // ['usd', 'etc'] -> USD,ETC
 // ['usd'] -> USD
 export function getSymbolsURL(symbols) {
-  if (Array.isArray(symbols) && symbols.length > 0) {
+  if (Array.isArray(symbols) && symbols.length) {
     if (symbols.length === 1) {
       return symbols[0].toUpperCase()
     }
@@ -146,23 +145,21 @@ export function getSymbolsURL(symbols) {
 }
 
 // USD,ETC -> ['USD', 'ETC']
-// usd,etc -> ['USD', 'ETC']
-// usd -> ['USD']
+// USD -> ['USD']
 export function getSymbolsFromUrlParam(param) {
   if (param.indexOf(',') > -1) {
-    return param.split(',').map(symbol => symbol.toUpperCase())
+    return param.split(',')
   }
   return [param.toUpperCase()]
 }
 
-// BTCUSD,ETHUSD -> ['btcusd', 'etcusd']
-// btcusd,ethusd -> ['btcusd', 'ethusd']
-// btcusd -> ['btcusd']
+// BTCUSD,ETHUSD -> ['BTCUSD', 'ETHUSD']
+// BTCUSD -> ['BTCUSD']
 export function getPairsFromUrlParam(param) {
   if (param.indexOf(',') > -1) {
-    return param.split(',').map(pair => pair.toLowerCase())
+    return param.split(',')
   }
-  return [param.toLowerCase()]
+  return [param]
 }
 
 // btcusd -> tBTCUSD
@@ -172,13 +169,81 @@ export function getPairsFromUrlParam(param) {
 // ['USD'] -> 'fUSD'
 // ['USD', 'BTC'] -> ['fUSD', 'fBTC']
 export function formatRawSymbols(symbols) {
-  if (Array.isArray(symbols) && symbols.length > 0) {
+  if (Array.isArray(symbols) && symbols.length) {
     if (symbols.length === 1) {
       return addPrefix(symbols[0])
     }
     return symbols.map(symbol => addPrefix(symbol))
   }
   return addPrefix(symbols)
+}
+
+// symbol mapping
+
+// BAB -> BCH
+export const mapSymbol = currency => symbolMap[currency] || currency
+
+// BTCUSD -> [BTC, USD]
+export const splitPair = pair => [pair.slice(0, 3), pair.slice(3)]
+
+// BABUSD -> BCHUSD
+export const mapPair = pair => splitPair(pair).map(mapSymbol).join('')
+
+// [BCH, USD] -> [BAB, USD]
+export const demapSymbols = (symbols, returnString = false) => {
+  const mapKeys = Object.keys(symbolMap)
+  const mappedSymbols = _castArray(symbols).map((symbol) => {
+    const key = mapKeys.find(k => symbolMap[k] === symbol)
+    if (key) {
+      return key
+    }
+    return symbol
+  })
+
+  return returnString
+    ? mappedSymbols[0]
+    : mappedSymbols
+}
+
+export const demapPairs = (pairs, returnString = false) => {
+  const mappedPairs = _castArray(pairs).map(pair => demapSymbols(splitPair(pair)).join(''))
+
+  return returnString
+    ? mappedPairs[0]
+    : mappedPairs
+}
+
+export const mapRequestSymbols = (symbols, returnString = false) => {
+  const demapped = demapSymbols(symbols)
+
+  if (demapped.includes('BAB') && !returnString) {
+    return [...demapped, 'BCH']
+  }
+
+  return returnString
+    ? demapped[0]
+    : demapped
+}
+
+// [BCHUSD] -> [BABUSD]
+export const mapRequestPairs = (pairs, returnString = false) => {
+  const demapped = demapPairs(pairs)
+
+  const additionalPairs = []
+
+  demapped.forEach((pair) => {
+    if (pair.includes('BAB')) {
+      additionalPairs.push(pair.replace('BAB', 'BCH'))
+    }
+  })
+
+  if (additionalPairs.length && !returnString) {
+    return [...demapped, ...additionalPairs]
+  }
+
+  return returnString
+    ? demapped[0]
+    : demapped
 }
 
 export default {
@@ -192,4 +257,9 @@ export default {
   isPair,
   isSymbol,
   parsePairTag,
+  splitPair,
+  mapSymbol,
+  mapPair,
+  mapRequestSymbols,
+  mapRequestPairs,
 }

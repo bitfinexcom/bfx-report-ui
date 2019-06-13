@@ -13,6 +13,7 @@ import {
   setSymbols,
   setTimeRange,
 } from 'state/reducers.helper'
+import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
@@ -58,7 +59,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           status,
           symbol,
         } = entry
-        const currentSymbol = symbol.slice(1)
+        const currentSymbol = mapSymbol(symbol.slice(1))
         // save new symbol to updateCoins list
         if (updateCoins.indexOf(currentSymbol) === -1) {
           updateCoins.push(currentSymbol)

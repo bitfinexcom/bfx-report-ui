@@ -6,7 +6,7 @@ const POSITIONS_ENTRIES_PROPS = PropTypes.shape({
   liquidationPrice: PropTypes.number,
   marginFunding: PropTypes.number,
   marginFundingType: PropTypes.number,
-  mtsUpdate: PropTypes.number.isRequired,
+  mtsUpdate: PropTypes.number,
   pair: PropTypes.string.isRequired,
   pl: PropTypes.number,
   plPerc: PropTypes.number,

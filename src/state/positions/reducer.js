@@ -1,5 +1,7 @@
 // data format https://github.com/bitfinexcom/bfx-api-node-models/blob/master/lib/position_hist.js
-import { formatInternalSymbol, formatSymbolToPair } from 'state/symbols/utils'
+import {
+  formatInternalSymbol, formatSymbolToPair, mapSymbol, mapPair,
+} from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -50,7 +52,7 @@ export function positionsReducer(state = initialState, action) {
           status,
           symbol,
         } = entry
-        const internalPair = formatInternalSymbol(symbol)
+        const internalPair = mapPair(formatInternalSymbol(symbol))
         // save new pair to updatePairs list
         if (updatePairs.indexOf(internalPair) === -1) {
           updatePairs.push(internalPair)
@@ -63,7 +65,7 @@ export function positionsReducer(state = initialState, action) {
         }
         return {
           id,
-          pair: formatSymbolToPair(symbol),
+          pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
           amount,
           leverage,
           marginFunding,

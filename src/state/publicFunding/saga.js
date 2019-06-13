@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbols } from 'state/symbols/utils'
+import { formatRawSymbols, mapRequestSymbols, mapSymbol } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -31,19 +31,18 @@ function getReqPublicFunding({
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
   if (targetSymbol) {
-    params.symbol = formatRawSymbols(targetSymbol)
+    params.symbol = formatRawSymbols(mapRequestSymbols(targetSymbol, true))
   }
   return makeFetchCall('getPublicTrades', auth, params)
 }
 
 function* fetchPublicFunding({ payload: symbol }) {
   try {
-    const urlSymbol = symbol && symbol.toLowerCase()
     let targetSymbol = yield select(getTargetSymbol)
     // set symbol from url
-    if (urlSymbol && urlSymbol !== targetSymbol) {
-      yield put(actions.setTargetSymbol(urlSymbol))
-      targetSymbol = urlSymbol
+    if (symbol && symbol !== targetSymbol) {
+      yield put(actions.setTargetSymbol(mapSymbol(symbol)))
+      targetSymbol = symbol
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)

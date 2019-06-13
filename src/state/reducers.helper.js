@@ -1,3 +1,4 @@
+import symbolMap from 'state/symbols/map'
 import queryTypes from 'state/query/constants'
 import { getFilterType, getPageSize } from 'state/query/utils'
 
@@ -141,6 +142,12 @@ export function setSymbols(state, payload, initialState) {
   }
 }
 
+// 'BAB from wallet exchange' -> 'BCH from wallet exchange'
+export const mapDescription = (description) => {
+  const mapKeys = Object.keys(symbolMap)
+  return mapKeys.reduce((desc, symbol) => desc.replace(new RegExp(symbol, 'g'), symbolMap[symbol]), description)
+}
+
 /* pairs */
 export function addPair(state, payload, initialState) {
   return state.targetPairs.includes(payload)
@@ -196,5 +203,6 @@ export default {
   removeSymbol,
   setPairs,
   setSymbols,
+  mapDescription,
   setTimeRange,
 }

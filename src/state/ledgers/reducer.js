@@ -13,8 +13,10 @@ import {
   removeSymbol,
   setQueryLimit,
   setSymbols,
+  mapDescription,
   setTimeRange,
 } from 'state/reducers.helper'
+import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
@@ -51,25 +53,24 @@ export function ledgersReducer(state = initialState, action) {
           mts,
           wallet,
         } = entry
+        const mappedCurrency = mapSymbol(currency)
         // save new symbol to updateCoins list
-        if (updateCoins.indexOf(currency) === -1) {
-          updateCoins.push(currency)
+        if (updateCoins.indexOf(mappedCurrency) === -1) {
+          updateCoins.push(mappedCurrency)
         }
         // log smallest mts
-        if (nextPage === false
-          && (!smallestMts || smallestMts > mts)
-        ) {
+        if (nextPage === false && (!smallestMts || smallestMts > mts)) {
           smallestMts = mts
         }
         return {
           id,
-          currency,
+          currency: mappedCurrency,
           mts,
           amount,
           amountUsd,
           balance,
           balanceUsd,
-          description,
+          description: mapDescription(description),
           wallet,
         }
       })

@@ -10,10 +10,11 @@ import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { getSymbolsURL, getSymbolsFromUrlParam } from 'state/symbols/utils'
+import {
+  getSymbolsURL, getSymbolsFromUrlParam, mapSymbol, mapRequestSymbols,
+} from 'state/symbols/utils'
 import { getPageSize } from 'state/query/utils'
 import { fetchNext } from 'state/sagas.helper'
-
 import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
@@ -31,8 +32,8 @@ function getReqLedgers({
   queryLimit,
 }) {
   const params = getTimeFrame(query, smallestMts)
-  if (targetSymbols.length > 0) {
-    params.symbol = targetSymbols
+  if (targetSymbols.length) {
+    params.symbol = mapRequestSymbols(targetSymbols)
   }
   if (queryLimit) {
     params.limit = queryLimit
@@ -52,7 +53,7 @@ function* fetchLedgers({ payload: symbol }) {
     const symbolsUrl = getSymbolsURL(targetSymbols)
     // set symbol from url
     if (symbol && symbol !== symbolsUrl) {
-      targetSymbols = getSymbolsFromUrlParam(symbol)
+      targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
       yield put(actions.setTargetSymbols(targetSymbols))
     }
     const auth = yield select(selectAuth)

@@ -41,9 +41,7 @@ export function publicFundingReducer(state = initialState, action) {
           rate,
         } = entry
         // log smallest mts
-        if (nextPage === false
-          && (!smallestMts || smallestMts > mts)
-        ) {
+        if (nextPage === false && (!smallestMts || smallestMts > mts)) {
           smallestMts = mts
         }
         return {

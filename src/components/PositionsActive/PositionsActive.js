@@ -34,10 +34,9 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 class PositionsActive extends PureComponent {
   componentDidMount() {
-    const { loading, fetchActivepositions, match } = this.props
+    const { loading, fetchActivepositions } = this.props
     if (loading) {
-      const pair = (match.params && match.params.pair) || ''
-      fetchActivepositions(pair)
+      fetchActivepositions()
     }
   }
 
