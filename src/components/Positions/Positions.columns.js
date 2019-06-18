@@ -125,7 +125,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].amount,
     },
     {
-      id: 'basesPrice',
+      id: 'basePrice',
       name: 'positions.column.base-price',
       width: 100,
       renderer: (rowIndex) => {
@@ -140,7 +140,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].basesPrice,
+      copyText: rowIndex => filteredData[rowIndex].basePrice,
     },
     ...ACTIVE_POSITIONS_COLS,
     {
