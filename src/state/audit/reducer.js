@@ -37,6 +37,7 @@ export function positionsAuditReducer(state = initialState, action) {
       const entries = res.map((entry) => {
         const {
           amount,
+          basesPrice,
           id,
           leverage,
           marginFunding,
@@ -56,6 +57,7 @@ export function positionsAuditReducer(state = initialState, action) {
           id,
           pair: formatSymbolToPair(symbol),
           amount,
+          basesPrice,
           leverage,
           marginFunding,
           marginFundingType,
