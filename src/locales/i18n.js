@@ -9,16 +9,23 @@ import { initReactI18next } from 'react-i18next'
 
 export const LANGUAGES = {
   en: 'en-US',
-  // RU: 'ru',
-  // ZH_CN: 'zh-CN',
+  ru: 'ru',
+  cn: 'zh-CN',
   tw: 'zh-TW',
+}
+
+export const LANGUAGE_NAMES = {
+  en: 'English',
+  ru: 'Русский',
+  cn: '中文 (简化)',
+  tw: '中文 (繁體)',
 }
 
 // email templates language mapping
 export const LANGUAGES_MAP = {
   en: 'en',
-  // ru: 'ru',
-  // cn: 'zh-CN',
+  ru: 'ru',
+  cn: 'zh-CN',
   tw: 'zh-TW',
 }
 
@@ -65,4 +72,5 @@ i18n
       escapeValue: false, // react already safes from xss
     },
   })
+
 export default i18n

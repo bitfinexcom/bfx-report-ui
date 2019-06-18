@@ -134,10 +134,6 @@
   },
   "header": {
     "logout": "Logout",
-    "lang": {
-      "en": "English",
-      "tw": "中文 (繁體)"
-    },
     "preferences": "Preferences",
     "help": "Help"
   },
@@ -312,7 +308,7 @@
       "pair": "PAIR",
       "ask": "ASK",
       "bid": "BID",
-      "time": "Time"
+      "time": "TIME"
     }
   },
   "timeframe": {
