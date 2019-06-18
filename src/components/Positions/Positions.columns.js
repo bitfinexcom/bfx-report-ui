@@ -29,24 +29,6 @@ export default function getColumns(props) {
   const ACTIVE_POSITIONS_COLS = (target === MENU_POSITIONS_ACTIVE)
     ? [
       {
-        id: 'basesPrice',
-        name: 'positions.column.base-price',
-        width: 100,
-        renderer: (rowIndex) => {
-          const { basePrice } = filteredData[rowIndex]
-          const fixedPrice = fixedFloat(basePrice)
-          return (
-            <Cell
-              className='bitfinex-text-align-right'
-              tooltip={fixedPrice}
-            >
-              {fixedPrice}
-            </Cell>
-          )
-        },
-        copyText: rowIndex => filteredData[rowIndex].basesPrice,
-      },
-      {
         id: 'priceLiq',
         name: 'positions.column.liq-price',
         width: 100,
@@ -141,6 +123,24 @@ export default function getColumns(props) {
         )
       },
       copyText: rowIndex => filteredData[rowIndex].amount,
+    },
+    {
+      id: 'basesPrice',
+      name: 'positions.column.base-price',
+      width: 100,
+      renderer: (rowIndex) => {
+        const { basePrice } = filteredData[rowIndex]
+        const fixedPrice = fixedFloat(basePrice)
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedPrice}
+          >
+            {fixedPrice}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].basesPrice,
     },
     ...ACTIVE_POSITIONS_COLS,
     {
