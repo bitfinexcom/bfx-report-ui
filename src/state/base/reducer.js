@@ -1,3 +1,4 @@
+import moment from 'moment-timezone'
 import authTypes from 'state/auth/constants'
 
 import types from './constants'
@@ -13,6 +14,7 @@ const initialState = {
   queryLimit: 0,
   theme: types.DEFAULT_THEME,
   timezone: '',
+  inputTimezone: moment.tz.guess(),
   milliseconds: false,
 }
 
@@ -58,6 +60,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         timezone: payload,
+      }
+    case types.SET_DISPLAY_TIMEZONE:
+      return {
+        ...state,
+        inputTimezone: payload,
       }
     case types.SET_DATE_FORMAT:
       return {

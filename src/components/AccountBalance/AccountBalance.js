@@ -8,9 +8,9 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
-import { DateInput, TimePrecision } from '@blueprintjs/datetime'
 import _sortBy from 'lodash/sortBy'
 
+import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import LineChart from 'ui/Charts/LineChart'
@@ -18,10 +18,6 @@ import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeframeSelector from 'ui/TimeframeSelector/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
-import {
-  momentFormatter, DEFAULT_DATETIME_FORMAT,
-} from 'state/utils'
-import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './AccountBalance.props'
 
@@ -83,12 +79,9 @@ class AccountBalance extends PureComponent {
       loading,
       refresh,
       t,
-      timezone,
     } = this.props
     const { start, end, timeframe } = this.state
     const hasNewTime = this.hasNewTime()
-    const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
-    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
 
     const { chartData, presentCurrencies } = parseChartData({
       data: _sortBy(entries, ['mts']),
@@ -106,11 +99,9 @@ class AccountBalance extends PureComponent {
           position={Position.TOP}
         >
           <DateInput
-            formatDate={formatDate}
-            parseDate={parseDate}
             onChange={date => this.handleDateChange('start', date)}
             value={start}
-            timePrecision={timePrecision}
+            daysOnly
           />
         </Tooltip>
         {' '}
@@ -123,11 +114,9 @@ class AccountBalance extends PureComponent {
           position={Position.TOP}
         >
           <DateInput
-            formatDate={formatDate}
-            parseDate={parseDate}
             onChange={date => this.handleDateChange('end', date)}
             value={end}
-            timePrecision={timePrecision}
+            daysOnly
           />
         </Tooltip>
         {' '}

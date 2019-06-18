@@ -123,7 +123,7 @@ class Main extends PureComponent {
       isFrameworkOpen,
       location,
       menuMode,
-      timezone,
+      inputTimezone,
     } = this.props
     const {
       endDate,
@@ -331,7 +331,7 @@ class Main extends PureComponent {
           startQuery={this.startQuery}
           startDate={startDate}
           endDate={endDate}
-          timezone={timezone}
+          timezone={inputTimezone}
         />
         <ExportDialog
           type={target}

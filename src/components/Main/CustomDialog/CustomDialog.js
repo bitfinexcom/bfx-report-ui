@@ -31,29 +31,20 @@ class CustomDialog extends PureComponent {
       return returnVal
     }
 
-    const todayStart = new Date()
-    todayStart.setHours(0, 0, 0)
-    const yesterdayStart = makeDate((d) => {
-      d.setDate(d.getDate() - 2)
-      d.setHours(0, 0, 0)
-    })
-    const yesterdayEnd = makeDate((d) => {
-      d.setDate(d.getDate() - 2)
-      d.setHours(23, 59, 59)
-    })
-    const oneWeekAgo = makeDate(d => d.setDate(d.getDate() - 7))
+    const pastDay = makeDate(d => d.setDate(d.getDate() - 1))
+    const twoWeeksAgo = makeDate(d => d.setDate(d.getDate() - 14))
     const oneMonthAgo = makeDate(d => d.setMonth(d.getMonth() - 1))
     const threeMonthsAgo = makeDate(d => d.setMonth(d.getMonth() - 3))
     const oneYearAgo = makeDate(d => d.setFullYear(d.getFullYear() - 1))
     const twoYearsAgo = makeDate(d => d.setFullYear(d.getFullYear() - 2))
+
     const currentYearStart = new Date(today.getFullYear(), 0, 1)
     const lastYearStart = new Date(today.getFullYear() - 1, 0, 1)
     const lastYearEnd = new Date(today.getFullYear() - 1, 11, 31, 23, 59, 59)
 
     return [
-      this.createShortcut(t('timeframe.today'), [todayStart, today]),
-      this.createShortcut(t('timeframe.yesterday'), [yesterdayStart, yesterdayEnd]),
-      this.createShortcut(t('timeframe.past_week'), [oneWeekAgo, today]),
+      this.createShortcut(t('timeframe.24h'), [pastDay, today]),
+      this.createShortcut(t('timeframe.2w'), [twoWeeksAgo, today]),
       this.createShortcut(t('timeframe.past_month'), [oneMonthAgo, today]),
       this.createShortcut(t('timeframe.past_3m'), [threeMonthsAgo, today]),
       this.createShortcut(t('timeframe.past_year'), [oneYearAgo, today]),

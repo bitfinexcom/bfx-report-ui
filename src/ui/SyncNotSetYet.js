@@ -16,9 +16,7 @@ class SyncNotSetYet extends PureComponent {
         title={t('preferences.sync.notset')}
         description={acceptSymbol ? t('preferences.sync.symbol-description') : t('preferences.sync.description')}
       >
-        {
-        acceptSymbol ? <SyncSymbolPrefButton textOnly /> : <SyncPrefButton textOnly />
-      }
+        {acceptSymbol ? <SyncSymbolPrefButton textOnly /> : <SyncPrefButton textOnly />}
       </NonIdealState>
     )
   }

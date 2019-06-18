@@ -8,15 +8,14 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
-import { DateInput, TimePrecision } from '@blueprintjs/datetime'
 
+import DateInput from 'ui/DateInput'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import queryConstants from 'state/query/constants'
-import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
 import { isValidTimeStamp } from 'state/query/utils'
 import { platform } from 'var/config'
 
@@ -69,7 +68,6 @@ class Wallets extends PureComponent {
       loading,
       refresh,
       t,
-      timezone,
     } = this.props
     const { timestamp } = this.state
     const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
@@ -82,8 +80,6 @@ class Wallets extends PureComponent {
     const marginRows = marginData.length
     const fundingRows = fundingData.length
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
-    const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
-    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
     const walletsTitle = platform.showSyncMode ? 'wallets.title' : 'wallets.title_beta'
 
     const renderTimeSelection = (
@@ -97,13 +93,7 @@ class Wallets extends PureComponent {
           position={Position.TOP}
           usePortal
         >
-          <DateInput
-            formatDate={formatDate}
-            parseDate={parseDate}
-            onChange={this.handleDateChange}
-            value={timestamp}
-            timePrecision={timePrecision}
-          />
+          <DateInput onChange={this.handleDateChange} value={timestamp} />
         </Tooltip>
         <Button
           onClick={this.handleQuery}

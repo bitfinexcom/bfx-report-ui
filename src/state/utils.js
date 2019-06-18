@@ -177,7 +177,14 @@ export function momentFormatter(format, timezone) {
     }
 }
 
+export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD'
 export const DEFAULT_DATETIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'
+
+export const momentFormatterDays = () => ({
+  formatDate: date => moment(date).format(DEFAULT_DATE_FORMAT),
+  parseDate: str => moment.utc(str, 'YYYY-MM-DD 00:00:00').toDate(),
+})
+
 
 export function getSideMsg(side) {
   switch (side) {
@@ -211,6 +218,7 @@ export default {
   generateUrl,
   isValidateType,
   momentFormatter,
+  momentFormatterDays,
   postJsonfetch,
   timeOffset: memoizeOne(timeOffset),
 }

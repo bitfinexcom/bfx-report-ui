@@ -8,18 +8,16 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
-import { DateInput, TimePrecision } from '@blueprintjs/datetime'
 import _keys from 'lodash/keys'
 import _sortBy from 'lodash/sortBy'
 
+import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import PieChart from 'ui/Charts/PieChart'
-import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
 import { isValidTimeStamp } from 'state/query/utils'
-import { platform } from 'var/config'
 
 import getColumns from './ConcentrationRisk.columns'
 import { propTypes, defaultProps } from './ConcentrationRisk.props'
@@ -88,12 +86,9 @@ class ConcentrationRisk extends PureComponent {
       loading,
       refresh,
       t,
-      timezone,
     } = this.props
     const { timestamp } = this.state
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
-    const timePrecision = platform.showSyncMode ? TimePrecision.SECOND : undefined
-    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
 
     const filteredData = entries.filter(entry => entry.balanceUsd)
 
@@ -115,13 +110,7 @@ class ConcentrationRisk extends PureComponent {
           position={Position.TOP}
           usePortal
         >
-          <DateInput
-            formatDate={formatDate}
-            parseDate={parseDate}
-            onChange={this.handleDateChange}
-            value={timestamp}
-            timePrecision={timePrecision}
-          />
+          <DateInput onChange={this.handleDateChange} value={timestamp} />
         </Tooltip>
         <Button
           onClick={this.handleQuery}

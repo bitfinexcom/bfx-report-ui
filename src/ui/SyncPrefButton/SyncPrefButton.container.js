@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { setSyncPref } from 'state/sync/actions'
 import { getStartTime, getSyncMode, getSyncPairs } from 'state/sync/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
-import { getTimezone } from 'state/base/selectors'
 
 import SyncPrefButton from './SyncPrefButton'
 
@@ -17,7 +16,6 @@ const mapStateToProps = (state = {}) => {
     syncMode: getSyncMode(state),
     syncPairs: pairs,
     startTime: getStartTime(state) || new Date(start).getTime(),
-    timezone: getTimezone(state),
   }
 }
 
