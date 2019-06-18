@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 const POSITIONS_ENTRIES_PROPS = PropTypes.shape({
   amount: PropTypes.number,
-  basesPrice: PropTypes.number,
+  basePrice: PropTypes.number,
   liquidationPrice: PropTypes.number,
   marginFunding: PropTypes.number,
   marginFundingType: PropTypes.number,
