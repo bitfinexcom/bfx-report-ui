@@ -7,7 +7,7 @@ import {
 } from 'state/base/actions'
 import { checkAuth } from 'state/auth/actions'
 import { setCustomTimeRange } from 'state/query/actions'
-import { getParsedUrlParams, getNoAuthUrlString, isValidTimezone } from 'state/utils'
+import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 import { isSynched } from 'state/sync/saga'
 import { platform } from 'var/config'
 
@@ -23,6 +23,8 @@ function* uiLoaded() {
     authToken, apiKey, apiSecret, timezone, range,
   } = parsed
 
+  removeUrlParams(['timezone', 'authToken', 'apiKey', 'apiSecret'])
+
   // handle custom timezone
   if (timezone && isValidTimezone(timezone)) {
     yield put(setTimezone(timezone))
@@ -36,12 +38,6 @@ function* uiLoaded() {
 
   // handle authToken
   if (authToken || (apiKey && apiSecret)) {
-    window.history.pushState(null, null,
-      window.location.href.replace(
-        window.location.search,
-        getNoAuthUrlString(window.location.search),
-      ))
-
     if (authToken) {
       yield put(setAuthToken(authToken))
     }

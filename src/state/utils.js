@@ -1,7 +1,8 @@
 import moment from 'moment-timezone'
 import queryString from 'query-string'
-import _omit from 'lodash/omit'
 import memoizeOne from 'memoize-one'
+import _omit from 'lodash/omit'
+import _castArray from 'lodash/castArray'
 
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
@@ -100,6 +101,16 @@ export function checkFetch(prevProps, props, type) {
   if (loading && loading !== prevLoading) {
     fetch()
   }
+}
+
+export const removeUrlParams = (params) => {
+  const arrayParams = _castArray(params)
+  const currentUrlParams = window.location.search
+  const updatedParams = _omit(queryString.parse(currentUrlParams), arrayParams)
+  const nextUrlParams = queryString.stringify(updatedParams, { encode: false })
+  const updatedQuery = nextUrlParams ? `?${nextUrlParams}` : ''
+
+  window.history.pushState(null, null, window.location.href.replace(currentUrlParams, updatedQuery))
 }
 
 // remove authToken param from url but keep others
@@ -223,5 +234,6 @@ export default {
   momentFormatter,
   momentFormatterDays,
   postJsonfetch,
+  removeUrlParams,
   timeOffset: memoizeOne(timeOffset),
 }
