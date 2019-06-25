@@ -79,6 +79,8 @@ export function timeOffset(timezone) {
     : moment.tz(moment.tz.guess()).format('Z')
 }
 
+export const isValidTimezone = timezone => !!moment.tz.zone(timezone)
+
 export function isValidateType(type) {
   return TYPE_WHITELIST.includes(type)
 }
@@ -216,6 +218,7 @@ export default {
   getParsedUrlParams,
   getSideMsg,
   generateUrl,
+  isValidTimezone,
   isValidateType,
   momentFormatter,
   momentFormatterDays,

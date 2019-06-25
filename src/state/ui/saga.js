@@ -3,11 +3,11 @@ import {
 } from 'redux-saga/effects'
 
 import {
-  setApiKey, setApiSecret, setAuthToken, updateTheme,
+  setApiKey, setApiSecret, setAuthToken, setTimezone, updateTheme,
 } from 'state/base/actions'
 import { checkAuth } from 'state/auth/actions'
 import { setCustomTimeRange } from 'state/query/actions'
-import { getParsedUrlParams, getNoAuthUrlString } from 'state/utils'
+import { getParsedUrlParams, getNoAuthUrlString, isValidTimezone } from 'state/utils'
 import { isSynched } from 'state/sync/saga'
 import { platform } from 'var/config'
 
@@ -20,14 +20,20 @@ function* uiLoaded() {
 
   const parsed = getParsedUrlParams(window.location.search)
   const {
-    authToken, apiKey, apiSecret, range,
+    authToken, apiKey, apiSecret, timezone, range,
   } = parsed
+
+  // handle custom timezone
+  if (timezone && isValidTimezone(timezone)) {
+    yield put(setTimezone(timezone))
+  }
 
   // handle custom time range
   if (range && range.indexOf('-') > -1) {
     const [startStr, endStr] = range.split('-')
     yield put(setCustomTimeRange(parseInt(startStr, 10), parseInt(endStr, 10)))
   }
+
   // handle authToken
   if (authToken || (apiKey && apiSecret)) {
     window.history.pushState(null, null,
