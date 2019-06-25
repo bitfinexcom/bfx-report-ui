@@ -22,7 +22,7 @@ import {
 import {
   checkFetch,
   getCurrentEntries,
-  getNoAuthTokenUrlString,
+  getNoAuthUrlString,
 } from 'state/utils'
 
 import getColumns from 'components/Positions/Positions.columns'
@@ -49,14 +49,14 @@ class PositionsActive extends PureComponent {
     const { history } = this.props
     const id = e.target.getAttribute('value')
     history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/`
-      + `${id}${getNoAuthTokenUrlString(history.location.search)}`)
+      + `${id}${getNoAuthUrlString(history.location.search)}`)
   }
 
   jumpToPositions = (e) => {
     e.preventDefault()
     const { history } = this.props
     history.push(`${getPath(queryConstants.MENU_POSITIONS)}`
-      + `${getNoAuthTokenUrlString(history.location.search)}`)
+      + `${getNoAuthUrlString(history.location.search)}`)
   }
 
   render() {

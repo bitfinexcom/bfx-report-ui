@@ -7,9 +7,10 @@ export const getIsShown = state => getAuth(state).isShown
 export const getIsLoading = state => getAuth(state).loading
 
 export function selectAuth(state) {
-  return getAuthToken(state)
+  const authToken = getAuthToken(state)
+  return authToken
     ? {
-      authToken: getAuthToken(state),
+      authToken,
     }
     : {
       apiKey: getApiKey(state),

@@ -101,9 +101,9 @@ export function checkFetch(prevProps, props, type) {
 }
 
 // remove authToken param from url but keep others
-export function getNoAuthTokenUrlString(searchUrl) {
+export function getNoAuthUrlString(searchUrl) {
   const parsed = queryString.parse(searchUrl)
-  const params = _omit(parsed, 'authToken')
+  const params = _omit(parsed, ['authToken', 'apiKey', 'apiSecret'])
   const queries = queryString.stringify(params, { encode: false })
   return queries ? `?${queries}` : ''
 }
@@ -115,7 +115,7 @@ export function generateUrl(type, params, symbols) {
     console.error('Unsupport route type ', type)
     return ''
   }
-  const noAuthTokenParams = getNoAuthTokenUrlString(params)
+  const noAuthTokenParams = getNoAuthUrlString(params)
   return (symbols && symbols.length)
     ? `${getPath(type)}/${getSymbolsURL(symbols)}${noAuthTokenParams}`
     : `${getPath(type)}${noAuthTokenParams}`
@@ -212,7 +212,7 @@ export default {
   formatTime,
   getAuth,
   getCurrentEntries,
-  getNoAuthTokenUrlString,
+  getNoAuthUrlString,
   getParsedUrlParams,
   getSideMsg,
   generateUrl,
