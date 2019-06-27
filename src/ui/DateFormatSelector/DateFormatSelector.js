@@ -8,6 +8,7 @@ import {
   PopoverInteractionKind,
   Position,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import types from 'state/base/constants'
 
@@ -45,7 +46,7 @@ class DateFormatSelector extends PureComponent {
         position={Position.BOTTOM}
       >
         <Button
-          rightIcon='caret-down'
+          rightIcon={IconNames.CARET_DOWN}
           text={dateFormat}
         />
       </Popover>

@@ -9,6 +9,7 @@ import {
   Position,
 } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
+import { IconNames } from '@blueprintjs/icons'
 
 import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
 
@@ -94,7 +95,7 @@ class CustomDialog extends PureComponent {
 
     return isCustomOpen ? (
       <Dialog
-        icon='calendar'
+        icon={IconNames.CALENDAR}
         onClose={handleCustomDialogClose}
         title={t('timeframe.custom.title')}
         autoFocus

@@ -6,6 +6,7 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import DateFormatSelector from 'ui/DateFormatSelector'
 import Loading from 'ui/Loading'
@@ -174,7 +175,7 @@ class ExportDialog extends PureComponent {
 
     return (
       <Dialog
-        icon='cloud-download'
+        icon={IconNames.CLOUD_DOWNLOAD}
         onClose={handleExportDialogClose}
         title={t('download.title')}
         autoFocus

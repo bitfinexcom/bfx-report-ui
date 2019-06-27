@@ -1,3 +1,4 @@
+import { IconNames } from '@blueprintjs/icons'
 
 import types from './constants'
 
@@ -22,12 +23,12 @@ export function getTooltipMessageId(mode) {
 export function getIcon(mode) {
   switch (mode) {
     case MODE_ONLINE:
-      return 'pulse'
+      return IconNames.PULSE
     case MODE_OFFLINE:
-      return 'updated'
+      return IconNames.UPDATED
     case MODE_SYNCING:
     default:
-      return 'refresh'
+      return IconNames.REFRESH
   }
 }
 

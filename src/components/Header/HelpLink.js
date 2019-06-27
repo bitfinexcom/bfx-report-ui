@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
+import { IconNames } from '@blueprintjs/icons'
 
 import {
   Button,
@@ -33,7 +34,7 @@ class HelpLink extends PureComponent {
         <Button
           className='bitfinex-help'
           minimal
-          icon='help'
+          icon={IconNames.HELP}
           onClick={HelpLink.handleHelp}
         />
       </Tooltip>

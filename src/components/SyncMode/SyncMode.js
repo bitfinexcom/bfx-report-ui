@@ -9,6 +9,7 @@ import {
   Tooltip,
   Intent,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import mode from 'state/sync/constants'
 import { getIcon, getTooltipMessageId } from 'state/sync/utils'
@@ -67,7 +68,7 @@ class SyncMode extends PureComponent {
     const { isSyncDialogOpen } = this.state
     const icon = getIcon(syncMode)
 
-    const renderButton = icon !== 'refresh'
+    const renderButton = icon !== IconNames.REFRESH
       ? (
         <Button
           className='bitfinex-help'

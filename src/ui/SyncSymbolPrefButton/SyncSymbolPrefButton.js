@@ -9,6 +9,7 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import DateInput from 'ui/DateInput'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
@@ -17,8 +18,6 @@ import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/util
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './SyncSymbolPrefButton.props'
-
-const ICON = 'issue-new'
 
 const initState = {
   isOpen: false,
@@ -112,7 +111,7 @@ class SyncSymbolPrefButton extends PureComponent {
             usePortal={false}
           >
             <Button
-              icon={textOnly ? null : ICON}
+              icon={textOnly ? null : IconNames.ISSUE_NEW}
               onClick={this.handleOpen}
               intent={Intent.PRIMARY}
             >
@@ -120,7 +119,7 @@ class SyncSymbolPrefButton extends PureComponent {
             </Button>
           </Tooltip>
           <Dialog
-            icon={ICON}
+            icon={IconNames.ISSUE_NEW}
             onClose={this.handleClose}
             title={t('preferences.sync.title')}
             autoFocus

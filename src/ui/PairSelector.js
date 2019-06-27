@@ -6,6 +6,7 @@ import {
   MenuItem,
 } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
+import { IconNames } from '@blueprintjs/icons'
 
 import { formatPair } from 'state/symbols/utils'
 
@@ -49,7 +50,7 @@ class PairSelector extends PureComponent {
       >
         <Button
           text={formatPair(currentPair)}
-          rightIcon='caret-down'
+          rightIcon={IconNames.CARET_DOWN}
           disabled={!pairs.length}
         />
       </Select>

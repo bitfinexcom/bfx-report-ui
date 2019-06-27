@@ -9,6 +9,7 @@ import {
   PopoverInteractionKind,
   Position,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import { LANGUAGES } from 'locales/i18n'
 
@@ -57,7 +58,7 @@ class PrefMenu extends PureComponent {
       >
         <Button
           minimal
-          icon='person'
+          icon={IconNames.PERSON}
         />
       </Popover>
     )
