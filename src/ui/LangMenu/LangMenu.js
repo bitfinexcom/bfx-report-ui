@@ -31,6 +31,7 @@ class LangMenu extends PureComponent {
       <Menu>
         {_keys(LANGUAGE_NAMES).map(language => (
           <MenuItem
+            key={language}
             text={LANGUAGE_NAMES[language]}
             onClick={e => this.switchLang(language, e)}
             intent={locale === language ? Intent.PRIMARY : undefined}
