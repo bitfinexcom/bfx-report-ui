@@ -1,6 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import classNames from 'classnames'
 
 import AccountBalance from 'components/AccountBalance'
 import AverageWinLoss from 'components/AverageWinLoss'
@@ -23,7 +22,6 @@ import Trades from 'components/Trades'
 import Wallets from 'components/Wallets'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
-import baseType from 'state/base/constants'
 import { getPath, getTarget } from 'state/query/utils'
 import ToggleMenu from 'ui/ToggleMenu'
 import { platform } from 'var/config'
@@ -132,21 +130,6 @@ class Main extends PureComponent {
     } = this.state
     const target = getTarget(location.pathname)
 
-    const datasetClass = menuMode === baseType.MENU_MODE_ICON
-      ? classNames(
-        'col-xs-12',
-        'col-sm-12',
-        'col-md-12',
-        'col-lg-11',
-        'col-xl-11',
-      ) : classNames(
-        'col-xs-12',
-        'col-sm-12',
-        'col-md-12',
-        'col-lg-9',
-        'col-xl-10',
-      )
-
     return authStatus && !authIsShown ? (
       <div className='row'>
         <ToggleMenu
@@ -155,7 +138,7 @@ class Main extends PureComponent {
           history={history}
           menuMode={menuMode}
         />
-        <div className={datasetClass}>
+        <div className='bitfinex-dataset'>
           <Switch>
             <Route
               exact
