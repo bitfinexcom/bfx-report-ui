@@ -6,6 +6,7 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 const RefreshButton = ({ handleClickRefresh, t }) => (
   <Tooltip
@@ -18,7 +19,7 @@ const RefreshButton = ({ handleClickRefresh, t }) => (
     usePortal={false}
   >
     <Button
-      icon='refresh'
+      icon={IconNames.REFRESH}
       onClick={handleClickRefresh}
     />
   </Tooltip>

@@ -6,6 +6,7 @@ import {
   MenuItem,
 } from '@blueprintjs/core'
 import { Select } from '@blueprintjs/select'
+import { IconNames } from '@blueprintjs/icons'
 
 class SymbolSelector extends PureComponent {
   render() {
@@ -52,7 +53,7 @@ class SymbolSelector extends PureComponent {
       >
         <Button
           text={currentCoin.toUpperCase()}
-          rightIcon='caret-down'
+          rightIcon={IconNames.CARET_DOWN}
           disabled={!coins.length}
         />
       </Select>

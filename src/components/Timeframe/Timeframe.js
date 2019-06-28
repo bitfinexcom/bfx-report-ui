@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import { MenuItem, PopoverInteractionKind } from '@blueprintjs/core'
 import queryString from 'query-string'
+import { MenuItem, PopoverInteractionKind } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import constants from 'state/query/constants'
 import baseType from 'state/base/constants'
@@ -69,7 +70,7 @@ class Timeframe extends PureComponent {
 
     return (
       <MenuItem
-        icon='calendar'
+        icon={IconNames.CALENDAR}
         text={menuMode === baseType.MENU_MODE_ICON ? '' : timeSpan}
         title={menuMode === baseType.MENU_MODE_ICON ? timeSpan : undefined}
         className='bitfinex-dropdown'

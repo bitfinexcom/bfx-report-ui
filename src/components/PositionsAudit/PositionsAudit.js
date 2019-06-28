@@ -7,6 +7,7 @@ import {
   Intent,
   NonIdealState,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
@@ -80,7 +81,7 @@ class PositionsAudit extends PureComponent {
       return (
         <NonIdealState
           className='bitfinex-nonideal'
-          icon='numbered-list'
+          icon={IconNames.NUMBERED_LIST}
           title={t('paudit.noid.title')}
           description={t('paudit.noid.description')}
         >

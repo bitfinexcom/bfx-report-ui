@@ -62,7 +62,7 @@
     "react-test-renderer": "^16.8.6"
   },
   "scripts": {
-    "prepare": "node scripts/copyFiles",
+    "prepare": "node scripts/copyFiles && node scripts/handleBptIcons",
     "start": "npm run prepare && react-scripts start",
     "build": "npm run prepare && react-scripts build",
     "test": "react-scripts test --env=jsdom --modulePaths=src",

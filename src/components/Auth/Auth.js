@@ -8,6 +8,7 @@ import {
   Intent,
   NonIdealState,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import { platform } from 'var/config'
 // eslint-disable-next-line import/no-unresolved
@@ -98,7 +99,7 @@ class Auth extends PureComponent {
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <Button
                 name='check'
-                icon='key'
+                icon={IconNames.KEY}
                 intent={Intent.SUCCESS}
                 onClick={this.handleClick}
                 disabled={!apiKey || !apiSecret || loading}
@@ -113,7 +114,7 @@ class Auth extends PureComponent {
     ) : (
       <NonIdealState
         className='bitfinex-nonideal'
-        icon='key'
+        icon={IconNames.KEY}
         title={t('auth.nonideal.title')}
         description={t('auth.nonideal.description')}
       />

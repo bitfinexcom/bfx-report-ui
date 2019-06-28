@@ -1,6 +1,7 @@
 import React, { createRef, Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Button, Spinner } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import { isValidateType } from 'state/utils'
@@ -112,13 +113,13 @@ class Pagination extends PureComponent {
         <div className='bitfinex-pagination-group col-xs-12 col-sm-6'>
           <Button
             minimal
-            icon='double-chevron-left'
+            icon={IconNames.DOUBLE_CHEVRON_LEFT}
             onClick={prevClick}
             disabled={offset <= LIMIT || loading}
           />
           <Button
             minimal
-            icon='chevron-left'
+            icon={IconNames.CHEVRON_LEFT}
             onClick={this.backward}
             disabled={currentPage - 1 === 0 || loading}
           />
@@ -137,13 +138,13 @@ class Pagination extends PureComponent {
           {renderRestDots}
           <Button
             minimal
-            icon='chevron-right'
+            icon={IconNames.CHEVRON_RIGHT}
             onClick={this.forward}
             disabled={currentPage === pageLen || loading}
           />
           <Button
             minimal
-            rightIcon='double-chevron-right'
+            rightIcon={IconNames.DOUBLE_CHEVRON_RIGHT}
             onClick={this.fetchNext}
             disabled={!nextPage || loading}
           />

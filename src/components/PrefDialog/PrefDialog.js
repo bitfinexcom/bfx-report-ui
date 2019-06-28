@@ -8,6 +8,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 import { TimezonePicker } from '@blueprintjs/timezone'
+import { IconNames } from '@blueprintjs/icons'
 
 import { platform } from 'var/config'
 import DateFormatSelector from 'ui/DateFormatSelector'
@@ -91,7 +92,7 @@ class PrefDialog extends PureComponent {
 
     return (
       <Dialog
-        icon='person'
+        icon={IconNames.PERSON}
         onClose={handlePrefDialogClose}
         title={t('preferences.title')}
         autoFocus

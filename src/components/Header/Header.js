@@ -8,6 +8,7 @@ import {
   PopoverInteractionKind,
   Position,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import Status from 'components/Status'
 import PrefMenu from 'components/PrefMenu'
@@ -95,13 +96,13 @@ class Header extends PureComponent {
         >
           <Button
             minimal
-            icon='menu'
+            icon={IconNames.MENU}
           />
         </Popover>
         <span className='hidden-xs hidden-sm hidden-md'>
           <Button
             minimal
-            icon='menu'
+            icon={IconNames.MENU}
             onClick={this.handleToggleMenu}
           />
         </span>

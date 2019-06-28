@@ -10,6 +10,7 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import { propTypes, defaultProps } from './QueryLimitSelector.props'
 
@@ -64,7 +65,7 @@ class QueryLimitSelector extends PureComponent {
           position={Position.BOTTOM}
         >
           <Button
-            rightIcon='caret-down'
+            rightIcon={IconNames.CARET_DOWN}
             text={queryLimit}
           />
         </Popover>

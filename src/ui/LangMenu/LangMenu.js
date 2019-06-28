@@ -8,6 +8,7 @@ import {
   PopoverInteractionKind,
   Position,
 } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 import _keys from 'lodash/keys'
 
 import { LANGUAGE_NAMES } from 'locales/i18n'
@@ -46,7 +47,7 @@ class LangMenu extends PureComponent {
         position={Position.BOTTOM}
       >
         <Button
-          rightIcon='caret-down'
+          rightIcon={IconNames.CARET_DOWN}
           text={LANGUAGE_NAMES[locale]}
         />
       </Popover>
