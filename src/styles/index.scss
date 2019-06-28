@@ -126,6 +126,12 @@ body.#{$ns}-dark {
       color: #b57074;
     }
   }
+
+  .bp3-table-cell-ledger {
+    &-odd {
+      background-color: #2f3d48;
+    }
+  }
 }
 
 body.#{$ns}-light {
@@ -144,6 +150,12 @@ body.#{$ns}-light {
 
     &.bitfinex-red-text > .bitfinex-amount-fraction {
       color: #fb7e85;
+    }
+  }
+
+  .bp3-table-cell-ledger {
+    &-odd {
+      background-color: #f7f8ff;
     }
   }
 }
