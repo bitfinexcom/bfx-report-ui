@@ -20,7 +20,7 @@ import { getQueryLimit, getPageSize, getPath } from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  getNoAuthTokenUrlString,
+  getNoAuthUrlString,
 } from 'state/utils'
 import { platform } from 'var/config'
 
@@ -49,7 +49,7 @@ class PublicFunding extends PureComponent {
     const { history, targetSymbol, setTargetSymbol } = this.props
     if (symbol !== targetSymbol) {
       // show select symbol in url
-      history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${getNoAuthTokenUrlString(history.location.search)}`)
+      history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${getNoAuthUrlString(history.location.search)}`)
       setTargetSymbol(symbol)
     }
   }

@@ -1,7 +1,8 @@
 import moment from 'moment-timezone'
 import queryString from 'query-string'
-import _omit from 'lodash/omit'
 import memoizeOne from 'memoize-one'
+import _omit from 'lodash/omit'
+import _castArray from 'lodash/castArray'
 
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
@@ -79,6 +80,8 @@ export function timeOffset(timezone) {
     : moment.tz(moment.tz.guess()).format('Z')
 }
 
+export const isValidTimezone = timezone => !!moment.tz.zone(timezone)
+
 export function isValidateType(type) {
   return TYPE_WHITELIST.includes(type)
 }
@@ -100,10 +103,20 @@ export function checkFetch(prevProps, props, type) {
   }
 }
 
+export const removeUrlParams = (params) => {
+  const arrayParams = _castArray(params)
+  const currentUrlParams = window.location.search
+  const updatedParams = _omit(queryString.parse(currentUrlParams), arrayParams)
+  const nextUrlParams = queryString.stringify(updatedParams, { encode: false })
+  const updatedQuery = nextUrlParams ? `?${nextUrlParams}` : ''
+
+  window.history.pushState(null, null, window.location.href.replace(currentUrlParams, updatedQuery))
+}
+
 // remove authToken param from url but keep others
-export function getNoAuthTokenUrlString(searchUrl) {
+export function getNoAuthUrlString(searchUrl) {
   const parsed = queryString.parse(searchUrl)
-  const params = _omit(parsed, 'authToken')
+  const params = _omit(parsed, ['authToken', 'apiKey', 'apiSecret'])
   const queries = queryString.stringify(params, { encode: false })
   return queries ? `?${queries}` : ''
 }
@@ -115,7 +128,7 @@ export function generateUrl(type, params, symbols) {
     console.error('Unsupport route type ', type)
     return ''
   }
-  const noAuthTokenParams = getNoAuthTokenUrlString(params)
+  const noAuthTokenParams = getNoAuthUrlString(params)
   return (symbols && symbols.length)
     ? `${getPath(type)}/${getSymbolsURL(symbols)}${noAuthTokenParams}`
     : `${getPath(type)}${noAuthTokenParams}`
@@ -212,13 +225,15 @@ export default {
   formatTime,
   getAuth,
   getCurrentEntries,
-  getNoAuthTokenUrlString,
+  getNoAuthUrlString,
   getParsedUrlParams,
   getSideMsg,
   generateUrl,
+  isValidTimezone,
   isValidateType,
   momentFormatter,
   momentFormatterDays,
   postJsonfetch,
+  removeUrlParams,
   timeOffset: memoizeOne(timeOffset),
 }

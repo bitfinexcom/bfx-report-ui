@@ -32,7 +32,6 @@ const platforms = {
     showAuthPage: true,
     showSyncMode: true,
     showFrameworkMode: false,
-    autoAuth: true,
   },
 }
 

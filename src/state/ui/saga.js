@@ -2,10 +2,12 @@ import {
   call, take, put, takeLatest,
 } from 'redux-saga/effects'
 
-import { updateTheme } from 'state/base/actions'
-import { checkAuthWithToken, checkAuthWithLocalToken } from 'state/auth/actions'
+import {
+  setApiKey, setApiSecret, setAuthToken, setTimezone, updateTheme,
+} from 'state/base/actions'
+import { checkAuth } from 'state/auth/actions'
 import { setCustomTimeRange } from 'state/query/actions'
-import { getParsedUrlParams, getNoAuthTokenUrlString } from 'state/utils'
+import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 import { isSynched } from 'state/sync/saga'
 import { platform } from 'var/config'
 
@@ -17,23 +19,36 @@ function* uiLoaded() {
   yield put(updateTheme())
 
   const parsed = getParsedUrlParams(window.location.search)
-  const { authToken, range } = parsed
+  const {
+    authToken, apiKey, apiSecret, timezone, range,
+  } = parsed
+
+  removeUrlParams(['timezone', 'authToken', 'apiKey', 'apiSecret'])
+
+  // handle custom timezone
+  if (timezone && isValidTimezone(timezone)) {
+    yield put(setTimezone(timezone))
+  }
+
   // handle custom time range
   if (range && range.indexOf('-') > -1) {
     const [startStr, endStr] = range.split('-')
     yield put(setCustomTimeRange(parseInt(startStr, 10), parseInt(endStr, 10)))
   }
+
   // handle authToken
-  if (authToken) {
-    window.history.pushState(null, null,
-      window.location.href.replace(
-        window.location.search,
-        getNoAuthTokenUrlString(window.location.search),
-      ))
-    yield put(checkAuthWithToken(authToken))
-  } else {
-    yield put(checkAuthWithLocalToken())
+  if (authToken || (apiKey && apiSecret)) {
+    if (authToken) {
+      yield put(setAuthToken(authToken))
+    }
+
+    if (apiKey && apiSecret) {
+      yield put(setApiKey(apiKey))
+      yield put(setApiSecret(apiSecret))
+    }
   }
+
+  yield put(checkAuth())
 }
 
 export function* frameworkCheck() {

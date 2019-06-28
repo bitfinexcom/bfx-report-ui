@@ -25,7 +25,7 @@ import {
 import {
   checkFetch,
   getCurrentEntries,
-  getNoAuthTokenUrlString,
+  getNoAuthUrlString,
 } from 'state/utils'
 
 import getColumns from 'components/Positions/Positions.columns'
@@ -53,7 +53,7 @@ class PositionsAudit extends PureComponent {
   jumpToPositions = (e) => {
     e.preventDefault()
     const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS)}${getNoAuthTokenUrlString(history.location.search)}`)
+    history.push(`${getPath(queryConstants.MENU_POSITIONS)}${getNoAuthUrlString(history.location.search)}`)
   }
 
   render() {

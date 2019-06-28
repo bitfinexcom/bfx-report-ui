@@ -20,7 +20,7 @@ import { getQueryLimit, getPageSize, getPath } from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  getNoAuthTokenUrlString,
+  getNoAuthUrlString,
 } from 'state/utils'
 import { platform } from 'var/config'
 
@@ -49,7 +49,7 @@ class PublicTrades extends PureComponent {
     const { history, targetPair, setTargetPair } = this.props
     if (pair !== targetPair) {
       // show select pair in url
-      history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${getNoAuthTokenUrlString(history.location.search)}`)
+      history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${getNoAuthUrlString(history.location.search)}`)
       setTargetPair(pair)
     }
   }

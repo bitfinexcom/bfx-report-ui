@@ -5,10 +5,11 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import _keys from 'lodash/keys'
 
-import { setAuthToken, setTimezone } from 'state/base/actions'
+import { setTimezone } from 'state/base/actions'
 import { selectAuth } from 'state/auth/selectors'
-import { getAuthToken, getTimezone } from 'state/base/selectors'
+import { getTimezone } from 'state/base/selectors'
 import { getAuth, checkEmail, makeFetchCall } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { setOwnerEmail } from 'state/query/actions'
@@ -17,8 +18,6 @@ import { platform } from 'var/config'
 import types from './constants'
 import actions from './actions'
 
-const LOCAL_AUTHTOKEN = 'local'
-
 const getUsersTimeConf = auth => makeFetchCall('getUsersTimeConf', auth)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
@@ -26,9 +25,14 @@ const updateSyncErrorStatus = msg => updateErrorStatus({
   detail: JSON.stringify(msg),
 })
 
-function* checkAuth({ payload: flag }) {
+function* checkAuth() {
   try {
     const auth = yield select(selectAuth)
+    if (!_keys(auth).filter(key => auth[key]).length) {
+      yield put(actions.updateAuthStatus())
+      return
+    }
+
     const { result = false, error } = yield call(getAuth, auth)
     if (result) {
       yield put(updateSuccessStatus({
@@ -66,12 +70,21 @@ function* checkAuth({ payload: flag }) {
 
         yield put(actions.hideAuth())
       }
-    }
-    yield put(actions.updateAuthStatus(result))
+    } else {
+      const { authToken } = auth
 
-    if (result === false && flag === LOCAL_AUTHTOKEN) {
       yield put(actions.logout())
+
+      if (authToken) {
+        const { apiKey, apiSecret } = yield select(selectAuth)
+        if (apiKey && apiSecret) {
+          yield call(checkAuth)
+          return
+        }
+      }
     }
+
+    yield put(actions.updateAuthStatus(result))
 
     if (error) {
       yield put(updateErrorStatus({
@@ -85,28 +98,6 @@ function* checkAuth({ payload: flag }) {
   }
 }
 
-function* checkAuthWithToken({ payload: authToken }) {
-  try {
-    yield put(setAuthToken(authToken))
-    yield put(actions.checkAuth())
-  } catch (fail) {
-    yield put(updateSyncErrorStatus(fail))
-  }
-}
-
-function* checkAuthWithLocalToken() {
-  try {
-    const authToken = yield select(getAuthToken)
-    if (authToken) {
-      yield put(actions.checkAuth(LOCAL_AUTHTOKEN))
-    }
-  } catch (fail) {
-    yield put(updateSyncErrorStatus(fail))
-  }
-}
-
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
-  yield takeLatest(types.CHECK_AUTH_WITH_TOKEN, checkAuthWithToken)
-  yield takeLatest(types.CHECK_AUTH_WITH_LOCAL_TOKEN, checkAuthWithLocalToken)
 }
