@@ -331,7 +331,7 @@
     "past_week": "上星期",
     "past_year": "去年",
     "past_2y": "過去兩年",
-    "range_limit": "無法查詢實際日期後兩年以上的資訊",
+    "range_limit": "無法查詢實際日期後六年以上的資訊",
     "start-date-placeholder": "開始日期時間",
     "today": "今日",
     "year": "年"

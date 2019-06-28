@@ -57,9 +57,9 @@ class CustomDialog extends PureComponent {
   handleRangeChange = (range) => {
     const { updateWarningStatus, handleRangeChange } = this.props
     const [startDate] = range
-    const twoYearsPast = moment().add({ years: -2 })
+    const sixYearsPast = moment().add({ years: -6 })
 
-    if (twoYearsPast.isAfter(startDate)) {
+    if (sixYearsPast.isAfter(startDate)) {
       updateWarningStatus({
         id: 'status.warn',
         topic: 'timeframe.range_limit',
