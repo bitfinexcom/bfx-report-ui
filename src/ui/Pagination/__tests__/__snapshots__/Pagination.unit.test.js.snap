@@ -72,7 +72,7 @@ exports[`render correctly in 1 of 1 page 1`] = `
       placeholder={1}
     />
     pagination.of
-     
+     
     1
     
     <button
@@ -207,7 +207,7 @@ exports[`render correctly in 1 of 2 pages 1`] = `
       placeholder={1}
     />
     pagination.of
-     
+     
     2
     
     <button
@@ -341,12 +341,12 @@ exports[`render correctly in 1 of 4 pages 1`] = `
       placeholder={1}
     />
     pagination.of
-     
+     
     4
     <span>
       +
     </span>
-     
+     
     <button
       className="bp3-button bp3-minimal"
       onClick={[Function]}
@@ -476,7 +476,7 @@ exports[`render correctly in 2 of 2 pages 1`] = `
       placeholder={2}
     />
     pagination.of
-     
+     
     2
     
     <button
@@ -610,7 +610,7 @@ exports[`render correctly in 3 of 4 pages 1`] = `
       placeholder={3}
     />
     pagination.of
-     
+     
     4
     
     <button
@@ -743,7 +743,7 @@ exports[`render correctly in 4 of 4 pages 1`] = `
       placeholder={4}
     />
     pagination.of
-     
+     
     4
     
     <button
@@ -876,7 +876,7 @@ exports[`render correctly in 5 of 5 pages 1`] = `
       placeholder={5}
     />
     pagination.of
-     
+     
     5
     
     <button
@@ -1009,7 +1009,7 @@ exports[`render correctly in 5 of 7 pages 1`] = `
       placeholder={5}
     />
     pagination.of
-     
+     
     7
     
     <button
@@ -1141,12 +1141,12 @@ exports[`render correctly in 5 of 8 pages 1`] = `
       placeholder={5}
     />
     pagination.of
-     
+     
     8
     <span>
       +
     </span>
-     
+     
     <button
       className="bp3-button bp3-minimal"
       onClick={[Function]}
@@ -1275,7 +1275,7 @@ exports[`render correctly in 6 of 7 pages 1`] = `
       placeholder={6}
     />
     pagination.of
-     
+     
     7
     
     <button
@@ -1407,7 +1407,7 @@ exports[`render correctly in 9 of 9 pages 1`] = `
       placeholder={9}
     />
     pagination.of
-     
+     
     9
     
     <button
@@ -1542,7 +1542,7 @@ exports[`render correctly with 1 entry 1`] = `
       placeholder={1}
     />
     pagination.of
-     
+     
     1
     
     <button
@@ -1677,7 +1677,7 @@ exports[`render correctly with 35 entry 1`] = `
       placeholder={1}
     />
     pagination.of
-     
+     
     1
     
     <button
@@ -1812,7 +1812,7 @@ exports[`render trades correctly in 1 of 1 pages 1`] = `
       placeholder={1}
     />
     pagination.of
-     
+     
     1
     
     <button
@@ -1952,7 +1952,7 @@ exports[`render trades correctly in 1 of 2 pages 1`] = `
       placeholder={1}
     />
     pagination.of
-     
+     
     2
     
     <button
@@ -2090,7 +2090,7 @@ exports[`render trades correctly in 1 of 2 pages 2`] = `
       placeholder={2}
     />
     pagination.of
-     
+     
     2
     
     <button
@@ -2230,12 +2230,12 @@ exports[`render trades correctly in 1 of 12 pages 1`] = `
       placeholder={1}
     />
     pagination.of
-     
+     
     12
     <span>
       +
     </span>
-     
+     
     <button
       className="bp3-button bp3-minimal"
       onClick={[Function]}
@@ -2369,7 +2369,7 @@ exports[`render trades correctly in 11 of 12 pages 1`] = `
       placeholder={11}
     />
     pagination.of
-     
+     
     12
     
     <button
@@ -2506,7 +2506,7 @@ exports[`render trades correctly in 12 of 12 pages 1`] = `
       placeholder={12}
     />
     pagination.of
-     
+     
     12
     
     <button

@@ -65,7 +65,7 @@
     "prepare": "node scripts/copyFiles && node scripts/handleBptIcons",
     "start": "npm run prepare && react-scripts start",
     "build": "npm run prepare && react-scripts build",
-    "test": "react-scripts test --env=jsdom --modulePaths=src",
+    "test": "react-scripts test --env=jsdom --modulePaths=src --watchAll=false",
     "lint": "eslint src scripts --ignore-path .gitignore",
     "lintFix": "eslint src scripts --fix --ignore-path .gitignore"
   },
