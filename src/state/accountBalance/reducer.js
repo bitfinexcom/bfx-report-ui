@@ -18,12 +18,6 @@ export function balanceReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_BALANCE: {
-      if (!payload) {
-        return {
-          ...state,
-          dataReceived: true,
-        }
-      }
       return {
         ...state,
         dataReceived: true,

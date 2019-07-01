@@ -14,7 +14,7 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-function getReqBalance({
+export function getReqBalance({
   start,
   end,
   timeframe,
@@ -24,12 +24,13 @@ function getReqBalance({
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchAccountBalance({ payload }) {
+export function* fetchAccountBalance(action) {
   try {
+    const { payload } = action
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
       // stop loading for first request
-      return yield put(actions.updateBalance())
+      return yield put(actions.updateBalance([]))
     }
     // save current query params in state for csv export reference and toggle loading
     yield put(actions.setParams(payload))
