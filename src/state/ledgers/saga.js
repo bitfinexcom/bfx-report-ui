@@ -6,7 +6,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
@@ -26,7 +25,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqLedgers({
   smallestMts,
-  auth,
   query,
   targetSymbols,
   queryLimit,
@@ -38,7 +36,7 @@ function getReqLedgers({
   if (queryLimit) {
     params.limit = queryLimit
   }
-  return makeFetchCall('getLedgers', auth, params)
+  return makeFetchCall('getLedgers', params)
 }
 
 /* eslint-disable-next-line consistent-return */
@@ -56,20 +54,17 @@ function* fetchLedgers({ payload: symbol }) {
       targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
       yield put(actions.setTargetSymbols(targetSymbols))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
     const { result: resulto, error: erroro } = yield call(getReqLedgers, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbols,
       queryLimit,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqLedgers, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbols,
       queryLimit,
@@ -106,18 +101,15 @@ function* fetchNextLedgers() {
     if (entries.length - queryLimit >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto = {}, error: erroro } = yield call(getReqLedgers, {
       smallestMts,
-      auth,
       query,
       targetSymbols,
       queryLimit,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqLedgers, {
       smallestMts,
-      auth,
       query,
       targetSymbols,
       queryLimit,

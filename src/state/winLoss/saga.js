@@ -6,7 +6,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
 
@@ -14,17 +13,10 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-function getReqWinLoss({
-  start,
-  end,
-  timeframe,
-  auth,
-}) {
-  return makeFetchCall('getWinLoss', auth, { start, end, timeframe })
-}
+const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
 
 /* eslint-disable-next-line consistent-return */
-function* fetchWinLoss({ payload }) {
+function* fetchWinLoss({ payload = {} }) {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
@@ -34,8 +26,7 @@ function* fetchWinLoss({ payload }) {
     // save current query params in state for csv export reference and toggle loading
     yield put(actions.setParams(payload))
 
-    const auth = yield select(selectAuth)
-    const { result = [], error } = yield call(getReqWinLoss, { auth, ...payload })
+    const { result = [], error } = yield call(getReqWinLoss, { ...payload })
     yield put(actions.updateWinLoss(result))
 
     if (error) {

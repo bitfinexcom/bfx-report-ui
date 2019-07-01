@@ -18,7 +18,7 @@ function configureStore() {
   // add middlewares here
   const middleware = [sagaMiddleware]
   // use the logger in development mode - this is set in webpack.config.dev.js
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
     middleware.push(createLogger())
   }
 
@@ -30,7 +30,10 @@ function configureStore() {
 
 const store = configureStore()
 const persistor = persistStore(store)
-sagaMiddleware.run(saga)
+
+if (process.env.NODE_ENV !== 'test') {
+  sagaMiddleware.run(saga)
+}
 
 export {
   configureStore,

@@ -11,7 +11,6 @@ import { makeFetchCall } from 'state/utils'
 import {
   formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
 } from 'state/symbols/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
@@ -28,7 +27,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqPositions({
   smallestMts,
-  auth,
   query,
   targetPairs,
 }) {
@@ -37,7 +35,7 @@ function getReqPositions({
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
-  return makeFetchCall('getPositionsHistory', auth, params)
+  return makeFetchCall('getPositionsHistory', params)
 }
 
 function* fetchPositions({ payload: pair }) {
@@ -49,17 +47,14 @@ function* fetchPositions({ payload: pair }) {
       targetPairs = getPairsFromUrlParam(pair).map(mapPair)
       yield put(actions.setTargetPairs(targetPairs))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqPositions, {
       smallestMts: 0,
-      auth,
       query,
       targetPairs,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, {
       smallestMts: 0,
-      auth,
       query,
       targetPairs,
     })
@@ -93,17 +88,14 @@ function* fetchNextPositions() {
     if (entries.length - LIMIT >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqPositions, {
       smallestMts,
-      auth,
       query,
       targetPairs,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, {
       smallestMts,
-      auth,
       query,
       targetPairs,
     })

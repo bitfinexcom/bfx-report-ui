@@ -8,7 +8,6 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapPair, mapRequestPairs } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
-import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
@@ -24,7 +23,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqPublicTrades({
   smallestMts,
-  auth,
   query,
   targetPair,
 }) {
@@ -33,7 +31,7 @@ function getReqPublicTrades({
   if (targetPair) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPair, true))
   }
-  return makeFetchCall('getPublicTrades', auth, params)
+  return makeFetchCall('getPublicTrades', params)
 }
 
 function* fetchPublicTrades({ payload: pair }) {
@@ -44,17 +42,14 @@ function* fetchPublicTrades({ payload: pair }) {
       targetPair = mapPair(pair)
       yield put(actions.setTargetPair(targetPair))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqPublicTrades, {
       smallestMts: 0,
-      auth,
       query,
       targetPair,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicTrades, {
       smallestMts: 0,
-      auth,
       query,
       targetPair,
     })
@@ -88,17 +83,14 @@ function* fetchNextPublicTrades() {
     if (entries.length - LIMIT >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqPublicTrades, {
       smallestMts,
-      auth,
       query,
       targetPair,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicTrades, {
       smallestMts,
-      auth,
       query,
       targetPair,
     })

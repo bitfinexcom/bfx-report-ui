@@ -12,7 +12,6 @@ import authTypes from 'state/auth/constants'
 import { makeFetchCall } from 'state/utils'
 import { setSyncState } from 'state/base/actions'
 import { getSyncState } from 'state/base/selectors'
-import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 import {
   mapRequestSymbols, formatInternalSymbol, formatRawSymbols, formatSymbolToPair,
@@ -30,15 +29,15 @@ import {
   getPublicTradesStartTime,
 } from './selectors'
 
-const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
-const fetchSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
-const logout = auth => makeFetchCall('logout', auth)
-const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
-const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
-const getPublicTradesConf = auth => makeFetchCall('getPublicTradesConf', auth)
-const getTickersHistoryConf = auth => makeFetchCall('getTickersHistoryConf', auth)
-const editPublicTradesConf = (auth, params) => makeFetchCall('editPublicTradesConf', auth, params)
-const editTickersHistoryConf = (auth, params) => makeFetchCall('editTickersHistoryConf', auth, params)
+const checkIsSyncModeWithDbData = () => makeFetchCall('isSyncModeWithDbData')
+const fetchSyncProgress = () => makeFetchCall('getSyncProgress')
+const logout = () => makeFetchCall('logout')
+const enableSyncMode = () => makeFetchCall('enableSyncMode')
+const disableSyncMode = () => makeFetchCall('disableSyncMode')
+const getPublicTradesConf = () => makeFetchCall('getPublicTradesConf')
+const getTickersHistoryConf = () => makeFetchCall('getTickersHistoryConf')
+const editPublicTradesConf = params => makeFetchCall('editPublicTradesConf', params)
+const editTickersHistoryConf = params => makeFetchCall('editTickersHistoryConf', params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -46,8 +45,7 @@ const updateSyncErrorStatus = msg => updateErrorStatus({
 })
 
 function* startSyncing() {
-  const auth = yield select(selectAuth)
-  const { result, error } = yield call(enableSyncMode, auth)
+  const { result, error } = yield call(enableSyncMode)
   if (result) {
     yield put(actions.setSyncPref({
       syncMode: types.MODE_SYNCING,
@@ -63,8 +61,7 @@ function* startSyncing() {
 
 function* stopSyncing() {
   yield delay(300)
-  const auth = yield select(selectAuth)
-  const { result, error } = yield call(disableSyncMode, auth)
+  const { result, error } = yield call(disableSyncMode)
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
     yield put(setSyncState(false))
@@ -76,10 +73,9 @@ function* stopSyncing() {
 }
 
 export function* isSynced() {
-  const auth = yield select(selectAuth)
   const [{ result: isQueryWithDb, error }, { result: syncProgress, error: progressError }] = yield all([
-    call(checkIsSyncModeWithDbData, auth),
-    call(fetchSyncProgress, auth),
+    call(checkIsSyncModeWithDbData),
+    call(fetchSyncProgress),
   ])
 
   const synced = (Number.isInteger(syncProgress) && syncProgress === 100)
@@ -103,8 +99,7 @@ function* forceQueryFromDb() {
 
 function* syncLogout() {
   yield delay(300)
-  const auth = yield select(selectAuth)
-  const { result, error } = yield call(logout, auth)
+  const { result, error } = yield call(logout)
   if (result) {
     const syncMode = yield select(getSyncMode)
     if (syncMode !== types.MODE_ONLINE) {
@@ -120,7 +115,6 @@ function* syncLogout() {
 function* editPublicTradesPref({ payload }) {
   const { pairs, startTime } = payload
 
-  const auth = yield select(selectAuth)
   const symbols = yield select(getPublicFundingSymbols)
   const publicFundingStartTime = yield select(getPublicFundingStartTime)
 
@@ -138,7 +132,7 @@ function* editPublicTradesPref({ payload }) {
     })),
   ]
 
-  const { error } = yield call(editPublicTradesConf, auth, params)
+  const { error } = yield call(editPublicTradesConf, params)
   if (error) {
     yield put(updateSyncErrorStatus('during editPublicTradesPairConf'))
   }
@@ -147,7 +141,6 @@ function* editPublicTradesPref({ payload }) {
 function* editPublicFundingPref({ payload }) {
   const { symbols, startTime } = payload
 
-  const auth = yield select(selectAuth)
   const pairs = yield select(getPublicTradesPairs)
   const publicTradesStartTime = yield select(getPublicTradesStartTime)
 
@@ -165,7 +158,7 @@ function* editPublicFundingPref({ payload }) {
     })),
   ]
 
-  const { error } = yield call(editPublicTradesConf, auth, params)
+  const { error } = yield call(editPublicTradesConf, params)
   if (error) {
     yield put(updateSyncErrorStatus('during editPublicTradesSymbolConf'))
   }
@@ -174,27 +167,24 @@ function* editPublicFundingPref({ payload }) {
 function* editTickersHistoryPref({ payload }) {
   const { pairs = [], startTime } = payload
 
-  const auth = yield select(selectAuth)
   const params = mapRequestPairs(pairs).map(pair => ({
     symbol: formatRawSymbols(pair),
     start: startTime,
   }))
 
-  const { error } = yield call(editTickersHistoryConf, auth, params)
+  const { error } = yield call(editTickersHistoryConf, params)
   if (error) {
     yield put(updateSyncErrorStatus('during editTickersHistoryConf'))
   }
 }
 
 function* getSyncPref() {
-  const auth = yield select(selectAuth)
-
   const [
     { result: publicTradesPrefResult, error: publicTradesPrefError },
     { result: tickersHistoryPrefResult, error: tickersHistoryPrefError },
   ] = yield all([
-    yield call(getPublicTradesConf, auth),
-    yield call(getTickersHistoryConf, auth),
+    yield call(getPublicTradesConf),
+    yield call(getTickersHistoryConf),
   ])
 
   const formatSymbol = data => mapSymbol(formatInternalSymbol(data.symbol))
@@ -239,8 +229,7 @@ function* initSync() {
   const isEnabled = yield select(getSyncState)
 
   if (isEnabled) {
-    const auth = yield select(selectAuth)
-    const { result: syncProgress } = yield call(fetchSyncProgress, auth)
+    const { result: syncProgress } = yield call(fetchSyncProgress)
 
     const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
     if (isSyncing) {
@@ -286,8 +275,7 @@ function* updateSyncStatus() {
   const syncMode = yield select(getSyncMode)
 
   if (isEnabled) {
-    const auth = yield select(selectAuth)
-    const { result: syncProgress, error: progressError } = yield call(fetchSyncProgress, auth)
+    const { result: syncProgress, error: progressError } = yield call(fetchSyncProgress)
 
     switch (typeof syncProgress) {
       case 'number':

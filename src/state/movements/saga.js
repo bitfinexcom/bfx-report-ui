@@ -6,7 +6,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
@@ -26,7 +25,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqMovements({
   smallestMts,
-  auth,
   query,
   targetSymbols,
 }) {
@@ -35,7 +33,7 @@ function getReqMovements({
   if (targetSymbols.length) {
     params.symbol = mapRequestSymbols(targetSymbols)
   }
-  return makeFetchCall('getMovements', auth, params)
+  return makeFetchCall('getMovements', params)
 }
 
 function* fetchMovements({ payload: symbol }) {
@@ -47,17 +45,14 @@ function* fetchMovements({ payload: symbol }) {
       targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
       yield put(actions.setTargetSymbols(targetSymbols))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqMovements, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbols,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqMovements, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbols,
     })
@@ -91,17 +86,14 @@ function* fetchNextMovements() {
     if (entries.length - LIMIT >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqMovements, {
       smallestMts,
-      auth,
       query,
       targetSymbols,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqMovements, {
       smallestMts,
-      auth,
       query,
       targetSymbols,
     })

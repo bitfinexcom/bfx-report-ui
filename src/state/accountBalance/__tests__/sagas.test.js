@@ -1,8 +1,7 @@
-import { put, call, select } from 'redux-saga/effects'
+import { put, call } from 'redux-saga/effects'
 import { cloneableGenerator } from 'redux-saga/utils'
 
 import { frameworkCheck } from 'state/ui/saga'
-import { selectAuth } from 'state/auth/selectors'
 
 import { fetchAccountBalance, getReqBalance } from '../saga'
 import actions from '../actions'
@@ -35,12 +34,7 @@ describe('Account balance saga', () => {
 
   it('sets params from the payload', () => {
     const result = generator.next(true).value
-    expect(result).toEqual(put(actions.setParams()))
-  })
-
-  it('gets auth', () => {
-    const result = generator.next().value
-    expect(result).toEqual(select(selectAuth))
+    expect(result).toEqual(put(actions.setParams({})))
   })
 
   it('calls the API', () => {

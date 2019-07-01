@@ -13,7 +13,6 @@ import {
   mapRequestSymbols,
   mapSymbol,
 } from 'state/symbols/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
@@ -30,7 +29,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqFOffer({
   smallestMts,
-  auth,
   query,
   targetSymbols,
 }) {
@@ -39,7 +37,7 @@ function getReqFOffer({
   if (targetSymbols.length) {
     params.symbol = formatRawSymbols(mapRequestSymbols(targetSymbols))
   }
-  return makeFetchCall('getFundingOfferHistory', auth, params)
+  return makeFetchCall('getFundingOfferHistory', params)
 }
 
 function* fetchFOffer({ payload: symbol }) {
@@ -51,17 +49,14 @@ function* fetchFOffer({ payload: symbol }) {
       targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
       yield put(actions.setTargetSymbols(targetSymbols))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqFOffer, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbols,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFOffer, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbols,
     })
@@ -95,17 +90,14 @@ function* fetchNextFOffer() {
     if (entries.length - LIMIT >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqFOffer, {
       smallestMts,
-      auth,
       query,
       targetSymbols,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFOffer, {
       smallestMts,
-      auth,
       query,
       targetSymbols,
     })

@@ -10,7 +10,6 @@ import {
   formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
 } from 'state/symbols/utils'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
-import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
@@ -25,7 +24,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqTrades({
   smallestMts,
-  auth,
   query,
   targetPairs,
   queryLimit,
@@ -37,7 +35,7 @@ function getReqTrades({
   if (queryLimit) {
     params.limit = queryLimit
   }
-  return makeFetchCall('getTrades', auth, params)
+  return makeFetchCall('getTrades', params)
 }
 
 function* fetchTrades({ payload: pair }) {
@@ -49,20 +47,17 @@ function* fetchTrades({ payload: pair }) {
       targetPairs = getPairsFromUrlParam(pair).map(mapPair)
       yield put(actions.setTargetPairs(targetPairs))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
     const { result: resulto, error: erroro } = yield call(getReqTrades, {
       smallestMts: 0,
-      auth,
       query,
       targetPairs,
       queryLimit,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTrades, {
       smallestMts: 0,
-      auth,
       query,
       targetPairs,
       queryLimit,
@@ -99,18 +94,15 @@ function* fetchNextTrades() {
     if (entries.length - queryLimit >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqTrades, {
       smallestMts,
-      auth,
       query,
       targetPairs,
       queryLimit,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTrades, {
       smallestMts,
-      auth,
       query,
       targetPairs,
       queryLimit,
