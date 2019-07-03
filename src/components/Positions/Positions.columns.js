@@ -22,8 +22,8 @@ export default function getColumns(props) {
 
   function showType(swapType) {
     return swapType
-      ? t('positions.swap.daily')
-      : t('positions.swap.term')
+      ? t('positions.swap.term')
+      : t('positions.swap.daily')
   }
 
   const ACTIVE_POSITIONS_COLS = (target === MENU_POSITIONS_ACTIVE)
