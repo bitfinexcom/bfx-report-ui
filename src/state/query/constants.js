@@ -16,6 +16,7 @@ export default {
   MENU_POSITIONS_AUDIT: 'paudit',
   MENU_PUBLIC_FUNDING: 'publicfunding',
   MENU_PUBLIC_TRADES: 'publictrades',
+  MENU_SNAPSHOTS: 'snapshots',
   MENU_WALLETS: 'wallets',
   MENU_WIN_LOSS: 'winloss',
   MENU_WITHDRAWALS: 'withdrawals',

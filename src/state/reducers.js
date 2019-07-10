@@ -19,6 +19,7 @@ import positionsActiveReducer from './positionsActive/reducer'
 import positionsReducer from './positions/reducer'
 import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
+import snapshotsReducer from './snapshots/reducer'
 import queryReducer from './query/reducer'
 import tickersReducer from './tickers/reducer'
 import tradesReducer from './trades/reducer'
@@ -69,6 +70,7 @@ const SYNC_REDUCERS = {
 const FRAMEWORK_REDUCERS = {
   balance: accountBalanceReducer,
   winLoss: winLossReducer,
+  snapshots: snapshotsReducer,
 }
 
 const REDUCERS = {

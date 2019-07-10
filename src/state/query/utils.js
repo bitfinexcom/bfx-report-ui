@@ -1,4 +1,5 @@
 import { IconNames } from '@blueprintjs/icons'
+import _isArray from 'lodash/isArray'
 
 import { platform } from 'var/config'
 
@@ -23,6 +24,7 @@ const {
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
+  MENU_SNAPSHOTS,
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
@@ -45,6 +47,7 @@ export const TYPE_WHITELIST = [
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
+  MENU_SNAPSHOTS,
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
@@ -66,6 +69,7 @@ export const ROUTE_WHITELIST = [
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
+  MENU_SNAPSHOTS,
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
@@ -84,6 +88,7 @@ const BASIC_TARGETS = [
   MENU_POSITIONS_ACTIVE,
   // MENU_POSITIONS_AUDIT,
   MENU_WALLETS,
+  MENU_SNAPSHOTS,
 ]
 // MENU_FPAYMENT only for sync mode
 const FUNDING_TARGETS = platform.showSyncMode ? [
@@ -239,16 +244,27 @@ const MAPPING = {
     queryLimit: 25,
     pageSize: 25,
   },
+  [MENU_SNAPSHOTS]: {
+    icon: IconNames.HISTORY,
+    path: ['/snapshots_positions', '/snapshots_wallets'],
+  },
   [MENU_WALLETS]: {
     icon: IconNames.DOLLAR,
     path: '/wallets',
-    // queryLimit: 100,
   },
 }
 
 const PATHMAP = {}
 ROUTE_WHITELIST.forEach((key) => {
-  PATHMAP[MAPPING[key].path] = key
+  const { path } = MAPPING[key]
+
+  if (_isArray(path)) {
+    path.forEach((subpath) => {
+      PATHMAP[subpath] = key
+    })
+  } else {
+    PATHMAP[path] = key
+  }
 })
 
 function error(target, action) {
