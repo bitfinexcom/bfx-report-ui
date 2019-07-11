@@ -17,6 +17,7 @@ import PositionsActive from 'components/PositionsActive'
 import PositionsAudit from 'components/PositionsAudit'
 import PublicFunding from 'components/PublicFunding'
 import PublicTrades from 'components/PublicTrades'
+import Snapshots from 'components/Snapshots'
 import Tickers from 'components/Tickers'
 import Trades from 'components/Trades'
 import Wallets from 'components/Wallets'
@@ -46,6 +47,7 @@ const {
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
+  MENU_SNAPSHOTS,
   MENU_TICKERS,
   MENU_WALLETS,
   MENU_WIN_LOSS,
@@ -301,6 +303,11 @@ class Main extends PureComponent {
                   exact
                   path={getPath(MENU_CONCENTRATION_RISK)}
                   component={ConcentrationRisk}
+                />
+                <Route
+                  exact
+                  path={getPath(MENU_SNAPSHOTS)}
+                  render={() => <Snapshots handleClickExport={this.handleClickExport} />}
                 />
               </Fragment>
             )}

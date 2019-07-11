@@ -269,6 +269,14 @@
       "pair": "Pair Filter"
     }
   },
+  "snapshots": {
+    "title": "Snapshots",
+    "query": {
+      "title": "Query",
+      "tooltip": "Select a time to query snapshots"
+    },
+    "nodata": "No related data in this date time. You can try another date time."
+  },
   "status": {
     "success": "{{topic}} Success at {{time}}",
     "warn": "{{topic}}",

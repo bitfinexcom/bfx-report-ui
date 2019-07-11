@@ -22,6 +22,7 @@ const USED_ICONS = [
   IconNames.FLOWS,
   IconNames.FOLDER_SHARED_OPEN,
   IconNames.HELP,
+  IconNames.HISTORY,
   IconNames.ISSUE_NEW,
   IconNames.KEY,
   IconNames.MENU,

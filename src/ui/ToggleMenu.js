@@ -6,6 +6,7 @@ import {
   MenuDivider,
   MenuItem,
 } from '@blueprintjs/core'
+import _castArray from 'lodash/castArray'
 
 import Timeframe from 'components/Timeframe'
 import queryType from 'state/query/constants'
@@ -31,6 +32,7 @@ const {
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
+  MENU_SNAPSHOTS,
   MENU_WIN_LOSS,
   MENU_WITHDRAWALS,
   MENU_WALLETS,
@@ -56,11 +58,13 @@ class ToggleMenu extends PureComponent {
     this.handleClickAccountBalance = this.handleClick.bind(this, MENU_ACCOUNT_BALANCE)
     this.handleClickWinLoss = this.handleClick.bind(this, MENU_WIN_LOSS)
     this.handleClickConcentrationRisk = this.handleClick.bind(this, MENU_CONCENTRATION_RISK)
+    this.handleClickSnapshots = this.handleClick.bind(this, MENU_SNAPSHOTS)
   }
 
   handleClick(target) {
     const { history } = this.props
-    history.push(`${getPath(target)}${getNoAuthUrlString(history.location.search)}`)
+    const path = _castArray(getPath(target))[0]
+    history.push(`${path}${getNoAuthUrlString(history.location.search)}`)
   }
 
   render() {
@@ -207,6 +211,13 @@ class ToggleMenu extends PureComponent {
               title={isIconMode ? t('concentrationrisk.title') : ''}
               onClick={this.handleClickConcentrationRisk}
               active={target === MENU_CONCENTRATION_RISK}
+            />
+            <MenuItem
+              icon={getIcon(MENU_SNAPSHOTS)}
+              text={isIconMode ? '' : t('snapshots.title')}
+              title={isIconMode ? t('snapshots.title') : ''}
+              onClick={this.handleClickSnapshots}
+              active={target === MENU_SNAPSHOTS}
             />
           </Fragment>
         ) : undefined}
