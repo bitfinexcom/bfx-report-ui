@@ -20,6 +20,8 @@ function toRegularPair(symbol) {
 const SKIP_PARSING_PAIRS = [
   'BTCF0:USTF0',
   'ETHF0:USTF0',
+  'BTCF0:USDF0',
+  'ETHF0:USDF0',
   'DUSK:BTC',
   'DUSK:USD',
 ]
