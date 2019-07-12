@@ -1,4 +1,6 @@
 import _castArray from 'lodash/castArray'
+import _includes from 'lodash/includes'
+
 import symbolMap from './map'
 
 const table = {
@@ -15,20 +17,15 @@ function toRegularPair(symbol) {
   return table[symbol] || symbol.slice(0, 3)
 }
 
-const isFuture = symbol => symbol.toUpperCase().endsWith('F0')
-
-const isFuturePair = (symbol) => {
-  if (!symbol.includes(':')) {
-    return false
-  }
-
-  const spl = symbol.split(':')
-
-  return isFuture(spl[0]) || isFuture(spl[1])
-}
+const SKIP_PARSING_PAIRS = [
+  'BTCF0:USTF0',
+  'BTCF0:USTF0',
+  'DUSK:BTC',
+  'DUSK:USD',
+]
 
 const parseSymbol = (symbol) => {
-  if (!symbol.includes(':') || isFuturePair(symbol)) {
+  if (!symbol.includes(':') || _includes(SKIP_PARSING_PAIRS, symbol)) {
     return symbol.toUpperCase()
   }
 
