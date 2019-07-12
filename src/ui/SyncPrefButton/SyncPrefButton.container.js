@@ -10,7 +10,7 @@ const mapStateToProps = (state = {}) => {
   const { start } = getTimeFrame(getQuery(state))
   let pairs = getSyncPairs(state)
   if (!pairs.length) {
-    pairs = ['BTCUSD']
+    pairs = ['BTC:USD']
   }
   return {
     syncMode: getSyncMode(state),

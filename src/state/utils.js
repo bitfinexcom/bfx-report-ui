@@ -152,6 +152,17 @@ export function toggleSymbol(type, props, symbol) {
   history.push(generateUrl(type, history.location.search, demapSymbols(nextSymbols)))
 }
 
+export function setPair(type, props, pair) {
+  const {
+    history, targetPair, setTargetPair,
+  } = props
+
+  if (targetPair !== pair) {
+    setTargetPair(pair)
+    history.push(generateUrl(type, history.location.search, demapPairs(pair)))
+  }
+}
+
 export function togglePair(type, props, pair) {
   const {
     history, targetPairs, addTargetPair, removeTargetPair,

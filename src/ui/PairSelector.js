@@ -20,7 +20,7 @@ class PairSelector extends PureComponent {
     const {
       currentPair, existingPairs, wildCard, onPairSelect,
     } = this.props
-    const isCurrent = currentPair === pair
+    const isCurrent = currentPair === pair.replace('/', ':')
     const className = (wildCard.includes(pair) || existingPairs.includes(pair)) && !isCurrent
       ? 'bitfinex-queried-symbol' : ''
 
@@ -31,8 +31,8 @@ class PairSelector extends PureComponent {
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={modifiers.disabled}
         key={pair}
-        onClick={() => onPairSelect(pair)}
-        text={formatPair(pair)}
+        onClick={() => onPairSelect(pair.replace('/', ':'))}
+        text={pair}
       />
     )
   }

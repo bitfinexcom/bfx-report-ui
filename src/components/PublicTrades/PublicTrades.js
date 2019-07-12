@@ -16,11 +16,11 @@ import NoData from 'ui/NoData'
 import PairSelector from 'ui/PairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getQueryLimit, getPageSize, getPath } from 'state/query/utils'
+import { getQueryLimit, getPageSize } from 'state/query/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  getNoAuthUrlString,
+  setPair,
 } from 'state/utils'
 import { platform } from 'var/config'
 
@@ -43,15 +43,6 @@ class PublicTrades extends PureComponent {
 
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, TYPE)
-  }
-
-  handlePairSelect = (pair) => {
-    const { history, targetPair, setTargetPair } = this.props
-    if (pair !== targetPair) {
-      // show select pair in url
-      history.push(`${getPath(TYPE)}/${pair.toUpperCase()}${getNoAuthUrlString(history.location.search)}`)
-      setTargetPair(pair)
-    }
   }
 
   render() {
@@ -81,7 +72,7 @@ class PublicTrades extends PureComponent {
     }
 
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const currentPair = targetPair || 'BTCUSD'
+    const currentPair = targetPair || 'BTC:USD'
     const numRows = filteredData.length
     const tableColums = getColumns({
       filteredData,
@@ -111,7 +102,7 @@ class PublicTrades extends PureComponent {
         <PairSelector
           currentPair={currentPair}
           existingPairs={[]}
-          onPairSelect={this.handlePairSelect}
+          onPairSelect={pair => setPair(TYPE, this.props, pair)}
           pairs={pairs}
           wildCard={WILD_CARD}
         />

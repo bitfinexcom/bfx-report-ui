@@ -21,7 +21,7 @@ import types from './constants'
 
 const initialState = {
   ...basePairState,
-  targetPairs: [mapPair('BTCUSD')],
+  targetPairs: [mapPair('BTC:USD')],
 }
 
 const TYPE = queryTypes.MENU_TICKERS

@@ -6,7 +6,7 @@ import {
 } from '@blueprintjs/core'
 import { MultiSelect } from '@blueprintjs/select'
 
-import { formatPair, parsePairTag } from 'state/symbols/utils'
+import { formatPair } from 'state/symbols/utils'
 
 import { propTypes, defaultProps } from './MultiPairSelector.props'
 
@@ -20,7 +20,7 @@ class MultiPairSelector extends PureComponent {
       return null
     }
     const { currentFilters, existingPairs, togglePair } = this.props
-    const isCurrent = currentFilters.map(currentPair => currentPair.toUpperCase()).includes(pair)
+    const isCurrent = currentFilters.map(currentPair => currentPair.replace(':', '/')).includes(pair)
     const className = existingPairs.includes(pair) && !isCurrent
       ? 'bitfinex-queried-symbol' : ''
 
@@ -31,8 +31,8 @@ class MultiPairSelector extends PureComponent {
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={modifiers.disabled}
         key={pair}
-        onClick={() => togglePair(pair)}
-        text={formatPair(pair)}
+        onClick={() => togglePair(pair.replace('/', ':'))}
+        text={pair}
       />
     )
   }
@@ -58,10 +58,10 @@ class MultiPairSelector extends PureComponent {
         popoverProps={{ minimal: true }}
         tagInputProps={{
           tagProps: { minimal: true },
-          onRemove: pair => togglePair(parsePairTag(pair)),
+          onRemove: pair => togglePair(pair.replace('/', ':')),
         }}
         tagRenderer={this.renderTag}
-        selectedItems={currentFilters.map(pair => pair.toLowerCase())}
+        selectedItems={currentFilters}
         resetOnSelect
       />
     )
