@@ -1,7 +1,7 @@
 import _castArray from 'lodash/castArray'
 
 import authTypes from 'state/auth/constants'
-import { mapPair } from 'state/symbols/utils'
+import { formatSymbolToPair, mapPair } from 'state/symbols/utils'
 
 import types from './constants'
 import { setSymbolMap } from './map'
@@ -43,12 +43,14 @@ export function symbolsReducer(state = initialState, action) {
         coins.push(cid)
       })
       setSymbolMap(symbolMapping)
+
+      const formattedPairs = pairs.map(formatSymbolToPair)
       return {
         ...state,
         coins: coins.sort(),
         currencies: dict,
         explorers: explorersDict,
-        pairs: _castArray(pairs).map(mapPair).sort(),
+        pairs: _castArray(formattedPairs).map(mapPair).sort(),
       }
     }
     case authTypes.LOGOUT:

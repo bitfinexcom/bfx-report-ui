@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
+import { formatRawSymbols, mapPair, mapRequestPairs } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -41,8 +41,8 @@ function* fetchPublicTrades({ payload: pair }) {
     let targetPair = yield select(getTargetPair)
     // set pair from url
     if (pair && pair !== targetPair) {
-      yield put(actions.setTargetPair(pair))
-      targetPair = pair
+      targetPair = mapPair(pair)
+      yield put(actions.setTargetPair(mapPair(targetPair)))
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)

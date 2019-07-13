@@ -1,4 +1,6 @@
 import _castArray from 'lodash/castArray'
+import _includes from 'lodash/includes'
+
 import symbolMap from './map'
 
 const table = {
@@ -15,20 +17,17 @@ function toRegularPair(symbol) {
   return table[symbol] || symbol.slice(0, 3)
 }
 
-const isFuture = symbol => symbol.toUpperCase().endsWith('F0')
-
-const isFuturePair = (symbol) => {
-  if (!symbol.includes(':')) {
-    return false
-  }
-
-  const spl = symbol.split(':')
-
-  return isFuture(spl[0]) || isFuture(spl[1])
-}
+const SKIP_PARSING_PAIRS = [
+  'BTCF0:USTF0',
+  'ETHF0:USTF0',
+  'BTCF0:USDF0',
+  'ETHF0:USDF0',
+  'DUSK:BTC',
+  'DUSK:USD',
+]
 
 const parseSymbol = (symbol) => {
-  if (!symbol.includes(':') || isFuturePair(symbol)) {
+  if (!symbol.includes(':') || _includes(SKIP_PARSING_PAIRS, symbol)) {
     return symbol.toUpperCase()
   }
 
@@ -49,15 +48,14 @@ const parseSymbol = (symbol) => {
  * ex. USD -> fUSD
  */
 export function addPrefix(symbol = '') {
-  const sym = `${symbol}`
-  const first = sym.charAt(0)
+  const first = symbol.charAt(0)
   // already okay
-  if ((sym.length === 4 || sym.length === 7)
+  if ((symbol.length === 4 || symbol.length === 7)
     && (first === 't' || first === 'f')) {
-    return sym
+    return symbol
   }
 
-  const s = parseSymbol(sym)
+  const s = parseSymbol(symbol)
 
   switch (s.length) {
     case 6:
@@ -113,7 +111,12 @@ const getSplitPair = pair => [firstInPair(pair), lastInPair(pair)]
 export const formatInternalSymbol = symbol => removePrefix(symbol)
 
 // tBTCUSD -> BTC/USD
+// BTCF0:USTF0 -> BTCF0/USTF0
 export function formatSymbolToPair(symbol) {
+  if (_includes(symbol, ':')) {
+    return removePrefix(symbol).replace(':', '/')
+  }
+
   const [first, last] = getSplitPair(removePrefix(symbol), true)
   return `${first}/${last}`
 }
@@ -169,13 +172,16 @@ export function getPairsFromUrlParam(param) {
 // ['USD'] -> 'fUSD'
 // ['USD', 'BTC'] -> ['fUSD', 'fBTC']
 export function formatRawSymbols(symbols) {
-  if (Array.isArray(symbols) && symbols.length) {
-    if (symbols.length === 1) {
-      return addPrefix(symbols[0])
+  const symbolsArray = _castArray(symbols).map((symbol) => {
+    if (_includes(SKIP_PARSING_PAIRS, symbol)) {
+      return symbol
     }
-    return symbols.map(symbol => addPrefix(symbol))
-  }
-  return addPrefix(symbols)
+    return symbol.replace(':', '')
+  }).map(symbol => addPrefix(symbol))
+
+  return symbolsArray.length > 1
+    ? symbolsArray
+    : symbolsArray[0]
 }
 
 // symbol mapping
@@ -205,8 +211,9 @@ export const demapSymbols = (symbols, returnString = false) => {
     : mappedSymbols
 }
 
+// [BCH:USD] -> [BAB:USD]
 export const demapPairs = (pairs, returnString = false) => {
-  const mappedPairs = _castArray(pairs).map(pair => demapSymbols(splitPair(pair)).join(''))
+  const mappedPairs = _castArray(pairs).map(pair => demapSymbols(pair.split(':')).join(':'))
 
   return returnString
     ? mappedPairs[0]

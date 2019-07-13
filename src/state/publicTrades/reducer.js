@@ -15,7 +15,7 @@ import types from './constants'
 
 const initialState = {
   ...baseState,
-  targetPair: mapPair('BTCUSD'),
+  targetPair: mapPair('BTC:USD'),
 }
 
 const TYPE = queryTypes.MENU_PUBLIC_TRADES
