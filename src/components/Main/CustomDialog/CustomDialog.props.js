@@ -7,7 +7,6 @@ export const propTypes = {
   isCustomOpen: PropTypes.bool.isRequired,
   startQuery: PropTypes.func.isRequired,
   startDate: PropTypes.instanceOf(Date),
-  timezone: PropTypes.string,
   endDate: PropTypes.instanceOf(Date),
   updateWarningStatus: PropTypes.func.isRequired,
 }
@@ -15,5 +14,4 @@ export const propTypes = {
 export const defaultProps = {
   startDate: null,
   endDate: null,
-  timezone: '',
 }
