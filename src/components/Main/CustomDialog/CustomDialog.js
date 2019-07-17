@@ -79,16 +79,15 @@ class CustomDialog extends PureComponent {
       startQuery,
       startDate,
       t,
-      timezone,
     } = this.props
-    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
+    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, 'Etc/UTC')
     const commonDateRangeProps = {
       allowSingleDayRange: true,
       closeOnSelection: true,
       formatDate,
       parseDate,
       onChange: this.handleRangeChange,
-      value: [startDate, endDate],
+      defaultValue: [startDate, endDate],
       maxDate: new Date(),
       placeholder: t('timeframe.start-date-placeholder'),
     }

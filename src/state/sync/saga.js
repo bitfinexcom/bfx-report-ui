@@ -29,7 +29,7 @@ import { getSyncMode, getSyncSymbols, getSyncPairs } from './selectors'
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
 const getSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
 const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
-const syncNow = auth => makeFetchCall('syncNow', auth)
+const syncNow = auth => ({ result: {} })
 const logout = auth => makeFetchCall('logout', auth)
 const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
@@ -235,7 +235,7 @@ function* syncWatcher() {
               yield put(actions.forceQueryFromDb())
             }
           } else if (syncMode !== types.MODE_SYNCING) {
-            yield put(actions.startSyncing())
+            // yield put(actions.startSyncing())
           }
         } else {
           switch (typeof progress) {
@@ -245,7 +245,7 @@ function* syncWatcher() {
                 if (syncMode !== types.MODE_SYNCING) {
                   const { result: hasSched, error: schedError } = yield call(isSchedulerEnabled)
                   if (!hasSched) {
-                    yield put(actions.startSyncing())
+                    // yield put(actions.startSyncing())
                   } else {
                     yield put(actions.setSyncMode(types.MODE_SYNCING))
                   }

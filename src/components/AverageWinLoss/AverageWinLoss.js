@@ -13,7 +13,7 @@ import _sortBy from 'lodash/sortBy'
 import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import LineChart from 'ui/Charts/LineChart'
+import Chart from 'ui/Charts/Chart'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeframeSelector from 'ui/TimeframeSelector/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
@@ -163,7 +163,7 @@ class AverageWinLoss extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          <LineChart
+          <Chart
             data={chartData}
             dataKeys={presentCurrencies}
           />
