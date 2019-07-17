@@ -12,7 +12,7 @@ const initialState = {
 
 const getPositionsEntries = entries => entries.map((entry) => {
   const {
-    // actualPrice, 1.4686
+    actualPrice,
     amount,
     basePrice,
     id,
@@ -22,6 +22,7 @@ const getPositionsEntries = entries => entries.map((entry) => {
     mtsCreate,
     mtsUpdate,
     pl,
+    plUsd,
     plPerc,
     liquidationPrice,
     status,
@@ -31,6 +32,7 @@ const getPositionsEntries = entries => entries.map((entry) => {
   return {
     id,
     pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+    actualPrice,
     amount,
     basePrice,
     leverage,
@@ -39,6 +41,7 @@ const getPositionsEntries = entries => entries.map((entry) => {
     mtsCreate,
     mtsUpdate,
     pl,
+    plUsd,
     plPerc,
     liquidationPrice,
     status,

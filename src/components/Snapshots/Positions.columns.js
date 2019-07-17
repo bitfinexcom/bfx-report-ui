@@ -83,6 +83,24 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].basePrice,
     },
     {
+      id: 'actualPrice',
+      name: 'positions.column.actual-price',
+      width: 125,
+      renderer: (rowIndex) => {
+        const { actualPrice } = filteredData[rowIndex]
+        const fixedPrice = fixedFloat(actualPrice)
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedPrice}
+          >
+            {fixedPrice}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].actualPrice,
+    },
+    {
       id: 'priceLiq',
       name: 'positions.column.liq-price',
       width: 100,
@@ -113,6 +131,20 @@ export default function getColumns(props) {
         )
       },
       copyText: rowIndex => filteredData[rowIndex].pl,
+    },
+    {
+      id: 'plUsd',
+      name: 'positions.column.plUsd',
+      width: 125,
+      renderer: (rowIndex) => {
+        const { plUsd } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={fixedFloat(plUsd)}>
+            {formatAmount(plUsd)}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].plUsd,
     },
     {
       id: 'plperc',
