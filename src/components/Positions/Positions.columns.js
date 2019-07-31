@@ -8,7 +8,7 @@ import {
 import queryConstants from 'state/query/constants'
 import { formatAmount, fixedFloat } from 'ui/utils'
 
-const { MENU_POSITIONS_ACTIVE } = queryConstants
+const { MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT } = queryConstants
 
 export default function getColumns(props) {
   const {
@@ -73,6 +73,41 @@ export default function getColumns(props) {
           )
         },
         copyText: rowIndex => filteredData[rowIndex].plPerc,
+      },
+    ]
+    : []
+
+  const POSITIONS_AUDIT_COLS = (target === MENU_POSITIONS_AUDIT)
+    ? [
+      {
+        id: 'collateral',
+        name: 'positions.column.collateral',
+        width: 110,
+        renderer: (rowIndex) => {
+          const { collateral } = filteredData[rowIndex]
+          return (
+            <Cell tooltip={collateral}>
+              {collateral}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].collateral,
+      },
+      {
+        id: 'metadata',
+        name: 'positions.column.metadata',
+        width: 200,
+        renderer: (rowIndex) => {
+          const { metadata = '' } = filteredData[rowIndex]
+          return (
+            <Cell tooltip={metadata}>
+              <TruncatedFormat>
+                {metadata}
+              </TruncatedFormat>
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].metadata || '',
       },
     ]
     : []
@@ -205,5 +240,6 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
+    ...POSITIONS_AUDIT_COLS,
   ]
 }

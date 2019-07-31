@@ -211,7 +211,9 @@
       "swap": "FUNDING COST",
       "swap-type": "FUNDING TYPE",
       "status": "STATUS",
-      "update": "UPDATED"
+      "update": "UPDATED",
+      "collateral": "COLLATERAL",
+      "metadata": "METADATA"
     },
     "swap": {
       "daily": "Daily",
