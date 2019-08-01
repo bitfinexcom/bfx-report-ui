@@ -1,9 +1,6 @@
 import types from './constants'
 
 const initialState = {
-  // apiKey: '', // moved to state/base
-  // apiSecret: '',
-  // authToken: '',
   authStatus: null,
   isShown: true,
   loading: false,

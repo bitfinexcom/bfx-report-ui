@@ -19,7 +19,7 @@ export function syncReducer(state = initialState, action) {
     case types.SET_PREF: {
       const { pairs: syncPairs, startTime } = payload
       return {
-        ...initialState,
+        ...state,
         startTime,
         syncPairs,
         syncSymbols: state.syncSymbols,
@@ -28,7 +28,7 @@ export function syncReducer(state = initialState, action) {
     case types.SET_SYMBOL_PREF: {
       const { symbols: syncSymbols, startTime } = payload
       return {
-        ...initialState,
+        ...state,
         startTime,
         syncPairs: state.syncPairs,
         syncSymbols,

@@ -8,4 +8,7 @@ export default {
   FORCE_OFFLINE: 'BITFINEX/SYNC/OFFLINE',
   SET_PREF: 'BITFINEX/SYNC/PREF/SET',
   SET_SYMBOL_PREF: 'BITFINEX/SYNC/PREF/SET/SYMBOL',
+
+  SYNC_PROGRESS: 'ws_emitProgress',
+  SYNC_REQUESTS_REDIRECT: 'ws_emitRedirectingRequestsStatusToApi',
 }
