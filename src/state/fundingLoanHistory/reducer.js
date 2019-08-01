@@ -1,4 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-funding-loans-hist
+import _get from 'lodash/get'
+
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -27,7 +29,7 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_FLOAN: {
-      if (!payload) {
+      if (!_get(payload, ['data', 'res'])) {
         return {
           ...state,
           dataReceived: true,

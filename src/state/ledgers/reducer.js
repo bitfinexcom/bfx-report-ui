@@ -1,4 +1,7 @@
 // https://docs.bitfinex.com/v2/reference#ledgers
+
+import _get from 'lodash/get'
+
 import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
@@ -30,7 +33,7 @@ export function ledgersReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_LEDGERS: {
-      if (!payload) {
+      if (!_get(payload, ['data', 'res'])) {
         return {
           ...state,
           dataReceived: true,
