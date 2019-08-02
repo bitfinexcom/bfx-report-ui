@@ -14,6 +14,8 @@ import { platform } from 'var/config'
 import types from './constants'
 import { toggleFrameworkDialog } from './actions'
 
+const { REACT_APP_ELECTRON } = process.env
+
 function* uiLoaded() {
   // update theme from pref
   yield put(updateTheme())
@@ -48,7 +50,10 @@ function* uiLoaded() {
     }
   }
 
-  yield put(checkAuth())
+  // skip auto auth for electron build because front is loading faster
+  if (!REACT_APP_ELECTRON) {
+    yield put(checkAuth())
+  }
 }
 
 export function* frameworkCheck() {
