@@ -41,7 +41,7 @@ function* checkAuth() {
         time: (new Date()).toLocaleString(),
       }))
 
-      yield WS.send('login', auth)
+      yield WS.connect()
 
       // get owner email
       const { result: ownerEmail, error: emailError } = yield call(checkEmail, auth)

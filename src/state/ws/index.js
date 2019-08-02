@@ -1,16 +1,33 @@
 import { store } from 'state/store'
 
+import { selectAuth } from 'state/auth/selectors'
+
 const { REACT_APP_WS_ADDRESS } = process.env
+
+const getAuth = () => {
+  const state = store.getState()
+  return selectAuth(state)
+}
 
 class WS {
   constructor() {
     this.isConnected = false
     this.websocket = null
+  }
 
-    this.connect()
+  heartbeat = () => {
+    clearTimeout(this.pingTimeout)
+
+    this.pingTimeout = setTimeout(() => {
+      this.disconnect()
+    }, 11000)
   }
 
   connect = () => {
+    if (this.isConnected) {
+      return
+    }
+
     const websocket = new WebSocket(REACT_APP_WS_ADDRESS)
     this.websocket = websocket
 
@@ -21,11 +38,14 @@ class WS {
 
     websocket.onopen = () => {
       this.isConnected = true
+      this.send('login', getAuth())
+      this.heartbeat()
       resolver()
     }
 
     websocket.onclose = () => {
       this.isConnected = false
+      this.connect()
     }
 
     websocket.onmessage = this.onMessage
@@ -75,7 +95,12 @@ class WS {
       const data = JSON.parse(e.data)
       const { action, ...payload } = data
 
-      if (action === '__ping__' || !action) {
+      if (!action) {
+        return
+      }
+
+      if (action === '__ping__') {
+        this.heartbeat()
         return
       }
 
