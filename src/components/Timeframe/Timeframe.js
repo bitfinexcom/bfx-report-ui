@@ -12,6 +12,7 @@ import { propTypes, defaultProps } from './Timeframe.props'
 
 const TIME_FRAMES_POPOVER_PROPS = {
   interactionKind: PopoverInteractionKind.CLICK,
+  className: 'bitfinex-timeframe',
 }
 
 class Timeframe extends PureComponent {
