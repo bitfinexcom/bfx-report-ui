@@ -31,7 +31,7 @@ export function symbolsReducer(state = initialState, action) {
           symbolMapping[cid] = 'BCH'
           return
         }
-        if (symbol) {
+        if (symbol && id !== symbol) {
           symbolMapping[cid] = symbol
           explorersDict[symbol] = explorer
           dict[symbol] = name
