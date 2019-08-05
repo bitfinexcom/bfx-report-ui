@@ -190,6 +190,14 @@ body.#{$ns}-light {
   margin-right: 2px;
 }
 
+.bitfinex-sync-progress {
+  transform: translate(0.2px, -18.5px);
+  font-size: 10px;
+  position: absolute;
+  width: 26px;
+  text-align: center;
+}
+
 .bitfinex-pref-checkbox {
   margin-top: 6px;
 }

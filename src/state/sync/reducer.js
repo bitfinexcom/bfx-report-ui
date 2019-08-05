@@ -5,6 +5,8 @@ const initialState = {
   syncPairs: [],
   syncSymbols: [],
   startTime: undefined,
+  progress: null,
+  isSyncEnabled: false,
 }
 
 export function syncReducer(state = initialState, action) {
@@ -16,22 +18,34 @@ export function syncReducer(state = initialState, action) {
         syncMode: payload,
       }
     }
-    case types.SET_PREF: {
+    case types.SET_PAIR_PREF:
+    case types.EDIT_PAIR_PREF: {
       const { pairs: syncPairs, startTime } = payload
       return {
         ...state,
         startTime,
         syncPairs,
-        syncSymbols: state.syncSymbols,
       }
     }
-    case types.SET_SYMBOL_PREF: {
+    case types.SET_SYMBOL_PREF:
+    case types.EDIT_SYMBOL_PREF: {
       const { symbols: syncSymbols, startTime } = payload
       return {
         ...state,
         startTime,
-        syncPairs: state.syncPairs,
         syncSymbols,
+      }
+    }
+    case types.SET_PREF: {
+      return {
+        ...state,
+        ...payload,
+      }
+    }
+    case types.SET_PROGRESS: {
+      return {
+        ...state,
+        progress: payload,
       }
     }
     default: {

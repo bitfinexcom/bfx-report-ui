@@ -2,6 +2,8 @@ import { store } from 'state/store'
 
 import { selectAuth } from 'state/auth/selectors'
 
+import types from './constants'
+
 const { REACT_APP_WS_ADDRESS } = process.env
 
 const getAuth = () => {
@@ -38,8 +40,9 @@ class WS {
 
     websocket.onopen = () => {
       this.isConnected = true
-      this.send('login', getAuth())
+      this.send('login')
       this.heartbeat()
+      store.dispatch({ type: types.WS_CONNECT })
       resolver()
     }
 
@@ -57,6 +60,7 @@ class WS {
       this.connect()
     }
 
+    // eslint-disable-next-line consistent-return
     return isConnectionOpen
   }
 
@@ -66,7 +70,7 @@ class WS {
     }
   }
 
-  send = (method = '', auth = {}, params = {}) => {
+  send = (method = '', params = {}, auth = getAuth()) => {
     if (!this.isConnected) {
       return
     }
