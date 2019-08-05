@@ -203,7 +203,7 @@
       "pair": "货币对",
       "amount": "金额",
       "base-price": "基价",
-      "actual-price": "ACTUAL PRICE",
+      "actual-price": "实际价格",
       "liq-price": "清算价格",
       "pl": "损益",
       "plUsd": "损益 (USD)",
@@ -270,6 +270,14 @@
       "symbol": "符号筛选器",
       "pair": "货币对筛选器"
     }
+  },
+  "snapshots": {
+    "title": "Snapshots",
+    "query": {
+      "title": "查询",
+      "tooltip": "Select a time to query snapshots"
+    },
+    "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。"
   },
   "status": {
     "success": "{{topic}}在 {{time}} 成功",
