@@ -164,8 +164,8 @@ class Header extends PureComponent {
           </NavbarGroup>
           <NavbarGroup align='right'>
             <HelpLink />
-            {renderSyncMode}
             {renderMenu}
+            {renderSyncMode}
           </NavbarGroup>
         </Navbar>
         <div className='row'>

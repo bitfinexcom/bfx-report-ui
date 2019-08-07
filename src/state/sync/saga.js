@@ -1,7 +1,6 @@
 import {
   call,
   all,
-  cancelled,
   put,
   select,
   takeLatest,
@@ -9,9 +8,10 @@ import {
 import { delay } from 'redux-saga'
 
 import { makeFetchCall } from 'state/utils'
-import { hideAuth, logout as logoutAction } from 'state/auth/actions'
+import { logout as logoutAction } from 'state/auth/actions'
 import authTypes from 'state/auth/constants'
-import { getAuthStatus, selectAuth, getIsShown } from 'state/auth/selectors'
+import wsTypes from 'state/ws/constants'
+import { selectAuth } from 'state/auth/selectors'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
@@ -24,12 +24,14 @@ import {
 
 import types from './constants'
 import actions from './actions'
-import { getSyncMode, getSyncSymbols, getSyncPairs } from './selectors'
+import {
+  getSyncMode, getSyncSymbols, getSyncPairs, isSyncEnabled,
+} from './selectors'
 
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
 const getSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
-const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
-const syncNow = auth => ({ result: {} })
+// const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
+const syncNow = auth => makeFetchCall('syncNow', auth)
 const logout = auth => makeFetchCall('logout', auth)
 const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
@@ -45,11 +47,12 @@ const updateSyncErrorStatus = msg => updateErrorStatus({
 })
 
 function* startSyncing() {
-  yield delay(300)
   const auth = yield select(selectAuth)
   const { result, error } = yield call(enableSyncMode, auth)
   if (result) {
+    yield call(syncNow, auth)
     yield put(actions.setSyncMode(types.MODE_SYNCING))
+    yield put(actions.setSyncPref({ isSyncEnabled: true }))
     yield put(updateStatus({ id: 'sync.start' }))
   }
   if (error) {
@@ -63,6 +66,7 @@ function* stopSyncing() {
   const { result, error } = yield call(disableSyncMode, auth)
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
+    yield put(actions.setSyncPref({ isSyncEnabled: false }))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
   }
   if (error) {
@@ -80,7 +84,7 @@ export function* isSynched() {
     return true
   }
   if (error || progressError) {
-    yield put(updateSyncErrorStatus('during isSynching'))
+    yield put(updateSyncErrorStatus('during isSynched'))
   }
   return false
 }
@@ -165,119 +169,105 @@ function* editSyncSymbolPref({ payload }) {
   }
 }
 
-function* syncWatcher() {
-  try {
-    while (true) {
-      const authState = yield select(getAuthStatus)
-      const isShownAuth = yield select(getIsShown)
-      const auth = yield select(selectAuth)
-      if (authState && isShownAuth) {
-        const { result, error } = yield call(syncNow, auth)
-        if (result) {
-          // get default timezone
-          const currentTimezone = yield select(getTimezone)
-          if (!currentTimezone) {
-            yield delay(300)
-            const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
-            if (tz) {
-              yield put(setTimezone(tz.timezoneName))
-            }
+function* getSyncPref() {
+  const auth = yield select(selectAuth)
 
-            if (tzError) {
-              yield put(updateSyncErrorStatus(JSON.stringify(tzError)))
-            }
+  const { result: syncPrefResult, error: syncPrefError } = yield call(getPublicTradesConf, auth)
+  if (syncPrefResult && syncPrefResult.length > 0) {
+    const { start } = syncPrefResult[0]
+    const format = data => formatInternalSymbol(data.symbol)
+    const pairs = syncPrefResult.filter(data => isPair(data.symbol)).map(format)
+    const symbols = syncPrefResult.filter(data => isSymbol(data.symbol)).map(format)
+
+    yield put(actions.setSyncPairPref(pairs, start))
+    yield put(actions.setSyncSymbolPref(symbols, start))
+  }
+  if (syncPrefError) {
+    yield put(updateSyncErrorStatus('during getPublicTradesConf'))
+  }
+}
+
+function* initSync() {
+  const isEnabled = yield select(isSyncEnabled)
+
+  // start sync
+  if (isEnabled) {
+    const auth = yield select(selectAuth)
+    const { result: syncProgress } = yield call(getSyncProgress, auth)
+
+    // if sync is going on, don't start a new one
+    if (!syncProgress || syncProgress === 100) {
+      const { result, error } = yield call(syncNow, auth)
+      if (result) {
+        yield put(actions.setSyncMode(types.MODE_SYNCING))
+        // get default timezone
+        const currentTimezone = yield select(getTimezone)
+        if (!currentTimezone) {
+          yield delay(300)
+          const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
+          if (tz) {
+            yield put(setTimezone(tz.timezoneName))
           }
 
-          // get syncPref
-          const { result: syncPrefResult, error: syncPrefError } = yield call(getPublicTradesConf, auth)
-          if (syncPrefResult && syncPrefResult.length > 0) {
-            const format = data => formatInternalSymbol(data.symbol)
-            const pairs = syncPrefResult.filter(data => isPair(data.symbol))
-            const symbols = syncPrefResult.filter(data => isSymbol(data.symbol))
-            if (pairs.length > 0) {
-              yield put(actions.setSyncPref(
-                pairs.map(data => format(data)),
-                syncPrefResult[0].start,
-              ))
-            }
-            if (symbols.length > 0) {
-              yield put(actions.setSyncSymbolPref(
-                symbols.map(data => format(data)),
-                syncPrefResult[0].start,
-              ))
-            }
-          }
-          if (syncPrefError) {
-            yield put(updateSyncErrorStatus('during editPublicTradesConf'))
-          }
-
-          yield put(hideAuth())
-        }
-        if (error) {
-          yield put(updateSyncErrorStatus('during syncNow'))
-        }
-      }
-      if (authState && !isShownAuth) {
-        const { result: isQueryWithDb } = yield call(checkIsSyncModeWithDbData, auth)
-        // get current ui state
-        const syncMode = yield select(getSyncMode)
-        yield delay(300)
-        const { result: progress } = yield call(getSyncProgress, auth)
-        // console.warn('queryWithDb, %', isQueryWithDb, progress)
-        if (isQueryWithDb) {
-          if (progress) {
-            // go offline when progress return result
-            // "Error: The server https://{url} is not available", which means no internet connection
-            if (typeof progress === 'string' && progress.startsWith('Error: The server')) {
-              yield put(actions.setSyncMode(types.MODE_OFFLINE))
-              // go offline with notification when progress 100
-            } else if ((progress === 100 && syncMode !== types.MODE_OFFLINE)) {
-              yield put(actions.forceQueryFromDb())
-            }
-          } else if (syncMode !== types.MODE_SYNCING) {
-            // yield put(actions.startSyncing())
-          }
-        } else {
-          switch (typeof progress) {
-            case 'number':
-              // when progress 0~99 => syncing mode
-              if (progress !== 100) {
-                if (syncMode !== types.MODE_SYNCING) {
-                  const { result: hasSched, error: schedError } = yield call(isSchedulerEnabled)
-                  if (!hasSched) {
-                    // yield put(actions.startSyncing())
-                  } else {
-                    yield put(actions.setSyncMode(types.MODE_SYNCING))
-                  }
-
-                  if (schedError) {
-                    yield put(updateSyncErrorStatus('during check isSchedulerEnabled'))
-                  }
-                }
-              }
-              break
-            // when progress false => online mode
-            case 'boolean':
-              if (syncMode !== types.MODE_ONLINE) {
-                yield put(actions.setSyncMode(types.MODE_ONLINE))
-              }
-              break
-            // when progress error after the main page is shown => show notification and stop syncing
-            case 'string':
-            default:
-              yield put(updateSyncErrorStatus(progress))
-              yield put(actions.stopSyncing())
-              break
+          if (tzError) {
+            yield put(updateSyncErrorStatus(JSON.stringify(tzError)))
           }
         }
       }
-      yield delay(5000) // check every 5s
+      if (error) {
+        yield put(updateSyncErrorStatus('during syncNow'))
+      }
     }
-  } finally {
-    if (yield cancelled()) {
-      yield put(updateErrorStatus({
-        id: 'sync.message.canceled',
-      }))
+  }
+
+  yield call(getSyncPref)
+}
+
+function* progressUpdate({ payload }) {
+  const { result } = payload
+  yield put(actions.setSyncProgress(result))
+}
+
+function* requestsRedirectUpdate({ payload }) {
+  const { result } = payload
+  yield delay(300)
+
+  if (!result) {
+    yield put(actions.forceQueryFromDb())
+  }
+}
+
+function* wsConnect() {
+  const isEnabled = yield select(isSyncEnabled)
+  const syncMode = yield select(getSyncMode)
+
+  if (isEnabled) {
+    const auth = yield select(selectAuth)
+    const { result: syncProgress, error: progressError } = yield call(getSyncProgress, auth)
+
+    switch (typeof syncProgress) {
+      case 'number':
+        if (syncProgress !== 100 && syncMode !== types.MODE_SYNCING) {
+          yield put(actions.setSyncMode(types.MODE_SYNCING))
+        }
+        if (syncProgress === 100 && syncMode !== types.MODE_OFFLINE) {
+          yield put(actions.setSyncMode(types.MODE_OFFLINE))
+        }
+        break
+      case 'boolean':
+        if (syncMode !== types.MODE_ONLINE) {
+          yield put(actions.setSyncMode(types.MODE_ONLINE))
+        }
+        break
+      case 'string':
+      default:
+        yield put(updateSyncErrorStatus(syncProgress))
+        yield put(actions.stopSyncing())
+        break
+    }
+
+    if (progressError) {
+      yield put(updateSyncErrorStatus('during getSyncProgress'))
     }
   }
 }
@@ -286,8 +276,11 @@ export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
-  yield takeLatest(types.SET_PREF, editSyncPref)
-  yield takeLatest(types.SET_SYMBOL_PREF, editSyncSymbolPref)
-  yield takeLatest(authTypes.UPDATE_AUTH_STATUS, syncWatcher)
+  yield takeLatest(types.EDIT_PAIR_PREF, editSyncPref)
+  yield takeLatest(types.EDIT_SYMBOL_PREF, editSyncSymbolPref)
+  yield takeLatest(authTypes.UPDATE_AUTH_STATUS, initSync)
+  yield takeLatest(types.WS_PROGRESS_UPDATE, progressUpdate)
+  yield takeLatest(types.WS_REQUESTS_REDIRECT, requestsRedirectUpdate)
+  yield takeLatest(wsTypes.WS_CONNECT, wsConnect)
   yield takeLatest(authTypes.LOGOUT, syncLogout)
 }

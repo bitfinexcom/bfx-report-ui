@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { setSyncPref } from 'state/sync/actions'
+import { editSyncPairPref } from 'state/sync/actions'
 import { getStartTime, getSyncMode, getSyncPairs } from 'state/sync/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 
@@ -20,7 +20,7 @@ const mapStateToProps = (state = {}) => {
 }
 
 const mapDispatchToProps = {
-  setSyncPref: (pair, startTime, logout) => setSyncPref(pair, startTime.getTime(), logout),
+  setSyncPref: (pair, startTime, logout) => editSyncPairPref(pair, startTime.getTime(), logout),
 }
 
 const SyncPrefButtonContainer = connect(mapStateToProps, mapDispatchToProps)(SyncPrefButton)

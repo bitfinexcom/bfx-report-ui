@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 
 import { startSyncing, stopSyncing } from 'state/sync/actions'
-import { getSyncMode } from 'state/sync/selectors'
+import { getSyncMode, getSyncProgress } from 'state/sync/selectors'
 
 import SyncMode from './SyncMode'
 
 const mapStateToProps = (state = {}) => ({
   syncMode: getSyncMode(state),
+  syncProgress: getSyncProgress(state),
 })
 
 const mapDispatchToProps = {

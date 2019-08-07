@@ -63,6 +63,7 @@ class SyncMode extends PureComponent {
   render() {
     const {
       syncMode,
+      syncProgress,
       t,
     } = this.props
     const { isSyncDialogOpen } = this.state
@@ -83,7 +84,10 @@ class SyncMode extends PureComponent {
           minimal
           onClick={this.handleToggleClick}
         >
-          <Spinner size={18} />
+          <Spinner size={26} />
+          <div className='bitfinex-sync-progress'>
+            {syncProgress}
+          </div>
         </Button>
       )
     return (

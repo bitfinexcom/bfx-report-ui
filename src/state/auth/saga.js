@@ -4,9 +4,9 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
 import _keys from 'lodash/keys'
 
+import WS from 'state/ws'
 import { setTimezone } from 'state/base/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { getTimezone } from 'state/base/selectors'
@@ -41,8 +41,9 @@ function* checkAuth() {
         time: (new Date()).toLocaleString(),
       }))
 
+      yield WS.connect()
+
       // get owner email
-      yield delay(300)
       const { result: ownerEmail, error: emailError } = yield call(checkEmail, auth)
       if (ownerEmail) {
         yield put(setOwnerEmail(ownerEmail))
@@ -57,7 +58,6 @@ function* checkAuth() {
         // get default timezone
         const currentTimezone = yield select(getTimezone)
         if (!currentTimezone) {
-          yield delay(300)
           const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
           if (tz) {
             yield put(setTimezone(tz.timezoneName))
@@ -70,6 +70,8 @@ function* checkAuth() {
 
         yield put(actions.hideAuth())
       }
+
+      yield put(actions.hideAuth())
     } else {
       const { authToken } = auth
 
