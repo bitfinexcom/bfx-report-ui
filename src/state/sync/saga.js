@@ -195,8 +195,12 @@ function* initSync() {
     const auth = yield select(selectAuth)
     const { result: syncProgress } = yield call(getSyncProgress, auth)
 
+    if (Number.isInteger(syncProgress)) {
+      yield put(actions.setSyncProgress(syncProgress))
+    }
+
     // if sync is going on, don't start a new one
-    if (!syncProgress || syncProgress === 100) {
+    if (!Number.isInteger(syncProgress) || syncProgress === 100) {
       const { result, error } = yield call(syncNow, auth)
       if (result) {
         yield put(actions.setSyncMode(types.MODE_SYNCING))
