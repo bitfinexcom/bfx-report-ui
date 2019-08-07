@@ -2,9 +2,9 @@ import { store } from 'state/store'
 
 import { selectAuth } from 'state/auth/selectors'
 
-import types from './constants'
+import { platform } from 'var/config'
 
-const { REACT_APP_WS_ADDRESS } = process.env
+import types from './constants'
 
 const getAuth = () => {
   const state = store.getState()
@@ -30,7 +30,7 @@ class WS {
       return
     }
 
-    const websocket = new WebSocket(REACT_APP_WS_ADDRESS)
+    const websocket = new WebSocket(platform.WS_ADDRESS)
     this.websocket = websocket
 
     let resolver
