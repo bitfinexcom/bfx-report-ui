@@ -47,11 +47,9 @@ export default function* rootSaga() {
   yield fork(tradesSaga)
   yield fork(uiSaga)
   yield fork(walletsSaga)
-  if (platform.showSyncMode) {
+  if (platform.showFrameworkMode) {
     yield fork(syncSaga)
     yield fork(fpaymentSaga)
-  }
-  if (platform.showFrameworkMode) {
     yield fork(accountBalanceSaga)
     yield fork(winLossSaga)
     yield fork(snapshotsSaga)

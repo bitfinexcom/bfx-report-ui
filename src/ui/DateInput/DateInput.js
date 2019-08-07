@@ -32,7 +32,7 @@ class DateInput extends PureComponent {
       ? momentFormatterDays()
       : momentFormatter(DEFAULT_DATETIME_FORMAT, inputTimezone)
 
-    const timePrecision = (platform.showSyncMode && !daysOnly) ? TimePrecision.SECOND : undefined
+    const timePrecision = (platform.showFrameworkMode && !daysOnly) ? TimePrecision.SECOND : undefined
 
     return (
       <BptDateInput

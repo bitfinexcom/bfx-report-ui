@@ -80,7 +80,7 @@ class Wallets extends PureComponent {
     const marginRows = marginData.length
     const fundingRows = fundingData.length
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
-    const walletsTitle = platform.showSyncMode ? 'wallets.title' : 'wallets.title_beta'
+    const walletsTitle = platform.showFrameworkMode ? 'wallets.title' : 'wallets.title_beta'
 
     const renderTimeSelection = (
       <Fragment>

@@ -6,7 +6,6 @@ const platforms = {
     HOME_URL: 'https://www.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     showAuthPage: false,
-    showSyncMode: false,
     showFrameworkMode: false,
   },
   ethfinex: {
@@ -15,7 +14,6 @@ const platforms = {
     HOME_URL: 'https://www.ethfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     showAuthPage: false,
-    showSyncMode: false,
     showFrameworkMode: false,
     hideSwitchTheme: true,
   },
@@ -25,7 +23,6 @@ const platforms = {
     HOME_URL: 'https://test.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     showAuthPage: true,
-    showSyncMode: false,
     showFrameworkMode: false,
   },
   localhost: {
@@ -34,18 +31,9 @@ const platforms = {
     HOME_URL: 'http://localhost:3000',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     showAuthPage: true,
-    showSyncMode: true,
-    showFrameworkMode: false,
+    showFrameworkMode: true,
   },
 }
-
-Object.keys(platforms).forEach((platform) => {
-  const { showSyncMode, showFrameworkMode } = platforms[platform]
-
-  if (showFrameworkMode && !showSyncMode) {
-    throw Error(`Sync mode should be enabled for platform ${platform}`)
-  }
-})
 
 export const platformId = process.env.REACT_APP_PLATFORM || 'localhost'
 export const platform = platforms[platformId] || {}

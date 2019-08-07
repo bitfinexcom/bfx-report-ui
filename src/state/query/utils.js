@@ -90,8 +90,8 @@ const BASIC_TARGETS = [
   MENU_WALLETS,
   MENU_SNAPSHOTS,
 ]
-// MENU_FPAYMENT only for sync mode
-const FUNDING_TARGETS = platform.showSyncMode ? [
+// MENU_FPAYMENT only for framework mode
+const FUNDING_TARGETS = platform.showFrameworkMode ? [
   MENU_FOFFER,
   MENU_FLOAN,
   MENU_FCREDIT,

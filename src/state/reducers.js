@@ -30,7 +30,12 @@ import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
 
-const PERSIST_WHITELIST = ['base', 'sync']
+const PERSIST_WHITELIST = ['base']
+const PERSIST_WHITELIST_SYNC = ['sync']
+if (platform.showFrameworkMode) {
+  PERSIST_WHITELIST.push(...PERSIST_WHITELIST_SYNC)
+}
+
 const PERSIST_DEBUG = false
 const persistConfig = {
   key: 'bfx',
@@ -62,12 +67,9 @@ const BASE_REDUCERS = {
   wallets: walletsReducer,
 }
 
-const SYNC_REDUCERS = {
+const FRAMEWORK_REDUCERS = {
   fpayment: fundingPaymentReducer,
   sync: syncReducer,
-}
-
-const FRAMEWORK_REDUCERS = {
   balance: accountBalanceReducer,
   winLoss: winLossReducer,
   snapshots: snapshotsReducer,
@@ -75,7 +77,6 @@ const FRAMEWORK_REDUCERS = {
 
 const REDUCERS = {
   ...BASE_REDUCERS,
-  ...(platform.showSyncMode ? SYNC_REDUCERS : {}),
   ...(platform.showFrameworkMode ? FRAMEWORK_REDUCERS : {}),
 }
 

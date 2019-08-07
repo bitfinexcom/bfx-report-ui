@@ -53,8 +53,8 @@ function* checkAuth() {
         yield put(updateSyncErrorStatus(emailError))
       }
 
-      // non sync mode
-      if (!platform.showSyncMode) {
+      // non framework mode
+      if (!platform.showFrameworkMode) {
         // get default timezone
         const currentTimezone = yield select(getTimezone)
         if (!currentTimezone) {

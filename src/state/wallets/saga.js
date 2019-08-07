@@ -22,7 +22,7 @@ function getReqWallets(auth, end) {
 
 /* eslint-disable-next-line consistent-return */
 function* fetchWallets({ payload: end }) {
-  const walletsTitle = platform.showSyncMode ? 'wallets.title' : 'wallets.title_beta'
+  const walletsTitle = platform.showFrameworkMode ? 'wallets.title' : 'wallets.title_beta'
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
