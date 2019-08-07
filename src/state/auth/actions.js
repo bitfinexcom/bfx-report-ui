@@ -39,6 +39,17 @@ export function logout() {
 }
 
 /**
+ * Create an action to update successful auth status.
+ * @param {boolean} result auth status
+ */
+export function authSuccess(result) {
+  return {
+    type: types.AUTH_SUCCESS,
+    payload: result,
+  }
+}
+
+/**
  * Create an action to update auth status.
  * @param {boolean} result auth status
  */
@@ -54,5 +65,6 @@ export default {
   logout,
   showAuth,
   hideAuth,
+  authSuccess,
   updateAuthStatus,
 }

@@ -282,7 +282,7 @@ export default function* syncSaga() {
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
   yield takeLatest(types.EDIT_PAIR_PREF, editSyncPref)
   yield takeLatest(types.EDIT_SYMBOL_PREF, editSyncSymbolPref)
-  yield takeLatest(authTypes.UPDATE_AUTH_STATUS, initSync)
+  yield takeLatest(authTypes.AUTH_SUCCESS, initSync)
   yield takeLatest(types.WS_PROGRESS_UPDATE, progressUpdate)
   yield takeLatest(types.WS_REQUESTS_REDIRECT, requestsRedirectUpdate)
   yield takeLatest(wsTypes.WS_CONNECT, wsConnect)

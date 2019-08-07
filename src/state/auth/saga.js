@@ -41,6 +41,8 @@ function* checkAuth() {
         time: (new Date()).toLocaleString(),
       }))
 
+      yield put(actions.authSuccess(result))
+
       yield WS.connect()
 
       // get owner email
@@ -84,9 +86,9 @@ function* checkAuth() {
           return
         }
       }
-    }
 
-    yield put(actions.updateAuthStatus(result))
+      yield put(actions.updateAuthStatus(result))
+    }
 
     if (error) {
       yield put(updateErrorStatus({
