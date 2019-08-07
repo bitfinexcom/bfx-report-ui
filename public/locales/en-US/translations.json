@@ -128,6 +128,7 @@
   },
   "framework": {
     "title": "Please wait until sync is completed",
+    "no_sync": "Sync is not enabled",
     "proceed": "Proceed anyway",
     "cancel": "Cancel",
     "notagain": "Don't show this message again"

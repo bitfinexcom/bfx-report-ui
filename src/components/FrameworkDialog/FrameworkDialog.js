@@ -44,17 +44,21 @@ class FrameworkDialog extends PureComponent {
   }
 
   render() {
-    const { isFrameworkOpen, t } = this.props
+    const { isFrameworkOpen, syncMode, t } = this.props
     const { isFrameworkDialogDisabled } = this.state
     if (!isFrameworkOpen) {
       return null
     }
 
+    const title = (syncMode === mode.MODE_SYNCING)
+      ? t('framework.title')
+      : t('framework.no_sync')
+
     return (
       <Dialog
         icon={IconNames.CONFIRM}
         onClose={() => this.handleProceed(false)}
-        title={t('framework.title')}
+        title={title}
         autoFocus
         canEscapeKeyClose
         canOutsideClickClose

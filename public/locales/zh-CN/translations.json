@@ -128,6 +128,7 @@
   },
   "framework": {
     "title": "请等待同步完成",
+    "no_sync": "Sync is not enabled",
     "proceed": "仍然继续",
     "cancel": "取消",
     "notagain": "不再显示此消息"

@@ -128,6 +128,7 @@
   },
   "framework": {
     "title": "請等待同步完成為止",
+    "no_sync": "Sync is not enabled",
     "proceed": "選擇繼續",
     "cancel": "取消",
     "notagain": "不要再顯示此信息"
