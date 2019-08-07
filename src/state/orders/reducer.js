@@ -1,4 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#orders-history
+import _get from 'lodash/get'
+
 import {
   formatInternalSymbol, formatSymbolToPair, mapSymbol, mapPair,
 } from 'state/symbols/utils'
@@ -31,7 +33,7 @@ export function ordersReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_ORDERS: {
-      if (!payload) {
+      if (!_get(payload, ['data', 'res'])) {
         return {
           ...state,
           dataReceived: true,

@@ -1,4 +1,6 @@
 // data format https://github.com/bitfinexcom/bfx-api-node-models/blob/master/lib/position_hist.js
+import _get from 'lodash/get'
+
 import {
   formatInternalSymbol, formatSymbolToPair, mapSymbol, mapPair,
 } from 'state/symbols/utils'
@@ -29,7 +31,7 @@ export function positionsReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_POSITIONS: {
-      if (!payload) {
+      if (!_get(payload, ['data', 'res'])) {
         return {
           ...state,
           dataReceived: true,

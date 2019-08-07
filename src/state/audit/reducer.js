@@ -1,4 +1,6 @@
 // data format https://github.com/bitfinexcom/bfx-api-node-models/blob/master/lib/position_hist.js
+import _get from 'lodash/get'
+
 import { formatSymbolToPair, mapSymbol } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
@@ -25,7 +27,7 @@ export function positionsAuditReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_PAUDIT: {
-      if (!payload) {
+      if (!_get(payload, ['data', 'res'])) {
         return {
           ...state,
           dataReceived: true,

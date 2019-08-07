@@ -94,6 +94,12 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
   width: 40px;
 }
 
+.bitfinex-timeframe {
+  .bp3-transition-container {
+    z-index: 5;
+  }
+}
+
 .bitfinex-queried-symbol {
   background-color: $pt-text-color-muted !important;
 }

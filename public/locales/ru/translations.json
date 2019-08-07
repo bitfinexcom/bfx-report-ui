@@ -203,7 +203,7 @@
       "pair": "ПАРА",
       "amount": "СУММА",
       "base-price": "БАЗОВАЯ ЦЕНА",
-      "actual-price": "ACTUAL PRICE",
+      "actual-price": "АКТУАЛЬНАЯ ЦЕНА",
       "liq-price": "ЦЕНА ЛИКВ.",
       "pl": "P/L",
       "plUsd": "P/L (USD)",
@@ -270,6 +270,14 @@
       "symbol": "Фильтр по символу",
       "pair": "Фильтр по паре"
     }
+  },
+  "snapshots": {
+    "title": "Snapshots",
+    "query": {
+      "title": "Запрос",
+      "tooltip": "Select a time to query snapshots"
+    },
+    "nodata": "Нет данных за этот промежуток времени. Вы можете выбрать другой промежуток времени."
   },
   "status": {
     "success": "{{topic}} Выполнено в {{time}}",

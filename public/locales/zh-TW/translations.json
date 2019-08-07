@@ -70,7 +70,7 @@
     "title": "信用融資（已使用）",
     "column": {
       "symbol": "貨幣",
-      "side": "SIDE",
+      "side": "方向",
       "amount": "數量",
       "status": "狀態",
       "rate": "利率",
@@ -78,21 +78,21 @@
       "days": "天",
       "opening": "開始",
       "lastpayout": "最後付款",
-      "positionpair": "POSITION PAIR",
+      "positionpair": "倉位對",
       "updated": "日期"
     },
     "side": {
-      "provided": "PROVIDED",
-      "taken": "TAKEN",
-      "both": "BOTH",
-      "null": "null"
+      "provided": "已提供",
+      "taken": "已領取",
+      "both": "兩者",
+      "null": "空"
     }
   },
   "floan": {
     "title": "提供的融資（未使用）",
     "column": {
       "symbol": "貨幣",
-      "side": "SIDE",
+      "side": "方向",
       "amount": "數量",
       "status": "狀態",
       "rate": "利率",
@@ -103,10 +103,10 @@
       "updated": "日期"
     },
     "side": {
-      "provided": "PROVIDED",
-      "taken": "TAKEN",
-      "both": "BOTH",
-      "null": "null"
+      "provided": "已提供",
+      "taken": "已領取",
+      "both": "兩者",
+      "null": "空"
     }
   },
   "foffer": {
@@ -203,7 +203,7 @@
       "pair": "對",
       "amount": "數量",
       "base-price": "基價",
-      "actual-price": "ACTUAL PRICE",
+      "actual-price": "實際價格",
       "liq-price": "清算價格",
       "pl": "損益",
       "plUsd": "損益 (USD)",
@@ -270,6 +270,14 @@
       "symbol": "代幣過濾器",
       "pair": "代幣對過濾器"
     }
+  },
+  "snapshots": {
+    "title": "Snapshots",
+    "query": {
+      "title": "查詢",
+      "tooltip": "Select a time to query snapshots"
+    },
+    "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。"
   },
   "status":{
     "success": "於 {{time}} {{topic}}成功",

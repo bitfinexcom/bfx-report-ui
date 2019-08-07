@@ -1,4 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#rest-public-trades
+import _get from 'lodash/get'
+
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -24,7 +26,7 @@ export function publicTradesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_PUBLIC_TRADES: {
-      if (!payload) {
+      if (!_get(payload, ['data', 'res'])) {
         return {
           ...state,
           dataReceived: true,
