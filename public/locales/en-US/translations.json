@@ -200,6 +200,7 @@
     "title": "Positions",
     "active": "Active",
     "closed": "Closed",
+    "no_active": "No active positions at the moment.",
     "column": {
       "pair": "PAIR",
       "amount": "AMOUNT",
