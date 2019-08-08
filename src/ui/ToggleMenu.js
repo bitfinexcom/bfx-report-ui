@@ -75,7 +75,7 @@ class ToggleMenu extends PureComponent {
       t,
     } = this.props
     const isIconMode = menuMode === baseType.MENU_MODE_ICON
-    const walletsTitle = platform.showSyncMode ? 'wallets.title' : 'wallets.title_beta'
+    const walletsTitle = platform.showFrameworkMode ? 'wallets.title' : 'wallets.title_beta'
 
     const renderMenu = (
       <Fragment>
@@ -157,7 +157,7 @@ class ToggleMenu extends PureComponent {
           onClick={this.handleClickFCredit}
           active={target === MENU_FCREDIT}
         />
-        {platform.showSyncMode ? (
+        {platform.showFrameworkMode ? (
           <MenuItem
             icon={getIcon(MENU_FPAYMENT)}
             text={isIconMode ? '' : t('fpayment.title')}

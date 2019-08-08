@@ -125,7 +125,7 @@ class Header extends PureComponent {
       </Fragment>
     ) : null
 
-    const renderSyncMode = platform.showSyncMode ? (<SyncMode />) : null
+    const renderSyncMode = platform.showFrameworkMode ? <SyncMode /> : null
 
     const renderBrand = (
       <a href={platform.HOME_URL}>

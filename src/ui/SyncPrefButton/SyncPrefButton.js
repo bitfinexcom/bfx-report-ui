@@ -96,7 +96,7 @@ class SyncPrefButton extends PureComponent {
         </Fragment>
       )
       : null
-    return platform.showSyncMode
+    return platform.showFrameworkMode
       ? (
         <Fragment>
           {' '}

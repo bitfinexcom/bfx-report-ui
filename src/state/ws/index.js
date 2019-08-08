@@ -1,7 +1,6 @@
 import { store } from 'state/store'
 
 import { selectAuth } from 'state/auth/selectors'
-
 import { platform } from 'var/config'
 
 import types from './constants'
@@ -26,7 +25,7 @@ class WS {
   }
 
   connect = () => {
-    if (this.isConnected) {
+    if (!platform.showFrameworkMode || this.isConnected) {
       return
     }
 

@@ -75,7 +75,7 @@ class PublicFunding extends PureComponent {
       nextPage,
       timeOffset,
     } = this.props
-    if (platform.showSyncMode && !hasSyncPref) {
+    if (platform.showFrameworkMode && !hasSyncPref) {
       return (
         <SyncNotSetYet acceptSymbol />
       )
