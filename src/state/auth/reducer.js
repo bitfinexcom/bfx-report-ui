@@ -14,6 +14,7 @@ export function authReducer(state = initialState, action) {
         ...state,
         loading: true,
       }
+    case types.AUTH_SUCCESS:
     case types.UPDATE_AUTH_STATUS:
       return {
         ...state,

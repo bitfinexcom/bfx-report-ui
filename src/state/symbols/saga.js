@@ -44,5 +44,5 @@ function* fetchSymbols({ payload: success }) {
 }
 
 export default function* symbolsSaga() {
-  yield takeLatest(types.UPDATE_AUTH_STATUS, fetchSymbols)
+  yield takeLatest(types.AUTH_SUCCESS, fetchSymbols)
 }
