@@ -15,6 +15,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
+import { fetchSymbols } from 'state/symbols/actions'
 import {
   formatInternalSymbol,
   formatRawSymbols,
@@ -50,7 +51,6 @@ function* startSyncing() {
   const auth = yield select(selectAuth)
   const { result, error } = yield call(enableSyncMode, auth)
   if (result) {
-    yield call(syncNow, auth)
     yield put(actions.setSyncMode(types.MODE_SYNCING))
     yield put(actions.setSyncPref({ isSyncEnabled: true }))
     yield put(updateStatus({ id: 'sync.start' }))
@@ -224,6 +224,7 @@ function* initSync() {
     }
   }
 
+  yield put(fetchSymbols())
   yield call(getSyncPref)
 }
 
@@ -264,10 +265,14 @@ function* wsConnect() {
         }
         break
       case 'string':
-      default:
+      default: {
+        if (syncProgress === 'SYNCHRONIZATION_HAS_NOT_STARTED_YET') {
+          return
+        }
+
         yield put(updateSyncErrorStatus(syncProgress))
         yield put(actions.stopSyncing())
-        break
+      }
     }
 
     if (progressError) {

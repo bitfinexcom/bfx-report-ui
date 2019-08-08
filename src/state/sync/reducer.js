@@ -6,7 +6,7 @@ const initialState = {
   syncSymbols: [],
   startTime: undefined,
   progress: null,
-  isSyncEnabled: false,
+  isSyncEnabled: true,
 }
 
 export function syncReducer(state = initialState, action) {

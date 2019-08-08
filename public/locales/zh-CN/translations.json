@@ -200,6 +200,7 @@
     "title": "仓位",
     "active": "活动",
     "closed": "已结清",
+    "no_active": "No active positions at the moment.",
     "column": {
       "pair": "货币对",
       "amount": "金额",

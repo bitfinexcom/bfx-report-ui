@@ -200,6 +200,7 @@
     "title": "倉位",
     "active": "活躍",
     "closed": "已關閉",
+    "no_active": "No active positions at the moment.",
     "column": {
       "pair": "對",
       "amount": "數量",

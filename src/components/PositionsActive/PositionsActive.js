@@ -122,7 +122,7 @@ class PositionsActive extends PureComponent {
           {renderButtonGroup}
           <br />
           <br />
-          <NoData />
+          <NoData descId='positions.no_active' />
         </Fragment>
       )
     } else {
