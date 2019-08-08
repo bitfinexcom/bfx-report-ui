@@ -12,6 +12,7 @@ import { selectAuth } from 'state/auth/selectors'
 import { getTimezone } from 'state/base/selectors'
 import { getAuth, checkEmail, makeFetchCall } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { fetchSymbols } from 'state/symbols/actions'
 import { setOwnerEmail } from 'state/query/actions'
 import { platform } from 'var/config'
 
@@ -44,6 +45,11 @@ function* checkAuth() {
       yield put(actions.authSuccess(result))
 
       yield WS.connect()
+
+      // fetch symbols if framework mode is not enabled
+      if (!platform.showFrameworkMode) {
+        yield put(fetchSymbols())
+      }
 
       // get owner email
       const { result: ownerEmail, error: emailError } = yield call(checkEmail, auth)

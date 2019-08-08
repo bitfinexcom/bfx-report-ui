@@ -7,20 +7,16 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
-import types from 'state/auth/constants'
 import { selectAuth } from 'state/auth/selectors'
 
+import types from './constants'
 import actions from './actions'
 
 function getSymbols(auth) {
   return makeFetchCall('getSymbols', auth)
 }
 
-function* fetchSymbols({ payload: success }) {
-  if (!success) {
-    return
-  }
-
+function* fetchSymbols() {
   try {
     const auth = yield select(selectAuth)
     const { result, error } = yield call(getSymbols, auth)
@@ -44,5 +40,5 @@ function* fetchSymbols({ payload: success }) {
 }
 
 export default function* symbolsSaga() {
-  yield takeLatest(types.AUTH_SUCCESS, fetchSymbols)
+  yield takeLatest(types.FETCH_SYMBOLS, fetchSymbols)
 }
