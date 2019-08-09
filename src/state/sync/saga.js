@@ -6,6 +6,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import _includes from 'lodash/includes'
 
 import { makeFetchCall } from 'state/utils'
 import { logout as logoutAction } from 'state/auth/actions'
@@ -74,17 +75,20 @@ function* stopSyncing() {
   }
 }
 
-export function* isSynched() {
+export function* isSynced() {
   const auth = yield select(selectAuth)
   const [{ result: isQueryWithDb, error }, { result: syncProgress, error: progressError }] = yield all([
     call(checkIsSyncModeWithDbData, auth),
     call(getSyncProgress, auth),
   ])
-  if (isQueryWithDb && Number.isInteger(syncProgress) && syncProgress === 100) {
+
+  const synced = (Number.isInteger(syncProgress) && syncProgress === 100)
+    || _includes(syncProgress, 'ServerAvailabilityError')
+  if (isQueryWithDb && synced) {
     return true
   }
   if (error || progressError) {
-    yield put(updateSyncErrorStatus('during isSynched'))
+    yield put(updateSyncErrorStatus('during isSynced'))
   }
   return false
 }
