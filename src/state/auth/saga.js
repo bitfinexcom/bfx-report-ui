@@ -52,11 +52,11 @@ function* wsLogin() {
   if (timeout) {
     if (loginRetryCount < 8) {
       loginRetryCount += 1
-      yield call(wsLogin)
-    } else {
-      yield put(updateAuthErrorStatus())
-      yield put(actions.updateAuthStatus())
+      return yield call(wsLogin)
     }
+
+    yield put(updateAuthErrorStatus())
+    yield put(actions.updateAuthStatus())
   }
 
   return wsAuth
