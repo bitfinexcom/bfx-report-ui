@@ -12,8 +12,6 @@ import { logout as logoutAction } from 'state/auth/actions'
 import authTypes from 'state/auth/constants'
 import wsTypes from 'state/ws/constants'
 import { selectAuth } from 'state/auth/selectors'
-import { setTimezone } from 'state/base/actions'
-import { getTimezone } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import {
@@ -32,11 +30,10 @@ import {
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
 const getSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
 // const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
-const syncNow = auth => makeFetchCall('syncNow', auth)
+// const syncNow = auth => makeFetchCall('syncNow', auth)
 const logout = auth => makeFetchCall('logout', auth)
 const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
-const getUsersTimeConf = auth => makeFetchCall('getUsersTimeConf', auth)
 const getPublicTradesConf = auth => makeFetchCall('getPublicTradesConf', auth)
 const editPublicTradesConf = (auth, params) => makeFetchCall('editPublicTradesConf', auth, params)
 // const getTickersHistoryConf = auth => makeFetchCall('getTickersHistoryConf', auth)
@@ -190,37 +187,14 @@ function* getSyncPref() {
 function* initSync() {
   const isEnabled = yield select(isSyncEnabled)
 
-  // start sync
   if (isEnabled) {
     const auth = yield select(selectAuth)
     const { result: syncProgress } = yield call(getSyncProgress, auth)
 
-    if (Number.isInteger(syncProgress)) {
+    if (Number.isInteger(syncProgress) && syncProgress !== 100) {
       yield put(actions.setSyncProgress(syncProgress))
-    }
-
-    // if sync is going on, don't start a new one
-    if (!Number.isInteger(syncProgress) || syncProgress === 100) {
-      const { result, error } = yield call(syncNow, auth)
-      if (result) {
-        yield put(actions.setSyncMode(types.MODE_SYNCING))
-        // get default timezone
-        const currentTimezone = yield select(getTimezone)
-        if (!currentTimezone) {
-          yield delay(300)
-          const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
-          if (tz) {
-            yield put(setTimezone(tz.timezoneName))
-          }
-
-          if (tzError) {
-            yield put(updateSyncErrorStatus(JSON.stringify(tzError)))
-          }
-        }
-      }
-      if (error) {
-        yield put(updateSyncErrorStatus('during syncNow'))
-      }
+    } else {
+      yield call(startSyncing)
     }
   }
 
