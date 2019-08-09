@@ -49,8 +49,6 @@ function* wsLogin() {
     timeout: delay(300),
   })
 
-  console.log(2, wsAuth, timeout)
-
   if (timeout) {
     if (loginRetryCount < 8) {
       loginRetryCount += 1
@@ -66,7 +64,6 @@ function* wsLogin() {
 
 function* checkAuth() {
   try {
-    console.log(111111111111111111111)
     const auth = yield select(selectAuth)
     if (!auth) {
       yield put(actions.updateAuthStatus())

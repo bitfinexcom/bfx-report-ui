@@ -23,6 +23,17 @@ export function setApiSecret(secret) {
 }
 
 /**
+ * Create an action to store sync state.
+ * @param {boolean} syncState
+ */
+export function setSyncState(syncState) {
+  return {
+    type: types.SET_SYNC_STATE,
+    payload: syncState,
+  }
+}
+
+/**
  * Create an action to store Auth Token.
  * @param {string} token
  */
@@ -134,6 +145,7 @@ export default {
   setApiKey,
   setApiSecret,
   setAuthToken,
+  setSyncState,
   setDateFormat,
   setLang,
   setMenuMode,

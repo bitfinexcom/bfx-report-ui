@@ -31,7 +31,7 @@ import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
 
 const PERSIST_WHITELIST = ['base']
-const PERSIST_WHITELIST_SYNC = ['sync']
+const PERSIST_WHITELIST_SYNC = []
 if (platform.showFrameworkMode) {
   PERSIST_WHITELIST.push(...PERSIST_WHITELIST_SYNC)
 }

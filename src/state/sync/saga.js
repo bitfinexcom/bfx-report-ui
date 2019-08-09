@@ -12,6 +12,8 @@ import { makeFetchCall } from 'state/utils'
 import { logout as logoutAction } from 'state/auth/actions'
 import authTypes from 'state/auth/constants'
 import wsTypes from 'state/ws/constants'
+import { setSyncState } from 'state/base/actions'
+import { getSyncState } from 'state/base/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
@@ -24,9 +26,7 @@ import {
 
 import types from './constants'
 import actions from './actions'
-import {
-  getSyncMode, getSyncSymbols, getSyncPairs, isSyncEnabled,
-} from './selectors'
+import { getSyncMode, getSyncSymbols, getSyncPairs } from './selectors'
 
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
 const getSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
@@ -51,9 +51,9 @@ function* startSyncing() {
   if (result) {
     yield put(actions.setSyncPref({
       syncMode: types.MODE_SYNCING,
-      isSyncEnabled: true,
       progress: 0,
     }))
+    yield put(setSyncState(true))
     yield put(updateStatus({ id: 'sync.start' }))
   }
   if (error) {
@@ -67,7 +67,7 @@ function* stopSyncing() {
   const { result, error } = yield call(disableSyncMode, auth)
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
-    yield put(actions.setSyncPref({ isSyncEnabled: false }))
+    yield put(setSyncState(false))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
   }
   if (error) {
@@ -192,7 +192,7 @@ function* getSyncPref() {
 }
 
 function* initSync() {
-  const isEnabled = yield select(isSyncEnabled)
+  const isEnabled = yield select(getSyncState)
 
   if (isEnabled) {
     const auth = yield select(selectAuth)
@@ -224,7 +224,7 @@ function* requestsRedirectUpdate({ payload }) {
 }
 
 function* wsConnect() {
-  const isEnabled = yield select(isSyncEnabled)
+  const isEnabled = yield select(getSyncState)
   const syncMode = yield select(getSyncMode)
 
   if (isEnabled) {
