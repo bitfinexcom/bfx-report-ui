@@ -30,6 +30,7 @@ import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
 } from 'state/base/selectors'
+import { platform } from 'var/config'
 
 import {
   getEmail,
@@ -39,8 +40,6 @@ import {
 } from './selectors'
 import actions from './actions'
 import types from './constants'
-
-import { platform } from 'var/config'
 
 const {
   MENU_FCREDIT,

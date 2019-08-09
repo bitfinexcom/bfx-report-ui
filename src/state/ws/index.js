@@ -39,9 +39,9 @@ class WS {
 
     websocket.onopen = () => {
       this.isConnected = true
+      store.dispatch({ type: types.WS_CONNECT })
       this.send('login')
       this.heartbeat()
-      store.dispatch({ type: types.WS_CONNECT })
       resolver()
     }
 
