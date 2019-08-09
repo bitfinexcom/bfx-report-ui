@@ -94,20 +94,20 @@ export default function getColumns(props) {
         copyText: rowIndex => filteredData[rowIndex].collateral,
       },
       {
-        id: 'metadata',
-        name: 'positions.column.metadata',
+        id: 'meta',
+        name: 'positions.column.meta',
         width: 200,
         renderer: (rowIndex) => {
-          const { metadata = '' } = filteredData[rowIndex]
+          const { meta = '' } = filteredData[rowIndex]
           return (
-            <Cell tooltip={metadata}>
+            <Cell tooltip={meta}>
               <TruncatedFormat>
-                {metadata}
+                {meta}
               </TruncatedFormat>
             </Cell>
           )
         },
-        copyText: rowIndex => filteredData[rowIndex].metadata || '',
+        copyText: rowIndex => filteredData[rowIndex].meta || '',
       },
     ]
     : []

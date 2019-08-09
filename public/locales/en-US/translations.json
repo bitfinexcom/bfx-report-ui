@@ -215,7 +215,7 @@
       "status": "STATUS",
       "update": "UPDATED",
       "collateral": "COLLATERAL",
-      "metadata": "METADATA"
+      "meta": "METADATA"
     },
     "swap": {
       "daily": "Daily",
