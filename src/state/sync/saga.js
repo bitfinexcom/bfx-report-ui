@@ -48,8 +48,11 @@ function* startSyncing() {
   const auth = yield select(selectAuth)
   const { result, error } = yield call(enableSyncMode, auth)
   if (result) {
-    yield put(actions.setSyncMode(types.MODE_SYNCING))
-    yield put(actions.setSyncPref({ isSyncEnabled: true }))
+    yield put(actions.setSyncPref({
+      syncMode: types.MODE_SYNCING,
+      isSyncEnabled: true,
+      progress: 0,
+    }))
     yield put(updateStatus({ id: 'sync.start' }))
   }
   if (error) {

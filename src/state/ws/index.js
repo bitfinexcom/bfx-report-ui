@@ -56,7 +56,6 @@ class WS {
       console.error(err) // eslint-disable-line no-console
       resolver()
       websocket.close()
-      this.connect()
     }
 
     // eslint-disable-next-line consistent-return
