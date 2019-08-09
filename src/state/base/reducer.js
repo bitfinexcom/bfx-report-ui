@@ -13,7 +13,7 @@ const initialState = {
   menuMode: types.MENU_MODE_NORMAL,
   queryLimit: 0,
   theme: types.DEFAULT_THEME,
-  timezone: '',
+  timezone: types.DEFAULT_TIMEZONE,
   inputTimezone: moment.tz.guess(),
   milliseconds: false,
 }

@@ -11,6 +11,7 @@ import {
 import { DateRangeInput } from '@blueprintjs/datetime'
 import { IconNames } from '@blueprintjs/icons'
 
+import baseTypes from 'state/base/constants'
 import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
 
 import { propTypes, defaultProps } from './CustomDialog.props'
@@ -80,7 +81,7 @@ class CustomDialog extends PureComponent {
       startDate,
       t,
     } = this.props
-    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, 'Etc/UTC')
+    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, baseTypes.DEFAULT_TIMEZONE)
     const commonDateRangeProps = {
       allowSingleDayRange: true,
       closeOnSelection: true,
