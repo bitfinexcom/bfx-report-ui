@@ -81,7 +81,7 @@ export function* isSynced() {
 
   const synced = (Number.isInteger(syncProgress) && syncProgress === 100)
     || _includes(syncProgress, 'ServerAvailabilityError')
-    || _includes(syncProgress, 'getaddrinfo ENOTFOUND')
+    || _includes(syncProgress, 'getaddrinfo')
   if (isQueryWithDb && synced) {
     return true
   }

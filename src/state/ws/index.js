@@ -24,7 +24,7 @@ class WS {
 
     this.pingTimeout = setTimeout(() => {
       this.disconnect()
-    }, 11000)
+    }, 13000)
   }
 
   connect = () => {
