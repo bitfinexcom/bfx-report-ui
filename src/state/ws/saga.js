@@ -9,7 +9,7 @@ function* reconnect() {
   const wsAuth = yield call(login)
 
   if (wsAuth) {
-    yield put(updateSyncStatus)
+    yield put(updateSyncStatus())
   }
 }
 
