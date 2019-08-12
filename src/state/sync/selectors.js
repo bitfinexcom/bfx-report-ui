@@ -11,8 +11,6 @@ export const hasSyncPref = state => getSyncPairs(state).length !== 0
 export const hasSyncSymbolsPref = state => getSyncSymbols(state).length !== 0
   && getStartTime(state) !== undefined
 
-export const isSyncEnabled = state => getSync(state).isSyncEnabled
-
 export default {
   hasSyncPref,
   hasSyncSymbolsPref,
@@ -20,5 +18,4 @@ export default {
   getSyncMode,
   getSyncPairs,
   getSyncSymbols,
-  isSyncEnabled,
 }

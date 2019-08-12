@@ -6,14 +6,15 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import _includes from 'lodash/includes'
 
 import { makeFetchCall } from 'state/utils'
 import { logout as logoutAction } from 'state/auth/actions'
 import authTypes from 'state/auth/constants'
-import wsTypes from 'state/ws/constants'
+import { setSyncState } from 'state/base/actions'
+import { getSyncState } from 'state/base/selectors'
 import { selectAuth } from 'state/auth/selectors'
-import { setTimezone } from 'state/base/actions'
-import { getTimezone } from 'state/base/selectors'
+import { getSymbolsFetchStatus } from 'state/symbols/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import {
@@ -25,21 +26,15 @@ import {
 
 import types from './constants'
 import actions from './actions'
-import {
-  getSyncMode, getSyncSymbols, getSyncPairs, isSyncEnabled,
-} from './selectors'
+import { getSyncMode, getSyncSymbols, getSyncPairs } from './selectors'
 
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
 const getSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
-// const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
-const syncNow = auth => makeFetchCall('syncNow', auth)
 const logout = auth => makeFetchCall('logout', auth)
 const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
-const getUsersTimeConf = auth => makeFetchCall('getUsersTimeConf', auth)
 const getPublicTradesConf = auth => makeFetchCall('getPublicTradesConf', auth)
 const editPublicTradesConf = (auth, params) => makeFetchCall('editPublicTradesConf', auth, params)
-// const getTickersHistoryConf = auth => makeFetchCall('getTickersHistoryConf', auth)
 const editTickersHistoryConf = (auth, params) => makeFetchCall('editTickersHistoryConf', auth, params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
@@ -51,8 +46,11 @@ function* startSyncing() {
   const auth = yield select(selectAuth)
   const { result, error } = yield call(enableSyncMode, auth)
   if (result) {
-    yield put(actions.setSyncMode(types.MODE_SYNCING))
-    yield put(actions.setSyncPref({ isSyncEnabled: true }))
+    yield put(actions.setSyncPref({
+      syncMode: types.MODE_SYNCING,
+      progress: 0,
+    }))
+    yield put(setSyncState(true))
     yield put(updateStatus({ id: 'sync.start' }))
   }
   if (error) {
@@ -66,7 +64,7 @@ function* stopSyncing() {
   const { result, error } = yield call(disableSyncMode, auth)
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
-    yield put(actions.setSyncPref({ isSyncEnabled: false }))
+    yield put(setSyncState(false))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
   }
   if (error) {
@@ -74,17 +72,21 @@ function* stopSyncing() {
   }
 }
 
-export function* isSynched() {
+export function* isSynced() {
   const auth = yield select(selectAuth)
   const [{ result: isQueryWithDb, error }, { result: syncProgress, error: progressError }] = yield all([
     call(checkIsSyncModeWithDbData, auth),
     call(getSyncProgress, auth),
   ])
-  if (isQueryWithDb && Number.isInteger(syncProgress) && syncProgress === 100) {
+
+  const synced = (Number.isInteger(syncProgress) && syncProgress === 100)
+    || _includes(syncProgress, 'ServerAvailabilityError')
+    || _includes(syncProgress, 'getaddrinfo ENOTFOUND')
+  if (isQueryWithDb && synced) {
     return true
   }
   if (error || progressError) {
-    yield put(updateSyncErrorStatus('during isSynched'))
+    yield put(updateSyncErrorStatus('during isSynced'))
   }
   return false
 }
@@ -188,39 +190,20 @@ function* getSyncPref() {
 }
 
 function* initSync() {
-  const isEnabled = yield select(isSyncEnabled)
+  const isEnabled = yield select(getSyncState)
 
-  // start sync
   if (isEnabled) {
     const auth = yield select(selectAuth)
     const { result: syncProgress } = yield call(getSyncProgress, auth)
 
-    if (Number.isInteger(syncProgress)) {
-      yield put(actions.setSyncProgress(syncProgress))
-    }
-
-    // if sync is going on, don't start a new one
-    if (!Number.isInteger(syncProgress) || syncProgress === 100) {
-      const { result, error } = yield call(syncNow, auth)
-      if (result) {
-        yield put(actions.setSyncMode(types.MODE_SYNCING))
-        // get default timezone
-        const currentTimezone = yield select(getTimezone)
-        if (!currentTimezone) {
-          yield delay(300)
-          const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
-          if (tz) {
-            yield put(setTimezone(tz.timezoneName))
-          }
-
-          if (tzError) {
-            yield put(updateSyncErrorStatus(JSON.stringify(tzError)))
-          }
-        }
-      }
-      if (error) {
-        yield put(updateSyncErrorStatus('during syncNow'))
-      }
+    const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
+    if (isSyncing) {
+      yield put(actions.setSyncPref({
+        syncMode: types.MODE_SYNCING,
+        progress: syncProgress,
+      }))
+    } else {
+      yield call(startSyncing)
     }
   }
 
@@ -230,7 +213,11 @@ function* initSync() {
 
 function* progressUpdate({ payload }) {
   const { result } = payload
-  yield put(actions.setSyncProgress(result))
+  const progress = Number.isInteger(result)
+    ? result
+    : 0
+
+  yield put(actions.setSyncProgress(progress))
 }
 
 function* requestsRedirectUpdate({ payload }) {
@@ -239,11 +226,16 @@ function* requestsRedirectUpdate({ payload }) {
 
   if (!result) {
     yield put(actions.forceQueryFromDb())
+
+    const areSymbolsFetched = select(getSymbolsFetchStatus)
+    if (!areSymbolsFetched) {
+      yield put(fetchSymbols()) // if user synced after starting offline while in online mode
+    }
   }
 }
 
-function* wsConnect() {
-  const isEnabled = yield select(isSyncEnabled)
+function* updateSyncStatus() {
+  const isEnabled = yield select(getSyncState)
   const syncMode = yield select(getSyncMode)
 
   if (isEnabled) {
@@ -266,7 +258,8 @@ function* wsConnect() {
         break
       case 'string':
       default: {
-        if (syncProgress === 'SYNCHRONIZATION_HAS_NOT_STARTED_YET') {
+        if (syncProgress === 'SYNCHRONIZATION_HAS_NOT_STARTED_YET'
+          || _includes(syncProgress, 'ServerAvailabilityError')) {
           return
         }
 
@@ -290,6 +283,6 @@ export default function* syncSaga() {
   yield takeLatest(authTypes.AUTH_SUCCESS, initSync)
   yield takeLatest(types.WS_PROGRESS_UPDATE, progressUpdate)
   yield takeLatest(types.WS_REQUESTS_REDIRECT, requestsRedirectUpdate)
-  yield takeLatest(wsTypes.WS_CONNECT, wsConnect)
+  yield takeLatest(types.UPDATE_STATUS, updateSyncStatus)
   yield takeLatest(authTypes.LOGOUT, syncLogout)
 }

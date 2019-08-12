@@ -7,6 +7,7 @@ import types from './constants'
 import { setSymbolMap } from './map'
 
 const initialState = {
+  isFetched: false,
   coins: [], // symbol
   currencies: {}, // full name
   explorers: {}, // symbol explorer
@@ -47,6 +48,7 @@ export function symbolsReducer(state = initialState, action) {
       const formattedPairs = pairs.map(formatSymbolToPair)
       return {
         ...state,
+        isFetched: true,
         coins: coins.sort(),
         currencies: dict,
         explorers: explorersDict,

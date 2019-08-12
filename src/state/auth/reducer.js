@@ -18,8 +18,8 @@ export function authReducer(state = initialState, action) {
     case types.UPDATE_AUTH_STATUS:
       return {
         ...state,
-        authStatus: payload,
-        loading: payload, // eject from loading if auth fail
+        authStatus: payload || null,
+        loading: payload || false, // eject from loading if auth fail
       }
     case types.SHOW_AUTH:
       return {

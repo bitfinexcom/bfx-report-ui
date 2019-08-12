@@ -1,16 +1,22 @@
 import {
   call,
+  take,
+  all,
+  race,
   put,
   select,
   takeLatest,
 } from 'redux-saga/effects'
-import _keys from 'lodash/keys'
+import { delay } from 'redux-saga'
 
 import WS from 'state/ws'
-import { setTimezone } from 'state/base/actions'
+import wsTypes from 'state/ws/constants'
+import wsLogin from 'state/ws/login'
 import { selectAuth } from 'state/auth/selectors'
-import { getTimezone } from 'state/base/selectors'
-import { getAuth, checkEmail, makeFetchCall } from 'state/utils'
+import { fetchTimezone } from 'state/base/saga'
+import { setAuthToken } from 'state/base/actions'
+import { getApiKey, getApiSecret } from 'state/base/selectors'
+import { getAuth, checkEmail } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { setOwnerEmail } from 'state/query/actions'
@@ -19,23 +25,69 @@ import { platform } from 'var/config'
 import types from './constants'
 import actions from './actions'
 
-const getUsersTimeConf = auth => makeFetchCall('getUsersTimeConf', auth)
-const updateSyncErrorStatus = msg => updateErrorStatus({
+const updateAuthErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'auth.auth',
   detail: JSON.stringify(msg),
 })
 
+function* fetchEmail() {
+  const auth = yield select(selectAuth)
+  const { result } = yield call(checkEmail, auth)
+
+  if (result) {
+    yield put(setOwnerEmail(result))
+  }
+}
+
 function* checkAuth() {
   try {
     const auth = yield select(selectAuth)
-    if (!_keys(auth).filter(key => auth[key]).length) {
+    if (!auth) {
       yield put(actions.updateAuthStatus())
       return
     }
 
-    const { result = false, error } = yield call(getAuth, auth)
+    const { result, error } = yield call(getAuth, auth)
+
     if (result) {
+      if (platform.showFrameworkMode) {
+        if (!WS.isConnected) {
+          WS.connect()
+
+          const { connectTimeout } = yield race({
+            wsConnect: take(wsTypes.WS_CONNECT),
+            connectTimeout: delay(3000),
+          })
+
+          if (connectTimeout) {
+            yield put(updateAuthErrorStatus())
+            yield put(actions.updateAuthStatus())
+            return
+          }
+        }
+
+        const wsAuth = yield call(wsLogin)
+        if (!wsAuth) {
+          yield put(updateAuthErrorStatus())
+          yield put(actions.updateAuthStatus())
+
+          return
+        }
+
+        if (wsAuth) {
+          yield put(setOwnerEmail(wsAuth))
+        }
+
+        yield call(fetchTimezone)
+      } else {
+        yield all([
+          put(fetchSymbols()),
+          call(fetchEmail),
+          call(fetchTimezone),
+        ])
+      }
+
       yield put(updateSuccessStatus({
         id: 'status.success',
         topic: 'auth.auth',
@@ -43,58 +95,26 @@ function* checkAuth() {
       }))
 
       yield put(actions.authSuccess(result))
-
-      yield WS.connect()
-
-      // fetch symbols if framework mode is not enabled
-      if (!platform.showFrameworkMode) {
-        yield put(fetchSymbols())
-      }
-
-      // get owner email
-      const { result: ownerEmail, error: emailError } = yield call(checkEmail, auth)
-      if (ownerEmail) {
-        yield put(setOwnerEmail(ownerEmail))
-      }
-
-      if (emailError) {
-        yield put(updateSyncErrorStatus(emailError))
-      }
-
-      // non framework mode
-      if (!platform.showFrameworkMode) {
-        // get default timezone
-        const currentTimezone = yield select(getTimezone)
-        if (!currentTimezone) {
-          const { result: tz, error: tzError } = yield call(getUsersTimeConf, auth)
-          if (tz) {
-            yield put(setTimezone(tz.timezoneName))
-          }
-
-          if (tzError) {
-            yield put(updateSyncErrorStatus(tzError))
-          }
-        }
-
-        yield put(actions.hideAuth())
-      }
-
       yield put(actions.hideAuth())
-    } else {
-      const { authToken } = auth
 
-      yield put(actions.logout())
-
-      if (authToken) {
-        const { apiKey, apiSecret } = yield select(selectAuth)
-        if (apiKey && apiSecret) {
-          yield call(checkAuth)
-          return
-        }
-      }
-
-      yield put(actions.updateAuthStatus(result))
+      return
     }
+
+    // if auth was done with authToken and there is apiKey and apiSecret present,
+    // clear authToken and try to auth with those instead
+    const { authToken } = auth
+    if (authToken) {
+      const apiKey = yield select(getApiKey)
+      const apiSecret = yield select(getApiSecret)
+
+      if (apiKey && apiSecret) {
+        yield put(setAuthToken())
+        yield call(checkAuth)
+        return
+      }
+    }
+
+    yield put(actions.updateAuthStatus())
 
     if (error) {
       yield put(updateErrorStatus({
@@ -104,7 +124,7 @@ function* checkAuth() {
       }))
     }
   } catch (fail) {
-    yield put(updateSyncErrorStatus(fail))
+    yield put(updateAuthErrorStatus(fail))
   }
 }
 

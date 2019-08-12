@@ -56,7 +56,7 @@
     "query": "Prepare Export",
     "title": "Export CSV",
     "prepare": "Bitfinex will prepare your data during",
-    "send": "and send to Email {{email}} .",
+    "send": "and send to Email {{email}}.",
     "store": "and store to your local folder.",
     "export": "Export",
     "cancel": "Cancel",
@@ -215,7 +215,7 @@
       "status": "STATUS",
       "update": "UPDATED",
       "collateral": "COLLATERAL",
-      "metadata": "METADATA"
+      "meta": "METADATA"
     },
     "swap": {
       "daily": "Daily",

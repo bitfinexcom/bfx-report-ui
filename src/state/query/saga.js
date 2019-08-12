@@ -30,6 +30,7 @@ import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
 } from 'state/base/selectors'
+import { platform } from 'var/config'
 
 import {
   getEmail,
@@ -293,6 +294,11 @@ function* exportCSV({ payload: targets }) {
 
 function* prepareExport() {
   try {
+    if (platform.showFrameworkMode) {
+      yield put(actions.setExportEmail(false))
+      return
+    }
+
     // owner email now get while first auth-check
     const result = yield select(getEmail)
     // export email

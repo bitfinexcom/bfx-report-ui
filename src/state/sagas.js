@@ -26,6 +26,7 @@ import syncSaga from './sync/saga'
 import uiSaga from './ui/saga'
 import walletsSaga from './wallets/saga'
 import winLossSaga from './winLoss/saga'
+import wsSaga from './ws/saga'
 
 export default function* rootSaga() {
   yield fork(authSaga)
@@ -53,5 +54,6 @@ export default function* rootSaga() {
     yield fork(accountBalanceSaga)
     yield fork(winLossSaga)
     yield fork(snapshotsSaga)
+    yield fork(wsSaga)
   }
 }

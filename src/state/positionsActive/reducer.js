@@ -50,7 +50,7 @@ export function positionsActiveReducer(state = initialState, action) {
           leverage,
           marginFunding,
           marginFundingType,
-          metadata,
+          meta,
           mtsCreate,
           mtsUpdate,
           pl, // Profit & Loss
@@ -77,7 +77,7 @@ export function positionsActiveReducer(state = initialState, action) {
           leverage,
           marginFunding,
           marginFundingType,
-          metadata,
+          meta,
           mtsCreate,
           mtsUpdate,
           pl,

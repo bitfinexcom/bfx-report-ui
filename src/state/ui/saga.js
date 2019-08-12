@@ -8,7 +8,7 @@ import {
 import { checkAuth } from 'state/auth/actions'
 import { setCustomTimeRange } from 'state/query/actions'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
-import { isSynched } from 'state/sync/saga'
+import { isSynced } from 'state/sync/saga'
 import { platform } from 'var/config'
 
 import types from './constants'
@@ -60,7 +60,7 @@ export function* frameworkCheck() {
   if (!platform.showFrameworkMode || localStorage.getItem('isFrameworkDialogDisabled')) {
     return true
   }
-  if (yield call(isSynched)) {
+  if (yield call(isSynced)) {
     return true
   }
   yield put(toggleFrameworkDialog())

@@ -59,6 +59,15 @@ export function setSyncPref(payload) {
 }
 
 /**
+ * Create an action to update sync status.
+ */
+export function updateSyncStatus() {
+  return {
+    type: types.UPDATE_STATUS,
+  }
+}
+
+/**
  * Create an action to set pair preferences.
  * @param {string[]} pairs pairs
  * @param {numeric} startTime start time in milliseconds
