@@ -15,6 +15,7 @@ import wsTypes from 'state/ws/constants'
 import { setSyncState } from 'state/base/actions'
 import { getSyncState } from 'state/base/selectors'
 import { selectAuth } from 'state/auth/selectors'
+import { getSymbolsFetchStatus } from 'state/symbols/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import {
@@ -30,14 +31,11 @@ import { getSyncMode, getSyncSymbols, getSyncPairs } from './selectors'
 
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
 const getSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
-// const isSchedulerEnabled = () => makeFetchCall('isSchedulerEnabled')
-// const syncNow = auth => makeFetchCall('syncNow', auth)
 const logout = auth => makeFetchCall('logout', auth)
 const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
 const getPublicTradesConf = auth => makeFetchCall('getPublicTradesConf', auth)
 const editPublicTradesConf = (auth, params) => makeFetchCall('editPublicTradesConf', auth, params)
-// const getTickersHistoryConf = auth => makeFetchCall('getTickersHistoryConf', auth)
 const editTickersHistoryConf = (auth, params) => makeFetchCall('editTickersHistoryConf', auth, params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
@@ -84,6 +82,7 @@ export function* isSynced() {
 
   const synced = (Number.isInteger(syncProgress) && syncProgress === 100)
     || _includes(syncProgress, 'ServerAvailabilityError')
+    || _includes(syncProgress, 'getaddrinfo ENOTFOUND')
   if (isQueryWithDb && synced) {
     return true
   }
@@ -198,8 +197,12 @@ function* initSync() {
     const auth = yield select(selectAuth)
     const { result: syncProgress } = yield call(getSyncProgress, auth)
 
-    if (Number.isInteger(syncProgress) && syncProgress !== 100) {
-      yield put(actions.setSyncProgress(syncProgress))
+    const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
+    if (isSyncing) {
+      yield put(actions.setSyncPref({
+        syncMode: types.MODE_SYNCING,
+        progress: syncProgress,
+      }))
     } else {
       yield call(startSyncing)
     }
@@ -211,7 +214,11 @@ function* initSync() {
 
 function* progressUpdate({ payload }) {
   const { result } = payload
-  yield put(actions.setSyncProgress(result))
+  const progress = Number.isInteger(result)
+    ? result
+    : 0
+
+  yield put(actions.setSyncProgress(progress))
 }
 
 function* requestsRedirectUpdate({ payload }) {
@@ -220,6 +227,11 @@ function* requestsRedirectUpdate({ payload }) {
 
   if (!result) {
     yield put(actions.forceQueryFromDb())
+
+    const areSymbolsFetched = select(getSymbolsFetchStatus)
+    if (!areSymbolsFetched) {
+      yield put(fetchSymbols()) // if user synced after starting offline while in online mode
+    }
   }
 }
 
@@ -247,7 +259,8 @@ function* wsConnect() {
         break
       case 'string':
       default: {
-        if (syncProgress === 'SYNCHRONIZATION_HAS_NOT_STARTED_YET') {
+        if (syncProgress === 'SYNCHRONIZATION_HAS_NOT_STARTED_YET'
+          || _includes(syncProgress, 'ServerAvailabilityError')) {
           return
         }
 
