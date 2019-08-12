@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-import { persistReducer } from 'redux-persist'
+import { persistReducer, createMigrate } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import { platform } from 'var/config'
+import persistMigrations from 'state/persist.migrations'
 
 import accountBalanceReducer from './accountBalance/reducer'
 import authReducer from './auth/reducer'
@@ -31,17 +32,17 @@ import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
 
 const PERSIST_WHITELIST = ['base']
-const PERSIST_WHITELIST_SYNC = []
-if (platform.showFrameworkMode) {
-  PERSIST_WHITELIST.push(...PERSIST_WHITELIST_SYNC)
-}
 
+const PERSIST_VERSION = 0 // starts with -1
 const PERSIST_DEBUG = false
+
 const persistConfig = {
   key: 'bfx',
+  version: PERSIST_VERSION,
   storage,
   whitelist: PERSIST_WHITELIST,
   debug: PERSIST_DEBUG,
+  migrate: createMigrate(persistMigrations, { debug: PERSIST_DEBUG }),
 }
 
 const BASE_REDUCERS = {
