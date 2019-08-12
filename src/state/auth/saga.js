@@ -8,10 +8,10 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import _get from 'lodash/get'
 
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
+import wsLogin from 'state/ws/login'
 import { selectAuth } from 'state/auth/selectors'
 import { fetchTimezone } from 'state/base/saga'
 import { setAuthToken } from 'state/base/actions'
@@ -31,8 +31,6 @@ const updateAuthErrorStatus = msg => updateErrorStatus({
   detail: JSON.stringify(msg),
 })
 
-let loginRetryCount = 0
-
 function* fetchEmail() {
   const auth = yield select(selectAuth)
   const { result } = yield call(checkEmail, auth)
@@ -40,26 +38,6 @@ function* fetchEmail() {
   if (result) {
     yield put(setOwnerEmail(result))
   }
-}
-
-function* wsLogin() {
-  WS.send('login')
-  const { wsAuth, timeout } = yield race({
-    wsAuth: take(types.WS_LOGIN),
-    timeout: delay(300),
-  })
-
-  if (timeout) {
-    if (loginRetryCount < 8) {
-      loginRetryCount += 1
-      return yield call(wsLogin)
-    }
-
-    yield put(updateAuthErrorStatus())
-    yield put(actions.updateAuthStatus())
-  }
-
-  return wsAuth
 }
 
 function* checkAuth() {
@@ -74,28 +52,31 @@ function* checkAuth() {
 
     if (result) {
       if (platform.showFrameworkMode) {
-        WS.connect()
+        if (!WS.isConnected) {
+          WS.connect()
 
-        const { connectTimeout } = yield race({
-          wsConnect: take(wsTypes.WS_CONNECT),
-          connectTimeout: delay(3000),
-        })
+          const { connectTimeout } = yield race({
+            wsConnect: take(wsTypes.WS_CONNECT),
+            connectTimeout: delay(3000),
+          })
 
-        if (connectTimeout) {
-          yield put(updateAuthErrorStatus())
-          yield put(actions.updateAuthStatus())
-          return
+          if (connectTimeout) {
+            yield put(updateAuthErrorStatus())
+            yield put(actions.updateAuthStatus())
+            return
+          }
         }
 
         const wsAuth = yield call(wsLogin)
-        loginRetryCount = 0
         if (!wsAuth) {
+          yield put(updateAuthErrorStatus())
+          yield put(actions.updateAuthStatus())
+
           return
         }
 
-        const email = _get(wsAuth, ['payload', 'result'])
-        if (email) {
-          yield put(setOwnerEmail(email))
+        if (wsAuth) {
+          yield put(setOwnerEmail(wsAuth))
         }
 
         yield call(fetchTimezone)

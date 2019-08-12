@@ -5,6 +5,8 @@ import { platform } from 'var/config'
 
 import types from './constants'
 
+const { NODE_ENV } = process.env
+
 const getAuth = () => {
   const state = store.getState()
   return selectAuth(state)
@@ -14,6 +16,7 @@ class WS {
   constructor() {
     this.isConnected = false
     this.websocket = null
+    this.isFirstConnect = true
   }
 
   heartbeat = () => {
@@ -32,6 +35,7 @@ class WS {
     const websocket = new WebSocket(platform.WS_ADDRESS)
     this.websocket = websocket
 
+    // allows async use from sagas
     let resolver
     const isConnectionOpen = new Promise((res) => {
       resolver = res
@@ -40,7 +44,12 @@ class WS {
     websocket.onopen = () => {
       this.isConnected = true
       store.dispatch({ type: types.WS_CONNECT })
-      this.send('login')
+
+      if (!this.isFirstConnect) {
+        store.dispatch({ type: types.WS_RECONNECT })
+      }
+      this.isFirstConnect = false
+
       this.heartbeat()
       resolver()
     }
@@ -53,7 +62,9 @@ class WS {
     websocket.onmessage = this.onMessage
 
     websocket.onerror = (err) => {
-      console.error(err) // eslint-disable-line no-console
+      if (NODE_ENV === 'development') {
+        console.error(err) // eslint-disable-line no-console
+      }
       resolver()
       websocket.close()
     }
@@ -87,7 +98,9 @@ class WS {
 
       this.websocket.send(JSON.stringify(data))
     } catch (err) {
-      console.error(err) // eslint-disable-line no-console
+      if (NODE_ENV === 'development') {
+        console.error(err) // eslint-disable-line no-console
+      }
     }
   }
 

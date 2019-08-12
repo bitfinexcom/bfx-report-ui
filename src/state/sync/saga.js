@@ -11,7 +11,6 @@ import _includes from 'lodash/includes'
 import { makeFetchCall } from 'state/utils'
 import { logout as logoutAction } from 'state/auth/actions'
 import authTypes from 'state/auth/constants'
-import wsTypes from 'state/ws/constants'
 import { setSyncState } from 'state/base/actions'
 import { getSyncState } from 'state/base/selectors'
 import { selectAuth } from 'state/auth/selectors'
@@ -235,7 +234,7 @@ function* requestsRedirectUpdate({ payload }) {
   }
 }
 
-function* wsConnect() {
+function* updateSyncStatus() {
   const isEnabled = yield select(getSyncState)
   const syncMode = yield select(getSyncMode)
 
@@ -284,6 +283,6 @@ export default function* syncSaga() {
   yield takeLatest(authTypes.AUTH_SUCCESS, initSync)
   yield takeLatest(types.WS_PROGRESS_UPDATE, progressUpdate)
   yield takeLatest(types.WS_REQUESTS_REDIRECT, requestsRedirectUpdate)
-  yield takeLatest(wsTypes.WS_CONNECT, wsConnect)
+  yield takeLatest(types.UPDATE_STATUS, updateSyncStatus)
   yield takeLatest(authTypes.LOGOUT, syncLogout)
 }
