@@ -99,15 +99,16 @@ export default function getColumns(props) {
         width: 200,
         renderer: (rowIndex) => {
           const { meta = '' } = filteredData[rowIndex]
+          const metaData = JSON.stringify(meta)
           return (
-            <Cell tooltip={meta}>
+            <Cell tooltip={metaData}>
               <TruncatedFormat>
-                {meta}
+                {metaData}
               </TruncatedFormat>
             </Cell>
           )
         },
-        copyText: rowIndex => filteredData[rowIndex].meta || '',
+        copyText: rowIndex => JSON.stringify(filteredData[rowIndex].meta) || '',
       },
     ]
     : []
