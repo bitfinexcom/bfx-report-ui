@@ -8,7 +8,7 @@ import {
 import queryConstants from 'state/query/constants'
 import { formatAmount, fixedFloat } from 'ui/utils'
 
-const { MENU_POSITIONS_ACTIVE } = queryConstants
+const { MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT } = queryConstants
 
 export default function getColumns(props) {
   const {
@@ -77,7 +77,7 @@ export default function getColumns(props) {
     ]
     : []
 
-  const ACTIVE_POSITIONS_COLS_2 = (target === MENU_POSITIONS_ACTIVE)
+  const COLLATERAL_META = (target === MENU_POSITIONS_ACTIVE || target === MENU_POSITIONS_AUDIT)
     ? [
       {
         id: 'collateral',
@@ -240,6 +240,6 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
-    ...ACTIVE_POSITIONS_COLS_2,
+    ...COLLATERAL_META,
   ]
 }
