@@ -13,6 +13,7 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
+import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
 import {
@@ -108,6 +109,8 @@ class Orders extends PureComponent {
             {' '}
             <TimeRange />
             {renderPairSelector}
+            {' '}
+            <QueryLimitSelector target={TYPE} />
           </h4>
           <NoData />
         </Fragment>
