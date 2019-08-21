@@ -90,7 +90,7 @@ export function setSyncPairPref(pairs, startTime) {
  */
 export function editSyncPairPref(pairs, startTime, logout) {
   return {
-    type: types.SET_PAIR_PREF,
+    type: types.EDIT_PAIR_PREF,
     payload: {
       pairs,
       startTime,
@@ -122,7 +122,7 @@ export function setSyncSymbolPref(symbols, startTime) {
  */
 export function editSyncSymbolPref(symbols, startTime, logout) {
   return {
-    type: types.SET_SYMBOL_PREF,
+    type: types.EDIT_SYMBOL_PREF,
     payload: {
       symbols,
       startTime,

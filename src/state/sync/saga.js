@@ -101,8 +101,11 @@ function* syncLogout() {
   const auth = yield select(selectAuth)
   const { result, error } = yield call(logout, auth)
   if (result) {
-    yield put(actions.setSyncMode(types.MODE_ONLINE))
-    yield put(updateStatus({ id: 'sync.logout' }))
+    const syncMode = yield select(getSyncMode)
+    if (syncMode !== types.MODE_ONLINE) {
+      yield put(actions.setSyncMode(types.MODE_ONLINE))
+      yield put(updateStatus({ id: 'sync.logout' }))
+    }
   }
   if (error) {
     yield put(updateSyncErrorStatus('during logout'))

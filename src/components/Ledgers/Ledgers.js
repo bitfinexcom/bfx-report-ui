@@ -13,6 +13,7 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
+import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
 import {
@@ -108,6 +109,8 @@ class Ledgers extends PureComponent {
             {' '}
             <TimeRange />
             {renderSymbolSelector}
+            {' '}
+            <QueryLimitSelector target={TYPE} />
           </h4>
           <NoData />
         </Fragment>

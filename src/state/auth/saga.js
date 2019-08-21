@@ -1,7 +1,6 @@
 import {
   call,
   take,
-  all,
   race,
   put,
   select,
@@ -13,7 +12,6 @@ import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsLogin from 'state/ws/login'
 import { selectAuth } from 'state/auth/selectors'
-import { fetchTimezone } from 'state/base/saga'
 import { setAuthToken } from 'state/base/actions'
 import { getApiKey, getApiSecret } from 'state/base/selectors'
 import { getAuth, checkEmail } from 'state/utils'
@@ -78,14 +76,9 @@ function* checkAuth() {
         if (wsAuth) {
           yield put(setOwnerEmail(wsAuth))
         }
-
-        yield call(fetchTimezone)
       } else {
-        yield all([
-          put(fetchSymbols()),
-          call(fetchEmail),
-          call(fetchTimezone),
-        ])
+        yield put(fetchSymbols())
+        yield call(fetchEmail)
       }
 
       yield put(updateSuccessStatus({

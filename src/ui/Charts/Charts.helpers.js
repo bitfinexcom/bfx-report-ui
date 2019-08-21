@@ -2,7 +2,7 @@ import moment from 'moment-timezone'
 
 import timeframeConstants from 'ui/TimeframeSelector/constants'
 
-import { CURRENCIES } from './constants'
+import { CURRENCY_USD } from './constants'
 
 const formatTimestamp = (timestamp, timeframe) => {
   if (!timestamp) {
@@ -24,31 +24,18 @@ const formatTimestamp = (timestamp, timeframe) => {
 }
 
 const parseChartData = ({ data, timeframe }) => {
-  const presentCurrencies = CURRENCIES.reduce((acc, currency) => {
-    const isPresent = data.find(entry => entry[currency])
-    if (isPresent) {
-      acc.push(currency)
-    }
-    return acc
-  }, [])
-
   const chartData = data.map((entry) => {
     const { mts } = entry
 
-    const currenciesData = presentCurrencies.reduce((acc, cur) => {
-      acc[cur] = entry[cur] && +entry[cur].toFixed(2)
-      return acc
-    }, {})
-
     return {
       name: formatTimestamp(mts, timeframe),
-      ...currenciesData,
+      [CURRENCY_USD]: entry[CURRENCY_USD] && +entry[CURRENCY_USD].toFixed(2),
     }
   })
 
   return {
     chartData,
-    presentCurrencies,
+    presentCurrencies: [CURRENCY_USD],
   }
 }
 
