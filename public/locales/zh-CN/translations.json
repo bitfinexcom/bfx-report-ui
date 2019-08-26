@@ -158,6 +158,7 @@
       "updated": "日期",
       "currency": "货币",
       "amount": "金额",
+      "amountUsd": "金额 (USD)",
       "fees": "费用",
       "status": "状态",
       "destination": "目的地",

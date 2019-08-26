@@ -158,6 +158,7 @@
       "updated": "DATE",
       "currency": "CURRENCY",
       "amount": "AMOUNT",
+      "amountUsd": "AMOUNT (USD)",
       "fees": "FEES",
       "status": "STATUS",
       "destination": "DESTINATION",

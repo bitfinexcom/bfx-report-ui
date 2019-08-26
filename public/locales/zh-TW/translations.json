@@ -158,6 +158,7 @@
       "updated": "時間",
       "currency": "貨幣",
       "amount": "數量",
+      "amountUsd": "數量(美元)",
       "fees": "費用",
       "status": "狀態",
       "destination": "去處",

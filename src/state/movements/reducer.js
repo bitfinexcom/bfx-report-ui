@@ -43,6 +43,7 @@ export function movementsReducer(state = initialState, action) {
       const entries = res.map((entry) => {
         const {
           amount,
+          amountUsd,
           currency,
           currencyName,
           destinationAddress,
@@ -70,6 +71,7 @@ export function movementsReducer(state = initialState, action) {
           mtsUpdated,
           status,
           amount,
+          amountUsd,
           fees,
           destinationAddress,
           transactionId,

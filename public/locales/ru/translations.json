@@ -158,6 +158,7 @@
       "updated": "ДАТА",
       "currency": "ВАЛЮТА",
       "amount": "СУММА",
+      "amountUsd": "СУММА (USD)",
       "fees": "КОМИССИИ",
       "status": "СТАТУС",
       "destination": "НАЗНАЧЕНИЕ",

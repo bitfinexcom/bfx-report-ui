@@ -4,8 +4,9 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { formatAmount, fixedFloat } from 'ui/utils'
+import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 import Explorer from 'ui/Explorer'
+import { platform } from 'var/config'
 
 export default function getColumns(props) {
   const {
@@ -92,6 +93,26 @@ export default function getColumns(props) {
         return `${amount} ${currency}`
       },
     },
+    ...insertIf(platform.showFrameworkMode, (
+      {
+        id: 'amountUsd',
+        name: 'movements.column.amountUsd',
+        width: 120,
+        renderer: (rowIndex) => {
+          const { amountUsd } = filteredData[rowIndex]
+          const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
+          return (
+            <Cell tooltip={tooltip}>
+              {formatAmount(amountUsd)}
+            </Cell>
+          )
+        },
+        copyText: (rowIndex) => {
+          const { amountUsd } = filteredData[rowIndex]
+          return `${fixedFloat(amountUsd)} ${t('column.usd')}`
+        },
+      }
+    )),
     {
       id: 'fees',
       name: 'movements.column.fees',
