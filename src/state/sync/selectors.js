@@ -6,6 +6,10 @@ export const getSyncSymbols = state => getSync(state).syncSymbols || []
 export const getStartTime = state => getSync(state).startTime
 export const getSyncProgress = state => getSync(state).progress || 0
 
+export const getPublicTradesPairs = state => getSync(state).publicTradesPairs
+export const getPublicTradesSymbols = state => getSync(state).publicTradesSymbols
+export const getTickersHistoryPairs = state => getSync(state).tickersHistoryPairs
+
 export const hasSyncPref = state => getSyncPairs(state).length !== 0
   && getStartTime(state) !== undefined
 export const hasSyncSymbolsPref = state => getSyncSymbols(state).length !== 0

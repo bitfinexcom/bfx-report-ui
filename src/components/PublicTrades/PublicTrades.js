@@ -67,7 +67,7 @@ class PublicTrades extends PureComponent {
     } = this.props
     if (platform.showFrameworkMode && !hasSyncPref) {
       return (
-        <SyncNotSetYet />
+        <SyncNotSetYet sectionType={TYPE} />
       )
     }
 
@@ -122,6 +122,8 @@ class PublicTrades extends PureComponent {
             {' '}
             <TimeRange />
             {renderPairSelector}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton />
           </h4>
           <NoData />

@@ -68,13 +68,13 @@ export function updateSyncStatus() {
 }
 
 /**
- * Create an action to set pair preferences.
+ * Create an action to edit public trades pair preferences.
  * @param {string[]} pairs pairs
  * @param {numeric} startTime start time in milliseconds
  */
-export function setSyncPairPref(pairs, startTime) {
+export function editPublicTradesPairPref(pairs, startTime) {
   return {
-    type: types.SET_PAIR_PREF,
+    type: types.EDIT_PUBLIC_TRADES_PAIRS_PREF,
     payload: {
       pairs,
       startTime,
@@ -83,63 +83,43 @@ export function setSyncPairPref(pairs, startTime) {
 }
 
 /**
- * Create an action to edit pair preferences.
+ * Create an action to edit public trades symbol preferences.
+ * @param {string[]} symbols symbols
+ * @param {numeric} startTime start time in milliseconds
+ */
+export function editPublicTradesSymbolPref(symbols, startTime) {
+  return {
+    type: types.EDIT_PUBLIC_TRADES_SYMBOLS_PREF,
+    payload: {
+      symbols,
+      startTime,
+    },
+  }
+}
+
+/**
+ * Create an action to edit tickers history pair preferences.
  * @param {string[]} pairs pairs
  * @param {numeric} startTime start time in milliseconds
- * @param {boolean} logout logout after set pref
  */
-export function editSyncPairPref(pairs, startTime, logout) {
+export function editTickersHistoryPairPref(pairs, startTime) {
   return {
-    type: types.EDIT_PAIR_PREF,
+    type: types.EDIT_TICKERS_HISTORY_PAIRS_PREF,
     payload: {
       pairs,
       startTime,
-      logout,
-    },
-  }
-}
-
-/**
- * Create an action to set symbol preferences.
- * @param {string[]} symbols symbols
- * @param {numeric} startTime start time in milliseconds
- */
-export function setSyncSymbolPref(symbols, startTime) {
-  return {
-    type: types.SET_SYMBOL_PREF,
-    payload: {
-      symbols,
-      startTime,
-    },
-  }
-}
-
-/**
- * Create an action to edit symbol preferences.
- * @param {string[]} symbols symbols
- * @param {numeric} startTime start time in milliseconds
- * @param {boolean} logout logout after set pref
- */
-export function editSyncSymbolPref(symbols, startTime, logout) {
-  return {
-    type: types.EDIT_SYMBOL_PREF,
-    payload: {
-      symbols,
-      startTime,
-      logout,
     },
   }
 }
 
 export default {
+  editPublicTradesPairPref,
+  editPublicTradesSymbolPref,
+  editTickersHistoryPairPref,
   forceQueryFromDb,
   setSyncMode,
   setSyncProgress,
   setSyncPref,
-  setSyncPairPref,
-  editSyncPairPref,
-  setSyncSymbolPref,
-  editSyncSymbolPref,
   startSyncing,
   stopSyncing,
 }

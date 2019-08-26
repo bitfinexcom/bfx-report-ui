@@ -11,7 +11,7 @@ import {
 } from 'state/publicTrades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getPairs } from 'state/symbols/selectors'
-import { hasSyncPref } from 'state/sync/selectors'
+import { getPublicTradesPairs } from 'state/sync/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -27,7 +27,7 @@ import PublicTrades from './PublicTrades'
 const mapStateToProps = (state = {}) => ({
   entries: getEntries(state),
   getFullTime: getFullTime(state),
-  hasSyncPref: hasSyncPref(state),
+  hasSyncPref: !!getPublicTradesPairs(state).length,
   loading: !getDataReceived(state),
   nextPage: getNextPage(state),
   offset: getOffset(state),

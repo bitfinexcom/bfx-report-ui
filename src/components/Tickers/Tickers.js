@@ -76,7 +76,7 @@ class Tickers extends PureComponent {
     } = this.props
     if (platform.showFrameworkMode && !hasSyncPref) {
       return (
-        <SyncNotSetYet />
+        <SyncNotSetYet sectionType={TYPE} />
       )
     }
 
@@ -127,6 +127,8 @@ class Tickers extends PureComponent {
             {' '}
             <TimeRange />
             {renderPairSelector}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton />
           </h4>
           <NoData />
