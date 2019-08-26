@@ -6,6 +6,7 @@ import types from './constants'
 const initialState = {
   dataReceived: false,
   positionsEntries: [],
+  tickersEntries: [],
   walletsEntries: [],
   timestamp: undefined,
 }
@@ -48,11 +49,22 @@ const getPositionsEntries = entries => entries.map((entry) => {
   }
 })
 
+const getTickersEntires = entries => entries.map((entry) => {
+  const {
+    symbol,
+    amount,
+  } = entry
+
+  return {
+    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+    amount,
+  }
+})
+
 const getWalletsEntries = entries => entries.map((entry) => {
   const {
     type,
     currency,
-    // mtsUpdate, 1562657495000
     balance,
     balanceUsd,
   } = entry
@@ -76,12 +88,13 @@ export function snapshotsReducer(state = initialState, action) {
         }
       }
 
-      const { positionsSnapshot = [], walletsSnapshot = [] } = payload
+      const { positionsSnapshot = [], tickers = [], walletsSnapshot = [] } = payload
 
       return {
         ...state,
         dataReceived: true,
         positionsEntries: getPositionsEntries(positionsSnapshot),
+        tickersEntries: getTickersEntires(tickers),
         walletsEntries: getWalletsEntries(walletsSnapshot),
       }
     }

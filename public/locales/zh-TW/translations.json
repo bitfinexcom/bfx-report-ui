@@ -279,6 +279,9 @@
       "title": "查詢",
       "tooltip": "Select a time to query snapshots"
     },
+    "column": {
+      "amount": "數量"
+    },
     "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。"
   },
   "status":{

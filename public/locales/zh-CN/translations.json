@@ -279,6 +279,9 @@
       "title": "查询",
       "tooltip": "Select a time to query snapshots"
     },
+    "column": {
+      "amount": "金额"
+    },
     "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。"
   },
   "status": {

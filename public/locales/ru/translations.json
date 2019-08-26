@@ -279,6 +279,9 @@
       "title": "Запрос",
       "tooltip": "Select a time to query snapshots"
     },
+    "column": {
+      "amount": "СУММА"
+    },
     "nodata": "Нет данных за этот промежуток времени. Вы можете выбрать другой промежуток времени."
   },
   "status": {
