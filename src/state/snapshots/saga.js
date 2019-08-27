@@ -29,16 +29,7 @@ function* fetchSnapshots({ payload: end }) {
 
     const auth = yield select(selectAuth)
     const { result = {}, error } = yield call(getReqSnapshots, auth, end)
-    result.tickers = [
-      {
-        symbol: 'tBTCUSD',
-        amount: 10000.2,
-      },
-      {
-        symbol: 'tIOTUSD',
-        amount: 0.2386,
-      },
-    ]
+
     yield put(actions.updateSnapshots(result))
 
     if (error) {
