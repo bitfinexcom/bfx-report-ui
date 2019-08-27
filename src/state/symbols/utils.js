@@ -156,7 +156,7 @@ export function getSymbolsFromUrlParam(param) {
   return [param.toUpperCase()]
 }
 
-// BTCUSD,ETHUSD -> ['BTCUSD', 'ETHUSD']
+// BTCUSD, ETHUSD -> ['BTCUSD', 'ETHUSD']
 // BTCUSD -> ['BTCUSD']
 export function getPairsFromUrlParam(param) {
   if (param.indexOf(',') > -1) {
@@ -165,9 +165,9 @@ export function getPairsFromUrlParam(param) {
   return [param]
 }
 
-// btcusd -> tBTCUSD
-// ['btcusd'] -> 'tBTCUSD'
-// ['btcusd', 'ethusd'] -> ['tBTCUSD', 'tETHUSD']
+// BTCUSD -> tBTCUSD
+// ['BTCUSD'] -> 'tBTCUSD'
+// ['BTCUSD', 'ETHUSD'] -> ['tBTCUSD', 'tETHUSD']
 // USD -> fUSD
 // ['USD'] -> 'fUSD'
 // ['USD', 'BTC'] -> ['fUSD', 'fBTC']

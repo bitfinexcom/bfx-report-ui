@@ -124,7 +124,7 @@ class PublicTrades extends PureComponent {
             {renderPairSelector}
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
-            <SyncPrefButton />
+            <SyncPrefButton sectionType={TYPE} />
           </h4>
           <NoData />
         </Fragment>
@@ -141,7 +141,7 @@ class PublicTrades extends PureComponent {
             <ExportButton handleClickExport={handleClickExport} />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
-            <SyncPrefButton />
+            <SyncPrefButton sectionType={TYPE} />
           </h4>
           {renderPagination}
           <DataTable

@@ -77,7 +77,7 @@ class PublicFunding extends PureComponent {
     } = this.props
     if (platform.showFrameworkMode && !hasSyncPref) {
       return (
-        <SyncNotSetYet acceptSymbol />
+        <SyncNotSetYet acceptSymbol sectionType={TYPE} />
       )
     }
 

@@ -17,10 +17,8 @@ import { getSymbolsFetchStatus } from 'state/symbols/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import {
-  formatInternalSymbol,
-  formatRawSymbols,
-  isPair,
-  isSymbol,
+  mapRequestSymbols, formatInternalSymbol, formatRawSymbols, formatSymbolToPair,
+  isPair, isSymbol, mapRequestPairs, mapSymbol,
 } from 'state/symbols/utils'
 
 import types from './constants'
@@ -119,12 +117,13 @@ function* editPublicTradesPairPref({ payload }) {
 
   const auth = yield select(selectAuth)
   const symbols = yield select(getPublicTradesSymbols)
+
   const params = [
-    ...pairs.map(symbol => ({
-      symbol: formatRawSymbols(symbol),
+    ...mapRequestPairs(pairs).map(pair => ({
+      symbol: formatRawSymbols(pair),
       start: startTime,
     })),
-    ...symbols.map(symbol => ({
+    ...mapRequestSymbols(symbols).map(symbol => ({
       symbol: formatRawSymbols(symbol),
       start: startTime,
     })),
@@ -142,11 +141,11 @@ function* editPublicTradesSymbolPref({ payload }) {
   const auth = yield select(selectAuth)
   const pairs = yield select(getPublicTradesPairs)
   const params = [
-    ...pairs.map(symbol => ({
-      symbol: formatRawSymbols(symbol),
+    ...mapRequestPairs(pairs).map(pair => ({
+      symbol: formatRawSymbols(pair),
       start: startTime,
     })),
-    ...symbols.map(symbol => ({
+    ...mapRequestSymbols(symbols).map(symbol => ({
       symbol: formatRawSymbols(symbol),
       start: startTime,
     })),
@@ -162,8 +161,8 @@ function* editTickersHistoryPairPref({ payload }) {
   const { pairs = [], startTime } = payload
 
   const auth = yield select(selectAuth)
-  const params = pairs.map(symbol => ({
-    symbol: formatRawSymbols(symbol),
+  const params = mapRequestPairs(pairs).map(pair => ({
+    symbol: formatRawSymbols(pair),
     start: startTime,
   }))
 
@@ -184,11 +183,13 @@ function* getSyncPref() {
     yield call(getTickersHistoryConf, auth),
   ])
 
+  const formatSymbol = data => mapSymbol(formatInternalSymbol(data.symbol))
+  const formatPair = ({ symbol }) => formatSymbolToPair(symbol).split('/').map(mapSymbol).join(':')
+
   if (publicTradesPrefResult && publicTradesPrefResult.length > 0) {
     const { start } = publicTradesPrefResult[0]
-    const format = data => formatInternalSymbol(data.symbol)
-    const publicTradesPairs = publicTradesPrefResult.filter(data => isPair(data.symbol)).map(format)
-    const publicTradesSymbols = publicTradesPrefResult.filter(data => isSymbol(data.symbol)).map(format)
+    const publicTradesPairs = publicTradesPrefResult.filter(data => isPair(data.symbol)).map(formatPair)
+    const publicTradesSymbols = publicTradesPrefResult.filter(data => isSymbol(data.symbol)).map(formatSymbol)
 
     yield put(actions.setSyncPref({
       publicTradesPairs,
@@ -199,8 +200,7 @@ function* getSyncPref() {
 
   if (tickersHistoryPrefResult && tickersHistoryPrefResult.length > 0) {
     const { start } = tickersHistoryPrefResult[0]
-    const format = data => formatInternalSymbol(data.symbol)
-    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isPair(data.symbol)).map(format)
+    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isPair(data.symbol)).map(formatPair)
 
     yield put(actions.setSyncPref({
       tickersHistoryPairs,
