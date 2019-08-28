@@ -24,7 +24,12 @@ import {
 import types from './constants'
 import actions from './actions'
 import {
-  getSyncMode, getSyncProgress, getPublicTradesPairs, getPublicTradesSymbols,
+  getSyncMode,
+  getSyncProgress,
+  getPublicTradesPairs,
+  getPublicFundingSymbols,
+  getPublicFundingStartTime,
+  getPublicTradesStartTime,
 } from './selectors'
 
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
@@ -112,20 +117,24 @@ function* syncLogout() {
   }
 }
 
-function* editPublicTradesPairPref({ payload }) {
+function* editPublicTradesPref({ payload }) {
   const { pairs, startTime } = payload
 
   const auth = yield select(selectAuth)
-  const symbols = yield select(getPublicTradesSymbols)
+  const symbols = yield select(getPublicFundingSymbols)
+  const publicFundingStartTime = yield select(getPublicFundingStartTime)
 
+  // config for 2 sections is merged in one
   const params = [
+    // public trades config
     ...mapRequestPairs(pairs).map(pair => ({
       symbol: formatRawSymbols(pair),
       start: startTime,
     })),
+    // public funding config
     ...mapRequestSymbols(symbols).map(symbol => ({
       symbol: formatRawSymbols(symbol),
-      start: startTime,
+      start: publicFundingStartTime,
     })),
   ]
 
@@ -135,16 +144,21 @@ function* editPublicTradesPairPref({ payload }) {
   }
 }
 
-function* editPublicTradesSymbolPref({ payload }) {
+function* editPublicFundingPref({ payload }) {
   const { symbols, startTime } = payload
 
   const auth = yield select(selectAuth)
   const pairs = yield select(getPublicTradesPairs)
+  const publicTradesStartTime = yield select(getPublicTradesStartTime)
+
+  // config for 2 sections is merged in one
   const params = [
+    // public trades config
     ...mapRequestPairs(pairs).map(pair => ({
       symbol: formatRawSymbols(pair),
-      start: startTime,
+      start: publicTradesStartTime,
     })),
+    // public funding config
     ...mapRequestSymbols(symbols).map(symbol => ({
       symbol: formatRawSymbols(symbol),
       start: startTime,
@@ -157,7 +171,7 @@ function* editPublicTradesSymbolPref({ payload }) {
   }
 }
 
-function* editTickersHistoryPairPref({ payload }) {
+function* editTickersHistoryPref({ payload }) {
   const { pairs = [], startTime } = payload
 
   const auth = yield select(selectAuth)
@@ -187,24 +201,29 @@ function* getSyncPref() {
   const formatPair = ({ symbol }) => formatSymbolToPair(symbol).split('/').map(mapSymbol).join(':')
 
   if (publicTradesPrefResult && publicTradesPrefResult.length > 0) {
-    const { start } = publicTradesPrefResult[0]
-    const publicTradesPairs = publicTradesPrefResult.filter(data => isPair(data.symbol)).map(formatPair)
-    const publicTradesSymbols = publicTradesPrefResult.filter(data => isSymbol(data.symbol)).map(formatSymbol)
+    const publicTradesPairs = publicTradesPrefResult.filter(data => isPair(data.symbol))
+    const publicTradesSymbols = publicTradesPrefResult.filter(data => isSymbol(data.symbol))
 
     yield put(actions.setSyncPref({
-      publicTradesPairs,
-      publicTradesSymbols,
-      startTime: start,
+      publicTrades: {
+        pairs: publicTradesPairs.map(formatPair),
+        startTime: publicTradesPairs[0] && publicTradesPairs[0].start,
+      },
+      publicFunding: {
+        symbols: publicTradesSymbols.map(formatSymbol),
+        startTime: publicTradesSymbols[0] && publicTradesSymbols[0].start,
+      },
     }))
   }
 
   if (tickersHistoryPrefResult && tickersHistoryPrefResult.length > 0) {
-    const { start } = tickersHistoryPrefResult[0]
-    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isPair(data.symbol)).map(formatPair)
+    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isPair(data.symbol))
 
     yield put(actions.setSyncPref({
-      tickersHistoryPairs,
-      startTime: start,
+      tickersHistory: {
+        pairs: tickersHistoryPairs.map(formatPair),
+        startTime: tickersHistoryPairs[0] && tickersHistoryPairs[0].start,
+      },
     }))
   }
 
@@ -312,9 +331,9 @@ export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
-  yield takeLatest(types.EDIT_PUBLIC_TRADES_PAIRS_PREF, editPublicTradesPairPref)
-  yield takeLatest(types.EDIT_PUBLIC_TRADES_SYMBOLS_PREF, editPublicTradesSymbolPref)
-  yield takeLatest(types.EDIT_TICKERS_HISTORY_PAIRS_PREF, editTickersHistoryPairPref)
+  yield takeLatest(types.EDIT_PUBLIC_TRADES_PREF, editPublicTradesPref)
+  yield takeLatest(types.EDIT_PUBLIC_FUNDING_PREF, editPublicFundingPref)
+  yield takeLatest(types.EDIT_TICKERS_HISTORY_PREF, editTickersHistoryPref)
   yield takeLatest(authTypes.AUTH_SUCCESS, initSync)
   yield takeLatest(types.WS_PROGRESS_UPDATE, progressUpdate)
   yield takeLatest(types.WS_REQUESTS_REDIRECT, requestsRedirectUpdate)

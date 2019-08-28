@@ -1,21 +1,29 @@
 import { connect } from 'react-redux'
 
 import { editPublicTradesSymbolPref } from 'state/sync/actions'
-import { getStartTime, getSyncMode, getPublicTradesSymbols } from 'state/sync/selectors'
+import {
+  getSyncMode, getPublicFundingStartTime, getPublicFundingSymbols,
+} from 'state/sync/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 
 import SyncSymbolPrefButton from './SyncSymbolPrefButton'
 
 const mapStateToProps = (state = {}) => {
-  const { start } = getTimeFrame(getQuery(state))
-  let symbols = getPublicTradesSymbols(state)
-  if (!symbols.length) {
-    symbols = ['USD']
+  let syncSymbols = getPublicFundingSymbols(state)
+  if (!syncSymbols.length) {
+    syncSymbols = ['USD']
   }
+
+  let startTime = getPublicFundingStartTime(state)
+  if (!startTime) {
+    const { start } = getTimeFrame(getQuery(state))
+    startTime = new Date(start).getTime()
+  }
+
   return {
     syncMode: getSyncMode(state),
-    syncSymbols: symbols,
-    startTime: getStartTime(state) || new Date(start).getTime(),
+    syncSymbols,
+    startTime,
   }
 }
 

@@ -11,7 +11,7 @@ import {
 } from 'state/publicFunding/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getCoins, getCurrencies } from 'state/symbols/selectors'
-import { getPublicTradesSymbols } from 'state/sync/selectors'
+import { getPublicFundingSymbols } from 'state/sync/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -29,7 +29,7 @@ const mapStateToProps = (state = {}) => ({
   currencies: getCurrencies(state),
   entries: getEntries(state),
   getFullTime: getFullTime(state),
-  hasSyncPref: !!getPublicTradesSymbols(state).length,
+  hasSyncPref: !!getPublicFundingSymbols(state).length,
   loading: !getDataReceived(state),
   nextPage: getNextPage(state),
   offset: getOffset(state),

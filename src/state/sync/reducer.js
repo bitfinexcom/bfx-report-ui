@@ -2,10 +2,18 @@ import types from './constants'
 
 const initialState = {
   syncMode: types.MODE_ONLINE,
-  publicTradesPairs: [],
-  publicTradesSymbols: [],
-  tickersHistoryPairs: [],
-  startTime: undefined,
+  publicTrades: {
+    pairs: [],
+    startTime: undefined,
+  },
+  publicFunding: {
+    symbols: [],
+    startTime: undefined,
+  },
+  tickersHistory: {
+    pairs: [],
+    startTime: undefined,
+  },
   progress: 0,
 }
 
@@ -18,28 +26,34 @@ export function syncReducer(state = initialState, action) {
         syncMode: payload,
       }
     }
-    case types.EDIT_PUBLIC_TRADES_PAIRS_PREF: {
+    case types.EDIT_PUBLIC_TRADES_PREF: {
       const { pairs, startTime } = payload
       return {
         ...state,
-        startTime,
-        publicTradesPairs: pairs,
+        publicTrades: {
+          pairs,
+          startTime,
+        },
       }
     }
-    case types.EDIT_PUBLIC_TRADES_SYMBOLS_PREF: {
+    case types.EDIT_PUBLIC_FUNDING_PREF: {
       const { symbols, startTime } = payload
       return {
         ...state,
-        startTime,
-        publicTradesSymbols: symbols,
+        publicFunding: {
+          symbols,
+          startTime,
+        },
       }
     }
-    case types.EDIT_TICKERS_HISTORY_PAIRS_PREF: {
+    case types.EDIT_TICKERS_HISTORY_PREF: {
       const { pairs, startTime } = payload
       return {
         ...state,
-        startTime,
-        tickersHistoryPairs: pairs,
+        tickersHistory: {
+          pairs,
+          startTime,
+        },
       }
     }
     case types.SET_PREF: {

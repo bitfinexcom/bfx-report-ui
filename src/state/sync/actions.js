@@ -72,9 +72,9 @@ export function updateSyncStatus() {
  * @param {string[]} pairs pairs
  * @param {numeric} startTime start time in milliseconds
  */
-export function editPublicTradesPairPref(pairs, startTime) {
+export function editPublicTradesPref(pairs, startTime) {
   return {
-    type: types.EDIT_PUBLIC_TRADES_PAIRS_PREF,
+    type: types.EDIT_PUBLIC_TRADES_PREF,
     payload: {
       pairs,
       startTime,
@@ -89,7 +89,7 @@ export function editPublicTradesPairPref(pairs, startTime) {
  */
 export function editPublicTradesSymbolPref(symbols, startTime) {
   return {
-    type: types.EDIT_PUBLIC_TRADES_SYMBOLS_PREF,
+    type: types.EDIT_PUBLIC_FUNDING_PREF,
     payload: {
       symbols,
       startTime,
@@ -104,7 +104,7 @@ export function editPublicTradesSymbolPref(symbols, startTime) {
  */
 export function editTickersHistoryPairPref(pairs, startTime) {
   return {
-    type: types.EDIT_TICKERS_HISTORY_PAIRS_PREF,
+    type: types.EDIT_TICKERS_HISTORY_PREF,
     payload: {
       pairs,
       startTime,
@@ -113,7 +113,7 @@ export function editTickersHistoryPairPref(pairs, startTime) {
 }
 
 export default {
-  editPublicTradesPairPref,
+  editPublicTradesPref,
   editPublicTradesSymbolPref,
   editTickersHistoryPairPref,
   forceQueryFromDb,

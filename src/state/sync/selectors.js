@@ -1,25 +1,26 @@
 const getSync = state => state.sync || {}
 
 export const getSyncMode = state => getSync(state).syncMode || false
-export const getSyncPairs = state => getSync(state).syncPairs || []
-export const getSyncSymbols = state => getSync(state).syncSymbols || []
-export const getStartTime = state => getSync(state).startTime
 export const getSyncProgress = state => getSync(state).progress || 0
 
-export const getPublicTradesPairs = state => getSync(state).publicTradesPairs
-export const getPublicTradesSymbols = state => getSync(state).publicTradesSymbols
-export const getTickersHistoryPairs = state => getSync(state).tickersHistoryPairs
+const getPublicTradesPref = state => getSync(state).publicTrades
+export const getPublicTradesStartTime = state => getPublicTradesPref(state).startTime
+export const getPublicTradesPairs = state => getPublicTradesPref(state).pairs
 
-export const hasSyncPref = state => getSyncPairs(state).length !== 0
-  && getStartTime(state) !== undefined
-export const hasSyncSymbolsPref = state => getSyncSymbols(state).length !== 0
-  && getStartTime(state) !== undefined
+const getPublicFundingPref = state => getSync(state).publicFunding
+export const getPublicFundingStartTime = state => getPublicFundingPref(state).startTime
+export const getPublicFundingSymbols = state => getPublicFundingPref(state).symbols
+
+const getTickersHistoryPref = state => getSync(state).tickersHistory
+export const getTickersHistoryStartTime = state => getTickersHistoryPref(state).startTime
+export const getTickersHistoryPairs = state => getTickersHistoryPref(state).pairs
 
 export default {
-  hasSyncPref,
-  hasSyncSymbolsPref,
-  getStartTime,
   getSyncMode,
-  getSyncPairs,
-  getSyncSymbols,
+  getPublicTradesStartTime,
+  getPublicTradesPairs,
+  getPublicFundingStartTime,
+  getPublicFundingSymbols,
+  getTickersHistoryStartTime,
+  getTickersHistoryPairs,
 }
