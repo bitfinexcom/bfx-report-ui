@@ -214,7 +214,9 @@
       "swap": "互換成本",
       "swap-type": "互換類型",
       "status": "狀態",
-      "update": "更新"
+      "update": "更新",
+      "collateral": "抵押品",
+      "meta": "後設資料"
     },
     "swap": {
       "daily": "每日",

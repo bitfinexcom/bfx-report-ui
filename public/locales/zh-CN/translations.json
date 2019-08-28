@@ -214,7 +214,9 @@
       "swap": "融资成本",
       "swap-type": "融资类型",
       "status": "状态",
-      "update": "更新时间"
+      "update": "更新时间",
+      "collateral": "抵押品",
+      "meta": "元数据"
     },
     "swap": {
       "daily": "每日",
