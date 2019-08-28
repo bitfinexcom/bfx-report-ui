@@ -240,7 +240,7 @@
       "pairs": "离线对",
       "starttime": "开始时间",
       "btn-apply": "应用",
-      "apply-tooltip": "应用后，您需要重新登录才能生效。",
+      "apply-tooltip": "Changes will be applied at the next sync.",
       "insync-warning": "无法在同步期间应用。请等待同步完成。"
     }
   },
