@@ -7,8 +7,11 @@ import {
   Table,
   CopyCellsMenuItem,
 } from '@blueprintjs/table'
+import _keys from 'lodash/keys'
 
 class DataTable extends PureComponent {
+  selectedColumns = {}
+
   getCellData = (rowIndex, columnIndex) => {
     const { tableColums } = this.props
 
@@ -25,6 +28,60 @@ class DataTable extends PureComponent {
     )
   }
 
+  onSelection = (selection) => {
+    const isWholeColumnSelected = selection.find(({ rows }) => !rows)
+
+    if (!isWholeColumnSelected) {
+      this.selectedColumns = {}
+      return
+    }
+
+    this.selectedColumns = selection.reduce((acc, sel) => {
+      const { cols } = sel
+      const [start, end] = cols
+
+      let cur = start
+
+      while (cur <= end) {
+        acc[cur] = true
+        cur += 1
+      }
+
+      return acc
+    }, {})
+  }
+
+  onCopy = () => {
+    const { tableColums, t } = this.props
+
+    navigator.clipboard.readText().then((text) => {
+      const columnHeaders = []
+      const selectedColumns = _keys(this.selectedColumns).sort()
+      const start = +selectedColumns[0]
+      const end = +selectedColumns[selectedColumns.length - 1]
+      let cur = start
+
+      while (cur <= end) {
+        if (this.selectedColumns[cur]) {
+          const columnName = t(tableColums[cur].name)
+          columnHeaders.push(columnName)
+        } else {
+          columnHeaders.push('')
+        }
+
+        cur += 1
+      }
+
+      navigator.clipboard.writeText(`${columnHeaders.join('\t')}\n${text}`)
+    })
+  }
+
+  getCellClipboardData = (row, col) => {
+    const { tableColums } = this.props
+
+    return tableColums[col].copyText(row)
+  }
+
   render() {
     const {
       numRows,
@@ -39,8 +96,9 @@ class DataTable extends PureComponent {
         numRows={numRows}
         enableRowHeader={false}
         columnWidths={columnWidths}
-        enableFocusedCell
-        getCellClipboardData={(row, col) => navigator.clipboard.writeText(tableColums[col].copyText(row))}
+        onSelection={this.onSelection}
+        getCellClipboardData={this.getCellClipboardData}
+        onCopy={this.onCopy}
         bodyContextMenuRenderer={this.renderBodyContextMenu}
       >
         {tableColums.map(column => (
