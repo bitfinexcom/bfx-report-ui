@@ -118,7 +118,7 @@ class Snapshots extends PureComponent {
     const section = this.getCurrentSection()
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
 
-    const isNotEmpty = positionsEntries.length || tickersEntries.length || walletsEntries.length
+    const isNotEmpty = !!(positionsEntries.length || tickersEntries.length || walletsEntries.length)
 
     const renderTimeSelection = (
       <Fragment>
