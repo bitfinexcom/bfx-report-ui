@@ -119,6 +119,8 @@ class Movements extends PureComponent {
             {' '}
             <TimeRange />
             {renderSymbolSelector}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData />
         </Fragment>
