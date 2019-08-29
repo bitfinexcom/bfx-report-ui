@@ -17,6 +17,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import PieChart from 'ui/Charts/PieChart'
+import { fixedFloat } from 'ui/utils'
 import { isValidTimeStamp } from 'state/query/utils'
 
 import getColumns from './ConcentrationRisk.columns'
@@ -40,20 +41,28 @@ class ConcentrationRisk extends PureComponent {
   }
 
   parseData = (filteredData) => {
+    let allBalance = 0
     const summaryData = filteredData.reduce((acc, entry) => {
       const { currency, balanceUsd } = entry
       if (balanceUsd) {
         acc[currency] = (acc[currency] || 0) + balanceUsd
+        allBalance += balanceUsd
       }
       return acc
     }, {})
 
-    const tableData = _keys(summaryData).map(key => ({
-      currency: key,
-      balanceUsd: summaryData[key],
-    }))
+    const tableData = _sortBy(_keys(summaryData).map((key) => {
+      const balanceUsd = summaryData[key]
+      const percent = ((balanceUsd / allBalance) * 100)
 
-    const chartData = tableData.map(({ currency, balanceUsd }) => ({
+      return {
+        currency: key,
+        balanceUsd,
+        percent: fixedFloat(percent),
+      }
+    }), 'balanceUsd').reverse()
+
+    const chartData = tableData.filter(({ percent }) => percent > 0.1).map(({ currency, balanceUsd }) => ({
       name: currency,
       value: balanceUsd,
     }))

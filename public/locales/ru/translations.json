@@ -45,7 +45,8 @@
     },
     "column": {
       "currency": "ВАЛЮТА",
-      "balanceUsd": "БАЛАНС (USD)"
+      "balanceUsd": "БАЛАНС (USD)",
+      "percent": "ПРОЦЕНТ"
     }
   },
   "copy": "Копировать",

@@ -45,7 +45,8 @@
     },
     "column": {
       "currency": "貨幣",
-      "balanceUsd": "餘額(美元)"
+      "balanceUsd": "餘額(美元)",
+      "percent": "百分"
     }
   },
   "copy": "複製",

@@ -45,7 +45,8 @@
     },
     "column": {
       "currency": "货币",
-      "balanceUsd": "余额 (USD)"
+      "balanceUsd": "余额 (USD)",
+      "percent": "百分"
     }
   },
   "copy": "复制",

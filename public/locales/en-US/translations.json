@@ -45,7 +45,8 @@
     },
     "column": {
       "currency": "CURRENCY",
-      "balanceUsd": "BALANCE (USD)"
+      "balanceUsd": "BALANCE (USD)",
+      "percent": "PERCENT"
     }
   },
   "copy": "Copy",
