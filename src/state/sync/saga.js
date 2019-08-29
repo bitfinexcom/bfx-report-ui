@@ -85,9 +85,11 @@ export function* isSynced() {
   ])
 
   const synced = (Number.isInteger(syncProgress) && syncProgress === 100)
-    || _includes(syncProgress, 'ServerAvailabilityError')
-    || _includes(syncProgress, 'getaddrinfo')
-  if (isQueryWithDb && synced) {
+  const pseudoSynced = _includes(syncProgress, 'ServerAvailabilityError')
+  || _includes(syncProgress, 'getaddrinfo')
+  || _includes(syncProgress, 'SYNCHRONIZATION_HAS_NOT_STARTED_YET')
+
+  if (isQueryWithDb && (synced || pseudoSynced)) {
     return true
   }
   if (error || progressError) {
