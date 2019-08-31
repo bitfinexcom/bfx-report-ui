@@ -8,7 +8,7 @@ import queryString from 'query-string'
 
 import { LANGUAGES_MAP } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbols } from 'state/symbols/utils'
+import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
@@ -136,13 +136,15 @@ function formatSymbol(target, sign) {
     return ''
   }
   switch (target) {
+    // sections with a single symbol
     case MENU_LEDGERS:
     case MENU_WITHDRAWALS:
     case MENU_DEPOSITS:
     case MENU_FPAYMENT:
-      return sign
+      return mapRequestSymbols(sign)
     case MENU_PUBLIC_FUNDING:
-      return `f${sign.toUpperCase()}`
+      return `f${mapRequestSymbols(sign)}`
+    // sections with pairs
     case MENU_ORDERS:
     case MENU_TICKERS:
     case MENU_TRADES:
@@ -152,7 +154,7 @@ function formatSymbol(target, sign) {
     case MENU_FCREDIT:
     case MENU_FLOAN:
     case MENU_FOFFER:
-      return formatRawSymbols(sign)
+      return formatRawSymbols(mapRequestPairs(sign))
     default:
       return ''
   }
