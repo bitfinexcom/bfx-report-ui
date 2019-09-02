@@ -42,7 +42,7 @@ function* fetchPublicTrades({ payload: pair }) {
     // set pair from url
     if (pair && pair !== targetPair) {
       targetPair = mapPair(pair)
-      yield put(actions.setTargetPair(mapPair(targetPair)))
+      yield put(actions.setTargetPair(targetPair))
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
