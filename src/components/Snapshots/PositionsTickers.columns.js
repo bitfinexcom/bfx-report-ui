@@ -24,7 +24,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amount',
-      name: 'positions.column.amount',
+      name: 'snapshots.column.amount',
       width: 120,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]

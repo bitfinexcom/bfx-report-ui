@@ -6,7 +6,8 @@ import types from './constants'
 const initialState = {
   dataReceived: false,
   positionsEntries: [],
-  tickersEntries: [],
+  positionsTickersEntries: [],
+  walletsTickersEntries: [],
   walletsEntries: [],
   timestamp: undefined,
 }
@@ -49,13 +50,27 @@ const getPositionsEntries = entries => entries.map((entry) => {
   }
 })
 
-const getTickersEntires = entries => entries.map((entry) => {
+const getPositionsTickersEntires = entries => entries.map((entry) => {
   const {
     symbol,
     amount,
   } = entry
 
   return {
+    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+    amount,
+  }
+})
+
+const getWalletsTickersEntires = entries => entries.map((entry) => {
+  const {
+    walletType,
+    symbol,
+    amount,
+  } = entry
+
+  return {
+    walletType,
     pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
     amount,
   }
@@ -88,13 +103,16 @@ export function snapshotsReducer(state = initialState, action) {
         }
       }
 
-      const { positionsSnapshot = [], tickers = [], walletsSnapshot = [] } = payload
+      const {
+        positionsSnapshot = [], positionsTickers = [], walletsTickers = [], walletsSnapshot = [],
+      } = payload
 
       return {
         ...state,
         dataReceived: true,
         positionsEntries: getPositionsEntries(positionsSnapshot),
-        tickersEntries: getTickersEntires(tickers),
+        positionsTickersEntries: getPositionsTickersEntires(positionsTickers),
+        walletsTickersEntries: getWalletsTickersEntires(walletsTickers),
         walletsEntries: getWalletsEntries(walletsSnapshot),
       }
     }

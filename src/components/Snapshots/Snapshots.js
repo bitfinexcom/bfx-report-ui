@@ -19,7 +19,8 @@ import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
 import getPositionsColumns from './Positions.columns'
-import getTickersColumns from './Tickers.columns'
+import getPositionsTickersColumns from './PositionsTickers.columns'
+import getWalletsTickersColumns from './WalletsTickers.columns'
 import getWalletsColumns from './Wallets.columns'
 import { propTypes, defaultProps } from './Snapshots.props'
 
@@ -106,7 +107,8 @@ class Snapshots extends PureComponent {
       getFullTime,
       timeOffset,
       positionsEntries,
-      tickersEntries,
+      positionsTickersEntries,
+      walletsTickersEntries,
       walletsEntries,
       handleClickExport,
       loading,
@@ -118,7 +120,8 @@ class Snapshots extends PureComponent {
     const section = this.getCurrentSection()
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
 
-    const isNotEmpty = !!(positionsEntries.length || tickersEntries.length || walletsEntries.length)
+    const isNotEmpty = !!(positionsEntries.length || positionsTickersEntries.length
+      || walletsTickersEntries || walletsEntries.length)
 
     const renderTimeSelection = (
       <Fragment>
@@ -192,7 +195,7 @@ class Snapshots extends PureComponent {
         <Loading title='snapshots.title' />
       )
     } else if ((section === MENU_POSITIONS && !positionsEntries.length)
-      || (section === MENU_TICKERS && !tickersEntries.length)
+      || (section === MENU_TICKERS && (!positionsTickersEntries.length && !walletsTickersEntries))
       || (section === MENU_WALLETS && !walletsEntries.length)) {
       showContent = (
         <Fragment>
@@ -257,15 +260,21 @@ class Snapshots extends PureComponent {
         </Fragment>
       )
     } else {
-      const tickersColumns = getTickersColumns({ filteredData: tickersEntries })
+      const positionsTickersColumns = getPositionsTickersColumns({ filteredData: positionsTickersEntries })
+      const walletsTickersColumns = getWalletsTickersColumns({ filteredData: walletsTickersEntries, t })
 
       showContent = (
         <Fragment>
           {renderTitle}
-          <br />
+          <h4>{t('positions.title')}</h4>
           <DataTable
-            numRows={tickersEntries.length}
-            tableColums={tickersColumns}
+            numRows={positionsTickersEntries.length}
+            tableColums={positionsTickersColumns}
+          />
+          <h4>{t('wallets.title')}</h4>
+          <DataTable
+            numRows={walletsTickersEntries.length}
+            tableColums={walletsTickersColumns}
           />
         </Fragment>
       )

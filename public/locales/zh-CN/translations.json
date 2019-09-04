@@ -284,7 +284,8 @@
       "tooltip": "Select a time to query snapshots"
     },
     "column": {
-      "amount": "金额"
+      "amount": "金额",
+      "type": "类型"
     },
     "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。"
   },

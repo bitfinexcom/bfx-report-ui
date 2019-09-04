@@ -8,7 +8,8 @@ import {
 import {
   getDataReceived,
   getPositionsEntries,
-  getTickersEntries,
+  getPositionsTickersEntries,
+  getWalletsTickersEntries,
   getWalletsEntries,
   getTimestamp,
 } from 'state/snapshots/selectors'
@@ -19,7 +20,8 @@ import Snapshots from './Snapshots'
 const mapStateToProps = (state = {}) => ({
   currentTime: getTimestamp(state),
   positionsEntries: getPositionsEntries(state),
-  tickersEntries: getTickersEntries(state),
+  positionsTickersEntries: getPositionsTickersEntries(state),
+  walletsTickersEntries: getWalletsTickersEntries(state),
   walletsEntries: getWalletsEntries(state),
   loading: !getDataReceived(state),
   getFullTime: getFullTime(state),

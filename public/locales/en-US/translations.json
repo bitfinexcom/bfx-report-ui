@@ -284,7 +284,8 @@
       "tooltip": "Select a time to query snapshots"
     },
     "column": {
-      "amount": "AMOUNT"
+      "amount": "AMOUNT",
+      "type": "TYPE"
     },
     "nodata": "No related data in this date time. You can try another date time."
   },

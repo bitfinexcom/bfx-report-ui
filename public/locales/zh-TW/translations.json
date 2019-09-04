@@ -284,7 +284,8 @@
       "tooltip": "Select a time to query snapshots"
     },
     "column": {
-      "amount": "數量"
+      "amount": "數量",
+      "type": "類型"
     },
     "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。"
   },
