@@ -16,7 +16,7 @@ import selectors from './selectors'
 
 const getReqSnapshots = (auth, end) => {
   const params = end ? { end } : {}
-  makeFetchCall('getFullSnapshotReport', auth, params)
+  return makeFetchCall('getFullSnapshotReport', auth, params)
 }
 
 /* eslint-disable-next-line consistent-return */
