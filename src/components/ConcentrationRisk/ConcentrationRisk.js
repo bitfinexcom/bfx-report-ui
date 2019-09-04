@@ -62,10 +62,12 @@ class ConcentrationRisk extends PureComponent {
       }
     }), 'balanceUsd').reverse()
 
-    const chartData = tableData.filter(({ percent }) => percent > 0.1).map(({ currency, balanceUsd }) => ({
-      name: currency,
-      value: balanceUsd,
-    }))
+    const chartData = tableData
+      .filter(({ percent }) => percent > 0.1)
+      .map(({ currency, balanceUsd }) => ({
+        name: currency,
+        value: balanceUsd,
+      }))
 
     return {
       tableData: _sortBy(tableData, ['balanceUsd']).reverse(),
