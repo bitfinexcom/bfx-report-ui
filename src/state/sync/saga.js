@@ -251,7 +251,7 @@ function* initSync() {
         progress: syncProgress,
       }))
     } else {
-      // yield call(startSyncing)
+      yield call(startSyncing)
     }
   }
 

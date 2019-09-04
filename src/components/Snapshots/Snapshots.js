@@ -195,7 +195,7 @@ class Snapshots extends PureComponent {
         <Loading title='snapshots.title' />
       )
     } else if ((section === MENU_POSITIONS && !positionsEntries.length)
-      || (section === MENU_TICKERS && (!positionsTickersEntries.length && !walletsTickersEntries))
+      || (section === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries)
       || (section === MENU_WALLETS && !walletsEntries.length)) {
       showContent = (
         <Fragment>
