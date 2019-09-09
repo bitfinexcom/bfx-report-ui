@@ -80,6 +80,13 @@ export function timeOffset(timezone) {
     : moment.tz(moment.tz.guess()).format('Z')
 }
 
+export const getLastMonth = () => {
+  const date = new Date()
+  date.setMonth(date.getMonth() - 1)
+
+  return date.getTime()
+}
+
 export const isValidTimezone = timezone => !!moment.tz.zone(timezone)
 
 export function isValidateType(type) {
@@ -236,6 +243,7 @@ export default {
   formatTime,
   getAuth,
   getCurrentEntries,
+  getLastMonth,
   getNoAuthUrlString,
   getParsedUrlParams,
   getSideMsg,

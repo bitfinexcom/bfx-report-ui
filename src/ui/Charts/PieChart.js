@@ -5,13 +5,13 @@ import {
 } from 'recharts'
 
 const COLORS = [
+  '#8a36d8',
+  '#FF3333',
+  '#00ab00',
   '#0088FE',
   '#00C49F',
   '#FFBB28',
   '#FF8042',
-  '#00ab00',
-  '#FF3333',
-  '#8a36d8',
   '#2f2fff',
   '#7b1010',
   '#76818c',
@@ -28,9 +28,16 @@ const renderCustomizedLabel = (props) => {
   const x = cx + radius * Math.cos(-midAngle * RADIAN)
   const y = cy + radius * Math.sin(-midAngle * RADIAN)
 
+  const percentValue = (percent * 100).toFixed(0)
+
+  // don't show percentage for low values
+  if (percentValue < 3) {
+    return null
+  }
+
   return (
     <text x={x} y={y} fill='white' textAnchor={x > cx ? 'start' : 'end'} dominantBaseline='central'>
-      {`${(percent * 100).toFixed(0)}%`}
+      {`${percentValue}%`}
     </text>
   )
 }

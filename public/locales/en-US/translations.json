@@ -45,7 +45,8 @@
     },
     "column": {
       "currency": "CURRENCY",
-      "balanceUsd": "BALANCE (USD)"
+      "balanceUsd": "BALANCE (USD)",
+      "percent": "PERCENT"
     }
   },
   "copy": "Copy",
@@ -158,6 +159,7 @@
       "updated": "DATE",
       "currency": "CURRENCY",
       "amount": "AMOUNT",
+      "amountUsd": "AMOUNT (USD)",
       "fees": "FEES",
       "status": "STATUS",
       "destination": "DESTINATION",
@@ -241,7 +243,7 @@
       "pairs": "Offline Pairs",
       "starttime": "Start Time",
       "btn-apply": "Apply",
-      "apply-tooltip": "After apply, you needs to login again to take effect.",
+      "apply-tooltip": "Changes will be applied at the next sync.",
       "insync-warning": "Can't apply during syncing. Please wait until syncing is done."
     }
   },
@@ -280,6 +282,10 @@
     "query": {
       "title": "Query",
       "tooltip": "Select a time to query snapshots"
+    },
+    "column": {
+      "amount": "AMOUNT",
+      "type": "TYPE"
     },
     "nodata": "No related data in this date time. You can try another date time."
   },

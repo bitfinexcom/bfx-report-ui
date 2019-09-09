@@ -246,7 +246,7 @@ const MAPPING = {
   },
   [MENU_SNAPSHOTS]: {
     icon: IconNames.HISTORY,
-    path: ['/snapshots_positions', '/snapshots_wallets'],
+    path: ['/snapshots_positions', '/snapshots_tickers', '/snapshots_wallets'],
   },
   [MENU_WALLETS]: {
     icon: IconNames.DOLLAR,

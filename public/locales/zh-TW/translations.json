@@ -45,7 +45,8 @@
     },
     "column": {
       "currency": "貨幣",
-      "balanceUsd": "餘額(美元)"
+      "balanceUsd": "餘額(美元)",
+      "percent": "百分"
     }
   },
   "copy": "複製",
@@ -158,6 +159,7 @@
       "updated": "時間",
       "currency": "貨幣",
       "amount": "數量",
+      "amountUsd": "數量(美元)",
       "fees": "費用",
       "status": "狀態",
       "destination": "去處",
@@ -213,7 +215,9 @@
       "swap": "互換成本",
       "swap-type": "互換類型",
       "status": "狀態",
-      "update": "更新"
+      "update": "更新",
+      "collateral": "抵押品",
+      "meta": "後設資料"
     },
     "swap": {
       "daily": "每日",
@@ -278,6 +282,10 @@
     "query": {
       "title": "查詢",
       "tooltip": "選擇快照的時間"
+    },
+    "column": {
+      "amount": "數量",
+      "type": "類型"
     },
     "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。"
   },
