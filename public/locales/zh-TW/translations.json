@@ -129,7 +129,7 @@
   },
   "framework": {
     "title": "請等待同步完成為止",
-    "no_sync": "Sync is not enabled",
+    "no_sync": "未啟動同步功能",
     "proceed": "選擇繼續",
     "cancel": "取消",
     "notagain": "不要再顯示此信息"
@@ -202,7 +202,7 @@
     "title": "倉位",
     "active": "活躍",
     "closed": "已關閉",
-    "no_active": "No active positions at the moment.",
+    "no_active": "目前沒有未平倉位。",
     "column": {
       "pair": "對",
       "amount": "數量",
@@ -243,7 +243,7 @@
       "pairs": "暫存代幣對",
       "starttime": "起始時間",
       "btn-apply": "確認",
-      "apply-tooltip": "Changes will be applied at the next sync.",
+      "apply-tooltip": "資料將於下次同步時變更。",
       "insync-warning": "同步時無法確認設定。請等到同步完成後再按確認。"
     }
   },
@@ -278,10 +278,10 @@
     }
   },
   "snapshots": {
-    "title": "Snapshots",
+    "title": "快照",
     "query": {
       "title": "查詢",
-      "tooltip": "Select a time to query snapshots"
+      "tooltip": "選擇快照的時間"
     },
     "column": {
       "amount": "數量",

@@ -129,7 +129,7 @@
   },
   "framework": {
     "title": "请等待同步完成",
-    "no_sync": "Sync is not enabled",
+    "no_sync": "未启动同步功能",
     "proceed": "仍然继续",
     "cancel": "取消",
     "notagain": "不再显示此消息"
@@ -202,7 +202,7 @@
     "title": "仓位",
     "active": "活动",
     "closed": "已结清",
-    "no_active": "No active positions at the moment.",
+    "no_active": "无有效仓位。",
     "column": {
       "pair": "货币对",
       "amount": "金额",
@@ -243,7 +243,7 @@
       "pairs": "离线对",
       "starttime": "开始时间",
       "btn-apply": "应用",
-      "apply-tooltip": "Changes will be applied at the next sync.",
+      "apply-tooltip": "资料将在下一次同步时变更。",
       "insync-warning": "无法在同步期间应用。请等待同步完成。"
     }
   },
@@ -278,10 +278,10 @@
     }
   },
   "snapshots": {
-    "title": "Snapshots",
+    "title": "快照",
     "query": {
       "title": "查询",
-      "tooltip": "Select a time to query snapshots"
+      "tooltip": "选择快照的时间"
     },
     "column": {
       "amount": "金额",
