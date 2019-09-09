@@ -2,6 +2,7 @@ import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
 import {
   Button,
+  AnchorButton,
   Callout,
   Classes,
   Dialog,
@@ -168,7 +169,7 @@ class SyncPrefButton extends PureComponent {
                   position={Position.TOP}
                   usePortal={false}
                 >
-                  <Button
+                  <AnchorButton
                     onClick={this.handleApply}
                     intent={Intent.PRIMARY}
                     disabled={(
@@ -178,7 +179,7 @@ class SyncPrefButton extends PureComponent {
                     )}
                   >
                     {t('preferences.sync.btn-apply')}
-                  </Button>
+                  </AnchorButton>
                 </Tooltip>
                 <Button onClick={this.handleClose}>
                   {t('preferences.close')}

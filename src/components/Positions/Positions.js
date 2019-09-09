@@ -138,6 +138,8 @@ class Positions extends PureComponent {
             {' '}
             <TimeRange />
             {renderPairSelector}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderButtonGroup}
           <br />

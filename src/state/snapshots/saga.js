@@ -14,7 +14,10 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-const getReqSnapshots = (auth, end) => makeFetchCall('getFullSnapshotReport', auth, { end })
+const getReqSnapshots = (auth, end) => {
+  const params = end ? { end } : {}
+  return makeFetchCall('getFullSnapshotReport', auth, params)
+}
 
 /* eslint-disable-next-line consistent-return */
 function* fetchSnapshots({ payload: end }) {
@@ -29,6 +32,7 @@ function* fetchSnapshots({ payload: end }) {
 
     const auth = yield select(selectAuth)
     const { result = {}, error } = yield call(getReqSnapshots, auth, end)
+
     yield put(actions.updateSnapshots(result))
 
     if (error) {

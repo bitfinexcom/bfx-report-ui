@@ -1,26 +1,54 @@
 import { connect } from 'react-redux'
 
-import { editSyncPairPref } from 'state/sync/actions'
-import { getStartTime, getSyncMode, getSyncPairs } from 'state/sync/selectors'
+import queryConstants from 'state/query/constants'
+import { editPublicTradesPref, editTickersHistoryPairPref } from 'state/sync/actions'
+import {
+  getSyncMode,
+  getPublicTradesStartTime,
+  getPublicTradesPairs,
+  getTickersHistoryStartTime,
+  getTickersHistoryPairs,
+} from 'state/sync/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 
 import SyncPrefButton from './SyncPrefButton'
 
-const mapStateToProps = (state = {}) => {
-  const { start } = getTimeFrame(getQuery(state))
-  let pairs = getSyncPairs(state)
-  if (!pairs.length) {
-    pairs = ['BTC:USD']
+const { MENU_PUBLIC_TRADES } = queryConstants
+
+const mapStateToProps = (state = {}, props) => {
+  const { sectionType } = props
+
+  let syncPairs = (sectionType === MENU_PUBLIC_TRADES)
+    ? getPublicTradesPairs(state)
+    : getTickersHistoryPairs(state)
+  if (!syncPairs.length) {
+    syncPairs = ['BTC:USD']
   }
+
+  let startTime = (sectionType === MENU_PUBLIC_TRADES)
+    ? getPublicTradesStartTime(state)
+    : getTickersHistoryStartTime(state)
+  if (!startTime) {
+    const { start } = getTimeFrame(getQuery(state))
+    startTime = new Date(start).getTime()
+  }
+
   return {
     syncMode: getSyncMode(state),
-    syncPairs: pairs,
-    startTime: getStartTime(state) || new Date(start).getTime(),
+    syncPairs,
+    startTime,
   }
 }
 
-const mapDispatchToProps = {
-  setSyncPref: (pair, startTime, logout) => editSyncPairPref(pair, startTime.getTime(), logout),
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { sectionType } = ownProps
+  const setSyncPrefFunc = (sectionType === MENU_PUBLIC_TRADES)
+    ? editPublicTradesPref
+    : editTickersHistoryPairPref
+
+  return {
+    setSyncPref: (pair, startTime) => dispatch(setSyncPrefFunc(pair, startTime.getTime())),
+  }
 }
 
 const SyncPrefButtonContainer = connect(mapStateToProps, mapDispatchToProps)(SyncPrefButton)

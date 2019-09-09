@@ -110,6 +110,8 @@ class Ledgers extends PureComponent {
             <TimeRange />
             {renderSymbolSelector}
             {' '}
+            <RefreshButton handleClickRefresh={refresh} />
+            {' '}
             <QueryLimitSelector target={TYPE} />
           </h4>
           <NoData />

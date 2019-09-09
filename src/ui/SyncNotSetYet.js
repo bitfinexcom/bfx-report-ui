@@ -9,7 +9,7 @@ import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
 
 class SyncNotSetYet extends PureComponent {
   render() {
-    const { t, acceptSymbol } = this.props
+    const { t, acceptSymbol, sectionType } = this.props
     return (
       <NonIdealState
         className='bitfinex-nonideal'
@@ -17,7 +17,7 @@ class SyncNotSetYet extends PureComponent {
         title={t('preferences.sync.notset')}
         description={acceptSymbol ? t('preferences.sync.symbol-description') : t('preferences.sync.description')}
       >
-        {acceptSymbol ? <SyncSymbolPrefButton textOnly /> : <SyncPrefButton textOnly />}
+        {acceptSymbol ? <SyncSymbolPrefButton textOnly /> : <SyncPrefButton textOnly sectionType={sectionType} />}
       </NonIdealState>
     )
   }
@@ -26,6 +26,7 @@ class SyncNotSetYet extends PureComponent {
 SyncNotSetYet.propTypes = {
   t: PropTypes.func.isRequired,
   acceptSymbol: PropTypes.bool,
+  sectionType: PropTypes.string.isRequired,
 }
 
 SyncNotSetYet.defaultProps = {

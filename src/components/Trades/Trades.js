@@ -110,6 +110,8 @@ class Trades extends PureComponent {
             <TimeRange />
             {renderPairSelector}
             {' '}
+            <RefreshButton handleClickRefresh={refresh} />
+            {' '}
             <QueryLimitSelector target={TYPE} />
           </h4>
           <NoData />

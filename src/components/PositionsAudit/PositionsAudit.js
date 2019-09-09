@@ -137,6 +137,8 @@ class PositionsAudit extends PureComponent {
             {t('paudit.title')}
             {' '}
             <TimeRange />
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData />
         </Fragment>

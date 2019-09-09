@@ -19,11 +19,14 @@ import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
 import getPositionsColumns from './Positions.columns'
+import getPositionsTickersColumns from './PositionsTickers.columns'
+import getWalletsTickersColumns from './WalletsTickers.columns'
 import getWalletsColumns from './Wallets.columns'
 import { propTypes, defaultProps } from './Snapshots.props'
 
 const {
   MENU_POSITIONS,
+  MENU_TICKERS,
   MENU_WALLETS,
   WALLET_EXCHANGE,
   WALLET_MARGIN,
@@ -68,8 +71,23 @@ class Snapshots extends PureComponent {
     switch (history.location.pathname) {
       case '/snapshots_positions':
         return MENU_POSITIONS
+      case '/snapshots_tickers':
+        return MENU_TICKERS
       case '/snapshots_wallets':
         return MENU_WALLETS
+      default:
+        return ''
+    }
+  }
+
+  getSectionURL = (section) => {
+    switch (section) {
+      case MENU_POSITIONS:
+        return '/snapshots_positions'
+      case MENU_TICKERS:
+        return '/snapshots_tickers'
+      case MENU_WALLETS:
+        return '/snapshots_wallets'
       default:
         return ''
     }
@@ -78,9 +96,7 @@ class Snapshots extends PureComponent {
   switchSection = (section) => {
     const { history } = this.props
 
-    const path = (section === MENU_POSITIONS)
-      ? '/snapshots_positions'
-      : '/snapshots_wallets'
+    const path = this.getSectionURL(section)
 
     history.push(`${path}${history.location.search}`)
   }
@@ -91,6 +107,8 @@ class Snapshots extends PureComponent {
       getFullTime,
       timeOffset,
       positionsEntries,
+      positionsTickersEntries,
+      walletsTickersEntries,
       walletsEntries,
       handleClickExport,
       loading,
@@ -102,13 +120,8 @@ class Snapshots extends PureComponent {
     const section = this.getCurrentSection()
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
 
-    const positionsColumns = getPositionsColumns({
-      filteredData: positionsEntries,
-      getFullTime,
-      t,
-      timeOffset,
-    })
-
+    const isNotEmpty = !!(positionsEntries.length || positionsTickersEntries.length
+      || walletsTickersEntries.length || walletsEntries.length)
 
     const renderTimeSelection = (
       <Fragment>
@@ -142,6 +155,12 @@ class Snapshots extends PureComponent {
           {t('positions.title')}
         </Button>
         <Button
+          active={section === MENU_TICKERS}
+          onClick={() => this.switchSection(MENU_TICKERS)}
+        >
+          {t('tickers.title')}
+        </Button>
+        <Button
           active={section === MENU_WALLETS}
           onClick={() => this.switchSection(MENU_WALLETS)}
         >
@@ -150,24 +169,37 @@ class Snapshots extends PureComponent {
       </ButtonGroup>
     )
 
+    const renderTitle = (
+      <Fragment>
+        <h4>
+          {t('snapshots.title')}
+          {' '}
+          {renderTimeSelection}
+          {isNotEmpty && (
+            <Fragment>
+              {' '}
+              <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
+            </Fragment>
+          )}
+          {' '}
+          <RefreshButton handleClickRefresh={refresh} />
+        </h4>
+        {renderButtonGroup}
+        <br />
+      </Fragment>
+    )
+
     let showContent
     if (loading) {
       showContent = (
         <Loading title='snapshots.title' />
       )
     } else if ((section === MENU_POSITIONS && !positionsEntries.length)
+      || (section === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries)
       || (section === MENU_WALLETS && !walletsEntries.length)) {
       showContent = (
         <Fragment>
-          <h4>
-            {t('snapshots.title')}
-            {' '}
-            {renderTimeSelection}
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          {renderButtonGroup}
-          <br />
+          {renderTitle}
           <br />
           <NoData descId='snapshots.nodata' />
         </Fragment>
@@ -185,17 +217,7 @@ class Snapshots extends PureComponent {
 
       showContent = (
         <Fragment>
-          <h4>
-            {t('snapshots.title')}
-            {' '}
-            {renderTimeSelection}
-            {' '}
-            <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          {renderButtonGroup}
-          <br />
+          {renderTitle}
           <h4>
             {t('wallets.header.exchange')}
           </h4>
@@ -219,24 +241,40 @@ class Snapshots extends PureComponent {
           />
         </Fragment>
       )
-    } else {
+    } else if (section === MENU_POSITIONS) {
+      const positionsColumns = getPositionsColumns({
+        filteredData: positionsEntries,
+        getFullTime,
+        t,
+        timeOffset,
+      })
+
       showContent = (
         <Fragment>
-          <h4>
-            {t('snapshots.title')}
-            {' '}
-            {renderTimeSelection}
-            {' '}
-            <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          {renderButtonGroup}
-          <br />
+          {renderTitle}
           <br />
           <DataTable
             numRows={positionsEntries.length}
             tableColums={positionsColumns}
+          />
+        </Fragment>
+      )
+    } else {
+      const positionsTickersColumns = getPositionsTickersColumns({ filteredData: positionsTickersEntries })
+      const walletsTickersColumns = getWalletsTickersColumns({ filteredData: walletsTickersEntries, t })
+
+      showContent = (
+        <Fragment>
+          {renderTitle}
+          <h4>{t('positions.title')}</h4>
+          <DataTable
+            numRows={positionsTickersEntries.length}
+            tableColums={positionsTickersColumns}
+          />
+          <h4>{t('wallets.title')}</h4>
+          <DataTable
+            numRows={walletsTickersEntries.length}
+            tableColums={walletsTickersColumns}
           />
         </Fragment>
       )

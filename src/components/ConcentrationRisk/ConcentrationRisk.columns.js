@@ -42,5 +42,26 @@ export default function getColumns(props) {
         return `${fixedFloat(balanceUsd)} ${t('column.usd')}`
       },
     },
+    {
+      id: 'percent',
+      name: 'concentrationrisk.column.percent',
+      width: 150,
+      renderer: (rowIndex) => {
+        const { percent } = data[rowIndex]
+        const fixedPercent = fixedFloat(percent)
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedPercent}
+          >
+            {fixedPercent}
+          </Cell>
+        )
+      },
+      copyText: (rowIndex) => {
+        const { percent } = data[rowIndex]
+        return fixedFloat(percent)
+      },
+    },
   ]
 }

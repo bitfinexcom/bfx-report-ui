@@ -1,13 +1,15 @@
 import authTypes from 'state/auth/constants'
 import timeframeConstants from 'ui/TimeframeSelector/constants'
 
+import { getLastMonth } from 'state/utils'
+
 import types from './constants'
 
 const initialState = {
   dataReceived: false,
   entries: [],
-  startDate: undefined,
-  endDate: undefined,
+  start: getLastMonth(),
+  end: undefined,
   timeframe: timeframeConstants.DAY,
   skip: undefined,
 }

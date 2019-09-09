@@ -45,7 +45,8 @@
     },
     "column": {
       "currency": "货币",
-      "balanceUsd": "余额 (USD)"
+      "balanceUsd": "余额 (USD)",
+      "percent": "百分"
     }
   },
   "copy": "复制",
@@ -158,6 +159,7 @@
       "updated": "日期",
       "currency": "货币",
       "amount": "金额",
+      "amountUsd": "金额 (USD)",
       "fees": "费用",
       "status": "状态",
       "destination": "目的地",
@@ -213,7 +215,9 @@
       "swap": "融资成本",
       "swap-type": "融资类型",
       "status": "状态",
-      "update": "更新时间"
+      "update": "更新时间",
+      "collateral": "抵押品",
+      "meta": "元数据"
     },
     "swap": {
       "daily": "每日",
@@ -239,7 +243,7 @@
       "pairs": "离线对",
       "starttime": "开始时间",
       "btn-apply": "应用",
-      "apply-tooltip": "应用后，您需要重新登录才能生效。",
+      "apply-tooltip": "Changes will be applied at the next sync.",
       "insync-warning": "无法在同步期间应用。请等待同步完成。"
     }
   },
@@ -278,6 +282,10 @@
     "query": {
       "title": "查询",
       "tooltip": "Select a time to query snapshots"
+    },
+    "column": {
+      "amount": "金额",
+      "type": "类型"
     },
     "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。"
   },

@@ -77,7 +77,7 @@ class PublicFunding extends PureComponent {
     } = this.props
     if (platform.showFrameworkMode && !hasSyncPref) {
       return (
-        <SyncNotSetYet acceptSymbol />
+        <SyncNotSetYet acceptSymbol sectionType={TYPE} />
       )
     }
 
@@ -106,7 +106,7 @@ class PublicFunding extends PureComponent {
       />
     )
 
-    const renderPairSelector = (
+    const renderSymbolSelector = (
       <Fragment>
         {' '}
         <SymbolSelector
@@ -132,7 +132,9 @@ class PublicFunding extends PureComponent {
             {t('publicfunding.title')}
             {' '}
             <TimeRange />
-            {renderPairSelector}
+            {renderSymbolSelector}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
             <SyncSymbolPrefButton />
           </h4>
           <NoData />
@@ -145,7 +147,7 @@ class PublicFunding extends PureComponent {
             {t('publicfunding.title')}
             {' '}
             <TimeRange />
-            {renderPairSelector}
+            {renderSymbolSelector}
             {' '}
             <ExportButton handleClickExport={handleClickExport} />
             {' '}

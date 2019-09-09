@@ -8,9 +8,8 @@ import {
 import { delay } from 'redux-saga'
 import _includes from 'lodash/includes'
 
-import { makeFetchCall } from 'state/utils'
-import { logout as logoutAction } from 'state/auth/actions'
 import authTypes from 'state/auth/constants'
+import { makeFetchCall } from 'state/utils'
 import { setSyncState } from 'state/base/actions'
 import { getSyncState } from 'state/base/selectors'
 import { selectAuth } from 'state/auth/selectors'
@@ -18,22 +17,28 @@ import { getSymbolsFetchStatus } from 'state/symbols/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import {
-  formatInternalSymbol,
-  formatRawSymbols,
-  isPair,
-  isSymbol,
+  mapRequestSymbols, formatInternalSymbol, formatRawSymbols, formatSymbolToPair,
+  isPair, isSymbol, mapRequestPairs, mapSymbol,
 } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
-import { getSyncMode, getSyncSymbols, getSyncPairs } from './selectors'
+import {
+  getSyncMode,
+  getSyncProgress,
+  getPublicTradesPairs,
+  getPublicFundingSymbols,
+  getPublicFundingStartTime,
+  getPublicTradesStartTime,
+} from './selectors'
 
 const checkIsSyncModeWithDbData = auth => makeFetchCall('isSyncModeWithDbData', auth)
-const getSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
+const fetchSyncProgress = auth => makeFetchCall('getSyncProgress', auth)
 const logout = auth => makeFetchCall('logout', auth)
 const enableSyncMode = auth => makeFetchCall('enableSyncMode', auth)
 const disableSyncMode = auth => makeFetchCall('disableSyncMode', auth)
 const getPublicTradesConf = auth => makeFetchCall('getPublicTradesConf', auth)
+const getTickersHistoryConf = auth => makeFetchCall('getTickersHistoryConf', auth)
 const editPublicTradesConf = (auth, params) => makeFetchCall('editPublicTradesConf', auth, params)
 const editTickersHistoryConf = (auth, params) => makeFetchCall('editTickersHistoryConf', auth, params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
@@ -76,13 +81,15 @@ export function* isSynced() {
   const auth = yield select(selectAuth)
   const [{ result: isQueryWithDb, error }, { result: syncProgress, error: progressError }] = yield all([
     call(checkIsSyncModeWithDbData, auth),
-    call(getSyncProgress, auth),
+    call(fetchSyncProgress, auth),
   ])
 
   const synced = (Number.isInteger(syncProgress) && syncProgress === 100)
-    || _includes(syncProgress, 'ServerAvailabilityError')
-    || _includes(syncProgress, 'getaddrinfo')
-  if (isQueryWithDb && synced) {
+  const pseudoSynced = _includes(syncProgress, 'ServerAvailabilityError')
+  || _includes(syncProgress, 'getaddrinfo')
+  || _includes(syncProgress, 'SYNCHRONIZATION_HAS_NOT_STARTED_YET')
+
+  if (isQueryWithDb && (synced || pseudoSynced)) {
     return true
   }
   if (error || progressError) {
@@ -112,83 +119,121 @@ function* syncLogout() {
   }
 }
 
-function* editSyncPref({ payload }) {
-  const { pairs, startTime, logout: logoutFlag } = payload
+function* editPublicTradesPref({ payload }) {
+  const { pairs, startTime } = payload
 
   const auth = yield select(selectAuth)
-  const symbols = yield select(getSyncSymbols)
-  const params = (pairs.length === 1)
-    ? {
-      symbol: formatRawSymbols(pairs[0]),
+  const symbols = yield select(getPublicFundingSymbols)
+  const publicFundingStartTime = yield select(getPublicFundingStartTime)
+
+  // config for 2 sections is merged in one
+  const params = [
+    // public trades config
+    ...mapRequestPairs(pairs).map(pair => ({
+      symbol: formatRawSymbols(pair),
       start: startTime,
-    }
-    : [
-      ...pairs.map(symbol => ({
-        symbol: formatRawSymbols(symbol),
-        start: startTime,
-      })),
-      ...symbols.map(symbol => ({
-        symbol: formatRawSymbols(symbol),
-        start: startTime,
-      })),
-    ]
+    })),
+    // public funding config
+    ...mapRequestSymbols(symbols).map(symbol => ({
+      symbol: formatRawSymbols(symbol),
+      start: publicFundingStartTime,
+    })),
+  ]
+
   const { error } = yield call(editPublicTradesConf, auth, params)
   if (error) {
-    yield put(updateSyncErrorStatus('during editPublicTradesConf'))
-  }
-  const { error: tickersConfError } = yield call(editTickersHistoryConf, auth, params)
-  if (tickersConfError) {
-    yield put(updateSyncErrorStatus('during editTickersHistoryConf'))
-  }
-  if (logoutFlag) {
-    yield put(logoutAction())
+    yield put(updateSyncErrorStatus('during editPublicTradesPairConf'))
   }
 }
 
-function* editSyncSymbolPref({ payload }) {
-  const { symbols, startTime, logout: logoutFlag } = payload
+function* editPublicFundingPref({ payload }) {
+  const { symbols, startTime } = payload
 
   const auth = yield select(selectAuth)
-  const pairs = yield select(getSyncPairs)
-  const params = (symbols.length === 1)
-    ? {
-      symbol: formatRawSymbols(symbols[0]),
+  const pairs = yield select(getPublicTradesPairs)
+  const publicTradesStartTime = yield select(getPublicTradesStartTime)
+
+  // config for 2 sections is merged in one
+  const params = [
+    // public trades config
+    ...mapRequestPairs(pairs).map(pair => ({
+      symbol: formatRawSymbols(pair),
+      start: publicTradesStartTime,
+    })),
+    // public funding config
+    ...mapRequestSymbols(symbols).map(symbol => ({
+      symbol: formatRawSymbols(symbol),
       start: startTime,
-    }
-    : [
-      ...pairs.map(symbol => ({
-        symbol: formatRawSymbols(symbol),
-        start: startTime,
-      })),
-      ...symbols.map(symbol => ({
-        symbol: formatRawSymbols(symbol),
-        start: startTime,
-      })),
-    ]
+    })),
+  ]
+
   const { error } = yield call(editPublicTradesConf, auth, params)
   if (error) {
-    yield put(updateSyncErrorStatus('during editPublicTradesConf'))
+    yield put(updateSyncErrorStatus('during editPublicTradesSymbolConf'))
   }
-  if (logoutFlag) {
-    yield put(logoutAction())
+}
+
+function* editTickersHistoryPref({ payload }) {
+  const { pairs = [], startTime } = payload
+
+  const auth = yield select(selectAuth)
+  const params = mapRequestPairs(pairs).map(pair => ({
+    symbol: formatRawSymbols(pair),
+    start: startTime,
+  }))
+
+  const { error } = yield call(editTickersHistoryConf, auth, params)
+  if (error) {
+    yield put(updateSyncErrorStatus('during editTickersHistoryConf'))
   }
 }
 
 function* getSyncPref() {
   const auth = yield select(selectAuth)
 
-  const { result: syncPrefResult, error: syncPrefError } = yield call(getPublicTradesConf, auth)
-  if (syncPrefResult && syncPrefResult.length > 0) {
-    const { start } = syncPrefResult[0]
-    const format = data => formatInternalSymbol(data.symbol)
-    const pairs = syncPrefResult.filter(data => isPair(data.symbol)).map(format)
-    const symbols = syncPrefResult.filter(data => isSymbol(data.symbol)).map(format)
+  const [
+    { result: publicTradesPrefResult, error: publicTradesPrefError },
+    { result: tickersHistoryPrefResult, error: tickersHistoryPrefError },
+  ] = yield all([
+    yield call(getPublicTradesConf, auth),
+    yield call(getTickersHistoryConf, auth),
+  ])
 
-    yield put(actions.setSyncPairPref(pairs, start))
-    yield put(actions.setSyncSymbolPref(symbols, start))
+  const formatSymbol = data => mapSymbol(formatInternalSymbol(data.symbol))
+  const formatPair = ({ symbol }) => formatSymbolToPair(symbol).split('/').map(mapSymbol).join(':')
+
+  if (publicTradesPrefResult && publicTradesPrefResult.length > 0) {
+    const publicTradesPairs = publicTradesPrefResult.filter(data => isPair(data.symbol))
+    const publicTradesSymbols = publicTradesPrefResult.filter(data => isSymbol(data.symbol))
+
+    yield put(actions.setSyncPref({
+      publicTrades: {
+        pairs: publicTradesPairs.map(formatPair),
+        startTime: publicTradesPairs[0] && publicTradesPairs[0].start,
+      },
+      publicFunding: {
+        symbols: publicTradesSymbols.map(formatSymbol),
+        startTime: publicTradesSymbols[0] && publicTradesSymbols[0].start,
+      },
+    }))
   }
-  if (syncPrefError) {
+
+  if (tickersHistoryPrefResult && tickersHistoryPrefResult.length > 0) {
+    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isPair(data.symbol))
+
+    yield put(actions.setSyncPref({
+      tickersHistory: {
+        pairs: tickersHistoryPairs.map(formatPair),
+        startTime: tickersHistoryPairs[0] && tickersHistoryPairs[0].start,
+      },
+    }))
+  }
+
+  if (publicTradesPrefError) {
     yield put(updateSyncErrorStatus('during getPublicTradesConf'))
+  }
+  if (tickersHistoryPrefError) {
+    yield put(updateSyncErrorStatus('during getTickersHistoryConf'))
   }
 }
 
@@ -197,7 +242,7 @@ function* initSync() {
 
   if (isEnabled) {
     const auth = yield select(selectAuth)
-    const { result: syncProgress } = yield call(getSyncProgress, auth)
+    const { result: syncProgress } = yield call(fetchSyncProgress, auth)
 
     const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
     if (isSyncing) {
@@ -225,9 +270,16 @@ function* progressUpdate({ payload }) {
 
 function* requestsRedirectUpdate({ payload }) {
   const { result } = payload
-  yield delay(300)
 
-  if (!result) {
+  if (result) {
+    const syncProgress = yield select(getSyncProgress)
+    const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
+    if (isSyncing) {
+      yield put(actions.setSyncMode(types.MODE_SYNCING))
+    } else {
+      yield put(actions.setSyncMode(types.MODE_ONLINE))
+    }
+  } else {
     yield put(actions.forceQueryFromDb())
 
     const areSymbolsFetched = select(getSymbolsFetchStatus)
@@ -243,7 +295,7 @@ function* updateSyncStatus() {
 
   if (isEnabled) {
     const auth = yield select(selectAuth)
-    const { result: syncProgress, error: progressError } = yield call(getSyncProgress, auth)
+    const { result: syncProgress, error: progressError } = yield call(fetchSyncProgress, auth)
 
     switch (typeof syncProgress) {
       case 'number':
@@ -272,7 +324,7 @@ function* updateSyncStatus() {
     }
 
     if (progressError) {
-      yield put(updateSyncErrorStatus('during getSyncProgress'))
+      yield put(updateSyncErrorStatus('during fetchSyncProgress'))
     }
   }
 }
@@ -281,8 +333,9 @@ export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
-  yield takeLatest(types.EDIT_PAIR_PREF, editSyncPref)
-  yield takeLatest(types.EDIT_SYMBOL_PREF, editSyncSymbolPref)
+  yield takeLatest(types.EDIT_PUBLIC_TRADES_PREF, editPublicTradesPref)
+  yield takeLatest(types.EDIT_PUBLIC_FUNDING_PREF, editPublicFundingPref)
+  yield takeLatest(types.EDIT_TICKERS_HISTORY_PREF, editTickersHistoryPref)
   yield takeLatest(authTypes.AUTH_SUCCESS, initSync)
   yield takeLatest(types.WS_PROGRESS_UPDATE, progressUpdate)
   yield takeLatest(types.WS_REQUESTS_REDIRECT, requestsRedirectUpdate)
