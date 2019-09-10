@@ -46,7 +46,9 @@ export function fpaymentReducer(state = initialState, action) {
       const entries = res.map((entry) => {
         const {
           amount,
+          amountUsd,
           balance,
+          balanceUsd,
           currency,
           description,
           id,
@@ -67,7 +69,9 @@ export function fpaymentReducer(state = initialState, action) {
           currency: mappedCurrency,
           mts,
           amount,
+          amountUsd,
           balance,
+          balanceUsd,
           description: mapDescription(description),
           wallet,
         }
