@@ -11,7 +11,7 @@ import { IconNames } from '@blueprintjs/icons'
 import { formatPair } from 'state/symbols/utils'
 
 class PairSelector extends PureComponent {
-  filterPair = (query, pair) => pair.indexOf(query.replace('/', '').toUpperCase()) >= 0
+  filterPair = (query, pair) => pair.indexOf(query.toUpperCase()) >= 0
 
   renderPair = (pair, { modifiers }) => {
     if (!modifiers.matchesPredicate) {

@@ -11,7 +11,7 @@ import { formatPair } from 'state/symbols/utils'
 import { propTypes, defaultProps } from './MultiPairSelector.props'
 
 class MultiPairSelector extends PureComponent {
-  filterPair = (query, pair) => pair.indexOf(query.replace('/', '').toUpperCase()) >= 0
+  filterPair = (query, pair) => pair.indexOf(query.toUpperCase()) >= 0
 
   renderTag = pair => formatPair(pair)
 
