@@ -28,10 +28,7 @@ export function* fetchTimezone() {
 }
 
 function* updateTheme() {
-  const theme = yield select(getTheme)
-  // .replace is the temp fix for the wrong default value
-  // could be removed later
-  document.body.className = theme.replace('_', '-')
+  document.body.className = yield select(getTheme)
 }
 
 const WAIT_INTERVAL = 500
@@ -43,7 +40,6 @@ function* updateLang() {
 }
 
 export default function* baseSaga() {
-  yield takeLatest(types.SET_THEME, updateTheme)
-  yield takeLatest(types.UPDATE_THEME, updateTheme)
+  yield takeLatest([types.SET_THEME, types.UPDATE_THEME, 'persist/REHYDRATE'], updateTheme)
   yield takeLatest(types.SET_LANG, updateLang)
 }

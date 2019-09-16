@@ -45,7 +45,7 @@ export function baseReducer(state = initialState, action) {
     case types.SET_LANG:
       return {
         ...state,
-        locale: payload,
+        locale: payload || 'en',
       }
     case types.SET_THEME:
       return {

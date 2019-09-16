@@ -56,7 +56,7 @@ export function setLang(lang) {
 }
 
 /**
- * Create an action to store default theme.
+ * Create an action to set theme.
  * @param {string} theme
  */
 export function setTheme(theme) {
@@ -67,7 +67,7 @@ export function setTheme(theme) {
 }
 
 /**
- * Create an action to update theme.
+ * Create an action to update theme class in ui.
  */
 export function updateTheme() {
   return {
