@@ -6,7 +6,9 @@ import _castArray from 'lodash/castArray'
 
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
-import { getSymbolsURL, demapSymbols, demapPairs } from 'state/symbols/utils'
+import {
+  getSymbolsURL, demapSymbols, demapPairs, formatSymbolToPair, mapSymbol,
+} from 'state/symbols/utils'
 
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
@@ -234,6 +236,56 @@ export function getParsedUrlParams(searchUrl) {
   return queryString.parse(searchUrl)
 }
 
+export const getFrameworkPositionsEntries = entries => entries.map((entry) => {
+  const {
+    actualPrice,
+    amount,
+    basePrice,
+    id,
+    leverage,
+    marginFunding,
+    marginFundingType,
+    mtsCreate,
+    mtsUpdate,
+    pl,
+    plUsd,
+    plPerc,
+    liquidationPrice,
+    status,
+    symbol,
+  } = entry
+
+  return {
+    id,
+    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+    actualPrice,
+    amount,
+    basePrice,
+    leverage,
+    marginFunding,
+    marginFundingType,
+    mtsCreate,
+    mtsUpdate,
+    pl,
+    plUsd,
+    plPerc,
+    liquidationPrice,
+    status,
+  }
+})
+
+export const getFrameworkPositionsTickersEntries = entries => entries.map((entry) => {
+  const {
+    symbol,
+    amount,
+  } = entry
+
+  return {
+    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+    amount,
+  }
+})
+
 export default {
   checkFetch,
   checkEmail,
@@ -254,5 +306,7 @@ export default {
   momentFormatterDays,
   postJsonfetch,
   removeUrlParams,
+  getFrameworkPositionsEntries,
+  getFrameworkPositionsTickersEntries,
   timeOffset: memoizeOne(timeOffset),
 }

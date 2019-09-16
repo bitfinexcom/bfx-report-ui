@@ -17,6 +17,7 @@ export default {
   MENU_PUBLIC_FUNDING: 'publicfunding',
   MENU_PUBLIC_TRADES: 'publictrades',
   MENU_SNAPSHOTS: 'snapshots',
+  MENU_TAX_REPORT: 'taxreport',
   MENU_WALLETS: 'wallets',
   MENU_WIN_LOSS: 'winloss',
   MENU_WITHDRAWALS: 'withdrawals',
