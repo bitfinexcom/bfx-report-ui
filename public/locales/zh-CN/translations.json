@@ -318,6 +318,22 @@
       "canceled": "已取消旧同步观察程序"
     }
   },
+  "taxreport": {
+    "title": "Tax Report",
+    "query": {
+      "title": "查询",
+      "startDateTooltip": "选择开始时间",
+      "endDateTooltip": "选择结束时间"
+    },
+    "winloss": "Total Amount Win/Loss",
+    "startPositions": "Start Positions",
+    "endPositions": "End Positions",
+    "tickers": "牌价",
+    "movements": "移动",
+    "deposits": "存款",
+    "withdrawals": "提款",
+    "movementsTotal": "Total Amount"
+  },
   "theme": {
     "light": "浅色",
     "dark": "深色"

@@ -95,7 +95,8 @@ export function taxReportReducer(state = initialState, action) {
     case types.REFRESH:
       return {
         ...initialState,
-        timestamp: state.timestamp,
+        start: state.start,
+        end: state.end,
       }
     case authTypes.LOGOUT:
       return initialState

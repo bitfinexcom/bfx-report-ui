@@ -31,7 +31,7 @@ function* fetchTaxReport({ payload }) {
     yield put(actions.setParams(payload))
 
     const auth = yield select(selectAuth)
-    const { result = {}, error } = yield call(getReqTaxReport, { auth, ...payload })
+    const { result, error } = yield call(getReqTaxReport, { auth, ...payload })
 
     yield put(actions.updateTaxReport(result))
 
@@ -52,8 +52,8 @@ function* fetchTaxReport({ payload }) {
 }
 
 function* refreshTaxReport() {
-  const timestamp = yield select(selectors.getTimestamp)
-  yield call(fetchTaxReport, { payload: timestamp })
+  const params = yield select(selectors.getParams)
+  yield call(fetchTaxReport, { payload: params })
 }
 
 function* fetchTaxReportFail({ payload }) {

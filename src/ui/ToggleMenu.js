@@ -33,6 +33,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
   MENU_WIN_LOSS,
   MENU_WITHDRAWALS,
   MENU_WALLETS,
@@ -59,6 +60,7 @@ class ToggleMenu extends PureComponent {
     this.handleClickWinLoss = this.handleClick.bind(this, MENU_WIN_LOSS)
     this.handleClickConcentrationRisk = this.handleClick.bind(this, MENU_CONCENTRATION_RISK)
     this.handleClickSnapshots = this.handleClick.bind(this, MENU_SNAPSHOTS)
+    this.handleClickTaxReport = this.handleClick.bind(this, MENU_TAX_REPORT)
   }
 
   handleClick(target) {
@@ -218,6 +220,13 @@ class ToggleMenu extends PureComponent {
               title={isIconMode ? t('snapshots.title') : ''}
               onClick={this.handleClickSnapshots}
               active={target === MENU_SNAPSHOTS}
+            />
+            <MenuItem
+              icon={getIcon(MENU_TAX_REPORT)}
+              text={isIconMode ? '' : t('taxreport.title')}
+              title={isIconMode ? t('taxreport.title') : ''}
+              onClick={this.handleClickTaxReport}
+              active={target === MENU_TAX_REPORT}
             />
           </Fragment>
         ) : undefined}

@@ -318,6 +318,22 @@
       "canceled": "Отмененный старый Sync Watcher"
     }
   },
+  "taxreport": {
+    "title": "Tax Report",
+    "query": {
+      "title": "Запрос",
+      "startDateTooltip": "Выберите начальное время",
+      "endDateTooltip": "Выберите конечное время"
+    },
+    "winloss": "Total Amount Win/Loss",
+    "startPositions": "Start Positions",
+    "endPositions": "End Positions",
+    "tickers": "Тикеры",
+    "movements": "Движения",
+    "deposits": "Депозиты",
+    "withdrawals": "Снятия",
+    "movementsTotal": "Total Amount"
+  },
   "theme": {
     "light": "Светлая",
     "dark": "Темная"

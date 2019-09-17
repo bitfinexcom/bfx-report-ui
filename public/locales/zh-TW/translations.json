@@ -318,6 +318,22 @@
       "canceled": "已取消上次的同步監測"
     }
   },
+  "taxreport": {
+    "title": "Tax Report",
+    "query": {
+      "title": "查詢",
+      "startDateTooltip": "選擇開始時間",
+      "endDateTooltip": "選擇結束時間"
+    },
+    "winloss": "Total Amount Win/Loss",
+    "startPositions": "Start Positions",
+    "endPositions": "End Positions",
+    "tickers": "牌價",
+    "movements": "活動",
+    "deposits": "存款",
+    "withdrawals": "提款",
+    "movementsTotal": "Total Amount"
+  },
   "theme": {
     "light": "白",
     "dark": "黑"

@@ -17,9 +17,8 @@ import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
+import { getFrameworkPositionsColumns, getPositionsTickersColumns } from 'utils/columns'
 
-import getPositionsColumns from './Positions.columns'
-import getPositionsTickersColumns from './PositionsTickers.columns'
 import getWalletsTickersColumns from './WalletsTickers.columns'
 import getWalletsColumns from './Wallets.columns'
 import { propTypes, defaultProps } from './Snapshots.props'
@@ -178,7 +177,7 @@ class Snapshots extends PureComponent {
           {isNotEmpty && (
             <Fragment>
               {' '}
-              <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
+              <ExportButton handleClickExport={handleClickExport} />
             </Fragment>
           )}
           {' '}
@@ -242,7 +241,7 @@ class Snapshots extends PureComponent {
         </Fragment>
       )
     } else if (section === MENU_POSITIONS) {
-      const positionsColumns = getPositionsColumns({
+      const positionsColumns = getFrameworkPositionsColumns({
         filteredData: positionsEntries,
         getFullTime,
         t,

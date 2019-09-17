@@ -152,7 +152,7 @@ export default function getColumns(props) {
     {
       id: 'transid',
       name: 'movements.column.transactionId',
-      width: 80,
+      width: 135,
       renderer: (rowIndex) => {
         const { transactionId } = filteredData[rowIndex]
         return (
