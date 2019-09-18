@@ -11,15 +11,13 @@ import { IconNames } from '@blueprintjs/icons'
 import { formatPair } from 'state/symbols/utils'
 
 class PairSelector extends PureComponent {
-  filterPair = (query, pair) => pair.indexOf(query.replace('/', '').toUpperCase()) >= 0
+  filterPair = (query, pair) => pair.indexOf(query.toUpperCase()) >= 0
 
   renderPair = (pair, { modifiers }) => {
     if (!modifiers.matchesPredicate) {
       return null
     }
-    const {
-      currentPair, existingPairs, wildCard, onPairSelect,
-    } = this.props
+    const { currentPair, existingPairs, wildCard } = this.props
     const isCurrent = currentPair === pair.replace('/', ':')
     const className = (wildCard.includes(pair) || existingPairs.includes(pair)) && !isCurrent
       ? 'bitfinex-queried-symbol' : ''
@@ -31,14 +29,20 @@ class PairSelector extends PureComponent {
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={modifiers.disabled}
         key={pair}
-        onClick={() => onPairSelect(pair.replace('/', ':'))}
+        onClick={() => this.onPairSelect(pair)}
         text={pair}
       />
     )
   }
 
+  onPairSelect = (pair) => {
+    const { onPairSelect } = this.props
+
+    onPairSelect(pair.replace('/', ':'))
+  }
+
   render() {
-    const { currentPair, onPairSelect, pairs } = this.props
+    const { currentPair, pairs } = this.props
 
     return (
       <Select
@@ -46,7 +50,7 @@ class PairSelector extends PureComponent {
         items={pairs}
         itemRenderer={this.renderPair}
         itemPredicate={this.filterPair}
-        onItemSelect={onPairSelect}
+        onItemSelect={this.onPairSelect}
       >
         <Button
           text={formatPair(currentPair)}
