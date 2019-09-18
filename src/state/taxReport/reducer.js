@@ -1,5 +1,6 @@
 import authTypes from 'state/auth/constants'
 import { getFrameworkPositionsEntries, getFrameworkPositionsTickersEntries } from 'state/utils'
+import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
@@ -36,7 +37,7 @@ const getMovementsEntries = entries => entries.map((entry) => {
   return {
     amount,
     amountUsd,
-    currency,
+    currency: mapSymbol(currency),
     currencyName,
     destinationAddress,
     fees,
