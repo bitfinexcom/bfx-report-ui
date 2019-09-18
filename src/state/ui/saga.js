@@ -3,13 +3,15 @@ import {
 } from 'redux-saga/effects'
 
 import {
-  setApiKey, setApiSecret, setAuthToken, setTimezone, updateTheme,
+  setApiKey, setApiSecret, setAuthToken, setTimezone, setTheme, setLang,
 } from 'state/base/actions'
 import { checkAuth } from 'state/auth/actions'
 import { setCustomTimeRange } from 'state/query/actions'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 import { isSynced } from 'state/sync/saga'
+import { getThemeClass } from 'utils/themes'
 import { platform } from 'var/config'
+import { LANGUAGES } from 'locales/i18n'
 
 import types from './constants'
 import { toggleFrameworkDialog } from './actions'
@@ -17,19 +19,30 @@ import { toggleFrameworkDialog } from './actions'
 const { REACT_APP_ELECTRON } = process.env
 
 function* uiLoaded() {
-  // update theme from pref
-  yield put(updateTheme())
-
   const parsed = getParsedUrlParams(window.location.search)
   const {
-    authToken, apiKey, apiSecret, timezone, range,
+    authToken, apiKey, apiSecret, timezone, theme, locale, range,
   } = parsed
 
-  removeUrlParams(['timezone', 'authToken', 'apiKey', 'apiSecret'])
+  removeUrlParams(['timezone', 'theme', 'locale', 'authToken', 'apiKey', 'apiSecret'])
 
   // handle custom timezone
   if (timezone && isValidTimezone(timezone)) {
     yield put(setTimezone(timezone))
+  }
+
+  // handle custom theme
+  if (theme) {
+    const themeClass = getThemeClass(theme)
+    yield put(setTheme(themeClass))
+  }
+
+  // handle custom locale
+  if (locale) {
+    // replace handles underscored param on mobile
+    const parsedLocale = locale.replace('_', '-')
+    const lang = Object.keys(LANGUAGES).find(key => LANGUAGES[key] === parsedLocale)
+    yield put(setLang(lang))
   }
 
   // handle custom time range
