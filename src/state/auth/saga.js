@@ -49,6 +49,8 @@ function* checkAuth() {
     const { result, error } = yield call(getAuth, auth)
 
     if (result) {
+      yield put(fetchSymbols())
+
       if (platform.showFrameworkMode) {
         if (!WS.isConnected) {
           WS.connect()
@@ -77,7 +79,6 @@ function* checkAuth() {
           yield put(setOwnerEmail(wsAuth))
         }
       } else {
-        yield put(fetchSymbols())
         yield call(fetchEmail)
       }
 

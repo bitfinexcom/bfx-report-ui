@@ -13,9 +13,7 @@ import { makeFetchCall } from 'state/utils'
 import { setSyncState } from 'state/base/actions'
 import { getSyncState } from 'state/base/selectors'
 import { selectAuth } from 'state/auth/selectors'
-import { getSymbolsFetchStatus } from 'state/symbols/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
-import { fetchSymbols } from 'state/symbols/actions'
 import {
   mapRequestSymbols, formatInternalSymbol, formatRawSymbols, formatSymbolToPair,
   isPair, isSymbol, mapRequestPairs, mapSymbol,
@@ -255,7 +253,6 @@ function* initSync() {
     }
   }
 
-  yield put(fetchSymbols())
   yield call(getSyncPref)
 }
 
@@ -281,11 +278,6 @@ function* requestsRedirectUpdate({ payload }) {
     }
   } else {
     yield put(actions.forceQueryFromDb())
-
-    const areSymbolsFetched = select(getSymbolsFetchStatus)
-    if (!areSymbolsFetched) {
-      yield put(fetchSymbols()) // if user synced after starting offline while in online mode
-    }
   }
 }
 
