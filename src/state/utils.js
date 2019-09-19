@@ -89,7 +89,7 @@ export function timeOffset(timezone) {
     : moment.tz(moment.tz.guess()).format('Z')
 }
 
-export const getLastMonth = () => {
+export function getLastMonth() {
   const date = new Date()
   date.setMonth(date.getMonth() - 1)
 

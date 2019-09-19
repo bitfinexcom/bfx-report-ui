@@ -5,7 +5,7 @@ import { getLastMonth } from 'state/utils'
 
 import types from './constants'
 
-const initialState = {
+export const initialState = {
   dataReceived: false,
   entries: [],
   start: getLastMonth(),

@@ -1,16 +1,5 @@
-import timeframeConstants from 'ui/TimeframeSelector/constants'
-
 import actions from '../actions'
-import reducer from '../reducer'
-
-const initialState = {
-  dataReceived: false,
-  entries: [],
-  startDate: undefined,
-  endDate: undefined,
-  timeframe: timeframeConstants.DAY,
-  skip: undefined,
-}
+import reducer, { initialState } from '../reducer'
 
 const TEST_ENTRY = { id: 1 }
 
