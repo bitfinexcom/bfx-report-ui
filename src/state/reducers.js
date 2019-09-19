@@ -63,6 +63,7 @@ const BASE_REDUCERS = {
   tickers: tickersReducer,
   trades: tradesReducer,
   status: statusReducer,
+  sync: syncReducer,
   symbols: symbolsReducer,
   ui: uiReducer,
   wallets: walletsReducer,
@@ -70,7 +71,6 @@ const BASE_REDUCERS = {
 
 const FRAMEWORK_REDUCERS = {
   fpayment: fundingPaymentReducer,
-  sync: syncReducer,
   balance: accountBalanceReducer,
   winLoss: winLossReducer,
   snapshots: snapshotsReducer,
