@@ -319,20 +319,20 @@
     }
   },
   "taxreport": {
-    "title": "Tax Report",
+    "title": "税务报告",
     "query": {
       "title": "查询",
       "startDateTooltip": "选择开始时间",
       "endDateTooltip": "选择结束时间"
     },
-    "winloss": "Total Amount Win/Loss",
-    "startPositions": "Start Positions",
-    "endPositions": "End Positions",
+    "winloss": "获利/损失的总金额",
+    "startPositions": "开仓",
+    "endPositions": "关仓",
     "tickers": "牌价",
     "movements": "移动",
     "deposits": "存款",
     "withdrawals": "提款",
-    "movementsTotal": "Total Amount"
+    "movementsTotal": "总金额"
   },
   "theme": {
     "light": "浅色",

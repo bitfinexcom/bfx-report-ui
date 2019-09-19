@@ -319,20 +319,20 @@
     }
   },
   "taxreport": {
-    "title": "Tax Report",
+    "title": "Налоговый отчет",
     "query": {
       "title": "Запрос",
       "startDateTooltip": "Выберите начальное время",
       "endDateTooltip": "Выберите конечное время"
     },
-    "winloss": "Total Amount Win/Loss",
-    "startPositions": "Start Positions",
-    "endPositions": "End Positions",
+    "winloss": "Общая сумма выигрышей/проигрышей",
+    "startPositions": "Начальные позиции",
+    "endPositions": "Конечные позиции",
     "tickers": "Тикеры",
     "movements": "Движения",
     "deposits": "Депозиты",
     "withdrawals": "Снятия",
-    "movementsTotal": "Total Amount"
+    "movementsTotal": "Общая сумма"
   },
   "theme": {
     "light": "Светлая",
