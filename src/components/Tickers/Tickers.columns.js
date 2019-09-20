@@ -5,6 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import { fixedFloat } from 'ui/utils'
+import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -18,7 +19,7 @@ export default function getColumns(props) {
     {
       id: 'symbol',
       name: 'tickers.column.pair',
-      width: 80,
+      width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -32,7 +33,7 @@ export default function getColumns(props) {
     {
       id: 'bid',
       name: 'tickers.column.bid',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { bid } = filteredData[rowIndex]
         const fixedBid = fixedFloat(bid)
@@ -50,7 +51,7 @@ export default function getColumns(props) {
     {
       id: 'ask',
       name: 'tickers.column.ask',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { ask } = filteredData[rowIndex]
         const fixedAsk = fixedFloat(ask)
@@ -68,7 +69,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       nameStr: `${t('tickers.column.time')} (${timeOffset})`,
-      width: 200,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (

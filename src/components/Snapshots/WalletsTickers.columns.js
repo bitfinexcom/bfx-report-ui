@@ -29,7 +29,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'tickers.column.pair',
-      width: 80,
+      width: 100,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (

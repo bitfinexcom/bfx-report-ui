@@ -5,6 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
+import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -18,7 +19,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: 85,
+      width: COLUMN_WIDTHS.ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -32,7 +33,7 @@ export default function getColumns(props) {
     {
       id: 'order_id',
       name: 'trades.column.orderid',
-      width: 100,
+      width: COLUMN_WIDTHS.ORDER_ID,
       renderer: (rowIndex) => {
         const { orderID } = filteredData[rowIndex]
         return (
@@ -46,7 +47,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'trades.column.pair',
-      width: 80,
+      width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -60,7 +61,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'trades.column.amount',
-      width: 125,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { execAmount } = filteredData[rowIndex]
         return (
@@ -74,7 +75,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'trades.column.price',
-      width: 125,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { execPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(execPrice)
@@ -120,7 +121,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('trades.column.time')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (

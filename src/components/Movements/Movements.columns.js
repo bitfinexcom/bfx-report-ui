@@ -7,6 +7,7 @@ import {
 import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 import Explorer from 'ui/Explorer'
 import { platform } from 'var/config'
+import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -34,7 +35,7 @@ export default function getColumns(props) {
     {
       id: 'mtsupdated',
       nameStr: `${t('movements.column.updated')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
         return (
@@ -50,7 +51,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'movements.column.currency',
-      width: 100,
+      width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
@@ -78,7 +79,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'movements.column.amount',
-      width: 120,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(amount)} ${currency}`
@@ -97,7 +98,7 @@ export default function getColumns(props) {
       {
         id: 'amountUsd',
         name: 'movements.column.amountUsd',
-        width: 120,
+        width: COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
           const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`

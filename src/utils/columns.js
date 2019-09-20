@@ -4,6 +4,18 @@ import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 
+export const COLUMN_WIDTHS = {
+  ID: 82, // 123456789
+  ORDER_ID: 95, // 12345678901
+  SYMBOL: 92, // USTF0
+  PAIR: 100, // BTCF0/USTF0
+  AMOUNT: 120, // -33942.556789
+  BALANCE_USD: 125, // -33942.556789
+  DATE: 140, // 18-09-19 17:10:37
+  RATE: 120, // 0.00063000
+  PERIOD: 80, // 30 Day(s)
+}
+
 export const getFrameworkPositionsColumns = (props) => {
   const {
     filteredData,
@@ -36,7 +48,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'pair',
       name: 'positions.column.pair',
-      width: 80,
+      width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -50,7 +62,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'amount',
       name: 'positions.column.amount',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
@@ -64,7 +76,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'basePrice',
       name: 'positions.column.base-price',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { basePrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(basePrice)
@@ -82,7 +94,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'actualPrice',
       name: 'positions.column.actual-price',
-      width: 125,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { actualPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(actualPrice)
@@ -100,7 +112,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'priceLiq',
       name: 'positions.column.liq-price',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { liquidationPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(liquidationPrice)
@@ -132,7 +144,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'plUsd',
       name: 'positions.column.plUsd',
-      width: 125,
+      width: 100,
       renderer: (rowIndex) => {
         const { plUsd } = filteredData[rowIndex]
         return (
@@ -160,7 +172,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'swap',
       name: 'positions.column.swap',
-      width: 150,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { marginFunding } = filteredData[rowIndex]
         const fixedSwap = fixedFloat(marginFunding)
@@ -178,7 +190,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'swapType',
       name: 'positions.column.swap-type',
-      width: 150,
+      width: 120,
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex].marginFundingType)
         return (
@@ -206,7 +218,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'mtsUpdate',
       nameStr: `${t('positions.column.update')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
@@ -229,7 +241,7 @@ export const getPositionsTickersColumns = (props) => {
     {
       id: 'pair',
       name: 'tickers.column.pair',
-      width: 80,
+      width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -243,7 +255,7 @@ export const getPositionsTickersColumns = (props) => {
     {
       id: 'amount',
       name: 'snapshots.column.amount',
-      width: 120,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
@@ -258,6 +270,7 @@ export const getPositionsTickersColumns = (props) => {
 }
 
 export default {
+  COLUMN_WIDTHS,
   getFrameworkPositionsColumns,
   getPositionsTickersColumns,
 }

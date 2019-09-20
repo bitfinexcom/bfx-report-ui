@@ -6,6 +6,7 @@ import {
 
 import { formatAmount, fixedFloat, amountStyle } from 'ui/utils'
 import { formatPair } from 'state/symbols/utils'
+import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -20,7 +21,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: 85,
+      width: COLUMN_WIDTHS.ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -34,7 +35,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('publictrades.column.time')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
@@ -50,7 +51,7 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'publictrades.column.type',
-      width: 80,
+      width: 70,
       renderer: (rowIndex) => {
         const { type, amount } = filteredData[rowIndex]
         const classes = amountStyle(amount)
@@ -68,7 +69,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'publictrades.column.price',
-      width: 125,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { price, amount } = filteredData[rowIndex]
         const color = (amount > 0)
@@ -85,7 +86,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'publictrades.column.amount',
-      width: 125,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         const fixedAmount = fixedFloat(Math.abs(amount))
@@ -103,7 +104,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'publictrades.column.pair',
-      width: 100,
+      width: COLUMN_WIDTHS.PAIR,
       renderer: () => {
         const formatedCurrentPair = formatPair(targetPair)
         return (
