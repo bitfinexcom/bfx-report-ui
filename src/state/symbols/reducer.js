@@ -45,14 +45,14 @@ export function symbolsReducer(state = initialState, action) {
       })
       setSymbolMap(symbolMapping)
 
-      const formattedPairs = pairs.map(formatSymbolToPair)
+      const formattedPairs = pairs.map(formatSymbolToPair).sort()
       return {
         ...state,
         isFetched: true,
         coins: coins.sort(),
         currencies: dict,
         explorers: explorersDict,
-        pairs: _castArray(formattedPairs).map(mapPair).sort(),
+        pairs: formattedPairs,
       }
     }
     case authTypes.LOGOUT:
