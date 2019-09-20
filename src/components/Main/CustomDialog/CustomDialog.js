@@ -58,7 +58,7 @@ class CustomDialog extends PureComponent {
 
   handleRangeChange = (range) => {
     const { updateWarningStatus, handleRangeChange } = this.props
-    const [startDate] = range
+    const [startDate, endDate] = range
     const sixYearsPast = moment().add({ years: -6 })
 
     if (sixYearsPast.isAfter(startDate)) {
@@ -69,18 +69,39 @@ class CustomDialog extends PureComponent {
       return
     }
 
+    if (startDate && endDate) {
+      if (moment(startDate).isBefore(endDate)) {
+        handleRangeChange(range)
+      }
+      return
+    }
+
     handleRangeChange(range)
+  }
+
+  getDates = () => {
+    const { startDate, endDate } = this.props
+
+    let formattedEndDate = endDate
+
+    if (endDate && moment().isBefore(endDate)) {
+      formattedEndDate = null
+    }
+
+    return {
+      startDate,
+      endDate: formattedEndDate,
+    }
   }
 
   render() {
     const {
-      endDate,
       handleCustomDialogClose,
       isCustomOpen,
       startQuery,
-      startDate,
       t,
     } = this.props
+    const { startDate, endDate } = this.getDates()
     const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, baseTypes.DEFAULT_TIMEZONE)
     const commonDateRangeProps = {
       allowSingleDayRange: true,
