@@ -114,6 +114,10 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
   padding-bottom: 8px;
 }
 
+.bitfinex-amount {
+  display: inline-block;
+}
+
 body.#{$ns}-dark {
   .bitfinex-green-text, .bitfinex-green-text > div {
     color: #7a9c4a;

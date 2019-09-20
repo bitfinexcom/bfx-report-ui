@@ -93,7 +93,7 @@ export default function getColumns(props) {
     {
       id: 'fee',
       name: 'trades.column.fee',
-      width: 125,
+      width: 145,
       renderer: (rowIndex) => {
         const { fee, feeCurrency } = filteredData[rowIndex]
         const fixedFee = fixedFloat(fee)

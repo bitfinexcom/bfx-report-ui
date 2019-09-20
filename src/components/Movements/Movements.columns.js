@@ -117,13 +117,22 @@ export default function getColumns(props) {
     {
       id: 'fees',
       name: 'movements.column.fees',
-      width: 80,
+      width: 145,
       renderer: (rowIndex) => {
         const { fees, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(fees)} ${currency}`
         return (
-          <Cell tooltip={tooltip}>
-            {formatAmount(fees)}
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={tooltip}
+          >
+            <Fragment>
+              {formatAmount(fees)}
+              {' '}
+              <span className='bitfinex-show-soft'>
+                {currency}
+              </span>
+            </Fragment>
           </Cell>
         )
       },
