@@ -16,7 +16,10 @@ export default function getColumns(props) {
       name: 'taxreport.deposits',
       width: 120,
       renderer: () => (
-        <Cell tooltip={fixedFloat(depositsTotalAmount)}>
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={fixedFloat(depositsTotalAmount)}
+        >
           {formatAmount(depositsTotalAmount)}
         </Cell>
       ),
@@ -27,7 +30,10 @@ export default function getColumns(props) {
       name: 'taxreport.withdrawals',
       width: 120,
       renderer: () => (
-        <Cell tooltip={fixedFloat(withdrawalsTotalAmount)}>
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={fixedFloat(withdrawalsTotalAmount)}
+        >
           {formatAmount(withdrawalsTotalAmount)}
         </Cell>
       ),
@@ -38,7 +44,10 @@ export default function getColumns(props) {
       name: 'taxreport.movementsTotal',
       width: 140,
       renderer: () => (
-        <Cell tooltip={fixedFloat(movementsTotalAmount)}>
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={fixedFloat(movementsTotalAmount)}
+        >
           {formatAmount(movementsTotalAmount)}
         </Cell>
       ),

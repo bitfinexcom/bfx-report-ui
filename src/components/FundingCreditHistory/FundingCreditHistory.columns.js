@@ -66,7 +66,10 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(amount)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(amount)}
+          >
             {formatAmount(amount)}
           </Cell>
         )

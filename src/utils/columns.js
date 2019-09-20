@@ -66,7 +66,10 @@ export const getFrameworkPositionsColumns = (props) => {
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(amount)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(amount)}
+          >
             {formatAmount(amount)}
           </Cell>
         )
@@ -134,7 +137,10 @@ export const getFrameworkPositionsColumns = (props) => {
       renderer: (rowIndex) => {
         const { pl } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(pl)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(pl)}
+          >
             {formatAmount(pl)}
           </Cell>
         )
@@ -148,7 +154,10 @@ export const getFrameworkPositionsColumns = (props) => {
       renderer: (rowIndex) => {
         const { plUsd } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(plUsd)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(plUsd)}
+          >
             {formatAmount(plUsd)}
           </Cell>
         )
@@ -162,7 +171,10 @@ export const getFrameworkPositionsColumns = (props) => {
       renderer: (rowIndex) => {
         const { plPerc } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(plPerc)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(plPerc)}
+          >
             {formatAmount(plPerc)}
           </Cell>
         )
@@ -259,7 +271,10 @@ export const getPositionsTickersColumns = (props) => {
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(amount)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(amount)}
+          >
             {formatAmount(amount)}
           </Cell>
         )

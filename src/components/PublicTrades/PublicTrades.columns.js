@@ -76,7 +76,10 @@ export default function getColumns(props) {
           ? 'green'
           : 'red'
         return (
-          <Cell tooltip={fixedFloat(price)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(price)}
+          >
             {formatAmount(price, color)}
           </Cell>
         )

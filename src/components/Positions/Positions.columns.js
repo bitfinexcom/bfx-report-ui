@@ -54,7 +54,10 @@ export default function getColumns(props) {
         renderer: (rowIndex) => {
           const { pl } = filteredData[rowIndex]
           return (
-            <Cell tooltip={fixedFloat(pl)}>
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={fixedFloat(pl)}
+            >
               {formatAmount(pl)}
             </Cell>
           )
@@ -68,7 +71,10 @@ export default function getColumns(props) {
         renderer: (rowIndex) => {
           const { plPerc } = filteredData[rowIndex]
           return (
-            <Cell tooltip={fixedFloat(plPerc)}>
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={fixedFloat(plPerc)}
+            >
               {formatAmount(plPerc)}
             </Cell>
           )
@@ -83,12 +89,16 @@ export default function getColumns(props) {
       {
         id: 'collateral',
         name: 'positions.column.collateral',
-        width: 110,
+        width: COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
           const { collateral } = filteredData[rowIndex]
+          const fixedCollateral = fixedFloat(collateral)
           return (
-            <Cell tooltip={collateral}>
-              {collateral}
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={fixedCollateral}
+            >
+              {fixedCollateral}
             </Cell>
           )
         },
@@ -154,7 +164,10 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(amount)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(amount)}
+          >
             {formatAmount(amount)}
           </Cell>
         )

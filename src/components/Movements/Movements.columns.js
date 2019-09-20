@@ -84,7 +84,10 @@ export default function getColumns(props) {
         const { amount, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(amount)} ${currency}`
         return (
-          <Cell tooltip={tooltip}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={tooltip}
+          >
             {formatAmount(amount)}
           </Cell>
         )
@@ -103,7 +106,10 @@ export default function getColumns(props) {
           const { amountUsd } = filteredData[rowIndex]
           const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
           return (
-            <Cell tooltip={tooltip}>
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={tooltip}
+            >
               {formatAmount(amountUsd)}
             </Cell>
           )

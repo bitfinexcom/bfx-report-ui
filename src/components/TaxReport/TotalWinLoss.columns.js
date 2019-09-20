@@ -12,7 +12,10 @@ export default function getColumns(props) {
       name: 'taxreport.winloss',
       width: 170,
       renderer: () => (
-        <Cell tooltip={fixedFloat(winLossTotalAmount)}>
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={fixedFloat(winLossTotalAmount)}
+        >
           {formatAmount(winLossTotalAmount)}
         </Cell>
       ),
