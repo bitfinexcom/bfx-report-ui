@@ -1,7 +1,5 @@
-import _castArray from 'lodash/castArray'
-
 import authTypes from 'state/auth/constants'
-import { formatSymbolToPair, mapPair } from 'state/symbols/utils'
+import { formatSymbolToPair } from 'state/symbols/utils'
 
 import types from './constants'
 import { setSymbolMap } from './map'
