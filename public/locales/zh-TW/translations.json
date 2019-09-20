@@ -285,7 +285,9 @@
     },
     "column": {
       "amount": "數量",
-      "type": "類型"
+      "type": "類型",
+      "positions_total": "POSITIONS TOTAL P/L USD",
+      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。"
   },

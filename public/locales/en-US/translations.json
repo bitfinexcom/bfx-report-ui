@@ -285,7 +285,9 @@
     },
     "column": {
       "amount": "AMOUNT",
-      "type": "TYPE"
+      "type": "TYPE",
+      "positions_total": "POSITIONS TOTAL P/L USD",
+      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "No related data in this date time. You can try another date time."
   },

@@ -285,7 +285,9 @@
     },
     "column": {
       "amount": "СУММА",
-      "type": "ТИП"
+      "type": "ТИП",
+      "positions_total": "POSITIONS TOTAL P/L USD",
+      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "Нет данных за этот промежуток времени. Вы можете выбрать другой промежуток времени."
   },

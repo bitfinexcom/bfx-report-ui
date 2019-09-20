@@ -32,8 +32,10 @@ const WALLETS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   currentTime: PropTypes.number,
+  positionsTotalPlUsd: PropTypes.number,
   positionsEntries: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
   positionsTickersEntries: PropTypes.arrayOf(POSITIONS_TICKERS_ENTRIES_PROPS).isRequired,
+  walletsTotalBalanceUsd: PropTypes.number,
   walletsTickersEntries: PropTypes.arrayOf(WALLETS_TICKERS_ENTRIES_PROPS).isRequired,
   walletsEntries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
   fetchSnapshots: PropTypes.func.isRequired,
@@ -46,7 +48,9 @@ export const propTypes = {
 
 export const defaultProps = {
   currentTime: null,
+  positionsTotalPlUsd: null,
   positionsEntries: [],
+  walletsTotalBalanceUsd: null,
   walletsEntries: [],
   fetchSnapshots: () => {},
   getFullTime: () => {},

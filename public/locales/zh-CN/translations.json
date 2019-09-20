@@ -285,7 +285,9 @@
     },
     "column": {
       "amount": "金额",
-      "type": "类型"
+      "type": "类型",
+      "positions_total": "POSITIONS TOTAL P/L USD",
+      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。"
   },

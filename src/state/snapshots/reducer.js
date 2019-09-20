@@ -6,8 +6,10 @@ import types from './constants'
 
 const initialState = {
   dataReceived: false,
+  positionsTotalPlUsd: null,
   positionsEntries: [],
   positionsTickersEntries: [],
+  walletsTotalBalanceUsd: null,
   walletsTickersEntries: [],
   walletsEntries: [],
   timestamp: undefined,
@@ -56,13 +58,16 @@ export function snapshotsReducer(state = initialState, action) {
 
       const {
         positionsSnapshot = [], positionsTickers = [], walletsTickers = [], walletsSnapshot = [],
+        positionsTotalPlUsd, walletsTotalBalanceUsd,
       } = payload
 
       return {
         ...state,
         dataReceived: true,
+        positionsTotalPlUsd,
         positionsEntries: getFrameworkPositionsEntries(positionsSnapshot),
         positionsTickersEntries: getFrameworkPositionsTickersEntries(positionsTickers),
+        walletsTotalBalanceUsd,
         walletsTickersEntries: getWalletsTickersEntries(walletsTickers),
         walletsEntries: getWalletsEntries(walletsSnapshot),
       }
