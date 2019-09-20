@@ -2,7 +2,7 @@
 import _get from 'lodash/get'
 
 import {
-  formatInternalSymbol, formatSymbolToPair, mapSymbol, mapPair,
+  formatInternalSymbol, formatSymbolToPair, mapPair,
 } from 'state/symbols/utils'
 import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
@@ -79,7 +79,7 @@ export function ordersReducer(state = initialState, action) {
           id,
           gid,
           cid,
-          pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+          pair: formatSymbolToPair(symbol),
           mtsCreate,
           mtsUpdate,
           amount,

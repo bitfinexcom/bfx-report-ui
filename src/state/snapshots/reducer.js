@@ -22,7 +22,7 @@ const getWalletsTickersEntries = entries => entries.map((entry) => {
 
   return {
     walletType,
-    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+    pair: formatSymbolToPair(symbol),
     amount,
   }
 })

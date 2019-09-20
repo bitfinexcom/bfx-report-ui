@@ -90,7 +90,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           rateReal,
           renew,
           noClose,
-          positionPair: formatSymbolToPair(positionPair).split('/').map(mapSymbol).join('/'),
+          positionPair: formatSymbolToPair(positionPair),
         }
       })
       const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)

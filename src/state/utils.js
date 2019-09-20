@@ -7,7 +7,7 @@ import _castArray from 'lodash/castArray'
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import {
-  getSymbolsURL, demapSymbols, demapPairs, formatSymbolToPair, mapSymbol,
+  getSymbolsURL, demapSymbols, demapPairs, formatSymbolToPair,
 } from 'state/symbols/utils'
 
 export function postJsonfetch(url, bodyJson) {
@@ -257,7 +257,7 @@ export const getFrameworkPositionsEntries = entries => entries.map((entry) => {
 
   return {
     id,
-    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+    pair: formatSymbolToPair(symbol),
     actualPrice,
     amount,
     basePrice,
@@ -281,7 +281,7 @@ export const getFrameworkPositionsTickersEntries = entries => entries.map((entry
   } = entry
 
   return {
-    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+    pair: formatSymbolToPair(symbol),
     amount,
   }
 })

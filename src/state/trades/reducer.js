@@ -69,7 +69,7 @@ export function tradesReducer(state = initialState, action) {
         }
         return {
           id,
-          pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+          pair: formatSymbolToPair(symbol),
           mtsCreate,
           orderID,
           execAmount,

@@ -2,7 +2,7 @@
 import _get from 'lodash/get'
 
 import {
-  formatInternalSymbol, formatSymbolToPair, mapSymbol, mapPair,
+  formatInternalSymbol, formatSymbolToPair, mapPair,
 } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
@@ -70,7 +70,7 @@ export function positionsActiveReducer(state = initialState, action) {
         }
         return {
           id,
-          pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+          pair: formatSymbolToPair(symbol),
           amount,
           basePrice,
           collateral,
