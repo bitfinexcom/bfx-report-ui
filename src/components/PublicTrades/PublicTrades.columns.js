@@ -92,13 +92,13 @@ export default function getColumns(props) {
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
-        const fixedAmount = fixedFloat(Math.abs(amount))
+        const fixedAmount = fixedFloat(amount)
         return (
           <Cell
             className='bitfinex-text-align-right'
             tooltip={fixedAmount}
           >
-            {fixedAmount}
+            {formatAmount(amount)}
           </Cell>
         )
       },

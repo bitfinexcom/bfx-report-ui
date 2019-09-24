@@ -107,7 +107,7 @@ export default function getColumns(props) {
             tooltip={tooltip}
           >
             <Fragment>
-              {fixedFee}
+              {formatAmount(fee)}
               {' '}
               <span className='bitfinex-show-soft'>
                 {feeCurrency}
