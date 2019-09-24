@@ -15,7 +15,7 @@ import {
   setSymbols,
   setTimeRange,
 } from 'state/reducers.helper'
-import { mapSymbol } from 'state/symbols/utils'
+import { formatSymbolToPair, mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
@@ -90,7 +90,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           rateReal,
           renew,
           noClose,
-          positionPair,
+          positionPair: formatSymbolToPair(positionPair),
         }
       })
       const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)

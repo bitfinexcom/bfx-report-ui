@@ -1,68 +1,21 @@
 import authTypes from 'state/auth/constants'
 import { formatSymbolToPair, mapSymbol } from 'state/symbols/utils'
+import { getFrameworkPositionsEntries, getFrameworkPositionsTickersEntries } from 'state/utils'
 
 import types from './constants'
 
 const initialState = {
   dataReceived: false,
+  positionsTotalPlUsd: null,
   positionsEntries: [],
   positionsTickersEntries: [],
+  walletsTotalBalanceUsd: null,
   walletsTickersEntries: [],
   walletsEntries: [],
   timestamp: undefined,
 }
 
-const getPositionsEntries = entries => entries.map((entry) => {
-  const {
-    actualPrice,
-    amount,
-    basePrice,
-    id,
-    leverage,
-    marginFunding,
-    marginFundingType,
-    mtsCreate,
-    mtsUpdate,
-    pl,
-    plUsd,
-    plPerc,
-    liquidationPrice,
-    status,
-    symbol,
-  } = entry
-
-  return {
-    id,
-    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
-    actualPrice,
-    amount,
-    basePrice,
-    leverage,
-    marginFunding,
-    marginFundingType,
-    mtsCreate,
-    mtsUpdate,
-    pl,
-    plUsd,
-    plPerc,
-    liquidationPrice,
-    status,
-  }
-})
-
-const getPositionsTickersEntires = entries => entries.map((entry) => {
-  const {
-    symbol,
-    amount,
-  } = entry
-
-  return {
-    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
-    amount,
-  }
-})
-
-const getWalletsTickersEntires = entries => entries.map((entry) => {
+const getWalletsTickersEntries = entries => entries.map((entry) => {
   const {
     walletType,
     symbol,
@@ -71,7 +24,7 @@ const getWalletsTickersEntires = entries => entries.map((entry) => {
 
   return {
     walletType,
-    pair: formatSymbolToPair(symbol).split('/').map(mapSymbol).join('/'),
+    pair: formatSymbolToPair(symbol),
     amount,
   }
 })
@@ -105,14 +58,17 @@ export function snapshotsReducer(state = initialState, action) {
 
       const {
         positionsSnapshot = [], positionsTickers = [], walletsTickers = [], walletsSnapshot = [],
+        positionsTotalPlUsd, walletsTotalBalanceUsd,
       } = payload
 
       return {
         ...state,
         dataReceived: true,
-        positionsEntries: getPositionsEntries(positionsSnapshot),
-        positionsTickersEntries: getPositionsTickersEntires(positionsTickers),
-        walletsTickersEntries: getWalletsTickersEntires(walletsTickers),
+        positionsTotalPlUsd,
+        positionsEntries: getFrameworkPositionsEntries(positionsSnapshot),
+        positionsTickersEntries: getFrameworkPositionsTickersEntries(positionsTickers),
+        walletsTotalBalanceUsd,
+        walletsTickersEntries: getWalletsTickersEntries(walletsTickers),
         walletsEntries: getWalletsEntries(walletsSnapshot),
       }
     }

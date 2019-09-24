@@ -5,6 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import { fixedFloat, formatAmount } from 'ui/utils'
+import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -19,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: 85,
+      width: COLUMN_WIDTHS.ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -33,7 +34,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('publicfunding.column.time')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
@@ -49,7 +50,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'publicfunding.column.amount',
-      width: 150,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         const fixedAmount = fixedFloat(Math.abs(amount))
@@ -67,7 +68,7 @@ export default function getColumns(props) {
     {
       id: 'rate',
       name: 'publicfunding.column.rate',
-      width: 150,
+      width: COLUMN_WIDTHS.RATE,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
         return (
@@ -81,7 +82,7 @@ export default function getColumns(props) {
     {
       id: 'period',
       name: 'publicfunding.column.period',
-      width: 80,
+      width: COLUMN_WIDTHS.PERIOD,
       renderer: (rowIndex) => {
         const period = `${filteredData[rowIndex].period} ${t('publicfunding.column.days')}`
         return (
@@ -101,7 +102,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'publicfunding.column.currency',
-      width: 100,
+      width: COLUMN_WIDTHS.SYMBOL,
       renderer: () => {
         const currency = targetSymbol.toUpperCase()
         return (

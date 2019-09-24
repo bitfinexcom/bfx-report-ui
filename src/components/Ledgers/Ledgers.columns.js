@@ -6,6 +6,7 @@ import {
 
 import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
 import { platform } from 'var/config'
+import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -19,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'description',
       name: 'ledgers.column.description',
-      width: 500,
+      width: 520,
       renderer: (rowIndex) => {
         const { description } = filteredData[rowIndex]
         return (
@@ -33,7 +34,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'ledgers.column.currency',
-      width: 100,
+      width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
@@ -47,12 +48,15 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'ledgers.column.amount',
-      width: 120,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(amount)} ${currency}`
         return (
-          <Cell tooltip={tooltip}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={tooltip}
+          >
             {formatAmount(amount)}
           </Cell>
         )
@@ -66,12 +70,15 @@ export default function getColumns(props) {
       {
         id: 'amountUsd',
         name: 'ledgers.column.amountUsd',
-        width: 120,
+        width: COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
           const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
           return (
-            <Cell tooltip={tooltip}>
+            <Cell
+              className='bitfinex-text-align-right'
+              tooltip={tooltip}
+            >
               {formatAmount(amountUsd)}
             </Cell>
           )
@@ -85,7 +92,7 @@ export default function getColumns(props) {
     {
       id: 'balance',
       name: 'ledgers.column.balance',
-      width: 120,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { balance, currency } = filteredData[rowIndex]
         const fixedBalance = fixedFloat(balance)
@@ -108,7 +115,7 @@ export default function getColumns(props) {
       {
         id: 'balanceUsd',
         name: 'ledgers.column.balanceUsd',
-        width: 125,
+        width: COLUMN_WIDTHS.BALANCE_USD,
         renderer: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]
           const fixedBalanceUsd = fixedFloat(balanceUsd)
@@ -131,7 +138,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('ledgers.column.time')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (

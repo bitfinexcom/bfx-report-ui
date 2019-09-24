@@ -285,7 +285,9 @@
     },
     "column": {
       "amount": "數量",
-      "type": "類型"
+      "type": "類型",
+      "positions_total": "POSITIONS TOTAL P/L USD",
+      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。"
   },
@@ -317,6 +319,22 @@
     "message": {
       "canceled": "已取消上次的同步監測"
     }
+  },
+  "taxreport": {
+    "title": "稅務報告",
+    "query": {
+      "title": "查詢",
+      "startDateTooltip": "選擇開始時間",
+      "endDateTooltip": "選擇結束時間"
+    },
+    "winloss": "獲利/損失之總金額",
+    "startPositions": "開倉",
+    "endPositions": "關倉",
+    "tickers": "牌價",
+    "movements": "活動",
+    "deposits": "存款",
+    "withdrawals": "提款",
+    "movementsTotal": "總金額"
   },
   "theme": {
     "light": "白",

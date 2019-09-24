@@ -285,7 +285,9 @@
     },
     "column": {
       "amount": "СУММА",
-      "type": "ТИП"
+      "type": "ТИП",
+      "positions_total": "POSITIONS TOTAL P/L USD",
+      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "Нет данных за этот промежуток времени. Вы можете выбрать другой промежуток времени."
   },
@@ -317,6 +319,22 @@
     "message": {
       "canceled": "Отмененный старый Sync Watcher"
     }
+  },
+  "taxreport": {
+    "title": "Налоговый отчет",
+    "query": {
+      "title": "Запрос",
+      "startDateTooltip": "Выберите начальное время",
+      "endDateTooltip": "Выберите конечное время"
+    },
+    "winloss": "Общая сумма выигрышей/проигрышей",
+    "startPositions": "Начальные позиции",
+    "endPositions": "Конечные позиции",
+    "tickers": "Тикеры",
+    "movements": "Движения",
+    "deposits": "Депозиты",
+    "withdrawals": "Снятия",
+    "movementsTotal": "Общая сумма"
   },
   "theme": {
     "light": "Светлая",

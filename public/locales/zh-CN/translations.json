@@ -285,7 +285,9 @@
     },
     "column": {
       "amount": "金额",
-      "type": "类型"
+      "type": "类型",
+      "positions_total": "POSITIONS TOTAL P/L USD",
+      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。"
   },
@@ -317,6 +319,22 @@
     "message": {
       "canceled": "已取消旧同步观察程序"
     }
+  },
+  "taxreport": {
+    "title": "税务报告",
+    "query": {
+      "title": "查询",
+      "startDateTooltip": "选择开始时间",
+      "endDateTooltip": "选择结束时间"
+    },
+    "winloss": "获利/损失的总金额",
+    "startPositions": "开仓",
+    "endPositions": "关仓",
+    "tickers": "牌价",
+    "movements": "移动",
+    "deposits": "存款",
+    "withdrawals": "提款",
+    "movementsTotal": "总金额"
   },
   "theme": {
     "light": "浅色",

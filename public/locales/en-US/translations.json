@@ -285,7 +285,9 @@
     },
     "column": {
       "amount": "AMOUNT",
-      "type": "TYPE"
+      "type": "TYPE",
+      "positions_total": "POSITIONS TOTAL P/L USD",
+      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "No related data in this date time. You can try another date time."
   },
@@ -317,6 +319,22 @@
     "message": {
       "canceled": "Canceled old Sync Watcher"
     }
+  },
+  "taxreport": {
+    "title": "Tax Report",
+    "query": {
+      "title": "Query",
+      "startDateTooltip": "Select a start time",
+      "endDateTooltip": "Select end time"
+    },
+    "winloss": "Total Amount Win/Loss",
+    "startPositions": "Start Positions",
+    "endPositions": "End Positions",
+    "tickers": "Tickers",
+    "movements": "Movements",
+    "deposits": "Deposits",
+    "withdrawals": "Withdrawals",
+    "movementsTotal": "Total Amount"
   },
   "theme": {
     "light": "Light",

@@ -22,6 +22,7 @@ import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
 import snapshotsReducer from './snapshots/reducer'
 import queryReducer from './query/reducer'
+import taxReportReducer from './taxReport/reducer'
 import tickersReducer from './tickers/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
@@ -74,6 +75,7 @@ const FRAMEWORK_REDUCERS = {
   balance: accountBalanceReducer,
   winLoss: winLossReducer,
   snapshots: snapshotsReducer,
+  taxReport: taxReportReducer,
 }
 
 const REDUCERS = {

@@ -5,6 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
+import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -18,7 +19,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: 80,
+      width: COLUMN_WIDTHS.ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -32,7 +33,7 @@ export default function getColumns(props) {
     {
       id: 'symbol',
       name: 'foffer.column.symbol',
-      width: 100,
+      width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { symbol } = filteredData[rowIndex]
         return (
@@ -46,7 +47,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'foffer.column.amount',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amountOrig } = filteredData[rowIndex]
         const fixedAmount = fixedFloat(amountOrig)
@@ -64,11 +65,14 @@ export default function getColumns(props) {
     {
       id: 'amountExecuted',
       name: 'foffer.column.amount-exe',
-      width: 150,
+      width: 152,
       renderer: (rowIndex) => {
         const { amountExecuted } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(amountExecuted)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(amountExecuted)}
+          >
             {formatAmount(amountExecuted)}
           </Cell>
         )
@@ -106,7 +110,7 @@ export default function getColumns(props) {
     {
       id: 'rate',
       name: 'foffer.column.rate',
-      width: 150,
+      width: COLUMN_WIDTHS.RATE,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
         const fixedRate = fixedFloat(rate)
@@ -124,7 +128,7 @@ export default function getColumns(props) {
     {
       id: 'period',
       name: 'foffer.column.period',
-      width: 80,
+      width: COLUMN_WIDTHS.PERIOD,
       renderer: (rowIndex) => {
         const period = `${filteredData[rowIndex].period} ${t('foffer.column.days')}`
         return (
@@ -144,7 +148,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       nameStr: `${t('foffer.column.updated')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (

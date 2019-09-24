@@ -25,6 +25,7 @@ import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selecto
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTargetPairs as getActivePositionsPairs } from 'state/positionsActive/selectors'
 import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors'
+import { getParams as getTaxReportParams } from 'state/taxReport/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import {
@@ -57,6 +58,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
   MENU_WALLETS,
   MENU_WITHDRAWALS,
 } = types
@@ -123,6 +125,8 @@ function getSelector(target) {
       return getPublicTradesPair
     case MENU_SNAPSHOTS:
       return getSnapshotsTimestamp
+    case MENU_TAX_REPORT:
+      return getTaxReportParams
     case MENU_WALLETS:
       return getTimestamp
     default:
@@ -168,7 +172,7 @@ function* exportCSV({ payload: targets }) {
     // eslint-disable-next-line no-restricted-syntax
     for (const target of targets) {
       const options = {}
-      if (target !== MENU_WALLETS && target !== MENU_SNAPSHOTS) {
+      if (target !== MENU_WALLETS && target !== MENU_SNAPSHOTS && target !== MENU_TAX_REPORT) {
         Object.assign(options, getTimeFrame(query, target))
         const getQueryLimit = yield select(getTargetQueryLimit)
         options.limit = getQueryLimit(target)
@@ -182,6 +186,10 @@ function* exportCSV({ payload: targets }) {
         case MENU_WALLETS:
         case MENU_SNAPSHOTS:
           options.end = sign || undefined
+          break
+        case MENU_TAX_REPORT:
+          options.start = sign.start || undefined
+          options.end = sign.end || undefined
           break
         case MENU_POSITIONS_AUDIT:
           options.id = sign || undefined
@@ -243,6 +251,9 @@ function* exportCSV({ payload: targets }) {
           break
         case MENU_SNAPSHOTS:
           options.method = 'getFullSnapshotReportCsv'
+          break
+        case MENU_TAX_REPORT:
+          options.method = 'getFullTaxReportCsv'
           break
         case MENU_WALLETS:
           options.method = 'getWalletsCsv'

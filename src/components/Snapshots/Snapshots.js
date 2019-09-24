@@ -8,6 +8,7 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
+import _isNumber from 'lodash/isNumber'
 
 import DateInput from 'ui/DateInput'
 import ExportButton from 'ui/ExportButton'
@@ -17,9 +18,10 @@ import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
+import { getFrameworkPositionsColumns, getPositionsTickersColumns } from 'utils/columns'
 
-import getPositionsColumns from './Positions.columns'
-import getPositionsTickersColumns from './PositionsTickers.columns'
+import getTotalPositionsColumns from './TotalPositions.columns'
+import getTotalWalletsColumns from './TotalWallets.columns'
 import getWalletsTickersColumns from './WalletsTickers.columns'
 import getWalletsColumns from './Wallets.columns'
 import { propTypes, defaultProps } from './Snapshots.props'
@@ -106,8 +108,10 @@ class Snapshots extends PureComponent {
       currentTime,
       getFullTime,
       timeOffset,
+      positionsTotalPlUsd,
       positionsEntries,
       positionsTickersEntries,
+      walletsTotalBalanceUsd,
       walletsTickersEntries,
       walletsEntries,
       handleClickExport,
@@ -178,7 +182,7 @@ class Snapshots extends PureComponent {
           {isNotEmpty && (
             <Fragment>
               {' '}
-              <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
+              <ExportButton handleClickExport={handleClickExport} />
             </Fragment>
           )}
           {' '}
@@ -205,6 +209,8 @@ class Snapshots extends PureComponent {
         </Fragment>
       )
     } else if (section === MENU_WALLETS) {
+      const totalWalletsColumns = getTotalWalletsColumns({ walletsTotalBalanceUsd })
+
       const exchangeData = walletsEntries.filter(entry => entry.type === WALLET_EXCHANGE)
       const marginData = walletsEntries.filter(entry => entry.type === WALLET_MARGIN)
       const fundingData = walletsEntries.filter(entry => entry.type === WALLET_FUNDING)
@@ -218,6 +224,13 @@ class Snapshots extends PureComponent {
       showContent = (
         <Fragment>
           {renderTitle}
+          <br />
+          {_isNumber(walletsTotalBalanceUsd) && (
+            <DataTable
+              numRows={1}
+              tableColums={totalWalletsColumns}
+            />
+          ) }
           <h4>
             {t('wallets.header.exchange')}
           </h4>
@@ -242,7 +255,8 @@ class Snapshots extends PureComponent {
         </Fragment>
       )
     } else if (section === MENU_POSITIONS) {
-      const positionsColumns = getPositionsColumns({
+      const totalPositionsColumns = getTotalPositionsColumns({ positionsTotalPlUsd })
+      const positionsColumns = getFrameworkPositionsColumns({
         filteredData: positionsEntries,
         getFullTime,
         t,
@@ -252,6 +266,13 @@ class Snapshots extends PureComponent {
       showContent = (
         <Fragment>
           {renderTitle}
+          <br />
+          {_isNumber(positionsTotalPlUsd) && (
+            <DataTable
+              numRows={1}
+              tableColums={totalPositionsColumns}
+            />
+          ) }
           <br />
           <DataTable
             numRows={positionsEntries.length}

@@ -5,6 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
+import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -18,7 +19,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: 100,
+      width: COLUMN_WIDTHS.ORDER_ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -32,7 +33,7 @@ export default function getColumns(props) {
     {
       id: 'symbol',
       name: 'orders.column.pair',
-      width: 80,
+      width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -46,7 +47,7 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'orders.column.type',
-      width: 150,
+      width: 135,
       renderer: (rowIndex) => {
         const { type } = filteredData[rowIndex]
         return (
@@ -60,7 +61,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'orders.column.amount',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amountOrig } = filteredData[rowIndex]
         const fixedAmount = fixedFloat(amountOrig)
@@ -78,11 +79,14 @@ export default function getColumns(props) {
     {
       id: 'amountExecuted',
       name: 'orders.column.amount-exe',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amountExecuted } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(amountExecuted)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(amountExecuted)}
+          >
             {formatAmount(amountExecuted)}
           </Cell>
         )
@@ -92,7 +96,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'orders.column.price',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { price } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(price)
@@ -110,7 +114,7 @@ export default function getColumns(props) {
     {
       id: 'priceAvg',
       name: 'orders.column.avgprice',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { priceAvg } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(priceAvg)
@@ -128,7 +132,7 @@ export default function getColumns(props) {
     {
       id: 'mtsCreate',
       nameStr: `${t('orders.column.create')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (
@@ -144,7 +148,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       nameStr: `${t('orders.column.update')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
@@ -160,7 +164,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'orders.column.status',
-      width: 200,
+      width: 165,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -174,7 +178,7 @@ export default function getColumns(props) {
     {
       id: 'priceTrailing',
       name: 'orders.column.pricetrail',
-      width: 200,
+      width: 125,
       renderer: (rowIndex) => {
         const { priceTrailing } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(priceTrailing)
@@ -192,7 +196,7 @@ export default function getColumns(props) {
     {
       id: 'typePrev',
       name: 'orders.column.typeprev',
-      width: 200,
+      width: 145,
       renderer: (rowIndex) => {
         const { typePrev } = filteredData[rowIndex]
         return (

@@ -113,12 +113,20 @@ export const formatInternalSymbol = symbol => removePrefix(symbol)
 // tBTCUSD -> BTC/USD
 // BTCF0:USTF0 -> BTCF0/USTF0
 export function formatSymbolToPair(symbol) {
-  if (_includes(symbol, ':')) {
-    return removePrefix(symbol).replace(':', '/')
+  if (!symbol) {
+    return symbol
   }
 
-  const [first, last] = getSplitPair(removePrefix(symbol), true)
-  return `${first}/${last}`
+  let formattedSymbol
+  if (_includes(symbol, ':')) {
+    formattedSymbol = removePrefix(symbol).replace(':', '/')
+  } else {
+    const [first, last] = getSplitPair(removePrefix(symbol), true)
+    formattedSymbol = `${first}/${last}`
+  }
+
+  // eslint-disable-next-line no-use-before-define
+  return formattedSymbol.split('/').map(mapSymbol).join('/')
 }
 
 // BTCUSD -> BTC/USD

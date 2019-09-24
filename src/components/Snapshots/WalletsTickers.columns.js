@@ -29,7 +29,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'tickers.column.pair',
-      width: 80,
+      width: 100,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -47,7 +47,10 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(amount)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(amount)}
+          >
             {formatAmount(amount)}
           </Cell>
         )

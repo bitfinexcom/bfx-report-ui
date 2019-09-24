@@ -130,7 +130,7 @@ class Wallets extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} timestamp={timestamp} />
+            <ExportButton handleClickExport={handleClickExport} />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

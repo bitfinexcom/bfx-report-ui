@@ -6,6 +6,7 @@ import {
 
 import { getSideMsg } from 'state/utils'
 import { formatAmount, fixedFloat } from 'ui/utils'
+import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -19,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: 80,
+      width: COLUMN_WIDTHS.ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -33,7 +34,7 @@ export default function getColumns(props) {
     {
       id: 'symbol',
       name: 'fcredit.column.symbol',
-      width: 100,
+      width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { symbol } = filteredData[rowIndex]
         return (
@@ -61,11 +62,14 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'fcredit.column.amount',
-      width: 100,
+      width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
-          <Cell tooltip={fixedFloat(amount)}>
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={fixedFloat(amount)}
+          >
             {formatAmount(amount)}
           </Cell>
         )
@@ -75,7 +79,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'fcredit.column.status',
-      width: 150,
+      width: 170,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -89,7 +93,7 @@ export default function getColumns(props) {
     {
       id: 'rate',
       name: 'fcredit.column.rate',
-      width: 150,
+      width: COLUMN_WIDTHS.RATE,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
         return (
@@ -106,7 +110,7 @@ export default function getColumns(props) {
     {
       id: 'period',
       name: 'fcredit.column.period',
-      width: 100,
+      width: COLUMN_WIDTHS.PERIOD,
       renderer: (rowIndex) => {
         const period = `${filteredData[rowIndex].period} ${t('fcredit.column.days')}`
         return (
@@ -126,7 +130,7 @@ export default function getColumns(props) {
     {
       id: 'mtsOpening',
       name: 'fcredit.column.opening',
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsOpening)
         return (
@@ -142,7 +146,7 @@ export default function getColumns(props) {
     {
       id: 'mtsLastPayout',
       name: 'fcredit.column.lastpayout',
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsLastPayout)
         return (
@@ -158,7 +162,7 @@ export default function getColumns(props) {
     {
       id: 'positionPair',
       name: 'fcredit.column.positionpair',
-      width: 130,
+      width: 120,
       renderer: (rowIndex) => {
         const { positionPair } = filteredData[rowIndex]
         return (
@@ -172,7 +176,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       nameStr: `${t('fcredit.column.updated')} (${timeOffset})`,
-      width: 150,
+      width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (

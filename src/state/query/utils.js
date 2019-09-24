@@ -25,6 +25,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
@@ -48,6 +49,7 @@ export const TYPE_WHITELIST = [
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
@@ -70,6 +72,7 @@ export const ROUTE_WHITELIST = [
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADES,
   MENU_WALLETS,
@@ -89,6 +92,7 @@ const BASIC_TARGETS = [
   // MENU_POSITIONS_AUDIT,
   MENU_WALLETS,
   MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
 ]
 // MENU_FPAYMENT only for framework mode
 const FUNDING_TARGETS = platform.showFrameworkMode ? [
@@ -247,6 +251,10 @@ const MAPPING = {
   [MENU_SNAPSHOTS]: {
     icon: IconNames.HISTORY,
     path: ['/snapshots_positions', '/snapshots_tickers', '/snapshots_wallets'],
+  },
+  [MENU_TAX_REPORT]: {
+    icon: IconNames.HISTORY,
+    path: '/tax_report',
   },
   [MENU_WALLETS]: {
     icon: IconNames.DOLLAR,
