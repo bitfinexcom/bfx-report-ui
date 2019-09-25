@@ -5,6 +5,7 @@ import { platform } from 'var/config'
 import accountBalanceSaga from './accountBalance/saga'
 import authSaga from './auth/saga'
 import baseSaga from './base/saga'
+import derivativesStatusSaga from './derivativesStatus/saga'
 import fcreditSaga from './fundingCreditHistory/saga'
 import floanSaga from './fundingLoanHistory/saga'
 import fofferSaga from './fundingOfferHistory/saga'
@@ -32,6 +33,7 @@ import wsSaga from './ws/saga'
 export default function* rootSaga() {
   yield fork(authSaga)
   yield fork(baseSaga)
+  yield fork(derivativesStatusSaga)
   yield fork(fcreditSaga)
   yield fork(floanSaga)
   yield fork(fofferSaga)
