@@ -5,12 +5,14 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import queryString from 'query-string'
+import _includes from 'lodash/includes'
 
 import { LANGUAGES_MAP } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
+import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
 import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
 import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
@@ -40,9 +42,11 @@ import {
   getTimeFrame,
 } from './selectors'
 import actions from './actions'
+import { NO_QUERY_LIMIT_TARGETS } from './utils'
 import types from './constants'
 
 const {
+  MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -94,6 +98,8 @@ function getMultipleCsv(auth, params) {
 
 function getSelector(target) {
   switch (target) {
+    case MENU_DERIVATIVES:
+      return getDerivativesPairs
     case MENU_FCREDIT:
       return getFCreditSymbols
     case MENU_FLOAN:
@@ -149,6 +155,7 @@ function formatSymbol(target, sign) {
     case MENU_PUBLIC_FUNDING:
       return `f${mapRequestSymbols(sign)}`
     // sections with pairs
+    case MENU_DERIVATIVES:
     case MENU_ORDERS:
     case MENU_TICKERS:
     case MENU_TRADES:
@@ -172,7 +179,7 @@ function* exportCSV({ payload: targets }) {
     // eslint-disable-next-line no-restricted-syntax
     for (const target of targets) {
       const options = {}
-      if (target !== MENU_WALLETS && target !== MENU_SNAPSHOTS && target !== MENU_TAX_REPORT) {
+      if (!_includes(NO_QUERY_LIMIT_TARGETS, target)) {
         Object.assign(options, getTimeFrame(query, target))
         const getQueryLimit = yield select(getTargetQueryLimit)
         options.limit = getQueryLimit(target)
@@ -204,6 +211,9 @@ function* exportCSV({ payload: targets }) {
         }
       }
       switch (target) {
+        case MENU_DERIVATIVES:
+          options.method = 'getDerivativesCsv'
+          break
         case MENU_FCREDIT:
           options.method = 'getFundingCreditHistoryCsv'
           break

@@ -5,7 +5,6 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
-import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
@@ -78,7 +77,6 @@ class Derivatives extends PureComponent {
           <h4>
             {t('derivatives.title')}
             {' '}
-            <TimeRange />
             {renderPairSelector}
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
@@ -92,7 +90,6 @@ class Derivatives extends PureComponent {
           <h4>
             {t('derivatives.title')}
             {' '}
-            <TimeRange />
             {renderPairSelector}
             {' '}
             <ExportButton handleClickExport={handleClickExport} />

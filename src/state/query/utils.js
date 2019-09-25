@@ -120,6 +120,13 @@ export const ORDERED_TARGETS = [
   ...PUBLIC_TARGETS,
 ]
 
+export const NO_QUERY_LIMIT_TARGETS = [
+  MENU_DERIVATIVES,
+  MENU_WALLETS,
+  MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
+]
+
 export function isValidTimeStamp(n) {
   return (`${n}`).length === 13
     && (new Date(n)).getTime() === n
@@ -371,4 +378,5 @@ export default {
   ORDERED_TARGETS,
   ROUTE_WHITELIST,
   TYPE_WHITELIST,
+  NO_QUERY_LIMIT_TARGETS,
 }
