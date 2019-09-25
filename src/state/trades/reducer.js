@@ -77,7 +77,7 @@ export function tradesReducer(state = initialState, action) {
           orderType,
           orderPrice,
           maker,
-          fee: Math.abs(fee),
+          fee,
           feeCurrency: mapSymbol(feeCurrency),
         }
       })
