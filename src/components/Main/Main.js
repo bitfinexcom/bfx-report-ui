@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import AccountBalance from 'components/AccountBalance'
 import AverageWinLoss from 'components/AverageWinLoss'
 import ConcentrationRisk from 'components/ConcentrationRisk'
+import Derivatives from 'components/Derivatives'
 import FrameworkDialog from 'components/FrameworkDialog'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
@@ -34,6 +35,7 @@ import CustomDialog from './CustomDialog'
 const {
   MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
+  MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -260,6 +262,15 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_TICKERS)}/:pair`}
               render={() => <Tickers handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_DERIVATIVES)}
+              render={() => <Derivatives handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_DERIVATIVES)}/:pair`}
+              render={() => <Derivatives handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact

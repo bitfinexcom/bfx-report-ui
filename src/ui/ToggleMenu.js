@@ -19,6 +19,7 @@ const {
   MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
+  MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -50,6 +51,7 @@ class ToggleMenu extends PureComponent {
     this.handleClickOrders = this.handleClick.bind(this, MENU_ORDERS)
     this.handleClickTrades = this.handleClick.bind(this, MENU_TRADES)
     this.handleClickDeposits = this.handleClick.bind(this, MENU_DEPOSITS)
+    this.handleClickDerivatives = this.handleClick.bind(this, MENU_DERIVATIVES)
     this.handleClickWithdrawals = this.handleClick.bind(this, MENU_WITHDRAWALS)
     this.handleClickPublicFunding = this.handleClick.bind(this, MENU_PUBLIC_FUNDING)
     this.handleClickPublicTrades = this.handleClick.bind(this, MENU_PUBLIC_TRADES)
@@ -189,6 +191,13 @@ class ToggleMenu extends PureComponent {
           title={isIconMode ? t('tickers.title') : ''}
           onClick={this.handleClickTickers}
           active={target === MENU_TICKERS}
+        />
+        <MenuItem
+          icon={getIcon(MENU_DERIVATIVES)}
+          text={isIconMode ? '' : t('derivatives.title')}
+          title={isIconMode ? t('derivatives.title') : ''}
+          onClick={this.handleClickDerivatives}
+          active={target === MENU_DERIVATIVES}
         />
         {platform.showFrameworkMode ? (
           <Fragment>

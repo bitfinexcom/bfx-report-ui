@@ -16,16 +16,16 @@ import types from './constants'
 import actions from './actions'
 import { getTargetPairs } from './selectors'
 
-function getReqDerivativesStatus({ auth, targetPairs }) {
+function getReqDerivatives({ auth, targetPairs }) {
   const params = {}
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
 
-  return makeFetchCall('getDerivativesStatus', auth, params)
+  return makeFetchCall('getDerivatives', auth, params)
 }
 
-function* fetchDerivativesStatus({ payload: pair }) {
+function* fetchDerivatives({ payload: pair }) {
   try {
     let targetPairs = yield select(getTargetPairs)
     const pairsUrl = getSymbolsURL(targetPairs)
@@ -35,33 +35,33 @@ function* fetchDerivativesStatus({ payload: pair }) {
       yield put(actions.setTargetPairs(targetPairs))
     }
     const auth = yield select(selectAuth)
-    const { result, error } = yield call(getReqDerivativesStatus, {
+    const { result, error } = yield call(getReqDerivatives, {
       auth,
       targetPairs,
     })
-    yield put(actions.updateDerivativesStatus(result))
+    yield put(actions.updateDerivatives(result))
 
-    if (error) {
+    if (!error) {
       yield put(actions.fetchFail({
         id: 'status.fail',
-        topic: 'derivativesstatus.title',
+        topic: 'derivatives.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
       id: 'status.request.error',
-      topic: 'derivativesstatus.title',
+      topic: 'derivatives.title',
       detail: JSON.stringify(fail),
     }))
   }
 }
 
-function* fetchDerivativesStatusFail({ payload }) {
+function* fetchDerivativesFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
-export default function* derivativesStatusSaga() {
-  yield takeLatest(types.FETCH_DERIVATIVES_STATUS, fetchDerivativesStatus)
-  yield takeLatest(types.FETCH_FAIL, fetchDerivativesStatusFail)
+export default function* derivativesSaga() {
+  yield takeLatest(types.FETCH_DERIVATIVES, fetchDerivatives)
+  yield takeLatest(types.FETCH_FAIL, fetchDerivativesFail)
 }

@@ -2,6 +2,7 @@ export default {
   MENU_ACCOUNT_BALANCE: 'accountbalance',
   MENU_CONCENTRATION_RISK: 'concentrationrisk',
   MENU_DEPOSITS: 'deposits',
+  MENU_DERIVATIVES: 'derivatives',
   MENU_FCREDIT: 'fcredit',
   MENU_FLOAN: 'floan',
   MENU_FOFFER: 'foffer',

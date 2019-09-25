@@ -4,9 +4,9 @@ import types from './constants'
  * Create an action to fetch derivatives status data.
  * @param {string} pairs pairs param from url
  */
-export function fetchDerivativesStatus(pairs) {
+export function fetchDerivatives(pairs) {
   return {
-    type: types.FETCH_DERIVATIVES_STATUS,
+    type: types.FETCH_DERIVATIVES,
     payload: pairs,
   }
 }
@@ -32,12 +32,12 @@ export function refresh() {
 }
 
 /**
- * Create an action to update derivatives status.
+ * Create an action to update derivatives.
  * @param {Object[]} data data set
  */
-export function updateDerivativesStatus(data) {
+export function updateDerivatives(data) {
   return {
-    type: types.UPDATE_DERIVATIVES_STATUS,
+    type: types.UPDATE_DERIVATIVES,
     payload: {
       data,
     },
@@ -78,10 +78,10 @@ export function removeTargetPair(pair) {
 }
 
 export default {
-  fetchDerivativesStatus,
+  fetchDerivatives,
   fetchFail,
   refresh,
-  updateDerivativesStatus,
+  updateDerivatives,
   setTargetPairs,
   addTargetPair,
   removeTargetPair,

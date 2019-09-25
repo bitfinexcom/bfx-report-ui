@@ -14,10 +14,10 @@ const initialState = {
   ...basePairState,
 }
 
-export function derivativesStatusReducer(state = initialState, action) {
+export function derivativesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
-    case types.UPDATE_DERIVATIVES_STATUS: {
+    case types.UPDATE_DERIVATIVES: {
       if (!_get(payload, ['data', 'res'])) {
         return {
           ...state,
@@ -37,7 +37,7 @@ export function derivativesStatusReducer(state = initialState, action) {
         } = entry
 
         return {
-          key: formatSymbolToPair(key),
+          pair: formatSymbolToPair(key),
           timestamp,
           price,
           priceSpot,
@@ -76,4 +76,4 @@ export function derivativesStatusReducer(state = initialState, action) {
   }
 }
 
-export default derivativesStatusReducer
+export default derivativesReducer

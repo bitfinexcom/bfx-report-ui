@@ -53,6 +53,17 @@
   "deposits": {
     "title": "Deposits"
   },
+  "derivatives": {
+    "title": "Derivatives",
+    "column": {
+      "pair": "PAIR",
+      "price": "PRICE",
+      "balance": "BALANCE",
+      "funding": "FUNDING",
+      "step": "STEP",
+      "time": "TIME"
+    }
+  },
   "download": {
     "query": "Prepare Export",
     "title": "Export CSV",
