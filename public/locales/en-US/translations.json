@@ -57,11 +57,12 @@
     "title": "Derivatives",
     "column": {
       "pair": "PAIR",
-      "price": "PRICE",
-      "balance": "BALANCE",
-      "funding": "FUNDING",
-      "step": "STEP",
-      "time": "TIME"
+      "priceDeriv": "DERIV PRICE",
+      "priceSpot": "SPOT PRICE",
+      "fundBalance": "INSURANCE FUND BALANCE",
+      "fundingAccrued": "NEXT FUNDING ACCRUED",
+      "fundingStep": "NEXT FUNDING STEP",
+      "update": "UPDATED"
     }
   },
   "download": {

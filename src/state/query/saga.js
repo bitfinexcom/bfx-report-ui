@@ -212,7 +212,7 @@ function* exportCSV({ payload: targets }) {
       }
       switch (target) {
         case MENU_DERIVATIVES:
-          options.method = 'getDerivativesCsv'
+          options.method = 'getStatusMessagesCsv'
           break
         case MENU_FCREDIT:
           options.method = 'getFundingCreditHistoryCsv'

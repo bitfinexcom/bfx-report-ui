@@ -31,17 +31,18 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].pair,
     },
     {
-      id: 'price',
-      name: 'derivatives.column.price',
+      id: 'priceDeriv',
+      name: 'derivatives.column.priceDeriv',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { price } = filteredData[rowIndex]
+        const fixedPrice = fixedFloat(price)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(price)}
+            tooltip={fixedPrice}
           >
-            {formatAmount(price)}
+            {fixedPrice}
           </Cell>
         )
       },
@@ -49,7 +50,7 @@ export default function getColumns(props) {
     },
     {
       id: 'priceSpot',
-      name: 'derivatives.column.price',
+      name: 'derivatives.column.priceSpot',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { priceSpot } = filteredData[rowIndex]
@@ -66,9 +67,9 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].priceSpot,
     },
     {
-      id: 'balance',
-      name: 'derivatives.column.balance',
-      width: COLUMN_WIDTHS.AMOUNT,
+      id: 'fundBalance',
+      name: 'derivatives.column.fundBalance',
+      width: 205,
       renderer: (rowIndex) => {
         const { fundBal } = filteredData[rowIndex]
         const fixedBalance = fixedFloat(fundBal)
@@ -84,9 +85,9 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].fundBal,
     },
     {
-      id: 'funding',
-      name: 'derivatives.column.funding',
-      width: COLUMN_WIDTHS.AMOUNT,
+      id: 'fundingAccrued',
+      name: 'derivatives.column.fundingAccrued',
+      width: 185,
       renderer: (rowIndex) => {
         const { fundingAccrued } = filteredData[rowIndex]
         const fixedFunding = fixedFloat(fundingAccrued)
@@ -95,16 +96,16 @@ export default function getColumns(props) {
             className='bitfinex-text-align-right'
             tooltip={fixedFunding}
           >
-            {fixedFunding}
+            {formatAmount(fundingAccrued)}
           </Cell>
         )
       },
       copyText: rowIndex => filteredData[rowIndex].fundingAccrued,
     },
     {
-      id: 'step',
-      name: 'derivatives.column.step',
-      width: 80,
+      id: 'fundingStep',
+      name: 'derivatives.column.fundingStep',
+      width: 155,
       renderer: (rowIndex) => {
         const { fundingStep } = filteredData[rowIndex]
         return (
@@ -120,7 +121,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
-      nameStr: `${t('derivatives.column.time')} (${timeOffset})`,
+      nameStr: `${t('derivatives.column.update')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].timestamp)
