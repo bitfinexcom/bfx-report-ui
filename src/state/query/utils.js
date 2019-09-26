@@ -146,7 +146,7 @@ const MAPPING = {
     path: '/concentration_risk',
   },
   [MENU_DERIVATIVES]: {
-    icon: IconNames.EXCHANGE,
+    icon: IconNames.SERIES_DERIVED,
     filterType: FILTER_PAIR,
     path: '/derivatives',
   },

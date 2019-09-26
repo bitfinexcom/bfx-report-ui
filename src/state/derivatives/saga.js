@@ -22,7 +22,7 @@ function getReqDerivatives({ auth, targetPairs }) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
 
-  return makeFetchCall('getStatusMessages ', auth, params)
+  return makeFetchCall('getDerivatives', auth, params)
 }
 
 function* fetchDerivatives({ payload: pair }) {
