@@ -8,27 +8,15 @@ export const getParams = (state) => {
 }
 export const getData = (state) => {
   const {
-    depositsTotalAmount,
-    endPositionsSnapshot,
-    endTickers,
-    movementsEntries,
-    movementsTotalAmount,
-    startPositionsSnapshot,
-    startTickers,
-    winLossTotalAmount,
-    withdrawalsTotalAmount,
+    startingPositionsSnapshot,
+    endingPositionsSnapshot,
+    finalState,
   } = getTaxReport(state)
 
   return {
-    depositsTotalAmount,
-    endPositionsSnapshot,
-    endTickers,
-    movementsEntries,
-    movementsTotalAmount,
-    startPositionsSnapshot,
-    startTickers,
-    winLossTotalAmount,
-    withdrawalsTotalAmount,
+    startingPositionsSnapshot,
+    endingPositionsSnapshot,
+    finalState,
   }
 }
 

@@ -327,14 +327,17 @@
       "startDateTooltip": "选择开始时间",
       "endDateTooltip": "选择结束时间"
     },
-    "winloss": "获利/损失的总金额",
-    "startPositions": "开仓",
-    "endPositions": "关仓",
-    "tickers": "牌价",
-    "movements": "移动",
-    "deposits": "存款",
-    "withdrawals": "提款",
-    "movementsTotal": "总金额"
+    "columns": {
+      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
+      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
+      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
+      "totalResult": "TOTAL RESULT (USD)"
+    },
+    "startingPeriodBalances": "Starting Period Balances",
+    "endingPeriodBalances": "Ending Period Balances",
+    "startPositions": "Starting Positions Snapshot",
+    "endPositions": "Ending Positions Snapshot",
+    "movements": "移动"
   },
   "theme": {
     "light": "浅色",

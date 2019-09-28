@@ -327,14 +327,17 @@
       "startDateTooltip": "Выберите начальное время",
       "endDateTooltip": "Выберите конечное время"
     },
-    "winloss": "Общая сумма выигрышей/проигрышей",
-    "startPositions": "Начальные позиции",
-    "endPositions": "Конечные позиции",
-    "tickers": "Тикеры",
-    "movements": "Движения",
-    "deposits": "Депозиты",
-    "withdrawals": "Снятия",
-    "movementsTotal": "Общая сумма"
+    "columns": {
+      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
+      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
+      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
+      "totalResult": "TOTAL RESULT (USD)"
+    },
+    "startingPeriodBalances": "Starting Period Balances",
+    "endingPeriodBalances": "Ending Period Balances",
+    "startPositions": "Starting Positions Snapshot",
+    "endPositions": "Ending Positions Snapshot",
+    "movements": "Движения"
   },
   "theme": {
     "light": "Светлая",

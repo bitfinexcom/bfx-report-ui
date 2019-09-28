@@ -13,11 +13,6 @@ const POSITIONS_ENTRIES_PROPS = PropTypes.shape({
   plPerc: PropTypes.number,
 })
 
-const POSITIONS_TICKERS_ENTRIES_PROPS = PropTypes.shape({
-  pair: PropTypes.string.isRequired,
-  amount: PropTypes.number,
-})
-
 const MOVEMENTS_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
@@ -34,15 +29,23 @@ export const propTypes = {
     end: PropTypes.number,
   }).isRequired,
   data: PropTypes.shape({
-    depositsTotalAmount: PropTypes.number,
-    endPositionsSnapshot: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
-    endTickers: PropTypes.arrayOf(POSITIONS_TICKERS_ENTRIES_PROPS).isRequired,
-    movementsEntries: PropTypes.arrayOf(MOVEMENTS_ENTRIES_PROPS).isRequired,
-    movementsTotalAmount: PropTypes.number,
-    startPositionsSnapshot: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
-    startTickers: PropTypes.arrayOf(POSITIONS_TICKERS_ENTRIES_PROPS).isRequired,
-    winLossTotalAmount: PropTypes.number,
-    withdrawalsTotalAmount: PropTypes.number,
+    startingPositionsSnapshot: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
+    endingPositionsSnapshot: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
+    finalState: PropTypes.shape({
+      startingPeriodBalances: PropTypes.shape({
+        walletsTotalBalanceUsd: PropTypes.number,
+        positionsTotalPlUsd: PropTypes.number,
+        totalResult: PropTypes.number,
+      }),
+      movements: PropTypes.arrayOf(MOVEMENTS_ENTRIES_PROPS).isRequired,
+      movementsTotalAmount: PropTypes.number,
+      endingPeriodBalances: PropTypes.shape({
+        walletsTotalBalanceUsd: PropTypes.number,
+        positionsTotalPlUsd: PropTypes.number,
+        totalResult: PropTypes.number,
+      }),
+      totalResult: PropTypes.number,
+    }).isRequired,
   }).isRequired,
   loading: PropTypes.bool.isRequired,
   getFullTime: PropTypes.func.isRequired,
