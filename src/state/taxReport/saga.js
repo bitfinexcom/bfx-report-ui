@@ -6,7 +6,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
 
@@ -14,14 +13,15 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-const getReqTaxReport = (params) => {
-  const { start, end, auth } = params
-  return makeFetchCall('getFullTaxReport', auth, { start, end })
+export const getReqTaxReport = (params) => {
+  const { start, end } = params
+  return makeFetchCall('getFullTaxReport', { start, end })
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchTaxReport({ payload }) {
+export function* fetchTaxReport(action) {
   try {
+    const { payload = {} } = action
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
       // stop loading for first request
@@ -29,9 +29,7 @@ function* fetchTaxReport({ payload }) {
     }
     // save current query time in state for csv export reference
     yield put(actions.setParams(payload))
-
-    const auth = yield select(selectAuth)
-    const { result, error } = yield call(getReqTaxReport, { auth, ...payload })
+    const { result, error } = yield call(getReqTaxReport, payload)
 
     yield put(actions.updateTaxReport(result))
 
