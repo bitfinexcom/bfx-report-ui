@@ -9,6 +9,7 @@ import accountBalanceReducer from './accountBalance/reducer'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import derivativesReducer from './derivatives/reducer'
+import filtersReducer from './filters/reducer'
 import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
 import fundingLoanHistoryReducer from './fundingLoanHistory/reducer'
 import fundingOfferHistoryReducer from './fundingOfferHistory/reducer'
@@ -54,6 +55,7 @@ const BASE_REDUCERS = {
   base: baseReducer,
   derivatives: derivativesReducer,
   fcredit: fundingCreditHistoryReducer,
+  filters: filtersReducer,
   floan: fundingLoanHistoryReducer,
   foffer: fundingOfferHistoryReducer,
   ledgers: ledgersReducer,

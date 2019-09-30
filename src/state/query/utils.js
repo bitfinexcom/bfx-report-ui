@@ -83,6 +83,20 @@ export const ROUTE_WHITELIST = [
   MENU_WITHDRAWALS,
 ]
 
+export const FILTERS_WHITELIST = [
+  MENU_LEDGERS,
+  MENU_TRADES,
+  MENU_POSITIONS,
+  MENU_ORDERS,
+  MENU_MOVEMENTS,
+  MENU_FOFFER,
+  MENU_FLOAN,
+  MENU_FCREDIT,
+  MENU_PUBLIC_TRADES,
+  MENU_PUBLIC_FUNDING,
+  MENU_TICKERS,
+]
+
 // Should keep the order, which used in ExportTargetsSelector
 const BASIC_TARGETS = [
   MENU_LEDGERS,
