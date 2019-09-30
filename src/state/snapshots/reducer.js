@@ -4,7 +4,7 @@ import { getFrameworkPositionsEntries, getFrameworkPositionsTickersEntries } fro
 
 import types from './constants'
 
-const initialState = {
+export const initialState = {
   dataReceived: false,
   positionsTotalPlUsd: null,
   positionsEntries: [],
@@ -58,7 +58,7 @@ export function snapshotsReducer(state = initialState, action) {
 
       const {
         positionsSnapshot = [], positionsTickers = [], walletsTickers = [], walletsSnapshot = [],
-        positionsTotalPlUsd, walletsTotalBalanceUsd,
+        positionsTotalPlUsd = null, walletsTotalBalanceUsd = null,
       } = payload
 
       return {

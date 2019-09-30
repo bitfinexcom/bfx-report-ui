@@ -44,7 +44,7 @@ export function refresh() {
 
 /**
  * Create an action to update Snapshots.
- * @param {Object[]} payload data set
+ * @param {Object} payload data set
  */
 export function updateSnapshots(payload) {
   return {

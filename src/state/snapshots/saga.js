@@ -13,13 +13,13 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-const getReqSnapshots = (end) => {
+export const getReqSnapshots = (end) => {
   const params = end ? { end } : {}
   return makeFetchCall('getFullSnapshotReport', params)
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchSnapshots({ payload: end }) {
+export function* fetchSnapshots({ payload: end }) {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {

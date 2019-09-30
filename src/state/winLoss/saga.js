@@ -26,7 +26,7 @@ export function* fetchWinLoss({ payload = {} }) {
     // save current query params in state for csv export reference and toggle loading
     yield put(actions.setParams(payload))
 
-    const { result = [], error } = yield call(getReqWinLoss, { ...payload })
+    const { result = [], error } = yield call(getReqWinLoss, payload)
     yield put(actions.updateWinLoss(result))
 
     if (error) {
