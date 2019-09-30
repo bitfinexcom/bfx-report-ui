@@ -13,10 +13,10 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
+export const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
 
 /* eslint-disable-next-line consistent-return */
-function* fetchWinLoss({ payload = {} }) {
+export function* fetchWinLoss({ payload = {} }) {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
