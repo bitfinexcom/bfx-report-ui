@@ -5,6 +5,7 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
+import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
@@ -125,6 +126,8 @@ class Ledgers extends PureComponent {
             {' '}
             <TimeRange />
             {renderSymbolSelector}
+            {' '}
+            <ColumnsFilter section={TYPE} />
             {' '}
             <ExportButton handleClickExport={handleClickExport} />
             {' '}

@@ -34,6 +34,7 @@ const USED_ICONS = [
   IconNames.SEARCH,
   IconNames.SERIES_DERIVED,
   IconNames.SMALL_CROSS,
+  IconNames.TH_FILTERED,
   IconNames.UPDATED,
 ]
 

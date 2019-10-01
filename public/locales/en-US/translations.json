@@ -32,9 +32,14 @@
       "endDateTooltip": "Select end time"
     }
   },
-  "column":{
+  "column": {
     "id": "#",
     "usd": "USD"
+  },
+  "columnsfilter": {
+    "title": "Filter Columns",
+    "cancel": "Cancel",
+    "apply": "Apply Filters"
   },
   "concentrationrisk": {
     "title": "Concentration Risk",
