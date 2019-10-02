@@ -53,6 +53,18 @@
   "deposits": {
     "title": "Депозиты"
   },
+  "derivatives": {
+    "title": "Derivatives",
+    "column": {
+      "pair": "PAIR",
+      "priceDeriv": "DERIV PRICE",
+      "priceSpot": "SPOT PRICE",
+      "fundBalance": "INSURANCE FUND BALANCE",
+      "fundingAccrued": "NEXT FUNDING ACCRUED",
+      "fundingStep": "NEXT FUNDING STEP",
+      "update": "UPDATED"
+    }
+  },
   "download": {
     "query": "Подготовить экспорт",
     "title": "Экспорт в CSV",

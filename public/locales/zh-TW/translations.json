@@ -53,6 +53,18 @@
   "deposits": {
     "title": "存款"
   },
+  "derivatives": {
+    "title": "Derivatives",
+    "column": {
+      "pair": "PAIR",
+      "priceDeriv": "DERIV PRICE",
+      "priceSpot": "SPOT PRICE",
+      "fundBalance": "INSURANCE FUND BALANCE",
+      "fundingAccrued": "NEXT FUNDING ACCRUED",
+      "fundingStep": "NEXT FUNDING STEP",
+      "update": "UPDATED"
+    }
+  },
   "download": {
     "query": "預備匯出",
     "title": "匯出成CSV",
