@@ -1,5 +1,23 @@
 .columns-filter {
+  &-item {
+    padding: 5px 0;
+
+    &-column {
+      min-width: 180px;
+      margin-right: 10px;
+    }
+
+    &-filter {
+      min-width: 180px;
+      margin-right: 10px;
+    }
+  }
+
   &-add {
+    width: fit-content;
+    margin-top: 10px;
+    margin-bottom: -8px;
     cursor: pointer;
+    color: #419eff;
   }
 }

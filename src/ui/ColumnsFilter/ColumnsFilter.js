@@ -1,10 +1,11 @@
 import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button, HTMLSelect } from '@blueprintjs/core'
+import { Button } from '@blueprintjs/core'
 
 import ColumnsFilterDialog from './Dialog'
 import { propTypes, defaultProps } from './ColumnsFilter.props'
 
+import ColumnSelector from './ColumnSelector'
 import FilterTypeSelector from './FilterTypeSelector'
 
 const EMPTY_FILTER = { column: '', type: '', value: '' }
@@ -15,8 +16,6 @@ const DEFAULT_FILTERS = [
   EMPTY_FILTER,
 ]
 
-const COLUMNS = []
-
 /* eslint-disable react/no-array-index-key */
 class ColumnsFilter extends PureComponent {
   constructor(props) {
@@ -24,7 +23,7 @@ class ColumnsFilter extends PureComponent {
 
     const { filters } = props
     this.state = {
-      isOpen: false,
+      isOpen: true,
       filters: filters.length
         ? filters
         : DEFAULT_FILTERS,
@@ -51,23 +50,31 @@ class ColumnsFilter extends PureComponent {
     })
   }
 
+  onColumnChange = (index, column) => {
+    const { filters } = this.state
+
+    const updatedFilters = filters.map((filter, i) => {
+      if (i === index) {
+        return {
+          ...filter,
+          column,
+        }
+      }
+
+      return filter
+    })
+
+    this.setState({
+      filters: updatedFilters,
+    })
+  }
+
   onFilterTypeChange = () => {
     //
   }
 
-  getColumnSelect = () => {
-    return (
-      <HTMLSelect>
-        {COLUMNS.map((column) => {
-          const { id, name } = column
-          return <option key={id} value={id}>{name}</option>
-        })}
-      </HTMLSelect>
-    )
-  }
-
   render() {
-    const { t } = this.props
+    const { section, t } = this.props
     const { isOpen, filters } = this.state
 
     const hasChanges = true
@@ -90,8 +97,12 @@ class ColumnsFilter extends PureComponent {
                 const { column, type, value } = filter
 
                 return (
-                  <div key={index}>
-                    {this.getColumnSelect()}
+                  <div key={index} className='columns-filter-item'>
+                    <ColumnSelector
+                      section={section}
+                      value={column}
+                      onChange={col => this.onColumnChange(index, col)}
+                    />
                     <FilterTypeSelector value={type} onChange={() => this.onFilterTypeChange(column)} />
                   </div>
                 )
