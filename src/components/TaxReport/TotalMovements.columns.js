@@ -4,45 +4,13 @@ import { Cell } from '@blueprintjs/table'
 import { fixedFloat, formatAmount } from 'ui/utils'
 
 export default function getColumns(props) {
-  const {
-    depositsTotalAmount,
-    withdrawalsTotalAmount,
-    movementsTotalAmount,
-  } = props
+  const { movementsTotalAmount } = props
 
   return [
     {
-      id: 'id',
-      name: 'taxreport.deposits',
-      width: 120,
-      renderer: () => (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={fixedFloat(depositsTotalAmount)}
-        >
-          {formatAmount(depositsTotalAmount)}
-        </Cell>
-      ),
-      copyText: () => fixedFloat(depositsTotalAmount),
-    },
-    {
-      id: 'id',
-      name: 'taxreport.withdrawals',
-      width: 120,
-      renderer: () => (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={fixedFloat(withdrawalsTotalAmount)}
-        >
-          {formatAmount(withdrawalsTotalAmount)}
-        </Cell>
-      ),
-      copyText: () => fixedFloat(withdrawalsTotalAmount),
-    },
-    {
-      id: 'id',
-      name: 'taxreport.movementsTotal',
-      width: 140,
+      id: 'movementsTotal',
+      name: 'taxreport.columns.movementsTotal',
+      width: 260,
       renderer: () => (
         <Cell
           className='bitfinex-text-align-right'

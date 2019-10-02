@@ -339,14 +339,17 @@
       "startDateTooltip": "選擇開始時間",
       "endDateTooltip": "選擇結束時間"
     },
-    "winloss": "獲利/損失之總金額",
-    "startPositions": "開倉",
-    "endPositions": "關倉",
-    "tickers": "牌價",
-    "movements": "活動",
-    "deposits": "存款",
-    "withdrawals": "提款",
-    "movementsTotal": "總金額"
+    "columns": {
+      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
+      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
+      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
+      "totalResult": "TOTAL RESULT (USD)"
+    },
+    "startingPeriodBalances": "Starting Period Balances",
+    "endingPeriodBalances": "Ending Period Balances",
+    "startPositions": "Starting Positions Snapshot",
+    "endPositions": "Ending Positions Snapshot",
+    "movements": "活動"
   },
   "theme": {
     "light": "白",

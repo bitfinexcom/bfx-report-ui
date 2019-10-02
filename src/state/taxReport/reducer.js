@@ -1,20 +1,28 @@
 import authTypes from 'state/auth/constants'
-import { getFrameworkPositionsEntries, getFrameworkPositionsTickersEntries } from 'state/utils'
+import { getFrameworkPositionsEntries } from 'state/utils'
 import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
 const initialState = {
   dataReceived: false,
-  depositsTotalAmount: undefined,
-  endPositionsSnapshot: [],
-  endTickers: [],
-  movementsEntries: [],
-  movementsTotalAmount: undefined,
-  startPositionsSnapshot: [],
-  startTickers: [],
-  winLossTotalAmount: undefined,
-  withdrawalsTotalAmount: undefined,
+  startingPositionsSnapshot: [],
+  endingPositionsSnapshot: [],
+  finalState: {
+    startingPeriodBalances: {
+      walletsTotalBalanceUsd: null,
+      positionsTotalPlUsd: null,
+      totalResult: null,
+    },
+    movements: [],
+    movementsTotalAmount: null,
+    endingPeriodBalances: {
+      walletsTotalBalanceUsd: null,
+      positionsTotalPlUsd: null,
+      totalResult: null,
+    },
+    totalResult: null,
+  },
   start: undefined,
   end: undefined,
 }
@@ -61,29 +69,29 @@ export function taxReportReducer(state = initialState, action) {
       }
 
       const {
-        depositsTotalAmount,
-        endPositionsSnapshot,
-        endTickers,
-        movements,
-        movementsTotalAmount,
-        startPositionsSnapshot,
-        startTickers,
-        winLossTotalAmount,
-        withdrawalsTotalAmount,
+        startingPositionsSnapshot,
+        endingPositionsSnapshot,
+        finalState: {
+          startingPeriodBalances,
+          movements,
+          movementsTotalAmount,
+          endingPeriodBalances,
+          totalResult,
+        },
       } = payload
 
       return {
         ...state,
         dataReceived: true,
-        depositsTotalAmount,
-        endPositionsSnapshot: getFrameworkPositionsEntries(endPositionsSnapshot),
-        endTickers: getFrameworkPositionsTickersEntries(endTickers),
-        movementsEntries: getMovementsEntries(movements),
-        movementsTotalAmount,
-        startPositionsSnapshot: getFrameworkPositionsEntries(startPositionsSnapshot),
-        startTickers: getFrameworkPositionsTickersEntries(startTickers),
-        winLossTotalAmount,
-        withdrawalsTotalAmount,
+        endingPositionsSnapshot: getFrameworkPositionsEntries(endingPositionsSnapshot),
+        finalState: {
+          startingPeriodBalances: startingPeriodBalances || {},
+          movements: getMovementsEntries(movements),
+          movementsTotalAmount,
+          endingPeriodBalances: endingPeriodBalances || {},
+          totalResult,
+        },
+        startingPositionsSnapshot: getFrameworkPositionsEntries(startingPositionsSnapshot),
       }
     }
     case types.SET_PARAMS:

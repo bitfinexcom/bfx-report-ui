@@ -18,11 +18,12 @@ import DataTable from 'ui/DataTable'
 import NoData from 'ui/NoData'
 import { isValidTimeStamp } from 'state/query/utils'
 import getMovementsColumns from 'components/Movements/Movements.columns'
-import { getFrameworkPositionsColumns, getPositionsTickersColumns } from 'utils/columns'
+import { getFrameworkPositionsColumns } from 'utils/columns'
 
 import { propTypes } from './TaxReport.props'
-import getTotalWinLossColumns from './TotalWinLoss.columns'
+import getBalancesColumns from './Balances.columns'
 import getTotalMovementsColumns from './TotalMovements.columns'
+import getTotalResultColumns from './TotalResult.columns'
 
 class TaxReport extends PureComponent {
   constructor(props) {
@@ -68,7 +69,7 @@ class TaxReport extends PureComponent {
     return isDiffStart || isDiffEnd
   }
 
-  getPositions = (positions, tickers, title) => {
+  getPositionsSnapshot = ({ positions, title }) => {
     const {
       getFullTime,
       timeOffset,
@@ -86,23 +87,6 @@ class TaxReport extends PureComponent {
       timeOffset,
     })
 
-    let renderTickers
-    if (tickers.length) {
-      const tickersColumns = getPositionsTickersColumns({ filteredData: tickers })
-
-      renderTickers = (
-        <Fragment>
-          <h4>
-            {t('taxreport.tickers')}
-          </h4>
-          <DataTable
-            numRows={tickers.length}
-            tableColums={tickersColumns}
-          />
-        </Fragment>
-      )
-    }
-
     return (
       <Fragment>
         <h4>
@@ -112,7 +96,36 @@ class TaxReport extends PureComponent {
           numRows={positions.length}
           tableColums={positionsColumns}
         />
-        {renderTickers}
+      </Fragment>
+    )
+  }
+
+  getBalances = ({ balances, title }) => {
+    if (this.isBalancesEmpty(balances)) {
+      return null
+    }
+
+    const {
+      walletsTotalBalanceUsd,
+      positionsTotalPlUsd,
+      totalResult,
+    } = balances
+
+    const balancesColumns = getBalancesColumns({
+      walletsTotalBalanceUsd,
+      positionsTotalPlUsd,
+      totalResult,
+    })
+
+    return (
+      <Fragment>
+        <h4>
+          {title}
+        </h4>
+        <DataTable
+          numRows={1}
+          tableColums={balancesColumns}
+        />
       </Fragment>
     )
   }
@@ -125,46 +138,53 @@ class TaxReport extends PureComponent {
       t,
     } = this.props
     const {
-      movementsEntries,
-      depositsTotalAmount,
-      withdrawalsTotalAmount,
+      movements,
       movementsTotalAmount,
-    } = data
-
-    if (!movementsEntries.length) {
-      return null
-    }
+    } = data.finalState
 
     const movementsColumns = getMovementsColumns({
-      filteredData: movementsEntries,
+      filteredData: movements,
       getFullTime,
       t,
       timeOffset,
     })
 
     const totalMovementsColumns = getTotalMovementsColumns({
-      depositsTotalAmount,
-      withdrawalsTotalAmount,
       movementsTotalAmount,
     })
 
     return (
       <Fragment>
-        <br />
         <h4>
           {t('taxreport.movements')}
         </h4>
-        <DataTable
-          numRows={movementsEntries.length}
-          tableColums={movementsColumns}
-        />
-        <br />
+        {(movements.length > 0) && (
+          <Fragment>
+            <DataTable
+              numRows={movements.length}
+              tableColums={movementsColumns}
+            />
+            <br />
+          </Fragment>
+        )}
         <DataTable
           numRows={1}
           tableColums={totalMovementsColumns}
         />
       </Fragment>
     )
+  }
+
+  isBalancesEmpty = (balances) => {
+    const {
+      walletsTotalBalanceUsd,
+      positionsTotalPlUsd,
+      totalResult,
+    } = balances
+
+    return !_isNumber(walletsTotalBalanceUsd)
+      && !_isNumber(positionsTotalPlUsd)
+      && !totalResult
   }
 
   render() {
@@ -176,22 +196,26 @@ class TaxReport extends PureComponent {
       t,
     } = this.props
     const {
-      winLossTotalAmount,
-      startPositionsSnapshot,
-      startTickers,
-      endPositionsSnapshot,
-      endTickers,
-      movementsEntries,
-      depositsTotalAmount,
-      withdrawalsTotalAmount,
-      movementsTotalAmount,
+      startingPositionsSnapshot,
+      endingPositionsSnapshot,
+      finalState: {
+        startingPeriodBalances,
+        endingPeriodBalances,
+        movements,
+        movementsTotalAmount,
+        totalResult,
+      },
     } = data
     const { start, end } = this.state
     const hasNewTime = this.hasNewTime()
 
-    const isEmpty = !_isNumber(winLossTotalAmount) && !startPositionsSnapshot.length && !endPositionsSnapshot.length
-      && !movementsEntries.length && !_isNumber(depositsTotalAmount)
-      && !_isNumber(withdrawalsTotalAmount) && !_isNumber(movementsTotalAmount)
+    const isEmpty = !startingPositionsSnapshot.length
+      && !endingPositionsSnapshot.length
+      && this.isBalancesEmpty(startingPeriodBalances)
+      && this.isBalancesEmpty(endingPeriodBalances)
+      && !movements.length
+      && !_isNumber(movementsTotalAmount)
+      && !totalResult // can be 0 even if data is absent
 
     const renderTimeSelection = (
       <Fragment>
@@ -263,21 +287,47 @@ class TaxReport extends PureComponent {
         </Fragment>
       )
     } else {
-      const totalWinLossColumns = getTotalWinLossColumns({ winLossTotalAmount })
+      const totalResultColumns = getTotalResultColumns({ totalResult })
+
+      const positionsNotEmpty = startingPositionsSnapshot.length || endingPositionsSnapshot.length
+      const movementsNotEmpty = movements.length || _isNumber(movementsTotalAmount)
 
       showContent = (
         <Fragment>
           {renderTitle}
-          {_isNumber(winLossTotalAmount) && (
-            <DataTable
-              numRows={1}
-              tableColums={totalWinLossColumns}
-            />
+          {this.getPositionsSnapshot({
+            positions: startingPositionsSnapshot,
+            title: t('taxreport.startPositions'),
+          })}
+          {this.getPositionsSnapshot({
+            positions: [],
+            title: t('taxreport.endPositions'),
+          })}
+          {positionsNotEmpty ? <br /> : null}
+          {this.getBalances({
+            balances: startingPeriodBalances,
+            title: t('taxreport.startingPeriodBalances'),
+          })}
+          {this.getBalances({
+            balances: endingPeriodBalances,
+            title: t('taxreport.endingPeriodBalances'),
+          })}
+          {movementsNotEmpty && (
+            <Fragment>
+              <br />
+              {this.getMovements()}
+            </Fragment>
+          )}
+          {_isNumber(totalResult) && (
+            <Fragment>
+              <br />
+              <br />
+              <DataTable
+                numRows={1}
+                tableColums={totalResultColumns}
+              />
+            </Fragment>
           ) }
-          {(startPositionsSnapshot.length || endPositionsSnapshot.length) ? <br /> : null}
-          {this.getPositions(startPositionsSnapshot, startTickers, t('taxreport.startPositions'))}
-          {this.getPositions(endPositionsSnapshot, endTickers, t('taxreport.endPositions'))}
-          {this.getMovements()}
         </Fragment>
       )
     }
