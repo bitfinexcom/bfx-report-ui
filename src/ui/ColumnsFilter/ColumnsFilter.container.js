@@ -6,8 +6,8 @@ import { setFilters } from 'state/filters/actions'
 
 import ColumnsFilter from './ColumnsFilter'
 
-const mapStateToProps = (state, { section }) => ({
-  filters: getFilters(state, section),
+const mapStateToProps = (state, { target }) => ({
+  filters: getFilters(state, target),
 })
 
 const mapDispatchToProps = {

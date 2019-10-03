@@ -74,7 +74,7 @@ class ColumnsFilter extends PureComponent {
   }
 
   render() {
-    const { section, t } = this.props
+    const { target, t } = this.props
     const { isOpen, filters } = this.state
 
     const hasChanges = true
@@ -99,7 +99,7 @@ class ColumnsFilter extends PureComponent {
                 return (
                   <div key={index} className='columns-filter-item'>
                     <ColumnSelector
-                      section={section}
+                      section={target}
                       value={column}
                       onChange={col => this.onColumnChange(index, col)}
                     />

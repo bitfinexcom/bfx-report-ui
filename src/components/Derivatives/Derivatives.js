@@ -5,6 +5,7 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
+import ColumnsFilter from 'ui/ColumnsFilter'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
@@ -79,6 +80,8 @@ class Derivatives extends PureComponent {
             {' '}
             {renderPairSelector}
             {' '}
+            <ColumnsFilter target={TYPE} />
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData />
@@ -91,6 +94,8 @@ class Derivatives extends PureComponent {
             {t('derivatives.title')}
             {' '}
             {renderPairSelector}
+            {' '}
+            <ColumnsFilter target={TYPE} />
             {' '}
             <ExportButton handleClickExport={handleClickExport} />
             {' '}

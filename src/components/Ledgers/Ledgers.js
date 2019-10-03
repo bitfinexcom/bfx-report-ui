@@ -111,6 +111,8 @@ class Ledgers extends PureComponent {
             <TimeRange />
             {renderSymbolSelector}
             {' '}
+            <ColumnsFilter target={TYPE} />
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             {' '}
             <QueryLimitSelector target={TYPE} />
@@ -127,7 +129,7 @@ class Ledgers extends PureComponent {
             <TimeRange />
             {renderSymbolSelector}
             {' '}
-            <ColumnsFilter section={TYPE} />
+            <ColumnsFilter target={TYPE} />
             {' '}
             <ExportButton handleClickExport={handleClickExport} />
             {' '}
