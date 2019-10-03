@@ -95,6 +95,7 @@ export const FILTERS_WHITELIST = [
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
+  MENU_DERIVATIVES,
 ]
 
 // Should keep the order, which used in ExportTargetsSelector
