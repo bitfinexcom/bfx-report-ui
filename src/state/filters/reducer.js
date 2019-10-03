@@ -1,9 +1,7 @@
-import _isEmpty from 'lodash/isEmpty'
-import _reduce from 'lodash/reduce'
-
 import authTypes from 'state/auth/constants'
 import { FILTERS_WHITELIST } from 'state/query/utils'
 
+import { calculateFilterQuery } from './utils'
 import types from './constants'
 
 const getDefaultSectionsValues = defaultValue => FILTERS_WHITELIST.reduce((acc, section) => {
@@ -16,18 +14,6 @@ const initialState = {
 
   // prepared filter queries for each section
   queries: getDefaultSectionsValues({}),
-}
-
-const calculateFilterQuery = (filters = []) => {
-  if (_isEmpty(filters)) {
-    return {}
-  }
-
-  return _reduce(filters, (acc, filter) => {
-    const { column, type, value } = filter
-
-    return acc
-  }, {})
 }
 
 function filtersReducer(state = initialState, action) {
