@@ -12,6 +12,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
+  MENU_DERIVATIVES,
 } = queryConstants
 
 const SECTION_COLUMNS = {
@@ -188,6 +189,16 @@ const SECTION_COLUMNS = {
     // { id: 'bidPeriod', name: 'bidPeriod' },
     { id: 'ask', name: 'ask' },
     { id: 'mtsUpdate', name: 'mtsUpdate' },
+  ],
+
+  [MENU_DERIVATIVES]: [
+    { id: 'key', name: 'pair' },
+    { id: 'price', name: 'price' },
+    { id: 'priceSpot', name: 'price' },
+    { id: 'fundBal', name: 'fundBal' },
+    { id: 'fundingAccrued', name: 'fundingAccrued' },
+    { id: 'fundingStep', name: 'fundingStep' },
+    { id: 'timestamp', name: 'mts' },
   ],
 }
 
