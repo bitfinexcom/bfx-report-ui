@@ -1,6 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button } from '@blueprintjs/core'
+import { Button, InputGroup } from '@blueprintjs/core'
 
 import ColumnsFilterDialog from './Dialog'
 import { propTypes, defaultProps } from './ColumnsFilter.props'
@@ -24,11 +24,11 @@ class ColumnsFilter extends PureComponent {
     const { filters } = props
     this.state = {
       isOpen: true,
-      filters: filters.length
-        ? filters
-        : DEFAULT_FILTERS,
+      filters: this.getDefaultFilters(filters),
     }
   }
+
+  getDefaultFilters = filters => (filters.length ? filters : DEFAULT_FILTERS)
 
   toggleDialog = () => {
     const { isOpen } = this.state
@@ -36,11 +36,23 @@ class ColumnsFilter extends PureComponent {
   }
 
   onCancel = () => {
+    const { filters } = this.props
+
     this.toggleDialog()
+    this.setState({
+      filters: this.getDefaultFilters(filters),
+    })
   }
 
   onFiltersApply = () => {
+    const { filters } = this.state
+    const { target, setFilters } = this.props
+
     this.toggleDialog()
+    setFilters({
+      section: target,
+      filters,
+    })
   }
 
   onFilterAdd = () => {
@@ -50,14 +62,23 @@ class ColumnsFilter extends PureComponent {
     })
   }
 
-  onColumnChange = (index, column) => {
+  onFilterRemove = (index) => {
+    const { filters } = this.state
+
+    this.setState({
+      filters: filters.filter((el, i) => i !== index),
+    })
+  }
+
+  updateFilter = (params) => {
+    const { index, ...filterParams } = params
     const { filters } = this.state
 
     const updatedFilters = filters.map((filter, i) => {
       if (i === index) {
         return {
           ...filter,
-          column,
+          ...filterParams,
         }
       }
 
@@ -69,10 +90,12 @@ class ColumnsFilter extends PureComponent {
     })
   }
 
-  onFilterTypeChange = () => {
-    //
+  onInputChange = (index, e) => {
+    const { value } = e.target
+    this.updateFilter({ index, value })
   }
 
+  /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
   render() {
     const { target, t } = this.props
     const { isOpen, filters } = this.state
@@ -101,9 +124,23 @@ class ColumnsFilter extends PureComponent {
                     <ColumnSelector
                       section={target}
                       value={column}
-                      onChange={col => this.onColumnChange(index, col)}
+                      onChange={col => this.updateFilter({ index, column: col })}
                     />
-                    <FilterTypeSelector value={type} onChange={() => this.onFilterTypeChange(column)} />
+                    <FilterTypeSelector
+                      value={type}
+                      onChange={filterType => this.updateFilter({ index, type: filterType })}
+                    />
+                    <InputGroup
+                      className='columns-filter-item-input'
+                      value={value}
+                      onChange={e => this.onInputChange(index, e)}
+                    />
+                    <span
+                      className='columns-filter-item-remove'
+                      onClick={() => this.onFilterRemove(index)}
+                    >
+                      x
+                    </span>
                   </div>
                 )
               })}

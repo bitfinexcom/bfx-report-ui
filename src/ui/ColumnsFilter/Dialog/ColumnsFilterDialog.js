@@ -20,6 +20,7 @@ const ColumnsFilterDialog = (props) => {
   return (
     <Dialog
       icon={IconNames.TH_FILTERED}
+      className='columns-filter-dialog'
       onClose={onCancel}
       title={t('columnsfilter.title')}
       isOpen={isOpen}

@@ -7,7 +7,7 @@ import types from './constants'
 
 export function setFilters({ section, filters }) {
   return {
-    type: types.SET_SYMBOLS,
+    type: types.SET_FILTERS,
     payload: { section, filters },
   }
 }

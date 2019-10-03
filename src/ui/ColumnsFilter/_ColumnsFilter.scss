@@ -1,4 +1,8 @@
 .columns-filter {
+  &-dialog {
+    width: 550px;
+  }
+
   &-item {
     padding: 5px 0;
 
@@ -8,8 +12,18 @@
     }
 
     &-filter {
-      min-width: 180px;
+      min-width: 140px;
       margin-right: 10px;
+    }
+
+    &-input {
+      display: inline-block;
+      max-width: 150px;
+      margin-right: 12px;
+    }
+
+    &-remove {
+      cursor: pointer;
     }
   }
 

@@ -21,11 +21,18 @@ const FILTER_TYPES = {
 }
 
 class FilterTypeSelector extends React.PureComponent {
+  onChange = (e) => {
+    const { value } = e.target
+    const { onChange } = this.props
+    onChange(value)
+  }
+
   render() {
-    const { value, onChange } = this.props
+    const { value } = this.props
 
     return (
-      <HTMLSelect value={value} onChange={onChange}>
+      <HTMLSelect value={value} onChange={this.onChange} className='columns-filter-item-filter'>
+        <option value='' />
         {_keys(FILTER_TYPES).map(filter => <option key={filter} value={filter}>{filter}</option>)}
       </HTMLSelect>
     )
