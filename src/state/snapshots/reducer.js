@@ -1,6 +1,10 @@
 import authTypes from 'state/auth/constants'
-import { formatSymbolToPair, mapSymbol } from 'state/symbols/utils'
-import { getFrameworkPositionsEntries, getFrameworkPositionsTickersEntries } from 'state/utils'
+import {
+  getFrameworkPositionsEntries,
+  getFrameworkPositionsTickersEntries,
+  getWalletsTickersEntries,
+  getWalletsEntries,
+} from 'state/utils'
 
 import types from './constants'
 
@@ -14,36 +18,6 @@ const initialState = {
   walletsEntries: [],
   timestamp: undefined,
 }
-
-const getWalletsTickersEntries = entries => entries.map((entry) => {
-  const {
-    walletType,
-    symbol,
-    amount,
-  } = entry
-
-  return {
-    walletType,
-    pair: formatSymbolToPair(symbol),
-    amount,
-  }
-})
-
-const getWalletsEntries = entries => entries.map((entry) => {
-  const {
-    type,
-    currency,
-    balance,
-    balanceUsd,
-  } = entry
-
-  return {
-    type,
-    currency: mapSymbol(currency),
-    balance,
-    balanceUsd,
-  }
-}).sort((a, b) => a.currency.localeCompare(b.currency))
 
 export function snapshotsReducer(state = initialState, action) {
   const { type: actionType, payload } = action
