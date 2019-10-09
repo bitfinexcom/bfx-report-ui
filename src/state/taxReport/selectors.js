@@ -1,3 +1,5 @@
+import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
+
 export const getTaxReport = state => state.taxReport
 export const getStartSnapshot = state => getTaxReport(state).startSnapshot
 export const getEndSnapshot = state => getTaxReport(state).endSnapshot
@@ -22,13 +24,13 @@ export const getData = (state) => {
   }
 }
 export const getSnapshot = (state, section) => {
-  if (section === 'start_snapshot') {
+  if (section === TAX_REPORT_SECTIONS.START_SNAPSHOT) {
     return getStartSnapshot(state)
   }
   return getEndSnapshot(state)
 }
 export const getSnapshotDataReceived = (state, section) => {
-  if (section === 'start_snapshot') {
+  if (section === TAX_REPORT_SECTIONS.START_SNAPSHOT) {
     return getStartSnapshot(state).dataReceived
   }
   return getEndSnapshot(state).dataReceived

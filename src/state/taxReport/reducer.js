@@ -6,6 +6,7 @@ import {
   getWalletsEntries,
 } from 'state/utils'
 import { mapSymbol } from 'state/symbols/utils'
+import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
 
 import types from './constants'
 
@@ -79,7 +80,7 @@ const getMovementsEntries = entries => entries.map((entry) => {
 })
 
 const getSectionProperty = (section) => {
-  if (section === 'start_snapshot') {
+  if (section === TAX_REPORT_SECTIONS.START_SNAPSHOT) {
     return 'startSnapshot'
   }
   return 'endSnapshot'

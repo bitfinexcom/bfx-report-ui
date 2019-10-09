@@ -18,12 +18,7 @@ import { isValidTimeStamp } from 'state/query/utils'
 import Result from './Result'
 import Snapshot from './Snapshot'
 import { propTypes } from './TaxReport.props'
-
-const SECTIONS = {
-  START_SNAPSHOT: 'start_snapshot',
-  END_SNAPSHOT: 'end_snapshot',
-  RESULT: 'result',
-}
+import TAX_REPORT_SECTIONS from './TaxReport.sections'
 
 const SECTIONS_URL = {
   START_SNAPSHOT: '/tax_report/start_snapshot',
@@ -56,27 +51,14 @@ class TaxReport extends PureComponent {
       start: start ? start.getTime() : undefined,
       end: end ? end.getTime() : undefined,
     }
-    const { section = SECTIONS.RESULT } = match.params
+    const { section = TAX_REPORT_SECTIONS.RESULT } = match.params
 
     setParams({ params, section })
-
-    // const { match, fetchTaxReport, fetchSnapshot } = this.props
-    // const { start, end } = this.state
-    // const { section = SECTIONS.RESULT } = match.params
-    // const params = {
-    //   start: start ? start.getTime() : undefined,
-    //   end: end ? end.getTime() : undefined,
-    // }
-    // if (section === SECTIONS.RESULT) {
-    //   fetchTaxReport(params)
-    // } else {
-    //   fetchSnapshot({ params, section })
-    // }
   }
 
   handleRefresh = () => {
     const { match, refresh } = this.props
-    const { section = SECTIONS.RESULT } = match.params
+    const { section = TAX_REPORT_SECTIONS.RESULT } = match.params
     refresh({ section })
   }
 
@@ -96,11 +78,11 @@ class TaxReport extends PureComponent {
 
   getSection = (section) => {
     switch (section) {
-      case SECTIONS.START_SNAPSHOT:
-        return <Snapshot key={SECTIONS.START_SNAPSHOT} />
-      case SECTIONS.END_SNAPSHOT:
-        return <Snapshot key={SECTIONS.END_SNAPSHOT} />
-      case SECTIONS.RESULT:
+      case TAX_REPORT_SECTIONS.START_SNAPSHOT:
+        return <Snapshot key={TAX_REPORT_SECTIONS.START_SNAPSHOT} />
+      case TAX_REPORT_SECTIONS.END_SNAPSHOT:
+        return <Snapshot key={TAX_REPORT_SECTIONS.END_SNAPSHOT} />
+      case TAX_REPORT_SECTIONS.RESULT:
       default:
         return <Result />
     }
@@ -114,7 +96,7 @@ class TaxReport extends PureComponent {
     } = this.props
     const { start, end } = this.state
     const hasNewTime = this.hasNewTime()
-    const { section = SECTIONS.RESULT } = match.params
+    const { section = TAX_REPORT_SECTIONS.RESULT } = match.params
 
     const renderTimeSelection = (
       <Fragment>
@@ -158,19 +140,19 @@ class TaxReport extends PureComponent {
     const renderButtonGroup = (
       <ButtonGroup>
         <Button
-          active={section === SECTIONS.START_SNAPSHOT}
+          active={section === TAX_REPORT_SECTIONS.START_SNAPSHOT}
           onClick={() => this.switchSection(`${SECTIONS_URL.START_SNAPSHOT}/positions`)}
         >
           {t('taxreport.sections.startSnapshot')}
         </Button>
         <Button
-          active={section === SECTIONS.END_SNAPSHOT}
+          active={section === TAX_REPORT_SECTIONS.END_SNAPSHOT}
           onClick={() => this.switchSection(`${SECTIONS_URL.END_SNAPSHOT}/positions`)}
         >
           {t('taxreport.sections.endSnapshot')}
         </Button>
         <Button
-          active={section === SECTIONS.RESULT}
+          active={section === TAX_REPORT_SECTIONS.RESULT}
           onClick={() => this.switchSection(SECTIONS_URL.RESULT)}
         >
           {t('taxreport.sections.finalResult')}

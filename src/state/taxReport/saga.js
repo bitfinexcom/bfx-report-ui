@@ -9,6 +9,7 @@ import { makeFetchCall } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
+import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
 
 import types from './constants'
 import actions from './actions'
@@ -66,7 +67,7 @@ function* fetchTaxReportSnapshot({ payload: section }) {
     }
 
     const params = yield select(selectors.getParams)
-    const timestamp = (section === 'start_snapshot')
+    const timestamp = (section === TAX_REPORT_SECTIONS.START_SNAPSHOT)
       ? params.start
       : params.end
 
@@ -95,12 +96,10 @@ function* fetchTaxReportSnapshot({ payload: section }) {
 function* refreshTaxReport({ payload }) {
   const { section } = payload
 
-  if (section === 'start_snapshot') {
-    yield put(actions.fetchTaxReportSnapshot('start_snapshot'))
-  } else if (section === 'end_snapshot') {
-    yield put(actions.fetchTaxReportSnapshot('end_snapshot'))
-  } else {
+  if (section === TAX_REPORT_SECTIONS.RESULT) {
     yield put(actions.fetchTaxReport())
+  } else {
+    yield put(actions.fetchTaxReportSnapshot(section))
   }
 }
 
