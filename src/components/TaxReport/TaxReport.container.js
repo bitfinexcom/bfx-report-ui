@@ -2,8 +2,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import {
-  fetchTaxReport,
-  fetchTaxReportSnapshot,
   setParams,
   refresh,
 } from 'state/taxReport/actions'
@@ -16,8 +14,6 @@ const mapStateToProps = (state = {}) => ({
 })
 
 const mapDispatchToProps = {
-  fetchTaxReport,
-  fetchSnapshot: fetchTaxReportSnapshot,
   setParams,
   refresh,
 }

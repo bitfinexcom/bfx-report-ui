@@ -6,8 +6,6 @@ export const propTypes = {
     start: PropTypes.number,
     end: PropTypes.number,
   }).isRequired,
-  fetchTaxReport: PropTypes.func.isRequired,
-  fetchSnapshot: PropTypes.func.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
