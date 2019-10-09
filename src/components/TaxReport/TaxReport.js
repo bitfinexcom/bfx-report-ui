@@ -2,28 +2,34 @@ import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import {
   Button,
+  ButtonGroup,
   Card,
   Elevation,
   Intent,
   Position,
   Tooltip,
 } from '@blueprintjs/core'
-import _isNumber from 'lodash/isNumber'
 
 import DateInput from 'ui/DateInput'
 import ExportButton from 'ui/ExportButton'
-import Loading from 'ui/Loading'
 import RefreshButton from 'ui/RefreshButton'
-import DataTable from 'ui/DataTable'
-import NoData from 'ui/NoData'
 import { isValidTimeStamp } from 'state/query/utils'
-import getMovementsColumns from 'components/Movements/Movements.columns'
-import { getFrameworkPositionsColumns } from 'utils/columns'
 
+import Result from './Result'
+import Snapshot from './Snapshot'
 import { propTypes } from './TaxReport.props'
-import getBalancesColumns from './Balances.columns'
-import getTotalMovementsColumns from './TotalMovements.columns'
-import getTotalResultColumns from './TotalResult.columns'
+
+const SECTIONS = {
+  START_SNAPSHOT: 'start_snapshot',
+  END_SNAPSHOT: 'end_snapshot',
+  RESULT: 'result',
+}
+
+const SECTIONS_URL = {
+  START_SNAPSHOT: '/tax_report/start_snapshot',
+  END_SNAPSHOT: '/tax_report/end_snapshot',
+  RESULT: '/tax_report/result',
+}
 
 class TaxReport extends PureComponent {
   constructor(props) {
@@ -36,13 +42,6 @@ class TaxReport extends PureComponent {
     }
   }
 
-  componentDidMount() {
-    const { loading, fetchTaxReport } = this.props
-    if (loading) {
-      fetchTaxReport()
-    }
-  }
-
   handleDateChange = (input, time) => {
     const timestamp = time && time.getTime()
     if (isValidTimeStamp(timestamp) || time === null) {
@@ -51,13 +50,34 @@ class TaxReport extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchTaxReport } = this.props
     const { start, end } = this.state
+    const { match, setParams } = this.props
     const params = {
       start: start ? start.getTime() : undefined,
       end: end ? end.getTime() : undefined,
     }
-    fetchTaxReport(params)
+    const { section = SECTIONS.RESULT } = match.params
+
+    setParams({ params, section })
+
+    // const { match, fetchTaxReport, fetchSnapshot } = this.props
+    // const { start, end } = this.state
+    // const { section = SECTIONS.RESULT } = match.params
+    // const params = {
+    //   start: start ? start.getTime() : undefined,
+    //   end: end ? end.getTime() : undefined,
+    // }
+    // if (section === SECTIONS.RESULT) {
+    //   fetchTaxReport(params)
+    // } else {
+    //   fetchSnapshot({ params, section })
+    // }
+  }
+
+  handleRefresh = () => {
+    const { match, refresh } = this.props
+    const { section = SECTIONS.RESULT } = match.params
+    refresh({ section })
   }
 
   hasNewTime = () => {
@@ -69,153 +89,32 @@ class TaxReport extends PureComponent {
     return isDiffStart || isDiffEnd
   }
 
-  getPositionsSnapshot = ({ positions, title }) => {
-    const {
-      getFullTime,
-      timeOffset,
-      t,
-    } = this.props
+  switchSection = (section) => {
+    const { history } = this.props
+    history.push(`${section}${history.location.search}`)
+  }
 
-    if (!positions.length) {
-      return null
+  getSection = (section) => {
+    switch (section) {
+      case SECTIONS.START_SNAPSHOT:
+        return <Snapshot key={SECTIONS.START_SNAPSHOT} />
+      case SECTIONS.END_SNAPSHOT:
+        return <Snapshot key={SECTIONS.END_SNAPSHOT} />
+      case SECTIONS.RESULT:
+      default:
+        return <Result />
     }
-
-    const positionsColumns = getFrameworkPositionsColumns({
-      filteredData: positions,
-      getFullTime,
-      t,
-      timeOffset,
-    })
-
-    return (
-      <Fragment>
-        <h4>
-          {title}
-        </h4>
-        <DataTable
-          numRows={positions.length}
-          tableColums={positionsColumns}
-        />
-      </Fragment>
-    )
-  }
-
-  getBalances = ({ balances, title }) => {
-    if (this.isBalancesEmpty(balances)) {
-      return null
-    }
-
-    const {
-      walletsTotalBalanceUsd,
-      positionsTotalPlUsd,
-      totalResult,
-    } = balances
-
-    const balancesColumns = getBalancesColumns({
-      walletsTotalBalanceUsd,
-      positionsTotalPlUsd,
-      totalResult,
-    })
-
-    return (
-      <Fragment>
-        <h4>
-          {title}
-        </h4>
-        <DataTable
-          numRows={1}
-          tableColums={balancesColumns}
-        />
-      </Fragment>
-    )
-  }
-
-  getMovements = () => {
-    const {
-      data,
-      getFullTime,
-      timeOffset,
-      t,
-    } = this.props
-    const {
-      movements,
-      movementsTotalAmount,
-    } = data.finalState
-
-    const movementsColumns = getMovementsColumns({
-      filteredData: movements,
-      getFullTime,
-      t,
-      timeOffset,
-    })
-
-    const totalMovementsColumns = getTotalMovementsColumns({
-      movementsTotalAmount,
-    })
-
-    return (
-      <Fragment>
-        <h4>
-          {t('taxreport.movements')}
-        </h4>
-        {(movements.length > 0) && (
-          <Fragment>
-            <DataTable
-              numRows={movements.length}
-              tableColums={movementsColumns}
-            />
-            <br />
-          </Fragment>
-        )}
-        <DataTable
-          numRows={1}
-          tableColums={totalMovementsColumns}
-        />
-      </Fragment>
-    )
-  }
-
-  isBalancesEmpty = (balances) => {
-    const {
-      walletsTotalBalanceUsd,
-      positionsTotalPlUsd,
-      totalResult,
-    } = balances
-
-    return !_isNumber(walletsTotalBalanceUsd)
-      && !_isNumber(positionsTotalPlUsd)
-      && !totalResult
   }
 
   render() {
     const {
-      data,
       handleClickExport,
-      loading,
-      refresh,
+      match,
       t,
     } = this.props
-    const {
-      startingPositionsSnapshot,
-      endingPositionsSnapshot,
-      finalState: {
-        startingPeriodBalances,
-        endingPeriodBalances,
-        movements,
-        movementsTotalAmount,
-        totalResult,
-      },
-    } = data
     const { start, end } = this.state
     const hasNewTime = this.hasNewTime()
-
-    const isEmpty = !startingPositionsSnapshot.length
-      && !endingPositionsSnapshot.length
-      && this.isBalancesEmpty(startingPeriodBalances)
-      && this.isBalancesEmpty(endingPeriodBalances)
-      && !movements.length
-      && !_isNumber(movementsTotalAmount)
-      && !totalResult // can be 0 even if data is absent
+    const { section = SECTIONS.RESULT } = match.params
 
     const renderTimeSelection = (
       <Fragment>
@@ -256,85 +155,44 @@ class TaxReport extends PureComponent {
       </Fragment>
     )
 
-    const renderTitle = (
-      <Fragment>
+    const renderButtonGroup = (
+      <ButtonGroup>
+        <Button
+          active={section === SECTIONS.START_SNAPSHOT}
+          onClick={() => this.switchSection(`${SECTIONS_URL.START_SNAPSHOT}/positions`)}
+        >
+          {t('taxreport.sections.startSnapshot')}
+        </Button>
+        <Button
+          active={section === SECTIONS.END_SNAPSHOT}
+          onClick={() => this.switchSection(`${SECTIONS_URL.END_SNAPSHOT}/positions`)}
+        >
+          {t('taxreport.sections.endSnapshot')}
+        </Button>
+        <Button
+          active={section === SECTIONS.RESULT}
+          onClick={() => this.switchSection(SECTIONS_URL.RESULT)}
+        >
+          {t('taxreport.sections.finalResult')}
+        </Button>
+      </ButtonGroup>
+    )
+
+    return (
+      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <h4>
           {t('taxreport.title')}
           {' '}
           {renderTimeSelection}
-          {!isEmpty && (
-            <Fragment>
-              {' '}
-              <ExportButton handleClickExport={handleClickExport} />
-            </Fragment>
-          )}
           {' '}
-          <RefreshButton handleClickRefresh={refresh} />
+          <ExportButton handleClickExport={handleClickExport} />
+          {' '}
+          <RefreshButton handleClickRefresh={this.handleRefresh} />
         </h4>
-      </Fragment>
-    )
-
-    let showContent
-    if (loading) {
-      showContent = (
-        <Loading title='taxreport.title' />
-      )
-    } else if (isEmpty) {
-      showContent = (
-        <Fragment>
-          {renderTitle}
-          <NoData />
-        </Fragment>
-      )
-    } else {
-      const totalResultColumns = getTotalResultColumns({ totalResult })
-
-      const positionsNotEmpty = startingPositionsSnapshot.length || endingPositionsSnapshot.length
-      const movementsNotEmpty = movements.length || _isNumber(movementsTotalAmount)
-
-      showContent = (
-        <Fragment>
-          {renderTitle}
-          {this.getPositionsSnapshot({
-            positions: startingPositionsSnapshot,
-            title: t('taxreport.startPositions'),
-          })}
-          {this.getPositionsSnapshot({
-            positions: [],
-            title: t('taxreport.endPositions'),
-          })}
-          {positionsNotEmpty ? <br /> : null}
-          {this.getBalances({
-            balances: startingPeriodBalances,
-            title: t('taxreport.startingPeriodBalances'),
-          })}
-          {this.getBalances({
-            balances: endingPeriodBalances,
-            title: t('taxreport.endingPeriodBalances'),
-          })}
-          {movementsNotEmpty && (
-            <Fragment>
-              <br />
-              {this.getMovements()}
-            </Fragment>
-          )}
-          {_isNumber(totalResult) && (
-            <Fragment>
-              <br />
-              <br />
-              <DataTable
-                numRows={1}
-                tableColums={totalResultColumns}
-              />
-            </Fragment>
-          ) }
-        </Fragment>
-      )
-    }
-
-    return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-        {showContent}
+        {renderButtonGroup}
+        <br />
+        <br />
+        {this.getSection(section)}
       </Card>
     )
   }

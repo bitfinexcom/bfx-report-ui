@@ -1,10 +1,25 @@
 import authTypes from 'state/auth/constants'
-import { getFrameworkPositionsEntries } from 'state/utils'
+import {
+  getFrameworkPositionsEntries,
+  getFrameworkPositionsTickersEntries,
+  getWalletsTickersEntries,
+  getWalletsEntries,
+} from 'state/utils'
 import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
-const initialState = {
+const snapshotInitState = {
+  dataReceived: false,
+  positionsTotalPlUsd: null,
+  positionsEntries: [],
+  positionsTickersEntries: [],
+  walletsTotalBalanceUsd: null,
+  walletsTickersEntries: [],
+  walletsEntries: [],
+}
+
+const finalResultInitState = {
   dataReceived: false,
   startingPositionsSnapshot: [],
   endingPositionsSnapshot: [],
@@ -23,6 +38,12 @@ const initialState = {
     },
     totalResult: null,
   },
+}
+
+const initialState = {
+  startSnapshot: snapshotInitState,
+  endSnapshot: snapshotInitState,
+  ...finalResultInitState,
   start: undefined,
   end: undefined,
 }
@@ -56,6 +77,13 @@ const getMovementsEntries = entries => entries.map((entry) => {
     transactionId,
   }
 })
+
+const getSectionProperty = (section) => {
+  if (section === 'start_snapshot') {
+    return 'startSnapshot'
+  }
+  return 'endSnapshot'
+}
 
 export function taxReportReducer(state = initialState, action) {
   const { type: actionType, payload } = action
@@ -94,11 +122,45 @@ export function taxReportReducer(state = initialState, action) {
         startingPositionsSnapshot: getFrameworkPositionsEntries(startingPositionsSnapshot),
       }
     }
-    case types.SET_PARAMS:
+    case types.UPDATE_TAX_REPORT_SNAPSHOT: {
+      const { result, section } = payload
+      const snapshotSection = getSectionProperty(section)
+      if (!result) {
+        return {
+          ...state,
+          [snapshotSection]: {
+            ...state[snapshotSection],
+            dataReceived: true,
+          },
+        }
+      }
+
+      const {
+        positionsSnapshot = [], positionsTickers = [], walletsTickers = [], walletsSnapshot = [],
+        positionsTotalPlUsd, walletsTotalBalanceUsd,
+      } = result
+
+      return {
+        ...state,
+        [snapshotSection]: {
+          dataReceived: true,
+          positionsTotalPlUsd,
+          positionsEntries: getFrameworkPositionsEntries(positionsSnapshot),
+          positionsTickersEntries: getFrameworkPositionsTickersEntries(positionsTickers),
+          walletsTotalBalanceUsd,
+          walletsTickersEntries: getWalletsTickersEntries(walletsTickers),
+          walletsEntries: getWalletsEntries(walletsSnapshot),
+        },
+      }
+    }
+    case types.SET_PARAMS: {
+      const { params: { start, end } } = payload
       return {
         ...initialState,
-        ...payload,
+        start,
+        end,
       }
+    }
     case types.FETCH_FAIL:
       return state
     case types.REFRESH:

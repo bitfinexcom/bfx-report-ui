@@ -344,5 +344,5 @@ export default {
   COLUMN_WIDTHS,
   getFrameworkPositionsColumns,
   getPositionsTickersColumns,
-  getWalletsTickersColumns
+  getWalletsTickersColumns,
 }

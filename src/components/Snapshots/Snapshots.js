@@ -200,7 +200,12 @@ class Snapshots extends PureComponent {
 
     let showContent
     if (isEmpty) {
-      showContent = <NoData descId='snapshots.nodata' />
+      showContent = (
+        <Fragment>
+          <br />
+          <NoData descId='snapshots.nodata' />
+        </Fragment>
+      )
     } else if (section === MENU_WALLETS) {
       showContent = (
         <WalletsSnapshot
