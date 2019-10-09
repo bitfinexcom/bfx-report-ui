@@ -57,6 +57,8 @@ const {
   MENU_WIN_LOSS,
 } = queryType
 
+const TAX_REPORT_SECTION = '/:section(start_snapshot|end_snapshot|result)'
+
 class Main extends PureComponent {
   constructor(props) {
     super(props)
@@ -321,9 +323,18 @@ class Main extends PureComponent {
                   path={getPath(MENU_SNAPSHOTS)}
                   render={() => <Snapshots handleClickExport={this.handleClickExport} />}
                 />
+
                 <Route
                   exact
                   path={getPath(MENU_TAX_REPORT)}
+                  render={() => <TaxReport handleClickExport={this.handleClickExport} />}
+                />
+                <Route
+                  path={`${getPath(MENU_TAX_REPORT)}/:section(result)`}
+                  render={() => <TaxReport handleClickExport={this.handleClickExport} />}
+                />
+                <Route
+                  path={`${getPath(MENU_TAX_REPORT)}${TAX_REPORT_SECTION}/:subsection(positions|tickers|wallets)`}
                   render={() => <TaxReport handleClickExport={this.handleClickExport} />}
                 />
               </Fragment>
