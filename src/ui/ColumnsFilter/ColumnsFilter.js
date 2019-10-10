@@ -3,15 +3,14 @@ import { withTranslation } from 'react-i18next'
 import { Button, InputGroup } from '@blueprintjs/core'
 
 import ColumnsFilterDialog from './Dialog'
-import { propTypes, defaultProps } from './ColumnsFilter.props'
-
 import ColumnSelector from './ColumnSelector'
 import FilterTypeSelector from './FilterTypeSelector'
+import { propTypes, defaultProps } from './ColumnsFilter.props'
 
 const EMPTY_FILTER = { column: '', type: '', value: '' }
 
 const DEFAULT_FILTERS = [
-  EMPTY_FILTER,
+  { column: 'balance', type: '$gt', value: '1000' },
   EMPTY_FILTER,
   EMPTY_FILTER,
 ]

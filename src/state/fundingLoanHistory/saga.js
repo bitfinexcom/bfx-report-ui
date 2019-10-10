@@ -11,6 +11,7 @@ import {
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
@@ -29,9 +30,11 @@ function getReqFLoan({
   auth,
   query,
   targetSymbols,
+  filter,
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
+  params.filter = filter
   if (targetSymbols.length) {
     params.symbol = formatRawSymbols(mapRequestSymbols(targetSymbols))
   }
@@ -49,17 +52,20 @@ function* fetchFLoan({ payload: symbol }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqFLoan, {
       smallestMts: 0,
       auth,
       query,
       targetSymbols,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFLoan, {
       smallestMts: 0,
       auth,
       query,
       targetSymbols,
+      filter,
     })
     yield put(actions.updateFLoan(result, LIMIT, PAGE_SIZE))
 
@@ -93,17 +99,20 @@ function* fetchNextFLoan() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqFLoan, {
       smallestMts,
       auth,
       query,
       targetSymbols,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFLoan, {
       smallestMts,
       auth,
       query,
       targetSymbols,
+      filter,
     })
     yield put(actions.updateFLoan(result, LIMIT, PAGE_SIZE))
 

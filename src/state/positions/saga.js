@@ -13,6 +13,7 @@ import {
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
@@ -31,9 +32,11 @@ function getReqPositions({
   auth,
   query,
   targetPairs,
+  filter,
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
+  params.filter = filter
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
@@ -51,17 +54,20 @@ function* fetchPositions({ payload: pair }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPositions, {
       smallestMts: 0,
       auth,
       query,
       targetPairs,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, {
       smallestMts: 0,
       auth,
       query,
       targetPairs,
+      filter,
     })
     yield put(actions.updatePositions(result, LIMIT, PAGE_SIZE))
 

@@ -29,7 +29,7 @@ export const calculateFilterQuery = (filters = []) => {
     if (isArrayTypeFilter) {
       acc[type].push(column)
     } else {
-      acc[type][column] = value
+      acc[type][column] = +value
     }
 
     return acc
