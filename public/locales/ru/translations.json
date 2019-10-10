@@ -86,6 +86,20 @@
     "usd": "USD",
     "wallet": "КОШЕЛЕК"
   },
+  "columnsfilter": {
+    "title": "Filter Columns",
+    "cancel": "Cancel",
+    "apply": "Apply Filters",
+    "filters": {
+      "contains": "Contains",
+      "beginsWith": "Begins with",
+      "endsWith": "Ends with",
+      "equalTo": "Equal to",
+      "notEqualTo": "Not equal to",
+      "greaterThan": "Greater than",
+      "lessThan": "Less than"
+    }
+  },
   "concentrationrisk": {
     "title": "Риск концентрации",
     "nodata": "Нет связанных данных для этой даты и времени. Задайте другую дату и время.",

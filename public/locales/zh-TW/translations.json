@@ -86,6 +86,20 @@
     "usd": "美元",
     "wallet": "錢包"
   },
+  "columnsfilter": {
+    "title": "Filter Columns",
+    "cancel": "Cancel",
+    "apply": "Apply Filters",
+    "filters": {
+      "contains": "Contains",
+      "beginsWith": "Begins with",
+      "endsWith": "Ends with",
+      "equalTo": "Equal to",
+      "notEqualTo": "Not equal to",
+      "greaterThan": "Greater than",
+      "lessThan": "Less than"
+    }
+  },
   "concentrationrisk": {
     "title": "集中風險",
     "nodata": "沒有相關資料。請嘗試選擇其他時間。",

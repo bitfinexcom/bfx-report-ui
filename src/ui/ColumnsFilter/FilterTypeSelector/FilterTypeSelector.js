@@ -1,9 +1,8 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
 import { HTMLSelect } from '@blueprintjs/core'
-import _keys from 'lodash/keys'
 
-import FILTER_TYPES from 'var/filterTypes'
+import { FILTERS } from 'var/filterTypes'
 
 import { propTypes, defaultProps } from './FilterTypeSelector.props'
 
@@ -15,14 +14,18 @@ class FilterTypeSelector extends React.PureComponent {
   }
 
   render() {
-    const { value } = this.props
+    const { value, t } = this.props
 
     return (
       <HTMLSelect value={value} onChange={this.onChange} className='columns-filter-item-filter'>
         <option value='' />
-        {_keys(FILTER_TYPES).map(filter => (
-          <option key={filter} value={FILTER_TYPES[filter]}>{filter}</option>
-        ))}
+        {<option value={FILTERS.CONTAINS}>{t('columnsfilter.filters.contains')}</option>}
+        {<option value={FILTERS.BEGINS_WITH}>{t('columnsfilter.filters.beginsWith')}</option>}
+        {<option value={FILTERS.ENDS_WITH}>{t('columnsfilter.filters.endsWith')}</option>}
+        {<option value={FILTERS.EQUAL_TO}>{t('columnsfilter.filters.equalTo')}</option>}
+        {<option value={FILTERS.NOT_EQUAL_TO}>{t('columnsfilter.filters.notEqualTo')}</option>}
+        {<option value={FILTERS.GREATER_THAN}>{t('columnsfilter.filters.greaterThan')}</option>}
+        {<option value={FILTERS.LESS_THAN}>{t('columnsfilter.filters.lessThan')}</option>}
       </HTMLSelect>
     )
   }

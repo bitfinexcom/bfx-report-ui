@@ -89,7 +89,16 @@
   "columnsfilter": {
     "title": "Filter Columns",
     "cancel": "Cancel",
-    "apply": "Apply Filters"
+    "apply": "Apply Filters",
+    "filters": {
+      "contains": "Contains",
+      "beginsWith": "Begins with",
+      "endsWith": "Ends with",
+      "equalTo": "Equal to",
+      "notEqualTo": "Not equal to",
+      "greaterThan": "Greater than",
+      "lessThan": "Less than"
+    }
   },
   "concentrationrisk": {
     "title": "Concentration Risk",

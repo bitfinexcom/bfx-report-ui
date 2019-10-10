@@ -18,4 +18,14 @@ export const ARRAY_FILTERS = [
   FILTER_TYPES.IS_NOT_NULL,
 ]
 
+export const FILTERS = {
+  CONTAINS: 'contains',
+  BEGINS_WITH: 'begins_with',
+  ENDS_WITH: 'ends_with',
+  EQUAL_TO: 'equal_to',
+  NOT_EQUAL_TO: 'not_equal_to',
+  GREATER_THAN: 'greater_than',
+  LESS_THAN: 'less_than',
+}
+
 export default FILTER_TYPES

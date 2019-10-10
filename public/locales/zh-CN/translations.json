@@ -86,6 +86,20 @@
     "usd": "美元",
     "wallet": "钱包"
   },
+  "columnsfilter": {
+    "title": "Filter Columns",
+    "cancel": "Cancel",
+    "apply": "Apply Filters",
+    "filters": {
+      "contains": "Contains",
+      "beginsWith": "Begins with",
+      "endsWith": "Ends with",
+      "equalTo": "Equal to",
+      "notEqualTo": "Not equal to",
+      "greaterThan": "Greater than",
+      "lessThan": "Less than"
+    }
+  },
   "concentrationrisk": {
     "title": "集中风险",
     "nodata": "此日期时间没有相关数据。您可以尝试其他日期时间。",

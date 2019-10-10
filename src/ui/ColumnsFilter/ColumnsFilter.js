@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button, InputGroup } from '@blueprintjs/core'
+import { Button, InputGroup, Icon } from '@blueprintjs/core'
+import { IconNames } from '@blueprintjs/icons'
 
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
@@ -134,12 +135,11 @@ class ColumnsFilter extends PureComponent {
                       value={value}
                       onChange={e => this.onInputChange(index, e)}
                     />
-                    <span
+                    <Icon
                       className='columns-filter-item-remove'
+                      icon={IconNames.SMALL_CROSS}
                       onClick={() => this.onFilterRemove(index)}
-                    >
-                      x
-                    </span>
+                    />
                   </div>
                 )
               })}
