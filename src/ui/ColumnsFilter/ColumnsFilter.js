@@ -3,6 +3,8 @@ import { withTranslation } from 'react-i18next'
 import { Button, InputGroup, Icon } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
+import { selectTextOnFocus } from 'utils/inputs'
+
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
 import FilterTypeSelector from './FilterTypeSelector'
@@ -134,6 +136,7 @@ class ColumnsFilter extends PureComponent {
                       className='columns-filter-item-input'
                       value={value}
                       onChange={e => this.onInputChange(index, e)}
+                      onFocus={selectTextOnFocus}
                     />
                     <Icon
                       className='columns-filter-item-remove'
