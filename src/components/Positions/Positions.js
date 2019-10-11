@@ -140,7 +140,7 @@ class Positions extends PureComponent {
             <TimeRange />
             {renderPairSelector}
             {' '}
-            <ColumnsFilter />
+            <ColumnsFilter target={TYPE} />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

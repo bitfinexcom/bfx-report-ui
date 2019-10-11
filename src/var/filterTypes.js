@@ -13,6 +13,8 @@ const FILTER_TYPES = {
   IS_NOT_NULL: '$isNotNull',
 }
 
+export const EMPTY_FILTER = { column: '', type: '', value: '' }
+
 export const ARRAY_FILTERS = [
   FILTER_TYPES.IS_NULL,
   FILTER_TYPES.IS_NOT_NULL,

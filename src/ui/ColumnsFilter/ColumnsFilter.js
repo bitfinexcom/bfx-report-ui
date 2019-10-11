@@ -4,33 +4,27 @@ import { Button, InputGroup, Icon } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
 import { selectTextOnFocus } from 'utils/inputs'
+import { EMPTY_FILTER } from 'var/filterTypes'
 
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
 import FilterTypeSelector from './FilterTypeSelector'
 import { propTypes, defaultProps } from './ColumnsFilter.props'
+import DEFAULT_FILTERS from './var/defaultFilters'
 
-const EMPTY_FILTER = { column: '', type: '', value: '' }
-
-const DEFAULT_FILTERS = [
-  { column: 'balance', type: '$gt', value: '1000' },
-  EMPTY_FILTER,
-  EMPTY_FILTER,
-]
+const getDefaultFilters = section => DEFAULT_FILTERS[section]
 
 /* eslint-disable react/no-array-index-key */
 class ColumnsFilter extends PureComponent {
   constructor(props) {
     super()
 
-    const { filters } = props
+    const { filters, target } = props
     this.state = {
       isOpen: true,
-      filters: this.getDefaultFilters(filters),
+      filters: filters.length ? filters : getDefaultFilters(target),
     }
   }
-
-  getDefaultFilters = filters => (filters.length ? filters : DEFAULT_FILTERS)
 
   toggleDialog = () => {
     const { isOpen } = this.state
@@ -38,11 +32,11 @@ class ColumnsFilter extends PureComponent {
   }
 
   onCancel = () => {
-    const { filters } = this.props
+    const { filters, target } = this.props
 
     this.toggleDialog()
     this.setState({
-      filters: this.getDefaultFilters(filters),
+      filters: filters.length ? filters : getDefaultFilters(target),
     })
   }
 
