@@ -339,6 +339,11 @@
       "startDateTooltip": "Select a start time",
       "endDateTooltip": "Select end time"
     },
+    "sections": {
+      "startSnapshot": "Start Snapshot",
+      "endSnapshot": "End Snapshot",
+      "finalResult": "Final Result"
+    },
     "columns": {
       "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
       "positionsTotal": "POSITIONS TOTAL P/L (USD)",

@@ -15,7 +15,6 @@ import {
   getWalletsEntries,
   getTimestamp,
 } from 'state/snapshots/selectors'
-import { getFullTime, getTimeOffset } from 'state/base/selectors'
 
 import Snapshots from './Snapshots'
 
@@ -28,8 +27,6 @@ const mapStateToProps = (state = {}) => ({
   walletsTickersEntries: getWalletsTickersEntries(state),
   walletsEntries: getWalletsEntries(state),
   loading: !getDataReceived(state),
-  getFullTime: getFullTime(state),
-  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {

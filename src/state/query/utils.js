@@ -302,11 +302,7 @@ function error(target, action) {
 // /target/BTCUSD
 // /target/BTCUSD?params=
 export function getTarget(link) {
-  let baseLink = link
-  if (link.slice(1).indexOf('/') > -1) {
-    const parts = link.split('/')
-    baseLink = link.replace(`/${parts[parts.length - 1]}`, '')
-  }
+  const baseLink = `/${link.split('/')[1]}`
   return PATHMAP[baseLink] || MENU_LEDGERS
 }
 

@@ -4,22 +4,22 @@ import { Cell } from '@blueprintjs/table'
 import { fixedFloat, formatAmount } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { positionsTotalPlUsd } = props
+  const { totalBalanceUsd } = props
 
   return [
     {
       id: 'id',
-      name: 'snapshots.column.positions_total',
+      name: 'snapshots.column.wallets_total',
       width: 230,
       renderer: () => (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedFloat(positionsTotalPlUsd)}
+          tooltip={fixedFloat(totalBalanceUsd)}
         >
-          {formatAmount(positionsTotalPlUsd)}
+          {formatAmount(totalBalanceUsd)}
         </Cell>
       ),
-      copyText: () => fixedFloat(positionsTotalPlUsd),
+      copyText: () => fixedFloat(totalBalanceUsd),
     },
   ]
 }
