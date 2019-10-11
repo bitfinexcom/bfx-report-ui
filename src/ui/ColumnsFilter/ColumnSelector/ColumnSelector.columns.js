@@ -9,24 +9,27 @@ const {
   MENU_FOFFER,
   MENU_FLOAN,
   MENU_FCREDIT,
+  MENU_FPAYMENT,
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
 } = queryConstants
 
+const LEDGERS_COLUMNS = [
+  // { id: 'id', name: 'id' },
+  { id: 'description', name: 'description' },
+  // { id: 'currency', name: 'currency' },
+  { id: 'amount', name: 'amount' },
+  { id: 'amountUsd', name: 'amountUsd' },
+  { id: 'balance', name: 'balance' },
+  { id: 'balanceUsd', name: 'balanceUsd' },
+  // { id: 'mts', name: 'date' },
+  { id: 'wallet', name: 'wallet' },
+]
+
 const SECTION_COLUMNS = {
-  [MENU_LEDGERS]: [
-    // { id: 'id', name: 'id' },
-    { id: 'description', name: 'description' },
-    // { id: 'currency', name: 'currency' },
-    { id: 'amount', name: 'amount' },
-    { id: 'amountUsd', name: 'amountUsd' },
-    { id: 'balance', name: 'balance' },
-    { id: 'balanceUsd', name: 'balanceUsd' },
-    // { id: 'mts', name: 'date' },
-    { id: 'wallet', name: 'wallet' },
-  ],
+  [MENU_LEDGERS]: LEDGERS_COLUMNS,
 
   [MENU_TRADES]: [
     { id: 'id', name: 'id' },
@@ -156,6 +159,8 @@ const SECTION_COLUMNS = {
     // { id: 'noClose', name: 'noClose' },
   ],
 
+  [MENU_FPAYMENT]: LEDGERS_COLUMNS,
+
   [MENU_PUBLIC_TRADES]: [
     { id: 'id', name: 'id' },
     // { id: 'mts', name: 'time' },
@@ -170,13 +175,10 @@ const SECTION_COLUMNS = {
   // not currently used
   [MENU_PUBLIC_FUNDING]: [
     { id: 'id', name: 'id' },
-    { id: 'symbol', name: 'symbol' },
-    { id: 'mts', name: 'mts' },
-    // { id: 'offerID', name: 'offerID' },
+    // { id: 'mts', name: 'time' },
     { id: 'amount', name: 'amount' },
     { id: 'rate', name: 'rate' },
     { id: 'period', name: 'period' },
-    // { id: 'maker', name: 'maker' },
     // { id: 'currency', name: 'currency' }, // custom column added on front
   ],
 

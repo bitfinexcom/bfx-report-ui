@@ -8,6 +8,7 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapSymbol } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getFilterQuery } from 'state/filters/selectors'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
@@ -27,9 +28,11 @@ function getReqPublicFunding({
   auth,
   query,
   targetSymbol,
+  filter,
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
+  params.filter = filter
   if (targetSymbol) {
     params.symbol = formatRawSymbols(mapRequestSymbols(targetSymbol, true))
   }
@@ -46,17 +49,20 @@ function* fetchPublicFunding({ payload: symbol }) {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPublicFunding, {
       smallestMts: 0,
       auth,
       query,
       targetSymbol,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicFunding, {
       smallestMts: 0,
       auth,
       query,
       targetSymbol,
+      filter,
     })
     yield put(actions.updatePublicFunding(result, LIMIT, PAGE_SIZE))
 
@@ -90,17 +96,20 @@ function* fetchNextPublicFunding() {
     }
     const auth = yield select(selectAuth)
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPublicFunding, {
       smallestMts,
       auth,
       query,
       targetSymbol,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicFunding, {
       smallestMts,
       auth,
       query,
       targetSymbol,
+      filter,
     })
     yield put(actions.updatePublicFunding(result, LIMIT, PAGE_SIZE))
 

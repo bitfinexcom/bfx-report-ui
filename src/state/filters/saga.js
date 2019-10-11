@@ -12,7 +12,9 @@ import { fetchPositions, refresh as refreshPositions } from 'state/positions/act
 import { fetchFOffer, refresh as refreshFOffer } from 'state/fundingOfferHistory/actions'
 import { fetchFLoan, refresh as refreshFLoan } from 'state/fundingLoanHistory/actions'
 import { fetchFCredit, refresh as refreshFCredit } from 'state/fundingCreditHistory/actions'
+import { fetchFPayment, refresh as refreshFPayment } from 'state/fundingPayment/actions'
 import { fetchPublicTrades, refresh as refreshPublicTrades } from 'state/publicTrades/actions'
+import { fetchPublicFunding, refresh as refreshPublicFunding } from 'state/publicFunding/actions'
 import { fetchTickers, refresh as refreshTickers } from 'state/tickers/actions'
 import { fetchDerivatives, refresh as refreshDerivatives } from 'state/derivatives/actions'
 
@@ -27,8 +29,9 @@ const {
   MENU_FOFFER,
   MENU_FLOAN,
   MENU_FCREDIT,
+  MENU_FPAYMENT,
   MENU_PUBLIC_TRADES,
-  // MENU_PUBLIC_FUNDING,
+  MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
 } = queryTypes
@@ -38,7 +41,6 @@ export function* setFilters({ payload }) {
 
   switch (section) {
     case MENU_LEDGERS:
-    default:
       yield put(refreshLedgers())
       yield put(fetchLedgers())
       break
@@ -70,9 +72,17 @@ export function* setFilters({ payload }) {
       yield put(refreshFCredit())
       yield put(fetchFCredit())
       break
+    case MENU_FPAYMENT:
+      yield put(refreshFPayment())
+      yield put(fetchFPayment())
+      break
     case MENU_PUBLIC_TRADES:
       yield put(refreshPublicTrades())
       yield put(fetchPublicTrades())
+      break
+    case MENU_PUBLIC_FUNDING:
+      yield put(refreshPublicFunding())
+      yield put(fetchPublicFunding())
       break
     case MENU_TICKERS:
       yield put(refreshTickers())
@@ -82,6 +92,7 @@ export function* setFilters({ payload }) {
       yield put(refreshDerivatives())
       yield put(fetchDerivatives())
       break
+    default:
   }
 }
 
