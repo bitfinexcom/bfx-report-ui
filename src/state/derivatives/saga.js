@@ -41,7 +41,7 @@ function* fetchDerivatives({ payload: pair }) {
     })
     yield put(actions.updateDerivatives(result))
 
-    if (!error) {
+    if (error) {
       yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'derivatives.title',
