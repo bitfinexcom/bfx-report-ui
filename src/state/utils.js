@@ -57,6 +57,10 @@ export function formatTime(mts, {
   milliseconds,
   timezone,
 }) {
+  if (!moment(mts).isValid()) {
+    return ''
+  }
+
   const baseFormat = dateFormat
     ? `${dateFormat} HH:mm:ss`
     : 'YY-MM-DD HH:mm:ss'
