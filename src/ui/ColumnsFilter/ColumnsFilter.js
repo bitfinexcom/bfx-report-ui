@@ -14,6 +14,8 @@ import DEFAULT_FILTERS from './var/defaultFilters'
 
 const getDefaultFilters = section => DEFAULT_FILTERS[section]
 
+const MAX_FILTERS = 7
+
 /* eslint-disable react/no-array-index-key */
 class ColumnsFilter extends PureComponent {
   constructor(props) {
@@ -21,7 +23,7 @@ class ColumnsFilter extends PureComponent {
 
     const { filters, target } = props
     this.state = {
-      isOpen: true,
+      isOpen: false,
       filters: filters.length ? filters : getDefaultFilters(target),
     }
   }
@@ -60,6 +62,14 @@ class ColumnsFilter extends PureComponent {
 
   onFilterRemove = (index) => {
     const { filters } = this.state
+
+    // last filter removal
+    if (filters.length === 1) {
+      this.setState({
+        filters: [EMPTY_FILTER],
+      })
+      return
+    }
 
     this.setState({
       filters: filters.filter((el, i) => i !== index),
@@ -145,9 +155,11 @@ class ColumnsFilter extends PureComponent {
               })}
             </div>
 
-            <div className='columns-filter-add' onClick={this.onFilterAdd}>
-              {'+ add filter'}
-            </div>
+            {(filters.length < MAX_FILTERS) && (
+              <div className='columns-filter-add' onClick={this.onFilterAdd}>
+                {'+ add filter'}
+              </div>
+            )}
           </div>
         </ColumnsFilterDialog>
       </Fragment>
