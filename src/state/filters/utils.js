@@ -2,8 +2,31 @@
 import _isEmpty from 'lodash/isEmpty'
 import _reduce from 'lodash/reduce'
 import _set from 'lodash/set'
+import _toNumber from 'lodash/toNumber'
+import _toInteger from 'lodash/toInteger'
+import _toString from 'lodash/toString'
 
 import FILTER_TYPES, { FILTERS } from 'var/filterTypes'
+import DATA_TYPES from 'var/dataTypes'
+
+const {
+  NUMBER,
+  INTEGER,
+  STRING,
+} = DATA_TYPES
+
+const getValue = ({ dataType, value }) => {
+  switch (dataType) {
+    case NUMBER:
+      return _toNumber(value)
+    case INTEGER:
+      return _toInteger(value)
+    case STRING:
+      return _toString(value)
+    default:
+      return value
+  }
+}
 
 export const calculateFilterQuery = (filters = []) => {
   if (_isEmpty(filters)) {
@@ -16,29 +39,33 @@ export const calculateFilterQuery = (filters = []) => {
   })
 
   return _reduce(validFilters, (acc, filter) => {
-    const { column, type, value } = filter
+    const {
+      column, type, dataType, value,
+    } = filter
+
+    const filterValue = getValue({ dataType, value })
 
     switch (type) {
       case FILTERS.CONTAINS:
-        _set(acc, `${FILTER_TYPES.LIKE}.${column}`, `%${value}%`)
+        _set(acc, `${FILTER_TYPES.LIKE}.${column}`, `%${filterValue}%`)
         break
       case FILTERS.BEGINS_WITH:
-        _set(acc, `${FILTER_TYPES.LIKE}.${column}`, `${value}%`)
+        _set(acc, `${FILTER_TYPES.LIKE}.${column}`, `${filterValue}%`)
         break
       case FILTERS.ENDS_WITH:
-        _set(acc, `${FILTER_TYPES.LIKE}.${column}`, `%${value}`)
+        _set(acc, `${FILTER_TYPES.LIKE}.${column}`, `%${filterValue}`)
         break
       case FILTERS.EQUAL_TO:
-        _set(acc, `${FILTER_TYPES.EQ}.${column}`, +value)
+        _set(acc, `${FILTER_TYPES.EQ}.${column}`, filterValue)
         break
       case FILTERS.NOT_EQUAL_TO:
-        _set(acc, `${FILTER_TYPES.NE}.${column}`, +value)
+        _set(acc, `${FILTER_TYPES.NE}.${column}`, filterValue)
         break
       case FILTERS.GREATER_THAN:
-        _set(acc, `${FILTER_TYPES.GTE}.${column}`, +value)
+        _set(acc, `${FILTER_TYPES.GTE}.${column}`, filterValue)
         break
       case FILTERS.LESS_THAN:
-        _set(acc, `${FILTER_TYPES.LTE}.${column}`, +value)
+        _set(acc, `${FILTER_TYPES.LTE}.${column}`, filterValue)
         break
       default:
     }

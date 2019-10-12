@@ -91,7 +91,7 @@ class ColumnsFilter extends PureComponent {
     this.updateFilter({ index, value })
   }
 
-  /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
+  /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events, no-shadow */
   render() {
     const { target, t } = this.props
     const { isOpen, filters } = this.state
@@ -113,17 +113,20 @@ class ColumnsFilter extends PureComponent {
           <div className='columns-filter'>
             <div>
               {filters.map((filter, index) => {
-                const { column, type, value } = filter
+                const {
+                  column, type, dataType, value,
+                } = filter
 
                 return (
                   <div key={index} className='columns-filter-item'>
                     <ColumnSelector
                       section={target}
                       value={column}
-                      onChange={col => this.updateFilter({ index, column: col })}
+                      onChange={({ column, dataType }) => this.updateFilter({ index, column, dataType })}
                     />
                     <FilterTypeSelector
                       value={type}
+                      dataType={dataType}
                       onChange={filterType => this.updateFilter({ index, type: filterType })}
                     />
                     <InputGroup
