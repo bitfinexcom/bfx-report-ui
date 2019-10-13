@@ -53,9 +53,9 @@
     "destination": "去處",
     "fee": "手續費",
     "fees": "費用",
-    "fundBalance": "INSURANCE FUND BALANCE",
-    "fundingAccrued": "NEXT FUNDING ACCRUED",
-    "fundingStep": "NEXT FUNDING STEP",
+    "fundBalance": "保險基金餘額",
+    "fundingAccrued": "下階段累計資金",
+    "fundingStep": "下階段累加值",
     "id": "#",
     "lastpayout": "結束",
     "liq-price": "清算價格",
@@ -69,8 +69,8 @@
     "plperc": "損益%",
     "positionpair": "倉位對",
     "price": "價格",
-    "priceDeriv": "DERIV PRICE",
-    "priceSpot": "SPOT PRICE",
+    "priceDeriv": "衍生品價格",
+    "priceSpot": "現貨價格",
     "pricetrail": "歷史價格",
     "rate": "利率",
     "side": "方向",
@@ -118,15 +118,15 @@
     "title": "存款"
   },
   "derivatives": {
-    "title": "Derivatives",
+    "title": "衍生品",
     "column": {
-      "pair": "PAIR",
-      "priceDeriv": "DERIV PRICE",
-      "priceSpot": "SPOT PRICE",
-      "fundBalance": "INSURANCE FUND BALANCE",
-      "fundingAccrued": "NEXT FUNDING ACCRUED",
-      "fundingStep": "NEXT FUNDING STEP",
-      "update": "UPDATED"
+      "pair": "對",
+      "priceDeriv": "衍生品價格",
+      "priceSpot": "現貨價格",
+      "fundBalance": "保險基金餘額",
+      "fundingAccrued": "下階段累計資金",
+      "fundingStep": "下階段累加值",
+      "update": "日期"
     }
   },
   "download": {
@@ -404,15 +404,15 @@
       "endDateTooltip": "選擇結束時間"
     },
     "columns": {
-      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
-      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
-      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
-      "totalResult": "TOTAL RESULT (USD)"
+      "walletsTotal": "錢包總餘額 (美元)",
+      "positionsTotal": "倉位總損益 (美元)",
+      "movementsTotal": "運用資金總額 (美元)",
+      "totalResult": "總額 (美元)"
     },
-    "startingPeriodBalances": "Starting Period Balances",
-    "endingPeriodBalances": "Ending Period Balances",
-    "startPositions": "Starting Positions Snapshot",
-    "endPositions": "Ending Positions Snapshot",
+    "startingPeriodBalances": "期初餘額",
+    "endingPeriodBalances": "期末餘額",
+    "startPositions": "倉位期初快照",
+    "endPositions": "倉位期末快照",
     "movements": "活動"
   },
   "theme": {

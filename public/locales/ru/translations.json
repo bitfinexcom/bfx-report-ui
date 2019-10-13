@@ -53,9 +53,9 @@
     "destination": "НАЗНАЧЕНИЕ",
     "fee": "КОМИССИЯ",
     "fees": "КОМИССИИ",
-    "fundBalance": "INSURANCE FUND BALANCE",
-    "fundingAccrued": "NEXT FUNDING ACCRUED",
-    "fundingStep": "NEXT FUNDING STEP",
+    "fundBalance": "БАЛАНС РЕЗЕРВНОГО ФОНДА",
+    "fundingAccrued": "СЛЕДУЮЩЕЕ ФИНАНСИРОВАНИЕ НАКОПЛЕНО",
+    "fundingStep": "СЛЕДУЮЩИЙ ШАГ ФИНАНСИРОВАНИЯ",
     "id": "№",
     "lastpayout": "ПОСЛЕДНЯЯ ВЫПЛАТА",
     "liq-price": "ЦЕНА ЛИКВ.",
@@ -69,7 +69,7 @@
     "plperc": "P/L%",
     "positionpair": "ПАРА В ПОЗИЦИИ",
     "price": "ЦЕНА",
-    "priceDeriv": "DERIV PRICE",
+    "priceDeriv": "ЦЕНА ДЕРИВАТИВА",
     "priceSpot": "SPOT PRICE",
     "pricetrail": "ТРЕЙЛИНГОВАЯ ЦЕНА",
     "rate": "СТАВКА",
@@ -118,15 +118,15 @@
     "title": "Депозиты"
   },
   "derivatives": {
-    "title": "Derivatives",
+    "title": "Деривативы",
     "column": {
-      "pair": "PAIR",
-      "priceDeriv": "DERIV PRICE",
-      "priceSpot": "SPOT PRICE",
-      "fundBalance": "INSURANCE FUND BALANCE",
-      "fundingAccrued": "NEXT FUNDING ACCRUED",
-      "fundingStep": "NEXT FUNDING STEP",
-      "update": "UPDATED"
+      "pair": "ПАРА",
+      "priceDeriv": "ЦЕНА ДЕРИВАТИВА",
+      "priceSpot": "ЦЕНА СПОТ",
+      "fundBalance": "БАЛАНС РЕЗЕРВНОГО ФОНДА",
+      "fundingAccrued": "СЛЕДУЮЩЕЕ ФИНАНСИРОВАНИЕ НАКОПЛЕНО",
+      "fundingStep": "СЛЕДУЮЩИЙ ШАГ ФИНАНСИРОВАНИЯ",
+      "update": "ДАТА"
     }
   },
   "download": {
@@ -404,15 +404,15 @@
       "endDateTooltip": "Выберите конечное время"
     },
     "columns": {
-      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
-      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
-      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
-      "totalResult": "TOTAL RESULT (USD)"
+      "walletsTotal": "ИТОГО БАЛАНСА НА КОШЕЛЬКАХ (USD)",
+      "positionsTotal": "ВСЕГО P/L ПОЗИЦИЙ (USD)",
+      "movementsTotal": "СУММА ДВИЖЕНИЙ (USD)",
+      "totalResult": "ИТОГО (USD)"
     },
-    "startingPeriodBalances": "Starting Period Balances",
-    "endingPeriodBalances": "Ending Period Balances",
-    "startPositions": "Starting Positions Snapshot",
-    "endPositions": "Ending Positions Snapshot",
+    "startingPeriodBalances": "Балансы в начале периода",
+    "endingPeriodBalances": "Балансы в конце периода",
+    "startPositions": "Начальный снапшот позиций",
+    "endPositions": "Конечный снапшот позиций",
     "movements": "Движения"
   },
   "theme": {

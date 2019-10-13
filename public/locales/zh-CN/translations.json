@@ -53,9 +53,9 @@
     "destination": "目的地",
     "fee": "费用",
     "fees": "费用",
-    "fundBalance": "INSURANCE FUND BALANCE",
-    "fundingAccrued": "NEXT FUNDING ACCRUED",
-    "fundingStep": "NEXT FUNDING STEP",
+    "fundBalance": "保险基金余额",
+    "fundingAccrued": "下阶段累计资金",
+    "fundingStep": "下阶段累加值",
     "id": "#",
     "lastpayout": "上一次支出",
     "liq-price": "清算价格",
@@ -69,8 +69,8 @@
     "plperc": "损益 %",
     "positionpair": "仓位对",
     "price": "价格",
-    "priceDeriv": "DERIV PRICE",
-    "priceSpot": "SPOT PRICE",
+    "priceDeriv": "衍生品价格",
+    "priceSpot": "现货价格",
     "pricetrail": "历史价格",
     "rate": "利率",
     "side": "方向",
@@ -118,15 +118,15 @@
     "title": "存款"
   },
   "derivatives": {
-    "title": "Derivatives",
+    "title": "衍生品",
     "column": {
-      "pair": "PAIR",
-      "priceDeriv": "DERIV PRICE",
-      "priceSpot": "SPOT PRICE",
-      "fundBalance": "INSURANCE FUND BALANCE",
-      "fundingAccrued": "NEXT FUNDING ACCRUED",
-      "fundingStep": "NEXT FUNDING STEP",
-      "update": "UPDATED"
+      "pair": "货币对",
+      "priceDeriv": "衍生品价格",
+      "priceSpot": "现货价格",
+      "fundBalance": "保险基金余额",
+      "fundingAccrued": "下阶段累计资金",
+      "fundingStep": "下阶段累加值",
+      "update": "日期"
     }
   },
   "download": {
@@ -404,15 +404,15 @@
       "endDateTooltip": "选择结束时间"
     },
     "columns": {
-      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
-      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
-      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
-      "totalResult": "TOTAL RESULT (USD)"
+      "walletsTotal": "钱包总余额 (美元)",
+      "positionsTotal": "仓位总损益 (美元)",
+      "movementsTotal": "运用资金总额 (美元)",
+      "totalResult": "总额 (美元)"
     },
-    "startingPeriodBalances": "Starting Period Balances",
-    "endingPeriodBalances": "Ending Period Balances",
-    "startPositions": "Starting Positions Snapshot",
-    "endPositions": "Ending Positions Snapshot",
+    "startingPeriodBalances": "期初余额",
+    "endingPeriodBalances": "期末余额",
+    "startPositions": "仓位期初快照",
+    "endPositions": "仓位期末快照",
     "movements": "移动"
   },
   "theme": {
