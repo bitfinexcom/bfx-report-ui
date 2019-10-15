@@ -87,17 +87,17 @@
     "wallet": "錢包"
   },
   "columnsfilter": {
-    "title": "Filter Columns",
-    "cancel": "Cancel",
-    "apply": "Apply Filters",
+    "title": "篩選欄",
+    "cancel": "取消",
+    "apply": "套用篩選",
     "filters": {
-      "contains": "Contains",
-      "beginsWith": "Begins with",
-      "endsWith": "Ends with",
-      "equalTo": "Equal to",
-      "notEqualTo": "Not equal to",
-      "greaterThan": "Greater than",
-      "lessThan": "Less than"
+      "contains": "包含",
+      "beginsWith": "開始於",
+      "endsWith": "結束於",
+      "equalTo": "等於",
+      "notEqualTo": "不等於",
+      "greaterThan": "大於",
+      "lessThan": "少於"
     }
   },
   "concentrationrisk": {
