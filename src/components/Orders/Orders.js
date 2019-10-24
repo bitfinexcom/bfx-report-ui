@@ -5,6 +5,7 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
+import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
@@ -110,6 +111,8 @@ class Orders extends PureComponent {
             <TimeRange />
             {renderPairSelector}
             {' '}
+            <ColumnsFilter target={TYPE} />
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             {' '}
             <QueryLimitSelector target={TYPE} />
@@ -125,6 +128,8 @@ class Orders extends PureComponent {
             {' '}
             <TimeRange />
             {renderPairSelector}
+            {' '}
+            <ColumnsFilter target={TYPE} />
             {' '}
             <ExportButton handleClickExport={handleClickExport} />
             {' '}

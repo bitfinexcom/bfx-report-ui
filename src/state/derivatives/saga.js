@@ -10,14 +10,18 @@ import {
   formatRawSymbols, getPairsFromUrlParam, getSymbolsURL, mapPair, mapRequestPairs,
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
+import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
+import queryTypes from 'state/query/constants'
 
 import types from './constants'
 import actions from './actions'
 import { getTargetPairs } from './selectors'
 
-function getReqDerivatives({ auth, targetPairs }) {
-  const params = {}
+const TYPE = queryTypes.MENU_DERIVATIVES
+
+function getReqDerivatives({ auth, targetPairs, filter }) {
+  const params = { filter }
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
@@ -35,9 +39,11 @@ function* fetchDerivatives({ payload: pair }) {
       yield put(actions.setTargetPairs(targetPairs))
     }
     const auth = yield select(selectAuth)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(getReqDerivatives, {
       auth,
       targetPairs,
+      filter,
     })
     yield put(actions.updateDerivatives(result))
 

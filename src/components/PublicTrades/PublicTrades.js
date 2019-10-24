@@ -5,6 +5,7 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
+import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
 import SyncNotSetYet from 'ui/SyncNotSetYet'
@@ -123,6 +124,8 @@ class PublicTrades extends PureComponent {
             <TimeRange />
             {renderPairSelector}
             {' '}
+            <ColumnsFilter target={TYPE} />
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton sectionType={TYPE} />
           </h4>
@@ -137,6 +140,8 @@ class PublicTrades extends PureComponent {
             {' '}
             <TimeRange />
             {renderPairSelector}
+            {' '}
+            <ColumnsFilter target={TYPE} />
             {' '}
             <ExportButton handleClickExport={handleClickExport} />
             {' '}

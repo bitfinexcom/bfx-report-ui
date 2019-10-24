@@ -66,7 +66,7 @@ export function derivativesReducer(state = initialState, action) {
     case queryTypes.SET_TIME_RANGE:
       return {
         ...initialState,
-        targetPair: state.targetPair,
+        targetPairs: state.targetPairs,
       }
     case authTypes.LOGOUT:
       return initialState

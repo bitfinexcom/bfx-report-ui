@@ -33,8 +33,72 @@
     }
   },
   "column": {
+    "actual-price": "实际价格",
+    "amount": "金额",
+    "amount-exe": "已执行的金额",
+    "amountUsd": "金额 (USD)",
+    "ask": "委卖",
+    "avgprice": "平均执行价格",
+    "balance": "余额",
+    "balanceUsd": "余额 (USD)",
+    "base-price": "基价",
+    "bid": "委买",
+    "close": "CLOSED",
+    "collateral": "抵押品",
+    "create": "创建时间",
+    "currency": "货币",
+    "date": "日期",
+    "days": "天",
+    "description": "描述",
+    "destination": "目的地",
+    "fee": "费用",
+    "fees": "费用",
+    "fundBalance": "保险基金余额",
+    "fundingAccrued": "下阶段累计资金",
+    "fundingStep": "下阶段累加值",
     "id": "#",
-    "usd": "美元"
+    "lastpayout": "上一次支出",
+    "liq-price": "清算价格",
+    "meta": "元数据",
+    "opening": "已打开",
+    "orderid": "订单 ID",
+    "pair": "货币对",
+    "period": "期间",
+    "pl": "损益",
+    "plUsd": "损益 (USD)",
+    "plperc": "损益 %",
+    "positionpair": "仓位对",
+    "price": "价格",
+    "priceDeriv": "衍生品价格",
+    "priceSpot": "现货价格",
+    "pricetrail": "历史价格",
+    "rate": "利率",
+    "side": "方向",
+    "status": "状态",
+    "swap": "融资成本",
+    "swap-type": "融资类型",
+    "symbol": "货币",
+    "time": "日期",
+    "transactionId": "交易 ID",
+    "type": "类型",
+    "typeprev": "先前订单类型",
+    "update": "更新时间",
+    "usd": "美元",
+    "wallet": "钱包"
+  },
+  "columnsfilter": {
+    "title": "筛选栏",
+    "cancel": "取消",
+    "apply": "应用筛选",
+    "filters": {
+      "contains": "包含",
+      "beginsWith": "开始于",
+      "endsWith": "结束于",
+      "equalTo": "等于",
+      "notEqualTo": "不等于",
+      "greaterThan": "大于",
+      "lessThan": "少于"
+    }
   },
   "concentrationrisk": {
     "title": "集中风险",
@@ -54,15 +118,15 @@
     "title": "存款"
   },
   "derivatives": {
-    "title": "Derivatives",
+    "title": "衍生品",
     "column": {
-      "pair": "PAIR",
-      "priceDeriv": "DERIV PRICE",
-      "priceSpot": "SPOT PRICE",
-      "fundBalance": "INSURANCE FUND BALANCE",
-      "fundingAccrued": "NEXT FUNDING ACCRUED",
-      "fundingStep": "NEXT FUNDING STEP",
-      "update": "UPDATED"
+      "pair": "货币对",
+      "priceDeriv": "衍生品价格",
+      "priceSpot": "现货价格",
+      "fundBalance": "保险基金余额",
+      "fundingAccrued": "下阶段累计资金",
+      "fundingStep": "下阶段累加值",
+      "update": "日期"
     }
   },
   "download": {
@@ -340,15 +404,15 @@
       "endDateTooltip": "选择结束时间"
     },
     "columns": {
-      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
-      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
-      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
-      "totalResult": "TOTAL RESULT (USD)"
+      "walletsTotal": "钱包总余额 (美元)",
+      "positionsTotal": "仓位总损益 (美元)",
+      "movementsTotal": "运用资金总额 (美元)",
+      "totalResult": "总额 (美元)"
     },
-    "startingPeriodBalances": "Starting Period Balances",
-    "endingPeriodBalances": "Ending Period Balances",
-    "startPositions": "Starting Positions Snapshot",
-    "endPositions": "Ending Positions Snapshot",
+    "startingPeriodBalances": "期初余额",
+    "endingPeriodBalances": "期末余额",
+    "startPositions": "仓位期初快照",
+    "endPositions": "仓位期末快照",
     "movements": "移动"
   },
   "theme": {

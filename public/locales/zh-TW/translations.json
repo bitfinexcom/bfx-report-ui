@@ -32,9 +32,73 @@
       "endDateTooltip": "選擇結束時間"
     }
   },
-  "column":{
+  "column": {
+    "actual-price": "實際價格",
+    "amount": "數量",
+    "amount-exe": "執行數量",
+    "amountUsd": "數量(美元)",
+    "ask": "賣價",
+    "avgprice": "平均執行價格",
+    "balance": "金額",
+    "balanceUsd": "金額(美元)",
+    "base-price": "基價",
+    "bid": "買價",
+    "close": "結束",
+    "collateral": "抵押品",
+    "create": "建立",
+    "currency": "貨幣",
+    "date": "日期",
+    "days": "天",
+    "description": "描述",
+    "destination": "去處",
+    "fee": "手續費",
+    "fees": "費用",
+    "fundBalance": "保險基金餘額",
+    "fundingAccrued": "下階段累計資金",
+    "fundingStep": "下階段累加值",
     "id": "#",
-    "usd": "美元"
+    "lastpayout": "結束",
+    "liq-price": "清算價格",
+    "meta": "後設資料",
+    "opening": "開始",
+    "orderid": "訂單 ID",
+    "pair": "對",
+    "period": "期間",
+    "pl": "損益",
+    "plUsd": "損益 (USD)",
+    "plperc": "損益%",
+    "positionpair": "倉位對",
+    "price": "價格",
+    "priceDeriv": "衍生品價格",
+    "priceSpot": "現貨價格",
+    "pricetrail": "歷史價格",
+    "rate": "利率",
+    "side": "方向",
+    "status": "狀態",
+    "swap": "互換成本",
+    "swap-type": "互換類型",
+    "symbol": "貨幣",
+    "time": "時間",
+    "transactionId": "交易編號",
+    "type": "類型",
+    "typeprev": "先前訂單類型",
+    "update": "更新",
+    "usd": "美元",
+    "wallet": "錢包"
+  },
+  "columnsfilter": {
+    "title": "篩選欄",
+    "cancel": "取消",
+    "apply": "套用篩選",
+    "filters": {
+      "contains": "包含",
+      "beginsWith": "開始於",
+      "endsWith": "結束於",
+      "equalTo": "等於",
+      "notEqualTo": "不等於",
+      "greaterThan": "大於",
+      "lessThan": "少於"
+    }
   },
   "concentrationrisk": {
     "title": "集中風險",
@@ -54,15 +118,15 @@
     "title": "存款"
   },
   "derivatives": {
-    "title": "Derivatives",
+    "title": "衍生品",
     "column": {
-      "pair": "PAIR",
-      "priceDeriv": "DERIV PRICE",
-      "priceSpot": "SPOT PRICE",
-      "fundBalance": "INSURANCE FUND BALANCE",
-      "fundingAccrued": "NEXT FUNDING ACCRUED",
-      "fundingStep": "NEXT FUNDING STEP",
-      "update": "UPDATED"
+      "pair": "對",
+      "priceDeriv": "衍生品價格",
+      "priceSpot": "現貨價格",
+      "fundBalance": "保險基金餘額",
+      "fundingAccrued": "下階段累計資金",
+      "fundingStep": "下階段累加值",
+      "update": "日期"
     }
   },
   "download": {
@@ -340,15 +404,15 @@
       "endDateTooltip": "選擇結束時間"
     },
     "columns": {
-      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
-      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
-      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
-      "totalResult": "TOTAL RESULT (USD)"
+      "walletsTotal": "錢包總餘額 (美元)",
+      "positionsTotal": "倉位總損益 (美元)",
+      "movementsTotal": "運用資金總額 (美元)",
+      "totalResult": "總額 (美元)"
     },
-    "startingPeriodBalances": "Starting Period Balances",
-    "endingPeriodBalances": "Ending Period Balances",
-    "startPositions": "Starting Positions Snapshot",
-    "endPositions": "Ending Positions Snapshot",
+    "startingPeriodBalances": "期初餘額",
+    "endingPeriodBalances": "期末餘額",
+    "startPositions": "倉位期初快照",
+    "endPositions": "倉位期末快照",
     "movements": "活動"
   },
   "theme": {

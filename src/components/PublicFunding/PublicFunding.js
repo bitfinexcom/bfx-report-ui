@@ -5,6 +5,7 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
+import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
 import SyncNotSetYet from 'ui/SyncNotSetYet'
@@ -134,6 +135,8 @@ class PublicFunding extends PureComponent {
             <TimeRange />
             {renderSymbolSelector}
             {' '}
+            <ColumnsFilter target={TYPE} />
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncSymbolPrefButton />
           </h4>
@@ -148,6 +151,8 @@ class PublicFunding extends PureComponent {
             {' '}
             <TimeRange />
             {renderSymbolSelector}
+            {' '}
+            <ColumnsFilter target={TYPE} />
             {' '}
             <ExportButton handleClickExport={handleClickExport} />
             {' '}

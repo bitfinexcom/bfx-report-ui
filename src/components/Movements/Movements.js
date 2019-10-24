@@ -5,6 +5,7 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
+import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
@@ -26,8 +27,9 @@ import { propTypes, defaultProps } from './Movements.props'
 
 const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
 // we treat withdrawals and deposits in the same way
-const LIMIT = getQueryLimit(queryConstants.MENU_MOVEMENTS)
-const PAGE_SIZE = getPageSize(queryConstants.MENU_MOVEMENTS)
+const TYPE = queryConstants.MENU_MOVEMENTS
+const LIMIT = getQueryLimit(TYPE)
+const PAGE_SIZE = getPageSize(TYPE)
 
 class Movements extends PureComponent {
   componentDidMount() {
@@ -120,6 +122,8 @@ class Movements extends PureComponent {
             <TimeRange />
             {renderSymbolSelector}
             {' '}
+            <ColumnsFilter target={TYPE} />
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData />
@@ -133,6 +137,8 @@ class Movements extends PureComponent {
             {' '}
             <TimeRange />
             {renderSymbolSelector}
+            {' '}
+            <ColumnsFilter target={TYPE} />
             {' '}
             <ExportButton handleClickExport={handleClickExport} />
             {' '}
