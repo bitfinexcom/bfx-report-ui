@@ -75,7 +75,7 @@ class ExportDialog extends PureComponent {
       return null
     }
     const isWallets = location && location.pathname && getTarget(location.pathname) === queryConstants.MENU_WALLETS
-    const datetime = getFullTime(timestamp, true)
+    const datetime = getFullTime(timestamp, true, true)
     const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
     const intlType = t(`${type}.title`)
     const renderMessage = !email ? (

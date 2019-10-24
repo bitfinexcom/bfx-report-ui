@@ -17,8 +17,8 @@ export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FO
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
 export const getBaseQueryLimit = state => getBase(state).queryLimit || types.DEFAULT_BASE_QUERY_LIMIT
 
-export const getFullTime = state => (mts, full) => (mts ? formatTime(mts, {
-  timezone: getTimezone(state),
+export const getFullTime = state => (mts, full, inputTime = false) => (mts ? formatTime(mts, {
+  timezone: inputTime ? getInputTimezone(state) : getTimezone(state),
   dateFormat: getDateFormat(state),
   milliseconds: getShowMilliseconds(state),
   full,
