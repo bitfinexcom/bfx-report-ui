@@ -1,10 +1,11 @@
-import { put, call } from 'redux-saga/effects'
+import { put, select, call } from 'redux-saga/effects'
 import { cloneableGenerator } from 'redux-saga/utils'
 
 import { frameworkCheck } from 'state/ui/saga'
 
 import { fetchTaxReport, getReqTaxReport } from '../saga'
 import actions from '../actions'
+import selectors from '../selectors'
 
 describe('Tax report saga', () => {
   const generator = cloneableGenerator(fetchTaxReport)(actions.fetchTaxReport())
@@ -32,13 +33,13 @@ describe('Tax report saga', () => {
     })
   })
 
-  it('sets params from the payload', () => {
+  it('gets params from store', () => {
     const result = generator.next(true).value
-    expect(result).toEqual(put(actions.setParams({})))
+    expect(result).toEqual(select(selectors.getParams))
   })
 
   it('calls the API', () => {
-    const result = generator.next().value
+    const result = generator.next({}).value
     expect(result).toEqual(call(getReqTaxReport, {}))
   })
 
