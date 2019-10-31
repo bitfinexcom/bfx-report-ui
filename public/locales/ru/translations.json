@@ -403,6 +403,11 @@
       "startDateTooltip": "Выберите начальное время",
       "endDateTooltip": "Выберите конечное время"
     },
+    "sections": {
+      "startSnapshot": "Начальный снапшот",
+      "endSnapshot": "Конечный снапшот",
+      "finalResult": "Финальный результат"
+    },
     "columns": {
       "walletsTotal": "ИТОГО БАЛАНСА НА КОШЕЛЬКАХ (USD)",
       "positionsTotal": "ВСЕГО P/L ПОЗИЦИЙ (USD)",

@@ -403,6 +403,11 @@
       "startDateTooltip": "选择开始时间",
       "endDateTooltip": "选择结束时间"
     },
+    "sections": {
+      "startSnapshot": "期初快照",
+      "endSnapshot": "期末快照",
+      "finalResult": "最终结果"
+    },
     "columns": {
       "walletsTotal": "钱包总余额 (美元)",
       "positionsTotal": "仓位总损益 (美元)",
