@@ -5,11 +5,13 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import queryString from 'query-string'
+import _includes from 'lodash/includes'
 
 import { LANGUAGES_MAP } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
 import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
 import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
@@ -39,9 +41,11 @@ import {
   getTimeFrame,
 } from './selectors'
 import actions from './actions'
+import { NO_QUERY_LIMIT_TARGETS } from './utils'
 import types from './constants'
 
 const {
+  MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -92,6 +96,8 @@ const getMultipleCsv = params => makeFetchCall('getMultipleCsv', params)
 
 function getSelector(target) {
   switch (target) {
+    case MENU_DERIVATIVES:
+      return getDerivativesPairs
     case MENU_FCREDIT:
       return getFCreditSymbols
     case MENU_FLOAN:
@@ -147,6 +153,7 @@ function formatSymbol(target, sign) {
     case MENU_PUBLIC_FUNDING:
       return `f${mapRequestSymbols(sign)}`
     // sections with pairs
+    case MENU_DERIVATIVES:
     case MENU_ORDERS:
     case MENU_TICKERS:
     case MENU_TRADES:
@@ -162,105 +169,130 @@ function formatSymbol(target, sign) {
   }
 }
 
+function* getOptions({ target, query }) {
+  const options = {}
+  if (!_includes(NO_QUERY_LIMIT_TARGETS, target)) {
+    Object.assign(options, getTimeFrame(query, target))
+    const getQueryLimit = yield select(getTargetQueryLimit)
+    options.limit = getQueryLimit(target)
+  }
+  options.timezone = yield select(getTimezone)
+  options.dateFormat = yield select(getDateFormat)
+  options.milliseconds = yield select(getShowMilliseconds)
+  const selector = getSelector(target)
+  const sign = selector ? yield select(selector) : ''
+
+  switch (target) {
+    case MENU_WALLETS:
+    case MENU_SNAPSHOTS:
+      options.end = sign || undefined
+      break
+    case MENU_TAX_REPORT:
+      options.start = sign.start || undefined
+      options.end = sign.end || undefined
+      break
+    case MENU_POSITIONS_AUDIT:
+      options.id = sign || undefined
+      break
+    default: {
+      const symbol = formatSymbol(target, sign)
+      if ((Array.isArray(symbol) && symbol.length > 0)
+        || (typeof symbol === 'string' && symbol !== '')) {
+        options.symbol = symbol
+      }
+      break
+    }
+  }
+
+  switch (target) {
+    case MENU_DERIVATIVES:
+      options.method = 'getStatusMessagesCsv'
+      break
+    case MENU_FCREDIT:
+      options.method = 'getFundingCreditHistoryCsv'
+      break
+    case MENU_FLOAN:
+      options.method = 'getFundingLoanHistoryCsv'
+      break
+    case MENU_FOFFER:
+      options.method = 'getFundingOfferHistoryCsv'
+      break
+    case MENU_FPAYMENT:
+      options.method = 'getLedgersCsv'
+      options.isMarginFundingPayment = true
+      break
+    case MENU_ORDERS:
+      options.method = 'getOrdersCsv'
+      break
+    case MENU_TICKERS:
+      options.method = 'getTickersHistoryCsv'
+      break
+    case MENU_TRADES:
+      options.method = 'getTradesCsv'
+      break
+    case MENU_WITHDRAWALS:
+      options.method = 'getMovementsCsv'
+      options.isWithdrawals = true
+      break
+    case MENU_DEPOSITS:
+      options.method = 'getMovementsCsv'
+      options.isDeposits = true
+      break
+    case MENU_POSITIONS:
+      options.method = 'getPositionsHistoryCsv'
+      break
+    case MENU_POSITIONS_ACTIVE:
+      options.method = 'getActivePositionsCsv'
+      break
+    case MENU_POSITIONS_AUDIT:
+      options.method = 'getPositionsAuditCsv'
+      break
+    case MENU_PUBLIC_FUNDING:
+      options.method = 'getPublicTradesCsv'
+      break
+    case MENU_PUBLIC_TRADES:
+      options.method = 'getPublicTradesCsv'
+      break
+    case MENU_SNAPSHOTS:
+      options.method = 'getFullSnapshotReportCsv'
+      break
+    case MENU_TAX_REPORT:
+      options.method = 'getFullTaxReportCsv'
+      break
+    case MENU_WALLETS:
+      options.method = 'getWalletsCsv'
+      break
+    case MENU_LEDGERS:
+    default:
+      options.method = 'getLedgersCsv'
+      break
+  }
+
+  return options
+}
+
 function* exportCSV({ payload: targets }) {
   try {
     const query = yield select(getQuery)
     const multiExport = []
     // eslint-disable-next-line no-restricted-syntax
     for (const target of targets) {
-      const options = {}
-      if (target !== MENU_WALLETS && target !== MENU_SNAPSHOTS && target !== MENU_TAX_REPORT) {
-        Object.assign(options, getTimeFrame(query, target))
-        const getQueryLimit = yield select(getTargetQueryLimit)
-        options.limit = getQueryLimit(target)
-      }
-      options.timezone = yield select(getTimezone)
-      options.dateFormat = yield select(getDateFormat)
-      options.milliseconds = yield select(getShowMilliseconds)
-      const selector = getSelector(target)
-      const sign = selector ? yield select(selector) : ''
-      switch (target) {
-        case MENU_WALLETS:
-        case MENU_SNAPSHOTS:
-          options.end = sign || undefined
-          break
-        case MENU_TAX_REPORT:
-          options.start = sign.start || undefined
-          options.end = sign.end || undefined
-          break
-        case MENU_POSITIONS_AUDIT:
-          options.id = sign || undefined
-          break
-        default: {
-          const symbol = formatSymbol(target, sign)
-          if ((Array.isArray(symbol) && symbol.length > 0)
-            || (typeof symbol === 'string' && symbol !== '')) {
-            options.symbol = symbol
-          }
-          break
-        }
-      }
-      switch (target) {
-        case MENU_FCREDIT:
-          options.method = 'getFundingCreditHistoryCsv'
-          break
-        case MENU_FLOAN:
-          options.method = 'getFundingLoanHistoryCsv'
-          break
-        case MENU_FOFFER:
-          options.method = 'getFundingOfferHistoryCsv'
-          break
-        case MENU_FPAYMENT:
-          options.method = 'getLedgersCsv'
-          options.isMarginFundingPayment = true
-          break
-        case MENU_ORDERS:
-          options.method = 'getOrdersCsv'
-          break
-        case MENU_TICKERS:
-          options.method = 'getTickersHistoryCsv'
-          break
-        case MENU_TRADES:
-          options.method = 'getTradesCsv'
-          break
-        case MENU_WITHDRAWALS:
-          options.method = 'getMovementsCsv'
-          options.isWithdrawals = true
-          break
-        case MENU_DEPOSITS:
-          options.method = 'getMovementsCsv'
-          options.isDeposits = true
-          break
-        case MENU_POSITIONS:
-          options.method = 'getPositionsHistoryCsv'
-          break
-        case MENU_POSITIONS_ACTIVE:
-          options.method = 'getActivePositionsCsv'
-          break
-        case MENU_POSITIONS_AUDIT:
-          options.method = 'getPositionsAuditCsv'
-          break
-        case MENU_PUBLIC_FUNDING:
-          options.method = 'getPublicTradesCsv'
-          break
-        case MENU_PUBLIC_TRADES:
-          options.method = 'getPublicTradesCsv'
-          break
-        case MENU_SNAPSHOTS:
-          options.method = 'getFullSnapshotReportCsv'
-          break
-        case MENU_TAX_REPORT:
-          options.method = 'getFullTaxReportCsv'
-          break
-        case MENU_WALLETS:
-          options.method = 'getWalletsCsv'
-          break
-        case MENU_LEDGERS:
-        default:
-          options.method = 'getLedgersCsv'
-          break
-      }
+      const options = yield call(getOptions, { target, query })
       multiExport.push(options)
+
+      // add 2 additional snapshot reports
+      if (target === MENU_TAX_REPORT) {
+        const { start, end } = yield select(getTaxReportParams)
+        const snapshotOptions = yield call(getOptions, { target: MENU_SNAPSHOTS, query })
+        multiExport.push({
+          ...snapshotOptions,
+          end: start || undefined,
+        })
+        multiExport.push({
+          ...snapshotOptions,
+          end: end || undefined,
+        })
+      }
     }
 
     const locale = yield select(getLocale)

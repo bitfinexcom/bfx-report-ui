@@ -8,6 +8,7 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapPair, mapRequestPairs } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
@@ -25,9 +26,11 @@ function getReqPublicTrades({
   smallestMts,
   query,
   targetPair,
+  filter,
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
+  params.filter = filter
   if (targetPair) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPair, true))
   }
@@ -43,15 +46,18 @@ function* fetchPublicTrades({ payload: pair }) {
       yield put(actions.setTargetPair(targetPair))
     }
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPublicTrades, {
       smallestMts: 0,
       query,
       targetPair,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicTrades, {
       smallestMts: 0,
       query,
       targetPair,
+      filter,
     })
     yield put(actions.updatePublicTrades(result, LIMIT, PAGE_SIZE))
 
@@ -84,15 +90,18 @@ function* fetchNextPublicTrades() {
       return
     }
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPublicTrades, {
       smallestMts,
       query,
       targetPair,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicTrades, {
       smallestMts,
       query,
       targetPair,
+      filter,
     })
     yield put(actions.updatePublicTrades(result, LIMIT, PAGE_SIZE))
 

@@ -8,7 +8,7 @@ import { store } from 'state/store'
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import {
-  getSymbolsURL, demapSymbols, demapPairs, formatSymbolToPair,
+  getSymbolsURL, demapSymbols, demapPairs, formatSymbolToPair, mapSymbol,
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 
@@ -64,6 +64,10 @@ export function formatTime(mts, {
   milliseconds,
   timezone,
 }) {
+  if (!moment(mts).isValid()) {
+    return ''
+  }
+
   const baseFormat = dateFormat
     ? `${dateFormat} HH:mm:ss`
     : 'YY-MM-DD HH:mm:ss'
@@ -293,6 +297,36 @@ export const getFrameworkPositionsTickersEntries = entries => entries.map((entry
   }
 })
 
+export const getWalletsTickersEntries = entries => entries.map((entry) => {
+  const {
+    walletType,
+    symbol,
+    amount,
+  } = entry
+
+  return {
+    walletType,
+    pair: formatSymbolToPair(symbol),
+    amount,
+  }
+})
+
+export const getWalletsEntries = entries => entries.map((entry) => {
+  const {
+    type,
+    currency,
+    balance,
+    balanceUsd,
+  } = entry
+
+  return {
+    type,
+    currency: mapSymbol(currency),
+    balance,
+    balanceUsd,
+  }
+}).sort((a, b) => a.currency.localeCompare(b.currency))
+
 export default {
   checkFetch,
   checkEmail,
@@ -315,5 +349,7 @@ export default {
   removeUrlParams,
   getFrameworkPositionsEntries,
   getFrameworkPositionsTickersEntries,
+  getWalletsTickersEntries,
+  getWalletsEntries,
   timeOffset: memoizeOne(timeOffset),
 }

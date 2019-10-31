@@ -5,6 +5,7 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
+import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
@@ -108,6 +109,8 @@ class FundingOfferHistory extends PureComponent {
             <TimeRange />
             {renderSymbolSelector}
             {' '}
+            <ColumnsFilter target={TYPE} />
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData />
@@ -121,6 +124,8 @@ class FundingOfferHistory extends PureComponent {
             {' '}
             <TimeRange />
             {renderSymbolSelector}
+            {' '}
+            <ColumnsFilter target={TYPE} />
             {' '}
             <ExportButton handleClickExport={handleClickExport} />
             {' '}

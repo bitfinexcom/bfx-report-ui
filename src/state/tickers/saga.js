@@ -10,6 +10,7 @@ import {
   formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
 } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
@@ -27,9 +28,11 @@ function getReqTickers({
   smallestMts,
   query,
   targetPairs,
+  filter,
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
+  params.filter = filter
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
@@ -46,15 +49,18 @@ function* fetchTickers({ payload: pair }) {
       yield put(actions.setTargetPairs(targetPairs))
     }
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqTickers, {
       smallestMts: 0,
       query,
       targetPairs,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTickers, {
       smallestMts: 0,
       query,
       targetPairs,
+      filter,
     })
     yield put(actions.updateTickers(result, LIMIT, PAGE_SIZE))
 
@@ -87,15 +93,18 @@ function* fetchNextTickers() {
       return
     }
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqTickers, {
       smallestMts,
       query,
       targetPairs,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTickers, {
       smallestMts,
       query,
       targetPairs,
+      filter,
     })
     yield put(actions.updateTickers(result, LIMIT, PAGE_SIZE))
 

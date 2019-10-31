@@ -10,6 +10,7 @@ import {
   formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
 } from 'state/symbols/utils'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
+import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
@@ -26,9 +27,11 @@ function getReqTrades({
   smallestMts,
   query,
   targetPairs,
+  filter,
   queryLimit,
 }) {
   const params = getTimeFrame(query, smallestMts)
+  params.filter = filter
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
@@ -48,18 +51,21 @@ function* fetchTrades({ payload: pair }) {
       yield put(actions.setTargetPairs(targetPairs))
     }
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
     const { result: resulto, error: erroro } = yield call(getReqTrades, {
       smallestMts: 0,
       query,
       targetPairs,
+      filter,
       queryLimit,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTrades, {
       smallestMts: 0,
       query,
       targetPairs,
+      filter,
       queryLimit,
     })
     yield put(actions.updateTrades(result, queryLimit, PAGE_SIZE))
@@ -88,6 +94,7 @@ function* fetchNextTrades() {
       smallestMts,
       targetPairs,
     } = yield select(getTrades)
+    const filter = yield select(getFilterQuery, TYPE)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
     // data exist, no need to fetch again
@@ -99,12 +106,14 @@ function* fetchNextTrades() {
       smallestMts,
       query,
       targetPairs,
+      filter,
       queryLimit,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTrades, {
       smallestMts,
       query,
       targetPairs,
+      filter,
       queryLimit,
     })
     yield put(actions.updateTrades(result, queryLimit, PAGE_SIZE))

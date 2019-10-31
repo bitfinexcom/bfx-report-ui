@@ -8,6 +8,8 @@ import persistMigrations from 'state/persist.migrations'
 import accountBalanceReducer from './accountBalance/reducer'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
+import derivativesReducer from './derivatives/reducer'
+import filtersReducer from './filters/reducer'
 import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
 import fundingLoanHistoryReducer from './fundingLoanHistory/reducer'
 import fundingOfferHistoryReducer from './fundingOfferHistory/reducer'
@@ -32,7 +34,7 @@ import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
 
-const PERSIST_WHITELIST = ['base']
+const PERSIST_WHITELIST = ['base', 'sync']
 
 const PERSIST_VERSION = 0 // starts with -1
 const PERSIST_DEBUG = false
@@ -51,7 +53,9 @@ const BASE_REDUCERS = {
   audit: positionsAuditReducer,
   auth: authReducer,
   base: baseReducer,
+  derivatives: derivativesReducer,
   fcredit: fundingCreditHistoryReducer,
+  filters: filtersReducer,
   floan: fundingLoanHistoryReducer,
   foffer: fundingOfferHistoryReducer,
   ledgers: ledgersReducer,

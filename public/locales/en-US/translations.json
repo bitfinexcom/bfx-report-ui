@@ -32,9 +32,73 @@
       "endDateTooltip": "Select end time"
     }
   },
-  "column":{
+  "column": {
+    "actual-price": "ACTUAL PRICE",
+    "amount": "AMOUNT",
+    "amount-exe": "EXECUTED AMOUNT",
+    "amountUsd": "AMOUNT (USD)",
+    "ask": "ASK",
+    "avgprice": "AVERAGE EXECUTION PRICE",
+    "balance": "BALANCE",
+    "balanceUsd": "BALANCE (USD)",
+    "base-price": "BASE PRICE",
+    "bid": "BID",
+    "close": "CLOSED",
+    "collateral": "COLLATERAL",
+    "create": "CREATED",
+    "currency": "CURRENCY",
+    "date": "DATE",
+    "days": "Day(s)",
+    "description": "DESCRIPTION",
+    "destination": "DESTINATION",
+    "fee": "FEE",
+    "fees": "FEES",
+    "fundBalance": "INSURANCE FUND BALANCE",
+    "fundingAccrued": "NEXT FUNDING ACCRUED",
+    "fundingStep": "NEXT FUNDING STEP",
     "id": "#",
-    "usd": "USD"
+    "lastpayout": "LAST PAYOUT",
+    "liq-price": "LIQ PRICE",
+    "meta": "METADATA",
+    "opening": "OPENED",
+    "orderid": "ORDER ID",
+    "pair": "PAIR",
+    "period": "PERIOD",
+    "pl": "P/L",
+    "plUsd": "P/L (USD)",
+    "plperc": "P/L%",
+    "positionpair": "POSITION PAIR",
+    "price": "PRICE",
+    "priceDeriv": "DERIV PRICE",
+    "priceSpot": "SPOT PRICE",
+    "pricetrail": "TRAILING PRICE",
+    "rate": "RATE",
+    "side": "SIDE",
+    "status": "STATUS",
+    "swap": "FUNDING COST",
+    "swap-type": "FUNDING TYPE",
+    "symbol": "CURRENCY",
+    "time": "TIME",
+    "transactionId": "TRANSACTION ID",
+    "type": "TYPE",
+    "typeprev": "PREVIOUS ORDER TYPE",
+    "update": "UPDATED",
+    "usd": "USD",
+    "wallet": "WALLET"
+  },
+  "columnsfilter": {
+    "title": "Filter Columns",
+    "cancel": "Cancel",
+    "apply": "Apply Filters",
+    "filters": {
+      "contains": "Contains",
+      "beginsWith": "Begins with",
+      "endsWith": "Ends with",
+      "equalTo": "Equal to",
+      "notEqualTo": "Not equal to",
+      "greaterThan": "Greater than",
+      "lessThan": "Less than"
+    }
   },
   "concentrationrisk": {
     "title": "Concentration Risk",
@@ -52,6 +116,18 @@
   "copy": "Copy",
   "deposits": {
     "title": "Deposits"
+  },
+  "derivatives": {
+    "title": "Derivatives",
+    "column": {
+      "pair": "PAIR",
+      "priceDeriv": "DERIV PRICE",
+      "priceSpot": "SPOT PRICE",
+      "fundBalance": "INSURANCE FUND BALANCE",
+      "fundingAccrued": "NEXT FUNDING ACCRUED",
+      "fundingStep": "NEXT FUNDING STEP",
+      "update": "UPDATED"
+    }
   },
   "download": {
     "query": "Prepare Export",
@@ -327,14 +403,22 @@
       "startDateTooltip": "Select a start time",
       "endDateTooltip": "Select end time"
     },
-    "winloss": "Total Amount Win/Loss",
-    "startPositions": "Start Positions",
-    "endPositions": "End Positions",
-    "tickers": "Tickers",
-    "movements": "Movements",
-    "deposits": "Deposits",
-    "withdrawals": "Withdrawals",
-    "movementsTotal": "Total Amount"
+    "sections": {
+      "startSnapshot": "Start Snapshot",
+      "endSnapshot": "End Snapshot",
+      "finalResult": "Final Result"
+    },
+    "columns": {
+      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
+      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
+      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
+      "totalResult": "TOTAL RESULT (USD)"
+    },
+    "startingPeriodBalances": "Starting Period Balances",
+    "endingPeriodBalances": "Ending Period Balances",
+    "startPositions": "Starting Positions Snapshot",
+    "endPositions": "Ending Positions Snapshot",
+    "movements": "Movements"
   },
   "theme": {
     "light": "Light",

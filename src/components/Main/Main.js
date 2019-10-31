@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import AccountBalance from 'components/AccountBalance'
 import AverageWinLoss from 'components/AverageWinLoss'
 import ConcentrationRisk from 'components/ConcentrationRisk'
+import Derivatives from 'components/Derivatives'
 import FrameworkDialog from 'components/FrameworkDialog'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
@@ -34,6 +35,7 @@ import CustomDialog from './CustomDialog'
 const {
   MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
+  MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -54,6 +56,8 @@ const {
   MENU_WALLETS,
   MENU_WIN_LOSS,
 } = queryType
+
+const TAX_REPORT_SECTION = '/:section(start_snapshot|end_snapshot|result)'
 
 class Main extends PureComponent {
   constructor(props) {
@@ -263,6 +267,15 @@ class Main extends PureComponent {
             />
             <Route
               exact
+              path={getPath(MENU_DERIVATIVES)}
+              render={() => <Derivatives handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_DERIVATIVES)}/:pair`}
+              render={() => <Derivatives handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
               path={getPath(MENU_POSITIONS_AUDIT)}
               render={() => <PositionsAudit handleClickExport={this.handleClickExport} noid />}
             />
@@ -310,9 +323,18 @@ class Main extends PureComponent {
                   path={getPath(MENU_SNAPSHOTS)}
                   render={() => <Snapshots handleClickExport={this.handleClickExport} />}
                 />
+
                 <Route
                   exact
                   path={getPath(MENU_TAX_REPORT)}
+                  render={() => <TaxReport handleClickExport={this.handleClickExport} />}
+                />
+                <Route
+                  path={`${getPath(MENU_TAX_REPORT)}/:section(result)`}
+                  render={() => <TaxReport handleClickExport={this.handleClickExport} />}
+                />
+                <Route
+                  path={`${getPath(MENU_TAX_REPORT)}${TAX_REPORT_SECTION}/:subsection(positions|tickers|wallets)`}
                   render={() => <TaxReport handleClickExport={this.handleClickExport} />}
                 />
               </Fragment>

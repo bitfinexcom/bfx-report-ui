@@ -7,6 +7,7 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
@@ -27,9 +28,11 @@ function getReqMovements({
   smallestMts,
   query,
   targetSymbols,
+  filter,
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.limit = LIMIT
+  params.filter = filter
   if (targetSymbols.length) {
     params.symbol = mapRequestSymbols(targetSymbols)
   }
@@ -46,15 +49,18 @@ function* fetchMovements({ payload: symbol }) {
       yield put(actions.setTargetSymbols(targetSymbols))
     }
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqMovements, {
       smallestMts: 0,
       query,
       targetSymbols,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqMovements, {
       smallestMts: 0,
       query,
       targetSymbols,
+      filter,
     })
     yield put(actions.updateMovements(result, LIMIT, PAGE_SIZE))
 
@@ -87,15 +93,18 @@ function* fetchNextMovements() {
       return
     }
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqMovements, {
       smallestMts,
       query,
       targetSymbols,
+      filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqMovements, {
       smallestMts,
       query,
       targetSymbols,
+      filter,
     })
     yield put(actions.updateMovements(result, LIMIT, PAGE_SIZE))
 

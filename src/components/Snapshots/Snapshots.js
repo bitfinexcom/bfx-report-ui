@@ -8,31 +8,24 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
-import _isNumber from 'lodash/isNumber'
 
 import DateInput from 'ui/DateInput'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
-import DataTable from 'ui/DataTable'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
-import { getFrameworkPositionsColumns, getPositionsTickersColumns } from 'utils/columns'
 
-import getTotalPositionsColumns from './TotalPositions.columns'
-import getTotalWalletsColumns from './TotalWallets.columns'
-import getWalletsTickersColumns from './WalletsTickers.columns'
-import getWalletsColumns from './Wallets.columns'
+import PositionsSnapshot from './PositionsSnapshot'
+import TickersSnapshot from './TickersSnapshot'
+import WalletsSnapshot from './WalletsSnapshot'
 import { propTypes, defaultProps } from './Snapshots.props'
 
 const {
   MENU_POSITIONS,
   MENU_TICKERS,
   MENU_WALLETS,
-  WALLET_EXCHANGE,
-  WALLET_MARGIN,
-  WALLET_FUNDING,
 } = queryConstants
 
 class Snapshots extends PureComponent {
@@ -106,8 +99,6 @@ class Snapshots extends PureComponent {
   render() {
     const {
       currentTime,
-      getFullTime,
-      timeOffset,
       positionsTotalPlUsd,
       positionsEntries,
       positionsTickersEntries,
@@ -120,6 +111,16 @@ class Snapshots extends PureComponent {
       t,
     } = this.props
     const { timestamp } = this.state
+
+    if (loading) {
+      return (
+        <Fragment>
+          <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+            <Loading title='snapshots.title' />
+          </Card>
+        </Fragment>
+      )
+    }
 
     const section = this.getCurrentSection()
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
@@ -193,116 +194,45 @@ class Snapshots extends PureComponent {
       </Fragment>
     )
 
-    let showContent
-    if (loading) {
-      showContent = (
-        <Loading title='snapshots.title' />
-      )
-    } else if ((section === MENU_POSITIONS && !positionsEntries.length)
+    const isEmpty = (section === MENU_POSITIONS && !positionsEntries.length)
       || (section === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries)
-      || (section === MENU_WALLETS && !walletsEntries.length)) {
+      || (section === MENU_WALLETS && !walletsEntries.length)
+
+    let showContent
+    if (isEmpty) {
       showContent = (
         <Fragment>
-          {renderTitle}
           <br />
           <NoData descId='snapshots.nodata' />
         </Fragment>
       )
     } else if (section === MENU_WALLETS) {
-      const totalWalletsColumns = getTotalWalletsColumns({ walletsTotalBalanceUsd })
-
-      const exchangeData = walletsEntries.filter(entry => entry.type === WALLET_EXCHANGE)
-      const marginData = walletsEntries.filter(entry => entry.type === WALLET_MARGIN)
-      const fundingData = walletsEntries.filter(entry => entry.type === WALLET_FUNDING)
-      const exchangeColums = getWalletsColumns({ filteredData: exchangeData, t })
-      const marginColums = getWalletsColumns({ filteredData: marginData, t })
-      const fundingColums = getWalletsColumns({ filteredData: fundingData, t })
-      const exchangeRows = exchangeData.length
-      const marginRows = marginData.length
-      const fundingRows = fundingData.length
-
       showContent = (
-        <Fragment>
-          {renderTitle}
-          <br />
-          {_isNumber(walletsTotalBalanceUsd) && (
-            <DataTable
-              numRows={1}
-              tableColums={totalWalletsColumns}
-            />
-          ) }
-          <h4>
-            {t('wallets.header.exchange')}
-          </h4>
-          <DataTable
-            numRows={exchangeRows}
-            tableColums={exchangeColums}
-          />
-          <h4>
-            {t('wallets.header.margin')}
-          </h4>
-          <DataTable
-            numRows={marginRows}
-            tableColums={marginColums}
-          />
-          <h4>
-            {t('wallets.header.funding')}
-          </h4>
-          <DataTable
-            numRows={fundingRows}
-            tableColums={fundingColums}
-          />
-        </Fragment>
+        <WalletsSnapshot
+          totalBalanceUsd={walletsTotalBalanceUsd}
+          entries={walletsEntries}
+        />
       )
     } else if (section === MENU_POSITIONS) {
-      const totalPositionsColumns = getTotalPositionsColumns({ positionsTotalPlUsd })
-      const positionsColumns = getFrameworkPositionsColumns({
-        filteredData: positionsEntries,
-        getFullTime,
-        t,
-        timeOffset,
-      })
-
       showContent = (
-        <Fragment>
-          {renderTitle}
-          <br />
-          {_isNumber(positionsTotalPlUsd) && (
-            <DataTable
-              numRows={1}
-              tableColums={totalPositionsColumns}
-            />
-          ) }
-          <br />
-          <DataTable
-            numRows={positionsEntries.length}
-            tableColums={positionsColumns}
-          />
-        </Fragment>
+        <PositionsSnapshot
+          totalPlUsd={positionsTotalPlUsd}
+          entries={positionsEntries}
+        />
       )
     } else {
-      const positionsTickersColumns = getPositionsTickersColumns({ filteredData: positionsTickersEntries })
-      const walletsTickersColumns = getWalletsTickersColumns({ filteredData: walletsTickersEntries, t })
-
       showContent = (
-        <Fragment>
-          {renderTitle}
-          <h4>{t('positions.title')}</h4>
-          <DataTable
-            numRows={positionsTickersEntries.length}
-            tableColums={positionsTickersColumns}
-          />
-          <h4>{t('wallets.title')}</h4>
-          <DataTable
-            numRows={walletsTickersEntries.length}
-            tableColums={walletsTickersColumns}
-          />
-        </Fragment>
+        <TickersSnapshot
+          positionsTickersEntries={positionsTickersEntries}
+          walletsTickersEntries={walletsTickersEntries}
+        />
       )
     }
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        {renderTitle}
+        <br />
         {showContent}
       </Card>
     )

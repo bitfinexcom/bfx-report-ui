@@ -10,6 +10,7 @@ import {
   formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
 } from 'state/symbols/utils'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
+import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
@@ -26,9 +27,11 @@ function getReqOrders({
   smallestMts,
   query,
   targetPairs,
+  filter,
   queryLimit,
 }) {
   const params = getTimeFrame(query, smallestMts)
+  params.filter = filter
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
@@ -48,18 +51,21 @@ function* fetchOrders({ payload: pair }) {
       yield put(actions.setTargetPairs(targetPairs))
     }
     const query = yield select(getQuery)
+    const filter = yield select(getFilterQuery, TYPE)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
     const { result: resulto, error: erroro } = yield call(getReqOrders, {
       smallestMts: 0,
       query,
       targetPairs,
+      filter,
       queryLimit,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqOrders, {
       smallestMts: 0,
       query,
       targetPairs,
+      filter,
       queryLimit,
     })
     yield put(actions.updateOrders(result, queryLimit, PAGE_SIZE))
@@ -88,6 +94,7 @@ function* fetchNextOrders() {
       smallestMts,
       targetPairs,
     } = yield select(getOrders)
+    const filter = yield select(getFilterQuery, TYPE)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
     // data exist, no need to fetch again
@@ -99,12 +106,14 @@ function* fetchNextOrders() {
       smallestMts,
       query,
       targetPairs,
+      filter,
       queryLimit,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqOrders, {
       smallestMts,
       query,
       targetPairs,
+      filter,
       queryLimit,
     })
     yield put(actions.updateOrders(result, queryLimit, PAGE_SIZE))

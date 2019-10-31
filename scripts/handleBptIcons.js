@@ -32,7 +32,9 @@ const USED_ICONS = [
   IconNames.PULSE,
   IconNames.REFRESH,
   IconNames.SEARCH,
+  IconNames.SERIES_DERIVED,
   IconNames.SMALL_CROSS,
+  IconNames.TH_FILTERED,
   IconNames.UPDATED,
 ]
 

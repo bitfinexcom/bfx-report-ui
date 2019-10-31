@@ -12,6 +12,7 @@ const {
   MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
+  MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -36,6 +37,7 @@ const {
 export const TYPE_WHITELIST = [
   MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
+  MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -60,6 +62,7 @@ export const ROUTE_WHITELIST = [
   MENU_ACCOUNT_BALANCE,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
+  MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FLOAN,
   MENU_FOFFER,
@@ -78,6 +81,22 @@ export const ROUTE_WHITELIST = [
   MENU_WALLETS,
   MENU_WIN_LOSS,
   MENU_WITHDRAWALS,
+]
+
+export const FILTERS_WHITELIST = [
+  MENU_LEDGERS,
+  MENU_TRADES,
+  MENU_ORDERS,
+  MENU_MOVEMENTS,
+  MENU_POSITIONS,
+  MENU_FOFFER,
+  MENU_FLOAN,
+  MENU_FCREDIT,
+  MENU_FPAYMENT,
+  MENU_PUBLIC_TRADES,
+  MENU_PUBLIC_FUNDING,
+  MENU_TICKERS,
+  MENU_DERIVATIVES,
 ]
 
 // Should keep the order, which used in ExportTargetsSelector
@@ -109,11 +128,19 @@ const PUBLIC_TARGETS = [
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
+  MENU_DERIVATIVES,
 ]
 export const ORDERED_TARGETS = [
   ...BASIC_TARGETS,
   ...FUNDING_TARGETS,
   ...PUBLIC_TARGETS,
+]
+
+export const NO_QUERY_LIMIT_TARGETS = [
+  MENU_DERIVATIVES,
+  MENU_WALLETS,
+  MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
 ]
 
 export function isValidTimeStamp(n) {
@@ -133,6 +160,11 @@ const MAPPING = {
   [MENU_CONCENTRATION_RISK]: {
     icon: IconNames.CHART,
     path: '/concentration_risk',
+  },
+  [MENU_DERIVATIVES]: {
+    icon: IconNames.SERIES_DERIVED,
+    filterType: FILTER_PAIR,
+    path: '/derivatives',
   },
   [MENU_FCREDIT]: {
     icon: IconNames.BOOK,
@@ -286,11 +318,7 @@ function error(target, action) {
 // /target/BTCUSD
 // /target/BTCUSD?params=
 export function getTarget(link) {
-  let baseLink = link
-  if (link.slice(1).indexOf('/') > -1) {
-    const parts = link.split('/')
-    baseLink = link.replace(`/${parts[parts.length - 1]}`, '')
-  }
+  const baseLink = `/${link.split('/')[1]}`
   return PATHMAP[baseLink] || MENU_LEDGERS
 }
 
@@ -362,4 +390,5 @@ export default {
   ORDERED_TARGETS,
   ROUTE_WHITELIST,
   TYPE_WHITELIST,
+  NO_QUERY_LIMIT_TARGETS,
 }

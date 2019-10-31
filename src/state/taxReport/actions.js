@@ -2,11 +2,20 @@ import types from './constants'
 
 /**
  * Create an action to fetch Tax Report data.
- * @param {object} payload object contains options
  */
-export function fetchTaxReport(payload) {
+export function fetchTaxReport() {
   return {
     type: types.FETCH_TAX_REPORT,
+  }
+}
+
+/**
+ * Create an action to fetch Snapshot data.
+ * @param {string} payload section to fetch
+ */
+export function fetchTaxReportSnapshot(payload) {
+  return {
+    type: types.FETCH_SNAPSHOT,
     payload,
   }
 }
@@ -35,10 +44,12 @@ export function fetchFail(payload) {
 
 /**
  * Create an action to refresh Tax Report.
+ * * @param {object} payload object contains options
  */
-export function refresh() {
+export function refresh(payload) {
   return {
     type: types.REFRESH,
+    payload,
   }
 }
 
@@ -53,10 +64,23 @@ export function updateTaxReport(payload) {
   }
 }
 
+/**
+ * Create an action to update Tax Report Snapshot.
+ * @param {Object} payload data set and section
+ */
+export function updateTaxReportSnapshot(payload) {
+  return {
+    type: types.UPDATE_TAX_REPORT_SNAPSHOT,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   fetchTaxReport,
+  fetchTaxReportSnapshot,
   refresh,
   setParams,
   updateTaxReport,
+  updateTaxReportSnapshot,
 }
