@@ -46,10 +46,19 @@ class ColumnsFilter extends PureComponent {
     const { filters } = this.state
     const { target, setFilters } = this.props
 
+    const trimmedFilters = filters.map(filter => ({
+      ...filter,
+      value: filter.value.trim(),
+    }))
+
     this.toggleDialog()
     setFilters({
       section: target,
-      filters,
+      filters: trimmedFilters,
+    })
+
+    this.setState({
+      filters: trimmedFilters,
     })
   }
 
