@@ -2,6 +2,7 @@ import React, { Fragment, PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import AccountBalance from 'components/AccountBalance'
+import AffiliatesEarnings from 'components/AffiliatesEarnings'
 import AverageWinLoss from 'components/AverageWinLoss'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import Derivatives from 'components/Derivatives'
@@ -34,6 +35,7 @@ import CustomDialog from './CustomDialog'
 
 const {
   MENU_ACCOUNT_BALANCE,
+  MENU_AFFILIATES_EARNINGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -237,6 +239,15 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_FPAYMENT)}/:symbol`}
               render={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_AFFILIATES_EARNINGS)}
+              render={() => <AffiliatesEarnings handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_AFFILIATES_EARNINGS)}/:symbol`}
+              render={() => <AffiliatesEarnings handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact

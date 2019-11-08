@@ -12,6 +12,7 @@ import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { selectAuth } from 'state/auth/selectors'
+import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliatesEarnings/selectors'
 import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
 import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
@@ -46,6 +47,7 @@ import { NO_QUERY_LIMIT_TARGETS } from './utils'
 import types from './constants'
 
 const {
+  MENU_AFFILIATES_EARNINGS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FLOAN,
@@ -98,6 +100,8 @@ function getMultipleCsv(auth, params) {
 
 function getSelector(target) {
   switch (target) {
+    case MENU_AFFILIATES_EARNINGS:
+      return getAffiliatesEarningsSymbols
     case MENU_DERIVATIVES:
       return getDerivativesPairs
     case MENU_FCREDIT:
@@ -147,6 +151,7 @@ function formatSymbol(target, sign) {
   }
   switch (target) {
     // sections with a single symbol
+    case MENU_AFFILIATES_EARNINGS:
     case MENU_LEDGERS:
     case MENU_WITHDRAWALS:
     case MENU_DEPOSITS:
@@ -207,6 +212,10 @@ function* getOptions({ target, query }) {
   }
 
   switch (target) {
+    case MENU_AFFILIATES_EARNINGS:
+      options.method = 'getLedgersCsv'
+      options.isAffiliateRebate = true
+      break
     case MENU_DERIVATIVES:
       options.method = 'getStatusMessagesCsv'
       break

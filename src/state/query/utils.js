@@ -10,6 +10,7 @@ const {
   FILTER_PAIR,
   FILTER_SYMBOL,
   MENU_ACCOUNT_BALANCE,
+  MENU_AFFILIATES_EARNINGS,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_DERIVATIVES,
@@ -36,6 +37,7 @@ const {
 
 export const TYPE_WHITELIST = [
   MENU_ACCOUNT_BALANCE,
+  MENU_AFFILIATES_EARNINGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -60,6 +62,7 @@ export const TYPE_WHITELIST = [
 
 export const ROUTE_WHITELIST = [
   MENU_ACCOUNT_BALANCE,
+  MENU_AFFILIATES_EARNINGS,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_DERIVATIVES,
@@ -93,6 +96,7 @@ export const FILTERS_WHITELIST = [
   MENU_FLOAN,
   MENU_FCREDIT,
   MENU_FPAYMENT,
+  MENU_AFFILIATES_EARNINGS,
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
@@ -113,12 +117,13 @@ const BASIC_TARGETS = [
   MENU_SNAPSHOTS,
   MENU_TAX_REPORT,
 ]
-// MENU_FPAYMENT only for framework mode
+// MENU_FPAYMENT and MENU_AFFILIATES_EARNINGS only for framework mode
 const FUNDING_TARGETS = platform.showFrameworkMode ? [
   MENU_FOFFER,
   MENU_FLOAN,
   MENU_FCREDIT,
   MENU_FPAYMENT,
+  MENU_AFFILIATES_EARNINGS,
 ] : [
   MENU_FOFFER,
   MENU_FLOAN,
@@ -190,6 +195,13 @@ const MAPPING = {
   [MENU_FPAYMENT]: {
     icon: IconNames.BOOK,
     path: '/payments',
+    filterType: FILTER_SYMBOL,
+    // queryLimit: 500,
+    pageSize: 125,
+  },
+  [MENU_AFFILIATES_EARNINGS]: {
+    icon: IconNames.BOOK,
+    path: '/affiliates',
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
     pageSize: 125,
@@ -375,6 +387,7 @@ export function canChangeQueryLimit(target) {
     MENU_ORDERS,
     MENU_TRADES,
     MENU_FPAYMENT,
+    MENU_AFFILIATES_EARNINGS,
   ].includes(target)
 }
 
