@@ -90,6 +90,11 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
   display: none;
 }
 
+.bitfinex-nav-menu {
+  max-height: calc(100vh - 50px);
+  overflow: auto;
+}
+
 .bitfinex-compact-menu.#{$ns}-menu {
   min-width: 40px;
   width: 40px;
