@@ -9,7 +9,7 @@ import { MultiSelect } from '@blueprintjs/select'
 import { propTypes, defaultProps } from './MultiSymbolSelector.props'
 
 class MultiSymbolSelector extends PureComponent {
-  filterSymbol = (query, coin) => coin.indexOf(query.toUpperCase()) >= 0
+  filterSymbol = (query, coin) => coin.toUpperCase().indexOf(query.toUpperCase()) >= 0
 
   renderSymbol = (symbol, { modifiers }) => {
     if (!modifiers.matchesPredicate) {
@@ -47,12 +47,16 @@ class MultiSymbolSelector extends PureComponent {
       t,
     } = this.props
 
+    const items = coins.length
+      ? coins
+      : existingCoins
+
     return (
       <MultiSelect
         className='bitfinex-multi-select'
-        disabled={!coins.length}
+        disabled={!coins.length && !existingCoins.length}
         placeholder={t('selector.filter.symbol')}
-        items={coins || existingCoins}
+        items={items}
         itemRenderer={this.renderSymbol}
         itemPredicate={this.filterSymbol}
         onItemSelect={toggleSymbol}
