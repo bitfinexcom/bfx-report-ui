@@ -51,12 +51,16 @@ class MultiPairSelector extends PureComponent {
       t,
     } = this.props
 
+    const items = pairs.length
+      ? pairs
+      : existingPairs
+
     return (
       <MultiSelect
         className='bitfinex-multi-select'
-        disabled={pairs.length === 0}
+        disabled={!pairs.length && !existingPairs.length}
         placeholder={t('selector.filter.pair')}
-        items={pairs || existingPairs}
+        items={items}
         itemRenderer={this.renderPair}
         itemPredicate={this.filterPair}
         onItemSelect={this.togglePair}

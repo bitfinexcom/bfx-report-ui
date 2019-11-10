@@ -20,13 +20,13 @@ export const baseState = {
 
 export const basePairState = {
   ...baseState,
-  existingPairs: [],
+  existingPairs: [], // shown in selection when a full list of pairs is unavailable
   targetPairs: [],
 }
 
 export const baseSymbolState = {
   ...baseState,
-  existingCoins: [],
+  existingCoins: [], // shown in selection when a full list of symbols is unavailable
   targetSymbols: [],
 }
 
