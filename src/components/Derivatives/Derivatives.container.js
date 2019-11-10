@@ -8,6 +8,7 @@ import {
   removeTargetPair,
 } from 'state/derivatives/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getPairs } from 'state/symbols/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -19,6 +20,7 @@ import Derivatives from './Derivatives'
 
 const mapStateToProps = (state = {}) => ({
   entries: getEntries(state),
+  pairs: getPairs(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
   loading: !getDataReceived(state),
