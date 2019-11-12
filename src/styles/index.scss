@@ -1,5 +1,7 @@
 @import "./variables.scss";
 @import "./fonts/roboto.css";
+
+@import "components/Header/_Header.scss";
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "ui/Charts/Chart/_Chart.scss";
 @import "ui/ColumnsFilter/_ColumnsFilter.scss";

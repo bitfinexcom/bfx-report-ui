@@ -118,12 +118,7 @@ class Header extends PureComponent {
     ) : (
       <LangMenu />
     )
-    const renderEmail = email ? (
-      <Fragment>
-        {' '}
-        <span className='bitfinex-show-soft'>{email}</span>
-      </Fragment>
-    ) : null
+    const renderEmail = email ? <span className='header-email bitfinex-show-soft'>{email}</span> : null
 
     const renderSyncMode = platform.showFrameworkMode ? <SyncMode /> : null
 
@@ -153,7 +148,7 @@ class Header extends PureComponent {
     )
 
     return (
-      <Fragment>
+      <div className='header'>
         <Navbar fixedToTop>
           <NavbarGroup align='left'>
             <NavbarHeading>
@@ -175,7 +170,7 @@ class Header extends PureComponent {
           isPrefOpen={isPrefOpen}
           handlePrefDialogClose={this.handlePrefDialogClose}
         />
-      </Fragment>
+      </div>
     )
   }
 }
