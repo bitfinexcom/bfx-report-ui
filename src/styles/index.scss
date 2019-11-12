@@ -94,6 +94,7 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
 }
 
 .bitfinex-nav-menu {
+  min-width: 225px;
   max-height: calc(100vh - 50px);
   overflow: auto;
 }
@@ -171,6 +172,11 @@ body.#{$ns}-light {
       background-color: #f7f8ff;
     }
   }
+}
+
+// fixes tooltips in menu
+.bp3-menu .bp3-popover-target {
+  display: block;
 }
 
 .bitfinex-text-align-right {
