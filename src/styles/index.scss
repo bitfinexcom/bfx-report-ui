@@ -5,6 +5,7 @@
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "ui/Charts/Chart/_Chart.scss";
 @import "ui/ColumnsFilter/_ColumnsFilter.scss";
+@import "ui/Pagination/_Pagination.scss";
 
 body {
   margin: 0;
@@ -112,12 +113,6 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
   background-color: $pt-text-color-muted !important;
 }
 
-.bitfinex-pagination-group {
-  &> button {
-    margin: 4px 2px;
-  }
-}
-
 .bitfinex-table {
   padding-bottom: 8px;
 }
@@ -180,13 +175,6 @@ body.#{$ns}-light {
 
 .bitfinex-text-align-right {
   text-align: right;
-}
-
-.bitfinex-page-input {
-  width: 45px;
-  margin-right: 2px;
-  margin-left: 2px;
-  text-align: center;
 }
 
 /* preferences dialog */
