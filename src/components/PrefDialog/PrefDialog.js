@@ -14,12 +14,7 @@ import { platform } from 'var/config'
 import DateFormatSelector from 'ui/DateFormatSelector'
 import LangMenu from 'ui/LangMenu'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
-import {
-  checkboxFieldStyle,
-  dialogDescStyle,
-  dialogFieldStyle,
-  dialogSmallDescStyle,
-} from 'ui/utils'
+import { checkboxFieldStyle, dialogDescStyle, dialogFieldStyle } from 'ui/utils'
 
 import { propTypes, defaultProps } from './PrefDialog.props'
 
@@ -68,9 +63,6 @@ class PrefDialog extends PureComponent {
         <div className={dialogDescStyle}>
           {t('preferences.theme')}
         </div>
-        <div className={dialogSmallDescStyle}>
-          {t('preferences.theme')}
-        </div>
         <div className={dialogFieldStyle}>
           <ButtonGroup>
             <Button
@@ -107,9 +99,6 @@ class PrefDialog extends PureComponent {
             <div className={dialogDescStyle}>
               {t('preferences.language')}
             </div>
-            <div className={dialogSmallDescStyle}>
-              {t('preferences.language')}
-            </div>
             <div className={dialogFieldStyle}>
               <LangMenu />
             </div>
@@ -117,9 +106,6 @@ class PrefDialog extends PureComponent {
           {renderThemeSwitcher}
           <div className='row'>
             <div className={dialogDescStyle}>
-              {t('preferences.timezone')}
-            </div>
-            <div className={dialogSmallDescStyle}>
               {t('preferences.timezone')}
             </div>
             <div className={dialogFieldStyle}>
@@ -134,9 +120,6 @@ class PrefDialog extends PureComponent {
             <div className={dialogDescStyle}>
               {t('preferences.timezone-input')}
             </div>
-            <div className={dialogSmallDescStyle}>
-              {t('preferences.timezone-input')}
-            </div>
             <div className={dialogFieldStyle}>
               <TimezonePicker
                 showLocalTimezone
@@ -149,18 +132,12 @@ class PrefDialog extends PureComponent {
             <div className={dialogDescStyle}>
               {t('preferences.dateformat')}
             </div>
-            <div className={dialogSmallDescStyle}>
-              {t('preferences.dateformat')}
-            </div>
             <div className={dialogFieldStyle}>
               <DateFormatSelector />
             </div>
           </div>
           <div className='row'>
             <div className={dialogDescStyle}>
-              {t('preferences.milliseconds')}
-            </div>
-            <div className={dialogSmallDescStyle}>
               {t('preferences.milliseconds')}
             </div>
             <div className={checkboxFieldStyle}>

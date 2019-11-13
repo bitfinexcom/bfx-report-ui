@@ -4,23 +4,15 @@ import classNames from 'classnames'
 export const dialogDescStyle = classNames(
   'bitfinex-preferences-desc',
   'bitfinex-text-align-right',
-  'hidden-xs',
+  'col-xs-4',
   'col-sm-4',
   'col-md-4',
   'col-lg-4',
   'col-xl-4',
 )
 
-export const dialogSmallDescStyle = classNames(
-  'col-xs-12',
-  'hidden-sm',
-  'hidden-md',
-  'hidden-lg',
-  'hidden-xl',
-)
-
 export const dialogFieldStyle = classNames(
-  'col-xs-12',
+  'col-xs-8',
   'col-sm-8',
   'col-md-8',
   'col-lg-8',
@@ -28,7 +20,7 @@ export const dialogFieldStyle = classNames(
 )
 
 export const checkboxFieldStyle = classNames(
-  'col-xs-12',
+  'col-xs-8',
   'col-sm-8',
   'col-md-8',
   'col-lg-8',
@@ -84,5 +76,4 @@ export default {
   checkboxFieldStyle,
   dialogDescStyle,
   dialogFieldStyle,
-  dialogSmallDescStyle,
 }
