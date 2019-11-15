@@ -17,6 +17,7 @@ import { platform } from 'var/config'
 
 const {
   MENU_ACCOUNT_BALANCE,
+  MENU_AFFILIATES_EARNINGS,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_DERIVATIVES,
@@ -44,6 +45,7 @@ class ToggleMenu extends PureComponent {
   constructor(props) {
     super(props)
     this.handleClickFCredit = this.handleClick.bind(this, MENU_FCREDIT)
+    this.handleClickAffiliatesEarnings = this.handleClick.bind(this, MENU_AFFILIATES_EARNINGS)
     this.handleClickFLoan = this.handleClick.bind(this, MENU_FLOAN)
     this.handleClickFOffer = this.handleClick.bind(this, MENU_FOFFER)
     this.handleClickFPayment = this.handleClick.bind(this, MENU_FPAYMENT)
@@ -161,7 +163,7 @@ class ToggleMenu extends PureComponent {
           onClick={this.handleClickFCredit}
           active={target === MENU_FCREDIT}
         />
-        {platform.showFrameworkMode ? (
+        {!!platform.showFrameworkMode && (
           <MenuItem
             icon={getIcon(MENU_FPAYMENT)}
             text={isIconMode ? '' : t('fpayment.title')}
@@ -169,7 +171,16 @@ class ToggleMenu extends PureComponent {
             onClick={this.handleClickFPayment}
             active={target === MENU_FPAYMENT}
           />
-        ) : undefined}
+        )}
+        {!!platform.showFrameworkMode && (
+          <MenuItem
+            icon={getIcon(MENU_AFFILIATES_EARNINGS)}
+            text={isIconMode ? '' : t('affiliatesearnings.title')}
+            title={isIconMode ? t('affiliatesearnings.title') : ''}
+            onClick={this.handleClickAffiliatesEarnings}
+            active={target === MENU_AFFILIATES_EARNINGS}
+          />
+        )}
         <MenuDivider />
         <MenuItem
           icon={getIcon(MENU_PUBLIC_TRADES)}

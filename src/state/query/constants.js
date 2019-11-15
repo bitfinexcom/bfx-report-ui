@@ -1,5 +1,6 @@
 export default {
   MENU_ACCOUNT_BALANCE: 'accountbalance',
+  MENU_AFFILIATES_EARNINGS: 'affiliatesearnings',
   MENU_CONCENTRATION_RISK: 'concentrationrisk',
   MENU_DEPOSITS: 'deposits',
   MENU_DERIVATIVES: 'derivatives',

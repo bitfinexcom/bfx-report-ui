@@ -7,6 +7,7 @@ const defaultState = {
 
 test('Can get right query limit via getQueryLimit', () => {
   const ql = getTargetQueryLimit(defaultState)
+  expect(ql(queryTypes.MENU_AFFILIATES_EARNINGS)).toEqual(250)
   expect(ql(queryTypes.MENU_FCREDIT)).toEqual(500)
   expect(ql(queryTypes.MENU_FLOAN)).toEqual(500)
   expect(ql(queryTypes.MENU_FOFFER)).toEqual(500)

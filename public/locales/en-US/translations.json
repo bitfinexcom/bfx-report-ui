@@ -10,6 +10,9 @@
   "activepositions": {
     "title": "Active Positions"
   },
+  "affiliatesearnings": {
+    "title": "Affiliates Earnings"
+  },
   "auth": {
     "auth": "Auth",
     "title": "Please Login",

@@ -12,6 +12,7 @@ const {
   MENU_FLOAN,
   MENU_FCREDIT,
   MENU_FPAYMENT,
+  MENU_AFFILIATES_EARNINGS,
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
@@ -32,12 +33,14 @@ const {
 } = DATA_TYPES
 
 /* eslint-disable object-curly-newline */
+const DEFAULT_LEDGERS = [
+  { column: 'description', type: CONTAINS, dataType: STRING, value: '' },
+  { column: 'amountUsd', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  { column: 'balanceUsd', type: GREATER_THAN, dataType: NUMBER, value: '' },
+]
+
 const DEFAULT_FILTERS = {
-  [MENU_LEDGERS]: [
-    { column: 'description', type: CONTAINS, dataType: STRING, value: '' },
-    { column: 'amountUsd', type: GREATER_THAN, dataType: NUMBER, value: '' },
-    { column: 'balanceUsd', type: GREATER_THAN, dataType: NUMBER, value: '' },
-  ],
+  [MENU_LEDGERS]: DEFAULT_LEDGERS,
   [MENU_TRADES]: [
     { column: 'orderID', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'execAmount', type: GREATER_THAN, dataType: NUMBER, value: '' },
@@ -73,11 +76,8 @@ const DEFAULT_FILTERS = {
     { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
     { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
   ],
-  [MENU_FPAYMENT]: [
-    { column: 'description', type: CONTAINS, dataType: STRING, value: '' },
-    { column: 'amountUsd', type: GREATER_THAN, dataType: NUMBER, value: '' },
-    { column: 'balanceUsd', type: GREATER_THAN, dataType: NUMBER, value: '' },
-  ],
+  [MENU_FPAYMENT]: DEFAULT_LEDGERS,
+  [MENU_AFFILIATES_EARNINGS]: DEFAULT_LEDGERS,
   [MENU_PUBLIC_TRADES]: [
     { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },

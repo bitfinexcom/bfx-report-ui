@@ -6,6 +6,7 @@ import { platform } from 'var/config'
 import persistMigrations from 'state/persist.migrations'
 
 import accountBalanceReducer from './accountBalance/reducer'
+import affiliatesEarningsReducer from './affiliatesEarnings/reducer'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import derivativesReducer from './derivatives/reducer'
@@ -75,6 +76,7 @@ const BASE_REDUCERS = {
 }
 
 const FRAMEWORK_REDUCERS = {
+  affiliatesEarnings: affiliatesEarningsReducer,
   fpayment: fundingPaymentReducer,
   balance: accountBalanceReducer,
   winLoss: winLossReducer,
