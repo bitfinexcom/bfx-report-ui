@@ -7,7 +7,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getQuery } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
@@ -21,14 +20,11 @@ const TYPE = queryTypes.MENU_POSITIONS_ACTIVE
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
 
-function getReqPositions({ auth }) {
-  return makeFetchCall('getActivePositions', auth)
-}
+const getReqPositions = () => makeFetchCall('getActivePositions')
 
 function* fetchPositions() {
   try {
-    const auth = yield select(selectAuth)
-    const { result, error } = yield call(getReqPositions, { auth })
+    const { result, error } = yield call(getReqPositions)
     yield put(actions.updateAPositions(result, LIMIT, PAGE_SIZE))
     if (error) {
       yield put(actions.fetchFail({
@@ -58,11 +54,9 @@ function* fetchNextPositions() {
     if (entries.length - LIMIT >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result, error } = yield call(getReqPositions, {
       smallestMts,
-      auth,
       query,
       targetPairs,
     })

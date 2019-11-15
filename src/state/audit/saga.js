@@ -8,7 +8,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
@@ -25,7 +24,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqPositionsAudit({
   smallestMts,
-  auth,
   query,
   targetIds,
 }) {
@@ -33,7 +31,7 @@ function getReqPositionsAudit({
   params.limit = LIMIT
   if (targetIds) {
     params.id = targetIds.map(id => parseInt(id, 10))
-    return makeFetchCall('getPositionsAudit', auth, params)
+    return makeFetchCall('getPositionsAudit', params)
   }
   return new Promise((_, reject) => reject(new Error('no id specified')))
 }
@@ -52,17 +50,14 @@ function* fetchPositionsAudit({ payload: ids }) {
       }
       yield put(actions.setTargetIds(targetIds))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, {
       smallestMts: 0,
-      auth,
       query,
       targetIds,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositionsAudit, {
       smallestMts: 0,
-      auth,
       query,
       targetIds,
     })
@@ -96,17 +91,14 @@ function* fetchNextPositionsAudit() {
     if (entries.length - LIMIT >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, {
       smallestMts,
-      auth,
       query,
       targetIds,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositionsAudit, {
       smallestMts,
-      auth,
       query,
       targetIds,
     })

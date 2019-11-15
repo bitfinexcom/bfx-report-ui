@@ -159,7 +159,7 @@ export function getSymbolsURL(symbols) {
 // USD -> ['USD']
 export function getSymbolsFromUrlParam(param) {
   if (param.indexOf(',') > -1) {
-    return param.split(',')
+    return param.split(',').map(symbol => symbol.toUpperCase())
   }
   return [param.toUpperCase()]
 }
@@ -168,9 +168,9 @@ export function getSymbolsFromUrlParam(param) {
 // BTCUSD -> ['BTCUSD']
 export function getPairsFromUrlParam(param) {
   if (param.indexOf(',') > -1) {
-    return param.split(',')
+    return param.split(',').map(pair => pair.toUpperCase())
   }
-  return [param]
+  return [param.toUpperCase()]
 }
 
 // BTCUSD -> tBTCUSD

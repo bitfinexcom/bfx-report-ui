@@ -30,8 +30,7 @@ const updateAuthErrorStatus = msg => updateErrorStatus({
 })
 
 function* fetchEmail() {
-  const auth = yield select(selectAuth)
-  const { result } = yield call(checkEmail, auth)
+  const { result } = yield call(checkEmail)
 
   if (result) {
     yield put(setOwnerEmail(result))

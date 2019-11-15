@@ -9,7 +9,6 @@ import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapSymbol } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
-import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
@@ -25,7 +24,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqPublicFunding({
   smallestMts,
-  auth,
   query,
   targetSymbol,
   filter,
@@ -36,7 +34,7 @@ function getReqPublicFunding({
   if (targetSymbol) {
     params.symbol = formatRawSymbols(mapRequestSymbols(targetSymbol, true))
   }
-  return makeFetchCall('getPublicTrades', auth, params)
+  return makeFetchCall('getPublicTrades', params)
 }
 
 function* fetchPublicFunding({ payload: symbol }) {
@@ -47,19 +45,16 @@ function* fetchPublicFunding({ payload: symbol }) {
       yield put(actions.setTargetSymbol(mapSymbol(symbol)))
       targetSymbol = symbol
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPublicFunding, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbol,
       filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicFunding, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbol,
       filter,
@@ -94,19 +89,16 @@ function* fetchNextPublicFunding() {
     if (entries.length - LIMIT >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPublicFunding, {
       smallestMts,
-      auth,
       query,
       targetSymbol,
       filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicFunding, {
       smallestMts,
-      auth,
       query,
       targetSymbol,
       filter,

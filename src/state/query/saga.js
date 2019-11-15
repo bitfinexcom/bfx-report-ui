@@ -11,7 +11,6 @@ import { LANGUAGES_MAP } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
-import { selectAuth } from 'state/auth/selectors'
 import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
 import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
@@ -92,9 +91,8 @@ const {
   }
 }
 */
-function getMultipleCsv(auth, params) {
-  return makeFetchCall('getMultipleCsv', auth, params)
-}
+
+const getMultipleCsv = params => makeFetchCall('getMultipleCsv', params)
 
 function getSelector(target) {
   switch (target) {
@@ -275,7 +273,6 @@ function* getOptions({ target, query }) {
 
 function* exportCSV({ payload: targets }) {
   try {
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const multiExport = []
     // eslint-disable-next-line no-restricted-syntax
@@ -306,7 +303,7 @@ function* exportCSV({ payload: targets }) {
     if (query.exportEmail) {
       params.email = query.exportEmail
     }
-    const { result, error } = yield call(getMultipleCsv, auth, params)
+    const { result, error } = yield call(getMultipleCsv, params)
     if (result) {
       if (result.isSendEmail) {
         yield put(updateSuccessStatus({

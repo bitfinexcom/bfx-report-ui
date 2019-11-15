@@ -6,7 +6,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
 import { platform } from 'var/config'
@@ -15,9 +14,9 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-function getReqWallets(auth, end) {
+function getReqWallets(end) {
   const params = end ? { end } : {}
-  return makeFetchCall('getWallets', auth, params)
+  return makeFetchCall('getWallets', params)
 }
 
 /* eslint-disable-next-line consistent-return */
@@ -32,8 +31,7 @@ function* fetchWallets({ payload: end }) {
     // save current query time in state for csv export reference
     yield put(actions.setTimestamp(end))
 
-    const auth = yield select(selectAuth)
-    const { result = [], error } = yield call(getReqWallets, auth, end)
+    const { result = [], error } = yield call(getReqWallets, end)
     yield put(actions.updateWallets(result))
 
     if (error) {
