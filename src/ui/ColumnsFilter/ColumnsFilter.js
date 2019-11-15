@@ -112,16 +112,20 @@ class ColumnsFilter extends PureComponent {
 
   /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events, no-shadow */
   render() {
-    const { target, t } = this.props
+    const { target, filters: currentFilters, t } = this.props
     const { isOpen, filters } = this.state
 
     const hasChanges = true
+    const hasAppliedFilters = currentFilters.some(filter => filter.value)
 
     return (
       <Fragment>
-        <Button onClick={this.toggleDialog}>
-          {t('columnsfilter.title')}
-        </Button>
+        <div className='columns-filter-wrapper'>
+          <Button onClick={this.toggleDialog}>
+            {t('columnsfilter.title')}
+          </Button>
+          {hasAppliedFilters && <div className='columns-filter-wrapper-mark' />}
+        </div>
 
         <ColumnsFilterDialog
           isOpen={isOpen}

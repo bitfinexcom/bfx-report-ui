@@ -28,13 +28,12 @@ const SKIP_PARSING_PAIRS = [
 
 const parseSymbol = (symbol) => {
   if (!symbol.includes(':') || _includes(SKIP_PARSING_PAIRS, symbol)) {
-    return symbol.toUpperCase()
+    return symbol
   }
 
   return symbol.split(':')
     .map(p => toRegularPair(p))
     .join()
-    .toUpperCase()
 }
 
 /**
@@ -91,8 +90,8 @@ export function isSymbol(symbol = '') {
  * ex. fUSD -> USD
  */
 const removePrefix = (symbol = '') => (isSymbol(symbol) || isPair(symbol)
-  ? symbol.substring(1).toUpperCase()
-  : symbol.toUpperCase())
+  ? symbol.substring(1)
+  : symbol)
 
 const firstInPair = (pair) => {
   const spliter = pair.indexOf(':') > -1 ? ':' : '/'
@@ -148,9 +147,9 @@ export function parsePairTag(tag) {
 export function getSymbolsURL(symbols) {
   if (Array.isArray(symbols) && symbols.length) {
     if (symbols.length === 1) {
-      return symbols[0].toUpperCase()
+      return symbols[0]
     }
-    return symbols.map(symbol => symbol.toUpperCase()).join(',')
+    return symbols.join(',')
   }
   return ''
 }
@@ -161,7 +160,7 @@ export function getSymbolsFromUrlParam(param) {
   if (param.indexOf(',') > -1) {
     return param.split(',').map(symbol => symbol.toUpperCase())
   }
-  return [param.toUpperCase()]
+  return [param]
 }
 
 // BTCUSD, ETHUSD -> ['BTCUSD', 'ETHUSD']
@@ -201,7 +200,14 @@ export const mapSymbol = currency => symbolMap[currency] || currency
 export const splitPair = pair => [pair.slice(0, 3), pair.slice(3)]
 
 // BABUSD -> BCHUSD
-export const mapPair = pair => splitPair(pair).map(mapSymbol).join('')
+// ABS:ETH -> ABYSS:ETH
+export const mapPair = (pair) => {
+  if (!_includes(pair, ':')) {
+    return splitPair(pair).map(mapSymbol).join('')
+  }
+
+  return pair.split(':').map(mapSymbol).join(':')
+}
 
 // [BCH, USD] -> [BAB, USD]
 export const demapSymbols = (symbols, returnString = false) => {

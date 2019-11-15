@@ -345,7 +345,7 @@
     }
   },
   "querylimit": {
-    "tooltip": "Choose the size per query. The Larger size will take longer query time"
+    "tooltip": "Choose the size per query. The larger size will take longer query time"
   },
   "selector": {
     "filter": {

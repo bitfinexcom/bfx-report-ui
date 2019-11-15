@@ -1,5 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
+import memoizeOne from 'memoize-one'
 import {
   Card,
   Elevation,
@@ -24,6 +25,12 @@ import { propTypes, defaultProps } from './Derivatives.props'
 const TYPE = queryConstants.MENU_DERIVATIVES
 
 class Derivatives extends PureComponent {
+  constructor() {
+    super()
+
+    this.getFilteredPairs = memoizeOne(this.getFilteredPairs)
+  }
+
   componentDidMount() {
     const { loading, fetchDerivatives, match } = this.props
     if (loading) {
@@ -36,8 +43,11 @@ class Derivatives extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
+  getFilteredPairs = pairs => pairs.filter(pair => pair.includes('F0'))
+
   render() {
     const {
+      pairs,
       existingPairs,
       getFullTime,
       entries,
@@ -61,6 +71,7 @@ class Derivatives extends PureComponent {
         {' '}
         <MultiPairSelector
           currentFilters={targetPairs}
+          pairs={this.getFilteredPairs(pairs)}
           existingPairs={existingPairs}
           togglePair={pair => togglePair(TYPE, this.props, pair)}
         />
