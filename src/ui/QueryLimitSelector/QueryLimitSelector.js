@@ -66,6 +66,7 @@ class QueryLimitSelector extends PureComponent {
         >
           <Button
             rightIcon={IconNames.CARET_DOWN}
+            className='query-limit-selector'
             text={queryLimit}
           />
         </Popover>

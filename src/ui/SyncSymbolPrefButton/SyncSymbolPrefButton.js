@@ -15,7 +15,7 @@ import { IconNames } from '@blueprintjs/icons'
 import DateInput from 'ui/DateInput'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import mode from 'state/sync/constants'
-import { dialogDescStyle, dialogFieldStyle, dialogSmallDescStyle } from 'ui/utils'
+import { dialogDescStyle, dialogFieldStyle } from 'ui/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './SyncSymbolPrefButton.props'
@@ -136,9 +136,6 @@ class SyncSymbolPrefButton extends PureComponent {
                 <div className={dialogDescStyle}>
                   {t('preferences.sync.symbols')}
                 </div>
-                <div className={dialogSmallDescStyle}>
-                  {t('preferences.sync.symbols')}
-                </div>
                 <div className={dialogFieldStyle}>
                   <MultiSymbolSelector
                     currentFilters={tempSymbols}
@@ -151,9 +148,6 @@ class SyncSymbolPrefButton extends PureComponent {
               </div>
               <div className='row'>
                 <div className={dialogDescStyle}>
-                  {t('preferences.sync.starttime')}
-                </div>
-                <div className={dialogSmallDescStyle}>
                   {t('preferences.sync.starttime')}
                 </div>
                 <div className={dialogFieldStyle}>

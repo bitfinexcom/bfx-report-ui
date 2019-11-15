@@ -1,0 +1,31 @@
+.header {
+  .bp3-navbar-heading {
+    margin-right: 5px;
+  }
+
+  &-email {
+    margin-left: 5px;
+    max-width: calc(100vw - 350px);
+    display: inline-block;
+    vertical-align: text-top;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    &-email {
+      max-width: calc(100vw - 255px);
+    }
+  }
+}
+
+@media screen and (max-width: 490px) {
+  .header {
+    &-email {
+      display: none;
+    }
+  }
+}

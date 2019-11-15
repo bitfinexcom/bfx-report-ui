@@ -16,10 +16,7 @@ class Pagination extends PureComponent {
     this.pageInput.current.value = ''
   }
 
-  /* eslint-disable-next-line arrow-body-style */
-  getCurrentPage = () => {
-    return parseInt(this.pageInput.current.placeholder || 1, 10)
-  }
+  getCurrentPage = () => parseInt(this.pageInput.current.placeholder || 1, 10)
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
@@ -100,32 +97,26 @@ class Pagination extends PureComponent {
       </Fragment>
     ) : undefined
 
-    const renderQueryLimitSelector = canChangeQueryLimit(type)
-      ? (
-        <QueryLimitSelector
-          target={type}
-        />
-      )
-      : undefined
-
     return (
-      <div className='row center-xs'>
-        <div className='bitfinex-pagination-group col-xs-12 col-sm-6'>
+      <div className='pagination row center-xs'>
+        <div className='bitfinex-pagination-group'>
           <Button
             minimal
+            className='pagination-icon'
             icon={IconNames.DOUBLE_CHEVRON_LEFT}
             onClick={prevClick}
             disabled={offset <= LIMIT || loading}
           />
           <Button
             minimal
+            className='pagination-icon'
             icon={IconNames.CHEVRON_LEFT}
             onClick={this.backward}
             disabled={currentPage - 1 === 0 || loading}
           />
           {t('pagination.page')}
           <input
-            className='bitfinex-page-input'
+            className='pagination-input'
             ref={this.pageInput}
             placeholder={currentPage}
             onKeyPress={this.handleKeyPress}
@@ -138,17 +129,19 @@ class Pagination extends PureComponent {
           {renderRestDots}
           <Button
             minimal
+            className='pagination-icon'
             icon={IconNames.CHEVRON_RIGHT}
             onClick={this.forward}
             disabled={currentPage === pageLen || loading}
           />
           <Button
             minimal
+            className='pagination-icon'
             rightIcon={IconNames.DOUBLE_CHEVRON_RIGHT}
             onClick={this.fetchNext}
             disabled={!nextPage || loading}
           />
-          {renderQueryLimitSelector}
+          {canChangeQueryLimit(type) && <QueryLimitSelector target={type} />}
           {renderLoading}
         </div>
       </div>

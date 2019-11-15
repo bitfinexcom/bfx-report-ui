@@ -10,12 +10,7 @@ import { IconNames } from '@blueprintjs/icons'
 
 import DateFormatSelector from 'ui/DateFormatSelector'
 import Loading from 'ui/Loading'
-import {
-  checkboxFieldStyle,
-  dialogDescStyle,
-  dialogFieldStyle,
-  dialogSmallDescStyle,
-} from 'ui/utils'
+import { checkboxFieldStyle, dialogDescStyle, dialogFieldStyle } from 'ui/utils'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
 import { formatDate } from 'state/utils'
 import { getTarget } from 'state/query/utils'
@@ -120,10 +115,7 @@ class ExportDialog extends PureComponent {
                   <div className={dialogDescStyle}>
                     {t('download.targets')}
                   </div>
-                  <div className={dialogSmallDescStyle}>
-                    {t('download.targets')}
-                  </div>
-                  <div className={checkboxFieldStyle}>
+                  <div className={dialogFieldStyle}>
                     <ExportTargetsSelector
                       currentTargets={currentTargets}
                       toggleTarget={this.toggleTarget}
@@ -136,18 +128,12 @@ class ExportDialog extends PureComponent {
               <div className={dialogDescStyle}>
                 {t('preferences.dateformat')}
               </div>
-              <div className={dialogSmallDescStyle}>
-                {t('preferences.dateformat')}
-              </div>
               <div className={dialogFieldStyle}>
                 <DateFormatSelector />
               </div>
             </div>
             <div className='row'>
               <div className={dialogDescStyle}>
-                {t('preferences.milliseconds')}
-              </div>
-              <div className={dialogSmallDescStyle}>
                 {t('preferences.milliseconds')}
               </div>
               <div className={checkboxFieldStyle}>

@@ -14,6 +14,7 @@ const USED_ICONS = [
   IconNames.CHEVRON_RIGHT,
   IconNames.CLOUD_DOWNLOAD,
   IconNames.CONFIRM,
+  IconNames.CROSS,
   IconNames.DOLLAR,
   IconNames.DOUBLE_CARET_VERTICAL,
   IconNames.DOUBLE_CHEVRON_LEFT,

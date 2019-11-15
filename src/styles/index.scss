@@ -1,8 +1,11 @@
 @import "./variables.scss";
 @import "./fonts/roboto.css";
+
+@import "components/Header/_Header.scss";
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "ui/Charts/Chart/_Chart.scss";
 @import "ui/ColumnsFilter/_ColumnsFilter.scss";
+@import "ui/Pagination/_Pagination.scss";
 
 body {
   margin: 0;
@@ -91,6 +94,7 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
 }
 
 .bitfinex-nav-menu {
+  min-width: 225px;
   max-height: calc(100vh - 50px);
   overflow: auto;
 }
@@ -108,12 +112,6 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
 
 .bitfinex-queried-symbol {
   background-color: $pt-text-color-muted !important;
-}
-
-.bitfinex-pagination-group {
-  &> button {
-    margin: 4px 2px;
-  }
 }
 
 .bitfinex-table {
@@ -176,15 +174,13 @@ body.#{$ns}-light {
   }
 }
 
-.bitfinex-text-align-right {
-  text-align: right;
+// fixes tooltips in menu
+.bp3-menu .bp3-popover-target {
+  display: block;
 }
 
-.bitfinex-page-input {
-  width: 45px;
-  margin-right: 2px;
-  margin-left: 2px;
-  text-align: center;
+.bitfinex-text-align-right {
+  text-align: right;
 }
 
 /* preferences dialog */
@@ -226,4 +222,14 @@ body.#{$ns}-light {
 div.bp3-multi-select {
   min-width: 180px;
   margin-right: 2px;
+}
+
+.bp3-card {
+  & > h4 {
+    margin: 10px 0;
+  }
+
+  .bp3-multi-select {
+    margin: 5px 2px 5px 0;
+  }
 }
