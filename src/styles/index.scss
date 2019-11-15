@@ -95,7 +95,6 @@ body.#{$ns}-light .bitfinex-logo-m-dark {
 
 .bitfinex-nav-menu {
   min-width: 225px;
-  max-height: calc(100vh - 50px);
 }
 
 .bitfinex-compact-menu.#{$ns}-menu {
@@ -236,5 +235,6 @@ div.bp3-multi-select {
 @media screen and (max-width: 991px) {
   .bitfinex-nav-menu {
     overflow: auto;
+    max-height: calc(100vh - 50px);
   }
 }
