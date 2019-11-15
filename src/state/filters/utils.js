@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import _isEmpty from 'lodash/isEmpty'
 import _reduce from 'lodash/reduce'
+import _get from 'lodash/get'
 import _set from 'lodash/set'
 import _toNumber from 'lodash/toNumber'
 import _toInteger from 'lodash/toInteger'
@@ -58,9 +59,11 @@ export const calculateFilterQuery = (filters = []) => {
       case FILTERS.EQUAL_TO:
         _set(acc, `${FILTER_TYPES.EQ}.${column}`, filterValue)
         break
-      case FILTERS.NOT_EQUAL_TO:
-        _set(acc, `${FILTER_TYPES.NE}.${column}`, filterValue)
+      case FILTERS.NOT_EQUAL_TO: {
+        const currentFilters = _get(acc, `${FILTER_TYPES.NIN}.${column}`, [])
+        _set(acc, `${FILTER_TYPES.NIN}.${column}`, currentFilters.concat(filterValue))
         break
+      }
       case FILTERS.GREATER_THAN:
         _set(acc, `${FILTER_TYPES.GTE}.${column}`, filterValue)
         break
