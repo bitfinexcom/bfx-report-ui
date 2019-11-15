@@ -4,11 +4,18 @@ import memoizeOne from 'memoize-one'
 import _omit from 'lodash/omit'
 import _castArray from 'lodash/castArray'
 
+import { store } from 'state/store'
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import {
   getSymbolsURL, demapSymbols, demapPairs, formatSymbolToPair, mapSymbol,
 } from 'state/symbols/utils'
+import { selectAuth } from 'state/auth/selectors'
+
+const getAuthFromStore = () => {
+  const state = store.getState()
+  return selectAuth(state)
+}
 
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
@@ -24,7 +31,7 @@ export function postJsonfetch(url, bodyJson) {
     .then(data => data)
 }
 
-export function makeFetchCall(method, auth = null, params = null) {
+export function makeFetchCall(method, params = null, auth = getAuthFromStore()) {
   return postJsonfetch(`${platform.API_URL}/get-data`, {
     auth,
     method,
@@ -32,13 +39,13 @@ export function makeFetchCall(method, auth = null, params = null) {
   })
 }
 
-export function getAuth(auth) {
+export function getAuth(auth = getAuthFromStore()) {
   return postJsonfetch(`${platform.API_URL}/check-auth`, {
     auth,
   })
 }
 
-export function checkEmail(auth) {
+export function checkEmail(auth = getAuthFromStore()) {
   return postJsonfetch(`${platform.API_URL}/check-stored-locally`, {
     auth,
   })
@@ -86,7 +93,7 @@ export function timeOffset(timezone) {
     : moment.tz(moment.tz.guess()).format('Z')
 }
 
-export const getLastMonth = () => {
+export function getLastMonth() {
   const date = new Date()
   date.setMonth(date.getMonth() - 1)
 

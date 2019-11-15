@@ -1,25 +1,16 @@
-import {
-  call,
-  put,
-  select,
-  takeLatest,
-} from 'redux-saga/effects'
+import { call, put, takeLatest } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
-import { selectAuth } from 'state/auth/selectors'
 
 import types from './constants'
 import actions from './actions'
 
-function getSymbols(auth) {
-  return makeFetchCall('getSymbols', auth)
-}
+const getSymbols = () => makeFetchCall('getSymbols')
 
 function* fetchSymbols() {
   try {
-    const auth = yield select(selectAuth)
-    const { result, error } = yield call(getSymbols, auth)
+    const { result, error } = yield call(getSymbols)
     if (result) {
       yield put(actions.updateSymbols(result))
     }

@@ -52,6 +52,7 @@
     "shelljs": "^0.8.3"
   },
   "devDependencies": {
+    "concurrently": "^5.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint-config-airbnb": "^17.1.0",
@@ -64,8 +65,9 @@
   "scripts": {
     "prepare": "node scripts/copyFiles && node scripts/handleBptIcons",
     "start": "npm run prepare && react-scripts start",
+    "startAll": "concurrently \"npm run start\" \"npm run --prefix ../bfx-reports-framework startSimulEnv\" \"npm run --prefix ../bfx-reports-framework startServDev\" \"npm run --prefix ../bfx-reports-framework startDev\"",
     "build": "npm run prepare && react-scripts build",
-    "test": "react-scripts test --env=jsdom --modulePaths=src",
+    "test": "react-scripts test --env=jsdom --modulePaths=src --verbose --color --watchAll=false",
     "lint": "eslint src scripts --ignore-path .gitignore",
     "lintFix": "eslint src scripts --fix --ignore-path .gitignore"
   },

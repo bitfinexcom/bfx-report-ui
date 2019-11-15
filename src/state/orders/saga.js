@@ -9,7 +9,6 @@ import { makeFetchCall } from 'state/utils'
 import {
   formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
 } from 'state/symbols/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -26,7 +25,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqOrders({
   smallestMts,
-  auth,
   query,
   targetPairs,
   filter,
@@ -40,7 +38,7 @@ function getReqOrders({
   if (queryLimit) {
     params.limit = queryLimit
   }
-  return makeFetchCall('getOrders', auth, params)
+  return makeFetchCall('getOrders', params)
 }
 
 function* fetchOrders({ payload: pair }) {
@@ -52,14 +50,12 @@ function* fetchOrders({ payload: pair }) {
       targetPairs = getPairsFromUrlParam(pair).map(mapPair)
       yield put(actions.setTargetPairs(targetPairs))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const queryLimit = getQueryLimit(TYPE)
     const { result: resulto, error: erroro } = yield call(getReqOrders, {
       smallestMts: 0,
-      auth,
       query,
       targetPairs,
       filter,
@@ -67,7 +63,6 @@ function* fetchOrders({ payload: pair }) {
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqOrders, {
       smallestMts: 0,
-      auth,
       query,
       targetPairs,
       filter,
@@ -106,11 +101,9 @@ function* fetchNextOrders() {
     if (entries.length - queryLimit >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const { result: resulto, error: erroro } = yield call(getReqOrders, {
       smallestMts,
-      auth,
       query,
       targetPairs,
       filter,
@@ -118,7 +111,6 @@ function* fetchNextOrders() {
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqOrders, {
       smallestMts,
-      auth,
       query,
       targetPairs,
       filter,

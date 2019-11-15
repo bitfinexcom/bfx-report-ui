@@ -13,7 +13,6 @@ import {
   mapRequestSymbols,
   mapSymbol,
 } from 'state/symbols/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -31,7 +30,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqFCredit({
   smallestMts,
-  auth,
   query,
   targetSymbols,
   filter,
@@ -42,7 +40,7 @@ function getReqFCredit({
   if (targetSymbols.length) {
     params.symbol = formatRawSymbols(mapRequestSymbols(targetSymbols))
   }
-  return makeFetchCall('getFundingCreditHistory', auth, params)
+  return makeFetchCall('getFundingCreditHistory', params)
 }
 
 function* fetchFCredit({ payload: symbol }) {
@@ -54,19 +52,16 @@ function* fetchFCredit({ payload: symbol }) {
       targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
       yield put(actions.setTargetSymbols(targetSymbols))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqFCredit, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbols,
       filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFCredit, {
       smallestMts: 0,
-      auth,
       query,
       targetSymbols,
       filter,
@@ -101,19 +96,16 @@ function* fetchNextFCredit() {
     if (entries.length - LIMIT >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqFCredit, {
       smallestMts,
-      auth,
       query,
       targetSymbols,
       filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFCredit, {
       smallestMts,
-      auth,
       query,
       targetSymbols,
       filter,

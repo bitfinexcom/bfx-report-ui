@@ -10,16 +10,16 @@ import {
 } from '../utils'
 
 describe('pair convertion', () => {
-  it('formatInternalSymbol tBTCUSD -> btcusd', () => {
-    expect(formatInternalSymbol('tBTCUSD')).toEqual('btcusd')
+  it('formatInternalSymbol tBTCUSD -> BTCUSD', () => {
+    expect(formatInternalSymbol('tBTCUSD')).toEqual('BTCUSD')
   })
 
-  it('formatInternalSymbol tETHUSD -> ethusd', () => {
-    expect(formatInternalSymbol('tETHUSD')).toEqual('ethusd')
+  it('formatInternalSymbol tETHUSD -> ETHUSD', () => {
+    expect(formatInternalSymbol('tETHUSD')).toEqual('ETHUSD')
   })
 
-  it('formatInternalSymbol fUSD -> usd', () => {
-    expect(formatInternalSymbol('fUSD')).toEqual('usd')
+  it('formatInternalSymbol fUSD -> USD', () => {
+    expect(formatInternalSymbol('fUSD')).toEqual('USD')
   })
 
   it('formatSymbolToPair tBTCUSD -> BTC/USD', () => {
@@ -30,8 +30,7 @@ describe('pair convertion', () => {
     expect(formatSymbolToPair('tETHUSD')).toEqual('ETH/USD')
   })
 
-  it('formatPair btcusd -> BTC/USD', () => {
-    expect(formatPair('btcusd')).toEqual('BTC/USD')
+  it('formatPair BTCUSD -> BTC/USD', () => {
     expect(formatPair('BTCUSD')).toEqual('BTC/USD')
   })
 
@@ -55,23 +54,23 @@ describe('pair convertion', () => {
     expect(formatPair('ALL')).toEqual('ALL')
   })
 
-  it('parsePairTag BTC/USD -> btcusd', () => {
-    expect(parsePairTag('BTC/USD')).toEqual('btcusd')
+  it('parsePairTag BTC/USD -> BTCUSD', () => {
+    expect(parsePairTag('BTC/USD')).toEqual('BTCUSD')
   })
 
-  it('parsePairTag ETH/USD -> ethusd', () => {
-    expect(parsePairTag('ETH/USD')).toEqual('ethusd')
+  it('parsePairTag ETH/USD -> ETHUSD', () => {
+    expect(parsePairTag('ETH/USD')).toEqual('ETHUSD')
   })
 
-  it('getPairsFromUrlParam BTCUSD,ETHUSD -> [\'btcusd\', \'etcusd\']', () => {
-    expect(getPairsFromUrlParam('btcusd,ethusd')).toEqual(['btcusd', 'ethusd'])
-    expect(getPairsFromUrlParam('BTCUSD,ethusd')).toEqual(['btcusd', 'ethusd'])
-    expect(getPairsFromUrlParam('BTCUSD,ETHUSD')).toEqual(['btcusd', 'ethusd'])
+  it('getPairsFromUrlParam BTCUSD,ETHUSD -> [\'BTCUSD\', \'ETHUSD\']', () => {
+    expect(getPairsFromUrlParam('btcusd,ethusd')).toEqual(['BTCUSD', 'ETHUSD'])
+    expect(getPairsFromUrlParam('BTCUSD,ethusd')).toEqual(['BTCUSD', 'ETHUSD'])
+    expect(getPairsFromUrlParam('BTCUSD,ETHUSD')).toEqual(['BTCUSD', 'ETHUSD'])
   })
 
-  it('getPairsFromUrlParam btcusd -> [\'btcusd\']', () => {
-    expect(getPairsFromUrlParam('btcusd')).toEqual(['btcusd'])
-    expect(getPairsFromUrlParam('BTCUSD')).toEqual(['btcusd'])
+  it('getPairsFromUrlParam btcusd -> [\'BTCUSD\']', () => {
+    expect(getPairsFromUrlParam('btcusd')).toEqual(['BTCUSD'])
+    expect(getPairsFromUrlParam('BTCUSD')).toEqual(['BTCUSD'])
   })
 })
 

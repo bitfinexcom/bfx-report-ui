@@ -6,7 +6,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
 import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
@@ -15,9 +14,9 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-const getReqTaxReport = (params) => {
-  const { start, end, auth } = params
-  return makeFetchCall('getFullTaxReport', auth, { start, end })
+export const getReqTaxReport = (params) => {
+  const { start, end } = params
+  return makeFetchCall('getFullTaxReport', { start, end })
 }
 
 const getReqTaxReportSnapshot = (auth, end) => {
@@ -26,7 +25,7 @@ const getReqTaxReportSnapshot = (auth, end) => {
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchTaxReport() {
+export function* fetchTaxReport() {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
@@ -35,9 +34,7 @@ function* fetchTaxReport() {
     }
 
     const params = yield select(selectors.getParams)
-
-    const auth = yield select(selectAuth)
-    const { result, error } = yield call(getReqTaxReport, { auth, ...params })
+    const { result, error } = yield call(getReqTaxReport, params)
 
     yield put(actions.updateTaxReport(result))
 
@@ -71,8 +68,7 @@ function* fetchTaxReportSnapshot({ payload: section }) {
       ? params.start
       : params.end
 
-    const auth = yield select(selectAuth)
-    const { result, error } = yield call(getReqTaxReportSnapshot, auth, timestamp)
+    const { result, error } = yield call(getReqTaxReportSnapshot, timestamp)
 
     yield put(actions.updateTaxReportSnapshot({ result, section }))
 

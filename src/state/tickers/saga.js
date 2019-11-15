@@ -9,7 +9,6 @@ import { makeFetchCall } from 'state/utils'
 import {
   formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
 } from 'state/symbols/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -27,7 +26,6 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqTickers({
   smallestMts,
-  auth,
   query,
   targetPairs,
   filter,
@@ -38,7 +36,7 @@ function getReqTickers({
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
-  return makeFetchCall('getTickersHistory', auth, params)
+  return makeFetchCall('getTickersHistory', params)
 }
 
 function* fetchTickers({ payload: pair }) {
@@ -50,19 +48,16 @@ function* fetchTickers({ payload: pair }) {
       targetPairs = getPairsFromUrlParam(pair).map(mapPair)
       yield put(actions.setTargetPairs(targetPairs))
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqTickers, {
       smallestMts: 0,
-      auth,
       query,
       targetPairs,
       filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTickers, {
       smallestMts: 0,
-      auth,
       query,
       targetPairs,
       filter,
@@ -97,19 +92,16 @@ function* fetchNextTickers() {
     if (entries.length - LIMIT >= offset) {
       return
     }
-    const auth = yield select(selectAuth)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqTickers, {
       smallestMts,
-      auth,
       query,
       targetPairs,
       filter,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqTickers, {
       smallestMts,
-      auth,
       query,
       targetPairs,
       filter,

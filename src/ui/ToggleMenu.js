@@ -257,7 +257,7 @@ class ToggleMenu extends PureComponent {
 
     if (menuMode === baseType.MENU_MODE_HOVER) {
       content = (
-        <Menu large>
+        <Menu large className='bitfinex-nav-menu'>
           {renderMenu}
         </Menu>
       )

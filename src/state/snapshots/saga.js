@@ -6,7 +6,6 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
 
@@ -14,13 +13,13 @@ import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
-const getReqSnapshots = (auth, end) => {
+export const getReqSnapshots = (end) => {
   const params = end ? { end } : {}
-  return makeFetchCall('getFullSnapshotReport', auth, params)
+  return makeFetchCall('getFullSnapshotReport', params)
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchSnapshots({ payload: end }) {
+export function* fetchSnapshots({ payload: end }) {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
@@ -30,8 +29,7 @@ function* fetchSnapshots({ payload: end }) {
     // save current query time in state for csv export reference
     yield put(actions.setTimestamp(end))
 
-    const auth = yield select(selectAuth)
-    const { result = {}, error } = yield call(getReqSnapshots, auth, end)
+    const { result = {}, error } = yield call(getReqSnapshots, end)
 
     yield put(actions.updateSnapshots(result))
 
