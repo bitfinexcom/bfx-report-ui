@@ -11,6 +11,7 @@ import { LANGUAGES_MAP } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { getFilterQuery } from 'state/filters/selectors'
 import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliatesEarnings/selectors'
 import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
@@ -184,6 +185,7 @@ function* getOptions({ target, query }) {
   options.timezone = yield select(getTimezone)
   options.dateFormat = yield select(getDateFormat)
   options.milliseconds = yield select(getShowMilliseconds)
+  options.filter = yield select(getFilterQuery, target)
   const selector = getSelector(target)
   const sign = selector ? yield select(selector) : ''
 

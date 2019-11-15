@@ -20,11 +20,6 @@ export const EMPTY_FILTER = {
   value: '',
 }
 
-export const ARRAY_FILTERS = [
-  FILTER_TYPES.IS_NULL,
-  FILTER_TYPES.IS_NOT_NULL,
-]
-
 export const FILTERS = {
   CONTAINS: 'contains',
   BEGINS_WITH: 'begins_with',
