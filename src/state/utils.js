@@ -8,7 +8,7 @@ import { store } from 'state/store'
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import {
-  getSymbolsURL, demapSymbols, demapPairs, formatSymbolToPair, mapSymbol,
+  getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol,
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 
@@ -268,7 +268,7 @@ export const getFrameworkPositionsEntries = entries => entries.map((entry) => {
 
   return {
     id,
-    pair: formatSymbolToPair(symbol),
+    pair: formatPair(symbol),
     actualPrice,
     amount,
     basePrice,
@@ -292,7 +292,7 @@ export const getFrameworkPositionsTickersEntries = entries => entries.map((entry
   } = entry
 
   return {
-    pair: formatSymbolToPair(symbol),
+    pair: formatPair(symbol),
     amount,
   }
 })
@@ -306,7 +306,7 @@ export const getWalletsTickersEntries = entries => entries.map((entry) => {
 
   return {
     walletType,
-    pair: formatSymbolToPair(symbol),
+    pair: formatPair(symbol),
     amount,
   }
 })

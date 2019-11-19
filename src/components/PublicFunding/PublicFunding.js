@@ -18,6 +18,7 @@ import SymbolSelector from 'ui/SymbolSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize, getPath } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   getCurrentEntries,
@@ -35,10 +36,15 @@ const WILD_CARD = ['']
 
 class PublicFunding extends PureComponent {
   componentDidMount() {
-    const { loading, fetchPublicfunding, match } = this.props
+    const {
+      loading, setTargetSymbol, fetchPublicfunding, match,
+    } = this.props
     if (loading) {
       const pair = (match.params && match.params.symbol) || ''
-      fetchPublicfunding(pair)
+      if (pair) {
+        setTargetSymbol(getMappedSymbolsFromUrl(pair)[0])
+      }
+      fetchPublicfunding()
     }
   }
 

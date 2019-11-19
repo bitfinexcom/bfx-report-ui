@@ -6,21 +6,19 @@ import {
 } from '@blueprintjs/core'
 import { MultiSelect } from '@blueprintjs/select'
 
-import { formatPair } from 'state/symbols/utils'
-
 import { propTypes, defaultProps } from './MultiPairSelector.props'
 
 class MultiPairSelector extends PureComponent {
   filterPair = (query, pair) => pair.toUpperCase().indexOf(query.toUpperCase()) >= 0
 
-  renderTag = pair => formatPair(pair)
+  renderTag = pair => pair
 
   renderPair = (pair, { modifiers }) => {
     if (!modifiers.matchesPredicate) {
       return null
     }
     const { currentFilters, existingPairs } = this.props
-    const isCurrent = currentFilters.map(currentPair => currentPair.replace(':', '/')).includes(pair)
+    const isCurrent = currentFilters.includes(pair)
     const className = existingPairs.includes(pair) && !isCurrent
       ? 'bitfinex-queried-symbol' : ''
 
@@ -40,7 +38,7 @@ class MultiPairSelector extends PureComponent {
   togglePair = (pair) => {
     const { togglePair } = this.props
 
-    togglePair(pair.replace('/', ':'))
+    togglePair(pair)
   }
 
   render() {

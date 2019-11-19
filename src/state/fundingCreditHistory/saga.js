@@ -6,13 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import {
-  formatRawSymbols,
-  getSymbolsURL,
-  getSymbolsFromUrlParam,
-  mapRequestSymbols,
-  mapSymbol,
-} from 'state/symbols/utils'
+import { formatRawSymbols, mapRequestSymbols } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -43,15 +37,9 @@ function getReqFCredit({
   return makeFetchCall('getFundingCreditHistory', params)
 }
 
-function* fetchFCredit({ payload: symbol }) {
+function* fetchFCredit() {
   try {
-    let targetSymbols = yield select(getTargetSymbols)
-    const symbolsUrl = getSymbolsURL(targetSymbols)
-    // set symbol from url
-    if (symbol && symbol !== symbolsUrl) {
-      targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
-      yield put(actions.setTargetSymbols(targetSymbols))
-    }
+    const targetSymbols = yield select(getTargetSymbols)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqFCredit, {

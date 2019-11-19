@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch Affiliates Earnings data.
- * @param {string} symbol symbol param from url
  */
-export function fetchAffiliatesEarnings(symbol) {
+export function fetchAffiliatesEarnings() {
   return {
     type: types.FETCH_AFFILIATES_EARNINGS,
-    payload: symbol,
   }
 }
 

@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbols, mapRequestSymbols, mapSymbol } from 'state/symbols/utils'
+import { formatRawSymbols, mapRequestSymbols } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -37,14 +37,9 @@ function getReqPublicFunding({
   return makeFetchCall('getPublicTrades', params)
 }
 
-function* fetchPublicFunding({ payload: symbol }) {
+function* fetchPublicFunding() {
   try {
-    let targetSymbol = yield select(getTargetSymbol)
-    // set symbol from url
-    if (symbol && symbol !== targetSymbol) {
-      yield put(actions.setTargetSymbol(mapSymbol(symbol)))
-      targetSymbol = symbol
-    }
+    const targetSymbol = yield select(getTargetSymbol)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPublicFunding, {

@@ -8,8 +8,6 @@ import {
 import { Select } from '@blueprintjs/select'
 import { IconNames } from '@blueprintjs/icons'
 
-import { formatPair } from 'state/symbols/utils'
-
 class PairSelector extends PureComponent {
   filterPair = (query, pair) => pair.indexOf(query.toUpperCase()) >= 0
 
@@ -18,7 +16,7 @@ class PairSelector extends PureComponent {
       return null
     }
     const { currentPair, existingPairs, wildCard } = this.props
-    const isCurrent = currentPair === pair.replace('/', ':')
+    const isCurrent = currentPair === pair
     const className = (wildCard.includes(pair) || existingPairs.includes(pair)) && !isCurrent
       ? 'bitfinex-queried-symbol' : ''
 
@@ -38,7 +36,7 @@ class PairSelector extends PureComponent {
   onPairSelect = (pair) => {
     const { onPairSelect } = this.props
 
-    onPairSelect(pair.replace('/', ':'))
+    onPairSelect(pair)
   }
 
   render() {
@@ -53,7 +51,7 @@ class PairSelector extends PureComponent {
         onItemSelect={this.onPairSelect}
       >
         <Button
-          text={formatPair(currentPair)}
+          text={currentPair}
           rightIcon={IconNames.CARET_DOWN}
           disabled={!pairs.length}
         />

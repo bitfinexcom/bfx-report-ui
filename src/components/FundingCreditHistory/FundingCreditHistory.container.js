@@ -8,6 +8,7 @@ import {
   jumpPage,
   refresh,
   addTargetSymbol,
+  setTargetSymbols,
   removeTargetSymbol,
 } from 'state/fundingCreditHistory/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -44,6 +45,7 @@ const mapDispatchToProps = {
   jumpPage,
   refresh,
   addTargetSymbol,
+  setTargetSymbols,
   removeTargetSymbol,
 }
 

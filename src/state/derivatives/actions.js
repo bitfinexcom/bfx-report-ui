@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch derivatives status data.
- * @param {string} pairs pairs param from url
  */
-export function fetchDerivatives(pairs) {
+export function fetchDerivatives() {
   return {
     type: types.FETCH_DERIVATIVES,
-    payload: pairs,
   }
 }
 

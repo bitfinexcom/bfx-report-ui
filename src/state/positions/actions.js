@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch Positions data.
- * @param {string} pair pair param from url
  */
-export function fetchPositions(pair) {
+export function fetchPositions() {
   return {
     type: types.FETCH_POSITIONS,
-    payload: pair,
   }
 }
 

@@ -9,9 +9,7 @@ import { makeFetchCall } from 'state/utils'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import {
-  getSymbolsURL, getSymbolsFromUrlParam, mapSymbol, mapRequestSymbols,
-} from 'state/symbols/utils'
+import { mapRequestSymbols } from 'state/symbols/utils'
 import { getFilterQuery } from 'state/filters/selectors'
 import { getPageSize } from 'state/query/utils'
 import { fetchNext } from 'state/sagas.helper'
@@ -43,20 +41,14 @@ function getReqLedgers({
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchLedgers({ payload: symbol }) {
+function* fetchLedgers() {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
       // stop loading for first request
       return yield put(actions.updateLedgers())
     }
-    let targetSymbols = yield select(getTargetSymbols)
-    const symbolsUrl = getSymbolsURL(targetSymbols)
-    // set symbol from url
-    if (symbol && symbol !== symbolsUrl) {
-      targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
-      yield put(actions.setTargetSymbols(targetSymbols))
-    }
+    const targetSymbols = yield select(getTargetSymbols)
     const query = yield select(getQuery)
     const getQueryLimit = yield select(getTargetQueryLimit)
     const filter = yield select(getFilterQuery, TYPE)

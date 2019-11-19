@@ -17,6 +17,7 @@ const FOFFER_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   addTargetSymbol: PropTypes.func.isRequired,
+  setTargetSymbols: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(FOFFER_ENTRIES_PROPS).isRequired,
   existingCoins: PropTypes.arrayOf(PropTypes.string),

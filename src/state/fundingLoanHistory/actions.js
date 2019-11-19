@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch funding loan history data.
- * @param {string} symbol symbol param from url
  */
-export function fetchFLoan(symbol) {
+export function fetchFLoan() {
   return {
     type: types.FETCH_FLOAN,
-    payload: symbol,
   }
 }
 

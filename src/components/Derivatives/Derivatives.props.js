@@ -12,6 +12,7 @@ const DERIVATIVES_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   addTargetPair: PropTypes.func.isRequired,
+  setTargetPairs: PropTypes.func.isRequired,
   entries: PropTypes.arrayOf(DERIVATIVES_ENTRIES_PROPS).isRequired,
   pairs: PropTypes.arrayOf(PropTypes.string),
   existingPairs: PropTypes.arrayOf(PropTypes.string),

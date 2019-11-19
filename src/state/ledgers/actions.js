@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch Ledgers data.
- * @param {string} symbol symbol param from url
  */
-export function fetchLedgers(symbol) {
+export function fetchLedgers() {
   return {
     type: types.FETCH_LEDGERS,
-    payload: symbol,
   }
 }
 

@@ -18,6 +18,7 @@ import PairSelector from 'ui/PairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   getCurrentEntries,
@@ -35,10 +36,15 @@ const WILD_CARD = ['']
 
 class PublicTrades extends PureComponent {
   componentDidMount() {
-    const { loading, fetchPublictrades, match } = this.props
+    const {
+      loading, setTargetPair, fetchPublictrades, match,
+    } = this.props
     if (loading) {
       const pair = (match.params && match.params.pair) || ''
-      fetchPublictrades(pair)
+      if (pair) {
+        setTargetPair(getMappedSymbolsFromUrl(pair)[0])
+      }
+      fetchPublictrades()
     }
   }
 

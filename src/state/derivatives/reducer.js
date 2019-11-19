@@ -6,7 +6,7 @@ import authTypes from 'state/auth/constants'
 import {
   addPair, basePairState, fetchFail, removePair, setPairs,
 } from 'state/reducers.helper'
-import { formatSymbolToPair } from 'state/symbols/utils'
+import { formatPair, mapPair } from 'state/symbols/utils'
 
 import types from './constants'
 
@@ -37,7 +37,7 @@ export function derivativesReducer(state = initialState, action) {
         } = entry
 
         return {
-          pair: formatSymbolToPair(key),
+          pair: mapPair(formatPair(key)),
           timestamp,
           price,
           priceSpot,

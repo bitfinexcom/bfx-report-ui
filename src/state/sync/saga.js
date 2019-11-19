@@ -14,8 +14,8 @@ import { setSyncState } from 'state/base/actions'
 import { getSyncState } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 import {
-  mapRequestSymbols, formatInternalSymbol, formatRawSymbols, formatSymbolToPair,
-  isPair, isSymbol, mapRequestPairs, mapSymbol,
+  formatRawSymbols, formatPair, mapRequestSymbols, mapRequestPairs,
+  mapSymbol, mapPair, isFundingSymbol, isTradingPair, removePrefix,
 } from 'state/symbols/utils'
 
 import types from './constants'
@@ -187,16 +187,16 @@ function* getSyncPref() {
     yield call(getTickersHistoryConf),
   ])
 
-  const formatSymbol = data => mapSymbol(formatInternalSymbol(data.symbol))
-  const formatPair = ({ symbol }) => formatSymbolToPair(symbol).split('/').map(mapSymbol).join(':')
+  const formatSymbol = data => mapSymbol(removePrefix(data.symbol))
+  const formatConfigPairs = ({ symbol }) => mapPair(formatPair(symbol))
 
-  if (publicTradesPrefResult && publicTradesPrefResult.length > 0) {
-    const publicTradesPairs = publicTradesPrefResult.filter(data => isPair(data.symbol))
-    const publicTradesSymbols = publicTradesPrefResult.filter(data => isSymbol(data.symbol))
+  if (publicTradesPrefResult && publicTradesPrefResult.length) {
+    const publicTradesPairs = publicTradesPrefResult.filter(data => isTradingPair(data.symbol))
+    const publicTradesSymbols = publicTradesPrefResult.filter(data => isFundingSymbol(data.symbol))
 
     yield put(actions.setSyncPref({
       publicTrades: {
-        pairs: publicTradesPairs.map(formatPair),
+        pairs: publicTradesPairs.map(formatConfigPairs),
         startTime: publicTradesPairs[0] && publicTradesPairs[0].start,
       },
       publicFunding: {
@@ -206,12 +206,12 @@ function* getSyncPref() {
     }))
   }
 
-  if (tickersHistoryPrefResult && tickersHistoryPrefResult.length > 0) {
-    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isPair(data.symbol))
+  if (tickersHistoryPrefResult && tickersHistoryPrefResult.length) {
+    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isTradingPair(data.symbol))
 
     yield put(actions.setSyncPref({
       tickersHistory: {
-        pairs: tickersHistoryPairs.map(formatPair),
+        pairs: tickersHistoryPairs.map(formatConfigPairs),
         startTime: tickersHistoryPairs[0] && tickersHistoryPairs[0].start,
       },
     }))

@@ -17,6 +17,7 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   getQueryLimit,
   getPath,
@@ -38,10 +39,15 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 class Positions extends PureComponent {
   componentDidMount() {
-    const { loading, fetchPositions, match } = this.props
+    const {
+      loading, setTargetPairs, fetchPositions, match,
+    } = this.props
     if (loading) {
-      const pair = (match.params && match.params.pair) || ''
-      fetchPositions(pair)
+      const pairs = (match.params && match.params.pair) || ''
+      if (pairs) {
+        setTargetPairs(getMappedSymbolsFromUrl(pairs))
+      }
+      fetchPositions()
     }
   }
 

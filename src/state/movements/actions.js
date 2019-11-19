@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch Movements data.
- * @param {string} symbol symbol param from url
  */
-export function fetchMovements(symbol) {
+export function fetchMovements() {
   return {
     type: types.FETCH_MOVEMENTS,
-    payload: symbol,
   }
 }
 

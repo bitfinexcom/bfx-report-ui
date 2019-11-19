@@ -8,9 +8,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import {
-  formatRawSymbols, getSymbolsURL, getPairsFromUrlParam, mapPair, mapRequestPairs,
-} from 'state/symbols/utils'
+import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -41,15 +39,9 @@ function getReqPositions({
   return makeFetchCall('getPositionsHistory', params)
 }
 
-function* fetchPositions({ payload: pair }) {
+function* fetchPositions() {
   try {
-    let targetPairs = yield select(getTargetPairs)
-    const pairsUrl = getSymbolsURL(targetPairs)
-    // set pair from url
-    if (pair && pair !== pairsUrl) {
-      targetPairs = getPairsFromUrlParam(pair).map(mapPair)
-      yield put(actions.setTargetPairs(targetPairs))
-    }
+    const targetPairs = yield select(getTargetPairs)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPositions, {

@@ -14,6 +14,7 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   togglePair,
@@ -32,10 +33,15 @@ class Derivatives extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchDerivatives, match } = this.props
+    const {
+      loading, setTargetPairs, fetchDerivatives, match,
+    } = this.props
     if (loading) {
-      const pair = (match.params && match.params.pair) || ''
-      fetchDerivatives(pair)
+      const pairs = (match.params && match.params.pair) || ''
+      if (pairs) {
+        setTargetPairs(getMappedSymbolsFromUrl(pairs))
+      }
+      fetchDerivatives()
     }
   }
 

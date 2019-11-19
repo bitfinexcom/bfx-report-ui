@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch public Funding data.
- * @param {string} symbol symbol param from url
  */
-export function fetchPublicFunding(symbol) {
+export function fetchPublicFunding() {
   return {
     type: types.FETCH_PUBLIC_FUNDING,
-    payload: symbol,
   }
 }
 

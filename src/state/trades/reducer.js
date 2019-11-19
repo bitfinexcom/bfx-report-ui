@@ -1,9 +1,7 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
 import _get from 'lodash/get'
 
-import {
-  formatInternalSymbol, formatSymbolToPair, mapSymbol, mapPair,
-} from 'state/symbols/utils'
+import { formatPair, mapSymbol, mapPair } from 'state/symbols/utils'
 import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
@@ -58,10 +56,10 @@ export function tradesReducer(state = initialState, action) {
           orderPrice,
           orderType,
         } = entry
-        const internalPair = mapPair(formatInternalSymbol(symbol))
+        const formattedPair = mapPair(formatPair(symbol))
         // save new pair to updatePairs list
-        if (updatePairs.indexOf(internalPair) === -1) {
-          updatePairs.push(internalPair)
+        if (updatePairs.indexOf(formattedPair) === -1) {
+          updatePairs.push(formattedPair)
         }
         // log smallest mts
         if (nextPage === false && (!smallestMts || smallestMts > mtsCreate)) {
@@ -69,7 +67,7 @@ export function tradesReducer(state = initialState, action) {
         }
         return {
           id,
-          pair: formatSymbolToPair(symbol),
+          pair: formattedPair,
           mtsCreate,
           orderID,
           execAmount,

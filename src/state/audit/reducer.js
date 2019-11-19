@@ -1,7 +1,7 @@
 // data format https://github.com/bitfinexcom/bfx-api-node-models/blob/master/lib/position_hist.js
 import _get from 'lodash/get'
 
-import { formatSymbolToPair } from 'state/symbols/utils'
+import { formatPair, mapPair } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -59,7 +59,7 @@ export function positionsAuditReducer(state = initialState, action) {
         }
         return {
           id,
-          pair: formatSymbolToPair(symbol),
+          pair: mapPair(formatPair(symbol)),
           amount,
           basePrice,
           collateral,

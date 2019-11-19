@@ -8,6 +8,7 @@ import {
   jumpPage,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
 } from 'state/tickers/actions'
 import { updateErrorStatus } from 'state/status/actions'
@@ -47,6 +48,7 @@ const mapDispatchToProps = {
   jumpPage,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
   updateErrorStatus,
 }

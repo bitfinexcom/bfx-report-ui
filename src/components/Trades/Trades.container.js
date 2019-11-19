@@ -8,7 +8,7 @@ import {
   jumpPage,
   refresh,
   addTargetPair,
-  removeTargetPair,
+  removeTargetPair, setTargetPairs,
 } from 'state/trades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getTargetQueryLimit } from 'state/query/selectors'
@@ -46,6 +46,7 @@ const mapDispatchToProps = {
   jumpPage,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
 }
 

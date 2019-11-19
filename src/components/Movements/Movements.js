@@ -16,6 +16,7 @@ import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   getCurrentEntries,
@@ -34,14 +35,14 @@ const PAGE_SIZE = getPageSize(TYPE)
 class Movements extends PureComponent {
   componentDidMount() {
     const {
-      loading,
-      fetchMovements,
-      match,
-      jumpPage,
+      loading, setTargetSymbols, fetchMovements, match, jumpPage,
     } = this.props
     if (loading) {
-      const symbol = (match.params && match.params.symbol) || ''
-      fetchMovements(symbol)
+      const symbols = (match.params && match.params.symbol) || ''
+      if (symbols) {
+        setTargetSymbols(getMappedSymbolsFromUrl(symbols))
+      }
+      fetchMovements()
     } else {
       jumpPage(0, 25)
     }

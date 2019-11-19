@@ -17,6 +17,7 @@ import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   toggleSymbol,
@@ -31,10 +32,15 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 class Ledgers extends PureComponent {
   componentDidMount() {
-    const { loading, fetchLedgers, match } = this.props
+    const {
+      loading, setTargetSymbols, fetchLedgers, match,
+    } = this.props
     if (loading) {
-      const symbol = (match.params && match.params.symbol) || ''
-      fetchLedgers(symbol)
+      const symbols = (match.params && match.params.symbol) || ''
+      if (symbols) {
+        setTargetSymbols(getMappedSymbolsFromUrl(symbols))
+      }
+      fetchLedgers()
     }
   }
 

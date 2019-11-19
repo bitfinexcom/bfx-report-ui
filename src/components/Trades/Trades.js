@@ -17,6 +17,7 @@ import RefreshButton from 'ui/RefreshButton'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   getCurrentEntries,
@@ -31,10 +32,15 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 class Trades extends PureComponent {
   componentDidMount() {
-    const { loading, fetchTrades, match } = this.props
+    const {
+      loading, setTargetPairs, fetchTrades, match,
+    } = this.props
     if (loading) {
-      const pair = (match.params && match.params.pair) || ''
-      fetchTrades(pair)
+      const pairs = (match.params && match.params.pair) || ''
+      if (pairs) {
+        setTargetPairs(getMappedSymbolsFromUrl(pairs))
+      }
+      fetchTrades()
     }
   }
 

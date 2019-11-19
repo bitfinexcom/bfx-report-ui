@@ -8,6 +8,7 @@ import {
   jumpPage,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
 } from 'state/positions/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -44,6 +45,7 @@ const mapDispatchToProps = {
   jumpPage,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
 }
 

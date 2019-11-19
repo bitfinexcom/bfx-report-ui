@@ -18,12 +18,12 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   getCurrentEntries,
   togglePair,
 } from 'state/utils'
-import { parsePairTag } from 'state/symbols/utils'
 import { platform } from 'var/config'
 
 import getColumns from './Tickers.columns'
@@ -35,10 +35,15 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 class Tickers extends PureComponent {
   componentDidMount() {
-    const { loading, fetchTickers, match } = this.props
+    const {
+      loading, setTargetPairs, fetchTickers, match,
+    } = this.props
     if (loading) {
-      const pair = (match.params && match.params.pair) || ''
-      fetchTickers(pair)
+      const pairs = (match.params && match.params.pair) || ''
+      if (pairs) {
+        setTargetPairs(getMappedSymbolsFromUrl(pairs))
+      }
+      fetchTickers()
     }
   }
 
@@ -48,7 +53,7 @@ class Tickers extends PureComponent {
 
   togglePair = (pair) => {
     const { targetPairs, updateErrorStatus } = this.props
-    if (targetPairs.length === 1 && targetPairs.includes(parsePairTag(pair))) {
+    if (targetPairs.length === 1 && targetPairs.includes(pair)) {
       updateErrorStatus({ id: 'tickers.minlength' })
     } else {
       togglePair(TYPE, this.props, pair)

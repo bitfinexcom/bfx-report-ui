@@ -1,9 +1,7 @@
 // https://docs.bitfinex.com/v2/reference#TICKERS-history
 import _get from 'lodash/get'
 
-import {
-  formatInternalSymbol, formatSymbolToPair, mapPair,
-} from 'state/symbols/utils'
+import { formatPair, mapPair } from 'state/symbols/utils'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -50,10 +48,10 @@ export function TickersReducer(state = initialState, action) {
           mtsUpdate,
           symbol,
         } = entry
-        const internalPair = mapPair(formatInternalSymbol(symbol))
+        const formattedPair = mapPair(formatPair(symbol))
         // save new pair to updatePairs list
-        if (updatePairs.indexOf(internalPair) === -1) {
-          updatePairs.push(internalPair)
+        if (updatePairs.indexOf(formattedPair) === -1) {
+          updatePairs.push(formattedPair)
         }
         // log smallest mts
         if (nextPage === false
@@ -65,7 +63,7 @@ export function TickersReducer(state = initialState, action) {
           ask,
           bid,
           mtsUpdate,
-          pair: formatSymbolToPair(symbol),
+          pair: formattedPair,
         }
       })
       const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)

@@ -5,6 +5,7 @@ import {
   fetchDerivatives,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
 } from 'state/derivatives/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -32,6 +33,7 @@ const mapDispatchToProps = {
   fetchDerivatives,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
 }
 
