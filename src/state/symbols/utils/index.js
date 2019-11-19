@@ -45,8 +45,8 @@ export const getMappedSymbolsFromUrl = (params) => {
   return [mapCurrency(params)]
 }
 
-// ['usd', 'etc'] -> USD,ETC
-// ['usd'] -> USD
+// ['USD'] -> USD
+// ['USD 'ETC'] -> USD,ETC
 export const getSymbolsURL = (symbols) => {
   if (Array.isArray(symbols) && symbols.length) {
     if (symbols.length === 1) {

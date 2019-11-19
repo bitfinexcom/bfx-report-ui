@@ -43,6 +43,9 @@ export const demapPairs = (pairs, returnString = false) => {
     : mappedPairs
 }
 
+// [CNHt] -> [CNHT]
+// [BCH] -> [BAB, BCH]
+// [BCH], true -> BAB
 export const mapRequestSymbols = (symbols, returnString = false) => {
   const demapped = demapSymbols(symbols)
 
@@ -81,6 +84,8 @@ export default {
   mapPair,
   mapCurrency,
   mapDescription,
+  demapSymbols,
+  demapPairs,
   mapRequestSymbols,
   mapRequestPairs,
 }
