@@ -19,9 +19,9 @@ export const getReqTaxReport = (params) => {
   return makeFetchCall('getFullTaxReport', { start, end })
 }
 
-const getReqTaxReportSnapshot = (auth, end) => {
+const getReqTaxReportSnapshot = (end) => {
   const params = end ? { end } : {}
-  return makeFetchCall('getFullSnapshotReport', auth, params)
+  return makeFetchCall('getFullSnapshotReport', params)
 }
 
 /* eslint-disable-next-line consistent-return */
