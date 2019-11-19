@@ -14,25 +14,21 @@ class SymbolSelector extends PureComponent {
       coins,
       currencies,
       currentCoin,
-      existingCoins,
       onSymbolSelect,
-      wildCard,
     } = this.props
 
     const renderSymbol = (symbol, { modifiers }) => {
-      if (!modifiers.matchesPredicate) {
+      const { active, disabled, matchesPredicate } = modifiers
+      if (!matchesPredicate) {
         return null
       }
       const isCurrent = currentCoin === symbol
-      const className = (wildCard.includes(symbol) || existingCoins.includes(symbol)) && !isCurrent
-        ? 'bitfinex-queried-symbol' : ''
 
       return (
         <MenuItem
-          className={className}
-          active={modifiers.active}
+          active={active}
           intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-          disabled={modifiers.disabled}
+          disabled={disabled}
           key={symbol}
           onClick={() => onSymbolSelect(symbol)}
           text={symbol}
@@ -65,15 +61,11 @@ SymbolSelector.propTypes = {
   coins: PropTypes.arrayOf(PropTypes.string),
   currencies: PropTypes.objectOf(PropTypes.string),
   currentCoin: PropTypes.string.isRequired,
-  existingCoins: PropTypes.arrayOf(PropTypes.string),
   onSymbolSelect: PropTypes.func.isRequired,
-  wildCard: PropTypes.arrayOf(PropTypes.string),
 }
 SymbolSelector.defaultProps = {
   coins: [],
   currencies: {},
-  existingCoins: [],
-  wildCard: [],
 }
 
 export default SymbolSelector

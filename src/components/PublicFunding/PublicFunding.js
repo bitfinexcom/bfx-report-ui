@@ -32,7 +32,6 @@ import { propTypes, defaultProps } from './PublicFunding.props'
 const TYPE = queryConstants.MENU_PUBLIC_FUNDING
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
-const WILD_CARD = ['']
 
 class PublicFunding extends PureComponent {
   componentDidMount() {
@@ -120,9 +119,7 @@ class PublicFunding extends PureComponent {
           coins={coins}
           currencies={currencies}
           currentCoin={currentSymbol}
-          existingCoins={[]}
           onSymbolSelect={this.handleClick}
-          wildCard={WILD_CARD}
         />
       </Fragment>
     )

@@ -32,7 +32,6 @@ import { propTypes, defaultProps } from './PublicTrades.props'
 const TYPE = queryConstants.MENU_PUBLIC_TRADES
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
-const WILD_CARD = ['']
 
 class PublicTrades extends PureComponent {
   componentDidMount() {
@@ -108,10 +107,8 @@ class PublicTrades extends PureComponent {
         {' '}
         <PairSelector
           currentPair={currentPair}
-          existingPairs={[]}
           onPairSelect={pair => setPair(TYPE, this.props, pair)}
           pairs={pairs}
-          wildCard={WILD_CARD}
         />
       </Fragment>
     )

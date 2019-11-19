@@ -12,20 +12,18 @@ class PairSelector extends PureComponent {
   filterPair = (query, pair) => pair.indexOf(query.toUpperCase()) >= 0
 
   renderPair = (pair, { modifiers }) => {
-    if (!modifiers.matchesPredicate) {
+    const { active, disabled, matchesPredicate } = modifiers
+    if (!matchesPredicate) {
       return null
     }
-    const { currentPair, existingPairs, wildCard } = this.props
+    const { currentPair } = this.props
     const isCurrent = currentPair === pair
-    const className = (wildCard.includes(pair) || existingPairs.includes(pair)) && !isCurrent
-      ? 'bitfinex-queried-symbol' : ''
 
     return (
       <MenuItem
-        className={className}
-        active={modifiers.active}
+        active={active}
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-        disabled={modifiers.disabled}
+        disabled={disabled}
         key={pair}
         onClick={() => this.onPairSelect(pair)}
         text={pair}
@@ -62,15 +60,11 @@ class PairSelector extends PureComponent {
 
 PairSelector.propTypes = {
   currentPair: PropTypes.string.isRequired,
-  existingPairs: PropTypes.arrayOf(PropTypes.string),
   onPairSelect: PropTypes.func.isRequired,
   pairs: PropTypes.arrayOf(PropTypes.string),
-  wildCard: PropTypes.arrayOf(PropTypes.string),
 }
 PairSelector.defaultProps = {
   pairs: [],
-  existingPairs: [],
-  wildCard: [],
 }
 
 export default PairSelector

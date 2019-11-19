@@ -14,20 +14,21 @@ class MultiPairSelector extends PureComponent {
   renderTag = pair => pair
 
   renderPair = (pair, { modifiers }) => {
-    if (!modifiers.matchesPredicate) {
+    const { active, disabled, matchesPredicate } = modifiers
+    if (!matchesPredicate) {
       return null
     }
     const { currentFilters, existingPairs } = this.props
     const isCurrent = currentFilters.includes(pair)
-    const className = existingPairs.includes(pair) && !isCurrent
+    const className = existingPairs.includes(pair) && !isCurrent && !active
       ? 'bitfinex-queried-symbol' : ''
 
     return (
       <MenuItem
         className={className}
-        active={modifiers.active}
+        active={active}
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-        disabled={modifiers.disabled}
+        disabled={disabled}
         key={pair}
         onClick={() => this.togglePair(pair)}
         text={pair}
