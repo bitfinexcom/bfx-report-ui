@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import { persistReducer, createMigrate } from 'redux-persist'
+import { connectRouter } from 'connected-react-router'
 import storage from 'redux-persist/lib/storage'
 
 import { platform } from 'var/config'
 import persistMigrations from 'state/persist.migrations'
 
+import history from './createdHistory'
 import accountBalanceReducer from './accountBalance/reducer'
 import affiliatesEarningsReducer from './affiliatesEarnings/reducer'
 import authReducer from './auth/reducer'
@@ -65,6 +67,7 @@ const BASE_REDUCERS = {
   positions: positionsReducer,
   publicFunding: publicFundingReducer,
   publicTrades: publicTradesReducer,
+  router: connectRouter(history),
   query: queryReducer,
   tickers: tickersReducer,
   trades: tradesReducer,

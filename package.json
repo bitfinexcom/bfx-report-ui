@@ -23,6 +23,7 @@
     "@blueprintjs/table": "^3.5.0",
     "@blueprintjs/timezone": "^3.4.0",
     "classnames": "2.2.6",
+    "connected-react-router": "^6.6.0",
     "dotenv": "^7.0.0",
     "flexboxgrid2": "7.2.1",
     "history": "^4.9.0",

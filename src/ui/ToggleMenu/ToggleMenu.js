@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
@@ -17,6 +16,8 @@ import baseType from 'state/base/constants'
 import { getIcon, getPath } from 'state/query/utils'
 import { getNoAuthUrlString } from 'state/utils'
 import { platform } from 'var/config'
+
+import { propTypes, defaultProps } from './ToggleMenu.props'
 
 const { showFrameworkMode } = platform
 
@@ -47,6 +48,10 @@ const {
 } = queryType
 
 class ToggleMenu extends PureComponent {
+  static propTypes = propTypes
+
+  static defaultProps = defaultProps
+
   sections = [
     [MENU_LEDGERS, 'ledgers.title'],
     [MENU_TRADES, 'trades.title'],
@@ -130,18 +135,6 @@ class ToggleMenu extends PureComponent {
       </Menu>
     )
   }
-}
-
-ToggleMenu.propTypes = {
-  handleClickCustom: PropTypes.func.isRequired,
-  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
-  menuMode: PropTypes.string,
-  t: PropTypes.func.isRequired,
-  target: PropTypes.string.isRequired,
-}
-
-ToggleMenu.defaultProps = {
-  menuMode: '',
 }
 
 export default withTranslation('translations')(ToggleMenu)
