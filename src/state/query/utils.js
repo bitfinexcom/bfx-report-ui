@@ -306,7 +306,7 @@ const MAPPING = {
   },
 }
 
-const PATHMAP = {}
+export const PATHMAP = {}
 ROUTE_WHITELIST.forEach((key) => {
   const { path } = MAPPING[key]
 

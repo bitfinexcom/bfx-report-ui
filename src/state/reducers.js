@@ -25,6 +25,7 @@ import positionsActiveReducer from './positionsActive/reducer'
 import positionsReducer from './positions/reducer'
 import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
+import routingReducer from './routing/reducer'
 import snapshotsReducer from './snapshots/reducer'
 import queryReducer from './query/reducer'
 import taxReportReducer from './taxReport/reducer'
@@ -68,6 +69,7 @@ const BASE_REDUCERS = {
   publicFunding: publicFundingReducer,
   publicTrades: publicTradesReducer,
   router: connectRouter(history),
+  routing: routingReducer,
   query: queryReducer,
   tickers: tickersReducer,
   trades: tradesReducer,

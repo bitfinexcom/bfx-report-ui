@@ -78,10 +78,13 @@ class ToggleMenu extends PureComponent {
     [MENU_TAX_REPORT, 'taxreport.title', !showFrameworkMode],
   ]
 
-  handleClick(target) {
-    const { history } = this.props
-    const path = _castArray(getPath(target))[0]
-    history.push(`${path}${history.location.search}`)
+  handleClick(nextTarget) {
+    const { target, history } = this.props
+    if (target === nextTarget) {
+      return
+    }
+    const [path] = _castArray(getPath(nextTarget))
+    history.push(path)
   }
 
   /* eslint-disable react/no-array-index-key */
