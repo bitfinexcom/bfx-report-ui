@@ -133,25 +133,16 @@ export const removeUrlParams = (params) => {
   window.history.pushState(null, null, window.location.href.replace(currentUrlParams, updatedQuery))
 }
 
-// remove authToken param from url but keep others
-export function getNoAuthUrlString(searchUrl) {
-  const parsed = queryString.parse(searchUrl)
-  const params = _omit(parsed, ['authToken', 'apiKey', 'apiSecret'])
-  const queries = queryString.stringify(params, { encode: false })
-  return queries ? `?${queries}` : ''
-}
-
 // genereate url with route and params
 export function generateUrl(type, params, symbols) {
   if (!isValidRouteType(type)) {
     // eslint-disable-next-line no-console
-    console.error('Unsupport route type ', type)
+    console.error('Unsupported route type ', type)
     return ''
   }
-  const noAuthTokenParams = getNoAuthUrlString(params)
   return (symbols && symbols.length)
-    ? `${getPath(type)}/${getSymbolsURL(symbols)}${noAuthTokenParams}`
-    : `${getPath(type)}${noAuthTokenParams}`
+    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
+    : `${getPath(type)}${params}`
 }
 
 export function toggleSymbol(type, props, symbol) {
@@ -337,7 +328,6 @@ export default {
   getAuth,
   getCurrentEntries,
   getLastMonth,
-  getNoAuthUrlString,
   getParsedUrlParams,
   getSideMsg,
   generateUrl,

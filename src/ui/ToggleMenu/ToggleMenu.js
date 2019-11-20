@@ -14,7 +14,6 @@ import Timeframe from 'components/Timeframe'
 import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
 import { getIcon, getPath } from 'state/query/utils'
-import { getNoAuthUrlString } from 'state/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './ToggleMenu.props'
@@ -82,7 +81,7 @@ class ToggleMenu extends PureComponent {
   handleClick(target) {
     const { history } = this.props
     const path = _castArray(getPath(target))[0]
-    history.push(`${path}${getNoAuthUrlString(history.location.search)}`)
+    history.push(`${path}${history.location.search}`)
   }
 
   /* eslint-disable react/no-array-index-key */

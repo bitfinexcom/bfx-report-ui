@@ -22,11 +22,7 @@ import {
   getPageSize,
   getPath,
 } from 'state/query/utils'
-import {
-  checkFetch,
-  getCurrentEntries,
-  getNoAuthUrlString,
-} from 'state/utils'
+import { checkFetch, getCurrentEntries } from 'state/utils'
 
 import getColumns from 'components/Positions/Positions.columns'
 import { propTypes, defaultProps } from './PositionsAudit.props'
@@ -53,7 +49,7 @@ class PositionsAudit extends PureComponent {
   jumpToPositions = (e) => {
     e.preventDefault()
     const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS)}${getNoAuthUrlString(history.location.search)}`)
+    history.push(`${getPath(queryConstants.MENU_POSITIONS)}${history.location.search}`)
   }
 
   render() {

@@ -22,7 +22,6 @@ import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  getNoAuthUrlString,
 } from 'state/utils'
 import { platform } from 'var/config'
 
@@ -55,7 +54,7 @@ class PublicFunding extends PureComponent {
     const { history, targetSymbol, setTargetSymbol } = this.props
     if (symbol !== targetSymbol) {
       // show select symbol in url
-      history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${getNoAuthUrlString(history.location.search)}`)
+      history.push(`${getPath(TYPE)}/${symbol}${history.location.search}`)
       setTargetSymbol(symbol)
     }
   }
