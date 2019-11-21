@@ -4,6 +4,9 @@ import {
 } from 'redux-saga/effects'
 
 import queryTypes from 'state/query/constants'
+import { getTarget } from 'state/query/utils'
+import uiTypes from 'state/ui/constants'
+import { decodeFilters } from 'state/filters/utils'
 import { fetchLedgers, refresh as refreshLedgers } from 'state/ledgers/actions'
 import { fetchTrades, refresh as refreshTrades } from 'state/trades/actions'
 import { fetchOrders, refresh as refreshOrders } from 'state/orders/actions'
@@ -20,6 +23,7 @@ import { fetchTickers, refresh as refreshTickers } from 'state/tickers/actions'
 import { fetchDerivatives, refresh as refreshDerivatives } from 'state/derivatives/actions'
 
 import types from './constants'
+import actions from './actions'
 
 const {
   MENU_LEDGERS,
@@ -39,7 +43,11 @@ const {
 } = queryTypes
 
 export function* setFilters({ payload }) {
-  const { section } = payload
+  const { section, refresh = true } = payload
+
+  if (!refresh) {
+    return
+  }
 
   switch (section) {
     case MENU_LEDGERS:
@@ -102,6 +110,19 @@ export function* setFilters({ payload }) {
   }
 }
 
+function* setFiltersFromUrl() {
+  const { pathname, search } = window.location
+
+  const section = getTarget(pathname, false)
+  if (!section) {
+    return
+  }
+
+  const filters = decodeFilters({ query: search, section })
+  yield put(actions.setFilters({ section, filters, refresh: false })) // fetch will be done automatically after auth
+}
+
 export default function* filtersSaga() {
   yield takeLatest(types.SET_FILTERS, setFilters)
+  yield takeLatest(uiTypes.UI_LOADED, setFiltersFromUrl)
 }

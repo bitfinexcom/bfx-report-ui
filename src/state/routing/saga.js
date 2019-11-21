@@ -3,6 +3,8 @@ import { LOCATION_CHANGE, replace } from 'connected-react-router'
 import _isEmpty from 'lodash/isEmpty'
 
 import { PATHMAP } from 'state/query/utils'
+import { encodeFilters } from 'state/filters/utils'
+import filterTypes from 'state/filters/constants'
 
 import { setLastRoute, setRouteParams } from './actions'
 import { getLastRoute, getRouteParams } from './selectors'
@@ -54,7 +56,27 @@ function* lastRouteSet({ payload }) {
   yield put(setLastRoute(route))
 }
 
+function* filtersSet({ payload }) {
+  const { section, filters } = payload
+
+  const query = encodeFilters(filters)
+
+  const { pathname } = window.location
+  yield put(replace(`${pathname}${query}`, { isSkipped: true })) // skip next location change check
+
+  const options = {
+    route: section,
+    params: {
+      pathname,
+      search: query,
+    },
+  }
+
+  yield put(setRouteParams(options))
+}
+
 export default function* routingSaga() {
   yield takeLatest(LOCATION_CHANGE, locationChange)
   yield takeLatest(LOCATION_CHANGE, lastRouteSet)
+  yield takeLatest(filterTypes.SET_FILTERS, filtersSet)
 }

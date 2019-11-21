@@ -6,8 +6,12 @@ import _set from 'lodash/set'
 import _toNumber from 'lodash/toNumber'
 import _toInteger from 'lodash/toInteger'
 import _toString from 'lodash/toString'
+import _findKey from 'lodash/findKey'
+import _sortBy from 'lodash/sortBy'
+import _find from 'lodash/find'
 
-import FILTER_TYPES, { FILTERS } from 'var/filterTypes'
+import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
+import FILTER_TYPES, { FILTER_QUERY_TYPES, FILTERS } from 'var/filterTypes'
 import DATA_TYPES from 'var/dataTypes'
 
 const {
@@ -29,16 +33,18 @@ const getValue = ({ dataType, value }) => {
   }
 }
 
+const getValidFilters = filters => filters.filter((filter) => {
+  const { column, type, value } = filter
+  return column && type && value !== undefined && value !== ''
+})
+
+
 export const calculateFilterQuery = (filters = []) => {
   if (_isEmpty(filters)) {
     return {}
   }
 
-  const validFilters = filters.filter((filter) => {
-    const { column, type, value } = filter
-    return column && type && value !== undefined && value !== ''
-  })
-
+  const validFilters = getValidFilters(filters)
   return _reduce(validFilters, (acc, filter) => {
     const {
       column, type, dataType, value,
@@ -75,4 +81,32 @@ export const calculateFilterQuery = (filters = []) => {
 
     return acc
   }, {})
+}
+
+export const encodeFilters = (filters) => {
+  const validFilters = getValidFilters(filters)
+
+  return _sortBy(validFilters, 'column').reduce((acc, filter, index) => {
+    const { column, type, value } = filter
+
+    return `${acc}${index ? '&' : ''}${column}=${FILTER_QUERY_TYPES[type]},${encodeURIComponent(value)}`
+  }, '?')
+}
+
+export const decodeFilters = ({ query, section }) => {
+  if (!query) {
+    return []
+  }
+
+  return query.substr(1).split('&').map((param) => {
+    const [column, val] = param.split('=')
+    const [type, value] = val.split(',')
+
+    return {
+      column,
+      type: _findKey(FILTER_QUERY_TYPES, filterType => filterType === type),
+      dataType: _find(SECTION_COLUMNS[section], { id: column }).type,
+      value: decodeURIComponent(value),
+    }
+  })
 }

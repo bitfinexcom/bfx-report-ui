@@ -30,4 +30,14 @@ export const FILTERS = {
   LESS_THAN: 'less_than',
 }
 
+export const FILTER_QUERY_TYPES = {
+  [FILTERS.CONTAINS]: 'ct',
+  [FILTERS.BEGINS_WITH]: 'bw',
+  [FILTERS.ENDS_WITH]: 'ew',
+  [FILTERS.EQUAL_TO]: 'eq',
+  [FILTERS.NOT_EQUAL_TO]: 'ne',
+  [FILTERS.GREATER_THAN]: 'gt',
+  [FILTERS.LESS_THAN]: 'lt',
+}
+
 export default FILTER_TYPES

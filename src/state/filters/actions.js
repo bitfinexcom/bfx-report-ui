@@ -5,10 +5,10 @@ import types from './constants'
  * @param {Object} options: section and filters to set
  */
 
-export function setFilters({ section, filters }) {
+export function setFilters({ section, filters, refresh }) {
   return {
     type: types.SET_FILTERS,
-    payload: { section, filters },
+    payload: { section, filters, refresh },
   }
 }
 
