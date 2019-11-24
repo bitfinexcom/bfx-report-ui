@@ -36,7 +36,7 @@ export const FILTERS = {
 
 // calculates all keys used as filters based on defined columns
 export const FILTER_KEYS = _reduce(SECTION_COLUMNS, (acc, columns) => {
-  columns.forEach(({ id }) => {
+  columns.filter(column => column.filter).forEach(({ id }) => {
     if (!acc[id]) {
       acc[id] = true
     }
