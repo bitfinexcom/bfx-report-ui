@@ -38,7 +38,7 @@ import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
 
-const PERSIST_WHITELIST = ['base', 'sync']
+const PERSIST_WHITELIST = ['base']
 
 const PERSIST_VERSION = 0 // starts with -1
 const PERSIST_DEBUG = false
@@ -74,7 +74,6 @@ const BASE_REDUCERS = {
   tickers: tickersReducer,
   trades: tradesReducer,
   status: statusReducer,
-  sync: syncReducer,
   symbols: symbolsReducer,
   ui: uiReducer,
   wallets: walletsReducer,
@@ -86,6 +85,7 @@ const FRAMEWORK_REDUCERS = {
   balance: accountBalanceReducer,
   winLoss: winLossReducer,
   snapshots: snapshotsReducer,
+  sync: syncReducer,
   taxReport: taxReportReducer,
 }
 
