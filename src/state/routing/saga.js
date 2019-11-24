@@ -5,6 +5,8 @@ import _isEmpty from 'lodash/isEmpty'
 import { PATHMAP } from 'state/query/utils'
 import { encodeFilters } from 'state/filters/utils'
 import filterTypes from 'state/filters/constants'
+import { concatQueryStrings, getQueryWithoutParams } from 'state/utils'
+import { FILTER_KEYS } from 'var/filterTypes'
 
 import { setLastRoute, setRouteParams } from './actions'
 import { getLastRoute, getRouteParams } from './selectors'
@@ -28,12 +30,14 @@ function* locationChange({ payload }) {
   if (route !== lastRoute && !isFirstRendering) {
     const routeParams = yield select(getRouteParams, route)
     if (_isEmpty(routeParams)) {
+      const query = getQueryWithoutParams(Object.keys(FILTER_KEYS)) // remove filters of current section
+      yield put(replace(`${pathname}${query}`, { isSkipped: true }))
       return
     }
 
     /* eslint-disable-next-line no-shadow */
-    const { pathname, search } = routeParams
-    yield put(replace(`${pathname}${search}`, { isSkipped: true })) // skip next location change check
+    const { pathname: routePathname, search } = routeParams
+    yield put(replace(`${routePathname}${search}`, { isSkipped: true }))
     return
   }
 
@@ -51,18 +55,23 @@ function* locationChange({ payload }) {
 function* lastRouteSet({ payload }) {
   const { location: { pathname } } = payload
   const [, path] = pathname.split('/')
-
   const route = PATHMAP[`/${path}`]
-  yield put(setLastRoute(route))
+
+  const lastRoute = yield select(getLastRoute)
+  if (lastRoute !== route) {
+    yield put(setLastRoute(route))
+  }
 }
 
 function* filtersSet({ payload }) {
   const { section, filters } = payload
 
-  const query = encodeFilters(filters)
-
   const { pathname } = window.location
-  yield put(replace(`${pathname}${query}`, { isSkipped: true })) // skip next location change check
+  const filtersQuery = encodeFilters(filters)
+
+  const query = concatQueryStrings(getQueryWithoutParams(Object.keys(FILTER_KEYS)), filtersQuery)
+
+  yield put(replace(`${pathname}${query}`, { isSkipped: true }))
 
   const options = {
     route: section,

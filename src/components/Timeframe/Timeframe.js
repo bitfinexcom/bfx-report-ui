@@ -26,11 +26,12 @@ class Timeframe extends PureComponent {
 
   componentDidUpdate() {
     const {
-      timeRange, start, end, location, history,
+      timeRange, start, end, history,
     } = this.props
     // only update query param when its set in custom time range
     if (timeRange === constants.TIME_RANGE_CUSTOM) {
-      const parsed = queryString.parse(location.search)
+      const { pathname, search } = window.location
+      const parsed = queryString.parse(search)
       const { range } = parsed
       const [startStr, endStr] = range ? range.split('-') : [undefined, undefined]
       if (`${start}` !== startStr || `${end}` !== endStr) {
@@ -38,7 +39,7 @@ class Timeframe extends PureComponent {
           parsed,
           { range: `${start}-${end}` },
         )
-        history.push(`${location.pathname}?${queryString.stringify(params, { encode: false })}`)
+        history.replace(`${pathname}?${queryString.stringify(params, { encode: false })}`)
       }
     }
   }

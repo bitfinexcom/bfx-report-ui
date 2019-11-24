@@ -1,3 +1,7 @@
+import _reduce from 'lodash/reduce'
+
+import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
+
 const FILTER_TYPES = {
   GT: '$gt',
   GTE: '$gte',
@@ -29,6 +33,17 @@ export const FILTERS = {
   GREATER_THAN: 'greater_than',
   LESS_THAN: 'less_than',
 }
+
+// calculates all keys used as filters based on defined columns
+export const FILTER_KEYS = _reduce(SECTION_COLUMNS, (acc, columns) => {
+  columns.forEach(({ id }) => {
+    if (!acc[id]) {
+      acc[id] = true
+    }
+  })
+
+  return acc
+}, {})
 
 export const FILTER_QUERY_TYPES = {
   [FILTERS.CONTAINS]: 'ct',

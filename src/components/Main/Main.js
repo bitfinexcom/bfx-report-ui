@@ -76,12 +76,6 @@ class Main extends PureComponent {
     endDate: new Date(),
   }
 
-  handleClick = (target) => {
-    const { history } = this.props
-    // remove url params
-    history.push(`${getPath(target)}${history.location.search}`)
-  }
-
   handleCustomDialog = (show, e) => {
     e.preventDefault()
     // eslint-disable-next-line react/destructuring-assignment

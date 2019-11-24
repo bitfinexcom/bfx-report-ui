@@ -123,17 +123,38 @@ export function checkFetch(prevProps, props, type) {
   }
 }
 
-export const removeUrlParams = (params) => {
+export const concatQueryStrings = (...args) => {
+  const queryStrings = _castArray(args)
+  const result = queryStrings.reduce((acc, query) => {
+    if (!query) {
+      return acc
+    }
+
+    const params = query[0] === '?' ? query.substr(1) : query
+
+    return acc ? `${acc}&${params}` : params
+  }, '')
+
+  return result && `?${result}`
+}
+
+export const getQueryWithoutParams = (params) => {
   const arrayParams = _castArray(params)
   const currentUrlParams = window.location.search
   const updatedParams = _omit(queryString.parse(currentUrlParams), arrayParams)
   const nextUrlParams = queryString.stringify(updatedParams, { encode: false })
-  const updatedQuery = nextUrlParams ? `?${nextUrlParams}` : ''
 
-  window.history.pushState(null, null, window.location.href.replace(currentUrlParams, updatedQuery))
+  return nextUrlParams ? `?${nextUrlParams}` : ''
 }
 
-// genereate url with route and params
+export const removeUrlParams = (params) => {
+  const { search } = window.location
+  const updatedQuery = getQueryWithoutParams(params)
+
+  window.history.pushState(null, null, window.location.href.replace(search, updatedQuery))
+}
+
+// genererate url with route and params
 export function generateUrl(type, params, symbols) {
   if (!isValidRouteType(type)) {
     // eslint-disable-next-line no-console
@@ -188,7 +209,6 @@ export function togglePair(type, props, pair) {
     nextPairs = targetPairs.filter(tag => pair !== tag)
     removeTargetPair(pair)
   }
-
   history.push(generateUrl(type, history.location.search, demapPairs(nextPairs)))
 }
 
@@ -322,6 +342,7 @@ export default {
   checkFetch,
   checkEmail,
   DEFAULT_DATETIME_FORMAT,
+  getQueryWithoutParams,
   makeFetchCall,
   formatDate,
   formatTime,

@@ -11,7 +11,7 @@ import _sortBy from 'lodash/sortBy'
 import _find from 'lodash/find'
 
 import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
-import FILTER_TYPES, { FILTER_QUERY_TYPES, FILTERS } from 'var/filterTypes'
+import FILTER_TYPES, { FILTER_QUERY_TYPES, FILTERS, FILTER_KEYS } from 'var/filterTypes'
 import DATA_TYPES from 'var/dataTypes'
 
 const {
@@ -83,6 +83,7 @@ export const calculateFilterQuery = (filters = []) => {
   }, {})
 }
 
+// returns a string with the encoded filters
 export const encodeFilters = (filters) => {
   const validFilters = getValidFilters(filters)
 
@@ -90,15 +91,21 @@ export const encodeFilters = (filters) => {
     const { column, type, value } = filter
 
     return `${acc}${index ? '&' : ''}${column}=${FILTER_QUERY_TYPES[type]},${encodeURIComponent(value)}`
-  }, '?')
+  }, '')
 }
 
 export const decodeFilters = ({ query, section }) => {
-  if (!query) {
+  if (!query || !SECTION_COLUMNS[section]) {
     return []
   }
 
-  return query.substr(1).split('&').map((param) => {
+  const params = query.substr(1).split('&')
+  const filterParams = params.filter((param) => {
+    const [key] = param.split('=')
+    return FILTER_KEYS[key]
+  })
+
+  return filterParams.map((param) => {
     const [column, val] = param.split('=')
     const [type, value] = val.split(',')
 
