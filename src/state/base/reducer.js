@@ -8,7 +8,6 @@ const initialState = {
   apiKey: '',
   apiSecret: '',
   authToken: '',
-  isSyncEnabled: true,
   dateFormat: types.DATE_FORMATS[0],
   locale: 'en',
   menuMode: types.MENU_MODE_NORMAL,
@@ -36,11 +35,6 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         authToken: payload,
-      }
-    case types.SET_SYNC_STATE:
-      return {
-        ...state,
-        isSyncEnabled: payload,
       }
     case types.SET_LANG:
       return {
