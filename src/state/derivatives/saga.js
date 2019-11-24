@@ -7,7 +7,6 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
-import { selectAuth } from 'state/auth/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
@@ -18,22 +17,20 @@ import { getTargetPairs } from './selectors'
 
 const TYPE = queryTypes.MENU_DERIVATIVES
 
-function getReqDerivatives({ auth, targetPairs, filter }) {
+function getReqDerivatives({ targetPairs, filter }) {
   const params = { filter }
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
 
-  return makeFetchCall('getStatusMessages', auth, params)
+  return makeFetchCall('getStatusMessages', params)
 }
 
 function* fetchDerivatives() {
   try {
     const targetPairs = yield select(getTargetPairs)
-    const auth = yield select(selectAuth)
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(getReqDerivatives, {
-      auth,
       targetPairs,
       filter,
     })
