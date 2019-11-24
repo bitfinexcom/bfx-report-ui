@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 const PUBLIC_FUNDING_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
   amount: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
+  rate: PropTypes.number.isRequired,
   mts: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
+  period: PropTypes.number.isRequired,
 })
 
 export const propTypes = {
