@@ -31,7 +31,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].pair,
     },
     {
-      id: 'priceDeriv',
+      id: 'price',
       name: 'derivatives.column.priceDeriv',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
@@ -67,7 +67,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].priceSpot,
     },
     {
-      id: 'fundBalance',
+      id: 'fundBal',
       name: 'derivatives.column.fundBalance',
       width: 205,
       renderer: (rowIndex) => {

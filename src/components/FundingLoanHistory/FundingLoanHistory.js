@@ -50,6 +50,7 @@ class FundingLoanHistory extends PureComponent {
 
   render() {
     const {
+      columns,
       fetchNext,
       fetchPrev,
       getFullTime,
@@ -74,7 +75,7 @@ class FundingLoanHistory extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderSymbolSelector = (
       <Fragment>

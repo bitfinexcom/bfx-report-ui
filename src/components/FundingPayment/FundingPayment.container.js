@@ -23,10 +23,13 @@ import {
   getTargetSymbols,
   getNextPage,
 } from 'state/fundingPayment/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import FundingPayment from './FundingPayment'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_FPAYMENT),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),

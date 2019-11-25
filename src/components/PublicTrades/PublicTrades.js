@@ -53,6 +53,7 @@ class PublicTrades extends PureComponent {
 
   render() {
     const {
+      columns,
       fetchNext,
       fetchPrev,
       getFullTime,
@@ -86,7 +87,7 @@ class PublicTrades extends PureComponent {
       t,
       targetPair,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderPagination = (
       <Pagination

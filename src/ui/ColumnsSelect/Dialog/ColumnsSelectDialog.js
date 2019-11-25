@@ -5,34 +5,24 @@ import {
 } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
-import ColumnsSelect from 'ui/ColumnsSelect'
+import { propTypes, defaultProps } from './ColumnsSelectDialog.props'
 
-import { propTypes, defaultProps } from './ColumnsFilterDialog.props'
-
-const ColumnsFilterDialog = (props) => {
+const ColumnsSelectDialog = (props) => {
   const {
     children,
-    target,
     isOpen,
     hasChanges,
     onCancel,
-    onFiltersApply,
+    onApply,
     t,
   } = props
 
-  const title = (
-    <span>
-      {t('columnsfilter.title')}
-      <ColumnsSelect target={target} />
-    </span>
-  )
-
   return (
     <Dialog
-      icon={IconNames.TH_FILTERED}
-      className='columns-filter-dialog'
+      icon={IconNames.LIST_COLUMNS}
+      className='columns-select-dialog'
       onClose={onCancel}
-      title={title}
+      title={t('columnsselect.title')}
       isOpen={isOpen}
     >
       <div className={Classes.DIALOG_BODY}>
@@ -43,14 +33,14 @@ const ColumnsFilterDialog = (props) => {
           <Button
             onClick={onCancel}
           >
-            {t('columnsfilter.cancel')}
+            {t('columnsselect.cancel')}
           </Button>
           <Button
             intent={Intent.PRIMARY}
-            onClick={onFiltersApply}
+            onClick={onApply}
             disabled={!hasChanges}
           >
-            {t('columnsfilter.apply')}
+            {t('columnsselect.apply')}
           </Button>
         </div>
       </div>
@@ -58,7 +48,7 @@ const ColumnsFilterDialog = (props) => {
   )
 }
 
-ColumnsFilterDialog.propTypes = propTypes
-ColumnsFilterDialog.defaultProps = defaultProps
+ColumnsSelectDialog.propTypes = propTypes
+ColumnsSelectDialog.defaultProps = defaultProps
 
-export default withTranslation('translations')(ColumnsFilterDialog)
+export default withTranslation('translations')(ColumnsSelectDialog)

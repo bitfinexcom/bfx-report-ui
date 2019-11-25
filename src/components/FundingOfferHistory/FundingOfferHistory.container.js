@@ -22,10 +22,13 @@ import {
   getTargetSymbols,
   getNextPage,
 } from 'state/fundingOfferHistory/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import FundingOfferHistory from './FundingOfferHistory'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_FOFFER),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),

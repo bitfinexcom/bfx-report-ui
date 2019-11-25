@@ -42,7 +42,7 @@ const SECTION_COLUMNS = {
   [MENU_TRADES]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true },
     { id: 'orderID', name: 'orderid', type: INTEGER, filter: true },
-    { id: 'symbol', name: 'pair' },
+    { id: 'pair', name: 'pair' },
     { id: 'execAmount', name: 'amount', type: NUMBER, filter: true },
     { id: 'execPrice', name: 'price', type: NUMBER, filter: true },
     { id: 'fee', name: 'fee', type: NUMBER, filter: true },
@@ -51,7 +51,7 @@ const SECTION_COLUMNS = {
 
   [MENU_ORDERS]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true },
-    { id: 'symbol', name: 'pair' },
+    { id: 'pair', name: 'pair' },
     { id: 'type', name: 'type', type: STRING, filter: true },
     { id: 'amountOrig', name: 'amount', type: NUMBER, filter: true },
     { id: 'amountExecuted', name: 'amount-exe', type: NUMBER, filter: true },
@@ -78,7 +78,7 @@ const SECTION_COLUMNS = {
 
   [MENU_POSITIONS]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true },
-    { id: 'symbol', name: 'pair' },
+    { id: 'pair', name: 'pair' },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'basePrice', name: 'base-price', type: NUMBER, filter: true },
     { id: 'marginFunding', name: 'swap', type: NUMBER, filter: true },
@@ -135,7 +135,7 @@ const SECTION_COLUMNS = {
     { id: 'type', name: 'type' },
     { id: 'price', name: 'price', type: NUMBER, filter: true },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
-    { id: 'symbol', name: 'pair' },
+    { id: 'pair', name: 'pair' },
   ],
 
   [MENU_PUBLIC_FUNDING]: [

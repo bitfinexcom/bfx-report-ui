@@ -22,10 +22,13 @@ import {
   getTargetPairs,
   getNextPage,
 } from 'state/trades/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import Trades from './Trades'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_TRADES),
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),

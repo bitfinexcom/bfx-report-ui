@@ -21,10 +21,13 @@ import {
   getTargetPair,
   getNextPage,
 } from 'state/publicTrades/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import PublicTrades from './PublicTrades'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_PUBLIC_TRADES),
   entries: getEntries(state),
   getFullTime: getFullTime(state),
   hasSyncPref: !!getPublicTradesPairs(state).length,

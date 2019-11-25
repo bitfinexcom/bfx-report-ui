@@ -50,6 +50,7 @@ class Orders extends PureComponent {
 
   render() {
     const {
+      columns,
       existingPairs,
       fetchNext,
       fetchPrev,
@@ -76,7 +77,7 @@ class Orders extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderPagination = (
       <Pagination

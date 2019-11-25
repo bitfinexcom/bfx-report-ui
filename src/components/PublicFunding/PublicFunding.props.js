@@ -9,6 +9,7 @@ const PUBLIC_FUNDING_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  columns: PropTypes.object.isRequired,
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(PUBLIC_FUNDING_ENTRIES_PROPS).isRequired,
   fetchPublicfunding: PropTypes.func.isRequired,

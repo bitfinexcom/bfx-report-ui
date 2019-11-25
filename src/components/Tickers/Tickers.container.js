@@ -24,10 +24,13 @@ import {
   getPageOffset,
   getTargetPairs,
 } from 'state/tickers/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import Tickers from './Tickers'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_TICKERS),
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),

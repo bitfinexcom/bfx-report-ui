@@ -33,7 +33,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
-      id: 'mtsupdated',
+      id: 'mtsUpdated',
       nameStr: `${t('movements.column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
@@ -148,7 +148,7 @@ export default function getColumns(props) {
       },
     },
     {
-      id: 'destination',
+      id: 'destinationAddress',
       name: 'movements.column.destination',
       width: 400,
       renderer: (rowIndex) => {
@@ -166,7 +166,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].destinationAddress,
     },
     {
-      id: 'transid',
+      id: 'transactionId',
       name: 'movements.column.transactionId',
       width: 135,
       renderer: (rowIndex) => {

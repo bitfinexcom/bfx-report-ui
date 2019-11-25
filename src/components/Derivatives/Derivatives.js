@@ -53,6 +53,7 @@ class Derivatives extends PureComponent {
 
   render() {
     const {
+      columns,
       pairs,
       existingPairs,
       getFullTime,
@@ -70,7 +71,7 @@ class Derivatives extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderPairSelector = (
       <Fragment>

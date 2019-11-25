@@ -30,7 +30,7 @@ export default function getColumns(props) {
   const ACTIVE_POSITIONS_COLS = (target === MENU_POSITIONS_ACTIVE)
     ? [
       {
-        id: 'priceLiq',
+        id: 'liquidationPrice',
         name: 'positions.column.liq-price',
         width: COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
@@ -65,7 +65,7 @@ export default function getColumns(props) {
         copyText: rowIndex => filteredData[rowIndex].pl,
       },
       {
-        id: 'plperc',
+        id: 'plPerc',
         name: 'positions.column.plperc',
         width: 100,
         renderer: (rowIndex) => {
@@ -194,7 +194,7 @@ export default function getColumns(props) {
     },
     ...ACTIVE_POSITIONS_COLS,
     {
-      id: 'swap',
+      id: 'marginFunding',
       name: 'positions.column.swap',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
@@ -212,7 +212,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].marginFunding,
     },
     {
-      id: 'swapType',
+      id: 'marginFundingType',
       name: 'positions.column.swap-type',
       width: 130,
       renderer: (rowIndex) => {

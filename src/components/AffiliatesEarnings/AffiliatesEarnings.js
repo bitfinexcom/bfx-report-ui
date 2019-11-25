@@ -53,6 +53,7 @@ class AffiliatesEarnings extends PureComponent {
 
   render() {
     const {
+      columns,
       fetchNext,
       fetchPrev,
       getFullTime,
@@ -79,7 +80,7 @@ class AffiliatesEarnings extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderSymbolSelector = (
       <Fragment>

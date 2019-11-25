@@ -17,6 +17,7 @@ const FLOAN_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  columns: PropTypes.object.isRequired,
   addTargetSymbol: PropTypes.func.isRequired,
   setTargetSymbols: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,

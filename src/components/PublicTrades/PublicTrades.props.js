@@ -9,6 +9,7 @@ const PUBLIC_TRADES_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  columns: PropTypes.object.isRequired,
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(PUBLIC_TRADES_ENTRIES_PROPS).isRequired,
   fetchPublictrades: PropTypes.func.isRequired,

@@ -12,6 +12,7 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   addTargetSymbol: PropTypes.func.isRequired,
+  columns: PropTypes.object.isRequired,
   setTargetSymbols: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(LEDGERS_ENTRIES_PROPS).isRequired,

@@ -1,0 +1,22 @@
+.columns-select {
+  &-icon {
+    margin-left: 10px;
+    vertical-align: middle;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &-item {
+    list-style: none;
+    float: left;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .columns-select {
+    padding-inline-start: 10px;
+  }
+}

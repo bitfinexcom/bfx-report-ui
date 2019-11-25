@@ -11,6 +11,7 @@ const DERIVATIVES_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  columns: PropTypes.object.isRequired,
   addTargetPair: PropTypes.func.isRequired,
   setTargetPairs: PropTypes.func.isRequired,
   entries: PropTypes.arrayOf(DERIVATIVES_ENTRIES_PROPS).isRequired,

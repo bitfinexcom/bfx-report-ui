@@ -128,6 +128,7 @@ class ColumnsFilter extends PureComponent {
         </div>
 
         <ColumnsFilterDialog
+          target={target}
           isOpen={isOpen}
           hasChanges={hasChanges}
           onCancel={this.onCancel}

@@ -69,6 +69,7 @@ class Positions extends PureComponent {
 
   render() {
     const {
+      columns,
       existingPairs,
       fetchNext,
       fetchPrev,
@@ -95,7 +96,7 @@ class Positions extends PureComponent {
       t,
       onIdClick: this.jumpToPositionsAudit,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderPagination = (
       <Pagination

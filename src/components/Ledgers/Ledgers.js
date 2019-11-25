@@ -50,6 +50,7 @@ class Ledgers extends PureComponent {
 
   render() {
     const {
+      columns,
       fetchNext,
       fetchPrev,
       getFullTime,
@@ -76,7 +77,7 @@ class Ledgers extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderSymbolSelector = (
       <Fragment>

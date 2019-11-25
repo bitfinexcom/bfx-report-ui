@@ -62,6 +62,7 @@ class Tickers extends PureComponent {
 
   render() {
     const {
+      columns,
       existingPairs,
       fetchNext,
       fetchPrev,
@@ -93,7 +94,7 @@ class Tickers extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderPagination = (
       <Pagination

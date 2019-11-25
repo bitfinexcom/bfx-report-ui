@@ -8,6 +8,7 @@ const TICKERS_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  columns: PropTypes.object.isRequired,
   addTargetPair: PropTypes.func.isRequired,
   setTargetPairs: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,

@@ -45,7 +45,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].symbol,
     },
     {
-      id: 'amount',
+      id: 'amountOrig',
       name: 'foffer.column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {

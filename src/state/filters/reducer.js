@@ -29,6 +29,16 @@ const initialState = {
 function filtersReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
+    case types.SET_COLUMNS: {
+      const { section, columns } = payload
+      return {
+        ...state,
+        columns: {
+          ...state.columns,
+          [section]: columns,
+        },
+      }
+    }
     case types.SET_FILTERS: {
       const { section, filters } = payload
       return {

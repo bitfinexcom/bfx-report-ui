@@ -31,7 +31,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
-      id: 'order_id',
+      id: 'orderID',
       name: 'trades.column.orderid',
       width: COLUMN_WIDTHS.ORDER_ID,
       renderer: (rowIndex) => {
@@ -59,7 +59,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].pair,
     },
     {
-      id: 'amount',
+      id: 'execAmount',
       name: 'trades.column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
@@ -76,7 +76,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].execAmount,
     },
     {
-      id: 'price',
+      id: 'execPrice',
       name: 'trades.column.price',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
@@ -122,7 +122,7 @@ export default function getColumns(props) {
       },
     },
     {
-      id: 'mts',
+      id: 'mtsCreate',
       nameStr: `${t('trades.column.time')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {

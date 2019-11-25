@@ -54,6 +54,7 @@ class Movements extends PureComponent {
 
   render() {
     const {
+      columns,
       entries,
       existingCoins,
       fetchNext,
@@ -81,7 +82,7 @@ class Movements extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderSymbolSelector = (
       <Fragment>

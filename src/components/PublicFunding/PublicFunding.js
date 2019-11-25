@@ -61,6 +61,7 @@ class PublicFunding extends PureComponent {
 
   render() {
     const {
+      columns,
       coins,
       currencies,
       fetchNext,
@@ -95,7 +96,7 @@ class PublicFunding extends PureComponent {
       t,
       targetSymbol,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderPagination = (
       <Pagination

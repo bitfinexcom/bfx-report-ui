@@ -16,10 +16,13 @@ import {
   getExistingPairs,
   getTargetPairs,
 } from 'state/derivatives/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import Derivatives from './Derivatives'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_DERIVATIVES),
   entries: getEntries(state),
   pairs: getPairs(state),
   existingPairs: getExistingPairs(state),
