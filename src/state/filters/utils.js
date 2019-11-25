@@ -38,6 +38,7 @@ const getValidFilters = filters => filters.filter((filter) => {
   return column && type && value !== undefined && value !== ''
 })
 
+export const getValidSortedFilters = filters => _sortBy(getValidFilters(filters), ['column', 'type', 'value'])
 
 export const calculateFilterQuery = (filters = []) => {
   if (_isEmpty(filters)) {
