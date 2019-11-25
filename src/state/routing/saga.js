@@ -5,11 +5,16 @@ import _isEmpty from 'lodash/isEmpty'
 import { PATHMAP } from 'state/query/utils'
 import { encodeFilters } from 'state/filters/utils'
 import filterTypes from 'state/filters/constants'
+import queryConstants from 'state/query/constants'
 import { concatQueryStrings, getQueryWithoutParams } from 'state/utils'
 import { FILTER_KEYS } from 'var/filterTypes'
 
 import { setLastRoute, setRouteParams } from './actions'
 import { getLastRoute, getRouteParams } from './selectors'
+
+const {
+  MENU_DEPOSITS, MENU_WITHDRAWALS, MENU_MOVEMENTS,
+} = queryConstants
 
 function* locationChange({ payload }) {
   const { isFirstRendering, location } = payload
@@ -20,7 +25,11 @@ function* locationChange({ payload }) {
   }
 
   const [, path] = pathname.split('/')
-  const route = PATHMAP[`/${path}`]
+  let route = PATHMAP[`/${path}`]
+  // filters for movements are treated the same
+  if (route === MENU_DEPOSITS || route === MENU_WITHDRAWALS) {
+    route = MENU_MOVEMENTS
+  }
   if (!route) {
     return
   }

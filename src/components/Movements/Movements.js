@@ -97,7 +97,7 @@ class Movements extends PureComponent {
 
     const renderPagination = (
       <Pagination
-        type='movements'
+        type={TYPE}
         dataLen={entries.length}
         loading={pageLoading}
         offset={offset}
