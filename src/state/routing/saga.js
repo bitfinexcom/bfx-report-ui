@@ -2,7 +2,7 @@ import { put, select, takeLatest } from 'redux-saga/effects'
 import { LOCATION_CHANGE, replace } from 'connected-react-router'
 import _isEmpty from 'lodash/isEmpty'
 
-import { PATHMAP } from 'state/query/utils'
+import { getTarget } from 'state/query/utils'
 import { encodeFilters } from 'state/filters/utils'
 import filterTypes from 'state/filters/constants'
 import queryConstants from 'state/query/constants'
@@ -24,8 +24,7 @@ function* locationChange({ payload }) {
     return
   }
 
-  const [, path] = pathname.split('/')
-  let route = PATHMAP[`/${path}`]
+  let route = getTarget(pathname, false)
   // filters for movements are treated the same
   if (route === MENU_DEPOSITS || route === MENU_WITHDRAWALS) {
     route = MENU_MOVEMENTS
@@ -63,8 +62,7 @@ function* locationChange({ payload }) {
 
 function* lastRouteSet({ payload }) {
   const { location: { pathname } } = payload
-  const [, path] = pathname.split('/')
-  const route = PATHMAP[`/${path}`]
+  const route = getTarget(pathname, false)
 
   const lastRoute = yield select(getLastRoute)
   if (lastRoute !== route) {

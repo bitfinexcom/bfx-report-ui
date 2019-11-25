@@ -40,6 +40,10 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
+
+  // filters parsing
+  MENU_DEPOSITS,
+  MENU_WITHDRAWALS,
 } = queryTypes
 
 export function* setFilters({ payload }) {
@@ -113,13 +117,19 @@ export function* setFilters({ payload }) {
 function* setFiltersFromUrl() {
   const { pathname, search } = window.location
 
-  const section = getTarget(pathname, false)
+  let section = getTarget(pathname, false)
+  // filters for movements are treated the same
+  if (section === MENU_DEPOSITS || section === MENU_WITHDRAWALS) {
+    section = MENU_MOVEMENTS
+  }
   if (!section) {
     return
   }
 
   const filters = decodeFilters({ query: search, section })
-  yield put(actions.setFilters({ section, filters, refresh: false })) // fetch will be done automatically after auth
+  if (filters.length) {
+    yield put(actions.setFilters({ section, filters, refresh: false })) // fetch will be done automatically after auth
+  }
 }
 
 export default function* filtersSaga() {
