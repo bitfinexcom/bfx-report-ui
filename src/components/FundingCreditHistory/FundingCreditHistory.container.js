@@ -8,6 +8,7 @@ import {
   jumpPage,
   refresh,
   addTargetSymbol,
+  setTargetSymbols,
   removeTargetSymbol,
 } from 'state/fundingCreditHistory/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -21,10 +22,13 @@ import {
   getTargetSymbols,
   getNextPage,
 } from 'state/fundingCreditHistory/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import FundingCreditHistory from './FundingCreditHistory'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_FCREDIT),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
@@ -44,6 +48,7 @@ const mapDispatchToProps = {
   jumpPage,
   refresh,
   addTargetSymbol,
+  setTargetSymbols,
   removeTargetSymbol,
 }
 

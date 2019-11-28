@@ -5,11 +5,14 @@ import {
 } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
+import ColumnsSelect from 'ui/ColumnsSelect'
+
 import { propTypes, defaultProps } from './ColumnsFilterDialog.props'
 
 const ColumnsFilterDialog = (props) => {
   const {
     children,
+    target,
     isOpen,
     hasChanges,
     onCancel,
@@ -17,12 +20,19 @@ const ColumnsFilterDialog = (props) => {
     t,
   } = props
 
+  const title = (
+    <span>
+      {t('columnsfilter.title')}
+      <ColumnsSelect target={target} />
+    </span>
+  )
+
   return (
     <Dialog
       icon={IconNames.TH_FILTERED}
       className='columns-filter-dialog'
       onClose={onCancel}
-      title={t('columnsfilter.title')}
+      title={title}
       isOpen={isOpen}
     >
       <div className={Classes.DIALOG_BODY}>

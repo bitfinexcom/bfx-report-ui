@@ -17,6 +17,7 @@ import RefreshButton from 'ui/RefreshButton'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   getCurrentEntries,
@@ -31,10 +32,15 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 class Orders extends PureComponent {
   componentDidMount() {
-    const { loading, fetchOrders, match } = this.props
+    const {
+      loading, setTargetPairs, fetchOrders, match,
+    } = this.props
     if (loading) {
-      const pair = (match.params && match.params.pair) || ''
-      fetchOrders(pair)
+      const pairs = (match.params && match.params.pair) || ''
+      if (pairs) {
+        setTargetPairs(getMappedSymbolsFromUrl(pairs))
+      }
+      fetchOrders()
     }
   }
 
@@ -44,6 +50,7 @@ class Orders extends PureComponent {
 
   render() {
     const {
+      columns,
       existingPairs,
       fetchNext,
       fetchPrev,
@@ -70,7 +77,7 @@ class Orders extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderPagination = (
       <Pagination

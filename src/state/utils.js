@@ -8,7 +8,7 @@ import { store } from 'state/store'
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import {
-  getSymbolsURL, demapSymbols, demapPairs, formatSymbolToPair, mapSymbol,
+  getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol,
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 
@@ -123,35 +123,47 @@ export function checkFetch(prevProps, props, type) {
   }
 }
 
-export const removeUrlParams = (params) => {
+export const concatQueryStrings = (...args) => {
+  const queryStrings = _castArray(args)
+  const result = queryStrings.reduce((acc, query) => {
+    if (!query) {
+      return acc
+    }
+
+    const params = query[0] === '?' ? query.substr(1) : query
+
+    return acc ? `${acc}&${params}` : params
+  }, '')
+
+  return result && `?${result}`
+}
+
+export const getQueryWithoutParams = (params) => {
   const arrayParams = _castArray(params)
   const currentUrlParams = window.location.search
   const updatedParams = _omit(queryString.parse(currentUrlParams), arrayParams)
   const nextUrlParams = queryString.stringify(updatedParams, { encode: false })
-  const updatedQuery = nextUrlParams ? `?${nextUrlParams}` : ''
 
-  window.history.pushState(null, null, window.location.href.replace(currentUrlParams, updatedQuery))
+  return nextUrlParams ? `?${nextUrlParams}` : ''
 }
 
-// remove authToken param from url but keep others
-export function getNoAuthUrlString(searchUrl) {
-  const parsed = queryString.parse(searchUrl)
-  const params = _omit(parsed, ['authToken', 'apiKey', 'apiSecret'])
-  const queries = queryString.stringify(params, { encode: false })
-  return queries ? `?${queries}` : ''
+export const removeUrlParams = (params) => {
+  const { search } = window.location
+  const updatedQuery = getQueryWithoutParams(params)
+
+  window.history.pushState(null, null, window.location.href.replace(search, updatedQuery))
 }
 
-// genereate url with route and params
+// genererate url with route and params
 export function generateUrl(type, params, symbols) {
   if (!isValidRouteType(type)) {
     // eslint-disable-next-line no-console
-    console.error('Unsupport route type ', type)
+    console.error('Unsupported route type ', type)
     return ''
   }
-  const noAuthTokenParams = getNoAuthUrlString(params)
   return (symbols && symbols.length)
-    ? `${getPath(type)}/${getSymbolsURL(symbols)}${noAuthTokenParams}`
-    : `${getPath(type)}${noAuthTokenParams}`
+    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
+    : `${getPath(type)}${params}`
 }
 
 export function toggleSymbol(type, props, symbol) {
@@ -197,7 +209,6 @@ export function togglePair(type, props, pair) {
     nextPairs = targetPairs.filter(tag => pair !== tag)
     removeTargetPair(pair)
   }
-
   history.push(generateUrl(type, history.location.search, demapPairs(nextPairs)))
 }
 
@@ -268,7 +279,7 @@ export const getFrameworkPositionsEntries = entries => entries.map((entry) => {
 
   return {
     id,
-    pair: formatSymbolToPair(symbol),
+    pair: formatPair(symbol),
     actualPrice,
     amount,
     basePrice,
@@ -292,7 +303,7 @@ export const getFrameworkPositionsTickersEntries = entries => entries.map((entry
   } = entry
 
   return {
-    pair: formatSymbolToPair(symbol),
+    pair: formatPair(symbol),
     amount,
   }
 })
@@ -306,7 +317,7 @@ export const getWalletsTickersEntries = entries => entries.map((entry) => {
 
   return {
     walletType,
-    pair: formatSymbolToPair(symbol),
+    pair: formatPair(symbol),
     amount,
   }
 })
@@ -331,13 +342,13 @@ export default {
   checkFetch,
   checkEmail,
   DEFAULT_DATETIME_FORMAT,
+  getQueryWithoutParams,
   makeFetchCall,
   formatDate,
   formatTime,
   getAuth,
   getCurrentEntries,
   getLastMonth,
-  getNoAuthUrlString,
   getParsedUrlParams,
   getSideMsg,
   generateUrl,

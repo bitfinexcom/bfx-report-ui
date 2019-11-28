@@ -18,7 +18,9 @@ const FCREDIT_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
+  columns: PropTypes.object.isRequired,
   addTargetSymbol: PropTypes.func.isRequired,
+  setTargetSymbols: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,
   entries: PropTypes.arrayOf(FCREDIT_ENTRIES_PROPS).isRequired,
   existingCoins: PropTypes.arrayOf(PropTypes.string),

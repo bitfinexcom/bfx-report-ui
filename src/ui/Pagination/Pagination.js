@@ -81,7 +81,7 @@ class Pagination extends PureComponent {
     const renderRestDots = nextPage ? (
       <Fragment>
         <span>
-          +
+          {'+'}
         </span>
         {' '}
       </Fragment>

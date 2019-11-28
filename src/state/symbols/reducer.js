@@ -1,5 +1,5 @@
 import authTypes from 'state/auth/constants'
-import { formatSymbolToPair } from 'state/symbols/utils'
+import { formatPair, mapPair } from 'state/symbols/utils'
 
 import types from './constants'
 import { setSymbolMap } from './map'
@@ -25,25 +25,25 @@ export function symbolsReducer(state = initialState, action) {
         const {
           id, name, explorer, symbol,
         } = currency
-        const cid = id.toUpperCase()
-        if (id === 'BAB') { // skip duplicate BAB/BCH
-          symbolMapping[cid] = 'BCH'
+        if (id === 'BAB') { // exception, skip duplicate BAB/BCH
+          symbolMapping[id] = 'BCH'
           return
         }
         if (symbol && id !== symbol) {
-          symbolMapping[cid] = symbol
+          symbolMapping[id] = symbol
           explorersDict[symbol] = explorer
           dict[symbol] = name
           coins.push(symbol)
           return
         }
-        explorersDict[cid] = explorer
-        dict[cid] = name
-        coins.push(cid)
+        explorersDict[id] = explorer
+        dict[id] = name
+        coins.push(id)
       })
       setSymbolMap(symbolMapping)
 
-      const formattedPairs = pairs.map(formatSymbolToPair).sort()
+      const formattedPairs = pairs.map(formatPair).map(mapPair).sort()
+
       return {
         ...state,
         isFetched: true,

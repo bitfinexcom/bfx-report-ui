@@ -103,6 +103,11 @@
       "lessThan": "Less than"
     }
   },
+  "columnsselect": {
+    "title": "Columns Select",
+    "cancel": "Cancel",
+    "apply": "Apply Columns"
+  },
   "concentrationrisk": {
     "title": "Concentration Risk",
     "nodata": "No related data in this date time. You can try another date time.",

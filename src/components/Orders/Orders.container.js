@@ -8,6 +8,7 @@ import {
   jumpPage,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
 } from 'state/orders/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -22,10 +23,13 @@ import {
   getPageOffset,
   getTargetPairs,
 } from 'state/orders/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import Orders from './Orders'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_ORDERS),
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
@@ -46,6 +50,7 @@ const mapDispatchToProps = {
   jumpPage,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
 }
 

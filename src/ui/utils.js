@@ -61,7 +61,7 @@ export const formatAmount = (val, color) => {
     <Fragment>
       <div className={classes}>
         <span>{integer}</span>
-        .
+        {'.'}
         <span className='bitfinex-amount-fraction'>{fraction}</span>
       </div>
     </Fragment>

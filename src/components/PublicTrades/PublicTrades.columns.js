@@ -109,10 +109,10 @@ export default function getColumns(props) {
       name: 'publictrades.column.pair',
       width: COLUMN_WIDTHS.PAIR,
       renderer: () => {
-        const formatedCurrentPair = formatPair(targetPair)
+        const formattedCurrentPair = formatPair(targetPair)
         return (
-          <Cell tooltip={formatedCurrentPair}>
-            {formatedCurrentPair}
+          <Cell tooltip={formattedCurrentPair}>
+            {formattedCurrentPair}
           </Cell>
         )
       },

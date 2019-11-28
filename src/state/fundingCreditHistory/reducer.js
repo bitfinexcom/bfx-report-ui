@@ -15,7 +15,7 @@ import {
   setSymbols,
   setTimeRange,
 } from 'state/reducers.helper'
-import { formatSymbolToPair, mapSymbol } from 'state/symbols/utils'
+import { formatPair, removePrefix, mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
 
@@ -40,6 +40,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
       let smallestMts
+
       const entries = res.map((entry) => {
         const {
           amount,
@@ -61,7 +62,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           status,
           symbol,
         } = entry
-        const currentSymbol = mapSymbol(symbol.slice(1))
+        const currentSymbol = mapSymbol(removePrefix(symbol))
         // save new symbol to updateCoins list
         if (updateCoins.indexOf(currentSymbol) === -1) {
           updateCoins.push(currentSymbol)
@@ -90,7 +91,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           rateReal,
           renew,
           noClose,
-          positionPair: formatSymbolToPair(positionPair),
+          positionPair: formatPair(positionPair),
         }
       })
       const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)

@@ -17,6 +17,7 @@ import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   toggleSymbol,
@@ -34,10 +35,15 @@ const PAGE_SIZE = getPageSize(TYPE)
  */
 class FundingPayment extends PureComponent {
   componentDidMount() {
-    const { loading, fetchFpayment, match } = this.props
+    const {
+      loading, setTargetSymbols, fetchFpayment, match,
+    } = this.props
     if (loading) {
-      const symbol = (match.params && match.params.symbol) || ''
-      fetchFpayment(symbol)
+      const symbols = (match.params && match.params.symbol) || ''
+      if (symbols) {
+        setTargetSymbols(getMappedSymbolsFromUrl(symbols))
+      }
+      fetchFpayment()
     }
   }
 
@@ -47,6 +53,7 @@ class FundingPayment extends PureComponent {
 
   render() {
     const {
+      columns,
       fetchNext,
       fetchPrev,
       getFullTime,
@@ -73,7 +80,7 @@ class FundingPayment extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderSymbolSelector = (
       <Fragment>

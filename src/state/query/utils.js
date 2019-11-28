@@ -306,7 +306,7 @@ const MAPPING = {
   },
 }
 
-const PATHMAP = {}
+export const PATHMAP = {}
 ROUTE_WHITELIST.forEach((key) => {
   const { path } = MAPPING[key]
 
@@ -329,9 +329,13 @@ function error(target, action) {
 // /target?params=
 // /target/BTCUSD
 // /target/BTCUSD?params=
-export function getTarget(link) {
+export function getTarget(link, defaultValue = true) {
   const baseLink = `/${link.split('/')[1]}`
-  return PATHMAP[baseLink] || MENU_LEDGERS
+  const target = PATHMAP[baseLink]
+
+  return defaultValue
+    ? target || MENU_LEDGERS
+    : target
 }
 
 // get icon from target

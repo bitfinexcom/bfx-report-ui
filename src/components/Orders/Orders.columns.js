@@ -31,7 +31,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].id,
     },
     {
-      id: 'symbol',
+      id: 'pair',
       name: 'orders.column.pair',
       width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
@@ -59,7 +59,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].type,
     },
     {
-      id: 'amount',
+      id: 'amountOrig',
       name: 'orders.column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {

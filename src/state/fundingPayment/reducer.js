@@ -12,13 +12,12 @@ import {
   fetchPrev,
   getPageOffset,
   jumpPage,
-  mapDescription,
   removeSymbol,
   setQueryLimit,
   setSymbols,
   setTimeRange,
 } from 'state/reducers.helper'
-import { mapSymbol } from 'state/symbols/utils'
+import { mapSymbol, mapDescription } from 'state/symbols/utils'
 
 import types from './constants'
 

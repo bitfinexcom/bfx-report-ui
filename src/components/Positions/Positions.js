@@ -17,6 +17,7 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   getQueryLimit,
   getPath,
@@ -25,7 +26,6 @@ import {
 import {
   checkFetch,
   getCurrentEntries,
-  getNoAuthUrlString,
   togglePair,
 } from 'state/utils'
 
@@ -38,10 +38,15 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 class Positions extends PureComponent {
   componentDidMount() {
-    const { loading, fetchPositions, match } = this.props
+    const {
+      loading, setTargetPairs, fetchPositions, match,
+    } = this.props
     if (loading) {
-      const pair = (match.params && match.params.pair) || ''
-      fetchPositions(pair)
+      const pairs = (match.params && match.params.pair) || ''
+      if (pairs) {
+        setTargetPairs(getMappedSymbolsFromUrl(pairs))
+      }
+      fetchPositions()
     }
   }
 
@@ -53,19 +58,18 @@ class Positions extends PureComponent {
     e.preventDefault()
     const { history } = this.props
     const id = e.target.getAttribute('value')
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/`
-      + `${id}${getNoAuthUrlString(history.location.search)}`)
+    history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/${id}${history.location.search}`)
   }
 
   jumpToActivePositions = (e) => {
     e.preventDefault()
     const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_ACTIVE)}`
-      + `${getNoAuthUrlString(history.location.search)}`)
+    history.push(`${getPath(queryConstants.MENU_POSITIONS_ACTIVE)}${history.location.search}`)
   }
 
   render() {
     const {
+      columns,
       existingPairs,
       fetchNext,
       fetchPrev,
@@ -92,7 +96,7 @@ class Positions extends PureComponent {
       t,
       onIdClick: this.jumpToPositionsAudit,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderPagination = (
       <Pagination

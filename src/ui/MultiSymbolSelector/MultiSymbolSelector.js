@@ -12,7 +12,8 @@ class MultiSymbolSelector extends PureComponent {
   filterSymbol = (query, coin) => coin.toUpperCase().indexOf(query.toUpperCase()) >= 0
 
   renderSymbol = (symbol, { modifiers }) => {
-    if (!modifiers.matchesPredicate) {
+    const { active, disabled, matchesPredicate } = modifiers
+    if (!matchesPredicate) {
       return null
     }
     const {
@@ -20,16 +21,16 @@ class MultiSymbolSelector extends PureComponent {
     } = this.props
 
     const isCurrent = currentFilters.includes(symbol)
-    const className = existingCoins.includes(symbol) && !isCurrent
+    const className = existingCoins.includes(symbol) && !isCurrent && !active
       ? 'bitfinex-queried-symbol'
       : ''
 
     return (
       <MenuItem
         className={className}
-        active={modifiers.active}
+        active={active}
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-        disabled={modifiers.disabled}
+        disabled={disabled}
         key={symbol}
         onClick={() => toggleSymbol(symbol)}
         text={symbol}

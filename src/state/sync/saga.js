@@ -10,12 +10,10 @@ import _includes from 'lodash/includes'
 
 import authTypes from 'state/auth/constants'
 import { makeFetchCall } from 'state/utils'
-import { setSyncState } from 'state/base/actions'
-import { getSyncState } from 'state/base/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 import {
-  mapRequestSymbols, formatInternalSymbol, formatRawSymbols, formatSymbolToPair,
-  isPair, isSymbol, mapRequestPairs, mapSymbol,
+  formatRawSymbols, formatPair, mapRequestSymbols, mapRequestPairs,
+  mapSymbol, mapPair, isFundingSymbol, isTradingPair, removePrefix,
 } from 'state/symbols/utils'
 
 import types from './constants'
@@ -51,7 +49,6 @@ function* startSyncing() {
       syncMode: types.MODE_SYNCING,
       progress: 0,
     }))
-    yield put(setSyncState(true))
     yield put(updateStatus({ id: 'sync.start' }))
   }
   if (error) {
@@ -64,7 +61,6 @@ function* stopSyncing() {
   const { result, error } = yield call(disableSyncMode)
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
-    yield put(setSyncState(false))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
   }
   if (error) {
@@ -187,16 +183,16 @@ function* getSyncPref() {
     yield call(getTickersHistoryConf),
   ])
 
-  const formatSymbol = data => mapSymbol(formatInternalSymbol(data.symbol))
-  const formatPair = ({ symbol }) => formatSymbolToPair(symbol).split('/').map(mapSymbol).join(':')
+  const formatSymbol = data => mapSymbol(removePrefix(data.symbol))
+  const formatConfigPairs = ({ symbol }) => mapPair(formatPair(symbol))
 
-  if (publicTradesPrefResult && publicTradesPrefResult.length > 0) {
-    const publicTradesPairs = publicTradesPrefResult.filter(data => isPair(data.symbol))
-    const publicTradesSymbols = publicTradesPrefResult.filter(data => isSymbol(data.symbol))
+  if (publicTradesPrefResult && publicTradesPrefResult.length) {
+    const publicTradesPairs = publicTradesPrefResult.filter(data => isTradingPair(data.symbol))
+    const publicTradesSymbols = publicTradesPrefResult.filter(data => isFundingSymbol(data.symbol))
 
     yield put(actions.setSyncPref({
       publicTrades: {
-        pairs: publicTradesPairs.map(formatPair),
+        pairs: publicTradesPairs.map(formatConfigPairs),
         startTime: publicTradesPairs[0] && publicTradesPairs[0].start,
       },
       publicFunding: {
@@ -206,12 +202,12 @@ function* getSyncPref() {
     }))
   }
 
-  if (tickersHistoryPrefResult && tickersHistoryPrefResult.length > 0) {
-    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isPair(data.symbol))
+  if (tickersHistoryPrefResult && tickersHistoryPrefResult.length) {
+    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isTradingPair(data.symbol))
 
     yield put(actions.setSyncPref({
       tickersHistory: {
-        pairs: tickersHistoryPairs.map(formatPair),
+        pairs: tickersHistoryPairs.map(formatConfigPairs),
         startTime: tickersHistoryPairs[0] && tickersHistoryPairs[0].start,
       },
     }))
@@ -226,20 +222,16 @@ function* getSyncPref() {
 }
 
 function* initSync() {
-  const isEnabled = yield select(getSyncState)
+  const { result: syncProgress } = yield call(fetchSyncProgress)
 
-  if (isEnabled) {
-    const { result: syncProgress } = yield call(fetchSyncProgress)
-
-    const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
-    if (isSyncing) {
-      yield put(actions.setSyncPref({
-        syncMode: types.MODE_SYNCING,
-        progress: syncProgress,
-      }))
-    } else {
-      yield call(startSyncing)
-    }
+  const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
+  if (isSyncing) {
+    yield put(actions.setSyncPref({
+      syncMode: types.MODE_SYNCING,
+      progress: syncProgress,
+    }))
+  } else {
+    yield call(startSyncing)
   }
 
   yield call(getSyncPref)
@@ -271,41 +263,37 @@ function* requestsRedirectUpdate({ payload }) {
 }
 
 function* updateSyncStatus() {
-  const isEnabled = yield select(getSyncState)
   const syncMode = yield select(getSyncMode)
+  const { result: syncProgress, error: progressError } = yield call(fetchSyncProgress)
 
-  if (isEnabled) {
-    const { result: syncProgress, error: progressError } = yield call(fetchSyncProgress)
-
-    switch (typeof syncProgress) {
-      case 'number':
-        if (syncProgress !== 100 && syncMode !== types.MODE_SYNCING) {
-          yield put(actions.setSyncMode(types.MODE_SYNCING))
-        }
-        if (syncProgress === 100 && syncMode !== types.MODE_OFFLINE) {
-          yield put(actions.setSyncMode(types.MODE_OFFLINE))
-        }
-        break
-      case 'boolean':
-        if (syncMode !== types.MODE_ONLINE) {
-          yield put(actions.setSyncMode(types.MODE_ONLINE))
-        }
-        break
-      case 'string':
-      default: {
-        if (syncProgress === 'SYNCHRONIZATION_HAS_NOT_STARTED_YET'
-          || _includes(syncProgress, 'ServerAvailabilityError')) {
-          return
-        }
-
-        yield put(updateSyncErrorStatus(syncProgress))
-        yield put(actions.stopSyncing())
+  switch (typeof syncProgress) {
+    case 'number':
+      if (syncProgress !== 100 && syncMode !== types.MODE_SYNCING) {
+        yield put(actions.setSyncMode(types.MODE_SYNCING))
       }
-    }
+      if (syncProgress === 100 && syncMode !== types.MODE_OFFLINE) {
+        yield put(actions.setSyncMode(types.MODE_OFFLINE))
+      }
+      break
+    case 'boolean':
+      if (syncMode !== types.MODE_ONLINE) {
+        yield put(actions.setSyncMode(types.MODE_ONLINE))
+      }
+      break
+    case 'string':
+    default: {
+      if (syncProgress === 'SYNCHRONIZATION_HAS_NOT_STARTED_YET'
+        || _includes(syncProgress, 'ServerAvailabilityError')) {
+        return
+      }
 
-    if (progressError) {
-      yield put(updateSyncErrorStatus('during fetchSyncProgress'))
+      yield put(updateSyncErrorStatus(syncProgress))
+      yield put(actions.stopSyncing())
     }
+  }
+
+  if (progressError) {
+    yield put(updateSyncErrorStatus('during fetchSyncProgress'))
   }
 }
 

@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import { persistReducer, createMigrate } from 'redux-persist'
+import { connectRouter } from 'connected-react-router'
 import storage from 'redux-persist/lib/storage'
 
 import { platform } from 'var/config'
 import persistMigrations from 'state/persist.migrations'
 
+import history from './createdHistory'
 import accountBalanceReducer from './accountBalance/reducer'
 import affiliatesEarningsReducer from './affiliatesEarnings/reducer'
 import authReducer from './auth/reducer'
@@ -23,6 +25,7 @@ import positionsActiveReducer from './positionsActive/reducer'
 import positionsReducer from './positions/reducer'
 import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
+import routingReducer from './routing/reducer'
 import snapshotsReducer from './snapshots/reducer'
 import queryReducer from './query/reducer'
 import taxReportReducer from './taxReport/reducer'
@@ -35,7 +38,7 @@ import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
 
-const PERSIST_WHITELIST = ['base', 'sync']
+const PERSIST_WHITELIST = ['base']
 
 const PERSIST_VERSION = 0 // starts with -1
 const PERSIST_DEBUG = false
@@ -65,11 +68,12 @@ const BASE_REDUCERS = {
   positions: positionsReducer,
   publicFunding: publicFundingReducer,
   publicTrades: publicTradesReducer,
+  router: connectRouter(history),
+  routing: routingReducer,
   query: queryReducer,
   tickers: tickersReducer,
   trades: tradesReducer,
   status: statusReducer,
-  sync: syncReducer,
   symbols: symbolsReducer,
   ui: uiReducer,
   wallets: walletsReducer,
@@ -81,6 +85,7 @@ const FRAMEWORK_REDUCERS = {
   balance: accountBalanceReducer,
   winLoss: winLossReducer,
   snapshots: snapshotsReducer,
+  sync: syncReducer,
   taxReport: taxReportReducer,
 }
 

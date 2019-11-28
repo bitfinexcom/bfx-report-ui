@@ -11,9 +11,7 @@ import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
-import {
-  getSymbolsURL, getSymbolsFromUrlParam, mapRequestSymbols, mapSymbol,
-} from 'state/symbols/utils'
+import { mapRequestSymbols } from 'state/symbols/utils'
 import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
@@ -39,15 +37,9 @@ function getReqMovements({
   return makeFetchCall('getMovements', params)
 }
 
-function* fetchMovements({ payload: symbol }) {
+function* fetchMovements() {
   try {
-    let targetSymbols = yield select(getTargetSymbols)
-    const symbolsUrl = getSymbolsURL(targetSymbols)
-    // set symbol from url
-    if (symbol && symbol !== symbolsUrl) {
-      targetSymbols = getSymbolsFromUrlParam(symbol).map(mapSymbol)
-      yield put(actions.setTargetSymbols(targetSymbols))
-    }
+    const targetSymbols = yield select(getTargetSymbols)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqMovements, {

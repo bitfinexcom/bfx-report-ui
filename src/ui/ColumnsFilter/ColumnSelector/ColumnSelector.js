@@ -20,7 +20,8 @@ class ColumnSelector extends React.PureComponent {
 
   getSectionColumns = () => {
     const { section } = this.props
-    return SECTION_COLUMNS[section] || []
+    const columns = SECTION_COLUMNS[section] || []
+    return columns.filter(column => column.filter)
   }
 
   getColumnDataType = (column) => {

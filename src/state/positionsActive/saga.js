@@ -22,7 +22,7 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 const getReqPositions = () => makeFetchCall('getActivePositions')
 
-function* fetchPositions() {
+function* fetchActivePositions() {
   try {
     const { result, error } = yield call(getReqPositions)
     yield put(actions.updateAPositions(result, LIMIT, PAGE_SIZE))
@@ -42,7 +42,7 @@ function* fetchPositions() {
   }
 }
 
-function* fetchNextPositions() {
+function* fetchNextActivePositions() {
   try {
     const {
       offset,
@@ -83,7 +83,7 @@ function* fetchPositionsFail({ payload }) {
 }
 
 export default function* positionsActiveSaga() {
-  yield takeLatest(types.FETCH_APOSITIONS, fetchPositions)
-  yield takeLatest(types.FETCH_NEXT_APOSITIONS, fetchNextPositions)
+  yield takeLatest(types.FETCH_APOSITIONS, fetchActivePositions)
+  yield takeLatest(types.FETCH_NEXT_APOSITIONS, fetchNextActivePositions)
   yield takeLatest(types.FETCH_FAIL, fetchPositionsFail)
 }

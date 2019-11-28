@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch Tickers data.
- * @param {string} pair pair param from url
  */
-export function fetchTickers(pair) {
+export function fetchTickers() {
   return {
     type: types.FETCH_TICKERS,
-    payload: pair,
   }
 }
 

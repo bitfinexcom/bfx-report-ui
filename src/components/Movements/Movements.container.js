@@ -8,6 +8,7 @@ import {
   jumpPage,
   refresh,
   addTargetSymbol,
+  setTargetSymbols,
   removeTargetSymbol,
 } from 'state/movements/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -21,10 +22,13 @@ import {
   getTargetSymbols,
   getNextPage,
 } from 'state/movements/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import Movements from './Movements'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_MOVEMENTS),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
@@ -44,6 +48,7 @@ const mapDispatchToProps = {
   jumpPage,
   refresh,
   addTargetSymbol,
+  setTargetSymbols,
   removeTargetSymbol,
 }
 

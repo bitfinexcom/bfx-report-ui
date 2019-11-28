@@ -8,7 +8,7 @@ import {
   jumpPage,
   refresh,
   addTargetPair,
-  removeTargetPair,
+  removeTargetPair, setTargetPairs,
 } from 'state/trades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getTargetQueryLimit } from 'state/query/selectors'
@@ -22,10 +22,13 @@ import {
   getTargetPairs,
   getNextPage,
 } from 'state/trades/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import Trades from './Trades'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_TRADES),
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
@@ -46,6 +49,7 @@ const mapDispatchToProps = {
   jumpPage,
   refresh,
   addTargetPair,
+  setTargetPairs,
   removeTargetPair,
 }
 

@@ -2,17 +2,16 @@ import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Button, InputGroup, Icon } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
+import _isEqual from 'lodash/isEqual'
 
 import { selectTextOnFocus } from 'utils/inputs'
+import { getValidSortedFilters } from 'state/filters/utils'
 import { EMPTY_FILTER } from 'var/filterTypes'
 
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
 import FilterTypeSelector from './FilterTypeSelector'
 import { propTypes, defaultProps } from './ColumnsFilter.props'
-import DEFAULT_FILTERS from './var/defaultFilters'
-
-const getDefaultFilters = section => DEFAULT_FILTERS[section]
 
 const MAX_FILTERS = 7
 
@@ -21,10 +20,10 @@ class ColumnsFilter extends PureComponent {
   constructor(props) {
     super()
 
-    const { filters, target } = props
+    const { filters } = props
     this.state = {
       isOpen: false,
-      filters: filters.length ? filters : getDefaultFilters(target),
+      filters,
     }
   }
 
@@ -34,11 +33,11 @@ class ColumnsFilter extends PureComponent {
   }
 
   onCancel = () => {
-    const { filters, target } = this.props
+    const { filters } = this.props
 
     this.toggleDialog()
     this.setState({
-      filters: filters.length ? filters : getDefaultFilters(target),
+      filters,
     })
   }
 
@@ -110,12 +109,22 @@ class ColumnsFilter extends PureComponent {
     this.updateFilter({ index, value })
   }
 
+  haveFiltersChanged = () => {
+    const { filters: currentFilters } = this.props
+    const { filters } = this.state
+
+    const currentValidFilters = getValidSortedFilters(currentFilters)
+
+    return getValidSortedFilters(filters)
+      .some((filter, index) => !_isEqual(filter, currentValidFilters[index]))
+  }
+
   /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events, no-shadow */
   render() {
     const { target, filters: currentFilters, t } = this.props
     const { isOpen, filters } = this.state
 
-    const hasChanges = true
+    const hasChanges = this.haveFiltersChanged()
     const hasAppliedFilters = currentFilters.some(filter => filter.value)
 
     return (
@@ -128,6 +137,7 @@ class ColumnsFilter extends PureComponent {
         </div>
 
         <ColumnsFilterDialog
+          target={target}
           isOpen={isOpen}
           hasChanges={hasChanges}
           onCancel={this.onCancel}

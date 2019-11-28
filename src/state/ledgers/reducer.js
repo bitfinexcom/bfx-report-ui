@@ -16,10 +16,9 @@ import {
   removeSymbol,
   setQueryLimit,
   setSymbols,
-  mapDescription,
   setTimeRange,
 } from 'state/reducers.helper'
-import { mapSymbol } from 'state/symbols/utils'
+import { mapSymbol, mapDescription } from 'state/symbols/utils'
 
 import types from './constants'
 

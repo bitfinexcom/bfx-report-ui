@@ -8,6 +8,7 @@ import {
   jumpPage,
   refresh,
   addTargetSymbol,
+  setTargetSymbols,
   removeTargetSymbol,
 } from 'state/fundingOfferHistory/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -21,10 +22,13 @@ import {
   getTargetSymbols,
   getNextPage,
 } from 'state/fundingOfferHistory/selectors'
+import { getColumns } from 'state/filters/selectors'
+import queryConstants from 'state/query/constants'
 
 import FundingOfferHistory from './FundingOfferHistory'
 
 const mapStateToProps = (state = {}) => ({
+  columns: getColumns(state, queryConstants.MENU_FOFFER),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
@@ -44,6 +48,7 @@ const mapDispatchToProps = {
   jumpPage,
   refresh,
   addTargetSymbol,
+  setTargetSymbols,
   removeTargetSymbol,
 }
 

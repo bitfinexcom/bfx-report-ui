@@ -18,10 +18,10 @@ import SymbolSelector from 'ui/SymbolSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize, getPath } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   getCurrentEntries,
-  getNoAuthUrlString,
 } from 'state/utils'
 import { platform } from 'var/config'
 
@@ -31,14 +31,18 @@ import { propTypes, defaultProps } from './PublicFunding.props'
 const TYPE = queryConstants.MENU_PUBLIC_FUNDING
 const LIMIT = getQueryLimit(TYPE)
 const PAGE_SIZE = getPageSize(TYPE)
-const WILD_CARD = ['']
 
 class PublicFunding extends PureComponent {
   componentDidMount() {
-    const { loading, fetchPublicfunding, match } = this.props
+    const {
+      loading, setTargetSymbol, fetchPublicfunding, match,
+    } = this.props
     if (loading) {
       const pair = (match.params && match.params.symbol) || ''
-      fetchPublicfunding(pair)
+      if (pair) {
+        setTargetSymbol(getMappedSymbolsFromUrl(pair)[0])
+      }
+      fetchPublicfunding()
     }
   }
 
@@ -50,13 +54,14 @@ class PublicFunding extends PureComponent {
     const { history, targetSymbol, setTargetSymbol } = this.props
     if (symbol !== targetSymbol) {
       // show select symbol in url
-      history.push(`${getPath(TYPE)}/${symbol.toUpperCase()}${getNoAuthUrlString(history.location.search)}`)
+      history.push(`${getPath(TYPE)}/${symbol}${history.location.search}`)
       setTargetSymbol(symbol)
     }
   }
 
   render() {
     const {
+      columns,
       coins,
       currencies,
       fetchNext,
@@ -91,7 +96,7 @@ class PublicFunding extends PureComponent {
       t,
       targetSymbol,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderPagination = (
       <Pagination
@@ -114,9 +119,7 @@ class PublicFunding extends PureComponent {
           coins={coins}
           currencies={currencies}
           currentCoin={currentSymbol}
-          existingCoins={[]}
           onSymbolSelect={this.handleClick}
-          wildCard={WILD_CARD}
         />
       </Fragment>
     )

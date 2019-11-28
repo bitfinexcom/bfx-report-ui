@@ -16,6 +16,7 @@ import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
 import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import {
   checkFetch,
   getCurrentEntries,
@@ -31,10 +32,15 @@ const PAGE_SIZE = getPageSize(TYPE)
 
 class FundingCreditHistory extends PureComponent {
   componentDidMount() {
-    const { loading, fetchFcredit, match } = this.props
+    const {
+      loading, setTargetSymbols, fetchFcredit, match,
+    } = this.props
     if (loading) {
-      const symbol = (match.params && match.params.symbol) || ''
-      fetchFcredit(symbol)
+      const symbols = (match.params && match.params.symbol) || ''
+      if (symbols) {
+        setTargetSymbols(getMappedSymbolsFromUrl(symbols))
+      }
+      fetchFcredit()
     }
   }
 
@@ -44,6 +50,7 @@ class FundingCreditHistory extends PureComponent {
 
   render() {
     const {
+      columns,
       fetchNext,
       fetchPrev,
       getFullTime,
@@ -68,7 +75,7 @@ class FundingCreditHistory extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-    })
+    }).filter(({ id }) => columns[id])
 
     const renderSymbolSelector = (
       <Fragment>
