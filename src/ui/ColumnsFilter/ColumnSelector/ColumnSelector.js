@@ -3,6 +3,8 @@ import { withTranslation } from 'react-i18next'
 import { HTMLSelect } from '@blueprintjs/core'
 import _find from 'lodash/find'
 
+import { platform } from 'var/config'
+
 import SECTION_COLUMNS from './ColumnSelector.columns'
 import { propTypes, defaultProps } from './ColumnSelector.props'
 
@@ -21,7 +23,7 @@ class ColumnSelector extends React.PureComponent {
   getSectionColumns = () => {
     const { section } = this.props
     const columns = SECTION_COLUMNS[section] || []
-    return columns.filter(column => column.filter)
+    return columns.filter(column => column.filter && (!column.frameworkOnly || platform.showFrameworkMode))
   }
 
   getColumnDataType = (column) => {

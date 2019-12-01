@@ -35,8 +35,8 @@ const {
 /* eslint-disable object-curly-newline */
 const DEFAULT_LEDGERS = [
   { column: 'description', type: CONTAINS, dataType: STRING, value: '' },
-  { column: 'amountUsd', type: GREATER_THAN, dataType: NUMBER, value: '' },
-  { column: 'balanceUsd', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  { column: 'balance', type: GREATER_THAN, dataType: NUMBER, value: '' },
 ]
 
 const DEFAULT_FILTERS = {
@@ -54,7 +54,7 @@ const DEFAULT_FILTERS = {
   [MENU_MOVEMENTS]: [
     { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
-    { column: 'amountUsd', type: GREATER_THAN, dataType: NUMBER, value: '' },
+    { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
   ],
   [MENU_POSITIONS]: [
     { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
