@@ -121,7 +121,7 @@ class Derivatives extends PureComponent {
           </h4>
           <DataTable
             numRows={numRows}
-            tableColums={tableColumns}
+            tableColumns={tableColumns}
           />
         </Fragment>
       )

@@ -105,7 +105,7 @@ class ConcentrationRisk extends PureComponent {
 
     const { tableData, chartData } = this.parseData(filteredData)
     const numRows = tableData.length
-    const tableColums = getColumns({
+    const tableColumns = getColumns({
       data: tableData,
       t,
     })
@@ -163,7 +163,7 @@ class ConcentrationRisk extends PureComponent {
           <div className='concentration-risk-data'>
             <DataTable
               numRows={numRows}
-              tableColums={tableColums}
+              tableColumns={tableColumns}
             />
             <div className='concentration-risk-data-chart'>
               <PieChart data={chartData} />

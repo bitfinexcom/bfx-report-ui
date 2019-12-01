@@ -32,13 +32,13 @@ class PositionsSnapshot extends PureComponent {
         {_isNumber(totalPlUsd) && (
           <DataTable
             numRows={1}
-            tableColums={totalPositionsColumns}
+            tableColumns={totalPositionsColumns}
           />
         ) }
         <br />
         <DataTable
           numRows={entries.length}
-          tableColums={positionsColumns}
+          tableColumns={positionsColumns}
         />
       </Fragment>
     )

@@ -73,9 +73,9 @@ class Wallets extends PureComponent {
     const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
     const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
     const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
-    const exchangeColums = getColumns({ filteredData: exchangeData, t })
-    const marginColums = getColumns({ filteredData: marginData, t })
-    const fundingColums = getColumns({ filteredData: fundingData, t })
+    const exchangeColumns = getColumns({ filteredData: exchangeData, t })
+    const marginColumns = getColumns({ filteredData: marginData, t })
+    const fundingColumns = getColumns({ filteredData: fundingData, t })
     const exchangeRows = exchangeData.length
     const marginRows = marginData.length
     const fundingRows = fundingData.length
@@ -139,21 +139,21 @@ class Wallets extends PureComponent {
           </h4>
           <DataTable
             numRows={exchangeRows}
-            tableColums={exchangeColums}
+            tableColumns={exchangeColumns}
           />
           <h4>
             {t('wallets.header.margin')}
           </h4>
           <DataTable
             numRows={marginRows}
-            tableColums={marginColums}
+            tableColumns={marginColumns}
           />
           <h4>
             {t('wallets.header.funding')}
           </h4>
           <DataTable
             numRows={fundingRows}
-            tableColums={fundingColums}
+            tableColumns={fundingColumns}
           />
         </Fragment>
       )

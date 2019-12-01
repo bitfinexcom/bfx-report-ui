@@ -77,7 +77,7 @@ class Movements extends PureComponent {
     const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
     const numRows = filteredData.length
-    const tableColums = getColumns({
+    const tableColumns = getColumns({
       filteredData,
       getFullTime,
       t,
@@ -149,7 +149,7 @@ class Movements extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            tableColums={tableColums}
+            tableColumns={tableColumns}
           />
           {renderPagination}
         </Fragment>
