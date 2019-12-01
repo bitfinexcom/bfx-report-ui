@@ -5,7 +5,7 @@ import { getSyncMode, getSyncProgress } from 'state/sync/selectors'
 
 import SyncMode from './SyncMode'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   syncMode: getSyncMode(state),
   syncProgress: getSyncProgress(state),
 })

@@ -6,7 +6,7 @@ import { toggleFrameworkDialog, proceedFrameworkRequest } from 'state/ui/actions
 
 import FrameworkDialog from './FrameworkDialog'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   syncMode: getSyncMode(state),
 })
 

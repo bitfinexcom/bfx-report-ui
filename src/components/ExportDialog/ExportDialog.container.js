@@ -12,7 +12,7 @@ import { getTimestamp } from 'state/wallets/selectors'
 
 import ExportDialog from './ExportDialog'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   ...getTimeFrame(getQuery(state)),
   email: getExportEmail(state),
   getFullTime: getFullTime(state),

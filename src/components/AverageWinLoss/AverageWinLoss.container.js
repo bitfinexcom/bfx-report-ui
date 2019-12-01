@@ -10,7 +10,7 @@ import {
 
 import AverageWinLoss from './AverageWinLoss'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   entries: getEntries(state),
   params: getParams(state),
   loading: !getDataReceived(state),

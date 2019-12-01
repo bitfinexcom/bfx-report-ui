@@ -10,7 +10,7 @@ import {
 
 import ConcentrationRisk from './ConcentrationRisk'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   currentTime: getTimestamp(state),
   entries: getEntries(state),
   loading: !getDataReceived(state),

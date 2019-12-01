@@ -21,7 +21,7 @@ import queryConstants from 'state/query/constants'
 
 import Derivatives from './Derivatives'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_DERIVATIVES),
   entries: getEntries(state),
   pairs: getPairs(state),

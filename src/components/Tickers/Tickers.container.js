@@ -29,7 +29,7 @@ import queryConstants from 'state/query/constants'
 
 import Tickers from './Tickers'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_TICKERS),
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),

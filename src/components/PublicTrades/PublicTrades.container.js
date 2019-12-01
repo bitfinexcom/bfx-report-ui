@@ -26,7 +26,7 @@ import queryConstants from 'state/query/constants'
 
 import PublicTrades from './PublicTrades'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_PUBLIC_TRADES),
   entries: getEntries(state),
   getFullTime: getFullTime(state),

@@ -4,7 +4,7 @@ import { getTargetQueryLimit } from 'state/query/selectors'
 
 import Pagination from './Pagination'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   getQueryLimit: getTargetQueryLimit(state),
 })
 

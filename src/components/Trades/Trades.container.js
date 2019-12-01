@@ -27,7 +27,7 @@ import queryConstants from 'state/query/constants'
 
 import Trades from './Trades'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_TRADES),
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),

@@ -5,7 +5,7 @@ import { getDateFormat } from 'state/base/selectors'
 
 import DateFormatSelector from './DateFormatSelector'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   dateFormat: getDateFormat(state),
 })
 

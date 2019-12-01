@@ -4,7 +4,7 @@ import { getCoins, getCurrencies } from 'state/symbols/selectors'
 
 import MultiSymbolSelector from './MultiSymbolSelector'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   coins: getCoins(state),
   currencies: getCurrencies(state),
 })

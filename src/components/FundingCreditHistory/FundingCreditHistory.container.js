@@ -27,7 +27,7 @@ import queryConstants from 'state/query/constants'
 
 import FundingCreditHistory from './FundingCreditHistory'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_FCREDIT),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),

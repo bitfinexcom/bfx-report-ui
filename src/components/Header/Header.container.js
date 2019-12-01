@@ -10,7 +10,7 @@ import { getEmail } from 'state/query/selectors'
 
 import Header from './Header'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   authIsShown: getIsShown(state),
   authStatus: getAuthStatus(state),
   email: getEmail(state),

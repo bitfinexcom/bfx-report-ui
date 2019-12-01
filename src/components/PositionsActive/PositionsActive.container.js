@@ -22,7 +22,7 @@ import {
 
 import PositionsActive from './PositionsActive'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),

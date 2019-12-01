@@ -27,7 +27,7 @@ import queryConstants from 'state/query/constants'
 
 import FundingOfferHistory from './FundingOfferHistory'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_FOFFER),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),

@@ -10,7 +10,7 @@ import { getFullTime, getTimeOffset } from 'state/base/selectors'
 
 import TaxReportResult from './Result'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   data: getData(state),
   loading: !getDataReceived(state),
   getFullTime: getFullTime(state),

@@ -5,7 +5,7 @@ import { getShowMilliseconds } from 'state/base/selectors'
 
 import ShowMilliseconds from './ShowMilliseconds'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   milliseconds: getShowMilliseconds(state),
 })
 
