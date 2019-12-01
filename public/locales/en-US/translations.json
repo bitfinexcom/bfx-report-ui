@@ -91,6 +91,7 @@
   },
   "columnsfilter": {
     "title": "Filter Columns",
+    "clear": "Clear",
     "cancel": "Cancel",
     "apply": "Apply Filters",
     "filters": {

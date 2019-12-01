@@ -15,6 +15,7 @@ const ColumnsFilterDialog = (props) => {
     target,
     isOpen,
     hasChanges,
+    onClear,
     onCancel,
     onFiltersApply,
     t,
@@ -40,6 +41,12 @@ const ColumnsFilterDialog = (props) => {
       </div>
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+          <Button
+            onClick={onClear}
+            className='columns-filter-clear'
+          >
+            {t('columnsfilter.clear')}
+          </Button>
           <Button
             onClick={onCancel}
           >

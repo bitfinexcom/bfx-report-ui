@@ -7,6 +7,7 @@ import _isEqual from 'lodash/isEqual'
 import { selectTextOnFocus } from 'utils/inputs'
 import { getValidSortedFilters } from 'state/filters/utils'
 import { EMPTY_FILTER } from 'var/filterTypes'
+import DEFAULT_FILTERS from 'ui/ColumnsFilter/var/defaultFilters'
 
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
@@ -30,6 +31,14 @@ class ColumnsFilter extends PureComponent {
   toggleDialog = () => {
     const { isOpen } = this.state
     this.setState({ isOpen: !isOpen })
+  }
+
+  onClear = () => {
+    const { target } = this.props
+
+    this.setState({
+      filters: DEFAULT_FILTERS[target],
+    })
   }
 
   onCancel = () => {
@@ -143,6 +152,7 @@ class ColumnsFilter extends PureComponent {
           target={target}
           isOpen={isOpen}
           hasChanges={hasChanges}
+          onClear={this.onClear}
           onCancel={this.onCancel}
           onFiltersApply={this.onFiltersApply}
         >
