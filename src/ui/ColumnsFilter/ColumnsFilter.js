@@ -114,9 +114,12 @@ class ColumnsFilter extends PureComponent {
     const { filters } = this.state
 
     const currentValidFilters = getValidSortedFilters(currentFilters)
+    const nextValidFilters = getValidSortedFilters(filters)
 
-    return getValidSortedFilters(filters)
+    const hasFilterValueChanged = nextValidFilters
       .some((filter, index) => !_isEqual(filter, currentValidFilters[index]))
+
+    return currentValidFilters.length !== nextValidFilters.length || hasFilterValueChanged
   }
 
   /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events, no-shadow */
