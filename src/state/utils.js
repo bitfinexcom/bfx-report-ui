@@ -151,7 +151,7 @@ export const removeUrlParams = (params) => {
   const { search } = window.location
   const updatedQuery = getQueryWithoutParams(params)
 
-  window.history.pushState(null, null, window.location.href.replace(search, updatedQuery))
+  window.history.replaceState(null, null, window.location.href.replace(search, updatedQuery))
 }
 
 // genererate url with route and params
