@@ -90,7 +90,7 @@ class DataTable extends PureComponent {
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
 
-    if (device === DEVICES.PHONE && tableColumns.length > 3) {
+    if (device === DEVICES.PHONE && tableColumns.length > 2) {
       return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
     }
 
