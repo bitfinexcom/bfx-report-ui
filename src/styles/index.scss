@@ -146,6 +146,12 @@ body.#{$ns}-dark {
       background-color: #2f3d48;
     }
   }
+
+  .collapsed-table-item-attribute {
+    &:nth-child(odd) {
+      background-color: #2f3d48;
+    }
+  }
 }
 
 body.#{$ns}-light {
@@ -169,6 +175,12 @@ body.#{$ns}-light {
 
   .bp3-table-cell-ledger {
     &-odd {
+      background-color: #f7f8ff;
+    }
+  }
+
+  .collapsed-table-item-attribute {
+    &:nth-child(odd) {
       background-color: #f7f8ff;
     }
   }

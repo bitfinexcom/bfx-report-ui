@@ -10,8 +10,12 @@
     &-attribute {
       padding: 1px 10px;
 
-      &:nth-child(odd) {
-        background-color: #2f3d48;
+      &:first-of-type {
+        padding-top: 3px;
+      }
+
+      &:last-of-type {
+        padding-bottom: 3px;
       }
 
       &-name {
