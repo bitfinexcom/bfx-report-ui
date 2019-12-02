@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { Menu } from '@blueprintjs/core'
 import {
@@ -8,6 +7,9 @@ import {
   CopyCellsMenuItem,
 } from '@blueprintjs/table'
 import _keys from 'lodash/keys'
+
+import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
+import DEVICES from 'var/devices'
 
 class DataTable extends PureComponent {
   selectedColumns = {}
@@ -84,11 +86,13 @@ class DataTable extends PureComponent {
 
   render() {
     const {
-      numRows,
-      t,
-      tableColumns,
+      numRows, t, tableColumns, device,
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
+
+    if (device === DEVICES.PHONE && tableColumns.length > 3) {
+      return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
+    }
 
     return (
       <Table
@@ -125,10 +129,11 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
 
 DataTable.propTypes = {
   numRows: PropTypes.number.isRequired,
-  t: PropTypes.func.isRequired,
   tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
+  device: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 DataTable.defaultProps = {}
 
-export default withTranslation('translations')(DataTable)
+export default DataTable

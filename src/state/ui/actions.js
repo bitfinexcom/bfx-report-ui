@@ -40,6 +40,15 @@ export function uiLoaded() {
   }
 }
 
+/**
+ * Create an action to handle document resize event.
+ */
+export function uiResized() {
+  return {
+    type: types.UI_RESIZED,
+  }
+}
+
 export default {
   showCustomDialog,
   toggleFrameworkDialog,

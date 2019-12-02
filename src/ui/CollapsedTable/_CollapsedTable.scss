@@ -1,0 +1,41 @@
+.collapsed-table {
+  &-item {
+    &.bp3-card {
+      margin: 5px 0;
+      padding: 0;
+    }
+
+    &-attribute {
+      padding: 1px 10px;
+
+      &:nth-child(odd) {
+        background-color: #2f3d48;
+      }
+
+      &-name {
+        display: inline-block;
+        width: 45%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+      }
+
+      &-value {
+        display: inline-block;
+        width: 55%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .bp3-table-truncated-format-text {
+    position: initial;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
