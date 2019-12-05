@@ -18,7 +18,7 @@ const {
 
 function* locationChange({ payload }) {
   const { isFirstRendering, location } = payload
-  const { pathname, search, state } = location
+  const { pathname, state } = location
 
   if (!_isEmpty(state) && state.isSkipped) {
     return
@@ -53,7 +53,7 @@ function* locationChange({ payload }) {
     route,
     params: {
       pathname,
-      search,
+      search: getQueryWithoutParams(['timezone', 'theme', 'locale', 'authToken', 'apiKey', 'apiSecret']),
     },
   }
 

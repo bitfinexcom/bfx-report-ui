@@ -1,6 +1,7 @@
 import {
   call, take, put, takeLatest,
 } from 'redux-saga/effects'
+import { REHYDRATE } from 'redux-persist'
 
 import {
   setApiKey, setApiSecret, setAuthToken, setTimezone, setTheme, setLang,
@@ -89,5 +90,5 @@ export function* frameworkCheck() {
 }
 
 export default function* uiSaga() {
-  yield takeLatest(types.UI_LOADED, uiLoaded)
+  yield takeLatest(REHYDRATE, uiLoaded)
 }

@@ -50,6 +50,11 @@
     cursor: pointer;
     color: #419eff;
   }
+
+  &-clear {
+    transform: translate(-10px);
+    margin-right: auto;
+  }
 }
 
 @media screen and (max-width: 550px) {

@@ -5,6 +5,7 @@ export const propTypes = {
   target: PropTypes.string.isRequired,
   isOpen: PropTypes.bool.isRequired,
   hasChanges: PropTypes.bool.isRequired,
+  onClear: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   onFiltersApply: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
