@@ -15,7 +15,7 @@ import SyncPrefButton from './SyncPrefButton'
 
 const { MENU_PUBLIC_TRADES } = queryConstants
 
-const mapStateToProps = (state = {}, props) => {
+const mapStateToProps = (state, props) => {
   const { sectionType } = props
 
   let syncPairs = (sectionType === MENU_PUBLIC_TRADES)

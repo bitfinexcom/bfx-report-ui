@@ -18,7 +18,7 @@ import {
 
 import Snapshots from './Snapshots'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   currentTime: getTimestamp(state),
   positionsTotalPlUsd: getPositionsTotalPl(state),
   positionsEntries: getPositionsEntries(state),

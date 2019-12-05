@@ -25,12 +25,12 @@ class TickersSnapshot extends PureComponent {
         <h4>{t('positions.title')}</h4>
         <DataTable
           numRows={positionsTickersEntries.length}
-          tableColums={positionsTickersColumns}
+          tableColumns={positionsTickersColumns}
         />
         <h4>{t('wallets.title')}</h4>
         <DataTable
           numRows={walletsTickersEntries.length}
-          tableColums={walletsTickersColumns}
+          tableColumns={walletsTickersColumns}
         />
       </Fragment>
     )

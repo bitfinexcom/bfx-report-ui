@@ -26,7 +26,7 @@ import queryConstants from 'state/query/constants'
 
 import PublicFunding from './PublicFunding'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_PUBLIC_FUNDING),
   coins: getCoins(state),
   currencies: getCurrencies(state),

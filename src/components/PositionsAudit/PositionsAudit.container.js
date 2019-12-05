@@ -23,7 +23,7 @@ import {
 
 import PositionsAudit from './PositionsAudit'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   entries: getEntries(state),
   getFullTime: getFullTime(state),
   loading: !getDataReceived(state),

@@ -74,7 +74,7 @@ class PositionsActive extends PureComponent {
     } = this.props
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-    const tableColums = getColumns({
+    const tableColumns = getColumns({
       target: TYPE,
       filteredData,
       getFullTime,
@@ -135,7 +135,7 @@ class PositionsActive extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            tableColums={tableColums}
+            tableColumns={tableColumns}
           />
           {renderPagination}
         </Fragment>

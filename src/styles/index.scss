@@ -4,6 +4,7 @@
 @import "components/Header/_Header.scss";
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "ui/Charts/Chart/_Chart.scss";
+@import "ui/CollapsedTable/_CollapsedTable.scss";
 @import "ui/ColumnsFilter/_ColumnsFilter.scss";
 @import "ui/ColumnsSelect/_ColumnsSelect.scss";
 @import "ui/Pagination/_Pagination.scss";
@@ -145,6 +146,12 @@ body.#{$ns}-dark {
       background-color: #2f3d48;
     }
   }
+
+  .collapsed-table-item-attribute {
+    &:nth-child(odd) {
+      background-color: #2f3d48;
+    }
+  }
 }
 
 body.#{$ns}-light {
@@ -168,6 +175,12 @@ body.#{$ns}-light {
 
   .bp3-table-cell-ledger {
     &-odd {
+      background-color: #f7f8ff;
+    }
+  }
+
+  .collapsed-table-item-attribute {
+    &:nth-child(odd) {
       background-color: #f7f8ff;
     }
   }
@@ -236,6 +249,6 @@ div.bp3-multi-select {
 @media screen and (max-width: 991px) {
   .bitfinex-nav-menu {
     overflow: auto;
-    max-height: calc(100vh - 50px);
+    max-height: calc(100vh - 60px);
   }
 }

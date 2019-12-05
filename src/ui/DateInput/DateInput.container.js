@@ -4,7 +4,7 @@ import { getInputTimezone } from 'state/base/selectors'
 
 import DateInput from './DateInput'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   inputTimezone: getInputTimezone(state),
 })
 

@@ -44,7 +44,7 @@ export const formatAmount = (val, color) => {
   if (!val) {
     return (
       <Fragment>
-        <div className='bitfinex-text-align-right'>
+        <div className='bitfinex-amount'>
           {val}
         </div>
       </Fragment>
@@ -52,7 +52,7 @@ export const formatAmount = (val, color) => {
   }
 
   const [integer, fraction] = val.toFixed(8).split('.')
-  const classes = classNames('bitfinex-amount bitfinex-text-align-right', {
+  const classes = classNames('bitfinex-amount', {
     'bitfinex-green-text': color ? color === 'green' : val > 0,
     'bitfinex-red-text': color ? color === 'red' : val < 0,
   })

@@ -72,7 +72,7 @@ class Ledgers extends PureComponent {
     const limit = getQueryLimit(TYPE)
     const filteredData = getCurrentEntries(entries, offset, limit, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-    const tableColums = getColumns({
+    const tableColumns = getColumns({
       filteredData,
       getFullTime,
       t,
@@ -145,7 +145,7 @@ class Ledgers extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            tableColums={tableColums}
+            tableColumns={tableColumns}
           />
           {renderPagination}
         </Fragment>

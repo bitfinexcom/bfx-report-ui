@@ -8,7 +8,7 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 
 import SyncSymbolPrefButton from './SyncSymbolPrefButton'
 
-const mapStateToProps = (state = {}) => {
+const mapStateToProps = (state) => {
   let syncSymbols = getPublicFundingSymbols(state)
   if (!syncSymbols.length) {
     syncSymbols = ['USD']

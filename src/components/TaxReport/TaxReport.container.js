@@ -9,7 +9,7 @@ import { getParams } from 'state/taxReport/selectors'
 
 import TaxReport from './TaxReport'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   params: getParams(state),
 })
 

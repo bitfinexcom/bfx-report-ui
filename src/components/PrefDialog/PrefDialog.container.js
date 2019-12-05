@@ -5,7 +5,7 @@ import { getTheme, getTimezone, getInputTimezone } from 'state/base/selectors'
 
 import PrefDialog from './PrefDialog'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   theme: getTheme(state),
   timezone: getTimezone(state),
   inputTimezone: getInputTimezone(state),

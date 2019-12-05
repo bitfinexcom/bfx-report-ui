@@ -51,7 +51,7 @@ class TaxReport extends PureComponent {
         </h4>
         <DataTable
           numRows={positions.length}
-          tableColums={positionsColumns}
+          tableColumns={positionsColumns}
         />
       </Fragment>
     )
@@ -81,7 +81,7 @@ class TaxReport extends PureComponent {
         </h4>
         <DataTable
           numRows={1}
-          tableColums={balancesColumns}
+          tableColumns={balancesColumns}
         />
       </Fragment>
     )
@@ -119,14 +119,14 @@ class TaxReport extends PureComponent {
           <Fragment>
             <DataTable
               numRows={movements.length}
-              tableColums={movementsColumns}
+              tableColumns={movementsColumns}
             />
             <br />
           </Fragment>
         )}
         <DataTable
           numRows={1}
-          tableColums={totalMovementsColumns}
+          tableColumns={totalMovementsColumns}
         />
       </Fragment>
     )
@@ -214,7 +214,7 @@ class TaxReport extends PureComponent {
             <br />
             <DataTable
               numRows={1}
-              tableColums={totalResultColumns}
+              tableColumns={totalResultColumns}
             />
           </Fragment>
         ) }

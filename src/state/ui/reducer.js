@@ -1,8 +1,11 @@
+import getDeviceType from 'utils/getDeviceType'
+
 import types from './constants'
 
 const initialState = {
   isCustomDialogOpen: false,
   isFrameworkDialogOpen: false,
+  device: getDeviceType(),
 }
 
 export function uiReducer(state = initialState, action) {
@@ -17,6 +20,11 @@ export function uiReducer(state = initialState, action) {
       return {
         ...state,
         isFrameworkDialogOpen: !state.isFrameworkDialogOpen,
+      }
+    case types.UI_RESIZED:
+      return {
+        ...state,
+        device: getDeviceType(),
       }
     default: {
       return state

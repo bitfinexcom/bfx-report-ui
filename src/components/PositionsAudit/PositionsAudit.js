@@ -99,7 +99,7 @@ class PositionsAudit extends PureComponent {
     }
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const numRows = filteredData.length
-    const tableColums = getColumns({
+    const tableColumns = getColumns({
       target: TYPE,
       filteredData,
       getFullTime,
@@ -154,7 +154,7 @@ class PositionsAudit extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            tableColums={tableColums}
+            tableColumns={tableColumns}
           />
           {renderPagination}
         </Fragment>

@@ -28,7 +28,7 @@ import queryConstants from 'state/query/constants'
 
 import Ledgers from './Ledgers'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_LEDGERS),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),

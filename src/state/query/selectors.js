@@ -30,7 +30,7 @@ export const getTargetQueryLimit = state => target => (canChangeQueryLimit(targe
  * Selector to return query range (in milliseconds) and limit.
  * @param {object} state query state
  */
-export function getTimeFrame(state = {}, smallestMts = 0) {
+export function getTimeFrame(state, smallestMts = 0) {
   const date = new Date()
   const now = date.getTime()
   let TIME_SHIFT

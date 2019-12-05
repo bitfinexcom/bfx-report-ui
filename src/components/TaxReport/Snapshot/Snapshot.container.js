@@ -11,7 +11,7 @@ import {
 
 import Snapshot from './Snapshot'
 
-const mapStateToProps = (state = {}, { match }) => ({
+const mapStateToProps = (state, { match }) => ({
   data: getSnapshot(state, match.params.section),
   loading: !getSnapshotDataReceived(state, match.params.section),
 })

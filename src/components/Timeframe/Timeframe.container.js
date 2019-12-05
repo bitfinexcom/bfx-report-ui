@@ -7,7 +7,7 @@ import { setTimeRange } from 'state/query/actions'
 
 import Timeframe from './Timeframe'
 
-function mapStateToProps(state = {}) {
+function mapStateToProps(state) {
   const { start, end } = getTimeFrame(getQuery(state))
   return {
     start,

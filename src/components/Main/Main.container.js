@@ -9,7 +9,7 @@ import { getIsCustomDialogOpen, getIsFrameworkDialogOpen } from 'state/ui/select
 
 import Main from './Main'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   authIsShown: getIsShown(state),
   authStatus: getAuthStatus(state),
   menuMode: getMenuMode(state),

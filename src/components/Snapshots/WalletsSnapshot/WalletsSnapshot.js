@@ -41,7 +41,7 @@ class WalletsSnapshot extends PureComponent {
         {_isNumber(totalBalanceUsd) && (
           <DataTable
             numRows={1}
-            tableColums={totalWalletsColumns}
+            tableColumns={totalWalletsColumns}
           />
         ) }
         <h4>
@@ -49,21 +49,21 @@ class WalletsSnapshot extends PureComponent {
         </h4>
         <DataTable
           numRows={exchangeRows}
-          tableColums={exchangeColumns}
+          tableColumns={exchangeColumns}
         />
         <h4>
           {t('wallets.header.margin')}
         </h4>
         <DataTable
           numRows={marginRows}
-          tableColums={marginColumns}
+          tableColumns={marginColumns}
         />
         <h4>
           {t('wallets.header.funding')}
         </h4>
         <DataTable
           numRows={fundingRows}
-          tableColums={fundingColumns}
+          tableColumns={fundingColumns}
         />
       </Fragment>
     )

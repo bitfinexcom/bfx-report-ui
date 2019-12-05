@@ -28,7 +28,7 @@ import queryConstants from 'state/query/constants'
 
 import AffiliatesEarnings from './AffiliatesEarnings'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_AFFILIATES_EARNINGS),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),

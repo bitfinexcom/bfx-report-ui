@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { Menu } from '@blueprintjs/core'
 import {
@@ -9,13 +8,16 @@ import {
 } from '@blueprintjs/table'
 import _keys from 'lodash/keys'
 
+import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
+import DEVICES from 'var/devices'
+
 class DataTable extends PureComponent {
   selectedColumns = {}
 
   getCellData = (rowIndex, columnIndex) => {
-    const { tableColums } = this.props
+    const { tableColumns } = this.props
 
-    return tableColums[columnIndex].copyText(rowIndex)
+    return tableColumns[columnIndex].copyText(rowIndex)
   }
 
   renderBodyContextMenu = (context) => {
@@ -52,7 +54,7 @@ class DataTable extends PureComponent {
   }
 
   onCopy = () => {
-    const { tableColums, t } = this.props
+    const { tableColumns, t } = this.props
 
     navigator.clipboard.readText().then((text) => {
       const columnHeaders = []
@@ -63,7 +65,7 @@ class DataTable extends PureComponent {
 
       while (cur <= end) {
         if (this.selectedColumns[cur]) {
-          const columnName = t(tableColums[cur].name)
+          const columnName = t(tableColumns[cur].name)
           columnHeaders.push(columnName)
         } else {
           columnHeaders.push('')
@@ -77,18 +79,20 @@ class DataTable extends PureComponent {
   }
 
   getCellClipboardData = (row, col) => {
-    const { tableColums } = this.props
+    const { tableColumns } = this.props
 
-    return tableColums[col].copyText(row)
+    return tableColumns[col].copyText(row)
   }
 
   render() {
     const {
-      numRows,
-      t,
-      tableColums,
+      numRows, t, tableColumns, device,
     } = this.props
-    const columnWidths = tableColums.map(column => column.width)
+    const columnWidths = tableColumns.map(column => column.width)
+
+    if (device === DEVICES.PHONE && tableColumns.length > 2) {
+      return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
+    }
 
     return (
       <Table
@@ -101,7 +105,7 @@ class DataTable extends PureComponent {
         onCopy={this.onCopy}
         bodyContextMenuRenderer={this.renderBodyContextMenu}
       >
-        {tableColums.map(column => (
+        {tableColumns.map(column => (
           <Column
             key={column.id}
             id={column.id}
@@ -125,10 +129,11 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
 
 DataTable.propTypes = {
   numRows: PropTypes.number.isRequired,
+  tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
+  device: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
-  tableColums: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
 }
 
 DataTable.defaultProps = {}
 
-export default withTranslation('translations')(DataTable)
+export default DataTable

@@ -27,7 +27,7 @@ import queryConstants from 'state/query/constants'
 
 import Movements from './Movements'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_MOVEMENTS),
   entries: getEntries(state),
   existingCoins: getExistingCoins(state),

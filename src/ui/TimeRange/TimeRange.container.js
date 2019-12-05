@@ -5,7 +5,7 @@ import { getTimeFrame } from 'state/query/selectors'
 
 import TimeRange from './TimeRange'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   ...getTimeFrame(state.query),
   timezone: getTimezone(state),
 })

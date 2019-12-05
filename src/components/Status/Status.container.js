@@ -5,7 +5,7 @@ import { getIntent, getMsg } from 'state/status/selectors'
 
 import Status from './Status'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   intent: getIntent(state),
   msg: getMsg(state),
 })

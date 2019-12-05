@@ -5,7 +5,7 @@ import { setQueryLimit } from 'state/base/actions'
 
 import QueryLimitSelector from './QueryLimitSelector'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   getQueryLimit: getTargetQueryLimit(state),
 })
 

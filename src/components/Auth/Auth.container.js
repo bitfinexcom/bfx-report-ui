@@ -7,7 +7,7 @@ import { getApiKey, getApiSecret } from 'state/base/selectors'
 
 import Auth from './Auth'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   apiKey: getApiKey(state),
   apiSecret: getApiSecret(state),
   isShown: getIsShown(state),

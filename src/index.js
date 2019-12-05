@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { FocusStyleManager } from '@blueprintjs/core'
 import { PersistGate } from 'redux-persist/integration/react'
+import _debounce from 'lodash/debounce'
 
 import 'normalize.css/normalize.css'
 import 'flexboxgrid2/flexboxgrid2.css'
@@ -15,7 +16,7 @@ import '@blueprintjs/timezone/lib/css/blueprint-timezone.css'
 
 import { persistor, store } from 'state/store'
 import { platform } from 'var/config'
-import { uiLoaded } from 'state/ui/actions'
+import { uiLoaded, uiResized } from 'state/ui/actions'
 import 'styles/index.scss'
 
 import App from './App'
@@ -38,5 +39,9 @@ window.addEventListener('load', () => {
   // eslint-disable-next-line no-console
   console.log(`UI v.${version}`)
 })
+
+window.addEventListener('resize', _debounce(() => {
+  store.dispatch(uiResized())
+}, 100))
 
 FocusStyleManager.onlyShowFocusOnTabs()

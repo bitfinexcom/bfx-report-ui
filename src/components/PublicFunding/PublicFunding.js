@@ -90,7 +90,7 @@ class PublicFunding extends PureComponent {
     const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const currentSymbol = targetSymbol || 'USD'
     const numRows = filteredData.length
-    const tableColums = getColumns({
+    const tableColumns = getColumns({
       filteredData,
       getFullTime,
       t,
@@ -165,7 +165,7 @@ class PublicFunding extends PureComponent {
           {renderPagination}
           <DataTable
             numRows={numRows}
-            tableColums={tableColums}
+            tableColumns={tableColumns}
           />
           {renderPagination}
         </Fragment>

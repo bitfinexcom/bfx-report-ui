@@ -5,7 +5,7 @@ import { getLocale } from 'state/base/selectors'
 
 import LangMenu from './LangMenu'
 
-const mapStateToProps = (state = {}) => ({
+const mapStateToProps = state => ({
   locale: getLocale(state),
 })
 
