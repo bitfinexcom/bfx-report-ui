@@ -10,6 +10,9 @@
   "activepositions": {
     "title": "Активные позиции"
   },
+  "affiliatesearnings": {
+    "title": "Доходы аффилиатов"
+  },
   "auth": {
     "auth": "Аутент.",
     "title": "Пожалуйста, авторизуйтесь",
@@ -99,6 +102,11 @@
       "greaterThan": "Больше чем",
       "lessThan": "Меньше чем"
     }
+  },
+  "columnsselect": {
+    "title": "Выбрать столбцы",
+    "cancel": "Cancel",
+    "apply": "Применить столбцы"
   },
   "concentrationrisk": {
     "title": "Риск концентрации",

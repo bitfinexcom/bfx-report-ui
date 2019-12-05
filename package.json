@@ -64,7 +64,7 @@
     "react-test-renderer": "^16.8.6"
   },
   "scripts": {
-    "prepare": "node scripts/copyFiles && node scripts/handleBptIcons",
+    "prepare": "node scripts/copyEnv && node scripts/copyFiles && node scripts/handleBptIcons",
     "start": "npm run prepare && react-scripts start",
     "startAll": "concurrently \"npm run start\" \"npm run --prefix ../bfx-reports-framework startSimulEnv\" \"npm run --prefix ../bfx-reports-framework startServDev\" \"npm run --prefix ../bfx-reports-framework startDev\"",
     "build": "npm run prepare && react-scripts build",

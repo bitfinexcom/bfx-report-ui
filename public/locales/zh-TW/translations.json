@@ -10,6 +10,9 @@
   "activepositions": {
     "title": "活躍的倉位"
   },
+  "affiliatesearnings": {
+    "title": "推薦計畫收益"
+  },
   "auth": {
     "auth": "驗證",
     "title": "請先登入",
@@ -99,6 +102,11 @@
       "greaterThan": "大於",
       "lessThan": "少於"
     }
+  },
+  "columnsselect": {
+    "title": "欄位選擇",
+    "cancel": "Cancel",
+    "apply": "適用欄位"
   },
   "concentrationrisk": {
     "title": "集中風險",

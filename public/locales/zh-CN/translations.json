@@ -10,6 +10,9 @@
   "activepositions": {
     "title": "有效仓位"
   },
+  "affiliatesearnings": {
+    "title": "推荐人计划收益"
+  },
   "auth": {
     "auth": "验证",
     "title": "请登录",
@@ -99,6 +102,11 @@
       "greaterThan": "大于",
       "lessThan": "少于"
     }
+  },
+  "columnsselect": {
+    "title": "栏位选择",
+    "cancel": "Cancel",
+    "apply": "适用栏位"
   },
   "concentrationrisk": {
     "title": "集中风险",
