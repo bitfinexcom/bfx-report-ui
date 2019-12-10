@@ -84,7 +84,10 @@ class ToggleMenu extends PureComponent {
       return
     }
     const [path] = _castArray(getPath(nextTarget))
-    history.push(path)
+    history.push({
+      pathname: path,
+      search: history.location.search,
+    })
   }
 
   /* eslint-disable react/no-array-index-key */

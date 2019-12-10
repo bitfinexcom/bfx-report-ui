@@ -21,11 +21,6 @@ class TaxReport extends PureComponent {
     }
   }
 
-  switchSection = (section) => {
-    const { history } = this.props
-    history.push(`${section}${history.location.search}`)
-  }
-
   getPositionsSnapshot = ({ positions, title }) => {
     const {
       getFullTime,
