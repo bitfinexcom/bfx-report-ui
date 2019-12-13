@@ -2,8 +2,9 @@ import _get from 'lodash/get'
 
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
-import { FILTERS_WHITELIST, getPageSize } from 'state/query/utils'
+import { ROUTE_WHITELIST, getPageSize } from 'state/query/utils'
 import ledgersTypes from 'state/ledgers/constants'
+import tradesTypes from 'state/trades/constants'
 import types from './constants'
 import { fetchNext2, fetchPrev2, jumpPage2, getPageOffset } from 'state/reducers.helper'
 
@@ -16,7 +17,7 @@ const initialSectionState = {
   smallestMts: 0,
 }
 
-const getInitialState = () => FILTERS_WHITELIST.reduce((acc, section) => {
+const getInitialState = () => ROUTE_WHITELIST.reduce((acc, section) => {
   acc[section] = initialSectionState
   return acc
 }, {})
@@ -48,6 +49,37 @@ function paginationReducer(state = initialState, { type, payload }) {
         ...state,
         ledgers: {
           entriesSize: state.ledgers.entriesSize + res.length,
+          currentEntriesSize: res.length,
+          smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
+          offset,
+          pageOffset,
+          nextPage,
+        },
+      }
+    }
+    case tradesTypes.UPDATE_TRADES: {
+      if (!_get(payload, ['data', 'res'])) {
+        return state
+      }
+
+      const { data, limit } = payload
+      const { res, nextPage } = data
+      const pageSize = getPageSize('trades')
+      let smallestMts
+      res.forEach((entry) => {
+        const {
+          mtsCreate,
+        } = entry
+        if (nextPage === false && (!smallestMts || smallestMts > mtsCreate)) {
+          smallestMts = mtsCreate
+        }
+      })
+      const [offset, pageOffset] = getPageOffset(state.trades, res, limit, pageSize)
+
+      return {
+        ...state,
+        trades: {
+          entriesSize: state.trades.entriesSize + res.length,
           currentEntriesSize: res.length,
           smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
           offset,

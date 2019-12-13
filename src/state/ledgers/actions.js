@@ -23,21 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to jump to a specific Ledgers page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_LEDGERS_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh ledgers.
  */
 export function refresh() {
@@ -98,7 +83,6 @@ export default {
   addTargetSymbol,
   fetchFail,
   fetchLedgers,
-  jumpPage,
   refresh,
   removeTargetSymbol,
   setTargetSymbols,

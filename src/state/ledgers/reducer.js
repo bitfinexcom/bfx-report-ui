@@ -79,11 +79,6 @@ export function ledgersReducer(state = initialState, action) {
     }
     case types.FETCH_FAIL:
       return fetchFail(state)
-    case types.FETCH_NEXT_LEDGERS:
-      return {
-        ...state,
-        pageLoading: true,
-      }
     case types.ADD_SYMBOL:
       return addSymbol(state, payload, initialState)
     case types.REMOVE_SYMBOL:

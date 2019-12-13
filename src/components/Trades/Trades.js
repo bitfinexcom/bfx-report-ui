@@ -6,7 +6,7 @@ import {
 } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
-import Pagination from 'ui/Pagination'
+import Pagination from 'ui/Pagination2'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -16,19 +16,13 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
-import { getPageSize } from 'state/query/utils'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import {
-  checkFetch,
-  getCurrentEntries,
-  togglePair,
-} from 'state/utils'
+import { checkFetch, togglePair } from 'state/utils'
 
 import getColumns from './Trades.columns'
 import { propTypes, defaultProps } from './Trades.props'
 
 const TYPE = queryConstants.MENU_TRADES
-const PAGE_SIZE = getPageSize(TYPE)
 
 class Trades extends PureComponent {
   componentDidMount() {
@@ -51,47 +45,22 @@ class Trades extends PureComponent {
   render() {
     const {
       columns,
-      existingPairs,
-      fetchNext,
-      fetchPrev,
-      getFullTime,
-      getQueryLimit,
-      offset,
-      pageOffset,
-      pageLoading,
       entries,
+      existingPairs,
+      getFullTime,
       handleClickExport,
-      jumpPage,
       loading,
       refresh,
       t,
       targetPairs,
-      nextPage,
       timeOffset,
     } = this.props
-    const limit = getQueryLimit(TYPE)
-    const filteredData = getCurrentEntries(entries, offset, limit, pageOffset, PAGE_SIZE)
-    const numRows = filteredData.length
     const tableColumns = getColumns({
-      filteredData,
+      filteredData: entries,
       getFullTime,
       t,
       timeOffset,
     }).filter(({ id }) => columns[id])
-
-    const renderPagination = (
-      <Pagination
-        type={TYPE}
-        dataLen={entries.length}
-        loading={pageLoading}
-        offset={offset}
-        jumpPage={jumpPage}
-        prevClick={fetchPrev}
-        nextClick={fetchNext}
-        pageOffset={pageOffset}
-        nextPage={nextPage}
-      />
-    )
 
     const renderPairSelector = (
       <Fragment>
@@ -109,7 +78,7 @@ class Trades extends PureComponent {
       showContent = (
         <Loading title='trades.title' />
       )
-    } else if (numRows === 0) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -142,12 +111,12 @@ class Trades extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          {renderPagination}
+          <Pagination target={TYPE} loading={loading} />
           <DataTable
-            numRows={numRows}
+            numRows={entries.length}
             tableColumns={tableColumns}
           />
-          {renderPagination}
+          <Pagination target={TYPE} loading={loading} />
         </Fragment>
       )
     }

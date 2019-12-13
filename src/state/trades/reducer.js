@@ -11,7 +11,6 @@ import {
   fetchFail,
   fetchNext,
   fetchPrev,
-  getPageOffset,
   jumpPage,
   removePair,
   setPairs,
@@ -37,11 +36,10 @@ export function tradesReducer(state = initialState, action) {
           dataReceived: true,
         }
       }
-      const { data, limit, pageSize } = payload
-      const { res, nextPage } = data
+      const { data } = payload
+      const { res } = data
       const { existingPairs } = state
       const updatePairs = [...existingPairs]
-      let smallestMts
       const entries = res.map((entry) => {
         const {
           execAmount,
@@ -61,10 +59,6 @@ export function tradesReducer(state = initialState, action) {
         if (updatePairs.indexOf(formattedPair) === -1) {
           updatePairs.push(formattedPair)
         }
-        // log smallest mts
-        if (nextPage === false && (!smallestMts || smallestMts > mtsCreate)) {
-          smallestMts = mtsCreate
-        }
         return {
           id,
           pair: formattedPair,
@@ -79,28 +73,22 @@ export function tradesReducer(state = initialState, action) {
           feeCurrency: mapSymbol(feeCurrency),
         }
       })
-      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,
         dataReceived: true,
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
-        smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-        offset,
-        pageOffset,
         pageLoading: false,
-        nextPage,
       }
     }
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.FETCH_NEXT_TRADES:
-      return fetchNext(TYPE, state, payload)
-    case types.FETCH_PREV_TRADES:
-      return fetchPrev(TYPE, state, payload)
-    case types.JUMP_TRADES_PAGE:
-      return jumpPage(TYPE, state, payload)
+      return {
+        ...state,
+        pageLoading: true,
+      }
     case types.ADD_PAIR:
       return addPair(state, payload, initialState)
     case types.REMOVE_PAIR:

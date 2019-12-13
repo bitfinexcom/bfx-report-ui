@@ -42,9 +42,8 @@ function getReqLedgers({
 
 /* eslint-disable-next-line consistent-return */
 function* fetchLedgers({ payload }) {
+  const { nextFetch = false } = payload
   try {
-    const { nextFetch = false } = payload
-
     if (!nextFetch) {
       const shouldProceed = yield call(frameworkCheck)
       if (!shouldProceed) {

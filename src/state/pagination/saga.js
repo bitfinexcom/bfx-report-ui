@@ -5,6 +5,7 @@ import {
 
 import queryTypes from 'state/query/constants'
 import { fetchLedgers } from 'state/ledgers/actions'
+import { fetchTrades } from 'state/trades/actions'
 
 import types from './constants'
 
@@ -33,6 +34,8 @@ function* fetchNext({ payload }) {
       yield put(fetchLedgers({ nextFetch: true }))
       break
     case MENU_TRADES:
+      yield put(fetchTrades({ nextFetch: true }))
+      break
     case MENU_ORDERS:
     case MENU_MOVEMENTS:
     case MENU_POSITIONS:
