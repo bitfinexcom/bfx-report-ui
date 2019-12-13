@@ -118,6 +118,7 @@ export function checkFetch(prevProps, props, type) {
   const { loading } = props
   // eslint-disable-next-line react/destructuring-assignment
   const fetch = props[`fetch${type.charAt(0).toUpperCase() + type.slice(1)}`]
+  console.log(4, loading, loading !== prevLoading, props)
   if (loading && loading !== prevLoading) {
     fetch()
   }

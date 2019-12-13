@@ -9,10 +9,6 @@ import {
   addSymbol,
   baseSymbolState,
   fetchFail,
-  fetchNext,
-  fetchPrev,
-  getPageOffset,
-  jumpPage,
   removeSymbol,
   setQueryLimit,
   setSymbols,
@@ -38,7 +34,7 @@ export function ledgersReducer(state = initialState, action) {
           dataReceived: true,
         }
       }
-      const { data, limit, pageSize } = payload
+      const { data } = payload
       const { res, nextPage } = data
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
@@ -60,10 +56,6 @@ export function ledgersReducer(state = initialState, action) {
         if (updateCoins.indexOf(mappedCurrency) === -1) {
           updateCoins.push(mappedCurrency)
         }
-        // log smallest mts
-        if (nextPage === false && (!smallestMts || smallestMts > mts)) {
-          smallestMts = mts
-        }
         return {
           id,
           currency: mappedCurrency,
@@ -76,28 +68,22 @@ export function ledgersReducer(state = initialState, action) {
           wallet,
         }
       })
-      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
-        currentEntriesSize: entries.length,
         dataReceived: true,
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
         smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-        offset,
-        pageOffset,
         pageLoading: false,
-        nextPage,
       }
     }
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.FETCH_NEXT_LEDGERS:
-      return fetchNext(TYPE, state, payload)
-    case types.FETCH_PREV_LEDGERS:
-      return fetchPrev(TYPE, state, payload)
-    case types.JUMP_LEDGERS_PAGE:
-      return jumpPage(TYPE, state, payload)
+      return {
+        ...state,
+        pageLoading: true,
+      }
     case types.ADD_SYMBOL:
       return addSymbol(state, payload, initialState)
     case types.REMOVE_SYMBOL:

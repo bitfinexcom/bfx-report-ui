@@ -26,9 +26,14 @@ export const getTargetQueryLimit = state => target => (canChangeQueryLimit(targe
   ? getBaseQueryLimit(state)
   : getQueryLimit(target))
 
+export const getTargetQueryLimit2 = (state, target) => (canChangeQueryLimit(target)
+  ? getBaseQueryLimit(state)
+  : getQueryLimit(target))
+
 /**
  * Selector to return query range (in milliseconds) and limit.
  * @param {object} state query state
+ * @param {number} smallestMts timestamp of the last checked entry, used for pagination
  */
 export function getTimeFrame(state, smallestMts = 0) {
   const date = new Date()

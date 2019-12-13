@@ -6,7 +6,7 @@ import {
 } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
-import Pagination from 'ui/Pagination'
+import Pagination from 'ui/Pagination2'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -16,19 +16,13 @@ import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
-import { getPageSize } from 'state/query/utils'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import {
-  checkFetch,
-  toggleSymbol,
-  getCurrentEntries,
-} from 'state/utils'
+import { checkFetch, toggleSymbol } from 'state/utils'
 
 import getColumns from './Ledgers.columns'
 import { propTypes, defaultProps } from './Ledgers.props'
 
 const TYPE = queryConstants.MENU_LEDGERS
-const PAGE_SIZE = getPageSize(TYPE)
 
 class Ledgers extends PureComponent {
   componentDidMount() {
@@ -51,29 +45,18 @@ class Ledgers extends PureComponent {
   render() {
     const {
       columns,
-      fetchNext,
-      fetchPrev,
       getFullTime,
-      getQueryLimit,
-      offset,
-      pageOffset,
-      pageLoading,
       targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
-      jumpPage,
       loading,
       refresh,
-      nextPage,
       t,
       timeOffset,
     } = this.props
-    const limit = getQueryLimit(TYPE)
-    const filteredData = getCurrentEntries(entries, offset, limit, pageOffset, PAGE_SIZE)
-    const numRows = filteredData.length
     const tableColumns = getColumns({
-      filteredData,
+      filteredData: entries,
       getFullTime,
       t,
       timeOffset,
@@ -90,26 +73,12 @@ class Ledgers extends PureComponent {
       </Fragment>
     )
 
-    const renderPagination = (
-      <Pagination
-        type={TYPE}
-        dataLen={entries.length}
-        loading={pageLoading}
-        offset={offset}
-        jumpPage={jumpPage}
-        nextClick={fetchNext}
-        prevClick={fetchPrev}
-        pageOffset={pageOffset}
-        nextPage={nextPage}
-      />
-    )
-
     let showContent
     if (loading) {
       showContent = (
         <Loading title='ledgers.title' />
       )
-    } else if (numRows === 0) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -142,12 +111,12 @@ class Ledgers extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          {renderPagination}
+          <Pagination loading={loading} target={TYPE} />
           <DataTable
-            numRows={numRows}
+            numRows={entries.length}
             tableColumns={tableColumns}
           />
-          {renderPagination}
+          <Pagination loading={loading} target={TYPE} />
         </Fragment>
       )
     }

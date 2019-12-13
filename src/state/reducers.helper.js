@@ -92,6 +92,38 @@ export function fetchPrev(type, state, LIMIT) {
   }
 }
 
+export function fetchNext2(type, state, LIMIT) {
+  return (state.entriesSize - LIMIT >= state.offset)
+    ? {
+      offset: state.offset + state.currentEntriesSize,
+      pageOffset: 0,
+    } : {}
+}
+
+export function fetchPrev2(type, state, LIMIT) {
+  return {
+    offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
+    pageOffset: 0,
+  }
+}
+
+export function jumpPage2(type, state, page, LIMIT) {
+  const PAGE_SIZE = getPageSize(type)
+  const totalOffset = (page - 1) * PAGE_SIZE
+  const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
+  if (totalOffset < LIMIT) {
+    const baseOffset = Math.ceil(page / LIMIT * PAGE_SIZE) * LIMIT
+    return {
+      offset: state.offset < baseOffset ? state.offset : baseOffset,
+      pageOffset: totalOffset - currentOffset,
+    }
+  }
+  return {
+    offset: currentOffset + LIMIT,
+    pageOffset: totalOffset - currentOffset,
+  }
+}
+
 export function jumpPage(type, state, payload) {
   const { page, queryLimit: LIMIT } = payload
   const PAGE_SIZE = getPageSize(type)
