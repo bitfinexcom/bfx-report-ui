@@ -1,12 +1,9 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
-import Pagination from 'ui/Pagination'
+import Pagination from 'ui/Pagination2'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -16,19 +13,13 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
-import { getPageSize } from 'state/query/utils'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import {
-  checkFetch,
-  getCurrentEntries,
-  togglePair,
-} from 'state/utils'
+import { checkFetch, togglePair } from 'state/utils'
 
 import getColumns from './Orders.columns'
 import { propTypes, defaultProps } from './Orders.props'
 
 const TYPE = queryConstants.MENU_ORDERS
-const PAGE_SIZE = getPageSize(TYPE)
 
 class Orders extends PureComponent {
   componentDidMount() {
@@ -52,46 +43,21 @@ class Orders extends PureComponent {
     const {
       columns,
       existingPairs,
-      fetchNext,
-      fetchPrev,
-      getQueryLimit,
-      offset,
-      pageOffset,
-      pageLoading,
       entries,
       handleClickExport,
-      jumpPage,
       loading,
       refresh,
       targetPairs,
       getFullTime,
-      nextPage,
       t,
       timeOffset,
     } = this.props
-    const limit = getQueryLimit(TYPE)
-    const filteredData = getCurrentEntries(entries, offset, limit, pageOffset, PAGE_SIZE)
-    const numRows = filteredData.length
     const tableColumns = getColumns({
-      filteredData,
+      filteredData: entries,
       getFullTime,
       t,
       timeOffset,
     }).filter(({ id }) => columns[id])
-
-    const renderPagination = (
-      <Pagination
-        type={TYPE}
-        dataLen={entries.length}
-        loading={pageLoading}
-        offset={offset}
-        jumpPage={jumpPage}
-        prevClick={fetchPrev}
-        nextClick={fetchNext}
-        pageOffset={pageOffset}
-        nextPage={nextPage}
-      />
-    )
 
     const renderPairSelector = (
       <Fragment>
@@ -109,7 +75,7 @@ class Orders extends PureComponent {
       showContent = (
         <Loading title='orders.title' />
       )
-    } else if (numRows === 0) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -142,12 +108,12 @@ class Orders extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          {renderPagination}
+          <Pagination target={TYPE} loading={loading} />
           <DataTable
-            numRows={numRows}
+            numRows={entries.length}
             tableColumns={tableColumns}
           />
-          {renderPagination}
+          <Pagination target={TYPE} loading={loading} />
         </Fragment>
       )
     }

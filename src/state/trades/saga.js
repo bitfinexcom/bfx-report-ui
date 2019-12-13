@@ -10,6 +10,8 @@ import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { getQuery, getTargetQueryLimit2, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
+import { refreshPagination, updatePagination } from 'state/pagination/actions'
+import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { getPageSize } from 'state/query/utils'
 import { fetchNext } from 'state/sagas.helper'
@@ -17,8 +19,6 @@ import { fetchNext } from 'state/sagas.helper'
 import types from './constants'
 import actions from './actions'
 import { getTrades } from './selectors'
-import { refreshPagination } from 'state/pagination/actions'
-import { getPaginationData } from 'state/pagination/selectors'
 
 const TYPE = queryTypes.MENU_TRADES
 const PAGE_SIZE = getPageSize(TYPE)
@@ -70,6 +70,7 @@ function* fetchTrades({ payload }) {
       queryLimit,
     })
     yield put(actions.updateTrades(result, queryLimit, PAGE_SIZE))
+    yield put(updatePagination(TYPE, result, queryLimit))
 
     if (error) {
       yield put(actions.fetchFail({

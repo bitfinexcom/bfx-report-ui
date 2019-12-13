@@ -11,7 +11,7 @@ import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
 import { getFilterQuery } from 'state/filters/selectors'
-import { refreshPagination } from 'state/pagination/actions'
+import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import { fetchNext } from 'state/sagas.helper'
 import { frameworkCheck } from 'state/ui/saga'
@@ -78,6 +78,7 @@ function* fetchLedgers({ payload }) {
       queryLimit,
     })
     yield put(actions.updateLedgers(result, queryLimit))
+    yield put(updatePagination(TYPE, result, queryLimit))
 
     if (error) {
       yield put(actions.fetchFail({

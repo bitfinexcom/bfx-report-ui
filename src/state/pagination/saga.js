@@ -6,6 +6,7 @@ import {
 import queryTypes from 'state/query/constants'
 import { fetchLedgers } from 'state/ledgers/actions'
 import { fetchTrades } from 'state/trades/actions'
+import { fetchOrders } from 'state/orders/actions'
 
 import types from './constants'
 
@@ -31,12 +32,11 @@ function* fetchNext({ payload }) {
 
   switch (section) {
     case MENU_LEDGERS:
-      yield put(fetchLedgers({ nextFetch: true }))
-      break
+      return yield put(fetchLedgers({ nextFetch: true }))
     case MENU_TRADES:
-      yield put(fetchTrades({ nextFetch: true }))
-      break
+      return yield put(fetchTrades({ nextFetch: true }))
     case MENU_ORDERS:
+      return yield put(fetchOrders({ nextFetch: true }))
     case MENU_MOVEMENTS:
     case MENU_POSITIONS:
     case MENU_FOFFER:
@@ -49,16 +49,11 @@ function* fetchNext({ payload }) {
     case MENU_TICKERS:
     case MENU_DERIVATIVES:
     default:
+      return undefined
   }
-}
-
-function* jumpPage({ payload }) {
-  const { page, section } = payload
-  console.log('jumpPage', section, page)
 }
 
 export default function* filtersSaga() {
   yield takeLatest(types.FETCH_NEXT, fetchNext)
   yield takeLatest(types.FETCH_PREV, fetchNext)
-  yield takeLatest(types.JUMP_PAGE, jumpPage)
 }

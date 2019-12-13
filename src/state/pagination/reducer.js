@@ -1,12 +1,11 @@
-import _get from 'lodash/get'
-
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import { ROUTE_WHITELIST, getPageSize } from 'state/query/utils'
-import ledgersTypes from 'state/ledgers/constants'
-import tradesTypes from 'state/trades/constants'
+import {
+  fetchNext2, fetchPrev2, jumpPage2, getPageOffset,
+} from 'state/reducers.helper'
+
 import types from './constants'
-import { fetchNext2, fetchPrev2, jumpPage2, getPageOffset } from 'state/reducers.helper'
 
 const initialSectionState = {
   entriesSize: 0,
@@ -24,63 +23,37 @@ const getInitialState = () => ROUTE_WHITELIST.reduce((acc, section) => {
 
 const initialState = getInitialState()
 
+const SMALLEST_MTS_MAP = {
+  ledgers: 'mts',
+  trades: 'mtsCreate',
+  orders: 'mtsUpdate',
+}
+
 function paginationReducer(state = initialState, { type, payload }) {
   switch (type) {
-    case ledgersTypes.UPDATE_LEDGERS: {
-      if (!_get(payload, ['data', 'res'])) {
+    case types.UPDATE: {
+      const { section, data, queryLimit } = payload
+      const { res: entries, nextPage } = data
+      if (!entries.length) {
         return state
       }
 
-      const { data, limit } = payload
-      const { res, nextPage } = data
-      const pageSize = getPageSize('ledgers')
-      let smallestMts
-      res.forEach((entry) => {
-        const {
-          mts,
-        } = entry
+      let smallestMts = 0
+      entries.forEach((entry) => {
+        const mts = entry[SMALLEST_MTS_MAP[section]]
         if (nextPage === false && (!smallestMts || smallestMts > mts)) {
           smallestMts = mts
         }
       })
-      const [offset, pageOffset] = getPageOffset(state.ledgers, res, limit, pageSize)
+
+      const pageSize = getPageSize(section)
+      const [offset, pageOffset] = getPageOffset(state[section], entries, queryLimit, pageSize)
 
       return {
         ...state,
-        ledgers: {
-          entriesSize: state.ledgers.entriesSize + res.length,
-          currentEntriesSize: res.length,
-          smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-          offset,
-          pageOffset,
-          nextPage,
-        },
-      }
-    }
-    case tradesTypes.UPDATE_TRADES: {
-      if (!_get(payload, ['data', 'res'])) {
-        return state
-      }
-
-      const { data, limit } = payload
-      const { res, nextPage } = data
-      const pageSize = getPageSize('trades')
-      let smallestMts
-      res.forEach((entry) => {
-        const {
-          mtsCreate,
-        } = entry
-        if (nextPage === false && (!smallestMts || smallestMts > mtsCreate)) {
-          smallestMts = mtsCreate
-        }
-      })
-      const [offset, pageOffset] = getPageOffset(state.trades, res, limit, pageSize)
-
-      return {
-        ...state,
-        trades: {
-          entriesSize: state.trades.entriesSize + res.length,
-          currentEntriesSize: res.length,
+        [section]: {
+          entriesSize: state[section].entriesSize + entries.length,
+          currentEntriesSize: entries.length,
           smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
           offset,
           pageOffset,

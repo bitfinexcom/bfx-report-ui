@@ -2,7 +2,6 @@
 import _get from 'lodash/get'
 
 import { formatPair, mapPair } from 'state/symbols/utils'
-import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -13,9 +12,9 @@ import {
   fetchPrev,
   getPageOffset,
   jumpPage,
+  refresh,
   removePair,
   setPairs,
-  setQueryLimit,
   setTimeRange,
 } from 'state/reducers.helper'
 
@@ -95,28 +94,17 @@ export function ordersReducer(state = initialState, action) {
           placedId,
         }
       })
-      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,
         dataReceived: true,
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
-        smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-        offset,
-        pageOffset,
         pageLoading: false,
-        nextPage,
       }
     }
     case types.FETCH_FAIL:
       return fetchFail(state)
-    case types.FETCH_NEXT_ORDERS:
-      return fetchNext(TYPE, state, payload)
-    case types.FETCH_PREV_ORDERS:
-      return fetchPrev(TYPE, state, payload)
-    case types.JUMP_ORDERS_PAGE:
-      return jumpPage(TYPE, state, payload)
     case types.ADD_PAIR:
       return addPair(state, payload, initialState)
     case types.REMOVE_PAIR:
@@ -124,8 +112,7 @@ export function ordersReducer(state = initialState, action) {
     case types.SET_PAIRS:
       return setPairs(state, payload, initialState)
     case types.REFRESH:
-    case baseTypes.SET_QUERY_LIMIT:
-      return setQueryLimit(TYPE, state, initialState)
+      return refresh(TYPE, state, initialState)
     case queryTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:

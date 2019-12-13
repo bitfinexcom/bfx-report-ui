@@ -2,19 +2,15 @@
 import _get from 'lodash/get'
 
 import { formatPair, mapSymbol, mapPair } from 'state/symbols/utils'
-import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
   addPair,
   basePairState,
   fetchFail,
-  fetchNext,
-  fetchPrev,
-  jumpPage,
+  refresh,
   removePair,
   setPairs,
-  setQueryLimit,
   setTimeRange,
 } from 'state/reducers.helper'
 
@@ -96,8 +92,7 @@ export function tradesReducer(state = initialState, action) {
     case types.SET_PAIRS:
       return setPairs(state, payload, initialState)
     case types.REFRESH:
-    case baseTypes.SET_QUERY_LIMIT:
-      return setQueryLimit(TYPE, state, initialState)
+      return refresh(TYPE, state, initialState)
     case queryTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:

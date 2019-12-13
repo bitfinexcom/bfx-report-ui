@@ -202,7 +202,19 @@ export function setPairs(state, payload, initialState) {
   }
 }
 
+// TODO: delete
 export function setQueryLimit(type, state, initialState) {
+  const data = (getFilterType(type) === queryTypes.FILTER_PAIR)
+    ? { targetPairs: state.targetPairs }
+    : { targetSymbols: state.targetSymbols }
+  return {
+    ...initialState,
+    ...data,
+    existingPairs: state.existingPairs,
+  }
+}
+
+export function refresh(type, state, initialState) {
   const data = (getFilterType(type) === queryTypes.FILTER_PAIR)
     ? { targetPairs: state.targetPairs }
     : { targetSymbols: state.targetSymbols }
@@ -224,6 +236,7 @@ export default {
   getPageOffset,
   jumpPage,
   paginateState,
+  refresh,
   removePair,
   removeSymbol,
   setPairs,

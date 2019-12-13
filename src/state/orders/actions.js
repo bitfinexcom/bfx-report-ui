@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Orders data.
+ * @param {Object} options
  */
-export function fetchOrders() {
+export function fetchOrders(options = {}) {
   return {
     type: types.FETCH_ORDERS,
+    payload: options,
   }
 }
 
@@ -17,43 +19,6 @@ export function fetchFail(payload) {
   return {
     type: types.FETCH_FAIL,
     payload,
-  }
-}
-
-/**
- * Create an action to fetch next Orders data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextOrders(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_ORDERS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Orders data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevOrders(queryLimit) {
-  return {
-    type: types.FETCH_PREV_ORDERS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Orders page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_ORDERS_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
   }
 }
 
@@ -120,9 +85,6 @@ export default {
   addTargetPair,
   fetchFail,
   fetchOrders,
-  fetchNextOrders,
-  fetchPrevOrders,
-  jumpPage,
   refresh,
   removeTargetPair,
   setTargetPairs,
