@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Movements data.
+ * @param {Object} options
  */
-export function fetchMovements() {
+export function fetchMovements(options = {}) {
   return {
     type: types.FETCH_MOVEMENTS,
+    payload: options,
   }
 }
 
@@ -17,43 +19,6 @@ export function fetchFail(payload) {
   return {
     type: types.FETCH_FAIL,
     payload,
-  }
-}
-
-/**
- * Create an action to fetch next Movements data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextMovements(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_MOVEMENTS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Movements data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevMovements(queryLimit) {
-  return {
-    type: types.FETCH_PREV_MOVEMENTS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Movements page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_MOVEMENTS_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
   }
 }
 
@@ -120,9 +85,6 @@ export default {
   addTargetSymbol,
   fetchFail,
   fetchMovements,
-  fetchNextMovements,
-  fetchPrevMovements,
-  jumpPage,
   refresh,
   removeTargetSymbol,
   setTargetSymbols,

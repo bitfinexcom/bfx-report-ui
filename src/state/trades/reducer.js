@@ -79,11 +79,6 @@ export function tradesReducer(state = initialState, action) {
     }
     case types.FETCH_FAIL:
       return fetchFail(state)
-    case types.FETCH_NEXT_TRADES:
-      return {
-        ...state,
-        pageLoading: true,
-      }
     case types.ADD_PAIR:
       return addPair(state, payload, initialState)
     case types.REMOVE_PAIR:

@@ -2,7 +2,7 @@ import _get from 'lodash/get'
 
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
-import { ROUTE_WHITELIST, getPageSize } from 'state/query/utils'
+import { TYPE_WHITELIST, getPageSize } from 'state/query/utils'
 import {
   fetchNext2, fetchPrev2, jumpPage2, getPageOffset,
 } from 'state/reducers.helper'
@@ -18,7 +18,7 @@ const initialSectionState = {
   smallestMts: 0,
 }
 
-const getInitialState = () => ROUTE_WHITELIST.reduce((acc, section) => {
+const getInitialState = () => TYPE_WHITELIST.reduce((acc, section) => {
   acc[section] = initialSectionState
   return acc
 }, {})
@@ -29,6 +29,7 @@ const SMALLEST_MTS_MAP = {
   [queryTypes.MENU_LEDGERS]: 'mts',
   [queryTypes.MENU_TRADES]: 'mtsCreate',
   [queryTypes.MENU_ORDERS]: 'mtsUpdate',
+  [queryTypes.MENU_MOVEMENTS]: 'mtsUpdated',
   [queryTypes.MENU_POSITIONS]: 'mtsUpdate',
   [queryTypes.MENU_POSITIONS_AUDIT]: 'mtsUpdate',
 }
