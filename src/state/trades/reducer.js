@@ -26,14 +26,13 @@ export function tradesReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_TRADES: {
-      if (!_get(payload, ['data', 'res'])) {
+      const res = _get(payload, ['data', 'res'])
+      if (!res) {
         return {
           ...state,
           dataReceived: true,
         }
       }
-      const { data } = payload
-      const { res } = data
       const { existingPairs } = state
       const updatePairs = [...existingPairs]
       const entries = res.map((entry) => {

@@ -2,12 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Positions Audit data.
- * @param {string} ids id params from url
+ * @param {Object} options
  */
-export function fetchPAudit(ids) {
+export function fetchPAudit(options = {}) {
   return {
     type: types.FETCH_PAUDIT,
-    payload: ids,
+    payload: options,
   }
 }
 
@@ -19,43 +19,6 @@ export function fetchFail(payload) {
   return {
     type: types.FETCH_FAIL,
     payload,
-  }
-}
-
-/**
- * Create an action to fetch next Positions Audit data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextPAudit(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_PAUDIT,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Positions Audit data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevPAudit(queryLimit) {
-  return {
-    type: types.FETCH_PREV_PAUDIT,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Positions Audit page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_PAUDIT_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
   }
 }
 
@@ -122,9 +85,6 @@ export default {
   addTargetId,
   fetchFail,
   fetchPAudit,
-  fetchNextPAudit,
-  fetchPrevPAudit,
-  jumpPage,
   refresh,
   removeTargetId,
   setTargetIds,

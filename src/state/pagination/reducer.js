@@ -1,3 +1,5 @@
+import _get from 'lodash/get'
+
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import { ROUTE_WHITELIST, getPageSize } from 'state/query/utils'
@@ -24,14 +26,19 @@ const getInitialState = () => ROUTE_WHITELIST.reduce((acc, section) => {
 const initialState = getInitialState()
 
 const SMALLEST_MTS_MAP = {
-  ledgers: 'mts',
-  trades: 'mtsCreate',
-  orders: 'mtsUpdate',
+  [queryTypes.MENU_LEDGERS]: 'mts',
+  [queryTypes.MENU_TRADES]: 'mtsCreate',
+  [queryTypes.MENU_ORDERS]: 'mtsUpdate',
+  [queryTypes.MENU_POSITIONS]: 'mtsUpdate',
+  [queryTypes.MENU_POSITIONS_AUDIT]: 'mtsUpdate',
 }
 
 function paginationReducer(state = initialState, { type, payload }) {
   switch (type) {
     case types.UPDATE: {
+      if (!_get(payload, ['data', 'res'])) {
+        return state
+      }
       const { section, data, queryLimit } = payload
       const { res: entries, nextPage } = data
       if (!entries.length) {

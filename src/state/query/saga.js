@@ -26,7 +26,6 @@ import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
 import { getTargetSymbol as getPublicTradesSymbol } from 'state/publicFunding/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
-import { getTargetPairs as getActivePositionsPairs } from 'state/positionsActive/selectors'
 import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors'
 import { getParams as getTaxReportParams } from 'state/taxReport/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
@@ -124,8 +123,6 @@ function getSelector(target) {
       return getTradesPairs
     case MENU_POSITIONS:
       return getPositionsPairs
-    case MENU_POSITIONS_ACTIVE:
-      return getActivePositionsPairs
     case MENU_POSITIONS_AUDIT:
       return getPositionsIds
     case MENU_PUBLIC_FUNDING:

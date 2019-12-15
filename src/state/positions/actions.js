@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Positions data.
+ * @param {Object} options
  */
-export function fetchPositions() {
+export function fetchPositions(options = {}) {
   return {
     type: types.FETCH_POSITIONS,
+    payload: options,
   }
 }
 
@@ -17,43 +19,6 @@ export function fetchFail(payload) {
   return {
     type: types.FETCH_FAIL,
     payload,
-  }
-}
-
-/**
- * Create an action to fetch next Positions data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextPositions(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_POSITIONS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Positions data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevPositions(queryLimit) {
-  return {
-    type: types.FETCH_PREV_POSITIONS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Positions page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_POSITIONS_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
   }
 }
 
@@ -120,9 +85,6 @@ export default {
   addTargetPair,
   fetchFail,
   fetchPositions,
-  fetchNextPositions,
-  fetchPrevPositions,
-  jumpPage,
   refresh,
   removeTargetPair,
   setTargetPairs,

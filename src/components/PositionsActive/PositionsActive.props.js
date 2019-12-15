@@ -14,16 +14,16 @@ const POSITIONS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   entries: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
-  fetchPaudit: PropTypes.func.isRequired,
+  fetchActivepositions: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
   loading: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   timeOffset: PropTypes.string.isRequired,
-  setTargetIds: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
   entries: [],
+  pageLoading: false,
 }

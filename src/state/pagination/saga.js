@@ -7,6 +7,8 @@ import queryTypes from 'state/query/constants'
 import { fetchLedgers } from 'state/ledgers/actions'
 import { fetchTrades } from 'state/trades/actions'
 import { fetchOrders } from 'state/orders/actions'
+import { fetchPositions } from 'state/positions/actions'
+import { fetchPAudit } from 'state/audit/actions'
 
 import types from './constants'
 
@@ -16,6 +18,7 @@ const {
   MENU_ORDERS,
   MENU_MOVEMENTS,
   MENU_POSITIONS,
+  MENU_POSITIONS_AUDIT,
   MENU_FOFFER,
   MENU_FLOAN,
   MENU_FCREDIT,
@@ -39,6 +42,9 @@ function* fetchNext({ payload }) {
       return yield put(fetchOrders({ nextFetch: true }))
     case MENU_MOVEMENTS:
     case MENU_POSITIONS:
+      return yield put(fetchPositions({ nextFetch: true }))
+    case MENU_POSITIONS_AUDIT:
+      return yield put(fetchPAudit({ nextFetch: true }))
     case MENU_FOFFER:
     case MENU_FLOAN:
     case MENU_FCREDIT:

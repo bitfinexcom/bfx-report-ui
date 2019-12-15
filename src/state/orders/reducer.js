@@ -8,10 +8,6 @@ import {
   addPair,
   basePairState,
   fetchFail,
-  fetchNext,
-  fetchPrev,
-  getPageOffset,
-  jumpPage,
   refresh,
   removePair,
   setPairs,
@@ -30,17 +26,15 @@ export function ordersReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.UPDATE_ORDERS: {
-      if (!_get(payload, ['data', 'res'])) {
+      const res = _get(payload, ['data', 'res'])
+      if (!res) {
         return {
           ...state,
           dataReceived: true,
         }
       }
-      const { data, limit, pageSize } = payload
-      const { res, nextPage } = data
       const { existingPairs } = state
       const updatePairs = [...existingPairs]
-      let smallestMts
       const entries = res.map((entry) => {
         const {
           amount,
@@ -67,10 +61,6 @@ export function ordersReducer(state = initialState, action) {
         // save new pair to updatePairs list
         if (updatePairs.indexOf(formattedPair) === -1) {
           updatePairs.push(formattedPair)
-        }
-        // log smallest mts
-        if (nextPage === false && (!smallestMts || smallestMts > mtsUpdate)) {
-          smallestMts = mtsUpdate
         }
         return {
           id,
