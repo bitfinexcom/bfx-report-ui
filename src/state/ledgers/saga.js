@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getQuery, getTargetQueryLimit2, getTimeFrame } from 'state/query/selectors'
+import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
@@ -55,7 +55,7 @@ function* fetchLedgers({ payload }) {
     const { entries, targetSymbols } = yield select(getLedgers)
     const filter = yield select(getFilterQuery, TYPE)
     const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-    const queryLimit = yield select(getTargetQueryLimit2, TYPE)
+    const queryLimit = yield select(getTargetQueryLimit, TYPE)
 
     // data exist, no need to fetch again
     if (nextFetch && entries.length - queryLimit >= offset) {

@@ -7,7 +7,7 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
-import { getQuery, getTargetQueryLimit2, getTimeFrame } from 'state/query/selectors'
+import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -46,7 +46,7 @@ function* fetchTrades({ payload }) {
     const { offset, smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
-    const queryLimit = yield select(getTargetQueryLimit2, TYPE)
+    const queryLimit = yield select(getTargetQueryLimit, TYPE)
 
     // data exist, no need to fetch again
     if (nextFetch && entries.length - queryLimit >= offset) {

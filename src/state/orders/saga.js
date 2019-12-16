@@ -9,13 +9,12 @@ import { makeFetchCall } from 'state/utils'
 import {
   formatRawSymbols, mapRequestPairs,
 } from 'state/symbols/utils'
-import { getQuery, getTargetQueryLimit2, getTimeFrame } from 'state/query/selectors'
+import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import queryTypes from 'state/query/constants'
-import { getPageSize } from 'state/query/utils'
 import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
@@ -23,7 +22,6 @@ import actions from './actions'
 import { getOrders } from './selectors'
 
 const TYPE = queryTypes.MENU_ORDERS
-const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqOrders({
   smallestMts,
@@ -48,7 +46,7 @@ function* fetchOrders({ payload }) {
   try {
     const { entries, targetPairs } = yield select(getOrders)
     const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-    const queryLimit = yield select(getTargetQueryLimit2, TYPE)
+    const queryLimit = yield select(getTargetQueryLimit, TYPE)
 
     // data exist, no need to fetch again
     if (nextFetch && entries.length - queryLimit >= offset) {

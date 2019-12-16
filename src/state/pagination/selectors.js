@@ -1,4 +1,4 @@
-import { getTargetQueryLimit2 } from 'state/query/selectors'
+import { getTargetQueryLimit } from 'state/query/selectors'
 import { getPageSize } from 'state/query/utils'
 import { getCurrentEntries } from 'state/utils'
 
@@ -22,7 +22,7 @@ export const getPaginationData = (state, section) => {
 
 export const getFilteredEntries = (state, section, entries) => {
   const { offset, pageOffset } = getPagination(state, section)
-  const limit = getTargetQueryLimit2(state, section)
+  const limit = getTargetQueryLimit(state, section)
   const pageSize = getPageSize(section)
 
   return getCurrentEntries(entries, offset, limit, pageOffset, pageSize)

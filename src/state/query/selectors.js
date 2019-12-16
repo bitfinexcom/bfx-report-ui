@@ -21,12 +21,9 @@ export const getPrepareExport = state => getQuery(state).prepareExport
  * Selector to return query limit by type.
  * Some section allow user custom query limit.
  * @param {object} state query state
+ * @param {string} target section
  */
-export const getTargetQueryLimit = state => target => (canChangeQueryLimit(target)
-  ? getBaseQueryLimit(state)
-  : getQueryLimit(target))
-
-export const getTargetQueryLimit2 = (state, target) => (canChangeQueryLimit(target)
+export const getTargetQueryLimit = (state, target) => (canChangeQueryLimit(target)
   ? getBaseQueryLimit(state)
   : getQueryLimit(target))
 

@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getQuery, getTargetQueryLimit2, getTimeFrame } from 'state/query/selectors'
+import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -54,7 +54,7 @@ function* fetchFPayment({ payload }) {
 
     const { entries, targetSymbols } = yield select(getFundingOfferHistory, TYPE)
     const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-    const queryLimit = yield select(getTargetQueryLimit2, TYPE)
+    const queryLimit = yield select(getTargetQueryLimit, TYPE)
     // data exist, no need to fetch again
     if (nextFetch && entries.length - queryLimit >= offset) {
       return undefined

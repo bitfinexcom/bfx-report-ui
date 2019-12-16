@@ -22,12 +22,7 @@ class QueryLimitSelector extends PureComponent {
   }
 
   render() {
-    const {
-      getQueryLimit,
-      t,
-      target,
-    } = this.props
-    const queryLimit = getQueryLimit(target)
+    const { queryLimit, t } = this.props
     const options = (
       <Menu>
         <MenuItem
