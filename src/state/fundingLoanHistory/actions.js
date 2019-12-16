@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch funding loan history data.
+ * @param {Object} options
  */
-export function fetchFLoan() {
+export function fetchFLoan(options = {}) {
   return {
     type: types.FETCH_FLOAN,
+    payload: options,
   }
 }
 
@@ -21,43 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to fetch next funding loan history data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextFLoan(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_FLOAN,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev funding loan history data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevFLoan(queryLimit) {
-  return {
-    type: types.FETCH_PREV_FLOAN,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific funding loan history page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_FLOAN_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh funding loan history.
  */
 export function refresh() {
@@ -69,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update funding loan history.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateFLoan(data, limit, pageSize) {
+export function updateFLoan(data) {
   return {
     type: types.UPDATE_FLOAN,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
@@ -120,9 +81,6 @@ export default {
   addTargetSymbol,
   fetchFail,
   fetchFLoan,
-  fetchNextFLoan,
-  fetchPrevFLoan,
-  jumpPage,
   refresh,
   removeTargetSymbol,
   setTargetSymbols,

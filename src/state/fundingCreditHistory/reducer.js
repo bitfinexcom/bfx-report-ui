@@ -7,10 +7,7 @@ import {
   addSymbol,
   baseSymbolState,
   fetchFail,
-  fetchNext,
-  fetchPrev,
-  getPageOffset,
-  jumpPage,
+  refresh,
   removeSymbol,
   setSymbols,
   setTimeRange,
@@ -29,18 +26,15 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_FCREDIT: {
-      if (!_get(payload, ['data', 'res'])) {
+      const res = _get(payload, ['data', 'res'])
+      if (!res) {
         return {
           ...state,
           dataReceived: true,
         }
       }
-      const { data, limit, pageSize } = payload
-      const { res, nextPage } = data
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
-      let smallestMts
-
       const entries = res.map((entry) => {
         const {
           amount,
@@ -67,12 +61,6 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
         if (updateCoins.indexOf(currentSymbol) === -1) {
           updateCoins.push(currentSymbol)
         }
-        // log smallest mts
-        if (nextPage === false
-          && (!smallestMts || smallestMts > mtsUpdate)
-        ) {
-          smallestMts = mtsUpdate
-        }
         return {
           id,
           symbol: currentSymbol,
@@ -94,28 +82,17 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           positionPair: formatPair(positionPair),
         }
       })
-      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,
         dataReceived: true,
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
-        smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-        offset,
-        pageOffset,
         pageLoading: false,
-        nextPage,
       }
     }
     case types.FETCH_FAIL:
       return fetchFail(state)
-    case types.FETCH_NEXT_FCREDIT:
-      return fetchNext(TYPE, state, payload)
-    case types.FETCH_PREV_FCREDIT:
-      return fetchPrev(TYPE, state, payload)
-    case types.JUMP_FCREDIT_PAGE:
-      return jumpPage(TYPE, state, payload)
     case types.ADD_SYMBOL:
       return addSymbol(state, payload, initialState)
     case types.REMOVE_SYMBOL:
@@ -123,6 +100,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
     case types.SET_SYMBOLS:
       return setSymbols(state, payload, initialState)
     case types.REFRESH:
+      return refresh(TYPE, state, initialState)
     case queryTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:

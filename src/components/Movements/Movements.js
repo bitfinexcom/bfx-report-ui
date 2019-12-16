@@ -39,7 +39,7 @@ class Movements extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, 'movements')
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   render() {

@@ -9,18 +9,19 @@ import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
+import { refreshPagination, updatePagination } from 'state/pagination/actions'
+import { getPaginationData } from 'state/pagination/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getQueryLimit } from 'state/query/utils'
 import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetSymbols, getFundingOfferHistory } from './selectors'
+import { getFundingOfferHistory } from './selectors'
 
 const TYPE = queryTypes.MENU_FOFFER
 const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqFOffer({
   smallestMts,
@@ -37,51 +38,13 @@ function getReqFOffer({
   return makeFetchCall('getFundingOfferHistory', params)
 }
 
-function* fetchFOffer() {
+function* fetchFOffer({ payload }) {
+  const { nextFetch = false } = payload
   try {
-    const targetSymbols = yield select(getTargetSymbols)
-    const query = yield select(getQuery)
-    const filter = yield select(getFilterQuery, TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqFOffer, {
-      smallestMts: 0,
-      query,
-      targetSymbols,
-      filter,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFOffer, {
-      smallestMts: 0,
-      query,
-      targetSymbols,
-      filter,
-    })
-    yield put(actions.updateFOffer(result, LIMIT, PAGE_SIZE))
-
-    if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'foffer.title',
-        detail: JSON.stringify(error),
-      }))
-    }
-  } catch (fail) {
-    yield put(actions.fetchFail({
-      id: 'status.request.error',
-      topic: 'foffer.title',
-      detail: JSON.stringify(fail),
-    }))
-  }
-}
-
-function* fetchNextFOffer() {
-  try {
-    const {
-      offset,
-      entries,
-      smallestMts,
-      targetSymbols,
-    } = yield select(getFundingOfferHistory)
+    const { entries, targetSymbols } = yield select(getFundingOfferHistory, TYPE)
+    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
     // data exist, no need to fetch again
-    if (entries.length - LIMIT >= offset) {
+    if (nextFetch && entries.length - LIMIT >= offset) {
       return
     }
     const query = yield select(getQuery)
@@ -98,7 +61,8 @@ function* fetchNextFOffer() {
       targetSymbols,
       filter,
     })
-    yield put(actions.updateFOffer(result, LIMIT, PAGE_SIZE))
+    yield put(actions.updateFOffer(result))
+    yield put(updatePagination(TYPE, result, LIMIT))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -116,12 +80,16 @@ function* fetchNextFOffer() {
   }
 }
 
+function* refreshFOffer() {
+  yield put(refreshPagination(TYPE))
+}
+
 function* fetchFOfferFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
-export default function* ordersSaga() {
+export default function* fundingOfferSaga() {
   yield takeLatest(types.FETCH_FOFFER, fetchFOffer)
-  yield takeLatest(types.FETCH_NEXT_FOFFER, fetchNextFOffer)
+  yield takeLatest(types.REFRESH, refreshFOffer)
   yield takeLatest(types.FETCH_FAIL, fetchFOfferFail)
 }
