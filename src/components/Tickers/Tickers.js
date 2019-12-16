@@ -1,12 +1,9 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
-import Pagination from 'ui/Pagination'
+import Pagination from 'ui/Pagination2'
 import SyncPrefButton from 'ui/SyncPrefButton'
 import SyncNotSetYet from 'ui/SyncNotSetYet'
 import TimeRange from 'ui/TimeRange'
@@ -17,21 +14,14 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import {
-  checkFetch,
-  getCurrentEntries,
-  togglePair,
-} from 'state/utils'
+import { checkFetch, togglePair } from 'state/utils'
 import { platform } from 'var/config'
 
 import getColumns from './Tickers.columns'
 import { propTypes, defaultProps } from './Tickers.props'
 
 const TYPE = queryConstants.MENU_TICKERS
-const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 class Tickers extends PureComponent {
   componentDidMount() {
@@ -64,21 +54,15 @@ class Tickers extends PureComponent {
     const {
       columns,
       existingPairs,
-      fetchNext,
-      fetchPrev,
       getFullTime,
       hasSyncPref,
-      offset,
-      pageOffset,
       pageLoading,
       entries,
       handleClickExport,
-      jumpPage,
       loading,
       refresh,
       t,
       targetPairs,
-      nextPage,
       timeOffset,
     } = this.props
     if (platform.showFrameworkMode && !hasSyncPref) {
@@ -87,28 +71,12 @@ class Tickers extends PureComponent {
       )
     }
 
-    const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const numRows = filteredData.length
     const tableColumns = getColumns({
-      filteredData,
+      filteredData: entries,
       getFullTime,
       t,
       timeOffset,
     }).filter(({ id }) => columns[id])
-
-    const renderPagination = (
-      <Pagination
-        type={TYPE}
-        dataLen={entries.length}
-        loading={pageLoading}
-        offset={offset}
-        jumpPage={jumpPage}
-        prevClick={fetchPrev}
-        nextClick={fetchNext}
-        pageOffset={pageOffset}
-        nextPage={nextPage}
-      />
-    )
 
     const renderPairSelector = (
       <Fragment>
@@ -126,7 +94,7 @@ class Tickers extends PureComponent {
       showContent = (
         <Loading title='tickers.title' />
       )
-    } else if (numRows === 0) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -159,12 +127,12 @@ class Tickers extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton sectionType={TYPE} />
           </h4>
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
-            numRows={numRows}
+            numRows={entries.length}
             tableColumns={tableColumns}
           />
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
         </Fragment>
       )
     }

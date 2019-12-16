@@ -3,9 +3,6 @@ import { withRouter } from 'react-router-dom'
 
 import {
   fetchTickers,
-  fetchNextTickers,
-  fetchPrevTickers,
-  jumpPage,
   refresh,
   addTargetPair,
   setTargetPairs,
@@ -14,14 +11,12 @@ import {
 import { updateErrorStatus } from 'state/status/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getTickersHistoryPairs } from 'state/sync/selectors'
+import { getFilteredEntries } from 'state/pagination/selectors'
 import {
   getDataReceived,
   getEntries,
   getExistingPairs,
-  getNextPage,
-  getOffset,
   getPageLoading,
-  getPageOffset,
   getTargetPairs,
 } from 'state/tickers/selectors'
 import { getColumns } from 'state/filters/selectors'
@@ -31,14 +26,11 @@ import Tickers from './Tickers'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_TICKERS),
-  entries: getEntries(state),
+  entries: getFilteredEntries(state, queryConstants.MENU_TICKERS, getEntries(state)),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
   hasSyncPref: !!getTickersHistoryPairs(state).length,
   loading: !getDataReceived(state),
-  nextPage: getNextPage(state),
-  offset: getOffset(state),
-  pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
   timeOffset: getTimeOffset(state),
@@ -46,9 +38,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchTickers,
-  fetchNext: fetchNextTickers,
-  fetchPrev: fetchPrevTickers,
-  jumpPage,
   refresh,
   addTargetPair,
   setTargetPairs,

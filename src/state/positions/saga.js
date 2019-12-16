@@ -15,7 +15,7 @@ import { updateErrorStatus } from 'state/status/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getQueryLimit } from 'state/query/utils'
 import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
@@ -24,7 +24,6 @@ import { getPositions } from './selectors'
 
 const TYPE = queryTypes.MENU_POSITIONS
 const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqPositions({
   smallestMts,
@@ -66,7 +65,7 @@ function* fetchPositions({ payload }) {
       targetPairs,
       filter,
     })
-    yield put(actions.updatePositions(result, LIMIT, PAGE_SIZE))
+    yield put(actions.updatePositions(result))
     yield put(updatePagination(TYPE, result, LIMIT))
 
     if (error) {

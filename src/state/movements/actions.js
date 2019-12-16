@@ -34,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Movements.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateMovements(data, limit, pageSize) {
+export function updateMovements(data) {
   return {
     type: types.UPDATE_MOVEMENTS,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }

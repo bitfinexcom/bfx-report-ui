@@ -37,6 +37,9 @@ const SMALLEST_MTS_MAP = {
   [queryTypes.MENU_FOFFER]: 'mtsUpdate',
   [queryTypes.MENU_FPAYMENT]: 'mts',
   [queryTypes.MENU_AFFILIATES_EARNINGS]: 'mts',
+  [queryTypes.MENU_PUBLIC_TRADES]: 'mts',
+  [queryTypes.MENU_PUBLIC_FUNDING]: 'mts',
+  [queryTypes.MENU_TICKERS]: 'mtsUpdate',
 }
 
 function paginationReducer(state = initialState, { type, payload }) {

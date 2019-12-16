@@ -1,12 +1,9 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
-import Pagination from 'ui/Pagination'
+import Pagination from 'ui/Pagination2'
 import SyncPrefButton from 'ui/SyncPrefButton'
 import SyncNotSetYet from 'ui/SyncNotSetYet'
 import TimeRange from 'ui/TimeRange'
@@ -17,21 +14,14 @@ import NoData from 'ui/NoData'
 import PairSelector from 'ui/PairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import {
-  checkFetch,
-  getCurrentEntries,
-  setPair,
-} from 'state/utils'
+import { checkFetch, setPair } from 'state/utils'
 import { platform } from 'var/config'
 
 import getColumns from './PublicTrades.columns'
 import { propTypes, defaultProps } from './PublicTrades.props'
 
 const TYPE = queryConstants.MENU_PUBLIC_TRADES
-const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 class PublicTrades extends PureComponent {
   componentDidMount() {
@@ -54,22 +44,16 @@ class PublicTrades extends PureComponent {
   render() {
     const {
       columns,
-      fetchNext,
-      fetchPrev,
       getFullTime,
       hasSyncPref,
-      offset,
-      pageOffset,
       pageLoading,
       pairs,
       entries,
       handleClickExport,
-      jumpPage,
       loading,
       refresh,
       t,
       targetPair,
-      nextPage,
       timeOffset,
     } = this.props
     if (platform.showFrameworkMode && !hasSyncPref) {
@@ -77,31 +61,14 @@ class PublicTrades extends PureComponent {
         <SyncNotSetYet sectionType={TYPE} />
       )
     }
-
-    const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const currentPair = targetPair || 'BTC:USD'
-    const numRows = filteredData.length
     const tableColumns = getColumns({
-      filteredData,
+      filteredData: entries,
       getFullTime,
       t,
       targetPair,
       timeOffset,
     }).filter(({ id }) => columns[id])
-
-    const renderPagination = (
-      <Pagination
-        type={TYPE}
-        dataLen={entries.length}
-        loading={pageLoading}
-        offset={offset}
-        jumpPage={jumpPage}
-        prevClick={fetchPrev}
-        nextClick={fetchNext}
-        pageOffset={pageOffset}
-        nextPage={nextPage}
-      />
-    )
 
     const renderPairSelector = (
       <Fragment>
@@ -119,7 +86,7 @@ class PublicTrades extends PureComponent {
       showContent = (
         <Loading title='publictrades.title' />
       )
-    } else if (numRows === 0) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -152,12 +119,12 @@ class PublicTrades extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton sectionType={TYPE} />
           </h4>
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
-            numRows={numRows}
+            numRows={entries.length}
             tableColumns={tableColumns}
           />
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
         </Fragment>
       )
     }

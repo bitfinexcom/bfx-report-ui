@@ -1,12 +1,9 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
-import Pagination from 'ui/Pagination'
+import Pagination from 'ui/Pagination2'
 import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
 import SyncNotSetYet from 'ui/SyncNotSetYet'
 import TimeRange from 'ui/TimeRange'
@@ -17,20 +14,15 @@ import NoData from 'ui/NoData'
 import SymbolSelector from 'ui/SymbolSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getQueryLimit, getPageSize, getPath } from 'state/query/utils'
+import { getPath } from 'state/query/utils'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import {
-  checkFetch,
-  getCurrentEntries,
-} from 'state/utils'
+import { checkFetch } from 'state/utils'
 import { platform } from 'var/config'
 
 import getColumns from './PublicFunding.columns'
 import { propTypes, defaultProps } from './PublicFunding.props'
 
 const TYPE = queryConstants.MENU_PUBLIC_FUNDING
-const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 class PublicFunding extends PureComponent {
   componentDidMount() {
@@ -64,21 +56,15 @@ class PublicFunding extends PureComponent {
       columns,
       coins,
       currencies,
-      fetchNext,
-      fetchPrev,
       getFullTime,
       hasSyncPref,
-      offset,
-      pageOffset,
       pageLoading,
       entries,
       handleClickExport,
-      jumpPage,
       loading,
       refresh,
       t,
       targetSymbol,
-      nextPage,
       timeOffset,
     } = this.props
     if (platform.showFrameworkMode && !hasSyncPref) {
@@ -87,30 +73,14 @@ class PublicFunding extends PureComponent {
       )
     }
 
-    const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
     const currentSymbol = targetSymbol || 'USD'
-    const numRows = filteredData.length
     const tableColumns = getColumns({
-      filteredData,
+      filteredData: entries,
       getFullTime,
       t,
       targetSymbol,
       timeOffset,
     }).filter(({ id }) => columns[id])
-
-    const renderPagination = (
-      <Pagination
-        type={TYPE}
-        dataLen={entries.length}
-        loading={pageLoading}
-        offset={offset}
-        jumpPage={jumpPage}
-        prevClick={fetchPrev}
-        nextClick={fetchNext}
-        pageOffset={pageOffset}
-        nextPage={nextPage}
-      />
-    )
 
     const renderSymbolSelector = (
       <Fragment>
@@ -129,7 +99,7 @@ class PublicFunding extends PureComponent {
       showContent = (
         <Loading title='publicfunding.title' />
       )
-    } else if (numRows === 0) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -162,12 +132,12 @@ class PublicFunding extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
             <SyncSymbolPrefButton />
           </h4>
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
-            numRows={numRows}
+            numRows={entries.length}
             tableColumns={tableColumns}
           />
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
         </Fragment>
       )
     }

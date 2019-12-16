@@ -1,7 +1,4 @@
-import {
-  put,
-  takeLatest,
-} from 'redux-saga/effects'
+import { put, takeLatest } from 'redux-saga/effects'
 
 import queryTypes from 'state/query/constants'
 import { fetchLedgers } from 'state/ledgers/actions'
@@ -14,6 +11,10 @@ import { fetchFCredit } from 'state/fundingCreditHistory/actions'
 import { fetchFLoan } from 'state/fundingLoanHistory/actions'
 import { fetchFOffer } from 'state/fundingOfferHistory/actions'
 import { fetchFPayment } from 'state/fundingPayment/actions'
+import { fetchAffiliatesEarnings } from 'state/affiliatesEarnings/actions'
+import { fetchPublicTrades } from 'state/publicTrades/actions'
+import { fetchPublicFunding } from 'state/publicFunding/actions'
+import { fetchTickers } from 'state/tickers/actions'
 
 import types from './constants'
 
@@ -32,7 +33,6 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
-  MENU_DERIVATIVES,
 } = queryTypes
 
 function* fetchNext({ payload }) {
@@ -60,16 +60,18 @@ function* fetchNext({ payload }) {
     case MENU_FPAYMENT:
       return yield put(fetchFPayment({ nextFetch: true }))
     case MENU_AFFILIATES_EARNINGS:
+      return yield put(fetchAffiliatesEarnings({ nextFetch: true }))
     case MENU_PUBLIC_TRADES:
+      return yield put(fetchPublicTrades({ nextFetch: true }))
     case MENU_PUBLIC_FUNDING:
+      return yield put(fetchPublicFunding({ nextFetch: true }))
     case MENU_TICKERS:
-    case MENU_DERIVATIVES:
+      return yield put(fetchTickers({ nextFetch: true }))
     default:
       return undefined
   }
 }
 
 export default function* filtersSaga() {
-  yield takeLatest(types.FETCH_NEXT, fetchNext)
-  yield takeLatest(types.FETCH_PREV, fetchNext)
+  yield takeLatest([types.FETCH_NEXT, types.FETCH_PREV], fetchNext)
 }

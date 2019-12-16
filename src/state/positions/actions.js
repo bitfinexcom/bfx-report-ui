@@ -34,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Positions.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updatePositions(data, limit, pageSize) {
+export function updatePositions(data) {
   return {
     type: types.UPDATE_POSITIONS,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }

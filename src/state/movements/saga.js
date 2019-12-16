@@ -12,7 +12,7 @@ import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getQueryLimit } from 'state/query/utils'
 import { mapRequestSymbols } from 'state/symbols/utils'
 import { fetchNext } from 'state/sagas.helper'
 
@@ -22,7 +22,6 @@ import { getMovements } from './selectors'
 
 const TYPE = queryTypes.MENU_MOVEMENTS
 const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqMovements({
   smallestMts,
@@ -64,7 +63,7 @@ function* fetchMovements({ payload }) {
       targetSymbols,
       filter,
     })
-    yield put(actions.updateMovements(result, LIMIT, PAGE_SIZE))
+    yield put(actions.updateMovements(result))
     yield put(updatePagination(TYPE, result, LIMIT))
 
     if (error) {

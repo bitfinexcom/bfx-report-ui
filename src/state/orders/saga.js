@@ -71,7 +71,7 @@ function* fetchOrders({ payload }) {
       filter,
       queryLimit,
     })
-    yield put(actions.updateOrders(result, queryLimit, PAGE_SIZE))
+    yield put(actions.updateOrders(result))
     yield put(updatePagination(TYPE, result, queryLimit))
 
     if (error) {

@@ -34,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Trades.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateTrades(data, limit, pageSize) {
+export function updateTrades(data) {
   return {
     type: types.UPDATE_TRADES,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }

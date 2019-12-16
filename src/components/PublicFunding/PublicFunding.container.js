@@ -3,23 +3,18 @@ import { withRouter } from 'react-router-dom'
 
 import {
   fetchPublicFunding,
-  fetchNextPublicFunding,
-  fetchPrevPublicFunding,
-  jumpPage,
   refresh,
   setTargetSymbol,
 } from 'state/publicFunding/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getCoins, getCurrencies } from 'state/symbols/selectors'
 import { getPublicFundingSymbols } from 'state/sync/selectors'
+import { getFilteredEntries } from 'state/pagination/selectors'
 import {
   getDataReceived,
   getEntries,
-  getOffset,
   getPageLoading,
-  getPageOffset,
   getTargetSymbol,
-  getNextPage,
 } from 'state/publicFunding/selectors'
 import { getColumns } from 'state/filters/selectors'
 import queryConstants from 'state/query/constants'
@@ -30,13 +25,10 @@ const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_PUBLIC_FUNDING),
   coins: getCoins(state),
   currencies: getCurrencies(state),
-  entries: getEntries(state),
+  entries: getFilteredEntries(state, queryConstants.MENU_PUBLIC_FUNDING, getEntries(state)),
   getFullTime: getFullTime(state),
   hasSyncPref: !!getPublicFundingSymbols(state).length,
   loading: !getDataReceived(state),
-  nextPage: getNextPage(state),
-  offset: getOffset(state),
-  pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   targetSymbol: getTargetSymbol(state),
   timeOffset: getTimeOffset(state),
@@ -44,9 +36,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchPublicfunding: fetchPublicFunding,
-  fetchNext: fetchNextPublicFunding,
-  fetchPrev: fetchPrevPublicFunding,
-  jumpPage,
   refresh,
   setTargetSymbol,
 }

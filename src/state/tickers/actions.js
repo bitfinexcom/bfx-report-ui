@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Tickers data.
+ * @param {Object} options
  */
-export function fetchTickers() {
+export function fetchTickers(options = {}) {
   return {
     type: types.FETCH_TICKERS,
+    payload: options,
   }
 }
 
@@ -21,43 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to fetch next Tickers data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextTickers(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_TICKERS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Tickers data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevTickers(queryLimit) {
-  return {
-    type: types.FETCH_PREV_TICKERS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Tickers page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_TICKERS_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh Tickers.
  */
 export function refresh() {
@@ -69,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Tickers.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateTickers(data, limit, pageSize) {
+export function updateTickers(data) {
   return {
     type: types.UPDATE_TICKERS,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
@@ -120,9 +81,6 @@ export default {
   addTargetPair,
   fetchFail,
   fetchTickers,
-  fetchNextTickers,
-  fetchPrevTickers,
-  jumpPage,
   refresh,
   removeTargetPair,
   setTargetPairs,

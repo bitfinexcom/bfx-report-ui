@@ -34,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Positions Audit.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updatePAudit(data, limit, pageSize) {
+export function updatePAudit(data) {
   return {
     type: types.UPDATE_PAUDIT,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
