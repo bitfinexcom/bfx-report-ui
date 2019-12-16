@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Affiliates Earnings data.
+ * @param {Object} options
  */
-export function fetchAffiliatesEarnings() {
+export function fetchAffiliatesEarnings(options = {}) {
   return {
     type: types.FETCH_AFFILIATES_EARNINGS,
+    payload: options,
   }
 }
 
@@ -21,43 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to fetch next Affiliates Earnings data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextAffiliatesEarnings(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_AFFILIATES_EARNINGS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Affiliates Earnings data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevAffiliatesEarnings(queryLimit) {
-  return {
-    type: types.FETCH_PREV_AFFILIATES_EARNINGS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Affiliates Earnings page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_AFFILIATES_EARNINGS_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh Affiliates Earnings.
  */
 export function refresh() {
@@ -69,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Affiliates Earnings.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateAffiliatesEarnings(data, limit, pageSize) {
+export function updateAffiliatesEarnings(data) {
   return {
     type: types.UPDATE_AFFILIATES_EARNINGS,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
@@ -120,9 +81,6 @@ export default {
   addTargetSymbol,
   fetchFail,
   fetchAffiliatesEarnings,
-  fetchNextAffiliatesEarnings,
-  fetchPrevAffiliatesEarnings,
-  jumpPage,
   refresh,
   removeTargetSymbol,
   setTargetSymbols,
