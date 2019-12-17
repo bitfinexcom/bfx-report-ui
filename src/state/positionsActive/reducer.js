@@ -74,7 +74,6 @@ export function positionsActiveReducer(state = initialState, action) {
       })
       return {
         ...state,
-        currentEntriesSize: entries.length,
         dataReceived: true,
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),

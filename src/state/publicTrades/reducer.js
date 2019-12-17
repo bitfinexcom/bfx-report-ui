@@ -44,7 +44,6 @@ export function publicTradesReducer(state = initialState, action) {
       })
       return {
         ...state,
-        currentEntriesSize: entries.length,
         dataReceived: true,
         entries: [...state.entries, ...entries],
         pageLoading: false,

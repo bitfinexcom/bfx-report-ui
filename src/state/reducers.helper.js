@@ -1,20 +1,10 @@
 import queryTypes from 'state/query/constants'
 import { getFilterType, getPageSize } from 'state/query/utils'
 
-/* init states */
-export const paginateState = {
-  offset: 0, // end of current offset
-  pageOffset: 0, // start of current page, is used by jumpPage
-}
-
 export const baseState = {
-  ...paginateState,
   dataReceived: false,
   entries: [],
-  currentEntriesSize: 0,
   pageLoading: false,
-  smallestMts: 0,
-  nextPage: false,
 }
 
 export const basePairState = {
@@ -235,7 +225,6 @@ export default {
   fetchPrev,
   getPageOffset,
   jumpPage,
-  paginateState,
   refresh,
   removePair,
   removeSymbol,

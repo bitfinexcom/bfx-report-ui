@@ -77,7 +77,7 @@ function* fetchLedgers({ payload }) {
       filter,
       queryLimit,
     })
-    yield put(actions.updateLedgers(result, queryLimit))
+    yield put(actions.updateLedgers(result))
     yield put(updatePagination(TYPE, result, queryLimit))
 
     if (error) {
