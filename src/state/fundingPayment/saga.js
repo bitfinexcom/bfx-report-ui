@@ -15,7 +15,7 @@ import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
 import { frameworkCheck } from 'state/ui/saga'
-import { fetchNext } from 'state/sagas.helper'
+import { fetchData } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -62,14 +62,7 @@ function* fetchFPayment({ payload }) {
 
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqLedgers, {
-      smallestMts,
-      query,
-      targetSymbols,
-      filter,
-      queryLimit,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqLedgers, {
+    const { result, error } = yield call(fetchData, getReqLedgers, {
       smallestMts,
       query,
       targetSymbols,

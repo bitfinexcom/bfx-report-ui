@@ -14,7 +14,7 @@ import { getPaginationData } from 'state/pagination/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit } from 'state/query/utils'
-import { fetchNext } from 'state/sagas.helper'
+import { fetchData } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -50,13 +50,7 @@ function* fetchPublicTrades({ payload }) {
     }
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqPublicTrades, {
-      smallestMts,
-      query,
-      targetPair,
-      filter,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicTrades, {
+    const { result, error } = yield call(fetchData, getReqPublicTrades, {
       smallestMts,
       query,
       targetPair,

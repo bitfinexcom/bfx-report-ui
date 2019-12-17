@@ -14,7 +14,7 @@ import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit } from 'state/query/utils'
 import { mapRequestSymbols } from 'state/symbols/utils'
-import { fetchNext } from 'state/sagas.helper'
+import { fetchData } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -51,13 +51,7 @@ function* fetchMovements({ payload }) {
     }
 
     const filter = yield select(getFilterQuery, TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqMovements, {
-      smallestMts,
-      query,
-      targetSymbols,
-      filter,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqMovements, {
+    const { result, error } = yield call(fetchData, getReqMovements, {
       smallestMts,
       query,
       targetSymbols,

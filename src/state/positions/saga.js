@@ -16,7 +16,7 @@ import { getPaginationData } from 'state/pagination/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit } from 'state/query/utils'
-import { fetchNext } from 'state/sagas.helper'
+import { fetchData } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -53,13 +53,7 @@ function* fetchPositions({ payload }) {
       return
     }
 
-    const { result: resulto, error: erroro } = yield call(getReqPositions, {
-      smallestMts,
-      query,
-      targetPairs,
-      filter,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositions, {
+    const { result, error } = yield call(fetchData, getReqPositions, {
       smallestMts,
       query,
       targetPairs,

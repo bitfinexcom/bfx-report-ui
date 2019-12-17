@@ -13,7 +13,7 @@ import { mapRequestSymbols } from 'state/symbols/utils'
 import { getFilterQuery } from 'state/filters/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
-import { fetchNext } from 'state/sagas.helper'
+import { fetchData } from 'state/sagas.helper'
 import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
@@ -63,14 +63,7 @@ function* fetchLedgers({ payload }) {
     }
 
     const query = yield select(getQuery)
-    const { result: resulto = {}, error: erroro } = yield call(getReqLedgers, {
-      smallestMts,
-      query,
-      targetSymbols,
-      filter,
-      queryLimit,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqLedgers, {
+    const { result, error } = yield call(fetchData, getReqLedgers, {
       smallestMts,
       query,
       targetSymbols,
