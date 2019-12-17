@@ -1,5 +1,5 @@
 import queryTypes from 'state/query/constants'
-import { getFilterType, getPageSize } from 'state/query/utils'
+import { getFilterType } from 'state/query/utils'
 
 export const baseState = {
   dataReceived: false,
@@ -60,63 +60,6 @@ export function getPageOffset(state, entries, limit, pageSize) {
       state.offset + entries.length,
       0,
     ]
-}
-
-export function fetchNext(type, state, LIMIT) {
-  return (state.entries.length - LIMIT >= state.offset)
-    ? {
-      ...state,
-      offset: state.offset + state.currentEntriesSize,
-      pageOffset: 0,
-    } : {
-      ...state,
-      pageLoading: true,
-    }
-}
-
-export function fetchNext2(type, state, LIMIT) {
-  return (state.entriesSize - LIMIT >= state.offset)
-    ? {
-      offset: state.offset + state.currentEntriesSize,
-      pageOffset: 0,
-    } : {}
-}
-
-export function jumpPage2(type, state, page, LIMIT) {
-  const PAGE_SIZE = getPageSize(type)
-  const totalOffset = (page - 1) * PAGE_SIZE
-  const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
-  if (totalOffset < LIMIT) {
-    const baseOffset = Math.ceil(page / LIMIT * PAGE_SIZE) * LIMIT
-    return {
-      offset: state.offset < baseOffset ? state.offset : baseOffset,
-      pageOffset: totalOffset - currentOffset,
-    }
-  }
-  return {
-    offset: currentOffset + LIMIT,
-    pageOffset: totalOffset - currentOffset,
-  }
-}
-
-export function jumpPage(type, state, payload) {
-  const { page, queryLimit: LIMIT } = payload
-  const PAGE_SIZE = getPageSize(type)
-  const totalOffset = (page - 1) * PAGE_SIZE
-  const currentOffset = Math.floor(totalOffset / LIMIT) * LIMIT
-  if (totalOffset < LIMIT) {
-    const baseOffset = Math.ceil(page / LIMIT * PAGE_SIZE) * LIMIT
-    return {
-      ...state,
-      offset: state.offset < baseOffset ? state.offset : baseOffset,
-      pageOffset: totalOffset - currentOffset,
-    }
-  }
-  return {
-    ...state,
-    offset: currentOffset + LIMIT,
-    pageOffset: totalOffset - currentOffset,
-  }
 }
 
 /* symbols */
@@ -206,9 +149,7 @@ export default {
   basePairState,
   baseSymbolState,
   fetchFail,
-  fetchNext,
   getPageOffset,
-  jumpPage,
   refresh,
   removePair,
   removeSymbol,

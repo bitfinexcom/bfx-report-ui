@@ -3,7 +3,7 @@ import _get from 'lodash/get'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import { TYPE_WHITELIST, getPageSize } from 'state/query/utils'
-import { fetchNext2, jumpPage2, getPageOffset } from 'state/reducers.helper'
+import { getPageOffset } from 'state/reducers.helper'
 
 import types from './constants'
 
@@ -77,25 +77,40 @@ function paginationReducer(state = initialState, { type, payload }) {
     }
     case types.FETCH_NEXT: {
       const { section, queryLimit } = payload
-      const fetchNextState = fetchNext2(section, state[section], queryLimit)
+      const fetchNextOffsets = (state.entriesSize - queryLimit >= state.offset)
+        ? {
+          offset: state.offset + state.currentEntriesSize,
+          pageOffset: 0,
+        } : {}
 
       return {
         ...state,
         [section]: {
           ...state[section],
-          ...fetchNextState,
+          ...fetchNextOffsets,
         },
       }
     }
     case types.JUMP_PAGE: {
       const { section, page, queryLimit } = payload
-      const nextState = jumpPage2(section, state, page, queryLimit)
+      const PAGE_SIZE = getPageSize(section)
+      const totalOffset = (page - 1) * PAGE_SIZE
+      const currentOffset = Math.floor(totalOffset / queryLimit) * queryLimit
+      const baseOffset = Math.ceil(page / queryLimit * PAGE_SIZE) * queryLimit
+
+      const nextOffsets = (totalOffset < queryLimit) ? {
+        offset: state.offset < baseOffset ? state.offset : baseOffset,
+        pageOffset: totalOffset - currentOffset,
+      } : {
+        offset: currentOffset + queryLimit,
+        pageOffset: totalOffset - currentOffset,
+      }
 
       return {
         ...state,
         [section]: {
           ...state[section],
-          ...nextState,
+          ...nextOffsets,
         },
       }
     }
