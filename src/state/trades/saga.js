@@ -39,19 +39,13 @@ function getReqTrades({
   return makeFetchCall('getTrades', params)
 }
 
-function* fetchTrades({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchTrades() {
   try {
-    const { entries, targetPairs } = yield select(getTrades)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
+    const { targetPairs } = yield select(getTrades)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const queryLimit = yield select(getTargetQueryLimit, TYPE)
-
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - queryLimit >= offset) {
-      return
-    }
 
     const { result, error } = yield call(fetchData, getReqTrades, {
       smallestMts,
@@ -61,7 +55,7 @@ function* fetchTrades({ payload }) {
       queryLimit,
     })
     yield put(actions.updateTrades(result))
-    yield put(updatePagination(TYPE, result, queryLimit))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -89,6 +83,6 @@ function* fetchTradesFail({ payload }) {
 
 export default function* tradesSaga() {
   yield takeLatest(types.FETCH_TRADES, fetchTrades)
-  yield takeLatest(types.REFRESH, refreshTrades)
+  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR], refreshTrades)
   yield takeLatest(types.FETCH_FAIL, fetchTradesFail)
 }

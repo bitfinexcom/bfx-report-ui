@@ -3,14 +3,12 @@ import types from './constants'
 /**
  * Create an action to fetch next data.
  * @param {string} section
- * @param {number} queryLimit
  */
-export function fetchNext(section, queryLimit) {
+export function fetchNext(section) {
   return {
     type: types.FETCH_NEXT,
     payload: {
       section,
-      queryLimit,
     },
   }
 }
@@ -19,15 +17,13 @@ export function fetchNext(section, queryLimit) {
  * Create an action to jump to a specific page.
  * @param {string} section
  * @param {number} page page number
- * @param {number} queryLimit
  */
-export function jumpPage(section, page, queryLimit) {
+export function jumpPage(section, page) {
   return {
     type: types.JUMP_PAGE,
     payload: {
       section,
       page,
-      queryLimit,
     },
   }
 }
@@ -47,15 +43,13 @@ export function refreshPagination(section) {
  * Create an action to update section data.
  * @param {string} section
  * @param {Object} data
- * @param {number} queryLimit
  */
-export function updatePagination(section, data, queryLimit) {
+export function updatePagination(section, data) {
   return {
     type: types.UPDATE,
     payload: {
       section,
       data,
-      queryLimit,
     },
   }
 }

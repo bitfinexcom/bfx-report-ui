@@ -52,15 +52,10 @@ function* fetchLedgers({ payload }) {
       }
     }
 
-    const { entries, targetSymbols } = yield select(getLedgers)
+    const { targetSymbols } = yield select(getLedgers)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const filter = yield select(getFilterQuery, TYPE)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
     const queryLimit = yield select(getTargetQueryLimit, TYPE)
-
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - queryLimit >= offset) {
-      return undefined
-    }
 
     const query = yield select(getQuery)
     const { result, error } = yield call(fetchData, getReqLedgers, {
@@ -71,7 +66,7 @@ function* fetchLedgers({ payload }) {
       queryLimit,
     })
     yield put(actions.updateLedgers(result))
-    yield put(updatePagination(TYPE, result, queryLimit))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -99,6 +94,6 @@ function* fetchLedgersFail({ payload }) {
 
 export default function* ledgersSaga() {
   yield takeLatest(types.FETCH_LEDGERS, fetchLedgers)
-  yield takeLatest(types.REFRESH, refreshLedgers)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshLedgers)
   yield takeLatest(types.FETCH_FAIL, fetchLedgersFail)
 }

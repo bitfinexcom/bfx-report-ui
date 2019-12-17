@@ -38,15 +38,10 @@ function getReqFOffer({
   return makeFetchCall('getFundingOfferHistory', params)
 }
 
-function* fetchFOffer({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchFOffer() {
   try {
-    const { entries, targetSymbols } = yield select(getFundingOfferHistory, TYPE)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - LIMIT >= offset) {
-      return
-    }
+    const { targetSymbols } = yield select(getFundingOfferHistory, TYPE)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(fetchData, getReqFOffer, {
@@ -56,7 +51,7 @@ function* fetchFOffer({ payload }) {
       filter,
     })
     yield put(actions.updateFOffer(result))
-    yield put(updatePagination(TYPE, result, LIMIT))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -84,6 +79,6 @@ function* fetchFOfferFail({ payload }) {
 
 export default function* fundingOfferSaga() {
   yield takeLatest(types.FETCH_FOFFER, fetchFOffer)
-  yield takeLatest(types.REFRESH, refreshFOffer)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshFOffer)
   yield takeLatest(types.FETCH_FAIL, fetchFOfferFail)
 }

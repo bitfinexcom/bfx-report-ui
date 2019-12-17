@@ -4,15 +4,14 @@ export const propTypes = {
   target: PropTypes.string.isRequired,
   entriesSize: PropTypes.number.isRequired,
   loading: PropTypes.bool,
-  jumpPage: PropTypes.func,
-  offset: PropTypes.number.isRequired,
-  fetchNext: PropTypes.func.isRequired,
-  pageOffset: PropTypes.number.isRequired,
-  t: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
   nextPage: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.bool,
   ]),
+  jumpPage: PropTypes.func,
+  fetchNext: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

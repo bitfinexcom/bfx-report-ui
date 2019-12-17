@@ -40,18 +40,12 @@ function getReqPositions({
   return makeFetchCall('getPositionsHistory', params)
 }
 
-function* fetchPositions({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchPositions() {
   try {
-    const { entries, targetPairs } = yield select(getPositions)
+    const { targetPairs } = yield select(getPositions)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - LIMIT >= offset) {
-      return
-    }
+    const { smallestMts } = yield select(getPaginationData, TYPE)
 
     const { result, error } = yield call(fetchData, getReqPositions, {
       smallestMts,
@@ -60,7 +54,7 @@ function* fetchPositions({ payload }) {
       filter,
     })
     yield put(actions.updatePositions(result))
-    yield put(updatePagination(TYPE, result, LIMIT))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -88,6 +82,6 @@ function* fetchPositionsFail({ payload }) {
 
 export default function* positionsSaga() {
   yield takeLatest(types.FETCH_POSITIONS, fetchPositions)
-  yield takeLatest(types.REFRESH, refreshPositions)
+  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR], refreshPositions)
   yield takeLatest(types.FETCH_FAIL, fetchPositionsFail)
 }

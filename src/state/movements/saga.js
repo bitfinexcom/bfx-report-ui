@@ -38,17 +38,11 @@ function getReqMovements({
   return makeFetchCall('getMovements', params)
 }
 
-function* fetchMovements({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchMovements() {
   try {
-    const { entries, targetSymbols } = yield select(getMovements)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
+    const { targetSymbols } = yield select(getMovements)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
-
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - LIMIT >= offset) {
-      return
-    }
 
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(fetchData, getReqMovements, {
@@ -58,7 +52,7 @@ function* fetchMovements({ payload }) {
       filter,
     })
     yield put(actions.updateMovements(result))
-    yield put(updatePagination(TYPE, result, LIMIT))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -86,6 +80,6 @@ function* fetchMovementsFail({ payload }) {
 
 export default function* movementsSaga() {
   yield takeLatest(types.FETCH_MOVEMENTS, fetchMovements)
-  yield takeLatest(types.REFRESH, refreshMovements)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshMovements)
   yield takeLatest(types.FETCH_FAIL, fetchMovementsFail)
 }

@@ -212,11 +212,7 @@ export function togglePair(type, props, pair) {
   history.push(generateUrl(type, history.location.search, demapPairs(nextPairs)))
 }
 
-export function getCurrentEntries(entries, offset, limit, pageOffset, pageSize) {
-  return offset < limit
-    ? entries.slice(pageOffset, pageOffset + pageSize)
-    : entries.slice(offset + pageOffset - limit, offset + pageOffset - limit + pageSize)
-}
+export const getCurrentEntries = (entries, page, pageSize) => entries.slice((page - 1) * pageSize, page * pageSize)
 
 export function momentFormatter(format, timezone) {
   return timezone

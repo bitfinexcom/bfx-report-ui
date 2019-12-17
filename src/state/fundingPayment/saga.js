@@ -43,8 +43,7 @@ function getReqLedgers({
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchFPayment({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchFPayment() {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
@@ -52,13 +51,9 @@ function* fetchFPayment({ payload }) {
       return yield put(actions.updateFPayment())
     }
 
-    const { entries, targetSymbols } = yield select(getFundingOfferHistory, TYPE)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
+    const { targetSymbols } = yield select(getFundingOfferHistory, TYPE)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const queryLimit = yield select(getTargetQueryLimit, TYPE)
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - queryLimit >= offset) {
-      return undefined
-    }
 
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
@@ -70,7 +65,7 @@ function* fetchFPayment({ payload }) {
       queryLimit,
     })
     yield put(actions.updateFPayment(result))
-    yield put(updatePagination(TYPE, result, queryLimit))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -98,6 +93,6 @@ function* fetchFPaymentFail({ payload }) {
 
 export default function* fpaymentSaga() {
   yield takeLatest(types.FETCH_FPAYMENT, fetchFPayment)
-  yield takeLatest(types.REFRESH, refreshFPayment)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshFPayment)
   yield takeLatest(types.FETCH_FAIL, fetchFPaymentFail)
 }

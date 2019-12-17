@@ -38,15 +38,11 @@ function getReqPublicFunding({
   return makeFetchCall('getPublicTrades', params)
 }
 
-function* fetchPublicFunding({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchPublicFunding() {
   try {
-    const { entries, targetSymbol } = yield select(getPublicFunding)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - LIMIT >= offset) {
-      return
-    }
+    const { targetSymbol } = yield select(getPublicFunding)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
+
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(fetchData, getReqPublicFunding, {
@@ -56,7 +52,7 @@ function* fetchPublicFunding({ payload }) {
       filter,
     })
     yield put(actions.updatePublicFunding(result))
-    yield put(updatePagination(TYPE, result, LIMIT))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -84,6 +80,6 @@ function* fetchPublicFundingFail({ payload }) {
 
 export default function* publicFundingSaga() {
   yield takeLatest(types.FETCH_PUBLIC_FUNDING, fetchPublicFunding)
-  yield takeLatest(types.REFRESH, refreshPublicFunding)
+  yield takeLatest([types.REFRESH, types.SET_SYMBOL], refreshPublicFunding)
   yield takeLatest(types.FETCH_FAIL, fetchPublicFundingFail)
 }

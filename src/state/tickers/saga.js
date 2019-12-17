@@ -38,18 +38,13 @@ function getReqTickers({
   return makeFetchCall('getTickersHistory', params)
 }
 
-function* fetchTickers({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchTickers() {
   try {
-    const { entries, targetPairs } = yield select(getTickers)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
+    const { targetPairs } = yield select(getTickers)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
-
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - LIMIT >= offset) {
-      return
-    }
     const filter = yield select(getFilterQuery, TYPE)
+
     const { result, error } = yield call(fetchData, getReqTickers, {
       smallestMts,
       query,
@@ -57,7 +52,7 @@ function* fetchTickers({ payload }) {
       filter,
     })
     yield put(actions.updateTickers(result))
-    yield put(updatePagination(TYPE, result, LIMIT))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -85,6 +80,6 @@ function* fetchTickersFail({ payload }) {
 
 export default function* tickersSaga() {
   yield takeLatest(types.FETCH_TICKERS, fetchTickers)
-  yield takeLatest(types.REFRESH, refreshTickers)
+  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR], refreshTickers)
   yield takeLatest(types.FETCH_FAIL, fetchTickersFail)
 }

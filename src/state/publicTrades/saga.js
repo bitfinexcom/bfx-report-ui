@@ -38,18 +38,13 @@ function getReqPublicTrades({
   return makeFetchCall('getPublicTrades', params)
 }
 
-function* fetchPublicTrades({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchPublicTrades() {
   try {
-    const { entries, targetPair } = yield select(getPublicTrades)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - LIMIT >= offset) {
-      return
-    }
+    const { targetPair } = yield select(getPublicTrades)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
+
     const { result, error } = yield call(fetchData, getReqPublicTrades, {
       smallestMts,
       query,
@@ -57,7 +52,7 @@ function* fetchPublicTrades({ payload }) {
       filter,
     })
     yield put(actions.updatePublicTrades(result))
-    yield put(updatePagination(TYPE, result, LIMIT))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -85,6 +80,6 @@ function* fetchPublicTradesFail({ payload }) {
 
 export default function* publicTradesSaga() {
   yield takeLatest(types.FETCH_PUBLIC_TRADES, fetchPublicTrades)
-  yield takeLatest(types.REFRESH, refreshPublicTrades)
+  yield takeLatest([types.REFRESH, types.SET_PAIR], refreshPublicTrades)
   yield takeLatest(types.FETCH_FAIL, fetchPublicTradesFail)
 }
