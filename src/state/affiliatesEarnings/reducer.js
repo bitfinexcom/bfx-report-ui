@@ -1,7 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#ledgers
 import _get from 'lodash/get'
 
-import baseTypes from 'state/base/constants'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -10,7 +9,6 @@ import {
   fetchFail,
   refresh,
   removeSymbol,
-  setQueryLimit,
   setSymbols,
   setTimeRange,
 } from 'state/reducers.helper'
@@ -84,8 +82,6 @@ export function affiliatesEarningsReducer(state = initialState, action) {
       return setSymbols(state, payload, initialState)
     case types.REFRESH:
       return refresh(TYPE, state, initialState)
-    case baseTypes.SET_QUERY_LIMIT:
-      return setQueryLimit(TYPE, state, initialState)
     case queryTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:
