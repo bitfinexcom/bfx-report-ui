@@ -74,27 +74,12 @@ export function fetchNext(type, state, LIMIT) {
     }
 }
 
-export function fetchPrev(type, state, LIMIT) {
-  return {
-    ...state,
-    offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
-    pageOffset: 0,
-  }
-}
-
 export function fetchNext2(type, state, LIMIT) {
   return (state.entriesSize - LIMIT >= state.offset)
     ? {
       offset: state.offset + state.currentEntriesSize,
       pageOffset: 0,
     } : {}
-}
-
-export function fetchPrev2(type, state, LIMIT) {
-  return {
-    offset: state.offset >= LIMIT ? state.offset - LIMIT : 0,
-    pageOffset: 0,
-  }
 }
 
 export function jumpPage2(type, state, page, LIMIT) {
@@ -222,7 +207,6 @@ export default {
   baseSymbolState,
   fetchFail,
   fetchNext,
-  fetchPrev,
   getPageOffset,
   jumpPage,
   refresh,

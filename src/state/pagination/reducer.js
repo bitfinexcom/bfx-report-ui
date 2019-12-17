@@ -3,9 +3,7 @@ import _get from 'lodash/get'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import { TYPE_WHITELIST, getPageSize } from 'state/query/utils'
-import {
-  fetchNext2, fetchPrev2, jumpPage2, getPageOffset,
-} from 'state/reducers.helper'
+import { fetchNext2, jumpPage2, getPageOffset } from 'state/reducers.helper'
 
 import types from './constants'
 
@@ -86,18 +84,6 @@ function paginationReducer(state = initialState, { type, payload }) {
         [section]: {
           ...state[section],
           ...fetchNextState,
-        },
-      }
-    }
-    case types.FETCH_PREV: {
-      const { section, queryLimit } = payload
-      const fetchPrevState = fetchPrev2(section, state[section], queryLimit)
-
-      return {
-        ...state,
-        [section]: {
-          ...state[section],
-          ...fetchPrevState,
         },
       }
     }
