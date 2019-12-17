@@ -16,7 +16,6 @@ import { propTypes, defaultProps } from './QueryLimitSelector.props'
 
 class QueryLimitSelector extends PureComponent {
   onClick = (e) => {
-    e.preventDefault()
     const { setQueryLimit } = this.props
     setQueryLimit(parseInt(e.currentTarget.getAttribute('value'), 10))
   }
@@ -46,26 +45,26 @@ class QueryLimitSelector extends PureComponent {
       </Menu>
     )
     return (
-      <Tooltip
-        content={(
-          <span>
-            {t('querylimit.tooltip')}
-          </span>
-        )}
-        usePortal
+      <Popover
+        content={options}
+        interactionKind={PopoverInteractionKind.CLICK}
+        position={Position.BOTTOM}
       >
-        <Popover
-          content={options}
-          interactionKind={PopoverInteractionKind.CLICK}
-          position={Position.BOTTOM}
+        <Tooltip
+          content={(
+            <span>
+              {t('querylimit.tooltip')}
+            </span>
+          )}
+          hoverOpenDelay={300}
         >
           <Button
             rightIcon={IconNames.CARET_DOWN}
             className='query-limit-selector'
             text={queryLimit}
           />
-        </Popover>
-      </Tooltip>
+        </Tooltip>
+      </Popover>
     )
   }
 }
