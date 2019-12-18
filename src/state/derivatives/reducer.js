@@ -4,7 +4,7 @@ import _get from 'lodash/get'
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
-  addPair, basePairState, fetchFail, removePair, setPairs,
+  addPair, basePairState, fetch, fetchFail, removePair, setPairs,
 } from 'state/reducers.helper'
 import { formatPair, mapPair } from 'state/symbols/utils'
 
@@ -17,11 +17,14 @@ const initialState = {
 export function derivativesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
+    case types.FETCH_DERIVATIVES:
+      return fetch(state)
     case types.UPDATE_DERIVATIVES: {
       if (!_get(payload, ['data', 'res'])) {
         return {
           ...state,
           dataReceived: true,
+          pageLoading: false,
         }
       }
       const { data: { res } } = payload
@@ -50,8 +53,8 @@ export function derivativesReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
-        entries,
         pageLoading: false,
+        entries,
       }
     }
     case types.FETCH_FAIL:

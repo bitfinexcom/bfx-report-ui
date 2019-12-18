@@ -30,9 +30,9 @@ const TYPE = queryConstants.MENU_FPAYMENT
 class FundingPayment extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetSymbols, fetchFpayment, match,
+      dataReceived, pageLoading, setTargetSymbols, fetchFpayment, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const symbols = (match.params && match.params.symbol) || ''
       if (symbols) {
         setTargetSymbols(getMappedSymbolsFromUrl(symbols))
@@ -49,12 +49,12 @@ class FundingPayment extends PureComponent {
     const {
       columns,
       getFullTime,
-      pageLoading,
       targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       timeOffset,
@@ -78,7 +78,7 @@ class FundingPayment extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='fpayment.title' />
       )

@@ -8,6 +8,7 @@ export const updateLedgers = (state, payload) => {
     return {
       ...state,
       dataReceived: true,
+      pageLoading: false,
     }
   }
 
@@ -46,9 +47,9 @@ export const updateLedgers = (state, payload) => {
   return {
     ...state,
     dataReceived: true,
+    pageLoading: false,
     entries: [...state.entries, ...entries],
     existingCoins: updateCoins.sort(),
-    pageLoading: false,
   }
 }
 

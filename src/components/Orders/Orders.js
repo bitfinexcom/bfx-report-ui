@@ -26,9 +26,9 @@ const TYPE = queryConstants.MENU_ORDERS
 class Orders extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetPairs, fetchOrders, match,
+      dataReceived, pageLoading, setTargetPairs, fetchOrders, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const pairs = (match.params && match.params.pair) || ''
       if (pairs) {
         setTargetPairs(getMappedSymbolsFromUrl(pairs))
@@ -61,7 +61,8 @@ class Orders extends PureComponent {
       existingPairs,
       entries,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       targetPairs,
       getFullTime,
@@ -88,7 +89,7 @@ class Orders extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='orders.title' />
       )
@@ -125,12 +126,12 @@ class Orders extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          <Pagination target={TYPE} loading={loading} />
+          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={loading} />
+          <Pagination target={TYPE} loading={pageLoading} />
         </Fragment>
       )
     }

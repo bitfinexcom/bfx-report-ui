@@ -13,6 +13,7 @@ import {
   getDataReceived,
   getEntries,
   getExistingPairs,
+  getPageLoading,
   getTargetPairs,
 } from 'state/trades/selectors'
 import { getColumns } from 'state/filters/selectors'
@@ -25,7 +26,8 @@ const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_TRADES, getEntries(state)),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
+  pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
   timeOffset: getTimeOffset(state),
 })

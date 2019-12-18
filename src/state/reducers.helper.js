@@ -2,9 +2,9 @@ import queryTypes from 'state/query/constants'
 import { getFilterType } from 'state/query/utils'
 
 export const baseState = {
-  dataReceived: false,
+  dataReceived: false, // indicator that first response was received
+  pageLoading: false, // current loading status
   entries: [],
-  pageLoading: false,
 }
 
 export const basePairState = {
@@ -19,12 +19,16 @@ export const baseSymbolState = {
   targetSymbols: [],
 }
 
-export function fetchFail(state) {
-  return {
-    ...state,
-    pageLoading: false,
-  }
-}
+export const fetch = state => ({
+  ...state,
+  pageLoading: true,
+})
+
+export const fetchFail = state => ({
+  ...state,
+  dataReceived: true,
+  pageLoading: false,
+})
 
 // existingCoins/existingPairs should be re-calc in new time range
 export function setTimeRange(type, state, initialState) {
@@ -122,6 +126,7 @@ export default {
   addSymbol,
   basePairState,
   baseSymbolState,
+  fetch,
   fetchFail,
   refresh,
   removePair,

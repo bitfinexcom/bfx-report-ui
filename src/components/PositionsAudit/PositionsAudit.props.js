@@ -16,7 +16,7 @@ export const propTypes = {
   entries: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
   fetchPaudit: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
-  loading: PropTypes.bool.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,

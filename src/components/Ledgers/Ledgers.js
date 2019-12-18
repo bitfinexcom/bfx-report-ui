@@ -24,9 +24,9 @@ const TYPE = queryConstants.MENU_LEDGERS
 class Ledgers extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetSymbols, fetchLedgers, match,
+      dataReceived, pageLoading, setTargetSymbols, fetchLedgers, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const symbols = (match.params && match.params.symbol) || ''
       if (symbols) {
         setTargetSymbols(getMappedSymbolsFromUrl(symbols))
@@ -47,7 +47,8 @@ class Ledgers extends PureComponent {
       entries,
       existingCoins,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       timeOffset,
@@ -71,7 +72,7 @@ class Ledgers extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='ledgers.title' />
       )
@@ -108,12 +109,12 @@ class Ledgers extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          <Pagination loading={loading} target={TYPE} />
+          <Pagination loading={pageLoading} target={TYPE} />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination loading={loading} target={TYPE} />
+          <Pagination loading={pageLoading} target={TYPE} />
         </Fragment>
       )
     }

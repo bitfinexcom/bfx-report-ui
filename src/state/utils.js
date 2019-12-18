@@ -114,11 +114,10 @@ export function checkFetch(prevProps, props, type) {
   if (!isValidateType(type)) {
     return
   }
-  const { loading: prevLoading } = prevProps
-  const { loading } = props
-  // eslint-disable-next-line react/destructuring-assignment
+  const { dataReceived: prevDataReceived } = prevProps
+  const { dataReceived, pageLoading } = props
   const fetch = props[`fetch${type.charAt(0).toUpperCase() + type.slice(1)}`]
-  if (loading && loading !== prevLoading) {
+  if (!dataReceived && dataReceived !== prevDataReceived && !pageLoading) {
     fetch()
   }
 }

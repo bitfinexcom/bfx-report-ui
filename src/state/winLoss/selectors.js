@@ -2,6 +2,7 @@ export const getWinLoss = state => state.winLoss
 
 export const getDataReceived = state => getWinLoss(state).dataReceived
 export const getEntries = state => getWinLoss(state).entries
+export const getPageLoading = state => getWinLoss(state).pageLoading
 export const getParams = (state) => {
   const {
     start,
@@ -18,6 +19,7 @@ export const getParams = (state) => {
 export default {
   getDataReceived,
   getEntries,
+  getPageLoading,
   getParams,
   getWinLoss,
 }

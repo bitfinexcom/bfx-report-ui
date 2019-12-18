@@ -7,6 +7,7 @@ import authTypes from 'state/auth/constants'
 import {
   addPair,
   basePairState,
+  fetch,
   fetchFail,
   refresh,
   removePair,
@@ -25,12 +26,15 @@ const TYPE = queryTypes.MENU_TRADES
 export function tradesReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
+    case types.FETCH_TRADES:
+      return fetch(state)
     case types.UPDATE_TRADES: {
       const res = _get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,
           dataReceived: true,
+          pageLoading: false,
         }
       }
       const { existingPairs } = state
@@ -71,9 +75,9 @@ export function tradesReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
+        pageLoading: false,
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
-        pageLoading: false,
       }
     }
     case types.FETCH_FAIL:

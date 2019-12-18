@@ -6,6 +6,7 @@ import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
   baseState,
+  fetch,
   fetchFail,
   setTimeRange,
 } from 'state/reducers.helper'
@@ -22,12 +23,15 @@ const TYPE = queryTypes.MENU_POSITIONS_AUDIT
 export function positionsAuditReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
+    case types.FETCH_PAUDIT:
+      return fetch(state)
     case types.UPDATE_PAUDIT: {
       const res = _get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,
           dataReceived: true,
+          pageLoading: false,
         }
       }
       const entries = res.map((entry) => {
@@ -63,8 +67,8 @@ export function positionsAuditReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
-        entries: [...state.entries, ...entries],
         pageLoading: false,
+        entries: [...state.entries, ...entries],
       }
     }
     case types.FETCH_FAIL:

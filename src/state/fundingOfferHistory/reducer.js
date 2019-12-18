@@ -6,6 +6,7 @@ import authTypes from 'state/auth/constants'
 import {
   addSymbol,
   baseSymbolState,
+  fetch,
   fetchFail,
   refresh,
   removeSymbol,
@@ -25,12 +26,15 @@ const TYPE = queryTypes.MENU_FOFFER
 export function fundingOfferHistoryReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
+    case types.FETCH_FOFFER:
+      return fetch(state)
     case types.UPDATE_FOFFER: {
       const res = _get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,
           dataReceived: true,
+          pageLoading: false,
         }
       }
       const { existingCoins } = state
@@ -81,9 +85,9 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
+        pageLoading: false,
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
-        pageLoading: false,
       }
     }
     case types.FETCH_FAIL:

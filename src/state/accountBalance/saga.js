@@ -48,7 +48,7 @@ export function* fetchAccountBalance(action) {
 
 function* refreshAccountBalance() {
   const params = yield select(selectors.getParams)
-  yield call(fetchAccountBalance, { payload: params })
+  yield put(actions.fetchBalance(params))
 }
 
 function* fetchAccountBalanceFail({ payload }) {

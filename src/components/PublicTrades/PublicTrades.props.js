@@ -14,7 +14,7 @@ export const propTypes = {
   fetchPublictrades: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
   hasSyncPref: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   setTargetPair: PropTypes.func.isRequired,

@@ -34,8 +34,8 @@ class ConcentrationRisk extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchWallets } = this.props
-    if (loading) {
+    const { dataReceived, pageLoading, fetchWallets } = this.props
+    if (!dataReceived && !pageLoading) {
       fetchWallets()
     }
   }
@@ -94,7 +94,8 @@ class ConcentrationRisk extends PureComponent {
     const {
       currentTime,
       entries,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
     } = this.props
@@ -133,7 +134,7 @@ class ConcentrationRisk extends PureComponent {
       </Fragment>
     )
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='concentrationrisk.title' />
       )

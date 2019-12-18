@@ -23,9 +23,9 @@ const TYPE = queryConstants.MENU_FOFFER
 class FundingOfferHistory extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetSymbols, fetchFoffer, match,
+      dataReceived, pageLoading, setTargetSymbols, fetchFoffer, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const symbols = (match.params && match.params.symbol) || ''
       if (symbols) {
         setTargetSymbols(getMappedSymbolsFromUrl(symbols))
@@ -42,12 +42,12 @@ class FundingOfferHistory extends PureComponent {
     const {
       columns,
       getFullTime,
-      pageLoading,
       targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       timeOffset,
@@ -71,7 +71,7 @@ class FundingOfferHistory extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='foffer.title' />
       )

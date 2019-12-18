@@ -23,7 +23,7 @@ export const propTypes = {
   existingCoins: PropTypes.arrayOf(PropTypes.string),
   fetchFoffer: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
-  loading: PropTypes.bool.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   removeTargetSymbol: PropTypes.func.isRequired,

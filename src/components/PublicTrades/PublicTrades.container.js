@@ -26,7 +26,7 @@ const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_PUBLIC_TRADES, getEntries(state)),
   getFullTime: getFullTime(state),
   hasSyncPref: !!getPublicTradesPairs(state).length,
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   pairs: getPairs(state),
   targetPair: getTargetPair(state),

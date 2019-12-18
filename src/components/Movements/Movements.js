@@ -25,9 +25,9 @@ const TYPE = queryConstants.MENU_MOVEMENTS
 class Movements extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetSymbols, fetchMovements, match, jumpPage,
+      dataReceived, pageLoading, setTargetSymbols, fetchMovements, match, jumpPage,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const symbols = (match.params && match.params.symbol) || ''
       if (symbols) {
         setTargetSymbols(getMappedSymbolsFromUrl(symbols))
@@ -49,7 +49,7 @@ class Movements extends PureComponent {
       existingCoins,
       getFullTime,
       handleClickExport,
-      loading,
+      dataReceived,
       pageLoading,
       refresh,
       t,
@@ -80,7 +80,7 @@ class Movements extends PureComponent {
 
     const titleMsgId = type === TYPE_WITHDRAWALS ? 'withdrawals.title' : 'deposits.title'
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title={titleMsgId} />
       )

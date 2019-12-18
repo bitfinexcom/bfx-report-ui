@@ -27,7 +27,7 @@ const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_FCREDIT, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
   timeOffset: getTimeOffset(state),

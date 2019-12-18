@@ -5,6 +5,7 @@ import { fetchWallets, refresh } from 'state/wallets/actions'
 import {
   getDataReceived,
   getEntries,
+  getPageLoading,
   getTimestamp,
 } from 'state/wallets/selectors'
 
@@ -13,7 +14,8 @@ import ConcentrationRisk from './ConcentrationRisk'
 const mapStateToProps = state => ({
   currentTime: getTimestamp(state),
   entries: getEntries(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
+  pageLoading: getPageLoading(state),
 })
 
 const mapDispatchToProps = {

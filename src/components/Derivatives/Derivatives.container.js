@@ -14,6 +14,7 @@ import {
   getDataReceived,
   getEntries,
   getExistingPairs,
+  getPageLoading,
   getTargetPairs,
 } from 'state/derivatives/selectors'
 import { getColumns } from 'state/filters/selectors'
@@ -27,7 +28,8 @@ const mapStateToProps = state => ({
   pairs: getPairs(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
+  pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
   timeOffset: getTimeOffset(state),
 })

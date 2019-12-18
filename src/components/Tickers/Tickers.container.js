@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
   hasSyncPref: !!getTickersHistoryPairs(state).length,
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
   timeOffset: getTimeOffset(state),

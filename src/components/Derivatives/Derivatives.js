@@ -34,9 +34,9 @@ class Derivatives extends PureComponent {
 
   componentDidMount() {
     const {
-      loading, setTargetPairs, fetchDerivatives, match,
+      dataReceived, pageLoading, setTargetPairs, fetchDerivatives, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const pairs = (match.params && match.params.pair) || ''
       if (pairs) {
         setTargetPairs(getMappedSymbolsFromUrl(pairs))
@@ -59,7 +59,8 @@ class Derivatives extends PureComponent {
       getFullTime,
       entries,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       targetPairs,
@@ -86,7 +87,7 @@ class Derivatives extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='derivatives.title' />
       )

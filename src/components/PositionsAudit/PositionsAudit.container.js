@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_POSITIONS_AUDIT, getEntries(state)),
   getFullTime: getFullTime(state),
   targetIds: getTargetIds(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   timeOffset: getTimeOffset(state),
 })

@@ -9,7 +9,8 @@ export const propTypes = {
   currentTime: PropTypes.number,
   entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
   fetchWallets: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
+  pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
@@ -17,7 +18,4 @@ export const propTypes = {
 export const defaultProps = {
   currentTime: null,
   entries: [],
-  fetchWallets: () => {},
-  loading: true,
-  refresh: () => {},
 }

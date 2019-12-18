@@ -9,6 +9,7 @@ import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getDataReceived,
   getEntries,
+  getPageLoading,
 } from 'state/positionsActive/selectors'
 
 import PositionsActive from './PositionsActive'
@@ -16,7 +17,8 @@ import PositionsActive from './PositionsActive'
 const mapStateToProps = state => ({
   entries: getEntries(state),
   getFullTime: getFullTime(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
+  pageLoading: getPageLoading(state),
   timeOffset: getTimeOffset(state),
 })
 
