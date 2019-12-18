@@ -19,7 +19,7 @@ const getInitialState = () => TYPE_WHITELIST.reduce((acc, section) => {
   return acc
 }, {})
 
-const initialState = getInitialState()
+export const initialState = getInitialState()
 
 const SMALLEST_MTS_MAP = {
   [queryTypes.MENU_LEDGERS]: 'mts',
@@ -52,8 +52,8 @@ function paginationReducer(state = initialState, { type, payload }) {
 
       let smallestMts = 0
       entries.forEach((entry) => {
-        const mts = entry[SMALLEST_MTS_MAP[section]]
-        if (nextPage === false && (!smallestMts || smallestMts > mts)) {
+        const mts = entry[SMALLEST_MTS_MAP[section]] || 0
+        if (nextPage === false && (!smallestMts || mts < smallestMts)) {
           smallestMts = mts
         }
       })
