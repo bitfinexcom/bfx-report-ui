@@ -30,6 +30,7 @@ import snapshotsReducer from './snapshots/reducer'
 import queryReducer from './query/reducer'
 import taxReportReducer from './taxReport/reducer'
 import tickersReducer from './tickers/reducer'
+import tradedVolumeReducer from './tradedVolume/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
 import symbolsReducer from './symbols/reducer'
@@ -72,6 +73,7 @@ const BASE_REDUCERS = {
   routing: routingReducer,
   query: queryReducer,
   tickers: tickersReducer,
+  tradedVolume: tradedVolumeReducer,
   trades: tradesReducer,
   status: statusReducer,
   symbols: symbolsReducer,

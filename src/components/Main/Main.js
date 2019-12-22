@@ -22,6 +22,7 @@ import PublicTrades from 'components/PublicTrades'
 import Snapshots from 'components/Snapshots'
 import TaxReport from 'components/TaxReport'
 import Tickers from 'components/Tickers'
+import TradedVolume from 'components/TradedVolume'
 import Trades from 'components/Trades'
 import Wallets from 'components/Wallets'
 import ExportDialog from 'components/ExportDialog'
@@ -55,6 +56,7 @@ const {
   MENU_SNAPSHOTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
+  MENU_TRADED_VOLUME,
   MENU_WALLETS,
   MENU_WIN_LOSS,
 } = queryType
@@ -312,6 +314,10 @@ class Main extends PureComponent {
                   exact
                   path={getPath(MENU_ACCOUNT_BALANCE)}
                   component={AccountBalance}
+                />
+                <Route
+                  path={[getPath(MENU_TRADED_VOLUME), `${getPath(MENU_TRADED_VOLUME)}/:pair`]}
+                  render={() => <TradedVolume handleClickExport={this.handleClickExport} />}
                 />
                 <Route
                   exact
