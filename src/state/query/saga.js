@@ -12,6 +12,7 @@ import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { getFilterQuery } from 'state/filters/selectors'
+import { getParams as getAccountBalanceParams } from 'state/accountBalance/selectors'
 import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliatesEarnings/selectors'
 import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
@@ -30,6 +31,7 @@ import { getTargetPairs as getActivePositionsPairs } from 'state/positionsActive
 import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors'
 import { getParams as getTaxReportParams } from 'state/taxReport/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
+import { getParams as getWinLossParams } from 'state/winLoss/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
@@ -47,6 +49,7 @@ import { NO_QUERY_LIMIT_TARGETS } from './utils'
 import types from './constants'
 
 const {
+  MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -66,6 +69,7 @@ const {
   MENU_SNAPSHOTS,
   MENU_TAX_REPORT,
   MENU_WALLETS,
+  MENU_WIN_LOSS,
   MENU_WITHDRAWALS,
 } = types
 
@@ -99,6 +103,8 @@ const getMultipleCsv = params => makeFetchCall('getMultipleCsv', params)
 
 function getSelector(target) {
   switch (target) {
+    case MENU_ACCOUNT_BALANCE:
+      return getAccountBalanceParams
     case MENU_AFFILIATES_EARNINGS:
       return getAffiliatesEarningsSymbols
     case MENU_DERIVATIVES:
@@ -138,6 +144,8 @@ function getSelector(target) {
       return getTaxReportParams
     case MENU_WALLETS:
       return getTimestamp
+    case MENU_WIN_LOSS:
+      return getWinLossParams
     default:
       return ''
   }
@@ -190,6 +198,12 @@ function* getOptions({ target, query }) {
   const sign = selector ? yield select(selector) : ''
 
   switch (target) {
+    case MENU_ACCOUNT_BALANCE:
+    case MENU_WIN_LOSS:
+      options.start = sign.start || undefined
+      options.end = sign.end || undefined
+      options.timeframe = sign.timeframe
+      break
     case MENU_WALLETS:
     case MENU_SNAPSHOTS:
       options.end = sign || undefined
@@ -212,6 +226,9 @@ function* getOptions({ target, query }) {
   }
 
   switch (target) {
+    case MENU_ACCOUNT_BALANCE:
+      options.method = 'getBalanceHistoryCsv'
+      break
     case MENU_AFFILIATES_EARNINGS:
       options.method = 'getLedgersCsv'
       options.isAffiliateRebate = true
@@ -272,6 +289,9 @@ function* getOptions({ target, query }) {
       break
     case MENU_WALLETS:
       options.method = 'getWalletsCsv'
+      break
+    case MENU_WIN_LOSS:
+      options.method = 'getWinLossCsv'
       break
     case MENU_LEDGERS:
     default:
