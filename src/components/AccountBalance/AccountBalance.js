@@ -14,6 +14,7 @@ import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
+import ExportButton from 'ui/ExportButton'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeframeSelector from 'ui/TimeframeSelector/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
@@ -78,6 +79,7 @@ class AccountBalance extends PureComponent {
       params: { timeframe: currTimeframe },
       loading,
       refresh,
+      handleClickExport,
       t,
     } = this.props
     const { start, end, timeframe } = this.state
@@ -148,6 +150,8 @@ class AccountBalance extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
+            <ExportButton handleClickExport={handleClickExport} />
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData />
@@ -160,6 +164,8 @@ class AccountBalance extends PureComponent {
             {t('accountbalance.title')}
             {' '}
             {renderTimeSelection}
+            {' '}
+            <ExportButton handleClickExport={handleClickExport} />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

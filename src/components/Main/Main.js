@@ -314,7 +314,7 @@ class Main extends PureComponent {
                 <Route
                   exact
                   path={getPath(MENU_ACCOUNT_BALANCE)}
-                  component={AccountBalance}
+                  component={() => <AccountBalance handleClickExport={this.handleClickExport} />}
                 />
                 <Route
                   path={[getPath(MENU_TRADED_VOLUME), `${getPath(MENU_TRADED_VOLUME)}/:pair`]}
@@ -323,7 +323,7 @@ class Main extends PureComponent {
                 <Route
                   exact
                   path={getPath(MENU_WIN_LOSS)}
-                  component={AverageWinLoss}
+                  component={() => <AverageWinLoss handleClickExport={this.handleClickExport} />}
                 />
                 <Route
                   exact

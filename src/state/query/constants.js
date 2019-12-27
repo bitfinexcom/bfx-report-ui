@@ -22,7 +22,7 @@ export default {
   MENU_TAX_REPORT: 'taxreport',
   MENU_TRADED_VOLUME: 'tradedvolume',
   MENU_WALLETS: 'wallets',
-  MENU_WIN_LOSS: 'winloss',
+  MENU_WIN_LOSS: 'averagewinloss',
   MENU_WITHDRAWALS: 'withdrawals',
   TIME_TYPE_UTC: 'utc',
   TIME_TYPE_LOCALTIME: 'local',
