@@ -20,6 +20,7 @@ import fundingPaymentReducer from './fundingPayment/reducer'
 import ledgersReducer from './ledgers/reducer'
 import movementsReducer from './movements/reducer'
 import ordersReducer from './orders/reducer'
+import orderTradesReducer from './orderTrades/reducer'
 import paginationReducer from './pagination/reducer'
 import positionsAuditReducer from './audit/reducer'
 import positionsActiveReducer from './positionsActive/reducer'
@@ -67,6 +68,7 @@ const BASE_REDUCERS = {
   ledgers: ledgersReducer,
   movements: movementsReducer,
   orders: ordersReducer,
+  orderTrades: orderTradesReducer,
   pagination: paginationReducer,
   positions: positionsReducer,
   publicFunding: publicFundingReducer,

@@ -13,7 +13,7 @@ import { setLastRoute, setRouteParams } from './actions'
 import { getLastRoute, getRouteParams } from './selectors'
 
 const {
-  MENU_DEPOSITS, MENU_WITHDRAWALS, MENU_MOVEMENTS,
+  MENU_DEPOSITS, MENU_WITHDRAWALS, MENU_MOVEMENTS, MENU_ORDER_TRADES,
 } = queryConstants
 
 function* locationChange({ payload }) {
@@ -29,7 +29,7 @@ function* locationChange({ payload }) {
   if (route === MENU_DEPOSITS || route === MENU_WITHDRAWALS) {
     route = MENU_MOVEMENTS
   }
-  if (!route) {
+  if (!route || route === MENU_ORDER_TRADES) {
     return
   }
 

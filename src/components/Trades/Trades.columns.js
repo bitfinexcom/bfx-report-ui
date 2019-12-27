@@ -1,8 +1,5 @@
 import React, { Fragment } from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 import { COLUMN_WIDTHS } from 'utils/columns'

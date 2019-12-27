@@ -15,6 +15,7 @@ import fpaymentSaga from './fundingPayment/saga'
 import ledgersSaga from './ledgers/saga'
 import movementsSaga from './movements/saga'
 import ordersSaga from './orders/saga'
+import orderTradesSaga from './orderTrades/saga'
 import paginationSaga from './pagination/saga'
 import positionsSaga from './positions/saga'
 import positionsActiveSaga from './positionsActive/saga'
@@ -46,6 +47,7 @@ export default function* rootSaga() {
   yield fork(ledgersSaga)
   yield fork(movementsSaga)
   yield fork(ordersSaga)
+  yield fork(orderTradesSaga)
   yield fork(paginationSaga)
   yield fork(positionsSaga)
   yield fork(positionsActiveSaga)
