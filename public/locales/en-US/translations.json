@@ -468,6 +468,14 @@
     "today": "Today",
     "year": "Year"
   },
+  "tradedvolume": {
+    "title": "Traded Volume",
+    "query": {
+      "title": "Query",
+      "startDateTooltip": "Select a start time",
+      "endDateTooltip": "Select end time"
+    }
+  },
   "trades": {
     "title": "Trades",
     "column": {

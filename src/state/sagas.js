@@ -26,6 +26,7 @@ import snapshotsSaga from './snapshots/saga'
 import taxReportSaga from './taxReport/saga'
 import querySaga from './query/saga'
 import tickersSaga from './tickers/saga'
+import tradedVolumeSaga from './tradedVolume/saga'
 import tradesSaga from './trades/saga'
 import symbolsSaga from './symbols/saga'
 import syncSaga from './sync/saga'
@@ -63,6 +64,7 @@ export default function* rootSaga() {
     yield fork(affiliatesEarningsSaga)
     yield fork(fpaymentSaga)
     yield fork(accountBalanceSaga)
+    yield fork(tradedVolumeSaga)
     yield fork(winLossSaga)
     yield fork(snapshotsSaga)
     yield fork(taxReportSaga)

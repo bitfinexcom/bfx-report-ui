@@ -28,6 +28,7 @@ import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selecto
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors'
 import { getParams as getTaxReportParams } from 'state/taxReport/selectors'
+import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import {
@@ -64,6 +65,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
   MENU_TAX_REPORT,
+  MENU_TRADED_VOLUME,
   MENU_WALLETS,
   MENU_WITHDRAWALS,
 } = types
@@ -133,6 +135,8 @@ function getSelector(target) {
       return getSnapshotsTimestamp
     case MENU_TAX_REPORT:
       return getTaxReportParams
+    case MENU_TRADED_VOLUME:
+      return getTradedVolumeParams
     case MENU_WALLETS:
       return getTimestamp
     default:
@@ -140,9 +144,9 @@ function getSelector(target) {
   }
 }
 
-function formatSymbol(target, sign) {
-  // return directly if no sign
-  if (!sign) {
+function formatSymbol(target, symbols) {
+  // return directly if no symbol
+  if (!symbols) {
     return ''
   }
   switch (target) {
@@ -152,13 +156,14 @@ function formatSymbol(target, sign) {
     case MENU_WITHDRAWALS:
     case MENU_DEPOSITS:
     case MENU_FPAYMENT:
-      return mapRequestSymbols(sign)
+      return mapRequestSymbols(symbols)
     case MENU_PUBLIC_FUNDING:
-      return `f${mapRequestSymbols(sign)}`
+      return `f${mapRequestSymbols(symbols)}`
     // sections with pairs
     case MENU_DERIVATIVES:
     case MENU_ORDERS:
     case MENU_TICKERS:
+    case MENU_TRADED_VOLUME:
     case MENU_TRADES:
     case MENU_POSITIONS:
     case MENU_POSITIONS_ACTIVE:
@@ -166,7 +171,7 @@ function formatSymbol(target, sign) {
     case MENU_FCREDIT:
     case MENU_FLOAN:
     case MENU_FOFFER:
-      return formatRawSymbols(mapRequestPairs(sign))
+      return formatRawSymbols(mapRequestPairs(symbols))
     default:
       return ''
   }
@@ -189,6 +194,12 @@ function* getOptions({ target, query }) {
     case MENU_WALLETS:
     case MENU_SNAPSHOTS:
       options.end = sign || undefined
+      break
+    case MENU_TRADED_VOLUME:
+      options.start = sign.start || undefined
+      options.end = sign.end || undefined
+      options.timeframe = sign.timeframe
+      options.symbol = formatSymbol(target, sign.targetPairs)
       break
     case MENU_TAX_REPORT:
       options.start = sign.start || undefined
@@ -265,6 +276,9 @@ function* getOptions({ target, query }) {
       break
     case MENU_TAX_REPORT:
       options.method = 'getFullTaxReportCsv'
+      break
+    case MENU_TRADED_VOLUME:
+      options.method = 'getTradedVolumeCsv'
       break
     case MENU_WALLETS:
       options.method = 'getWalletsCsv'
