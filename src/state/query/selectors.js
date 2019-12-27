@@ -21,14 +21,16 @@ export const getPrepareExport = state => getQuery(state).prepareExport
  * Selector to return query limit by type.
  * Some section allow user custom query limit.
  * @param {object} state query state
+ * @param {string} target section
  */
-export const getTargetQueryLimit = state => target => (canChangeQueryLimit(target)
+export const getTargetQueryLimit = (state, target) => (canChangeQueryLimit(target)
   ? getBaseQueryLimit(state)
   : getQueryLimit(target))
 
 /**
  * Selector to return query range (in milliseconds) and limit.
  * @param {object} state query state
+ * @param {number} smallestMts timestamp of the last checked entry, used for pagination
  */
 export function getTimeFrame(state, smallestMts = 0) {
   const date = new Date()

@@ -8,19 +8,20 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
+import { getPaginationData } from 'state/pagination/selectors'
+import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getQueryLimit } from 'state/query/utils'
 import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
-import { getPositionsAudit, getTargetIds } from './selectors'
+import { getPositionsAudit } from './selectors'
 
 const TYPE = queryTypes.MENU_POSITIONS_AUDIT
 const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqPositionsAudit({
   smallestMts,
@@ -36,32 +37,29 @@ function getReqPositionsAudit({
   return new Promise((_, reject) => reject(new Error('no id specified')))
 }
 
-function* fetchPositionsAudit({ payload: ids }) {
+function* fetchPositionsAudit({ payload }) {
+  const { nextFetch = false } = payload
   try {
-    let targetIds = yield select(getTargetIds)
-    const idsUrl = targetIds.join(',')
-    // set id from url
-    if (ids && ids !== idsUrl) {
-      if (Number(ids)) {
-        targetIds = [parseInt(ids, 10)]
-      }
-      if (ids.indexOf(',')) {
-        targetIds = ids.split(',').map(id => parseInt(id, 10))
-      }
-      yield put(actions.setTargetIds(targetIds))
+    const { entries, targetIds } = yield select(getPositionsAudit)
+    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
+    // data exist, no need to fetch again
+    if (nextFetch && entries.length - LIMIT >= offset) {
+      return
     }
     const query = yield select(getQuery)
+    const queryLimit = yield select(getTargetQueryLimit, TYPE)
     const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, {
-      smallestMts: 0,
+      smallestMts,
       query,
       targetIds,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositionsAudit, {
-      smallestMts: 0,
+      smallestMts,
       query,
       targetIds,
     })
-    yield put(actions.updatePAudit(result, LIMIT, PAGE_SIZE))
+    yield put(actions.updatePAudit(result))
+    yield put(updatePagination(TYPE, result, queryLimit))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -79,45 +77,8 @@ function* fetchPositionsAudit({ payload: ids }) {
   }
 }
 
-function* fetchNextPositionsAudit() {
-  try {
-    const {
-      offset,
-      entries,
-      smallestMts,
-      targetIds,
-    } = yield select(getPositionsAudit)
-    // data exist, no need to fetch again
-    if (entries.length - LIMIT >= offset) {
-      return
-    }
-    const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqPositionsAudit, {
-      smallestMts,
-      query,
-      targetIds,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPositionsAudit, {
-      smallestMts,
-      query,
-      targetIds,
-    })
-    yield put(actions.updatePAudit(result, LIMIT, PAGE_SIZE))
-
-    if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'paudit.title',
-        detail: JSON.stringify(error),
-      }))
-    }
-  } catch (fail) {
-    yield put(actions.fetchFail({
-      id: 'status.request.error',
-      topic: 'paudit.title',
-      detail: JSON.stringify(fail),
-    }))
-  }
+function* refreshPositionsAudit() {
+  yield put(refreshPagination(TYPE))
 }
 
 function* fetchPositionsAuditFail({ payload }) {
@@ -126,6 +87,6 @@ function* fetchPositionsAuditFail({ payload }) {
 
 export default function* positionsAuditSaga() {
   yield takeLatest(types.FETCH_PAUDIT, fetchPositionsAudit)
-  yield takeLatest(types.FETCH_NEXT_PAUDIT, fetchNextPositionsAudit)
+  yield takeLatest(types.REFRESH, refreshPositionsAudit)
   yield takeLatest(types.FETCH_FAIL, fetchPositionsAuditFail)
 }

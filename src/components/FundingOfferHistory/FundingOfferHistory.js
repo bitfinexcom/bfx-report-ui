@@ -1,9 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
@@ -15,20 +12,13 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import {
-  checkFetch,
-  getCurrentEntries,
-  toggleSymbol,
-} from 'state/utils'
+import { checkFetch, toggleSymbol } from 'state/utils'
 
 import getColumns from './FundingOfferHistory.columns'
 import { propTypes, defaultProps } from './FundingOfferHistory.props'
 
 const TYPE = queryConstants.MENU_FOFFER
-const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 class FundingOfferHistory extends PureComponent {
   componentDidMount() {
@@ -51,27 +41,19 @@ class FundingOfferHistory extends PureComponent {
   render() {
     const {
       columns,
-      fetchNext,
-      fetchPrev,
       getFullTime,
-      offset,
-      pageOffset,
       pageLoading,
       targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
-      jumpPage,
       loading,
       refresh,
-      nextPage,
       t,
       timeOffset,
     } = this.props
-    const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const numRows = filteredData.length
     const tableColumns = getColumns({
-      filteredData,
+      filteredData: entries,
       getFullTime,
       t,
       timeOffset,
@@ -88,26 +70,12 @@ class FundingOfferHistory extends PureComponent {
       </Fragment>
     )
 
-    const renderPagination = (
-      <Pagination
-        type={TYPE}
-        dataLen={entries.length}
-        loading={pageLoading}
-        offset={offset}
-        jumpPage={jumpPage}
-        prevClick={fetchPrev}
-        nextClick={fetchNext}
-        pageOffset={pageOffset}
-        nextPage={nextPage}
-      />
-    )
-
     let showContent
     if (loading) {
       showContent = (
         <Loading title='foffer.title' />
       )
-    } else if (numRows === 0) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -138,12 +106,12 @@ class FundingOfferHistory extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
-            numRows={numRows}
+            numRows={entries.length}
             tableColumns={tableColumns}
           />
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
         </Fragment>
       )
     }

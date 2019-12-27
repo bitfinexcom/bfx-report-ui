@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Trades data.
+ * @param {Object} options
  */
-export function fetchTrades() {
+export function fetchTrades(options = {}) {
   return {
     type: types.FETCH_TRADES,
+    payload: options,
   }
 }
 
@@ -21,43 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to fetch next Trades data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextTrades(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_TRADES,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Trades data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevTrades(queryLimit) {
-  return {
-    type: types.FETCH_PREV_TRADES,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Trades page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_TRADES_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh trades.
  */
 export function refresh() {
@@ -69,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Trades.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateTrades(data, limit, pageSize) {
+export function updateTrades(data) {
   return {
     type: types.UPDATE_TRADES,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
@@ -121,9 +82,6 @@ export default {
   addTargetPair,
   fetchFail,
   fetchTrades,
-  fetchNextTrades,
-  fetchPrevTrades,
-  jumpPage,
   refresh,
   setTargetPairs,
   removeTargetPair,

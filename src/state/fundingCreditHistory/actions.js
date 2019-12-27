@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch funding credit history data.
+ * @param {Object} options
  */
-export function fetchFCredit() {
+export function fetchFCredit(options = {}) {
   return {
     type: types.FETCH_FCREDIT,
+    payload: options,
   }
 }
 
@@ -21,43 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to fetch next funding credit history data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextFCredit(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_FCREDIT,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev funding credit history data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevFCredit(queryLimit) {
-  return {
-    type: types.FETCH_PREV_FCREDIT,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific funding credit history page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_FCREDIT_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh funding credit history.
  */
 export function refresh() {
@@ -69,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update funding credit history.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateFCredit(data, limit, pageSize) {
+export function updateFCredit(data) {
   return {
     type: types.UPDATE_FCREDIT,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
@@ -120,9 +81,6 @@ export default {
   addTargetSymbol,
   fetchFail,
   fetchFCredit,
-  fetchNextFCredit,
-  fetchPrevFCredit,
-  jumpPage,
   refresh,
   removeTargetSymbol,
   setTargetSymbols,

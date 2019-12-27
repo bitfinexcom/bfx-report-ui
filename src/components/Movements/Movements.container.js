@@ -3,24 +3,20 @@ import { withRouter } from 'react-router-dom'
 
 import {
   fetchMovements,
-  fetchNextMovements,
-  fetchPrevMovements,
-  jumpPage,
   refresh,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
 } from 'state/movements/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getFilteredEntries } from 'state/pagination/selectors'
+import { jumpPage } from 'state/pagination/actions'
 import {
   getDataReceived,
   getEntries,
   getExistingCoins,
-  getOffset,
   getPageLoading,
-  getPageOffset,
   getTargetSymbols,
-  getNextPage,
 } from 'state/movements/selectors'
 import { getColumns } from 'state/filters/selectors'
 import queryConstants from 'state/query/constants'
@@ -29,13 +25,10 @@ import Movements from './Movements'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_MOVEMENTS),
-  entries: getEntries(state),
+  entries: getFilteredEntries(state, queryConstants.MENU_MOVEMENTS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
   loading: !getDataReceived(state),
-  nextPage: getNextPage(state),
-  offset: getOffset(state),
-  pageOffset: getPageOffset(state),
   pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
   timeOffset: getTimeOffset(state),
@@ -43,10 +36,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchMovements,
-  fetchNext: fetchNextMovements,
-  fetchPrev: fetchPrevMovements,
-  jumpPage,
   refresh,
+  jumpPage,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,

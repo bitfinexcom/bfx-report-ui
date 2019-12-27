@@ -9,18 +9,18 @@ import { makeFetchCall } from 'state/utils'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
+import { refreshPagination, updatePagination } from 'state/pagination/actions'
+import { getAffiliatesEarnings } from 'state/affiliatesEarnings/selectors'
+import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
-import { getPageSize } from 'state/query/utils'
 import { frameworkCheck } from 'state/ui/saga'
 import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetSymbols, getAffiliatesEarnings } from './selectors'
 
 const TYPE = queryTypes.MENU_AFFILIATES_EARNINGS
-const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqLedgers({
   smallestMts,
@@ -43,7 +43,8 @@ function getReqLedgers({
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchAffiliatesEarnings() {
+function* fetchAffiliatesEarnings({ payload }) {
+  const { nextFetch = false } = payload
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
@@ -51,26 +52,32 @@ function* fetchAffiliatesEarnings() {
       return yield put(actions.updateAffiliatesEarnings())
     }
 
-    const targetSymbols = yield select(getTargetSymbols)
+    const { entries, targetSymbols } = yield select(getAffiliatesEarnings)
+    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
+    const queryLimit = yield select(getTargetQueryLimit, TYPE)
+    // data exist, no need to fetch again
+    if (nextFetch && entries.length - queryLimit >= offset) {
+      return undefined
+    }
+
     const query = yield select(getQuery)
-    const getQueryLimit = yield select(getTargetQueryLimit)
     const filter = yield select(getFilterQuery, TYPE)
-    const queryLimit = getQueryLimit(TYPE)
     const { result: resulto, error: erroro } = yield call(getReqLedgers, {
-      smallestMts: 0,
+      smallestMts,
       query,
       targetSymbols,
       filter,
       queryLimit,
     })
     const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqLedgers, {
-      smallestMts: 0,
+      smallestMts,
       query,
       targetSymbols,
       filter,
       queryLimit,
     })
-    yield put(actions.updateAffiliatesEarnings(result, queryLimit, PAGE_SIZE))
+    yield put(actions.updateAffiliatesEarnings(result))
+    yield put(updatePagination(TYPE, result, queryLimit))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -88,52 +95,8 @@ function* fetchAffiliatesEarnings() {
   }
 }
 
-function* fetchNextAffiliatesEarnings() {
-  try {
-    const {
-      entries,
-      offset,
-      smallestMts,
-      targetSymbols,
-    } = yield select(getAffiliatesEarnings)
-    const filter = yield select(getFilterQuery, TYPE)
-    const getQueryLimit = yield select(getTargetQueryLimit)
-    const queryLimit = getQueryLimit(TYPE)
-    // data exist, no need to fetch again
-    if (entries.length - queryLimit >= offset) {
-      return
-    }
-    const query = yield select(getQuery)
-    const { result: resulto, error: erroro } = yield call(getReqLedgers, {
-      smallestMts,
-      query,
-      targetSymbols,
-      filter,
-      queryLimit,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqLedgers, {
-      smallestMts,
-      query,
-      targetSymbols,
-      filter,
-      queryLimit,
-    })
-    yield put(actions.updateAffiliatesEarnings(result, queryLimit, PAGE_SIZE))
-
-    if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'affiliatesearnings.title',
-        detail: JSON.stringify(error),
-      }))
-    }
-  } catch (fail) {
-    yield put(actions.fetchFail({
-      id: 'status.request.error',
-      topic: 'affiliatesearnings.title',
-      detail: JSON.stringify(fail),
-    }))
-  }
+function* refreshAffiliatesEarnings() {
+  yield put(refreshPagination(TYPE))
 }
 
 function* fetchAffiliatesEarningsFail({ payload }) {
@@ -142,6 +105,6 @@ function* fetchAffiliatesEarningsFail({ payload }) {
 
 export default function* affiliatesEarningsSaga() {
   yield takeLatest(types.FETCH_AFFILIATES_EARNINGS, fetchAffiliatesEarnings)
-  yield takeLatest(types.FETCH_NEXT_AFFILIATES_EARNINGS, fetchNextAffiliatesEarnings)
+  yield takeLatest(types.REFRESH, refreshAffiliatesEarnings)
   yield takeLatest(types.FETCH_FAIL, fetchAffiliatesEarningsFail)
 }

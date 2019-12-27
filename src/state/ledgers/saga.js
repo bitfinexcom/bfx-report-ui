@@ -11,16 +11,16 @@ import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
 import { getFilterQuery } from 'state/filters/selectors'
-import { getPageSize } from 'state/query/utils'
+import { refreshPagination, updatePagination } from 'state/pagination/actions'
+import { getPaginationData } from 'state/pagination/selectors'
 import { fetchNext } from 'state/sagas.helper'
 import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetSymbols, getLedgers } from './selectors'
+import { getLedgers } from './selectors'
 
 const TYPE = queryTypes.MENU_LEDGERS
-const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqLedgers({
   smallestMts,
@@ -41,65 +41,27 @@ function getReqLedgers({
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchLedgers() {
+function* fetchLedgers({ payload }) {
+  const { nextFetch = false } = payload
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateLedgers())
+    if (!nextFetch) {
+      const shouldProceed = yield call(frameworkCheck)
+      if (!shouldProceed) {
+        // stop loading for first request
+        return yield put(actions.updateLedgers())
+      }
     }
-    const targetSymbols = yield select(getTargetSymbols)
-    const query = yield select(getQuery)
-    const getQueryLimit = yield select(getTargetQueryLimit)
-    const filter = yield select(getFilterQuery, TYPE)
-    const queryLimit = getQueryLimit(TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqLedgers, {
-      smallestMts: 0,
-      query,
-      targetSymbols,
-      filter,
-      queryLimit,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqLedgers, {
-      smallestMts: 0,
-      query,
-      targetSymbols,
-      filter,
-      queryLimit,
-    })
-    yield put(actions.updateLedgers(result, queryLimit, PAGE_SIZE))
 
-    if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'ledgers.title',
-        detail: JSON.stringify(error),
-      }))
-    }
-  } catch (fail) {
-    yield put(actions.fetchFail({
-      id: 'status.request.error',
-      topic: 'ledgers.title',
-      detail: JSON.stringify(fail),
-    }))
-  }
-}
-
-function* fetchNextLedgers() {
-  try {
-    const {
-      entries,
-      offset,
-      smallestMts,
-      targetSymbols,
-    } = yield select(getLedgers)
+    const { entries, targetSymbols } = yield select(getLedgers)
     const filter = yield select(getFilterQuery, TYPE)
-    const getQueryLimit = yield select(getTargetQueryLimit)
-    const queryLimit = getQueryLimit(TYPE)
+    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
+    const queryLimit = yield select(getTargetQueryLimit, TYPE)
+
     // data exist, no need to fetch again
-    if (entries.length - queryLimit >= offset) {
-      return
+    if (nextFetch && entries.length - queryLimit >= offset) {
+      return undefined
     }
+
     const query = yield select(getQuery)
     const { result: resulto = {}, error: erroro } = yield call(getReqLedgers, {
       smallestMts,
@@ -115,7 +77,8 @@ function* fetchNextLedgers() {
       filter,
       queryLimit,
     })
-    yield put(actions.updateLedgers(result, queryLimit, PAGE_SIZE))
+    yield put(actions.updateLedgers(result, queryLimit))
+    yield put(updatePagination(TYPE, result, queryLimit))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -133,12 +96,16 @@ function* fetchNextLedgers() {
   }
 }
 
+function* refreshLedgers() {
+  yield put(refreshPagination(TYPE))
+}
+
 function* fetchLedgersFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
 export default function* ledgersSaga() {
   yield takeLatest(types.FETCH_LEDGERS, fetchLedgers)
-  yield takeLatest(types.FETCH_NEXT_LEDGERS, fetchNextLedgers)
+  yield takeLatest(types.REFRESH, refreshLedgers)
   yield takeLatest(types.FETCH_FAIL, fetchLedgersFail)
 }

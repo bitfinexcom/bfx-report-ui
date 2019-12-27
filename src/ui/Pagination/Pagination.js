@@ -4,7 +4,6 @@ import { Button, Spinner } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
 import QueryLimitSelector from 'ui/QueryLimitSelector'
-import { isValidateType } from 'state/utils'
 import { canChangeQueryLimit, getPageSize } from 'state/query/utils'
 
 import { propTypes, defaultProps } from './Pagination.props'
@@ -20,60 +19,57 @@ class Pagination extends PureComponent {
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      const { getQueryLimit, jumpPage, type } = this.props
-      const limit = getQueryLimit(type)
+      const { jumpPage, target, limit } = this.props
       const pageLen = parseInt(this.pageInput.current.dataset.pagelen || 1, 10)
       const page = Math.abs(parseInt(this.pageInput.current.value || 1, 10))
-      jumpPage(page < pageLen ? page : pageLen, limit)
+      jumpPage(target, page < pageLen ? page : pageLen, limit)
     }
   }
 
   backward = () => {
-    const { getQueryLimit, jumpPage, type } = this.props
+    const { target, limit, jumpPage } = this.props
     const page = this.getCurrentPage()
-    const limit = getQueryLimit(type)
-    jumpPage(page - 1, limit)
+    jumpPage(target, page - 1, limit)
   }
 
   forward = () => {
-    const { getQueryLimit, jumpPage, type } = this.props
+    const { target, limit, jumpPage } = this.props
     const page = this.getCurrentPage()
-    const limit = getQueryLimit(type)
-    jumpPage(page + 1, limit)
+    jumpPage(target, page + 1, limit)
+  }
+
+  fetchPrev = () => {
+    const { target, limit, fetchPrev } = this.props
+    fetchPrev(target, limit)
   }
 
   fetchNext = () => {
-    const { getQueryLimit, nextClick, type } = this.props
-    const limit = getQueryLimit(type)
-    nextClick(limit)
+    const { target, limit, fetchNext } = this.props
+    fetchNext(target, limit)
   }
 
   render() {
     const {
-      dataLen,
-      getQueryLimit,
+      entriesSize,
+      limit,
       loading,
       nextPage = false,
       offset,
-      prevClick,
       pageOffset,
       t,
-      type,
+      target,
     } = this.props
-    if (!isValidateType(type)) {
-      return ''
-    }
-    const LIMIT = getQueryLimit(type)
-    const PAGE_SIZE = getPageSize(type)
-    const PAGE_GAP = LIMIT / PAGE_SIZE
-    const pageLen = Math.ceil(dataLen / PAGE_SIZE)
+
+    const PAGE_SIZE = getPageSize(target)
+    const PAGE_GAP = limit / PAGE_SIZE
+    const pageLen = Math.ceil(entriesSize / PAGE_SIZE)
     let pageBase
-    if (offset < LIMIT) {
+    if (offset < limit) {
       pageBase = 0
-    } else if (offset % LIMIT === 0) {
-      pageBase = (offset - LIMIT) / LIMIT * PAGE_GAP
+    } else if (offset % limit === 0) {
+      pageBase = (offset - limit) / limit * PAGE_GAP
     } else {
-      pageBase = Math.floor(offset / LIMIT) * PAGE_GAP
+      pageBase = Math.floor(offset / limit) * PAGE_GAP
     }
     const currentPageBase = (pageBase % PAGE_GAP === 0)
       ? pageBase + 1 : pageBase
@@ -104,8 +100,8 @@ class Pagination extends PureComponent {
             minimal
             className='pagination-icon'
             icon={IconNames.DOUBLE_CHEVRON_LEFT}
-            onClick={prevClick}
-            disabled={offset <= LIMIT || loading}
+            onClick={this.fetchPrev}
+            disabled={offset <= limit || loading}
           />
           <Button
             minimal
@@ -141,7 +137,7 @@ class Pagination extends PureComponent {
             onClick={this.fetchNext}
             disabled={!nextPage || loading}
           />
-          {canChangeQueryLimit(type) && <QueryLimitSelector target={type} />}
+          {canChangeQueryLimit(target) && <QueryLimitSelector target={target} />}
           {renderLoading}
         </div>
       </div>

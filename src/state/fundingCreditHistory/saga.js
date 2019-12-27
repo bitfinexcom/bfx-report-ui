@@ -10,17 +10,18 @@ import { formatRawSymbols, mapRequestSymbols } from 'state/symbols/utils'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
+import { refreshPagination, updatePagination } from 'state/pagination/actions'
+import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
+import { getQueryLimit } from 'state/query/utils'
 import { fetchNext } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetSymbols, getFundingCreditHistory } from './selectors'
+import { getFundingCreditHistory } from './selectors'
 
 const TYPE = queryTypes.MENU_FCREDIT
 const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 function getReqFCredit({
   smallestMts,
@@ -37,51 +38,13 @@ function getReqFCredit({
   return makeFetchCall('getFundingCreditHistory', params)
 }
 
-function* fetchFCredit() {
+function* fetchFCredit({ payload }) {
+  const { nextFetch = false } = payload
   try {
-    const targetSymbols = yield select(getTargetSymbols)
-    const query = yield select(getQuery)
-    const filter = yield select(getFilterQuery, TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqFCredit, {
-      smallestMts: 0,
-      query,
-      targetSymbols,
-      filter,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFCredit, {
-      smallestMts: 0,
-      query,
-      targetSymbols,
-      filter,
-    })
-    yield put(actions.updateFCredit(result, LIMIT, PAGE_SIZE))
-
-    if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'fcredit.title',
-        detail: JSON.stringify(error),
-      }))
-    }
-  } catch (fail) {
-    yield put(actions.fetchFail({
-      id: 'status.request.error',
-      topic: 'fcredit.title',
-      detail: JSON.stringify(fail),
-    }))
-  }
-}
-
-function* fetchNextFCredit() {
-  try {
-    const {
-      offset,
-      entries,
-      smallestMts,
-      targetSymbols,
-    } = yield select(getFundingCreditHistory)
+    const { entries, targetSymbols } = yield select(getFundingCreditHistory)
+    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
     // data exist, no need to fetch again
-    if (entries.length - LIMIT >= offset) {
+    if (nextFetch && entries.length - LIMIT >= offset) {
       return
     }
     const query = yield select(getQuery)
@@ -98,7 +61,8 @@ function* fetchNextFCredit() {
       targetSymbols,
       filter,
     })
-    yield put(actions.updateFCredit(result, LIMIT, PAGE_SIZE))
+    yield put(actions.updateFCredit(result))
+    yield put(updatePagination(TYPE, result, LIMIT))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -116,12 +80,16 @@ function* fetchNextFCredit() {
   }
 }
 
+function* refreshFCredit() {
+  yield put(refreshPagination(TYPE))
+}
+
 function* fetchFCreditFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
-export default function* ordersSaga() {
+export default function* fundingCreditHistorySaga() {
   yield takeLatest(types.FETCH_FCREDIT, fetchFCredit)
-  yield takeLatest(types.FETCH_NEXT_FCREDIT, fetchNextFCredit)
+  yield takeLatest(types.REFRESH, refreshFCredit)
   yield takeLatest(types.FETCH_FAIL, fetchFCreditFail)
 }

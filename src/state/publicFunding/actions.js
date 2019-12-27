@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch public Funding data.
+ * @param {Object} options
  */
-export function fetchPublicFunding() {
+export function fetchPublicFunding(options = {}) {
   return {
     type: types.FETCH_PUBLIC_FUNDING,
+    payload: options,
   }
 }
 
@@ -21,43 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to fetch next public Funding data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextPublicFunding(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_PUBLIC_FUNDING,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev public Funding data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevPublicFunding(queryLimit) {
-  return {
-    type: types.FETCH_PREV_PUBLIC_FUNDING,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific public Funding page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_PUBLIC_FUNDING_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh public Funding.
  */
 export function refresh() {
@@ -69,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update public Funding.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updatePublicFunding(data, limit, pageSize) {
+export function updatePublicFunding(data) {
   return {
     type: types.UPDATE_PUBLIC_FUNDING,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
@@ -97,9 +58,6 @@ export function setTargetSymbol(symbol) {
 export default {
   fetchFail,
   fetchPublicFunding,
-  fetchNextPublicFunding,
-  fetchPrevPublicFunding,
-  jumpPage,
   refresh,
   setTargetSymbol,
   updatePublicFunding,

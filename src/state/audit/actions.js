@@ -2,12 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Positions Audit data.
- * @param {string} ids id params from url
+ * @param {Object} options
  */
-export function fetchPAudit(ids) {
+export function fetchPAudit(options = {}) {
   return {
     type: types.FETCH_PAUDIT,
-    payload: ids,
+    payload: options,
   }
 }
 
@@ -23,43 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to fetch next Positions Audit data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextPAudit(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_PAUDIT,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Positions Audit data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevPAudit(queryLimit) {
-  return {
-    type: types.FETCH_PREV_PAUDIT,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Positions Audit page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_PAUDIT_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh Positions Audit.
  */
 export function refresh() {
@@ -71,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Positions Audit.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updatePAudit(data, limit, pageSize) {
+export function updatePAudit(data) {
   return {
     type: types.UPDATE_PAUDIT,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
@@ -122,9 +81,6 @@ export default {
   addTargetId,
   fetchFail,
   fetchPAudit,
-  fetchNextPAudit,
-  fetchPrevPAudit,
-  jumpPage,
   refresh,
   removeTargetId,
   setTargetIds,

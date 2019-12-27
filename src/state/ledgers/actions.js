@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Ledgers data.
+ * @param {Object} options
  */
-export function fetchLedgers() {
+export function fetchLedgers(options = {}) {
   return {
     type: types.FETCH_LEDGERS,
+    payload: options,
   }
 }
 
@@ -17,43 +19,6 @@ export function fetchFail(payload) {
   return {
     type: types.FETCH_FAIL,
     payload,
-  }
-}
-
-/**
- * Create an action to fetch next Ledgers data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextLedgers(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_LEDGERS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Ledgers data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevLedgers(queryLimit) {
-  return {
-    type: types.FETCH_PREV_LEDGERS,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Ledgers page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_LEDGERS_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
   }
 }
 
@@ -70,15 +35,13 @@ export function refresh() {
  * Create an action to update Ledgers.
  * @param {Object[]} data data set
  * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateLedgers(data, limit, pageSize) {
+export function updateLedgers(data, limit) {
   return {
     type: types.UPDATE_LEDGERS,
     payload: {
       data,
       limit,
-      pageSize,
     },
   }
 }
@@ -120,9 +83,6 @@ export default {
   addTargetSymbol,
   fetchFail,
   fetchLedgers,
-  fetchNextLedgers,
-  fetchPrevLedgers,
-  jumpPage,
   refresh,
   removeTargetSymbol,
   setTargetSymbols,

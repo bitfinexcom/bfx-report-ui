@@ -3,24 +3,18 @@ import { withRouter } from 'react-router-dom'
 
 import {
   fetchTrades,
-  fetchNextTrades,
-  fetchPrevTrades,
-  jumpPage,
   refresh,
   addTargetPair,
   removeTargetPair, setTargetPairs,
 } from 'state/trades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
-import { getTargetQueryLimit } from 'state/query/selectors'
+import { getFilteredEntries } from 'state/pagination/selectors'
 import {
   getDataReceived,
   getEntries,
   getExistingPairs,
-  getOffset,
-  getPageLoading,
   getPageOffset,
   getTargetPairs,
-  getNextPage,
 } from 'state/trades/selectors'
 import { getColumns } from 'state/filters/selectors'
 import queryConstants from 'state/query/constants'
@@ -29,24 +23,17 @@ import Trades from './Trades'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_TRADES),
-  entries: getEntries(state),
+  entries: getFilteredEntries(state, queryConstants.MENU_TRADES, getEntries(state)),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
-  getQueryLimit: getTargetQueryLimit(state),
   loading: !getDataReceived(state),
-  nextPage: getNextPage(state),
-  offset: getOffset(state),
   pageOffset: getPageOffset(state),
-  pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
   timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {
   fetchTrades,
-  fetchNext: fetchNextTrades,
-  fetchPrev: fetchPrevTrades,
-  jumpPage,
   refresh,
   addTargetPair,
   setTargetPairs,

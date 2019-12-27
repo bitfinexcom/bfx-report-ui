@@ -7,26 +7,19 @@ import {
   Elevation,
 } from '@blueprintjs/core'
 
-import Pagination from 'ui/Pagination'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import {
-  getQueryLimit,
-  getPath,
-  getPageSize,
-} from 'state/query/utils'
-import { checkFetch, getCurrentEntries } from 'state/utils'
+import { getPath } from 'state/query/utils'
+import { checkFetch } from 'state/utils'
 
 import getColumns from 'components/Positions/Positions.columns'
-import { propTypes, defaultProps } from 'components/Positions/Positions.props'
+import { propTypes, defaultProps } from './PositionsActive.props'
 
 const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
-const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 class PositionsActive extends PureComponent {
   componentDidMount() {
@@ -44,58 +37,33 @@ class PositionsActive extends PureComponent {
     e.preventDefault()
     const { history } = this.props
     const id = e.target.getAttribute('value')
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/`
-      + `${id}${history.location.search}`)
+    history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/${id}${history.location.search}`)
   }
 
   jumpToPositions = (e) => {
     e.preventDefault()
     const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS)}`
-      + `${history.location.search}`)
+    history.push(`${getPath(queryConstants.MENU_POSITIONS)}${history.location.search}`)
   }
 
   render() {
     const {
-      fetchNext,
-      fetchPrev,
       getFullTime,
-      offset,
-      pageOffset,
-      pageLoading,
       entries,
       handleClickExport,
-      jumpPage,
       loading,
       refresh,
       t,
-      nextPage,
       timeOffset,
     } = this.props
-    const filteredData = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const numRows = filteredData.length
     const tableColumns = getColumns({
       target: TYPE,
-      filteredData,
+      filteredData: entries,
       getFullTime,
       t,
       onIdClick: this.jumpToPositionsAudit,
       timeOffset,
     })
-
-    const renderPagination = (
-      <Pagination
-        type={TYPE}
-        dataLen={entries.length}
-        loading={pageLoading}
-        offset={offset}
-        jumpPage={jumpPage}
-        prevClick={fetchPrev}
-        nextClick={fetchNext}
-        pageOffset={pageOffset}
-        nextPage={nextPage}
-      />
-    )
 
     const renderButtonGroup = (
       <ButtonGroup>
@@ -109,7 +77,7 @@ class PositionsActive extends PureComponent {
       showContent = (
         <Loading title='positions.title' />
       )
-    } else if (numRows === 0) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -132,12 +100,10 @@ class PositionsActive extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderButtonGroup}
-          {renderPagination}
           <DataTable
-            numRows={numRows}
+            numRows={entries.length}
             tableColumns={tableColumns}
           />
-          {renderPagination}
         </Fragment>
       )
     }

@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch funding offer history data.
+ * @param {Object} options
  */
-export function fetchFOffer() {
+export function fetchFOffer(options = {}) {
   return {
     type: types.FETCH_FOFFER,
+    payload: options,
   }
 }
 
@@ -21,43 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to fetch next funding offer history data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextFOffer(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_FOFFER,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev funding offer history data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevFOffer(queryLimit) {
-  return {
-    type: types.FETCH_PREV_FOFFER,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific funding offer history page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_FOFFER_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh funding offer history.
  */
 export function refresh() {
@@ -69,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update funding offer history.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateFOffer(data, limit, pageSize) {
+export function updateFOffer(data) {
   return {
     type: types.UPDATE_FOFFER,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
@@ -120,9 +81,6 @@ export default {
   addTargetSymbol,
   fetchFail,
   fetchFOffer,
-  fetchNextFOffer,
-  fetchPrevFOffer,
-  jumpPage,
   refresh,
   removeTargetSymbol,
   setTargetSymbols,

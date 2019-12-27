@@ -8,10 +8,7 @@ import {
   addSymbol,
   baseSymbolState,
   fetchFail,
-  fetchNext,
-  fetchPrev,
-  getPageOffset,
-  jumpPage,
+  refresh,
   removeSymbol,
   setQueryLimit,
   setSymbols,
@@ -31,17 +28,15 @@ export function fpaymentReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_FPAYMENT: {
-      if (!_get(payload, ['data', 'res'])) {
+      const res = _get(payload, ['data', 'res'])
+      if (!res) {
         return {
           ...state,
           dataReceived: true,
         }
       }
-      const { data, limit, pageSize } = payload
-      const { res = [], nextPage } = data
       const { existingCoins } = state
       const updateCoins = [...existingCoins]
-      let smallestMts
       const entries = res.map((entry) => {
         const {
           amount,
@@ -59,10 +54,6 @@ export function fpaymentReducer(state = initialState, action) {
         if (updateCoins.indexOf(mappedCurrency) === -1) {
           updateCoins.push(mappedCurrency)
         }
-        // log smallest mts
-        if (nextPage === false && (!smallestMts || smallestMts > mts)) {
-          smallestMts = mts
-        }
         return {
           id,
           currency: mappedCurrency,
@@ -75,28 +66,17 @@ export function fpaymentReducer(state = initialState, action) {
           wallet,
         }
       })
-      const [offset, pageOffset] = getPageOffset(state, entries, limit, pageSize)
       return {
         ...state,
         currentEntriesSize: entries.length,
         dataReceived: true,
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
-        smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-        offset,
-        pageOffset,
         pageLoading: false,
-        nextPage,
       }
     }
     case types.FETCH_FAIL:
       return fetchFail(state)
-    case types.FETCH_NEXT_FPAYMENT:
-      return fetchNext(TYPE, state, payload)
-    case types.FETCH_PREV_FPAYMENT:
-      return fetchPrev(TYPE, state, payload)
-    case types.JUMP_FPAYMENT_PAGE:
-      return jumpPage(TYPE, state, payload)
     case types.ADD_SYMBOL:
       return addSymbol(state, payload, initialState)
     case types.REMOVE_SYMBOL:
@@ -104,6 +84,7 @@ export function fpaymentReducer(state = initialState, action) {
     case types.SET_SYMBOLS:
       return setSymbols(state, payload, initialState)
     case types.REFRESH:
+      return refresh(TYPE, state, initialState)
     case baseTypes.SET_QUERY_LIMIT:
       return setQueryLimit(TYPE, state, initialState)
     case queryTypes.SET_TIME_RANGE:

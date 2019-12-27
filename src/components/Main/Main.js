@@ -17,6 +17,7 @@ import Orders from 'components/Orders'
 import Positions from 'components/Positions'
 import PositionsActive from 'components/PositionsActive'
 import PositionsAudit from 'components/PositionsAudit'
+import PositionsAuditNoId from 'components/PositionsAudit/PositionsAudit.NoId'
 import PublicFunding from 'components/PublicFunding'
 import PublicTrades from 'components/PublicTrades'
 import Snapshots from 'components/Snapshots'
@@ -282,7 +283,7 @@ class Main extends PureComponent {
             <Route
               exact
               path={getPath(MENU_POSITIONS_AUDIT)}
-              render={() => <PositionsAudit handleClickExport={this.handleClickExport} noid />}
+              render={() => <PositionsAuditNoId />}
             />
             <Route
               path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}

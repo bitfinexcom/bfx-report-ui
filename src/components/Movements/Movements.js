@@ -1,9 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
@@ -15,13 +12,8 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getQueryLimit, getPageSize } from 'state/query/utils'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import {
-  checkFetch,
-  getCurrentEntries,
-  toggleSymbol,
-} from 'state/utils'
+import { checkFetch, toggleSymbol } from 'state/utils'
 
 import getColumns from './Movements.columns'
 import { propTypes, defaultProps } from './Movements.props'
@@ -29,8 +21,6 @@ import { propTypes, defaultProps } from './Movements.props'
 const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
 // we treat withdrawals and deposits in the same way
 const TYPE = queryConstants.MENU_MOVEMENTS
-const LIMIT = getQueryLimit(TYPE)
-const PAGE_SIZE = getPageSize(TYPE)
 
 class Movements extends PureComponent {
   componentDidMount() {
@@ -44,12 +34,12 @@ class Movements extends PureComponent {
       }
       fetchMovements()
     } else {
-      jumpPage(0, 25)
+      jumpPage(TYPE, 0, 25)
     }
   }
 
   componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, 'movements')
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   render() {
@@ -57,15 +47,9 @@ class Movements extends PureComponent {
       columns,
       entries,
       existingCoins,
-      fetchNext,
-      fetchPrev,
       getFullTime,
       handleClickExport,
-      jumpPage,
       loading,
-      nextPage,
-      offset,
-      pageOffset,
       pageLoading,
       refresh,
       t,
@@ -73,10 +57,9 @@ class Movements extends PureComponent {
       timeOffset,
       type,
     } = this.props
-    const currentEntries = getCurrentEntries(entries, offset, LIMIT, pageOffset, PAGE_SIZE)
-    const filteredData = currentEntries.filter(entry => (type === TYPE_WITHDRAWALS
+    const filteredData = entries.filter(entry => (type === TYPE_WITHDRAWALS
       ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
-    const numRows = filteredData.length
+
     const tableColumns = getColumns({
       filteredData,
       getFullTime,
@@ -95,27 +78,13 @@ class Movements extends PureComponent {
       </Fragment>
     )
 
-    const renderPagination = (
-      <Pagination
-        type={TYPE}
-        dataLen={entries.length}
-        loading={pageLoading}
-        offset={offset}
-        jumpPage={jumpPage}
-        prevClick={fetchPrev}
-        nextClick={fetchNext}
-        pageOffset={pageOffset}
-        nextPage={nextPage}
-      />
-    )
-
     const titleMsgId = type === TYPE_WITHDRAWALS ? 'withdrawals.title' : 'deposits.title'
     let showContent
     if (loading) {
       showContent = (
         <Loading title={titleMsgId} />
       )
-    } else if (currentEntries.length === 0) {
+    } else if (!filteredData.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -146,12 +115,12 @@ class Movements extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
-            numRows={numRows}
+            numRows={filteredData.length}
             tableColumns={tableColumns}
           />
-          {renderPagination}
+          <Pagination target={TYPE} loading={pageLoading} />
         </Fragment>
       )
     }

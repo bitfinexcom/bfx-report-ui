@@ -2,10 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Funding Payment data.
+ * @param {Object} options
  */
-export function fetchFPayment() {
+export function fetchFPayment(options = {}) {
   return {
     type: types.FETCH_FPAYMENT,
+    payload: options,
   }
 }
 
@@ -21,43 +23,6 @@ export function fetchFail(payload) {
 }
 
 /**
- * Create an action to fetch next Funding Payment data.
- * @param {number} queryLimit query limit
- */
-export function fetchNextFPayment(queryLimit) {
-  return {
-    type: types.FETCH_NEXT_FPAYMENT,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to fetch prev Funding Payment data.
- * @param {number} queryLimit query limit
- */
-export function fetchPrevFPayment(queryLimit) {
-  return {
-    type: types.FETCH_PREV_FPAYMENT,
-    payload: queryLimit,
-  }
-}
-
-/**
- * Create an action to jump to a specific Funding Payment page.
- * @param {number} page page number
- * @param {number} queryLimit query limit
- */
-export function jumpPage(page, queryLimit) {
-  return {
-    type: types.JUMP_FPAYMENT_PAGE,
-    payload: {
-      page,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to refresh Funding Payment.
  */
 export function refresh() {
@@ -69,16 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Funding Payment.
  * @param {Object[]} data data set
- * @param {number} limit query limit
- * @param {number} pageSize page size
  */
-export function updateFPayment(data, limit, pageSize) {
+export function updateFPayment(data) {
   return {
     type: types.UPDATE_FPAYMENT,
     payload: {
       data,
-      limit,
-      pageSize,
     },
   }
 }
@@ -120,9 +81,6 @@ export default {
   addTargetSymbol,
   fetchFail,
   fetchFPayment,
-  fetchNextFPayment,
-  fetchPrevFPayment,
-  jumpPage,
   refresh,
   removeTargetSymbol,
   setTargetSymbols,
