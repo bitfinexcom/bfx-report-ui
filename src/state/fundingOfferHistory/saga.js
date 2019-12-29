@@ -14,7 +14,7 @@ import { getPaginationData } from 'state/pagination/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit } from 'state/query/utils'
-import { fetchData } from 'state/sagas.helper'
+import { fetchDataWithPagination } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -44,7 +44,7 @@ function* fetchFOffer() {
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
-    const { result, error } = yield call(fetchData, getReqFOffer, {
+    const { result, error } = yield call(fetchDataWithPagination, getReqFOffer, {
       smallestMts,
       query,
       targetSymbols,

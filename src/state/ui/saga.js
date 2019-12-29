@@ -1,5 +1,5 @@
 import {
-  call, take, put, takeLatest,
+  call, take, put, select, takeLatest,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
 
@@ -15,7 +15,8 @@ import { platform } from 'var/config'
 import { LANGUAGES } from 'locales/i18n'
 
 import types from './constants'
-import { toggleFrameworkDialog } from './actions'
+import { toggleFrameworkDialog, togglePaginationDialog } from './actions'
+import selectors from './selectors'
 
 const { REACT_APP_ELECTRON } = process.env
 
@@ -70,6 +71,7 @@ function* uiLoaded() {
   }
 }
 
+// user confirmation for proceeding with framework request while not in sync
 export function* frameworkCheck() {
   if (!platform.showFrameworkMode || localStorage.getItem('isFrameworkDialogDisabled')) {
     return true
@@ -85,6 +87,21 @@ export function* frameworkCheck() {
     const disablingTime = new Date().getTime()
     localStorage.setItem('isFrameworkDialogDisabled', disablingTime)
   }
+
+  return shouldProceed
+}
+
+// user confirmation for proceeding with multiple consecutive empty search requests
+export function* paginationCheck(latestPaginationTimestamp) {
+  // handles pending late request from other section
+  const isPaginationDialogOpen = yield select(selectors.getIsPaginationDialogOpen)
+  if (isPaginationDialogOpen) {
+    return true
+  }
+
+  yield put(togglePaginationDialog(true, latestPaginationTimestamp))
+
+  const { payload: shouldProceed } = yield take(types.PROCEED_PAGINATION_REQUEST)
 
   return shouldProceed
 }

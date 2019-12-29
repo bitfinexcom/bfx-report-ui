@@ -294,7 +294,10 @@
   "pagination": {
     "page": "Page",
     "of": "of",
-    "loading": "loading..."
+    "loading": "loading...",
+    "no_results": "No results found",
+    "proceed": "Proceed search",
+    "last_data_timestamp": "Last data received dated: {{date}}"
   },
   "paudit": {
     "title": "Positions Audit",

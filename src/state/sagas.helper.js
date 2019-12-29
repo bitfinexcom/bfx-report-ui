@@ -1,25 +1,38 @@
 import { call } from 'redux-saga/effects'
+import _get from 'lodash/get'
 
-export function* fetchNext(result, error, func, options) {
-  if (result && result.res && result.res.length === 0 && result.nextPage) {
-    const args = {
-      ...options,
-      smallestMts: result.nextPage,
+import { paginationCheck } from 'state/ui/saga'
+
+import { PAGINATION_SEARCH_LIMIT } from 'var'
+
+const shouldFetchNext = ({ result }) => result && result.res && result.res.length === 0 && result.nextPage
+
+export function* fetchDataWithPagination(requestFunction, options) {
+  let requestsCounter = 0
+  let response
+
+  do {
+    const nextPage = _get(response, 'result.nextPage')
+    if (PAGINATION_SEARCH_LIMIT <= requestsCounter) {
+      const shouldProceed = yield call(paginationCheck, nextPage)
+      if (!shouldProceed) {
+        break
+      }
+      requestsCounter = 0
     }
-    const { result: result1 = {}, error: error1 } = yield call(func, args)
-    return yield call(fetchNext, result1, error1, func, args)
-  }
-  return { result, error }
-}
 
-export function* fetchData(requestFunction, options) {
-  const { result: res, error: err } = yield call(requestFunction, options)
-  const { result = {}, error } = yield call(fetchNext, res, err, requestFunction, options)
+    if (response) {
+      options.smallestMts = nextPage // eslint-disable-line no-param-reassign
+    }
 
+    response = yield call(requestFunction, options)
+    requestsCounter += 1
+  } while (shouldFetchNext(response))
+
+  const { result, error } = response
   return { result, error }
 }
 
 export default {
-  fetchData,
-  fetchNext,
+  fetchDataWithPagination,
 }

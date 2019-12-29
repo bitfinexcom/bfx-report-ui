@@ -5,6 +5,8 @@ import types from './constants'
 const initialState = {
   isCustomDialogOpen: false,
   isFrameworkDialogOpen: false,
+  isPaginationDialogOpen: false,
+  latestPaginationTimestamp: undefined,
   device: getDeviceType(),
 }
 
@@ -21,6 +23,15 @@ export function uiReducer(state = initialState, action) {
         ...state,
         isFrameworkDialogOpen: !state.isFrameworkDialogOpen,
       }
+    case types.TOGGLE_PAGINATION_DIALOG: {
+      const { isOpen, latestPaginationTimestamp } = payload
+
+      return {
+        ...state,
+        isPaginationDialogOpen: isOpen,
+        latestPaginationTimestamp,
+      }
+    }
     case types.UI_RESIZED:
       return {
         ...state,
