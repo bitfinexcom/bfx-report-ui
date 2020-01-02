@@ -182,7 +182,7 @@ class Main extends PureComponent {
             />
             <Route
               exact
-              path={`${getPath(MENU_ORDER_TRADES)}`}
+              path={getPath(MENU_ORDER_TRADES)}
               render={() => <OrderTrades handleClickExport={this.handleClickExport} />}
             />
             <Route
