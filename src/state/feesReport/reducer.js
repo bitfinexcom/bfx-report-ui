@@ -1,3 +1,5 @@
+import _map from 'lodash/map'
+
 import authTypes from 'state/auth/constants'
 import timeframeConstants from 'ui/TimeframeSelector/constants'
 import { getLastMonth } from 'state/utils'
@@ -34,7 +36,10 @@ export function feesReportReducer(state = initialState, action) {
         ...state,
         dataReceived: true,
         pageLoading: false,
-        entries: payload,
+        entries: _map(payload, entry => ({
+          ...entry,
+          USD: Math.abs(entry.USD),
+        })),
       }
     }
     case types.SET_PARAMS:
