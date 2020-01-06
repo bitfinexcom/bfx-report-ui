@@ -16,6 +16,7 @@ import { getParams as getAccountBalanceParams } from 'state/accountBalance/selec
 import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliatesEarnings/selectors'
 import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
+import { getParams as getFeesReportParams } from 'state/feesReport/selectors'
 import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
 import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
 import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/selectors'
@@ -53,6 +54,7 @@ const {
   MENU_AFFILIATES_EARNINGS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
+  MENU_FEES_REPORT,
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
@@ -143,6 +145,8 @@ function getSelector(target) {
       return getTaxReportParams
     case MENU_TRADED_VOLUME:
       return getTradedVolumeParams
+    case MENU_FEES_REPORT:
+      return getFeesReportParams
     case MENU_WALLETS:
       return getTimestamp
     case MENU_WIN_LOSS:
@@ -172,6 +176,7 @@ function formatSymbol(target, symbols) {
     case MENU_ORDERS:
     case MENU_TICKERS:
     case MENU_TRADED_VOLUME:
+    case MENU_FEES_REPORT:
     case MENU_TRADES:
     case MENU_POSITIONS:
     case MENU_POSITIONS_ACTIVE:
@@ -210,6 +215,7 @@ function* getOptions({ target, query }) {
       options.end = sign || undefined
       break
     case MENU_TRADED_VOLUME:
+    case MENU_FEES_REPORT:
       options.start = sign.start || undefined
       options.end = sign.end || undefined
       options.timeframe = sign.timeframe
@@ -296,6 +302,9 @@ function* getOptions({ target, query }) {
       break
     case MENU_TRADED_VOLUME:
       options.method = 'getTradedVolumeCsv'
+      break
+    case MENU_FEES_REPORT:
+      options.method = 'getFeesReportCsv'
       break
     case MENU_WALLETS:
       options.method = 'getWalletsCsv'
