@@ -1,6 +1,8 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import _get from 'lodash/get'
+import _isEqual from 'lodash/isEqual'
 
 import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
@@ -21,14 +23,14 @@ const TYPE = queryConstants.MENU_POSITIONS_AUDIT
 class PositionsAudit extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetIds, fetchPaudit, match,
+      loading, setTargetIds, fetchPaudit, match, targetIds,
     } = this.props
-    if (loading) {
-      const id = (match.params && match.params.id) || ''
-      if (id) {
-        setTargetIds(id.split(','))
-        fetchPaudit()
-      }
+    const ids = _get(match, 'params.id', '').split(',')
+
+    const isIdChanged = !_isEqual(ids, targetIds)
+    if (ids.length && (loading || isIdChanged)) {
+      setTargetIds(ids)
+      fetchPaudit()
     }
   }
 
