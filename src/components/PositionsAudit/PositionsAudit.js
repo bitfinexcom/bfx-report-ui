@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _get from 'lodash/get'
 import _isEqual from 'lodash/isEqual'
+import _sortBy from 'lodash/sortBy'
 
 import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
@@ -27,7 +28,7 @@ class PositionsAudit extends PureComponent {
     } = this.props
     const ids = _get(match, 'params.id', '').split(',')
 
-    const isIdChanged = !_isEqual(ids, targetIds)
+    const isIdChanged = !_isEqual(_sortBy(ids), _sortBy(targetIds))
     if (ids.length && (loading || isIdChanged)) {
       setTargetIds(ids)
       fetchPaudit()
