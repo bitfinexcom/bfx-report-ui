@@ -16,9 +16,7 @@ class MultiSymbolSelector extends PureComponent {
     if (!matchesPredicate) {
       return null
     }
-    const {
-      currencies, currentFilters, existingCoins, toggleSymbol,
-    } = this.props
+    const { currencies, currentFilters, existingCoins } = this.props
 
     const isCurrent = currentFilters.includes(symbol)
     const className = existingCoins.includes(symbol) && !isCurrent && !active
