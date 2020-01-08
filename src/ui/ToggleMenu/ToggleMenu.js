@@ -1,15 +1,11 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import {
-  Menu,
-  MenuDivider,
-  MenuItem,
-  Tooltip,
-} from '@blueprintjs/core'
+import { Menu, MenuDivider, MenuItem } from '@blueprintjs/core'
 import _castArray from 'lodash/castArray'
 import _includes from 'lodash/includes'
 
+import Tooltip from 'ui/Tooltip'
 import Timeframe from 'components/Timeframe'
 import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'

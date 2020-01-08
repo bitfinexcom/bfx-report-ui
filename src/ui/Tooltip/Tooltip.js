@@ -4,7 +4,12 @@ import { Tooltip as BptTooltip } from '@blueprintjs/core'
 import { propTypes, defaultProps } from './Tooltip.props'
 
 const Tooltip = (props) => {
-  const { content, className, children } = props
+  const {
+    content,
+    className,
+    children,
+    ...additionalProps
+  } = props
 
   if (!content || !children) {
     return children
@@ -14,6 +19,7 @@ const Tooltip = (props) => {
     <BptTooltip
       content={content}
       className={className}
+      {...additionalProps}
     >
       {children}
     </BptTooltip>
