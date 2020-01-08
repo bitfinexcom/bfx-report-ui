@@ -12,6 +12,7 @@ import affiliatesEarningsReducer from './affiliatesEarnings/reducer'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import derivativesReducer from './derivatives/reducer'
+import feesReportReducer from './feesReport/reducer'
 import filtersReducer from './filters/reducer'
 import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
 import fundingLoanHistoryReducer from './fundingLoanHistory/reducer'
@@ -77,7 +78,6 @@ const BASE_REDUCERS = {
   routing: routingReducer,
   query: queryReducer,
   tickers: tickersReducer,
-  tradedVolume: tradedVolumeReducer,
   trades: tradesReducer,
   status: statusReducer,
   symbols: symbolsReducer,
@@ -89,6 +89,8 @@ const FRAMEWORK_REDUCERS = {
   affiliatesEarnings: affiliatesEarningsReducer,
   fpayment: fundingPaymentReducer,
   balance: accountBalanceReducer,
+  tradedVolume: tradedVolumeReducer,
+  feesReport: feesReportReducer,
   winLoss: winLossReducer,
   snapshots: snapshotsReducer,
   sync: syncReducer,

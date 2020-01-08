@@ -16,21 +16,6 @@ export function fetchNext(section, queryLimit) {
 }
 
 /**
- * Create an action to fetch prev data.
- * @param {string} section
- * @param {number} queryLimit
- */
-export function fetchPrev(section, queryLimit) {
-  return {
-    type: types.FETCH_PREV,
-    payload: {
-      section,
-      queryLimit,
-    },
-  }
-}
-
-/**
  * Create an action to jump to a specific page.
  * @param {string} section
  * @param {number} page page number
@@ -77,7 +62,6 @@ export function updatePagination(section, data, queryLimit) {
 
 export default {
   fetchNext,
-  fetchPrev,
   jumpPage,
   refreshPagination,
   updatePagination,

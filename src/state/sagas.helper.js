@@ -12,6 +12,14 @@ export function* fetchNext(result, error, func, options) {
   return { result, error }
 }
 
+export function* fetchData(requestFunction, options) {
+  const { result: res, error: err } = yield call(requestFunction, options)
+  const { result = {}, error } = yield call(fetchNext, res, err, requestFunction, options)
+
+  return { result, error }
+}
+
 export default {
+  fetchData,
   fetchNext,
 }

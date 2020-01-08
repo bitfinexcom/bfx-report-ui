@@ -11,6 +11,7 @@ import {
   getDataReceived,
   getEntries,
   getPageLoading,
+  getTargetIds,
 } from 'state/audit/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import queryConstants from 'state/query/constants'
@@ -20,6 +21,7 @@ import PositionsAudit from './PositionsAudit'
 const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_POSITIONS_AUDIT, getEntries(state)),
   getFullTime: getFullTime(state),
+  targetIds: getTargetIds(state),
   loading: !getDataReceived(state),
   pageLoading: getPageLoading(state),
   timeOffset: getTimeOffset(state),

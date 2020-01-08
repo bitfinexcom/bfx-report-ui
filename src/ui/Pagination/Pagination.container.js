@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { getTargetQueryLimit } from 'state/query/selectors'
 import { getPaginationData } from 'state/pagination/selectors'
-import { jumpPage, fetchNext, fetchPrev } from 'state/pagination/actions'
+import { jumpPage, fetchNext } from 'state/pagination/actions'
 
 import Pagination from './Pagination'
 
@@ -14,7 +14,6 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = {
   jumpPage,
   fetchNext,
-  fetchPrev,
 }
 
 const PaginationContainer = connect(mapStateToProps, mapDispatchToProps)(Pagination)

@@ -15,7 +15,7 @@ import { updateErrorStatus } from 'state/status/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import queryTypes from 'state/query/constants'
-import { fetchNext } from 'state/sagas.helper'
+import { fetchData } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -55,14 +55,7 @@ function* fetchOrders({ payload }) {
 
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqOrders, {
-      smallestMts,
-      query,
-      targetPairs,
-      filter,
-      queryLimit,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqOrders, {
+    const { result, error } = yield call(fetchData, getReqOrders, {
       smallestMts,
       query,
       targetPairs,

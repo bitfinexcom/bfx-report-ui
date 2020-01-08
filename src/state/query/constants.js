@@ -5,6 +5,7 @@ export default {
   MENU_DEPOSITS: 'deposits',
   MENU_DERIVATIVES: 'derivatives',
   MENU_FCREDIT: 'fcredit',
+  MENU_FEES_REPORT: 'feesreport',
   MENU_FLOAN: 'floan',
   MENU_FOFFER: 'foffer',
   MENU_FPAYMENT: 'fpayment',

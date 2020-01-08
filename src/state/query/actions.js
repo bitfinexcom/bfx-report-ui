@@ -4,17 +4,6 @@ import types from './constants'
 import { isValidTimeStamp } from './utils'
 
 /**
- * Create an action to set query limit.
- *  @param {integer} size query limit
- */
-export function setQueryLimit(size) {
-  return {
-    type: types.SET_QUERY_LIMIT,
-    payload: size,
-  }
-}
-
-/**
  * Create an action to set time type.
  * @param {integer} type show as local or GMT time
  */
@@ -106,7 +95,6 @@ export default {
   setExportEmail,
   setOwnerEmail,
   setCustomTimeRange,
-  setQueryLimit,
   setTimeType,
   setTimeRange,
 }

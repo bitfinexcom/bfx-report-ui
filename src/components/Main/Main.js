@@ -6,6 +6,7 @@ import AffiliatesEarnings from 'components/AffiliatesEarnings'
 import AverageWinLoss from 'components/AverageWinLoss'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import Derivatives from 'components/Derivatives'
+import FeesReport from 'components/FeesReport'
 import FrameworkDialog from 'components/FrameworkDialog'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
@@ -42,6 +43,7 @@ const {
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
+  MENU_FEES_REPORT,
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
@@ -330,6 +332,10 @@ class Main extends PureComponent {
                 <Route
                   path={[getPath(MENU_TRADED_VOLUME), `${getPath(MENU_TRADED_VOLUME)}/:pair`]}
                   render={() => <TradedVolume handleClickExport={this.handleClickExport} />}
+                />
+                <Route
+                  path={[getPath(MENU_FEES_REPORT), `${getPath(MENU_FEES_REPORT)}/:pair`]}
+                  render={() => <FeesReport handleClickExport={this.handleClickExport} />}
                 />
                 <Route
                   exact

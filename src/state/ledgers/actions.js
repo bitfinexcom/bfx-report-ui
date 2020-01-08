@@ -34,14 +34,12 @@ export function refresh() {
 /**
  * Create an action to update Ledgers.
  * @param {Object[]} data data set
- * @param {number} limit query limit
  */
-export function updateLedgers(data, limit) {
+export function updateLedgers(data) {
   return {
     type: types.UPDATE_LEDGERS,
     payload: {
       data,
-      limit,
     },
   }
 }

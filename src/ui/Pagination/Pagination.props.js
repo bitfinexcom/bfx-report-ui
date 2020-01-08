@@ -7,7 +7,6 @@ export const propTypes = {
   jumpPage: PropTypes.func,
   offset: PropTypes.number.isRequired,
   fetchNext: PropTypes.func.isRequired,
-  fetchPrev: PropTypes.func.isRequired,
   pageOffset: PropTypes.number.isRequired,
   t: PropTypes.func.isRequired,
   nextPage: PropTypes.oneOfType([

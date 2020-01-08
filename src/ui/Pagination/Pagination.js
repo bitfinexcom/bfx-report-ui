@@ -38,9 +38,9 @@ class Pagination extends PureComponent {
     jumpPage(target, page + 1, limit)
   }
 
-  fetchPrev = () => {
-    const { target, limit, fetchPrev } = this.props
-    fetchPrev(target, limit)
+  jumpToFirstPage = () => {
+    const { target, limit, jumpPage } = this.props
+    jumpPage(target, 1, limit)
   }
 
   fetchNext = () => {
@@ -100,8 +100,8 @@ class Pagination extends PureComponent {
             minimal
             className='pagination-icon'
             icon={IconNames.DOUBLE_CHEVRON_LEFT}
-            onClick={this.fetchPrev}
-            disabled={offset <= limit || loading}
+            onClick={this.jumpToFirstPage}
+            disabled={currentPage === 1 || loading}
           />
           <Button
             minimal

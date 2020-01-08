@@ -15,6 +15,7 @@ const {
   MENU_DEPOSITS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
+  MENU_FEES_REPORT,
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
@@ -43,6 +44,7 @@ export const TYPE_WHITELIST = [
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
+  MENU_FEES_REPORT,
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
@@ -71,6 +73,7 @@ export const ROUTE_WHITELIST = [
   MENU_DEPOSITS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
+  MENU_FEES_REPORT,
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
@@ -121,6 +124,10 @@ const BASIC_TARGETS = [
   MENU_POSITIONS_ACTIVE,
   // MENU_POSITIONS_AUDIT, // needs specific id
   MENU_WALLETS,
+  MENU_TRADED_VOLUME,
+  MENU_FEES_REPORT,
+  MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
 ]
 // MENU_FPAYMENT and MENU_AFFILIATES_EARNINGS only for framework mode
 const FUNDING_TARGETS = platform.showFrameworkMode ? [
@@ -159,6 +166,7 @@ export const ORDERED_TARGETS = [
 export const NO_QUERY_LIMIT_TARGETS = [
   MENU_ORDER_TRADES,
   MENU_DERIVATIVES,
+  MENU_FEES_REPORT,
   MENU_WALLETS,
   MENU_SNAPSHOTS,
   MENU_TRADED_VOLUME,
@@ -195,6 +203,10 @@ const MAPPING = {
     queryLimit: 500,
     pageSize: 125,
   },
+  [MENU_FEES_REPORT]: {
+    icon: IconNames.CHART,
+    path: '/fees_report',
+  },
   [MENU_FLOAN]: {
     icon: IconNames.BOOK,
     path: '/loans',
@@ -225,7 +237,7 @@ const MAPPING = {
   },
   [MENU_LEDGERS]: {
     icon: IconNames.BOOK,
-    path: '/ledgers',
+    path: ['/', '/ledgers'],
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
     pageSize: 125,
