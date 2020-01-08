@@ -23,6 +23,7 @@ import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/sel
 import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
+import { getParams as getOrderTradesParams } from 'state/orderTrades/selectors'
 import { getTargetPairs as getTickersPairs } from 'state/tickers/selectors'
 import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
 import { getTargetSymbol as getPublicTradesSymbol } from 'state/publicFunding/selectors'
@@ -60,6 +61,7 @@ const {
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_ORDERS,
+  MENU_ORDER_TRADES,
   MENU_TICKERS,
   MENU_TRADES,
   MENU_DEPOSITS,
@@ -124,6 +126,8 @@ function getSelector(target) {
       return getLedgersSymbols
     case MENU_ORDERS:
       return getOrdersPairs
+    case MENU_ORDER_TRADES:
+      return getOrderTradesParams
     case MENU_WITHDRAWALS:
     case MENU_DEPOSITS:
       return getMovementsSymbols
@@ -174,6 +178,7 @@ function formatSymbol(target, symbols) {
     // sections with pairs
     case MENU_DERIVATIVES:
     case MENU_ORDERS:
+    case MENU_ORDER_TRADES:
     case MENU_TICKERS:
     case MENU_TRADED_VOLUME:
     case MENU_FEES_REPORT:
@@ -213,6 +218,10 @@ function* getOptions({ target, query }) {
     case MENU_WALLETS:
     case MENU_SNAPSHOTS:
       options.end = sign || undefined
+      break
+    case MENU_ORDER_TRADES:
+      options.symbol = formatSymbol(target, sign.targetPair)
+      options.id = sign.id
       break
     case MENU_TRADED_VOLUME:
     case MENU_FEES_REPORT:
@@ -264,6 +273,9 @@ function* getOptions({ target, query }) {
       break
     case MENU_ORDERS:
       options.method = 'getOrdersCsv'
+      break
+    case MENU_ORDER_TRADES:
+      options.method = 'getOrderTradesCsv'
       break
     case MENU_TICKERS:
       options.method = 'getTickersHistoryCsv'

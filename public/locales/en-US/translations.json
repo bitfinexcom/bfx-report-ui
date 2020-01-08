@@ -276,6 +276,13 @@
       "typeprev": "PREVIOUS ORDER TYPE"
     }
   },
+  "ordertrades": {
+    "title": "Order Trades",
+    "noid": {
+      "title": "No Order ID",
+      "description": "Please select from the Orders page to query the Orders changelog by ID."
+    }
+  },
   "pagination": {
     "page": "Page",
     "of": "of",

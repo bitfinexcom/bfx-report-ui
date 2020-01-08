@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import {
   Cell,
   TruncatedFormat,
@@ -11,6 +11,7 @@ export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
+    onIdClick,
     t,
     timeOffset,
   } = props
@@ -21,12 +22,16 @@ export default function getColumns(props) {
       name: 'column.id',
       width: COLUMN_WIDTHS.ORDER_ID,
       renderer: (rowIndex) => {
-        const { id } = filteredData[rowIndex]
+        const { id, pair } = filteredData[rowIndex]
+        /* eslint-disable jsx-a11y/anchor-is-valid */
         return (
           <Cell tooltip={id}>
-            {id}
+            <Fragment>
+              <a href='#' onClick={e => onIdClick(e, { id, pair })}>{id}</a>
+            </Fragment>
           </Cell>
         )
+        /* eslint-enable jsx-a11y/anchor-is-valid */
       },
       copyText: rowIndex => filteredData[rowIndex].id,
     },

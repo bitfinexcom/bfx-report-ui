@@ -15,6 +15,7 @@ import FundingPayment from 'components/FundingPayment'
 import Ledgers from 'components/Ledgers'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
+import OrderTrades from 'components/OrderTrades'
 import Positions from 'components/Positions'
 import PositionsActive from 'components/PositionsActive'
 import PositionsAudit from 'components/PositionsAudit'
@@ -48,6 +49,7 @@ const {
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_ORDERS,
+  MENU_ORDER_TRADES,
   MENU_TRADES,
   MENU_DEPOSITS,
   MENU_WITHDRAWALS,
@@ -179,6 +181,15 @@ class Main extends PureComponent {
             <Route
               path={`${getPath(MENU_ORDERS)}/:pair`}
               render={() => <Orders handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              exact
+              path={getPath(MENU_ORDER_TRADES)}
+              render={() => <OrderTrades handleClickExport={this.handleClickExport} />}
+            />
+            <Route
+              path={`${getPath(MENU_ORDER_TRADES)}/:pair`}
+              render={() => <OrderTrades handleClickExport={this.handleClickExport} />}
             />
             <Route
               exact

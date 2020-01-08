@@ -33,6 +33,7 @@ const {
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_ORDERS,
+  MENU_ORDER_TRADES,
   MENU_TICKERS,
   MENU_TRADES,
   MENU_POSITIONS,
@@ -56,7 +57,7 @@ class ToggleMenu extends PureComponent {
   sections = [
     [MENU_LEDGERS, 'ledgers.title'],
     [MENU_TRADES, 'trades.title'],
-    [MENU_ORDERS, 'orders.title'],
+    [[MENU_ORDERS, MENU_ORDER_TRADES], 'orders.title'],
     [MENU_DEPOSITS, 'deposits.title'],
     [MENU_WITHDRAWALS, 'withdrawals.title'],
     [[MENU_POSITIONS, MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT], 'positions.title'],

@@ -1,5 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
+import queryString from 'query-string'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
@@ -13,8 +14,9 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
+import { getMappedSymbolsFromUrl, mapRequestPairs } from 'state/symbols/utils'
 import { checkFetch, togglePair } from 'state/utils'
+import { getPath } from 'state/query/utils'
 
 import getColumns from './Orders.columns'
 import { propTypes, defaultProps } from './Orders.props'
@@ -39,6 +41,20 @@ class Orders extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
+  jumpToOrderTrades = (e, { id, pair }) => {
+    e.preventDefault()
+    const { history, location } = this.props
+    const params = queryString.parse(location.search)
+    const search = queryString.stringify({ ...params, orderId: id })
+
+    const demappedPair = mapRequestPairs(pair, true)
+
+    history.push({
+      pathname: `${getPath(queryConstants.MENU_ORDER_TRADES)}/${demappedPair}`,
+      search,
+    })
+  }
+
   render() {
     const {
       columns,
@@ -55,6 +71,7 @@ class Orders extends PureComponent {
     const tableColumns = getColumns({
       filteredData: entries,
       getFullTime,
+      onIdClick: this.jumpToOrderTrades,
       t,
       timeOffset,
     }).filter(({ id }) => columns[id])
