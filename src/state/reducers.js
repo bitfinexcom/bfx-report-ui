@@ -19,6 +19,7 @@ import fundingLoanHistoryReducer from './fundingLoanHistory/reducer'
 import fundingOfferHistoryReducer from './fundingOfferHistory/reducer'
 import fundingPaymentReducer from './fundingPayment/reducer'
 import ledgersReducer from './ledgers/reducer'
+import loanReportReducer from './loanReport/reducer'
 import movementsReducer from './movements/reducer'
 import ordersReducer from './orders/reducer'
 import orderTradesReducer from './orderTrades/reducer'
@@ -89,6 +90,7 @@ const FRAMEWORK_REDUCERS = {
   affiliatesEarnings: affiliatesEarningsReducer,
   fpayment: fundingPaymentReducer,
   balance: accountBalanceReducer,
+  loanReport: loanReportReducer,
   tradedVolume: tradedVolumeReducer,
   feesReport: feesReportReducer,
   winLoss: winLossReducer,
