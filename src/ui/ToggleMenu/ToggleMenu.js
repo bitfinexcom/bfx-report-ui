@@ -93,6 +93,7 @@ class ToggleMenu extends PureComponent {
       pathname: path,
       search: history.location.search,
     })
+    window.scrollTo(0, 0) // scroll to the top of page on section change
   }
 
   /* eslint-disable react/no-array-index-key */
