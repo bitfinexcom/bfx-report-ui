@@ -11,7 +11,7 @@ import { propTypes, defaultProps } from './MultiSymbolSelector.props'
 class MultiSymbolSelector extends PureComponent {
   filterSymbol = (query, coin) => coin.toUpperCase().indexOf(query.toUpperCase()) >= 0
 
-  renderSymbol = (symbol, { modifiers }) => {
+  renderSymbol = (symbol, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
       return null
@@ -32,7 +32,7 @@ class MultiSymbolSelector extends PureComponent {
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={disabled}
         key={symbol}
-        onClick={() => toggleSymbol(symbol)}
+        onClick={handleClick}
         text={symbol}
         label={currencies[symbol]}
       />

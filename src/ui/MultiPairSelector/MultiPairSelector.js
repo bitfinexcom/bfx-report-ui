@@ -13,7 +13,7 @@ class MultiPairSelector extends PureComponent {
 
   renderTag = pair => pair
 
-  renderPair = (pair, { modifiers }) => {
+  renderPair = (pair, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
       return null
@@ -30,7 +30,7 @@ class MultiPairSelector extends PureComponent {
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={disabled}
         key={pair}
-        onClick={() => this.togglePair(pair)}
+        onClick={handleClick}
         text={pair}
       />
     )

@@ -11,7 +11,7 @@ import { IconNames } from '@blueprintjs/icons'
 class PairSelector extends PureComponent {
   filterPair = (query, pair) => pair.indexOf(query.toUpperCase()) >= 0
 
-  renderPair = (pair, { modifiers }) => {
+  renderPair = (pair, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
       return null
@@ -25,7 +25,7 @@ class PairSelector extends PureComponent {
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={disabled}
         key={pair}
-        onClick={() => this.onPairSelect(pair)}
+        onClick={handleClick}
         text={pair}
       />
     )

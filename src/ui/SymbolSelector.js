@@ -17,7 +17,7 @@ class SymbolSelector extends PureComponent {
       onSymbolSelect,
     } = this.props
 
-    const renderSymbol = (symbol, { modifiers }) => {
+    const renderSymbol = (symbol, { modifiers, handleClick }) => {
       const { active, disabled, matchesPredicate } = modifiers
       if (!matchesPredicate) {
         return null
@@ -30,7 +30,7 @@ class SymbolSelector extends PureComponent {
           intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
           disabled={disabled}
           key={symbol}
-          onClick={() => onSymbolSelect(symbol)}
+          onClick={handleClick}
           text={symbol}
           label={currencies[symbol]}
         />
