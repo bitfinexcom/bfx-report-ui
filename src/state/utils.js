@@ -161,9 +161,11 @@ export function generateUrl(type, params, symbols) {
     console.error('Unsupported route type ', type)
     return ''
   }
+
+  const path = _castArray(getPath(type))[0]
   return (symbols && symbols.length)
-    ? `${getPath(type)}/${getSymbolsURL(symbols)}${params}`
-    : `${getPath(type)}${params}`
+    ? `${path}/${getSymbolsURL(symbols)}${params}`
+    : `${path}${params}`
 }
 
 export function toggleSymbol(type, props, symbol) {
