@@ -31,14 +31,8 @@ class PairSelector extends PureComponent {
     )
   }
 
-  onPairSelect = (pair) => {
-    const { onPairSelect } = this.props
-
-    onPairSelect(pair)
-  }
-
   render() {
-    const { currentPair, pairs } = this.props
+    const { currentPair, pairs, onPairSelect } = this.props
 
     return (
       <Select
@@ -46,7 +40,7 @@ class PairSelector extends PureComponent {
         items={pairs}
         itemRenderer={this.renderPair}
         itemPredicate={this.filterPair}
-        onItemSelect={this.onPairSelect}
+        onItemSelect={onPairSelect}
       >
         <Button
           text={currentPair}

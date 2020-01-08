@@ -9,42 +9,42 @@ import { Select } from '@blueprintjs/select'
 import { IconNames } from '@blueprintjs/icons'
 
 class SymbolSelector extends PureComponent {
+  filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
+
+  renderSymbol = (symbol, { modifiers, handleClick }) => {
+    const { active, disabled, matchesPredicate } = modifiers
+    if (!matchesPredicate) {
+      return null
+    }
+    const { currentCoin, currencies } = this.props
+    const isCurrent = currentCoin === symbol
+
+    return (
+      <MenuItem
+        active={active}
+        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
+        disabled={disabled}
+        key={symbol}
+        onClick={handleClick}
+        text={symbol}
+        label={currencies[symbol]}
+      />
+    )
+  }
+
   render() {
     const {
       coins,
-      currencies,
       currentCoin,
       onSymbolSelect,
     } = this.props
-
-    const renderSymbol = (symbol, { modifiers, handleClick }) => {
-      const { active, disabled, matchesPredicate } = modifiers
-      if (!matchesPredicate) {
-        return null
-      }
-      const isCurrent = currentCoin === symbol
-
-      return (
-        <MenuItem
-          active={active}
-          intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-          disabled={disabled}
-          key={symbol}
-          onClick={handleClick}
-          text={symbol}
-          label={currencies[symbol]}
-        />
-      )
-    }
-
-    const filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
 
     return (
       <Select
         disabled={!coins.length}
         items={coins}
-        itemRenderer={renderSymbol}
-        itemPredicate={filterSymbol}
+        itemRenderer={this.renderSymbol}
+        itemPredicate={this.filterSymbol}
         onItemSelect={onSymbolSelect}
       >
         <Button

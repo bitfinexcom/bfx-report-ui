@@ -36,17 +36,12 @@ class MultiPairSelector extends PureComponent {
     )
   }
 
-  togglePair = (pair) => {
-    const { togglePair } = this.props
-
-    togglePair(pair)
-  }
-
   render() {
     const {
       currentFilters,
       existingPairs,
       pairs,
+      togglePair,
       t,
     } = this.props
 
@@ -62,11 +57,11 @@ class MultiPairSelector extends PureComponent {
         items={items}
         itemRenderer={this.renderPair}
         itemPredicate={this.filterPair}
-        onItemSelect={this.togglePair}
+        onItemSelect={togglePair}
         popoverProps={{ minimal: true }}
         tagInputProps={{
           tagProps: { minimal: true },
-          onRemove: this.togglePair,
+          onRemove: togglePair,
         }}
         tagRenderer={this.renderTag}
         selectedItems={currentFilters}
