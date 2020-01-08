@@ -77,6 +77,6 @@ function* fetchPositionsAuditFail({ payload }) {
 
 export default function* positionsAuditSaga() {
   yield takeLatest(types.FETCH_PAUDIT, fetchPositionsAudit)
-  yield takeLatest(types.REFRESH, refreshPositionsAudit)
+  yield takeLatest([types.REFRESH, types.SET_IDS, types.ADD_ID, types.REMOVE_ID], refreshPositionsAudit)
   yield takeLatest(types.FETCH_FAIL, fetchPositionsAuditFail)
 }
