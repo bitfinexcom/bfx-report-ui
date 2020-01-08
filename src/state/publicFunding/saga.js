@@ -14,7 +14,7 @@ import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit } from 'state/query/utils'
-import { fetchNext } from 'state/sagas.helper'
+import { fetchData } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -49,13 +49,7 @@ function* fetchPublicFunding({ payload }) {
     }
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqPublicFunding, {
-      smallestMts,
-      query,
-      targetSymbol,
-      filter,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqPublicFunding, {
+    const { result, error } = yield call(fetchData, getReqPublicFunding, {
       smallestMts,
       query,
       targetSymbol,

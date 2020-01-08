@@ -14,7 +14,7 @@ import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit } from 'state/query/utils'
-import { fetchNext } from 'state/sagas.helper'
+import { fetchData } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
@@ -49,13 +49,7 @@ function* fetchFLoan({ payload }) {
     }
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
-    const { result: resulto, error: erroro } = yield call(getReqFLoan, {
-      smallestMts,
-      query,
-      targetSymbols,
-      filter,
-    })
-    const { result = {}, error } = yield call(fetchNext, resulto, erroro, getReqFLoan, {
+    const { result, error } = yield call(fetchData, getReqFLoan, {
       smallestMts,
       query,
       targetSymbols,

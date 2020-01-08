@@ -80,7 +80,6 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
       })
       return {
         ...state,
-        currentEntriesSize: entries.length,
         dataReceived: true,
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),

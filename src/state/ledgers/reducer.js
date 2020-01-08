@@ -1,7 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#ledgers
 
-import _get from 'lodash/get'
-
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
@@ -13,9 +11,9 @@ import {
   setSymbols,
   setTimeRange,
 } from 'state/reducers.helper'
-import { mapSymbol, mapDescription } from 'state/symbols/utils'
 
 import types from './constants'
+import { updateLedgers } from './utils'
 
 const initialState = {
   ...baseSymbolState,
@@ -26,54 +24,8 @@ const TYPE = queryTypes.MENU_LEDGERS
 export function ledgersReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
-    case types.UPDATE_LEDGERS: {
-      const res = _get(payload, ['data', 'res'])
-      if (!res) {
-        return {
-          ...state,
-          dataReceived: true,
-        }
-      }
-
-      const { existingCoins } = state
-      const updateCoins = [...existingCoins]
-      const entries = res.map((entry) => {
-        const {
-          amount,
-          amountUsd,
-          balance,
-          balanceUsd,
-          currency,
-          description,
-          id,
-          mts,
-          wallet,
-        } = entry
-        const mappedCurrency = mapSymbol(currency)
-        // save new symbol to updateCoins list
-        if (updateCoins.indexOf(mappedCurrency) === -1) {
-          updateCoins.push(mappedCurrency)
-        }
-        return {
-          id,
-          currency: mappedCurrency,
-          mts,
-          amount,
-          amountUsd,
-          balance,
-          balanceUsd,
-          description: mapDescription(description),
-          wallet,
-        }
-      })
-      return {
-        ...state,
-        dataReceived: true,
-        entries: [...state.entries, ...entries],
-        existingCoins: updateCoins.sort(),
-        pageLoading: false,
-      }
-    }
+    case types.UPDATE_LEDGERS:
+      return updateLedgers(state, payload)
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.ADD_SYMBOL:

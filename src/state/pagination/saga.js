@@ -73,5 +73,5 @@ function* fetchNext({ payload }) {
 }
 
 export default function* filtersSaga() {
-  yield takeLatest([types.FETCH_NEXT, types.FETCH_PREV], fetchNext)
+  yield takeLatest(types.FETCH_NEXT, fetchNext)
 }
