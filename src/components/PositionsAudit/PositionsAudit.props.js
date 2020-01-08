@@ -20,6 +20,7 @@ export const propTypes = {
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  targetIds: PropTypes.array.isRequired,
   timeOffset: PropTypes.string.isRequired,
   setTargetIds: PropTypes.func.isRequired,
 }
