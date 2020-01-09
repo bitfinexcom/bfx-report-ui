@@ -246,6 +246,14 @@
     }
   },
   "loading": "Loading...",
+  "loanreport": {
+    "title": "Loan Report",
+    "query": {
+      "title": "Query",
+      "startDateTooltip": "Select a start time",
+      "endDateTooltip": "Select end time"
+    }
+  },
   "movements": {
     "title": "Movements",
     "column": {

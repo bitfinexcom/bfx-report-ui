@@ -13,6 +13,7 @@ import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
 import FundingPayment from 'components/FundingPayment'
 import Ledgers from 'components/Ledgers'
+import LoanReport from 'components/LoanReport'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import OrderTrades from 'components/OrderTrades'
@@ -48,6 +49,7 @@ const {
   MENU_FOFFER,
   MENU_FPAYMENT,
   MENU_LEDGERS,
+  MENU_LOAN_REPORT,
   MENU_ORDERS,
   MENU_ORDER_TRADES,
   MENU_TRADES,
@@ -328,6 +330,11 @@ class Main extends PureComponent {
                   exact
                   path={getPath(MENU_ACCOUNT_BALANCE)}
                   component={() => <AccountBalance handleClickExport={this.handleClickExport} />}
+                />
+                <Route
+                  exact
+                  path={getPath(MENU_LOAN_REPORT)}
+                  component={() => <LoanReport handleClickExport={this.handleClickExport} />}
                 />
                 <Route
                   path={[getPath(MENU_TRADED_VOLUME), `${getPath(MENU_TRADED_VOLUME)}/:pair`]}

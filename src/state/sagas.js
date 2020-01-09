@@ -14,6 +14,7 @@ import floanSaga from './fundingLoanHistory/saga'
 import fofferSaga from './fundingOfferHistory/saga'
 import fpaymentSaga from './fundingPayment/saga'
 import ledgersSaga from './ledgers/saga'
+import loanReportSaga from './loanReport/saga'
 import movementsSaga from './movements/saga'
 import ordersSaga from './orders/saga'
 import orderTradesSaga from './orderTrades/saga'
@@ -67,6 +68,7 @@ export default function* rootSaga() {
     yield fork(affiliatesEarningsSaga)
     yield fork(fpaymentSaga)
     yield fork(accountBalanceSaga)
+    yield fork(loanReportSaga)
     yield fork(tradedVolumeSaga)
     yield fork(feesReportSaga)
     yield fork(winLossSaga)
