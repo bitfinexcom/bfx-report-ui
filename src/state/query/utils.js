@@ -239,7 +239,7 @@ const MAPPING = {
   },
   [MENU_LEDGERS]: {
     icon: IconNames.BOOK,
-    path: ['/', '/ledgers'],
+    path: ['/ledgers', '/'],
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
     pageSize: 125,

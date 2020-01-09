@@ -13,7 +13,7 @@ class MultiPairSelector extends PureComponent {
 
   renderTag = pair => pair
 
-  renderPair = (pair, { modifiers }) => {
+  renderPair = (pair, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
       return null
@@ -30,16 +30,10 @@ class MultiPairSelector extends PureComponent {
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={disabled}
         key={pair}
-        onClick={() => this.togglePair(pair)}
+        onClick={handleClick}
         text={pair}
       />
     )
-  }
-
-  togglePair = (pair) => {
-    const { togglePair } = this.props
-
-    togglePair(pair)
   }
 
   render() {
@@ -47,6 +41,7 @@ class MultiPairSelector extends PureComponent {
       currentFilters,
       existingPairs,
       pairs,
+      togglePair,
       t,
     } = this.props
 
@@ -62,11 +57,11 @@ class MultiPairSelector extends PureComponent {
         items={items}
         itemRenderer={this.renderPair}
         itemPredicate={this.filterPair}
-        onItemSelect={this.togglePair}
+        onItemSelect={togglePair}
         popoverProps={{ minimal: true }}
         tagInputProps={{
           tagProps: { minimal: true },
-          onRemove: this.togglePair,
+          onRemove: togglePair,
         }}
         tagRenderer={this.renderTag}
         selectedItems={currentFilters}
