@@ -155,7 +155,6 @@ class Main extends PureComponent {
       authIsShown,
       history,
       isCustomOpen,
-      isFrameworkOpen,
       location,
       menuMode,
     } = this.props
@@ -345,7 +344,7 @@ class Main extends PureComponent {
           handleExportDialogClose={this.handleExportDialogClose}
           startExport={this.startExport}
         />
-        {platform.showFrameworkMode && <FrameworkDialog isFrameworkOpen={isFrameworkOpen} />}
+        {platform.showFrameworkMode && <FrameworkDialog />}
         <PaginationDialog />
       </div>
     ) : ''
