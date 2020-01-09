@@ -99,12 +99,9 @@ class Main extends PureComponent {
     super(props)
     this.handleClickCustom = this.handleCustomDialog.bind(this, true)
     this.handleCustomDialogClose = this.handleCustomDialog.bind(this, false)
-    this.handleClickExport = this.handleExportDialog.bind(this, true)
-    this.handleExportDialogClose = this.handleExportDialog.bind(this, false)
   }
 
   state = {
-    isExportOpen: false,
     startDate: null,
     endDate: new Date(),
   }
@@ -132,23 +129,6 @@ class Main extends PureComponent {
     showCustomDialog(false)
   }
 
-  handleExportDialog = (show, e) => {
-    e.preventDefault()
-    if (show) {
-      // eslint-disable-next-line react/destructuring-assignment
-      this.props.prepareExport()
-    }
-    this.setState({ isExportOpen: show })
-  }
-
-  startExport = (currentTargets) => {
-    const { exportCsv } = this.props
-    return () => {
-      exportCsv(currentTargets)
-      this.setState({ isExportOpen: false })
-    }
-  }
-
   render() {
     const {
       authStatus,
@@ -160,7 +140,6 @@ class Main extends PureComponent {
     } = this.props
     const {
       endDate,
-      isExportOpen,
       startDate,
     } = this.state
     const target = getTarget(location.pathname)
@@ -178,133 +157,133 @@ class Main extends PureComponent {
             <Route
               exact
               path={PATHS.MENU_LEDGERS}
-              render={() => <Ledgers handleClickExport={this.handleClickExport} />}
+              component={Ledgers}
             />
             <Route
               exact
               path={PATHS.MENU_TRADES}
-              render={() => <Trades handleClickExport={this.handleClickExport} />}
+              component={Trades}
             />
             <Route
               exact
               path={PATHS.MENU_ORDERS}
-              render={() => <Orders handleClickExport={this.handleClickExport} />}
+              component={Orders}
             />
             <Route
               exact
               path={PATHS.MENU_ORDER_TRADES}
-              render={() => <OrderTrades handleClickExport={this.handleClickExport} />}
+              component={OrderTrades}
             />
             <Route
               exact
               path={PATHS.MENU_DEPOSITS}
-              render={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
+              render={() => <Movements type={MENU_DEPOSITS} />}
             />
             <Route
               exact
               path={PATHS.MENU_WITHDRAWALS}
-              render={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
+              render={() => <Movements type={MENU_WITHDRAWALS} />}
             />
             <Route
               exact
               path={PATHS.MENU_FCREDIT}
-              render={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
+              component={FundingCreditHistory}
             />
             <Route
               exact
               path={PATHS.MENU_FLOAN}
-              render={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
+              component={FundingLoanHistory}
             />
             <Route
               exact
               path={PATHS.MENU_FOFFER}
-              render={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+              component={FundingOfferHistory}
             />
             <Route
               exact
               path={PATHS.MENU_FPAYMENT}
-              render={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+              component={FundingPayment}
             />
             <Route
               exact
               path={PATHS.MENU_AFFILIATES_EARNINGS}
-              render={() => <AffiliatesEarnings handleClickExport={this.handleClickExport} />}
+              component={AffiliatesEarnings}
             />
             <Route
               exact
               path={PATHS.MENU_PUBLIC_FUNDING}
-              render={() => <PublicFunding handleClickExport={this.handleClickExport} />}
+              component={PublicFunding}
             />
             <Route
               exact
               path={PATHS.MENU_PUBLIC_TRADES}
-              render={() => <PublicTrades handleClickExport={this.handleClickExport} />}
+              component={PublicTrades}
             />
             <Route
               exact
               path={PATHS.MENU_TICKERS}
-              render={() => <Tickers handleClickExport={this.handleClickExport} />}
+              component={Tickers}
             />
             <Route
               exact
               path={PATHS.MENU_DERIVATIVES}
-              render={() => <Derivatives handleClickExport={this.handleClickExport} />}
+              component={Derivatives}
             />
             <Route
               exact
               path={getPath(MENU_POSITIONS_AUDIT)}
-              render={() => <PositionsAuditNoId />}
+              component={PositionsAuditNoId}
             />
             <Route
               exact
               path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}
-              render={() => <PositionsAudit handleClickExport={this.handleClickExport} />}
+              component={PositionsAudit}
             />
             <Route
               exact
               path={getPath(MENU_POSITIONS_ACTIVE)}
-              render={() => <PositionsActive handleClickExport={this.handleClickExport} />}
+              component={PositionsActive}
             />
             <Route
               exact
               path={PATHS.MENU_POSITIONS}
-              render={() => <Positions handleClickExport={this.handleClickExport} />}
+              component={Positions}
             />
             <Route
               exact
               path={getPath(MENU_WALLETS)}
-              render={() => <Wallets handleClickExport={this.handleClickExport} />}
+              component={Wallets}
             />
             {platform.showFrameworkMode && (
               [
                 <Route
                   exact
                   path={getPath(MENU_ACCOUNT_BALANCE)}
-                  component={() => <AccountBalance handleClickExport={this.handleClickExport} />}
+                  component={AccountBalance}
                   key={MENU_ACCOUNT_BALANCE}
                 />,
                 <Route
                   exact
                   path={getPath(MENU_LOAN_REPORT)}
-                  component={() => <LoanReport handleClickExport={this.handleClickExport} />}
+                  component={LoanReport}
                   key={MENU_LOAN_REPORT}
                 />,
                 <Route
                   exact
                   path={PATHS.MENU_TRADED_VOLUME}
-                  render={() => <TradedVolume handleClickExport={this.handleClickExport} />}
+                  component={TradedVolume}
                   key={MENU_TRADED_VOLUME}
                 />,
                 <Route
                   exact
                   path={PATHS.MENU_FEES_REPORT}
-                  render={() => <FeesReport handleClickExport={this.handleClickExport} />}
+                  component={FeesReport}
                   key={MENU_FEES_REPORT}
                 />,
                 <Route
                   exact
                   path={getPath(MENU_WIN_LOSS)}
-                  component={() => <AverageWinLoss handleClickExport={this.handleClickExport} />}
+                  component={AverageWinLoss}
                   key={MENU_WIN_LOSS}
                 />,
                 <Route
@@ -316,13 +295,13 @@ class Main extends PureComponent {
                 <Route
                   exact
                   path={getPath(MENU_SNAPSHOTS)}
-                  render={() => <Snapshots handleClickExport={this.handleClickExport} />}
+                  component={Snapshots}
                   key={MENU_SNAPSHOTS}
                 />,
                 <Route
                   exact
                   path={PATHS.MENU_TAX_REPORT}
-                  render={() => <TaxReport handleClickExport={this.handleClickExport} />}
+                  component={TaxReport}
                   key={MENU_TAX_REPORT}
                 />,
               ]
@@ -338,12 +317,7 @@ class Main extends PureComponent {
           startDate={startDate}
           endDate={endDate}
         />
-        <ExportDialog
-          type={target}
-          isExportOpen={isExportOpen}
-          handleExportDialogClose={this.handleExportDialogClose}
-          startExport={this.startExport}
-        />
+        <ExportDialog />
         {platform.showFrameworkMode && <FrameworkDialog />}
         <PaginationDialog />
       </div>

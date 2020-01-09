@@ -45,7 +45,6 @@ class Trades extends PureComponent {
       entries,
       existingPairs,
       getFullTime,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -105,7 +104,7 @@ class Trades extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

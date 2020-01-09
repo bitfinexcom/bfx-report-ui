@@ -84,7 +84,6 @@ class LoanReport extends PureComponent {
       dataReceived,
       pageLoading,
       refresh,
-      handleClickExport,
       t,
     } = this.props
     const { start, end } = this.state
@@ -167,7 +166,7 @@ class LoanReport extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
@@ -184,7 +183,7 @@ class LoanReport extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

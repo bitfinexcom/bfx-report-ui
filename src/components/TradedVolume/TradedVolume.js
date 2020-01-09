@@ -84,7 +84,6 @@ class TradedVolume extends PureComponent {
       dataReceived,
       pageLoading,
       refresh,
-      handleClickExport,
       t,
     } = this.props
     const { start, end } = this.state
@@ -167,7 +166,7 @@ class TradedVolume extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
@@ -184,7 +183,7 @@ class TradedVolume extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

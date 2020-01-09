@@ -57,7 +57,6 @@ class Tickers extends PureComponent {
       getFullTime,
       hasSyncPref,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -122,7 +121,7 @@ class Tickers extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton sectionType={TYPE} />

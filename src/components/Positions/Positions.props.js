@@ -27,7 +27,6 @@ export const propTypes = {
   t: PropTypes.func.isRequired,
   targetPairs: PropTypes.arrayOf(PropTypes.string),
   timeOffset: PropTypes.string.isRequired,
-  handleClickExport: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

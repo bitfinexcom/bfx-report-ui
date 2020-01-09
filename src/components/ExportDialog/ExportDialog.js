@@ -22,18 +22,39 @@ import { propTypes, defaultProps } from './ExportDialog.props'
 class ExportDialog extends PureComponent {
   state = {
     currentTargets: [],
-    type: '',
+    target: '',
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.type !== prevState.type) {
+    const target = getTarget(nextProps.location.pathname)
+    if (target !== prevState.target) {
       return {
-        currentTargets: [nextProps.type],
-        type: nextProps.type,
+        currentTargets: [target],
+        target,
       }
     }
 
     return null
+  }
+
+  toggleDialog = () => {
+    const { isOpen, prepareExport, toggleDialog } = this.props
+    if (!isOpen) {
+      prepareExport()
+    }
+    toggleDialog()
+  }
+
+  startExport = () => {
+    const { exportCsv, toggleDialog, location } = this.props
+    const { currentTargets } = this.state
+    const target = getTarget(location.pathname)
+    const targets = queryConstants.MENU_POSITIONS_AUDIT !== target
+      ? currentTargets
+      : [queryConstants.MENU_POSITIONS_AUDIT]
+
+    exportCsv(targets)
+    toggleDialog()
   }
 
   toggleTarget = (target) => {
@@ -54,25 +75,23 @@ class ExportDialog extends PureComponent {
       email,
       end,
       getFullTime,
-      handleExportDialogClose,
-      isExportOpen,
+      isOpen,
       loading,
       start,
-      startExport,
       t,
-      type,
       timestamp,
       timezone,
       location,
     } = this.props
     const { currentTargets } = this.state
-    if (!isExportOpen) {
+    if (!isOpen) {
       return null
     }
-    const isWallets = location && location.pathname && getTarget(location.pathname) === queryConstants.MENU_WALLETS
+    const target = getTarget(location.pathname)
+    const isWallets = location && location.pathname && target === queryConstants.MENU_WALLETS
     const datetime = getFullTime(timestamp, true, true)
     const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
-    const intlType = t(`${type}.title`)
+    const intlType = t(`${target}.title`)
     const renderMessage = !email ? (
       <p>
         {t('download.prepare', { intlType })}
@@ -109,7 +128,7 @@ class ExportDialog extends PureComponent {
             {renderMessage}
             <br />
             {
-              queryConstants.MENU_POSITIONS_AUDIT !== type
+              queryConstants.MENU_POSITIONS_AUDIT !== target
               && (
                 <div className='row'>
                   <div className={dialogDescStyle}>
@@ -143,14 +162,13 @@ class ExportDialog extends PureComponent {
           </div>
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              <Button onClick={handleExportDialogClose}>
+              <Button onClick={this.toggleDialog}>
                 {t('download.cancel')}
               </Button>
               <Button
                 intent={Intent.PRIMARY}
-                disabled={queryConstants.MENU_POSITIONS_AUDIT !== type && currentTargets.length === 0}
-                onClick={startExport(queryConstants.MENU_POSITIONS_AUDIT !== type
-                  ? currentTargets : [queryConstants.MENU_POSITIONS_AUDIT])}
+                disabled={queryConstants.MENU_POSITIONS_AUDIT !== target && currentTargets.length === 0}
+                onClick={this.startExport}
               >
                 {t('download.export')}
               </Button>
@@ -162,14 +180,14 @@ class ExportDialog extends PureComponent {
     return (
       <Dialog
         icon={IconNames.CLOUD_DOWNLOAD}
-        onClose={handleExportDialogClose}
+        onClose={this.toggleDialog}
         title={t('download.title')}
         autoFocus
         canEscapeKeyClose
         canOutsideClickClose
         enforceFocus
         usePortal
-        isOpen={isExportOpen}
+        isOpen={isOpen}
       >
         {renderContent}
       </Dialog>

@@ -44,7 +44,6 @@ class OrderTrades extends PureComponent {
   render() {
     const {
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -92,7 +91,7 @@ class OrderTrades extends PureComponent {
             {' '}
             <TimeRange />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

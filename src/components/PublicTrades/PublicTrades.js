@@ -48,7 +48,6 @@ class PublicTrades extends PureComponent {
       hasSyncPref,
       pairs,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -114,7 +113,7 @@ class PublicTrades extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncPrefButton sectionType={TYPE} />

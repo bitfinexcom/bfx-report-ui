@@ -50,7 +50,6 @@ class PositionsActive extends PureComponent {
     const {
       getFullTime,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -96,7 +95,7 @@ class PositionsActive extends PureComponent {
           <h4>
             {t('positions.title')}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

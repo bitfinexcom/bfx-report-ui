@@ -63,7 +63,6 @@ class Positions extends PureComponent {
       existingPairs,
       getFullTime,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -133,7 +132,7 @@ class Positions extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

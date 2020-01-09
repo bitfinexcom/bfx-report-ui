@@ -59,7 +59,6 @@ class PublicFunding extends PureComponent {
       getFullTime,
       hasSyncPref,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -127,7 +126,7 @@ class PublicFunding extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <SyncSymbolPrefButton />

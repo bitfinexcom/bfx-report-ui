@@ -48,7 +48,6 @@ class Movements extends PureComponent {
       entries,
       existingCoins,
       getFullTime,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -111,7 +110,7 @@ class Movements extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

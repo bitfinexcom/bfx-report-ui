@@ -18,7 +18,6 @@ export const propTypes = {
   setTargetPairs: PropTypes.func.isRequired,
   removeTargetPair: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
-  handleClickExport: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

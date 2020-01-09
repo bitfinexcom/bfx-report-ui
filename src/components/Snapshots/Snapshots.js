@@ -104,7 +104,6 @@ class Snapshots extends PureComponent {
       walletsTotalBalanceUsd,
       walletsTickersEntries,
       walletsEntries,
-      handleClickExport,
       loading,
       refresh,
       t,
@@ -182,7 +181,7 @@ class Snapshots extends PureComponent {
           {isNotEmpty && (
             <Fragment>
               {' '}
-              <ExportButton handleClickExport={handleClickExport} />
+              <ExportButton />
             </Fragment>
           )}
           {' '}

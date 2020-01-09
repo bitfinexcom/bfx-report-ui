@@ -60,7 +60,6 @@ class Orders extends PureComponent {
       columns,
       existingPairs,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -122,7 +121,7 @@ class Orders extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

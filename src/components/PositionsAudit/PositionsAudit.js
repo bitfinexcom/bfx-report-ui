@@ -49,7 +49,6 @@ class PositionsAudit extends PureComponent {
     const {
       entries,
       getFullTime,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -90,7 +89,7 @@ class PositionsAudit extends PureComponent {
             {' '}
             <TimeRange />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

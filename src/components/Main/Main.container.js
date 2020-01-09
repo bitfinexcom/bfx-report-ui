@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { exportCsv, prepareExport, setCustomTimeRange } from 'state/query/actions'
+import { setCustomTimeRange } from 'state/query/actions'
 import { showCustomDialog } from 'state/ui/actions'
 import { getAuthStatus, getIsShown } from 'state/auth/selectors'
 import { getMenuMode } from 'state/base/selectors'
@@ -17,8 +17,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  exportCsv,
-  prepareExport,
   setCustomTimeRange,
   showCustomDialog,
 }
