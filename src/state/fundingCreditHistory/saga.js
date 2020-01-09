@@ -38,15 +38,10 @@ function getReqFCredit({
   return makeFetchCall('getFundingCreditHistory', params)
 }
 
-function* fetchFCredit({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchFCredit() {
   try {
-    const { entries, targetSymbols } = yield select(getFundingCreditHistory)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - LIMIT >= offset) {
-      return
-    }
+    const { targetSymbols } = yield select(getFundingCreditHistory)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(fetchData, getReqFCredit, {
@@ -56,7 +51,7 @@ function* fetchFCredit({ payload }) {
       filter,
     })
     yield put(actions.updateFCredit(result))
-    yield put(updatePagination(TYPE, result, LIMIT))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -84,6 +79,6 @@ function* fetchFCreditFail({ payload }) {
 
 export default function* fundingCreditHistorySaga() {
   yield takeLatest(types.FETCH_FCREDIT, fetchFCredit)
-  yield takeLatest(types.REFRESH, refreshFCredit)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshFCredit)
   yield takeLatest(types.FETCH_FAIL, fetchFCreditFail)
 }

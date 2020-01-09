@@ -23,9 +23,9 @@ const TYPE = queryConstants.MENU_FCREDIT
 class FundingCreditHistory extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetSymbols, fetchFcredit, match,
+      dataReceived, pageLoading, setTargetSymbols, fetchFcredit, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const symbols = (match.params && match.params.symbol) || ''
       if (symbols) {
         setTargetSymbols(getMappedSymbolsFromUrl(symbols))
@@ -42,12 +42,12 @@ class FundingCreditHistory extends PureComponent {
     const {
       columns,
       getFullTime,
-      pageLoading,
       targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       timeOffset,
@@ -71,7 +71,7 @@ class FundingCreditHistory extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='fcredit.title' />
       )

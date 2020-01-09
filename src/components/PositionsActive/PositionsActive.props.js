@@ -16,7 +16,7 @@ export const propTypes = {
   entries: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
   fetchActivepositions: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
-  loading: PropTypes.bool.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
@@ -25,5 +25,4 @@ export const propTypes = {
 
 export const defaultProps = {
   entries: [],
-  pageLoading: false,
 }

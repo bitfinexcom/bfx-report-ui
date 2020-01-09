@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { fetchWinLoss, refresh } from 'state/winLoss/actions'
 import {
   getDataReceived,
+  getPageLoading,
   getEntries,
   getParams,
 } from 'state/winLoss/selectors'
@@ -13,7 +14,8 @@ import AverageWinLoss from './AverageWinLoss'
 const mapStateToProps = state => ({
   entries: getEntries(state),
   params: getParams(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
+  pageLoading: getPageLoading(state),
 })
 
 const mapDispatchToProps = {

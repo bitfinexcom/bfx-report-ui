@@ -43,8 +43,7 @@ function getReqLedgers({
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchAffiliatesEarnings({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchAffiliatesEarnings() {
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
@@ -52,13 +51,9 @@ function* fetchAffiliatesEarnings({ payload }) {
       return yield put(actions.updateAffiliatesEarnings())
     }
 
-    const { entries, targetSymbols } = yield select(getAffiliatesEarnings)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
+    const { targetSymbols } = yield select(getAffiliatesEarnings)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const queryLimit = yield select(getTargetQueryLimit, TYPE)
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - queryLimit >= offset) {
-      return undefined
-    }
 
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
@@ -70,7 +65,7 @@ function* fetchAffiliatesEarnings({ payload }) {
       queryLimit,
     })
     yield put(actions.updateAffiliatesEarnings(result))
-    yield put(updatePagination(TYPE, result, queryLimit))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -98,6 +93,6 @@ function* fetchAffiliatesEarningsFail({ payload }) {
 
 export default function* affiliatesEarningsSaga() {
   yield takeLatest(types.FETCH_AFFILIATES_EARNINGS, fetchAffiliatesEarnings)
-  yield takeLatest(types.REFRESH, refreshAffiliatesEarnings)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshAffiliatesEarnings)
   yield takeLatest(types.FETCH_FAIL, fetchAffiliatesEarningsFail)
 }

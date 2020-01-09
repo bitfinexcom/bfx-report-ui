@@ -27,9 +27,9 @@ const TYPE = queryConstants.MENU_AFFILIATES_EARNINGS
 class AffiliatesEarnings extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetSymbols, fetchAffiliatesearnings, match,
+      dataReceived, pageLoading, setTargetSymbols, fetchAffiliatesearnings, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const symbols = (match.params && match.params.symbol) || ''
       if (symbols) {
         setTargetSymbols(getMappedSymbolsFromUrl(symbols))
@@ -46,12 +46,12 @@ class AffiliatesEarnings extends PureComponent {
     const {
       columns,
       getFullTime,
-      pageLoading,
       targetSymbols,
       entries,
       existingCoins,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       timeOffset,
@@ -75,7 +75,7 @@ class AffiliatesEarnings extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='affiliatesearnings.title' />
       )

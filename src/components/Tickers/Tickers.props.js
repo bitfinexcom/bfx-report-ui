@@ -16,7 +16,7 @@ export const propTypes = {
   fetchTickers: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
   hasSyncPref: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   pairs: PropTypes.arrayOf(PropTypes.string),
   refresh: PropTypes.func.isRequired,
@@ -31,6 +31,4 @@ export const defaultProps = {
   existingPairs: [],
   hasSyncPref: false,
   pairs: [],
-  refresh: () => {},
-  updateErrorStatus: () => {},
 }

@@ -24,9 +24,9 @@ const TYPE = queryConstants.MENU_TRADES
 class Trades extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetPairs, fetchTrades, match,
+      dataReceived, pageLoading, setTargetPairs, fetchTrades, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const pairs = (match.params && match.params.pair) || ''
       if (pairs) {
         setTargetPairs(getMappedSymbolsFromUrl(pairs))
@@ -46,7 +46,8 @@ class Trades extends PureComponent {
       existingPairs,
       getFullTime,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       targetPairs,
@@ -71,7 +72,7 @@ class Trades extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='trades.title' />
       )
@@ -108,12 +109,12 @@ class Trades extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          <Pagination target={TYPE} loading={loading} />
+          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={loading} />
+          <Pagination target={TYPE} loading={pageLoading} />
         </Fragment>
       )
     }

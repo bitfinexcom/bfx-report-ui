@@ -6,6 +6,7 @@ import authTypes from 'state/auth/constants'
 import {
   addSymbol,
   baseSymbolState,
+  fetch,
   fetchFail,
   refresh,
   removeSymbol,
@@ -25,12 +26,15 @@ const TYPE = queryTypes.MENU_FCREDIT
 export function fundingCreditHistoryReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
+    case types.FETCH_FCREDIT:
+      return fetch(state)
     case types.UPDATE_FCREDIT: {
       const res = _get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,
           dataReceived: true,
+          pageLoading: false,
         }
       }
       const { existingCoins } = state
@@ -85,9 +89,9 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
+        pageLoading: false,
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
-        pageLoading: false,
       }
     }
     case types.FETCH_FAIL:

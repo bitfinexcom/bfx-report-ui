@@ -35,8 +35,10 @@ class AccountBalance extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchBalance, params } = this.props
-    if (loading) {
+    const {
+      dataReceived, pageLoading, fetchBalance, params,
+    } = this.props
+    if (!dataReceived && !pageLoading) {
       fetchBalance(params)
     }
   }
@@ -77,7 +79,8 @@ class AccountBalance extends PureComponent {
     const {
       entries,
       params: { timeframe: currTimeframe },
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       handleClickExport,
       t,
@@ -138,7 +141,7 @@ class AccountBalance extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='accountbalance.title' />
       )

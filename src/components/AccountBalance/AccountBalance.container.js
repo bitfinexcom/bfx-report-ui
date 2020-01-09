@@ -8,6 +8,7 @@ import {
 import {
   getDataReceived,
   getEntries,
+  getPageLoading,
   getParams,
 } from 'state/accountBalance/selectors'
 
@@ -16,7 +17,8 @@ import AccountBalance from './AccountBalance'
 const mapStateToProps = state => ({
   entries: getEntries(state),
   params: getParams(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
+  pageLoading: getPageLoading(state),
 })
 
 const mapDispatchToProps = {

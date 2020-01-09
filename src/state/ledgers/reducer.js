@@ -5,6 +5,7 @@ import authTypes from 'state/auth/constants'
 import {
   addSymbol,
   baseSymbolState,
+  fetch,
   fetchFail,
   refresh,
   removeSymbol,
@@ -24,6 +25,8 @@ const TYPE = queryTypes.MENU_LEDGERS
 export function ledgersReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
+    case types.FETCH_LEDGERS:
+      return fetch(state)
     case types.UPDATE_LEDGERS:
       return updateLedgers(state, payload)
     case types.FETCH_FAIL:

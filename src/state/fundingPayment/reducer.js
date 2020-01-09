@@ -6,6 +6,7 @@ import { updateLedgers } from 'state/ledgers/utils'
 import {
   addSymbol,
   baseSymbolState,
+  fetch,
   fetchFail,
   refresh,
   removeSymbol,
@@ -24,6 +25,8 @@ const TYPE = queryTypes.MENU_FPAYMENT
 export function fpaymentReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
+    case types.FETCH_FPAYMENT:
+      return fetch(state)
     case types.UPDATE_FPAYMENT:
       return updateLedgers(state, payload)
     case types.FETCH_FAIL:

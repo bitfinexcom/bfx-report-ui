@@ -38,15 +38,10 @@ function getReqFLoan({
   return makeFetchCall('getFundingLoanHistory', params)
 }
 
-function* fetchFLoan({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchFLoan() {
   try {
-    const { entries, targetSymbols } = yield select(getFundingLoanHistory)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - LIMIT >= offset) {
-      return
-    }
+    const { targetSymbols } = yield select(getFundingLoanHistory)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(fetchData, getReqFLoan, {
@@ -56,7 +51,7 @@ function* fetchFLoan({ payload }) {
       filter,
     })
     yield put(actions.updateFLoan(result))
-    yield put(updatePagination(TYPE, result, LIMIT))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -84,6 +79,6 @@ function* fetchFLoanFail({ payload }) {
 
 export default function* fundingLoanHistorySaga() {
   yield takeLatest(types.FETCH_FLOAN, fetchFLoan)
-  yield takeLatest(types.REFRESH, refreshFLoan)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshFLoan)
   yield takeLatest(types.FETCH_FAIL, fetchFLoanFail)
 }

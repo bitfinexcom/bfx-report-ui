@@ -24,12 +24,12 @@ const TYPE = queryConstants.MENU_POSITIONS_AUDIT
 class PositionsAudit extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetIds, fetchPaudit, match, targetIds,
+      targetIds, dataReceived, pageLoading, setTargetIds, fetchPaudit, match,
     } = this.props
     const ids = _get(match, 'params.id', '').split(',')
 
     const isIdChanged = !_isEqual(_sortBy(ids), _sortBy(targetIds))
-    if (ids.length && (loading || isIdChanged)) {
+    if (ids.length && ((!dataReceived && !pageLoading) || isIdChanged)) {
       setTargetIds(ids)
       fetchPaudit()
     }
@@ -50,7 +50,7 @@ class PositionsAudit extends PureComponent {
       entries,
       getFullTime,
       handleClickExport,
-      loading,
+      dataReceived,
       pageLoading,
       refresh,
       t,
@@ -65,7 +65,7 @@ class PositionsAudit extends PureComponent {
     })
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='paudit.title' />
       )

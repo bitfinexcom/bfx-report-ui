@@ -51,7 +51,8 @@ class PositionsActive extends PureComponent {
       getFullTime,
       entries,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       timeOffset,
@@ -73,7 +74,7 @@ class PositionsActive extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='positions.title' />
       )

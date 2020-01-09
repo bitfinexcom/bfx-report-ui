@@ -6,6 +6,7 @@ import { updateLedgers } from 'state/ledgers/utils'
 import {
   addSymbol,
   baseSymbolState,
+  fetch,
   fetchFail,
   refresh,
   removeSymbol,
@@ -24,6 +25,8 @@ const TYPE = queryTypes.MENU_AFFILIATES_EARNINGS
 export function affiliatesEarningsReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
+    case types.FETCH_AFFILIATES_EARNINGS:
+      return fetch(state)
     case types.UPDATE_AFFILIATES_EARNINGS:
       return updateLedgers(state, payload)
     case types.FETCH_FAIL:

@@ -19,61 +19,48 @@ class Pagination extends PureComponent {
 
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      const { jumpPage, target, limit } = this.props
+      const { jumpPage, target } = this.props
       const pageLen = parseInt(this.pageInput.current.dataset.pagelen || 1, 10)
       const page = Math.abs(parseInt(this.pageInput.current.value || 1, 10))
-      jumpPage(target, page < pageLen ? page : pageLen, limit)
+      jumpPage(target, page < pageLen ? page : pageLen)
     }
   }
 
   backward = () => {
-    const { target, limit, jumpPage } = this.props
+    const { target, jumpPage } = this.props
     const page = this.getCurrentPage()
-    jumpPage(target, page - 1, limit)
+    jumpPage(target, page - 1)
   }
 
   forward = () => {
-    const { target, limit, jumpPage } = this.props
+    const { target, jumpPage } = this.props
     const page = this.getCurrentPage()
-    jumpPage(target, page + 1, limit)
+    jumpPage(target, page + 1)
   }
 
   jumpToFirstPage = () => {
-    const { target, limit, jumpPage } = this.props
-    jumpPage(target, 1, limit)
+    const { target, jumpPage } = this.props
+    jumpPage(target, 1)
   }
 
   fetchNext = () => {
-    const { target, limit, fetchNext } = this.props
-    fetchNext(target, limit)
+    const { target, fetchNext } = this.props
+    fetchNext(target)
   }
 
   render() {
     const {
       entriesSize,
-      limit,
       loading,
       nextPage = false,
-      offset,
-      pageOffset,
       t,
       target,
+      page,
     } = this.props
 
     const PAGE_SIZE = getPageSize(target)
-    const PAGE_GAP = limit / PAGE_SIZE
     const pageLen = Math.ceil(entriesSize / PAGE_SIZE)
-    let pageBase
-    if (offset < limit) {
-      pageBase = 0
-    } else if (offset % limit === 0) {
-      pageBase = (offset - limit) / limit * PAGE_GAP
-    } else {
-      pageBase = Math.floor(offset / limit) * PAGE_GAP
-    }
-    const currentPageBase = (pageBase % PAGE_GAP === 0)
-      ? pageBase + 1 : pageBase
-    const currentPage = currentPageBase + pageOffset / PAGE_SIZE
+
     const renderRestDots = nextPage ? (
       <Fragment>
         <span>
@@ -101,20 +88,20 @@ class Pagination extends PureComponent {
             className='pagination-icon'
             icon={IconNames.DOUBLE_CHEVRON_LEFT}
             onClick={this.jumpToFirstPage}
-            disabled={currentPage === 1 || loading}
+            disabled={page === 1 || loading}
           />
           <Button
             minimal
             className='pagination-icon'
             icon={IconNames.CHEVRON_LEFT}
             onClick={this.backward}
-            disabled={currentPage - 1 === 0 || loading}
+            disabled={page - 1 === 0 || loading}
           />
           {t('pagination.page')}
           <input
             className='pagination-input'
             ref={this.pageInput}
-            placeholder={currentPage}
+            placeholder={page}
             onKeyPress={this.handleKeyPress}
             data-pagelen={pageLen}
             disabled={loading}
@@ -128,7 +115,7 @@ class Pagination extends PureComponent {
             className='pagination-icon'
             icon={IconNames.CHEVRON_RIGHT}
             onClick={this.forward}
-            disabled={currentPage === pageLen || loading}
+            disabled={page === pageLen || loading}
           />
           <Button
             minimal

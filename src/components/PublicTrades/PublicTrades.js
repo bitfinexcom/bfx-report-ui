@@ -26,9 +26,9 @@ const TYPE = queryConstants.MENU_PUBLIC_TRADES
 class PublicTrades extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetPair, fetchPublictrades, match,
+      dataReceived, pageLoading, setTargetPair, fetchPublictrades, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const pair = (match.params && match.params.pair) || ''
       if (pair) {
         setTargetPair(getMappedSymbolsFromUrl(pair)[0])
@@ -46,11 +46,11 @@ class PublicTrades extends PureComponent {
       columns,
       getFullTime,
       hasSyncPref,
-      pageLoading,
       pairs,
       entries,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       targetPair,
@@ -82,7 +82,7 @@ class PublicTrades extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='publictrades.title' />
       )

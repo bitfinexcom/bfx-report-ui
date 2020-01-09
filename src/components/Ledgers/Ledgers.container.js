@@ -13,6 +13,7 @@ import {
   getDataReceived,
   getEntries,
   getExistingCoins,
+  getPageLoading,
   getTargetSymbols,
 } from 'state/ledgers/selectors'
 import { getColumns } from 'state/filters/selectors'
@@ -26,7 +27,8 @@ const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_LEDGERS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
+  pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
   timeOffset: getTimeOffset(state),
 })

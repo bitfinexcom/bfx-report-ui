@@ -52,7 +52,7 @@ function* fetchWallets({ payload: end }) {
 
 function* refreshWallets() {
   const timestamp = yield select(selectors.getTimestamp)
-  yield call(fetchWallets, { payload: timestamp })
+  yield put(actions.fetchWallets(timestamp))
 }
 
 function* fetchWalletsFail({ payload }) {

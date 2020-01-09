@@ -39,8 +39,8 @@ class Wallets extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchWallets } = this.props
-    if (loading) {
+    const { dataReceived, pageLoading, fetchWallets } = this.props
+    if (!dataReceived && !pageLoading) {
       fetchWallets()
     }
   }
@@ -65,7 +65,8 @@ class Wallets extends PureComponent {
       currentTime,
       entries,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
     } = this.props
@@ -105,7 +106,7 @@ class Wallets extends PureComponent {
       </Fragment>
     )
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title={walletsTitle} />
       )

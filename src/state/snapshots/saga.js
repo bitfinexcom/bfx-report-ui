@@ -51,7 +51,7 @@ export function* fetchSnapshots({ payload: end }) {
 
 function* refreshSnapshots() {
   const timestamp = yield select(selectors.getTimestamp)
-  yield call(fetchSnapshots, { payload: timestamp })
+  yield put(actions.fetchSnapshots(timestamp))
 }
 
 function* fetchSnapshotsFail({ payload }) {

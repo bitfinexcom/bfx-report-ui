@@ -8,6 +8,7 @@ import {
 import {
   getDataReceived,
   getEntries,
+  getPageLoading,
   getTimestamp,
 } from 'state/wallets/selectors'
 
@@ -16,7 +17,8 @@ import Wallets from './Wallets'
 const mapStateToProps = state => ({
   currentTime: getTimestamp(state),
   entries: getEntries(state),
-  loading: !getDataReceived(state),
+  dataReceived: getDataReceived(state),
+  pageLoading: getPageLoading(state),
 })
 
 const mapDispatchToProps = {

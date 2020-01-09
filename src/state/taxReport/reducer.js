@@ -12,6 +12,7 @@ import types from './constants'
 
 const snapshotInitState = {
   dataReceived: false,
+  pageLoading: false,
   positionsTotalPlUsd: null,
   positionsEntries: [],
   positionsTickersEntries: [],
@@ -22,6 +23,7 @@ const snapshotInitState = {
 
 const finalResultInitState = {
   dataReceived: false,
+  pageLoading: false,
   startingPositionsSnapshot: [],
   endingPositionsSnapshot: [],
   finalState: {
@@ -94,6 +96,7 @@ export function taxReportReducer(state = initialState, action) {
         return {
           ...state,
           dataReceived: true,
+          pageLoading: false,
         }
       }
 
@@ -112,6 +115,7 @@ export function taxReportReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
+        pageLoading: false,
         endingPositionsSnapshot: getFrameworkPositionsEntries(endingPositionsSnapshot),
         finalState: {
           startingPeriodBalances: startingPeriodBalances || {},
@@ -132,6 +136,7 @@ export function taxReportReducer(state = initialState, action) {
           [snapshotSection]: {
             ...state[snapshotSection],
             dataReceived: true,
+            pageLoading: false,
           },
         }
       }
@@ -145,6 +150,7 @@ export function taxReportReducer(state = initialState, action) {
         ...state,
         [snapshotSection]: {
           dataReceived: true,
+          pageLoading: false,
           positionsTotalPlUsd,
           positionsEntries: getFrameworkPositionsEntries(positionsSnapshot),
           positionsTickersEntries: getFrameworkPositionsTickersEntries(positionsTickers),

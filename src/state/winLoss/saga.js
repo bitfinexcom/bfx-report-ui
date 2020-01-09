@@ -47,7 +47,7 @@ export function* fetchWinLoss({ payload = {} }) {
 
 function* refreshWinLoss() {
   const params = yield select(selectors.getParams)
-  yield call(fetchWinLoss, { payload: params })
+  yield put(actions.fetchWinLoss(params))
 }
 
 function* fetchWinLossFail({ payload }) {

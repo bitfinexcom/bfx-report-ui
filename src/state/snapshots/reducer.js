@@ -10,6 +10,7 @@ import types from './constants'
 
 export const initialState = {
   dataReceived: false,
+  pageLoading: false,
   positionsTotalPlUsd: null,
   positionsEntries: [],
   positionsTickersEntries: [],
@@ -27,6 +28,7 @@ export function snapshotsReducer(state = initialState, action) {
         return {
           ...state,
           dataReceived: true,
+          pageLoading: false,
         }
       }
 
@@ -38,6 +40,7 @@ export function snapshotsReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
+        pageLoading: false,
         positionsTotalPlUsd,
         positionsEntries: getFrameworkPositionsEntries(positionsSnapshot),
         positionsTickersEntries: getFrameworkPositionsTickersEntries(positionsTickers),

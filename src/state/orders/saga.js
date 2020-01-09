@@ -6,9 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import {
-  formatRawSymbols, mapRequestPairs,
-} from 'state/symbols/utils'
+import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -41,17 +39,11 @@ function getReqOrders({
   return makeFetchCall('getOrders', params)
 }
 
-function* fetchOrders({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchOrders() {
   try {
-    const { entries, targetPairs } = yield select(getOrders)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
+    const { targetPairs } = yield select(getOrders)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const queryLimit = yield select(getTargetQueryLimit, TYPE)
-
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - queryLimit >= offset) {
-      return
-    }
 
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
@@ -63,7 +55,7 @@ function* fetchOrders({ payload }) {
       queryLimit,
     })
     yield put(actions.updateOrders(result))
-    yield put(updatePagination(TYPE, result, queryLimit))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -81,7 +73,7 @@ function* fetchOrders({ payload }) {
   }
 }
 
-function* refreshLedgers() {
+function* refreshOrders() {
   yield put(refreshPagination(TYPE))
 }
 
@@ -91,6 +83,6 @@ function* fetchOrdersFail({ payload }) {
 
 export default function* ordersSaga() {
   yield takeLatest(types.FETCH_ORDERS, fetchOrders)
-  yield takeLatest(types.REFRESH, refreshLedgers)
+  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR], refreshOrders)
   yield takeLatest(types.FETCH_FAIL, fetchOrdersFail)
 }

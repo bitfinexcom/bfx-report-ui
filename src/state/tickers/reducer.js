@@ -7,6 +7,7 @@ import authTypes from 'state/auth/constants'
 import {
   addPair,
   basePairState,
+  fetch,
   fetchFail,
   refresh,
   removePair,
@@ -26,12 +27,15 @@ const TYPE = queryTypes.MENU_TICKERS
 export function TickersReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
+    case types.FETCH_TICKERS:
+      return fetch(state)
     case types.UPDATE_TICKERS: {
       const res = _get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,
           dataReceived: true,
+          pageLoading: false,
         }
       }
       const { existingPairs } = state
@@ -58,9 +62,9 @@ export function TickersReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
+        pageLoading: false,
         entries: [...state.entries, ...entries],
         existingPairs: updatePairs.sort(),
-        pageLoading: false,
       }
     }
     case types.FETCH_FAIL:

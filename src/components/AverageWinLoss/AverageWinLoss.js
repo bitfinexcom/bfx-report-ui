@@ -35,8 +35,10 @@ class AverageWinLoss extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchWinLoss, params } = this.props
-    if (loading) {
+    const {
+      dataReceived, pageLoading, fetchWinLoss, params,
+    } = this.props
+    if (!dataReceived && !pageLoading) {
       fetchWinLoss(params)
     }
   }
@@ -77,7 +79,8 @@ class AverageWinLoss extends PureComponent {
     const {
       entries,
       params: { timeframe: currTimeframe },
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       handleClickExport,
       t,
@@ -138,7 +141,7 @@ class AverageWinLoss extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='averagewinloss.title' />
       )

@@ -6,7 +6,8 @@ const WIN_LOSS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   entries: PropTypes.arrayOf(WIN_LOSS_ENTRIES_PROPS).isRequired,
-  loading: PropTypes.bool.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
+  pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
@@ -15,8 +16,5 @@ export const propTypes = {
 
 export const defaultProps = {
   entries: [],
-  loading: true,
-  refresh: () => {},
   params: {},
-  fetchWinLoss: () => {},
 }

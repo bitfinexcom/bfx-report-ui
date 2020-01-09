@@ -6,6 +6,7 @@ import types from './constants'
 
 const initialState = {
   dataReceived: false,
+  pageLoading: false,
   entries: [],
   timestamp: undefined,
 }
@@ -13,11 +14,17 @@ const initialState = {
 export function walletsReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
+    case types.FETCH_WALLETS:
+      return {
+        ...state,
+        pageLoading: true,
+      }
     case types.UPDATE_WALLETS: {
       if (!payload) {
         return {
           ...state,
           dataReceived: true,
+          pageLoading: false,
         }
       }
       const entries = payload.map((entry) => {
@@ -37,12 +44,13 @@ export function walletsReducer(state = initialState, action) {
       return {
         ...state,
         dataReceived: true,
+        pageLoading: false,
         entries,
       }
     }
     case types.SET_TIMESTAMP:
       return {
-        ...initialState,
+        ...state,
         timestamp: payload,
       }
     case types.FETCH_FAIL:

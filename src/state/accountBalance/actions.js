@@ -24,7 +24,7 @@ export function setParams(payload) {
 
 /**
  * Create an action to note fetch fail.
- * @param {number} payload fail message
+ * @param {Object} payload fail message
  */
 export function fetchFail(payload) {
   return {

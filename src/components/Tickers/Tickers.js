@@ -26,9 +26,9 @@ const TYPE = queryConstants.MENU_TICKERS
 class Tickers extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetPairs, fetchTickers, match,
+      dataReceived, pageLoading, setTargetPairs, fetchTickers, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const pairs = (match.params && match.params.pair) || ''
       if (pairs) {
         setTargetPairs(getMappedSymbolsFromUrl(pairs))
@@ -56,10 +56,10 @@ class Tickers extends PureComponent {
       existingPairs,
       getFullTime,
       hasSyncPref,
-      pageLoading,
       entries,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       targetPairs,
@@ -90,7 +90,7 @@ class Tickers extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='tickers.title' />
       )

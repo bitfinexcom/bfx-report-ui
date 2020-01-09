@@ -2,18 +2,16 @@ import _get from 'lodash/get'
 
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
-import { TYPE_WHITELIST, getPageSize } from 'state/query/utils'
-import { getPageOffset } from 'state/reducers.helper'
+import { getPageSize, TYPE_WHITELIST } from 'state/query/utils'
 
 import types from './constants'
 
 const initialSectionState = {
   entriesSize: 0,
-  currentEntriesSize: 0,
   nextPage: 0,
-  offset: 0,
-  pageOffset: 0,
   smallestMts: 0,
+
+  page: 1,
 }
 
 const getInitialState = () => TYPE_WHITELIST.reduce((acc, section) => {
@@ -21,7 +19,7 @@ const getInitialState = () => TYPE_WHITELIST.reduce((acc, section) => {
   return acc
 }, {})
 
-const initialState = getInitialState()
+export const initialState = getInitialState()
 
 const SMALLEST_MTS_MAP = {
   [queryTypes.MENU_LEDGERS]: 'mts',
@@ -46,7 +44,7 @@ function paginationReducer(state = initialState, { type, payload }) {
       if (!_get(payload, ['data', 'res'])) {
         return state
       }
-      const { section, data, queryLimit } = payload
+      const { section, data } = payload
       const { res: entries, nextPage } = data
       if (!entries.length) {
         return state
@@ -54,63 +52,39 @@ function paginationReducer(state = initialState, { type, payload }) {
 
       let smallestMts = 0
       entries.forEach((entry) => {
-        const mts = entry[SMALLEST_MTS_MAP[section]]
-        if (nextPage === false && (!smallestMts || smallestMts > mts)) {
+        const mts = entry[SMALLEST_MTS_MAP[section]] || 0
+        if (nextPage === false && (!smallestMts || mts < smallestMts)) {
           smallestMts = mts
         }
       })
 
+      const currentPage = state[section].page
+      const entriesSize = state[section].entriesSize + entries.length
       const pageSize = getPageSize(section)
-      const [offset, pageOffset] = getPageOffset(state[section], entries, queryLimit, pageSize)
+      const maxPage = Math.ceil(entriesSize / pageSize)
 
       return {
         ...state,
         [section]: {
-          entriesSize: state[section].entriesSize + entries.length,
-          currentEntriesSize: entries.length,
+          entriesSize,
           smallestMts: nextPage !== false ? nextPage : smallestMts - 1,
-          offset,
-          pageOffset,
           nextPage,
-        },
-      }
-    }
-    case types.FETCH_NEXT: {
-      const { section, queryLimit } = payload
-      const fetchNextOffsets = (state.entriesSize - queryLimit >= state.offset)
-        ? {
-          offset: state.offset + state.currentEntriesSize,
-          pageOffset: 0,
-        } : {}
 
-      return {
-        ...state,
-        [section]: {
-          ...state[section],
-          ...fetchNextOffsets,
+          // jump next page if not first fetch and able
+          page: entries.length < entriesSize && maxPage > currentPage
+            ? currentPage + 1
+            : currentPage,
         },
       }
     }
     case types.JUMP_PAGE: {
-      const { section, page, queryLimit } = payload
-      const PAGE_SIZE = getPageSize(section)
-      const totalOffset = (page - 1) * PAGE_SIZE
-      const currentOffset = Math.floor(totalOffset / queryLimit) * queryLimit
-      const baseOffset = Math.ceil(page / queryLimit * PAGE_SIZE) * queryLimit
-
-      const nextOffsets = (totalOffset < queryLimit) ? {
-        offset: state.offset < baseOffset ? state.offset : baseOffset,
-        pageOffset: totalOffset - currentOffset,
-      } : {
-        offset: currentOffset + queryLimit,
-        pageOffset: totalOffset - currentOffset,
-      }
+      const { section, page } = payload
 
       return {
         ...state,
         [section]: {
           ...state[section],
-          ...nextOffsets,
+          page,
         },
       }
     }

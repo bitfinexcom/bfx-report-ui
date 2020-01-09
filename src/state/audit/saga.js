@@ -8,7 +8,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
+import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -37,24 +37,19 @@ function getReqPositionsAudit({
   return new Promise((_, reject) => reject(new Error('no id specified')))
 }
 
-function* fetchPositionsAudit({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchPositionsAudit() {
   try {
-    const { entries, targetIds } = yield select(getPositionsAudit)
-    const { offset, smallestMts } = yield select(getPaginationData, TYPE)
-    // data exist, no need to fetch again
-    if (nextFetch && entries.length - LIMIT >= offset) {
-      return
-    }
+    const { targetIds } = yield select(getPositionsAudit)
+    const { smallestMts } = yield select(getPaginationData, TYPE)
     const query = yield select(getQuery)
-    const queryLimit = yield select(getTargetQueryLimit, TYPE)
+
     const { result, error } = yield call(fetchData, getReqPositionsAudit, {
       smallestMts,
       query,
       targetIds,
     })
     yield put(actions.updatePAudit(result))
-    yield put(updatePagination(TYPE, result, queryLimit))
+    yield put(updatePagination(TYPE, result))
 
     if (error) {
       yield put(actions.fetchFail({
@@ -82,6 +77,6 @@ function* fetchPositionsAuditFail({ payload }) {
 
 export default function* positionsAuditSaga() {
   yield takeLatest(types.FETCH_PAUDIT, fetchPositionsAudit)
-  yield takeLatest(types.REFRESH, refreshPositionsAudit)
+  yield takeLatest([types.REFRESH, types.SET_IDS, types.ADD_ID, types.REMOVE_ID], refreshPositionsAudit)
   yield takeLatest(types.FETCH_FAIL, fetchPositionsAuditFail)
 }

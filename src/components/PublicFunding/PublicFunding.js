@@ -27,9 +27,9 @@ const TYPE = queryConstants.MENU_PUBLIC_FUNDING
 class PublicFunding extends PureComponent {
   componentDidMount() {
     const {
-      loading, setTargetSymbol, fetchPublicfunding, match,
+      dataReceived, pageLoading, setTargetSymbol, fetchPublicfunding, match,
     } = this.props
-    if (loading) {
+    if (!dataReceived && !pageLoading) {
       const pair = (match.params && match.params.symbol) || ''
       if (pair) {
         setTargetSymbol(getMappedSymbolsFromUrl(pair)[0])
@@ -58,10 +58,10 @@ class PublicFunding extends PureComponent {
       currencies,
       getFullTime,
       hasSyncPref,
-      pageLoading,
       entries,
       handleClickExport,
-      loading,
+      dataReceived,
+      pageLoading,
       refresh,
       t,
       targetSymbol,
@@ -95,7 +95,7 @@ class PublicFunding extends PureComponent {
     )
 
     let showContent
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       showContent = (
         <Loading title='publicfunding.title' />
       )
