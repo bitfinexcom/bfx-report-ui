@@ -270,7 +270,10 @@
   "pagination": {
     "page": "頁數",
     "of": "/",
-    "loading": "查詢中..."
+    "loading": "查詢中...",
+    "no_results": "無搜尋結果",
+    "proceed": "繼續搜尋",
+    "last_data_timestamp": "Last data received dated: {{date}}"
   },
   "paudit": {
     "title": "倉位驗證",
