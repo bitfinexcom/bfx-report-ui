@@ -6,13 +6,11 @@ import {
 } from '@blueprintjs/core'
 import { MultiSelect } from '@blueprintjs/select'
 
+import { filterSelectorItem } from 'ui/utils'
+
 import { propTypes, defaultProps } from './MultiPairSelector.props'
 
 class MultiPairSelector extends PureComponent {
-  filterPair = (query, pair) => pair.toUpperCase().indexOf(query.toUpperCase()) >= 0
-
-  renderTag = pair => pair
-
   renderPair = (pair, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
@@ -56,14 +54,14 @@ class MultiPairSelector extends PureComponent {
         placeholder={t('selector.filter.pair')}
         items={items}
         itemRenderer={this.renderPair}
-        itemPredicate={this.filterPair}
+        itemPredicate={filterSelectorItem}
         onItemSelect={togglePair}
         popoverProps={{ minimal: true }}
         tagInputProps={{
           tagProps: { minimal: true },
           onRemove: togglePair,
         }}
-        tagRenderer={this.renderTag}
+        tagRenderer={pair => pair}
         selectedItems={currentFilters}
         resetOnSelect
       />

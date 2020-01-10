@@ -38,6 +38,8 @@ export const amountStyle = (amount) => {
 
 export const insertIf = (condition, ...elements) => (condition ? elements : [])
 
+export const filterSelectorItem = (query, item) => item.toLowerCase().indexOf(query.toLowerCase()) >= 0
+
 export const fixedFloat = val => (typeof val === 'number' ? val && val.toFixed(8) : val)
 
 export const formatAmount = (val, color) => {
@@ -76,4 +78,5 @@ export default {
   checkboxFieldStyle,
   dialogDescStyle,
   dialogFieldStyle,
+  filterSelectorItem,
 }

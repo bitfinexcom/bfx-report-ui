@@ -16,7 +16,7 @@ import { formatDate } from 'state/utils'
 import { getTarget } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
-import ExportTargetsSelector from './ExportTargetsSelector'
+import ExportTargetsSelector from './ExportDialog.TargetsSelector'
 import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {

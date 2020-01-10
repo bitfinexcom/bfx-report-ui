@@ -6,11 +6,11 @@ import {
 } from '@blueprintjs/core'
 import { MultiSelect } from '@blueprintjs/select'
 
+import { filterSelectorItem } from 'ui/utils'
+
 import { propTypes, defaultProps } from './MultiSymbolSelector.props'
 
 class MultiSymbolSelector extends PureComponent {
-  filterSymbol = (query, coin) => coin.toUpperCase().indexOf(query.toUpperCase()) >= 0
-
   renderSymbol = (symbol, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
@@ -57,7 +57,7 @@ class MultiSymbolSelector extends PureComponent {
         placeholder={t('selector.filter.symbol')}
         items={items}
         itemRenderer={this.renderSymbol}
-        itemPredicate={this.filterSymbol}
+        itemPredicate={filterSelectorItem}
         onItemSelect={toggleSymbol}
         popoverProps={{ minimal: true }}
         tagInputProps={{ tagProps: { minimal: true }, onRemove: toggleSymbol }}
