@@ -99,7 +99,7 @@ class TradedVolume extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('tradedvolume.query.startDateTooltip')}
+              {t('query.startDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -114,7 +114,7 @@ class TradedVolume extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('tradedvolume.query.endDateTooltip')}
+              {t('query.endDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -136,7 +136,7 @@ class TradedVolume extends PureComponent {
           intent={hasChanges ? Intent.PRIMARY : null}
           disabled={!hasChanges}
         >
-          {t('tradedvolume.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )

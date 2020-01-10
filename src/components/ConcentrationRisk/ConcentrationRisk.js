@@ -129,7 +129,7 @@ class ConcentrationRisk extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('concentrationrisk.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )

@@ -1,11 +1,6 @@
 {
   "accountbalance": {
-    "title": "Баланс на счете",
-    "query": {
-      "title": "Запрос",
-      "startDateTooltip": "Выберите начальное время",
-      "endDateTooltip": "Выберите конечное время"
-    }
+    "title": "Баланс на счете"
   },
   "activepositions": {
     "title": "Активные позиции"
@@ -28,12 +23,7 @@
     }
   },
   "averagewinloss": {
-    "title": "Среднее от выигрышей/проигрышей",
-    "query": {
-      "title": "Запрос",
-      "startDateTooltip": "Выберите начальное время",
-      "endDateTooltip": "Выберите конечное время"
-    }
+    "title": "Среднее от выигрышей/проигрышей"
   },
   "column": {
     "actual-price": "АКТУАЛЬНАЯ ЦЕНА",
@@ -91,7 +81,8 @@
   },
   "columnsfilter": {
     "title": "Фильтровать столбцы",
-    "cancel": "Отменить",
+    "clear": "Clear",
+    "cancel": "Отмена",
     "apply": "Применить фильтры",
     "filters": {
       "contains": "Включает",
@@ -104,8 +95,8 @@
     }
   },
   "columnsselect": {
-    "title": "Выбрать столбцы",
-    "cancel": "Cancel",
+    "title": "Выбор столбцов",
+    "cancel": "Отмена",
     "apply": "Применить столбцы"
   },
   "concentrationrisk": {
@@ -173,6 +164,9 @@
       "null": "пусто"
     }
   },
+  "feesreport": {
+    "title": "Отчет о размерах комиссии"
+  },
   "floan": {
     "title": "Кредиты обеспечения (неиспольз.)",
     "column": {
@@ -237,6 +231,9 @@
     }
   },
   "loading": "Загрузка...",
+  "loanreport": {
+    "title": "Отчет о займах"
+  },
   "movements": {
     "title": "Движения",
     "column": {
@@ -267,6 +264,13 @@
       "typeprev": "ПРЕДЫДУЩИЙ ТИП ОРДЕРА"
     }
   },
+  "ordertrades": {
+    "title": "Order Trades",
+    "noid": {
+      "title": "ID ордера",
+      "description": "Пожалуйста, выберите ID ордера со страницы Ордеров."
+    }
+  },
   "pagination": {
     "page": "Страница",
     "of": "из",
@@ -282,7 +286,7 @@
     },
     "noid": {
       "title": "Нет ID позиций",
-      "description": "На странице с позициями выберите запрос журнала изменений позиций по ID."
+      "description": "Пожалуйста, выберите ID позиции со страницы Позиции, чтобы сделать запрос."
     }
   },
   "positions": {
@@ -355,6 +359,11 @@
       "pair": "ПАРА"
     }
   },
+  "query": {
+    "title": "Запрос",
+    "startDateTooltip": "Выберите начальное время",
+    "endDateTooltip": "Выберите конечное время"
+  },
   "querylimit": {
     "tooltip": "Выберите объем для каждого запроса. Чем больше объем, тем дольше будет выполняться запрос"
   },
@@ -409,11 +418,6 @@
   },
   "taxreport": {
     "title": "Налоговый отчет",
-    "query": {
-      "title": "Запрос",
-      "startDateTooltip": "Выберите начальное время",
-      "endDateTooltip": "Выберите конечное время"
-    },
     "sections": {
       "startSnapshot": "Начальный снапшот",
       "endSnapshot": "Конечный снапшот",
@@ -469,6 +473,9 @@
     "start-date-placeholder": "Начальная дата и время",
     "today": "Сегодня",
     "year": "Год"
+  },
+  "tradedvolume": {
+    "title": "Объем торгов"
   },
   "trades": {
     "title": "Сделки",

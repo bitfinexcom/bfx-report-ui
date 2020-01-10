@@ -1,11 +1,6 @@
 {
   "accountbalance": {
-    "title": "Account Balance",
-    "query": {
-      "title": "Query",
-      "startDateTooltip": "Select a start time",
-      "endDateTooltip": "Select end time"
-    }
+    "title": "Account Balance"
   },
   "activepositions": {
     "title": "Active Positions"
@@ -28,12 +23,7 @@
     }
   },
   "averagewinloss": {
-    "title": "Average Win/Loss",
-    "query": {
-      "title": "Query",
-      "startDateTooltip": "Select a start time",
-      "endDateTooltip": "Select end time"
-    }
+    "title": "Average Win/Loss"
   },
   "column": {
     "actual-price": "ACTUAL PRICE",
@@ -175,12 +165,7 @@
     }
   },
   "feesreport": {
-    "title": "Fees Report",
-    "query": {
-      "title": "Query",
-      "startDateTooltip": "Select a start time",
-      "endDateTooltip": "Select end time"
-    }
+    "title": "Fees Report"
   },
   "floan": {
     "title": "Funding Loans (Unused)",
@@ -247,12 +232,7 @@
   },
   "loading": "Loading...",
   "loanreport": {
-    "title": "Loan Report",
-    "query": {
-      "title": "Query",
-      "startDateTooltip": "Select a start time",
-      "endDateTooltip": "Select end time"
-    }
+    "title": "Loan Report"
   },
   "movements": {
     "title": "Movements",
@@ -306,7 +286,7 @@
     },
     "noid": {
       "title": "No Positions ID",
-      "description": "Please select from the Positions page to query the Positions changelog by ID."
+      "description": "Please select a position ID from the Positions page to make the query."
     }
   },
   "positions": {
@@ -379,6 +359,11 @@
       "pair": "PAIR"
     }
   },
+  "query": {
+    "title": "Query",
+    "startDateTooltip": "Select a start time",
+    "endDateTooltip": "Select end time"
+  },
   "querylimit": {
     "tooltip": "Choose the size per query. The larger size will take longer query time"
   },
@@ -433,11 +418,6 @@
   },
   "taxreport": {
     "title": "Tax Report",
-    "query": {
-      "title": "Query",
-      "startDateTooltip": "Select a start time",
-      "endDateTooltip": "Select end time"
-    },
     "sections": {
       "startSnapshot": "Start Snapshot",
       "endSnapshot": "End Snapshot",
@@ -495,12 +475,7 @@
     "year": "Year"
   },
   "tradedvolume": {
-    "title": "Traded Volume",
-    "query": {
-      "title": "Query",
-      "startDateTooltip": "Select a start time",
-      "endDateTooltip": "Select end time"
-    }
+    "title": "Traded Volume"
   },
   "trades": {
     "title": "Trades",

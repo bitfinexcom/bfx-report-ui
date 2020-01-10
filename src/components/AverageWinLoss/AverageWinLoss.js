@@ -97,7 +97,7 @@ class AverageWinLoss extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('averagewinloss.query.startDateTooltip')}
+              {t('query.startDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -112,7 +112,7 @@ class AverageWinLoss extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('averagewinloss.query.endDateTooltip')}
+              {t('query.endDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -134,7 +134,7 @@ class AverageWinLoss extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('averagewinloss.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )

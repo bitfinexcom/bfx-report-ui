@@ -99,7 +99,7 @@ class TaxReport extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('taxreport.query.startDateTooltip')}
+              {t('query.startDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -113,7 +113,7 @@ class TaxReport extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('taxreport.query.endDateTooltip')}
+              {t('query.endDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -128,7 +128,7 @@ class TaxReport extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('taxreport.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )

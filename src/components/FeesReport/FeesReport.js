@@ -99,7 +99,7 @@ class FeesReport extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('feesreport.query.startDateTooltip')}
+              {t('query.startDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -114,7 +114,7 @@ class FeesReport extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('feesreport.query.endDateTooltip')}
+              {t('query.endDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -136,7 +136,7 @@ class FeesReport extends PureComponent {
           intent={hasChanges ? Intent.PRIMARY : null}
           disabled={!hasChanges}
         >
-          {t('feesreport.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )

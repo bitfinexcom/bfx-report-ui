@@ -1,11 +1,6 @@
 {
   "accountbalance": {
-    "title": "帐户余额",
-    "query": {
-      "title": "查询",
-      "startDateTooltip": "选择开始时间",
-      "endDateTooltip": "选择结束时间"
-    }
+    "title": "帐户余额"
   },
   "activepositions": {
     "title": "有效仓位"
@@ -28,12 +23,7 @@
     }
   },
   "averagewinloss": {
-    "title": "平均盈利/损失",
-    "query": {
-      "title": "查询",
-      "startDateTooltip": "选择开始时间",
-      "endDateTooltip": "选择结束时间"
-    }
+    "title": "平均盈利/损失"
   },
   "column": {
     "actual-price": "实际价格",
@@ -91,6 +81,7 @@
   },
   "columnsfilter": {
     "title": "筛选栏",
+    "clear": "Clear",
     "cancel": "取消",
     "apply": "应用筛选",
     "filters": {
@@ -105,7 +96,7 @@
   },
   "columnsselect": {
     "title": "栏位选择",
-    "cancel": "Cancel",
+    "cancel": "取消",
     "apply": "适用栏位"
   },
   "concentrationrisk": {
@@ -173,6 +164,9 @@
       "null": "空"
     }
   },
+  "feesreport": {
+    "title": "手续费报告"
+  },
   "floan": {
     "title": "融资贷款（未使用）",
     "column": {
@@ -237,6 +231,9 @@
     }
   },
   "loading": "正在加载...",
+  "loanreport": {
+    "title": "借贷报告"
+  },
   "movements": {
     "title": "移动",
     "column": {
@@ -267,6 +264,13 @@
       "typeprev": "先前订单类型"
     }
   },
+  "ordertrades": {
+    "title": "Order Trades",
+    "noid": {
+      "title": "无订单ID",
+      "description": "请在订单页面中选择订单ID，来进行查询。"
+    }
+  },
   "pagination": {
     "page": "页码",
     "of": "/",
@@ -282,7 +286,7 @@
     },
     "noid": {
       "title": "无仓位 ID",
-      "description": "请从“仓位”页面中选择以按 ID 查询仓位日志记录。"
+      "description": "请提供仓位页面上的仓位ID进行查询。"
     }
   },
   "positions": {
@@ -355,6 +359,11 @@
       "pair": "货币对"
     }
   },
+  "query": {
+    "title": "查询",
+    "startDateTooltip": "选择开始时间",
+    "endDateTooltip": "选择结束时间"
+  },
   "querylimit": {
     "tooltip": "按查询选择大小，查询越大，时间越长。"
   },
@@ -409,11 +418,6 @@
   },
   "taxreport": {
     "title": "税务报告",
-    "query": {
-      "title": "查询",
-      "startDateTooltip": "选择开始时间",
-      "endDateTooltip": "选择结束时间"
-    },
     "sections": {
       "startSnapshot": "期初快照",
       "endSnapshot": "期末快照",
@@ -469,6 +473,9 @@
     "start-date-placeholder": "开始日期时间",
     "today": "今日",
     "year": "年"
+  },
+  "tradedvolume": {
+    "title": "交易量"
   },
   "trades": {
     "title": "交易",

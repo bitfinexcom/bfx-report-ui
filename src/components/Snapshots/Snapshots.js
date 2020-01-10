@@ -144,7 +144,7 @@ class Snapshots extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('snapshots.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )
