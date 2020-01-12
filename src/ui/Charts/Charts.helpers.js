@@ -4,6 +4,8 @@ import timeframeConstants from 'ui/TimeframeSelector/constants'
 
 import { CURRENCY_USD } from './constants'
 
+const formatValue = val => val && +val.toFixed(2)
+
 const formatTimestamp = (timestamp, timeframe) => {
   if (!timestamp) {
     return ''
@@ -29,13 +31,35 @@ const parseChartData = ({ data, timeframe }) => {
 
     return {
       name: formatTimestamp(mts, timeframe),
-      [CURRENCY_USD]: entry[CURRENCY_USD] && +entry[CURRENCY_USD].toFixed(2),
+      [CURRENCY_USD]: formatValue(entry[CURRENCY_USD]),
     }
   })
 
   return {
     chartData,
     presentCurrencies: [CURRENCY_USD],
+  }
+}
+
+export const parseLoanReportChartData = ({ data, timeframe, t }) => {
+  const chartData = data.map((entry) => {
+    const { mts } = entry
+
+    return {
+      name: formatTimestamp(mts, timeframe),
+      [CURRENCY_USD]: formatValue(entry[CURRENCY_USD]),
+      cumulative: formatValue(entry.cumulative),
+      perc: formatValue(entry.perc),
+    }
+  })
+
+  return {
+    chartData,
+    dataKeys: [
+      CURRENCY_USD,
+      { key: 'cumulative', name: t('charts.cumulative') },
+      { key: 'perc', name: t('charts.percentage') },
+    ],
   }
 }
 

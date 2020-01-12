@@ -25,6 +25,10 @@
   "averagewinloss": {
     "title": "平均盈利/损失"
   },
+  "charts": {
+    "cumulative": "Cumulative",
+    "percentage": "Percentage"
+  },
   "column": {
     "actual-price": "实际价格",
     "amount": "金额",

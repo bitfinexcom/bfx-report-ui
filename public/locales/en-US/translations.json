@@ -25,6 +25,10 @@
   "averagewinloss": {
     "title": "Average Win/Loss"
   },
+  "charts": {
+    "cumulative": "Cumulative",
+    "percentage": "Percentage"
+  },
   "column": {
     "actual-price": "ACTUAL PRICE",
     "amount": "AMOUNT",

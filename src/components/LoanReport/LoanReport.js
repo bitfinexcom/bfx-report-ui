@@ -17,7 +17,7 @@ import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
-import parseChartData from 'ui/Charts/Charts.helpers'
+import { parseLoanReportChartData } from 'ui/Charts/Charts.helpers'
 import TimeframeSelector from 'ui/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
@@ -79,9 +79,10 @@ class LoanReport extends PureComponent {
     const { start, end } = this.state
     const hasChanges = this.hasChanges()
 
-    const { chartData, presentCurrencies } = parseChartData({
+    const { chartData, dataKeys } = parseLoanReportChartData({
       data: _sortBy(entries, ['mts']),
       timeframe,
+      t,
     })
 
     const renderTimeSelection = (
@@ -179,7 +180,7 @@ class LoanReport extends PureComponent {
           </h4>
           <Chart
             data={chartData}
-            dataKeys={presentCurrencies}
+            dataKeys={dataKeys}
           />
         </Fragment>
       )

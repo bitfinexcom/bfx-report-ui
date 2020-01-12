@@ -18,29 +18,33 @@ class Chart extends React.PureComponent {
   getGradients = () => {
     const { dataKeys } = this.props
 
-    return dataKeys.map((key, i) => (
-      <linearGradient key={key} id={key} x1='0' y1='0' x2='0' y2='1'>
-        <stop offset='0%' stopColor={COLORS[i]} stopOpacity={0.15} />
-        <stop offset='100%' stopColor={COLORS[i]} stopOpacity={0.06} />
-      </linearGradient>
-    ))
+    return dataKeys.map((dataKey, i) => {
+      const { key = dataKey } = dataKey
+
+      return (
+        <linearGradient key={key} id={key} x1='0' y1='0' x2='0' y2='1'>
+          <stop offset='0%' stopColor={COLORS[i]} stopOpacity={0.15} />
+          <stop offset='100%' stopColor={COLORS[i]} stopOpacity={0.06} />
+        </linearGradient>
+      )
+    })
   }
 
   getAreas = () => {
     const { dataKeys } = this.props
 
-    return dataKeys.map((key, i) => {
-      const { dataKey = key, name } = key
+    return dataKeys.map((dataKey, i) => {
+      const { key = dataKey, name } = dataKey
 
       return (
         <Area
-          key={dataKey}
+          key={key}
           name={name}
           type='monotone'
-          dataKey={dataKey}
+          dataKey={key}
           stroke={COLORS[i]}
           strokeWidth={1.2}
-          fill={`url(#${dataKey})`}
+          fill={`url(#${key})`}
           connectNulls
           dot={false}
         />

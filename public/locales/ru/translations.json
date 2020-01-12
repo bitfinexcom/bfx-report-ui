@@ -25,6 +25,10 @@
   "averagewinloss": {
     "title": "Среднее от выигрышей/проигрышей"
   },
+  "charts": {
+    "cumulative": "Cumulative",
+    "percentage": "Percentage"
+  },
   "column": {
     "actual-price": "АКТУАЛЬНАЯ ЦЕНА",
     "amount": "СУММА",
