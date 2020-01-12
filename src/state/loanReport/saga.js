@@ -9,7 +9,7 @@ import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
 import { getParams } from 'state/loanReport/selectors'
-import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
+import { mapRequestSymbols } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -18,11 +18,11 @@ export const getLoanReport = ({
   start,
   end,
   timeframe,
-  targetPairs,
+  targetSymbols,
 }) => {
   const params = { start, end, timeframe }
-  if (targetPairs.length) {
-    params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
+  if (targetSymbols.length) {
+    params.symbol = mapRequestSymbols(targetSymbols)
   }
   return makeFetchCall('getPerformingLoan', params)
 }

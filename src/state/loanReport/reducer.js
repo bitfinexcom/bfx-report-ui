@@ -9,7 +9,7 @@ export const initialState = {
   pageLoading: false,
   currentFetchParams: {},
   entries: [],
-  targetPairs: [],
+  targetSymbols: [],
   start: getLastMonth(),
   end: undefined,
   timeframe: timeframeConstants.DAY,
@@ -23,7 +23,7 @@ export function loanReportReducer(state = initialState, action) {
         ...state,
         pageLoading: true,
         currentFetchParams: {
-          targetPairs: state.targetPairs,
+          targetSymbols: state.targetSymbols,
           start: state.start,
           end: state.end,
           timeframe: state.timeframe,
@@ -48,20 +48,20 @@ export function loanReportReducer(state = initialState, action) {
         dataReceived: true,
         pageLoading: false,
       }
-    case types.ADD_PAIR:
+    case types.ADD_SYMBOL:
       return {
         ...state,
-        targetPairs: [...state.targetPairs, payload],
+        targetSymbols: [...state.targetSymbols, payload],
       }
-    case types.REMOVE_PAIR:
+    case types.REMOVE_SYMBOL:
       return {
         ...state,
-        targetPairs: state.targetPairs.filter(pair => pair !== payload),
+        targetSymbols: state.targetSymbols.filter(symbol => symbol !== payload),
       }
-    case types.SET_PAIRS:
+    case types.SET_SYMBOLS:
       return {
         ...state,
-        targetPairs: payload,
+        targetSymbols: payload,
       }
     case types.REFRESH:
       return {
@@ -69,7 +69,7 @@ export function loanReportReducer(state = initialState, action) {
         start: state.start,
         end: state.end,
         timeframe: state.timeframe,
-        targetPairs: state.targetPairs,
+        targetSymbols: state.targetSymbols,
       }
     case authTypes.LOGOUT:
       return initialState

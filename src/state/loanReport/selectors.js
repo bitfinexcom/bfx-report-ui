@@ -3,17 +3,17 @@ export const getLoanReport = state => state.loanReport
 export const getCurrentFetchParams = state => getLoanReport(state).currentFetchParams
 export const getDataReceived = state => getLoanReport(state).dataReceived
 export const getEntries = state => getLoanReport(state).entries
-export const getTargetPairs = state => getLoanReport(state).targetPairs
+export const getTargetSymbols = state => getLoanReport(state).targetSymbols
 export const getPageLoading = state => getLoanReport(state).pageLoading
 export const getParams = (state) => {
   const {
-    targetPairs,
+    targetSymbols,
     start,
     end,
     timeframe,
   } = getLoanReport(state)
   return {
-    targetPairs,
+    targetSymbols,
     start,
     end,
     timeframe,

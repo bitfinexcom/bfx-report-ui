@@ -52,35 +52,35 @@ export function updateLoanReport(payload) {
 }
 
 /**
- * Create an action to set current pair.
- * @param {string[]} pairs pairs
+ * Create an action to set current symbols.
+ * @param {string[]} symbols symbols
  */
-export function setTargetPairs(pairs) {
+export function setTargetSymbols(symbols) {
   return {
-    type: types.SET_PAIRS,
-    payload: pairs,
+    type: types.SET_SYMBOLS,
+    payload: symbols,
   }
 }
 
 /**
- * Create an action to add target pair.
- * @param {string} pair pair
+ * Create an action to add target symbol.
+ * @param {string} symbol symbol
  */
-export function addTargetPair(pair) {
+export function addTargetSymbol(symbol) {
   return {
-    type: types.ADD_PAIR,
-    payload: pair,
+    type: types.ADD_SYMBOL,
+    payload: symbol,
   }
 }
 
 /**
- * Create an action to remove target pair.
- * @param {string} pair pair
+ * Create an action to remove target symbol.
+ * @param {string} symbol symbol
  */
-export function removeTargetPair(pair) {
+export function removeTargetSymbol(symbol) {
   return {
-    type: types.REMOVE_PAIR,
-    payload: pair,
+    type: types.REMOVE_SYMBOL,
+    payload: symbol,
   }
 }
 
@@ -90,7 +90,7 @@ export default {
   refresh,
   setParams,
   updateLoanReport,
-  setTargetPairs,
-  addTargetPair,
-  removeTargetPair,
+  setTargetSymbols,
+  addTargetSymbol,
+  removeTargetSymbol,
 }

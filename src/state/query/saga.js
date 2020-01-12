@@ -176,6 +176,7 @@ function formatSymbol(target, symbols) {
     case MENU_WITHDRAWALS:
     case MENU_DEPOSITS:
     case MENU_FPAYMENT:
+    case MENU_LOAN_REPORT:
       return mapRequestSymbols(symbols)
     case MENU_PUBLIC_FUNDING:
       return `f${mapRequestSymbols(symbols)}`
@@ -184,7 +185,6 @@ function formatSymbol(target, symbols) {
     case MENU_ORDERS:
     case MENU_ORDER_TRADES:
     case MENU_TICKERS:
-    case MENU_LOAN_REPORT:
     case MENU_TRADED_VOLUME:
     case MENU_FEES_REPORT:
     case MENU_TRADES:
@@ -229,6 +229,11 @@ function* getOptions({ target, query }) {
       options.id = sign.id
       break
     case MENU_LOAN_REPORT:
+      options.start = sign.start || undefined
+      options.end = sign.end || undefined
+      options.timeframe = sign.timeframe
+      options.symbol = formatSymbol(target, sign.targetSymbols)
+      break
     case MENU_TRADED_VOLUME:
     case MENU_FEES_REPORT:
       options.start = sign.start || undefined
