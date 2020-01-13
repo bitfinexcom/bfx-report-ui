@@ -31,6 +31,5 @@ export const propTypes = {
 export const defaultProps = {
   entries: [],
   existingPairs: [],
-  loading: true,
   targetPairs: [],
 }

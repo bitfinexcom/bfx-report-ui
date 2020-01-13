@@ -23,8 +23,8 @@ const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
 
 class PositionsActive extends PureComponent {
   componentDidMount() {
-    const { loading, fetchData } = this.props
-    if (loading) {
+    const { dataReceived, pageLoading, fetchData } = this.props
+    if (!dataReceived && !pageLoading) {
       fetchData()
     }
   }

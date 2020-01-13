@@ -7,6 +7,7 @@ import {
 } from 'state/snapshots/actions'
 import {
   getDataReceived,
+  getPageLoading,
   getPositionsTotalPl,
   getPositionsEntries,
   getPositionsTickersEntries,
@@ -20,17 +21,18 @@ import Snapshots from './Snapshots'
 
 const mapStateToProps = state => ({
   currentTime: getTimestamp(state),
+  dataReceived: getDataReceived(state),
+  pageLoading: getPageLoading(state),
   positionsTotalPlUsd: getPositionsTotalPl(state),
   positionsEntries: getPositionsEntries(state),
   positionsTickersEntries: getPositionsTickersEntries(state),
   walletsTotalBalanceUsd: getWalletsTotalBalance(state),
   walletsTickersEntries: getWalletsTickersEntries(state),
   walletsEntries: getWalletsEntries(state),
-  loading: !getDataReceived(state),
 })
 
 const mapDispatchToProps = {
-  fetchSnapshots,
+  fetchData: fetchSnapshots,
   refresh,
 }
 
