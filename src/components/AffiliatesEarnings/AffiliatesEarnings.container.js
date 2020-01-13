@@ -34,7 +34,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchAffiliatesearnings: fetchAffiliatesEarnings,
+  fetchData: fetchAffiliatesEarnings,
   refresh,
   addTargetSymbol,
   setTargetSymbols,

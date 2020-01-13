@@ -34,7 +34,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchFcredit: fetchFCredit,
+  fetchData: fetchFCredit,
   refresh,
   addTargetSymbol,
   setTargetSymbols,

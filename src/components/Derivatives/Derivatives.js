@@ -1,10 +1,7 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import memoizeOne from 'memoize-one'
-import {
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
 import DataTable from 'ui/DataTable'
@@ -14,11 +11,7 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import {
-  checkFetch,
-  togglePair,
-} from 'state/utils'
+import { checkInit, checkFetch, togglePair } from 'state/utils'
 
 import getColumns from './Derivatives.columns'
 import { propTypes, defaultProps } from './Derivatives.props'
@@ -33,16 +26,7 @@ class Derivatives extends PureComponent {
   }
 
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetPairs, fetchDerivatives, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const pairs = (match.params && match.params.pair) || ''
-      if (pairs) {
-        setTargetPairs(getMappedSymbolsFromUrl(pairs))
-      }
-      fetchDerivatives()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {

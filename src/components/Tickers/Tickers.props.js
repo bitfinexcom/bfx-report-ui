@@ -13,7 +13,7 @@ export const propTypes = {
   setTargetPairs: PropTypes.func.isRequired,
   entries: PropTypes.arrayOf(TICKERS_ENTRIES_PROPS).isRequired,
   existingPairs: PropTypes.arrayOf(PropTypes.string),
-  fetchTickers: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
   hasSyncPref: PropTypes.bool.isRequired,
   dataReceived: PropTypes.bool.isRequired,

@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchFeesReport,
+  fetchData: fetchFeesReport,
   refresh,
   setParams,
   addTargetPair,

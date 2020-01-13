@@ -14,8 +14,7 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch, togglePair } from 'state/utils'
+import { checkInit, checkFetch, togglePair } from 'state/utils'
 import { platform } from 'var/config'
 
 import getColumns from './Tickers.columns'
@@ -25,16 +24,7 @@ const TYPE = queryConstants.MENU_TICKERS
 
 class Tickers extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetPairs, fetchTickers, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const pairs = (match.params && match.params.pair) || ''
-      if (pairs) {
-        setTargetPairs(getMappedSymbolsFromUrl(pairs))
-      }
-      fetchTickers()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {

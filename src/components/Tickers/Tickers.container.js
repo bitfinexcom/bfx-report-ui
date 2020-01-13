@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchTickers,
+  fetchData: fetchTickers,
   refresh,
   addTargetPair,
   setTargetPairs,

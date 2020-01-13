@@ -13,7 +13,7 @@ const ORDER_TRADES_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   setParams: PropTypes.func.isRequired,
   entries: PropTypes.arrayOf(ORDER_TRADES_ENTRIES_PROPS).isRequired,
-  fetchOrdertrades: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   params: PropTypes.shape({

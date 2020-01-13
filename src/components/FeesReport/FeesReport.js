@@ -21,9 +21,8 @@ import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeframeSelector from 'ui/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { togglePair } from 'state/utils'
+import { checkInit, togglePair } from 'state/utils'
 import { isValidTimeStamp } from 'state/query/utils'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 
 import { propTypes, defaultProps } from './FeesReport.props'
 
@@ -41,16 +40,7 @@ class FeesReport extends PureComponent {
   }
 
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetPairs, fetchFeesReport, match,
-    } = this.props
-    const pairs = (match.params && match.params.pair) || ''
-    if (!dataReceived && !pageLoading) {
-      if (pairs) {
-        setTargetPairs(getMappedSymbolsFromUrl(pairs))
-      }
-      fetchFeesReport()
-    }
+    checkInit(this.props, TYPE)
   }
 
   handleDateChange = (input, time) => {
@@ -62,8 +52,8 @@ class FeesReport extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchFeesReport } = this.props
-    fetchFeesReport()
+    const { fetchData } = this.props
+    fetchData()
   }
 
   handleTimeframeChange = (timeframe) => {

@@ -14,8 +14,7 @@ import NoData from 'ui/NoData'
 import PairSelector from 'ui/PairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch, setPair } from 'state/utils'
+import { checkInit, checkFetch, setPair } from 'state/utils'
 import { platform } from 'var/config'
 
 import getColumns from './PublicTrades.columns'
@@ -25,16 +24,7 @@ const TYPE = queryConstants.MENU_PUBLIC_TRADES
 
 class PublicTrades extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetPair, fetchPublictrades, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const pair = (match.params && match.params.pair) || ''
-      if (pair) {
-        setTargetPair(getMappedSymbolsFromUrl(pair)[0])
-      }
-      fetchPublictrades()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {

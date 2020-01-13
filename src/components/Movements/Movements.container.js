@@ -35,7 +35,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchMovements,
+  fetchData: fetchMovements,
   refresh,
   jumpPage,
   addTargetSymbol,

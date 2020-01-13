@@ -36,10 +36,10 @@ class AverageWinLoss extends PureComponent {
 
   componentDidMount() {
     const {
-      dataReceived, pageLoading, fetchWinLoss, params,
+      dataReceived, pageLoading, fetchData, params,
     } = this.props
     if (!dataReceived && !pageLoading) {
-      fetchWinLoss(params)
+      fetchData(params)
     }
   }
 
@@ -51,14 +51,14 @@ class AverageWinLoss extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchWinLoss } = this.props
+    const { fetchData } = this.props
     const { start, end, timeframe } = this.state
     const params = {
       start: start ? start.getTime() : undefined,
       end: end ? end.getTime() : undefined,
       timeframe,
     }
-    fetchWinLoss(params)
+    fetchData(params)
   }
 
   handleTimeframeChange = (timeframe) => {

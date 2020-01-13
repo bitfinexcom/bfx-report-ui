@@ -13,7 +13,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
-  fetchLoanReport: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   addTargetPair: PropTypes.func.isRequired,
   setTargetPairs: PropTypes.func.isRequired,
   removeTargetPair: PropTypes.func.isRequired,

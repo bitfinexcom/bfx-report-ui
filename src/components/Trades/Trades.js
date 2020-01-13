@@ -13,8 +13,7 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch, togglePair } from 'state/utils'
+import { checkInit, checkFetch, togglePair } from 'state/utils'
 
 import getColumns from './Trades.columns'
 import { propTypes, defaultProps } from './Trades.props'
@@ -23,16 +22,7 @@ const TYPE = queryConstants.MENU_TRADES
 
 class Trades extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetPairs, fetchTrades, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const pairs = (match.params && match.params.pair) || ''
-      if (pairs) {
-        setTargetPairs(getMappedSymbolsFromUrl(pairs))
-      }
-      fetchTrades()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {

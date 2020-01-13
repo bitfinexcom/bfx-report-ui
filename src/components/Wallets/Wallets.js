@@ -39,9 +39,9 @@ class Wallets extends PureComponent {
   }
 
   componentDidMount() {
-    const { dataReceived, pageLoading, fetchWallets } = this.props
+    const { dataReceived, pageLoading, fetchData } = this.props
     if (!dataReceived && !pageLoading) {
-      fetchWallets()
+      fetchData()
     }
   }
 
@@ -54,10 +54,10 @@ class Wallets extends PureComponent {
 
   handleQuery = (e) => {
     e.preventDefault()
-    const { fetchWallets } = this.props
+    const { fetchData } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
-    fetchWallets(time)
+    fetchData(time)
   }
 
   render() {

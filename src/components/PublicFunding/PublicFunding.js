@@ -15,8 +15,7 @@ import SymbolSelector from 'ui/SymbolSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch } from 'state/utils'
+import { checkInit, checkFetch } from 'state/utils'
 import { platform } from 'var/config'
 
 import getColumns from './PublicFunding.columns'
@@ -26,16 +25,7 @@ const TYPE = queryConstants.MENU_PUBLIC_FUNDING
 
 class PublicFunding extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetSymbol, fetchPublicfunding, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const pair = (match.params && match.params.symbol) || ''
-      if (pair) {
-        setTargetSymbol(getMappedSymbolsFromUrl(pair)[0])
-      }
-      fetchPublicfunding()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {

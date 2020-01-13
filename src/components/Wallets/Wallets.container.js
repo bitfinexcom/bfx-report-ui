@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchWallets,
+  fetchData: fetchWallets,
   refresh,
 }
 

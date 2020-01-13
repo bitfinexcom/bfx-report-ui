@@ -10,7 +10,7 @@ const WALLETS_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   currentTime: PropTypes.number,
   entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
-  fetchWallets: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,

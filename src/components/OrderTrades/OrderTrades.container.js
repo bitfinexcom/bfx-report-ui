@@ -26,7 +26,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchOrdertrades: fetchOrderTrades,
+  fetchData: fetchOrderTrades,
   refresh,
   setParams,
 }

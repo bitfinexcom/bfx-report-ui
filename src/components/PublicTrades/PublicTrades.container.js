@@ -34,7 +34,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchPublictrades: fetchPublicTrades,
+  fetchData: fetchPublicTrades,
   refresh,
   setTargetPair,
 }

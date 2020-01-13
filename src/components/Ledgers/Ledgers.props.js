@@ -16,7 +16,7 @@ export const propTypes = {
   setTargetSymbols: PropTypes.func.isRequired,
   entries: PropTypes.arrayOf(LEDGERS_ENTRIES_PROPS).isRequired,
   existingCoins: PropTypes.arrayOf(PropTypes.string),
-  fetchLedgers: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   getFullTime: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,

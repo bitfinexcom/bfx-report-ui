@@ -17,7 +17,7 @@ export const propTypes = {
   entries: PropTypes.arrayOf(DERIVATIVES_ENTRIES_PROPS).isRequired,
   pairs: PropTypes.arrayOf(PropTypes.string),
   existingPairs: PropTypes.arrayOf(PropTypes.string),
-  fetchDerivatives: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
