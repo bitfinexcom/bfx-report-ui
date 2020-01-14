@@ -13,8 +13,7 @@ import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch, toggleSymbol } from 'state/utils'
+import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 
 import getColumns from 'components/Ledgers/Ledgers.columns'
 import { propTypes, defaultProps } from 'components/Ledgers/Ledgers.props'
@@ -26,16 +25,7 @@ const TYPE = queryConstants.MENU_AFFILIATES_EARNINGS
  */
 class AffiliatesEarnings extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetSymbols, fetchAffiliatesearnings, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const symbols = (match.params && match.params.symbol) || ''
-      if (symbols) {
-        setTargetSymbols(getMappedSymbolsFromUrl(symbols))
-      }
-      fetchAffiliatesearnings()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {
@@ -49,7 +39,6 @@ class AffiliatesEarnings extends PureComponent {
       targetSymbols,
       entries,
       existingCoins,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -108,7 +97,7 @@ class AffiliatesEarnings extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

@@ -3,14 +3,39 @@ import queryString from 'query-string'
 import memoizeOne from 'memoize-one'
 import _omit from 'lodash/omit'
 import _castArray from 'lodash/castArray'
+import _get from 'lodash/get'
+import _isEqual from 'lodash/isEqual'
+import _sortBy from 'lodash/sortBy'
 
 import { store } from 'state/store'
 import { platform } from 'var/config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
+import queryType from 'state/query/constants'
 import {
-  getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol,
+  getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol, getMappedSymbolsFromUrl,
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
+
+const {
+  MENU_AFFILIATES_EARNINGS,
+  MENU_DERIVATIVES,
+  MENU_FCREDIT,
+  MENU_FEES_REPORT,
+  MENU_FLOAN,
+  MENU_FOFFER,
+  MENU_FPAYMENT,
+  MENU_LEDGERS,
+  MENU_LOAN_REPORT,
+  MENU_MOVEMENTS,
+  MENU_ORDERS,
+  MENU_POSITIONS,
+  MENU_POSITIONS_AUDIT,
+  MENU_PUBLIC_FUNDING,
+  MENU_PUBLIC_TRADES,
+  MENU_TICKERS,
+  MENU_TRADED_VOLUME,
+  MENU_TRADES,
+} = queryType
 
 const getAuthFromStore = () => {
   const state = store.getState()
@@ -110,15 +135,97 @@ export function isValidRouteType(type) {
   return ROUTE_WHITELIST.includes(type)
 }
 
+export const checkInit = (props, type) => {
+  const {
+    dataReceived,
+    pageLoading,
+    fetchData,
+    match,
+
+    setTargetSymbol,
+    setTargetSymbols,
+    setTargetPair,
+    setTargetPairs,
+    targetIds,
+    setTargetIds,
+  } = props
+
+  switch (type) {
+    case MENU_PUBLIC_FUNDING: {
+      if (!dataReceived && !pageLoading) {
+        const symbol = (match.params && match.params.symbol) || ''
+        if (symbol) {
+          setTargetSymbol(getMappedSymbolsFromUrl(symbol)[0])
+        }
+        fetchData()
+      }
+      break
+    }
+    case MENU_PUBLIC_TRADES: {
+      if (!dataReceived && !pageLoading) {
+        const pair = (match.params && match.params.pair) || ''
+        if (pair) {
+          setTargetPair(getMappedSymbolsFromUrl(pair)[0])
+        }
+        fetchData()
+      }
+      break
+    }
+    case MENU_LEDGERS:
+    case MENU_MOVEMENTS:
+    case MENU_FOFFER:
+    case MENU_FLOAN:
+    case MENU_FCREDIT:
+    case MENU_FPAYMENT:
+    case MENU_AFFILIATES_EARNINGS:
+    case MENU_LOAN_REPORT: {
+      if (!dataReceived && !pageLoading) {
+        const symbols = (match.params && match.params.symbol) || ''
+        if (symbols) {
+          setTargetSymbols(getMappedSymbolsFromUrl(symbols))
+        }
+        fetchData()
+      }
+      break
+    }
+    case MENU_TRADES:
+    case MENU_ORDERS:
+    case MENU_POSITIONS:
+    case MENU_TICKERS:
+    case MENU_DERIVATIVES:
+    case MENU_TRADED_VOLUME:
+    case MENU_FEES_REPORT: {
+      if (!dataReceived && !pageLoading) {
+        const pairs = (match.params && match.params.pair) || ''
+        if (pairs) {
+          setTargetPairs(getMappedSymbolsFromUrl(pairs))
+        }
+        fetchData()
+      }
+      break
+    }
+    case MENU_POSITIONS_AUDIT: {
+      const ids = _get(match, 'params.id', '').split(',')
+
+      const isIdChanged = !_isEqual(_sortBy(ids), _sortBy(targetIds))
+      if (ids.length && ((!dataReceived && !pageLoading) || isIdChanged)) {
+        setTargetIds(ids)
+        fetchData()
+      }
+      break
+    }
+    default:
+  }
+}
+
 export function checkFetch(prevProps, props, type) {
   if (!isValidateType(type)) {
     return
   }
   const { dataReceived: prevDataReceived } = prevProps
-  const { dataReceived, pageLoading } = props
-  const fetch = props[`fetch${type.charAt(0).toUpperCase() + type.slice(1)}`]
+  const { dataReceived, pageLoading, fetchData } = props
   if (!dataReceived && dataReceived !== prevDataReceived && !pageLoading) {
-    fetch()
+    fetchData()
   }
 }
 

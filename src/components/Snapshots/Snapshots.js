@@ -39,9 +39,9 @@ class Snapshots extends PureComponent {
   }
 
   componentDidMount() {
-    const { loading, fetchSnapshots } = this.props
-    if (loading) {
-      fetchSnapshots()
+    const { dataReceived, pageLoading, fetchData } = this.props
+    if (!dataReceived && !pageLoading) {
+      fetchData()
     }
   }
 
@@ -54,10 +54,10 @@ class Snapshots extends PureComponent {
 
   handleQuery = (e) => {
     e.preventDefault()
-    const { fetchSnapshots } = this.props
+    const { fetchData } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
-    fetchSnapshots(time)
+    fetchData(time)
   }
 
   getCurrentSection = () => {
@@ -98,20 +98,20 @@ class Snapshots extends PureComponent {
   render() {
     const {
       currentTime,
+      dataReceived,
+      pageLoading,
       positionsTotalPlUsd,
       positionsEntries,
       positionsTickersEntries,
       walletsTotalBalanceUsd,
       walletsTickersEntries,
       walletsEntries,
-      handleClickExport,
-      loading,
       refresh,
       t,
     } = this.props
     const { timestamp } = this.state
 
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       return (
         <Fragment>
           <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
@@ -145,7 +145,7 @@ class Snapshots extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('snapshots.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )
@@ -182,7 +182,7 @@ class Snapshots extends PureComponent {
           {isNotEmpty && (
             <Fragment>
               {' '}
-              <ExportButton handleClickExport={handleClickExport} />
+              <ExportButton />
             </Fragment>
           )}
           {' '}

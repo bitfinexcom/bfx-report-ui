@@ -13,8 +13,7 @@ import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch, toggleSymbol } from 'state/utils'
+import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 
 import getColumns from './Ledgers.columns'
 import { propTypes, defaultProps } from './Ledgers.props'
@@ -23,16 +22,7 @@ const TYPE = queryConstants.MENU_LEDGERS
 
 class Ledgers extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetSymbols, fetchLedgers, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const symbols = (match.params && match.params.symbol) || ''
-      if (symbols) {
-        setTargetSymbols(getMappedSymbolsFromUrl(symbols))
-      }
-      fetchLedgers()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {
@@ -46,7 +36,6 @@ class Ledgers extends PureComponent {
       targetSymbols,
       entries,
       existingCoins,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -105,7 +94,7 @@ class Ledgers extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

@@ -1,11 +1,6 @@
 {
   "accountbalance": {
-    "title": "賬戶餘額",
-    "query": {
-      "title": "查詢",
-      "startDateTooltip": "選擇開始時間",
-      "endDateTooltip": "選擇結束時間"
-    }
+    "title": "賬戶餘額"
   },
   "activepositions": {
     "title": "活躍的倉位"
@@ -28,12 +23,7 @@
     }
   },
   "averagewinloss": {
-    "title": "平均淨/損失",
-    "query": {
-      "title": "查詢",
-      "startDateTooltip": "選擇開始時間",
-      "endDateTooltip": "選擇結束時間"
-    }
+    "title": "平均淨/損失"
   },
   "column": {
     "actual-price": "實際價格",
@@ -91,6 +81,7 @@
   },
   "columnsfilter": {
     "title": "篩選欄",
+    "clear": "Clear",
     "cancel": "取消",
     "apply": "套用篩選",
     "filters": {
@@ -105,7 +96,7 @@
   },
   "columnsselect": {
     "title": "欄位選擇",
-    "cancel": "Cancel",
+    "cancel": "取消",
     "apply": "適用欄位"
   },
   "concentrationrisk": {
@@ -173,6 +164,9 @@
       "null": "空"
     }
   },
+  "feesreport": {
+    "title": "手續費報告"
+  },
   "floan": {
     "title": "提供的融資（未使用）",
     "column": {
@@ -237,6 +231,9 @@
     }
   },
   "loading": "讀取中...",
+  "loanreport": {
+    "title": "借貸報告"
+  },
   "movements": {
     "title": "活動",
     "column": {
@@ -267,6 +264,13 @@
       "typeprev": "先前訂單類型"
     }
   },
+  "ordertrades": {
+    "title": "Order Trades",
+    "noid": {
+      "title": "無訂單ID",
+      "description": "請於訂單頁面中選擇訂單ID，以進行查詢。"
+    }
+  },
   "pagination": {
     "page": "頁數",
     "of": "/",
@@ -282,7 +286,7 @@
     },
     "noid": {
       "title": "未指定倉位 ID",
-      "description": "欲查看倉位變更紀錄，可先從倉位頁面選取ID"
+      "description": "請提供倉位頁面上的倉位ID進行查詢"
     }
   },
   "positions": {
@@ -355,6 +359,11 @@
       "pair": "對"
     }
   },
+  "query": {
+    "title": "查詢",
+    "startDateTooltip": "選擇開始時間",
+    "endDateTooltip": "選擇結束時間"
+  },
   "querylimit": {
     "tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間"
   },
@@ -409,11 +418,6 @@
   },
   "taxreport": {
     "title": "稅務報告",
-    "query": {
-      "title": "查詢",
-      "startDateTooltip": "選擇開始時間",
-      "endDateTooltip": "選擇結束時間"
-    },
     "sections": {
       "startSnapshot": "期初快照",
       "endSnapshot": "期末快照",
@@ -469,6 +473,9 @@
     "start-date-placeholder": "開始日期時間",
     "today": "今日",
     "year": "年"
+  },
+  "tradedvolume": {
+    "title": "交易量"
   },
   "trades": {
     "title": "交易",

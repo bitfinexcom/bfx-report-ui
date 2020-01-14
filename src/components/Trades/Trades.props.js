@@ -16,7 +16,7 @@ export const propTypes = {
   setTargetPairs: PropTypes.func.isRequired,
   entries: PropTypes.arrayOf(TRADES_ENTRIES_PROPS).isRequired,
   existingPairs: PropTypes.arrayOf(PropTypes.string),
-  fetchTrades: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
@@ -25,7 +25,6 @@ export const propTypes = {
   targetPairs: PropTypes.arrayOf(PropTypes.string),
   getFullTime: PropTypes.func,
   timeOffset: PropTypes.string.isRequired,
-  handleClickExport: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

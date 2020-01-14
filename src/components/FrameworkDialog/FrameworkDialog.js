@@ -44,11 +44,8 @@ class FrameworkDialog extends PureComponent {
   }
 
   render() {
-    const { isFrameworkOpen, syncMode, t } = this.props
+    const { isOpen, syncMode, t } = this.props
     const { isFrameworkDialogDisabled } = this.state
-    if (!isFrameworkOpen) {
-      return null
-    }
 
     const title = (syncMode === mode.MODE_SYNCING)
       ? t('framework.title')
@@ -59,7 +56,7 @@ class FrameworkDialog extends PureComponent {
         icon={IconNames.CONFIRM}
         onClose={() => this.handleProceed(false)}
         title={title}
-        isOpen={isFrameworkOpen}
+        isOpen={isOpen}
       >
         <div className={Classes.DIALOG_BODY}>
           <Checkbox

@@ -21,9 +21,8 @@ import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeframeSelector from 'ui/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { togglePair } from 'state/utils'
+import { checkInit, togglePair } from 'state/utils'
 import { isValidTimeStamp } from 'state/query/utils'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 
 import { propTypes, defaultProps } from './TradedVolume.props'
 
@@ -41,16 +40,7 @@ class TradedVolume extends PureComponent {
   }
 
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetPairs, fetchTradedVolume, match,
-    } = this.props
-    const pairs = (match.params && match.params.pair) || ''
-    if (!dataReceived && !pageLoading) {
-      if (pairs) {
-        setTargetPairs(getMappedSymbolsFromUrl(pairs))
-      }
-      fetchTradedVolume()
-    }
+    checkInit(this.props, TYPE)
   }
 
   handleDateChange = (input, time) => {
@@ -62,8 +52,8 @@ class TradedVolume extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchTradedVolume } = this.props
-    fetchTradedVolume()
+    const { fetchData } = this.props
+    fetchData()
   }
 
   handleTimeframeChange = (timeframe) => {
@@ -84,7 +74,6 @@ class TradedVolume extends PureComponent {
       dataReceived,
       pageLoading,
       refresh,
-      handleClickExport,
       t,
     } = this.props
     const { start, end } = this.state
@@ -100,7 +89,7 @@ class TradedVolume extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('tradedvolume.query.startDateTooltip')}
+              {t('query.startDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -115,7 +104,7 @@ class TradedVolume extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('tradedvolume.query.endDateTooltip')}
+              {t('query.endDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -137,7 +126,7 @@ class TradedVolume extends PureComponent {
           intent={hasChanges ? Intent.PRIMARY : null}
           disabled={!hasChanges}
         >
-          {t('tradedvolume.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )
@@ -167,7 +156,7 @@ class TradedVolume extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
@@ -184,7 +173,7 @@ class TradedVolume extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

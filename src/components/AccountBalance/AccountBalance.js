@@ -82,7 +82,6 @@ class AccountBalance extends PureComponent {
       dataReceived,
       pageLoading,
       refresh,
-      handleClickExport,
       t,
     } = this.props
     const { start, end, timeframe } = this.state
@@ -98,7 +97,7 @@ class AccountBalance extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('accountbalance.query.startDateTooltip')}
+              {t('query.startDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -113,7 +112,7 @@ class AccountBalance extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('accountbalance.query.endDateTooltip')}
+              {t('query.endDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -135,7 +134,7 @@ class AccountBalance extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('accountbalance.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )
@@ -153,7 +152,7 @@ class AccountBalance extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
@@ -168,7 +167,7 @@ class AccountBalance extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

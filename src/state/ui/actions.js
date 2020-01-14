@@ -12,6 +12,15 @@ export function showCustomDialog(show) {
 }
 
 /**
+ * Create an action to show/hide export dialog.
+ */
+export function toggleExportDialog() {
+  return {
+    type: types.TOGGLE_EXPORT_DIALOG,
+  }
+}
+
+/**
  * Create an action to show/hide framework dialog.
  */
 export function toggleFrameworkDialog() {
@@ -77,6 +86,7 @@ export function uiResized() {
 
 export default {
   showCustomDialog,
+  toggleExportDialog,
   toggleFrameworkDialog,
   proceedFrameworkRequest,
   togglePaginationDialog,

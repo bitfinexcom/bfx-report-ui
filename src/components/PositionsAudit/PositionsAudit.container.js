@@ -28,7 +28,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchPaudit: fetchPAudit,
+  fetchData: fetchPAudit,
   refresh,
   setTargetIds,
 }

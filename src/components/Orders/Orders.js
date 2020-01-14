@@ -14,8 +14,8 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl, mapRequestPairs } from 'state/symbols/utils'
-import { checkFetch, togglePair } from 'state/utils'
+import { mapRequestPairs } from 'state/symbols/utils'
+import { checkInit, checkFetch, togglePair } from 'state/utils'
 import { getPath } from 'state/query/utils'
 
 import getColumns from './Orders.columns'
@@ -25,16 +25,7 @@ const TYPE = queryConstants.MENU_ORDERS
 
 class Orders extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetPairs, fetchOrders, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const pairs = (match.params && match.params.pair) || ''
-      if (pairs) {
-        setTargetPairs(getMappedSymbolsFromUrl(pairs))
-      }
-      fetchOrders()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {
@@ -60,7 +51,6 @@ class Orders extends PureComponent {
       columns,
       existingPairs,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -122,7 +112,7 @@ class Orders extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

@@ -22,7 +22,7 @@ const { MENU_ORDER_TRADES } = queryConstants
 class OrderTrades extends PureComponent {
   componentDidMount() {
     const {
-      dataReceived, pageLoading, setParams, fetchOrdertrades, match, location, params,
+      dataReceived, pageLoading, setParams, fetchData, match, location, params,
     } = this.props
     const { targetPair, id } = params
     const { pair } = match.params
@@ -33,7 +33,7 @@ class OrderTrades extends PureComponent {
     const isParamsChanged = targetPair !== pair || id !== +orderId
     if (hasCorrectData && (isLoading || isParamsChanged)) {
       setParams({ targetPair: getMappedSymbolsFromUrl(pair)[0], id: +orderId })
-      fetchOrdertrades()
+      fetchData()
     }
   }
 
@@ -44,7 +44,6 @@ class OrderTrades extends PureComponent {
   render() {
     const {
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -92,7 +91,7 @@ class OrderTrades extends PureComponent {
             {' '}
             <TimeRange />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

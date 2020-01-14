@@ -34,7 +34,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchFloan: fetchFLoan,
+  fetchData: fetchFLoan,
   refresh,
   addTargetSymbol,
   setTargetSymbols,

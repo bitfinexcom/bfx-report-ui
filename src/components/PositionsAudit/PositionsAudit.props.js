@@ -14,7 +14,7 @@ const POSITIONS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   entries: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
-  fetchPaudit: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,

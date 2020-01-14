@@ -8,9 +8,9 @@ import {
 import { Select } from '@blueprintjs/select'
 import { IconNames } from '@blueprintjs/icons'
 
-class PairSelector extends PureComponent {
-  filterPair = (query, pair) => pair.indexOf(query.toUpperCase()) >= 0
+import { filterSelectorItem } from 'ui/utils'
 
+class PairSelector extends PureComponent {
   renderPair = (pair, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
@@ -39,7 +39,7 @@ class PairSelector extends PureComponent {
         disabled={!pairs.length}
         items={pairs}
         itemRenderer={this.renderPair}
-        itemPredicate={this.filterPair}
+        itemPredicate={filterSelectorItem}
         onItemSelect={onPairSelect}
       >
         <Button

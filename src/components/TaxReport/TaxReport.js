@@ -89,11 +89,7 @@ class TaxReport extends PureComponent {
   }
 
   render() {
-    const {
-      handleClickExport,
-      match,
-      t,
-    } = this.props
+    const { match, t } = this.props
     const { start, end } = this.state
     const hasNewTime = this.hasNewTime()
     const { section = TAX_REPORT_SECTIONS.RESULT } = match.params
@@ -103,7 +99,7 @@ class TaxReport extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('taxreport.query.startDateTooltip')}
+              {t('query.startDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -117,7 +113,7 @@ class TaxReport extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('taxreport.query.endDateTooltip')}
+              {t('query.endDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -132,7 +128,7 @@ class TaxReport extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('taxreport.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )
@@ -167,7 +163,7 @@ class TaxReport extends PureComponent {
           {' '}
           {renderTimeSelection}
           {' '}
-          <ExportButton handleClickExport={handleClickExport} />
+          <ExportButton />
           {' '}
           <RefreshButton handleClickRefresh={this.handleRefresh} />
         </h4>

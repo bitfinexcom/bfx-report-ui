@@ -17,9 +17,8 @@ import NoData from 'ui/NoData'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import { getPath } from 'state/query/utils'
-import { checkFetch, togglePair } from 'state/utils'
+import { checkInit, checkFetch, togglePair } from 'state/utils'
 
 import getColumns from './Positions.columns'
 import { propTypes, defaultProps } from './Positions.props'
@@ -28,16 +27,7 @@ const TYPE = queryConstants.MENU_POSITIONS
 
 class Positions extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetPairs, fetchPositions, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const pairs = (match.params && match.params.pair) || ''
-      if (pairs) {
-        setTargetPairs(getMappedSymbolsFromUrl(pairs))
-      }
-      fetchPositions()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {
@@ -63,7 +53,6 @@ class Positions extends PureComponent {
       existingPairs,
       getFullTime,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -133,7 +122,7 @@ class Positions extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchWinLoss,
+  fetchData: fetchWinLoss,
   refresh,
 }
 

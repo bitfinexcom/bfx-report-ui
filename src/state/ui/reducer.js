@@ -4,6 +4,7 @@ import types from './constants'
 
 const initialState = {
   isCustomDialogOpen: false,
+  isExportDialogOpen: false,
   isFrameworkDialogOpen: false,
   isPaginationDialogOpen: false,
   latestPaginationTimestamp: undefined,
@@ -17,6 +18,11 @@ export function uiReducer(state = initialState, action) {
       return {
         ...state,
         isCustomDialogOpen: payload,
+      }
+    case types.TOGGLE_EXPORT_DIALOG:
+      return {
+        ...state,
+        isExportDialogOpen: !state.isExportDialogOpen,
       }
     case types.TOGGLE_FRAMEWORK_DIALOG:
       return {

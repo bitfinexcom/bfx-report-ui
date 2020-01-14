@@ -5,6 +5,7 @@ import {
   getWalletsTickersEntries,
   getWalletsEntries,
 } from 'state/utils'
+import { fetch, fetchFail } from 'state/reducers.helper'
 
 import types from './constants'
 
@@ -23,6 +24,8 @@ export const initialState = {
 export function snapshotsReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
+    case types.FETCH_SNAPSHOTS:
+      return fetch(state)
     case types.UPDATE_SNAPSHOTS: {
       if (!payload) {
         return {
@@ -52,13 +55,17 @@ export function snapshotsReducer(state = initialState, action) {
     case types.SET_TIMESTAMP:
       return {
         ...initialState,
+        dataReceived: false,
+        pageLoading: true,
         timestamp: payload,
       }
     case types.FETCH_FAIL:
-      return state
+      return fetchFail(state)
     case types.REFRESH:
       return {
         ...initialState,
+        dataReceived: false,
+        pageLoading: true,
         timestamp: state.timestamp,
       }
     case authTypes.LOGOUT:

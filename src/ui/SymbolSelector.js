@@ -8,9 +8,9 @@ import {
 import { Select } from '@blueprintjs/select'
 import { IconNames } from '@blueprintjs/icons'
 
-class SymbolSelector extends PureComponent {
-  filterSymbol = (query, coin) => coin.toLowerCase().indexOf(query.toLowerCase()) >= 0
+import { filterSelectorItem } from 'ui/utils'
 
+class SymbolSelector extends PureComponent {
   renderSymbol = (symbol, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
@@ -44,7 +44,7 @@ class SymbolSelector extends PureComponent {
         disabled={!coins.length}
         items={coins}
         itemRenderer={this.renderSymbol}
-        itemPredicate={this.filterSymbol}
+        itemPredicate={filterSelectorItem}
         onItemSelect={onSymbolSelect}
       >
         <Button

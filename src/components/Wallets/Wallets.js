@@ -39,9 +39,9 @@ class Wallets extends PureComponent {
   }
 
   componentDidMount() {
-    const { dataReceived, pageLoading, fetchWallets } = this.props
+    const { dataReceived, pageLoading, fetchData } = this.props
     if (!dataReceived && !pageLoading) {
-      fetchWallets()
+      fetchData()
     }
   }
 
@@ -54,17 +54,16 @@ class Wallets extends PureComponent {
 
   handleQuery = (e) => {
     e.preventDefault()
-    const { fetchWallets } = this.props
+    const { fetchData } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
-    fetchWallets(time)
+    fetchData(time)
   }
 
   render() {
     const {
       currentTime,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -101,7 +100,7 @@ class Wallets extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('wallets.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )
@@ -131,7 +130,7 @@ class Wallets extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

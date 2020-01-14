@@ -11,7 +11,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
-  fetchWinLoss: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import AccountBalance from 'components/AccountBalance'
@@ -69,19 +69,39 @@ const {
   MENU_WIN_LOSS,
 } = queryType
 
-const TAX_REPORT_SECTION = '/:section(start_snapshot|end_snapshot|result)'
+const PATHS = {
+  MENU_LEDGERS: [...getPath(MENU_LEDGERS), `${getPath(MENU_LEDGERS)[0]}/:symbol`],
+  MENU_TRADES: [getPath(MENU_TRADES), `${getPath(MENU_TRADES)}/:pair`],
+  MENU_ORDERS: [getPath(MENU_ORDERS), `${getPath(MENU_ORDERS)}/:pair`],
+  MENU_ORDER_TRADES: [getPath(MENU_ORDER_TRADES), `${getPath(MENU_ORDER_TRADES)}/:pair`],
+  MENU_DEPOSITS: [getPath(MENU_DEPOSITS), `${getPath(MENU_DEPOSITS)}/:symbol`],
+  MENU_WITHDRAWALS: [getPath(MENU_WITHDRAWALS), `${getPath(MENU_WITHDRAWALS)}/:symbol`],
+  MENU_FCREDIT: [getPath(MENU_FCREDIT), `${getPath(MENU_FCREDIT)}/:symbol`],
+  MENU_FLOAN: [getPath(MENU_FLOAN), `${getPath(MENU_FLOAN)}/:symbol`],
+  MENU_FOFFER: [getPath(MENU_FOFFER), `${getPath(MENU_FOFFER)}/:symbol`],
+  MENU_FPAYMENT: [getPath(MENU_FPAYMENT), `${getPath(MENU_FPAYMENT)}/:symbol`],
+  MENU_AFFILIATES_EARNINGS: [getPath(MENU_AFFILIATES_EARNINGS), `${getPath(MENU_AFFILIATES_EARNINGS)}/:symbol`],
+  MENU_PUBLIC_FUNDING: [getPath(MENU_PUBLIC_FUNDING), `${getPath(MENU_PUBLIC_FUNDING)}/:symbol`],
+  MENU_PUBLIC_TRADES: [getPath(MENU_PUBLIC_TRADES), `${getPath(MENU_PUBLIC_TRADES)}/:pair`],
+  MENU_TICKERS: [getPath(MENU_TICKERS), `${getPath(MENU_TICKERS)}/:pair`],
+  MENU_DERIVATIVES: [getPath(MENU_DERIVATIVES), `${getPath(MENU_DERIVATIVES)}/:pair`],
+  MENU_POSITIONS: [getPath(MENU_POSITIONS), `${getPath(MENU_POSITIONS)}/:pair`],
+  MENU_FEES_REPORT: [getPath(MENU_FEES_REPORT), `${getPath(MENU_FEES_REPORT)}/:pair`],
+  MENU_TRADED_VOLUME: [getPath(MENU_TRADED_VOLUME), `${getPath(MENU_TRADED_VOLUME)}/:pair`],
+  MENU_TAX_REPORT: [
+    getPath(MENU_TAX_REPORT),
+    `${getPath(MENU_TAX_REPORT)}/:section(result)`,
+    `${getPath(MENU_TAX_REPORT)}/:section(start_snapshot|end_snapshot|result)/:subsection(positions|tickers|wallets)`],
+}
 
 class Main extends PureComponent {
   constructor(props) {
     super(props)
     this.handleClickCustom = this.handleCustomDialog.bind(this, true)
     this.handleCustomDialogClose = this.handleCustomDialog.bind(this, false)
-    this.handleClickExport = this.handleExportDialog.bind(this, true)
-    this.handleExportDialogClose = this.handleExportDialog.bind(this, false)
   }
 
   state = {
-    isExportOpen: false,
     startDate: null,
     endDate: new Date(),
   }
@@ -109,36 +129,17 @@ class Main extends PureComponent {
     showCustomDialog(false)
   }
 
-  handleExportDialog = (show, e) => {
-    e.preventDefault()
-    if (show) {
-      // eslint-disable-next-line react/destructuring-assignment
-      this.props.prepareExport()
-    }
-    this.setState({ isExportOpen: show })
-  }
-
-  startExport = (currentTargets) => {
-    const { exportCsv } = this.props
-    return () => {
-      exportCsv(currentTargets)
-      this.setState({ isExportOpen: false })
-    }
-  }
-
   render() {
     const {
       authStatus,
       authIsShown,
       history,
       isCustomOpen,
-      isFrameworkOpen,
       location,
       menuMode,
     } = this.props
     const {
       endDate,
-      isExportOpen,
       startDate,
     } = this.state
     const target = getTarget(location.pathname)
@@ -155,221 +156,155 @@ class Main extends PureComponent {
           <Switch>
             <Route
               exact
-              path={getPath(MENU_LEDGERS)}
-              render={() => <Ledgers handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_LEDGERS)[0]}/:symbol`}
-              render={() => <Ledgers handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_LEDGERS}
+              component={Ledgers}
             />
             <Route
               exact
-              path={getPath(MENU_TRADES)}
-              render={() => <Trades handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_TRADES)}/:pair`}
-              render={() => <Trades handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_TRADES}
+              component={Trades}
             />
             <Route
               exact
-              path={getPath(MENU_ORDERS)}
-              render={() => <Orders handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_ORDERS)}/:pair`}
-              render={() => <Orders handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_ORDERS}
+              component={Orders}
             />
             <Route
               exact
-              path={getPath(MENU_ORDER_TRADES)}
-              render={() => <OrderTrades handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_ORDER_TRADES)}/:pair`}
-              render={() => <OrderTrades handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_ORDER_TRADES}
+              component={OrderTrades}
             />
             <Route
               exact
-              path={getPath(MENU_DEPOSITS)}
-              render={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_DEPOSITS)}/:symbol`}
-              render={() => <Movements type={MENU_DEPOSITS} handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_DEPOSITS}
+              render={() => <Movements type={MENU_DEPOSITS} />}
             />
             <Route
               exact
-              path={getPath(MENU_WITHDRAWALS)}
-              render={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_WITHDRAWALS)}/:symbol`}
-              render={() => <Movements type={MENU_WITHDRAWALS} handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_WITHDRAWALS}
+              render={() => <Movements type={MENU_WITHDRAWALS} />}
             />
             <Route
               exact
-              path={getPath(MENU_FCREDIT)}
-              render={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_FCREDIT)}/:symbol`}
-              render={() => <FundingCreditHistory handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_FCREDIT}
+              component={FundingCreditHistory}
             />
             <Route
               exact
-              path={getPath(MENU_FLOAN)}
-              render={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_FLOAN)}/:symbol`}
-              render={() => <FundingLoanHistory handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_FLOAN}
+              component={FundingLoanHistory}
             />
             <Route
               exact
-              path={getPath(MENU_FOFFER)}
-              render={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_FOFFER)}/:symbol`}
-              render={() => <FundingOfferHistory handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_FOFFER}
+              component={FundingOfferHistory}
             />
             <Route
               exact
-              path='/'
-              render={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_FPAYMENT}
+              component={FundingPayment}
             />
             <Route
               exact
-              path={getPath(MENU_FPAYMENT)}
-              render={() => <FundingPayment handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_FPAYMENT)}/:symbol`}
-              render={() => <FundingPayment handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_AFFILIATES_EARNINGS}
+              component={AffiliatesEarnings}
             />
             <Route
               exact
-              path={getPath(MENU_AFFILIATES_EARNINGS)}
-              render={() => <AffiliatesEarnings handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_AFFILIATES_EARNINGS)}/:symbol`}
-              render={() => <AffiliatesEarnings handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_PUBLIC_FUNDING}
+              component={PublicFunding}
             />
             <Route
               exact
-              path={getPath(MENU_PUBLIC_FUNDING)}
-              render={() => <PublicFunding handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_PUBLIC_FUNDING)}/:symbol`}
-              render={() => <PublicFunding handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_PUBLIC_TRADES}
+              component={PublicTrades}
             />
             <Route
               exact
-              path={getPath(MENU_PUBLIC_TRADES)}
-              render={() => <PublicTrades handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_PUBLIC_TRADES)}/:pair`}
-              render={() => <PublicTrades handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_TICKERS}
+              component={Tickers}
             />
             <Route
               exact
-              path={getPath(MENU_TICKERS)}
-              render={() => <Tickers handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_TICKERS)}/:pair`}
-              render={() => <Tickers handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              exact
-              path={getPath(MENU_DERIVATIVES)}
-              render={() => <Derivatives handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={`${getPath(MENU_DERIVATIVES)}/:pair`}
-              render={() => <Derivatives handleClickExport={this.handleClickExport} />}
+              path={PATHS.MENU_DERIVATIVES}
+              component={Derivatives}
             />
             <Route
               exact
               path={getPath(MENU_POSITIONS_AUDIT)}
-              render={() => <PositionsAuditNoId />}
-            />
-            <Route
-              path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}
-              render={() => <PositionsAudit handleClickExport={this.handleClickExport} />}
-            />
-            <Route
-              path={getPath(MENU_POSITIONS_ACTIVE)}
-              render={() => <PositionsActive handleClickExport={this.handleClickExport} />}
+              component={PositionsAuditNoId}
             />
             <Route
               exact
-              path={getPath(MENU_POSITIONS)}
-              render={() => <Positions handleClickExport={this.handleClickExport} />}
+              path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}
+              component={PositionsAudit}
             />
             <Route
-              path={`${getPath(MENU_POSITIONS)}/:pair`}
-              render={() => <Positions handleClickExport={this.handleClickExport} />}
+              exact
+              path={getPath(MENU_POSITIONS_ACTIVE)}
+              component={PositionsActive}
+            />
+            <Route
+              exact
+              path={PATHS.MENU_POSITIONS}
+              component={Positions}
             />
             <Route
               exact
               path={getPath(MENU_WALLETS)}
-              render={() => <Wallets handleClickExport={this.handleClickExport} />}
+              component={Wallets}
             />
             {platform.showFrameworkMode && (
-              <Fragment>
+              [
                 <Route
                   exact
                   path={getPath(MENU_ACCOUNT_BALANCE)}
-                  component={() => <AccountBalance handleClickExport={this.handleClickExport} />}
-                />
+                  component={AccountBalance}
+                  key={MENU_ACCOUNT_BALANCE}
+                />,
                 <Route
                   exact
                   path={getPath(MENU_LOAN_REPORT)}
-                  component={() => <LoanReport handleClickExport={this.handleClickExport} />}
-                />
+                  component={LoanReport}
+                  key={MENU_LOAN_REPORT}
+                />,
                 <Route
-                  path={[getPath(MENU_TRADED_VOLUME), `${getPath(MENU_TRADED_VOLUME)}/:pair`]}
-                  render={() => <TradedVolume handleClickExport={this.handleClickExport} />}
-                />
+                  exact
+                  path={PATHS.MENU_TRADED_VOLUME}
+                  component={TradedVolume}
+                  key={MENU_TRADED_VOLUME}
+                />,
                 <Route
-                  path={[getPath(MENU_FEES_REPORT), `${getPath(MENU_FEES_REPORT)}/:pair`]}
-                  render={() => <FeesReport handleClickExport={this.handleClickExport} />}
-                />
+                  exact
+                  path={PATHS.MENU_FEES_REPORT}
+                  component={FeesReport}
+                  key={MENU_FEES_REPORT}
+                />,
                 <Route
                   exact
                   path={getPath(MENU_WIN_LOSS)}
-                  component={() => <AverageWinLoss handleClickExport={this.handleClickExport} />}
-                />
+                  component={AverageWinLoss}
+                  key={MENU_WIN_LOSS}
+                />,
                 <Route
                   exact
                   path={getPath(MENU_CONCENTRATION_RISK)}
                   component={ConcentrationRisk}
-                />
+                  key={MENU_CONCENTRATION_RISK}
+                />,
                 <Route
                   exact
                   path={getPath(MENU_SNAPSHOTS)}
-                  render={() => <Snapshots handleClickExport={this.handleClickExport} />}
-                />
-
+                  component={Snapshots}
+                  key={MENU_SNAPSHOTS}
+                />,
                 <Route
                   exact
-                  path={getPath(MENU_TAX_REPORT)}
-                  render={() => <TaxReport handleClickExport={this.handleClickExport} />}
-                />
-                <Route
-                  path={`${getPath(MENU_TAX_REPORT)}/:section(result)`}
-                  render={() => <TaxReport handleClickExport={this.handleClickExport} />}
-                />
-                <Route
-                  path={`${getPath(MENU_TAX_REPORT)}${TAX_REPORT_SECTION}/:subsection(positions|tickers|wallets)`}
-                  render={() => <TaxReport handleClickExport={this.handleClickExport} />}
-                />
-              </Fragment>
+                  path={PATHS.MENU_TAX_REPORT}
+                  component={TaxReport}
+                  key={MENU_TAX_REPORT}
+                />,
+              ]
             )}
           </Switch>
         </div>
@@ -382,13 +317,8 @@ class Main extends PureComponent {
           startDate={startDate}
           endDate={endDate}
         />
-        <ExportDialog
-          type={target}
-          isExportOpen={isExportOpen}
-          handleExportDialogClose={this.handleExportDialogClose}
-          startExport={this.startExport}
-        />
-        {platform.showFrameworkMode && <FrameworkDialog isFrameworkOpen={isFrameworkOpen} />}
+        <ExportDialog />
+        {platform.showFrameworkMode && <FrameworkDialog />}
         <PaginationDialog />
       </div>
     ) : ''

@@ -12,8 +12,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch, toggleSymbol } from 'state/utils'
+import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 
 import getColumns from './FundingOfferHistory.columns'
 import { propTypes, defaultProps } from './FundingOfferHistory.props'
@@ -22,16 +21,7 @@ const TYPE = queryConstants.MENU_FOFFER
 
 class FundingOfferHistory extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetSymbols, fetchFoffer, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const symbols = (match.params && match.params.symbol) || ''
-      if (symbols) {
-        setTargetSymbols(getMappedSymbolsFromUrl(symbols))
-      }
-      fetchFoffer()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {
@@ -45,7 +35,6 @@ class FundingOfferHistory extends PureComponent {
       targetSymbols,
       entries,
       existingCoins,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -102,7 +91,7 @@ class FundingOfferHistory extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

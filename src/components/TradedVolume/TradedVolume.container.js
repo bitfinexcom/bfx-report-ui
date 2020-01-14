@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchTradedVolume,
+  fetchData: fetchTradedVolume,
   refresh,
   setParams,
   addTargetPair,

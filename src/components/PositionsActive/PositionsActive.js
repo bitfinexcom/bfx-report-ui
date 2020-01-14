@@ -23,9 +23,9 @@ const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
 
 class PositionsActive extends PureComponent {
   componentDidMount() {
-    const { loading, fetchActivepositions } = this.props
-    if (loading) {
-      fetchActivepositions()
+    const { dataReceived, pageLoading, fetchData } = this.props
+    if (!dataReceived && !pageLoading) {
+      fetchData()
     }
   }
 
@@ -50,7 +50,6 @@ class PositionsActive extends PureComponent {
     const {
       getFullTime,
       entries,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -96,7 +95,7 @@ class PositionsActive extends PureComponent {
           <h4>
             {t('positions.title')}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

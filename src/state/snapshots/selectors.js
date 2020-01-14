@@ -1,6 +1,7 @@
 export const getSnapshots = state => state.snapshots
 
 export const getDataReceived = state => getSnapshots(state).dataReceived
+export const getPageLoading = state => getSnapshots(state).pageLoading
 export const getPositionsTotalPl = state => getSnapshots(state).positionsTotalPlUsd
 export const getPositionsEntries = state => getSnapshots(state).positionsEntries
 export const getPositionsTickersEntries = state => getSnapshots(state).positionsTickersEntries
@@ -11,6 +12,7 @@ export const getTimestamp = state => getSnapshots(state).timestamp
 
 export default {
   getDataReceived,
+  getPageLoading,
   getPositionsTotalPl,
   getPositionsEntries,
   getPositionsTickersEntries,

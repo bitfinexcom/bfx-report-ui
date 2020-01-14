@@ -12,8 +12,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch, toggleSymbol } from 'state/utils'
+import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 
 import { propTypes, defaultProps } from './FundingCreditHistory.props'
 import getColumns from './FundingCreditHistory.columns'
@@ -22,16 +21,7 @@ const TYPE = queryConstants.MENU_FCREDIT
 
 class FundingCreditHistory extends PureComponent {
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, setTargetSymbols, fetchFcredit, match,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      const symbols = (match.params && match.params.symbol) || ''
-      if (symbols) {
-        setTargetSymbols(getMappedSymbolsFromUrl(symbols))
-      }
-      fetchFcredit()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {
@@ -45,7 +35,6 @@ class FundingCreditHistory extends PureComponent {
       targetSymbols,
       entries,
       existingCoins,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -102,7 +91,7 @@ class FundingCreditHistory extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

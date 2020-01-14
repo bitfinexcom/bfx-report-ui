@@ -13,12 +13,11 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
-  fetchTradedVolume: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   addTargetPair: PropTypes.func.isRequired,
   setTargetPairs: PropTypes.func.isRequired,
   removeTargetPair: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
-  handleClickExport: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

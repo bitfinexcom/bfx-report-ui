@@ -1,9 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
-import _get from 'lodash/get'
-import _isEqual from 'lodash/isEqual'
-import _sortBy from 'lodash/sortBy'
 
 import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
@@ -14,7 +11,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
-import { checkFetch } from 'state/utils'
+import { checkInit, checkFetch } from 'state/utils'
 
 import getColumns from 'components/Positions/Positions.columns'
 import { propTypes, defaultProps } from './PositionsAudit.props'
@@ -23,16 +20,7 @@ const TYPE = queryConstants.MENU_POSITIONS_AUDIT
 
 class PositionsAudit extends PureComponent {
   componentDidMount() {
-    const {
-      targetIds, dataReceived, pageLoading, setTargetIds, fetchPaudit, match,
-    } = this.props
-    const ids = _get(match, 'params.id', '').split(',')
-
-    const isIdChanged = !_isEqual(_sortBy(ids), _sortBy(targetIds))
-    if (ids.length && ((!dataReceived && !pageLoading) || isIdChanged)) {
-      setTargetIds(ids)
-      fetchPaudit()
-    }
+    checkInit(this.props, TYPE)
   }
 
   componentDidUpdate(prevProps) {
@@ -49,7 +37,6 @@ class PositionsAudit extends PureComponent {
     const {
       entries,
       getFullTime,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -90,7 +77,7 @@ class PositionsAudit extends PureComponent {
             {' '}
             <TimeRange />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

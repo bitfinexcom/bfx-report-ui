@@ -36,10 +36,10 @@ class AverageWinLoss extends PureComponent {
 
   componentDidMount() {
     const {
-      dataReceived, pageLoading, fetchWinLoss, params,
+      dataReceived, pageLoading, fetchData, params,
     } = this.props
     if (!dataReceived && !pageLoading) {
-      fetchWinLoss(params)
+      fetchData(params)
     }
   }
 
@@ -51,14 +51,14 @@ class AverageWinLoss extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchWinLoss } = this.props
+    const { fetchData } = this.props
     const { start, end, timeframe } = this.state
     const params = {
       start: start ? start.getTime() : undefined,
       end: end ? end.getTime() : undefined,
       timeframe,
     }
-    fetchWinLoss(params)
+    fetchData(params)
   }
 
   handleTimeframeChange = (timeframe) => {
@@ -82,7 +82,6 @@ class AverageWinLoss extends PureComponent {
       dataReceived,
       pageLoading,
       refresh,
-      handleClickExport,
       t,
     } = this.props
     const { start, end, timeframe } = this.state
@@ -98,7 +97,7 @@ class AverageWinLoss extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('averagewinloss.query.startDateTooltip')}
+              {t('query.startDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -113,7 +112,7 @@ class AverageWinLoss extends PureComponent {
         <Tooltip
           content={(
             <span>
-              {t('averagewinloss.query.endDateTooltip')}
+              {t('query.endDateTooltip')}
             </span>
           )}
           position={Position.TOP}
@@ -135,7 +134,7 @@ class AverageWinLoss extends PureComponent {
           intent={hasNewTime ? Intent.PRIMARY : null}
           disabled={!hasNewTime}
         >
-          {t('averagewinloss.query.title')}
+          {t('query.title')}
         </Button>
       </Fragment>
     )
@@ -153,7 +152,7 @@ class AverageWinLoss extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
@@ -168,7 +167,7 @@ class AverageWinLoss extends PureComponent {
             {' '}
             {renderTimeSelection}
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

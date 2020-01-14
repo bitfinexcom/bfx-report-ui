@@ -2,14 +2,15 @@ import PropTypes from 'prop-types'
 
 export const propTypes = {
   currentTime: PropTypes.number,
+  dataReceived: PropTypes.bool.isRequired,
+  pageLoading: PropTypes.bool.isRequired,
   positionsTotalPlUsd: PropTypes.number,
   positionsEntries: PropTypes.array.isRequired,
   positionsTickersEntries: PropTypes.array.isRequired,
   walletsTotalBalanceUsd: PropTypes.number,
   walletsTickersEntries: PropTypes.array.isRequired,
   walletsEntries: PropTypes.array.isRequired,
-  fetchSnapshots: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  fetchData: PropTypes.func.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
@@ -20,7 +21,4 @@ export const defaultProps = {
   positionsEntries: [],
   walletsTotalBalanceUsd: null,
   walletsEntries: [],
-  fetchSnapshots: () => {},
-  loading: true,
-  refresh: () => {},
 }

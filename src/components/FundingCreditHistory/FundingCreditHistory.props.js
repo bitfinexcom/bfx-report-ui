@@ -23,7 +23,7 @@ export const propTypes = {
   setTargetSymbols: PropTypes.func.isRequired,
   entries: PropTypes.arrayOf(FCREDIT_ENTRIES_PROPS).isRequired,
   existingCoins: PropTypes.arrayOf(PropTypes.string),
-  fetchFcredit: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,

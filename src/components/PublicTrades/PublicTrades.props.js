@@ -11,7 +11,7 @@ const PUBLIC_TRADES_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   columns: PropTypes.object.isRequired,
   entries: PropTypes.arrayOf(PUBLIC_TRADES_ENTRIES_PROPS).isRequired,
-  fetchPublictrades: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
   hasSyncPref: PropTypes.bool.isRequired,
   dataReceived: PropTypes.bool.isRequired,

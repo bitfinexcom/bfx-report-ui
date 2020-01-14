@@ -12,8 +12,7 @@ import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import queryConstants from 'state/query/constants'
-import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch, toggleSymbol } from 'state/utils'
+import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 
 import getColumns from './Movements.columns'
 import { propTypes, defaultProps } from './Movements.props'
@@ -24,17 +23,13 @@ const TYPE = queryConstants.MENU_MOVEMENTS
 
 class Movements extends PureComponent {
   componentDidMount() {
+    checkInit(this.props, TYPE)
     const {
-      dataReceived, pageLoading, setTargetSymbols, fetchMovements, match, jumpPage,
+      dataReceived, pageLoading, jumpPage,
     } = this.props
-    if (!dataReceived && !pageLoading) {
-      const symbols = (match.params && match.params.symbol) || ''
-      if (symbols) {
-        setTargetSymbols(getMappedSymbolsFromUrl(symbols))
-      }
-      fetchMovements()
-    } else {
-      jumpPage(TYPE, 0, 25)
+    // workaround for managing pagination of movements from 2 points (deposits/withdrawals)
+    if (dataReceived || pageLoading) {
+      jumpPage(TYPE, 1, 25)
     }
   }
 
@@ -48,7 +43,6 @@ class Movements extends PureComponent {
       entries,
       existingCoins,
       getFullTime,
-      handleClickExport,
       dataReceived,
       pageLoading,
       refresh,
@@ -111,7 +105,7 @@ class Movements extends PureComponent {
             {' '}
             <ColumnsFilter target={TYPE} />
             {' '}
-            <ExportButton handleClickExport={handleClickExport} />
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>

@@ -4,14 +4,14 @@ import PropTypes from 'prop-types'
 import { Button } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
-const ExportButton = ({ handleClickExport, t }) => (
-  <Button icon={IconNames.CLOUD_DOWNLOAD} onClick={handleClickExport}>
+const ExportButton = ({ toggleDialog, t }) => (
+  <Button icon={IconNames.CLOUD_DOWNLOAD} onClick={toggleDialog}>
     {t('download.export')}
   </Button>
 )
 
 ExportButton.propTypes = {
-  handleClickExport: PropTypes.func.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 

@@ -35,7 +35,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchPublicfunding: fetchPublicFunding,
+  fetchData: fetchPublicFunding,
   refresh,
   setTargetSymbol,
 }

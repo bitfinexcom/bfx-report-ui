@@ -23,7 +23,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchActivepositions: fetchAPositions,
+  fetchData: fetchAPositions,
   refresh,
 }
 
