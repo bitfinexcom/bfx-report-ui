@@ -12,16 +12,16 @@ import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
 
 import DateInput from 'ui/DateInput'
-import MultiPairSelector from 'ui/MultiPairSelector'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
-import parseChartData from 'ui/Charts/Charts.helpers'
+import { parseLoanReportChartData } from 'ui/Charts/Charts.helpers'
 import TimeframeSelector from 'ui/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
-import { checkInit, togglePair } from 'state/utils'
+import { checkInit, toggleSymbol } from 'state/utils'
 import { isValidTimeStamp } from 'state/query/utils'
 
 import { propTypes, defaultProps } from './LoanReport.props'
@@ -69,7 +69,7 @@ class LoanReport extends PureComponent {
   render() {
     const {
       entries,
-      targetPairs,
+      targetSymbols,
       params: { timeframe },
       dataReceived,
       pageLoading,
@@ -79,9 +79,10 @@ class LoanReport extends PureComponent {
     const { start, end } = this.state
     const hasChanges = this.hasChanges()
 
-    const { chartData, presentCurrencies } = parseChartData({
+    const { chartData, dataKeys } = parseLoanReportChartData({
       data: _sortBy(entries, ['mts']),
       timeframe,
+      t,
     })
 
     const renderTimeSelection = (
@@ -131,12 +132,12 @@ class LoanReport extends PureComponent {
       </Fragment>
     )
 
-    const renderPairSelector = (
+    const renderSymbolSelector = (
       <Fragment>
         {' '}
-        <MultiPairSelector
-          currentFilters={targetPairs}
-          togglePair={pair => togglePair(TYPE, this.props, pair)}
+        <MultiSymbolSelector
+          currentFilters={targetSymbols}
+          toggleSymbol={symbol => toggleSymbol(TYPE, this.props, symbol)}
         />
       </Fragment>
     )
@@ -152,7 +153,7 @@ class LoanReport extends PureComponent {
           <h4>
             {t('loanreport.title')}
             {' '}
-            {renderPairSelector}
+            {renderSymbolSelector}
             {' '}
             {renderTimeSelection}
             {' '}
@@ -169,7 +170,7 @@ class LoanReport extends PureComponent {
           <h4>
             {t('loanreport.title')}
             {' '}
-            {renderPairSelector}
+            {renderSymbolSelector}
             {' '}
             {renderTimeSelection}
             {' '}
@@ -179,7 +180,7 @@ class LoanReport extends PureComponent {
           </h4>
           <Chart
             data={chartData}
-            dataKeys={presentCurrencies}
+            dataKeys={dataKeys}
           />
         </Fragment>
       )

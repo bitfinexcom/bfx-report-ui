@@ -25,6 +25,10 @@
   "averagewinloss": {
     "title": "平均淨/損失"
   },
+  "charts": {
+    "cumulative": "Cumulative",
+    "percentage": "Percentage"
+  },
   "column": {
     "actual-price": "實際價格",
     "amount": "數量",
