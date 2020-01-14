@@ -270,7 +270,10 @@
   "pagination": {
     "page": "页码",
     "of": "/",
-    "loading": "正在加载..."
+    "loading": "正在加载...",
+    "no_results": "无搜寻结果",
+    "proceed": "继续搜寻",
+    "last_data_timestamp": "Last data received dated: {{date}}"
   },
   "paudit": {
     "title": "仓位审计",

@@ -59,11 +59,6 @@ class FrameworkDialog extends PureComponent {
         icon={IconNames.CONFIRM}
         onClose={() => this.handleProceed(false)}
         title={title}
-        autoFocus
-        canEscapeKeyClose
-        canOutsideClickClose
-        enforceFocus
-        usePortal
         isOpen={isFrameworkOpen}
       >
         <div className={Classes.DIALOG_BODY}>

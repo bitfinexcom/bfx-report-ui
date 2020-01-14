@@ -270,7 +270,10 @@
   "pagination": {
     "page": "Страница",
     "of": "из",
-    "loading": "загрузка..."
+    "loading": "загрузка...",
+    "no_results": "Результаты не найдены",
+    "proceed": "Продолжить поиск",
+    "last_data_timestamp": "Last data received dated: {{date}}"
   },
   "paudit": {
     "title": "Аудит позиций",

@@ -17,6 +17,7 @@ import LoanReport from 'components/LoanReport'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import OrderTrades from 'components/OrderTrades'
+import PaginationDialog from 'components/PaginationDialog'
 import Positions from 'components/Positions'
 import PositionsActive from 'components/PositionsActive'
 import PositionsAudit from 'components/PositionsAudit'
@@ -388,6 +389,7 @@ class Main extends PureComponent {
           startExport={this.startExport}
         />
         {platform.showFrameworkMode && <FrameworkDialog isFrameworkOpen={isFrameworkOpen} />}
+        <PaginationDialog />
       </div>
     ) : ''
   }

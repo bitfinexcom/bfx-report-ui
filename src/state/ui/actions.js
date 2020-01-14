@@ -32,6 +32,32 @@ export function proceedFrameworkRequest(payload) {
 }
 
 /**
+ * Create an action to toggle pagination dialog.
+ * @param {boolean} isOpen dialog state
+ * @param {number} latestPaginationTimestamp timestamp of the last checked entry (nextPage value)
+ */
+export function togglePaginationDialog(isOpen, latestPaginationTimestamp) {
+  return {
+    type: types.TOGGLE_PAGINATION_DIALOG,
+    payload: {
+      isOpen,
+      latestPaginationTimestamp,
+    },
+  }
+}
+
+/**
+ * Create an action to proceed with pagination request.
+ * @param {boolean} payload indicator of whether pagination request should proceed
+ */
+export function proceedPaginationRequest(payload) {
+  return {
+    type: types.PROCEED_PAGINATION_REQUEST,
+    payload,
+  }
+}
+
+/**
  * Create an action to handle document loaded event.
  */
 export function uiLoaded() {
@@ -52,4 +78,7 @@ export function uiResized() {
 export default {
   showCustomDialog,
   toggleFrameworkDialog,
+  proceedFrameworkRequest,
+  togglePaginationDialog,
+  proceedPaginationRequest,
 }
