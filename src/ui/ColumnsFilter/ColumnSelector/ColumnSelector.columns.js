@@ -46,6 +46,7 @@ const SECTION_COLUMNS = {
     { id: 'execAmount', name: 'amount', type: NUMBER, filter: true },
     { id: 'execPrice', name: 'price', type: NUMBER, filter: true },
     { id: 'fee', name: 'fee', type: NUMBER, filter: true },
+    { id: 'feePercent', name: 'feePercent' },
     { id: 'mtsCreate', name: 'time' },
   ],
 

@@ -40,7 +40,7 @@ export const insertIf = (condition, ...elements) => (condition ? elements : [])
 
 export const filterSelectorItem = (query, item) => item.toLowerCase().indexOf(query.toLowerCase()) >= 0
 
-export const fixedFloat = val => (typeof val === 'number' ? val && val.toFixed(8) : val)
+export const fixedFloat = (val, num = 8) => (typeof val === 'number' ? val && val.toFixed(num) : val)
 
 export const formatAmount = (val, color) => {
   if (!val) {

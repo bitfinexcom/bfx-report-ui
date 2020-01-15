@@ -4,6 +4,29 @@ import { Cell, TruncatedFormat } from '@blueprintjs/table'
 import { formatAmount, fixedFloat } from 'ui/utils'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
+const getFeePercent = (entry) => {
+  const {
+    fee,
+    execAmount,
+    execPrice,
+    pair,
+    feeCurrency,
+  } = entry
+
+  const [firstCurr, secondCurr] = pair.split(':')
+  let val
+  if (feeCurrency === firstCurr) {
+    val = fee / execAmount
+  }
+  if (feeCurrency === secondCurr) {
+    val = fee / (execAmount * execPrice)
+  }
+  if (val) {
+    return `${fixedFloat(Math.abs(val) * 100, 2)}%`
+  }
+  return ''
+}
+
 export default function getColumns(props) {
   const {
     filteredData,
@@ -117,6 +140,23 @@ export default function getColumns(props) {
         const { fee, feeCurrency } = filteredData[rowIndex]
         return `${fee} ${feeCurrency}`
       },
+    },
+    {
+      id: 'feePercent',
+      name: 'trades.column.feePercent',
+      width: 90,
+      renderer: (rowIndex) => {
+        const feePercent = getFeePercent(filteredData[rowIndex])
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={feePercent}
+          >
+            {feePercent}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => getFeePercent(filteredData[rowIndex]),
     },
     {
       id: 'mtsCreate',
