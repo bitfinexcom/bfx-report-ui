@@ -69,7 +69,7 @@ export function updateSyncStatus() {
 
 /**
  * Create an action to edit public trades pair preferences.
- * @param {string[]} pairs pairs
+ * @param {string[]} pairs
  * @param {numeric} startTime start time in milliseconds
  */
 export function editPublicTradesPref(pairs, startTime) {
@@ -84,7 +84,7 @@ export function editPublicTradesPref(pairs, startTime) {
 
 /**
  * Create an action to edit public trades symbol preferences.
- * @param {string[]} symbols symbols
+ * @param {string[]} symbols
  * @param {numeric} startTime start time in milliseconds
  */
 export function editPublicTradesSymbolPref(symbols, startTime) {
@@ -99,7 +99,7 @@ export function editPublicTradesSymbolPref(symbols, startTime) {
 
 /**
  * Create an action to edit tickers history pair preferences.
- * @param {string[]} pairs pairs
+ * @param {string[]} pairs
  * @param {numeric} startTime start time in milliseconds
  */
 export function editTickersHistoryPairPref(pairs, startTime) {

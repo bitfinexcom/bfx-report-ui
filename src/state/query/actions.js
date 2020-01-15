@@ -16,9 +16,9 @@ export function setTimeType(type) {
 
 /**
  * Create an action to set time range.
- * @param {integer} timeRangeType
- * @param {integer} start start time in milliseconds
- * @param {integer} end end time in milliseconds
+ * @param {number} rangeType
+ * @param {number} start time in milliseconds
+ * @param {number} end time in milliseconds
  */
 export function setTimeRange(rangeType, start, end) {
   return {
@@ -33,8 +33,8 @@ export function setTimeRange(rangeType, start, end) {
 
 /**
  * Create an action to custom time range.
- * @param {integer} start start time in milliseconds
- * @param {integer} end end time in milliseconds
+ * @param {number} start time in milliseconds
+ * @param {number} end time in milliseconds
  */
 export function setCustomTimeRange(start, end) {
   if (isValidTimeStamp(start) && isValidTimeStamp(end)) {

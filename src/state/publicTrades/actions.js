@@ -33,7 +33,7 @@ export function refresh() {
 
 /**
  * Create an action to update public Trades.
- * @param {Object[]} data data set
+ * @param {Object[]} data
  */
 export function updatePublicTrades(data) {
   return {
@@ -46,7 +46,7 @@ export function updatePublicTrades(data) {
 
 /**
  * Create an action to set current pair.
- * @param {string} pair pair
+ * @param {string} pair
  */
 export function setTargetPair(pair) {
   return {

@@ -61,7 +61,7 @@ export const mapRequestSymbols = (symbols, returnString = false) => {
 // [BCHUSD] -> [BABUSD]
 /**
  * Demaps pairs
- * @param {Object[]|string} pairs pairs to demap
+ * @param {Object[]|string} pairs data for demapping
  * @param {boolean} returnString if a single string should be a returned value or an array
  */
 export const mapRequestPairs = (pairs, returnString = false) => {

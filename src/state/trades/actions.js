@@ -33,7 +33,7 @@ export function refresh() {
 
 /**
  * Create an action to update Trades.
- * @param {Object[]} data data set
+ * @param {Object[]} data
  */
 export function updateTrades(data) {
   return {
@@ -47,7 +47,7 @@ export function updateTrades(data) {
 
 /**
  * Create an action to set current pair.
- * @param {string[]} pairs pairs
+ * @param {string[]} pairs
  */
 export function setTargetPairs(pairs) {
   return {
@@ -58,7 +58,7 @@ export function setTargetPairs(pairs) {
 
 /**
  * Create an action to add target pair.
- * @param {string} pair pair
+ * @param {string} pair
  */
 export function addTargetPair(pair) {
   return {
@@ -69,7 +69,7 @@ export function addTargetPair(pair) {
 
 /**
  * Create an action to remove target pair.
- * @param {string} pair pair
+ * @param {string} pair
  */
 export function removeTargetPair(pair) {
   return {

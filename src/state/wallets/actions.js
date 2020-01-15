@@ -2,7 +2,7 @@ import types from './constants'
 
 /**
  * Create an action to fetch Wallets data.
- * @param {string} timestamp timestamp param from url
+ * @param {string} timestamp param from url
  */
 export function fetchWallets(timestamp) {
   return {

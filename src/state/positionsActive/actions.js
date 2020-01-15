@@ -31,7 +31,7 @@ export function refresh() {
 
 /**
  * Create an action to update Positions(active).
- * @param {Object[]} data data set
+ * @param {Object[]} data
  */
 export function updateAPositions(data) {
   return {

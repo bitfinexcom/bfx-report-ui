@@ -31,7 +31,7 @@ export function refresh() {
 
 /**
  * Create an action to update Order Trades.
- * @param {Object[]} data data set
+ * @param {Object[]} data
  */
 export function updateOrderTrades(data) {
   return {
@@ -44,7 +44,7 @@ export function updateOrderTrades(data) {
 
 /**
  * Create an action to set current pair.
- * @param {string} pair pair
+ * @param {string} pair
  */
 export function setTargetPair(pair) {
   return {
