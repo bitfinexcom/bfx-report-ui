@@ -29,8 +29,7 @@ div.bitfinex-auth {
   flex-direction: column;
   display: flex;
 
-  > .bitfinex-logo-light,
-  > .bitfinex-logo-dark {
+  > .bitfinex-logo {
     position: relative;
     width: 250px;
     margin: 0 auto 40px;
@@ -73,25 +72,14 @@ div.bitfinex-auth {
 }
 
 /* normal size logo */
-.bitfinex-logo-light,
-.bitfinex-logo-dark {
+.bitfinex-logo {
   width: 176px;
   position: relative;
   top: 5px;
 }
 
-/* small screen logo */
-.bitfinex-logo-m-light,
-.bitfinex-logo-m-dark {
-  width: 79px;
-  position: relative;
-  top: 3px;
-}
-
-body.#{$ns}-dark .bitfinex-logo-light,
-body.#{$ns}-light .bitfinex-logo-dark,
-body.#{$ns}-dark .bitfinex-logo-m-light,
-body.#{$ns}-light .bitfinex-logo-m-dark {
+body.#{$ns}-dark .bitfinex-logo--light,
+body.#{$ns}-light .bitfinex-logo--dark {
   display: none;
 }
 
@@ -252,3 +240,11 @@ div.bp3-multi-select {
     max-height: calc(100vh - 60px);
   }
 }
+
+@media screen and (max-width: 720px) {
+  .bitfinex-logo {
+    width: 130px;
+    height: 20px;
+  }
+}
+

@@ -25,8 +25,6 @@ import { propTypes, defaultProps } from './Header.props'
 import darkLogo from './logo3-dark-theme.svg'
 import lightLogo from './logo3-light-theme.svg'
 // eslint-disable-next-line import/no-unresolved
-import mDarkLogo from './mobile_logo_dark.svg'
-import mLightLogo from './mobile_logo_light.svg'
 import HelpLink from './HelpLink'
 
 class Header extends PureComponent {
@@ -127,22 +125,12 @@ class Header extends PureComponent {
         <img
           alt={platform.Name}
           src={darkLogo}
-          className='bitfinex-logo-dark hidden-sm hidden-xs'
+          className='bitfinex-logo bitfinex-logo--dark'
         />
         <img
           alt={platform.Name}
           src={lightLogo}
-          className='bitfinex-logo-light hidden-sm hidden-xs'
-        />
-        <img
-          alt={platform.Name}
-          src={mDarkLogo}
-          className='bitfinex-logo-m-dark hidden-xl hidden-lg hidden-md'
-        />
-        <img
-          alt={platform.Name}
-          src={mLightLogo}
-          className='bitfinex-logo-m-light hidden-xl hidden-lg hidden-md'
+          className='bitfinex-logo bitfinex-logo--light'
         />
       </a>
     )
