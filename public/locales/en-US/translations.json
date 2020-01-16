@@ -49,6 +49,7 @@
     "description": "DESCRIPTION",
     "destination": "DESTINATION",
     "fee": "FEE",
+    "feePercent": "FEE PERC",
     "fees": "FEES",
     "fundBalance": "INSURANCE FUND BALANCE",
     "fundingAccrued": "NEXT FUNDING ACCRUED",
@@ -489,7 +490,8 @@
       "pair": "PAIR",
       "amount": "AMOUNT",
       "price": "PRICE",
-      "fee": "FEE"
+      "fee": "FEE",
+      "feePercent": "FEE PERC"
     }
   },
   "wallets": {
