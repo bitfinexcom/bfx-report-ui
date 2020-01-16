@@ -33,7 +33,7 @@ export function refresh() {
 
 /**
  * Create an action to update public Funding.
- * @param {Object[]} data data set
+ * @param {Object[]} data
  */
 export function updatePublicFunding(data) {
   return {
@@ -46,7 +46,7 @@ export function updatePublicFunding(data) {
 
 /**
  * Create an action to set current symbol.
- * @param {string} symbol symbol
+ * @param {string} symbol
  */
 export function setTargetSymbol(symbol) {
   return {

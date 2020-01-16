@@ -33,7 +33,7 @@ export function refresh() {
 
 /**
  * Create an action to update funding credit history.
- * @param {Object[]} data data set
+ * @param {Object[]} data
  */
 export function updateFCredit(data) {
   return {
@@ -46,7 +46,7 @@ export function updateFCredit(data) {
 
 /**
  * Create an action to set target symbol.
- * @param {string[]} symbols symbols
+ * @param {string[]} symbols
  */
 export function setTargetSymbols(symbols) {
   return {
@@ -57,7 +57,7 @@ export function setTargetSymbols(symbols) {
 
 /**
  * Create an action to add target symbol.
- * @param {string} symbol symbol
+ * @param {string} symbol
  */
 export function addTargetSymbol(symbol) {
   return {
@@ -68,7 +68,7 @@ export function addTargetSymbol(symbol) {
 
 /**
  * Create an action to remove target symbol.
- * @param {string} symbol symbol
+ * @param {string} symbol
  */
 export function removeTargetSymbol(symbol) {
   return {

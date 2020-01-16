@@ -33,7 +33,7 @@ export function refresh() {
 
 /**
  * Create an action to update Positions Audit.
- * @param {Object[]} data data set
+ * @param {Object[]} data
  */
 export function updatePAudit(data) {
   return {
@@ -46,7 +46,7 @@ export function updatePAudit(data) {
 
 /**
  * Create an action to set current id.
- * @param {string[]} ids ids
+ * @param {string[]} ids
  */
 export function setTargetIds(ids) {
   return {
@@ -57,7 +57,7 @@ export function setTargetIds(ids) {
 
 /**
  * Create an action to add target id.
- * @param {string} id id
+ * @param {string} id
  */
 export function addTargetId(id) {
   return {
@@ -68,7 +68,7 @@ export function addTargetId(id) {
 
 /**
  * Create an action to remove target id.
- * @param {string} id id
+ * @param {string} id
  */
 export function removeTargetId(id) {
   return {

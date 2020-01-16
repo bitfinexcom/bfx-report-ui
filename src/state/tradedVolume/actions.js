@@ -53,7 +53,7 @@ export function updateTradedVolume(payload) {
 
 /**
  * Create an action to set current pair.
- * @param {string[]} pairs pairs
+ * @param {string[]} pairs
  */
 export function setTargetPairs(pairs) {
   return {
@@ -64,7 +64,7 @@ export function setTargetPairs(pairs) {
 
 /**
  * Create an action to add target pair.
- * @param {string} pair pair
+ * @param {string} pair
  */
 export function addTargetPair(pair) {
   return {
@@ -75,7 +75,7 @@ export function addTargetPair(pair) {
 
 /**
  * Create an action to remove target pair.
- * @param {string} pair pair
+ * @param {string} pair
  */
 export function removeTargetPair(pair) {
   return {

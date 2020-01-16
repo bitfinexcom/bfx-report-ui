@@ -16,7 +16,7 @@ export function fetchNext(section) {
 /**
  * Create an action to jump to a specific page.
  * @param {string} section
- * @param {number} page page number
+ * @param {number} page
  */
 export function jumpPage(section, page) {
   return {

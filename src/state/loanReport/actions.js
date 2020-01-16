@@ -53,7 +53,7 @@ export function updateLoanReport(payload) {
 
 /**
  * Create an action to set current symbols.
- * @param {string[]} symbols symbols
+ * @param {string[]} symbols
  */
 export function setTargetSymbols(symbols) {
   return {
@@ -64,7 +64,7 @@ export function setTargetSymbols(symbols) {
 
 /**
  * Create an action to add target symbol.
- * @param {string} symbol symbol
+ * @param {string} symbol
  */
 export function addTargetSymbol(symbol) {
   return {
@@ -75,7 +75,7 @@ export function addTargetSymbol(symbol) {
 
 /**
  * Create an action to remove target symbol.
- * @param {string} symbol symbol
+ * @param {string} symbol
  */
 export function removeTargetSymbol(symbol) {
   return {

@@ -2,7 +2,7 @@ import types from './constants'
 
 /**
  * Create an action to fetch Snapshots data.
- * @param {string} timestamp timestamp param from url
+ * @param {string} timestamp param from url
  */
 export function fetchSnapshots(timestamp) {
   return {
@@ -13,7 +13,7 @@ export function fetchSnapshots(timestamp) {
 
 /**
  * Create an action to set timestamp.
- * @param {number} timestamp timestamp of date
+ * @param {number} timestamp
  */
 export function setTimestamp(timestamp) {
   return {
