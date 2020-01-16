@@ -5,13 +5,14 @@ import { paginationCheck } from 'state/ui/saga'
 
 import { PAGINATION_SEARCH_LIMIT } from 'var'
 
-const shouldFetchNext = ({ result }) => result && result.res && result.res.length === 0 && result.nextPage
+const shouldFetchNext = ({ result }) => _get(result, 'res.length', 0) === 0 && _get(result, 'nextPage')
 
 export function* fetchDataWithPagination(requestFunction, options) {
   let requestsCounter = 0
-  let response
 
-  do {
+  let response = yield call(requestFunction, options)
+  while (shouldFetchNext(response)) {
+    requestsCounter += 1
     const nextPage = _get(response, 'result.nextPage')
     if (PAGINATION_SEARCH_LIMIT <= requestsCounter) {
       const shouldProceed = yield call(paginationCheck, nextPage)
@@ -21,13 +22,9 @@ export function* fetchDataWithPagination(requestFunction, options) {
       requestsCounter = 0
     }
 
-    if (response) {
-      options.smallestMts = nextPage // eslint-disable-line no-param-reassign
-    }
-
+    options.smallestMts = nextPage // eslint-disable-line no-param-reassign
     response = yield call(requestFunction, options)
-    requestsCounter += 1
-  } while (shouldFetchNext(response))
+  }
 
   const { result, error } = response
   return { result, error }

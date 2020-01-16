@@ -35,8 +35,8 @@ const filesMap = {
       destination: 'src/components/Header/logo3-dark-theme.svg',
     },
     {
-      source: 'scripts/template/bitfinex-mlogo-dark.svg',
-      destination: 'src/components/Header/mobile_logo_dark.svg',
+      source: 'scripts/template/bitfinex-logo-light.svg',
+      destination: 'src/components/Header/logo3-light-theme.svg',
     },
     {
       source: 'scripts/template/bitfinex-favicon.ico',

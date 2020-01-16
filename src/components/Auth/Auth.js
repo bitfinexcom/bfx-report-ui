@@ -57,12 +57,12 @@ class Auth extends PureComponent {
             <img
               alt={platform.Name}
               src={darkLogo}
-              className='bitfinex-logo-dark'
+              className='bitfinex-logo bitfinex-logo--dark'
             />
             <img
               alt={platform.Name}
               src={lightLogo}
-              className='bitfinex-logo-light'
+              className='bitfinex-logo bitfinex-logo--light'
             />
             <Callout>
               {t('auth.note1')}
