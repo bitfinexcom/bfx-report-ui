@@ -31,14 +31,12 @@ export function refresh() {
 
 /**
  * Create an action to update Positions(active).
- * @param {Object[]} data
+ * @param {Object[]} payload data set
  */
-export function updateAPositions(data) {
+export function updateAPositions(payload) {
   return {
     type: types.UPDATE_APOSITIONS,
-    payload: {
-      data,
-    },
+    payload,
   }
 }
 

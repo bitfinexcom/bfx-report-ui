@@ -82,6 +82,8 @@ class PositionsActive extends PureComponent {
         <Fragment>
           <h4>
             {t('positions.title')}
+            {' '}
+            <RefreshButton handleClickRefresh={refresh} />
           </h4>
           {renderButtonGroup}
           <br />
