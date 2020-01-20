@@ -34,8 +34,10 @@ const enableSyncMode = () => makeFetchCall('enableSyncMode')
 const disableSyncMode = () => makeFetchCall('disableSyncMode')
 const getPublicTradesConf = () => makeFetchCall('getPublicTradesConf')
 const getTickersHistoryConf = () => makeFetchCall('getTickersHistoryConf')
+const getStatusMessagesConf = () => makeFetchCall('getStatusMessagesConf')
 const editPublicTradesConf = params => makeFetchCall('editPublicTradesConf', params)
 const editTickersHistoryConf = params => makeFetchCall('editTickersHistoryConf', params)
+const editStatusMessagesConf = params => makeFetchCall('editStatusMessagesConf', params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -178,10 +180,17 @@ function* getSyncPref() {
   const [
     { result: publicTradesPrefResult, error: publicTradesPrefError },
     { result: tickersHistoryPrefResult, error: tickersHistoryPrefError },
+    { result: statusMessagesPrefResult },
   ] = yield all([
     yield call(getPublicTradesConf),
     yield call(getTickersHistoryConf),
+    yield call(getStatusMessagesConf),
   ])
+
+  // set default pref for derivatives, enabling view of those pairs in sync mode
+  if (!statusMessagesPrefResult.length) {
+    yield call(editStatusMessagesConf, [{ symbol: 'tBTCF0:USTF0', start: 0 }, { symbol: 'tETHF0:USTF0', start: 0 }])
+  }
 
   const formatSymbol = data => mapSymbol(removePrefix(data.symbol))
   const formatConfigPairs = ({ symbol }) => mapPair(formatPair(symbol))
