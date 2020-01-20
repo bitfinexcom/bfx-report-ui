@@ -23,26 +23,29 @@ class ExportDialog extends PureComponent {
   state = {
     currentTargets: [],
     target: '',
+    isOpen: false,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    const { isOpen, prepareExport } = nextProps
+    const { isOpen: isPrevOpen } = prevState
+
+    if (!isPrevOpen && isOpen) {
+      prepareExport()
+    }
+
     const target = getTarget(nextProps.location.pathname)
     if (target !== prevState.target) {
       return {
         currentTargets: [target],
         target,
+        isOpen,
       }
     }
 
-    return null
-  }
-
-  toggleDialog = () => {
-    const { isOpen, prepareExport, toggleDialog } = this.props
-    if (!isOpen) {
-      prepareExport()
+    return {
+      isOpen,
     }
-    toggleDialog()
   }
 
   startExport = () => {
@@ -81,6 +84,7 @@ class ExportDialog extends PureComponent {
       t,
       timestamp,
       timezone,
+      toggleDialog,
       location,
     } = this.props
     const { currentTargets } = this.state
@@ -162,7 +166,7 @@ class ExportDialog extends PureComponent {
           </div>
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              <Button onClick={this.toggleDialog}>
+              <Button onClick={toggleDialog}>
                 {t('download.cancel')}
               </Button>
               <Button
@@ -180,7 +184,7 @@ class ExportDialog extends PureComponent {
     return (
       <Dialog
         icon={IconNames.CLOUD_DOWNLOAD}
-        onClose={this.toggleDialog}
+        onClose={toggleDialog}
         title={t('download.title')}
         autoFocus
         canEscapeKeyClose

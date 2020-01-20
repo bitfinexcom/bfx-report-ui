@@ -413,7 +413,7 @@ function* exportCSV({ payload: targets }) {
 function* prepareExport() {
   try {
     if (platform.showFrameworkMode) {
-      yield put(actions.setExportEmail(false))
+      yield put(actions.setExportEmail(''))
       return
     }
 
