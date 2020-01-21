@@ -15,6 +15,10 @@ const COLORS = [
 ]
 
 class Chart extends React.PureComponent {
+  state = {
+    hiddenKeys: {},
+  }
+
   getGradients = () => {
     const { dataKeys } = this.props
 
@@ -31,6 +35,7 @@ class Chart extends React.PureComponent {
   }
 
   getAreas = () => {
+    const { hiddenKeys } = this.state
     const { dataKeys } = this.props
 
     return dataKeys.map((dataKey, i) => {
@@ -47,9 +52,19 @@ class Chart extends React.PureComponent {
           fill={`url(#${key})`}
           connectNulls
           dot={false}
+          hide={hiddenKeys[key]}
         />
       )
     })
+  }
+
+  onLegendClick = ({ dataKey }) => {
+    this.setState(({ hiddenKeys }) => ({
+      hiddenKeys: {
+        ...hiddenKeys,
+        [dataKey]: !hiddenKeys[dataKey],
+      },
+    }))
   }
 
   render() {
@@ -74,7 +89,12 @@ class Chart extends React.PureComponent {
             <YAxis stroke='#9e9494' />
             <Tooltip animationDuration={150} />
             <CartesianGrid stroke='#57636b' strokeDasharray='3 3' />
-            <Legend verticalAlign='top' wrapperStyle={{ paddingBottom: 15 }} iconType='rect' />
+            <Legend
+              verticalAlign='top'
+              wrapperStyle={{ paddingBottom: 15 }}
+              iconType='rect'
+              onClick={this.onLegendClick}
+            />
             {this.getAreas()}
           </AreaChart>
         </ResponsiveContainer>
