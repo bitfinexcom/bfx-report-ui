@@ -47,7 +47,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'pair',
-      name: 'positions.column.pair',
+      name: 'column.pair',
       width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -61,7 +61,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'amount',
-      name: 'positions.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
@@ -78,7 +78,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'basePrice',
-      name: 'positions.column.base-price',
+      name: 'column.base-price',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { basePrice } = filteredData[rowIndex]
@@ -96,7 +96,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'actualPrice',
-      name: 'positions.column.actual-price',
+      name: 'column.actual-price',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { actualPrice } = filteredData[rowIndex]
@@ -114,7 +114,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'priceLiq',
-      name: 'positions.column.liq-price',
+      name: 'column.liq-price',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { liquidationPrice } = filteredData[rowIndex]
@@ -132,7 +132,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'pl',
-      name: 'positions.column.pl',
+      name: 'column.pl',
       width: 100,
       renderer: (rowIndex) => {
         const { pl } = filteredData[rowIndex]
@@ -149,7 +149,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'plUsd',
-      name: 'positions.column.plUsd',
+      name: 'column.plUsd',
       width: 100,
       renderer: (rowIndex) => {
         const { plUsd } = filteredData[rowIndex]
@@ -166,7 +166,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'plperc',
-      name: 'positions.column.plperc',
+      name: 'column.plperc',
       width: 100,
       renderer: (rowIndex) => {
         const { plPerc } = filteredData[rowIndex]
@@ -183,7 +183,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'swap',
-      name: 'positions.column.swap',
+      name: 'column.swap',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { marginFunding } = filteredData[rowIndex]
@@ -201,7 +201,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'swapType',
-      name: 'positions.column.swap-type',
+      name: 'column.swap-type',
       width: 120,
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex].marginFundingType)
@@ -215,7 +215,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'status',
-      name: 'positions.column.status',
+      name: 'column.status',
       width: 100,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
@@ -229,7 +229,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('positions.column.update')} (${timeOffset})`,
+      nameStr: `${t('column.update')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
@@ -252,7 +252,7 @@ export const getPositionsTickersColumns = (props) => {
   return [
     {
       id: 'pair',
-      name: 'tickers.column.pair',
+      name: 'column.pair',
       width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -266,7 +266,7 @@ export const getPositionsTickersColumns = (props) => {
     },
     {
       id: 'amount',
-      name: 'snapshots.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
@@ -290,7 +290,7 @@ export const getWalletsTickersColumns = (props) => {
   return [
     {
       id: 'type',
-      name: 'snapshots.column.type',
+      name: 'column.type',
       width: 80,
       renderer: (rowIndex) => {
         const { walletType } = filteredData[rowIndex]
@@ -308,7 +308,7 @@ export const getWalletsTickersColumns = (props) => {
     },
     {
       id: 'pair',
-      name: 'tickers.column.pair',
+      name: 'column.pair',
       width: 100,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -322,7 +322,7 @@ export const getWalletsTickersColumns = (props) => {
     },
     {
       id: 'amount',
-      name: 'snapshots.column.amount',
+      name: 'column.amount',
       width: 120,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]

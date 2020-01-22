@@ -33,7 +33,7 @@ export default function getColumns(props) {
     },
     {
       id: 'symbol',
-      name: 'floan.column.symbol',
+      name: 'column.symbol',
       width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { symbol } = filteredData[rowIndex]
@@ -47,7 +47,7 @@ export default function getColumns(props) {
     },
     {
       id: 'side',
-      name: 'floan.column.side',
+      name: 'column.side',
       width: 80,
       renderer: (rowIndex) => {
         const side = t(`floan.side.${getSideMsg(filteredData[rowIndex].side)}`)
@@ -61,7 +61,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amount',
-      name: 'floan.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
@@ -78,7 +78,7 @@ export default function getColumns(props) {
     },
     {
       id: 'status',
-      name: 'floan.column.status',
+      name: 'column.status',
       width: 150,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
@@ -92,7 +92,7 @@ export default function getColumns(props) {
     },
     {
       id: 'rate',
-      name: 'floan.column.rate',
+      name: 'column.rate',
       width: COLUMN_WIDTHS.RATE,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
@@ -110,10 +110,10 @@ export default function getColumns(props) {
     },
     {
       id: 'period',
-      name: 'floan.column.period',
+      name: 'column.period',
       width: COLUMN_WIDTHS.PERIOD,
       renderer: (rowIndex) => {
-        const period = `${filteredData[rowIndex].period} ${t('floan.column.days')}`
+        const period = `${filteredData[rowIndex].period} ${t('column.days')}`
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -124,11 +124,11 @@ export default function getColumns(props) {
         )
       },
       copyText: rowIndex => `${filteredData[rowIndex].period} `
-        + `${t('floan.column.days')}`,
+        + `${t('column.days')}`,
     },
     {
       id: 'mtsOpening',
-      name: 'floan.column.opening',
+      name: 'column.opening',
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsOpening)
@@ -144,7 +144,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsLastPayout',
-      name: 'floan.column.lastpayout',
+      name: 'column.close',
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsLastPayout)
@@ -160,7 +160,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('floan.column.updated')} (${timeOffset})`,
+      nameStr: `${t('column.date')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

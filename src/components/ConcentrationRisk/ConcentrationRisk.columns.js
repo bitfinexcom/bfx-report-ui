@@ -9,7 +9,7 @@ export default function getColumns(props) {
   return [
     {
       id: 'currency',
-      name: 'concentrationrisk.column.currency',
+      name: 'column.currency',
       width: 100,
       renderer: (rowIndex) => {
         const { currency } = data[rowIndex]
@@ -23,7 +23,7 @@ export default function getColumns(props) {
     },
     {
       id: 'balanceUsd',
-      name: 'concentrationrisk.column.balanceUsd',
+      name: 'column.balanceUsd',
       width: 150,
       renderer: (rowIndex) => {
         const { balanceUsd } = data[rowIndex]
@@ -44,7 +44,7 @@ export default function getColumns(props) {
     },
     {
       id: 'percent',
-      name: 'concentrationrisk.column.percent',
+      name: 'column.percent',
       width: 150,
       renderer: (rowIndex) => {
         const { percent } = data[rowIndex]

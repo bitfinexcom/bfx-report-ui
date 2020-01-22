@@ -13,7 +13,7 @@ export default function getColumns(props) {
   return [
     {
       id: 'walletsTotal',
-      name: 'taxreport.columns.walletsTotal',
+      name: 'column.walletsTotal',
       width: 240,
       renderer: () => (
         <Cell
@@ -27,7 +27,7 @@ export default function getColumns(props) {
     },
     {
       id: 'positionsTotal',
-      name: 'taxreport.columns.positionsTotal',
+      name: 'column.positionsTotal',
       width: 210,
       renderer: () => (
         <Cell
@@ -41,7 +41,7 @@ export default function getColumns(props) {
     },
     {
       id: 'totalResult',
-      name: 'taxreport.columns.totalResult',
+      name: 'column.totalResult',
       width: 160,
       renderer: () => (
         <Cell

@@ -32,7 +32,7 @@ export default function getColumns(props) {
     },
     {
       id: 'symbol',
-      name: 'foffer.column.symbol',
+      name: 'column.symbol',
       width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { symbol } = filteredData[rowIndex]
@@ -46,7 +46,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amountOrig',
-      name: 'foffer.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amountOrig } = filteredData[rowIndex]
@@ -64,7 +64,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amountExecuted',
-      name: 'foffer.column.amount-exe',
+      name: 'column.amount-exe',
       width: 152,
       renderer: (rowIndex) => {
         const { amountExecuted } = filteredData[rowIndex]
@@ -81,7 +81,7 @@ export default function getColumns(props) {
     },
     {
       id: 'type',
-      name: 'foffer.column.type',
+      name: 'column.type',
       width: 100,
       renderer: (rowIndex) => {
         const { type } = filteredData[rowIndex]
@@ -95,7 +95,7 @@ export default function getColumns(props) {
     },
     {
       id: 'status',
-      name: 'foffer.column.status',
+      name: 'column.status',
       width: 200,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
@@ -109,7 +109,7 @@ export default function getColumns(props) {
     },
     {
       id: 'rate',
-      name: 'foffer.column.rate',
+      name: 'column.rate',
       width: COLUMN_WIDTHS.RATE,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
@@ -127,10 +127,10 @@ export default function getColumns(props) {
     },
     {
       id: 'period',
-      name: 'foffer.column.period',
+      name: 'column.period',
       width: COLUMN_WIDTHS.PERIOD,
       renderer: (rowIndex) => {
-        const period = `${filteredData[rowIndex].period} ${t('foffer.column.days')}`
+        const period = `${filteredData[rowIndex].period} ${t('column.days')}`
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -141,13 +141,13 @@ export default function getColumns(props) {
         )
       },
       copyText: (rowIndex) => {
-        const days = t('foffer.column.days')
+        const days = t('column.days')
         return `${filteredData[rowIndex].period} ${days}`
       },
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('foffer.column.updated')} (${timeOffset})`,
+      nameStr: `${t('column.date')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

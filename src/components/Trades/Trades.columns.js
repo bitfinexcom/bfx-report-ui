@@ -52,7 +52,7 @@ export default function getColumns(props) {
     },
     {
       id: 'orderID',
-      name: 'trades.column.orderid',
+      name: 'column.orderid',
       width: COLUMN_WIDTHS.ORDER_ID,
       renderer: (rowIndex) => {
         const { orderID } = filteredData[rowIndex]
@@ -66,7 +66,7 @@ export default function getColumns(props) {
     },
     {
       id: 'pair',
-      name: 'trades.column.pair',
+      name: 'column.pair',
       width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -80,7 +80,7 @@ export default function getColumns(props) {
     },
     {
       id: 'execAmount',
-      name: 'trades.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { execAmount } = filteredData[rowIndex]
@@ -97,7 +97,7 @@ export default function getColumns(props) {
     },
     {
       id: 'execPrice',
-      name: 'trades.column.price',
+      name: 'column.price',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { execPrice } = filteredData[rowIndex]
@@ -115,7 +115,7 @@ export default function getColumns(props) {
     },
     {
       id: 'fee',
-      name: 'trades.column.fee',
+      name: 'column.fee',
       width: 145,
       renderer: (rowIndex) => {
         const { fee, feeCurrency } = filteredData[rowIndex]
@@ -143,7 +143,7 @@ export default function getColumns(props) {
     },
     {
       id: 'feePercent',
-      name: 'trades.column.feePercent',
+      name: 'column.feePercent',
       width: 90,
       renderer: (rowIndex) => {
         const feePercent = getFeePercent(filteredData[rowIndex])
@@ -160,7 +160,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsCreate',
-      nameStr: `${t('trades.column.time')} (${timeOffset})`,
+      nameStr: `${t('column.date')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)

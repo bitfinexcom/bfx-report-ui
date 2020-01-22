@@ -10,7 +10,7 @@ export default function getColumns(props) {
   return [
     {
       id: 'currency',
-      name: 'wallets.column.currency',
+      name: 'column.currency',
       width: 100,
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
@@ -24,7 +24,7 @@ export default function getColumns(props) {
     },
     {
       id: 'balance',
-      name: 'wallets.column.balance',
+      name: 'column.balance',
       width: 200,
       renderer: (rowIndex) => {
         const { balance } = filteredData[rowIndex]
@@ -43,7 +43,7 @@ export default function getColumns(props) {
     ...insertIf(platform.showFrameworkMode, (
       {
         id: 'balanceUsd',
-        name: 'wallets.column.balanceUsd',
+        name: 'column.balanceUsd',
         width: 200,
         renderer: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]

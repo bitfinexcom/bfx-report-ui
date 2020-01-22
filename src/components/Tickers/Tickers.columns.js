@@ -18,7 +18,7 @@ export default function getColumns(props) {
   return [
     {
       id: 'symbol',
-      name: 'tickers.column.pair',
+      name: 'column.pair',
       width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -32,7 +32,7 @@ export default function getColumns(props) {
     },
     {
       id: 'bid',
-      name: 'tickers.column.bid',
+      name: 'column.bid',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { bid } = filteredData[rowIndex]
@@ -50,7 +50,7 @@ export default function getColumns(props) {
     },
     {
       id: 'ask',
-      name: 'tickers.column.ask',
+      name: 'column.ask',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { ask } = filteredData[rowIndex]
@@ -68,7 +68,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('tickers.column.time')} (${timeOffset})`,
+      nameStr: `${t('column.time')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

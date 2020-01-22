@@ -36,6 +36,7 @@ const LEDGERS_COLUMNS = [
   { id: 'wallet', name: 'wallet', type: STRING, filter: true },
 ]
 
+// name: translation keys `column.[name]`
 const SECTION_COLUMNS = {
   [MENU_LEDGERS]: LEDGERS_COLUMNS,
 

@@ -57,14 +57,18 @@
     "lastpayout": "結束",
     "liq-price": "清算價格",
     "meta": "後設資料",
+    "movementsTotal": "運用資金總額 (美元)",
     "opening": "開始",
     "orderid": "訂單 ID",
     "pair": "對",
+    "percent": "百分",
     "period": "期間",
     "pl": "損益",
     "plUsd": "損益 (USD)",
     "plperc": "損益%",
     "positionpair": "倉位對",
+    "positionsTotal": "倉位總損益 (美元)",
+    "positions_total": "POSITIONS TOTAL P/L USD",
     "price": "價格",
     "priceDeriv": "衍生品價格",
     "priceSpot": "現貨價格",
@@ -76,12 +80,15 @@
     "swap-type": "互換類型",
     "symbol": "貨幣",
     "time": "時間",
+    "totalResult": "總額 (美元)",
     "transactionId": "交易編號",
     "type": "類型",
     "typeprev": "先前訂單類型",
     "update": "更新",
     "usd": "美元",
-    "wallet": "錢包"
+    "wallet": "錢包",
+    "walletsTotal": "錢包總餘額 (美元)",
+    "wallets_total": "WALLETS TOTAL BALANCE USD"
   },
   "columnsfilter": {
     "title": "篩選欄",
@@ -109,11 +116,6 @@
     "query": {
       "title": "查詢",
       "tooltip": "選擇一個時間以查看過去時刻的錢包"
-    },
-    "column": {
-      "currency": "貨幣",
-      "balanceUsd": "餘額(美元)",
-      "percent": "百分"
     }
   },
   "copy": "複製",
@@ -121,16 +123,7 @@
     "title": "存款"
   },
   "derivatives": {
-    "title": "衍生品",
-    "column": {
-      "pair": "對",
-      "priceDeriv": "衍生品價格",
-      "priceSpot": "現貨價格",
-      "fundBalance": "保險基金餘額",
-      "fundingAccrued": "下階段累計資金",
-      "fundingStep": "下階段累加值",
-      "update": "日期"
-    }
+    "title": "衍生品"
   },
   "download": {
     "query": "預備匯出",
@@ -148,19 +141,6 @@
   },
   "fcredit": {
     "title": "信用融資（已使用）",
-    "column": {
-      "symbol": "貨幣",
-      "side": "方向",
-      "amount": "數量",
-      "status": "狀態",
-      "rate": "利率",
-      "period": "期間",
-      "days": "天",
-      "opening": "開始",
-      "lastpayout": "最後付款",
-      "positionpair": "倉位對",
-      "updated": "日期"
-    },
     "side": {
       "provided": "已提供",
       "taken": "已領取",
@@ -173,18 +153,6 @@
   },
   "floan": {
     "title": "提供的融資（未使用）",
-    "column": {
-      "symbol": "貨幣",
-      "side": "方向",
-      "amount": "數量",
-      "status": "狀態",
-      "rate": "利率",
-      "period": "期間",
-      "days": "天",
-      "opening": "開始",
-      "lastpayout": "結束",
-      "updated": "日期"
-    },
     "side": {
       "provided": "已提供",
       "taken": "已領取",
@@ -193,18 +161,7 @@
     }
   },
   "foffer": {
-    "title": "保證金融資出價與報價",
-    "column": {
-      "symbol": "貨幣",
-      "amount": "數量",
-      "amount-exe": "執行數量",
-      "type": "類型",
-      "status": "狀態",
-      "rate": "利率",
-      "period": "期間",
-      "days": "天",
-      "updated": "日期"
-    }
+    "title": "保證金融資出價與報價"
   },
   "fpayment": {
     "title": "融資付款"
@@ -222,51 +179,18 @@
     "help": "說明"
   },
   "ledgers": {
-    "title": "餘額",
-    "column":{
-      "description": "描述",
-      "wallet": "錢包",
-      "currency": "貨幣",
-      "time": "時間",
-      "amount": "數量",
-      "amountUsd": "數量(美元)",
-      "balance": "金額",
-      "balanceUsd": "金額(美元)"
-    }
+    "title": "餘額"
   },
   "loading": "讀取中...",
   "loanreport": {
     "title": "借貸報告"
   },
   "movements": {
-    "title": "活動",
-    "column": {
-      "updated": "時間",
-      "currency": "貨幣",
-      "amount": "數量",
-      "amountUsd": "數量(美元)",
-      "fees": "費用",
-      "status": "狀態",
-      "destination": "去處",
-      "transactionId": "交易編號"
-    }
+    "title": "活動"
   },
   "nodata": "沒有相關資料。請試試其他時間範圍。",
   "orders": {
-    "title": "訂單",
-    "column": {
-      "pair": "對",
-      "type": "類型",
-      "amount": "數量",
-      "amount-exe": "執行數量",
-      "price": "價格",
-      "avgprice": "平均執行價格",
-      "create": "建立",
-      "update": "更新",
-      "status": "狀態",
-      "pricetrail": "歷史價格",
-      "typeprev": "先前訂單類型"
-    }
+    "title": "訂單"
   },
   "ordertrades": {
     "title": "Order Trades",
@@ -298,22 +222,6 @@
     "active": "活躍",
     "closed": "已關閉",
     "no_active": "目前沒有未平倉位。",
-    "column": {
-      "pair": "對",
-      "amount": "數量",
-      "base-price": "基價",
-      "actual-price": "實際價格",
-      "liq-price": "清算價格",
-      "pl": "損益",
-      "plUsd": "損益 (USD)",
-      "plperc": "損益%",
-      "swap": "互換成本",
-      "swap-type": "互換類型",
-      "status": "狀態",
-      "update": "更新",
-      "collateral": "抵押品",
-      "meta": "後設資料"
-    },
     "swap": {
       "daily": "每日",
       "term": "條件"
@@ -343,25 +251,10 @@
     }
   },
   "publicfunding": {
-    "title": "公開融資",
-    "column": {
-      "time": "時間",
-      "amount": "數量",
-      "rate": "利率",
-      "period": "期間",
-      "currency": "貨幣",
-      "days": "天"
-    }
+    "title": "公開融資"
   },
   "publictrades": {
-    "title": "公開交易",
-    "column": {
-      "time": "時間",
-      "type": "類型",
-      "price": "價格",
-      "amount": "數量",
-      "pair": "對"
-    }
+    "title": "公開交易"
   },
   "query": {
     "title": "查詢",
@@ -382,12 +275,6 @@
     "query": {
       "title": "查詢",
       "tooltip": "選擇快照的時間"
-    },
-    "column": {
-      "amount": "數量",
-      "type": "類型",
-      "positions_total": "POSITIONS TOTAL P/L USD",
-      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。"
   },
@@ -427,12 +314,6 @@
       "endSnapshot": "期末快照",
       "finalResult": "最終結果"
     },
-    "columns": {
-      "walletsTotal": "錢包總餘額 (美元)",
-      "positionsTotal": "倉位總損益 (美元)",
-      "movementsTotal": "運用資金總額 (美元)",
-      "totalResult": "總額 (美元)"
-    },
     "startingPeriodBalances": "期初餘額",
     "endingPeriodBalances": "期末餘額",
     "startPositions": "倉位期初快照",
@@ -445,13 +326,7 @@
   },
   "tickers": {
     "title": "牌價",
-    "minlength": "應至少選擇一個貨幣對",
-    "column": {
-      "pair": "對",
-      "ask": "賣價",
-      "bid": "買價",
-      "time": "時間"
-    }
+    "minlength": "應至少選擇一個貨幣對"
   },
   "timeframe": {
     "custom": {
@@ -482,24 +357,11 @@
     "title": "交易量"
   },
   "trades": {
-    "title": "交易",
-    "column": {
-      "orderid": "訂單 ID",
-      "time": "時間",
-      "pair": "對",
-      "amount": "數量",
-      "price": "價格",
-      "fee": "手續費"
-    }
+    "title": "交易"
   },
   "wallets": {
     "title": "錢包",
     "title_beta": "錢包(Beta)",
-    "column": {
-      "currency": "貨幣",
-      "balance": "餘額",
-      "balanceUsd": "餘額(美元)"
-    },
     "header": {
       "exchange": "交易",
       "margin": "保證金",

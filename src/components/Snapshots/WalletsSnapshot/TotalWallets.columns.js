@@ -9,7 +9,7 @@ export default function getColumns(props) {
   return [
     {
       id: 'id',
-      name: 'snapshots.column.wallets_total',
+      name: 'column.wallets_total',
       width: 230,
       renderer: () => (
         <Cell
