@@ -183,7 +183,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'swap',
-      name: 'column.swap',
+      name: 'column.fundingCost',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { marginFunding } = filteredData[rowIndex]
@@ -201,7 +201,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'swapType',
-      name: 'column.swap-type',
+      name: 'column.fundingType',
       width: 120,
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex].marginFundingType)
@@ -229,7 +229,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('column.update')} (${timeOffset})`,
+      nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

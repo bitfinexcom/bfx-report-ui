@@ -136,7 +136,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsCreate',
-      nameStr: `${t('column.create')} (${timeOffset})`,
+      nameStr: `${t('column.created')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
@@ -152,7 +152,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('column.update')} (${timeOffset})`,
+      nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

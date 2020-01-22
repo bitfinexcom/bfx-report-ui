@@ -32,7 +32,7 @@ export default function getColumns(props) {
     },
     {
       id: 'symbol',
-      name: 'column.symbol',
+      name: 'column.currency',
       width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { symbol } = filteredData[rowIndex]

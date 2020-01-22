@@ -33,7 +33,7 @@ export default function getColumns(props) {
     },
     {
       id: 'symbol',
-      name: 'column.symbol',
+      name: 'column.currency',
       width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { symbol } = filteredData[rowIndex]
@@ -128,7 +128,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsOpening',
-      name: 'column.opening',
+      name: 'column.opened',
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsOpening)
@@ -144,7 +144,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsLastPayout',
-      name: 'column.close',
+      name: 'column.closed',
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsLastPayout)

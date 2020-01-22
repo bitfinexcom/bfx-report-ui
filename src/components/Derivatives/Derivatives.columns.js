@@ -121,7 +121,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
-      nameStr: `${t('column.update')} (${timeOffset})`,
+      nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].timestamp)

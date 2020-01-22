@@ -195,7 +195,7 @@ export default function getColumns(props) {
     ...ACTIVE_POSITIONS_COLS,
     {
       id: 'marginFunding',
-      name: 'column.swap',
+      name: 'column.fundingCost',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { marginFunding } = filteredData[rowIndex]
@@ -213,7 +213,7 @@ export default function getColumns(props) {
     },
     {
       id: 'marginFundingType',
-      name: 'column.swap-type',
+      name: 'column.fundingType',
       width: 130,
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex].marginFundingType)
@@ -241,7 +241,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('column.update')} (${timeOffset})`,
+      nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
