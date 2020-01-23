@@ -39,7 +39,7 @@ export default function getColumns(props) {
     },
     {
       id: 'pair',
-      name: 'orders.column.pair',
+      name: 'column.pair',
       width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -53,7 +53,7 @@ export default function getColumns(props) {
     },
     {
       id: 'type',
-      name: 'orders.column.type',
+      name: 'column.type',
       width: 135,
       renderer: (rowIndex) => {
         const { type } = filteredData[rowIndex]
@@ -67,7 +67,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amountOrig',
-      name: 'orders.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amountOrig } = filteredData[rowIndex]
@@ -85,7 +85,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amountExecuted',
-      name: 'orders.column.amount-exe',
+      name: 'column.amount-exe',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amountExecuted } = filteredData[rowIndex]
@@ -102,7 +102,7 @@ export default function getColumns(props) {
     },
     {
       id: 'price',
-      name: 'orders.column.price',
+      name: 'column.price',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { price } = filteredData[rowIndex]
@@ -120,7 +120,7 @@ export default function getColumns(props) {
     },
     {
       id: 'priceAvg',
-      name: 'orders.column.avgprice',
+      name: 'column.avgprice',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { priceAvg } = filteredData[rowIndex]
@@ -138,7 +138,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsCreate',
-      nameStr: `${t('orders.column.create')} (${timeOffset})`,
+      nameStr: `${t('column.created')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
@@ -154,7 +154,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('orders.column.update')} (${timeOffset})`,
+      nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
@@ -170,7 +170,7 @@ export default function getColumns(props) {
     },
     {
       id: 'status',
-      name: 'orders.column.status',
+      name: 'column.status',
       width: 165,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
@@ -184,7 +184,7 @@ export default function getColumns(props) {
     },
     {
       id: 'priceTrailing',
-      name: 'orders.column.pricetrail',
+      name: 'column.pricetrail',
       width: 125,
       renderer: (rowIndex) => {
         const { priceTrailing } = filteredData[rowIndex]
@@ -202,7 +202,7 @@ export default function getColumns(props) {
     },
     {
       id: 'typePrev',
-      name: 'orders.column.typeprev',
+      name: 'column.typeprev',
       width: 145,
       renderer: (rowIndex) => {
         const { typePrev } = filteredData[rowIndex]

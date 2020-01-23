@@ -33,7 +33,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
-      nameStr: `${t('publicfunding.column.time')} (${timeOffset})`,
+      nameStr: `${t('column.time')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
@@ -49,7 +49,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amount',
-      name: 'publicfunding.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
@@ -67,7 +67,7 @@ export default function getColumns(props) {
     },
     {
       id: 'rate',
-      name: 'publicfunding.column.rate',
+      name: 'column.rate',
       width: COLUMN_WIDTHS.RATE,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
@@ -84,10 +84,10 @@ export default function getColumns(props) {
     },
     {
       id: 'period',
-      name: 'publicfunding.column.period',
+      name: 'column.period',
       width: COLUMN_WIDTHS.PERIOD,
       renderer: (rowIndex) => {
-        const period = `${filteredData[rowIndex].period} ${t('publicfunding.column.days')}`
+        const period = `${filteredData[rowIndex].period} ${t('column.days')}`
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -98,13 +98,13 @@ export default function getColumns(props) {
         )
       },
       copyText: (rowIndex) => {
-        const days = t('publicfunding.column.days')
+        const days = t('column.days')
         return `${filteredData[rowIndex].period} ${days}`
       },
     },
     {
       id: 'currency',
-      name: 'publicfunding.column.currency',
+      name: 'column.currency',
       width: COLUMN_WIDTHS.SYMBOL,
       renderer: () => {
         const currency = targetSymbol.toUpperCase()

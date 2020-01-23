@@ -34,7 +34,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdated',
-      nameStr: `${t('movements.column.updated')} (${timeOffset})`,
+      nameStr: `${t('column.date')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
@@ -50,7 +50,7 @@ export default function getColumns(props) {
     },
     {
       id: 'currency',
-      name: 'movements.column.currency',
+      name: 'column.currency',
       width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
@@ -64,7 +64,7 @@ export default function getColumns(props) {
     },
     {
       id: 'status',
-      name: 'movements.column.status',
+      name: 'column.status',
       width: 125,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
@@ -78,7 +78,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amount',
-      name: 'movements.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
@@ -100,7 +100,7 @@ export default function getColumns(props) {
     ...insertIf(platform.showFrameworkMode, (
       {
         id: 'amountUsd',
-        name: 'movements.column.amountUsd',
+        name: 'column.amountUsd',
         width: COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
@@ -122,7 +122,7 @@ export default function getColumns(props) {
     )),
     {
       id: 'fees',
-      name: 'movements.column.fees',
+      name: 'column.fees',
       width: 145,
       renderer: (rowIndex) => {
         const { fees, currency } = filteredData[rowIndex]
@@ -149,7 +149,7 @@ export default function getColumns(props) {
     },
     {
       id: 'destinationAddress',
-      name: 'movements.column.destination',
+      name: 'column.destination',
       width: 400,
       renderer: (rowIndex) => {
         const { currency, destinationAddress } = filteredData[rowIndex]
@@ -167,7 +167,7 @@ export default function getColumns(props) {
     },
     {
       id: 'transactionId',
-      name: 'movements.column.transactionId',
+      name: 'column.transactionId',
       width: 135,
       renderer: (rowIndex) => {
         const { transactionId } = filteredData[rowIndex]

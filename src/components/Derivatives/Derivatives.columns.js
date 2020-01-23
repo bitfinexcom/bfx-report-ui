@@ -18,7 +18,7 @@ export default function getColumns(props) {
   return [
     {
       id: 'pair',
-      name: 'derivatives.column.pair',
+      name: 'column.pair',
       width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -32,7 +32,7 @@ export default function getColumns(props) {
     },
     {
       id: 'price',
-      name: 'derivatives.column.priceDeriv',
+      name: 'column.priceDeriv',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { price } = filteredData[rowIndex]
@@ -50,7 +50,7 @@ export default function getColumns(props) {
     },
     {
       id: 'priceSpot',
-      name: 'derivatives.column.priceSpot',
+      name: 'column.priceSpot',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { priceSpot } = filteredData[rowIndex]
@@ -68,7 +68,7 @@ export default function getColumns(props) {
     },
     {
       id: 'fundBal',
-      name: 'derivatives.column.fundBalance',
+      name: 'column.fundBalance',
       width: 205,
       renderer: (rowIndex) => {
         const { fundBal } = filteredData[rowIndex]
@@ -86,7 +86,7 @@ export default function getColumns(props) {
     },
     {
       id: 'fundingAccrued',
-      name: 'derivatives.column.fundingAccrued',
+      name: 'column.fundingAccrued',
       width: 185,
       renderer: (rowIndex) => {
         const { fundingAccrued } = filteredData[rowIndex]
@@ -104,7 +104,7 @@ export default function getColumns(props) {
     },
     {
       id: 'fundingStep',
-      name: 'derivatives.column.fundingStep',
+      name: 'column.fundingStep',
       width: 155,
       renderer: (rowIndex) => {
         const { fundingStep } = filteredData[rowIndex]
@@ -121,7 +121,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
-      nameStr: `${t('derivatives.column.update')} (${timeOffset})`,
+      nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].timestamp)

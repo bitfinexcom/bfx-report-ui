@@ -31,7 +31,7 @@ export default function getColumns(props) {
     ? [
       {
         id: 'liquidationPrice',
-        name: 'positions.column.liq-price',
+        name: 'column.liq-price',
         width: COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
           const { liquidationPrice } = filteredData[rowIndex]
@@ -49,7 +49,7 @@ export default function getColumns(props) {
       },
       {
         id: 'pl',
-        name: 'positions.column.pl',
+        name: 'column.pl',
         width: 100,
         renderer: (rowIndex) => {
           const { pl } = filteredData[rowIndex]
@@ -66,7 +66,7 @@ export default function getColumns(props) {
       },
       {
         id: 'plPerc',
-        name: 'positions.column.plperc',
+        name: 'column.plperc',
         width: 100,
         renderer: (rowIndex) => {
           const { plPerc } = filteredData[rowIndex]
@@ -88,7 +88,7 @@ export default function getColumns(props) {
     ? [
       {
         id: 'collateral',
-        name: 'positions.column.collateral',
+        name: 'column.collateral',
         width: COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
           const { collateral } = filteredData[rowIndex]
@@ -106,7 +106,7 @@ export default function getColumns(props) {
       },
       {
         id: 'meta',
-        name: 'positions.column.meta',
+        name: 'column.meta',
         width: 160,
         renderer: (rowIndex) => {
           const { meta = '' } = filteredData[rowIndex]
@@ -145,7 +145,7 @@ export default function getColumns(props) {
     },
     {
       id: 'pair',
-      name: 'positions.column.pair',
+      name: 'column.pair',
       width: COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -159,7 +159,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amount',
-      name: 'positions.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
@@ -176,7 +176,7 @@ export default function getColumns(props) {
     },
     {
       id: 'basePrice',
-      name: 'positions.column.base-price',
+      name: 'column.base-price',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { basePrice } = filteredData[rowIndex]
@@ -195,7 +195,7 @@ export default function getColumns(props) {
     ...ACTIVE_POSITIONS_COLS,
     {
       id: 'marginFunding',
-      name: 'positions.column.swap',
+      name: 'column.fundingCost',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { marginFunding } = filteredData[rowIndex]
@@ -213,7 +213,7 @@ export default function getColumns(props) {
     },
     {
       id: 'marginFundingType',
-      name: 'positions.column.swap-type',
+      name: 'column.fundingType',
       width: 130,
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex].marginFundingType)
@@ -227,7 +227,7 @@ export default function getColumns(props) {
     },
     {
       id: 'status',
-      name: 'positions.column.status',
+      name: 'column.status',
       width: 100,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
@@ -241,7 +241,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('positions.column.update')} (${timeOffset})`,
+      nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

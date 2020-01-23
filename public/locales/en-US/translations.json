@@ -40,9 +40,9 @@
     "balanceUsd": "BALANCE (USD)",
     "base-price": "BASE PRICE",
     "bid": "BID",
-    "close": "CLOSED",
+    "closed": "CLOSED",
     "collateral": "COLLATERAL",
-    "create": "CREATED",
+    "created": "CREATED",
     "currency": "CURRENCY",
     "date": "DATE",
     "days": "Day(s)",
@@ -58,14 +58,17 @@
     "lastpayout": "LAST PAYOUT",
     "liq-price": "LIQ PRICE",
     "meta": "METADATA",
-    "opening": "OPENED",
+    "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
+    "opened": "OPENED",
     "orderid": "ORDER ID",
     "pair": "PAIR",
+    "percent": "PERCENT",
     "period": "PERIOD",
     "pl": "P/L",
     "plUsd": "P/L (USD)",
     "plperc": "P/L%",
     "positionpair": "POSITION PAIR",
+    "positionsTotal": "POSITIONS TOTAL P/L (USD)",
     "price": "PRICE",
     "priceDeriv": "DERIV PRICE",
     "priceSpot": "SPOT PRICE",
@@ -73,16 +76,17 @@
     "rate": "RATE",
     "side": "SIDE",
     "status": "STATUS",
-    "swap": "FUNDING COST",
-    "swap-type": "FUNDING TYPE",
-    "symbol": "CURRENCY",
+    "fundingCost": "FUNDING COST",
+    "fundingType": "FUNDING TYPE",
     "time": "TIME",
+    "totalResult": "TOTAL RESULT (USD)",
     "transactionId": "TRANSACTION ID",
     "type": "TYPE",
     "typeprev": "PREVIOUS ORDER TYPE",
-    "update": "UPDATED",
+    "updated": "UPDATED",
     "usd": "USD",
-    "wallet": "WALLET"
+    "wallet": "WALLET",
+    "walletsTotal": "WALLETS TOTAL BALANCE (USD)"
   },
   "columnsfilter": {
     "title": "Filter Columns",
@@ -110,11 +114,6 @@
     "query": {
       "title": "Query",
       "tooltip": "Select a time to query the wallets snapshot"
-    },
-    "column": {
-      "currency": "CURRENCY",
-      "balanceUsd": "BALANCE (USD)",
-      "percent": "PERCENT"
     }
   },
   "copy": "Copy",
@@ -122,16 +121,7 @@
     "title": "Deposits"
   },
   "derivatives": {
-    "title": "Derivatives",
-    "column": {
-      "pair": "PAIR",
-      "priceDeriv": "DERIV PRICE",
-      "priceSpot": "SPOT PRICE",
-      "fundBalance": "INSURANCE FUND BALANCE",
-      "fundingAccrued": "NEXT FUNDING ACCRUED",
-      "fundingStep": "NEXT FUNDING STEP",
-      "update": "UPDATED"
-    }
+    "title": "Derivatives"
   },
   "download": {
     "query": "Prepare Export",
@@ -149,19 +139,6 @@
   },
   "fcredit": {
     "title": "Funding Credit (Used)",
-    "column": {
-      "symbol": "CURRENCY",
-      "side": "SIDE",
-      "amount": "AMOUNT",
-      "status": "STATUS",
-      "rate": "RATE",
-      "period": "PERIOD",
-      "days": "Day(s)",
-      "opening": "OPENED",
-      "lastpayout": "LAST PAYOUT",
-      "positionpair": "POSITION PAIR",
-      "updated": "DATE"
-    },
     "side": {
       "provided": "PROVIDED",
       "taken": "TAKEN",
@@ -174,18 +151,6 @@
   },
   "floan": {
     "title": "Funding Loans (Unused)",
-    "column": {
-      "symbol": "CURRENCY",
-      "side": "SIDE",
-      "amount": "AMOUNT",
-      "status": "STATUS",
-      "rate": "RATE",
-      "period": "PERIOD",
-      "days": "Day(s)",
-      "opening": "OPENED",
-      "lastpayout": "CLOSED",
-      "updated": "DATE"
-    },
     "side": {
       "provided": "PROVIDED",
       "taken": "TAKEN",
@@ -194,18 +159,7 @@
     }
   },
   "foffer": {
-    "title": "Funding Bids & Offers",
-    "column": {
-      "symbol": "CURRENCY",
-      "amount": "AMOUNT",
-      "amount-exe": "EXECUTED AMOUNT",
-      "type": "TYPE",
-      "status": "STATUS",
-      "rate": "RATE",
-      "period": "PERIOD",
-      "days": "Day(s)",
-      "updated": "DATE"
-    }
+    "title": "Funding Bids & Offers"
   },
   "fpayment": {
     "title": "Funding Payment"
@@ -223,51 +177,18 @@
     "help": "Help"
   },
   "ledgers":{
-    "title": "Ledgers",
-    "column":{
-      "description": "DESCRIPTION",
-      "wallet": "WALLET",
-      "currency": "CURRENCY",
-      "time": "DATE",
-      "amount": "AMOUNT",
-      "amountUsd": "AMOUNT (USD)",
-      "balance": "BALANCE",
-      "balanceUsd": "BALANCE (USD)"
-    }
+    "title": "Ledgers"
   },
   "loading": "Loading...",
   "loanreport": {
     "title": "Loan Report"
   },
   "movements": {
-    "title": "Movements",
-    "column": {
-      "updated": "DATE",
-      "currency": "CURRENCY",
-      "amount": "AMOUNT",
-      "amountUsd": "AMOUNT (USD)",
-      "fees": "FEES",
-      "status": "STATUS",
-      "destination": "DESTINATION",
-      "transactionId": "TRANSACTION ID"
-    }
+    "title": "Movements"
   },
   "nodata": "No related data in this time range. You can try another time range.",
   "orders": {
-    "title": "Orders",
-    "column": {
-      "pair": "PAIR",
-      "type": "TYPE",
-      "amount": "AMOUNT",
-      "amount-exe": "EXECUTED AMOUNT",
-      "price": "PRICE",
-      "avgprice": "AVERAGE EXECUTION PRICE",
-      "create": "CREATED",
-      "update": "UPDATED",
-      "status": "STATUS",
-      "pricetrail": "TRAILING PRICE",
-      "typeprev": "PREVIOUS ORDER TYPE"
-    }
+    "title": "Orders"
   },
   "ordertrades": {
     "title": "Order Trades",
@@ -299,22 +220,6 @@
     "active": "Active",
     "closed": "Closed",
     "no_active": "No active positions at the moment.",
-    "column": {
-      "pair": "PAIR",
-      "amount": "AMOUNT",
-      "base-price": "BASE PRICE",
-      "actual-price": "ACTUAL PRICE",
-      "liq-price": "LIQ PRICE",
-      "pl": "P/L",
-      "plUsd": "P/L (USD)",
-      "plperc": "P/L%",
-      "swap": "FUNDING COST",
-      "swap-type": "FUNDING TYPE",
-      "status": "STATUS",
-      "update": "UPDATED",
-      "collateral": "COLLATERAL",
-      "meta": "METADATA"
-    },
     "swap": {
       "daily": "Daily",
       "term": "Term"
@@ -344,25 +249,10 @@
     }
   },
   "publicfunding": {
-    "title": "Public Funding",
-    "column": {
-      "time": "TIME",
-      "amount": "AMOUNT",
-      "rate": "RATE",
-      "period": "PERIOD",
-      "currency": "CURRENCY",
-      "days": "Day(s)"
-    }
+    "title": "Public Funding"
   },
   "publictrades":{
-    "title": "Public Trades",
-    "column": {
-      "time": "TIME",
-      "type": "TYPE",
-      "price": "PRICE",
-      "amount": "AMOUNT",
-      "pair": "PAIR"
-    }
+    "title": "Public Trades"
   },
   "query": {
     "title": "Query",
@@ -383,12 +273,6 @@
     "query": {
       "title": "Query",
       "tooltip": "Select a time to query snapshots"
-    },
-    "column": {
-      "amount": "AMOUNT",
-      "type": "TYPE",
-      "positions_total": "POSITIONS TOTAL P/L USD",
-      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "No related data in this date time. You can try another date time."
   },
@@ -428,12 +312,6 @@
       "endSnapshot": "End Snapshot",
       "finalResult": "Final Result"
     },
-    "columns": {
-      "walletsTotal": "WALLETS TOTAL BALANCE (USD)",
-      "positionsTotal": "POSITIONS TOTAL P/L (USD)",
-      "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
-      "totalResult": "TOTAL RESULT (USD)"
-    },
     "startingPeriodBalances": "Starting Period Balances",
     "endingPeriodBalances": "Ending Period Balances",
     "startPositions": "Starting Positions Snapshot",
@@ -446,13 +324,7 @@
   },
   "tickers": {
     "title": "Tickers",
-    "minlength": "Should pick at least one pair",
-    "column": {
-      "pair": "PAIR",
-      "ask": "ASK",
-      "bid": "BID",
-      "time": "TIME"
-    }
+    "minlength": "Should pick at least one pair"
   },
   "timeframe": {
     "custom": {
@@ -483,25 +355,11 @@
     "title": "Traded Volume"
   },
   "trades": {
-    "title": "Trades",
-    "column": {
-      "orderid": "ORDER ID",
-      "time": "DATE",
-      "pair": "PAIR",
-      "amount": "AMOUNT",
-      "price": "PRICE",
-      "fee": "FEE",
-      "feePercent": "FEE PERC"
-    }
+    "title": "Trades"
   },
   "wallets": {
     "title": "Wallets",
     "title_beta": "Wallets (Beta)",
-    "column": {
-      "currency": "CURRENCY",
-      "balance": "BALANCE",
-      "balanceUsd": "BALANCE (USD)"
-    },
     "header": {
       "exchange": "Exchange",
       "margin": "Margin",

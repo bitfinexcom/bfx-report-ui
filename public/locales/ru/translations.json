@@ -40,9 +40,9 @@
     "balanceUsd": "БАЛАНС (USD)",
     "base-price": "БАЗОВАЯ ЦЕНА",
     "bid": "ЗАЯВКА",
-    "close": "ЗАКРЫТО",
+    "closed": "ЗАКРЫТО",
     "collateral": "ОБЕСПЕЧЕНИЕ",
-    "create": "СОЗДАНО",
+    "created": "СОЗДАНО",
     "currency": "ВАЛЮТА",
     "date": "ДАТА",
     "days": "Дней",
@@ -57,14 +57,17 @@
     "lastpayout": "ПОСЛЕДНЯЯ ВЫПЛАТА",
     "liq-price": "ЦЕНА ЛИКВ.",
     "meta": "МЕТАДАННЫЕ",
-    "opening": "ОТКРЫТО",
+    "movementsTotal": "СУММА ДВИЖЕНИЙ (USD)",
+    "opened": "ОТКРЫТО",
     "orderid": "ID ОРДЕРА",
     "pair": "ПАРА",
+    "percent": "ПРОЦЕНТ",
     "period": "ПЕРИОД",
     "pl": "P/L",
     "plUsd": "P/L (USD)",
     "plperc": "P/L%",
     "positionpair": "ПАРА В ПОЗИЦИИ",
+    "positionsTotal": "ВСЕГО P/L ПОЗИЦИЙ (USD)",
     "price": "ЦЕНА",
     "priceDeriv": "ЦЕНА ДЕРИВАТИВА",
     "priceSpot": "SPOT PRICE",
@@ -72,16 +75,17 @@
     "rate": "СТАВКА",
     "side": "СТОРОНА",
     "status": "СТАТУС",
-    "swap": "СТОИМОСТЬ ОБЕСПЕЧЕНИЯ",
-    "swap-type": "ТИП ОБЕСПЕЧЕНИЯ",
-    "symbol": "ВАЛЮТА",
+    "fundingCost": "СТОИМОСТЬ ОБЕСПЕЧЕНИЯ",
+    "fundingType": "ТИП ОБЕСПЕЧЕНИЯ",
     "time": "ВРЕМЯ",
+    "totalResult": "ИТОГО (USD)",
     "transactionId": "ID ТРАНЗАКЦИИ",
     "type": "ТИП",
     "typeprev": "ПРЕДЫДУЩИЙ ТИП ОРДЕРА",
-    "update": "ОБНОВЛЕНО",
+    "updated": "ОБНОВЛЕНО",
     "usd": "USD",
-    "wallet": "КОШЕЛЕК"
+    "wallet": "КОШЕЛЕК",
+    "walletsTotal": "ИТОГО БАЛАНСА НА КОШЕЛЬКАХ (USD)"
   },
   "columnsfilter": {
     "title": "Фильтровать столбцы",
@@ -109,11 +113,6 @@
     "query": {
       "title": "Запрос",
       "tooltip": "Выберите время для запроса снимка кошельков"
-    },
-    "column": {
-      "currency": "ВАЛЮТА",
-      "balanceUsd": "БАЛАНС (USD)",
-      "percent": "ПРОЦЕНТ"
     }
   },
   "copy": "Копировать",
@@ -121,16 +120,7 @@
     "title": "Депозиты"
   },
   "derivatives": {
-    "title": "Деривативы",
-    "column": {
-      "pair": "ПАРА",
-      "priceDeriv": "ЦЕНА ДЕРИВАТИВА",
-      "priceSpot": "ЦЕНА СПОТ",
-      "fundBalance": "БАЛАНС РЕЗЕРВНОГО ФОНДА",
-      "fundingAccrued": "СЛЕДУЮЩЕЕ ФИНАНСИРОВАНИЕ НАКОПЛЕНО",
-      "fundingStep": "СЛЕДУЮЩИЙ ШАГ ФИНАНСИРОВАНИЯ",
-      "update": "ДАТА"
-    }
+    "title": "Деривативы"
   },
   "download": {
     "query": "Подготовить экспорт",
@@ -148,19 +138,6 @@
   },
   "fcredit": {
     "title": "Объем обеспечения (использ.)",
-    "column": {
-      "symbol": "ВАЛЮТА",
-      "side": "СТОРОНА",
-      "amount": "СУММА",
-      "status": "СТАТУС",
-      "rate": "СТАВКА",
-      "period": "ПЕРИОД",
-      "days": "Дней",
-      "opening": "ОТКРЫТО",
-      "lastpayout": "ПОСЛЕДНЯЯ ВЫПЛАТА",
-      "positionpair": "ПАРА В ПОЗИЦИИ",
-      "updated": "ДАТА"
-    },
     "side": {
       "provided": "ПРЕДОСТАВЛЕНО",
       "taken": "ВЗЯТО",
@@ -173,18 +150,6 @@
   },
   "floan": {
     "title": "Кредиты обеспечения (неиспольз.)",
-    "column": {
-      "symbol": "ВАЛЮТА",
-      "side": "СТОРОНА",
-      "amount": "СУММА",
-      "status": "СТАТУС",
-      "rate": "СТАВКА",
-      "period": "ПЕРИОД",
-      "days": "Дней",
-      "opening": "ОТКРЫТО",
-      "lastpayout": "ЗАКРЫТО",
-      "updated": "ДАТА"
-    },
     "side": {
       "provided": "ПРЕДОСТАВЛЕНО",
       "taken": "ВЗЯТО",
@@ -193,18 +158,7 @@
     }
   },
   "foffer": {
-    "title": "Ставки и предложения обеспечения",
-    "column": {
-      "symbol": "ВАЛЮТА",
-      "amount": "СУММА",
-      "amount-exe": "ИСПОЛНЕННАЯ СУММА",
-      "type": "ТИП",
-      "status": "СТАТУС",
-      "rate": "СТАВКА",
-      "period": "ПЕРИОД",
-      "days": "Дней",
-      "updated": "ДАТА"
-    }
+    "title": "Ставки и предложения обеспечения"
   },
   "fpayment": {
     "title": "Выплата обеспечения"
@@ -222,51 +176,18 @@
     "help": "Справка"
   },
   "ledgers": {
-    "title": "Журналы",
-    "column": {
-      "description": "ОПИСАНИЕ",
-      "wallet": "КОШЕЛЕК",
-      "currency": "ВАЛЮТА",
-      "time": "ДАТА",
-      "amount": "СУММА",
-      "amountUsd": "СУММА (USD)",
-      "balance": "БАЛАНС",
-      "balanceUsd": "БАЛАНС (USD)"
-    }
+    "title": "Журналы"
   },
   "loading": "Загрузка...",
   "loanreport": {
     "title": "Отчет о займах"
   },
   "movements": {
-    "title": "Движения",
-    "column": {
-      "updated": "ДАТА",
-      "currency": "ВАЛЮТА",
-      "amount": "СУММА",
-      "amountUsd": "СУММА (USD)",
-      "fees": "КОМИССИИ",
-      "status": "СТАТУС",
-      "destination": "НАЗНАЧЕНИЕ",
-      "transactionId": "ID ТРАНЗАКЦИИ"
-    }
+    "title": "Движения"
   },
   "nodata": "Нет связанных данных для этого периода времени. Задайте другой период.",
   "orders": {
-    "title": "Ордеры",
-    "column": {
-      "pair": "ПАРА",
-      "type": "ТИП",
-      "amount": "СУММА",
-      "amount-exe": "ИСПОЛНЕННАЯ СУММА",
-      "price": "ЦЕНА",
-      "avgprice": "СРЕДНЯЯ ЦЕНА ИСПОЛНЕНИЯ",
-      "create": "СОЗДАНО",
-      "update": "ОБНОВЛЕНО",
-      "status": "СТАТУС",
-      "pricetrail": "ТРЕЙЛИНГОВАЯ ЦЕНА",
-      "typeprev": "ПРЕДЫДУЩИЙ ТИП ОРДЕРА"
-    }
+    "title": "Ордеры"
   },
   "ordertrades": {
     "title": "Order Trades",
@@ -298,22 +219,6 @@
     "active": "Активные",
     "closed": "Закрытые",
     "no_active": "Нет активных позиции на данный момент.",
-    "column": {
-      "pair": "ПАРА",
-      "amount": "СУММА",
-      "base-price": "БАЗОВАЯ ЦЕНА",
-      "actual-price": "АКТУАЛЬНАЯ ЦЕНА",
-      "liq-price": "ЦЕНА ЛИКВ.",
-      "pl": "P/L",
-      "plUsd": "P/L (USD)",
-      "plperc": "P/L%",
-      "swap": "СТОИМОСТЬ ОБЕСПЕЧЕНИЯ",
-      "swap-type": "ТИП ОБЕСПЕЧЕНИЯ",
-      "status": "СТАТУС",
-      "update": "ОБНОВЛЕНО",
-      "collateral": "ОБЕСПЕЧЕНИЕ",
-      "meta": "МЕТАДАННЫЕ"
-    },
     "swap": {
       "daily": "Ежедневно",
       "term": "Условие"
@@ -343,25 +248,10 @@
     }
   },
   "publicfunding": {
-    "title": "Публичное обеспечение",
-    "column": {
-      "time": "ВРЕМЯ",
-      "amount": "СУММА",
-      "rate": "СТАВКА",
-      "period": "ПЕРИОД",
-      "currency": "ВАЛЮТА",
-      "days": "Дней"
-    }
+    "title": "Публичное обеспечение"
   },
   "publictrades": {
-    "title": "Публичные сделки",
-    "column": {
-      "time": "ВРЕМЯ",
-      "type": "ТИП",
-      "price": "ЦЕНА",
-      "amount": "СУММА",
-      "pair": "ПАРА"
-    }
+    "title": "Публичные сделки"
   },
   "query": {
     "title": "Запрос",
@@ -382,12 +272,6 @@
     "query": {
       "title": "Запрос",
       "tooltip": "Выберите время для запроса снэпшотов"
-    },
-    "column": {
-      "amount": "СУММА",
-      "type": "ТИП",
-      "positions_total": "POSITIONS TOTAL P/L USD",
-      "wallets_total": "WALLETS TOTAL BALANCE USD"
     },
     "nodata": "Нет данных за этот промежуток времени. Вы можете выбрать другой промежуток времени."
   },
@@ -427,12 +311,6 @@
       "endSnapshot": "Конечный снапшот",
       "finalResult": "Финальный результат"
     },
-    "columns": {
-      "walletsTotal": "ИТОГО БАЛАНСА НА КОШЕЛЬКАХ (USD)",
-      "positionsTotal": "ВСЕГО P/L ПОЗИЦИЙ (USD)",
-      "movementsTotal": "СУММА ДВИЖЕНИЙ (USD)",
-      "totalResult": "ИТОГО (USD)"
-    },
     "startingPeriodBalances": "Балансы в начале периода",
     "endingPeriodBalances": "Балансы в конце периода",
     "startPositions": "Начальный снапшот позиций",
@@ -445,13 +323,7 @@
   },
   "tickers": {
     "title": "Тикеры",
-    "minlength": "Нужно выбрать хотя бы одну пару",
-    "column": {
-      "pair": "ПАРА",
-      "ask": "ПРОДАЖА",
-      "bid": "ЗАЯВКА",
-      "time": "ВРЕМЯ"
-    }
+    "minlength": "Нужно выбрать хотя бы одну пару"
   },
   "timeframe": {
     "custom": {
@@ -482,24 +354,11 @@
     "title": "Объем торгов"
   },
   "trades": {
-    "title": "Сделки",
-    "column": {
-      "orderid": "ID ОРДЕРА",
-      "time": "ВРЕМЯ",
-      "pair": "ПАРА",
-      "amount": "СУММА",
-      "price": "ЦЕНА",
-      "fee": "КОМИССИЯ"
-    }
+    "title": "Сделки"
   },
   "wallets": {
     "title": "Кошельки",
     "title_beta": "Кошельки (Beta)",
-    "column": {
-      "currency": "ВАЛЮТА",
-      "balance": "БАЛАНС",
-      "balanceUsd": "БАЛАНС (USD)"
-    },
     "header": {
       "exchange": "Биржа",
       "margin": "Маржинальное",

@@ -9,7 +9,7 @@ export default function getColumns(props) {
   return [
     {
       id: 'movementsTotal',
-      name: 'taxreport.columns.movementsTotal',
+      name: 'column.movementsTotal',
       width: 260,
       renderer: () => (
         <Cell

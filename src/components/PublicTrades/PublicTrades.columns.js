@@ -34,7 +34,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
-      nameStr: `${t('publictrades.column.time')} (${timeOffset})`,
+      nameStr: `${t('column.time')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
@@ -50,7 +50,7 @@ export default function getColumns(props) {
     },
     {
       id: 'type',
-      name: 'publictrades.column.type',
+      name: 'column.type',
       width: 70,
       renderer: (rowIndex) => {
         const { type, amount } = filteredData[rowIndex]
@@ -68,7 +68,7 @@ export default function getColumns(props) {
     },
     {
       id: 'price',
-      name: 'publictrades.column.price',
+      name: 'column.price',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { price, amount } = filteredData[rowIndex]
@@ -88,7 +88,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amount',
-      name: 'publictrades.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
@@ -106,7 +106,7 @@ export default function getColumns(props) {
     },
     {
       id: 'pair',
-      name: 'publictrades.column.pair',
+      name: 'column.pair',
       width: COLUMN_WIDTHS.PAIR,
       renderer: () => {
         const formattedCurrentPair = formatPair(targetPair)

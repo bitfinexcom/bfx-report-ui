@@ -33,7 +33,7 @@ export default function getColumns(props) {
     },
     {
       id: 'symbol',
-      name: 'fcredit.column.symbol',
+      name: 'column.currency',
       width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { symbol } = filteredData[rowIndex]
@@ -47,7 +47,7 @@ export default function getColumns(props) {
     },
     {
       id: 'side',
-      name: 'fcredit.column.side',
+      name: 'column.side',
       width: 100,
       renderer: (rowIndex) => {
         const side = t(`fcredit.side.${getSideMsg(filteredData[rowIndex].side)}`)
@@ -61,7 +61,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amount',
-      name: 'fcredit.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
@@ -78,7 +78,7 @@ export default function getColumns(props) {
     },
     {
       id: 'status',
-      name: 'fcredit.column.status',
+      name: 'column.status',
       width: 170,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
@@ -92,7 +92,7 @@ export default function getColumns(props) {
     },
     {
       id: 'rate',
-      name: 'fcredit.column.rate',
+      name: 'column.rate',
       width: COLUMN_WIDTHS.RATE,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
@@ -109,10 +109,10 @@ export default function getColumns(props) {
     },
     {
       id: 'period',
-      name: 'fcredit.column.period',
+      name: 'column.period',
       width: COLUMN_WIDTHS.PERIOD,
       renderer: (rowIndex) => {
-        const period = `${filteredData[rowIndex].period} ${t('fcredit.column.days')}`
+        const period = `${filteredData[rowIndex].period} ${t('column.days')}`
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -123,13 +123,13 @@ export default function getColumns(props) {
         )
       },
       copyText: (rowIndex) => {
-        const days = t('fcredit.column.days')
+        const days = t('column.days')
         return `${filteredData[rowIndex].period} ${days}`
       },
     },
     {
       id: 'mtsOpening',
-      name: 'fcredit.column.opening',
+      name: 'column.opened',
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsOpening)
@@ -145,7 +145,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsLastPayout',
-      name: 'fcredit.column.lastpayout',
+      name: 'column.lastpayout',
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsLastPayout)
@@ -161,7 +161,7 @@ export default function getColumns(props) {
     },
     {
       id: 'positionPair',
-      name: 'fcredit.column.positionpair',
+      name: 'column.positionpair',
       width: 120,
       renderer: (rowIndex) => {
         const { positionPair } = filteredData[rowIndex]
@@ -175,7 +175,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
-      nameStr: `${t('fcredit.column.updated')} (${timeOffset})`,
+      nameStr: `${t('column.date')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)

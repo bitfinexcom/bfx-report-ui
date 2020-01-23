@@ -19,7 +19,7 @@ export default function getColumns(props) {
   return [
     {
       id: 'description',
-      name: 'ledgers.column.description',
+      name: 'column.description',
       width: 520,
       renderer: (rowIndex) => {
         const { description } = filteredData[rowIndex]
@@ -33,7 +33,7 @@ export default function getColumns(props) {
     },
     {
       id: 'currency',
-      name: 'ledgers.column.currency',
+      name: 'column.currency',
       width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
@@ -47,7 +47,7 @@ export default function getColumns(props) {
     },
     {
       id: 'amount',
-      name: 'ledgers.column.amount',
+      name: 'column.amount',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
@@ -69,7 +69,7 @@ export default function getColumns(props) {
     ...insertIf(platform.showFrameworkMode, (
       {
         id: 'amountUsd',
-        name: 'ledgers.column.amountUsd',
+        name: 'column.amountUsd',
         width: COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
@@ -91,7 +91,7 @@ export default function getColumns(props) {
     )),
     {
       id: 'balance',
-      name: 'ledgers.column.balance',
+      name: 'column.balance',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { balance, currency } = filteredData[rowIndex]
@@ -114,7 +114,7 @@ export default function getColumns(props) {
     ...insertIf(platform.showFrameworkMode, (
       {
         id: 'balanceUsd',
-        name: 'ledgers.column.balanceUsd',
+        name: 'column.balanceUsd',
         width: COLUMN_WIDTHS.BALANCE_USD,
         renderer: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]
@@ -137,7 +137,7 @@ export default function getColumns(props) {
     )),
     {
       id: 'mts',
-      nameStr: `${t('ledgers.column.time')} (${timeOffset})`,
+      nameStr: `${t('column.date')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
@@ -153,7 +153,7 @@ export default function getColumns(props) {
     },
     {
       id: 'wallet',
-      name: 'ledgers.column.wallet',
+      name: 'column.wallet',
       width: 80,
       renderer: (rowIndex) => {
         const { wallet } = filteredData[rowIndex]
