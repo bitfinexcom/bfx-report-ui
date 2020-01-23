@@ -44,6 +44,7 @@ class Orders extends PureComponent {
       pathname: `${getPath(queryConstants.MENU_ORDER_TRADES)}/${demappedPair}`,
       search,
     })
+    window.scrollTo(0, 0) // scroll to the top of page on section change
   }
 
   render() {
