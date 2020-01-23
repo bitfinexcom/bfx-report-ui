@@ -27,6 +27,8 @@ import lightLogo from './logo3-light-theme.svg'
 // eslint-disable-next-line import/no-unresolved
 import HelpLink from './HelpLink'
 
+const { REACT_APP_ELECTRON } = process.env
+
 class Header extends PureComponent {
   static propTypes = propTypes
 
@@ -120,8 +122,10 @@ class Header extends PureComponent {
 
     const renderSyncMode = platform.showFrameworkMode ? <SyncMode /> : null
 
+    const HOME_URL = REACT_APP_ELECTRON ? '/' : platform.HOME_URL
+
     const renderBrand = (
-      <a href={platform.HOME_URL}>
+      <a href={HOME_URL}>
         <img
           alt={platform.Name}
           src={darkLogo}
