@@ -89,7 +89,7 @@ class ToggleMenu extends PureComponent {
     const [path] = _castArray(getPath(nextTarget))
     history.push({
       pathname: path,
-      search: history.location.search,
+      search: window.location.search,
     })
     window.scrollTo(0, 0) // scroll to the top of page on section change
   }

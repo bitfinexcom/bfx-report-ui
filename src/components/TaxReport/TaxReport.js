@@ -73,7 +73,7 @@ class TaxReport extends PureComponent {
 
   switchSection = (section) => {
     const { history } = this.props
-    history.push(`${section}${history.location.search}`)
+    history.push(`${section}${window.location.search}`)
   }
 
   getSection = (section) => {

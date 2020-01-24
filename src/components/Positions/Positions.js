@@ -38,13 +38,13 @@ class Positions extends PureComponent {
     e.preventDefault()
     const { history } = this.props
     const id = e.target.getAttribute('value')
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/${id}${history.location.search}`)
+    history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/${id}${window.location.search}`)
   }
 
   jumpToActivePositions = (e) => {
     e.preventDefault()
     const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_ACTIVE)}${history.location.search}`)
+    history.push(`${getPath(queryConstants.MENU_POSITIONS_ACTIVE)}${window.location.search}`)
   }
 
   render() {
