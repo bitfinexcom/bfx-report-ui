@@ -1,4 +1,4 @@
-// https://docs.bitfinex.com/v2/reference#ledgers
+// https://docs.bitfinex.com/reference#rest-auth-ledgers
 
 import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'

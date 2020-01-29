@@ -1,4 +1,4 @@
-// https://docs.bitfinex.com/v2/reference#rest-auth-wallets
+// https://docs.bitfinex.com/reference#rest-auth-wallets
 import authTypes from 'state/auth/constants'
 import { mapSymbol } from 'state/symbols/utils'
 

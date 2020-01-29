@@ -1,4 +1,4 @@
-// https://docs.bitfinex.com/v2/reference#movements
+// https://docs.bitfinex.com/reference#rest-auth-movements
 import _get from 'lodash/get'
 
 import queryTypes from 'state/query/constants'
