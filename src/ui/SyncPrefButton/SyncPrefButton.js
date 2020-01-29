@@ -37,7 +37,7 @@ class SyncPrefButton extends PureComponent {
     // fill init state from props
     if (prevState.tempPairs.length === 0 || prevState.tempTime === undefined) {
       return {
-        tempPairs: nextProps.syncPairs.map(pair => pair.toUpperCase()),
+        tempPairs: nextProps.syncPairs,
         tempTime: new Date(nextProps.startTime),
       }
     }
