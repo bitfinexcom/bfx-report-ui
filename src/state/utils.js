@@ -320,7 +320,9 @@ export function togglePair(type, props, pair) {
   history.push(generateUrl(type, history.location.search, demapPairs(nextPairs)))
 }
 
-export const getCurrentEntries = (entries, page, pageSize) => entries.slice((page - 1) * pageSize, page * pageSize)
+export const getCurrentEntries = memoizeOne(
+  (entries, page, pageSize) => entries.slice((page - 1) * pageSize, page * pageSize),
+)
 
 export function momentFormatter(format, timezone) {
   return timezone

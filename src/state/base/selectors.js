@@ -1,3 +1,5 @@
+import memoizeOne from 'memoize-one'
+
 import { formatTime, timeOffset } from 'state/utils'
 
 import types from './constants'
@@ -16,13 +18,32 @@ export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FO
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
 export const getBaseQueryLimit = state => getBase(state).queryLimit || types.DEFAULT_BASE_QUERY_LIMIT
 
-export const getFullTime = state => (mts, full, inputTime = false) => (mts ? formatTime(mts, {
-  timezone: inputTime ? getInputTimezone(state) : getTimezone(state),
-  dateFormat: getDateFormat(state),
-  milliseconds: getShowMilliseconds(state),
-  full,
-}) : '')
 export const getTimeOffset = state => timeOffset(getTimezone(state))
+
+const getFormattedTime = (inputTimezone, timezone, dateFormat, milliseconds) => (mts, full, inputTime = false) => {
+  if (!mts) {
+    return ''
+  }
+
+  const options = {
+    timezone: inputTime ? inputTimezone : timezone,
+    dateFormat,
+    milliseconds,
+    full,
+  }
+  return formatTime(mts, options)
+}
+
+const getFormattedTimeMemo = memoizeOne(getFormattedTime)
+
+export const getFullTime = (state) => {
+  const inputTimezone = getInputTimezone(state)
+  const timezone = getTimezone(state)
+  const dateFormat = getDateFormat(state)
+  const milliseconds = getShowMilliseconds(state)
+
+  return getFormattedTimeMemo(inputTimezone, timezone, dateFormat, milliseconds)
+}
 
 export default {
   getBase,
