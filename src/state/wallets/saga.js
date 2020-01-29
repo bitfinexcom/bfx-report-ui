@@ -8,7 +8,6 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
-import { platform } from 'var/config'
 
 import types from './constants'
 import actions from './actions'
@@ -21,7 +20,6 @@ function getReqWallets(end) {
 
 /* eslint-disable-next-line consistent-return */
 function* fetchWallets({ payload: end }) {
-  const walletsTitle = platform.showFrameworkMode ? 'wallets.title' : 'wallets.title_beta'
   try {
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
@@ -37,14 +35,14 @@ function* fetchWallets({ payload: end }) {
     if (error) {
       yield put(actions.fetchFail({
         id: 'status.fail',
-        topic: walletsTitle,
+        topic: 'wallets.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
       id: 'status.request.error',
-      topic: walletsTitle,
+      topic: 'wallets.title',
       detail: JSON.stringify(fail),
     }))
   }

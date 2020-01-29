@@ -58,7 +58,7 @@ class ToggleMenu extends PureComponent {
     [MENU_DEPOSITS, 'deposits.title'],
     [MENU_WITHDRAWALS, 'withdrawals.title'],
     [[MENU_POSITIONS, MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT], 'positions.title'],
-    [MENU_WALLETS, showFrameworkMode ? 'wallets.title' : 'wallets.title_beta'],
+    [MENU_WALLETS, 'wallets.title'],
     ['divider'],
     [MENU_FOFFER, 'foffer.title'],
     [MENU_FLOAN, 'floan.title'],

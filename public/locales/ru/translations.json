@@ -358,7 +358,6 @@
   },
   "wallets": {
     "title": "Кошельки",
-    "title_beta": "Кошельки (Beta)",
     "header": {
       "exchange": "Биржа",
       "margin": "Маржинальное",

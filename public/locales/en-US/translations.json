@@ -359,7 +359,6 @@
   },
   "wallets": {
     "title": "Wallets",
-    "title_beta": "Wallets (Beta)",
     "header": {
       "exchange": "Exchange",
       "margin": "Margin",

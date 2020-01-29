@@ -16,7 +16,7 @@ import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
 import ExportButton from 'ui/ExportButton'
 import parseChartData from 'ui/Charts/Charts.helpers'
-import TimeframeSelector from 'ui/TimeframeSelector/TimeframeSelector'
+import TimeframeSelector from 'ui/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 

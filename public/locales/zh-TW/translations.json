@@ -358,7 +358,6 @@
   },
   "wallets": {
     "title": "錢包",
-    "title_beta": "錢包(Beta)",
     "header": {
       "exchange": "交易",
       "margin": "保證金",
