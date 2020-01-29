@@ -29,7 +29,7 @@ class Movements extends PureComponent {
     } = this.props
     // workaround for managing pagination of movements from 2 points (deposits/withdrawals)
     if (dataReceived || pageLoading) {
-      jumpPage(TYPE, 1, 25)
+      jumpPage(TYPE, 1)
     }
   }
 
