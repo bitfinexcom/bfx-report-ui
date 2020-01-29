@@ -8,7 +8,6 @@ import {
 } from 'state/publicFunding/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getCoins, getCurrencies } from 'state/symbols/selectors'
-import { getPublicFundingSymbols } from 'state/sync/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import {
   getDataReceived,
@@ -27,7 +26,6 @@ const mapStateToProps = state => ({
   currencies: getCurrencies(state),
   entries: getFilteredEntries(state, queryConstants.MENU_PUBLIC_FUNDING, getEntries(state)),
   getFullTime: getFullTime(state),
-  hasSyncPref: !!getPublicFundingSymbols(state).length,
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   targetSymbol: getTargetSymbol(state),

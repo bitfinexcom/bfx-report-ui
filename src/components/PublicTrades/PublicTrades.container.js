@@ -7,7 +7,6 @@ import {
   setTargetPair,
 } from 'state/publicTrades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
-import { getPublicTradesPairs } from 'state/sync/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import {
   getDataReceived,
@@ -24,7 +23,6 @@ const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_PUBLIC_TRADES),
   entries: getFilteredEntries(state, queryConstants.MENU_PUBLIC_TRADES, getEntries(state)),
   getFullTime: getFullTime(state),
-  hasSyncPref: !!getPublicTradesPairs(state).length,
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   targetPair: getTargetPair(state),

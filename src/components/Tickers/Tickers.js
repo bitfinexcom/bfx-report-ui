@@ -5,7 +5,6 @@ import { Card, Elevation } from '@blueprintjs/core'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
-import SyncNotSetYet from 'ui/SyncNotSetYet'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -15,7 +14,6 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, togglePair } from 'state/utils'
-import { platform } from 'var/config'
 
 import getColumns from './Tickers.columns'
 import { propTypes, defaultProps } from './Tickers.props'
@@ -45,7 +43,6 @@ class Tickers extends PureComponent {
       columns,
       existingPairs,
       getFullTime,
-      hasSyncPref,
       entries,
       dataReceived,
       pageLoading,
@@ -54,11 +51,6 @@ class Tickers extends PureComponent {
       targetPairs,
       timeOffset,
     } = this.props
-    if (platform.showFrameworkMode && !hasSyncPref) {
-      return (
-        <SyncNotSetYet sectionType={TYPE} />
-      )
-    }
 
     const tableColumns = getColumns({
       filteredData: entries,
