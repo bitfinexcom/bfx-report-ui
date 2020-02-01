@@ -26,8 +26,8 @@
     "title": "Среднее от выигрышей/проигрышей"
   },
   "charts": {
-    "cumulative": "Cumulative",
-    "percentage": "Percentage"
+    "cumulative": "Суммарный",
+    "percentage": "Проценты"
   },
   "column": {
     "actual-price": "АКТУАЛЬНАЯ ЦЕНА",
@@ -89,7 +89,7 @@
   },
   "columnsfilter": {
     "title": "Фильтровать столбцы",
-    "clear": "Clear",
+    "clear": "Очистить",
     "cancel": "Отмена",
     "apply": "Применить фильтры",
     "filters": {
@@ -190,7 +190,7 @@
     "title": "Ордеры"
   },
   "ordertrades": {
-    "title": "Order Trades",
+    "title": "Торги ордера",
     "noid": {
       "title": "ID ордера",
       "description": "Пожалуйста, выберите ID ордера со страницы Ордеров."
@@ -202,7 +202,7 @@
     "loading": "загрузка...",
     "no_results": "Результаты не найдены",
     "proceed": "Продолжить поиск",
-    "last_data_timestamp": "Last data received dated: {{date}}"
+    "last_data_timestamp": "Последние полученные данные датированы: {{date}}"
   },
   "paudit": {
     "title": "Аудит позиций",

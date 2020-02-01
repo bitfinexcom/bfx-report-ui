@@ -26,8 +26,8 @@
     "title": "平均盈利/损失"
   },
   "charts": {
-    "cumulative": "Cumulative",
-    "percentage": "Percentage"
+    "cumulative": "累计",
+    "percentage": "百分比"
   },
   "column": {
     "actual-price": "实际价格",
@@ -89,7 +89,7 @@
   },
   "columnsfilter": {
     "title": "筛选栏",
-    "clear": "Clear",
+    "clear": "清除",
     "cancel": "取消",
     "apply": "应用筛选",
     "filters": {
@@ -190,7 +190,7 @@
     "title": "订单"
   },
   "ordertrades": {
-    "title": "Order Trades",
+    "title": "订单记录",
     "noid": {
       "title": "无订单ID",
       "description": "请在订单页面中选择订单ID，来进行查询。"
@@ -202,7 +202,7 @@
     "loading": "正在加载...",
     "no_results": "无搜寻结果",
     "proceed": "继续搜寻",
-    "last_data_timestamp": "Last data received dated: {{date}}"
+    "last_data_timestamp": "上次存取数据日期为{{date}}"
   },
   "paudit": {
     "title": "仓位审计",
