@@ -15,6 +15,7 @@ import { fetchAffiliatesEarnings } from 'state/affiliatesEarnings/actions'
 import { fetchPublicTrades } from 'state/publicTrades/actions'
 import { fetchPublicFunding } from 'state/publicFunding/actions'
 import { fetchTickers } from 'state/tickers/actions'
+import { fetchData as fetchLogins } from 'state/logins/actions'
 
 import types from './constants'
 
@@ -33,40 +34,47 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
+  MENU_LOGINS,
 } = queryTypes
 
 function* fetchNext({ payload }) {
   const { section } = payload
 
+  const options = {
+    nextFetch: true,
+  }
+
   switch (section) {
     case MENU_LEDGERS:
-      return yield put(fetchLedgers({ nextFetch: true }))
+      return yield put(fetchLedgers(options))
     case MENU_TRADES:
-      return yield put(fetchTrades({ nextFetch: true }))
+      return yield put(fetchTrades(options))
     case MENU_ORDERS:
-      return yield put(fetchOrders({ nextFetch: true }))
+      return yield put(fetchOrders(options))
     case MENU_MOVEMENTS:
-      return yield put(fetchMovements({ nextFetch: true }))
+      return yield put(fetchMovements(options))
     case MENU_POSITIONS:
-      return yield put(fetchPositions({ nextFetch: true }))
+      return yield put(fetchPositions(options))
     case MENU_POSITIONS_AUDIT:
-      return yield put(fetchPAudit({ nextFetch: true }))
+      return yield put(fetchPAudit(options))
     case MENU_FOFFER:
-      return yield put(fetchFOffer({ nextFetch: true }))
+      return yield put(fetchFOffer(options))
     case MENU_FLOAN:
-      return yield put(fetchFLoan({ nextFetch: true }))
+      return yield put(fetchFLoan(options))
     case MENU_FCREDIT:
-      return yield put(fetchFCredit({ nextFetch: true }))
+      return yield put(fetchFCredit(options))
     case MENU_FPAYMENT:
-      return yield put(fetchFPayment({ nextFetch: true }))
+      return yield put(fetchFPayment(options))
     case MENU_AFFILIATES_EARNINGS:
-      return yield put(fetchAffiliatesEarnings({ nextFetch: true }))
+      return yield put(fetchAffiliatesEarnings(options))
     case MENU_PUBLIC_TRADES:
-      return yield put(fetchPublicTrades({ nextFetch: true }))
+      return yield put(fetchPublicTrades(options))
     case MENU_PUBLIC_FUNDING:
-      return yield put(fetchPublicFunding({ nextFetch: true }))
+      return yield put(fetchPublicFunding(options))
     case MENU_TICKERS:
-      return yield put(fetchTickers({ nextFetch: true }))
+      return yield put(fetchTickers(options))
+    case MENU_LOGINS:
+      return yield put(fetchLogins(options))
     default:
       return undefined
   }

@@ -27,6 +27,7 @@ const USED_ICONS = [
   IconNames.ISSUE_NEW,
   IconNames.KEY,
   IconNames.LIST_COLUMNS,
+  IconNames.LOG_IN,
   IconNames.MENU,
   IconNames.NUMBERED_LIST,
   IconNames.PERSON,

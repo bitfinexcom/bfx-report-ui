@@ -6,6 +6,7 @@ import { formatAmount, fixedFloat } from 'ui/utils'
 
 export const COLUMN_WIDTHS = {
   ID: 82, // 123456789
+  IP: 115, // 128.128.128.128
   ORDER_ID: 95, // 12345678901
   SYMBOL: 92, // USTF0
   PAIR: 100, // BTCF0/USTF0

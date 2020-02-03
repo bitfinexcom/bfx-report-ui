@@ -30,6 +30,7 @@ const {
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
+  MENU_LOGINS,
   MENU_ORDERS,
   MENU_ORDER_TRADES,
   MENU_TICKERS,
@@ -82,6 +83,7 @@ class ToggleMenu extends PureComponent {
     [MENU_TAX_REPORT, 'taxreport.title', !showFrameworkMode],
     ['divider'],
     [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
+    [MENU_LOGINS, 'logins.title'],
   ]
 
   handleClick(nextTarget) {

@@ -17,6 +17,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
+  MENU_LOGINS,
 } = queryConstants
 
 const {
@@ -97,6 +98,10 @@ const DEFAULT_FILTERS = {
     { column: 'price', type: GREATER_THAN, dataType: NUMBER, value: '' },
     { column: 'priceSpot', type: GREATER_THAN, dataType: NUMBER, value: '' },
     EMPTY_FILTER,
+  ],
+  [MENU_LOGINS]: [
+    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
+    { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
   ],
 }
 

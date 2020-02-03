@@ -22,6 +22,7 @@ const {
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
+  MENU_LOGINS,
   MENU_MOVEMENTS,
   MENU_ORDERS,
   MENU_ORDER_TRADES,
@@ -53,6 +54,7 @@ export const TYPE_WHITELIST = [
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
+  MENU_LOGINS,
   MENU_MOVEMENTS,
   MENU_ORDERS,
   MENU_ORDER_TRADES,
@@ -84,6 +86,7 @@ export const ROUTE_WHITELIST = [
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
+  MENU_LOGINS,
   MENU_ORDERS,
   MENU_ORDER_TRADES,
   MENU_POSITIONS,
@@ -116,6 +119,7 @@ export const FILTERS_WHITELIST = [
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
+  MENU_LOGINS,
 ]
 
 // Should keep the order, which used in ExportTargetsSelector
@@ -254,6 +258,12 @@ const MAPPING = {
   [MENU_LOAN_REPORT]: {
     icon: IconNames.CHART,
     path: '/loan_report',
+  },
+  [MENU_LOGINS]: {
+    icon: IconNames.LOG_IN,
+    path: '/logins',
+    queryLimit: 25, // 250 maximum
+    pageSize: 25,
   },
   [MENU_ORDERS]: {
     icon: IconNames.FLOWS,

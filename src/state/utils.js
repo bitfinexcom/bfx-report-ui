@@ -27,6 +27,7 @@ const {
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
+  MENU_LOGINS,
   MENU_MOVEMENTS,
   MENU_ORDERS,
   MENU_POSITIONS,
@@ -215,11 +216,16 @@ export const checkInit = (props, type) => {
       }
       break
     }
+    case MENU_LOGINS: {
+      if (!dataReceived && !pageLoading) {
+        fetchData()
+      }
+      break
+    }
     case MENU_ACCOUNT_BALANCE: {
       if (!dataReceived && !pageLoading) {
         fetchData()
       }
-
       break
     }
     default:

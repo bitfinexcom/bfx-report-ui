@@ -47,6 +47,7 @@
     "balanceUsd": "BALANCE (USD)",
     "base-price": "BASE PRICE",
     "bid": "BID",
+    "browser": "BROWSER",
     "closed": "CLOSED",
     "collateral": "COLLATERAL",
     "created": "CREATED",
@@ -62,11 +63,13 @@
     "fundingAccrued": "NEXT FUNDING ACCRUED",
     "fundingStep": "NEXT FUNDING STEP",
     "id": "#",
+    "ip": "IP",
     "lastpayout": "LAST PAYOUT",
     "liq-price": "LIQ PRICE",
     "maker_fees": "MAKER FEES",
     "maker_rebate": "MAKER REBATE",
     "meta": "METADATA",
+    "mobile": "MOBILE",
     "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
     "opened": "OPENED",
     "orderid": "ORDER ID",
@@ -96,6 +99,7 @@
     "typeprev": "PREVIOUS ORDER TYPE",
     "updated": "UPDATED",
     "usd": "USD",
+    "version": "VERSION",
     "volume": "VOLUME",
     "wallet": "WALLET",
     "walletsTotal": "WALLETS TOTAL BALANCE (USD)"
@@ -194,6 +198,9 @@
   "loading": "Loading...",
   "loanreport": {
     "title": "Loan Report"
+  },
+  "logins": {
+    "title": "Logins"
   },
   "movements": {
     "title": "Movements"

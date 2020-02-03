@@ -21,6 +21,7 @@ import { fetchPublicTrades, refresh as refreshPublicTrades } from 'state/publicT
 import { fetchPublicFunding, refresh as refreshPublicFunding } from 'state/publicFunding/actions'
 import { fetchTickers, refresh as refreshTickers } from 'state/tickers/actions'
 import { fetchDerivatives, refresh as refreshDerivatives } from 'state/derivatives/actions'
+import { fetchData as fetchLogins, refresh as refreshLogins } from 'state/logins/actions'
 
 import types from './constants'
 import actions from './actions'
@@ -40,6 +41,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
+  MENU_LOGINS,
 
   // filters parsing
   MENU_DEPOSITS,
@@ -109,6 +111,10 @@ export function* setFilters({ payload }) {
     case MENU_DERIVATIVES:
       yield put(refreshDerivatives())
       yield put(fetchDerivatives())
+      break
+    case MENU_LOGINS:
+      yield put(refreshLogins())
+      yield put(fetchLogins())
       break
     default:
   }
