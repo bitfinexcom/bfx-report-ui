@@ -3,6 +3,7 @@ import { fork } from 'redux-saga/effects'
 import { platform } from 'var/config'
 
 import accountBalanceSaga from './accountBalance/saga'
+import accountSummarySaga from './accountSummary/saga'
 import affiliatesEarningsSaga from './affiliatesEarnings/saga'
 import authSaga from './auth/saga'
 import baseSaga from './base/saga'
@@ -40,6 +41,7 @@ import wsSaga from './ws/saga'
 
 export default function* rootSaga() {
   yield fork(authSaga)
+  yield fork(accountSummarySaga)
   yield fork(baseSaga)
   yield fork(derivativesSaga)
   yield fork(fcreditSaga)

@@ -8,6 +8,7 @@ import persistMigrations from 'state/persist.migrations'
 
 import history from './createdHistory'
 import accountBalanceReducer from './accountBalance/reducer'
+import accountSummaryReducer from './accountSummary/reducer'
 import affiliatesEarningsReducer from './affiliatesEarnings/reducer'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
@@ -58,6 +59,7 @@ const persistConfig = {
 }
 
 const BASE_REDUCERS = {
+  accountSummary: accountSummaryReducer,
   apositions: positionsActiveReducer,
   audit: positionsAuditReducer,
   auth: authReducer,

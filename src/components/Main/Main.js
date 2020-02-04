@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import AccountBalance from 'components/AccountBalance'
+import AccountSummary from 'components/AccountSummary'
 import AffiliatesEarnings from 'components/AffiliatesEarnings'
 import AverageWinLoss from 'components/AverageWinLoss'
 import ConcentrationRisk from 'components/ConcentrationRisk'
@@ -41,6 +42,7 @@ import CustomDialog from './CustomDialog'
 
 const {
   MENU_ACCOUNT_BALANCE,
+  MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
@@ -93,6 +95,7 @@ const PATHS = {
     getPath(MENU_TAX_REPORT),
     `${getPath(MENU_TAX_REPORT)}/:section(result)`,
     `${getPath(MENU_TAX_REPORT)}/:section(start_snapshot|end_snapshot|result)/:subsection(positions|tickers|wallets)`],
+  MENU_ACCOUNT_SUMMARY: [getPath(MENU_ACCOUNT_SUMMARY)],
 }
 
 class Main extends PureComponent {
@@ -307,6 +310,11 @@ class Main extends PureComponent {
                 />,
               ]
             )}
+            <Route
+              exact
+              path={PATHS.MENU_ACCOUNT_SUMMARY}
+              component={AccountSummary}
+            />
           </Switch>
         </div>
         <CustomDialog

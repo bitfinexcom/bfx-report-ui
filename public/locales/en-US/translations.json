@@ -2,6 +2,13 @@
   "accountbalance": {
     "title": "Account Balance"
   },
+  "accountsummary": {
+    "title": "Account Summary",
+    "fees": "Your fees on Bitfinex (based on your trading volume)",
+    "fees_deriv": "Your fees on Bitfinex Derivatives (based on your trading volume)",
+    "30dVolume": "Your volume in the last 30 days",
+    "margin_funds": "Total return on your margin funds provided in the last 30 days"
+  },
   "activepositions": {
     "title": "Active Positions"
   },
@@ -57,6 +64,8 @@
     "id": "#",
     "lastpayout": "LAST PAYOUT",
     "liq-price": "LIQ PRICE",
+    "maker_fees": "MAKER FEES",
+    "maker_rebate": "MAKER REBATE",
     "meta": "METADATA",
     "movementsTotal": "MOVEMENTS TOTAL AMOUNT (USD)",
     "opened": "OPENED",
@@ -78,6 +87,8 @@
     "status": "STATUS",
     "fundingCost": "FUNDING COST",
     "fundingType": "FUNDING TYPE",
+    "taker_fees": "TAKER FEES",
+    "taker_rebate": "TAKER REBATE",
     "time": "TIME",
     "totalResult": "TOTAL RESULT (USD)",
     "transactionId": "TRANSACTION ID",
@@ -85,6 +96,7 @@
     "typeprev": "PREVIOUS ORDER TYPE",
     "updated": "UPDATED",
     "usd": "USD",
+    "volume": "VOLUME",
     "wallet": "WALLET",
     "walletsTotal": "WALLETS TOTAL BALANCE (USD)"
   },
@@ -357,6 +369,8 @@
   "trades": {
     "title": "Trades"
   },
+  "update": "Update",
+  "updated": "Updated",
   "wallets": {
     "title": "Wallets",
     "title_beta": "Wallets (Beta)",

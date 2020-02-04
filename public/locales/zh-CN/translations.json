@@ -356,6 +356,8 @@
   "trades": {
     "title": "交易"
   },
+  "update": "更新",
+  "updated": "已更新",
   "wallets": {
     "title": "钱包",
     "title_beta": "钱包 (Beta)",
