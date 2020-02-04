@@ -40,24 +40,24 @@ export function loginsReducer(state = initialState, action) {
       const entries = res.map((entry) => {
         const {
           id,
-          mts,
+          time,
           ip,
-          extra,
+          extraData,
         } = entry
         const {
           browser = '',
           version = '',
           is_mobile: mobile,
-        } = _get(extra, 'user_agent', {})
+        } = _get(extraData, 'user_agent', {})
 
         return {
           id,
-          mts,
+          mts: time,
           ip,
           browser,
           version,
           mobile: mobile || '',
-          extra,
+          extra: extraData,
         }
       })
 
