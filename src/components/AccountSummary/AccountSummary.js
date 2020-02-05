@@ -78,7 +78,7 @@ class AccountSummary extends PureComponent {
             takerFee={data.deriv_taker_fee || data.deriv_taker_rebate}
           />
           <br />
-          <MarginFunds data={_get(data, 'trade_vol_30d', [])} />
+          <MarginFunds data={_get(data, 'fees_funding_30d', {})} />
         </Fragment>
       )
     }

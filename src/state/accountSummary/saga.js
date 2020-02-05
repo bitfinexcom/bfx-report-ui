@@ -14,7 +14,7 @@ export const getReqAccountSummary = () => makeFetchCall('getAccountSummary')
 
 export function* fetchAccountSummary() {
   try {
-    const { result = [], error } = yield call(getReqAccountSummary)
+    const { result = {}, error } = yield call(getReqAccountSummary)
     yield put(actions.updateData(result))
 
     if (error) {

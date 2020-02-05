@@ -31,17 +31,17 @@ const getColumns = (props) => {
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = data[rowIndex]
-        const fixedVolume = fixedFloat(amount)
+        const fixedAmount = fixedFloat(amount)
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedVolume}
+            tooltip={fixedAmount}
           >
-            {fixedVolume}
+            {fixedAmount}
           </Cell>
         )
       },
-      copyText: rowIndex => fixedFloat(data[rowIndex].vol),
+      copyText: rowIndex => fixedFloat(data[rowIndex].amount),
     },
   ]
 }
@@ -49,30 +49,26 @@ const getColumns = (props) => {
 const AccountSummaryMarginFunds = (props) => {
   const { data, t } = props
 
-  if (!data.length) {
-    return null
-  }
+  const formattedData = Object.keys(data).map(key => ({
+    curr: key,
+    amount: data[key],
+  }))
 
-  const columns = getColumns({ data })
+  const columns = getColumns({ data: formattedData })
 
   return (
     <Fragment>
       <h4>{t('accountsummary.margin_funds')}</h4>
       <DataTable
-        numRows={data.length}
+        numRows={formattedData.length}
         tableColumns={columns}
       />
     </Fragment>
   )
 }
 
-const VOLUME_ENTRIES_PROPS = PropTypes.shape({
-  curr: PropTypes.string.isRequired,
-  vol: PropTypes.number.isRequired,
-})
-
 AccountSummaryMarginFunds.propTypes = {
-  data: PropTypes.arrayOf(VOLUME_ENTRIES_PROPS).isRequired,
+  data: PropTypes.objectOf(PropTypes.number).isRequired,
   t: PropTypes.func.isRequired,
 }
 
