@@ -19,6 +19,7 @@ import { selectAuth } from 'state/auth/selectors'
 const {
   MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
+  MENU_CANDLES,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FEES_REPORT,
@@ -212,6 +213,12 @@ export const checkInit = (props, type) => {
       const isIdChanged = !_isEqual(_sortBy(ids), _sortBy(targetIds))
       if (ids.length && ((!dataReceived && !pageLoading) || isIdChanged)) {
         setTargetIds(ids)
+        fetchData()
+      }
+      break
+    }
+    case MENU_CANDLES: {
+      if (!dataReceived && !pageLoading) {
         fetchData()
       }
       break
