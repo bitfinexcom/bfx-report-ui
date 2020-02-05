@@ -7,7 +7,6 @@ import _get from 'lodash/get'
 import Loading from 'ui/Loading'
 import LinkButton from 'ui/LinkButton'
 import NoData from 'ui/NoData'
-import RefreshButton from 'ui/RefreshButton'
 import { getFormattedDate } from 'utils/dates'
 
 import { propTypes, defaultProps } from './AccountSummary.props'
@@ -35,6 +34,14 @@ class AccountSummary extends PureComponent {
     } = this.props
 
     const updateTitle = `${t('updated')} ${getFormattedDate(data.time)} `
+    const renderUpdate = (
+      <h3 className='bitfinex-show-soft'>
+        {updateTitle}
+        <LinkButton onClick={refresh}>
+          {t('update')}
+        </LinkButton>
+      </h3>
+    )
 
     let showContent
     if (!dataReceived && pageLoading) {
@@ -46,9 +53,8 @@ class AccountSummary extends PureComponent {
         <Fragment>
           <h4>
             {t('accountsummary.title')}
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
           </h4>
+          {renderUpdate}
           <NoData />
         </Fragment>
       )
@@ -58,12 +64,7 @@ class AccountSummary extends PureComponent {
           <h4>
             {t('accountsummary.title')}
           </h4>
-          <h3 className='bitfinex-show-soft'>
-            {updateTitle}
-            <LinkButton onClick={refresh}>
-              {t('update')}
-            </LinkButton>
-          </h3>
+          {renderUpdate}
           <Volume data={_get(data, 'trade_vol_30d', [])} />
           <br />
           <Fees
