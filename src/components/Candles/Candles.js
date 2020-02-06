@@ -13,6 +13,7 @@ import _isEqual from 'lodash/isEqual'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import DateInput from 'ui/DateInput'
+import TradesSwitch from 'components/Trades/TradesSwitch'
 import PairSelector from 'ui/PairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
@@ -123,6 +124,9 @@ class Candles extends PureComponent {
             {renderOptionsSelection}
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
+            <br />
+            <br />
+            <TradesSwitch target={TYPE} />
           </h4>
           <NoData />
         </Fragment>
@@ -136,6 +140,9 @@ class Candles extends PureComponent {
             {renderOptionsSelection}
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
+            <br />
+            <br />
+            <TradesSwitch target={TYPE} />
           </h4>
         </Fragment>
       )

@@ -32,6 +32,9 @@
   "averagewinloss": {
     "title": "Average Win/Loss"
   },
+  "candles": {
+    "title": "Candles"
+  },
   "charts": {
     "cumulative": "Cumulative",
     "percentage": "Percentage"
