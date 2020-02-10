@@ -4,6 +4,7 @@ import moment from 'moment'
 import classNames from 'classnames'
 import { createChart, CrosshairMode } from 'lightweight-charts'
 
+import CandleStats from './CandleStats'
 import Tooltip from './Tooltip'
 import { propTypes, defaultProps } from './Candlestick.props'
 
@@ -28,14 +29,14 @@ class Candlestick extends React.PureComponent {
       height,
       layout: {
         backgroundColor: '#30404d',
-        textColor: 'rgba(255, 255, 255, 0.9)',
+        textColor: 'rgba(255, 255, 255, 0.5)',
       },
       grid: {
         vertLines: {
-          color: 'rgba(197, 203, 206, 0.5)',
+          color: 'rgba(197, 203, 206, 0.2)',
         },
         horzLines: {
-          color: 'rgba(197, 203, 206, 0.5)',
+          color: 'rgba(197, 203, 206, 0.2)',
         },
       },
       crosshair: {
@@ -45,10 +46,10 @@ class Candlestick extends React.PureComponent {
         timeFormatter: this.timeFormatter,
       },
       priceScale: {
-        borderColor: 'rgba(197, 203, 206, 0.8)',
+        borderColor: 'rgba(197, 203, 206, 0.4)',
       },
       timeScale: {
-        borderColor: 'rgba(197, 203, 206, 0.8)',
+        borderColor: 'rgba(197, 203, 206, 0.4)',
         rightOffset: 5,
         barSpacing: 15,
       },
@@ -95,7 +96,7 @@ class Candlestick extends React.PureComponent {
   timeFormatter = timestamp => moment.utc(timestamp * 1000).format('YYYY-MM-DD HH:mm:ss')
 
   render() {
-    const { className } = this.props
+    const { className, candles } = this.props
     const {
       chart,
       width,
@@ -113,8 +114,14 @@ class Candlestick extends React.PureComponent {
             chart={chart}
             width={width}
             height={height}
-            candleSeries={candleSeries}
             tradeSeries={tradeSeries}
+          />
+        )}
+        {chart && (
+          <CandleStats
+            chart={chart}
+            candleSeries={candleSeries}
+            defaultCandle={candles[0] || {}}
           />
         )}
       </div>

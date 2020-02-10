@@ -31,7 +31,6 @@ class Tooltip extends React.PureComponent {
       width,
       height,
       tradeSeries,
-      // candleSeries,
     } = this.props
     const { time, point = {}, seriesPrices } = param
     const trade = seriesPrices.get(tradeSeries)
@@ -46,7 +45,6 @@ class Tooltip extends React.PureComponent {
 
     tooltip.style.display = 'block'
     tooltip.style.borderColor = trade.open.execAmount > 0 ? '#16b157' : '#f05359'
-    // const candle = seriesPrices.get(candleSeries)
 
     if (trade) {
       this.setState({

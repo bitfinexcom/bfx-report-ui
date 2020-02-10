@@ -19,4 +19,23 @@
     border: 2px solid;
     border-radius: 2px;
   }
+
+  &-candle {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 10px;
+
+    &-stat {
+      margin-right: 9px;
+
+      &--green {
+        color: #16b157;
+      }
+
+      &--red {
+        color: #f05359;
+      }
+    }
+  }
 }
