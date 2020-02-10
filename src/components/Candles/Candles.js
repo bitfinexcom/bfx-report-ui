@@ -16,6 +16,7 @@ import DateInput from 'ui/DateInput'
 import TradesSwitch from 'components/Trades/TradesSwitch'
 import PairSelector from 'ui/PairSelector'
 import RefreshButton from 'ui/RefreshButton'
+import Candlestick from 'ui/Charts/Candlestick'
 import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
@@ -53,13 +54,14 @@ class Candles extends PureComponent {
 
   render() {
     const {
-      entries,
+      candlesEntries,
       dataReceived,
       pageLoading,
       pairs,
       params,
       refresh,
       t,
+      tradesEntries,
     } = this.props
     const { start, end, pair } = params
     const hasChanges = this.hasChanges()
@@ -115,7 +117,7 @@ class Candles extends PureComponent {
       showContent = (
         <Loading title='candles.title' />
       )
-    } else if (!entries.length) {
+    } else if (!candlesEntries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -144,6 +146,7 @@ class Candles extends PureComponent {
             <br />
             <TradesSwitch target={TYPE} />
           </h4>
+          <Candlestick candles={candlesEntries} trades={tradesEntries} />
         </Fragment>
       )
     }

@@ -44,7 +44,9 @@ export function refresh() {
 
 /**
  * Create an action to update Candles.
- * @param {Object[]} payload data set
+ * @param {Object} payload data
+ * @param {Object[]} payload.candles data set
+ * @param {Object[]} payload.trades data set
  */
 export function updateData(payload) {
   return {

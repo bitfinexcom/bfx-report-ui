@@ -11,23 +11,38 @@ import { updateErrorStatus } from 'state/status/actions'
 import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
+import { formatRawSymbols, mapRequestPairs } from '../symbols/utils'
 
-export const getReqCandles = params => makeFetchCall('getCandles', {
-  ...params,
-  limit: 24,
-})
+export const getReqCandles = (params) => {
+  const { start, end, pair } = params
+  const tradesParams = {
+    start,
+    end,
+    symbol: formatRawSymbols(mapRequestPairs(pair, true)),
+  }
+  return Promise.all([
+    makeFetchCall('getCandles', {
+      ...params,
+      limit: 500,
+    }),
+    makeFetchCall('getTrades', tradesParams),
+  ])
+}
 
 export function* fetchCandles() {
   try {
     const params = yield select(selectors.getParams)
-    const { result = [], error } = yield call(getReqCandles, params)
-    yield put(actions.updateData(result))
+    const [
+      { result: candles = [], error: candlesError },
+      { result: trades = [], error: tradesError },
+    ] = yield call(getReqCandles, params)
+    yield put(actions.updateData({ candles, trades }))
 
-    if (error) {
+    if (candlesError || tradesError) {
       yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'candles.title',
-        detail: JSON.stringify(error),
+        detail: JSON.stringify(candlesError || tradesError),
       }))
     }
   } catch (fail) {

@@ -33,7 +33,10 @@
     "title": "Average Win/Loss"
   },
   "candles": {
-    "title": "Candles"
+    "title": "Candles",
+    "amount": "Amount",
+    "orderid": "OrderID",
+    "fee": "Fee"
   },
   "charts": {
     "cumulative": "Cumulative",

@@ -9,9 +9,9 @@ import {
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getPairs } from 'state/symbols/selectors'
 import {
+  getCandlesEntries,
   getCurrentFetchParams,
   getDataReceived,
-  getEntries,
   getPageLoading,
   getParams,
   getTradesEntries,
@@ -21,7 +21,7 @@ import Candles from './Candles'
 
 const mapStateToProps = state => ({
   currentFetchParams: getCurrentFetchParams(state),
-  entries: getEntries(state),
+  candlesEntries: getCandlesEntries(state),
   tradesEntries: getTradesEntries(state),
   getFullTime: getFullTime(state),
   dataReceived: getDataReceived(state),
