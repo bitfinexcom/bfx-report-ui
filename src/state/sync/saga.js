@@ -71,23 +71,10 @@ function* stopSyncing() {
 }
 
 export function* isSynced() {
-  const [{ result: isQueryWithDb, error }, { result: syncProgress, error: progressError }] = yield all([
-    call(checkIsSyncModeWithDbData),
-    call(fetchSyncProgress),
-  ])
+  const syncMode = yield select(getSyncMode)
+  const syncProgress = yield select(getSyncProgress)
 
-  const synced = (Number.isInteger(syncProgress) && syncProgress === 100)
-  const pseudoSynced = _includes(syncProgress, 'ServerAvailabilityError')
-  || _includes(syncProgress, 'getaddrinfo')
-  || _includes(syncProgress, 'SYNCHRONIZATION_HAS_NOT_STARTED_YET')
-
-  if (isQueryWithDb && (synced || pseudoSynced)) {
-    return true
-  }
-  if (error || progressError) {
-    yield put(updateSyncErrorStatus('during isSynced'))
-  }
-  return false
+  return (syncMode === types.MODE_OFFLINE && syncProgress === 100)
 }
 
 function* forceQueryFromDb() {
