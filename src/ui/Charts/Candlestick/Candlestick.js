@@ -45,9 +45,9 @@ class Candlestick extends React.PureComponent {
       localization: {
         timeFormatter: this.timeFormatter,
       },
-      priceScale: {
+      priceScale: [{
         borderColor: 'rgba(197, 203, 206, 0.4)',
-      },
+      }],
       timeScale: {
         borderColor: 'rgba(197, 203, 206, 0.4)',
         rightOffset: 5,
@@ -55,6 +55,7 @@ class Candlestick extends React.PureComponent {
       },
     })
 
+    // candle series
     const candleSeries = chart.addCandlestickSeries({
       upColor: '#30404d',
       downColor: '#f05359',
@@ -65,6 +66,7 @@ class Candlestick extends React.PureComponent {
     })
     candleSeries.setData(candles)
 
+    // trade series
     const tradeSeries = chart.addBarSeries({
       thinBars: true,
       openVisible: false,
@@ -76,12 +78,31 @@ class Candlestick extends React.PureComponent {
       open: trade,
     })))
 
-
     tradeSeries.setMarkers(trades.map(trade => ({
       time: trade.time,
       position: 'inBar',
       shape: 'circle',
       color: trade.execAmount > 0 ? '#16b157' : '#f05359',
+    })))
+
+    // volume series
+    const volumeSeries = chart.addHistogramSeries({
+      color: '#26a69a',
+      lineWidth: 2,
+      priceFormat: {
+        type: 'volume',
+      },
+      overlay: true,
+      scaleMargins: {
+        top: 0.8,
+        bottom: 0,
+      },
+    })
+
+    volumeSeries.setData(candles.map(candle => ({
+      time: candle.time,
+      value: candle.volume,
+      color: 'rgba(97, 107, 115, 1)',
     })))
 
     this.setState({
