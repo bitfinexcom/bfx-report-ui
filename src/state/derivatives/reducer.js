@@ -1,7 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#rest-public-status
 import _get from 'lodash/get'
 
-import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
 import {
   addPair, basePairState, fetch, fetchFail, removePair, setPairs,
@@ -66,11 +65,6 @@ export function derivativesReducer(state = initialState, action) {
     case types.SET_PAIRS:
       return setPairs(state, payload, initialState)
     case types.REFRESH:
-    case queryTypes.SET_TIME_RANGE:
-      return {
-        ...initialState,
-        targetPairs: state.targetPairs,
-      }
     case authTypes.LOGOUT:
       return initialState
     default: {
