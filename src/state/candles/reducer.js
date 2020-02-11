@@ -32,7 +32,7 @@ export function candlesReducer(state = initialState, action) {
         ...state,
         dataReceived: true,
         pageLoading: false,
-        candles: candles.map((candle) => {
+        candles: candles.reverse().map((candle) => {
           const {
             time,
             high,
@@ -51,7 +51,7 @@ export function candlesReducer(state = initialState, action) {
             volume,
           }
         }),
-        trades: trades.res.map((trade) => {
+        trades: trades.res.reverse().map((trade) => {
           const {
             execAmount,
             execPrice,

@@ -121,7 +121,7 @@ class Candlestick extends React.PureComponent {
           <CandleStats
             chart={chart}
             candleSeries={candleSeries}
-            defaultCandle={candles[0] || {}}
+            defaultCandle={candles[candles.length - 1] || {}}
           />
         )}
       </div>
