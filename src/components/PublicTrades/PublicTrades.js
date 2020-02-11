@@ -36,7 +36,6 @@ class PublicTrades extends PureComponent {
       columns,
       getFullTime,
       hasSyncPref,
-      pairs,
       entries,
       dataReceived,
       pageLoading,
@@ -65,7 +64,6 @@ class PublicTrades extends PureComponent {
         <PairSelector
           currentPair={currentPair}
           onPairSelect={pair => setPair(TYPE, this.props, pair)}
-          pairs={pairs}
         />
       </Fragment>
     )
