@@ -4,8 +4,10 @@ import { withRouter } from 'react-router-dom'
 import {
   fetchBalance,
   refresh,
+  setParams,
 } from 'state/accountBalance/actions'
 import {
+  getCurrentFetchParams,
   getDataReceived,
   getEntries,
   getPageLoading,
@@ -15,6 +17,7 @@ import {
 import AccountBalance from './AccountBalance'
 
 const mapStateToProps = state => ({
+  currentFetchParams: getCurrentFetchParams(state),
   entries: getEntries(state),
   params: getParams(state),
   dataReceived: getDataReceived(state),
@@ -22,8 +25,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchBalance,
+  fetchData: fetchBalance,
   refresh,
+  setParams,
 }
 
 const AccountBalanceContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AccountBalance))

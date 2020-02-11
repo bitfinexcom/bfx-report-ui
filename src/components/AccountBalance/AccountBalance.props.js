@@ -5,13 +5,15 @@ const BALANCE_ENTRIES_PROPS = PropTypes.shape({
 })
 
 export const propTypes = {
-  entries: PropTypes.arrayOf(BALANCE_ENTRIES_PROPS).isRequired,
+  currentFetchParams: PropTypes.object.isRequired,
   dataReceived: PropTypes.bool.isRequired,
+  entries: PropTypes.arrayOf(BALANCE_ENTRIES_PROPS).isRequired,
+  fetchData: PropTypes.func.isRequired,
   pageLoading: PropTypes.bool.isRequired,
-  refresh: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
-  fetchBalance: PropTypes.func.isRequired,
+  refresh: PropTypes.func.isRequired,
+  setParams: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

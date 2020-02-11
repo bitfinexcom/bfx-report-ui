@@ -8,6 +8,7 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
+import _isEqual from 'lodash/isEqual'
 import _sortBy from 'lodash/sortBy'
 
 import DateInput from 'ui/DateInput'
@@ -18,74 +19,54 @@ import ExportButton from 'ui/ExportButton'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeframeSelector from 'ui/TimeframeSelector/TimeframeSelector'
 import RefreshButton from 'ui/RefreshButton'
+import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
+import { checkInit } from 'state/utils'
 
 import { propTypes, defaultProps } from './AccountBalance.props'
 
+const TYPE = queryConstants.MENU_ACCOUNT_BALANCE
+
 class AccountBalance extends PureComponent {
-  constructor(props) {
-    super(props)
-
-    const { params: { start, end, timeframe } } = props
-    this.state = {
-      start: start && new Date(start),
-      end: end && new Date(end),
-      timeframe,
-    }
-  }
-
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, fetchBalance, params,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      fetchBalance(params)
-    }
+    checkInit(this.props, TYPE)
   }
 
   handleDateChange = (input, time) => {
+    const { setParams } = this.props
     const timestamp = time && time.getTime()
     if (isValidTimeStamp(timestamp) || time === null) {
-      this.setState({ [input]: time || null })
+      setParams({ [input]: time ? timestamp : null })
     }
   }
 
   handleQuery = () => {
-    const { fetchBalance } = this.props
-    const { start, end, timeframe } = this.state
-    const params = {
-      start: start ? start.getTime() : undefined,
-      end: end ? end.getTime() : undefined,
-      timeframe,
-    }
-    fetchBalance(params)
+    const { fetchData } = this.props
+    fetchData()
   }
 
   handleTimeframeChange = (timeframe) => {
-    this.setState({ timeframe })
+    const { setParams } = this.props
+    setParams({ timeframe })
   }
 
-  hasNewTime = () => {
-    const { params } = this.props
-    const { start: currStart, end: currEnd, timeframe: currTimeframe } = params
-    const { start, end, timeframe } = this.state
-    const isDiffStart = start ? start.getTime() !== currStart : !!start !== !!currStart
-    const isDiffEnd = end ? end.getTime() !== currEnd : !!end !== !!currEnd
-    const isDiffTimeframe = timeframe !== currTimeframe
-    return isDiffStart || isDiffEnd || isDiffTimeframe
+  hasChanges = () => {
+    const { currentFetchParams, params } = this.props
+    return !_isEqual(currentFetchParams, params)
   }
 
   render() {
     const {
+      currentFetchParams: { timeframe: currTimeframe },
       entries,
-      params: { timeframe: currTimeframe },
+      params,
       dataReceived,
       pageLoading,
       refresh,
       t,
     } = this.props
-    const { start, end, timeframe } = this.state
-    const hasNewTime = this.hasNewTime()
+    const { start, end, timeframe } = params
+    const hasChanges = this.hasChanges()
 
     const { chartData, presentCurrencies } = parseChartData({
       data: _sortBy(entries, ['mts']),
@@ -104,7 +85,7 @@ class AccountBalance extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('start', date)}
-            value={start}
+            value={start && new Date(start)}
             daysOnly
           />
         </Tooltip>
@@ -119,7 +100,7 @@ class AccountBalance extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('end', date)}
-            value={end}
+            value={end && new Date(end)}
             daysOnly
           />
         </Tooltip>
@@ -131,8 +112,8 @@ class AccountBalance extends PureComponent {
         {' '}
         <Button
           onClick={this.handleQuery}
-          intent={hasNewTime ? Intent.PRIMARY : null}
-          disabled={!hasNewTime}
+          intent={hasChanges ? Intent.PRIMARY : null}
+          disabled={!hasChanges}
         >
           {t('query.title')}
         </Button>
