@@ -14,7 +14,6 @@ import { getAffiliatesEarnings } from 'state/affiliatesEarnings/selectors'
 import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
-import { frameworkCheck } from 'state/ui/saga'
 import { fetchDataWithPagination } from 'state/sagas.helper'
 
 import types from './constants'
@@ -45,12 +44,6 @@ function getReqLedgers({
 /* eslint-disable-next-line consistent-return */
 function* fetchAffiliatesEarnings() {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateAffiliatesEarnings())
-    }
-
     const { targetSymbols } = yield select(getAffiliatesEarnings)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const queryLimit = yield select(getTargetQueryLimit, TYPE)
