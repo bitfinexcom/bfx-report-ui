@@ -23,12 +23,10 @@ export const propTypes = {
   candlesEntries: PropTypes.arrayOf(CANDLES_ENTRIES_PROPS).isRequired,
   dataReceived: PropTypes.bool.isRequired,
   fetchData: PropTypes.func.isRequired,
-  getFullTime: PropTypes.func,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  timeOffset: PropTypes.string.isRequired,
   tradesEntries: PropTypes.arrayOf(TRADES_ENTRIES_PROPS).isRequired,
 }
 

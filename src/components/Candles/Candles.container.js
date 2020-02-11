@@ -6,7 +6,6 @@ import {
   refresh,
   setParams,
 } from 'state/candles/actions'
-import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getPairs } from 'state/symbols/selectors'
 import {
   getCandlesEntries,
@@ -23,12 +22,10 @@ const mapStateToProps = state => ({
   currentFetchParams: getCurrentFetchParams(state),
   candlesEntries: getCandlesEntries(state),
   tradesEntries: getTradesEntries(state),
-  getFullTime: getFullTime(state),
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   pairs: getPairs(state),
   params: getParams(state),
-  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {

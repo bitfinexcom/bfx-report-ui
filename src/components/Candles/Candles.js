@@ -47,6 +47,11 @@ class Candles extends PureComponent {
     }
   }
 
+  handleQuery = () => {
+    const { fetchData } = this.props
+    fetchData()
+  }
+
   onPairSelect = (pair) => {
     const { setParams } = this.props
     setParams({ pair })

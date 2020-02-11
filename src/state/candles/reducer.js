@@ -1,5 +1,5 @@
 import authTypes from 'state/auth/constants'
-import { fetch, fetchFail } from 'state/reducers.helper'
+import { fetchFail } from 'state/reducers.helper'
 import { getLastMonth } from 'state/utils'
 import { mapSymbol } from 'state/symbols/utils'
 
@@ -8,7 +8,7 @@ import types from './constants'
 const initialParams = {
   start: getLastMonth(),
   end: undefined,
-  timeFrame: '1D',
+  timeFrame: '1h',
   pair: 'BTC:USD',
 }
 
@@ -25,7 +25,17 @@ export function candlesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.FETCH:
-      return fetch(state)
+      return {
+        ...state,
+        dataReceived: false,
+        pageLoading: true,
+        currentFetchParams: {
+          start: state.start,
+          end: state.end,
+          timeFrame: state.timeFrame,
+          pair: state.pair,
+        },
+      }
     case types.UPDATE: {
       const { candles, trades } = payload
       return {
@@ -90,7 +100,7 @@ export function candlesReducer(state = initialState, action) {
         ...initialState,
         start: state.start,
         end: state.end,
-        timeFrame: state.timeframe,
+        timeFrame: state.timeFrame,
       }
     case authTypes.LOGOUT:
       return initialState

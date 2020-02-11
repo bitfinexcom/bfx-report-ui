@@ -4,6 +4,7 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
@@ -23,7 +24,7 @@ export const getReqCandles = (params) => {
   return Promise.all([
     makeFetchCall('getCandles', {
       ...params,
-      limit: 500,
+      limit: 1000,
     }),
     makeFetchCall('getTrades', tradesParams),
   ])
@@ -32,6 +33,7 @@ export const getReqCandles = (params) => {
 export function* fetchCandles() {
   try {
     const params = yield select(selectors.getParams)
+    yield delay(1500)
     const [
       { result: candles = [], error: candlesError },
       { result: trades = [], error: tradesError },

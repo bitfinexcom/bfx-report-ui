@@ -18,6 +18,19 @@ class Candlestick extends React.PureComponent {
   }
 
   componentDidMount() {
+    this.createChart()
+  }
+
+  componentDidUpdate(prevProps) {
+    const { trades, candles } = this.props
+    const { chart } = this.state
+    if (trades !== prevProps.trades || candles !== prevProps.candles) {
+      chart.remove()
+      this.createChart()
+    }
+  }
+
+  createChart = () => {
     const { candles, trades } = this.props
 
     const element = document.getElementById('candlestick')
@@ -50,7 +63,7 @@ class Candlestick extends React.PureComponent {
       }],
       timeScale: {
         borderColor: 'rgba(197, 203, 206, 0.4)',
-        rightOffset: 5,
+        rightOffset: 3,
         barSpacing: 15,
       },
     })
