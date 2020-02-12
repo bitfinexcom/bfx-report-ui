@@ -193,7 +193,7 @@ const MAPPING = {
     path: '/account_balance',
   },
   [MENU_ACCOUNT_SUMMARY]: {
-    icon: IconNames.CHART,
+    icon: IconNames.TIMELINE_BAR_CHART,
     path: '/account_summary',
   },
   [MENU_CONCENTRATION_RISK]: {
