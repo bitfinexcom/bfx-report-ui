@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
 import moment from 'moment'
 import classNames from 'classnames'
@@ -6,6 +6,7 @@ import { createChart, CrosshairMode } from 'lightweight-charts'
 
 import CandleStats from './CandleStats'
 import Tooltip from './Tooltip'
+import TradingViewLink from './TradingViewLink'
 import { propTypes, defaultProps } from './Candlestick.props'
 
 class Candlestick extends React.PureComponent {
@@ -144,19 +145,20 @@ class Candlestick extends React.PureComponent {
     return (
       <div id='candlestick' className={classes}>
         {chart && (
-          <Tooltip
-            chart={chart}
-            width={width}
-            height={height}
-            tradeSeries={tradeSeries}
-          />
-        )}
-        {chart && (
-          <CandleStats
-            chart={chart}
-            candleSeries={candleSeries}
-            defaultCandle={candles[candles.length - 1] || {}}
-          />
+          <Fragment>
+            <Tooltip
+              chart={chart}
+              width={width}
+              height={height}
+              tradeSeries={tradeSeries}
+            />
+            <CandleStats
+              chart={chart}
+              candleSeries={candleSeries}
+              defaultCandle={candles[candles.length - 1] || {}}
+            />
+            <TradingViewLink />
+          </Fragment>
         )}
       </div>
     )
