@@ -9,8 +9,6 @@
     padding: 8px;
     box-sizing: border-box;
     font-size: 12px;
-    color: #ebecee;
-    background-color: #273d4d;
     text-align: left;
     z-index: 1000;
     top: 12px;
@@ -55,5 +53,19 @@
       font-weight: bold;
       color: #37a6ef;
     }
+  }
+}
+
+.bp3-dark {
+  .candlestick-tooltip {
+    color: #ebecee;
+    background-color: #273d4d;
+  }
+}
+
+.bp3-light {
+  .candlestick-tooltip {
+    color: #273d4d;
+    background-color: #ffffff;
   }
 }

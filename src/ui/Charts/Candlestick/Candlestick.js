@@ -4,10 +4,23 @@ import moment from 'moment'
 import classNames from 'classnames'
 import { createChart, CrosshairMode } from 'lightweight-charts'
 
+import { THEME_CLASSES } from 'utils/themes'
+
 import CandleStats from './CandleStats'
 import Tooltip from './Tooltip'
 import TradingViewLink from './TradingViewLink'
 import { propTypes, defaultProps } from './Candlestick.props'
+
+const STYLES = {
+  [THEME_CLASSES.DARK]: {
+    backgroundColor: '#30404d',
+    volumeColor: 'rgb(97,107,115)',
+  },
+  [THEME_CLASSES.LIGHT]: {
+    backgroundColor: '#ffffff',
+    volumeColor: 'rgb(165,176,185)',
+  },
+}
 
 class Candlestick extends React.PureComponent {
   state = {
@@ -23,16 +36,25 @@ class Candlestick extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { trades, candles } = this.props
+    const { trades, candles, theme } = this.props
     const { chart } = this.state
-    if (trades !== prevProps.trades || candles !== prevProps.candles) {
+    if (trades !== prevProps.trades || candles !== prevProps.candles || theme !== prevProps.theme) {
       chart.remove()
       this.createChart()
     }
   }
 
+  componentWillUnmount() {
+    const { chart } = this.state
+    chart.remove()
+  }
+
   createChart = () => {
-    const { candles, trades } = this.props
+    const { candles, trades, theme } = this.props
+    const {
+      backgroundColor,
+      volumeColor,
+    } = STYLES[theme]
 
     const element = document.getElementById('candlestick')
     const width = element.offsetWidth
@@ -42,7 +64,7 @@ class Candlestick extends React.PureComponent {
       width,
       height,
       layout: {
-        backgroundColor: '#30404d',
+        backgroundColor,
         textColor: 'rgba(255, 255, 255, 0.5)',
       },
       grid: {
@@ -71,7 +93,7 @@ class Candlestick extends React.PureComponent {
 
     // candle series
     const candleSeries = chart.addCandlestickSeries({
-      upColor: '#30404d',
+      upColor: backgroundColor,
       downColor: '#f05359',
       borderDownColor: '#f05359',
       borderUpColor: '#16b157',
@@ -84,8 +106,8 @@ class Candlestick extends React.PureComponent {
     const tradeSeries = chart.addBarSeries({
       thinBars: true,
       openVisible: false,
-      downColor: '#30404d',
-      upColor: '#30404d',
+      downColor: backgroundColor,
+      upColor: backgroundColor,
     })
     tradeSeries.setData(trades.map(trade => ({
       ...trade,
@@ -116,7 +138,7 @@ class Candlestick extends React.PureComponent {
     volumeSeries.setData(candles.map(candle => ({
       time: candle.time,
       value: candle.volume,
-      color: 'rgba(97, 107, 115, 1)',
+      color: volumeColor,
     })))
 
     this.setState({
