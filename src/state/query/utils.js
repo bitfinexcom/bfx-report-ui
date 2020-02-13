@@ -262,8 +262,8 @@ const MAPPING = {
   [MENU_LOGINS]: {
     icon: IconNames.LOG_IN,
     path: '/logins',
-    queryLimit: 25, // 250 maximum
-    pageSize: 25,
+    queryLimit: 50, // 250 maximum
+    pageSize: 50,
   },
   [MENU_ORDERS]: {
     icon: IconNames.FLOWS,

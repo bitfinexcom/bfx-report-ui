@@ -7,6 +7,7 @@ import {
   setParams,
 } from 'state/logins/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getFilteredEntries } from 'state/pagination/selectors'
 import {
   getCurrentFetchParams,
   getDataReceived,
@@ -22,7 +23,7 @@ import Logins from './Logins'
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_LOGINS),
   currentFetchParams: getCurrentFetchParams(state),
-  entries: getEntries(state),
+  entries: getFilteredEntries(state, queryConstants.MENU_LOGINS, getEntries(state)),
   params: getParams(state),
   getFullTime: getFullTime(state),
   dataReceived: getDataReceived(state),
