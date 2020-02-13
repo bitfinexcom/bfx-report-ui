@@ -170,7 +170,7 @@ const SECTION_COLUMNS = {
   [MENU_LOGINS]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true },
     { id: 'mts', name: 'date' },
-    { id: 'ip', name: 'ip', type: INTEGER, filter: true },
+    { id: 'ip', name: 'ip', type: STRING, filter: true },
     { id: 'browser', name: 'browser' },
     { id: 'version', name: 'version' },
     { id: 'mobile', name: 'mobile' },
