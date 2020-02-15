@@ -15,6 +15,7 @@ import NoData from 'ui/NoData'
 import DateInput from 'ui/DateInput'
 import TradesSwitch from 'components/Trades/TradesSwitch'
 import PairSelector from 'ui/PairSelector'
+import Timeframe from 'ui/CandlesTimeframe'
 import RefreshButton from 'ui/RefreshButton'
 import Candlestick from 'ui/Charts/Candlestick'
 import queryConstants from 'state/query/constants'
@@ -57,6 +58,11 @@ class Candles extends PureComponent {
     setParams({ pair })
   }
 
+  onTimeframeChange = (timeframe) => {
+    const { setParams } = this.props
+    setParams({ timeframe })
+  }
+
   render() {
     const {
       candlesEntries,
@@ -68,7 +74,9 @@ class Candles extends PureComponent {
       t,
       tradesEntries,
     } = this.props
-    const { start, end, pair } = params
+    const {
+      start, end, pair, timeframe,
+    } = params
     const hasChanges = this.hasChanges()
 
     const renderOptionsSelection = (
@@ -106,6 +114,8 @@ class Candles extends PureComponent {
           onPairSelect={this.onPairSelect}
           pairs={pairs}
         />
+        {' '}
+        <Timeframe value={timeframe} onChange={this.onTimeframeChange} />
         {' '}
         <Button
           onClick={this.handleQuery}

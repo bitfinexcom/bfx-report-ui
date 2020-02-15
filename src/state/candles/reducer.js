@@ -8,7 +8,7 @@ import types from './constants'
 const initialParams = {
   start: getLastMonth(),
   end: undefined,
-  timeFrame: '1h',
+  timeframe: '1h',
   pair: 'BTC:USD',
 }
 
@@ -32,7 +32,7 @@ export function candlesReducer(state = initialState, action) {
         currentFetchParams: {
           start: state.start,
           end: state.end,
-          timeFrame: state.timeFrame,
+          timeframe: state.timeframe,
           pair: state.pair,
         },
       }
@@ -100,7 +100,7 @@ export function candlesReducer(state = initialState, action) {
         ...initialState,
         start: state.start,
         end: state.end,
-        timeFrame: state.timeFrame,
+        timeframe: state.timeframe,
       }
     case authTypes.LOGOUT:
       return initialState

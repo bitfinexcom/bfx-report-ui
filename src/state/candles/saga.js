@@ -16,15 +16,17 @@ import { formatRawSymbols, mapRequestPairs } from '../symbols/utils'
 
 export const getReqCandles = (params) => {
   const { start, end, pair } = params
+  const symbol = formatRawSymbols(mapRequestPairs(pair, true))
   const tradesParams = {
     start,
     end,
-    symbol: formatRawSymbols(mapRequestPairs(pair, true)),
+    symbol,
   }
   return Promise.all([
     makeFetchCall('getCandles', {
       ...params,
-      limit: 1000,
+      symbol,
+      limit: 500,
     }),
     makeFetchCall('getTrades', tradesParams),
   ])

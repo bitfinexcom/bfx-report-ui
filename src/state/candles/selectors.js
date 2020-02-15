@@ -8,13 +8,13 @@ export const getParams = (state) => {
   const {
     start,
     end,
-    timeFrame,
+    timeframe,
     pair,
   } = getCandles(state)
   return {
     start,
     end,
-    timeFrame,
+    timeframe,
     pair,
   }
 }
