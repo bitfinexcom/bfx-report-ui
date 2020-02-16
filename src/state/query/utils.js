@@ -205,7 +205,7 @@ const MAPPING = {
   },
   [MENU_CANDLES]: {
     icon: IconNames.EXCHANGE,
-    path: '/trades/candles',
+    path: '/candles',
   },
   [MENU_CONCENTRATION_RISK]: {
     icon: IconNames.CHART,
