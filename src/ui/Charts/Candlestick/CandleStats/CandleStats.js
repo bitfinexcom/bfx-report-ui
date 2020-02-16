@@ -19,6 +19,19 @@ class CandleStats extends React.PureComponent {
     chart.subscribeCrosshairMove(this.onCrosshairMove)
   }
 
+  componentDidUpdate(prevProps) {
+    const { chart } = this.props
+    if (chart !== prevProps.chart) {
+      prevProps.chart.unsubscribeCrosshairMove(this.onCrosshairMove)
+      chart.subscribeCrosshairMove(this.onCrosshairMove)
+    }
+  }
+
+  componentWillUnmount() {
+    const { chart } = this.props
+    chart.unsubscribeCrosshairMove(this.onCrosshairMove)
+  }
+
   onCrosshairMove = (param) => {
     const { candleSeries } = this.props
     const { time, seriesPrices } = param
