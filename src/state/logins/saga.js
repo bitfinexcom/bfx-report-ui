@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getTargetQueryLimit } from 'state/query/selectors'
+import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getFilterQuery } from 'state/filters/selectors'
@@ -16,16 +16,16 @@ import { fetchDataWithPagination } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
-import { getParams } from './selectors'
 
 const TYPE = queryTypes.MENU_LOGINS
 
 function getReqLogins({
-  start,
-  end,
+  query,
+  smallestMts,
   queryLimit,
   filter,
 }) {
+  const { start, end } = getTimeFrame(query, smallestMts)
   const params = {
     start,
     end,
@@ -36,17 +36,16 @@ function getReqLogins({
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchLogins({ payload = {} }) {
-  const { nextFetch } = payload
+function* fetchLogins() {
   try {
     const filter = yield select(getFilterQuery, TYPE)
     const queryLimit = yield select(getTargetQueryLimit, TYPE)
-    const { start, end } = yield select(getParams)
-    const { nextPage } = yield select(getPaginationData, TYPE)
+    const { smalletsMts } = yield select(getPaginationData, TYPE)
+    const query = yield select(getQuery)
 
     const { result, error } = yield call(fetchDataWithPagination, getReqLogins, {
-      start,
-      end: nextFetch ? nextPage : end,
+      query,
+      smalletsMts,
       filter,
       queryLimit,
     })

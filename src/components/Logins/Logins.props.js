@@ -12,18 +12,12 @@ const LOGINS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   columns: PropTypes.object.isRequired,
-  currentFetchParams: PropTypes.object.isRequired,
   entries: PropTypes.arrayOf(LOGINS_ENTRIES_PROPS).isRequired,
-  params: PropTypes.shape({
-    start: PropTypes.number,
-    end: PropTypes.number,
-  }).isRequired,
   fetchData: PropTypes.func.isRequired,
   getFullTime: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   timeOffset: PropTypes.string.isRequired,
 }
