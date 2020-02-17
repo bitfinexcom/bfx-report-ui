@@ -22,6 +22,7 @@ import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/
 import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/selectors'
 import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
 import { getParams as getLoanReportParams } from 'state/loanReport/selectors'
+import { getParams as getLoginsParams } from 'state/logins/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
 import { getParams as getOrderTradesParams } from 'state/orderTrades/selectors'
@@ -62,6 +63,7 @@ const {
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
+  MENU_LOGINS,
   MENU_ORDERS,
   MENU_ORDER_TRADES,
   MENU_TICKERS,
@@ -128,6 +130,8 @@ function getSelector(target) {
       return getLedgersSymbols
     case MENU_LOAN_REPORT:
       return getLoanReportParams
+    case MENU_LOGINS:
+      return getLoginsParams
     case MENU_ORDERS:
       return getOrdersPairs
     case MENU_ORDER_TRADES:
@@ -242,6 +246,7 @@ function* getOptions({ target, query }) {
       options.symbol = formatSymbol(target, sign.targetPairs)
       break
     case MENU_TAX_REPORT:
+    case MENU_LOGINS:
       options.start = sign.start || undefined
       options.end = sign.end || undefined
       break
@@ -284,6 +289,9 @@ function* getOptions({ target, query }) {
       break
     case MENU_LOAN_REPORT:
       options.method = 'getPerformingLoanCsv'
+      break
+    case MENU_LOGINS:
+      options.method = 'getLoginsCsv'
       break
     case MENU_ORDERS:
       options.method = 'getOrdersCsv'

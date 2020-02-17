@@ -15,6 +15,7 @@ import FundingOfferHistory from 'components/FundingOfferHistory'
 import FundingPayment from 'components/FundingPayment'
 import Ledgers from 'components/Ledgers'
 import LoanReport from 'components/LoanReport'
+import Logins from 'components/Logins'
 import Movements from 'components/Movements'
 import Orders from 'components/Orders'
 import OrderTrades from 'components/OrderTrades'
@@ -53,6 +54,7 @@ const {
   MENU_FPAYMENT,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
+  MENU_LOGINS,
   MENU_ORDERS,
   MENU_ORDER_TRADES,
   MENU_TRADES,
@@ -96,6 +98,7 @@ const PATHS = {
     `${getPath(MENU_TAX_REPORT)}/:section(result)`,
     `${getPath(MENU_TAX_REPORT)}/:section(start_snapshot|end_snapshot|result)/:subsection(positions|tickers|wallets)`],
   MENU_ACCOUNT_SUMMARY: [getPath(MENU_ACCOUNT_SUMMARY)],
+  MENU_LOGINS: [getPath(MENU_LOGINS)],
 }
 
 class Main extends PureComponent {
@@ -314,6 +317,11 @@ class Main extends PureComponent {
               exact
               path={PATHS.MENU_ACCOUNT_SUMMARY}
               component={AccountSummary}
+            />
+            <Route
+              exact
+              path={PATHS.MENU_LOGINS}
+              component={Logins}
             />
           </Switch>
         </div>

@@ -27,7 +27,6 @@ import {
   getPublicTradesStartTime,
 } from './selectors'
 
-const checkIsSyncModeWithDbData = () => makeFetchCall('isSyncModeWithDbData')
 const fetchSyncProgress = () => makeFetchCall('getSyncProgress')
 const logout = () => makeFetchCall('logout')
 const enableSyncMode = () => makeFetchCall('enableSyncMode')

@@ -12,6 +12,7 @@ export default {
   MENU_FPAYMENT: 'fpayment',
   MENU_LEDGERS: 'ledgers',
   MENU_LOAN_REPORT: 'loanreport',
+  MENU_LOGINS: 'logins',
   MENU_MOVEMENTS: 'movements',
   MENU_ORDERS: 'orders',
   MENU_ORDER_TRADES: 'ordertrades',

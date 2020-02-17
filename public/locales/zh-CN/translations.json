@@ -183,6 +183,9 @@
   "loanreport": {
     "title": "借贷报告"
   },
+  "logins": {
+    "title": "Logins"
+  },
   "movements": {
     "title": "移动"
   },

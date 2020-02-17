@@ -17,6 +17,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
+  MENU_LOGINS,
 } = queryConstants
 
 const {
@@ -164,6 +165,16 @@ const SECTION_COLUMNS = {
     { id: 'fundingAccrued', name: 'fundingAccrued', type: NUMBER, filter: true },
     { id: 'fundingStep', name: 'fundingStep', type: NUMBER, filter: true },
     { id: 'mts', name: 'updated' },
+  ],
+
+  [MENU_LOGINS]: [
+    { id: 'id', name: 'id', type: INTEGER, filter: true },
+    { id: 'mts', name: 'date' },
+    { id: 'ip', name: 'ip', type: STRING, filter: true },
+    { id: 'browser', name: 'browser' },
+    { id: 'version', name: 'version' },
+    { id: 'mobile', name: 'mobile' },
+    { id: 'extra', name: 'meta' },
   ],
 }
 

@@ -183,6 +183,9 @@
   "loanreport": {
     "title": "Отчет о займах"
   },
+  "logins": {
+    "title": "Logins"
+  },
   "movements": {
     "title": "Движения"
   },
