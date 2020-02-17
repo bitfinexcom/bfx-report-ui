@@ -10,7 +10,7 @@
     box-sizing: border-box;
     font-size: 12px;
     text-align: left;
-    z-index: 1000;
+    z-index: 10;
     top: 12px;
     left: 12px;
     pointer-events: none;
@@ -20,7 +20,7 @@
 
   &-candle {
     position: absolute;
-    z-index: 1000;
+    z-index: 11;
     top: 0;
     left: 40px;
 
@@ -39,7 +39,7 @@
 
   &-trading-view {
     position: absolute;
-    z-index: 3000;
+    z-index: 30;
     bottom: 40px;
     left: 15px;
     cursor: pointer;
@@ -57,7 +57,7 @@
 
   &-trades-toggle {
     position: absolute;
-    z-index: 2000;
+    z-index: 20;
     top: -1px;
     left: 10px;
     cursor: pointer;
