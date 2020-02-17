@@ -100,6 +100,7 @@ class Wallets extends PureComponent {
         >
           {t('query.title')}
         </Button>
+        {' '}
       </Fragment>
     )
     let showContent
@@ -113,8 +114,7 @@ class Wallets extends PureComponent {
           <h4>
             {t('wallets.title')}
             {' '}
-            {renderTimeSelection}
-            {' '}
+            {platform.showFrameworkMode && renderTimeSelection}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <NoData descId='wallets.nodata' />
@@ -126,8 +126,7 @@ class Wallets extends PureComponent {
           <h4>
             {t('wallets.title')}
             {' '}
-            {renderTimeSelection}
-            {' '}
+            {platform.showFrameworkMode && renderTimeSelection}
             <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
