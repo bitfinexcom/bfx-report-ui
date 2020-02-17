@@ -6,7 +6,7 @@ import { getTarget } from 'state/query/utils'
 import { encodeFilters } from 'state/filters/utils'
 import filterTypes from 'state/filters/constants'
 import queryConstants from 'state/query/constants'
-import { concatQueryStrings, getQueryWithoutParams } from 'state/utils'
+import { concatQueryStrings, getQueryWithoutParams, removeUrlParams } from 'state/utils'
 import { FILTER_KEYS } from 'var/filterTypes'
 
 import { setLastRoute, setRouteParams } from './actions'
@@ -29,12 +29,17 @@ function* locationChange({ payload }) {
   if (route === MENU_DEPOSITS || route === MENU_WITHDRAWALS) {
     route = MENU_MOVEMENTS
   }
-  if (!route || route === MENU_ORDER_TRADES) {
+  if (!route) {
+    return
+  }
+
+  const lastRoute = yield select(getLastRoute)
+  if (lastRoute === MENU_ORDER_TRADES) {
+    removeUrlParams(['orderId'])
     return
   }
 
   // return previously saved params on route change
-  const lastRoute = yield select(getLastRoute)
   if (route !== lastRoute && !isFirstRendering) {
     const routeParams = yield select(getRouteParams, route)
     if (_isEmpty(routeParams)) {

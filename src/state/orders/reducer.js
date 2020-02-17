@@ -1,4 +1,4 @@
-// https://docs.bitfinex.com/v2/reference#orders-history
+// https://docs.bitfinex.com/reference#rest-auth-orders-history
 import _get from 'lodash/get'
 
 import { formatPair, mapPair } from 'state/symbols/utils'

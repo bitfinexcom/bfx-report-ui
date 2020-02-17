@@ -38,7 +38,7 @@ class SyncSymbolPrefButton extends PureComponent {
     // fill init state from props
     if (prevState.tempSymbols.length === 0 || prevState.tempTime === undefined) {
       return {
-        tempSymbols: nextProps.syncSymbols.map(symbol => symbol.toUpperCase()),
+        tempSymbols: nextProps.syncSymbols,
         tempTime: new Date(nextProps.startTime),
       }
     }

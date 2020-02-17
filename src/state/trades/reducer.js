@@ -1,4 +1,4 @@
-// https://docs.bitfinex.com/v2/reference#rest-auth-trades-hist
+// https://docs.bitfinex.com/reference#rest-auth-trades
 import _get from 'lodash/get'
 
 import { formatPair, mapSymbol, mapPair } from 'state/symbols/utils'

@@ -106,15 +106,12 @@ export default function getColumns(props) {
       id: 'currency',
       name: 'column.currency',
       width: COLUMN_WIDTHS.SYMBOL,
-      renderer: () => {
-        const currency = targetSymbol.toUpperCase()
-        return (
-          <Cell tooltip={currency}>
-            {currency}
-          </Cell>
-        )
-      },
-      copyText: () => targetSymbol.toUpperCase(),
+      renderer: () => (
+        <Cell tooltip={targetSymbol}>
+          {targetSymbol}
+        </Cell>
+      ),
+      copyText: () => targetSymbol,
     },
   ]
 }

@@ -49,6 +49,7 @@
     "description": "描述",
     "destination": "去處",
     "fee": "手續費",
+    "feePercent": "費用百分比",
     "fees": "費用",
     "fundBalance": "保險基金餘額",
     "fundingAccrued": "下階段累計資金",
@@ -61,7 +62,7 @@
     "opened": "開始",
     "orderid": "訂單 ID",
     "pair": "對",
-    "percent": "百分",
+    "percent": "百分比",
     "period": "期間",
     "pl": "損益",
     "plUsd": "損益 (USD)",
@@ -360,7 +361,6 @@
   "updated": "更新",
   "wallets": {
     "title": "錢包",
-    "title_beta": "錢包(Beta)",
     "header": {
       "exchange": "交易",
       "margin": "保證金",

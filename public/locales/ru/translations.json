@@ -49,6 +49,7 @@
     "description": "ОПИСАНИЕ",
     "destination": "НАЗНАЧЕНИЕ",
     "fee": "КОМИССИЯ",
+    "feePercent": "КОМИССИЯ ПРОЦ",
     "fees": "КОМИССИИ",
     "fundBalance": "БАЛАНС РЕЗЕРВНОГО ФОНДА",
     "fundingAccrued": "СЛЕДУЮЩЕЕ ФИНАНСИРОВАНИЕ НАКОПЛЕНО",
@@ -360,7 +361,6 @@
   "updated": "Обновлено",
   "wallets": {
     "title": "Кошельки",
-    "title_beta": "Кошельки (Beta)",
     "header": {
       "exchange": "Биржа",
       "margin": "Маржинальное",

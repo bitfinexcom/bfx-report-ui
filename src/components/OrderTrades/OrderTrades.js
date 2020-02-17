@@ -3,7 +3,6 @@ import { withTranslation } from 'react-i18next'
 import queryString from 'query-string'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
@@ -75,8 +74,6 @@ class OrderTrades extends PureComponent {
           <h4>
             {t('ordertrades.title')}
             {' '}
-            <TimeRange />
-            {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
           <br />
@@ -88,8 +85,6 @@ class OrderTrades extends PureComponent {
         <Fragment>
           <h4>
             {t('ordertrades.title')}
-            {' '}
-            <TimeRange />
             {' '}
             <ExportButton />
             {' '}

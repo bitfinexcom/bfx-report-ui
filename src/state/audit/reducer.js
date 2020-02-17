@@ -1,4 +1,5 @@
 // data format https://github.com/bitfinexcom/bfx-api-node-models/blob/master/lib/position_hist.js
+// https://docs.bitfinex.com/reference#rest-auth-positions-audit
 import _get from 'lodash/get'
 
 import { formatPair, mapPair } from 'state/symbols/utils'

@@ -17,7 +17,6 @@ import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
-import { platform } from 'var/config'
 
 import getColumns from './Wallets.columns'
 import { propTypes, defaultProps } from './Wallets.props'
@@ -80,7 +79,6 @@ class Wallets extends PureComponent {
     const marginRows = marginData.length
     const fundingRows = fundingData.length
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
-    const walletsTitle = platform.showFrameworkMode ? 'wallets.title' : 'wallets.title_beta'
 
     const renderTimeSelection = (
       <Fragment>
@@ -107,13 +105,13 @@ class Wallets extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = (
-        <Loading title={walletsTitle} />
+        <Loading title='wallets.title' />
       )
     } else if (exchangeRows === 0 && marginRows === 0 && fundingRows === 0) {
       showContent = (
         <Fragment>
           <h4>
-            {t(walletsTitle)}
+            {t('wallets.title')}
             {' '}
             {renderTimeSelection}
             {' '}
@@ -126,7 +124,7 @@ class Wallets extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {t(walletsTitle)}
+            {t('wallets.title')}
             {' '}
             {renderTimeSelection}
             {' '}
