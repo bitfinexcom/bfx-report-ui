@@ -83,7 +83,7 @@ const getUpdatedCandles = (state, data) => {
   return {
     entries: [...candlesEntries, ...state.candles.entries],
     isLoading: false,
-    nextPage: data.res.length === 500 ? data.res[0].time - 1 : data.nextPage,
+    nextPage: data.nextPage,
   }
 }
 const getUpdatedTrades = (state, data) => {
