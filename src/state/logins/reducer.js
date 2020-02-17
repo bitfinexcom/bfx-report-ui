@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/reference#rest-auth-logins-hist
 import _get from 'lodash/get'
+import _toString from 'lodash/toString'
 
 import authTypes from 'state/auth/constants'
 import { fetchFail } from 'state/reducers.helper'
@@ -56,7 +57,7 @@ export function loginsReducer(state = initialState, action) {
           ip,
           browser,
           version,
-          mobile: mobile || '',
+          mobile: mobile === false ? '' : _toString(mobile),
           extra: extraData,
         }
       })
