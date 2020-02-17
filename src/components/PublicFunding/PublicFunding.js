@@ -36,7 +36,7 @@ class PublicFunding extends PureComponent {
     const { history, targetSymbol, setTargetSymbol } = this.props
     if (symbol !== targetSymbol) {
       // show select symbol in url
-      history.push(`${getPath(TYPE)}/${symbol}${history.location.search}`)
+      history.push(`${getPath(TYPE)}/${symbol}${window.location.search}`)
       setTargetSymbol(symbol)
     }
   }

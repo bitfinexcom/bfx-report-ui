@@ -12,7 +12,7 @@ const OrderTradesNoData = (props) => {
   const { t, history } = props
 
   const jumpToOrders = () => {
-    history.push(`${getPath(queryConstants.MENU_ORDERS)}${history.location.search}`)
+    history.push(`${getPath(queryConstants.MENU_ORDERS)}${window.location.search}`)
   }
 
   return (

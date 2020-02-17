@@ -24,7 +24,7 @@ const getFeePercent = (entry) => {
   if (val) {
     return `${fixedFloat(Math.abs(val) * 100, 2)}%`
   }
-  return ''
+  return '-'
 }
 
 export default function getColumns(props) {

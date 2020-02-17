@@ -13,7 +13,7 @@ const PositionsAuditNoId = (props) => {
 
   const jumpToPositions = (e) => {
     e.preventDefault()
-    history.push(`${getPath(queryConstants.MENU_POSITIONS)}${history.location.search}`)
+    history.push(`${getPath(queryConstants.MENU_POSITIONS)}${window.location.search}`)
   }
 
   return (

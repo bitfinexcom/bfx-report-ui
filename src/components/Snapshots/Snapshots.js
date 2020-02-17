@@ -92,7 +92,7 @@ class Snapshots extends PureComponent {
     const { history } = this.props
 
     const path = this.getSectionURL(section)
-    history.push(`${path}${history.location.search}`)
+    history.push(`${path}${window.location.search}`)
   }
 
   render() {

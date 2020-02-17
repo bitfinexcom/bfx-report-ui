@@ -297,7 +297,7 @@ export function toggleSymbol(type, props, symbol) {
     removeTargetSymbol(symbol)
   }
 
-  history.push(generateUrl(type, history.location.search, demapSymbols(nextSymbols)))
+  history.push(generateUrl(type, window.location.search, demapSymbols(nextSymbols)))
 }
 
 export function setPair(type, props, pair) {
@@ -307,7 +307,7 @@ export function setPair(type, props, pair) {
 
   if (targetPair !== pair) {
     setTargetPair(pair)
-    history.push(generateUrl(type, history.location.search, demapPairs(pair)))
+    history.push(generateUrl(type, window.location.search, demapPairs(pair)))
   }
 }
 
@@ -325,7 +325,7 @@ export function togglePair(type, props, pair) {
     nextPairs = targetPairs.filter(tag => pair !== tag)
     removeTargetPair(pair)
   }
-  history.push(generateUrl(type, history.location.search, demapPairs(nextPairs)))
+  history.push(generateUrl(type, window.location.search, demapPairs(nextPairs)))
 }
 
 export const getCurrentEntries = memoizeOne(
