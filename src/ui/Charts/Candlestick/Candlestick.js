@@ -140,6 +140,7 @@ class Candlestick extends React.PureComponent {
         downColor: backgroundColor,
         upColor: backgroundColor,
       })
+      this.forceUpdate()
     }
 
     this.tradeSeries.setData(trades.map(trade => ({
