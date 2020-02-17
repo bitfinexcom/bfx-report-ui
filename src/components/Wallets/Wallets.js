@@ -17,6 +17,7 @@ import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
+import { platform } from 'var/config'
 
 import getColumns from './Wallets.columns'
 import { propTypes, defaultProps } from './Wallets.props'
