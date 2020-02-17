@@ -29,10 +29,14 @@ class Candlestick extends React.PureComponent {
   state = {
     width: null,
     height: null,
-    isTradesVisible: false,
+    isTradesVisible: true,
   }
 
   chart = null
+
+  candleSeries = null
+
+  tradeSeries = null
 
   componentDidMount() {
     this.createChart()
@@ -63,10 +67,7 @@ class Candlestick extends React.PureComponent {
   createChart = () => {
     const { isTradesVisible } = this.state
     const { candles: { entries: candles }, theme } = this.props
-    const {
-      backgroundColor,
-      volumeColor,
-    } = STYLES[theme]
+    const { backgroundColor } = STYLES[theme]
 
     const element = document.getElementById('candlestick')
     const width = element.offsetWidth
@@ -107,7 +108,6 @@ class Candlestick extends React.PureComponent {
 
     chart.subscribeVisibleTimeRangeChange(this.onTimeRangeChange)
 
-    // candle series
     this.candleSeries = chart.addCandlestickSeries({
       upColor: backgroundColor,
       downColor: '#f05359',
@@ -118,45 +118,30 @@ class Candlestick extends React.PureComponent {
     })
     this.candleSeries.setData(candles)
 
-    this.tradeSeries = chart.addBarSeries({
-      thinBars: true,
-      openVisible: true,
-      downColor: backgroundColor,
-      upColor: backgroundColor,
-    })
-
-    // volume series
-    const volumeSeries = chart.addHistogramSeries({
-      color: '#26a69a',
-      lineWidth: 2,
-      priceFormat: {
-        type: 'volume',
-      },
-      overlay: true,
-      scaleMargins: {
-        top: 0.8,
-        bottom: 0,
-      },
-    })
-
-    volumeSeries.setData(candles.map(candle => ({
-      time: candle.time,
-      value: candle.volume,
-      color: volumeColor,
-    })))
-
     this.setState({
       width,
       height,
     })
 
+    this.setVolumeSeries()
     if (isTradesVisible) {
       this.setTradeSeries()
     }
   }
 
   setTradeSeries = () => {
-    const { trades: { entries: trades } } = this.props
+    const { trades: { entries: trades }, theme } = this.props
+    const { backgroundColor } = STYLES[theme]
+
+    if (!this.tradeSeries) {
+      this.tradeSeries = this.chart.addBarSeries({
+        thinBars: true,
+        openVisible: true,
+        downColor: backgroundColor,
+        upColor: backgroundColor,
+      })
+    }
+
     this.tradeSeries.setData(trades.map(trade => ({
       ...trade,
       open: trade,
@@ -167,6 +152,32 @@ class Candlestick extends React.PureComponent {
       position: 'inBar',
       shape: 'circle',
       color: trade.execAmount > 0 ? '#16b157' : '#f05359',
+    })))
+  }
+
+  setVolumeSeries = () => {
+    const { candles: { entries: candles }, theme } = this.props
+    const { volumeColor } = STYLES[theme]
+
+    if (!this.volumeSeries) {
+      this.volumeSeries = this.chart.addHistogramSeries({
+        color: '#26a69a',
+        lineWidth: 2,
+        priceFormat: {
+          type: 'volume',
+        },
+        overlay: true,
+        scaleMargins: {
+          top: 0.8,
+          bottom: 0,
+        },
+      })
+    }
+
+    this.volumeSeries.setData(candles.map(candle => ({
+      time: candle.time,
+      value: candle.volume,
+      color: volumeColor,
     })))
   }
 
@@ -197,22 +208,21 @@ class Candlestick extends React.PureComponent {
   timeFormatter = timestamp => moment.utc(timestamp * 1000).format('YYYY-MM-DD HH:mm:ss')
 
   onTradesVisibilityChange = (isTradesVisible) => {
+    const { candles: { entries: candles } } = this.props
     this.setState({ isTradesVisible }, () => {
-      if (!this.tradeSeries) {
-        return
-      }
-
       if (isTradesVisible) {
         this.setTradeSeries()
       } else {
-        // this.chart.removeSeries(tradeSeries) // https://github.com/tradingview/lightweight-charts/issues/300
-        this.recreateChart() // workaround for bug in the library
+        this.chart.removeSeries(this.tradeSeries)
+        this.tradeSeries = null
+        this.candleSeries.setData(candles)
+        this.setVolumeSeries()
       }
     })
   }
 
   render() {
-    const { className, candles } = this.props
+    const { className, candles: { entries: candles } } = this.props
     const {
       width,
       height,
@@ -233,11 +243,13 @@ class Candlestick extends React.PureComponent {
                 tradeSeries={this.tradeSeries}
               />
             )}
-            <CandleStats
-              chart={this.chart}
-              candleSeries={this.candleSeries}
-              defaultCandle={candles[candles.length - 1] || {}}
-            />
+            {this.candleSeries && candles.length > 0 && (
+              <CandleStats
+                chart={this.chart}
+                candleSeries={this.candleSeries}
+                defaultCandle={candles[candles.length - 1] || {}}
+              />
+            )}
             <TradesToggle
               value={isTradesVisible}
               onChange={this.onTradesVisibilityChange}
