@@ -16,6 +16,7 @@ import DateInput from 'ui/DateInput'
 import TradesSwitch from 'components/Trades/TradesSwitch'
 import PairSelector from 'ui/PairSelector'
 import Timeframe from 'ui/CandlesTimeframe'
+import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
 import Candlestick from 'ui/Charts/Candlestick'
 import queryConstants from 'state/query/constants'
@@ -142,6 +143,8 @@ class Candles extends PureComponent {
             {' '}
             {renderOptionsSelection}
             {' '}
+            <ExportButton />
+            {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <br />
             <br />
@@ -157,6 +160,8 @@ class Candles extends PureComponent {
             {t('candles.title')}
             {' '}
             {renderOptionsSelection}
+            {' '}
+            <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
             <br />
