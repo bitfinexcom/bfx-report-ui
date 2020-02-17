@@ -8,20 +8,20 @@ import {
 } from 'state/candles/actions'
 import { getPairs } from 'state/symbols/selectors'
 import {
-  getCandlesEntries,
+  getCandles,
   getCurrentFetchParams,
   getDataReceived,
   getPageLoading,
   getParams,
-  getTradesEntries,
+  getTrades,
 } from 'state/candles/selectors'
 
 import Candles from './Candles'
 
 const mapStateToProps = state => ({
   currentFetchParams: getCurrentFetchParams(state),
-  candlesEntries: getCandlesEntries(state),
-  tradesEntries: getTradesEntries(state),
+  candles: getCandles(state),
+  trades: getTrades(state),
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   pairs: getPairs(state),

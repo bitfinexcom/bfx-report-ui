@@ -23,13 +23,13 @@ const STYLES = {
   },
 }
 
+const SCROLL_THRESHOLD = 200
+
 class Candlestick extends React.PureComponent {
   state = {
     width: null,
     height: null,
-    candleSeries: null,
-    tradeSeries: null,
-    isTradesVisible: true,
+    isTradesVisible: false,
   }
 
   chart = null
@@ -39,20 +39,30 @@ class Candlestick extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { trades, candles, theme } = this.props
-    if (trades !== prevProps.trades || candles !== prevProps.candles || theme !== prevProps.theme) {
+    const { isTradesVisible } = this.state
+    const { candles, trades, theme } = this.props
+    if (candles.entries !== prevProps.candles.entries) {
+      this.candleSeries.setData(candles.entries)
+    }
+    if (trades.entries !== prevProps.trades.entries && isTradesVisible) {
+      this.setTradeSeries()
+    }
+
+    if (theme !== prevProps.theme) {
       this.recreateChart()
     }
   }
 
   componentWillUnmount() {
-    const { chart } = this.state
-    chart.remove()
+    if (this.chart) {
+      this.chart.unsubscribeVisibleTimeRangeChange(this.onTimeRangeChange)
+      this.chart.remove()
+    }
   }
 
   createChart = () => {
     const { isTradesVisible } = this.state
-    const { candles, theme } = this.props
+    const { candles: { entries: candles }, theme } = this.props
     const {
       backgroundColor,
       volumeColor,
@@ -95,8 +105,10 @@ class Candlestick extends React.PureComponent {
     })
     this.chart = chart
 
+    chart.subscribeVisibleTimeRangeChange(this.onTimeRangeChange)
+
     // candle series
-    const candleSeries = chart.addCandlestickSeries({
+    this.candleSeries = chart.addCandlestickSeries({
       upColor: backgroundColor,
       downColor: '#f05359',
       borderDownColor: '#f05359',
@@ -104,7 +116,14 @@ class Candlestick extends React.PureComponent {
       wickDownColor: '#f05359',
       wickUpColor: '#16b157',
     })
-    candleSeries.setData(candles)
+    this.candleSeries.setData(candles)
+
+    this.tradeSeries = chart.addBarSeries({
+      thinBars: true,
+      openVisible: true,
+      downColor: backgroundColor,
+      upColor: backgroundColor,
+    })
 
     // volume series
     const volumeSeries = chart.addHistogramSeries({
@@ -127,42 +146,42 @@ class Candlestick extends React.PureComponent {
     })))
 
     this.setState({
-      chart,
       width,
       height,
-      candleSeries,
     })
 
     if (isTradesVisible) {
-      this.addTrades()
+      this.setTradeSeries()
     }
   }
 
-  addTrades = () => {
-    const { trades, theme } = this.props
-    const { backgroundColor } = STYLES[theme]
-
-    const tradeSeries = this.chart.addBarSeries({
-      thinBars: true,
-      openVisible: true,
-      downColor: backgroundColor,
-      upColor: backgroundColor,
-    })
-    tradeSeries.setData(trades.map(trade => ({
+  setTradeSeries = () => {
+    const { trades: { entries: trades } } = this.props
+    this.tradeSeries.setData(trades.map(trade => ({
       ...trade,
       open: trade,
     })))
 
-    tradeSeries.setMarkers(trades.map(trade => ({
+    this.tradeSeries.setMarkers(trades.map(trade => ({
       time: trade.time,
       position: 'inBar',
       shape: 'circle',
       color: trade.execAmount > 0 ? '#16b157' : '#f05359',
     })))
+  }
 
-    this.setState({
-      tradeSeries,
-    })
+  onTimeRangeChange = ({ from }) => {
+    const { candles, trades, fetchData } = this.props
+
+    const candleScrollTime = candles.entries[SCROLL_THRESHOLD] && candles.entries[SCROLL_THRESHOLD].time
+    if (candles.nextPage && !candles.isLoading && from < candleScrollTime) {
+      fetchData('candles')
+    }
+
+    const tradeScrollTime = trades.entries[SCROLL_THRESHOLD] && trades.entries[SCROLL_THRESHOLD].time
+    if (trades.nextPage && !trades.isLoading && from < tradeScrollTime) {
+      fetchData('trades')
+    }
   }
 
   recreateChart = () => {
@@ -170,6 +189,7 @@ class Candlestick extends React.PureComponent {
       return
     }
 
+    this.chart.unsubscribeVisibleTimeRangeChange(this.onTimeRangeChange)
     this.chart.remove()
     this.createChart()
   }
@@ -177,14 +197,13 @@ class Candlestick extends React.PureComponent {
   timeFormatter = timestamp => moment.utc(timestamp * 1000).format('YYYY-MM-DD HH:mm:ss')
 
   onTradesVisibilityChange = (isTradesVisible) => {
-    const { tradeSeries } = this.state
     this.setState({ isTradesVisible }, () => {
-      if (!tradeSeries) {
+      if (!this.tradeSeries) {
         return
       }
 
       if (isTradesVisible) {
-        this.addTrades()
+        this.setTradeSeries()
       } else {
         // this.chart.removeSeries(tradeSeries) // https://github.com/tradingview/lightweight-charts/issues/300
         this.recreateChart() // workaround for bug in the library
@@ -197,8 +216,6 @@ class Candlestick extends React.PureComponent {
     const {
       width,
       height,
-      candleSeries,
-      tradeSeries,
       isTradesVisible,
     } = this.state
 
@@ -208,15 +225,17 @@ class Candlestick extends React.PureComponent {
       <div id='candlestick' className={classes}>
         {this.chart && (
           <Fragment>
-            <Tooltip
-              chart={this.chart}
-              width={width}
-              height={height}
-              tradeSeries={tradeSeries}
-            />
+            {this.tradeSeries && (
+              <Tooltip
+                chart={this.chart}
+                width={width}
+                height={height}
+                tradeSeries={this.tradeSeries}
+              />
+            )}
             <CandleStats
               chart={this.chart}
-              candleSeries={candleSeries}
+              candleSeries={this.candleSeries}
               defaultCandle={candles[candles.length - 1] || {}}
             />
             <TradesToggle

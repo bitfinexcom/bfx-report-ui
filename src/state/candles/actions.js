@@ -2,12 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to fetch Candles.
- * @param {object} payload object contains options for fetching Candles
+ * @param {string} type contains data type for fetching (candles/trades)
  */
-export function fetchData(payload) {
+export function fetchData(type) {
   return {
     type: types.FETCH,
-    payload,
+    payload: type,
   }
 }
 
@@ -45,8 +45,12 @@ export function refresh() {
 /**
  * Create an action to update Candles.
  * @param {Object} payload data
- * @param {Object[]} payload.candles data set
- * @param {Object[]} payload.trades data set
+ * @param {Object} [payload.candles] candles response
+ * @param {Object[]} payload.candles.res candles data set
+ * @param {number} payload.candles.nextPage nextPage mts
+ * @param {Object} [payload.trades] trades response
+ * @param {Object[]} payload.trades.res trades data set
+ * @param {number} payload.trades.nextPage nextPage mts
  */
 export function updateData(payload) {
   return {

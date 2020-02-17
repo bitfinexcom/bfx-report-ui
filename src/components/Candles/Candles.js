@@ -49,7 +49,8 @@ class Candles extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchData } = this.props
+    const { refresh, fetchData } = this.props
+    refresh()
     fetchData()
   }
 
@@ -65,14 +66,15 @@ class Candles extends PureComponent {
 
   render() {
     const {
-      candlesEntries,
+      candles,
       dataReceived,
+      fetchData,
       pageLoading,
       pairs,
       params,
       refresh,
       t,
-      tradesEntries,
+      trades,
     } = this.props
     const {
       start, end, pair, timeframe,
@@ -132,7 +134,7 @@ class Candles extends PureComponent {
       showContent = (
         <Loading title='candles.title' />
       )
-    } else if (!candlesEntries.length) {
+    } else if (!candles.entries.length) {
       showContent = (
         <Fragment>
           <h4>
@@ -161,7 +163,11 @@ class Candles extends PureComponent {
             <br />
             <TradesSwitch target={TYPE} />
           </h4>
-          <Candlestick candles={candlesEntries} trades={tradesEntries} />
+          <Candlestick
+            candles={candles}
+            trades={trades}
+            fetchData={fetchData}
+          />
         </Fragment>
       )
     }

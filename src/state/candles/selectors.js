@@ -1,16 +1,16 @@
-export const getCandles = state => state.candles
+export const getCandlesData = state => state.candles
 
-export const getCandlesEntries = state => getCandles(state).candles || []
-export const getCurrentFetchParams = state => getCandles(state).currentFetchParams
-export const getDataReceived = state => getCandles(state).dataReceived
-export const getPageLoading = state => getCandles(state).pageLoading
+export const getCandles = state => getCandlesData(state).candles || {}
+export const getCurrentFetchParams = state => getCandlesData(state).currentFetchParams
+export const getDataReceived = state => getCandlesData(state).dataReceived
+export const getPageLoading = state => getCandlesData(state).pageLoading
 export const getParams = (state) => {
   const {
     start,
     end,
     timeframe,
     pair,
-  } = getCandles(state)
+  } = getCandlesData(state)
   return {
     start,
     end,
@@ -18,13 +18,13 @@ export const getParams = (state) => {
     pair,
   }
 }
-export const getTradesEntries = state => getCandles(state).trades || []
+export const getTrades = state => getCandlesData(state).trades || {}
 
 export default {
+  getCandles,
   getCurrentFetchParams,
   getDataReceived,
-  getCandlesEntries,
   getPageLoading,
   getParams,
-  getTradesEntries,
+  getTrades,
 }

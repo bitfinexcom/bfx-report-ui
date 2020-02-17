@@ -12,19 +12,109 @@ const initialParams = {
   pair: 'BTC:USD',
 }
 
+const initDataState = {
+  entries: [],
+  isLoading: false,
+  nextPage: false,
+}
+
 export const initialState = {
   dataReceived: false,
   pageLoading: false,
-  candles: [],
-  trades: [],
+  candles: initDataState,
+  trades: initDataState,
   ...initialParams,
   currentFetchParams: initialParams,
+}
+
+const mapCandles = entries => entries.reverse().map((candle) => {
+  const {
+    time,
+    high,
+    low,
+    open,
+    close,
+    volume,
+  } = candle
+
+  return {
+    time: time / 1000,
+    high,
+    low,
+    open,
+    close,
+    volume,
+  }
+})
+
+const mapTrades = entries => entries.reverse().map((trade) => {
+  const {
+    execAmount,
+    execPrice,
+    fee,
+    feeCurrency,
+    id,
+    mtsCreate,
+    orderID,
+  } = trade
+
+  return {
+    execAmount,
+    execPrice,
+    fee,
+    feeCurrency: mapSymbol(feeCurrency),
+    id,
+    mtsCreate,
+    orderID,
+
+    time: mtsCreate / 1000,
+    close: execPrice,
+    open: 0,
+  }
+})
+
+const getUpdatedCandles = (state, data) => {
+  if (!data) {
+    return state.candles
+  }
+
+  const candlesEntries = mapCandles(data.res)
+
+  return {
+    entries: [...candlesEntries, ...state.candles.entries],
+    isLoading: false,
+    nextPage: data.res.length === 500 ? data.res[0].time - 1 : data.nextPage,
+  }
+}
+const getUpdatedTrades = (state, data) => {
+  if (!data) {
+    return state.trades
+  }
+
+  const tradesEntries = mapTrades(data.res)
+
+  return {
+    entries: [...tradesEntries, ...state.trades.entries],
+    isLoading: false,
+    nextPage: data.nextPage,
+  }
 }
 
 export function candlesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
-    case types.FETCH:
+    case types.FETCH: {
+      // subsequent requests for candles/trades (infinite scroll)
+      if (payload) {
+        return {
+          ...state,
+          [payload]: {
+            ...state[payload],
+            isLoading: true,
+          },
+        }
+      }
+
       return {
         ...state,
         dataReceived: false,
@@ -36,56 +126,16 @@ export function candlesReducer(state = initialState, action) {
           pair: state.pair,
         },
       }
+    }
     case types.UPDATE: {
       const { candles, trades } = payload
+
       return {
         ...state,
         dataReceived: true,
         pageLoading: false,
-        candles: candles.reverse().map((candle) => {
-          const {
-            time,
-            high,
-            low,
-            open,
-            close,
-            volume,
-          } = candle
-
-          return {
-            time: time / 1000,
-            high,
-            low,
-            open,
-            close,
-            volume,
-          }
-        }),
-        trades: trades.res.reverse().map((trade) => {
-          const {
-            execAmount,
-            execPrice,
-            fee,
-            feeCurrency,
-            id,
-            mtsCreate,
-            orderID,
-          } = trade
-
-          return {
-            execAmount,
-            execPrice,
-            fee,
-            feeCurrency: mapSymbol(feeCurrency),
-            id,
-            mtsCreate,
-            orderID,
-
-            time: mtsCreate / 1000,
-            close: execPrice,
-            open: 0,
-          }
-        }),
+        candles: getUpdatedCandles(state, candles),
+        trades: getUpdatedTrades(state, trades),
       }
     }
     case types.SET_PARAMS:

@@ -19,15 +19,27 @@ const TRADES_ENTRIES_PROPS = PropTypes.shape({
   orderID: PropTypes.number.isRequired,
 })
 
+export const CANDLES_PROPS = PropTypes.shape({
+  entries: PropTypes.arrayOf(CANDLES_ENTRIES_PROPS).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  nextPage: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired,
+})
+
+export const TRADES_PROPS = PropTypes.shape({
+  entries: PropTypes.arrayOf(TRADES_ENTRIES_PROPS).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  nextPage: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired,
+})
+
 export const propTypes = {
-  candlesEntries: PropTypes.arrayOf(CANDLES_ENTRIES_PROPS).isRequired,
+  candles: CANDLES_PROPS,
   dataReceived: PropTypes.bool.isRequired,
   fetchData: PropTypes.func.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  tradesEntries: PropTypes.arrayOf(TRADES_ENTRIES_PROPS).isRequired,
+  trades: TRADES_PROPS,
 }
 
 export const defaultProps = {}
