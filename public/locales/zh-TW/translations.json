@@ -26,8 +26,8 @@
     "title": "平均淨/損失"
   },
   "charts": {
-    "cumulative": "Cumulative",
-    "percentage": "Percentage"
+    "cumulative": "累計",
+    "percentage": "百分比"
   },
   "column": {
     "actual-price": "實際價格",
@@ -89,7 +89,7 @@
   },
   "columnsfilter": {
     "title": "篩選欄",
-    "clear": "Clear",
+    "clear": "清除",
     "cancel": "取消",
     "apply": "套用篩選",
     "filters": {
@@ -190,7 +190,7 @@
     "title": "訂單"
   },
   "ordertrades": {
-    "title": "Order Trades",
+    "title": "訂單記錄",
     "noid": {
       "title": "無訂單ID",
       "description": "請於訂單頁面中選擇訂單ID，以進行查詢。"
@@ -202,7 +202,7 @@
     "loading": "查詢中...",
     "no_results": "無搜尋結果",
     "proceed": "繼續搜尋",
-    "last_data_timestamp": "Last data received dated: {{date}}"
+    "last_data_timestamp": "上次存取數據日期： {{date}}"
   },
   "paudit": {
     "title": "倉位驗證",
