@@ -1,24 +1,37 @@
 import authTypes from 'state/auth/constants'
 import timeframeConstants from 'ui/TimeframeSelector/constants'
 import { getLastMonth } from 'state/utils'
-import { fetch, fetchFail } from 'state/reducers.helper'
+import { fetchFail } from 'state/reducers.helper'
 
 import types from './constants'
 
-export const initialState = {
-  dataReceived: false,
-  pageLoading: false,
-  entries: [],
+const initialOptions = {
   start: getLastMonth(),
   end: undefined,
   timeframe: timeframeConstants.DAY,
+}
+
+export const initialState = {
+  currentFetchParams: initialOptions,
+  dataReceived: false,
+  entries: [],
+  pageLoading: false,
+  ...initialOptions,
 }
 
 export function balanceReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.FETCH_BALANCE:
-      return fetch(state)
+      return {
+        ...state,
+        pageLoading: true,
+        currentFetchParams: {
+          start: state.start,
+          end: state.end,
+          timeframe: state.timeframe,
+        },
+      }
     case types.UPDATE_BALANCE: {
       return {
         ...state,

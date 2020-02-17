@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch Account Balance data.
- * @param {object} payload object contains options for fetching Account Balance
  */
-export function fetchBalance(payload) {
+export function fetchBalance() {
   return {
     type: types.FETCH_BALANCE,
-    payload,
   }
 }
 

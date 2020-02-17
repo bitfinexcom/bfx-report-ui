@@ -14,7 +14,6 @@ import { getFilterQuery } from 'state/filters/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import { fetchDataWithPagination } from 'state/sagas.helper'
-import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
 import actions from './actions'
@@ -41,17 +40,8 @@ function getReqLedgers({
 }
 
 /* eslint-disable-next-line consistent-return */
-function* fetchLedgers({ payload }) {
-  const { nextFetch = false } = payload
+function* fetchLedgers() {
   try {
-    if (!nextFetch) {
-      const shouldProceed = yield call(frameworkCheck)
-      if (!shouldProceed) {
-        // stop loading for first request
-        return yield put(actions.updateLedgers())
-      }
-    }
-
     const { targetSymbols } = yield select(getLedgers)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const filter = yield select(getFilterQuery, TYPE)

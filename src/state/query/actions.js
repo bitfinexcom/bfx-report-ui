@@ -16,7 +16,7 @@ export function setTimeType(type) {
 
 /**
  * Create an action to set time range.
- * @param {number} rangeType
+ * @param {string} rangeType
  * @param {number} start time in milliseconds
  * @param {number} end time in milliseconds
  */

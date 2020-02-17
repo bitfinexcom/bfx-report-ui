@@ -17,6 +17,7 @@ import {
 import { selectAuth } from 'state/auth/selectors'
 
 const {
+  MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -212,6 +213,13 @@ export const checkInit = (props, type) => {
         setTargetIds(ids)
         fetchData()
       }
+      break
+    }
+    case MENU_ACCOUNT_BALANCE: {
+      if (!dataReceived && !pageLoading) {
+        fetchData()
+      }
+
       break
     }
     default:

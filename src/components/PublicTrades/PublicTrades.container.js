@@ -7,7 +7,6 @@ import {
   setTargetPair,
 } from 'state/publicTrades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
-import { getPairs } from 'state/symbols/selectors'
 import { getPublicTradesPairs } from 'state/sync/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import {
@@ -28,7 +27,6 @@ const mapStateToProps = state => ({
   hasSyncPref: !!getPublicTradesPairs(state).length,
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
-  pairs: getPairs(state),
   targetPair: getTargetPair(state),
   timeOffset: getTimeOffset(state),
 })

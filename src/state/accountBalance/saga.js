@@ -16,18 +16,17 @@ import selectors from './selectors'
 export const getReqBalance = params => makeFetchCall('getBalanceHistory', params)
 
 /* eslint-disable-next-line consistent-return */
-export function* fetchAccountBalance(action) {
+export function* fetchAccountBalance() {
   try {
-    const { payload = {} } = action
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
       // stop loading for first request
       return yield put(actions.updateBalance([]))
     }
 
-    yield put(actions.setParams(payload)) // save current query params in state for csv export reference
+    const params = yield select(selectors.getParams)
 
-    const { result = [], error } = yield call(getReqBalance, payload)
+    const { result = [], error } = yield call(getReqBalance, params)
     yield put(actions.updateBalance(result))
 
     if (error) {

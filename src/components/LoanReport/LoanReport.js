@@ -29,16 +29,6 @@ import { propTypes, defaultProps } from './LoanReport.props'
 const TYPE = queryConstants.MENU_LOAN_REPORT
 
 class LoanReport extends PureComponent {
-  constructor(props) {
-    super(props)
-
-    const { params: { start, end } } = props
-    this.state = {
-      start: start && new Date(start),
-      end: end && new Date(end),
-    }
-  }
-
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -68,20 +58,21 @@ class LoanReport extends PureComponent {
 
   render() {
     const {
+      currentFetchParams: { timeframe: currTimeframe },
       entries,
       targetSymbols,
-      params: { timeframe },
+      params,
       dataReceived,
       pageLoading,
       refresh,
       t,
     } = this.props
-    const { start, end } = this.state
+    const { start, end, timeframe } = params
     const hasChanges = this.hasChanges()
 
     const { chartData, dataKeys } = parseLoanReportChartData({
       data: _sortBy(entries, ['mts']),
-      timeframe,
+      timeframe: currTimeframe,
       t,
     })
 
@@ -97,7 +88,7 @@ class LoanReport extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('start', date)}
-            value={start}
+            value={start && new Date(start)}
             daysOnly
           />
         </Tooltip>
@@ -112,7 +103,7 @@ class LoanReport extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('end', date)}
-            value={end}
+            value={end && new Date(end)}
             daysOnly
           />
         </Tooltip>

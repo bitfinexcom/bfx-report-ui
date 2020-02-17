@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import {
   Button,
   Intent,
@@ -9,6 +8,8 @@ import { Select } from '@blueprintjs/select'
 import { IconNames } from '@blueprintjs/icons'
 
 import { filterSelectorItem } from 'ui/utils'
+
+import { propTypes, defaultProps } from './PairSelector.props'
 
 class PairSelector extends PureComponent {
   renderPair = (pair, { modifiers, handleClick }) => {
@@ -52,13 +53,7 @@ class PairSelector extends PureComponent {
   }
 }
 
-PairSelector.propTypes = {
-  currentPair: PropTypes.string.isRequired,
-  onPairSelect: PropTypes.func.isRequired,
-  pairs: PropTypes.arrayOf(PropTypes.string),
-}
-PairSelector.defaultProps = {
-  pairs: [],
-}
+PairSelector.propTypes = propTypes
+PairSelector.defaultProps = defaultProps
 
 export default PairSelector
