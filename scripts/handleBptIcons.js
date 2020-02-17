@@ -37,6 +37,7 @@ const USED_ICONS = [
   IconNames.SERIES_DERIVED,
   IconNames.SMALL_CROSS,
   IconNames.TH_FILTERED,
+  IconNames.TIMELINE_BAR_CHART,
   IconNames.UPDATED,
 ]
 

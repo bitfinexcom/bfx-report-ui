@@ -18,6 +18,7 @@ const { showFrameworkMode } = platform
 
 const {
   MENU_ACCOUNT_BALANCE,
+  MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
@@ -79,6 +80,8 @@ class ToggleMenu extends PureComponent {
     [MENU_CONCENTRATION_RISK, 'concentrationrisk.title', !showFrameworkMode],
     [MENU_SNAPSHOTS, 'snapshots.title', !showFrameworkMode],
     [MENU_TAX_REPORT, 'taxreport.title', !showFrameworkMode],
+    ['divider'],
+    [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
   ]
 
   handleClick(nextTarget) {

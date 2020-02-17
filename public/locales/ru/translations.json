@@ -356,6 +356,8 @@
   "trades": {
     "title": "Сделки"
   },
+  "update": "Обновить",
+  "updated": "Обновлено",
   "wallets": {
     "title": "Кошельки",
     "title_beta": "Кошельки (Beta)",
