@@ -46,10 +46,26 @@ class CandleStats extends React.PureComponent {
     })
   }
 
-  getCandleStat = (pref, val = 0, valueClass) => (
+  formatValue = (val) => {
+    if (val >= 1) {
+      return val.toFixed(1)
+    }
+
+    if (val >= 0.1) {
+      return val.toFixed(2)
+    }
+
+    if (val >= 0.01) {
+      return val.toFixed(3)
+    }
+
+    return val
+  }
+
+  getCandleStat = (pref, val, valueClass) => (
     <span className='candlestick-candle-stat'>
       <span className='bitfinex-show-soft'>{`${pref} `}</span>
-      <span className={valueClass}>{val.toFixed(1)}</span>
+      <span className={valueClass}>{this.formatValue(val)}</span>
     </span>
   )
 

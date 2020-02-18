@@ -151,6 +151,7 @@ export function candlesReducer(state = initialState, action) {
         start: state.start,
         end: state.end,
         timeframe: state.timeframe,
+        pair: state.pair,
       }
     case authTypes.LOGOUT:
       return initialState
