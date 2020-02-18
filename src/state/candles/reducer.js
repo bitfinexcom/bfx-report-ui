@@ -29,7 +29,7 @@ export const initialState = {
 
 const mapCandles = entries => entries.reverse().map((candle) => {
   const {
-    time,
+    mts,
     high,
     low,
     open,
@@ -38,7 +38,7 @@ const mapCandles = entries => entries.reverse().map((candle) => {
   } = candle
 
   return {
-    time: time / 1000,
+    time: mts / 1000,
     high,
     low,
     open,
