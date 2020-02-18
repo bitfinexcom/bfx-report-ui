@@ -1,17 +1,16 @@
 // https://docs.bitfinex.com/reference#rest-auth-logins-hist
 import _get from 'lodash/get'
+import _toString from 'lodash/toString'
 
 import authTypes from 'state/auth/constants'
-import { fetchFail } from 'state/reducers.helper'
+import { fetch, fetchFail } from 'state/reducers.helper'
 
 import types from './constants'
+import queryTypes from '../query/constants'
 
 const initialState = {
   dataReceived: false,
   pageLoading: false,
-  currentFetchParams: {},
-  start: undefined,
-  end: undefined,
   entries: [],
 }
 
@@ -19,14 +18,7 @@ export function loginsReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.FETCH:
-      return {
-        ...state,
-        pageLoading: true,
-        currentFetchParams: {
-          start: state.start,
-          end: state.end,
-        },
-      }
+      return fetch(state)
     case types.UPDATE: {
       const res = _get(payload, ['data', 'res'])
       if (!res) {
@@ -56,7 +48,7 @@ export function loginsReducer(state = initialState, action) {
           ip,
           browser,
           version,
-          mobile: mobile || '',
+          mobile: mobile === false ? '' : _toString(mobile),
           extra: extraData,
         }
       })
@@ -76,12 +68,7 @@ export function loginsReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.REFRESH:
-      return {
-        ...initialState,
-        start: state.start,
-        end: state.end,
-        currentFetchParams: state.currentFetchParams,
-      }
+    case queryTypes.SET_TIME_RANGE:
     case authTypes.LOGOUT:
       return initialState
     default: {

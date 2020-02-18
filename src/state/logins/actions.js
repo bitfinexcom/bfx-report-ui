@@ -2,12 +2,10 @@ import types from './constants'
 
 /**
  * Create an action to fetch Logins data.
- * @param {Object} options
  */
-export function fetchData(options = {}) {
+export function fetchData() {
   return {
     type: types.FETCH,
-    payload: options,
   }
 }
 
@@ -18,17 +16,6 @@ export function fetchData(options = {}) {
 export function fetchFail(payload) {
   return {
     type: types.FETCH_FAIL,
-    payload,
-  }
-}
-
-/**
- * Create an action to set options for Logins data.
- * @param {object} payload object contains options
- */
-export function setParams(payload) {
-  return {
-    type: types.SET_PARAMS,
     payload,
   }
 }
@@ -59,6 +46,5 @@ export default {
   fetchData,
   fetchFail,
   refresh,
-  setParams,
   updateData,
 }

@@ -22,7 +22,6 @@ import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/
 import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/selectors'
 import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
 import { getParams as getLoanReportParams } from 'state/loanReport/selectors'
-import { getParams as getLoginsParams } from 'state/logins/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
 import { getParams as getOrderTradesParams } from 'state/orderTrades/selectors'
@@ -130,8 +129,6 @@ function getSelector(target) {
       return getLedgersSymbols
     case MENU_LOAN_REPORT:
       return getLoanReportParams
-    case MENU_LOGINS:
-      return getLoginsParams
     case MENU_ORDERS:
       return getOrdersPairs
     case MENU_ORDER_TRADES:
@@ -247,8 +244,6 @@ function* getOptions({ target, query }) {
       break
     case MENU_TAX_REPORT:
     case MENU_LOGINS:
-      options.start = sign.start || undefined
-      options.end = sign.end || undefined
       break
     case MENU_POSITIONS_AUDIT:
       options.id = sign || undefined
