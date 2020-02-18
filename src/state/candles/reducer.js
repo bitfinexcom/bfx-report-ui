@@ -1,13 +1,11 @@
 import authTypes from 'state/auth/constants'
 import { fetchFail } from 'state/reducers.helper'
-import { getLastMonth } from 'state/utils'
 import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
+import queryTypes from '../query/constants'
 
 const initialParams = {
-  start: getLastMonth(),
-  end: undefined,
   timeframe: '1h',
   pair: 'BTC:USD',
 }
@@ -120,8 +118,6 @@ export function candlesReducer(state = initialState, action) {
         dataReceived: false,
         pageLoading: true,
         currentFetchParams: {
-          start: state.start,
-          end: state.end,
           timeframe: state.timeframe,
           pair: state.pair,
         },
@@ -146,10 +142,9 @@ export function candlesReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.REFRESH:
+    case queryTypes.SET_TIME_RANGE:
       return {
         ...initialState,
-        start: state.start,
-        end: state.end,
         timeframe: state.timeframe,
         pair: state.pair,
       }

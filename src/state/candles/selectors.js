@@ -6,14 +6,10 @@ export const getDataReceived = state => getCandlesData(state).dataReceived
 export const getPageLoading = state => getCandlesData(state).pageLoading
 export const getParams = (state) => {
   const {
-    start,
-    end,
     timeframe,
     pair,
   } = getCandlesData(state)
   return {
-    start,
-    end,
     timeframe,
     pair,
   }

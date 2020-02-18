@@ -175,7 +175,6 @@ export const ORDERED_TARGETS = [
 ]
 
 export const NO_QUERY_LIMIT_TARGETS = [
-  MENU_CANDLES,
   MENU_ORDER_TRADES,
   MENU_DERIVATIVES,
   MENU_FEES_REPORT,
@@ -207,6 +206,7 @@ const MAPPING = {
   [MENU_CANDLES]: {
     icon: IconNames.EXCHANGE,
     path: '/candles',
+    queryLimit: 500,
   },
   [MENU_CONCENTRATION_RISK]: {
     icon: IconNames.CHART,

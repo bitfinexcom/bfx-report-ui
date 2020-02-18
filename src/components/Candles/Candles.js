@@ -5,14 +5,12 @@ import {
   Card,
   Elevation,
   Intent,
-  Position,
-  Tooltip,
 } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import DateInput from 'ui/DateInput'
+import TimeRange from 'ui/TimeRange'
 import TradesSwitch from 'components/Trades/TradesSwitch'
 import PairSelector from 'ui/PairSelector'
 import Timeframe from 'ui/CandlesTimeframe'
@@ -20,7 +18,6 @@ import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
 import Candlestick from 'ui/Charts/Candlestick'
 import queryConstants from 'state/query/constants'
-import { isValidTimeStamp } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
 
 import { propTypes, defaultProps } from './Candles.props'
@@ -39,14 +36,6 @@ class Candles extends PureComponent {
   hasChanges = () => {
     const { currentFetchParams, params } = this.props
     return !_isEqual(currentFetchParams, params)
-  }
-
-  handleDateChange = (input, time) => {
-    const { setParams } = this.props
-    const timestamp = time && time.getTime()
-    if (isValidTimeStamp(timestamp) || time === null) {
-      setParams({ [input]: time ? timestamp : undefined })
-    }
   }
 
   handleQuery = () => {
@@ -77,41 +66,11 @@ class Candles extends PureComponent {
       t,
       trades,
     } = this.props
-    const {
-      start, end, pair, timeframe,
-    } = params
+    const { pair, timeframe } = params
     const hasChanges = this.hasChanges()
 
     const renderOptionsSelection = (
       <Fragment>
-        <Tooltip
-          content={(
-            <span>
-              {t('query.startDateTooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-        >
-          <DateInput
-            onChange={date => this.handleDateChange('start', date)}
-            value={start && new Date(start)}
-          />
-        </Tooltip>
-        {' '}
-        <Tooltip
-          content={(
-            <span>
-              {t('query.endDateTooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-        >
-          <DateInput
-            onChange={date => this.handleDateChange('end', date)}
-            value={end && new Date(end)}
-          />
-        </Tooltip>
-        {' '}
         <PairSelector
           currentPair={pair}
           onPairSelect={this.onPairSelect}
@@ -141,6 +100,8 @@ class Candles extends PureComponent {
           <h4>
             {t('candles.title')}
             {' '}
+            <TimeRange />
+            {' '}
             {renderOptionsSelection}
             {' '}
             <ExportButton />
@@ -158,6 +119,8 @@ class Candles extends PureComponent {
         <Fragment>
           <h4>
             {t('candles.title')}
+            {' '}
+            <TimeRange />
             {' '}
             {renderOptionsSelection}
             {' '}

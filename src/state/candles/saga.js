@@ -8,11 +8,12 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
+import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
-import { formatRawSymbols, mapRequestPairs } from '../symbols/utils'
 
 const getReqCandles = (params) => {
   const {
@@ -42,9 +43,12 @@ const getReqTrades = (params) => {
 
 function* fetchData(section, data, method) {
   const params = yield select(selectors.getParams)
+  const query = yield select(getQuery)
+  const { start, end } = getTimeFrame(query, data.nextPage)
   const { result, error } = yield call(method, {
     ...params,
-    end: data.nextPage || params.end,
+    start,
+    end,
   })
   yield put(actions.updateData({ [section]: result }))
 

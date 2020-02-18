@@ -36,6 +36,10 @@ export const propTypes = {
   dataReceived: PropTypes.bool.isRequired,
   fetchData: PropTypes.func.isRequired,
   pageLoading: PropTypes.bool.isRequired,
+  params: PropTypes.shape({
+    pair: PropTypes.string.isRequired,
+    timeframe: PropTypes.string.isRequired,
+  }).isRequired,
   refresh: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,

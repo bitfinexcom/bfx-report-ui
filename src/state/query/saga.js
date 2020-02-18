@@ -227,8 +227,6 @@ function* getOptions({ target, query }) {
       options.timeframe = sign.timeframe
       break
     case MENU_CANDLES:
-      options.start = sign.start || undefined
-      options.end = sign.end || undefined
       options.timeframe = sign.timeframe
       options.symbol = formatSymbol(target, sign.pair)
       break
