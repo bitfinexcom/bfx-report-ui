@@ -74,6 +74,7 @@
     "priceSpot": "现货价格",
     "pricetrail": "历史价格",
     "rate": "利率",
+    "rateperc": "利率 %",
     "side": "方向",
     "status": "状态",
     "fundingCost": "融资成本",

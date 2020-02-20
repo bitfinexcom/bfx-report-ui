@@ -74,6 +74,7 @@
     "priceSpot": "現貨價格",
     "pricetrail": "歷史價格",
     "rate": "利率",
+    "rateperc": "利率 %",
     "side": "方向",
     "status": "狀態",
     "fundingCost": "互換成本",

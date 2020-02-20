@@ -7,6 +7,7 @@ import {
   baseState,
   fetch,
   fetchFail,
+  formatPercent,
 } from 'state/reducers.helper'
 
 import types from './constants'
@@ -43,7 +44,7 @@ export function publicFundingReducer(state = initialState, action) {
           mts,
           amount,
           period,
-          rate,
+          rate: formatPercent(rate),
         }
       })
       return {

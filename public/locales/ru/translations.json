@@ -74,6 +74,7 @@
     "priceSpot": "SPOT PRICE",
     "pricetrail": "Трейлинговая цена",
     "rate": "Ставка",
+    "rateperc": "Ставка %",
     "side": "Сторона",
     "status": "Статус",
     "fundingCost": "Стоимость обеспечения",

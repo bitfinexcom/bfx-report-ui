@@ -67,7 +67,7 @@ export default function getColumns(props) {
     },
     {
       id: 'rate',
-      name: 'column.rate',
+      name: 'column.rateperc',
       width: COLUMN_WIDTHS.RATE,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]

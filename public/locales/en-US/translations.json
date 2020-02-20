@@ -86,6 +86,7 @@
     "priceSpot": "Spot price",
     "pricetrail": "Trailing price",
     "rate": "Rate",
+    "rateperc": "Rate %",
     "side": "Side",
     "status": "Status",
     "fundingCost": "Funding cost",
