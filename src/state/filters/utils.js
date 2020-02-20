@@ -72,9 +72,15 @@ export const calculateFilterQuery = (filters = []) => {
         break
       }
       case FILTERS.GREATER_THAN:
+        _set(acc, `${FILTER_TYPES.GT}.${column}`, filterValue)
+        break
+      case FILTERS.GREATER_THAN_EQUAL:
         _set(acc, `${FILTER_TYPES.GTE}.${column}`, filterValue)
         break
       case FILTERS.LESS_THAN:
+        _set(acc, `${FILTER_TYPES.LT}.${column}`, filterValue)
+        break
+      case FILTERS.LESS_THAN_EQUAL:
         _set(acc, `${FILTER_TYPES.LTE}.${column}`, filterValue)
         break
       default:

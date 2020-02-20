@@ -31,7 +31,9 @@ export const FILTERS = {
   EQUAL_TO: 'equal_to',
   NOT_EQUAL_TO: 'not_equal_to',
   GREATER_THAN: 'greater_than',
+  GREATER_THAN_EQUAL: 'greater_than_equal',
   LESS_THAN: 'less_than',
+  LESS_THAN_EQUAL: 'less_than_equal',
 }
 
 // calculates all keys used as filters based on defined columns
