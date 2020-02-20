@@ -151,7 +151,7 @@ class SyncSymbolPrefButton extends PureComponent {
                   {t('preferences.sync.starttime')}
                 </div>
                 <div className={dialogFieldStyle}>
-                  <DateInput onChange={this.handleDateChange} value={tempTime} />
+                  <DateInput onChange={this.handleDateChange} defaultValue={tempTime} />
                 </div>
               </div>
             </div>

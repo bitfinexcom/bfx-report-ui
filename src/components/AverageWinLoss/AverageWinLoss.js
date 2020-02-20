@@ -104,7 +104,7 @@ class AverageWinLoss extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('start', date)}
-            value={start}
+            defaultValue={start}
             daysOnly
           />
         </Tooltip>
@@ -119,7 +119,7 @@ class AverageWinLoss extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('end', date)}
-            value={end}
+            defaultValue={end}
             daysOnly
           />
         </Tooltip>

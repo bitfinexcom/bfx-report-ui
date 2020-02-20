@@ -88,7 +88,7 @@ class LoanReport extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('start', date)}
-            value={start && new Date(start)}
+            defaultValue={start}
             daysOnly
           />
         </Tooltip>
@@ -103,7 +103,7 @@ class LoanReport extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('end', date)}
-            value={end && new Date(end)}
+            defaultValue={end}
             daysOnly
           />
         </Tooltip>

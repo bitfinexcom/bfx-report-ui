@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types'
 
 export const propTypes = {
-  value: PropTypes.object,
+  defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
   inputTimezone: PropTypes.string,
   daysOnly: PropTypes.bool,
 }
 
 export const defaultProps = {
-  value: null,
+  defaultValue: null,
   inputTimezone: '',
   daysOnly: false,
 }

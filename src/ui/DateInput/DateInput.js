@@ -23,10 +23,15 @@ class DateInput extends PureComponent {
 
   render() {
     const {
-      value,
+      defaultValue,
       inputTimezone,
       daysOnly,
     } = this.props
+
+    // automatically create date from timestamp
+    const defaultDate = (typeof defaultValue === 'object')
+      ? defaultValue
+      : defaultValue && new Date(defaultValue)
 
     const { formatDate, parseDate } = daysOnly
       ? momentFormatterDays()
@@ -39,7 +44,7 @@ class DateInput extends PureComponent {
         formatDate={formatDate}
         parseDate={parseDate}
         onChange={this.onChange}
-        defaultValue={value}
+        defaultValue={defaultDate}
         timePrecision={timePrecision}
       />
     )
