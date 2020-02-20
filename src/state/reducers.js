@@ -70,6 +70,7 @@ const BASE_REDUCERS = {
   filters: filtersReducer,
   floan: fundingLoanHistoryReducer,
   foffer: fundingOfferHistoryReducer,
+  fpayment: fundingPaymentReducer,
   ledgers: ledgersReducer,
   logins: loginsReducer,
   movements: movementsReducer,
@@ -92,7 +93,6 @@ const BASE_REDUCERS = {
 
 const FRAMEWORK_REDUCERS = {
   affiliatesEarnings: affiliatesEarningsReducer,
-  fpayment: fundingPaymentReducer,
   balance: accountBalanceReducer,
   loanReport: loanReportReducer,
   tradedVolume: tradedVolumeReducer,
