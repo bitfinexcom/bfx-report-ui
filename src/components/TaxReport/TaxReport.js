@@ -106,7 +106,7 @@ class TaxReport extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('start', date)}
-            value={start}
+            defaultValue={start}
           />
         </Tooltip>
         {' '}
@@ -120,7 +120,7 @@ class TaxReport extends PureComponent {
         >
           <DateInput
             onChange={date => this.handleDateChange('end', date)}
-            value={end}
+            defaultValue={end}
           />
         </Tooltip>
         <Button

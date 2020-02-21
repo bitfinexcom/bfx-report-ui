@@ -138,7 +138,7 @@ class Snapshots extends PureComponent {
           position={Position.TOP}
           usePortal
         >
-          <DateInput onChange={this.handleDateChange} value={timestamp} />
+          <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
         </Tooltip>
         <Button
           onClick={this.handleQuery}

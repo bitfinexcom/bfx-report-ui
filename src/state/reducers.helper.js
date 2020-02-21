@@ -1,3 +1,5 @@
+import _isNumber from 'lodash/isNumber'
+
 import queryTypes from 'state/query/constants'
 import { getFilterType } from 'state/query/utils'
 
@@ -50,6 +52,10 @@ export function setTimeRange(type, state, initialState) {
         targetPairs: state.targetPairs,
       }
   }
+}
+
+export function formatPercent(value) {
+  return _isNumber(value) ? value * 100 : value
 }
 
 /* symbols */
