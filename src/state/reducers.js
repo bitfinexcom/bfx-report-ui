@@ -12,6 +12,7 @@ import accountSummaryReducer from './accountSummary/reducer'
 import affiliatesEarningsReducer from './affiliatesEarnings/reducer'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
+import candlesReducer from './candles/reducer'
 import derivativesReducer from './derivatives/reducer'
 import feesReportReducer from './feesReport/reducer'
 import filtersReducer from './filters/reducer'
@@ -65,6 +66,7 @@ const BASE_REDUCERS = {
   audit: positionsAuditReducer,
   auth: authReducer,
   base: baseReducer,
+  candles: candlesReducer,
   derivatives: derivativesReducer,
   fcredit: fundingCreditHistoryReducer,
   filters: filtersReducer,

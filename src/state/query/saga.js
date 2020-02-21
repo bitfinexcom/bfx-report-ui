@@ -14,6 +14,7 @@ import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { getFilterQuery } from 'state/filters/selectors'
 import { getParams as getAccountBalanceParams } from 'state/accountBalance/selectors'
 import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliatesEarnings/selectors'
+import { getParams as getCandlesParams } from 'state/candles/selectors'
 import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
 import { getParams as getFeesReportParams } from 'state/feesReport/selectors'
@@ -54,6 +55,7 @@ import types from './constants'
 const {
   MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
+  MENU_CANDLES,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FEES_REPORT,
@@ -115,6 +117,8 @@ function getSelector(target) {
       return getAccountBalanceParams
     case MENU_AFFILIATES_EARNINGS:
       return getAffiliatesEarningsSymbols
+    case MENU_CANDLES:
+      return getCandlesParams
     case MENU_DERIVATIVES:
       return getDerivativesPairs
     case MENU_FCREDIT:
@@ -182,6 +186,7 @@ function formatSymbol(target, symbols) {
     case MENU_PUBLIC_FUNDING:
       return `f${mapRequestSymbols(symbols)}`
     // sections with pairs
+    case MENU_CANDLES:
     case MENU_DERIVATIVES:
     case MENU_ORDERS:
     case MENU_ORDER_TRADES:
@@ -220,6 +225,10 @@ function* getOptions({ target, query }) {
       options.start = sign.start || undefined
       options.end = sign.end || undefined
       options.timeframe = sign.timeframe
+      break
+    case MENU_CANDLES:
+      options.timeframe = sign.timeframe
+      options.symbol = formatSymbol(target, sign.pair)
       break
     case MENU_WALLETS:
     case MENU_SNAPSHOTS:
@@ -265,6 +274,9 @@ function* getOptions({ target, query }) {
     case MENU_AFFILIATES_EARNINGS:
       options.method = 'getLedgersCsv'
       options.isAffiliateRebate = true
+      break
+    case MENU_CANDLES:
+      options.method = 'getCandlesCsv'
       break
     case MENU_DERIVATIVES:
       options.method = 'getStatusMessagesCsv'
