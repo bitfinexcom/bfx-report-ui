@@ -32,6 +32,13 @@
   "averagewinloss": {
     "title": "Average Win/Loss"
   },
+  "candles": {
+    "title": "Candles",
+    "amount": "Amount",
+    "orderid": "OrderID",
+    "fee": "Fee",
+    "toggle_trades": "Toggle Trades"
+  },
   "charts": {
     "cumulative": "Cumulative",
     "percentage": "Percentage"
@@ -117,7 +124,9 @@
       "equalTo": "Equal to",
       "notEqualTo": "Not equal to",
       "greaterThan": "Greater than",
-      "lessThan": "Less than"
+      "greaterThanEqual": "Greater / equal",
+      "lessThan": "Less than",
+      "lessThanEqual": "Less / equal"
     }
   },
   "columnsselect": {

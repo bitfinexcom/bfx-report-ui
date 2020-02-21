@@ -3,6 +3,7 @@
 
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "components/Header/_Header.scss";
+@import "ui/Charts/Candlestick/_Candlestick.scss";
 @import "ui/Charts/Chart/_Chart.scss";
 @import "ui/CollapsedTable/_CollapsedTable.scss";
 @import "ui/ColumnsFilter/_ColumnsFilter.scss";
@@ -95,7 +96,7 @@ body.#{$ns}-light .bitfinex-logo--dark {
 
 .bitfinex-timeframe {
   .bp3-transition-container {
-    z-index: 5;
+    z-index: 60;
   }
 }
 

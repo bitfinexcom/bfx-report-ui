@@ -5,6 +5,7 @@ import AccountBalance from 'components/AccountBalance'
 import AccountSummary from 'components/AccountSummary'
 import AffiliatesEarnings from 'components/AffiliatesEarnings'
 import AverageWinLoss from 'components/AverageWinLoss'
+import Candles from 'components/Candles'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import Derivatives from 'components/Derivatives'
 import FeesReport from 'components/FeesReport'
@@ -45,6 +46,7 @@ const {
   MENU_ACCOUNT_BALANCE,
   MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
+  MENU_CANDLES,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -75,6 +77,7 @@ const {
 
 const PATHS = {
   MENU_LEDGERS: [...getPath(MENU_LEDGERS), `${getPath(MENU_LEDGERS)[0]}/:symbol`],
+  MENU_CANDLES: [getPath(MENU_CANDLES)],
   MENU_TRADES: [getPath(MENU_TRADES), `${getPath(MENU_TRADES)}/:pair`],
   MENU_ORDERS: [getPath(MENU_ORDERS), `${getPath(MENU_ORDERS)}/:pair`],
   MENU_ORDER_TRADES: [getPath(MENU_ORDER_TRADES), `${getPath(MENU_ORDER_TRADES)}/:pair`],
@@ -165,6 +168,11 @@ class Main extends PureComponent {
               exact
               path={PATHS.MENU_LEDGERS}
               component={Ledgers}
+            />
+            <Route
+              exact
+              path={PATHS.MENU_CANDLES}
+              component={Candles}
             />
             <Route
               exact

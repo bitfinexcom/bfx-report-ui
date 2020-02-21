@@ -38,7 +38,9 @@ class FilterTypeSelector extends React.PureComponent {
         {(dataType === NUMBER || dataType === INTEGER) && (
           <Fragment>
             <option value={FILTERS.GREATER_THAN}>{t('columnsfilter.filters.greaterThan')}</option>
+            <option value={FILTERS.GREATER_THAN_EQUAL}>{t('columnsfilter.filters.greaterThanEqual')}</option>
             <option value={FILTERS.LESS_THAN}>{t('columnsfilter.filters.lessThan')}</option>
+            <option value={FILTERS.LESS_THAN_EQUAL}>{t('columnsfilter.filters.lessThanEqual')}</option>
           </Fragment>
         )}
       </HTMLSelect>

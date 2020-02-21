@@ -20,6 +20,7 @@ const {
   MENU_ACCOUNT_BALANCE,
   MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
+  MENU_CANDLES,
   MENU_CONCENTRATION_RISK,
   MENU_DEPOSITS,
   MENU_DERIVATIVES,
@@ -55,7 +56,7 @@ class ToggleMenu extends PureComponent {
 
   sections = [
     [MENU_LEDGERS, 'ledgers.title'],
-    [MENU_TRADES, 'trades.title'],
+    [[MENU_TRADES, MENU_CANDLES], 'trades.title'],
     [[MENU_ORDERS, MENU_ORDER_TRADES], 'orders.title'],
     [MENU_DEPOSITS, 'deposits.title'],
     [MENU_WITHDRAWALS, 'withdrawals.title'],
@@ -65,7 +66,7 @@ class ToggleMenu extends PureComponent {
     [MENU_FOFFER, 'foffer.title'],
     [MENU_FLOAN, 'floan.title'],
     [MENU_FCREDIT, 'fcredit.title'],
-    [MENU_FPAYMENT, 'fpayment.title', !showFrameworkMode],
+    [MENU_FPAYMENT, 'fpayment.title'],
     [MENU_AFFILIATES_EARNINGS, 'affiliatesearnings.title', !showFrameworkMode],
     ['divider'],
     [MENU_PUBLIC_TRADES, 'publictrades.title'],

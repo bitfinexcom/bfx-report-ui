@@ -15,6 +15,7 @@ import QueryLimitSelector from 'ui/QueryLimitSelector'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, togglePair } from 'state/utils'
 
+import TradesSwitch from './TradesSwitch'
 import getColumns from './Trades.columns'
 import { propTypes, defaultProps } from './Trades.props'
 
@@ -79,6 +80,9 @@ class Trades extends PureComponent {
             <RefreshButton handleClickRefresh={refresh} />
             {' '}
             <QueryLimitSelector target={TYPE} />
+            <br />
+            <br />
+            <TradesSwitch target={TYPE} />
           </h4>
           <NoData />
         </Fragment>
@@ -97,6 +101,9 @@ class Trades extends PureComponent {
             <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
+            <br />
+            <br />
+            <TradesSwitch target={TYPE} />
           </h4>
           <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
