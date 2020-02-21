@@ -53,6 +53,7 @@ export default function* rootSaga() {
   yield fork(fofferSaga)
   yield fork(ledgersSaga)
   yield fork(loginsSaga)
+  yield fork(fpaymentSaga)
   yield fork(movementsSaga)
   yield fork(ordersSaga)
   yield fork(orderTradesSaga)
@@ -72,7 +73,6 @@ export default function* rootSaga() {
   if (platform.showFrameworkMode) {
     yield fork(syncSaga)
     yield fork(affiliatesEarningsSaga)
-    yield fork(fpaymentSaga)
     yield fork(accountBalanceSaga)
     yield fork(loanReportSaga)
     yield fork(tradedVolumeSaga)
