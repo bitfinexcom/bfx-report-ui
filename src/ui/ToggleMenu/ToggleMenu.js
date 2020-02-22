@@ -87,7 +87,8 @@ class ToggleMenu extends PureComponent {
     [MENU_LOGINS, 'logins.title'],
   ]
 
-  handleClick(nextTarget) {
+  handleClick(e, nextTarget) {
+    e.preventDefault()
     const { target, history } = this.props
     if (target === nextTarget) {
       return
@@ -122,6 +123,7 @@ class ToggleMenu extends PureComponent {
           menuMode={menuMode}
         />
         <MenuDivider />
+
         {this.sections.map((section, index) => {
           const [type, title, isSkipped] = section
 
@@ -136,12 +138,15 @@ class ToggleMenu extends PureComponent {
           const types = _castArray(type)
           const mainType = types[0]
 
+          const [path] = _castArray(getPath(mainType))
+
           return (
             <Tooltip content={isIconMode ? t(title) : ''} key={index}>
               <MenuItem
                 icon={getIcon(mainType)}
                 text={isIconMode ? '' : t(title)}
-                onClick={() => this.handleClick(mainType)}
+                onClick={(e) => this.handleClick(e, mainType)}
+                href={path}
                 active={_includes(types, target)}
               />
             </Tooltip>
