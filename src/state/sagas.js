@@ -44,6 +44,7 @@ import wsSaga from './ws/saga'
 export default function* rootSaga() {
   yield fork(authSaga)
   yield fork(accountSummarySaga)
+  yield fork(affiliatesEarningsSaga)
   yield fork(baseSaga)
   yield fork(candlesSaga)
   yield fork(derivativesSaga)
@@ -71,15 +72,14 @@ export default function* rootSaga() {
   yield fork(uiSaga)
   yield fork(walletsSaga)
   if (platform.showFrameworkMode) {
-    yield fork(syncSaga)
-    yield fork(affiliatesEarningsSaga)
     yield fork(accountBalanceSaga)
-    yield fork(loanReportSaga)
-    yield fork(tradedVolumeSaga)
     yield fork(feesReportSaga)
-    yield fork(winLossSaga)
+    yield fork(loanReportSaga)
     yield fork(snapshotsSaga)
+    yield fork(syncSaga)
     yield fork(taxReportSaga)
+    yield fork(tradedVolumeSaga)
+    yield fork(winLossSaga)
     yield fork(wsSaga)
   }
 }

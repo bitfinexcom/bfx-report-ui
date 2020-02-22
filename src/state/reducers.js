@@ -62,6 +62,7 @@ const persistConfig = {
 
 const BASE_REDUCERS = {
   accountSummary: accountSummaryReducer,
+  affiliatesEarnings: affiliatesEarningsReducer,
   apositions: positionsActiveReducer,
   audit: positionsAuditReducer,
   auth: authReducer,
@@ -94,7 +95,6 @@ const BASE_REDUCERS = {
 }
 
 const FRAMEWORK_REDUCERS = {
-  affiliatesEarnings: affiliatesEarningsReducer,
   balance: accountBalanceReducer,
   loanReport: loanReportReducer,
   tradedVolume: tradedVolumeReducer,

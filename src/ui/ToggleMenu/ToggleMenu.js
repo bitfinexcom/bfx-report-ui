@@ -67,7 +67,7 @@ class ToggleMenu extends PureComponent {
     [MENU_FLOAN, 'floan.title'],
     [MENU_FCREDIT, 'fcredit.title'],
     [MENU_FPAYMENT, 'fpayment.title'],
-    [MENU_AFFILIATES_EARNINGS, 'affiliatesearnings.title', !showFrameworkMode],
+    [MENU_AFFILIATES_EARNINGS, 'affiliatesearnings.title'],
     ['divider'],
     [MENU_PUBLIC_TRADES, 'publictrades.title'],
     [MENU_PUBLIC_FUNDING, 'publicfunding.title'],
