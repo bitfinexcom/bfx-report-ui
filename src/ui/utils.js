@@ -42,7 +42,7 @@ export const filterSelectorItem = (query, item) => item.toLowerCase().indexOf(qu
 
 export const fixedFloat = (val, num = 8) => (typeof val === 'number' ? val && val.toFixed(num) : val)
 
-export const formatAmount = (val, color) => {
+export const formatAmount = (val, color, digits = 8) => {
   if (!val) {
     return (
       <Fragment>
@@ -53,7 +53,7 @@ export const formatAmount = (val, color) => {
     )
   }
 
-  const [integer, fraction] = val.toFixed(8).split('.')
+  const [integer, fraction] = val.toFixed(digits).split('.')
   const classes = classNames('bitfinex-amount', {
     'bitfinex-green-text': color ? color === 'green' : val > 0,
     'bitfinex-red-text': color ? color === 'red' : val < 0,

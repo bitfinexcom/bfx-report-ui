@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
-import { fixedFloat } from 'ui/utils'
+import { fixedFloat, formatAmount } from 'ui/utils'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
 const getColumns = (props) => {
@@ -37,7 +37,7 @@ const getColumns = (props) => {
             className='bitfinex-text-align-right'
             tooltip={fixedVolume}
           >
-            {fixedVolume}
+            {formatAmount(vol)}
           </Cell>
         )
       },
