@@ -18,6 +18,20 @@ export default function getColumns(props) {
 
   return [
     {
+      id: 'id',
+      name: 'column.id',
+      width: COLUMN_WIDTHS.ID,
+      renderer: (rowIndex) => {
+        const { id } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={id}>
+            {id}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].id,
+    },
+    {
       id: 'description',
       name: 'column.description',
       width: 520,

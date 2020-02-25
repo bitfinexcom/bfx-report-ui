@@ -35,6 +35,7 @@ const {
 
 /* eslint-disable object-curly-newline */
 const DEFAULT_LEDGERS = [
+  { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
   { column: 'description', type: CONTAINS, dataType: STRING, value: '' },
   { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
   { column: 'balance', type: GREATER_THAN, dataType: NUMBER, value: '' },

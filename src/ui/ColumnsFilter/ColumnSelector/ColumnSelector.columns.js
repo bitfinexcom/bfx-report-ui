@@ -27,6 +27,7 @@ const {
 } = DATA_TYPES
 
 const LEDGERS_COLUMNS = [
+  { id: 'id', name: 'id', type: INTEGER, filter: true },
   { id: 'description', name: 'description', type: STRING, filter: true },
   { id: 'currency', name: 'currency' },
   { id: 'amount', name: 'amount', type: NUMBER, filter: true },
