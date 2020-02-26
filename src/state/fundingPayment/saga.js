@@ -10,7 +10,6 @@ import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selecto
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
-import { getFundingOfferHistory } from 'state/fundingOfferHistory/selectors'
 import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
@@ -19,6 +18,7 @@ import { fetchDataWithPagination } from 'state/sagas.helper'
 
 import types from './constants'
 import actions from './actions'
+import selectors from './selectors'
 
 const TYPE = queryTypes.MENU_FPAYMENT
 
@@ -51,7 +51,7 @@ function* fetchFPayment() {
       return yield put(actions.updateFPayment())
     }
 
-    const { targetSymbols } = yield select(getFundingOfferHistory, TYPE)
+    const targetSymbols = yield select(selectors.getTargetSymbols, TYPE)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const queryLimit = yield select(getTargetQueryLimit, TYPE)
 

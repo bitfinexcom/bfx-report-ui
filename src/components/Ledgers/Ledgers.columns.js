@@ -20,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.ID,
+      width: COLUMN_WIDTHS.ORDER_ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
