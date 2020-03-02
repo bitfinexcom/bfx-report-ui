@@ -59,6 +59,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           renew,
           side,
           status,
+          type,
           symbol,
         } = entry
         const currentSymbol = mapSymbol(removePrefix(symbol))
@@ -75,6 +76,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
           amount,
           flags,
           status,
+          type,
           rate: formatPercent(rate),
           period,
           mtsOpening,
