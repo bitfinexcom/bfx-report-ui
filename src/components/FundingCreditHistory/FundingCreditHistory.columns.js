@@ -91,6 +91,20 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].status,
     },
     {
+      id: 'type',
+      name: 'column.type',
+      width: 100,
+      renderer: (rowIndex) => {
+        const { type } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={type}>
+            {type}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].type,
+    },
+    {
       id: 'rate',
       name: 'column.rateperc',
       width: COLUMN_WIDTHS.RATE,

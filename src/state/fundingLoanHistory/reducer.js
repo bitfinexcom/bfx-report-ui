@@ -58,6 +58,7 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
           renew,
           side,
           status,
+          type,
           symbol,
         } = entry
         const currentSymbol = mapSymbol(symbol.slice(1))
@@ -74,6 +75,7 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
           amount,
           flags,
           status,
+          type,
           rate: formatPercent(rate),
           period,
           mtsOpening,
