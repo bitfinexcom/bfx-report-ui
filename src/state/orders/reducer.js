@@ -60,6 +60,7 @@ export function ordersReducer(state = initialState, action) {
           symbol,
           type,
           typePrev,
+          meta,
         } = entry
         const formattedPair = mapPair(formatPair(symbol))
         // save new pair to updatePairs list
@@ -86,6 +87,7 @@ export function ordersReducer(state = initialState, action) {
           priceAuxLimit,
           notify,
           placedId,
+          meta,
         }
       })
       return {

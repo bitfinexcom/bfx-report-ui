@@ -214,5 +214,22 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => filteredData[rowIndex].typePrev,
     },
+    {
+      id: 'meta',
+      name: 'column.meta',
+      width: 160,
+      renderer: (rowIndex) => {
+        const meta = filteredData[rowIndex].meta
+        const metaData = JSON.stringify(meta)
+        return (
+          <Cell tooltip={metaData}>
+            <TruncatedFormat>
+              {metaData}
+            </TruncatedFormat>
+          </Cell>
+        )
+      },
+      copyText: rowIndex => JSON.stringify(filteredData[rowIndex].meta) || '',
+    },
   ]
 }
