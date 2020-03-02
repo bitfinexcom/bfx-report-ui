@@ -66,6 +66,7 @@ const SECTION_COLUMNS = {
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'priceTrailing', name: 'pricetrail', type: NUMBER, filter: true },
     { id: 'typePrev', name: 'typeprev', type: STRING, filter: true },
+    { id: 'meta', name: 'meta' },
   ],
 
   [MENU_MOVEMENTS]: [
