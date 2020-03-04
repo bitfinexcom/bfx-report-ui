@@ -1,50 +1,28 @@
 import { connect } from 'react-redux'
 
-import queryConstants from 'state/query/constants'
-import { editPublicTradesPref, editTickersHistoryPairPref } from 'state/sync/actions'
-import {
-  getSyncMode,
-  getPublicTradesStartTime,
-  getPublicTradesPairs,
-  getTickersHistoryStartTime,
-  getTickersHistoryPairs,
-} from 'state/sync/selectors'
+import { getSyncMode } from 'state/sync/selectors'
 import { getQuery, getTimeFrame } from 'state/query/selectors'
 
 import SyncPrefButton from './SyncPrefButton'
 
-const { MENU_PUBLIC_TRADES } = queryConstants
+import { getSyncPref, getSyncPrefFunc } from './SyncPrefButton.helpers'
 
 const mapStateToProps = (state, props) => {
   const { sectionType } = props
 
-  let syncPairs = (sectionType === MENU_PUBLIC_TRADES)
-    ? getPublicTradesPairs(state)
-    : getTickersHistoryPairs(state)
-  if (!syncPairs.length) {
-    syncPairs = ['BTC:USD']
-  }
-
-  let startTime = (sectionType === MENU_PUBLIC_TRADES)
-    ? getPublicTradesStartTime(state)
-    : getTickersHistoryStartTime(state)
-  if (!startTime) {
-    const { start } = getTimeFrame(getQuery(state))
-    startTime = new Date(start).getTime()
-  }
+  const { pairs, startTime } = getSyncPref(state, sectionType)
+  const { start } = getTimeFrame(getQuery(state))
 
   return {
     syncMode: getSyncMode(state),
-    syncPairs,
-    startTime,
+    syncPairs: pairs,
+    startTime: startTime || new Date(start).getTime(),
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { sectionType } = ownProps
-  const setSyncPrefFunc = (sectionType === MENU_PUBLIC_TRADES)
-    ? editPublicTradesPref
-    : editTickersHistoryPairPref
+  const setSyncPrefFunc = getSyncPrefFunc(sectionType)
 
   return {
     setSyncPref: (pair, startTime) => dispatch(setSyncPrefFunc(pair, startTime.getTime())),

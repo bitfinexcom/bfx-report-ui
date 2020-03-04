@@ -112,10 +112,26 @@ export function editTickersHistoryPairPref(pairs, startTime) {
   }
 }
 
+/**
+ * Create an action to edit candles pair preferences.
+ * @param {string[]} pairs
+ * @param {numeric} startTime start time in milliseconds
+ */
+export function editCandlesPairPref(pairs, startTime) {
+  return {
+    type: types.EDIT_CANDLES_PREF,
+    payload: {
+      pairs,
+      startTime,
+    },
+  }
+}
+
 export default {
   editPublicTradesPref,
   editPublicTradesSymbolPref,
   editTickersHistoryPairPref,
+  editCandlesPairPref,
   forceQueryFromDb,
   setSyncMode,
   setSyncProgress,

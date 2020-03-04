@@ -21,6 +21,7 @@ import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
 import { propTypes, defaultProps } from './Candles.props'
+import SyncPrefButton from '../../ui/SyncPrefButton'
 
 const TYPE = queryConstants.MENU_CANDLES
 
@@ -107,6 +108,7 @@ class Candles extends PureComponent {
             <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
+            <SyncPrefButton sectionType={TYPE} />
             <br />
             <br />
             <TradesSwitch target={TYPE} />
@@ -127,6 +129,7 @@ class Candles extends PureComponent {
             <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
+            <SyncPrefButton sectionType={TYPE} />
             <br />
             <br />
             <TradesSwitch target={TYPE} />

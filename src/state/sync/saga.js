@@ -34,9 +34,11 @@ const disableSyncMode = () => makeFetchCall('disableSyncMode')
 const getPublicTradesConf = () => makeFetchCall('getPublicTradesConf')
 const getTickersHistoryConf = () => makeFetchCall('getTickersHistoryConf')
 const getStatusMessagesConf = () => makeFetchCall('getStatusMessagesConf')
+const getCandlesConf = () => makeFetchCall('getCandlesConf')
 const editPublicTradesConf = params => makeFetchCall('editPublicTradesConf', params)
 const editTickersHistoryConf = params => makeFetchCall('editTickersHistoryConf', params)
 const editStatusMessagesConf = params => makeFetchCall('editStatusMessagesConf', params)
+const editCandlesConf = params => makeFetchCall('editCandlesConf', params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -162,20 +164,40 @@ function* editTickersHistoryPref({ payload }) {
   }
 }
 
+function* editCandlesPref({ payload }) {
+  const { pairs, startTime } = payload
+
+  const params = mapRequestPairs(pairs).map(pair => ({
+    symbol: formatRawSymbols(pair),
+    start: startTime,
+  }))
+
+  const { error } = yield call(editCandlesConf, params)
+  if (error) {
+    yield put(updateSyncErrorStatus('during editCandlesConf'))
+  }
+}
+
 function* getSyncPref() {
   const [
     { result: publicTradesPrefResult, error: publicTradesPrefError },
     { result: tickersHistoryPrefResult, error: tickersHistoryPrefError },
     { result: statusMessagesPrefResult },
+    { result: candlesPrefResult, error: candlesPrefError },
   ] = yield all([
     yield call(getPublicTradesConf),
     yield call(getTickersHistoryConf),
     yield call(getStatusMessagesConf),
+    yield call(getCandlesConf),
   ])
 
   // set default pref for derivatives, enabling view of those pairs in sync mode
   if (!statusMessagesPrefResult.length) {
     yield call(editStatusMessagesConf, [{ symbol: 'tBTCF0:USTF0', start: 0 }, { symbol: 'tETHF0:USTF0', start: 0 }])
+  }
+
+  if (!candlesPrefResult.length) {
+    yield call(editCandlesConf, [{ symbol: 'tBTCUSD', start: 0 }])
   }
 
   const formatSymbol = data => mapSymbol(removePrefix(data.symbol))
@@ -213,6 +235,9 @@ function* getSyncPref() {
   }
   if (tickersHistoryPrefError) {
     yield put(updateSyncErrorStatus('during getTickersHistoryConf'))
+  }
+  if (candlesPrefError) {
+    yield put(updateSyncErrorStatus('during getCandlesConf'))
   }
 }
 
@@ -299,6 +324,7 @@ export default function* syncSaga() {
   yield takeLatest(types.EDIT_PUBLIC_TRADES_PREF, editPublicTradesPref)
   yield takeLatest(types.EDIT_PUBLIC_FUNDING_PREF, editPublicFundingPref)
   yield takeLatest(types.EDIT_TICKERS_HISTORY_PREF, editTickersHistoryPref)
+  yield takeLatest(types.EDIT_CANDLES_PREF, editCandlesPref)
   yield takeLatest(authTypes.AUTH_SUCCESS, initSync)
   yield takeLatest(types.WS_PROGRESS_UPDATE, progressUpdate)
   yield takeLatest(types.WS_REQUESTS_REDIRECT, requestsRedirectUpdate)
