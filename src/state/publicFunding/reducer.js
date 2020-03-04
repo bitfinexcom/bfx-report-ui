@@ -59,7 +59,7 @@ export function publicFundingReducer(state = initialState, action) {
     case types.SET_SYMBOL:
       return {
         ...initialState,
-        targetSymbol: payload.toUpperCase(),
+        targetSymbol: payload,
       }
     case types.REFRESH:
     case queryTypes.SET_TIME_RANGE:
