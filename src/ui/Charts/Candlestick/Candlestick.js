@@ -152,7 +152,7 @@ class Candlestick extends React.PureComponent {
       time: trade.time,
       position: 'inBar',
       shape: 'circle',
-      color: trade.execAmount > 0 ? '#16b157' : '#f05359',
+      color: trade.execAmount > 0 ? '#1eb150' : '#f0403f',
     })))
   }
 
