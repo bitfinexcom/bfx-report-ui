@@ -5,16 +5,17 @@ import { Cell, TruncatedFormat } from '@blueprintjs/table'
 import { formatAmount, fixedFloat } from 'ui/utils'
 
 export const COLUMN_WIDTHS = {
-  ID: 82, // 123456789
-  IP: 115, // 128.128.128.128
-  ORDER_ID: 95, // 12345678901
-  SYMBOL: 92, // USTF0
-  PAIR: 100, // BTCF0/USTF0
   AMOUNT: 120, // -33942.556789
   BALANCE_USD: 125, // -33942.556789
   DATE: 140, // 18-09-19 17:10:37
-  RATE: 120, // 0.00063000
+  ID: 82, // 123456789
+  IP: 115, // 128.128.128.128
+  META: 160, // stringified object
+  ORDER_ID: 95, // 12345678901
+  PAIR: 100, // BTCF0/USTF0
   PERIOD: 80, // 30 Day(s)
+  RATE: 120, // 0.00063000
+  SYMBOL: 92, // USTF0
 }
 
 export const getFrameworkPositionsColumns = (props) => {
