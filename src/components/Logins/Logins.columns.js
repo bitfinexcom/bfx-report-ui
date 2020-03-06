@@ -4,6 +4,7 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
+import JSONFormat from 'ui/JSONFormat'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
@@ -104,16 +105,16 @@ export default function getColumns(props) {
     {
       id: 'extra',
       name: 'column.meta',
-      width: 500,
+      width: COLUMN_WIDTHS.META,
       renderer: (rowIndex) => {
         const { extra } = filteredData[rowIndex]
-        const formattedExtra = JSON.stringify(extra)
+        const formattedExtra = JSON.stringify(extra, undefined, 2)
+
         return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={formattedExtra}
-          >
-            {formattedExtra}
+          <Cell>
+            <JSONFormat content={formattedExtra}>
+              {formattedExtra}
+            </JSONFormat>
           </Cell>
         )
       },

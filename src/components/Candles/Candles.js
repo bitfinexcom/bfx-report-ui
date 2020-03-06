@@ -17,6 +17,7 @@ import Timeframe from 'ui/CandlesTimeframe'
 import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
 import Candlestick from 'ui/Charts/Candlestick'
+import SyncPrefButton from 'ui/SyncPrefButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
@@ -107,6 +108,7 @@ class Candles extends PureComponent {
             <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
+            <SyncPrefButton sectionType={TYPE} />
             <br />
             <br />
             <TradesSwitch target={TYPE} />
@@ -127,6 +129,7 @@ class Candles extends PureComponent {
             <ExportButton />
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
+            <SyncPrefButton sectionType={TYPE} />
             <br />
             <br />
             <TradesSwitch target={TYPE} />

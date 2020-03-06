@@ -1,19 +1,19 @@
 import types from './constants'
 
+const initPairsState = {
+  pairs: ['BTC:USD'],
+  startTime: undefined,
+}
+
 const initialState = {
   syncMode: types.MODE_ONLINE,
-  publicTrades: {
-    pairs: [],
-    startTime: undefined,
-  },
+  publicTrades: initPairsState,
   publicFunding: {
     symbols: [],
     startTime: undefined,
   },
-  tickersHistory: {
-    pairs: [],
-    startTime: undefined,
-  },
+  tickersHistory: initPairsState,
+  candles: initPairsState,
   progress: 0,
 }
 

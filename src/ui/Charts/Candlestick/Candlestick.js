@@ -15,10 +15,12 @@ import { propTypes, defaultProps } from './Candlestick.props'
 const STYLES = {
   [THEME_CLASSES.DARK]: {
     backgroundColor: '#30404d',
+    textColor: 'rgba(255, 255, 255, 0.5)',
     volumeColor: 'rgb(97,107,115)',
   },
   [THEME_CLASSES.LIGHT]: {
     backgroundColor: '#ffffff',
+    textColor: 'rgba(0, 0, 0, 0.6)',
     volumeColor: 'rgb(165,176,185)',
   },
 }
@@ -59,15 +61,14 @@ class Candlestick extends React.PureComponent {
 
   componentWillUnmount() {
     if (this.chart) {
-      this.chart.unsubscribeVisibleTimeRangeChange(this.onTimeRangeChange)
-      this.chart.remove()
+      this.cleanChartData()
     }
   }
 
   createChart = () => {
     const { isTradesVisible } = this.state
     const { candles: { entries: candles }, theme } = this.props
-    const { backgroundColor } = STYLES[theme]
+    const { backgroundColor, textColor } = STYLES[theme]
 
     const element = document.getElementById('candlestick')
     const width = element.offsetWidth
@@ -78,7 +79,7 @@ class Candlestick extends React.PureComponent {
       height,
       layout: {
         backgroundColor,
-        textColor: 'rgba(255, 255, 255, 0.5)',
+        textColor,
       },
       grid: {
         vertLines: {
@@ -152,7 +153,7 @@ class Candlestick extends React.PureComponent {
       time: trade.time,
       position: 'inBar',
       shape: 'circle',
-      color: trade.execAmount > 0 ? '#16b157' : '#f05359',
+      color: trade.execAmount > 0 ? '#1eb150' : '#f0403f',
     })))
   }
 
@@ -196,13 +197,21 @@ class Candlestick extends React.PureComponent {
     }
   }
 
+  cleanChartData = () => {
+    this.chart.unsubscribeVisibleTimeRangeChange(this.onTimeRangeChange)
+    this.chart.remove()
+
+    this.candleSeries = null
+    this.tradeSeries = null
+    this.volumeSeries = null
+  }
+
   recreateChart = () => {
     if (!this.chart) {
       return
     }
 
-    this.chart.unsubscribeVisibleTimeRangeChange(this.onTimeRangeChange)
-    this.chart.remove()
+    this.cleanChartData()
     this.createChart()
   }
 

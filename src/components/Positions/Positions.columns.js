@@ -6,6 +6,7 @@ import {
 } from '@blueprintjs/table'
 
 import queryConstants from 'state/query/constants'
+import JSONFormat from 'ui/JSONFormat'
 import { formatAmount, fixedFloat } from 'ui/utils'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
@@ -107,15 +108,16 @@ export default function getColumns(props) {
       {
         id: 'meta',
         name: 'column.meta',
-        width: 160,
+        width: COLUMN_WIDTHS.META,
         renderer: (rowIndex) => {
           const { meta = '' } = filteredData[rowIndex]
-          const metaData = JSON.stringify(meta)
+          const formattedMeta = JSON.stringify(meta, undefined, 2)
+
           return (
-            <Cell tooltip={metaData}>
-              <TruncatedFormat>
-                {metaData}
-              </TruncatedFormat>
+            <Cell>
+              <JSONFormat content={formattedMeta}>
+                {formattedMeta}
+              </JSONFormat>
             </Cell>
           )
         },

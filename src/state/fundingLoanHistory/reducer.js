@@ -58,7 +58,7 @@ export function fundingLoanHistoryReducer(state = initialState, action) {
           renew,
           side,
           status,
-          type,
+          type, // eslint-disable-line no-shadow
           symbol,
         } = entry
         const currentSymbol = mapSymbol(symbol.slice(1))
