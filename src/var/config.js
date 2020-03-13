@@ -18,7 +18,7 @@ const platforms = {
     hideSwitchTheme: true,
   },
   test: {
-    API_URL: 'https://test-report.bitfinex.com/api',
+    API_URL: 'https://bfx-report-ui.staging.bitfinex.com/api',
     KEY_URL: 'https://test.bitfinex.com/api',
     HOME_URL: 'https://test.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
