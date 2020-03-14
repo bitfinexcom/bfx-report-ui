@@ -7,13 +7,15 @@ const initPairsState = {
 
 const initialState = {
   syncMode: types.MODE_ONLINE,
-  publicTrades: initPairsState,
-  publicFunding: {
-    symbols: [],
-    startTime: undefined,
+  config: {
+    publicTradesConf: initPairsState,
+    publicFundingConf: {
+      symbols: [],
+      startTime: undefined,
+    },
+    tickersHistoryConf: initPairsState,
+    candlesConf: initPairsState,
   },
-  tickersHistory: initPairsState,
-  candles: initPairsState,
   progress: 0,
 }
 
@@ -26,13 +28,25 @@ export function syncReducer(state = initialState, action) {
         syncMode: payload,
       }
     }
+    case types.EDIT_CONFIG: {
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          ...payload,
+        },
+      }
+    }
     case types.EDIT_PUBLIC_TRADES_PREF: {
       const { pairs, startTime } = payload
       return {
         ...state,
-        publicTrades: {
-          pairs,
-          startTime,
+        config: {
+          ...state.config,
+          publicTradesConf: {
+            pairs,
+            startTime,
+          },
         },
       }
     }
@@ -40,9 +54,12 @@ export function syncReducer(state = initialState, action) {
       const { symbols, startTime } = payload
       return {
         ...state,
-        publicFunding: {
-          symbols,
-          startTime,
+        config: {
+          ...state.config,
+          publicFundingConf: {
+            symbols,
+            startTime,
+          },
         },
       }
     }
@@ -50,9 +67,25 @@ export function syncReducer(state = initialState, action) {
       const { pairs, startTime } = payload
       return {
         ...state,
-        tickersHistory: {
-          pairs,
-          startTime,
+        config: {
+          ...state.config,
+          tickersHistoryConf: {
+            pairs,
+            startTime,
+          },
+        },
+      }
+    }
+    case types.EDIT_CANDLES_PREF: {
+      const { pairs, startTime } = payload
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          candlesConf: {
+            pairs,
+            startTime,
+          },
         },
       }
     }

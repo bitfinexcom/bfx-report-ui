@@ -127,11 +127,23 @@ export function editCandlesPairPref(pairs, startTime) {
   }
 }
 
+/**
+ * Create an action to edit sync config.
+ * @param {object} config
+ */
+export function editSyncConfig(config) {
+  return {
+    type: types.EDIT_CONFIG,
+    payload: config,
+  }
+}
+
 export default {
   editPublicTradesPref,
   editPublicTradesSymbolPref,
   editTickersHistoryPairPref,
   editCandlesPairPref,
+  editSyncConfig,
   forceQueryFromDb,
   setSyncMode,
   setSyncProgress,

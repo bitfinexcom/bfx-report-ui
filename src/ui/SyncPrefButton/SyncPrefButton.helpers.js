@@ -1,4 +1,4 @@
-import { getCandlesPref, getPublicTradesPref, getTickersHistoryPref } from 'state/sync/selectors'
+import { getCandlesPref, getPublicTradesPref, getTickersHistoryConf } from 'state/sync/selectors'
 import { editCandlesPairPref, editPublicTradesPref, editTickersHistoryPairPref } from 'state/sync/actions'
 import queryConstants from 'state/query/constants'
 
@@ -9,7 +9,7 @@ export const getSyncPref = (state, section) => {
     case MENU_PUBLIC_TRADES:
       return getPublicTradesPref(state)
     case MENU_TICKERS:
-      return getTickersHistoryPref(state)
+      return getTickersHistoryConf(state)
     case MENU_CANDLES:
       return getCandlesPref(state)
     default:
