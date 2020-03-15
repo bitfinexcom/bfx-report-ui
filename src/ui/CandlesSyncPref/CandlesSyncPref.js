@@ -142,6 +142,11 @@ class CandlesSyncPref extends PureComponent {
     return currentOptions.length !== options.length || hasFilterValueChanged
   }
 
+  canSave = () => {
+    const { options } = this.state
+    return !options.some(option => !option.start)
+  }
+
   render() {
     const { syncMode, t } = this.props
     const { isOpen, options } = this.state
@@ -151,6 +156,7 @@ class CandlesSyncPref extends PureComponent {
     }
 
     const hasChanges = this.hasChanges()
+    const canSave = this.canSave()
 
     const renderInSyncWarning = syncMode === mode.MODE_SYNCING
       ? (
@@ -216,7 +222,7 @@ class CandlesSyncPref extends PureComponent {
                     />
                     <div className='candles-sync-pref-item-date'>
                       <DateInput
-                        onChange={val => this.updateOption({ index, start: val.getTime() })}
+                        onChange={val => this.updateOption({ index, start: val && val.getTime() })}
                         defaultValue={start}
                       />
                     </div>
@@ -250,7 +256,7 @@ class CandlesSyncPref extends PureComponent {
                 <AnchorButton
                   onClick={this.handleApply}
                   intent={Intent.PRIMARY}
-                  disabled={(syncMode === mode.MODE_SYNCING || !hasChanges)}
+                  disabled={(syncMode === mode.MODE_SYNCING || !hasChanges || !canSave)}
                 >
                   {t('preferences.sync.btn-apply')}
                 </AnchorButton>
