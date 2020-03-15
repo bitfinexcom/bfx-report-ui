@@ -20,59 +20,64 @@ import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './SyncSymbolPrefButton.props'
 
-const initState = {
-  isOpen: false,
-  tempSymbols: [],
-  tempTime: undefined,
-}
-
 class SyncSymbolPrefButton extends PureComponent {
   static propTypes = propTypes
 
   static defaultProps = defaultProps
 
+  constructor(props) {
+    super(props)
 
-  state = initState
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    // fill init state from props
-    if (prevState.tempSymbols.length === 0 || prevState.tempTime === undefined) {
-      return {
-        tempSymbols: nextProps.syncSymbols,
-        tempTime: new Date(nextProps.startTime),
-      }
-    }
-    return null
+    this.state = this.getInitialState()
   }
 
-  handleOpen = (e) => {
-    e.preventDefault()
+  componentDidUpdate(prevProps) {
+    const { syncSymbols } = this.props
+
+    if (syncSymbols !== prevProps.syncSymbols) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        symbols: syncSymbols,
+      })
+    }
+  }
+
+  getInitialState = () => {
+    const { syncSymbols, startTime } = this.props
+
+    return {
+      isOpen: false,
+      symbols: syncSymbols,
+      start: startTime,
+    }
+  }
+
+  handleOpen = () => {
     this.setState({ isOpen: true })
   }
 
-  handleClose = (e) => {
-    e.preventDefault()
-    this.setState(initState)
+  handleClose = () => {
+    this.setState(this.getInitialState())
   }
 
   toggleSymbol = (symbol) => {
-    const { tempSymbols } = this.state
+    const { symbols } = this.state
 
-    if (tempSymbols.includes(symbol)) {
-      this.setState({ tempSymbols: tempSymbols.filter(tag => tag !== symbol) })
+    if (symbols.includes(symbol)) {
+      this.setState({ symbols: symbols.filter(tag => tag !== symbol) })
     } else {
-      this.setState({ tempSymbols: [...tempSymbols, symbol] })
+      this.setState({ symbols: [...symbols, symbol] })
     }
   }
 
   handleDateChange = (time) => {
-    this.setState({ tempTime: time })
+    this.setState({ start: time })
   }
 
   handleApply = () => {
-    const { tempSymbols, tempTime } = this.state
+    const { symbols, start } = this.state
     const { setSyncPref } = this.props
-    setSyncPref(tempSymbols, tempTime, true)
+    setSyncPref(symbols, start, true)
     this.setState({ isOpen: false })
   }
 
@@ -80,13 +85,14 @@ class SyncSymbolPrefButton extends PureComponent {
     const {
       syncMode,
       syncSymbols,
+      startTime,
       t,
       textOnly,
     } = this.props
     const {
       isOpen,
-      tempSymbols,
-      tempTime,
+      symbols,
+      start,
     } = this.state
     const renderInSyncWarning = syncMode === mode.MODE_SYNCING
       ? (
@@ -138,7 +144,7 @@ class SyncSymbolPrefButton extends PureComponent {
                 </div>
                 <div className={dialogFieldStyle}>
                   <MultiSymbolSelector
-                    currentFilters={tempSymbols}
+                    currentFilters={symbols}
                     existingCoins={syncSymbols}
                     toggleSymbol={this.toggleSymbol}
                     onSymbolSelect={this.addSymbol}
@@ -151,7 +157,7 @@ class SyncSymbolPrefButton extends PureComponent {
                   {t('preferences.sync.starttime')}
                 </div>
                 <div className={dialogFieldStyle}>
-                  <DateInput onChange={this.handleDateChange} defaultValue={tempTime} />
+                  <DateInput key={startTime} onChange={this.handleDateChange} defaultValue={startTime} />
                 </div>
               </div>
             </div>
@@ -171,8 +177,8 @@ class SyncSymbolPrefButton extends PureComponent {
                     intent={Intent.PRIMARY}
                     disabled={(
                       syncMode === mode.MODE_SYNCING
-                      || tempSymbols.length === 0
-                      || tempTime === undefined
+                      || !symbols.length
+                      || !start
                     )}
                   >
                     {t('preferences.sync.btn-apply')}

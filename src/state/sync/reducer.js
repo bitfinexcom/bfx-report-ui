@@ -10,7 +10,7 @@ const initialState = {
   config: {
     publicTradesConf: initPairsState,
     publicFundingConf: {
-      symbols: [],
+      symbols: ['USD'],
       startTime: undefined,
     },
     tickersHistoryConf: initPairsState,

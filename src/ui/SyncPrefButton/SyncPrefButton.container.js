@@ -11,12 +11,11 @@ const mapStateToProps = (state, props) => {
   const { sectionType } = props
 
   const { pairs, startTime } = getSyncPref(state, sectionType)
-  const { start } = getTimeFrame(getQuery(state))
 
   return {
     syncMode: getSyncMode(state),
     syncPairs: pairs,
-    startTime: startTime || new Date(start).getTime(),
+    startTime: startTime || getTimeFrame(getQuery(state)).start,
   }
 }
 
