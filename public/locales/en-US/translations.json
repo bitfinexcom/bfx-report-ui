@@ -264,6 +264,8 @@
     "dateformat": "Date Format:",
     "milliseconds": "Display Milliseconds:",
     "sync": {
+      "add-filter": "add filter",
+      "add-pair": "add pair",
       "title": "Sync preferences",
       "notset": "Sync preferences are not set yet",
       "description": "To access Public Trades and Tickers offline, you need to setup offline available pairs and the start query time.",

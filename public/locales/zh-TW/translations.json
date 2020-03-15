@@ -239,6 +239,8 @@
     "dateformat": "日期格式:",
     "milliseconds": "顯示毫秒:",
     "sync": {
+      "add-filter": "add filter",
+      "add-pair": "add pair",
       "title": "同步偏好設定",
       "notset": "同步偏好尚未設定",
       "description": "為了離線查詢公開交易與牌價，請先設定欲離線查詢的交易對與開始日期。",

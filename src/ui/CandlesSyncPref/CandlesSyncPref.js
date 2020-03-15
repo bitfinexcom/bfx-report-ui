@@ -232,7 +232,7 @@ class CandlesSyncPref extends PureComponent {
 
             {(options.length < MAX_OPTIONS) && (
               <div className='candles-sync-pref-add' onClick={this.onOptionAdd}>
-                {'+ add option'}
+                {`+ ${t('preferences.sync.add-pair')}`}
               </div>
             )}
           </div>
