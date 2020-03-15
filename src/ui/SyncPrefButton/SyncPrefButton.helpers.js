@@ -1,8 +1,8 @@
-import { getCandlesPref, getPublicTradesPref, getTickersHistoryConf } from 'state/sync/selectors'
-import { editCandlesPairPref, editPublicTradesPref, editTickersHistoryPairPref } from 'state/sync/actions'
+import { getPublicTradesPref, getTickersHistoryConf } from 'state/sync/selectors'
+import { editPublicTradesPref, editTickersHistoryPairPref } from 'state/sync/actions'
 import queryConstants from 'state/query/constants'
 
-const { MENU_PUBLIC_TRADES, MENU_TICKERS, MENU_CANDLES } = queryConstants
+const { MENU_PUBLIC_TRADES, MENU_TICKERS } = queryConstants
 
 export const getSyncPref = (state, section) => {
   switch (section) {
@@ -10,8 +10,6 @@ export const getSyncPref = (state, section) => {
       return getPublicTradesPref(state)
     case MENU_TICKERS:
       return getTickersHistoryConf(state)
-    case MENU_CANDLES:
-      return getCandlesPref(state)
     default:
       return {
         pairs: ['BTC:USD'],
@@ -26,8 +24,6 @@ export const getSyncPrefFunc = (section) => {
       return editPublicTradesPref
     case MENU_TICKERS:
       return editTickersHistoryPairPref
-    case MENU_CANDLES:
-      return editCandlesPairPref
     default:
       return () => {}
   }

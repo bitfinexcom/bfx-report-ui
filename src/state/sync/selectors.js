@@ -16,9 +16,7 @@ export const getTickersHistoryConf = state => getSyncConf(state).tickersHistoryC
 export const getTickersHistoryStartTime = state => getTickersHistoryConf(state).startTime
 export const getTickersHistoryPairs = state => getTickersHistoryConf(state).pairs || []
 
-export const getCandlesPref = state => getSyncConf(state).candlesConf || {}
-export const getCandlesStartTime = state => getCandlesPref(state).startTime
-export const getCandlesPairs = state => getCandlesPref(state).pairs || []
+export const getCandlesConf = state => getSyncConf(state).candlesConf || []
 
 export default {
   getSyncMode,
@@ -31,7 +29,5 @@ export default {
   getTickersHistoryConf,
   getTickersHistoryStartTime,
   getTickersHistoryPairs,
-  getCandlesPref,
-  getCandlesStartTime,
-  getCandlesPairs,
+  getCandlesConf,
 }

@@ -59,18 +59,18 @@ export function* getSyncConf() {
     })
   }
 
-  if (!candlesConf.length) {
-    yield call(editSyncConfReq, {
-      candlesConf: [{ symbol: 'tBTCUSD', start: 0 }],
-    })
-  }
-
   const configs = {
     tickersHistoryConf: tickersHistoryConf.length
       ? {
         pairs: tickersHistoryConf.map(({ symbol }) => mapPair(formatPair(symbol))),
         startTime: tickersHistoryConf[0].start,
       }
+      : [],
+    candlesConf: candlesConf.length
+      ? candlesConf.map(data => ({
+        ...data,
+        symbol: mapPair(formatPair(data.symbol)),
+      }))
       : [],
   }
 
@@ -92,7 +92,7 @@ export function* getSyncConf() {
     }
     : { pairs: [], startTime: 0 }
 
-  return yield put(actions.editSyncConfig(configs))
+  return yield put(actions.editSyncConf(configs))
 }
 
 function* editPublicTradesConf({ payload }) {
@@ -167,12 +167,11 @@ function* editTickersHistoryConf({ payload }) {
   }
 }
 
-function* editCandlesConf({ payload }) {
-  const { pairs, startTime } = payload
-
-  const params = mapRequestPairs(pairs).map(pair => ({
-    symbol: formatRawSymbols(pair),
-    start: startTime,
+function* editCandlesConf({ payload: options }) {
+  const params = options.map(option => ({
+    start: option.start,
+    symbol: formatRawSymbols(mapRequestPairs(option.symbol, true)),
+    timeframe: option.timeframe,
   }))
 
   const { error } = yield call(editSyncConfReq, {

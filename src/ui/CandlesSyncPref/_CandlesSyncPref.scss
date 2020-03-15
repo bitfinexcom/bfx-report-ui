@@ -1,0 +1,83 @@
+.candles-sync-pref {
+  &-item {
+    padding: 5px 0;
+    width: 100%;
+
+    &-pair {
+      display: inline-block;
+      width: 140px;
+      margin-right: 10px;
+
+      .bp3-icon {
+        float: right;
+      }
+    }
+
+    &-timeframe {
+      display: inline-block;
+      width: 100px;
+      margin-right: 10px;
+    }
+
+    &-date {
+      display: inline-block;
+      width: 170px;
+      margin-right: 10px;
+    }
+
+    &-remove {
+      cursor: pointer;
+    }
+  }
+
+  &-add {
+    width: fit-content;
+    margin-top: 10px;
+    margin-bottom: -8px;
+    cursor: pointer;
+    color: #419eff;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .candles-sync-pref {
+    &-item {
+      margin: 0 auto;
+
+      &-wrapper {
+        width: 240px;
+        margin: 0 auto;
+        padding-left: 5px;
+      }
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #1c1c1c;
+      }
+
+      &-pair {
+        width: 140px;
+        margin-right: 10px;
+        margin-bottom: 5px;
+      }
+
+      &-timeframe {
+        width: 80px;
+        transform: translate(0, -2px);
+        margin-right: 0;
+      }
+
+      &-date {
+        width: 180px;
+        margin-right: 20px;
+      }
+    }
+  }
+}

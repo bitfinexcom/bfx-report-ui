@@ -14,7 +14,7 @@ const initialState = {
       startTime: undefined,
     },
     tickersHistoryConf: initPairsState,
-    candlesConf: initPairsState,
+    candlesConf: [],
   },
   progress: 0,
 }
@@ -77,15 +77,11 @@ export function syncReducer(state = initialState, action) {
       }
     }
     case types.EDIT_CANDLES_PREF: {
-      const { pairs, startTime } = payload
       return {
         ...state,
         config: {
           ...state.config,
-          candlesConf: {
-            pairs,
-            startTime,
-          },
+          candlesConf: payload,
         },
       }
     }
