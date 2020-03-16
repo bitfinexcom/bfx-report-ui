@@ -2,6 +2,13 @@
   "accountbalance": {
     "title": "賬戶餘額"
   },
+  "accountsummary": {
+    "title": "帳戶摘要",
+    "fees": "您在Bitfinex交易的手續費率（基於您的交易量）",
+    "fees_deriv": "您於衍生品交易的手續費率（基於您的交易量）",
+    "30dVolume": "過去30天交易量",
+    "margin_funds": "過去30天提供的保證金融資之總收益"
+  },
   "activepositions": {
     "title": "活躍的倉位"
   },
@@ -40,6 +47,7 @@
     "balanceUsd": "金額(美元)",
     "base-price": "基價",
     "bid": "買價",
+    "browser": "瀏覽器",
     "closed": "結束",
     "collateral": "抵押品",
     "created": "建立",
@@ -55,9 +63,11 @@
     "fundingAccrued": "下階段累計資金",
     "fundingStep": "下階段累加值",
     "id": "#",
+    "ip": "IP",
     "lastpayout": "結束",
     "liq-price": "清算價格",
     "meta": "後設資料",
+    "mobile": "行動裝置",
     "movementsTotal": "運用資金總額 (美元)",
     "opened": "開始",
     "orderid": "訂單 ID",
@@ -86,6 +96,8 @@
     "typeprev": "先前訂單類型",
     "updated": "更新",
     "usd": "美元",
+    "version": "版本",
+    "volume": "交易量",
     "wallet": "錢包",
     "walletsTotal": "錢包總餘額 (美元)"
   },
@@ -101,7 +113,9 @@
       "equalTo": "等於",
       "notEqualTo": "不等於",
       "greaterThan": "大於",
-      "lessThan": "少於"
+      "greaterThanEqual": "大於/等於",
+      "lessThan": "少於",
+      "lessThanEqual": "小於/等於"
     }
   },
   "columnsselect": {
@@ -185,7 +199,7 @@
     "title": "借貸報告"
   },
   "logins": {
-    "title": "Logins"
+    "title": "登入"
   },
   "movements": {
     "title": "活動"

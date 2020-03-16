@@ -2,6 +2,13 @@
   "accountbalance": {
     "title": "帐户余额"
   },
+  "accountsummary": {
+    "title": "帐号摘要",
+    "fees": "您于Bitfinex交易的手续费率（基于您的交易量）",
+    "fees_deriv": "您于衍生品交易的手续费率（基于您的交易量）",
+    "30dVolume": "过去30天交易量",
+    "margin_funds": "过去30天提供的保证金借贷之总收益"
+  },
   "activepositions": {
     "title": "有效仓位"
   },
@@ -40,6 +47,7 @@
     "balanceUsd": "余额 (USD)",
     "base-price": "基价",
     "bid": "委买",
+    "browser": "浏览器",
     "closed": "CLOSED",
     "collateral": "抵押品",
     "created": "创建时间",
@@ -55,9 +63,11 @@
     "fundingAccrued": "下阶段累计资金",
     "fundingStep": "下阶段累加值",
     "id": "#",
+    "ip": "IP",
     "lastpayout": "上一次支出",
     "liq-price": "清算价格",
     "meta": "元数据",
+    "mobile": "移动设备",
     "movementsTotal": "运用资金总额 (美元)",
     "opened": "已打开",
     "orderid": "订单 ID",
@@ -86,6 +96,8 @@
     "typeprev": "先前订单类型",
     "updated": "更新时间",
     "usd": "美元",
+    "version": "版本",
+    "volume": "交易量",
     "wallet": "钱包",
     "walletsTotal": "钱包总余额 (美元)"
   },
@@ -101,7 +113,9 @@
       "equalTo": "等于",
       "notEqualTo": "不等于",
       "greaterThan": "大于",
-      "lessThan": "少于"
+      "greaterThanEqual": "大于/等于",
+      "lessThan": "少于",
+      "lessThanEqual": "小于/等于"
     }
   },
   "columnsselect": {
@@ -185,7 +199,7 @@
     "title": "借贷报告"
   },
   "logins": {
-    "title": "Logins"
+    "title": "登录"
   },
   "movements": {
     "title": "移动"
