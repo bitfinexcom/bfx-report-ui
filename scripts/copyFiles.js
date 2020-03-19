@@ -43,20 +43,6 @@ const filesMap = {
       destination: 'public/favicon.ico',
     },
   ],
-  ethfinex: [
-    {
-      source: 'scripts/template/ethfinex-logo-dark.svg',
-      destination: 'src/components/Header/logo3-dark-theme.svg',
-    },
-    {
-      source: 'scripts/template/ethfinex-mlogo-dark.svg',
-      destination: 'src/components/Header/mobile_logo_dark.svg',
-    },
-    {
-      source: 'scripts/template/ethfinex-favicon.png',
-      destination: 'public/favicon.png',
-    },
-  ],
 }
 
 filesMap[platform].forEach((pair) => {
