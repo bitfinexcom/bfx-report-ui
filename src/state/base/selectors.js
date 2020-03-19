@@ -10,7 +10,6 @@ export const getApiKey = state => getBase(state).apiKey
 export const getApiSecret = state => getBase(state).apiSecret
 export const getAuthToken = state => getBase(state).authToken
 export const getLocale = state => getBase(state).locale
-export const getMenuMode = state => getBase(state).menuMode
 export const getTheme = state => getBase(state).theme || types.DEFAULT_THEME
 export const getTimezone = state => getBase(state).timezone
 export const getInputTimezone = state => getBase(state).inputTimezone
@@ -53,7 +52,6 @@ export default {
   getDateFormat,
   getFullTime,
   getLocale,
-  getMenuMode,
   getBaseQueryLimit,
   getShowMilliseconds,
   getTheme,

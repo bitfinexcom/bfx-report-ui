@@ -65,17 +65,6 @@ export function updateTheme() {
 }
 
 /**
- * Create an action to store menu mode.
- * @param {string} mode
- */
-export function setMenuMode(mode) {
-  return {
-    type: types.SET_MENU_MODE,
-    payload: mode,
-  }
-}
-
-/**
  * Create an action to store timezone.
  * @param {string} timezone
  */
@@ -136,7 +125,6 @@ export default {
   setAuthToken,
   setDateFormat,
   setLang,
-  setMenuMode,
   setQueryLimit,
   setTheme,
   setTimezone,

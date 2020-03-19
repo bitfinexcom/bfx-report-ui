@@ -10,7 +10,6 @@ const initialState = {
   authToken: '',
   dateFormat: types.DATE_FORMATS[0],
   locale: 'en',
-  menuMode: types.MENU_MODE_NORMAL,
   queryLimit: 0,
   theme: types.DEFAULT_THEME,
   timezone: types.DEFAULT_TIMEZONE,
@@ -45,11 +44,6 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         theme: payload,
-      }
-    case types.SET_MENU_MODE:
-      return {
-        ...state,
-        menuMode: payload,
       }
     case authTypes.LOGOUT:
       return {

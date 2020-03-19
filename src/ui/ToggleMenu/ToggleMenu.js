@@ -103,22 +103,24 @@ class ToggleMenu extends PureComponent {
   render() {
     const {
       handleClickCustom,
-      menuMode,
       target,
       t,
     } = this.props
-    const isIconMode = menuMode === baseType.MENU_MODE_ICON
+
+    // TODO: add listener and take value from state
+    const windowWidth = window.innerWidth
+    const isIconMode = windowWidth < 992
 
     const classes = classNames('bitfinex-nav-menu', {
-      'bitfinex-compact-menu hidden-xs hidden-sm hidden-md': isIconMode,
-      'hidden-xs hidden-sm hidden-md col-lg-1 col-xl-2': menuMode === baseType.MENU_MODE_NORMAL,
+      'hidden-xs hidden-sm bitfinex-compact-menu': isIconMode,
+      'hidden-xs hidden-sm hidden-md col-lg-1 col-xl-2': !isIconMode,
     })
 
     return (
       <Menu large className={classes}>
         <Timeframe
           handleClickCustom={handleClickCustom}
-          menuMode={menuMode}
+          menuMode={isIconMode ? baseType.MENU_MODE_ICON : baseType.MENU_MODE_NORMAL}
         />
         <MenuDivider />
 

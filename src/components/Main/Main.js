@@ -144,7 +144,6 @@ class Main extends PureComponent {
       history,
       isCustomOpen,
       location,
-      menuMode,
     } = this.props
     const {
       endDate,
@@ -158,7 +157,6 @@ class Main extends PureComponent {
           target={target}
           handleClickCustom={this.handleClickCustom}
           history={history}
-          menuMode={menuMode}
         />
         <div className='bitfinex-dataset'>
           <Switch>
