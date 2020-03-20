@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import classNames from 'classnames'
 import { Menu, MenuDivider, MenuItem } from '@blueprintjs/core'
 import _castArray from 'lodash/castArray'
 import _includes from 'lodash/includes'
 
-import Tooltip from 'ui/Tooltip'
 import Timeframe from 'components/Timeframe'
 import queryType from 'state/query/constants'
 import baseType from 'state/base/constants'
@@ -107,20 +105,11 @@ class ToggleMenu extends PureComponent {
       t,
     } = this.props
 
-    // TODO: add listener and take value from state
-    const windowWidth = window.innerWidth
-    const isIconMode = windowWidth < 992
-
-    const classes = classNames('bitfinex-nav-menu', {
-      'hidden-xs hidden-sm bitfinex-compact-menu': isIconMode,
-      'hidden-xs hidden-sm hidden-md col-lg-1 col-xl-2': !isIconMode,
-    })
-
     return (
-      <Menu large className={classes}>
+      <Menu large className='bitfinex-nav-menu hidden-xs hidden-sm hidden-md col-lg-1 col-xl-2'>
         <Timeframe
           handleClickCustom={handleClickCustom}
-          menuMode={isIconMode ? baseType.MENU_MODE_ICON : baseType.MENU_MODE_NORMAL}
+          menuMode={baseType.MENU_MODE_NORMAL}
         />
         <MenuDivider />
 
@@ -135,21 +124,22 @@ class ToggleMenu extends PureComponent {
             return <MenuDivider key={index} />
           }
 
+
           const types = _castArray(type)
           const mainType = types[0]
 
+          const Icon = getIcon(mainType)
           const [path] = _castArray(getPath(mainType))
 
           return (
-            <Tooltip content={isIconMode ? t(title) : ''} key={index}>
-              <MenuItem
-                icon={getIcon(mainType)}
-                text={isIconMode ? '' : t(title)}
-                onClick={(e) => this.handleClick(e, mainType)}
-                href={path}
-                active={_includes(types, target)}
-              />
-            </Tooltip>
+            <MenuItem
+              icon={<Icon />}
+              key={mainType}
+              text={t(title)}
+              onClick={(e) => this.handleClick(e, mainType)}
+              href={path}
+              active={_includes(types, target)}
+            />
           )
         })}
       </Menu>

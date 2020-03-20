@@ -82,6 +82,13 @@ body.#{$ns}-light .bitfinex-logo--dark {
 
 .bitfinex-nav-menu {
   min-width: 225px;
+  padding: 5px 10px;
+
+  svg {
+    width: 18px;
+    height: 20px;
+    margin-right: 14px;
+  }
 }
 
 .bitfinex-compact-menu.#{$ns}-menu {

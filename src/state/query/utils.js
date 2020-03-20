@@ -1,6 +1,6 @@
-import { IconNames } from '@blueprintjs/icons'
 import _isArray from 'lodash/isArray'
 
+import Icons from 'icons'
 import { platform } from 'var/config'
 
 import queryType from './constants'
@@ -192,169 +192,169 @@ export function isValidTimeStamp(n) {
  */
 const MAPPING = {
   [MENU_ACCOUNT_BALANCE]: {
-    icon: IconNames.CHART,
+    icon: Icons.ACCOUNT_BALANCE,
     path: '/account_balance',
   },
   [MENU_ACCOUNT_SUMMARY]: {
-    icon: IconNames.TIMELINE_BAR_CHART,
+    icon: Icons.FILE_TABLE,
     path: '/account_summary',
   },
   [MENU_CANDLES]: {
-    icon: IconNames.EXCHANGE,
+    icon: Icons.LOOP,
     path: '/candles',
     queryLimit: 500,
   },
   [MENU_CONCENTRATION_RISK]: {
-    icon: IconNames.CHART,
+    icon: Icons.DISK,
     path: '/concentration_risk',
   },
   [MENU_DERIVATIVES]: {
-    icon: IconNames.SERIES_DERIVED,
+    icon: Icons.DERIVATIVES,
     filterType: FILTER_PAIR,
     path: '/derivatives',
   },
   [MENU_FCREDIT]: {
-    icon: IconNames.BOOK,
+    icon: Icons.NOTEBOOK,
     path: '/credits',
     filterType: FILTER_SYMBOL,
     queryLimit: 500,
     pageSize: 125,
   },
   [MENU_FEES_REPORT]: {
-    icon: IconNames.CHART,
+    icon: Icons.FILE_TABLE,
     path: '/fees_report',
   },
   [MENU_FLOAN]: {
-    icon: IconNames.BOOK,
+    icon: Icons.NOTEBOOK,
     path: '/loans',
     filterType: FILTER_SYMBOL,
     queryLimit: 500,
     pageSize: 125,
   },
   [MENU_FOFFER]: {
-    icon: IconNames.BOOK,
+    icon: Icons.NOTEBOOK,
     path: '/offers',
     filterType: FILTER_SYMBOL,
     queryLimit: 500,
     pageSize: 125,
   },
   [MENU_FPAYMENT]: {
-    icon: IconNames.BOOK,
+    icon: Icons.NOTEBOOK,
     path: '/payments',
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
     pageSize: 125,
   },
   [MENU_AFFILIATES_EARNINGS]: {
-    icon: IconNames.BOOK,
+    icon: Icons.NOTEBOOK,
     path: '/affiliates',
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
     pageSize: 125,
   },
   [MENU_LEDGERS]: {
-    icon: IconNames.BOOK,
+    icon: Icons.NOTEBOOK,
     path: ['/ledgers', '/'],
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
     pageSize: 125,
   },
   [MENU_LOAN_REPORT]: {
-    icon: IconNames.CHART,
+    icon: Icons.STICKY_NOTES,
     path: '/loan_report',
   },
   [MENU_LOGINS]: {
-    icon: IconNames.LOG_IN,
+    icon: Icons.SIGN_IN,
     path: '/logins',
     queryLimit: 50, // 250 maximum
     pageSize: 50,
   },
   [MENU_ORDERS]: {
-    icon: IconNames.FLOWS,
+    icon: Icons.ORDERS,
     path: '/orders',
     filterType: FILTER_PAIR,
     // queryLimit: 500,
     pageSize: 125,
   },
   [MENU_ORDER_TRADES]: {
-    icon: IconNames.FLOWS,
+    icon: Icons.ORDERS,
     path: '/order_trades',
     filterType: FILTER_ID,
   },
   [MENU_TICKERS]: {
-    icon: IconNames.PROPERTY,
+    icon: Icons.TICKERS,
     path: '/tickers',
     filterType: FILTER_PAIR,
     queryLimit: 250,
     pageSize: 125,
   },
   [MENU_TRADES]: {
-    icon: IconNames.EXCHANGE,
+    icon: Icons.LOOP,
     path: '/trades',
     filterType: FILTER_PAIR,
     // queryLimit: 1000,
     pageSize: 125,
   },
   [MENU_MOVEMENTS]: {
-    icon: IconNames.EXCHANGE,
+    icon: Icons.MOVEMENTS,
     path: '/movements',
     filterType: FILTER_SYMBOL,
     queryLimit: 25,
     pageSize: 25,
   },
   [MENU_WIN_LOSS]: {
-    icon: IconNames.CHART,
+    icon: Icons.SLIDER_CIRCLE_H,
     path: '/average_win_loss',
   },
   [MENU_PUBLIC_FUNDING]: {
-    icon: IconNames.EXCHANGE,
+    icon: Icons.LOOP,
     path: '/pub_trades_funding',
     filterType: FILTER_SYMBOL,
     queryLimit: 5000,
     pageSize: 125,
   },
   [MENU_PUBLIC_TRADES]: {
-    icon: IconNames.EXCHANGE,
+    icon: Icons.LOOP,
     path: '/pub_trades',
     filterType: FILTER_PAIR,
     queryLimit: 5000,
     pageSize: 125,
   },
   [MENU_POSITIONS]: {
-    icon: IconNames.NUMBERED_LIST,
+    icon: Icons.LIST_NUMBER,
     path: '/positions',
     filterType: FILTER_PAIR,
     queryLimit: 50,
     pageSize: 25,
   },
   [MENU_POSITIONS_ACTIVE]: {
-    icon: IconNames.NUMBERED_LIST,
+    icon: Icons.LIST_NUMBER,
     path: '/activepositions',
     filterType: FILTER_PAIR,
     queryLimit: 50,
     pageSize: 25,
   },
   [MENU_POSITIONS_AUDIT]: {
-    icon: IconNames.NUMBERED_LIST,
+    icon: Icons.LIST_NUMBER,
     path: '/positions_audit',
     filterType: FILTER_ID,
     queryLimit: 250,
     pageSize: 125,
   },
   [MENU_SNAPSHOTS]: {
-    icon: IconNames.HISTORY,
+    icon: Icons.COLLAPSE_WIDE,
     path: ['/snapshots_positions', '/snapshots_tickers', '/snapshots_wallets'],
   },
   [MENU_TAX_REPORT]: {
-    icon: IconNames.HISTORY,
+    icon: Icons.FEES_REPORT,
     path: '/tax_report',
   },
   [MENU_TRADED_VOLUME]: {
-    icon: IconNames.CHART,
+    icon: Icons.TRADE_VOLUME,
     path: '/traded_volume',
   },
   [MENU_WALLETS]: {
-    icon: IconNames.DOLLAR,
+    icon: Icons.WALLET,
     path: '/wallets',
   },
 }
