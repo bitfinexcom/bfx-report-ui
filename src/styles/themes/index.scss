@@ -1,1 +1,79 @@
+@import 'dark';
+@import 'light';
 @import 'midnight';
+
+.bp3-navbar, .bp3-card, .bp3-menu, .bp3-table-container {
+  background-color: inherit;
+  color: inherit;
+}
+
+body {
+  background-color: var(--bgColor);
+  color: var(--color);
+
+  .header {
+    .bp3-navbar {
+      box-shadow: 0 0 0 2px var(--borderColor), 0 0 0 var(--borderColor), 0 1px 1px var(--borderColor);
+    }
+  }
+
+  .bitfinex-nav-menu {
+    box-shadow: 0 2px 0 2px var(--borderColor);
+    clip-path: inset(0 -2px 0 0);
+    margin-left: -7px;
+  }
+
+  .bp3-card.bp3-elevation-0 {
+    box-shadow: none;
+  }
+
+  .bitfinex-dataset {
+    min-height: calc(100vh - 50px); // minus header height
+  }
+
+  // table specific styles
+  .bp3-table-container {
+    box-shadow: 0 0 0 1px var(--tableBorder);
+    //color: var(--tableColor);
+  }
+
+  .bp3-table-column-headers .bp3-table-header {
+    box-shadow: 0 1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+  }
+
+  .bp3-table-column-name {
+    font-size: 13px;
+    color: var(--thColor);
+  }
+
+  .bp3-table-column-headers {
+    background-color: var(--thBg);
+    color: inherit;
+  }
+
+  .bp3-table-selection-enabled .bp3-table-header:hover::before {
+    background-color: var(--thBgHover);
+  }
+
+  .bp3-table-cell {
+    color: var(--tableColor);
+  }
+
+  .bp3-table-cell-ledger {
+    &-even {
+      background-color: var(--tableEvenBg);
+    }
+
+    &-odd {
+      background-color: var(--tableOddBg);
+    }
+  }
+
+  .bp3-table-quadrant-scroll-container {
+    background-color: var(--bgColor);
+  }
+
+  .bp3-table-cell {
+    box-shadow: inset 0 -1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+  }
+}
