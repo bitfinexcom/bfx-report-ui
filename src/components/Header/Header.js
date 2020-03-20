@@ -75,7 +75,7 @@ class Header extends PureComponent {
 
     return (
       <div className='header'>
-        <Navbar fixedToTop>
+        <Navbar>
           <NavbarGroup align='left'>
             <NavbarHeading>
               {renderBrand}
