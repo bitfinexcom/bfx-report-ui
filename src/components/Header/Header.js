@@ -1,9 +1,4 @@
 import React, { PureComponent } from 'react'
-import {
-  Navbar,
-  NavbarGroup,
-  NavbarHeading,
-} from '@blueprintjs/core'
 
 import Status from 'components/Status'
 import PrefMenu from 'components/PrefMenu'
@@ -67,27 +62,17 @@ class Header extends PureComponent {
 
     const HOME_URL = REACT_APP_ELECTRON ? '/' : platform.HOME_URL
 
-    const renderBrand = (
-      <a href={HOME_URL}>
-        <PlatformLogo />
-      </a>
-    )
-
     return (
       <div className='header'>
-        <Navbar>
-          <NavbarGroup align='left'>
-            <NavbarHeading>
-              {renderBrand}
-              {renderEmail}
-            </NavbarHeading>
-          </NavbarGroup>
-          <NavbarGroup align='right'>
-            <HelpLink />
-            {renderMenu}
-            {renderSyncMode}
-          </NavbarGroup>
-        </Navbar>
+        <div className='header-brand'>
+          <a href={HOME_URL} className='header-brand-logo'>
+            <PlatformLogo />
+          </a>
+        </div>
+        {renderEmail}
+        <HelpLink />
+        {renderMenu}
+        {renderSyncMode}
         <div className='row'>
           <Status />
         </div>

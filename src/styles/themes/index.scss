@@ -11,12 +11,6 @@ body {
   background-color: var(--bgColor);
   color: var(--color);
 
-  .header {
-    .bp3-navbar {
-      box-shadow: 0 0 0 2px var(--borderColor), 0 0 0 var(--borderColor), 0 1px 1px var(--borderColor);
-    }
-  }
-
   .bitfinex-nav-menu {
     box-shadow: 0 2px 0 2px var(--borderColor);
     clip-path: inset(0 -2px 0 0);

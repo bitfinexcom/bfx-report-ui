@@ -1,7 +1,10 @@
 .bitfinex-nav-menu {
-  min-width: 225px;
-  margin-left: -7px;
+  width: 282px;
+  margin-left: -8px;
   padding: 0;
+  border-radius: 0;
+  box-shadow: 0 2px 0 2px var(--borderColor);
+  clip-path: inset(0 -2px 0 0);
 
   .bp3-menu-item {
     display: block;
@@ -20,10 +23,24 @@
     div {
       display: inline-block;
     }
+
+    &.bp3-active {
+      background-color: var(--menuActive);
+      border-right: 6px solid var(--menuActiveBorder);
+      color: var(--activeColor);
+
+      svg {
+        stroke: var(--activeColor);
+      }
+    }
+
+    &:hover {
+      background-color: var(--menuHover);
+    }
   }
 
   .bp3-menu-divider {
     margin: 0;
-    border-top: 2px solid;
+    border-top: 2px solid var(--borderColor);
   }
 }
