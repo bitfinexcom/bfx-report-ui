@@ -36,7 +36,7 @@ import Wallets from 'components/Wallets'
 import ExportDialog from 'components/ExportDialog'
 import queryType from 'state/query/constants'
 import { getPath, getTarget } from 'state/query/utils'
-import ToggleMenu from 'ui/ToggleMenu'
+import NavMenu from 'ui/NavMenu'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Main.props'
@@ -153,11 +153,7 @@ class Main extends PureComponent {
 
     return authStatus && !authIsShown ? (
       <div className='row'>
-        <ToggleMenu
-          target={target}
-          handleClickCustom={this.handleClickCustom}
-          history={history}
-        />
+        <NavMenu target={target} history={history} />
         <div className='bitfinex-dataset'>
           <Switch>
             <Route

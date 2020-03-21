@@ -1,0 +1,29 @@
+.bitfinex-nav-menu {
+  min-width: 225px;
+  margin-left: -7px;
+  padding: 0;
+
+  .bp3-menu-item {
+    display: block;
+    width: 282px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 0 0 20px;
+    font-size: 18px;
+    border-radius: 0;
+
+    svg {
+      height: 50px;
+      margin-right: 14px;
+    }
+
+    div {
+      display: inline-block;
+    }
+  }
+
+  .bp3-menu-divider {
+    margin: 0;
+    border-top: 2px solid;
+  }
+}

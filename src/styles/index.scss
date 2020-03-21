@@ -11,7 +11,9 @@
 @import "ui/ColumnsFilter/_ColumnsFilter.scss";
 @import "ui/ColumnsSelect/_ColumnsSelect.scss";
 @import "ui/DataTable/_DataTable.scss";
+@import "ui/NavMenu/_NavMenu.scss";
 @import "ui/Pagination/_Pagination.scss";
+@import "ui/PlatformLogo/_PlatformLogo.scss";
 @import "themes";
 
 body {
@@ -26,7 +28,7 @@ div.bitfinex-auth {
   flex-direction: column;
   display: flex;
 
-  > .bitfinex-logo {
+  > .platform-logo {
     position: relative;
     width: 250px;
     margin: 0 auto 40px;
@@ -66,34 +68,6 @@ div.bitfinex-auth {
 
 .bitfinex-dropdown > div {
   font-size: 11px;
-}
-
-/* normal size logo */
-.bitfinex-logo {
-  width: 176px;
-  position: relative;
-  top: 5px;
-}
-
-body.#{$ns}-dark .bitfinex-logo--light,
-body.#{$ns}-light .bitfinex-logo--dark {
-  display: none;
-}
-
-.bitfinex-nav-menu {
-  min-width: 225px;
-  padding: 5px 10px;
-
-  svg {
-    width: 18px;
-    height: 20px;
-    margin-right: 14px;
-  }
-}
-
-.bitfinex-compact-menu.#{$ns}-menu {
-  min-width: 40px;
-  width: 40px;
 }
 
 .bitfinex-timeframe {
@@ -233,18 +207,3 @@ div.bp3-multi-select {
     margin: 5px 2px 5px 0;
   }
 }
-
-@media screen and (max-width: 991px) {
-  .bitfinex-nav-menu {
-    overflow: auto;
-    max-height: calc(100vh - 60px);
-  }
-}
-
-@media screen and (max-width: 720px) {
-  .bitfinex-logo {
-    width: 130px;
-    height: 20px;
-  }
-}
-

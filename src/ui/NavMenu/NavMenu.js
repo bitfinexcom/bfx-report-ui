@@ -4,13 +4,11 @@ import { Menu, MenuDivider, MenuItem } from '@blueprintjs/core'
 import _castArray from 'lodash/castArray'
 import _includes from 'lodash/includes'
 
-import Timeframe from 'components/Timeframe'
 import queryType from 'state/query/constants'
-import baseType from 'state/base/constants'
 import { getIcon, getPath } from 'state/query/utils'
 import { platform } from 'var/config'
 
-import { propTypes, defaultProps } from './ToggleMenu.props'
+import { propTypes, defaultProps } from './NavMenu.props'
 
 const { showFrameworkMode } = platform
 
@@ -46,7 +44,7 @@ const {
   MENU_WALLETS,
 } = queryType
 
-class ToggleMenu extends PureComponent {
+class NavMenu extends PureComponent {
   static propTypes = propTypes
 
   static defaultProps = defaultProps
@@ -97,22 +95,14 @@ class ToggleMenu extends PureComponent {
     window.scrollTo(0, 0) // scroll to the top of page on section change
   }
 
-  /* eslint-disable react/no-array-index-key */
   render() {
     const {
-      handleClickCustom,
       target,
       t,
     } = this.props
 
     return (
-      <Menu large className='bitfinex-nav-menu hidden-xs hidden-sm hidden-md col-lg-1 col-xl-2'>
-        <Timeframe
-          handleClickCustom={handleClickCustom}
-          menuMode={baseType.MENU_MODE_NORMAL}
-        />
-        <MenuDivider />
-
+      <Menu large className='bitfinex-nav-menu hidden-xs hidden-sm hidden-md'>
         {this.sections.map((section, index) => {
           const [type, title, isSkipped] = section
 
@@ -121,6 +111,7 @@ class ToggleMenu extends PureComponent {
           }
 
           if (type === 'divider') {
+            /* eslint-disable-next-line react/no-array-index-key */
             return <MenuDivider key={index} />
           }
 
@@ -147,4 +138,4 @@ class ToggleMenu extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(ToggleMenu)
+export default withTranslation('translations')(NavMenu)
