@@ -1,0 +1,30 @@
+.date-range-picker {
+  padding: 10px 20px;
+
+  .bp3-control-group {
+    display: block;
+    width: 100%;
+
+    .bp3-input-group {
+      width: 100%;
+      display: block;
+      margin: 15px 0;
+
+      .bp3-input {
+        text-align: center;
+        background-color: var(--bgColor);
+        color: var(--color);
+
+        &::placeholder {
+          color: var(--color);
+        }
+      }
+    }
+  }
+
+  .bp3-button {
+    float: right;
+    margin-top: 15px;
+    padding: 0 35px;
+  }
+}

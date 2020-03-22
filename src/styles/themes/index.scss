@@ -11,37 +11,12 @@ body {
   background-color: var(--bgColor);
   color: var(--color);
 
-  .bitfinex-nav-menu {
-    box-shadow: 0 2px 0 2px var(--borderColor);
-    clip-path: inset(0 -2px 0 0);
-
-    .bp3-menu-item {
-      &.bp3-active {
-        background-color: var(--menuActive);
-        border-right: 6px solid var(--menuActiveBorder);
-        color: var(--activeColor);
-
-        svg {
-          stroke: var(--activeColor);
-        }
-      }
-
-      &:hover {
-        background-color: var(--menuHover);
-      }
-    }
-
-    .bp3-menu-divider {
-      border-color: var(--borderColor);
-    }
-  }
-
   .bp3-card.bp3-elevation-0 {
     box-shadow: none;
   }
 
   .bitfinex-dataset {
-    min-height: calc(100vh - 50px); // minus header height
+    min-height: calc(100vh - 52px); // minus header height
   }
 
   // table specific styles

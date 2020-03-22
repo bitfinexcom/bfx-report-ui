@@ -9,6 +9,7 @@ import PlatformLogo from 'ui/PlatformLogo'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Header.props'
+import TimeFrame from './TimeFrame'
 import HelpLink from './HelpLink'
 
 const { REACT_APP_ELECTRON } = process.env
@@ -20,11 +21,6 @@ class Header extends PureComponent {
 
   state = {
     isPrefOpen: false,
-  }
-
-  authLogout = () => {
-    const { logout } = this.props
-    logout()
   }
 
   handleClickPref = (e) => {
@@ -42,6 +38,7 @@ class Header extends PureComponent {
       authIsShown,
       authStatus,
       email,
+      logout,
     } = this.props
     const { isPrefOpen } = this.state
 
@@ -50,7 +47,7 @@ class Header extends PureComponent {
     const renderMenu = isLogin ? (
       <PrefMenu
         isLogin={isLogin}
-        handleLogout={this.authLogout}
+        handleLogout={logout}
         handleClickPref={this.handleClickPref}
       />
     ) : (
@@ -69,6 +66,10 @@ class Header extends PureComponent {
             <PlatformLogo />
           </a>
         </div>
+        <div className='header-timeframe'>
+          <TimeFrame />
+        </div>
+
         {renderEmail}
         <HelpLink />
         {renderMenu}

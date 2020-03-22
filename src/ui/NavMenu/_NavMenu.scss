@@ -29,13 +29,18 @@
       border-right: 6px solid var(--menuActiveBorder);
       color: var(--activeColor);
 
-      svg {
-        stroke: var(--activeColor);
+      svg path {
+        fill: var(--activeColor);
       }
     }
 
     &:hover {
       background-color: var(--menuHover);
+      color: var(--activeColor);
+
+      svg path {
+        fill: var(--activeColor);
+      }
     }
   }
 

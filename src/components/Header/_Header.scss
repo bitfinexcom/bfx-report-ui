@@ -7,9 +7,9 @@
   &-brand {
     position: relative;
     display: inline-block;
-    width: 282px;
+    width: 284px;
     height: 100%;
-    box-shadow: 0 0 0 2px var(--borderColor);
+    border-right: 2px solid var(--borderColor);
 
     &-logo {
       display: block;
@@ -22,6 +22,15 @@
       bottom: 0;
       right: 0;
     }
+  }
+
+  &-timeframe {
+    display: inline-block;
+    vertical-align: top;
+    width: 274px;
+    height: 100%;
+    border-right: 2px solid var(--borderColor);
+    cursor: pointer;
   }
 
   &-email {

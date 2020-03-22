@@ -1,6 +1,8 @@
 import { ReactComponent as ACCOUNT_BALANCE } from './account-balance.svg'
 import { ReactComponent as CALENDAR } from './calendar.svg'
 import { ReactComponent as CHECKMARK_CIRCLE } from './checkmark-circle.svg'
+import { ReactComponent as CHEVRON_DOWN } from './chevron-down.svg'
+import { ReactComponent as CHEVRON_UP } from './chevron-up.svg'
 import { ReactComponent as CLOSE } from './close.svg'
 import { ReactComponent as COLLAPSE_WIDE } from './collapse-wide.svg'
 import { ReactComponent as DEPOSITS } from './deposits.svg'
@@ -29,6 +31,8 @@ export default {
   ACCOUNT_BALANCE,
   CALENDAR,
   CHECKMARK_CIRCLE,
+  CHEVRON_DOWN,
+  CHEVRON_UP,
   CLOSE,
   COLLAPSE_WIDE,
   DEPOSITS,

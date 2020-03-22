@@ -5,7 +5,7 @@ import { getTimezone } from 'state/base/selectors'
 import { getQuery, getTimeFrame, getTimeRange } from 'state/query/selectors'
 import { setTimeRange } from 'state/query/actions'
 
-import Timeframe from './Timeframe'
+import TimeFrame from './TimeFrame'
 
 function mapStateToProps(state) {
   const { start, end } = getTimeFrame(getQuery(state))
@@ -21,6 +21,6 @@ const mapDispatchToProps = {
   setTimeRange,
 }
 
-const TimeframeContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Timeframe))
+const TimeFrameContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(TimeFrame))
 
-export default TimeframeContainer
+export default TimeFrameContainer

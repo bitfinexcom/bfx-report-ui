@@ -40,7 +40,6 @@ import NavMenu from 'ui/NavMenu'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Main.props'
-import CustomDialog from './CustomDialog'
 
 const {
   MENU_ACCOUNT_BALANCE,
@@ -103,31 +102,6 @@ const PATHS = {
 }
 
 class Main extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handleClickCustom = this.handleCustomDialog.bind(this, true)
-    this.handleCustomDialogClose = this.handleCustomDialog.bind(this, false)
-  }
-
-  state = {
-    startDate: null,
-    endDate: new Date(),
-  }
-
-  handleCustomDialog = (show, e) => {
-    e.preventDefault()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.showCustomDialog(show)
-  }
-
-  handleRangeChange = (range) => {
-    const [startDate, endDate] = range
-    this.setState({
-      startDate,
-      endDate,
-    })
-  }
-
   startQuery = () => {
     const { startDate, endDate } = this.state
     const { setCustomTimeRange, showCustomDialog } = this.props
@@ -142,13 +116,8 @@ class Main extends PureComponent {
       authStatus,
       authIsShown,
       history,
-      isCustomOpen,
       location,
     } = this.props
-    const {
-      endDate,
-      startDate,
-    } = this.state
     const target = getTarget(location.pathname)
 
     return authStatus && !authIsShown ? (
@@ -320,15 +289,6 @@ class Main extends PureComponent {
             />
           </Switch>
         </div>
-        <CustomDialog
-          type={target}
-          isCustomOpen={isCustomOpen}
-          handleCustomDialogClose={this.handleCustomDialogClose}
-          handleRangeChange={this.handleRangeChange}
-          startQuery={this.startQuery}
-          startDate={startDate}
-          endDate={endDate}
-        />
         <ExportDialog />
         {platform.showFrameworkMode && <FrameworkDialog />}
         <PaginationDialog />

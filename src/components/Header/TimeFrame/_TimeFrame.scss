@@ -1,0 +1,70 @@
+.timeframe {
+  height: 50px;
+  line-height: 50px;
+  user-select: none;
+
+  &-wrapper {
+    height: 50px;
+
+    .chevron-up {
+      display: none;
+    }
+
+    &.bp3-active {
+      background-color: var(--bgColor2);
+      color: var(--activeColor);
+
+      svg path {
+        fill: var(--activeColor);
+      }
+
+      .chevron-down {
+        display: none;
+      }
+
+      .chevron-up {
+        display: inline-block;
+      }
+    }
+
+    &:hover {
+      background-color: var(--borderColor);
+      color: var(--activeColor);
+
+      svg path {
+        fill: var(--activeColor);
+      }
+    }
+  }
+
+  &-target {
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  svg {
+    height: 50px;
+  }
+
+  &-range {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 3px 0 10px;
+    font-size: 15px;
+  }
+
+  &-content {
+    width: 272px;
+    height: 174px;
+    background-color: var(--bgColor2);
+    box-shadow: 0 0 0 2px var(--borderColor);
+  }
+
+  .bp3-popover-content {
+    border-radius: 0;
+  }
+
+  .bp3-popover-target {
+    height: 52px;
+  }
+}

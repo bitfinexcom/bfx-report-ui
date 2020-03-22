@@ -3,7 +3,6 @@ import getDeviceType from 'utils/getDeviceType'
 import types from './constants'
 
 const initialState = {
-  isCustomDialogOpen: false,
   isExportDialogOpen: false,
   isFrameworkDialogOpen: false,
   isPaginationDialogOpen: false,
@@ -14,11 +13,6 @@ const initialState = {
 export function uiReducer(state = initialState, action) {
   const { type, payload = {} } = action
   switch (type) {
-    case types.SHOW_CUSTOM_DIALOG:
-      return {
-        ...state,
-        isCustomDialogOpen: payload,
-      }
     case types.TOGGLE_EXPORT_DIALOG:
       return {
         ...state,
