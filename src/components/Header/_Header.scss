@@ -1,4 +1,8 @@
+@import './TimeFrame/_TimeFrame.scss';
+
 .header {
+  @import './TimeFrameShortcut/_TimeFrameShortcut.scss';
+
   width: 100%;
   height: 50px;
   box-shadow: 0 0 0 2px var(--borderColor);

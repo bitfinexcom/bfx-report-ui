@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import { setCustomTimeRange } from 'state/query/actions'
 import { updateWarningStatus } from 'state/status/actions'
@@ -10,6 +11,6 @@ const mapDispatchToProps = {
   updateWarningStatus,
 }
 
-const DateRangePickerContainer = connect(null, mapDispatchToProps)(CustomDialog)
+const DateRangePickerContainer = withRouter(connect(null, mapDispatchToProps)(CustomDialog))
 
 export default DateRangePickerContainer

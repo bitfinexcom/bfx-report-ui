@@ -6,10 +6,12 @@ import PrefDialog from 'components/PrefDialog'
 import SyncMode from 'components/SyncMode'
 import LangMenu from 'ui/LangMenu'
 import PlatformLogo from 'ui/PlatformLogo'
+import constants from 'state/query/constants'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Header.props'
 import TimeFrame from './TimeFrame'
+import TimeFrameShortcut from './TimeFrameShortcut'
 import HelpLink from './HelpLink'
 
 const { REACT_APP_ELECTRON } = process.env
@@ -69,6 +71,14 @@ class Header extends PureComponent {
         <div className='header-timeframe'>
           <TimeFrame />
         </div>
+        <TimeFrameShortcut
+          title='timeframe.2w'
+          type={constants.TIME_RANGE_LAST_2WEEKS}
+        />
+        <TimeFrameShortcut
+          title='timeframe.past_month'
+          type={constants.TIME_RANGE_PAST_MONTH}
+        />
 
         {renderEmail}
         <HelpLink />

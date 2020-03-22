@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
+import queryString from 'query-string'
 import moment from 'moment-timezone'
 import {
   Button,
@@ -102,9 +103,24 @@ class DateRangePicker extends PureComponent {
 
   startQuery = () => {
     const { startDate, endDate } = this.state
-    const { setCustomTimeRange } = this.props
+    const { history, setCustomTimeRange } = this.props
     if (startDate !== null && endDate !== null) {
-      setCustomTimeRange(startDate.getTime(), endDate.getTime())
+      const start = startDate.getTime()
+      const end = endDate.getTime()
+
+      setCustomTimeRange(start, end)
+
+      const { pathname, search } = window.location
+      const parsed = queryString.parse(search)
+      const { range } = parsed
+      const [startStr, endStr] = range ? range.split('-') : [undefined, undefined]
+      if (`${start}` !== startStr || `${end}` !== endStr) {
+        const params = Object.assign(
+          parsed,
+          { range: `${start}-${end}` },
+        )
+        history.replace(`${pathname}?${queryString.stringify(params, { encode: false })}`)
+      }
     }
   }
 

@@ -1,0 +1,31 @@
+.timeframe-shortcut {
+  display: inline-block;
+  padding: 0 13px;
+  width: fit-content;
+  height: 100%;
+  line-height: 50px;
+  user-select: none;
+  vertical-align: top;
+  cursor: pointer;
+  border-right: 2px solid var(--borderColor);
+
+  &:hover {
+    background-color: var(--borderColor);
+    color: var(--activeColor);
+
+    svg path {
+      fill: var(--activeColor);
+    }
+  }
+
+  svg {
+    height: 50px;
+  }
+
+  &-title {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 3px 0 10px;
+    font-size: 15px;
+  }
+}
