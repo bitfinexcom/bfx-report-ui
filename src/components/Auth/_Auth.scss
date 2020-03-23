@@ -1,0 +1,38 @@
+.bitfinex-auth {
+  .bp3-dialog {
+    background-color: var(--bgColor2);
+
+    &-header {
+      background-color: var(--borderColor);
+      color: var(--color);
+
+      .bp3-heading {
+        color: var(--color);
+        font-weight: 400;
+      }
+    }
+
+    &-body {
+      margin-top: 10px;
+      font-size: 15px;
+      flex-direction: column;
+      display: flex;
+
+      > .platform-logo {
+        position: relative;
+        //width: 250px;
+        height: 26px;
+        margin: 15px auto 30px auto;
+      }
+
+      > .#{$ns}-callout {
+        margin: 0 auto 24px;
+      }
+
+      .bp3-form-group {
+        margin-left: 5px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

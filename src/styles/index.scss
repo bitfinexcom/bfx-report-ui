@@ -1,6 +1,7 @@
 @import "./variables.scss";
 @import "./fonts/roboto.css";
 
+@import "components/Auth/_Auth.scss";
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "components/Header/_Header.scss";
 @import "components/Header/TimeFrame/_TimeFrame.scss";
@@ -22,23 +23,6 @@ body {
   margin: 0;
   padding: 0 0 0 0;
   font-family: "Roboto", sans-serif;
-}
-
-div.bitfinex-auth {
-  margin-top: 10px;
-  font-size: 14px;
-  flex-direction: column;
-  display: flex;
-
-  > .platform-logo {
-    position: relative;
-    width: 250px;
-    margin: 0 auto 40px;
-  }
-
-  > .#{$ns}-callout {
-    margin: 0 auto 24px;
-  }
 }
 
 .bitfinex-dataset {

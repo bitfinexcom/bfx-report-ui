@@ -12,12 +12,6 @@
 
       .bp3-input {
         text-align: center;
-        background-color: var(--bgColor);
-        color: var(--color);
-
-        &::placeholder {
-          color: var(--color);
-        }
       }
     }
   }

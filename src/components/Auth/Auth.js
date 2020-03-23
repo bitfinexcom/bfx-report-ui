@@ -10,10 +10,8 @@ import {
 } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
+import PlatformLogo from 'ui/PlatformLogo'
 import { platform } from 'var/config'
-// eslint-disable-next-line import/no-unresolved
-import darkLogo from 'components/Header/logo3-dark-theme.svg'
-import lightLogo from 'components/Header//logo3-light-theme.svg'
 
 import { propTypes, defaultProps } from './Auth.props'
 import InputKey from './InputKey'
@@ -47,23 +45,15 @@ class Auth extends PureComponent {
       t,
     } = this.props
     const renderAuth = platform.showAuthPage ? (
-      <div className='row'>
+      <div className='row bitfinex-auth'>
         <Dialog
           title={t('auth.title')}
           isOpen
           isCloseButtonShown={false}
+          usePortal={false}
         >
-          <div className={`${Classes.DIALOG_BODY} bitfinex-auth`}>
-            <img
-              alt={platform.Name}
-              src={darkLogo}
-              className='bitfinex-logo bitfinex-logo--dark'
-            />
-            <img
-              alt={platform.Name}
-              src={lightLogo}
-              className='bitfinex-logo bitfinex-logo--light'
-            />
+          <div className={Classes.DIALOG_BODY}>
+            <PlatformLogo />
             <Callout>
               {t('auth.note1')}
               <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>

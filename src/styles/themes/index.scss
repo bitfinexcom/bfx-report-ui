@@ -19,6 +19,15 @@ body {
     min-height: calc(100vh - 52px); // minus header height
   }
 
+  .bp3-input {
+    background-color: var(--bgColor);
+    color: var(--Color);
+
+    &::placeholder {
+      color: var(--Color)
+    }
+  }
+
   // table specific styles
   .bp3-table-container {
     box-shadow: 0 0 0 1px var(--tableBorder);
