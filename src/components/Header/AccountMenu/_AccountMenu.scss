@@ -1,8 +1,10 @@
-.timeframe {
+.account-menu {
+  float: right;
   height: 50px;
   line-height: 50px;
   user-select: none;
   cursor: pointer;
+  border-left: 2px solid var(--borderColor);
 
   &-wrapper {
     height: 50px;
@@ -40,7 +42,7 @@
 
   &-target {
     width: fit-content;
-    margin: 0 auto;
+    padding: 0 13px;
   }
 
   svg {
@@ -48,17 +50,56 @@
   }
 
   &-range {
-    display: inline-block;
     vertical-align: top;
     margin: 0 3px 0 10px;
     font-size: 15px;
   }
 
   &-content {
-    width: 272px;
-    height: 174px;
+    width: 80%;
+    min-width: 235px;
+    height: 82px;
     background-color: var(--bgColor2);
     box-shadow: 0 0 0 2px var(--borderColor);
+
+    .bp3-menu {
+      padding: 0;
+
+      &-item {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 14px;
+
+        svg {
+          height: 40px;
+          margin-right: 14px;
+        }
+
+        &.bp3-active {
+          background-color: var(--menuActive);
+          border-right: 6px solid var(--menuActiveBorder);
+          color: var(--activeColor);
+
+          svg path {
+            fill: var(--activeColor);
+          }
+        }
+
+        &:hover {
+          background-color: var(--menuHover);
+          color: var(--activeColor);
+
+          svg path {
+            fill: var(--activeColor);
+          }
+        }
+      }
+
+      &-divider {
+        margin: 0;
+        border-top: 2px solid var(--borderColor);
+      }
+    }
   }
 
   .bp3-popover-content {

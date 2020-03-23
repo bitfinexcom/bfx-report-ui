@@ -1,4 +1,5 @@
 @import './TimeFrame/_TimeFrame.scss';
+@import './AccountMenu/_AccountMenu.scss';
 
 .header {
   width: 100%;
@@ -62,7 +63,6 @@
     width: 274px;
     height: 100%;
     border-right: 2px solid var(--borderColor);
-    cursor: pointer;
   }
 
   .help-link {
@@ -78,21 +78,5 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .header {
-    &-email {
-      max-width: calc(100vw - 255px);
-    }
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .header {
-    &-email {
-      display: none;
-    }
   }
 }

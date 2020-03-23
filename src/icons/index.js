@@ -19,6 +19,7 @@ import { ReactComponent as NOTEBOOK } from './notebook.svg'
 import { ReactComponent as ORDERS } from './orders.svg'
 import { ReactComponent as REFRESH_DOUBLE } from './refresh-double.svg'
 import { ReactComponent as SIGN_IN } from './sign-in.svg'
+import { ReactComponent as SIGN_OUT } from './sign-out.svg'
 import { ReactComponent as SLIDER_CIRCLE_H } from './slider-circle-h.svg'
 import { ReactComponent as STICKY_NOTES } from './sticky-notes.svg'
 import { ReactComponent as TICKERS } from './tickers.svg'
@@ -49,6 +50,7 @@ export default {
   ORDERS,
   REFRESH_DOUBLE,
   SIGN_IN,
+  SIGN_OUT,
   SLIDER_CIRCLE_H,
   STICKY_NOTES,
   TICKERS,
