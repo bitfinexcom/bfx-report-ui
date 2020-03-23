@@ -97,7 +97,6 @@ function* initSync() {
   }
 
   yield call(getSyncConf)
-  // yield call(getSyncPref)
 }
 
 function* progressUpdate({ payload }) {
