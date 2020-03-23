@@ -11,6 +11,7 @@ const JSONFormat = (props) => {
       content={<pre className='json-format'>{content}</pre>}
       targetClassName='json-format-target'
       popoverClassName='json-format-popover'
+      boundary='window'
     >
       {children}
     </Tooltip>
