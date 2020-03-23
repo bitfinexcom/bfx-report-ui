@@ -12,7 +12,7 @@ import { platform } from 'var/config'
 import { propTypes, defaultProps } from './Header.props'
 import TimeFrame from './TimeFrame'
 import TimeFrameShortcut from './TimeFrameShortcut'
-import HelpLink from './HelpLink'
+import HelpLink from './Header.HelpLink'
 
 const { REACT_APP_ELECTRON } = process.env
 
@@ -79,9 +79,9 @@ class Header extends PureComponent {
           title='timeframe.past_month'
           type={constants.TIME_RANGE_PAST_MONTH}
         />
+        <HelpLink />
 
         {renderEmail}
-        <HelpLink />
         {renderMenu}
         {renderSyncMode}
         <div className='row'>

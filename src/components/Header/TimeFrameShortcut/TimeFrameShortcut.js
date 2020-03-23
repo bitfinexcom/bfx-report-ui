@@ -29,9 +29,7 @@ class TimeFrameShortcut extends PureComponent {
     return (
       <div className='timeframe-shortcut' onClick={this.onClick}>
         <Icon.CALENDAR />
-        <div className='timeframe-shortcut-title'>
-          {t(title)}
-        </div>
+        <span>{t(title)}</span>
       </div>
     )
   }

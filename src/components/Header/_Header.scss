@@ -1,12 +1,11 @@
 @import './TimeFrame/_TimeFrame.scss';
 
 .header {
-  @import './TimeFrameShortcut/_TimeFrameShortcut.scss';
-
   width: 100%;
   height: 50px;
   box-shadow: 0 0 0 2px var(--borderColor);
   margin-bottom: 2px;
+  font-size: 15px;
 
   &-brand {
     position: relative;
@@ -28,6 +27,35 @@
     }
   }
 
+  .timeframe-shortcut, .help-link {
+    display: inline-block;
+    padding: 0 13px;
+    height: 100%;
+    line-height: 50px;
+    user-select: none;
+    vertical-align: top;
+    cursor: pointer;
+    border-right: 2px solid var(--borderColor);
+
+    svg {
+      height: 50px;
+    }
+
+    span {
+      margin-left: 10px;
+      vertical-align: top;
+    }
+
+    &:hover {
+      background-color: var(--borderColor);
+      color: var(--activeColor);
+
+      svg path {
+        fill: var(--activeColor);
+      }
+    }
+  }
+
   &-timeframe {
     display: inline-block;
     vertical-align: top;
@@ -35,6 +63,11 @@
     height: 100%;
     border-right: 2px solid var(--borderColor);
     cursor: pointer;
+  }
+
+  .help-link {
+    color: var(--color);
+    text-decoration: none;
   }
 
   &-email {
