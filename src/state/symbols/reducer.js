@@ -25,10 +25,7 @@ export function symbolsReducer(state = initialState, action) {
         const {
           id, name, explorer, symbol,
         } = currency
-        if (id === 'BAB') { // exception, skip duplicate BAB/BCH
-          symbolMapping[id] = 'BCH'
-          return
-        }
+
         if (symbol && id !== symbol) {
           symbolMapping[id] = symbol
           explorersDict[symbol] = explorer
