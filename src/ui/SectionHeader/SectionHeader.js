@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
+import MultiPairSelector from 'ui/MultiPairSelector'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 
 import { propTypes, defaultProps } from './SectionHeader.props'
@@ -13,10 +14,15 @@ class SectionHeader extends PureComponent {
     const {
       title,
       target,
+      pairSelectorProps,
       symbolSelectorProps,
       refresh,
       t,
     } = this.props
+
+    const selector = pairSelectorProps
+      ? <MultiPairSelector {...pairSelectorProps} />
+      : <MultiSymbolSelector {...symbolSelectorProps} />
 
     return (
       <div className='section-header'>
@@ -28,7 +34,7 @@ class SectionHeader extends PureComponent {
           <div>
             {t('selector.filter.symbol')}
           </div>
-          <MultiSymbolSelector {...symbolSelectorProps} />
+          {selector}
           <ColumnsFilter target={target} />
           <RefreshButton handleClickRefresh={refresh} />
         </div>
