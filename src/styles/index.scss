@@ -5,21 +5,7 @@
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "components/Header/_Header.scss";
 @import "components/Header/TimeFrame/_TimeFrame.scss";
-@import "ui/CandlesSyncPref/_CandlesSyncPref.scss";
-@import "ui/Charts/Candlestick/_Candlestick.scss";
-@import "ui/Charts/Chart/_Chart.scss";
-@import "ui/DateRangePicker/_DateRangePicker.scss";
-@import "ui/JSONFormat/_JSONFormat.scss";
-@import "ui/CollapsedTable/_CollapsedTable.scss";
-@import "ui/ColumnsFilter/_ColumnsFilter.scss";
-@import "ui/ColumnsSelect/_ColumnsSelect.scss";
-@import "ui/DataTable/_DataTable.scss";
-@import "ui/NavMenu/_NavMenu.scss";
-@import "ui/Pagination/_Pagination.scss";
-@import "ui/PlatformLogo/_PlatformLogo.scss";
-@import "ui/SectionHeader/_SectionHeader.scss";
-@import "ui/TimeRange/_TimeRange.scss";
-@import "ui/Tooltip/_Tooltip.scss";
+@import "ui/_index.scss";
 @import "themes";
 
 body {
