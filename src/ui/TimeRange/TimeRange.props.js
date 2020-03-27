@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types'
 
 export const propTypes = {
-  start: PropTypes.number,
+  className: PropTypes.string,
   end: PropTypes.number,
+  start: PropTypes.number,
+  timezone: PropTypes.string,
 }
 
 export const defaultProps = {
-  start: 0,
+  className: '',
   end: 0,
+  start: 0,
 }

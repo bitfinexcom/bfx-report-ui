@@ -17,12 +17,16 @@
 @import "ui/NavMenu/_NavMenu.scss";
 @import "ui/Pagination/_Pagination.scss";
 @import "ui/PlatformLogo/_PlatformLogo.scss";
+@import "ui/SectionHeader/_SectionHeader.scss";
+@import "ui/TimeRange/_TimeRange.scss";
+@import "ui/Tooltip/_Tooltip.scss";
 @import "themes";
 
 body {
   margin: 0;
   padding: 0 0 0 0;
   font-family: "Roboto", sans-serif;
+  font-size: 15px;
 }
 
 .bitfinex-dataset {
@@ -33,6 +37,16 @@ body {
 
 .bitfinex-nonideal {
   margin-top: 30px;
+}
+
+.refresh-button {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &-icon {
+    vertical-align: middle;
+  }
 }
 
 /* status close button */
@@ -134,9 +148,21 @@ body.#{$ns}-light {
   }
 }
 
-// fixes tooltips in menu
-.bp3-menu .bp3-popover-target {
-  display: block;
+.bp3-button {
+  height: 40px;
+  padding: 0 30px;
+  font-size: 15px;
+  border-radius: 2px;
+
+  &:not([class*="bp3-intent-"]) {
+    background-image: none;
+    background-color: var(--buttonBg);
+    color: var(--color);
+
+    &:hover {
+      background-color: var(--buttonHoverBg);
+    }
+  }
 }
 
 .bitfinex-text-align-right {
@@ -150,12 +176,6 @@ body.#{$ns}-light {
 
 .bitfinex-preferences-desc {
   padding-top: 6px;
-}
-
-.bitfinex-timerange {
-  margin-right: 8px;
-  margin-left: 8px;
-  font-size: 90%;
 }
 
 .bitfinex-help {

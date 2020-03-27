@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
+import classNames from 'classnames'
 import {
   Intent,
   MenuItem,
@@ -17,15 +18,16 @@ class MultiSymbolSelector extends PureComponent {
       return null
     }
     const { currencies, currentFilters, existingCoins } = this.props
-
     const isCurrent = currentFilters.includes(symbol)
-    const className = existingCoins.includes(symbol) && !isCurrent && !active
-      ? 'bitfinex-queried-symbol'
-      : ''
+
+    const classes = classNames({
+      'bitfinex-queried-symbol': existingCoins.includes(symbol) && !isCurrent && !active,
+      'bp3-menu-item--selected': isCurrent,
+    })
 
     return (
       <MenuItem
-        className={className}
+        className={classes}
         active={active}
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={disabled}
@@ -54,12 +56,15 @@ class MultiSymbolSelector extends PureComponent {
       <MultiSelect
         className='bitfinex-multi-select'
         disabled={!coins.length && !existingCoins.length}
-        placeholder={t('selector.filter.symbol')}
+        placeholder={t('selector.select')}
         items={items}
         itemRenderer={this.renderSymbol}
         itemPredicate={filterSelectorItem}
         onItemSelect={toggleSymbol}
-        popoverProps={{ minimal: true }}
+        popoverProps={{
+          minimal: true,
+          popoverClassName: 'bitfinex-multi-select-menu',
+        }}
         tagInputProps={{ tagProps: { minimal: true }, onRemove: toggleSymbol }}
         tagRenderer={coin => coin}
         selectedItems={currentFilters}

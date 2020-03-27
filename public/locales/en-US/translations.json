@@ -294,6 +294,7 @@
     "tooltip": "Choose the size per query. The larger size will take longer query time"
   },
   "selector": {
+    "select": "Select",
     "filter": {
       "symbol": "Symbol Filter",
       "pair": "Pair Filter"

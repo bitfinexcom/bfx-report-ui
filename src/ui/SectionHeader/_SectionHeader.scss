@@ -1,0 +1,20 @@
+.section-header {
+  margin-bottom: 20px;
+
+  &-title {
+    font-size: 30px;
+    color: var(--activeColor);
+  }
+
+  &-time-range {
+    margin: 15px 2px;
+  }
+
+  .refresh-button {
+    margin-left: 15px;
+  }
+
+  .bitfinex-multi-select {
+    margin-right: 15px;
+  }
+}

@@ -1,0 +1,107 @@
+.bitfinex-multi-select {
+  .bp3-multi-select {
+    height: 40px;
+    background-color: var(--multiBg);
+    border: 1px solid var(--borderColor);
+    box-shadow: none;
+    min-width: 223px;
+
+    &-tag-input-input {
+      color: var(--color);
+
+      &::placeholder {
+        color: var(--color);
+      }
+    }
+
+    .bp3-tag-input-values {
+      .bp3-tag {
+        background-color: var(--multiTagBg);
+        color: var(--color);
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--multiTagHoverBg);
+        }
+
+        &-remove {
+          color: var(--multiTagRemove);
+        }
+      }
+
+      &:last-child {
+        padding-left: 3px;
+      }
+    }
+  }
+
+  &-menu {
+    .bp3-popover-content {
+      width: 223px;
+      height: 100%;
+    }
+    .bp3-menu {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      background-color: var(--multiBg);
+      border: 1px solid var(--borderColor);
+      border-radius: 0;
+      scrollbar-width: none; // Firefox
+      -ms-overflow-style: none; // IE
+
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        background: transparent;
+      }
+
+      &-item {
+        width: 100%;
+        padding: 5px 15px;
+        border-bottom: 1px solid var(--borderColor);
+        border-radius: 0;
+
+        &-label {
+          color: var(--color);
+        }
+
+        &.bp3-active {
+          background-color: var(--multiActiveBg);
+          color: var(--activeColor);
+
+          .bp3-menu-item-label {
+            color: var(--activeColor);
+          }
+        }
+
+        &:hover {
+          background-color: var(--multiHoverBg);
+          color: var(--activeColor);
+
+          .bp3-menu-item-label {
+            color: var(--activeColor);
+          }
+        }
+
+        &--selected {
+          background-color: var(--multiSelectedBg);
+          color: var(--color);
+
+          .bp3-menu-item-label {
+            color: var(--color);
+          }
+
+          &:hover {
+            background-color: var(--multiSelectedHoverBg);
+            color: var(--color);
+
+            .bp3-menu-item-label {
+              color: var(--color);
+            }
+          }
+        }
+      }
+    }
+  }
+}
