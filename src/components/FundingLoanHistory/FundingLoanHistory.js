@@ -54,7 +54,6 @@ class FundingLoanHistory extends PureComponent {
     } else {
       showContent = (
         <Fragment>
-          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}

@@ -54,7 +54,6 @@ class Ledgers extends PureComponent {
     } else {
       showContent = (
         <Fragment>
-          <Pagination loading={pageLoading} target={TYPE} />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}

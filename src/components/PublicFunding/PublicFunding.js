@@ -72,7 +72,6 @@ class PublicFunding extends PureComponent {
       showContent = (
         <Fragment>
           <SyncSymbolPrefButton />
-          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}

@@ -69,7 +69,6 @@ class Tickers extends PureComponent {
       showContent = (
         <Fragment>
           <SyncPrefButton sectionType={TYPE} />
-          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}

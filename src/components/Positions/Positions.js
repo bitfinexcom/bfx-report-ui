@@ -88,7 +88,6 @@ class Positions extends PureComponent {
       showContent = (
         <Fragment>
           {renderButtonGroup}
-          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
