@@ -78,8 +78,8 @@ describe('mapRequestSymbols', () => {
     expect(mapRequestSymbols(['CNHt'])).toEqual(['CNHT'])
   })
 
-  it('[BCH] -> [BAB, BCH]', () => {
-    expect(mapRequestSymbols(['BCH'])).toEqual(['BAB', 'BCH'])
+  it('[BCH] -> [BAB]', () => {
+    expect(mapRequestSymbols(['BCH'])).toEqual(['BAB'])
   })
 
   it('[BCH], true -> BAB', () => {
@@ -87,11 +87,11 @@ describe('mapRequestSymbols', () => {
   })
 })
 
-// [BCH:USD] -> [BAB:USD, BCH:USD]
+// [BCH:USD] -> [BAB:USD]
 // [BCH:USD], true -> [BAB:USD]
 describe('mapRequestPairs', () => {
-  it('[BCH:USD] -> [BAB:USD, BCH:USD]', () => {
-    expect(mapRequestPairs(['BCH:USD'])).toEqual(['BAB:USD', 'BCH:USD'])
+  it('[BCH:USD] -> [BAB:USD]', () => {
+    expect(mapRequestPairs(['BCH:USD'])).toEqual(['BAB:USD'])
   })
 
   it('[BCH:USD], true -> [BAB:USD]', () => {

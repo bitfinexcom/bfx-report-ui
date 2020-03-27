@@ -49,10 +49,6 @@ export const demapPairs = (pairs, returnString = false) => {
 export const mapRequestSymbols = (symbols, returnString = false) => {
   const demapped = demapSymbols(symbols)
 
-  if (demapped.includes('BAB') && !returnString) {
-    return [...demapped, 'BCH']
-  }
-
   return returnString
     ? demapped[0]
     : demapped
@@ -66,18 +62,6 @@ export const mapRequestSymbols = (symbols, returnString = false) => {
  */
 export const mapRequestPairs = (pairs, returnString = false) => {
   const demapped = demapPairs(pairs)
-
-  const additionalPairs = []
-
-  demapped.forEach((pair) => {
-    if (pair.includes('BAB')) {
-      additionalPairs.push(pair.replace('BAB', 'BCH'))
-    }
-  })
-
-  if (additionalPairs.length && !returnString) {
-    return [...demapped, ...additionalPairs]
-  }
 
   return returnString
     ? demapped[0]
