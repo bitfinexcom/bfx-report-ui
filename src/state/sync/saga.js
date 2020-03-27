@@ -1,6 +1,6 @@
 import {
   call,
-  all,
+  fork,
   put,
   select,
   takeLatest,
@@ -11,34 +11,19 @@ import _includes from 'lodash/includes'
 import authTypes from 'state/auth/constants'
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
-import {
-  formatRawSymbols, formatPair, mapRequestSymbols, mapRequestPairs,
-  mapSymbol, mapPair, isFundingSymbol, isTradingPair, removePrefix,
-} from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
 import {
   getSyncMode,
   getSyncProgress,
-  getPublicTradesPairs,
-  getPublicFundingSymbols,
-  getPublicFundingStartTime,
-  getPublicTradesStartTime,
 } from './selectors'
+import syncConfigSaga, { getSyncConf } from './saga.config'
 
 const fetchSyncProgress = () => makeFetchCall('getSyncProgress')
 const logout = () => makeFetchCall('logout')
 const enableSyncMode = () => makeFetchCall('enableSyncMode')
 const disableSyncMode = () => makeFetchCall('disableSyncMode')
-const getPublicTradesConf = () => makeFetchCall('getPublicTradesConf')
-const getTickersHistoryConf = () => makeFetchCall('getTickersHistoryConf')
-const getStatusMessagesConf = () => makeFetchCall('getStatusMessagesConf')
-const getCandlesConf = () => makeFetchCall('getCandlesConf')
-const editPublicTradesConf = params => makeFetchCall('editPublicTradesConf', params)
-const editTickersHistoryConf = params => makeFetchCall('editTickersHistoryConf', params)
-const editStatusMessagesConf = params => makeFetchCall('editStatusMessagesConf', params)
-const editCandlesConf = params => makeFetchCall('editCandlesConf', params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -98,149 +83,6 @@ function* syncLogout() {
   }
 }
 
-function* editPublicTradesPref({ payload }) {
-  const { pairs, startTime } = payload
-
-  const symbols = yield select(getPublicFundingSymbols)
-  const publicFundingStartTime = yield select(getPublicFundingStartTime)
-
-  // config for 2 sections is merged in one
-  const params = [
-    // public trades config
-    ...mapRequestPairs(pairs).map(pair => ({
-      symbol: formatRawSymbols(pair),
-      start: startTime,
-    })),
-    // public funding config
-    ...mapRequestSymbols(symbols).map(symbol => ({
-      symbol: formatRawSymbols(symbol),
-      start: publicFundingStartTime,
-    })),
-  ]
-
-  const { error } = yield call(editPublicTradesConf, params)
-  if (error) {
-    yield put(updateSyncErrorStatus('during editPublicTradesPairConf'))
-  }
-}
-
-function* editPublicFundingPref({ payload }) {
-  const { symbols, startTime } = payload
-
-  const pairs = yield select(getPublicTradesPairs)
-  const publicTradesStartTime = yield select(getPublicTradesStartTime)
-
-  // config for 2 sections is merged in one
-  const params = [
-    // public trades config
-    ...mapRequestPairs(pairs).map(pair => ({
-      symbol: formatRawSymbols(pair),
-      start: publicTradesStartTime,
-    })),
-    // public funding config
-    ...mapRequestSymbols(symbols).map(symbol => ({
-      symbol: formatRawSymbols(symbol),
-      start: startTime,
-    })),
-  ]
-
-  const { error } = yield call(editPublicTradesConf, params)
-  if (error) {
-    yield put(updateSyncErrorStatus('during editPublicTradesSymbolConf'))
-  }
-}
-
-function* editTickersHistoryPref({ payload }) {
-  const { pairs = [], startTime } = payload
-
-  const params = mapRequestPairs(pairs).map(pair => ({
-    symbol: formatRawSymbols(pair),
-    start: startTime,
-  }))
-
-  const { error } = yield call(editTickersHistoryConf, params)
-  if (error) {
-    yield put(updateSyncErrorStatus('during editTickersHistoryConf'))
-  }
-}
-
-function* editCandlesPref({ payload }) {
-  const { pairs, startTime } = payload
-
-  const params = mapRequestPairs(pairs).map(pair => ({
-    symbol: formatRawSymbols(pair),
-    start: startTime,
-  }))
-
-  const { error } = yield call(editCandlesConf, params)
-  if (error) {
-    yield put(updateSyncErrorStatus('during editCandlesConf'))
-  }
-}
-
-function* getSyncPref() {
-  const [
-    { result: publicTradesPrefResult, error: publicTradesPrefError },
-    { result: tickersHistoryPrefResult, error: tickersHistoryPrefError },
-    { result: statusMessagesPrefResult },
-    { result: candlesPrefResult, error: candlesPrefError },
-  ] = yield all([
-    yield call(getPublicTradesConf),
-    yield call(getTickersHistoryConf),
-    yield call(getStatusMessagesConf),
-    yield call(getCandlesConf),
-  ])
-
-  // set default pref for derivatives, enabling view of those pairs in sync mode
-  if (!statusMessagesPrefResult.length) {
-    yield call(editStatusMessagesConf, [{ symbol: 'tBTCF0:USTF0', start: 0 }, { symbol: 'tETHF0:USTF0', start: 0 }])
-  }
-
-  if (!candlesPrefResult.length) {
-    yield call(editCandlesConf, [{ symbol: 'tBTCUSD', start: 0 }])
-  }
-
-  const formatSymbol = data => mapSymbol(removePrefix(data.symbol))
-  const formatConfigPairs = ({ symbol }) => mapPair(formatPair(symbol))
-
-  if (publicTradesPrefResult && publicTradesPrefResult.length) {
-    const publicTradesPairs = publicTradesPrefResult.filter(data => isTradingPair(data.symbol))
-    const publicTradesSymbols = publicTradesPrefResult.filter(data => isFundingSymbol(data.symbol))
-
-    yield put(actions.setSyncPref({
-      publicTrades: {
-        pairs: publicTradesPairs.map(formatConfigPairs),
-        startTime: publicTradesPairs[0] && publicTradesPairs[0].start,
-      },
-      publicFunding: {
-        symbols: publicTradesSymbols.map(formatSymbol),
-        startTime: publicTradesSymbols[0] && publicTradesSymbols[0].start,
-      },
-    }))
-  }
-
-  if (tickersHistoryPrefResult && tickersHistoryPrefResult.length) {
-    const tickersHistoryPairs = tickersHistoryPrefResult.filter(data => isTradingPair(data.symbol))
-
-    yield put(actions.setSyncPref({
-      tickersHistory: {
-        pairs: tickersHistoryPairs.map(formatConfigPairs),
-        startTime: tickersHistoryPairs[0] && tickersHistoryPairs[0].start,
-      },
-    }))
-  }
-
-  if (publicTradesPrefError) {
-    yield put(updateSyncErrorStatus('during getPublicTradesConf'))
-  }
-  if (tickersHistoryPrefError) {
-    yield put(updateSyncErrorStatus('during getTickersHistoryConf'))
-  }
-  if (candlesPrefError) {
-    yield put(updateSyncErrorStatus('during getCandlesConf'))
-  }
-}
-
 function* initSync() {
   const { result: syncProgress } = yield call(fetchSyncProgress)
 
@@ -254,7 +96,7 @@ function* initSync() {
     yield call(startSyncing)
   }
 
-  yield call(getSyncPref)
+  yield call(getSyncConf)
 }
 
 function* progressUpdate({ payload }) {
@@ -321,13 +163,10 @@ export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
-  yield takeLatest(types.EDIT_PUBLIC_TRADES_PREF, editPublicTradesPref)
-  yield takeLatest(types.EDIT_PUBLIC_FUNDING_PREF, editPublicFundingPref)
-  yield takeLatest(types.EDIT_TICKERS_HISTORY_PREF, editTickersHistoryPref)
-  yield takeLatest(types.EDIT_CANDLES_PREF, editCandlesPref)
   yield takeLatest(authTypes.AUTH_SUCCESS, initSync)
   yield takeLatest(types.WS_PROGRESS_UPDATE, progressUpdate)
   yield takeLatest(types.WS_REQUESTS_REDIRECT, requestsRedirectUpdate)
   yield takeLatest(types.UPDATE_STATUS, updateSyncStatus)
   yield takeLatest(authTypes.LOGOUT, syncLogout)
+  yield fork(syncConfigSaga)
 }

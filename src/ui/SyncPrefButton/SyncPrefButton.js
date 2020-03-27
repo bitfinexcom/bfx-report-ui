@@ -20,59 +20,66 @@ import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './SyncPrefButton.props'
 
-const initState = {
-  isOpen: false,
-  tempPairs: [],
-  tempTime: undefined,
-}
-
 class SyncPrefButton extends PureComponent {
   static propTypes = propTypes
 
   static defaultProps = defaultProps
 
-  state = initState
+  constructor(props) {
+    super(props)
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    // fill init state from props
-    if (prevState.tempPairs.length === 0 || prevState.tempTime === undefined) {
-      return {
-        tempPairs: nextProps.syncPairs,
-        tempTime: new Date(nextProps.startTime),
-      }
-    }
-    return null
+    this.state = this.getInitialState()
   }
 
-  handleOpen = (e) => {
-    e.preventDefault()
+  componentDidUpdate(prevProps) {
+    const { syncPairs } = this.props
+
+    if (syncPairs !== prevProps.syncPairs) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        pairs: syncPairs,
+      })
+    }
+  }
+
+  getInitialState = () => {
+    const { syncPairs, startTime } = this.props
+
+    return {
+      isOpen: false,
+      pairs: syncPairs,
+      start: startTime,
+    }
+  }
+
+  handleOpen = () => {
     this.setState({ isOpen: true })
   }
 
-  handleClose = (e) => {
-    e.preventDefault()
-    this.setState(initState)
+  handleClose = () => {
+    this.setState(this.getInitialState())
   }
 
   togglePair = (pair) => {
-    const { tempPairs } = this.state
-    if (tempPairs.includes(pair)) {
-      const pairs = tempPairs.filter(tempPair => tempPair !== pair)
-      this.setState({ tempPairs: pairs })
+    const { pairs } = this.state
+    if (pairs.includes(pair)) {
+      this.setState({
+        pairs: pairs.filter(tempPair => tempPair !== pair),
+      })
     } else {
-      this.setState({ tempPairs: [...tempPairs, pair] })
+      this.setState({ pairs: [...pairs, pair] })
     }
   }
 
   handleDateChange = (time) => {
-    this.setState({ tempTime: time })
+    this.setState({ start: time })
   }
 
   handleApply = () => {
-    const { tempPairs, tempTime } = this.state
+    const { pairs, start } = this.state
     const { setSyncPref } = this.props
     this.setState({ isOpen: false })
-    setSyncPref(tempPairs, tempTime, true)
+    setSyncPref(pairs, start, true)
   }
 
   render() {
@@ -81,11 +88,12 @@ class SyncPrefButton extends PureComponent {
       syncPairs,
       t,
       textOnly,
+      startTime,
     } = this.props
     const {
       isOpen,
-      tempPairs,
-      tempTime,
+      pairs,
+      start,
     } = this.state
     const renderInSyncWarning = syncMode === mode.MODE_SYNCING
       ? (
@@ -137,7 +145,7 @@ class SyncPrefButton extends PureComponent {
                 </div>
                 <div className={dialogFieldStyle}>
                   <MultiPairSelector
-                    currentFilters={tempPairs}
+                    currentFilters={pairs}
                     existingPairs={syncPairs}
                     togglePair={this.togglePair}
                   />
@@ -148,7 +156,7 @@ class SyncPrefButton extends PureComponent {
                   {t('preferences.sync.starttime')}
                 </div>
                 <div className={dialogFieldStyle}>
-                  <DateInput onChange={this.handleDateChange} defaultValue={tempTime} />
+                  <DateInput key={startTime} onChange={this.handleDateChange} defaultValue={startTime} />
                 </div>
               </div>
             </div>
@@ -168,8 +176,8 @@ class SyncPrefButton extends PureComponent {
                     intent={Intent.PRIMARY}
                     disabled={(
                       syncMode === mode.MODE_SYNCING
-                      || tempPairs.length === 0
-                      || tempTime === undefined
+                      || !pairs.length
+                      || !start
                     )}
                   >
                     {t('preferences.sync.btn-apply')}

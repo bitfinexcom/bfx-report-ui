@@ -113,17 +113,24 @@ export function editTickersHistoryPairPref(pairs, startTime) {
 }
 
 /**
- * Create an action to edit candles pair preferences.
- * @param {string[]} pairs
- * @param {numeric} startTime start time in milliseconds
+ * Create an action to edit candles sync preferences.
+ * @param {object[]} config
  */
-export function editCandlesPairPref(pairs, startTime) {
+export function editCandlesConf(config) {
   return {
     type: types.EDIT_CANDLES_PREF,
-    payload: {
-      pairs,
-      startTime,
-    },
+    payload: config,
+  }
+}
+
+/**
+ * Create an action to edit sync config.
+ * @param {object} config
+ */
+export function editSyncConf(config) {
+  return {
+    type: types.EDIT_CONFIG,
+    payload: config,
   }
 }
 
@@ -131,7 +138,8 @@ export default {
   editPublicTradesPref,
   editPublicTradesSymbolPref,
   editTickersHistoryPairPref,
-  editCandlesPairPref,
+  editCandlesConf,
+  editSyncConf,
   forceQueryFromDb,
   setSyncMode,
   setSyncProgress,

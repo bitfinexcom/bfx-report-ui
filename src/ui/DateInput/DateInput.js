@@ -13,12 +13,12 @@ class DateInput extends PureComponent {
   onChange = (date) => {
     const { daysOnly, onChange } = this.props
     if (!date) {
-      onChange(null)
+      return onChange(null)
     }
     const offset = daysOnly ? moment().utcOffset() : 0
 
     const utcDate = moment(date).add({ minutes: offset }).toDate()
-    onChange(utcDate)
+    return onChange(utcDate)
   }
 
   render() {

@@ -253,6 +253,8 @@
     "dateformat": "日期格式:",
     "milliseconds": "显示毫秒：",
     "sync": {
+      "add-filter": "add filter",
+      "add-pair": "add pair",
       "title": "同步首选项",
       "notset": "尚未设置同步首选项",
       "description": "要离线访问公开交易和牌价，您需要设置离线可用货币对和起始查询时间。",

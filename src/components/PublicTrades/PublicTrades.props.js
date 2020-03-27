@@ -13,7 +13,6 @@ export const propTypes = {
   entries: PropTypes.arrayOf(PUBLIC_TRADES_ENTRIES_PROPS).isRequired,
   fetchData: PropTypes.func.isRequired,
   getFullTime: PropTypes.func,
-  hasSyncPref: PropTypes.bool.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,

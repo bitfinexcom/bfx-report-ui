@@ -5,7 +5,6 @@ import { Card, Elevation } from '@blueprintjs/core'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
-import SyncNotSetYet from 'ui/SyncNotSetYet'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -16,7 +15,6 @@ import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
-import { platform } from 'var/config'
 
 import getColumns from './PublicFunding.columns'
 import { propTypes, defaultProps } from './PublicFunding.props'
@@ -47,7 +45,6 @@ class PublicFunding extends PureComponent {
       coins,
       currencies,
       getFullTime,
-      hasSyncPref,
       entries,
       dataReceived,
       pageLoading,
@@ -56,13 +53,7 @@ class PublicFunding extends PureComponent {
       targetSymbol,
       timeOffset,
     } = this.props
-    if (platform.showFrameworkMode && !hasSyncPref) {
-      return (
-        <SyncNotSetYet acceptSymbol sectionType={TYPE} />
-      )
-    }
 
-    const currentSymbol = targetSymbol || 'USD'
     const tableColumns = getColumns({
       filteredData: entries,
       getFullTime,
@@ -77,7 +68,7 @@ class PublicFunding extends PureComponent {
         <SymbolSelector
           coins={coins}
           currencies={currencies}
-          currentCoin={currentSymbol}
+          currentCoin={targetSymbol}
           onSymbolSelect={this.handleClick}
         />
       </Fragment>

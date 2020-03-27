@@ -13,11 +13,12 @@ class CandlesTimeframe extends React.PureComponent {
   }
 
   render() {
-    const { value } = this.props
+    const { value, className } = this.props
 
     return (
       <HTMLSelect
         value={value}
+        className={className}
         onChange={this.onChange}
       >
         {_map(TIMEFRAMES, timeframe => (

@@ -193,7 +193,7 @@ class ColumnsFilter extends PureComponent {
 
             {(filters.length < MAX_FILTERS) && (
               <div className='columns-filter-add' onClick={this.onFilterAdd}>
-                {'+ add filter'}
+                {`+ ${t('preferences.sync.add-filter')}`}
               </div>
             )}
           </div>

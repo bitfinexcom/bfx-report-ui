@@ -5,7 +5,6 @@ import { Card, Elevation } from '@blueprintjs/core'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
-import SyncNotSetYet from 'ui/SyncNotSetYet'
 import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import ExportButton from 'ui/ExportButton'
@@ -15,7 +14,6 @@ import PairSelector from 'ui/PairSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, setPair } from 'state/utils'
-import { platform } from 'var/config'
 
 import getColumns from './PublicTrades.columns'
 import { propTypes, defaultProps } from './PublicTrades.props'
@@ -35,7 +33,6 @@ class PublicTrades extends PureComponent {
     const {
       columns,
       getFullTime,
-      hasSyncPref,
       entries,
       dataReceived,
       pageLoading,
@@ -44,12 +41,7 @@ class PublicTrades extends PureComponent {
       targetPair,
       timeOffset,
     } = this.props
-    if (platform.showFrameworkMode && !hasSyncPref) {
-      return (
-        <SyncNotSetYet sectionType={TYPE} />
-      )
-    }
-    const currentPair = targetPair || 'BTC:USD'
+
     const tableColumns = getColumns({
       filteredData: entries,
       getFullTime,
@@ -62,7 +54,7 @@ class PublicTrades extends PureComponent {
       <Fragment>
         {' '}
         <PairSelector
-          currentPair={currentPair}
+          currentPair={targetPair}
           onPairSelect={pair => setPair(TYPE, this.props, pair)}
         />
       </Fragment>

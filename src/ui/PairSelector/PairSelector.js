@@ -33,7 +33,9 @@ class PairSelector extends PureComponent {
   }
 
   render() {
-    const { currentPair, pairs, onPairSelect } = this.props
+    const {
+      currentPair, pairs, onPairSelect, buttonClassName,
+    } = this.props
 
     return (
       <Select
@@ -45,6 +47,7 @@ class PairSelector extends PureComponent {
       >
         <Button
           text={currentPair}
+          className={buttonClassName}
           rightIcon={IconNames.CARET_DOWN}
           disabled={!pairs.length}
         />

@@ -9,21 +9,13 @@ import { getQuery, getTimeFrame } from 'state/query/selectors'
 import SyncSymbolPrefButton from './SyncSymbolPrefButton'
 
 const mapStateToProps = (state) => {
-  let syncSymbols = getPublicFundingSymbols(state)
-  if (!syncSymbols.length) {
-    syncSymbols = ['USD']
-  }
-
-  let startTime = getPublicFundingStartTime(state)
-  if (!startTime) {
-    const { start } = getTimeFrame(getQuery(state))
-    startTime = new Date(start).getTime()
-  }
+  const syncSymbols = getPublicFundingSymbols(state)
+  const startTime = getPublicFundingStartTime(state)
 
   return {
     syncMode: getSyncMode(state),
     syncSymbols,
-    startTime,
+    startTime: startTime || getTimeFrame(getQuery(state)).start,
   }
 }
 
