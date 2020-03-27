@@ -2,6 +2,13 @@
   "accountbalance": {
     "title": "Баланс на счете"
   },
+  "accountsummary": {
+    "title": "Сводная информация",
+    "fees": "Размеры вашей комиссии на Bitfinex (в зависимости от объемов вашей торговли)",
+    "fees_deriv": "Размеры вашей комиссий на деривативы Bitfinex (в зависимости от объемов вашей торговли)",
+    "30dVolume": "Ваш объем торговли за последние 30 дней",
+    "margin_funds": "Общая прибыль, полученная от предоставленного маржинального финансирования, за последние 30 дней"
+  },
   "activepositions": {
     "title": "Активные позиции"
   },
@@ -40,6 +47,7 @@
     "balanceUsd": "Баланс (USD)",
     "base-price": "Базовая цена",
     "bid": "Заявка",
+    "browser": "Браузер",
     "closed": "Закрыто",
     "collateral": "Обеспечение",
     "created": "Создано",
@@ -55,11 +63,13 @@
     "fundingAccrued": "Следующее финансирование накоплено",
     "fundingStep": "Следующий шаг финансирования",
     "id": "№",
+    "ip": "IP",
     "lastpayout": "Последняя выплата",
     "liq-price": "Цена ликв.",
     "meta": "Метаданные",
+    "mobile": "Мобильный",
     "movementsTotal": "Сумма движений (USD)",
-    "opened": "ОТКРЫТО",
+    "opened": "Открыто",
     "orderid": "ID ордера",
     "pair": "Пара",
     "percent": "Процент",
@@ -71,7 +81,7 @@
     "positionsTotal": "Всего P/L позиций (USD)",
     "price": "Цена",
     "priceDeriv": "Цена дериватива",
-    "priceSpot": "SPOT PRICE",
+    "priceSpot": "Спот цена",
     "pricetrail": "Трейлинговая цена",
     "rate": "Ставка",
     "rateperc": "Ставка %",
@@ -86,6 +96,8 @@
     "typeprev": "Предыдущий шаг ордера",
     "updated": "Обновлено",
     "usd": "USD",
+    "version": "Версия",
+    "volume": "Объем",
     "wallet": "Кошелек",
     "walletsTotal": "Итого баланса на кошельках (USD)"
   },
@@ -101,7 +113,9 @@
       "equalTo": "Равняется",
       "notEqualTo": "Не равняется",
       "greaterThan": "Больше чем",
-      "lessThan": "Меньше чем"
+      "greaterThanEqual": "Больше / равно",
+      "lessThan": "Меньше чем",
+      "lessThanEqual": "Меньше / равно"
     }
   },
   "columnsselect": {
@@ -185,7 +199,7 @@
     "title": "Отчет о займах"
   },
   "logins": {
-    "title": "Logins"
+    "title": "Логины"
   },
   "movements": {
     "title": "Движения"
