@@ -6,7 +6,8 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
+import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getQueryLimit } from 'state/query/utils'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -26,15 +27,12 @@ function getReqLedgers({
   query,
   targetSymbols,
   filter,
-  queryLimit,
 }) {
   const params = getTimeFrame(query, smallestMts)
   params.filter = filter
+  params.limit = getQueryLimit(TYPE)
   if (targetSymbols.length) {
     params.symbol = mapRequestSymbols(targetSymbols)
-  }
-  if (queryLimit) {
-    params.limit = queryLimit
   }
   // Affiliates Earnings specific param
   params.isAffiliateRebate = true
@@ -46,7 +44,6 @@ function* fetchAffiliatesEarnings() {
   try {
     const { targetSymbols } = yield select(getAffiliatesEarnings)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-    const queryLimit = yield select(getTargetQueryLimit, TYPE)
 
     const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
@@ -55,7 +52,6 @@ function* fetchAffiliatesEarnings() {
       query,
       targetSymbols,
       filter,
-      queryLimit,
     })
     yield put(actions.updateAffiliatesEarnings(result))
     yield put(updatePagination(TYPE, result))

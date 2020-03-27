@@ -108,24 +108,12 @@ export function showMilliseconds(show) {
   }
 }
 
-/**
- * Create an action to store query limit.
- * @param {string} limit query limit
- */
-export function setQueryLimit(limit) {
-  return {
-    type: types.SET_QUERY_LIMIT,
-    payload: limit,
-  }
-}
-
 export default {
   setApiKey,
   setApiSecret,
   setAuthToken,
   setDateFormat,
   setLang,
-  setQueryLimit,
   setTheme,
   setTimezone,
   setInputTimezone,

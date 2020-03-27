@@ -422,11 +422,7 @@ export function getFilterType(target) {
 
 export function getQueryLimit(target) {
   const { queryLimit } = MAPPING[target]
-  if (queryLimit) {
-    return queryLimit
-  }
-  error(target, 'queryLimit')
-  return 0
+  return queryLimit || queryType.DEFAULT_QUERY_LIMIT
 }
 
 export function getPageSize(target) {
@@ -438,18 +434,7 @@ export function getPageSize(target) {
   return 0
 }
 
-export function canChangeQueryLimit(target) {
-  return [
-    MENU_LEDGERS,
-    MENU_ORDERS,
-    MENU_TRADES,
-    MENU_FPAYMENT,
-    MENU_AFFILIATES_EARNINGS,
-  ].includes(target)
-}
-
 export default {
-  canChangeQueryLimit,
   getIcon,
   getFilterType,
   getPageSize,

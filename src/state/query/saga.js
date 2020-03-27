@@ -45,11 +45,10 @@ import { platform } from 'var/config'
 import {
   getEmail,
   getQuery,
-  getTargetQueryLimit,
   getTimeFrame,
 } from './selectors'
 import actions from './actions'
-import { NO_QUERY_LIMIT_TARGETS } from './utils'
+import { getQueryLimit, NO_QUERY_LIMIT_TARGETS } from './utils'
 import types from './constants'
 
 const {
@@ -207,7 +206,7 @@ function* getOptions({ target, query }) {
   const options = {}
   if (!_includes(NO_QUERY_LIMIT_TARGETS, target)) {
     Object.assign(options, getTimeFrame(query, target))
-    options.limit = yield select(getTargetQueryLimit, target)
+    options.limit = getQueryLimit(target)
   }
   options.timezone = yield select(getTimezone)
   options.dateFormat = yield select(getDateFormat)

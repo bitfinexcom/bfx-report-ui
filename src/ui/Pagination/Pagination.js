@@ -3,8 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { Button, Spinner } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
-import QueryLimitSelector from 'ui/QueryLimitSelector'
-import { canChangeQueryLimit, getPageSize } from 'state/query/utils'
+import { getPageSize } from 'state/query/utils'
 
 import { propTypes, defaultProps } from './Pagination.props'
 
@@ -124,7 +123,6 @@ class Pagination extends PureComponent {
             onClick={this.fetchNext}
             disabled={!nextPage || loading}
           />
-          {canChangeQueryLimit(target) && <QueryLimitSelector target={target} />}
           {renderLoading}
         </div>
       </div>

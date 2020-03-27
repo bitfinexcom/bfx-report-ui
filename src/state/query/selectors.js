@@ -1,6 +1,3 @@
-import { getBaseQueryLimit } from 'state/base/selectors'
-
-import { canChangeQueryLimit, getQueryLimit } from './utils'
 import constants from './constants'
 
 const {
@@ -17,15 +14,6 @@ export const getTimeRange = state => getQuery(state).timeRange
 export const getEmail = state => getQuery(state).email
 export const getExportEmail = state => getQuery(state).exportEmail
 export const getPrepareExport = state => getQuery(state).prepareExport
-/**
- * Selector to return query limit by type.
- * Some section allow user custom query limit.
- * @param {object} state query state
- * @param {string} target section
- */
-export const getTargetQueryLimit = (state, target) => (canChangeQueryLimit(target)
-  ? getBaseQueryLimit(state)
-  : getQueryLimit(target))
 
 /**
  * Selector to return query range (in milliseconds) and limit.
@@ -74,7 +62,6 @@ export default {
   getExportEmail,
   getPrepareExport,
   getQuery,
-  getTargetQueryLimit,
   getTimeFrame,
   getTimeRange,
 }
