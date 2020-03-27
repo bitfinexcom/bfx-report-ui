@@ -2,15 +2,11 @@ import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
-import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import RefreshButton from 'ui/RefreshButton'
-import QueryLimitSelector from 'ui/QueryLimitSelector'
+import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
@@ -49,40 +45,12 @@ class Logins extends PureComponent {
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='logins.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('logins.title')}
-            {' '}
-            <TimeRange />
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            {' '}
-            <QueryLimitSelector target={TYPE} />
-          </h4>
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
         <Fragment>
-          <h4>
-            {t('logins.title')}
-            {' '}
-            <TimeRange />
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
           <Pagination loading={pageLoading} target={TYPE} />
           <DataTable
             numRows={entries.length}
@@ -94,6 +62,10 @@ class Logins extends PureComponent {
     }
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader
+          title='logins.title'
+          refresh={refresh}
+        />
         {showContent}
       </Card>
     )

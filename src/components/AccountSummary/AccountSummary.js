@@ -7,6 +7,7 @@ import _get from 'lodash/get'
 import Loading from 'ui/Loading'
 import LinkButton from 'ui/LinkButton'
 import NoData from 'ui/NoData'
+import SectionHeader from 'ui/SectionHeader'
 import { getFormattedDate } from 'utils/dates'
 
 import { propTypes, defaultProps } from './AccountSummary.props'
@@ -45,15 +46,10 @@ class AccountSummary extends PureComponent {
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='accountsummary.title' />
-      )
+      showContent = <Loading />
     } else if (_isEmpty(data)) {
       showContent = (
         <Fragment>
-          <h4>
-            {t('accountsummary.title')}
-          </h4>
           {renderUpdate}
           <NoData />
         </Fragment>
@@ -61,9 +57,6 @@ class AccountSummary extends PureComponent {
     } else {
       showContent = (
         <Fragment>
-          <h4>
-            {t('accountsummary.title')}
-          </h4>
           {renderUpdate}
           <Volume data={_get(data, 'trade_vol_30d', [])} />
           <br />
@@ -84,6 +77,10 @@ class AccountSummary extends PureComponent {
     }
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader
+          filter={false}
+          title='accountsummary.title'
+        />
         {showContent}
       </Card>
     )

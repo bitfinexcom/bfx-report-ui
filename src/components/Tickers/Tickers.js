@@ -2,16 +2,12 @@ import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
-import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import MultiPairSelector from 'ui/MultiPairSelector'
-import RefreshButton from 'ui/RefreshButton'
+import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, togglePair } from 'state/utils'
 
@@ -59,55 +55,20 @@ class Tickers extends PureComponent {
       timeOffset,
     }).filter(({ id }) => columns[id])
 
-    const renderPairSelector = (
-      <Fragment>
-        {' '}
-        <MultiPairSelector
-          currentFilters={targetPairs}
-          existingPairs={existingPairs}
-          togglePair={this.togglePair}
-        />
-      </Fragment>
-    )
-
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='tickers.title' />
-      )
+      showContent = <Loading title='tickers.title' />
     } else if (!entries.length) {
       showContent = (
         <Fragment>
-          <h4>
-            {t('tickers.title')}
-            {' '}
-            <TimeRange />
-            {renderPairSelector}
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <SyncPrefButton sectionType={TYPE} />
-          </h4>
+          <SyncPrefButton sectionType={TYPE} />
           <NoData />
         </Fragment>
       )
     } else {
       showContent = (
         <Fragment>
-          <h4>
-            {t('tickers.title')}
-            {' '}
-            <TimeRange />
-            {renderPairSelector}
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <SyncPrefButton sectionType={TYPE} />
-          </h4>
+          <SyncPrefButton sectionType={TYPE} />
           <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
             numRows={entries.length}
@@ -120,6 +81,16 @@ class Tickers extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader
+          title='tickers.title'
+          target={TYPE}
+          pairsSelectorProps={{
+            currentFilters: targetPairs,
+            existingPairs,
+            togglePair: this.togglePair,
+          }}
+          refresh={refresh}
+        />
         {showContent}
       </Card>
     )

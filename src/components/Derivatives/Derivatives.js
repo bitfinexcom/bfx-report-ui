@@ -3,13 +3,10 @@ import { withTranslation } from 'react-i18next'
 import memoizeOne from 'memoize-one'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import ColumnsFilter from 'ui/ColumnsFilter'
 import DataTable from 'ui/DataTable'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import MultiPairSelector from 'ui/MultiPairSelector'
-import RefreshButton from 'ui/RefreshButton'
+import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, togglePair } from 'state/utils'
 
@@ -35,6 +32,8 @@ class Derivatives extends PureComponent {
 
   getFilteredPairs = pairs => pairs.filter(pair => pair.includes('F0'))
 
+  togglePair = pair => togglePair(TYPE, this.props, pair)
+
   render() {
     const {
       columns,
@@ -57,52 +56,14 @@ class Derivatives extends PureComponent {
       timeOffset,
     }).filter(({ id }) => columns[id])
 
-    const renderPairSelector = (
-      <Fragment>
-        {' '}
-        <MultiPairSelector
-          currentFilters={targetPairs}
-          pairs={this.getFilteredPairs(pairs)}
-          existingPairs={existingPairs}
-          togglePair={pair => togglePair(TYPE, this.props, pair)}
-        />
-      </Fragment>
-    )
-
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='derivatives.title' />
-      )
+      showContent = <Loading />
     } else if (numRows === 0) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('derivatives.title')}
-            {' '}
-            {renderPairSelector}
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
         <Fragment>
-          <h4>
-            {t('derivatives.title')}
-            {' '}
-            {renderPairSelector}
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
           <DataTable
             numRows={numRows}
             tableColumns={tableColumns}
@@ -113,6 +74,17 @@ class Derivatives extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader
+          title='derivatives.title'
+          target={TYPE}
+          pairsSelectorProps={{
+            currentFilters: targetPairs,
+            existingPairs,
+            pairs: this.getFilteredPairs(pairs),
+            togglePair: this.togglePair,
+          }}
+          refresh={refresh}
+        />
         {showContent}
       </Card>
     )

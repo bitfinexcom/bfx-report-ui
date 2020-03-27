@@ -69,7 +69,7 @@ class Ledgers extends PureComponent {
         <SectionHeader
           title='ledgers.title'
           target={TYPE}
-          symbolSelectorProps={{
+          symbolsSelectorProps={{
             currentFilters: targetSymbols,
             existingCoins,
             toggleSymbol: this.toggleSymbol,

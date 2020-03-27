@@ -2,16 +2,12 @@ import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
-import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import SymbolSelector from 'ui/SymbolSelector'
-import RefreshButton from 'ui/RefreshButton'
+import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
@@ -30,7 +26,7 @@ class PublicFunding extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleClick = (symbol) => {
+  onSymbolSelect = (symbol) => {
     const { history, targetSymbol, setTargetSymbol } = this.props
     if (symbol !== targetSymbol) {
       // show select symbol in url
@@ -62,56 +58,20 @@ class PublicFunding extends PureComponent {
       timeOffset,
     }).filter(({ id }) => columns[id])
 
-    const renderSymbolSelector = (
-      <Fragment>
-        {' '}
-        <SymbolSelector
-          coins={coins}
-          currencies={currencies}
-          currentCoin={targetSymbol}
-          onSymbolSelect={this.handleClick}
-        />
-      </Fragment>
-    )
-
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='publicfunding.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
       showContent = (
         <Fragment>
-          <h4>
-            {t('publicfunding.title')}
-            {' '}
-            <TimeRange />
-            {renderSymbolSelector}
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <SyncSymbolPrefButton />
-          </h4>
+          <SyncSymbolPrefButton />
           <NoData />
         </Fragment>
       )
     } else {
       showContent = (
         <Fragment>
-          <h4>
-            {t('publicfunding.title')}
-            {' '}
-            <TimeRange />
-            {renderSymbolSelector}
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <SyncSymbolPrefButton />
-          </h4>
+          <SyncSymbolPrefButton />
           <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
             numRows={entries.length}
@@ -124,6 +84,17 @@ class PublicFunding extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader
+          title='publicfunding.title'
+          target={TYPE}
+          symbolSelectorProps={{
+            coins,
+            currencies,
+            currentCoin: targetSymbol,
+            onSymbolSelect: this.onSymbolSelect,
+          }}
+          refresh={refresh}
+        />
         {showContent}
       </Card>
     )

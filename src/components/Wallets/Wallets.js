@@ -10,11 +10,10 @@ import {
 } from '@blueprintjs/core'
 
 import DateInput from 'ui/DateInput'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
+import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
 import { platform } from 'var/config'
@@ -106,32 +105,18 @@ class Wallets extends PureComponent {
     )
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='wallets.title' />
-      )
+      showContent = <Loading />
     } else if (exchangeRows === 0 && marginRows === 0 && fundingRows === 0) {
       showContent = (
         <Fragment>
-          <h4>
-            {t('wallets.title')}
-            {' '}
-            {platform.showFrameworkMode && renderTimeSelection}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
+          {platform.showFrameworkMode && renderTimeSelection}
           <NoData descId='wallets.nodata' />
         </Fragment>
       )
     } else {
       showContent = (
         <Fragment>
-          <h4>
-            {t('wallets.title')}
-            {' '}
-            {platform.showFrameworkMode && renderTimeSelection}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
+          {platform.showFrameworkMode && renderTimeSelection}
           <h4>
             {t('wallets.header.exchange')}
           </h4>
@@ -159,6 +144,11 @@ class Wallets extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader
+          filter={false}
+          title='wallets.title'
+          refresh={refresh}
+        />
         {showContent}
       </Card>
     )

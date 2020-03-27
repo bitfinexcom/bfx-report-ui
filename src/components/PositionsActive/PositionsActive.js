@@ -8,9 +8,9 @@ import {
 } from '@blueprintjs/core'
 
 import DataTable from 'ui/DataTable'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import SectionHeader from 'ui/SectionHeader'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
@@ -69,22 +69,16 @@ class PositionsActive extends PureComponent {
       <ButtonGroup>
         <Button onClick={this.jumpToPositions}>{t('positions.closed')}</Button>
         <Button active>{t('positions.active')}</Button>
+        <RefreshButton handleClickRefresh={refresh} />
       </ButtonGroup>
     )
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='positions.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
       showContent = (
         <Fragment>
-          <h4>
-            {t('positions.title')}
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
           {renderButtonGroup}
           <br />
           <br />
@@ -94,13 +88,6 @@ class PositionsActive extends PureComponent {
     } else {
       showContent = (
         <Fragment>
-          <h4>
-            {t('positions.title')}
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
           {renderButtonGroup}
           <DataTable
             numRows={entries.length}
@@ -112,6 +99,10 @@ class PositionsActive extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader
+          filter={false}
+          title='positions.title'
+        />
         {showContent}
       </Card>
     )

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
@@ -6,23 +6,46 @@ import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
+import PairSelector from 'ui/PairSelector'
+import SymbolSelector from 'ui/SymbolSelector'
 
 import { propTypes, defaultProps } from './SectionHeader.props'
 
 class SectionHeader extends PureComponent {
+  getSelector = () => {
+    const {
+      pairSelectorProps,
+      pairsSelectorProps,
+      symbolSelectorProps,
+      symbolsSelectorProps,
+    } = this.props
+
+    if (symbolSelectorProps) {
+      return <SymbolSelector {...symbolSelectorProps} />
+    }
+    if (symbolsSelectorProps) {
+      return <MultiSymbolSelector {...symbolsSelectorProps} />
+    }
+    if (pairSelectorProps) {
+      return <PairSelector {...pairSelectorProps} />
+    }
+    if (pairsSelectorProps) {
+      return <MultiPairSelector {...pairsSelectorProps} />
+    }
+
+    return null
+  }
+
   render() {
     const {
+      filter,
       title,
       target,
-      pairSelectorProps,
-      symbolSelectorProps,
       refresh,
       t,
     } = this.props
 
-    const selector = pairSelectorProps
-      ? <MultiPairSelector {...pairSelectorProps} />
-      : <MultiSymbolSelector {...symbolSelectorProps} />
+    const selector = this.getSelector()
 
     return (
       <div className='section-header'>
@@ -31,12 +54,16 @@ class SectionHeader extends PureComponent {
         </div>
         <TimeRange className='section-header-time-range' />
         <div>
-          <div>
-            {t('selector.filter.symbol')}
-          </div>
-          {selector}
-          <ColumnsFilter target={target} />
-          <RefreshButton handleClickRefresh={refresh} />
+          {selector && (
+            <Fragment>
+              <div>
+                {t('selector.filter.symbol')}
+              </div>
+              {selector}
+            </Fragment>
+          )}
+          {filter && <ColumnsFilter target={target} />}
+          {refresh && <RefreshButton handleClickRefresh={refresh} />}
         </div>
       </div>
     )
