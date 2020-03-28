@@ -20,7 +20,7 @@
     "@blueprintjs/datetime": "^3.8.0",
     "@blueprintjs/icons": "^3.7.0",
     "@blueprintjs/select": "^3.8.0",
-    "@blueprintjs/table": "^3.5.0",
+    "@blueprintjs/table": "^3.8.3",
     "@blueprintjs/timezone": "^3.4.0",
     "classnames": "2.2.6",
     "connected-react-router": "^6.6.0",

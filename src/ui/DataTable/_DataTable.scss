@@ -1,3 +1,23 @@
 .bitfinex-table {
-  padding-bottom: 8px;
+  width: fit-content;
+  flex: 1 1 100px;
+
+  .bp3-table-quadrant-scroll-container {
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+      background-color: #0C1A25;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #5EBEFA;
+      border-radius: 2px;
+    }
+  }
+}
+
+.bp3-card {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
