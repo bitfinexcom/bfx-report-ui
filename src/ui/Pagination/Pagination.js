@@ -80,8 +80,8 @@ class Pagination extends PureComponent {
     ) : undefined
 
     return (
-      <div className='pagination row center-xs'>
-        <div className='bitfinex-pagination-group'>
+      <div className='pagination'>
+        <div className='pagination-group'>
           <Button
             minimal
             className='pagination-icon'
