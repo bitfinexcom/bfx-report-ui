@@ -4,16 +4,15 @@ import {
   Button,
   Classes,
   Dialog,
-  ButtonGroup,
   Intent,
 } from '@blueprintjs/core'
 import { TimezonePicker } from '@blueprintjs/timezone'
 
 import Icon from 'icons'
-import { platform } from 'var/config'
 import DateFormatSelector from 'ui/DateFormatSelector'
 import LangMenu from 'ui/LangMenu'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
+import ThemeSwitcher from 'ui/ThemeSwitcher'
 
 import { propTypes, defaultProps } from './Preferences.props'
 
@@ -21,11 +20,6 @@ class Preferences extends PureComponent {
   static propTypes = propTypes
 
   static defaultProps = defaultProps
-
-  switchTheme = (theme) => {
-    const { setTheme } = this.props
-    setTheme(theme)
-  }
 
   handleTimezoneChange = (timezone) => {
     const { setTimezone } = this.props
@@ -42,27 +36,9 @@ class Preferences extends PureComponent {
       handlePrefDialogClose,
       isOpen,
       t,
-      theme,
       timezone,
       inputTimezone,
     } = this.props
-
-    const renderThemeSwitcher = platform.hideSwitchTheme ? null : (
-      <ButtonGroup className='preferences-row preferences-theme'>
-        <Button
-          name='light'
-          text={t('theme.light')}
-          onClick={() => this.switchTheme('theme-light')}
-          intent={theme.includes('light') ? Intent.PRIMARY : undefined}
-        />
-        <Button
-          name='dark'
-          text={t('theme.dark')}
-          onClick={() => this.switchTheme('theme-dark')}
-          intent={theme.includes('dark') ? Intent.PRIMARY : undefined}
-        />
-      </ButtonGroup>
-    )
 
     return (
       <Dialog
@@ -78,7 +54,7 @@ class Preferences extends PureComponent {
             <div>{t('preferences.language')}</div>
             <LangMenu />
           </div>
-          {renderThemeSwitcher}
+          <ThemeSwitcher />
           <div className='preferences-row preferences-timezones'>
             <div className='preferences-item'>
               <div>{t('preferences.timezone')}</div>
