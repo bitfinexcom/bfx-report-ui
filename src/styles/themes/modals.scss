@@ -1,0 +1,16 @@
+.bp3-dialog {
+  background-color: var(--bgColor);
+  border: 1px solid var(--borderColor);
+  border-radius: 2px;
+
+  &-header {
+    background-color: var(--bgColor2);
+    border-radius: 2px 2px 0 0;
+
+    .bp3-heading {
+      margin-left: 10px;
+      font-size: 15px;
+      color: var(--color);
+    }
+  }
+}

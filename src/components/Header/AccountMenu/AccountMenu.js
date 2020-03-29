@@ -9,7 +9,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import PrefDialog from 'components/PrefDialog'
+import Preferences from 'components/Preferences'
 
 import { propTypes, defaultProps } from './AccountMenu.props'
 
@@ -65,8 +65,8 @@ class AccountMenu extends PureComponent {
           </div>
         </Popover>
 
-        <PrefDialog
-          isPrefOpen={isPrefOpen}
+        <Preferences
+          isOpen={isPrefOpen}
           handlePrefDialogClose={this.togglePref}
         />
       </div>

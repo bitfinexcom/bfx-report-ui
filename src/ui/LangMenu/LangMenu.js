@@ -20,10 +20,9 @@ class LangMenu extends PureComponent {
 
   static defaultProps = defaultProps
 
-  switchLang(lang, e) {
-    e.preventDefault()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.setLang(lang)
+  switchLang(lang) {
+    const { setLang } = this.props
+    setLang(lang)
   }
 
   render() {
@@ -34,7 +33,7 @@ class LangMenu extends PureComponent {
           <MenuItem
             key={language}
             text={LANGUAGE_NAMES[language]}
-            onClick={e => this.switchLang(language, e)}
+            onClick={() => this.switchLang(language)}
             intent={locale === language ? Intent.PRIMARY : undefined}
           />
         ))}
@@ -47,6 +46,7 @@ class LangMenu extends PureComponent {
         position={Position.BOTTOM}
       >
         <Button
+          className='button--medium'
           rightIcon={IconNames.CARET_DOWN}
           text={LANGUAGE_NAMES[locale]}
         />

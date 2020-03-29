@@ -257,12 +257,12 @@
   "preferences":{
     "title": "Preferences",
     "close": "Close",
-    "language": "Language:",
-    "theme": "Theme:",
-    "timezone": "Timezone:",
-    "timezone-input": "Input Timezone:",
-    "dateformat": "Date Format:",
-    "milliseconds": "Display Milliseconds:",
+    "language": "Language",
+    "theme": "Theme",
+    "timezone": "Timezone",
+    "timezone-input": "Input Timezone",
+    "dateformat": "Date Format",
+    "milliseconds": "Display Milliseconds",
     "sync": {
       "add-filter": "add filter",
       "add-pair": "add pair",

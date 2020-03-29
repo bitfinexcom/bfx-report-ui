@@ -1,10 +1,14 @@
 @import "./variables.scss";
 @import "./fonts/roboto.css";
+@import './button.scss';
+@import './checkbox.scss';
+@import './popover.scss';
 
 @import "components/Auth/_Auth.scss";
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "components/Header/_Header.scss";
 @import "components/Header/TimeFrame/_TimeFrame.scss";
+@import "components/Preferences/_Preferences.scss";
 @import "ui/_index.scss";
 @import "themes";
 
@@ -23,29 +27,6 @@ body {
 
 .bitfinex-nonideal {
   margin-top: 30px;
-}
-
-.refresh-button {
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
-
-  &-icon {
-    vertical-align: middle;
-  }
-}
-
-/* status close button */
-.#{$ns}-callout.#{$ns}-callout-icon .#{$ns}-icon.bitfinex-status-close {
-  position: absolute;
-  top: 12px;
-  right: 10px;
-  cursor: pointer;
-  opacity: 0.3;
-
-  &:hover {
-    opacity: 0.5;
-  }
 }
 
 .bitfinex-show-soft {
@@ -134,30 +115,14 @@ body.#{$ns}-light {
   }
 }
 
-.bp3-button {
-  height: 40px;
-  padding: 0 30px;
-  font-size: 15px;
-  border-radius: 2px;
-
-  &:not([class*="bp3-intent-"]) {
-    background-image: none;
-    background-color: var(--buttonBg);
-    color: var(--color);
-
-    &:hover {
-      background-color: var(--buttonHoverBg);
-    }
+.bp3-timezone-picker-popover {
+  .bp3-input {
+    background-color: var(--color);
   }
 }
 
 .bitfinex-text-align-right {
   text-align: right;
-}
-
-/* preferences dialog */
-.#{$ns}-dialog-body > .row {
-  margin-bottom: 10px;
 }
 
 .bitfinex-preferences-desc {

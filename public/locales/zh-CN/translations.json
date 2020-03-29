@@ -246,12 +246,12 @@
   "preferences": {
     "title": "首选项",
     "close": "结清",
-    "language": "语言:",
-    "theme": "主题:",
-    "timezone": "时区:",
-    "timezone-input": "输入时区:",
-    "dateformat": "日期格式:",
-    "milliseconds": "显示毫秒：",
+    "language": "语言",
+    "theme": "主题",
+    "timezone": "时区",
+    "timezone-input": "输入时区",
+    "dateformat": "日期格式",
+    "milliseconds": "显示毫秒",
     "sync": {
       "add-filter": "add filter",
       "add-pair": "add pair",

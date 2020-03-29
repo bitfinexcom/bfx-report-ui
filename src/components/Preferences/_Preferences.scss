@@ -1,0 +1,36 @@
+.preferences {
+  &-row {
+    margin-bottom: 25px;
+
+    &:last-of-type {
+      margin-top: -10px;
+      margin-bottom: 0;
+    }
+  }
+
+  &-item {
+    margin-right: 20px;
+
+    & > span {
+      display: block;
+      margin-top: 10px;
+    }
+  }
+
+  &-timezones {
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .preferences-item {
+      margin-bottom: 10px;
+    }
+  }
+
+  .timezone-picker {
+    width: 106px;
+    height: 40px;
+  }
+}

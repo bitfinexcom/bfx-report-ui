@@ -1,0 +1,69 @@
+.bp3-button {
+  width: 100px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 2px;
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  &:not([class*="bp3-intent-"]) {
+    background-image: none;
+    background-color: var(--bgColor2);
+    box-shadow: 0 0 0 1px var(--borderColor);
+    color: var(--color);
+
+    &:hover, &:active, &.bp3-active {
+      background-color: var(--borderColor);
+      box-shadow: 0 0 0 1px var(--borderColor);
+    }
+  }
+
+  &.bp3-intent {
+    &-primary {
+      background-image: none;
+      background-color: var(--buttonBg);
+      box-shadow: 0 0 0 1px var(--buttonBg);
+      color: var(--color);
+
+      &:hover, &:active, &.bp3-active {
+        background-color: var(--buttonHoverBg);
+        box-shadow: 0 0 0 1px var(--buttonHoverBg);
+      }
+    }
+  }
+
+  &.button--medium {
+    width: 123px;
+    height: 40px;
+  }
+
+  &.button--large {
+    width: 162px;
+    height: 40px;
+  }
+}
+
+.refresh-button {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+
+  &-icon {
+    vertical-align: middle;
+  }
+}
+
+/* status close button */
+.#{$ns}-callout.#{$ns}-callout-icon .#{$ns}-icon.bitfinex-status-close {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  cursor: pointer;
+  opacity: 0.3;
+
+  &:hover {
+    opacity: 0.5;
+  }
+}

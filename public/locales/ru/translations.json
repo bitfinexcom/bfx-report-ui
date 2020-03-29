@@ -246,12 +246,12 @@
   "preferences": {
     "title": "Предпочтения",
     "close": "Закрыть",
-    "language": "Язык:",
-    "theme": "Тема:",
-    "timezone": "Часовой пояс:",
-    "timezone-input": "Часовой пояс вводимых данных:",
-    "dateformat": "Формат даты:",
-    "milliseconds": "Показать миллисекунды:",
+    "language": "Язык",
+    "theme": "Тема",
+    "timezone": "Часовой пояс",
+    "timezone-input": "Часовой пояс вводимых данных",
+    "dateformat": "Формат даты",
+    "milliseconds": "Показать миллисекунды",
     "sync": {
       "add-filter": "add filter",
       "add-pair": "add pair",

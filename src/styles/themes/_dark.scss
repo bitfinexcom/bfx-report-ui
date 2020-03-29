@@ -11,11 +11,11 @@
   --menuActive: #172d3e;
   --menuActiveBorder: #82baf6;
 
-  --timeRangeColor: #545C62;
+  --timeRangeColor: #545c62;
 
   // tooltips
-  --tooltipBg: #ffffff;
-  --tooltipColor: black;
+  --popoverBg: #ffffff;
+  --popoverColor: #000000;
 
   // buttons
   --buttonBg: #82baf6;
@@ -39,4 +39,7 @@
   --multiHoverBg: #19354a;
   --multiSelectedBg: #82baf6;
   --multiSelectedHoverBg: #4c88c8;
+
+  // checkbox
+  --checkboxBorder: #f5f2f2;
 }

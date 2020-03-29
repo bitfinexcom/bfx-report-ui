@@ -1,6 +1,11 @@
 import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button, InputGroup, Icon } from '@blueprintjs/core'
+import {
+  Button,
+  InputGroup,
+  Icon,
+  Intent,
+} from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 import _isEqual from 'lodash/isEqual'
 
@@ -142,7 +147,11 @@ class ColumnsFilter extends PureComponent {
     return (
       <Fragment>
         <div className='columns-filter-wrapper'>
-          <Button onClick={this.toggleDialog}>
+          <Button
+            onClick={this.toggleDialog}
+            className='button--large'
+            intent={Intent.PRIMARY}
+          >
             {t('columnsfilter.title')}
           </Button>
           {hasAppliedFilters && <div className='columns-filter-wrapper-mark' />}

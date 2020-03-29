@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { setTheme, setTimezone, setInputTimezone } from 'state/base/actions'
 import { getTheme, getTimezone, getInputTimezone } from 'state/base/selectors'
 
-import PrefDialog from './PrefDialog'
+import Preferences from './Preferences'
 
 const mapStateToProps = state => ({
   theme: getTheme(state),
@@ -17,6 +17,6 @@ const mapDispatchToProps = {
   setInputTimezone,
 }
 
-const PrefDialogContainer = connect(mapStateToProps, mapDispatchToProps)(PrefDialog)
+const PreferencesContainer = connect(mapStateToProps, mapDispatchToProps)(Preferences)
 
-export default PrefDialogContainer
+export default PreferencesContainer

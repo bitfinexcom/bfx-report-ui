@@ -46,6 +46,7 @@ class DateFormatSelector extends PureComponent {
         position={Position.BOTTOM}
       >
         <Button
+          className='button--medium'
           rightIcon={IconNames.CARET_DOWN}
           text={dateFormat}
         />
