@@ -1,6 +1,8 @@
 .bitfinex-table {
   width: fit-content;
+  max-height: max-content;
   flex: 1 1 100px;
+  clip-path: inset(-1px 0px 0px -1px);
 
   .bp3-table-quadrant-scroll-container {
     &::-webkit-scrollbar {
