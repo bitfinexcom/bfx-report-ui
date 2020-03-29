@@ -1,13 +1,42 @@
-.bp3-dark {
-  --bgColor: #30404d;
-  --bgColor2: #394b59; // #2f3d48
+.theme-dark {
+  // main
+  --bgColor: #102331;
+  --bgColor2: #172d3e;
   --color: #ffffff;
-  --borderColor: #28363f;
+  --borderColor: #19354a;
+  --activeColor: #82baf6;
 
-  --thBg: #30404d;
-  --thBgHover: #394b59;
+  // nav menu
+  --menuHover: #19354a;
+  --menuActive: #172d3e;
+  --menuActiveBorder: #82baf6;
+
+  --timeRangeColor: #545C62;
+
+  // tooltips
+  --tooltipBg: #ffffff;
+  --tooltipColor: black;
+
+  // buttons
+  --buttonBg: #82baf6;
+  --buttonHoverBg: #4c88c8;
+
+  // tables
+  --thColor: #82baf6;
+  --thBg: #172d3e;
+  --thBgHover: #19354a;
   --tableColor: #f5f8fa;
-  --tableBorder: rgba(16, 22, 26, 0.15);
-  --tableOddBg: #2f3d48;
-  --tableEvenBg: #293742;
+  --tableBorder: #19354a;
+  --tableOddBg: #172d3e;
+  --tableEvenBg: #102331;
+
+  // multi select
+  --multiBg: #172d3e;
+  --multiTagBg: #82baf6;
+  --multiTagHoverBg: #4c88c8;
+  --multiTagRemove: #061a25;
+  --multiActiveBg: #102331;
+  --multiHoverBg: #19354a;
+  --multiSelectedBg: #82baf6;
+  --multiSelectedHoverBg: #4c88c8;
 }

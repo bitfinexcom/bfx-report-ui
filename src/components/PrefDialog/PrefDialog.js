@@ -25,9 +25,8 @@ class PrefDialog extends PureComponent {
 
   constructor(props) {
     super(props)
-    this.switchDark = this.switchTheme.bind(this, 'bp3-dark')
-    this.switchLight = this.switchTheme.bind(this, 'bp3-light')
-    this.switchMidnight = this.switchTheme.bind(this, 'midnight')
+    this.switchDark = this.switchTheme.bind(this, 'theme-dark')
+    this.switchLight = this.switchTheme.bind(this, 'theme-light')
   }
 
   switchTheme = (theme, e) => {
@@ -77,12 +76,6 @@ class PrefDialog extends PureComponent {
               text={t('theme.dark')}
               onClick={this.switchDark}
               intent={theme.includes('dark') ? Intent.PRIMARY : undefined}
-            />
-            <Button
-              name='midnight'
-              text={t('theme.midnight')}
-              onClick={this.switchMidnight}
-              intent={theme.includes('midnight') ? Intent.PRIMARY : undefined}
             />
           </ButtonGroup>
         </div>
