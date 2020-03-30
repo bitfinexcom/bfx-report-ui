@@ -1,4 +1,13 @@
-.bitfinex-multi-select {
+.bitfinex-select {
+  .bp3-button {
+    width: 180px;
+    height: 40px;
+    margin: 5px 2px 5px 0;
+    background-color: var(--multiBg);
+    border: 1px solid var(--borderColor);
+    box-shadow: none;
+  }
+
   .bp3-multi-select {
     height: 40px;
     background-color: var(--multiBg);
@@ -37,8 +46,17 @@
 
   &-menu {
     .bp3-popover-content {
-      width: 223px;
+      //width: 223px;
       height: 100%;
+      padding: 0;
+
+      .bp3-input-group {
+        color: var(--color);
+
+        .bp3-input {
+          border-radius: 2px;
+        }
+      }
     }
 
     .bp3-menu {
@@ -47,7 +65,7 @@
       padding: 0;
       background-color: var(--multiBg);
       border: 1px solid var(--borderColor);
-      border-radius: 0;
+      border-radius: 2px;
       scrollbar-width: none; // Firefox
       -ms-overflow-style: none; // IE
 
@@ -74,6 +92,12 @@
 
           .bp3-menu-item-label {
             color: var(--activeColor);
+          }
+
+          &:hover {
+            .bp3-menu-item-label {
+              color: var(--color);
+            }
           }
         }
 

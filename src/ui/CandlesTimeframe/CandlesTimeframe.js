@@ -1,32 +1,22 @@
 import React from 'react'
-import { HTMLSelect } from '@blueprintjs/core'
 import _map from 'lodash/map'
+
+import Select from 'ui/Select'
 
 import { propTypes, defaultProps } from './CandlesTimeframe.props'
 import TIMEFRAMES from './var'
 
-class CandlesTimeframe extends React.PureComponent {
-  onChange = (e) => {
-    const { value } = e.target
-    const { onChange } = this.props
-    onChange(value)
-  }
+const CandlesTimeframe = (props) => {
+  const { value, onChange } = props
+  const items = _map(TIMEFRAMES, timeframe => timeframe)
 
-  render() {
-    const { value, className } = this.props
-
-    return (
-      <HTMLSelect
-        value={value}
-        className={className}
-        onChange={this.onChange}
-      >
-        {_map(TIMEFRAMES, timeframe => (
-          <option key={timeframe} value={timeframe}>{timeframe}</option>
-        ))}
-      </HTMLSelect>
-    )
-  }
+  return (
+    <Select
+      value={value}
+      items={items}
+      onChange={onChange}
+    />
+  )
 }
 
 CandlesTimeframe.propTypes = propTypes

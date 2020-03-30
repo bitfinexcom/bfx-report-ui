@@ -14,7 +14,7 @@ import { propTypes, defaultProps } from './Candlestick.props'
 
 const STYLES = {
   [THEME_CLASSES.DARK]: {
-    backgroundColor: '#30404d',
+    backgroundColor: '#102331',
     textColor: 'rgba(255, 255, 255, 0.5)',
     volumeColor: 'rgb(97,107,115)',
   },

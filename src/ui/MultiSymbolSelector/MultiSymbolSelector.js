@@ -54,7 +54,7 @@ class MultiSymbolSelector extends PureComponent {
 
     return (
       <MultiSelect
-        className='bitfinex-multi-select'
+        className='bitfinex-select'
         disabled={!coins.length && !existingCoins.length}
         placeholder={t('selector.select')}
         items={items}
@@ -63,7 +63,7 @@ class MultiSymbolSelector extends PureComponent {
         onItemSelect={toggleSymbol}
         popoverProps={{
           minimal: true,
-          popoverClassName: 'bitfinex-multi-select-menu',
+          popoverClassName: 'bitfinex-select-menu',
         }}
         tagInputProps={{ tagProps: { minimal: true }, onRemove: toggleSymbol }}
         tagRenderer={coin => coin}

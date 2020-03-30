@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import {
   Button,
@@ -10,11 +10,9 @@ import _isEqual from 'lodash/isEqual'
 
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import TimeRange from 'ui/TimeRange'
 import TradesSwitch from 'components/Trades/TradesSwitch'
 import PairSelector from 'ui/PairSelector'
 import Timeframe from 'ui/CandlesTimeframe'
-import ExportButton from 'ui/ExportButton'
 import RefreshButton from 'ui/RefreshButton'
 import Candlestick from 'ui/Charts/Candlestick'
 import CandlesSyncPref from 'ui/CandlesSyncPref'
@@ -22,6 +20,7 @@ import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
 import { propTypes, defaultProps } from './Candles.props'
+import TimeRange from '../../ui/TimeRange'
 
 const TYPE = queryConstants.MENU_CANDLES
 
@@ -70,81 +69,51 @@ class Candles extends PureComponent {
     const { pair, timeframe } = params
     const hasChanges = this.hasChanges()
 
-    const renderOptionsSelection = (
-      <Fragment>
-        <PairSelector
-          currentPair={pair}
-          onPairSelect={this.onPairSelect}
-          pairs={pairs}
-        />
-        {' '}
-        <Timeframe value={timeframe} onChange={this.onTimeframeChange} />
-        {' '}
-        <Button
-          onClick={this.handleQuery}
-          intent={hasChanges ? Intent.PRIMARY : null}
-          disabled={!hasChanges}
-        >
-          {t('query.title')}
-        </Button>
-      </Fragment>
-    )
-
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='candles.title' />
-      )
+      showContent = <Loading />
     } else if (!candles.entries.length) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('candles.title')}
-            {' '}
-            <TimeRange />
-            {' '}
-            {renderOptionsSelection}
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <CandlesSyncPref />
-            <br />
-            <br />
-            <TradesSwitch target={TYPE} />
-          </h4>
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
-          <h4>
-            {t('candles.title')}
-            {' '}
-            <TimeRange />
-            {' '}
-            {renderOptionsSelection}
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <CandlesSyncPref />
-            <br />
-            <br />
-            <TradesSwitch target={TYPE} />
-          </h4>
-          <Candlestick
-            candles={candles}
-            trades={trades}
-            fetchData={fetchData}
-          />
-        </Fragment>
+        <Candlestick
+          candles={candles}
+          trades={trades}
+          fetchData={fetchData}
+        />
       )
     }
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <div className='section-header'>
+          <div className='section-header-title'>
+            {t('candles.title')}
+          </div>
+          <TimeRange className='section-header-time-range' />
+          <div>
+            {t('selector.filter.symbol')}
+          </div>
+          <PairSelector
+            currentPair={pair}
+            onPairSelect={this.onPairSelect}
+            pairs={pairs}
+          />
+          {' '}
+          <Timeframe value={timeframe} onChange={this.onTimeframeChange} />
+          {' '}
+          <Button
+            className='button--large'
+            onClick={this.handleQuery}
+            intent={Intent.PRIMARY}
+            disabled={!hasChanges}
+          >
+            {t('query.title')}
+          </Button>
+          <RefreshButton handleClickRefresh={refresh} />
+        </div>
+        <CandlesSyncPref />
+        <TradesSwitch target={TYPE} />
         {showContent}
       </Card>
     )

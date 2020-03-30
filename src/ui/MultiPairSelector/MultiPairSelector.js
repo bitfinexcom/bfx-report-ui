@@ -52,7 +52,7 @@ class MultiPairSelector extends PureComponent {
 
     return (
       <MultiSelect
-        className='bitfinex-multi-select'
+        className='bitfinex-select'
         disabled={!pairs.length && !existingPairs.length}
         placeholder={t('selector.select')}
         items={items}
@@ -61,7 +61,7 @@ class MultiPairSelector extends PureComponent {
         onItemSelect={togglePair}
         popoverProps={{
           minimal: true,
-          popoverClassName: 'bitfinex-multi-select-menu',
+          popoverClassName: 'bitfinex-select-menu',
         }}
         tagInputProps={{
           tagProps: { minimal: true },
