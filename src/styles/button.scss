@@ -13,11 +13,11 @@
     background-color: var(--bgColor2);
     border: 1px solid var(--borderColor);
     box-shadow: none;
-    color: var(--color);
+    color: var(--buttonColor);
 
     &:hover, &:active, &.bp3-active {
-      background-color: var(--borderColor);
-      border: 1px solid var(--borderColor);
+      background-color: var(--buttonHoverBg);
+      border: 1px solid var(--buttonHoverBg);
       box-shadow: none;
     }
   }
@@ -28,11 +28,11 @@
       background-color: var(--buttonBg);
       border: 1px solid var(--buttonBg);
       box-shadow: none;
-      color: var(--color);
+      color: var(--buttonPrimaryColor);
 
       &:hover, &:active, &.bp3-active {
-        background-color: var(--buttonHoverBg);
-        border: 1px solid var(--buttonHoverBg);
+        background-color: var(--buttonPrimaryHoverBg);
+        border: 1px solid var(--buttonPrimaryHoverBg);
         box-shadow: none;
       }
     }

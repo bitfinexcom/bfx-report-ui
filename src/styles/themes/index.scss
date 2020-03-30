@@ -12,6 +12,10 @@ body {
   background-color: var(--bgColor);
   color: var(--color);
 
+  svg path {
+    fill: var(--iconColor);
+  }
+
   .bp3-card.bp3-elevation-0 {
     box-shadow: none;
   }

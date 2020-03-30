@@ -1,8 +1,54 @@
 .theme-light {
+  // main
   --bgColor: #ffffff;
   --bgColor2: #ffffff;
-  --color: #182026;
-  --borderColor: #dbdcdd;
+  --color: #102331;
+  --borderColor: #102331;
+  --iconColor: #102331;
+  --activeColor: #518bc9;
 
-  --tableBorder: rgba(16, 22, 26, 0.15);
+  // nav menu
+  --menuHover: #d8ecfb;
+  --menuActive: #d8ecfb;
+  --menuActiveBorder: #518bc9;
+
+  --timeRangeColor: #545c62;
+
+  // tooltips
+  --popoverBg: #ffffff;
+  --popoverColor: #000000;
+
+  // buttons
+  --buttonBg: #518bc9;
+  --buttonColor: #102331;
+  --buttonPrimaryColor: #ffffff;
+  --buttonHoverBg: #d8ecfb;
+  --buttonPrimaryHoverBg: #4c88c8;
+
+  // tables
+  --thColor: #518bc9;
+  --thBg: #d8ecfb;
+  --thBgHover: #427ab7;
+  --tableColor: #102331;
+  --tableBorder: #102331;
+  --tableOddBg: #d8ecfb;
+  --tableEvenBg: #ffffff;
+  --tableScrollBg: #d1d1d1;
+  --tableScrollThumbBg: #82baf6;
+
+  // multi select
+  --multiBg: #f5f8fa;
+  --multiTagBg: #82baf6;
+  --multiTagHoverBg: #4c88c8;
+  --multiTagRemove: #061a25;
+  --multiActiveBg: #518bc9;
+  --multiActiveColor: #ffffff;
+  --multiActiveHoverColor: #ffffff;
+  --multiHoverBg: #d8ecfb;
+  --multiSelectedBg: #82baf6;
+  --multiSelectedColor: #ffffff;
+  --multiSelectedHoverBg: #4c88c8;
+
+  // checkbox
+  --checkboxBorder: #102331;
 }

@@ -8,11 +8,11 @@
     &::-webkit-scrollbar {
       width: 6px;
       height: 6px;
-      background-color: #0C1A25;
+      background-color: var(--tableScrollBg);
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #5EBEFA;
+      background-color: var(--tableScrollThumbBg);
       border-radius: 2px;
     }
   }

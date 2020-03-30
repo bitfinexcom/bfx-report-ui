@@ -4,6 +4,7 @@
   --bgColor2: #172d3e;
   --color: #ffffff;
   --borderColor: #19354a;
+  --iconColor: #ffffff;
   --activeColor: #82baf6;
 
   // nav menu
@@ -19,7 +20,10 @@
 
   // buttons
   --buttonBg: #82baf6;
-  --buttonHoverBg: #4c88c8;
+  --buttonColor: #ffffff;
+  --buttonPrimaryColor: #ffffff;
+  --buttonHoverBg: #19354a;
+  --buttonPrimaryHoverBg: #4c88c8;
 
   // tables
   --thColor: #82baf6;
@@ -29,6 +33,8 @@
   --tableBorder: #19354a;
   --tableOddBg: #172d3e;
   --tableEvenBg: #102331;
+  --tableScrollBg: #0c1a25;
+  --tableScrollThumbBg: #5ebefa;
 
   // multi select
   --multiBg: #172d3e;
@@ -36,8 +42,11 @@
   --multiTagHoverBg: #4c88c8;
   --multiTagRemove: #061a25;
   --multiActiveBg: #102331;
+  --multiActiveColor: #82baf6;
+  --multiActiveHoverColor: #ffffff;
   --multiHoverBg: #19354a;
   --multiSelectedBg: #82baf6;
+  --multiSelectedColor: #ffffff;
   --multiSelectedHoverBg: #4c88c8;
 
   // checkbox

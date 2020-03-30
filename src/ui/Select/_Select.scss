@@ -4,6 +4,7 @@
     height: 40px;
     margin: 5px 2px 5px 0;
     background-color: var(--multiBg);
+    color: var(--color);
     border: 1px solid var(--borderColor);
     box-shadow: none;
   }
@@ -88,15 +89,17 @@
 
         &.bp3-active {
           background-color: var(--multiActiveBg);
-          color: var(--activeColor);
+          color: var(--multiActiveColor);
 
           .bp3-menu-item-label {
-            color: var(--activeColor);
+            color: var(--multiActiveColor);
           }
 
           &:hover {
+            color: var(--multiActiveHoverColor);
+
             .bp3-menu-item-label {
-              color: var(--color);
+              color: var(--multiActiveHoverColor);
             }
           }
         }
@@ -112,18 +115,18 @@
 
         &--selected {
           background-color: var(--multiSelectedBg);
-          color: var(--color);
+          color: var(--multiSelectedColor);
 
           .bp3-menu-item-label {
-            color: var(--color);
+            color: var(--multiSelectedColor);
           }
 
           &:hover {
             background-color: var(--multiSelectedHoverBg);
-            color: var(--color);
+            color: var(--multiSelectedColor);
 
             .bp3-menu-item-label {
-              color: var(--color);
+              color: var(--multiSelectedColor);
             }
           }
         }
