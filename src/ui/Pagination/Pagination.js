@@ -1,8 +1,9 @@
 import React, { createRef, Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button, Spinner } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
+import classNames from 'classnames'
+import { Spinner } from '@blueprintjs/core'
 
+import Icon from 'icons'
 import { getPageSize } from 'state/query/utils'
 
 import { propTypes, defaultProps } from './Pagination.props'
@@ -82,46 +83,36 @@ class Pagination extends PureComponent {
     return (
       <div className='pagination'>
         <div className='pagination-group'>
-          <Button
-            minimal
-            className='pagination-icon'
-            icon={IconNames.DOUBLE_CHEVRON_LEFT}
+          <Icon.CHEVRON_DOUBLE_LEFT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page === 1 || loading })}
             onClick={this.jumpToFirstPage}
-            disabled={page === 1 || loading}
           />
-          <Button
-            minimal
-            className='pagination-icon'
-            icon={IconNames.CHEVRON_LEFT}
+          <Icon.CHEVRON_LEFT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page - 1 === 0 || loading })}
             onClick={this.backward}
-            disabled={page - 1 === 0 || loading}
           />
-          {t('pagination.page')}
-          <input
-            className='pagination-input'
-            ref={this.pageInput}
-            placeholder={page}
-            onKeyPress={this.handleKeyPress}
-            data-pagelen={pageLen}
-            disabled={loading}
-          />
-          {t('pagination.of')}
-          {' '}
-          {pageLen}
-          {renderRestDots}
-          <Button
-            minimal
-            className='pagination-icon'
-            icon={IconNames.CHEVRON_RIGHT}
+          <span className='pagination-page'>
+            {t('pagination.page')}
+            <input
+              className='pagination-input'
+              ref={this.pageInput}
+              placeholder={page}
+              onKeyPress={this.handleKeyPress}
+              data-pagelen={pageLen}
+              disabled={loading}
+            />
+            {t('pagination.of')}
+            {' '}
+            {pageLen}
+            {renderRestDots}
+          </span>
+          <Icon.CHEVRON_RIGHT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page === pageLen || loading })}
             onClick={this.forward}
-            disabled={page === pageLen || loading}
           />
-          <Button
-            minimal
-            className='pagination-icon'
-            rightIcon={IconNames.DOUBLE_CHEVRON_RIGHT}
+          <Icon.CHEVRON_DOUBLE_RIGHT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': !nextPage || loading })}
             onClick={this.fetchNext}
-            disabled={!nextPage || loading}
           />
           {renderLoading}
         </div>

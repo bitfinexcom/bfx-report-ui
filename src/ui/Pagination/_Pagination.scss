@@ -1,12 +1,27 @@
 .pagination {
+  margin: 25px 0;
+
   &-icon {
-    margin: 4px -5px;
+    margin: 0 2px;
+    vertical-align: middle;
+    cursor: pointer;
+
+    &--disabled {
+      pointer-events: none;
+
+      path {
+        fill: var(--timeRangeColor);
+      }
+    }
+  }
+
+  &-page {
+    margin: 0 10px;
   }
 
   &-input {
     width: 45px;
-    margin-right: 2px;
-    margin-left: 2px;
+    margin: 0 2px;
     text-align: center;
   }
 }
