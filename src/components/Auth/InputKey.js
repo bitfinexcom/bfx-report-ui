@@ -14,7 +14,6 @@ export const InputKey = ({
     <FormGroup
       label={t(label)}
       labelFor={name}
-      labelInfo={t('auth.required')}
     />
     <InputGroup
       id={name}

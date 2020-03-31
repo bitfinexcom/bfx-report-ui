@@ -47,7 +47,7 @@
 
   &-menu {
     .bp3-popover-content {
-      //width: 223px;
+      width: 223px;
       height: 100%;
       padding: 0;
 
@@ -84,6 +84,7 @@
         border-radius: 0;
 
         &-label {
+          font-size: 12px;
           color: var(--color);
         }
 

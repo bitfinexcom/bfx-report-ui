@@ -24,15 +24,6 @@ body {
     min-height: calc(100vh - 52px); // minus header height
   }
 
-  .bp3-input {
-    background-color: var(--bgColor);
-    color: var(--Color);
-
-    &::placeholder {
-      color: var(--Color)
-    }
-  }
-
   // table specific styles
   .bp3-table-container {
     box-shadow: 0 0 0 1px var(--tableBorder);
@@ -77,5 +68,25 @@ body {
 
   .bp3-table-cell {
     box-shadow: inset 0 -1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+  }
+
+  .bp3-input {
+    height: 40px;
+    background-color: var(--bgColor2);
+    box-shadow: none;
+    border: 1px solid var(--borderColor);
+    color: var(--color);
+
+    &::placeholder {
+      color: var(--color)
+    }
+  }
+
+  a {
+    color: var(--buttonBg);
+
+    &:hover {
+      color: var(--buttonBg);
+    }
   }
 }

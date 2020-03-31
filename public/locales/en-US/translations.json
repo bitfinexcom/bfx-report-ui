@@ -17,7 +17,7 @@
   },
   "auth": {
     "auth": "Auth",
-    "title": "Please Login",
+    "title": "Login",
     "enterAPIKey": "Enter API Key:",
     "enterAPISecret": "Enter API Secret:",
     "checkAuth": "Check Auth",

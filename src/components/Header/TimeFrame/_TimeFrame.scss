@@ -60,6 +60,11 @@
     background-color: var(--bgColor2);
     color: var(--color);
     box-shadow: 0 0 0 2px var(--borderColor);
+
+    .bp3-input {
+      height: 30px;
+      background-color: var(--bgColor);
+    }
   }
 
   .bp3-popover-content {

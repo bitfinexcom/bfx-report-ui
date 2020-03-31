@@ -79,9 +79,8 @@ class Auth extends PureComponent {
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <Button
-                className='button--large'
+                className='bitfinex-auth-check'
                 name='check'
-                icon={IconNames.KEY}
                 intent={Intent.SUCCESS}
                 onClick={this.handleClick}
                 disabled={!apiKey || !apiSecret || loading}

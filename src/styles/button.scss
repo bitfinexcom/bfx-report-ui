@@ -36,6 +36,20 @@
         box-shadow: none;
       }
     }
+
+    &-success {
+      background-image: none;
+      background-color: var(--buttonSuccessBg);
+      border: 1px solid var(--buttonSuccessBg);
+      box-shadow: none;
+      color: var(--buttonSuccessColor);
+
+      &:hover, &:active, &.bp3-active {
+        background-color: var(--buttonSuccessHoverBg);
+        border: 1px solid var(--buttonSuccessHoverBg);
+        box-shadow: none;
+      }
+    }
   }
 
   &.button--medium {
