@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
+import classNames from 'classnames'
 import {
   Menu,
   MenuDivider,
@@ -14,6 +15,8 @@ import Preferences from 'components/Preferences'
 import { propTypes, defaultProps } from './AccountMenu.props'
 
 const HELP_LINK = 'https://support.bitfinex.com/hc/en-us/articles/360008951853'
+
+const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
 
 class AccountMenu extends PureComponent {
   state = {
@@ -33,7 +36,7 @@ class AccountMenu extends PureComponent {
     const { isPrefOpen } = this.state
 
     return (
-      <div className='account-menu'>
+      <div className={classNames('account-menu', { 'account-menu--no-email': !email })}>
         <Popover
           minimal
           position={Position.BOTTOM_LEFT}
@@ -67,7 +70,7 @@ class AccountMenu extends PureComponent {
             <div className='account-menu-target'>
               <Icon.USER_CIRCLE />
               <span className='account-menu-range'>
-                {email}
+                {formatUsername(email)}
               </span>
               <Icon.CHEVRON_DOWN />
               <Icon.CHEVRON_UP />

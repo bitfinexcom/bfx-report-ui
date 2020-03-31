@@ -1,10 +1,15 @@
 .account-menu {
+  min-width: 206px;
   float: right;
   height: 50px;
   line-height: 50px;
   user-select: none;
   cursor: pointer;
   border-left: 2px solid var(--borderColor);
+
+  &--no-email {
+    min-width: initial;
+  }
 
   &-wrapper {
     height: 50px;
@@ -42,6 +47,7 @@
 
   &-target {
     width: fit-content;
+    margin: 0 auto;
     padding: 0 13px;
   }
 
@@ -56,8 +62,7 @@
   }
 
   &-content {
-    width: 80%;
-    min-width: 235px;
+    min-width: 198px;
     height: fit-content;
     background-color: var(--bgColor2);
     color: var(--color);
