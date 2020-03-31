@@ -28,7 +28,7 @@
     }
   }
 
-  .timeframe-shortcut, .help-link {
+  .timeframe-shortcut {
     display: inline-block;
     padding: 0 13px;
     height: 100%;
@@ -63,11 +63,6 @@
     width: 274px;
     height: 100%;
     border-right: 2px solid var(--borderColor);
-  }
-
-  .help-link {
-    color: var(--color);
-    text-decoration: none;
   }
 
   &-email {

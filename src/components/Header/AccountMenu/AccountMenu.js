@@ -13,12 +13,16 @@ import Preferences from 'components/Preferences'
 
 import { propTypes, defaultProps } from './AccountMenu.props'
 
+const HELP_LINK = 'https://support.bitfinex.com/hc/en-us/articles/360008951853'
+
 class AccountMenu extends PureComponent {
   state = {
     isPrefOpen: false,
   }
 
   togglePref = () => this.setState(({ isPrefOpen }) => ({ isPrefOpen: !isPrefOpen }))
+
+  openHelp = () => window.open(HELP_LINK)
 
   render() {
     const {
@@ -40,6 +44,12 @@ class AccountMenu extends PureComponent {
                   onClick={this.togglePref}
                   icon={<Icon.SLIDER_CIRCLE_H />}
                   text={t('header.preferences')}
+                />
+                <MenuDivider />
+                <MenuItem
+                  onClick={this.openHelp}
+                  icon={<Icon.INFO_CIRCLE />}
+                  text={t('header.help')}
                 />
                 <MenuDivider />
                 <MenuItem
