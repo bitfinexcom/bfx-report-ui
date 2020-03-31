@@ -1,0 +1,13 @@
+.theme-switcher {
+  &-theme {
+    display: inline-block;
+
+    svg {
+      margin-bottom: 6px;
+    }
+
+    &:first-of-type {
+      margin-right: 50px;
+    }
+  }
+}

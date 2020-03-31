@@ -1,11 +1,8 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  ButtonGroup,
-  Intent,
-} from '@blueprintjs/core'
+import { Radio } from '@blueprintjs/core'
 
+import Icon from 'icons'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './ThemeSwitcher.props'
@@ -15,9 +12,10 @@ class ThemeSwitcher extends PureComponent {
 
   static defaultProps = defaultProps
 
-  switchTheme = (theme) => {
+  switchTheme = (e) => {
+    const { value } = e.target
     const { setTheme } = this.props
-    setTheme(theme)
+    setTheme(value)
   }
 
   render() {
@@ -28,20 +26,27 @@ class ThemeSwitcher extends PureComponent {
     }
 
     return (
-      <ButtonGroup className='preferences-row preferences-theme'>
-        <Button
-          name='light'
-          text={t('theme.light')}
-          onClick={() => this.switchTheme('theme-light')}
-          intent={theme.includes('light') ? Intent.PRIMARY : undefined}
-        />
-        <Button
-          name='dark'
-          text={t('theme.dark')}
-          onClick={() => this.switchTheme('theme-dark')}
-          intent={theme.includes('dark') ? Intent.PRIMARY : undefined}
-        />
-      </ButtonGroup>
+      <div className='theme-switcher'>
+        <div className='theme-switcher-theme'>
+          <Icon.DARK_THEME />
+          <Radio
+            checked={theme === 'theme-dark'}
+            label={t('theme.dark')}
+            onChange={this.switchTheme}
+            value='theme-dark'
+          />
+        </div>
+
+        <div className='theme-switcher-theme'>
+          <Icon.LIGHT_THEME />
+          <Radio
+            checked={theme === 'theme-light'}
+            label={t('theme.light')}
+            onChange={this.switchTheme}
+            value='theme-light'
+          />
+        </div>
+      </div>
     )
   }
 }
