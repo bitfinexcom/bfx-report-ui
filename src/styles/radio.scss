@@ -1,0 +1,37 @@
+.bp3-radio {
+  .bp3-control-indicator {
+    box-shadow: 0 0 0 1px var(--checkboxBorder);
+    background-color: transparent;
+    background-image: none;
+
+    &:active {
+      background-color: transparent;
+      background-image: none;
+    }
+
+    &:hover {
+      background-color: transparent;
+      background-image: none;
+    }
+  }
+
+  &.bp3-control {
+    &:hover {
+      .bp3-control-indicator {
+        box-shadow: 0 0 0 1px var(--checkboxBorder);
+        background-color: transparent;
+        background-image: none;
+      }
+    }
+
+    input:checked ~ .bp3-control-indicator {
+      box-shadow: 0 0 0 1px var(--activeColor);
+      background-color: var(--activeColor);
+      background-image: none;
+
+      &:before {
+        background-image: none;
+      }
+    }
+  }
+}

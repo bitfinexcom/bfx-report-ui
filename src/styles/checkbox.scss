@@ -8,6 +8,12 @@
       background-color: transparent;
       background-image: none;
     }
+
+    input:checked ~ .bp3-control-indicator {
+      box-shadow: 0 0 0 1px var(--activeColor);
+      background-color: transparent;
+      background-image: none;
+    }
   }
 
   &:active {
@@ -23,11 +29,26 @@
   input {
     width: 14px;
 
+    &:checked ~ .bp3-control-indicator {
+      box-shadow: 0 0 0 1px var(--activeColor);
+      background-color: transparent;
+      background-image: none;
+      transition: 0.3s ease-out;
+    }
+
     &:not(:disabled):active {
       ~ .bp3-control-indicator {
         box-shadow: 0 0 0 1px var(--checkboxBorder);
         background-color: transparent;
         background-image: none;
+      }
+
+      &:checked {
+        ~ .bp3-control-indicator {
+          box-shadow: 0 0 0 1px var(--activeColor);
+          background-color: transparent;
+          background-image: none;
+        }
       }
     }
   }
