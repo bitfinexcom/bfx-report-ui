@@ -1,9 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Checkbox, Icon } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
+import { Checkbox } from '@blueprintjs/core'
 
-import Tooltip from 'ui/Tooltip'
 import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 
 import ColumnsSelectDialog from './Dialog'
@@ -66,13 +64,9 @@ class ColumnsSelect extends PureComponent {
 
     return (
       <Fragment>
-        <Tooltip content={t('columnsselect.title')}>
-          <Icon
-            className='columns-select-icon'
-            icon={IconNames.LIST_COLUMNS}
-            onClick={this.toggleDialog}
-          />
-        </Tooltip>
+        <span onClick={this.toggleDialog} className='color--active clickable'>
+          {t('columnsselect.title')}
+        </span>
 
         <ColumnsSelectDialog
           isOpen={isOpen}

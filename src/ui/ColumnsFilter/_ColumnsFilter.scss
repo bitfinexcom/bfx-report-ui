@@ -16,11 +16,29 @@
   }
 
   &-dialog {
-    width: 550px;
+    width: 576px;
+
+    .bp3-dialog-header .bp3-heading {
+      margin: 0;
+    }
+
+    .bp3-dialog-body, .bp3-dialog-footer {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
   }
 
   &-item {
     padding: 5px 0;
+
+    .bitfinex-select {
+      width: 138px;
+      margin-right: 20px;
+
+      .bp3-button {
+        width: 138px;
+      }
+    }
 
     &-column {
       width: 180px;
@@ -34,21 +52,25 @@
 
     &-input {
       display: inline-block;
-      width: 150px;
-      margin-right: 12px;
+      width: 192px;
+      margin-right: 13px;
     }
 
     &-remove {
       cursor: pointer;
+      vertical-align: middle;
     }
   }
 
-  &-add {
-    width: fit-content;
+  &-controls {
     margin-top: 10px;
-    margin-bottom: -8px;
-    cursor: pointer;
-    color: #419eff;
+    margin-bottom: 20px;
+
+    &-add {
+      width: fit-content;
+      margin-right: 20px;
+      cursor: pointer;
+    }
   }
 
   &-clear {
@@ -57,7 +79,7 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 576px) {
   .columns-filter {
     &-item {
       max-width: 380px;

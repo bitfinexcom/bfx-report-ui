@@ -6,11 +6,18 @@
   &-header {
     background-color: var(--bgColor2);
     border-radius: 2px 2px 0 0;
+    padding-left: 16px;
 
     .bp3-heading {
-      margin-left: 10px;
       font-size: 15px;
+      font-weight: normal;
+      margin: 0;
       color: var(--color);
     }
+  }
+
+  &-body {
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }

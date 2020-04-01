@@ -1,21 +1,20 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
-import { HTMLSelect } from '@blueprintjs/core'
 import _find from 'lodash/find'
 
+import Select from 'ui/Select'
 import { platform } from 'var/config'
 
 import SECTION_COLUMNS from './ColumnSelector.columns'
 import { propTypes, defaultProps } from './ColumnSelector.props'
 
 class ColumnSelector extends React.PureComponent {
-  onColumnChange = (e) => {
+  onColumnChange = (column) => {
     const { onChange } = this.props
-    const { value } = e.target
-    const columnDataType = this.getColumnDataType(value)
+    const columnDataType = this.getColumnDataType(column)
 
     onChange({
-      column: value,
+      column,
       dataType: columnDataType,
     })
   }
@@ -26,9 +25,9 @@ class ColumnSelector extends React.PureComponent {
     return columns.filter(column => column.filter && (!column.frameworkOnly || platform.showFrameworkMode))
   }
 
-  getColumnDataType = (column) => {
+  getColumnDataType = (id) => {
     const columns = this.getSectionColumns()
-    const { type } = _find(columns, { id: column }) || {}
+    const { type } = _find(columns, { id }) || {}
 
     return type
   }
@@ -37,15 +36,18 @@ class ColumnSelector extends React.PureComponent {
     const { value, t } = this.props
     const columns = this.getSectionColumns()
 
+    const items = columns.map(({ id, name }) => ({
+      value: id,
+      label: t(`column.${name}`),
+    }))
+
     return (
-      <HTMLSelect value={value} onChange={this.onColumnChange} className='columns-filter-item-column'>
-        <option value='' />
-        {columns.map((column) => {
-          const { id, name } = column
-          const columnName = t(`column.${name}`)
-          return <option key={id} value={id}>{columnName}</option>
-        })}
-      </HTMLSelect>
+      <Select
+        filterable={false}
+        items={items}
+        onChange={this.onColumnChange}
+        value={value}
+      />
     )
   }
 }

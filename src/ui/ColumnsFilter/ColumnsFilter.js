@@ -3,12 +3,12 @@ import { withTranslation } from 'react-i18next'
 import {
   Button,
   InputGroup,
-  Icon,
   Intent,
 } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
 import _isEqual from 'lodash/isEqual'
 
+import ColumnsSelect from 'ui/ColumnsSelect'
+import Icon from 'icons'
 import { selectTextOnFocus } from 'utils/inputs'
 import { getValidSortedFilters } from 'state/filters/utils'
 import { EMPTY_FILTER } from 'var/filterTypes'
@@ -158,7 +158,6 @@ class ColumnsFilter extends PureComponent {
         </div>
 
         <ColumnsFilterDialog
-          target={target}
           isOpen={isOpen}
           hasChanges={hasChanges}
           onClear={this.onClear}
@@ -190,9 +189,8 @@ class ColumnsFilter extends PureComponent {
                       onChange={e => this.onInputChange(index, e)}
                       onFocus={selectTextOnFocus}
                     />
-                    <Icon
+                    <Icon.BIN
                       className='columns-filter-item-remove'
-                      icon={IconNames.SMALL_CROSS}
                       onClick={() => this.onFilterRemove(index)}
                     />
                   </div>
@@ -200,11 +198,14 @@ class ColumnsFilter extends PureComponent {
               })}
             </div>
 
-            {(filters.length < MAX_FILTERS) && (
-              <div className='columns-filter-add' onClick={this.onFilterAdd}>
-                {`+ ${t('preferences.sync.add-filter')}`}
-              </div>
-            )}
+            <div className='columns-filter-controls'>
+              {(filters.length < MAX_FILTERS) && (
+                <span className='columns-filter-controls-add color--active' onClick={this.onFilterAdd}>
+                  {`+ ${t('preferences.sync.add-filter')}`}
+                </span>
+              )}
+              <ColumnsSelect target={target} />
+            </div>
           </div>
         </ColumnsFilterDialog>
       </Fragment>

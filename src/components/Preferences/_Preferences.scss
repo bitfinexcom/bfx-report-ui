@@ -1,4 +1,21 @@
 .preferences {
+  &.bp3-dialog {
+    .bp3-heading {
+      margin-left: 10px;
+    }
+
+    .bp3-dialog {
+      &-header {
+        padding-left: 20px;
+      }
+
+      &-body {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+  }
+
   &-row {
     margin-bottom: 25px;
 
@@ -36,5 +53,9 @@
   .timezone-picker {
     width: 106px;
     height: 40px;
+  }
+
+  .bp3-checkbox {
+    width: 14px;
   }
 }

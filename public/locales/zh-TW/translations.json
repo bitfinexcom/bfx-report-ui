@@ -105,7 +105,7 @@
     "title": "篩選欄",
     "clear": "清除",
     "cancel": "取消",
-    "apply": "套用篩選",
+    "apply": "確認",
     "filters": {
       "contains": "包含",
       "beginsWith": "開始於",
@@ -121,7 +121,7 @@
   "columnsselect": {
     "title": "欄位選擇",
     "cancel": "取消",
-    "apply": "適用欄位"
+    "apply": "確認"
   },
   "concentrationrisk": {
     "title": "集中風險",

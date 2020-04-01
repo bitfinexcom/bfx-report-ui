@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withTranslation } from 'react-i18next'
-import { HTMLSelect } from '@blueprintjs/core'
 
+import Select from 'ui/Select'
 import { FILTERS } from 'var/filterTypes'
 import DATA_TYPES from 'var/dataTypes'
 
@@ -14,36 +14,46 @@ const {
 } = DATA_TYPES
 
 class FilterTypeSelector extends React.PureComponent {
-  onChange = (e) => {
-    const { value } = e.target
+  onChange = (value) => {
     const { onChange } = this.props
     onChange(value)
   }
 
   render() {
     const { value, dataType, t } = this.props
+    const stringTypes = (dataType === STRING)
+      ? [
+        { value: FILTERS.CONTAINS, label: t('columnsfilter.filters.contains') },
+        { value: FILTERS.BEGINS_WITH, label: t('columnsfilter.filters.beginsWith') },
+        { value: FILTERS.ENDS_WITH, label: t('columnsfilter.filters.endsWith') },
+      ]
+      : []
+    const equalityTypes = [
+      { value: FILTERS.EQUAL_TO, label: t('columnsfilter.filters.equalTo') },
+      { value: FILTERS.NOT_EQUAL_TO, label: t('columnsfilter.filters.notEqualTo') },
+    ]
+    const numberTypes = (dataType === NUMBER || dataType === INTEGER)
+      ? [
+        { value: FILTERS.GREATER_THAN, label: t('columnsfilter.filters.greaterThan') },
+        { value: FILTERS.GREATER_THAN_EQUAL, label: t('columnsfilter.filters.greaterThanEqual') },
+        { value: FILTERS.LESS_THAN, label: t('columnsfilter.filters.lessThan') },
+        { value: FILTERS.LESS_THAN_EQUAL, label: t('columnsfilter.filters.lessThanEqual') },
+      ]
+      : []
+
+    const items = [
+      ...stringTypes,
+      ...equalityTypes,
+      ...numberTypes,
+    ]
 
     return (
-      <HTMLSelect value={value} onChange={this.onChange} className='columns-filter-item-filter'>
-        <option value='' />
-        {(dataType === STRING) && (
-          <Fragment>
-            <option value={FILTERS.CONTAINS}>{t('columnsfilter.filters.contains')}</option>
-            <option value={FILTERS.BEGINS_WITH}>{t('columnsfilter.filters.beginsWith')}</option>
-            <option value={FILTERS.ENDS_WITH}>{t('columnsfilter.filters.endsWith')}</option>
-          </Fragment>
-        )}
-        <option value={FILTERS.EQUAL_TO}>{t('columnsfilter.filters.equalTo')}</option>
-        <option value={FILTERS.NOT_EQUAL_TO}>{t('columnsfilter.filters.notEqualTo')}</option>
-        {(dataType === NUMBER || dataType === INTEGER) && (
-          <Fragment>
-            <option value={FILTERS.GREATER_THAN}>{t('columnsfilter.filters.greaterThan')}</option>
-            <option value={FILTERS.GREATER_THAN_EQUAL}>{t('columnsfilter.filters.greaterThanEqual')}</option>
-            <option value={FILTERS.LESS_THAN}>{t('columnsfilter.filters.lessThan')}</option>
-            <option value={FILTERS.LESS_THAN_EQUAL}>{t('columnsfilter.filters.lessThanEqual')}</option>
-          </Fragment>
-        )}
-      </HTMLSelect>
+      <Select
+        filterable={false}
+        items={items}
+        onChange={this.onChange}
+        value={value}
+      />
     )
   }
 }

@@ -105,7 +105,7 @@
     "title": "筛选栏",
     "clear": "清除",
     "cancel": "取消",
-    "apply": "应用筛选",
+    "apply": "应用",
     "filters": {
       "contains": "包含",
       "beginsWith": "开始于",
@@ -121,7 +121,7 @@
   "columnsselect": {
     "title": "栏位选择",
     "cancel": "取消",
-    "apply": "适用栏位"
+    "apply": "应用"
   },
   "concentrationrisk": {
     "title": "集中风险",

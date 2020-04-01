@@ -16,6 +16,10 @@ body {
     fill: var(--iconColor);
   }
 
+  .color--active {
+    color: var(--activeColor);
+  }
+
   .bp3-card.bp3-elevation-0 {
     box-shadow: none;
   }

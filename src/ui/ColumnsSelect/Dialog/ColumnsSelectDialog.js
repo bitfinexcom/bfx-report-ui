@@ -3,7 +3,6 @@ import { withTranslation } from 'react-i18next'
 import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
 
 import { propTypes, defaultProps } from './ColumnsSelectDialog.props'
 
@@ -19,11 +18,11 @@ const ColumnsSelectDialog = (props) => {
 
   return (
     <Dialog
-      icon={IconNames.LIST_COLUMNS}
       className='columns-select-dialog'
+      isCloseButtonShown={false}
+      isOpen={isOpen}
       onClose={onCancel}
       title={t('columnsselect.title')}
-      isOpen={isOpen}
     >
       <div className={Classes.DIALOG_BODY}>
         {children}

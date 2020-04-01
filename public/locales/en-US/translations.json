@@ -116,7 +116,7 @@
     "title": "Filter Columns",
     "clear": "Clear",
     "cancel": "Cancel",
-    "apply": "Apply Filters",
+    "apply": "Apply",
     "filters": {
       "contains": "Contains",
       "beginsWith": "Begins with",
@@ -130,9 +130,9 @@
     }
   },
   "columnsselect": {
-    "title": "Columns Select",
+    "title": "Column Selection",
     "cancel": "Cancel",
-    "apply": "Apply Columns"
+    "apply": "Apply"
   },
   "concentrationrisk": {
     "title": "Concentration Risk",
@@ -264,8 +264,8 @@
     "dateformat": "Date Format",
     "milliseconds": "Display Milliseconds",
     "sync": {
-      "add-filter": "add filter",
-      "add-pair": "add pair",
+      "add-filter": "Add Filter",
+      "add-pair": "Add Pair",
       "title": "Sync preferences",
       "notset": "Sync preferences are not set yet",
       "description": "To access Public Trades and Tickers offline, you need to setup offline available pairs and the start query time.",
