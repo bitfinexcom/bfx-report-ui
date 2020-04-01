@@ -8,6 +8,7 @@ import { platform } from 'var/config'
 
 import TimeFrame from './TimeFrame'
 import TimeFrameShortcut from './TimeFrameShortcut'
+import Export from './Export'
 import AccountMenu from './AccountMenu'
 
 const { REACT_APP_ELECTRON } = process.env
@@ -34,6 +35,7 @@ const Header = () => {
         title='timeframe.past_month'
         type={constants.TIME_RANGE_PAST_MONTH}
       />
+      <Export />
 
       {renderSyncMode}
       <Status />
