@@ -37,7 +37,7 @@ class ExportDialogTargetsSelector extends PureComponent {
 
     return (
       <MultiSelect
-        className='bitfinex-multi-select'
+        className='bitfinex-select'
         items={ORDERED_TARGETS}
         itemRenderer={this.renderTarget}
         itemPredicate={filterSelectorItem}

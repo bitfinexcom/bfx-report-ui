@@ -4,6 +4,7 @@
   border-radius: 2px;
 
   &-header {
+    min-height: 36px;
     background-color: var(--bgColor2);
     border-radius: 2px 2px 0 0;
     padding-left: 16px;
@@ -13,6 +14,10 @@
       font-weight: normal;
       margin: 0;
       color: var(--color);
+
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
     }
   }
 
