@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 
 export const propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  loading: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   start: PropTypes.number,
   end: PropTypes.number,

@@ -424,15 +424,11 @@ function* prepareExport() {
     }
 
     // owner email now get while first auth-check
-    const result = yield select(getEmail)
+    const ownerEmail = yield select(getEmail)
     // export email
     const { reportEmail } = queryString.parse(window.location.search)
-    // send email get from the URL when possible
-    if (reportEmail && result) {
-      yield put(actions.setExportEmail(reportEmail))
-    } else {
-      yield put(actions.setExportEmail(result))
-    }
+    // use email from the URL when possible
+    yield put(actions.setExportEmail(reportEmail || ownerEmail))
   } catch (fail) {
     yield put(actions.setExportEmail(false))
     yield put(updateErrorStatus({

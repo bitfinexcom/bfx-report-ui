@@ -5,7 +5,6 @@ import types from './constants'
 const initialState = {
   email: '',
   exportEmail: '',
-  prepareExport: false,
   timeRange: types.DEFAULT_RANGE,
   timeType: types.DEFAULT_TIME_TYPE,
 }
@@ -17,6 +16,7 @@ export function queryReducer(state = initialState, action) {
       const isValidCustom = payload.rangeType === types.TIME_RANGE_CUSTOM
         && payload.start
         && payload.end
+
       return {
         ...state,
         timeRange: payload.rangeType || types.DEFAULT_RANGE,
@@ -24,31 +24,20 @@ export function queryReducer(state = initialState, action) {
         end: isValidCustom ? payload.end : undefined,
       }
     }
-    case types.PREPARE_EXPORT:
+    case types.SET_OWNER_EMAIL:
       return {
         ...state,
-        prepareExport: true,
+        email: payload || '',
       }
-    case types.SET_OWNER_EMAIL: {
-      const email = payload || ''
+    case types.SET_EXPORT_EMAIL:
       return {
         ...state,
-        email,
+        exportEmail: payload || '',
       }
-    }
-    case types.SET_EXPORT_EMAIL: {
-      const exportEmail = payload || ''
-      return {
-        ...state,
-        prepareExport: false,
-        exportEmail,
-      }
-    }
     case authTypes.LOGOUT:
       return initialState
-    default: {
+    default:
       return state
-    }
   }
 }
 

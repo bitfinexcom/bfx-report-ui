@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { getFullTime, getTimezone } from 'state/base/selectors'
 import {
   getExportEmail,
-  getPrepareExport,
   getQuery,
   getTimeFrame,
 } from 'state/query/selectors'
@@ -19,7 +18,6 @@ const mapStateToProps = state => ({
   ...getTimeFrame(getQuery(state)),
   email: getExportEmail(state),
   getFullTime: getFullTime(state),
-  loading: getPrepareExport(state),
   timezone: getTimezone(state),
   timestamp: getTimestamp(state),
   isOpen: getIsExportDialogOpen(state),
