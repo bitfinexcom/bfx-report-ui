@@ -348,6 +348,7 @@
   },
   "timeframe": {
     "custom": {
+      "cancel": "取消",
       "title": "选择查询范围",
       "view": "查看"
     },

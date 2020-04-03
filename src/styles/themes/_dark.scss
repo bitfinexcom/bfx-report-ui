@@ -6,6 +6,7 @@
   --borderColor: #19354a;
   --iconColor: #ffffff;
   --activeColor: #82baf6;
+  --activeHoverColor: #4c88c8;
 
   --authNoticeBg: #172d3e;
 
@@ -41,6 +42,9 @@
   --tableScrollBg: #0c1a25;
   --tableScrollThumbBg: #5ebefa;
 
+  // select
+  --selectColor: black;
+
   // multi select
   --multiBg: #172d3e;
   --multiTagBg: #82baf6;
@@ -56,4 +60,7 @@
 
   // checkbox
   --checkboxBorder: #f5f2f2;
+
+  // datepicker
+  --datepickerSelectedRangeBg: #5782ad;
 }

@@ -361,6 +361,8 @@
   },
   "timeframe": {
     "custom": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
       "title": "Select Query Range",
       "view" : "View"
     },

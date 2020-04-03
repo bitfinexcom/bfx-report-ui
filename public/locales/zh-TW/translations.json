@@ -348,6 +348,7 @@
   },
   "timeframe": {
     "custom": {
+      "cancel": "取消",
       "title": "選擇查詢時段",
       "view" : "查詢"
     },

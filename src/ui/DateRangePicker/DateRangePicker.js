@@ -2,11 +2,7 @@ import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import queryString from 'query-string'
 import moment from 'moment-timezone'
-import {
-  Button,
-  Classes,
-  Intent,
-} from '@blueprintjs/core'
+import { Classes, Position } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
 
 import baseTypes from 'state/base/constants'
@@ -20,6 +16,28 @@ class DateRangePicker extends PureComponent {
   state = {
     startDate: null,
     endDate: new Date(),
+  }
+
+  addControls = () => {
+    const { t } = this.props
+
+    const datePicker = document.querySelector('.bp3-daterangepicker')
+    const controls = document.createElement('div')
+    controls.classList.add('date-range-picker-controls')
+
+    const cancel = document.createElement('button')
+    cancel.classList.add('bp3-button', Classes.POPOVER_DISMISS)
+    cancel.innerHTML = t('timeframe.custom.cancel')
+
+    const confirm = document.createElement('button')
+    confirm.classList.add('bp3-button', 'bp3-intent-primary', Classes.POPOVER_DISMISS)
+    confirm.innerHTML = t('timeframe.custom.confirm')
+    confirm.addEventListener('click', this.startQuery)
+
+    controls.appendChild(cancel)
+    controls.appendChild(confirm)
+
+    datePicker.appendChild(controls)
   }
 
   createShortcuts = () => {
@@ -58,6 +76,7 @@ class DateRangePicker extends PureComponent {
   handleRangeChange = (range) => {
     const { updateWarningStatus } = this.props
     const [startDate, endDate] = range
+    this.removePopoverDismiss()
     const sixYearsPast = moment().add({ years: -6 })
 
     if (sixYearsPast.isAfter(startDate)) {
@@ -124,13 +143,26 @@ class DateRangePicker extends PureComponent {
     }
   }
 
+  // workaround for popover dismiss https://github.com/palantir/blueprint/issues/3338
+  removePopoverDismiss = () => {
+    const shortcuts = document.querySelectorAll('.bp3-daterangepicker-shortcuts li .bp3-menu-item')
+    if (!shortcuts.length) {
+      return
+    }
+
+    shortcuts.forEach((shortcut) => {
+      shortcut.classList.remove('bp3-popover-dismiss')
+    })
+  }
+
   render() {
     const { t } = this.props
     const { startDate, endDate } = this.getDates()
     const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, baseTypes.DEFAULT_TIMEZONE)
     const commonDateRangeProps = {
       allowSingleDayRange: true,
-      closeOnSelection: true,
+      closeOnSelection: false,
+      // contiguousCalendarMonths: false,
       formatDate,
       parseDate,
       onChange: this.handleRangeChange,
@@ -145,19 +177,16 @@ class DateRangePicker extends PureComponent {
           {...commonDateRangeProps}
           className='date-range-picker-inputs'
           popoverProps={{
+            minimal: true,
+            onOpened: this.removePopoverDismiss,
+            onOpening: this.addControls,
+            position: Position.BOTTOM_LEFT,
+            popoverClassName: 'date-range-picker-popover',
+            shouldDismissPopover: false,
             targetTagName: 'div',
           }}
           shortcuts={this.createShortcuts()}
         />
-
-        <Button
-          intent={Intent.PRIMARY}
-          onClick={this.startQuery}
-          className={Classes.POPOVER_DISMISS}
-          disabled={!startDate || !endDate}
-        >
-          {t('timeframe.custom.view')}
-        </Button>
       </div>
     )
   }

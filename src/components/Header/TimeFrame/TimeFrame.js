@@ -22,11 +22,7 @@ class TimeFrame extends PureComponent {
         <Popover
           minimal
           position={Position.BOTTOM}
-          content={(
-            <div className='timeframe-content'>
-              <DateRangePicker />
-            </div>
-          )}
+          content={<DateRangePicker />}
           targetTagName='div'
           className='bitfinex-dropdown'
         >

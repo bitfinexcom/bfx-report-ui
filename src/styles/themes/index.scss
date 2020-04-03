@@ -93,4 +93,24 @@ body {
       color: var(--buttonBg);
     }
   }
+
+  .bp3-divider {
+    border-right-color: var(--borderColor);
+    border-bottom-color: var(--borderColor);
+  }
+
+  .bp3-html-select.bp3-minimal {
+    select {
+      color: var(--color);
+
+      &:hover {
+        color: var(--color);
+        background-color: var(--borderColor);
+      }
+
+      option {
+        background-color: var(--borderColor);
+      }
+    }
+  }
 }
