@@ -148,7 +148,7 @@ class ConcentrationRisk extends PureComponent {
             {' '}
             <RefreshButton handleClickRefresh={refresh} />
           </h4>
-          <NoData descId='concentrationrisk.nodata' />
+          <NoData title='concentrationrisk.nodata' />
         </Fragment>
       )
     } else {

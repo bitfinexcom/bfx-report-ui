@@ -110,7 +110,7 @@ class Wallets extends PureComponent {
       showContent = (
         <Fragment>
           {platform.showFrameworkMode && renderTimeSelection}
-          <NoData descId='wallets.nodata' />
+          <NoData title='wallets.nodata' />
         </Fragment>
       )
     } else {

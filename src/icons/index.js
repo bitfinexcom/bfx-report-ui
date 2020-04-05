@@ -34,6 +34,7 @@ import { ReactComponent as TICKERS } from './tickers.svg'
 import { ReactComponent as TRADE_VOLUME } from './trade-volume.svg'
 import { ReactComponent as USER_CIRCLE } from './user-circle.svg'
 import { ReactComponent as WALLET } from './wallet.svg'
+import { ReactComponent as WARNING } from './warning.svg'
 import { ReactComponent as WITHDRAWALS } from './withdrawals.svg'
 
 export default {
@@ -73,5 +74,6 @@ export default {
   TRADE_VOLUME,
   USER_CIRCLE,
   WALLET,
+  WARNING,
   WITHDRAWALS,
 }

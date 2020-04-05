@@ -202,7 +202,7 @@ class Snapshots extends PureComponent {
       showContent = (
         <Fragment>
           <br />
-          <NoData descId='snapshots.nodata' />
+          <NoData title='snapshots.nodata' />
         </Fragment>
       )
     } else if (section === MENU_WALLETS) {

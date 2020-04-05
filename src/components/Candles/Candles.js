@@ -16,11 +16,11 @@ import Timeframe from 'ui/CandlesTimeframe'
 import RefreshButton from 'ui/RefreshButton'
 import Candlestick from 'ui/Charts/Candlestick'
 import CandlesSyncPref from 'ui/CandlesSyncPref'
+import TimeRange from 'ui/TimeRange'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
 import { propTypes, defaultProps } from './Candles.props'
-import TimeRange from '../../ui/TimeRange'
 
 const TYPE = queryConstants.MENU_CANDLES
 

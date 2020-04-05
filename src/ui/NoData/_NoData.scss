@@ -1,0 +1,18 @@
+.no-data {
+  height: 100%;
+  position: relative;
+
+  &-wrapper {
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+
+    svg {
+      display: block;
+      margin: 0 auto 38px auto;
+    }
+  }
+}
