@@ -4,8 +4,7 @@ import { mapDescription, mapSymbol } from 'state/symbols/utils'
 
 export const updateLedgers = (state, payload) => {
   const res = _get(payload, ['data', 'res'])
-  console.log('change back')
-  if (res) {
+  if (!res) {
     return {
       ...state,
       dataReceived: true,

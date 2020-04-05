@@ -117,33 +117,35 @@ class Wallets extends PureComponent {
       showContent = (
         <Fragment>
           {platform.showFrameworkMode && renderTimeSelection}
-          <h4>
-            {t('wallets.header.exchange')}
-          </h4>
-          <DataTable
-            numRows={exchangeRows}
-            tableColumns={exchangeColumns}
-          />
-          <h4>
-            {t('wallets.header.margin')}
-          </h4>
-          <DataTable
-            numRows={marginRows}
-            tableColumns={marginColumns}
-          />
-          <h4>
-            {t('wallets.header.funding')}
-          </h4>
-          <DataTable
-            numRows={fundingRows}
-            tableColumns={fundingColumns}
-          />
+          <div className='section-wallets-data'>
+            <div className='section-wallets-data-item'>
+              <div>{t('wallets.header.exchange')}</div>
+              <DataTable
+                numRows={exchangeRows}
+                tableColumns={exchangeColumns}
+              />
+            </div>
+            <div className='section-wallets-data-item'>
+              <div>{t('wallets.header.margin')}</div>
+              <DataTable
+                numRows={marginRows}
+                tableColumns={marginColumns}
+              />
+            </div>
+            <div className='section-wallets-data-item'>
+              <div>{t('wallets.header.funding')}</div>
+              <DataTable
+                numRows={fundingRows}
+                tableColumns={fundingColumns}
+              />
+            </div>
+          </div>
         </Fragment>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'>
         <SectionHeader
           filter={false}
           title='wallets.title'
