@@ -101,6 +101,7 @@ class PositionsActive extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader
           filter={false}
+          target={TYPE}
           title='positions.title'
         />
         {showContent}

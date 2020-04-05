@@ -24,7 +24,7 @@ export const propTypes = {
     toggleSymbol: PropTypes.func.isRequired,
   }),
   t: PropTypes.func.isRequired,
-  target: PropTypes.string.isRequired,
+  target: PropTypes.string,
   title: PropTypes.string.isRequired,
 }
 
