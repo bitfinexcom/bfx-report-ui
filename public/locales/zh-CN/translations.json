@@ -247,14 +247,13 @@
     "title": "首选项",
     "close": "结清",
     "language": "语言",
-    "theme": "主题",
     "timezone": "时区",
     "timezone-input": "输入时区",
     "dateformat": "日期格式",
     "milliseconds": "显示毫秒",
     "sync": {
-      "add-filter": "add filter",
-      "add-pair": "add pair",
+      "add-filter": "增加筛选条件",
+      "add-pair": "增加交易对",
       "title": "同步首选项",
       "notset": "尚未设置同步首选项",
       "description": "要离线访问公开交易和牌价，您需要设置离线可用货币对和起始查询时间。",
@@ -283,6 +282,7 @@
     "tooltip": "按查询选择大小，查询越大，时间越长。"
   },
   "selector": {
+    "select": "选取",
     "filter": {
       "symbol": "符号筛选器",
       "pair": "货币对筛选器"

@@ -247,14 +247,13 @@
     "title": "偏好設定",
     "close": "關閉",
     "language": "語言",
-    "theme": "佈景主題",
     "timezone": "時區",
     "timezone-input": "輸入時區",
     "dateformat": "日期格式",
     "milliseconds": "顯示毫秒",
     "sync": {
-      "add-filter": "add filter",
-      "add-pair": "add pair",
+      "add-filter": "增加篩選條件",
+      "add-pair": "增加交易對",
       "title": "同步偏好設定",
       "notset": "同步偏好尚未設定",
       "description": "為了離線查詢公開交易與牌價，請先設定欲離線查詢的交易對與開始日期。",
@@ -283,6 +282,7 @@
     "tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間"
   },
   "selector": {
+    "select": "選取",
     "filter": {
       "symbol": "代幣過濾器",
       "pair": "代幣對過濾器"
