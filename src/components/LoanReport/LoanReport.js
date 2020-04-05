@@ -135,9 +135,7 @@ class LoanReport extends PureComponent {
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='loanreport.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
       showContent = (
         <Fragment>

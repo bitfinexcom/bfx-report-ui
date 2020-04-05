@@ -144,7 +144,7 @@ class TradedVolume extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = (
-        <Loading title='tradedvolume.title' />
+        <Loading />
       )
     } else if (!entries.length) {
       showContent = (

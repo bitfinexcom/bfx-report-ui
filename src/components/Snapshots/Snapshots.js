@@ -115,7 +115,7 @@ class Snapshots extends PureComponent {
       return (
         <Fragment>
           <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-            <Loading title='snapshots.title' />
+            <Loading />
           </Card>
         </Fragment>
       )

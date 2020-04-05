@@ -143,9 +143,7 @@ class FeesReport extends PureComponent {
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='feesreport.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
       showContent = (
         <Fragment>

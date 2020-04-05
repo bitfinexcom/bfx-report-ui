@@ -49,7 +49,7 @@ class Trades extends PureComponent {
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = <Loading title='trades.title' />
+      showContent = <Loading />
     } else if (!entries.length) {
       showContent = <NoData />
     } else {

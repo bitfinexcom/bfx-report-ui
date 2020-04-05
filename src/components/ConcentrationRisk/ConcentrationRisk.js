@@ -135,9 +135,7 @@ class ConcentrationRisk extends PureComponent {
     )
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='concentrationrisk.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
       showContent = (
         <Fragment>

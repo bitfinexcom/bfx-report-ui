@@ -122,9 +122,7 @@ class AccountBalance extends PureComponent {
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='accountbalance.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
       showContent = (
         <Fragment>

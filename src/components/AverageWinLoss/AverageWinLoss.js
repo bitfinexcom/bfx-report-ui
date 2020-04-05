@@ -141,9 +141,7 @@ class AverageWinLoss extends PureComponent {
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='averagewinloss.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
       showContent = (
         <Fragment>

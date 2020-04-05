@@ -57,7 +57,7 @@ class Tickers extends PureComponent {
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = <Loading title='tickers.title' />
+      showContent = <Loading />
     } else if (!entries.length) {
       showContent = (
         <Fragment>
