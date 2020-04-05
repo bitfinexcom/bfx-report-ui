@@ -6,6 +6,7 @@ import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.colu
 
 import ColumnsSelectDialog from './Dialog'
 import { propTypes, defaultProps } from './ColumnsSelect.props'
+import { platform } from '../../var/config'
 
 class ColumnsSelect extends PureComponent {
   constructor(props) {
@@ -61,6 +62,7 @@ class ColumnsSelect extends PureComponent {
 
     const hasChanges = Object.keys(columns).some(column => columns[column] !== currentColumns[column])
     const sectionColumns = SECTION_COLUMNS[target]
+      .filter(column => !column.frameworkOnly || platform.showFrameworkMode)
 
     return (
       <Fragment>
