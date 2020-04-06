@@ -64,14 +64,12 @@ class Auth extends PureComponent {
             <InputKey
               label='auth.enterAPIKey'
               name='key'
-              placeholder='auth.enterAPIKey'
               value={apiKey}
               onChange={this.handleChange}
             />
             <InputKey
               label='auth.enterAPISecret'
               name='secret'
-              placeholder='auth.enterAPISecret'
               value={apiSecret}
               onChange={this.handleChange}
             />

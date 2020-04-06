@@ -19,7 +19,7 @@ export const InputKey = ({
       id={name}
       type='password'
       name={name}
-      placeholder={t(placeholder)}
+      placeholder={placeholder && t(placeholder)}
       value={value}
       onChange={onChange}
     />
