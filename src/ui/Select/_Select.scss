@@ -7,14 +7,26 @@
     color: var(--color);
     border: 1px solid var(--borderColor);
     box-shadow: none;
+    justify-content: space-between;
   }
 
   .bp3-multi-select {
+    position: relative;
     height: 40px;
     background-color: var(--multiBg);
     border: 1px solid var(--borderColor);
     box-shadow: none;
     min-width: 223px;
+
+    &-arrow {
+      position: absolute;
+      top: 6px;
+      right: 5px;
+    }
+
+    input {
+      padding-right: 24px;
+    }
 
     &-tag-input-input {
       color: var(--color);

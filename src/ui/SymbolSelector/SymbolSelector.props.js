@@ -6,6 +6,7 @@ export const propTypes = {
   currentFilters: PropTypes.arrayOf(PropTypes.string),
   existingCoins: PropTypes.arrayOf(PropTypes.string),
   toggleSymbol: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

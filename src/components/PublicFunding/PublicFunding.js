@@ -38,8 +38,6 @@ class PublicFunding extends PureComponent {
   render() {
     const {
       columns,
-      coins,
-      currencies,
       getFullTime,
       entries,
       dataReceived,
@@ -87,8 +85,6 @@ class PublicFunding extends PureComponent {
           title='publicfunding.title'
           target={TYPE}
           symbolSelectorProps={{
-            coins,
-            currencies,
             currentCoin: targetSymbol,
             onSymbolSelect: this.onSymbolSelect,
           }}

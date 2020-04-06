@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 
 export const propTypes = {
   filterable: PropTypes.bool,
+  itemRenderer: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({

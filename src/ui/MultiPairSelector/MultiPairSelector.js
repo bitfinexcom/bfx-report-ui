@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
   Intent,
   MenuItem,
 } from '@blueprintjs/core'
-import { MultiSelect } from '@blueprintjs/select'
 
+import MultiSelect from 'ui/MultiSelect'
 import { filterSelectorItem } from 'ui/utils'
 
 import { propTypes, defaultProps } from './MultiPairSelector.props'
@@ -43,7 +42,6 @@ class MultiPairSelector extends PureComponent {
       existingPairs,
       pairs,
       togglePair,
-      t,
     } = this.props
 
     const items = pairs.length
@@ -52,24 +50,17 @@ class MultiPairSelector extends PureComponent {
 
     return (
       <MultiSelect
-        className='bitfinex-select'
         disabled={!pairs.length && !existingPairs.length}
-        placeholder={t('selector.select')}
         items={items}
         itemRenderer={this.renderPair}
         itemPredicate={filterSelectorItem}
         onItemSelect={togglePair}
-        popoverProps={{
-          minimal: true,
-          popoverClassName: 'bitfinex-select-menu',
-        }}
         tagInputProps={{
           tagProps: { minimal: true },
           onRemove: togglePair,
         }}
         tagRenderer={pair => pair}
         selectedItems={currentFilters}
-        resetOnSelect
       />
     )
   }
@@ -78,4 +69,4 @@ class MultiPairSelector extends PureComponent {
 MultiPairSelector.propTypes = propTypes
 MultiPairSelector.defaultProps = defaultProps
 
-export default withTranslation('translations')(MultiPairSelector)
+export default MultiPairSelector

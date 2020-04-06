@@ -1,17 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import {
-  Button,
-  Intent,
-  MenuItem,
-} from '@blueprintjs/core'
-import { Select } from '@blueprintjs/select'
-import { IconNames } from '@blueprintjs/icons'
+import { Intent, MenuItem } from '@blueprintjs/core'
 
-import { filterSelectorItem } from 'ui/utils'
+import Select from 'ui/Select'
 
 class SymbolSelector extends PureComponent {
-  renderSymbol = (symbol, { modifiers, handleClick }) => {
+  itemRenderer = (symbol, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
       return null
@@ -41,18 +35,12 @@ class SymbolSelector extends PureComponent {
 
     return (
       <Select
-        disabled={!coins.length}
+        onChange={onSymbolSelect}
+        filterable
+        itemRenderer={this.itemRenderer}
         items={coins}
-        itemRenderer={this.renderSymbol}
-        itemPredicate={filterSelectorItem}
-        onItemSelect={onSymbolSelect}
-      >
-        <Button
-          text={currentCoin}
-          rightIcon={IconNames.CARET_DOWN}
-          disabled={!coins.length}
-        />
-      </Select>
+        value={currentCoin}
+      />
     )
   }
 }

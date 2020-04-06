@@ -1,18 +1,12 @@
 import React, { PureComponent } from 'react'
-import {
-  Button,
-  Intent,
-  MenuItem,
-} from '@blueprintjs/core'
-import { Select } from '@blueprintjs/select'
-import { IconNames } from '@blueprintjs/icons'
+import { Intent, MenuItem } from '@blueprintjs/core'
 
-import { filterSelectorItem } from 'ui/utils'
+import Select from 'ui/Select'
 
 import { propTypes, defaultProps } from './PairSelector.props'
 
 class PairSelector extends PureComponent {
-  renderPair = (pair, { modifiers, handleClick }) => {
+  itemRenderer = (pair, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
       return null
@@ -34,29 +28,17 @@ class PairSelector extends PureComponent {
 
   render() {
     const {
-      currentPair, pairs, onPairSelect, buttonClassName,
+      currentPair, pairs, onPairSelect,
     } = this.props
 
     return (
       <Select
-        className='bitfinex-select'
-        disabled={!pairs.length}
+        itemRenderer={this.itemRenderer}
+        onChange={onPairSelect}
+        filterable
         items={pairs}
-        itemRenderer={this.renderPair}
-        itemPredicate={filterSelectorItem}
-        onItemSelect={onPairSelect}
-        popoverProps={{
-          minimal: true,
-          popoverClassName: 'bitfinex-select-menu',
-        }}
-      >
-        <Button
-          text={currentPair}
-          className={buttonClassName}
-          rightIcon={IconNames.CARET_DOWN}
-          disabled={!pairs.length}
-        />
-      </Select>
+        value={currentPair}
+      />
     )
   }
 }

@@ -5,7 +5,6 @@ export const propTypes = {
   existingPairs: PropTypes.arrayOf(PropTypes.string),
   togglePair: PropTypes.func.isRequired,
   pairs: PropTypes.arrayOf(PropTypes.string),
-  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

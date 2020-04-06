@@ -7,7 +7,6 @@ import {
   setTargetSymbol,
 } from 'state/publicFunding/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
-import { getCoins, getCurrencies } from 'state/symbols/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import {
   getDataReceived,
@@ -22,8 +21,6 @@ import PublicFunding from './PublicFunding'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_PUBLIC_FUNDING),
-  coins: getCoins(state),
-  currencies: getCurrencies(state),
   entries: getFilteredEntries(state, queryConstants.MENU_PUBLIC_FUNDING, getEntries(state)),
   getFullTime: getFullTime(state),
   dataReceived: getDataReceived(state),

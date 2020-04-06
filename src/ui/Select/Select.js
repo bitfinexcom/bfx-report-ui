@@ -5,14 +5,18 @@ import {
   MenuItem,
 } from '@blueprintjs/core'
 import { Select as BlueprintSelect } from '@blueprintjs/select'
-import { IconNames } from '@blueprintjs/icons'
 import _isObject from 'lodash/isObject'
 
+import Icon from 'icons'
 import { filterSelectorItem } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Select.props'
 
 class Select extends PureComponent {
+  state = {
+    isOpen: false,
+  }
+
   itemRenderer = (item, { modifiers, handleClick }) => {
     const { active, disabled } = modifiers
     const { value } = this.props
@@ -55,16 +59,26 @@ class Select extends PureComponent {
     return onChange(item, e)
   }
 
+  onToggle = (nextOpenState) => {
+    this.setState({ isOpen: nextOpenState })
+  }
+
   render() {
     const {
       filterable,
+      itemRenderer,
       items,
       value,
     } = this.props
+    const { isOpen } = this.state
 
     const selectedText = _isObject(items[0])
       ? (items.find(item => item.value === value, {}) || {}).label
       : value
+
+    const icon = isOpen
+      ? <Icon.CHEVRON_UP />
+      : <Icon.CHEVRON_DOWN />
 
     return (
       <BlueprintSelect
@@ -72,17 +86,18 @@ class Select extends PureComponent {
         filterable={filterable}
         disabled={!items.length}
         items={items}
-        itemRenderer={this.itemRenderer}
+        itemRenderer={itemRenderer || this.itemRenderer}
         itemPredicate={filterable && filterSelectorItem}
         onItemSelect={this.onChange}
         popoverProps={{
           minimal: true,
+          onInteraction: this.onToggle,
           popoverClassName: 'bitfinex-select-menu',
         }}
       >
         <Button
           text={selectedText}
-          rightIcon={IconNames.CARET_DOWN}
+          rightIcon={icon}
           disabled={!items.length}
         />
       </BlueprintSelect>

@@ -13,8 +13,6 @@ export const propTypes = {
   }),
   refresh: PropTypes.func,
   symbolSelectorProps: PropTypes.shape({
-    coins: PropTypes.array.isRequired,
-    currencies: PropTypes.object.isRequired,
     currentCoin: PropTypes.string.isRequired,
     onSymbolSelect: PropTypes.func.isRequired,
   }),
