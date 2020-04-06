@@ -4,8 +4,9 @@
   },
   "accountsummary": {
     "title": "帳戶摘要",
-    "fees": "您在Bitfinex交易的手續費率（基於您的交易量）",
-    "fees_deriv": "您於衍生品交易的手續費率（基於您的交易量）",
+    "fees": "您在Bitfinex交易的手續費率",
+    "fees_explain": "（基於您的交易量）",
+    "fees_deriv": "您於衍生品交易的手續費率",
     "30dVolume": "過去30天交易量",
     "margin_funds": "過去30天提供的保證金融資之總收益"
   },

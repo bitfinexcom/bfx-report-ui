@@ -1,5 +1,6 @@
 .bitfinex-table {
   width: fit-content;
+  min-height: unset;
   max-height: max-content;
   flex: 1 1 100px;
   clip-path: inset(-1px 0px 0px -1px);

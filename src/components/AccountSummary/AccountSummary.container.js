@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 
 import {
   fetchData,
-  refresh,
 } from 'state/accountSummary/actions'
 import {
   getData,
@@ -21,7 +20,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchData,
-  refresh,
 }
 
 const AccountSummaryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AccountSummary))

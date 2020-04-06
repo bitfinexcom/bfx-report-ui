@@ -4,8 +4,9 @@
   },
   "accountsummary": {
     "title": "Account Summary",
-    "fees": "Your fees on Bitfinex (based on your trading volume)",
-    "fees_deriv": "Your fees on Bitfinex Derivatives (based on your trading volume)",
+    "fees": "Your fees on Bitfinex",
+    "fees_explain": "(based on your trading volume)",
+    "fees_deriv": "Your fees on Bitfinex Derivatives",
     "30dVolume": "Your volume in the last 30 days",
     "margin_funds": "Total return on your margin funds provided in the last 30 days"
   },

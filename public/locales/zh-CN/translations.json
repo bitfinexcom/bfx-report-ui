@@ -4,8 +4,9 @@
   },
   "accountsummary": {
     "title": "帐号摘要",
-    "fees": "您于Bitfinex交易的手续费率（基于您的交易量）",
-    "fees_deriv": "您于衍生品交易的手续费率（基于您的交易量）",
+    "fees": "您于Bitfinex交易的手续费率",
+    "fees_explain": "（基于您的交易量）",
+    "fees_deriv": "您于衍生品交易的手续费率",
     "30dVolume": "过去30天交易量",
     "margin_funds": "过去30天提供的保证金借贷之总收益"
   },

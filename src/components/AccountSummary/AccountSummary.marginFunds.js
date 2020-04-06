@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
@@ -57,13 +57,13 @@ const AccountSummaryMarginFunds = (props) => {
   const columns = getColumns({ data: formattedData })
 
   return (
-    <Fragment>
-      <h4>{t('accountsummary.margin_funds')}</h4>
+    <div className='section-account-summary-data-item'>
+      <div>{t('accountsummary.margin_funds')}</div>
       <DataTable
         numRows={formattedData.length}
         tableColumns={columns}
       />
-    </Fragment>
+    </div>
   )
 }
 

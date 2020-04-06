@@ -1,14 +1,11 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import { Card, Elevation } from '@blueprintjs/core'
 import _isEmpty from 'lodash/isEmpty'
 import _get from 'lodash/get'
 
 import Loading from 'ui/Loading'
-import LinkButton from 'ui/LinkButton'
 import NoData from 'ui/NoData'
 import SectionHeader from 'ui/SectionHeader'
-import { getFormattedDate } from 'utils/dates'
 
 import { propTypes, defaultProps } from './AccountSummary.props'
 import Volume from './AccountSummary.volume'
@@ -30,36 +27,17 @@ class AccountSummary extends PureComponent {
       data,
       dataReceived,
       pageLoading,
-      refresh,
-      t,
     } = this.props
-
-    const updateTitle = `${t('updated')} ${getFormattedDate(data.time)} `
-    const renderUpdate = (
-      <h3 className='bitfinex-show-soft'>
-        {updateTitle}
-        <LinkButton onClick={refresh}>
-          {t('update')}
-        </LinkButton>
-      </h3>
-    )
 
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (_isEmpty(data)) {
-      showContent = (
-        <Fragment>
-          {renderUpdate}
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
-          {renderUpdate}
+        <div className='section-account-summary-data'>
           <Volume data={_get(data, 'trade_vol_30d', [])} />
-          <br />
           <Fees
             title='accountsummary.fees'
             makerFee={data.maker_fee || data.maker_rebate}
@@ -72,7 +50,7 @@ class AccountSummary extends PureComponent {
           />
           <br />
           <MarginFunds data={_get(data, 'fees_funding_30d', {})} />
-        </Fragment>
+        </div>
       )
     }
     return (
@@ -90,4 +68,4 @@ class AccountSummary extends PureComponent {
 AccountSummary.propTypes = propTypes
 AccountSummary.defaultProps = defaultProps
 
-export default withTranslation('translations')(AccountSummary)
+export default AccountSummary

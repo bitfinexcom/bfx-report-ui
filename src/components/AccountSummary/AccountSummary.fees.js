@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
@@ -17,7 +17,7 @@ const getColumns = (props) => {
     {
       id: 'makerFee',
       name: makerFee > 0 ? 'column.maker_fees' : 'column.maker_rebate',
-      width: 185,
+      width: 100,
       renderer: () => (
         <Cell tooltip={formattedMakerFee}>
           {formatAmount(makerFee * 100, getColor(makerFee), 2)}
@@ -29,7 +29,7 @@ const getColumns = (props) => {
     {
       id: 'takerFee',
       name: takerFee > 0 ? 'column.taker_fees' : 'column.taker_rebate',
-      width: 185,
+      width: 100,
       renderer: () => (
         <Cell tooltip={formattedTakerFee}>
           {formatAmount(takerFee * 100, getColor(takerFee), 2)}
@@ -52,13 +52,16 @@ const AccountSummaryFees = (props) => {
   const columns = getColumns({ makerFee, takerFee })
 
   return (
-    <Fragment>
-      <h4>{t(title)}</h4>
+    <div className='section-account-summary-data-item'>
+      <div>
+        {t(title)}
+        <div>{t('accountsummary.fees_explain')}</div>
+      </div>
       <DataTable
         numRows={1}
         tableColumns={columns}
       />
-    </Fragment>
+    </div>
   )
 }
 
