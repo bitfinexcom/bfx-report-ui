@@ -27,13 +27,14 @@ class AccountSummary extends PureComponent {
       data,
       dataReceived,
       pageLoading,
+      refresh,
     } = this.props
 
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (_isEmpty(data)) {
-      showContent = <NoData />
+      showContent = <NoData refresh={refresh} />
     } else {
       showContent = (
         <div className='section-account-summary-data'>
