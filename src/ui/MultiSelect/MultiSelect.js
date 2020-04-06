@@ -11,8 +11,15 @@ class MultiSelect extends PureComponent {
     isOpen: false,
   }
 
-  onToggle = (nextOpenState) => {
-    this.setState({ isOpen: nextOpenState })
+  popoverProps = {
+    minimal: true,
+    popoverClassName: 'bitfinex-select-menu',
+    onOpening: () => this.onToggle(true),
+    onClosing: () => this.onToggle(false),
+  }
+
+  onToggle = (isOpen) => {
+    this.setState({ isOpen })
   }
 
   render() {
@@ -28,11 +35,7 @@ class MultiSelect extends PureComponent {
       <BlueprintMultiSelect
         className='bitfinex-select'
         placeholder={t('selector.select')}
-        popoverProps={{
-          minimal: true,
-          onInteraction: this.onToggle,
-          popoverClassName: 'bitfinex-select-menu',
-        }}
+        popoverProps={this.popoverProps}
         {...selectProps}
         tagInputProps={{
           ...tagInputProps,
