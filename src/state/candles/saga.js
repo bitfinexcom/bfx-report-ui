@@ -8,7 +8,7 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 
 import types from './constants'
@@ -43,8 +43,7 @@ const getReqTrades = (params) => {
 
 function* fetchData(section, data, method) {
   const params = yield select(selectors.getParams)
-  const query = yield select(getQuery)
-  const { start, end } = getTimeFrame(query, data.nextPage)
+  const { start, end } = yield select(getTimeFrame, data.nextPage)
   const { result, error } = yield call(method, {
     ...params,
     start,

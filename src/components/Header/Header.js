@@ -3,7 +3,7 @@ import React from 'react'
 import Status from 'components/Status'
 import SyncMode from 'components/SyncMode'
 import PlatformLogo from 'ui/PlatformLogo'
-import constants from 'state/query/constants'
+import timeRangeTypes from 'state/timeRange/constants'
 import { platform } from 'var/config'
 
 import TimeFrame from './TimeFrame'
@@ -29,11 +29,11 @@ const Header = () => {
       </div>
       <TimeFrameShortcut
         title='timeframe.2w'
-        type={constants.TIME_RANGE_LAST_2WEEKS}
+        type={timeRangeTypes.TIME_RANGE_LAST_2WEEKS}
       />
       <TimeFrameShortcut
         title='timeframe.past_month'
-        type={constants.TIME_RANGE_PAST_MONTH}
+        type={timeRangeTypes.TIME_RANGE_PAST_MONTH}
       />
       <Export />
 

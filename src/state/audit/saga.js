@@ -8,7 +8,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -24,12 +24,15 @@ const TYPE = queryTypes.MENU_POSITIONS_AUDIT
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqPositionsAudit({
-  smallestMts,
-  query,
+  start,
+  end,
   targetIds,
 }) {
-  const params = getTimeFrame(query, smallestMts)
-  params.limit = LIMIT
+  const params = {
+    start,
+    end,
+    limit: LIMIT,
+  }
   if (targetIds) {
     params.id = targetIds.map(id => parseInt(id, 10))
     return makeFetchCall('getPositionsAudit', params)
@@ -41,11 +44,10 @@ function* fetchPositionsAudit() {
   try {
     const { targetIds } = yield select(getPositionsAudit)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-    const query = yield select(getQuery)
-
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const { result, error } = yield call(fetchDataWithPagination, getReqPositionsAudit, {
-      smallestMts,
-      query,
+      start,
+      end,
       targetIds,
     })
     yield put(actions.updatePAudit(result))

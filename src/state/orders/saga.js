@@ -7,7 +7,7 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { getQueryLimit } from 'state/query/utils'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -23,16 +23,17 @@ import { getOrders } from './selectors'
 const TYPE = queryTypes.MENU_ORDERS
 
 function getReqOrders({
-  smallestMts,
-  query,
+  start,
+  end,
   targetPairs,
   filter,
 }) {
-  const params = getTimeFrame(query, smallestMts)
-  params.filter = filter
-  params.limit = getQueryLimit(TYPE)
-  if (targetPairs.length) {
-    params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
+  const params = {
+    start,
+    end,
+    limit: getQueryLimit(TYPE),
+    filter,
+    symbol: targetPairs.length ? formatRawSymbols(mapRequestPairs(targetPairs)) : undefined,
   }
   return makeFetchCall('getOrders', params)
 }
@@ -41,12 +42,11 @@ function* fetchOrders() {
   try {
     const { targetPairs } = yield select(getOrders)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-
-    const query = yield select(getQuery)
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(fetchDataWithPagination, getReqOrders, {
-      smallestMts,
-      query,
+      start,
+      end,
       targetPairs,
       filter,
     })

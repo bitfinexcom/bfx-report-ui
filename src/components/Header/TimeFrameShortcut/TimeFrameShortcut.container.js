@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { setTimeRange } from 'state/query/actions'
+import { setTimeRange } from 'state/timeRange/actions'
 
 import TimeFrameShortcut from './TimeFrameShortcut'
 

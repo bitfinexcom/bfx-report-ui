@@ -7,7 +7,7 @@ import {
   setApiKey, setApiSecret, setAuthToken, setTimezone, setTheme, setLang,
 } from 'state/base/actions'
 import { checkAuth } from 'state/auth/actions'
-import { setCustomTimeRange } from 'state/query/actions'
+import { setCustomTimeRange } from 'state/timeRange/actions'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 import { isSynced } from 'state/sync/saga'
 import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'

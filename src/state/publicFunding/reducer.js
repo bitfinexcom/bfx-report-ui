@@ -1,8 +1,8 @@
 // https://docs.bitfinex.com/v2/reference#rest-public-trades
 import _get from 'lodash/get'
 
-import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
+import timeRangeTypes from 'state/timeRange/constants'
 import {
   baseState,
   fetch,
@@ -62,7 +62,7 @@ export function publicFundingReducer(state = initialState, action) {
         targetSymbol: payload,
       }
     case types.REFRESH:
-    case queryTypes.SET_TIME_RANGE:
+    case timeRangeTypes.SET_TIME_RANGE:
       return {
         ...initialState,
         targetSymbol: state.targetSymbol,

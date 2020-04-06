@@ -1,7 +1,8 @@
 // https://docs.bitfinex.com/reference#rest-auth-ledgers
 
-import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
+import timeRangeTypes from 'state/timeRange/constants'
+import queryTypes from 'state/query/constants'
 import { updateLedgers } from 'state/ledgers/utils'
 import {
   addSymbol,
@@ -39,7 +40,7 @@ export function affiliatesEarningsReducer(state = initialState, action) {
       return setSymbols(state, payload, initialState)
     case types.REFRESH:
       return refresh(TYPE, state, initialState)
-    case queryTypes.SET_TIME_RANGE:
+    case timeRangeTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:
       return initialState

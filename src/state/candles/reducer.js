@@ -1,9 +1,9 @@
 import authTypes from 'state/auth/constants'
+import timeRangeTypes from 'state/timeRange/constants'
 import { fetchFail } from 'state/reducers.helper'
 import { mapSymbol } from 'state/symbols/utils'
 
 import types from './constants'
-import queryTypes from '../query/constants'
 
 const initialParams = {
   timeframe: '1h',
@@ -142,7 +142,7 @@ export function candlesReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.REFRESH:
-    case queryTypes.SET_TIME_RANGE:
+    case timeRangeTypes.SET_TIME_RANGE:
       return {
         ...initialState,
         timeframe: state.timeframe,

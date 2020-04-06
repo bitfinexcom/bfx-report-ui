@@ -7,7 +7,7 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -21,19 +21,19 @@ import actions from './actions'
 import { getTickers } from './selectors'
 
 const TYPE = queryTypes.MENU_TICKERS
-const LIMIT = getQueryLimit(TYPE)
 
 function getReqTickers({
-  smallestMts,
-  query,
+  start,
+  end,
   targetPairs,
   filter,
 }) {
-  const params = getTimeFrame(query, smallestMts)
-  params.limit = LIMIT
-  params.filter = filter
-  if (targetPairs.length) {
-    params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
+  const params = {
+    start,
+    end,
+    filter,
+    limit: getQueryLimit(TYPE),
+    symbol: targetPairs.length ? formatRawSymbols(mapRequestPairs(targetPairs)) : undefined,
   }
   return makeFetchCall('getTickersHistory', params)
 }
@@ -42,12 +42,12 @@ function* fetchTickers() {
   try {
     const { targetPairs } = yield select(getTickers)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-    const query = yield select(getQuery)
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const filter = yield select(getFilterQuery, TYPE)
 
     const { result, error } = yield call(fetchDataWithPagination, getReqTickers, {
-      smallestMts,
-      query,
+      start,
+      end,
       targetPairs,
       filter,
     })

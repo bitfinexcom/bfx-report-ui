@@ -40,12 +40,12 @@ import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
 } from 'state/base/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { platform } from 'var/config'
 
 import {
   getEmail,
   getQuery,
-  getTimeFrame,
 } from './selectors'
 import actions from './actions'
 import { getQueryLimit, NO_QUERY_LIMIT_TARGETS } from './utils'
@@ -202,10 +202,11 @@ function formatSymbol(target, symbols) {
   }
 }
 
-function* getOptions({ target, query }) {
+function* getOptions({ target }) {
   const options = {}
   if (!_includes(NO_QUERY_LIMIT_TARGETS, target)) {
-    Object.assign(options, getTimeFrame(query, target))
+    const timeFrame = yield select(getTimeFrame)
+    Object.assign(options, timeFrame)
     options.limit = getQueryLimit(target)
   }
   options.timezone = yield select(getTimezone)
@@ -355,17 +356,17 @@ function* getOptions({ target, query }) {
 
 function* exportCSV({ payload: targets }) {
   try {
-    const query = yield select(getQuery)
+    const { exportEmail } = yield select(getQuery)
     const multiExport = []
     // eslint-disable-next-line no-restricted-syntax
     for (const target of targets) {
-      const options = yield call(getOptions, { target, query })
+      const options = yield call(getOptions, { target })
       multiExport.push(options)
 
       // add 2 additional snapshot reports
       if (target === MENU_TAX_REPORT) {
         const { start, end } = yield select(getTaxReportParams)
-        const snapshotOptions = yield call(getOptions, { target: MENU_SNAPSHOTS, query })
+        const snapshotOptions = yield call(getOptions, { target: MENU_SNAPSHOTS })
         multiExport.push({
           ...snapshotOptions,
           end: start || undefined,
@@ -382,8 +383,8 @@ function* exportCSV({ payload: targets }) {
       language: LANGUAGES_MAP[locale],
       multiExport,
     }
-    if (query.exportEmail) {
-      params.email = query.exportEmail
+    if (exportEmail) {
+      params.email = exportEmail
     }
     const { result, error } = yield call(getMultipleCsv, params)
     if (result) {

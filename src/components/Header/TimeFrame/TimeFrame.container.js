@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 
 import { getTimezone } from 'state/base/selectors'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 
 import TimeFrame from './TimeFrame'
 
 function mapStateToProps(state) {
-  const { start, end } = getTimeFrame(getQuery(state))
+  const { start, end } = getTimeFrame(state)
   return {
     start,
     end,

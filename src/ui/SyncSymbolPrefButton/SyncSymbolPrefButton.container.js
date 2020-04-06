@@ -4,7 +4,7 @@ import { editPublicTradesSymbolPref } from 'state/sync/actions'
 import {
   getSyncMode, getPublicFundingStartTime, getPublicFundingSymbols,
 } from 'state/sync/selectors'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 
 import SyncSymbolPrefButton from './SyncSymbolPrefButton'
 
@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
   return {
     syncMode: getSyncMode(state),
     syncSymbols,
-    startTime: startTime || getTimeFrame(getQuery(state)).start,
+    startTime: startTime || getTimeFrame(state).start,
   }
 }
 
