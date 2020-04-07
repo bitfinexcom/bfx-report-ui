@@ -102,15 +102,6 @@ const PATHS = {
 }
 
 class Main extends PureComponent {
-  startQuery = () => {
-    const { startDate, endDate } = this.state
-    const { setCustomTimeRange, showCustomDialog } = this.props
-    if (startDate !== null && endDate !== null) {
-      setCustomTimeRange(startDate.getTime(), endDate.getTime())
-    }
-    showCustomDialog(false)
-  }
-
   render() {
     const {
       authStatus,

@@ -6,16 +6,37 @@ import { Classes, Position } from '@blueprintjs/core'
 import { DateRangeInput } from '@blueprintjs/datetime'
 
 import baseTypes from 'state/base/constants'
+import timeRangeTypes from 'state/timeRange/constants'
+import { getTimeFrameFromData } from 'state/timeRange/selectors'
 import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
 
 import { propTypes, defaultProps } from './DateRangePicker.props'
+import {
+  getSelectedShortcutIndex,
+  getShortcutIndex,
+  getShortcutTimeRange,
+} from './utils'
 
 const createShortcut = (label, dateRange) => ({ dateRange, label, includeTime: true })
 
+const makeDate = (action) => {
+  const returnVal = new Date()
+  action(returnVal)
+  return returnVal
+}
+
 class DateRangePicker extends PureComponent {
-  state = {
-    startDate: null,
-    endDate: new Date(),
+  constructor(props) {
+    super()
+
+    const { range, start, end } = props
+
+    const { start: timeFrameStart, end: timeFrameEnd } = getTimeFrameFromData({ range, start, end })
+    this.state = {
+      startDate: timeFrameStart && new Date(timeFrameStart),
+      endDate: timeFrameEnd && new Date(timeFrameEnd),
+      shortcutIndex: getShortcutIndex(range),
+    }
   }
 
   addControls = () => {
@@ -43,12 +64,6 @@ class DateRangePicker extends PureComponent {
   createShortcuts = () => {
     const { t } = this.props
     const today = new Date()
-    const makeDate = (action) => {
-      const returnVal = new Date()
-      action(returnVal)
-      returnVal.setDate(returnVal.getDate() + 1)
-      return returnVal
-    }
 
     const pastDay = makeDate(d => d.setDate(d.getDate() - 1))
     const twoWeeksAgo = makeDate(d => d.setDate(d.getDate() - 14))
@@ -60,6 +75,17 @@ class DateRangePicker extends PureComponent {
     const currentYearStart = new Date(today.getFullYear(), 0, 1)
     const lastYearStart = new Date(today.getFullYear() - 1, 0, 1)
     const lastYearEnd = new Date(today.getFullYear() - 1, 11, 31, 23, 59, 59)
+
+    this.shortcutsMap = [
+      [pastDay, today],
+      [twoWeeksAgo, today],
+      [oneMonthAgo, today],
+      [threeMonthsAgo, today],
+      [oneYearAgo, today],
+      [twoYearsAgo, today],
+      [currentYearStart, today],
+      [lastYearStart, lastYearEnd],
+    ]
 
     return [
       createShortcut(t('timeframe.24h'), [pastDay, today]),
@@ -78,6 +104,7 @@ class DateRangePicker extends PureComponent {
     const [startDate, endDate] = range
     this.removePopoverDismiss()
     const sixYearsPast = moment().add({ years: -6 })
+    const shortcutIndex = getSelectedShortcutIndex({ range, shortcutsMap: this.shortcutsMap })
 
     if (sixYearsPast.isAfter(startDate)) {
       updateWarningStatus({
@@ -87,22 +114,37 @@ class DateRangePicker extends PureComponent {
       return
     }
 
-    if (startDate && endDate) {
-      if (moment(startDate).isBefore(endDate)) {
-        this.handleRangeChange2(range)
-      }
+    if (startDate && endDate && !moment(startDate).isBefore(endDate)) {
       return
     }
 
-    this.handleRangeChange2(range)
-  }
-
-  handleRangeChange2 = (range) => {
-    const [startDate, endDate] = range
     this.setState({
       startDate,
       endDate,
+      shortcutIndex,
     })
+  }
+
+  // workaround for not being able to set selected shortcut, `selectedShortcutIndex` doesn't work
+  // sets active classes on a currently selected shortcut and removes them on shortcut click
+  highlightSelectedShortcut = () => {
+    const { range } = this.props
+    const shortcutIndex = getShortcutIndex(range)
+
+    if (shortcutIndex === -1) {
+      return
+    }
+
+    const shortcuts = document.querySelectorAll('.bp3-daterangepicker-shortcuts li .bp3-menu-item')
+    const shortcut = shortcuts[shortcutIndex]
+    shortcut.classList.add('bp3-active', 'bp3-intent-primary')
+
+    const shortcutsContainer = document.getElementsByClassName('bp3-daterangepicker-shortcuts')[0]
+    this.removeShortcutHighlight = () => {
+      shortcut.classList.remove('bp3-active', 'bp3-intent-primary')
+      shortcutsContainer.removeEventListener('click', this.removeShortcutHighlight)
+    }
+    shortcutsContainer.addEventListener('click', this.removeShortcutHighlight)
   }
 
   getDates = () => {
@@ -121,22 +163,30 @@ class DateRangePicker extends PureComponent {
   }
 
   startQuery = () => {
-    const { startDate, endDate } = this.state
-    const { history, setCustomTimeRange } = this.props
+    const { startDate, endDate, shortcutIndex } = this.state
+    const { history, setTimeRange } = this.props
     if (startDate !== null && endDate !== null) {
       const start = startDate.getTime()
       const end = endDate.getTime()
+      const timeRange = getShortcutTimeRange(shortcutIndex)
 
-      setCustomTimeRange(start, end)
+      setTimeRange({
+        range: timeRange,
+        start,
+        end,
+      })
 
       const { pathname, search } = window.location
       const parsed = queryString.parse(search)
       const { range } = parsed
       const [startStr, endStr] = range ? range.split('-') : [undefined, undefined]
       if (`${start}` !== startStr || `${end}` !== endStr) {
+        const nextRange = timeRange === timeRangeTypes.CUSTOM
+          ? `${start}-${end}`
+          : undefined
         const params = Object.assign(
           parsed,
-          { range: `${start}-${end}` },
+          { range: nextRange },
         )
         history.replace(`${pathname}?${queryString.stringify(params, { encode: false })}`)
       }
@@ -162,7 +212,7 @@ class DateRangePicker extends PureComponent {
     const commonDateRangeProps = {
       allowSingleDayRange: true,
       closeOnSelection: false,
-      // contiguousCalendarMonths: false,
+      contiguousCalendarMonths: false,
       formatDate,
       parseDate,
       onChange: this.handleRangeChange,
@@ -179,7 +229,10 @@ class DateRangePicker extends PureComponent {
           popoverProps={{
             minimal: true,
             onOpened: this.removePopoverDismiss,
-            onOpening: this.addControls,
+            onOpening: () => {
+              this.addControls()
+              this.highlightSelectedShortcut()
+            },
             position: Position.BOTTOM_LEFT,
             popoverClassName: 'date-range-picker-popover',
             shouldDismissPopover: false,

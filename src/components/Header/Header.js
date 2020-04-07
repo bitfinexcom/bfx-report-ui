@@ -29,11 +29,11 @@ const Header = () => {
       </div>
       <TimeFrameShortcut
         title='timeframe.2w'
-        type={timeRangeTypes.TIME_RANGE_LAST_2WEEKS}
+        type={timeRangeTypes.LAST_2WEEKS}
       />
       <TimeFrameShortcut
         title='timeframe.past_month'
-        type={timeRangeTypes.TIME_RANGE_PAST_MONTH}
+        type={timeRangeTypes.PAST_MONTH}
       />
       <Export />
 

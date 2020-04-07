@@ -10,7 +10,7 @@ class TimeFrameShortcut extends PureComponent {
   onClick = () => {
     const { type, setTimeRange } = this.props
     this.resetRangeQuery()
-    setTimeRange(type)
+    setTimeRange({ range: type })
   }
 
   resetRangeQuery = () => {

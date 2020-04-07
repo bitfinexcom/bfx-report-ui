@@ -10,13 +10,13 @@ export function timeRangeReducer(state = initialState, action) {
   const { type, payload = {} } = action
   switch (type) {
     case types.SET_TIME_RANGE: {
-      const isValidCustom = payload.rangeType === types.TIME_RANGE_CUSTOM
+      const isValidCustom = payload.range === types.CUSTOM
         && payload.start
         && payload.end
 
       return {
         ...state,
-        range: payload.rangeType || types.DEFAULT_RANGE,
+        range: payload.range || types.DEFAULT_RANGE,
         start: isValidCustom ? payload.start : undefined,
         end: isValidCustom ? payload.end : undefined,
       }
