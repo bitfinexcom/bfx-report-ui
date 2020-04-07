@@ -1,0 +1,30 @@
+.bp3-toast {
+  padding: 5px;
+  border-radius: 2px;
+
+  &.bp3-intent {
+    &-primary {
+      background-color: var(--toastPrimaryBg);
+    }
+
+    &-success {
+      background-color: var(--toastSuccessBg);
+    }
+
+    &-warning {
+      background-color: var(--toastWarningBg);
+    }
+
+    &-error {
+      background-color: var(--toastErrorBg);
+    }
+  }
+
+  &-message {
+    height: 40px;
+  }
+
+  svg path {
+    fill: var(--toastIconColor);
+  }
+}
