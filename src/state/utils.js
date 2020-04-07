@@ -78,6 +78,12 @@ export function checkEmail(auth = getAuthFromStore()) {
     auth,
   })
 }
+
+export function formatAuthDate(mts) {
+  // MMM dd yyyy
+  return moment(mts).format('M/D/YYYY, h:mm:ss A')
+}
+
 /**
  * Format time.
  * @param {number} mts timestamp
@@ -471,6 +477,7 @@ export default {
   DEFAULT_DATETIME_FORMAT,
   getQueryWithoutParams,
   makeFetchCall,
+  formatAuthDate,
   formatDate,
   formatTime,
   getAuth,

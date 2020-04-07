@@ -14,7 +14,7 @@ import wsLogin from 'state/ws/login'
 import { selectAuth } from 'state/auth/selectors'
 import { setAuthToken } from 'state/base/actions'
 import { getApiKey, getApiSecret } from 'state/base/selectors'
-import { getAuth, checkEmail } from 'state/utils'
+import { getAuth, checkEmail, formatAuthDate } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { setOwnerEmail } from 'state/query/actions'
@@ -84,7 +84,7 @@ function* checkAuth() {
       yield put(updateSuccessStatus({
         id: 'status.success',
         topic: 'auth.auth',
-        time: (new Date()).toLocaleString(),
+        time: formatAuthDate(new Date()),
       }))
 
       yield put(actions.authSuccess(result))
