@@ -6,7 +6,7 @@ import types from './constants'
 export const initialState = {
   dataReceived: false,
   pageLoading: false,
-  data: {},
+  data: [],
 }
 
 export function accountSummaryReducer(state = initialState, action) {
