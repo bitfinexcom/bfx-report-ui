@@ -27,7 +27,7 @@
   }
 
   input {
-    width: 14px;
+    width: 16px;
 
     &:checked ~ .bp3-control-indicator {
       box-shadow: 0 0 0 1px var(--activeColor);
@@ -59,8 +59,8 @@
   padding: 0;
 
   .bp3-control-indicator {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     margin-left: 0;
     box-shadow: 0 0 0 1px var(--checkboxBorder);
     border-radius: 2px;
@@ -68,8 +68,8 @@
     background-image: none;
 
     &:before {
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
     }
 
     &:active {
@@ -88,6 +88,15 @@
 
     .bp3-control-indicator {
       margin-left: 0;
+    }
+  }
+
+  input:checked {
+    ~ .bp3-control-indicator::before {
+      background-image: url('../icons/checkmark.svg');
+      background-position: center;
+      background-position-x: 57%;
+      background-repeat: no-repeat;
     }
   }
 }

@@ -2,6 +2,7 @@ import { ReactComponent as ACCOUNT_BALANCE } from './account-balance.svg'
 import { ReactComponent as BIN } from './bin.svg'
 import { ReactComponent as CALENDAR } from './calendar.svg'
 import { ReactComponent as CHECKBOX_ACTIVE } from './checkbox-active.svg'
+import { ReactComponent as CHECKMARK } from './checkmark.svg'
 import { ReactComponent as CHECKMARK_CIRCLE } from './checkmark-circle.svg'
 import { ReactComponent as CHEVRON_DOUBLE_LEFT } from './chevron-double-left.svg'
 import { ReactComponent as CHEVRON_DOUBLE_RIGHT } from './chevron-double-right.svg'
@@ -44,6 +45,7 @@ export default {
   BIN,
   CALENDAR,
   CHECKBOX_ACTIVE,
+  CHECKMARK,
   CHECKMARK_CIRCLE,
   CHEVRON_DOUBLE_LEFT,
   CHEVRON_DOUBLE_RIGHT,
