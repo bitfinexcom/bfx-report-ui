@@ -127,6 +127,10 @@ body.#{$ns}-light {
 .section-switch {
   margin-left: 1px;
   margin-bottom: 30px;
+
+  .refresh-button {
+    margin-left: 23px;
+  }
 }
 
 .bp3-timezone-picker-popover {

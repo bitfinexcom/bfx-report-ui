@@ -1,17 +1,12 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import DataTable from 'ui/DataTable'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import PositionsSwitch from 'components/Positions/PositionsSwitch'
 import SectionHeader from 'ui/SectionHeader'
-import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import { checkFetch } from 'state/utils'
@@ -40,12 +35,6 @@ class PositionsActive extends PureComponent {
     history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/${id}${window.location.search}`)
   }
 
-  jumpToPositions = (e) => {
-    e.preventDefault()
-    const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS)}${window.location.search}`)
-  }
-
   render() {
     const {
       getFullTime,
@@ -65,35 +54,17 @@ class PositionsActive extends PureComponent {
       timeOffset,
     })
 
-    const renderButtonGroup = (
-      <ButtonGroup className='section-switch'>
-        <Button onClick={this.jumpToPositions}>{t('positions.closed')}</Button>
-        <Button active>{t('positions.active')}</Button>
-        <RefreshButton handleClickRefresh={refresh} />
-      </ButtonGroup>
-    )
-
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (!entries.length) {
-      showContent = (
-        <Fragment>
-          {renderButtonGroup}
-          <br />
-          <br />
-          <NoData title='positions.no_active' />
-        </Fragment>
-      )
+      showContent = <NoData title='positions.no_active' />
     } else {
       showContent = (
-        <Fragment>
-          {renderButtonGroup}
-          <DataTable
-            numRows={entries.length}
-            tableColumns={tableColumns}
-          />
-        </Fragment>
+        <DataTable
+          numRows={entries.length}
+          tableColumns={tableColumns}
+        />
       )
     }
 
@@ -103,6 +74,10 @@ class PositionsActive extends PureComponent {
           filter={false}
           target={TYPE}
           title='positions.title'
+        />
+        <PositionsSwitch
+          target={TYPE}
+          refresh={refresh}
         />
         {showContent}
       </Card>

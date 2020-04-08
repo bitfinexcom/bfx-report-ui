@@ -1,11 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import Pagination from 'ui/Pagination'
 import DataTable from 'ui/DataTable'
@@ -18,6 +13,7 @@ import { checkInit, checkFetch, togglePair } from 'state/utils'
 
 import getColumns from './Positions.columns'
 import { propTypes, defaultProps } from './Positions.props'
+import PositionsSwitch from './PositionsSwitch'
 
 const TYPE = queryConstants.MENU_POSITIONS
 
@@ -35,12 +31,6 @@ class Positions extends PureComponent {
     const { history } = this.props
     const id = e.target.getAttribute('value')
     history.push(`${getPath(queryConstants.MENU_POSITIONS_AUDIT)}/${id}${window.location.search}`)
-  }
-
-  jumpToActivePositions = (e) => {
-    e.preventDefault()
-    const { history } = this.props
-    history.push(`${getPath(queryConstants.MENU_POSITIONS_ACTIVE)}${window.location.search}`)
   }
 
   togglePair = pair => togglePair(TYPE, this.props, pair)
@@ -67,27 +57,14 @@ class Positions extends PureComponent {
       timeOffset,
     }).filter(({ id }) => columns[id])
 
-    const renderButtonGroup = (
-      <ButtonGroup className='section-switch'>
-        <Button active>{t('positions.closed')}</Button>
-        <Button onClick={this.jumpToActivePositions}>{t('positions.active')}</Button>
-      </ButtonGroup>
-    )
-
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (!entries.length) {
-      showContent = (
-        <Fragment>
-          {renderButtonGroup}
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
         <Fragment>
-          {renderButtonGroup}
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
@@ -109,6 +86,7 @@ class Positions extends PureComponent {
           }}
           refresh={refresh}
         />
+        <PositionsSwitch target={TYPE} />
         {showContent}
       </Card>
     )

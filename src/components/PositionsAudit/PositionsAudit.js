@@ -2,6 +2,8 @@ import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
+import getColumns from 'components/Positions/Positions.columns'
+import PositionsSwitch from 'components/Positions/PositionsSwitch'
 import Pagination from 'ui/Pagination'
 import DataTable from 'ui/DataTable'
 import Loading from 'ui/Loading'
@@ -11,7 +13,6 @@ import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
 
-import getColumns from 'components/Positions/Positions.columns'
 import { propTypes, defaultProps } from './PositionsAudit.props'
 
 const TYPE = queryConstants.MENU_POSITIONS_AUDIT
@@ -72,8 +73,8 @@ class PositionsAudit extends PureComponent {
           filter={false}
           target={TYPE}
           title='paudit.title'
-          refresh={refresh}
         />
+        <PositionsSwitch target={TYPE} refresh={refresh} />
         {showContent}
       </Card>
     )
