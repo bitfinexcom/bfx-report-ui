@@ -4,6 +4,8 @@ import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
 
+import Icon from 'icons'
+
 import { propTypes, defaultProps } from './ColumnsFilterDialog.props'
 
 const ColumnsFilterDialog = (props) => {
@@ -22,6 +24,7 @@ const ColumnsFilterDialog = (props) => {
       className='columns-filter-dialog'
       onClose={onCancel}
       title={t('columnsfilter.title')}
+      icon={<Icon.FILTER />}
       isCloseButtonShown={false}
       isOpen={isOpen}
     >

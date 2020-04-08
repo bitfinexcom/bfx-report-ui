@@ -11,6 +11,7 @@ import { ReactComponent as CHEVRON_RIGHT } from './chevron-right.svg'
 import { ReactComponent as CHEVRON_UP } from './chevron-up.svg'
 import { ReactComponent as CLOSE } from './close.svg'
 import { ReactComponent as COLLAPSE_WIDE } from './collapse-wide.svg'
+import { ReactComponent as CURSOR_SQUARE } from './cursor-square.svg'
 import { ReactComponent as DARK_THEME } from './dark-theme.svg'
 import { ReactComponent as DEPOSITS } from './deposits.svg'
 import { ReactComponent as DERIVATIVES } from './derivatives.svg'
@@ -18,6 +19,7 @@ import { ReactComponent as DISK } from './disk.svg'
 import { ReactComponent as FEES_REPORT } from './fees-report.svg'
 import { ReactComponent as FILE_EXPORT } from './file-export.svg'
 import { ReactComponent as FILE_TABLE } from './file-table.svg'
+import { ReactComponent as FILTER } from './filter.svg'
 import { ReactComponent as INFO_CIRCLE } from './info-circle.svg'
 import { ReactComponent as LIGHT_THEME } from './light-theme.svg'
 import { ReactComponent as LIST_NUMBER } from './list-number.svg'
@@ -51,6 +53,7 @@ export default {
   CHEVRON_UP,
   CLOSE,
   COLLAPSE_WIDE,
+  CURSOR_SQUARE,
   DARK_THEME,
   DEPOSITS,
   DERIVATIVES,
@@ -58,6 +61,7 @@ export default {
   FEES_REPORT,
   FILE_EXPORT,
   FILE_TABLE,
+  FILTER,
   INFO_CIRCLE,
   LIGHT_THEME,
   LIST_NUMBER,

@@ -32,6 +32,12 @@
 
   .theme-switcher {
     margin-bottom: 25px;
+
+    &-theme {
+      &--light svg {
+        box-shadow: var(--lightThemeBorder);
+      }
+    }
   }
 
   &-timezones {

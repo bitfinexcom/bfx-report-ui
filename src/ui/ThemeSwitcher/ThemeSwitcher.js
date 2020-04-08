@@ -27,7 +27,7 @@ class ThemeSwitcher extends PureComponent {
 
     return (
       <div className='theme-switcher'>
-        <div className='theme-switcher-theme'>
+        <div className='theme-switcher-theme theme-switcher-theme--dark'>
           <Icon.DARK_THEME />
           <Radio
             checked={theme === 'theme-dark'}
@@ -37,7 +37,7 @@ class ThemeSwitcher extends PureComponent {
           />
         </div>
 
-        <div className='theme-switcher-theme'>
+        <div className='theme-switcher-theme theme-switcher-theme--light'>
           <Icon.LIGHT_THEME />
           <Radio
             checked={theme === 'theme-light'}

@@ -4,6 +4,8 @@ import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
 
+import Icon from 'icons'
+
 import { propTypes, defaultProps } from './ColumnsSelectDialog.props'
 
 const ColumnsSelectDialog = (props) => {
@@ -19,6 +21,7 @@ const ColumnsSelectDialog = (props) => {
   return (
     <Dialog
       className='columns-select-dialog'
+      icon={<Icon.CURSOR_SQUARE />}
       isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={onCancel}
