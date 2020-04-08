@@ -6,6 +6,7 @@
   &-header {
     min-height: 36px;
     background-color: var(--bgColor2);
+    box-shadow: 0 1px 0 var(--dialogHeaderBorder);
     border-radius: 2px 2px 0 0;
     padding-left: 16px;
 

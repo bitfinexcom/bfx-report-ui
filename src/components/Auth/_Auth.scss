@@ -24,6 +24,7 @@
       > .bp3-callout {
         border-radius: 0;
         margin: 0 auto 24px;
+        padding: 10px 21px 9px;
         font-size: 15px;
         background-color: var(--authNoticeBg);
       }
@@ -31,6 +32,10 @@
       .bp3-form-group {
         margin-left: 5px;
         margin-bottom: 5px;
+      }
+
+      .bp3-input {
+        padding: 0 15px;
       }
     }
   }

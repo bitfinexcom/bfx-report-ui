@@ -10,6 +10,7 @@ import {
 } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
+import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
 import { platform } from 'var/config'
 
@@ -49,6 +50,7 @@ class Auth extends PureComponent {
         <Dialog
           title={t('auth.title')}
           isOpen
+          icon={<Icon.SIGN_IN />}
           isCloseButtonShown={false}
           usePortal={false}
         >
@@ -57,7 +59,7 @@ class Auth extends PureComponent {
             <Callout>
               {t('auth.note1')}
               <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>
-                {platform.KEY_URL}
+                {platform.KEY_URL.split('https://')[1]}
               </a>
               {t('auth.note2')}
             </Callout>
