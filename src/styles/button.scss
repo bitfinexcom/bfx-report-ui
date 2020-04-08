@@ -85,9 +85,10 @@
 
 // toasts close button
 .bp3-minimal {
-  > .bp3-button {
-    border: none;
+  &.bp3-button,  > .bp3-button {
     width: unset;
+    height: unset;
+    border: none;
 
     &:hover {
       border: none;

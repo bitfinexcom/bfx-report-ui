@@ -12,6 +12,8 @@ const CandlesTimeframe = (props) => {
 
   return (
     <Select
+      className='bitfinex-select--timeframe'
+      popoverClassName='bitfinex-select-menu--timeframe'
       value={value}
       items={items}
       onChange={onChange}

@@ -33,6 +33,7 @@ class PairSelector extends PureComponent {
 
     return (
       <Select
+        popoverClassName='bitfinex-select-menu--pair'
         itemRenderer={this.itemRenderer}
         onChange={onPairSelect}
         filterable

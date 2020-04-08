@@ -10,6 +10,10 @@
     justify-content: space-between;
   }
 
+  &--timeframe .bp3-button {
+    width: 100px;
+  }
+
   .bp3-multi-select {
     position: relative;
     height: 40px;
@@ -67,8 +71,23 @@
         color: var(--color);
 
         .bp3-input {
+          height: 30px;
           border-radius: 2px;
         }
+      }
+    }
+
+    &--symbol, &--pair {
+      .bp3-popover-content {
+        width: 180px;
+      }
+    }
+
+    &--timeframe .bp3-popover-content {
+      width: 100px;
+
+      .bp3-menu {
+        min-width: unset;
       }
     }
 
@@ -149,6 +168,10 @@
 
   .bp3-popover-open {
     input::placeholder {
+      color: var(--activeColor);
+    }
+
+    .bp3-button {
       color: var(--activeColor);
     }
   }

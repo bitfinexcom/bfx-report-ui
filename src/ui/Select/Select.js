@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import classNames from 'classnames'
 import {
   Button,
   Intent,
@@ -65,9 +66,11 @@ class Select extends PureComponent {
 
   render() {
     const {
+      className,
       filterable,
       itemRenderer,
       items,
+      popoverClassName,
       value,
     } = this.props
     const { isOpen } = this.state
@@ -80,9 +83,12 @@ class Select extends PureComponent {
       ? <Icon.CHEVRON_UP />
       : <Icon.CHEVRON_DOWN />
 
+    const selectClasses = classNames('bitfinex-select', className)
+    const popoverClasses = classNames('bitfinex-select-menu', popoverClassName)
+
     return (
       <BlueprintSelect
-        className='bitfinex-select'
+        className={selectClasses}
         filterable={filterable}
         disabled={!items.length}
         items={items}
@@ -92,7 +98,7 @@ class Select extends PureComponent {
         popoverProps={{
           minimal: true,
           onInteraction: this.onToggle,
-          popoverClassName: 'bitfinex-select-menu',
+          popoverClassName: popoverClasses,
         }}
       >
         <Button
