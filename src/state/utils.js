@@ -79,10 +79,7 @@ export function checkEmail(auth = getAuthFromStore()) {
   })
 }
 
-export function formatAuthDate(mts) {
-  // MMM dd yyyy
-  return moment(mts).format('M/D/YYYY, h:mm:ss A')
-}
+export const formatAuthDate = mts => moment(mts).format('M/D/YYYY, h:mm:ss A')
 
 /**
  * Format time.

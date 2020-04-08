@@ -35,6 +35,16 @@
         border: 1px solid var(--buttonPrimaryHoverBg);
         box-shadow: none;
       }
+
+      &.bp3-disabled {
+        background-color: var(--buttonDisabledBg);
+        border-color: var(--buttonDisabledBg);
+
+        &:hover {
+          background-color: var(--buttonDisabledHoverBg);
+          border-color: var(--buttonDisabledHoverBg);
+        }
+      }
     }
 
     &-success {
@@ -73,15 +83,14 @@
   }
 }
 
-/* status close button */
-.#{$ns}-callout.#{$ns}-callout-icon .#{$ns}-icon.bitfinex-status-close {
-  position: absolute;
-  top: 12px;
-  right: 10px;
-  cursor: pointer;
-  opacity: 0.3;
+// toasts close button
+.bp3-minimal {
+  > .bp3-button {
+    border: none;
+    width: unset;
 
-  &:hover {
-    opacity: 0.5;
+    &:hover {
+      border: none;
+    }
   }
 }

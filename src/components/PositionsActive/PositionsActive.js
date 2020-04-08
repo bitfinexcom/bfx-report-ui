@@ -66,7 +66,7 @@ class PositionsActive extends PureComponent {
     })
 
     const renderButtonGroup = (
-      <ButtonGroup>
+      <ButtonGroup className='section-switch'>
         <Button onClick={this.jumpToPositions}>{t('positions.closed')}</Button>
         <Button active>{t('positions.active')}</Button>
         <RefreshButton handleClickRefresh={refresh} />

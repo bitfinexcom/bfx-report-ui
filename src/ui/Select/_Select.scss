@@ -146,4 +146,10 @@
       }
     }
   }
+
+  .bp3-popover-open {
+    input::placeholder {
+      color: var(--activeColor);
+    }
+  }
 }

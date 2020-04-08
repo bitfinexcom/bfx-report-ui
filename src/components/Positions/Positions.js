@@ -68,7 +68,7 @@ class Positions extends PureComponent {
     }).filter(({ id }) => columns[id])
 
     const renderButtonGroup = (
-      <ButtonGroup>
+      <ButtonGroup className='section-switch'>
         <Button active>{t('positions.closed')}</Button>
         <Button onClick={this.jumpToActivePositions}>{t('positions.active')}</Button>
       </ButtonGroup>
