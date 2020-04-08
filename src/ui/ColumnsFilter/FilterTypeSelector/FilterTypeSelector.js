@@ -49,6 +49,7 @@ class FilterTypeSelector extends React.PureComponent {
 
     return (
       <Select
+        className='columns-filter-item-filter'
         filterable={false}
         items={items}
         onChange={this.onChange}

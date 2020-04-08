@@ -43,6 +43,7 @@ class ColumnSelector extends React.PureComponent {
 
     return (
       <Select
+        className='columns-filter-item-column'
         filterable={false}
         items={items}
         onChange={this.onColumnChange}

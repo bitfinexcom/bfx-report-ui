@@ -83,7 +83,7 @@
   .columns-filter {
     &-item {
       max-width: 380px;
-      padding: 10px 0;
+      padding: 30px 0;
       margin: 0 auto;
 
       &:first-child {
@@ -95,25 +95,22 @@
       }
 
       &:not(:last-child) {
-        border-bottom: 1px solid #1c1c1c;
+        border-bottom: 1px solid var(--borderColor);
       }
 
       &-column {
-        width: 100%;
-        max-width: 380px;
-        margin-bottom: 5px;
+        display: inline-block;
+        margin-bottom: 20px;
       }
 
       &-filter {
-        width: 100%;
-        max-width: 380px;
-        margin-bottom: 5px;
+        display: inline-block;
+        margin-bottom: 20px;
       }
 
       &-input {
-        width: calc(100% - 20px);
-        margin-right: 3px;
-        max-width: 380px;
+        width: 200px;
+        margin-right: 13px;
       }
     }
   }
