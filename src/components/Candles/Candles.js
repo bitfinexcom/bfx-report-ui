@@ -57,9 +57,7 @@ class Candles extends PureComponent {
   render() {
     const {
       candles,
-      dataReceived,
       fetchData,
-      pageLoading,
       pairs,
       params,
       refresh,
@@ -70,7 +68,7 @@ class Candles extends PureComponent {
     const hasChanges = this.hasChanges()
 
     let showContent
-    if (!dataReceived && pageLoading) {
+    if (!candles.entries.length && candles.isLoading) {
       showContent = <Loading />
     } else if (!candles.entries.length) {
       showContent = <NoData />

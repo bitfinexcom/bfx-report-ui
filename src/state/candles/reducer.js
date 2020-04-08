@@ -121,6 +121,16 @@ export function candlesReducer(state = initialState, action) {
           timeframe: state.timeframe,
           pair: state.pair,
         },
+        candles: {
+          entries: [],
+          isLoading: true,
+          nextPage: false,
+        },
+        trades: {
+          entries: [],
+          isLoading: true,
+          nextPage: false,
+        },
       }
     }
     case types.UPDATE: {
