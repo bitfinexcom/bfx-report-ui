@@ -1,3 +1,14 @@
 .loading {
-  margin: 25px 0;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+
+  &-container {
+    height: 100%;
+    position: relative;
+  }
+
 }
