@@ -73,7 +73,8 @@ class PositionsActive extends PureComponent {
         <SectionHeader
           filter={false}
           target={TYPE}
-          title='positions.title'
+          timeframe={false}
+          title='activepositions.title'
         />
         <PositionsSwitch
           target={TYPE}

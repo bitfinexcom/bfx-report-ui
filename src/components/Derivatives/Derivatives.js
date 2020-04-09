@@ -75,8 +75,6 @@ class Derivatives extends PureComponent {
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader
-          title='derivatives.title'
-          target={TYPE}
           pairsSelectorProps={{
             currentFilters: targetPairs,
             existingPairs,
@@ -84,6 +82,9 @@ class Derivatives extends PureComponent {
             togglePair: this.togglePair,
           }}
           refresh={refresh}
+          target={TYPE}
+          timeframe={false}
+          title='derivatives.title'
         />
         {showContent}
       </Card>

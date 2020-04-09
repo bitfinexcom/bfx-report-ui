@@ -65,7 +65,6 @@ class Wallets extends PureComponent {
       entries,
       dataReceived,
       pageLoading,
-      refresh,
       t,
     } = this.props
     const { timestamp } = this.state
@@ -148,8 +147,8 @@ class Wallets extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'>
         <SectionHeader
           filter={false}
+          timeframe={false}
           title='wallets.title'
-          refresh={refresh}
         />
         {showContent}
       </Card>

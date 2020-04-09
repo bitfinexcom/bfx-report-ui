@@ -2,12 +2,13 @@
   margin-bottom: 20px;
 
   &-title {
+    margin-bottom: 15px;
     font-size: 30px;
     color: var(--activeColor);
   }
 
   &-time-range {
-    margin: 15px 2px;
+    margin: 0 2px 15px 2px;
   }
 
   .refresh-button {

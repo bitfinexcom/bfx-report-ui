@@ -23,9 +23,11 @@ export const propTypes = {
   }),
   t: PropTypes.func.isRequired,
   target: PropTypes.string,
+  timeframe: PropTypes.bool,
   title: PropTypes.string.isRequired,
 }
 
 export const defaultProps = {
   filter: true,
+  timeframe: true,
 }

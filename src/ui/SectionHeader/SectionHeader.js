@@ -39,10 +39,11 @@ class SectionHeader extends PureComponent {
   render() {
     const {
       filter,
-      title,
-      target,
       refresh,
       t,
+      target,
+      timeframe,
+      title,
     } = this.props
 
     const selector = this.getSelector()
@@ -52,7 +53,7 @@ class SectionHeader extends PureComponent {
         <div className='section-header-title'>
           {t(title)}
         </div>
-        <TimeRange className='section-header-time-range' />
+        {timeframe && <TimeRange className='section-header-time-range' />}
         <div>
           {selector && (
             <Fragment>

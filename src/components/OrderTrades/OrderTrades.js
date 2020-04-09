@@ -44,7 +44,6 @@ class OrderTrades extends PureComponent {
       entries,
       dataReceived,
       pageLoading,
-      refresh,
       getFullTime,
       params: { targetPair, id },
       t,
@@ -81,8 +80,8 @@ class OrderTrades extends PureComponent {
         <SectionHeader
           filter={false}
           target={MENU_ORDER_TRADES}
+          timeframe={false}
           title='ordertrades.title'
-          refresh={refresh}
         />
         {showContent}
       </Card>
