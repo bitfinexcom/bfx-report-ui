@@ -174,5 +174,13 @@
     .bp3-button {
       color: var(--activeColor);
     }
+
+    .bp3-multi-select-arrow path {
+      fill: var(--activeColor);
+    }
+  }
+
+  .chevron-up path {
+    fill: var(--activeColor);
   }
 }

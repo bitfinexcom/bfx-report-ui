@@ -59,8 +59,13 @@ class Preferences extends PureComponent {
             <div className='preferences-item'>
               <div>{t('preferences.timezone')}</div>
               <TimezonePicker
+                className='bitfinex-select'
                 buttonProps={{
                   className: 'timezone-picker',
+                }}
+                popoverProps={{
+                  minimal: true,
+                  popoverClassName: 'bitfinex-select-menu',
                 }}
                 showLocalTimezone
                 value={timezone}
@@ -70,8 +75,13 @@ class Preferences extends PureComponent {
             <div className='preferences-item'>
               <div>{t('preferences.timezone-input')}</div>
               <TimezonePicker
+                className='bitfinex-select'
                 buttonProps={{
                   className: 'timezone-picker',
+                }}
+                popoverProps={{
+                  minimal: true,
+                  popoverClassName: 'bitfinex-select-menu',
                 }}
                 showLocalTimezone
                 value={inputTimezone}
