@@ -27,3 +27,16 @@
     }
   }
 }
+
+.bp3-tooltip {
+  .bp3-popover {
+    &-content {
+      background-color: var(--tooltipBg);
+      color: var(--tooltipColor);
+    }
+
+    &-arrow-fill {
+      fill: var(--tooltipBg);
+    }
+  }
+}
