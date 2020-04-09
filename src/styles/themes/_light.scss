@@ -25,6 +25,10 @@
   --popoverBg: #ffffff;
   --popoverColor: #000000;
 
+  // select
+  --selectColor: black;
+  --selectOptionBg: #ffffff;
+
   // tooltips
   --tooltipBg: #394b59;
   --tooltipColor: #f5f8fa;
@@ -74,4 +78,14 @@
 
   // checkbox
   --checkboxBorder: #102331;
+
+  // datepicker
+  --datepickerSelectedRangeBg: #ebf1f5;
+  --datepickerSelectedOuterRangeBg: #ebf1f5;
+
+  // icons
+  --iconWarning: #f05359;
+
+  // shortcuts
+  --shortcutHoverBg: #d8ecfb;
 }

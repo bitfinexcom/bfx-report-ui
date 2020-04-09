@@ -61,6 +61,7 @@
 
   // select
   --selectColor: black;
+  --selectOptionBg: #19354a;
 
   // multi select
   --multiBg: #172d3e;
@@ -80,7 +81,11 @@
 
   // datepicker
   --datepickerSelectedRangeBg: #5782ad;
+  --datepickerSelectedOuterRangeBg: #5782ad;
 
   // icons
   --iconWarning: #f05359;
+
+  // shortcuts
+  --shortcutHoverBg: #19354a;
 }

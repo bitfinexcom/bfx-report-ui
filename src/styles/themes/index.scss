@@ -106,11 +106,11 @@ body {
 
       &:hover {
         color: var(--color);
-        background-color: var(--borderColor);
+        background-color: var(--menuHover);
       }
 
       option {
-        background-color: var(--borderColor);
+        background-color: var(--selectOptionBg);
       }
     }
   }
