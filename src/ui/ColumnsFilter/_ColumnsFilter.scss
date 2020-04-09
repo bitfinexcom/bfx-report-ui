@@ -2,17 +2,6 @@
   &-wrapper {
     display: inline-block;
     position: relative;
-
-    &-mark {
-      background-color: red;
-      border-radius: 50%;
-      border: 1px;
-      width: 4px;
-      height: 4px;
-      position: absolute;
-      top: 3px;
-      left: 4px;
-    }
   }
 
   &-dialog {
@@ -25,6 +14,16 @@
     .bp3-dialog-body, .bp3-dialog-footer {
       margin-left: 15px;
       margin-right: 15px;
+    }
+  }
+
+  &--active {
+    &.bp3-button {
+      border-color: var(--activeFilterBorder);
+
+      &:hover {
+        border-color: var(--activeFilterBorder);
+      }
     }
   }
 

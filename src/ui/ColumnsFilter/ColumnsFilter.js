@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
+import classNames from 'classnames'
 import {
   Button,
   InputGroup,
@@ -143,18 +144,18 @@ class ColumnsFilter extends PureComponent {
 
     const hasChanges = this.haveFiltersChanged()
     const hasAppliedFilters = currentFilters.some(filter => filter.value)
+    const buttonClasses = classNames('button--large', { 'columns-filter--active': hasAppliedFilters })
 
     return (
       <Fragment>
         <div className='columns-filter-wrapper'>
           <Button
             onClick={this.toggleDialog}
-            className='button--large'
+            className={buttonClasses}
             intent={Intent.PRIMARY}
           >
             {t('columnsfilter.title')}
           </Button>
-          {hasAppliedFilters && <div className='columns-filter-wrapper-mark' />}
         </div>
 
         <ColumnsFilterDialog
