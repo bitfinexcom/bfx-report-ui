@@ -147,12 +147,8 @@ body.#{$ns}-light {
   padding-top: 6px;
 }
 
-.bitfinex-help {
-  margin-right: 2px;
-}
-
 .bitfinex-sync-progress {
-  transform: translate(0.2px, -18.5px);
+  transform: translate(-3px, -49.5px);
   font-size: 10px;
   position: absolute;
   width: 26px;
@@ -183,8 +179,19 @@ div.bp3-multi-select {
   }
 }
 
+.bp3-spinner {
+  display: inline-block;
+  vertical-align: top;
+}
+
 .icon {
-  &-warning {
+  &--checkmark-circle {
+    path {
+      fill: var(--iconCheckmark);
+    }
+  }
+
+  &--warning {
     path {
       fill: var(--iconWarning);
     }

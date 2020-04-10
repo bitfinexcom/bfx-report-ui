@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Status from 'components/Status'
-import SyncMode from 'components/SyncMode'
 import PlatformLogo from 'ui/PlatformLogo'
 import timeRangeTypes from 'state/timeRange/constants'
 import { platform } from 'var/config'
@@ -9,12 +8,12 @@ import { platform } from 'var/config'
 import TimeFrame from './TimeFrame'
 import TimeFrameShortcut from './TimeFrameShortcut'
 import Export from './Export'
+import SyncMode from './SyncMode'
 import AccountMenu from './AccountMenu'
 
 const { REACT_APP_ELECTRON } = process.env
 
 const Header = () => {
-  const renderSyncMode = platform.showFrameworkMode ? <SyncMode /> : null
   const HOME_URL = REACT_APP_ELECTRON ? '/' : platform.HOME_URL
 
   return (
@@ -36,8 +35,7 @@ const Header = () => {
         type={timeRangeTypes.PAST_MONTH}
       />
       <Export />
-
-      {renderSyncMode}
+      <SyncMode />
       <Status />
       <AccountMenu />
     </div>

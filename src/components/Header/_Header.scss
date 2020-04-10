@@ -28,7 +28,7 @@
     }
   }
 
-  .timeframe-shortcut, .export {
+  .timeframe-shortcut, .export, .sync-mode {
     display: inline-block;
     padding: 0 13px;
     height: 100%;
@@ -57,21 +57,18 @@
     }
   }
 
+  .sync-mode {
+    .bp3-popover-target {
+      height: 50px;
+      margin-left: 0;
+    }
+  }
+
   &-timeframe {
     display: inline-block;
     vertical-align: top;
     width: 274px;
     height: 100%;
     border-right: 2px solid var(--borderColor);
-  }
-
-  &-email {
-    margin-left: 5px;
-    max-width: calc(100vw - 350px);
-    display: inline-block;
-    vertical-align: text-top;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
   }
 }

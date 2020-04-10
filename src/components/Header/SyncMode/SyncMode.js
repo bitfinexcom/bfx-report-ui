@@ -9,12 +9,13 @@ import {
   Tooltip,
   Intent,
 } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
 
+import Icon from 'icons'
 import mode from 'state/sync/constants'
-import { getIcon, getTooltipMessageId } from 'state/sync/utils'
+import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './SyncMode.props'
+import { getTitle, getTooltipMessage } from './SyncMode.helpers'
 
 const {
   MODE_ONLINE,
@@ -28,26 +29,23 @@ class SyncMode extends PureComponent {
   static defaultProps = defaultProps
 
   state = {
-    isSyncDialogOpen: false,
+    isOpen: false,
   }
 
-  handleToggleClick = (e) => {
-    e.preventDefault()
+  handleToggleClick = () => {
     const { syncMode, stopSyncing } = this.props
     if (syncMode !== MODE_OFFLINE) {
-      this.setState({ isSyncDialogOpen: true })
+      this.setState({ isOpen: true })
     } else {
       stopSyncing()
     }
   }
 
-  handleDialogClose = (e) => {
-    e.preventDefault()
-    this.setState({ isSyncDialogOpen: false })
+  handleDialogClose = () => {
+    this.setState({ isOpen: false })
   }
 
-  startAction = (e) => {
-    e.preventDefault()
+  startAction = () => {
     const { startSyncing, stopSyncing, syncMode } = this.props
     if (syncMode === MODE_ONLINE) {
       startSyncing()
@@ -57,7 +55,7 @@ class SyncMode extends PureComponent {
       stopSyncing()
     }
 
-    this.setState({ isSyncDialogOpen: false })
+    this.setState({ isOpen: false })
   }
 
   render() {
@@ -66,53 +64,48 @@ class SyncMode extends PureComponent {
       syncProgress,
       t,
     } = this.props
-    const { isSyncDialogOpen } = this.state
-    const icon = getIcon(syncMode)
+    const { isOpen } = this.state
 
-    const renderButton = icon !== IconNames.REFRESH
-      ? (
-        <Button
-          className='bitfinex-help'
-          minimal
-          icon={icon}
-          onClick={this.handleToggleClick}
-        />
+    if (!platform.showFrameworkMode) {
+      return (
+        <div className='sync-mode' onClick={this.handleToggleClick}>
+          <Icon.CHECKMARK_CIRCLE />
+          <span>{t('sync.online')}</span>
+        </div>
       )
-      : (
-        <Button
-          className='bitfinex-help'
-          minimal
-          onClick={this.handleToggleClick}
-        >
-          <Spinner size={26} />
-          <div className='bitfinex-sync-progress'>
-            {syncProgress}
-          </div>
-        </Button>
-      )
+    }
+
     return (
       <Fragment>
         <Tooltip
+          className='sync-mode'
           content={(
             <span>
-              {t(getTooltipMessageId(syncMode))}
+              {t(getTooltipMessage(syncMode))}
             </span>
           )}
-          position={Position.LEFT}
-          usePortal={false}
+          position={Position.BOTTOM}
         >
-          {renderButton}
+          <div onClick={this.handleToggleClick}>
+            {syncMode !== MODE_SYNCING
+              ? <Icon.CHECKMARK_CIRCLE />
+              : (
+                <>
+                  <Spinner size={20} />
+                  <div className='bitfinex-sync-progress'>
+                    {syncProgress}
+                  </div>
+                </>
+              )}
+            <span>{t(getTitle(syncMode))}</span>
+          </div>
         </Tooltip>
         <Dialog
-          icon={icon}
-          isOpen={isSyncDialogOpen}
+          icon={<Icon.LOOP />}
+          isOpen={isOpen}
           onClose={this.handleDialogClose}
           title={t('sync.switch-mode')}
-          autoFocus
-          canEscapeKeyClose={false}
-          canOutsideClickClose={false}
-          enforceFocus
-          usePortal
+          isCloseButtonShown={false}
         >
           <div className={Classes.DIALOG_BODY}>
             { syncMode === MODE_ONLINE
