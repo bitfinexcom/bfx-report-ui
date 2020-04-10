@@ -34,17 +34,14 @@
 
 .date-range-picker-popover {
   position: absolute;
-  top: -100px;
-  left: -20px;
+  top: -102px;
+  left: -32px;
 }
 
 .bp3-daterangepicker {
-  width: 550px;
+  width: 554px;
   padding: 20px 10px;
-  background-color: var(--bgColor2);
-  box-shadow: 0 0 0 2px var(--borderColor);
   border-radius: 0;
-  display: flex;
   flex-flow: column;
 
   div {

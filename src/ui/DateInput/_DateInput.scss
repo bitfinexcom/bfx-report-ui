@@ -1,0 +1,39 @@
+.bp3-datepicker {
+  background-color: var(--bgColor2);
+  border: 2px solid var(--borderColor);
+  border-radius: 2px;
+  padding: 15px;
+}
+
+.date-input-popover {
+  .bp3-input-action {
+    padding-right: 8px;
+
+    svg {
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+
+  .icon--chevron-up {
+    path {
+      fill: var(--activeColor);
+    }
+  }
+}
+
+.bp3-popover {
+  &-open {
+    .bp3-input {
+      color: var(--activeColor);
+
+      &::placeholder {
+        color: var(--activeColor);
+      }
+    }
+  }
+
+  &.bp3-dateinput-popover {
+    margin-top: 5px !important;
+  }
+}

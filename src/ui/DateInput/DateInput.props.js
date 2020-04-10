@@ -5,6 +5,7 @@ export const propTypes = {
   onChange: PropTypes.func.isRequired,
   inputTimezone: PropTypes.string,
   daysOnly: PropTypes.bool,
+  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

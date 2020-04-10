@@ -88,6 +88,7 @@
 .bp3-minimal {
   &.bp3-button,  > .bp3-button {
     width: unset;
+    min-width: unset;
     height: unset;
     border: none;
 

@@ -7,7 +7,7 @@
   &-wrapper {
     height: 50px;
 
-    .chevron-up {
+    .icon--chevron-up {
       display: none;
     }
 
@@ -19,11 +19,11 @@
         fill: var(--activeColor);
       }
 
-      .chevron-down {
+      .icon--chevron-down {
         display: none;
       }
 
-      .chevron-up {
+      .icon--chevron-up {
         display: inline-block;
       }
     }
