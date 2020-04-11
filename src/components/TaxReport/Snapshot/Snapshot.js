@@ -111,7 +111,7 @@ class Snapshot extends PureComponent {
       showContent = (
         <Fragment>
           <br />
-          <NoData title='snapshots.nodata' />
+          <NoData />
         </Fragment>
       )
     } else if (subsection === MENU_WALLETS) {

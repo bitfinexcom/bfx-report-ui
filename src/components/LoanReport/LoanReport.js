@@ -1,19 +1,23 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import {
   Button,
   Card,
   Elevation,
   Intent,
-  Position,
-  Tooltip,
 } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
 
+import {
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
@@ -76,106 +80,74 @@ class LoanReport extends PureComponent {
       t,
     })
 
-    const renderTimeSelection = (
-      <Fragment>
-        <Tooltip
-          content={(
-            <span>
-              {t('query.startDateTooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-        >
-          <DateInput
-            onChange={date => this.handleDateChange('start', date)}
-            defaultValue={start}
-            daysOnly
-          />
-        </Tooltip>
-        {' '}
-        <Tooltip
-          content={(
-            <span>
-              {t('query.endDateTooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-        >
-          <DateInput
-            onChange={date => this.handleDateChange('end', date)}
-            defaultValue={end}
-            daysOnly
-          />
-        </Tooltip>
-        {' '}
-        <TimeFrameSelector
-          value={timeframe}
-          onChange={this.handleTimeframeChange}
-        />
-        {' '}
-        <Button
-          onClick={this.handleQuery}
-          intent={hasChanges ? Intent.PRIMARY : null}
-          disabled={!hasChanges}
-        >
-          {t('query.title')}
-        </Button>
-      </Fragment>
-    )
-
-    const renderSymbolSelector = (
-      <Fragment>
-        {' '}
-        <MultiSymbolSelector
-          currentFilters={targetSymbols}
-          toggleSymbol={symbol => toggleSymbol(TYPE, this.props, symbol)}
-        />
-      </Fragment>
-    )
-
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (!entries.length) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('loanreport.title')}
-            {' '}
-            {renderSymbolSelector}
-            {' '}
-            {renderTimeSelection}
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
-          <h4>
-            {t('loanreport.title')}
-            {' '}
-            {renderSymbolSelector}
-            {' '}
-            {renderTimeSelection}
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          <Chart
-            data={chartData}
-            dataKeys={dataKeys}
-          />
-        </Fragment>
+        <Chart
+          data={chartData}
+          dataKeys={dataKeys}
+        />
       )
     }
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader>
+          <SectionHeaderTitle>{t('loanreport.title')}</SectionHeaderTitle>
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.symbol')}
+              </SectionHeaderItemLabel>
+              <MultiSymbolSelector
+                currentFilters={targetSymbols}
+                toggleSymbol={symbol => toggleSymbol(TYPE, this.props, symbol)}
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('query.startTime')}
+              </SectionHeaderItemLabel>
+              <DateInput
+                onChange={date => this.handleDateChange('start', date)}
+                defaultValue={start}
+                daysOnly
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('query.endTime')}
+              </SectionHeaderItemLabel>
+              <DateInput
+                onChange={date => this.handleDateChange('end', date)}
+                defaultValue={end}
+                daysOnly
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.select')}
+              </SectionHeaderItemLabel>
+              <TimeFrameSelector
+                value={timeframe}
+                onChange={this.handleTimeframeChange}
+              />
+            </SectionHeaderItem>
+
+            <Button
+              className='button--large'
+              onClick={this.handleQuery}
+              intent={Intent.PRIMARY}
+              disabled={!hasChanges}
+            >
+              {t('query.title')}
+            </Button>
+            <RefreshButton handleClickRefresh={refresh} />
+          </SectionHeaderRow>
+        </SectionHeader>
         {showContent}
       </Card>
     )

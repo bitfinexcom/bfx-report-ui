@@ -1,16 +1,20 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import {
   Button, ButtonGroup,
   Card,
   Elevation,
   Intent,
-  Position,
-  Tooltip,
 } from '@blueprintjs/core'
 
+import {
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
@@ -111,100 +115,18 @@ class Snapshots extends PureComponent {
     } = this.props
     const { timestamp } = this.state
 
-    if (!dataReceived && pageLoading) {
-      return (
-        <Fragment>
-          <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-            <Loading />
-          </Card>
-        </Fragment>
-      )
-    }
-
     const section = this.getCurrentSection()
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
-
-    const isNotEmpty = !!(positionsEntries.length || positionsTickersEntries.length
-      || walletsTickersEntries.length || walletsEntries.length)
-
-    const renderTimeSelection = (
-      <Fragment>
-        <Tooltip
-          content={(
-            <span>
-              {t('snapshots.query.tooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-          usePortal
-        >
-          <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
-        </Tooltip>
-        <Button
-          onClick={this.handleQuery}
-          intent={hasNewTime ? Intent.PRIMARY : null}
-          disabled={!hasNewTime}
-        >
-          {t('query.title')}
-        </Button>
-      </Fragment>
-    )
-
-    const renderButtonGroup = (
-      <ButtonGroup>
-        <Button
-          active={section === MENU_POSITIONS}
-          onClick={() => this.switchSection(MENU_POSITIONS)}
-        >
-          {t('positions.title')}
-        </Button>
-        <Button
-          active={section === MENU_TICKERS}
-          onClick={() => this.switchSection(MENU_TICKERS)}
-        >
-          {t('tickers.title')}
-        </Button>
-        <Button
-          active={section === MENU_WALLETS}
-          onClick={() => this.switchSection(MENU_WALLETS)}
-        >
-          {t('wallets.title')}
-        </Button>
-      </ButtonGroup>
-    )
-
-    const renderTitle = (
-      <Fragment>
-        <h4>
-          {t('snapshots.title')}
-          {' '}
-          {renderTimeSelection}
-          {isNotEmpty && (
-            <Fragment>
-              {' '}
-              <ExportButton />
-            </Fragment>
-          )}
-          {' '}
-          <RefreshButton handleClickRefresh={refresh} />
-        </h4>
-        {renderButtonGroup}
-        <br />
-      </Fragment>
-    )
 
     const isEmpty = (section === MENU_POSITIONS && !positionsEntries.length)
       || (section === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries)
       || (section === MENU_WALLETS && !walletsEntries.length)
 
     let showContent
-    if (isEmpty) {
-      showContent = (
-        <Fragment>
-          <br />
-          <NoData title='snapshots.nodata' />
-        </Fragment>
-      )
+    if (!dataReceived && pageLoading) {
+      showContent = <Loading />
+    } else if (isEmpty) {
+      showContent = <NoData />
     } else if (section === MENU_WALLETS) {
       showContent = (
         <WalletsSnapshot
@@ -230,8 +152,52 @@ class Snapshots extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-        {renderTitle}
-        <br />
+        <SectionHeader>
+          <SectionHeaderTitle>{t('snapshots.title')}</SectionHeaderTitle>
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('query.endTime')}
+              </SectionHeaderItemLabel>
+              <DateInput
+                onChange={this.handleDateChange}
+                defaultValue={timestamp}
+              />
+            </SectionHeaderItem>
+
+            <Button
+              className='button--large'
+              onClick={this.handleQuery}
+              intent={Intent.PRIMARY}
+              disabled={!hasNewTime}
+            >
+              {t('query.title')}
+            </Button>
+            <RefreshButton handleClickRefresh={refresh} />
+          </SectionHeaderRow>
+        </SectionHeader>
+
+        <ButtonGroup>
+          <Button
+            intent={section === MENU_POSITIONS ? Intent.PRIMARY : undefined}
+            onClick={() => this.switchSection(MENU_POSITIONS)}
+          >
+            {t('positions.title')}
+          </Button>
+          <Button
+            intent={section === MENU_TICKERS ? Intent.PRIMARY : undefined}
+            onClick={() => this.switchSection(MENU_TICKERS)}
+          >
+            {t('tickers.title')}
+          </Button>
+          <Button
+            intent={section === MENU_WALLETS ? Intent.PRIMARY : undefined}
+            onClick={() => this.switchSection(MENU_WALLETS)}
+          >
+            {t('wallets.title')}
+          </Button>
+        </ButtonGroup>
+
         {showContent}
       </Card>
     )

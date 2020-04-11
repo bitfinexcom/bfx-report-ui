@@ -137,7 +137,6 @@
   },
   "concentrationrisk": {
     "title": "Concentration Risk",
-    "nodata": "No related data in this date time. You can try another date time.",
     "query": {
       "title": "Query",
       "tooltip": "Select a time to query the wallets snapshot"
@@ -305,8 +304,7 @@
     "query": {
       "title": "Query",
       "tooltip": "Select a time to query snapshots"
-    },
-    "nodata": "No related data in this date time. You can try another date time."
+    }
   },
   "status": {
     "success": "{{topic}} Success at {{time}}",

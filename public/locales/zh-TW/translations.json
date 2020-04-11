@@ -126,7 +126,6 @@
   },
   "concentrationrisk": {
     "title": "集中風險",
-    "nodata": "沒有相關資料。請嘗試選擇其他時間。",
     "query": {
       "title": "查詢",
       "tooltip": "選擇一個時間以查看過去時刻的錢包"
@@ -294,8 +293,7 @@
     "query": {
       "title": "查詢",
       "tooltip": "選擇快照的時間"
-    },
-    "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。"
+    }
   },
   "status":{
     "success": "於 {{time}} {{topic}}成功",

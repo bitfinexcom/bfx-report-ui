@@ -126,7 +126,6 @@
   },
   "concentrationrisk": {
     "title": "集中风险",
-    "nodata": "此日期时间没有相关数据。您可以尝试其他日期时间。",
     "query": {
       "title": "查询",
       "tooltip": "选择一个要查询钱包快照的时间"
@@ -294,8 +293,7 @@
     "query": {
       "title": "查询",
       "tooltip": "选择快照的时间"
-    },
-    "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。"
+    }
   },
   "status": {
     "success": "{{topic}}在 {{time}} 成功",
