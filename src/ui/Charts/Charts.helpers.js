@@ -1,6 +1,6 @@
 import moment from 'moment-timezone'
 
-import timeframeConstants from 'ui/TimeframeSelector/constants'
+import timeframeConstants from 'ui/TimeFrameSelector/constants'
 
 import { CURRENCY_USD } from './constants'
 

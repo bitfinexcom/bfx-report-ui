@@ -182,6 +182,7 @@ class CandlesSyncPref extends PureComponent {
           usePortal={false}
         >
           <Button
+            className='sync-pref-button'
             icon={IconNames.ISSUE_NEW}
             onClick={this.handleOpen}
             intent={Intent.PRIMARY}

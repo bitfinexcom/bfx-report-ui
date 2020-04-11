@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 
 import ColumnsFilter from 'ui/ColumnsFilter'
@@ -10,6 +10,13 @@ import PairSelector from 'ui/PairSelector'
 import SymbolSelector from 'ui/SymbolSelector'
 
 import { propTypes, defaultProps } from './SectionHeader.props'
+import {
+  SectionHeader as SectionHeaderWrapper,
+  SectionHeaderTitle,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+} from './SectionHeader.components'
 
 class SectionHeader extends PureComponent {
   getSelector = () => {
@@ -49,24 +56,22 @@ class SectionHeader extends PureComponent {
     const selector = this.getSelector()
 
     return (
-      <div className='section-header'>
-        <div className='section-header-title'>
-          {t(title)}
-        </div>
+      <SectionHeaderWrapper>
+        <SectionHeaderTitle>{t(title)}</SectionHeaderTitle>
         {timeframe && <TimeRange className='section-header-time-range' />}
-        <div>
+        <SectionHeaderRow>
           {selector && (
-            <Fragment>
-              <div>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
-              </div>
+              </SectionHeaderItemLabel>
               {selector}
-            </Fragment>
+            </SectionHeaderItem>
           )}
           {filter && <ColumnsFilter target={target} />}
           {refresh && <RefreshButton handleClickRefresh={refresh} />}
-        </div>
-      </div>
+        </SectionHeaderRow>
+      </SectionHeaderWrapper>
     )
   }
 }

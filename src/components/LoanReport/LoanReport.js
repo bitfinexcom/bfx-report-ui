@@ -18,7 +18,7 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
 import { parseLoanReportChartData } from 'ui/Charts/Charts.helpers'
-import TimeframeSelector from 'ui/TimeframeSelector'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, toggleSymbol } from 'state/utils'
@@ -108,9 +108,9 @@ class LoanReport extends PureComponent {
           />
         </Tooltip>
         {' '}
-        <TimeframeSelector
-          currentTimeframe={timeframe}
-          onTimeframeSelect={this.handleTimeframeChange}
+        <TimeFrameSelector
+          value={timeframe}
+          onChange={this.handleTimeframeChange}
         />
         {' '}
         <Button

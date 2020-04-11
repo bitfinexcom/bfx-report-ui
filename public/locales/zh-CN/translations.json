@@ -276,8 +276,8 @@
   },
   "query": {
     "title": "查询",
-    "startDateTooltip": "选择开始时间",
-    "endDateTooltip": "选择结束时间"
+    "startTime": "Start Time",
+    "endTime": "End Time"
   },
   "querylimit": {
     "tooltip": "按查询选择大小，查询越大，时间越长。"

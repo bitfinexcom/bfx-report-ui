@@ -276,8 +276,8 @@
   },
   "query": {
     "title": "Запрос",
-    "startDateTooltip": "Выберите начальное время",
-    "endDateTooltip": "Выберите конечное время"
+    "startTime": "Start Time",
+    "endTime": "End Time"
   },
   "querylimit": {
     "tooltip": "Выберите объем для каждого запроса. Чем больше объем, тем дольше будет выполняться запрос"

@@ -276,8 +276,8 @@
   },
   "query": {
     "title": "查詢",
-    "startDateTooltip": "選擇開始時間",
-    "endDateTooltip": "選擇結束時間"
+    "startTime": "Start Time",
+    "endTime": "End Time"
   },
   "querylimit": {
     "tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間"

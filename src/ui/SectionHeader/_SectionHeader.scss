@@ -1,21 +1,32 @@
 .section-header {
-  margin-bottom: 20px;
+  margin-bottom: 31px;
 
   &-title {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: 30px;
     color: var(--activeColor);
   }
 
+  &-row {
+    > * {
+      display: inline-flex;
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  &-item {
+    display: inline-block;
+    margin-right: 20px;
+
+    &-label {
+      margin-bottom: 10px;
+    }
+  }
+
   &-time-range {
-    margin: 0 2px 15px 2px;
-  }
-
-  .refresh-button {
-    margin-left: 15px;
-  }
-
-  .bitfinex-select {
-    margin-right: 15px;
+    margin: 0 2px 22px 2px;
   }
 }

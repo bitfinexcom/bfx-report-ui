@@ -18,7 +18,7 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
 import parseChartData from 'ui/Charts/Charts.helpers'
-import TimeframeSelector from 'ui/TimeframeSelector'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, togglePair } from 'state/utils'
@@ -116,9 +116,9 @@ class TradedVolume extends PureComponent {
           />
         </Tooltip>
         {' '}
-        <TimeframeSelector
-          currentTimeframe={timeframe}
-          onTimeframeSelect={this.handleTimeframeChange}
+        <TimeFrameSelector
+          value={timeframe}
+          onChange={this.handleTimeframeChange}
         />
         {' '}
         <Button

@@ -8,6 +8,13 @@ import {
 } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 
+import {
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import TradesSwitch from 'components/Trades/TradesSwitch'
@@ -84,33 +91,33 @@ class Candles extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-        <div className='section-header'>
-          <div className='section-header-title'>
-            {t('candles.title')}
-          </div>
+        <SectionHeader>
+          <SectionHeaderTitle>{t('candles.title')}</SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
-          <div>
-            {t('selector.filter.symbol')}
-          </div>
-          <PairSelector
-            currentPair={pair}
-            onPairSelect={this.onPairSelect}
-            pairs={pairs}
-          />
-          {' '}
-          <Timeframe value={timeframe} onChange={this.onTimeframeChange} />
-          {' '}
-          <Button
-            className='button--large'
-            onClick={this.handleQuery}
-            intent={Intent.PRIMARY}
-            disabled={!hasChanges}
-          >
-            {t('query.title')}
-          </Button>
-          <RefreshButton handleClickRefresh={refresh} />
-        </div>
-        <CandlesSyncPref />
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.symbol')}
+              </SectionHeaderItemLabel>
+              <PairSelector
+                currentPair={pair}
+                onPairSelect={this.onPairSelect}
+                pairs={pairs}
+              />
+            </SectionHeaderItem>
+            <Timeframe value={timeframe} onChange={this.onTimeframeChange} />
+            <Button
+              className='button--large'
+              onClick={this.handleQuery}
+              intent={Intent.PRIMARY}
+              disabled={!hasChanges}
+            >
+              {t('query.title')}
+            </Button>
+            <CandlesSyncPref />
+            <RefreshButton handleClickRefresh={refresh} />
+          </SectionHeaderRow>
+        </SectionHeader>
         <TradesSwitch target={TYPE} />
         {showContent}
       </Card>
