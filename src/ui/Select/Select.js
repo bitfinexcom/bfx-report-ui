@@ -102,7 +102,7 @@ class Select extends PureComponent {
         }}
       >
         <Button
-          text={selectedText}
+          text={selectedText || ' '} // button should have an empty span so the icon wouldn't render on the left side
           rightIcon={icon}
           disabled={!items.length}
         />

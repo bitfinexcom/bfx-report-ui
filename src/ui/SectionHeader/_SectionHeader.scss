@@ -10,6 +10,12 @@
   &-row {
     > * {
       display: inline-flex;
+      vertical-align: bottom;
+
+      &.refresh-button {
+        height: 40px;
+        align-items: center;
+      }
 
       &:not(:last-child) {
         margin-right: 20px;

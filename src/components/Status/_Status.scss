@@ -1,6 +1,8 @@
 .bp3-toast {
+  min-height: 40px;
   padding: 5px;
   border-radius: 2px;
+  align-items: center;
 
   &.bp3-intent {
     &-primary {
@@ -21,7 +23,7 @@
   }
 
   &-message {
-    height: 40px;
+    padding: 10px 11px;
   }
 
   svg path {
