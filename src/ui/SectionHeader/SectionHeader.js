@@ -69,7 +69,7 @@ class SectionHeader extends PureComponent {
             </SectionHeaderItem>
           )}
           {filter && <ColumnsFilter target={target} />}
-          {refresh && <RefreshButton handleClickRefresh={refresh} />}
+          {refresh && <RefreshButton onClick={refresh} />}
         </SectionHeaderRow>
       </SectionHeaderWrapper>
     )

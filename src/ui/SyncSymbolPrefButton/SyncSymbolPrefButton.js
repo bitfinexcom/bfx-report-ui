@@ -10,12 +10,12 @@ import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
 
+import Icon from 'icons'
+import SyncButton from 'ui/SyncButton'
 import DateInput from 'ui/DateInput'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import mode from 'state/sync/constants'
-import { dialogDescStyle, dialogFieldStyle } from 'ui/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './SyncSymbolPrefButton.props'
@@ -87,7 +87,6 @@ class SyncSymbolPrefButton extends PureComponent {
       syncSymbols,
       startTime,
       t,
-      textOnly,
     } = this.props
     const {
       isOpen,
@@ -96,54 +95,28 @@ class SyncSymbolPrefButton extends PureComponent {
     } = this.state
     const renderInSyncWarning = syncMode === mode.MODE_SYNCING
       ? (
-        <Fragment>
-          <Callout intent={Intent.WARNING}>
-            {t('preferences.sync.insync-warning')}
-          </Callout>
-          <br />
-        </Fragment>
+        <Callout>
+          {t('preferences.sync.insync-warning')}
+        </Callout>
       )
       : null
     return platform.showFrameworkMode
       ? (
         <Fragment>
-          {' '}
-          <Tooltip
-            content={(
-              <span>
-                {t('preferences.sync.title')}
-              </span>
-              )}
-            position={Position.TOP}
-            usePortal={false}
-          >
-            <Button
-              className='sync-pref-button'
-              icon={textOnly ? null : IconNames.ISSUE_NEW}
-              onClick={this.handleOpen}
-              intent={Intent.PRIMARY}
-            >
-              {textOnly ? t('preferences.sync.title') : ''}
-            </Button>
-          </Tooltip>
+          <SyncButton onClick={this.handleOpen} />
           <Dialog
-            icon={IconNames.ISSUE_NEW}
+            className='sync-pref-dialog'
+            icon={<Icon.TRAY_IMPORT />}
+            isCloseButtonShown={false}
             onClose={this.handleClose}
             title={t('preferences.sync.title')}
-            autoFocus
-            canEscapeKeyClose
-            canOutsideClickClose
-            enforceFocus
-            usePortal
             isOpen={isOpen}
           >
             <div className={Classes.DIALOG_BODY}>
               {renderInSyncWarning}
-              <div className='row'>
-                <div className={dialogDescStyle}>
-                  {t('preferences.sync.symbols')}
-                </div>
-                <div className={dialogFieldStyle}>
+              <div className='bitfinex-row'>
+                <div className='bitfinex-row-item'>
+                  <div className='bitfinex-row-item-label'>{t('preferences.sync.symbols')}</div>
                   <MultiSymbolSelector
                     currentFilters={symbols}
                     existingCoins={syncSymbols}
@@ -152,42 +125,34 @@ class SyncSymbolPrefButton extends PureComponent {
                     handleTagRemove={this.handleTagRemove}
                   />
                 </div>
-              </div>
-              <div className='row'>
-                <div className={dialogDescStyle}>
-                  {t('preferences.sync.starttime')}
-                </div>
-                <div className={dialogFieldStyle}>
-                  <DateInput key={startTime} onChange={this.handleDateChange} defaultValue={startTime} />
+                <div className='bitfinex-row-item'>
+                  <div className='bitfinex-row-item-label'>{t('preferences.sync.starttime')}</div>
+                  <DateInput
+                    key={startTime}
+                    onChange={this.handleDateChange}
+                    defaultValue={startTime}
+                  />
                 </div>
               </div>
             </div>
             <div className={Classes.DIALOG_FOOTER}>
               <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                <Button onClick={this.handleClose}>
+                  {t('preferences.close')}
+                </Button>
                 <Tooltip
-                  content={(
-                    <span>
-                      {t('preferences.sync.apply-tooltip')}
-                    </span>
-                    )}
+                  content={t('preferences.sync.apply-tooltip')}
                   position={Position.TOP}
                   usePortal={false}
                 >
                   <AnchorButton
                     onClick={this.handleApply}
                     intent={Intent.PRIMARY}
-                    disabled={(
-                      syncMode === mode.MODE_SYNCING
-                      || !symbols.length
-                      || !start
-                    )}
+                    disabled={(syncMode === mode.MODE_SYNCING || !symbols.length || !start)}
                   >
                     {t('preferences.sync.btn-apply')}
                   </AnchorButton>
                 </Tooltip>
-                <Button onClick={this.handleClose}>
-                  {t('preferences.close')}
-                </Button>
               </div>
             </div>
           </Dialog>

@@ -89,8 +89,8 @@ class PublicTrades extends PureComponent {
               />
             </SectionHeaderItem>
             <ColumnsFilter target={TYPE} />
+            <RefreshButton onClick={refresh} />
             <SyncPrefButton sectionType={TYPE} />
-            <RefreshButton handleClickRefresh={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}

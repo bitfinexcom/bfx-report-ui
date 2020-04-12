@@ -60,6 +60,24 @@ body {
   cursor: pointer;
 }
 
+.bitfinex-row {
+  > * {
+    display: inline-block;
+    vertical-align: bottom;
+    margin-bottom: 15px;
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+
+  &-item {
+    &-label {
+      margin-bottom: 10px;
+    }
+  }
+}
+
 body.#{$ns}-dark {
   .bitfinex-green-text, .bitfinex-green-text > div {
     color: #7a9c4a;
@@ -141,10 +159,6 @@ body.#{$ns}-light {
 
 .bitfinex-text-align-right {
   text-align: right;
-}
-
-.bitfinex-preferences-desc {
-  padding-top: 6px;
 }
 
 .bitfinex-sync-progress {

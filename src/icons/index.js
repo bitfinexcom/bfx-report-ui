@@ -35,6 +35,7 @@ import { ReactComponent as SLIDER_CIRCLE_H } from './slider-circle-h.svg'
 import { ReactComponent as STICKY_NOTES } from './sticky-notes.svg'
 import { ReactComponent as TICKERS } from './tickers.svg'
 import { ReactComponent as TRADE_VOLUME } from './trade-volume.svg'
+import { ReactComponent as TRAY_IMPORT } from './tray-import.svg'
 import { ReactComponent as USER_CIRCLE } from './user-circle.svg'
 import { ReactComponent as WALLET } from './wallet.svg'
 import { ReactComponent as WARNING } from './warning.svg'
@@ -78,6 +79,7 @@ export default {
   STICKY_NOTES,
   TICKERS,
   TRADE_VOLUME,
+  TRAY_IMPORT,
   USER_CIRCLE,
   WALLET,
   WARNING,

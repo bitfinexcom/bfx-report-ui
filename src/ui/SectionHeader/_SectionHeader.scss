@@ -9,13 +9,8 @@
 
   &-row {
     > * {
-      display: inline-flex;
+      display: inline-block;
       vertical-align: bottom;
-
-      &.refresh-button {
-        height: 40px;
-        align-items: center;
-      }
 
       &:not(:last-child) {
         margin-right: 20px;
@@ -24,9 +19,6 @@
   }
 
   &-item {
-    display: inline-block;
-    margin-right: 20px;
-
     &-label {
       margin-bottom: 10px;
     }

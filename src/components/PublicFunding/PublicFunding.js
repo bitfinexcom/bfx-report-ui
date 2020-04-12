@@ -97,8 +97,8 @@ class PublicFunding extends PureComponent {
               />
             </SectionHeaderItem>
             <ColumnsFilter target={TYPE} />
+            <RefreshButton onClick={refresh} />
             <SyncSymbolPrefButton />
-            <RefreshButton handleClickRefresh={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}

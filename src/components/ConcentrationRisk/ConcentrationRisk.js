@@ -157,7 +157,7 @@ class ConcentrationRisk extends PureComponent {
             >
               {t('query.title')}
             </Button>
-            <RefreshButton handleClickRefresh={refresh} />
+            <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}

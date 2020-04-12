@@ -114,8 +114,8 @@ class Candles extends PureComponent {
             >
               {t('query.title')}
             </Button>
+            <RefreshButton onClick={refresh} />
             <CandlesSyncPref />
-            <RefreshButton handleClickRefresh={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
         <TradesSwitch target={TYPE} />

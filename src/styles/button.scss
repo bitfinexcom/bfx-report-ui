@@ -74,16 +74,6 @@
   }
 }
 
-.refresh-button {
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
-
-  &-icon {
-    vertical-align: middle;
-  }
-}
-
 // toasts close button
 .bp3-minimal {
   &.bp3-button,  > .bp3-button {
@@ -96,9 +86,4 @@
       border: none;
     }
   }
-}
-
-.sync-pref-button {
-  height: 40px;
-  vertical-align: middle;
 }

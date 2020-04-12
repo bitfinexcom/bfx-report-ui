@@ -130,7 +130,7 @@ class TaxReport extends PureComponent {
             >
               {t('query.title')}
             </Button>
-            <RefreshButton handleClickRefresh={this.handleRefresh} />
+            <RefreshButton onClick={this.handleRefresh} />
           </SectionHeaderRow>
         </SectionHeader>
 

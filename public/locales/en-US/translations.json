@@ -265,7 +265,7 @@
     "sync": {
       "add-filter": "Add Filter",
       "add-pair": "Add Pair",
-      "title": "Sync preferences",
+      "title": "Sync Preferences",
       "notset": "Sync preferences are not set yet",
       "description": "To access Public Trades and Tickers offline, you need to setup offline available pairs and the start query time.",
       "symbol-description": "To access Public Funding offline, you need to setup offline available currencies and the start query time.",

@@ -9,11 +9,11 @@ import {
   Intent,
   Position,
   Tooltip,
-  Icon,
 } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
 
+import Icon from 'icons'
 import PairSelector from 'ui/PairSelector'
+import SyncButton from 'ui/SyncButton'
 import Timeframe from 'ui/CandlesTimeframe'
 import DateInput from 'ui/DateInput'
 import mode from 'state/sync/constants'
@@ -58,13 +58,11 @@ class CandlesSyncPref extends PureComponent {
     }
   }
 
-  handleOpen = (e) => {
-    e.preventDefault()
+  handleOpen = () => {
     this.setState({ isOpen: true })
   }
 
-  handleClose = (e) => {
-    e.preventDefault()
+  handleClose = () => {
     const { config } = this.props
     this.setState({
       isOpen: false,
@@ -160,57 +158,35 @@ class CandlesSyncPref extends PureComponent {
 
     const renderInSyncWarning = syncMode === mode.MODE_SYNCING
       ? (
-        <Fragment>
-          <Callout intent={Intent.WARNING}>
-            {t('preferences.sync.insync-warning')}
-          </Callout>
-          <br />
-        </Fragment>
+        <Callout>
+          {t('preferences.sync.insync-warning')}
+        </Callout>
       )
       : null
 
     return (
       <Fragment>
-        {' '}
-        <Tooltip
-          content={(
-            <span>
-              {t('preferences.sync.title')}
-            </span>
-          )}
-          position={Position.TOP}
-          usePortal={false}
-        >
-          <Button
-            className='sync-pref-button'
-            icon={IconNames.ISSUE_NEW}
-            onClick={this.handleOpen}
-            intent={Intent.PRIMARY}
-          />
-        </Tooltip>
+        <SyncButton onClick={this.handleOpen} />
         <Dialog
-          icon={IconNames.ISSUE_NEW}
+          className='sync-pref-dialog candles-sync-pref'
+          icon={<Icon.TRAY_IMPORT />}
+          isCloseButtonShown={false}
           onClose={this.handleClose}
           title={t('preferences.sync.title')}
-          autoFocus
-          canEscapeKeyClose
-          canOutsideClickClose
-          enforceFocus
-          usePortal
           isOpen={isOpen}
         >
           <div className={Classes.DIALOG_BODY}>
             {renderInSyncWarning}
 
-            {options.map((conf, index) => {
-              const {
-                symbol, start, timeframe,
-              } = conf
+            <div>
+              {options.map((conf, index) => {
+                const {
+                  symbol, start, timeframe,
+                } = conf
 
-              return (
-                // eslint-disable-next-line react/no-array-index-key
-                <div key={index} className='candles-sync-pref-item'>
-                  <div className='candles-sync-pref-item-wrapper'>
+                return (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div key={index} className='candles-sync-pref-item'>
                     <PairSelector
                       currentPair={symbol}
                       onPairSelect={val => this.updateOption({ index, symbol: val })}
@@ -218,7 +194,6 @@ class CandlesSyncPref extends PureComponent {
                     />
                     <Timeframe
                       value={timeframe}
-                      className='candles-sync-pref-item-timeframe'
                       onChange={val => this.updateOption({ index, timeframe: val })}
                     />
                     <div className='candles-sync-pref-item-date'>
@@ -227,30 +202,28 @@ class CandlesSyncPref extends PureComponent {
                         defaultValue={start}
                       />
                     </div>
-                    <Icon
+                    <Icon.BIN
                       className='candles-sync-pref-item-remove'
-                      icon={IconNames.SMALL_CROSS}
                       onClick={() => this.onOptionRemove(index)}
                     />
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
+            </div>
 
             {(options.length < MAX_OPTIONS) && (
-              <div className='candles-sync-pref-add' onClick={this.onOptionAdd}>
+              <div className='candles-sync-pref-add color--active' onClick={this.onOptionAdd}>
                 {`+ ${t('preferences.sync.add-pair')}`}
               </div>
             )}
           </div>
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <Button onClick={this.handleClose}>
+                {t('preferences.close')}
+              </Button>
               <Tooltip
-                content={(
-                  <span>
-                    {t('preferences.sync.apply-tooltip')}
-                  </span>
-                )}
+                content={t('preferences.sync.apply-tooltip')}
                 position={Position.TOP}
                 usePortal={false}
               >
@@ -262,9 +235,6 @@ class CandlesSyncPref extends PureComponent {
                   {t('preferences.sync.btn-apply')}
                 </AnchorButton>
               </Tooltip>
-              <Button onClick={this.handleClose}>
-                {t('preferences.close')}
-              </Button>
             </div>
           </div>
         </Dialog>

@@ -5,7 +5,6 @@ export const propTypes = {
   startTime: PropTypes.number,
   setPairs: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  textOnly: PropTypes.bool,
 
   syncMode: PropTypes.string.isRequired,
   config: PropTypes.array.isRequired,
@@ -18,5 +17,4 @@ export const defaultProps = {
   syncPairs: [],
   startTime: 0,
   setPairs: () => {},
-  textOnly: false,
 }

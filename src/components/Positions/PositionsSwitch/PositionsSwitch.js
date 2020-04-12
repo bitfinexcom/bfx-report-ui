@@ -48,7 +48,7 @@ class PositionsSwitch extends React.PureComponent {
             {t('positions.active')}
           </Button>
         </ButtonGroup>
-        {refresh && <RefreshButton handleClickRefresh={refresh} />}
+        {refresh && <RefreshButton onClick={refresh} />}
       </div>
     )
   }
