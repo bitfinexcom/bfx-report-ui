@@ -118,6 +118,7 @@ class SyncSymbolPrefButton extends PureComponent {
             usePortal={false}
           >
             <Button
+              className='sync-pref-button'
               icon={textOnly ? null : IconNames.ISSUE_NEW}
               onClick={this.handleOpen}
               intent={Intent.PRIMARY}

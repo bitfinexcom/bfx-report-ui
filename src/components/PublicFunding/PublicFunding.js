@@ -2,12 +2,21 @@ import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
+import {
+  SectionHeader,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+  SectionHeaderRow,
+  SectionHeaderTitle,
+} from 'ui/SectionHeader'
+import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
 import DataTable from 'ui/DataTable'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import SectionHeader from 'ui/SectionHeader'
+import SymbolSelector from 'ui/SymbolSelector'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
@@ -60,16 +69,10 @@ class PublicFunding extends PureComponent {
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (!entries.length) {
-      showContent = (
-        <Fragment>
-          <SyncSymbolPrefButton />
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
         <Fragment>
-          <SyncSymbolPrefButton />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
@@ -81,15 +84,23 @@ class PublicFunding extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-        <SectionHeader
-          title='publicfunding.title'
-          target={TYPE}
-          symbolSelectorProps={{
-            currentCoin: targetSymbol,
-            onSymbolSelect: this.onSymbolSelect,
-          }}
-          refresh={refresh}
-        />
+        <SectionHeader>
+          <SectionHeaderTitle>{t('publicfunding.title')}</SectionHeaderTitle>
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.symbol')}
+              </SectionHeaderItemLabel>
+              <SymbolSelector
+                currentCoin={targetSymbol}
+                onSymbolSelect={this.onSymbolSelect}
+              />
+            </SectionHeaderItem>
+            <ColumnsFilter target={TYPE} />
+            <SyncSymbolPrefButton />
+            <RefreshButton handleClickRefresh={refresh} />
+          </SectionHeaderRow>
+        </SectionHeader>
         {showContent}
       </Card>
     )
