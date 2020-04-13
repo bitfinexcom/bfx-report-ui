@@ -1,0 +1,22 @@
+.nav-switcher {
+  width: 100%;
+  border-bottom: 1px solid var(--borderColor);
+  padding-bottom: 5px;
+  margin-bottom: 25px;
+
+  &-item {
+    width: fit-content;
+    margin-bottom: 10px;
+    padding: 0 3px 6px 3px;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 24px;
+    }
+
+    &--active {
+      color: var(--activeColor);
+      border-bottom: 4px solid var(--activeColor);
+    }
+  }
+}

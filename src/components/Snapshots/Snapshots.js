@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import {
-  Button, ButtonGroup,
+  Button,
   Card,
   Elevation,
   Intent,
@@ -16,6 +16,7 @@ import {
 } from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
+import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
 import NoData from 'ui/NoData'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
@@ -56,8 +57,7 @@ class Snapshots extends PureComponent {
     }
   }
 
-  handleQuery = (e) => {
-    e.preventDefault()
+  handleQuery = () => {
     const { fetchData } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
@@ -177,26 +177,15 @@ class Snapshots extends PureComponent {
           </SectionHeaderRow>
         </SectionHeader>
 
-        <ButtonGroup>
-          <Button
-            intent={section === MENU_POSITIONS ? Intent.PRIMARY : undefined}
-            onClick={() => this.switchSection(MENU_POSITIONS)}
-          >
-            {t('positions.title')}
-          </Button>
-          <Button
-            intent={section === MENU_TICKERS ? Intent.PRIMARY : undefined}
-            onClick={() => this.switchSection(MENU_TICKERS)}
-          >
-            {t('tickers.title')}
-          </Button>
-          <Button
-            intent={section === MENU_WALLETS ? Intent.PRIMARY : undefined}
-            onClick={() => this.switchSection(MENU_WALLETS)}
-          >
-            {t('wallets.title')}
-          </Button>
-        </ButtonGroup>
+        <NavSwitcher
+          items={[
+            { value: MENU_POSITIONS, label: t('positions.title') },
+            { value: MENU_TICKERS, label: t('tickers.title') },
+            { value: MENU_WALLETS, label: t('wallets.title') },
+          ]}
+          onChange={this.switchSection}
+          value={section}
+        />
 
         {showContent}
       </Card>
