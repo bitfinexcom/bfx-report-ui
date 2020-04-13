@@ -40,6 +40,7 @@ class Chart extends React.PureComponent {
 
     return dataKeys.map((dataKey, i) => {
       const { key = dataKey, name } = dataKey
+      console.log(1, key, this.props)
 
       return (
         <Area

@@ -14,6 +14,7 @@
 @import "components/Preferences/_Preferences.scss";
 @import "components/Status/_Status.scss";
 @import "components/Wallets/_Wallets.scss";
+@import "icons/_icons.scss";
 @import "ui/_index.scss";
 @import "themes";
 
@@ -192,18 +193,4 @@ div.bp3-multi-select {
 .bp3-spinner {
   display: inline-block;
   vertical-align: top;
-}
-
-.icon {
-  &--checkmark-circle {
-    path {
-      fill: var(--iconCheckmark);
-    }
-  }
-
-  &--warning {
-    path {
-      fill: var(--iconWarning);
-    }
-  }
 }

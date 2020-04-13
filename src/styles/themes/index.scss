@@ -12,10 +12,6 @@ body {
   background-color: var(--bgColor);
   color: var(--color);
 
-  svg path {
-    fill: var(--iconColor);
-  }
-
   .color--active {
     color: var(--activeColor);
   }
@@ -31,7 +27,6 @@ body {
   // table specific styles
   .bp3-table-container {
     box-shadow: 0 0 0 1px var(--tableBorder);
-    //color: var(--tableColor);
   }
 
   .bp3-table-column-headers .bp3-table-header {
