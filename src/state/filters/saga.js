@@ -42,10 +42,6 @@ const {
   MENU_TICKERS,
   MENU_DERIVATIVES,
   MENU_LOGINS,
-
-  // filters parsing
-  MENU_DEPOSITS,
-  MENU_WITHDRAWALS,
 } = queryTypes
 
 export function* setFilters({ payload }) {
@@ -123,11 +119,7 @@ export function* setFilters({ payload }) {
 function* setFiltersFromUrl() {
   const { pathname, search } = window.location
 
-  let section = getTarget(pathname, false)
-  // filters for movements are treated the same
-  if (section === MENU_DEPOSITS || section === MENU_WITHDRAWALS) {
-    section = MENU_MOVEMENTS
-  }
+  const section = getTarget(pathname, false)
   if (!section) {
     return
   }

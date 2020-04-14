@@ -17,8 +17,6 @@ import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 import getColumns from './Movements.columns'
 import { propTypes, defaultProps } from './Movements.props'
 
-const TYPE_WITHDRAWALS = queryConstants.MENU_WITHDRAWALS
-// we treat withdrawals and deposits in the same way
 const TYPE = queryConstants.MENU_MOVEMENTS
 
 class Movements extends PureComponent {
@@ -37,6 +35,8 @@ class Movements extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
+  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
+
   render() {
     const {
       columns,
@@ -49,40 +49,37 @@ class Movements extends PureComponent {
       t,
       targetSymbols,
       timeOffset,
-      type,
     } = this.props
-    const filteredData = entries.filter(entry => (type === TYPE_WITHDRAWALS
-      ? parseFloat(entry.amount) < 0 : parseFloat(entry.amount) > 0))
 
     const tableColumns = getColumns({
-      filteredData,
+      filteredData: entries,
       getFullTime,
       t,
       timeOffset,
     }).filter(({ id }) => columns[id])
 
+    const title = 'movements.title'
     const renderSymbolSelector = (
       <Fragment>
         {' '}
         <MultiSymbolSelector
           currentFilters={targetSymbols}
           existingCoins={existingCoins}
-          toggleSymbol={symbol => toggleSymbol(type, this.props, symbol)}
+          toggleSymbol={this.toggleSymbol}
         />
       </Fragment>
     )
 
-    const titleMsgId = type === TYPE_WITHDRAWALS ? 'withdrawals.title' : 'deposits.title'
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = (
-        <Loading title={titleMsgId} />
+        <Loading title={title} />
       )
-    } else if (!filteredData.length) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           <h4>
-            {t(titleMsgId)}
+            {t(title)}
             {' '}
             <TimeRange />
             {renderSymbolSelector}
@@ -98,7 +95,7 @@ class Movements extends PureComponent {
       showContent = (
         <Fragment>
           <h4>
-            {t(titleMsgId)}
+            {t(title)}
             {' '}
             <TimeRange />
             {renderSymbolSelector}
@@ -111,7 +108,7 @@ class Movements extends PureComponent {
           </h4>
           <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
-            numRows={filteredData.length}
+            numRows={entries.length}
             tableColumns={tableColumns}
           />
           <Pagination target={TYPE} loading={pageLoading} />

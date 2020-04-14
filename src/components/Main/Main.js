@@ -60,8 +60,7 @@ const {
   MENU_ORDERS,
   MENU_ORDER_TRADES,
   MENU_TRADES,
-  MENU_DEPOSITS,
-  MENU_WITHDRAWALS,
+  MENU_MOVEMENTS,
   MENU_POSITIONS,
   MENU_POSITIONS_ACTIVE,
   MENU_POSITIONS_AUDIT,
@@ -81,8 +80,7 @@ const PATHS = {
   MENU_TRADES: [getPath(MENU_TRADES), `${getPath(MENU_TRADES)}/:pair`],
   MENU_ORDERS: [getPath(MENU_ORDERS), `${getPath(MENU_ORDERS)}/:pair`],
   MENU_ORDER_TRADES: [getPath(MENU_ORDER_TRADES), `${getPath(MENU_ORDER_TRADES)}/:pair`],
-  MENU_DEPOSITS: [getPath(MENU_DEPOSITS), `${getPath(MENU_DEPOSITS)}/:symbol`],
-  MENU_WITHDRAWALS: [getPath(MENU_WITHDRAWALS), `${getPath(MENU_WITHDRAWALS)}/:symbol`],
+  MENU_MOVEMENTS: [getPath(MENU_MOVEMENTS), `${getPath(MENU_MOVEMENTS)}/:symbol`],
   MENU_FCREDIT: [getPath(MENU_FCREDIT), `${getPath(MENU_FCREDIT)}/:symbol`],
   MENU_FLOAN: [getPath(MENU_FLOAN), `${getPath(MENU_FLOAN)}/:symbol`],
   MENU_FOFFER: [getPath(MENU_FOFFER), `${getPath(MENU_FOFFER)}/:symbol`],
@@ -191,13 +189,8 @@ class Main extends PureComponent {
             />
             <Route
               exact
-              path={PATHS.MENU_DEPOSITS}
-              render={() => <Movements type={MENU_DEPOSITS} />}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_WITHDRAWALS}
-              render={() => <Movements type={MENU_WITHDRAWALS} />}
+              path={PATHS.MENU_MOVEMENTS}
+              component={Movements}
             />
             <Route
               exact

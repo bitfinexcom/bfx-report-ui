@@ -65,11 +65,11 @@ const {
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
+  MENU_MOVEMENTS,
   MENU_ORDERS,
   MENU_ORDER_TRADES,
   MENU_TICKERS,
   MENU_TRADES,
-  MENU_DEPOSITS,
   MENU_POSITIONS,
   MENU_POSITIONS_ACTIVE,
   MENU_POSITIONS_AUDIT,
@@ -80,7 +80,6 @@ const {
   MENU_TRADED_VOLUME,
   MENU_WALLETS,
   MENU_WIN_LOSS,
-  MENU_WITHDRAWALS,
 } = types
 
 /**
@@ -137,8 +136,7 @@ function getSelector(target) {
       return getOrdersPairs
     case MENU_ORDER_TRADES:
       return getOrderTradesParams
-    case MENU_WITHDRAWALS:
-    case MENU_DEPOSITS:
+    case MENU_MOVEMENTS:
       return getMovementsSymbols
     case MENU_TICKERS:
       return getTickersPairs
@@ -178,8 +176,7 @@ function formatSymbol(target, symbols) {
     // sections with a single symbol
     case MENU_AFFILIATES_EARNINGS:
     case MENU_LEDGERS:
-    case MENU_WITHDRAWALS:
-    case MENU_DEPOSITS:
+    case MENU_MOVEMENTS:
     case MENU_FPAYMENT:
     case MENU_LOAN_REPORT:
       return mapRequestSymbols(symbols)
@@ -312,13 +309,8 @@ function* getOptions({ target, query }) {
     case MENU_TRADES:
       options.method = 'getTradesCsv'
       break
-    case MENU_WITHDRAWALS:
+    case MENU_MOVEMENTS:
       options.method = 'getMovementsCsv'
-      options.isWithdrawals = true
-      break
-    case MENU_DEPOSITS:
-      options.method = 'getMovementsCsv'
-      options.isDeposits = true
       break
     case MENU_POSITIONS:
       options.method = 'getPositionsHistoryCsv'

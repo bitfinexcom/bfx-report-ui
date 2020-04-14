@@ -12,9 +12,7 @@ import { FILTER_KEYS } from 'var/filterTypes'
 import { setLastRoute, setRouteParams } from './actions'
 import { getLastRoute, getRouteParams } from './selectors'
 
-const {
-  MENU_DEPOSITS, MENU_WITHDRAWALS, MENU_MOVEMENTS, MENU_ORDER_TRADES,
-} = queryConstants
+const { MENU_ORDER_TRADES } = queryConstants
 
 function* locationChange({ payload }) {
   const { isFirstRendering, location } = payload
@@ -24,11 +22,7 @@ function* locationChange({ payload }) {
     return
   }
 
-  let route = getTarget(pathname, false)
-  // filters for movements are treated the same
-  if (route === MENU_DEPOSITS || route === MENU_WITHDRAWALS) {
-    route = MENU_MOVEMENTS
-  }
+  const route = getTarget(pathname, false)
   if (!route) {
     return
   }

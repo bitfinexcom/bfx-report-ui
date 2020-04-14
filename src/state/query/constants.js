@@ -4,7 +4,6 @@ export default {
   MENU_AFFILIATES_EARNINGS: 'affiliatesearnings',
   MENU_CANDLES: 'candles',
   MENU_CONCENTRATION_RISK: 'concentrationrisk',
-  MENU_DEPOSITS: 'deposits',
   MENU_DERIVATIVES: 'derivatives',
   MENU_FCREDIT: 'fcredit',
   MENU_FEES_REPORT: 'feesreport',
@@ -29,7 +28,6 @@ export default {
   MENU_TRADED_VOLUME: 'tradedvolume',
   MENU_WALLETS: 'wallets',
   MENU_WIN_LOSS: 'averagewinloss',
-  MENU_WITHDRAWALS: 'withdrawals',
   TIME_TYPE_UTC: 'utc',
   TIME_TYPE_LOCALTIME: 'local',
   VALID_QUERY_RANGE: 7776000, // 3 month
