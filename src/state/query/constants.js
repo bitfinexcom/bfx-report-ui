@@ -39,7 +39,4 @@ export default {
   FILTER_ID: 'id',
   FILTER_PAIR: 'pair',
   FILTER_SYMBOL: 'symbol',
-  WALLET_EXCHANGE: 'exchange',
-  WALLET_MARGIN: 'margin',
-  WALLET_FUNDING: 'funding',
 }

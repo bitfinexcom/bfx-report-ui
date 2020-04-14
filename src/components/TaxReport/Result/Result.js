@@ -5,13 +5,12 @@ import _isNumber from 'lodash/isNumber'
 import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import NoData from 'ui/NoData'
+import { fixedFloat } from 'ui/utils'
 import getMovementsColumns from 'components/Movements/Movements.columns'
 import { getFrameworkPositionsColumns } from 'utils/columns'
 
 import { propTypes } from './Result.props'
 import getBalancesColumns from './Balances.columns'
-import getTotalMovementsColumns from './TotalMovements.columns'
-import getTotalResultColumns from './TotalResult.columns'
 
 class TaxReport extends PureComponent {
   componentDidMount() {
@@ -41,9 +40,9 @@ class TaxReport extends PureComponent {
 
     return (
       <Fragment>
-        <h4>
+        <div className='table-section-title'>
           {title}
-        </h4>
+        </div>
         <DataTable
           numRows={positions.length}
           tableColumns={positionsColumns}
@@ -71,9 +70,9 @@ class TaxReport extends PureComponent {
 
     return (
       <Fragment>
-        <h4>
+        <div className='table-section-title'>
           {title}
-        </h4>
+        </div>
         <DataTable
           numRows={1}
           tableColumns={balancesColumns}
@@ -91,7 +90,6 @@ class TaxReport extends PureComponent {
     } = this.props
     const {
       movements,
-      movementsTotalAmount,
     } = data.finalState
 
     const movementsColumns = getMovementsColumns({
@@ -101,29 +99,16 @@ class TaxReport extends PureComponent {
       timeOffset,
     })
 
-    const totalMovementsColumns = getTotalMovementsColumns({
-      movementsTotalAmount,
-    })
-
     return (
-      <Fragment>
-        <h4>
+      <div className='movements'>
+        <div className='table-section-title'>
           {t('taxreport.movements')}
-        </h4>
-        {(movements.length > 0) && (
-          <Fragment>
-            <DataTable
-              numRows={movements.length}
-              tableColumns={movementsColumns}
-            />
-            <br />
-          </Fragment>
-        )}
+        </div>
         <DataTable
-          numRows={1}
-          tableColumns={totalMovementsColumns}
+          numRows={movements.length}
+          tableColumns={movementsColumns}
         />
-      </Fragment>
+      </div>
     )
   }
 
@@ -173,13 +158,31 @@ class TaxReport extends PureComponent {
       return <NoData />
     }
 
-    const totalResultColumns = getTotalResultColumns({ totalResult })
-
     const positionsNotEmpty = startingPositionsSnapshot.length || endingPositionsSnapshot.length
-    const movementsNotEmpty = movements.length || _isNumber(movementsTotalAmount)
 
     return (
       <Fragment>
+        {_isNumber(totalResult) && _isNumber(movementsTotalAmount) && (
+          <div className='total-stats'>
+            {_isNumber(totalResult) && (
+              <div className='total-stats-item'>
+                <div className='color--active'>
+                  {t('column.totalResult')}
+                </div>
+                <span>{fixedFloat(totalResult)}</span>
+              </div>
+            )}
+            {_isNumber(movementsTotalAmount) && (
+              <div className='total-stats-item'>
+                <div className='color--active'>
+                  {t('column.movementsTotal')}
+                </div>
+                <span>{fixedFloat(movementsTotalAmount)}</span>
+              </div>
+            )}
+          </div>
+        )}
+        {movements.length > 0 && this.getMovements()}
         {this.getPositionsSnapshot({
           positions: startingPositionsSnapshot,
           title: t('taxreport.startPositions'),
@@ -197,22 +200,6 @@ class TaxReport extends PureComponent {
           balances: endingPeriodBalances,
           title: t('taxreport.endingPeriodBalances'),
         })}
-        {movementsNotEmpty && (
-          <Fragment>
-            <br />
-            {this.getMovements()}
-          </Fragment>
-        )}
-        {_isNumber(totalResult) && (
-          <Fragment>
-            <br />
-            <br />
-            <DataTable
-              numRows={1}
-              tableColumns={totalResultColumns}
-            />
-          </Fragment>
-        ) }
       </Fragment>
     )
   }

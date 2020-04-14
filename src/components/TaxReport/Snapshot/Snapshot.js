@@ -1,6 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button, ButtonGroup } from '@blueprintjs/core'
+import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 
 import PositionsSnapshot from 'components/Snapshots/PositionsSnapshot'
 import TickersSnapshot from 'components/Snapshots/TickersSnapshot'
@@ -79,29 +79,6 @@ class Snapshot extends PureComponent {
       return <NoData />
     }
 
-    const renderButtonGroup = (
-      <ButtonGroup>
-        <Button
-          active={subsection === MENU_POSITIONS}
-          onClick={() => this.switchSection(MENU_POSITIONS)}
-        >
-          {t('positions.title')}
-        </Button>
-        <Button
-          active={subsection === MENU_TICKERS}
-          onClick={() => this.switchSection(MENU_TICKERS)}
-        >
-          {t('tickers.title')}
-        </Button>
-        <Button
-          active={subsection === MENU_WALLETS}
-          onClick={() => this.switchSection(MENU_WALLETS)}
-        >
-          {t('wallets.title')}
-        </Button>
-      </ButtonGroup>
-    )
-
     const isEmpty = (subsection === MENU_POSITIONS && !positionsEntries.length)
       || (subsection === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries)
       || (subsection === MENU_WALLETS && !walletsEntries.length)
@@ -138,9 +115,27 @@ class Snapshot extends PureComponent {
     }
 
     return (
-      <div>
-        {renderButtonGroup}
-        <br />
+      <div className='snapshot'>
+        <ButtonGroup>
+          <Button
+            intent={subsection === MENU_POSITIONS ? Intent.PRIMARY : undefined}
+            onClick={() => this.switchSection(MENU_POSITIONS)}
+          >
+            {t('positions.title')}
+          </Button>
+          <Button
+            intent={subsection === MENU_TICKERS ? Intent.PRIMARY : undefined}
+            onClick={() => this.switchSection(MENU_TICKERS)}
+          >
+            {t('tickers.title')}
+          </Button>
+          <Button
+            intent={subsection === MENU_WALLETS ? Intent.PRIMARY : undefined}
+            onClick={() => this.switchSection(MENU_WALLETS)}
+          >
+            {t('wallets.title')}
+          </Button>
+        </ButtonGroup>
         {showContent}
       </div>
     )

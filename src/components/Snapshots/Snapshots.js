@@ -119,7 +119,7 @@ class Snapshots extends PureComponent {
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
 
     const isEmpty = (section === MENU_POSITIONS && !positionsEntries.length)
-      || (section === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries)
+      || (section === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries.length)
       || (section === MENU_WALLETS && !walletsEntries.length)
 
     let showContent

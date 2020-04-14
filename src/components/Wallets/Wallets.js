@@ -12,20 +12,12 @@ import {
 import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import DataTable from 'ui/DataTable'
 import SectionHeader from 'ui/SectionHeader'
-import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
 import { platform } from 'var/config'
 
-import getColumns from './Wallets.columns'
+import WalletsData from './Wallets.data'
 import { propTypes, defaultProps } from './Wallets.props'
-
-const {
-  WALLET_EXCHANGE,
-  WALLET_MARGIN,
-  WALLET_FUNDING,
-} = queryConstants
 
 class Wallets extends PureComponent {
   constructor(props) {
@@ -51,8 +43,7 @@ class Wallets extends PureComponent {
     }
   }
 
-  handleQuery = (e) => {
-    e.preventDefault()
+  handleQuery = () => {
     const { fetchData } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
@@ -65,18 +56,10 @@ class Wallets extends PureComponent {
       entries,
       dataReceived,
       pageLoading,
+      refresh,
       t,
     } = this.props
     const { timestamp } = this.state
-    const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
-    const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
-    const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
-    const exchangeColumns = getColumns({ filteredData: exchangeData, t })
-    const marginColumns = getColumns({ filteredData: marginData, t })
-    const fundingColumns = getColumns({ filteredData: fundingData, t })
-    const exchangeRows = exchangeData.length
-    const marginRows = marginData.length
-    const fundingRows = fundingData.length
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
 
     const renderTimeSelection = (
@@ -105,40 +88,20 @@ class Wallets extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
-    } else if (exchangeRows === 0 && marginRows === 0 && fundingRows === 0) {
+    } else if (!entries.length) {
       showContent = (
         <Fragment>
           {platform.showFrameworkMode && renderTimeSelection}
-          <NoData title='wallets.nodata' />
+          <NoData title='wallets.nodata' refresh={refresh} />
         </Fragment>
       )
     } else {
       showContent = (
         <Fragment>
           {platform.showFrameworkMode && renderTimeSelection}
-          <div className='section-wallets-data'>
-            <div className='section-wallets-data-item'>
-              <div>{t('wallets.header.exchange')}</div>
-              <DataTable
-                numRows={exchangeRows}
-                tableColumns={exchangeColumns}
-              />
-            </div>
-            <div className='section-wallets-data-item'>
-              <div>{t('wallets.header.margin')}</div>
-              <DataTable
-                numRows={marginRows}
-                tableColumns={marginColumns}
-              />
-            </div>
-            <div className='section-wallets-data-item'>
-              <div>{t('wallets.header.funding')}</div>
-              <DataTable
-                numRows={fundingRows}
-                tableColumns={fundingColumns}
-              />
-            </div>
-          </div>
+          <WalletsData
+            entries={entries}
+          />
         </Fragment>
       )
     }
