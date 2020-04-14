@@ -1,18 +1,23 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import {
   Button,
   Card,
   Elevation,
   Intent,
-  Position,
-  Tooltip,
 } from '@blueprintjs/core'
 
 import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import SectionHeader from 'ui/SectionHeader'
+import {
+  SectionHeader,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+  SectionHeaderRow,
+  SectionHeaderTitle,
+} from 'ui/SectionHeader'
+import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 import { platform } from 'var/config'
 
@@ -62,57 +67,39 @@ class Wallets extends PureComponent {
     const { timestamp } = this.state
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
 
-    const renderTimeSelection = (
-      <Fragment>
-        <Tooltip
-          content={(
-            <span>
-              {t('wallets.query.tooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-          usePortal
-        >
-          <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
-        </Tooltip>
-        <Button
-          onClick={this.handleQuery}
-          intent={hasNewTime ? Intent.PRIMARY : null}
-          disabled={!hasNewTime}
-        >
-          {t('query.title')}
-        </Button>
-        {' '}
-      </Fragment>
-    )
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (!entries.length) {
-      showContent = (
-        <Fragment>
-          {platform.showFrameworkMode && renderTimeSelection}
-          <NoData title='wallets.nodata' refresh={refresh} />
-        </Fragment>
-      )
+      showContent = <NoData title='wallets.nodata' refresh={refresh} />
     } else {
-      showContent = (
-        <Fragment>
-          {platform.showFrameworkMode && renderTimeSelection}
-          <WalletsData
-            entries={entries}
-          />
-        </Fragment>
-      )
+      showContent = <WalletsData entries={entries} />
     }
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'>
-        <SectionHeader
-          filter={false}
-          timeframe={false}
-          title='wallets.title'
-        />
+        <SectionHeader>
+          <SectionHeaderTitle>{t('wallets.title')}</SectionHeaderTitle>
+          {platform.showFrameworkMode && (
+            <SectionHeaderRow>
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('query.endTime')}
+                </SectionHeaderItemLabel>
+                <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
+              </SectionHeaderItem>
+              <Button
+                className='button--large'
+                onClick={this.handleQuery}
+                intent={Intent.PRIMARY}
+                disabled={!hasNewTime}
+              >
+                {t('query.title')}
+              </Button>
+              <RefreshButton onClick={refresh} />
+            </SectionHeaderRow>
+          )}
+        </SectionHeader>
         {showContent}
       </Card>
     )
