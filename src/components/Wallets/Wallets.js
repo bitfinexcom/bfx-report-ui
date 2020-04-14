@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
@@ -17,6 +12,7 @@ import {
   SectionHeaderRow,
   SectionHeaderTitle,
 } from 'ui/SectionHeader'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 import { platform } from 'var/config'
@@ -88,14 +84,10 @@ class Wallets extends PureComponent {
                 </SectionHeaderItemLabel>
                 <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
               </SectionHeaderItem>
-              <Button
-                className='button--large'
-                onClick={this.handleQuery}
-                intent={Intent.PRIMARY}
+              <QueryButton
                 disabled={!hasNewTime}
-              >
-                {t('query.title')}
-              </Button>
+                onClick={this.handleQuery}
+              />
               <RefreshButton onClick={refresh} />
             </SectionHeaderRow>
           )}

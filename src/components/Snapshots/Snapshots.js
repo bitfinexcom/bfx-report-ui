@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import {
   SectionHeader,
@@ -18,6 +13,7 @@ import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
 import NoData from 'ui/NoData'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
@@ -165,14 +161,10 @@ class Snapshots extends PureComponent {
               />
             </SectionHeaderItem>
 
-            <Button
-              className='button--large'
-              onClick={this.handleQuery}
-              intent={Intent.PRIMARY}
+            <QueryButton
               disabled={!hasNewTime}
-            >
-              {t('query.title')}
-            </Button>
+              onClick={this.handleQuery}
+            />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>

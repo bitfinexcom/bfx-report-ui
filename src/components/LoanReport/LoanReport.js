@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
 
@@ -23,6 +18,7 @@ import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
 import { parseLoanReportChartData } from 'ui/Charts/Charts.helpers'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, toggleSymbol } from 'state/utils'
@@ -137,14 +133,10 @@ class LoanReport extends PureComponent {
               />
             </SectionHeaderItem>
 
-            <Button
-              className='button--large'
-              onClick={this.handleQuery}
-              intent={Intent.PRIMARY}
+            <QueryButton
               disabled={!hasChanges}
-            >
-              {t('query.title')}
-            </Button>
+              onClick={this.handleQuery}
+            />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>

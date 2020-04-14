@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import {
   SectionHeader,
@@ -16,6 +11,7 @@ import {
 } from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
 import NavSwitcher from 'ui/NavSwitcher'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 
@@ -143,14 +139,10 @@ class TaxReport extends PureComponent {
               />
             </SectionHeaderItem>
 
-            <Button
-              className='button--large'
-              onClick={this.handleQuery}
-              intent={Intent.PRIMARY}
+            <QueryButton
               disabled={!hasNewTime}
-            >
-              {t('query.title')}
-            </Button>
+              onClick={this.handleQuery}
+            />
             <RefreshButton onClick={this.handleRefresh} />
           </SectionHeaderRow>
         </SectionHeader>

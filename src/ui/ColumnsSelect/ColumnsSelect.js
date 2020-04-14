@@ -3,10 +3,10 @@ import { withTranslation } from 'react-i18next'
 import { Checkbox } from '@blueprintjs/core'
 
 import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
+import { platform } from 'var/config'
 
 import ColumnsSelectDialog from './Dialog'
 import { propTypes, defaultProps } from './ColumnsSelect.props'
-import { platform } from '../../var/config'
 
 class ColumnsSelect extends PureComponent {
   constructor(props) {

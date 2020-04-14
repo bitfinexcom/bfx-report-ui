@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 
 import {
@@ -20,6 +15,7 @@ import NoData from 'ui/NoData'
 import TradesSwitch from 'components/Trades/TradesSwitch'
 import PairSelector from 'ui/PairSelector'
 import Timeframe from 'ui/CandlesTimeframe'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import Candlestick from 'ui/Charts/Candlestick'
 import CandlesSyncPref from 'ui/CandlesSyncPref'
@@ -106,14 +102,10 @@ class Candles extends PureComponent {
               />
             </SectionHeaderItem>
             <Timeframe value={timeframe} onChange={this.onTimeframeChange} />
-            <Button
-              className='button--large'
-              onClick={this.handleQuery}
-              intent={Intent.PRIMARY}
+            <QueryButton
               disabled={!hasChanges}
-            >
-              {t('query.title')}
-            </Button>
+              onClick={this.handleQuery}
+            />
             <RefreshButton onClick={refresh} />
             <CandlesSyncPref />
           </SectionHeaderRow>

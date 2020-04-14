@@ -1,11 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 import _keys from 'lodash/keys'
 import _sortBy from 'lodash/sortBy'
 
@@ -19,6 +14,7 @@ import {
 import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import PieChart from 'ui/Charts/PieChart'
@@ -149,14 +145,10 @@ class ConcentrationRisk extends PureComponent {
               />
             </SectionHeaderItem>
 
-            <Button
-              className='button--large'
-              onClick={this.handleQuery}
-              intent={Intent.PRIMARY}
+            <QueryButton
               disabled={!hasNewTime}
-            >
-              {t('query.title')}
-            </Button>
+              onClick={this.handleQuery}
+            />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
