@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import {
-  Button, Checkbox,
+  Button,
+  Checkbox,
   Classes,
   Dialog,
   Intent,
 } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
 
+import Icon from 'icons'
 import mode from 'state/sync/constants'
 
 import { propTypes, defaultProps } from './FrameworkDialog.props'
@@ -53,18 +54,22 @@ class FrameworkDialog extends PureComponent {
 
     return (
       <Dialog
-        icon={IconNames.CONFIRM}
+        icon={<Icon.TRAY_IMPORT />}
         onClose={() => this.handleProceed(false)}
         title={title}
+        isCloseButtonShown={false}
         isOpen={isOpen}
       >
         <div className={Classes.DIALOG_BODY}>
+          <br />
           <Checkbox
             checked={isFrameworkDialogDisabled}
             onChange={this.handleChange}
             label={t('framework.notagain')}
             className='bitfinex-framework-checkbox'
           />
+          <br />
+          <br />
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
