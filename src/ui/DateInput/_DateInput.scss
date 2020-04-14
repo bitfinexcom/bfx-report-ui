@@ -3,11 +3,23 @@
   border: 2px solid var(--borderColor);
   border-radius: 2px;
   padding: 15px;
+
+  .bp3-timepicker {
+    &-input-row {
+      background-color: var(--bgColor);
+    }
+
+    &-input {
+      height: 30px;
+      color: var(--color);
+    }
+  }
 }
 
 .date-input-popover {
   .bp3-input-action {
     padding-right: 8px;
+    pointer-events: none;
 
     svg {
       height: 40px;
