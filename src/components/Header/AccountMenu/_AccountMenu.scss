@@ -1,11 +1,11 @@
 .account-menu {
-  min-width: 206px;
+  min-width: 208px;
   float: right;
   height: 50px;
   line-height: 50px;
   user-select: none;
   cursor: pointer;
-  border-left: 2px solid var(--borderColor);
+  border-left: 1px solid var(--borderColor);
 
   &--no-email {
     min-width: initial;
@@ -66,7 +66,7 @@
     height: fit-content;
     background-color: var(--bgColor2);
     color: var(--color);
-    box-shadow: 0 0 0 2px var(--borderColor);
+    box-shadow: 0 0 0 1px var(--borderColor);
 
     .bp3-menu {
       padding: 0;
@@ -103,7 +103,7 @@
 
       &-divider {
         margin: 0;
-        border-top: 2px solid var(--borderColor);
+        border-top: 1px solid var(--borderColor);
       }
     }
   }
@@ -113,6 +113,6 @@
   }
 
   .bp3-popover-target {
-    height: 52px;
+    height: 51px;
   }
 }

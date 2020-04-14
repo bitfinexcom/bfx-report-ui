@@ -3,8 +3,8 @@
   margin-left: -8px;
   padding: 0;
   border-radius: 0;
-  box-shadow: 0 2px 0 2px var(--borderColor);
-  clip-path: inset(0 -2px 0 0);
+  box-shadow: 0 1px 0 1px var(--borderColor);
+  clip-path: inset(0 -1px 0 0);
 
   .bp3-menu-item {
     display: block;
@@ -46,6 +46,6 @@
 
   .bp3-menu-divider {
     margin: 0;
-    border-top: 2px solid var(--borderColor);
+    border-top: 1px solid var(--borderColor);
   }
 }
