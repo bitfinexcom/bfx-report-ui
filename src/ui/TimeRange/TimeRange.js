@@ -11,13 +11,14 @@ class TimeRange extends PureComponent {
     const {
       className,
       end,
+      icon,
       start,
       timezone,
     } = this.props
 
     return (
       <div className={classNames('time-range', className)}>
-        <Icon.CALENDAR />
+        {icon && <Icon.CALENDAR />}
         <span>
           {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
         </span>

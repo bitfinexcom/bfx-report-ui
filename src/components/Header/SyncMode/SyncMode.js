@@ -79,25 +79,25 @@ class SyncMode extends PureComponent {
       <Fragment>
         <Tooltip
           className='sync-mode'
-          content={(
-            <span>
-              {t(getTooltipMessage(syncMode))}
-            </span>
-          )}
+          content={t(getTooltipMessage(syncMode))}
           position={Position.BOTTOM}
         >
-          <div onClick={this.handleToggleClick}>
-            {syncMode !== MODE_SYNCING
-              ? <Icon.CHECKMARK_CIRCLE />
-              : (
-                <>
-                  <Spinner size={20} />
-                  <div className='bitfinex-sync-progress'>
-                    {syncProgress}
-                  </div>
-                </>
-              )}
-            <span>{t(getTitle(syncMode))}</span>
+          <div className='sync-mode-wrapper' onClick={this.handleToggleClick}>
+            <div className='sync-mode-icon-wrapper'>
+              <div className='sync-mode-icon'>
+                {syncMode !== MODE_SYNCING
+                  ? <Icon.CHECKMARK_CIRCLE />
+                  : (
+                    <>
+                      <Spinner size={20} />
+                      <div className='bitfinex-sync-progress'>
+                        {syncProgress}
+                      </div>
+                    </>
+                  )}
+              </div>
+            </div>
+            <span className='sync-mode-status'>{t(getTitle(syncMode))}</span>
           </div>
         </Tooltip>
         <Dialog

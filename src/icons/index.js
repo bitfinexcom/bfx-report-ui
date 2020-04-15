@@ -21,6 +21,7 @@ import { ReactComponent as FEES_REPORT } from './fees-report.svg'
 import { ReactComponent as FILE_EXPORT } from './file-export.svg'
 import { ReactComponent as FILE_TABLE } from './file-table.svg'
 import { ReactComponent as FILTER } from './filter.svg'
+import { ReactComponent as HAMBURGER_MENU } from './hamburger-menu.svg'
 import { ReactComponent as INFO_CIRCLE } from './info-circle.svg'
 import { ReactComponent as LIGHT_THEME } from './light-theme.svg'
 import { ReactComponent as LIST_NUMBER } from './list-number.svg'
@@ -65,6 +66,7 @@ export default {
   FILE_EXPORT,
   FILE_TABLE,
   FILTER,
+  HAMBURGER_MENU,
   INFO_CIRCLE,
   LIGHT_THEME,
   LIST_NUMBER,

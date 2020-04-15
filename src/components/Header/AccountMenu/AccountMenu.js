@@ -10,7 +10,6 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import Preferences from 'components/Preferences'
 
 import { propTypes, defaultProps } from './AccountMenu.props'
 
@@ -19,12 +18,6 @@ const HELP_LINK = 'https://support.bitfinex.com/hc/en-us/articles/360008951853'
 const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
 
 class AccountMenu extends PureComponent {
-  state = {
-    isPrefOpen: false,
-  }
-
-  togglePref = () => this.setState(({ isPrefOpen }) => ({ isPrefOpen: !isPrefOpen }))
-
   openHelp = () => window.open(HELP_LINK)
 
   render() {
@@ -32,8 +25,8 @@ class AccountMenu extends PureComponent {
       email,
       logout,
       t,
+      togglePrefDialog,
     } = this.props
-    const { isPrefOpen } = this.state
 
     return (
       <div className={classNames('account-menu', { 'account-menu--no-email': !email })}>
@@ -44,7 +37,7 @@ class AccountMenu extends PureComponent {
             <div className='account-menu-content'>
               <Menu>
                 <MenuItem
-                  onClick={this.togglePref}
+                  onClick={togglePrefDialog}
                   icon={<Icon.SLIDER_CIRCLE_H />}
                   text={t('header.preferences')}
                 />
@@ -77,11 +70,6 @@ class AccountMenu extends PureComponent {
             </div>
           </div>
         </Popover>
-
-        <Preferences
-          isOpen={isPrefOpen}
-          handlePrefDialogClose={this.togglePref}
-        />
       </div>
     )
   }

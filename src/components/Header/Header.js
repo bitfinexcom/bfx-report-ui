@@ -10,6 +10,7 @@ import TimeFrameShortcut from './TimeFrameShortcut'
 import Export from './Export'
 import SyncMode from './SyncMode'
 import AccountMenu from './AccountMenu'
+import TopNavigation from './TopNavigation'
 
 const { REACT_APP_ELECTRON } = process.env
 
@@ -38,6 +39,8 @@ const Header = () => {
       <SyncMode />
       <Status />
       <AccountMenu />
+
+      <TopNavigation />
     </div>
   )
 }

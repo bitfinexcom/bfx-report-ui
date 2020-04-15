@@ -202,14 +202,6 @@ body.#{$ns}-light {
   text-align: right;
 }
 
-.bitfinex-sync-progress {
-  transform: translate(-3px, -49.5px);
-  font-size: 10px;
-  position: absolute;
-  width: 26px;
-  text-align: center;
-}
-
 .bitfinex-pref-checkbox {
   margin-top: 6px;
 }
@@ -233,4 +225,10 @@ div.bp3-multi-select {
 .bp3-spinner {
   display: inline-block;
   vertical-align: top;
+}
+
+@media screen and (max-width: 375px) {
+  body {
+    font-size: 13px;
+  }
 }

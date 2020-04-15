@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
 
 import { getEmail } from 'state/query/selectors'
-import { logout } from 'state/auth/actions'
 import { togglePreferencesDialog } from 'state/ui/actions'
+import { logout } from 'state/auth/actions'
 
-import AccountMenu from './AccountMenu'
+import TopNavigation from './TopNavigation'
 
 const mapStateToProps = state => ({
   email: getEmail(state),
@@ -15,6 +15,6 @@ const mapDispatchToProps = {
   togglePrefDialog: togglePreferencesDialog,
 }
 
-const AccountMenuContainer = connect(mapStateToProps, mapDispatchToProps)(AccountMenu)
+const TopNavigationContainer = connect(mapStateToProps, mapDispatchToProps)(TopNavigation)
 
-export default AccountMenuContainer
+export default TopNavigationContainer

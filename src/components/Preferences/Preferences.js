@@ -33,18 +33,18 @@ class Preferences extends PureComponent {
 
   render() {
     const {
-      handlePrefDialogClose,
+      inputTimezone,
       isOpen,
       t,
       timezone,
-      inputTimezone,
+      toggleDialog,
     } = this.props
 
     return (
       <Dialog
         className='preferences'
         icon={<Icon.SLIDER_CIRCLE_H />}
-        onClose={handlePrefDialogClose}
+        onClose={toggleDialog}
         title={t('preferences.title')}
         isCloseButtonShown={false}
         isOpen={isOpen}
@@ -101,7 +101,7 @@ class Preferences extends PureComponent {
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
             <Button
-              onClick={handlePrefDialogClose}
+              onClick={toggleDialog}
               intent={Intent.PRIMARY}
             >
               {t('preferences.close')}

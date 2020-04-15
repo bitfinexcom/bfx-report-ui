@@ -45,6 +45,15 @@ export function togglePaginationDialog(isOpen, latestPaginationTimestamp) {
 }
 
 /**
+ * Create an action to show/hide preferences dialog.
+ */
+export function togglePreferencesDialog() {
+  return {
+    type: types.TOGGLE_PREFERENCES_DIALOG,
+  }
+}
+
+/**
  * Create an action to proceed with pagination request.
  * @param {boolean} payload indicator of whether pagination request should proceed
  */
@@ -78,5 +87,6 @@ export default {
   toggleFrameworkDialog,
   proceedFrameworkRequest,
   togglePaginationDialog,
+  togglePreferencesDialog,
   proceedPaginationRequest,
 }

@@ -6,6 +6,7 @@ const initialState = {
   isExportDialogOpen: false,
   isFrameworkDialogOpen: false,
   isPaginationDialogOpen: false,
+  isPreferencesDialogOpen: false,
   latestPaginationTimestamp: undefined,
   device: getDeviceType(),
 }
@@ -30,6 +31,12 @@ export function uiReducer(state = initialState, action) {
         ...state,
         isPaginationDialogOpen: isOpen,
         latestPaginationTimestamp,
+      }
+    }
+    case types.TOGGLE_PREFERENCES_DIALOG: {
+      return {
+        ...state,
+        isPreferencesDialogOpen: !state.isPreferencesDialogOpen,
       }
     }
     case types.UI_RESIZED:

@@ -1,5 +1,7 @@
-@import './TimeFrame/_TimeFrame.scss';
 @import './AccountMenu/_AccountMenu.scss';
+@import './TimeFrame/_TimeFrame.scss';
+@import './TopNavigation/_TopNavigation.scss';
+@import './SyncMode/_SyncMode.scss';
 
 .header {
   width: 100%;
@@ -70,5 +72,36 @@
     width: 273px;
     height: 100%;
     border-right: 1px solid var(--borderColor);
+  }
+
+  .top-nagivation {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .header {
+    &-brand {
+      width: 140px;
+      margin-left: 15px;
+      border-right: none;
+
+      &-logo {
+        width: 140px;
+        height: 20px;
+
+        img {
+          width: 140px;
+        }
+      }
+    }
+
+    .header-timeframe, .timeframe-shortcut, .export, .sync-mode, .account-menu {
+      display: none;
+    }
+
+    .top-navigation {
+      display: inline-block;
+    }
   }
 }

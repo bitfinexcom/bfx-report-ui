@@ -1,0 +1,35 @@
+.sync-mode {
+  .bp3-popover-target {
+    width: 100%;
+  }
+
+  &-wrapper {
+    width: 100%;
+  }
+
+  &-icon {
+    display: inline-block;
+    position: relative;
+    width: 20px;
+
+    .bp3-spinner {
+      margin: 0 2px;
+    }
+
+    &-wrapper {
+      display: inline-block;
+      width: 24px;
+    }
+  }
+
+  .bitfinex-sync-progress {
+    transform: translate(-50%, 0);
+    margin-left: 2px;
+    font-size: 10px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    //width: 26px;
+    text-align: center;
+  }
+}

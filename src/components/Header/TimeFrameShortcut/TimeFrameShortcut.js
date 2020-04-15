@@ -22,13 +22,14 @@ class TimeFrameShortcut extends PureComponent {
 
   render() {
     const {
+      icon,
       title,
       t,
     } = this.props
 
     return (
       <div className='timeframe-shortcut' onClick={this.onClick}>
-        <Icon.CALENDAR />
+        {icon && <Icon.CALENDAR />}
         <span>{t(title)}</span>
       </div>
     )
