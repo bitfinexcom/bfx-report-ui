@@ -14,7 +14,6 @@ import { ReactComponent as CLOSE } from './close.svg'
 import { ReactComponent as COLLAPSE_WIDE } from './collapse-wide.svg'
 import { ReactComponent as CURSOR_SQUARE } from './cursor-square.svg'
 import { ReactComponent as DARK_THEME } from './dark-theme.svg'
-import { ReactComponent as DEPOSITS } from './deposits.svg'
 import { ReactComponent as DERIVATIVES } from './derivatives.svg'
 import { ReactComponent as DISK } from './disk.svg'
 import { ReactComponent as FEES_REPORT } from './fees-report.svg'
@@ -40,7 +39,6 @@ import { ReactComponent as TRAY_IMPORT } from './tray-import.svg'
 import { ReactComponent as USER_CIRCLE } from './user-circle.svg'
 import { ReactComponent as WALLET } from './wallet.svg'
 import { ReactComponent as WARNING } from './warning.svg'
-import { ReactComponent as WITHDRAWALS } from './withdrawals.svg'
 
 export default {
   ACCOUNT_BALANCE,
@@ -59,7 +57,6 @@ export default {
   COLLAPSE_WIDE,
   CURSOR_SQUARE,
   DARK_THEME,
-  DEPOSITS,
   DERIVATIVES,
   DISK,
   FEES_REPORT,
@@ -85,5 +82,4 @@ export default {
   USER_CIRCLE,
   WALLET,
   WARNING,
-  WITHDRAWALS,
 }
