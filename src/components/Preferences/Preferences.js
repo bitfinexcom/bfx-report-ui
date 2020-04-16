@@ -6,12 +6,12 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
-import { TimezonePicker } from '@blueprintjs/timezone'
 
 import Icon from 'icons'
 import DateFormatSelector from 'ui/DateFormatSelector'
 import LangMenu from 'ui/LangMenu'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
+import TimezonePicker from 'ui/TimezonePicker'
 import ThemeSwitcher from 'ui/ThemeSwitcher'
 
 import { propTypes, defaultProps } from './Preferences.props'
@@ -21,20 +21,12 @@ class Preferences extends PureComponent {
 
   static defaultProps = defaultProps
 
-  handleTimezoneChange = (timezone) => {
-    const { setTimezone } = this.props
-    setTimezone(timezone)
-  }
-
-  handleInputTimezoneChange = (timezone) => {
-    const { setInputTimezone } = this.props
-    setInputTimezone(timezone)
-  }
-
   render() {
     const {
       inputTimezone,
       isOpen,
+      setTimezone,
+      setInputTimezone,
       t,
       timezone,
       toggleDialog,
@@ -59,33 +51,15 @@ class Preferences extends PureComponent {
             <div className='preferences-item'>
               <div>{t('preferences.timezone')}</div>
               <TimezonePicker
-                className='bitfinex-select'
-                buttonProps={{
-                  className: 'timezone-picker',
-                }}
-                popoverProps={{
-                  minimal: true,
-                  popoverClassName: 'bitfinex-select-menu',
-                }}
-                showLocalTimezone
+                onChange={setTimezone}
                 value={timezone}
-                onChange={this.handleTimezoneChange}
               />
             </div>
             <div className='preferences-item'>
               <div>{t('preferences.timezone-input')}</div>
               <TimezonePicker
-                className='bitfinex-select'
-                buttonProps={{
-                  className: 'timezone-picker',
-                }}
-                popoverProps={{
-                  minimal: true,
-                  popoverClassName: 'bitfinex-select-menu',
-                }}
-                showLocalTimezone
+                onChange={setInputTimezone}
                 value={inputTimezone}
-                onChange={this.handleInputTimezoneChange}
               />
             </div>
             <div className='preferences-item'>
