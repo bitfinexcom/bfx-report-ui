@@ -102,7 +102,7 @@ class NavMenu extends PureComponent {
     } = this.props
 
     return (
-      <Menu large className='bitfinex-nav-menu hidden-xs hidden-sm hidden-md'>
+      <Menu large className='bitfinex-nav-menu'>
         {this.sections.map((section, index) => {
           const [type, title, isSkipped] = section
 

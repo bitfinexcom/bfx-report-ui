@@ -3,7 +3,6 @@ import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
   Menu,
-  MenuDivider,
   MenuItem,
   Popover,
   Position,
@@ -12,6 +11,7 @@ import {
 import Icon from 'icons'
 
 import { propTypes, defaultProps } from './AccountMenu.props'
+import SyncMode from '../SyncMode'
 
 const HELP_LINK = 'https://support.bitfinex.com/hc/en-us/articles/360008951853'
 
@@ -25,6 +25,7 @@ class AccountMenu extends PureComponent {
       email,
       logout,
       t,
+      toggleExportDialog,
       togglePrefDialog,
     } = this.props
 
@@ -41,13 +42,22 @@ class AccountMenu extends PureComponent {
                   icon={<Icon.SLIDER_CIRCLE_H />}
                   text={t('header.preferences')}
                 />
-                <MenuDivider />
+                <MenuItem
+                  className='account-menu-export'
+                  onClick={toggleExportDialog}
+                  icon={<Icon.FILE_EXPORT />}
+                  text={t('download.export')}
+                />
                 <MenuItem
                   onClick={this.openHelp}
                   icon={<Icon.INFO_CIRCLE />}
                   text={t('header.help')}
                 />
-                <MenuDivider />
+                <MenuItem
+                  className='account-menu-sync'
+                  shouldDismissPopover={false}
+                  text={<SyncMode />}
+                />
                 <MenuItem
                   onClick={logout}
                   icon={<Icon.SIGN_OUT />}
@@ -62,7 +72,7 @@ class AccountMenu extends PureComponent {
           <div className='account-menu-wrapper'>
             <div className='account-menu-target'>
               <Icon.USER_CIRCLE />
-              <span className='account-menu-range'>
+              <span className='account-menu-username'>
                 {formatUsername(email)}
               </span>
               <Icon.CHEVRON_DOWN />

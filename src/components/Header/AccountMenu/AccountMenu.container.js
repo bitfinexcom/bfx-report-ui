@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { getEmail } from 'state/query/selectors'
 import { logout } from 'state/auth/actions'
-import { togglePreferencesDialog } from 'state/ui/actions'
+import { toggleExportDialog, togglePreferencesDialog } from 'state/ui/actions'
 
 import AccountMenu from './AccountMenu'
 
@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   logout,
+  toggleExportDialog,
   togglePrefDialog: togglePreferencesDialog,
 }
 

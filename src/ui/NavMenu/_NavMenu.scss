@@ -49,3 +49,9 @@
     border-top: 1px solid var(--borderColor);
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .bitfinex-nav-menu {
+    display: none;
+  }
+}

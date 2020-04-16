@@ -4,51 +4,55 @@
   height: 51px;
   line-height: 50px;
   margin-right: 15px;
+  cursor: pointer;
+
+  .icon--close {
+    display: none;
+  }
 
   &-title {
+    display: none;
     position: absolute;
     top: 0;
     left: 15px;
     font-size: 15px;
   }
 
-  &-portal {
-    &.bp3-overlay-open {
-      margin-top: 50px;
-      height: 100vh;
-      background-color: var(--bgColor);
-    }
-  }
-
   .icon--hamburger-menu, .icon--close {
     vertical-align: middle;
   }
 
-  &-popover.bp3-popover {
-    margin-left: 5px !important;
+  &--open {
+    .icon--hamburger-menu {
+      transform: rotate(90deg);
+    }
   }
 
   &-content {
-    width: 100vw;
     background-color: var(--bgColor);
 
     .bp3-menu {
+      border-radius: 0;
       padding: 0;
       border-top: 1px solid var(--borderColor);
+      border-left: 1px solid var(--borderColor);
+
 
       &-item {
-        height: 35px;
-        line-height: 35px;
+        width: calc(100% + 4px);
+        height: 40px;
+        line-height: 40px;
         padding: 0 15px;
         vertical-align: middle;
         border-bottom: 1px solid var(--borderColor);
+        border-radius: 0;
 
         &:hover, &:active {
           background-color: var(--bgColor2);
         }
 
         svg {
-          height: 35px;
+          height: 40px;
         }
 
         &--subitem {
@@ -57,7 +61,7 @@
 
         &--timeframe {
           .time-range {
-            height: 34px;
+            height: 39px;
             font-size: 13px;
             color: var(--color);
           }
@@ -65,13 +69,14 @@
 
         .sync-mode {
           .bp3-popover-target {
-            height: 35px;
+            height: 40px;
           }
+
           &-icon {
-            height: 35px;
+            height: 40px;
 
             &-wrapper {
-              height: 35px;
+              height: 40px;
             }
           }
 
@@ -85,6 +90,84 @@
       &-divider {
         margin: 0;
         border-top: 1px solid var(--borderColor);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .top-navigation {
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .top-navigation {
+    &-title {
+      display: inline-block;
+    }
+
+    &--open {
+      .icon--close {
+        display: inline-block;
+      }
+
+      .icon--hamburger-menu {
+        display: none;
+      }
+    }
+
+    &-portal {
+      &.bp3-overlay-open {
+        margin-top: 50px;
+        height: 100vh;
+        background-color: var(--bgColor);
+      }
+    }
+
+    &-popover.bp3-popover {
+      margin-left: 5px !important;
+    }
+
+    &-content {
+      width: 100vw;
+
+      .bp3-menu {
+        border-left: none;
+
+        &-item {
+          width: 100%;
+          height: 35px;
+          line-height: 35px;
+
+          svg {
+            height: 35px;
+          }
+
+          &--subitem {
+            padding: 0 46px;
+          }
+
+          &--timeframe {
+            .time-range {
+              height: 34px;
+              font-size: 13px;
+            }
+          }
+
+          .sync-mode {
+            .bp3-popover-target {
+              height: 35px;
+            }
+            &-icon {
+              height: 35px;
+
+              &-wrapper {
+                height: 35px;
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -32,9 +32,9 @@ class TopNavigation extends PureComponent {
 
     const headerBrand = document.getElementsByClassName('header-brand')[0]
     if (isOpen) {
-      headerBrand.style.display = 'none'
+      headerBrand.classList.add('top-navigation--open')
     } else {
-      headerBrand.style.display = 'inline-block'
+      headerBrand.classList.remove('top-navigation--open')
     }
   }
 
@@ -47,8 +47,12 @@ class TopNavigation extends PureComponent {
     } = this.props
     const { isOpen } = this.state
 
+    const classes = classNames('top-navigation', {
+      'top-navigation--open': isOpen,
+    })
+
     return (
-      <div className={classNames('top-navigation', { 'account-menu--no-email': !email })}>
+      <div className={classes}>
         <Popover
           minimal
           autoFocus={false}
@@ -56,6 +60,8 @@ class TopNavigation extends PureComponent {
           portalClassName='top-navigation-portal'
           onOpening={() => this.togglePopover(true)}
           onClosing={() => this.togglePopover(false)}
+          // usePortal={false}
+          boundary='viewport'
           content={(
             <div className='top-navigation-content'>
               <Menu>
@@ -124,9 +130,8 @@ class TopNavigation extends PureComponent {
           className='bitfinex-dropdown'
         >
           <span>
-            {isOpen
-              ? <Icon.CLOSE />
-              : <Icon.HAMBURGER_MENU />}
+            <Icon.CLOSE />
+            <Icon.HAMBURGER_MENU />
             {isOpen && <span className='top-navigation-title'>Top Navigation</span>}
           </span>
         </Popover>

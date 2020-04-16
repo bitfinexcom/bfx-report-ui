@@ -1,5 +1,6 @@
 .account-menu {
   min-width: 208px;
+  max-width: 375px;
   float: right;
   height: 50px;
   line-height: 50px;
@@ -55,10 +56,15 @@
     height: 50px;
   }
 
-  &-range {
+  &-username {
     vertical-align: top;
     margin: 0 3px 0 10px;
     font-size: 15px;
+    text-overflow: ellipsis;
+    max-width: 287px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   &-content {
@@ -71,10 +77,12 @@
     .bp3-menu {
       padding: 0;
 
+
       &-item {
         height: 40px;
         line-height: 40px;
         padding: 0 14px;
+        border-bottom: 1px solid var(--borderColor);
 
         svg {
           height: 40px;
@@ -99,11 +107,30 @@
             fill: var(--activeColor);
           }
         }
+
+        .sync-mode {
+          .bp3-popover-target {
+            height: 35px;
+          }
+          &-icon {
+            height: 35px;
+
+            &-wrapper {
+              height: 35px;
+            }
+          }
+
+          &-status {
+            margin-left: 13px;
+            vertical-align: top;
+          }
+        }
       }
 
-      &-divider {
-        margin: 0;
-        border-top: 1px solid var(--borderColor);
+      li:last-child {
+        .bp3-menu-item {
+          border-bottom: none;
+        }
       }
     }
   }
@@ -114,5 +141,35 @@
 
   .bp3-popover-target {
     height: 51px;
+  }
+
+  &-export, &-sync {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1550px) {
+  .account-menu {
+    max-width: 275px;
+
+    &-username {
+      max-width: 187px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .account-menu {
+    &-sync {
+      display: flex;
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .account-menu {
+    &-export {
+      display: flex;
+    }
   }
 }

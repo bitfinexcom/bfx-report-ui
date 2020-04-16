@@ -10,10 +10,14 @@
   &-icon {
     display: inline-block;
     position: relative;
-    width: 20px;
+    width: 22px;
 
     .bp3-spinner {
-      margin: 0 2px;
+      margin: 0 1px;
+
+      &-animation {
+        width: 20px;
+      }
     }
 
     &-wrapper {
@@ -24,12 +28,10 @@
 
   .bitfinex-sync-progress {
     transform: translate(-50%, 0);
-    margin-left: 2px;
     font-size: 10px;
     position: absolute;
-    top: 0;
+    top: 0.4px;
     left: 50%;
-    //width: 26px;
     text-align: center;
   }
 }

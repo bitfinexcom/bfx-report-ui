@@ -68,9 +68,15 @@ class SyncMode extends PureComponent {
 
     if (!platform.showFrameworkMode) {
       return (
-        <div className='sync-mode' onClick={this.handleToggleClick}>
-          <Icon.CHECKMARK_CIRCLE />
-          <span>{t('sync.online')}</span>
+        <div className='sync-mode'>
+          <div className='sync-mode-wrapper' onClick={this.handleToggleClick}>
+            <div className='sync-mode-icon-wrapper'>
+              <div className='sync-mode-icon'>
+                <Icon.CHECKMARK_CIRCLE />
+              </div>
+            </div>
+            <span className='sync-mode-status'>{t('sync.online')}</span>
+          </div>
         </div>
       )
     }
