@@ -2,38 +2,41 @@
   width: 100%;
 
   &-item {
-    &.bp3-card {
-      margin: 5px 0;
-      padding: 0;
+    display: table;
+    margin-bottom: 10px;
+    border: 1px solid var(--borderColor);
+    border-radius: 2px;
+
+    &:last-child {
+      margin-bottom: 0;
     }
 
-    &-attribute {
-      padding: 1px 10px;
+    & > div {
+      display: table-row;
 
-      &:first-of-type {
-        padding-top: 3px;
+      &:nth-child(odd) {
+        background-color: var(--tableOddBg);
       }
 
-      &:last-of-type {
-        padding-bottom: 3px;
+      &:nth-child(even) {
+        background-color: var(--tableEvenBg);
       }
 
-      &-name {
-        display: inline-block;
-        width: 45%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      & > div {
+        display: table-cell;
+        min-height: 24px;
+        padding: 4px 11px;
         vertical-align: middle;
-      }
 
-      &-value {
-        display: inline-block;
-        width: 55%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        vertical-align: middle;
+        &:first-child {
+          width: 45%;
+          color: var(--activeColor);
+          border-right: 1px solid var(--borderColor);
+        }
+
+        &:last-child {
+          padding: 4px 5px;
+        }
       }
     }
   }
