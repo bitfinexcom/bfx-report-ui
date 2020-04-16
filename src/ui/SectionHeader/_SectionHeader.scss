@@ -8,9 +8,12 @@
   }
 
   &-row {
+    margin-bottom: -10px;
+
     > * {
       display: inline-block;
       vertical-align: bottom;
+      margin-bottom: 10px;
 
       &:not(:last-child) {
         margin-right: 20px;

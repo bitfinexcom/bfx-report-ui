@@ -1,0 +1,55 @@
+.bp3-multi-select {
+  position: relative;
+  min-width: 223px;
+  min-height: 40px;
+
+  &.bp3-input {
+    box-shadow: none;
+    background-color: var(--multiBg);
+    border: 1px solid var(--borderColor);
+  }
+
+  &-arrow {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+  }
+
+  input {
+    padding-right: 24px;
+  }
+
+  &-tag-input-input {
+    color: var(--color);
+
+    &::placeholder {
+      color: var(--color);
+    }
+  }
+
+  .bp3-tag-input-values {
+    .bp3-tag {
+      background-color: var(--multiTagBg);
+      color: var(--color);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--multiTagHoverBg);
+      }
+
+      &-remove {
+        color: var(--multiTagRemove);
+      }
+    }
+
+    &:last-child {
+      padding-left: 3px;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .bp3-multi-select {
+    min-width: 150px;
+  }
+}

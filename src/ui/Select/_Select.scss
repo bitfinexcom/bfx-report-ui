@@ -13,53 +13,6 @@
     width: 100px;
   }
 
-  .bp3-multi-select {
-    position: relative;
-    height: 40px;
-    background-color: var(--multiBg);
-    border: 1px solid var(--borderColor);
-    box-shadow: none;
-    min-width: 223px;
-
-    &-arrow {
-      position: absolute;
-      top: 6px;
-      right: 5px;
-    }
-
-    input {
-      padding-right: 24px;
-    }
-
-    &-tag-input-input {
-      color: var(--color);
-
-      &::placeholder {
-        color: var(--color);
-      }
-    }
-
-    .bp3-tag-input-values {
-      .bp3-tag {
-        background-color: var(--multiTagBg);
-        color: var(--color);
-        cursor: pointer;
-
-        &:hover {
-          background-color: var(--multiTagHoverBg);
-        }
-
-        &-remove {
-          color: var(--multiTagRemove);
-        }
-      }
-
-      &:last-child {
-        padding-left: 3px;
-      }
-    }
-  }
-
   &-menu {
     .bp3-popover-content {
       width: 223px;

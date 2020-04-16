@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import classNames from 'classnames'
 import { withTranslation } from 'react-i18next'
 import { MultiSelect as BlueprintMultiSelect } from '@blueprintjs/select'
 
@@ -23,9 +24,11 @@ class MultiSelect extends PureComponent {
   }
 
   render() {
-    const { t, ...selectProps } = this.props
+    const { className, t, ...selectProps } = this.props
     const { isOpen } = this.state
     const { tagInputProps } = selectProps
+
+    const classes = classNames('bitfinex-select', className)
 
     const icon = isOpen
       ? <Icon.CHEVRON_UP className='bp3-multi-select-arrow' />
@@ -33,7 +36,7 @@ class MultiSelect extends PureComponent {
 
     return (
       <BlueprintMultiSelect
-        className='bitfinex-select'
+        className={classes}
         placeholder={t('selector.select')}
         popoverProps={this.popoverProps}
         {...selectProps}
