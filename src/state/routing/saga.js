@@ -22,7 +22,7 @@ function* locationChange({ payload }) {
     // redirects from legacy sections `deposits' and 'withdrawals' to 'movements' on first render
     if (pathname.includes('/deposits') || pathname.includes('/withdrawals')) {
       const [, , symbols] = pathname.split('/')
-      yield put(replace(`/movements${symbols ? `/${symbols}` : ''}${search || ''}`))
+      yield put(replace(`/movements${symbols ? `/${symbols}` : ''}${search || ''}`, { isSkipped: true }))
       return
     }
   }
