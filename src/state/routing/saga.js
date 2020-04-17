@@ -16,7 +16,16 @@ const { MENU_ORDER_TRADES } = queryConstants
 
 function* locationChange({ payload }) {
   const { isFirstRendering, location } = payload
-  const { pathname, state } = location
+  const { pathname, search, state } = location
+
+  if (isFirstRendering) {
+    // redirects from legacy sections `deposits' and 'withdrawals' to 'movements' on first render
+    if (pathname.includes('/deposits') || pathname.includes('/withdrawals')) {
+      const [, , symbols] = pathname.split('/')
+      yield put(replace(`/movements${symbols ? `/${symbols}` : ''}${search || ''}`))
+      return
+    }
+  }
 
   if (!_isEmpty(state) && state.isSkipped) {
     return
