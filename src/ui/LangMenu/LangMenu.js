@@ -1,58 +1,28 @@
-import React, { PureComponent } from 'react'
-import {
-  Button,
-  Intent,
-  Menu,
-  MenuItem,
-  Popover,
-  PopoverInteractionKind,
-  Position,
-} from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
+import React from 'react'
 import _keys from 'lodash/keys'
 
+import Select from 'ui/Select'
 import { LANGUAGE_NAMES } from 'locales/i18n'
 
 import { propTypes, defaultProps } from './LangMenu.props'
 
-class LangMenu extends PureComponent {
-  static propTypes = propTypes
+const items = _keys(LANGUAGE_NAMES).map(lang => ({ value: lang, label: LANGUAGE_NAMES[lang] }))
 
-  static defaultProps = defaultProps
+const LangMenu = (props) => {
+  const { setLang, value } = props
 
-  switchLang(lang) {
-    const { setLang } = this.props
-    setLang(lang)
-  }
-
-  render() {
-    const { locale } = this.props
-    const options = (
-      <Menu>
-        {_keys(LANGUAGE_NAMES).map(language => (
-          <MenuItem
-            key={language}
-            text={LANGUAGE_NAMES[language]}
-            onClick={() => this.switchLang(language)}
-            intent={locale === language ? Intent.PRIMARY : undefined}
-          />
-        ))}
-      </Menu>
-    )
-    return (
-      <Popover
-        content={options}
-        interactionKind={PopoverInteractionKind.CLICK}
-        position={Position.BOTTOM}
-      >
-        <Button
-          className='button--medium'
-          rightIcon={IconNames.CARET_DOWN}
-          text={LANGUAGE_NAMES[locale]}
-        />
-      </Popover>
-    )
-  }
+  return (
+    <Select
+      className='bitfinex-select--language'
+      popoverClassName='bitfinex-select-menu--language'
+      value={value}
+      items={items}
+      onChange={setLang}
+    />
+  )
 }
+
+LangMenu.propTypes = propTypes
+LangMenu.defaultProps = defaultProps
 
 export default LangMenu

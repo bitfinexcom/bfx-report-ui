@@ -9,6 +9,10 @@
     justify-content: space-between;
   }
 
+  &--language .bp3-button {
+    width: 140px;
+  }
+
   &--timeframe .bp3-button {
     width: 100px;
   }
@@ -32,6 +36,14 @@
     &--symbol, &--pair {
       .bp3-popover-content {
         width: 180px;
+      }
+    }
+
+    &--language .bp3-popover-content {
+      width: 140px;
+
+      .bp3-menu {
+        min-width: unset;
       }
     }
 
