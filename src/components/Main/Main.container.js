@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 import { getAuthStatus, getIsShown } from 'state/auth/selectors'
 
@@ -10,6 +9,6 @@ const mapStateToProps = state => ({
   authStatus: getAuthStatus(state),
 })
 
-const MainContainer = withRouter(connect(mapStateToProps)(Main))
+const MainContainer = connect(mapStateToProps)(Main)
 
 export default MainContainer

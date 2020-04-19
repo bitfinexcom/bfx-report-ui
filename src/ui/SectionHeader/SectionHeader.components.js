@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import SectionHeaderTitle from './SectionHeader.title'
 import Classes from './SectionHeader.classes'
 
 const ComponentWrapper = ({ children, className }) => (
@@ -16,7 +17,7 @@ ComponentWrapper.propTypes = {
 }
 
 export const SectionHeader = (props) => <ComponentWrapper {...props} className={Classes.SECTION_HEADER} />
-export const SectionHeaderTitle = (props) => <ComponentWrapper {...props} className={Classes.SECTION_HEADER_TITLE} />
+export { SectionHeaderTitle }
 export const SectionHeaderRow = (props) => <ComponentWrapper {...props} className={Classes.SECTION_HEADER_ROW} />
 export const SectionHeaderItem = (props) => <ComponentWrapper {...props} className={Classes.SECTION_HEADER_ITEM} />
 export const SectionHeaderItemLabel = (props) => (

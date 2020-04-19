@@ -5,6 +5,37 @@
     margin-bottom: 20px;
     font-size: 30px;
     color: var(--activeColor);
+
+    &--mobile {
+      display: none;
+      margin-top: -13px;
+      margin-left: -18px;
+
+      &-section {
+        display: inline-flex;
+        align-items: center;
+        width: 100vw;
+        height: 40px;
+        padding: 0 18px;
+        font-size: 15px;
+        background-color: var(--bgColor2);
+
+        svg {
+          margin-right: 12px;
+
+          path {
+            fill: var(--activeColor);
+          }
+        }
+
+        .icon {
+          &--chevron-up, &--chevron-down {
+            margin-left: auto;
+            margin-right: -3px;
+          }
+        }
+      }
+    }
   }
 
   &-row {
@@ -29,5 +60,19 @@
 
   &-time-range {
     margin: 0 2px 22px 2px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .section-header {
+    &-title {
+      &--main {
+        display: none;
+      }
+
+      &--mobile {
+        display: block;
+      }
+    }
   }
 }

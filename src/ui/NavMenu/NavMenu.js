@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
+import classNames from 'classnames'
 import { Menu, MenuDivider, MenuItem } from '@blueprintjs/core'
 import _castArray from 'lodash/castArray'
 import _includes from 'lodash/includes'
 
 import queryType from 'state/query/constants'
-import { getIcon, getPath } from 'state/query/utils'
+import { getIcon, getPath, getTarget } from 'state/query/utils'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './NavMenu.props'
@@ -97,12 +98,16 @@ class NavMenu extends PureComponent {
 
   render() {
     const {
-      target,
+      className,
+      history,
       t,
     } = this.props
+    const target = getTarget(history.location.pathname)
+
+    const classes = classNames('bitfinex-nav-menu', className)
 
     return (
-      <Menu large className='bitfinex-nav-menu'>
+      <Menu large className={classes}>
         {this.sections.map((section, index) => {
           const [type, title, isSkipped] = section
 

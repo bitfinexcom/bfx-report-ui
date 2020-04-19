@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import AccountBalance from 'components/AccountBalance'
@@ -36,7 +36,7 @@ import Wallets from 'components/Wallets'
 import ExportDialog from 'components/ExportDialog'
 import Preferences from 'components/Preferences'
 import queryType from 'state/query/constants'
-import { getPath, getTarget } from 'state/query/utils'
+import { getPath } from 'state/query/utils'
 import NavMenu from 'ui/NavMenu'
 import { platform } from 'var/config'
 
@@ -107,14 +107,11 @@ class Main extends PureComponent {
     const {
       authStatus,
       authIsShown,
-      history,
-      location,
     } = this.props
-    const target = getTarget(location.pathname)
 
     return authStatus && !authIsShown ? (
-      <div className='row'>
-        <NavMenu target={target} history={history} />
+      <Fragment>
+        <NavMenu className='bitfinex-nav-menu--main' />
         <div className='bitfinex-dataset'>
           <Switch>
             <Route
@@ -285,7 +282,7 @@ class Main extends PureComponent {
         {platform.showFrameworkMode && <FrameworkDialog />}
         <PaginationDialog />
         <Preferences />
-      </div>
+      </Fragment>
     ) : ''
   }
 }
