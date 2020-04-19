@@ -2,8 +2,8 @@
   width: fit-content;
   min-height: unset;
   height: fit-content;
-  max-height: max-content;
-  flex: 1 1 100px;
+  max-height: 517px;
+  flex: 0 1 auto;
   clip-path: inset(-1px 0px 0px -1px);
 
   .bp3-table-quadrant-scroll-container {
@@ -16,6 +16,10 @@
     &::-webkit-scrollbar-thumb {
       background-color: var(--tableScrollThumbBg);
       border-radius: 2px;
+    }
+
+    &::-webkit-scrollbar-corner {
+      background-color: var(--tableScrollThumbBg);
     }
   }
 }

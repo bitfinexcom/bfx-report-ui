@@ -17,6 +17,10 @@
 }
 
 .date-input-popover {
+  .bp3-input {
+    height: 40px;
+  }
+
   .bp3-input-action {
     padding-right: 8px;
     pointer-events: none;
