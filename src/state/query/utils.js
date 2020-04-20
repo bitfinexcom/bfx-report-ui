@@ -14,7 +14,6 @@ const {
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
   MENU_CONCENTRATION_RISK,
-  MENU_DEPOSITS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FEES_REPORT,
@@ -39,7 +38,6 @@ const {
   MENU_TRADES,
   MENU_WALLETS,
   MENU_WIN_LOSS,
-  MENU_WITHDRAWALS,
 } = queryType
 
 export const TYPE_WHITELIST = [
@@ -80,7 +78,6 @@ export const ROUTE_WHITELIST = [
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
   MENU_CONCENTRATION_RISK,
-  MENU_DEPOSITS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FEES_REPORT,
@@ -90,6 +87,7 @@ export const ROUTE_WHITELIST = [
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
+  MENU_MOVEMENTS,
   MENU_ORDERS,
   MENU_ORDER_TRADES,
   MENU_POSITIONS,
@@ -104,7 +102,6 @@ export const ROUTE_WHITELIST = [
   MENU_TRADED_VOLUME,
   MENU_WALLETS,
   MENU_WIN_LOSS,
-  MENU_WITHDRAWALS,
 ]
 
 export const FILTERS_WHITELIST = [
@@ -131,8 +128,7 @@ const BASIC_TARGETS = [
   MENU_TRADES,
   MENU_ORDERS,
   // MENU_ORDER_TRADES, // needs specific id
-  MENU_DEPOSITS,
-  MENU_WITHDRAWALS,
+  MENU_MOVEMENTS,
   MENU_POSITIONS,
   MENU_POSITIONS_ACTIVE,
   // MENU_POSITIONS_AUDIT, // needs specific id
@@ -299,9 +295,9 @@ const MAPPING = {
     // queryLimit: 1000,
     pageSize: 125,
   },
-  [MENU_DEPOSITS]: {
-    icon: IconNames.ADD_TO_FOLDER,
-    path: '/deposits',
+  [MENU_MOVEMENTS]: {
+    icon: IconNames.EXCHANGE,
+    path: '/movements',
     filterType: FILTER_SYMBOL,
     queryLimit: 25,
     pageSize: 25,
@@ -309,13 +305,6 @@ const MAPPING = {
   [MENU_WIN_LOSS]: {
     icon: IconNames.CHART,
     path: '/average_win_loss',
-  },
-  [MENU_WITHDRAWALS]: {
-    icon: IconNames.FOLDER_SHARED_OPEN,
-    path: '/withdrawals',
-    filterType: FILTER_SYMBOL,
-    queryLimit: 25,
-    pageSize: 25,
   },
   [MENU_PUBLIC_FUNDING]: {
     icon: IconNames.EXCHANGE,
@@ -351,11 +340,6 @@ const MAPPING = {
     filterType: FILTER_ID,
     queryLimit: 250,
     pageSize: 125,
-  },
-  [MENU_MOVEMENTS]: {
-    filterType: FILTER_SYMBOL,
-    queryLimit: 25,
-    pageSize: 25,
   },
   [MENU_SNAPSHOTS]: {
     icon: IconNames.HISTORY,
