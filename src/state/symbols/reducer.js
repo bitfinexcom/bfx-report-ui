@@ -22,9 +22,13 @@ export function symbolsReducer(state = initialState, action) {
       const explorersDict = {}
       const symbolMapping = {}
       currencies.forEach((currency) => {
-        const {
-          id, name, explorer, symbol,
-        } = currency
+        const { id, explorer } = currency
+        let { name, symbol } = currency
+
+        if (id === 'BCH') {
+          name = 'Bitcoin Cash (Pre Fork)'
+          symbol = 'pBCH'
+        }
 
         if (symbol && id !== symbol) {
           symbolMapping[id] = symbol
