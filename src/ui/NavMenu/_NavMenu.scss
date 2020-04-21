@@ -77,7 +77,22 @@
 
 @media screen and (max-width: 1024px) {
   .bitfinex-nav-menu {
-    display: none;
+    width: 39px;
+    min-width: 39px;
+
+    .bp3-menu {
+      &-item {
+        padding: 0 7px;
+
+        div {
+          display: none;
+        }
+
+        &.bp3-active {
+          border-right: none;
+        }
+      }
+    }
   }
 }
 
