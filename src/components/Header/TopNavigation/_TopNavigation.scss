@@ -24,7 +24,9 @@
 
   &--open {
     .icon--hamburger-menu {
-      transform: rotate(90deg);
+      path {
+        fill: var(--activeColor);
+      }
     }
   }
 

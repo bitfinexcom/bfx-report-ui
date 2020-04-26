@@ -60,7 +60,6 @@ class TopNavigation extends PureComponent {
           portalClassName='top-navigation-portal'
           onOpening={() => this.togglePopover(true)}
           onClosing={() => this.togglePopover(false)}
-          // usePortal={false}
           boundary='viewport'
           content={(
             <div className='top-navigation-content'>
