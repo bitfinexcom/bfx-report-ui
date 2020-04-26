@@ -41,8 +41,13 @@
     }
 
     &-column {
-      width: 180px;
       margin-right: 10px;
+
+      &.bitfinex-select {
+        .bp3-button {
+          width: 154px;
+        }
+      }
     }
 
     &-filter {
@@ -52,8 +57,12 @@
 
     &-input {
       display: inline-block;
-      width: 192px;
+      width: 180px;
       margin-right: 13px;
+
+      .bp3-input {
+        height: 40px;
+      }
     }
 
     &-remove {
