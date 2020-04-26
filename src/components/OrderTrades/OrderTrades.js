@@ -6,7 +6,7 @@ import { Card, Elevation } from '@blueprintjs/core'
 import DataTable from 'ui/DataTable'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import SectionHeader from 'ui/SectionHeader'
+import { SectionHeader, SectionHeaderTitle } from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import { checkFetch } from 'state/utils'
@@ -77,12 +77,9 @@ class OrderTrades extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-        <SectionHeader
-          filter={false}
-          target={MENU_ORDER_TRADES}
-          timeframe={false}
-          title='ordertrades.title'
-        />
+        <SectionHeader>
+          <SectionHeaderTitle>{t('ordertrades.title')}</SectionHeaderTitle>
+        </SectionHeader>
         {showContent}
       </Card>
     )

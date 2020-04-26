@@ -10,10 +10,14 @@ const ComponentWrapper = ({ children, className }) => (
 ComponentWrapper.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.array,
     PropTypes.string,
-  ]).isRequired,
+  ]),
   className: PropTypes.string.isRequired,
+}
+
+ComponentWrapper.defaultProps = {
+  children: null,
 }
 
 export const SectionHeader = (props) => <ComponentWrapper {...props} className={Classes.SECTION_HEADER} />

@@ -15,7 +15,7 @@ const NavSwitcher = (props) => {
         })
 
         return (
-          <span className={itemClasses} onClick={() => onChange(itemValue)}>
+          <span className={itemClasses} onClick={() => onChange(itemValue)} key={itemValue}>
             {label}
           </span>
         )

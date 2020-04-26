@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types'
 
 export const propTypes = {
-  syncPairs: PropTypes.arrayOf(String),
+  setSyncPref: PropTypes.func.isRequired,
   startTime: PropTypes.number,
-  setPairs: PropTypes.func.isRequired,
+  syncPairs: PropTypes.arrayOf(String),
   t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
-  logout: () => {},
   syncPairs: [],
   startTime: 0,
-  setPairs: () => {},
 }
