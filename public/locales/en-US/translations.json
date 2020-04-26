@@ -383,7 +383,8 @@
     "past_year": "Past Year",
     "past_2y": "Past 2 Years",
     "range_limit": "Queries more than six years behind the actual date are not allowed",
-    "start-date-placeholder": "Start Date Time",
+    "start-date-placeholder": "Start Date",
+    "end-date-placeholder": "End Date",
     "today": "Today",
     "year": "Year"
   },

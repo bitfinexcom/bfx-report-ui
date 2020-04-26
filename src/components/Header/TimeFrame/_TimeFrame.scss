@@ -61,4 +61,32 @@
   .bp3-popover-target {
     height: 51px;
   }
+
+  &-popover {
+    width: 274px;
+    padding: 20px 15px;
+    border: 1px solid var(--borderColor);
+    border-top: none;
+    border-radius: 0;
+    text-align: right;
+
+    .bp3-input {
+      width: 100%;
+      background-color: var(--bgColor);
+      text-align: center;
+
+      &::placeholder {
+        text-align: center;
+      }
+
+      &-group {
+        margin: 0 auto 12px auto;
+        pointer-events: none;
+      }
+    }
+
+    .bp3-button {
+      margin-top: 15px;
+    }
+  }
 }

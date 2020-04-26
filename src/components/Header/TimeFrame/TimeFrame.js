@@ -1,9 +1,16 @@
 import React, { PureComponent } from 'react'
-import { Popover, Position } from '@blueprintjs/core'
+import { withTranslation } from 'react-i18next'
+import {
+  Button,
+  InputGroup,
+  Intent,
+  Popover,
+  Position,
+} from '@blueprintjs/core'
 
 import DateRangePicker from 'ui/DateRangePicker'
 import Icon from 'icons'
-import { formatDate } from 'state/utils'
+import { DEFAULT_DATETIME_FORMAT, formatDate } from 'state/utils'
 
 import { propTypes, defaultProps } from './TimeFrame.props'
 
@@ -12,6 +19,7 @@ class TimeFrame extends PureComponent {
     const {
       end,
       start,
+      t,
       timezone,
     } = this.props
 
@@ -22,7 +30,25 @@ class TimeFrame extends PureComponent {
         <Popover
           minimal
           position={Position.BOTTOM}
-          content={<DateRangePicker />}
+          content={(
+            <div className='timeframe-popover'>
+              <InputGroup
+                placeholder={t('timeframe.start-date-placeholder')}
+                readOnly
+                value={formatDate(start, timezone, DEFAULT_DATETIME_FORMAT)}
+              />
+              <InputGroup
+                placeholder={t('timeframe.end-date-placeholder')}
+                readOnly
+                value={formatDate(end, timezone, DEFAULT_DATETIME_FORMAT)}
+              />
+              <DateRangePicker>
+                <Button intent={Intent.PRIMARY}>
+                  {t('timeframe.custom.view')}
+                </Button>
+              </DateRangePicker>
+            </div>
+          )}
           targetTagName='div'
           className='bitfinex-dropdown'
         >
@@ -45,4 +71,4 @@ class TimeFrame extends PureComponent {
 TimeFrame.propTypes = propTypes
 TimeFrame.defaultProps = defaultProps
 
-export default TimeFrame
+export default withTranslation('translations')(TimeFrame)

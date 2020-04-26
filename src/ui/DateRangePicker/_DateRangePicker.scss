@@ -1,45 +1,7 @@
-.date-range-picker {
-  width: 272px;
-  padding: 10px 30px;
-  background-color: var(--bgColor2);
-  color: var(--color);
-  box-shadow: 0 0 0 1px var(--borderColor);
-
-  .bp3-input {
-    height: 30px;
-    background-color: var(--bgColor);
-  }
-
-  .bp3-control-group {
-    display: block;
-    width: 100%;
-
-    .bp3-input-group {
-      width: 100%;
-      display: block;
-      margin: 15px 0;
-
-      .bp3-input {
-        text-align: center;
-      }
-    }
-  }
-
-  .bp3-button {
-    float: right;
-    margin-top: 15px;
-    padding: 0 35px;
-  }
-
-  &-popover {
-    box-shadow: none;
-  }
-}
-
 .date-range-picker-popover {
   position: absolute;
-  top: -101px;
-  left: -31px;
+  top: -90px;
+  left: -208px;
 }
 
 .bp3-daterangepicker {
@@ -102,7 +64,7 @@
 
       .bp3-menu-item {
         width: fit-content;
-        padding: 4px 13px;
+        padding: 4px 12px;
         height: 30px;
         font-size: 10px;
         border: 1px solid var(--borderColor);
@@ -141,6 +103,41 @@
 
     &--selected-range {
       background-color: var(--datepickerSelectedRangeBg);
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .date-range-picker-popover {
+    position: absolute;
+    top: -26px;
+    left: -447px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .date-range-picker-popover {
+    position: absolute;
+    top: -21px;
+    left: -186px;
+  }
+
+  .bp3-daterangepicker {
+    width: calc(100vw - 1px);
+
+    div {
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .DayPicker {
+        &:first-child {
+          margin-bottom: 30px;
+        }
+      }
+    }
+
+    &-shortcuts {
+      margin-top: 10px;
     }
   }
 }

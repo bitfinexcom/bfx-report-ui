@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import queryString from 'query-string'
 import moment from 'moment-timezone'
-import { Classes, Position } from '@blueprintjs/core'
-import { DateRangeInput } from '@blueprintjs/datetime'
+import { Classes, Popover } from '@blueprintjs/core'
+import { DateRangePicker as BlueprintDateRangePicker } from '@blueprintjs/datetime'
 
 import baseTypes from 'state/base/constants'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -206,7 +206,7 @@ class DateRangePicker extends PureComponent {
   }
 
   render() {
-    const { t } = this.props
+    const { children, t } = this.props
     const { startDate, endDate } = this.getDates()
     const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, baseTypes.DEFAULT_TIMEZONE)
     const commonDateRangeProps = {
@@ -222,25 +222,24 @@ class DateRangePicker extends PureComponent {
     }
 
     return (
-      <div className='date-range-picker'>
-        <DateRangeInput
-          {...commonDateRangeProps}
-          className='date-range-picker-inputs'
-          popoverProps={{
-            minimal: true,
-            onOpened: this.removePopoverDismiss,
-            onOpening: () => {
-              this.addControls()
-              this.highlightSelectedShortcut()
-            },
-            position: Position.BOTTOM_LEFT,
-            popoverClassName: 'date-range-picker-popover',
-            shouldDismissPopover: false,
-            targetTagName: 'div',
-          }}
-          shortcuts={this.createShortcuts()}
-        />
-      </div>
+      <Popover
+        content={(
+          <BlueprintDateRangePicker
+            {...commonDateRangeProps}
+            shortcuts={this.createShortcuts()}
+          />
+        )}
+        hasBackdrop
+        onOpened={this.removePopoverDismiss}
+        onOpening={() => {
+          this.addControls()
+          this.highlightSelectedShortcut()
+        }}
+        popoverClassName='date-range-picker-popover'
+        transitionDuration={0}
+      >
+        {children}
+      </Popover>
     )
   }
 }

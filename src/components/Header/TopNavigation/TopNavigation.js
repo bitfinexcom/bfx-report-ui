@@ -9,6 +9,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
+import DateRangePicker from 'ui/DateRangePicker'
 import TimeRange from 'ui/TimeRange'
 import timeRangeTypes from 'state/timeRange/constants'
 
@@ -56,6 +57,7 @@ class TopNavigation extends PureComponent {
         <Popover
           minimal
           autoFocus={false}
+          hasBackdrop
           position={Position.BOTTOM}
           portalClassName='top-navigation-portal'
           onOpening={() => this.togglePopover(true)}
@@ -71,8 +73,13 @@ class TopNavigation extends PureComponent {
                   text={<TimeRange icon={false} />}
                 />
                 <MenuItem
-                  className='bp3-menu-item--subitem'
-                  text={t('timeframe.custom_time')}
+                  className='bp3-menu-item--subitem bp3-menu-item--timeframe-custom'
+                  shouldDismissPopover={false}
+                  text={(
+                    <DateRangePicker>
+                      {t('timeframe.custom_time')}
+                    </DateRangePicker>
+                  )}
                 />
                 <MenuItem
                   className='bp3-menu-item--subitem'

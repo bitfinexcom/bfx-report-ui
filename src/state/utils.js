@@ -109,10 +109,9 @@ export function formatTime(mts, {
     : moment(mts, 'x').format(format)
 }
 
-export function formatDate(mts, timezone) {
-  // MMM dd yyyy
+export function formatDate(mts, timezone, format = 'MMM DD YYYY') {
   if (timezone) {
-    return moment(mts, 'x').tz(timezone).utcOffset('0').format('MMM DD YYYY')
+    return moment(mts, 'x').tz(timezone).utcOffset('0').format(format)
       .toUpperCase()
   }
   return moment(mts, 'x').format('MMM DD YYYY').toUpperCase()
