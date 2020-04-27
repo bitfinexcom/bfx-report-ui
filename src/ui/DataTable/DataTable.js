@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { Menu } from '@blueprintjs/core'
 import {
   Column,
-  Table,
   CopyCellsMenuItem,
+  Table,
 } from '@blueprintjs/table'
 import _keys from 'lodash/keys'
 
