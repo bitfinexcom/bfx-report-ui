@@ -58,10 +58,30 @@ class SyncMode extends PureComponent {
     this.setState({ isOpen: false })
   }
 
+  getSyncIcon = () => {
+    const { syncMode, syncProgress } = this.props
+
+    switch (syncMode) {
+      case MODE_ONLINE:
+      default:
+        return <Icon.CHECKMARK_CIRCLE />
+      case MODE_SYNCING:
+        return (
+          <>
+            <Spinner size={20} />
+            <div className='bitfinex-sync-progress'>
+              {syncProgress}
+            </div>
+          </>
+        )
+      case MODE_OFFLINE:
+        return <Icon.CLOSE_CIRCLE />
+    }
+  }
+
   render() {
     const {
       syncMode,
-      syncProgress,
       t,
     } = this.props
     const { isOpen } = this.state
@@ -81,6 +101,8 @@ class SyncMode extends PureComponent {
       )
     }
 
+    const syncIcon = this.getSyncIcon()
+
     return (
       <Fragment>
         <Tooltip
@@ -91,16 +113,7 @@ class SyncMode extends PureComponent {
           <div className='sync-mode-wrapper' onClick={this.handleToggleClick}>
             <div className='sync-mode-icon-wrapper'>
               <div className='sync-mode-icon'>
-                {syncMode !== MODE_SYNCING
-                  ? <Icon.CHECKMARK_CIRCLE />
-                  : (
-                    <>
-                      <Spinner size={20} />
-                      <div className='bitfinex-sync-progress'>
-                        {syncProgress}
-                      </div>
-                    </>
-                  )}
+                {syncIcon}
               </div>
             </div>
             <span className='sync-mode-status'>{t(getTitle(syncMode))}</span>

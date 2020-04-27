@@ -22,6 +22,8 @@
     .bp3-popover-content {
       width: 223px;
       height: 100%;
+      margin-top: 5px;
+      margin-bottom: -5px;
       padding: 0;
 
       .bp3-input-group {
@@ -72,6 +74,12 @@
         background: transparent;
       }
 
+      li:last-child {
+        .bp3-menu-item {
+          border-bottom: none;
+        }
+      }
+
       &-item {
         width: 100%;
         padding: 5px 15px;
@@ -82,23 +90,6 @@
         &-label {
           font-size: 12px;
           color: var(--color);
-        }
-
-        &.bp3-active {
-          background-color: var(--multiActiveBg);
-          color: var(--multiActiveColor);
-
-          .bp3-menu-item-label {
-            color: var(--multiActiveColor);
-          }
-
-          &:hover {
-            color: var(--multiActiveHoverColor);
-
-            .bp3-menu-item-label {
-              color: var(--multiActiveHoverColor);
-            }
-          }
         }
 
         &:hover {
@@ -124,6 +115,23 @@
 
             .bp3-menu-item-label {
               color: var(--multiSelectedColor);
+            }
+          }
+        }
+
+        &.bp3-active {
+          background-color: var(--multiActiveBg);
+          color: var(--multiActiveColor);
+
+          .bp3-menu-item-label {
+            color: var(--multiActiveColor);
+          }
+
+          &:hover {
+            color: var(--multiActiveHoverColor) !important;
+
+            .bp3-menu-item-label {
+              color: var(--multiActiveHoverColor);
             }
           }
         }

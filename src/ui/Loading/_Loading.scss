@@ -1,14 +1,21 @@
 .loading {
   width: fit-content;
   height: fit-content;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -70%);
+  margin: 195px auto 0 auto;
+
+  &.bp3-spinner {
+    display: block;
+  }
 
   &-container {
     height: 100%;
     position: relative;
   }
 
+}
+
+@media screen and (max-width: 375px) {
+  .loading {
+    margin: 55px auto 0 auto;
+  }
 }

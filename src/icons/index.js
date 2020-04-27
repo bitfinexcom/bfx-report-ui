@@ -11,6 +11,7 @@ import { ReactComponent as CHEVRON_LEFT } from './chevron-left.svg'
 import { ReactComponent as CHEVRON_RIGHT } from './chevron-right.svg'
 import { ReactComponent as CHEVRON_UP } from './chevron-up.svg'
 import { ReactComponent as CLOSE } from './close.svg'
+import { ReactComponent as CLOSE_CIRCLE } from './close-circle.svg'
 import { ReactComponent as COLLAPSE_WIDE } from './collapse-wide.svg'
 import { ReactComponent as CURSOR_SQUARE } from './cursor-square.svg'
 import { ReactComponent as DARK_THEME } from './dark-theme.svg'
@@ -54,6 +55,7 @@ export default {
   CHEVRON_RIGHT,
   CHEVRON_UP,
   CLOSE,
+  CLOSE_CIRCLE,
   COLLAPSE_WIDE,
   CURSOR_SQUARE,
   DARK_THEME,

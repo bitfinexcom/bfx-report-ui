@@ -19,7 +19,7 @@
 
     &:hover, &:active, &.bp3-active {
       background-color: var(--buttonHoverBg);
-      border: 1px solid var(--buttonHoverBg);
+      border: 1px solid var(--borderColor);
       box-shadow: none;
     }
   }

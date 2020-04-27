@@ -9,7 +9,7 @@ svg.icon {
     }
   }
 
-  &--warning {
+  &--close-circle, &--warning {
     path {
       fill: var(--iconWarning);
     }
