@@ -49,6 +49,7 @@ class FundingPayment extends PureComponent {
       filteredData: entries,
       getFullTime,
       t,
+      target: TYPE,
       timeOffset,
     }).filter(({ id }) => columns[id])
 

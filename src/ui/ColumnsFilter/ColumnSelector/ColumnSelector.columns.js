@@ -27,7 +27,7 @@ const {
 } = DATA_TYPES
 
 const LEDGERS_COLUMNS = [
-  { id: 'id', name: 'id', type: INTEGER, filter: true },
+  { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
   { id: 'description', name: 'description', type: STRING, filter: true },
   { id: 'currency', name: 'currency' },
   { id: 'amount', name: 'amount', type: NUMBER, filter: true },
@@ -38,12 +38,19 @@ const LEDGERS_COLUMNS = [
   { id: 'wallet', name: 'wallet', type: STRING, filter: true },
 ]
 
-// name: translation keys `column.[name]`
+/**
+ * id: column id
+ * name: translation keys `column.[name]`
+ * type: column data type, used for filters
+ * frameworkOnly: shown only in framework mode
+ * filter: if column is filterable
+ * hidden: if column is hidden by default
+ */
 const SECTION_COLUMNS = {
   [MENU_LEDGERS]: LEDGERS_COLUMNS,
 
   [MENU_TRADES]: [
-    { id: 'id', name: 'id', type: INTEGER, filter: true },
+    { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'orderID', name: 'orderid', type: INTEGER, filter: true },
     { id: 'pair', name: 'pair' },
     { id: 'execAmount', name: 'amount', type: NUMBER, filter: true },
@@ -70,7 +77,7 @@ const SECTION_COLUMNS = {
   ],
 
   [MENU_MOVEMENTS]: [
-    { id: 'id', name: 'id', type: INTEGER, filter: true },
+    { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'mtsUpdated', name: 'date' },
     { id: 'currency', name: 'currency' },
     { id: 'status', name: 'status', type: STRING, filter: true },
@@ -93,7 +100,7 @@ const SECTION_COLUMNS = {
   ],
 
   [MENU_FOFFER]: [
-    { id: 'id', name: 'id', type: INTEGER, filter: true },
+    { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'symbol', name: 'currency' },
     { id: 'amountOrig', name: 'amount', type: NUMBER, filter: true },
     { id: 'amountExecuted', name: 'amount-exe', type: INTEGER, filter: true },
@@ -105,7 +112,7 @@ const SECTION_COLUMNS = {
   ],
 
   [MENU_FLOAN]: [
-    { id: 'id', name: 'id', type: INTEGER, filter: true },
+    { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'symbol', name: 'currency' },
     { id: 'side', name: 'side', type: INTEGER, filter: true },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
@@ -119,7 +126,7 @@ const SECTION_COLUMNS = {
   ],
 
   [MENU_FCREDIT]: [
-    { id: 'id', name: 'id', type: INTEGER, filter: true },
+    { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'symbol', name: 'currency' },
     { id: 'side', name: 'side', type: INTEGER, filter: true },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
@@ -137,21 +144,21 @@ const SECTION_COLUMNS = {
   [MENU_AFFILIATES_EARNINGS]: LEDGERS_COLUMNS,
 
   [MENU_PUBLIC_TRADES]: [
-    { id: 'id', name: 'id', type: INTEGER, filter: true },
+    { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'mts', name: 'time' },
     { id: 'type', name: 'type' },
     { id: 'price', name: 'price', type: NUMBER, filter: true },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
-    { id: 'pair', name: 'pair' },
+    { id: 'pair', name: 'pair', hidden: true },
   ],
 
   [MENU_PUBLIC_FUNDING]: [
-    { id: 'id', name: 'id', type: INTEGER, filter: true },
+    { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'mts', name: 'time' },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'rate', name: 'rate', type: NUMBER, filter: true },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
-    { id: 'currency', name: 'currency' },
+    { id: 'currency', name: 'currency', hidden: true },
   ],
 
   [MENU_TICKERS]: [
@@ -172,7 +179,7 @@ const SECTION_COLUMNS = {
   ],
 
   [MENU_LOGINS]: [
-    { id: 'id', name: 'id', type: INTEGER, filter: true },
+    { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'mts', name: 'date' },
     { id: 'ip', name: 'ip', type: STRING, filter: true },
     { id: 'browser', name: 'browser' },

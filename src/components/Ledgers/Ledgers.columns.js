@@ -1,10 +1,8 @@
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
+import queryConstants from 'state/query/constants'
 import { platform } from 'var/config'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
@@ -13,6 +11,7 @@ export default function getColumns(props) {
     filteredData,
     getFullTime,
     t,
+    target,
     timeOffset,
   } = props
 
@@ -31,20 +30,22 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => filteredData[rowIndex].id,
     },
-    {
-      id: 'description',
-      name: 'column.description',
-      width: 520,
-      renderer: (rowIndex) => {
-        const { description } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={description}>
-            {description}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].description,
-    },
+    ...insertIf(target !== queryConstants.MENU_FPAYMENT, (
+      {
+        id: 'description',
+        name: 'column.description',
+        width: 520,
+        renderer: (rowIndex) => {
+          const { description } = filteredData[rowIndex]
+          return (
+            <Cell tooltip={description}>
+              {description}
+            </Cell>
+          )
+        },
+        copyText: rowIndex => filteredData[rowIndex].description,
+      }
+    )),
     {
       id: 'currency',
       name: 'column.currency',
