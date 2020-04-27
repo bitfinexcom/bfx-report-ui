@@ -9,6 +9,8 @@ import _toString from 'lodash/toString'
 import _findKey from 'lodash/findKey'
 import _sortBy from 'lodash/sortBy'
 import _find from 'lodash/find'
+import _isNumber from 'lodash/isNumber'
+import _isNaN from 'lodash/isNaN'
 
 import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import FILTER_TYPES, { FILTER_QUERY_TYPES, FILTERS, FILTER_KEYS } from 'var/filterTypes'
@@ -25,7 +27,7 @@ const getValue = ({ dataType, value }) => {
     case NUMBER:
       return _toNumber(value)
     case INTEGER:
-      return _toInteger(value)
+      return _isNumber(value) ? _toInteger(value) : NaN
     case STRING:
       return _toString(value)
     default:
@@ -52,6 +54,9 @@ export const calculateFilterQuery = (filters = []) => {
     } = filter
 
     const filterValue = getValue({ dataType, value })
+    if ((dataType === NUMBER || dataType === INTEGER) && _isNaN(filterValue)) {
+      return acc
+    }
 
     switch (type) {
       case FILTERS.CONTAINS:
