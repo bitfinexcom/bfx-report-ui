@@ -1,0 +1,17 @@
+.export-success-dialog {
+  .icon--checked {
+    display: block;
+    margin: 23px auto 28px auto;
+  }
+
+  &-message {
+    width: 283px;
+    margin: 0 auto 10px auto;
+    text-align: center;
+  }
+
+  .bp3-button {
+    display: block;
+    margin: 0 auto;
+  }
+}

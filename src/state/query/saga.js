@@ -10,7 +10,7 @@ import _includes from 'lodash/includes'
 import { LANGUAGES_MAP } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
-import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { updateErrorStatus } from 'state/status/actions'
 import { getFilterQuery } from 'state/filters/selectors'
 import { getParams as getAccountBalanceParams } from 'state/accountBalance/selectors'
 import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliatesEarnings/selectors'
@@ -37,6 +37,7 @@ import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors
 import { getTimestamp } from 'state/wallets/selectors'
 import { getParams as getWinLossParams } from 'state/winLoss/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
+import { toggleExportSuccessDialog } from 'state/ui/actions'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
 } from 'state/base/selectors'
@@ -388,17 +389,7 @@ function* exportCSV({ payload: targets }) {
     }
     const { result, error } = yield call(getMultipleCsv, params)
     if (result) {
-      if (result.isSendEmail) {
-        yield put(updateSuccessStatus({
-          id: 'download.status.email',
-          topic: 'download.export',
-        }))
-      } else if (result.isSaveLocaly) {
-        yield put(updateSuccessStatus({
-          id: 'download.status.local',
-          topic: 'download.export',
-        }))
-      }
+      yield put(toggleExportSuccessDialog())
     }
 
     if (error) {

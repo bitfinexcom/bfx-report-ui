@@ -3,7 +3,7 @@ svg:not(.recharts-surface) path {
 }
 
 svg.icon {
-  &--checkmark-circle {
+  &--checked, &--checkmark-circle {
     path {
       fill: var(--iconCheckmark);
     }

@@ -157,10 +157,12 @@
     "store": "and store to your local folder.",
     "export": "Export",
     "cancel": "Cancel",
+    "okay": "Okay",
     "status": {
-      "local": "{{topic}} csv generated, please check your local 'csv' folder",
+      "local": "Export csv generated, please check your local 'csv' folder",
       "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
     },
+    "success": "Success",
     "targets": "Data to Export"
   },
   "fcredit": {

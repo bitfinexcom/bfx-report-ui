@@ -34,6 +34,7 @@ import TradedVolume from 'components/TradedVolume'
 import Trades from 'components/Trades'
 import Wallets from 'components/Wallets'
 import ExportDialog from 'components/ExportDialog'
+import ExportSuccessDialog from 'components/ExportSuccessDialog'
 import Preferences from 'components/Preferences'
 import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
@@ -279,6 +280,7 @@ class Main extends PureComponent {
           </Switch>
         </div>
         <ExportDialog />
+        <ExportSuccessDialog />
         {platform.showFrameworkMode && <FrameworkDialog />}
         <PaginationDialog />
         <Preferences />

@@ -10,6 +10,15 @@ export function toggleExportDialog() {
 }
 
 /**
+ * Create an action to show/hide export success dialog.
+ */
+export function toggleExportSuccessDialog() {
+  return {
+    type: types.TOGGLE_EXPORT_SUCCESS_DIALOG,
+  }
+}
+
+/**
  * Create an action to show/hide framework dialog.
  */
 export function toggleFrameworkDialog() {
@@ -84,6 +93,7 @@ export function uiResized() {
 
 export default {
   toggleExportDialog,
+  toggleExportSuccessDialog,
   toggleFrameworkDialog,
   proceedFrameworkRequest,
   togglePaginationDialog,

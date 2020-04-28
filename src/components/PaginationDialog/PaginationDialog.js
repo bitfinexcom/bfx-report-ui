@@ -29,9 +29,10 @@ class PaginationDialog extends PureComponent {
     return (
       <Dialog
         icon={IconNames.CONFIRM}
+        isCloseButtonShown={false}
+        isOpen={isOpen}
         onClose={() => this.handleProceed(false)}
         title={t('pagination.no_results')}
-        isOpen={isOpen}
       >
         <div className={Classes.DIALOG_BODY}>
           {t('pagination.last_data_timestamp', { date: getFullTime(latestPaginationTimestamp) })}
