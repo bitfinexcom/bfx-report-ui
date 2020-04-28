@@ -8,7 +8,7 @@ import {
 import { Select as BlueprintSelect } from '@blueprintjs/select'
 import _isObject from 'lodash/isObject'
 
-import Icon from 'icons'
+import Icons from 'icons'
 import { filterSelectorItem } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Select.props'
@@ -80,8 +80,8 @@ class Select extends PureComponent {
       : value
 
     const icon = isOpen
-      ? <Icon.CHEVRON_UP />
-      : <Icon.CHEVRON_DOWN />
+      ? <Icons.CHEVRON_UP />
+      : <Icons.CHEVRON_DOWN />
 
     const selectClasses = classNames('bitfinex-select', className)
     const popoverClasses = classNames('bitfinex-select-menu', popoverClassName)
@@ -91,6 +91,7 @@ class Select extends PureComponent {
         className={selectClasses}
         filterable={filterable}
         disabled={!items.length}
+        inputProps={filterable ? { leftIcon: <Icons.SEARCH className='bp3-icon' /> } : {}}
         items={items}
         itemRenderer={itemRenderer || this.itemRenderer}
         itemPredicate={filterable && filterSelectorItem}

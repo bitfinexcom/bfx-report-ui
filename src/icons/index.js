@@ -11,7 +11,6 @@ import { ReactComponent as CHEVRON_LEFT } from './chevron-left.svg'
 import { ReactComponent as CHEVRON_RIGHT } from './chevron-right.svg'
 import { ReactComponent as CHEVRON_UP } from './chevron-up.svg'
 import { ReactComponent as CLOSE } from './close.svg'
-import { ReactComponent as CLOSE_CIRCLE } from './close-circle.svg'
 import { ReactComponent as COLLAPSE_WIDE } from './collapse-wide.svg'
 import { ReactComponent as CURSOR_SQUARE } from './cursor-square.svg'
 import { ReactComponent as DARK_THEME } from './dark-theme.svg'
@@ -28,8 +27,10 @@ import { ReactComponent as LIST_NUMBER } from './list-number.svg'
 import { ReactComponent as LOOP } from './loop.svg'
 import { ReactComponent as MOVEMENTS } from './movements.svg'
 import { ReactComponent as NOTEBOOK } from './notebook.svg'
+import { ReactComponent as OFFLINE } from './offline.svg'
 import { ReactComponent as ORDERS } from './orders.svg'
 import { ReactComponent as REFRESH_DOUBLE } from './refresh-double.svg'
+import { ReactComponent as SEARCH } from './search.svg'
 import { ReactComponent as SIGN_IN } from './sign-in.svg'
 import { ReactComponent as SIGN_OUT } from './sign-out.svg'
 import { ReactComponent as SLIDER_CIRCLE_H } from './slider-circle-h.svg'
@@ -55,7 +56,6 @@ export default {
   CHEVRON_RIGHT,
   CHEVRON_UP,
   CLOSE,
-  CLOSE_CIRCLE,
   COLLAPSE_WIDE,
   CURSOR_SQUARE,
   DARK_THEME,
@@ -72,8 +72,10 @@ export default {
   LOOP,
   MOVEMENTS,
   NOTEBOOK,
+  OFFLINE,
   ORDERS,
   REFRESH_DOUBLE,
+  SEARCH,
   SIGN_IN,
   SIGN_OUT,
   SLIDER_CIRCLE_H,

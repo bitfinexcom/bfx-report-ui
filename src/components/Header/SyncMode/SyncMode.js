@@ -75,7 +75,7 @@ class SyncMode extends PureComponent {
           </>
         )
       case MODE_OFFLINE:
-        return <Icon.CLOSE_CIRCLE />
+        return <Icon.OFFLINE />
     }
   }
 
