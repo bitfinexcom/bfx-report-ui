@@ -189,6 +189,15 @@ body.#{$ns}-light {
   }
 }
 
+.section-positions-active, .section-positions-audit {
+  .section-switch {
+    .refresh-button {
+      vertical-align: middle;
+      margin-bottom: 1px;
+    }
+  }
+}
+
 .section-switch {
   margin-left: 1px;
   margin-bottom: 30px;
