@@ -23,6 +23,21 @@ body {
   padding: 0 0 0 0;
   font-family: "Roboto", sans-serif;
   font-size: 15px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: var(--tableScrollBg);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--tableScrollThumbBg);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background-color: var(--tableScrollThumbBg);
+  }
 }
 
 .app {
