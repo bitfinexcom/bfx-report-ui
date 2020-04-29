@@ -70,7 +70,7 @@
   }
 
   &.button--large {
-    width: 162px;
+    min-width: 162px;
     height: 40px;
   }
 }
@@ -85,6 +85,14 @@
 
     &:hover {
       border: none;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .bp3-button {
+    &.button--large {
+      min-width: 145px;
     }
   }
 }

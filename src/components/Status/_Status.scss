@@ -27,6 +27,21 @@
   }
 
   svg path {
-    fill: var(--toastIconColor);
+    fill: var(--toastIconColor) !important;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .bp3-toast {
+    min-height: 30px;
+    font-size: 13px;
+
+    &-message {
+      padding: 5px 11px;
+    }
+
+    .bp3-button-group {
+      padding: 0 5px;
+    }
   }
 }

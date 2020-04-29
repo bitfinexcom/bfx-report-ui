@@ -2,7 +2,6 @@
   &-data {
     &-item {
       display: inline-block;
-      vertical-align: top;
       width: fit-content;
       margin-right: 41px;
       margin-bottom: 35px;
@@ -19,7 +18,7 @@
 
       &:first-child {
         > div:first-child {
-          min-height: 35px;
+          margin-bottom: 10px;
         }
       }
 

@@ -8,6 +8,7 @@
 
   &-chart {
     width: 100%;
+    margin-left: 15px;
 
     .recharts-wrapper {
       height: 300px;
@@ -22,7 +23,7 @@
   }
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 850px) {
   .concentration-risk-data {
     flex-wrap: wrap;
 
