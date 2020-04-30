@@ -39,6 +39,16 @@ body {
   &::-webkit-scrollbar-corner {
     background-color: var(--tableScrollThumbBg);
   }
+
+  // firefox
+  scrollbar-width: thin;
+  scrollbar-color: var(--tableScrollThumbBg) var(--tableScrollBg);
+}
+
+html {
+  // firefox
+  scrollbar-width: thin;
+  scrollbar-color: var(--tableScrollThumbBg) var(--tableScrollBg);
 }
 
 .app {

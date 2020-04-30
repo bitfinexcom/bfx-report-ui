@@ -22,6 +22,10 @@
     &::-webkit-scrollbar-corner {
       background-color: var(--tableScrollThumbBg);
     }
+
+    // firefox
+    scrollbar-width: thin;
+    scrollbar-color: var(--tableScrollThumbBg) var(--tableScrollBg);
   }
 
   .bp3-table-cell-client {
