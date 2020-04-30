@@ -31,6 +31,10 @@ class DateRangePicker extends PureComponent {
 
     const { range, start, end } = props
 
+    const date = new Date()
+    date.setFullYear(date.getFullYear() - 6)
+    this.sixYearsBefore = date
+
     const { start: timeFrameStart, end: timeFrameEnd } = getTimeFrameFromData({ range, start, end })
     this.state = {
       startDate: timeFrameStart && new Date(timeFrameStart),
@@ -53,7 +57,7 @@ class DateRangePicker extends PureComponent {
     const confirm = document.createElement('button')
     confirm.classList.add('bp3-button', 'bp3-intent-primary', Classes.POPOVER_DISMISS)
     confirm.innerHTML = t('timeframe.custom.confirm')
-    confirm.addEventListener('click', this.startQuery)
+    confirm.addEventListener('click', this.onApply)
 
     controls.appendChild(cancel)
     controls.appendChild(confirm)
@@ -100,19 +104,9 @@ class DateRangePicker extends PureComponent {
   }
 
   handleRangeChange = (range) => {
-    const { updateWarningStatus } = this.props
     const [startDate, endDate] = range
     this.removePopoverDismiss()
-    const sixYearsPast = moment().add({ years: -6 })
     const shortcutIndex = getSelectedShortcutIndex({ range, shortcutsMap: this.shortcutsMap })
-
-    if (sixYearsPast.isAfter(startDate)) {
-      updateWarningStatus({
-        id: 'status.warn',
-        topic: 'timeframe.range_limit',
-      })
-      return
-    }
 
     if (startDate && endDate && !moment(startDate).isBefore(endDate)) {
       return
@@ -162,9 +156,9 @@ class DateRangePicker extends PureComponent {
     }
   }
 
-  startQuery = () => {
+  onApply = () => {
     const { startDate, endDate, shortcutIndex } = this.state
-    const { history, setTimeRange } = this.props
+    const { history, setTimeRange, updateSuccessStatus } = this.props
     if (startDate !== null && endDate !== null) {
       const start = startDate.getTime()
       const end = endDate.getTime()
@@ -190,6 +184,7 @@ class DateRangePicker extends PureComponent {
         )
         history.replace(`${pathname}?${queryString.stringify(params, { encode: false })}`)
       }
+      updateSuccessStatus({ id: 'status.timeframe_update' })
     }
   }
 
@@ -217,6 +212,7 @@ class DateRangePicker extends PureComponent {
       parseDate,
       onChange: this.handleRangeChange,
       defaultValue: [startDate, endDate],
+      minDate: this.sixYearsBefore,
       maxDate: new Date(),
       placeholder: t('timeframe.start-date-placeholder'),
     }

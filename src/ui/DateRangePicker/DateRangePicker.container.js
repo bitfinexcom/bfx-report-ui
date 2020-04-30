@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import { setTimeRange } from 'state/timeRange/actions'
-import { updateWarningStatus } from 'state/status/actions'
+import { updateSuccessStatus } from 'state/status/actions'
 import { getTimeRange } from 'state/timeRange/selectors'
 
 import DateRangePicker from './DateRangePicker'
@@ -19,7 +19,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   setTimeRange,
-  updateWarningStatus,
+  updateSuccessStatus,
 }
 
 const DateRangePickerContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(DateRangePicker))

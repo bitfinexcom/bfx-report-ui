@@ -315,7 +315,8 @@
     "noid": "dev: the status action should contain the id param",
     "request": {
       "error": "{{topic}} request fail {{detail}}"
-    }
+    },
+    "timeframe_update": "Time frame updated"
   },
   "symbols": {
     "title": "Get symbols"

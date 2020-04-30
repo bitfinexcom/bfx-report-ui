@@ -6,7 +6,7 @@ export const propTypes = {
   setTimeRange: PropTypes.func.isRequired,
   start: PropTypes.number,
   t: PropTypes.func.isRequired,
-  updateWarningStatus: PropTypes.func.isRequired,
+  updateSuccessStatus: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {}
