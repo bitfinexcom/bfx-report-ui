@@ -6,6 +6,12 @@
   vertical-align: baseline;
   text-align: center;
 
+  &-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   &:hover {
     box-shadow: none;
   }

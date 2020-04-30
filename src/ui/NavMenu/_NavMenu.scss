@@ -22,6 +22,7 @@
 
     div {
       display: inline-block;
+      width: 218px;
     }
 
     &.bp3-active {
@@ -108,6 +109,12 @@
 
     &--mobile {
       display: block;
+    }
+
+    .bp3-menu-item {
+      div {
+        width: 310px;
+      }
     }
   }
 }
