@@ -157,3 +157,18 @@
     fill: var(--activeColor);
   }
 }
+
+.bp3-html-select.bp3-minimal {
+  select {
+    color: var(--color);
+
+    &:hover {
+      color: var(--color);
+      background-color: var(--menuHover);
+    }
+
+    option {
+      background-color: var(--selectOptionBg);
+    }
+  }
+}

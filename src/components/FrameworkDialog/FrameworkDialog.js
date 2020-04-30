@@ -66,7 +66,7 @@ class FrameworkDialog extends PureComponent {
             checked={isFrameworkDialogDisabled}
             onChange={this.handleChange}
             label={t('framework.notagain')}
-            className='bitfinex-framework-checkbox'
+            className='framework-dialog-checkbox'
           />
         </div>
         <div className={Classes.DIALOG_FOOTER}>

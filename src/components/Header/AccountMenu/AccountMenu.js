@@ -67,7 +67,6 @@ class AccountMenu extends PureComponent {
             </div>
           )}
           targetTagName='div'
-          className='bitfinex-dropdown'
         >
           <div className='account-menu-wrapper'>
             <div className='account-menu-target'>

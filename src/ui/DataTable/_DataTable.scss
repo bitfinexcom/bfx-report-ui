@@ -31,6 +31,69 @@
   .bp3-table-cell-client {
     background-color: var(--bgColor);
   }
+
+  .bitfinex-green-text, .bitfinex-green-text > div {
+    color: var(--tableAmountPosColor);
+  }
+
+  .bitfinex-red-text, .bitfinex-red-text > div {
+    color: var(--tableAmountNegColor);
+  }
+
+  .bitfinex-amount {
+    &.bitfinex-green-text > .bitfinex-amount-fraction {
+      color: var(--tableAmountFractionPosColor);
+    }
+
+    &.bitfinex-red-text > .bitfinex-amount-fraction {
+      color: var(--tableAmountFractionNegColor);
+    }
+  }
+}
+
+.bp3-table {
+  &-container {
+    box-shadow: 0 0 0 1px var(--tableBorder);
+  }
+
+  &-column {
+    &-headers {
+      background-color: var(--thBg);
+      color: inherit;
+
+      .bp3-table-header {
+        box-shadow: 0 1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+      }
+    }
+
+    &-name {
+      font-size: 13px;
+      color: var(--thColor);
+    }
+  }
+
+  &-selection-enabled .bp3-table-header:hover::before {
+    background-color: var(--thBgHover);
+  }
+
+  &-quadrant-scroll-container {
+    background-color: var(--bgColor);
+  }
+
+  &-cell {
+    color: var(--tableColor);
+    box-shadow: inset 0 -1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+
+    &-ledger {
+      &-even {
+        background-color: var(--tableEvenBg);
+      }
+
+      &-odd {
+        background-color: var(--tableOddBg);
+      }
+    }
+  }
 }
 
 .bp3-card {

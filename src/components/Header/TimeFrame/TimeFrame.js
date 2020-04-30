@@ -50,7 +50,6 @@ class TimeFrame extends PureComponent {
             </div>
           )}
           targetTagName='div'
-          className='bitfinex-dropdown'
         >
           <div className='timeframe-wrapper'>
             <div className='timeframe-target'>

@@ -133,7 +133,6 @@ class TopNavigation extends PureComponent {
           )}
           targetTagName='div'
           popoverClassName='top-navigation-popover'
-          className='bitfinex-dropdown'
         >
           <span>
             <Icon.CLOSE />
