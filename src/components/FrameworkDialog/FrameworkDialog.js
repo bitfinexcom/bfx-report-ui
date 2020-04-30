@@ -54,6 +54,7 @@ class FrameworkDialog extends PureComponent {
 
     return (
       <Dialog
+        className='framework-dialog'
         icon={<Icon.TRAY_IMPORT />}
         onClose={() => this.handleProceed(false)}
         title={title}
@@ -61,15 +62,12 @@ class FrameworkDialog extends PureComponent {
         isOpen={isOpen}
       >
         <div className={Classes.DIALOG_BODY}>
-          <br />
           <Checkbox
             checked={isFrameworkDialogDisabled}
             onChange={this.handleChange}
             label={t('framework.notagain')}
             className='bitfinex-framework-checkbox'
           />
-          <br />
-          <br />
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>

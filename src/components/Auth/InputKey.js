@@ -23,7 +23,6 @@ export const InputKey = ({
       value={value}
       onChange={onChange}
     />
-    <br />
   </Fragment>
 )
 

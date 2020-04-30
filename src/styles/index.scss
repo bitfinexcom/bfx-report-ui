@@ -10,6 +10,7 @@
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "components/ExportDialog/_ExportDialog.scss";
 @import "components/ExportSuccessDialog/_ExportSuccessDialog.scss";
+@import "components/FrameworkDialog/_FrameworkDialog.scss";
 @import "components/Header/_Header.scss";
 @import "components/Header/TimeFrame/_TimeFrame.scss";
 @import "components/Preferences/_Preferences.scss";
@@ -49,6 +50,10 @@ html {
   // firefox
   scrollbar-width: thin;
   scrollbar-color: var(--tableScrollThumbBg) var(--tableScrollBg);
+}
+
+br {
+  height: 18px;
 }
 
 .app {
