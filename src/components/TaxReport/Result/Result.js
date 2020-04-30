@@ -100,15 +100,16 @@ class TaxReport extends PureComponent {
     })
 
     return (
-      <div className='movements'>
+      <Fragment>
         <div className='table-section-title'>
           {t('taxreport.movements')}
         </div>
         <DataTable
+          className='movements-table'
           numRows={movements.length}
           tableColumns={movementsColumns}
         />
-      </div>
+      </Fragment>
     )
   }
 
