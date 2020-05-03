@@ -46,7 +46,10 @@ class Preferences extends PureComponent {
             <div>{t('preferences.language')}</div>
             <LangMenu />
           </div>
-          <ThemeSwitcher />
+          <div className='preferences-row preferences-item'>
+            <div>{t('preferences.theme')}</div>
+            <ThemeSwitcher />
+          </div>
           <div className='preferences-row preferences-timezones'>
             <div className='preferences-item'>
               <div>{t('preferences.timezone')}</div>
