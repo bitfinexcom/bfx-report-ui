@@ -14,7 +14,12 @@ export const mapCurrency = currency => (_includes(currency, ':') ? mapPair(curre
 
 // 'BAB from wallet exchange' -> 'BCH from wallet exchange'
 export const mapDescription = (description) => {
-  const mapKeys = Object.keys(symbolMap)
+  let mapKeys = Object.keys(symbolMap)
+  // workaround for exception case when BAB is mapped into BCH and then BCH into pBCH
+  if (mapKeys.BCH) {
+    mapKeys = mapKeys.filter(key => key === 'BCH')
+    mapKeys.push('BCH')
+  }
   return mapKeys.reduce((desc, symbol) => desc.replace(new RegExp(symbol, 'g'), symbolMap[symbol]), description)
 }
 
