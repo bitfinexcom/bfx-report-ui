@@ -51,7 +51,7 @@
     display: inline-block;
     vertical-align: top;
     margin: 0 3px 0 10px;
-    font-size: 15px;
+    font-size: 1rem;
   }
 
   .bp3-popover-content {
@@ -72,6 +72,7 @@
 
     .bp3-input {
       width: 100%;
+      font-size: 0.9rem;
       background-color: var(--bgColor);
       text-align: center;
 
@@ -87,6 +88,52 @@
 
     .bp3-button {
       margin-top: 15px;
+    }
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .timeframe {
+    height: 70px;
+    line-height: 70px;
+
+    &-wrapper {
+      height: 70px;
+    }
+
+    svg {
+      height: 70px;
+    }
+
+    &-range {
+      margin: 0 5px 0 14px;
+    }
+
+    .bp3-popover-target {
+      height: 71px;
+    }
+
+    &-target {
+      svg {
+        width: 28px;
+      }
+    }
+
+    &-popover {
+      width: 372px;
+      padding: 25px 25px;
+
+      .bp3-input {
+        &-group {
+          .bp3-input {
+            height: 40px;
+          }
+        }
+      }
+
+      .bp3-button {
+        margin-top: 20px;
+      }
     }
   }
 }

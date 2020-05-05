@@ -2,6 +2,7 @@
 @import "./fonts/roboto.css";
 @import './button.scss';
 @import './checkbox.scss';
+@import './modals.scss';
 @import './popover.scss';
 @import './radio.scss';
 
@@ -19,6 +20,10 @@
 @import "icons/_icons.scss";
 @import "ui/_index.scss";
 @import "themes";
+
+html {
+  font-size: 15px;
+}
 
 body {
   margin: 0;
@@ -61,7 +66,7 @@ html {
 
 .bitfinex-dataset {
   display: inline-block;
-  min-height: calc(100vh - 52px); // minus header height
+  min-height: calc(100vh - 51px); // minus header height
   flex: 1;
   min-width: 1px;
   padding: 0;
@@ -214,15 +219,39 @@ a {
   }
 }
 
+.extra-line-height {
+  line-height: 1.2;
+}
+
 .bp3-spinner {
   display: inline-block;
   vertical-align: top;
 }
 
-@media screen and (max-width: 375px) {
-  body {
-    font-size: 13px;
+@media screen and (min-width: 2560px) {
+  html {
+    font-size: 20px;
+  }
 
+  body {
+    font-size: 20px;
+
+    .bp3-card {
+      padding: 40px 50px 0 50px;
+    }
+  }
+
+  .bitfinex-dataset {
+    min-height: calc(100vh - 71px); // minus header height
+  }
+}
+
+@media screen and (max-width: 375px) {
+  html {
+    font-size: 13px;
+  }
+
+  body {
     .app {
       flex-direction: column;
     }

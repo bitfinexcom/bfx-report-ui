@@ -1,13 +1,5 @@
 .bitfinex-auth {
   .bp3-dialog {
-    &-header {
-      .bp3-heading {
-        margin: 0;
-        font-weight: 400;
-        color: var(--color);
-      }
-    }
-
     &-body {
       margin-top: 10px;
       font-size: 15px;
@@ -46,5 +38,50 @@
 
   &-check {
     width: 136px;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .bitfinex-auth {
+    .bp3-dialog {
+      &-body {
+        font-size: 20px;
+
+        > .platform-logo {
+          width: 280px;
+          height: fit-content;
+          margin: 25px auto 30px auto;
+        }
+
+        > .bp3-callout {
+          margin: 0 auto 30px;
+          padding: 12px 21px 11px;
+          font-size: 20px;
+        }
+
+        .bp3-form-group {
+          margin-left: 5px;
+          margin-bottom: 5px;
+        }
+
+        .bp3-input {
+          height: 40px;
+          padding: 0 15px;
+          font-size: 20px;
+
+          &-group {
+            margin-bottom: 18px;
+          }
+        }
+      }
+
+      &-footer {
+        margin: 0 25px;
+      }
+    }
+
+    &-check {
+      width: 150px;
+    }
   }
 }

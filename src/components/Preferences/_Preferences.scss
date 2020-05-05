@@ -63,3 +63,29 @@
     width: 14px;
   }
 }
+
+@media screen and (min-width: 2560px) {
+  .preferences {
+    width: 590px;
+
+    &-row {
+      margin-bottom: 30px;
+    }
+
+    &-item {
+      &:not(:last-child) {
+        margin-right: 30px;
+      }
+
+      & > span, & > .theme-switcher {
+        margin-top: 15px;
+      }
+    }
+
+    &-timezones {
+      .preferences-item {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

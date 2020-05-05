@@ -12,7 +12,7 @@
     height: 50px;
     line-height: 50px;
     padding: 0 0 0 20px;
-    font-size: 18px;
+    font-size: 1.2rem;
     border-radius: 0;
 
     svg {
@@ -60,7 +60,6 @@
         height: 40px;
         line-height: 40px;
         padding-left: 18px;
-        font-size: 15px;
         background-color: var(--bgColor);
         color: var(--color);
 
@@ -71,6 +70,28 @@
 
       &-divider {
         display: none;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .bitfinex-nav-menu {
+    width: 346px;
+
+    .bp3-menu {
+      &-item {
+        height: 60px;
+        line-height: 60px;
+
+        svg {
+          width: 28px;
+          height: 60px;
+        }
+
+        div {
+          width: 278px;
+        }
       }
     }
   }

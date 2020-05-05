@@ -72,7 +72,13 @@ class Candlestick extends React.PureComponent {
 
     const element = document.getElementById('candlestick')
     const width = element.offsetWidth
-    const height = 500
+    let height = 520
+    if (window.innerHeight <= 812) {
+      height = 420
+    }
+    if (window.innerHeight >= 1440) {
+      height = 850
+    }
 
     const chart = createChart(element, {
       width,

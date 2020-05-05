@@ -27,3 +27,26 @@
     margin-right: 15px;
   }
 }
+
+@media screen and (min-width: 2560px) {
+  .bp3-dialog {
+    width: 620px;
+
+    &-header {
+      min-height: 49px;
+
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .bp3-heading {
+        font-size: 20px;
+      }
+    }
+
+    &-body {
+      margin: 30px 25px;
+    }
+  }
+}

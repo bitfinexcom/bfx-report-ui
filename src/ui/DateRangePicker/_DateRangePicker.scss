@@ -107,6 +107,68 @@
   }
 }
 
+@media screen and (min-width: 2560px) {
+  .date-range-picker-popover {
+    top: -115px;
+    left: -285px;
+  }
+
+  .bp3-daterangepicker {
+    width: 758px;
+    padding: 30px 20px;
+
+    .DayPicker-NavButton {
+      &--next {
+        margin-right: 5px;
+      }
+    }
+
+    .DayPicker {
+      margin: 0 35px 10px 35px;
+
+      .bp3-datepicker {
+        &-month-select, &-year-select {
+          select {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .DayPicker-Month {
+        width: 250px;
+        height: 221px;
+        margin: 0 10px;
+      }
+    }
+
+    .date-range-picker-controls {
+      margin: 13px 10px 0 10px;
+
+      button:first-child {
+        margin-right: 10px;
+      }
+    }
+
+    .bp3-daterangepicker-shortcuts {
+      width: 100%;
+      margin-top: 8px;
+      padding: 0 5px;
+
+      li {
+        margin-right: 10px;
+        margin-bottom: 8px;
+
+        .bp3-menu-item {
+          padding: 0 13px;
+          height: 40px;
+          line-height: 38px;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .date-range-picker-popover {
     position: absolute;

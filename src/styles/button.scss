@@ -95,6 +95,24 @@
   }
 }
 
+@media screen and (min-width: 2560px) {
+  .bp3-button {
+    min-width: 120px;
+    height: 40px;
+    font-size: 20px;
+
+    &.button--medium {
+      width: 143px;
+      height: 50px;
+    }
+
+    &.button--large {
+      min-width: 182px;
+      height: 50px;
+    }
+  }
+}
+
 @media screen and (max-width: 375px) {
   .bp3-button {
     &.button--large {

@@ -19,7 +19,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.ORDER_ID,
+      width: COLUMN_WIDTHS.LEDGERS_ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -34,7 +34,7 @@ export default function getColumns(props) {
       {
         id: 'description',
         name: 'column.description',
-        width: 520,
+        width: COLUMN_WIDTHS.LEDGERS_DESCRIPTION,
         renderer: (rowIndex) => {
           const { description } = filteredData[rowIndex]
           return (
@@ -169,7 +169,7 @@ export default function getColumns(props) {
     {
       id: 'wallet',
       name: 'column.wallet',
-      width: 80,
+      width: COLUMN_WIDTHS.LEDGERS_WALLET,
       renderer: (rowIndex) => {
         const { wallet } = filteredData[rowIndex]
         return (

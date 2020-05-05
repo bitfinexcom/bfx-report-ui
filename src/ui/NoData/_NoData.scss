@@ -21,6 +21,14 @@
   }
 }
 
+@media screen and (min-width: 2560px) {
+  .no-data {
+    &-wrapper {
+      margin: 262px auto 0 auto;
+    }
+  }
+}
+
 @media screen and (max-width: 375px) {
   .no-data {
     &-wrapper {

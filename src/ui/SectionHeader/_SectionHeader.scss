@@ -63,6 +63,43 @@
   }
 }
 
+@media screen and (min-width: 2560px) {
+  .section-header {
+    margin-bottom: 36px;
+
+    &-title {
+      margin-bottom: 20px;
+      font-size: 38px;
+      color: var(--activeColor);
+    }
+
+    &-row {
+      margin-bottom: -10px;
+
+      > * {
+        display: inline-block;
+        vertical-align: bottom;
+        margin-bottom: 10px;
+
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+    }
+
+    &-item {
+      &-label {
+        margin-bottom: 10px;
+      }
+    }
+
+    &-time-range {
+      font-size: 20px;
+      margin: 0 2px 22px 2px;
+    }
+  }
+}
+
 @media screen and (max-width: 375px) {
   .section-header {
     &-title {

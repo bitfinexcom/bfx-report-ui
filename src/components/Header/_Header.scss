@@ -8,7 +8,7 @@
   height: 50px;
   box-shadow: 0 0 0 1px var(--borderColor);
   margin-bottom: 1px;
-  font-size: 15px;
+  font-size: 1rem;
 
   &-brand {
     position: relative;
@@ -72,6 +72,46 @@
     width: 273px;
     height: 100%;
     border-right: 1px solid var(--borderColor);
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .header {
+    height: 70px;
+
+    &-brand {
+      width: 347px;
+
+      &-logo, .platform-logo {
+        width: 250px;
+        height: 31px;
+      }
+    }
+
+    .timeframe-shortcut, .export, .sync-mode {
+      padding: 0 20px;
+      line-height: 70px;
+
+      svg {
+        width: 28px;
+        height: 70px;
+      }
+
+      span {
+        margin-left: 14px;
+      }
+    }
+
+    .sync-mode {
+      .bp3-popover-target {
+        height: 70px;
+      }
+    }
+
+    &-timeframe {
+      width: 371px;
+      height: 100%;
+    }
   }
 }
 

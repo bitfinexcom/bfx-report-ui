@@ -48,6 +48,30 @@
   }
 }
 
+@media screen and (min-width: 2560px) {
+  .bp3-multi-select {
+    min-width: 253px;
+    min-height: 50px;
+
+    &-tag-input-input {
+      font-size: 18px;
+    }
+
+    .bp3-tag-input-values {
+      .bp3-tag {
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+
+    &-arrow {
+      top: 12px;
+    }
+  }
+}
+
+
 @media screen and (max-width: 375px) {
   .bp3-multi-select {
     min-width: 150px;

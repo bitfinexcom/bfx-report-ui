@@ -16,3 +16,14 @@
     vertical-align: middle;
   }
 }
+
+@media screen and (min-width: 2560px) {
+  .time-range {
+    font-size: 24px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

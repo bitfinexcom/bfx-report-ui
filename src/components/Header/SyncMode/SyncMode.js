@@ -127,9 +127,9 @@ class SyncMode extends PureComponent {
           isCloseButtonShown={false}
         >
           <div className={Classes.DIALOG_BODY}>
-            { syncMode === MODE_ONLINE
-              ? t('sync.description')
-              : t('sync.sync-description') }
+            <p className='extra-line-height'>
+              {syncMode === MODE_ONLINE ? t('sync.description') : t('sync.sync-description')}
+            </p>
           </div>
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>

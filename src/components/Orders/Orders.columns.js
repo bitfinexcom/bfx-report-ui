@@ -55,7 +55,7 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'column.type',
-      width: 135,
+      width: COLUMN_WIDTHS.ORDER_TYPE,
       renderer: (rowIndex) => {
         const { type } = filteredData[rowIndex]
         return (
@@ -172,7 +172,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'column.status',
-      width: 165,
+      width: COLUMN_WIDTHS.ORDER_STATUS,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -204,7 +204,7 @@ export default function getColumns(props) {
     {
       id: 'typePrev',
       name: 'column.typeprev',
-      width: 145,
+      width: COLUMN_WIDTHS.ORDER_TYPE,
       renderer: (rowIndex) => {
         const { typePrev } = filteredData[rowIndex]
         return (

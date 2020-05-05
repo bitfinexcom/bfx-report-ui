@@ -59,7 +59,7 @@
   &-username {
     vertical-align: top;
     margin: 0 3px 0 10px;
-    font-size: 15px;
+    font-size: 1rem;
     text-overflow: ellipsis;
     max-width: 287px;
     display: inline-block;
@@ -145,6 +145,55 @@
 
   &-export, &-sync {
     display: none;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .account-menu {
+    min-width: 248px;
+    max-width: 415px;
+    height: 70px;
+    line-height: 70px;
+
+    &-wrapper {
+      height: 70px;
+    }
+
+    &-target {
+      padding: 0 20px;
+
+      svg {
+        width: 28px;
+      }
+    }
+
+    svg {
+      height: 70px;
+    }
+
+    &-username {
+      margin: 0 5px 0 14px;
+      max-width: 327px;
+    }
+
+    &-content {
+      min-width: 238px;
+
+      .bp3-menu {
+        &-item {
+          height: 60px;
+          line-height: 60px;
+
+          svg {
+            height: 60px;
+          }
+        }
+      }
+    }
+
+    .bp3-popover-target {
+      height: 71px;
+    }
   }
 }
 

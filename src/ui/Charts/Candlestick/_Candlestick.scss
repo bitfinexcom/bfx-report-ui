@@ -16,6 +16,8 @@
     pointer-events: none;
     border: 2px solid;
     border-radius: 2px;
+    color: var(--color);
+    background-color: var(--bgColor);
   }
 
   &-candle {
@@ -75,16 +77,22 @@
   }
 }
 
-.bp3-dark {
-  .candlestick-tooltip {
-    color: #ebecee;
-    background-color: #273d4d;
-  }
-}
+@media screen and (min-width: 2560px) {
+  .candlestick {
+    &-tooltip {
+      width: 220px;
+      height: 124px;
+      padding: 15px;
+      font-size: 18px;
+    }
 
-.bp3-light {
-  .candlestick-tooltip {
-    color: #273d4d;
-    background-color: #ffffff;
+    &-trades-toggle {
+      &-icon {
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
   }
 }

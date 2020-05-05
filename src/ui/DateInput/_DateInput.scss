@@ -53,3 +53,31 @@
     margin-top: 5px !important;
   }
 }
+
+@media screen and (min-width: 2560px) {
+  .date-input-popover {
+    .bp3-input {
+      height: 50px;
+      font-size: 18px;
+    }
+
+    .bp3-input-action {
+      svg {
+        height: 50px;
+        line-height: 50px;
+      }
+    }
+  }
+
+  .bp3-datepicker {
+    .DayPicker {
+      .bp3-datepicker {
+        &-month-select, &-year-select {
+          select {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -26,3 +26,11 @@
     width: 14px;
   }
 }
+
+@media screen and (min-width: 2560px) {
+  .export-dialog {
+    &-notice {
+      line-height: 27px;
+    }
+  }
+}

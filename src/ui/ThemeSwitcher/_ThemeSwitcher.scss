@@ -11,3 +11,18 @@
     }
   }
 }
+
+@media screen and (min-width: 2560px) {
+  .theme-switcher {
+    &-theme {
+      svg {
+        transform: scale(1.3);
+        margin: 13px 11px 25px 11px;
+      }
+
+      &:first-of-type {
+        margin-right: 70px;
+      }
+    }
+  }
+}
