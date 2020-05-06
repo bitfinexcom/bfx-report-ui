@@ -200,8 +200,15 @@ class DateRangePicker extends PureComponent {
     })
   }
 
+  onClose = () => {
+    const { onClose } = this.props
+    if (onClose) {
+      onClose()
+    }
+  }
+
   render() {
-    const { children, t } = this.props
+    const { children, isOpen, t } = this.props
     const { startDate, endDate } = this.getDates()
     const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, baseTypes.DEFAULT_TIMEZONE)
     const commonDateRangeProps = {
@@ -225,12 +232,14 @@ class DateRangePicker extends PureComponent {
             shortcuts={this.createShortcuts()}
           />
         )}
+        isOpen={isOpen === undefined ? undefined : isOpen}
         hasBackdrop
         onOpened={this.removePopoverDismiss}
         onOpening={() => {
           this.addControls()
           this.highlightSelectedShortcut()
         }}
+        onClose={this.onClose}
         popoverClassName='date-range-picker-popover'
         transitionDuration={0}
       >

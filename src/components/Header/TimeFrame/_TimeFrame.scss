@@ -70,6 +70,10 @@
     border-radius: 0;
     text-align: right;
 
+    .bp3-popover-target {
+      width: 100%;
+    }
+
     .bp3-input {
       width: 100%;
       font-size: 0.9rem;
@@ -82,12 +86,15 @@
 
       &-group {
         margin: 0 auto 12px auto;
-        pointer-events: none;
-      }
-    }
 
-    .bp3-button {
-      margin-top: 15px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .bp3-input {
+          cursor: pointer;
+        }
+      }
     }
   }
 }
@@ -129,10 +136,6 @@
             height: 40px;
           }
         }
-      }
-
-      .bp3-button {
-        margin-top: 20px;
       }
     }
   }

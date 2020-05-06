@@ -1,9 +1,7 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import {
-  Button,
   InputGroup,
-  Intent,
   Popover,
   Position,
 } from '@blueprintjs/core'
@@ -15,6 +13,16 @@ import { DEFAULT_DATETIME_FORMAT, formatDate } from 'state/utils'
 import { propTypes, defaultProps } from './TimeFrame.props'
 
 class TimeFrame extends PureComponent {
+  state = {
+    isOpen: false,
+  }
+
+  onToggle = (isOpen) => {
+    this.setState(() => ({
+      isOpen,
+    }))
+  }
+
   render() {
     const {
       end,
@@ -22,6 +30,7 @@ class TimeFrame extends PureComponent {
       t,
       timezone,
     } = this.props
+    const { isOpen } = this.state
 
     const timeSpan = `${formatDate(start, timezone)} - ${formatDate(end, timezone)}`
 
@@ -32,20 +41,21 @@ class TimeFrame extends PureComponent {
           position={Position.BOTTOM}
           content={(
             <div className='timeframe-popover'>
-              <InputGroup
-                placeholder={t('timeframe.start-date-placeholder')}
-                readOnly
-                value={formatDate(start, timezone, DEFAULT_DATETIME_FORMAT)}
-              />
-              <InputGroup
-                placeholder={t('timeframe.end-date-placeholder')}
-                readOnly
-                value={formatDate(end, timezone, DEFAULT_DATETIME_FORMAT)}
-              />
-              <DateRangePicker>
-                <Button intent={Intent.PRIMARY}>
-                  {t('timeframe.custom.view')}
-                </Button>
+              <DateRangePicker isOpen={isOpen} onClose={() => this.onToggle(false)}>
+                <Fragment>
+                  <InputGroup
+                    onClick={() => this.onToggle(true)}
+                    placeholder={t('timeframe.start-date-placeholder')}
+                    readOnly
+                    value={formatDate(start, timezone, DEFAULT_DATETIME_FORMAT)}
+                  />
+                  <InputGroup
+                    onClick={() => this.onToggle(true)}
+                    placeholder={t('timeframe.end-date-placeholder')}
+                    readOnly
+                    value={formatDate(end, timezone, DEFAULT_DATETIME_FORMAT)}
+                  />
+                </Fragment>
               </DateRangePicker>
             </div>
           )}
