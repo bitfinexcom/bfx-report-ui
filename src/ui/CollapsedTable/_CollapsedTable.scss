@@ -50,3 +50,9 @@
     text-overflow: ellipsis;
   }
 }
+
+@media screen and (max-width: 375px) {
+  .collapsed-table {
+    margin-bottom: 30px;
+  }
+}

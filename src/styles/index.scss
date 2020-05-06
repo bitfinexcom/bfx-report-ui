@@ -257,7 +257,16 @@ a {
     }
 
     .bp3-card {
+      display: flex;
       padding: 12px 18px 0 18px;
     }
+  }
+
+  .collapsed-table {
+    order: 2;
+  }
+
+  .pagination {
+    order: 1
   }
 }
