@@ -92,6 +92,20 @@
           color: var(--color);
         }
 
+        &.bitfinex-queried-symbol {
+          background-color: var(--multiQueriedBg);
+          color: var(--multiQueriedColor);
+
+          &:hover {
+            background-color: var(--multiQueriedHoverBg);
+            color: var(--multiQueriedColor);
+
+            .bp3-menu-item-label {
+              color: var(--multiQueriedColor);
+            }
+          }
+        }
+
         &:hover {
           background-color: var(--multiHoverBg);
           color: var(--activeColor);
@@ -128,7 +142,8 @@
           }
 
           &:hover {
-            color: var(--multiActiveHoverColor) !important;
+            background-color: var(--multiActiveHoverBg);
+            color: var(--multiActiveHoverColor);
 
             .bp3-menu-item-label {
               color: var(--multiActiveHoverColor);

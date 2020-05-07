@@ -13,20 +13,6 @@
       fill: var(--popoverBg);
     }
   }
-
-  .bp3-menu-item {
-    &.bp3-intent {
-      &-primary {
-        background-color: var(--buttonBg);
-        color: var(--color);
-
-        &:hover {
-          background-color: var(--buttonHoverBg);
-          color: var(--color);
-        }
-      }
-    }
-  }
 }
 
 .bp3-tooltip {
