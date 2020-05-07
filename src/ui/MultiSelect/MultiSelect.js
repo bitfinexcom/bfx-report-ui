@@ -30,6 +30,9 @@ class MultiSelect extends PureComponent {
 
     const classes = classNames('bitfinex-select', className)
 
+    const placeholder = isOpen
+      ? ''
+      : t('selector.select')
     const icon = isOpen
       ? <Icon.CHEVRON_UP className='bp3-multi-select-arrow' />
       : <Icon.CHEVRON_DOWN className='bp3-multi-select-arrow' />
@@ -37,7 +40,7 @@ class MultiSelect extends PureComponent {
     return (
       <BlueprintMultiSelect
         className={classes}
-        placeholder={t('selector.select')}
+        placeholder={placeholder}
         popoverProps={this.popoverProps}
         {...selectProps}
         tagInputProps={{
