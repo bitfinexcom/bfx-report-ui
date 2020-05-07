@@ -22,7 +22,7 @@ const platforms = {
     HOME_URL: 'http://localhost:3000',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     showAuthPage: true,
-    showFrameworkMode: false,
+    showFrameworkMode: true,
   },
 }
 
