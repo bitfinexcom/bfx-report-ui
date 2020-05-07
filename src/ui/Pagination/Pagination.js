@@ -71,13 +71,9 @@ class Pagination extends PureComponent {
     ) : ''
 
     const renderLoading = loading ? (
-      <Fragment>
-        <Spinner size={5} />
-        {' '}
-        <span className='bitfinex-show-soft'>
-          {t('pagination.loading')}
-        </span>
-      </Fragment>
+      <span className='pagination-loading'>
+        <Spinner size={6} />
+      </span>
     ) : undefined
 
     return (

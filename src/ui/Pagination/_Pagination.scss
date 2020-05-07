@@ -24,6 +24,14 @@
     margin: 0 2px;
     text-align: center;
   }
+
+  &-loading {
+    margin-left: 15px;
+
+    .bp3-spinner {
+      vertical-align: middle;
+    }
+  }
 }
 
 @media screen and (min-width: 2560px) {
@@ -55,5 +63,10 @@
 @media screen and (max-width: 375px) {
   .pagination {
     margin: 10px auto 25px auto;
+
+    &-loading {
+      position: absolute;
+      margin-top: 5px;
+    }
   }
 }
