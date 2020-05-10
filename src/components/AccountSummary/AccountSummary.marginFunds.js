@@ -14,7 +14,9 @@ const getColumns = (props) => {
     {
       id: 'currency',
       name: 'column.currency',
-      width: 250,
+      width: window.innerWidth > 375
+        ? 250
+        : COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { curr } = data[rowIndex]
         return (

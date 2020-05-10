@@ -9,6 +9,7 @@ import {
   SectionHeaderItem,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
+import TimeRange from 'ui/TimeRange'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
 import PairSelector from 'ui/PairSelector'
@@ -78,6 +79,7 @@ class PublicTrades extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('publictrades.title')}</SectionHeaderTitle>
+          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>

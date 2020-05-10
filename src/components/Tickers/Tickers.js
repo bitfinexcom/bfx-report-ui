@@ -9,6 +9,7 @@ import {
   SectionHeaderRow,
   SectionHeaderTitle,
 } from 'ui/SectionHeader'
+import TimeRange from 'ui/TimeRange'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
@@ -85,6 +86,7 @@ class Tickers extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('tickers.title')}</SectionHeaderTitle>
+          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>

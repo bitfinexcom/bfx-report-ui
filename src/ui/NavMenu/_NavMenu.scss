@@ -134,7 +134,7 @@
 
     .bp3-menu-item {
       div {
-        width: 310px;
+        width: calc(100% - 38px);
       }
     }
   }
