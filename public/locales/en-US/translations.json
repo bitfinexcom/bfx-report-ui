@@ -265,6 +265,7 @@
     "timezone-input": "Input Timezone",
     "dateformat": "Date Format",
     "milliseconds": "Display Milliseconds",
+    "table_scroll": "Table Scroll",
     "sync": {
       "add-filter": "Add Filter",
       "add-pair": "Add Pair",

@@ -11,6 +11,7 @@ import Icon from 'icons'
 import DateFormatSelector from 'ui/DateFormatSelector'
 import LangMenu from 'ui/LangMenu'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
+import TableScrollPref from 'ui/TableScrollPref'
 import TimezonePicker from 'ui/TimezonePicker'
 import ThemeSwitcher from 'ui/ThemeSwitcher'
 
@@ -73,6 +74,10 @@ class Preferences extends PureComponent {
           <div className='preferences-row'>
             <span>{t('preferences.milliseconds')}</span>
             <ShowMilliseconds />
+          </div>
+          <div className='preferences-row'>
+            <span>{t('preferences.table_scroll')}</span>
+            <TableScrollPref />
           </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>

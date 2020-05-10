@@ -108,6 +108,15 @@ export function showMilliseconds(show) {
   }
 }
 
+/**
+ * Create an action to toggle table scroll setting.
+ */
+export function toggleTableScroll() {
+  return {
+    type: types.TOGGLE_TABLE_SCROLL,
+  }
+}
+
 export default {
   setApiKey,
   setApiSecret,
@@ -118,5 +127,6 @@ export default {
   setTimezone,
   setInputTimezone,
   showMilliseconds,
+  toggleTableScroll,
   updateTheme,
 }

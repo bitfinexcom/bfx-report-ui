@@ -15,6 +15,7 @@ export const getTimezone = state => getBase(state).timezone
 export const getInputTimezone = state => getBase(state).inputTimezone
 export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FORMATS[0]
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
+export const getTableScroll = state => getBase(state).tableScroll || false
 
 export const getTimeOffset = state => timeOffset(getTimezone(state))
 

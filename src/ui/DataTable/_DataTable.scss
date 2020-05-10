@@ -6,6 +6,10 @@
   margin-left: 1px;
   flex: 0 1 auto;
 
+  &-full-width {
+    max-height: unset;
+  }
+
   .bp3-table-quadrant-scroll-container {
     &::-webkit-scrollbar {
       width: 6px;

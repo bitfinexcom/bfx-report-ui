@@ -87,7 +87,7 @@ class DataTable extends PureComponent {
 
   render() {
     const {
-      className, numRows, t, tableColumns, device,
+      className, numRows, t, tableColumns, device, tableScroll,
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
 
@@ -97,7 +97,7 @@ class DataTable extends PureComponent {
 
     return (
       <Table
-        className={classNames('bitfinex-table', className)}
+        className={classNames('bitfinex-table', className, { 'bitfinex-table-full-width': tableScroll })}
         numRows={numRows}
         enableRowHeader={false}
         columnWidths={columnWidths}
@@ -134,6 +134,7 @@ DataTable.propTypes = {
   tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
   device: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
+  tableScroll: PropTypes.bool.isRequired,
 }
 
 DataTable.defaultProps = {

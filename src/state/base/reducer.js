@@ -16,6 +16,7 @@ const initialState = {
   timezone: types.DEFAULT_TIMEZONE,
   inputTimezone: moment.tz.guess(),
   milliseconds: false,
+  tableScroll: true,
 }
 
 export function baseReducer(state = initialState, action) {
@@ -70,6 +71,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         milliseconds: payload,
+      }
+    case types.TOGGLE_TABLE_SCROLL:
+      return {
+        ...state,
+        tableScroll: !state.tableScroll,
       }
     case types.SET_QUERY_LIMIT:
       return {
