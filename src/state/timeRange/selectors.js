@@ -35,9 +35,9 @@ export const getTimeFrameFromData = (data) => {
   const oneYearAgo = makeDate(d => d.setFullYear(d.getFullYear() - 1))
   const twoYearsAgo = makeDate(d => d.setFullYear(d.getFullYear() - 2))
 
-  const currentYearStart = new Date(today.getFullYear(), 0, 1)
-  const lastYearStart = new Date(today.getFullYear() - 1, 0, 1)
-  const lastYearEnd = new Date(today.getFullYear() - 1, 11, 31, 23, 59, 59)
+  const currentYearStart = new Date(today.getFullYear(), 0, 1).getTime()
+  const lastYearStart = new Date(today.getFullYear() - 1, 0, 1).getTime()
+  const lastYearEnd = new Date(today.getFullYear() - 1, 11, 31, 23, 59, 59).getTime()
 
   switch (data.range) {
     case LAST_24HOURS:
