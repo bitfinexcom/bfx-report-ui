@@ -6,9 +6,11 @@ export const propTypes = {
     location: PropTypes.object.isRequired,
     push: PropTypes.func.isRequired,
   }).isRequired,
+  showMenuPopover: PropTypes.bool,
   t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
   className: '',
+  showMenuPopover: true,
 }

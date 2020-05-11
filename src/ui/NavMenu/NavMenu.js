@@ -1,7 +1,12 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import { Menu, MenuDivider, MenuItem } from '@blueprintjs/core'
+import {
+  Classes,
+  Menu,
+  MenuDivider,
+  MenuItem,
+} from '@blueprintjs/core'
 import _castArray from 'lodash/castArray'
 import _includes from 'lodash/includes'
 
@@ -9,6 +14,7 @@ import queryType from 'state/query/constants'
 import { getIcon, getPath, getTarget } from 'state/query/utils'
 import { platform } from 'var/config'
 
+import NavMenuPopover from './NavMenuPopover'
 import { propTypes, defaultProps } from './NavMenu.props'
 
 const { showFrameworkMode } = platform
@@ -84,6 +90,11 @@ class NavMenu extends PureComponent {
 
   handleClick(e, nextTarget) {
     e.preventDefault()
+    // dismiss popover mode
+    const { parentElement } = e.target
+    parentElement.classList.add(Classes.POPOVER_DISMISS)
+    parentElement.click()
+
     const { target, history } = this.props
     if (target === nextTarget) {
       return
@@ -100,6 +111,7 @@ class NavMenu extends PureComponent {
     const {
       className,
       history,
+      showMenuPopover,
       t,
     } = this.props
     const target = getTarget(history.location.pathname)
@@ -108,6 +120,7 @@ class NavMenu extends PureComponent {
 
     return (
       <Menu large className={classes}>
+        {showMenuPopover && window.innerWidth <= 1024 && <NavMenuPopover />}
         {this.sections.map((section, index) => {
           const [type, title, isSkipped] = section
 

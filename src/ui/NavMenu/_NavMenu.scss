@@ -6,6 +6,15 @@
   box-shadow: 0 1px 0 1px var(--borderColor);
   clip-path: inset(0 -1px 0 0);
 
+  &--popover {
+    box-shadow: 0 0 1px var(--menuPopoverShadow);
+
+    .bp3-popover-content {
+      height: calc(100vh - 160px);
+      overflow: auto;
+    }
+  }
+
   .bp3-menu-item {
     display: block;
     width: 100%;
@@ -98,7 +107,7 @@
 }
 
 @media screen and (min-width: 376px) and (max-width: 1024px) {
-  .bitfinex-nav-menu {
+  .bitfinex-nav-menu:not(.bitfinex-nav-menu--popover-menu) {
     width: 40px;
     min-width: 40px;
 
@@ -123,7 +132,7 @@
 }
 
 @media screen and (max-width: 375px) {
-  .bitfinex-nav-menu {
+  .bitfinex-nav-menu:not(.bitfinex-nav-menu--popover-menu) {
     &--main {
       display: none;
     }
