@@ -234,6 +234,7 @@ class DateRangePicker extends PureComponent {
         )}
         isOpen={isOpen === undefined ? undefined : isOpen}
         hasBackdrop
+        minimal
         onOpened={this.removePopoverDismiss}
         onOpening={() => {
           this.addControls()

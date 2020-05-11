@@ -132,7 +132,7 @@
 }
 
 @media screen and (max-width: 375px) {
-  .bitfinex-nav-menu:not(.bitfinex-nav-menu--popover-menu) {
+  .bitfinex-nav-menu {
     &--main {
       display: none;
     }

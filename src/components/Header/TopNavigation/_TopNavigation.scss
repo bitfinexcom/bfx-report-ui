@@ -192,3 +192,11 @@
     }
   }
 }
+
+@media screen and (max-width: 360px) {
+  .top-navigation {
+    &-popover.bp3-popover {
+      margin-left: 4px !important;
+    }
+  }
+}

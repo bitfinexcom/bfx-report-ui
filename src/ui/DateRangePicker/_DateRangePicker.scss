@@ -1,6 +1,6 @@
 .date-range-picker-popover {
   position: absolute;
-  top: -6px;
+  top: -21px;
   left: -137px;
 }
 
@@ -172,7 +172,7 @@
 @media screen and (max-width: 855px) {
   .date-range-picker-popover {
     position: absolute;
-    top: -26px;
+    top: -41px;
     left: -447px;
   }
 }
@@ -180,12 +180,15 @@
 @media screen and (max-width: 375px) {
   .date-range-picker-popover {
     position: absolute;
-    top: -21px;
+    top: -25px;
     left: -186px;
   }
 
   .bp3-daterangepicker {
-    width: calc(100vw - 1px);
+    width: 100vw;
+    margin-top: -10px;
+    margin-left: -1px;
+    border: none;
 
     div {
       flex-wrap: wrap;
@@ -201,5 +204,16 @@
     &-shortcuts {
       margin-top: 10px;
     }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .date-range-picker-popover {
+    left: -179px;
+  }
+
+  .bp3-daterangepicker {
+    height: 575px;
+    overflow: auto;
   }
 }
