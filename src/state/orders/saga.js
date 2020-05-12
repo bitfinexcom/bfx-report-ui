@@ -33,7 +33,7 @@ function getReqOrders({
     end,
     limit: getQueryLimit(TYPE),
     filter,
-    symbol: targetPairs.length ? formatRawSymbols(mapRequestPairs(targetPairs)) : undefined,
+    symbol: formatRawSymbols(mapRequestPairs(targetPairs)),
   }
   return makeFetchCall('getOrders', params)
 }

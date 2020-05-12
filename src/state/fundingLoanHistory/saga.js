@@ -34,7 +34,7 @@ function getReqFLoan({
     end,
     limit: LIMIT,
     filter,
-    symbol: targetSymbols.length ? formatRawSymbols(mapRequestSymbols(targetSymbols)) : undefined,
+    symbol: formatRawSymbols(mapRequestSymbols(targetSymbols)),
   }
   return makeFetchCall('getFundingLoanHistory', params)
 }

@@ -36,7 +36,7 @@ function getReqPositions({
     end,
     limit: LIMIT,
     filter,
-    symbol: targetPairs.length ? formatRawSymbols(mapRequestPairs(targetPairs)) : undefined,
+    symbol: formatRawSymbols(mapRequestPairs(targetPairs)),
   }
   return makeFetchCall('getPositionsHistory', params)
 }

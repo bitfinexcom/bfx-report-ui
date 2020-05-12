@@ -34,7 +34,7 @@ function getReqPublicFunding({
     end,
     limit: LIMIT,
     filter,
-    symbol: targetSymbol ? formatRawSymbols(mapRequestSymbols(targetSymbol, true)) : undefined,
+    symbol: formatRawSymbols(mapRequestSymbols(targetSymbol, true)),
   }
   return makeFetchCall('getPublicTrades', params)
 }

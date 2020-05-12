@@ -33,7 +33,7 @@ function getReqTickers({
     end,
     filter,
     limit: getQueryLimit(TYPE),
-    symbol: targetPairs.length ? formatRawSymbols(mapRequestPairs(targetPairs)) : undefined,
+    symbol: formatRawSymbols(mapRequestPairs(targetPairs)),
   }
   return makeFetchCall('getTickersHistory', params)
 }

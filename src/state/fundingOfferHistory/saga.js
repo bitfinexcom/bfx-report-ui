@@ -34,7 +34,7 @@ function getReqFOffer({
     end,
     limit: LIMIT,
     filter,
-    symbol: targetSymbols.length ? formatRawSymbols(mapRequestSymbols(targetSymbols)) : undefined,
+    symbol: formatRawSymbols(mapRequestSymbols(targetSymbols)),
   }
   return makeFetchCall('getFundingOfferHistory', params)
 }

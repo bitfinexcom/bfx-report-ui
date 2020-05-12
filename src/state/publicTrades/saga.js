@@ -33,7 +33,7 @@ function getReqPublicTrades({
     end,
     filter,
     limit: getQueryLimit(TYPE),
-    symbol: targetPair ? formatRawSymbols(mapRequestPairs(targetPair, true)) : undefined,
+    symbol: formatRawSymbols(mapRequestPairs(targetPair, true)),
   }
   return makeFetchCall('getPublicTrades', params)
 }
