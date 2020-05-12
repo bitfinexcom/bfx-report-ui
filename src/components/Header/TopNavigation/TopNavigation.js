@@ -14,10 +14,9 @@ import TimeRange from 'ui/TimeRange'
 import timeRangeTypes from 'state/timeRange/constants'
 
 import SyncMode from '../SyncMode'
+import { openHelp } from '../utils'
 import TimeFrameShortcut from '../TimeFrameShortcut'
 import { propTypes, defaultProps } from './TopNavigation.props'
-
-const HELP_LINK = 'https://support.bitfinex.com/hc/en-us/articles/360008951853'
 
 const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
 
@@ -25,8 +24,6 @@ class TopNavigation extends PureComponent {
   state = {
     isOpen: false,
   }
-
-  openHelp = () => window.open(HELP_LINK)
 
   togglePopover = (isOpen) => {
     this.setState({ isOpen })
@@ -120,7 +117,7 @@ class TopNavigation extends PureComponent {
                 />
                 <MenuItem
                   className='bp3-menu-item--subitem'
-                  onClick={this.openHelp}
+                  onClick={openHelp}
                   text={t('header.help')}
                 />
                 <MenuItem

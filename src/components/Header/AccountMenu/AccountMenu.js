@@ -12,14 +12,11 @@ import Icon from 'icons'
 
 import { propTypes, defaultProps } from './AccountMenu.props'
 import SyncMode from '../SyncMode'
-
-const HELP_LINK = 'https://support.bitfinex.com/hc/en-us/articles/360008951853'
+import { openHelp } from '../utils'
 
 const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
 
 class AccountMenu extends PureComponent {
-  openHelp = () => window.open(HELP_LINK)
-
   render() {
     const {
       email,
@@ -49,7 +46,7 @@ class AccountMenu extends PureComponent {
                   text={t('download.export')}
                 />
                 <MenuItem
-                  onClick={this.openHelp}
+                  onClick={openHelp}
                   icon={<Icon.INFO_CIRCLE />}
                   text={t('header.help')}
                 />
