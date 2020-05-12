@@ -14,10 +14,11 @@ class TimeRange extends PureComponent {
       icon,
       start,
       timezone,
+      toggleTimeFrameDialog,
     } = this.props
 
     return (
-      <div className={classNames('time-range', className)}>
+      <div className={classNames('time-range', className)} onClick={() => toggleTimeFrameDialog(true)}>
         {icon && <Icon.CALENDAR />}
         <span>
           {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}

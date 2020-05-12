@@ -63,6 +63,16 @@ export function togglePreferencesDialog() {
 }
 
 /**
+ * Create an action to show/hide timeframe dialog.
+ */
+export function toggleTimeFrameDialog(payload) {
+  return {
+    type: types.TOGGLE_TIMEFRAME_DIALOG,
+    payload,
+  }
+}
+
+/**
  * Create an action to proceed with pagination request.
  * @param {boolean} payload indicator of whether pagination request should proceed
  */
@@ -98,5 +108,6 @@ export default {
   proceedFrameworkRequest,
   togglePaginationDialog,
   togglePreferencesDialog,
+  toggleTimeFrameDialog,
   proceedPaginationRequest,
 }

@@ -6,6 +6,7 @@ export const propTypes = {
   icon: PropTypes.bool,
   start: PropTypes.number,
   timezone: PropTypes.string,
+  toggleTimeFrameDialog: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

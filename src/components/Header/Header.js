@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Status from 'components/Status'
+import DateRangePicker from 'ui/DateRangePicker'
 import PlatformLogo from 'ui/PlatformLogo'
 import timeRangeTypes from 'state/timeRange/constants'
 import { platform } from 'var/config'
@@ -26,6 +27,7 @@ const Header = () => {
       </div>
       <div className='header-timeframe'>
         <TimeFrame />
+        <DateRangePicker className='date-range-picker-popover--dialog' controlledFromRedux />
       </div>
       <TimeFrameShortcut
         title='timeframe.2w'
