@@ -66,7 +66,7 @@ html {
 
 .bitfinex-dataset {
   display: inline-block;
-  min-height: calc(100vh - 51px); // minus header height
+  min-height: calc(100vh - 46px); // minus header height
   flex: 1;
   min-width: 1px;
   padding: 0;
@@ -226,11 +226,11 @@ a {
 
 @media screen and (min-width: 2560px) {
   html {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   body {
-    font-size: 20px;
+    font-size: 18px;
 
     .bp3-card {
       padding: 40px 50px 0 50px;
@@ -238,7 +238,7 @@ a {
   }
 
   .bitfinex-dataset {
-    min-height: calc(100vh - 71px); // minus header height
+    min-height: calc(100vh - 57px); // minus header height
   }
 }
 

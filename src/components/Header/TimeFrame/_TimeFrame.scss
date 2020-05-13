@@ -1,11 +1,11 @@
 .timeframe {
-  height: 50px;
-  line-height: 50px;
+  height: 44px;
+  line-height: 44px;
   user-select: none;
   cursor: pointer;
 
   &-wrapper {
-    height: 50px;
+    height: 44px;
 
     .icon--chevron-up {
       display: none;
@@ -44,7 +44,7 @@
   }
 
   svg {
-    height: 50px;
+    height: 44px;
   }
 
   &-range {
@@ -59,7 +59,7 @@
   }
 
   .bp3-popover-target {
-    height: 51px;
+    height: 45px;
   }
 
   &-popover {
@@ -101,15 +101,15 @@
 
 @media screen and (min-width: 2560px) {
   .timeframe {
-    height: 70px;
-    line-height: 70px;
+    height: 56px;
+    line-height: 56px;
 
     &-wrapper {
-      height: 70px;
+      height: 56px;
     }
 
     svg {
-      height: 70px;
+      height: 56px;
     }
 
     &-range {
@@ -117,7 +117,7 @@
     }
 
     .bp3-popover-target {
-      height: 71px;
+      height: 57px;
     }
 
     &-target {

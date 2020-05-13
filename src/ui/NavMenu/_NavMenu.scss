@@ -18,14 +18,14 @@
   .bp3-menu-item {
     display: block;
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    height: 44px;
+    line-height: 44px;
     padding: 0 0 0 20px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-radius: 0;
 
     svg {
-      height: 50px;
+      height: 44px;
       margin-right: 14px;
     }
 
@@ -90,12 +90,12 @@
 
     .bp3-menu {
       &-item {
-        height: 60px;
-        line-height: 60px;
+        height: 52px;
+        line-height: 52px;
 
         svg {
           width: 28px;
-          height: 60px;
+          height: 52px;
         }
 
         div {
