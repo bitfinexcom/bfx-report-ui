@@ -9,7 +9,6 @@ import {
   NonIdealState,
 } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
-
 import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
 import { platform } from 'var/config'

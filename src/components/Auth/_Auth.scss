@@ -28,11 +28,16 @@
 
       .bp3-input {
         padding: 0 15px;
+        font-size: 15px;
 
         &-group {
           margin-bottom: 18px;
         }
       }
+    }
+
+    .bitfinex-auth-check {
+      line-height: 18px;
     }
   }
 
@@ -77,6 +82,10 @@
 
       &-footer {
         margin: 0 25px;
+      }
+
+      .bitfinex-auth-check {
+        line-height: 23px;
       }
     }
 
