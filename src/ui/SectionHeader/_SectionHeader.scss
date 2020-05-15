@@ -58,8 +58,9 @@
     }
   }
 
-  &-time-range {
+  .time-range {
     margin: 0 2px 22px 2px;
+    font-size: 15px;
   }
 }
 
@@ -93,9 +94,9 @@
       }
     }
 
-    &-time-range {
-      font-size: 20px;
+    .time-range {
       margin: 0 2px 22px 2px;
+      font-size: 18px;
     }
   }
 }
