@@ -45,6 +45,9 @@ const getAuthFromStore = () => {
   return selectAuth(state)
 }
 
+// turned off for firefox
+export const getDefaultTableScrollSetting = () => !navigator.userAgent.includes('Firefox')
+
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
     method: 'POST',
@@ -471,6 +474,7 @@ export default {
   checkFetch,
   checkEmail,
   DEFAULT_DATETIME_FORMAT,
+  getDefaultTableScrollSetting,
   getQueryWithoutParams,
   makeFetchCall,
   formatAuthDate,

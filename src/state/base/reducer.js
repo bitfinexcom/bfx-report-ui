@@ -1,6 +1,7 @@
 import moment from 'moment-timezone'
 
 import authTypes from 'state/auth/constants'
+import { getDefaultTableScrollSetting } from 'state/utils'
 
 import types from './constants'
 
@@ -16,7 +17,7 @@ const initialState = {
   timezone: types.DEFAULT_TIMEZONE,
   inputTimezone: moment.tz.guess(),
   milliseconds: false,
-  tableScroll: true,
+  tableScroll: getDefaultTableScrollSetting(),
 }
 
 export function baseReducer(state = initialState, action) {
