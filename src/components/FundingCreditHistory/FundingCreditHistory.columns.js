@@ -79,7 +79,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'column.status',
-      width: 170,
+      width: 180,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
