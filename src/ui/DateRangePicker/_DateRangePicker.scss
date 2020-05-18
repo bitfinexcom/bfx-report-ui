@@ -69,7 +69,7 @@
 
       .bp3-menu-item {
         width: fit-content;
-        padding: 4px 12px;
+        padding: 4px 14px;
         height: 30px;
         font-size: 10px;
         border: 1px solid var(--borderColor);
@@ -79,15 +79,13 @@
           background-color: var(--shortcutHoverBg);
         }
 
-        &.bp3-active:hover {
-          background-color: var(--activeHoverColor);
-        }
-
-        &.bp3-intent-primary {
-          color: var(--popoverColor);
+        &.bp3-active {
+          background-color: var(--buttonBg);
+          color: var(--buttonPrimaryColor);
 
           &:hover {
-            color: var(--popoverColor);
+            background-color: var(--activeHoverColor);
+            color: var(--buttonPrimaryColor);
           }
         }
       }
@@ -221,8 +219,14 @@
       }
     }
 
-    &-shortcuts {
+    .bp3-daterangepicker-shortcuts {
       margin-top: 10px;
+
+      li {
+        .bp3-menu-item {
+          padding: 4px 12px;
+        }
+      }
     }
   }
 }

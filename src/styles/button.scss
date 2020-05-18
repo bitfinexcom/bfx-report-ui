@@ -2,6 +2,7 @@
   min-width: 100px;
   height: 30px;
   font-size: 15px;
+  line-height: 18px;
   border-radius: 2px;
   vertical-align: baseline;
   text-align: center;
@@ -40,16 +41,19 @@
 
       &:hover, &:active, &.bp3-active {
         background-color: var(--buttonPrimaryHoverBg);
+        color: var(--buttonPrimaryHoverColor);
         border: 1px solid var(--buttonPrimaryHoverBg);
         box-shadow: none;
       }
 
       &.bp3-disabled {
         background-color: var(--buttonDisabledBg);
+        color: var(--buttonDisabledColor);
         border-color: var(--buttonDisabledBg);
 
         &:hover {
           background-color: var(--buttonDisabledHoverBg);
+          color: var(--buttonDisabledColor);
           border-color: var(--buttonDisabledHoverBg);
         }
       }

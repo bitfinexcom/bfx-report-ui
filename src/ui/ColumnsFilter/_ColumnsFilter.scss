@@ -62,12 +62,14 @@
 
       .bp3-input {
         height: 40px;
+        line-height: 40px;
       }
     }
 
     &-remove {
       cursor: pointer;
       vertical-align: middle;
+      height: 40px;
     }
   }
 

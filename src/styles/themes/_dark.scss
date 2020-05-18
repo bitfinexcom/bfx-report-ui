@@ -33,7 +33,8 @@
   // buttons
   --buttonBg: #82baf6;
   --buttonColor: #ffffff;
-  --buttonPrimaryColor: #ffffff;
+  --buttonPrimaryColor: #102331;
+  --buttonPrimaryHoverColor: #102331;
   --buttonHoverBg: #19354a;
   --buttonPrimaryHoverBg: #4c88c8;
   --buttonSuccessBg: #16b157;
@@ -41,6 +42,8 @@
   --buttonSuccessHoverBg: #0fc75c;
   --buttonDisabledBg: #132635;
   --buttonDisabledHoverBg: #172d3e;
+  --buttonDisabledColor: rgba(255, 255, 255, 0.6);
+  --buttonDisabledHoverColor: rgba(255, 255, 255, 0.6);
   --activeFilterBorder: #ffffff;
 
   // tables
