@@ -16,6 +16,8 @@ import {
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 
+const { REACT_APP_ELECTRON } = process.env
+
 const {
   MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
@@ -46,7 +48,7 @@ const getAuthFromStore = () => {
 }
 
 // turned off for firefox
-export const getDefaultTableScrollSetting = () => !navigator.userAgent.includes('Firefox')
+export const getDefaultTableScrollSetting = () => REACT_APP_ELECTRON || !navigator.userAgent.includes('Firefox')
 
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
