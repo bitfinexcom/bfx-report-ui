@@ -1,6 +1,7 @@
 import React, { createRef, Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import { Swipeable } from 'react-swipeable'
 import { Spinner } from '@blueprintjs/core'
 
 import Icon from 'icons'
@@ -48,6 +49,36 @@ class Pagination extends PureComponent {
     fetchNext(target)
   }
 
+  onSwiped = (e) => {
+    const { dir } = e
+    const {
+      entriesSize,
+      loading,
+      nextPage,
+      page,
+      target,
+    } = this.props
+
+    if (loading) {
+      return
+    }
+
+    if (dir === 'Left') {
+      const PAGE_SIZE = getPageSize(target)
+      const pageLen = Math.ceil(entriesSize / PAGE_SIZE)
+
+      if (page !== pageLen) {
+        this.forward()
+      } else if (nextPage) {
+        this.fetchNext()
+      }
+    }
+
+    if (dir === 'Right' && page !== 1) {
+      this.backward()
+    }
+  }
+
   render() {
     const {
       entriesSize,
@@ -77,14 +108,14 @@ class Pagination extends PureComponent {
     ) : undefined
 
     return (
-      <div className='pagination'>
+      <Swipeable className='pagination' onSwiped={this.onSwiped} delta={50}>
         <div className='pagination-group'>
           <Icon.CHEVRON_DOUBLE_LEFT
             className={classNames('pagination-icon', { 'pagination-icon--disabled': page === 1 || loading })}
             onClick={this.jumpToFirstPage}
           />
           <Icon.CHEVRON_LEFT
-            className={classNames('pagination-icon', { 'pagination-icon--disabled': page - 1 === 0 || loading })}
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page === 1 || loading })}
             onClick={this.backward}
           />
           <span className='pagination-page'>
@@ -112,7 +143,7 @@ class Pagination extends PureComponent {
           />
           {renderLoading}
         </div>
-      </div>
+      </Swipeable>
     )
   }
 }
