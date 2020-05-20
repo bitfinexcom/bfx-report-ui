@@ -16,9 +16,9 @@ export const mapCurrency = currency => (_includes(currency, ':') ? mapPair(curre
 export const mapDescription = (description) => {
   let mapKeys = Object.keys(symbolMap)
   // workaround for exception case when BAB is mapped into BCH and then BCH into pBCH
-  if (mapKeys.BCH) {
-    mapKeys = mapKeys.filter(key => key === 'BCH')
-    mapKeys.push('BCH')
+  if (symbolMap.BAB) {
+    mapKeys = mapKeys.filter(key => key !== 'BAB')
+    mapKeys.push('BAB')
   }
   return mapKeys.reduce((desc, symbol) => desc.replace(new RegExp(symbol, 'g'), symbolMap[symbol]), description)
 }
