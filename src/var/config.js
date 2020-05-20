@@ -8,15 +8,6 @@ const platforms = {
     showAuthPage: false,
     showFrameworkMode: false,
   },
-  ethfinex: {
-    API_URL: 'https://report.ethfinex.com/api',
-    KEY_URL: 'https://www.ethfinex.com/api',
-    HOME_URL: 'https://www.ethfinex.com',
-    WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
-    showAuthPage: false,
-    showFrameworkMode: false,
-    hideSwitchTheme: true,
-  },
   test: {
     API_URL: 'https://bfx-report-ui.staging.bitfinex.com/api',
     KEY_URL: 'https://test.bitfinex.com/api',

@@ -1,0 +1,105 @@
+.theme-light {
+  // main
+  --bgColor: #ffffff;
+  --bgColor2: #ffffff;
+  --color: #102331;
+  --borderColor: #102331;
+  --iconColor: #102331;
+  --activeColor: #518bc9;
+  --activeHoverColor: #4c88c8;
+
+  --authNoticeBg: #ebf1f5;
+
+  // dialogs
+  --dialogHeaderBorder: #000000;
+  --lightThemeBorder: 0 0 0 1px #eaeaea;
+
+  // nav menu
+  --menuHover: #d8ecfb;
+  --menuActive: #d8ecfb;
+  --menuActiveBorder: #518bc9;
+  --menuPopoverShadow: black;
+
+  --timeRangeColor: #545c62;
+
+  // popovers
+  --popoverBg: #ffffff;
+  --popoverColor: #000000;
+
+  // select
+  --selectColor: black;
+  --selectOptionBg: #ffffff;
+
+  // tooltips
+  --tooltipBg: #394b59;
+  --tooltipColor: #f5f8fa;
+
+  // buttons
+  --buttonBg: #518bc9;
+  --buttonColor: #102331;
+  --buttonPrimaryColor: #ffffff;
+  --buttonPrimaryHoverColor: #ffffff;
+  --buttonHoverBg: #d8ecfb;
+  --buttonPrimaryHoverBg: #4c88c8;
+  --buttonSuccessBg: #16b157;
+  --buttonSuccessColor: #ffffff;
+  --buttonSuccessHoverBg: #0fc75c;
+  --buttonDisabledBg: #c9cbce;
+  --buttonDisabledHoverBg: #bababa;
+  --buttonDisabledColor: rgb(16, 35, 49);
+  --buttonDisabledHoverColor: rgb(16, 35, 49);
+  --activeFilterBorder: #000000;
+
+  // tables
+  --thColor: #518bc9;
+  --thBg: #d8ecfb;
+  --thBgHover: #427ab7;
+  --tableColor: #102331;
+  --tableBorder: #102331;
+  --tableOddBg: #d8ecfb;
+  --tableEvenBg: #ffffff;
+  --tableScrollBg: #d1d1d1;
+  --tableScrollThumbBg: #82baf6;
+  --tableAmountPosColor: #16b157;
+  --tableAmountNegColor: #f05359;
+  --tableAmountFractionPosColor: #53cb85;
+  --tableAmountFractionNegColor: #d85f64;
+
+  // toasts
+  --toastPrimaryBg: #518bc9;
+  --toastSuccessBg: #16b157;
+  --toastWarningBg: #fbb13c;
+  --toastErrorBg: #f05359;
+  --toastIconColor: #ffffff;
+
+  // multi select
+  --multiBg: #f5f8fa;
+  --multiTagBg: #82baf6;
+  --multiTagHoverBg: #4c88c8;
+  --multiTagRemove: #061a25;
+  --multiActiveBg: #518bc9;
+  --multiActiveHoverBg: #4881bd;
+  --multiActiveColor: #ffffff;
+  --multiActiveHoverColor: #ffffff;
+  --multiQueriedBg: #bed7f3;
+  --multiQueriedHoverBg: #accaec;
+  --multiQueriedColor: #102331;
+  --multiHoverBg: #d8ecfb;
+  --multiSelectedBg: #82baf6;
+  --multiSelectedColor: #ffffff;
+  --multiSelectedHoverBg: #4c88c8;
+
+  // checkbox
+  --checkboxBorder: #102331;
+
+  // datepicker
+  --datepickerSelectedRangeBg: #ebf1f5;
+  --datepickerSelectedOuterRangeBg: #ebf1f5;
+
+  // icons
+  --iconCheckmark: #16b157;
+  --iconWarning: #f05359;
+
+  // shortcuts
+  --shortcutHoverBg: #d8ecfb;
+}

@@ -4,19 +4,57 @@ import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 
-export const COLUMN_WIDTHS = {
-  AMOUNT: 120, // -33942.556789
-  BALANCE_USD: 125, // -33942.556789
-  DATE: 140, // 18-09-19 17:10:37
-  ID: 82, // 123456789
+const COLUMN_WIDTH_STANDARD = {
+  AMOUNT: 132, // -33942.556789
+  BALANCE_USD: 137, // -33942.556789
+  DATE: 150, // 18-09-19 17:10:37
+  ID: 90, // 123456789
   IP: 115, // 128.128.128.128
   META: 160, // stringified object
-  ORDER_ID: 95, // 12345678901
-  PAIR: 100, // BTCF0/USTF0
+  ORDER_ID: 105, // 12345678901
+  PAIR: 110, // BTCF0/USTF0
   PERIOD: 80, // 30 Day(s)
   RATE: 120, // 0.00063000
   SYMBOL: 92, // USTF0
+  FEE: 145,
+  FEE_PERC: 90,
+
+  LEDGERS_ID: 95,
+  LEDGERS_DESCRIPTION: 520,
+  LEDGERS_WALLET: 80,
+  TRADES_DATE: 150,
+  ORDER_TYPE: 135,
+  ORDER_STATUS: 165,
+  MOVEMENT_STATUS: 125,
 }
+
+const COLUMN_WIDTHS_BIG_SCREENS = {
+  AMOUNT: 160,
+  BALANCE_USD: 160,
+  DATE: 170,
+  ID: 140,
+  IP: 115,
+  META: 160,
+  ORDER_ID: 124,
+  PAIR: 120,
+  PERIOD: 100,
+  RATE: 130,
+  SYMBOL: 110,
+  FEE: 180,
+  FEE_PERC: 115,
+
+  LEDGERS_ID: 118,
+  LEDGERS_DESCRIPTION: 640,
+  LEDGERS_WALLET: 120,
+  TRADES_DATE: 180,
+  ORDER_TYPE: 165,
+  ORDER_STATUS: 260,
+  MOVEMENT_STATUS: 150,
+}
+
+export const COLUMN_WIDTHS = window.innerWidth < 2560
+  ? COLUMN_WIDTH_STANDARD
+  : COLUMN_WIDTHS_BIG_SCREENS
 
 export const getFrameworkPositionsColumns = (props) => {
   const {

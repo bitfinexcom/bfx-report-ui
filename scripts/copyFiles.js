@@ -32,29 +32,15 @@ const filesMap = {
   bitfinex: [
     {
       source: 'scripts/template/bitfinex-logo-dark.svg',
-      destination: 'src/components/Header/logo3-dark-theme.svg',
+      destination: 'src/ui/PlatformLogo/files/logo-dark-theme.svg',
     },
     {
       source: 'scripts/template/bitfinex-logo-light.svg',
-      destination: 'src/components/Header/logo3-light-theme.svg',
+      destination: 'src/ui/PlatformLogo/files/logo-light-theme.svg',
     },
     {
       source: 'scripts/template/bitfinex-favicon.ico',
       destination: 'public/favicon.ico',
-    },
-  ],
-  ethfinex: [
-    {
-      source: 'scripts/template/ethfinex-logo-dark.svg',
-      destination: 'src/components/Header/logo3-dark-theme.svg',
-    },
-    {
-      source: 'scripts/template/ethfinex-mlogo-dark.svg',
-      destination: 'src/components/Header/mobile_logo_dark.svg',
-    },
-    {
-      source: 'scripts/template/ethfinex-favicon.png',
-      destination: 'public/favicon.png',
     },
   ],
 }

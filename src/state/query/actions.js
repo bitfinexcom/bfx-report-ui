@@ -1,51 +1,4 @@
-import { updateErrorStatus } from 'state/status/actions'
-
 import types from './constants'
-import { isValidTimeStamp } from './utils'
-
-/**
- * Create an action to set time type.
- * @param {integer} type show as local or GMT time
- */
-export function setTimeType(type) {
-  return {
-    type: types.SET_TIME_TYPE,
-    payload: type,
-  }
-}
-
-/**
- * Create an action to set time range.
- * @param {string} rangeType
- * @param {number} start time in milliseconds
- * @param {number} end time in milliseconds
- */
-export function setTimeRange(rangeType, start, end) {
-  return {
-    type: types.SET_TIME_RANGE,
-    payload: {
-      rangeType,
-      start,
-      end,
-    },
-  }
-}
-
-/**
- * Create an action to custom time range.
- * @param {number} start time in milliseconds
- * @param {number} end time in milliseconds
- */
-export function setCustomTimeRange(start, end) {
-  if (isValidTimeStamp(start) && isValidTimeStamp(end)) {
-    return setTimeRange(types.TIME_RANGE_CUSTOM, start, end)
-  }
-  return updateErrorStatus({
-    id: 'status.fail',
-    topic: 'timeframe.custom-timerange',
-    detail: `with wrong format ${start}-${end}`,
-  })
-}
 
 /**
  * Create an action to export CSV.
@@ -94,7 +47,4 @@ export default {
   prepareExport,
   setExportEmail,
   setOwnerEmail,
-  setCustomTimeRange,
-  setTimeType,
-  setTimeRange,
 }

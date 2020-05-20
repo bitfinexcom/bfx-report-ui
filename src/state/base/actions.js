@@ -65,17 +65,6 @@ export function updateTheme() {
 }
 
 /**
- * Create an action to store menu mode.
- * @param {string} mode
- */
-export function setMenuMode(mode) {
-  return {
-    type: types.SET_MENU_MODE,
-    payload: mode,
-  }
-}
-
-/**
  * Create an action to store timezone.
  * @param {string} timezone
  */
@@ -120,13 +109,11 @@ export function showMilliseconds(show) {
 }
 
 /**
- * Create an action to store query limit.
- * @param {string} limit query limit
+ * Create an action to toggle table scroll setting.
  */
-export function setQueryLimit(limit) {
+export function toggleTableScroll() {
   return {
-    type: types.SET_QUERY_LIMIT,
-    payload: limit,
+    type: types.TOGGLE_TABLE_SCROLL,
   }
 }
 
@@ -136,11 +123,10 @@ export default {
   setAuthToken,
   setDateFormat,
   setLang,
-  setMenuMode,
-  setQueryLimit,
   setTheme,
   setTimezone,
   setInputTimezone,
   showMilliseconds,
+  toggleTableScroll,
   updateTheme,
 }

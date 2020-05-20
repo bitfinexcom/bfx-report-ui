@@ -1,17 +1,17 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  ButtonGroup,
-  Card,
-  Elevation,
-  Intent,
-  Position,
-  Tooltip,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
+import {
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
-import ExportButton from 'ui/ExportButton'
+import NavSwitcher from 'ui/NavSwitcher'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 
@@ -19,6 +19,12 @@ import Result from './Result'
 import Snapshot from './Snapshot'
 import { propTypes } from './TaxReport.props'
 import TAX_REPORT_SECTIONS from './TaxReport.sections'
+
+const {
+  START_SNAPSHOT,
+  END_SNAPSHOT,
+  RESULT,
+} = TAX_REPORT_SECTIONS
 
 const SECTIONS_URL = {
   START_SNAPSHOT: '/tax_report/start_snapshot',
@@ -51,14 +57,14 @@ class TaxReport extends PureComponent {
       start: start ? start.getTime() : undefined,
       end: end ? end.getTime() : undefined,
     }
-    const { section = TAX_REPORT_SECTIONS.RESULT } = match.params
+    const { section = RESULT } = match.params
 
     setParams({ params, section })
   }
 
   handleRefresh = () => {
     const { match, refresh } = this.props
-    const { section = TAX_REPORT_SECTIONS.RESULT } = match.params
+    const { section = RESULT } = match.params
     refresh({ section })
   }
 
@@ -73,18 +79,33 @@ class TaxReport extends PureComponent {
 
   switchSection = (section) => {
     const { history } = this.props
-    history.push(`${section}${window.location.search}`)
+
+    const path = this.getSectionURL(section)
+    history.push(`${path}${window.location.search}`)
   }
 
   getSection = (section) => {
     switch (section) {
-      case TAX_REPORT_SECTIONS.START_SNAPSHOT:
-        return <Snapshot key={TAX_REPORT_SECTIONS.START_SNAPSHOT} />
-      case TAX_REPORT_SECTIONS.END_SNAPSHOT:
-        return <Snapshot key={TAX_REPORT_SECTIONS.END_SNAPSHOT} />
-      case TAX_REPORT_SECTIONS.RESULT:
+      case START_SNAPSHOT:
+        return <Snapshot key={START_SNAPSHOT} />
+      case END_SNAPSHOT:
+        return <Snapshot key={END_SNAPSHOT} />
+      case RESULT:
       default:
         return <Result />
+    }
+  }
+
+  getSectionURL = (section) => {
+    switch (section) {
+      case START_SNAPSHOT:
+        return `${SECTIONS_URL.START_SNAPSHOT}/positions`
+      case END_SNAPSHOT:
+        return `${SECTIONS_URL.END_SNAPSHOT}/positions`
+      case RESULT:
+        return SECTIONS_URL.RESULT
+      default:
+        return ''
     }
   }
 
@@ -92,84 +113,50 @@ class TaxReport extends PureComponent {
     const { match, t } = this.props
     const { start, end } = this.state
     const hasNewTime = this.hasNewTime()
-    const { section = TAX_REPORT_SECTIONS.RESULT } = match.params
-
-    const renderTimeSelection = (
-      <Fragment>
-        <Tooltip
-          content={(
-            <span>
-              {t('query.startDateTooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-        >
-          <DateInput
-            onChange={date => this.handleDateChange('start', date)}
-            defaultValue={start}
-          />
-        </Tooltip>
-        {' '}
-        <Tooltip
-          content={(
-            <span>
-              {t('query.endDateTooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-        >
-          <DateInput
-            onChange={date => this.handleDateChange('end', date)}
-            defaultValue={end}
-          />
-        </Tooltip>
-        <Button
-          onClick={this.handleQuery}
-          intent={hasNewTime ? Intent.PRIMARY : null}
-          disabled={!hasNewTime}
-        >
-          {t('query.title')}
-        </Button>
-      </Fragment>
-    )
-
-    const renderButtonGroup = (
-      <ButtonGroup>
-        <Button
-          active={section === TAX_REPORT_SECTIONS.START_SNAPSHOT}
-          onClick={() => this.switchSection(`${SECTIONS_URL.START_SNAPSHOT}/positions`)}
-        >
-          {t('taxreport.sections.startSnapshot')}
-        </Button>
-        <Button
-          active={section === TAX_REPORT_SECTIONS.END_SNAPSHOT}
-          onClick={() => this.switchSection(`${SECTIONS_URL.END_SNAPSHOT}/positions`)}
-        >
-          {t('taxreport.sections.endSnapshot')}
-        </Button>
-        <Button
-          active={section === TAX_REPORT_SECTIONS.RESULT}
-          onClick={() => this.switchSection(SECTIONS_URL.RESULT)}
-        >
-          {t('taxreport.sections.finalResult')}
-        </Button>
-      </ButtonGroup>
-    )
+    const { section = RESULT } = match.params
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-        <h4>
-          {t('taxreport.title')}
-          {' '}
-          {renderTimeSelection}
-          {' '}
-          <ExportButton />
-          {' '}
-          <RefreshButton handleClickRefresh={this.handleRefresh} />
-        </h4>
-        {renderButtonGroup}
-        <br />
-        <br />
+      <Card elevation={Elevation.ZERO} className='tax-report col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader>
+          <SectionHeaderTitle>{t('taxreport.title')}</SectionHeaderTitle>
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('query.startTime')}
+              </SectionHeaderItemLabel>
+              <DateInput
+                onChange={date => this.handleDateChange('start', date)}
+                defaultValue={start}
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('query.endTime')}
+              </SectionHeaderItemLabel>
+              <DateInput
+                onChange={date => this.handleDateChange('end', date)}
+                defaultValue={end}
+              />
+            </SectionHeaderItem>
+
+            <QueryButton
+              disabled={!hasNewTime}
+              onClick={this.handleQuery}
+            />
+            <RefreshButton onClick={this.handleRefresh} />
+          </SectionHeaderRow>
+        </SectionHeader>
+
+        <NavSwitcher
+          items={[
+            { value: START_SNAPSHOT, label: t('taxreport.sections.startSnapshot') },
+            { value: END_SNAPSHOT, label: t('taxreport.sections.endSnapshot') },
+            { value: RESULT, label: t('taxreport.sections.finalResult') },
+          ]}
+          onChange={this.switchSection}
+          value={section}
+        />
+
         {this.getSection(section)}
       </Card>
     )

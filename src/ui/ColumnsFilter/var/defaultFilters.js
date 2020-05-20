@@ -35,7 +35,6 @@ const {
 
 /* eslint-disable object-curly-newline */
 const DEFAULT_LEDGERS = [
-  { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
   { column: 'description', type: CONTAINS, dataType: STRING, value: '' },
   { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
   { column: 'balance', type: GREATER_THAN, dataType: NUMBER, value: '' },
@@ -49,46 +48,46 @@ const DEFAULT_FILTERS = {
     { column: 'execPrice', type: GREATER_THAN, dataType: NUMBER, value: '' },
   ],
   [MENU_ORDERS]: [
-    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'type', type: CONTAINS, dataType: STRING, value: '' },
     { column: 'amountOrig', type: GREATER_THAN, dataType: NUMBER, value: '' },
+    EMPTY_FILTER,
   ],
   [MENU_MOVEMENTS]: [
-    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
     { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+    EMPTY_FILTER,
   ],
   [MENU_POSITIONS]: [
-    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'basePrice', type: GREATER_THAN, dataType: NUMBER, value: '' },
+    EMPTY_FILTER,
     EMPTY_FILTER,
   ],
   [MENU_FOFFER]: [
-    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'amountOrig', type: GREATER_THAN, dataType: NUMBER, value: '' },
     { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
+    EMPTY_FILTER,
   ],
   [MENU_FLOAN]: [
-    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
     { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
+    EMPTY_FILTER,
   ],
   [MENU_FCREDIT]: [
-    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
     { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
+    EMPTY_FILTER,
   ],
   [MENU_FPAYMENT]: DEFAULT_LEDGERS,
   [MENU_AFFILIATES_EARNINGS]: DEFAULT_LEDGERS,
   [MENU_PUBLIC_TRADES]: [
-    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
     { column: 'price', type: LESS_THAN, dataType: NUMBER, value: '' },
+    EMPTY_FILTER,
   ],
   [MENU_PUBLIC_FUNDING]: [
-    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'amount', type: LESS_THAN, dataType: NUMBER, value: '' },
     { column: 'rate', type: LESS_THAN, dataType: NUMBER, value: '' },
+    EMPTY_FILTER,
   ],
   [MENU_TICKERS]: [
     { column: 'bid', type: GREATER_THAN, dataType: NUMBER, value: '' },
@@ -101,9 +100,58 @@ const DEFAULT_FILTERS = {
     EMPTY_FILTER,
   ],
   [MENU_LOGINS]: [
-    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
+    { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
+    EMPTY_FILTER,
+    EMPTY_FILTER,
+  ],
+}
+
+const DEFAULT_LEDGERS_MIN = [
+  { column: 'description', type: CONTAINS, dataType: STRING, value: '' },
+]
+
+const DEFAULT_FILTERS_MIN = {
+  [MENU_LEDGERS]: DEFAULT_LEDGERS_MIN,
+  [MENU_TRADES]: [
+    { column: 'execAmount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_ORDERS]: [
+    { column: 'amountOrig', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_MOVEMENTS]: [
+    { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_POSITIONS]: [
+    { column: 'basePrice', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_FOFFER]: [
+    { column: 'amountOrig', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_FLOAN]: [
+    { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_FCREDIT]: [
+    { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_FPAYMENT]: DEFAULT_LEDGERS,
+  [MENU_AFFILIATES_EARNINGS]: DEFAULT_LEDGERS,
+  [MENU_PUBLIC_TRADES]: [
+    { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_PUBLIC_FUNDING]: [
+    { column: 'amount', type: LESS_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_TICKERS]: [
+    { column: 'bid', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_DERIVATIVES]: [
+    { column: 'price', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_LOGINS]: [
     { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
   ],
 }
 
-export default DEFAULT_FILTERS
+export default window.innerWidth >= 1024
+  ? DEFAULT_FILTERS
+  : DEFAULT_FILTERS_MIN

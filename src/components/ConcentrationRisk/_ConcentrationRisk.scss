@@ -2,31 +2,33 @@
   display: flex;
 
   .bitfinex-table {
-    width: fit-content;
-    flex-shrink: 0;
+    height: fit-content;
+    flex: 0 0 400px;
   }
 
   &-chart {
     width: 100%;
+    margin-left: 15px;
 
     .recharts-wrapper {
+      height: 300px;
       margin: 0 auto;
 
       .recharts-legend-item {
         svg {
-          margin-bottom: 3px;
+          margin-bottom: 4px;
         }
       }
     }
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
   .concentration-risk-data {
     flex-wrap: wrap;
 
     .bitfinex-table {
-      margin: 0 auto;
+      margin: 0 auto 25px auto;
     }
 
     &-chart {

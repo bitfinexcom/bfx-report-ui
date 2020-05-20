@@ -1,0 +1,83 @@
+.bp3-datepicker {
+  background-color: var(--bgColor2);
+  border: 1px solid var(--borderColor);
+  border-radius: 2px;
+  padding: 15px;
+
+  .bp3-timepicker {
+    &-input-row {
+      background-color: var(--bgColor);
+    }
+
+    &-input {
+      height: 30px;
+      color: var(--color);
+    }
+  }
+}
+
+.date-input-popover {
+  .bp3-input {
+    height: 40px;
+  }
+
+  .bp3-input-action {
+    padding-right: 8px;
+    pointer-events: none;
+
+    svg {
+      height: 40px;
+      line-height: 40px;
+    }
+  }
+
+  .icon--chevron-up {
+    path {
+      fill: var(--activeColor);
+    }
+  }
+}
+
+.bp3-popover {
+  &-open {
+    .bp3-input {
+      color: var(--activeColor);
+
+      &::placeholder {
+        color: var(--activeColor);
+      }
+    }
+  }
+
+  &.bp3-dateinput-popover {
+    margin-top: 5px !important;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .date-input-popover {
+    .bp3-input {
+      height: 50px;
+      font-size: 18px;
+    }
+
+    .bp3-input-action {
+      svg {
+        height: 50px;
+        line-height: 50px;
+      }
+    }
+  }
+
+  .bp3-datepicker {
+    .DayPicker {
+      .bp3-datepicker {
+        &-month-select, &-year-select {
+          select {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}

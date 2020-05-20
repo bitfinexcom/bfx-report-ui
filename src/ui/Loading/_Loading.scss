@@ -1,0 +1,37 @@
+.loading {
+  width: fit-content;
+  height: fit-content;
+  margin: 195px auto 0 auto;
+
+  &.bp3-spinner {
+    display: block;
+  }
+
+  &-container {
+    height: 100%;
+    position: relative;
+  }
+
+}
+
+@media screen and (min-width: 2560px) {
+  .loading {
+    margin: 255px auto 0 auto;
+
+    &.bp3-spinner {
+      width: 100px;
+      height: 100px;
+
+      svg {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .loading {
+    margin: 55px auto 0 auto;
+  }
+}

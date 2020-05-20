@@ -1,6 +1,6 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button, ButtonGroup } from '@blueprintjs/core'
+import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
@@ -29,17 +29,17 @@ class TradesSwitch extends React.PureComponent {
     } = this.props
 
     return (
-      <ButtonGroup>
+      <ButtonGroup className='section-switch'>
         <Button
           value={queryConstants.MENU_TRADES}
-          active={target === queryConstants.MENU_TRADES}
+          intent={target === queryConstants.MENU_TRADES ? Intent.PRIMARY : undefined}
           onClick={this.switchSection}
         >
           {t('trades.title')}
         </Button>
         <Button
           value={queryConstants.MENU_CANDLES}
-          active={target === queryConstants.MENU_CANDLES}
+          intent={target === queryConstants.MENU_CANDLES ? Intent.PRIMARY : undefined}
           onClick={this.switchSection}
         >
           {t('candles.title')}

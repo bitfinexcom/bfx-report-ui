@@ -1,5 +1,7 @@
 import moment from 'moment-timezone'
+
 import authTypes from 'state/auth/constants'
+import { getDefaultTableScrollSetting } from 'state/utils'
 
 import types from './constants'
 
@@ -10,12 +12,12 @@ const initialState = {
   authToken: '',
   dateFormat: types.DATE_FORMATS[0],
   locale: 'en',
-  menuMode: types.MENU_MODE_NORMAL,
   queryLimit: 0,
   theme: types.DEFAULT_THEME,
   timezone: types.DEFAULT_TIMEZONE,
   inputTimezone: moment.tz.guess(),
   milliseconds: false,
+  tableScroll: getDefaultTableScrollSetting(),
 }
 
 export function baseReducer(state = initialState, action) {
@@ -46,11 +48,6 @@ export function baseReducer(state = initialState, action) {
         ...state,
         theme: payload,
       }
-    case types.SET_MENU_MODE:
-      return {
-        ...state,
-        menuMode: payload,
-      }
     case authTypes.LOGOUT:
       return {
         ...state,
@@ -75,6 +72,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         milliseconds: payload,
+      }
+    case types.TOGGLE_TABLE_SCROLL:
+      return {
+        ...state,
+        tableScroll: !state.tableScroll,
       }
     case types.SET_QUERY_LIMIT:
       return {

@@ -116,7 +116,7 @@ export default function getColumns(props) {
     {
       id: 'fee',
       name: 'column.fee',
-      width: 145,
+      width: COLUMN_WIDTHS.FEE,
       renderer: (rowIndex) => {
         const { fee, feeCurrency } = filteredData[rowIndex]
         const fixedFee = fixedFloat(fee)
@@ -144,7 +144,7 @@ export default function getColumns(props) {
     {
       id: 'feePercent',
       name: 'column.feePercent',
-      width: 90,
+      width: COLUMN_WIDTHS.FEE_PERC,
       renderer: (rowIndex) => {
         const feePercent = getFeePercent(filteredData[rowIndex])
         return (
@@ -161,7 +161,7 @@ export default function getColumns(props) {
     {
       id: 'mtsCreate',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: COLUMN_WIDTHS.TRADES_DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (

@@ -7,7 +7,7 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols } from 'state/symbols/utils'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
@@ -24,16 +24,17 @@ const TYPE = queryTypes.MENU_PUBLIC_FUNDING
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqPublicFunding({
-  smallestMts,
-  query,
+  start,
+  end,
   targetSymbol,
   filter,
 }) {
-  const params = getTimeFrame(query, smallestMts)
-  params.limit = LIMIT
-  params.filter = filter
-  if (targetSymbol) {
-    params.symbol = formatRawSymbols(mapRequestSymbols(targetSymbol, true))
+  const params = {
+    start,
+    end,
+    limit: LIMIT,
+    filter,
+    symbol: formatRawSymbols(mapRequestSymbols(targetSymbol, true)),
   }
   return makeFetchCall('getPublicTrades', params)
 }
@@ -42,12 +43,11 @@ function* fetchPublicFunding() {
   try {
     const { targetSymbol } = yield select(getPublicFunding)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-
-    const query = yield select(getQuery)
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(fetchDataWithPagination, getReqPublicFunding, {
-      smallestMts,
-      query,
+      start,
+      end,
       targetSymbol,
       filter,
     })

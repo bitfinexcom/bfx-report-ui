@@ -1,7 +1,7 @@
 import _map from 'lodash/map'
 
 import authTypes from 'state/auth/constants'
-import timeframeConstants from 'ui/TimeframeSelector/constants'
+import timeframeConstants from 'ui/TimeFrameSelector/constants'
 import { getLastMonth } from 'state/utils'
 
 import types from './constants'

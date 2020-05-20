@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types'
 
 export const propTypes = {
-  start: PropTypes.number,
+  className: PropTypes.string,
   end: PropTypes.number,
+  icon: PropTypes.bool,
+  start: PropTypes.number,
+  timezone: PropTypes.string,
+  toggleTimeFrameDialog: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
-  start: 0,
+  className: '',
   end: 0,
+  icon: true,
+  start: 0,
 }

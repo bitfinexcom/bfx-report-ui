@@ -3,10 +3,12 @@ import getDeviceType from 'utils/getDeviceType'
 import types from './constants'
 
 const initialState = {
-  isCustomDialogOpen: false,
   isExportDialogOpen: false,
+  isExportSuccessDialogOpen: false,
   isFrameworkDialogOpen: false,
   isPaginationDialogOpen: false,
+  isPreferencesDialogOpen: false,
+  isTimeFrameDialogOpen: false,
   latestPaginationTimestamp: undefined,
   device: getDeviceType(),
 }
@@ -14,15 +16,15 @@ const initialState = {
 export function uiReducer(state = initialState, action) {
   const { type, payload = {} } = action
   switch (type) {
-    case types.SHOW_CUSTOM_DIALOG:
-      return {
-        ...state,
-        isCustomDialogOpen: payload,
-      }
     case types.TOGGLE_EXPORT_DIALOG:
       return {
         ...state,
         isExportDialogOpen: !state.isExportDialogOpen,
+      }
+    case types.TOGGLE_EXPORT_SUCCESS_DIALOG:
+      return {
+        ...state,
+        isExportSuccessDialogOpen: !state.isExportSuccessDialogOpen,
       }
     case types.TOGGLE_FRAMEWORK_DIALOG:
       return {
@@ -36,6 +38,18 @@ export function uiReducer(state = initialState, action) {
         ...state,
         isPaginationDialogOpen: isOpen,
         latestPaginationTimestamp,
+      }
+    }
+    case types.TOGGLE_PREFERENCES_DIALOG: {
+      return {
+        ...state,
+        isPreferencesDialogOpen: !state.isPreferencesDialogOpen,
+      }
+    }
+    case types.TOGGLE_TIMEFRAME_DIALOG: {
+      return {
+        ...state,
+        isTimeFrameDialogOpen: payload,
       }
     }
     case types.UI_RESIZED:

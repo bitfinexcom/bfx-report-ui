@@ -2,16 +2,22 @@ import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
+import {
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
+import TimeRange from 'ui/TimeRange'
 import ColumnsFilter from 'ui/ColumnsFilter'
+import RefreshButton from 'ui/RefreshButton'
+import PairSelector from 'ui/PairSelector'
 import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
-import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import PairSelector from 'ui/PairSelector'
-import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, setPair } from 'state/utils'
 
@@ -28,6 +34,8 @@ class PublicTrades extends PureComponent {
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, TYPE)
   }
+
+  onPairSelect = pair => setPair(TYPE, this.props, pair)
 
   render() {
     const {
@@ -50,55 +58,14 @@ class PublicTrades extends PureComponent {
       timeOffset,
     }).filter(({ id }) => columns[id])
 
-    const renderPairSelector = (
-      <Fragment>
-        {' '}
-        <PairSelector
-          currentPair={targetPair}
-          onPairSelect={pair => setPair(TYPE, this.props, pair)}
-        />
-      </Fragment>
-    )
-
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='publictrades.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('publictrades.title')}
-            {' '}
-            <TimeRange />
-            {renderPairSelector}
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <SyncPrefButton sectionType={TYPE} />
-          </h4>
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
         <Fragment>
-          <h4>
-            {t('publictrades.title')}
-            {' '}
-            <TimeRange />
-            {renderPairSelector}
-            {' '}
-            <ColumnsFilter target={TYPE} />
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <SyncPrefButton sectionType={TYPE} />
-          </h4>
-          <Pagination target={TYPE} loading={pageLoading} />
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
@@ -110,6 +77,24 @@ class PublicTrades extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader>
+          <SectionHeaderTitle>{t('publictrades.title')}</SectionHeaderTitle>
+          <TimeRange className='section-header-time-range' />
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.symbol')}
+              </SectionHeaderItemLabel>
+              <PairSelector
+                currentPair={targetPair}
+                onPairSelect={this.onPairSelect}
+              />
+            </SectionHeaderItem>
+            <ColumnsFilter target={TYPE} />
+            <RefreshButton onClick={refresh} />
+            <SyncPrefButton sectionType={TYPE} />
+          </SectionHeaderRow>
+        </SectionHeader>
         {showContent}
       </Card>
     )

@@ -22,16 +22,26 @@ class TickersSnapshot extends PureComponent {
 
     return (
       <Fragment>
-        <h4>{t('positions.title')}</h4>
-        <DataTable
-          numRows={positionsTickersEntries.length}
-          tableColumns={positionsTickersColumns}
-        />
-        <h4>{t('wallets.title')}</h4>
-        <DataTable
-          numRows={walletsTickersEntries.length}
-          tableColumns={walletsTickersColumns}
-        />
+        <div className='tables-row'>
+          {positionsTickersEntries.length > 0 && (
+            <div className='tables-row-item'>
+              <div>{t('positions.title')}</div>
+              <DataTable
+                numRows={positionsTickersEntries.length}
+                tableColumns={positionsTickersColumns}
+              />
+            </div>
+          )}
+          {walletsTickersEntries.length > 0 && (
+            <div className='tables-row-item'>
+              <div>{t('wallets.title')}</div>
+              <DataTable
+                numRows={walletsTickersEntries.length}
+                tableColumns={walletsTickersColumns}
+              />
+            </div>
+          )}
+        </div>
       </Fragment>
     )
   }

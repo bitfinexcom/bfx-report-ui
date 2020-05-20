@@ -2,8 +2,9 @@
 import _get from 'lodash/get'
 
 import { formatPair, mapSymbol, mapPair } from 'state/symbols/utils'
-import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
+import timeRangeTypes from 'state/timeRange/constants'
+import queryTypes from 'state/query/constants'
 import {
   addPair,
   basePairState,
@@ -90,7 +91,7 @@ export function tradesReducer(state = initialState, action) {
       return setPairs(state, payload, initialState)
     case types.REFRESH:
       return refresh(TYPE, state, initialState)
-    case queryTypes.SET_TIME_RANGE:
+    case timeRangeTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:
       return initialState

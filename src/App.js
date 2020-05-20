@@ -12,8 +12,8 @@ function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <ConnectedRouter history={history}>
-        <div className='container-fluid'>
-          <Header />
+        <Header />
+        <div className='app'>
           <Auth />
           <Main />
         </div>

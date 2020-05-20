@@ -7,7 +7,8 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
-import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
+import { getQueryLimit } from 'state/query/utils'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -22,19 +23,17 @@ import { getTrades } from './selectors'
 const TYPE = queryTypes.MENU_TRADES
 
 function getReqTrades({
-  smallestMts,
-  query,
+  start,
+  end,
   targetPairs,
   filter,
-  queryLimit,
 }) {
-  const params = getTimeFrame(query, smallestMts)
-  params.filter = filter
-  if (targetPairs.length) {
-    params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
-  }
-  if (queryLimit) {
-    params.limit = queryLimit
+  const params = {
+    start,
+    end,
+    filter,
+    limit: getQueryLimit(TYPE),
+    symbol: formatRawSymbols(mapRequestPairs(targetPairs)),
   }
   return makeFetchCall('getTrades', params)
 }
@@ -43,16 +42,13 @@ function* fetchTrades() {
   try {
     const { targetPairs } = yield select(getTrades)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-    const query = yield select(getQuery)
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const filter = yield select(getFilterQuery, TYPE)
-    const queryLimit = yield select(getTargetQueryLimit, TYPE)
-
     const { result, error } = yield call(fetchDataWithPagination, getReqTrades, {
-      smallestMts,
-      query,
+      start,
+      end,
       targetPairs,
       filter,
-      queryLimit,
     })
     yield put(actions.updateTrades(result))
     yield put(updatePagination(TYPE, result))

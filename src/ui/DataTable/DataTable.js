@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import { Menu } from '@blueprintjs/core'
 import {
   Column,
-  Table,
   CopyCellsMenuItem,
+  Table,
 } from '@blueprintjs/table'
 import _keys from 'lodash/keys'
 
@@ -86,7 +87,7 @@ class DataTable extends PureComponent {
 
   render() {
     const {
-      numRows, t, tableColumns, device,
+      className, numRows, t, tableColumns, device, tableScroll,
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
 
@@ -96,7 +97,7 @@ class DataTable extends PureComponent {
 
     return (
       <Table
-        className='bitfinex-table'
+        className={classNames('bitfinex-table', className, { 'bitfinex-table-full-width': !tableScroll })}
         numRows={numRows}
         enableRowHeader={false}
         columnWidths={columnWidths}
@@ -128,12 +129,16 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
 })
 
 DataTable.propTypes = {
+  className: PropTypes.string,
   numRows: PropTypes.number.isRequired,
   tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
   device: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
+  tableScroll: PropTypes.bool.isRequired,
 }
 
-DataTable.defaultProps = {}
+DataTable.defaultProps = {
+  className: '',
+}
 
 export default DataTable

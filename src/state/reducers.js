@@ -37,6 +37,7 @@ import snapshotsReducer from './snapshots/reducer'
 import queryReducer from './query/reducer'
 import taxReportReducer from './taxReport/reducer'
 import tickersReducer from './tickers/reducer'
+import timeRangeReducer from './timeRange/reducer'
 import tradedVolumeReducer from './tradedVolume/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
@@ -46,7 +47,10 @@ import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
 
-const PERSIST_WHITELIST = ['base']
+const PERSIST_WHITELIST = [
+  'base',
+  'timeRange',
+]
 
 const PERSIST_VERSION = 0 // starts with -1
 const PERSIST_DEBUG = false
@@ -87,6 +91,7 @@ const BASE_REDUCERS = {
   routing: routingReducer,
   query: queryReducer,
   tickers: tickersReducer,
+  timeRange: timeRangeReducer,
   trades: tradesReducer,
   status: statusReducer,
   symbols: symbolsReducer,

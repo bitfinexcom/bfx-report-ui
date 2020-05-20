@@ -1,0 +1,264 @@
+.bitfinex-select {
+  .bp3-button {
+    width: 180px;
+    height: 40px;
+    padding-right: 8px;
+    background-color: var(--multiBg);
+    color: var(--color);
+    border: 1px solid var(--borderColor);
+    box-shadow: none;
+    justify-content: space-between;
+  }
+
+  &--language .bp3-button {
+    width: 140px;
+  }
+
+  &--timeframe .bp3-button {
+    width: 100px;
+  }
+
+  &-menu {
+    .bp3-popover-content {
+      width: 223px;
+      height: 100%;
+      margin-top: 5px;
+      margin-bottom: -5px;
+      padding: 0;
+
+      .bp3-input-group {
+        color: var(--color);
+
+        .bp3-input {
+          height: 30px;
+          border-radius: 2px;
+        }
+      }
+    }
+
+    &--symbol, &--pair {
+      .bp3-popover-content {
+        width: 180px;
+      }
+    }
+
+    &--language .bp3-popover-content {
+      width: 140px;
+
+      .bp3-menu {
+        min-width: unset;
+      }
+    }
+
+    &--timeframe .bp3-popover-content {
+      width: 100px;
+
+      .bp3-menu {
+        min-width: unset;
+      }
+    }
+
+    .bp3-menu {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      background-color: var(--multiBg);
+      border: 1px solid var(--borderColor);
+      border-radius: 2px;
+      scrollbar-width: none; // Firefox
+      -ms-overflow-style: none; // IE
+
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        background: transparent;
+      }
+
+      li:last-child {
+        .bp3-menu-item {
+          border-bottom: none;
+        }
+      }
+
+      &-item {
+        width: 100%;
+        padding: 5px 15px;
+        color: var(--color);
+        border-bottom: 1px solid var(--borderColor);
+        border-radius: 0;
+
+        &-label {
+          font-size: 12px;
+          color: var(--color);
+        }
+
+        &.bitfinex-queried-symbol {
+          background-color: var(--multiQueriedBg);
+          color: var(--multiQueriedColor);
+
+          &:hover {
+            background-color: var(--multiQueriedHoverBg);
+            color: var(--multiQueriedColor);
+
+            .bp3-menu-item-label {
+              color: var(--multiQueriedColor);
+            }
+          }
+        }
+
+        &:hover {
+          background-color: var(--multiHoverBg);
+          color: var(--activeColor);
+
+          .bp3-menu-item-label {
+            color: var(--activeColor);
+          }
+        }
+
+        &--selected {
+          background-color: var(--multiSelectedBg);
+          color: var(--multiSelectedColor);
+
+          .bp3-menu-item-label {
+            color: var(--multiSelectedColor);
+          }
+
+          &:hover {
+            background-color: var(--multiSelectedHoverBg);
+            color: var(--multiSelectedColor);
+
+            .bp3-menu-item-label {
+              color: var(--multiSelectedColor);
+            }
+          }
+        }
+
+        &.bp3-active {
+          background-color: var(--multiActiveBg);
+          color: var(--multiActiveColor);
+
+          .bp3-menu-item-label {
+            color: var(--multiActiveColor);
+          }
+
+          &:hover {
+            background-color: var(--multiActiveHoverBg);
+            color: var(--multiActiveHoverColor);
+
+            .bp3-menu-item-label {
+              color: var(--multiActiveHoverColor);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .bp3-popover-open {
+    input::placeholder {
+      color: var(--activeColor);
+    }
+
+    .bp3-button {
+      color: var(--activeColor);
+    }
+
+    .bp3-multi-select-arrow path {
+      fill: var(--activeColor);
+    }
+  }
+
+  .icon--chevron-up path {
+    fill: var(--activeColor);
+  }
+}
+
+.bp3-html-select.bp3-minimal {
+  select {
+    color: var(--color);
+
+    &:hover {
+      color: var(--color);
+      background-color: var(--menuHover);
+    }
+
+    option {
+      background-color: var(--selectOptionBg);
+    }
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .bitfinex-select {
+    .bp3-button {
+      width: 210px;
+      height: 50px;
+    }
+
+    &--language .bp3-button {
+      width: 160px;
+    }
+
+    &--timeframe .bp3-button {
+      width: 120px;
+    }
+
+    &-menu {
+      .bp3-popover-content {
+        width: 253px;
+
+        .bp3-input-group {
+          svg:first-child {
+            width: 20px;
+            height: 20px;
+            margin-top: 10px;
+          }
+
+          .bp3-input {
+            height: 40px;
+            font-size: 18px;
+          }
+
+          .bp3-icon-cross svg {
+            width: 20px;
+            height: 20px;
+            margin-top: 6px;
+          }
+        }
+      }
+
+      &--symbol, &--pair {
+        .bp3-popover-content {
+          width: 210px;
+        }
+      }
+
+      &--language .bp3-popover-content {
+        width: 160px;
+      }
+
+      &--timeframe .bp3-popover-content {
+        width: 120px;
+      }
+
+      .bp3-menu {
+        &-item {
+          padding: 6px 15px;
+
+          &-label {
+            font-size: 14px;
+            color: var(--color);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .bitfinex-select {
+    .bp3-button {
+      width: 150px;
+    }
+  }
+}

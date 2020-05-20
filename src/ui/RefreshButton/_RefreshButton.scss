@@ -1,0 +1,17 @@
+.refresh-button {
+  height: 24px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 2560px) {
+  .refresh-button {
+    height: 28px;
+    margin-bottom: 10px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

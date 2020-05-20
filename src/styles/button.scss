@@ -1,0 +1,131 @@
+.bp3-button {
+  min-width: 100px;
+  height: 30px;
+  font-size: 15px;
+  line-height: 18px;
+  border-radius: 2px;
+  vertical-align: baseline;
+  text-align: center;
+
+  &-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    box-shadow: none;
+  }
+
+  &:not([class*="bp3-intent-"]) {
+    background-image: none;
+    background-color: var(--bgColor2);
+    border: 1px solid var(--borderColor);
+    box-shadow: none;
+    color: var(--buttonColor);
+
+    &:hover, &:active, &.bp3-active {
+      background-color: var(--buttonHoverBg);
+      border: 1px solid var(--borderColor);
+      box-shadow: none;
+    }
+  }
+
+  &.bp3-intent {
+    &-primary {
+      background-image: none;
+      background-color: var(--buttonBg);
+      border: 1px solid var(--buttonBg);
+      box-shadow: none;
+      color: var(--buttonPrimaryColor);
+
+      &:hover, &:active, &.bp3-active {
+        background-color: var(--buttonPrimaryHoverBg);
+        color: var(--buttonPrimaryHoverColor);
+        border: 1px solid var(--buttonPrimaryHoverBg);
+        box-shadow: none;
+      }
+
+      &.bp3-disabled {
+        background-color: var(--buttonDisabledBg);
+        color: var(--buttonDisabledColor);
+        border-color: var(--buttonDisabledBg);
+
+        &:hover {
+          background-color: var(--buttonDisabledHoverBg);
+          color: var(--buttonDisabledColor);
+          border-color: var(--buttonDisabledHoverBg);
+        }
+      }
+    }
+
+    &-success {
+      background-image: none;
+      background-color: var(--buttonSuccessBg);
+      border: 1px solid var(--buttonSuccessBg);
+      box-shadow: none;
+      color: var(--buttonSuccessColor);
+
+      &:hover, &:active, &.bp3-active {
+        background-color: var(--buttonSuccessHoverBg);
+        border: 1px solid var(--buttonSuccessHoverBg);
+        box-shadow: none;
+
+        &:disabled {
+          background-color: rgb(16, 94, 72);
+          border-color: rgb(16, 94, 72);
+        }
+      }
+    }
+  }
+
+  &.button--medium {
+    width: 123px;
+    height: 40px;
+  }
+
+  &.button--large {
+    min-width: 162px;
+    height: 40px;
+  }
+}
+
+// toasts close button
+.bp3-minimal {
+  &.bp3-button,  > .bp3-button {
+    width: unset;
+    min-width: unset;
+    height: unset;
+    border: none;
+
+    &:hover {
+      border: none;
+    }
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .bp3-button {
+    min-width: 120px;
+    height: 40px;
+    font-size: 20px;
+
+    &.button--medium {
+      width: 143px;
+      height: 50px;
+    }
+
+    &.button--large {
+      min-width: 182px;
+      height: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .bp3-button {
+    &.button--large {
+      min-width: 145px;
+    }
+  }
+}

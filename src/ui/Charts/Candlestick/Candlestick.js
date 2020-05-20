@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next'
 import moment from 'moment'
 import classNames from 'classnames'
 import { createChart, CrosshairMode } from 'lightweight-charts'
+import _debounce from 'lodash/debounce'
 
 import { THEME_CLASSES } from 'utils/themes'
 
@@ -14,7 +15,7 @@ import { propTypes, defaultProps } from './Candlestick.props'
 
 const STYLES = {
   [THEME_CLASSES.DARK]: {
-    backgroundColor: '#30404d',
+    backgroundColor: '#102331',
     textColor: 'rgba(255, 255, 255, 0.5)',
     volumeColor: 'rgb(97,107,115)',
   },
@@ -40,8 +41,15 @@ class Candlestick extends React.PureComponent {
 
   tradeSeries = null
 
+  constructor() {
+    super()
+
+    this.onResize = _debounce(this.onResize, 100)
+  }
+
   componentDidMount() {
     this.createChart()
+    window.addEventListener('resize', this.onResize, true)
   }
 
   componentDidUpdate(prevProps) {
@@ -63,6 +71,11 @@ class Candlestick extends React.PureComponent {
     if (this.chart) {
       this.cleanChartData()
     }
+    window.removeEventListener('resize', this.onResize)
+  }
+
+  onResize = () => {
+    this.recreateChart()
   }
 
   createChart = () => {
@@ -72,7 +85,13 @@ class Candlestick extends React.PureComponent {
 
     const element = document.getElementById('candlestick')
     const width = element.offsetWidth
-    const height = 500
+    let height = 520
+    if (window.innerHeight <= 812) {
+      height = 420
+    }
+    if (window.innerHeight >= 1440) {
+      height = 850
+    }
 
     const chart = createChart(element, {
       width,

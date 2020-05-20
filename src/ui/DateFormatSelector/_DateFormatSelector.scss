@@ -1,0 +1,69 @@
+.bitfinex-select {
+  &.bitfinex-select--date-format {
+    .bp3-button {
+      width: 130px;
+      margin: 0;
+    }
+  }
+
+  &-menu.bitfinex-select-menu--date-format {
+    .bp3-popover-content {
+      width: 130px;
+
+      .bp3-menu {
+        min-width: unset;
+      }
+    }
+  }
+}
+
+.bp3-timezone-picker {
+  &-popover {
+    &.bitfinex-select-menu .bp3-popover-content {
+      width: unset;
+    }
+
+    .bp3-input-group {
+      input {
+        background-color: var(--bgColor2);
+      }
+    }
+  }
+
+  .bp3-button.timezone-picker {
+    width: 110px;
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .bitfinex-select {
+    &.bitfinex-select--date-format {
+      .bp3-button {
+        width: 150px;
+      }
+    }
+
+    &-menu.bitfinex-select-menu--date-format {
+      .bp3-popover-content {
+        width: 150px;
+      }
+    }
+  }
+
+  .bp3-timezone-picker {
+    &-popover {
+      .bp3-input-group {
+        .bp3-icon-search {
+          svg:first-child {
+            margin-top: 3px !important;
+          }
+        }
+      }
+    }
+
+    .bp3-button.timezone-picker {
+      width: 140px;
+    }
+  }
+}

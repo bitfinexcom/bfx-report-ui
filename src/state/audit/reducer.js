@@ -3,8 +3,9 @@
 import _get from 'lodash/get'
 
 import { formatPair, mapPair } from 'state/symbols/utils'
-import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
+import timeRangeTypes from 'state/timeRange/constants'
+import queryTypes from 'state/query/constants'
 import {
   baseState,
   fetch,
@@ -84,7 +85,7 @@ export function positionsAuditReducer(state = initialState, action) {
         ...initialState,
         targetIds: state.targetIds,
       }
-    case queryTypes.SET_TIME_RANGE:
+    case timeRangeTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:
       return initialState

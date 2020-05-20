@@ -1,9 +1,15 @@
 import React, { PureComponent, Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button, InputGroup, Icon } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
+import classNames from 'classnames'
+import {
+  Button,
+  InputGroup,
+  Intent,
+} from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 
+import ColumnsSelect from 'ui/ColumnsSelect'
+import Icon from 'icons'
 import { selectTextOnFocus } from 'utils/inputs'
 import { getValidSortedFilters } from 'state/filters/utils'
 import { EMPTY_FILTER } from 'var/filterTypes'
@@ -138,18 +144,21 @@ class ColumnsFilter extends PureComponent {
 
     const hasChanges = this.haveFiltersChanged()
     const hasAppliedFilters = currentFilters.some(filter => filter.value)
+    const buttonClasses = classNames('button--large', { 'columns-filter--active': hasAppliedFilters })
 
     return (
       <Fragment>
         <div className='columns-filter-wrapper'>
-          <Button onClick={this.toggleDialog}>
+          <Button
+            onClick={this.toggleDialog}
+            className={buttonClasses}
+            intent={Intent.PRIMARY}
+          >
             {t('columnsfilter.title')}
           </Button>
-          {hasAppliedFilters && <div className='columns-filter-wrapper-mark' />}
         </div>
 
         <ColumnsFilterDialog
-          target={target}
           isOpen={isOpen}
           hasChanges={hasChanges}
           onClear={this.onClear}
@@ -181,9 +190,8 @@ class ColumnsFilter extends PureComponent {
                       onChange={e => this.onInputChange(index, e)}
                       onFocus={selectTextOnFocus}
                     />
-                    <Icon
+                    <Icon.BIN
                       className='columns-filter-item-remove'
-                      icon={IconNames.SMALL_CROSS}
                       onClick={() => this.onFilterRemove(index)}
                     />
                   </div>
@@ -191,11 +199,14 @@ class ColumnsFilter extends PureComponent {
               })}
             </div>
 
-            {(filters.length < MAX_FILTERS) && (
-              <div className='columns-filter-add' onClick={this.onFilterAdd}>
-                {`+ ${t('preferences.sync.add-filter')}`}
-              </div>
-            )}
+            <div className='columns-filter-controls'>
+              {(filters.length < MAX_FILTERS) && (
+                <span className='columns-filter-controls-add color--active' onClick={this.onFilterAdd}>
+                  {`+ ${t('preferences.sync.add-filter')}`}
+                </span>
+              )}
+              <ColumnsSelect target={target} />
+            </div>
           </div>
         </ColumnsFilterDialog>
       </Fragment>

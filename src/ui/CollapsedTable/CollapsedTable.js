@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
-import { Card } from '@blueprintjs/core'
 import _times from 'lodash/times'
 
 class CollapsedTable extends PureComponent {
@@ -11,7 +10,7 @@ class CollapsedTable extends PureComponent {
     return (
       <div className='collapsed-table'>
         {_times(numRows, rowIndex => (
-          <Card className='collapsed-table-item' key={rowIndex}>
+          <div className='collapsed-table-item' key={rowIndex}>
             {tableColumns.map((column) => {
               const {
                 id, name, nameStr, renderer,
@@ -19,17 +18,13 @@ class CollapsedTable extends PureComponent {
               const cell = renderer(rowIndex)
 
               return (
-                <div className='collapsed-table-item-attribute' key={id}>
-                  <div className='collapsed-table-item-attribute-name'>
-                    {nameStr || t(name)}
-                  </div>
-                  <div className='collapsed-table-item-attribute-value'>
-                    {cell.props.children}
-                  </div>
+                <div key={id}>
+                  <div>{nameStr || t(name)}</div>
+                  <div>{cell.props.children}</div>
                 </div>
               )
             })}
-          </Card>
+          </div>
         ))}
       </div>
     )

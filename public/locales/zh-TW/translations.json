@@ -4,8 +4,9 @@
   },
   "accountsummary": {
     "title": "帳戶摘要",
-    "fees": "您在Bitfinex交易的手續費率（基於您的交易量）",
-    "fees_deriv": "您於衍生品交易的手續費率（基於您的交易量）",
+    "fees": "您在Bitfinex交易的手續費率",
+    "fees_explain": "（基於您的交易量）",
+    "fees_deriv": "您於衍生品交易的手續費率",
     "30dVolume": "過去30天交易量",
     "margin_funds": "過去30天提供的保證金融資之總收益"
   },
@@ -105,7 +106,7 @@
     "title": "篩選欄",
     "clear": "清除",
     "cancel": "取消",
-    "apply": "套用篩選",
+    "apply": "確認",
     "filters": {
       "contains": "包含",
       "beginsWith": "開始於",
@@ -121,11 +122,10 @@
   "columnsselect": {
     "title": "欄位選擇",
     "cancel": "取消",
-    "apply": "適用欄位"
+    "apply": "確認"
   },
   "concentrationrisk": {
     "title": "集中風險",
-    "nodata": "沒有相關資料。請嘗試選擇其他時間。",
     "query": {
       "title": "查詢",
       "tooltip": "選擇一個時間以查看過去時刻的錢包"
@@ -146,6 +146,7 @@
     "store": "期間的資料，並儲存至本地資料夾。",
     "export": "匯出",
     "cancel": "取消",
+    "okay": "好",
     "status": {
       "local": "已產生{{topic}}的csv檔，請查看您本地的'csv'資料夾。",
       "email": "正在生成您的 CSV 格式報告。生成後將立即透過 Email 送出。"
@@ -246,15 +247,15 @@
   "preferences": {
     "title": "偏好設定",
     "close": "關閉",
-    "language": "語言:",
-    "theme": "佈景主題:",
-    "timezone": "時區:",
-    "timezone-input": "輸入時區:",
-    "dateformat": "日期格式:",
-    "milliseconds": "顯示毫秒:",
+    "language": "語言",
+    "theme": "主題",
+    "timezone": "時區",
+    "timezone-input": "輸入時區",
+    "dateformat": "日期格式",
+    "milliseconds": "顯示毫秒",
     "sync": {
-      "add-filter": "add filter",
-      "add-pair": "add pair",
+      "add-filter": "增加篩選條件",
+      "add-pair": "增加交易對",
       "title": "同步偏好設定",
       "notset": "同步偏好尚未設定",
       "description": "為了離線查詢公開交易與牌價，請先設定欲離線查詢的交易對與開始日期。",
@@ -276,13 +277,14 @@
   },
   "query": {
     "title": "查詢",
-    "startDateTooltip": "選擇開始時間",
-    "endDateTooltip": "選擇結束時間"
+    "startTime": "Start Time",
+    "endTime": "End Time"
   },
   "querylimit": {
     "tooltip": "選擇每次取回的查詢數目。較大的查詢數目需要較長的查詢時間"
   },
   "selector": {
+    "select": "選取",
     "filter": {
       "symbol": "代幣過濾器",
       "pair": "代幣對過濾器"
@@ -293,8 +295,7 @@
     "query": {
       "title": "查詢",
       "tooltip": "選擇快照的時間"
-    },
-    "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。"
+    }
   },
   "status":{
     "success": "於 {{time}} {{topic}}成功",
@@ -348,6 +349,7 @@
   },
   "timeframe": {
     "custom": {
+      "cancel": "取消",
       "title": "選擇查詢時段",
       "view" : "查詢"
     },

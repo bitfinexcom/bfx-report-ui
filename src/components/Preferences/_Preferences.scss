@@ -1,0 +1,91 @@
+.preferences {
+  &.bp3-dialog {
+    .bp3-dialog {
+      &-header {
+        padding-left: 20px;
+      }
+
+      &-body {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+  }
+
+  &-row {
+    margin-bottom: 25px;
+
+    &:last-of-type {
+      margin-top: -10px;
+      margin-bottom: 0;
+    }
+  }
+
+  &-item {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    & > span, & > .theme-switcher {
+      display: block;
+      margin-top: 10px;
+    }
+  }
+
+  .theme-switcher {
+    margin-bottom: 25px;
+
+    &-theme {
+      &--light svg {
+        box-shadow: var(--lightThemeBorder);
+      }
+    }
+  }
+
+  &-timezones {
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .preferences-item {
+      margin-bottom: 10px;
+    }
+  }
+
+  .timezone-picker {
+    width: 106px;
+    height: 40px;
+  }
+
+  .bp3-checkbox {
+    width: 14px;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .preferences {
+    width: 590px;
+
+    &-row {
+      margin-bottom: 30px;
+    }
+
+    &-item {
+      &:not(:last-child) {
+        margin-right: 30px;
+      }
+
+      & > span, & > .theme-switcher {
+        margin-top: 15px;
+      }
+    }
+
+    &-timezones {
+      .preferences-item {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

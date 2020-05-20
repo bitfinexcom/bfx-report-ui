@@ -7,11 +7,13 @@ import {
   setApiKey, setApiSecret, setAuthToken, setTimezone, setTheme, setLang,
 } from 'state/base/actions'
 import { checkAuth } from 'state/auth/actions'
-import { setCustomTimeRange } from 'state/query/actions'
+import { setTimeRange } from 'state/timeRange/actions'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 import { isSynced } from 'state/sync/saga'
-import { getThemeClass } from 'utils/themes'
+import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
 import { platform } from 'var/config'
+import timeRangeTypes from 'state/timeRange/constants'
+import { getTheme } from 'state/base/selectors'
 import { LANGUAGES } from 'locales/i18n'
 
 import types from './constants'
@@ -37,6 +39,13 @@ function* uiLoaded() {
   if (theme) {
     const themeClass = getThemeClass(theme)
     yield put(setTheme(themeClass))
+  } else {
+    // check if current theme is valid, replace if not
+    const currentTheme = yield select(getTheme)
+    if (!verifyTheme(currentTheme)) {
+      const newTheme = getNewTheme(currentTheme)
+      yield put(setTheme(newTheme))
+    }
   }
 
   // handle custom locale
@@ -50,7 +59,11 @@ function* uiLoaded() {
   // handle custom time range
   if (range && range.indexOf('-') > -1) {
     const [startStr, endStr] = range.split('-')
-    yield put(setCustomTimeRange(parseInt(startStr, 10), parseInt(endStr, 10)))
+    yield put(setTimeRange({
+      range: timeRangeTypes.CUSTOM,
+      start: parseInt(startStr, 10),
+      end: parseInt(endStr, 10),
+    }))
   }
 
   // handle authToken

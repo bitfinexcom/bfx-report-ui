@@ -1,0 +1,142 @@
+.timeframe {
+  height: 44px;
+  line-height: 44px;
+  user-select: none;
+  cursor: pointer;
+
+  &-wrapper {
+    height: 44px;
+
+    .icon--chevron-up {
+      display: none;
+    }
+
+    &.bp3-active {
+      background-color: var(--bgColor2);
+      color: var(--activeColor);
+
+      svg path {
+        fill: var(--activeColor);
+      }
+
+      .icon--chevron-down {
+        display: none;
+      }
+
+      .icon--chevron-up {
+        display: inline-block;
+      }
+    }
+
+    &:hover {
+      background-color: var(--menuHover);
+      color: var(--activeColor);
+
+      svg path {
+        fill: var(--activeColor);
+      }
+    }
+  }
+
+  &-target {
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  svg {
+    height: 44px;
+  }
+
+  &-range {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 3px 0 10px;
+    font-size: 1rem;
+  }
+
+  .bp3-popover-content {
+    border-radius: 0;
+  }
+
+  .bp3-popover-target {
+    height: 45px;
+  }
+
+  &-popover {
+    width: 274px;
+    padding: 20px 15px;
+    border: 1px solid var(--borderColor);
+    border-top: none;
+    border-radius: 0;
+    text-align: right;
+
+    .bp3-popover-target {
+      width: 100%;
+    }
+
+    .bp3-input {
+      width: 100%;
+      font-size: 0.9rem;
+      background-color: var(--bgColor);
+      text-align: center;
+
+      &::placeholder {
+        text-align: center;
+      }
+
+      &-group {
+        margin: 0 auto 12px auto;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .bp3-input {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .timeframe {
+    height: 56px;
+    line-height: 56px;
+
+    &-wrapper {
+      height: 56px;
+    }
+
+    svg {
+      height: 56px;
+    }
+
+    &-range {
+      margin: 0 5px 0 14px;
+    }
+
+    .bp3-popover-target {
+      height: 57px;
+    }
+
+    &-target {
+      svg {
+        width: 28px;
+      }
+    }
+
+    &-popover {
+      width: 372px;
+      padding: 25px 25px;
+
+      .bp3-input {
+        &-group {
+          .bp3-input {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+}

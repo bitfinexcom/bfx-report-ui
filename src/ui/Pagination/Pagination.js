@@ -1,10 +1,11 @@
 import React, { createRef, Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button, Spinner } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
+import classNames from 'classnames'
+import { Swipeable } from 'react-swipeable'
+import { Spinner } from '@blueprintjs/core'
 
-import QueryLimitSelector from 'ui/QueryLimitSelector'
-import { canChangeQueryLimit, getPageSize } from 'state/query/utils'
+import Icon from 'icons'
+import { getPageSize } from 'state/query/utils'
 
 import { propTypes, defaultProps } from './Pagination.props'
 
@@ -48,6 +49,36 @@ class Pagination extends PureComponent {
     fetchNext(target)
   }
 
+  onSwiped = (e) => {
+    const { dir } = e
+    const {
+      entriesSize,
+      loading,
+      nextPage,
+      page,
+      target,
+    } = this.props
+
+    if (loading) {
+      return
+    }
+
+    if (dir === 'Left') {
+      const PAGE_SIZE = getPageSize(target)
+      const pageLen = Math.ceil(entriesSize / PAGE_SIZE)
+
+      if (page !== pageLen) {
+        this.forward()
+      } else if (nextPage) {
+        this.fetchNext()
+      }
+    }
+
+    if (dir === 'Right' && page !== 1) {
+      this.backward()
+    }
+  }
+
   render() {
     const {
       entriesSize,
@@ -71,63 +102,48 @@ class Pagination extends PureComponent {
     ) : ''
 
     const renderLoading = loading ? (
-      <Fragment>
-        <Spinner size={5} />
-        {' '}
-        <span className='bitfinex-show-soft'>
-          {t('pagination.loading')}
-        </span>
-      </Fragment>
+      <span className='pagination-loading'>
+        <Spinner size={6} />
+      </span>
     ) : undefined
 
     return (
-      <div className='pagination row center-xs'>
-        <div className='bitfinex-pagination-group'>
-          <Button
-            minimal
-            className='pagination-icon'
-            icon={IconNames.DOUBLE_CHEVRON_LEFT}
+      <Swipeable className='pagination' onSwiped={this.onSwiped} delta={50}>
+        <div className='pagination-group'>
+          <Icon.CHEVRON_DOUBLE_LEFT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page === 1 || loading })}
             onClick={this.jumpToFirstPage}
-            disabled={page === 1 || loading}
           />
-          <Button
-            minimal
-            className='pagination-icon'
-            icon={IconNames.CHEVRON_LEFT}
+          <Icon.CHEVRON_LEFT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page === 1 || loading })}
             onClick={this.backward}
-            disabled={page - 1 === 0 || loading}
           />
-          {t('pagination.page')}
-          <input
-            className='pagination-input'
-            ref={this.pageInput}
-            placeholder={page}
-            onKeyPress={this.handleKeyPress}
-            data-pagelen={pageLen}
-            disabled={loading}
-          />
-          {t('pagination.of')}
-          {' '}
-          {pageLen}
-          {renderRestDots}
-          <Button
-            minimal
-            className='pagination-icon'
-            icon={IconNames.CHEVRON_RIGHT}
+          <span className='pagination-page'>
+            {t('pagination.page')}
+            <input
+              className='pagination-input'
+              ref={this.pageInput}
+              placeholder={page}
+              onKeyPress={this.handleKeyPress}
+              data-pagelen={pageLen}
+              disabled={loading}
+            />
+            {t('pagination.of')}
+            {' '}
+            {pageLen}
+            {renderRestDots}
+          </span>
+          <Icon.CHEVRON_RIGHT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page === pageLen || loading })}
             onClick={this.forward}
-            disabled={page === pageLen || loading}
           />
-          <Button
-            minimal
-            className='pagination-icon'
-            rightIcon={IconNames.DOUBLE_CHEVRON_RIGHT}
+          <Icon.CHEVRON_DOUBLE_RIGHT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': !nextPage || loading })}
             onClick={this.fetchNext}
-            disabled={!nextPage || loading}
           />
-          {canChangeQueryLimit(target) && <QueryLimitSelector target={target} />}
           {renderLoading}
         </div>
-      </div>
+      </Swipeable>
     )
   }
 }

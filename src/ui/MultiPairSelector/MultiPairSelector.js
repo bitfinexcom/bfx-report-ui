@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import classNames from 'classnames'
 import {
   Intent,
   MenuItem,
 } from '@blueprintjs/core'
-import { MultiSelect } from '@blueprintjs/select'
 
+import MultiSelect from 'ui/MultiSelect'
 import { filterSelectorItem } from 'ui/utils'
 
 import { propTypes, defaultProps } from './MultiPairSelector.props'
@@ -18,12 +18,14 @@ class MultiPairSelector extends PureComponent {
     }
     const { currentFilters, existingPairs } = this.props
     const isCurrent = currentFilters.includes(pair)
-    const className = existingPairs.includes(pair) && !isCurrent && !active
-      ? 'bitfinex-queried-symbol' : ''
+    const classes = classNames({
+      'bitfinex-queried-symbol': existingPairs.includes(pair) && !isCurrent && !active,
+      'bp3-menu-item--selected': isCurrent,
+    })
 
     return (
       <MenuItem
-        className={className}
+        className={classes}
         active={active}
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={disabled}
@@ -40,7 +42,6 @@ class MultiPairSelector extends PureComponent {
       existingPairs,
       pairs,
       togglePair,
-      t,
     } = this.props
 
     const items = pairs.length
@@ -49,21 +50,17 @@ class MultiPairSelector extends PureComponent {
 
     return (
       <MultiSelect
-        className='bitfinex-multi-select'
         disabled={!pairs.length && !existingPairs.length}
-        placeholder={t('selector.filter.pair')}
         items={items}
         itemRenderer={this.renderPair}
         itemPredicate={filterSelectorItem}
         onItemSelect={togglePair}
-        popoverProps={{ minimal: true }}
         tagInputProps={{
           tagProps: { minimal: true },
           onRemove: togglePair,
         }}
         tagRenderer={pair => pair}
         selectedItems={currentFilters}
-        resetOnSelect
       />
     )
   }
@@ -72,4 +69,4 @@ class MultiPairSelector extends PureComponent {
 MultiPairSelector.propTypes = propTypes
 MultiPairSelector.defaultProps = defaultProps
 
-export default withTranslation('translations')(MultiPairSelector)
+export default MultiPairSelector

@@ -6,7 +6,8 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
+import { getQueryLimit } from 'state/query/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
@@ -22,19 +23,17 @@ import { getLedgers } from './selectors'
 const TYPE = queryTypes.MENU_LEDGERS
 
 function getReqLedgers({
-  smallestMts,
-  query,
+  start,
+  end,
   targetSymbols,
-  queryLimit,
   filter,
 }) {
-  const params = getTimeFrame(query, smallestMts)
-  params.filter = filter
-  if (targetSymbols.length) {
-    params.symbol = mapRequestSymbols(targetSymbols)
-  }
-  if (queryLimit) {
-    params.limit = queryLimit
+  const params = {
+    start,
+    end,
+    filter,
+    limit: getQueryLimit(TYPE),
+    symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
   }
   return makeFetchCall('getLedgers', params)
 }
@@ -45,15 +44,13 @@ function* fetchLedgers() {
     const { targetSymbols } = yield select(getLedgers)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const filter = yield select(getFilterQuery, TYPE)
-    const queryLimit = yield select(getTargetQueryLimit, TYPE)
 
-    const query = yield select(getQuery)
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const { result, error } = yield call(fetchDataWithPagination, getReqLedgers, {
-      smallestMts,
-      query,
+      start,
+      end,
       targetSymbols,
       filter,
-      queryLimit,
     })
     yield put(actions.updateLedgers(result))
     yield put(updatePagination(TYPE, result))

@@ -4,8 +4,9 @@
   },
   "accountsummary": {
     "title": "Account Summary",
-    "fees": "Your fees on Bitfinex (based on your trading volume)",
-    "fees_deriv": "Your fees on Bitfinex Derivatives (based on your trading volume)",
+    "fees": "Your fees on Bitfinex",
+    "fees_explain": "(based on your trading volume)",
+    "fees_deriv": "Your fees on Bitfinex Derivatives",
     "30dVolume": "Your volume in the last 30 days",
     "margin_funds": "Total return on your margin funds provided in the last 30 days"
   },
@@ -17,7 +18,7 @@
   },
   "auth": {
     "auth": "Auth",
-    "title": "Please Login",
+    "title": "Login",
     "enterAPIKey": "Enter API Key:",
     "enterAPISecret": "Enter API Secret:",
     "checkAuth": "Check Auth",
@@ -44,15 +45,15 @@
     "percentage": "Percentage"
   },
   "column": {
-    "actual-price": "Actual price",
+    "actual-price": "Actual Price",
     "amount": "Amount",
-    "amount-exe": "Executed amount",
+    "amount-exe": "Executed Amount",
     "amountUsd": "Amount (USD)",
     "ask": "Ask",
-    "avgprice": "Average execution price",
+    "avgprice": "Average Execution Price",
     "balance": "Balance",
     "balanceUsd": "Balance (USD)",
-    "base-price": "Base price",
+    "base-price": "Base Price",
     "bid": "Bid",
     "browser": "Browser",
     "closed": "Closed",
@@ -64,20 +65,20 @@
     "description": "Description",
     "destination": "Destination",
     "fee": "Fee",
-    "feePercent": "Fee perc",
+    "feePercent": "Fee Perc",
     "fees": "Fees",
-    "fundBalance": "Insurance fund balance",
-    "fundingAccrued": "Next funding accrued",
-    "fundingStep": "Next funding step",
+    "fundBalance": "Insurance Fund Balance",
+    "fundingAccrued": "Next Funding Accrued",
+    "fundingStep": "Next Funding Step",
     "id": "#",
     "ip": "IP",
-    "lastpayout": "Last payout",
-    "liq-price": "Liq price",
-    "maker_fees": "Maker fees",
-    "maker_rebate": "Maker rebate",
+    "lastpayout": "Last Payout",
+    "liq-price": "Liq Price",
+    "maker_fees": "Maker Fees",
+    "maker_rebate": "Maker Rebate",
     "meta": "Metadata",
     "mobile": "Mobile",
-    "movementsTotal": "Movements total amount (USD)",
+    "movementsTotal": "Movements Total Amount (USD)",
     "opened": "Opened",
     "orderid": "Order ID",
     "pair": "Pair",
@@ -86,37 +87,37 @@
     "pl": "P/L",
     "plUsd": "P/L (USD)",
     "plperc": "P/L%",
-    "positionpair": "Position pair",
-    "positionsTotal": "Positions total P/L (USD)",
+    "positionpair": "Position Pair",
+    "positionsTotal": "Positions Total P/L (USD)",
     "price": "Price",
-    "priceDeriv": "Deriv price",
-    "priceSpot": "Spot price",
-    "pricetrail": "Trailing price",
+    "priceDeriv": "Deriv Price",
+    "priceSpot": "Spot Price",
+    "pricetrail": "Trailing Price",
     "rate": "Rate",
     "rateperc": "Rate %",
     "side": "Side",
     "status": "Status",
-    "fundingCost": "Funding cost",
-    "fundingType": "Funding type",
-    "taker_fees": "Taker fees",
-    "taker_rebate": "Taker rebate",
+    "fundingCost": "Funding Cost",
+    "fundingType": "Funding Type",
+    "taker_fees": "Taker Fees",
+    "taker_rebate": "Taker Rebate",
     "time": "Time",
-    "totalResult": "Total result (USD)",
+    "totalResult": "Total Result (USD)",
     "transactionId": "Transaction ID",
     "type": "Type",
-    "typeprev": "Previous order type",
+    "typeprev": "Previous Order Type",
     "updated": "Updated",
     "usd": "USD",
     "version": "Version",
     "volume": "Volume",
     "wallet": "Wallet",
-    "walletsTotal": "Wallets total balance (USD)"
+    "walletsTotal": "Wallets Total Balance (USD)"
   },
   "columnsfilter": {
     "title": "Filter Columns",
     "clear": "Clear",
     "cancel": "Cancel",
-    "apply": "Apply Filters",
+    "apply": "Apply",
     "filters": {
       "contains": "Contains",
       "beginsWith": "Begins with",
@@ -130,13 +131,12 @@
     }
   },
   "columnsselect": {
-    "title": "Columns Select",
+    "title": "Column Selection",
     "cancel": "Cancel",
-    "apply": "Apply Columns"
+    "apply": "Apply"
   },
   "concentrationrisk": {
     "title": "Concentration Risk",
-    "nodata": "No related data in this date time. You can try another date time.",
     "query": {
       "title": "Query",
       "tooltip": "Select a time to query the wallets snapshot"
@@ -153,15 +153,17 @@
     "query": "Prepare Export",
     "title": "Export CSV",
     "prepare": "Bitfinex will prepare your data during",
-    "send": "and send to Email {{email}}.",
+    "send": "and send to {{email}}.",
     "store": "and store to your local folder.",
     "export": "Export",
     "cancel": "Cancel",
+    "okay": "Okay",
     "status": {
-      "local": "{{topic}} csv generated, please check your local 'csv' folder",
+      "local": "Export csv generated, please check your local 'csv' folder",
       "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
     },
-    "targets": "Data to export"
+    "success": "Success",
+    "targets": "Data to Export"
   },
   "fcredit": {
     "title": "Funding Credit (Used)",
@@ -257,16 +259,17 @@
   "preferences":{
     "title": "Preferences",
     "close": "Close",
-    "language": "Language:",
-    "theme": "Theme:",
-    "timezone": "Timezone:",
-    "timezone-input": "Input Timezone:",
-    "dateformat": "Date Format:",
-    "milliseconds": "Display Milliseconds:",
+    "language": "Language",
+    "theme": "Theme",
+    "timezone": "Timezone",
+    "timezone-input": "Input Timezone",
+    "dateformat": "Date Format",
+    "milliseconds": "Display Milliseconds",
+    "table_scroll": "Table Scroll",
     "sync": {
-      "add-filter": "add filter",
-      "add-pair": "add pair",
-      "title": "Sync preferences",
+      "add-filter": "Add Filter",
+      "add-pair": "Add Pair",
+      "title": "Sync Preferences",
       "notset": "Sync preferences are not set yet",
       "description": "To access Public Trades and Tickers offline, you need to setup offline available pairs and the start query time.",
       "symbol-description": "To access Public Funding offline, you need to setup offline available currencies and the start query time.",
@@ -287,13 +290,14 @@
   },
   "query": {
     "title": "Query",
-    "startDateTooltip": "Select a start time",
-    "endDateTooltip": "Select end time"
+    "startTime": "Start Time",
+    "endTime": "End Time"
   },
   "querylimit": {
     "tooltip": "Choose the size per query. The larger size will take longer query time"
   },
   "selector": {
+    "select": "Select",
     "filter": {
       "symbol": "Symbol Filter",
       "pair": "Pair Filter"
@@ -304,8 +308,7 @@
     "query": {
       "title": "Query",
       "tooltip": "Select a time to query snapshots"
-    },
-    "nodata": "No related data in this date time. You can try another date time."
+    }
   },
   "status": {
     "success": "{{topic}} Success at {{time}}",
@@ -314,7 +317,8 @@
     "noid": "dev: the status action should contain the id param",
     "request": {
       "error": "{{topic}} request fail {{detail}}"
-    }
+    },
+    "timeframe_update": "Time frame updated"
   },
   "symbols": {
     "title": "Get symbols"
@@ -322,9 +326,12 @@
   "sync": {
     "title": "Sync",
     "switch-mode": "Switch Sync Mode",
-    "online": "Currently query online. Click to switch to offline query mode",
-    "offline": "Currently query offline. Click to switch to online query mode",
-    "insync": "Currently query online. Click to pulse the sync procedure",
+    "online": "Query Online",
+    "online_tooltip": "Click to switch to offline query mode",
+    "offline": "Query Offline",
+    "offline_tooltip": "Click to switch to online query mode",
+    "insync": "Syncing",
+    "insync_tooltip": "Click to stop the sync procedure",
     "description": "We'll start caching your data locally. Once syncing is complete, you can query locally in offline mode. You can still query online during sync.",
     "sync-description": "Your data is syncing locally. Would you like to stop the sync process and keep in online query mode?",
     "close": "Cancel",
@@ -351,7 +358,8 @@
   },
   "theme": {
     "light": "Light",
-    "dark": "Dark"
+    "dark": "Dark",
+    "midnight": "Midnight"
   },
   "tickers": {
     "title": "Tickers",
@@ -359,6 +367,8 @@
   },
   "timeframe": {
     "custom": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
       "title": "Select Query Range",
       "view" : "View"
     },
@@ -378,7 +388,8 @@
     "past_year": "Past Year",
     "past_2y": "Past 2 Years",
     "range_limit": "Queries more than six years behind the actual date are not allowed",
-    "start-date-placeholder": "Start Date Time",
+    "start-date-placeholder": "Start Date",
+    "end-date-placeholder": "End Date",
     "today": "Today",
     "year": "Year"
   },

@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import classNames from 'classnames'
 import {
   Intent,
   MenuItem,
 } from '@blueprintjs/core'
-import { MultiSelect } from '@blueprintjs/select'
 
+import MultiSelect from 'ui/MultiSelect'
 import { filterSelectorItem } from 'ui/utils'
 
 import { propTypes, defaultProps } from './MultiSymbolSelector.props'
@@ -17,15 +17,16 @@ class MultiSymbolSelector extends PureComponent {
       return null
     }
     const { currencies, currentFilters, existingCoins } = this.props
-
     const isCurrent = currentFilters.includes(symbol)
-    const className = existingCoins.includes(symbol) && !isCurrent && !active
-      ? 'bitfinex-queried-symbol'
-      : ''
+
+    const classes = classNames({
+      'bitfinex-queried-symbol': existingCoins.includes(symbol) && !isCurrent && !active,
+      'bp3-menu-item--selected': isCurrent,
+    })
 
     return (
       <MenuItem
-        className={className}
+        className={classes}
         active={active}
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={disabled}
@@ -43,7 +44,6 @@ class MultiSymbolSelector extends PureComponent {
       currentFilters,
       existingCoins,
       toggleSymbol,
-      t,
     } = this.props
 
     const items = coins.length
@@ -52,18 +52,14 @@ class MultiSymbolSelector extends PureComponent {
 
     return (
       <MultiSelect
-        className='bitfinex-multi-select'
         disabled={!coins.length && !existingCoins.length}
-        placeholder={t('selector.filter.symbol')}
         items={items}
         itemRenderer={this.renderSymbol}
         itemPredicate={filterSelectorItem}
         onItemSelect={toggleSymbol}
-        popoverProps={{ minimal: true }}
         tagInputProps={{ tagProps: { minimal: true }, onRemove: toggleSymbol }}
         tagRenderer={coin => coin}
         selectedItems={currentFilters}
-        resetOnSelect
       />
     )
   }
@@ -72,4 +68,4 @@ class MultiSymbolSelector extends PureComponent {
 MultiSymbolSelector.propTypes = propTypes
 MultiSymbolSelector.defaultProps = defaultProps
 
-export default withTranslation('translations')(MultiSymbolSelector)
+export default MultiSymbolSelector

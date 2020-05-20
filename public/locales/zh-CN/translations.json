@@ -4,8 +4,9 @@
   },
   "accountsummary": {
     "title": "帐号摘要",
-    "fees": "您于Bitfinex交易的手续费率（基于您的交易量）",
-    "fees_deriv": "您于衍生品交易的手续费率（基于您的交易量）",
+    "fees": "您于Bitfinex交易的手续费率",
+    "fees_explain": "（基于您的交易量）",
+    "fees_deriv": "您于衍生品交易的手续费率",
     "30dVolume": "过去30天交易量",
     "margin_funds": "过去30天提供的保证金借贷之总收益"
   },
@@ -105,7 +106,7 @@
     "title": "筛选栏",
     "clear": "清除",
     "cancel": "取消",
-    "apply": "应用筛选",
+    "apply": "应用",
     "filters": {
       "contains": "包含",
       "beginsWith": "开始于",
@@ -121,11 +122,10 @@
   "columnsselect": {
     "title": "栏位选择",
     "cancel": "取消",
-    "apply": "适用栏位"
+    "apply": "应用"
   },
   "concentrationrisk": {
     "title": "集中风险",
-    "nodata": "此日期时间没有相关数据。您可以尝试其他日期时间。",
     "query": {
       "title": "查询",
       "tooltip": "选择一个要查询钱包快照的时间"
@@ -146,6 +146,7 @@
     "store": "，并存储到您的本地文件夹中。",
     "export": "导出",
     "cancel": "取消",
+    "okay": "一般",
     "status": {
       "local": "已生成{{topic}} csv，请查看您本地的“csv”文件夹",
       "email": "正在生成您的 CSV 报告，我们会在报告就绪后通过电子邮件发送给您…"
@@ -246,15 +247,15 @@
   "preferences": {
     "title": "首选项",
     "close": "结清",
-    "language": "语言:",
-    "theme": "主题:",
-    "timezone": "时区:",
-    "timezone-input": "输入时区:",
-    "dateformat": "日期格式:",
-    "milliseconds": "显示毫秒：",
+    "language": "语言",
+    "theme": "主题",
+    "timezone": "时区",
+    "timezone-input": "输入时区",
+    "dateformat": "日期格式",
+    "milliseconds": "显示毫秒",
     "sync": {
-      "add-filter": "add filter",
-      "add-pair": "add pair",
+      "add-filter": "增加筛选条件",
+      "add-pair": "增加交易对",
       "title": "同步首选项",
       "notset": "尚未设置同步首选项",
       "description": "要离线访问公开交易和牌价，您需要设置离线可用货币对和起始查询时间。",
@@ -276,13 +277,14 @@
   },
   "query": {
     "title": "查询",
-    "startDateTooltip": "选择开始时间",
-    "endDateTooltip": "选择结束时间"
+    "startTime": "Start Time",
+    "endTime": "End Time"
   },
   "querylimit": {
     "tooltip": "按查询选择大小，查询越大，时间越长。"
   },
   "selector": {
+    "select": "选取",
     "filter": {
       "symbol": "符号筛选器",
       "pair": "货币对筛选器"
@@ -293,8 +295,7 @@
     "query": {
       "title": "查询",
       "tooltip": "选择快照的时间"
-    },
-    "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。"
+    }
   },
   "status": {
     "success": "{{topic}}在 {{time}} 成功",
@@ -348,6 +349,7 @@
   },
   "timeframe": {
     "custom": {
+      "cancel": "取消",
       "title": "选择查询范围",
       "view": "查看"
     },

@@ -1,32 +1,24 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-  Position,
-  Tooltip,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 
 import DateInput from 'ui/DateInput'
-import ExportButton from 'ui/ExportButton'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import {
+  SectionHeader,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+  SectionHeaderRow,
+  SectionHeaderTitle,
+} from 'ui/SectionHeader'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import DataTable from 'ui/DataTable'
-import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
 import { platform } from 'var/config'
 
-import getColumns from './Wallets.columns'
+import WalletsData from './Wallets.data'
 import { propTypes, defaultProps } from './Wallets.props'
-
-const {
-  WALLET_EXCHANGE,
-  WALLET_MARGIN,
-  WALLET_FUNDING,
-} = queryConstants
 
 class Wallets extends PureComponent {
   constructor(props) {
@@ -52,8 +44,7 @@ class Wallets extends PureComponent {
     }
   }
 
-  handleQuery = (e) => {
-    e.preventDefault()
+  handleQuery = () => {
     const { fetchData } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
@@ -70,95 +61,37 @@ class Wallets extends PureComponent {
       t,
     } = this.props
     const { timestamp } = this.state
-    const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
-    const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
-    const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
-    const exchangeColumns = getColumns({ filteredData: exchangeData, t })
-    const marginColumns = getColumns({ filteredData: marginData, t })
-    const fundingColumns = getColumns({ filteredData: fundingData, t })
-    const exchangeRows = exchangeData.length
-    const marginRows = marginData.length
-    const fundingRows = fundingData.length
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
 
-    const renderTimeSelection = (
-      <Fragment>
-        <Tooltip
-          content={(
-            <span>
-              {t('wallets.query.tooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-          usePortal
-        >
-          <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
-        </Tooltip>
-        <Button
-          onClick={this.handleQuery}
-          intent={hasNewTime ? Intent.PRIMARY : null}
-          disabled={!hasNewTime}
-        >
-          {t('query.title')}
-        </Button>
-        {' '}
-      </Fragment>
-    )
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='wallets.title' />
-      )
-    } else if (exchangeRows === 0 && marginRows === 0 && fundingRows === 0) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('wallets.title')}
-            {' '}
-            {platform.showFrameworkMode && renderTimeSelection}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          <NoData descId='wallets.nodata' />
-        </Fragment>
-      )
+      showContent = <Loading />
+    } else if (!entries.length) {
+      showContent = <NoData title='wallets.nodata' refresh={refresh} />
     } else {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('wallets.title')}
-            {' '}
-            {platform.showFrameworkMode && renderTimeSelection}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          <h4>
-            {t('wallets.header.exchange')}
-          </h4>
-          <DataTable
-            numRows={exchangeRows}
-            tableColumns={exchangeColumns}
-          />
-          <h4>
-            {t('wallets.header.margin')}
-          </h4>
-          <DataTable
-            numRows={marginRows}
-            tableColumns={marginColumns}
-          />
-          <h4>
-            {t('wallets.header.funding')}
-          </h4>
-          <DataTable
-            numRows={fundingRows}
-            tableColumns={fundingColumns}
-          />
-        </Fragment>
-      )
+      showContent = <WalletsData entries={entries} />
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'>
+        <SectionHeader>
+          <SectionHeaderTitle>{t('wallets.title')}</SectionHeaderTitle>
+          {platform.showFrameworkMode && (
+            <SectionHeaderRow>
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('query.endTime')}
+                </SectionHeaderItemLabel>
+                <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
+              </SectionHeaderItem>
+              <QueryButton
+                disabled={!hasNewTime}
+                onClick={this.handleQuery}
+              />
+              <RefreshButton onClick={refresh} />
+            </SectionHeaderRow>
+          )}
+        </SectionHeader>
         {showContent}
       </Card>
     )

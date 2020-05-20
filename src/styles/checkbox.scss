@@ -1,0 +1,102 @@
+.bp3-checkbox {
+  display: inline-block;
+  margin-right: 0;
+  padding-right: 0;
+
+  &:hover {
+    .bp3-control-indicator {
+      background-color: transparent;
+      background-image: none;
+    }
+
+    input:checked ~ .bp3-control-indicator {
+      box-shadow: 0 0 0 1px var(--activeColor);
+      background-color: transparent;
+      background-image: none;
+    }
+  }
+
+  &:active {
+    background-color: transparent;
+    background-image: none;
+
+    .bp3-control-indicator {
+      background-color: transparent;
+      background-image: none;
+    }
+  }
+
+  input {
+    width: 16px;
+
+    &:checked ~ .bp3-control-indicator {
+      box-shadow: 0 0 0 1px var(--activeColor);
+      background-color: transparent;
+      background-image: none;
+      transition: 0.3s ease-out;
+    }
+
+    &:not(:disabled):active {
+      ~ .bp3-control-indicator {
+        box-shadow: 0 0 0 1px var(--checkboxBorder);
+        background-color: transparent;
+        background-image: none;
+      }
+
+      &:checked {
+        ~ .bp3-control-indicator {
+          box-shadow: 0 0 0 1px var(--activeColor);
+          background-color: transparent;
+          background-image: none;
+        }
+      }
+    }
+  }
+}
+
+.bp3-control.bp3-checkbox {
+  margin-left: 15px;
+  padding: 0;
+
+  .bp3-control-indicator {
+    width: 16px;
+    height: 16px;
+    margin-left: 0;
+    box-shadow: 0 0 0 1px var(--checkboxBorder);
+    border-radius: 2px;
+    background-color: transparent;
+    background-image: none;
+
+    &:before {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:active {
+      background-color: transparent;
+      background-image: none;
+    }
+
+    &:hover {
+      background-color: transparent;
+      background-image: none;
+    }
+  }
+
+  &.bp3-large:not(.bp3-align-right) {
+    padding-left: 0;
+
+    .bp3-control-indicator {
+      margin-left: 0;
+    }
+  }
+
+  input:checked {
+    ~ .bp3-control-indicator::before {
+      background-image: url('../icons/checkmark.svg');
+      background-position: center;
+      background-position-x: 57%;
+      background-repeat: no-repeat;
+    }
+  }
+}

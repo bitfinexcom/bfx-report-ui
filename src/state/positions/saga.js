@@ -9,7 +9,6 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { getPaginationData } from 'state/pagination/selectors'
@@ -21,21 +20,23 @@ import { fetchDataWithPagination } from 'state/sagas.helper'
 import types from './constants'
 import actions from './actions'
 import { getPositions } from './selectors'
+import { getTimeFrame } from '../timeRange/selectors'
 
 const TYPE = queryTypes.MENU_POSITIONS
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqPositions({
-  smallestMts,
-  query,
+  start,
+  end,
   targetPairs,
   filter,
 }) {
-  const params = getTimeFrame(query, smallestMts)
-  params.limit = LIMIT
-  params.filter = filter
-  if (targetPairs.length) {
-    params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
+  const params = {
+    start,
+    end,
+    limit: LIMIT,
+    filter,
+    symbol: formatRawSymbols(mapRequestPairs(targetPairs)),
   }
   return makeFetchCall('getPositionsHistory', params)
 }
@@ -43,13 +44,12 @@ function getReqPositions({
 function* fetchPositions() {
   try {
     const { targetPairs } = yield select(getPositions)
-    const query = yield select(getQuery)
     const filter = yield select(getFilterQuery, TYPE)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const { result, error } = yield call(fetchDataWithPagination, getReqPositions, {
-      smallestMts,
-      query,
+      start,
+      end,
       targetPairs,
       filter,
     })

@@ -17,8 +17,8 @@ const getDefaultQueries = () => FILTERS_WHITELIST.reduce((acc, section) => {
 }, {})
 
 const getSectionsColumns = () => FILTERS_WHITELIST.reduce((acc, section) => {
-  acc[section] = SECTION_COLUMNS[section].reduce((columns, { id }) => {
-    columns[id] = true // eslint-disable-line no-param-reassign
+  acc[section] = SECTION_COLUMNS[section].reduce((columns, { id, hidden }) => {
+    columns[id] = !hidden // eslint-disable-line no-param-reassign
     return columns
   }, {})
   return acc

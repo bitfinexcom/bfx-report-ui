@@ -1,0 +1,36 @@
+.export-dialog {
+  &-notice {
+    margin: 16px 0 26px 0;
+  }
+
+  &-row {
+    margin: 10px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &-item {
+    margin-right: 20px;
+    margin-bottom: 10px;
+
+    > :first-child {
+      margin-left: 2px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .bp3-checkbox {
+    width: 14px;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .export-dialog {
+    &-notice {
+      line-height: 27px;
+    }
+  }
+}

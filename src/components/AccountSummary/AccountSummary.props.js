@@ -6,7 +6,6 @@ export const propTypes = {
   fetchData: PropTypes.func.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {}

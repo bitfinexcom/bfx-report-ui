@@ -1,23 +1,23 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-  Position,
-  Tooltip,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 import _sortBy from 'lodash/sortBy'
 
+import {
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
-import ExportButton from 'ui/ExportButton'
 import parseChartData from 'ui/Charts/Charts.helpers'
-import TimeframeSelector from 'ui/TimeframeSelector'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
@@ -73,94 +73,61 @@ class AccountBalance extends PureComponent {
       timeframe: currTimeframe,
     })
 
-    const renderTimeSelection = (
-      <Fragment>
-        <Tooltip
-          content={(
-            <span>
-              {t('query.startDateTooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-        >
-          <DateInput
-            onChange={date => this.handleDateChange('start', date)}
-            defaultValue={start}
-            daysOnly
-          />
-        </Tooltip>
-        {' '}
-        <Tooltip
-          content={(
-            <span>
-              {t('query.endDateTooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-        >
-          <DateInput
-            onChange={date => this.handleDateChange('end', date)}
-            defaultValue={end}
-            daysOnly
-          />
-        </Tooltip>
-        {' '}
-        <TimeframeSelector
-          currentTimeframe={timeframe}
-          onTimeframeSelect={this.handleTimeframeChange}
-        />
-        {' '}
-        <Button
-          onClick={this.handleQuery}
-          intent={hasChanges ? Intent.PRIMARY : null}
-          disabled={!hasChanges}
-        >
-          {t('query.title')}
-        </Button>
-      </Fragment>
-    )
-
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='accountbalance.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('accountbalance.title')}
-            {' '}
-            {renderTimeSelection}
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
-          <h4>
-            {t('accountbalance.title')}
-            {' '}
-            {renderTimeSelection}
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          <Chart
-            data={chartData}
-            dataKeys={presentCurrencies}
-          />
-        </Fragment>
+        <Chart
+          data={chartData}
+          dataKeys={presentCurrencies}
+        />
       )
     }
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader>
+          <SectionHeaderTitle>{t('accountbalance.title')}</SectionHeaderTitle>
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('query.startTime')}
+              </SectionHeaderItemLabel>
+              <DateInput
+                onChange={date => this.handleDateChange('start', date)}
+                defaultValue={start}
+                daysOnly
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('query.endTime')}
+              </SectionHeaderItemLabel>
+              <DateInput
+                onChange={date => this.handleDateChange('end', date)}
+                defaultValue={end}
+                daysOnly
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.select')}
+              </SectionHeaderItemLabel>
+              <TimeFrameSelector
+                value={timeframe}
+                onChange={this.handleTimeframeChange}
+              />
+            </SectionHeaderItem>
+
+            <QueryButton
+              disabled={!hasChanges}
+              onClick={this.handleQuery}
+            />
+            <RefreshButton onClick={refresh} />
+          </SectionHeaderRow>
+        </SectionHeader>
         {showContent}
       </Card>
     )

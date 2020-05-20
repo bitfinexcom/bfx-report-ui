@@ -24,7 +24,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-src/components/Header/logo3-dark-theme.svg
-src/components/Header/mobile_logo_dark.svg
+src/ui/PlatformLogo/files/*
+!src/ui/PlatformLogo/files/.gitkeep
 public/favicon.ico
 public/favicon.png

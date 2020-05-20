@@ -1,22 +1,20 @@
 import types from './constants'
 
 /**
- * Create an action to show/hide custom dialog.
- *  @param {boolean} show true to show or false to hide
- */
-export function showCustomDialog(show) {
-  return {
-    type: types.SHOW_CUSTOM_DIALOG,
-    payload: show,
-  }
-}
-
-/**
  * Create an action to show/hide export dialog.
  */
 export function toggleExportDialog() {
   return {
     type: types.TOGGLE_EXPORT_DIALOG,
+  }
+}
+
+/**
+ * Create an action to show/hide export success dialog.
+ */
+export function toggleExportSuccessDialog() {
+  return {
+    type: types.TOGGLE_EXPORT_SUCCESS_DIALOG,
   }
 }
 
@@ -56,6 +54,25 @@ export function togglePaginationDialog(isOpen, latestPaginationTimestamp) {
 }
 
 /**
+ * Create an action to show/hide preferences dialog.
+ */
+export function togglePreferencesDialog() {
+  return {
+    type: types.TOGGLE_PREFERENCES_DIALOG,
+  }
+}
+
+/**
+ * Create an action to show/hide timeframe dialog.
+ */
+export function toggleTimeFrameDialog(payload) {
+  return {
+    type: types.TOGGLE_TIMEFRAME_DIALOG,
+    payload,
+  }
+}
+
+/**
  * Create an action to proceed with pagination request.
  * @param {boolean} payload indicator of whether pagination request should proceed
  */
@@ -85,10 +102,12 @@ export function uiResized() {
 }
 
 export default {
-  showCustomDialog,
   toggleExportDialog,
+  toggleExportSuccessDialog,
   toggleFrameworkDialog,
   proceedFrameworkRequest,
   togglePaginationDialog,
+  togglePreferencesDialog,
+  toggleTimeFrameDialog,
   proceedPaginationRequest,
 }

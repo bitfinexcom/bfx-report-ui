@@ -16,6 +16,8 @@ import {
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
 
+const { REACT_APP_ELECTRON } = process.env
+
 const {
   MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
@@ -44,6 +46,9 @@ const getAuthFromStore = () => {
   const state = store.getState()
   return selectAuth(state)
 }
+
+// turned off for firefox
+export const getDefaultTableScrollSetting = () => REACT_APP_ELECTRON || !navigator.userAgent.includes('Firefox')
 
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
@@ -78,6 +83,9 @@ export function checkEmail(auth = getAuthFromStore()) {
     auth,
   })
 }
+
+export const formatAuthDate = mts => moment(mts).format('M/D/YYYY, h:mm:ss A')
+
 /**
  * Format time.
  * @param {number} mts timestamp
@@ -106,10 +114,9 @@ export function formatTime(mts, {
     : moment(mts, 'x').format(format)
 }
 
-export function formatDate(mts, timezone) {
-  // MMM dd yyyy
+export function formatDate(mts, timezone, format = 'MMM DD YYYY') {
   if (timezone) {
-    return moment(mts, 'x').tz(timezone).utcOffset('0').format('MMM DD YYYY')
+    return moment(mts, 'x').tz(timezone).utcOffset('0').format(format)
       .toUpperCase()
   }
   return moment(mts, 'x').format('MMM DD YYYY').toUpperCase()
@@ -469,8 +476,10 @@ export default {
   checkFetch,
   checkEmail,
   DEFAULT_DATETIME_FORMAT,
+  getDefaultTableScrollSetting,
   getQueryWithoutParams,
   makeFetchCall,
+  formatAuthDate,
   formatDate,
   formatTime,
   getAuth,

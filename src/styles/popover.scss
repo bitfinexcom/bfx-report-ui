@@ -1,0 +1,29 @@
+.bp3-popover {
+  background-color: var(--bgColor);
+  border-radius: 2px;
+  box-shadow: none;
+
+  .bp3-popover {
+    &-content {
+      background-color: var(--popoverBg);
+      color: var(--popoverColor);
+    }
+
+    &-arrow-fill {
+      fill: var(--popoverBg);
+    }
+  }
+}
+
+.bp3-tooltip {
+  .bp3-popover {
+    &-content {
+      background-color: var(--tooltipBg);
+      color: var(--tooltipColor);
+    }
+
+    &-arrow-fill {
+      fill: var(--tooltipBg);
+    }
+  }
+}

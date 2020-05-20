@@ -1,0 +1,52 @@
+.bp3-dialog {
+  background-color: var(--bgColor);
+  border: 1px solid var(--borderColor);
+  border-radius: 2px;
+
+  &-header {
+    min-height: 36px;
+    background-color: var(--bgColor2);
+    box-shadow: 0 1px 0 var(--dialogHeaderBorder);
+    border-radius: 2px 2px 0 0;
+    padding-left: 16px;
+
+    .bp3-heading {
+      font-size: 15px;
+      font-weight: normal;
+      margin: 0;
+      color: var(--color);
+
+      &:not(:first-child) {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  &-body {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .bp3-dialog {
+    width: 620px;
+
+    &-header {
+      min-height: 49px;
+
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .bp3-heading {
+        font-size: 20px;
+      }
+    }
+
+    &-body {
+      margin: 30px 25px;
+    }
+  }
+}

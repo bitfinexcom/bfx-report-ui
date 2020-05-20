@@ -1,23 +1,25 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 
+import {
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import TimeRange from 'ui/TimeRange'
 import TradesSwitch from 'components/Trades/TradesSwitch'
 import PairSelector from 'ui/PairSelector'
 import Timeframe from 'ui/CandlesTimeframe'
-import ExportButton from 'ui/ExportButton'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import Candlestick from 'ui/Charts/Candlestick'
 import CandlesSyncPref from 'ui/CandlesSyncPref'
+import TimeRange from 'ui/TimeRange'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
@@ -58,9 +60,7 @@ class Candles extends PureComponent {
   render() {
     const {
       candles,
-      dataReceived,
       fetchData,
-      pageLoading,
       pairs,
       params,
       refresh,
@@ -70,81 +70,47 @@ class Candles extends PureComponent {
     const { pair, timeframe } = params
     const hasChanges = this.hasChanges()
 
-    const renderOptionsSelection = (
-      <Fragment>
-        <PairSelector
-          currentPair={pair}
-          onPairSelect={this.onPairSelect}
-          pairs={pairs}
-        />
-        {' '}
-        <Timeframe value={timeframe} onChange={this.onTimeframeChange} />
-        {' '}
-        <Button
-          onClick={this.handleQuery}
-          intent={hasChanges ? Intent.PRIMARY : null}
-          disabled={!hasChanges}
-        >
-          {t('query.title')}
-        </Button>
-      </Fragment>
-    )
-
     let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='candles.title' />
-      )
+    if (!candles.entries.length && candles.isLoading) {
+      showContent = <Loading />
     } else if (!candles.entries.length) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('candles.title')}
-            {' '}
-            <TimeRange />
-            {' '}
-            {renderOptionsSelection}
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <CandlesSyncPref />
-            <br />
-            <br />
-            <TradesSwitch target={TYPE} />
-          </h4>
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
-          <h4>
-            {t('candles.title')}
-            {' '}
-            <TimeRange />
-            {' '}
-            {renderOptionsSelection}
-            {' '}
-            <ExportButton />
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-            <CandlesSyncPref />
-            <br />
-            <br />
-            <TradesSwitch target={TYPE} />
-          </h4>
-          <Candlestick
-            candles={candles}
-            trades={trades}
-            fetchData={fetchData}
-          />
-        </Fragment>
+        <Candlestick
+          candles={candles}
+          trades={trades}
+          fetchData={fetchData}
+        />
       )
     }
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader>
+          <SectionHeaderTitle>{t('candles.title')}</SectionHeaderTitle>
+          <TimeRange className='section-header-time-range' />
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.symbol')}
+              </SectionHeaderItemLabel>
+              <PairSelector
+                currentPair={pair}
+                onPairSelect={this.onPairSelect}
+                pairs={pairs}
+              />
+            </SectionHeaderItem>
+            <Timeframe value={timeframe} onChange={this.onTimeframeChange} />
+            <QueryButton
+              disabled={!hasChanges}
+              onClick={this.handleQuery}
+            />
+            <RefreshButton onClick={refresh} />
+            <CandlesSyncPref />
+          </SectionHeaderRow>
+        </SectionHeader>
+        <TradesSwitch target={TYPE} />
         {showContent}
       </Card>
     )

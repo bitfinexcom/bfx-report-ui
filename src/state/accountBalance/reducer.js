@@ -1,5 +1,5 @@
 import authTypes from 'state/auth/constants'
-import timeframeConstants from 'ui/TimeframeSelector/constants'
+import timeframeConstants from 'ui/TimeFrameSelector/constants'
 import { getLastMonth } from 'state/utils'
 import { fetchFail } from 'state/reducers.helper'
 

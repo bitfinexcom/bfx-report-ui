@@ -14,17 +14,15 @@ export const InputKey = ({
     <FormGroup
       label={t(label)}
       labelFor={name}
-      labelInfo={t('auth.required')}
     />
     <InputGroup
       id={name}
       type='password'
       name={name}
-      placeholder={t(placeholder)}
+      placeholder={placeholder && t(placeholder)}
       value={value}
       onChange={onChange}
     />
-    <br />
   </Fragment>
 )
 

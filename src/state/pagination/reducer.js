@@ -1,7 +1,8 @@
 import _get from 'lodash/get'
 
-import queryTypes from 'state/query/constants'
 import authTypes from 'state/auth/constants'
+import timeRangeTypes from 'state/timeRange/constants'
+import queryTypes from 'state/query/constants'
 import { getPageSize, TYPE_WHITELIST } from 'state/query/utils'
 
 import types from './constants'
@@ -93,7 +94,7 @@ function paginationReducer(state = initialState, { type, payload }) {
         ...state,
         [payload]: initialSectionState,
       }
-    case queryTypes.SET_TIME_RANGE:
+    case timeRangeTypes.SET_TIME_RANGE:
     case authTypes.LOGOUT: {
       return initialState
     }

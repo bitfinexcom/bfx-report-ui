@@ -1,13 +1,11 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import { Card, Elevation } from '@blueprintjs/core'
 import _isEmpty from 'lodash/isEmpty'
 import _get from 'lodash/get'
 
 import Loading from 'ui/Loading'
-import LinkButton from 'ui/LinkButton'
 import NoData from 'ui/NoData'
-import { getFormattedDate } from 'utils/dates'
+import SectionHeader from 'ui/SectionHeader'
 
 import { propTypes, defaultProps } from './AccountSummary.props'
 import Volume from './AccountSummary.volume'
@@ -30,43 +28,17 @@ class AccountSummary extends PureComponent {
       dataReceived,
       pageLoading,
       refresh,
-      t,
     } = this.props
-
-    const updateTitle = `${t('updated')} ${getFormattedDate(data.time)} `
-    const renderUpdate = (
-      <h3 className='bitfinex-show-soft'>
-        {updateTitle}
-        <LinkButton onClick={refresh}>
-          {t('update')}
-        </LinkButton>
-      </h3>
-    )
 
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='accountsummary.title' />
-      )
+      showContent = <Loading />
     } else if (_isEmpty(data)) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('accountsummary.title')}
-          </h4>
-          {renderUpdate}
-          <NoData />
-        </Fragment>
-      )
+      showContent = <NoData refresh={refresh} />
     } else {
       showContent = (
-        <Fragment>
-          <h4>
-            {t('accountsummary.title')}
-          </h4>
-          {renderUpdate}
+        <div className='section-account-summary-data'>
           <Volume data={_get(data, 'trade_vol_30d', [])} />
-          <br />
           <Fees
             title='accountsummary.fees'
             makerFee={data.maker_fee || data.maker_rebate}
@@ -79,11 +51,16 @@ class AccountSummary extends PureComponent {
           />
           <br />
           <MarginFunds data={_get(data, 'fees_funding_30d', {})} />
-        </Fragment>
+        </div>
       )
     }
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <SectionHeader
+          filter={false}
+          timeframe={false}
+          title='accountsummary.title'
+        />
         {showContent}
       </Card>
     )
@@ -93,4 +70,4 @@ class AccountSummary extends PureComponent {
 AccountSummary.propTypes = propTypes
 AccountSummary.defaultProps = defaultProps
 
-export default withTranslation('translations')(AccountSummary)
+export default AccountSummary

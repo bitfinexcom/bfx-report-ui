@@ -6,7 +6,8 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
+import { getQueryLimit } from 'state/query/utils'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -23,22 +24,19 @@ import selectors from './selectors'
 const TYPE = queryTypes.MENU_FPAYMENT
 
 function getReqLedgers({
-  smallestMts,
-  query,
+  start,
+  end,
   targetSymbols,
   filter,
-  queryLimit,
 }) {
-  const params = getTimeFrame(query, smallestMts)
-  params.filter = filter
-  if (targetSymbols.length) {
-    params.symbol = mapRequestSymbols(targetSymbols)
+  const params = {
+    start,
+    end,
+    filter,
+    limit: getQueryLimit(TYPE),
+    isMarginFundingPayment: true,
+    symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
   }
-  if (queryLimit) {
-    params.limit = queryLimit
-  }
-  // Funding Payment specific param
-  params.isMarginFundingPayment = true
   return makeFetchCall('getLedgers', params)
 }
 
@@ -53,16 +51,13 @@ function* fetchFPayment() {
 
     const targetSymbols = yield select(selectors.getTargetSymbols, TYPE)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-    const queryLimit = yield select(getTargetQueryLimit, TYPE)
-
-    const query = yield select(getQuery)
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(fetchDataWithPagination, getReqLedgers, {
-      smallestMts,
-      query,
+      start,
+      end,
       targetSymbols,
       filter,
-      queryLimit,
     })
     yield put(actions.updateFPayment(result))
     yield put(updatePagination(TYPE, result))

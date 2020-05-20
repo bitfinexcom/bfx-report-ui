@@ -9,11 +9,9 @@ import {
   NonIdealState,
 } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
-
+import Icon from 'icons'
+import PlatformLogo from 'ui/PlatformLogo'
 import { platform } from 'var/config'
-// eslint-disable-next-line import/no-unresolved
-import darkLogo from 'components/Header/logo3-dark-theme.svg'
-import lightLogo from 'components/Header//logo3-light-theme.svg'
 
 import { propTypes, defaultProps } from './Auth.props'
 import InputKey from './InputKey'
@@ -47,41 +45,32 @@ class Auth extends PureComponent {
       t,
     } = this.props
     const renderAuth = platform.showAuthPage ? (
-      <div className='row'>
+      <div className='row bitfinex-auth'>
         <Dialog
           title={t('auth.title')}
           isOpen
+          icon={<Icon.SIGN_IN />}
           isCloseButtonShown={false}
+          usePortal={false}
         >
-          <div className={`${Classes.DIALOG_BODY} bitfinex-auth`}>
-            <img
-              alt={platform.Name}
-              src={darkLogo}
-              className='bitfinex-logo bitfinex-logo--dark'
-            />
-            <img
-              alt={platform.Name}
-              src={lightLogo}
-              className='bitfinex-logo bitfinex-logo--light'
-            />
+          <div className={Classes.DIALOG_BODY}>
+            <PlatformLogo />
             <Callout>
               {t('auth.note1')}
               <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>
-                {platform.KEY_URL}
+                {platform.KEY_URL.split('https://')[1]}
               </a>
               {t('auth.note2')}
             </Callout>
             <InputKey
               label='auth.enterAPIKey'
               name='key'
-              placeholder='auth.enterAPIKey'
               value={apiKey}
               onChange={this.handleChange}
             />
             <InputKey
               label='auth.enterAPISecret'
               name='secret'
-              placeholder='auth.enterAPISecret'
               value={apiSecret}
               onChange={this.handleChange}
             />
@@ -89,8 +78,8 @@ class Auth extends PureComponent {
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <Button
+                className='bitfinex-auth-check'
                 name='check'
-                icon={IconNames.KEY}
                 intent={Intent.SUCCESS}
                 onClick={this.handleClick}
                 disabled={!apiKey || !apiSecret || loading}

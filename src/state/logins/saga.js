@@ -6,7 +6,8 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { getQuery, getTargetQueryLimit, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
+import { getQueryLimit } from 'state/query/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { getFilterQuery } from 'state/filters/selectors'
@@ -20,17 +21,15 @@ import actions from './actions'
 const TYPE = queryTypes.MENU_LOGINS
 
 function getReqLogins({
-  query,
-  smallestMts,
-  queryLimit,
+  start,
+  end,
   filter,
 }) {
-  const { start, end } = getTimeFrame(query, smallestMts)
   const params = {
     start,
     end,
     filter,
-    limit: queryLimit,
+    limit: getQueryLimit(TYPE),
   }
   return makeFetchCall('getLogins', params)
 }
@@ -39,15 +38,12 @@ function getReqLogins({
 function* fetchLogins() {
   try {
     const filter = yield select(getFilterQuery, TYPE)
-    const queryLimit = yield select(getTargetQueryLimit, TYPE)
-    const { smalletsMts } = yield select(getPaginationData, TYPE)
-    const query = yield select(getQuery)
-
+    const { smallestMts } = yield select(getPaginationData, TYPE)
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const { result, error } = yield call(fetchDataWithPagination, getReqLogins, {
-      query,
-      smalletsMts,
+      start,
+      end,
       filter,
-      queryLimit,
     })
     yield put(actions.updateData(result))
     yield put(updatePagination(TYPE, result))

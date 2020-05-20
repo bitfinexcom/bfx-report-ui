@@ -1,0 +1,224 @@
+.account-menu {
+  min-width: 208px;
+  max-width: 375px;
+  float: right;
+  height: 44px;
+  line-height: 44px;
+  user-select: none;
+  cursor: pointer;
+  border-left: 1px solid var(--borderColor);
+
+  &--no-email {
+    min-width: initial;
+  }
+
+  &-wrapper {
+    height: 44px;
+
+    .icon--chevron-up {
+      display: none;
+    }
+
+    &.bp3-active {
+      background-color: var(--bgColor2);
+      color: var(--activeColor);
+
+      svg path {
+        fill: var(--activeColor);
+      }
+
+      .icon--chevron-down {
+        display: none;
+      }
+
+      .icon--chevron-up {
+        display: inline-block;
+      }
+    }
+
+    &:hover {
+      background-color: var(--menuHover);
+      color: var(--activeColor);
+
+      svg path {
+        fill: var(--activeColor);
+      }
+    }
+  }
+
+  &-target {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0 13px;
+  }
+
+  svg {
+    height: 44px;
+  }
+
+  &-username {
+    vertical-align: top;
+    margin: 0 3px 0 10px;
+    font-size: 1rem;
+    text-overflow: ellipsis;
+    max-width: 287px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &-content {
+    min-width: 198px;
+    height: fit-content;
+    background-color: var(--bgColor2);
+    color: var(--color);
+    box-shadow: 0 0 0 1px var(--borderColor);
+
+    .bp3-menu {
+      padding: 0;
+
+
+      &-item {
+        height: 40px;
+        line-height: 40px;
+        padding: 0 14px;
+        border-bottom: 1px solid var(--borderColor);
+
+        svg {
+          height: 40px;
+          margin-right: 14px;
+        }
+
+        &.bp3-active {
+          background-color: var(--menuActive);
+          border-right: 6px solid var(--menuActiveBorder);
+          color: var(--activeColor);
+
+          svg path {
+            fill: var(--activeColor);
+          }
+        }
+
+        &:hover {
+          background-color: var(--menuHover);
+          color: var(--activeColor);
+
+          svg path {
+            fill: var(--activeColor);
+          }
+        }
+
+        .sync-mode {
+          .bp3-popover-target {
+            height: 35px;
+          }
+          &-icon {
+            height: 35px;
+
+            &-wrapper {
+              height: 35px;
+            }
+          }
+
+          &-status {
+            margin-left: 13px;
+            vertical-align: top;
+          }
+        }
+      }
+
+      li:last-child {
+        .bp3-menu-item {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  .bp3-popover-content {
+    border-radius: 0;
+  }
+
+  .bp3-popover-target {
+    height: 45px;
+  }
+
+  &-export, &-sync {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .account-menu {
+    min-width: 248px;
+    max-width: 415px;
+    height: 56px;
+    line-height: 56px;
+
+    &-wrapper {
+      height: 56px;
+    }
+
+    &-target {
+      padding: 0 20px;
+
+      svg {
+        width: 28px;
+      }
+    }
+
+    svg {
+      height: 56px;
+    }
+
+    &-username {
+      margin: 0 5px 0 14px;
+      max-width: 327px;
+    }
+
+    &-content {
+      min-width: 238px;
+
+      .bp3-menu {
+        &-item {
+          height: 52px;
+          line-height: 52px;
+
+          svg {
+            height: 52px;
+          }
+        }
+      }
+    }
+
+    .bp3-popover-target {
+      height: 57px;
+    }
+  }
+}
+
+@media screen and (max-width: 1550px) {
+  .account-menu {
+    max-width: 275px;
+
+    &-username {
+      max-width: 187px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .account-menu {
+    &-sync {
+      display: flex;
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .account-menu {
+    &-export {
+      display: flex;
+    }
+  }
+}

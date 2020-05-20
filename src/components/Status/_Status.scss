@@ -1,0 +1,47 @@
+.bp3-toast {
+  min-height: 40px;
+  padding: 5px;
+  border-radius: 2px;
+  align-items: center;
+
+  &.bp3-intent {
+    &-primary {
+      background-color: var(--toastPrimaryBg);
+    }
+
+    &-success {
+      background-color: var(--toastSuccessBg);
+    }
+
+    &-warning {
+      background-color: var(--toastWarningBg);
+    }
+
+    &-error {
+      background-color: var(--toastErrorBg);
+    }
+  }
+
+  &-message {
+    padding: 10px 11px;
+  }
+
+  svg path {
+    fill: var(--toastIconColor) !important;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .bp3-toast {
+    min-height: 30px;
+    font-size: 13px;
+
+    &-message {
+      padding: 5px 11px;
+    }
+
+    .bp3-button-group {
+      padding: 0 5px;
+    }
+  }
+}

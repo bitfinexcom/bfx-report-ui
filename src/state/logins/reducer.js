@@ -3,10 +3,10 @@ import _get from 'lodash/get'
 import _toString from 'lodash/toString'
 
 import authTypes from 'state/auth/constants'
+import timeRangeTypes from 'state/timeRange/constants'
 import { fetch, fetchFail } from 'state/reducers.helper'
 
 import types from './constants'
-import queryTypes from '../query/constants'
 
 const initialState = {
   dataReceived: false,
@@ -68,7 +68,7 @@ export function loginsReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.REFRESH:
-    case queryTypes.SET_TIME_RANGE:
+    case timeRangeTypes.SET_TIME_RANGE:
     case authTypes.LOGOUT:
       return initialState
     default: {

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import AccountBalance from 'components/AccountBalance'
@@ -34,13 +34,14 @@ import TradedVolume from 'components/TradedVolume'
 import Trades from 'components/Trades'
 import Wallets from 'components/Wallets'
 import ExportDialog from 'components/ExportDialog'
+import ExportSuccessDialog from 'components/ExportSuccessDialog'
+import Preferences from 'components/Preferences'
 import queryType from 'state/query/constants'
-import { getPath, getTarget } from 'state/query/utils'
-import ToggleMenu from 'ui/ToggleMenu'
+import { getPath } from 'state/query/utils'
+import NavMenu from 'ui/NavMenu'
 import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './Main.props'
-import CustomDialog from './CustomDialog'
 
 const {
   MENU_ACCOUNT_BALANCE,
@@ -103,63 +104,15 @@ const PATHS = {
 }
 
 class Main extends PureComponent {
-  constructor(props) {
-    super(props)
-    this.handleClickCustom = this.handleCustomDialog.bind(this, true)
-    this.handleCustomDialogClose = this.handleCustomDialog.bind(this, false)
-  }
-
-  state = {
-    startDate: null,
-    endDate: new Date(),
-  }
-
-  handleCustomDialog = (show, e) => {
-    e.preventDefault()
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.showCustomDialog(show)
-  }
-
-  handleRangeChange = (range) => {
-    const [startDate, endDate] = range
-    this.setState({
-      startDate,
-      endDate,
-    })
-  }
-
-  startQuery = () => {
-    const { startDate, endDate } = this.state
-    const { setCustomTimeRange, showCustomDialog } = this.props
-    if (startDate !== null && endDate !== null) {
-      setCustomTimeRange(startDate.getTime(), endDate.getTime())
-    }
-    showCustomDialog(false)
-  }
-
   render() {
     const {
       authStatus,
       authIsShown,
-      history,
-      isCustomOpen,
-      location,
-      menuMode,
     } = this.props
-    const {
-      endDate,
-      startDate,
-    } = this.state
-    const target = getTarget(location.pathname)
 
     return authStatus && !authIsShown ? (
-      <div className='row'>
-        <ToggleMenu
-          target={target}
-          handleClickCustom={this.handleClickCustom}
-          history={history}
-          menuMode={menuMode}
-        />
+      <Fragment>
+        <NavMenu className='bitfinex-nav-menu--main' />
         <div className='bitfinex-dataset'>
           <Switch>
             <Route
@@ -326,19 +279,12 @@ class Main extends PureComponent {
             />
           </Switch>
         </div>
-        <CustomDialog
-          type={target}
-          isCustomOpen={isCustomOpen}
-          handleCustomDialogClose={this.handleCustomDialogClose}
-          handleRangeChange={this.handleRangeChange}
-          startQuery={this.startQuery}
-          startDate={startDate}
-          endDate={endDate}
-        />
         <ExportDialog />
+        <ExportSuccessDialog />
         {platform.showFrameworkMode && <FrameworkDialog />}
         <PaginationDialog />
-      </div>
+        <Preferences />
+      </Fragment>
     ) : ''
   }
 }

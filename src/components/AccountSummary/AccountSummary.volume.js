@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
@@ -14,7 +14,7 @@ const getColumns = (props) => {
     {
       id: 'currency',
       name: 'column.currency',
-      width: 250,
+      width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
         const { curr } = data[rowIndex]
         return (
@@ -56,13 +56,13 @@ const AccountSummaryVolume = (props) => {
   const columns = getColumns({ data })
 
   return (
-    <Fragment>
-      <h4>{t('accountsummary.30dVolume')}</h4>
+    <div className='section-account-summary-data-item'>
+      <div>{t('accountsummary.30dVolume')}</div>
       <DataTable
         numRows={data.length}
         tableColumns={columns}
       />
-    </Fragment>
+    </div>
   )
 }
 

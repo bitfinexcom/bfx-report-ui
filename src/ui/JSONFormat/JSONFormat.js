@@ -6,6 +6,10 @@ import Tooltip from 'ui/Tooltip'
 const JSONFormat = (props) => {
   const { content, children } = props
 
+  if (!children) {
+    return null
+  }
+
   return (
     <Tooltip
       content={<pre className='json-format'>{content}</pre>}
@@ -19,11 +23,16 @@ const JSONFormat = (props) => {
 }
 
 JSONFormat.propTypes = {
-  content: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
-  ]).isRequired,
+  ]),
+  content: PropTypes.string,
+}
+
+JSONFormat.defaultProps = {
+  children: undefined,
+  content: '',
 }
 
 export default JSONFormat

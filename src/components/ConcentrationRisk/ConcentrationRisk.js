@@ -1,19 +1,20 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Card,
-  Elevation,
-  Intent,
-  Position,
-  Tooltip,
-} from '@blueprintjs/core'
+import { Card, Elevation } from '@blueprintjs/core'
 import _keys from 'lodash/keys'
 import _sortBy from 'lodash/sortBy'
 
+import {
+  SectionHeader,
+  SectionHeaderTitle,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import DataTable from 'ui/DataTable'
 import PieChart from 'ui/Charts/PieChart'
@@ -82,8 +83,7 @@ class ConcentrationRisk extends PureComponent {
     }
   }
 
-  handleQuery = (e) => {
-    e.preventDefault()
+  handleQuery = () => {
     const { fetchWallets } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
@@ -111,71 +111,47 @@ class ConcentrationRisk extends PureComponent {
       t,
     })
 
-    const renderTimeSelection = (
-      <Fragment>
-        <Tooltip
-          content={(
-            <span>
-              {t('concentrationrisk.query.tooltip')}
-            </span>
-          )}
-          position={Position.TOP}
-          usePortal
-        >
-          <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
-        </Tooltip>
-        <Button
-          onClick={this.handleQuery}
-          intent={hasNewTime ? Intent.PRIMARY : null}
-          disabled={!hasNewTime}
-        >
-          {t('query.title')}
-        </Button>
-      </Fragment>
-    )
     let showContent
     if (!dataReceived && pageLoading) {
-      showContent = (
-        <Loading title='concentrationrisk.title' />
-      )
+      showContent = <Loading />
     } else if (!entries.length) {
-      showContent = (
-        <Fragment>
-          <h4>
-            {t('concentrationrisk.title')}
-            {' '}
-            {renderTimeSelection}
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          <NoData descId='concentrationrisk.nodata' />
-        </Fragment>
-      )
+      showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
-          <h4>
-            {t('concentrationrisk.title')}
-            {' '}
-            {renderTimeSelection}
-            {' '}
-            <RefreshButton handleClickRefresh={refresh} />
-          </h4>
-          <div className='concentration-risk-data'>
-            <DataTable
-              numRows={numRows}
-              tableColumns={tableColumns}
-            />
-            <div className='concentration-risk-data-chart'>
-              <PieChart data={chartData} />
-            </div>
+        <div className='concentration-risk-data'>
+          <DataTable
+            numRows={numRows}
+            tableColumns={tableColumns}
+          />
+          <div className='concentration-risk-data-chart'>
+            <PieChart data={chartData} />
           </div>
-        </Fragment>
+        </div>
       )
     }
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 concentration-risk'>
+        <SectionHeader>
+          <SectionHeaderTitle>{t('concentrationrisk.title')}</SectionHeaderTitle>
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('query.endTime')}
+              </SectionHeaderItemLabel>
+              <DateInput
+                onChange={this.handleDateChange}
+                defaultValue={timestamp}
+              />
+            </SectionHeaderItem>
+
+            <QueryButton
+              disabled={!hasNewTime}
+              onClick={this.handleQuery}
+            />
+            <RefreshButton onClick={refresh} />
+          </SectionHeaderRow>
+        </SectionHeader>
         {showContent}
       </Card>
     )

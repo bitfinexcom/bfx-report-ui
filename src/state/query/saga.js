@@ -10,7 +10,7 @@ import _includes from 'lodash/includes'
 import { LANGUAGES_MAP } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
-import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { updateErrorStatus } from 'state/status/actions'
 import { getFilterQuery } from 'state/filters/selectors'
 import { getParams as getAccountBalanceParams } from 'state/accountBalance/selectors'
 import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliatesEarnings/selectors'
@@ -37,19 +37,19 @@ import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors
 import { getTimestamp } from 'state/wallets/selectors'
 import { getParams as getWinLossParams } from 'state/winLoss/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
+import { toggleExportSuccessDialog } from 'state/ui/actions'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
 } from 'state/base/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { platform } from 'var/config'
 
 import {
   getEmail,
   getQuery,
-  getTargetQueryLimit,
-  getTimeFrame,
 } from './selectors'
 import actions from './actions'
-import { NO_QUERY_LIMIT_TARGETS } from './utils'
+import { getQueryLimit, NO_QUERY_LIMIT_TARGETS } from './utils'
 import types from './constants'
 
 const {
@@ -203,11 +203,12 @@ function formatSymbol(target, symbols) {
   }
 }
 
-function* getOptions({ target, query }) {
+function* getOptions({ target }) {
   const options = {}
   if (!_includes(NO_QUERY_LIMIT_TARGETS, target)) {
-    Object.assign(options, getTimeFrame(query, target))
-    options.limit = yield select(getTargetQueryLimit, target)
+    const timeFrame = yield select(getTimeFrame)
+    Object.assign(options, timeFrame)
+    options.limit = getQueryLimit(target)
   }
   options.timezone = yield select(getTimezone)
   options.dateFormat = yield select(getDateFormat)
@@ -356,17 +357,17 @@ function* getOptions({ target, query }) {
 
 function* exportCSV({ payload: targets }) {
   try {
-    const query = yield select(getQuery)
+    const { exportEmail } = yield select(getQuery)
     const multiExport = []
     // eslint-disable-next-line no-restricted-syntax
     for (const target of targets) {
-      const options = yield call(getOptions, { target, query })
+      const options = yield call(getOptions, { target })
       multiExport.push(options)
 
       // add 2 additional snapshot reports
       if (target === MENU_TAX_REPORT) {
         const { start, end } = yield select(getTaxReportParams)
-        const snapshotOptions = yield call(getOptions, { target: MENU_SNAPSHOTS, query })
+        const snapshotOptions = yield call(getOptions, { target: MENU_SNAPSHOTS })
         multiExport.push({
           ...snapshotOptions,
           end: start || undefined,
@@ -383,22 +384,12 @@ function* exportCSV({ payload: targets }) {
       language: LANGUAGES_MAP[locale],
       multiExport,
     }
-    if (query.exportEmail) {
-      params.email = query.exportEmail
+    if (exportEmail) {
+      params.email = exportEmail
     }
     const { result, error } = yield call(getMultipleCsv, params)
     if (result) {
-      if (result.isSendEmail) {
-        yield put(updateSuccessStatus({
-          id: 'download.status.email',
-          topic: 'download.export',
-        }))
-      } else if (result.isSaveLocaly) {
-        yield put(updateSuccessStatus({
-          id: 'download.status.local',
-          topic: 'download.export',
-        }))
-      }
+      yield put(toggleExportSuccessDialog())
     }
 
     if (error) {
@@ -425,15 +416,11 @@ function* prepareExport() {
     }
 
     // owner email now get while first auth-check
-    const result = yield select(getEmail)
+    const ownerEmail = yield select(getEmail)
     // export email
     const { reportEmail } = queryString.parse(window.location.search)
-    // send email get from the URL when possible
-    if (reportEmail && result) {
-      yield put(actions.setExportEmail(reportEmail))
-    } else {
-      yield put(actions.setExportEmail(result))
-    }
+    // use email from the URL when possible
+    yield put(actions.setExportEmail(reportEmail || ownerEmail))
   } catch (fail) {
     yield put(actions.setExportEmail(false))
     yield put(updateErrorStatus({

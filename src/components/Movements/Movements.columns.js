@@ -21,7 +21,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: 80,
+      width: COLUMN_WIDTHS.ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -65,7 +65,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'column.status',
-      width: 125,
+      width: COLUMN_WIDTHS.MOVEMENT_STATUS,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -123,7 +123,7 @@ export default function getColumns(props) {
     {
       id: 'fees',
       name: 'column.fees',
-      width: 145,
+      width: COLUMN_WIDTHS.FEE,
       renderer: (rowIndex) => {
         const { fees, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(fees)} ${currency}`

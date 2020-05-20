@@ -1,0 +1,17 @@
+svg:not(.recharts-surface) path {
+  fill: var(--iconColor);
+}
+
+svg.icon {
+  &--checked, &--checkmark-circle {
+    path {
+      fill: var(--iconCheckmark);
+    }
+  }
+
+  &--offline, &--warning {
+    path {
+      fill: var(--iconWarning);
+    }
+  }
+}

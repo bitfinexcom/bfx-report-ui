@@ -1,0 +1,96 @@
+.bitfinex-auth {
+  .bp3-dialog {
+    &-body {
+      margin-top: 10px;
+      font-size: 15px;
+      flex-direction: column;
+      display: flex;
+
+      > .platform-logo {
+        position: relative;
+        width: 240px;
+        height: 28px;
+        margin: 15px auto 30px auto;
+      }
+
+      > .bp3-callout {
+        border-radius: 0;
+        margin: 0 auto 24px;
+        padding: 10px 21px 9px;
+        font-size: 15px;
+        background-color: var(--authNoticeBg);
+      }
+
+      .bp3-form-group {
+        margin-left: 5px;
+        margin-bottom: 5px;
+      }
+
+      .bp3-input {
+        padding: 0 15px;
+        font-size: 15px;
+
+        &-group {
+          margin-bottom: 18px;
+        }
+      }
+    }
+
+    .bitfinex-auth-check {
+      line-height: 18px;
+    }
+  }
+
+  &-check {
+    width: 136px;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .bitfinex-auth {
+    .bp3-dialog {
+      &-body {
+        font-size: 20px;
+
+        > .platform-logo {
+          width: 280px;
+          height: fit-content;
+          margin: 25px auto 30px auto;
+        }
+
+        > .bp3-callout {
+          margin: 0 auto 30px;
+          padding: 12px 21px 11px;
+          font-size: 20px;
+        }
+
+        .bp3-form-group {
+          margin-left: 5px;
+          margin-bottom: 5px;
+        }
+
+        .bp3-input {
+          height: 40px;
+          padding: 0 15px;
+          font-size: 20px;
+
+          &-group {
+            margin-bottom: 18px;
+          }
+        }
+      }
+
+      &-footer {
+        margin: 0 25px;
+      }
+
+      .bitfinex-auth-check {
+        line-height: 23px;
+      }
+    }
+
+    &-check {
+      width: 150px;
+    }
+  }
+}

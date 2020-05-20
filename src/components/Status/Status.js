@@ -27,12 +27,15 @@ export const Status = ({
     ...msg,
     topic: msg.topic ? t(msg.topic) || msg.topic : undefined,
   }
-  AppToaster.show({
-    intent: intent || Intent.PRIMARY,
-    message: t(msg.id, params),
-    onDismiss: clearStatus,
-    timeout: 10000, // 10s
-  })
+  setTimeout(() => {
+    AppToaster.show({
+      intent: intent || Intent.PRIMARY,
+      message: t(msg.id, params),
+      onDismiss: clearStatus,
+      timeout: 10000, // 10s
+    })
+  }, 0)
+
   return ''
 }
 

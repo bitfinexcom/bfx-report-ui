@@ -1,0 +1,31 @@
+.time-range {
+  width: fit-content;
+  font-size: 18px;
+  color: var(--timeRangeColor);
+  vertical-align: middle;
+  cursor: pointer;
+
+  svg {
+    margin-right: 12px;
+    vertical-align: middle;
+
+    path {
+      fill: var(--timeRangeColor);
+    }
+  }
+
+  span {
+    vertical-align: middle;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .time-range {
+    font-size: 24px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

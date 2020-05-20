@@ -1,0 +1,60 @@
+.sync-mode {
+  .bp3-popover-target {
+    width: 100%;
+  }
+
+  &-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  &-icon {
+    display: inline-block;
+    position: relative;
+    width: 22px;
+    height: 100%;
+
+    .bp3-spinner {
+      margin: 0 1px;
+
+      &-animation {
+        width: 20px;
+      }
+    }
+
+    &-wrapper {
+      display: inline-block;
+      width: 24px;
+      height: 100%;
+    }
+  }
+
+  .bitfinex-sync-progress {
+    transform: translate(-50%, 0);
+    font-size: 10px;
+    position: absolute;
+    top: 0.4px;
+    left: 50%;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .sync-mode {
+    &-icon {
+      width: 28px;
+
+      .bp3-spinner {
+        margin: 0;
+
+        &-animation {
+          width: 28px;
+        }
+      }
+
+      &-wrapper {
+        width: 28px;
+      }
+    }
+  }
+}

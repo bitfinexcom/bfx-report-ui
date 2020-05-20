@@ -12,6 +12,12 @@
       margin-left: 67px !important;
     }
 
+    &-legend {
+      &-item {
+        cursor: pointer;
+      }
+    }
+
     &-tooltip {
       &-cursor {
         fill: white;

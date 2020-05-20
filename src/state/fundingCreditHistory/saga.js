@@ -7,7 +7,7 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols } from 'state/symbols/utils'
-import { getQuery, getTimeFrame } from 'state/query/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -24,16 +24,17 @@ const TYPE = queryTypes.MENU_FCREDIT
 const LIMIT = getQueryLimit(TYPE)
 
 function getReqFCredit({
-  smallestMts,
-  query,
+  start,
+  end,
   targetSymbols,
   filter,
 }) {
-  const params = getTimeFrame(query, smallestMts)
-  params.limit = LIMIT
-  params.filter = filter
-  if (targetSymbols.length) {
-    params.symbol = formatRawSymbols(mapRequestSymbols(targetSymbols))
+  const params = {
+    start,
+    end,
+    limit: LIMIT,
+    filter,
+    symbol: formatRawSymbols(mapRequestSymbols(targetSymbols)),
   }
   return makeFetchCall('getFundingCreditHistory', params)
 }
@@ -42,11 +43,11 @@ function* fetchFCredit() {
   try {
     const { targetSymbols } = yield select(getFundingCreditHistory)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-    const query = yield select(getQuery)
+    const { start, end } = yield select(getTimeFrame, smallestMts)
     const filter = yield select(getFilterQuery, TYPE)
     const { result, error } = yield call(fetchDataWithPagination, getReqFCredit, {
-      smallestMts,
-      query,
+      start,
+      end,
       targetSymbols,
       filter,
     })

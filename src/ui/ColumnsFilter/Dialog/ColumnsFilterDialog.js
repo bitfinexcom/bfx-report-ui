@@ -3,16 +3,14 @@ import { withTranslation } from 'react-i18next'
 import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
 
-import ColumnsSelect from 'ui/ColumnsSelect'
+import Icon from 'icons'
 
 import { propTypes, defaultProps } from './ColumnsFilterDialog.props'
 
 const ColumnsFilterDialog = (props) => {
   const {
     children,
-    target,
     isOpen,
     hasChanges,
     onClear,
@@ -21,19 +19,13 @@ const ColumnsFilterDialog = (props) => {
     t,
   } = props
 
-  const title = (
-    <span>
-      {t('columnsfilter.title')}
-      <ColumnsSelect target={target} />
-    </span>
-  )
-
   return (
     <Dialog
-      icon={IconNames.TH_FILTERED}
       className='columns-filter-dialog'
       onClose={onCancel}
-      title={title}
+      title={t('columnsfilter.title')}
+      icon={<Icon.FILTER />}
+      isCloseButtonShown={false}
       isOpen={isOpen}
     >
       <div className={Classes.DIALOG_BODY}>
