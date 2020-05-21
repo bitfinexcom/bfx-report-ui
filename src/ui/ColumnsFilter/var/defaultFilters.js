@@ -80,8 +80,8 @@ const DEFAULT_FILTERS = {
   [MENU_FPAYMENT]: DEFAULT_LEDGERS,
   [MENU_AFFILIATES_EARNINGS]: DEFAULT_LEDGERS,
   [MENU_PUBLIC_TRADES]: [
-    { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
     { column: 'price', type: LESS_THAN, dataType: NUMBER, value: '' },
+    { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
     EMPTY_FILTER,
   ],
   [MENU_PUBLIC_FUNDING]: [
@@ -101,8 +101,9 @@ const DEFAULT_FILTERS = {
   ],
   [MENU_LOGINS]: [
     { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
-    EMPTY_FILTER,
-    EMPTY_FILTER,
+    { column: 'browser', type: CONTAINS, dataType: STRING, value: '' },
+    { column: 'version', type: CONTAINS, dataType: STRING, value: '' },
+
   ],
 }
 
