@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { withTranslation } from 'react-i18next'
 import { TimezonePicker as BlueprintTimezonePicker } from '@blueprintjs/timezone'
 
 import Icon from 'icons'
@@ -14,8 +15,20 @@ class TimezonePicker extends PureComponent {
     this.setState({ isOpen: nextOpenState })
   }
 
+  onOpening = (element) => {
+    const { t } = this.props
+    const localTimezoneText = element.querySelector('.bp3-menu li div')
+    if (localTimezoneText) {
+      localTimezoneText.innerHTML = t('inputs.timezone_local')
+    }
+  }
+
   render() {
-    const { onChange, value } = this.props
+    const {
+      onChange,
+      t,
+      value,
+    } = this.props
     const { isOpen } = this.state
 
     const icon = isOpen
@@ -30,12 +43,15 @@ class TimezonePicker extends PureComponent {
         }}
         className='bitfinex-select'
         onChange={onChange}
+        inputProps={{
+          placeholder: t('inputs.timezone_placeholder'),
+        }}
         popoverProps={{
           minimal: true,
           onInteraction: this.onToggle,
+          onOpening: this.onOpening,
           popoverClassName: 'bitfinex-select-menu',
         }}
-        showLocalTimezone
         value={value}
       />
     )
@@ -45,4 +61,4 @@ class TimezonePicker extends PureComponent {
 TimezonePicker.propTypes = propTypes
 TimezonePicker.defaultProps = defaultProps
 
-export default TimezonePicker
+export default withTranslation('translations')(TimezonePicker)
