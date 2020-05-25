@@ -49,13 +49,9 @@ export function* getSyncConf() {
     candlesConf,
   } = result
 
-  // set default pref for derivatives, enabling view of those pairs in sync mode
-  if (!statusMessagesConf.length) {
+  if (statusMessagesConf.length) {
     yield call(editSyncConfReq, {
-      statusMessagesConf: [
-        { symbol: 'tBTCF0:USTF0', start: 0 },
-        { symbol: 'tETHF0:USTF0', start: 0 },
-      ],
+      statusMessagesConf: [],
     })
   }
 
@@ -65,12 +61,15 @@ export function* getSyncConf() {
         pairs: tickersHistoryConf.map(({ symbol }) => mapPair(formatPair(symbol))),
         startTime: tickersHistoryConf[0].start,
       }
-      : [],
+      : {},
     candlesConf: candlesConf.length
       ? candlesConf.map(data => ({
         ...data,
         symbol: mapPair(formatPair(data.symbol)),
       }))
+      : [],
+    statusMessagesConf: statusMessagesConf.length
+      ? statusMessagesConf.map(data => mapPair(formatPair(data.symbol)))
       : [],
   }
 
@@ -182,9 +181,24 @@ function* editCandlesConf({ payload: options }) {
   }
 }
 
+function* editDerivativesConf({ payload: pairs }) {
+  const params = pairs.map(pair => ({
+    start: 0,
+    symbol: formatRawSymbols(mapRequestPairs(pair, true)),
+  }))
+
+  const { error } = yield call(editSyncConfReq, {
+    statusMessagesConf: params,
+  })
+  if (error) {
+    yield put(updateSyncErrorStatus('during editCandlesConf'))
+  }
+}
+
 export default function* syncConfigSaga() {
   yield takeLatest(types.EDIT_PUBLIC_TRADES_PREF, editPublicTradesConf)
   yield takeLatest(types.EDIT_PUBLIC_FUNDING_PREF, editPublicFundingConf)
   yield takeLatest(types.EDIT_TICKERS_HISTORY_PREF, editTickersHistoryConf)
   yield takeLatest(types.EDIT_CANDLES_PREF, editCandlesConf)
+  yield takeLatest(types.EDIT_DERIVATIVES_PREF, editDerivativesConf)
 }

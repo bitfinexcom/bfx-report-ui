@@ -124,6 +124,17 @@ export function editCandlesConf(config) {
 }
 
 /**
+ * Create an action to edit status messages (derivatives) sync preferences.
+ * @param {object[]} config
+ */
+export function editStatusMessagesConf(config) {
+  return {
+    type: types.EDIT_DERIVATIVES_PREF,
+    payload: config,
+  }
+}
+
+/**
  * Create an action to edit sync config.
  * @param {object} config
  */
@@ -139,6 +150,7 @@ export default {
   editPublicTradesSymbolPref,
   editTickersHistoryPairPref,
   editCandlesConf,
+  editStatusMessagesConf,
   editSyncConf,
   forceQueryFromDb,
   setSyncMode,

@@ -15,6 +15,7 @@ const initialState = {
     },
     tickersHistoryConf: initPairsState,
     candlesConf: [],
+    statusMessagesConf: [],
   },
   progress: 0,
 }
@@ -82,6 +83,15 @@ export function syncReducer(state = initialState, action) {
         config: {
           ...state.config,
           candlesConf: payload,
+        },
+      }
+    }
+    case types.EDIT_DERIVATIVES_PREF: {
+      return {
+        ...state,
+        config: {
+          ...state.config,
+          statusMessagesConf: payload,
         },
       }
     }
