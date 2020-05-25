@@ -5,7 +5,8 @@ import { Intent, MenuItem } from '@blueprintjs/core'
 
 import MultiSelect from 'ui/MultiSelect'
 import { filterSelectorItem } from 'ui/utils'
-import { ORDERED_TARGETS } from 'state/query/utils'
+import { EXPORT_TARGETS } from 'state/query/utils'
+import classNames from 'classnames'
 
 class ExportDialogTargetsSelector extends PureComponent {
   renderTag = (item) => {
@@ -20,9 +21,14 @@ class ExportDialogTargetsSelector extends PureComponent {
     const { currentTargets } = this.props
     const isCurrent = currentTargets.includes(item)
 
+    const classes = classNames({
+      'bp3-menu-item--selected': isCurrent,
+    })
+
     return (
       <MenuItem
         active={modifiers.active}
+        className={classes}
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={modifiers.disabled}
         key={item}
@@ -38,7 +44,7 @@ class ExportDialogTargetsSelector extends PureComponent {
     return (
       <MultiSelect
         className='bitfinex-select'
-        items={ORDERED_TARGETS}
+        items={EXPORT_TARGETS}
         itemRenderer={this.renderTarget}
         itemPredicate={filterSelectorItem}
         onItemSelect={toggleTarget}
