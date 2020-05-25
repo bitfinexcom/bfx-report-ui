@@ -8,6 +8,7 @@ export const getIsPreferencesDialogOpen = state => getUI(state).isPreferencesDia
 export const getIsTimeFrameDialogOpen = state => getUI(state).isTimeFrameDialogOpen
 export const getLatestPaginationTimestamp = state => getUI(state).latestPaginationTimestamp
 export const getDevice = state => getUI(state).device
+export const getWindowWidth = state => getUI(state).windowWidth
 
 export default {
   getIsExportDialogOpen,
@@ -18,4 +19,5 @@ export default {
   getIsTimeFrameDialogOpen,
   getLatestPaginationTimestamp,
   getDevice,
+  getWindowWidth,
 }

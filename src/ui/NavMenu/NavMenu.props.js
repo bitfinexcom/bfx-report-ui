@@ -8,6 +8,7 @@ export const propTypes = {
   }).isRequired,
   showMenuPopover: PropTypes.bool,
   t: PropTypes.func.isRequired,
+  windowWidth: PropTypes.number.isRequired,
 }
 
 export const defaultProps = {

@@ -11,6 +11,7 @@ const initialState = {
   isTimeFrameDialogOpen: false,
   latestPaginationTimestamp: undefined,
   device: getDeviceType(),
+  windowWidth: window.innerWidth,
 }
 
 export function uiReducer(state = initialState, action) {
@@ -56,6 +57,7 @@ export function uiReducer(state = initialState, action) {
       return {
         ...state,
         device: getDeviceType(),
+        windowWidth: window.innerWidth,
       }
     default: {
       return state
