@@ -12,6 +12,25 @@
     .bp3-popover-content {
       height: calc(100vh - 160px);
       overflow: auto;
+
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        background-color: var(--tableScrollBg);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--tableScrollThumbBg);
+        border-radius: 2px;
+      }
+
+      &::-webkit-scrollbar-corner {
+        background-color: var(--tableScrollThumbBg);
+      }
+
+      // firefox
+      scrollbar-width: thin;
+      scrollbar-color: var(--tableScrollThumbBg) var(--tableScrollBg);
     }
   }
 

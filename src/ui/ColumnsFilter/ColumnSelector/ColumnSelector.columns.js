@@ -114,7 +114,7 @@ const SECTION_COLUMNS = {
   [MENU_FLOAN]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'symbol', name: 'currency' },
-    { id: 'side', name: 'side', type: INTEGER, filter: true },
+    { id: 'side', name: 'side', type: INTEGER },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
@@ -128,7 +128,7 @@ const SECTION_COLUMNS = {
   [MENU_FCREDIT]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'symbol', name: 'currency' },
-    { id: 'side', name: 'side', type: INTEGER, filter: true },
+    { id: 'side', name: 'side', type: INTEGER },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
@@ -182,8 +182,8 @@ const SECTION_COLUMNS = {
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'mts', name: 'date' },
     { id: 'ip', name: 'ip', type: STRING, filter: true },
-    { id: 'browser', name: 'browser' },
-    { id: 'version', name: 'version' },
+    { id: 'browser', name: 'browser', type: STRING, filter: true },
+    { id: 'version', name: 'version', type: STRING, filter: true },
     { id: 'mobile', name: 'mobile' },
     { id: 'extra', name: 'meta' },
   ],

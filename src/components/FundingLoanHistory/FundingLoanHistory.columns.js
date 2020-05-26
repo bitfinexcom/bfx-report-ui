@@ -48,7 +48,7 @@ export default function getColumns(props) {
     {
       id: 'side',
       name: 'column.side',
-      width: 80,
+      width: 90,
       renderer: (rowIndex) => {
         const side = t(`floan.side.${getSideMsg(filteredData[rowIndex].side)}`)
         return (

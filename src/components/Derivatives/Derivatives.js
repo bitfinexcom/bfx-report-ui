@@ -6,7 +6,17 @@ import { Card, Elevation } from '@blueprintjs/core'
 import DataTable from 'ui/DataTable'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import SectionHeader from 'ui/SectionHeader'
+import {
+  SectionHeader,
+  SectionHeaderItem,
+  SectionHeaderItemLabel,
+  SectionHeaderRow,
+  SectionHeaderTitle,
+} from 'ui/SectionHeader'
+import ColumnsFilter from 'ui/ColumnsFilter'
+import RefreshButton from 'ui/RefreshButton'
+import DerivativesSyncPref from 'ui/DerivativesSyncPref'
+import MultiPairSelector from 'ui/MultiPairSelector/MultiPairSelector'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, togglePair } from 'state/utils'
 
@@ -74,18 +84,25 @@ class Derivatives extends PureComponent {
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-        <SectionHeader
-          pairsSelectorProps={{
-            currentFilters: targetPairs,
-            existingPairs,
-            pairs: this.getFilteredPairs(pairs),
-            togglePair: this.togglePair,
-          }}
-          refresh={refresh}
-          target={TYPE}
-          timeframe={false}
-          title='derivatives.title'
-        />
+        <SectionHeader>
+          <SectionHeaderTitle>{t('derivatives.title')}</SectionHeaderTitle>
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.symbol')}
+              </SectionHeaderItemLabel>
+              <MultiPairSelector
+                currentFilters={targetPairs}
+                existingPairs={existingPairs}
+                pairs={this.getFilteredPairs(pairs)}
+                togglePair={this.togglePair}
+              />
+            </SectionHeaderItem>
+            <ColumnsFilter target={TYPE} />
+            <RefreshButton onClick={refresh} />
+            <DerivativesSyncPref />
+          </SectionHeaderRow>
+        </SectionHeader>
         {showContent}
       </Card>
     )

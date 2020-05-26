@@ -47,7 +47,6 @@ class MultiSelect extends PureComponent {
           ...tagInputProps,
           leftIcon: icon,
         }}
-        resetOnSelect
       />
     )
   }

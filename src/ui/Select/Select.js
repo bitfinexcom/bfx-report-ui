@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
+import { withTranslation } from 'react-i18next'
 import {
   Button,
   Intent,
@@ -71,6 +72,7 @@ class Select extends PureComponent {
       itemRenderer,
       items,
       popoverClassName,
+      t,
       value,
     } = this.props
     const { isOpen } = this.state
@@ -91,7 +93,10 @@ class Select extends PureComponent {
         className={selectClasses}
         filterable={filterable}
         disabled={!items.length}
-        inputProps={filterable ? { leftIcon: <Icons.SEARCH className='bp3-icon' /> } : {}}
+        inputProps={{
+          leftIcon: <Icons.SEARCH className='bp3-icon' />,
+          placeholder: t('inputs.filter_placeholder'),
+        }}
         items={items}
         itemRenderer={itemRenderer || this.itemRenderer}
         itemPredicate={filterable && filterSelectorItem}
@@ -115,4 +120,4 @@ class Select extends PureComponent {
 Select.propTypes = propTypes
 Select.defaultProps = defaultProps
 
-export default Select
+export default withTranslation('translations')(Select)

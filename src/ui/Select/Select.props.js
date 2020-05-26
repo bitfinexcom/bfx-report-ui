@@ -13,6 +13,7 @@ export const propTypes = {
   ])).isRequired,
   onChange: PropTypes.func.isRequired,
   popoverClassName: PropTypes.string,
+  t: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
 }
 

@@ -88,12 +88,17 @@ class NavMenu extends PureComponent {
     [MENU_LOGINS, 'logins.title'],
   ]
 
-  handleClick(e, nextTarget) {
+  handleClick = (e, nextTarget) => {
+    const { showMenuPopover } = this.props
     e.preventDefault()
-    // dismiss popover mode
-    const { parentElement } = e.target
-    parentElement.classList.add(Classes.POPOVER_DISMISS)
-    parentElement.click()
+
+    // imitate click to close the popover only in popover view
+    if (!showMenuPopover) {
+      // dismiss popover mode
+      const { parentElement } = e.target
+      parentElement.classList.add(Classes.POPOVER_DISMISS)
+      parentElement.click()
+    }
 
     const { target, history } = this.props
     if (target === nextTarget) {

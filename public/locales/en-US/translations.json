@@ -204,6 +204,11 @@
     "preferences": "Preferences",
     "help": "Help"
   },
+  "inputs": {
+    "filter_placeholder": "Filter...",
+    "timezone_local": "Current timezone",
+    "timezone_placeholder": "Search for timezones..."
+  },
   "ledgers":{
     "title": "Ledgers"
   },
