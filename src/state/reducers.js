@@ -52,7 +52,7 @@ const PERSIST_WHITELIST = [
   'timeRange',
 ]
 
-const PERSIST_VERSION = 0 // starts with -1
+const PERSIST_VERSION = 1 // starts with -1
 const PERSIST_DEBUG = false
 
 const persistConfig = {

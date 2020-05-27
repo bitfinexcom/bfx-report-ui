@@ -34,6 +34,7 @@ import { ReactComponent as REFRESH_DOUBLE } from './refresh-double.svg'
 import { ReactComponent as SEARCH } from './search.svg'
 import { ReactComponent as SIGN_IN } from './sign-in.svg'
 import { ReactComponent as SIGN_OUT } from './sign-out.svg'
+import { ReactComponent as SIGN_UP } from './sign-up.svg'
 import { ReactComponent as SLIDER_CIRCLE_H } from './slider-circle-h.svg'
 import { ReactComponent as STICKY_NOTES } from './sticky-notes.svg'
 import { ReactComponent as TICKERS } from './tickers.svg'
@@ -80,6 +81,7 @@ export default {
   SEARCH,
   SIGN_IN,
   SIGN_OUT,
+  SIGN_UP,
   SLIDER_CIRCLE_H,
   STICKY_NOTES,
   TICKERS,

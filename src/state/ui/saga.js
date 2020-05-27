@@ -3,10 +3,8 @@ import {
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
 
-import {
-  setApiKey, setApiSecret, setAuthToken, setTimezone, setTheme, setLang,
-} from 'state/base/actions'
-import { checkAuth } from 'state/auth/actions'
+import { setTimezone, setTheme, setLang } from 'state/base/actions'
+import { checkAuth, updateAuth } from 'state/auth/actions'
 import { setTimeRange } from 'state/timeRange/actions'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 import { isSynced } from 'state/sync/saga'
@@ -66,20 +64,18 @@ function* uiLoaded() {
     }))
   }
 
-  // handle authToken
+  // handle auth from url params
   if (authToken || (apiKey && apiSecret)) {
-    if (authToken) {
-      yield put(setAuthToken(authToken))
-    }
-
-    if (apiKey && apiSecret) {
-      yield put(setApiKey(apiKey))
-      yield put(setApiSecret(apiSecret))
-    }
+    yield put(updateAuth({
+      apiKey,
+      apiSecret,
+      authToken,
+    }))
   }
 
   // skip auto auth for electron build because front is loading faster
-  if (!REACT_APP_ELECTRON) {
+  // also skip in case apiKey and apiSecret are set from url to give user a chance not to save them
+  if (!REACT_APP_ELECTRON && !(apiKey && apiSecret)) {
     yield put(checkAuth())
   }
 }

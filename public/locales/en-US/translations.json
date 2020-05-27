@@ -19,11 +19,17 @@
   "auth": {
     "auth": "Auth",
     "title": "Login",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
     "enterAPIKey": "Enter API Key:",
     "enterAPISecret": "Enter API Secret:",
+    "enterPassword": "Enter Password:",
+    "repeatPassword": "Repeat Password:",
+    "enterEmail": "Enter Email:",
     "checkAuth": "Check Auth",
     "note1": "Visit ",
     "note2": " to get the readonly API key and secret pair.",
+    "rememberMe": "Remember me",
     "required": "(required)",
     "nonideal":{
       "title": "Reports 2.0",
@@ -323,6 +329,7 @@
     "request": {
       "error": "{{topic}} request fail {{detail}}"
     },
+    "credentials": "Incorrect credentials",
     "timeframe_update": "Time frame updated"
   },
   "symbols": {

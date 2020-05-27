@@ -8,6 +8,15 @@ const migrations = {
         : state.base.isSyncEnabled,
     },
   }),
+  1: state => ({
+    ...state,
+    base: {
+      ...state.base,
+      apiKey: undefined,
+      apiSecret: undefined,
+      authToken: undefined,
+    },
+  }),
 }
 
 export default migrations

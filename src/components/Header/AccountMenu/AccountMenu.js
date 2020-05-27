@@ -7,6 +7,7 @@ import {
   Popover,
   Position,
 } from '@blueprintjs/core'
+import _isString from 'lodash/isString'
 
 import Icon from 'icons'
 
@@ -14,7 +15,12 @@ import { propTypes, defaultProps } from './AccountMenu.props'
 import SyncMode from '../SyncMode'
 import { openHelp } from '../utils'
 
-const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
+const formatUsername = (email = '') => {
+  if (!_isString(email)) {
+    return ''
+  }
+  return email.includes('@') ? `${email.split('@')[0]}` : email
+}
 
 class AccountMenu extends PureComponent {
   render() {

@@ -42,7 +42,7 @@ const {
   MENU_TRADES,
 } = queryType
 
-const getAuthFromStore = () => {
+export const getAuthFromStore = () => {
   const state = store.getState()
   return selectAuth(state)
 }
@@ -64,20 +64,17 @@ export function postJsonfetch(url, bodyJson) {
     .then(data => data)
 }
 
-export function makeFetchCall(method, params = null, auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/get-data`, {
+export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
+  return postJsonfetch(`${platform.API_URL}/json-rpc`, {
     auth,
     method,
-    params,
+    params: params || undefined,
   })
 }
 
-export function getAuth(auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/check-auth`, {
-    auth,
-  })
-}
-
+// used to check the working state of services dealing with export mailing
+// response email should be added to export requests
+// currently not used anywhere
 export function checkEmail(auth = getAuthFromStore()) {
   return postJsonfetch(`${platform.API_URL}/check-stored-locally`, {
     auth,
@@ -482,7 +479,7 @@ export default {
   formatAuthDate,
   formatDate,
   formatTime,
-  getAuth,
+  getAuthFromStore,
   getCurrentEntries,
   getLastMonth,
   getParsedUrlParams,

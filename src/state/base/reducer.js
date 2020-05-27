@@ -1,15 +1,10 @@
 import moment from 'moment-timezone'
 
-import authTypes from 'state/auth/constants'
 import { getDefaultTableScrollSetting } from 'state/utils'
 
 import types from './constants'
 
-// auth states are local cached
 const initialState = {
-  apiKey: '',
-  apiSecret: '',
-  authToken: '',
   dateFormat: types.DATE_FORMATS[0],
   locale: 'en',
   queryLimit: 0,
@@ -23,21 +18,6 @@ const initialState = {
 export function baseReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
-    case types.SET_API_KEY:
-      return {
-        ...state,
-        apiKey: payload,
-      }
-    case types.SET_API_SECRET:
-      return {
-        ...state,
-        apiSecret: payload,
-      }
-    case types.SET_AUTH_TOKEN:
-      return {
-        ...state,
-        authToken: payload,
-      }
     case types.SET_LANG:
       return {
         ...state,
@@ -47,11 +27,6 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         theme: payload,
-      }
-    case authTypes.LOGOUT:
-      return {
-        ...state,
-        authToken: '',
       }
     case types.SET_TIMEZONE:
       return {

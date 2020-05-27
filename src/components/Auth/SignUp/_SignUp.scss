@@ -1,0 +1,20 @@
+.bitfinex-auth-sign-up {
+  &--framework {
+    width: 540px;
+
+    .bitfinex-auth-inputs-group {
+      .bitfinex-auth-form-input {
+        &:first-child {
+          margin-right: 4%;
+        }
+
+        width: 48%;
+        display: inline-block;
+
+        .bp3-input {
+          padding: 0 13px;
+        }
+      }
+    }
+  }
+}

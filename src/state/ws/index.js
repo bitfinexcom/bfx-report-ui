@@ -1,6 +1,6 @@
 import { store } from 'state/store'
 
-import { selectAuth } from 'state/auth/selectors'
+import { getAuthData, selectAuth } from 'state/auth/selectors'
 import { platform } from 'var/config'
 
 import types from './constants'
@@ -10,6 +10,13 @@ const { NODE_ENV } = process.env
 const getAuth = () => {
   const state = store.getState()
   return selectAuth(state)
+}
+
+// initial auth with /login requires email/password even if token already present
+const getLoginAuth = () => {
+  const state = store.getState()
+  const { email, password } = getAuthData(state)
+  return { email, password }
 }
 
 class WS {
@@ -79,19 +86,23 @@ class WS {
     }
   }
 
+  signIn = (auth = getLoginAuth()) => {
+    const { email, password } = auth
+    this.send('signIn', {}, {
+      email,
+      password,
+      isSubAccount: false,
+    })
+  }
+
   send = (method = '', params = {}, auth = getAuth()) => {
     if (!this.isConnected) {
       return
     }
 
     try {
-      const { apiKey, apiSecret } = auth
-
       const data = {
-        auth: {
-          apiKey,
-          apiSecret,
-        },
+        auth,
         method,
         params,
       }
