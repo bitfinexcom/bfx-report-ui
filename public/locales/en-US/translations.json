@@ -324,6 +324,9 @@
       "tooltip": "Select a time to query snapshots"
     }
   },
+  "spayments": {
+    "title": "Staking Earnings"
+  },
   "status": {
     "success": "{{topic}} Success at {{time}}",
     "warn": "{{topic}}",

@@ -16,6 +16,7 @@ import { fetchFOffer, refresh as refreshFOffer } from 'state/fundingOfferHistory
 import { fetchFLoan, refresh as refreshFLoan } from 'state/fundingLoanHistory/actions'
 import { fetchFCredit, refresh as refreshFCredit } from 'state/fundingCreditHistory/actions'
 import { fetchFPayment, refresh as refreshFPayment } from 'state/fundingPayment/actions'
+import { fetchData as fetchSPayments, refresh as refreshSPayments } from 'state/stakingPayments/actions'
 import { fetchAffiliatesEarnings, refresh as refreshAffiliatesEarnings } from 'state/affiliatesEarnings/actions'
 import { fetchPublicTrades, refresh as refreshPublicTrades } from 'state/publicTrades/actions'
 import { fetchPublicFunding, refresh as refreshPublicFunding } from 'state/publicFunding/actions'
@@ -36,6 +37,7 @@ const {
   MENU_FLOAN,
   MENU_FCREDIT,
   MENU_FPAYMENT,
+  MENU_SPAYMENTS,
   MENU_AFFILIATES_EARNINGS,
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
@@ -87,6 +89,10 @@ export function* setFilters({ payload }) {
     case MENU_FPAYMENT:
       yield put(refreshFPayment())
       yield put(fetchFPayment())
+      break
+    case MENU_SPAYMENTS:
+      yield put(refreshSPayments())
+      yield put(fetchSPayments())
       break
     case MENU_AFFILIATES_EARNINGS:
       yield put(refreshAffiliatesEarnings())

@@ -29,6 +29,7 @@ import publicFundingSaga from './publicFunding/saga'
 import publicTradesSaga from './publicTrades/saga'
 import routingSaga from './routing/saga'
 import snapshotsSaga from './snapshots/saga'
+import spaymentsSaga from './stakingPayments/saga'
 import taxReportSaga from './taxReport/saga'
 import querySaga from './query/saga'
 import tickersSaga from './tickers/saga'
@@ -66,6 +67,7 @@ export default function* rootSaga() {
   yield fork(publicTradesSaga)
   yield fork(routingSaga)
   yield fork(querySaga)
+  yield fork(spaymentsSaga)
   yield fork(symbolsSaga)
   yield fork(tickersSaga)
   yield fork(tradesSaga)

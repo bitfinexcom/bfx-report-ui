@@ -33,6 +33,7 @@ const SMALLEST_MTS_MAP = {
   [queryTypes.MENU_FLOAN]: 'mtsUpdate',
   [queryTypes.MENU_FOFFER]: 'mtsUpdate',
   [queryTypes.MENU_FPAYMENT]: 'mts',
+  [queryTypes.MENU_SPAYMENTS]: 'mts',
   [queryTypes.MENU_AFFILIATES_EARNINGS]: 'mts',
   [queryTypes.MENU_PUBLIC_TRADES]: 'mts',
   [queryTypes.MENU_PUBLIC_FUNDING]: 'mts',
