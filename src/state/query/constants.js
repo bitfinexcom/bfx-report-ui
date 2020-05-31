@@ -3,6 +3,7 @@ export default {
   MENU_ACCOUNT_SUMMARY: 'accountsummary',
   MENU_AFFILIATES_EARNINGS: 'affiliatesearnings',
   MENU_CANDLES: 'candles',
+  MENU_CHANGE_LOGS: 'changelogs',
   MENU_CONCENTRATION_RISK: 'concentrationrisk',
   MENU_DERIVATIVES: 'derivatives',
   MENU_FCREDIT: 'fcredit',

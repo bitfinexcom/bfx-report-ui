@@ -24,6 +24,7 @@ const {
   MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -86,6 +87,7 @@ class NavMenu extends PureComponent {
     ['divider'],
     [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
     [MENU_LOGINS, 'logins.title'],
+    [MENU_CHANGE_LOGS, 'changelogs.title'],
   ]
 
   handleClick = (e, nextTarget) => {

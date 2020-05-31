@@ -22,6 +22,7 @@ const {
   MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FEES_REPORT,
@@ -212,19 +213,10 @@ export const checkInit = (props, type) => {
       }
       break
     }
+    case MENU_ACCOUNT_BALANCE:
+    case MENU_CHANGE_LOGS:
+    case MENU_LOGINS:
     case MENU_CANDLES: {
-      if (!dataReceived && !pageLoading) {
-        fetchData()
-      }
-      break
-    }
-    case MENU_LOGINS: {
-      if (!dataReceived && !pageLoading) {
-        fetchData()
-      }
-      break
-    }
-    case MENU_ACCOUNT_BALANCE: {
       if (!dataReceived && !pageLoading) {
         fetchData()
       }

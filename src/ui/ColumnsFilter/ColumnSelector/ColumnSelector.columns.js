@@ -18,6 +18,7 @@ const {
   MENU_TICKERS,
   MENU_DERIVATIVES,
   MENU_LOGINS,
+  MENU_CHANGE_LOGS,
 } = queryConstants
 
 const {
@@ -186,6 +187,12 @@ const SECTION_COLUMNS = {
     { id: 'version', name: 'version', type: STRING, filter: true },
     { id: 'mobile', name: 'mobile' },
     { id: 'extra', name: 'meta' },
+  ],
+  [MENU_CHANGE_LOGS]: [
+    { id: 'mts', name: 'date' },
+    { id: 'log', name: 'description', type: STRING, filter: true },
+    { id: 'ip', name: 'ip', type: STRING, filter: true },
+    { id: 'userAgent', name: 'meta', type: STRING, filter: true },
   ],
 }
 

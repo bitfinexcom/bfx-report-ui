@@ -13,6 +13,7 @@ const {
   MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -45,6 +46,7 @@ export const TYPE_WHITELIST = [
   MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -77,6 +79,7 @@ export const ROUTE_WHITELIST = [
   MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -120,6 +123,7 @@ export const FILTERS_WHITELIST = [
   MENU_TICKERS,
   MENU_DERIVATIVES,
   MENU_LOGINS,
+  MENU_CHANGE_LOGS,
 ]
 
 // Should keep the order, which used in ExportTargetsSelector
@@ -168,6 +172,7 @@ export const EXPORT_TARGETS = [
   ...PUBLIC_TARGETS,
   ...FRAMEWORK,
   MENU_LOGINS,
+  MENU_CHANGE_LOGS,
 ]
 
 export const NO_QUERY_LIMIT_TARGETS = [
@@ -203,6 +208,12 @@ const MAPPING = {
     icon: Icons.LOOP,
     path: '/candles',
     queryLimit: 500,
+  },
+  [MENU_CHANGE_LOGS]: {
+    icon: Icons.NOTEBOOK,
+    path: '/change_logs',
+    queryLimit: 200,
+    pageSize: 100,
   },
   [MENU_CONCENTRATION_RISK]: {
     icon: Icons.DISK,

@@ -6,6 +6,7 @@ import AccountSummary from 'components/AccountSummary'
 import AffiliatesEarnings from 'components/AffiliatesEarnings'
 import AverageWinLoss from 'components/AverageWinLoss'
 import Candles from 'components/Candles'
+import ChangeLogs from 'components/ChangeLogs'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import Derivatives from 'components/Derivatives'
 import FeesReport from 'components/FeesReport'
@@ -48,6 +49,7 @@ const {
   MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -101,6 +103,7 @@ const PATHS = {
     `${getPath(MENU_TAX_REPORT)}/:section(start_snapshot|end_snapshot|result)/:subsection(positions|tickers|wallets)`],
   MENU_ACCOUNT_SUMMARY: [getPath(MENU_ACCOUNT_SUMMARY)],
   MENU_LOGINS: [getPath(MENU_LOGINS)],
+  MENU_CHANGE_LOGS: [getPath(MENU_CHANGE_LOGS)],
 }
 
 class Main extends PureComponent {
@@ -276,6 +279,11 @@ class Main extends PureComponent {
               exact
               path={PATHS.MENU_LOGINS}
               component={Logins}
+            />
+            <Route
+              exact
+              path={PATHS.MENU_CHANGE_LOGS}
+              component={ChangeLogs}
             />
           </Switch>
         </div>

@@ -16,6 +16,7 @@ import { fetchPublicTrades } from 'state/publicTrades/actions'
 import { fetchPublicFunding } from 'state/publicFunding/actions'
 import { fetchTickers } from 'state/tickers/actions'
 import { fetchData as fetchLogins } from 'state/logins/actions'
+import { fetchData as fetchChangeLogs } from 'state/changeLogs/actions'
 
 import types from './constants'
 
@@ -35,6 +36,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_LOGINS,
+  MENU_CHANGE_LOGS,
 } = queryTypes
 
 function* fetchNext({ payload }) {
@@ -75,6 +77,8 @@ function* fetchNext({ payload }) {
       return yield put(fetchTickers(options))
     case MENU_LOGINS:
       return yield put(fetchLogins(options))
+    case MENU_CHANGE_LOGS:
+      return yield put(fetchChangeLogs(options))
     default:
       return undefined
   }

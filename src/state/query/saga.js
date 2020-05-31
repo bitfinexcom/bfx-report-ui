@@ -54,6 +54,7 @@ const {
   MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FEES_REPORT,
@@ -249,6 +250,7 @@ function* getOptions({ target }) {
       break
     case MENU_TAX_REPORT:
     case MENU_LOGINS:
+    case MENU_CHANGE_LOGS:
       break
     case MENU_POSITIONS_AUDIT:
       options.id = sign || undefined
@@ -273,6 +275,9 @@ function* getOptions({ target }) {
       break
     case MENU_CANDLES:
       options.method = 'getCandlesCsv'
+      break
+    case MENU_CHANGE_LOGS:
+      options.method = 'getChangeLogsCsv'
       break
     case MENU_DERIVATIVES:
       options.method = 'getStatusMessagesCsv'
