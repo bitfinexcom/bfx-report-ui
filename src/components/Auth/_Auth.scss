@@ -1,5 +1,5 @@
-@import './SignUp/SignUp';
 @import './InputKey/InputKey';
+@import './ErrorLabel/ErrorLabel';
 
 .bitfinex-auth {
   .bp3-dialog {
@@ -32,8 +32,14 @@
 
   &-remember-me {
     &.bp3-checkbox {
-      margin: 0 auto 0 10px;
+      margin: 0 0 0 2px;
       line-height: 30px;
+    }
+
+    &--sign-in {
+      &.bp3-checkbox {
+        margin-bottom: 60px;
+      }
     }
   }
 

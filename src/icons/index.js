@@ -17,6 +17,7 @@ import { ReactComponent as CURSOR_SQUARE } from './cursor-square.svg'
 import { ReactComponent as DARK_THEME } from './dark-theme.svg'
 import { ReactComponent as DERIVATIVES } from './derivatives.svg'
 import { ReactComponent as DISK } from './disk.svg'
+import { ReactComponent as EXCLAMATION_CIRCLE } from './exclamation-circle.svg'
 import { ReactComponent as FEES_REPORT } from './fees-report.svg'
 import { ReactComponent as FILE_EXPORT } from './file-export.svg'
 import { ReactComponent as FILE_TABLE } from './file-table.svg'
@@ -64,6 +65,7 @@ export default {
   DARK_THEME,
   DERIVATIVES,
   DISK,
+  EXCLAMATION_CIRCLE,
   FEES_REPORT,
   FILE_EXPORT,
   FILE_TABLE,

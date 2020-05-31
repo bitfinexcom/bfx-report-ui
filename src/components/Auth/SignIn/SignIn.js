@@ -82,17 +82,17 @@ class SignIn extends PureComponent {
             value={password}
             onChange={this.handleInputChange}
           />
+          <Checkbox
+            className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
+            name={'isPersisted'}
+            checked={isPersisted}
+            onChange={this.togglePersistence}
+          >
+            {t('auth.rememberMe')}
+          </Checkbox>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <Checkbox
-              className='bitfinex-auth-remember-me'
-              name={'isPersisted'}
-              checked={isPersisted}
-              onChange={this.togglePersistence}
-            >
-              {t('auth.rememberMe')}
-            </Checkbox>
             <div className='bitfinex-auth-mode-switch' onClick={switchMode}>
               {t('auth.signUp')}
             </div>

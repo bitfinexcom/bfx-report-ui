@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
@@ -15,6 +15,9 @@ import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './SignUp.props'
 import InputKey from '../InputKey'
+import ErrorLabel from '../ErrorLabel'
+
+const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
 
 // handles framework sign up and online version login
 class SignUp extends PureComponent {
@@ -31,6 +34,9 @@ class SignUp extends PureComponent {
       apiSecret,
       password: '',
       passwordRepeat: '',
+      isBeingValidated: false,
+      passwordError: '',
+      passwordRepeatError: '',
     }
   }
 
@@ -39,11 +45,54 @@ class SignUp extends PureComponent {
     const {
       apiKey, apiSecret, password,
     } = this.state
-    signUp({
-      apiKey,
-      apiSecret,
-      password,
+    this.setState({
+      isBeingValidated: true,
     })
+    const isValid = this.validateForm()
+
+    if (isValid) {
+      signUp({
+        apiKey,
+        apiSecret,
+        password,
+      })
+    }
+  }
+
+  validateForm = () => {
+    const {
+      password,
+      passwordRepeat,
+      passwordError,
+      passwordRepeatError,
+    } = this.state
+
+    let isValid = true
+    const isValidPassword = passwordRegExp.test(password)
+
+    if (password.length < 8) {
+      this.setState({ passwordError: 'auth.passwordLengthValidationError' })
+      isValid = false
+    } else if (!isValidPassword) {
+      this.setState({ passwordError: 'auth.passwordCharactersValidationError' })
+      isValid = false
+    } else if (passwordError) {
+      this.setState({ passwordError: '' })
+    }
+
+    // don't start validating password repeat if password is invalid yet
+    if (!isValid && !passwordRepeatError) {
+      return isValid
+    }
+
+    if (password !== passwordRepeat) {
+      this.setState({ passwordRepeatError: 'auth.passwordRepeatValidationError' })
+      isValid = false
+    } else if (passwordRepeatError) {
+      this.setState({ passwordRepeatError: '' })
+    }
+
+    return isValid
   }
 
   togglePersistence = () => {
@@ -52,10 +101,11 @@ class SignUp extends PureComponent {
   }
 
   handleInputChange = (event) => {
+    const { isBeingValidated } = this.state
     const { name, value } = event.target
     this.setState({
       [name]: value,
-    })
+    }, () => isBeingValidated && this.validateForm())
   }
 
   render() {
@@ -70,12 +120,14 @@ class SignUp extends PureComponent {
       apiSecret,
       password,
       passwordRepeat,
+      passwordError,
+      passwordRepeatError,
     } = this.state
 
     const title = platform.showFrameworkMode ? t('auth.signUp') : t('auth.title')
     const icon = platform.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const isSignUpDisabled = !apiKey || !apiSecret
-      || (platform.showFrameworkMode && (!password || password !== passwordRepeat))
+      || (platform.showFrameworkMode && (!password || !passwordRepeat || passwordError || passwordRepeatError))
 
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
       'bitfinex-auth-sign-up--framework': platform.showFrameworkMode,
@@ -99,47 +151,47 @@ class SignUp extends PureComponent {
             </a>
             {t('auth.note2')}
           </Callout>
-          <div className='bitfinex-auth-inputs-group'>
-            <InputKey
-              label='auth.enterAPIKey'
-              name='apiKey'
-              value={apiKey}
-              onChange={this.handleInputChange}
-            />
-            <InputKey
-              label='auth.enterAPISecret'
-              name='apiSecret'
-              value={apiSecret}
-              onChange={this.handleInputChange}
-            />
-          </div>
+          <InputKey
+            label='auth.enterAPIKey'
+            name='apiKey'
+            value={apiKey}
+            onChange={this.handleInputChange}
+          />
+          <InputKey
+            label='auth.enterAPISecret'
+            name='apiSecret'
+            value={apiSecret}
+            onChange={this.handleInputChange}
+          />
           {platform.showFrameworkMode && (
-            <div className='bitfinex-auth-inputs-group'>
+            <Fragment>
               <InputKey
                 label='auth.enterPassword'
                 name='password'
                 value={password}
                 onChange={this.handleInputChange}
               />
+              <ErrorLabel text={passwordError} />
               <InputKey
                 label='auth.repeatPassword'
                 name='passwordRepeat'
                 value={passwordRepeat}
                 onChange={this.handleInputChange}
               />
-            </div>
+              <ErrorLabel text={passwordRepeatError} />
+            </Fragment>
           )}
+          <Checkbox
+            className='bitfinex-auth-remember-me'
+            name={'isPersisted'}
+            checked={isPersisted}
+            onChange={this.togglePersistence}
+          >
+            {t('auth.rememberMe')}
+          </Checkbox>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <Checkbox
-              className='bitfinex-auth-remember-me'
-              name={'isPersisted'}
-              checked={isPersisted}
-              onChange={this.togglePersistence}
-            >
-              {t('auth.rememberMe')}
-            </Checkbox>
             {platform.showFrameworkMode && (
               <div className='bitfinex-auth-mode-switch' onClick={switchMode}>
                 {t('auth.signIn')}
