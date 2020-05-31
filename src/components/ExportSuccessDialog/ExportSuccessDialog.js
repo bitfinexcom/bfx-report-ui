@@ -21,7 +21,7 @@ class ExportSuccessDialog extends PureComponent {
       return null
     }
 
-    const message = platform.showFrameworkMode ? t('download.status.local') : t('download.status.email')
+    const message = platform.localExport ? t('download.status.local') : t('download.status.email')
 
     return (
       <Dialog

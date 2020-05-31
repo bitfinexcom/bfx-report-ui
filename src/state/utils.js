@@ -72,15 +72,6 @@ export function makeFetchCall(method, params = undefined, auth = getAuthFromStor
   })
 }
 
-// used to check the working state of services dealing with export mailing
-// response email should be added to export requests
-// currently not used anywhere
-export function checkEmail(auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/check-stored-locally`, {
-    auth,
-  })
-}
-
 export const formatAuthDate = mts => moment(mts).format('M/D/YYYY, h:mm:ss A')
 
 /**
@@ -471,7 +462,6 @@ export const getWalletsEntries = entries => entries.map((entry) => {
 
 export default {
   checkFetch,
-  checkEmail,
   DEFAULT_DATETIME_FORMAT,
   getDefaultTableScrollSetting,
   getQueryWithoutParams,

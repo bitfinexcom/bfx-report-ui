@@ -16,7 +16,6 @@ import { selectAuth } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
-import { setOwnerEmail } from 'state/query/actions'
 import { platform } from 'var/config'
 
 import types from './constants'
@@ -56,8 +55,6 @@ function* onAuthSuccess(result) {
 
         return
       }
-    } else {
-      yield put(setOwnerEmail(result.email))
     }
 
     yield put(updateSuccessStatus({

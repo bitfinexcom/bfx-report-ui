@@ -41,13 +41,11 @@ import { toggleExportSuccessDialog } from 'state/ui/actions'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
 } from 'state/base/selectors'
+import { getEmail } from 'state/auth/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { platform } from 'var/config'
 
-import {
-  getEmail,
-  getQuery,
-} from './selectors'
+import { getExportEmail } from './selectors'
 import actions from './actions'
 import { getQueryLimit, NO_QUERY_LIMIT_TARGETS } from './utils'
 import types from './constants'
@@ -357,7 +355,7 @@ function* getOptions({ target }) {
 
 function* exportCSV({ payload: targets }) {
   try {
-    const { exportEmail } = yield select(getQuery)
+    const exportEmail = yield select(getExportEmail)
     const multiExport = []
     // eslint-disable-next-line no-restricted-syntax
     for (const target of targets) {
@@ -410,19 +408,19 @@ function* exportCSV({ payload: targets }) {
 
 function* prepareExport() {
   try {
-    if (platform.showFrameworkMode) {
+    if (platform.localExport) {
       yield put(actions.setExportEmail(''))
       return
     }
 
-    // owner email now get while first auth-check
+    // owner email from auth
     const ownerEmail = yield select(getEmail)
     // export email
     const { reportEmail } = queryString.parse(window.location.search)
     // use email from the URL when possible
     yield put(actions.setExportEmail(reportEmail || ownerEmail))
   } catch (fail) {
-    yield put(actions.setExportEmail(false))
+    yield put(actions.setExportEmail(''))
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'download.query',
