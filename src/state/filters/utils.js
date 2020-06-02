@@ -12,7 +12,7 @@ import _find from 'lodash/find'
 import _isNumber from 'lodash/isNumber'
 import _isNaN from 'lodash/isNaN'
 
-import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
+import SECTION_COLUMNS, { TRANSFORMS } from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import FILTER_TYPES, { FILTER_QUERY_TYPES, FILTERS, FILTER_KEYS } from 'var/filterTypes'
 import DATA_TYPES from 'var/dataTypes'
 
@@ -35,6 +35,15 @@ const getValue = ({ dataType, value }) => {
   }
 }
 
+const transformFilter = ({ type, value }) => {
+  switch (type) {
+    case TRANSFORMS.PERCENTAGE:
+      return (value / 100).toFixed(8)
+    default:
+      return value
+  }
+}
+
 const getValidFilters = filters => filters.filter((filter) => {
   const { column, type, value } = filter
   return column && type && value !== undefined && value !== ''
@@ -42,20 +51,27 @@ const getValidFilters = filters => filters.filter((filter) => {
 
 export const getValidSortedFilters = filters => _sortBy(getValidFilters(filters), ['column', 'type', 'value'])
 
-export const calculateFilterQuery = (filters = []) => {
-  if (_isEmpty(filters)) {
+export const calculateFilterQuery = (filters = [], section) => {
+  if (_isEmpty(filters) || !section) {
     return {}
   }
 
   const validFilters = getValidFilters(filters)
+  const columns = SECTION_COLUMNS[section]
+
   return _reduce(validFilters, (acc, filter) => {
     const {
       column, type, dataType, value,
     } = filter
 
-    const filterValue = getValue({ dataType, value })
+    let filterValue = getValue({ dataType, value })
     if ((dataType === NUMBER || dataType === INTEGER) && _isNaN(filterValue)) {
       return acc
+    }
+
+    const { transform } = columns.find(col => col.id === column)
+    if (transform) {
+      filterValue = transformFilter({ type: transform, value: filterValue })
     }
 
     switch (type) {

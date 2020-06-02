@@ -26,6 +26,10 @@ const {
   STRING,
 } = DATA_TYPES
 
+export const TRANSFORMS = {
+  PERCENTAGE: 'percentage',
+}
+
 const LEDGERS_COLUMNS = [
   { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
   { id: 'description', name: 'description', type: STRING, filter: true },
@@ -106,7 +110,7 @@ const SECTION_COLUMNS = {
     { id: 'amountExecuted', name: 'amount-exe', type: INTEGER, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
-    { id: 'rate', name: 'rate', type: STRING, filter: true },
+    { id: 'rate', name: 'rate', type: NUMBER, filter: true, transform: TRANSFORMS.PERCENTAGE },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
     { id: 'mtsUpdate', name: 'date' },
   ],
@@ -118,7 +122,7 @@ const SECTION_COLUMNS = {
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
-    { id: 'rate', name: 'rate', type: STRING, filter: true },
+    { id: 'rate', name: 'rate', type: NUMBER, filter: true, transform: TRANSFORMS.PERCENTAGE },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
     { id: 'mtsOpening', name: 'opened' },
     { id: 'mtsLastPayout', name: 'closed' },
@@ -132,7 +136,7 @@ const SECTION_COLUMNS = {
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
-    { id: 'rate', name: 'rate', type: STRING, filter: true },
+    { id: 'rate', name: 'rate', type: NUMBER, filter: true, transform: TRANSFORMS.PERCENTAGE },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
     { id: 'mtsOpening', name: 'opened' },
     { id: 'mtsLastPayout', name: 'lastpayout' },
@@ -156,7 +160,7 @@ const SECTION_COLUMNS = {
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'mts', name: 'time' },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
-    { id: 'rate', name: 'rate', type: NUMBER, filter: true },
+    { id: 'rate', name: 'rate', type: NUMBER, filter: true, transform: TRANSFORMS.PERCENTAGE },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
     { id: 'currency', name: 'currency', hidden: true },
   ],

@@ -51,7 +51,7 @@ function filtersReducer(state = initialState, action) {
         [section]: filters,
         queries: {
           ...state.queries,
-          [section]: calculateFilterQuery(filters),
+          [section]: calculateFilterQuery(filters, section),
         },
       }
     }
