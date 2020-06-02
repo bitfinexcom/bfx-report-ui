@@ -17,6 +17,7 @@ import { ReactComponent as CURSOR_SQUARE } from './cursor-square.svg'
 import { ReactComponent as DARK_THEME } from './dark-theme.svg'
 import { ReactComponent as DERIVATIVES } from './derivatives.svg'
 import { ReactComponent as DISK } from './disk.svg'
+import { ReactComponent as EXCLAMATION_CIRCLE } from './exclamation-circle.svg'
 import { ReactComponent as FEES_REPORT } from './fees-report.svg'
 import { ReactComponent as FILE_EXPORT } from './file-export.svg'
 import { ReactComponent as FILE_TABLE } from './file-table.svg'
@@ -34,6 +35,7 @@ import { ReactComponent as REFRESH_DOUBLE } from './refresh-double.svg'
 import { ReactComponent as SEARCH } from './search.svg'
 import { ReactComponent as SIGN_IN } from './sign-in.svg'
 import { ReactComponent as SIGN_OUT } from './sign-out.svg'
+import { ReactComponent as SIGN_UP } from './sign-up.svg'
 import { ReactComponent as SLIDER_CIRCLE_H } from './slider-circle-h.svg'
 import { ReactComponent as STICKY_NOTES } from './sticky-notes.svg'
 import { ReactComponent as TICKERS } from './tickers.svg'
@@ -63,6 +65,7 @@ export default {
   DARK_THEME,
   DERIVATIVES,
   DISK,
+  EXCLAMATION_CIRCLE,
   FEES_REPORT,
   FILE_EXPORT,
   FILE_TABLE,
@@ -80,6 +83,7 @@ export default {
   SEARCH,
   SIGN_IN,
   SIGN_OUT,
+  SIGN_UP,
   SLIDER_CIRCLE_H,
   STICKY_NOTES,
   TICKERS,

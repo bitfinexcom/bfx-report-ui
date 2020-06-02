@@ -3,7 +3,7 @@ import { call, put, takeLatest } from 'redux-saga/effects'
 import { updateSyncStatus } from 'state/sync/actions'
 
 import types from './constants'
-import login from './login'
+import login from './signIn'
 
 function* reconnect() {
   const wsAuth = yield call(login)

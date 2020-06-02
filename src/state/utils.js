@@ -42,7 +42,7 @@ const {
   MENU_TRADES,
 } = queryType
 
-const getAuthFromStore = () => {
+export const getAuthFromStore = () => {
   const state = store.getState()
   return selectAuth(state)
 }
@@ -64,23 +64,11 @@ export function postJsonfetch(url, bodyJson) {
     .then(data => data)
 }
 
-export function makeFetchCall(method, params = null, auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/get-data`, {
+export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
+  return postJsonfetch(`${platform.API_URL}/json-rpc`, {
     auth,
     method,
-    params,
-  })
-}
-
-export function getAuth(auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/check-auth`, {
-    auth,
-  })
-}
-
-export function checkEmail(auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/check-stored-locally`, {
-    auth,
+    params: params || undefined,
   })
 }
 
@@ -474,7 +462,6 @@ export const getWalletsEntries = entries => entries.map((entry) => {
 
 export default {
   checkFetch,
-  checkEmail,
   DEFAULT_DATETIME_FORMAT,
   getDefaultTableScrollSetting,
   getQueryWithoutParams,
@@ -482,7 +469,7 @@ export default {
   formatAuthDate,
   formatDate,
   formatTime,
-  getAuth,
+  getAuthFromStore,
   getCurrentEntries,
   getLastMonth,
   getParsedUrlParams,

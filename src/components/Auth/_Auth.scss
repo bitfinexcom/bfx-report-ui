@@ -1,3 +1,6 @@
+@import './InputKey/InputKey';
+@import './ErrorLabel/ErrorLabel';
+
 .bitfinex-auth {
   .bp3-dialog {
     &-body {
@@ -20,20 +23,6 @@
         font-size: 15px;
         background-color: var(--authNoticeBg);
       }
-
-      .bp3-form-group {
-        margin-left: 5px;
-        margin-bottom: 5px;
-      }
-
-      .bp3-input {
-        padding: 0 15px;
-        font-size: 15px;
-
-        &-group {
-          margin-bottom: 18px;
-        }
-      }
     }
 
     .bitfinex-auth-check {
@@ -41,8 +30,27 @@
     }
   }
 
+  &-remember-me {
+    &.bp3-checkbox {
+      margin: 0 0 0 2px;
+      line-height: 30px;
+    }
+
+    &--sign-in {
+      &.bp3-checkbox {
+        margin-bottom: 60px;
+      }
+    }
+  }
+
+  &-mode-switch {
+    margin-right: 10px;
+    line-height: 30px;
+    cursor: pointer;
+  }
+
   &-check {
-    width: 136px;
+    min-width: 136px;
   }
 }
 
@@ -62,21 +70,6 @@
           margin: 0 auto 30px;
           padding: 12px 21px 11px;
           font-size: 20px;
-        }
-
-        .bp3-form-group {
-          margin-left: 5px;
-          margin-bottom: 5px;
-        }
-
-        .bp3-input {
-          height: 40px;
-          padding: 0 15px;
-          font-size: 20px;
-
-          &-group {
-            margin-bottom: 18px;
-          }
         }
       }
 

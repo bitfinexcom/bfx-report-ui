@@ -1,16 +1,16 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withTranslation } from 'react-i18next'
 import {
   FormGroup,
   InputGroup,
 } from '@blueprintjs/core'
 
-import { inputKeyPropTypes, inputKeyDefaultProps } from './Auth.props'
+import { propTypes, defaultProps } from './InputKey.props'
 
 export const InputKey = ({
   t, label, onChange, name, placeholder, value,
 }) => (
-  <Fragment>
+  <div className='bitfinex-auth-form-input'>
     <FormGroup
       label={t(label)}
       labelFor={name}
@@ -23,10 +23,10 @@ export const InputKey = ({
       value={value}
       onChange={onChange}
     />
-  </Fragment>
+  </div>
 )
 
-InputKey.propTypes = inputKeyPropTypes
-InputKey.defaultProps = inputKeyDefaultProps
+InputKey.propTypes = propTypes
+InputKey.defaultProps = defaultProps
 
 export default withTranslation('translations')(InputKey)

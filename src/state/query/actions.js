@@ -21,17 +21,6 @@ export function prepareExport() {
 }
 
 /**
- * Create an action to set owner email.
- * @param {boolean | string} email return false or the email address
- */
-export function setOwnerEmail(email) {
-  return {
-    type: types.SET_OWNER_EMAIL,
-    payload: email,
-  }
-}
-
-/**
  * Create an action to set sender email.
  * @param {boolean | string} email return false or the email address
  */
@@ -46,5 +35,4 @@ export default {
   exportCsv,
   prepareExport,
   setExportEmail,
-  setOwnerEmail,
 }

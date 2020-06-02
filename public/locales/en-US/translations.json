@@ -19,11 +19,20 @@
   "auth": {
     "auth": "Auth",
     "title": "Login",
+    "signUp": "Sign Up",
+    "signIn": "Sign In",
     "enterAPIKey": "Enter API Key:",
     "enterAPISecret": "Enter API Secret:",
+    "enterPassword": "Enter Password:",
+    "repeatPassword": "Repeat Password:",
+    "enterEmail": "Enter Email:",
     "checkAuth": "Check Auth",
     "note1": "Visit ",
     "note2": " to get the readonly API key and secret pair.",
+    "passwordLengthValidationError": "The password must be at least 8 characters long",
+    "passwordCharactersValidationError": "The password must include both uppercase and lowercase characters",
+    "passwordRepeatValidationError": "The password does not match",
+    "rememberMe": "Remember Me",
     "required": "(required)",
     "nonideal":{
       "title": "Reports 2.0",
@@ -323,6 +332,7 @@
     "request": {
       "error": "{{topic}} request fail {{detail}}"
     },
+    "credentials": "Incorrect credentials",
     "timeframe_update": "Time frame updated"
   },
   "symbols": {

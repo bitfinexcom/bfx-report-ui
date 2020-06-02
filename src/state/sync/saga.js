@@ -21,7 +21,7 @@ import {
 import syncConfigSaga, { getSyncConf } from './saga.config'
 
 const fetchSyncProgress = () => makeFetchCall('getSyncProgress')
-const logout = () => makeFetchCall('logout')
+const logout = () => makeFetchCall('signOut')
 const enableSyncMode = () => makeFetchCall('enableSyncMode')
 const disableSyncMode = () => makeFetchCall('disableSyncMode')
 const updateSyncErrorStatus = msg => updateErrorStatus({

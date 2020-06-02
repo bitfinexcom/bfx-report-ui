@@ -10,6 +10,28 @@ export function checkAuth() {
 }
 
 /**
+ * Create an action to sign in.
+ * @param {Object} payload auth data
+ */
+export function signIn(payload) {
+  return {
+    type: types.SIGN_IN,
+    payload,
+  }
+}
+
+/**
+ * Create an action to sign up.
+ * @param {Object} payload auth data
+ */
+export function signUp(payload) {
+  return {
+    type: types.SIGN_UP,
+    payload,
+  }
+}
+
+/**
  * Create an action to show auth dialog.
  */
 export function showAuth() {
@@ -38,12 +60,23 @@ export function logout() {
 
 /**
  * Create an action to update successful auth status.
- * @param {boolean} result auth status
+ * @param {Object} payload auth data
  */
-export function authSuccess(result) {
+export function authSuccess(payload) {
   return {
     type: types.AUTH_SUCCESS,
-    payload: result,
+    payload,
+  }
+}
+
+/**
+ * Create an action to update auth data.
+ * @param {Object} payload auth status
+ */
+export function updateAuth(payload) {
+  return {
+    type: types.UPDATE_AUTH,
+    payload,
   }
 }
 
@@ -61,8 +94,11 @@ export function updateAuthStatus(result) {
 export default {
   checkAuth,
   logout,
+  signIn,
+  signUp,
   showAuth,
   hideAuth,
   authSuccess,
+  updateAuth,
   updateAuthStatus,
 }

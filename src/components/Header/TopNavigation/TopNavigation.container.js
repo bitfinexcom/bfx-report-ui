@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { getEmail } from 'state/query/selectors'
+import { getEmail } from 'state/auth/selectors'
 import { togglePreferencesDialog } from 'state/ui/actions'
 import { logout } from 'state/auth/actions'
 
