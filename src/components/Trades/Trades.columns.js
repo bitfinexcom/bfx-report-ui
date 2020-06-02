@@ -93,7 +93,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].execAmount,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].execAmount),
     },
     {
       id: 'execPrice',
@@ -136,10 +136,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: (rowIndex) => {
-        const { fee, feeCurrency } = filteredData[rowIndex]
-        return `${fee} ${feeCurrency}`
-      },
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].fee),
     },
     {
       id: 'feePercent',
