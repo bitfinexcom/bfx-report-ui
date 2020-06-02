@@ -1,4 +1,4 @@
 [submodule "bfx-report-express"]
 	path = bfx-report-express
-	url = https://github.com/bitfinexcom/bfx-report-express
+	url = https://github.com/bitfinexcom/bfx-report-express.git
 	branch = master
