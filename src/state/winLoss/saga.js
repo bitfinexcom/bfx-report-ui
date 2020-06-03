@@ -8,6 +8,7 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
+import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
 import actions from './actions'
@@ -18,6 +19,7 @@ export const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
 /* eslint-disable-next-line consistent-return */
 export function* fetchWinLoss({ payload = {} }) {
   try {
+    const { timeframe } = payload
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
       // stop loading for first request
@@ -26,7 +28,13 @@ export function* fetchWinLoss({ payload = {} }) {
     // save current query params in state for csv export reference and toggle loading
     yield put(actions.setParams(payload))
 
-    const { result = [], error } = yield call(getReqWinLoss, payload)
+    const { start, end } = yield select(getTimeFrame)
+
+    const { result = [], error } = yield call(getReqWinLoss, {
+      start,
+      end,
+      timeframe,
+    })
     yield put(actions.updateWinLoss(result))
 
     if (error) {

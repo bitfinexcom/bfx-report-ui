@@ -8,14 +8,10 @@ export const getPageLoading = state => getLoanReport(state).pageLoading
 export const getParams = (state) => {
   const {
     targetSymbols,
-    start,
-    end,
     timeframe,
   } = getLoanReport(state)
   return {
     targetSymbols,
-    start,
-    end,
     timeframe,
   }
 }

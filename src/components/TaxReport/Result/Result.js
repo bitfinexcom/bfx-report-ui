@@ -6,18 +6,23 @@ import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import NoData from 'ui/NoData'
 import { fixedFloat } from 'ui/utils'
+import queryConstants from 'state/query/constants'
+import { checkFetch, checkInit } from 'state/utils'
 import getMovementsColumns from 'components/Movements/Movements.columns'
 import { getFrameworkPositionsColumns } from 'utils/columns'
 
 import { propTypes } from './Result.props'
 import getBalancesColumns from './Balances.columns'
 
+const TYPE = queryConstants.MENU_TAX_REPORT
+
 class TaxReport extends PureComponent {
   componentDidMount() {
-    const { loading, fetchTaxReport } = this.props
-    if (loading) {
-      fetchTaxReport()
-    }
+    checkInit(this.props, TYPE)
+  }
+
+  componentDidUpdate(prevProps) {
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   getPositionsSnapshot = ({ positions, title }) => {
@@ -128,7 +133,8 @@ class TaxReport extends PureComponent {
   render() {
     const {
       data,
-      loading,
+      dataReceived,
+      pageLoading,
       t,
     } = this.props
     const {
@@ -143,7 +149,7 @@ class TaxReport extends PureComponent {
       },
     } = data
 
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       return <Loading />
     }
 

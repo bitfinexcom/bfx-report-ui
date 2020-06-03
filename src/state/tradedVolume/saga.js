@@ -10,6 +10,7 @@ import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
 import { getParams } from 'state/tradedVolume/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
+import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
 import actions from './actions'
@@ -36,9 +37,15 @@ export function* fetchTradedVolume() {
       return yield put(actions.updateTradedVolume([]))
     }
 
-    const params = yield select(getParams)
+    const { timeframe, targetPairs } = yield select(getParams)
+    const { start, end } = yield select(getTimeFrame)
 
-    const { result = [], error } = yield call(getTradedVolume, params)
+    const { result = [], error } = yield call(getTradedVolume, {
+      start,
+      end,
+      timeframe,
+      targetPairs,
+    })
     yield put(actions.updateTradedVolume(result))
 
     if (error) {

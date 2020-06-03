@@ -21,17 +21,6 @@ export function fetchTaxReportSnapshot(payload) {
 }
 
 /**
- * Create an action to set options for Tax Report data.
- * @param {object} payload object contains options
- */
-export function setParams(payload) {
-  return {
-    type: types.SET_PARAMS,
-    payload,
-  }
-}
-
-/**
  * Create an action to note fetch fail.
  * @param {Object} payload fail message
  */
@@ -80,7 +69,6 @@ export default {
   fetchTaxReport,
   fetchTaxReportSnapshot,
   refresh,
-  setParams,
   updateTaxReport,
   updateTaxReportSnapshot,
 }

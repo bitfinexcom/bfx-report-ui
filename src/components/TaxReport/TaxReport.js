@@ -5,15 +5,9 @@ import { Card, Elevation } from '@blueprintjs/core'
 import {
   SectionHeader,
   SectionHeaderTitle,
-  SectionHeaderRow,
-  SectionHeaderItem,
-  SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import DateInput from 'ui/DateInput'
 import NavSwitcher from 'ui/NavSwitcher'
-import QueryButton from 'ui/QueryButton'
-import RefreshButton from 'ui/RefreshButton'
-import { isValidTimeStamp } from 'state/query/utils'
+import TimeRange from 'ui/TimeRange'
 
 import Result from './Result'
 import Snapshot from './Snapshot'
@@ -33,50 +27,6 @@ const SECTIONS_URL = {
 }
 
 class TaxReport extends PureComponent {
-  constructor(props) {
-    super(props)
-
-    const { params: { start, end } } = props
-    this.state = {
-      start: start && new Date(start),
-      end: end && new Date(end),
-    }
-  }
-
-  handleDateChange = (input, time) => {
-    const timestamp = time && time.getTime()
-    if (isValidTimeStamp(timestamp) || time === null) {
-      this.setState({ [input]: time || null })
-    }
-  }
-
-  handleQuery = () => {
-    const { start, end } = this.state
-    const { match, setParams } = this.props
-    const params = {
-      start: start ? start.getTime() : undefined,
-      end: end ? end.getTime() : undefined,
-    }
-    const { section = RESULT } = match.params
-
-    setParams({ params, section })
-  }
-
-  handleRefresh = () => {
-    const { match, refresh } = this.props
-    const { section = RESULT } = match.params
-    refresh({ section })
-  }
-
-  hasNewTime = () => {
-    const { params } = this.props
-    const { start: currStart, end: currEnd } = params
-    const { start, end } = this.state
-    const isDiffStart = start ? start.getTime() !== currStart : !!start !== !!currStart
-    const isDiffEnd = end ? end.getTime() !== currEnd : !!end !== !!currEnd
-    return isDiffStart || isDiffEnd
-  }
-
   switchSection = (section) => {
     const { history } = this.props
 
@@ -111,40 +61,13 @@ class TaxReport extends PureComponent {
 
   render() {
     const { match, t } = this.props
-    const { start, end } = this.state
-    const hasNewTime = this.hasNewTime()
     const { section = RESULT } = match.params
 
     return (
       <Card elevation={Elevation.ZERO} className='tax-report col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('taxreport.title')}</SectionHeaderTitle>
-          <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.startTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('start', date)}
-                defaultValue={start}
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.endTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('end', date)}
-                defaultValue={end}
-              />
-            </SectionHeaderItem>
-
-            <QueryButton
-              disabled={!hasNewTime}
-              onClick={this.handleQuery}
-            />
-            <RefreshButton onClick={this.handleRefresh} />
-          </SectionHeaderRow>
+          <TimeRange className='section-header-time-range' />
         </SectionHeader>
 
         <NavSwitcher

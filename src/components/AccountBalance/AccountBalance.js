@@ -11,7 +11,6 @@ import {
   SectionHeaderItem,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
@@ -19,9 +18,9 @@ import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
+import TimeRange from 'ui/TimeRange'
 import queryConstants from 'state/query/constants'
-import { isValidTimeStamp } from 'state/query/utils'
-import { checkInit } from 'state/utils'
+import { checkFetch, checkInit } from 'state/utils'
 
 import { propTypes, defaultProps } from './AccountBalance.props'
 
@@ -32,12 +31,8 @@ class AccountBalance extends PureComponent {
     checkInit(this.props, TYPE)
   }
 
-  handleDateChange = (input, time) => {
-    const { setParams } = this.props
-    const timestamp = time && time.getTime()
-    if (isValidTimeStamp(timestamp) || time === null) {
-      setParams({ [input]: time ? timestamp : null })
-    }
+  componentDidUpdate(prevProps) {
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   handleQuery = () => {
@@ -59,13 +54,12 @@ class AccountBalance extends PureComponent {
     const {
       currentFetchParams: { timeframe: currTimeframe },
       entries,
-      params,
+      timeframe,
       dataReceived,
       pageLoading,
       refresh,
       t,
     } = this.props
-    const { start, end, timeframe } = params
     const hasChanges = this.hasChanges()
 
     const { chartData, presentCurrencies } = parseChartData({
@@ -90,27 +84,8 @@ class AccountBalance extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('accountbalance.title')}</SectionHeaderTitle>
+          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.startTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('start', date)}
-                defaultValue={start}
-                daysOnly
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.endTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('end', date)}
-                defaultValue={end}
-                daysOnly
-              />
-            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.select')}

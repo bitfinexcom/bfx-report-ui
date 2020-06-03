@@ -10,7 +10,6 @@ import {
   SectionHeaderItem,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
@@ -18,7 +17,7 @@ import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import { isValidTimeStamp } from 'state/query/utils'
+import TimeRange from 'ui/TimeRange'
 
 import { propTypes, defaultProps } from './AverageWinLoss.props'
 
@@ -26,10 +25,8 @@ class AverageWinLoss extends PureComponent {
   constructor(props) {
     super(props)
 
-    const { params: { start, end, timeframe } } = props
+    const { params: { timeframe } } = props
     this.state = {
-      start: start && new Date(start),
-      end: end && new Date(end),
       timeframe,
     }
   }
@@ -43,19 +40,10 @@ class AverageWinLoss extends PureComponent {
     }
   }
 
-  handleDateChange = (input, time) => {
-    const timestamp = time && time.getTime()
-    if (isValidTimeStamp(timestamp) || time === null) {
-      this.setState({ [input]: time || null })
-    }
-  }
-
   handleQuery = () => {
     const { fetchData } = this.props
-    const { start, end, timeframe } = this.state
+    const { timeframe } = this.state
     const params = {
-      start: start ? start.getTime() : undefined,
-      end: end ? end.getTime() : undefined,
       timeframe,
     }
     fetchData(params)
@@ -65,14 +53,10 @@ class AverageWinLoss extends PureComponent {
     this.setState({ timeframe })
   }
 
-  hasNewTime = () => {
-    const { params } = this.props
-    const { start: currStart, end: currEnd, timeframe: currTimeframe } = params
-    const { start, end, timeframe } = this.state
-    const isDiffStart = start ? start.getTime() !== currStart : !!start !== !!currStart
-    const isDiffEnd = end ? end.getTime() !== currEnd : !!end !== !!currEnd
-    const isDiffTimeframe = timeframe !== currTimeframe
-    return isDiffStart || isDiffEnd || isDiffTimeframe
+  hasChanges = () => {
+    const { params: { timeframe: currTimeframe } } = this.props
+    const { timeframe } = this.state
+    return timeframe !== currTimeframe
   }
 
   render() {
@@ -84,8 +68,7 @@ class AverageWinLoss extends PureComponent {
       refresh,
       t,
     } = this.props
-    const { start, end, timeframe } = this.state
-    const hasNewTime = this.hasNewTime()
+    const { timeframe } = this.state
 
     const { chartData, presentCurrencies } = parseChartData({
       data: _sortBy(entries, ['mts']),
@@ -109,27 +92,8 @@ class AverageWinLoss extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('averagewinloss.title')}</SectionHeaderTitle>
+          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.startTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('start', date)}
-                defaultValue={start}
-                daysOnly
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.endTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('end', date)}
-                defaultValue={end}
-                daysOnly
-              />
-            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.select')}
@@ -141,7 +105,7 @@ class AverageWinLoss extends PureComponent {
             </SectionHeaderItem>
 
             <QueryButton
-              disabled={!hasNewTime}
+              disabled={!this.hasChanges()}
               onClick={this.handleQuery}
             />
             <RefreshButton onClick={refresh} />

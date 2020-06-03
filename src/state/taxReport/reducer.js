@@ -6,6 +6,7 @@ import {
   getWalletsEntries,
 } from 'state/utils'
 import { mapSymbol } from 'state/symbols/utils'
+import timeRangeTypes from 'state/timeRange/constants'
 import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
 
 import types from './constants'
@@ -47,8 +48,6 @@ const initialState = {
   startSnapshot: snapshotInitState,
   endSnapshot: snapshotInitState,
   ...finalResultInitState,
-  start: undefined,
-  end: undefined,
 }
 
 const getMovementsEntries = entries => entries.map((entry) => {
@@ -91,6 +90,11 @@ const getSectionProperty = (section) => {
 export function taxReportReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
+    case types.FETCH_TAX_REPORT:
+      return {
+        ...state,
+        pageLoading: true,
+      }
     case types.UPDATE_TAX_REPORT: {
       if (!payload) {
         return {
@@ -160,22 +164,10 @@ export function taxReportReducer(state = initialState, action) {
         },
       }
     }
-    case types.SET_PARAMS: {
-      const { params: { start, end } } = payload
-      return {
-        ...initialState,
-        start,
-        end,
-      }
-    }
     case types.FETCH_FAIL:
       return state
     case types.REFRESH:
-      return {
-        ...initialState,
-        start: state.start,
-        end: state.end,
-      }
+    case timeRangeTypes.SET_TIME_RANGE:
     case authTypes.LOGOUT:
       return initialState
     default: {

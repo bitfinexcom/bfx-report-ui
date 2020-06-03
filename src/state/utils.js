@@ -39,6 +39,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SPAYMENTS,
+  MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
   MENU_TRADES,
@@ -218,6 +219,7 @@ export const checkInit = (props, type) => {
     case MENU_ACCOUNT_BALANCE:
     case MENU_CHANGE_LOGS:
     case MENU_LOGINS:
+    case MENU_TAX_REPORT:
     case MENU_CANDLES: {
       if (!dataReceived && !pageLoading) {
         fetchData()

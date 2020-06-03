@@ -9,8 +9,9 @@ export const propTypes = {
     walletsTickersEntries: PropTypes.array.isRequired,
     walletsEntries: PropTypes.array.isRequired,
   }).isRequired,
-  fetchSnapshot: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  fetchData: PropTypes.func.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
+  pageLoading: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
 }
 

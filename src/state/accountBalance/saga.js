@@ -8,6 +8,7 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
+import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
 import actions from './actions'
@@ -24,8 +25,13 @@ export function* fetchAccountBalance() {
       return yield put(actions.updateBalance([]))
     }
 
-    const params = yield select(selectors.getParams)
-
+    const timeframe = yield select(selectors.getTimeframe)
+    const { start, end } = yield select(getTimeFrame)
+    const params = {
+      timeframe,
+      start,
+      end,
+    }
     const { result = [], error } = yield call(getReqBalance, params)
     yield put(actions.updateBalance(result))
 
@@ -46,8 +52,7 @@ export function* fetchAccountBalance() {
 }
 
 function* refreshAccountBalance() {
-  const params = yield select(selectors.getParams)
-  yield put(actions.fetchBalance(params))
+  yield put(actions.fetchBalance())
 }
 
 function* fetchAccountBalanceFail({ payload }) {
