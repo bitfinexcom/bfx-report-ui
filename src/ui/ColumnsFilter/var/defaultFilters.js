@@ -107,7 +107,7 @@ const DEFAULT_FILTERS = {
   ],
   [MENU_CHANGE_LOGS]: [
     { column: 'log', type: CONTAINS, dataType: STRING, value: '' },
-    { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
+    { column: 'ip', type: CONTAINS, dataType: STRING, value: '' },
     { column: 'userAgent', type: CONTAINS, dataType: STRING, value: '' },
   ],
 }
