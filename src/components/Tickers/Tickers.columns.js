@@ -46,7 +46,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].bid,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].bid),
     },
     {
       id: 'ask',
@@ -64,7 +64,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].ask,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].ask),
     },
     {
       id: 'mtsUpdate',

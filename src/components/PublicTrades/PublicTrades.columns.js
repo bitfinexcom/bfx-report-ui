@@ -84,7 +84,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].price,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].price),
     },
     {
       id: 'amount',
@@ -102,7 +102,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].amount,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
     {
       id: 'pair',

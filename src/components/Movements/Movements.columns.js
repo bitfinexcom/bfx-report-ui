@@ -92,10 +92,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: (rowIndex) => {
-        const { amount, currency } = filteredData[rowIndex]
-        return `${amount} ${currency}`
-      },
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
     ...insertIf(platform.showFrameworkMode, (
       {
@@ -114,10 +111,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
-        copyText: (rowIndex) => {
-          const { amountUsd } = filteredData[rowIndex]
-          return `${fixedFloat(amountUsd)} ${t('column.usd')}`
-        },
+        copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
       }
     )),
     {
@@ -142,10 +136,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: (rowIndex) => {
-        const { fees, currency } = filteredData[rowIndex]
-        return `${fees} ${currency}`
-      },
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].fees),
     },
     {
       id: 'destinationAddress',

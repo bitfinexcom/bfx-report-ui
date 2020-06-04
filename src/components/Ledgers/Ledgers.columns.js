@@ -76,10 +76,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: (rowIndex) => {
-        const { amount, currency } = filteredData[rowIndex]
-        return `${amount} ${currency}`
-      },
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
     ...insertIf(platform.showFrameworkMode, (
       {
@@ -98,10 +95,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
-        copyText: (rowIndex) => {
-          const { amountUsd } = filteredData[rowIndex]
-          return `${fixedFloat(amountUsd)} ${t('column.usd')}`
-        },
+        copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
       }
     )),
     {
@@ -121,10 +115,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: (rowIndex) => {
-        const { balance, currency } = filteredData[rowIndex]
-        return `${balance} ${currency}`
-      },
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
     },
     ...insertIf(platform.showFrameworkMode, (
       {
@@ -144,10 +135,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
-        copyText: (rowIndex) => {
-          const { balanceUsd } = filteredData[rowIndex]
-          return `${fixedFloat(balanceUsd)} ${t('column.usd')}`
-        },
+        copyText: rowIndex => fixedFloat(filteredData[rowIndex].balanceUsd),
       }
     )),
     {

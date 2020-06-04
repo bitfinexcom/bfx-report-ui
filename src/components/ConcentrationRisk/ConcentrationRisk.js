@@ -106,10 +106,7 @@ class ConcentrationRisk extends PureComponent {
 
     const { tableData, chartData } = this.parseData(filteredData)
     const numRows = tableData.length
-    const tableColumns = getColumns({
-      data: tableData,
-      t,
-    })
+    const tableColumns = getColumns({ data: tableData })
 
     let showContent
     if (!dataReceived && pageLoading) {

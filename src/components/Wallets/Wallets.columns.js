@@ -6,7 +6,7 @@ import { COLUMN_WIDTHS } from 'utils/columns'
 import { platform } from 'var/config'
 
 export default function getColumns(props) {
-  const { filteredData, t } = props
+  const { filteredData } = props
 
   return [
     {
@@ -39,7 +39,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].balance,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
     },
     ...insertIf(platform.showFrameworkMode, (
       {
@@ -58,10 +58,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
-        copyText: (rowIndex) => {
-          const { balanceUsd } = filteredData[rowIndex]
-          return `${fixedFloat(balanceUsd)} ${t('column.usd')}`
-        },
+        copyText: rowIndex => fixedFloat(filteredData[rowIndex].balanceUsd),
       }
     )),
   ]

@@ -74,7 +74,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].amount,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
     {
       id: 'status',
@@ -120,7 +120,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].rate,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].rate),
     },
     {
       id: 'period',
@@ -137,8 +137,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => `${filteredData[rowIndex].period} `
-        + `${t('column.days')}`,
+      copyText: rowIndex => `${filteredData[rowIndex].period} ${t('column.days')}`,
     },
     {
       id: 'mtsOpening',
