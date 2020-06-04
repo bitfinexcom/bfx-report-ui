@@ -23,6 +23,7 @@ import { fetchPublicFunding, refresh as refreshPublicFunding } from 'state/publi
 import { fetchTickers, refresh as refreshTickers } from 'state/tickers/actions'
 import { fetchDerivatives, refresh as refreshDerivatives } from 'state/derivatives/actions'
 import { fetchData as fetchLogins, refresh as refreshLogins } from 'state/logins/actions'
+import { fetchData as fetchChangeLogs, refresh as refreshChangeLogs } from 'state/changeLogs/actions'
 
 import types from './constants'
 import actions from './actions'
@@ -44,6 +45,7 @@ const {
   MENU_TICKERS,
   MENU_DERIVATIVES,
   MENU_LOGINS,
+  MENU_CHANGE_LOGS,
 } = queryTypes
 
 export function* setFilters({ payload }) {
@@ -117,6 +119,10 @@ export function* setFilters({ payload }) {
     case MENU_LOGINS:
       yield put(refreshLogins())
       yield put(fetchLogins())
+      break
+    case MENU_CHANGE_LOGS:
+      yield put(refreshChangeLogs())
+      yield put(fetchChangeLogs())
       break
     default:
   }

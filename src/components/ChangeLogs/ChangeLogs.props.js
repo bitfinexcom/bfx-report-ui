@@ -1,18 +1,15 @@
 import PropTypes from 'prop-types'
 
-const LOGINS_ENTRIES_PROPS = PropTypes.shape({
-  id: PropTypes.number.isRequired,
+const CHANGE_LOGS_ENTRIES_PROPS = PropTypes.shape({
+  log: PropTypes.string.isRequired,
   mts: PropTypes.number.isRequired,
   ip: PropTypes.string.isRequired,
-  browser: PropTypes.string.isRequired,
-  version: PropTypes.string.isRequired,
-  mobile: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
-  extra: PropTypes.object.isRequired,
+  userAgent: PropTypes.string.isRequired,
 })
 
 export const propTypes = {
   columns: PropTypes.object.isRequired,
-  entries: PropTypes.arrayOf(LOGINS_ENTRIES_PROPS).isRequired,
+  entries: PropTypes.arrayOf(CHANGE_LOGS_ENTRIES_PROPS).isRequired,
   fetchData: PropTypes.func.isRequired,
   getFullTime: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,

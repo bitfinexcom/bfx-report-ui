@@ -19,6 +19,7 @@ const {
   MENU_TICKERS,
   MENU_DERIVATIVES,
   MENU_LOGINS,
+  MENU_CHANGE_LOGS,
 } = queryConstants
 
 const {
@@ -105,7 +106,11 @@ const DEFAULT_FILTERS = {
     { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'browser', type: CONTAINS, dataType: STRING, value: '' },
     { column: 'version', type: CONTAINS, dataType: STRING, value: '' },
-
+  ],
+  [MENU_CHANGE_LOGS]: [
+    { column: 'log', type: CONTAINS, dataType: STRING, value: '' },
+    { column: 'ip', type: CONTAINS, dataType: STRING, value: '' },
+    { column: 'userAgent', type: CONTAINS, dataType: STRING, value: '' },
   ],
 }
 
@@ -153,6 +158,9 @@ const DEFAULT_FILTERS_MIN = {
   ],
   [MENU_LOGINS]: [
     { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
+  ],
+  [MENU_CHANGE_LOGS]: [
+    { column: 'log', type: CONTAINS, dataType: STRING, value: '' },
   ],
 }
 

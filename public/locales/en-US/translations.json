@@ -49,6 +49,9 @@
     "fee": "Fee",
     "toggle_trades": "Toggle Trades"
   },
+  "changelogs": {
+    "title": "Change Logs"
+  },
   "charts": {
     "cumulative": "Cumulative",
     "percentage": "Percentage"
