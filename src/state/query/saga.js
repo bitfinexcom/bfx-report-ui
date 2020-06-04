@@ -32,6 +32,7 @@ import { getTargetSymbol as getPublicTradesSymbol } from 'state/publicFunding/se
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors'
+import { getTargetSymbols as getSPaymentsSymbols } from 'state/stakingPayments/selectors'
 import { getParams as getTaxReportParams } from 'state/taxReport/selectors'
 import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
@@ -74,6 +75,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
+  MENU_SPAYMENTS,
   MENU_TAX_REPORT,
   MENU_TRADED_VOLUME,
   MENU_WALLETS,
@@ -150,6 +152,8 @@ function getSelector(target) {
       return getPublicTradesPair
     case MENU_SNAPSHOTS:
       return getSnapshotsTimestamp
+    case MENU_SPAYMENTS:
+      return getSPaymentsSymbols
     case MENU_TAX_REPORT:
       return getTaxReportParams
     case MENU_TRADED_VOLUME:
@@ -176,6 +180,7 @@ function formatSymbol(target, symbols) {
     case MENU_LEDGERS:
     case MENU_MOVEMENTS:
     case MENU_FPAYMENT:
+    case MENU_SPAYMENTS:
     case MENU_LOAN_REPORT:
       return mapRequestSymbols(symbols)
     case MENU_PUBLIC_FUNDING:
@@ -301,6 +306,10 @@ function* getOptions({ target }) {
       break
     case MENU_ORDER_TRADES:
       options.method = 'getOrderTradesCsv'
+      break
+    case MENU_SPAYMENTS:
+      options.method = 'getLedgersCsv'
+      options.isStakingPayments = true
       break
     case MENU_TICKERS:
       options.method = 'getTickersHistoryCsv'

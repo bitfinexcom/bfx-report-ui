@@ -11,6 +11,7 @@ import { fetchFCredit } from 'state/fundingCreditHistory/actions'
 import { fetchFLoan } from 'state/fundingLoanHistory/actions'
 import { fetchFOffer } from 'state/fundingOfferHistory/actions'
 import { fetchFPayment } from 'state/fundingPayment/actions'
+import { fetchData as fetchSPayments } from 'state/stakingPayments/actions'
 import { fetchAffiliatesEarnings } from 'state/affiliatesEarnings/actions'
 import { fetchPublicTrades } from 'state/publicTrades/actions'
 import { fetchPublicFunding } from 'state/publicFunding/actions'
@@ -33,6 +34,7 @@ const {
   MENU_AFFILIATES_EARNINGS,
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
+  MENU_SPAYMENTS,
   MENU_TICKERS,
   MENU_LOGINS,
 } = queryTypes
@@ -65,6 +67,8 @@ function* fetchNext({ payload }) {
       return yield put(fetchFCredit(options))
     case MENU_FPAYMENT:
       return yield put(fetchFPayment(options))
+    case MENU_SPAYMENTS:
+      return yield put(fetchSPayments(options))
     case MENU_AFFILIATES_EARNINGS:
       return yield put(fetchAffiliatesEarnings(options))
     case MENU_PUBLIC_TRADES:

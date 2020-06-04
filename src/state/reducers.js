@@ -34,6 +34,7 @@ import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
 import routingReducer from './routing/reducer'
 import snapshotsReducer from './snapshots/reducer'
+import stakingPaymentsReducer from './stakingPayments/reducer'
 import queryReducer from './query/reducer'
 import taxReportReducer from './taxReport/reducer'
 import tickersReducer from './tickers/reducer'
@@ -89,6 +90,7 @@ const BASE_REDUCERS = {
   publicTrades: publicTradesReducer,
   router: connectRouter(history),
   routing: routingReducer,
+  spayments: stakingPaymentsReducer,
   query: queryReducer,
   tickers: tickersReducer,
   timeRange: timeRangeReducer,

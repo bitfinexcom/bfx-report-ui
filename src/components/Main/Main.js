@@ -28,6 +28,7 @@ import PositionsAuditNoId from 'components/PositionsAudit/PositionsAudit.NoId'
 import PublicFunding from 'components/PublicFunding'
 import PublicTrades from 'components/PublicTrades'
 import Snapshots from 'components/Snapshots'
+import StakingPayments from 'components/StakingPayments'
 import TaxReport from 'components/TaxReport'
 import Tickers from 'components/Tickers'
 import TradedVolume from 'components/TradedVolume'
@@ -68,6 +69,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
+  MENU_SPAYMENTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
@@ -86,6 +88,7 @@ const PATHS = {
   MENU_FLOAN: [getPath(MENU_FLOAN), `${getPath(MENU_FLOAN)}/:symbol`],
   MENU_FOFFER: [getPath(MENU_FOFFER), `${getPath(MENU_FOFFER)}/:symbol`],
   MENU_FPAYMENT: [getPath(MENU_FPAYMENT), `${getPath(MENU_FPAYMENT)}/:symbol`],
+  MENU_SPAYMENTS: [getPath(MENU_SPAYMENTS), `${getPath(MENU_SPAYMENTS)}/:symbol`],
   MENU_AFFILIATES_EARNINGS: [getPath(MENU_AFFILIATES_EARNINGS), `${getPath(MENU_AFFILIATES_EARNINGS)}/:symbol`],
   MENU_PUBLIC_FUNDING: [getPath(MENU_PUBLIC_FUNDING), `${getPath(MENU_PUBLIC_FUNDING)}/:symbol`],
   MENU_PUBLIC_TRADES: [getPath(MENU_PUBLIC_TRADES), `${getPath(MENU_PUBLIC_TRADES)}/:pair`],
@@ -164,6 +167,11 @@ class Main extends PureComponent {
               exact
               path={PATHS.MENU_FPAYMENT}
               component={FundingPayment}
+            />
+            <Route
+              exact
+              path={PATHS.MENU_SPAYMENTS}
+              component={StakingPayments}
             />
             <Route
               exact

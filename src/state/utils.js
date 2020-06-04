@@ -37,6 +37,7 @@ const {
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
+  MENU_SPAYMENTS,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
   MENU_TRADES,
@@ -175,6 +176,7 @@ export const checkInit = (props, type) => {
     case MENU_FLOAN:
     case MENU_FCREDIT:
     case MENU_FPAYMENT:
+    case MENU_SPAYMENTS:
     case MENU_AFFILIATES_EARNINGS:
     case MENU_LOAN_REPORT: {
       if (!dataReceived && !pageLoading) {
