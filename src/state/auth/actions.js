@@ -10,6 +10,37 @@ export function checkAuth() {
 }
 
 /**
+ * Create an action to add new user data.
+ * @param {Object} payload user data
+ */
+export function addUser(payload) {
+  return {
+    type: types.ADD_USER,
+    payload,
+  }
+}
+
+/**
+ * Create an action to fetch users.
+ */
+export function fetchUsers() {
+  return {
+    type: types.FETCH_USERS,
+  }
+}
+
+/**
+ * Create an action to set users data.
+ * @param {array} payload users data
+ */
+export function setUsers(payload) {
+  return {
+    type: types.SET_USERS,
+    payload,
+  }
+}
+
+/**
  * Create an action to sign in.
  * @param {Object} payload auth data
  */
@@ -93,7 +124,10 @@ export function updateAuthStatus(result) {
 
 export default {
   checkAuth,
+  addUser,
+  fetchUsers,
   logout,
+  setUsers,
   signIn,
   signUp,
   showAuth,

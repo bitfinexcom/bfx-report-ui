@@ -77,13 +77,15 @@ function* signUp({ payload }) {
       apiKey,
       apiSecret,
       password,
+      isNotProtected,
     } = payload
 
     const authParams = {
       authToken,
       apiKey,
       apiSecret,
-      password,
+      password: isNotProtected ? undefined : password,
+      isNotProtected: platform.showFrameworkMode ? isNotProtected : undefined,
     }
 
     const method = platform.showFrameworkMode ? 'signUp' : 'verifyUser'
@@ -91,6 +93,13 @@ function* signUp({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
+      const { email, isSubAccount } = result
+      const newUser = {
+        email,
+        isSubAccount,
+        isNotProtected,
+      }
+      yield put(actions.addUser(newUser))
       return
     }
 
@@ -100,11 +109,18 @@ function* signUp({ payload }) {
       if (authToken) {
         yield put(actions.updateAuth({ authToken: '' }))
       }
-      yield put(updateErrorStatus({
-        id: 'status.fail',
-        topic: 'auth.auth',
-        detail: JSON.stringify(error),
-      }))
+
+      if (platform.showFrameworkMode) {
+        yield put(updateErrorStatus({
+          id: 'status.signUpFail',
+        }))
+      } else {
+        yield put(updateErrorStatus({
+          id: 'status.fail',
+          topic: 'auth.auth',
+          detail: JSON.stringify(error),
+        }))
+      }
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
@@ -115,12 +131,13 @@ function* signIn({ payload }) {
   try {
     const {
       email,
+      isNotProtected,
       password,
     } = payload
 
     const authParams = {
       email,
-      password,
+      password: isNotProtected ? undefined : password,
     }
     const { result, error } = yield call(makeFetchCall, 'signIn', null, authParams)
 
@@ -134,7 +151,7 @@ function* signIn({ payload }) {
     if (error) {
       if (error.code === 401) {
         yield put(updateErrorStatus({
-          id: 'status.credentials',
+          id: 'status.signInFail',
         }))
         return
       }
@@ -150,8 +167,24 @@ function* signIn({ payload }) {
   }
 }
 
+function* fetchUsers() {
+  try {
+    const { result } = yield call(makeFetchCall, 'getUsers')
+
+    if (result) {
+      yield put(actions.setUsers(result))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 function* checkAuth() {
   try {
+    if (platform.showFrameworkMode) {
+      yield put(actions.fetchUsers())
+    }
+
     const auth = yield select(selectAuth)
     if (_isEmpty(auth)) {
       return
@@ -170,6 +203,7 @@ function* checkAuth() {
 
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
+  yield takeLatest(types.FETCH_USERS, fetchUsers)
   yield takeLatest(types.SIGN_UP, signUp)
   yield takeLatest(types.SIGN_IN, signIn)
 }

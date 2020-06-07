@@ -22,10 +22,18 @@ class Auth extends PureComponent {
   constructor(props) {
     super()
 
-    const { authData: { isNotFirstAuth } } = props
+    const { authData: { hasAuthData } } = props
 
     this.state = {
-      mode: (!platform.showFrameworkMode || !isNotFirstAuth) ? MODES.SIGH_UP : MODES.SIGN_IN,
+      mode: (!platform.showFrameworkMode || !hasAuthData) ? MODES.SIGH_UP : MODES.SIGN_IN,
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { users, usersLoading } = this.props
+    if (platform.showFrameworkMode && prevProps.usersLoading && !usersLoading && users.length) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ mode: MODES.SIGH_IN })
     }
   }
 
@@ -36,10 +44,15 @@ class Auth extends PureComponent {
   }
 
   render() {
-    const { isShown, t } = this.props
+    const {
+      authData: { hasAuthData },
+      isShown,
+      t,
+      usersLoading,
+    } = this.props
     const { mode } = this.state
 
-    if (!isShown) {
+    if (!isShown || (platform.showFrameworkMode && !hasAuthData && usersLoading)) {
       return null
     }
 

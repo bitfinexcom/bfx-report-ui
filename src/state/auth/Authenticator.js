@@ -1,10 +1,27 @@
+import _isEmpty from 'lodash/isEmpty'
 import _pick from 'lodash/pick'
+
+import { platform } from 'var/config'
+
+const PERSISTED_PARAMS_WEB = [
+  'apiKey',
+  'apiSecret',
+  'authToken',
+]
+
+const PERSISTED_PARAMS_FRAMEWORK = [
+  'email',
+  'password',
+  'isNotProtected',
+]
 
 class Authenticator {
   getStored = () => {
     const auth = window.localStorage.getItem('auth')
     return auth ? JSON.parse(auth) : {}
   }
+
+  hasData = () => !_isEmpty(this.getStored())
 
   persist = (data) => {
     window.localStorage.setItem('auth', JSON.stringify(data))
@@ -17,15 +34,16 @@ class Authenticator {
     if (!isPersisted) {
       this.persist({
         isPersisted: false,
-        isNotFirstAuth: true,
       })
       return
     }
 
+    const persistedParams = platform.showFrameworkMode ? PERSISTED_PARAMS_FRAMEWORK : PERSISTED_PARAMS_WEB
+
     this.persist({
       ...auth,
-      ..._pick(data, ['apiKey', 'apiSecret', 'authToken', 'email', 'password', 'isPersisted']),
-      isNotFirstAuth: true,
+      isPersisted: true,
+      ..._pick(data, persistedParams),
     })
   }
 }

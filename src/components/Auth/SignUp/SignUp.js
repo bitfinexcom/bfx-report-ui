@@ -28,13 +28,15 @@ class SignUp extends PureComponent {
   constructor(props) {
     super()
 
-    const { authData: { apiKey, apiSecret } } = props
+    const { authData: { apiKey, apiSecret, isPersisted } } = props
     this.state = {
       apiKey,
       apiSecret,
       password: '',
       passwordRepeat: '',
       isBeingValidated: false,
+      isPasswordProtected: false,
+      isPersisted,
       passwordError: '',
       passwordRepeatError: '',
     }
@@ -43,7 +45,11 @@ class SignUp extends PureComponent {
   onSignUp = () => {
     const { signUp } = this.props
     const {
-      apiKey, apiSecret, password,
+      apiKey,
+      apiSecret,
+      password,
+      isPasswordProtected,
+      isPersisted,
     } = this.state
     this.setState({
       isBeingValidated: true,
@@ -55,6 +61,8 @@ class SignUp extends PureComponent {
         apiKey,
         apiSecret,
         password,
+        isNotProtected: !isPasswordProtected,
+        isPersisted,
       })
     }
   }
@@ -63,9 +71,14 @@ class SignUp extends PureComponent {
     const {
       password,
       passwordRepeat,
+      isPasswordProtected,
       passwordError,
       passwordRepeatError,
     } = this.state
+
+    if (!platform.showFrameworkMode || !isPasswordProtected) {
+      return true
+    }
 
     let isValid = true
     const isValidPassword = passwordRegExp.test(password)
@@ -95,31 +108,35 @@ class SignUp extends PureComponent {
     return isValid
   }
 
-  togglePersistence = () => {
-    const { authData: { isPersisted }, updateAuth } = this.props
-    updateAuth({ isPersisted: !isPersisted })
-  }
-
-  handleInputChange = (event) => {
+  handleInputChange = (e) => {
     const { isBeingValidated } = this.state
-    const { name, value } = event.target
+    const { name, value } = e.target
     this.setState({
       [name]: value,
     }, () => isBeingValidated && this.validateForm())
   }
 
+  handleCheckboxChange = (e) => {
+    const { name, checked } = e.target
+    this.setState({
+      [name]: checked,
+    })
+  }
+
   render() {
     const {
-      authData: { isPersisted },
       loading,
       switchMode,
       t,
+      users,
     } = this.props
     const {
       apiKey,
       apiSecret,
       password,
       passwordRepeat,
+      isPasswordProtected,
+      isPersisted,
       passwordError,
       passwordRepeatError,
     } = this.state
@@ -127,7 +144,8 @@ class SignUp extends PureComponent {
     const title = platform.showFrameworkMode ? t('auth.signUp') : t('auth.title')
     const icon = platform.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const isSignUpDisabled = !apiKey || !apiSecret
-      || (platform.showFrameworkMode && (!password || !passwordRepeat || passwordError || passwordRepeatError))
+      || (platform.showFrameworkMode && isPasswordProtected
+        && (!password || !passwordRepeat || passwordError || passwordRepeatError))
 
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
       'bitfinex-auth-sign-up--framework': platform.showFrameworkMode,
@@ -163,7 +181,7 @@ class SignUp extends PureComponent {
             value={apiSecret}
             onChange={this.handleInputChange}
           />
-          {platform.showFrameworkMode && (
+          {platform.showFrameworkMode && isPasswordProtected && (
             <Fragment>
               <InputKey
                 label='auth.enterPassword'
@@ -181,18 +199,28 @@ class SignUp extends PureComponent {
               <ErrorLabel text={passwordRepeatError} />
             </Fragment>
           )}
-          <Checkbox
-            className='bitfinex-auth-remember-me'
-            name={'isPersisted'}
-            checked={isPersisted}
-            onChange={this.togglePersistence}
-          >
-            {t('auth.rememberMe')}
-          </Checkbox>
+          <div className='bitfinex-auth-checkboxes'>
+            <Checkbox
+              className='bitfinex-auth-remember-me'
+              name='isPersisted'
+              checked={isPersisted}
+              onChange={this.handleCheckboxChange}
+            >
+              {t('auth.rememberMe')}
+            </Checkbox>
+            <Checkbox
+              className='bitfinex-auth-remember-me'
+              name='isPasswordProtected'
+              checked={isPasswordProtected}
+              onChange={this.handleCheckboxChange}
+            >
+              {t('auth.passwordProtection')}
+            </Checkbox>
+          </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            {platform.showFrameworkMode && (
+            {platform.showFrameworkMode && users.length > 0 && (
               <div className='bitfinex-auth-mode-switch' onClick={switchMode}>
                 {t('auth.signIn')}
               </div>

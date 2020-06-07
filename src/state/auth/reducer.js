@@ -9,8 +9,9 @@ const getStoredAuth = () => {
     authToken = '',
     email = '',
     password = '',
-    isNotFirstAuth = false,
+    hasAuthData = Authenticator.hasData(),
     isPersisted = true,
+    isNotProtected = true,
   } = auth
 
   return {
@@ -19,8 +20,9 @@ const getStoredAuth = () => {
     authToken,
     email,
     password,
-    isNotFirstAuth,
+    hasAuthData,
     isPersisted,
+    isNotProtected,
   }
 }
 
@@ -30,11 +32,29 @@ const initialState = {
   token: '',
   isShown: true,
   loading: false,
+  users: [],
+  usersLoading: false,
 }
 
 export function authReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
+    case types.FETCH_USERS:
+      return {
+        ...state,
+        usersLoading: true,
+      }
+    case types.ADD_USER:
+      return {
+        ...state,
+        users: [...state.users, payload],
+      }
+    case types.SET_USERS:
+      return {
+        ...state,
+        users: payload,
+        usersLoading: false,
+      }
     case types.SIGN_UP:
     case types.SIGN_IN:
       return {
@@ -47,7 +67,7 @@ export function authReducer(state = initialState, action) {
         ...state,
         authStatus: true,
         loading: false,
-        isNotFirstAuth: true,
+        hasAuthData: true,
         ...payload,
       }
     case types.UPDATE_AUTH:
@@ -77,6 +97,7 @@ export function authReducer(state = initialState, action) {
       return {
         ...initialState,
         ...getStoredAuth(),
+        users: state.users,
       }
     default:
       return state

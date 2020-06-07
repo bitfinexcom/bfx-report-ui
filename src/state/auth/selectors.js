@@ -6,6 +6,8 @@ export const getAuthStatus = state => getAuth(state).authStatus
 export const getIsShown = state => getAuth(state).isShown
 export const getIsLoading = state => getAuth(state).loading
 export const getEmail = state => getAuth(state).email
+export const getUsers = state => getAuth(state).users
+export const getUsersLoading = state => getAuth(state).usersLoading
 export const getAuthData = state => {
   const {
     apiKey,
@@ -14,7 +16,8 @@ export const getAuthData = state => {
     email,
     password,
     token,
-    isNotFirstAuth,
+    hasAuthData,
+    isNotProtected,
     isPersisted,
   } = getAuth(state)
 
@@ -25,7 +28,8 @@ export const getAuthData = state => {
     email,
     password,
     token,
-    isNotFirstAuth,
+    hasAuthData,
+    isNotProtected,
     isPersisted,
   }
 }
@@ -39,6 +43,7 @@ export function selectAuth(state) {
     email,
     password,
     token,
+    isNotProtected,
   } = getAuthData(state)
 
   if (!platform.showFrameworkMode) {
@@ -55,7 +60,7 @@ export function selectAuth(state) {
     return { token }
   }
 
-  if (email && password) {
+  if (email && (isNotProtected || password)) {
     return { email, password }
   }
   return {}
@@ -66,5 +71,7 @@ export default {
   getAuthStatus,
   getIsLoading,
   getIsShown,
+  getUsers,
+  getUsersLoading,
   selectAuth,
 }
