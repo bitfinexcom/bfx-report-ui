@@ -87,6 +87,10 @@
         border-bottom: 1px solid var(--borderColor);
         border-radius: 0;
 
+        .bp3-text-overflow-ellipsis {
+          white-space: normal;
+        }
+
         &-label {
           font-size: 12px;
           color: var(--color);
