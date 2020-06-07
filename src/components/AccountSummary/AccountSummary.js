@@ -41,13 +41,13 @@ class AccountSummary extends PureComponent {
           <Volume data={_get(data, 'trade_vol_30d', [])} />
           <Fees
             title='accountsummary.fees'
-            makerFee={data.maker_fee || data.maker_rebate}
-            takerFee={data.taker_fee || data.taker_rebate}
+            makerFee={data.maker_fee || data.maker_rebate || 0}
+            takerFee={data.taker_fee || data.taker_rebate || 0}
           />
           <Fees
             title='accountsummary.fees_deriv'
-            makerFee={data.deriv_maker_fee || data.deriv_maker_rebate}
-            takerFee={data.deriv_taker_fee || data.deriv_taker_rebate}
+            makerFee={data.deriv_maker_fee || data.deriv_maker_rebate || 0}
+            takerFee={data.deriv_taker_fee || data.deriv_taker_rebate || 0}
           />
           <br />
           <MarginFunds data={_get(data, 'fees_funding_30d', {})} />
