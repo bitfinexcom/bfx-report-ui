@@ -33,7 +33,6 @@ import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selecto
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors'
 import { getTargetSymbols as getSPaymentsSymbols } from 'state/stakingPayments/selectors'
-import { getParams as getTaxReportParams } from 'state/taxReport/selectors'
 import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
 import { getTimeframe as getWinLossTimeframe } from 'state/winLoss/selectors'
@@ -155,8 +154,6 @@ function getSelector(target) {
       return getSnapshotsTimestamp
     case MENU_SPAYMENTS:
       return getSPaymentsSymbols
-    case MENU_TAX_REPORT:
-      return getTaxReportParams
     case MENU_TRADED_VOLUME:
       return getTradedVolumeParams
     case MENU_FEES_REPORT:
