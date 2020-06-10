@@ -20,12 +20,14 @@ export function feesReportReducer(state = initialState, action) {
   switch (actionType) {
     case types.FETCH_FEES_REPORT:
       return {
-        ...state,
+        ...initialState,
         pageLoading: true,
         currentFetchParams: {
           targetPairs: state.targetPairs,
           timeframe: state.timeframe,
         },
+        targetPairs: state.targetPairs,
+        timeframe: state.timeframe,
       }
     case types.UPDATE_FEES_REPORT: {
       return {

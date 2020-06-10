@@ -7,6 +7,7 @@ import { fetchFail } from 'state/reducers.helper'
 import types from './constants'
 
 export const initialState = {
+  currentFetchParams: {},
   dataReceived: false,
   pageLoading: false,
   entries: [],
@@ -18,8 +19,12 @@ export function winLossReducer(state = initialState, action) {
   switch (actionType) {
     case types.FETCH_WIN_LOSS:
       return {
-        ...state,
+        ...initialState,
         pageLoading: true,
+        currentFetchParams: {
+          timeframe: state.timeframe,
+        },
+        timeframe: state.timeframe,
       }
     case types.UPDATE_WIN_LOSS: {
       if (!payload) {

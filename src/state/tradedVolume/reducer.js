@@ -1,7 +1,6 @@
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
-import { getLastMonth } from 'state/utils'
 
 import types from './constants'
 
@@ -11,8 +10,6 @@ export const initialState = {
   currentFetchParams: {},
   entries: [],
   targetPairs: [],
-  start: getLastMonth(),
-  end: undefined,
   timeframe: timeframeConstants.DAY,
 }
 
@@ -21,12 +18,14 @@ export function tradedVolumeReducer(state = initialState, action) {
   switch (actionType) {
     case types.FETCH_TRADED_VOLUME:
       return {
-        ...state,
+        ...initialState,
         pageLoading: true,
         currentFetchParams: {
           targetPairs: state.targetPairs,
           timeframe: state.timeframe,
         },
+        targetPairs: state.targetPairs,
+        timeframe: state.timeframe,
       }
     case types.UPDATE_TRADED_VOLUME: {
       return {

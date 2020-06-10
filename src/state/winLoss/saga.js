@@ -17,18 +17,16 @@ import selectors from './selectors'
 export const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
 
 /* eslint-disable-next-line consistent-return */
-export function* fetchWinLoss({ payload = {} }) {
+export function* fetchWinLoss() {
   try {
-    const { timeframe } = payload
     const shouldProceed = yield call(frameworkCheck)
     if (!shouldProceed) {
       // stop loading for first request
       return yield put(actions.updateWinLoss())
     }
-    // save current query params in state for csv export reference and toggle loading
-    yield put(actions.setParams(payload))
 
     const { start, end } = yield select(getTimeFrame)
+    const { timeframe } = yield select(selectors.getParams)
 
     const { result = [], error } = yield call(getReqWinLoss, {
       start,

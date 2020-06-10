@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
+import _isEqual from 'lodash/isEqual'
 
 import {
   SectionHeader,
@@ -18,57 +19,47 @@ import TimeFrameSelector from 'ui/TimeFrameSelector'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import TimeRange from 'ui/TimeRange'
+import queryConstants from 'state/query/constants'
+import { checkFetch, checkInit } from 'state/utils'
 
 import { propTypes, defaultProps } from './AverageWinLoss.props'
 
-class AverageWinLoss extends PureComponent {
-  constructor(props) {
-    super(props)
+const TYPE = queryConstants.MENU_WIN_LOSS
 
-    const { params: { timeframe } } = props
-    this.state = {
-      timeframe,
-    }
+class AverageWinLoss extends PureComponent {
+  componentDidMount() {
+    checkInit(this.props, TYPE)
   }
 
-  componentDidMount() {
-    const {
-      dataReceived, pageLoading, fetchData, params,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      fetchData(params)
-    }
+  componentDidUpdate(prevProps) {
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   handleQuery = () => {
     const { fetchData } = this.props
-    const { timeframe } = this.state
-    const params = {
-      timeframe,
-    }
-    fetchData(params)
+    fetchData()
   }
 
   handleTimeframeChange = (timeframe) => {
-    this.setState({ timeframe })
+    const { setParams } = this.props
+    setParams({ timeframe })
   }
 
   hasChanges = () => {
-    const { params: { timeframe: currTimeframe } } = this.props
-    const { timeframe } = this.state
-    return timeframe !== currTimeframe
+    const { currentFetchParams, params } = this.props
+    return !_isEqual(currentFetchParams, params)
   }
 
   render() {
     const {
+      currentFetchParams: { timeframe: currTimeframe },
       entries,
-      params: { timeframe: currTimeframe },
       dataReceived,
       pageLoading,
+      params: { timeframe },
       refresh,
       t,
     } = this.props
-    const { timeframe } = this.state
 
     const { chartData, presentCurrencies } = parseChartData({
       data: _sortBy(entries, ['mts']),

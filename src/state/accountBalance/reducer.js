@@ -18,11 +18,12 @@ export function balanceReducer(state = initialState, action) {
   switch (actionType) {
     case types.FETCH_BALANCE:
       return {
-        ...state,
+        ...initialState,
         pageLoading: true,
         currentFetchParams: {
           timeframe: state.timeframe,
         },
+        timeframe: state.timeframe,
       }
     case types.UPDATE_BALANCE: {
       return {

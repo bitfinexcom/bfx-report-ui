@@ -43,6 +43,7 @@ const {
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
   MENU_TRADES,
+  MENU_WIN_LOSS,
 } = queryType
 
 export const getAuthFromStore = () => {
@@ -220,6 +221,7 @@ export const checkInit = (props, type) => {
     case MENU_CHANGE_LOGS:
     case MENU_LOGINS:
     case MENU_TAX_REPORT:
+    case MENU_WIN_LOSS:
     case MENU_CANDLES: {
       if (!dataReceived && !pageLoading) {
         fetchData()

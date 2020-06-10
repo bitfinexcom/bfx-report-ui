@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
-import _isEqual from 'lodash/isEqual'
 import _sortBy from 'lodash/sortBy'
 
 import {
@@ -46,8 +45,8 @@ class AccountBalance extends PureComponent {
   }
 
   hasChanges = () => {
-    const { currentFetchParams, params } = this.props
-    return !_isEqual(currentFetchParams, params)
+    const { currentFetchParams: { timeframe: currTimeframe }, timeframe } = this.props
+    return currTimeframe !== timeframe
   }
 
   render() {

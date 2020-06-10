@@ -18,12 +18,14 @@ export function loanReportReducer(state = initialState, action) {
   switch (actionType) {
     case types.FETCH_LOAN_REPORT:
       return {
-        ...state,
+        ...initialState,
         pageLoading: true,
         currentFetchParams: {
           targetSymbols: state.targetSymbols,
           timeframe: state.timeframe,
         },
+        targetSymbols: state.targetSymbols,
+        timeframe: state.timeframe,
       }
     case types.UPDATE_LOAN_REPORT: {
       return {
