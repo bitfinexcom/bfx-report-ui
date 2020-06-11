@@ -60,7 +60,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].amountOrig,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountOrig),
     },
     {
       id: 'amountExecuted',
@@ -77,7 +77,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].amountExecuted,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountExecuted),
     },
     {
       id: 'type',
@@ -123,7 +123,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].rate,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].rate),
     },
     {
       id: 'period',

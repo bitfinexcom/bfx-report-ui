@@ -8,11 +8,11 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
 
 import types from './constants'
 import actions from './actions'
-import selectors from './selectors'
 
 export const getReqTaxReport = (params) => {
   const { start, end } = params
@@ -33,8 +33,11 @@ export function* fetchTaxReport() {
       return yield put(actions.updateTaxReport())
     }
 
-    const params = yield select(selectors.getParams)
-    const { result, error } = yield call(getReqTaxReport, params)
+    const { start, end } = yield select(getTimeFrame)
+    const { result, error } = yield call(getReqTaxReport, {
+      start,
+      end,
+    })
 
     yield put(actions.updateTaxReport(result))
 
@@ -63,10 +66,10 @@ function* fetchTaxReportSnapshot({ payload: section }) {
       return yield put(actions.updateTaxReportSnapshot({ section }))
     }
 
-    const params = yield select(selectors.getParams)
+    const { start, end } = yield select(getTimeFrame)
     const timestamp = (section === TAX_REPORT_SECTIONS.START_SNAPSHOT)
-      ? params.start
-      : params.end
+      ? start
+      : end
 
     const { result, error } = yield call(getReqTaxReportSnapshot, timestamp)
 
@@ -106,6 +109,6 @@ function* fetchTaxReportFail({ payload }) {
 export default function* taxReportSaga() {
   yield takeLatest(types.FETCH_TAX_REPORT, fetchTaxReport)
   yield takeLatest(types.FETCH_SNAPSHOT, fetchTaxReportSnapshot)
-  yield takeLatest([types.SET_PARAMS, types.REFRESH], refreshTaxReport)
+  yield takeLatest(types.REFRESH, refreshTaxReport)
   yield takeLatest(types.FETCH_FAIL, fetchTaxReportFail)
 }

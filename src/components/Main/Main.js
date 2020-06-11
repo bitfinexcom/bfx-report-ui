@@ -6,6 +6,7 @@ import AccountSummary from 'components/AccountSummary'
 import AffiliatesEarnings from 'components/AffiliatesEarnings'
 import AverageWinLoss from 'components/AverageWinLoss'
 import Candles from 'components/Candles'
+import ChangeLogs from 'components/ChangeLogs'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import Derivatives from 'components/Derivatives'
 import FeesReport from 'components/FeesReport'
@@ -28,6 +29,7 @@ import PositionsAuditNoId from 'components/PositionsAudit/PositionsAudit.NoId'
 import PublicFunding from 'components/PublicFunding'
 import PublicTrades from 'components/PublicTrades'
 import Snapshots from 'components/Snapshots'
+import StakingPayments from 'components/StakingPayments'
 import TaxReport from 'components/TaxReport'
 import Tickers from 'components/Tickers'
 import TradedVolume from 'components/TradedVolume'
@@ -48,6 +50,7 @@ const {
   MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -68,6 +71,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
+  MENU_SPAYMENTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
@@ -86,6 +90,7 @@ const PATHS = {
   MENU_FLOAN: [getPath(MENU_FLOAN), `${getPath(MENU_FLOAN)}/:symbol`],
   MENU_FOFFER: [getPath(MENU_FOFFER), `${getPath(MENU_FOFFER)}/:symbol`],
   MENU_FPAYMENT: [getPath(MENU_FPAYMENT), `${getPath(MENU_FPAYMENT)}/:symbol`],
+  MENU_SPAYMENTS: [getPath(MENU_SPAYMENTS), `${getPath(MENU_SPAYMENTS)}/:symbol`],
   MENU_AFFILIATES_EARNINGS: [getPath(MENU_AFFILIATES_EARNINGS), `${getPath(MENU_AFFILIATES_EARNINGS)}/:symbol`],
   MENU_PUBLIC_FUNDING: [getPath(MENU_PUBLIC_FUNDING), `${getPath(MENU_PUBLIC_FUNDING)}/:symbol`],
   MENU_PUBLIC_TRADES: [getPath(MENU_PUBLIC_TRADES), `${getPath(MENU_PUBLIC_TRADES)}/:pair`],
@@ -101,6 +106,7 @@ const PATHS = {
     `${getPath(MENU_TAX_REPORT)}/:section(start_snapshot|end_snapshot|result)/:subsection(positions|tickers|wallets)`],
   MENU_ACCOUNT_SUMMARY: [getPath(MENU_ACCOUNT_SUMMARY)],
   MENU_LOGINS: [getPath(MENU_LOGINS)],
+  MENU_CHANGE_LOGS: [getPath(MENU_CHANGE_LOGS)],
 }
 
 class Main extends PureComponent {
@@ -164,6 +170,11 @@ class Main extends PureComponent {
               exact
               path={PATHS.MENU_FPAYMENT}
               component={FundingPayment}
+            />
+            <Route
+              exact
+              path={PATHS.MENU_SPAYMENTS}
+              component={StakingPayments}
             />
             <Route
               exact
@@ -276,6 +287,11 @@ class Main extends PureComponent {
               exact
               path={PATHS.MENU_LOGINS}
               component={Logins}
+            />
+            <Route
+              exact
+              path={PATHS.MENU_CHANGE_LOGS}
+              component={ChangeLogs}
             />
           </Switch>
         </div>

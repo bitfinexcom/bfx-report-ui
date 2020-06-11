@@ -82,7 +82,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].amountOrig,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountOrig),
     },
     {
       id: 'amountExecuted',
@@ -99,7 +99,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].amountExecuted,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountExecuted),
     },
     {
       id: 'price',
@@ -117,7 +117,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].price,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].price),
     },
     {
       id: 'priceAvg',
@@ -135,7 +135,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].priceAvg,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].priceAvg),
     },
     {
       id: 'mtsCreate',
@@ -199,7 +199,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].priceTrailing,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].priceTrailing),
     },
     {
       id: 'typePrev',

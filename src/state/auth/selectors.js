@@ -1,32 +1,77 @@
-import { getApiKey, getApiSecret, getAuthToken } from 'state/base/selectors'
+import { platform } from 'var/config'
 
 const getAuth = state => state.auth
 
 export const getAuthStatus = state => getAuth(state).authStatus
 export const getIsShown = state => getAuth(state).isShown
 export const getIsLoading = state => getAuth(state).loading
+export const getEmail = state => getAuth(state).email
+export const getUsers = state => getAuth(state).users
+export const getUsersLoading = state => getAuth(state).usersLoading
+export const getAuthData = state => {
+  const {
+    apiKey,
+    apiSecret,
+    authToken,
+    email,
+    password,
+    token,
+    hasAuthData,
+    isNotProtected,
+    isPersisted,
+  } = getAuth(state)
 
-// auth is done either with authToken or apiKey + apiSecret
+  return {
+    apiKey,
+    apiSecret,
+    authToken,
+    email,
+    password,
+    token,
+    hasAuthData,
+    isNotProtected,
+    isPersisted,
+  }
+}
+
+// auth is done either with authToken, apiKey + apiSecret for web or email + password for framework
 export function selectAuth(state) {
-  const authToken = getAuthToken(state)
+  const {
+    apiKey,
+    apiSecret,
+    authToken,
+    email,
+    password,
+    token,
+    isNotProtected,
+  } = getAuthData(state)
 
-  if (authToken) {
-    return { authToken }
+  if (!platform.showFrameworkMode) {
+    if (authToken) {
+      return { authToken }
+    }
+    if (apiKey && apiSecret) {
+      return { apiKey, apiSecret }
+    }
+    return {}
   }
 
-  const apiKey = getApiKey(state)
-  const apiSecret = getApiSecret(state)
-
-  if (apiKey && apiSecret) {
-    return { apiKey, apiSecret }
+  if (token) {
+    return { token }
   }
 
-  return null
+  if (email && (isNotProtected || password)) {
+    return { email, password }
+  }
+  return {}
 }
 
 export default {
+  getAuthData,
   getAuthStatus,
   getIsLoading,
   getIsShown,
+  getUsers,
+  getUsersLoading,
   selectAuth,
 }

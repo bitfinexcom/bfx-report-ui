@@ -10,6 +10,7 @@ import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
 import { getParams } from 'state/loanReport/selectors'
 import { mapRequestSymbols } from 'state/symbols/utils'
+import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
 import actions from './actions'
@@ -36,9 +37,15 @@ export function* fetchLoanReport() {
       return yield put(actions.updateLoanReport([]))
     }
 
-    const params = yield select(getParams)
+    const { timeframe, targetSymbols } = yield select(getParams)
+    const { start, end } = yield select(getTimeFrame)
 
-    const { result = [], error } = yield call(getLoanReport, params)
+    const { result = [], error } = yield call(getLoanReport, {
+      start,
+      end,
+      timeframe,
+      targetSymbols,
+    })
     yield put(actions.updateLoanReport(result))
 
     if (error) {

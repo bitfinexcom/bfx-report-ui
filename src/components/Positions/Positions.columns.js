@@ -46,7 +46,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
-        copyText: rowIndex => filteredData[rowIndex].liquidationPrice,
+        copyText: rowIndex => fixedFloat(filteredData[rowIndex].liquidationPrice),
       },
       {
         id: 'pl',
@@ -63,7 +63,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
-        copyText: rowIndex => filteredData[rowIndex].pl,
+        copyText: rowIndex => fixedFloat(filteredData[rowIndex].pl),
       },
       {
         id: 'plPerc',
@@ -80,7 +80,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
-        copyText: rowIndex => filteredData[rowIndex].plPerc,
+        copyText: rowIndex => fixedFloat(filteredData[rowIndex].plPerc),
       },
     ]
     : []
@@ -103,7 +103,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
-        copyText: rowIndex => filteredData[rowIndex].collateral,
+        copyText: rowIndex => fixedFloat(filteredData[rowIndex].collateral),
       },
       {
         id: 'meta',
@@ -174,7 +174,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].amount,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
     {
       id: 'basePrice',
@@ -192,7 +192,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].basePrice,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].basePrice),
     },
     ...ACTIVE_POSITIONS_COLS,
     {
@@ -211,7 +211,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].marginFunding,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].marginFunding),
     },
     {
       id: 'marginFundingType',

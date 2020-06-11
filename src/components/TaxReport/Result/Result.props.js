@@ -43,9 +43,10 @@ export const propTypes = {
       totalResult: PropTypes.number,
     }).isRequired,
   }).isRequired,
-  loading: PropTypes.bool.isRequired,
+  pageLoading: PropTypes.bool.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
   getFullTime: PropTypes.func.isRequired,
   timeOffset: PropTypes.string.isRequired,
-  fetchTaxReport: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }

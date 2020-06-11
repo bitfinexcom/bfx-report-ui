@@ -1,109 +1,77 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import {
-  Button,
-  Callout,
-  Classes,
-  Dialog,
-  Intent,
-  NonIdealState,
-} from '@blueprintjs/core'
+import { NonIdealState } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
-import Icon from 'icons'
-import PlatformLogo from 'ui/PlatformLogo'
+
 import { platform } from 'var/config'
 
+import SignUp from './SignUp'
+import SignIn from './SignIn'
 import { propTypes, defaultProps } from './Auth.props'
-import InputKey from './InputKey'
+
+const MODES = {
+  SIGH_UP: 'sign_up',
+  SIGH_IN: 'sign_in',
+}
 
 class Auth extends PureComponent {
   static propTypes = propTypes
 
   static defaultProps = defaultProps
 
-  handleClick = () => {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.checkAuth()
+  constructor(props) {
+    super()
+
+    const { authData: { hasAuthData } } = props
+
+    this.state = {
+      mode: (!platform.showFrameworkMode || !hasAuthData) ? MODES.SIGH_UP : MODES.SIGN_IN,
+    }
   }
 
-  handleChange = (event) => {
-    const { setKey, setSecret } = this.props
-    const { name, value } = event.target
-    if (name === 'key') {
-      setKey(value)
-    } else if (name === 'secret') {
-      setSecret(value)
+  componentDidUpdate(prevProps) {
+    const { users, usersLoading } = this.props
+    if (platform.showFrameworkMode && prevProps.usersLoading && !usersLoading && users.length) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ mode: MODES.SIGH_IN })
     }
+  }
+
+  switchMode = () => {
+    this.setState(({ mode }) => ({
+      mode: mode === MODES.SIGH_UP ? MODES.SIGH_IN : MODES.SIGH_UP,
+    }))
   }
 
   render() {
     const {
-      apiKey,
-      apiSecret,
+      authData: { hasAuthData },
       isShown,
-      loading,
       t,
+      usersLoading,
     } = this.props
-    const renderAuth = platform.showAuthPage ? (
-      <div className='row bitfinex-auth'>
-        <Dialog
-          title={t('auth.title')}
-          isOpen
-          icon={<Icon.SIGN_IN />}
-          isCloseButtonShown={false}
-          usePortal={false}
-        >
-          <div className={Classes.DIALOG_BODY}>
-            <PlatformLogo />
-            <Callout>
-              {t('auth.note1')}
-              <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>
-                {platform.KEY_URL.split('https://')[1]}
-              </a>
-              {t('auth.note2')}
-            </Callout>
-            <InputKey
-              label='auth.enterAPIKey'
-              name='key'
-              value={apiKey}
-              onChange={this.handleChange}
-            />
-            <InputKey
-              label='auth.enterAPISecret'
-              name='secret'
-              value={apiSecret}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className={Classes.DIALOG_FOOTER}>
-            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              <Button
-                className='bitfinex-auth-check'
-                name='check'
-                intent={Intent.SUCCESS}
-                onClick={this.handleClick}
-                disabled={!apiKey || !apiSecret || loading}
-                loading={loading}
-              >
-                {t('auth.checkAuth')}
-              </Button>
-            </div>
-          </div>
-        </Dialog>
-      </div>
-    ) : (
-      <NonIdealState
-        className='bitfinex-nonideal'
-        icon={IconNames.KEY}
-        title={t('auth.nonideal.title')}
-        description={t('auth.nonideal.description')}
-      />
-    )
-    return isShown ? (
-      <Fragment>
-        {renderAuth}
-      </Fragment>
-    ) : null
+    const { mode } = this.state
+
+    if (!isShown || (platform.showFrameworkMode && !hasAuthData && usersLoading)) {
+      return null
+    }
+
+    if (!platform.showAuthPage) {
+      return (
+        <NonIdealState
+          className='bitfinex-nonideal'
+          icon={IconNames.KEY}
+          title={t('auth.nonideal.title')}
+          description={t('auth.nonideal.description')}
+        />
+      )
+    }
+
+    if (mode === MODES.SIGH_UP) {
+      return <SignUp switchMode={this.switchMode} />
+    }
+
+    return <SignIn switchMode={this.switchMode} />
   }
 }
 

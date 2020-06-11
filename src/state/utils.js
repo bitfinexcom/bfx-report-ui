@@ -22,6 +22,7 @@ const {
   MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
   MENU_FEES_REPORT,
@@ -37,12 +38,15 @@ const {
   MENU_POSITIONS_AUDIT,
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
+  MENU_SPAYMENTS,
+  MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
   MENU_TRADES,
+  MENU_WIN_LOSS,
 } = queryType
 
-const getAuthFromStore = () => {
+export const getAuthFromStore = () => {
   const state = store.getState()
   return selectAuth(state)
 }
@@ -64,23 +68,11 @@ export function postJsonfetch(url, bodyJson) {
     .then(data => data)
 }
 
-export function makeFetchCall(method, params = null, auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/get-data`, {
+export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
+  return postJsonfetch(`${platform.API_URL}/json-rpc`, {
     auth,
     method,
-    params,
-  })
-}
-
-export function getAuth(auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/check-auth`, {
-    auth,
-  })
-}
-
-export function checkEmail(auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/check-stored-locally`, {
-    auth,
+    params: params || undefined,
   })
 }
 
@@ -187,6 +179,7 @@ export const checkInit = (props, type) => {
     case MENU_FLOAN:
     case MENU_FCREDIT:
     case MENU_FPAYMENT:
+    case MENU_SPAYMENTS:
     case MENU_AFFILIATES_EARNINGS:
     case MENU_LOAN_REPORT: {
       if (!dataReceived && !pageLoading) {
@@ -224,19 +217,12 @@ export const checkInit = (props, type) => {
       }
       break
     }
+    case MENU_ACCOUNT_BALANCE:
+    case MENU_CHANGE_LOGS:
+    case MENU_LOGINS:
+    case MENU_TAX_REPORT:
+    case MENU_WIN_LOSS:
     case MENU_CANDLES: {
-      if (!dataReceived && !pageLoading) {
-        fetchData()
-      }
-      break
-    }
-    case MENU_LOGINS: {
-      if (!dataReceived && !pageLoading) {
-        fetchData()
-      }
-      break
-    }
-    case MENU_ACCOUNT_BALANCE: {
       if (!dataReceived && !pageLoading) {
         fetchData()
       }
@@ -474,7 +460,6 @@ export const getWalletsEntries = entries => entries.map((entry) => {
 
 export default {
   checkFetch,
-  checkEmail,
   DEFAULT_DATETIME_FORMAT,
   getDefaultTableScrollSetting,
   getQueryWithoutParams,
@@ -482,7 +467,7 @@ export default {
   formatAuthDate,
   formatDate,
   formatTime,
-  getAuth,
+  getAuthFromStore,
   getCurrentEntries,
   getLastMonth,
   getParsedUrlParams,

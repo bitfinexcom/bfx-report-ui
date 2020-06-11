@@ -4,7 +4,7 @@ import { Cell } from '@blueprintjs/table'
 import { fixedFloat } from 'ui/utils'
 
 export default function getColumns(props) {
-  const { data, t } = props
+  const { data } = props
 
   return [
     {
@@ -37,10 +37,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: (rowIndex) => {
-        const { balanceUsd } = data[rowIndex]
-        return `${fixedFloat(balanceUsd)} ${t('column.usd')}`
-      },
+      copyText: rowIndex => fixedFloat(data[rowIndex].balanceUsd),
     },
     {
       id: 'percent',
@@ -58,10 +55,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: (rowIndex) => {
-        const { percent } = data[rowIndex]
-        return fixedFloat(percent)
-      },
+      copyText: rowIndex => fixedFloat(data[rowIndex].percent),
     },
   ]
 }

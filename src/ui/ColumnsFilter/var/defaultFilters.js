@@ -12,12 +12,14 @@ const {
   MENU_FLOAN,
   MENU_FCREDIT,
   MENU_FPAYMENT,
+  MENU_SPAYMENTS,
   MENU_AFFILIATES_EARNINGS,
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
   MENU_LOGINS,
+  MENU_CHANGE_LOGS,
 } = queryConstants
 
 const {
@@ -78,6 +80,7 @@ const DEFAULT_FILTERS = {
     EMPTY_FILTER,
   ],
   [MENU_FPAYMENT]: DEFAULT_LEDGERS,
+  [MENU_SPAYMENTS]: DEFAULT_LEDGERS,
   [MENU_AFFILIATES_EARNINGS]: DEFAULT_LEDGERS,
   [MENU_PUBLIC_TRADES]: [
     { column: 'price', type: LESS_THAN, dataType: NUMBER, value: '' },
@@ -103,7 +106,11 @@ const DEFAULT_FILTERS = {
     { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'browser', type: CONTAINS, dataType: STRING, value: '' },
     { column: 'version', type: CONTAINS, dataType: STRING, value: '' },
-
+  ],
+  [MENU_CHANGE_LOGS]: [
+    { column: 'log', type: CONTAINS, dataType: STRING, value: '' },
+    { column: 'ip', type: CONTAINS, dataType: STRING, value: '' },
+    { column: 'userAgent', type: CONTAINS, dataType: STRING, value: '' },
   ],
 }
 
@@ -135,6 +142,7 @@ const DEFAULT_FILTERS_MIN = {
     { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
   ],
   [MENU_FPAYMENT]: DEFAULT_LEDGERS,
+  [MENU_SPAYMENTS]: DEFAULT_LEDGERS,
   [MENU_AFFILIATES_EARNINGS]: DEFAULT_LEDGERS,
   [MENU_PUBLIC_TRADES]: [
     { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
@@ -150,6 +158,9 @@ const DEFAULT_FILTERS_MIN = {
   ],
   [MENU_LOGINS]: [
     { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
+  ],
+  [MENU_CHANGE_LOGS]: [
+    { column: 'log', type: CONTAINS, dataType: STRING, value: '' },
   ],
 }
 

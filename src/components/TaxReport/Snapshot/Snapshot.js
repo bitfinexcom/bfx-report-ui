@@ -8,10 +8,12 @@ import WalletsSnapshot from 'components/Snapshots/WalletsSnapshot'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import queryConstants from 'state/query/constants'
+import { checkFetch, checkInit } from 'state/utils'
 
 import { propTypes, defaultProps } from './Snapshots.props'
 
 const {
+  MENU_TAX_REPORT,
   MENU_POSITIONS,
   MENU_TICKERS,
   MENU_WALLETS,
@@ -19,11 +21,11 @@ const {
 
 class Snapshot extends PureComponent {
   componentDidMount() {
-    const { loading, match, fetchSnapshot } = this.props
+    checkInit(this.props, MENU_TAX_REPORT)
+  }
 
-    if (loading) {
-      fetchSnapshot(match.params.section)
-    }
+  componentDidUpdate(prevProps) {
+    checkFetch(prevProps, this.props, MENU_TAX_REPORT)
   }
 
   getSectionURL = (subsection) => {
@@ -53,7 +55,8 @@ class Snapshot extends PureComponent {
   render() {
     const {
       data,
-      loading,
+      dataReceived,
+      pageLoading,
       match,
       t,
     } = this.props
@@ -66,7 +69,7 @@ class Snapshot extends PureComponent {
       walletsEntries,
     } = data
 
-    if (loading) {
+    if (!dataReceived && pageLoading) {
       return <Loading />
     }
 

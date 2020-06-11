@@ -8,14 +8,10 @@ export const getPageLoading = state => getFeesReport(state).pageLoading
 export const getParams = (state) => {
   const {
     targetPairs,
-    start,
-    end,
     timeframe,
   } = getFeesReport(state)
   return {
     targetPairs,
-    start,
-    end,
     timeframe,
   }
 }

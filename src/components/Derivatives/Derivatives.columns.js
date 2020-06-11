@@ -46,7 +46,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].price,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].price),
     },
     {
       id: 'priceSpot',
@@ -64,7 +64,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].priceSpot,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].priceSpot),
     },
     {
       id: 'fundBal',
@@ -82,7 +82,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].fundBal,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].fundBal),
     },
     {
       id: 'fundingAccrued',
@@ -100,7 +100,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].fundingAccrued,
+      copyText: rowIndex => fixedFloat(filteredData[rowIndex].fundingAccrued),
     },
     {
       id: 'fundingStep',

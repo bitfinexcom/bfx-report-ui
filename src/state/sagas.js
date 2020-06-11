@@ -8,6 +8,7 @@ import affiliatesEarningsSaga from './affiliatesEarnings/saga'
 import authSaga from './auth/saga'
 import baseSaga from './base/saga'
 import candlesSaga from './candles/saga'
+import changeLogsSaga from './changeLogs/saga'
 import derivativesSaga from './derivatives/saga'
 import fcreditSaga from './fundingCreditHistory/saga'
 import feesReportSaga from './feesReport/saga'
@@ -29,6 +30,7 @@ import publicFundingSaga from './publicFunding/saga'
 import publicTradesSaga from './publicTrades/saga'
 import routingSaga from './routing/saga'
 import snapshotsSaga from './snapshots/saga'
+import spaymentsSaga from './stakingPayments/saga'
 import taxReportSaga from './taxReport/saga'
 import querySaga from './query/saga'
 import tickersSaga from './tickers/saga'
@@ -47,6 +49,7 @@ export default function* rootSaga() {
   yield fork(affiliatesEarningsSaga)
   yield fork(baseSaga)
   yield fork(candlesSaga)
+  yield fork(changeLogsSaga)
   yield fork(derivativesSaga)
   yield fork(fcreditSaga)
   yield fork(filtersSaga)
@@ -66,6 +69,7 @@ export default function* rootSaga() {
   yield fork(publicTradesSaga)
   yield fork(routingSaga)
   yield fork(querySaga)
+  yield fork(spaymentsSaga)
   yield fork(symbolsSaga)
   yield fork(tickersSaga)
   yield fork(tradesSaga)

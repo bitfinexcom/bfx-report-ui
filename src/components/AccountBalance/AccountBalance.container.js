@@ -11,7 +11,7 @@ import {
   getDataReceived,
   getEntries,
   getPageLoading,
-  getParams,
+  getTimeframe,
 } from 'state/accountBalance/selectors'
 
 import AccountBalance from './AccountBalance'
@@ -19,7 +19,7 @@ import AccountBalance from './AccountBalance'
 const mapStateToProps = state => ({
   currentFetchParams: getCurrentFetchParams(state),
   entries: getEntries(state),
-  params: getParams(state),
+  timeframe: getTimeframe(state),
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
 })

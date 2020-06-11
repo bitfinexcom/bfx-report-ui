@@ -5,11 +5,8 @@ export const getStartSnapshot = state => getTaxReport(state).startSnapshot
 export const getEndSnapshot = state => getTaxReport(state).endSnapshot
 
 export const getDataReceived = state => getTaxReport(state).dataReceived
-export const getParams = (state) => {
-  const { start, end } = getTaxReport(state)
+export const getPageLoading = state => getTaxReport(state).pageLoading
 
-  return { start, end }
-}
 export const getData = (state) => {
   const {
     startingPositionsSnapshot,
@@ -35,11 +32,18 @@ export const getSnapshotDataReceived = (state, section) => {
   }
   return getEndSnapshot(state).dataReceived
 }
+export const getSnapshotPageLoading = (state, section) => {
+  if (section === TAX_REPORT_SECTIONS.START_SNAPSHOT) {
+    return getStartSnapshot(state).pageLoading
+  }
+  return getEndSnapshot(state).pageLoading
+}
 
 export default {
   getDataReceived,
-  getParams,
-  getTaxReport,
+  getPageLoading,
   getSnapshot,
   getSnapshotDataReceived,
+  getSnapshotPageLoading,
+  getTaxReport,
 }

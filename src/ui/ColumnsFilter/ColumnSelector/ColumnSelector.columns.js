@@ -12,12 +12,14 @@ const {
   MENU_FLOAN,
   MENU_FCREDIT,
   MENU_FPAYMENT,
+  MENU_SPAYMENTS,
   MENU_AFFILIATES_EARNINGS,
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
   MENU_LOGINS,
+  MENU_CHANGE_LOGS,
 } = queryConstants
 
 const {
@@ -25,6 +27,10 @@ const {
   INTEGER,
   STRING,
 } = DATA_TYPES
+
+export const TRANSFORMS = {
+  PERCENTAGE: 'percentage',
+}
 
 const LEDGERS_COLUMNS = [
   { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
@@ -106,7 +112,7 @@ const SECTION_COLUMNS = {
     { id: 'amountExecuted', name: 'amount-exe', type: INTEGER, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
-    { id: 'rate', name: 'rate', type: STRING, filter: true },
+    { id: 'rate', name: 'rate', type: NUMBER, filter: true, transform: TRANSFORMS.PERCENTAGE },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
     { id: 'mtsUpdate', name: 'date' },
   ],
@@ -118,7 +124,7 @@ const SECTION_COLUMNS = {
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
-    { id: 'rate', name: 'rate', type: STRING, filter: true },
+    { id: 'rate', name: 'rate', type: NUMBER, filter: true, transform: TRANSFORMS.PERCENTAGE },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
     { id: 'mtsOpening', name: 'opened' },
     { id: 'mtsLastPayout', name: 'closed' },
@@ -132,7 +138,7 @@ const SECTION_COLUMNS = {
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
-    { id: 'rate', name: 'rate', type: STRING, filter: true },
+    { id: 'rate', name: 'rate', type: NUMBER, filter: true, transform: TRANSFORMS.PERCENTAGE },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
     { id: 'mtsOpening', name: 'opened' },
     { id: 'mtsLastPayout', name: 'lastpayout' },
@@ -141,6 +147,7 @@ const SECTION_COLUMNS = {
   ],
 
   [MENU_FPAYMENT]: LEDGERS_COLUMNS,
+  [MENU_SPAYMENTS]: LEDGERS_COLUMNS,
   [MENU_AFFILIATES_EARNINGS]: LEDGERS_COLUMNS,
 
   [MENU_PUBLIC_TRADES]: [
@@ -156,7 +163,7 @@ const SECTION_COLUMNS = {
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'mts', name: 'time' },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
-    { id: 'rate', name: 'rate', type: NUMBER, filter: true },
+    { id: 'rate', name: 'rate', type: NUMBER, filter: true, transform: TRANSFORMS.PERCENTAGE },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
     { id: 'currency', name: 'currency', hidden: true },
   ],
@@ -186,6 +193,12 @@ const SECTION_COLUMNS = {
     { id: 'version', name: 'version', type: STRING, filter: true },
     { id: 'mobile', name: 'mobile' },
     { id: 'extra', name: 'meta' },
+  ],
+  [MENU_CHANGE_LOGS]: [
+    { id: 'mts', name: 'date' },
+    { id: 'log', name: 'description', type: STRING, filter: true },
+    { id: 'ip', name: 'ip', type: STRING, filter: true },
+    { id: 'userAgent', name: 'meta', type: STRING, filter: true },
   ],
 }
 

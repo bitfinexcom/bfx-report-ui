@@ -11,11 +11,13 @@ import { fetchFCredit } from 'state/fundingCreditHistory/actions'
 import { fetchFLoan } from 'state/fundingLoanHistory/actions'
 import { fetchFOffer } from 'state/fundingOfferHistory/actions'
 import { fetchFPayment } from 'state/fundingPayment/actions'
+import { fetchData as fetchSPayments } from 'state/stakingPayments/actions'
 import { fetchAffiliatesEarnings } from 'state/affiliatesEarnings/actions'
 import { fetchPublicTrades } from 'state/publicTrades/actions'
 import { fetchPublicFunding } from 'state/publicFunding/actions'
 import { fetchTickers } from 'state/tickers/actions'
 import { fetchData as fetchLogins } from 'state/logins/actions'
+import { fetchData as fetchChangeLogs } from 'state/changeLogs/actions'
 
 import types from './constants'
 
@@ -33,8 +35,10 @@ const {
   MENU_AFFILIATES_EARNINGS,
   MENU_PUBLIC_TRADES,
   MENU_PUBLIC_FUNDING,
+  MENU_SPAYMENTS,
   MENU_TICKERS,
   MENU_LOGINS,
+  MENU_CHANGE_LOGS,
 } = queryTypes
 
 function* fetchNext({ payload }) {
@@ -65,6 +69,8 @@ function* fetchNext({ payload }) {
       return yield put(fetchFCredit(options))
     case MENU_FPAYMENT:
       return yield put(fetchFPayment(options))
+    case MENU_SPAYMENTS:
+      return yield put(fetchSPayments(options))
     case MENU_AFFILIATES_EARNINGS:
       return yield put(fetchAffiliatesEarnings(options))
     case MENU_PUBLIC_TRADES:
@@ -75,6 +81,8 @@ function* fetchNext({ payload }) {
       return yield put(fetchTickers(options))
     case MENU_LOGINS:
       return yield put(fetchLogins(options))
+    case MENU_CHANGE_LOGS:
+      return yield put(fetchChangeLogs(options))
     default:
       return undefined
   }

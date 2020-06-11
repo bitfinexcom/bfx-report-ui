@@ -16,11 +16,11 @@ import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import queryTypes from 'state/query/constants'
 import { getQueryLimit } from 'state/query/utils'
 import { fetchDataWithPagination } from 'state/sagas.helper'
+import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
 import actions from './actions'
 import { getPositions } from './selectors'
-import { getTimeFrame } from '../timeRange/selectors'
 
 const TYPE = queryTypes.MENU_POSITIONS
 const LIMIT = getQueryLimit(TYPE)

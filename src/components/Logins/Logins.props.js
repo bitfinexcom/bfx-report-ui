@@ -22,7 +22,4 @@ export const propTypes = {
   timeOffset: PropTypes.string.isRequired,
 }
 
-export const defaultProps = {
-  existingCoins: [],
-  targetSymbols: [],
-}
+export const defaultProps = {}

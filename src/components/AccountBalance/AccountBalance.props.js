@@ -10,7 +10,7 @@ export const propTypes = {
   entries: PropTypes.arrayOf(BALANCE_ENTRIES_PROPS).isRequired,
   fetchData: PropTypes.func.isRequired,
   pageLoading: PropTypes.bool.isRequired,
-  params: PropTypes.object.isRequired,
+  timeframe: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,

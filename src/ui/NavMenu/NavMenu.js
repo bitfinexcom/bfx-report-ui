@@ -24,6 +24,7 @@ const {
   MENU_ACCOUNT_SUMMARY,
   MENU_AFFILIATES_EARNINGS,
   MENU_CANDLES,
+  MENU_CHANGE_LOGS,
   MENU_CONCENTRATION_RISK,
   MENU_DERIVATIVES,
   MENU_FCREDIT,
@@ -43,6 +44,7 @@ const {
   MENU_PUBLIC_FUNDING,
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
+  MENU_SPAYMENTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
@@ -68,6 +70,7 @@ class NavMenu extends PureComponent {
     [MENU_FLOAN, 'floan.title'],
     [MENU_FCREDIT, 'fcredit.title'],
     [MENU_FPAYMENT, 'fpayment.title'],
+    [MENU_SPAYMENTS, 'spayments.title'],
     [MENU_AFFILIATES_EARNINGS, 'affiliatesearnings.title'],
     ['divider'],
     [MENU_PUBLIC_TRADES, 'publictrades.title'],
@@ -86,6 +89,7 @@ class NavMenu extends PureComponent {
     ['divider'],
     [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
     [MENU_LOGINS, 'logins.title'],
+    [MENU_CHANGE_LOGS, 'changelogs.title'],
   ]
 
   handleClick = (e, nextTarget) => {

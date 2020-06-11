@@ -13,6 +13,7 @@ import affiliatesEarningsReducer from './affiliatesEarnings/reducer'
 import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import candlesReducer from './candles/reducer'
+import changeLogsReducer from './changeLogs/reducer'
 import derivativesReducer from './derivatives/reducer'
 import feesReportReducer from './feesReport/reducer'
 import filtersReducer from './filters/reducer'
@@ -34,6 +35,7 @@ import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
 import routingReducer from './routing/reducer'
 import snapshotsReducer from './snapshots/reducer'
+import stakingPaymentsReducer from './stakingPayments/reducer'
 import queryReducer from './query/reducer'
 import taxReportReducer from './taxReport/reducer'
 import tickersReducer from './tickers/reducer'
@@ -52,7 +54,7 @@ const PERSIST_WHITELIST = [
   'timeRange',
 ]
 
-const PERSIST_VERSION = 0 // starts with -1
+const PERSIST_VERSION = 1 // starts with -1
 const PERSIST_DEBUG = false
 
 const persistConfig = {
@@ -72,6 +74,7 @@ const BASE_REDUCERS = {
   auth: authReducer,
   base: baseReducer,
   candles: candlesReducer,
+  changeLogs: changeLogsReducer,
   derivatives: derivativesReducer,
   fcredit: fundingCreditHistoryReducer,
   filters: filtersReducer,
@@ -89,6 +92,7 @@ const BASE_REDUCERS = {
   publicTrades: publicTradesReducer,
   router: connectRouter(history),
   routing: routingReducer,
+  spayments: stakingPaymentsReducer,
   query: queryReducer,
   tickers: tickersReducer,
   timeRange: timeRangeReducer,
