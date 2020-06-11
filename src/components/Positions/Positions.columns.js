@@ -137,7 +137,7 @@ export default function getColumns(props) {
         return (
           <Cell tooltip={id}>
             <Fragment>
-              <a href='#' onClick={onIdClick}>{id}</a>
+              <a href='#' onClick={onIdClick} value={id}>{id}</a>
             </Fragment>
           </Cell>
         )
