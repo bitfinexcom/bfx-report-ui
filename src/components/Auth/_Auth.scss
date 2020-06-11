@@ -25,15 +25,57 @@
       }
     }
 
+    &-footer {
+      margin : 0 15px;
+    }
+
     .bitfinex-auth-check {
       line-height: 18px;
     }
   }
 
+  &-email {
+    &.bitfinex-select {
+      margin-bottom: 20px;
+
+      .bp3-popover-target {
+        width: 100%;
+      }
+
+      .bp3-button {
+        width: 100%;
+      }
+    }
+
+    &-popover {
+      &.bitfinex-select-menu {
+        .bp3-popover-content {
+          width: 468px;
+
+          .bp3-menu {
+            max-width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  &-checkboxes {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &-remember-me {
     &.bp3-checkbox {
-      margin: 0 0 0 2px;
       line-height: 30px;
+
+      &:first-child {
+        margin: 0 0 0 2px;
+      }
+
+      &:last-child {
+        margin: 0 2px 0 0;
+      }
     }
 
     &--sign-in {

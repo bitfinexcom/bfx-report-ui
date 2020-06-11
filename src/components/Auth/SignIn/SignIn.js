@@ -8,6 +8,7 @@ import {
 } from '@blueprintjs/core'
 import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
+import Select from 'ui/Select'
 
 import { propTypes, defaultProps } from './SignIn.props'
 import InputKey from '../InputKey'
@@ -20,9 +21,10 @@ class SignIn extends PureComponent {
   constructor(props) {
     super()
 
-    const { authData: { email, password } } = props
+    const { authData: { email, password }, users } = props
+    const { email: firstUserEmail } = users[0] || {}
     this.state = {
-      email,
+      email: email || firstUserEmail,
       password,
     }
   }
@@ -32,6 +34,7 @@ class SignIn extends PureComponent {
     const { email, password } = this.state
     signIn({
       email,
+      isNotProtected: !password,
       password,
     })
   }
@@ -48,16 +51,22 @@ class SignIn extends PureComponent {
     })
   }
 
+  onEmailChange = (email) => {
+    this.setState({ email })
+  }
+
   render() {
     const {
       authData: { isPersisted },
       loading,
       switchMode,
       t,
+      users,
     } = this.props
     const { email, password } = this.state
 
-    const isSignInDisabled = !email || !password
+    const { isNotProtected } = users.find(user => user.email === email) || {}
+    const isSignInDisabled = !email || (!isNotProtected && !password)
 
     return (
       <Dialog
@@ -70,21 +79,25 @@ class SignIn extends PureComponent {
       >
         <div className={Classes.DIALOG_BODY}>
           <PlatformLogo />
-          <InputKey
-            label='auth.enterEmail'
-            name='email'
+          <Select
+            className='bitfinex-auth-email'
+            items={users.map(user => user.email)}
+            onChange={this.onEmailChange}
+            popoverClassName='bitfinex-auth-email-popover'
             value={email}
-            onChange={this.handleInputChange}
+            loading
           />
-          <InputKey
-            label='auth.enterPassword'
-            name='password'
-            value={password}
-            onChange={this.handleInputChange}
-          />
+          {!isNotProtected && (
+            <InputKey
+              label='auth.enterPassword'
+              name='password'
+              value={password}
+              onChange={this.handleInputChange}
+            />
+          )}
           <Checkbox
             className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
-            name={'isPersisted'}
+            name='isPersisted'
             checked={isPersisted}
             onChange={this.togglePersistence}
           >

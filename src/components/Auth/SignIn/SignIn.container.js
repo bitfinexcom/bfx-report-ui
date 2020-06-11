@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
 
 import { signIn, updateAuth } from 'state/auth/actions'
-import { getAuthData, getIsLoading } from 'state/auth/selectors'
+import { getAuthData, getIsLoading, getUsers } from 'state/auth/selectors'
 
 import SignUp from './SignIn'
 
 const mapStateToProps = state => ({
   authData: getAuthData(state),
   loading: getIsLoading(state),
+  users: getUsers(state),
 })
 
 const mapDispatchToProps = {

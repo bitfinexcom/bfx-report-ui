@@ -29,6 +29,7 @@
     "checkAuth": "Check Auth",
     "note1": "Visit ",
     "note2": " to get the readonly API key and secret pair.",
+    "passwordProtection": "Enable password protection",
     "passwordLengthValidationError": "The password must be at least 8 characters long",
     "passwordCharactersValidationError": "The password must include both uppercase and lowercase characters",
     "passwordRepeatValidationError": "The password does not match",
@@ -338,8 +339,9 @@
     "request": {
       "error": "{{topic}} request fail {{detail}}"
     },
-    "credentials": "Incorrect credentials",
-    "timeframe_update": "Time frame updated"
+    "signInFail": "Invalid credentials",
+    "timeframe_update": "Time frame updated",
+    "signUpFail": "Invalid API Key or Secret"
   },
   "symbols": {
     "title": "Get symbols"
