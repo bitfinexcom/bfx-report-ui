@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { fetchWinLoss, refresh } from 'state/winLoss/actions'
+import { fetchWinLoss, refresh, setParams } from 'state/winLoss/actions'
 import {
+  getCurrentFetchParams,
   getDataReceived,
   getPageLoading,
   getEntries,
@@ -12,6 +13,7 @@ import {
 import AverageWinLoss from './AverageWinLoss'
 
 const mapStateToProps = state => ({
+  currentFetchParams: getCurrentFetchParams(state),
   entries: getEntries(state),
   params: getParams(state),
   dataReceived: getDataReceived(state),
@@ -21,6 +23,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchData: fetchWinLoss,
   refresh,
+  setParams,
 }
 
 const AverageWinLossContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AverageWinLoss))

@@ -12,7 +12,7 @@ import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { getFilterQuery } from 'state/filters/selectors'
-import { getParams as getAccountBalanceParams } from 'state/accountBalance/selectors'
+import { getTimeframe as getAccountBalanceTimeframe } from 'state/accountBalance/selectors'
 import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliatesEarnings/selectors'
 import { getParams as getCandlesParams } from 'state/candles/selectors'
 import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
@@ -33,10 +33,9 @@ import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selecto
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
 import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors'
 import { getTargetSymbols as getSPaymentsSymbols } from 'state/stakingPayments/selectors'
-import { getParams as getTaxReportParams } from 'state/taxReport/selectors'
 import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
-import { getParams as getWinLossParams } from 'state/winLoss/selectors'
+import { getTimeframe as getWinLossTimeframe } from 'state/winLoss/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import { toggleExportSuccessDialog } from 'state/ui/actions'
 import {
@@ -114,7 +113,7 @@ const getMultipleCsv = params => makeFetchCall('getMultipleCsv', params)
 function getSelector(target) {
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
-      return getAccountBalanceParams
+      return getAccountBalanceTimeframe
     case MENU_AFFILIATES_EARNINGS:
       return getAffiliatesEarningsSymbols
     case MENU_CANDLES:
@@ -155,8 +154,6 @@ function getSelector(target) {
       return getSnapshotsTimestamp
     case MENU_SPAYMENTS:
       return getSPaymentsSymbols
-    case MENU_TAX_REPORT:
-      return getTaxReportParams
     case MENU_TRADED_VOLUME:
       return getTradedVolumeParams
     case MENU_FEES_REPORT:
@@ -164,7 +161,7 @@ function getSelector(target) {
     case MENU_WALLETS:
       return getTimestamp
     case MENU_WIN_LOSS:
-      return getWinLossParams
+      return getWinLossTimeframe
     default:
       return ''
   }
@@ -224,9 +221,7 @@ function* getOptions({ target }) {
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
     case MENU_WIN_LOSS:
-      options.start = sign.start || undefined
-      options.end = sign.end || undefined
-      options.timeframe = sign.timeframe
+      options.timeframe = sign
       break
     case MENU_CANDLES:
       options.timeframe = sign.timeframe
@@ -241,15 +236,11 @@ function* getOptions({ target }) {
       options.id = sign.id
       break
     case MENU_LOAN_REPORT:
-      options.start = sign.start || undefined
-      options.end = sign.end || undefined
       options.timeframe = sign.timeframe
       options.symbol = formatSymbol(target, sign.targetSymbols)
       break
     case MENU_TRADED_VOLUME:
     case MENU_FEES_REPORT:
-      options.start = sign.start || undefined
-      options.end = sign.end || undefined
       options.timeframe = sign.timeframe
       options.symbol = formatSymbol(target, sign.targetPairs)
       break
@@ -378,7 +369,7 @@ function* exportCSV({ payload: targets }) {
 
       // add 2 additional snapshot reports
       if (target === MENU_TAX_REPORT) {
-        const { start, end } = yield select(getTaxReportParams)
+        const { start, end } = yield select(getTimeFrame)
         const snapshotOptions = yield call(getOptions, { target: MENU_SNAPSHOTS })
         multiExport.push({
           ...snapshotOptions,

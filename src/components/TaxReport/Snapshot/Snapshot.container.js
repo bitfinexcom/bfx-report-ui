@@ -7,17 +7,25 @@ import {
 import {
   getSnapshot,
   getSnapshotDataReceived,
+  getSnapshotPageLoading,
 } from 'state/taxReport/selectors'
 
 import Snapshot from './Snapshot'
 
-const mapStateToProps = (state, { match }) => ({
-  data: getSnapshot(state, match.params.section),
-  loading: !getSnapshotDataReceived(state, match.params.section),
-})
+const mapStateToProps = (state, { match }) => {
+  const { section: snapshotSection } = match.params
+  return {
+    data: getSnapshot(state, snapshotSection),
+    dataReceived: getSnapshotDataReceived(state, snapshotSection),
+    pageLoading: getSnapshotPageLoading(state, snapshotSection),
+  }
+}
 
-const mapDispatchToProps = {
-  fetchSnapshot: fetchTaxReportSnapshot,
+const mapDispatchToProps = (dispatch, { match }) => {
+  const { section: snapshotSection } = match.params
+  return {
+    fetchData: () => dispatch(fetchTaxReportSnapshot(snapshotSection)),
+  }
 }
 
 const SnapshotContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Snapshot))

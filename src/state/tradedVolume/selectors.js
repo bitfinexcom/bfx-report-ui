@@ -8,14 +8,10 @@ export const getPageLoading = state => getTradedVolume(state).pageLoading
 export const getParams = (state) => {
   const {
     targetPairs,
-    start,
-    end,
     timeframe,
   } = getTradedVolume(state)
   return {
     targetPairs,
-    start,
-    end,
     timeframe,
   }
 }

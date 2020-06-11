@@ -1,6 +1,6 @@
 import authTypes from 'state/auth/constants'
+import timeRangeTypes from 'state/timeRange/constants'
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
-import { getLastMonth } from 'state/utils'
 
 import types from './constants'
 
@@ -10,8 +10,6 @@ export const initialState = {
   currentFetchParams: {},
   entries: [],
   targetSymbols: [],
-  start: getLastMonth(),
-  end: undefined,
   timeframe: timeframeConstants.DAY,
 }
 
@@ -20,14 +18,14 @@ export function loanReportReducer(state = initialState, action) {
   switch (actionType) {
     case types.FETCH_LOAN_REPORT:
       return {
-        ...state,
+        ...initialState,
         pageLoading: true,
         currentFetchParams: {
           targetSymbols: state.targetSymbols,
-          start: state.start,
-          end: state.end,
           timeframe: state.timeframe,
         },
+        targetSymbols: state.targetSymbols,
+        timeframe: state.timeframe,
       }
     case types.UPDATE_LOAN_REPORT: {
       return {
@@ -64,10 +62,9 @@ export function loanReportReducer(state = initialState, action) {
         targetSymbols: payload,
       }
     case types.REFRESH:
+    case timeRangeTypes.SET_TIME_RANGE:
       return {
         ...initialState,
-        start: state.start,
-        end: state.end,
         timeframe: state.timeframe,
         targetSymbols: state.targetSymbols,
       }

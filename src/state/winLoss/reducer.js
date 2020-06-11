@@ -1,17 +1,16 @@
 import authTypes from 'state/auth/constants'
+import timeRangeTypes from 'state/timeRange/constants'
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
 
-import { getLastMonth } from 'state/utils'
-import { fetch, fetchFail } from 'state/reducers.helper'
+import { fetchFail } from 'state/reducers.helper'
 
 import types from './constants'
 
 export const initialState = {
+  currentFetchParams: {},
   dataReceived: false,
   pageLoading: false,
   entries: [],
-  start: getLastMonth(),
-  end: undefined,
   timeframe: timeframeConstants.DAY,
 }
 
@@ -19,7 +18,14 @@ export function winLossReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.FETCH_WIN_LOSS:
-      return fetch(state)
+      return {
+        ...initialState,
+        pageLoading: true,
+        currentFetchParams: {
+          timeframe: state.timeframe,
+        },
+        timeframe: state.timeframe,
+      }
     case types.UPDATE_WIN_LOSS: {
       if (!payload) {
         return {
@@ -43,10 +49,9 @@ export function winLossReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.REFRESH:
+    case timeRangeTypes.SET_TIME_RANGE:
       return {
         ...initialState,
-        start: state.start,
-        end: state.end,
         timeframe: state.timeframe,
       }
     case authTypes.LOGOUT:

@@ -1,22 +1,16 @@
 import authTypes from 'state/auth/constants'
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
-import { getLastMonth } from 'state/utils'
 import { fetchFail } from 'state/reducers.helper'
+import timeRangeTypes from 'state/timeRange/constants'
 
 import types from './constants'
 
-const initialOptions = {
-  start: getLastMonth(),
-  end: undefined,
-  timeframe: timeframeConstants.DAY,
-}
-
 export const initialState = {
-  currentFetchParams: initialOptions,
+  currentFetchParams: {},
   dataReceived: false,
   entries: [],
   pageLoading: false,
-  ...initialOptions,
+  timeframe: timeframeConstants.DAY,
 }
 
 export function balanceReducer(state = initialState, action) {
@@ -24,13 +18,12 @@ export function balanceReducer(state = initialState, action) {
   switch (actionType) {
     case types.FETCH_BALANCE:
       return {
-        ...state,
+        ...initialState,
         pageLoading: true,
         currentFetchParams: {
-          start: state.start,
-          end: state.end,
           timeframe: state.timeframe,
         },
+        timeframe: state.timeframe,
       }
     case types.UPDATE_BALANCE: {
       return {
@@ -48,10 +41,9 @@ export function balanceReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.REFRESH:
+    case timeRangeTypes.SET_TIME_RANGE:
       return {
         ...initialState,
-        start: state.start,
-        end: state.end,
         timeframe: state.timeframe,
       }
     case authTypes.LOGOUT:

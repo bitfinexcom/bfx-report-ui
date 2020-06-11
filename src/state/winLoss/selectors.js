@@ -1,25 +1,25 @@
 export const getWinLoss = state => state.winLoss
 
+export const getCurrentFetchParams = state => getWinLoss(state).currentFetchParams
 export const getDataReceived = state => getWinLoss(state).dataReceived
 export const getEntries = state => getWinLoss(state).entries
 export const getPageLoading = state => getWinLoss(state).pageLoading
+export const getTimeframe = state => getWinLoss(state).timeframe
 export const getParams = (state) => {
   const {
-    start,
-    end,
     timeframe,
   } = getWinLoss(state)
   return {
-    start,
-    end,
     timeframe,
   }
 }
 
 export default {
+  getCurrentFetchParams,
   getDataReceived,
   getEntries,
   getPageLoading,
   getParams,
+  getTimeframe,
   getWinLoss,
 }

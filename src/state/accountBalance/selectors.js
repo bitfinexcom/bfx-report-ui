@@ -4,24 +4,13 @@ export const getCurrentFetchParams = state => getBalance(state).currentFetchPara
 export const getDataReceived = state => getBalance(state).dataReceived
 export const getEntries = state => getBalance(state).entries
 export const getPageLoading = state => getBalance(state).pageLoading
-export const getParams = (state) => {
-  const {
-    start,
-    end,
-    timeframe,
-  } = getBalance(state)
-  return {
-    start,
-    end,
-    timeframe,
-  }
-}
+export const getTimeframe = state => getBalance(state).timeframe
 
 export default {
+  getBalance,
   getCurrentFetchParams,
   getDataReceived,
   getEntries,
   getPageLoading,
-  getParams,
-  getBalance,
+  getTimeframe,
 }

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
+import _isEqual from 'lodash/isEqual'
 
 import {
   SectionHeader,
@@ -10,7 +11,6 @@ import {
   SectionHeaderItem,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
@@ -18,74 +18,48 @@ import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import { isValidTimeStamp } from 'state/query/utils'
+import TimeRange from 'ui/TimeRange'
+import queryConstants from 'state/query/constants'
+import { checkFetch, checkInit } from 'state/utils'
 
 import { propTypes, defaultProps } from './AverageWinLoss.props'
 
+const TYPE = queryConstants.MENU_WIN_LOSS
+
 class AverageWinLoss extends PureComponent {
-  constructor(props) {
-    super(props)
-
-    const { params: { start, end, timeframe } } = props
-    this.state = {
-      start: start && new Date(start),
-      end: end && new Date(end),
-      timeframe,
-    }
-  }
-
   componentDidMount() {
-    const {
-      dataReceived, pageLoading, fetchData, params,
-    } = this.props
-    if (!dataReceived && !pageLoading) {
-      fetchData(params)
-    }
+    checkInit(this.props, TYPE)
   }
 
-  handleDateChange = (input, time) => {
-    const timestamp = time && time.getTime()
-    if (isValidTimeStamp(timestamp) || time === null) {
-      this.setState({ [input]: time || null })
-    }
+  componentDidUpdate(prevProps) {
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   handleQuery = () => {
     const { fetchData } = this.props
-    const { start, end, timeframe } = this.state
-    const params = {
-      start: start ? start.getTime() : undefined,
-      end: end ? end.getTime() : undefined,
-      timeframe,
-    }
-    fetchData(params)
+    fetchData()
   }
 
   handleTimeframeChange = (timeframe) => {
-    this.setState({ timeframe })
+    const { setParams } = this.props
+    setParams({ timeframe })
   }
 
-  hasNewTime = () => {
-    const { params } = this.props
-    const { start: currStart, end: currEnd, timeframe: currTimeframe } = params
-    const { start, end, timeframe } = this.state
-    const isDiffStart = start ? start.getTime() !== currStart : !!start !== !!currStart
-    const isDiffEnd = end ? end.getTime() !== currEnd : !!end !== !!currEnd
-    const isDiffTimeframe = timeframe !== currTimeframe
-    return isDiffStart || isDiffEnd || isDiffTimeframe
+  hasChanges = () => {
+    const { currentFetchParams, params } = this.props
+    return !_isEqual(currentFetchParams, params)
   }
 
   render() {
     const {
+      currentFetchParams: { timeframe: currTimeframe },
       entries,
-      params: { timeframe: currTimeframe },
       dataReceived,
       pageLoading,
+      params: { timeframe },
       refresh,
       t,
     } = this.props
-    const { start, end, timeframe } = this.state
-    const hasNewTime = this.hasNewTime()
 
     const { chartData, presentCurrencies } = parseChartData({
       data: _sortBy(entries, ['mts']),
@@ -109,27 +83,8 @@ class AverageWinLoss extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('averagewinloss.title')}</SectionHeaderTitle>
+          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.startTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('start', date)}
-                defaultValue={start}
-                daysOnly
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.endTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('end', date)}
-                defaultValue={end}
-                daysOnly
-              />
-            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.select')}
@@ -141,7 +96,7 @@ class AverageWinLoss extends PureComponent {
             </SectionHeaderItem>
 
             <QueryButton
-              disabled={!hasNewTime}
+              disabled={!this.hasChanges()}
               onClick={this.handleQuery}
             />
             <RefreshButton onClick={refresh} />

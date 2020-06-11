@@ -11,7 +11,6 @@ import {
   SectionHeaderItem,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import DateInput from 'ui/DateInput'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
@@ -20,35 +19,21 @@ import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
+import TimeRange from 'ui/TimeRange'
 import queryConstants from 'state/query/constants'
-import { checkInit, togglePair } from 'state/utils'
-import { isValidTimeStamp } from 'state/query/utils'
+import { checkFetch, checkInit, togglePair } from 'state/utils'
 
 import { propTypes, defaultProps } from './TradedVolume.props'
 
 const TYPE = queryConstants.MENU_TRADED_VOLUME
 
 class TradedVolume extends PureComponent {
-  constructor(props) {
-    super(props)
-
-    const { params: { start, end } } = props
-    this.state = {
-      start: start && new Date(start),
-      end: end && new Date(end),
-    }
-  }
-
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
 
-  handleDateChange = (input, time) => {
-    const { setParams } = this.props
-    const timestamp = time && time.getTime()
-    if (isValidTimeStamp(timestamp) || time === null) {
-      setParams({ [input]: time ? timestamp : undefined })
-    }
+  componentDidUpdate(prevProps) {
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   handleQuery = () => {
@@ -76,7 +61,6 @@ class TradedVolume extends PureComponent {
       refresh,
       t,
     } = this.props
-    const { start, end } = this.state
     const hasChanges = this.hasChanges()
 
     const { chartData, presentCurrencies } = parseChartData({
@@ -101,6 +85,7 @@ class TradedVolume extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('tradedvolume.title')}</SectionHeaderTitle>
+          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
@@ -109,26 +94,6 @@ class TradedVolume extends PureComponent {
               <MultiPairSelector
                 currentFilters={targetPairs}
                 togglePair={pair => togglePair(TYPE, this.props, pair)}
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.startTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('start', date)}
-                defaultValue={start}
-                daysOnly
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('query.endTime')}
-              </SectionHeaderItemLabel>
-              <DateInput
-                onChange={date => this.handleDateChange('end', date)}
-                defaultValue={end}
-                daysOnly
               />
             </SectionHeaderItem>
             <SectionHeaderItem>
