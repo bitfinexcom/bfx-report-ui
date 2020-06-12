@@ -2,6 +2,7 @@ import {
   call, take, put, select, takeLatest,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
+import { delay } from 'redux-saga'
 
 import { setTimezone, setTheme, setLang } from 'state/base/actions'
 import { checkAuth, updateAuth } from 'state/auth/actions'
@@ -75,9 +76,10 @@ function* uiLoaded() {
 
   // skip auto auth for electron build because front is loading faster
   // also skip in case apiKey and apiSecret are set from url to give user a chance not to save them
-  if (!REACT_APP_ELECTRON && !(apiKey && apiSecret)) {
-    yield put(checkAuth())
+  if (REACT_APP_ELECTRON) {
+    yield delay(4000)
   }
+  yield put(checkAuth())
 }
 
 // user confirmation for proceeding with framework request while not in sync
