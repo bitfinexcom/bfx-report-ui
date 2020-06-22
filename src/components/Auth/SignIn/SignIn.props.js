@@ -6,6 +6,7 @@ export const propTypes = {
     password: PropTypes.string,
     isPersisted: PropTypes.bool,
   }).isRequired,
+  isElectronBackendLoaded: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   signIn: PropTypes.func.isRequired,
   switchMode: PropTypes.func.isRequired,

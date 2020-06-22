@@ -1,6 +1,15 @@
 import types from './constants'
 
 /**
+ * Create an action to toggle electron backend loaded event.
+ */
+export function electronBackendLoaded() {
+  return {
+    type: types.ELECTRON_BACKEND_LOADED,
+  }
+}
+
+/**
  * Create an action to show/hide export dialog.
  */
 export function toggleExportDialog() {
@@ -102,6 +111,7 @@ export function uiResized() {
 }
 
 export default {
+  electronBackendLoaded,
   toggleExportDialog,
   toggleExportSuccessDialog,
   toggleFrameworkDialog,

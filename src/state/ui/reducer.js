@@ -3,6 +3,7 @@ import getDeviceType from 'utils/getDeviceType'
 import types from './constants'
 
 const initialState = {
+  isElectronBackendLoaded: false,
   isExportDialogOpen: false,
   isExportSuccessDialogOpen: false,
   isFrameworkDialogOpen: false,
@@ -17,6 +18,11 @@ const initialState = {
 export function uiReducer(state = initialState, action) {
   const { type, payload = {} } = action
   switch (type) {
+    case types.ELECTRON_BACKEND_LOADED:
+      return {
+        ...state,
+        isElectronBackendLoaded: true,
+      }
     case types.TOGGLE_EXPORT_DIALOG:
       return {
         ...state,

@@ -2,7 +2,6 @@ import {
   call, take, put, select, takeLatest,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
-import { delay } from 'redux-saga'
 
 import { setTimezone, setTheme, setLang } from 'state/base/actions'
 import { checkAuth, updateAuth } from 'state/auth/actions'
@@ -14,6 +13,7 @@ import { platform } from 'var/config'
 import timeRangeTypes from 'state/timeRange/constants'
 import { getTheme } from 'state/base/selectors'
 import { LANGUAGES } from 'locales/i18n'
+import handleElectronLoad from 'utils/handleElectronLoad'
 
 import types from './constants'
 import { toggleFrameworkDialog, togglePaginationDialog } from './actions'
@@ -22,6 +22,10 @@ import selectors from './selectors'
 const { REACT_APP_ELECTRON } = process.env
 
 function* uiLoaded() {
+  if (REACT_APP_ELECTRON) {
+    handleElectronLoad()
+  }
+
   const parsed = getParsedUrlParams(window.location.search)
   const {
     authToken, apiKey, apiSecret, timezone, theme, locale, range,
@@ -76,10 +80,9 @@ function* uiLoaded() {
 
   // skip auto auth for electron build because front is loading faster
   // also skip in case apiKey and apiSecret are set from url to give user a chance not to save them
-  if (REACT_APP_ELECTRON) {
-    yield delay(4000)
+  if (!REACT_APP_ELECTRON && !(apiKey && apiSecret)) {
+    yield put(checkAuth())
   }
-  yield put(checkAuth())
 }
 
 // user confirmation for proceeding with framework request while not in sync
