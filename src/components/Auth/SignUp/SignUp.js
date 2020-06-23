@@ -17,7 +17,7 @@ import { propTypes, defaultProps } from './SignUp.props'
 import InputKey from '../InputKey'
 import ErrorLabel from '../ErrorLabel'
 
-const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
 
 // handles framework sign up and online version login
 class SignUp extends PureComponent {

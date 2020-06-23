@@ -9,7 +9,6 @@ import _toString from 'lodash/toString'
 import _findKey from 'lodash/findKey'
 import _sortBy from 'lodash/sortBy'
 import _find from 'lodash/find'
-import _isNumber from 'lodash/isNumber'
 import _isNaN from 'lodash/isNaN'
 
 import SECTION_COLUMNS, { TRANSFORMS } from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
@@ -26,8 +25,10 @@ const getValue = ({ dataType, value }) => {
   switch (dataType) {
     case NUMBER:
       return _toNumber(value)
-    case INTEGER:
-      return _isNumber(value) ? _toInteger(value) : NaN
+    case INTEGER: {
+      const number = _toNumber(value)
+      return _isNaN(number) ? NaN : _toInteger(number)
+    }
     case STRING:
       return _toString(value)
     default:
