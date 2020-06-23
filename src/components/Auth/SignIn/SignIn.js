@@ -13,6 +13,8 @@ import Select from 'ui/Select'
 import { propTypes, defaultProps } from './SignIn.props'
 import InputKey from '../InputKey'
 
+const { REACT_APP_ELECTRON } = process.env
+
 class SignIn extends PureComponent {
   static propTypes = propTypes
 
@@ -58,6 +60,7 @@ class SignIn extends PureComponent {
   render() {
     const {
       authData: { isPersisted },
+      isElectronBackendLoaded,
       loading,
       switchMode,
       t,
@@ -66,7 +69,8 @@ class SignIn extends PureComponent {
     const { email, password } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email) || {}
-    const isSignInDisabled = !email || (!isNotProtected && !password)
+    const isSignInDisabled = !email || (REACT_APP_ELECTRON && !isElectronBackendLoaded)
+      || (!isNotProtected && !password)
 
     return (
       <Dialog
@@ -87,7 +91,7 @@ class SignIn extends PureComponent {
             value={email}
             loading
           />
-          {!isNotProtected && (
+          {!isNotProtected && users.length > 0 && (
             <InputKey
               label='auth.enterPassword'
               name='password'
