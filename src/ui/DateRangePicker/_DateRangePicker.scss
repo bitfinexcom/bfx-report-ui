@@ -18,6 +18,7 @@
   div {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .DayPicker-NavButton {
@@ -52,6 +53,11 @@
     button:first-child {
       margin-right: 10px;
     }
+  }
+
+  .bp3-daterangepicker-timepickers {
+    flex-basis: 100%;
+    margin-top: 10px;
   }
 
   .bp3-daterangepicker-shortcuts {

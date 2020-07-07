@@ -4,7 +4,7 @@ import queryString from 'query-string'
 import classNames from 'classnames'
 import moment from 'moment-timezone'
 import { Popover } from '@blueprintjs/core'
-import { DateRangePicker as BlueprintDateRangePicker } from '@blueprintjs/datetime'
+import { DateRangePicker as BlueprintDateRangePicker, TimePrecision } from '@blueprintjs/datetime'
 
 import baseTypes from 'state/base/constants'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -133,6 +133,7 @@ class DateRangePicker extends PureComponent {
       defaultValue: [startDate, endDate],
       minDate: this.sixYearsBefore,
       maxDate: new Date(),
+      timePrecision: TimePrecision.SECOND,
     }
     const popoverClassName = classNames('date-range-picker-popover', className)
     const { shortcuts, shortcutsMap } = createShortcuts({ t })
