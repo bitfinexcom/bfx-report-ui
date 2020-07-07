@@ -21,10 +21,22 @@ import {
   removePopoverDismiss,
 } from './utils'
 
+const utcTimestampToLocale = (timestamp, offset = 0) => {
+  const localOffset = moment().utcOffset()
+  return timestamp - (localOffset - offset) * 60 * 1000
+}
+
+const localeTimestampToUtc = (timestamp, offset = 0) => {
+  const localOffset = moment().utcOffset()
+  return timestamp + (localOffset - offset) * 60 * 1000
+}
+
 class DateRangePicker extends PureComponent {
   constructor(props) {
-    super()
+    super(props)
     const { range, start, end } = props
+
+    const inputTimezoneOffset = this.getInputTimezoneOffset()
 
     const date = new Date()
     date.setFullYear(date.getFullYear() - 6)
@@ -32,8 +44,8 @@ class DateRangePicker extends PureComponent {
 
     const { start: timeFrameStart, end: timeFrameEnd } = getTimeFrameFromData({ range, start, end })
     this.state = {
-      startDate: timeFrameStart && new Date(timeFrameStart),
-      endDate: timeFrameEnd && new Date(timeFrameEnd),
+      startDate: timeFrameStart && new Date(utcTimestampToLocale(timeFrameStart, inputTimezoneOffset)),
+      endDate: timeFrameEnd && new Date(utcTimestampToLocale(timeFrameEnd, inputTimezoneOffset)),
       shortcutIndex: getShortcutIndex(range),
     }
   }
@@ -69,12 +81,18 @@ class DateRangePicker extends PureComponent {
     }
   }
 
+  getInputTimezoneOffset = () => {
+    const { inputTimezone } = this.props
+    return moment.tz(inputTimezone).utcOffset()
+  }
+
   onApply = () => {
     const { startDate, endDate, shortcutIndex } = this.state
     const { history, setTimeRange, updateSuccessStatus } = this.props
     if (startDate !== null && endDate !== null) {
-      const start = startDate.getTime()
-      const end = endDate.getTime()
+      const inputTimezoneOffset = this.getInputTimezoneOffset()
+      const start = localeTimestampToUtc(startDate.getTime(), inputTimezoneOffset)
+      const end = localeTimestampToUtc(endDate.getTime(), inputTimezoneOffset)
       const timeRange = getShortcutTimeRange(shortcutIndex)
 
       setTimeRange({

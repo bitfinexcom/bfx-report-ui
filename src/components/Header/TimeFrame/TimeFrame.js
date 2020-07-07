@@ -26,13 +26,13 @@ class TimeFrame extends PureComponent {
   render() {
     const {
       end,
-      inputTimezone,
       start,
       t,
+      timezone,
     } = this.props
     const { isOpen } = this.state
 
-    const timeSpan = `${formatDate(start, inputTimezone)} - ${formatDate(end, inputTimezone)}`
+    const timeSpan = `${formatDate(start, timezone)} - ${formatDate(end, timezone)}`
 
     return (
       <div className='timeframe'>
@@ -47,13 +47,13 @@ class TimeFrame extends PureComponent {
                     onClick={() => this.onToggle(true)}
                     placeholder={t('timeframe.start-date-placeholder')}
                     readOnly
-                    value={formatDate(start, inputTimezone, DEFAULT_DATETIME_FORMAT)}
+                    value={formatDate(start, timezone, DEFAULT_DATETIME_FORMAT)}
                   />
                   <InputGroup
                     onClick={() => this.onToggle(true)}
                     placeholder={t('timeframe.end-date-placeholder')}
                     readOnly
-                    value={formatDate(end, inputTimezone, DEFAULT_DATETIME_FORMAT)}
+                    value={formatDate(end, timezone, DEFAULT_DATETIME_FORMAT)}
                   />
                 </Fragment>
               </DateRangePicker>
