@@ -4,6 +4,7 @@ export const propTypes = {
   className: PropTypes.string,
   controlledFromRedux: PropTypes.bool,
   end: PropTypes.number,
+  inputTimezone: PropTypes.string,
   range: PropTypes.string.isRequired,
   setTimeRange: PropTypes.func.isRequired,
   start: PropTypes.number,
@@ -15,4 +16,5 @@ export const propTypes = {
 export const defaultProps = {
   className: '',
   controlledFromRedux: false,
+  inputTimezone: '',
 }

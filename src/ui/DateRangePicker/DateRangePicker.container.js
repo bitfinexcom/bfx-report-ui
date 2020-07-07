@@ -6,6 +6,7 @@ import { setTimeRange } from 'state/timeRange/actions'
 import { updateSuccessStatus } from 'state/status/actions'
 import { getTimeRange } from 'state/timeRange/selectors'
 import { toggleTimeFrameDialog } from 'state/ui/actions'
+import { getInputTimezone } from 'state/base/selectors'
 
 import DateRangePicker from './DateRangePicker'
 
@@ -14,6 +15,7 @@ const mapStateToProps = (state, ownProps) => {
   const { range, start, end } = getTimeRange(state)
 
   return {
+    inputTimezone: getInputTimezone(state),
     isOpen: controlledFromRedux ? getIsTimeFrameDialogOpen(state) : isOpen,
     range,
     start,

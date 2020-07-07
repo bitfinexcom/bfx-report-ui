@@ -6,7 +6,6 @@ import moment from 'moment-timezone'
 import { Popover } from '@blueprintjs/core'
 import { DateRangePicker as BlueprintDateRangePicker, TimePrecision } from '@blueprintjs/datetime'
 
-import baseTypes from 'state/base/constants'
 import timeRangeTypes from 'state/timeRange/constants'
 import { getTimeFrameFromData } from 'state/timeRange/selectors'
 import { DEFAULT_DATETIME_FORMAT, momentFormatter } from 'state/utils'
@@ -117,12 +116,13 @@ class DateRangePicker extends PureComponent {
     const {
       className,
       children,
+      inputTimezone,
       isOpen,
       range,
       t,
     } = this.props
     const { startDate, endDate } = this.getDates()
-    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, baseTypes.DEFAULT_TIMEZONE)
+    const { formatDate, parseDate } = momentFormatter(DEFAULT_DATETIME_FORMAT, inputTimezone)
     const commonDateRangeProps = {
       allowSingleDayRange: true,
       closeOnSelection: false,
