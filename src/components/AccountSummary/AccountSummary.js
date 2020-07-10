@@ -11,6 +11,7 @@ import { propTypes, defaultProps } from './AccountSummary.props'
 import Volume from './AccountSummary.volume'
 import Fees from './AccountSummary.fees'
 import MarginFunds from './AccountSummary.marginFunds'
+import FeeTierVolume from './AccountSummary.feeTierVolume'
 
 class AccountSummary extends PureComponent {
   componentDidMount() {
@@ -51,6 +52,7 @@ class AccountSummary extends PureComponent {
           />
           <br />
           <MarginFunds data={_get(data, 'fees_funding_30d', {})} />
+          <FeeTierVolume data={_get(data, 'trade_vol_30d', {})} />
         </div>
       )
     }

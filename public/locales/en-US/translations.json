@@ -7,6 +7,7 @@
     "fees": "Your fees on Bitfinex",
     "fees_explain": "(based on your trading volume)",
     "fees_deriv": "Your fees on Bitfinex Derivatives",
+    "fee_tier_volume": "Volume (eligible for fee tier calculation) in the last 30 days",
     "30dVolume": "Your volume in the last 30 days",
     "margin_funds": "Total return on your margin funds provided in the last 30 days"
   },

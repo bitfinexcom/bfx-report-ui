@@ -7,7 +7,7 @@ import DataTable from 'ui/DataTable'
 import { fixedFloat, formatAmount } from 'ui/utils'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
-const getColumns = (props) => {
+export const getColumns = (props) => {
   const { data } = props
 
   return [
