@@ -22,7 +22,7 @@ class TickersSnapshot extends PureComponent {
 
     return (
       <Fragment>
-        <div className='tables-row'>
+        <div className='tables-row no-table-scroll'>
           {positionsTickersEntries.length > 0 && (
             <div className='tables-row-item'>
               <div>{t('positions.title')}</div>

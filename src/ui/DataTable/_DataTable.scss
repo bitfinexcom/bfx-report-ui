@@ -6,7 +6,7 @@
   margin-left: 1px;
   flex: 0 1 auto;
 
-  &-full-width {
+  &-full-height {
     max-height: unset;
   }
 
@@ -122,6 +122,12 @@
   height: 100%;
 }
 
+.no-table-scroll {
+  .bitfinex-table{
+    max-height: unset;
+  }
+}
+
 @media screen and (min-width: 2560px) {
   .bitfinex-table {
     max-height: 857px;
@@ -133,7 +139,7 @@
       }
     }
 
-    &-full-width {
+    &-full-height {
       max-height: unset;
     }
   }
