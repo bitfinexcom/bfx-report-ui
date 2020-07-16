@@ -20,7 +20,7 @@ const getColumns = (props) => {
       width: 100,
       renderer: () => (
         <Cell tooltip={formattedMakerFee}>
-          {formatAmount(makerFee * 100, getColor(makerFee), 2)}
+          {formatAmount(makerFee * 100, { color: getColor(makerFee), digits: 2 })}
           %
         </Cell>
       ),
@@ -32,7 +32,7 @@ const getColumns = (props) => {
       width: 100,
       renderer: () => (
         <Cell tooltip={formattedTakerFee}>
-          {formatAmount(takerFee * 100, getColor(takerFee), 2)}
+          {formatAmount(takerFee * 100, { color: getColor(takerFee), digits: 2 })}
           %
         </Cell>
       ),

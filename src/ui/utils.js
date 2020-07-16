@@ -15,7 +15,9 @@ export const filterSelectorItem = (query, item) => item.toLowerCase().indexOf(qu
 
 export const fixedFloat = (val, num = 8) => (typeof val === 'number' ? val && val.toFixed(num) : val)
 
-export const formatAmount = (val, color, digits = 8) => {
+export const formatThousands = (value) => value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+
+export const formatAmount = (val, options = {}) => {
   if (!val) {
     return (
       <Fragment>
@@ -25,12 +27,27 @@ export const formatAmount = (val, color, digits = 8) => {
       </Fragment>
     )
   }
+  const {
+    color,
+    digits = 8,
+    fixFraction = true,
+    formatThousands: shouldFormatThousands = false,
+  } = options
 
-  const [integer, fraction] = val.toFixed(digits).split('.')
   const classes = classNames('bitfinex-amount', {
     'bitfinex-green-text': color ? color === 'green' : val > 0,
     'bitfinex-red-text': color ? color === 'red' : val < 0,
   })
+
+  if (fixFraction) {
+    val = val.toFixed(digits) // eslint-disable-line no-param-reassign
+  }
+
+  if (shouldFormatThousands) {
+    val = formatThousands(val) // eslint-disable-line no-param-reassign
+  }
+
+  const [integer, fraction] = val.split('.')
 
   return (
     <Fragment>
@@ -47,6 +64,7 @@ export default {
   fixedFloat,
   insertIf,
   formatAmount,
+  formatThousands,
   amountStyle,
   filterSelectorItem,
 }
