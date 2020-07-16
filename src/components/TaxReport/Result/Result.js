@@ -203,6 +203,7 @@ class TaxReport extends PureComponent {
           balances: startingPeriodBalances,
           title: t('taxreport.startingPeriodBalances'),
         })}
+        <br />
         {this.getBalances({
           balances: endingPeriodBalances,
           title: t('taxreport.endingPeriodBalances'),

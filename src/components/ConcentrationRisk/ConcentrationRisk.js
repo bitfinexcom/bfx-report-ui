@@ -128,7 +128,10 @@ class ConcentrationRisk extends PureComponent {
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 concentration-risk'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12 concentration-risk no-table-scroll'
+      >
         <SectionHeader>
           <SectionHeaderTitle>{t('concentrationrisk.title')}</SectionHeaderTitle>
           <SectionHeaderRow>

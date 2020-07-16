@@ -25,7 +25,7 @@ const WalletsData = (props) => {
   const fundingColumns = getColumns({ filteredData: fundingData })
 
   return (
-    <div className='tables-row'>
+    <div className='tables-row no-table-scroll'>
       <div className='tables-row-item'>
         <div>{t('wallets.header.exchange')}</div>
         <DataTable
