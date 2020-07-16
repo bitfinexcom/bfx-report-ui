@@ -32,6 +32,7 @@ export const formatAmount = (val, options = {}) => {
     digits = 8,
     fixFraction = true,
     formatThousands: shouldFormatThousands = false,
+    dollarSign = false,
   } = options
 
   const classes = classNames('bitfinex-amount', {
@@ -52,7 +53,10 @@ export const formatAmount = (val, options = {}) => {
   return (
     <Fragment>
       <div className={classes}>
-        <span>{integer}</span>
+        <span>
+          {dollarSign && '$'}
+          {integer}
+        </span>
         {'.'}
         <span className='bitfinex-amount-fraction'>{fraction}</span>
       </div>
