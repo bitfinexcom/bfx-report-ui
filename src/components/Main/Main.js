@@ -80,7 +80,7 @@ const {
 } = queryType
 
 const PATHS = {
-  MENU_LEDGERS: [...getPath(MENU_LEDGERS), `${getPath(MENU_LEDGERS)[0]}/:symbol`],
+  MENU_LEDGERS: [getPath(MENU_LEDGERS), `${getPath(MENU_LEDGERS)[0]}/:symbol`],
   MENU_CANDLES: [getPath(MENU_CANDLES)],
   MENU_TRADES: [getPath(MENU_TRADES), `${getPath(MENU_TRADES)}/:pair`],
   MENU_ORDERS: [getPath(MENU_ORDERS), `${getPath(MENU_ORDERS)}/:pair`],
@@ -104,7 +104,7 @@ const PATHS = {
     getPath(MENU_TAX_REPORT),
     `${getPath(MENU_TAX_REPORT)}/:section(result)`,
     `${getPath(MENU_TAX_REPORT)}/:section(start_snapshot|end_snapshot|result)/:subsection(positions|tickers|wallets)`],
-  MENU_ACCOUNT_SUMMARY: [getPath(MENU_ACCOUNT_SUMMARY)],
+  MENU_ACCOUNT_SUMMARY: [...getPath(MENU_ACCOUNT_SUMMARY)],
   MENU_LOGINS: [getPath(MENU_LOGINS)],
   MENU_CHANGE_LOGS: [getPath(MENU_CHANGE_LOGS)],
 }
