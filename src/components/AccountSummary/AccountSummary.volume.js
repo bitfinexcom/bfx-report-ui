@@ -37,7 +37,7 @@ const getColumns = (props) => {
             className='bitfinex-text-align-right'
             tooltip={fixedVolume}
           >
-            {formatAmount(vol, { formatThousands: true })}
+            {formatAmount(vol, { digits: 2, formatThousands: true })}
           </Cell>
         )
       },
