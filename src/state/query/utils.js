@@ -203,7 +203,7 @@ const MAPPING = {
   },
   [MENU_ACCOUNT_SUMMARY]: {
     icon: Icons.FILE_TABLE,
-    path: '/account_summary',
+    path: ['/account_summary', '/'],
   },
   [MENU_CANDLES]: {
     icon: Icons.LOOP,
@@ -273,7 +273,7 @@ const MAPPING = {
   },
   [MENU_LEDGERS]: {
     icon: Icons.NOTEBOOK,
-    path: ['/ledgers', '/'],
+    path: '/ledgers',
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
     pageSize: 125,

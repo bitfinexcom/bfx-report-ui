@@ -76,7 +76,7 @@ export default function getColumns(props) {
             className='bitfinex-text-align-right'
             tooltip={fixedFloat(rate)}
           >
-            {formatAmount(rate, 'red')}
+            {formatAmount(rate, { color: 'red' })}
           </Cell>
         )
       },

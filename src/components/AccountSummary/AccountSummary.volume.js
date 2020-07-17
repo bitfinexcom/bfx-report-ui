@@ -30,14 +30,18 @@ const getColumns = (props) => {
       name: 'column.volume',
       width: COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
-        const { vol } = data[rowIndex]
+        const { curr, vol } = data[rowIndex]
         const fixedVolume = fixedFloat(vol)
         return (
           <Cell
             className='bitfinex-text-align-right'
             tooltip={fixedVolume}
           >
-            {formatAmount(vol)}
+            {formatAmount(vol, {
+              digits: 2,
+              formatThousands: true,
+              dollarSign: curr === 'USD' || curr === 'Total (USD)',
+            })}
           </Cell>
         )
       },
