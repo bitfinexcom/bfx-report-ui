@@ -15,7 +15,11 @@ export const filterSelectorItem = (query, item) => item.toLowerCase().indexOf(qu
 
 export const fixedFloat = (val, num = 8) => (typeof val === 'number' ? val && val.toFixed(num) : val)
 
-export const formatThousands = (value) => value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+export const formatThousands = (value) =>  {
+  const parts = value.toString().split(".")
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  return parts.join(".")
+}
 
 export const formatAmount = (val, options = {}) => {
   if (!val) {
