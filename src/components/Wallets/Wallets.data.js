@@ -12,6 +12,7 @@ const {
   WALLET_EXCHANGE,
   WALLET_MARGIN,
   WALLET_FUNDING,
+  WALLET_CONTRIBUTION,
 } = constants
 
 const WalletsData = (props) => {
@@ -20,9 +21,11 @@ const WalletsData = (props) => {
   const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
   const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
   const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
+  const contributionData = entries.filter(entry => entry.type === WALLET_CONTRIBUTION)
   const exchangeColumns = getColumns({ filteredData: exchangeData })
   const marginColumns = getColumns({ filteredData: marginData })
   const fundingColumns = getColumns({ filteredData: fundingData })
+  const contributionColumns = getColumns({ filteredData: contributionData })
 
   return (
     <div className='tables-row no-table-scroll'>
@@ -45,6 +48,13 @@ const WalletsData = (props) => {
         <DataTable
           numRows={fundingData.length}
           tableColumns={fundingColumns}
+        />
+      </div>
+      <div className='tables-row-item'>
+        <div>{t('wallets.header.token-sales')}</div>
+        <DataTable
+          numRows={contributionData.length}
+          tableColumns={contributionColumns}
         />
       </div>
     </div>
