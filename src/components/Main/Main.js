@@ -80,7 +80,7 @@ const {
 } = queryType
 
 const PATHS = {
-  MENU_LEDGERS: [getPath(MENU_LEDGERS), `${getPath(MENU_LEDGERS)[0]}/:symbol`],
+  MENU_LEDGERS: [getPath(MENU_LEDGERS), `${getPath(MENU_LEDGERS)}/:symbol`],
   MENU_CANDLES: [getPath(MENU_CANDLES)],
   MENU_TRADES: [getPath(MENU_TRADES), `${getPath(MENU_TRADES)}/:pair`],
   MENU_ORDERS: [getPath(MENU_ORDERS), `${getPath(MENU_ORDERS)}/:pair`],
