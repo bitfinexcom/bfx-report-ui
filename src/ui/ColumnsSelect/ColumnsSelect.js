@@ -62,7 +62,7 @@ class ColumnsSelect extends PureComponent {
 
     const hasChanges = Object.keys(columns).some(column => columns[column] !== currentColumns[column])
     const sectionColumns = SECTION_COLUMNS[target]
-      .filter(column => !column.frameworkOnly || platform.showFrameworkMode)
+      .filter(column => (!column.frameworkOnly || platform.showFrameworkMode) && !column.filterOnly)
 
     return (
       <Fragment>

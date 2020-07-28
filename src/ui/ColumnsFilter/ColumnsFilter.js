@@ -18,7 +18,9 @@ import DEFAULT_FILTERS from 'ui/ColumnsFilter/var/defaultFilters'
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
 import FilterTypeSelector from './FilterTypeSelector'
+import LedgersCategoriesSelect from './Filters/LedgersCategoriesSelect'
 import { propTypes, defaultProps } from './ColumnsFilter.props'
+import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 
 const MAX_FILTERS = 7
 
@@ -99,6 +101,27 @@ class ColumnsFilter extends PureComponent {
     })
   }
 
+  onColumnChange = (params) => {
+    const { index, ...filterParams } = params
+    const { filters } = this.state
+
+    const updatedFilters = filters.map((filter, i) => {
+      if (i === index) {
+        return {
+          type: '',
+          value: '',
+          ...filterParams,
+        }
+      }
+
+      return filter
+    })
+
+    this.setState({
+      filters: updatedFilters,
+    })
+  }
+
   updateFilter = (params) => {
     const { index, ...filterParams } = params
     const { filters } = this.state
@@ -124,6 +147,10 @@ class ColumnsFilter extends PureComponent {
     this.updateFilter({ index, value })
   }
 
+  onSelectChange = (index, value) => {
+    this.updateFilter({ index, value })
+  }
+
   haveFiltersChanged = () => {
     const { filters: currentFilters } = this.props
     const { filters } = this.state
@@ -135,6 +162,22 @@ class ColumnsFilter extends PureComponent {
       .some((filter, index) => !_isEqual(filter, currentValidFilters[index]))
 
     return currentValidFilters.length !== nextValidFilters.length || hasFilterValueChanged
+  }
+
+  renderSelect = ({ filter, index }) => {
+    const { select, value } = filter
+    const selectProps = {
+      className: 'columns-filter-item-input columns-filter-item-input--select',
+      value,
+      onChange: itemValue => this.onSelectChange(index, itemValue),
+    }
+
+    switch (select) {
+      case FILTERS_SELECTOR.LEDGERS_CATEGORY:
+        return <LedgersCategoriesSelect {...selectProps} />
+      default:
+        return null
+    }
   }
 
   /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events, no-shadow */
@@ -169,27 +212,31 @@ class ColumnsFilter extends PureComponent {
             <div>
               {filters.map((filter, index) => {
                 const {
-                  column, type, dataType, value,
+                  column, type, dataType, select, value,
                 } = filter
 
                 return (
-                  <div key={index} className='columns-filter-item'>
+                  <div key={`${column}_${index}`} className='columns-filter-item'>
                     <ColumnSelector
                       section={target}
                       value={column}
-                      onChange={({ column, dataType }) => this.updateFilter({ index, column, dataType })}
+                      onChange={(column) => this.onColumnChange({ index, ...column, dataType })}
                     />
                     <FilterTypeSelector
                       value={type}
                       dataType={dataType}
                       onChange={filterType => this.updateFilter({ index, type: filterType })}
                     />
-                    <InputGroup
-                      className='columns-filter-item-input'
-                      value={value}
-                      onChange={e => this.onInputChange(index, e)}
-                      onFocus={selectTextOnFocus}
-                    />
+                    {select
+                      ? this.renderSelect({ filter, index })
+                      : (
+                        <InputGroup
+                          className='columns-filter-item-input'
+                          value={value}
+                          onChange={e => this.onInputChange(index, e)}
+                          onFocus={selectTextOnFocus}
+                        />
+                      )}
                     <Icon.BIN
                       className='columns-filter-item-remove'
                       onClick={() => this.onFilterRemove(index)}

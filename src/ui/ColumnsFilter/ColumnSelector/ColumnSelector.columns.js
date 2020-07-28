@@ -26,10 +26,15 @@ const {
   NUMBER,
   INTEGER,
   STRING,
+  SELECT,
 } = DATA_TYPES
 
 export const TRANSFORMS = {
   PERCENTAGE: 'percentage',
+}
+
+export const FILTERS_SELECTOR = {
+  LEDGERS_CATEGORY: 'ledgers_category',
 }
 
 const LEDGERS_COLUMNS = [
@@ -48,12 +53,17 @@ const LEDGERS_COLUMNS = [
  * id: column id
  * name: translation keys `column.[name]`
  * type: column data type, used for filters
+ * select: type of select, used for filters
  * frameworkOnly: shown only in framework mode
  * filter: if column is filterable
  * hidden: if column is hidden by default
+ * filterOnly: if entry acts as a filter only, not being displayed
  */
 const SECTION_COLUMNS = {
-  [MENU_LEDGERS]: LEDGERS_COLUMNS,
+  [MENU_LEDGERS]: [
+    ...LEDGERS_COLUMNS,
+    { id: 'category', name: 'category', type: SELECT, select: FILTERS_SELECTOR.LEDGERS_CATEGORY, filter: true, filterOnly: true }, // eslint-disable-line max-len
+  ],
 
   [MENU_TRADES]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
