@@ -16,6 +16,7 @@ import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
 import { frameworkCheck } from 'state/ui/saga'
 import { fetchDataWithPagination } from 'state/sagas.helper'
+import LEDGERS_CATEGORIES from 'var/ledgersCategories'
 
 import types from './constants'
 import actions from './actions'
@@ -34,7 +35,7 @@ function getReqLedgers({
     end,
     filter,
     limit: getQueryLimit(TYPE),
-    isMarginFundingPayment: true,
+    category: LEDGERS_CATEGORIES.FUNDING_PAYMENT,
     symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
   }
   return makeFetchCall('getLedgers', params)
