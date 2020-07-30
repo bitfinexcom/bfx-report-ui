@@ -18,9 +18,8 @@ import DEFAULT_FILTERS from 'ui/ColumnsFilter/var/defaultFilters'
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
 import FilterTypeSelector from './FilterTypeSelector'
-import LedgersCategoriesSelect from './Filters/LedgersCategoriesSelect'
 import { propTypes, defaultProps } from './ColumnsFilter.props'
-import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
+// import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 
 const MAX_FILTERS = 7
 
@@ -164,8 +163,10 @@ class ColumnsFilter extends PureComponent {
     return currentValidFilters.length !== nextValidFilters.length || hasFilterValueChanged
   }
 
+  // TODO: add selectors for respective filters (e.g. side)
   renderSelect = ({ filter, index }) => {
     const { select, value } = filter
+    // eslint-disable-next-line no-unused-vars
     const selectProps = {
       className: 'columns-filter-item-input columns-filter-item-input--select',
       value,
@@ -173,8 +174,6 @@ class ColumnsFilter extends PureComponent {
     }
 
     switch (select) {
-      case FILTERS_SELECTOR.LEDGERS_CATEGORY:
-        return <LedgersCategoriesSelect {...selectProps} />
       default:
         return null
     }

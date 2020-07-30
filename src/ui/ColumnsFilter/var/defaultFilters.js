@@ -33,7 +33,6 @@ const {
   NUMBER,
   INTEGER,
   STRING,
-  SELECT,
 } = DATA_TYPES
 
 /* eslint-disable object-curly-newline */
@@ -41,7 +40,6 @@ const DEFAULT_LEDGERS = [
   { column: 'description', type: CONTAINS, dataType: STRING, value: '' },
   { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
   { column: 'balance', type: GREATER_THAN, dataType: NUMBER, value: '' },
-  { column: 'category', type: EQUAL_TO, dataType: SELECT, select: 'LEDGERS_CATEGORY', value: '' },
 ]
 
 const DEFAULT_FILTERS = {
