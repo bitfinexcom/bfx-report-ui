@@ -32,6 +32,17 @@ export function refresh() {
 }
 
 /**
+ * Create an action to set options for Ledgers.
+ * @param {object} payload object contains options
+ */
+export function setParams(payload) {
+  return {
+    type: types.SET_PARAMS,
+    payload,
+  }
+}
+
+/**
  * Create an action to update Ledgers.
  * @param {Object[]} data
  */
@@ -83,6 +94,7 @@ export default {
   fetchLedgers,
   refresh,
   removeTargetSymbol,
+  setParams,
   setTargetSymbols,
   updateLedgers,
 }

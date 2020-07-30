@@ -351,9 +351,11 @@
   },
   "selector": {
     "select": "Select",
+    "all": "All",
     "filter": {
       "symbol": "Symbol Filter",
-      "pair": "Pair Filter"
+      "pair": "Pair Filter",
+      "category": "Category Filter"
     }
   },
   "snapshots": {

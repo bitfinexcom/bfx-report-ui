@@ -25,6 +25,7 @@ const TYPE = queryTypes.MENU_LEDGERS
 function getReqLedgers({
   start,
   end,
+  targetCategory,
   targetSymbols,
   filter,
 }) {
@@ -33,6 +34,7 @@ function getReqLedgers({
     end,
     filter,
     limit: getQueryLimit(TYPE),
+    category: targetCategory,
     symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
   }
   return makeFetchCall('getLedgers', params)
@@ -41,7 +43,7 @@ function getReqLedgers({
 /* eslint-disable-next-line consistent-return */
 function* fetchLedgers() {
   try {
-    const { targetSymbols } = yield select(getLedgers)
+    const { targetCategory, targetSymbols } = yield select(getLedgers)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const filter = yield select(getFilterQuery, TYPE)
 
@@ -49,6 +51,7 @@ function* fetchLedgers() {
     const { result, error } = yield call(fetchDataWithPagination, getReqLedgers, {
       start,
       end,
+      targetCategory,
       targetSymbols,
       filter,
     })

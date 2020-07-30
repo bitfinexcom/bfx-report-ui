@@ -2,16 +2,10 @@
 
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
-import queryTypes from 'state/query/constants'
 import {
-  addSymbol,
   baseSymbolState,
   fetch,
   fetchFail,
-  refresh,
-  removeSymbol,
-  setSymbols,
-  setTimeRange,
 } from 'state/reducers.helper'
 
 import types from './constants'
@@ -19,9 +13,8 @@ import { updateLedgers } from './utils'
 
 const initialState = {
   ...baseSymbolState,
+  targetCategory: undefined,
 }
-
-const TYPE = queryTypes.MENU_LEDGERS
 
 export function ledgersReducer(state = initialState, action) {
   const { type, payload } = action
@@ -33,15 +26,50 @@ export function ledgersReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.ADD_SYMBOL:
-      return addSymbol(state, payload, initialState)
+      return state.targetSymbols.includes(payload)
+        ? state
+        : {
+          ...initialState,
+          targetCategory: state.targetCategory,
+          targetSymbols: [...state.targetSymbols, payload],
+          existingCoins: state.existingCoins,
+        }
     case types.REMOVE_SYMBOL:
-      return removeSymbol(state, payload, initialState)
+      return (state.targetSymbols.includes(payload))
+        ? {
+          ...initialState,
+          targetCategory: state.targetCategory,
+          targetSymbols: state.targetSymbols.filter(symbol => symbol !== payload),
+          existingCoins: state.existingCoins,
+        }
+        : state
+    case types.SET_PARAMS:
+      return {
+        ...initialState,
+        targetCategory: state.targetCategory,
+        targetSymbols: state.targetSymbols,
+        ...payload,
+      }
     case types.SET_SYMBOLS:
-      return setSymbols(state, payload, initialState)
+      return {
+        ...initialState,
+        targetSymbols: payload,
+        existingCoins: state.existingCoins,
+        targetCategory: state.targetCategory,
+      }
     case types.REFRESH:
-      return refresh(TYPE, state, initialState)
+      return {
+        ...initialState,
+        targetCategory: state.targetCategory,
+        targetSymbols: state.targetSymbols,
+        existingPairs: state.existingPairs,
+      }
     case timeRangeTypes.SET_TIME_RANGE:
-      return setTimeRange(TYPE, state, initialState)
+      return {
+        ...initialState,
+        targetCategory: state.targetCategory,
+        targetSymbols: state.targetSymbols,
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {
