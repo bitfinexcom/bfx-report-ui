@@ -16,6 +16,7 @@
 @import "components/Header/TimeFrame/_TimeFrame.scss";
 @import "components/Preferences/_Preferences.scss";
 @import "components/Status/_Status.scss";
+@import "components/SubAccounts/_SubAccounts.scss";
 @import "components/TaxReport/_TaxReport.scss";
 @import "icons/_icons.scss";
 @import "ui/_index.scss";
@@ -85,6 +86,11 @@ html {
   box-shadow: none;
 }
 
+.subtitle {
+  font-size: 20px;
+  color: var(--activeColor);
+}
+
 .bp3-input {
   background-color: var(--bgColor2);
   box-shadow: none;
@@ -110,6 +116,12 @@ a {
   border-bottom-color: var(--borderColor);
 }
 
+.mt {
+  &20 {
+    margin-top: 20px;
+  }
+}
+
 .tables-row {
   &-item {
     display: inline-block;
@@ -123,7 +135,6 @@ a {
     }
   }
 }
-
 
 .total-stats {
   margin-bottom: 20px;

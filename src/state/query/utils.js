@@ -34,6 +34,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
   MENU_SPAYMENTS,
+  MENU_SUB_ACCOUNTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
@@ -68,6 +69,7 @@ export const TYPE_WHITELIST = [
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
   MENU_SPAYMENTS,
+  MENU_SUB_ACCOUNTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
@@ -102,6 +104,7 @@ export const ROUTE_WHITELIST = [
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
   MENU_SPAYMENTS,
+  MENU_SUB_ACCOUNTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADES,
@@ -363,6 +366,10 @@ const MAPPING = {
   [MENU_SNAPSHOTS]: {
     icon: Icons.COLLAPSE_WIDE,
     path: ['/snapshots_positions', '/snapshots_tickers', '/snapshots_wallets'],
+  },
+  [MENU_SUB_ACCOUNTS]: {
+    icon: Icons.USER_CIRCLE,
+    path: '/sub_accounts',
   },
   [MENU_TAX_REPORT]: {
     icon: Icons.FEES_REPORT,

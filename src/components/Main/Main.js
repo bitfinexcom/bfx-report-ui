@@ -30,6 +30,7 @@ import PublicFunding from 'components/PublicFunding'
 import PublicTrades from 'components/PublicTrades'
 import Snapshots from 'components/Snapshots'
 import StakingPayments from 'components/StakingPayments'
+import SubAccounts from 'components/SubAccounts'
 import TaxReport from 'components/TaxReport'
 import Tickers from 'components/Tickers'
 import TradedVolume from 'components/TradedVolume'
@@ -72,6 +73,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
   MENU_SPAYMENTS,
+  MENU_SUB_ACCOUNTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
@@ -107,6 +109,7 @@ const PATHS = {
   MENU_ACCOUNT_SUMMARY: [...getPath(MENU_ACCOUNT_SUMMARY)],
   MENU_LOGINS: [getPath(MENU_LOGINS)],
   MENU_CHANGE_LOGS: [getPath(MENU_CHANGE_LOGS)],
+  MENU_SUB_ACCOUNTS: [getPath(MENU_SUB_ACCOUNTS)],
 }
 
 class Main extends PureComponent {
@@ -293,6 +296,13 @@ class Main extends PureComponent {
               path={PATHS.MENU_CHANGE_LOGS}
               component={ChangeLogs}
             />
+            {platform.showFrameworkMode && (
+              <Route
+                exact
+                path={PATHS.MENU_SUB_ACCOUNTS}
+                component={SubAccounts}
+              />
+            )}
           </Switch>
         </div>
         <ExportDialog />

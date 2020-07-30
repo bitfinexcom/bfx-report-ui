@@ -45,6 +45,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
   MENU_SPAYMENTS,
+  MENU_SUB_ACCOUNTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
@@ -90,6 +91,7 @@ class NavMenu extends PureComponent {
     [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
     [MENU_LOGINS, 'logins.title'],
     [MENU_CHANGE_LOGS, 'changelogs.title'],
+    [MENU_SUB_ACCOUNTS, 'subaccounts.title'],
   ]
 
   handleClick = (e, nextTarget) => {

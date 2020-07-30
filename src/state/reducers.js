@@ -43,6 +43,7 @@ import timeRangeReducer from './timeRange/reducer'
 import tradedVolumeReducer from './tradedVolume/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
+import subAccountsReducer from './subAccounts/reducer'
 import symbolsReducer from './symbols/reducer'
 import syncReducer from './sync/reducer'
 import uiReducer from './ui/reducer'
@@ -110,6 +111,7 @@ const FRAMEWORK_REDUCERS = {
   feesReport: feesReportReducer,
   winLoss: winLossReducer,
   snapshots: snapshotsReducer,
+  subAccounts: subAccountsReducer,
   sync: syncReducer,
   taxReport: taxReportReducer,
 }

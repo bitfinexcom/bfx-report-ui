@@ -5,10 +5,11 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { updateErrorStatus } from 'state/status/actions'
 
 import types from './constants'
-import actions from './actions'
+import actions, { setSubAccounts } from './actions'
+
+const getReqFetchSubAccounts = () => makeFetchCall('verifyUser')
 
 const getReqAddSubAccount = (params) => {
   const { subAccountApiKeys } = params
@@ -23,13 +24,34 @@ const getReqRemoveSubAccount = (params) => {
   return makeFetchCall('removeSubAccount', subAccountApiKeys)
 }
 
+export function* getSubAccounts() {
+  try {
+    const { result, error } = yield call(getReqFetchSubAccounts)
+    yield put(setSubAccounts(result))
+
+    if (error) {
+      yield put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'subaccounts.title',
+        detail: JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(actions.fetchFail({
+      id: 'status.request.error',
+      topic: 'subaccounts.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
 export function* addSubAccount({ payload: subAccounts }) {
   try {
     yield call(getReqAddSubAccount, { subAccountApiKeys: subAccounts })
   } catch (fail) {
     yield put(actions.fetchFail({
       id: 'status.request.error',
-      topic: 'candles.title',
+      topic: 'subaccounts.title',
       detail: JSON.stringify(fail),
     }))
   }
@@ -41,17 +63,14 @@ export function* removeSubAccount({ payload: subAccounts }) {
   } catch (fail) {
     yield put(actions.fetchFail({
       id: 'status.request.error',
-      topic: 'candles.title',
+      topic: 'subaccounts.title',
       detail: JSON.stringify(fail),
     }))
   }
 }
 
-function* fetchCandlesFail({ payload }) {
-  yield put(updateErrorStatus(payload))
-}
-
 export default function* subAccountsSaga() {
-  yield takeLatest(types.FETCH, addSubAccount)
-  yield takeLatest(types.REFRESH, removeSubAccount)
+  yield takeLatest(types.FETCH, getSubAccounts)
+  yield takeLatest(types.ADD, addSubAccount)
+  yield takeLatest(types.REMOVE, removeSubAccount)
 }

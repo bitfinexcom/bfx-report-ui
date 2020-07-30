@@ -381,6 +381,14 @@
     "timeframe_update": "Time frame updated",
     "signUpFail": "Invalid API Key or Secret"
   },
+  "subaccounts": {
+    "title": "Sub Accounts",
+    "add": "Add Sub Account",
+    "api_key": "API Key",
+    "api_secret": "API Secret",
+    "password": "Password",
+    "current": "Current Sub Accounts"
+  },
   "symbols": {
     "title": "Get symbols"
   },

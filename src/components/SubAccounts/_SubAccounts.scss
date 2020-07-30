@@ -1,0 +1,43 @@
+.section-sub-accounts {
+  .subtitle {
+    margin-bottom: 15px;
+  }
+
+  &-current {
+
+  }
+
+  &-add {
+    width: 380px;
+
+    &-user {
+      margin-bottom: 20px;
+    }
+
+    &-select {
+      &.bitfinex-select {
+        .bp3-button {
+          width: 380px;
+        }
+      }
+
+      &-popover {
+        &.bitfinex-select-menu {
+          .bp3-popover-content {
+            width: 380px;
+          }
+        }
+      }
+    }
+
+    &-new {
+
+    }
+
+    &-confirm {
+      display: block;
+      margin-top: 30px;
+      margin-left: auto;
+    }
+  }
+}

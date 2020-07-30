@@ -1,18 +1,26 @@
 import authTypes from 'state/auth/constants'
+import _get from 'lodash/get'
 
 import types from './constants'
 
-export const initialState = []
+export const initialState = {
+  subUsers: [],
+}
 
-export function candlesReducer(state = initialState, action) {
+export function subAccountsReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
-    case types.SUB_ACCOUNTS_ADD:
+    case types.SET:
+      return {
+        ...state,
+        subUsers: _get(payload, 'subUsers', []),
+      }
+    case types.ADD:
       return [
         ...state,
         ...payload,
       ]
-    case types.SUB_ACCOUNTS_REMOVE:
+    case types.REMOVE:
       return state.filter(subAccount => subAccount.id !== payload)
     case authTypes.LOGOUT:
       return initialState
@@ -22,4 +30,4 @@ export function candlesReducer(state = initialState, action) {
   }
 }
 
-export default candlesReducer
+export default subAccountsReducer

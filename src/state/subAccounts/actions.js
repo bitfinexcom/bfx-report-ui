@@ -6,9 +6,16 @@ import types from './constants'
  */
 export function addSubAccounts(subAccounts) {
   return {
-    type: types.SUB_ACCOUNTS_ADD,
+    type: types.ADD,
     payload: subAccounts,
   }
+}
+
+/**
+ * Create an action to fetch sub accounts.
+ */
+export function fetchSubAccounts() {
+  return { type: types.FETCH }
 }
 
 /**
@@ -17,12 +24,25 @@ export function addSubAccounts(subAccounts) {
  */
 export function removeSubAccount(subAccount) {
   return {
-    type: types.SUB_ACCOUNTS_REMOVE,
+    type: types.REMOVE,
     payload: subAccount,
+  }
+}
+
+/**
+ * Create an action to set sub accounts data.
+ * @param {object} payload contains account data
+ */
+export function setSubAccounts(payload) {
+  return {
+    type: types.SET,
+    payload,
   }
 }
 
 export default {
   addSubAccounts,
+  fetchSubAccounts,
   removeSubAccount,
+  setSubAccounts,
 }
