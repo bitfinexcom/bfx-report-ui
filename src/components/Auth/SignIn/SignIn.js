@@ -54,7 +54,11 @@ class SignIn extends PureComponent {
   }
 
   onEmailChange = (email) => {
-    this.setState({ email })
+    const { authData: { email: preservedEmail, password } } = this.props
+    this.setState({
+      email,
+      password: email === preservedEmail ? password : undefined,
+    })
   }
 
   render() {
