@@ -11,11 +11,15 @@ import { propTypes, defaultProps } from './ColumnSelector.props'
 class ColumnSelector extends React.PureComponent {
   onColumnChange = (column) => {
     const { onChange } = this.props
-    const columnDataType = this.getColumnDataType(column)
+    const columnData = this.getColumnData(column)
+    const {
+      id, type, dataType, ...rest
+    } = columnData
 
     onChange({
-      column,
-      dataType: columnDataType,
+      ...rest,
+      column: id,
+      dataType: type,
     })
   }
 
@@ -25,11 +29,9 @@ class ColumnSelector extends React.PureComponent {
     return columns.filter(column => column.filter && (!column.frameworkOnly || platform.showFrameworkMode))
   }
 
-  getColumnDataType = (id) => {
+  getColumnData = (id) => {
     const columns = this.getSectionColumns()
-    const { type } = _find(columns, { id }) || {}
-
-    return type
+    return _find(columns, { id }) || {}
   }
 
   render() {

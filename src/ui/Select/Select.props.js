@@ -7,14 +7,14 @@ export const propTypes = {
   items: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.shape({
-      value: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       label: PropTypes.string.isRequired,
     }),
   ])).isRequired,
   onChange: PropTypes.func.isRequired,
   popoverClassName: PropTypes.string,
   t: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 }
 
 export const defaultProps = {

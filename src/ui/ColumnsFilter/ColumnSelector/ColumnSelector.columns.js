@@ -32,6 +32,9 @@ export const TRANSFORMS = {
   PERCENTAGE: 'percentage',
 }
 
+// TODO: add selectors for respective filters (e.g. side)
+export const FILTERS_SELECTOR = {}
+
 const LEDGERS_COLUMNS = [
   { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
   { id: 'description', name: 'description', type: STRING, filter: true },
@@ -48,9 +51,11 @@ const LEDGERS_COLUMNS = [
  * id: column id
  * name: translation keys `column.[name]`
  * type: column data type, used for filters
+ * select: type of select, used for filters
  * frameworkOnly: shown only in framework mode
  * filter: if column is filterable
  * hidden: if column is hidden by default
+ * filterOnly: if entry acts as a filter only, not being displayed
  */
 const SECTION_COLUMNS = {
   [MENU_LEDGERS]: LEDGERS_COLUMNS,

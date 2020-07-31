@@ -137,11 +137,14 @@ export const decodeFilters = ({ query, section }) => {
   return filterParams.map((param) => {
     const [column, val] = param.split('=')
     const [type, value] = val.split(',')
+    const filterData = _find(SECTION_COLUMNS[section], { id: column })
+    const { type: dataType, select } = filterData
 
     return {
       column,
       type: _findKey(FILTER_QUERY_TYPES, filterType => filterType === type),
-      dataType: _find(SECTION_COLUMNS[section], { id: column }).type,
+      dataType,
+      select,
       value: decodeURIComponent(value),
     }
   })

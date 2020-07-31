@@ -22,6 +22,7 @@ export const propTypes = {
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   removeTargetSymbol: PropTypes.func.isRequired,
+  setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   targetSymbols: PropTypes.arrayOf(PropTypes.string),
   timeOffset: PropTypes.string.isRequired,
