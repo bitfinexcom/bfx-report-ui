@@ -5,9 +5,10 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { updateErrorStatus } from 'state/status/actions'
 
 import types from './constants'
-import actions, { setSubAccounts } from './actions'
+import { setSubAccounts } from './actions'
 
 const getReqFetchSubAccounts = () => makeFetchCall('verifyUser')
 
@@ -30,14 +31,14 @@ export function* getSubAccounts() {
     yield put(setSubAccounts(result))
 
     if (error) {
-      yield put(actions.fetchFail({
+      yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'subaccounts.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
-    yield put(actions.fetchFail({
+    yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'subaccounts.title',
       detail: JSON.stringify(fail),
@@ -47,9 +48,23 @@ export function* getSubAccounts() {
 
 export function* addSubAccount({ payload: subAccounts }) {
   try {
-    yield call(getReqAddSubAccount, { subAccountApiKeys: subAccounts })
+    const { result, error } = yield call(getReqAddSubAccount, { subAccountApiKeys: subAccounts })
+    if (result) {
+      yield put({
+        type: types.ADD_SUCCESS,
+        payload: result,
+      })
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'subaccounts.title',
+        detail: JSON.stringify(error),
+      }))
+    }
   } catch (fail) {
-    yield put(actions.fetchFail({
+    yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'subaccounts.title',
       detail: JSON.stringify(fail),
@@ -59,9 +74,23 @@ export function* addSubAccount({ payload: subAccounts }) {
 
 export function* removeSubAccount({ payload: subAccounts }) {
   try {
-    yield call(getReqRemoveSubAccount, { subAccountApiKeys: subAccounts })
+    const { result, error } = yield call(getReqRemoveSubAccount, { subAccountApiKeys: subAccounts })
+    if (result) {
+      yield put({
+        type: types.REMOVE_SUCCESS,
+        payload: result,
+      })
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'subaccounts.title',
+        detail: JSON.stringify(error),
+      }))
+    }
   } catch (fail) {
-    yield put(actions.fetchFail({
+    yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'subaccounts.title',
       detail: JSON.stringify(fail),

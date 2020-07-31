@@ -15,12 +15,12 @@ export function subAccountsReducer(state = initialState, action) {
         ...state,
         subUsers: _get(payload, 'subUsers', []),
       }
-    case types.ADD:
-      return [
+    case types.ADD_SUCCESS:
+      return {
         ...state,
-        ...payload,
-      ]
-    case types.REMOVE:
+        subUsers: [...state.subUsers, payload],
+      }
+    case types.REMOVE_SUCCESS:
       return state.filter(subAccount => subAccount.id !== payload)
     case authTypes.LOGOUT:
       return initialState
