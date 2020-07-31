@@ -19,6 +19,7 @@ export const getAuthData = state => {
     hasAuthData,
     isNotProtected,
     isPersisted,
+    isSubAccount,
   } = getAuth(state)
 
   return {
@@ -31,6 +32,7 @@ export const getAuthData = state => {
     hasAuthData,
     isNotProtected,
     isPersisted,
+    isSubAccount,
   }
 }
 

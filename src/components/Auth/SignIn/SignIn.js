@@ -32,11 +32,13 @@ class SignIn extends PureComponent {
   }
 
   onSignIn = () => {
-    const { signIn } = this.props
+    const { authData: { isSubAccount }, signIn, users } = this.props
     const { email, password } = this.state
+    const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
     signIn({
       email,
       isNotProtected: !password,
+      isSubAccount: isCurrentUserHasSubAccount ? isSubAccount : false,
       password,
     })
   }
@@ -44,6 +46,11 @@ class SignIn extends PureComponent {
   togglePersistence = () => {
     const { authData: { isPersisted }, updateAuth } = this.props
     updateAuth({ isPersisted: !isPersisted })
+  }
+
+  toggleSubAccount = () => {
+    const { authData: { isSubAccount }, updateAuth } = this.props
+    updateAuth({ isSubAccount: !isSubAccount })
   }
 
   handleInputChange = (event) => {
@@ -63,7 +70,7 @@ class SignIn extends PureComponent {
 
   render() {
     const {
-      authData: { isPersisted },
+      authData: { isPersisted, isSubAccount },
       isElectronBackendLoaded,
       loading,
       switchMode,
@@ -75,6 +82,7 @@ class SignIn extends PureComponent {
     const { isNotProtected } = users.find(user => user.email === email) || {}
     const isSignInDisabled = !email || (REACT_APP_ELECTRON && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
+    const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
 
     return (
       <Dialog
@@ -89,7 +97,7 @@ class SignIn extends PureComponent {
           <PlatformLogo />
           <Select
             className='bitfinex-auth-email'
-            items={users.map(user => user.email)}
+            items={users.filter((user) => !user.isSubAccount).map(user => user.email)}
             onChange={this.onEmailChange}
             popoverClassName='bitfinex-auth-email-popover'
             value={email}
@@ -103,14 +111,26 @@ class SignIn extends PureComponent {
               onChange={this.handleInputChange}
             />
           )}
-          <Checkbox
-            className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
-            name='isPersisted'
-            checked={isPersisted}
-            onChange={this.togglePersistence}
-          >
-            {t('auth.rememberMe')}
-          </Checkbox>
+          <div className='bitfinex-auth-checkboxes'>
+            <Checkbox
+              className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
+              name='isPersisted'
+              checked={isPersisted}
+              onChange={this.togglePersistence}
+            >
+              {t('auth.rememberMe')}
+            </Checkbox>
+            {isCurrentUserHasSubAccount && (
+              <Checkbox
+                className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
+                name='isSubAccount'
+                checked={isSubAccount}
+                onChange={this.toggleSubAccount}
+              >
+                {t('auth.subAccount')}
+              </Checkbox>
+            )}
+          </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>

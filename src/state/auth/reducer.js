@@ -12,6 +12,7 @@ const getStoredAuth = () => {
     hasAuthData = Authenticator.hasData(),
     isPersisted = true,
     isNotProtected = true,
+    isSubAccount = false,
   } = auth
 
   return {
@@ -23,6 +24,7 @@ const getStoredAuth = () => {
     hasAuthData,
     isPersisted,
     isNotProtected,
+    isSubAccount,
   }
 }
 

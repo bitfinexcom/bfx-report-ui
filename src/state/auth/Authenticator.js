@@ -13,6 +13,7 @@ const PERSISTED_PARAMS_FRAMEWORK = [
   'email',
   'password',
   'isNotProtected',
+  'isSubAccount',
 ]
 
 class Authenticator {

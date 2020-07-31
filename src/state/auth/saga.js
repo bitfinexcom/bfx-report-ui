@@ -132,12 +132,14 @@ function* signIn({ payload }) {
     const {
       email,
       isNotProtected,
+      isSubAccount,
       password,
     } = payload
 
     const authParams = {
       email,
       password: isNotProtected ? undefined : password,
+      isSubAccount,
     }
     const { result, error } = yield call(makeFetchCall, 'signIn', null, authParams)
 
