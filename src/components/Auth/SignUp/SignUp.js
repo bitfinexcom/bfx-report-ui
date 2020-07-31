@@ -208,14 +208,16 @@ class SignUp extends PureComponent {
             >
               {t('auth.rememberMe')}
             </Checkbox>
-            <Checkbox
-              className='bitfinex-auth-remember-me'
-              name='isPasswordProtected'
-              checked={isPasswordProtected}
-              onChange={this.handleCheckboxChange}
-            >
-              {t('auth.passwordProtection')}
-            </Checkbox>
+            {platform.showFrameworkMode && (
+              <Checkbox
+                className='bitfinex-auth-remember-me'
+                name='isPasswordProtected'
+                checked={isPasswordProtected}
+                onChange={this.handleCheckboxChange}
+              >
+                {t('auth.passwordProtection')}
+              </Checkbox>
+            )}
           </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
