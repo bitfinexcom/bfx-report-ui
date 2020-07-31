@@ -46,6 +46,7 @@ export function selectAuth(state) {
     password,
     token,
     isNotProtected,
+    isSubAccount,
   } = getAuthData(state)
 
   if (!platform.showFrameworkMode) {
@@ -59,11 +60,18 @@ export function selectAuth(state) {
   }
 
   if (token) {
-    return { token }
+    return {
+      token,
+      isSubAccount: isSubAccount || undefined,
+    }
   }
 
   if (email && (isNotProtected || password)) {
-    return { email, password }
+    return {
+      email,
+      password,
+      isSubAccount: isSubAccount || undefined,
+    }
   }
   return {}
 }

@@ -13,9 +13,13 @@ export function addSubAccounts(subAccounts) {
 
 /**
  * Create an action to fetch sub accounts.
+ * @param {object} auth contains auth data for sub account
  */
-export function fetchSubAccounts() {
-  return { type: types.FETCH }
+export function fetchSubAccounts(auth) {
+  return {
+    type: types.FETCH,
+    payload: auth,
+  }
 }
 
 /**

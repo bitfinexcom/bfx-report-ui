@@ -1,27 +1,22 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import SectionHeader from 'ui/SectionHeader'
 
 import AddSubAccount from './AddSubAccount'
+import RemoveSubAccount from './RemoveSubAccount'
 import { propTypes, defaultProps } from './SubAccounts.props'
 
 class SubAccounts extends PureComponent {
-  constructor(props) {
-    super()
-
-    const { fetchSubAccounts } = props
-    fetchSubAccounts()
-  }
-
   render() {
     const {
       authData,
       subUsers,
       users,
-      t,
     } = this.props
+    const { email } = authData
+
+    const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
 
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
@@ -33,11 +28,11 @@ class SubAccounts extends PureComponent {
         <div className='section-sub-accounts'>
           {subUsers.length > 0 && (
             <div className='section-sub-accounts-current'>
-              <div className='subtitle'>{t('subaccounts.current')}</div>
-              {subUsers.map((account) => (<div>{account.email}</div>))}
+              {subUsers.map((account) => (<div key={account.email}>{account.email}</div>))}
             </div>
           )}
-          <AddSubAccount authData={authData} users={users} />
+          {hasSubAccount && <RemoveSubAccount authData={authData} />}
+          {!hasSubAccount && <AddSubAccount authData={authData} users={users} />}
         </div>
       </Card>
     )
@@ -47,4 +42,4 @@ class SubAccounts extends PureComponent {
 SubAccounts.propTypes = propTypes
 SubAccounts.defaultProps = defaultProps
 
-export default withTranslation('translations')(SubAccounts)
+export default SubAccounts

@@ -1,16 +1,18 @@
 import {
   call,
   put,
+  select,
   takeLatest,
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
+import { getAuthData } from 'state/auth/selectors'
 
 import types from './constants'
 import { setSubAccounts } from './actions'
 
-const getReqFetchSubAccounts = () => makeFetchCall('verifyUser')
+const getReqFetchSubAccounts = (auth) => makeFetchCall('verifyUser', null, { ...auth, isSubAccount: true })
 
 const getReqAddSubAccount = (params) => {
   const { subAccountApiKeys } = params
@@ -20,14 +22,11 @@ const getReqAddSubAccount = (params) => {
   })
 }
 
-const getReqRemoveSubAccount = (params) => {
-  const { subAccountApiKeys } = params
-  return makeFetchCall('removeSubAccount', subAccountApiKeys)
-}
+const getReqRemoveSubAccount = (auth) => makeFetchCall('removeUser', null, auth)
 
-export function* getSubAccounts() {
+export function* getSubAccounts({ payload: auth }) {
   try {
-    const { result, error } = yield call(getReqFetchSubAccounts)
+    const { result, error } = yield call(getReqFetchSubAccounts, auth)
     yield put(setSubAccounts(result))
 
     if (error) {
@@ -72,9 +71,14 @@ export function* addSubAccount({ payload: subAccounts }) {
   }
 }
 
-export function* removeSubAccount({ payload: subAccounts }) {
+export function* removeSubAccount() {
   try {
-    const { result, error } = yield call(getReqRemoveSubAccount, { subAccountApiKeys: subAccounts })
+    const { email, password } = yield select(getAuthData)
+    const { result, error } = yield call(getReqRemoveSubAccount, {
+      email,
+      password,
+      isSubAccount: true,
+    })
     if (result) {
       yield put({
         type: types.REMOVE_SUCCESS,

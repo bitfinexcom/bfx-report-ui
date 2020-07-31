@@ -12,9 +12,10 @@ import _isEmpty from 'lodash/isEmpty'
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-import { selectAuth } from 'state/auth/selectors'
+import { getUsers, selectAuth } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { fetchSubAccounts } from 'state/subAccounts/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { platform } from 'var/config'
 
@@ -145,6 +146,13 @@ function* signIn({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
+      if (!isSubAccount) {
+        const users = yield select(getUsers)
+        const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
+        if (hasSubAccount) {
+          yield put(fetchSubAccounts({ ...authParams, isSubAccount: true }))
+        }
+      }
       return
     }
 

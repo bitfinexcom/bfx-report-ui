@@ -388,7 +388,7 @@
     "api_key": "API Key",
     "api_secret": "API Secret",
     "password": "Password",
-    "current": "Current Sub Accounts"
+    "remove": "Remove Sub Account"
   },
   "symbols": {
     "title": "Get symbols"

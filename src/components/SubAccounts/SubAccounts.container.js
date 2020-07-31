@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { fetchSubAccounts, removeSubAccount } from 'state/subAccounts/actions'
 import { subUsers } from 'state/subAccounts/selectors'
 import { getAuthData, getUsers } from 'state/auth/selectors'
 
@@ -13,11 +12,6 @@ const mapStateToProps = state => ({
   users: getUsers(state),
 })
 
-const mapDispatchToProps = {
-  fetchSubAccounts,
-  removeSubAccount,
-}
-
-const SubAccountsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(SubAccounts))
+const SubAccountsContainer = withRouter(connect(mapStateToProps)(SubAccounts))
 
 export default SubAccountsContainer

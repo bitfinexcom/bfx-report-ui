@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 import { addSubAccounts } from 'state/subAccounts/actions'
 
@@ -9,6 +8,6 @@ const mapDispatchToProps = {
   addSubAccounts,
 }
 
-const AddSubAccountContainer = withRouter(connect(null, mapDispatchToProps)(AddSubAccount))
+const AddSubAccountContainer = connect(null, mapDispatchToProps)(AddSubAccount)
 
 export default AddSubAccountContainer
