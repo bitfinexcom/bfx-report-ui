@@ -48,6 +48,7 @@ export function ledgersReducer(state = initialState, action) {
         ...initialState,
         targetCategory: state.targetCategory,
         targetSymbols: state.targetSymbols,
+        existingCoins: state.existingCoins,
         ...payload,
       }
     case types.SET_SYMBOLS:
@@ -69,6 +70,7 @@ export function ledgersReducer(state = initialState, action) {
         ...initialState,
         targetCategory: state.targetCategory,
         targetSymbols: state.targetSymbols,
+        existingCoins: state.existingCoins,
       }
     case authTypes.LOGOUT:
       return initialState
