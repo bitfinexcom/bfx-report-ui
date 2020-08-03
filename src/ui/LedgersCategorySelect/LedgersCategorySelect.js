@@ -20,6 +20,7 @@ const getLedgersCategories = _memoize((t) => ([
   { value: 104, label: t('ledgers.categories.withdrawal') },
   { value: 105, label: t('ledgers.categories.cancelled_withdrawal') },
   { value: 201, label: t('ledgers.categories.trading_fee') },
+  { value: 202, label: t('ledgers.categories.trading_rebate') },
   { value: 204, label: t('ledgers.categories.hidden_order_fee') },
   { value: 207, label: t('ledgers.categories.otc_trade_fee') },
   { value: 222, label: t('ledgers.categories.swap_fee') },

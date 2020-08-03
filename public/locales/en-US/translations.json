@@ -240,6 +240,7 @@
       "withdrawal": "Withdrawal",
       "cancelled_withdrawal": "Cancelled withdrawal",
       "trading_fee": "Trading fee",
+      "trading_rebate": "Trading rebate",
       "hidden_order_fee": "Hidden order fee",
       "otc_trade_fee": "OTC trade fee",
       "swap_fee": "Swap fee",
