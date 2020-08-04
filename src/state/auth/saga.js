@@ -146,12 +146,10 @@ function* signIn({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
-      if (!isSubAccount) {
-        const users = yield select(getUsers)
-        const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
-        if (hasSubAccount) {
-          yield put(fetchSubAccounts({ ...authParams, isSubAccount: true }))
-        }
+      const users = yield select(getUsers)
+      const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
+      if (hasSubAccount) {
+        yield put(fetchSubAccounts({ ...authParams, isSubAccount: true }))
       }
       return
     }

@@ -7,14 +7,15 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
+import { logout } from 'state/auth/actions'
 import { getAuthData } from 'state/auth/selectors'
 
 import types from './constants'
-import { setSubAccounts } from './actions'
+import actions, { setSubAccounts } from './actions'
 
 const getReqFetchSubAccounts = (auth) => makeFetchCall('verifyUser', null, { ...auth, isSubAccount: true })
 
-const getReqAddSubAccount = (params) => {
+const getReqCreateSubAccount = (params) => {
   const { subAccountApiKeys } = params
 
   return makeFetchCall('createSubAccount', {
@@ -24,7 +25,7 @@ const getReqAddSubAccount = (params) => {
 
 const getReqRemoveSubAccount = (auth) => makeFetchCall('removeUser', null, auth)
 
-export function* getSubAccounts({ payload: auth }) {
+export function* fetchSubAccounts({ payload: auth }) {
   try {
     const { result, error } = yield call(getReqFetchSubAccounts, auth)
     yield put(setSubAccounts(result))
@@ -45,14 +46,17 @@ export function* getSubAccounts({ payload: auth }) {
   }
 }
 
-export function* addSubAccount({ payload: subAccounts }) {
+export function* createSubAccount({ payload: subAccounts }) {
   try {
-    const { result, error } = yield call(getReqAddSubAccount, { subAccountApiKeys: subAccounts })
+    const { result, error } = yield call(getReqCreateSubAccount, { subAccountApiKeys: subAccounts })
     if (result) {
       yield put({
         type: types.ADD_SUCCESS,
         payload: result,
       })
+      // TODO: get sub users data from server on sub account creation
+      const { email, password } = yield select(getAuthData)
+      yield put(actions.fetchSubAccounts({ email, password }))
     }
 
     if (error) {
@@ -73,7 +77,7 @@ export function* addSubAccount({ payload: subAccounts }) {
 
 export function* removeSubAccount() {
   try {
-    const { email, password } = yield select(getAuthData)
+    const { email, password, isSubAccount } = yield select(getAuthData)
     const { result, error } = yield call(getReqRemoveSubAccount, {
       email,
       password,
@@ -84,6 +88,9 @@ export function* removeSubAccount() {
         type: types.REMOVE_SUCCESS,
         payload: email,
       })
+      if (isSubAccount) {
+        yield put(logout())
+      }
     }
 
     if (error) {
@@ -103,7 +110,7 @@ export function* removeSubAccount() {
 }
 
 export default function* subAccountsSaga() {
-  yield takeLatest(types.FETCH, getSubAccounts)
-  yield takeLatest(types.ADD, addSubAccount)
+  yield takeLatest(types.FETCH, fetchSubAccounts)
+  yield takeLatest(types.ADD, createSubAccount)
   yield takeLatest(types.REMOVE, removeSubAccount)
 }
