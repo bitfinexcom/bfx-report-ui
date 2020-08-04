@@ -82,7 +82,7 @@ export function* removeSubAccount() {
     if (result) {
       yield put({
         type: types.REMOVE_SUCCESS,
-        payload: result,
+        payload: email,
       })
     }
 

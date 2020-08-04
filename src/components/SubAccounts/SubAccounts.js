@@ -3,7 +3,7 @@ import { Card, Elevation } from '@blueprintjs/core'
 
 import SectionHeader from 'ui/SectionHeader'
 
-import AddSubAccount from './AddSubAccount'
+import CreateSubAccount from './CreateSubAccount'
 import RemoveSubAccount from './RemoveSubAccount'
 import { propTypes, defaultProps } from './SubAccounts.props'
 
@@ -32,7 +32,7 @@ class SubAccounts extends PureComponent {
             </div>
           )}
           {hasSubAccount && <RemoveSubAccount authData={authData} />}
-          {!hasSubAccount && <AddSubAccount authData={authData} users={users} />}
+          {!hasSubAccount && <CreateSubAccount authData={authData} users={users} />}
         </div>
       </Card>
     )

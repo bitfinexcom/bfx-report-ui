@@ -383,8 +383,9 @@
     "signUpFail": "Invalid API Key or Secret"
   },
   "subaccounts": {
+    "add_account": "Add Account",
     "title": "Sub Accounts",
-    "add": "Add Sub Account",
+    "create": "Create Sub Account",
     "api_key": "API Key",
     "api_secret": "API Secret",
     "password": "Password",
