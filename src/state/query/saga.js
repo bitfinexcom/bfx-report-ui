@@ -21,7 +21,7 @@ import { getParams as getFeesReportParams } from 'state/feesReport/selectors'
 import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
 import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
 import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/selectors'
-import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
+import { getTargetSymbols as getLedgersSymbols, getTargetCategory as getLedgersCategory } from 'state/ledgers/selectors'
 import { getParams as getLoanReportParams } from 'state/loanReport/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
@@ -38,6 +38,7 @@ import { getTimestamp } from 'state/wallets/selectors'
 import { getTimeframe as getWinLossTimeframe } from 'state/winLoss/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import { toggleExportSuccessDialog } from 'state/ui/actions'
+import LEDGERS_CATEGORIES from 'var/ledgersCategories'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
 } from 'state/base/selectors'
@@ -267,7 +268,7 @@ function* getOptions({ target }) {
       break
     case MENU_AFFILIATES_EARNINGS:
       options.method = 'getLedgersCsv'
-      options.isAffiliateRebate = true
+      options.category = LEDGERS_CATEGORIES.AFFILIATE_REBATE
       break
     case MENU_CANDLES:
       options.method = 'getCandlesCsv'
@@ -289,7 +290,11 @@ function* getOptions({ target }) {
       break
     case MENU_FPAYMENT:
       options.method = 'getLedgersCsv'
-      options.isMarginFundingPayment = true
+      options.category = LEDGERS_CATEGORIES.FUNDING_PAYMENT
+      break
+    case MENU_LEDGERS:
+      options.method = 'getLedgersCsv'
+      options.category = yield select(getLedgersCategory)
       break
     case MENU_LOAN_REPORT:
       options.method = 'getPerformingLoanCsv'
@@ -305,7 +310,7 @@ function* getOptions({ target }) {
       break
     case MENU_SPAYMENTS:
       options.method = 'getLedgersCsv'
-      options.isStakingPayments = true
+      options.category = LEDGERS_CATEGORIES.STAKING_PAYMENT
       break
     case MENU_TICKERS:
       options.method = 'getTickersHistoryCsv'
@@ -349,7 +354,6 @@ function* getOptions({ target }) {
     case MENU_WIN_LOSS:
       options.method = 'getWinLossCsv'
       break
-    case MENU_LEDGERS:
     default:
       options.method = 'getLedgersCsv'
       break
