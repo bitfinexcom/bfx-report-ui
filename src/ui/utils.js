@@ -21,6 +21,25 @@ export const formatThousands = (value) => {
   return parts.join('.')
 }
 
+// formats a number to a specified fraction or a min fraction with a room to grow without rounding
+export const formatFraction = (value, options = {}) => {
+  if (!value) {
+    return value
+  }
+  const {
+    digits = 8,
+    minDigits = false,
+  } = options
+  if (minDigits) {
+    const fractionLength = value.toString().split('.')[1].length || 0
+    if (fractionLength < minDigits) {
+      return fixedFloat(value, minDigits)
+    }
+    return value
+  }
+  return fixedFloat(value, digits)
+}
+
 export const formatAmount = (val, options = {}) => {
   if (!val) {
     return (
@@ -34,6 +53,7 @@ export const formatAmount = (val, options = {}) => {
   const {
     color,
     digits = 8,
+    minDigits = false,
     fixFraction = true,
     formatThousands: shouldFormatThousands = false,
     dollarSign = false,
@@ -45,14 +65,14 @@ export const formatAmount = (val, options = {}) => {
   })
 
   if (fixFraction) {
-    val = val.toFixed(digits) // eslint-disable-line no-param-reassign
+    val = formatFraction(val, { digits, minDigits }) // eslint-disable-line no-param-reassign
   }
 
   if (shouldFormatThousands) {
     val = formatThousands(val) // eslint-disable-line no-param-reassign
   }
 
-  const [integer, fraction] = val.split('.')
+  const [integer, fraction] = val.toString().split('.')
 
   return (
     <Fragment>
@@ -72,6 +92,7 @@ export default {
   fixedFloat,
   insertIf,
   formatAmount,
+  formatFraction,
   formatThousands,
   amountStyle,
   filterSelectorItem,
