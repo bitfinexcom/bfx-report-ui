@@ -91,7 +91,7 @@ class NavMenu extends PureComponent {
     [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
     [MENU_LOGINS, 'logins.title'],
     [MENU_CHANGE_LOGS, 'changelogs.title'],
-    [MENU_SUB_ACCOUNTS, 'subaccounts.title'],
+    [MENU_SUB_ACCOUNTS, 'subaccounts.title', !showFrameworkMode],
   ]
 
   handleClick = (e, nextTarget) => {
