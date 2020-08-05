@@ -4,14 +4,14 @@ import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
-import { fixedFloat, formatAmount } from 'ui/utils'
+import { formatAmount, formatFraction } from 'ui/utils'
 
 const getColor = val => (val > 0 ? 'red' : 'green')
 
 const getColumns = (props) => {
   const { makerFee, takerFee } = props
-  const formattedMakerFee = `${fixedFloat(makerFee * 100, 2)}%`
-  const formattedTakerFee = `${fixedFloat(takerFee * 100, 2)}%`
+  const formattedMakerFee = `${formatFraction(makerFee * 100, { minDigits: 2 })}%`
+  const formattedTakerFee = `${formatFraction(takerFee * 100, { minDigits: 2 })}%`
 
   return [
     {
@@ -20,7 +20,7 @@ const getColumns = (props) => {
       width: 100,
       renderer: () => (
         <Cell tooltip={formattedMakerFee}>
-          {formatAmount(makerFee * 100, { color: getColor(makerFee), digits: 2 })}
+          {formatAmount(makerFee * 100, { color: getColor(makerFee), minDigits: 2 })}
           %
         </Cell>
       ),
@@ -32,7 +32,7 @@ const getColumns = (props) => {
       width: 100,
       renderer: () => (
         <Cell tooltip={formattedTakerFee}>
-          {formatAmount(takerFee * 100, { color: getColor(takerFee), digits: 2 })}
+          {formatAmount(takerFee * 100, { color: getColor(takerFee), minDigits: 2 })}
           %
         </Cell>
       ),
