@@ -7,6 +7,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
+import _isString from 'lodash/isString'
 
 import ColumnsSelect from 'ui/ColumnsSelect'
 import Icon from 'icons'
@@ -19,7 +20,8 @@ import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
 import FilterTypeSelector from './FilterTypeSelector'
 import { propTypes, defaultProps } from './ColumnsFilter.props'
-// import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
+import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
+import SideSelector from './Selectors/SideSelector'
 
 const MAX_FILTERS = 7
 
@@ -63,7 +65,9 @@ class ColumnsFilter extends PureComponent {
 
     const trimmedFilters = filters.map(filter => ({
       ...filter,
-      value: filter.value.trim(),
+      value: _isString(filter.value)
+        ? filter.value.trim()
+        : filter.value,
     }))
 
     this.toggleDialog()
@@ -163,7 +167,6 @@ class ColumnsFilter extends PureComponent {
     return currentValidFilters.length !== nextValidFilters.length || hasFilterValueChanged
   }
 
-  // TODO: add selectors for respective filters (e.g. side)
   renderSelect = ({ filter, index }) => {
     const { select, value } = filter
     // eslint-disable-next-line no-unused-vars
@@ -174,6 +177,8 @@ class ColumnsFilter extends PureComponent {
     }
 
     switch (select) {
+      case FILTERS_SELECTOR.SIDE:
+        return <SideSelector {...selectProps} />
       default:
         return null
     }

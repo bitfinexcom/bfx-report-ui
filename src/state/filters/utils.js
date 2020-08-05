@@ -145,7 +145,7 @@ export const decodeFilters = ({ query, section }) => {
       type: _findKey(FILTER_QUERY_TYPES, filterType => filterType === type),
       dataType,
       select,
-      value: decodeURIComponent(value),
+      value: getValue({ dataType, value: decodeURIComponent(value) }),
     }
   })
 }
