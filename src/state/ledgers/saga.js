@@ -84,6 +84,6 @@ function* fetchLedgersFail({ payload }) {
 
 export default function* ledgersSaga() {
   yield takeLatest(types.FETCH_LEDGERS, fetchLedgers)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshLedgers)
+  yield takeLatest([types.REFRESH, types.SET_PARAMS, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshLedgers)
   yield takeLatest(types.FETCH_FAIL, fetchLedgersFail)
 }
