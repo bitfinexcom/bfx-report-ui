@@ -29,7 +29,7 @@ class Authenticator {
 
   set = (data) => {
     const auth = this.getStored()
-    const { isPersisted } = data
+    const { apiKey, apiSecret, isPersisted } = data
 
     if (!isPersisted) {
       this.persist({
@@ -39,12 +39,18 @@ class Authenticator {
     }
 
     const persistedParams = platform.showFrameworkMode ? PERSISTED_PARAMS_FRAMEWORK : PERSISTED_PARAMS_WEB
-
-    this.persist({
+    const persistedData = {
       ...auth,
       isPersisted: true,
       ..._pick(data, persistedParams),
-    })
+    }
+
+    // remove auth token after successful auth with apiKey and apiSecret
+    if (!platform.showFrameworkMode && apiKey && apiSecret) {
+      persistedData.authToken = ''
+    }
+
+    this.persist(persistedData)
   }
 }
 
