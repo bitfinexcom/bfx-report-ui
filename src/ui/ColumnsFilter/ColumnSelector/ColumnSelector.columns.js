@@ -32,8 +32,9 @@ export const TRANSFORMS = {
   PERCENTAGE: 'percentage',
 }
 
-// TODO: add selectors for respective filters (e.g. side)
-export const FILTERS_SELECTOR = {}
+export const FILTERS_SELECTOR = {
+  SIDE: 'side',
+}
 
 const LEDGERS_COLUMNS = [
   { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
@@ -125,7 +126,7 @@ const SECTION_COLUMNS = {
   [MENU_FLOAN]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'symbol', name: 'currency' },
-    { id: 'side', name: 'side', type: INTEGER },
+    { id: 'side', name: 'side', type: INTEGER, select: FILTERS_SELECTOR.SIDE, filter: true },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
@@ -139,7 +140,7 @@ const SECTION_COLUMNS = {
   [MENU_FCREDIT]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'symbol', name: 'currency' },
-    { id: 'side', name: 'side', type: INTEGER },
+    { id: 'side', name: 'side', type: INTEGER, select: FILTERS_SELECTOR.SIDE, filter: true },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'type', name: 'type', type: STRING, filter: true },
