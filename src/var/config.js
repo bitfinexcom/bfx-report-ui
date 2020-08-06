@@ -3,7 +3,7 @@ const platforms = {
   bitfinex: {
     API_URL: 'https://report.bitfinex.com/api',
     KEY_URL: 'https://www.bitfinex.com/api',
-    HOME_URL: 'https://www.bitfinex.com',
+    HOME_URL: 'https://www.bitfinex.com/t',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: false,
     showAuthPage: false,
