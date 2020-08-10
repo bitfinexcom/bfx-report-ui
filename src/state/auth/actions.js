@@ -30,6 +30,17 @@ export function fetchUsers() {
 }
 
 /**
+ * Create an action to recover password.
+ * @param {array} payload new auth data
+ */
+export function recoverPassword(payload) {
+  return {
+    type: types.RECOVER_PASSWORD,
+    payload,
+  }
+}
+
+/**
  * Create an action to set users data.
  * @param {array} payload users data
  */
@@ -127,6 +138,7 @@ export default {
   addUser,
   fetchUsers,
   logout,
+  recoverPassword,
   setUsers,
   signIn,
   signUp,

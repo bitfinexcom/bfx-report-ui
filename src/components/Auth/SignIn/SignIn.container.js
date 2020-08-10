@@ -4,7 +4,7 @@ import { signIn, updateAuth } from 'state/auth/actions'
 import { getAuthData, getIsLoading, getUsers } from 'state/auth/selectors'
 import { getIsElectronBackendLoaded } from 'state/ui/selectors'
 
-import SignUp from './SignIn'
+import SignIn from './SignIn'
 
 const mapStateToProps = state => ({
   authData: getAuthData(state),
@@ -18,6 +18,6 @@ const mapDispatchToProps = {
   updateAuth,
 }
 
-const SignInContainer = connect(mapStateToProps, mapDispatchToProps)(SignUp)
+const SignInContainer = connect(mapStateToProps, mapDispatchToProps)(SignIn)
 
 export default SignInContainer

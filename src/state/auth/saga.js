@@ -34,6 +34,18 @@ function* onAuthSuccess(result) {
     yield put(fetchSymbols())
 
     if (platform.showFrameworkMode) {
+      const users = yield select(getUsers)
+      const { email, isNotProtected, password } = result
+      const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
+      if (hasSubAccount) {
+        const authParams = {
+          email,
+          password: isNotProtected ? undefined : password,
+          isSubAccount: true,
+        }
+        yield put(fetchSubAccounts(authParams))
+      }
+
       if (!WS.isConnected) {
         WS.connect()
 
@@ -146,11 +158,6 @@ function* signIn({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
-      const users = yield select(getUsers)
-      const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
-      if (hasSubAccount) {
-        yield put(fetchSubAccounts({ ...authParams, isSubAccount: true }))
-      }
       return
     }
 
@@ -209,9 +216,45 @@ function* checkAuth() {
   }
 }
 
+function* recoverPassword({ payload }) {
+  try {
+    const {
+      apiKey,
+      apiSecret,
+      password,
+      isNotProtected,
+    } = payload
+    const newPassword = isNotProtected ? undefined : password
+    const { result, error } = yield call(makeFetchCall, 'recoverPassword', null, {
+      apiKey,
+      apiSecret,
+      newPassword,
+      isSubAccount: false,
+      isNotProtected,
+    })
+
+    if (result) {
+      yield call(onAuthSuccess, { ...payload, ...result })
+    }
+
+    yield put(actions.updateAuthStatus())
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.auth',
+        detail: JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.FETCH_USERS, fetchUsers)
+  yield takeLatest(types.RECOVER_PASSWORD, recoverPassword)
   yield takeLatest(types.SIGN_UP, signUp)
   yield takeLatest(types.SIGN_IN, signIn)
 }

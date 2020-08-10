@@ -67,6 +67,7 @@ export function authReducer(state = initialState, action) {
       }
     case types.SIGN_UP:
     case types.SIGN_IN:
+    case types.RECOVER_PASSWORD:
       return {
         ...state,
         loading: true,
