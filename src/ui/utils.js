@@ -88,10 +88,24 @@ export const formatAmount = (val, options = {}) => {
   )
 }
 
+export const formatColor = (value, color) => {
+  const classes = classNames({
+    'bitfinex-green-text': color === 'green',
+    'bitfinex-red-text': color === 'red',
+  })
+
+  return (
+    <div className={classes}>
+      {value}
+    </div>
+  )
+}
+
 export default {
   fixedFloat,
   insertIf,
   formatAmount,
+  formatColor,
   formatFraction,
   formatThousands,
   amountStyle,
