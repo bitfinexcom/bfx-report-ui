@@ -7,7 +7,6 @@ import types from './constants'
 const initialState = {
   dateFormat: types.DATE_FORMATS[0],
   locale: 'en',
-  queryLimit: 0,
   theme: types.DEFAULT_THEME,
   timezone: types.DEFAULT_TIMEZONE,
   inputTimezone: moment.tz.guess(),
@@ -52,11 +51,6 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         tableScroll: !state.tableScroll,
-      }
-    case types.SET_QUERY_LIMIT:
-      return {
-        ...state,
-        queryLimit: payload,
       }
     default:
       return state
