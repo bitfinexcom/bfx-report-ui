@@ -21,6 +21,7 @@ class FilterTypeSelector extends React.PureComponent {
 
   render() {
     const { value, dataType, t } = this.props
+
     const stringTypes = (dataType === STRING)
       ? [
         { value: FILTERS.CONTAINS, label: t('columnsfilter.filters.contains') },

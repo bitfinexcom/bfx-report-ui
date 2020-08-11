@@ -224,7 +224,7 @@ class ColumnsFilter extends PureComponent {
                     <ColumnSelector
                       section={target}
                       value={column}
-                      onChange={(column) => this.onColumnChange({ index, ...column, dataType })}
+                      onChange={(column) => this.onColumnChange({ index, ...column })}
                     />
                     <FilterTypeSelector
                       value={type}
