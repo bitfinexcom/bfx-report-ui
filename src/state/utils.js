@@ -78,6 +78,10 @@ export function makeFetchCall(method, params = undefined, auth = getAuthFromStor
 
 export const formatAuthDate = mts => moment(mts).format('M/D/YYYY, h:mm:ss A')
 
+export const dispatchAction = (action) => {
+  store.dispatch(action)
+}
+
 /**
  * Format time.
  * @param {number} mts timestamp
