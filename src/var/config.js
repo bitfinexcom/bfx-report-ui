@@ -14,7 +14,7 @@ const platforms = {
     API_URL: 'https://bfx-report-ui.staging.bitfinex.com/api',
     KEY_URL: 'https://test.bitfinex.com/api',
     HOME_URL: 'https://test.bitfinex.com',
-    MAIN_API_URL: 'https://api.bitfinex.com',
+    MAIN_API_URL: 'https://api.staging.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: false,
     showAuthPage: true,
