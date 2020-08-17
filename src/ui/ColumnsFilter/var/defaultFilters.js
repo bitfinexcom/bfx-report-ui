@@ -103,9 +103,8 @@ const DEFAULT_FILTERS = {
     EMPTY_FILTER,
   ],
   [MENU_LOGINS]: [
-    { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
-    { column: 'browser', type: CONTAINS, dataType: STRING, value: '' },
-    { column: 'version', type: CONTAINS, dataType: STRING, value: '' },
+    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
+    { column: 'ip', type: CONTAINS, dataType: STRING, value: '' },
   ],
   [MENU_CHANGE_LOGS]: [
     { column: 'log', type: CONTAINS, dataType: STRING, value: '' },
@@ -157,7 +156,7 @@ const DEFAULT_FILTERS_MIN = {
     { column: 'price', type: GREATER_THAN, dataType: NUMBER, value: '' },
   ],
   [MENU_LOGINS]: [
-    { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
+    { column: 'ip', type: CONTAINS, dataType: STRING, value: '' },
   ],
   [MENU_CHANGE_LOGS]: [
     { column: 'log', type: CONTAINS, dataType: STRING, value: '' },

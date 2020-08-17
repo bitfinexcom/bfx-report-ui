@@ -4,8 +4,8 @@ import {
   TruncatedFormat,
 } from '@blueprintjs/table'
 
-import { getSideMsg } from 'state/utils'
-import { formatAmount, fixedFloat } from 'ui/utils'
+import { getSideMsg, getSideColor } from 'state/utils'
+import { formatAmount, formatColor, fixedFloat } from 'ui/utils'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
@@ -50,10 +50,11 @@ export default function getColumns(props) {
       name: 'column.side',
       width: 90,
       renderer: (rowIndex) => {
-        const side = t(`floan.side.${getSideMsg(filteredData[rowIndex].side)}`)
+        const { side } = filteredData[rowIndex]
+        const formattedSide = t(`floan.side.${getSideMsg(side)}`)
         return (
-          <Cell tooltip={side}>
-            {side}
+          <Cell tooltip={formattedSide}>
+            {formatColor(formattedSide, getSideColor(side))}
           </Cell>
         )
       },

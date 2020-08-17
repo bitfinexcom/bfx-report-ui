@@ -13,6 +13,7 @@ const {
 } = constants
 
 export const getTimeRange = state => state.timeRange
+export const getIsTimeRangePreserved = state => getTimeRange(state).isTimeRangePreserved
 
 const makeDate = (action) => {
   const returnVal = new Date()
@@ -91,6 +92,7 @@ export const getTimeFrame = (state, smallestMts = 0) => {
 }
 
 export default {
+  getIsTimeRangePreserved,
   getTimeRange,
   getTimeFrame,
   getTimeFrameFromData,

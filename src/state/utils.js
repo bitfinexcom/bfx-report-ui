@@ -374,6 +374,18 @@ export function getSideMsg(side) {
   }
 }
 
+export const getSideColor = (side) => {
+  switch (side) {
+    case 1:
+      return 'green'
+    case -1:
+      return 'red'
+    case 0:
+    default:
+      return null
+  }
+}
+
 export function getParsedUrlParams(searchUrl) {
   return queryString.parse(searchUrl)
 }
@@ -472,6 +484,7 @@ export default {
   getLastMonth,
   getParsedUrlParams,
   getSideMsg,
+  getSideColor,
   generateUrl,
   isValidTimezone,
   isValidateType,

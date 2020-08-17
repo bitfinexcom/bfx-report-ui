@@ -320,6 +320,7 @@
     "dateformat": "Date Format",
     "milliseconds": "Display Milliseconds",
     "table_scroll": "Table Scroll",
+    "preserve_timeframe": "Preserve Timeframe",
     "sync": {
       "add-filter": "Add Filter",
       "add-pair": "Add Pair",
