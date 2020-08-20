@@ -389,7 +389,8 @@
     "api_key": "API Key",
     "api_secret": "API Secret",
     "password": "Password",
-    "remove": "Remove Sub Account"
+    "remove": "Remove Sub Account",
+    "login": "Login To Sub Account"
   },
   "symbols": {
     "title": "Get symbols"

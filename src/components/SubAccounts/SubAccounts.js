@@ -5,6 +5,7 @@ import SectionHeader from 'ui/SectionHeader'
 
 import CreateSubAccount from './CreateSubAccount'
 import RemoveSubAccount from './RemoveSubAccount'
+import SubAccountLogin from './SubAccountLogin'
 import { propTypes, defaultProps } from './SubAccounts.props'
 
 class SubAccounts extends PureComponent {
@@ -14,7 +15,7 @@ class SubAccounts extends PureComponent {
       subUsers,
       users,
     } = this.props
-    const { email } = authData
+    const { email, isSubAccount } = authData
 
     const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
 
@@ -32,6 +33,7 @@ class SubAccounts extends PureComponent {
             </div>
           )}
           {hasSubAccount && <RemoveSubAccount authData={authData} />}
+          {hasSubAccount && !isSubAccount && <SubAccountLogin authData={authData} />}
           {!hasSubAccount && <CreateSubAccount authData={authData} users={users} />}
         </div>
       </Card>
