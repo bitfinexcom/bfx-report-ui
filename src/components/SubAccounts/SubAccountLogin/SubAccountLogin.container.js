@@ -2,13 +2,13 @@ import { connect } from 'react-redux'
 
 import { logout, signIn } from 'state/auth/actions'
 
-import RemoveSubAccount from './SubAccountLogin'
+import SubAccountLogin from './SubAccountLogin'
 
 const mapDispatchToProps = {
   logout,
   signIn,
 }
 
-const SubAccountLoginContainer = connect(null, mapDispatchToProps)(RemoveSubAccount)
+const SubAccountLoginContainer = connect(null, mapDispatchToProps)(SubAccountLogin)
 
 export default SubAccountLoginContainer
