@@ -65,6 +65,15 @@
     justify-content: space-between;
   }
 
+  &-sign-in {
+    &-checkboxes {
+      .bp3-checkbox {
+        display: inline-block;
+        width: 50%;
+      }
+    }
+  }
+
   &-remember-me {
     &.bp3-checkbox {
       line-height: 30px;

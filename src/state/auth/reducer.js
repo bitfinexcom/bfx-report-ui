@@ -1,3 +1,5 @@
+import subAccountsTypes from 'state/subAccounts/constants'
+
 import Authenticator from './Authenticator'
 import types from './constants'
 
@@ -12,6 +14,7 @@ const getStoredAuth = () => {
     hasAuthData = Authenticator.hasData(),
     isPersisted = true,
     isNotProtected = true,
+    isSubAccount = false,
   } = auth
 
   return {
@@ -23,6 +26,7 @@ const getStoredAuth = () => {
     hasAuthData,
     isPersisted,
     isNotProtected,
+    isSubAccount,
   }
 }
 
@@ -45,9 +49,15 @@ export function authReducer(state = initialState, action) {
         usersLoading: true,
       }
     case types.ADD_USER:
+    case subAccountsTypes.ADD_SUCCESS:
       return {
         ...state,
         users: [...state.users, payload],
+      }
+    case subAccountsTypes.REMOVE_SUCCESS:
+      return {
+        ...state,
+        users: state.users.filter((user) => !(user.isSubAccount && user.email === payload)),
       }
     case types.SET_USERS:
       return {
