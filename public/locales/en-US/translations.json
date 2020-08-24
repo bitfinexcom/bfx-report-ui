@@ -72,6 +72,8 @@
     "bid": "Bid",
     "browser": "Browser",
     "category": "Category",
+    "clampMax": "Clamp Max",
+    "clampMin": "Clamp Min",
     "closed": "Closed",
     "collateral": "Collateral",
     "created": "Created",

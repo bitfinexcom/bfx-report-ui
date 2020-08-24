@@ -29,6 +29,8 @@ export function derivativesReducer(state = initialState, action) {
       const { data: { res } } = payload
       const entries = res.map((entry) => {
         const {
+          clampMin,
+          clampMax,
           key,
           timestamp,
           price,
@@ -39,6 +41,8 @@ export function derivativesReducer(state = initialState, action) {
         } = entry
 
         return {
+          clampMin,
+          clampMax,
           pair: mapPair(formatPair(key)),
           timestamp,
           price,
