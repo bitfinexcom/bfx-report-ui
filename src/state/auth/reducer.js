@@ -49,11 +49,6 @@ export function authReducer(state = initialState, action) {
         usersLoading: true,
       }
     case types.ADD_USER:
-    case subAccountsTypes.ADD_SUCCESS:
-      return {
-        ...state,
-        users: [...state.users, payload],
-      }
     case subAccountsTypes.REMOVE_SUCCESS:
       return {
         ...state,

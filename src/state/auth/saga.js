@@ -12,10 +12,9 @@ import _isEmpty from 'lodash/isEmpty'
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-import { getUsers, selectAuth } from 'state/auth/selectors'
+import { selectAuth } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
-import { fetchSubAccounts } from 'state/subAccounts/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { platform } from 'var/config'
 
@@ -34,18 +33,6 @@ function* onAuthSuccess(result) {
     yield put(fetchSymbols())
 
     if (platform.showFrameworkMode) {
-      const users = yield select(getUsers)
-      const { email, isNotProtected, password } = result
-      const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
-      if (hasSubAccount) {
-        const authParams = {
-          email,
-          password: isNotProtected ? undefined : password,
-          isSubAccount: true,
-        }
-        yield put(fetchSubAccounts(authParams))
-      }
-
       if (!WS.isConnected) {
         WS.connect()
 

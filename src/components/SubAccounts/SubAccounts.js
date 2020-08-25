@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Card, Elevation } from '@blueprintjs/core'
+import _get from 'lodash/get'
 
 import SectionHeader from 'ui/SectionHeader'
 
@@ -12,10 +13,11 @@ class SubAccounts extends PureComponent {
   render() {
     const {
       authData,
-      subUsers,
       users,
     } = this.props
     const { email, isSubAccount } = authData
+    const subAccountData = users.find((user) => user.email === email && user.isSubAccount)
+    const subUsers = _get(subAccountData, 'subUsers', [])
 
     const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
 
