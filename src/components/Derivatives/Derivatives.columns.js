@@ -135,5 +135,39 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => getFullTime(filteredData[rowIndex].timestamp),
     },
+    {
+      id: 'clampMin',
+      name: 'column.clampMin',
+      width: 155,
+      renderer: (rowIndex) => {
+        const { clampMin } = filteredData[rowIndex]
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={clampMin}
+          >
+            {clampMin}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].clampMin,
+    },
+    {
+      id: 'clampMax',
+      name: 'column.clampMax',
+      width: 155,
+      renderer: (rowIndex) => {
+        const { clampMax } = filteredData[rowIndex]
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={clampMax}
+          >
+            {clampMax}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].clampMax,
+    },
   ]
 }

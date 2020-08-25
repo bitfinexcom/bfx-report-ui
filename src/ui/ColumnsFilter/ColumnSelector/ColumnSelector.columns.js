@@ -189,6 +189,8 @@ const SECTION_COLUMNS = {
     { id: 'fundingAccrued', name: 'fundingAccrued', type: NUMBER, filter: true },
     { id: 'fundingStep', name: 'fundingStep', type: NUMBER, filter: true },
     { id: 'mts', name: 'updated' },
+    { id: 'clampMin', name: 'clampMin', type: NUMBER, filter: true },
+    { id: 'clampMax', name: 'clampMax', type: NUMBER, filter: true },
   ],
 
   [MENU_LOGINS]: [
