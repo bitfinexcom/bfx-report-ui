@@ -222,6 +222,7 @@ function* recoverPassword({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
+      return
     }
 
     yield put(actions.updateAuthStatus())
