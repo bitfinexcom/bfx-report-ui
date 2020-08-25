@@ -15,7 +15,6 @@ import '@blueprintjs/select/lib/css/blueprint-select.css'
 import '@blueprintjs/timezone/lib/css/blueprint-timezone.css'
 
 import { persistor, store } from 'state/store'
-import { platform } from 'var/config'
 import { uiLoaded, uiResized } from 'state/ui/actions'
 import 'styles/index.scss'
 
@@ -34,8 +33,6 @@ ReactDOM.render(
 window.addEventListener('load', () => {
   store.dispatch(uiLoaded())
 
-  // eslint-disable-next-line no-console
-  console.log(`platform: ${platform.name}`)
   // eslint-disable-next-line no-console
   console.log(`UI v.${version}`)
 })
