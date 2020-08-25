@@ -32,15 +32,15 @@ class Auth extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { users, usersLoading } = this.props
-    if (platform.showFrameworkMode && prevProps.usersLoading && !usersLoading && users.length) {
+    const { isUsersLoaded, users } = this.props
+    if (platform.showFrameworkMode && !prevProps.isUsersLoaded && isUsersLoaded && users.length) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ mode: MODES.SIGN_IN })
     }
   }
 
   switchMode = (mode) => {
-    this.setState(() => ({ mode }))
+    this.setState({ mode })
   }
 
   render() {

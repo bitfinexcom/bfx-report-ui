@@ -5,9 +5,9 @@ export const propTypes = {
     hasAuthData: PropTypes.bool.isRequired,
   }).isRequired,
   isShown: PropTypes.bool.isRequired,
+  isUsersLoaded: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   users: PropTypes.array.isRequired,
-  usersLoading: PropTypes.bool.isRequired,
 }
 
 export const defaultProps = {}

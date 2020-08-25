@@ -32,6 +32,28 @@ class SignIn extends PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const {
+      authData: { email },
+      users,
+      isUsersLoaded,
+      switchMode,
+    } = this.props
+
+    if (!prevProps.isUsersLoaded && isUsersLoaded) {
+      if (users.length) {
+        const { email: firstUserEmail } = users[0] || {}
+
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({
+          email: email || firstUserEmail,
+        })
+      } else {
+        switchMode(MODES.SIGN_UP)
+      }
+    }
+  }
+
   onSignIn = () => {
     const { authData: { isSubAccount }, signIn, users } = this.props
     const { email, password } = this.state

@@ -174,7 +174,12 @@ function* fetchUsers() {
     const { result } = yield call(makeFetchCall, 'getUsers')
 
     if (result) {
+      const auth = yield select(selectAuth)
+
       yield put(actions.setUsers(result))
+      if (!result.length && !_isEmpty(auth)) {
+        yield put(actions.clearAuth())
+      }
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))

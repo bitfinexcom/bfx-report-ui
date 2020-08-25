@@ -123,6 +123,15 @@ export function updateAuth(payload) {
 }
 
 /**
+ * Create an action to clear auth data.
+ */
+export function clearAuth() {
+  return {
+    type: types.CLEAR_AUTH,
+  }
+}
+
+/**
  * Create an action to update auth status.
  * @param {boolean} result auth status
  */
@@ -146,5 +155,6 @@ export default {
   hideAuth,
   authSuccess,
   updateAuth,
+  clearAuth,
   updateAuthStatus,
 }

@@ -7,6 +7,7 @@ export const getIsShown = state => getAuth(state).isShown
 export const getIsLoading = state => getAuth(state).loading
 export const getEmail = state => getAuth(state).email
 export const getUsers = state => getAuth(state).users
+export const getUsersLoaded = state => getAuth(state).usersLoaded
 export const getUsersLoading = state => getAuth(state).usersLoading
 export const getAuthData = state => {
   const {
@@ -82,6 +83,7 @@ export default {
   getIsLoading,
   getIsShown,
   getUsers,
+  getUsersLoaded,
   getUsersLoading,
   selectAuth,
 }
