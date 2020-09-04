@@ -3,25 +3,22 @@ import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
   Button,
-  Callout,
   Checkbox,
   Classes,
   Dialog,
   Intent,
 } from '@blueprintjs/core'
 import Icon from 'icons'
-import PlatformLogo from 'ui/PlatformLogo'
 import { platform } from 'var/config'
 
-import { propTypes, defaultProps } from './SignUp.props'
+import { propTypes, defaultProps } from './PasswordRecovery.props'
 import InputKey from '../InputKey'
 import ErrorLabel from '../ErrorLabel'
 import { MODES } from '../Auth'
 
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
 
-// handles framework sign up and online version login
-class SignUp extends PureComponent {
+class PasswordRecovery extends PureComponent {
   static propTypes = propTypes
 
   static defaultProps = defaultProps
@@ -29,10 +26,11 @@ class SignUp extends PureComponent {
   constructor(props) {
     super()
 
-    const { authData: { apiKey, apiSecret, isPersisted } } = props
+    const { authData: { isPersisted } } = props
+
     this.state = {
-      apiKey,
-      apiSecret,
+      apiKey: '',
+      apiSecret: '',
       password: '',
       passwordRepeat: '',
       isBeingValidated: false,
@@ -43,8 +41,8 @@ class SignUp extends PureComponent {
     }
   }
 
-  onSignUp = () => {
-    const { signUp } = this.props
+  onPasswordRecovery = () => {
+    const { recoverPassword } = this.props
     const {
       apiKey,
       apiSecret,
@@ -58,7 +56,7 @@ class SignUp extends PureComponent {
     const isValid = this.validateForm()
 
     if (isValid) {
-      signUp({
+      recoverPassword({
         apiKey,
         apiSecret,
         password,
@@ -66,6 +64,11 @@ class SignUp extends PureComponent {
         isPersisted,
       })
     }
+  }
+
+  togglePersistence = () => {
+    const { authData: { isPersisted }, updateAuth } = this.props
+    updateAuth({ isPersisted: !isPersisted })
   }
 
   validateForm = () => {
@@ -129,7 +132,6 @@ class SignUp extends PureComponent {
       loading,
       switchMode,
       t,
-      users,
     } = this.props
     const {
       apiKey,
@@ -142,9 +144,8 @@ class SignUp extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    const title = platform.showFrameworkMode ? t('auth.signUp') : t('auth.title')
     const icon = platform.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
-    const isSignUpDisabled = !apiKey || !apiSecret
+    const isPasswordRecoveryDisabled = !apiKey || !apiSecret
       || (platform.showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
 
@@ -155,21 +156,13 @@ class SignUp extends PureComponent {
     return (
       <Dialog
         className={classes}
-        title={title}
+        title={t('auth.passwordRecovery')}
         isOpen
         icon={icon}
         isCloseButtonShown={false}
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          <PlatformLogo />
-          <Callout>
-            {t('auth.note1')}
-            <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>
-              {platform.KEY_URL.split('https://')[1]}
-            </a>
-            {t('auth.note2')}
-          </Callout>
           <InputKey
             label='auth.enterAPIKey'
             name='apiKey'
@@ -223,20 +216,18 @@ class SignUp extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            {platform.showFrameworkMode && users.length > 0 && (
-              <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
-                {t('auth.signIn')}
-              </div>
-            )}
+            <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
+              {t('auth.signIn')}
+            </div>
             <Button
               className='bitfinex-auth-check'
               name='check'
               intent={Intent.SUCCESS}
-              onClick={this.onSignUp}
-              disabled={isSignUpDisabled}
+              onClick={this.onPasswordRecovery}
+              disabled={isPasswordRecoveryDisabled}
               loading={loading}
             >
-              {title}
+              {t('timeframe.custom.confirm')}
             </Button>
           </div>
         </div>
@@ -245,4 +236,4 @@ class SignUp extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(SignUp)
+export default withTranslation('translations')(PasswordRecovery)

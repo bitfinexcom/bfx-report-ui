@@ -30,6 +30,17 @@ export function fetchUsers() {
 }
 
 /**
+ * Create an action to recover password.
+ * @param {array} payload new auth data
+ */
+export function recoverPassword(payload) {
+  return {
+    type: types.RECOVER_PASSWORD,
+    payload,
+  }
+}
+
+/**
  * Create an action to set users data.
  * @param {array} payload users data
  */
@@ -112,6 +123,15 @@ export function updateAuth(payload) {
 }
 
 /**
+ * Create an action to clear auth data.
+ */
+export function clearAuth() {
+  return {
+    type: types.CLEAR_AUTH,
+  }
+}
+
+/**
  * Create an action to update auth status.
  * @param {boolean} result auth status
  */
@@ -127,6 +147,7 @@ export default {
   addUser,
   fetchUsers,
   logout,
+  recoverPassword,
   setUsers,
   signIn,
   signUp,
@@ -134,5 +155,6 @@ export default {
   hideAuth,
   authSuccess,
   updateAuth,
+  clearAuth,
   updateAuthStatus,
 }

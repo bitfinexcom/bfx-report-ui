@@ -7,11 +7,13 @@ import { platform } from 'var/config'
 
 import SignUp from './SignUp'
 import SignIn from './SignIn'
+import PasswordRecovery from './PasswordRecovery'
 import { propTypes, defaultProps } from './Auth.props'
 
-const MODES = {
-  SIGH_UP: 'sign_up',
-  SIGH_IN: 'sign_in',
+export const MODES = {
+  SIGN_UP: 'sign_up',
+  SIGN_IN: 'sign_in',
+  PASSWORD_RECOVERY: 'password_recovery',
 }
 
 class Auth extends PureComponent {
@@ -25,22 +27,20 @@ class Auth extends PureComponent {
     const { authData: { hasAuthData } } = props
 
     this.state = {
-      mode: (!platform.showFrameworkMode || !hasAuthData) ? MODES.SIGH_UP : MODES.SIGN_IN,
+      mode: (!platform.showFrameworkMode || !hasAuthData) ? MODES.SIGN_UP : MODES.SIGN_IN,
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { users, usersLoading } = this.props
-    if (platform.showFrameworkMode && prevProps.usersLoading && !usersLoading && users.length) {
+    const { isUsersLoaded, users } = this.props
+    if (platform.showFrameworkMode && !prevProps.isUsersLoaded && isUsersLoaded && users.length) {
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ mode: MODES.SIGH_IN })
+      this.setState({ mode: MODES.SIGN_IN })
     }
   }
 
-  switchMode = () => {
-    this.setState(({ mode }) => ({
-      mode: mode === MODES.SIGH_UP ? MODES.SIGH_IN : MODES.SIGH_UP,
-    }))
+  switchMode = (mode) => {
+    this.setState({ mode })
   }
 
   render() {
@@ -67,11 +67,15 @@ class Auth extends PureComponent {
       )
     }
 
-    if (mode === MODES.SIGH_UP) {
-      return <SignUp switchMode={this.switchMode} />
+    switch (mode) {
+      case MODES.SIGN_UP:
+      default:
+        return <SignUp switchMode={this.switchMode} />
+      case MODES.SIGN_IN:
+        return <SignIn switchMode={this.switchMode} />
+      case MODES.PASSWORD_RECOVERY:
+        return <PasswordRecovery switchMode={this.switchMode} />
     }
-
-    return <SignIn switchMode={this.switchMode} />
   }
 }
 

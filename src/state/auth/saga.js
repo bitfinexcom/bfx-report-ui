@@ -12,10 +12,9 @@ import _isEmpty from 'lodash/isEmpty'
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-import { getUsers, selectAuth } from 'state/auth/selectors'
+import { selectAuth } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
-import { fetchSubAccounts } from 'state/subAccounts/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { platform } from 'var/config'
 
@@ -146,11 +145,6 @@ function* signIn({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
-      const users = yield select(getUsers)
-      const hasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
-      if (hasSubAccount) {
-        yield put(fetchSubAccounts({ ...authParams, isSubAccount: true }))
-      }
       return
     }
 
@@ -180,7 +174,12 @@ function* fetchUsers() {
     const { result } = yield call(makeFetchCall, 'getUsers')
 
     if (result) {
+      const auth = yield select(selectAuth)
+
       yield put(actions.setUsers(result))
+      if (!result.length && !_isEmpty(auth)) {
+        yield put(actions.clearAuth())
+      }
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
@@ -209,9 +208,46 @@ function* checkAuth() {
   }
 }
 
+function* recoverPassword({ payload }) {
+  try {
+    const {
+      apiKey,
+      apiSecret,
+      password,
+      isNotProtected,
+    } = payload
+    const newPassword = isNotProtected ? undefined : password
+    const { result, error } = yield call(makeFetchCall, 'recoverPassword', null, {
+      apiKey,
+      apiSecret,
+      newPassword,
+      isSubAccount: false,
+      isNotProtected,
+    })
+
+    if (result) {
+      yield call(onAuthSuccess, { ...payload, ...result })
+      return
+    }
+
+    yield put(actions.updateAuthStatus())
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.auth',
+        detail: JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.FETCH_USERS, fetchUsers)
+  yield takeLatest(types.RECOVER_PASSWORD, recoverPassword)
   yield takeLatest(types.SIGN_UP, signUp)
   yield takeLatest(types.SIGN_IN, signIn)
 }

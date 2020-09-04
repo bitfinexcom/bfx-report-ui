@@ -12,6 +12,7 @@ import Select from 'ui/Select'
 
 import { propTypes, defaultProps } from './SignIn.props'
 import InputKey from '../InputKey'
+import { MODES } from '../Auth'
 
 const { REACT_APP_ELECTRON } = process.env
 
@@ -28,6 +29,28 @@ class SignIn extends PureComponent {
     this.state = {
       email: email || firstUserEmail,
       password,
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      authData: { email },
+      users,
+      isUsersLoaded,
+      switchMode,
+    } = this.props
+
+    if (!prevProps.isUsersLoaded && isUsersLoaded) {
+      if (users.length) {
+        const { email: firstUserEmail } = users[0] || {}
+
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({
+          email: email || firstUserEmail,
+        })
+      } else {
+        switchMode(MODES.SIGN_UP)
+      }
     }
   }
 
@@ -86,7 +109,7 @@ class SignIn extends PureComponent {
 
     return (
       <Dialog
-        className='bitfinex-auth'
+        className='bitfinex-auth bitfinex-auth-sign-in'
         title={t('auth.signIn')}
         isOpen
         icon={<Icon.SIGN_IN />}
@@ -134,19 +157,24 @@ class SignIn extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <div className='bitfinex-auth-mode-switch' onClick={switchMode}>
-              {t('auth.signUp')}
+            <div className='bitfinex-auth-password-recovery' onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}>
+              {t('auth.passwordRecovery')}
             </div>
-            <Button
-              className='bitfinex-auth-check'
-              name='check'
-              intent={Intent.SUCCESS}
-              onClick={this.onSignIn}
-              disabled={isSignInDisabled}
-              loading={loading}
-            >
-              {t('auth.signIn')}
-            </Button>
+            <div>
+              <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_UP)}>
+                {t('auth.signUp')}
+              </div>
+              <Button
+                className='bitfinex-auth-check'
+                name='check'
+                intent={Intent.SUCCESS}
+                onClick={this.onSignIn}
+                disabled={isSignInDisabled}
+                loading={loading}
+              >
+                {t('auth.signIn')}
+              </Button>
+            </div>
           </div>
         </div>
       </Dialog>

@@ -7,6 +7,7 @@ export const propTypes = {
     isPersisted: PropTypes.bool,
   }).isRequired,
   isElectronBackendLoaded: PropTypes.bool.isRequired,
+  isUsersLoaded: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   signIn: PropTypes.func.isRequired,
   switchMode: PropTypes.func.isRequired,

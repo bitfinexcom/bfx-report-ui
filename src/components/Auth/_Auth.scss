@@ -72,6 +72,14 @@
         width: 50%;
       }
     }
+
+    .bp3-dialog {
+      &-footer {
+        &-actions {
+          justify-content: space-between;
+        }
+      }
+    }
   }
 
   &-remember-me {
@@ -94,7 +102,13 @@
     }
   }
 
+  &-password-recovery {
+    line-height: 30px;
+    cursor: pointer;
+  }
+
   &-mode-switch {
+    display: inline-flex;
     margin-right: 10px;
     line-height: 30px;
     cursor: pointer;

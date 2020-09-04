@@ -3,6 +3,18 @@ import subAccountsTypes from 'state/subAccounts/constants'
 import Authenticator from './Authenticator'
 import types from './constants'
 
+const initialAuthData = {
+  apiKey: '',
+  apiSecret: '',
+  authToken: '',
+  email: '',
+  password: '',
+  hasAuthData: false,
+  isPersisted: true,
+  isNotProtected: true,
+  isSubAccount: false,
+}
+
 const getStoredAuth = () => {
   const auth = Authenticator.getStored()
   const {
@@ -37,6 +49,7 @@ const initialState = {
   isShown: true,
   loading: false,
   users: [],
+  usersLoaded: false,
   usersLoading: false,
 }
 
@@ -46,14 +59,10 @@ export function authReducer(state = initialState, action) {
     case types.FETCH_USERS:
       return {
         ...state,
+        usersLoaded: false,
         usersLoading: true,
       }
     case types.ADD_USER:
-    case subAccountsTypes.ADD_SUCCESS:
-      return {
-        ...state,
-        users: [...state.users, payload],
-      }
     case subAccountsTypes.REMOVE_SUCCESS:
       return {
         ...state,
@@ -63,10 +72,12 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         users: payload,
+        usersLoaded: true,
         usersLoading: false,
       }
     case types.SIGN_UP:
     case types.SIGN_IN:
+    case types.RECOVER_PASSWORD:
       return {
         ...state,
         loading: true,
@@ -84,6 +95,12 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         ...payload,
+      }
+    case types.CLEAR_AUTH:
+      Authenticator.set({ ...initialAuthData, isPersisted: state.isPersisted })
+      return {
+        ...state,
+        ...initialAuthData,
       }
     case types.UPDATE_AUTH_STATUS:
       return {

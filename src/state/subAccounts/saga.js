@@ -7,13 +7,10 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
-import { logout } from 'state/auth/actions'
+import { fetchUsers, logout } from 'state/auth/actions'
 import { getAuthData } from 'state/auth/selectors'
 
 import types from './constants'
-import actions, { setSubAccounts } from './actions'
-
-const getReqFetchSubAccounts = (auth) => makeFetchCall('verifyUser', null, { ...auth, isSubAccount: true })
 
 const getReqCreateSubAccount = (params) => {
   const { subAccountApiKeys } = params
@@ -25,38 +22,11 @@ const getReqCreateSubAccount = (params) => {
 
 const getReqRemoveSubAccount = (auth) => makeFetchCall('removeUser', null, auth)
 
-export function* fetchSubAccounts({ payload: auth }) {
-  try {
-    const { result, error } = yield call(getReqFetchSubAccounts, auth)
-    yield put(setSubAccounts(result))
-
-    if (error) {
-      yield put(updateErrorStatus({
-        id: 'status.fail',
-        topic: 'subaccounts.title',
-        detail: JSON.stringify(error),
-      }))
-    }
-  } catch (fail) {
-    yield put(updateErrorStatus({
-      id: 'status.request.error',
-      topic: 'subaccounts.title',
-      detail: JSON.stringify(fail),
-    }))
-  }
-}
-
 export function* createSubAccount({ payload: subAccounts }) {
   try {
     const { result, error } = yield call(getReqCreateSubAccount, { subAccountApiKeys: subAccounts })
     if (result) {
-      yield put({
-        type: types.ADD_SUCCESS,
-        payload: result,
-      })
-      // TODO: get sub users data from server on sub account creation
-      const { email, password } = yield select(getAuthData)
-      yield put(actions.fetchSubAccounts({ email, password }))
+      yield put(fetchUsers())
     }
 
     if (error) {
@@ -110,7 +80,6 @@ export function* removeSubAccount() {
 }
 
 export default function* subAccountsSaga() {
-  yield takeLatest(types.FETCH, fetchSubAccounts)
   yield takeLatest(types.ADD, createSubAccount)
   yield takeLatest(types.REMOVE, removeSubAccount)
 }
