@@ -5,15 +5,13 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
-import { dispatchAction } from 'state/utils'
+import { dispatchAction, makeFetchCall } from 'state/utils'
 import { updateAuth } from 'state/auth/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getAuthData } from 'state/auth/selectors'
 
 import types from './constants'
 import actions from './actions'
-
-import { restAuthTokenRequest } from './api'
 
 const REFRESH_INTERVAL = 5 * 60 * 1000
 let interval = null
@@ -24,10 +22,10 @@ export function* refreshToken() {
     if (!authToken) {
       return
     }
-    const res = yield call(restAuthTokenRequest, authToken)
+    const { result } = yield call(makeFetchCall, 'generateToken')
 
-    if (res && res[0]) {
-      yield put(updateAuth({ authToken: res[0] }))
+    if (result && result[0]) {
+      yield put(updateAuth({ authToken: result[0] }))
     }
   } catch (fail) {
     yield put(updateErrorStatus({
