@@ -95,6 +95,17 @@ export function taxReportReducer(state = initialState, action) {
         ...state,
         pageLoading: true,
       }
+    case types.FETCH_SNAPSHOT: {
+      const snapshotSection = payload === TAX_REPORT_SECTIONS.START_SNAPSHOT ? 'startSnapshot' : 'endSnapshot'
+
+      return {
+        ...state,
+        [snapshotSection]: {
+          ...state[snapshotSection],
+          pageLoading: true,
+        },
+      }
+    }
     case types.UPDATE_TAX_REPORT: {
       if (!payload) {
         return {
