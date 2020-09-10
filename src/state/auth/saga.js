@@ -1,5 +1,6 @@
 import {
   call,
+  fork,
   take,
   race,
   put,
@@ -14,8 +15,10 @@ import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
 import { selectAuth } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
+import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
+import { refreshToken, tokenRefreshStart, tokenRefreshStop } from 'state/auth/tokenRefresh/actions'
 import { platform } from 'var/config'
 
 import types from './constants'
@@ -55,6 +58,10 @@ function* onAuthSuccess(result) {
 
         return
       }
+    } else {
+      // on app load try to refresh the token in case user refreshed the page and some time have already passed
+      yield put(refreshToken())
+      yield put(tokenRefreshStart())
     }
 
     yield put(updateSuccessStatus({
@@ -244,10 +251,16 @@ function* recoverPassword({ payload }) {
   }
 }
 
+function* logout() {
+  yield put(tokenRefreshStop())
+}
+
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.FETCH_USERS, fetchUsers)
   yield takeLatest(types.RECOVER_PASSWORD, recoverPassword)
   yield takeLatest(types.SIGN_UP, signUp)
   yield takeLatest(types.SIGN_IN, signIn)
+  yield takeLatest(types.LOGOUT, logout)
+  yield fork(tokenRefreshSaga)
 }
