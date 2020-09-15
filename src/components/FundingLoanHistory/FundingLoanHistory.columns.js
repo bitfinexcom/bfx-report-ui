@@ -142,7 +142,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsOpening',
-      name: 'column.opened',
+      nameStr: `${t('column.opened')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsOpening)
@@ -158,7 +158,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsLastPayout',
-      name: 'column.closed',
+      nameStr: `${t('column.closed')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsLastPayout)

@@ -34,6 +34,7 @@ class DateInput extends PureComponent {
 
   render() {
     const {
+      className,
       daysOnly,
       defaultValue,
       inputTimezone,
@@ -60,6 +61,7 @@ class DateInput extends PureComponent {
         defaultValue={defaultDate}
         formatDate={formatDate}
         inputProps={{
+          className,
           rightElement: icon,
         }}
         onChange={this.onChange}

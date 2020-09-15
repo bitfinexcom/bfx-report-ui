@@ -19,11 +19,13 @@ const {
   NUMBER,
   INTEGER,
   STRING,
+  DATE,
 } = DATA_TYPES
 
 const getValue = ({ dataType, value }) => {
   switch (dataType) {
     case NUMBER:
+    case DATE:
       return _toNumber(value)
     case INTEGER: {
       const number = _toNumber(value)

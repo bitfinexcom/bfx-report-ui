@@ -120,7 +120,7 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].fundingStep,
     },
     {
-      id: 'mts',
+      id: 'timestamp',
       nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {

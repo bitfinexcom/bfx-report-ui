@@ -146,7 +146,9 @@
       "greaterThan": "Greater than",
       "greaterThanEqual": "Greater / equal",
       "lessThan": "Less than",
-      "lessThanEqual": "Less / equal"
+      "lessThanEqual": "Less / equal",
+      "after": "After",
+      "before": "Before"
     }
   },
   "columnsselect": {

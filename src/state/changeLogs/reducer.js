@@ -40,7 +40,7 @@ export function changeLogsReducer(state = initialState, action) {
         return {
           ip,
           log,
-          mts: mtsCreate,
+          mtsCreate,
           subUserId,
           userAgent,
         }
