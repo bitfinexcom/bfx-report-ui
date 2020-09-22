@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 
-import { propTypes, defaultProps } from './RemoveSubAccount.props'
+import { propTypes, defaultProps } from './SubAccountRemove.props'
 
-class RemoveSubAccount extends PureComponent {
+class SubAccountRemove extends PureComponent {
   removeSubAccount = () => {
     const { removeSubAccount } = this.props
     removeSubAccount()
@@ -25,7 +25,7 @@ class RemoveSubAccount extends PureComponent {
   }
 }
 
-RemoveSubAccount.propTypes = propTypes
-RemoveSubAccount.defaultProps = defaultProps
+SubAccountRemove.propTypes = propTypes
+SubAccountRemove.defaultProps = defaultProps
 
-export default withTranslation('translations')(RemoveSubAccount)
+export default withTranslation('translations')(SubAccountRemove)

@@ -22,6 +22,18 @@ const getReqCreateSubAccount = (params) => {
 
 const getReqRemoveSubAccount = (auth) => makeFetchCall('removeUser', null, auth)
 
+const getReqUpdateSubAccount = (params, auth) => {
+  const {
+    addingSubUsers,
+    removingSubUsersByEmails,
+  } = params
+
+  return makeFetchCall('updateSubAccount', {
+    addingSubUsers,
+    removingSubUsersByEmails,
+  }, auth)
+}
+
 export function* createSubAccount({ payload: subAccounts }) {
   try {
     const { result, error } = yield call(getReqCreateSubAccount, { subAccountApiKeys: subAccounts })
@@ -79,7 +91,40 @@ export function* removeSubAccount() {
   }
 }
 
+export function* updateSubAccount({ payload }) {
+  try {
+    const { addedSubUsers, removedSubUsers } = payload
+    const { email, password } = yield select(getAuthData)
+    const { result, error } = yield call(getReqUpdateSubAccount, {
+      addingSubUsers: addedSubUsers,
+      removingSubUsersByEmails: removedSubUsers.map(subUserEmail => ({ email: subUserEmail })),
+    }, {
+      email,
+      password,
+      isSubAccount: true,
+    })
+    if (result) {
+      yield put(fetchUsers())
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'subaccounts.title',
+        detail: JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'subaccounts.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
 export default function* subAccountsSaga() {
   yield takeLatest(types.ADD, createSubAccount)
   yield takeLatest(types.REMOVE, removeSubAccount)
+  yield takeLatest(types.UPDATE, updateSubAccount)
 }

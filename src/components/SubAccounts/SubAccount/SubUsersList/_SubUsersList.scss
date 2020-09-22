@@ -1,0 +1,34 @@
+.sub-users-list {
+  margin-top: 25px;
+
+  &-item {
+    &-user {
+      display: inline-block;
+      width: 377px;
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 10px;
+      padding: 0 10px;
+      background-color: var(--bgColor2);
+      border: 1px solid var(--borderColor);
+    }
+
+    &-icon {
+      margin-left: 15px;
+      vertical-align: sub;
+      cursor: pointer;
+    }
+
+    &--removing & {
+      &-user {
+        border-color: var(--iconWarning);
+      }
+
+      &-icon {
+        path {
+          fill: var(--iconWarning);
+        }
+      }
+    }
+  }
+}

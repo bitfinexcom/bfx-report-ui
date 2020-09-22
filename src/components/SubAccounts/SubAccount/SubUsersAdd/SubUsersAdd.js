@@ -1,117 +1,63 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import { Button, Intent } from '@blueprintjs/core'
 
 import InputGroup from 'ui/InputGroup'
 import Select from 'ui/Select'
 import Icon from 'icons'
 
-import { propTypes, defaultProps } from './CreateSubAccount.props'
+import { propTypes, defaultProps } from './SubUsersAdd.props'
+import { EMPTY_ACCOUNT, MAX_ACCOUNTS } from '../utils'
 
-const MAX_ACCOUNTS = 15
-const EMPTY_ACCOUNT = {
-  email: '',
-  password: '',
-  isNotProtected: true,
-  apiKey: '',
-  apiSecret: '',
-}
-
-class CreateSubAccount extends PureComponent {
-  state = {
-    accounts: [EMPTY_ACCOUNT],
-  }
-
-  getFilledAccounts = (accounts) => accounts
-    .filter((account) => {
-      const {
-        email,
-        password,
-        isNotProtected,
-        apiKey,
-        apiSecret,
-      } = account
-
-      return (apiKey && apiSecret) || (email && (isNotProtected || password))
-    })
-
-  createSubAccount = () => {
-    const { addSubAccounts } = this.props
-    const { accounts } = this.state
-
-    const preparedAccountData = this.getFilledAccounts(accounts).map((account) => {
-      const {
-        email,
-        password,
-        apiKey,
-        apiSecret,
-      } = account
-
-      return email
-        ? { email, password: password || undefined }
-        : { apiKey, apiSecret }
-    })
-
-    addSubAccounts(preparedAccountData)
-  }
-
+class SubUsersAdd extends PureComponent {
   onInputChange = (e, index) => {
-    const { accounts } = this.state
+    const { accounts, onChange } = this.props
     const { name, value } = e.target
-    this.setState({
-      accounts: accounts.map((account, accountIndex) => {
-        if (accountIndex === index) {
-          return {
-            ...account,
-            [name]: value,
-          }
+
+    const updatedAccounts = accounts.map((account, accountIndex) => {
+      if (accountIndex === index) {
+        return {
+          ...account,
+          [name]: value,
         }
-        return account
-      }),
+      }
+      return account
     })
+    onChange(updatedAccounts)
   }
 
   onSubAccountEmailChange = (email, index) => {
-    const { users } = this.props
-    const { accounts } = this.state
+    const { accounts, onChange, users } = this.props
     const { isNotProtected = true } = users.find((account) => account.email === email) || {}
 
-    this.setState({
-      accounts: accounts.map((account, accountIndex) => {
-        if (accountIndex === index) {
-          return {
-            email,
-            password: '',
-            isNotProtected,
-            apiKey: '',
-            apiSecret: '',
-          }
+    const updatedAccounts = accounts.map((account, accountIndex) => {
+      if (accountIndex === index) {
+        return {
+          email,
+          password: '',
+          isNotProtected,
+          apiKey: '',
+          apiSecret: '',
         }
-        return account
-      }),
+      }
+      return account
     })
+    onChange(updatedAccounts)
   }
 
   onAccountAdd = () => {
-    const { accounts } = this.state
-    this.setState({
-      accounts: accounts.concat(EMPTY_ACCOUNT),
-    })
+    const { accounts, onChange } = this.props
+    onChange(accounts.concat(EMPTY_ACCOUNT))
   }
 
   onAccountRemove = (index) => {
-    const { accounts } = this.state
+    const { accounts, onChange } = this.props
 
     if (accounts.length === 1) {
-      this.setState({
-        accounts: [EMPTY_ACCOUNT],
-      })
+      onChange([EMPTY_ACCOUNT])
       return
     }
 
-    this.setState({
-      accounts: accounts.filter((el, i) => i !== index),
-    })
+    onChange(accounts.filter((el, i) => i !== index))
   }
 
   getTakenAccountOptions = (accounts) => accounts
@@ -119,18 +65,20 @@ class CreateSubAccount extends PureComponent {
     .map((account) => account.email)
 
   render() {
-    const { authData: { email: currentUserEmail }, users, t } = this.props
-    const { accounts } = this.state
+    const {
+      accounts,
+      authData,
+      users,
+      t,
+    } = this.props
+    const { email: currentUserEmail } = authData
 
     const subAccountOptions = users.filter((account) => !account.isSubAccount && account.email !== currentUserEmail)
     const takenAccountOptions = this.getTakenAccountOptions(accounts)
 
-    const hasFilledAccounts = this.getFilledAccounts(accounts).length > 0
-
     return (
-      <div className='section-sub-accounts-create'>
-        <div className='subtitle'>{t('subaccounts.create')}</div>
-        <div className='section-sub-accounts-create-accounts'>
+      <div className='sub-users-add'>
+        <div className='sub-users-add-accounts'>
           {accounts.map((account, index) => {
             const {
               email,
@@ -150,13 +98,13 @@ class CreateSubAccount extends PureComponent {
 
             return (
               /* eslint-disable-next-line react/no-array-index-key */
-              <div className='section-sub-accounts-create-accounts-account' key={index}>
+              <div className='sub-users-add-accounts-account' key={index}>
                 {accountOptions.length > 0 && !apiKey && !apiSecret && (
                   <Select
-                    className='section-sub-accounts-create-select'
+                    className='sub-account-create-select'
                     items={subAccountOptionsItems}
                     onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
-                    popoverClassName='section-sub-accounts-create-select-popover'
+                    popoverClassName='sub-users-add-select-popover'
                     value={email}
                     loading
                   />
@@ -186,7 +134,7 @@ class CreateSubAccount extends PureComponent {
                   </>
                 )}
                 <Icon.BIN
-                  className='section-sub-accounts-create-accounts-account-remove'
+                  className='sub-users-add-accounts-account-remove'
                   onClick={() => this.onAccountRemove(index)}
                 />
               </div>
@@ -194,28 +142,19 @@ class CreateSubAccount extends PureComponent {
           })}
         </div>
 
-        <div className='section-sub-accounts-create-add'>
+        <div className='sub-users-add-new'>
           {(accounts.length < MAX_ACCOUNTS) && (
             <span className='columns-filter-controls-create color--active' onClick={this.onAccountAdd}>
               {`+ ${t('subaccounts.add_account')}`}
             </span>
           )}
         </div>
-
-        <Button
-          className='section-sub-accounts-create-confirm'
-          disabled={!hasFilledAccounts}
-          intent={Intent.PRIMARY}
-          onClick={this.createSubAccount}
-        >
-          {t('timeframe.custom.confirm')}
-        </Button>
       </div>
     )
   }
 }
 
-CreateSubAccount.propTypes = propTypes
-CreateSubAccount.defaultProps = defaultProps
+SubUsersAdd.propTypes = propTypes
+SubUsersAdd.defaultProps = defaultProps
 
-export default withTranslation('translations')(CreateSubAccount)
+export default withTranslation('translations')(SubUsersAdd)

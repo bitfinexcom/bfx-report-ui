@@ -1,0 +1,37 @@
+@import 'SubUsersAdd/SubUsersAdd';
+@import 'SubUsersList/SubUsersList';
+
+.sub-account {
+  &-controls {
+    margin-bottom: 30px;
+
+    .bp3-button {
+      margin-top: 0;
+    }
+  }
+
+  &-user {
+    margin-bottom: 20px;
+  }
+
+  &-select {
+    &.bitfinex-select {
+      .bp3-button {
+        width: 380px;
+      }
+    }
+
+    &-popover {
+      &.bitfinex-select-menu {
+        .bp3-popover-content {
+          width: 380px;
+        }
+      }
+    }
+  }
+
+  &-confirm {
+    display: block;
+    margin-top: 30px;
+  }
+}
