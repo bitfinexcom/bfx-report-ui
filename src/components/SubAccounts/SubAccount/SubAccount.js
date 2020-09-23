@@ -6,7 +6,6 @@ import _get from 'lodash/get'
 import SubUsersList from './SubUsersList'
 import { propTypes, defaultProps } from './SubAccount.props'
 import RemoveSubAccount from './SubAccountRemove'
-import SubAccountLogin from './SubAccountLogin'
 import SubUsersAdd from './SubUsersAdd'
 import { getFilledAccounts, EMPTY_ACCOUNT } from './utils'
 
@@ -57,10 +56,10 @@ class SubAccount extends PureComponent {
     const { updateSubAccount } = this.props
     const { accounts, subUsersToRemove } = this.state
 
-    const hasFilledAccounts = getFilledAccounts(accounts).length > 0
-    if (hasFilledAccounts || subUsersToRemove.length) {
+    const filledAccounts = getFilledAccounts(accounts)
+    if (filledAccounts.length || subUsersToRemove.length) {
       updateSubAccount({
-        addedSubUsers: accounts,
+        addedSubUsers: filledAccounts,
         removedSubUsers: subUsersToRemove,
       })
 
@@ -84,37 +83,39 @@ class SubAccount extends PureComponent {
 
     return (
       <div className='sub-account'>
-        {hasSubAccount && (
+        {isSubAccount && (
+          <div className='sub-account-controls'>
+            <RemoveSubAccount authData={authData} />
+          </div>
+        )}
+        {subUsers.length > 0 && (
+          <SubUsersList
+            email={currentUserEmail}
+            isRemovalEnabled={isSubAccount}
+            onToggle={this.onSubUserToggle}
+            subUsers={subUsers}
+            subUsersToRemove={subUsersToRemove}
+          />
+        )}
+        {!isSubAccount && !hasSubAccount && <div className='subtitle'>{t('subaccounts.create')}</div>}
+        {isSubAccount && (
           <>
-            <div className='sub-accounts-controls'>
-              <RemoveSubAccount authData={authData} />
-              {!isSubAccount && <SubAccountLogin authData={authData} />}
-            </div>
-            {subUsers.length > 0 && (
-              <SubUsersList
-                onToggle={this.onSubUserToggle}
-                subUsers={subUsers}
-                subUsersToRemove={subUsersToRemove}
-              />
-            )}
+            <SubUsersAdd
+              accounts={accounts}
+              authData={authData}
+              onChange={this.onSubUsersChange}
+              users={users}
+            />
+            <Button
+              className='sub-account-confirm'
+              disabled={!hasFilledAccounts && !subUsersToRemove.length}
+              intent={Intent.PRIMARY}
+              onClick={subUsers.length > 0 ? this.updateSubAccount : this.createSubAccount}
+            >
+              {subUsers.length > 0 ? t('update') : t('timeframe.custom.confirm')}
+            </Button>
           </>
         )}
-        {!hasSubAccount && <div className='subtitle'>{t('subaccounts.create')}</div>}
-        <SubUsersAdd
-          accounts={accounts}
-          authData={authData}
-          onChange={this.onSubUsersChange}
-          users={users}
-        />
-
-        <Button
-          className='sub-account-confirm'
-          disabled={!hasFilledAccounts}
-          intent={Intent.PRIMARY}
-          onClick={subUsers.length > 0 ? this.updateSubAccount : this.createSubAccount}
-        >
-          {subUsers.length > 0 ? t('update') : t('timeframe.custom.confirm')}
-        </Button>
       </div>
     )
   }

@@ -8,7 +8,8 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { fetchUsers, logout } from 'state/auth/actions'
-import { getAuthData } from 'state/auth/selectors'
+import { getAuthData, selectAuth } from 'state/auth/selectors'
+import Authenticator from 'state/auth/Authenticator'
 
 import types from './constants'
 
@@ -59,20 +60,16 @@ export function* createSubAccount({ payload: subAccounts }) {
 
 export function* removeSubAccount() {
   try {
-    const { email, password, isSubAccount } = yield select(getAuthData)
-    const { result, error } = yield call(getReqRemoveSubAccount, {
-      email,
-      password,
-      isSubAccount: true,
-    })
+    const { email } = yield select(getAuthData)
+    const auth = yield select(selectAuth)
+    const { result, error } = yield call(getReqRemoveSubAccount, auth)
     if (result) {
+      Authenticator.clear()
       yield put({
         type: types.REMOVE_SUCCESS,
         payload: email,
       })
-      if (isSubAccount) {
-        yield put(logout())
-      }
+      yield put(logout())
     }
 
     if (error) {
@@ -94,15 +91,15 @@ export function* removeSubAccount() {
 export function* updateSubAccount({ payload }) {
   try {
     const { addedSubUsers, removedSubUsers } = payload
-    const { email, password } = yield select(getAuthData)
-    const { result, error } = yield call(getReqUpdateSubAccount, {
-      addingSubUsers: addedSubUsers,
-      removingSubUsersByEmails: removedSubUsers.map(subUserEmail => ({ email: subUserEmail })),
-    }, {
-      email,
-      password,
-      isSubAccount: true,
-    })
+    const auth = yield select(selectAuth)
+    const params = {}
+    if (addedSubUsers.length) {
+      params.addingSubUsers = addedSubUsers
+    }
+    if (removedSubUsers.length) {
+      params.removingSubUsersByEmails = removedSubUsers.map(subUserEmail => ({ email: subUserEmail }))
+    }
+    const { result, error } = yield call(getReqUpdateSubAccount, params, auth)
     if (result) {
       yield put(fetchUsers())
     }

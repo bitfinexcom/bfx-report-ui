@@ -5,22 +5,34 @@ import classNames from 'classnames'
 import Icon from 'icons'
 
 const SubUsersList = (props) => {
-  const { onToggle, subUsers, subUsersToRemove } = props
+  const {
+    email,
+    isRemovalEnabled,
+    onToggle,
+    subUsers,
+    subUsersToRemove,
+  } = props
+
+  const mainAccount = subUsers.find((subUser) => subUser.email === email)
+  const subUsersWithoutMainAccount = subUsers.filter((subUser) => subUser.email !== email)
+  const usersList = [mainAccount, ...subUsersWithoutMainAccount]
 
   return (
     <div className='sub-users-list'>
-      {subUsers.map((account) => {
-        const { email } = account
-        const isBeingRemoved = subUsersToRemove.includes(email)
+      {usersList.map((account) => {
+        const { email: accountEmail } = account
+        const isBeingRemoved = subUsersToRemove.includes(accountEmail)
         const classes = classNames('sub-users-list-item', { 'sub-users-list-item--removing': isBeingRemoved })
 
         return (
-          <div className={classes} key={email}>
-            <div className='sub-users-list-item-user'>{email}</div>
-            <Icon.BIN
-              className='sub-users-list-item-icon'
-              onClick={() => onToggle(email)}
-            />
+          <div className={classes} key={accountEmail}>
+            <div className='sub-users-list-item-user'>{accountEmail}</div>
+            {isRemovalEnabled && email !== accountEmail && (
+              <Icon.BIN
+                className='sub-users-list-item-icon'
+                onClick={() => onToggle(accountEmail)}
+              />
+            )}
           </div>
         )
       })}
@@ -29,11 +41,19 @@ const SubUsersList = (props) => {
 }
 
 SubUsersList.propTypes = {
-  onToggle: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  isRemovalEnabled: PropTypes.bool,
+  onToggle: PropTypes.func,
   subUsers: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string.isRequired,
   })).isRequired,
-  subUsersToRemove: PropTypes.arrayOf(PropTypes.string).isRequired,
+  subUsersToRemove: PropTypes.arrayOf(PropTypes.string),
+}
+
+SubUsersList.defaultProps = {
+  isRemovalEnabled: true,
+  onToggle: () => {},
+  subUsersToRemove: [],
 }
 
 export default SubUsersList
