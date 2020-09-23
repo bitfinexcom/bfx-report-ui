@@ -142,13 +142,13 @@ class SubUsersAdd extends PureComponent {
           })}
         </div>
 
-        <div className='sub-users-add-new'>
-          {(accounts.length < MAX_ACCOUNTS) && (
-            <span className='columns-filter-controls-create color--active' onClick={this.onAccountAdd}>
+        {(accounts.length < MAX_ACCOUNTS) && (
+          <div className='sub-users-add-new'>
+            <span className='sub-users-add-new-btn color--active' onClick={this.onAccountAdd}>
               {`+ ${t('subaccounts.add_account')}`}
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     )
   }

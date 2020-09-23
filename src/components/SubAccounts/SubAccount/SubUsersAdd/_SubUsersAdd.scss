@@ -32,6 +32,9 @@
 
   &-new {
     margin-top: 5px;
-    cursor: pointer;
+
+    &-btn {
+      cursor: pointer;
+    }
   }
 }
