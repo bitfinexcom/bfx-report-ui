@@ -19,7 +19,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
-      width: COLUMN_WIDTHS.PAIR,
+      width: 140,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (

@@ -1,5 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#rest-public-status
 import _get from 'lodash/get'
+import _sortBy from 'lodash/sortBy'
 
 import authTypes from 'state/auth/constants'
 import {
@@ -57,7 +58,7 @@ export function derivativesReducer(state = initialState, action) {
         ...state,
         dataReceived: true,
         pageLoading: false,
-        entries,
+        entries: _sortBy(entries, (o) => o.pair),
       }
     }
     case types.FETCH_FAIL:
