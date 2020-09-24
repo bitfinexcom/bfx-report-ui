@@ -13,7 +13,9 @@ class Pagination extends PureComponent {
   pageInput = createRef()
 
   componentDidUpdate() {
-    this.pageInput.current.value = ''
+    if (this.pageInput.current) {
+      this.pageInput.current.value = ''
+    }
   }
 
   getCurrentPage = () => parseInt(this.pageInput.current.placeholder || 1, 10)
@@ -91,6 +93,10 @@ class Pagination extends PureComponent {
 
     const PAGE_SIZE = getPageSize(target)
     const pageLen = Math.ceil(entriesSize / PAGE_SIZE)
+
+    if (pageLen === 1 && !nextPage) {
+      return null
+    }
 
     const renderRestDots = nextPage ? (
       <Fragment>
