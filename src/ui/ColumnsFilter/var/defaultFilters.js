@@ -79,7 +79,11 @@ const DEFAULT_FILTERS = {
     { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
     EMPTY_FILTER,
   ],
-  [MENU_FPAYMENT]: DEFAULT_LEDGERS,
+  [MENU_FPAYMENT]: [
+    { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+    { column: 'balance', type: GREATER_THAN, dataType: NUMBER, value: '' },
+    { column: 'wallet', type: CONTAINS, dataType: STRING, value: '' },
+  ],
   [MENU_SPAYMENTS]: DEFAULT_LEDGERS,
   [MENU_AFFILIATES_EARNINGS]: DEFAULT_LEDGERS,
   [MENU_PUBLIC_TRADES]: [
