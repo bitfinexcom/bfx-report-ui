@@ -58,6 +58,7 @@ class Snapshot extends PureComponent {
       dataReceived,
       pageLoading,
       match,
+      refresh,
       t,
     } = this.props
     const {
@@ -79,7 +80,7 @@ class Snapshot extends PureComponent {
       || walletsTickersEntries.length || walletsEntries.length)
 
     if (!isNotEmpty) {
-      return <NoData />
+      return <NoData refresh={refresh} />
     }
 
     const isEmpty = (subsection === MENU_POSITIONS && !positionsEntries.length)
@@ -91,7 +92,7 @@ class Snapshot extends PureComponent {
       showContent = (
         <Fragment>
           <br />
-          <NoData />
+          <NoData refresh={refresh} />
         </Fragment>
       )
     } else if (subsection === MENU_WALLETS) {

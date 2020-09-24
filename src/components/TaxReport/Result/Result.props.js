@@ -48,5 +48,6 @@ export const propTypes = {
   getFullTime: PropTypes.func.isRequired,
   timeOffset: PropTypes.string.isRequired,
   fetchData: PropTypes.func.isRequired,
+  refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }

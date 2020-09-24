@@ -1,9 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import {
-  fetchTaxReportSnapshot,
-} from 'state/taxReport/actions'
+import { fetchTaxReportSnapshot, refresh } from 'state/taxReport/actions'
 import {
   getSnapshot,
   getSnapshotDataReceived,
@@ -25,6 +23,7 @@ const mapDispatchToProps = (dispatch, { match }) => {
   const { section: snapshotSection } = match.params
   return {
     fetchData: () => dispatch(fetchTaxReportSnapshot(snapshotSection)),
+    refresh: () => dispatch(refresh({ section: snapshotSection })),
   }
 }
 
