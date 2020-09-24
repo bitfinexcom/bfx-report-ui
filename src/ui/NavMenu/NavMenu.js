@@ -125,7 +125,7 @@ class NavMenu extends PureComponent {
       showMenuPopover,
       t,
     } = this.props
-    const target = getTarget(history.location.pathname)
+    const target = getTarget(history.location.pathname, false)
 
     const classes = classNames('bitfinex-nav-menu', className)
 
