@@ -17,6 +17,15 @@ const PERSISTED_PARAMS_FRAMEWORK = [
 ]
 
 class Authenticator {
+  clear = () => {
+    const auth = this.getStored()
+    const persistedData = {
+      isPersisted: auth.isPersisted,
+    }
+
+    this.persist(persistedData)
+  }
+
   getStored = () => {
     const auth = window.localStorage.getItem('auth')
     return auth ? JSON.parse(auth) : {}

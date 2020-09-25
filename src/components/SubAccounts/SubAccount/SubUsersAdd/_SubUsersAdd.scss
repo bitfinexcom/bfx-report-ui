@@ -1,0 +1,40 @@
+.sub-users-add {
+  &-accounts {
+    &-account {
+      display: flex;
+      flex-wrap: wrap;
+      vertical-align: middle;
+      min-height: 74px;
+
+      & > * {
+        align-self: flex-end;
+
+        &:not(:last-child) {
+          margin-right: 15px;
+          margin-bottom: 15px;
+        }
+      }
+
+      .input-group {
+        display: inline-block;
+
+        .bp3-input {
+          height: 40px;
+        }
+      }
+
+      &-remove {
+        margin-bottom: 25px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-new {
+    margin-top: 5px;
+
+    &-btn {
+      cursor: pointer;
+    }
+  }
+}

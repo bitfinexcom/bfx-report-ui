@@ -1,72 +1,11 @@
-.section-sub-accounts {
+@import 'SubAccount/SubAccount';
+
+.sub-accounts {
+  .section-header {
+    margin-bottom: 0;
+  }
+
   .subtitle {
     margin-bottom: 15px;
-  }
-
-  &-current {
-
-  }
-
-  &-create {
-    &-accounts {
-      &-account {
-        display: flex;
-        flex-wrap: wrap;
-        vertical-align: middle;
-        min-height: 74px;
-
-        & > * {
-          align-self: flex-end;
-
-          &:not(:last-child) {
-            margin-right: 15px;
-            margin-bottom: 15px;
-          }
-        }
-
-        .input-group {
-          display: inline-block;
-
-          .bp3-input {
-            height: 40px;
-          }
-        }
-
-        &-remove {
-          margin-bottom: 25px;
-          cursor: pointer;
-        }
-      }
-    }
-
-    &-user {
-      margin-bottom: 20px;
-    }
-
-    &-select {
-      &.bitfinex-select {
-        .bp3-button {
-          width: 380px;
-        }
-      }
-
-      &-popover {
-        &.bitfinex-select-menu {
-          .bp3-popover-content {
-            width: 380px;
-          }
-        }
-      }
-    }
-
-    &-add {
-      margin-top: 5px;
-      cursor: pointer;
-    }
-
-    &-confirm {
-      display: block;
-      margin-top: 30px;
-    }
   }
 }

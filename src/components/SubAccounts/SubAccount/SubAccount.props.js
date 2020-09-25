@@ -4,7 +4,8 @@ export const propTypes = {
   authData: PropTypes.shape({
     email: PropTypes.string,
   }).isRequired,
-  addSubAccounts: PropTypes.func.isRequired,
+  addSubAccount: PropTypes.func.isRequired,
+  updateSubAccount: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string.isRequired,
     isSubAccount: PropTypes.bool.isRequired,

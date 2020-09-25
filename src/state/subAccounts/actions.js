@@ -2,12 +2,12 @@ import types from './constants'
 
 /**
  * Create an action to add sub accounts.
- * @param {array} subAccounts contains objects with 'apiKey' and 'apiSecret'
+ * @param {array} subUsers contains objects with 'apiKey' and 'apiSecret'
  */
-export function addSubAccounts(subAccounts) {
+export function addSubAccount(subUsers) {
   return {
     type: types.ADD,
-    payload: subAccounts,
+    payload: subUsers,
   }
 }
 
@@ -22,7 +22,19 @@ export function removeSubAccount(subAccount) {
   }
 }
 
+/**
+ * Create an action to update a sub account.
+ * @param {object} data contains sub users to add and remove
+ */
+export function updateSubAccount(data) {
+  return {
+    type: types.UPDATE,
+    payload: data,
+  }
+}
+
 export default {
-  addSubAccounts,
+  addSubAccount,
   removeSubAccount,
+  updateSubAccount,
 }

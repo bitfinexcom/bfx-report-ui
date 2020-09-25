@@ -59,18 +59,20 @@ class SectionHeader extends PureComponent {
       <SectionHeaderWrapper>
         <SectionHeaderTitle>{t(title)}</SectionHeaderTitle>
         {timeframe && <TimeRange className='section-header-time-range' />}
-        <SectionHeaderRow>
-          {selector && (
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
-              </SectionHeaderItemLabel>
-              {selector}
-            </SectionHeaderItem>
-          )}
-          {filter && <ColumnsFilter target={target} />}
-          {refresh && <RefreshButton onClick={refresh} />}
-        </SectionHeaderRow>
+        {(selector || filter || refresh) && (
+          <SectionHeaderRow>
+            {selector && (
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('selector.filter.symbol')}
+                </SectionHeaderItemLabel>
+                {selector}
+              </SectionHeaderItem>
+            )}
+            {filter && <ColumnsFilter target={target} />}
+            {refresh && <RefreshButton onClick={refresh} />}
+          </SectionHeaderRow>
+        )}
       </SectionHeaderWrapper>
     )
   }
