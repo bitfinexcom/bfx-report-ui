@@ -11,6 +11,7 @@ const {
   NUMBER,
   INTEGER,
   STRING,
+  DATE,
 } = DATA_TYPES
 
 class FilterTypeSelector extends React.PureComponent {
@@ -22,6 +23,12 @@ class FilterTypeSelector extends React.PureComponent {
   render() {
     const { value, dataType, t } = this.props
 
+    const dateTypes = (dataType === DATE)
+      ? [
+        { value: FILTERS.GREATER_THAN, label: t('columnsfilter.filters.after') },
+        { value: FILTERS.LESS_THAN, label: t('columnsfilter.filters.before') },
+      ]
+      : []
     const stringTypes = (dataType === STRING)
       ? [
         { value: FILTERS.CONTAINS, label: t('columnsfilter.filters.contains') },
@@ -43,6 +50,7 @@ class FilterTypeSelector extends React.PureComponent {
       : []
 
     const items = [
+      ...dateTypes,
       ...stringTypes,
       ...equalityTypes,
       ...numberTypes,

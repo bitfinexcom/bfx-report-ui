@@ -10,11 +10,13 @@ import _isEqual from 'lodash/isEqual'
 import _isString from 'lodash/isString'
 
 import ColumnsSelect from 'ui/ColumnsSelect'
+import DateInput from 'ui/DateInput'
 import Icon from 'icons'
 import { selectTextOnFocus } from 'utils/inputs'
 import { getValidSortedFilters } from 'state/filters/utils'
 import { EMPTY_FILTER } from 'var/filterTypes'
 import DEFAULT_FILTERS from 'ui/ColumnsFilter/var/defaultFilters'
+import DATA_TYPES from 'var/dataTypes'
 
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
@@ -24,6 +26,7 @@ import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 import SideSelector from './Selectors/SideSelector'
 
 const MAX_FILTERS = 7
+const { DATE } = DATA_TYPES
 
 /* eslint-disable react/no-array-index-key */
 class ColumnsFilter extends PureComponent {
@@ -145,6 +148,10 @@ class ColumnsFilter extends PureComponent {
     })
   }
 
+  onDateChange = (index, date) => {
+    this.updateFilter({ index, value: +date })
+  }
+
   onInputChange = (index, e) => {
     const { value } = e.target
     this.updateFilter({ index, value })
@@ -231,16 +238,22 @@ class ColumnsFilter extends PureComponent {
                       dataType={dataType}
                       onChange={filterType => this.updateFilter({ index, type: filterType })}
                     />
-                    {select
-                      ? this.renderSelect({ filter, index })
-                      : (
-                        <InputGroup
-                          className='columns-filter-item-input'
-                          value={value}
-                          onChange={e => this.onInputChange(index, e)}
-                          onFocus={selectTextOnFocus}
-                        />
-                      )}
+                    {select && this.renderSelect({ filter, index })}
+                    {dataType !== DATE && !select && (
+                      <InputGroup
+                        className='columns-filter-item-input'
+                        value={value}
+                        onChange={e => this.onInputChange(index, e)}
+                        onFocus={selectTextOnFocus}
+                      />
+                    )}
+                    {dataType === DATE && (
+                      <DateInput
+                        className='columns-filter-item-input'
+                        defaultValue={value || null}
+                        onChange={e => this.onDateChange(index, e)}
+                      />
+                    )}
                     <Icon.BIN
                       className='columns-filter-item-remove'
                       onClick={() => this.onFilterRemove(index)}

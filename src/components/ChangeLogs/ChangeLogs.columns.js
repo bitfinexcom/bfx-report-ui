@@ -17,11 +17,11 @@ export default function getColumns(props) {
 
   return [
     {
-      id: 'mts',
+      id: 'mtsCreate',
       nameStr: `${t('column.date')} (${timeOffset})`,
       width: COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
-        const timestamp = getFullTime(filteredData[rowIndex].mts)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (
           <Cell tooltip={timestamp}>
             <TruncatedFormat>
@@ -30,7 +30,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => getFullTime(filteredData[rowIndex].mts),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsCreate),
     },
     {
       id: 'log',
