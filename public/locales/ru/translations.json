@@ -7,6 +7,7 @@
     "fees": "Размеры вашей комиссии на Bitfinex",
     "fees_explain": "(в зависимости от объемов вашей торговли)",
     "fees_deriv": "Размеры вашей комиссий на деривативы Bitfinex",
+    "fee_tier_volume": "Объем (подлежащий расчету уровня комиссии) за последние 30 дней",
     "30dVolume": "Ваш объем торговли за последние 30 дней",
     "margin_funds": "Общая прибыль, полученная от предоставленного маржинального финансирования, за последние 30 дней"
   },
@@ -19,11 +20,21 @@
   "auth": {
     "auth": "Аутент.",
     "title": "Пожалуйста, авторизуйтесь",
+    "signUp": "Регистрация",
+    "signIn": "Войти",
     "enterAPIKey": "Введите ключ API:",
     "enterAPISecret": "Введите секретный ключ API:",
+    "enterPassword": "Введите пароль:",
+    "repeatPassword": "Повторите пароль:",
+    "enterEmail": "Введите электронную почту:",
     "checkAuth": "Проверка аутент.",
     "note1": "Посетите ",
     "note2": " для получения пары ключ API для чтения/секретный ключ.",
+    "passwordProtection": "Защитить паролем",
+    "passwordLengthValidationError": "Пароль должен состоять не менее чем из 8-ми символов",
+    "passwordCharactersValidationError": "Пароль должен включать как заглавные, так и строчные буквы",
+    "passwordRepeatValidationError": "Пароль не совпадает",
+    "rememberMe": "Запомнить меня",
     "required": "(обязательно)",
     "nonideal": {
       "title": "Reports 2.0",
@@ -32,6 +43,16 @@
   },
   "averagewinloss": {
     "title": "Среднее от выигрышей/проигрышей"
+  },
+  "candles": {
+    "title": "Свечи",
+    "amount": "Количество",
+    "orderid": "ID ордера",
+    "fee": "Комиссия",
+    "toggle_trades": "Переключить сделки"
+  },
+  "changelogs": {
+    "title": "Журналы изменений"
   },
   "charts": {
     "cumulative": "Суммарный",
@@ -49,6 +70,7 @@
     "base-price": "Базовая цена",
     "bid": "Заявка",
     "browser": "Браузер",
+    "category": "Категория",
     "closed": "Закрыто",
     "collateral": "Обеспечение",
     "created": "Создано",
@@ -67,6 +89,8 @@
     "ip": "IP",
     "lastpayout": "Последняя выплата",
     "liq-price": "Цена ликв.",
+    "maker_fees": "Комиссии маркет-мейкера",
+    "maker_rebate": "Вознаграждение маркет-мейкера",
     "meta": "Метаданные",
     "mobile": "Мобильный",
     "movementsTotal": "Сумма движений (USD)",
@@ -90,6 +114,8 @@
     "status": "Статус",
     "fundingCost": "Стоимость обеспечения",
     "fundingType": "Тип обеспечения",
+    "taker_fees": "Комиссии маркет-тейкера",
+    "taker_rebate": "Вознаграждение маркет-тейкера",
     "time": "Время",
     "totalResult": "Итого (USD)",
     "transactionId": "ID транзакции",
@@ -151,6 +177,7 @@
       "local": "CSV-файл для {{topic}} создан, проверьте локальную папку \"csv\"",
       "email": "CSV-отчет сейчас создается. Мы отправим его на вашу почту, когда он будет готов..."
     },
+    "success": "Выполнено",
     "targets": "Данные для экспорта"
   },
   "fcredit": {
@@ -192,8 +219,47 @@
     "preferences": "Предпочтения",
     "help": "Справка"
   },
+  "inputs": {
+    "filter_placeholder": "Фильтр...",
+    "timezone_local": "Текущий часовой пояс",
+    "timezone_placeholder": "Поиск часовых поясов..."
+  },
   "ledgers": {
-    "title": "Журналы"
+    "title": "Журналы",
+    "categories": {
+      "exchange": "Обмен",
+      "position_modified": "Позиция изменена, закрыта или ликвидирована",
+      "position_claim": "Отозванные позиции",
+      "position_transfer": "Перевод позиций",
+      "position_swap": "Обмен позиций",
+      "position_funding_cost": "Стоимость обеспечения позиции",
+      "interest_payment": "Выплата процентов",
+      "settlement": "Погашение задолженности",
+      "transfer": "Перевод",
+      "deposit": "Депозит",
+      "withdrawal": "Вывод",
+      "cancelled_withdrawal": "Отмененный вывод",
+      "trading_fee": "Комиссия за торговые операции",
+      "trading_rebate": "Вознаграждения за торговлю",
+      "hidden_order_fee": "Комиссия за скрытый ордер",
+      "otc_trade_fee": "OTC комиссия за торговые операции",
+      "swap_fee": "Комиссия за обмен",
+      "claiming_fee": "Комиссия за отзыв",
+      "margin_funding_charge": "Комиссия за использованное обеспечение",
+      "margin_funding_fee": "Комиссия за неиспользованное обеспечение",
+      "affiliate_rebate": "Вознаграждение аффилиата",
+      "ethfx_loyalty_fee": "Комиссия лояльности ETHFX",
+      "deposit_fee": "Комиссия за депозиты",
+      "withdrawal_fee": "Комиссия за снятие",
+      "withdrawal_express_fee": "Комиссия за экспресс-снятие",
+      "miner_fee": "Комиссия майнера",
+      "staking_payment": "Выплаты за стекинг",
+      "adjustment": "Корректировка",
+      "expense": "Расходы",
+      "currency_conversion": "Конвертация валют",
+      "monthly_profit_payment": "Ежемесячная прибыль",
+      "losses": "Убытки"
+    }
   },
   "loading": "Загрузка...",
   "loanreport": {
@@ -253,6 +319,8 @@
     "timezone-input": "Часовой пояс вводимых данных",
     "dateformat": "Формат даты",
     "milliseconds": "Показать миллисекунды",
+    "table_scroll": "Прокрутка таблицы",
+    "preserve_timeframe": "Сохранить временной промежуток",
     "sync": {
       "add-filter": "Добавить Фильтр",
       "add-pair": "Добавить Пару",
@@ -285,9 +353,11 @@
   },
   "selector": {
     "select": "Выбрать",
+    "all": "Bсе",
     "filter": {
       "symbol": "Фильтр по символу",
-      "pair": "Фильтр по паре"
+      "pair": "Фильтр по паре",
+      "category": "Категории-фильтры"
     }
   },
   "snapshots": {
@@ -297,6 +367,9 @@
       "tooltip": "Выберите время для запроса снэпшотов"
     }
   },
+  "spayments": {
+    "title": "Доходы от стекинга"
+  },
   "status": {
     "success": "{{topic}} Выполнено в {{time}}",
     "warn": "{{topic}}",
@@ -304,7 +377,10 @@
     "noid": "dev: the status action should contain the id param",
     "request": {
       "error": "{{topic}} Ошибка запроса {{detail}}"
-    }
+    },
+    "signInFail": "Неверные учетные данные",
+    "timeframe_update": "Временной диапазон обновлен",
+    "signUpFail": "Неверный API ключ или секрет"
   },
   "symbols": {
     "title": "Получить символы"
@@ -344,7 +420,8 @@
   },
   "theme": {
     "light": "Светлая",
-    "dark": "Темная"
+    "dark": "Темная",
+    "midnight": "Полночь"
   },
   "tickers": {
     "title": "Тикеры",
@@ -353,11 +430,13 @@
   "timeframe": {
     "custom": {
       "cancel": "Отмена",
+      "confirm": "Подтвердить",
       "title": "Выберите период для запроса",
       "view": "Просмотр"
     },
     "day": "День",
     "refresh": "Обновить",
+    "custom_time": "Другое",
     "custom-timerange": "Другой временной диапазон",
     "custom_year": "{{year}} год",
     "24h": "Последние 24 часа",
@@ -371,8 +450,8 @@
     "past_year": "Последний год",
     "past_2y": "Последние два года",
     "range_limit": "Запросы более шестилетней давности от текущего дня невозможны",
-    "custom_time": "Другое",
     "start-date-placeholder": "Начальная дата и время",
+    "end-date-placeholder": "Конечная дата",
     "today": "Сегодня",
     "year": "Год"
   },
@@ -389,7 +468,8 @@
     "header": {
       "exchange": "Биржа",
       "margin": "Маржинальное",
-      "funding": "Обеспечение"
+      "funding": "Обеспечение",
+      "token-sales": "Продажи токенов"
     },
     "nodata": "Нет данных за этот промежуток времени. Вы можете выбрать другой промежуток времени.",
     "query": {
