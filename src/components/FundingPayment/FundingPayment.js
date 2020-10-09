@@ -14,7 +14,7 @@ import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 
 import getColumns from 'components/Ledgers/Ledgers.columns'
-import { propTypes, defaultProps } from 'components/Ledgers/Ledgers.props'
+import { propTypes, defaultProps } from 'components/Ledgers/Ledgers.SubCategory.props'
 
 const TYPE = queryConstants.MENU_FPAYMENT
 

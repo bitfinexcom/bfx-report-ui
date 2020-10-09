@@ -21,8 +21,12 @@
 
   &-input {
     width: 45px;
-    margin: 0 2px;
+    height: 22px;
+    margin: 0 3px;
     text-align: center;
+    background-color: var(--bgColor);
+    border: 1px solid var(--borderColor);
+    color: var(--color);
   }
 
   &-loading {

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { fetchTaxReport } from 'state/taxReport/actions'
+import { fetchTaxReport, refresh } from 'state/taxReport/actions'
 import {
   getDataReceived,
   getData,
@@ -21,6 +21,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchData: fetchTaxReport,
+  refresh,
 }
 
 const TaxReportResultContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(TaxReportResult))

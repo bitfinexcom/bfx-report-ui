@@ -12,6 +12,7 @@ export const propTypes = {
   fetchData: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
+  refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 

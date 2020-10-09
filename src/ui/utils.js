@@ -94,10 +94,13 @@ export const formatColor = (value, color) => {
     'bitfinex-red-text': color === 'red',
   })
 
+  /* Fragment fixes blueprint's parentCellHeight warnings */
   return (
-    <div className={classes}>
-      {value}
-    </div>
+    <>
+      <div className={classes}>
+        {value}
+      </div>
+    </>
   )
 }
 

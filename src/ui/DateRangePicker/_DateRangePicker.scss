@@ -199,8 +199,13 @@
 @media screen and (max-width: 375px) {
   .date-range-picker-popover {
     position: absolute;
-    top: -25px;
+    top: -35px;
     left: -186px;
+
+    .bp3-popover-content {
+      max-height: calc(100vh - 50px);
+      overflow-y: scroll;
+    }
 
     &--dialog {
       top: 55px;
@@ -258,7 +263,7 @@
   }
 
   .bp3-daterangepicker {
-    height: 585px;
+    height: 605px;
     overflow: auto;
 
     .bp3-daterangepicker-shortcuts {

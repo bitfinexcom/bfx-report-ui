@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
+export const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
   amount: PropTypes.number.isRequired,
   balance: PropTypes.number.isRequired,
@@ -10,7 +10,7 @@ const LEDGERS_ENTRIES_PROPS = PropTypes.shape({
   wallet: PropTypes.string,
 })
 
-export const propTypes = {
+export const baseLedgersProps = {
   addTargetSymbol: PropTypes.func.isRequired,
   columns: PropTypes.object.isRequired,
   setTargetSymbols: PropTypes.func.isRequired,
@@ -22,10 +22,14 @@ export const propTypes = {
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   removeTargetSymbol: PropTypes.func.isRequired,
-  setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   targetSymbols: PropTypes.arrayOf(PropTypes.string),
   timeOffset: PropTypes.string.isRequired,
+}
+
+export const propTypes = {
+  ...baseLedgersProps,
+  setParams: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

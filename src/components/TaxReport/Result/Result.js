@@ -13,6 +13,7 @@ import { getFrameworkPositionsColumns } from 'utils/columns'
 
 import { propTypes } from './Result.props'
 import getBalancesColumns from './Balances.columns'
+import TAX_REPORT_SECTIONS from '../TaxReport.sections'
 
 const TYPE = queryConstants.MENU_TAX_REPORT
 
@@ -130,6 +131,11 @@ class TaxReport extends PureComponent {
       && !totalResult
   }
 
+  refresh = () => {
+    const { refresh } = this.props
+    refresh(TAX_REPORT_SECTIONS.RESULT)
+  }
+
   render() {
     const {
       data,
@@ -162,7 +168,7 @@ class TaxReport extends PureComponent {
       && !totalResult // can be 0 even if data is absent
 
     if (isEmpty) {
-      return <NoData />
+      return <NoData refresh={this.refresh} />
     }
 
     const positionsNotEmpty = startingPositionsSnapshot.length || endingPositionsSnapshot.length
