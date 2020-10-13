@@ -31,6 +31,13 @@ export function symbolsReducer(state = initialState, action) {
           symbol = 'pBCH'
         }
 
+        if (id.includes('F0')) {
+          const [perpSymbol] = id.split('F0')
+          const formattedPerpSymbol = `${perpSymbol}-PERP`
+          name = formattedPerpSymbol
+          symbol = formattedPerpSymbol
+        }
+
         if (symbol && id !== symbol) {
           symbolMapping[id] = symbol
           explorersDict[symbol] = explorer
