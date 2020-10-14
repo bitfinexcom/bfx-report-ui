@@ -17,6 +17,9 @@ export const mapDescription = (description) => {
   // 'BTCF0 (BTCF0:USTF0)' -> 'BTC-PERP'
   description = description.replace(/(\w+)F0 \(\w+:\w+\)/g, '$1-PERP') // eslint-disable-line no-param-reassign
 
+  // 'BTCF0:USTF0' -> 'BTC-PERP'
+  description = description.replace(/(\w+)F0:\w+/g, '$1-PERP') // eslint-disable-line no-param-reassign
+
   let mapKeys = Object.keys(symbolMap)
   // workaround for exception case when BAB is mapped into BCH and then BCH into pBCH
   if (symbolMap.BAB) {
