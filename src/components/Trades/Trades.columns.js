@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
+import { demapPairs, demapSymbols } from 'state/symbols/utils'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
 const getFeePercent = (entry) => {
@@ -13,12 +14,14 @@ const getFeePercent = (entry) => {
     feeCurrency,
   } = entry
 
-  const [firstCurr, secondCurr] = pair.split(':')
+  const demappedPair = demapPairs(pair, true)
+  const demappedFeeCurrency = demapSymbols(feeCurrency, true)
+  const [firstCurr, secondCurr] = demappedPair.split(':')
   let val
-  if (feeCurrency === firstCurr) {
+  if (demappedFeeCurrency === firstCurr) {
     val = fee / execAmount
   }
-  if (feeCurrency === secondCurr) {
+  if (demappedFeeCurrency === secondCurr) {
     val = fee / (execAmount * execPrice)
   }
   if (val) {
