@@ -14,6 +14,9 @@ export const mapCurrency = currency => (_includes(currency, ':') ? mapPair(curre
 
 // 'BAB from wallet exchange' -> 'BCH from wallet exchange'
 export const mapDescription = (description) => {
+  // 'BTCF0 (BTCF0:USTF0)' -> 'BTC-PERP'
+  description = description.replace(/(\w+)F0 \(\w+:\w+\)/g, '$1-PERP') // eslint-disable-line no-param-reassign
+
   let mapKeys = Object.keys(symbolMap)
   // workaround for exception case when BAB is mapped into BCH and then BCH into pBCH
   if (symbolMap.BAB) {
@@ -41,7 +44,16 @@ export const demapSymbols = (symbols, returnString = false) => {
 
 // [BCH:USD] -> [BAB:USD]
 export const demapPairs = (pairs, returnString = false) => {
-  const mappedPairs = _castArray(pairs).map(pair => demapSymbols(pair.split(':')).join(':'))
+  const mappedPairs = _castArray(pairs).map(pair => {
+    if (!pair.includes('-PERP')) {
+      return demapSymbols(pair.split(':')).join(':')
+    }
+
+    const [perpSymbol] = pair.split('-PERP')
+    return perpSymbol.includes('TEST')
+      ? `${perpSymbol}F0:TESTUSDTF0`
+      : `${perpSymbol}F0:USTF0`
+  })
 
   return returnString
     ? mappedPairs[0]

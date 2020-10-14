@@ -31,7 +31,7 @@ export function symbolsReducer(state = initialState, action) {
           symbol = 'pBCH'
         }
 
-        if (id.includes('F0')) {
+        if (id.includes('F0') && id !== 'USTF0') {
           const [perpSymbol] = id.split('F0')
           const formattedPerpSymbol = `${perpSymbol}-PERP`
           name = formattedPerpSymbol
