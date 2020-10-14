@@ -3,6 +3,7 @@ import { formatPair, mapPair } from 'state/symbols/utils'
 
 import types from './constants'
 import { setSymbolMap } from './map'
+import { PERP_EXCEPTIONS } from './var'
 
 const initialState = {
   isFetched: false,
@@ -31,7 +32,7 @@ export function symbolsReducer(state = initialState, action) {
           symbol = 'pBCH'
         }
 
-        if (id.includes('F0') && id !== 'USTF0') {
+        if (id.includes('F0') && !PERP_EXCEPTIONS.includes(id)) {
           const [perpSymbol] = id.split('F0')
           const formattedPerpSymbol = `${perpSymbol}-PERP`
           name = formattedPerpSymbol
