@@ -98,7 +98,7 @@ class SubAccount extends PureComponent {
           />
         )}
         {!isSubAccount && !hasSubAccount && <div className='subtitle'>{t('subaccounts.create')}</div>}
-        {isSubAccount && (
+        {(isSubAccount || !hasSubAccount) && (
           <>
             <SubUsersAdd
               accounts={accounts}

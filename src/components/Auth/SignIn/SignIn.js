@@ -102,7 +102,7 @@ class SignIn extends PureComponent {
     } = this.props
     const { email, password } = this.state
 
-    const { isNotProtected } = users.find(user => user.email === email) || {}
+    const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
     const isSignInDisabled = !email || (REACT_APP_ELECTRON && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
