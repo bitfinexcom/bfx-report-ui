@@ -239,7 +239,7 @@
       "position_transfer": "Position transfer",
       "position_swap": "Position swap",
       "position_funding_cost": "Position funding cost",
-      "interest_payment": "Interest payment",
+      "interest_payment": "Margin interest payment",
       "derivatives_funding_event": "Derivatives funding event",
       "settlement": "Settlement",
       "transfer": "Transfer",
