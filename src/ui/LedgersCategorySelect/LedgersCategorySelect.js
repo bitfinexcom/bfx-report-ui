@@ -14,6 +14,7 @@ const getLedgersCategories = _memoize((t) => ([
   { value: 26, label: t('ledgers.categories.position_swap') },
   { value: 27, label: t('ledgers.categories.position_funding_cost') },
   { value: 28, label: t('ledgers.categories.interest_payment') },
+  { value: 29, label: t('ledgers.categories.derivatives_funding_event') },
   { value: 31, label: t('ledgers.categories.settlement') },
   { value: 51, label: t('ledgers.categories.transfer') },
   { value: 101, label: t('ledgers.categories.deposit') },
