@@ -2,6 +2,7 @@
   position: absolute;
   top: -21px;
   left: -137px;
+  overflow: hidden;
 
   &--dialog {
     top: -14px;
@@ -15,7 +16,7 @@
   border-radius: 0;
   flex-flow: column;
 
-  div {
+  & > div {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -187,7 +188,7 @@
   .date-range-picker-popover {
     position: absolute;
     top: -41px;
-    left: -447px;
+    left: -446px;
 
     &--dialog {
       top: 45px;
@@ -197,19 +198,16 @@
 }
 
 @media screen and (max-width: 375px) {
-  .date-range-picker-popover {
-    position: absolute;
-    top: -35px;
-    left: -186px;
+  .date-range-picker {
+    &-popover {
+      position: absolute;
+      top: -35px;
+      left: -186px;
 
-    .bp3-popover-content {
-      max-height: calc(100vh - 50px);
-      overflow-y: scroll;
-    }
-
-    &--dialog {
-      top: 55px;
-      left: 0;
+      &--dialog {
+        top: 55px;
+        left: 0;
+      }
     }
   }
 
@@ -245,6 +243,8 @@
 @media screen and (max-width: 360px) {
   .date-range-picker-popover {
     left: -179px;
+    height: calc(100vh - 45px);
+    overflow: auto;
 
     &--dialog {
       height: 100vh;
@@ -263,9 +263,6 @@
   }
 
   .bp3-daterangepicker {
-    height: 605px;
-    overflow: auto;
-
     .bp3-daterangepicker-shortcuts {
       li {
         .bp3-menu-item {

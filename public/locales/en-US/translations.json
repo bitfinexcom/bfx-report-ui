@@ -223,7 +223,8 @@
   "header": {
     "logout": "Logout",
     "preferences": "Preferences",
-    "help": "Help"
+    "help": "Help",
+    "top_navigation": "Top Navigation"
   },
   "inputs": {
     "filter_placeholder": "Filter...",

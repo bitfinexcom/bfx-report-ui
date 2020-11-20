@@ -166,7 +166,6 @@ class DateRangePicker extends PureComponent {
           />
         )}
         isOpen={isOpen === undefined ? undefined : isOpen}
-        hasBackdrop
         minimal
         onOpened={removePopoverDismiss}
         onOpening={() => {
@@ -175,6 +174,7 @@ class DateRangePicker extends PureComponent {
         }}
         onClose={this.onClose}
         popoverClassName={popoverClassName}
+        portalClassName='date-range-picker-portal'
         transitionDuration={0}
       >
         {children || <span />}
