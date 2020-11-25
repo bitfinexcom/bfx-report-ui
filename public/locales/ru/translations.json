@@ -22,6 +22,8 @@
     "title": "Пожалуйста, авторизуйтесь",
     "signUp": "Регистрация",
     "signIn": "Войти",
+    "passwordRecovery": "Восстановление пароля",
+    "subAccount": "Субаккаунты",
     "enterAPIKey": "Введите ключ API:",
     "enterAPISecret": "Введите секретный ключ API:",
     "enterPassword": "Введите пароль:",
@@ -71,6 +73,8 @@
     "bid": "Заявка",
     "browser": "Браузер",
     "category": "Категория",
+    "clampMax": "Макс огранич.",
+    "clampMin": "Мин огранич.",
     "closed": "Закрыто",
     "collateral": "Обеспечение",
     "created": "Создано",
@@ -142,7 +146,9 @@
       "greaterThan": "Больше чем",
       "greaterThanEqual": "Больше / равно",
       "lessThan": "Меньше чем",
-      "lessThanEqual": "Меньше / равно"
+      "lessThanEqual": "Меньше / равно",
+      "after": "После",
+      "before": "До"
     }
   },
   "columnsselect": {
@@ -233,7 +239,8 @@
       "position_transfer": "Перевод позиций",
       "position_swap": "Обмен позиций",
       "position_funding_cost": "Стоимость обеспечения позиции",
-      "interest_payment": "Выплата процентов",
+      "interest_payment": "Выплата процентов по марже",
+      "derivatives_funding_event": "Финансирование деривативов",
       "settlement": "Погашение задолженности",
       "transfer": "Перевод",
       "deposit": "Депозит",
@@ -381,6 +388,16 @@
     "signInFail": "Неверные учетные данные",
     "timeframe_update": "Временной диапазон обновлен",
     "signUpFail": "Неверный API ключ или секрет"
+  },
+  "subaccounts": {
+    "add_account": "Добавить аккаунт",
+    "title": "Субаккаунты",
+    "create": "Создать субаккаунт",
+    "api_key": "Ключи API",
+    "api_secret": "Секретный ключ API",
+    "password": "Пароль",
+    "remove": "Удалить субаккаунт",
+    "login": "Войти в субаккаунт"
   },
   "symbols": {
     "title": "Получить символы"

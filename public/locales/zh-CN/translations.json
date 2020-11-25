@@ -22,6 +22,8 @@
     "title": "请登录",
     "signUp": "注册",
     "signIn": "登录",
+    "passwordRecovery": "找回密码",
+    "subAccount": "子账号",
     "enterAPIKey": "输入 API 密钥：",
     "enterAPISecret": "输入 API 密码：",
     "enterPassword": "输入密码：",
@@ -63,14 +65,16 @@
     "amount": "金额",
     "amount-exe": "已执行的金额",
     "amountUsd": "金额 (USD)",
-    "ask": "委卖",
+    "ask": "卖出价",
     "avgprice": "平均执行价格",
     "balance": "余额",
     "balanceUsd": "余额 (USD)",
     "base-price": "基价",
-    "bid": "委买",
+    "bid": "买入价",
     "browser": "浏览器",
     "category": "分类",
+    "clampMax": "最大值",
+    "clampMin": "最小值",
     "closed": "CLOSED",
     "collateral": "抵押品",
     "created": "创建时间",
@@ -142,7 +146,9 @@
       "greaterThan": "大于",
       "greaterThanEqual": "大于/等于",
       "lessThan": "少于",
-      "lessThanEqual": "小于/等于"
+      "lessThanEqual": "小于/等于",
+      "after": "此日期之后",
+      "before": "此日期之前"
     }
   },
   "columnsselect": {
@@ -233,7 +239,8 @@
       "position_transfer": "仓位转移",
       "position_swap": "仓位反转",
       "position_funding_cost": "仓位借贷费用",
-      "interest_payment": "利息收益",
+      "interest_payment": "保证金利息费用",
+      "derivatives_funding_event": "衍生品资金费用结算",
       "settlement": "结清",
       "transfer": "转移",
       "deposit": "充值",
@@ -381,6 +388,16 @@
     "signInFail": "凭证无效",
     "timeframe_update": "时间已更新",
     "signUpFail": "无效的API金钥或密钥"
+  },
+  "subaccounts": {
+    "add_account": "新增账号",
+    "title": "子账号",
+    "create": "创建子账号",
+    "api_key": "API密钥",
+    "api_secret": "API密码",
+    "password": "密码",
+    "remove": "移除子账号",
+    "login": "登录子账号"
   },
   "symbols": {
     "title": "获取符号"
