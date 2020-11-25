@@ -9,7 +9,6 @@ class NavMenuPopover extends PureComponent {
     return (
       <Popover
         popoverClassName='bitfinex-nav-menu--popover'
-        className='test'
         content={(
           <NavMenu
             className='bitfinex-nav-menu--popover-menu'

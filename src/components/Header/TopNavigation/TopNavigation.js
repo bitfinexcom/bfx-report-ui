@@ -12,6 +12,7 @@ import Icon from 'icons'
 import DateRangePicker from 'ui/DateRangePicker'
 import TimeRange from 'ui/TimeRange'
 import timeRangeTypes from 'state/timeRange/constants'
+import { platform } from 'var/config'
 
 import SyncMode from '../SyncMode'
 import { openHelp } from '../utils'
@@ -49,17 +50,19 @@ class TopNavigation extends PureComponent {
       'top-navigation--open': isOpen,
     })
 
+    if (window.innerWidth > 855) {
+      return null
+    }
+
     return (
       <div className={classes}>
         <Popover
           minimal
           autoFocus={false}
-          hasBackdrop
-          position={Position.BOTTOM}
+          position={Position.BOTTOM_RIGHT}
           portalClassName='top-navigation-portal'
           onOpening={() => this.togglePopover(true)}
           onClosing={() => this.togglePopover(false)}
-          boundary='viewport'
           content={(
             <div className='top-navigation-content'>
               <Menu>
@@ -80,7 +83,6 @@ class TopNavigation extends PureComponent {
                 />
                 <MenuItem
                   className='bp3-menu-item--subitem'
-                  shouldDismissPopover={false}
                   text={(
                     <TimeFrameShortcut
                       icon={false}
@@ -91,7 +93,6 @@ class TopNavigation extends PureComponent {
                 />
                 <MenuItem
                   className='bp3-menu-item--subitem'
-                  shouldDismissPopover={false}
                   text={(
                     <TimeFrameShortcut
                       icon={false}
@@ -101,6 +102,9 @@ class TopNavigation extends PureComponent {
                   )}
                 />
                 <MenuItem
+                  className={classNames('bp3-menu-item--sync', {
+                    'bp3-menu-item--sync--disabled': !platform.showFrameworkMode,
+                  })}
                   shouldDismissPopover={false}
                   text={<SyncMode />}
                 />
@@ -134,7 +138,7 @@ class TopNavigation extends PureComponent {
           <span>
             <Icon.CLOSE />
             <Icon.HAMBURGER_MENU />
-            {isOpen && <span className='top-navigation-title'>Top Navigation</span>}
+            {isOpen && <span className='top-navigation-title'>{t('header.top_navigation')}</span>}
           </span>
         </Popover>
       </div>

@@ -39,6 +39,6 @@ window.addEventListener('load', () => {
 
 window.addEventListener('resize', _debounce(() => {
   store.dispatch(uiResized())
-}, 100))
+}, 50))
 
 FocusStyleManager.onlyShowFocusOnTabs()
