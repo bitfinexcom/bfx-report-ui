@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import _endsWith from 'lodash/endsWith'
 
 import {
   Cell,
@@ -22,8 +23,14 @@ export default function getColumns(props) {
     timeOffset,
   } = props
 
-  function showType(swapType) {
-    return swapType
+  function showType(data) {
+    const { marginFundingType, pair } = data
+
+    if (_endsWith(pair, 'PERP')) {
+      return t('positions.swap.period')
+    }
+
+    return marginFundingType
       ? t('positions.swap.term')
       : t('positions.swap.daily')
   }
@@ -218,14 +225,14 @@ export default function getColumns(props) {
       name: 'column.fundingType',
       width: 130,
       renderer: (rowIndex) => {
-        const swapType = showType(filteredData[rowIndex].marginFundingType)
+        const swapType = showType(filteredData[rowIndex])
         return (
           <Cell tooltip={swapType}>
             {swapType}
           </Cell>
         )
       },
-      copyText: rowIndex => showType(filteredData[rowIndex].marginFundingType),
+      copyText: rowIndex => showType(filteredData[rowIndex]),
     },
     {
       id: 'status',
