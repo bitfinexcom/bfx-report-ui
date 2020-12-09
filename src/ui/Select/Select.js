@@ -69,6 +69,7 @@ class Select extends PureComponent {
     const {
       className,
       filterable,
+      itemPredicate,
       itemRenderer,
       items,
       popoverClassName,
@@ -99,7 +100,7 @@ class Select extends PureComponent {
         }}
         items={items}
         itemRenderer={itemRenderer || this.itemRenderer}
-        itemPredicate={filterable && filterSelectorItem}
+        itemPredicate={itemPredicate || (filterable && filterSelectorItem)}
         onItemSelect={this.onChange}
         popoverProps={{
           minimal: true,

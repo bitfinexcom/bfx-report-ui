@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 export const propTypes = {
   className: PropTypes.string,
   filterable: PropTypes.bool,
+  itemPredicate: PropTypes.func,
   itemRenderer: PropTypes.func,
   items: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.string,
