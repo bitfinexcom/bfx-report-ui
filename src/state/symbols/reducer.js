@@ -32,10 +32,13 @@ export function symbolsReducer(state = initialState, action) {
       const symbolMapping = {}
 
       currencies.forEach((currency) => {
-        const { id, explorer } = currency
-        const { name, symbol } = currency
+        const { id, explorer, name } = currency
+        let { symbol } = currency
 
         if (symbol && id !== symbol) {
+          if (id.includes('F0')) {
+            symbol = `${symbol} (deriv)`
+          }
           symbolMapping[id] = symbol
           explorersDict[symbol] = explorer
           dict[symbol] = name
