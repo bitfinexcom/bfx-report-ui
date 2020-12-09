@@ -26,14 +26,6 @@ export const formatPair = (pair) => {
   // eslint-disable-next-line no-param-reassign
   pair = removePrefix(pair)
 
-  if (pair.includes('F0')) {
-    const [perpSymbol] = pair.split(':')
-    // should always be the case
-    if (perpSymbol.includes('F0')) {
-      return `${perpSymbol.split('F0')[0]}-PERP`
-    }
-  }
-
   if (pair.length === 6) {
     return `${pair.substr(0, 3)}:${pair.substr(3, 6)}`
   }
