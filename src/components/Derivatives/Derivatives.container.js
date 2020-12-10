@@ -9,7 +9,7 @@ import {
   removeTargetPair,
 } from 'state/derivatives/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
-import { getPairs } from 'state/symbols/selectors'
+import { getInactivePairs, getPairs } from 'state/symbols/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -25,6 +25,7 @@ import Derivatives from './Derivatives'
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_DERIVATIVES),
   entries: getEntries(state),
+  inactivePairs: getInactivePairs(state),
   pairs: getPairs(state),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),

@@ -5,7 +5,7 @@ import { getInactivePairs, getPairs } from 'state/symbols/selectors'
 import MultiPairSelector from './MultiPairSelector'
 
 const mapStateToProps = (state, ownProps) => ({
-  inactivePairs: getInactivePairs(state),
+  inactivePairs: ownProps.inactivePairs || getInactivePairs(state),
   pairs: ownProps.pairs || getPairs(state),
 })
 

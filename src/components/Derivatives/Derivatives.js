@@ -16,7 +16,7 @@ import {
 import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
 import DerivativesSyncPref from 'ui/DerivativesSyncPref'
-import MultiPairSelector from 'ui/MultiPairSelector/MultiPairSelector'
+import MultiPairSelector from 'ui/MultiPairSelector'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, togglePair } from 'state/utils'
 
@@ -40,13 +40,14 @@ class Derivatives extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  getFilteredPairs = pairs => pairs.filter(pair => pair.includes('F0'))
+  getFilteredPairs = pairs => pairs.filter(pair => pair.includes('F0') || pair.includes('PERP'))
 
   togglePair = pair => togglePair(TYPE, this.props, pair)
 
   render() {
     const {
       columns,
+      inactivePairs,
       pairs,
       existingPairs,
       getFullTime,
@@ -94,6 +95,7 @@ class Derivatives extends PureComponent {
               <MultiPairSelector
                 currentFilters={targetPairs}
                 existingPairs={existingPairs}
+                inactivePairs={this.getFilteredPairs(inactivePairs)}
                 pairs={this.getFilteredPairs(pairs)}
                 togglePair={this.togglePair}
               />
