@@ -43,7 +43,7 @@ const getStoredAuth = () => {
 }
 
 const initialState = {
-  authStatus: null,
+  authStatus: false,
   ...getStoredAuth(),
   token: '',
   isShown: true,
@@ -105,7 +105,7 @@ export function authReducer(state = initialState, action) {
     case types.UPDATE_AUTH_STATUS:
       return {
         ...state,
-        authStatus: payload || null,
+        authStatus: !!payload,
         loading: payload || false, // eject from loading if auth fail
       }
     case types.SHOW_AUTH:
