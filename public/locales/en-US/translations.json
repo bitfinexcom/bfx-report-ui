@@ -315,6 +315,7 @@
     "no_active": "No active positions at the moment.",
     "swap": {
       "daily": "Daily",
+      "period": "Period",
       "term": "Term"
     }
   },
