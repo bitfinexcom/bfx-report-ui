@@ -1,15 +1,16 @@
 import authTypes from 'state/auth/constants'
-import { formatPair, mapPair } from 'state/symbols/utils'
+import { formatPair, mapPair, mapSymbol } from 'state/symbols/utils'
 
+import SymbolMap from './map'
 import types from './constants'
-import { setSymbolMap } from './map'
-import { PERP_EXCEPTIONS } from './var'
 
 const initialState = {
-  isFetched: false,
   coins: [], // symbol
   currencies: {}, // full name
   explorers: {}, // symbol explorer
+  inactiveCurrencies: [],
+  inactivePairs: [],
+  isFetched: false,
   pairs: [], // pair
 }
 
@@ -17,49 +18,60 @@ export function symbolsReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.UPDATE_SYMBOLS: {
-      const { currencies, inactiveSymbols, pairs } = payload
+      const {
+        currencies = [],
+        inactiveCurrencies = [],
+        inactiveSymbols = [],
+        mapSymbols = [],
+        pairs = [],
+      } = payload
+
       const coins = []
       const dict = {}
       const explorersDict = {}
       const symbolMapping = {}
 
       currencies.forEach((currency) => {
-        const { id, explorer } = currency
-        let { name, symbol } = currency
-
-        if (id === 'BCH') {
-          name = 'Bitcoin Cash (Pre Fork)'
-          symbol = 'pBCH'
-        }
-
-        if (id.includes('F0') && !PERP_EXCEPTIONS.includes(id)) {
-          const [perpSymbol] = id.split('F0')
-          const formattedPerpSymbol = `${perpSymbol}-PERP`
-          name = formattedPerpSymbol
-          symbol = formattedPerpSymbol
-        }
+        const { id, explorer, name } = currency
+        let { symbol } = currency
 
         if (symbol && id !== symbol) {
+          if (id.includes('F0')) {
+            symbol = `${symbol} (deriv)`
+          }
           symbolMapping[id] = symbol
           explorersDict[symbol] = explorer
           dict[symbol] = name
           coins.push(symbol)
           return
         }
+
         explorersDict[id] = explorer
         dict[id] = name
         coins.push(id)
       })
-      setSymbolMap(symbolMapping)
 
-      const formattedPairs = [...pairs, ...inactiveSymbols].map(formatPair).map(mapPair).sort()
+      const pairMapping = mapSymbols.reduce((acc, symbol) => {
+        const [from, to] = symbol
+        acc[from] = to
+        return acc
+      }, {})
+
+      SymbolMap.setSymbols(symbolMapping)
+      SymbolMap.setPairs(pairMapping)
+
+      const formattedInactiveCurrencies = inactiveCurrencies.map(mapSymbol).sort()
+      const formattedPairs = pairs.map(formatPair).map(mapPair).sort()
+      const formattedInactivePairs = inactiveSymbols.map(formatPair).map(mapPair).sort()
 
       return {
         ...state,
-        isFetched: true,
         coins: coins.sort(),
         currencies: dict,
         explorers: explorersDict,
+        inactiveCurrencies: formattedInactiveCurrencies,
+        inactivePairs: formattedInactivePairs,
+        isFetched: true,
         pairs: formattedPairs,
       }
     }

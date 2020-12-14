@@ -1,41 +1,37 @@
 import _includes from 'lodash/includes'
 import _castArray from 'lodash/castArray'
 
-import symbolMap from '../map'
+import SymbolMap from '../map'
 
 // BAB -> BCH
-export const mapSymbol = symbol => symbolMap[symbol] || symbol
+export const mapSymbol = symbol => SymbolMap.symbols[symbol] || symbol
 
+// ETHF0:BTCF0: "ETH:BTC-PERP
 // BAB:USD -> BCH:USD
-export const mapPair = pair => pair.split(':').map(mapSymbol).join(':')
+export const mapPair = (pair) => {
+  if (SymbolMap.pairs[pair]) {
+    return SymbolMap.pairs[pair]
+  }
+  return pair.split(':').map(mapSymbol).join(':')
+}
 
 // automatic mapping
 export const mapCurrency = currency => (_includes(currency, ':') ? mapPair(currency) : mapSymbol(currency))
 
 // 'BAB from wallet exchange' -> 'BCH from wallet exchange'
 export const mapDescription = (description) => {
-  // 'BTCF0 (BTCF0:USTF0)' -> 'BTC-PERP'
-  description = description.replace(/(\w+)F0 \(\w+:\w+\)/g, '$1-PERP') // eslint-disable-line no-param-reassign
+  const pairMapKeys = Object.keys(SymbolMap.pairs)
+  const symbolMapKeys = Object.keys(SymbolMap.symbols)
 
-  // 'BTCF0:USTF0' -> 'BTC-PERP'
-  description = description.replace(/(\w+)F0:\w+/g, '$1-PERP') // eslint-disable-line no-param-reassign
-
-  let mapKeys = Object.keys(symbolMap)
-  // workaround for exception case when BAB is mapped into BCH and then BCH into pBCH
-  if (symbolMap.BAB) {
-    mapKeys = mapKeys.filter(key => key !== 'BAB')
-    mapKeys.push('BAB')
-  }
-  return mapKeys.reduce((desc, symbol) => desc.replace(new RegExp(symbol, 'g'), symbolMap[symbol]), description)
+  return [...pairMapKeys, ...symbolMapKeys]
+    .reduce((desc, symbol) => desc.replace(new RegExp(symbol, 'g'), SymbolMap.symbols[symbol]), description)
 }
 
 // [BCH, USD] -> [BAB, USD]
 export const demapSymbols = (symbols, returnString = false) => {
-  const mapKeys = Object.keys(symbolMap)
   const mappedSymbols = _castArray(symbols).map((symbol) => {
-    const key = mapKeys.find(k => symbolMap[k] === symbol)
-    if (key) {
-      return key
+    if (SymbolMap.symbolsDemap[symbol]) {
+      return SymbolMap.symbolsDemap[symbol]
     }
     return symbol
   })
@@ -47,15 +43,11 @@ export const demapSymbols = (symbols, returnString = false) => {
 
 // [BCH:USD] -> [BAB:USD]
 export const demapPairs = (pairs, returnString = false) => {
-  const mappedPairs = _castArray(pairs).map(pair => {
-    if (!pair.includes('-PERP')) {
-      return demapSymbols(pair.split(':')).join(':')
+  const mappedPairs = _castArray(pairs).map((pair) => {
+    if (SymbolMap.pairsDemap[pair]) {
+      return SymbolMap.pairsDemap[pair]
     }
-
-    const [perpSymbol] = pair.split('-PERP')
-    return perpSymbol.includes('TEST')
-      ? `${perpSymbol}F0:TESTUSDTF0`
-      : `${perpSymbol}F0:USTF0`
+    return demapSymbols(pair.split(':')).join(':')
   })
 
   return returnString

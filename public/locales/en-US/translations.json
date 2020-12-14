@@ -362,6 +362,7 @@
   "selector": {
     "select": "Select",
     "all": "All",
+    "inactive": "Inactive",
     "filter": {
       "symbol": "Symbol Filter",
       "pair": "Pair Filter",

@@ -15,6 +15,7 @@ export const propTypes = {
   addTargetPair: PropTypes.func.isRequired,
   setTargetPairs: PropTypes.func.isRequired,
   entries: PropTypes.arrayOf(DERIVATIVES_ENTRIES_PROPS).isRequired,
+  inactivePairs: PropTypes.arrayOf(PropTypes.string),
   pairs: PropTypes.arrayOf(PropTypes.string),
   existingPairs: PropTypes.arrayOf(PropTypes.string),
   fetchData: PropTypes.func.isRequired,

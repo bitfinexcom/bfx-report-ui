@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { withTranslation } from 'react-i18next'
 import { Intent, MenuItem } from '@blueprintjs/core'
 
 import Select from 'ui/Select'
@@ -11,33 +12,52 @@ class PairSelector extends PureComponent {
     if (!matchesPredicate) {
       return null
     }
-    const { currentPair } = this.props
+    const { currentPair, t } = this.props
     const isCurrent = currentPair === pair
+    const text = pair === 'inactive' ? t('selector.inactive') : pair
 
     return (
       <MenuItem
         active={active}
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-        disabled={disabled}
+        disabled={disabled || pair === 'inactive'}
         key={pair}
         onClick={handleClick}
-        text={pair}
+        text={text}
       />
     )
   }
 
+  itemPredicate = (query, item) => {
+    if (item === 'inactive') {
+      const { inactivePairs } = this.props
+      return !!inactivePairs.find((pair) => pair.toLowerCase().indexOf(query.toLowerCase()) >= 0)
+    }
+
+    return item.toLowerCase().indexOf(query.toLowerCase()) >= 0
+  }
+
   render() {
     const {
-      currentPair, pairs, onPairSelect,
+      currentPair, inactivePairs, pairs, onPairSelect,
     } = this.props
+
+    const items = inactivePairs.length
+      ? [
+        ...pairs,
+        'inactive',
+        ...inactivePairs,
+      ]
+      : pairs
 
     return (
       <Select
         popoverClassName='bitfinex-select-menu--pair'
         itemRenderer={this.itemRenderer}
+        itemPredicate={this.itemPredicate}
         onChange={onPairSelect}
         filterable
-        items={pairs}
+        items={items}
         value={currentPair}
       />
     )
@@ -47,4 +67,4 @@ class PairSelector extends PureComponent {
 PairSelector.propTypes = propTypes
 PairSelector.defaultProps = defaultProps
 
-export default PairSelector
+export default withTranslation('translations')(PairSelector)
