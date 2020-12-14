@@ -181,10 +181,8 @@ function* fetchUsers() {
     const { result: users } = yield call(makeFetchCall, 'getUsers')
 
     if (users) {
-      const auth = yield select(selectAuth)
-
       yield put(actions.setUsers(users))
-      if (!users.length && !_isEmpty(auth)) {
+      if (!users.length) {
         yield put(actions.clearAuth())
       }
     }

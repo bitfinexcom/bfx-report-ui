@@ -97,7 +97,7 @@ export function authReducer(state = initialState, action) {
         ...payload,
       }
     case types.CLEAR_AUTH:
-      Authenticator.set({ ...initialAuthData, isPersisted: state.isPersisted })
+      Authenticator.clear()
       return {
         ...state,
         ...initialAuthData,
