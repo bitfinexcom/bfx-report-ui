@@ -19,6 +19,8 @@ export const mapPair = (pair) => {
 export const mapCurrency = currency => (_includes(currency, ':') ? mapPair(currency) : mapSymbol(currency))
 
 // 'BAB from wallet exchange' -> 'BCH from wallet exchange'
+// Prevent changeing words that have the symbols in them as to do that
+// only change the beginning/end of a word, consider that pair might be in ()
 export const mapDescription = (description) => {
   const pairMapKeys = Object.keys(SymbolMap.pairs)
   const symbolMapKeys = Object.keys(SymbolMap.symbols)
@@ -26,7 +28,13 @@ export const mapDescription = (description) => {
     return desc.replace(new RegExp(symbol, 'g'), SymbolMap.pairs[symbol])
   }, description)
   return symbolMapKeys.reduce((desc, symbol) => {
-    return desc.replace(new RegExp(symbol, 'g'), SymbolMap.symbols[symbol])
+    return desc.replace(
+      new RegExp(
+        `^${symbol}|${symbol}$|${symbol}[ ]|[ ]${symbol}|${symbol}[)]|[(]${symbol}`,
+         'g'
+       ),
+       (str) => str.replace(new RegExp(symbol, 'g'), SymbolMap.symbols[symbol])
+    )
   }, descPairsMapped)
 }
 
