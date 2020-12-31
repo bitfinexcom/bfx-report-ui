@@ -19,7 +19,7 @@ export const mapPair = (pair) => {
 export const mapCurrency = currency => (_includes(currency, ':') ? mapPair(currency) : mapSymbol(currency))
 
 // 'BAB from wallet exchange' -> 'BCH from wallet exchange'
-// Prevent changeing words that have the symbols in them as to do that
+// Prevent changing words that have the symbols in them as to do that
 // only change the beginning/end of a word, consider that pair might be in ()
 export const mapDescription = (description) => {
   const pairMapKeys = Object.keys(SymbolMap.pairs)
