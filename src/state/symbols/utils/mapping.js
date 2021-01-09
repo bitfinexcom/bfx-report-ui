@@ -24,18 +24,15 @@ export const mapCurrency = currency => (_includes(currency, ':') ? mapPair(curre
 export const mapDescription = (description) => {
   const pairMapKeys = Object.keys(SymbolMap.pairs)
   const symbolMapKeys = Object.keys(SymbolMap.symbols)
-  const descPairsMapped = pairMapKeys.reduce((desc, symbol) => {
-    return desc.replace(new RegExp(symbol, 'g'), SymbolMap.pairs[symbol])
-  }, description)
-  return symbolMapKeys.reduce((desc, symbol) => {
-    return desc.replace(
-      new RegExp(
-        `^${symbol}|${symbol}$|${symbol}[ ]|[ ]${symbol}|${symbol}[)]|[(]${symbol}`,
-         'g'
-       ),
-       (str) => str.replace(new RegExp(symbol, 'g'), SymbolMap.symbols[symbol])
-    )
-  }, descPairsMapped)
+  const descPairsMapped = pairMapKeys
+    .reduce((desc, symbol) => desc.replace(new RegExp(symbol, 'g'), SymbolMap.pairs[symbol]), description)
+  return symbolMapKeys.reduce((desc, symbol) => desc.replace(
+    new RegExp(
+      `^${symbol}|${symbol}$|${symbol}[ ]|[ ]${symbol}|${symbol}[)]|[(]${symbol}`,
+      'g',
+    ),
+    (str) => str.replace(new RegExp(symbol, 'g'), SymbolMap.symbols[symbol]),
+  ), descPairsMapped)
 }
 
 // [BCH, USD] -> [BAB, USD]
