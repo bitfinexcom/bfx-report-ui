@@ -52,19 +52,25 @@ export const getColumns = (props) => {
   ]
 }
 
-const AccountSummaryMarginFunds = (props) => {
-  const { data, t } = props
+const AccountSummaryPaidFees = (props) => {
+  const {
+    data, t, title, total,
+  } = props
 
   const formattedData = Object.keys(data).map(key => ({
     curr: key,
     amount: data[key],
   }))
+  formattedData.push({
+    curr: 'Total (USD)',
+    amount: total,
+  })
 
   const columns = getColumns({ data: formattedData })
 
   return (
     <div className='section-account-summary-data-item'>
-      <div>{t('accountsummary.margin_funds')}</div>
+      <div>{t(title)}</div>
       <DataTable
         numRows={formattedData.length}
         tableColumns={columns}
@@ -73,9 +79,11 @@ const AccountSummaryMarginFunds = (props) => {
   )
 }
 
-AccountSummaryMarginFunds.propTypes = {
+AccountSummaryPaidFees.propTypes = {
   data: PropTypes.objectOf(PropTypes.number).isRequired,
+  title: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
   t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(AccountSummaryMarginFunds)
+export default withTranslation('translations')(AccountSummaryPaidFees)
