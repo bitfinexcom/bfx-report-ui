@@ -37,7 +37,7 @@ const getColumns = (props) => {
   ]
 }
 
-const AccountSummaryFees = (props) => {
+const AccountSummaryLeo = (props) => {
   const { data } = props
   const { leo_lev: leoLevel, leo_amount_avg: leoAmountAvg } = data
 
@@ -53,11 +53,11 @@ const AccountSummaryFees = (props) => {
   )
 }
 
-AccountSummaryFees.propTypes = {
+AccountSummaryLeo.propTypes = {
   data: PropTypes.shape({
     leo_lev: PropTypes.number.isRequired,
     leo_amount_avg: PropTypes.number.isRequired,
   }).isRequired,
 }
 
-export default withTranslation('translations')(AccountSummaryFees)
+export default withTranslation('translations')(AccountSummaryLeo)
