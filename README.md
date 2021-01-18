@@ -70,11 +70,9 @@ npm run start
 2.2. back to `bfx-report-ui` root, set up env variables to run locally:
 
     ```
-    export NODE_PATH=src/
     export REACT_APP_PLATFORM=localhost
     ```
 
-`NODE_PATH` is used to support absolute import local package instead of relative import.
 `REACT_APP_PLATFORM` is used to select the right set for site title, api endpoint and more configs.
 
 2.3. start the report-ui
