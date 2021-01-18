@@ -4,7 +4,7 @@ import Status from 'components/Status'
 import DateRangePicker from 'ui/DateRangePicker'
 import PlatformLogo from 'ui/PlatformLogo'
 import timeRangeTypes from 'state/timeRange/constants'
-import { platform } from 'var/config'
+import config, { platform } from 'var/config'
 
 import TimeFrame from './TimeFrame'
 import TimeFrameShortcut from './TimeFrameShortcut'
@@ -13,10 +13,8 @@ import SyncMode from './SyncMode'
 import AccountMenu from './AccountMenu'
 import TopNavigation from './TopNavigation'
 
-const { REACT_APP_ELECTRON } = process.env
-
 const Header = () => {
-  const HOME_URL = REACT_APP_ELECTRON ? '/' : platform.HOME_URL
+  const HOME_URL = config.isElectronApp ? '/' : platform.HOME_URL
 
   return (
     <div className='header'>

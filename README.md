@@ -67,15 +67,7 @@ npm install
 npm run start
 ```
 
-2.2. back to `bfx-report-ui` root, set up env variables to run locally:
-
-    ```
-    export REACT_APP_PLATFORM=localhost
-    ```
-
-`REACT_APP_PLATFORM` is used to select the right set for site title, api endpoint and more configs.
-
-2.3. start the report-ui
+2.2. start the report-ui
 
     ```
     npm run start

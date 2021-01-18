@@ -6,6 +6,8 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+
+import config from 'var/config'
 import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
 import Select from 'ui/Select'
@@ -13,8 +15,6 @@ import Select from 'ui/Select'
 import { propTypes, defaultProps } from './SignIn.props'
 import InputKey from '../InputKey'
 import { MODES } from '../Auth'
-
-const { REACT_APP_ELECTRON } = process.env
 
 class SignIn extends PureComponent {
   static propTypes = propTypes
@@ -103,7 +103,7 @@ class SignIn extends PureComponent {
     const { email, password } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
-    const isSignInDisabled = !email || (REACT_APP_ELECTRON && !isElectronBackendLoaded)
+    const isSignInDisabled = !email || (config.isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
 
