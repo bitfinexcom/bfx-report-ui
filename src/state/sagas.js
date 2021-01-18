@@ -1,6 +1,6 @@
 import { fork } from 'redux-saga/effects'
 
-import { platform } from 'var/config'
+import config from 'config'
 
 import accountBalanceSaga from './accountBalance/saga'
 import accountSummarySaga from './accountSummary/saga'
@@ -76,7 +76,7 @@ export default function* rootSaga() {
   yield fork(tradesSaga)
   yield fork(uiSaga)
   yield fork(walletsSaga)
-  if (platform.showFrameworkMode) {
+  if (config.showFrameworkMode) {
     yield fork(accountBalanceSaga)
     yield fork(feesReportSaga)
     yield fork(loanReportSaga)

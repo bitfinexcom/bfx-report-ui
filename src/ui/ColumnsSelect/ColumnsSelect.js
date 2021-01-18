@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { Checkbox } from '@blueprintjs/core'
 
 import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
-import { platform } from 'var/config'
+import config from 'config'
 
 import ColumnsSelectDialog from './Dialog'
 import { propTypes, defaultProps } from './ColumnsSelect.props'
@@ -62,7 +62,7 @@ class ColumnsSelect extends PureComponent {
 
     const hasChanges = Object.keys(columns).some(column => columns[column] !== currentColumns[column])
     const sectionColumns = SECTION_COLUMNS[target]
-      .filter(column => (!column.frameworkOnly || platform.showFrameworkMode) && !column.filterOnly)
+      .filter(column => (!column.frameworkOnly || config.showFrameworkMode) && !column.filterOnly)
 
     return (
       <Fragment>

@@ -12,7 +12,7 @@ import {
 
 import Icon from 'icons'
 import mode from 'state/sync/constants'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './SyncMode.props'
 import { getTitle, getTooltipMessage } from './SyncMode.helpers'
@@ -86,7 +86,7 @@ class SyncMode extends PureComponent {
     } = this.props
     const { isOpen } = this.state
 
-    if (!platform.showFrameworkMode) {
+    if (!config.showFrameworkMode) {
       return (
         <div className='sync-mode'>
           <div className='sync-mode-wrapper' onClick={this.handleToggleClick}>

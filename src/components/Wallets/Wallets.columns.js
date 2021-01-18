@@ -3,7 +3,7 @@ import { Cell } from '@blueprintjs/table'
 
 import { insertIf, fixedFloat } from 'ui/utils'
 import { COLUMN_WIDTHS } from 'utils/columns'
-import { platform } from 'var/config'
+import config from 'config'
 
 export default function getColumns(props) {
   const { filteredData } = props
@@ -41,7 +41,7 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
     },
-    ...insertIf(platform.showFrameworkMode, (
+    ...insertIf(config.showFrameworkMode, (
       {
         id: 'balanceUsd',
         name: 'column.balanceUsd',

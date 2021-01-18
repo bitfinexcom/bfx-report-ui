@@ -1,7 +1,7 @@
 import _isArray from 'lodash/isArray'
 
 import Icons from 'icons'
-import { platform } from 'var/config'
+import config from 'config'
 
 import queryType from './constants'
 
@@ -162,7 +162,7 @@ const PUBLIC_TARGETS = [
   MENU_DERIVATIVES,
 ]
 
-const FRAMEWORK = platform.showFrameworkMode
+const FRAMEWORK = config.showFrameworkMode
   ? [
     MENU_ACCOUNT_BALANCE,
     MENU_LOAN_REPORT,

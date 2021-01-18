@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { NonIdealState } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
-import { platform } from 'var/config'
+import config from 'config'
 
 import SignUp from './SignUp'
 import SignIn from './SignIn'
@@ -27,13 +27,13 @@ class Auth extends PureComponent {
     const { authData: { hasAuthData } } = props
 
     this.state = {
-      mode: (!platform.showFrameworkMode || !hasAuthData) ? MODES.SIGN_UP : MODES.SIGN_IN,
+      mode: (!config.showFrameworkMode || !hasAuthData) ? MODES.SIGN_UP : MODES.SIGN_IN,
     }
   }
 
   componentDidUpdate(prevProps) {
     const { isUsersLoaded, users } = this.props
-    if (platform.showFrameworkMode && !prevProps.isUsersLoaded && isUsersLoaded && users.length) {
+    if (config.showFrameworkMode && !prevProps.isUsersLoaded && isUsersLoaded && users.length) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ mode: MODES.SIGN_IN })
     }
@@ -52,11 +52,11 @@ class Auth extends PureComponent {
     } = this.props
     const { mode } = this.state
 
-    if (!isShown || (platform.showFrameworkMode && !hasAuthData && usersLoading)) {
+    if (!isShown || (config.showFrameworkMode && !hasAuthData && usersLoading)) {
       return null
     }
 
-    if (!platform.showAuthPage) {
+    if (!config.showAuthPage) {
       return (
         <NonIdealState
           className='bitfinex-nonideal'

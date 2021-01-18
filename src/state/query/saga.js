@@ -44,7 +44,7 @@ import {
 } from 'state/base/selectors'
 import { getEmail } from 'state/auth/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { getExportEmail } from './selectors'
 import actions from './actions'
@@ -417,7 +417,7 @@ function* exportCSV({ payload: targets }) {
 
 function* prepareExport() {
   try {
-    if (platform.localExport) {
+    if (config.localExport) {
       yield put(actions.setExportEmail(''))
       return
     }

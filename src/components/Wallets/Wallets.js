@@ -15,7 +15,7 @@ import {
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
-import { platform } from 'var/config'
+import config from 'config'
 
 import WalletsData from './Wallets.data'
 import { propTypes, defaultProps } from './Wallets.props'
@@ -76,7 +76,7 @@ class Wallets extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'>
         <SectionHeader>
           <SectionHeaderTitle>{t('wallets.title')}</SectionHeaderTitle>
-          {platform.showFrameworkMode && (
+          {config.showFrameworkMode && (
             <SectionHeaderRow>
               <SectionHeaderItem>
                 <SectionHeaderItemLabel>

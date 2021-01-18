@@ -8,7 +8,7 @@ import _isEqual from 'lodash/isEqual'
 import _sortBy from 'lodash/sortBy'
 
 import { store } from 'state/store'
-import config, { platform } from 'var/config'
+import config from 'config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import queryType from 'state/query/constants'
 import {
@@ -67,7 +67,7 @@ export function postJsonfetch(url, bodyJson) {
 }
 
 export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/json-rpc`, {
+  return postJsonfetch(`${config.API_URL}/json-rpc`, {
     auth,
     method,
     params: params || undefined,

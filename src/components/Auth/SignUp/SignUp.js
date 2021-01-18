@@ -11,7 +11,7 @@ import {
 } from '@blueprintjs/core'
 import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './SignUp.props'
 import InputKey from '../InputKey'
@@ -77,7 +77,7 @@ class SignUp extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    if (!platform.showFrameworkMode || !isPasswordProtected) {
+    if (!config.showFrameworkMode || !isPasswordProtected) {
       return true
     }
 
@@ -142,14 +142,14 @@ class SignUp extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    const title = platform.showFrameworkMode ? t('auth.signUp') : t('auth.title')
-    const icon = platform.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
+    const title = config.showFrameworkMode ? t('auth.signUp') : t('auth.title')
+    const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const isSignUpDisabled = !apiKey || !apiSecret
-      || (platform.showFrameworkMode && isPasswordProtected
+      || (config.showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
 
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
-      'bitfinex-auth-sign-up--framework': platform.showFrameworkMode,
+      'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
     })
 
     return (
@@ -165,8 +165,8 @@ class SignUp extends PureComponent {
           <PlatformLogo />
           <Callout>
             {t('auth.note1')}
-            <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>
-              {platform.KEY_URL.split('https://')[1]}
+            <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
+              {config.KEY_URL.split('https://')[1]}
             </a>
             {t('auth.note2')}
           </Callout>
@@ -182,7 +182,7 @@ class SignUp extends PureComponent {
             value={apiSecret}
             onChange={this.handleInputChange}
           />
-          {platform.showFrameworkMode && isPasswordProtected && (
+          {config.showFrameworkMode && isPasswordProtected && (
             <Fragment>
               <InputKey
                 label='auth.enterPassword'
@@ -209,7 +209,7 @@ class SignUp extends PureComponent {
             >
               {t('auth.rememberMe')}
             </Checkbox>
-            {platform.showFrameworkMode && (
+            {config.showFrameworkMode && (
               <Checkbox
                 className='bitfinex-auth-remember-me'
                 name='isPasswordProtected'
@@ -223,7 +223,7 @@ class SignUp extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            {platform.showFrameworkMode && users.length > 0 && (
+            {config.showFrameworkMode && users.length > 0 && (
               <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
                 {t('auth.signIn')}
               </div>

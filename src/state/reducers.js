@@ -3,7 +3,7 @@ import { persistReducer, createMigrate } from 'redux-persist'
 import { connectRouter } from 'connected-react-router'
 import storage from 'redux-persist/lib/storage'
 
-import { platform } from 'var/config'
+import config from 'config'
 import persistMigrations from 'state/persist.migrations'
 
 import history from './createdHistory'
@@ -116,7 +116,7 @@ const FRAMEWORK_REDUCERS = {
 
 const REDUCERS = {
   ...BASE_REDUCERS,
-  ...(platform.showFrameworkMode ? FRAMEWORK_REDUCERS : {}),
+  ...(config.showFrameworkMode ? FRAMEWORK_REDUCERS : {}),
 }
 
 const rootReducer = combineReducers(REDUCERS)

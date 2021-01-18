@@ -4,7 +4,7 @@ import Status from 'components/Status'
 import DateRangePicker from 'ui/DateRangePicker'
 import PlatformLogo from 'ui/PlatformLogo'
 import timeRangeTypes from 'state/timeRange/constants'
-import config, { platform } from 'var/config'
+import config from 'config'
 
 import TimeFrame from './TimeFrame'
 import TimeFrameShortcut from './TimeFrameShortcut'
@@ -14,7 +14,7 @@ import AccountMenu from './AccountMenu'
 import TopNavigation from './TopNavigation'
 
 const Header = () => {
-  const HOME_URL = config.isElectronApp ? '/' : platform.HOME_URL
+  const HOME_URL = config.isElectronApp ? '/' : config.HOME_URL
 
   return (
     <div className='header'>

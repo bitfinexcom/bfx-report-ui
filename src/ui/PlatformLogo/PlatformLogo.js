@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { THEME_CLASSES } from 'utils/themes'
-import { platform } from 'var/config'
 
 import darkLogo from './files/logo-dark-theme.svg'
 import lightLogo from './files/logo-light-theme.svg'
@@ -27,7 +26,7 @@ const PlatformLogo = ({ theme }) => {
 
   return (
     <img
-      alt={platform.Name}
+      alt='Bitfinex'
       src={logo}
       className='platform-logo'
     />

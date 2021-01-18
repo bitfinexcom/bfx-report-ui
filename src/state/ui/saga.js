@@ -9,7 +9,7 @@ import { setTimeRange } from 'state/timeRange/actions'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 import { isSynced } from 'state/sync/saga'
 import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
-import config, { platform } from 'var/config'
+import config from 'config'
 import timeRangeTypes from 'state/timeRange/constants'
 import { getTheme } from 'state/base/selectors'
 import { LANGUAGES } from 'locales/i18n'
@@ -85,7 +85,7 @@ function* uiLoaded() {
 
 // user confirmation for proceeding with framework request while not in sync
 export function* frameworkCheck() {
-  if (!platform.showFrameworkMode || localStorage.getItem('isFrameworkDialogDisabled')) {
+  if (!config.showFrameworkMode || localStorage.getItem('isFrameworkDialogDisabled')) {
     return true
   }
   if (yield call(isSynced)) {

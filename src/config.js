@@ -41,10 +41,11 @@ const environments = {
   },
 }
 
-export const platform = environments[CI_ENVIRONMENT_NAME] || {}
+const environmentConfig = environments[CI_ENVIRONMENT_NAME] || {}
 
 const config = {
   isElectronApp: false,
+  ...environmentConfig,
 }
 
 export default config

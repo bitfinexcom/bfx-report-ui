@@ -17,7 +17,7 @@ import SyncButton from 'ui/SyncButton'
 import Timeframe from 'ui/CandlesTimeframe'
 import DateInput from 'ui/DateInput'
 import mode from 'state/sync/constants'
-import { platform } from 'var/config'
+import appConfig from 'config'
 
 import { propTypes, defaultProps } from './CandlesSyncPref.props'
 
@@ -149,7 +149,7 @@ class CandlesSyncPref extends PureComponent {
     const { syncMode, t } = this.props
     const { isOpen, options } = this.state
 
-    if (!platform.showFrameworkMode) {
+    if (!appConfig.showFrameworkMode) {
       return null
     }
 

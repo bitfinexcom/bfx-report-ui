@@ -19,7 +19,7 @@ import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { refreshToken, tokenRefreshStart, tokenRefreshStop } from 'state/auth/tokenRefresh/actions'
-import { platform } from 'var/config'
+import config from 'config'
 
 import types from './constants'
 import actions from './actions'
@@ -35,7 +35,7 @@ function* onAuthSuccess(result) {
     yield put(actions.updateAuth(result))
     yield put(fetchSymbols())
 
-    if (platform.showFrameworkMode) {
+    if (config.showFrameworkMode) {
       if (!WS.isConnected) {
         WS.connect()
 
@@ -92,10 +92,10 @@ function* signUp({ payload }) {
       apiKey,
       apiSecret,
       password: isNotProtected ? undefined : password,
-      isNotProtected: platform.showFrameworkMode ? isNotProtected : undefined,
+      isNotProtected: config.showFrameworkMode ? isNotProtected : undefined,
     }
 
-    const method = platform.showFrameworkMode ? 'signUp' : 'verifyUser'
+    const method = config.showFrameworkMode ? 'signUp' : 'verifyUser'
     const { result, error } = yield call(makeFetchCall, method, null, authParams)
 
     if (result) {
@@ -117,7 +117,7 @@ function* signUp({ payload }) {
         yield put(actions.updateAuth({ authToken: '' }))
       }
 
-      if (platform.showFrameworkMode) {
+      if (config.showFrameworkMode) {
         yield put(updateErrorStatus({
           id: 'status.signUpFail',
         }))
@@ -195,7 +195,7 @@ function* fetchUsers() {
 
 function* checkAuth() {
   try {
-    if (platform.showFrameworkMode) {
+    if (config.showFrameworkMode) {
       yield put(actions.fetchUsers())
     }
 
@@ -204,7 +204,7 @@ function* checkAuth() {
       return
     }
 
-    if (platform.showFrameworkMode) {
+    if (config.showFrameworkMode) {
       yield put(actions.signIn(auth))
       return
     }

@@ -6,7 +6,7 @@ import {
 
 import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 import Explorer from 'ui/Explorer'
-import { platform } from 'var/config'
+import config from 'config'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
@@ -94,7 +94,7 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
-    ...insertIf(platform.showFrameworkMode, (
+    ...insertIf(config.showFrameworkMode, (
       {
         id: 'amountUsd',
         name: 'column.amountUsd',

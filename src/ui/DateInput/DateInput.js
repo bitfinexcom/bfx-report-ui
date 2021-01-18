@@ -8,7 +8,7 @@ import Icon from 'icons'
 import {
   DEFAULT_DATETIME_FORMAT, momentFormatter, momentFormatterDays,
 } from 'state/utils'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './DateInput.props'
 
@@ -51,7 +51,7 @@ class DateInput extends PureComponent {
       ? momentFormatterDays()
       : momentFormatter(DEFAULT_DATETIME_FORMAT, inputTimezone)
 
-    const timePrecision = (platform.showFrameworkMode && !daysOnly) ? TimePrecision.SECOND : undefined
+    const timePrecision = (config.showFrameworkMode && !daysOnly) ? TimePrecision.SECOND : undefined
     const icon = isOpen
       ? <Icon.CHEVRON_UP />
       : <Icon.CHEVRON_DOWN />

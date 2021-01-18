@@ -3,7 +3,7 @@ import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
 import queryConstants from 'state/query/constants'
-import { platform } from 'var/config'
+import config from 'config'
 import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
@@ -78,7 +78,7 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
-    ...insertIf(platform.showFrameworkMode, (
+    ...insertIf(config.showFrameworkMode, (
       {
         id: 'amountUsd',
         name: 'column.amountUsd',
@@ -117,7 +117,7 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
     },
-    ...insertIf(platform.showFrameworkMode, (
+    ...insertIf(config.showFrameworkMode, (
       {
         id: 'balanceUsd',
         name: 'column.balanceUsd',
