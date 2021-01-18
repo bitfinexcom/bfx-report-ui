@@ -3,10 +3,7 @@ require('dotenv').config()
 
 const REQUIRED_ENVS = [
   'NODE_PATH',
-  'PUBLIC_URL',
   'REACT_APP_PLATFORM',
-  'REACT_APP_TITLE',
-  'REACT_APP_LOGO_PATH',
 ]
 
 const exitWithErrorMessage = (errorMessage) => {
