@@ -16,7 +16,7 @@ import SyncButton from 'ui/SyncButton'
 import DateInput from 'ui/DateInput'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import mode from 'state/sync/constants'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './SyncSymbolPrefButton.props'
 
@@ -100,7 +100,7 @@ class SyncSymbolPrefButton extends PureComponent {
         </Callout>
       )
       : null
-    return platform.showFrameworkMode
+    return config.showFrameworkMode
       ? (
         <Fragment>
           <SyncButton onClick={this.handleOpen} />

@@ -15,7 +15,7 @@ import SyncButton from 'ui/SyncButton'
 import Icon from 'icons'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import mode from 'state/sync/constants'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './DerivativesSyncPref.props'
 
@@ -91,7 +91,7 @@ class DerivativesSyncPref extends PureComponent {
       pairs,
     } = this.state
 
-    if (!platform.showFrameworkMode) {
+    if (!config.showFrameworkMode) {
       return null
     }
 

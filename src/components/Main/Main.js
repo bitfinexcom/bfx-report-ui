@@ -42,7 +42,7 @@ import Preferences from 'components/Preferences'
 import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import NavMenu from 'ui/NavMenu'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './Main.props'
 
@@ -229,7 +229,7 @@ class Main extends PureComponent {
               path={getPath(MENU_WALLETS)}
               component={Wallets}
             />
-            {platform.showFrameworkMode && (
+            {config.showFrameworkMode && (
               [
                 <Route
                   exact
@@ -296,7 +296,7 @@ class Main extends PureComponent {
               path={PATHS.MENU_CHANGE_LOGS}
               component={ChangeLogs}
             />
-            {platform.showFrameworkMode && (
+            {config.showFrameworkMode && (
               <Route
                 exact
                 path={PATHS.MENU_SUB_ACCOUNTS}
@@ -307,7 +307,7 @@ class Main extends PureComponent {
         </div>
         <ExportDialog />
         <ExportSuccessDialog />
-        {platform.showFrameworkMode && <FrameworkDialog />}
+        {config.showFrameworkMode && <FrameworkDialog />}
         <PaginationDialog />
         <Preferences />
       </Fragment>

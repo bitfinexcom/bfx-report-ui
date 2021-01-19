@@ -1,4 +1,4 @@
-import { platform } from 'var/config'
+import config from 'config'
 
 const getAuth = state => state.auth
 
@@ -50,7 +50,7 @@ export function selectAuth(state) {
     isSubAccount,
   } = getAuthData(state)
 
-  if (!platform.showFrameworkMode) {
+  if (!config.showFrameworkMode) {
     if (authToken) {
       return { authToken }
     }

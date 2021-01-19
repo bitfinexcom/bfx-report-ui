@@ -8,15 +8,13 @@ import _isEqual from 'lodash/isEqual'
 import _sortBy from 'lodash/sortBy'
 
 import { store } from 'state/store'
-import { platform } from 'var/config'
+import config from 'config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import queryType from 'state/query/constants'
 import {
   getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol, getMappedSymbolsFromUrl,
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
-
-const { REACT_APP_ELECTRON } = process.env
 
 const {
   MENU_ACCOUNT_BALANCE,
@@ -52,7 +50,7 @@ export const getAuthFromStore = () => {
 }
 
 // turned off for firefox
-export const getDefaultTableScrollSetting = () => REACT_APP_ELECTRON || !navigator.userAgent.includes('Firefox')
+export const getDefaultTableScrollSetting = () => config.isElectronApp || !navigator.userAgent.includes('Firefox')
 
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
@@ -69,7 +67,7 @@ export function postJsonfetch(url, bodyJson) {
 }
 
 export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/json-rpc`, {
+  return postJsonfetch(`${config.API_URL}/json-rpc`, {
     auth,
     method,
     params: params || undefined,

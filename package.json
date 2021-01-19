@@ -14,7 +14,7 @@
   "bugs": {
     "url": "https://github.com/bitfinexcom/bfx-report-ui/issues"
   },
-  "homepage": "https://github.com/bitfinexcom/bfx-report-ui#readme",
+  "homepage": "/",
   "dependencies": {
     "@blueprintjs/core": "^3.15.0",
     "@blueprintjs/datetime": "^3.15.2",
@@ -24,7 +24,6 @@
     "@blueprintjs/timezone": "^3.4.0",
     "classnames": "2.2.6",
     "connected-react-router": "^6.6.0",
-    "dotenv": "^7.0.0",
     "flexboxgrid2": "7.2.1",
     "history": "^4.9.0",
     "i18next": "15.0.7",
@@ -41,6 +40,7 @@
     "query-string": "^6.4.2",
     "react": "^16.13.1",
     "react-dom": "^16.8.6",
+    "react-helmet": "^6.1.0",
     "react-i18next": "10.5.2",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.0.0",
@@ -66,7 +66,7 @@
     "react-test-renderer": "^16.8.6"
   },
   "scripts": {
-    "prepare": "node scripts/copyEnv && node scripts/copyFiles && node scripts/handleBptIcons",
+    "prepare": "node scripts/copyFiles && node scripts/handleBptIcons",
     "start": "npm run prepare && react-scripts start",
     "startAll": "concurrently \"npm run start\" \"npm run --prefix ../bfx-reports-framework startSimulEnv\" \"npm run --prefix ../bfx-reports-framework startServDev\" \"npm run --prefix ../bfx-reports-framework startDev\"",
     "startAllWeb": "concurrently \"npm run start\" \"npm run --prefix ../bfx-report startSimulEnv\" \"npm run --prefix ../bfx-report startServDev\" \"npm run --prefix ../bfx-report startDev\"",

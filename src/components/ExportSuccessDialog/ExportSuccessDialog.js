@@ -8,7 +8,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './ExportSuccessDialog.props'
 
@@ -21,7 +21,7 @@ class ExportSuccessDialog extends PureComponent {
       return null
     }
 
-    const message = platform.localExport ? t('download.status.local') : t('download.status.email')
+    const message = config.localExport ? t('download.status.local') : t('download.status.email')
 
     return (
       <Dialog

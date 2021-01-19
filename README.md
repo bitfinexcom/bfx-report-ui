@@ -67,21 +67,7 @@ npm install
 npm run start
 ```
 
-2.2. back to `bfx-report-ui` root, set up env variables to run locally:
-
-    ```
-    export NODE_PATH=src/
-    export PUBLIC_URL=/
-    export REACT_APP_PLATFORM=localhost
-    export REACT_APP_TITLE=Bitfinex Reports
-    export REACT_APP_LOGO_PATH=favicon.ico
-    ```
-
-`NODE_PATH` is used to support absolute import local package instead of relative import.
-`PUBLIC_URL` is used to define default import path in `public/index.html`.
-`REACT_APP_PLATFORM` is used to select the right set for site title, api endpoint and more configs.
-
-2.3. start the report-ui
+2.2. start the report-ui
 
     ```
     npm run start
@@ -110,24 +96,6 @@ Bfx-report support sync user data to local machine and query offline. To enable 
 2. set `showSyncMode: true,` in bfx-report-ui/src/var/config.js
 
 Then run `npm start` and you will see the extra sync status button at top right side of the header.
-
-## Configure for Ethfinex
-
-1. set `export REACT_APP_PLATFORM=ethfinex` in env variables instead
-
-You'll be noticed `hideSwitchTheme` is set to true in `var/config.js` because Ethfinex does not have dark/light theming.
-
-Also need to set up related env variables:
-
-```
-NODE_PATH=src/
-PUBLIC_URL=/
-REACT_APP_PLATFORM=ethfinex
-REACT_APP_TITLE=Ethfinex Reports
-REACT_APP_LOGO_PATH=favicon.png
-```
-
-We can custom what files need to copy into the project through edit the `scripts/copyFiles` script.
 
 ## 3rd party libraries
 

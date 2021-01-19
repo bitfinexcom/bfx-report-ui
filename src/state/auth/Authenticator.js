@@ -1,7 +1,7 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pick from 'lodash/pick'
 
-import { platform } from 'var/config'
+import config from 'config'
 
 const PERSISTED_PARAMS_WEB = [
   'apiKey',
@@ -55,7 +55,7 @@ class Authenticator {
       return
     }
 
-    const persistedParams = platform.showFrameworkMode ? PERSISTED_PARAMS_FRAMEWORK : PERSISTED_PARAMS_WEB
+    const persistedParams = config.showFrameworkMode ? PERSISTED_PARAMS_FRAMEWORK : PERSISTED_PARAMS_WEB
     const persistedData = {
       ...auth,
       isPersisted: true,
@@ -63,7 +63,7 @@ class Authenticator {
     }
 
     // remove auth token after successful auth with apiKey and apiSecret
-    if (!platform.showFrameworkMode && apiKey && apiSecret) {
+    if (!config.showFrameworkMode && apiKey && apiSecret) {
       persistedData.authToken = ''
     }
 

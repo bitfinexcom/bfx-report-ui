@@ -12,12 +12,12 @@ import _includes from 'lodash/includes'
 
 import queryType from 'state/query/constants'
 import { getIcon, getPath, getTarget } from 'state/query/utils'
-import { platform } from 'var/config'
+import config from 'config'
 
 import NavMenuPopover from './NavMenuPopover'
 import { propTypes, defaultProps } from './NavMenu.props'
 
-const { showFrameworkMode } = platform
+const { showFrameworkMode } = config
 
 const {
   MENU_ACCOUNT_BALANCE,

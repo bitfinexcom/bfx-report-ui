@@ -9,7 +9,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 import Icon from 'icons'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './PasswordRecovery.props'
 import InputKey from '../InputKey'
@@ -80,7 +80,7 @@ class PasswordRecovery extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    if (!platform.showFrameworkMode || !isPasswordProtected) {
+    if (!config.showFrameworkMode || !isPasswordProtected) {
       return true
     }
 
@@ -144,13 +144,13 @@ class PasswordRecovery extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    const icon = platform.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
+    const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const isPasswordRecoveryDisabled = !apiKey || !apiSecret
-      || (platform.showFrameworkMode && isPasswordProtected
+      || (config.showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
 
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
-      'bitfinex-auth-sign-up--framework': platform.showFrameworkMode,
+      'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
     })
 
     return (
@@ -175,7 +175,7 @@ class PasswordRecovery extends PureComponent {
             value={apiSecret}
             onChange={this.handleInputChange}
           />
-          {platform.showFrameworkMode && isPasswordProtected && (
+          {config.showFrameworkMode && isPasswordProtected && (
             <Fragment>
               <InputKey
                 label='auth.enterPassword'
@@ -202,7 +202,7 @@ class PasswordRecovery extends PureComponent {
             >
               {t('auth.rememberMe')}
             </Checkbox>
-            {platform.showFrameworkMode && (
+            {config.showFrameworkMode && (
               <Checkbox
                 className='bitfinex-auth-remember-me'
                 name='isPasswordProtected'

@@ -9,7 +9,7 @@ import { setTimeRange } from 'state/timeRange/actions'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 import { isSynced } from 'state/sync/saga'
 import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
-import { platform } from 'var/config'
+import config from 'config'
 import timeRangeTypes from 'state/timeRange/constants'
 import { getTheme } from 'state/base/selectors'
 import { LANGUAGES } from 'locales/i18n'
@@ -19,10 +19,8 @@ import types from './constants'
 import { toggleFrameworkDialog, togglePaginationDialog } from './actions'
 import selectors from './selectors'
 
-const { REACT_APP_ELECTRON } = process.env
-
 function* uiLoaded() {
-  if (REACT_APP_ELECTRON) {
+  if (config.isElectronApp) {
     handleElectronLoad()
   }
 
@@ -80,14 +78,14 @@ function* uiLoaded() {
 
   // skip auto auth for electron build because front is loading faster
   // also skip in case apiKey and apiSecret are set from url to give user a chance not to save them
-  if (!REACT_APP_ELECTRON && !(apiKey && apiSecret)) {
+  if (!config.isElectronApp && !(apiKey && apiSecret)) {
     yield put(checkAuth())
   }
 }
 
 // user confirmation for proceeding with framework request while not in sync
 export function* frameworkCheck() {
-  if (!platform.showFrameworkMode || localStorage.getItem('isFrameworkDialogDisabled')) {
+  if (!config.showFrameworkMode || localStorage.getItem('isFrameworkDialogDisabled')) {
     return true
   }
   if (yield call(isSynced)) {

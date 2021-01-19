@@ -12,7 +12,7 @@ import Icon from 'icons'
 import DateRangePicker from 'ui/DateRangePicker'
 import TimeRange from 'ui/TimeRange'
 import timeRangeTypes from 'state/timeRange/constants'
-import { platform } from 'var/config'
+import config from 'config'
 
 import SyncMode from '../SyncMode'
 import { openHelp } from '../utils'
@@ -103,7 +103,7 @@ class TopNavigation extends PureComponent {
                 />
                 <MenuItem
                   className={classNames('bp3-menu-item--sync', {
-                    'bp3-menu-item--sync--disabled': !platform.showFrameworkMode,
+                    'bp3-menu-item--sync--disabled': !config.showFrameworkMode,
                   })}
                   shouldDismissPopover={false}
                   text={<SyncMode />}
