@@ -43,7 +43,7 @@ const getStoredAuth = () => {
 }
 
 const initialState = {
-  authStatus: null,
+  authStatus: false,
   ...getStoredAuth(),
   token: '',
   isShown: true,
@@ -63,6 +63,10 @@ export function authReducer(state = initialState, action) {
         usersLoading: true,
       }
     case types.ADD_USER:
+      return {
+        ...state,
+        users: [...state.users, payload],
+      }
     case subAccountsTypes.REMOVE_SUCCESS:
       return {
         ...state,
@@ -97,7 +101,7 @@ export function authReducer(state = initialState, action) {
         ...payload,
       }
     case types.CLEAR_AUTH:
-      Authenticator.set({ ...initialAuthData, isPersisted: state.isPersisted })
+      Authenticator.clear()
       return {
         ...state,
         ...initialAuthData,
@@ -105,7 +109,7 @@ export function authReducer(state = initialState, action) {
     case types.UPDATE_AUTH_STATUS:
       return {
         ...state,
-        authStatus: payload || null,
+        authStatus: !!payload,
         loading: payload || false, // eject from loading if auth fail
       }
     case types.SHOW_AUTH:

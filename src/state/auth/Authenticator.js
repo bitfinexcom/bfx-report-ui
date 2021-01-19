@@ -31,7 +31,14 @@ class Authenticator {
     return auth ? JSON.parse(auth) : {}
   }
 
-  hasData = () => !_isEmpty(this.getStored())
+  hasData = () => {
+    const storedData = this.getStored()
+    const storedKeys = Object.keys(storedData)
+    const isEmpty = _isEmpty(storedData)
+    const hasSingleKey = storedKeys.length === 1 && storedKeys.includes('isPersisted')
+
+    return !isEmpty && !hasSingleKey
+  }
 
   persist = (data) => {
     window.localStorage.setItem('auth', JSON.stringify(data))

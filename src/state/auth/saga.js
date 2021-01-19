@@ -178,13 +178,11 @@ function* signIn({ payload }) {
 
 function* fetchUsers() {
   try {
-    const { result } = yield call(makeFetchCall, 'getUsers')
+    const { result: users } = yield call(makeFetchCall, 'getUsers')
 
-    if (result) {
-      const auth = yield select(selectAuth)
-
-      yield put(actions.setUsers(result))
-      if (!result.length && !_isEmpty(auth)) {
+    if (users) {
+      yield put(actions.setUsers(users))
+      if (!users.length) {
         yield put(actions.clearAuth())
       }
     }

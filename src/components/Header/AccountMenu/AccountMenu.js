@@ -25,6 +25,7 @@ const formatUsername = (email = '') => {
 class AccountMenu extends PureComponent {
   render() {
     const {
+      authStatus,
       email,
       logout,
       t,
@@ -33,7 +34,7 @@ class AccountMenu extends PureComponent {
     } = this.props
 
     return (
-      <div className={classNames('account-menu', { 'account-menu--no-email': !email })}>
+      <div className={classNames('account-menu', { 'account-menu--no-email': !authStatus || !email })}>
         <Popover
           minimal
           position={Position.BOTTOM_LEFT}
@@ -75,7 +76,7 @@ class AccountMenu extends PureComponent {
             <div className='account-menu-target'>
               <Icon.USER_CIRCLE />
               <span className='account-menu-username'>
-                {formatUsername(email)}
+                {authStatus ? formatUsername(email) : ''}
               </span>
               <Icon.CHEVRON_DOWN />
               <Icon.CHEVRON_UP />
