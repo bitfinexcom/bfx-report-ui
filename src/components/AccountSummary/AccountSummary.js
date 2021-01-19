@@ -10,7 +10,8 @@ import SectionHeader from 'ui/SectionHeader'
 import { propTypes, defaultProps } from './AccountSummary.props'
 import Volume from './AccountSummary.volume'
 import Fees from './AccountSummary.fees'
-import MarginFunds from './AccountSummary.marginFunds'
+import Leo from './AccountSummary.leo'
+import PaidFees from './AccountSummary.paidFees'
 import FeeTierVolume from './AccountSummary.feeTierVolume'
 
 class AccountSummary extends PureComponent {
@@ -51,8 +52,18 @@ class AccountSummary extends PureComponent {
             takerFee={data.deriv_taker_fee || data.deriv_taker_rebate || 0}
           />
           <br />
-          <MarginFunds data={_get(data, 'fees_funding_30d', {})} />
+          <PaidFees
+            data={_get(data, 'fees_funding_30d', {})}
+            title='accountsummary.margin_funds'
+            total={_get(data, 'fees_funding_total_30d', 0)}
+          />
+          <PaidFees
+            data={_get(data, 'fees_trading_30d', {})}
+            title='accountsummary.trading_funds'
+            total={_get(data, 'fees_trading_total_30d', 0)}
+          />
           <FeeTierVolume data={_get(data, 'trade_vol_30d', {})} />
+          <Leo data={data} />
         </div>
       )
     }

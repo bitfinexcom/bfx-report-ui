@@ -373,15 +373,13 @@ function* exportCSV({ payload: targets }) {
 
       // add 2 additional snapshot reports
       if (target === MENU_TAX_REPORT) {
-        const { start, end } = yield select(getTimeFrame)
-        const snapshotOptions = yield call(getOptions, { target: MENU_SNAPSHOTS })
         multiExport.push({
-          ...snapshotOptions,
-          end: start || undefined,
+          ...options,
+          isStartSnapshot: true,
         })
         multiExport.push({
-          ...snapshotOptions,
-          end: end || undefined,
+          ...options,
+          isEndSnapshot: true,
         })
       }
     }

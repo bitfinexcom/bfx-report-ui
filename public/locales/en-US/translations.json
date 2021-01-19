@@ -9,7 +9,10 @@
     "fees_deriv": "Your fees on Bitfinex Derivatives",
     "fee_tier_volume": "Volume (eligible for fee tier calculation) in the last 30 days",
     "30dVolume": "Your volume in the last 30 days",
-    "margin_funds": "Total return on your margin funds provided in the last 30 days"
+    "margin_funds": "Total return on your margin funds provided in the last 30 days",
+    "trading_funds": "Trading fees charged in the last 30 days",
+    "leo_level": "LEO level",
+    "average_amount": "Average amount"
   },
   "activepositions": {
     "title": "Active Positions"

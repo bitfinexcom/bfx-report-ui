@@ -5,7 +5,7 @@ import _get from 'lodash/get'
 
 import DataTable from 'ui/DataTable'
 
-import { getColumns } from './AccountSummary.marginFunds'
+import { getColumns } from './AccountSummary.paidFees'
 
 const AccountSummaryFeeTierVolume = (props) => {
   const { data, t } = props
