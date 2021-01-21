@@ -1,6 +1,6 @@
 // Static config files to tune components
 
-const { CI_ENVIRONMENT_NAME = 'development' } = process.env
+const { REACT_APP_ENV } = process.env
 
 const environments = {
   development: {
@@ -41,7 +41,7 @@ const environments = {
   },
 }
 
-const environmentConfig = environments[CI_ENVIRONMENT_NAME] || {}
+const environmentConfig = environments[REACT_APP_ENV] || {}
 
 const config = {
   isElectronApp: false,

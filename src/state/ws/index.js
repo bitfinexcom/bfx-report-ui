@@ -5,7 +5,7 @@ import config from 'config'
 
 import types from './constants'
 
-const { CI_ENVIRONMENT_NAME = 'development' } = process.env
+const { REACT_APP_ENV } = process.env
 
 const getAuth = () => {
   const state = store.getState()
@@ -69,7 +69,7 @@ class WS {
     websocket.onmessage = this.onMessage
 
     websocket.onerror = (err) => {
-      if (CI_ENVIRONMENT_NAME === 'development') {
+      if (REACT_APP_ENV === 'development') {
         console.error(err) // eslint-disable-line no-console
       }
       resolver()
@@ -109,7 +109,7 @@ class WS {
 
       this.websocket.send(JSON.stringify(data))
     } catch (err) {
-      if (CI_ENVIRONMENT_NAME === 'development') {
+      if (REACT_APP_ENV === 'development') {
         console.error(err) // eslint-disable-line no-console
       }
     }

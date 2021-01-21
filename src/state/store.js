@@ -12,7 +12,7 @@ import reducer from './reducers'
 import saga from './sagas'
 import history from './createdHistory'
 
-const { CI_ENVIRONMENT_NAME = 'development' } = process.env
+const { REACT_APP_ENV } = process.env
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -22,7 +22,7 @@ function configureStore() {
   // add middlewares here
   const middleware = [sagaMiddleware, routerMiddleware(history)]
   // use the logger in development mode - this is set in webpack.config.dev.js
-  if (CI_ENVIRONMENT_NAME === 'development' || CI_ENVIRONMENT_NAME === 'staging') {
+  if (REACT_APP_ENV === 'development' || REACT_APP_ENV === 'staging') {
     middleware.push(createLogger())
   }
 
@@ -35,7 +35,7 @@ function configureStore() {
 const store = configureStore()
 const persistor = persistStore(store)
 
-if (CI_ENVIRONMENT_NAME !== 'testing') {
+if (REACT_APP_ENV !== 'testing') {
   sagaMiddleware.run(saga)
 }
 
