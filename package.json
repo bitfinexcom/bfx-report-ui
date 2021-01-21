@@ -67,10 +67,10 @@
   },
   "scripts": {
     "prepare": "node scripts/copyFiles && node scripts/handleBptIcons",
-    "start": "npm run prepare && react-scripts start",
+    "start": "npm run prepare && set REACT_APP_ENV=development&& react-scripts start",
     "startAll": "concurrently \"npm run start\" \"npm run --prefix ../bfx-reports-framework startSimulEnv\" \"npm run --prefix ../bfx-reports-framework startServDev\" \"npm run --prefix ../bfx-reports-framework startDev\"",
     "startAllWeb": "concurrently \"npm run start\" \"npm run --prefix ../bfx-report startSimulEnv\" \"npm run --prefix ../bfx-report startServDev\" \"npm run --prefix ../bfx-report startDev\"",
-    "build": "npm run prepare && react-scripts build",
+    "build": "npm run prepare && set REACT_APP_ENV=$CI_ENVIRONMENT_NAME&& react-scripts build",
     "test": "react-scripts test --env=jsdom --modulePaths=src --verbose --color --watchAll=false",
     "lint": "eslint src scripts --ignore-path .gitignore",
     "lintFix": "eslint src scripts --fix --ignore-path .gitignore"

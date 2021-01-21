@@ -7,7 +7,7 @@ import backend from 'i18next-xhr-backend'
 import detector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
-const { CI_ENVIRONMENT_NAME = 'development' } = process.env
+const { REACT_APP_ENV } = process.env
 
 export const LANGUAGES = {
   en: 'en-US',
@@ -58,7 +58,7 @@ i18n
     ns: ['translations'],
     defaultNS: 'translations',
 
-    debug: (CI_ENVIRONMENT_NAME === 'development'),
+    debug: (REACT_APP_ENV === 'development'),
 
     react: {
       wait: true,
