@@ -14,8 +14,8 @@ const environments = {
   },
   testing: {
     API_URL: 'https://bfx-report-ui.staging.bitfinex.com/api',
-    KEY_URL: 'https://test.bitfinex.com/api',
-    HOME_URL: 'https://test.bitfinex.com',
+    KEY_URL: 'https://staging.bitfinex.com/api',
+    HOME_URL: 'https://staging.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: false,
     showAuthPage: true,
@@ -23,8 +23,8 @@ const environments = {
   },
   staging: {
     API_URL: 'https://bfx-report-ui.staging.bitfinex.com/api',
-    KEY_URL: 'https://test.bitfinex.com/api',
-    HOME_URL: 'https://test.bitfinex.com',
+    KEY_URL: 'https://staging.bitfinex.com/api',
+    HOME_URL: 'https://staging.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: false,
     showAuthPage: true,
