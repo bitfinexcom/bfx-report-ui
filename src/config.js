@@ -41,7 +41,7 @@ const environments = {
   },
 }
 
-const environmentConfig = environments[REACT_APP_ENV] || {}
+const environmentConfig = environments[REACT_APP_ENV] || environments.staging
 
 const config = {
   isElectronApp: false,
