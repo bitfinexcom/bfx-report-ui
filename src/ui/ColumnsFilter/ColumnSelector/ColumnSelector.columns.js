@@ -35,6 +35,7 @@ export const TRANSFORMS = {
 
 export const FILTERS_SELECTOR = {
   SIDE: 'side',
+  WALLET: 'wallet',
 }
 
 const LEDGERS_COLUMNS = [
@@ -46,7 +47,7 @@ const LEDGERS_COLUMNS = [
   { id: 'balance', name: 'balance', type: NUMBER, filter: true },
   { id: 'balanceUsd', name: 'balanceUsd', type: NUMBER, filter: true, frameworkOnly: true },
   { id: 'mts', name: 'date', type: DATE, filter: true },
-  { id: 'wallet', name: 'wallet', type: STRING, filter: true },
+  { id: 'wallet', name: 'wallet', type: STRING, select: FILTERS_SELECTOR.WALLET, filter: true },
 ]
 
 /**
@@ -161,7 +162,7 @@ const SECTION_COLUMNS = {
     { id: 'balance', name: 'balance', type: NUMBER, filter: true },
     { id: 'balanceUsd', name: 'balanceUsd', type: NUMBER, filter: true, frameworkOnly: true },
     { id: 'mts', name: 'date' },
-    { id: 'wallet', name: 'wallet', type: STRING, filter: true },
+    { id: 'wallet', name: 'wallet', type: STRING, select: FILTERS_SELECTOR.WALLET, filter: true },
   ],
   [MENU_SPAYMENTS]: LEDGERS_COLUMNS,
   [MENU_AFFILIATES_EARNINGS]: LEDGERS_COLUMNS,

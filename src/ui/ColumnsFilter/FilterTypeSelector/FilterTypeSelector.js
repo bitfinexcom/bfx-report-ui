@@ -21,7 +21,9 @@ class FilterTypeSelector extends React.PureComponent {
   }
 
   render() {
-    const { value, dataType, t } = this.props
+    const {
+      dataType, isSelect, value, t,
+    } = this.props
 
     const dateTypes = (dataType === DATE)
       ? [
@@ -49,12 +51,14 @@ class FilterTypeSelector extends React.PureComponent {
       ]
       : []
 
-    const items = [
-      ...dateTypes,
-      ...stringTypes,
-      ...equalityTypes,
-      ...numberTypes,
-    ]
+    const items = isSelect
+      ? equalityTypes
+      : [
+        ...dateTypes,
+        ...stringTypes,
+        ...equalityTypes,
+        ...numberTypes,
+      ]
 
     return (
       <Select
