@@ -24,6 +24,7 @@ import FilterTypeSelector from './FilterTypeSelector'
 import { propTypes, defaultProps } from './ColumnsFilter.props'
 import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 import SideSelector from './Selectors/SideSelector'
+import WalletSelector from './Selectors/WalletSelector'
 
 const MAX_FILTERS = 7
 const { DATE } = DATA_TYPES
@@ -186,6 +187,8 @@ class ColumnsFilter extends PureComponent {
     switch (select) {
       case FILTERS_SELECTOR.SIDE:
         return <SideSelector {...selectProps} />
+      case FILTERS_SELECTOR.WALLET:
+        return <WalletSelector {...selectProps} />
       default:
         return null
     }
@@ -234,6 +237,7 @@ class ColumnsFilter extends PureComponent {
                       onChange={(column) => this.onColumnChange({ index, ...column })}
                     />
                     <FilterTypeSelector
+                      isSelect={!!select}
                       value={type}
                       dataType={dataType}
                       onChange={filterType => this.updateFilter({ index, type: filterType })}
