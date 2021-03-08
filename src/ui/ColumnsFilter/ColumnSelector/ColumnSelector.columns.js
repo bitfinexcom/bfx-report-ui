@@ -100,6 +100,7 @@ const SECTION_COLUMNS = {
     { id: 'fees', name: 'fees', type: NUMBER, filter: true },
     { id: 'destinationAddress', name: 'destination', type: STRING, filter: true },
     { id: 'transactionId', name: 'transactionId', type: STRING, filter: true },
+    { id: 'note', name: 'note', type: STRING, filter: true },
   ],
 
   [MENU_POSITIONS]: [
