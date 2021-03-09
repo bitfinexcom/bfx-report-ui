@@ -170,5 +170,19 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => filteredData[rowIndex].transactionId,
     },
+    {
+      id: 'note',
+      name: 'column.note',
+      width: 250,
+      renderer: (rowIndex) => {
+        const { note } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={note}>
+            {note}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].note,
+    },
   ]
 }

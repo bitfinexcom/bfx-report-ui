@@ -53,6 +53,7 @@ export function movementsReducer(state = initialState, action) {
           mtsUpdated,
           status,
           transactionId,
+          note,
         } = entry
         const mappedCurrency = mapSymbol(currency)
         // save new symbol to updateCoins list
@@ -71,6 +72,7 @@ export function movementsReducer(state = initialState, action) {
           fees,
           destinationAddress,
           transactionId,
+          note,
         }
       })
       return {
