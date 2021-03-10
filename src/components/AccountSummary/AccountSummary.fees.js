@@ -9,9 +9,13 @@ import { formatAmount, formatFraction } from 'ui/utils'
 const getColor = val => (val > 0 ? 'red' : 'green')
 
 const getColumns = (props) => {
-  const { makerFee, takerFee } = props
+  const {
+    makerFee, takerFeeToCrypto, takerFeeToFiat, takerFeeToStable,
+  } = props
   const formattedMakerFee = `${formatFraction(makerFee * 100, { minDigits: 2 })}%`
-  const formattedTakerFee = `${formatFraction(takerFee * 100, { minDigits: 2 })}%`
+  const formattedTakerFeeToCrypto = `${formatFraction(takerFeeToCrypto * 100, { minDigits: 2 })}%`
+  const formattedTakerFeeToFiat = `${formatFraction(takerFeeToFiat * 100, { minDigits: 2 })}%`
+  const formattedTakerFeeToStable = `${formatFraction(takerFeeToStable * 100, { minDigits: 2 })}%`
 
   return [
     {
@@ -27,29 +31,61 @@ const getColumns = (props) => {
       copyText: () => formattedMakerFee,
     },
     {
-      id: 'takerFee',
-      name: takerFee > 0 ? 'column.taker_fees' : 'column.taker_rebate',
-      width: 100,
+      id: 'takerFeeCrypto',
+      name: takerFeeToCrypto > 0 ? 'column.taker_fees_crypto' : 'column.taker_rebate_crypto',
+      width: 140,
       renderer: () => (
-        <Cell tooltip={formattedTakerFee}>
-          {formatAmount(takerFee * 100, { color: getColor(takerFee), minDigits: 2 })}
+        <Cell tooltip={formattedTakerFeeToCrypto}>
+          {formatAmount(takerFeeToCrypto * 100, { color: getColor(takerFeeToCrypto), minDigits: 2 })}
           %
         </Cell>
       ),
-      copyText: () => formattedTakerFee,
+      copyText: () => formattedTakerFeeToCrypto,
+    },
+    {
+      id: 'takerFeeFiat',
+      name: takerFeeToFiat > 0 ? 'column.taker_fees_fiat' : 'column.taker_rebate_fiat',
+      width: 140,
+      renderer: () => (
+        <Cell tooltip={formattedTakerFeeToFiat}>
+          {formatAmount(takerFeeToFiat * 100, { color: getColor(takerFeeToFiat), minDigits: 2 })}
+          %
+        </Cell>
+      ),
+      copyText: () => formattedTakerFeeToFiat,
+    },
+    {
+      id: 'takerFeeStable',
+      name: takerFeeToStable > 0 ? 'column.taker_fees_stable' : 'column.taker_rebate_stable',
+      width: 140,
+      renderer: () => (
+        <Cell tooltip={formattedTakerFeeToStable}>
+          {formatAmount(takerFeeToStable * 100, { color: getColor(takerFeeToStable), minDigits: 2 })}
+          %
+        </Cell>
+      ),
+      copyText: () => formattedTakerFeeToStable,
     },
   ]
 }
 
 const AccountSummaryFees = (props) => {
   const {
+    data,
     title,
-    makerFee,
-    takerFee,
     t,
   } = props
+  const {
+    makerFee, makerRebate, takerFeeToCrypto, takerFeeToFiat, takerFeeToStable,
+    takerRebateToCrypto, takerRebateToFiat, takerRebateToStable,
+  } = data
 
-  const columns = getColumns({ makerFee, takerFee })
+  const columns = getColumns({
+    makerFee: makerFee || makerRebate || 0,
+    takerFeeToCrypto: takerFeeToCrypto || takerRebateToCrypto || 0,
+    takerFeeToFiat: takerFeeToFiat || takerRebateToFiat || 0,
+    takerFeeToStable: takerFeeToStable || takerRebateToStable || 0,
+  })
 
   return (
     <div className='section-account-summary-data-item'>
@@ -66,9 +102,17 @@ const AccountSummaryFees = (props) => {
 }
 
 AccountSummaryFees.propTypes = {
+  data: PropTypes.shape({
+    makerFee: PropTypes.number,
+    makerRebate: PropTypes.number,
+    takerFeeToCrypto: PropTypes.number,
+    takerFeeToFiat: PropTypes.number,
+    takerFeeToStable: PropTypes.number,
+    takerRebateToCrypto: PropTypes.number,
+    takerRebateToFiat: PropTypes.number,
+    takerRebateToStable: PropTypes.number,
+  }).isRequired,
   title: PropTypes.string.isRequired,
-  makerFee: PropTypes.number.isRequired,
-  takerFee: PropTypes.number.isRequired,
   t: PropTypes.func.isRequired,
 }
 
