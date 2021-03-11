@@ -7,7 +7,7 @@ import DataTable from 'ui/DataTable'
 import { fixedFloat, formatAmount } from 'ui/utils'
 
 const getColumns = (props) => {
-  const { leoLevel, leoAmountAvg } = props
+  const { leoLev, leoAmountAvg } = props
 
   const formattedLeoAmountAvg = fixedFloat(leoAmountAvg)
 
@@ -17,11 +17,11 @@ const getColumns = (props) => {
       name: 'accountsummary.leo_level',
       width: 100,
       renderer: () => (
-        <Cell tooltip={leoLevel}>
-          {leoLevel}
+        <Cell tooltip={leoLev}>
+          {leoLev}
         </Cell>
       ),
-      copyText: () => leoLevel,
+      copyText: () => leoLev,
     },
     {
       id: 'leo_average_amount',
@@ -39,9 +39,9 @@ const getColumns = (props) => {
 
 const AccountSummaryLeo = (props) => {
   const { data } = props
-  const { leo_lev: leoLevel, leo_amount_avg: leoAmountAvg } = data
+  const { leoLev, leoAmountAvg } = data
 
-  const columns = getColumns({ leoLevel, leoAmountAvg })
+  const columns = getColumns({ leoLev, leoAmountAvg })
 
   return (
     <div className='section-account-summary-data-item'>
@@ -55,8 +55,8 @@ const AccountSummaryLeo = (props) => {
 
 AccountSummaryLeo.propTypes = {
   data: PropTypes.shape({
-    leo_lev: PropTypes.number.isRequired,
-    leo_amount_avg: PropTypes.number.isRequired,
+    leoLev: PropTypes.number.isRequired,
+    leoAmountAvg: PropTypes.number.isRequired,
   }).isRequired,
 }
 
