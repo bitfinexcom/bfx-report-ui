@@ -37,7 +37,9 @@ PositionsAuditNoId.propTypes = {
   t: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
 }
 
