@@ -43,7 +43,7 @@
     "react-i18next": "10.5.2",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "^3.4.3",
+    "react-scripts": "^4.0.3",
     "react-swipeable": "^5.5.1",
     "react-transition-group": "^2.6.1",
     "recharts": "^1.5.0",
