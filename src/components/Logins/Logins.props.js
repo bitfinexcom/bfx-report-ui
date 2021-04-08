@@ -7,7 +7,7 @@ const LOGINS_ENTRIES_PROPS = PropTypes.shape({
   browser: PropTypes.string.isRequired,
   version: PropTypes.string.isRequired,
   mobile: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
-  extra: PropTypes.object.isRequired,
+  extra: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 })
 
 export const propTypes = {
