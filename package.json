@@ -67,7 +67,7 @@
   },
   "scripts": {
     "prepare": "node scripts/copyFiles && node scripts/handleBptIcons",
-    "start": "cross-env REACT_APP_ENV=development react-scripts start",
+    "start": "cross-env REACT_APP_ENV=development FAST_REFRESH=false ESLINT_NO_DEV_ERRORS=true react-scripts start",
     "startAll": "concurrently \"npm run start\" \"npm run --prefix ../bfx-reports-framework startSimulEnv\" \"npm run --prefix ../bfx-reports-framework startServDev\" \"npm run --prefix ../bfx-reports-framework startDev\"",
     "startAllWeb": "concurrently \"npm run start\" \"npm run --prefix ../bfx-report startSimulEnv\" \"npm run --prefix ../bfx-report startServDev\" \"npm run --prefix ../bfx-report startDev\"",
     "prebuild": "npm run prepare && npm run lint",
