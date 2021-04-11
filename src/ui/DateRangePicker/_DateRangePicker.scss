@@ -197,12 +197,12 @@
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 390px) {
   .date-range-picker {
     &-popover {
       position: absolute;
-      top: -35px;
-      left: -186px;
+      top: -40px;
+      left: -274px;
 
       &--dialog {
         top: 55px;
@@ -236,6 +236,15 @@
           padding: 4px 12px;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .date-range-picker {
+    &-popover {
+      top: -35px;
+      left: -186px;
     }
   }
 }

@@ -3,8 +3,13 @@
     &-item {
       display: inline-block;
       width: fit-content;
+      max-width: calc(100vw - 20px);
       margin-right: 41px;
       margin-bottom: 35px;
+
+      .collapsed-table {
+        margin-bottom: 0;
+      }
 
       > div:first-child {
         margin-bottom: 5px;
@@ -39,3 +44,14 @@
     }
   }
 }
+
+@media screen and (max-width: 431px) {
+  .section-account-summary {
+    &-data {
+      &-item {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
