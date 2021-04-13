@@ -131,7 +131,7 @@ class NavMenu extends PureComponent {
 
     return (
       <Menu large className={classes}>
-        {showMenuPopover && window.innerWidth > 375 && window.innerWidth <= 1024 && <NavMenuPopover />}
+        {showMenuPopover && window.innerWidth > 390 && window.innerWidth <= 1024 && <NavMenuPopover />}
         {this.sections.map((section, index) => {
           const [type, title, isSkipped] = section
 
