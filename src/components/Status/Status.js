@@ -1,9 +1,10 @@
-import { withTranslation } from 'react-i18next'
 import {
   Toaster,
   Intent,
   Position,
 } from '@blueprintjs/core'
+
+import i18n from 'locales/i18n'
 
 import { propTypes, defaultProps } from './Status.props'
 
@@ -17,7 +18,6 @@ export const Status = ({
   clearStatus,
   intent,
   msg = {},
-  t,
 }) => {
   if (!msg.id) {
     return ''
@@ -25,12 +25,12 @@ export const Status = ({
 
   const params = {
     ...msg,
-    topic: msg.topic ? t(msg.topic) || msg.topic : undefined,
+    topic: msg.topic ? i18n.t(msg.topic) || msg.topic : undefined,
   }
   setTimeout(() => {
     AppToaster.show({
       intent: intent || Intent.PRIMARY,
-      message: t(msg.id, params),
+      message: i18n.t(msg.id, params),
       onDismiss: clearStatus,
       timeout: 10000, // 10s
     })
@@ -42,4 +42,4 @@ export const Status = ({
 Status.propTypes = propTypes
 Status.defaultProps = defaultProps
 
-export default withTranslation('translations')(Status)
+export default Status
