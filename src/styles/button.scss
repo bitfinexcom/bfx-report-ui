@@ -70,11 +70,11 @@
         background-color: var(--buttonSuccessHoverBg);
         border: 1px solid var(--buttonSuccessHoverBg);
         box-shadow: none;
+      }
 
-        &:disabled {
-          background-color: rgb(16, 94, 72);
-          border-color: rgb(16, 94, 72);
-        }
+      &:disabled {
+        background-color: var(--buttonSuccessDisabledBg);
+        border-color: var(--buttonSuccessDisabledBg);
       }
     }
   }
