@@ -67,7 +67,7 @@ class PieChart extends PureComponent {
     const { data } = this.props
 
     return (
-      <SimplePieChart width={282} height={320}>
+      <SimplePieChart width={282} height={340}>
         <Pie
           data={data}
           dataKey='value'
