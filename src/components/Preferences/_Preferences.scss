@@ -13,15 +13,13 @@
   }
 
   &-row {
+    display: block;
     margin-bottom: 25px;
-
-    &:last-of-type {
-      margin-top: -10px;
-      margin-bottom: 0;
-    }
   }
 
   &-item {
+    display: inline-block;
+
     &:not(:last-child) {
       margin-right: 20px;
     }
