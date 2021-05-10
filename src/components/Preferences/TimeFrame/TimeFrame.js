@@ -50,7 +50,7 @@ class TimeFrame extends PureComponent {
           range={range}
         />
         {range === timeRangeTypes.CUSTOM && (
-          <div className='preferences-row'>
+          <div className='preferences-timeframe-range preferences-row'>
             <div className='preferences-item'>
               <div>{t('timeframe.start-date-placeholder')}</div>
               <DateInput
