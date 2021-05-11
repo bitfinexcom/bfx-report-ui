@@ -7,6 +7,15 @@ import { formatDate } from 'state/utils'
 import { propTypes, defaultProps } from './TimeRange.props'
 
 class TimeRange extends PureComponent {
+  onClick = () => {
+    const { togglePreferencesDialog, toggleTimeFrameDialog } = this.props
+    if (window.innerWidth > 855) {
+      toggleTimeFrameDialog(true)
+    } else {
+      togglePreferencesDialog()
+    }
+  }
+
   render() {
     const {
       className,
@@ -14,11 +23,10 @@ class TimeRange extends PureComponent {
       icon,
       start,
       timezone,
-      toggleTimeFrameDialog,
     } = this.props
 
     return (
-      <div className={classNames('time-range', className)} onClick={() => toggleTimeFrameDialog(true)}>
+      <div className={classNames('time-range', className)} onClick={this.onClick}>
         {icon && <Icon.CALENDAR />}
         <span>
           {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
