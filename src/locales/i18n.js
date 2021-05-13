@@ -11,7 +11,7 @@ const { REACT_APP_ENV } = process.env
 
 export const LANGUAGES = {
   en: 'en-US',
-  es: 'es',
+  es: 'es-EM',
   ru: 'ru',
   cn: 'zh-CN',
   tw: 'zh-TW',
@@ -28,7 +28,7 @@ export const LANGUAGE_NAMES = {
 // email templates language mapping
 export const LANGUAGES_MAP = {
   en: 'en',
-  es: 'es',
+  es: 'es-EM',
   ru: 'ru',
   cn: 'zh-CN',
   tw: 'zh-TW',
