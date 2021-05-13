@@ -37,9 +37,10 @@
   --buttonPrimaryHoverColor: #102331;
   --buttonHoverBg: #19354a;
   --buttonPrimaryHoverBg: #4c88c8;
-  --buttonSuccessBg: #16b157;
+  --buttonSuccessBg: #03ca9b;
   --buttonSuccessColor: #ffffff;
-  --buttonSuccessHoverBg: #0fc75c;
+  --buttonSuccessHoverBg: #009c77;
+  --buttonSuccessDisabledBg: #009471;
   --buttonDisabledBg: #132635;
   --buttonDisabledHoverBg: #172d3e;
   --buttonDisabledColor: rgba(255, 255, 255, 0.6);
@@ -56,14 +57,14 @@
   --tableEvenBg: #102331;
   --tableScrollBg: #0c1a25;
   --tableScrollThumbBg: #5ebefa;
-  --tableAmountPosColor: #16b157;
+  --tableAmountPosColor: #00a27c;
   --tableAmountNegColor: #f05359;
-  --tableAmountFractionPosColor: #53cb85;
+  --tableAmountFractionPosColor: #03ca9b;
   --tableAmountFractionNegColor: #d85f64;
 
   // toasts
   --toastPrimaryBg: #82baf6;
-  --toastSuccessBg: #16b157;
+  --toastSuccessBg: #03ca9b;
   --toastWarningBg: #fbb13c;
   --toastErrorBg: #f05359;
   --toastIconColor: #ffffff;
