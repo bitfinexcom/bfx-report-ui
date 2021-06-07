@@ -15,8 +15,8 @@ import TableScrollPref from 'ui/TableScrollPref'
 import TimeRangePreservePref from 'ui/TimeRangePreservePref'
 import TimezonePicker from 'ui/TimezonePicker'
 import ThemeSwitcher from 'ui/ThemeSwitcher'
+import TimeFrame from 'ui/TimeFrame'
 
-import TimeFrame from './TimeFrame'
 import { propTypes, defaultProps } from './Preferences.props'
 
 class Preferences extends PureComponent {
