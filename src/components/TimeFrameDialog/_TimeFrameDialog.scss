@@ -1,0 +1,20 @@
+.time-frame-dialog {
+  &-message {
+    width: 283px;
+    margin: 0 auto 10px auto;
+    text-align: center;
+  }
+
+  .bp3-button {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .time-frame-dialog {
+    &-message {
+      line-height: 1.3;
+    }
+  }
+}
