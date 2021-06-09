@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import { getTimezone } from 'state/base/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
@@ -21,5 +22,6 @@ const mapDispatchToProps = {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
   withRouter,
 )(TimeFrameDialog)

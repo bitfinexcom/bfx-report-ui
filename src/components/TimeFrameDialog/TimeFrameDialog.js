@@ -1,7 +1,9 @@
 import React, { memo } from 'react'
 import {
+  Button,
   Classes,
   Dialog,
+  Intent,
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
@@ -14,6 +16,7 @@ const TimeFrameDialog = ({
   isOpen,
   end,
   start,
+  t,
   timezone,
   toggleDialog,
 }) => {
@@ -25,13 +28,18 @@ const TimeFrameDialog = ({
     <Dialog
       icon={<Icon.CALENDAR />}
       className='time-frame-dialog'
-      isCloseButtonShown
+      isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={toggleDialog}
       title={`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
     >
       <div className={Classes.DIALOG_BODY}>
         <TimeFrame />
+      </div>
+      <div className={Classes.DIALOG_FOOTER}>
+        <Button intent={Intent.PRIMARY} onClick={toggleDialog}>
+          {t('dialog.close')}
+        </Button>
       </div>
     </Dialog>
   )

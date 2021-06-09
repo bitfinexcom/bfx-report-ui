@@ -4,6 +4,7 @@ export const propTypes = {
   isOpen: PropTypes.bool.isRequired,
   end: PropTypes.number,
   start: PropTypes.number,
+  t: PropTypes.func.isRequired,
   timezone: PropTypes.string.isRequired,
   toggleDialog: PropTypes.func.isRequired,
 }
