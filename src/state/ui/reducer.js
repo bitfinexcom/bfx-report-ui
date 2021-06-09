@@ -56,7 +56,7 @@ export function uiReducer(state = initialState, action) {
     case types.TOGGLE_TIMEFRAME_DIALOG: {
       return {
         ...state,
-        isTimeFrameDialogOpen: payload,
+        isTimeFrameDialogOpen: !state.isTimeFrameDialogOpen,
       }
     }
     case types.UI_RESIZED:
