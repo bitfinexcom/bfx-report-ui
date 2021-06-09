@@ -2,8 +2,13 @@ import PropTypes from 'prop-types'
 
 export const propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  t: PropTypes.func.isRequired,
+  end: PropTypes.number,
+  start: PropTypes.number,
+  timezone: PropTypes.string.isRequired,
   toggleDialog: PropTypes.func.isRequired,
 }
 
-export const defaultProps = {}
+export const defaultProps = {
+  start: 0,
+  end: 0,
+}
