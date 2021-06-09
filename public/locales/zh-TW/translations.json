@@ -170,6 +170,9 @@
   "derivatives": {
     "title": "衍生品"
   },
+  "dialog": {
+    "close": "關閉"
+  },
   "download": {
     "query": "預備匯出",
     "title": "匯出成CSV",
