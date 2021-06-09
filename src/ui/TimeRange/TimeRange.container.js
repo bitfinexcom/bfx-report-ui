@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { getTimezone } from 'state/base/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
-import { togglePreferencesDialog, toggleTimeFrameDialog } from 'state/ui/actions'
+import { toggleTimeFrameDialog } from 'state/ui/actions'
 
 import TimeRange from './TimeRange'
 
@@ -12,7 +12,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  togglePreferencesDialog,
   toggleTimeFrameDialog,
 }
 
