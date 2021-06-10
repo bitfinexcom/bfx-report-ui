@@ -48,8 +48,10 @@ class TimeRangeSelect extends PureComponent {
     const items = this.getItems(t)
 
     return (
-      <div className='preferences-row preferences-item'>
-        <div>{t('timeframe.query_range')}</div>
+      <div className='time-range-select-row'>
+        <div className='time-range-select-title'>
+          {t('timeframe.query_range')}
+        </div>
         <Select
           className='time-range-select'
           items={items}

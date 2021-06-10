@@ -44,23 +44,27 @@ class TimeFrame extends PureComponent {
     const { end, start } = getTimeFrameFromData(timeRange)
 
     return (
-      <div className='preferences-timeframe'>
+      <div className='time-frame'>
         <TimeRangeSelect
           onChange={this.onTimeRangeUpdate}
           range={range}
         />
         {range === timeRangeTypes.CUSTOM && (
-          <div className='preferences-timeframe-range preferences-row'>
-            <div className='preferences-item'>
-              <div>{t('timeframe.start-date-placeholder')}</div>
+          <div className='time-frame-range'>
+            <div className='time-frame-item'>
+              <div className='time-frame-item--title'>
+                {t('timeframe.start-date-placeholder')}
+              </div>
               <DateInput
                 onChange={(date) => this.onDateChange('start', date)}
                 timezone={timezone}
                 value={start}
               />
             </div>
-            <div className='preferences-item'>
-              <div>{t('timeframe.end-date-placeholder')}</div>
+            <div className='time-frame-item'>
+              <div className='time-frame-item--title'>
+                {t('timeframe.end-date-placeholder')}
+              </div>
               <DateInput
                 onChange={(date) => this.onDateChange('end', date)}
                 timezone={timezone}
