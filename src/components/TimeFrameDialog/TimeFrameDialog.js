@@ -37,9 +37,22 @@ const TimeFrameDialog = ({
         <TimeFrame />
       </div>
       <div className={Classes.DIALOG_FOOTER}>
-        <Button intent={Intent.PRIMARY} onClick={toggleDialog}>
-          {t('dialog.close')}
-        </Button>
+        <div className='time-frame-dialog--buttons-row'>
+          <Button
+            className='time-frame-dialog--button'
+            intent={Intent.NONE}
+            onClick={toggleDialog}
+          >
+            {t('dialog.cancel')}
+          </Button>
+          <Button
+            className='time-frame-dialog--button'
+            intent={Intent.PRIMARY}
+            onClick={toggleDialog}
+          >
+            {t('dialog.confirm')}
+          </Button>
+        </div>
       </div>
     </Dialog>
   )
