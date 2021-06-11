@@ -49,9 +49,6 @@ class TimeRangeSelect extends PureComponent {
 
     return (
       <div className='time-range-select-row'>
-        <div className='time-range-select-title'>
-          {t('timeframe.query_range')}
-        </div>
         <Select
           className='time-range-select'
           items={items}
