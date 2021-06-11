@@ -170,9 +170,6 @@
   "derivatives": {
     "title": "Derivados"
   },
-  "dialog": {
-    "close": "Cerrar"
-  },
   "download": {
     "query": "Preparar exportación",
     "title": "Exportar CSV",

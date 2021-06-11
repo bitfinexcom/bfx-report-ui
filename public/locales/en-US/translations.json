@@ -180,9 +180,6 @@
   "derivatives": {
     "title": "Derivatives"
   },
-  "dialog": {
-    "close": "Close"
-  },
   "download": {
     "query": "Prepare Export",
     "title": "Export CSV",
