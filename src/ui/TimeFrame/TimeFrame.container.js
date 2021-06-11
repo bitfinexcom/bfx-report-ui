@@ -1,19 +1,16 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withTranslation } from 'react-i18next'
 
-import { getInputTimezone, getTimezone } from 'state/base/selectors'
-import { getTimeRange } from 'state/timeRange/selectors'
-import { setTimeRange } from 'state/timeRange/actions'
+import { getTimezone } from 'state/base/selectors'
 
 import TimeFrame from './TimeFrame'
 
 const mapStateToProps = (state) => ({
-  inputTimezone: getInputTimezone(state),
-  timeRange: getTimeRange(state),
   timezone: getTimezone(state),
 })
 
-const mapDispatchToProps = {
-  setTimeRange,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimeFrame)
+export default compose(
+  connect(mapStateToProps),
+  withTranslation('translations'),
+)(TimeFrame)
