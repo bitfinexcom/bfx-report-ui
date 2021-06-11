@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import {
   Button,
   Classes,
@@ -26,6 +26,14 @@ const TimeFrameDialog = ({
     end: endTime,
     range: timeRange.range || timeRangeTypes.CUSTOM,
   })
+
+  useEffect(() => {
+    const { range } = timeRange
+    setSelectedTimeFrame({
+      ...selectedTimeFrame,
+      range,
+    })
+  }, [timeRange])
 
   const onTimeFrameUpdate = (params) => {
     setSelectedTimeFrame({
