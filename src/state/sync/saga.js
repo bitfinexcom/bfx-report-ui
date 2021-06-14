@@ -24,6 +24,7 @@ const fetchSyncProgress = () => makeFetchCall('getSyncProgress')
 const logout = () => makeFetchCall('signOut')
 const enableSyncMode = () => makeFetchCall('enableSyncMode')
 const disableSyncMode = () => makeFetchCall('disableSyncMode')
+const haveCollsBeenSyncedAtLeastOnce = () => makeFetchCall('haveCollsBeenSyncedAtLeastOnce')
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -31,6 +32,8 @@ const updateSyncErrorStatus = msg => updateErrorStatus({
 })
 
 function* startSyncing() {
+  const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
+
   const { result, error } = yield call(enableSyncMode)
   if (result) {
     yield put(actions.setSyncPref({
