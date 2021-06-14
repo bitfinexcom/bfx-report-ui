@@ -22,7 +22,7 @@ import syncConfigSaga, { getSyncConf } from './saga.config'
 
 const fetchSyncProgress = () => makeFetchCall('getSyncProgress')
 const logout = () => makeFetchCall('signOut')
-const enableSyncMode = () => makeFetchCall('enableSyncMode')
+const enableSyncMode = (params) => makeFetchCall('enableSyncMode', params)
 const disableSyncMode = () => makeFetchCall('disableSyncMode')
 const haveCollsBeenSyncedAtLeastOnce = () => makeFetchCall('haveCollsBeenSyncedAtLeastOnce')
 const updateSyncErrorStatus = msg => updateErrorStatus({
@@ -33,8 +33,8 @@ const updateSyncErrorStatus = msg => updateErrorStatus({
 
 function* startSyncing() {
   const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
+  const { result, error } = yield call(enableSyncMode, { isNotSyncRequired })
 
-  const { result, error } = yield call(enableSyncMode)
   if (result) {
     yield put(actions.setSyncPref({
       syncMode: types.MODE_SYNCING,
