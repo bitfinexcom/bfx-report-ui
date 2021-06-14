@@ -35,7 +35,7 @@ function* startSyncing() {
   const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
   const { result, error } = yield call(enableSyncMode, { isNotSyncRequired })
 
-  if (result) {
+  if (result && !isNotSyncRequired) {
     yield put(actions.setSyncPref({
       syncMode: types.MODE_SYNCING,
       progress: 0,
