@@ -1,5 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import {
   Button,
   Classes,
@@ -51,6 +50,15 @@ class SyncMode extends PureComponent {
     this.setState({ isOpen: false })
   }
 
+  switchMode = () => {
+    const { syncMode, setSyncMode } = this.props
+    if (syncMode === MODE_ONLINE) {
+      setSyncMode(MODE_OFFLINE)
+    } else {
+      setSyncMode(MODE_ONLINE)
+    }
+  }
+
   startAction = () => {
     const { startSyncing, stopSyncing, syncMode } = this.props
     if (syncMode === MODE_ONLINE) {
@@ -91,7 +99,7 @@ class SyncMode extends PureComponent {
     const syncIcon = getSyncIcon(syncMode, syncProgress)
 
     return (
-      <Fragment>
+      <>
         <Tooltip
           className='sync-mode'
           content={t(getSyncTooltipMessage(syncMode))}
@@ -104,48 +112,6 @@ class SyncMode extends PureComponent {
               </div>
             </div>
             <span className='sync-mode-status'>{t(getSyncTitle(syncMode))}</span>
-          </div>
-        </Tooltip>
-        {/* <Dialog
-          icon={<Icon.LOOP />}
-          isOpen={isOpen}
-          onClose={this.handleDialogClose}
-          title={t('sync.switch-mode')}
-          isCloseButtonShown={false}
-        >
-          <div className={Classes.DIALOG_BODY}>
-            <p className='extra-line-height'>
-              {syncMode === MODE_ONLINE ? t('sync.description') : t('sync.sync-description')}
-            </p>
-          </div>
-          <div className={Classes.DIALOG_FOOTER}>
-            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              <Button onClick={this.handleDialogClose}>
-                {t('sync.close')}
-              </Button>
-              <Button
-                intent={Intent.PRIMARY}
-                onClick={this.startAction}
-              >
-                { syncMode === MODE_ONLINE
-                  ? t('sync.start')
-                  : t('sync.stop-sync') }
-              </Button>
-            </div>
-          </div>
-        </Dialog> */}
-        <Tooltip
-          className='sync-mode'
-          content={t(getModeTooltipMessage(syncMode))}
-          position={Position.BOTTOM}
-        >
-          <div className='sync-mode-wrapper' onClick={this.handleToggleClick}>
-            <div className='sync-mode-icon-wrapper'>
-              <div className='sync-mode-icon'>
-                {modeIcon}
-              </div>
-            </div>
-            <span className='sync-mode-status'>{t(getModeTitle(syncMode))}</span>
           </div>
         </Tooltip>
         <Dialog
@@ -176,9 +142,23 @@ class SyncMode extends PureComponent {
             </div>
           </div>
         </Dialog>
-      </Fragment>
+        <Tooltip
+          className='sync-mode'
+          content={t(getModeTooltipMessage(syncMode))}
+          position={Position.BOTTOM}
+        >
+          <div className='sync-mode-wrapper' onClick={this.switchMode}>
+            <div className='sync-mode-icon-wrapper'>
+              <div className='sync-mode-icon'>
+                {modeIcon}
+              </div>
+            </div>
+            <span className='sync-mode-status'>{t(getModeTitle(syncMode))}</span>
+          </div>
+        </Tooltip>
+      </>
     )
   }
 }
 
-export default withTranslation('translations')(SyncMode)
+export default SyncMode
