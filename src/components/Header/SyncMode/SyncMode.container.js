@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withTranslation } from 'react-i18next'
 
-import { startSyncing, stopSyncing } from 'state/sync/actions'
+import { setSyncMode, startSyncing, stopSyncing } from 'state/sync/actions'
 import { getSyncMode, getSyncProgress } from 'state/sync/selectors'
 
 import SyncMode from './SyncMode'
@@ -11,10 +13,12 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
+  setSyncMode,
   startSyncing,
   stopSyncing,
 }
 
-const SyncModeContainer = connect(mapStateToProps, mapDispatchToProps)(SyncMode)
-
-export default SyncModeContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(SyncMode)
