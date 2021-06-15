@@ -6,31 +6,48 @@ const {
   MODE_SYNCING,
 } = mode
 
-export const getTitle = (syncMode) => {
+export const getModeTitle = (syncMode) => {
   switch (syncMode) {
     case MODE_ONLINE:
     default:
       return 'sync.online'
     case MODE_OFFLINE:
       return 'sync.offline'
-    case MODE_SYNCING:
-      return 'sync.insync'
   }
 }
 
-export const getTooltipMessage = (syncMode) => {
+export const getSyncTitle = (syncMode) => {
+  switch (syncMode) {
+    case MODE_ONLINE:
+    default:
+      return 'sync.start'
+    case MODE_SYNCING:
+      return 'sync.stop-sync'
+  }
+}
+
+export const getModeTooltipMessage = (syncMode) => {
   switch (syncMode) {
     case MODE_ONLINE:
     default:
       return 'sync.online_tooltip'
     case MODE_OFFLINE:
       return 'sync.offline_tooltip'
+  }
+}
+
+export const getSyncTooltipMessage = (syncMode) => {
+  switch (syncMode) {
+    default:
+      return 'sync.start_sync_tooltip'
     case MODE_SYNCING:
       return 'sync.insync_tooltip'
   }
 }
 
 export default {
-  getTitle,
-  getTooltipMessage,
+  getModeTitle,
+  getSyncTitle,
+  getModeTooltipMessage,
+  getSyncTooltipMessage,
 }
