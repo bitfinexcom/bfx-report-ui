@@ -5,7 +5,6 @@ import {
   Classes,
   Dialog,
   Position,
-  Spinner,
   Tooltip,
   Intent,
 } from '@blueprintjs/core'
@@ -15,7 +14,14 @@ import mode from 'state/sync/constants'
 import config from 'config'
 
 import { propTypes, defaultProps } from './SyncMode.props'
-import { getTitle, getTooltipMessage } from './SyncMode.helpers'
+import {
+  getModeIcon,
+  getSyncIcon,
+  getModeTitle,
+  getSyncTitle,
+  getModeTooltipMessage,
+  getSyncTooltipMessage,
+} from './SyncMode.helpers'
 
 const {
   MODE_ONLINE,
@@ -58,30 +64,10 @@ class SyncMode extends PureComponent {
     this.setState({ isOpen: false })
   }
 
-  getSyncIcon = () => {
-    const { syncMode, syncProgress } = this.props
-
-    switch (syncMode) {
-      case MODE_ONLINE:
-      default:
-        return <Icon.CHECKMARK_CIRCLE />
-      case MODE_SYNCING:
-        return (
-          <>
-            <Spinner size={20} />
-            <div className='bitfinex-sync-progress'>
-              {syncProgress}
-            </div>
-          </>
-        )
-      case MODE_OFFLINE:
-        return <Icon.OFFLINE />
-    }
-  }
-
   render() {
     const {
       syncMode,
+      syncProgress,
       t,
     } = this.props
     const { isOpen } = this.state
@@ -101,13 +87,14 @@ class SyncMode extends PureComponent {
       )
     }
 
-    const syncIcon = this.getSyncIcon()
+    const modeIcon = getModeIcon(syncMode)
+    const syncIcon = getSyncIcon(syncMode, syncProgress)
 
     return (
       <Fragment>
         <Tooltip
           className='sync-mode'
-          content={t(getTooltipMessage(syncMode))}
+          content={t(getSyncTooltipMessage(syncMode))}
           position={Position.BOTTOM}
         >
           <div className='sync-mode-wrapper' onClick={this.handleToggleClick}>
@@ -116,7 +103,49 @@ class SyncMode extends PureComponent {
                 {syncIcon}
               </div>
             </div>
-            <span className='sync-mode-status'>{t(getTitle(syncMode))}</span>
+            <span className='sync-mode-status'>{t(getSyncTitle(syncMode))}</span>
+          </div>
+        </Tooltip>
+        {/* <Dialog
+          icon={<Icon.LOOP />}
+          isOpen={isOpen}
+          onClose={this.handleDialogClose}
+          title={t('sync.switch-mode')}
+          isCloseButtonShown={false}
+        >
+          <div className={Classes.DIALOG_BODY}>
+            <p className='extra-line-height'>
+              {syncMode === MODE_ONLINE ? t('sync.description') : t('sync.sync-description')}
+            </p>
+          </div>
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <Button onClick={this.handleDialogClose}>
+                {t('sync.close')}
+              </Button>
+              <Button
+                intent={Intent.PRIMARY}
+                onClick={this.startAction}
+              >
+                { syncMode === MODE_ONLINE
+                  ? t('sync.start')
+                  : t('sync.stop-sync') }
+              </Button>
+            </div>
+          </div>
+        </Dialog> */}
+        <Tooltip
+          className='sync-mode'
+          content={t(getModeTooltipMessage(syncMode))}
+          position={Position.BOTTOM}
+        >
+          <div className='sync-mode-wrapper' onClick={this.handleToggleClick}>
+            <div className='sync-mode-icon-wrapper'>
+              <div className='sync-mode-icon'>
+                {modeIcon}
+              </div>
+            </div>
+            <span className='sync-mode-status'>{t(getModeTitle(syncMode))}</span>
           </div>
         </Tooltip>
         <Dialog
