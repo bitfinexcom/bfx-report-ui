@@ -12,6 +12,17 @@ export function setSyncMode(mode) {
 }
 
 /**
+ * Create an action to switch sync mode.
+ * @param {string} mode sync mode
+ */
+export function switchSyncMode(mode) {
+  return {
+    type: types.SWITCH_SYNC_MODE,
+    mode,
+  }
+}
+
+/**
  * Create an action to start syncing.
  */
 export function startSyncing() {
@@ -26,6 +37,24 @@ export function startSyncing() {
 export function stopSyncing() {
   return {
     type: types.STOP_SYNCING,
+  }
+}
+
+/**
+ * Create an action to start syncing now.
+ */
+export function startSyncNow() {
+  return {
+    type: types.START_SYNC_NOW,
+  }
+}
+
+/**
+ * Create an action to stop syncing now.
+ */
+export function stopSyncNow() {
+  return {
+    type: types.STOP_SYNC_NOW,
   }
 }
 
@@ -154,8 +183,11 @@ export default {
   editSyncConf,
   forceQueryFromDb,
   setSyncMode,
+  switchSyncMode,
   setSyncProgress,
   setSyncPref,
   startSyncing,
   stopSyncing,
+  startSyncNow,
+  stopSyncNow,
 }
