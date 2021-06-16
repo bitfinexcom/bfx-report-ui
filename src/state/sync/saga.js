@@ -25,6 +25,8 @@ const logout = () => makeFetchCall('signOut')
 const enableSyncMode = (params) => makeFetchCall('enableSyncMode', params)
 const disableSyncMode = () => makeFetchCall('disableSyncMode')
 const haveCollsBeenSyncedAtLeastOnce = () => makeFetchCall('haveCollsBeenSyncedAtLeastOnce')
+const syncNow = () => makeFetchCall('syncNow')
+const stopSyncNow = () => makeFetchCall('stopSyncNow')
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
