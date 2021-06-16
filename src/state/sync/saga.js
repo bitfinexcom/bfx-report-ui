@@ -26,7 +26,7 @@ const enableSyncMode = (params) => makeFetchCall('enableSyncMode', params)
 const disableSyncMode = () => makeFetchCall('disableSyncMode')
 const haveCollsBeenSyncedAtLeastOnce = () => makeFetchCall('haveCollsBeenSyncedAtLeastOnce')
 const syncNow = () => makeFetchCall('syncNow')
-const stopSyncNow = () => makeFetchCall('stopSyncNow')
+const syncNowStop = () => makeFetchCall('stopSyncNow')
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -46,6 +46,24 @@ function* startSyncing() {
   }
   if (error) {
     yield put(updateSyncErrorStatus('during enableSyncMode'))
+  } else {
+    yield put(actions.setSyncMode(types.MODE_OFFLINE))
+  }
+}
+
+function* startSyncNow() {
+  const { error } = yield call(syncNow)
+
+  if (error) {
+    yield put(updateSyncErrorStatus('during startSyncNow'))
+  }
+}
+
+function* stopSyncNow() {
+  const { error } = yield call(syncNowStop)
+
+  if (error) {
+    yield put(updateSyncErrorStatus('during stopSyncNow'))
   }
 }
 
@@ -68,7 +86,7 @@ export function* isSynced() {
   return (syncMode === types.MODE_OFFLINE && syncProgress === 100)
 }
 
-export function* switchSyncMode({ mode }) {
+function* switchSyncMode({ mode }) {
   if (mode !== types.MODE_OFFLINE) {
     const { result, error } = yield call(enableSyncMode, { isNotSyncRequired: true })
     if (result) {
@@ -187,6 +205,8 @@ function* updateSyncStatus() {
 export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
+  yield takeLatest(types.START_SYNC_NOW, startSyncNow)
+  yield takeLatest(types.STOP_SYNC_NOW, stopSyncNow)
   yield takeLatest(types.SWITCH_SYNC_MODE, switchSyncMode)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
   yield takeLatest(authTypes.AUTH_SUCCESS, initSync)
