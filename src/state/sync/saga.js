@@ -66,6 +66,26 @@ export function* isSynced() {
   return (syncMode === types.MODE_OFFLINE && syncProgress === 100)
 }
 
+export function* switchSyncMode({ mode }) {
+  if (mode !== types.MODE_OFFLINE) {
+    const { result, error } = yield call(enableSyncMode, { isNotSyncRequired: true })
+    if (result) {
+      yield put(actions.setSyncMode(types.MODE_OFFLINE))
+    }
+    if (error) {
+      yield put(updateSyncErrorStatus('during enableSyncMode'))
+    }
+  } else {
+    const { result, error } = yield call(disableSyncMode)
+    if (result) {
+      yield put(actions.setSyncMode(types.MODE_ONLINE))
+    }
+    if (error) {
+      yield put(updateSyncErrorStatus('during disableSyncMode'))
+    }
+  }
+}
+
 function* forceQueryFromDb() {
   yield put(actions.setSyncMode(types.MODE_OFFLINE))
   yield put(updateStatus({ id: 'sync.go-offline' }))
@@ -165,6 +185,7 @@ function* updateSyncStatus() {
 export default function* syncSaga() {
   yield takeLatest(types.START_SYNCING, startSyncing)
   yield takeLatest(types.STOP_SYNCING, stopSyncing)
+  yield takeLatest(types.SWITCH_SYNC_MODE, switchSyncMode)
   yield takeLatest(types.FORCE_OFFLINE, forceQueryFromDb)
   yield takeLatest(authTypes.AUTH_SUCCESS, initSync)
   yield takeLatest(types.WS_PROGRESS_UPDATE, progressUpdate)
