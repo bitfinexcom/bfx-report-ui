@@ -8,7 +8,6 @@ import Icon from 'icons'
 import {
   DEFAULT_DATETIME_FORMAT, momentFormatter, momentFormatterDays,
 } from 'state/utils'
-import config from 'config'
 
 import { propTypes, defaultProps } from './DateInput.props'
 
