@@ -51,7 +51,7 @@ class DateInput extends PureComponent {
       ? momentFormatterDays()
       : momentFormatter(DEFAULT_DATETIME_FORMAT, timezone || inputTimezone)
 
-    const timePrecision = (config.showFrameworkMode && !daysOnly) ? TimePrecision.SECOND : undefined
+    const timePrecision = !daysOnly ? TimePrecision.SECOND : undefined
     const icon = isOpen
       ? <Icon.CHEVRON_UP />
       : <Icon.CHEVRON_DOWN />
