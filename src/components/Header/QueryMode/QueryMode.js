@@ -1,10 +1,9 @@
-import React, { PureComponent } from 'react'
+import React, { memo } from 'react'
 import {
   Position,
   Tooltip,
 } from '@blueprintjs/core'
 
-import Icon from 'icons'
 import config from 'config'
 
 import { propTypes, defaultProps } from './QueryMode.props'
@@ -14,58 +13,39 @@ import {
   getModeTooltipMessage,
 } from './QueryMode.helpers'
 
-class QueryMode extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
-
-  switchMode = () => {
-    const { syncMode, switchSyncMode } = this.props
+const QueryMode = ({ syncMode, switchSyncMode, t }) => {
+  const switchMode = () => {
     switchSyncMode(syncMode)
   }
 
-  render() {
-    const {
-      syncMode,
-      t,
-    } = this.props
+  const modeIcon = getModeIcon(syncMode)
 
-    if (!config.showFrameworkMode) {
-      return (
-        <div className='query-mode'>
-          <div className='query-mode-wrapper'>
-            <div className='query-mode-icon-wrapper'>
-              <div className='query-mode-icon'>
-                <Icon.CHECKMARK_CIRCLE />
-              </div>
-            </div>
-            <span className='query-mode-status'>{t('sync.online')}</span>
-          </div>
-        </div>
-      )
-    }
-
-    const modeIcon = getModeIcon(syncMode)
-
-    return (
-      <>
-        <Tooltip
-          className='query-mode'
-          content={t(getModeTooltipMessage(syncMode))}
-          position={Position.BOTTOM}
-        >
-          <div className='query-mode-wrapper' onClick={this.switchMode}>
-            <div className='query-mode-icon-wrapper'>
-              <div className='query-mode-icon'>
-                {modeIcon}
-              </div>
-            </div>
-            <span className='query-mode-status'>{t(getModeTitle(syncMode))}</span>
-          </div>
-        </Tooltip>
-      </>
-    )
+  if (!config.showFrameworkMode) {
+    return null
   }
+
+  return (
+    <>
+      <Tooltip
+        className='query-mode'
+        content={t(getModeTooltipMessage(syncMode))}
+        position={Position.BOTTOM}
+      >
+        <div className='query-mode-wrapper' onClick={switchMode}>
+          <div className='query-mode-icon-wrapper'>
+            <div className='query-mode-icon'>
+              {modeIcon}
+            </div>
+          </div>
+          <span className='query-mode-status'>{t(getModeTitle(syncMode))}</span>
+        </div>
+      </Tooltip>
+    </>
+  )
 }
 
-export default QueryMode
+
+QueryMode.propTypes = propTypes
+QueryMode.defaultProps = defaultProps
+
+export default memo(QueryMode)
