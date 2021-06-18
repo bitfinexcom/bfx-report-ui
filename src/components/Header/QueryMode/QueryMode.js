@@ -4,6 +4,7 @@ import {
   Tooltip,
 } from '@blueprintjs/core'
 
+import Icon from 'icons'
 import config from 'config'
 
 import { propTypes, defaultProps } from './QueryMode.props'
@@ -21,7 +22,18 @@ const QueryMode = ({ syncMode, switchSyncMode, t }) => {
   const modeIcon = getModeIcon(syncMode)
 
   if (!config.showFrameworkMode) {
-    return null
+    return (
+      <div className='query-mode'>
+        <div className='query-mode-wrapper'>
+          <div className='query-mode-icon-wrapper'>
+            <div className='query-mode-icon'>
+              <Icon.CHECKMARK_CIRCLE />
+            </div>
+          </div>
+          <span className='query-mode-status'>{t('sync.online')}</span>
+        </div>
+      </div>
+    )
   }
 
   return (
