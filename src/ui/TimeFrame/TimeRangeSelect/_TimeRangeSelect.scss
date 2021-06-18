@@ -1,0 +1,20 @@
+.time-range-select-row {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  .time-range-select-title {
+    margin-bottom: 10px;
+  } 
+
+  .time-range-select {
+    .bp3-button {
+      display: flex;
+      width: 190px;
+    }
+  }
+} 
+

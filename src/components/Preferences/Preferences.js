@@ -44,13 +44,17 @@ class Preferences extends PureComponent {
         isOpen={isOpen}
       >
         <div className={Classes.DIALOG_BODY}>
-          <div className='preferences-row preferences-item'>
-            <div>{t('preferences.language')}</div>
-            <LangMenu />
+          <div className='preferences-row'>
+            <div className='preferences-item'>
+              <div>{t('preferences.language')}</div>
+              <LangMenu />
+            </div>
           </div>
-          <div className='preferences-row preferences-item'>
-            <div>{t('preferences.theme')}</div>
-            <ThemeSwitcher />
+          <div className='preferences-row'>
+            <div className='preferences-item'>
+              <div>{t('preferences.theme')}</div>
+              <ThemeSwitcher />
+            </div>
           </div>
           <div className='preferences-row preferences-timezones'>
             <div className='preferences-item'>

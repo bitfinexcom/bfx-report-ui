@@ -8,7 +8,6 @@ import Icon from 'icons'
 import {
   DEFAULT_DATETIME_FORMAT, momentFormatter, momentFormatterDays,
 } from 'state/utils'
-import config from 'config'
 
 import { propTypes, defaultProps } from './DateInput.props'
 
@@ -32,6 +31,9 @@ class DateInput extends PureComponent {
     this.setState({ isOpen })
   }
 
+  // automatically creates date from timestamp
+  formatDate = date => (typeof date === 'object' ? date : date && new Date(date))
+
   render() {
     const {
       className,
@@ -39,26 +41,23 @@ class DateInput extends PureComponent {
       defaultValue,
       inputTimezone,
       t,
+      timezone,
+      value,
     } = this.props
     const { isOpen } = this.state
 
-    // automatically create date from timestamp
-    const defaultDate = (typeof defaultValue === 'object')
-      ? defaultValue
-      : defaultValue && new Date(defaultValue)
-
     const { formatDate, parseDate } = daysOnly
       ? momentFormatterDays()
-      : momentFormatter(DEFAULT_DATETIME_FORMAT, inputTimezone)
+      : momentFormatter(DEFAULT_DATETIME_FORMAT, timezone || inputTimezone)
 
-    const timePrecision = (config.showFrameworkMode && !daysOnly) ? TimePrecision.SECOND : undefined
+    const timePrecision = !daysOnly ? TimePrecision.SECOND : undefined
     const icon = isOpen
       ? <Icon.CHEVRON_UP />
       : <Icon.CHEVRON_DOWN />
 
     return (
       <BptDateInput
-        defaultValue={defaultDate}
+        defaultValue={this.formatDate(defaultValue)}
         formatDate={formatDate}
         inputProps={{
           className,
@@ -75,6 +74,7 @@ class DateInput extends PureComponent {
           position: Position.BOTTOM_LEFT,
         }}
         timePrecision={timePrecision}
+        value={this.formatDate(value)}
       />
     )
   }

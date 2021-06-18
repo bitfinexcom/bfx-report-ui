@@ -74,10 +74,9 @@ export function togglePreferencesDialog() {
 /**
  * Create an action to show/hide timeframe dialog.
  */
-export function toggleTimeFrameDialog(payload) {
+export function toggleTimeFrameDialog() {
   return {
     type: types.TOGGLE_TIMEFRAME_DIALOG,
-    payload,
   }
 }
 
