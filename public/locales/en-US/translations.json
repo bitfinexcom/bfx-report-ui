@@ -429,7 +429,9 @@
     "sync-description": "Your data is syncing locally. Would you like to stop the sync process and keep in online query mode?",
     "close": "Cancel",
     "start": "Start Sync",
+    "start-sync": "Sync Started",
     "stop-sync": "Stop Sync",
+    "go-online": "Switching to online query mode",
     "go-offline": "Switching to offline query mode (query from db)",
     "logout": "Sync Stopped",
     "message": {
