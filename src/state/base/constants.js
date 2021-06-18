@@ -1,7 +1,14 @@
 export default {
   MENU_MODE_ICON: 'icon',
   MENU_MODE_NORMAL: 'normal',
-  DATE_FORMATS: ['DD-MM-YY', 'MM-DD-YY', 'YY-MM-DD'],
+  DATE_FORMATS: [
+    'DD-MM-YY',
+    'DD-MM-YYYY',
+    'MM-DD-YY',
+    'MM-DD-YYYY',
+    'YY-MM-DD',
+    'YYYY-MM-DD',
+  ],
   DEFAULT_TIMEZONE: 'Etc/UTC',
   SET_SYNC_STATE: 'BITFINEX/SYNC/SET_STATE',
   SET_DATE_FORMAT: 'BITFINEX/DATEFORMAT/SET',

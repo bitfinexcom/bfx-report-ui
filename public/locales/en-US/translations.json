@@ -484,6 +484,7 @@
     "start-date-placeholder": "Start Date",
     "end-date-placeholder": "End Date",
     "today": "Today",
+    "query_range": "Query Range",
     "year": "Year"
   },
   "tradedvolume": {

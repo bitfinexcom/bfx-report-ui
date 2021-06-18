@@ -7,6 +7,7 @@ export const propTypes = {
   inputTimezone: PropTypes.string,
   daysOnly: PropTypes.bool,
   t: PropTypes.func.isRequired,
+  timezone: PropTypes.string,
 }
 
 export const defaultProps = {
