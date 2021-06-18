@@ -5,12 +5,10 @@ export const propTypes = {
   syncProgress: PropTypes.number.isRequired,
   startSyncNow: PropTypes.func,
   stopSyncNow: PropTypes.func,
-  switchSyncMode: PropTypes.func,
   t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
   startSyncNow: () => {},
   stopSyncNow: () => {},
-  switchSyncMode: () => {},
 }

@@ -4,15 +4,10 @@ import { Spinner } from '@blueprintjs/core'
 import Icon from 'icons'
 import mode from 'state/sync/constants'
 
-const {
-  MODE_OFFLINE,
-  MODE_SYNCING,
-} = mode
-
+const { MODE_SYNCING } = mode
 
 export const getSyncTitle = (syncMode) => {
   switch (syncMode) {
-    case MODE_OFFLINE:
     default:
       return 'sync.start'
     case MODE_SYNCING:

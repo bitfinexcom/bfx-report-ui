@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { memo } from 'react'
 import {
   Position,
   Tooltip,
@@ -14,17 +14,16 @@ import {
   getSyncTooltipMessage,
 } from './SyncMode.helpers'
 
-const {
-  MODE_SYNCING,
-} = mode
+const SyncMode = ({
+  syncMode,
+  syncProgress,
+  startSyncNow,
+  stopSyncNow,
+  t,
+}) => {
+  const handleSync = () => {
+    const { MODE_SYNCING } = mode
 
-class SyncMode extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
-
-  handleSync = () => {
-    const { startSyncNow, stopSyncNow, syncMode } = this.props
     if (syncMode === MODE_SYNCING) {
       stopSyncNow()
     } else {
@@ -32,38 +31,34 @@ class SyncMode extends PureComponent {
     }
   }
 
-  render() {
-    const {
-      syncMode,
-      syncProgress,
-      t,
-    } = this.props
+  const syncIcon = getSyncIcon(syncMode, syncProgress)
 
-    if (!config.showFrameworkMode) {
-      return null
-    }
-
-    const syncIcon = getSyncIcon(syncMode, syncProgress)
-
-    return (
-      <>
-        <Tooltip
-          className='sync-mode'
-          content={t(getSyncTooltipMessage(syncMode))}
-          position={Position.BOTTOM}
-        >
-          <div className='sync-mode-wrapper' onClick={this.handleSync}>
-            <div className='sync-mode-icon-wrapper'>
-              <div className='sync-mode-icon'>
-                {syncIcon}
-              </div>
-            </div>
-            <span className='sync-mode-status'>{t(getSyncTitle(syncMode))}</span>
-          </div>
-        </Tooltip>
-      </>
-    )
+  if (!config.showFrameworkMode) {
+    return null
   }
+
+  return (
+    <>
+      <Tooltip
+        className='sync-mode'
+        content={t(getSyncTooltipMessage(syncMode))}
+        position={Position.BOTTOM}
+      >
+        <div className='sync-mode-wrapper' onClick={handleSync}>
+          <div className='sync-mode-icon-wrapper'>
+            <div className='sync-mode-icon'>
+              {syncIcon}
+            </div>
+          </div>
+          <span className='sync-mode-status'>{t(getSyncTitle(syncMode))}</span>
+        </div>
+      </Tooltip>
+    </>
+  )
 }
 
-export default SyncMode
+
+SyncMode.propTypes = propTypes
+SyncMode.defaultProps = defaultProps
+
+export default memo(SyncMode)
