@@ -15,6 +15,7 @@ import timeRangeTypes from 'state/timeRange/constants'
 import config from 'config'
 
 import SyncMode from '../SyncMode'
+import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
 import TimeFrameShortcut from '../TimeFrameShortcut'
 import { propTypes, defaultProps } from './TopNavigation.props'
@@ -103,10 +104,17 @@ class TopNavigation extends PureComponent {
                 />
                 <MenuItem
                   className={classNames('bp3-menu-item--sync', {
-                    'bp3-menu-item--sync--disabled': !config.showFrameworkMode,
+                    'bp3-menu-item--sync--removed': !config.showFrameworkMode,
                   })}
                   shouldDismissPopover={false}
                   text={<SyncMode />}
+                />
+                <MenuItem
+                  className={classNames('bp3-menu-item--query', {
+                    'bp3-menu-item--query--disabled': !config.showFrameworkMode,
+                  })}
+                  shouldDismissPopover={false}
+                  text={<QueryMode />}
                 />
                 <MenuItem
                   className='bp3-menu-item--account'

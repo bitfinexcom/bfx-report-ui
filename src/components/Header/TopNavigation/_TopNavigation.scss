@@ -87,13 +87,18 @@
           }
         }
 
-        &--sync {
+        &--sync,
+        &--query {
           &--disabled {
             pointer-events: none;
           }
+          &--removed {
+            display: none;
+          }
         }
 
-        .sync-mode {
+        .sync-mode, 
+        .query-mode {
           height: 40px;
 
           .bp3-popover-target {
@@ -196,7 +201,8 @@
             }
           }
 
-          .sync-mode {
+          .sync-mode,
+          .query-mode {
             .bp3-popover-target {
               height: 35px;
             }
