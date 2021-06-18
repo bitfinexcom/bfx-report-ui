@@ -52,16 +52,20 @@ function* startSyncing() {
 }
 
 function* startSyncNow() {
-  const { error } = yield call(syncNow)
-
+  const { result, error } = yield call(syncNow)
+  if (result) {
+    yield put(updateStatus({ id: 'sync.start-sync' }))
+  }
   if (error) {
     yield put(updateSyncErrorStatus('during startSyncNow'))
   }
 }
 
 function* stopSyncNow() {
-  const { error } = yield call(syncNowStop)
-
+  const { result, error } = yield call(syncNowStop)
+  if (result) {
+    yield put(updateStatus({ id: 'sync.logout' }))
+  }
   if (error) {
     yield put(updateSyncErrorStatus('during stopSyncNow'))
   }
@@ -91,6 +95,7 @@ function* switchSyncMode({ mode }) {
     const { result, error } = yield call(enableSyncMode, { isNotSyncRequired: true })
     if (result) {
       yield put(actions.setSyncMode(types.MODE_OFFLINE))
+      yield put(updateStatus({ id: 'sync.go-online' }))
     }
     if (error) {
       yield put(updateSyncErrorStatus('during enableSyncMode'))
@@ -99,6 +104,7 @@ function* switchSyncMode({ mode }) {
     const { result, error } = yield call(disableSyncMode)
     if (result) {
       yield put(actions.setSyncMode(types.MODE_ONLINE))
+      yield put(updateStatus({ id: 'sync.go-offline' }))
     }
     if (error) {
       yield put(updateSyncErrorStatus('during disableSyncMode'))
@@ -160,7 +166,7 @@ function* requestsRedirectUpdate({ payload }) {
     if (isSyncing) {
       yield put(actions.setSyncMode(types.MODE_SYNCING))
     } else {
-      yield put(actions.setSyncMode(types.MODE_ONLINE))
+      yield put(actions.setSyncMode(types.MODE_OFFLINE))
     }
   } else {
     yield put(actions.forceQueryFromDb())
