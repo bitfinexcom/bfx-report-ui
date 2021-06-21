@@ -59,6 +59,17 @@ export function stopSyncNow() {
 }
 
 /**
+ * Create an action to set syncing status.
+ * @param {string} status syncing status
+ */
+export function setIsSyncing(status) {
+  return {
+    type: types.SET_IS_SYNCING,
+    payload: status,
+  }
+}
+
+/**
  * Create an action to force query from DB.
  */
 export function forceQueryFromDb() {
@@ -185,6 +196,7 @@ export default {
   setSyncMode,
   switchSyncMode,
   setSyncProgress,
+  setIsSyncing,
   setSyncPref,
   startSyncing,
   stopSyncing,
