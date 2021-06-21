@@ -4,7 +4,6 @@ import {
   Tooltip,
 } from '@blueprintjs/core'
 
-import mode from 'state/sync/constants'
 import config from 'config'
 
 import { propTypes, defaultProps } from './SyncMode.props'
@@ -15,23 +14,21 @@ import {
 } from './SyncMode.helpers'
 
 const SyncMode = ({
-  syncMode,
+  isSyncing,
   syncProgress,
   startSyncNow,
   stopSyncNow,
   t,
 }) => {
   const handleSync = () => {
-    const { MODE_SYNCING } = mode
-
-    if (syncMode === MODE_SYNCING) {
+    if (isSyncing) {
       stopSyncNow()
     } else {
       startSyncNow()
     }
   }
 
-  const syncIcon = getSyncIcon(syncMode, syncProgress)
+  const syncIcon = getSyncIcon(isSyncing, syncProgress)
 
   if (!config.showFrameworkMode) {
     return null
@@ -41,7 +38,7 @@ const SyncMode = ({
     <>
       <Tooltip
         className='sync-mode'
-        content={t(getSyncTooltipMessage(syncMode))}
+        content={t(getSyncTooltipMessage(isSyncing))}
         position={Position.BOTTOM}
       >
         <div className='sync-mode-wrapper' onClick={handleSync}>
@@ -50,7 +47,7 @@ const SyncMode = ({
               {syncIcon}
             </div>
           </div>
-          <span className='sync-mode-status'>{t(getSyncTitle(syncMode))}</span>
+          <span className='sync-mode-status'>{t(getSyncTitle(isSyncing))}</span>
         </div>
       </Tooltip>
     </>
