@@ -16,6 +16,7 @@ import types from './constants'
 import actions from './actions'
 import {
   getSyncMode,
+  getIsSyncing,
   getSyncProgress,
 } from './selectors'
 import syncConfigSaga, { getSyncConf } from './saga.config'
@@ -35,19 +36,17 @@ const updateSyncErrorStatus = msg => updateErrorStatus({
 
 function* startSyncing() {
   const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
-  const { result, error } = yield call(enableSyncMode, { isNotSyncRequired })
+  const { result, error } = yield call(enableSyncMode, { isNotSyncRequired: false })
 
   if (result && !isNotSyncRequired) {
     yield put(actions.setSyncPref({
-      syncMode: types.MODE_SYNCING,
       progress: 0,
+      isSyncing: true,
     }))
     yield put(updateStatus({ id: 'sync.start' }))
   }
   if (error) {
     yield put(updateSyncErrorStatus('during enableSyncMode'))
-  } else {
-    yield put(actions.setSyncMode(types.MODE_OFFLINE))
   }
 }
 
@@ -55,6 +54,7 @@ function* startSyncNow() {
   const { result, error } = yield call(syncNow)
   if (result) {
     yield put(updateStatus({ id: 'sync.start-sync' }))
+    yield put(actions.setIsSyncing(true))
   }
   if (error) {
     yield put(updateSyncErrorStatus('during startSyncNow'))
@@ -64,6 +64,7 @@ function* startSyncNow() {
 function* stopSyncNow() {
   const { result, error } = yield call(syncNowStop)
   if (result) {
+    yield put(actions.setIsSyncing(false))
     yield put(updateStatus({ id: 'sync.logout' }))
   }
   if (error) {
@@ -75,7 +76,7 @@ function* stopSyncing() {
   yield delay(300)
   const { result, error } = yield call(disableSyncMode)
   if (result) {
-    yield put(actions.setSyncMode(types.MODE_ONLINE))
+    yield put(actions.setIsSyncing(false))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
   }
   if (error) {
@@ -113,8 +114,7 @@ function* switchSyncMode({ mode }) {
 }
 
 function* forceQueryFromDb() {
-  yield put(actions.setSyncMode(types.MODE_OFFLINE))
-  yield put(updateStatus({ id: 'sync.go-offline' }))
+  yield put(actions.setIsSyncing(false))
 }
 
 function* syncLogout() {
@@ -138,8 +138,8 @@ function* initSync() {
   const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
   if (isSyncing) {
     yield put(actions.setSyncPref({
-      syncMode: types.MODE_SYNCING,
       progress: syncProgress,
+      isSyncing: true,
     }))
   } else {
     yield call(startSyncing)
@@ -164,9 +164,9 @@ function* requestsRedirectUpdate({ payload }) {
     const syncProgress = yield select(getSyncProgress)
     const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
     if (isSyncing) {
-      yield put(actions.setSyncMode(types.MODE_SYNCING))
+      yield put(actions.setIsSyncing(true))
     } else {
-      yield put(actions.setSyncMode(types.MODE_OFFLINE))
+      yield put(actions.setIsSyncing(false))
     }
   } else {
     yield put(actions.forceQueryFromDb())
@@ -175,15 +175,16 @@ function* requestsRedirectUpdate({ payload }) {
 
 function* updateSyncStatus() {
   const syncMode = yield select(getSyncMode)
+  const isSyncing = yield select(getIsSyncing)
   const { result: syncProgress, error: progressError } = yield call(fetchSyncProgress)
 
   switch (typeof syncProgress) {
     case 'number':
-      if (syncProgress !== 100 && syncMode !== types.MODE_SYNCING) {
-        yield put(actions.setSyncMode(types.MODE_SYNCING))
+      if (!isSyncing && syncProgress !== 100) {
+        yield put(actions.setIsSyncing(true))
       }
-      if (syncProgress === 100 && syncMode !== types.MODE_OFFLINE) {
-        yield put(actions.setSyncMode(types.MODE_OFFLINE))
+      if (syncProgress === 100) {
+        yield put(actions.setIsSyncing(false))
       }
       break
     case 'boolean':
