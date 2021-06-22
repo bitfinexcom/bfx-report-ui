@@ -36,7 +36,7 @@ const updateSyncErrorStatus = msg => updateErrorStatus({
 
 function* startSyncing() {
   const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
-  const { result, error } = yield call(enableSyncMode, { isNotSyncRequired: false })
+  const { result, error } = yield call(enableSyncMode, { isNotSyncRequired })
 
   if (result && !isNotSyncRequired) {
     yield put(actions.setSyncPref({
