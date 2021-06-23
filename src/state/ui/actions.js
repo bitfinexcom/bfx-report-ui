@@ -38,8 +38,10 @@ export function toggleFrameworkDialog() {
 
 /**
  * Create an action to show/hide error dialog.
+ * @param {boolean} isErrorDialogOpen dialog state
+ * @param {string} errorMessage error message
  */
-export function toggleErrorDialog(isErrorDialogOpen, errorMessage) {
+export function toggleErrorDialog(isErrorDialogOpen, errorMessage = null) {
   return {
     type: types.TOGGLE_ERROR_DIALOG,
     payload: {

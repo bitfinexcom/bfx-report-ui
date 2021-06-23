@@ -20,7 +20,7 @@ const ErrorDialog = ({
   const [isDialogDisabled, setIsDialogDisabled] = useState(false)
 
   const handleClose = () => {
-    toggleDialog()
+    toggleDialog(false)
   }
 
   const handleChange = (e) => {
