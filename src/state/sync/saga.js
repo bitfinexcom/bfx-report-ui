@@ -115,6 +115,7 @@ function* switchSyncMode({ mode }) {
 
 function* forceQueryFromDb() {
   yield put(actions.setIsSyncing(false))
+  yield put(updateStatus({ id: 'sync.sync-done' }))
 }
 
 function* syncLogout() {
@@ -167,6 +168,7 @@ function* requestsRedirectUpdate({ payload }) {
       yield put(actions.setIsSyncing(true))
     } else {
       yield put(actions.setIsSyncing(false))
+      yield put(updateStatus({ id: 'sync.sync-done' }))
     }
   } else {
     yield put(actions.forceQueryFromDb())
@@ -185,6 +187,7 @@ function* updateSyncStatus() {
       }
       if (syncProgress === 100) {
         yield put(actions.setIsSyncing(false))
+        yield put(updateStatus({ id: 'sync.sync-done' }))
       }
       break
     case 'boolean':
