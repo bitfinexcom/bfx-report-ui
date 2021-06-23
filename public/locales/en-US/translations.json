@@ -228,7 +228,9 @@
     "no_sync": "Sync is not enabled",
     "proceed": "Proceed anyway",
     "cancel": "Cancel",
-    "notagain": "Don't show this message again"
+    "notagain": "Don't show this message again",
+    "ok": "Ok",
+    "warning": "Warning",
   },
   "header": {
     "logout": "Logout",
