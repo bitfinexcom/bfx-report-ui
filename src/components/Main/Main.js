@@ -10,6 +10,7 @@ import ChangeLogs from 'components/ChangeLogs'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import Derivatives from 'components/Derivatives'
 import FeesReport from 'components/FeesReport'
+import ErrorDialog from 'components/ErrorDialog'
 import FrameworkDialog from 'components/FrameworkDialog'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
@@ -309,6 +310,7 @@ class Main extends PureComponent {
         <ExportDialog />
         <ExportSuccessDialog />
         {config.showFrameworkMode && <FrameworkDialog />}
+        {config.showFrameworkMode && <ErrorDialog />}
         <PaginationDialog />
         <Preferences />
         <TimeFrameDialog />
