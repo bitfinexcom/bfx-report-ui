@@ -114,8 +114,11 @@ function* switchSyncMode({ mode }) {
 }
 
 function* forceQueryFromDb() {
+  const syncProgress = yield select(getSyncProgress)
+  if (syncProgress === 100) {
+    yield put(updateStatus({ id: 'sync.sync-done' }))
+  }
   yield put(actions.setIsSyncing(false))
-  yield put(updateStatus({ id: 'sync.sync-done' }))
 }
 
 function* syncLogout() {
