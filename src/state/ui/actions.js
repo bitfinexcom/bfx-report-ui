@@ -37,6 +37,16 @@ export function toggleFrameworkDialog() {
 }
 
 /**
+ * Create an action to show/hide error dialog.
+ */
+export function toggleErrorDialog(payload) {
+  return {
+    type: types.TOGGLE_ERROR_DIALOG,
+    payload,
+  }
+}
+
+/**
  * Create an action to proceed with framework request.
  * @param {object} payload object with boolean properties shouldProceed and isFrameworkDialogDisabled
  */
