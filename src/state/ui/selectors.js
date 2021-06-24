@@ -9,7 +9,7 @@ export const getIsPaginationDialogOpen = state => getUI(state).isPaginationDialo
 export const getIsPreferencesDialogOpen = state => getUI(state).isPreferencesDialogOpen
 export const getIsTimeFrameDialogOpen = state => getUI(state).isTimeFrameDialogOpen
 export const getLatestPaginationTimestamp = state => getUI(state).latestPaginationTimestamp
-export const getErrorDialogMessage = state => getUI(state).errorMessage || null
+export const getErrorDialogMessage = state => getUI(state).errorMessage
 export const getDevice = state => getUI(state).device
 export const getWindowWidth = state => getUI(state).windowWidth
 

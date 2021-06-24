@@ -8,5 +8,5 @@ export const propTypes = {
 }
 
 export const defaultProps = {
-  errorMessage: null,
+  errorMessage: 'Something went wrong',
 }

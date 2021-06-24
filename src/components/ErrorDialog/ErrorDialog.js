@@ -31,14 +31,14 @@ const ErrorDialog = ({
   return (
     <Dialog
       className='error-dialog'
-      icon={<Icon.WARNING />}
+      icon={<Icon.INFO_CIRCLE />}
       onClose={handleClose}
       title={t('framework.warning')}
       isCloseButtonShown={false}
       isOpen={isOpen}
     >
       <div className={Classes.DIALOG_BODY}>
-        <p className='error-dialog-message'>{errorMessage}</p>
+        <div className='error-dialog-message'>{errorMessage}</div>
         <Checkbox
           checked={isDialogDisabled}
           onChange={handleChange}
@@ -49,7 +49,7 @@ const ErrorDialog = ({
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
           <Button intent={Intent.PRIMARY} onClick={handleClose}>
-            {t('framework.ok')}
+            {t('framework.continue')}
           </Button>
         </div>
       </div>
