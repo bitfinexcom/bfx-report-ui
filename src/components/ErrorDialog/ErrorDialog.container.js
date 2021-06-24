@@ -3,18 +3,24 @@ import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
-import { toggleErrorDialog } from 'state/ui/actions'
-import { getIsErrorDialogOpen, getErrorDialogMessage } from 'state/ui/selectors'
+import { toggleErrorDialog, disableErrorDialog } from 'state/ui/actions'
+import {
+  getIsErrorDialogOpen,
+  getIsErrorDialogDisabled,
+  getErrorDialogMessage,
+} from 'state/ui/selectors'
 
 import ErrorDialog from './ErrorDialog'
 
 const mapStateToProps = state => ({
   isOpen: getIsErrorDialogOpen(state),
+  isDisabled: getIsErrorDialogDisabled(state),
   errorMessage: getErrorDialogMessage(state),
 })
 
 const mapDispatchToProps = {
   toggleDialog: toggleErrorDialog,
+  disableDialog: disableErrorDialog,
 }
 
 export default compose(

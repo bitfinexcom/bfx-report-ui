@@ -14,13 +14,16 @@ import { propTypes, defaultProps } from './ErrorDialog.props'
 const ErrorDialog = ({
   t,
   isOpen,
+  isDisabled,
   errorMessage,
   toggleDialog,
+  disableDialog,
 }) => {
-  const [isDialogDisabled, setIsDialogDisabled] = useState(false)
+  const [isDialogDisabled, setIsDialogDisabled] = useState(isDisabled)
 
   const handleClose = () => {
     toggleDialog(false)
+    disableDialog(isDialogDisabled)
   }
 
   const handleChange = (e) => {
@@ -56,7 +59,6 @@ const ErrorDialog = ({
     </Dialog>
   )
 }
-
 
 ErrorDialog.propTypes = propTypes
 ErrorDialog.defaultProps = defaultProps
