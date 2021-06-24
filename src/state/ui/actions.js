@@ -41,13 +41,24 @@ export function toggleFrameworkDialog() {
  * @param {boolean} isErrorDialogOpen dialog state
  * @param {string} errorMessage error message
  */
-export function toggleErrorDialog(isErrorDialogOpen, errorMessage = null) {
+export function toggleErrorDialog(isErrorDialogOpen, errorMessage) {
   return {
     type: types.TOGGLE_ERROR_DIALOG,
     payload: {
       isErrorDialogOpen,
       errorMessage,
     },
+  }
+}
+
+/**
+ * Create an action to disable error dialog.
+ * @param {boolean} isErrorDialogDisabled dialog state
+ */
+export function disableErrorDialog(isErrorDialogDisabled) {
+  return {
+    type: types.DISABLE_ERROR_DIALOG,
+    payload: isErrorDialogDisabled,
   }
 }
 
@@ -126,6 +137,8 @@ export function uiResized() {
 
 export default {
   electronBackendLoaded,
+  disableErrorDialog,
+  toggleErrorDialog,
   toggleExportDialog,
   toggleExportSuccessDialog,
   toggleFrameworkDialog,

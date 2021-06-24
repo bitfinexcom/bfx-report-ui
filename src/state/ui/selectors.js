@@ -2,6 +2,7 @@ export const getUI = state => state.ui
 
 export const getIsElectronBackendLoaded = state => getUI(state).isElectronBackendLoaded
 export const getIsErrorDialogOpen = state => getUI(state).isErrorDialogOpen
+export const getIsErrorDialogDisabled = state => getUI(state).isErrorDialogDisabled
 export const getIsExportDialogOpen = state => getUI(state).isExportDialogOpen
 export const getIsExportSuccessDialogOpen = state => getUI(state).isExportSuccessDialogOpen
 export const getIsFrameworkDialogOpen = state => getUI(state).isFrameworkDialogOpen
@@ -15,6 +16,7 @@ export const getWindowWidth = state => getUI(state).windowWidth
 
 export default {
   getIsElectronBackendLoaded,
+  getIsErrorDialogDisabled,
   getIsErrorDialogOpen,
   getIsExportDialogOpen,
   getIsExportSuccessDialogOpen,

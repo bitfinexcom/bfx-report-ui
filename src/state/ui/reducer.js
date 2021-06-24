@@ -5,6 +5,7 @@ import types from './constants'
 const initialState = {
   isElectronBackendLoaded: false,
   isExportDialogOpen: false,
+  isErrorDialogDisabled: false,
   isErrorDialogOpen: false,
   isExportSuccessDialogOpen: false,
   isFrameworkDialogOpen: false,
@@ -12,7 +13,7 @@ const initialState = {
   isPreferencesDialogOpen: false,
   isTimeFrameDialogOpen: false,
   latestPaginationTimestamp: undefined,
-  errorMessage: null,
+  errorMessage: undefined,
   device: getDeviceType(),
   windowWidth: window.innerWidth,
 }
@@ -32,6 +33,12 @@ export function uiReducer(state = initialState, action) {
         ...state,
         isErrorDialogOpen,
         errorMessage,
+      }
+    }
+    case types.DISABLE_ERROR_DIALOG: {
+      return {
+        ...state,
+        isErrorDialogDisabled: payload,
       }
     }
     case types.TOGGLE_EXPORT_DIALOG:
