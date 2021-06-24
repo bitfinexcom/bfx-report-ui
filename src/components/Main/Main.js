@@ -119,6 +119,7 @@ class Main extends PureComponent {
     const {
       authStatus,
       authIsShown,
+      errorDialogDisabled,
     } = this.props
 
     return authStatus && !authIsShown ? (
@@ -310,7 +311,7 @@ class Main extends PureComponent {
         <ExportDialog />
         <ExportSuccessDialog />
         {config.showFrameworkMode && <FrameworkDialog />}
-        {config.showFrameworkMode && <ErrorDialog />}
+        {config.showFrameworkMode && !errorDialogDisabled && <ErrorDialog />}
         <PaginationDialog />
         <Preferences />
         <TimeFrameDialog />
