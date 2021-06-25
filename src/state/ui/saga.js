@@ -1,5 +1,5 @@
 import {
-  call, take, put, select, takeLatest,
+  take, put, select, takeLatest,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
 
@@ -7,7 +7,6 @@ import { setTimezone, setTheme, setLang } from 'state/base/actions'
 import { checkAuth, updateAuth } from 'state/auth/actions'
 import { setTimeRange } from 'state/timeRange/actions'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
-import { isSynced } from 'state/sync/saga'
 import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
 import config from 'config'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -16,7 +15,7 @@ import { LANGUAGES } from 'locales/i18n'
 import handleElectronLoad from 'utils/handleElectronLoad'
 
 import types from './constants'
-import { toggleFrameworkDialog, togglePaginationDialog } from './actions'
+import { togglePaginationDialog } from './actions'
 import selectors from './selectors'
 
 function* uiLoaded() {
@@ -81,26 +80,6 @@ function* uiLoaded() {
   if (!config.isElectronApp && !(apiKey && apiSecret)) {
     yield put(checkAuth())
   }
-}
-
-// user confirmation for proceeding with framework request while not in sync
-export function* frameworkCheck() {
-  if (!config.showFrameworkMode || localStorage.getItem('isFrameworkDialogDisabled')) {
-    return true
-  }
-  if (yield call(isSynced)) {
-    return true
-  }
-  yield put(toggleFrameworkDialog())
-
-  const { payload: { shouldProceed, isFrameworkDialogDisabled } } = yield take(types.PROCEED_FRAMEWORK_REQUEST)
-  if (isFrameworkDialogDisabled) {
-    // save timestamp for future use
-    const disablingTime = new Date().getTime()
-    localStorage.setItem('isFrameworkDialogDisabled', disablingTime)
-  }
-
-  return shouldProceed
 }
 
 // user confirmation for proceeding with multiple consecutive empty search requests
