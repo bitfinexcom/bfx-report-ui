@@ -6,6 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { frameworkCheck } from 'state/ui/saga'
 import { getTimeFrame } from 'state/timeRange/selectors'
@@ -36,11 +37,7 @@ export function* fetchWinLoss() {
     yield put(actions.updateWinLoss(result))
 
     if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'averagewinloss.title',
-        detail: JSON.stringify(error),
-      }))
+      yield put(toggleErrorDialog(true, error.message))
     }
   } catch (fail) {
     yield put(actions.fetchFail({

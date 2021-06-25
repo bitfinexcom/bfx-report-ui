@@ -85,10 +85,9 @@ function* stopSyncing() {
 }
 
 export function* isSynced() {
-  const syncMode = yield select(getSyncMode)
   const syncProgress = yield select(getSyncProgress)
 
-  return (syncMode === types.MODE_OFFLINE && syncProgress === 100)
+  return (syncProgress === 100)
 }
 
 function* switchSyncMode({ mode }) {
