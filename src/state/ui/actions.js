@@ -121,7 +121,6 @@ export default {
   toggleErrorDialog,
   toggleExportDialog,
   toggleExportSuccessDialog,
-  proceedFrameworkRequest,
   togglePaginationDialog,
   togglePreferencesDialog,
   toggleTimeFrameDialog,
