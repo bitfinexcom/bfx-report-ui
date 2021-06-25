@@ -8,7 +8,6 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
-import { frameworkCheck } from 'state/ui/saga'
 import { getParams } from 'state/tradedVolume/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { getTimeFrame } from 'state/timeRange/selectors'
@@ -32,12 +31,6 @@ export const getTradedVolume = ({
 /* eslint-disable-next-line consistent-return */
 export function* fetchTradedVolume() {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateTradedVolume([]))
-    }
-
     const { timeframe, targetPairs } = yield select(getParams)
     const { start, end } = yield select(getTimeFrame)
 

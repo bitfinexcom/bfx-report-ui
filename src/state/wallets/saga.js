@@ -8,7 +8,6 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
-import { frameworkCheck } from 'state/ui/saga'
 
 import types from './constants'
 import actions from './actions'
@@ -22,11 +21,6 @@ function getReqWallets(end) {
 /* eslint-disable-next-line consistent-return */
 function* fetchWallets({ payload: end }) {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateWallets())
-    }
     // save current query time in state for csv export reference
     yield put(actions.setTimestamp(end))
 

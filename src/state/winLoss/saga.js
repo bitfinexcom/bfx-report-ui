@@ -8,7 +8,6 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
-import { frameworkCheck } from 'state/ui/saga'
 import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
@@ -20,12 +19,6 @@ export const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
 /* eslint-disable-next-line consistent-return */
 export function* fetchWinLoss() {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateWinLoss())
-    }
-
     const { start, end } = yield select(getTimeFrame)
     const { timeframe } = yield select(selectors.getParams)
 

@@ -6,8 +6,8 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
-import { frameworkCheck } from 'state/ui/saga'
 import { getParams } from 'state/loanReport/selectors'
 import { mapRequestSymbols } from 'state/symbols/utils'
 import { getTimeFrame } from 'state/timeRange/selectors'
@@ -31,12 +31,6 @@ export const getLoanReport = ({
 /* eslint-disable-next-line consistent-return */
 export function* fetchLoanReport() {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateLoanReport([]))
-    }
-
     const { timeframe, targetSymbols } = yield select(getParams)
     const { start, end } = yield select(getTimeFrame)
 
@@ -49,11 +43,7 @@ export function* fetchLoanReport() {
     yield put(actions.updateLoanReport(result))
 
     if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'loanreport.title',
-        detail: JSON.stringify(error),
-      }))
+      yield put(toggleErrorDialog(true, error.message))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
