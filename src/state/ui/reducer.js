@@ -8,7 +8,6 @@ const initialState = {
   isErrorDialogDisabled: false,
   isErrorDialogOpen: false,
   isExportSuccessDialogOpen: false,
-  isFrameworkDialogOpen: false,
   isPaginationDialogOpen: false,
   isPreferencesDialogOpen: false,
   isTimeFrameDialogOpen: false,
@@ -50,11 +49,6 @@ export function uiReducer(state = initialState, action) {
       return {
         ...state,
         isExportSuccessDialogOpen: !state.isExportSuccessDialogOpen,
-      }
-    case types.TOGGLE_FRAMEWORK_DIALOG:
-      return {
-        ...state,
-        isFrameworkDialogOpen: !state.isFrameworkDialogOpen,
       }
     case types.TOGGLE_PAGINATION_DIALOG: {
       const { isOpen, latestPaginationTimestamp } = payload

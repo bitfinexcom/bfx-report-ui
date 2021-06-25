@@ -28,15 +28,6 @@ export function toggleExportSuccessDialog() {
 }
 
 /**
- * Create an action to show/hide framework dialog.
- */
-export function toggleFrameworkDialog() {
-  return {
-    type: types.TOGGLE_FRAMEWORK_DIALOG,
-  }
-}
-
-/**
  * Create an action to show/hide error dialog.
  * @param {boolean} isErrorDialogOpen dialog state
  * @param {string} errorMessage error message
@@ -59,17 +50,6 @@ export function disableErrorDialog(isErrorDialogDisabled) {
   return {
     type: types.DISABLE_ERROR_DIALOG,
     payload: isErrorDialogDisabled,
-  }
-}
-
-/**
- * Create an action to proceed with framework request.
- * @param {object} payload object with boolean properties shouldProceed and isFrameworkDialogDisabled
- */
-export function proceedFrameworkRequest(payload) {
-  return {
-    type: types.PROCEED_FRAMEWORK_REQUEST,
-    payload,
   }
 }
 
@@ -141,7 +121,6 @@ export default {
   toggleErrorDialog,
   toggleExportDialog,
   toggleExportSuccessDialog,
-  toggleFrameworkDialog,
   proceedFrameworkRequest,
   togglePaginationDialog,
   togglePreferencesDialog,
