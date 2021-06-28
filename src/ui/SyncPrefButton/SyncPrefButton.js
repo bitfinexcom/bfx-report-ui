@@ -15,7 +15,6 @@ import SyncButton from 'ui/SyncButton'
 import Icon from 'icons'
 import DateInput from 'ui/DateInput'
 import MultiPairSelector from 'ui/MultiPairSelector'
-import mode from 'state/sync/constants'
 import config from 'config'
 
 import { propTypes, defaultProps } from './SyncPrefButton.props'
@@ -84,7 +83,7 @@ class SyncPrefButton extends PureComponent {
 
   render() {
     const {
-      syncMode,
+      isSyncing,
       syncPairs,
       t,
       startTime,
@@ -94,7 +93,7 @@ class SyncPrefButton extends PureComponent {
       pairs,
       start,
     } = this.state
-    const renderInSyncWarning = syncMode === mode.MODE_SYNCING
+    const renderInSyncWarning = isSyncing
       ? (
         <Callout>
           {t('preferences.sync.insync-warning')}
@@ -147,7 +146,7 @@ class SyncPrefButton extends PureComponent {
                   <AnchorButton
                     onClick={this.handleApply}
                     intent={Intent.PRIMARY}
-                    disabled={(syncMode === mode.MODE_SYNCING || !pairs.length || !start)}
+                    disabled={(isSyncing || !pairs.length || !start)}
                   >
                     {t('preferences.sync.btn-apply')}
                   </AnchorButton>

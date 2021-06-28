@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import { getSyncMode } from 'state/sync/selectors'
+import { getIsSyncing } from 'state/sync/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 
 import SyncPrefButton from './SyncPrefButton'
@@ -13,7 +13,7 @@ const mapStateToProps = (state, props) => {
   const { pairs, startTime } = getSyncPref(state, sectionType)
 
   return {
-    syncMode: getSyncMode(state),
+    isSyncing: getIsSyncing(state),
     syncPairs: pairs,
     startTime: startTime || getTimeFrame(state).start,
   }
