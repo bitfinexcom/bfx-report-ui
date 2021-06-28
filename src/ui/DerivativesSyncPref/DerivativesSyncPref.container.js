@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 
-import { getStatusMessagesConf, getSyncMode } from 'state/sync/selectors'
+import { getStatusMessagesConf, getIsSyncing } from 'state/sync/selectors'
 import { editStatusMessagesConf } from 'state/sync/actions'
 
 import SyncPrefButton from './DerivativesSyncPref'
 
 const mapStateToProps = (state) => ({
-  syncMode: getSyncMode(state),
+  isSyncing: getIsSyncing(state),
   syncPairs: getStatusMessagesConf(state),
 })
 
