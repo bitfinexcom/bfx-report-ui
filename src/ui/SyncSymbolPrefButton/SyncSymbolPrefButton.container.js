@@ -2,7 +2,9 @@ import { connect } from 'react-redux'
 
 import { editPublicTradesSymbolPref } from 'state/sync/actions'
 import {
-  getSyncMode, getPublicFundingStartTime, getPublicFundingSymbols,
+  getIsSyncing,
+  getPublicFundingSymbols,
+  getPublicFundingStartTime,
 } from 'state/sync/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 
@@ -13,7 +15,7 @@ const mapStateToProps = (state) => {
   const startTime = getPublicFundingStartTime(state)
 
   return {
-    syncMode: getSyncMode(state),
+    isSyncing: getIsSyncing(state),
     syncSymbols,
     startTime: startTime || getTimeFrame(state).start,
   }

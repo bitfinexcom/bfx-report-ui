@@ -15,7 +15,6 @@ import Icon from 'icons'
 import SyncButton from 'ui/SyncButton'
 import DateInput from 'ui/DateInput'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
-import mode from 'state/sync/constants'
 import config from 'config'
 
 import { propTypes, defaultProps } from './SyncSymbolPrefButton.props'
@@ -83,7 +82,7 @@ class SyncSymbolPrefButton extends PureComponent {
 
   render() {
     const {
-      syncMode,
+      isSyncing,
       syncSymbols,
       startTime,
       t,
@@ -93,7 +92,7 @@ class SyncSymbolPrefButton extends PureComponent {
       symbols,
       start,
     } = this.state
-    const renderInSyncWarning = syncMode === mode.MODE_SYNCING
+    const renderInSyncWarning = isSyncing
       ? (
         <Callout>
           {t('preferences.sync.insync-warning')}
@@ -148,7 +147,7 @@ class SyncSymbolPrefButton extends PureComponent {
                   <AnchorButton
                     onClick={this.handleApply}
                     intent={Intent.PRIMARY}
-                    disabled={(syncMode === mode.MODE_SYNCING || !symbols.length || !start)}
+                    disabled={(isSyncing || !symbols.length || !start)}
                   >
                     {t('preferences.sync.btn-apply')}
                   </AnchorButton>
