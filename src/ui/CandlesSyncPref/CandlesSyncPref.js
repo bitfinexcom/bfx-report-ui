@@ -16,7 +16,6 @@ import PairSelector from 'ui/PairSelector'
 import SyncButton from 'ui/SyncButton'
 import Timeframe from 'ui/CandlesTimeframe'
 import DateInput from 'ui/DateInput'
-import mode from 'state/sync/constants'
 import appConfig from 'config'
 
 import { propTypes, defaultProps } from './CandlesSyncPref.props'
@@ -146,7 +145,7 @@ class CandlesSyncPref extends PureComponent {
   }
 
   render() {
-    const { syncMode, t } = this.props
+    const { isSyncing, t } = this.props
     const { isOpen, options } = this.state
 
     if (!appConfig.showFrameworkMode) {
@@ -156,7 +155,7 @@ class CandlesSyncPref extends PureComponent {
     const hasChanges = this.hasChanges()
     const canSave = this.canSave()
 
-    const renderInSyncWarning = syncMode === mode.MODE_SYNCING
+    const renderInSyncWarning = isSyncing
       ? (
         <Callout>
           {t('preferences.sync.insync-warning')}
@@ -230,7 +229,7 @@ class CandlesSyncPref extends PureComponent {
                 <AnchorButton
                   onClick={this.handleApply}
                   intent={Intent.PRIMARY}
-                  disabled={(syncMode === mode.MODE_SYNCING || !hasChanges || !canSave)}
+                  disabled={(isSyncing || !hasChanges || !canSave)}
                 >
                   {t('preferences.sync.btn-apply')}
                 </AnchorButton>
