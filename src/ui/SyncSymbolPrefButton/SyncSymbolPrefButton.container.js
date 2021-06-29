@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withTranslation } from 'react-i18next'
 
 import { editPublicTradesSymbolPref } from 'state/sync/actions'
 import {
@@ -25,6 +27,7 @@ const mapDispatchToProps = {
   setSyncPref: (symbol, startTime) => editPublicTradesSymbolPref(symbol, startTime.getTime()),
 }
 
-const SyncSymbolPrefButtonContainer = connect(mapStateToProps, mapDispatchToProps)(SyncSymbolPrefButton)
-
-export default SyncSymbolPrefButtonContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(SyncSymbolPrefButton)
