@@ -179,6 +179,7 @@ function* requestsRedirectUpdate({ payload }) {
   const { result } = payload
 
   if (result) {
+    yield put(actions.setSyncMode(types.MODE_ONLINE))
     const syncProgress = yield select(getSyncProgress)
     const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
     if (isSyncing) {
@@ -188,6 +189,7 @@ function* requestsRedirectUpdate({ payload }) {
       yield put(updateStatus({ id: 'sync.sync-done' }))
     }
   } else {
+    yield put(actions.setSyncMode(types.MODE_OFFLINE))
     yield put(actions.forceQueryFromDb())
   }
 }
