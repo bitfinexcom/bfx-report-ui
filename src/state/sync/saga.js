@@ -23,6 +23,7 @@ import syncConfigSaga, { getSyncConf } from './saga.config'
 
 const fetchSyncProgress = () => makeFetchCall('getSyncProgress')
 const logout = () => makeFetchCall('signOut')
+const isSyncModeWithDbData = () => makeFetchCall('isSyncModeWithDbData')
 const enableSyncMode = (params) => makeFetchCall('enableSyncMode', params)
 const disableSyncMode = () => makeFetchCall('disableSyncMode')
 const haveCollsBeenSyncedAtLeastOnce = () => makeFetchCall('haveCollsBeenSyncedAtLeastOnce')
