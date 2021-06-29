@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withTranslation } from 'react-i18next'
 
 import { editCandlesConf } from 'state/sync/actions'
 import { getCandlesConf, getIsSyncing } from 'state/sync/selectors'
@@ -16,6 +18,7 @@ const mapDispatchToProps = {
   editConfig: editCandlesConf,
 }
 
-const CandlesSyncPrefContainer = connect(mapStateToProps, mapDispatchToProps)(CandlesSyncPref)
-
-export default CandlesSyncPrefContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(CandlesSyncPref)

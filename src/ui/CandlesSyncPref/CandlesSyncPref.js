@@ -1,5 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import {
   Button,
   AnchorButton,
@@ -164,7 +163,7 @@ class CandlesSyncPref extends PureComponent {
       : null
 
     return (
-      <Fragment>
+      <>
         <SyncButton onClick={this.handleOpen} />
         <Dialog
           className='sync-pref-dialog candles-sync-pref'
@@ -237,9 +236,9 @@ class CandlesSyncPref extends PureComponent {
             </div>
           </div>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-export default withTranslation('translations')(CandlesSyncPref)
+export default CandlesSyncPref

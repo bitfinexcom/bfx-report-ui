@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withTranslation } from 'react-i18next'
 
 import { getStatusMessagesConf, getIsSyncing } from 'state/sync/selectors'
 import { editStatusMessagesConf } from 'state/sync/actions'
@@ -14,6 +16,7 @@ const mapDispatchToProps = {
   setSyncPref: editStatusMessagesConf,
 }
 
-const DerivativesSyncPrefContainer = connect(mapStateToProps, mapDispatchToProps)(SyncPrefButton)
-
-export default DerivativesSyncPrefContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(SyncPrefButton)
