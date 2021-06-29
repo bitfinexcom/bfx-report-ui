@@ -136,7 +136,21 @@ function* syncLogout() {
   }
 }
 
+function* initQueryMode() {
+  const { result, error } = yield call(isSyncModeWithDbData)
+
+  if (result) {
+    yield put(actions.setSyncMode(types.MODE_OFFLINE))
+  } else {
+    yield put(actions.setSyncMode(types.MODE_ONLINE))
+  }
+  if (error) {
+    yield put(updateSyncErrorStatus('during initQueryMode'))
+  }
+}
+
 function* initSync() {
+  yield call(initQueryMode)
   const { result: syncProgress } = yield call(fetchSyncProgress)
 
   const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
