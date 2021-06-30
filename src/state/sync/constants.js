@@ -23,4 +23,5 @@ export default {
 
   WS_PROGRESS_UPDATE: 'ws_emitProgress',
   WS_REQUESTS_REDIRECT: 'ws_emitRedirectingRequestsStatusToApi',
+  SYNC_INTERRUPTED: 'SYNCHRONIZATION_HAS_BEEN_INTERRUPTED',
 }
