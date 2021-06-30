@@ -168,11 +168,15 @@ function* initSync() {
 
 function* progressUpdate({ payload }) {
   const { result } = payload
-  const progress = Number.isInteger(result)
-    ? result
-    : 0
 
-  yield put(actions.setSyncProgress(progress))
+  if (result === types.SYNC_INTERRUPTED) {
+    yield put(actions.setIsSyncing(false))
+  } else {
+    const progress = Number.isInteger(result)
+      ? result
+      : 0
+    yield put(actions.setSyncProgress(progress))
+  }
 }
 
 function* requestsRedirectUpdate({ payload }) {
