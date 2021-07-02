@@ -16,6 +16,8 @@ const formatTimestamp = (timestamp, timeframe) => {
   switch (timeframe) {
     case timeframeConstants.DAY:
       return date.format('MMM DD')
+    case timeframeConstants.WEEK:
+      return date.format('WW')
     case timeframeConstants.MONTH:
       return date.format('YY MMM')
     case timeframeConstants.YEAR:
