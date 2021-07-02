@@ -6,13 +6,16 @@ import Select from 'ui/Select'
 
 import constants from './constants'
 
-const { DAY, MONTH, YEAR } = constants
+const {
+  DAY, WEEK, MONTH, YEAR,
+} = constants
 
 const TimeFrameSelector = (props) => {
   const { onChange, t, value } = props
 
   const items = [
     { value: DAY, label: t('timeframe.day') },
+    { value: WEEK, label: t('timeframe.week') },
     { value: MONTH, label: t('timeframe.month') },
     { value: YEAR, label: t('timeframe.year') },
   ]
