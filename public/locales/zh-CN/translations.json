@@ -470,7 +470,8 @@
     "start-date-placeholder": "开始日期时间",
     "end-date-placeholder": "结束日期",
     "today": "今日",
-    "year": "年"
+    "year": "年",
+    "week": "星期"
   },
   "tradedvolume": {
     "title": "交易量"

@@ -470,7 +470,8 @@
     "start-date-placeholder": "Начальная дата и время",
     "end-date-placeholder": "Конечная дата",
     "today": "Сегодня",
-    "year": "Год"
+    "year": "Год",
+    "week": "Неделя"
   },
   "tradedvolume": {
     "title": "Объем торгов"
