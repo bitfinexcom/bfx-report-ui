@@ -1,36 +1,36 @@
-import mode from 'state/sync/constants'
+import React from 'react'
+import { Spinner } from '@blueprintjs/core'
 
-const {
-  MODE_ONLINE,
-  MODE_OFFLINE,
-  MODE_SYNCING,
-} = mode
+import Icon from 'icons'
 
-export const getTitle = (syncMode) => {
-  switch (syncMode) {
-    case MODE_ONLINE:
-    default:
-      return 'sync.online'
-    case MODE_OFFLINE:
-      return 'sync.offline'
-    case MODE_SYNCING:
-      return 'sync.insync'
+export const getSyncTitle = (isSyncing) => (
+  isSyncing
+    ? 'sync.stop-sync'
+    : 'sync.start'
+)
+
+export const getSyncTooltipMessage = (isSyncing) => (
+  isSyncing
+    ? 'sync.insync_tooltip'
+    : 'sync.start_sync_tooltip'
+)
+
+export const getSyncIcon = (isSyncing, syncProgress) => {
+  if (isSyncing) {
+    return (
+      <>
+        <Spinner size={20} />
+        <div className='bitfinex-sync-progress'>
+          {syncProgress}
+        </div>
+      </>
+    )
   }
-}
-
-export const getTooltipMessage = (syncMode) => {
-  switch (syncMode) {
-    case MODE_ONLINE:
-    default:
-      return 'sync.online_tooltip'
-    case MODE_OFFLINE:
-      return 'sync.offline_tooltip'
-    case MODE_SYNCING:
-      return 'sync.insync_tooltip'
-  }
+  return <Icon.REFRESH_DOUBLE />
 }
 
 export default {
-  getTitle,
-  getTooltipMessage,
+  getSyncIcon,
+  getSyncTitle,
+  getSyncTooltipMessage,
 }

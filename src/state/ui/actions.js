@@ -28,22 +28,28 @@ export function toggleExportSuccessDialog() {
 }
 
 /**
- * Create an action to show/hide framework dialog.
+ * Create an action to show/hide error dialog.
+ * @param {boolean} isErrorDialogOpen dialog state
+ * @param {string} errorMessage error message
  */
-export function toggleFrameworkDialog() {
+export function toggleErrorDialog(isErrorDialogOpen, errorMessage) {
   return {
-    type: types.TOGGLE_FRAMEWORK_DIALOG,
+    type: types.TOGGLE_ERROR_DIALOG,
+    payload: {
+      isErrorDialogOpen,
+      errorMessage,
+    },
   }
 }
 
 /**
- * Create an action to proceed with framework request.
- * @param {object} payload object with boolean properties shouldProceed and isFrameworkDialogDisabled
+ * Create an action to disable error dialog.
+ * @param {boolean} isErrorDialogDisabled dialog state
  */
-export function proceedFrameworkRequest(payload) {
+export function disableErrorDialog(isErrorDialogDisabled) {
   return {
-    type: types.PROCEED_FRAMEWORK_REQUEST,
-    payload,
+    type: types.DISABLE_ERROR_DIALOG,
+    payload: isErrorDialogDisabled,
   }
 }
 
@@ -111,10 +117,10 @@ export function uiResized() {
 
 export default {
   electronBackendLoaded,
+  disableErrorDialog,
+  toggleErrorDialog,
   toggleExportDialog,
   toggleExportSuccessDialog,
-  toggleFrameworkDialog,
-  proceedFrameworkRequest,
   togglePaginationDialog,
   togglePreferencesDialog,
   toggleTimeFrameDialog,

@@ -13,6 +13,7 @@ import Icon from 'icons'
 
 import { propTypes, defaultProps } from './AccountMenu.props'
 import SyncMode from '../SyncMode'
+import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
 
 const formatUsername = (email = '') => {
@@ -61,6 +62,11 @@ class AccountMenu extends PureComponent {
                   className='account-menu-sync'
                   shouldDismissPopover={false}
                   text={<SyncMode />}
+                />
+                <MenuItem
+                  className='account-menu-query'
+                  shouldDismissPopover={false}
+                  text={<QueryMode />}
                 />
                 <MenuItem
                   onClick={logout}

@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types'
 
 export const propTypes = {
-  SyncMode: PropTypes.string.isRequired,
+  isSyncing: PropTypes.bool.isRequired,
   syncProgress: PropTypes.number.isRequired,
-  startSyncing: PropTypes.func,
-  stopSyncing: PropTypes.func,
+  startSyncNow: PropTypes.func,
+  stopSyncNow: PropTypes.func,
   t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
-  SyncMode: '',
-  startSyncing: () => {},
-  stopSyncing: () => {},
+  startSyncNow: () => {},
+  stopSyncNow: () => {},
 }

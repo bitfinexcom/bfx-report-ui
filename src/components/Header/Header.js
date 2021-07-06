@@ -9,6 +9,7 @@ import TimeFrame from './TimeFrame'
 import TimeFrameShortcut from './TimeFrameShortcut'
 import Export from './Export'
 import SyncMode from './SyncMode'
+import QueryMode from './QueryMode'
 import AccountMenu from './AccountMenu'
 import TopNavigation from './TopNavigation'
 
@@ -35,6 +36,7 @@ const Header = () => {
       />
       <Export />
       <SyncMode />
+      <QueryMode />
       <Status />
       <AccountMenu />
 

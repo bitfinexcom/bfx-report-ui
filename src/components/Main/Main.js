@@ -10,7 +10,7 @@ import ChangeLogs from 'components/ChangeLogs'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import Derivatives from 'components/Derivatives'
 import FeesReport from 'components/FeesReport'
-import FrameworkDialog from 'components/FrameworkDialog'
+import ErrorDialog from 'components/ErrorDialog'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
@@ -118,6 +118,7 @@ class Main extends PureComponent {
     const {
       authStatus,
       authIsShown,
+      errorDialogDisabled,
     } = this.props
 
     return authStatus && !authIsShown ? (
@@ -308,7 +309,7 @@ class Main extends PureComponent {
         </div>
         <ExportDialog />
         <ExportSuccessDialog />
-        {config.showFrameworkMode && <FrameworkDialog />}
+        {config.showFrameworkMode && !errorDialogDisabled && <ErrorDialog />}
         <PaginationDialog />
         <Preferences />
         <TimeFrameDialog />

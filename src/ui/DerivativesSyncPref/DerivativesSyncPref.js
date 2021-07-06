@@ -1,5 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import {
   Button,
   AnchorButton,
@@ -14,7 +13,6 @@ import {
 import SyncButton from 'ui/SyncButton'
 import Icon from 'icons'
 import MultiPairSelector from 'ui/MultiPairSelector'
-import mode from 'state/sync/constants'
 import config from 'config'
 
 import { propTypes, defaultProps } from './DerivativesSyncPref.props'
@@ -82,7 +80,7 @@ class DerivativesSyncPref extends PureComponent {
 
   render() {
     const {
-      syncMode,
+      isSyncing,
       syncPairs,
       t,
     } = this.props
@@ -95,7 +93,7 @@ class DerivativesSyncPref extends PureComponent {
       return null
     }
 
-    const renderInSyncWarning = syncMode === mode.MODE_SYNCING
+    const renderInSyncWarning = isSyncing
       ? (
         <Callout>
           {t('preferences.sync.insync-warning')}
@@ -104,7 +102,7 @@ class DerivativesSyncPref extends PureComponent {
       : null
 
     return (
-      <Fragment>
+      <>
         <SyncButton onClick={this.handleOpen} />
         <Dialog
           className='sync-pref-dialog'
@@ -140,7 +138,7 @@ class DerivativesSyncPref extends PureComponent {
                 <AnchorButton
                   onClick={this.handleApply}
                   intent={Intent.PRIMARY}
-                  disabled={(syncMode === mode.MODE_SYNCING)}
+                  disabled={isSyncing}
                 >
                   {t('preferences.sync.btn-apply')}
                 </AnchorButton>
@@ -148,9 +146,9 @@ class DerivativesSyncPref extends PureComponent {
             </div>
           </div>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-export default withTranslation('translations')(DerivativesSyncPref)
+export default DerivativesSyncPref

@@ -17,6 +17,7 @@ const initialState = {
     candlesConf: [],
     statusMessagesConf: [],
   },
+  isSyncing: false,
   progress: 0,
 }
 
@@ -27,6 +28,12 @@ export function syncReducer(state = initialState, action) {
       return {
         ...state,
         syncMode: payload,
+      }
+    }
+    case types.SET_IS_SYNCING: {
+      return {
+        ...state,
+        isSyncing: payload,
       }
     }
     case types.EDIT_CONFIG: {

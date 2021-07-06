@@ -32,7 +32,7 @@ export const Status = ({
       intent: intent || Intent.PRIMARY,
       message: i18n.t(msg.id, params),
       onDismiss: clearStatus,
-      timeout: 10000, // 10s
+      timeout: 4000, // 4s
     })
   }, 0)
 

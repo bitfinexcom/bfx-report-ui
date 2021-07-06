@@ -6,6 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { toggleErrorDialog } from 'state/ui/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getQueryLimit } from 'state/query/utils'
 import { getFilterQuery } from 'state/filters/selectors'
@@ -14,7 +15,6 @@ import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
-import { frameworkCheck } from 'state/ui/saga'
 import { fetchDataWithPagination } from 'state/sagas.helper'
 import LEDGERS_CATEGORIES from 'var/ledgersCategories'
 
@@ -44,12 +44,6 @@ function getReqLedgers({
 /* eslint-disable-next-line consistent-return */
 function* fetchFPayment() {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateFPayment())
-    }
-
     const targetSymbols = yield select(selectors.getTargetSymbols, TYPE)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const { start, end } = yield select(getTimeFrame, smallestMts)
@@ -64,11 +58,7 @@ function* fetchFPayment() {
     yield put(updatePagination(TYPE, result))
 
     if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'fpayment.title',
-        detail: JSON.stringify(error),
-      }))
+      yield put(toggleErrorDialog(true, error.message))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
