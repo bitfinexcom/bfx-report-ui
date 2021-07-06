@@ -470,7 +470,8 @@
     "start-date-placeholder": "Fecha de Inicio",
     "end-date-placeholder": "Fecha Final",
     "today": "Hoy",
-    "year": "Año"
+    "year": "Año",
+    "week": "Semana"
   },
   "tradedvolume": {
     "title": "Volumen Traded"

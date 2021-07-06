@@ -484,7 +484,8 @@
     "end-date-placeholder": "End Date",
     "today": "Today",
     "query_range": "Query Range",
-    "year": "Year"
+    "year": "Year",
+    "week": "Week"
   },
   "tradedvolume": {
     "title": "Traded Volume"
