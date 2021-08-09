@@ -10,9 +10,9 @@
     "fee_tier_volume": "Объем (подлежащий расчету уровня комиссии) за последние 30 дней",
     "30dVolume": "Ваш объем торговли за последние 30 дней",
     "margin_funds": "Общая прибыль, полученная от предоставленного маржинального финансирования, за последние 30 дней",
-    "trading_funds": "Trading fees charged in the last 30 days",
-    "leo_level": "LEO level",
-    "average_amount": "Average amount"
+    "trading_funds": "Комиссия за торговлю за последние 30 дней",
+    "leo_level": "Уровень LEO",
+    "average_amount": "Среднее количество"
   },
   "activepositions": {
     "title": "Активные позиции"
@@ -101,7 +101,7 @@
     "meta": "Метаданные",
     "mobile": "Мобильный",
     "movementsTotal": "Сумма движений (USD)",
-    "note": "Note",
+    "note": "Примечание",
     "opened": "Открыто",
     "orderid": "ID ордера",
     "pair": "Пара",
@@ -123,13 +123,13 @@
     "fundingCost": "Стоимость обеспечения",
     "fundingType": "Тип обеспечения",
     "taker_fees": "Комиссии маркет-тейкера",
-    "taker_fees_crypto": "Taker Fees Crypto",
-    "taker_fees_fiat": "Taker Fees Fiat",
-    "taker_fees_stable": "Taker Fees Stable",
+    "taker_fees_crypto": "Комиссия тейкера (Криптовалюта)",
+    "taker_fees_fiat": "Комиссия тейкера (Фиат)",
+    "taker_fees_stable": "Комиссия тейкера (Стейблкойны)",
     "taker_rebate": "Вознаграждение маркет-тейкера",
-    "taker_rebate_crypto": "Taker Rebate Crypto",
-    "taker_rebate_fiat": "Taker Rebate Fiat",
-    "taker_rebate_stable": "Taker Rebate Stable",
+    "taker_rebate_crypto": "Вознаграждения тейкера (Криптовалюта)",
+    "taker_rebate_fiat": "Вознаграждения тейкера (Фиат)",
+    "taker_rebate_stable": "Вознаграждения тейкера (Стейблкойны)",
     "time": "Время",
     "totalResult": "Итого (USD)",
     "transactionId": "ID транзакции",
@@ -229,8 +229,8 @@
     "proceed": "Все равно продолжить",
     "cancel": "Отмена",
     "notagain": "Больше не показывать это сообщение",
-    "continue": "Continue",
-    "warning": "Warning"
+    "continue": "Далее",
+    "warning": "Предупреждение"
   },
   "header": {
     "logout": "Выйти",
@@ -326,7 +326,7 @@
     "no_active": "Нет активных позиции на данный момент.",
     "swap": {
       "daily": "Ежедневно",
-      "period": "Period",
+      "period": "Период",
       "term": "Условие"
     }
   },
@@ -374,7 +374,7 @@
   "selector": {
     "select": "Выбрать",
     "all": "Bсе",
-    "inactive": "Inactive",
+    "inactive": "Неактивные",
     "filter": {
       "symbol": "Фильтр по символу",
       "pair": "Фильтр по паре",
@@ -429,11 +429,11 @@
     "sync-description": "Ваши данные синхронизируются локально. Вы хотите остановить процесс синхронизации и остаться в режиме онлайн-запросов?",
     "close": "Закрыть",
     "start": "Начать синхронизацию",
-    "start-sync": "Sync Started",
-    "start_sync_tooltip": "Click to start the sync procedure",
+    "start-sync": "Синхронизация началась",
+    "start_sync_tooltip": "Нажмите для старта синхронизации",
     "stop-sync": "Остановить синхронизацию",
-    "sync-done": "Synchronized",
-    "go-online": "Switching to online query mode",
+    "sync-done": "Синхронизировано",
+    "go-online": "Переход в онлайн режим",
     "go-offline": "Переход в режим запроса оффлайн (запрос из БД)",
     "logout": "Синхронизация остановлена",
     "message": {

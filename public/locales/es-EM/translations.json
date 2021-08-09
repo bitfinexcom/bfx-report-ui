@@ -327,6 +327,7 @@
     "no_active": "No hay posiciones activas por el momento.",
     "swap": {
       "daily": "Diario",
+      "period": "Periodo",
       "term": "Término"
     }
   },
@@ -374,6 +375,7 @@
   "selector": {
     "select": "Seleccionar",
     "all": "Todo",
+    "inactive": "Inactivo",
     "filter": {
       "symbol": "Filtro de símbolo",
       "pair": "Filtro de par",
