@@ -10,9 +10,9 @@
     "fee_tier_volume": "Volumen (elegible para calcular el nivel de comisiones) en los últimos 30 dias",
     "30dVolume": "Tu volumen en los últimos 30 días",
     "margin_funds": "Retorno total de fondos proporcionados para margen en los últimos 30 días",
-    "trading_funds": "Trading fees charged in the last 30 days",
-    "leo_level": "LEO level",
-    "average_amount": "Average amount"
+    "trading_funds": "Comisiones de trading cargadas en los últimos 30 días",
+    "leo_level": "nivel LEO",
+    "average_amount": "Monto promedio"
   },
   "activepositions": {
     "title": "Posiciones activas"
@@ -101,7 +101,7 @@
     "meta": "Metadatos",
     "mobile": "Móvil",
     "movementsTotal": "Monto total de movimientos (USD)",
-    "note": "Note",
+    "note": "Nota",
     "opened": "Abierto",
     "orderid": "ID de la orden",
     "pair": "Par",
@@ -123,13 +123,13 @@
     "fundingCost": "Costo de Financimiento",
     "fundingType": "Tipo de Financiamiento",
     "taker_fees": "Tarifas de tomador",
-    "taker_fees_crypto": "Taker Fees Crypto",
-    "taker_fees_fiat": "Taker Fees Fiat",
-    "taker_fees_stable": "Taker Fees Stable",
+    "taker_fees_crypto": "Comisiones del Tomador Crypto",
+    "taker_fees_fiat": "Comisiones del Tomador Fiat",
+    "taker_fees_stable": "Comisiones del Tomador Estable",
     "taker_rebate": "Reembolso del tomador",
-    "taker_rebate_crypto": "Taker Rebate Crypto",
-    "taker_rebate_fiat": "Taker Rebate Fiat",
-    "taker_rebate_stable": "Taker Rebate Stable",
+    "taker_rebate_crypto": "Reembolso del Tomador Crypto",
+    "taker_rebate_fiat": "Reembolso del Tomador Fiat",
+    "taker_rebate_stable": "Reembolso del Tomador Estable",
     "time": "Hora",
     "totalResult": "Resultado Total (USD)",
     "transactionId": "ID de la transacción",
@@ -229,8 +229,8 @@
     "proceed": "Proceder de todas maneras",
     "cancel": "Cancelar",
     "notagain": "No volver a mostrar este mensaje",
-    "continue": "Continue",
-    "warning": "Warning"
+    "continue": "Continuar",
+    "warning": "Advertencia"
   },
   "header": {
     "logout": "Cerrar sesión",
@@ -428,11 +428,11 @@
     "sync-description": "Tus datos se sincronizan localmente. ¿Te gustaría detener el proceso de sincronización y mantenerte en modo de consulta en línea?",
     "close": "Cancelar",
     "start": "Empezar a sincronizar",
-    "start-sync": "Sync Started",
-    "start_sync_tooltip": "Click to start the sync procedure",
+    "start-sync": "Sincronización empezada",
+    "start_sync_tooltip": "Haz click para empezar el procedimiento de sincronización",
     "stop-sync": "Detener la sincronización",
-    "sync-done": "Synchronized",
-    "go-online": "Switching to online query mode",
+    "sync-done": "Sincronizado",
+    "go-online": "Cambiando al modo de consulta en línea",
     "go-offline": "Cambiar al modo de consulta fuera de línea (consulta desde la base de datos)",
     "logout": "Sincronización detenida",
     "message": {
