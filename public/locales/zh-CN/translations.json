@@ -9,7 +9,10 @@
     "fees_deriv": "您于衍生品交易的手续费率",
     "fee_tier_volume": "过去30天交易量（符合手续费等级计算）",
     "30dVolume": "过去30天交易量",
-    "margin_funds": "过去30天提供的保证金借贷之总收益"
+    "margin_funds": "过去30天提供的保证金借贷之总收益",
+    "trading_funds": "过去30天交易手续费",
+    "leo_level": "LEO级别",
+    "average_amount": "平均数量"
   },
   "activepositions": {
     "title": "有效仓位"
@@ -98,6 +101,7 @@
     "meta": "元数据",
     "mobile": "移动设备",
     "movementsTotal": "运用资金总额 (美元)",
+    "note": "备注",
     "opened": "已打开",
     "orderid": "订单 ID",
     "pair": "货币对",
@@ -119,7 +123,13 @@
     "fundingCost": "融资成本",
     "fundingType": "融资类型",
     "taker_fees": "吃单手续费",
+    "taker_fees_crypto": "吃单手续费 (加密货币）",
+    "taker_fees_fiat": "吃单手续费 (法币)",
+    "taker_fees_stable": "吃单手续费 (稳定币)",
     "taker_rebate": "吃单者返点奖励",
+    "taker_rebate_crypto": "吃单手续费返佣 (加密货币)",
+    "taker_rebate_fiat": "吃单手续费返佣 (法币)",
+    "taker_rebate_stable": "吃单手续费返佣 (稳定币)",
     "time": "日期",
     "totalResult": "总额 (美元)",
     "transactionId": "交易 ID",
@@ -218,12 +228,15 @@
     "no_sync": "未启动同步功能",
     "proceed": "仍然继续",
     "cancel": "取消",
-    "notagain": "不再显示此消息"
+    "notagain": "不再显示此消息",
+    "continue": "继续",
+    "warning": "提醒"
   },
   "header": {
     "logout": "注销",
     "preferences": "首选项",
-    "help": "帮助"
+    "help": "帮助",
+    "top_navigation": "Top Navigation"
   },
   "inputs": {
     "filter_placeholder": "筛选...",
@@ -314,6 +327,7 @@
     "no_active": "无有效仓位。",
     "swap": {
       "daily": "每日",
+      "period": "期间",
       "term": "期限"
     }
   },
@@ -361,6 +375,7 @@
   "selector": {
     "select": "选取",
     "all": "全部",
+    "inactive": "无相关交易对的数据",
     "filter": {
       "symbol": "符号筛选器",
       "pair": "货币对筛选器",
@@ -415,7 +430,11 @@
     "sync-description": "您的数据正在进行本地同步。想要停止同步过程并保持处于在线查询模式？",
     "close": "取消",
     "start": "开始同步",
+    "start-sync": "已开始同步",
+    "start_sync_tooltip": "单击开始同步",
     "stop-sync": "停止同步",
+    "sync-done": "已同步",
+    "go-online": "正在转换为连线查询模式",
     "go-offline": "正在切换到离线查询模式（在数据库中查询）",
     "logout": "已停止同步",
     "message": {
