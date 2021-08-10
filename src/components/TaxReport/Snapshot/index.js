@@ -1,3 +1,1 @@
-import Snapshot from './Snapshot.container'
-
-export default Snapshot
+export { default } from './Snapshot.container'

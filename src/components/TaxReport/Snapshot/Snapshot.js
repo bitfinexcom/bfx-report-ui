@@ -1,5 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 
 import PositionsSnapshot from 'components/Snapshots/PositionsSnapshot'
@@ -90,10 +89,10 @@ class Snapshot extends PureComponent {
     let showContent
     if (isEmpty) {
       showContent = (
-        <Fragment>
+        <>
           <br />
           <NoData refresh={refresh} />
-        </Fragment>
+        </>
       )
     } else if (subsection === MENU_WALLETS) {
       showContent = (
@@ -149,4 +148,4 @@ class Snapshot extends PureComponent {
 Snapshot.propTypes = propTypes
 Snapshot.defaultProps = defaultProps
 
-export default withTranslation('translations')(Snapshot)
+export default Snapshot

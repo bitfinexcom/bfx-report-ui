@@ -1,11 +1,13 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import { fetchTaxReportSnapshot, refresh } from 'state/taxReport/actions'
 import {
   getSnapshot,
-  getSnapshotDataReceived,
   getSnapshotPageLoading,
+  getSnapshotDataReceived,
 } from 'state/taxReport/selectors'
 
 import Snapshot from './Snapshot'
@@ -27,6 +29,8 @@ const mapDispatchToProps = (dispatch, { match }) => {
   }
 }
 
-const SnapshotContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Snapshot))
-
-export default SnapshotContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(Snapshot)
