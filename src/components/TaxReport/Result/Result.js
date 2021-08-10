@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import _isNumber from 'lodash/isNumber'
 
@@ -17,7 +17,7 @@ import TAX_REPORT_SECTIONS from '../TaxReport.sections'
 
 const TYPE = queryConstants.MENU_TAX_REPORT
 
-class TaxReport extends PureComponent {
+class Result extends PureComponent {
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -45,7 +45,7 @@ class TaxReport extends PureComponent {
     })
 
     return (
-      <Fragment>
+      <>
         <div className='table-section-title'>
           {title}
         </div>
@@ -53,7 +53,7 @@ class TaxReport extends PureComponent {
           numRows={positions.length}
           tableColumns={positionsColumns}
         />
-      </Fragment>
+      </>
     )
   }
 
@@ -75,7 +75,7 @@ class TaxReport extends PureComponent {
     })
 
     return (
-      <Fragment>
+      <>
         <div className='table-section-title'>
           {title}
         </div>
@@ -83,7 +83,7 @@ class TaxReport extends PureComponent {
           numRows={1}
           tableColumns={balancesColumns}
         />
-      </Fragment>
+      </>
     )
   }
 
@@ -106,7 +106,7 @@ class TaxReport extends PureComponent {
     })
 
     return (
-      <Fragment>
+      <>
         <div className='table-section-title'>
           {t('taxreport.movements')}
         </div>
@@ -115,7 +115,7 @@ class TaxReport extends PureComponent {
           numRows={movements.length}
           tableColumns={movementsColumns}
         />
-      </Fragment>
+      </>
     )
   }
 
@@ -174,7 +174,7 @@ class TaxReport extends PureComponent {
     const positionsNotEmpty = startingPositionsSnapshot.length || endingPositionsSnapshot.length
 
     return (
-      <Fragment>
+      <>
         {_isNumber(totalResult) && _isNumber(movementsTotalAmount) && (
           <div className='total-stats'>
             {_isNumber(totalResult) && (
@@ -214,11 +214,11 @@ class TaxReport extends PureComponent {
           balances: endingPeriodBalances,
           title: t('taxreport.endingPeriodBalances'),
         })}
-      </Fragment>
+      </>
     )
   }
 }
 
-TaxReport.propTypes = propTypes
+Result.propTypes = propTypes
 
-export default withTranslation('translations')(TaxReport)
+export default withTranslation('translations')(Result)
