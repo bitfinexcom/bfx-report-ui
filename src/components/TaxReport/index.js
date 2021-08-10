@@ -1,3 +1,1 @@
-import TaxReport from './TaxReport.container'
-
-export default TaxReport
+export { default } from './TaxReport.container'
