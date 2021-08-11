@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import _isNumber from 'lodash/isNumber'
 
 import Loading from 'ui/Loading'
@@ -219,4 +218,4 @@ class Result extends PureComponent {
 
 Result.propTypes = propTypes
 
-export default withTranslation('translations')(Result)
+export default Result
