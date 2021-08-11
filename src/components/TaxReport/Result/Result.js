@@ -175,26 +175,24 @@ class Result extends PureComponent {
 
     return (
       <>
-        {_isNumber(totalResult) && _isNumber(movementsTotalAmount) && (
-          <div className='total-stats'>
-            {_isNumber(totalResult) && (
-              <div className='total-stats-item'>
-                <div className='color--active'>
-                  {t('column.totalResult')}
-                </div>
-                <span>{fixedFloat(totalResult)}</span>
-              </div>
-            )}
-            {_isNumber(movementsTotalAmount) && (
-              <div className='total-stats-item'>
-                <div className='color--active'>
-                  {t('column.movementsTotal')}
-                </div>
-                <span>{fixedFloat(movementsTotalAmount)}</span>
-              </div>
-            )}
+        <div className='total-stats'>
+          {_isNumber(totalResult) && (
+          <div className='total-stats-item'>
+            <div className='color--active'>
+              {t('column.totalResult')}
+            </div>
+            <span>{fixedFloat(totalResult)}</span>
           </div>
-        )}
+          )}
+          {_isNumber(movementsTotalAmount) && (
+          <div className='total-stats-item'>
+            <div className='color--active'>
+              {t('column.movementsTotal')}
+            </div>
+            <span>{fixedFloat(movementsTotalAmount)}</span>
+          </div>
+          )}
+        </div>
         {movements.length > 0 && this.getMovements()}
         {this.getPositionsSnapshot({
           positions: startingPositionsSnapshot,
