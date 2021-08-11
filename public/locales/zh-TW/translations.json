@@ -9,7 +9,10 @@
     "fees_deriv": "您於衍生品交易的手續費率",
     "fee_tier_volume": "過去30天交易量（符合手續費等級計算）",
     "30dVolume": "過去30天交易量",
-    "margin_funds": "過去30天提供的保證金融資之總收益"
+    "margin_funds": "過去30天提供的保證金融資之總收益",
+    "trading_funds": "過去30天交易手續費",
+    "leo_level": "LEO級別",
+    "average_amount": "平均數量"
   },
   "activepositions": {
     "title": "活躍的倉位"
@@ -98,6 +101,7 @@
     "meta": "後設資料",
     "mobile": "行動裝置",
     "movementsTotal": "運用資金總額 (美元)",
+    "note": "附註",
     "opened": "開始",
     "orderid": "訂單 ID",
     "pair": "對",
@@ -119,7 +123,13 @@
     "fundingCost": "互換成本",
     "fundingType": "互換類型",
     "taker_fees": "吃單手續費",
+    "taker_fees_crypto": "吃單手續費（加密貨幣）",
+    "taker_fees_fiat": "吃單手續費（法幣）",
+    "taker_fees_stable": "吃單手續費（穩定幣）",
     "taker_rebate": "受價者返利",
+    "taker_rebate_crypto": "吃單手續費返利（加密貨幣）",
+    "taker_rebate_fiat": "吃單手續費返利（法幣）",
+    "taker_rebate_stable": "吃單手續費返利（穩定幣）",
     "time": "時間",
     "totalResult": "總額 (美元)",
     "transactionId": "交易編號",
@@ -218,12 +228,15 @@
     "no_sync": "未啟動同步功能",
     "proceed": "選擇繼續",
     "cancel": "取消",
-    "notagain": "不要再顯示此信息"
+    "notagain": "不要再顯示此信息",
+    "continue": "繼續",
+    "warning": "提醒"
   },
   "header": {
     "logout": "登出",
     "preferences": "偏好設定",
-    "help": "說明"
+    "help": "說明",
+    "top_navigation": "Top Navigation"
   },
   "inputs": {
     "filter_placeholder": "篩選...",
@@ -314,6 +327,7 @@
     "no_active": "目前沒有未平倉位。",
     "swap": {
       "daily": "每日",
+      "period": "期間",
       "term": "條件"
     }
   },
@@ -361,6 +375,7 @@
   "selector": {
     "select": "選取",
     "all": "全部",
+    "inactive": "無交易對之代幣",
     "filter": {
       "symbol": "代幣過濾器",
       "pair": "代幣對過濾器",
@@ -415,7 +430,11 @@
     "sync-description": "資料正在同步到本地中。您希望停止同步並繼續使用連線查詢模式嗎？",
     "close": "取消",
     "start": "開始同步",
+    "start-sync": "已開始同步",
+    "start_sync_tooltip": "點擊開始同步",
     "stop-sync": "停止同步",
+    "sync-done": "已同步",
+    "go-online": "正在切換到連線查詢模式",
     "go-offline": "切換至離線查詢模式",
     "logout": "同步已停止",
     "message": {

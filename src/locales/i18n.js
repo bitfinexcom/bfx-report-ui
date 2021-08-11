@@ -13,6 +13,7 @@ export const LANGUAGES = {
   en: 'en-US',
   es: 'es-EM',
   ru: 'ru',
+  tr: 'tr',
   cn: 'zh-CN',
   tw: 'zh-TW',
 }
@@ -21,6 +22,7 @@ export const LANGUAGE_NAMES = {
   en: 'English',
   es: 'Español',
   ru: 'Русский',
+  tr: 'Türk',
   cn: '中文 (简化)',
   tw: '中文 (繁體)',
 }
@@ -30,6 +32,7 @@ export const LANGUAGES_MAP = {
   en: 'en',
   es: 'es-EM',
   ru: 'ru',
+  tr: 'tr',
   cn: 'zh-CN',
   tw: 'zh-TW',
 }
