@@ -504,6 +504,7 @@
   "wallets": {
     "title": "Wallets",
     "header": {
+      "capital-raise": "Capital Raise",
       "exchange": "Exchange",
       "margin": "Margin",
       "funding": "Funding",
