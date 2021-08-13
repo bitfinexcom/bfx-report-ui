@@ -51,7 +51,7 @@ const WalletsData = (props) => {
         />
       </div>
       <div className='tables-row-item'>
-        <div>{t('wallets.header.token-sales')}</div>
+        <div>{t('wallets.header.capital-raise')}</div>
         <DataTable
           numRows={contributionData.length}
           tableColumns={contributionColumns}
