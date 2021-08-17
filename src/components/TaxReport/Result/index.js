@@ -1,3 +1,1 @@
-import TaxReportResult from './Result.container'
-
-export default TaxReportResult
+export { default } from './Result.container'

@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
@@ -64,7 +63,10 @@ class TaxReport extends PureComponent {
     const { section = RESULT } = match.params
 
     return (
-      <Card elevation={Elevation.ZERO} className='tax-report col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='tax-report col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
           <SectionHeaderTitle>{t('taxreport.title')}</SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
@@ -88,4 +90,4 @@ class TaxReport extends PureComponent {
 
 TaxReport.propTypes = propTypes
 
-export default withTranslation('translations')(TaxReport)
+export default TaxReport
