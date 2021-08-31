@@ -28,7 +28,7 @@ export const mapDescription = (description) => {
     .reduce((desc, symbol) => desc.replace(new RegExp(symbol, 'g'), SymbolMap.pairs[symbol]), description)
   return symbolMapKeys.reduce((desc, symbol) => desc.replace(
     new RegExp(
-      `^${symbol}|${symbol}$|${symbol}[ ]|[ ]${symbol}|${symbol}[)]|[(]${symbol}`,
+      `\\b${symbol}\\b|\\b${symbol}\\b[ ]|[ ]\\b${symbol}\\b|\\b${symbol}\\b[)]|[(]\\b${symbol}\\b`,
       'g',
     ),
     (str) => str.replace(new RegExp(symbol, 'g'), SymbolMap.symbols[symbol]),
