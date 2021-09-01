@@ -4,6 +4,7 @@ import types from './constants'
 
 const initialState = {
   exportEmail: '',
+  localExportPath: null,
 }
 
 export function queryReducer(state = initialState, action) {
@@ -13,6 +14,11 @@ export function queryReducer(state = initialState, action) {
       return {
         ...state,
         exportEmail: payload || '',
+      }
+    case types.SET_LOCAL_CSV_PATH:
+      return {
+        ...state,
+        localExportPath: payload || null,
       }
     case authTypes.LOGOUT:
       return initialState
