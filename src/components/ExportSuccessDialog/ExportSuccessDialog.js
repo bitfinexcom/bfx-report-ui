@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -15,13 +14,18 @@ import { propTypes, defaultProps } from './ExportSuccessDialog.props'
 class ExportSuccessDialog extends PureComponent {
   render() {
     const {
-      isOpen, t, toggleDialog,
+      isOpen,
+      t,
+      toggleDialog,
+      localExportPath,
     } = this.props
     if (!isOpen) {
       return null
     }
 
-    const message = config.localExport ? t('download.status.local') : t('download.status.email')
+    const message = config.localExport
+      ? `${t('download.status.local')} ${localExportPath}`
+      : t('download.status.email')
 
     return (
       <Dialog
@@ -48,4 +52,4 @@ class ExportSuccessDialog extends PureComponent {
 ExportSuccessDialog.propTypes = propTypes
 ExportSuccessDialog.defaultProps = defaultProps
 
-export default withTranslation('translations')(ExportSuccessDialog)
+export default ExportSuccessDialog
