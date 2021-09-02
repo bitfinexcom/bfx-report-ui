@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import { getFullTime, getTimezone } from 'state/base/selectors'
 import { getExportEmail } from 'state/query/selectors'
@@ -26,6 +28,8 @@ const mapDispatchToProps = {
   prepareExport,
 }
 
-const ExportDialogContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ExportDialog))
-
-export default ExportDialogContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(ExportDialog)
