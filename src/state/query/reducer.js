@@ -15,7 +15,7 @@ export function queryReducer(state = initialState, action) {
         ...state,
         exportEmail: payload || '',
       }
-    case types.SET_LOCAL_CSV_PATH:
+    case types.SET_LOCAL_EXPORT_PATH:
       return {
         ...state,
         localExportPath: payload || null,
