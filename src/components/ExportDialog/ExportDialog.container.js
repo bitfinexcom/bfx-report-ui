@@ -1,5 +1,5 @@
-import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
@@ -16,16 +16,16 @@ import ExportDialog from './ExportDialog'
 const mapStateToProps = state => ({
   ...getTimeFrame(state),
   email: getExportEmail(state),
-  getFullTime: getFullTime(state),
   timezone: getTimezone(state),
   timestamp: getTimestamp(state),
+  getFullTime: getFullTime(state),
   isOpen: getIsExportDialogOpen(state),
 })
 
 const mapDispatchToProps = {
-  toggleDialog: toggleExportDialog,
   exportCsv,
   prepareExport,
+  toggleDialog: toggleExportDialog,
 }
 
 export default compose(

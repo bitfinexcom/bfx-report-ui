@@ -1,5 +1,7 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import { getLocalExportPath } from 'state/query/selectors'
 import { toggleExportSuccessDialog } from 'state/ui/actions'
@@ -16,6 +18,8 @@ const mapDispatchToProps = {
   toggleDialog: toggleExportSuccessDialog,
 }
 
-const ExportSuccessDialogContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ExportSuccessDialog))
-
-export default ExportSuccessDialogContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(ExportSuccessDialog)
