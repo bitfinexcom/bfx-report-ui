@@ -12,6 +12,17 @@ export function exportCsv(targets) {
 }
 
 /**
+ * Create an action to set path to local export CSV folder.
+ * @param {string} path to local export folder
+ */
+export function setLocalExportPath(path) {
+  return {
+    type: types.SET_LOCAL_EXPORT_PATH,
+    payload: path,
+  }
+}
+
+/**
  * Create an action to prepare export related params.
  */
 export function prepareExport() {
@@ -35,4 +46,5 @@ export default {
   exportCsv,
   prepareExport,
   setExportEmail,
+  setLocalExportPath,
 }

@@ -1,3 +1,1 @@
-import ExportDialog from './ExportDialog.container'
-
-export default ExportDialog
+export { default } from './ExportDialog.container'

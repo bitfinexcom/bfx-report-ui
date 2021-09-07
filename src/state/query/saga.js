@@ -393,7 +393,11 @@ function* exportCSV({ payload: targets }) {
       params.email = exportEmail
     }
     const { result, error } = yield call(getMultipleCsv, params)
+
     if (result) {
+      const { localCsvFolderPath } = result
+
+      yield put(actions.setLocalExportPath(localCsvFolderPath))
       yield put(toggleExportSuccessDialog())
     }
 
