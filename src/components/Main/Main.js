@@ -15,6 +15,7 @@ import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
 import FundingPayment from 'components/FundingPayment'
+import Invoices from 'components/Invoices'
 import Ledgers from 'components/Ledgers'
 import LoanReport from 'components/LoanReport'
 import Logins from 'components/Logins'
@@ -60,6 +61,7 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -84,6 +86,7 @@ const {
 
 const PATHS = {
   MENU_LEDGERS: [getPath(MENU_LEDGERS), `${getPath(MENU_LEDGERS)}/:symbol`],
+  MENU_INVOICES: [getPath(MENU_INVOICES), `${getPath(MENU_INVOICES)}/:symbol`],
   MENU_CANDLES: [getPath(MENU_CANDLES)],
   MENU_TRADES: [getPath(MENU_TRADES), `${getPath(MENU_TRADES)}/:pair`],
   MENU_ORDERS: [getPath(MENU_ORDERS), `${getPath(MENU_ORDERS)}/:pair`],
@@ -130,6 +133,11 @@ class Main extends PureComponent {
               exact
               path={PATHS.MENU_LEDGERS}
               component={Ledgers}
+            />
+            <Route
+              exact
+              path={PATHS.MENU_INVOICES}
+              component={Invoices}
             />
             <Route
               exact
