@@ -12,6 +12,7 @@ export default {
   MENU_FOFFER: 'foffer',
   MENU_FPAYMENT: 'fpayment',
   MENU_SPAYMENTS: 'spayments',
+  MENU_INVOICES: 'invoices',
   MENU_LEDGERS: 'ledgers',
   MENU_LOAN_REPORT: 'loanreport',
   MENU_LOGINS: 'logins',
