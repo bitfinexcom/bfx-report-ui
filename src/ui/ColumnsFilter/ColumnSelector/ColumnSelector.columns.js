@@ -4,6 +4,7 @@ import DATA_TYPES from 'var/dataTypes'
 
 const {
   MENU_LEDGERS,
+  MENU_INVOICES,
   MENU_TRADES,
   MENU_ORDERS,
   MENU_MOVEMENTS,
@@ -50,6 +51,18 @@ const LEDGERS_COLUMNS = [
   { id: 'wallet', name: 'wallet', type: STRING, select: FILTERS_SELECTOR.WALLET, filter: true },
 ]
 
+const INVOICES_COLUMNS = [
+  { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
+  { id: 'description', name: 'description', type: STRING, filter: true },
+  { id: 'currency', name: 'currency' },
+  { id: 'amount', name: 'amount', type: NUMBER, filter: true },
+  { id: 'amountUsd', name: 'amountUsd', type: NUMBER, filter: true, frameworkOnly: true },
+  { id: 'balance', name: 'balance', type: NUMBER, filter: true },
+  { id: 'balanceUsd', name: 'balanceUsd', type: NUMBER, filter: true, frameworkOnly: true },
+  { id: 'mts', name: 'date', type: DATE, filter: true },
+  { id: 'wallet', name: 'wallet', type: STRING, select: FILTERS_SELECTOR.WALLET, filter: true },
+]
+
 /**
  * id: column id
  * name: translation keys `column.[name]`
@@ -62,6 +75,8 @@ const LEDGERS_COLUMNS = [
  */
 const SECTION_COLUMNS = {
   [MENU_LEDGERS]: LEDGERS_COLUMNS,
+
+  [MENU_INVOICES]: INVOICES_COLUMNS,
 
   [MENU_TRADES]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
