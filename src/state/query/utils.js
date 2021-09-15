@@ -21,6 +21,7 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -115,6 +116,7 @@ export const ROUTE_WHITELIST = [
 
 export const FILTERS_WHITELIST = [
   MENU_LEDGERS,
+  MENU_INVOICES,
   MENU_TRADES,
   MENU_ORDERS,
   MENU_MOVEMENTS,
@@ -136,6 +138,7 @@ export const FILTERS_WHITELIST = [
 // Should keep the order, which used in ExportTargetsSelector
 const BASIC_TARGETS = [
   MENU_LEDGERS,
+  MENU_INVOICES,
   MENU_TRADES,
   MENU_ORDERS,
   // MENU_ORDER_TRADES, // needs specific id
@@ -277,6 +280,13 @@ const MAPPING = {
   [MENU_LEDGERS]: {
     icon: Icons.NOTEBOOK,
     path: '/ledgers',
+    filterType: FILTER_SYMBOL,
+    // queryLimit: 500,
+    pageSize: 125,
+  },
+  [MENU_INVOICES]: {
+    icon: Icons.NOTEBOOK,
+    path: '/invoices',
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
     pageSize: 125,
