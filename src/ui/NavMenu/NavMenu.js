@@ -32,6 +32,7 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -61,6 +62,7 @@ class NavMenu extends PureComponent {
 
   sections = [
     [MENU_LEDGERS, 'ledgers.title'],
+    [MENU_INVOICES, 'invoices.title'],
     [[MENU_TRADES, MENU_CANDLES], 'trades.title'],
     [[MENU_ORDERS, MENU_ORDER_TRADES], 'orders.title'],
     [MENU_MOVEMENTS, 'movements.title'],
