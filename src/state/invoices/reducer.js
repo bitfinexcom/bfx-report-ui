@@ -7,7 +7,7 @@ import {
 } from 'state/reducers.helper'
 
 import types from './constants'
-import { updateLedgers } from './utils'
+import { updateInvoices } from './utils'
 
 const initialState = {
   ...baseSymbolState,
@@ -20,7 +20,7 @@ export function invoicesReducer(state = initialState, action) {
     case types.FETCH_INVOICES:
       return fetch(state)
     case types.UPDATE_INVOICES:
-      return updateLedgers(state, payload)
+      return updateInvoices(state, payload)
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.ADD_SYMBOL:
