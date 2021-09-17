@@ -44,7 +44,6 @@ function getReqInvoices({
 /* eslint-disable-next-line consistent-return */
 function* fetchInvoices() {
   try {
-    // const { targetCategory, targetSymbols } = yield select(getLedgers)
     const { targetCategory, targetSymbols } = yield select(getInvoices)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const filter = yield select(getFilterQuery, TYPE)

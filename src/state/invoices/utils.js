@@ -16,11 +16,11 @@ export const updateInvoices = (state, payload) => {
   const updateCoins = [...existingCoins]
   const entries = res.map((entry) => {
     const {
+      id,
       amount,
       currency,
       customerInfo,
       duration,
-      id,
       invoices,
       merchantName,
       orderId,
