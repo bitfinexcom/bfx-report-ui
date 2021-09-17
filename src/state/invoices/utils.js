@@ -17,30 +17,41 @@ export const updateInvoices = (state, payload) => {
   const entries = res.map((entry) => {
     const {
       amount,
-      amountUsd,
-      balance,
-      balanceUsd,
       currency,
-      // description,
+      customerInfo,
+      duration,
       id,
-      mts,
-      wallet,
+      invoices,
+      merchantName,
+      orderId,
+      payCurrencies,
+      payment,
+      redirectUrl,
+      status,
+      t,
+      webhook,
     } = entry
+
     const mappedCurrency = mapSymbol(currency)
     // save new symbol to updateCoins list
     if (updateCoins.indexOf(mappedCurrency) === -1) {
       updateCoins.push(mappedCurrency)
     }
     return {
-      id,
-      currency: mappedCurrency,
-      mts,
       amount,
-      amountUsd,
-      balance,
-      balanceUsd,
-      // description: mapDescription(description),
-      wallet,
+      currency: mappedCurrency,
+      customerInfo,
+      duration,
+      id,
+      invoices,
+      merchantName,
+      orderId,
+      payCurrencies,
+      payment,
+      redirectUrl,
+      status,
+      t,
+      webhook,
     }
   })
 
