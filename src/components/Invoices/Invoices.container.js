@@ -2,13 +2,13 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import {
-  fetchLedgers,
+  fetchInvoices,
   refresh,
   addTargetSymbol,
   setParams,
   setTargetSymbols,
   removeTargetSymbol,
-} from 'state/ledgers/actions'
+} from 'state/invoices/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getDataReceived,
@@ -17,7 +17,7 @@ import {
   getPageLoading,
   getTargetCategory,
   getTargetSymbols,
-} from 'state/ledgers/selectors'
+} from 'state/invoices/selectors'
 import { getColumns } from 'state/filters/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import queryConstants from 'state/query/constants'
@@ -25,8 +25,8 @@ import queryConstants from 'state/query/constants'
 import Invoices from './Invoices'
 
 const mapStateToProps = state => ({
-  columns: getColumns(state, queryConstants.MENU_LEDGERS),
-  entries: getFilteredEntries(state, queryConstants.MENU_LEDGERS, getEntries(state)),
+  columns: getColumns(state, queryConstants.MENU_INVOICES),
+  entries: getFilteredEntries(state, queryConstants.MENU_INVOICES, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
   dataReceived: getDataReceived(state),
@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchLedgers,
+  fetchData: fetchInvoices,
   refresh,
   addTargetSymbol,
   setParams,
