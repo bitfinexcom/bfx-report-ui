@@ -38,11 +38,11 @@ export const updateInvoices = (state, payload) => {
       updateCoins.push(mappedCurrency)
     }
     return {
+      id,
       amount,
       currency: mappedCurrency,
       customerInfo,
       duration,
-      id,
       invoices,
       merchantName,
       orderId,
@@ -50,7 +50,7 @@ export const updateInvoices = (state, payload) => {
       payment,
       redirectUrl,
       status,
-      t,
+      mts: t,
       webhook,
     }
   })

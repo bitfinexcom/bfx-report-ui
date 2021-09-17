@@ -53,7 +53,7 @@ const LEDGERS_COLUMNS = [
 
 const INVOICES_COLUMNS = [
   { id: 'id', name: 'id', type: STRING, filter: true, hidden: true },
-  { id: 't', name: 'date', type: DATE, filter: true, hidden: true },
+  { id: 'mts', name: 'date', type: DATE, filter: true, hidden: true },
   { id: 'duration', name: 'duration', type: NUMBER, filter: true, hidden: true },
   { id: 'amount', name: 'amount', type: NUMBER, filter: true },
   { id: 'currency', name: 'currency' },
