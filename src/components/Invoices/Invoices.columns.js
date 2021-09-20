@@ -1,17 +1,15 @@
 import React from 'react'
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
-import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
-import queryConstants from 'state/query/constants'
-import config from 'config'
+import JSONFormat from 'ui/JSONFormat'
 import { COLUMN_WIDTHS } from 'utils/columns'
+import { fixedFloat, formatAmount } from 'ui/utils'
 
 export default function getColumns(props) {
   const {
     filteredData,
     getFullTime,
     t,
-    target,
     timeOffset,
   } = props
 
@@ -19,7 +17,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.LEDGERS_ID,
+      width: COLUMN_WIDTHS.INVOICES_ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -29,36 +27,6 @@ export default function getColumns(props) {
         )
       },
       copyText: rowIndex => filteredData[rowIndex].id,
-    },
-    ...insertIf(target !== queryConstants.MENU_FPAYMENT, (
-      {
-        id: 'description',
-        name: 'column.description',
-        width: COLUMN_WIDTHS.LEDGERS_DESCRIPTION,
-        renderer: (rowIndex) => {
-          const { description } = filteredData[rowIndex]
-          return (
-            <Cell tooltip={description}>
-              {description}
-            </Cell>
-          )
-        },
-        copyText: rowIndex => filteredData[rowIndex].description,
-      }
-    )),
-    {
-      id: 'currency',
-      name: 'column.currency',
-      width: COLUMN_WIDTHS.SYMBOL,
-      renderer: (rowIndex) => {
-        const { currency } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={currency}>
-            {currency}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].currency,
     },
     {
       id: 'amount',
@@ -78,66 +46,158 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
-    ...insertIf(config.showFrameworkMode, (
-      {
-        id: 'amountUsd',
-        name: 'column.amountUsd',
-        width: COLUMN_WIDTHS.AMOUNT,
-        renderer: (rowIndex) => {
-          const { amountUsd } = filteredData[rowIndex]
-          const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
-          return (
-            <Cell
-              className='bitfinex-text-align-right'
-              tooltip={tooltip}
-            >
-              {formatAmount(amountUsd)}
-            </Cell>
-          )
-        },
-        copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
-      }
-    )),
     {
-      id: 'balance',
-      name: 'column.balance',
-      width: COLUMN_WIDTHS.AMOUNT,
+      id: 'currency',
+      name: 'column.currency',
+      width: COLUMN_WIDTHS.SYMBOL,
       renderer: (rowIndex) => {
-        const { balance, currency } = filteredData[rowIndex]
-        const fixedBalance = fixedFloat(balance)
-        const tooltip = `${fixedBalance} ${currency}`
+        const { currency } = filteredData[rowIndex]
         return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={tooltip}
-          >
-            {fixedBalance}
+          <Cell tooltip={currency}>
+            {currency}
           </Cell>
         )
       },
-      copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
+      copyText: rowIndex => filteredData[rowIndex].currency,
     },
-    ...insertIf(config.showFrameworkMode, (
-      {
-        id: 'balanceUsd',
-        name: 'column.balanceUsd',
-        width: COLUMN_WIDTHS.BALANCE_USD,
-        renderer: (rowIndex) => {
-          const { balanceUsd } = filteredData[rowIndex]
-          const fixedBalanceUsd = fixedFloat(balanceUsd)
-          const tooltip = `${fixedBalanceUsd} ${t('column.usd')}`
-          return (
-            <Cell
-              className='bitfinex-text-align-right'
-              tooltip={tooltip}
-            >
-              {fixedBalanceUsd}
-            </Cell>
-          )
-        },
-        copyText: rowIndex => fixedFloat(filteredData[rowIndex].balanceUsd),
-      }
-    )),
+    {
+      id: 'orderId',
+      name: 'column.orderid',
+      width: COLUMN_WIDTHS.ORDER_ID,
+      renderer: (rowIndex) => {
+        const { orderId } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={orderId}>
+            {orderId}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].orderId,
+    },
+    {
+      id: 'payCurrencies',
+      name: 'column.payCurrencies',
+      width: COLUMN_WIDTHS.META,
+      renderer: (rowIndex) => {
+        const { payCurrencies } = filteredData[rowIndex]
+        const formattedPayCurrenciesInfo = JSON.stringify(payCurrencies, undefined, 2)
+        return (
+          <Cell>
+            <JSONFormat content={formattedPayCurrenciesInfo}>
+              {formattedPayCurrenciesInfo}
+            </JSONFormat>
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].formattedPayCurrenciesInfo,
+    },
+    {
+      id: 'status',
+      name: 'column.status',
+      width: COLUMN_WIDTHS.ORDER_ID,
+      renderer: (rowIndex) => {
+        const { status } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={status}>
+            {status}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].status,
+    },
+    {
+      id: 'customerInfo',
+      name: 'column.customerInfo',
+      width: COLUMN_WIDTHS.META,
+      renderer: (rowIndex) => {
+        const { customerInfo } = filteredData[rowIndex]
+        const formattedCustomerInfo = JSON.stringify(customerInfo, undefined, 2)
+        return (
+          <Cell>
+            <JSONFormat content={formattedCustomerInfo}>
+              {formattedCustomerInfo}
+            </JSONFormat>
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].customerInfo,
+    },
+    {
+      id: 'invoices',
+      name: 'column.invoices',
+      width: COLUMN_WIDTHS.META,
+      renderer: (rowIndex) => {
+        const { invoices } = filteredData[rowIndex]
+        const formattedInvoicesInfo = JSON.stringify(invoices, undefined, 2)
+        return (
+          <Cell>
+            <JSONFormat content={formattedInvoicesInfo}>
+              {formattedInvoicesInfo}
+            </JSONFormat>
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].formattedInvoicesInfo,
+    },
+    {
+      id: 'payment',
+      name: 'column.payment',
+      width: COLUMN_WIDTHS.META,
+      renderer: (rowIndex) => {
+        const { payment } = filteredData[rowIndex]
+        const formattedPayment = JSON.stringify(payment, undefined, 2)
+        return (
+          <Cell>
+            <JSONFormat content={formattedPayment}>
+              {formattedPayment}
+            </JSONFormat>
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].formattedPayment,
+    },
+    {
+      id: 'duration',
+      name: 'column.duration',
+      width: COLUMN_WIDTHS.INVOICES_DURATION,
+      renderer: (rowIndex) => {
+        const { duration } = filteredData[rowIndex]
+        return (
+          <Cell>
+            {duration}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].duration,
+    },
+    {
+      id: 'merchantName',
+      name: 'column.merchantName',
+      width: COLUMN_WIDTHS.INVOICES_MERCHANT_NAME,
+      renderer: (rowIndex) => {
+        const { merchantName } = filteredData[rowIndex]
+        return (
+          <Cell>
+            {merchantName}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].merchantName,
+    },
+    {
+      id: 'redirectUrl',
+      name: 'column.redirectUrl',
+      width: COLUMN_WIDTHS.INVOICES_REDIRECT_URL,
+      renderer: (rowIndex) => {
+        const { redirectUrl } = filteredData[rowIndex]
+        return (
+          <Cell>
+            <a href={`${redirectUrl}`}>{redirectUrl}</a>
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].redirectUrl,
+    },
     {
       id: 'mts',
       nameStr: `${t('column.date')} (${timeOffset})`,
@@ -155,18 +215,18 @@ export default function getColumns(props) {
       copyText: rowIndex => getFullTime(filteredData[rowIndex].mts),
     },
     {
-      id: 'wallet',
-      name: 'column.wallet',
-      width: COLUMN_WIDTHS.LEDGERS_WALLET,
+      id: 'webhook',
+      name: 'column.webhook',
+      width: COLUMN_WIDTHS.INVOICES_WEBHOOK,
       renderer: (rowIndex) => {
-        const { wallet } = filteredData[rowIndex]
+        const { webhook } = filteredData[rowIndex]
         return (
-          <Cell tooltip={wallet}>
-            {wallet}
+          <Cell>
+            <a href={`${webhook}`}>{webhook}</a>
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].wallet,
+      copyText: rowIndex => filteredData[rowIndex].webhook,
     },
   ]
 }
