@@ -16,7 +16,6 @@ import NoData from 'ui/NoData'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
-import LedgersCategorySelect from 'ui/LedgersCategorySelect'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
@@ -24,7 +23,7 @@ import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 import getColumns from './Invoices.columns'
 import { propTypes, defaultProps } from './Invoices.props'
 
-const TYPE = queryConstants.MENU_LEDGERS
+const TYPE = queryConstants.MENU_INVOICES
 
 class Invoices extends PureComponent {
   componentDidMount() {
@@ -37,11 +36,6 @@ class Invoices extends PureComponent {
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
 
-  onCategoryChange = (targetCategory) => {
-    const { setParams } = this.props
-    setParams({ targetCategory: targetCategory ? +targetCategory : undefined })
-  }
-
   render() {
     const {
       columns,
@@ -53,7 +47,6 @@ class Invoices extends PureComponent {
       pageLoading,
       refresh,
       t,
-      targetCategory,
       timeOffset,
     } = this.props
     const tableColumns = getColumns({
@@ -83,7 +76,7 @@ class Invoices extends PureComponent {
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
-          <SectionHeaderTitle>{t('ledgers.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>{t('invoices.title')}</SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -94,15 +87,6 @@ class Invoices extends PureComponent {
                 currentFilters={targetSymbols}
                 existingCoins={existingCoins}
                 toggleSymbol={this.toggleSymbol}
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.category')}
-              </SectionHeaderItemLabel>
-              <LedgersCategorySelect
-                onChange={this.onCategoryChange}
-                value={targetCategory}
               />
             </SectionHeaderItem>
             <ColumnsFilter target={TYPE} />

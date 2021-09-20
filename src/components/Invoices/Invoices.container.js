@@ -5,7 +5,6 @@ import {
   fetchInvoices,
   refresh,
   addTargetSymbol,
-  setParams,
   setTargetSymbols,
   removeTargetSymbol,
 } from 'state/invoices/actions'
@@ -15,7 +14,6 @@ import {
   getEntries,
   getExistingCoins,
   getPageLoading,
-  getTargetCategory,
   getTargetSymbols,
 } from 'state/invoices/selectors'
 import { getColumns } from 'state/filters/selectors'
@@ -31,7 +29,6 @@ const mapStateToProps = state => ({
   getFullTime: getFullTime(state),
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
-  targetCategory: getTargetCategory(state),
   targetSymbols: getTargetSymbols(state),
   timeOffset: getTimeOffset(state),
 })
@@ -40,7 +37,6 @@ const mapDispatchToProps = {
   fetchData: fetchInvoices,
   refresh,
   addTargetSymbol,
-  setParams,
   setTargetSymbols,
   removeTargetSymbol,
 }
