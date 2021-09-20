@@ -51,7 +51,7 @@ const DEFAULT_INVOICES = [
 
 const DEFAULT_FILTERS = {
   [MENU_LEDGERS]: DEFAULT_LEDGERS,
-  [MENU_INVOICES]: DEFAULT_INVOICES ,
+  [MENU_INVOICES]: DEFAULT_INVOICES,
   [MENU_TRADES]: [
     { column: 'orderID', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'execAmount', type: GREATER_THAN, dataType: NUMBER, value: '' },
