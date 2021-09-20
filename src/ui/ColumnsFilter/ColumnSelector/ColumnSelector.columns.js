@@ -60,12 +60,12 @@ const INVOICES_COLUMNS = [
   { id: 'orderId', name: 'orderid', type: STRING, filter: true },
   { id: 'payCurrencies', name: 'payCurrencies' },
   { id: 'payment', name: 'payment' },
-  { id: 'webhook', name: 'webhook', type: STRING, hidden: true },
-  { id: 'redirectUrl', name: 'redirectUrl', type: STRING, hidden: true },
-  { id: 'status', name: 'status', type: STRING },
+  { id: 'webhook', name: 'webhook', type: STRING, filter: true, hidden: true },
+  { id: 'redirectUrl', name: 'redirectUrl', type: STRING, filter: true, hidden: true },
+  { id: 'status', name: 'status', type: STRING, filter: true },
   { id: 'customerInfo', name: 'customerInfo' },
   { id: 'invoices', name: 'invoices' },
-  { id: 'merchantName', name: 'merchantName', type: STRING, hidden: true },
+  { id: 'merchantName', name: 'merchantName', type: STRING, filter: true, hidden: true },
 ]
 
 /**
