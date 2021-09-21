@@ -32,17 +32,6 @@ export function refresh() {
 }
 
 /**
- * Create an action to set options for Invoices.
- * @param {object} payload object contains options
- */
-export function setParams(payload) {
-  return {
-    type: types.SET_PARAMS,
-    payload,
-  }
-}
-
-/**
  * Create an action to update Invoices.
  * @param {Object[]} data
  */
@@ -94,7 +83,6 @@ export default {
   fetchInvoices,
   refresh,
   removeTargetSymbol,
-  setParams,
   setTargetSymbols,
   updateInvoices,
 }
