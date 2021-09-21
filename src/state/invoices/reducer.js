@@ -11,7 +11,6 @@ import { updateInvoices } from './utils'
 
 const initialState = {
   ...baseSymbolState,
-  targetCategory: undefined,
 }
 
 export function invoicesReducer(state = initialState, action) {
@@ -41,14 +40,6 @@ export function invoicesReducer(state = initialState, action) {
           existingCoins: state.existingCoins,
         }
         : state
-    case types.SET_PARAMS:
-      return {
-        ...initialState,
-        targetCategory: state.targetCategory,
-        targetSymbols: state.targetSymbols,
-        existingCoins: state.existingCoins,
-        ...payload,
-      }
     case types.SET_SYMBOLS:
       return {
         ...initialState,
