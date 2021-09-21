@@ -25,7 +25,6 @@ const TYPE = queryTypes.MENU_INVOICES
 function getReqInvoices({
   start,
   end,
-  targetCategory,
   targetSymbols,
   filter,
 }) {
@@ -34,7 +33,6 @@ function getReqInvoices({
     end,
     filter,
     limit: getQueryLimit(TYPE),
-    category: targetCategory,
     symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
   }
 
@@ -44,7 +42,7 @@ function getReqInvoices({
 /* eslint-disable-next-line consistent-return */
 function* fetchInvoices() {
   try {
-    const { targetCategory, targetSymbols } = yield select(getInvoices)
+    const { targetSymbols } = yield select(getInvoices)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const filter = yield select(getFilterQuery, TYPE)
 
@@ -52,7 +50,6 @@ function* fetchInvoices() {
     const { result, error } = yield call(fetchDataWithPagination, getReqInvoices, {
       start,
       end,
-      targetCategory,
       targetSymbols,
       filter,
     })
@@ -63,14 +60,14 @@ function* fetchInvoices() {
     if (error) {
       yield put(actions.fetchFail({
         id: 'status.fail',
-        topic: 'ledgers.title',
+        topic: 'invoices.title',
         detail: JSON.stringify(error),
       }))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
       id: 'status.request.error',
-      topic: 'ledgers.title',
+      topic: 'invoices.title',
       detail: JSON.stringify(fail),
     }))
   }
@@ -86,6 +83,6 @@ function* fetchInvoicesFail({ payload }) {
 
 export default function* invoicesSaga() {
   yield takeLatest(types.FETCH_INVOICES, fetchInvoices)
-  yield takeLatest([types.REFRESH, types.SET_PARAMS, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshInvoices)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshInvoices)
   yield takeLatest(types.FETCH_FAIL, fetchInvoicesFail)
 }
