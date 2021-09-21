@@ -1,5 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
@@ -38,22 +37,22 @@ class Invoices extends PureComponent {
 
   render() {
     const {
-      columns,
-      getFullTime,
-      targetSymbols,
-      entries,
-      existingCoins,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      entries,
+      refresh,
+      columns,
       timeOffset,
+      getFullTime,
+      pageLoading,
+      dataReceived,
+      existingCoins,
+      targetSymbols,
     } = this.props
     const tableColumns = getColumns({
-      filteredData: entries,
-      getFullTime,
       t,
       timeOffset,
+      getFullTime,
+      filteredData: entries,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -63,18 +62,21 @@ class Invoices extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
           />
           <Pagination loading={pageLoading} target={TYPE} />
-        </Fragment>
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
           <SectionHeaderTitle>{t('invoices.title')}</SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
@@ -84,8 +86,8 @@ class Invoices extends PureComponent {
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
               <MultiSymbolSelector
-                currentFilters={targetSymbols}
                 existingCoins={existingCoins}
+                currentFilters={targetSymbols}
                 toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
@@ -102,4 +104,4 @@ class Invoices extends PureComponent {
 Invoices.propTypes = propTypes
 Invoices.defaultProps = defaultProps
 
-export default withTranslation('translations')(Invoices)
+export default Invoices
