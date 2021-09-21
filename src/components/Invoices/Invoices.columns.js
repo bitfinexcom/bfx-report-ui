@@ -192,7 +192,9 @@ export default function getColumns(props) {
         const { redirectUrl } = filteredData[rowIndex]
         return (
           <Cell>
-            <a href={`${redirectUrl}`}>{redirectUrl}</a>
+            <>
+              <a href={`${redirectUrl}`}>{redirectUrl}</a>
+            </>
           </Cell>
         )
       },
@@ -222,7 +224,9 @@ export default function getColumns(props) {
         const { webhook } = filteredData[rowIndex]
         return (
           <Cell>
-            <a href={`${webhook}`}>{webhook}</a>
+            <>
+              <a href={`${webhook}`}>{webhook}</a>
+            </>
           </Cell>
         )
       },
