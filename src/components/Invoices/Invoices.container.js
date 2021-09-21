@@ -1,19 +1,21 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchInvoices,
   refresh,
+  fetchInvoices,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
 } from 'state/invoices/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
-  getDataReceived,
   getEntries,
-  getExistingCoins,
   getPageLoading,
+  getDataReceived,
+  getExistingCoins,
   getTargetSymbols,
 } from 'state/invoices/selectors'
 import { getColumns } from 'state/filters/selectors'
@@ -23,24 +25,26 @@ import queryConstants from 'state/query/constants'
 import Invoices from './Invoices'
 
 const mapStateToProps = state => ({
+  getFullTime: getFullTime(state),
+  timeOffset: getTimeOffset(state),
+  pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
+  existingCoins: getExistingCoins(state),
+  targetSymbols: getTargetSymbols(state),
   columns: getColumns(state, queryConstants.MENU_INVOICES),
   entries: getFilteredEntries(state, queryConstants.MENU_INVOICES, getEntries(state)),
-  existingCoins: getExistingCoins(state),
-  getFullTime: getFullTime(state),
-  dataReceived: getDataReceived(state),
-  pageLoading: getPageLoading(state),
-  targetSymbols: getTargetSymbols(state),
-  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchInvoices,
   refresh,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  fetchData: fetchInvoices,
 }
 
-const InvoicesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Invoices))
-
-export default InvoicesContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(Invoices)
