@@ -3,20 +3,20 @@ import { Card, Elevation } from '@blueprintjs/core'
 
 import {
   SectionHeader,
-  SectionHeaderItem,
-  SectionHeaderItemLabel,
   SectionHeaderRow,
+  SectionHeaderItem,
   SectionHeaderTitle,
+  SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
 import TimeRange from 'ui/TimeRange'
-import RefreshButton from 'ui/RefreshButton'
-import MultiSymbolSelector from 'ui/MultiSymbolSelector'
+import Pagination from 'ui/Pagination'
 import ColumnsFilter from 'ui/ColumnsFilter'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 
 import getColumns from './Invoices.columns'
@@ -48,6 +48,7 @@ class Invoices extends PureComponent {
       existingCoins,
       targetSymbols,
     } = this.props
+
     const tableColumns = getColumns({
       t,
       timeOffset,
