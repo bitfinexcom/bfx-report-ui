@@ -193,7 +193,13 @@ export default function getColumns(props) {
         return (
           <Cell>
             <>
-              <a href={`${redirectUrl}`}>{redirectUrl}</a>
+              <a
+                target='_blank'
+                href={`${redirectUrl}`}
+                rel='noopener noreferrer'
+              >
+                {redirectUrl}
+              </a>
             </>
           </Cell>
         )
@@ -225,7 +231,13 @@ export default function getColumns(props) {
         return (
           <Cell>
             <>
-              <a href={`${webhook}`}>{webhook}</a>
+              <a
+                target='_blank'
+                href={`${webhook}`}
+                rel='noopener noreferrer'
+              >
+                {webhook}
+              </a>
             </>
           </Cell>
         )
