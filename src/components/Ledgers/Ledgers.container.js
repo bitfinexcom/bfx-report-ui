@@ -1,22 +1,24 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchLedgers,
   refresh,
-  addTargetSymbol,
   setParams,
+  fetchLedgers,
+  addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
 } from 'state/ledgers/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
-  getDataReceived,
   getEntries,
-  getExistingCoins,
   getPageLoading,
-  getTargetCategory,
+  getDataReceived,
+  getExistingCoins,
   getTargetSymbols,
+  getTargetCategory,
 } from 'state/ledgers/selectors'
 import { getColumns } from 'state/filters/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
@@ -25,26 +27,28 @@ import queryConstants from 'state/query/constants'
 import Ledgers from './Ledgers'
 
 const mapStateToProps = state => ({
+  getFullTime: getFullTime(state),
+  timeOffset: getTimeOffset(state),
+  pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
+  targetSymbols: getTargetSymbols(state),
+  existingCoins: getExistingCoins(state),
+  targetCategory: getTargetCategory(state),
   columns: getColumns(state, queryConstants.MENU_LEDGERS),
   entries: getFilteredEntries(state, queryConstants.MENU_LEDGERS, getEntries(state)),
-  existingCoins: getExistingCoins(state),
-  getFullTime: getFullTime(state),
-  dataReceived: getDataReceived(state),
-  pageLoading: getPageLoading(state),
-  targetCategory: getTargetCategory(state),
-  targetSymbols: getTargetSymbols(state),
-  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchLedgers,
   refresh,
-  addTargetSymbol,
   setParams,
+  addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  fetchData: fetchLedgers,
 }
 
-const LedgersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Ledgers))
-
-export default LedgersContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(Ledgers)
