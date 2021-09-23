@@ -198,7 +198,7 @@
     "cancel": "Cancel",
     "okay": "Okay",
     "status": {
-      "local": "Export csv generated, files are saved in:",
+      "local": "Export csv generated, files are saved in: ",
       "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
     },
     "success": "Success",
