@@ -1,13 +1,12 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
   SectionHeader,
-  SectionHeaderItem,
-  SectionHeaderItemLabel,
   SectionHeaderRow,
+  SectionHeaderItem,
   SectionHeaderTitle,
+  SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import Pagination from 'ui/Pagination'
 import DataTable from 'ui/DataTable'
@@ -44,23 +43,23 @@ class Ledgers extends PureComponent {
 
   render() {
     const {
-      columns,
-      getFullTime,
-      targetSymbols,
-      entries,
-      existingCoins,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
-      targetCategory,
+      columns,
+      entries,
+      refresh,
       timeOffset,
+      pageLoading,
+      getFullTime,
+      dataReceived,
+      targetSymbols,
+      existingCoins,
+      targetCategory,
     } = this.props
     const tableColumns = getColumns({
-      filteredData: entries,
-      getFullTime,
       t,
       timeOffset,
+      getFullTime,
+      filteredData: entries,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -70,18 +69,21 @@ class Ledgers extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
           />
           <Pagination loading={pageLoading} target={TYPE} />
-        </Fragment>
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
           <SectionHeaderTitle>{t('ledgers.title')}</SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
@@ -91,8 +93,8 @@ class Ledgers extends PureComponent {
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
               <MultiSymbolSelector
-                currentFilters={targetSymbols}
                 existingCoins={existingCoins}
+                currentFilters={targetSymbols}
                 toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
@@ -101,8 +103,8 @@ class Ledgers extends PureComponent {
                 {t('selector.filter.category')}
               </SectionHeaderItemLabel>
               <LedgersCategorySelect
-                onChange={this.onCategoryChange}
                 value={targetCategory}
+                onChange={this.onCategoryChange}
               />
             </SectionHeaderItem>
             <ColumnsFilter target={TYPE} />
@@ -118,4 +120,4 @@ class Ledgers extends PureComponent {
 Ledgers.propTypes = propTypes
 Ledgers.defaultProps = defaultProps
 
-export default withTranslation('translations')(Ledgers)
+export default Ledgers
