@@ -290,7 +290,6 @@ const MAPPING = {
     icon: Icons.NOTEBOOK,
     path: '/invoices',
     filterType: FILTER_SYMBOL,
-    // queryLimit: 500,
     pageSize: 125,
   },
   [MENU_LOAN_REPORT]: {
