@@ -209,7 +209,7 @@
 
 @media screen and (max-width: 1024px) {
   .account-menu {
-    &-sync, &-query {
+     &-query {
       display: flex;
     }
   }
@@ -217,6 +217,7 @@
 
 @media screen and (max-width: 1150px) {
   .account-menu {
+    &-sync,
     &-export {
       display: flex;
     }
