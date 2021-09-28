@@ -1,8 +1,15 @@
 import React from 'react'
-import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import { withTranslation } from 'react-i18next'
 import {
-  ResponsiveContainer, Area, AreaChart, XAxis, YAxis, Tooltip, CartesianGrid, Legend,
+  Area,
+  XAxis,
+  YAxis,
+  Legend,
+  Tooltip,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
 } from 'recharts'
 
 import { propTypes, defaultProps } from './Chart.props'
@@ -45,13 +52,13 @@ class Chart extends React.PureComponent {
         <Area
           key={key}
           name={name}
-          type='monotone'
+          dot={false}
+          connectNulls
           dataKey={key}
-          stroke={COLORS[i]}
+          type='monotone'
           strokeWidth={1.2}
           fill={`url(#${key})`}
-          connectNulls
-          dot={false}
+          stroke={COLORS[i]}
           hide={hiddenKeys[key]}
         />
       )
@@ -85,15 +92,21 @@ class Chart extends React.PureComponent {
             <defs>
               {this.getGradients()}
             </defs>
-            <XAxis dataKey='name' stroke='#9e9494' />
+            <XAxis
+              dataKey='name'
+              stroke='#9e9494'
+            />
             <YAxis stroke='#9e9494' />
-            <Tooltip animationDuration={150} />
-            <CartesianGrid stroke='#57636b' strokeDasharray='3 3' />
+            <Tooltip isAnimationActive={false} />
+            <CartesianGrid
+              stroke='#57636b'
+              strokeDasharray='3 3'
+            />
             <Legend
-              verticalAlign='top'
-              wrapperStyle={{ paddingBottom: 15 }}
               iconType='rect'
+              verticalAlign='top'
               onClick={this.onLegendClick}
+              wrapperStyle={{ paddingBottom: 15 }}
             />
             {this.getAreas()}
           </AreaChart>
