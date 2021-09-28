@@ -132,7 +132,8 @@
 
 @media screen and (max-width: 1150px) {
   .header {
-    .export {
+    .export,
+    .sync-mode {
       display: none;
     }
   }
@@ -140,7 +141,8 @@
 
 @media screen and (max-width: 1024px) {
   .header {
-    .export, .sync-mode, .query-mode {
+    .export,
+    .query-mode {
       display: none;
     }
   }
