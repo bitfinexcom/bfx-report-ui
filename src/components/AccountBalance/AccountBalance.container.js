@@ -1,6 +1,7 @@
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
   refresh,
@@ -33,5 +34,6 @@ const mapDispatchToProps = {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
   withRouter,
 )(AccountBalance)
