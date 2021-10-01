@@ -1,23 +1,22 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
-import parseChartData from 'ui/Charts/Charts.helpers'
-import TimeFrameSelector from 'ui/TimeFrameSelector'
+import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import TimeRange from 'ui/TimeRange'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
+import parseChartData from 'ui/Charts/Charts.helpers'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
 
@@ -51,13 +50,13 @@ class AccountBalance extends PureComponent {
 
   render() {
     const {
-      currentFetchParams: { timeframe: currTimeframe },
+      t,
+      refresh,
       entries,
       timeframe,
-      dataReceived,
       pageLoading,
-      refresh,
-      t,
+      dataReceived,
+      currentFetchParams: { timeframe: currTimeframe },
     } = this.props
     const hasChanges = this.hasChanges()
 
@@ -80,7 +79,10 @@ class AccountBalance extends PureComponent {
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
           <SectionHeaderTitle>{t('accountbalance.title')}</SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
@@ -94,7 +96,6 @@ class AccountBalance extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-
             <QueryButton
               disabled={!hasChanges}
               onClick={this.handleQuery}
@@ -111,4 +112,4 @@ class AccountBalance extends PureComponent {
 AccountBalance.propTypes = propTypes
 AccountBalance.defaultProps = defaultProps
 
-export default withTranslation('translations')(AccountBalance)
+export default AccountBalance

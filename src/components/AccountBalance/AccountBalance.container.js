@@ -1,35 +1,39 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchBalance,
   refresh,
   setParams,
+  fetchBalance,
 } from 'state/accountBalance/actions'
 import {
-  getCurrentFetchParams,
-  getDataReceived,
   getEntries,
-  getPageLoading,
   getTimeframe,
+  getPageLoading,
+  getDataReceived,
+  getCurrentFetchParams,
 } from 'state/accountBalance/selectors'
 
 import AccountBalance from './AccountBalance'
 
 const mapStateToProps = state => ({
-  currentFetchParams: getCurrentFetchParams(state),
   entries: getEntries(state),
   timeframe: getTimeframe(state),
-  dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
+  currentFetchParams: getCurrentFetchParams(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchBalance,
   refresh,
   setParams,
+  fetchData: fetchBalance,
 }
 
-const AccountBalanceContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AccountBalance))
-
-export default AccountBalanceContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(AccountBalance)
