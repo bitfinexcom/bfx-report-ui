@@ -3,6 +3,7 @@ import { FILTERS, EMPTY_FILTER } from 'var/filterTypes'
 import DATA_TYPES from 'var/dataTypes'
 
 const {
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_TRADES,
   MENU_ORDERS,
@@ -42,8 +43,15 @@ const DEFAULT_LEDGERS = [
   { column: 'balance', type: GREATER_THAN, dataType: NUMBER, value: '' },
 ]
 
+const DEFAULT_INVOICES = [
+  { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  { column: 'orderId', type: CONTAINS, dataType: STRING, value: '' },
+  { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
+]
+
 const DEFAULT_FILTERS = {
   [MENU_LEDGERS]: DEFAULT_LEDGERS,
+  [MENU_INVOICES]: DEFAULT_INVOICES,
   [MENU_TRADES]: [
     { column: 'orderID', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'execAmount', type: GREATER_THAN, dataType: NUMBER, value: '' },

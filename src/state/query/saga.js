@@ -22,6 +22,7 @@ import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/se
 import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
 import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/selectors'
 import { getTargetSymbols as getLedgersSymbols, getTargetCategory as getLedgersCategory } from 'state/ledgers/selectors'
+import { getTargetSymbols as getInvoicesSymbols } from 'state/invoices/selectors'
 import { getParams as getLoanReportParams } from 'state/loanReport/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
@@ -62,6 +63,7 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -129,6 +131,8 @@ function getSelector(target) {
       return getFOfferSymbols
     case MENU_FPAYMENT:
       return getFPaymentSymbols
+    case MENU_INVOICES:
+      return getInvoicesSymbols
     case MENU_LEDGERS:
       return getLedgersSymbols
     case MENU_LOAN_REPORT:
@@ -291,6 +295,9 @@ function* getOptions({ target }) {
     case MENU_FPAYMENT:
       options.method = 'getLedgersCsv'
       options.category = LEDGERS_CATEGORIES.FUNDING_PAYMENT
+      break
+    case MENU_INVOICES:
+      options.method = 'getPayInvoiceListCsv'
       break
     case MENU_LEDGERS:
       options.method = 'getLedgersCsv'

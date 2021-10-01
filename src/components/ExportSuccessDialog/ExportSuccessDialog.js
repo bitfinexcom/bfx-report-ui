@@ -22,7 +22,14 @@ const ExportSuccessDialog = ({
   }
 
   const message = config.localExport
-    ? `${t('download.status.local')} ${localExportPath}`
+    ? (
+      <>
+        {t('download.status.local')}
+        <span>
+          {localExportPath}
+        </span>
+      </>
+    )
     : t('download.status.email')
 
   return (

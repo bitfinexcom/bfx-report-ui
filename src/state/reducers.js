@@ -21,6 +21,7 @@ import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
 import fundingLoanHistoryReducer from './fundingLoanHistory/reducer'
 import fundingOfferHistoryReducer from './fundingOfferHistory/reducer'
 import fundingPaymentReducer from './fundingPayment/reducer'
+import invoicesReducer from './invoices/reducer'
 import ledgersReducer from './ledgers/reducer'
 import loanReportReducer from './loanReport/reducer'
 import loginsReducer from './logins/reducer'
@@ -81,6 +82,7 @@ const BASE_REDUCERS = {
   floan: fundingLoanHistoryReducer,
   foffer: fundingOfferHistoryReducer,
   fpayment: fundingPaymentReducer,
+  invoices: invoicesReducer,
   ledgers: ledgersReducer,
   logins: loginsReducer,
   movements: movementsReducer,

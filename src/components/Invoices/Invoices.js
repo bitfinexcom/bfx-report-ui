@@ -8,24 +8,23 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
 import TimeRange from 'ui/TimeRange'
-import RefreshButton from 'ui/RefreshButton'
-import MultiSymbolSelector from 'ui/MultiSymbolSelector'
-import LedgersCategorySelect from 'ui/LedgersCategorySelect'
+import Pagination from 'ui/Pagination'
 import ColumnsFilter from 'ui/ColumnsFilter'
+import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
 
-import getColumns from './Ledgers.columns'
-import { propTypes, defaultProps } from './Ledgers.props'
+import getColumns from './Invoices.columns'
+import { propTypes, defaultProps } from './Invoices.props'
 
-const TYPE = queryConstants.MENU_LEDGERS
+const TYPE = queryConstants.MENU_INVOICES
 
-class Ledgers extends PureComponent {
+class Invoices extends PureComponent {
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -36,25 +35,20 @@ class Ledgers extends PureComponent {
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
 
-  onCategoryChange = (targetCategory) => {
-    const { setParams } = this.props
-    setParams({ targetCategory: targetCategory ? +targetCategory : undefined })
-  }
-
   render() {
     const {
       t,
-      columns,
       entries,
       refresh,
+      columns,
       timeOffset,
-      pageLoading,
       getFullTime,
+      pageLoading,
       dataReceived,
-      targetSymbols,
       existingCoins,
-      targetCategory,
+      targetSymbols,
     } = this.props
+
     const tableColumns = getColumns({
       t,
       timeOffset,
@@ -85,7 +79,7 @@ class Ledgers extends PureComponent {
         className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader>
-          <SectionHeaderTitle>{t('ledgers.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>{t('invoices.title')}</SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -98,15 +92,6 @@ class Ledgers extends PureComponent {
                 toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.category')}
-              </SectionHeaderItemLabel>
-              <LedgersCategorySelect
-                value={targetCategory}
-                onChange={this.onCategoryChange}
-              />
-            </SectionHeaderItem>
             <ColumnsFilter target={TYPE} />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
@@ -117,7 +102,7 @@ class Ledgers extends PureComponent {
   }
 }
 
-Ledgers.propTypes = propTypes
-Ledgers.defaultProps = defaultProps
+Invoices.propTypes = propTypes
+Invoices.defaultProps = defaultProps
 
-export default Ledgers
+export default Invoices

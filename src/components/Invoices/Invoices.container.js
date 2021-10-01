@@ -5,12 +5,11 @@ import { withTranslation } from 'react-i18next'
 
 import {
   refresh,
-  setParams,
-  fetchLedgers,
+  fetchInvoices,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
-} from 'state/ledgers/actions'
+} from 'state/invoices/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getEntries,
@@ -18,37 +17,34 @@ import {
   getDataReceived,
   getExistingCoins,
   getTargetSymbols,
-  getTargetCategory,
-} from 'state/ledgers/selectors'
+} from 'state/invoices/selectors'
 import { getColumns } from 'state/filters/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import queryConstants from 'state/query/constants'
 
-import Ledgers from './Ledgers'
+import Invoices from './Invoices'
 
 const mapStateToProps = state => ({
   getFullTime: getFullTime(state),
   timeOffset: getTimeOffset(state),
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
-  targetSymbols: getTargetSymbols(state),
   existingCoins: getExistingCoins(state),
-  targetCategory: getTargetCategory(state),
-  columns: getColumns(state, queryConstants.MENU_LEDGERS),
-  entries: getFilteredEntries(state, queryConstants.MENU_LEDGERS, getEntries(state)),
+  targetSymbols: getTargetSymbols(state),
+  columns: getColumns(state, queryConstants.MENU_INVOICES),
+  entries: getFilteredEntries(state, queryConstants.MENU_INVOICES, getEntries(state)),
 })
 
 const mapDispatchToProps = {
   refresh,
-  setParams,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
-  fetchData: fetchLedgers,
+  fetchData: fetchInvoices,
 }
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withTranslation('translations'),
   withRouter,
-)(Ledgers)
+)(Invoices)

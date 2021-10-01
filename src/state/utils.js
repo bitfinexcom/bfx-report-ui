@@ -27,6 +27,7 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -176,6 +177,7 @@ export const checkInit = (props, type) => {
       break
     }
     case MENU_LEDGERS:
+    case MENU_INVOICES:
     case MENU_MOVEMENTS:
     case MENU_FOFFER:
     case MENU_FLOAN:

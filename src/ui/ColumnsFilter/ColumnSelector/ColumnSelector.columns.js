@@ -4,6 +4,7 @@ import DATA_TYPES from 'var/dataTypes'
 
 const {
   MENU_LEDGERS,
+  MENU_INVOICES,
   MENU_TRADES,
   MENU_ORDERS,
   MENU_MOVEMENTS,
@@ -50,6 +51,23 @@ const LEDGERS_COLUMNS = [
   { id: 'wallet', name: 'wallet', type: STRING, select: FILTERS_SELECTOR.WALLET, filter: true },
 ]
 
+const INVOICES_COLUMNS = [
+  { id: 'id', name: 'id', type: STRING, filter: true, hidden: true },
+  { id: 'mts', name: 'date', type: DATE, filter: true, hidden: true },
+  { id: 'duration', name: 'duration', type: NUMBER, filter: true, hidden: true },
+  { id: 'amount', name: 'amount', type: NUMBER, filter: true },
+  { id: 'currency', name: 'currency' },
+  { id: 'orderId', name: 'orderid', type: STRING, filter: true },
+  { id: 'payCurrencies', name: 'payCurrencies' },
+  { id: 'payment', name: 'payment' },
+  { id: 'webhook', name: 'webhook', type: STRING, filter: true, hidden: true },
+  { id: 'redirectUrl', name: 'redirectUrl', type: STRING, filter: true, hidden: true },
+  { id: 'status', name: 'status', type: STRING, filter: true },
+  { id: 'customerInfo', name: 'customerInfo' },
+  { id: 'invoices', name: 'invoices' },
+  { id: 'merchantName', name: 'merchantName', type: STRING, filter: true, hidden: true },
+]
+
 /**
  * id: column id
  * name: translation keys `column.[name]`
@@ -62,6 +80,8 @@ const LEDGERS_COLUMNS = [
  */
 const SECTION_COLUMNS = {
   [MENU_LEDGERS]: LEDGERS_COLUMNS,
+
+  [MENU_INVOICES]: INVOICES_COLUMNS,
 
   [MENU_TRADES]: [
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },

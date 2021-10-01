@@ -8,6 +8,10 @@
     width: 283px;
     margin: 0 auto 10px auto;
     text-align: center;
+
+    span {
+      color: var(--thColor);
+    }
   }
 
   .bp3-button {

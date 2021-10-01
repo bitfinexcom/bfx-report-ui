@@ -7,6 +7,7 @@ import queryTypes from 'state/query/constants'
 import { getTarget } from 'state/query/utils'
 import uiTypes from 'state/ui/constants'
 import { decodeFilters } from 'state/filters/utils'
+import { fetchInvoices, refresh as refreshInvoices } from 'state/invoices/actions'
 import { fetchLedgers, refresh as refreshLedgers } from 'state/ledgers/actions'
 import { fetchTrades, refresh as refreshTrades } from 'state/trades/actions'
 import { fetchOrders, refresh as refreshOrders } from 'state/orders/actions'
@@ -29,6 +30,7 @@ import types from './constants'
 import actions from './actions'
 
 const {
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_TRADES,
   MENU_ORDERS,
@@ -56,6 +58,10 @@ export function* setFilters({ payload }) {
   }
 
   switch (section) {
+    case MENU_INVOICES:
+      yield put(refreshInvoices())
+      yield put(fetchInvoices())
+      break
     case MENU_LEDGERS:
       yield put(refreshLedgers())
       yield put(fetchLedgers())

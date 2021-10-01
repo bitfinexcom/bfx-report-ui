@@ -82,10 +82,12 @@
     "collateral": "Collateral",
     "created": "Created",
     "currency": "Currency",
+    "customerInfo": "Customer Info",
     "date": "Date",
     "days": "Days",
     "description": "Description",
     "destination": "Destination",
+    "duration": "Duration",
     "fee": "Fee",
     "feePercent": "Fee Perc",
     "fees": "Fees",
@@ -96,10 +98,12 @@
     "fundingType": "Funding Type",
     "id": "#",
     "ip": "IP",
+    "invoices": "Invoices",
     "lastpayout": "Last Payout",
     "liq-price": "Liq Price",
     "maker_fees": "Maker Fees",
     "maker_rebate": "Maker Rebate",
+    "merchantName": "Merchant Name",
     "meta": "Metadata",
     "mobile": "Mobile",
     "movementsTotal": "Movements Total Amount (USD)",
@@ -107,6 +111,8 @@
     "opened": "Opened",
     "orderid": "Order ID",
     "pair": "Pair",
+    "payCurrencies": "Pay Currencies",
+    "payment": "Payment",
     "percent": "Percent",
     "period": "Period",
     "pl": "P/L",
@@ -120,6 +126,7 @@
     "pricetrail": "Trailing Price",
     "rate": "Rate",
     "rateperc": "Rate %",
+    "redirectUrl": "Redirect URL",
     "side": "Side",
     "status": "Status",
     "taker_fees": "Taker Fees",
@@ -140,7 +147,8 @@
     "version": "Version",
     "volume": "Volume",
     "wallet": "Wallet",
-    "walletsTotal": "Wallets Total Balance (USD)"
+    "walletsTotal": "Wallets Total Balance (USD)",
+    "webhook": "Webhook"
   },
   "columnsfilter": {
     "title": "Filter Columns",
@@ -190,7 +198,7 @@
     "cancel": "Cancel",
     "okay": "Okay",
     "status": {
-      "local": "Export csv generated, files are saved in:",
+      "local": "Export csv generated, files are saved in: ",
       "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
     },
     "success": "Success",
@@ -242,6 +250,9 @@
     "filter_placeholder": "Filter...",
     "timezone_local": "Current timezone",
     "timezone_placeholder": "Search for timezones..."
+  },
+  "invoices":{
+    "title": "Invoices"
   },
   "ledgers":{
     "title": "Ledgers",
