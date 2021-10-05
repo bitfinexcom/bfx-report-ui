@@ -10,6 +10,7 @@ const JSONFormat = ({ content, children }) => {
 
   return (
     <Tooltip
+      placement='left'
       boundary='document.body'
       targetClassName='json-format-target'
       popoverClassName='json-format-popover'
