@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 import Tooltip from 'ui/Tooltip'
@@ -22,16 +22,16 @@ const JSONFormat = ({ content, children }) => {
 }
 
 JSONFormat.propTypes = {
+  content: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
   ]),
-  content: PropTypes.string,
 }
 
 JSONFormat.defaultProps = {
-  children: undefined,
   content: '',
+  children: undefined,
 }
 
-export default JSONFormat
+export default memo(JSONFormat)
