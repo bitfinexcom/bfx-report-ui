@@ -1,11 +1,7 @@
 .json-format {
+  width: 100%;
+  overflow: hidden;
   white-space: pre-wrap;
-
-  &-target {
-    width: 100%;
-  }
-
-  &-popover {
-    margin-left: 10px;
-  }
+  word-break: break-all;
+  max-width: calc(85vh - 20px);
 }

@@ -1,21 +1,20 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 import Tooltip from 'ui/Tooltip'
 
-const JSONFormat = (props) => {
-  const { content, children } = props
-
+const JSONFormat = ({ content, children }) => {
   if (!children) {
     return null
   }
 
   return (
     <Tooltip
-      content={<pre className='json-format'>{content}</pre>}
+      placement='left'
+      boundary='document.body'
       targetClassName='json-format-target'
       popoverClassName='json-format-popover'
-      boundary='window'
+      content={<pre className='json-format'>{content}</pre>}
     >
       {children}
     </Tooltip>
@@ -23,16 +22,16 @@ const JSONFormat = (props) => {
 }
 
 JSONFormat.propTypes = {
+  content: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
   ]),
-  content: PropTypes.string,
 }
 
 JSONFormat.defaultProps = {
-  children: undefined,
   content: '',
+  children: undefined,
 }
 
-export default JSONFormat
+export default memo(JSONFormat)
