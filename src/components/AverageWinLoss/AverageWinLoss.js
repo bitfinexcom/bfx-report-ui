@@ -16,6 +16,7 @@ import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
+import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import TimeRange from 'ui/TimeRange'
@@ -45,6 +46,11 @@ class AverageWinLoss extends PureComponent {
     setParams({ timeframe })
   }
 
+  handleUnrealizedProfitChange = (isUnrealizedProfitExcluded) => {
+    const { setParams } = this.props
+    setParams({ isUnrealizedProfitExcluded })
+  }
+
   hasChanges = () => {
     const { currentFetchParams, params } = this.props
     return !_isEqual(currentFetchParams, params)
@@ -56,7 +62,7 @@ class AverageWinLoss extends PureComponent {
       entries,
       dataReceived,
       pageLoading,
-      params: { timeframe },
+      params: { timeframe, isUnrealizedProfitExcluded },
       refresh,
       t,
     } = this.props
@@ -92,6 +98,15 @@ class AverageWinLoss extends PureComponent {
               <TimeFrameSelector
                 value={timeframe}
                 onChange={this.handleTimeframeChange}
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.unrealized-profits.title')}
+              </SectionHeaderItemLabel>
+              <UnrealizedProfitSelector
+                value={isUnrealizedProfitExcluded}
+                onChange={this.handleUnrealizedProfitChange}
               />
             </SectionHeaderItem>
 
