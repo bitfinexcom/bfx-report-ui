@@ -9,9 +9,11 @@ export const getTimeframe = state => getWinLoss(state).timeframe
 export const getParams = (state) => {
   const {
     timeframe,
+    isUnrealizedProfitExcluded,
   } = getWinLoss(state)
   return {
     timeframe,
+    isUnrealizedProfitExcluded,
   }
 }
 
