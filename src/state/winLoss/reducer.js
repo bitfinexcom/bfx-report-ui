@@ -1,17 +1,19 @@
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
+import unrealizedProfitConstants from 'ui/UnrealizedProfitSelector/constants'
 
 import { fetchFail } from 'state/reducers.helper'
 
 import types from './constants'
 
 export const initialState = {
-  currentFetchParams: {},
-  dataReceived: false,
-  pageLoading: false,
   entries: [],
+  pageLoading: false,
+  dataReceived: false,
+  currentFetchParams: {},
   timeframe: timeframeConstants.DAY,
+  isUnrealizedProfitExcluded: unrealizedProfitConstants.TRUE,
 }
 
 export function winLossReducer(state = initialState, action) {
@@ -23,8 +25,10 @@ export function winLossReducer(state = initialState, action) {
         pageLoading: true,
         currentFetchParams: {
           timeframe: state.timeframe,
+          isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
         },
         timeframe: state.timeframe,
+        isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
       }
     case types.UPDATE_WIN_LOSS: {
       if (!payload) {
