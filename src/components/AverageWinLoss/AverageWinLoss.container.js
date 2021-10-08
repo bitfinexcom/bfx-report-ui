@@ -1,7 +1,13 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
-import { fetchWinLoss, refresh, setParams } from 'state/winLoss/actions'
+import {
+  refresh,
+  setParams,
+  fetchWinLoss,
+} from 'state/winLoss/actions'
 import {
   getParams,
   getEntries,
@@ -26,6 +32,8 @@ const mapDispatchToProps = {
   fetchData: fetchWinLoss,
 }
 
-const AverageWinLossContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AverageWinLoss))
-
-export default AverageWinLossContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(AverageWinLoss)
