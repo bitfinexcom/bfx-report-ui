@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
@@ -126,4 +125,4 @@ class AverageWinLoss extends PureComponent {
 AverageWinLoss.propTypes = propTypes
 AverageWinLoss.defaultProps = defaultProps
 
-export default withTranslation('translations')(AverageWinLoss)
+export default AverageWinLoss
