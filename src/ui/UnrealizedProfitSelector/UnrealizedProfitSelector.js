@@ -27,7 +27,7 @@ const UnrealizedProfitSelector = ({ onChange, t, value }) => {
 
 UnrealizedProfitSelector.propTypes = {
   t: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
 }
 
