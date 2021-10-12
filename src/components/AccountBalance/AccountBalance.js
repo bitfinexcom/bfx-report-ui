@@ -17,6 +17,7 @@ import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
+import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
 
@@ -43,6 +44,11 @@ class AccountBalance extends PureComponent {
     setParams({ timeframe })
   }
 
+  handleUnrealizedProfitChange = (isUnrealizedProfitExcluded) => {
+    const { setParams } = this.props
+    setParams({ isUnrealizedProfitExcluded })
+  }
+
   hasChanges = () => {
     const { currentFetchParams: { timeframe: currTimeframe }, timeframe } = this.props
     return currTimeframe !== timeframe
@@ -56,6 +62,7 @@ class AccountBalance extends PureComponent {
       timeframe,
       pageLoading,
       dataReceived,
+      isUnrealizedProfitExcluded,
       currentFetchParams: { timeframe: currTimeframe },
     } = this.props
     const hasChanges = this.hasChanges()
@@ -94,6 +101,15 @@ class AccountBalance extends PureComponent {
               <TimeFrameSelector
                 value={timeframe}
                 onChange={this.handleTimeframeChange}
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.unrealized-profits.title')}
+              </SectionHeaderItemLabel>
+              <UnrealizedProfitSelector
+                value={isUnrealizedProfitExcluded}
+                onChange={this.handleUnrealizedProfitChange}
               />
             </SectionHeaderItem>
             <QueryButton
