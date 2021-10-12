@@ -113,7 +113,6 @@ class AverageWinLoss extends PureComponent {
                 onChange={this.handleUnrealizedProfitChange}
               />
             </SectionHeaderItem>
-
             <QueryButton
               onClick={this.handleQuery}
               disabled={!this.hasChanges()}

@@ -1,3 +1,1 @@
-import AverageWinLoss from './AverageWinLoss.container'
-
-export default AverageWinLoss
+export { default } from './AverageWinLoss.container'
