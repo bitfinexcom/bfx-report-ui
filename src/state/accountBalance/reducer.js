@@ -2,6 +2,7 @@ import authTypes from 'state/auth/constants'
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
 import { fetchFail } from 'state/reducers.helper'
 import timeRangeTypes from 'state/timeRange/constants'
+import unrealizedProfitConstants from 'ui/UnrealizedProfitSelector/constants'
 
 import types from './constants'
 
@@ -11,6 +12,7 @@ export const initialState = {
   entries: [],
   pageLoading: false,
   timeframe: timeframeConstants.DAY,
+  isUnrealizedProfitExcluded: unrealizedProfitConstants.TRUE,
 }
 
 export function balanceReducer(state = initialState, action) {
@@ -22,8 +24,10 @@ export function balanceReducer(state = initialState, action) {
         pageLoading: true,
         currentFetchParams: {
           timeframe: state.timeframe,
+          isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
         },
         timeframe: state.timeframe,
+        isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
       }
     case types.UPDATE_BALANCE: {
       return {
