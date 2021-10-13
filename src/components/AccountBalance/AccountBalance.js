@@ -50,8 +50,16 @@ class AccountBalance extends PureComponent {
   }
 
   hasChanges = () => {
-    const { currentFetchParams: { timeframe: currTimeframe }, timeframe } = this.props
+    const {
+      timeframe,
+      isUnrealizedProfitExcluded,
+      currentFetchParams: {
+        timeframe: currTimeframe,
+        isUnrealizedProfitExcluded: currUnrealizedProfitState,
+      },
+    } = this.props
     return currTimeframe !== timeframe
+      || currUnrealizedProfitState !== isUnrealizedProfitExcluded
   }
 
   render() {
