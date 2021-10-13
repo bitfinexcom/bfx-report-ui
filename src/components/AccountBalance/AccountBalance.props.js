@@ -7,6 +7,7 @@ const BALANCE_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   currentFetchParams: PropTypes.object.isRequired,
   dataReceived: PropTypes.bool.isRequired,
+  isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
   entries: PropTypes.arrayOf(BALANCE_ENTRIES_PROPS).isRequired,
   fetchData: PropTypes.func.isRequired,
   pageLoading: PropTypes.bool.isRequired,
