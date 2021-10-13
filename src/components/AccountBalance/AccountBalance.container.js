@@ -14,6 +14,7 @@ import {
   getPageLoading,
   getDataReceived,
   getCurrentFetchParams,
+  getIsUnrealizedProfitExcluded,
 } from 'state/accountBalance/selectors'
 
 import AccountBalance from './AccountBalance'
@@ -24,6 +25,7 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   currentFetchParams: getCurrentFetchParams(state),
+  isUnrealizedProfitExcluded: getIsUnrealizedProfitExcluded(state),
 })
 
 const mapDispatchToProps = {
