@@ -10,8 +10,8 @@ const { TRUE, FALSE } = constants
 
 const UnrealizedProfitSelector = ({ onChange, t, value }) => {
   const items = [
-    { value: TRUE, label: t('selector.unrealized-profits.yes') },
-    { value: FALSE, label: t('selector.unrealized-profits.no') },
+    { value: FALSE, label: t('selector.unrealized-profits.yes') },
+    { value: TRUE, label: t('selector.unrealized-profits.no') },
   ]
 
   return (
