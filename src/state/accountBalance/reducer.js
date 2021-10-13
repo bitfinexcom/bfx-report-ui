@@ -12,7 +12,7 @@ export const initialState = {
   entries: [],
   pageLoading: false,
   timeframe: timeframeConstants.DAY,
-  isUnrealizedProfitExcluded: unrealizedProfitConstants.TRUE,
+  isUnrealizedProfitExcluded: unrealizedProfitConstants.FALSE,
 }
 
 export function balanceReducer(state = initialState, action) {
