@@ -99,7 +99,9 @@ class AccountBalance extends PureComponent {
         className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader>
-          <SectionHeaderTitle>{t('accountbalance.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('accountbalance.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
