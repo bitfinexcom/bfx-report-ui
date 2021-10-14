@@ -13,7 +13,7 @@ export const initialState = {
   dataReceived: false,
   currentFetchParams: {},
   timeframe: timeframeConstants.DAY,
-  isUnrealizedProfitExcluded: unrealizedProfitConstants.TRUE,
+  isUnrealizedProfitExcluded: unrealizedProfitConstants.FALSE,
 }
 
 export function winLossReducer(state = initialState, action) {
