@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch, { match }) => {
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation('translations'),
   withRouter,
+  withTranslation('translations'),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Snapshot)
