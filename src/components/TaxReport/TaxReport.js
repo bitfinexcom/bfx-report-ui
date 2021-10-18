@@ -5,8 +5,8 @@ import {
   SectionHeader,
   SectionHeaderTitle,
 } from 'ui/SectionHeader'
-import NavSwitcher from 'ui/NavSwitcher'
 import TimeRange from 'ui/TimeRange'
+import NavSwitcher from 'ui/NavSwitcher'
 
 import Result from './Result'
 import Snapshot from './Snapshot'
@@ -68,7 +68,9 @@ class TaxReport extends PureComponent {
         className='tax-report col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader>
-          <SectionHeaderTitle>{t('taxreport.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('taxreport.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
         </SectionHeader>
 
