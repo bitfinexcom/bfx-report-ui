@@ -22,8 +22,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchTaxReport,
   refresh,
+  fetchData: fetchTaxReport,
 }
 
 export default compose(

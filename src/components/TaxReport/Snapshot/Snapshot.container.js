@@ -16,21 +16,21 @@ const mapStateToProps = (state, { match }) => {
   const { section: snapshotSection } = match.params
   return {
     data: getSnapshot(state, snapshotSection),
-    dataReceived: getSnapshotDataReceived(state, snapshotSection),
     pageLoading: getSnapshotPageLoading(state, snapshotSection),
+    dataReceived: getSnapshotDataReceived(state, snapshotSection),
   }
 }
 
 const mapDispatchToProps = (dispatch, { match }) => {
   const { section: snapshotSection } = match.params
   return {
-    fetchData: () => dispatch(fetchTaxReportSnapshot(snapshotSection)),
     refresh: () => dispatch(refresh({ section: snapshotSection })),
+    fetchData: () => dispatch(fetchTaxReportSnapshot(snapshotSection)),
   }
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation('translations'),
   withRouter,
+  withTranslation('translations'),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Snapshot)

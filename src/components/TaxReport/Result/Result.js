@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react'
 import _isNumber from 'lodash/isNumber'
 
+import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
-import NoData from 'ui/NoData'
 import { fixedFloat } from 'ui/utils'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
-import getMovementsColumns from 'components/Movements/Movements.columns'
 import { getFrameworkPositionsColumns } from 'utils/columns'
+import getMovementsColumns from 'components/Movements/Movements.columns'
 
 import { propTypes } from './Result.props'
 import getBalancesColumns from './Balances.columns'
@@ -27,9 +27,9 @@ class Result extends PureComponent {
 
   getPositionsSnapshot = ({ positions, title }) => {
     const {
-      getFullTime,
-      timeOffset,
       t,
+      timeOffset,
+      getFullTime,
     } = this.props
 
     if (!positions.length) {
@@ -37,10 +37,10 @@ class Result extends PureComponent {
     }
 
     const positionsColumns = getFrameworkPositionsColumns({
-      filteredData: positions,
-      getFullTime,
       t,
       timeOffset,
+      getFullTime,
+      filteredData: positions,
     })
 
     return (
@@ -62,15 +62,15 @@ class Result extends PureComponent {
     }
 
     const {
-      walletsTotalBalanceUsd,
-      positionsTotalPlUsd,
       totalResult,
+      positionsTotalPlUsd,
+      walletsTotalBalanceUsd,
     } = balances
 
     const balancesColumns = getBalancesColumns({
-      walletsTotalBalanceUsd,
-      positionsTotalPlUsd,
       totalResult,
+      positionsTotalPlUsd,
+      walletsTotalBalanceUsd,
     })
 
     return (
@@ -88,20 +88,20 @@ class Result extends PureComponent {
 
   getMovements = () => {
     const {
-      data,
-      getFullTime,
-      timeOffset,
       t,
+      data,
+      timeOffset,
+      getFullTime,
     } = this.props
     const {
       movements,
     } = data.finalState
 
     const movementsColumns = getMovementsColumns({
-      filteredData: movements,
-      getFullTime,
       t,
       timeOffset,
+      getFullTime,
+      filteredData: movements,
     })
 
     return (
@@ -120,9 +120,9 @@ class Result extends PureComponent {
 
   isBalancesEmpty = (balances) => {
     const {
-      walletsTotalBalanceUsd,
-      positionsTotalPlUsd,
       totalResult,
+      positionsTotalPlUsd,
+      walletsTotalBalanceUsd,
     } = balances
 
     return !_isNumber(walletsTotalBalanceUsd)
@@ -137,10 +137,10 @@ class Result extends PureComponent {
 
   render() {
     const {
-      data,
-      dataReceived,
-      pageLoading,
       t,
+      data,
+      pageLoading,
+      dataReceived,
     } = this.props
     const {
       startingPositionsSnapshot,
