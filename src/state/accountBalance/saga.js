@@ -20,11 +20,13 @@ export const getReqBalance = params => makeFetchCall('getBalanceHistory', params
 export function* fetchAccountBalance() {
   try {
     const timeframe = yield select(selectors.getTimeframe)
+    const isUnrealizedProfitExcluded = yield select(selectors.getIsUnrealizedProfitExcluded)
     const { start, end } = yield select(getTimeFrame)
     const params = {
-      timeframe,
       start,
       end,
+      timeframe,
+      isUnrealizedProfitExcluded,
     }
     const { result = [], error } = yield call(getReqBalance, params)
     yield put(actions.updateBalance(result))

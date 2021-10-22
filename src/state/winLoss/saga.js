@@ -20,12 +20,13 @@ export const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
 export function* fetchWinLoss() {
   try {
     const { start, end } = yield select(getTimeFrame)
-    const { timeframe } = yield select(selectors.getParams)
+    const { timeframe, isUnrealizedProfitExcluded } = yield select(selectors.getParams)
 
     const { result = [], error } = yield call(getReqWinLoss, {
       start,
       end,
       timeframe,
+      isUnrealizedProfitExcluded,
     })
     yield put(actions.updateWinLoss(result))
 

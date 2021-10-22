@@ -1,24 +1,24 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
-import parseChartData from 'ui/Charts/Charts.helpers'
-import TimeFrameSelector from 'ui/TimeFrameSelector'
+import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import TimeRange from 'ui/TimeRange'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
+import parseChartData from 'ui/Charts/Charts.helpers'
+import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
 
@@ -45,6 +45,11 @@ class AverageWinLoss extends PureComponent {
     setParams({ timeframe })
   }
 
+  handleUnrealizedProfitChange = (isUnrealizedProfitExcluded) => {
+    const { setParams } = this.props
+    setParams({ isUnrealizedProfitExcluded })
+  }
+
   hasChanges = () => {
     const { currentFetchParams, params } = this.props
     return !_isEqual(currentFetchParams, params)
@@ -52,13 +57,13 @@ class AverageWinLoss extends PureComponent {
 
   render() {
     const {
-      currentFetchParams: { timeframe: currTimeframe },
-      entries,
-      dataReceived,
-      pageLoading,
-      params: { timeframe },
-      refresh,
       t,
+      entries,
+      refresh,
+      pageLoading,
+      dataReceived,
+      currentFetchParams: { timeframe: currTimeframe },
+      params: { timeframe, isUnrealizedProfitExcluded },
     } = this.props
 
     const { chartData, presentCurrencies } = parseChartData({
@@ -80,9 +85,14 @@ class AverageWinLoss extends PureComponent {
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('averagewinloss.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('averagewinloss.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -94,10 +104,18 @@ class AverageWinLoss extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.unrealized-profits.title')}
+              </SectionHeaderItemLabel>
+              <UnrealizedProfitSelector
+                value={isUnrealizedProfitExcluded}
+                onChange={this.handleUnrealizedProfitChange}
+              />
+            </SectionHeaderItem>
             <QueryButton
-              disabled={!this.hasChanges()}
               onClick={this.handleQuery}
+              disabled={!this.hasChanges()}
             />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
@@ -111,4 +129,4 @@ class AverageWinLoss extends PureComponent {
 AverageWinLoss.propTypes = propTypes
 AverageWinLoss.defaultProps = defaultProps
 
-export default withTranslation('translations')(AverageWinLoss)
+export default AverageWinLoss

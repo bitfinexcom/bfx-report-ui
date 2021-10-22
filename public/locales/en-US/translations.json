@@ -391,6 +391,11 @@
       "symbol": "Symbol Filter",
       "pair": "Pair Filter",
       "category": "Category Filter"
+    },
+    "unrealized-profits": {
+      "title": "Show Unrealized Profits",
+      "yes": "Yes",
+      "no": "No"
     }
   },
   "snapshots": {
