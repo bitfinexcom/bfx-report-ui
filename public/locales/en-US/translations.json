@@ -392,6 +392,11 @@
       "pair": "Pair Filter",
       "category": "Category Filter"
     },
+    "report-type": {
+      "title": "Select Report Type",
+      "win_loss": "Win/Loss",
+      "win_loss_vs_acc_balance": "Win/Loss vs Account Balance"
+    },
     "unrealized-profits": {
       "title": "Show Unrealized Profits",
       "yes": "Yes",
