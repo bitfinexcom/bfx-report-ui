@@ -18,6 +18,7 @@ import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
+import ReportTypeSelector from 'ui/ReportTypeSelector'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
@@ -48,6 +49,11 @@ class AverageWinLoss extends PureComponent {
   handleUnrealizedProfitChange = (isUnrealizedProfitExcluded) => {
     const { setParams } = this.props
     setParams({ isUnrealizedProfitExcluded })
+  }
+
+  handleReportTypeChange = (isVsAccountBalanceSelected) => {
+    const { setParams } = this.props
+    setParams({ isVsAccountBalanceSelected })
   }
 
   hasChanges = () => {
@@ -109,6 +115,15 @@ class AverageWinLoss extends PureComponent {
                 {t('selector.unrealized-profits.title')}
               </SectionHeaderItemLabel>
               <UnrealizedProfitSelector
+                value={isUnrealizedProfitExcluded}
+                onChange={this.handleUnrealizedProfitChange}
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.report-type.title')}
+              </SectionHeaderItemLabel>
+              <ReportTypeSelector
                 value={isUnrealizedProfitExcluded}
                 onChange={this.handleUnrealizedProfitChange}
               />
