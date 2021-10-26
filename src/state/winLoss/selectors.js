@@ -11,10 +11,12 @@ export const getParams = (state) => {
   const {
     timeframe,
     isUnrealizedProfitExcluded,
+    isVsAccountBalanceSelected,
   } = getWinLoss(state)
   return {
     timeframe,
     isUnrealizedProfitExcluded,
+    isVsAccountBalanceSelected,
   }
 }
 
