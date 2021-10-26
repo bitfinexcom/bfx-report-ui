@@ -18,6 +18,10 @@
     width: 160px;
   }
 
+  &--report-type .bp3-button {
+    width: 250px;
+  }
+
   &--timeframe .bp3-button {
     width: 100px;
   }
@@ -55,6 +59,14 @@
 
     &--unrealized-profit .bp3-popover-content {
       width: 160px;
+
+      .bp3-menu {
+        min-width: unset;
+      }
+    }
+
+    &--report-type .bp3-popover-content {
+      width: 250px;
 
       .bp3-menu {
         min-width: unset;
