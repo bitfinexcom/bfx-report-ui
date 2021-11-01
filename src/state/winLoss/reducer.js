@@ -28,9 +28,11 @@ export function winLossReducer(state = initialState, action) {
         currentFetchParams: {
           timeframe: state.timeframe,
           isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
+          isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
         },
         timeframe: state.timeframe,
         isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
+        isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
       }
     case types.UPDATE_WIN_LOSS: {
       if (!payload) {
