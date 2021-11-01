@@ -69,7 +69,11 @@ class AverageWinLoss extends PureComponent {
       pageLoading,
       dataReceived,
       currentFetchParams: { timeframe: currTimeframe },
-      params: { timeframe, isUnrealizedProfitExcluded },
+      params: {
+        timeframe,
+        isUnrealizedProfitExcluded,
+        isVsAccountBalanceSelected,
+      },
     } = this.props
 
     const { chartData, presentCurrencies } = parseChartData({
@@ -124,8 +128,8 @@ class AverageWinLoss extends PureComponent {
                 {t('selector.report-type.title')}
               </SectionHeaderItemLabel>
               <ReportTypeSelector
-                value={isUnrealizedProfitExcluded}
-                onChange={this.handleUnrealizedProfitChange}
+                value={isVsAccountBalanceSelected}
+                onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
             <QueryButton
