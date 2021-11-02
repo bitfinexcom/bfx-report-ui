@@ -68,7 +68,9 @@ class AverageWinLoss extends PureComponent {
       refresh,
       pageLoading,
       dataReceived,
-      currentFetchParams: { timeframe: currTimeframe },
+      currentFetchParams: {
+        timeframe: currTimeframe,
+      },
       params: {
         timeframe,
         isUnrealizedProfitExcluded,
