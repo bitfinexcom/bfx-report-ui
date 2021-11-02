@@ -27,30 +27,18 @@ export function* fetchWinLoss() {
       isVsAccountBalanceSelected,
     } = yield select(selectors.getParams)
 
-    if (isVsAccountBalanceSelected) {
-      const { result = [], error } = yield call(getReqWinLossVSAccountBalance, {
-        start,
-        end,
-        timeframe,
-        isUnrealizedProfitExcluded,
-      })
-      yield put(actions.updateWinLoss(result))
+    const { result = [], error } = yield call((isVsAccountBalanceSelected
+      ? getReqWinLossVSAccountBalance
+      : getReqWinLoss), {
+      start,
+      end,
+      timeframe,
+      isUnrealizedProfitExcluded,
+    })
+    yield put(actions.updateWinLoss(result))
 
-      if (error) {
-        yield put(toggleErrorDialog(true, error.message))
-      }
-    } else {
-      const { result = [], error } = yield call(getReqWinLoss, {
-        start,
-        end,
-        timeframe,
-        isUnrealizedProfitExcluded,
-      })
-      yield put(actions.updateWinLoss(result))
-
-      if (error) {
-        yield put(toggleErrorDialog(true, error.message))
-      }
+    if (error) {
+      yield put(toggleErrorDialog(true, error.message))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
