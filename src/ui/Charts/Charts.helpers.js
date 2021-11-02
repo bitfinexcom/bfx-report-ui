@@ -43,6 +43,26 @@ const parseChartData = ({ data, timeframe }) => {
   }
 }
 
+export const parseVSAccBalanceChartData = ({ data, timeframe, t }) => {
+  const chartData = data.map((entry) => {
+    const { mts } = entry
+
+    return {
+      name: formatTimestamp(mts, timeframe),
+      [CURRENCY_USD]: formatValue(entry[CURRENCY_USD]),
+      cumulative: formatValue(entry.cumulative),
+      perc: formatValue(entry.perc),
+    }
+  })
+
+  return {
+    chartData,
+    dataKeys: [
+      { key: 'perc', name: t('charts.percentage') },
+    ],
+  }
+}
+
 export const parseLoanReportChartData = ({ data, timeframe, t }) => {
   const chartData = data.map((entry) => {
     const { mts } = entry
