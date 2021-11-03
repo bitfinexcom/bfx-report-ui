@@ -27,7 +27,7 @@ const formatTimestamp = (timestamp, timeframe) => {
   }
 }
 
-const parseChartData = ({ data, timeframe }) => {
+export const parseChartData = ({ data, timeframe }) => {
   const chartData = data.map((entry) => {
     const { mts } = entry
 
@@ -49,8 +49,6 @@ export const parseVSAccBalanceChartData = ({ data, timeframe, t }) => {
 
     return {
       name: formatTimestamp(mts, timeframe),
-      [CURRENCY_USD]: formatValue(entry[CURRENCY_USD]),
-      cumulative: formatValue(entry.cumulative),
       perc: formatValue(entry.perc),
     }
   })
