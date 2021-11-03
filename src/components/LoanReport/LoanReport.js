@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
@@ -131,4 +130,4 @@ class LoanReport extends PureComponent {
 LoanReport.propTypes = propTypes
 LoanReport.defaultProps = defaultProps
 
-export default withTranslation('translations')(LoanReport)
+export default LoanReport
