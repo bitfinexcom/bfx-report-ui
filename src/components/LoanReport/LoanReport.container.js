@@ -1,3 +1,4 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -38,6 +39,7 @@ const mapDispatchToProps = {
   setTargetSymbols,
 }
 
-const LoanReportContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(LoanReport))
-
-export default LoanReportContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+)(LoanReport)
