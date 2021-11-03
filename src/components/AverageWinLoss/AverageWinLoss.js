@@ -17,7 +17,10 @@ import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
-import parseChartData from 'ui/Charts/Charts.helpers'
+import {
+  parseChartData,
+  parseVSAccBalanceChartData,
+} from 'ui/Charts/Charts.helpers'
 import ReportTypeSelector from 'ui/ReportTypeSelector'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
@@ -26,6 +29,23 @@ import { checkFetch, checkInit } from 'state/utils'
 import { propTypes, defaultProps } from './AverageWinLoss.props'
 
 const TYPE = queryConstants.MENU_WIN_LOSS
+
+const prepareChartData = (entries, t, timeframe, isVSAccBalanceData) => {
+  if (isVSAccBalanceData) {
+    const { chartData, dataKeys } = parseVSAccBalanceChartData({
+      data: _sortBy(entries, ['mts']),
+      timeframe,
+      t,
+    })
+    return { chartData, dataKeys }
+  }
+
+  const { chartData, presentCurrencies } = parseChartData({
+    data: _sortBy(entries, ['mts']),
+    timeframe,
+  })
+  return { chartData, dataKeys: presentCurrencies }
+}
 
 class AverageWinLoss extends PureComponent {
   componentDidMount() {
@@ -78,10 +98,19 @@ class AverageWinLoss extends PureComponent {
       },
     } = this.props
 
-    const { chartData, presentCurrencies } = parseChartData({
-      data: _sortBy(entries, ['mts']),
-      timeframe: currTimeframe,
-    })
+    // const { chartData, presentCurrencies } = parseChartData({
+    //   data: _sortBy(entries, ['mts']),
+    //   timeframe: currTimeframe,
+    // })
+
+    // const { chartData, dataKeys } = parseVSAccBalanceChartData({
+    //   data: _sortBy(entries, ['mts']),
+    //   timeframe: currTimeframe,
+    //   t,
+    // })
+    const { chartData, dataKeys } = prepareChartData(
+      entries, t, currTimeframe, isVsAccountBalanceSelected,
+    )
 
     let showContent
     if (!dataReceived && pageLoading) {
@@ -92,7 +121,8 @@ class AverageWinLoss extends PureComponent {
       showContent = (
         <Chart
           data={chartData}
-          dataKeys={presentCurrencies}
+          // dataKeys={presentCurrencies}
+          dataKeys={dataKeys}
         />
       )
     }
