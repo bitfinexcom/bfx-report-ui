@@ -67,18 +67,23 @@ class PieChart extends PureComponent {
     const { data } = this.props
 
     return (
-      <SimplePieChart width={282} height={340}>
+      <SimplePieChart
+        width={282}
+        height={340}
+      >
         <Pie
           data={data}
           dataKey='value'
           labelLine={false}
-          label={renderCustomizedLabel}
           outerRadius={140}
-
+          label={renderCustomizedLabel}
         >
           {data.map((entry, index) => <Cell key={entry.name} fill={this.getColor(index)} />)}
         </Pie>
-        <Legend verticalAlign='top' wrapperStyle={{ paddingBottom: 15 }} />
+        <Legend
+          verticalAlign='top'
+          wrapperStyle={{ paddingBottom: 15 }}
+        />
       </SimplePieChart>
     )
   }
