@@ -30,7 +30,9 @@ import { propTypes, defaultProps } from './AverageWinLoss.props'
 
 const TYPE = queryConstants.MENU_WIN_LOSS
 
-const prepareChartData = (entries, t, timeframe, isVSAccBalanceData) => {
+const prepareChartData = (
+  entries, timeframe, isVSAccBalanceData, t,
+) => {
   if (isVSAccBalanceData) {
     const { chartData, dataKeys } = parseVSAccBalanceChartData({
       data: _sortBy(entries, ['mts']),
@@ -98,18 +100,8 @@ class AverageWinLoss extends PureComponent {
       },
     } = this.props
 
-    // const { chartData, presentCurrencies } = parseChartData({
-    //   data: _sortBy(entries, ['mts']),
-    //   timeframe: currTimeframe,
-    // })
-
-    // const { chartData, dataKeys } = parseVSAccBalanceChartData({
-    //   data: _sortBy(entries, ['mts']),
-    //   timeframe: currTimeframe,
-    //   t,
-    // })
     const { chartData, dataKeys } = prepareChartData(
-      entries, t, currTimeframe, isVsAccountBalanceSelected,
+      entries, currTimeframe, isVsAccountBalanceSelected, t,
     )
 
     let showContent
