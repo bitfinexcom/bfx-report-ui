@@ -113,7 +113,6 @@ class AverageWinLoss extends PureComponent {
       showContent = (
         <Chart
           data={chartData}
-          // dataKeys={presentCurrencies}
           dataKeys={dataKeys}
         />
       )
