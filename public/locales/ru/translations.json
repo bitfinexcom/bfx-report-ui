@@ -61,7 +61,8 @@
   },
   "charts": {
     "cumulative": "Суммарный",
-    "percentage": "Проценты"
+    "percentage": "Проценты",
+    "percent": "%"
   },
   "column": {
     "actual-price": "Актуальная цена",
