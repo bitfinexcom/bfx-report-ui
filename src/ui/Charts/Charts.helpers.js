@@ -78,7 +78,7 @@ export const parseLoanReportChartData = ({ data, timeframe, t }) => {
     dataKeys: [
       CURRENCY_USD,
       { key: 'cumulative', name: t('charts.cumulative') },
-      { key: 'perc', name: t('charts.percentage') },
+      { key: 'perc', name: t('charts.percent') },
     ],
   }
 }
