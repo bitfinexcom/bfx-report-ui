@@ -61,7 +61,6 @@
   },
   "charts": {
     "cumulative": "累计",
-    "percentage": "百分比",
     "percent": "%"
   },
   "column": {

@@ -61,7 +61,6 @@
   },
   "charts": {
     "cumulative": "Cumulative",
-    "percentage": "Percentage",
     "percent": "%"
   },
   "column": {
