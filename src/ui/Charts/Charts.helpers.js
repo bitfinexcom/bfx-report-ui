@@ -56,7 +56,7 @@ export const parseVSAccBalanceChartData = ({ data, timeframe, t }) => {
   return {
     chartData,
     dataKeys: [
-      { key: 'perc', name: t('charts.percentage') },
+      { key: 'perc', name: t('charts.percent') },
     ],
   }
 }
