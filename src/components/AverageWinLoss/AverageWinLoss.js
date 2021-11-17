@@ -17,7 +17,11 @@ import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
-import parseChartData from 'ui/Charts/Charts.helpers'
+import {
+  parseChartData,
+  parseVSAccBalanceChartData,
+} from 'ui/Charts/Charts.helpers'
+import ReportTypeSelector from 'ui/ReportTypeSelector'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
@@ -25,6 +29,25 @@ import { checkFetch, checkInit } from 'state/utils'
 import { propTypes, defaultProps } from './AverageWinLoss.props'
 
 const TYPE = queryConstants.MENU_WIN_LOSS
+
+const prepareChartData = (
+  entries, timeframe, isVSAccBalanceData, t,
+) => {
+  if (isVSAccBalanceData) {
+    const { chartData, dataKeys } = parseVSAccBalanceChartData({
+      data: _sortBy(entries, ['mts']),
+      timeframe,
+      t,
+    })
+    return { chartData, dataKeys }
+  }
+
+  const { chartData, presentCurrencies } = parseChartData({
+    data: _sortBy(entries, ['mts']),
+    timeframe,
+  })
+  return { chartData, dataKeys: presentCurrencies }
+}
 
 class AverageWinLoss extends PureComponent {
   componentDidMount() {
@@ -50,6 +73,11 @@ class AverageWinLoss extends PureComponent {
     setParams({ isUnrealizedProfitExcluded })
   }
 
+  handleReportTypeChange = (isVsAccountBalanceSelected) => {
+    const { setParams } = this.props
+    setParams({ isVsAccountBalanceSelected })
+  }
+
   hasChanges = () => {
     const { currentFetchParams, params } = this.props
     return !_isEqual(currentFetchParams, params)
@@ -62,14 +90,19 @@ class AverageWinLoss extends PureComponent {
       refresh,
       pageLoading,
       dataReceived,
-      currentFetchParams: { timeframe: currTimeframe },
-      params: { timeframe, isUnrealizedProfitExcluded },
+      currentFetchParams: {
+        timeframe: currTimeframe,
+      },
+      params: {
+        timeframe,
+        isUnrealizedProfitExcluded,
+        isVsAccountBalanceSelected,
+      },
     } = this.props
 
-    const { chartData, presentCurrencies } = parseChartData({
-      data: _sortBy(entries, ['mts']),
-      timeframe: currTimeframe,
-    })
+    const { chartData, dataKeys } = prepareChartData(
+      entries, currTimeframe, isVsAccountBalanceSelected, t,
+    )
 
     let showContent
     if (!dataReceived && pageLoading) {
@@ -80,7 +113,7 @@ class AverageWinLoss extends PureComponent {
       showContent = (
         <Chart
           data={chartData}
-          dataKeys={presentCurrencies}
+          dataKeys={dataKeys}
         />
       )
     }
@@ -111,6 +144,15 @@ class AverageWinLoss extends PureComponent {
               <UnrealizedProfitSelector
                 value={isUnrealizedProfitExcluded}
                 onChange={this.handleUnrealizedProfitChange}
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.report-type.title')}
+              </SectionHeaderItemLabel>
+              <ReportTypeSelector
+                value={isVsAccountBalanceSelected}
+                onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
             <QueryButton

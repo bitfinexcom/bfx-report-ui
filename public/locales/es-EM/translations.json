@@ -61,7 +61,7 @@
   },
   "charts": {
     "cumulative": "Acumulativo",
-    "percentage": "Porcentaje"
+    "percent": "%"
   },
   "column": {
     "actual-price": "Precio Actual",

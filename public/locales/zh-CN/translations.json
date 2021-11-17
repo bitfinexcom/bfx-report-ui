@@ -61,7 +61,7 @@
   },
   "charts": {
     "cumulative": "累计",
-    "percentage": "百分比"
+    "percent": "%"
   },
   "column": {
     "actual-price": "实际价格",

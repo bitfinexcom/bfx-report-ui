@@ -15,14 +15,21 @@ import actions from './actions'
 import selectors from './selectors'
 
 export const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
+export const getReqWinLossVSAccountBalance = params => makeFetchCall('getWinLossVSAccountBalance', params)
 
 /* eslint-disable-next-line consistent-return */
 export function* fetchWinLoss() {
   try {
     const { start, end } = yield select(getTimeFrame)
-    const { timeframe, isUnrealizedProfitExcluded } = yield select(selectors.getParams)
+    const {
+      timeframe,
+      isUnrealizedProfitExcluded,
+      isVsAccountBalanceSelected,
+    } = yield select(selectors.getParams)
 
-    const { result = [], error } = yield call(getReqWinLoss, {
+    const { result = [], error } = yield call((isVsAccountBalanceSelected
+      ? getReqWinLossVSAccountBalance
+      : getReqWinLoss), {
       start,
       end,
       timeframe,

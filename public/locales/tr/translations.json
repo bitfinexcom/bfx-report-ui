@@ -61,7 +61,7 @@
   },
   "charts": {
     "cumulative": "Kümülatif",
-    "percentage": "Yüzde"
+    "percent": "%"
   },
   "column": {
     "actual-price": "Gerçek Fiyat",
