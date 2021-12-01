@@ -8,7 +8,9 @@ export * from './mapping'
 // BTCUSD -> tBTCUSD
 // BTCF0:USDF0 -> tBTCF0:USDF0
 // USD -> fUSD
-const addPrefix = (symbol = '') => (symbol.length < 6 ? `f${symbol}` : `t${symbol}`)
+const addPrefix = (symbol = '', isFunding = false) => (
+  (isFunding || symbol.length < 6) ? `f${symbol}` : `t${symbol}`
+)
 
 const hasPrefix = pair => pair.charAt(0) === 't' || pair.charAt(0) === 'f'
 export const removePrefix = pair => (hasPrefix(pair) ? pair.substr(1) : pair)
@@ -67,10 +69,10 @@ const deformatPair = pair => ((pair.length === 7) ? pair.replace(':', '') : pair
 // USD -> fUSD
 // ['USD'] -> 'fUSD'
 // ['USD', 'BTC'] -> ['fUSD', 'fBTC']
-export const formatRawSymbols = (symbols) => {
+export const formatRawSymbols = (symbols, isFunding) => {
   const symbolsArray = _castArray(symbols)
     .map(deformatPair)
-    .map(addPrefix)
+    .map((symbol) => addPrefix(symbol, isFunding))
 
   return symbolsArray.length > 1
     ? symbolsArray
