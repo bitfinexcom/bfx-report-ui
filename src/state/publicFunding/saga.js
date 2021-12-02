@@ -22,6 +22,7 @@ import { getPublicFunding } from './selectors'
 
 const TYPE = queryTypes.MENU_PUBLIC_FUNDING
 const LIMIT = getQueryLimit(TYPE)
+const isFunding = true
 
 function getReqPublicFunding({
   start,
@@ -34,7 +35,7 @@ function getReqPublicFunding({
     end,
     limit: LIMIT,
     filter,
-    symbol: formatRawSymbols(mapRequestSymbols(targetSymbol, true)),
+    symbol: formatRawSymbols(mapRequestSymbols(targetSymbol, true), isFunding),
   }
   return makeFetchCall('getPublicTrades', params)
 }
