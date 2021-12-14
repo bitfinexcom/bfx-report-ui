@@ -1,7 +1,6 @@
 .json-format {
-  width: 100%;
+  width: #{"max(500px, 40vw);"};
   overflow: hidden;
   white-space: pre-wrap;
   word-break: break-all;
-  max-width: calc(85vh - 20px);
 }
