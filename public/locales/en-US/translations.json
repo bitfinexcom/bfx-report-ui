@@ -23,6 +23,8 @@
   "auth": {
     "auth": "Auth",
     "title": "Login",
+    "simpleAccounts": "Simple Accounts",
+    "multipleAccounts": "Multiple Accounts",
     "signUp": "Sign Up",
     "signIn": "Sign In",
     "passwordRecovery": "Password Recovery",
