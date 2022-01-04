@@ -4,3 +4,9 @@
   white-space: pre-wrap;
   word-break: break-all;
 }
+
+@media screen and (max-width: 767px) {
+  .json-format-popover {
+    display: none;
+  }
+}
