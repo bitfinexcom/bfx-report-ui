@@ -45,6 +45,18 @@ class Auth extends PureComponent {
     this.setState({ mode })
   }
 
+  getAuthTabContent = (mode) => {
+    switch (mode) {
+      case MODES.SIGN_UP:
+      default:
+        return <SignUp switchMode={this.switchMode} />
+      case MODES.SIGN_IN:
+        return <SignIn switchMode={this.switchMode} />
+      case MODES.PASSWORD_RECOVERY:
+        return <PasswordRecovery switchMode={this.switchMode} />
+    }
+  }
+
   render() {
     const {
       authData: { hasAuthData },
