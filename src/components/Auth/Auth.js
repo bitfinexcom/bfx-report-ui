@@ -11,6 +11,8 @@ import PasswordRecovery from './PasswordRecovery'
 import { propTypes, defaultProps } from './Auth.props'
 
 export const MODES = {
+  SIMPLE_ACCOUNTS: 'simpleAccounts',
+  MULTIPLE_ACCOUNTS: 'multipleAccounts',
   SIGN_UP: 'sign_up',
   SIGN_IN: 'sign_in',
   PASSWORD_RECOVERY: 'password_recovery',
