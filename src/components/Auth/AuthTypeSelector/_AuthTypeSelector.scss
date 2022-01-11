@@ -1,0 +1,22 @@
+.auth-type-selector {
+  .nav-switcher{
+    margin-bottom: 10px;
+    border-bottom: none;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    
+    &-item {
+      display: flex;
+      justify-content: center;
+      width: 50%;
+      margin-bottom: 0;
+
+      &:not(:last-child){
+        margin-right: 0;
+      } 
+    }
+  }
+}
+
+
