@@ -14,6 +14,7 @@ import PlatformLogo from 'ui/PlatformLogo'
 import config from 'config'
 
 import { propTypes, defaultProps } from './SignUp.props'
+import AuthTypeSelector from '../AuthTypeSelector'
 import InputKey from '../InputKey'
 import ErrorLabel from '../ErrorLabel'
 import { MODES } from '../Auth'
@@ -126,8 +127,10 @@ class SignUp extends PureComponent {
 
   render() {
     const {
+      authType,
       loading,
       switchMode,
+      switchAuthType,
       t,
       users,
     } = this.props
@@ -162,6 +165,10 @@ class SignUp extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
+          <AuthTypeSelector
+            authType={authType}
+            switchAuthType={switchAuthType}
+          />
           <PlatformLogo />
           <Callout>
             {t('auth.note1')}

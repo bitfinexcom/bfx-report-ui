@@ -15,6 +15,7 @@ import Select from 'ui/Select'
 import { propTypes, defaultProps } from './SignIn.props'
 import InputKey from '../InputKey'
 import { MODES } from '../Auth'
+import AuthTypeSelector from '../AuthTypeSelector'
 
 class SignIn extends PureComponent {
   static propTypes = propTypes
@@ -94,8 +95,10 @@ class SignIn extends PureComponent {
   render() {
     const {
       authData: { isPersisted, isSubAccount },
+      authType,
       isElectronBackendLoaded,
       loading,
+      switchAuthType,
       switchMode,
       t,
       users,
@@ -117,6 +120,10 @@ class SignIn extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
+          <AuthTypeSelector
+            authType={authType}
+            switchAuthType={switchAuthType}
+          />
           <PlatformLogo />
           <Select
             className='bitfinex-auth-email'
