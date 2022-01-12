@@ -61,6 +61,7 @@ class Auth extends PureComponent {
       usersLoading,
     } = this.props
     const { mode, authType } = this.state
+    const isMultipleAccsSelected = authType === AUTH_TYPES.MULTIPLE_ACCOUNTS
 
     if (!isShown || (config.showFrameworkMode && !hasAuthData && usersLoading)) {
       return null
@@ -85,6 +86,7 @@ class Auth extends PureComponent {
             authType={authType}
             switchMode={this.switchMode}
             switchAuthType={this.switchAuthType}
+            isMultipleAccsSelected={isMultipleAccsSelected}
           />
         )
       case MODES.SIGN_IN:
@@ -93,6 +95,7 @@ class Auth extends PureComponent {
             authType={authType}
             switchMode={this.switchMode}
             switchAuthType={this.switchAuthType}
+            isMultipleAccsSelected={isMultipleAccsSelected}
           />
         )
       case MODES.PASSWORD_RECOVERY:
