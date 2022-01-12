@@ -7,6 +7,7 @@ export const propTypes = {
     apiSecret: PropTypes.string,
     isPersisted: PropTypes.bool.isRequired,
   }).isRequired,
+  isMultipleAccsSelected: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   signUp: PropTypes.func.isRequired,

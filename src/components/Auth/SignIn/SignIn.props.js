@@ -7,6 +7,7 @@ export const propTypes = {
     password: PropTypes.string,
     isPersisted: PropTypes.bool,
   }).isRequired,
+  isMultipleAccsSelected: PropTypes.bool.isRequired,
   isElectronBackendLoaded: PropTypes.bool.isRequired,
   isUsersLoaded: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
