@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 
 export const propTypes = {
+  authType: PropTypes.string.isRequired,
   authData: PropTypes.shape({
     apiKey: PropTypes.string,
     apiSecret: PropTypes.string,
@@ -10,6 +11,7 @@ export const propTypes = {
   t: PropTypes.func.isRequired,
   signUp: PropTypes.func.isRequired,
   switchMode: PropTypes.func.isRequired,
+  switchAuthType: PropTypes.func.isRequired,
   updateAuth: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string.isRequired,
