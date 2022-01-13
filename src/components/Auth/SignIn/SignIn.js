@@ -97,6 +97,7 @@ class SignIn extends PureComponent {
       authData: { isPersisted, isSubAccount },
       authType,
       isElectronBackendLoaded,
+      isMultipleAccsSelected,
       loading,
       switchAuthType,
       switchMode,
@@ -109,6 +110,7 @@ class SignIn extends PureComponent {
     const isSignInDisabled = !email || (config.isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
+    const showSubAccount = isCurrentUserHasSubAccount && isMultipleAccsSelected
 
     return (
       <Dialog
@@ -150,7 +152,7 @@ class SignIn extends PureComponent {
             >
               {t('auth.rememberMe')}
             </Checkbox>
-            {isCurrentUserHasSubAccount && (
+            {showSubAccount && (
               <Checkbox
                 className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
                 name='isSubAccount'
@@ -164,11 +166,17 @@ class SignIn extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <div className='bitfinex-auth-password-recovery' onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}>
+            <div
+              className='bitfinex-auth-password-recovery'
+              onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
+            >
               {t('auth.passwordRecovery')}
             </div>
             <div>
-              <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_UP)}>
+              <div
+                className='bitfinex-auth-mode-switch'
+                onClick={() => switchMode(MODES.SIGN_UP)}
+              >
                 {t('auth.signUp')}
               </div>
               <Button
