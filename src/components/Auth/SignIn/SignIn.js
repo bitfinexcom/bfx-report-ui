@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
+import _filter from 'lodash/filter'
 import {
   Button, Checkbox,
   Classes,
@@ -111,6 +112,9 @@ class SignIn extends PureComponent {
       || (!isNotProtected && !password)
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
     const showSubAccount = isCurrentUserHasSubAccount && isMultipleAccsSelected
+    const preparedUsers = isMultipleAccsSelected
+      ? _filter(users, 'isSubAccount').map(user => user.email)
+      : _filter(users, ['isSubAccount', false]).map(user => user.email)
 
     return (
       <Dialog
@@ -129,7 +133,7 @@ class SignIn extends PureComponent {
           <PlatformLogo />
           <Select
             className='bitfinex-auth-email'
-            items={users.filter((user) => !user.isSubAccount).map(user => user.email)}
+            items={preparedUsers}
             onChange={this.onEmailChange}
             popoverClassName='bitfinex-auth-email-popover'
             value={email}
