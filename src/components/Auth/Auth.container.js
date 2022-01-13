@@ -16,6 +16,4 @@ const mapStateToProps = state => ({
   users: getUsers(state),
 })
 
-const AuthContainer = connect(mapStateToProps, null)(Auth)
-
-export default AuthContainer
+export default connect(mapStateToProps)(Auth)
