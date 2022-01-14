@@ -1,13 +1,40 @@
 .bitfinex-auth-sign-up--sub-accs {
+  .master-acc-selector--title {
+    font-size: 15px;
+    margin: 0 0 5px 5px;
+    font-weight: 400;
+    color: var(--activeColor);
+  }
+
   .sub-account {
-    .subtitle {
-      font-size:17px;
-      margin-bottom: 10px;
+    &-controls {
+      margin-bottom: 20px;
     }
+
+    &-create-select {
+      .bp3-popover-target {
+        width: inherit;
+
+        .bp3-button,
+        .bp3-menu-item {
+          width: 100%
+        }
+      }
+    }
+
+    .subtitle {
+      font-size:15px;
+      margin: 0 0 5px 5px;
+    }
+
     .sub-users {
       &-add-accounts-account > * {
         align-self: flex-start;
         width: 100%;
+
+        &:not(:last-child) {
+          margin-right: 0;
+        }
       }
     }
 
