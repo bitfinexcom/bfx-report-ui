@@ -1,0 +1,15 @@
+.bitfinex-auth-sign-up--sub-accs {
+  .sub-account {
+    .subtitle {
+      font-size:17px;
+      margin-bottom: 10px;
+    }
+    .sub-users {
+      &-add-accounts-account > * {
+        align-self: flex-start;
+        width: 100%;
+      }
+    }
+
+  }
+}
