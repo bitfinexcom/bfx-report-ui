@@ -194,6 +194,9 @@ class RegisterSubAccounts extends PureComponent {
             switchAuthType={switchAuthType}
           />
           <PlatformLogo />
+          <h3 className='master-acc-selector--title'>
+            {t('auth.selectMasterAccount')}
+          </h3>
           <Select
             className='bitfinex-auth-email'
             items={preparedUsers}
