@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import { NonIdealState } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
@@ -7,6 +6,7 @@ import config from 'config'
 
 import SignUp from './SignUp'
 import SignIn from './SignIn'
+import RegisterSubAccounts from './RegisterSubAccounts'
 import PasswordRecovery from './PasswordRecovery'
 import { propTypes, defaultProps } from './Auth.props'
 
@@ -77,12 +77,10 @@ class Auth extends PureComponent {
         />
       )
     }
-
     switch (mode) {
-      case MODES.SIGN_UP:
-      default:
+      case isMultipleAccsSelected && MODES.SIGN_UP:
         return (
-          <SignUp
+          <RegisterSubAccounts
             authType={authType}
             switchMode={this.switchMode}
             switchAuthType={this.switchAuthType}
@@ -98,10 +96,20 @@ class Auth extends PureComponent {
             isMultipleAccsSelected={isMultipleAccsSelected}
           />
         )
+      case MODES.SIGN_UP:
+      default:
+        return (
+          <SignUp
+            authType={authType}
+            switchMode={this.switchMode}
+            switchAuthType={this.switchAuthType}
+            isMultipleAccsSelected={isMultipleAccsSelected}
+          />
+        )
       case MODES.PASSWORD_RECOVERY:
         return <PasswordRecovery switchMode={this.switchMode} />
     }
   }
 }
 
-export default withTranslation('translations')(Auth)
+export default Auth
