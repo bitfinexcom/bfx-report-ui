@@ -71,15 +71,19 @@ class SubAccount extends PureComponent {
   }
 
   render() {
-    const { authData, users, t } = this.props
+    const {
+      authData,
+      masterAccount,
+      users,
+      t,
+    } = this.props
     const { accounts, subUsersToRemove } = this.state
     const { email: currentUserEmail, isSubAccount } = authData
-
-    const subAccountData = users.find((user) => user.email === currentUserEmail && user.isSubAccount)
+    const masterAccountEmail = masterAccount || currentUserEmail
+    const subAccountData = users.find((user) => user.email === masterAccountEmail && user.isSubAccount)
     const subUsers = _get(subAccountData, 'subUsers', [])
-
     const hasFilledAccounts = getFilledAccounts(accounts).length > 0
-    const hasSubAccount = !!users.find(user => user.email === currentUserEmail && user.isSubAccount)
+    const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
 
     return (
       <div className='sub-account'>
@@ -90,7 +94,7 @@ class SubAccount extends PureComponent {
         )}
         {subUsers.length > 0 && (
           <SubUsersList
-            email={currentUserEmail}
+            email={masterAccountEmail}
             isRemovalEnabled={isSubAccount}
             onToggle={this.onSubUserToggle}
             subUsers={subUsers}
