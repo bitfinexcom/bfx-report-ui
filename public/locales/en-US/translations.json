@@ -27,6 +27,7 @@
     "multipleAccounts": "Multiple Accounts",
     "signUp": "Sign Up",
     "signIn": "Sign In",
+    "selectMasterAccount": "Select Master Account",
     "passwordRecovery": "Password Recovery",
     "subAccount": "Sub Account",
     "enterAPIKey": "Enter API Key:",
