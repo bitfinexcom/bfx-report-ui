@@ -1,10 +1,11 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import _filter from 'lodash/filter'
 import {
   Button,
-  Callout,
-  Checkbox,
+  // Callout,
+  // Checkbox,
   Classes,
   Dialog,
   Intent,
@@ -13,10 +14,13 @@ import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
 import config from 'config'
 
+import Select from 'ui/Select'
+import SubAccount from 'components/SubAccounts/SubAccount'
+
 import { propTypes, defaultProps } from './RegisterSubAccounts.props'
 import AuthTypeSelector from '../AuthTypeSelector'
-import InputKey from '../InputKey'
-import ErrorLabel from '../ErrorLabel'
+// import InputKey from '../InputKey'
+// import ErrorLabel from '../ErrorLabel'
 import { MODES } from '../Auth'
 
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
@@ -30,8 +34,10 @@ class RegisterSubAccounts extends PureComponent {
   constructor(props) {
     super()
 
-    const { authData: { apiKey, apiSecret, isPersisted } } = props
+    const { authData: { apiKey, email, apiSecret, isPersisted }, users } = props
+    const { email: firstUserEmail } = users[0] || {}
     this.state = {
+      masterAccEmail: email || firstUserEmail,
       apiKey,
       apiSecret,
       password: '',
@@ -125,8 +131,17 @@ class RegisterSubAccounts extends PureComponent {
     })
   }
 
+  onEmailChange = (email) => {
+    // const { authData: { email: preservedEmail, password } } = this.props
+    this.setState({
+      masterAccEmail: email,
+      // password: email === preservedEmail ? password : undefined,
+    })
+  }
+
   render() {
     const {
+      authData,
       authType,
       loading,
       switchMode,
@@ -140,12 +155,13 @@ class RegisterSubAccounts extends PureComponent {
       password,
       passwordRepeat,
       isPasswordProtected,
-      isPersisted,
+      // isPersisted,
       passwordError,
       passwordRepeatError,
+      masterAccEmail,
     } = this.state
 
-  console.log('+++users', users)
+    console.log('+++users', users)
 
     const title = config.showFrameworkMode ? t('auth.signUp') : t('auth.title')
     const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
@@ -153,9 +169,15 @@ class RegisterSubAccounts extends PureComponent {
       || (config.showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
 
-    const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
-      'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
-    })
+    const preparedUsers = _filter(users, ['isSubAccount', false]).map(user => user.email)
+
+    const classes = classNames(
+      'bitfinex-auth',
+      'bitfinex-auth-sign-up',
+      'bitfinex-auth-sign-up--sub-accs', {
+        'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
+      },
+    )
 
     return (
       <Dialog
@@ -172,14 +194,22 @@ class RegisterSubAccounts extends PureComponent {
             switchAuthType={switchAuthType}
           />
           <PlatformLogo />
-          <Callout>
+          <Select
+            className='bitfinex-auth-email'
+            items={preparedUsers}
+            onChange={this.onEmailChange}
+            popoverClassName='bitfinex-auth-email-popover'
+            value={masterAccEmail}
+            loading
+          />
+          {/* <Callout>
             {t('auth.note1')}
             <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
               {config.KEY_URL.split('https://')[1]}
             </a>
             {t('auth.note2')}
-          </Callout>
-          <InputKey
+          </Callout> */}
+          {/* <InputKey
             label='auth.enterAPIKey'
             name='apiKey'
             value={apiKey}
@@ -191,8 +221,15 @@ class RegisterSubAccounts extends PureComponent {
             name='apiSecret'
             value={apiSecret}
             onChange={this.handleInputChange}
-          />
-          {config.showFrameworkMode && isPasswordProtected && (
+          /> */}
+          <>
+            <SubAccount
+              masterAccount={masterAccEmail}
+              authData={authData}
+              users={users}
+            />
+          </>
+          {/* {config.showFrameworkMode && isPasswordProtected && (
             <Fragment>
               <InputKey
                 label='auth.enterPassword'
@@ -209,8 +246,8 @@ class RegisterSubAccounts extends PureComponent {
               />
               <ErrorLabel text={passwordRepeatError} />
             </Fragment>
-          )}
-          <div className='bitfinex-auth-checkboxes'>
+          )} */}
+          {/* <div className='bitfinex-auth-checkboxes'>
             <Checkbox
               className='bitfinex-auth-remember-me'
               name='isPersisted'
@@ -229,7 +266,7 @@ class RegisterSubAccounts extends PureComponent {
                 {t('auth.passwordProtection')}
               </Checkbox>
             )}
-          </div>
+          </div> */}
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
