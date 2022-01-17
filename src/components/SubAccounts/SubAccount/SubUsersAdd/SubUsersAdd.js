@@ -67,6 +67,7 @@ class SubUsersAdd extends PureComponent {
   render() {
     const {
       accounts,
+      addMultipleAccsEnabled,
       authData,
       users,
       t,
@@ -142,7 +143,7 @@ class SubUsersAdd extends PureComponent {
           })}
         </div>
 
-        {(accounts.length < MAX_ACCOUNTS) && (
+        {(addMultipleAccsEnabled && accounts.length < MAX_ACCOUNTS) && (
           <div className='sub-users-add-new'>
             <span className='sub-users-add-new-btn color--active' onClick={this.onAccountAdd}>
               {`+ ${t('subaccounts.add_account')}`}

@@ -8,6 +8,7 @@ export const propTypes = {
     apiKey: PropTypes.string,
     apiSecret: PropTypes.string,
   })).isRequired,
+  addMultipleAccsEnabled: PropTypes.bool.isRequired,
   authData: PropTypes.shape({
     email: PropTypes.string,
   }).isRequired,
