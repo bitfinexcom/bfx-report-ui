@@ -143,6 +143,7 @@ class RegisterSubAccounts extends PureComponent {
     const {
       authData,
       authType,
+      isMultipleAccsSelected,
       loading,
       switchMode,
       switchAuthType,
@@ -227,8 +228,9 @@ class RegisterSubAccounts extends PureComponent {
           /> */}
           <>
             <SubAccount
-              masterAccount={masterAccEmail}
               authData={authData}
+              masterAccount={masterAccEmail}
+              addMultipleAccsEnabled={!isMultipleAccsSelected}
               users={users}
             />
           </>

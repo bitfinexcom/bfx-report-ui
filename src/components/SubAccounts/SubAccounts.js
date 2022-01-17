@@ -11,7 +11,10 @@ class SubAccounts extends PureComponent {
     const { authData, users } = this.props
 
     return (
-      <Card elevation={Elevation.ZERO} className='sub-accounts col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='sub-accounts col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
           filter={false}
           timeframe={false}
