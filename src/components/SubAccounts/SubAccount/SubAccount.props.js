@@ -5,6 +5,8 @@ export const propTypes = {
     email: PropTypes.string,
   }).isRequired,
   addSubAccount: PropTypes.func.isRequired,
+  addMultipleAccsEnabled: PropTypes.bool,
+  masterAccount: PropTypes.string.isRequired,
   updateSubAccount: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string.isRequired,
@@ -13,4 +15,7 @@ export const propTypes = {
   })).isRequired,
 }
 
-export const defaultProps = {}
+export const defaultProps = {
+  addMultipleAccsEnabled: true,
+  masterAccount: undefined,
+}

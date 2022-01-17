@@ -73,6 +73,7 @@ class SubAccount extends PureComponent {
   render() {
     const {
       authData,
+      addMultipleAccsEnabled,
       masterAccount,
       users,
       t,
@@ -106,6 +107,7 @@ class SubAccount extends PureComponent {
           <>
             <SubUsersAdd
               accounts={accounts}
+              addMultipleAccsEnabled={addMultipleAccsEnabled}
               authData={authData}
               onChange={this.onSubUsersChange}
               users={users}
