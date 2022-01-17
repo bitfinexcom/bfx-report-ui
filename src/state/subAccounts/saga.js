@@ -4,6 +4,8 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+import _isEmpty from 'lodash/isEmpty'
+ 
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
@@ -14,6 +16,8 @@ import Authenticator from 'state/auth/Authenticator'
 import types from './constants'
 
 const getReqCreateSubAccount = (params) => {
+  console.log('++getReqCreateSubAccount param', params)
+
   const { subAccountApiKeys } = params
 
   return makeFetchCall('createSubAccount', {
@@ -29,6 +33,9 @@ const getReqUpdateSubAccount = (params, auth) => {
     removingSubUsersByEmails,
   } = params
 
+  console.log('++getReqUpdateSubAccount params', params)
+  console.log('++getReqUpdateSubAccount auth', auth)
+
   return makeFetchCall('updateSubAccount', {
     addingSubUsers,
     removingSubUsersByEmails,
@@ -36,8 +43,10 @@ const getReqUpdateSubAccount = (params, auth) => {
 }
 
 export function* createSubAccount({ payload: subAccounts }) {
+  console.log('++createSubAccount subAccounts', subAccounts)
   try {
     const { result, error } = yield call(getReqCreateSubAccount, { subAccountApiKeys: subAccounts })
+    console.log('++createSubAccount result', result)
     if (result) {
       yield put(fetchUsers())
     }
@@ -62,6 +71,10 @@ export function* removeSubAccount() {
   try {
     const { email } = yield select(getAuthData)
     const auth = yield select(selectAuth)
+
+    console.log('++removeSubAccount email', email)
+    console.log('++removeSubAccount auth', auth)
+
     const { result, error } = yield call(getReqRemoveSubAccount, auth)
     if (result) {
       Authenticator.clear()
@@ -90,8 +103,33 @@ export function* removeSubAccount() {
 
 export function* updateSubAccount({ payload }) {
   try {
-    const { addedSubUsers, removedSubUsers } = payload
-    const auth = yield select(selectAuth)
+    const { addedSubUsers, removedSubUsers, masterAccount } = payload
+
+    console.log('++updateSubAccount masterAccount', masterAccount)
+
+    let auth
+    if (masterAccount) {
+      auth = {
+        email: masterAccount,
+        isSubAccount: true,
+      }
+    }else {
+      auth = yield select(selectAuth)
+    }
+
+
+
+    console.log('++updateSubAccount addedSubUsers', addedSubUsers)
+    console.log('++updateSubAccount removedSubUsers', removedSubUsers)
+
+
+    // const auth = {
+    //   email: 'zequipro@protonmail.com',
+    //   isSubAccount: true,
+    // }
+
+    console.log('++updateSubAccount auth', auth)
+
     const params = {}
     if (addedSubUsers.length) {
       params.addingSubUsers = addedSubUsers
