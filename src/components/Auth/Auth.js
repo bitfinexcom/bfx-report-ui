@@ -39,9 +39,11 @@ class Auth extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const { isUsersLoaded, users } = this.props
+    const { authType } = this.state
+    const isMultipleAccsSelected = authType === AUTH_TYPES.MULTIPLE_ACCOUNTS
     if (config.showFrameworkMode && !prevProps.isUsersLoaded && isUsersLoaded && users.length) {
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ mode: MODES.SIGN_IN })
+      this.setState({ mode: isMultipleAccsSelected ? MODES.SIGN_UP : MODES.SIGN_IN })
     }
   }
 
