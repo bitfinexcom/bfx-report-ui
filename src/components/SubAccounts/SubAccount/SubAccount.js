@@ -53,12 +53,13 @@ class SubAccount extends PureComponent {
   }
 
   updateSubAccount = () => {
-    const { updateSubAccount } = this.props
+    const { masterAccount, updateSubAccount } = this.props
     const { accounts, subUsersToRemove } = this.state
 
     const filledAccounts = getFilledAccounts(accounts)
     if (filledAccounts.length || subUsersToRemove.length) {
       updateSubAccount({
+        masterAccount,
         addedSubUsers: filledAccounts,
         removedSubUsers: subUsersToRemove,
       })
