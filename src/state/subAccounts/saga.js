@@ -62,20 +62,29 @@ export function* createSubAccount({ payload: subAccounts }) {
   }
 }
 
-export function* removeSubAccount() {
+export function* removeSubAccount({ payload: masterAccount }) {
   try {
-    const { email } = yield select(getAuthData)
-    const auth = yield select(selectAuth)
-
-    console.log('++removeSubAccount email', email)
-    console.log('++removeSubAccount auth', auth)
+    let auth
+    let accountEmail
+    if (masterAccount) {
+      auth = {
+        email: masterAccount,
+        isSubAccount: true,
+      }
+      accountEmail = masterAccount
+    } else {
+      auth = yield select(selectAuth)
+      const authData = yield select(getAuthData)
+      const { email } = authData
+      accountEmail = email
+    }
 
     const { result, error } = yield call(getReqRemoveSubAccount, auth)
     if (result) {
       Authenticator.clear()
       yield put({
         type: types.REMOVE_SUCCESS,
-        payload: email,
+        payload: accountEmail,
       })
       yield put(logout())
     }
