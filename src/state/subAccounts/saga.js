@@ -4,8 +4,6 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
-import _isEmpty from 'lodash/isEmpty'
- 
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
@@ -32,9 +30,6 @@ const getReqUpdateSubAccount = (params, auth) => {
     addingSubUsers,
     removingSubUsersByEmails,
   } = params
-
-  console.log('++getReqUpdateSubAccount params', params)
-  console.log('++getReqUpdateSubAccount auth', auth)
 
   return makeFetchCall('updateSubAccount', {
     addingSubUsers,
@@ -105,30 +100,15 @@ export function* updateSubAccount({ payload }) {
   try {
     const { addedSubUsers, removedSubUsers, masterAccount } = payload
 
-    console.log('++updateSubAccount masterAccount', masterAccount)
-
     let auth
     if (masterAccount) {
       auth = {
         email: masterAccount,
         isSubAccount: true,
       }
-    }else {
+    } else {
       auth = yield select(selectAuth)
     }
-
-
-
-    console.log('++updateSubAccount addedSubUsers', addedSubUsers)
-    console.log('++updateSubAccount removedSubUsers', removedSubUsers)
-
-
-    // const auth = {
-    //   email: 'zequipro@protonmail.com',
-    //   isSubAccount: true,
-    // }
-
-    console.log('++updateSubAccount auth', auth)
 
     const params = {}
     if (addedSubUsers.length) {
