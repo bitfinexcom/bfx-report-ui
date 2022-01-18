@@ -10,7 +10,7 @@
     &-controls {
       margin-bottom: 20px;
     }
-
+    
     &-create-select {
       .bp3-popover-target {
         width: inherit;
@@ -19,7 +19,7 @@
         .bp3-menu-item {
           width: 100%
         }
-      }
+      }   
     }
 
     .subtitle {
@@ -28,6 +28,12 @@
     }
 
     .sub-users {
+      &-add {
+        .input-group-label {
+          margin: 0 0 5px 5px;
+        }
+      }
+  
       &-add-accounts-account > * {
         align-self: flex-start;
         width: 100%;
@@ -37,6 +43,5 @@
         }
       }
     }
-
   }
 }
