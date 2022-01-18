@@ -10,7 +10,7 @@
     &-controls {
       margin-bottom: 20px;
     }
-    
+
     &-create-select {
       .bp3-popover-target {
         width: inherit;
@@ -28,6 +28,10 @@
     }
 
     .sub-users {
+      &-list {
+        margin-top: 0;
+      }
+
       &-add {
         .input-group-label {
           margin: 0 0 5px 5px;
@@ -41,6 +45,10 @@
         &:not(:last-child) {
           margin-right: 0;
         }
+      }
+
+      &-add-accounts-account-remove {
+        margin-bottom: 0;
       }
     }
   }
