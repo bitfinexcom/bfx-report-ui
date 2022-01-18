@@ -165,10 +165,12 @@ class SignUp extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          <AuthTypeSelector
-            authType={authType}
-            switchAuthType={switchAuthType}
-          />
+          {config.showFrameworkMode && (
+            <AuthTypeSelector
+              authType={authType}
+              switchAuthType={switchAuthType}
+            />
+          )}
           <PlatformLogo />
           <Callout>
             {t('auth.note1')}

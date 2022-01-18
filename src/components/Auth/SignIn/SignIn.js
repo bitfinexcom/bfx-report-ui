@@ -126,10 +126,12 @@ class SignIn extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          <AuthTypeSelector
-            authType={authType}
-            switchAuthType={switchAuthType}
-          />
+          {config.showFrameworkMode && (
+            <AuthTypeSelector
+              authType={authType}
+              switchAuthType={switchAuthType}
+            />
+          )}
           <PlatformLogo />
           <Select
             className='bitfinex-auth-email'

@@ -48,9 +48,6 @@ class RegisterSubAccounts extends PureComponent {
     } = this.props
     const { masterAccEmail } = this.state
 
-    const title = config.showFrameworkMode ? t('auth.signUp') : t('auth.title')
-    const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
-
     const preparedUsers = _filter(users, ['isSubAccount', false]).map(user => user.email)
 
     const classes = classNames(
@@ -64,17 +61,19 @@ class RegisterSubAccounts extends PureComponent {
     return (
       <Dialog
         isOpen
-        icon={icon}
-        title={title}
         usePortal={false}
         className={classes}
+        icon={<Icon.SIGN_UP />}
+        title={t('auth.signUp')}
         isCloseButtonShown={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          <AuthTypeSelector
-            authType={authType}
-            switchAuthType={switchAuthType}
-          />
+          {config.showFrameworkMode && (
+            <AuthTypeSelector
+              authType={authType}
+              switchAuthType={switchAuthType}
+            />
+          )}
           <PlatformLogo />
           <h3 className='master-acc-selector--title'>
             {t('auth.selectMasterAccount')}
