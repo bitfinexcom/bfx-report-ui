@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 
 export const propTypes = {
-  authData: PropTypes.shape({
-    email: PropTypes.string,
-  }).isRequired,
+  masterAccount: PropTypes.string,
   removeSubAccount: PropTypes.func.isRequired,
 }
 
-export const defaultProps = {}
+export const defaultProps = {
+  masterAccount: undefined,
+}

@@ -6,8 +6,8 @@ import { propTypes, defaultProps } from './SubAccountRemove.props'
 
 class SubAccountRemove extends PureComponent {
   removeSubAccount = () => {
-    const { removeSubAccount } = this.props
-    removeSubAccount()
+    const { masterAccount, removeSubAccount } = this.props
+    removeSubAccount(masterAccount)
   }
 
   render() {
