@@ -13,11 +13,19 @@ import Authenticator from 'state/auth/Authenticator'
 
 import types from './constants'
 
-const getReqCreateSubAccount = (params) => {
-  console.log('++getReqCreateSubAccount param', params)
-
-  const { subAccountApiKeys } = params
-
+const getReqCreateSubAccount = ({
+  masterAccount,
+  subAccountApiKeys,
+}) => {
+  if (masterAccount) {
+    const auth = {
+      email: masterAccount,
+      isSubAccount: true,
+    }
+    return makeFetchCall('createSubAccount', {
+      subAccountApiKeys,
+    }, auth)
+  }
   return makeFetchCall('createSubAccount', {
     subAccountApiKeys,
   })
@@ -37,11 +45,11 @@ const getReqUpdateSubAccount = (params, auth) => {
   }, auth)
 }
 
-export function* createSubAccount({ payload: subAccounts }) {
-  console.log('++createSubAccount subAccounts', subAccounts)
+export function* createSubAccount({ payload }) {
+  const { preparedAccountData, masterAccount } = payload
+  const params = { subAccountApiKeys: preparedAccountData, masterAccount }
   try {
-    const { result, error } = yield call(getReqCreateSubAccount, { subAccountApiKeys: subAccounts })
-    console.log('++createSubAccount result', result)
+    const { result, error } = yield call(getReqCreateSubAccount, params)
     if (result) {
       yield put(fetchUsers())
     }
