@@ -6,7 +6,7 @@ export const propTypes = {
   }).isRequired,
   addSubAccount: PropTypes.func.isRequired,
   addMultipleAccsEnabled: PropTypes.bool,
-  masterAccount: PropTypes.string.isRequired,
+  masterAccount: PropTypes.string,
   updateSubAccount: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string.isRequired,
