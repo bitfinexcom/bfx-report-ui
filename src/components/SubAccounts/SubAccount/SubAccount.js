@@ -16,7 +16,7 @@ class SubAccount extends PureComponent {
   }
 
   createSubAccount = () => {
-    const { addSubAccount } = this.props
+    const { addSubAccount, masterAccount } = this.props
     const { accounts } = this.state
 
     const preparedAccountData = getFilledAccounts(accounts).map((account) => {
@@ -32,7 +32,7 @@ class SubAccount extends PureComponent {
         : { apiKey, apiSecret }
     })
 
-    addSubAccount(preparedAccountData)
+    addSubAccount({ preparedAccountData, masterAccount })
 
     this.setState({
       accounts: [EMPTY_ACCOUNT],
@@ -73,11 +73,11 @@ class SubAccount extends PureComponent {
 
   render() {
     const {
-      authData,
-      addMultipleAccsEnabled,
-      masterAccount,
-      users,
       t,
+      users,
+      authData,
+      masterAccount,
+      addMultipleAccsEnabled,
     } = this.props
     const { accounts, subUsersToRemove } = this.state
     const { email: currentUserEmail, isSubAccount } = authData
@@ -91,15 +91,17 @@ class SubAccount extends PureComponent {
       <div className='sub-account'>
         {isSubAccount && (
           <div className='sub-account-controls'>
-            <RemoveSubAccount authData={authData} />
+            <RemoveSubAccount
+              masterAccount={masterAccount}
+            />
           </div>
         )}
         {subUsers.length > 0 && (
           <SubUsersList
+            subUsers={subUsers}
             email={masterAccountEmail}
             isRemovalEnabled={isSubAccount}
             onToggle={this.onSubUserToggle}
-            subUsers={subUsers}
             subUsersToRemove={subUsersToRemove}
           />
         )}
@@ -107,16 +109,16 @@ class SubAccount extends PureComponent {
         {(isSubAccount || !hasSubAccount) && (
           <>
             <SubUsersAdd
+              users={users}
               accounts={accounts}
-              addMultipleAccsEnabled={addMultipleAccsEnabled}
               authData={authData}
               onChange={this.onSubUsersChange}
-              users={users}
+              addMultipleAccsEnabled={addMultipleAccsEnabled}
             />
             <Button
               className='sub-account-confirm'
-              disabled={!hasFilledAccounts && !subUsersToRemove.length}
               intent={Intent.PRIMARY}
+              disabled={!hasFilledAccounts && !subUsersToRemove.length}
               onClick={subUsers.length > 0 ? this.updateSubAccount : this.createSubAccount}
             >
               {subUsers.length > 0 ? t('update') : t('timeframe.custom.confirm')}
