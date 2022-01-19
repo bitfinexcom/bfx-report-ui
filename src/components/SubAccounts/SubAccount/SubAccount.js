@@ -22,8 +22,8 @@ class SubAccount extends PureComponent {
     const preparedAccountData = getFilledAccounts(accounts).map((account) => {
       const {
         email,
-        password,
         apiKey,
+        password,
         apiSecret,
       } = account
 
@@ -89,9 +89,10 @@ class SubAccount extends PureComponent {
 
     return (
       <div className='sub-account'>
-        {isSubAccount && (
+        {(masterAccount || isSubAccount) && (
           <div className='sub-account-controls'>
             <RemoveSubAccount
+              subUsers={subUsers}
               masterAccount={masterAccount}
             />
           </div>
@@ -100,13 +101,13 @@ class SubAccount extends PureComponent {
           <SubUsersList
             subUsers={subUsers}
             email={masterAccountEmail}
-            isRemovalEnabled={isSubAccount}
+            isRemovalEnabled={masterAccount || isSubAccount}
             onToggle={this.onSubUserToggle}
             subUsersToRemove={subUsersToRemove}
           />
         )}
         {!isSubAccount && !hasSubAccount && <div className='subtitle'>{t('subaccounts.create')}</div>}
-        {(isSubAccount || !hasSubAccount) && (
+        {(masterAccount || (isSubAccount || !hasSubAccount)) && (
           <>
             <SubUsersAdd
               users={users}
