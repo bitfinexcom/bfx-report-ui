@@ -89,12 +89,16 @@ export function* removeSubAccount({ payload: masterAccount }) {
 
     const { result, error } = yield call(getReqRemoveSubAccount, auth)
     if (result) {
-      Authenticator.clear()
-      yield put({
-        type: types.REMOVE_SUCCESS,
-        payload: accountEmail,
-      })
-      yield put(logout())
+      if (masterAccount) {
+        yield put(fetchUsers())
+      } else {
+        Authenticator.clear()
+        yield put({
+          type: types.REMOVE_SUCCESS,
+          payload: accountEmail,
+        })
+        yield put(logout())
+      }
     }
 
     if (error) {
