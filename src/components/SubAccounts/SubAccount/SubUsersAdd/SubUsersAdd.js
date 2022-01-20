@@ -80,6 +80,10 @@ class SubUsersAdd extends PureComponent {
       && account.email !== currentUserEmail
       && account.email !== masterAccount))
     const takenAccountOptions = this.getTakenAccountOptions(accounts)
+    const selectClassName = addMultipleAccsEnabled
+      ? 'sub-account-create-select' : 'bitfinex-auth-email'
+    const selectPopoverClassName = addMultipleAccsEnabled
+      ? 'sub-users-add-select-popover' : 'bitfinex-auth-email-popover'
 
     return (
       <div className='sub-users-add'>
@@ -108,9 +112,9 @@ class SubUsersAdd extends PureComponent {
                   <Select
                     loading
                     value={email}
+                    className={selectClassName}
                     items={subAccountOptionsItems}
-                    className='sub-account-create-select'
-                    popoverClassName='sub-users-add-select-popover'
+                    popoverClassName={selectPopoverClassName}
                     onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
                   />
                 )}
