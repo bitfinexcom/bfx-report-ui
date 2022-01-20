@@ -101,12 +101,14 @@ class SubAccount extends PureComponent {
           <SubUsersList
             subUsers={subUsers}
             email={masterAccountEmail}
-            isRemovalEnabled={masterAccount || isSubAccount}
             onToggle={this.onSubUserToggle}
             subUsersToRemove={subUsersToRemove}
+            isRemovalEnabled={masterAccount || isSubAccount}
           />
         )}
-        {!isSubAccount && !hasSubAccount && <div className='subtitle'>{t('subaccounts.create')}</div>}
+        {(masterAccount || (!isSubAccount && !hasSubAccount)) && (
+          <div className='subtitle'>{t('subaccounts.create')}</div>
+        )}
         {(masterAccount || (isSubAccount || !hasSubAccount)) && (
           <>
             <SubUsersAdd
@@ -114,6 +116,7 @@ class SubAccount extends PureComponent {
               accounts={accounts}
               authData={authData}
               onChange={this.onSubUsersChange}
+              masterAccount={masterAccount}
               addMultipleAccsEnabled={addMultipleAccsEnabled}
             />
             <Button
