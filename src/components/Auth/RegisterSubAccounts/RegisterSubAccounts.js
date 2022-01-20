@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import _filter from 'lodash/filter'
 import { Classes, Dialog } from '@blueprintjs/core'
@@ -38,13 +37,13 @@ class RegisterSubAccounts extends PureComponent {
 
   render() {
     const {
-      authData,
-      authType,
-      isMultipleAccsSelected,
-      switchMode,
-      switchAuthType,
       t,
       users,
+      authType,
+      authData,
+      switchMode,
+      switchAuthType,
+      isMultipleAccsSelected,
     } = this.props
     const { masterAccEmail } = this.state
 
@@ -111,4 +110,5 @@ class RegisterSubAccounts extends PureComponent {
     )
   }
 }
-export default withTranslation('translations')(RegisterSubAccounts)
+
+export default RegisterSubAccounts

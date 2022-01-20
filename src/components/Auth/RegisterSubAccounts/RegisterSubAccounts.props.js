@@ -10,10 +10,8 @@ export const propTypes = {
   isMultipleAccsSelected: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
-  signUp: PropTypes.func.isRequired,
   switchMode: PropTypes.func.isRequired,
   switchAuthType: PropTypes.func.isRequired,
-  updateAuth: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string.isRequired,
     isSubAccount: PropTypes.bool.isRequired,

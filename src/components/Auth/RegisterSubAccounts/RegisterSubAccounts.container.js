@@ -1,7 +1,12 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
-import { signUp, updateAuth } from 'state/auth/actions'
-import { getAuthData, getIsLoading, getUsers } from 'state/auth/selectors'
+import {
+  getAuthData,
+  getIsLoading,
+  getUsers,
+} from 'state/auth/selectors'
 
 import RegisterSubAccounts from './RegisterSubAccounts'
 
@@ -11,9 +16,7 @@ const mapStateToProps = state => ({
   users: getUsers(state),
 })
 
-const mapDispatchToProps = {
-  signUp,
-  updateAuth,
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterSubAccounts)
+export default compose(
+  withTranslation('translations'),
+  connect(mapStateToProps),
+)(RegisterSubAccounts)
