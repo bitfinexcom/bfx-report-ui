@@ -10,7 +10,6 @@ const SubUsersList = ({
   subUsers,
   subUsersToRemove,
   isRemovalEnabled,
-
 }) => {
   const mainAccount = subUsers.find((subUser) => subUser.email === email)
   const subUsersWithoutMainAccount = subUsers.filter((subUser) => subUser.email !== email)
