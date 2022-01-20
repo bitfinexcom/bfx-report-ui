@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -57,4 +57,4 @@ SubUsersList.defaultProps = {
   isRemovalEnabled: true,
 }
 
-export default SubUsersList
+export default memo(SubUsersList)
