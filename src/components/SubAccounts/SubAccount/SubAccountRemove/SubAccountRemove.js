@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Intent } from '@blueprintjs/core'
 import _isEmpty from 'lodash/isEmpty'
@@ -36,4 +36,4 @@ SubAccountRemove.defaultProps = {
   masterAccount: undefined,
 }
 
-export default SubAccountRemove
+export default memo(SubAccountRemove)
