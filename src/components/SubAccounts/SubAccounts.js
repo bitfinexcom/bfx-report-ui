@@ -1,32 +1,36 @@
-import React, { PureComponent } from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import SectionHeader from 'ui/SectionHeader'
 
 import SubAccount from './SubAccount'
-import { propTypes, defaultProps } from './SubAccounts.props'
 
-class SubAccounts extends PureComponent {
-  render() {
-    const { authData, users } = this.props
+const SubAccounts = ({ authData, users }) => (
+  <Card
+    elevation={Elevation.ZERO}
+    className='sub-accounts col-lg-12 col-md-12 col-sm-12 col-xs-12'
+  >
+    <SectionHeader
+      filter={false}
+      timeframe={false}
+      title='subaccounts.title'
+    />
+    <SubAccount authData={authData} users={users} />
+  </Card>
+)
 
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='sub-accounts col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader
-          filter={false}
-          timeframe={false}
-          title='subaccounts.title'
-        />
-        <SubAccount authData={authData} users={users} />
-      </Card>
-    )
-  }
+SubAccounts.propTypes = {
+  authData: PropTypes.shape({
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+  users: PropTypes.arrayOf(PropTypes.shape({
+    email: PropTypes.string.isRequired,
+    isSubAccount: PropTypes.bool.isRequired,
+    subUsers: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+    })),
+  })).isRequired,
 }
 
-SubAccounts.propTypes = propTypes
-SubAccounts.defaultProps = defaultProps
-
-export default SubAccounts
+export default memo(SubAccounts)
