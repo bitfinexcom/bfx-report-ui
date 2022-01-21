@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import _filter from 'lodash/filter'
 import {
-  Button, Checkbox,
+  Button,
+  Checkbox,
   Classes,
   Dialog,
   Intent,
@@ -12,15 +14,34 @@ import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
 import Select from 'ui/Select'
 
-import { propTypes, defaultProps } from './SignIn.props'
 import InputKey from '../InputKey'
 import { MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
 
 class SignIn extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
+  static propTypes = {
+    authType: PropTypes.string.isRequired,
+    authData: PropTypes.shape({
+      email: PropTypes.string,
+      password: PropTypes.string,
+      isPersisted: PropTypes.bool,
+      isSubAccount: PropTypes.bool,
+    }).isRequired,
+    isMultipleAccsSelected: PropTypes.bool.isRequired,
+    isElectronBackendLoaded: PropTypes.bool.isRequired,
+    isUsersLoaded: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    signIn: PropTypes.func.isRequired,
+    switchMode: PropTypes.func.isRequired,
+    switchAuthType: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    updateAuth: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      isSubAccount: PropTypes.bool.isRequired,
+      isNotProtected: PropTypes.bool.isRequired,
+    })).isRequired,
+  }
 
   constructor(props) {
     super()

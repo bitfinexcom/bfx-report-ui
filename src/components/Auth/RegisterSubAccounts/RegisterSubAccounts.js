@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _filter from 'lodash/filter'
 import { Classes, Dialog } from '@blueprintjs/core'
@@ -12,12 +13,25 @@ import SubAccount from 'components/SubAccounts/SubAccount'
 import { MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
 
-import { propTypes, defaultProps } from './RegisterSubAccounts.props'
-
 class RegisterSubAccounts extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
+  static propTypes = {
+    authType: PropTypes.string.isRequired,
+    authData: PropTypes.shape({
+      apiKey: PropTypes.string,
+      email: PropTypes.string,
+      apiSecret: PropTypes.string,
+      isPersisted: PropTypes.bool.isRequired,
+    }).isRequired,
+    isMultipleAccsSelected: PropTypes.bool.isRequired,
+    t: PropTypes.func.isRequired,
+    switchMode: PropTypes.func.isRequired,
+    switchAuthType: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      isSubAccount: PropTypes.bool.isRequired,
+      isNotProtected: PropTypes.bool.isRequired,
+    })).isRequired,
+  }
 
   constructor(props) {
     super()
