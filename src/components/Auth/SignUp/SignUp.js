@@ -1,5 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import {
   Button,
@@ -192,7 +191,7 @@ class SignUp extends PureComponent {
             onChange={this.handleInputChange}
           />
           {config.showFrameworkMode && isPasswordProtected && (
-            <Fragment>
+            <>
               <InputKey
                 label='auth.enterPassword'
                 name='password'
@@ -207,7 +206,7 @@ class SignUp extends PureComponent {
                 onChange={this.handleInputChange}
               />
               <ErrorLabel text={passwordRepeatError} />
-            </Fragment>
+            </>
           )}
           <div className='bitfinex-auth-checkboxes'>
             <Checkbox
@@ -254,4 +253,4 @@ class SignUp extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(SignUp)
+export default SignUp

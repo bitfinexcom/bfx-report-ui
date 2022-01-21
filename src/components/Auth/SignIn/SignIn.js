@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import _filter from 'lodash/filter'
 import {
   Button, Checkbox,
@@ -203,4 +202,4 @@ class SignIn extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(SignIn)
+export default SignIn
