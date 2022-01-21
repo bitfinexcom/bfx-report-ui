@@ -1,3 +1,1 @@
-import PasswordRecovery from './PasswordRecovery.container'
-
-export default PasswordRecovery
+export { default } from './PasswordRecovery.container'

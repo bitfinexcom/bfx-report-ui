@@ -1,3 +1,1 @@
-import SubAccountRemove from './SubAccountRemove.container'
-
-export default SubAccountRemove
+export { default } from './SubAccountRemove.container'

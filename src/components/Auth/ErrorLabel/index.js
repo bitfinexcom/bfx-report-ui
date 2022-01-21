@@ -1,3 +1,1 @@
-import ErrorLabel from './ErrorLabel'
-
-export default ErrorLabel
+export { default } from './ErrorLabel'

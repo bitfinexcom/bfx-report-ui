@@ -1,3 +1,1 @@
-import SubAccounts from './SubAccounts.container'
-
-export default SubAccounts
+export { default } from './SubAccounts.container'

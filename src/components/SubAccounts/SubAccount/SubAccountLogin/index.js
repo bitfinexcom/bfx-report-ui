@@ -1,3 +1,1 @@
-import SubAccountLogin from './SubAccountLogin.container'
-
-export default SubAccountLogin
+export { default } from './SubAccountLogin.container'

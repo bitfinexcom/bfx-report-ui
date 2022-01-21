@@ -1,3 +1,1 @@
-import SignUp from './SignUp.container'
-
-export default SignUp
+export { default } from './SignUp.container'

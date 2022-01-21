@@ -1,3 +1,1 @@
-import SubUsersList from './SubUsersList'
-
-export default SubUsersList
+export { default } from './SubUsersList'

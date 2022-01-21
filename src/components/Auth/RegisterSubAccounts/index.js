@@ -1,3 +1,1 @@
-import RegisterSubAccounts from './RegisterSubAccounts.container'
-
-export default RegisterSubAccounts
+export { default } from './RegisterSubAccounts.container'
