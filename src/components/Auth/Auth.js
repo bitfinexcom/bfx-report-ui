@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { NonIdealState } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
@@ -8,7 +9,6 @@ import SignUp from './SignUp'
 import SignIn from './SignIn'
 import RegisterSubAccounts from './RegisterSubAccounts'
 import PasswordRecovery from './PasswordRecovery'
-import { propTypes, defaultProps } from './Auth.props'
 
 export const AUTH_TYPES = {
   SIMPLE_ACCOUNTS: 'simpleAccounts',
@@ -22,9 +22,22 @@ export const MODES = {
 }
 
 class Auth extends PureComponent {
-  static propTypes = propTypes
+  static propTypes = {
+    authData: PropTypes.shape({
+      hasAuthData: PropTypes.bool.isRequired,
+    }).isRequired,
+    isShown: PropTypes.bool,
+    isUsersLoaded: PropTypes.bool,
+    t: PropTypes.func.isRequired,
+    usersLoading: PropTypes.bool,
+    users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }
 
-  static defaultProps = defaultProps
+  static defaultProps = {
+    isShown: false,
+    usersLoading: false,
+    isUsersLoaded: false,
+  }
 
   constructor(props) {
     super()
