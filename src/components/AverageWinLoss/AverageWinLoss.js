@@ -51,25 +51,31 @@ const prepareChartData = (
 class AverageWinLoss extends PureComponent {
   static propTypes = {
     currentFetchParams: PropTypes.shape({
-      timeframe: PropTypes.string.isRequired,
-      isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
-      isVsAccountBalanceSelected: PropTypes.bool.isRequired,
-    }).isRequired,
+      timeframe: PropTypes.string,
+      isUnrealizedProfitExcluded: PropTypes.bool,
+      isVsAccountBalanceSelected: PropTypes.bool,
+    }),
     entries: PropTypes.arrayOf(PropTypes.shape({
-      mts: PropTypes.number.isRequired,
-      USD: PropTypes.number.isRequired,
-    })).isRequired,
+      mts: PropTypes.number,
+      USD: PropTypes.number,
+    })),
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     params: PropTypes.shape({
-      timeframe: PropTypes.string.isRequired,
-      isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
-      isVsAccountBalanceSelected: PropTypes.bool.isRequired,
-    }).isRequired,
+      timeframe: PropTypes.string,
+      isUnrealizedProfitExcluded: PropTypes.bool,
+      isVsAccountBalanceSelected: PropTypes.bool,
+    }),
     fetchData: PropTypes.func.isRequired,
     setParams: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    params: {},
+    entries: [],
+    currentFetchParams: {},
   }
 
   componentDidMount() {
