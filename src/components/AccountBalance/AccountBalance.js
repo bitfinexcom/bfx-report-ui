@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 
@@ -21,11 +22,33 @@ import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
 
-import { propTypes, defaultProps } from './AccountBalance.props'
-
 const TYPE = queryConstants.MENU_ACCOUNT_BALANCE
 
 class AccountBalance extends PureComponent {
+  static propTypes = {
+    currentFetchParams: PropTypes.shape({
+      timeframe: PropTypes.string,
+      isUnrealizedProfitExcluded: PropTypes.bool,
+    }),
+    dataReceived: PropTypes.bool.isRequired,
+    isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      mts: PropTypes.number,
+      USD: PropTypes.number,
+    })),
+    fetchData: PropTypes.func.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    timeframe: PropTypes.string.isRequired,
+    refresh: PropTypes.func.isRequired,
+    setParams: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
+    currentFetchParams: {},
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -134,8 +157,5 @@ class AccountBalance extends PureComponent {
     )
   }
 }
-
-AccountBalance.propTypes = propTypes
-AccountBalance.defaultProps = defaultProps
 
 export default AccountBalance
