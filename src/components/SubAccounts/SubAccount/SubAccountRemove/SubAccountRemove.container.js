@@ -1,4 +1,6 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
 import { removeSubAccount } from 'state/subAccounts/actions'
 
@@ -8,6 +10,7 @@ const mapDispatchToProps = {
   removeSubAccount,
 }
 
-const SubAccountRemoveContainer = connect(null, mapDispatchToProps)(SubAccountRemove)
-
-export default SubAccountRemoveContainer
+export default compose(
+  connect(null, mapDispatchToProps),
+  withTranslation('translations'),
+)(SubAccountRemove)

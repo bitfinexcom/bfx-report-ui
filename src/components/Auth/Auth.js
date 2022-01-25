@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import { NonIdealState } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
@@ -7,8 +7,13 @@ import config from 'config'
 
 import SignUp from './SignUp'
 import SignIn from './SignIn'
+import RegisterSubAccounts from './RegisterSubAccounts'
 import PasswordRecovery from './PasswordRecovery'
-import { propTypes, defaultProps } from './Auth.props'
+
+export const AUTH_TYPES = {
+  SIMPLE_ACCOUNTS: 'simpleAccounts',
+  MULTIPLE_ACCOUNTS: 'multipleAccounts',
+}
 
 export const MODES = {
   SIGN_UP: 'sign_up',
@@ -17,9 +22,22 @@ export const MODES = {
 }
 
 class Auth extends PureComponent {
-  static propTypes = propTypes
+  static propTypes = {
+    authData: PropTypes.shape({
+      hasAuthData: PropTypes.bool.isRequired,
+    }).isRequired,
+    isShown: PropTypes.bool,
+    isUsersLoaded: PropTypes.bool,
+    t: PropTypes.func.isRequired,
+    usersLoading: PropTypes.bool,
+    users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }
 
-  static defaultProps = defaultProps
+  static defaultProps = {
+    isShown: false,
+    usersLoading: false,
+    isUsersLoaded: false,
+  }
 
   constructor(props) {
     super()
@@ -28,19 +46,26 @@ class Auth extends PureComponent {
 
     this.state = {
       mode: (!config.showFrameworkMode || !hasAuthData) ? MODES.SIGN_UP : MODES.SIGN_IN,
+      authType: AUTH_TYPES.SIMPLE_ACCOUNTS,
     }
   }
 
   componentDidUpdate(prevProps) {
     const { isUsersLoaded, users } = this.props
+    const { authType } = this.state
+    const isMultipleAccsSelected = authType === AUTH_TYPES.MULTIPLE_ACCOUNTS
     if (config.showFrameworkMode && !prevProps.isUsersLoaded && isUsersLoaded && users.length) {
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ mode: MODES.SIGN_IN })
+      this.setState({ mode: isMultipleAccsSelected ? MODES.SIGN_UP : MODES.SIGN_IN })
     }
   }
 
   switchMode = (mode) => {
     this.setState({ mode })
+  }
+
+  switchAuthType = (authType) => {
+    this.setState({ authType })
   }
 
   render() {
@@ -50,7 +75,8 @@ class Auth extends PureComponent {
       t,
       usersLoading,
     } = this.props
-    const { mode } = this.state
+    const { mode, authType } = this.state
+    const isMultipleAccsSelected = authType === AUTH_TYPES.MULTIPLE_ACCOUNTS
 
     if (!isShown || (config.showFrameworkMode && !hasAuthData && usersLoading)) {
       return null
@@ -66,17 +92,39 @@ class Auth extends PureComponent {
         />
       )
     }
-
     switch (mode) {
+      case isMultipleAccsSelected && MODES.SIGN_UP:
+        return (
+          <RegisterSubAccounts
+            authType={authType}
+            switchMode={this.switchMode}
+            switchAuthType={this.switchAuthType}
+            isMultipleAccsSelected={isMultipleAccsSelected}
+          />
+        )
+      case MODES.SIGN_IN:
+        return (
+          <SignIn
+            authType={authType}
+            switchMode={this.switchMode}
+            switchAuthType={this.switchAuthType}
+            isMultipleAccsSelected={isMultipleAccsSelected}
+          />
+        )
       case MODES.SIGN_UP:
       default:
-        return <SignUp switchMode={this.switchMode} />
-      case MODES.SIGN_IN:
-        return <SignIn switchMode={this.switchMode} />
+        return (
+          <SignUp
+            authType={authType}
+            switchMode={this.switchMode}
+            switchAuthType={this.switchAuthType}
+            isMultipleAccsSelected={isMultipleAccsSelected}
+          />
+        )
       case MODES.PASSWORD_RECOVERY:
         return <PasswordRecovery switchMode={this.switchMode} />
     }
   }
 }
 
-export default withTranslation('translations')(Auth)
+export default Auth

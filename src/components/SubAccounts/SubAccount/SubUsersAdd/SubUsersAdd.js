@@ -66,15 +66,24 @@ class SubUsersAdd extends PureComponent {
 
   render() {
     const {
+      t,
+      users,
       accounts,
       authData,
-      users,
-      t,
+      masterAccount,
+      addMultipleAccsEnabled,
     } = this.props
     const { email: currentUserEmail } = authData
 
-    const subAccountOptions = users.filter((account) => !account.isSubAccount && account.email !== currentUserEmail)
+    const subAccountOptions = users.filter((account) => (
+      !account.isSubAccount
+      && account.email !== currentUserEmail
+      && account.email !== masterAccount))
     const takenAccountOptions = this.getTakenAccountOptions(accounts)
+    const selectClassName = addMultipleAccsEnabled
+      ? 'sub-account-create-select' : 'bitfinex-auth-email'
+    const selectPopoverClassName = addMultipleAccsEnabled
+      ? 'sub-users-add-select-popover' : 'bitfinex-auth-email-popover'
 
     return (
       <div className='sub-users-add'>
@@ -82,10 +91,10 @@ class SubUsersAdd extends PureComponent {
           {accounts.map((account, index) => {
             const {
               email,
-              password,
-              isNotProtected,
               apiKey,
+              password,
               apiSecret,
+              isNotProtected,
             } = account
 
             const accountOptions = subAccountOptions
@@ -101,50 +110,53 @@ class SubUsersAdd extends PureComponent {
               <div className='sub-users-add-accounts-account' key={index}>
                 {accountOptions.length > 0 && !apiKey && !apiSecret && (
                   <Select
-                    className='sub-account-create-select'
-                    items={subAccountOptionsItems}
-                    onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
-                    popoverClassName='sub-users-add-select-popover'
-                    value={email}
                     loading
+                    value={email}
+                    className={selectClassName}
+                    items={subAccountOptionsItems}
+                    popoverClassName={selectPopoverClassName}
+                    onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
                   />
                 )}
                 {!isNotProtected && (
                   <InputGroup
-                    label={t('subaccounts.password')}
                     name='password'
-                    onChange={(e) => this.onInputChange(e, index)}
                     value={password}
+                    label={t('subaccounts.password')}
+                    onChange={(e) => this.onInputChange(e, index)}
                   />
                 )}
                 {!email && (
                   <>
                     <InputGroup
-                      label={t('subaccounts.api_key')}
                       name='apiKey'
                       value={apiKey}
+                      label={t('subaccounts.api_key')}
                       onChange={(e) => this.onInputChange(e, index)}
                     />
                     <InputGroup
-                      label={t('subaccounts.api_secret')}
                       name='apiSecret'
                       value={apiSecret}
+                      label={t('subaccounts.api_secret')}
                       onChange={(e) => this.onInputChange(e, index)}
                     />
                   </>
                 )}
                 <Icon.BIN
-                  className='sub-users-add-accounts-account-remove'
                   onClick={() => this.onAccountRemove(index)}
+                  className='sub-users-add-accounts-account-remove'
                 />
               </div>
             )
           })}
         </div>
 
-        {(accounts.length < MAX_ACCOUNTS) && (
+        {(addMultipleAccsEnabled && accounts.length < MAX_ACCOUNTS) && (
           <div className='sub-users-add-new'>
-            <span className='sub-users-add-new-btn color--active' onClick={this.onAccountAdd}>
+            <span
+              onClick={this.onAccountAdd}
+              className='sub-users-add-new-btn color--active'
+            >
               {`+ ${t('subaccounts.add_account')}`}
             </span>
           </div>

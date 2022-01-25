@@ -13,9 +13,19 @@ import Authenticator from 'state/auth/Authenticator'
 
 import types from './constants'
 
-const getReqCreateSubAccount = (params) => {
-  const { subAccountApiKeys } = params
-
+const getReqCreateSubAccount = ({
+  masterAccount,
+  subAccountApiKeys,
+}) => {
+  if (masterAccount) {
+    const auth = {
+      email: masterAccount,
+      isSubAccount: true,
+    }
+    return makeFetchCall('createSubAccount', {
+      subAccountApiKeys,
+    }, auth)
+  }
   return makeFetchCall('createSubAccount', {
     subAccountApiKeys,
   })
@@ -35,9 +45,11 @@ const getReqUpdateSubAccount = (params, auth) => {
   }, auth)
 }
 
-export function* createSubAccount({ payload: subAccounts }) {
+export function* createSubAccount({ payload }) {
+  const { preparedAccountData, masterAccount } = payload
+  const params = { subAccountApiKeys: preparedAccountData, masterAccount }
   try {
-    const { result, error } = yield call(getReqCreateSubAccount, { subAccountApiKeys: subAccounts })
+    const { result, error } = yield call(getReqCreateSubAccount, params)
     if (result) {
       yield put(fetchUsers())
     }
@@ -58,18 +70,35 @@ export function* createSubAccount({ payload: subAccounts }) {
   }
 }
 
-export function* removeSubAccount() {
+export function* removeSubAccount({ payload: masterAccount }) {
   try {
-    const { email } = yield select(getAuthData)
-    const auth = yield select(selectAuth)
+    let auth
+    let accountEmail
+    if (masterAccount) {
+      auth = {
+        email: masterAccount,
+        isSubAccount: true,
+      }
+      accountEmail = masterAccount
+    } else {
+      auth = yield select(selectAuth)
+      const authData = yield select(getAuthData)
+      const { email } = authData
+      accountEmail = email
+    }
+
     const { result, error } = yield call(getReqRemoveSubAccount, auth)
     if (result) {
-      Authenticator.clear()
-      yield put({
-        type: types.REMOVE_SUCCESS,
-        payload: email,
-      })
-      yield put(logout())
+      if (masterAccount) {
+        yield put(fetchUsers())
+      } else {
+        Authenticator.clear()
+        yield put({
+          type: types.REMOVE_SUCCESS,
+          payload: accountEmail,
+        })
+        yield put(logout())
+      }
     }
 
     if (error) {
@@ -90,8 +119,18 @@ export function* removeSubAccount() {
 
 export function* updateSubAccount({ payload }) {
   try {
-    const { addedSubUsers, removedSubUsers } = payload
-    const auth = yield select(selectAuth)
+    const { addedSubUsers, removedSubUsers, masterAccount } = payload
+
+    let auth
+    if (masterAccount) {
+      auth = {
+        email: masterAccount,
+        isSubAccount: true,
+      }
+    } else {
+      auth = yield select(selectAuth)
+    }
+
     const params = {}
     if (addedSubUsers.length) {
       params.addingSubUsers = addedSubUsers

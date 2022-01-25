@@ -16,14 +16,14 @@ class SubAccount extends PureComponent {
   }
 
   createSubAccount = () => {
-    const { addSubAccount } = this.props
+    const { addSubAccount, masterAccount } = this.props
     const { accounts } = this.state
 
     const preparedAccountData = getFilledAccounts(accounts).map((account) => {
       const {
         email,
-        password,
         apiKey,
+        password,
         apiSecret,
       } = account
 
@@ -32,7 +32,7 @@ class SubAccount extends PureComponent {
         : { apiKey, apiSecret }
     })
 
-    addSubAccount(preparedAccountData)
+    addSubAccount({ preparedAccountData, masterAccount })
 
     this.setState({
       accounts: [EMPTY_ACCOUNT],
@@ -53,12 +53,13 @@ class SubAccount extends PureComponent {
   }
 
   updateSubAccount = () => {
-    const { updateSubAccount } = this.props
+    const { masterAccount, updateSubAccount } = this.props
     const { accounts, subUsersToRemove } = this.state
 
     const filledAccounts = getFilledAccounts(accounts)
     if (filledAccounts.length || subUsersToRemove.length) {
       updateSubAccount({
+        masterAccount,
         addedSubUsers: filledAccounts,
         removedSubUsers: subUsersToRemove,
       })
@@ -71,45 +72,57 @@ class SubAccount extends PureComponent {
   }
 
   render() {
-    const { authData, users, t } = this.props
+    const {
+      t,
+      users,
+      authData,
+      masterAccount,
+      addMultipleAccsEnabled,
+    } = this.props
     const { accounts, subUsersToRemove } = this.state
     const { email: currentUserEmail, isSubAccount } = authData
-
-    const subAccountData = users.find((user) => user.email === currentUserEmail && user.isSubAccount)
+    const masterAccountEmail = masterAccount || currentUserEmail
+    const subAccountData = users.find((user) => user.email === masterAccountEmail && user.isSubAccount)
     const subUsers = _get(subAccountData, 'subUsers', [])
-
     const hasFilledAccounts = getFilledAccounts(accounts).length > 0
-    const hasSubAccount = !!users.find(user => user.email === currentUserEmail && user.isSubAccount)
+    const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
 
     return (
       <div className='sub-account'>
-        {isSubAccount && (
+        {(masterAccount || isSubAccount) && (
           <div className='sub-account-controls'>
-            <RemoveSubAccount authData={authData} />
+            <RemoveSubAccount
+              subUsers={subUsers}
+              masterAccount={masterAccount}
+            />
           </div>
         )}
         {subUsers.length > 0 && (
           <SubUsersList
-            email={currentUserEmail}
-            isRemovalEnabled={isSubAccount}
-            onToggle={this.onSubUserToggle}
             subUsers={subUsers}
+            email={masterAccountEmail}
+            onToggle={this.onSubUserToggle}
             subUsersToRemove={subUsersToRemove}
+            isRemovalEnabled={masterAccount || isSubAccount}
           />
         )}
-        {!isSubAccount && !hasSubAccount && <div className='subtitle'>{t('subaccounts.create')}</div>}
-        {(isSubAccount || !hasSubAccount) && (
+        {(masterAccount || (!isSubAccount && !hasSubAccount)) && (
+          <div className='subtitle'>{t('subaccounts.create')}</div>
+        )}
+        {(masterAccount || (isSubAccount || !hasSubAccount)) && (
           <>
             <SubUsersAdd
+              users={users}
               accounts={accounts}
               authData={authData}
               onChange={this.onSubUsersChange}
-              users={users}
+              masterAccount={masterAccount}
+              addMultipleAccsEnabled={addMultipleAccsEnabled}
             />
             <Button
               className='sub-account-confirm'
-              disabled={!hasFilledAccounts && !subUsersToRemove.length}
               intent={Intent.PRIMARY}
+              disabled={!hasFilledAccounts && !subUsersToRemove.length}
               onClick={subUsers.length > 0 ? this.updateSubAccount : this.createSubAccount}
             >
               {subUsers.length > 0 ? t('update') : t('timeframe.custom.confirm')}

@@ -8,6 +8,8 @@ export const propTypes = {
     apiKey: PropTypes.string,
     apiSecret: PropTypes.string,
   })).isRequired,
+  addMultipleAccsEnabled: PropTypes.bool.isRequired,
+  masterAccount: PropTypes.string,
   authData: PropTypes.shape({
     email: PropTypes.string,
   }).isRequired,
@@ -19,4 +21,6 @@ export const propTypes = {
   })).isRequired,
 }
 
-export const defaultProps = {}
+export const defaultProps = {
+  masterAccount: undefined,
+}

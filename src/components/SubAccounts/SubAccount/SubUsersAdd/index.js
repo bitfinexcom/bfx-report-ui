@@ -1,3 +1,1 @@
-import SubUsersAdd from './SubUsersAdd'
-
-export default SubUsersAdd
+export { default } from './SubUsersAdd'

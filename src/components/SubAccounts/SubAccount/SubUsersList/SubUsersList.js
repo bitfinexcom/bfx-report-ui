@@ -1,18 +1,16 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import Icon from 'icons'
 
-const SubUsersList = (props) => {
-  const {
-    email,
-    isRemovalEnabled,
-    onToggle,
-    subUsers,
-    subUsersToRemove,
-  } = props
-
+const SubUsersList = ({
+  email,
+  onToggle,
+  subUsers,
+  subUsersToRemove,
+  isRemovalEnabled,
+}) => {
   const mainAccount = subUsers.find((subUser) => subUser.email === email)
   const subUsersWithoutMainAccount = subUsers.filter((subUser) => subUser.email !== email)
   const usersList = [mainAccount, ...subUsersWithoutMainAccount]
@@ -42,7 +40,10 @@ const SubUsersList = (props) => {
 
 SubUsersList.propTypes = {
   email: PropTypes.string.isRequired,
-  isRemovalEnabled: PropTypes.bool,
+  isRemovalEnabled: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.string,
+  ]),
   onToggle: PropTypes.func,
   subUsers: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string.isRequired,
@@ -51,9 +52,9 @@ SubUsersList.propTypes = {
 }
 
 SubUsersList.defaultProps = {
-  isRemovalEnabled: true,
   onToggle: () => {},
   subUsersToRemove: [],
+  isRemovalEnabled: true,
 }
 
-export default SubUsersList
+export default memo(SubUsersList)

@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
+import _filter from 'lodash/filter'
 import {
-  Button, Checkbox,
+  Button,
+  Checkbox,
   Classes,
   Dialog,
   Intent,
@@ -12,14 +14,34 @@ import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
 import Select from 'ui/Select'
 
-import { propTypes, defaultProps } from './SignIn.props'
 import InputKey from '../InputKey'
 import { MODES } from '../Auth'
+import AuthTypeSelector from '../AuthTypeSelector'
 
 class SignIn extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
+  static propTypes = {
+    authType: PropTypes.string.isRequired,
+    authData: PropTypes.shape({
+      email: PropTypes.string,
+      password: PropTypes.string,
+      isPersisted: PropTypes.bool,
+      isSubAccount: PropTypes.bool,
+    }).isRequired,
+    isMultipleAccsSelected: PropTypes.bool.isRequired,
+    isElectronBackendLoaded: PropTypes.bool.isRequired,
+    isUsersLoaded: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    signIn: PropTypes.func.isRequired,
+    switchMode: PropTypes.func.isRequired,
+    switchAuthType: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    updateAuth: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      isSubAccount: PropTypes.bool.isRequired,
+      isNotProtected: PropTypes.bool.isRequired,
+    })).isRequired,
+  }
 
   constructor(props) {
     super()
@@ -94,8 +116,11 @@ class SignIn extends PureComponent {
   render() {
     const {
       authData: { isPersisted, isSubAccount },
+      authType,
       isElectronBackendLoaded,
+      isMultipleAccsSelected,
       loading,
+      switchAuthType,
       switchMode,
       t,
       users,
@@ -106,6 +131,10 @@ class SignIn extends PureComponent {
     const isSignInDisabled = !email || (config.isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
+    const showSubAccount = isCurrentUserHasSubAccount && isMultipleAccsSelected
+    const preparedUsers = isMultipleAccsSelected
+      ? _filter(users, 'isSubAccount').map(user => user.email)
+      : _filter(users, ['isSubAccount', false]).map(user => user.email)
 
     return (
       <Dialog
@@ -117,10 +146,16 @@ class SignIn extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
+          {config.showFrameworkMode && (
+            <AuthTypeSelector
+              authType={authType}
+              switchAuthType={switchAuthType}
+            />
+          )}
           <PlatformLogo />
           <Select
             className='bitfinex-auth-email'
-            items={users.filter((user) => !user.isSubAccount).map(user => user.email)}
+            items={preparedUsers}
             onChange={this.onEmailChange}
             popoverClassName='bitfinex-auth-email-popover'
             value={email}
@@ -143,7 +178,7 @@ class SignIn extends PureComponent {
             >
               {t('auth.rememberMe')}
             </Checkbox>
-            {isCurrentUserHasSubAccount && (
+            {showSubAccount && (
               <Checkbox
                 className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
                 name='isSubAccount'
@@ -157,11 +192,17 @@ class SignIn extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <div className='bitfinex-auth-password-recovery' onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}>
+            <div
+              className='bitfinex-auth-password-recovery'
+              onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
+            >
               {t('auth.passwordRecovery')}
             </div>
             <div>
-              <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_UP)}>
+              <div
+                className='bitfinex-auth-mode-switch'
+                onClick={() => switchMode(MODES.SIGN_UP)}
+              >
                 {t('auth.signUp')}
               </div>
               <Button
@@ -182,4 +223,4 @@ class SignIn extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(SignIn)
+export default SignIn

@@ -1,5 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Button,
@@ -13,7 +13,7 @@ import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
 import config from 'config'
 
-import { propTypes, defaultProps } from './SignUp.props'
+import AuthTypeSelector from '../AuthTypeSelector'
 import InputKey from '../InputKey'
 import ErrorLabel from '../ErrorLabel'
 import { MODES } from '../Auth'
@@ -22,9 +22,24 @@ const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=
 
 // handles framework sign up and online version login
 class SignUp extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
+  static propTypes = {
+    authType: PropTypes.string.isRequired,
+    authData: PropTypes.shape({
+      apiKey: PropTypes.string,
+      apiSecret: PropTypes.string,
+      isPersisted: PropTypes.bool.isRequired,
+    }).isRequired,
+    loading: PropTypes.bool.isRequired,
+    t: PropTypes.func.isRequired,
+    signUp: PropTypes.func.isRequired,
+    switchMode: PropTypes.func.isRequired,
+    switchAuthType: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      isSubAccount: PropTypes.bool.isRequired,
+      isNotProtected: PropTypes.bool.isRequired,
+    })).isRequired,
+  }
 
   constructor(props) {
     super()
@@ -126,8 +141,10 @@ class SignUp extends PureComponent {
 
   render() {
     const {
+      authType,
       loading,
       switchMode,
+      switchAuthType,
       t,
       users,
     } = this.props
@@ -162,6 +179,12 @@ class SignUp extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
+          {config.showFrameworkMode && (
+            <AuthTypeSelector
+              authType={authType}
+              switchAuthType={switchAuthType}
+            />
+          )}
           <PlatformLogo />
           <Callout>
             {t('auth.note1')}
@@ -183,7 +206,7 @@ class SignUp extends PureComponent {
             onChange={this.handleInputChange}
           />
           {config.showFrameworkMode && isPasswordProtected && (
-            <Fragment>
+            <>
               <InputKey
                 label='auth.enterPassword'
                 name='password'
@@ -198,7 +221,7 @@ class SignUp extends PureComponent {
                 onChange={this.handleInputChange}
               />
               <ErrorLabel text={passwordRepeatError} />
-            </Fragment>
+            </>
           )}
           <div className='bitfinex-auth-checkboxes'>
             <Checkbox
@@ -245,4 +268,4 @@ class SignUp extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(SignUp)
+export default SignUp

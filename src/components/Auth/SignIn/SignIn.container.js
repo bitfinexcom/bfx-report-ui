@@ -1,4 +1,6 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
 import { signIn, updateAuth } from 'state/auth/actions'
 import {
@@ -21,6 +23,7 @@ const mapDispatchToProps = {
   updateAuth,
 }
 
-const SignInContainer = connect(mapStateToProps, mapDispatchToProps)(SignIn)
-
-export default SignInContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(SignIn)
