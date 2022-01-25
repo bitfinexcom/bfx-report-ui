@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _isEmpty from 'lodash/isEmpty'
 import _get from 'lodash/get'
@@ -7,7 +8,6 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import SectionHeader from 'ui/SectionHeader'
 
-import { propTypes, defaultProps } from './AccountSummary.props'
 import Volume from './AccountSummary.volume'
 import Fees from './AccountSummary.fees'
 import DerivFees from './AccountSummary.derivFees'
@@ -16,6 +16,38 @@ import PaidFees from './AccountSummary.paidFees'
 import FeeTierVolume from './AccountSummary.feeTierVolume'
 
 class AccountSummary extends PureComponent {
+  static propTypes = {
+    data: PropTypes.shape({
+      derivMakerRebate: PropTypes.number,
+      derivTakerRebate: PropTypes.number,
+      derivTakerFee: PropTypes.number,
+      derivMakerFee: PropTypes.number,
+      fees_funding_30d: PropTypes.shape({
+        USD: PropTypes.number,
+      }),
+      fees_funding_total_30d: PropTypes.number,
+      fees_trading_30d: PropTypes.shape({
+        USD: PropTypes.number,
+      }),
+      fees_trading_total_30d: PropTypes.number,
+      leoAmountAvg: PropTypes.number,
+      leoLev: PropTypes.number,
+      makerFee: PropTypes.number,
+      takerFeeToCrypto: PropTypes.number,
+      takerFeeToFiat: PropTypes.number,
+      takerFeeToStable: PropTypes.number,
+      trade_vol_30d: PropTypes.arrayOf(PropTypes.object),
+    }),
+    dataReceived: PropTypes.bool.isRequired,
+    fetchData: PropTypes.func.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    data: {},
+  }
+
   componentDidMount() {
     const {
       dataReceived, pageLoading, fetchData,
@@ -79,8 +111,5 @@ class AccountSummary extends PureComponent {
     )
   }
 }
-
-AccountSummary.propTypes = propTypes
-AccountSummary.defaultProps = defaultProps
 
 export default AccountSummary
