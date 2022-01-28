@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import _filter from 'lodash/filter'
+import _isEmpty from 'lodash/isEmpty'
 import {
   Button,
   Checkbox,
@@ -17,6 +18,11 @@ import Select from 'ui/Select'
 import InputKey from '../InputKey'
 import { MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
+
+const getPreparedUsers = (users, multi = false) => (multi
+  ? _filter(users, 'isSubAccount').map(user => user.email)
+  : _filter(users, ['isSubAccount', false]).map(user => user.email))
+
 
 class SignIn extends PureComponent {
   static propTypes = {
@@ -46,10 +52,15 @@ class SignIn extends PureComponent {
   constructor(props) {
     super()
 
-    const { authData: { email, password }, users } = props
+    const { authData: { email, password }, users, isMultipleAccsSelected } = props
     const { email: firstUserEmail } = users[0] || {}
+    const multiAccsUsers = getPreparedUsers(users, isMultipleAccsSelected)
+    const multiAccsEmail = multiAccsUsers[0]
+    const initialEmail = isMultipleAccsSelected
+      ? multiAccsEmail || ''
+      : email || firstUserEmail
     this.state = {
-      email: email || firstUserEmail,
+      email: initialEmail,
       password,
     }
   }
@@ -60,12 +71,12 @@ class SignIn extends PureComponent {
       users,
       isUsersLoaded,
       switchMode,
+      isMultipleAccsSelected,
     } = this.props
 
     if (!prevProps.isUsersLoaded && isUsersLoaded) {
       if (users.length) {
         const { email: firstUserEmail } = users[0] || {}
-
         // eslint-disable-next-line react/no-did-update-set-state
         this.setState({
           email: email || firstUserEmail,
@@ -73,6 +84,15 @@ class SignIn extends PureComponent {
       } else {
         switchMode(MODES.SIGN_UP)
       }
+    }
+
+    if (!prevProps.isMultipleAccsSelected && isMultipleAccsSelected) {
+      const multiAccsUsers = getPreparedUsers(users, isMultipleAccsSelected)
+      const updatedEmail = multiAccsUsers[0]
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        email: updatedEmail || '',
+      })
     }
   }
 
@@ -132,9 +152,9 @@ class SignIn extends PureComponent {
       || (!isNotProtected && !password)
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
     const showSubAccount = isCurrentUserHasSubAccount && isMultipleAccsSelected
-    const preparedUsers = isMultipleAccsSelected
-      ? _filter(users, 'isSubAccount').map(user => user.email)
-      : _filter(users, ['isSubAccount', false]).map(user => user.email)
+    const preparedUsers = getPreparedUsers(users, isMultipleAccsSelected)
+    const isEmailSelected = !_isEmpty(email)
+
 
     return (
       <Dialog
@@ -161,7 +181,7 @@ class SignIn extends PureComponent {
             value={email}
             loading
           />
-          {!isNotProtected && users.length > 0 && (
+          {!isNotProtected && isEmailSelected && users.length > 0 && (
             <InputKey
               label='auth.enterPassword'
               name='password'
@@ -170,14 +190,16 @@ class SignIn extends PureComponent {
             />
           )}
           <div className='bitfinex-auth-checkboxes'>
-            <Checkbox
-              className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
-              name='isPersisted'
-              checked={isPersisted}
-              onChange={this.togglePersistence}
-            >
-              {t('auth.rememberMe')}
-            </Checkbox>
+            {isEmailSelected && (
+              <Checkbox
+                className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
+                name='isPersisted'
+                checked={isPersisted}
+                onChange={this.togglePersistence}
+              >
+                {t('auth.rememberMe')}
+              </Checkbox>
+            )}
             {showSubAccount && (
               <Checkbox
                 className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
