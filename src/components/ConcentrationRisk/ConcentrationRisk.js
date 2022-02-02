@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _keys from 'lodash/keys'
@@ -22,9 +23,26 @@ import { fixedFloat } from 'ui/utils'
 import { isValidTimeStamp } from 'state/query/utils'
 
 import getColumns from './ConcentrationRisk.columns'
-import { propTypes, defaultProps } from './ConcentrationRisk.props'
 
 class ConcentrationRisk extends PureComponent {
+  static propTypes = {
+    currentTime: PropTypes.number,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      currency: PropTypes.string,
+      balanceUsd: PropTypes.number,
+    })),
+    fetchWallets: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
+    currentTime: null,
+  }
+
   constructor(props) {
     super(props)
     const { currentTime } = props
@@ -133,18 +151,19 @@ class ConcentrationRisk extends PureComponent {
         className='col-lg-12 col-md-12 col-sm-12 col-xs-12 concentration-risk no-table-scroll'
       >
         <SectionHeader>
-          <SectionHeaderTitle>{t('concentrationrisk.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('concentrationrisk.title')}
+          </SectionHeaderTitle>
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('query.endTime')}
               </SectionHeaderItemLabel>
               <DateInput
-                onChange={this.handleDateChange}
                 defaultValue={timestamp}
+                onChange={this.handleDateChange}
               />
             </SectionHeaderItem>
-
             <QueryButton
               disabled={!hasNewTime}
               onClick={this.handleQuery}
@@ -157,8 +176,5 @@ class ConcentrationRisk extends PureComponent {
     )
   }
 }
-
-ConcentrationRisk.propTypes = propTypes
-ConcentrationRisk.defaultProps = defaultProps
 
 export default withTranslation('translations')(ConcentrationRisk)
