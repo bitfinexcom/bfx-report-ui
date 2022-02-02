@@ -1,3 +1,1 @@
-import ChangeLogs from './ChangeLogs.container'
-
-export default ChangeLogs
+export { default } from './ChangeLogs.container'
