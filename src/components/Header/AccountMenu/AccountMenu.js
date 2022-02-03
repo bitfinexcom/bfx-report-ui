@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
@@ -11,7 +12,6 @@ import _isString from 'lodash/isString'
 
 import Icon from 'icons'
 
-import { propTypes, defaultProps } from './AccountMenu.props'
 import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
@@ -94,7 +94,13 @@ const AccountMenu = ({
 )
 
 
-AccountMenu.propTypes = propTypes
-AccountMenu.defaultProps = defaultProps
+AccountMenu.propTypes = {
+  authStatus: PropTypes.bool.isRequired,
+  email: PropTypes.string.isRequired,
+  logout: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
+  toggleExportDialog: PropTypes.func.isRequired,
+  togglePrefDialog: PropTypes.func.isRequired,
+}
 
 export default withTranslation('translations')(AccountMenu)
