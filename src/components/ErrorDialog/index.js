@@ -1,3 +1,1 @@
-import ErrorDialog from './ErrorDialog.container'
-
-export default ErrorDialog
+export { default } from './ErrorDialog.container'
