@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   Classes,
@@ -8,8 +9,6 @@ import {
 
 import Icon from 'icons'
 import config from 'config'
-
-import { propTypes, defaultProps } from './ExportSuccessDialog.props'
 
 const ExportSuccessDialog = ({
   t,
@@ -43,18 +42,23 @@ const ExportSuccessDialog = ({
 
   return (
     <Dialog
-      className='export-success-dialog'
-      isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={toggleDialog}
+      isCloseButtonShown={false}
       title={t('download.success')}
+      className='export-success-dialog'
     >
       <div className={Classes.DIALOG_BODY}>
         <Icon.CHECKED />
-        <div className='export-success-dialog-message'>{message}</div>
+        <div className='export-success-dialog-message'>
+          {message}
+        </div>
       </div>
       <div className={Classes.DIALOG_FOOTER}>
-        <Button intent={Intent.PRIMARY} onClick={toggleDialog}>
+        <Button
+          onClick={toggleDialog}
+          intent={Intent.PRIMARY}
+        >
           {t('download.okay')}
         </Button>
       </div>
@@ -62,7 +66,14 @@ const ExportSuccessDialog = ({
   )
 }
 
-ExportSuccessDialog.propTypes = propTypes
-ExportSuccessDialog.defaultProps = defaultProps
+ExportSuccessDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  t: PropTypes.func.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
+  localExportPath: PropTypes.string,
+}
+ExportSuccessDialog.defaultProps = {
+  localExportPath: null,
+}
 
 export default memo(ExportSuccessDialog)
