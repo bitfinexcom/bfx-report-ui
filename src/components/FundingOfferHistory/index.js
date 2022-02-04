@@ -1,3 +1,1 @@
-import FundingOfferHistory from './FundingOfferHistory.container'
-
-export default FundingOfferHistory
+export { default } from './FundingOfferHistory.container'
