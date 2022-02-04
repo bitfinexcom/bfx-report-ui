@@ -1,3 +1,1 @@
-import TimeFrame from './TimeFrame.container'
-
-export default TimeFrame
+export { default } from './TimeFrame.container'

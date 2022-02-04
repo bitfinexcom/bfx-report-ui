@@ -1,9 +1,8 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 
 import Icon from 'icons'
 import { formatDate } from 'state/utils'
-
-import { propTypes, defaultProps } from './TimeFrame.props'
 
 const TimeFrame = ({
   end,
@@ -13,8 +12,8 @@ const TimeFrame = ({
 }) => (
   <div className='timeframe'>
     <div
-      className='timeframe-wrapper'
       onClick={toggleDialog}
+      className='timeframe-wrapper'
     >
       <div className='timeframe-target'>
         <Icon.CALENDAR />
@@ -26,7 +25,16 @@ const TimeFrame = ({
   </div>
 )
 
-TimeFrame.propTypes = propTypes
-TimeFrame.defaultProps = defaultProps
+TimeFrame.propTypes = {
+  start: PropTypes.number,
+  end: PropTypes.number,
+  timezone: PropTypes.string.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
+}
+
+TimeFrame.defaultProps = {
+  start: 0,
+  end: 0,
+}
 
 export default memo(TimeFrame)
