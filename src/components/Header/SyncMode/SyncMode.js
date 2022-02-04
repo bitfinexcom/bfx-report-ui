@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import {
   Position,
   Tooltip,
@@ -6,7 +7,6 @@ import {
 
 import config from 'config'
 
-import { propTypes, defaultProps } from './SyncMode.props'
 import {
   getSyncIcon,
   getSyncTitle,
@@ -14,11 +14,11 @@ import {
 } from './SyncMode.helpers'
 
 const SyncMode = ({
-  isSyncing,
-  syncProgress,
-  startSyncNow,
-  stopSyncNow,
   t,
+  isSyncing,
+  stopSyncNow,
+  startSyncNow,
+  syncProgress,
 }) => {
   const handleSync = () => {
     if (isSyncing) {
@@ -38,8 +38,8 @@ const SyncMode = ({
     <>
       <Tooltip
         className='sync-mode'
-        content={t(getSyncTooltipMessage(isSyncing))}
         position={Position.BOTTOM}
+        content={t(getSyncTooltipMessage(isSyncing))}
       >
         <div className='sync-mode-wrapper' onClick={handleSync}>
           <div className='sync-mode-icon-wrapper'>
@@ -47,15 +47,26 @@ const SyncMode = ({
               {syncIcon}
             </div>
           </div>
-          <span className='sync-mode-status'>{t(getSyncTitle(isSyncing))}</span>
+          <span className='sync-mode-status'>
+            {t(getSyncTitle(isSyncing))}
+          </span>
         </div>
       </Tooltip>
     </>
   )
 }
 
+SyncMode.propTypes = {
+  t: PropTypes.func.isRequired,
+  stopSyncNow: PropTypes.func,
+  startSyncNow: PropTypes.func,
+  isSyncing: PropTypes.bool.isRequired,
+  syncProgress: PropTypes.number.isRequired,
+}
 
-SyncMode.propTypes = propTypes
-SyncMode.defaultProps = defaultProps
+SyncMode.defaultProps = {
+  startSyncNow: () => {},
+  stopSyncNow: () => {},
+}
 
 export default memo(SyncMode)
