@@ -75,7 +75,18 @@ class DataTable extends PureComponent {
         cur += 1
       }
 
-      navigator.clipboard.writeText(`${columnHeaders.join('\t')}\n${text}`)
+      const newLineChar = columnHeaders.length > 0
+        ? '\n'
+        : ''
+      const headersText = `${columnHeaders.join('\t')}${newLineChar}`
+
+      navigator.clipboard.writeText(`${headersText}${text}`).catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error(err)
+      })
+    }).catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error(err)
     })
   }
 
