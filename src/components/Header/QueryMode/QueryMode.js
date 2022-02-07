@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import {
   Position,
   Tooltip,
@@ -7,7 +8,6 @@ import {
 import Icon from 'icons'
 import config from 'config'
 
-import { propTypes, defaultProps } from './QueryMode.props'
 import {
   getModeIcon,
   getModeTitle,
@@ -30,7 +30,9 @@ const QueryMode = ({ syncMode, switchSyncMode, t }) => {
               <Icon.CHECKMARK_CIRCLE />
             </div>
           </div>
-          <span className='query-mode-status'>{t('sync.online')}</span>
+          <span className='query-mode-status'>
+            {t('sync.online')}
+          </span>
         </div>
       </div>
     )
@@ -56,8 +58,15 @@ const QueryMode = ({ syncMode, switchSyncMode, t }) => {
   )
 }
 
-
-QueryMode.propTypes = propTypes
-QueryMode.defaultProps = defaultProps
+QueryMode.propTypes = {
+  t: PropTypes.func.isRequired,
+  switchSyncMode: PropTypes.func,
+  syncMode: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool]).isRequired,
+}
+QueryMode.defaultProps = {
+  switchSyncMode: () => {},
+}
 
 export default memo(QueryMode)

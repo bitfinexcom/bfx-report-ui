@@ -1,3 +1,1 @@
-import QueryMode from './QueryMode.container'
-
-export default QueryMode
+export { default } from './QueryMode.container'
