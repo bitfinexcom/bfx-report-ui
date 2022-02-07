@@ -1,3 +1,1 @@
-import FundingPayment from './FundingPayment.container'
-
-export default FundingPayment
+export { default } from './FundingPayment.container'
