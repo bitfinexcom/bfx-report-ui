@@ -1,4 +1,5 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import {
   Card,
@@ -19,7 +20,6 @@ import {
 } from 'state/utils'
 
 import getColumns from 'components/Ledgers/Ledgers.columns'
-import { propTypes, defaultProps } from 'components/Ledgers/Ledgers.SubCategory.props'
 
 const TYPE = queryConstants.MENU_FPAYMENT
 
@@ -27,6 +27,43 @@ const TYPE = queryConstants.MENU_FPAYMENT
  * Funding Payment has the same state and columns as Ledgers
  */
 class FundingPayment extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amount: PropTypes.bool,
+      amountUsd: PropTypes.bool,
+      balance: PropTypes.bool,
+      balanceUsd: PropTypes.bool,
+      currency: PropTypes.bool,
+      id: PropTypes.bool,
+      mts: PropTypes.bool,
+      wallet: PropTypes.bool,
+    }),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      amount: PropTypes.number.isRequired,
+      balance: PropTypes.number.isRequired,
+      currency: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      mts: PropTypes.number.isRequired,
+      wallet: PropTypes.string,
+    })).isRequired,
+    existingCoins: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    existingCoins: [],
+    targetSymbols: [],
+  }
+
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -41,22 +78,22 @@ class FundingPayment extends PureComponent {
 
   render() {
     const {
-      columns,
-      getFullTime,
-      targetSymbols,
-      entries,
-      existingCoins,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      columns,
+      entries,
+      refresh,
       timeOffset,
+      getFullTime,
+      pageLoading,
+      dataReceived,
+      existingCoins,
+      targetSymbols,
     } = this.props
     const tableColumns = getColumns({
-      filteredData: entries,
-      getFullTime,
       t,
+      getFullTime,
       target: TYPE,
+      filteredData: entries,
       timeOffset,
     }).filter(({ id }) => columns[id])
 
@@ -67,20 +104,26 @@ class FundingPayment extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={pageLoading} />
-        </Fragment>
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
+        </>
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
-          title='fpayment.title'
           target={TYPE}
+          title='fpayment.title'
           symbolsSelectorProps={{
             currentFilters: targetSymbols,
             existingCoins,
@@ -94,8 +137,5 @@ class FundingPayment extends PureComponent {
     )
   }
 }
-
-FundingPayment.propTypes = propTypes
-FundingPayment.defaultProps = defaultProps
 
 export default withTranslation('translations')(FundingPayment)
