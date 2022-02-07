@@ -1,22 +1,24 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 
 import Icon from 'icons'
 
-import { propTypes, defaultProps } from './Export.props'
+const Export = ({ t, toggleDialog }) => (
+  <div
+    className='export'
+    onClick={toggleDialog}
+  >
+    <Icon.FILE_EXPORT />
+    <span>
+      {t('download.export')}
+    </span>
+  </div>
+)
 
-const Export = (props) => {
-  const { t, toggleDialog } = props
-
-  return (
-    <div className='export' onClick={toggleDialog}>
-      <Icon.FILE_EXPORT />
-      <span>{t('download.export')}</span>
-    </div>
-  )
+Export.propTypes = {
+  t: PropTypes.func.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
 }
-
-Export.propTypes = propTypes
-Export.defaultProps = defaultProps
 
 export default withTranslation('translations')(Export)
