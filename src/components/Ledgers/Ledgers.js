@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
@@ -27,11 +28,50 @@ import {
 } from 'state/utils'
 
 import getColumns from './Ledgers.columns'
-import { propTypes, defaultProps } from './Ledgers.props'
 
 const TYPE = queryConstants.MENU_LEDGERS
 
 class Ledgers extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amount: PropTypes.bool,
+      amountUsd: PropTypes.bool,
+      balance: PropTypes.bool,
+      balanceUsd: PropTypes.bool,
+      currency: PropTypes.bool,
+      description: PropTypes.bool,
+      id: PropTypes.bool,
+      mts: PropTypes.bool,
+      wallet: PropTypes.bool,
+    }),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      amount: PropTypes.number.isRequired,
+      balance: PropTypes.number.isRequired,
+      currency: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      mts: PropTypes.number.isRequired,
+      wallet: PropTypes.string,
+    })).isRequired,
+    existingCoins: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    setParams: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+    targetCategory: PropTypes.number,
+  }
+
+  static defaultProps = {
+    columns: {},
+    existingCoins: [],
+    targetSymbols: [],
+    targetCategory: undefined,
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -99,7 +139,9 @@ class Ledgers extends PureComponent {
         className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader>
-          <SectionHeaderTitle>{t('ledgers.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('ledgers.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -131,8 +173,5 @@ class Ledgers extends PureComponent {
     )
   }
 }
-
-Ledgers.propTypes = propTypes
-Ledgers.defaultProps = defaultProps
 
 export default Ledgers
