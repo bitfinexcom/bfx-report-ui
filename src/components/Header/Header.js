@@ -39,7 +39,6 @@ const Header = () => {
       <QueryMode />
       <Status />
       <AccountMenu />
-
       <TopNavigation />
     </div>
   )
