@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
@@ -14,11 +15,17 @@ import config from 'config'
 import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
-import { propTypes, defaultProps } from './TopNavigation.props'
 
 const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
 
 class TopNavigation extends PureComponent {
+  static propTypes = {
+    email: PropTypes.string.isRequired,
+    logout: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    togglePrefDialog: PropTypes.func.isRequired,
+  }
+
   state = {
     isOpen: false,
   }
@@ -114,8 +121,5 @@ class TopNavigation extends PureComponent {
     )
   }
 }
-
-TopNavigation.propTypes = propTypes
-TopNavigation.defaultProps = defaultProps
 
 export default withTranslation('translations')(TopNavigation)
