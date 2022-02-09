@@ -1,4 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 
 import AccountBalance from 'components/AccountBalance'
@@ -45,8 +46,6 @@ import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import NavMenu from 'ui/NavMenu'
 import config from 'config'
-
-import { propTypes, defaultProps } from './Main.props'
 
 const {
   MENU_ACCOUNT_BALANCE,
@@ -117,6 +116,16 @@ const PATHS = {
 }
 
 class Main extends PureComponent {
+  static propTypes = {
+    authIsShown: PropTypes.bool,
+    authStatus: PropTypes.bool.isRequired,
+    errorDialogDisabled: PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    authIsShown: false,
+  }
+
   render() {
     const {
       authStatus,
@@ -125,7 +134,7 @@ class Main extends PureComponent {
     } = this.props
 
     return authStatus && !authIsShown ? (
-      <Fragment>
+      <>
         <NavMenu className='bitfinex-nav-menu--main' />
         <div className='bitfinex-dataset'>
           <Switch>
@@ -321,12 +330,9 @@ class Main extends PureComponent {
         <PaginationDialog />
         <Preferences />
         <TimeFrameDialog />
-      </Fragment>
+      </>
     ) : ''
   }
 }
-
-Main.propTypes = propTypes
-Main.defaultProps = defaultProps
 
 export default Main
