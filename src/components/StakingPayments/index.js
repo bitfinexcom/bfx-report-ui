@@ -1,3 +1,1 @@
-import StakingPayments from './StakingPayments.container'
-
-export default StakingPayments
+export { default } from './StakingPayments.container'
