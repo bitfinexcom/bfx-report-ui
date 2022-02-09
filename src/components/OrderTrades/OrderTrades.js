@@ -1,26 +1,62 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import queryString from 'query-string'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
 import { SectionHeader, SectionHeaderTitle } from 'ui/SectionHeader'
+import { checkFetch } from 'state/utils'
 import queryConstants from 'state/query/constants'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch } from 'state/utils'
+
+import getColumns from '../Trades/Trades.columns'
 
 import OrderTradesNoData from './OrderTrades.NoData'
-import getColumns from '../Trades/Trades.columns'
-import { propTypes, defaultProps } from './OrderTrades.props'
 
 const { MENU_ORDER_TRADES } = queryConstants
 
 class OrderTrades extends PureComponent {
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.shape({ pair: PropTypes.string }),
+    }).isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string,
+    }).isRequired,
+    setParams: PropTypes.func.isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      execAmount: PropTypes.number.isRequired,
+      execPrice: PropTypes.number.isRequired,
+      fee: PropTypes.number,
+      feeCurrency: PropTypes.string,
+      mtsCreate: PropTypes.number.isRequired,
+      orderID: PropTypes.number.isRequired,
+    })).isRequired,
+    fetchData: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    params: PropTypes.shape({
+      targetPair: PropTypes.string,
+      id: PropTypes.number,
+    }).isRequired,
+    t: PropTypes.func.isRequired,
+    getFullTime: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
   componentDidMount() {
     const {
-      dataReceived, pageLoading, setParams, fetchData, match, location, params,
+      match,
+      params,
+      location,
+      setParams,
+      fetchData,
+      pageLoading,
+      dataReceived,
     } = this.props
     const { targetPair, id } = params
     const { pair } = match.params
@@ -41,13 +77,13 @@ class OrderTrades extends PureComponent {
 
   render() {
     const {
+      t,
       entries,
-      dataReceived,
       pageLoading,
       getFullTime,
-      params: { targetPair, id },
-      t,
       timeOffset,
+      dataReceived,
+      params: { targetPair, id },
     } = this.props
 
     if (!targetPair || !id) {
@@ -55,10 +91,10 @@ class OrderTrades extends PureComponent {
     }
 
     const tableColumns = getColumns({
-      filteredData: entries,
-      getFullTime,
       t,
       timeOffset,
+      getFullTime,
+      filteredData: entries,
     })
 
     let showContent
@@ -76,17 +112,19 @@ class OrderTrades extends PureComponent {
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('ordertrades.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('ordertrades.title')}
+          </SectionHeaderTitle>
         </SectionHeader>
         {showContent}
       </Card>
     )
   }
 }
-
-OrderTrades.propTypes = propTypes
-OrderTrades.defaultProps = defaultProps
 
 export default withTranslation('translations')(OrderTrades)
