@@ -1,12 +1,13 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import queryString from 'query-string'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { mapRequestPairs } from 'state/symbols/utils'
@@ -19,11 +20,63 @@ import {
 import { getPath } from 'state/query/utils'
 
 import getColumns from './Orders.columns'
-import { propTypes, defaultProps } from './Orders.props'
 
 const TYPE = queryConstants.MENU_ORDERS
 
 class Orders extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amountExecuted: PropTypes.bool,
+      amountOrig: PropTypes.bool,
+      existingCoins: PropTypes.bool,
+      targetSymbols: PropTypes.bool,
+      id: PropTypes.bool,
+      meta: PropTypes.bool,
+      mtsCreate: PropTypes.bool,
+      mtsUpdate: PropTypes.bool,
+      pair: PropTypes.bool,
+      price: PropTypes.bool,
+      priceAvg: PropTypes.bool,
+      priceTrailing: PropTypes.bool,
+      status: PropTypes.bool,
+      type: PropTypes.bool,
+      typePrev: PropTypes.bool,
+    }),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      amountOrig: PropTypes.number,
+      amountExecuted: PropTypes.number,
+      id: PropTypes.number,
+      mtsUpdate: PropTypes.number,
+      pair: PropTypes.string,
+      price: PropTypes.number,
+      priceAvg: PropTypes.number,
+      status: PropTypes.string,
+      type: PropTypes.string,
+    })),
+    existingPairs: PropTypes.arrayOf(PropTypes.string),
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    entries: [],
+    targetPairs: [],
+    existingPairs: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -53,25 +106,25 @@ class Orders extends PureComponent {
 
   render() {
     const {
+      t,
       columns,
       columnsWidth,
-      existingPairs,
       entries,
-      dataReceived,
-      pageLoading,
       refresh,
+      timeOffset,
+      pageLoading,
       targetPairs,
       getFullTime,
-      t,
-      timeOffset,
+      dataReceived,
+      existingPairs,
     } = this.props
     const tableColumns = getColumns({
       columnsWidth,
-      filteredData: entries,
-      getFullTime,
-      onIdClick: this.jumpToOrderTrades,
       t,
       timeOffset,
+      getFullTime,
+      filteredData: entries,
+      onIdClick: this.jumpToOrderTrades,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -81,7 +134,7 @@ class Orders extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
@@ -91,21 +144,24 @@ class Orders extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </Fragment>
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
-          title='orders.title'
           target={TYPE}
+          refresh={refresh}
+          title='orders.title'
           pairsSelectorProps={{
             currentFilters: targetPairs,
             existingPairs,
             togglePair: this.togglePair,
           }}
-          refresh={refresh}
           clearTargetPairs={this.clearPairs}
         />
         {showContent}
@@ -113,8 +169,5 @@ class Orders extends PureComponent {
     )
   }
 }
-
-Orders.propTypes = propTypes
-Orders.defaultProps = defaultProps
 
 export default withTranslation('translations')(Orders)
