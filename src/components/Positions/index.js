@@ -1,3 +1,1 @@
-import Positions from './Positions.container'
-
-export default Positions
+export { default } from './Positions.container'

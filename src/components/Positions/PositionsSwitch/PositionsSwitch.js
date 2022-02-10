@@ -13,9 +13,13 @@ class PositionsSwitch extends React.PureComponent {
       push: PropTypes.func.isRequired,
       location: PropTypes.shape({ search: PropTypes.string }),
     }).isRequired,
-    refresh: PropTypes.func.isRequired,
+    refresh: PropTypes.func,
     t: PropTypes.func.isRequired,
     target: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    refresh: () => {},
   }
 
   switchSection = (e) => {
