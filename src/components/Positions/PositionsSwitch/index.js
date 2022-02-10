@@ -1,3 +1,1 @@
-import PositionsSwitch from './PositionsSwitch.container'
-
-export default PositionsSwitch
+export { default } from './PositionsSwitch.container'
