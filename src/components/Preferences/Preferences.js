@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import {
   Button,
@@ -15,8 +16,6 @@ import TableScrollPref from 'ui/TableScrollPref'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
 import DateFormatSelector from 'ui/DateFormatSelector'
 import TimeRangePreservePref from 'ui/TimeRangePreservePref'
-
-import { propTypes, defaultProps } from './Preferences.props'
 
 const Preferences = ({
   t,
@@ -110,9 +109,14 @@ const Preferences = ({
   </Dialog>
 )
 
-Preferences.propTypes = propTypes
+Preferences.propTypes = {
+  toggleDialog: PropTypes.func.isRequired,
+  setTimezone: PropTypes.func.isRequired,
+  setInputTimezone: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
+  timezone: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  inputTimezone: PropTypes.string.isRequired,
+}
 
-Preferences.defaultProps = defaultProps
-
-
-export default withTranslation('translations')(Preferences)
+export default withTranslation('translations')(memo(Preferences))
