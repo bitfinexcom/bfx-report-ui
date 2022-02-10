@@ -1,4 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -23,11 +24,45 @@ import { getPath } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
 
 import getColumns from './PublicFunding.columns'
-import { propTypes, defaultProps } from './PublicFunding.props'
 
 const TYPE = queryConstants.MENU_PUBLIC_FUNDING
 
 class PublicFunding extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amount: PropTypes.bool,
+      currency: PropTypes.bool,
+      id: PropTypes.bool,
+      mts: PropTypes.bool,
+      period: PropTypes.bool,
+      rate: PropTypes.bool,
+    }),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      amount: PropTypes.number,
+      rate: PropTypes.number,
+      mts: PropTypes.number,
+      period: PropTypes.number,
+    })),
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    setTargetSymbol: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetSymbol: PropTypes.string,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    entries: [],
+    targetSymbol: '',
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -47,25 +82,25 @@ class PublicFunding extends PureComponent {
 
   render() {
     const {
+      t,
       columns,
       columnsWidth,
-      getFullTime,
       entries,
-      dataReceived,
-      pageLoading,
       refresh,
-      t,
-      targetSymbol,
       timeOffset,
+      pageLoading,
+      getFullTime,
+      targetSymbol,
+      dataReceived,
     } = this.props
 
     const tableColumns = getColumns({
       columnsWidth,
-      filteredData: entries,
       getFullTime,
       t,
-      targetSymbol,
       timeOffset,
+      targetSymbol,
+      filteredData: entries,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -75,21 +110,29 @@ class PublicFunding extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={pageLoading} />
-        </Fragment>
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('publicfunding.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('publicfunding.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -111,8 +154,5 @@ class PublicFunding extends PureComponent {
     )
   }
 }
-
-PublicFunding.propTypes = propTypes
-PublicFunding.defaultProps = defaultProps
 
 export default withTranslation('translations')(PublicFunding)

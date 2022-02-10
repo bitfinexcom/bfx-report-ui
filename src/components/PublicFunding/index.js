@@ -1,3 +1,1 @@
-import PublicFunding from './PublicFunding.container'
-
-export default PublicFunding
+export { default } from './PublicFunding.container'
