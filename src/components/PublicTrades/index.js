@@ -1,3 +1,1 @@
-import PublicTrades from './PublicTrades.container'
-
-export default PublicTrades
+export { default } from './PublicTrades.container'
