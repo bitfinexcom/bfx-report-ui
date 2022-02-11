@@ -1,15 +1,37 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 import _get from 'lodash/get'
 
-import SubUsersList from './SubUsersList'
-import { propTypes, defaultProps } from './SubAccount.props'
-import RemoveSubAccount from './SubAccountRemove'
 import SubUsersAdd from './SubUsersAdd'
+import SubUsersList from './SubUsersList'
+import RemoveSubAccount from './SubAccountRemove'
 import { getFilledAccounts, EMPTY_ACCOUNT } from './utils'
 
 class SubAccount extends PureComponent {
+  static propTypes = {
+    authData: PropTypes.shape({
+      email: PropTypes.string,
+      isSubAccount: PropTypes.bool,
+    }).isRequired,
+    addSubAccount: PropTypes.func.isRequired,
+    addMultipleAccsEnabled: PropTypes.bool,
+    masterAccount: PropTypes.string,
+    updateSubAccount: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      isSubAccount: PropTypes.bool.isRequired,
+      isNotProtected: PropTypes.bool.isRequired,
+    })).isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    masterAccount: undefined,
+    addMultipleAccsEnabled: true,
+  }
+
   state = {
     accounts: [EMPTY_ACCOUNT],
     subUsersToRemove: [],
@@ -133,8 +155,5 @@ class SubAccount extends PureComponent {
     )
   }
 }
-
-SubAccount.propTypes = propTypes
-SubAccount.defaultProps = defaultProps
 
 export default withTranslation('translations')(SubAccount)
