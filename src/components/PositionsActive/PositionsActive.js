@@ -1,22 +1,50 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import PositionsSwitch from 'components/Positions/PositionsSwitch'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
 import SectionHeader from 'ui/SectionHeader'
+import PositionsSwitch from 'components/Positions/PositionsSwitch'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
 import { checkFetch } from 'state/utils'
+import { getPath } from 'state/query/utils'
 
 import getColumns from 'components/Positions/Positions.columns'
-import { propTypes, defaultProps } from './PositionsActive.props'
 
 const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
 
 class PositionsActive extends PureComponent {
+  static propTypes = {
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      amount: PropTypes.number,
+      basePrice: PropTypes.number,
+      liquidationPrice: PropTypes.number,
+      marginFunding: PropTypes.number,
+      marginFundingType: PropTypes.number,
+      mtsUpdate: PropTypes.number,
+      pair: PropTypes.string,
+      pl: PropTypes.number,
+      plPerc: PropTypes.number,
+    })),
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    fetchData: PropTypes.func.isRequired,
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
+  }
+
   componentDidMount() {
     const { dataReceived, pageLoading, fetchData } = this.props
     if (!dataReceived && !pageLoading) {
@@ -37,21 +65,21 @@ class PositionsActive extends PureComponent {
 
   render() {
     const {
-      getFullTime,
-      entries,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      entries,
+      refresh,
       timeOffset,
+      pageLoading,
+      getFullTime,
+      dataReceived,
     } = this.props
     const tableColumns = getColumns({
+      t,
+      timeOffset,
+      getFullTime,
       target: TYPE,
       filteredData: entries,
-      getFullTime,
-      t,
       onIdClick: this.jumpToPositionsAudit,
-      timeOffset,
     })
 
     let showContent
@@ -69,10 +97,13 @@ class PositionsActive extends PureComponent {
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='section-positions-active col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='section-positions-active col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
-          filter={false}
           target={TYPE}
+          filter={false}
           timeframe={false}
           title='activepositions.title'
         />
@@ -85,8 +116,5 @@ class PositionsActive extends PureComponent {
     )
   }
 }
-
-PositionsActive.propTypes = propTypes
-PositionsActive.defaultProps = defaultProps
 
 export default withTranslation('translations')(PositionsActive)
