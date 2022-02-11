@@ -1,32 +1,56 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import TimeRange from 'ui/TimeRange'
-import ColumnsFilter from 'ui/ColumnsFilter'
-import RefreshButton from 'ui/RefreshButton'
-import PairSelector from 'ui/PairSelector'
-import Pagination from 'ui/Pagination'
-import SyncPrefButton from 'ui/SyncPrefButton'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import TimeRange from 'ui/TimeRange'
+import Pagination from 'ui/Pagination'
+import PairSelector from 'ui/PairSelector'
+import RefreshButton from 'ui/RefreshButton'
+import ColumnsFilter from 'ui/ColumnsFilter'
+import SyncPrefButton from 'ui/SyncPrefButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, setPair } from 'state/utils'
 
 import getColumns from './PublicTrades.columns'
-import { propTypes, defaultProps } from './PublicTrades.props'
 
 const TYPE = queryConstants.MENU_PUBLIC_TRADES
 
 class PublicTrades extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.objectOf(PropTypes.bool),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      amount: PropTypes.number.isRequired,
+      price: PropTypes.number.isRequired,
+      mts: PropTypes.number.isRequired,
+      type: PropTypes.string.isRequired,
+    })),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetPair: PropTypes.string,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    entries: [],
+    targetPair: '',
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -39,23 +63,23 @@ class PublicTrades extends PureComponent {
 
   render() {
     const {
-      columns,
-      getFullTime,
-      entries,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      columns,
+      entries,
+      refresh,
       targetPair,
       timeOffset,
+      getFullTime,
+      pageLoading,
+      dataReceived,
     } = this.props
 
     const tableColumns = getColumns({
-      filteredData: entries,
-      getFullTime,
       t,
       targetPair,
       timeOffset,
+      getFullTime,
+      filteredData: entries,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -65,20 +89,28 @@ class PublicTrades extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={pageLoading} />
-        </Fragment>
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('publictrades.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('publictrades.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -100,8 +132,5 @@ class PublicTrades extends PureComponent {
     )
   }
 }
-
-PublicTrades.propTypes = propTypes
-PublicTrades.defaultProps = defaultProps
 
 export default withTranslation('translations')(PublicTrades)
