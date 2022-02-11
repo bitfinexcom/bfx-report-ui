@@ -1,14 +1,40 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 
-import InputGroup from 'ui/InputGroup'
-import Select from 'ui/Select'
 import Icon from 'icons'
+import Select from 'ui/Select'
+import InputGroup from 'ui/InputGroup'
 
-import { propTypes, defaultProps } from './SubUsersAdd.props'
 import { EMPTY_ACCOUNT, MAX_ACCOUNTS } from '../utils'
 
 class SubUsersAdd extends PureComponent {
+  static propTypes = {
+    accounts: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string,
+      password: PropTypes.string,
+      isNotProtected: PropTypes.bool,
+      apiKey: PropTypes.string,
+      apiSecret: PropTypes.string,
+    })).isRequired,
+    addMultipleAccsEnabled: PropTypes.bool.isRequired,
+    masterAccount: PropTypes.string,
+    authData: PropTypes.shape({
+      email: PropTypes.string,
+    }).isRequired,
+    onChange: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      isSubAccount: PropTypes.bool.isRequired,
+      isNotProtected: PropTypes.bool.isRequired,
+    })).isRequired,
+  }
+
+  static defaultProps = {
+    masterAccount: undefined,
+  }
+
   onInputChange = (e, index) => {
     const { accounts, onChange } = this.props
     const { name, value } = e.target
@@ -33,10 +59,10 @@ class SubUsersAdd extends PureComponent {
       if (accountIndex === index) {
         return {
           email,
-          password: '',
-          isNotProtected,
           apiKey: '',
+          password: '',
           apiSecret: '',
+          isNotProtected,
         }
       }
       return account
@@ -165,8 +191,5 @@ class SubUsersAdd extends PureComponent {
     )
   }
 }
-
-SubUsersAdd.propTypes = propTypes
-SubUsersAdd.defaultProps = defaultProps
 
 export default withTranslation('translations')(SubUsersAdd)
