@@ -1,3 +1,1 @@
-import Status from './Status.container'
-
-export default Status
+export { default } from './Status.container'

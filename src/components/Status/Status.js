@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import {
   Toaster,
   Intent,
@@ -6,8 +7,6 @@ import {
 
 import i18n from 'locales/i18n'
 
-import { propTypes, defaultProps } from './Status.props'
-
 /** Singleton toaster instance. */
 export const AppToaster = Toaster.create({
   className: 'bitfinex-toaster',
@@ -15,9 +14,9 @@ export const AppToaster = Toaster.create({
 })
 
 export const Status = ({
-  clearStatus,
+  msg,
   intent,
-  msg = {},
+  clearStatus,
 }) => {
   if (!msg.id) {
     return ''
@@ -39,7 +38,15 @@ export const Status = ({
   return ''
 }
 
-Status.propTypes = propTypes
-Status.defaultProps = defaultProps
+Status.propTypes = {
+  intent: PropTypes.string,
+  clearStatus: PropTypes.func,
+  msg: PropTypes.objectOf(PropTypes.string),
+}
+Status.defaultProps = {
+  msg: {},
+  clearStatus: () => {},
+  intent: Intent.PRIMARY,
+}
 
 export default Status
