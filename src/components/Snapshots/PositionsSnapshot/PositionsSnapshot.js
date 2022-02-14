@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import compose from 'lodash/fp/compose'
 import { withTranslation } from 'react-i18next'
 import _isNumber from 'lodash/isNumber'
@@ -6,8 +7,6 @@ import _isNumber from 'lodash/isNumber'
 import DataTable from 'ui/DataTable'
 import { fixedFloat } from 'ui/utils'
 import { getFrameworkPositionsColumns } from 'utils/columns'
-
-import { propTypes, defaultProps } from './PositionsSnapshot.props'
 
 const PositionsSnapshot = ({
   t,
@@ -34,7 +33,7 @@ const PositionsSnapshot = ({
           <span>{fixedFloat(totalPlUsd)}</span>
         </div>
       </div>
-      ) }
+      )}
 
       <DataTable
         numRows={entries.length}
@@ -44,9 +43,29 @@ const PositionsSnapshot = ({
   )
 }
 
+PositionsSnapshot.propTypes = {
+  totalPlUsd: PropTypes.number,
+  entries: PropTypes.arrayOf(PropTypes.shape({
+    amount: PropTypes.number,
+    basePrice: PropTypes.number,
+    liquidationPrice: PropTypes.number,
+    marginFunding: PropTypes.number,
+    marginFundingType: PropTypes.number,
+    mtsUpdate: PropTypes.number,
+    pair: PropTypes.string.isRequired,
+    pl: PropTypes.number,
+    plPerc: PropTypes.number,
+  })),
+  getFullTime: PropTypes.func,
+  timeOffset: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
+}
 
-PositionsSnapshot.propTypes = propTypes
-PositionsSnapshot.defaultProps = defaultProps
+PositionsSnapshot.defaultProps = {
+  entries: [],
+  totalPlUsd: null,
+  getFullTime: () => {},
+}
 
 export default compose(
   withTranslation('translations'),
