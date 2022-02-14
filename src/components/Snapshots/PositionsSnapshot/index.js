@@ -1,3 +1,1 @@
-import PositionsSnapshot from './PositionsSnapshot.container'
-
-export default PositionsSnapshot
+export { default } from './PositionsSnapshot.container'
