@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
@@ -10,7 +11,6 @@ import NavSwitcher from 'ui/NavSwitcher'
 
 import Result from './Result'
 import Snapshot from './Snapshot'
-import { propTypes } from './TaxReport.props'
 import TAX_REPORT_SECTIONS from './TaxReport.sections'
 
 const {
@@ -26,6 +26,16 @@ const SECTIONS_URL = {
 }
 
 class TaxReport extends PureComponent {
+  static propTypes = {
+    t: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({ section: PropTypes.string }),
+    }).isRequired,
+  }
+
   switchSection = (section) => {
     const { history } = this.props
 
@@ -89,7 +99,5 @@ class TaxReport extends PureComponent {
     )
   }
 }
-
-TaxReport.propTypes = propTypes
 
 export default TaxReport
