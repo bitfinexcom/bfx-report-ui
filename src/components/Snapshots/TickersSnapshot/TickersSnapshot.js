@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import compose from 'lodash/fp/compose'
 import { withTranslation } from 'react-i18next'
 
@@ -7,8 +8,6 @@ import {
   getPositionsTickersColumns,
   getWalletsTickersColumns,
 } from 'utils/columns'
-
-import { propTypes, defaultProps } from './TickersSnapshot.props'
 
 const TickersSnapshot = ({
   t,
@@ -44,8 +43,26 @@ const TickersSnapshot = ({
   )
 }
 
-TickersSnapshot.propTypes = propTypes
-TickersSnapshot.defaultProps = defaultProps
+TickersSnapshot.propTypes = {
+  positionsTickersEntries: PropTypes.arrayOf(
+    PropTypes.shape({
+      pair: PropTypes.string,
+      amount: PropTypes.number,
+    }),
+  ),
+  walletsTickersEntries: PropTypes.arrayOf(
+    PropTypes.shape({
+      walletType: PropTypes.string,
+      pair: PropTypes.string,
+      amount: PropTypes.number,
+    }),
+  ),
+  t: PropTypes.func.isRequired,
+}
+TickersSnapshot.defaultProps = {
+  positionsTickersEntries: [],
+  walletsTickersEntries: [],
+}
 
 export default compose(
   withTranslation('translations'),
