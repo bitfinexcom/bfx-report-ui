@@ -1,3 +1,1 @@
-import WalletsSnapshot from './WalletsSnapshot'
-
-export default WalletsSnapshot
+export { default } from './WalletsSnapshot'
