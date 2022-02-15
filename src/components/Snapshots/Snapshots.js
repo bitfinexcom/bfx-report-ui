@@ -1,27 +1,27 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import DateInput from 'ui/DateInput'
-import Loading from 'ui/Loading'
-import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DateInput from 'ui/DateInput'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
+import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
-import PositionsSnapshot from './PositionsSnapshot'
-import TickersSnapshot from './TickersSnapshot'
 import WalletsSnapshot from './WalletsSnapshot'
-import { propTypes, defaultProps } from './Snapshots.props'
+import TickersSnapshot from './TickersSnapshot'
+import PositionsSnapshot from './PositionsSnapshot'
 
 const {
   MENU_POSITIONS,
@@ -30,6 +30,61 @@ const {
 } = queryConstants
 
 class Snapshots extends PureComponent {
+  static propTypes = {
+    currentTime: PropTypes.number,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    positionsTotalPlUsd: PropTypes.number,
+    positionsEntries: PropTypes.arrayOf(PropTypes.shape({
+      amount: PropTypes.number,
+      basePrice: PropTypes.number,
+      liquidationPrice: PropTypes.number,
+      marginFunding: PropTypes.number,
+      marginFundingType: PropTypes.number,
+      mtsUpdate: PropTypes.number,
+      pair: PropTypes.string.isRequired,
+      pl: PropTypes.number,
+      plPerc: PropTypes.number,
+    })),
+    positionsTickersEntries: PropTypes.arrayOf(
+      PropTypes.shape({
+        pair: PropTypes.string,
+        amount: PropTypes.number,
+      }),
+    ),
+    walletsTotalBalanceUsd: PropTypes.number,
+    walletsTickersEntries: PropTypes.arrayOf(
+      PropTypes.shape({
+        walletType: PropTypes.string,
+        pair: PropTypes.string,
+        amount: PropTypes.number,
+      }),
+    ),
+    walletsEntries: PropTypes.arrayOf(PropTypes.shape({
+      currency: PropTypes.string,
+      balance: PropTypes.number,
+      unsettledInterest: PropTypes.number,
+      balanceAvailable: PropTypes.number,
+    })),
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+      location: PropTypes.objectOf(PropTypes.string),
+    }).isRequired,
+    fetchData: PropTypes.func.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    currentTime: null,
+    walletsEntries: [],
+    positionsEntries: [],
+    positionsTickersEntries: [],
+    walletsTickersEntries: [],
+    positionsTotalPlUsd: null,
+    walletsTotalBalanceUsd: null,
+  }
+
   constructor(props) {
     super(props)
     const { currentTime } = props
@@ -97,17 +152,17 @@ class Snapshots extends PureComponent {
 
   render() {
     const {
-      currentTime,
-      dataReceived,
-      pageLoading,
-      positionsTotalPlUsd,
-      positionsEntries,
-      positionsTickersEntries,
-      walletsTotalBalanceUsd,
-      walletsTickersEntries,
-      walletsEntries,
-      refresh,
       t,
+      refresh,
+      currentTime,
+      pageLoading,
+      dataReceived,
+      walletsEntries,
+      positionsEntries,
+      positionsTotalPlUsd,
+      walletsTickersEntries,
+      walletsTotalBalanceUsd,
+      positionsTickersEntries,
     } = this.props
     const { timestamp } = this.state
 
@@ -147,17 +202,22 @@ class Snapshots extends PureComponent {
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('snapshots.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('snapshots.title')}
+          </SectionHeaderTitle>
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('query.endTime')}
               </SectionHeaderItemLabel>
               <DateInput
-                onChange={this.handleDateChange}
                 defaultValue={timestamp}
+                onChange={this.handleDateChange}
               />
             </SectionHeaderItem>
 
@@ -184,8 +244,5 @@ class Snapshots extends PureComponent {
     )
   }
 }
-
-Snapshots.propTypes = propTypes
-Snapshots.defaultProps = defaultProps
 
 export default withTranslation('translations')(Snapshots)
