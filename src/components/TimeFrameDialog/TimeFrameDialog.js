@@ -1,4 +1,5 @@
 import React, { memo, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   Classes,
@@ -10,16 +11,14 @@ import Icon from 'icons'
 import TimeFrame from 'ui/TimeFrame'
 import timeRangeTypes from 'state/timeRange/constants'
 
-import { propTypes, defaultProps } from './TimeFrameDialog.props'
-
 const TimeFrameDialog = ({
+  t,
   isOpen,
+  timeRange,
+  setTimeRange,
+  toggleDialog,
   end: endTime,
   start: startTime,
-  setTimeRange,
-  t,
-  timeRange,
-  toggleDialog,
 }) => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState({
     start: startTime,
@@ -92,7 +91,23 @@ const TimeFrameDialog = ({
   )
 }
 
-TimeFrameDialog.propTypes = propTypes
-TimeFrameDialog.defaultProps = defaultProps
+TimeFrameDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  end: PropTypes.number,
+  start: PropTypes.number,
+  t: PropTypes.func.isRequired,
+  timeRange: PropTypes.shape({
+    end: PropTypes.number,
+    range: PropTypes.string,
+    start: PropTypes.number,
+  }).isRequired,
+  setTimeRange: PropTypes.func.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
+}
+
+TimeFrameDialog.defaultProps = {
+  start: 0,
+  end: 0,
+}
 
 export default memo(TimeFrameDialog)

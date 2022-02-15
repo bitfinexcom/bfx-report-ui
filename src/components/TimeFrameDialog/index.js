@@ -1,3 +1,1 @@
-import TimeFrameDialog from './TimeFrameDialog.container'
-
-export default TimeFrameDialog
+export { default } from './TimeFrameDialog.container'

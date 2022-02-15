@@ -1,3 +1,1 @@
-import Tickers from './Tickers.container'
-
-export default Tickers
+export { default } from './Tickers.container'
