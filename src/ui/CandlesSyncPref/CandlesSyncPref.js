@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   AnchorButton,
@@ -11,20 +12,26 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import PairSelector from 'ui/PairSelector'
-import SyncButton from 'ui/SyncButton'
-import Timeframe from 'ui/CandlesTimeframe'
-import DateInput from 'ui/DateInput'
 import appConfig from 'config'
-
-import { propTypes, defaultProps } from './CandlesSyncPref.props'
+import DateInput from 'ui/DateInput'
+import SyncButton from 'ui/SyncButton'
+import PairSelector from 'ui/PairSelector'
+import Timeframe from 'ui/CandlesTimeframe'
 
 const MAX_OPTIONS = 5
 
 class CandlesSyncPref extends PureComponent {
-  static propTypes = propTypes
+  static propTypes = {
+    t: PropTypes.func.isRequired,
+    isSyncing: PropTypes.bool.isRequired,
+    config: PropTypes.arrayOf(PropTypes.object),
+    defaultStartTime: PropTypes.number.isRequired,
+    editConfig: PropTypes.func.isRequired,
+  }
 
-  static defaultProps = defaultProps
+  static defaultProps = {
+    config: [],
+  }
 
   constructor(props) {
     super(props)
