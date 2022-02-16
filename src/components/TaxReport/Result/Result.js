@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import _isNumber from 'lodash/isNumber'
 
 import NoData from 'ui/NoData'
@@ -10,13 +11,68 @@ import { checkFetch, checkInit } from 'state/utils'
 import { getFrameworkPositionsColumns } from 'utils/columns'
 import getMovementsColumns from 'components/Movements/Movements.columns'
 
-import { propTypes } from './Result.props'
 import getBalancesColumns from './Balances.columns'
 import TAX_REPORT_SECTIONS from '../TaxReport.sections'
 
 const TYPE = queryConstants.MENU_TAX_REPORT
 
 class Result extends PureComponent {
+  static propTypes = {
+    data: PropTypes.shape({
+      startingPositionsSnapshot: PropTypes.arrayOf(PropTypes.shape({
+        amount: PropTypes.number,
+        basePrice: PropTypes.number,
+        liquidationPrice: PropTypes.number,
+        marginFunding: PropTypes.number,
+        marginFundingType: PropTypes.number,
+        mtsUpdate: PropTypes.number,
+        pair: PropTypes.string.isRequired,
+        pl: PropTypes.number,
+        plPerc: PropTypes.number,
+      })).isRequired,
+      endingPositionsSnapshot: PropTypes.arrayOf(PropTypes.shape({
+        amount: PropTypes.number,
+        basePrice: PropTypes.number,
+        liquidationPrice: PropTypes.number,
+        marginFunding: PropTypes.number,
+        marginFundingType: PropTypes.number,
+        mtsUpdate: PropTypes.number,
+        pair: PropTypes.string.isRequired,
+        pl: PropTypes.number,
+        plPerc: PropTypes.number,
+      })).isRequired,
+      finalState: PropTypes.shape({
+        startingPeriodBalances: PropTypes.shape({
+          walletsTotalBalanceUsd: PropTypes.number,
+          positionsTotalPlUsd: PropTypes.number,
+          totalResult: PropTypes.number,
+        }),
+        movements: PropTypes.arrayOf(PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          currency: PropTypes.string.isRequired,
+          mtsStarted: PropTypes.number.isRequired,
+          mtsUpdated: PropTypes.number.isRequired,
+          status: PropTypes.string.isRequired,
+          amount: PropTypes.number.isRequired,
+          destinationAddress: PropTypes.string,
+        })).isRequired,
+        movementsTotalAmount: PropTypes.number,
+        endingPeriodBalances: PropTypes.shape({
+          walletsTotalBalanceUsd: PropTypes.number,
+          positionsTotalPlUsd: PropTypes.number,
+          totalResult: PropTypes.number,
+        }),
+        totalResult: PropTypes.number,
+      }).isRequired,
+    }).isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    getFullTime: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -215,7 +271,5 @@ class Result extends PureComponent {
     )
   }
 }
-
-Result.propTypes = propTypes
 
 export default Result
