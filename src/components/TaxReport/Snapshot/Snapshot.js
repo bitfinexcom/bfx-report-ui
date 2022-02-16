@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 
 import NoData from 'ui/NoData'
@@ -9,8 +10,6 @@ import PositionsSnapshot from 'components/Snapshots/PositionsSnapshot'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
 
-import { propTypes, defaultProps } from './Snapshots.props'
-
 const {
   MENU_TAX_REPORT,
   MENU_POSITIONS,
@@ -19,6 +18,60 @@ const {
 } = queryConstants
 
 class Snapshot extends PureComponent {
+  static propTypes = {
+    data: PropTypes.shape({
+      positionsTotalPlUsd: PropTypes.number,
+      positionsEntries: PropTypes.arrayOf(PropTypes.shape({
+        amount: PropTypes.number,
+        basePrice: PropTypes.number,
+        liquidationPrice: PropTypes.number,
+        marginFunding: PropTypes.number,
+        marginFundingType: PropTypes.number,
+        mtsUpdate: PropTypes.number,
+        pair: PropTypes.string.isRequired,
+        pl: PropTypes.number,
+        plPerc: PropTypes.number,
+      })),
+      positionsTickersEntries: PropTypes.arrayOf(
+        PropTypes.shape({
+          pair: PropTypes.string,
+          amount: PropTypes.number,
+        }),
+      ),
+      walletsTotalBalanceUsd: PropTypes.number,
+      walletsTickersEntries: PropTypes.arrayOf(
+        PropTypes.shape({
+          walletType: PropTypes.string,
+          pair: PropTypes.string,
+          amount: PropTypes.number,
+        }),
+      ),
+      walletsEntries: PropTypes.arrayOf(PropTypes.shape({
+        currency: PropTypes.string,
+        balance: PropTypes.number,
+        unsettledInterest: PropTypes.number,
+        balanceAvailable: PropTypes.number,
+      })),
+    }),
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        section: PropTypes.string,
+        subsection: PropTypes.string,
+      }),
+    }).isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    data: {},
+  }
+
   componentDidMount() {
     checkInit(this.props, MENU_TAX_REPORT)
   }
@@ -143,8 +196,5 @@ class Snapshot extends PureComponent {
     )
   }
 }
-
-Snapshot.propTypes = propTypes
-Snapshot.defaultProps = defaultProps
 
 export default Snapshot
