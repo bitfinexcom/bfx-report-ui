@@ -1,3 +1,1 @@
-import TradesSwitch from './TradesSwitch.container'
-
-export default TradesSwitch
+export { default } from './TradesSwitch.container'
