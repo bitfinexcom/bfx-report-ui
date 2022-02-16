@@ -1,3 +1,1 @@
-import TradedVolume from './TradedVolume.container'
-
-export default TradedVolume
+export { default } from './TradedVolume.container'

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
@@ -29,11 +30,35 @@ import {
   clearAllPairs,
 } from 'state/utils'
 
-import { propTypes, defaultProps } from './TradedVolume.props'
-
 const TYPE = queryConstants.MENU_TRADED_VOLUME
 
 class TradedVolume extends PureComponent {
+  static propTypes = {
+    currentFetchParams: PropTypes.shape({
+      pair: PropTypes.string,
+      timeframe: PropTypes.string,
+    }).isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      mts: PropTypes.number,
+    })),
+    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    params: PropTypes.shape({
+      pair: PropTypes.string,
+      timeframe: PropTypes.string,
+    }).isRequired,
+    fetchData: PropTypes.func.isRequired,
+    setParams: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
+    targetPairs: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -61,13 +86,13 @@ class TradedVolume extends PureComponent {
 
   render() {
     const {
+      t,
+      refresh,
       entries,
       targetPairs,
-      params: { timeframe },
-      dataReceived,
       pageLoading,
-      refresh,
-      t,
+      dataReceived,
+      params: { timeframe },
     } = this.props
     const hasChanges = this.hasChanges()
 
@@ -90,7 +115,10 @@ class TradedVolume extends PureComponent {
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
           <SectionHeaderTitle>{t('tradedvolume.title')}</SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
@@ -127,8 +155,5 @@ class TradedVolume extends PureComponent {
     )
   }
 }
-
-TradedVolume.propTypes = propTypes
-TradedVolume.defaultProps = defaultProps
 
 export default withTranslation('translations')(TradedVolume)
