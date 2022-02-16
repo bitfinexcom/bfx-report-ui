@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   AnchorButton,
@@ -15,12 +16,17 @@ import Icon from 'icons'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import config from 'config'
 
-import { propTypes, defaultProps } from './DerivativesSyncPref.props'
-
 class DerivativesSyncPref extends PureComponent {
-  static propTypes = propTypes
+  static propTypes = {
+    setSyncPref: PropTypes.func.isRequired,
+    syncPairs: PropTypes.arrayOf(PropTypes.string),
+    isSyncing: PropTypes.bool.isRequired,
+    t: PropTypes.func.isRequired,
+  }
 
-  static defaultProps = defaultProps
+  static defaultProps = {
+    syncPairs: [],
+  }
 
   constructor(props) {
     super(props)
@@ -80,13 +86,13 @@ class DerivativesSyncPref extends PureComponent {
 
   render() {
     const {
+      t,
       isSyncing,
       syncPairs,
-      t,
     } = this.props
     const {
-      isOpen,
       pairs,
+      isOpen,
     } = this.state
 
     if (!config.showFrameworkMode) {
