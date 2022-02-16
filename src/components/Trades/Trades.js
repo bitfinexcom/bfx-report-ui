@@ -1,4 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -17,11 +18,37 @@ import {
 
 import TradesSwitch from './TradesSwitch'
 import getColumns from './Trades.columns'
-import { propTypes, defaultProps } from './Trades.props'
 
 const TYPE = queryConstants.MENU_TRADES
 
 class Trades extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.objectOf(PropTypes.bool).isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      execAmount: PropTypes.number.isRequired,
+      execPrice: PropTypes.number.isRequired,
+      fee: PropTypes.number,
+      feeCurrency: PropTypes.string,
+      mtsCreate: PropTypes.number.isRequired,
+      orderID: PropTypes.number.isRequired,
+    })),
+    existingPairs: PropTypes.arrayOf(PropTypes.string),
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
+    targetPairs: [],
+    existingPairs: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -36,22 +63,22 @@ class Trades extends PureComponent {
 
   render() {
     const {
+      t,
       columns,
       entries,
-      existingPairs,
-      getFullTime,
-      dataReceived,
-      pageLoading,
       refresh,
-      t,
-      targetPairs,
       timeOffset,
+      targetPairs,
+      getFullTime,
+      pageLoading,
+      dataReceived,
+      existingPairs,
     } = this.props
     const tableColumns = getColumns({
-      filteredData: entries,
-      getFullTime,
       t,
       timeOffset,
+      getFullTime,
+      filteredData: entries,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -61,18 +88,24 @@ class Trades extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={pageLoading} />
-        </Fragment>
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
           title='trades.title'
           target={TYPE}
@@ -90,8 +123,5 @@ class Trades extends PureComponent {
     )
   }
 }
-
-Trades.propTypes = propTypes
-Trades.defaultProps = defaultProps
 
 export default withTranslation('translations')(Trades)
