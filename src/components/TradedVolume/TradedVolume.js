@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
@@ -29,11 +30,35 @@ import {
   clearAllPairs,
 } from 'state/utils'
 
-import { propTypes, defaultProps } from './TradedVolume.props'
-
 const TYPE = queryConstants.MENU_TRADED_VOLUME
 
 class TradedVolume extends PureComponent {
+  static propTypes = {
+    currentFetchParams: PropTypes.shape({
+      pair: PropTypes.string,
+      timeframe: PropTypes.string,
+    }).isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      mts: PropTypes.number,
+    })),
+    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    params: PropTypes.shape({
+      pair: PropTypes.string,
+      timeframe: PropTypes.string,
+    }).isRequired,
+    fetchData: PropTypes.func.isRequired,
+    setParams: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
+    targetPairs: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -132,8 +157,5 @@ class TradedVolume extends PureComponent {
     )
   }
 }
-
-TradedVolume.propTypes = propTypes
-TradedVolume.defaultProps = defaultProps
 
 export default withTranslation('translations')(TradedVolume)
