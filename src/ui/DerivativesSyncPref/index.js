@@ -1,3 +1,1 @@
-import DerivativesSyncPref from './DerivativesSyncPref.container'
-
-export default DerivativesSyncPref
+export { default } from './DerivativesSyncPref.container'
