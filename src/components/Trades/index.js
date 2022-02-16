@@ -1,3 +1,1 @@
-import Trades from './Trades.container'
-
-export default Trades
+export { default } from './Trades.container'
