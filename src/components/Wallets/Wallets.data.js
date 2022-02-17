@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 
 import DataTable from 'ui/DataTable'
 
-import getColumns from './Wallets.columns'
-import { WALLETS_ENTRIES_PROPS } from './Wallets.props'
 import constants from './var'
+import getColumns from './Wallets.columns'
 
 const {
   WALLET_EXCHANGE,
@@ -15,9 +14,7 @@ const {
   WALLET_CONTRIBUTION,
 } = constants
 
-const WalletsData = (props) => {
-  const { entries, t } = props
-
+const WalletsData = ({ entries, t }) => {
   const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
   const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
   const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
@@ -62,8 +59,13 @@ const WalletsData = (props) => {
 }
 
 WalletsData.propTypes = {
-  entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
+  entries: PropTypes.arrayOf(PropTypes.shape({
+    currency: PropTypes.string,
+    balance: PropTypes.number,
+    unsettledInterest: PropTypes.number,
+    balanceAvailable: PropTypes.number,
+  })).isRequired,
   t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(WalletsData)
+export default withTranslation('translations')(memo(WalletsData))
