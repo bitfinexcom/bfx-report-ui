@@ -11,7 +11,9 @@ class TradesSwitch extends React.PureComponent {
     target: PropTypes.string.isRequired,
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
-      location: PropTypes.objectOf(PropTypes.string),
+      location: PropTypes.shape({
+        search: PropTypes.string,
+      }),
     }).isRequired,
     t: PropTypes.func.isRequired,
   }
