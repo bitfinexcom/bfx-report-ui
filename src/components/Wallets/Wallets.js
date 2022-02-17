@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _isEmpty from 'lodash/isEmpty'
@@ -20,11 +21,30 @@ import { isValidTimeStamp } from 'state/query/utils'
 import config from 'config'
 
 import WalletsData from './Wallets.data'
-import { propTypes, defaultProps } from './Wallets.props'
 
 const isFrameworkMode = config.showFrameworkMode
 
 class Wallets extends PureComponent {
+  static propTypes = {
+    currentTime: PropTypes.number,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      currency: PropTypes.string,
+      balance: PropTypes.number,
+      unsettledInterest: PropTypes.number,
+      balanceAvailable: PropTypes.number,
+    })),
+    fetchData: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
+    currentTime: null,
+  }
+
   constructor(props) {
     super(props)
     const { currentTime } = props
@@ -135,8 +155,5 @@ class Wallets extends PureComponent {
     )
   }
 }
-
-Wallets.propTypes = propTypes
-Wallets.defaultProps = defaultProps
 
 export default withTranslation('translations')(Wallets)
