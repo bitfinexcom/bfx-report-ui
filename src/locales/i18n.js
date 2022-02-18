@@ -10,7 +10,7 @@ import { initReactI18next } from 'react-i18next'
 const { REACT_APP_ENV } = process.env
 
 export const LANGUAGES = {
-  en: 'en-US',
+  en: 'en',
   es: 'es-EM',
   ru: 'ru',
   tr: 'tr',
