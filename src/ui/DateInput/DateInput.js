@@ -1,16 +1,34 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { withTranslation } from 'react-i18next'
 import moment from 'moment-timezone'
 import { Position } from '@blueprintjs/core'
 import { DateInput as BptDateInput, TimePrecision } from '@blueprintjs/datetime'
 
 import Icon from 'icons'
 import {
-  DEFAULT_DATETIME_FORMAT, momentFormatter, momentFormatterDays,
+  DEFAULT_DATETIME_FORMAT,
+  momentFormatterDays,
+  momentFormatter,
 } from 'state/utils'
 
-import { propTypes, defaultProps } from './DateInput.props'
-
 class DateInput extends PureComponent {
+  static propTypes = {
+    className: PropTypes.string,
+    defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    value: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    onChange: PropTypes.func.isRequired,
+    daysOnly: PropTypes.bool,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    value: null,
+    className: '',
+    daysOnly: false,
+    defaultValue: null,
+  }
+
   state = {
     isOpen: false,
   }
@@ -35,12 +53,12 @@ class DateInput extends PureComponent {
 
   render() {
     const {
-      className,
-      daysOnly,
-      defaultValue,
       t,
       timezone,
       value,
+      daysOnly,
+      className,
+      defaultValue,
     } = this.props
     const { isOpen } = this.state
 
@@ -78,7 +96,4 @@ class DateInput extends PureComponent {
   }
 }
 
-DateInput.propTypes = propTypes
-DateInput.defaultProps = defaultProps
-
-export default DateInput
+export default withTranslation('translations')(DateInput)
