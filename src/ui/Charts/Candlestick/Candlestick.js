@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import moment from 'moment'
 import classNames from 'classnames'
@@ -7,11 +8,10 @@ import _debounce from 'lodash/debounce'
 
 import { THEME_CLASSES } from 'utils/themes'
 
+import Tooltip from './Tooltip'
 import CandleStats from './CandleStats'
 import TradesToggle from './TradesToggle'
-import Tooltip from './Tooltip'
 import TradingViewLink from './TradingViewLink'
-import { propTypes, defaultProps } from './Candlestick.props'
 
 const STYLES = {
   [THEME_CLASSES.DARK]: {
@@ -29,6 +29,44 @@ const STYLES = {
 const SCROLL_THRESHOLD = 200
 
 class Candlestick extends React.PureComponent {
+  static propTypes = {
+    candles: PropTypes.shape({
+      entries: PropTypes.arrayOf(PropTypes.shape({
+        time: PropTypes.number,
+        open: PropTypes.number,
+        close: PropTypes.number,
+        high: PropTypes.number,
+        low: PropTypes.number,
+        volume: PropTypes.number,
+      })),
+      isLoading: PropTypes.bool.isRequired,
+      nextPage: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired,
+    }),
+    className: PropTypes.string,
+    trades: PropTypes.shape({
+      entries: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        time: PropTypes.number,
+        execAmount: PropTypes.number,
+        execPrice: PropTypes.number,
+        fee: PropTypes.number,
+        feeCurrency: PropTypes.string,
+        mtsCreate: PropTypes.number,
+        orderID: PropTypes.number,
+      })),
+      isLoading: PropTypes.bool.isRequired,
+      nextPage: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired,
+    }),
+    fetchData: PropTypes.func.isRequired,
+    theme: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    trades: {},
+    candles: {},
+    className: undefined,
+  }
+
   state = {
     width: null,
     height: null,
@@ -263,7 +301,7 @@ class Candlestick extends React.PureComponent {
     return (
       <div id='candlestick' className={classes}>
         {this.chart && (
-          <Fragment>
+          <>
             {this.tradeSeries && (
               <Tooltip
                 chart={this.chart}
@@ -284,14 +322,11 @@ class Candlestick extends React.PureComponent {
               onChange={this.onTradesVisibilityChange}
             />
             <TradingViewLink />
-          </Fragment>
+          </>
         )}
       </div>
     )
   }
 }
-
-Candlestick.propTypes = propTypes
-Candlestick.defaultProps = defaultProps
 
 export default withTranslation('translations')(Candlestick)
