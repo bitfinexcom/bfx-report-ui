@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withTranslation } from 'react-i18next'
 import {
@@ -12,8 +13,6 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
-import { propTypes, defaultProps } from './Chart.props'
-
 const COLORS = [
   '#73c7ff',
   '#0e9803',
@@ -22,6 +21,18 @@ const COLORS = [
 ]
 
 class Chart extends React.PureComponent {
+  static propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object),
+    dataKeys: PropTypes.arrayOf(PropTypes.string),
+    className: PropTypes.string,
+  }
+
+  static defaultProps = {
+    data: [],
+    dataKeys: [],
+    className: undefined,
+  }
+
   state = {
     hiddenKeys: {},
   }
@@ -115,8 +126,5 @@ class Chart extends React.PureComponent {
     )
   }
 }
-
-Chart.propTypes = propTypes
-Chart.defaultProps = defaultProps
 
 export default withTranslation('translations')(Chart)
