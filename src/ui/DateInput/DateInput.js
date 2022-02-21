@@ -25,11 +25,11 @@ class DateInput extends PureComponent {
   }
 
   static defaultProps = {
-    value: null,
     timezone: '',
     className: '',
     daysOnly: false,
     inputTimezone: '',
+    value: undefined,
     defaultValue: null,
   }
 
