@@ -1,3 +1,1 @@
-import CandleStats from './CandleStats'
-
-export default CandleStats
+export { default } from './CandleStats'
