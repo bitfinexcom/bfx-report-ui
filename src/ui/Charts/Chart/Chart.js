@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withTranslation } from 'react-i18next'
 import {
@@ -16,7 +17,6 @@ import _isEmpty from 'lodash/isEmpty'
 
 import SumUpTooltip from './Chart.tooltip'
 import { formatChartData, getSumUpRangeValue } from '../Charts.helpers'
-import { propTypes, defaultProps } from './Chart.props'
 
 const COLORS = [
   '#73c7ff',
@@ -26,6 +26,20 @@ const COLORS = [
 ]
 
 class Chart extends React.PureComponent {
+  static propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object),
+    dataKeys: PropTypes.arrayOf(PropTypes.string),
+    className: PropTypes.string,
+    isSumUpEnabled: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    data: [],
+    dataKeys: [],
+    className: undefined,
+    isSumUpEnabled: false,
+  }
+
   state = {
     hiddenKeys: {},
     showSum: false,
@@ -182,8 +196,5 @@ class Chart extends React.PureComponent {
     )
   }
 }
-
-Chart.propTypes = propTypes
-Chart.defaultProps = defaultProps
 
 export default withTranslation('translations')(Chart)
