@@ -1,14 +1,25 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Checkbox } from '@blueprintjs/core'
 
-import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import config from 'config'
+import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 
 import ColumnsSelectDialog from './Dialog'
-import { propTypes, defaultProps } from './ColumnsSelect.props'
 
 class ColumnsSelect extends PureComponent {
+  static propTypes = {
+    target: PropTypes.string.isRequired,
+    columns: PropTypes.objectOf(PropTypes.bool),
+    setColumns: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+  }
+
   constructor(props) {
     super()
 
@@ -65,16 +76,18 @@ class ColumnsSelect extends PureComponent {
       .filter(column => (!column.frameworkOnly || config.showFrameworkMode) && !column.filterOnly)
 
     return (
-      <Fragment>
-        <span onClick={this.toggleDialog} className='color--active clickable'>
+      <>
+        <span
+          onClick={this.toggleDialog}
+          className='color--active clickable'
+        >
           {t('columnsselect.title')}
         </span>
-
         <ColumnsSelectDialog
           isOpen={isOpen}
+          onApply={this.onApply}
           hasChanges={hasChanges}
           onCancel={this.onCancel}
-          onApply={this.onApply}
         >
           <ul className='columns-select'>
             {sectionColumns.map((column) => {
@@ -94,12 +107,9 @@ class ColumnsSelect extends PureComponent {
             })}
           </ul>
         </ColumnsSelectDialog>
-      </Fragment>
+      </>
     )
   }
 }
-
-ColumnsSelect.propTypes = propTypes
-ColumnsSelect.defaultProps = defaultProps
 
 export default withTranslation('translations')(ColumnsSelect)
