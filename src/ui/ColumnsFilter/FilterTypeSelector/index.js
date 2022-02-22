@@ -1,3 +1,1 @@
-import FilterTypeSelector from './FilterTypeSelector'
-
-export default FilterTypeSelector
+export { default } from './FilterTypeSelector'

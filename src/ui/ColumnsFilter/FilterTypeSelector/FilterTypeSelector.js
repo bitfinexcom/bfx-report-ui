@@ -1,11 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 
 import Select from 'ui/Select'
 import { FILTERS } from 'var/filterTypes'
 import DATA_TYPES from 'var/dataTypes'
-
-import { propTypes, defaultProps } from './FilterTypeSelector.props'
 
 const {
   NUMBER,
@@ -15,6 +14,18 @@ const {
 } = DATA_TYPES
 
 class FilterTypeSelector extends React.PureComponent {
+  static propTypes = {
+    isSelect: PropTypes.bool.isRequired,
+    value: PropTypes.string.isRequired,
+    dataType: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    dataType: '',
+  }
+
   onChange = (value) => {
     const { onChange } = this.props
     onChange(value)
@@ -62,17 +73,14 @@ class FilterTypeSelector extends React.PureComponent {
 
     return (
       <Select
-        className='columns-filter-item-filter'
-        filterable={false}
-        items={items}
-        onChange={this.onChange}
         value={value}
+        items={items}
+        filterable={false}
+        onChange={this.onChange}
+        className='columns-filter-item-filter'
       />
     )
   }
 }
-
-FilterTypeSelector.propTypes = propTypes
-FilterTypeSelector.defaultProps = defaultProps
 
 export default withTranslation('translations')(FilterTypeSelector)
