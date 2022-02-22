@@ -1,3 +1,1 @@
-import ColumnsFilter from './ColumnsFilter.container'
-
-export default ColumnsFilter
+export { default } from './ColumnsFilter.container'

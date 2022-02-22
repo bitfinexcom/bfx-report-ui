@@ -1,36 +1,47 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
+  Intent,
   Button,
   InputGroup,
-  Intent,
 } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 import _isString from 'lodash/isString'
 
-import ColumnsSelect from 'ui/ColumnsSelect'
-import DateInput from 'ui/DateInput'
 import Icon from 'icons'
+import DateInput from 'ui/DateInput'
+import DATA_TYPES from 'var/dataTypes'
+import ColumnsSelect from 'ui/ColumnsSelect'
+import { EMPTY_FILTER } from 'var/filterTypes'
 import { selectTextOnFocus } from 'utils/inputs'
 import { getValidSortedFilters } from 'state/filters/utils'
-import { EMPTY_FILTER } from 'var/filterTypes'
 import DEFAULT_FILTERS from 'ui/ColumnsFilter/var/defaultFilters'
-import DATA_TYPES from 'var/dataTypes'
 
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
-import FilterTypeSelector from './FilterTypeSelector'
-import { propTypes, defaultProps } from './ColumnsFilter.props'
-import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 import SideSelector from './Selectors/SideSelector'
+import FilterTypeSelector from './FilterTypeSelector'
 import WalletSelector from './Selectors/WalletSelector'
+import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 
 const MAX_FILTERS = 7
 const { DATE } = DATA_TYPES
 
 /* eslint-disable react/no-array-index-key */
 class ColumnsFilter extends PureComponent {
+  static propTypes = {
+    t: PropTypes.func.isRequired,
+    target: PropTypes.string.isRequired,
+    setFilters: PropTypes.func.isRequired,
+    filters: PropTypes.arrayOf(PropTypes.object),
+  }
+
+  static defaultProps = {
+    filters: [],
+  }
+
   constructor(props) {
     super()
 
@@ -204,12 +215,12 @@ class ColumnsFilter extends PureComponent {
     const buttonClasses = classNames('button--large', { 'columns-filter--active': hasAppliedFilters })
 
     return (
-      <Fragment>
+      <>
         <div className='columns-filter-wrapper'>
           <Button
-            onClick={this.toggleDialog}
-            className={buttonClasses}
             intent={Intent.PRIMARY}
+            className={buttonClasses}
+            onClick={this.toggleDialog}
           >
             {t('columnsfilter.title')}
           </Button>
@@ -217,8 +228,8 @@ class ColumnsFilter extends PureComponent {
 
         <ColumnsFilterDialog
           isOpen={isOpen}
-          hasChanges={hasChanges}
           onClear={this.onClear}
+          hasChanges={hasChanges}
           onCancel={this.onCancel}
           onFiltersApply={this.onFiltersApply}
         >
@@ -232,29 +243,29 @@ class ColumnsFilter extends PureComponent {
                 return (
                   <div key={`${column}_${index}`} className='columns-filter-item'>
                     <ColumnSelector
-                      section={target}
                       value={column}
+                      section={target}
                       onChange={(column) => this.onColumnChange({ index, ...column })}
                     />
                     <FilterTypeSelector
-                      isSelect={!!select}
                       value={type}
                       dataType={dataType}
+                      isSelect={!!select}
                       onChange={filterType => this.updateFilter({ index, type: filterType })}
                     />
                     {select && this.renderSelect({ filter, index })}
                     {dataType !== DATE && !select && (
                       <InputGroup
-                        className='columns-filter-item-input'
                         value={value}
-                        onChange={e => this.onInputChange(index, e)}
                         onFocus={selectTextOnFocus}
+                        className='columns-filter-item-input'
+                        onChange={e => this.onInputChange(index, e)}
                       />
                     )}
                     {dataType === DATE && (
                       <DateInput
-                        className='columns-filter-item-input'
                         defaultValue={value || null}
+                        className='columns-filter-item-input'
                         onChange={e => this.onDateChange(index, e)}
                       />
                     )}
@@ -269,7 +280,10 @@ class ColumnsFilter extends PureComponent {
 
             <div className='columns-filter-controls'>
               {(filters.length < MAX_FILTERS) && (
-                <span className='columns-filter-controls-add color--active' onClick={this.onFilterAdd}>
+                <span
+                  onClick={this.onFilterAdd}
+                  className='columns-filter-controls-add color--active'
+                >
                   {`+ ${t('preferences.sync.add-filter')}`}
                 </span>
               )}
@@ -277,12 +291,9 @@ class ColumnsFilter extends PureComponent {
             </div>
           </div>
         </ColumnsFilterDialog>
-      </Fragment>
+      </>
     )
   }
 }
-
-ColumnsFilter.propTypes = propTypes
-ColumnsFilter.defaultProps = defaultProps
 
 export default withTranslation('translations')(ColumnsFilter)
