@@ -1,3 +1,1 @@
-import ColumnsSelect from './ColumnsSelect.container'
-
-export default ColumnsSelect
+export { default } from './ColumnsSelect.container'
