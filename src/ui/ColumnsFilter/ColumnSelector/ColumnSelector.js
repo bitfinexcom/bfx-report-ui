@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import _find from 'lodash/find'
 
@@ -6,9 +7,19 @@ import Select from 'ui/Select'
 import config from 'config'
 
 import SECTION_COLUMNS from './ColumnSelector.columns'
-import { propTypes, defaultProps } from './ColumnSelector.props'
 
 class ColumnSelector extends React.PureComponent {
+  static propTypes = {
+    section: PropTypes.string.isRequired,
+    value: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    value: '',
+  }
+
   onColumnChange = (column) => {
     const { onChange } = this.props
     const columnData = this.getColumnData(column)
@@ -45,17 +56,14 @@ class ColumnSelector extends React.PureComponent {
 
     return (
       <Select
-        className='columns-filter-item-column'
-        filterable={false}
-        items={items}
-        onChange={this.onColumnChange}
         value={value}
+        items={items}
+        filterable={false}
+        onChange={this.onColumnChange}
+        className='columns-filter-item-column'
       />
     )
   }
 }
-
-ColumnSelector.propTypes = propTypes
-ColumnSelector.defaultProps = defaultProps
 
 export default withTranslation('translations')(ColumnSelector)
