@@ -15,6 +15,4 @@ ExportButton.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-ExportButton.defaultProps = {}
-
 export default withTranslation('translations')(ExportButton)
