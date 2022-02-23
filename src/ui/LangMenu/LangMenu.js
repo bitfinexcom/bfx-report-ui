@@ -1,28 +1,25 @@
-import React from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import _keys from 'lodash/keys'
 
 import Select from 'ui/Select'
 import { LANGUAGE_NAMES } from 'locales/i18n'
 
-import { propTypes, defaultProps } from './LangMenu.props'
-
 const items = _keys(LANGUAGE_NAMES).map(lang => ({ value: lang, label: LANGUAGE_NAMES[lang] }))
 
-const LangMenu = (props) => {
-  const { setLang, value } = props
+const LangMenu = ({ setLang, value }) => (
+  <Select
+    items={items}
+    value={value}
+    onChange={setLang}
+    className='bitfinex-select--language'
+    popoverClassName='bitfinex-select-menu--language'
+  />
+)
 
-  return (
-    <Select
-      className='bitfinex-select--language'
-      popoverClassName='bitfinex-select-menu--language'
-      value={value}
-      items={items}
-      onChange={setLang}
-    />
-  )
+LangMenu.propTypes = {
+  value: PropTypes.string.isRequired,
+  setLang: PropTypes.func.isRequired,
 }
 
-LangMenu.propTypes = propTypes
-LangMenu.defaultProps = defaultProps
-
-export default LangMenu
+export default memo(LangMenu)
