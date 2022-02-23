@@ -1,3 +1,1 @@
-import Explorer from './Explorer.container'
-
-export default Explorer
+export { default } from './Explorer.container'
