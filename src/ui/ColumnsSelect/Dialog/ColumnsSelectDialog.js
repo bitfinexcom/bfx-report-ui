@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import {
   Button, Classes, Dialog, Intent,
@@ -6,51 +7,51 @@ import {
 
 import Icon from 'icons'
 
-import { propTypes, defaultProps } from './ColumnsSelectDialog.props'
-
-const ColumnsSelectDialog = (props) => {
-  const {
-    children,
-    isOpen,
-    hasChanges,
-    onCancel,
-    onApply,
-    t,
-  } = props
-
-  return (
-    <Dialog
-      className='columns-select-dialog'
-      icon={<Icon.CURSOR_SQUARE />}
-      isCloseButtonShown={false}
-      isOpen={isOpen}
-      onClose={onCancel}
-      title={t('columnsselect.title')}
-    >
-      <div className={Classes.DIALOG_BODY}>
-        {children}
+const ColumnsSelectDialog = ({
+  t,
+  isOpen,
+  onApply,
+  children,
+  onCancel,
+  hasChanges,
+}) => (
+  <Dialog
+    isOpen={isOpen}
+    onClose={onCancel}
+    isCloseButtonShown={false}
+    icon={<Icon.CURSOR_SQUARE />}
+    title={t('columnsselect.title')}
+    className='columns-select-dialog'
+  >
+    <div className={Classes.DIALOG_BODY}>
+      {children}
+    </div>
+    <div className={Classes.DIALOG_FOOTER}>
+      <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+        <Button
+          onClick={onCancel}
+        >
+          {t('columnsselect.cancel')}
+        </Button>
+        <Button
+          onClick={onApply}
+          intent={Intent.PRIMARY}
+          disabled={!hasChanges}
+        >
+          {t('columnsselect.apply')}
+        </Button>
       </div>
-      <div className={Classes.DIALOG_FOOTER}>
-        <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-          <Button
-            onClick={onCancel}
-          >
-            {t('columnsselect.cancel')}
-          </Button>
-          <Button
-            intent={Intent.PRIMARY}
-            onClick={onApply}
-            disabled={!hasChanges}
-          >
-            {t('columnsselect.apply')}
-          </Button>
-        </div>
-      </div>
-    </Dialog>
-  )
+    </div>
+  </Dialog>
+)
+
+ColumnsSelectDialog.propTypes = {
+  children: PropTypes.element.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  hasChanges: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onApply: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 }
 
-ColumnsSelectDialog.propTypes = propTypes
-ColumnsSelectDialog.defaultProps = defaultProps
-
-export default withTranslation('translations')(ColumnsSelectDialog)
+export default withTranslation('translations')(memo(ColumnsSelectDialog))
