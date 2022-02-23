@@ -1,3 +1,1 @@
-import ColumnsSelectDialog from './ColumnsSelectDialog'
-
-export default ColumnsSelectDialog
+export { default } from './ColumnsSelectDialog'
