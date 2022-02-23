@@ -1,22 +1,38 @@
-import React from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 
-import { propTypes, defaultProps } from './Explorer.props'
-
-export const Explorer = ({ currency, destinationAddress, explorers = {} }) => {
+export const Explorer = ({
+  currency,
+  explorers,
+  destinationAddress,
+}) => {
   if (!explorers[currency]) {
     return null
   }
   const [name, link] = explorers[currency]
   return name && link ? (
     <span className='bitfinex-show-soft'>
-      <a href={link.replace('VAL', destinationAddress)} target='_blank' rel='noopener noreferrer'>
+      <a
+        target='_blank'
+        rel='noopener noreferrer'
+        href={link.replace('VAL', destinationAddress)}
+      >
         {name}
       </a>
     </span>
   ) : null
 }
 
-Explorer.propTypes = propTypes
-Explorer.defaultProps = defaultProps
+Explorer.propTypes = {
+  currency: PropTypes.string,
+  destinationAddress: PropTypes.string,
+  explorers: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string)),
+}
 
-export default Explorer
+Explorer.defaultProps = {
+  currency: '',
+  explorers: {},
+  destinationAddress: '',
+}
+
+export default memo(Explorer)
