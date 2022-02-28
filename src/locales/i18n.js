@@ -22,7 +22,7 @@ export const LANGUAGES = {
 export const LANGUAGE_NAMES = {
   en: 'English',
   es: 'Español',
-  pt: 'Türkçe',
+  pt: 'Português',
   ru: 'Русский',
   tr: 'Türk',
   cn: '中文 (简化)',
