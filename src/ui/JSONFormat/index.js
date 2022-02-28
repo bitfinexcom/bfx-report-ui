@@ -1,3 +1,1 @@
-import JSONFormat from './JSONFormat'
-
-export default JSONFormat
+export { default } from './JSONFormat'
