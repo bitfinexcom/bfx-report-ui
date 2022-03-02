@@ -118,7 +118,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].extra,
+      copyText: rowIndex => JSON.stringify(filteredData[rowIndex].extra, undefined, 2),
     },
   ]
 }
