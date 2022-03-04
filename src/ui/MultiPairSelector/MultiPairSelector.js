@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
@@ -7,8 +8,6 @@ import {
 } from '@blueprintjs/core'
 
 import MultiSelect from 'ui/MultiSelect'
-
-import { propTypes, defaultProps } from './MultiPairSelector.props'
 
 class MultiPairSelector extends PureComponent {
   renderPair = (pair, { modifiers, handleClick }) => {
@@ -27,13 +26,13 @@ class MultiPairSelector extends PureComponent {
 
     return (
       <MenuItem
-        className={classes}
-        active={active}
-        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-        disabled={disabled || pair === 'inactive'}
         key={pair}
-        onClick={handleClick}
         text={text}
+        active={active}
+        className={classes}
+        onClick={handleClick}
+        disabled={disabled || pair === 'inactive'}
+        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
       />
     )
   }
@@ -49,11 +48,11 @@ class MultiPairSelector extends PureComponent {
 
   render() {
     const {
-      currentFilters,
-      existingPairs,
-      inactivePairs,
       pairs,
       togglePair,
+      inactivePairs,
+      existingPairs,
+      currentFilters,
     } = this.props
 
     const shownPairs = pairs.length
@@ -69,23 +68,36 @@ class MultiPairSelector extends PureComponent {
 
     return (
       <MultiSelect
-        disabled={!pairs.length && !existingPairs.length}
         items={items}
-        itemRenderer={this.renderPair}
-        itemPredicate={this.itemPredicate}
         onItemSelect={togglePair}
         tagInputProps={{
           tagProps: { minimal: true },
           onRemove: togglePair,
         }}
         tagRenderer={pair => pair}
+        itemRenderer={this.renderPair}
         selectedItems={currentFilters}
+        itemPredicate={this.itemPredicate}
+        disabled={!pairs.length && !existingPairs.length}
       />
     )
   }
 }
 
-MultiPairSelector.propTypes = propTypes
-MultiPairSelector.defaultProps = defaultProps
+MultiPairSelector.propTypes = {
+  t: PropTypes.func.isRequired,
+  togglePair: PropTypes.func.isRequired,
+  pairs: PropTypes.arrayOf(PropTypes.string),
+  inactivePairs: PropTypes.arrayOf(PropTypes.string),
+  existingPairs: PropTypes.arrayOf(PropTypes.string),
+  currentFilters: PropTypes.arrayOf(PropTypes.string),
+}
+
+MultiPairSelector.defaultProps = {
+  pairs: [],
+  existingPairs: [],
+  inactivePairs: [],
+  currentFilters: [],
+}
 
 export default withTranslation('translations')(MultiPairSelector)
