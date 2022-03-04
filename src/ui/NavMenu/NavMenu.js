@@ -1,21 +1,21 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
-  Classes,
   Menu,
-  MenuDivider,
+  Classes,
   MenuItem,
+  MenuDivider,
 } from '@blueprintjs/core'
-import _castArray from 'lodash/castArray'
 import _includes from 'lodash/includes'
+import _castArray from 'lodash/castArray'
 
+import config from 'config'
 import queryType from 'state/query/constants'
 import { getIcon, getPath, getTarget } from 'state/query/utils'
-import config from 'config'
 
 import NavMenuPopover from './NavMenuPopover'
-import { propTypes, defaultProps } from './NavMenu.props'
 
 const { showFrameworkMode } = config
 
@@ -56,9 +56,25 @@ const {
 } = queryType
 
 class NavMenu extends PureComponent {
-  static propTypes = propTypes
+  static propTypes = {
+    target: PropTypes.string,
+    className: PropTypes.string,
+    history: PropTypes.shape({
+      location: PropTypes.shape({
+        pathname: PropTypes.string.isRequired,
+        search: PropTypes.string.isRequired,
+      }).isRequired,
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    showMenuPopover: PropTypes.bool,
+    t: PropTypes.func.isRequired,
+  }
 
-  static defaultProps = defaultProps
+  static defaultProps = {
+    className: '',
+    target: undefined,
+    showMenuPopover: true,
+  }
 
   sections = [
     [MENU_LEDGERS, 'ledgers.title'],
@@ -112,6 +128,7 @@ class NavMenu extends PureComponent {
     if (target === nextTarget) {
       return
     }
+
     const [path] = _castArray(getPath(nextTarget))
     history.push({
       pathname: path,
@@ -122,10 +139,10 @@ class NavMenu extends PureComponent {
 
   render() {
     const {
-      className,
-      history,
-      showMenuPopover,
       t,
+      history,
+      className,
+      showMenuPopover,
     } = this.props
     const target = getTarget(history.location.pathname, false)
 
@@ -133,7 +150,10 @@ class NavMenu extends PureComponent {
 
     return (
       <Menu large className={classes}>
-        {showMenuPopover && window.innerWidth > 390 && window.innerWidth <= 1024 && <NavMenuPopover />}
+        {showMenuPopover
+          && window.innerWidth > 390
+          && window.innerWidth <= 1024
+          && <NavMenuPopover />}
         {this.sections.map((section, index) => {
           const [type, title, isSkipped] = section
 
@@ -146,7 +166,6 @@ class NavMenu extends PureComponent {
             return <MenuDivider key={index} />
           }
 
-
           const types = _castArray(type)
           const mainType = types[0]
 
@@ -155,12 +174,12 @@ class NavMenu extends PureComponent {
 
           return (
             <MenuItem
-              icon={<Icon />}
+              href={path}
               key={mainType}
               text={t(title)}
-              onClick={(e) => this.handleClick(e, mainType)}
-              href={path}
+              icon={<Icon />}
               active={_includes(types, target)}
+              onClick={(e) => this.handleClick(e, mainType)}
             />
           )
         })}
