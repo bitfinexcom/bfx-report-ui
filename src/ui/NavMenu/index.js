@@ -1,3 +1,1 @@
-import NavMenu from './NavMenu.container'
-
-export default NavMenu
+export { default } from './NavMenu.container'
