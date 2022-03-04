@@ -1,3 +1,1 @@
-import LedgersCategoriesSelect from './LedgersCategorySelect'
-
-export default LedgersCategoriesSelect
+export { default } from './LedgersCategorySelect'

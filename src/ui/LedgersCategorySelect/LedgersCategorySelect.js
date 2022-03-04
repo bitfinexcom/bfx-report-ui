@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import _memoize from 'lodash/memoize'
@@ -42,34 +42,30 @@ const getLedgersCategories = _memoize((t) => ([
   { value: 911, label: t('ledgers.categories.losses') },
 ]))
 
-const LedgersCategorySelect = (props) => {
-  const {
-    className,
-    onChange,
-    t,
-    value,
-  } = props
-
-  return (
-    <Select
-      className={className}
-      items={getLedgersCategories(t)}
-      onChange={onChange}
-      value={value}
-    />
-  )
-}
+const LedgersCategorySelect = ({
+  t,
+  value,
+  onChange,
+  className,
+}) => (
+  <Select
+    value={value}
+    onChange={onChange}
+    className={className}
+    items={getLedgersCategories(t)}
+  />
+)
 
 LedgersCategorySelect.propTypes = {
   className: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }
 
 LedgersCategorySelect.defaultProps = {
-  className: '',
   value: '',
+  className: '',
 }
 
-export default withTranslation('translations')(LedgersCategorySelect)
+export default withTranslation('translations')(memo(LedgersCategorySelect))
