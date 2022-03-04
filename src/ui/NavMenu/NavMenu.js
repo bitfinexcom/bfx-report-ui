@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
   Menu,
@@ -188,4 +187,4 @@ class NavMenu extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(NavMenu)
+export default NavMenu
