@@ -1,3 +1,4 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
@@ -9,7 +10,7 @@ const mapStateToProps = state => ({
   windowWidth: getWindowWidth(state),
 })
 
-
-const NavMenuContainer = connect(mapStateToProps)(withRouter(NavMenu))
-
-export default NavMenuContainer
+export default compose(
+  connect(mapStateToProps),
+  withRouter,
+)(NavMenu)
