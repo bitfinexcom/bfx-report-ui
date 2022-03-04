@@ -1,3 +1,1 @@
-import MultiPairSelector from './MultiPairSelector.container'
-
-export default MultiPairSelector
+export { default } from './MultiPairSelector.container'
