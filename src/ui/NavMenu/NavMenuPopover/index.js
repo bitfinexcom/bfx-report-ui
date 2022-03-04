@@ -1,3 +1,1 @@
-import NavMenuPopover from './NavMenuPopover'
-
-export default NavMenuPopover
+export { default } from './NavMenuPopover'
