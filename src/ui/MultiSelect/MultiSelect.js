@@ -1,13 +1,21 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withTranslation } from 'react-i18next'
 import { MultiSelect as BlueprintMultiSelect } from '@blueprintjs/select'
 
 import Icon from 'icons'
 
-import { propTypes, defaultProps } from './MultiSymbolSelector.props'
-
 class MultiSelect extends PureComponent {
+  static propTypes = {
+    className: PropTypes.string,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    className: '',
+  }
+
   state = {
     isOpen: false,
   }
@@ -51,8 +59,5 @@ class MultiSelect extends PureComponent {
     )
   }
 }
-
-MultiSelect.propTypes = propTypes
-MultiSelect.defaultProps = defaultProps
 
 export default withTranslation('translations')(MultiSelect)
