@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
   Intent,
@@ -100,4 +99,4 @@ MultiPairSelector.defaultProps = {
   currentFilters: [],
 }
 
-export default withTranslation('translations')(MultiPairSelector)
+export default MultiPairSelector
