@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+import compose from 'lodash/fp/compose'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
   fetchAffiliatesEarnings,
@@ -43,6 +45,8 @@ const mapDispatchToProps = {
   clearTargetSymbols,
 }
 
-const AffiliatesEarningsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AffiliatesEarnings))
-
-export default AffiliatesEarningsContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(AffiliatesEarnings)
