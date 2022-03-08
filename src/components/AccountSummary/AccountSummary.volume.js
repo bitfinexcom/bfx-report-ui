@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
@@ -50,9 +49,7 @@ const getColumns = (props) => {
   ]
 }
 
-const AccountSummaryVolume = (props) => {
-  const { data, t } = props
-
+const AccountSummaryVolume = ({ data, t }) => {
   if (!data.length) {
     return null
   }
@@ -76,8 +73,8 @@ const VOLUME_ENTRIES_PROPS = PropTypes.shape({
 })
 
 AccountSummaryVolume.propTypes = {
-  data: PropTypes.arrayOf(VOLUME_ENTRIES_PROPS).isRequired,
   t: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(VOLUME_ENTRIES_PROPS).isRequired,
 }
 
-export default withTranslation('translations')(AccountSummaryVolume)
+export default memo(AccountSummaryVolume)
