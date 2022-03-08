@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
@@ -8,10 +7,12 @@ import { formatAmount, formatFraction } from 'ui/utils'
 
 const getColor = val => (val > 0 ? 'red' : 'green')
 
-const getColumns = (props) => {
-  const {
-    makerFee, takerFeeToCrypto, takerFeeToFiat, takerFeeToStable,
-  } = props
+const getColumns = ({
+  makerFee,
+  takerFeeToFiat,
+  takerFeeToStable,
+  takerFeeToCrypto,
+}) => {
   const formattedMakerFee = `${formatFraction(makerFee * 100, { minDigits: 2 })}%`
   const formattedTakerFeeToCrypto = `${formatFraction(takerFeeToCrypto * 100, { minDigits: 2 })}%`
   const formattedTakerFeeToFiat = `${formatFraction(takerFeeToFiat * 100, { minDigits: 2 })}%`
@@ -69,15 +70,20 @@ const getColumns = (props) => {
   ]
 }
 
-const AccountSummaryFees = (props) => {
+const AccountSummaryFees = ({
+  t,
+  data,
+  title,
+}) => {
   const {
-    data,
-    title,
-    t,
-  } = props
-  const {
-    makerFee, makerRebate, takerFeeToCrypto, takerFeeToFiat, takerFeeToStable,
-    takerRebateToCrypto, takerRebateToFiat, takerRebateToStable,
+    makerFee,
+    makerRebate,
+    takerFeeToFiat,
+    takerFeeToStable,
+    takerFeeToCrypto,
+    takerRebateToFiat,
+    takerRebateToCrypto,
+    takerRebateToStable,
   } = data
 
   const columns = getColumns({
@@ -116,4 +122,4 @@ AccountSummaryFees.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(AccountSummaryFees)
+export default memo(AccountSummaryFees)
