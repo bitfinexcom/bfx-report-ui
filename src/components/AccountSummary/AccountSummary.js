@@ -1,18 +1,18 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Card, Elevation } from '@blueprintjs/core'
-import _isEmpty from 'lodash/isEmpty'
 import _get from 'lodash/get'
+import _isEmpty from 'lodash/isEmpty'
+import { Card, Elevation } from '@blueprintjs/core'
 
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
 import SectionHeader from 'ui/SectionHeader'
 
-import Volume from './AccountSummary.volume'
-import Fees from './AccountSummary.fees'
-import DerivFees from './AccountSummary.derivFees'
 import Leo from './AccountSummary.leo'
+import Fees from './AccountSummary.fees'
+import Volume from './AccountSummary.volume'
 import PaidFees from './AccountSummary.paidFees'
+import DerivFees from './AccountSummary.derivFees'
 import FeeTierVolume from './AccountSummary.feeTierVolume'
 
 class AccountSummary extends PureComponent {
@@ -42,6 +42,7 @@ class AccountSummary extends PureComponent {
     fetchData: PropTypes.func.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -59,10 +60,11 @@ class AccountSummary extends PureComponent {
 
   render() {
     const {
+      t,
       data,
-      dataReceived,
-      pageLoading,
       refresh,
+      pageLoading,
+      dataReceived,
     } = this.props
 
     let showContent
@@ -73,29 +75,39 @@ class AccountSummary extends PureComponent {
     } else {
       showContent = (
         <div className='section-account-summary-data'>
-          <Volume data={_get(data, 'trade_vol_30d', [])} />
+          <Volume
+            t={t}
+            data={_get(data, 'trade_vol_30d', [])}
+          />
           <Fees
+            t={t}
             data={data}
             title='accountsummary.fees'
           />
           <DerivFees
+            t={t}
             title='accountsummary.fees_deriv'
             makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
             takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
           />
           <br />
           <PaidFees
-            data={_get(data, 'fees_funding_30d', {})}
+            t={t}
             title='accountsummary.margin_funds'
+            data={_get(data, 'fees_funding_30d', {})}
             total={_get(data, 'fees_funding_total_30d', 0)}
           />
           <PaidFees
-            data={_get(data, 'fees_trading_30d', {})}
+            t={t}
             title='accountsummary.trading_funds'
+            data={_get(data, 'fees_trading_30d', {})}
             total={_get(data, 'fees_trading_total_30d', 0)}
           />
-          <FeeTierVolume data={_get(data, 'trade_vol_30d', {})} />
-          <Leo data={data} />
+          <FeeTierVolume
+            t={t}
+            data={_get(data, 'trade_vol_30d', {})}
+          />
+          <Leo t={t} data={data} />
         </div>
       )
     }
