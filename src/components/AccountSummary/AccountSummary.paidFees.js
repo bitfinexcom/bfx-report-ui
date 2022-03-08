@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
-import { fixedFloat, formatAmount } from 'ui/utils'
 import { COLUMN_WIDTHS } from 'utils/columns'
+import { fixedFloat, formatAmount } from 'ui/utils'
 
 export const getColumns = (props) => {
   const { data } = props
@@ -52,11 +51,12 @@ export const getColumns = (props) => {
   ]
 }
 
-const AccountSummaryPaidFees = (props) => {
-  const {
-    data, t, title, total,
-  } = props
-
+const AccountSummaryPaidFees = ({
+  t,
+  data,
+  total,
+  title,
+}) => {
   const formattedData = Object.keys(data).map(key => ({
     curr: key,
     amount: data[key],
@@ -80,10 +80,10 @@ const AccountSummaryPaidFees = (props) => {
 }
 
 AccountSummaryPaidFees.propTypes = {
-  data: PropTypes.objectOf(PropTypes.number).isRequired,
+  t: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   total: PropTypes.number.isRequired,
-  t: PropTypes.func.isRequired,
+  data: PropTypes.objectOf(PropTypes.number).isRequired,
 }
 
-export default withTranslation('translations')(AccountSummaryPaidFees)
+export default memo(AccountSummaryPaidFees)
