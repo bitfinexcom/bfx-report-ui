@@ -1,3 +1,1 @@
-import MultiSymbolSelector from './MultiSymbolSelector.container'
-
-export default MultiSymbolSelector
+export { default } from './MultiSymbolSelector.container'

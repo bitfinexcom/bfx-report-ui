@@ -1,4 +1,6 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
 import { getCoins, getCurrencies, getInactiveCurrencies } from 'state/symbols/selectors'
 
@@ -10,6 +12,7 @@ const mapStateToProps = state => ({
   inactiveCurrencies: getInactiveCurrencies(state),
 })
 
-const MultiSymbolSelectorContainer = connect(mapStateToProps)(MultiSymbolSelector)
-
-export default MultiSymbolSelectorContainer
+export default compose(
+  withTranslation('translations'),
+  connect(mapStateToProps),
+)(MultiSymbolSelector)
