@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 
@@ -90,15 +89,15 @@ class Candles extends PureComponent {
 
   render() {
     const {
-      candles,
-      fetchData,
+      t,
       pairs,
       params,
-      refresh,
-      t,
       trades,
       toggleGoToRangeDialog,
       isChartLoading,
+      refresh,
+      candles,
+      fetchData,
     } = this.props
     const { pair, timeframe } = params
     const hasChanges = this.hasChanges()
@@ -164,4 +163,4 @@ class Candles extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(Candles)
+export default Candles
