@@ -16,6 +16,7 @@ class MultiSymbolSelector extends PureComponent {
     existingCoins: PropTypes.arrayOf(PropTypes.string),
     inactiveCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
     toggleSymbol: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
