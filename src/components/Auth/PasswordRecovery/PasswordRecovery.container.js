@@ -1,4 +1,6 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
 import { recoverPassword, updateAuth } from 'state/auth/actions'
 import { getAuthData, getIsLoading } from 'state/auth/selectors'
@@ -11,10 +13,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  recoverPassword,
   updateAuth,
+  recoverPassword,
 }
 
-const PasswordRecoveryContainer = connect(mapStateToProps, mapDispatchToProps)(PasswordRecovery)
-
-export default PasswordRecoveryContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(PasswordRecovery)

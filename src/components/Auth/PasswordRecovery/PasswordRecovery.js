@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
   Button,
@@ -39,13 +38,13 @@ class PasswordRecovery extends PureComponent {
 
     this.state = {
       apiKey: '',
+      isPersisted,
       apiSecret: '',
       password: '',
+      passwordError: '',
       passwordRepeat: '',
       isBeingValidated: false,
       isPasswordProtected: config.hostedFrameworkMode,
-      isPersisted,
-      passwordError: '',
       passwordRepeatError: '',
     }
   }
@@ -245,4 +244,4 @@ class PasswordRecovery extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(PasswordRecovery)
+export default PasswordRecovery
