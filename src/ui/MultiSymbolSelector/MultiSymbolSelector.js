@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Intent,
@@ -8,9 +8,23 @@ import {
 
 import MultiSelect from 'ui/MultiSelect'
 
-import { propTypes, defaultProps } from './MultiSymbolSelector.props'
-
 class MultiSymbolSelector extends PureComponent {
+  static propTypes = {
+    coins: PropTypes.arrayOf(PropTypes.string),
+    currencies: PropTypes.objectOf(PropTypes.string),
+    currentFilters: PropTypes.arrayOf(PropTypes.string),
+    existingCoins: PropTypes.arrayOf(PropTypes.string),
+    inactiveCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+    toggleSymbol: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    coins: [],
+    currencies: {},
+    currentFilters: [],
+    existingCoins: [],
+  }
+
   renderSymbol = (symbol, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
@@ -29,14 +43,14 @@ class MultiSymbolSelector extends PureComponent {
 
     return (
       <MenuItem
-        className={classes}
-        active={active}
-        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-        disabled={disabled || symbol === 'inactive'}
-        key={symbol}
-        onClick={handleClick}
         text={text}
+        key={symbol}
+        active={active}
+        className={classes}
+        onClick={handleClick}
         label={currencies[symbol]}
+        disabled={disabled || symbol === 'inactive'}
+        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
       />
     )
   }
@@ -53,10 +67,10 @@ class MultiSymbolSelector extends PureComponent {
   render() {
     const {
       coins,
-      currentFilters,
-      existingCoins,
-      inactiveCurrencies,
       toggleSymbol,
+      existingCoins,
+      currentFilters,
+      inactiveCurrencies,
     } = this.props
 
     const shownCoins = coins.length
@@ -73,20 +87,17 @@ class MultiSymbolSelector extends PureComponent {
 
     return (
       <MultiSelect
-        disabled={!coins.length && !existingCoins.length}
         items={items}
+        tagRenderer={coin => coin}
+        onItemSelect={toggleSymbol}
+        selectedItems={currentFilters}
         itemRenderer={this.renderSymbol}
         itemPredicate={this.itemPredicate}
-        onItemSelect={toggleSymbol}
+        disabled={!coins.length && !existingCoins.length}
         tagInputProps={{ tagProps: { minimal: true }, onRemove: toggleSymbol }}
-        tagRenderer={coin => coin}
-        selectedItems={currentFilters}
       />
     )
   }
 }
 
-MultiSymbolSelector.propTypes = propTypes
-MultiSymbolSelector.defaultProps = defaultProps
-
-export default withTranslation('translations')(MultiSymbolSelector)
+export default MultiSymbolSelector
