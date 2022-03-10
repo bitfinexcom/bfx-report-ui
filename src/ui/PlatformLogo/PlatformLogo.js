@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 
 import { THEME_CLASSES } from 'utils/themes'
 
 import darkLogo from './files/logo-dark-theme.svg'
 import lightLogo from './files/logo-light-theme.svg'
-import { propTypes, defaultProps } from './PlatformLogo.props'
 
 const getLogo = (theme) => {
   switch (theme) {
@@ -33,7 +33,8 @@ const PlatformLogo = ({ theme }) => {
   )
 }
 
-PlatformLogo.propTypes = propTypes
-PlatformLogo.defaultProps = defaultProps
+PlatformLogo.propTypes = {
+  theme: PropTypes.string.isRequired,
+}
 
-export default PlatformLogo
+export default memo(PlatformLogo)

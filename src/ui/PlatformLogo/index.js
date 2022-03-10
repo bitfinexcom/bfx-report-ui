@@ -1,3 +1,1 @@
-import PlatformLogo from './PlatformLogo.container'
-
-export default PlatformLogo
+export { default } from './PlatformLogo.container'
