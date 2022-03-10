@@ -1,4 +1,6 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
 import { getPaginationData } from 'state/pagination/selectors'
 import { jumpPage, fetchNext } from 'state/pagination/actions'
@@ -14,6 +16,7 @@ const mapDispatchToProps = {
   fetchNext,
 }
 
-const PaginationContainer = connect(mapStateToProps, mapDispatchToProps)(Pagination)
-
-export default PaginationContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(Pagination)
