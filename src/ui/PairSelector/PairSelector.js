@@ -1,12 +1,22 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Intent, MenuItem } from '@blueprintjs/core'
 
 import Select from 'ui/Select'
 
-import { propTypes, defaultProps } from './PairSelector.props'
-
 class PairSelector extends PureComponent {
+  static propTypes = {
+    onPairSelect: PropTypes.func.isRequired,
+    currentPair: PropTypes.string.isRequired,
+    pairs: PropTypes.arrayOf(PropTypes.string),
+    inactivePairs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }
+
+  static defaultProps = {
+    pairs: [],
+  }
+
   itemRenderer = (pair, { modifiers, handleClick }) => {
     const { active, disabled, matchesPredicate } = modifiers
     if (!matchesPredicate) {
@@ -18,12 +28,12 @@ class PairSelector extends PureComponent {
 
     return (
       <MenuItem
-        active={active}
-        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-        disabled={disabled || pair === 'inactive'}
         key={pair}
-        onClick={handleClick}
         text={text}
+        active={active}
+        onClick={handleClick}
+        disabled={disabled || pair === 'inactive'}
+        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
       />
     )
   }
@@ -39,7 +49,10 @@ class PairSelector extends PureComponent {
 
   render() {
     const {
-      currentPair, inactivePairs, pairs, onPairSelect,
+      pairs,
+      currentPair,
+      onPairSelect,
+      inactivePairs,
     } = this.props
 
     const items = inactivePairs.length
@@ -52,19 +65,16 @@ class PairSelector extends PureComponent {
 
     return (
       <Select
-        popoverClassName='bitfinex-select-menu--pair'
-        itemRenderer={this.itemRenderer}
-        itemPredicate={this.itemPredicate}
-        onChange={onPairSelect}
         filterable
         items={items}
         value={currentPair}
+        onChange={onPairSelect}
+        itemRenderer={this.itemRenderer}
+        itemPredicate={this.itemPredicate}
+        popoverClassName='bitfinex-select-menu--pair'
       />
     )
   }
 }
-
-PairSelector.propTypes = propTypes
-PairSelector.defaultProps = defaultProps
 
 export default withTranslation('translations')(PairSelector)

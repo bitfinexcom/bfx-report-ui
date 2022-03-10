@@ -1,3 +1,1 @@
-import PairSelector from './PairSelector.container'
-
-export default PairSelector
+export { default } from './PairSelector.container'
