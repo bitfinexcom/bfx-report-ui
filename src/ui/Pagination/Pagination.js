@@ -1,6 +1,5 @@
 import React, { createRef, PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { Swipeable } from 'react-swipeable'
 import { Spinner } from '@blueprintjs/core'
@@ -177,4 +176,4 @@ class Pagination extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(Pagination)
+export default Pagination
