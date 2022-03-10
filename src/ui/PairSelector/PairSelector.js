@@ -11,6 +11,7 @@ class PairSelector extends PureComponent {
     currentPair: PropTypes.string.isRequired,
     pairs: PropTypes.arrayOf(PropTypes.string),
     inactivePairs: PropTypes.arrayOf(PropTypes.string).isRequired,
+    t: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
