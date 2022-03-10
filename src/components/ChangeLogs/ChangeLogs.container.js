@@ -1,20 +1,22 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchData,
   refresh,
+  fetchData,
 } from 'state/changeLogs/actions'
-import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import queryConstants from 'state/query/constants'
+import { getColumns } from 'state/filters/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
-  getDataReceived,
   getEntries,
   getPageLoading,
+  getDataReceived,
 } from 'state/changeLogs/selectors'
-import { getColumns } from 'state/filters/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
-import queryConstants from 'state/query/constants'
 
 import ChangeLogs from './ChangeLogs'
 
@@ -29,10 +31,12 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  fetchData,
   refresh,
+  fetchData,
 }
 
-const ChangeLogsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(ChangeLogs))
-
-export default ChangeLogsContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(ChangeLogs)

@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import NoData from 'ui/NoData'
@@ -107,4 +106,4 @@ class ChangeLogs extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(ChangeLogs)
+export default ChangeLogs
