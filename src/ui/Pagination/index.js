@@ -1,3 +1,1 @@
-import PaginationContainer from './Pagination.container'
-
-export default PaginationContainer
+export { default } from './Pagination.container'
