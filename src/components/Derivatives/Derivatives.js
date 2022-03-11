@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import memoizeOne from 'memoize-one'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -162,4 +161,4 @@ class Derivatives extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(Derivatives)
+export default Derivatives

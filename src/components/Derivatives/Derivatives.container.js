@@ -1,22 +1,24 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchDerivatives,
   refresh,
   addTargetPair,
   setTargetPairs,
+  fetchDerivatives,
   removeTargetPair,
   clearTargetPairs,
 } from 'state/derivatives/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getInactivePairs, getPairs } from 'state/symbols/selectors'
 import {
-  getDataReceived,
   getEntries,
-  getExistingPairs,
   getPageLoading,
   getTargetPairs,
+  getDataReceived,
+  getExistingPairs,
 } from 'state/derivatives/selectors'
 import { getColumns } from 'state/filters/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
@@ -25,28 +27,30 @@ import queryConstants from 'state/query/constants'
 import Derivatives from './Derivatives'
 
 const mapStateToProps = state => ({
-  columns: getColumns(state, queryConstants.MENU_DERIVATIVES),
-  columnsWidth: getColumnsWidth(state, queryConstants.MENU_DERIVATIVES),
-  entries: getEntries(state),
-  inactivePairs: getInactivePairs(state),
   pairs: getPairs(state),
-  existingPairs: getExistingPairs(state),
+  entries: getEntries(state),
   getFullTime: getFullTime(state),
-  dataReceived: getDataReceived(state),
+  timeOffset: getTimeOffset(state),
   pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
-  timeOffset: getTimeOffset(state),
+  dataReceived: getDataReceived(state),
+  existingPairs: getExistingPairs(state),
+  inactivePairs: getInactivePairs(state),
+  columns: getColumns(state, queryConstants.MENU_DERIVATIVES),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_DERIVATIVES),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchDerivatives,
   refresh,
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
   clearTargetPairs,
+  fetchData: fetchDerivatives,
 }
 
-const DerivativesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Derivatives))
-
-export default DerivativesContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(Derivatives)
