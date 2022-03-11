@@ -1,33 +1,35 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchFeesReport,
   refresh,
-  addTargetPair,
-  removeTargetPair,
-  setTargetPairs,
   setParams,
+  addTargetPair,
+  setTargetPairs,
   clearTargetPairs,
+  removeTargetPair,
+  fetchFeesReport,
 } from 'state/feesReport/actions'
 import {
-  getCurrentFetchParams,
-  getDataReceived,
-  getEntries,
-  getPageLoading,
   getParams,
+  getEntries,
   getTargetPairs,
+  getPageLoading,
+  getDataReceived,
+  getCurrentFetchParams,
 } from 'state/feesReport/selectors'
 
 import FeesReport from './FeesReport'
 
 const mapStateToProps = state => ({
-  currentFetchParams: getCurrentFetchParams(state),
-  entries: getEntries(state),
   params: getParams(state),
+  entries: getEntries(state),
+  pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
   dataReceived: getDataReceived(state),
-  pageLoading: getPageLoading(state),
+  currentFetchParams: getCurrentFetchParams(state),
 })
 
 const mapDispatchToProps = {
@@ -40,6 +42,8 @@ const mapDispatchToProps = {
   clearTargetPairs,
 }
 
-const FeesReportContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FeesReport))
-
-export default FeesReportContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(FeesReport)
