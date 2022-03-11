@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
@@ -161,4 +160,4 @@ class FeesReport extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(FeesReport)
+export default FeesReport
