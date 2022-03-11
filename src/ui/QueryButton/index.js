@@ -1,3 +1,1 @@
-import QueryButton from './QueryButton'
-
-export default QueryButton
+export { default } from './QueryButton'
