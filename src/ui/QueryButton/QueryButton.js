@@ -1,26 +1,22 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 
-const QueryButton = (props) => {
-  const {
-    disabled,
-    onClick,
-    t,
-  } = props
-
-  return (
-    <Button
-      className='query-button'
-      onClick={onClick}
-      intent={Intent.PRIMARY}
-      disabled={disabled}
-    >
-      {t('query.title')}
-    </Button>
-  )
-}
+const QueryButton = ({
+  t,
+  onClick,
+  disabled,
+}) => (
+  <Button
+    onClick={onClick}
+    disabled={disabled}
+    intent={Intent.PRIMARY}
+    className='query-button'
+  >
+    {t('query.title')}
+  </Button>
+)
 
 QueryButton.propTypes = {
   disabled: PropTypes.bool,
@@ -32,4 +28,4 @@ QueryButton.defaultProps = {
   disabled: false,
 }
 
-export default withTranslation('translations')(QueryButton)
+export default withTranslation('translations')(memo(QueryButton))
