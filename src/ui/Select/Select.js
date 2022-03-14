@@ -42,8 +42,8 @@ class Select extends PureComponent {
     filterable: false,
     className: '',
     popoverClassName: '',
-    itemRenderer: () => {},
-    itemPredicate: () => {},
+    itemRenderer: undefined,
+    itemPredicate: undefined,
   }
 
   state = {
