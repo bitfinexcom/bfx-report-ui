@@ -1,5 +1,3 @@
-import SectionHeader from './SectionHeader.container'
+export { default } from './SectionHeader.container'
 
 export * from './SectionHeader.components'
-
-export default SectionHeader
