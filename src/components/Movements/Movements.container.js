@@ -1,9 +1,11 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchMovements,
   refresh,
+  fetchMovements,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
@@ -13,10 +15,10 @@ import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import { jumpPage } from 'state/pagination/actions'
 import {
-  getDataReceived,
   getEntries,
-  getExistingCoins,
   getPageLoading,
+  getDataReceived,
+  getExistingCoins,
   getTargetSymbols,
 } from 'state/movements/selectors'
 import { getColumns } from 'state/filters/selectors'
@@ -25,26 +27,28 @@ import queryConstants from 'state/query/constants'
 import Movements from './Movements'
 
 const mapStateToProps = state => ({
+  getFullTime: getFullTime(state),
+  timeOffset: getTimeOffset(state),
+  pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
+  existingCoins: getExistingCoins(state),
+  targetSymbols: getTargetSymbols(state),
   columns: getColumns(state, queryConstants.MENU_MOVEMENTS),
   entries: getFilteredEntries(state, queryConstants.MENU_MOVEMENTS, getEntries(state)),
-  existingCoins: getExistingCoins(state),
-  getFullTime: getFullTime(state),
-  dataReceived: getDataReceived(state),
-  pageLoading: getPageLoading(state),
-  targetSymbols: getTargetSymbols(state),
-  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchMovements,
   refresh,
   jumpPage,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
   clearTargetSymbols,
+  fetchData: fetchMovements,
 }
 
-const MovementsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Movements))
-
-export default MovementsContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(Movements)
