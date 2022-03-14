@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withTranslation } from 'react-i18next'
 import {
@@ -12,9 +13,39 @@ import _isObject from 'lodash/isObject'
 import Icons from 'icons'
 import { filterSelectorItem } from 'ui/utils'
 
-import { propTypes, defaultProps } from './Select.props'
-
 class Select extends PureComponent {
+  static propTypes = {
+    className: PropTypes.string,
+    filterable: PropTypes.bool,
+    itemPredicate: PropTypes.func,
+    itemRenderer: PropTypes.func,
+    items: PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        value: PropTypes.oneOfType([
+          PropTypes.bool,
+          PropTypes.string,
+          PropTypes.number]).isRequired,
+        label: PropTypes.string.isRequired,
+      }),
+    ])).isRequired,
+    onChange: PropTypes.func.isRequired,
+    popoverClassName: PropTypes.string,
+    t: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string,
+      PropTypes.number]).isRequired,
+  }
+
+  static defaultProps = {
+    filterable: false,
+    className: '',
+    popoverClassName: '',
+    itemRenderer: () => {},
+    itemPredicate: () => {},
+  }
+
   state = {
     isOpen: false,
   }
@@ -43,12 +74,12 @@ class Select extends PureComponent {
 
     return (
       <MenuItem
-        active={active}
-        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
-        disabled={disabled}
         key={key}
-        onClick={handleClick}
         text={text}
+        active={active}
+        disabled={disabled}
+        onClick={handleClick}
+        intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
       />
     )
   }
@@ -67,14 +98,14 @@ class Select extends PureComponent {
 
   render() {
     const {
+      t,
+      items,
+      value,
       className,
       filterable,
       itemPredicate,
       itemRenderer,
-      items,
       popoverClassName,
-      t,
-      value,
     } = this.props
     const { isOpen } = this.state
 
@@ -116,8 +147,5 @@ class Select extends PureComponent {
     )
   }
 }
-
-Select.propTypes = propTypes
-Select.defaultProps = defaultProps
 
 export default withTranslation('translations')(Select)
