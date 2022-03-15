@@ -89,7 +89,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].formattedPayCurrenciesInfo,
+      copyText: rowIndex => JSON.stringify(filteredData[rowIndex].payCurrencies, undefined, 2),
     },
     {
       id: 'status',
@@ -120,7 +120,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].customerInfo,
+      copyText: rowIndex => JSON.stringify(filteredData[rowIndex].customerInfo, undefined, 2),
     },
     {
       id: 'invoices',
@@ -137,7 +137,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].formattedInvoicesInfo,
+      copyText: rowIndex => JSON.stringify(filteredData[rowIndex].invoices, undefined, 2),
     },
     {
       id: 'payment',
