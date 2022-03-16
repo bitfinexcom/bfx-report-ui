@@ -26,6 +26,15 @@
     width: 100px;
   }
 
+  &--indicatorsSelect .bp3-button {
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 350px;
+    width: 130px;
+    height: 5px;
+  }
+
   &-menu {
     .bp3-popover-content {
       width: 223px;
@@ -75,6 +84,19 @@
 
     &--timeframe .bp3-popover-content {
       width: 100px;
+
+      .bp3-menu {
+        min-width: unset;
+      }
+    }
+
+    &--indicatorsSelect .bp3-popover-content {
+      position: absolute;
+      z-index: 11;
+      top: 15px;
+      left: 350px;
+      width: 180px;
+      height: 10px;
 
       .bp3-menu {
         min-width: unset;

@@ -7,11 +7,28 @@ import _debounce from 'lodash/debounce'
 
 import { THEME_CLASSES } from 'utils/themes'
 
+import IndicatorsSelect from './IndicatorsSelect'
+import Indicators from './Indicators'
 import CandleStats from './CandleStats'
 import TradesToggle from './TradesToggle'
 import Tooltip from './Tooltip'
 import TradingViewLink from './TradingViewLink'
 import { propTypes, defaultProps } from './Candlestick.props'
+
+const {
+  HorizontalLine,
+  HorizontalLineForm,
+  MovingAverage,
+  MovingAverageForm,
+  BollingerBand,
+  BollingerBandForm,
+} = Indicators
+
+const FORMS = {
+  HorizontalLine: HorizontalLineForm,
+  MovingAverage: MovingAverageForm,
+  BollingerBand: BollingerBandForm,
+}
 
 const STYLES = {
   [THEME_CLASSES.DARK]: {
@@ -33,6 +50,7 @@ class Candlestick extends React.PureComponent {
     width: null,
     height: null,
     isTradesVisible: true,
+    indicators: {},
   }
 
   chart = null
@@ -45,6 +63,8 @@ class Candlestick extends React.PureComponent {
     super()
 
     this.onResize = _debounce(this.onResize, 100)
+
+    this.addIndicator = this.addIndicator.bind(this) // Avoid bind in JSX onChange.
   }
 
   componentDidMount() {
@@ -57,7 +77,13 @@ class Candlestick extends React.PureComponent {
     const { candles, trades, theme } = this.props
     if (candles.entries !== prevProps.candles.entries) {
       this.candleSeries.setData(candles.entries)
+      const { indicators } = this.state
+      const indicatorsValues = Object.values(indicators)
+      indicatorsValues.forEach((indicator) => {
+        if (indicator.isVisible) indicator.setSeriesData(candles.entries)
+      })
     }
+
     if (trades.entries !== prevProps.trades.entries && isTradesVisible) {
       this.setTradeSeries()
     }
@@ -135,8 +161,18 @@ class Candlestick extends React.PureComponent {
       borderUpColor: '#16b157',
       wickDownColor: '#f05359',
       wickUpColor: '#16b157',
+      lastValueVisible: false,
+      priceLineVisible: false,
     })
     this.candleSeries.setData(candles)
+
+    const { indicators } = this.state
+    const indicatorsValues = Object.values(indicators)
+    indicatorsValues.forEach((indicator) => {
+      if (!indicator.isVisible) return
+      indicator.getSeries(chart)
+      indicator.setSeriesData(candles)
+    })
 
     this.setState({
       width,
@@ -250,6 +286,73 @@ class Candlestick extends React.PureComponent {
     })
   }
 
+  addIndicator(indicator) {
+    const { indicators } = this.state
+    if (indicator === 'HorizontalLine') {
+      const newLine = new HorizontalLine({ value: 40000 })
+      const key = Date.now()
+      newLine.key = key
+      indicators[key] = newLine
+    } else if (indicator === 'MovingAverage') {
+      const newLine = new MovingAverage({ value: 24 })
+      const key = Date.now()
+      newLine.key = key
+      indicators[key] = newLine
+    } else if (indicator === 'BollingerBand') {
+      const newLine = new BollingerBand({ value: 24, stdValue: 2 })
+      const key = Date.now()
+      newLine.key = key
+      indicators[key] = newLine
+    }
+    this.recreateChart()
+  }
+
+  removeIndicator(key) {
+    const { indicators } = this.state
+    const newIndicators = { ...indicators }
+    delete newIndicators[key]
+    this.setState({ indicators: newIndicators }, () => this.recreateChart())
+  }
+
+  updateValue(key, event) {
+    event.preventDefault() // Avoid page refresh.
+    const { indicators } = this.state
+    const updatedIndicators = { ...indicators }
+    const { level } = event.target
+    const levelValue = level.value
+    updatedIndicators[key].value = +levelValue
+    if (updatedIndicators[key].type === 'BollingerBand') {
+      const { std } = event.target
+      const stdValue = std.value
+      updatedIndicators[key].stdValue = +stdValue
+    }
+    this.setState({ indicators: updatedIndicators }, () => this.recreateChart())
+  }
+
+  getIndicatorsStatusBar() {
+    const { indicators } = this.state
+    return (
+      <div>
+        {Object.values(indicators).map((indicator) => {
+          const opts = {
+            chart: this.chart,
+            indicator,
+            lineSeries: indicator.series,
+            defaultValue: indicator.value,
+            onSubmit: this.updateValue.bind(this, indicator.key),
+            onClose: this.removeIndicator.bind(this, indicator.key),
+          }
+          if (indicator.type === 'BollingerBand') {
+            opts.stdDefaultValue = indicator.stdValue
+          }
+          return (
+            React.createElement(FORMS[indicator.type], opts)
+          )
+        })}
+      </div>
+    )
+  }
+
   render() {
     const { className, candles: { entries: candles } } = this.props
     const {
@@ -283,7 +386,12 @@ class Candlestick extends React.PureComponent {
               value={isTradesVisible}
               onChange={this.onTradesVisibilityChange}
             />
+            <IndicatorsSelect
+              value={'Indicators:'}
+              onChange={this.addIndicator}
+            />
             <TradingViewLink />
+            {this.getIndicatorsStatusBar()}
           </Fragment>
         )}
       </div>
