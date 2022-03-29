@@ -14,6 +14,7 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import LedgersCategorySelect from 'ui/LedgersCategorySelect'
 import ColumnsFilter from 'ui/ColumnsFilter'
@@ -54,6 +55,7 @@ class Ledgers extends PureComponent {
       targetSymbols,
       existingCoins,
       targetCategory,
+      clearTargetSymbols,
     } = this.props
     const tableColumns = getColumns({
       t,
@@ -98,6 +100,7 @@ class Ledgers extends PureComponent {
                 toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={clearTargetSymbols} />
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.category')}
