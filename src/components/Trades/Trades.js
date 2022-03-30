@@ -39,6 +39,7 @@ class Trades extends PureComponent {
       t,
       targetPairs,
       timeOffset,
+      clearTargetPairs,
     } = this.props
     const tableColumns = getColumns({
       filteredData: entries,
@@ -75,6 +76,7 @@ class Trades extends PureComponent {
             togglePair: this.togglePair,
           }}
           refresh={refresh}
+          clearTargetPairs={clearTargetPairs}
         />
         <TradesSwitch target={TYPE} />
         {showContent}

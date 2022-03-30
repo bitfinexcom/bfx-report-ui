@@ -5,7 +5,9 @@ import {
   fetchTrades,
   refresh,
   addTargetPair,
-  removeTargetPair, setTargetPairs,
+  setTargetPairs,
+  removeTargetPair,
+  clearTargetPairs,
 } from 'state/trades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
@@ -38,6 +40,7 @@ const mapDispatchToProps = {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 }
 
 const TradesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Trades))
