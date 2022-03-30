@@ -15,6 +15,7 @@ import TimeRange from 'ui/TimeRange'
 import Pagination from 'ui/Pagination'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import queryConstants from 'state/query/constants'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
@@ -47,6 +48,7 @@ class Invoices extends PureComponent {
       dataReceived,
       existingCoins,
       targetSymbols,
+      clearTargetSymbols,
     } = this.props
 
     const tableColumns = getColumns({
@@ -92,6 +94,7 @@ class Invoices extends PureComponent {
                 toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={clearTargetSymbols} />
             <ColumnsFilter target={TYPE} />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
