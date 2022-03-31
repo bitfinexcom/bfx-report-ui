@@ -402,9 +402,10 @@ function* exportCSV({ payload: targets }) {
     const { result, error } = yield call(getMultipleCsv, params)
 
     if (result) {
-      const { localCsvFolderPath } = result
+      const { localCsvFolderPath, remoteCsvUrn } = result
+      const localExportPath = remoteCsvUrn || localCsvFolderPath
 
-      yield put(actions.setLocalExportPath(localCsvFolderPath))
+      yield put(actions.setLocalExportPath(localExportPath))
       yield put(toggleExportSuccessDialog())
     }
 
