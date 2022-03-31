@@ -79,6 +79,6 @@ function* fetchOrdersFail({ payload }) {
 
 export default function* ordersSaga() {
   yield takeLatest(types.FETCH_ORDERS, fetchOrders)
-  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR], refreshOrders)
+  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR, types.CLEAR_PAIRS], refreshOrders)
   yield takeLatest(types.FETCH_FAIL, fetchOrdersFail)
 }
