@@ -56,6 +56,7 @@ class Orders extends PureComponent {
       getFullTime,
       t,
       timeOffset,
+      clearTargetPairs,
     } = this.props
     const tableColumns = getColumns({
       filteredData: entries,
@@ -93,6 +94,7 @@ class Orders extends PureComponent {
             togglePair: this.togglePair,
           }}
           refresh={refresh}
+          clearTargetPairs={clearTargetPairs}
         />
         {showContent}
       </Card>

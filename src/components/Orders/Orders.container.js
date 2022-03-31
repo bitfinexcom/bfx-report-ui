@@ -7,6 +7,7 @@ import {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 } from 'state/orders/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
@@ -39,6 +40,7 @@ const mapDispatchToProps = {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 }
 
 const OrdersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Orders))
