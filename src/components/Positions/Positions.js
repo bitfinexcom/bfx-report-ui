@@ -47,6 +47,7 @@ class Positions extends PureComponent {
       t,
       targetPairs,
       timeOffset,
+      clearTargetPairs,
     } = this.props
     const tableColumns = getColumns({
       target: TYPE,
@@ -85,6 +86,7 @@ class Positions extends PureComponent {
             togglePair: this.togglePair,
           }}
           refresh={refresh}
+          clearTargetPairs={clearTargetPairs}
         />
         <PositionsSwitch target={TYPE} />
         {showContent}
