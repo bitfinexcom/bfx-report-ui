@@ -53,6 +53,7 @@ class SectionHeader extends PureComponent {
       timeframe,
       title,
       clearTargetPairs,
+      clearTargetSymbols,
     } = this.props
 
     const selector = this.getSelector()
@@ -72,6 +73,7 @@ class SectionHeader extends PureComponent {
               </SectionHeaderItem>
             )}
             {clearTargetPairs && <ClearFiltersButton onClick={clearTargetPairs} />}
+            {clearTargetSymbols && <ClearFiltersButton onClick={clearTargetSymbols} />}
             {filter && <ColumnsFilter target={target} />}
             {refresh && <RefreshButton onClick={refresh} />}
           </SectionHeaderRow>
