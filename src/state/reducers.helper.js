@@ -123,6 +123,13 @@ export function clearPairs(state, initialState) {
   }
 }
 
+export function clearSymbols(state, initialState) {
+  return {
+    ...initialState,
+    existingCoins: state.existingCoins,
+  }
+}
+
 export function refresh(type, state, initialState) {
   const data = (getFilterType(type) === queryTypes.FILTER_PAIR)
     ? { targetPairs: state.targetPairs }
@@ -140,6 +147,7 @@ export default {
   basePairState,
   baseSymbolState,
   clearPairs,
+  clearSymbols,
   fetch,
   fetchFail,
   refresh,
