@@ -36,6 +36,7 @@ class Movements extends PureComponent {
   render() {
     const {
       columns,
+      clearTargetSymbols,
       entries,
       existingCoins,
       getFullTime,
@@ -82,6 +83,7 @@ class Movements extends PureComponent {
             toggleSymbol: this.toggleSymbol,
           }}
           refresh={refresh}
+          clearTargetSymbols={clearTargetSymbols}
         />
         {showContent}
       </Card>
