@@ -82,6 +82,6 @@ function* fetchPositionsFail({ payload }) {
 
 export default function* positionsSaga() {
   yield takeLatest(types.FETCH_POSITIONS, fetchPositions)
-  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR], refreshPositions)
+  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR, types.CLEAR_PAIRS], refreshPositions)
   yield takeLatest(types.FETCH_FAIL, fetchPositionsFail)
 }
