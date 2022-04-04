@@ -154,7 +154,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => filteredData[rowIndex].formattedPayment,
+      copyText: rowIndex => JSON.stringify(filteredData[rowIndex].payment, undefined, 2),
     },
     {
       id: 'duration',
