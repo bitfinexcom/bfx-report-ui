@@ -29,7 +29,7 @@ const ExportSuccessDialog = ({
         {remoteUrn
           ? (
             <a href={remoteUrn}>
-              {remoteUrn}
+              {t('download.remoteStorage')}
             </a>
           ) : (
             <span>
