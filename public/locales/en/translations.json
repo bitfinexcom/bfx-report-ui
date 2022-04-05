@@ -200,6 +200,7 @@
     "export": "Export",
     "cancel": "Cancel",
     "okay": "Okay",
+    "remoteStorage": "Remote storage",
     "status": {
       "local": "Export csv generated, files are saved in: ",
       "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
