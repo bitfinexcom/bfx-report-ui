@@ -14,6 +14,7 @@ import { propTypes, defaultProps } from './ExportSuccessDialog.props'
 const ExportSuccessDialog = ({
   t,
   isOpen,
+  remoteUrn,
   toggleDialog,
   localExportPath,
 }) => {
@@ -25,9 +26,17 @@ const ExportSuccessDialog = ({
     ? (
       <>
         {t('download.status.local')}
-        <span>
-          {localExportPath}
-        </span>
+        {remoteUrn
+          ? (
+            <a href={remoteUrn}>
+              {remoteUrn}
+            </a>
+          ) : (
+            <span>
+              {localExportPath}
+            </span>
+          )
+        }
       </>
     )
     : t('download.status.email')
