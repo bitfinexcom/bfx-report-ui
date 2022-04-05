@@ -15,6 +15,8 @@ import Tooltip from './Tooltip'
 import TradingViewLink from './TradingViewLink'
 import { propTypes, defaultProps } from './Candlestick.props'
 
+import backtestData from './BacktestTrades/backtestTrades.json'
+
 const {
   HorizontalLine,
   HorizontalLineForm,
@@ -22,12 +24,15 @@ const {
   MovingAverageForm,
   BollingerBand,
   BollingerBandForm,
+  BacktestTrades,
+  BacktestTradesForm,
 } = Indicators
 
 const FORMS = {
   HorizontalLine: HorizontalLineForm,
   MovingAverage: MovingAverageForm,
   BollingerBand: BollingerBandForm,
+  BacktestTrades: BacktestTradesForm,
 }
 
 const STYLES = {
@@ -303,6 +308,11 @@ class Candlestick extends React.PureComponent {
       const key = Date.now()
       newLine.key = key
       indicators[key] = newLine
+    } else if (indicator === 'BacktestTrades') {
+      const newBar = new BacktestTrades({ trades: backtestData.trades })
+      const key = Date.now()
+      newBar.key = key
+      indicators[key] = newBar
     }
     this.recreateChart()
   }

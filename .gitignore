@@ -1,5 +1,6 @@
 # Personal ignores
 .vscode
+/src/ui/Charts/Candlestick/BacktestTrades/backtestTrades.json
 
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 

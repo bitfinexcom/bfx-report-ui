@@ -1,0 +1,5 @@
+{ "trades": [
+  {"_id":{"$oid":"624ae2408d766b8627996cd3"},"backtestName":"btc02","symbol":"tBTCUSD","mtsCreate":164916600700,"execAmount":0.6072837,"execPrice":46500,"orderType":"LIMIT","maker":true,"fee":0,"feeCurrency":"USD"},
+  {"_id":{"$oid":"624ae2408d766b8627996cd4"},"backtestName":"btc02","symbol":"tBTCUSD","mtsCreate":1649166009000,"execAmount":-0.34,"execPrice":46700,"orderType":"LIMIT","maker":true,"fee":0,"feeCurrency":"USD"},
+  {"_id":{"$oid":"624ae2408d766b8627996cd5"},"backtestName":"btc02","symbol":"tBTCUSD","mtsCreate":1949166097000,"execAmount":-0.015,"execPrice":46000,"orderType":"LIMIT","maker":true,"fee":0,"feeCurrency":"USD"}
+]}
