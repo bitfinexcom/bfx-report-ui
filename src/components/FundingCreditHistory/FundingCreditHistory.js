@@ -29,6 +29,7 @@ class FundingCreditHistory extends PureComponent {
   render() {
     const {
       columns,
+      clearTargetSymbols,
       getFullTime,
       targetSymbols,
       entries,
@@ -74,6 +75,7 @@ class FundingCreditHistory extends PureComponent {
             toggleSymbol: this.toggleSymbol,
           }}
           refresh={refresh}
+          clearTargetSymbols={clearTargetSymbols}
         />
         {showContent}
       </Card>
