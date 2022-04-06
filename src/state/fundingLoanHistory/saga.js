@@ -80,6 +80,6 @@ function* fetchFLoanFail({ payload }) {
 
 export default function* fundingLoanHistorySaga() {
   yield takeLatest(types.FETCH_FLOAN, fetchFLoan)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshFLoan)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS], refreshFLoan)
   yield takeLatest(types.FETCH_FAIL, fetchFLoanFail)
 }

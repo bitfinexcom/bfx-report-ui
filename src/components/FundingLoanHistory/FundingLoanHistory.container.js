@@ -7,6 +7,7 @@ import {
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
 } from 'state/fundingLoanHistory/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
@@ -39,6 +40,7 @@ const mapDispatchToProps = {
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
 }
 
 const FundingLoanHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FundingLoanHistory))
