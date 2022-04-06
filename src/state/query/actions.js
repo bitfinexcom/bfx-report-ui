@@ -23,6 +23,17 @@ export function setLocalExportPath(path) {
 }
 
 /**
+ * Create an action to set remote CSV URN.
+ * @param {string} urn to generated report.
+ */
+export function setRemoteUrn(urn) {
+  return {
+    type: types.SET_REMOTE_CSV_URN,
+    payload: urn,
+  }
+}
+
+/**
  * Create an action to prepare export related params.
  */
 export function prepareExport() {
@@ -44,6 +55,7 @@ export function setExportEmail(email) {
 
 export default {
   exportCsv,
+  setRemoteUrn,
   prepareExport,
   setExportEmail,
   setLocalExportPath,
