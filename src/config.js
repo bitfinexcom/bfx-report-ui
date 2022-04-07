@@ -11,6 +11,7 @@ const environments = {
     localExport: true,
     showAuthPage: true,
     showFrameworkMode: true,
+    hostedFrameworkMode: false,
   },
   testing: {
     API_URL: 'https://bfx-report-ui.staging.bitfinex.com/api',
@@ -20,6 +21,7 @@ const environments = {
     localExport: false,
     showAuthPage: true,
     showFrameworkMode: false,
+    hostedFrameworkMode: false,
   },
   staging: {
     API_URL: 'https://bfx-report-ui.staging.bitfinex.com/api',
@@ -29,6 +31,7 @@ const environments = {
     localExport: false,
     showAuthPage: true,
     showFrameworkMode: false,
+    hostedFrameworkMode: false,
   },
   production: {
     API_URL: 'https://report.bitfinex.com/api',
@@ -38,6 +41,7 @@ const environments = {
     localExport: false,
     showAuthPage: false,
     showFrameworkMode: false,
+    hostedFrameworkMode: false,
   },
 }
 
