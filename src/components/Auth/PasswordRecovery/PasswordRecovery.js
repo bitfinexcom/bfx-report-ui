@@ -34,7 +34,7 @@ class PasswordRecovery extends PureComponent {
       password: '',
       passwordRepeat: '',
       isBeingValidated: false,
-      isPasswordProtected: false,
+      isPasswordProtected: config.hostedFrameworkMode,
       isPersisted,
       passwordError: '',
       passwordRepeatError: '',
@@ -145,10 +145,10 @@ class PasswordRecovery extends PureComponent {
     } = this.state
 
     const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
+    const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
     const isPasswordRecoveryDisabled = !apiKey || !apiSecret
       || (config.showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
-
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
       'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
     })
@@ -202,7 +202,7 @@ class PasswordRecovery extends PureComponent {
             >
               {t('auth.rememberMe')}
             </Checkbox>
-            {config.showFrameworkMode && (
+            {showPasswordProtection && (
               <Checkbox
                 className='bitfinex-auth-remember-me'
                 name='isPasswordProtected'
