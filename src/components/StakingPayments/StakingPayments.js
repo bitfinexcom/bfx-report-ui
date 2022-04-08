@@ -35,6 +35,7 @@ class StakingPayments extends PureComponent {
   render() {
     const {
       columns,
+      clearTargetSymbols,
       getFullTime,
       targetSymbols,
       entries,
@@ -80,6 +81,7 @@ class StakingPayments extends PureComponent {
             toggleSymbol: this.toggleSymbol,
           }}
           refresh={refresh}
+          clearTargetSymbols={clearTargetSymbols}
         />
         {showContent}
       </Card>
