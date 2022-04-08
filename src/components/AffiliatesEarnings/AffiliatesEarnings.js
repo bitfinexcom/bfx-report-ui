@@ -32,6 +32,7 @@ class AffiliatesEarnings extends PureComponent {
   render() {
     const {
       columns,
+      clearTargetSymbols,
       getFullTime,
       targetSymbols,
       entries,
@@ -76,6 +77,7 @@ class AffiliatesEarnings extends PureComponent {
             toggleSymbol: this.toggleSymbol,
           }}
           refresh={refresh}
+          clearTargetSymbols={clearTargetSymbols}
         />
         {showContent}
       </Card>

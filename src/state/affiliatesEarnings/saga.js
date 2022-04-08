@@ -83,6 +83,8 @@ function* fetchAffiliatesEarningsFail({ payload }) {
 
 export default function* affiliatesEarningsSaga() {
   yield takeLatest(types.FETCH_AFFILIATES_EARNINGS, fetchAffiliatesEarnings)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshAffiliatesEarnings)
+  yield takeLatest([
+    types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS,
+  ], refreshAffiliatesEarnings)
   yield takeLatest(types.FETCH_FAIL, fetchAffiliatesEarningsFail)
 }
