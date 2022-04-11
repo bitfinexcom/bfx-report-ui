@@ -20,7 +20,12 @@ import DataTable from 'ui/DataTable'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import queryConstants from 'state/query/constants'
-import { checkInit, checkFetch, togglePair } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  togglePair,
+  clearPairs,
+} from 'state/utils'
 
 import getColumns from './Tickers.columns'
 import { propTypes, defaultProps } from './Tickers.props'
@@ -45,6 +50,12 @@ class Tickers extends PureComponent {
     }
   }
 
+  clearPairs = () => {
+    const { clearTargetPairs } = this.props
+    clearPairs(TYPE, this.props)
+    clearTargetPairs()
+  }
+
   render() {
     const {
       columns,
@@ -57,7 +68,6 @@ class Tickers extends PureComponent {
       t,
       targetPairs,
       timeOffset,
-      clearTargetPairs,
     } = this.props
 
     const tableColumns = getColumns({
@@ -100,7 +110,7 @@ class Tickers extends PureComponent {
                 togglePair={this.togglePair}
               />
             </SectionHeaderItem>
-            <ClearFiltersButton onClick={clearTargetPairs} />
+            <ClearFiltersButton onClick={this.clearPairs} />
             <ColumnsFilter target={TYPE} />
             <RefreshButton onClick={refresh} />
             <SyncPrefButton sectionType={TYPE} />
