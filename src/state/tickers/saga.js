@@ -45,6 +45,11 @@ function* fetchTickers() {
     const { start, end } = yield select(getTimeFrame, smallestMts)
     const filter = yield select(getFilterQuery, TYPE)
 
+    console.log('+++targetPairs', targetPairs)
+    console.log('+++filter', filter)
+    // console.log('+++targetPairs', targetPairs)
+    // console.log('+++targetPairs', targetPairs)
+
     const { result, error } = yield call(fetchDataWithPagination, getReqTickers, {
       start,
       end,
@@ -80,6 +85,6 @@ function* fetchTickersFail({ payload }) {
 
 export default function* tickersSaga() {
   yield takeLatest(types.FETCH_TICKERS, fetchTickers)
-  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR], refreshTickers)
+  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR, types.CLEAR_PAIRS], refreshTickers)
   yield takeLatest(types.FETCH_FAIL, fetchTickersFail)
 }
