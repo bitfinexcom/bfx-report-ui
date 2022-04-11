@@ -15,6 +15,7 @@ import RefreshButton from 'ui/RefreshButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import DataTable from 'ui/DataTable'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
@@ -56,6 +57,7 @@ class Tickers extends PureComponent {
       t,
       targetPairs,
       timeOffset,
+      clearTargetPairs,
     } = this.props
 
     const tableColumns = getColumns({
@@ -98,6 +100,7 @@ class Tickers extends PureComponent {
                 togglePair={this.togglePair}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={clearTargetPairs} />
             <ColumnsFilter target={TYPE} />
             <RefreshButton onClick={refresh} />
             <SyncPrefButton sectionType={TYPE} />
