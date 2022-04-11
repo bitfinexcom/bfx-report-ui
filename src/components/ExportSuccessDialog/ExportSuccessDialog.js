@@ -67,12 +67,14 @@ const ExportSuccessDialog = ({
 }
 
 ExportSuccessDialog.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  t: PropTypes.func.isRequired,
-  toggleDialog: PropTypes.func.isRequired,
+  remoteUrn: PropTypes.string,
   localExportPath: PropTypes.string,
+  t: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
 }
 ExportSuccessDialog.defaultProps = {
+  remoteUrn: null,
   localExportPath: null,
 }
 
