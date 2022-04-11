@@ -66,7 +66,6 @@ class Ledgers extends PureComponent {
       targetSymbols,
       existingCoins,
       targetCategory,
-      clearTargetSymbols,
     } = this.props
     const tableColumns = getColumns({
       t,
