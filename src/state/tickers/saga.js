@@ -45,11 +45,6 @@ function* fetchTickers() {
     const { start, end } = yield select(getTimeFrame, smallestMts)
     const filter = yield select(getFilterQuery, TYPE)
 
-    console.log('+++targetPairs', targetPairs)
-    console.log('+++filter', filter)
-    // console.log('+++targetPairs', targetPairs)
-    // console.log('+++targetPairs', targetPairs)
-
     const { result, error } = yield call(fetchDataWithPagination, getReqTickers, {
       start,
       end,
