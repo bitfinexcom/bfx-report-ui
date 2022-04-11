@@ -321,7 +321,7 @@ export function setPair(type, props, pair) {
   }
 }
 
-export const clearPairs = (type, props) => {
+export const clearAll = (type, props) => {
   const { history } = props
   history.push(generateUrl(type, window.location.search))
 }
@@ -481,7 +481,7 @@ export const getWalletsEntries = entries => entries.map((entry) => {
 
 export default {
   checkFetch,
-  clearPairs,
+  clearAll,
   DEFAULT_DATETIME_FORMAT,
   getDefaultTableScrollSetting,
   getQueryWithoutParams,
