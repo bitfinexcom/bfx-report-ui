@@ -20,10 +20,10 @@ import LedgersCategorySelect from 'ui/LedgersCategorySelect'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import queryConstants from 'state/query/constants'
 import {
-  clearAll,
   checkInit,
   checkFetch,
   toggleSymbol,
+  clearAllSymbols,
 } from 'state/utils'
 
 import getColumns from './Ledgers.columns'
@@ -43,9 +43,7 @@ class Ledgers extends PureComponent {
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
 
   clearSymbols = () => {
-    const { clearTargetSymbols } = this.props
-    clearAll(TYPE, this.props)
-    clearTargetSymbols()
+    clearAllSymbols(TYPE, this.props)
   }
 
   onCategoryChange = (targetCategory) => {
