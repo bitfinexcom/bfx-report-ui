@@ -42,9 +42,7 @@ class Ledgers extends PureComponent {
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
 
-  clearSymbols = () => {
-    clearAllSymbols(TYPE, this.props)
-  }
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
 
   onCategoryChange = (targetCategory) => {
     const { setParams } = this.props

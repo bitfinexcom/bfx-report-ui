@@ -50,9 +50,7 @@ class Tickers extends PureComponent {
     }
   }
 
-  clearPairs = () => {
-    clearAllPairs(TYPE, this.props)
-  }
+  clearPairs = () => clearAllPairs(TYPE, this.props)
 
   render() {
     const {
