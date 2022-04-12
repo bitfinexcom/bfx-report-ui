@@ -57,6 +57,6 @@ function* fetchDerivativesFail({ payload }) {
 }
 
 export default function* derivativesSaga() {
-  yield takeLatest(types.FETCH_DERIVATIVES, fetchDerivatives)
+  yield takeLatest([types.FETCH_DERIVATIVES, types.CLEAR_PAIRS], fetchDerivatives)
   yield takeLatest(types.FETCH_FAIL, fetchDerivativesFail)
 }

@@ -4,7 +4,13 @@ import _sortBy from 'lodash/sortBy'
 
 import authTypes from 'state/auth/constants'
 import {
-  addPair, basePairState, fetch, fetchFail, removePair, setPairs,
+  addPair,
+  basePairState,
+  clearPairs,
+  fetch,
+  fetchFail,
+  removePair,
+  setPairs,
 } from 'state/reducers.helper'
 import { formatPair, mapPair } from 'state/symbols/utils'
 
@@ -69,6 +75,8 @@ export function derivativesReducer(state = initialState, action) {
       return removePair(state, payload, initialState)
     case types.SET_PAIRS:
       return setPairs(state, payload, initialState)
+    case types.CLEAR_PAIRS:
+      return clearPairs(state, initialState)
     case types.REFRESH:
     case authTypes.LOGOUT:
       return initialState
