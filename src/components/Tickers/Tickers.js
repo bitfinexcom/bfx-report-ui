@@ -21,10 +21,10 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import queryConstants from 'state/query/constants'
 import {
-  clearAll,
   checkInit,
   checkFetch,
   togglePair,
+  clearAllPairs,
 } from 'state/utils'
 
 import getColumns from './Tickers.columns'
@@ -51,9 +51,7 @@ class Tickers extends PureComponent {
   }
 
   clearPairs = () => {
-    const { clearTargetPairs } = this.props
-    clearAll(TYPE, this.props)
-    clearTargetPairs()
+    clearAllPairs(TYPE, this.props)
   }
 
   render() {
