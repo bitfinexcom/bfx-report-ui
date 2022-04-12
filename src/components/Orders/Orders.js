@@ -10,7 +10,12 @@ import NoData from 'ui/NoData'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { mapRequestPairs } from 'state/symbols/utils'
-import { checkInit, checkFetch, togglePair } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  togglePair,
+  clearAllPairs,
+} from 'state/utils'
 import { getPath } from 'state/query/utils'
 
 import getColumns from './Orders.columns'
@@ -28,6 +33,8 @@ class Orders extends PureComponent {
   }
 
   togglePair = pair => togglePair(TYPE, this.props, pair)
+
+  clearPairs = () => clearAllPairs(TYPE, this.props)
 
   jumpToOrderTrades = (e, { id, pair }) => {
     e.preventDefault()
@@ -56,7 +63,6 @@ class Orders extends PureComponent {
       getFullTime,
       t,
       timeOffset,
-      clearTargetPairs,
     } = this.props
     const tableColumns = getColumns({
       filteredData: entries,
@@ -94,7 +100,7 @@ class Orders extends PureComponent {
             togglePair: this.togglePair,
           }}
           refresh={refresh}
-          clearTargetPairs={clearTargetPairs}
+          clearTargetPairs={this.clearPairs}
         />
         {showContent}
       </Card>
