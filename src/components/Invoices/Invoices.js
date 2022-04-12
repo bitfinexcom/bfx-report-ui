@@ -18,7 +18,12 @@ import RefreshButton from 'ui/RefreshButton'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import queryConstants from 'state/query/constants'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
-import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  toggleSymbol,
+  clearAllSymbols,
+} from 'state/utils'
 
 import getColumns from './Invoices.columns'
 import { propTypes, defaultProps } from './Invoices.props'
@@ -36,6 +41,8 @@ class Invoices extends PureComponent {
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
 
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
+
   render() {
     const {
       t,
@@ -48,7 +55,6 @@ class Invoices extends PureComponent {
       dataReceived,
       existingCoins,
       targetSymbols,
-      clearTargetSymbols,
     } = this.props
 
     const tableColumns = getColumns({
@@ -94,7 +100,7 @@ class Invoices extends PureComponent {
                 toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
-            <ClearFiltersButton onClick={clearTargetSymbols} />
+            <ClearFiltersButton onClick={this.clearSymbols} />
             <ColumnsFilter target={TYPE} />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
