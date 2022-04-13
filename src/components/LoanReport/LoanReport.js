@@ -17,10 +17,16 @@ import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import { parseLoanReportChartData } from 'ui/Charts/Charts.helpers'
 import queryConstants from 'state/query/constants'
-import { checkFetch, checkInit, toggleSymbol } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  toggleSymbol,
+  clearAllSymbols,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './LoanReport.props'
 
@@ -49,6 +55,10 @@ class LoanReport extends PureComponent {
     const { currentFetchParams, params } = this.props
     return !_isEqual(currentFetchParams, params)
   }
+
+  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
+
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
 
   render() {
     const {
@@ -102,9 +112,10 @@ class LoanReport extends PureComponent {
               </SectionHeaderItemLabel>
               <MultiSymbolSelector
                 currentFilters={targetSymbols}
-                toggleSymbol={symbol => toggleSymbol(TYPE, this.props, symbol)}
+                toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={this.clearSymbols} />
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.select')}
