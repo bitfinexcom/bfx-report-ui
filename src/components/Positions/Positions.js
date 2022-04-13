@@ -9,7 +9,12 @@ import NoData from 'ui/NoData'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
-import { checkInit, checkFetch, togglePair } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  togglePair,
+  clearAllPairs,
+} from 'state/utils'
 
 import getColumns from './Positions.columns'
 import { propTypes, defaultProps } from './Positions.props'
@@ -35,6 +40,8 @@ class Positions extends PureComponent {
 
   togglePair = pair => togglePair(TYPE, this.props, pair)
 
+  clearPairs = () => clearAllPairs(TYPE, this.props)
+
   render() {
     const {
       columns,
@@ -47,7 +54,6 @@ class Positions extends PureComponent {
       t,
       targetPairs,
       timeOffset,
-      clearTargetPairs,
     } = this.props
     const tableColumns = getColumns({
       target: TYPE,
@@ -86,7 +92,7 @@ class Positions extends PureComponent {
             togglePair: this.togglePair,
           }}
           refresh={refresh}
-          clearTargetPairs={clearTargetPairs}
+          clearTargetPairs={this.clearPairs}
         />
         <PositionsSwitch target={TYPE} />
         {showContent}
