@@ -62,7 +62,7 @@ function* fetchLoanReportFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
-export default function* tradedVolumeSaga() {
+export default function* loanReportSaga() {
   yield takeLatest(types.FETCH_LOAN_REPORT, fetchLoanReport)
   yield takeLatest(types.REFRESH, refreshLoanReport)
   yield takeLatest(types.FETCH_FAIL, fetchLoanReportFail)
