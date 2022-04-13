@@ -84,6 +84,15 @@ export function removeTargetSymbol(symbol) {
   }
 }
 
+/**
+ * Create an action to clear target symbols.
+ */
+export function clearTargetSymbols() {
+  return {
+    type: types.CLEAR_SYMBOLS,
+  }
+}
+
 export default {
   fetchFail,
   fetchLoanReport,
@@ -93,4 +102,5 @@ export default {
   setTargetSymbols,
   addTargetSymbol,
   removeTargetSymbol,
+  clearTargetSymbols,
 }
