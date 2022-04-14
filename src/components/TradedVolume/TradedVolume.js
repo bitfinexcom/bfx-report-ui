@@ -6,22 +6,28 @@ import _isEqual from 'lodash/isEqual'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import MultiPairSelector from 'ui/MultiPairSelector'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
-import parseChartData from 'ui/Charts/Charts.helpers'
-import TimeFrameSelector from 'ui/TimeFrameSelector'
+import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import TimeRange from 'ui/TimeRange'
+import MultiPairSelector from 'ui/MultiPairSelector'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
+import parseChartData from 'ui/Charts/Charts.helpers'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import queryConstants from 'state/query/constants'
-import { checkFetch, checkInit, togglePair } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  togglePair,
+  clearAllPairs,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './TradedVolume.props'
 
@@ -50,6 +56,8 @@ class TradedVolume extends PureComponent {
     const { currentFetchParams, params } = this.props
     return !_isEqual(currentFetchParams, params)
   }
+
+  clearPairs = () => clearAllPairs(TYPE, this.props)
 
   render() {
     const {
@@ -96,6 +104,7 @@ class TradedVolume extends PureComponent {
                 togglePair={pair => togglePair(TYPE, this.props, pair)}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={this.clearPairs} />
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.select')}
