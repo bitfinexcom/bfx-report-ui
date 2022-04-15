@@ -66,6 +66,11 @@ export function feesReportReducer(state = initialState, action) {
         ...state,
         targetPairs: payload,
       }
+    case types.CLEAR_PAIRS:
+      return {
+        ...state,
+        targetPairs: [],
+      }
     case types.REFRESH:
     case timeRangeTypes.SET_TIME_RANGE:
       return {
