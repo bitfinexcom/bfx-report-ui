@@ -48,11 +48,11 @@ class Result extends PureComponent {
           totalResult: PropTypes.number,
         }),
         movements: PropTypes.arrayOf(PropTypes.shape({
-          id: PropTypes.number.isRequired,
+          id: PropTypes.number,
           currency: PropTypes.string.isRequired,
           mtsStarted: PropTypes.number.isRequired,
           mtsUpdated: PropTypes.number.isRequired,
-          status: PropTypes.string.isRequired,
+          status: PropTypes.string,
           amount: PropTypes.number.isRequired,
           destinationAddress: PropTypes.string,
         })).isRequired,
