@@ -54,6 +54,12 @@ export function invoicesReducer(state = initialState, action) {
         targetSymbols: state.targetSymbols,
         existingPairs: state.existingPairs,
       }
+    case types.CLEAR_SYMBOLS:
+      return {
+        ...initialState,
+        existingCoins: state.existingCoins,
+        targetCategory: state.targetCategory,
+      }
     case timeRangeTypes.SET_TIME_RANGE:
       return {
         ...initialState,

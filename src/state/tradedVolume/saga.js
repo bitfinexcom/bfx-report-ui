@@ -64,6 +64,6 @@ function* fetchTradedVolumeFail({ payload }) {
 
 export default function* tradedVolumeSaga() {
   yield takeLatest(types.FETCH_TRADED_VOLUME, fetchTradedVolume)
-  yield takeLatest(types.REFRESH, refreshTradedVolume)
+  yield takeLatest([types.REFRESH, types.CLEAR_SYMBOLS], refreshTradedVolume)
   yield takeLatest(types.FETCH_FAIL, fetchTradedVolumeFail)
 }

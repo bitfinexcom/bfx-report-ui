@@ -77,6 +77,15 @@ export function removeTargetPair(pair) {
   }
 }
 
+/**
+ * Create an action to clear target pairs.
+ */
+export function clearTargetPairs() {
+  return {
+    type: types.CLEAR_PAIRS,
+  }
+}
+
 export default {
   addTargetPair,
   fetchFail,

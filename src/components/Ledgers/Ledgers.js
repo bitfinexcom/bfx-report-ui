@@ -14,11 +14,17 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import LedgersCategorySelect from 'ui/LedgersCategorySelect'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import queryConstants from 'state/query/constants'
-import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  toggleSymbol,
+  clearAllSymbols,
+} from 'state/utils'
 
 import getColumns from './Ledgers.columns'
 import { propTypes, defaultProps } from './Ledgers.props'
@@ -35,6 +41,8 @@ class Ledgers extends PureComponent {
   }
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
+
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
 
   onCategoryChange = (targetCategory) => {
     const { setParams } = this.props
@@ -98,6 +106,7 @@ class Ledgers extends PureComponent {
                 toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={this.clearSymbols} />
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.category')}

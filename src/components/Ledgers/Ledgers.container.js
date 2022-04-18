@@ -10,6 +10,7 @@ import {
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
 } from 'state/ledgers/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
@@ -44,6 +45,7 @@ const mapDispatchToProps = {
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
   fetchData: fetchLedgers,
 }
 

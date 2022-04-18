@@ -7,6 +7,7 @@ import queryTypes from 'state/query/constants'
 import {
   addSymbol,
   baseSymbolState,
+  clearSymbols,
   fetch,
   fetchFail,
   formatPercent,
@@ -102,6 +103,8 @@ export function fundingOfferHistoryReducer(state = initialState, action) {
       return setSymbols(state, payload, initialState)
     case types.REFRESH:
       return refresh(TYPE, state, initialState)
+    case types.CLEAR_SYMBOLS:
+      return clearSymbols(state, initialState)
     case timeRangeTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:

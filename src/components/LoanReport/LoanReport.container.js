@@ -10,6 +10,7 @@ import {
   fetchLoanReport,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
 } from 'state/loanReport/actions'
 import {
   getParams,
@@ -37,6 +38,7 @@ const mapDispatchToProps = {
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
   fetchData: fetchLoanReport,
 }
 

@@ -79,6 +79,6 @@ function* fetchFPaymentFail({ payload }) {
 
 export default function* fpaymentSaga() {
   yield takeLatest(types.FETCH_FPAYMENT, fetchFPayment)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshFPayment)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS], refreshFPayment)
   yield takeLatest(types.FETCH_FAIL, fetchFPaymentFail)
 }

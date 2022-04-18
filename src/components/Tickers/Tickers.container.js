@@ -7,6 +7,7 @@ import {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 } from 'state/tickers/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -41,6 +42,7 @@ const mapDispatchToProps = {
   setTargetPairs,
   removeTargetPair,
   updateErrorStatus,
+  clearTargetPairs,
 }
 
 const TickersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Tickers))

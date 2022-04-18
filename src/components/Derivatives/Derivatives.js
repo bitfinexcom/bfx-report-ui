@@ -16,9 +16,15 @@ import {
 import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
 import DerivativesSyncPref from 'ui/DerivativesSyncPref'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import queryConstants from 'state/query/constants'
-import { checkInit, checkFetch, togglePair } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  togglePair,
+  clearAllPairs,
+} from 'state/utils'
 
 import getColumns from './Derivatives.columns'
 import { propTypes, defaultProps } from './Derivatives.props'
@@ -43,6 +49,8 @@ class Derivatives extends PureComponent {
   getFilteredPairs = pairs => pairs.filter(pair => pair.includes('F0') || pair.includes('PERP'))
 
   togglePair = pair => togglePair(TYPE, this.props, pair)
+
+  clearPairs = () => clearAllPairs(TYPE, this.props)
 
   render() {
     const {
@@ -100,6 +108,7 @@ class Derivatives extends PureComponent {
                 togglePair={this.togglePair}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={this.clearPairs} />
             <ColumnsFilter target={TYPE} />
             <RefreshButton onClick={refresh} />
             <DerivativesSyncPref />

@@ -8,7 +8,12 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
-import { checkInit, checkFetch, togglePair } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  togglePair,
+  clearAllPairs,
+} from 'state/utils'
 
 import TradesSwitch from './TradesSwitch'
 import getColumns from './Trades.columns'
@@ -26,6 +31,8 @@ class Trades extends PureComponent {
   }
 
   togglePair = pair => togglePair(TYPE, this.props, pair)
+
+  clearPairs = () => clearAllPairs(TYPE, this.props)
 
   render() {
     const {
@@ -75,6 +82,7 @@ class Trades extends PureComponent {
             togglePair: this.togglePair,
           }}
           refresh={refresh}
+          clearTargetPairs={this.clearPairs}
         />
         <TradesSwitch target={TYPE} />
         {showContent}

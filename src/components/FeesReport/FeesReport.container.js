@@ -8,6 +8,7 @@ import {
   removeTargetPair,
   setTargetPairs,
   setParams,
+  clearTargetPairs,
 } from 'state/feesReport/actions'
 import {
   getCurrentFetchParams,
@@ -36,6 +37,7 @@ const mapDispatchToProps = {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 }
 
 const FeesReportContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FeesReport))

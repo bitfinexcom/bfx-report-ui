@@ -440,7 +440,8 @@
     "login": "Login To Sub Account"
   },
   "symbols": {
-    "title": "Get symbols"
+    "title": "Get symbols",
+    "clear_symbols": "Clear Symbols"
   },
   "sync": {
     "title": "Sync",

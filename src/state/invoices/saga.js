@@ -83,6 +83,6 @@ function* fetchInvoicesFail({ payload }) {
 
 export default function* invoicesSaga() {
   yield takeLatest(types.FETCH_INVOICES, fetchInvoices)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshInvoices)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS], refreshInvoices)
   yield takeLatest(types.FETCH_FAIL, fetchInvoicesFail)
 }

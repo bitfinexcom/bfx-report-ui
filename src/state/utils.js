@@ -321,6 +321,18 @@ export function setPair(type, props, pair) {
   }
 }
 
+export const clearAllPairs = (type, props) => {
+  const { history, clearTargetPairs } = props
+  clearTargetPairs()
+  history.push(generateUrl(type, window.location.search))
+}
+
+export const clearAllSymbols = (type, props) => {
+  const { history, clearTargetSymbols } = props
+  clearTargetSymbols()
+  history.push(generateUrl(type, window.location.search))
+}
+
 export function togglePair(type, props, pair) {
   const {
     history, targetPairs, addTargetPair, removeTargetPair,
@@ -476,6 +488,8 @@ export const getWalletsEntries = entries => entries.map((entry) => {
 
 export default {
   checkFetch,
+  clearAllPairs,
+  clearAllSymbols,
   DEFAULT_DATETIME_FORMAT,
   getDefaultTableScrollSetting,
   getQueryWithoutParams,

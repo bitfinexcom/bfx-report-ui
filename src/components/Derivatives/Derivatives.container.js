@@ -7,6 +7,7 @@ import {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 } from 'state/derivatives/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getInactivePairs, getPairs } from 'state/symbols/selectors'
@@ -41,6 +42,7 @@ const mapDispatchToProps = {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 }
 
 const DerivativesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Derivatives))

@@ -8,7 +8,12 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
-import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  toggleSymbol,
+  clearAllSymbols,
+} from 'state/utils'
 
 import getColumns from 'components/Ledgers/Ledgers.columns'
 import { propTypes, defaultProps } from 'components/Ledgers/Ledgers.SubCategory.props'
@@ -28,6 +33,8 @@ class AffiliatesEarnings extends PureComponent {
   }
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
+
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
 
   render() {
     const {
@@ -76,6 +83,7 @@ class AffiliatesEarnings extends PureComponent {
             toggleSymbol: this.toggleSymbol,
           }}
           refresh={refresh}
+          clearTargetSymbols={this.clearSymbols}
         />
         {showContent}
       </Card>
