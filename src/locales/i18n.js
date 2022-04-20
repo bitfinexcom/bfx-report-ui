@@ -3,7 +3,7 @@
 // refer https://github.com/bitfinexcom/bfxuilib/blob/master/functions/i18n.spa.js
 
 import i18n from 'i18next'
-import backend from 'i18next-xhr-backend'
+import backend from 'i18next-http-backend'
 import detector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
