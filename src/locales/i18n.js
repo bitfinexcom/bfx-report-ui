@@ -11,33 +11,39 @@ const { REACT_APP_ENV } = process.env
 
 export const LANGUAGES = {
   en: 'en',
-  es: 'es-EM',
-  pt: 'pt-PT',
+  'en-US': 'en',
   ru: 'ru',
-  tr: 'tr',
   cn: 'zh-CN',
   tw: 'zh-TW',
+  tr: 'tr',
+  es: 'es-EM',
+  pt: 'pt-BR',
+  'pt-PT': 'pt-BR',
+  'pt-BR': 'pt-BR',
 }
 
 export const LANGUAGE_NAMES = {
   en: 'English',
-  es: 'Español',
-  pt: 'Português',
   ru: 'Русский',
-  tr: 'Türk',
   cn: '中文 (简化)',
   tw: '中文 (繁體)',
+  tr: 'Türkçe',
+  es: 'Español',
+  pt: 'Português',
 }
 
 // email templates language mapping
 export const LANGUAGES_MAP = {
   en: 'en',
-  es: 'es-EM',
-  pt: 'pt-PT',
+  'en-US': 'en',
   ru: 'ru',
-  tr: 'tr',
   cn: 'zh-CN',
   tw: 'zh-TW',
+  es: 'es-EM',
+  tr: 'tr',
+  pt: 'pt-BR',
+  'pt-PT': 'pt-BR',
+  'pt-BR': 'pt-BR',
 }
 
 i18n
