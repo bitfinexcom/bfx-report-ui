@@ -18,7 +18,8 @@
     "title": "Active Positions"
   },
   "affiliatesearnings": {
-    "title": "Affiliates Earnings"
+    "title": "Affiliates Earnings",
+    "dashboard_link": "Affiliates Dashboard"
   },
   "auth": {
     "auth": "Auth",
