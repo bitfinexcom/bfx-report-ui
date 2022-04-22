@@ -2,9 +2,19 @@
   margin-bottom: 31px;
 
   &-title {
-    margin-bottom: 20px;
     font-size: 30px;
+    margin-bottom: 20px;
     color: var(--activeColor);
+    position: relative;
+
+    .bp3-popover-wrapper {
+      position: absolute;
+      margin-top: 8px;
+    }
+
+    &--main {
+      margin-right: 12px;
+    }
 
     &--mobile {
       display: none;
