@@ -17,7 +17,7 @@ class SectionHeaderTitle extends PureComponent {
   }
 
   render() {
-    const { children } = this.props
+    const { children, getTitleLink } = this.props
     const { isOpen } = this.state
 
     const icon = isOpen
@@ -27,6 +27,7 @@ class SectionHeaderTitle extends PureComponent {
     return (
       <div className={Classes.SECTION_HEADER_TITLE}>
         <span className='section-header-title--main'>{children}</span>
+        {getTitleLink && <>{getTitleLink()}</>}
         <div className='section-header-title--mobile'>
           <div className='section-header-title--mobile-section' onClick={this.onToggle}>
             <Icon.NOTEBOOK className='section-header-title--mobile-icon' />
@@ -45,6 +46,11 @@ SectionHeaderTitle.propTypes = {
     PropTypes.element,
     PropTypes.string,
   ]).isRequired,
+  getTitleLink: PropTypes.func,
+}
+
+SectionHeaderTitle.defaultProps = {
+  getTitleLink: undefined,
 }
 
 export default withTranslation('translations')(SectionHeaderTitle)
