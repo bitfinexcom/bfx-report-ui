@@ -9,11 +9,15 @@ const AFFILIATES_LINK = 'https://affiliate.bitfinex.com/'
 
 const AffiliatesLink = ({ t }) => (
   <Tooltip
-    usePortal={false}
+    usePortal
     targetClassName='affiliates_link'
     content={t('affiliatesearnings.dashboard_link')}
   >
-    <a href={AFFILIATES_LINK}>
+    <a
+      target='_blank'
+      rel='noreferrer'
+      href={AFFILIATES_LINK}
+    >
       <Icon.AFFILIATES />
     </a>
   </Tooltip>
