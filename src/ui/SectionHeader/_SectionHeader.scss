@@ -116,6 +116,12 @@
     margin-bottom: 21px;
 
     &-title {
+      .bp3-popover-wrapper {
+        margin-top: 6px;
+        margin-left: 170px;
+        transform: scale(0.75);
+      }
+
       &--main {
         display: none;
       }
