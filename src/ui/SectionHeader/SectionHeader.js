@@ -52,6 +52,7 @@ class SectionHeader extends PureComponent {
       target,
       timeframe,
       title,
+      getTitleLink,
       clearTargetPairs,
       clearTargetSymbols,
     } = this.props
@@ -60,7 +61,9 @@ class SectionHeader extends PureComponent {
 
     return (
       <SectionHeaderWrapper>
-        <SectionHeaderTitle>{t(title)}</SectionHeaderTitle>
+        <SectionHeaderTitle getTitleLink={getTitleLink}>
+          {t(title)}
+        </SectionHeaderTitle>
         {timeframe && <TimeRange className='section-header-time-range' />}
         {(selector || filter || refresh || clearTargetPairs) && (
           <SectionHeaderRow>

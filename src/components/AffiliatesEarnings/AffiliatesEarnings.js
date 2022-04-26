@@ -18,6 +18,8 @@ import {
 import getColumns from 'components/Ledgers/Ledgers.columns'
 import { propTypes, defaultProps } from 'components/Ledgers/Ledgers.SubCategory.props'
 
+import AffiliatesLink from './AffiliatesEarnings.link'
+
 const TYPE = queryConstants.MENU_AFFILIATES_EARNINGS
 
 /**
@@ -76,6 +78,7 @@ class AffiliatesEarnings extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader
           title='affiliatesearnings.title'
+          getTitleLink={() => <AffiliatesLink />}
           target={TYPE}
           symbolsSelectorProps={{
             currentFilters: targetSymbols,
