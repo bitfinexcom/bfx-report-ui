@@ -124,6 +124,14 @@ class Candlestick extends React.PureComponent {
         barSpacing: 15,
       },
     })
+
+    chart.addLineSeries({
+      priceFormat: {
+        minMove: 0.00001,
+        precision: 5,
+      },
+    })
+
     this.chart = chart
 
     chart.subscribeVisibleTimeRangeChange(this.onTimeRangeChange)
