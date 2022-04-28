@@ -83,4 +83,14 @@ export const parseLoanReportChartData = ({ data, timeframe, t }) => {
   }
 }
 
+export const getPriceFormat = (candles) => {
+  const price = +candles[0]?.high
+  if (price >= 100) return { minMove: 0.01, precision: 2 }
+  if (price >= 10) return { minMove: 0.001, precision: 3 }
+  if (price >= 1) return { minMove: 0.0001, precision: 4 }
+  if (price < 0.0001) return { minMove: 0.0000001, precision: 7 }
+  if (price < 1) return { minMove: 0.00001, precision: 5 }
+  return { minMove: 0.01, precision: 2 }
+}
+
 export default parseChartData

@@ -6,10 +6,11 @@ import { createChart, CrosshairMode } from 'lightweight-charts'
 import _debounce from 'lodash/debounce'
 
 import { THEME_CLASSES } from 'utils/themes'
+import { getPriceFormat } from '../Charts.helpers'
 
+import Tooltip from './Tooltip'
 import CandleStats from './CandleStats'
 import TradesToggle from './TradesToggle'
-import Tooltip from './Tooltip'
 import TradingViewLink from './TradingViewLink'
 import { propTypes, defaultProps } from './Candlestick.props'
 
@@ -124,6 +125,11 @@ class Candlestick extends React.PureComponent {
         barSpacing: 15,
       },
     })
+
+    const priceFormat = getPriceFormat(candles)
+
+    chart.addLineSeries({ priceFormat })
+
     this.chart = chart
 
     chart.subscribeVisibleTimeRangeChange(this.onTimeRangeChange)
