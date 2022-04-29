@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withTranslation } from 'react-i18next'
 import _throttle from 'lodash/throttle'
 
@@ -99,7 +99,7 @@ class Tooltip extends React.PureComponent {
     } = trade
 
     return (
-      <Fragment>
+      <>
         {`Price: ${formatExecPrice(execPrice)}`}
         <br />
         {`${t('candles.amount')}: `}
@@ -113,7 +113,7 @@ class Tooltip extends React.PureComponent {
         <span className='bitfinex-show-soft'>
           {feeCurrency}
         </span>
-      </Fragment>
+      </>
     )
   }
 

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 
 export const amountStyle = (amount) => {
@@ -43,11 +43,11 @@ export const formatFraction = (value, options = {}) => {
 export const formatAmount = (val, options = {}) => {
   if (!val) {
     return (
-      <Fragment>
+      <>
         <div className='bitfinex-amount'>
           {val}
         </div>
-      </Fragment>
+      </>
     )
   }
   const {
@@ -75,7 +75,7 @@ export const formatAmount = (val, options = {}) => {
   const [integer, fraction] = val.toString().split('.')
 
   return (
-    <Fragment>
+    <>
       <div className={classes}>
         <span>
           {dollarSign && '$'}
@@ -84,7 +84,7 @@ export const formatAmount = (val, options = {}) => {
         {'.'}
         <span className='bitfinex-amount-fraction'>{fraction}</span>
       </div>
-    </Fragment>
+    </>
   )
 }
 
