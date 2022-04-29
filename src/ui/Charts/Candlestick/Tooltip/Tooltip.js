@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { withTranslation } from 'react-i18next'
 import _throttle from 'lodash/throttle'
 
-import { formatAmount } from 'ui/utils'
+import { formatAmount, formatExecPrice } from 'ui/utils'
 
 import { propTypes, defaultProps } from './Tooltip.props'
 
@@ -100,7 +100,7 @@ class Tooltip extends React.PureComponent {
 
     return (
       <Fragment>
-        {`Price: ${execPrice.toFixed(2)}`}
+        {`Price: ${formatExecPrice(execPrice)}`}
         <br />
         {`${t('candles.amount')}: `}
         {formatAmount(execAmount)}
