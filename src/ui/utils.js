@@ -104,11 +104,21 @@ export const formatColor = (value, color) => {
   )
 }
 
+export const formatExecPrice = (price) => {
+  if (price >= 100) return price.toFixed(2)
+  if (price >= 10) return price.toFixed(3)
+  if (price >= 1) return price.toFixed(4)
+  if (price < 0.0001) return price.toFixed(7)
+  if (price < 1) return price.toFixed(5)
+  return price.toFixed(2)
+}
+
 export default {
   fixedFloat,
   insertIf,
   formatAmount,
   formatColor,
+  formatExecPrice,
   formatFraction,
   formatThousands,
   amountStyle,
