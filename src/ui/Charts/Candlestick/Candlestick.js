@@ -186,7 +186,7 @@ class Candlestick extends React.PureComponent {
       open: trade,
     })))
 
-    this.tradeSeries.setMarkers(trades.map(trade => ({
+    this.tradeSeries.setMarkers(uniqueTrades.map(trade => ({
       time: trade.time,
       position: 'inBar',
       shape: 'circle',
@@ -269,7 +269,10 @@ class Candlestick extends React.PureComponent {
   }
 
   render() {
-    const { className, candles: { entries: candles } } = this.props
+    const {
+      className,
+      candles: { entries: candles },
+    } = this.props
     const {
       width,
       height,
