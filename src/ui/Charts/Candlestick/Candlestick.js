@@ -3,12 +3,10 @@ import { withTranslation } from 'react-i18next'
 import moment from 'moment'
 import classNames from 'classnames'
 import { createChart, CrosshairMode } from 'lightweight-charts'
-import _reduce from 'lodash/reduce'
-import _values from 'lodash/values'
 import _debounce from 'lodash/debounce'
 
 import { THEME_CLASSES } from 'utils/themes'
-import { getPriceFormat } from '../Charts.helpers'
+import { getPriceFormat, mergeSimilarTrades } from '../Charts.helpers'
 
 import Tooltip from './Tooltip'
 import CandleStats from './CandleStats'
@@ -171,22 +169,14 @@ class Candlestick extends React.PureComponent {
       this.forceUpdate()
     }
 
-    const uniqueTrades = _values(
-      _reduce(trades, (acc, trade) => {
-        if (!acc[trade.orderID]) acc[trade.orderID] = trade
-        if (acc[trade.orderID] && acc[trade.orderID].execPrice !== trade.execPrice) {
-          acc[trade.execPrice] = trade
-        }
-        return acc
-      }, {}),
-    )
+    const preparedTrades = mergeSimilarTrades(trades)
 
-    this.tradeSeries.setData(uniqueTrades.map(trade => ({
+    this.tradeSeries.setData(preparedTrades.map(trade => ({
       ...trade,
       open: trade,
     })))
 
-    this.tradeSeries.setMarkers(uniqueTrades.map(trade => ({
+    this.tradeSeries.setMarkers(preparedTrades.map(trade => ({
       time: trade.time,
       position: 'inBar',
       shape: 'circle',
