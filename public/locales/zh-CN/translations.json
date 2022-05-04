@@ -246,7 +246,7 @@
   "ledgers": {
     "title": "分类账",
     "categories": {
-      "exchange": "现货",
+      "exchange": "兌換",
       "position_modified": "仓位调整、关闭或清算",
       "position_claim": "仓位赎回",
       "position_transfer": "仓位转移",
@@ -503,7 +503,7 @@
   "wallets": {
     "title": "钱包",
     "header": {
-      "exchange": "交易所",
+      "exchange": "兌換",
       "margin": "保证金",
       "funding": "融资",
       "token-sales": "通证发布"
