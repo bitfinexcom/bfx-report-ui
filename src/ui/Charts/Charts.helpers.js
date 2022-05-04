@@ -1,4 +1,6 @@
 import moment from 'moment-timezone'
+import _reduce from 'lodash/reduce'
+import _values from 'lodash/values'
 
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
 
@@ -92,5 +94,15 @@ export const getPriceFormat = (candles) => {
   if (price < 1) return { minMove: 0.00001, precision: 5 }
   return { minMove: 0.01, precision: 2 }
 }
+
+export const mergeSimilarTrades = (trades) => _values(
+  _reduce(trades, (acc, trade) => {
+    if (!acc[trade.orderID]) acc[trade.orderID] = trade
+    if (acc[trade.orderID] && acc[trade.orderID].execPrice !== trade.execPrice) {
+      acc[trade.execPrice] = trade
+    }
+    return acc
+  }, {}),
+)
 
 export default parseChartData

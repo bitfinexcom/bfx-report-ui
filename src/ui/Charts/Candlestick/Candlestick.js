@@ -6,7 +6,7 @@ import { createChart, CrosshairMode } from 'lightweight-charts'
 import _debounce from 'lodash/debounce'
 
 import { THEME_CLASSES } from 'utils/themes'
-import { getPriceFormat } from '../Charts.helpers'
+import { getPriceFormat, mergeSimilarTrades } from '../Charts.helpers'
 
 import Tooltip from './Tooltip'
 import CandleStats from './CandleStats'
@@ -169,12 +169,14 @@ class Candlestick extends React.PureComponent {
       this.forceUpdate()
     }
 
-    this.tradeSeries.setData(trades.map(trade => ({
+    const preparedTrades = mergeSimilarTrades(trades)
+
+    this.tradeSeries.setData(preparedTrades.map(trade => ({
       ...trade,
       open: trade,
     })))
 
-    this.tradeSeries.setMarkers(trades.map(trade => ({
+    this.tradeSeries.setMarkers(preparedTrades.map(trade => ({
       time: trade.time,
       position: 'inBar',
       shape: 'circle',
@@ -257,7 +259,10 @@ class Candlestick extends React.PureComponent {
   }
 
   render() {
-    const { className, candles: { entries: candles } } = this.props
+    const {
+      className,
+      candles: { entries: candles },
+    } = this.props
     const {
       width,
       height,
