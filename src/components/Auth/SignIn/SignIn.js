@@ -67,7 +67,7 @@ class SignIn extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {
-      authData: { email },
+      authData: { email, isSubAccount },
       users,
       isUsersLoaded,
       switchMode,
@@ -94,6 +94,8 @@ class SignIn extends PureComponent {
         email: updatedEmail || '',
       })
     }
+
+    if (isMultipleAccsSelected && !isSubAccount) this.enableSubAccount()
   }
 
   onSignIn = () => {
@@ -146,8 +148,6 @@ class SignIn extends PureComponent {
       users,
     } = this.props
     const { email, password } = this.state
-
-    console.log('+++isSubAccount', isSubAccount)
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
     const isSignInDisabled = !email || (config.isElectronApp && !isElectronBackendLoaded)
