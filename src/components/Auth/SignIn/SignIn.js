@@ -113,9 +113,9 @@ class SignIn extends PureComponent {
     updateAuth({ isPersisted: !isPersisted })
   }
 
-  toggleSubAccount = () => {
-    const { authData: { isSubAccount }, updateAuth } = this.props
-    updateAuth({ isSubAccount: !isSubAccount })
+  enableSubAccount = () => {
+    const { updateAuth } = this.props
+    updateAuth({ isSubAccount: true })
   }
 
   handleInputChange = (event) => {
@@ -146,6 +146,8 @@ class SignIn extends PureComponent {
       users,
     } = this.props
     const { email, password } = this.state
+
+    console.log('+++isSubAccount', isSubAccount)
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
     const isSignInDisabled = !email || (config.isElectronApp && !isElectronBackendLoaded)
@@ -206,6 +208,7 @@ class SignIn extends PureComponent {
                 name='isSubAccount'
                 checked={isSubAccount}
                 onChange={this.toggleSubAccount}
+                // disabled
               >
                 {t('auth.subAccount')}
               </Checkbox>
