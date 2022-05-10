@@ -209,11 +209,10 @@ class SignIn extends PureComponent {
             )}
             {showSubAccount && (
               <Checkbox
-                className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
+                className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sub-accounts'
                 name='isSubAccount'
                 checked={isSubAccount}
-                // onChange={this.toggleSubAccount}
-                // disabled
+                disabled
               >
                 {t('auth.subAccount')}
               </Checkbox>
