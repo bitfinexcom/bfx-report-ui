@@ -67,7 +67,7 @@ class SignIn extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {
-      authData: { email, isSubAccount },
+      authData: { email },
       users,
       isUsersLoaded,
       switchMode,
@@ -95,7 +95,7 @@ class SignIn extends PureComponent {
       })
     }
 
-    if (isMultipleAccsSelected && !isSubAccount) this.enableSubAccount()
+    this.handleSubAccounts()
   }
 
   onSignIn = () => {
@@ -115,9 +115,14 @@ class SignIn extends PureComponent {
     updateAuth({ isPersisted: !isPersisted })
   }
 
-  enableSubAccount = () => {
-    const { updateAuth } = this.props
-    updateAuth({ isSubAccount: true })
+  handleSubAccounts = () => {
+    const {
+      authData: { isSubAccount },
+      updateAuth,
+      isMultipleAccsSelected,
+    } = this.props
+    if (isMultipleAccsSelected && !isSubAccount)updateAuth({ isSubAccount: true })
+    if (!isMultipleAccsSelected && isSubAccount)updateAuth({ isSubAccount: false })
   }
 
   handleInputChange = (event) => {
@@ -207,7 +212,7 @@ class SignIn extends PureComponent {
                 className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
                 name='isSubAccount'
                 checked={isSubAccount}
-                onChange={this.toggleSubAccount}
+                // onChange={this.toggleSubAccount}
                 // disabled
               >
                 {t('auth.subAccount')}
