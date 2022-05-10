@@ -123,8 +123,8 @@ class SignIn extends PureComponent {
     const {
       isSubAccount, updateAuth, isMultipleAccsSelected,
     } = this.props
-    if (isMultipleAccsSelected && !isSubAccount)updateAuth({ isSubAccount: true })
-    if (!isMultipleAccsSelected && isSubAccount)updateAuth({ isSubAccount: false })
+    if (isMultipleAccsSelected && !isSubAccount) updateAuth({ isSubAccount: true })
+    if (!isMultipleAccsSelected && isSubAccount) updateAuth({ isSubAccount: false })
   }
 
   handleInputChange = (event) => {
