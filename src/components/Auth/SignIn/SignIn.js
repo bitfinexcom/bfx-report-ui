@@ -23,7 +23,6 @@ const getPreparedUsers = (users, multi = false) => (multi
   ? _filter(users, 'isSubAccount').map(user => user.email)
   : _filter(users, ['isSubAccount', false]).map(user => user.email))
 
-
 class SignIn extends PureComponent {
   static propTypes = {
     authType: PropTypes.string.isRequired,
@@ -35,6 +34,7 @@ class SignIn extends PureComponent {
     }).isRequired,
     isMultipleAccsSelected: PropTypes.bool.isRequired,
     isElectronBackendLoaded: PropTypes.bool.isRequired,
+    isSubAccount: PropTypes.bool.isRequired,
     isUsersLoaded: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
     signIn: PropTypes.func.isRequired,
@@ -65,12 +65,16 @@ class SignIn extends PureComponent {
     }
   }
 
+  componentDidMount() {
+    this.handleSubAccounts()
+  }
+
   componentDidUpdate(prevProps) {
     const {
-      authData: { email },
       users,
-      isUsersLoaded,
       switchMode,
+      isUsersLoaded,
+      authData: { email },
       isMultipleAccsSelected,
     } = this.props
 
@@ -99,7 +103,7 @@ class SignIn extends PureComponent {
   }
 
   onSignIn = () => {
-    const { authData: { isSubAccount }, signIn, users } = this.props
+    const { isSubAccount, signIn, users } = this.props
     const { email, password } = this.state
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
     signIn({
@@ -117,9 +121,7 @@ class SignIn extends PureComponent {
 
   handleSubAccounts = () => {
     const {
-      authData: { isSubAccount },
-      updateAuth,
-      isMultipleAccsSelected,
+      isSubAccount, updateAuth, isMultipleAccsSelected,
     } = this.props
     if (isMultipleAccsSelected && !isSubAccount)updateAuth({ isSubAccount: true })
     if (!isMultipleAccsSelected && isSubAccount)updateAuth({ isSubAccount: false })
@@ -142,15 +144,16 @@ class SignIn extends PureComponent {
 
   render() {
     const {
-      authData: { isPersisted, isSubAccount },
-      authType,
-      isElectronBackendLoaded,
-      isMultipleAccsSelected,
-      loading,
-      switchAuthType,
-      switchMode,
       t,
       users,
+      loading,
+      authType,
+      switchMode,
+      isSubAccount,
+      switchAuthType,
+      isMultipleAccsSelected,
+      isElectronBackendLoaded,
+      authData: { isPersisted },
     } = this.props
     const { email, password } = this.state
 
