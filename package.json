@@ -21,7 +21,7 @@
     "@blueprintjs/icons": "^3.7.0",
     "@blueprintjs/select": "^3.8.0",
     "@blueprintjs/table": "3.5.0",
-    "@blueprintjs/timezone": "^3.4.0",
+    "@blueprintjs/timezone": "3.10.1",
     "classnames": "2.2.6",
     "connected-react-router": "^6.6.0",
     "flexboxgrid2": "7.2.1",
