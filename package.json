@@ -33,7 +33,7 @@
     "lodash": "4.17.21",
     "memoize-one": "^5.0.2",
     "moment": "2.29.3",
-    "moment-timezone": "0.5.23",
+    "moment-timezone": "0.5.34",
     "sass": "1.50.0",
     "normalize.css": "8.0.1",
     "prop-types": "^15.7.2",
