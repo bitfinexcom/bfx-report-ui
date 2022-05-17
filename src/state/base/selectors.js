@@ -9,20 +9,19 @@ export const getBase = state => state.base
 export const getLocale = state => getBase(state).locale
 export const getTheme = state => getBase(state).theme || types.DEFAULT_THEME
 export const getTimezone = state => getBase(state).timezone
-export const getInputTimezone = state => getBase(state).inputTimezone
 export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FORMATS[0]
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
 export const getTableScroll = state => getBase(state).tableScroll || false
 
 export const getTimeOffset = state => timeOffset(getTimezone(state))
 
-const getFormattedTime = (inputTimezone, timezone, dateFormat, milliseconds) => (mts, full, inputTime = false) => {
+const getFormattedTime = (timezone, dateFormat, milliseconds) => (mts, full) => {
   if (!mts) {
     return ''
   }
 
   const options = {
-    timezone: inputTime ? inputTimezone : timezone,
+    timezone,
     dateFormat,
     milliseconds,
     full,
@@ -33,12 +32,11 @@ const getFormattedTime = (inputTimezone, timezone, dateFormat, milliseconds) => 
 const getFormattedTimeMemo = memoizeOne(getFormattedTime)
 
 export const getFullTime = (state) => {
-  const inputTimezone = getInputTimezone(state)
   const timezone = getTimezone(state)
   const dateFormat = getDateFormat(state)
   const milliseconds = getShowMilliseconds(state)
 
-  return getFormattedTimeMemo(inputTimezone, timezone, dateFormat, milliseconds)
+  return getFormattedTimeMemo(timezone, dateFormat, milliseconds)
 }
 
 export default {
@@ -50,5 +48,4 @@ export default {
   getTheme,
   getTimeOffset,
   getTimezone,
-  getInputTimezone,
 }
