@@ -3,6 +3,7 @@ import config from 'config'
 const getAuth = state => state.auth
 
 export const getAuthStatus = state => getAuth(state).authStatus
+export const getIsSubAccount = state => getAuth(state).isSubAccount
 export const getIsShown = state => getAuth(state).isShown
 export const getIsLoading = state => getAuth(state).loading
 export const getEmail = state => getAuth(state).email
@@ -80,6 +81,7 @@ export function selectAuth(state) {
 export default {
   getAuthData,
   getAuthStatus,
+  getIsSubAccount,
   getIsLoading,
   getIsShown,
   getUsers,

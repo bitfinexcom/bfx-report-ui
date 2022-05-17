@@ -4,7 +4,11 @@ import { withTranslation } from 'react-i18next'
 
 import { signIn, updateAuth } from 'state/auth/actions'
 import {
-  getAuthData, getIsLoading, getUsers, getUsersLoaded,
+  getAuthData,
+  getIsLoading,
+  getUsers,
+  getUsersLoaded,
+  getIsSubAccount,
 } from 'state/auth/selectors'
 import { getIsElectronBackendLoaded } from 'state/ui/selectors'
 
@@ -16,6 +20,7 @@ const mapStateToProps = state => ({
   isUsersLoaded: getUsersLoaded(state),
   loading: getIsLoading(state),
   users: getUsers(state),
+  isSubAccount: getIsSubAccount(state),
 })
 
 const mapDispatchToProps = {

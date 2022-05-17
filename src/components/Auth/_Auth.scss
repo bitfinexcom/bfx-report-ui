@@ -102,6 +102,13 @@
         margin-bottom: 60px;
       }
     }
+
+    &--sub-accounts {
+      &.bp3-checkbox {
+        color: #fff;
+        pointer-events: none;
+      }
+    }
   }
 
   &-password-recovery {
