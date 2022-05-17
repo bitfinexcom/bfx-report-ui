@@ -6,10 +6,12 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import _isEmpty from 'lodash/isEmpty'
 import _includes from 'lodash/includes'
 
 import authTypes from 'state/auth/constants'
 import { makeFetchCall } from 'state/utils'
+import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 
 import types from './constants'
@@ -123,16 +125,19 @@ function* forceQueryFromDb() {
 
 function* syncLogout() {
   yield delay(300)
-  const { result, error } = yield call(logout)
-  if (result) {
-    const syncMode = yield select(getSyncMode)
-    if (syncMode !== types.MODE_ONLINE) {
-      yield put(actions.setSyncMode(types.MODE_ONLINE))
-      yield put(updateStatus({ id: 'sync.logout' }))
+  const isLoggedIn = !_isEmpty(yield select(selectAuth))
+  if (isLoggedIn) {
+    const { result, error } = yield call(logout)
+    if (result) {
+      const syncMode = yield select(getSyncMode)
+      if (syncMode !== types.MODE_ONLINE) {
+        yield put(actions.setSyncMode(types.MODE_ONLINE))
+        yield put(updateStatus({ id: 'sync.logout' }))
+      }
     }
-  }
-  if (error) {
-    yield put(updateSyncErrorStatus('during logout'))
+    if (error) {
+      yield put(updateSyncErrorStatus('during logout'))
+    }
   }
 }
 
