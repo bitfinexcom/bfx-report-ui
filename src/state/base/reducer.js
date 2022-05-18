@@ -1,5 +1,3 @@
-import moment from 'moment-timezone'
-
 import { getDefaultTableScrollSetting } from 'state/utils'
 
 import types from './constants'
@@ -9,7 +7,6 @@ const initialState = {
   locale: 'en',
   theme: types.DEFAULT_THEME,
   timezone: types.DEFAULT_TIMEZONE,
-  inputTimezone: moment.tz.guess(),
   milliseconds: false,
   tableScroll: getDefaultTableScrollSetting(),
 }
@@ -31,11 +28,6 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         timezone: payload,
-      }
-    case types.SET_DISPLAY_TIMEZONE:
-      return {
-        ...state,
-        inputTimezone: payload,
       }
     case types.SET_DATE_FORMAT:
       return {
