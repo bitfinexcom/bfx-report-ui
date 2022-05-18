@@ -11,6 +11,8 @@ import {
 
 import { propTypes, defaultProps } from './DateInput.props'
 
+const currentTimezone = moment.tz.guess()
+
 class DateInput extends PureComponent {
   state = {
     isOpen: false,
@@ -39,16 +41,14 @@ class DateInput extends PureComponent {
       className,
       daysOnly,
       defaultValue,
-      inputTimezone,
       t,
-      timezone,
       value,
     } = this.props
     const { isOpen } = this.state
 
     const { formatDate, parseDate } = daysOnly
       ? momentFormatterDays()
-      : momentFormatter(DEFAULT_DATETIME_FORMAT, timezone || inputTimezone)
+      : momentFormatter(DEFAULT_DATETIME_FORMAT, currentTimezone)
 
     const timePrecision = !daysOnly ? TimePrecision.SECOND : undefined
     const icon = isOpen
