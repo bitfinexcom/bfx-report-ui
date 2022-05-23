@@ -392,6 +392,7 @@
     "all": "All",
     "inactive": "Inactive",
     "balance-precision": {
+      "title": "Balance (USD)",
       "approximate": "Approximate",
       "exact": "Exact"
     },
@@ -533,7 +534,6 @@
   "updated": "Updated",
   "wallets": {
     "title": "Wallets",
-    "balance_usd": "Balance (USD)",
     "header": {
       "capital-raise": "Capital Raise",
       "exchange": "Exchange",
