@@ -391,6 +391,10 @@
     "select": "Select",
     "all": "All",
     "inactive": "Inactive",
+    "balance-precision": {
+      "approximate": "Approximate",
+      "exact": "Exact"
+    },
     "filter": {
       "symbol": "Symbol Filter",
       "pair": "Pair Filter",
@@ -529,6 +533,7 @@
   "updated": "Updated",
   "wallets": {
     "title": "Wallets",
+    "balance_usd": "Balance (USD)",
     "header": {
       "capital-raise": "Capital Raise",
       "exchange": "Exchange",
