@@ -6,6 +6,7 @@ import types from './constants'
 
 const initialState = {
   dataReceived: false,
+  exactBalance: false,
   pageLoading: false,
   entries: [],
   timestamp: undefined,
@@ -53,12 +54,18 @@ export function walletsReducer(state = initialState, action) {
         ...state,
         timestamp: payload,
       }
+    case types.SET_EXACT_BALANCE:
+      return {
+        ...state,
+        exactBalance: payload,
+      }
     case types.FETCH_FAIL:
       return state
     case types.REFRESH:
       return {
         ...initialState,
         timestamp: state.timestamp,
+        exactBalance: state.exactBalance,
       }
     case authTypes.LOGOUT:
       return initialState
