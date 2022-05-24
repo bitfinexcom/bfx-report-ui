@@ -5,6 +5,7 @@ import { Card, Elevation } from '@blueprintjs/core'
 import DateInput from 'ui/DateInput'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import BalancePrecisionSelector from 'ui/BalancePrecisionSelector'
 import {
   SectionHeader,
   SectionHeaderItem,
@@ -58,6 +59,8 @@ class Wallets extends PureComponent {
       dataReceived,
       pageLoading,
       refresh,
+      exactBalance,
+      setExactBalance,
       t,
     } = this.props
     const { timestamp } = this.state
@@ -83,6 +86,15 @@ class Wallets extends PureComponent {
                   {t('query.endTime')}
                 </SectionHeaderItemLabel>
                 <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
+              </SectionHeaderItem>
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('selector.balance-precision.title')}
+                </SectionHeaderItemLabel>
+                <BalancePrecisionSelector
+                  value={exactBalance}
+                  onChange={setExactBalance}
+                />
               </SectionHeaderItem>
               <QueryButton
                 disabled={!hasNewTime}
