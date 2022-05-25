@@ -2,32 +2,36 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
 import {
-  fetchWallets,
   refresh,
+  fetchWallets,
   setExactBalance,
 } from 'state/wallets/actions'
+import { fetchSnapshots } from 'state/snapshots/actions'
+import { getWalletsEntries } from 'state/snapshots/selectors'
 import {
-  getDataReceived,
   getEntries,
-  getExactBalance,
-  getPageLoading,
   getTimestamp,
+  getPageLoading,
+  getExactBalance,
+  getDataReceived,
 } from 'state/wallets/selectors'
 
 import Wallets from './Wallets'
 
 const mapStateToProps = state => ({
-  currentTime: getTimestamp(state),
   entries: getEntries(state),
-  exactBalance: getExactBalance(state),
-  dataReceived: getDataReceived(state),
+  currentTime: getTimestamp(state),
   pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
+  exactBalance: getExactBalance(state),
+  walletsSnapshotEntries: getWalletsEntries(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchWallets,
   refresh,
+  fetchSnapshots,
   setExactBalance,
+  fetchData: fetchWallets,
 }
 
 const WalletsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Wallets))
