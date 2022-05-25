@@ -32,8 +32,12 @@ class Wallets extends PureComponent {
   }
 
   componentDidMount() {
-    const { dataReceived, pageLoading, fetchData } = this.props
+    const {
+      dataReceived, pageLoading, fetchData, fetchSnapshots,
+    } = this.props
+
     if (!dataReceived && !pageLoading) {
+      fetchSnapshots()
       fetchData()
     }
   }
@@ -46,9 +50,10 @@ class Wallets extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchData } = this.props
+    const { fetchData, fetchSnapshots } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
+    fetchSnapshots(time)
     fetchData(time)
   }
 
@@ -62,6 +67,7 @@ class Wallets extends PureComponent {
       exactBalance,
       setExactBalance,
       t,
+      walletsSnapshotEntries,
     } = this.props
     const { timestamp } = this.state
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
@@ -72,20 +78,28 @@ class Wallets extends PureComponent {
     } else if (!entries.length) {
       showContent = <NoData title='wallets.nodata' refresh={refresh} />
     } else {
-      showContent = <WalletsData entries={entries} />
+      showContent = <WalletsData entries={exactBalance ? walletsSnapshotEntries : entries} />
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('wallets.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('wallets.title')}
+          </SectionHeaderTitle>
           {config.showFrameworkMode && (
             <SectionHeaderRow>
               <SectionHeaderItem>
                 <SectionHeaderItemLabel>
                   {t('query.endTime')}
                 </SectionHeaderItemLabel>
-                <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
+                <DateInput
+                  defaultValue={timestamp}
+                  onChange={this.handleDateChange}
+                />
               </SectionHeaderItem>
               <SectionHeaderItem>
                 <SectionHeaderItemLabel>
