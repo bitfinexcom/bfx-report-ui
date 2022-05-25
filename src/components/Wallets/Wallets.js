@@ -2,16 +2,16 @@ import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import DateInput from 'ui/DateInput'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DateInput from 'ui/DateInput'
 import BalancePrecisionSelector from 'ui/BalancePrecisionSelector'
 import {
   SectionHeader,
-  SectionHeaderItem,
-  SectionHeaderItemLabel,
   SectionHeaderRow,
+  SectionHeaderItem,
   SectionHeaderTitle,
+  SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
@@ -33,12 +33,15 @@ class Wallets extends PureComponent {
 
   componentDidMount() {
     const {
-      dataReceived, pageLoading, fetchData, fetchSnapshots,
+      fetchData,
+      pageLoading,
+      dataReceived,
+      fetchSnapshots,
     } = this.props
 
     if (!dataReceived && !pageLoading) {
-      fetchSnapshots()
       fetchData()
+      fetchSnapshots()
     }
   }
 
@@ -53,24 +56,25 @@ class Wallets extends PureComponent {
     const { fetchData, fetchSnapshots } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
-    fetchSnapshots(time)
     fetchData(time)
+    fetchSnapshots(time)
   }
 
   render() {
     const {
-      currentTime,
-      entries,
-      dataReceived,
-      pageLoading,
-      refresh,
-      exactBalance,
-      setExactBalance,
       t,
+      entries,
+      refresh,
+      pageLoading,
+      currentTime,
+      exactBalance,
+      dataReceived,
+      setExactBalance,
       walletsSnapshotEntries,
     } = this.props
     const { timestamp } = this.state
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
+    const walletsData = exactBalance ? walletsSnapshotEntries : entries
 
     let showContent
     if (!dataReceived && pageLoading) {
@@ -78,7 +82,7 @@ class Wallets extends PureComponent {
     } else if (!entries.length) {
       showContent = <NoData title='wallets.nodata' refresh={refresh} />
     } else {
-      showContent = <WalletsData entries={exactBalance ? walletsSnapshotEntries : entries} />
+      showContent = <WalletsData entries={walletsData} />
     }
 
     return (
