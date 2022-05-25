@@ -70,6 +70,8 @@ class Wallets extends PureComponent {
       exactBalance,
       dataReceived,
       setExactBalance,
+      snapshotLoading,
+      snapshotReceived,
       walletsSnapshotEntries,
     } = this.props
     const { timestamp } = this.state
@@ -77,7 +79,7 @@ class Wallets extends PureComponent {
     const walletsData = exactBalance ? walletsSnapshotEntries : entries
 
     let showContent
-    if (!dataReceived && pageLoading) {
+    if ((!dataReceived && pageLoading) || (exactBalance && !snapshotReceived && snapshotLoading)) {
       showContent = <Loading />
     } else if (!entries.length) {
       showContent = <NoData title='wallets.nodata' refresh={refresh} />
