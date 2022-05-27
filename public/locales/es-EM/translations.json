@@ -337,7 +337,6 @@
     "language": "Idioma",
     "theme": "Temática",
     "timezone": "Zona horaria",
-    "timezone-input": "Ingresar Zona horaria",
     "dateformat": "Formato de fecha",
     "milliseconds": "Mostrar milisegundos",
     "table_scroll": "Desplazamiento de tabla",

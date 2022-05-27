@@ -353,7 +353,6 @@
     "language": "Language",
     "theme": "Theme",
     "timezone": "Timezone",
-    "timezone-input": "Input Timezone",
     "dateformat": "Date Format",
     "milliseconds": "Display Milliseconds",
     "table_scroll": "Table Scroll",

@@ -337,7 +337,6 @@
     "language": "Idioma",
     "theme": "Tema",
     "timezone": "Fuso horário",
-    "timezone-input": "Fuso horário de entrada",
     "dateformat": "Formato de data",
     "milliseconds": "Exibir milissegundos",
     "table_scroll": "Rolagem de tabela",

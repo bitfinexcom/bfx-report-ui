@@ -337,7 +337,6 @@
     "language": "語言",
     "theme": "主題",
     "timezone": "時區",
-    "timezone-input": "輸入時區",
     "dateformat": "日期格式",
     "milliseconds": "顯示毫秒",
     "table_scroll": "顯示捲軸",

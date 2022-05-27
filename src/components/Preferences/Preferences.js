@@ -25,10 +25,8 @@ class Preferences extends PureComponent {
 
   render() {
     const {
-      inputTimezone,
       isOpen,
       setTimezone,
-      setInputTimezone,
       t,
       timezone,
       toggleDialog,
@@ -62,13 +60,6 @@ class Preferences extends PureComponent {
               <TimezonePicker
                 onChange={setTimezone}
                 value={timezone}
-              />
-            </div>
-            <div className='preferences-item'>
-              <div>{t('preferences.timezone-input')}</div>
-              <TimezonePicker
-                onChange={setInputTimezone}
-                value={inputTimezone}
               />
             </div>
             <div className='preferences-item'>
