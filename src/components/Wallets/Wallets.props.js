@@ -9,11 +9,15 @@ export const WALLETS_ENTRIES_PROPS = PropTypes.shape({
 
 export const propTypes = {
   currentTime: PropTypes.number,
-  entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
+  entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS),
+  walletsSnapshotEntries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS),
   exactBalance: PropTypes.bool.isRequired,
   fetchData: PropTypes.func.isRequired,
+  fetchSnapshots: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
+  snapshotLoading: PropTypes.bool.isRequired,
+  snapshotReceived: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   setExactBalance: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
@@ -22,4 +26,5 @@ export const propTypes = {
 export const defaultProps = {
   currentTime: null,
   entries: [],
+  walletsSnapshotEntries: [],
 }
