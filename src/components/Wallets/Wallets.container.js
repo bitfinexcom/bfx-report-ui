@@ -7,7 +7,6 @@ import {
   setExactBalance,
 } from 'state/wallets/actions'
 import { fetchSnapshots } from 'state/snapshots/actions'
-import { getWalletsEntries } from 'state/snapshots/selectors'
 import {
   getEntries,
   getTimestamp,
@@ -15,6 +14,11 @@ import {
   getExactBalance,
   getDataReceived,
 } from 'state/wallets/selectors'
+import {
+  getWalletsEntries,
+  getPageLoading as getSnapshotLoading,
+  getDataReceived as getSnapshotReceived,
+} from 'state/snapshots/selectors'
 
 import Wallets from './Wallets'
 
@@ -24,6 +28,8 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   exactBalance: getExactBalance(state),
+  snapshotLoading: getSnapshotLoading(state),
+  snapshotReceived: getSnapshotReceived(state),
   walletsSnapshotEntries: getWalletsEntries(state),
 })
 
