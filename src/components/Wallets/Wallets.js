@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import _isEmpty from 'lodash/isEmpty'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
@@ -77,11 +78,14 @@ class Wallets extends PureComponent {
     const { timestamp } = this.state
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
     const walletsData = exactBalance ? walletsSnapshotEntries : entries
+    const isLoading = (!dataReceived && pageLoading)
+      || (exactBalance && !snapshotReceived && snapshotLoading)
+    const isNoData = _isEmpty(entries) || (exactBalance && _isEmpty(walletsSnapshotEntries))
 
     let showContent
-    if ((!dataReceived && pageLoading) || (exactBalance && !snapshotReceived && snapshotLoading)) {
+    if (isLoading) {
       showContent = <Loading />
-    } else if (!entries.length) {
+    } else if (isNoData) {
       showContent = <NoData title='wallets.nodata' refresh={refresh} />
     } else {
       showContent = <WalletsData entries={walletsData} />
