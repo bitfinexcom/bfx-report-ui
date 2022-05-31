@@ -391,6 +391,11 @@
     "select": "Select",
     "all": "All",
     "inactive": "Inactive",
+    "balance-precision": {
+      "title": "Balance (USD)",
+      "approximate": "Approximate",
+      "exact": "Exact"
+    },
     "filter": {
       "symbol": "Symbol Filter",
       "pair": "Pair Filter",

@@ -1,7 +1,7 @@
-export const getSnapshots = state => state.snapshots
+export const getSnapshots = state => state.snapshots || {}
 
-export const getDataReceived = state => getSnapshots(state).dataReceived
-export const getPageLoading = state => getSnapshots(state).pageLoading
+export const getDataReceived = state => getSnapshots(state).dataReceived || false
+export const getPageLoading = state => getSnapshots(state).pageLoading || false
 export const getPositionsTotalPl = state => getSnapshots(state).positionsTotalPlUsd
 export const getPositionsEntries = state => getSnapshots(state).positionsEntries
 export const getPositionsTickersEntries = state => getSnapshots(state).positionsTickersEntries

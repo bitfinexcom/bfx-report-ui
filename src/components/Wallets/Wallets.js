@@ -1,16 +1,18 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import _isEmpty from 'lodash/isEmpty'
 
-import DateInput from 'ui/DateInput'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DateInput from 'ui/DateInput'
+import BalancePrecisionSelector from 'ui/BalancePrecisionSelector'
 import {
   SectionHeader,
-  SectionHeaderItem,
-  SectionHeaderItemLabel,
   SectionHeaderRow,
+  SectionHeaderItem,
   SectionHeaderTitle,
+  SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
@@ -19,6 +21,8 @@ import config from 'config'
 
 import WalletsData from './Wallets.data'
 import { propTypes, defaultProps } from './Wallets.props'
+
+const isFrameworkMode = config.showFrameworkMode
 
 class Wallets extends PureComponent {
   constructor(props) {
@@ -31,9 +35,16 @@ class Wallets extends PureComponent {
   }
 
   componentDidMount() {
-    const { dataReceived, pageLoading, fetchData } = this.props
+    const {
+      fetchData,
+      pageLoading,
+      dataReceived,
+      fetchSnapshots,
+    } = this.props
+
     if (!dataReceived && !pageLoading) {
       fetchData()
+      if (isFrameworkMode)fetchSnapshots()
     }
   }
 
@@ -45,44 +56,71 @@ class Wallets extends PureComponent {
   }
 
   handleQuery = () => {
-    const { fetchData } = this.props
+    const { fetchData, fetchSnapshots } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
     fetchData(time)
+    if (isFrameworkMode) fetchSnapshots(time)
   }
 
   render() {
     const {
-      currentTime,
-      entries,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      entries,
+      refresh,
+      pageLoading,
+      currentTime,
+      exactBalance,
+      dataReceived,
+      setExactBalance,
+      snapshotLoading,
+      snapshotReceived,
+      walletsSnapshotEntries,
     } = this.props
     const { timestamp } = this.state
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
+    const walletsData = (isFrameworkMode && exactBalance) ? walletsSnapshotEntries : entries
+    const isLoading = (!dataReceived && pageLoading)
+      || (exactBalance && !snapshotReceived && snapshotLoading)
+    const isNoData = _isEmpty(entries) || (exactBalance && _isEmpty(walletsSnapshotEntries))
 
     let showContent
-    if (!dataReceived && pageLoading) {
+    if (isLoading) {
       showContent = <Loading />
-    } else if (!entries.length) {
+    } else if (isNoData) {
       showContent = <NoData title='wallets.nodata' refresh={refresh} />
     } else {
-      showContent = <WalletsData entries={entries} />
+      showContent = <WalletsData entries={walletsData} />
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12 section-wallets'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('wallets.title')}</SectionHeaderTitle>
-          {config.showFrameworkMode && (
+          <SectionHeaderTitle>
+            {t('wallets.title')}
+          </SectionHeaderTitle>
+          {isFrameworkMode && (
             <SectionHeaderRow>
               <SectionHeaderItem>
                 <SectionHeaderItemLabel>
                   {t('query.endTime')}
                 </SectionHeaderItemLabel>
-                <DateInput onChange={this.handleDateChange} defaultValue={timestamp} />
+                <DateInput
+                  defaultValue={timestamp}
+                  onChange={this.handleDateChange}
+                />
+              </SectionHeaderItem>
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('selector.balance-precision.title')}
+                </SectionHeaderItemLabel>
+                <BalancePrecisionSelector
+                  value={exactBalance}
+                  onChange={setExactBalance}
+                />
               </SectionHeaderItem>
               <QueryButton
                 disabled={!hasNewTime}
