@@ -97,7 +97,10 @@ class Chart extends React.PureComponent {
               stroke='#9e9494'
             />
             <YAxis stroke='#9e9494' />
-            <Tooltip isAnimationActive={false} />
+            <Tooltip
+              isAnimationActive={false}
+              formatter={value => new Intl.NumberFormat('en').format(value)}
+            />
             <CartesianGrid
               stroke='#57636b'
               strokeDasharray='3 3'
