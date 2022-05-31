@@ -22,6 +22,8 @@ import config from 'config'
 import WalletsData from './Wallets.data'
 import { propTypes, defaultProps } from './Wallets.props'
 
+const isFrameworkMode = config.showFrameworkMode
+
 class Wallets extends PureComponent {
   constructor(props) {
     super(props)
@@ -42,7 +44,7 @@ class Wallets extends PureComponent {
 
     if (!dataReceived && !pageLoading) {
       fetchData()
-      fetchSnapshots()
+      if (isFrameworkMode)fetchSnapshots()
     }
   }
 
@@ -58,7 +60,7 @@ class Wallets extends PureComponent {
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
     fetchData(time)
-    fetchSnapshots(time)
+    if (isFrameworkMode) fetchSnapshots(time)
   }
 
   render() {
@@ -77,7 +79,7 @@ class Wallets extends PureComponent {
     } = this.props
     const { timestamp } = this.state
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
-    const walletsData = exactBalance ? walletsSnapshotEntries : entries
+    const walletsData = (isFrameworkMode && exactBalance) ? walletsSnapshotEntries : entries
     const isLoading = (!dataReceived && pageLoading)
       || (exactBalance && !snapshotReceived && snapshotLoading)
     const isNoData = _isEmpty(entries) || (exactBalance && _isEmpty(walletsSnapshotEntries))
@@ -100,7 +102,7 @@ class Wallets extends PureComponent {
           <SectionHeaderTitle>
             {t('wallets.title')}
           </SectionHeaderTitle>
-          {config.showFrameworkMode && (
+          {isFrameworkMode && (
             <SectionHeaderRow>
               <SectionHeaderItem>
                 <SectionHeaderItemLabel>
