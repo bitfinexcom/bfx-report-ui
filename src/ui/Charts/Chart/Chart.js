@@ -12,6 +12,8 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
+import { formatChartData } from '../Charts.helpers'
+
 import { propTypes, defaultProps } from './Chart.props'
 
 const COLORS = [
@@ -82,7 +84,6 @@ class Chart extends React.PureComponent {
     }
 
     const classes = classNames('line-chart', className)
-    const dataFormatter = value => new Intl.NumberFormat('en').format(value)
 
     return (
       <div className={classes}>
@@ -100,11 +101,11 @@ class Chart extends React.PureComponent {
             <YAxis
               width={90}
               stroke='#9e9494'
-              tickFormatter={dataFormatter}
+              tickFormatter={formatChartData}
             />
             <Tooltip
               isAnimationActive={false}
-              formatter={value => new Intl.NumberFormat('en').format(value)}
+              formatter={formatChartData}
             />
             <CartesianGrid
               stroke='#57636b'
