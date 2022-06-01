@@ -82,6 +82,7 @@ class Chart extends React.PureComponent {
     }
 
     const classes = classNames('line-chart', className)
+    const dataFormatter = value => new Intl.NumberFormat('en').format(value)
 
     return (
       <div className={classes}>
@@ -96,7 +97,10 @@ class Chart extends React.PureComponent {
               dataKey='name'
               stroke='#9e9494'
             />
-            <YAxis stroke='#9e9494' />
+            <YAxis
+              stroke='#9e9494'
+              tickFormatter={dataFormatter}
+            />
             <Tooltip
               isAnimationActive={false}
               formatter={value => new Intl.NumberFormat('en').format(value)}
