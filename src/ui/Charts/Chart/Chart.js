@@ -13,7 +13,6 @@ import {
 } from 'recharts'
 
 import { formatChartData } from '../Charts.helpers'
-
 import { propTypes, defaultProps } from './Chart.props'
 
 const COLORS = [
