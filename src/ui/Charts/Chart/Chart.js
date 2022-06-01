@@ -98,6 +98,7 @@ class Chart extends React.PureComponent {
               stroke='#9e9494'
             />
             <YAxis
+              width={90}
               stroke='#9e9494'
               tickFormatter={dataFormatter}
             />
