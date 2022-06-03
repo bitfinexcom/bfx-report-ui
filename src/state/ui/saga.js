@@ -52,7 +52,7 @@ function* uiLoaded() {
   if (locale) {
     // replace handles underscored param on mobile
     const parsedLocale = locale.replace('_', '-')
-    const lang = Object.keys(LANGUAGES).find(key => LANGUAGES[key] === parsedLocale)
+    const lang = LANGUAGES[parsedLocale]
     yield put(setLang(lang))
   }
 
