@@ -7,7 +7,7 @@ import {
 import queryString from 'query-string'
 import _includes from 'lodash/includes'
 
-import { LANGUAGES_MAP } from 'locales/i18n'
+import { LANGUAGES } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus } from 'state/status/actions'
@@ -393,7 +393,7 @@ function* exportCSV({ payload: targets }) {
 
     const locale = yield select(getLocale)
     const params = {
-      language: LANGUAGES_MAP[locale],
+      language: LANGUAGES[locale],
       multiExport,
     }
     if (exportEmail) {

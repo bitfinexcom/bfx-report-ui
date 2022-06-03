@@ -34,21 +34,6 @@ export const LANGUAGE_NAMES = {
   'pt-BR': 'Português',
 }
 
-// email templates language mapping
-export const LANGUAGES_MAP = {
-  en: 'en',
-  'en-US': 'en',
-  ru: 'ru',
-  cn: 'zh-CN',
-  tw: 'zh-TW',
-  es: 'es-EM',
-  tr: 'tr',
-  'tr-TR': 'tr',
-  pt: 'pt-BR',
-  'pt-PT': 'pt-BR',
-  'pt-BR': 'pt-BR',
-}
-
 i18n
   .use(backend)
   .use(detector)
