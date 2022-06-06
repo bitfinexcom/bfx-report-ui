@@ -13,10 +13,12 @@ export const LANGUAGES = {
   en: 'en',
   'en-US': 'en',
   ru: 'ru',
-  cn: 'zh-CN',
-  tw: 'zh-TW',
+  'zh-CN': 'zh-CN',
+  'zh-TW': 'zh-TW',
   tr: 'tr',
+  'tr-TR': 'tr',
   es: 'es-EM',
+  'es-EM': 'es-EM',
   pt: 'pt-BR',
   'pt-PT': 'pt-BR',
   'pt-BR': 'pt-BR',
@@ -25,25 +27,11 @@ export const LANGUAGES = {
 export const LANGUAGE_NAMES = {
   en: 'English',
   ru: 'Русский',
-  cn: '中文 (简化)',
-  tw: '中文 (繁體)',
+  'zh-CN': '中文 (简化)',
+  'zh-TW': '中文 (繁體)',
   tr: 'Türkçe',
-  es: 'Español',
-  pt: 'Português',
-}
-
-// email templates language mapping
-export const LANGUAGES_MAP = {
-  en: 'en',
-  'en-US': 'en',
-  ru: 'ru',
-  cn: 'zh-CN',
-  tw: 'zh-TW',
-  es: 'es-EM',
-  tr: 'tr',
-  pt: 'pt-BR',
-  'pt-PT': 'pt-BR',
-  'pt-BR': 'pt-BR',
+  'es-EM': 'Español',
+  'pt-BR': 'Português',
 }
 
 i18n
