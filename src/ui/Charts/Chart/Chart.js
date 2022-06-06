@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 
+import { formatChartData } from '../Charts.helpers'
 import { propTypes, defaultProps } from './Chart.props'
 
 const COLORS = [
@@ -96,8 +97,15 @@ class Chart extends React.PureComponent {
               dataKey='name'
               stroke='#9e9494'
             />
-            <YAxis stroke='#9e9494' />
-            <Tooltip isAnimationActive={false} />
+            <YAxis
+              width={90}
+              stroke='#9e9494'
+              tickFormatter={formatChartData}
+            />
+            <Tooltip
+              isAnimationActive={false}
+              formatter={formatChartData}
+            />
             <CartesianGrid
               stroke='#57636b'
               strokeDasharray='3 3'

@@ -105,4 +105,7 @@ export const mergeSimilarTrades = (trades) => _values(
   }, {}),
 )
 
+// Formatting: 1000000 ---> 1,000,000
+export const formatChartData = value => new Intl.NumberFormat('en').format(value)
+
 export default parseChartData
