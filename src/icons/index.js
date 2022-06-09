@@ -24,6 +24,7 @@ import { ReactComponent as FILE_EXPORT } from './file-export.svg'
 import { ReactComponent as FILE_TABLE } from './file-table.svg'
 import { ReactComponent as FILTER } from './filter.svg'
 import { ReactComponent as FILTER_CLEAR } from './filter-clear.svg'
+import { ReactComponent as GO_TO } from './go-to.svg'
 import { ReactComponent as HAMBURGER_MENU } from './hamburger-menu.svg'
 import { ReactComponent as INFO_CIRCLE } from './info-circle.svg'
 import { ReactComponent as LIGHT_THEME } from './light-theme.svg'
@@ -74,6 +75,7 @@ export default {
   FILE_TABLE,
   FILTER,
   FILTER_CLEAR,
+  GO_TO,
   HAMBURGER_MENU,
   INFO_CIRCLE,
   LIGHT_THEME,
