@@ -501,6 +501,7 @@
       "title": "Select Query Range",
       "view" : "View"
     },
+    "go_to": "Go to",
     "day": "Day",
     "refresh": "Refresh",
     "custom_time": "Custom",
