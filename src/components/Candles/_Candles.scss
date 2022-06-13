@@ -1,0 +1,12 @@
+.candles-header {
+  display: flex;
+
+  .section-switch {
+    margin-right: 15px;
+  }
+
+  .go-to-button {
+    cursor: pointer;
+    transform: scale(0.8);
+  }
+}
