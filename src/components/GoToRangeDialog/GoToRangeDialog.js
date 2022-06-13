@@ -1,4 +1,5 @@
 import React, { memo, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   Classes,
@@ -10,9 +11,7 @@ import Icon from 'icons'
 import TimeFrame from 'ui/TimeFrame'
 import timeRangeTypes from 'state/timeRange/constants'
 
-import { propTypes, defaultProps } from './GoToRangeDialog.props'
-
-const TimeFrameDialog = ({
+const GoToRangeDialog = ({
   isOpen,
   end: endTime,
   start: startTime,
@@ -92,7 +91,23 @@ const TimeFrameDialog = ({
   )
 }
 
-TimeFrameDialog.propTypes = propTypes
-TimeFrameDialog.defaultProps = defaultProps
+GoToRangeDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  end: PropTypes.number,
+  start: PropTypes.number,
+  t: PropTypes.func.isRequired,
+  timeRange: PropTypes.shape({
+    end: PropTypes.number,
+    range: PropTypes.string.isRequired,
+    start: PropTypes.number,
+  }).isRequired,
+  setTimeRange: PropTypes.func.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
+}
 
-export default memo(TimeFrameDialog)
+GoToRangeDialog.defaultProps = {
+  start: 0,
+  end: 0,
+}
+
+export default memo(GoToRangeDialog)
