@@ -15,6 +15,7 @@ import NoData from 'ui/NoData'
 import TradesSwitch from 'components/Trades/TradesSwitch'
 import PairSelector from 'ui/PairSelector'
 import Timeframe from 'ui/CandlesTimeframe'
+import GoToButton from 'ui/GoToButton'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import Candlestick from 'ui/Charts/Candlestick'
@@ -110,7 +111,10 @@ class Candles extends PureComponent {
             <CandlesSyncPref />
           </SectionHeaderRow>
         </SectionHeader>
-        <TradesSwitch target={TYPE} />
+        <div className='candles-header'>
+          <TradesSwitch target={TYPE} />
+          <GoToButton />
+        </div>
         {showContent}
       </Card>
     )
