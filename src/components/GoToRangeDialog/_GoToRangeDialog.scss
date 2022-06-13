@@ -1,0 +1,26 @@
+.time-frame-dialog {
+  width: 435px;
+  max-width: 90vw;
+
+  .bp3-dialog-header {
+    min-height: 40px;
+  }
+
+  .bp3-dialog-body {
+    margin-bottom: 0;
+  }
+
+  .bp3-dialog-footer {
+    display: flex;
+    justify-content: center;
+  }
+
+  &--buttons-row {
+    display: flex;
+    justify-content:center;
+  }
+
+  &--button:not(:last-child) {
+    margin-right: 20px;
+  }
+}

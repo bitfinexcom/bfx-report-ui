@@ -56,7 +56,7 @@ const TimeFrameDialog = ({
   return (
     <Dialog
       icon={<Icon.CALENDAR />}
-      className='time-frame-dialog'
+      className='go-to-range-dialog'
       isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={toggleDialog}
@@ -71,16 +71,16 @@ const TimeFrameDialog = ({
         />
       </div>
       <div className={Classes.DIALOG_FOOTER}>
-        <div className='time-frame-dialog--buttons-row'>
+        <div className='go-to-range-dialog--buttons-row'>
           <Button
-            className='time-frame-dialog--button'
+            className='go-to-range-dialog--button'
             intent={Intent.NONE}
             onClick={toggleDialog}
           >
             {t('timeframe.custom.cancel')}
           </Button>
           <Button
-            className='time-frame-dialog--button'
+            className='go-to-range-dialog--button'
             intent={Intent.PRIMARY}
             onClick={onConfirm}
           >
