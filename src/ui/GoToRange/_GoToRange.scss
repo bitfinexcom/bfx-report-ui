@@ -1,0 +1,27 @@
+.go-to-range {
+  &-row {
+    display: block;
+  }
+  
+  &-item {
+    display: inline-block;
+     margin-bottom: 10px;
+
+     &--title {
+      margin-bottom: 10px;
+     }
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    .bp3-button {
+      display: flex;
+    }
+  }
+
+  &-range {
+    display: block;
+    margin-bottom: 20px;
+  }
+}
