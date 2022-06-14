@@ -67,6 +67,7 @@ class Candles extends PureComponent {
       refresh,
       t,
       trades,
+      toggleGoToRangeDialog,
     } = this.props
     const { pair, timeframe } = params
     const hasChanges = this.hasChanges()
@@ -97,12 +98,15 @@ class Candles extends PureComponent {
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
               <PairSelector
+                pairs={pairs}
                 currentPair={pair}
                 onPairSelect={this.onPairSelect}
-                pairs={pairs}
               />
             </SectionHeaderItem>
-            <Timeframe value={timeframe} onChange={this.onTimeframeChange} />
+            <Timeframe
+              value={timeframe}
+              onChange={this.onTimeframeChange}
+            />
             <QueryButton
               disabled={!hasChanges}
               onClick={this.handleQuery}
@@ -113,7 +117,7 @@ class Candles extends PureComponent {
         </SectionHeader>
         <div className='candles-header'>
           <TradesSwitch target={TYPE} />
-          <GoToButton />
+          <GoToButton onClick={toggleGoToRangeDialog} />
         </div>
         {showContent}
       </Card>

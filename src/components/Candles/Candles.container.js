@@ -6,6 +6,7 @@ import {
   refresh,
   setParams,
 } from 'state/candles/actions'
+import { toggleGoToRangeDialog } from 'state/ui/actions'
 import { getPairs } from 'state/symbols/selectors'
 import {
   getCandles,
@@ -32,6 +33,7 @@ const mapDispatchToProps = {
   fetchData,
   refresh,
   setParams,
+  toggleGoToRangeDialog,
 }
 
 const CandlesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Candles))
