@@ -54,12 +54,12 @@ const GoToRangeDialog = ({
 
   return (
     <Dialog
-      icon={<Icon.CALENDAR />}
+      icon={<Icon.GO_TO />}
       className='go-to-range-dialog'
       isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={toggleDialog}
-      title={t('timeframe.custom.title')}
+      title={t('timeframe.go_to')}
     >
       <div className={Classes.DIALOG_BODY}>
         <TimeFrame
