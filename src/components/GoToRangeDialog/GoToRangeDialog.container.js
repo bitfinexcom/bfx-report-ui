@@ -4,21 +4,21 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
 import { getTimeFrame, getTimeRange } from 'state/timeRange/selectors'
-import { getIsTimeFrameDialogOpen } from 'state/ui/selectors'
+import { getIsGoToRangeDialogOpen } from 'state/ui/selectors'
 import { setTimeRange } from 'state/timeRange/actions'
-import { toggleTimeFrameDialog } from 'state/ui/actions'
+import { toggleGoToRangeDialog } from 'state/ui/actions'
 
 import GoToRangeDialog from './GoToRangeDialog'
 
 const mapStateToProps = state => ({
   ...getTimeFrame(state),
   timeRange: getTimeRange(state),
-  isOpen: getIsTimeFrameDialogOpen(state),
+  isOpen: getIsGoToRangeDialogOpen(state),
 })
 
 const mapDispatchToProps = {
   setTimeRange,
-  toggleDialog: toggleTimeFrameDialog,
+  toggleDialog: toggleGoToRangeDialog,
 }
 
 export default compose(
