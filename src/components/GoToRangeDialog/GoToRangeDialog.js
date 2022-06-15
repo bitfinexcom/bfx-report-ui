@@ -8,7 +8,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import TimeFrame from 'ui/TimeFrame'
+import GoToRange from 'ui/GoToRange'
 import timeRangeTypes from 'state/timeRange/constants'
 
 const GoToRangeDialog = ({
@@ -62,7 +62,7 @@ const GoToRangeDialog = ({
       title={t('timeframe.go_to')}
     >
       <div className={Classes.DIALOG_BODY}>
-        <TimeFrame
+        <GoToRange
           start={start}
           end={end}
           range={range}
@@ -83,7 +83,7 @@ const GoToRangeDialog = ({
             intent={Intent.PRIMARY}
             onClick={onConfirm}
           >
-            {t('timeframe.custom.confirm')}
+            {t('timeframe.go_to')}
           </Button>
         </div>
       </div>
