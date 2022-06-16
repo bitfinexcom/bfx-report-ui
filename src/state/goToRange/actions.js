@@ -3,19 +3,24 @@ import { isValidTimeStamp } from 'state/query/utils'
 
 import types from './constants'
 
-/**
- * Create an action to set got to range.
- * @param {string} range
- * @param {number} start time in milliseconds
- * @param {number} end time in milliseconds
- */
 export function setGoToRange({ range, start, end }) {
-  if (range === types.CUSTOM && (!isValidTimeStamp(start) || !isValidTimeStamp(end))) {
+  if (!isValidTimeStamp(start) || !isValidTimeStamp(end)) {
     return updateErrorStatus({
       id: 'status.fail',
       topic: 'timeframe.custom-timerange',
       detail: `with wrong format ${start}-${end}`,
     })
+  }
+
+  if (range === types.DATE) {
+    return {
+      type: types.SET_GO_TO_RANGE,
+      payload: {
+        range,
+        start: start - 86400000,
+        end: start + 86400000,
+      },
+    }
   }
 
   return {
