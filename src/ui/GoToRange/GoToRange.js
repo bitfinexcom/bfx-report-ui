@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 
 import DateInput from 'ui/DateInput'
 import { isValidTimeStamp } from 'state/query/utils'
 import gotToRangeTypes from 'state/goToRange/constants'
 
 import RangeTypeSelect from './RangeTypeSelect'
-import { propTypes } from './GoToRange.props'
 
 const GoToRange = ({
   end,
@@ -15,6 +15,7 @@ const GoToRange = ({
   timezone,
   range,
 }) => {
+
   const onDateChange = (type, date) => {
     const timestamp = date && date.getTime()
     if (isValidTimeStamp(timestamp) || timestamp === null) {
@@ -60,6 +61,13 @@ const GoToRange = ({
   )
 }
 
-GoToRange.propTypes = propTypes
+GoToRange.propTypes = {
+  end: PropTypes.number.isRequired,
+  start: PropTypes.number.isRequired,
+  range: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
+  timezone: PropTypes.string.isRequired,
+  onTimeFrameUpdate: PropTypes.func.isRequired,
+}
 
 export default memo(GoToRange)
