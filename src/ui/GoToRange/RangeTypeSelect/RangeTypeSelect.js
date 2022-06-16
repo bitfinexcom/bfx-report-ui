@@ -1,47 +1,38 @@
-import React, { PureComponent } from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
-import _memoize from 'lodash/memoize'
 
 import Select from 'ui/Select'
 import goToRangeTypes from 'state/goToRange/constants'
-
-import { propTypes } from './RangeTypeSelect.props'
 
 const {
   DATE,
   CUSTOM,
 } = goToRangeTypes
 
-class RangeTypeSelect extends PureComponent {
-  constructor() {
-    super()
-
-    this.getItems = _memoize(this.getItems)
-  }
-
-  getItems = (t) => ([
+const RangeTypeSelect = ({ onChange, range, t }) => {
+  const items = [
     { value: DATE, label: t('timeframe.date') },
     { value: CUSTOM, label: t('timeframe.custom_range') },
-  ])
+  ]
 
-  render() {
-    const { onChange, range, t } = this.props
-
-    const items = this.getItems(t)
-
-    return (
-      <div className='range-type-select-row'>
-        <Select
-          className='range-type-select'
-          items={items}
-          onChange={onChange}
-          value={range}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className='range-type-select-row'>
+      <Select
+        items={items}
+        value={range}
+        onChange={onChange}
+        className='range-type-select'
+        popoverClassName='range-type-select'
+      />
+    </div>
+  )
 }
 
-RangeTypeSelect.propTypes = propTypes
+RangeTypeSelect.propTypes = {
+  t: PropTypes.func.isRequired,
+  range: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+}
 
-export default withTranslation('translations')(RangeTypeSelect)
+export default memo(withTranslation('translations')(RangeTypeSelect))
