@@ -9,7 +9,7 @@ import {
 
 import Icon from 'icons'
 import GoToRange from 'ui/GoToRange'
-import timeRangeTypes from 'state/timeRange/constants'
+import gotToRangeTypes from 'state/goToRange/constants'
 
 const GoToRangeDialog = ({
   isOpen,
@@ -23,7 +23,7 @@ const GoToRangeDialog = ({
   const [selectedTimeFrame, setSelectedTimeFrame] = useState({
     start: startTime,
     end: endTime,
-    range: timeRange.range || timeRangeTypes.CUSTOM,
+    range: timeRange.range || gotToRangeTypes.DAY,
   })
 
   useEffect(() => {
