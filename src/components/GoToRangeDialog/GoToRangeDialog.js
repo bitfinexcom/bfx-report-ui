@@ -12,18 +12,16 @@ import GoToRange from 'ui/GoToRange'
 import gotToRangeTypes from 'state/goToRange/constants'
 
 const GoToRangeDialog = ({
-  isOpen,
-  end: endTime,
-  start: startTime,
-  setTimeRange,
   t,
+  isOpen,
   timeRange,
+  setTimeRange,
   toggleDialog,
   setGoToRangePreserve,
 }) => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState({
-    start: startTime,
-    end: endTime,
+    start: timeRange.start,
+    end: timeRange.end,
     range: timeRange.range || gotToRangeTypes.DAY,
   })
 
@@ -95,8 +93,6 @@ const GoToRangeDialog = ({
 
 GoToRangeDialog.propTypes = {
   isOpen: PropTypes.bool.isRequired,
-  end: PropTypes.number,
-  start: PropTypes.number,
   t: PropTypes.func.isRequired,
   timeRange: PropTypes.shape({
     end: PropTypes.number,
@@ -106,11 +102,6 @@ GoToRangeDialog.propTypes = {
   setTimeRange: PropTypes.func.isRequired,
   toggleDialog: PropTypes.func.isRequired,
   setGoToRangePreserve: PropTypes.func.isRequired,
-}
-
-GoToRangeDialog.defaultProps = {
-  start: 0,
-  end: 0,
 }
 
 export default memo(GoToRangeDialog)
