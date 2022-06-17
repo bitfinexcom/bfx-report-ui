@@ -33,16 +33,14 @@ export function setGoToRange({ range, start, end }) {
   }
 }
 
-/**
- * Create an action to toggle got to range preserve setting.
- */
-export function toggleGoToRangePreserve() {
+export function setGoToRangePreserve(payload) {
   return {
-    type: types.TOGGLE_GO_TO_RANGE_PRESERVE,
+    type: types.SET_GO_TO_RANGE_PRESERVE,
+    payload,
   }
 }
 
 export default {
   setGoToRange,
-  toggleGoToRangePreserve,
+  setGoToRangePreserve,
 }
