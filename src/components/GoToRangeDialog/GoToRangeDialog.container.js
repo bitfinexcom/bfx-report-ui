@@ -3,22 +3,23 @@ import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
-import { getTimeFrame, getTimeRange } from 'state/timeRange/selectors'
+import { getGoToRange, getRange } from 'state/goToRange/selectors'
 import { getIsGoToRangeDialogOpen } from 'state/ui/selectors'
-import { setTimeRange } from 'state/timeRange/actions'
+import { setGoToRange, setGoToRangePreserve } from 'state/goToRange/actions'
 import { toggleGoToRangeDialog } from 'state/ui/actions'
 
 import GoToRangeDialog from './GoToRangeDialog'
 
 const mapStateToProps = state => ({
-  ...getTimeFrame(state),
-  timeRange: getTimeRange(state),
+  ...getRange(state),
+  timeRange: getGoToRange(state),
   isOpen: getIsGoToRangeDialogOpen(state),
 })
 
 const mapDispatchToProps = {
-  setTimeRange,
+  setTimeRange: setGoToRange,
   toggleDialog: toggleGoToRangeDialog,
+  setGoToRangePreserve,
 }
 
 export default compose(
