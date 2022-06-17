@@ -1,6 +1,9 @@
 @import "./RangeTypeSelect/_RangeTypeSelect.scss";
 
 .go-to-range {
+  display: block;
+  margin-bottom: 20px;
+
   &-row {
     display: block;
   }
@@ -11,6 +14,7 @@
 
      &--title {
       margin-bottom: 10px;
+      margin-left: 2px;
      }
 
     &:not(:last-child) {
@@ -20,10 +24,5 @@
     .bp3-button {
       display: flex;
     }
-  }
-
-  &-range {
-    display: block;
-    margin-bottom: 20px;
   }
 }
