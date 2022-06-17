@@ -8,12 +8,12 @@ import gotToRangeTypes from 'state/goToRange/constants'
 import RangeTypeSelect from './RangeTypeSelect'
 
 const GoToRange = ({
-  end,
-  onTimeFrameUpdate,
-  start,
   t,
-  timezone,
+  end,
+  start,
   range,
+  timezone,
+  onTimeFrameUpdate,
 }) => {
   const onDateChange = (type, date) => {
     const timestamp = date && date.getTime()

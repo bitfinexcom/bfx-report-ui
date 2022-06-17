@@ -65,7 +65,6 @@ class Candlestick extends React.PureComponent {
     if (trades.entries !== prevProps.trades.entries && isTradesVisible) {
       this.setTradeSeries()
     }
-
     if (theme !== prevProps.theme) {
       this.recreateChart()
     }
@@ -92,7 +91,9 @@ class Candlestick extends React.PureComponent {
 
   createChart = () => {
     const { isTradesVisible } = this.state
-    const { candles: { entries: candles }, theme, timeRange, isGoToRangePreserved } = this.props
+    const {
+      candles: { entries: candles }, theme, timeRange, isGoToRangePreserved,
+    } = this.props
     const { backgroundColor, textColor } = STYLES[theme]
 
     const element = document.getElementById('candlestick')
@@ -231,15 +232,10 @@ class Candlestick extends React.PureComponent {
   }
 
   onTimeRangeChange = ({ from }) => {
-    const { candles, trades, fetchData } = this.props
+    const {
+      candles, trades, fetchData,
+    } = this.props
 
-    // console.log('++candles', candles)
-    // console.log('++from', from)
-
-    // const range = this.chart.timeScale().getVisibleRange()
-    // const position = this.chart.timeScale().scrollPosition()
-    // console.log('++position', position)
-    // console.log('++range', range)
 
     const candleScrollTime = candles.entries[SCROLL_THRESHOLD] && candles.entries[SCROLL_THRESHOLD].time
     if (candles.nextPage && !candles.isLoading && from < candleScrollTime) {
@@ -290,16 +286,12 @@ class Candlestick extends React.PureComponent {
     const {
       className,
       candles: { entries: candles },
-      // timeRange,
-      isGoToRangePreserved,
     } = this.props
     const {
       width,
       height,
       isTradesVisible,
     } = this.state
-
-    console.log('+++isGoToRangePreserved', isGoToRangePreserved)
 
     const classes = classNames('candlestick', className)
 
