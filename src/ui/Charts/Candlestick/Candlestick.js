@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next'
 import moment from 'moment'
 import classNames from 'classnames'
 import { createChart, CrosshairMode } from 'lightweight-charts'
+import _isEqual from 'lodash/isEqual'
 import _debounce from 'lodash/debounce'
 
 import { THEME_CLASSES } from 'utils/themes'
@@ -55,7 +56,9 @@ class Candlestick extends React.PureComponent {
 
   componentDidUpdate(prevProps) {
     const { isTradesVisible } = this.state
-    const { candles, trades, theme } = this.props
+    const {
+      candles, trades, theme, timeRange, isGoToRangePreserved,
+    } = this.props
     if (candles.entries !== prevProps.candles.entries) {
       this.candleSeries.setData(candles.entries)
     }
@@ -66,12 +69,20 @@ class Candlestick extends React.PureComponent {
     if (theme !== prevProps.theme) {
       this.recreateChart()
     }
+    if (isGoToRangePreserved && !_isEqual(timeRange, prevProps.timeRange)) {
+      this.recreateChart()
+    }
   }
 
   componentWillUnmount() {
+    const {
+      isGoToRangePreserved,
+      setGoToRangePreserve,
+    } = this.props
     if (this.chart) {
       this.cleanChartData()
     }
+    if (isGoToRangePreserved) setGoToRangePreserve(false)
     window.removeEventListener('resize', this.onResize)
   }
 
@@ -81,7 +92,7 @@ class Candlestick extends React.PureComponent {
 
   createChart = () => {
     const { isTradesVisible } = this.state
-    const { candles: { entries: candles }, theme } = this.props
+    const { candles: { entries: candles }, theme, timeRange, isGoToRangePreserved } = this.props
     const { backgroundColor, textColor } = STYLES[theme]
 
     const element = document.getElementById('candlestick')
@@ -129,6 +140,15 @@ class Candlestick extends React.PureComponent {
     const priceFormat = getPriceFormat(candles)
 
     chart.addLineSeries({ priceFormat })
+
+    const { start, end } = timeRange
+
+    if (isGoToRangePreserved) {
+      chart.timeScale().setVisibleRange({
+        from: start / 1000,
+        to: end / 1000,
+      })
+    }
 
     this.chart = chart
 
@@ -213,6 +233,14 @@ class Candlestick extends React.PureComponent {
   onTimeRangeChange = ({ from }) => {
     const { candles, trades, fetchData } = this.props
 
+    // console.log('++candles', candles)
+    // console.log('++from', from)
+
+    // const range = this.chart.timeScale().getVisibleRange()
+    // const position = this.chart.timeScale().scrollPosition()
+    // console.log('++position', position)
+    // console.log('++range', range)
+
     const candleScrollTime = candles.entries[SCROLL_THRESHOLD] && candles.entries[SCROLL_THRESHOLD].time
     if (candles.nextPage && !candles.isLoading && from < candleScrollTime) {
       fetchData('candles')
@@ -262,12 +290,16 @@ class Candlestick extends React.PureComponent {
     const {
       className,
       candles: { entries: candles },
+      // timeRange,
+      isGoToRangePreserved,
     } = this.props
     const {
       width,
       height,
       isTradesVisible,
     } = this.state
+
+    console.log('+++isGoToRangePreserved', isGoToRangePreserved)
 
     const classes = classNames('candlestick', className)
 
@@ -284,11 +316,11 @@ class Candlestick extends React.PureComponent {
               />
             )}
             {this.candleSeries && candles.length > 0 && (
-              <CandleStats
-                chart={this.chart}
-                candleSeries={this.candleSeries}
-                defaultCandle={candles[candles.length - 1] || {}}
-              />
+            <CandleStats
+              chart={this.chart}
+              candleSeries={this.candleSeries}
+              defaultCandle={candles[candles.length - 1] || {}}
+            />
             )}
             <TradesToggle
               value={isTradesVisible}
