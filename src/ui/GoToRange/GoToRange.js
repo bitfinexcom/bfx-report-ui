@@ -15,7 +15,6 @@ const GoToRange = ({
   timezone,
   range,
 }) => {
-
   const onDateChange = (type, date) => {
     const timestamp = date && date.getTime()
     if (isValidTimeStamp(timestamp) || timestamp === null) {
@@ -27,32 +26,37 @@ const GoToRange = ({
     onTimeFrameUpdate({ range: value })
   }
 
+  const isCustomRangeSelected = range === gotToRangeTypes.CUSTOM
+
   return (
-    <div className='go-to-range'>
+    <div className='go-to-range-row'>
       <RangeTypeSelect
         onChange={onTimeRangeUpdate}
         range={range}
       />
-      <div className='time-frame-range'>
-        <div className='time-frame-item'>
-          <div className='time-frame-item--title'>
-            {t('timeframe.start-date-placeholder')}
+      <div className='go-to-range'>
+        <div className='go-to-range-item'>
+          <div className='go-to-range-item--title'>
+            {isCustomRangeSelected
+              ? t('timeframe.from')
+              : t('timeframe.select-date')
+             }
           </div>
           <DateInput
-            onChange={(date) => onDateChange('start', date)}
-            timezone={timezone}
             value={start}
+            timezone={timezone}
+            onChange={(date) => onDateChange('start', date)}
           />
         </div>
-        {range === gotToRangeTypes.CUSTOM && (
-          <div className='time-frame-item'>
-            <div className='time-frame-item--title'>
-              {t('timeframe.end-date-placeholder')}
+        {isCustomRangeSelected && (
+          <div className='go-to-range-item'>
+            <div className='go-to-range-item--title'>
+              {t('timeframe.to')}
             </div>
             <DateInput
-              onChange={(date) => onDateChange('end', date)}
-              timezone={timezone}
               value={end}
+              timezone={timezone}
+              onChange={(date) => onDateChange('end', date)}
             />
           </div>
         )}
