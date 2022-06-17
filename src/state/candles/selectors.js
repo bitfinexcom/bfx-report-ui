@@ -4,6 +4,8 @@ export const getCandles = state => getCandlesData(state).candles || {}
 export const getCurrentFetchParams = state => getCandlesData(state).currentFetchParams
 export const getDataReceived = state => getCandlesData(state).dataReceived
 export const getPageLoading = state => getCandlesData(state).pageLoading
+export const getCandlesNextPage = state => getCandles(state).nextPage
+
 export const getParams = (state) => {
   const {
     timeframe,
@@ -21,6 +23,7 @@ export default {
   getCurrentFetchParams,
   getDataReceived,
   getPageLoading,
+  getCandlesNextPage,
   getParams,
   getTrades,
 }

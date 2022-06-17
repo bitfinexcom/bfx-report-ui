@@ -50,13 +50,16 @@ function* fetchData(section, data, method) {
     end,
   })
   yield put(actions.updateData({ [section]: result }))
-
   if (error) {
     yield put(actions.fetchFail({
       id: 'status.fail',
       topic: 'candles.title',
       detail: JSON.stringify(error),
     }))
+  }
+  const nextPage = yield select(selectors.getCandlesNextPage)
+  if (nextPage) {
+    yield yield put(actions.fetchData('candles'))
   }
 }
 
@@ -71,7 +74,6 @@ export function* fetchCandles({ payload: type }) {
     if (type === 'trades') {
       return yield call(fetchData, 'trades', trades, getReqTrades)
     }
-
     yield all([
       call(fetchData, 'candles', candles, getReqCandles),
       call(fetchData, 'trades', trades, getReqTrades),
