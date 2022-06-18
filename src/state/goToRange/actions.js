@@ -4,7 +4,7 @@ import { isValidTimeStamp } from 'state/query/utils'
 import types from './constants'
 
 export function setGoToRange({ range, start, end }) {
-  if (!isValidTimeStamp(start) || !isValidTimeStamp(end)) {
+  if ((start > end) || !isValidTimeStamp(start) || !isValidTimeStamp(end)) {
     return updateErrorStatus({
       id: 'status.fail',
       topic: 'timeframe.custom-timerange',
