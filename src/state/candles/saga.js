@@ -10,6 +10,8 @@ import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
+import goToRangeTypes from 'state/goToRange/constants'
+import { setGoToRange, handleGoToRange } from 'state/goToRange/actions'
 
 import types from './constants'
 import actions from './actions'
@@ -57,10 +59,6 @@ function* fetchData(section, data, method) {
       detail: JSON.stringify(error),
     }))
   }
-  const nextPage = yield select(selectors.getCandlesNextPage)
-  if (nextPage) {
-    yield yield put(actions.fetchData('candles'))
-  }
 }
 
 /* eslint-disable-next-line consistent-return */
@@ -96,8 +94,30 @@ function* fetchCandlesFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
+function* nextPageCheck(start) {
+  const candlesNextPage = yield select(selectors.getCandlesNextPage)
+  return start < candlesNextPage
+}
+
+function* handleGoToRangeSaga({ payload }) {
+  const { start } = payload
+  const candlesNextPage = yield select(selectors.getCandlesNextPage)
+  if (candlesNextPage) {
+    const shouldUpdateCandles = yield call(nextPageCheck, start)
+    if (shouldUpdateCandles) {
+      yield call(fetchCandles, { payload: 'candles' })
+      yield put(actions.setChartLoading(true))
+      yield put(handleGoToRange(payload))
+    } else {
+      yield put(actions.setChartLoading(false))
+      yield put(setGoToRange(payload))
+    }
+  }
+}
+
 export default function* candlesSaga() {
   yield takeLatest(types.FETCH, fetchCandles)
   yield takeLatest(types.REFRESH, refreshCandles)
   yield takeLatest(types.FETCH_FAIL, fetchCandlesFail)
+  yield takeLatest(goToRangeTypes.HANDLE_GO_TO_RANGE, handleGoToRangeSaga)
 }

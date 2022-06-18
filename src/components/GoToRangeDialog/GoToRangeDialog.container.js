@@ -5,7 +5,7 @@ import { withTranslation } from 'react-i18next'
 
 import { getGoToRange } from 'state/goToRange/selectors'
 import { getIsGoToRangeDialogOpen } from 'state/ui/selectors'
-import { setGoToRange, setGoToRangePreserve } from 'state/goToRange/actions'
+import { handleGoToRange, setGoToRangePreserve } from 'state/goToRange/actions'
 import { toggleGoToRangeDialog } from 'state/ui/actions'
 
 import GoToRangeDialog from './GoToRangeDialog'
@@ -17,7 +17,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setGoToRangePreserve,
-  setTimeRange: setGoToRange,
+  setTimeRange: handleGoToRange,
   toggleDialog: toggleGoToRangeDialog,
 }
 
