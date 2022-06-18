@@ -112,6 +112,8 @@ function* handleGoToRangeSaga({ payload }) {
       yield put(actions.setChartLoading(false))
       yield put(setGoToRange(payload))
     }
+  } else {
+    yield put(setGoToRange(payload))
   }
 }
 
