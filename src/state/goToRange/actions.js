@@ -17,8 +17,8 @@ export function setGoToRange({ range, start, end }) {
       type: types.SET_GO_TO_RANGE,
       payload: {
         range,
-        start: start - 86400000,
-        end: start + 86400000,
+        start: start - 3600000,
+        end: start + 3600000,
       },
     }
   }
@@ -40,7 +40,15 @@ export function setGoToRangePreserve(payload) {
   }
 }
 
+export function handleGoToRange(payload) {
+  return {
+    type: types.HANDLE_GO_TO_RANGE,
+    payload,
+  }
+}
+
 export default {
   setGoToRange,
+  handleGoToRange,
   setGoToRangePreserve,
 }
