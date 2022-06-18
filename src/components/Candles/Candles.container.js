@@ -13,6 +13,7 @@ import {
   getCurrentFetchParams,
   getDataReceived,
   getPageLoading,
+  getChartLoading,
   getParams,
   getTrades,
 } from 'state/candles/selectors'
@@ -27,6 +28,7 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   pairs: getPairs(state),
   params: getParams(state),
+  isChartLoading: getChartLoading(state),
 })
 
 const mapDispatchToProps = {

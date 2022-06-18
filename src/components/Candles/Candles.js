@@ -68,12 +68,14 @@ class Candles extends PureComponent {
       t,
       trades,
       toggleGoToRangeDialog,
+      isChartLoading,
     } = this.props
     const { pair, timeframe } = params
     const hasChanges = this.hasChanges()
+    const isLoading = isChartLoading || (!candles.entries.length && candles.isLoading)
 
     let showContent
-    if (!candles.entries.length && candles.isLoading) {
+    if (isLoading) {
       showContent = <Loading />
     } else if (!candles.entries.length) {
       showContent = <NoData />
