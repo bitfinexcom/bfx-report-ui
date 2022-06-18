@@ -292,7 +292,6 @@ class Candlestick extends React.PureComponent {
       height,
       isTradesVisible,
     } = this.state
-
     const classes = classNames('candlestick', className)
 
     return (
@@ -308,11 +307,11 @@ class Candlestick extends React.PureComponent {
               />
             )}
             {this.candleSeries && candles.length > 0 && (
-            <CandleStats
-              chart={this.chart}
-              candleSeries={this.candleSeries}
-              defaultCandle={candles[candles.length - 1] || {}}
-            />
+              <CandleStats
+                chart={this.chart}
+                candleSeries={this.candleSeries}
+                defaultCandle={candles[candles.length - 1] || {}}
+              />
             )}
             <TradesToggle
               value={isTradesVisible}
