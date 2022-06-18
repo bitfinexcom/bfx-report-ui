@@ -59,10 +59,18 @@ export function updateData(payload) {
   }
 }
 
+export function setChartLoading(payload) {
+  return {
+    type: types.LOADING,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   fetchData,
   refresh,
   setParams,
   updateData,
+  setChartLoading,
 }
