@@ -72,20 +72,24 @@ class Candles extends PureComponent {
     } = this.props
     const { pair, timeframe } = params
     const hasChanges = this.hasChanges()
-    const isLoading = isChartLoading || (!candles.entries.length && candles.isLoading)
+    const chartClassName = isChartLoading ? 'candlestick--loading' : ''
 
     let showContent
-    if (isLoading) {
+    if (!candles.entries.length && candles.isLoading) {
       showContent = <Loading />
     } else if (!candles.entries.length) {
       showContent = <NoData />
     } else {
       showContent = (
-        <Candlestick
-          candles={candles}
-          trades={trades}
-          fetchData={fetchData}
-        />
+        <>
+          {isChartLoading && (<Loading />)}
+          <Candlestick
+            candles={candles}
+            trades={trades}
+            fetchData={fetchData}
+            className={chartClassName}
+          />
+        </>
       )
     }
 
