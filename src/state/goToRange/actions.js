@@ -1,9 +1,11 @@
 import { updateErrorStatus } from 'state/status/actions'
 import { isValidTimeStamp } from 'state/query/utils'
 
-import types from './constants'
+import types, { OFFSETS } from './constants'
 
-export function setGoToRange({ range, start, end }) {
+export function setGoToRange({
+  range, start, end, timeFrame = '1h',
+}) {
   if ((start > end) || !isValidTimeStamp(start) || !isValidTimeStamp(end)) {
     return updateErrorStatus({
       id: 'status.fail',
@@ -17,8 +19,9 @@ export function setGoToRange({ range, start, end }) {
       type: types.SET_GO_TO_RANGE,
       payload: {
         range,
-        start: start - 3600000,
-        end: start + 3600000,
+        // -+ offsets to center single selected date on the chart range
+        start: start - OFFSETS[timeFrame],
+        end: start + OFFSETS[timeFrame],
       },
     }
   }

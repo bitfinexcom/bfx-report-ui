@@ -15,6 +15,7 @@ const GoToRangeDialog = ({
   t,
   isOpen,
   timeRange,
+  timeFrame,
   setTimeRange,
   toggleDialog,
   setGoToRangePreserve,
@@ -43,7 +44,9 @@ const GoToRangeDialog = ({
   const { start, end, range } = selectedTimeFrame
 
   const onConfirm = () => {
-    setTimeRange({ start, end, range })
+    setTimeRange({
+      start, end, range, timeFrame,
+    })
     setGoToRangePreserve(true)
     toggleDialog()
   }
@@ -99,6 +102,7 @@ GoToRangeDialog.propTypes = {
     range: PropTypes.string.isRequired,
     start: PropTypes.number,
   }).isRequired,
+  timeFrame: PropTypes.string.isRequired,
   setTimeRange: PropTypes.func.isRequired,
   toggleDialog: PropTypes.func.isRequired,
   setGoToRangePreserve: PropTypes.func.isRequired,
