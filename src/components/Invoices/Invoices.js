@@ -73,10 +73,14 @@ class Invoices extends PureComponent {
       showContent = (
         <>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination loading={pageLoading} target={TYPE} />
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
         </>
       )
     }
