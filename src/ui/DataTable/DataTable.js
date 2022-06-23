@@ -96,6 +96,18 @@ class DataTable extends PureComponent {
     return tableColumns[col].copyText(row)
   }
 
+  onColumnWidthChanged = (index, width) => {
+    const { section, tableColumns, setColumnsWidth } = this.props
+
+    const updatedColumn = {
+      ...tableColumns[index],
+      width,
+    }
+    tableColumns[index] = updatedColumn
+
+    setColumnsWidth({ section, columns: tableColumns })
+  }
+
   render() {
     const {
       className, numRows, t, tableColumns, device, tableScroll,
@@ -113,6 +125,7 @@ class DataTable extends PureComponent {
         enableRowHeader={false}
         columnWidths={columnWidths}
         onSelection={this.onSelection}
+        onColumnWidthChanged={this.onColumnWidthChanged}
         getCellClipboardData={this.getCellClipboardData}
         onCopy={this.onCopy}
         bodyContextMenuRenderer={this.renderBodyContextMenu}
@@ -141,15 +154,18 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
 
 DataTable.propTypes = {
   className: PropTypes.string,
+  section: PropTypes.string,
   numRows: PropTypes.number.isRequired,
   tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
   device: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
+  setColumnsWidth: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
 }
 
 DataTable.defaultProps = {
   className: '',
+  section: undefined,
 }
 
 export default DataTable
