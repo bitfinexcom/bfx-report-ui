@@ -1,3 +1,4 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
@@ -16,6 +17,7 @@ const mapDispatchToProps = {
   setColumnsWidth,
 }
 
-const DataTableContainer = connect(mapStateToProps, mapDispatchToProps)(DataTable)
-
-export default withTranslation('translations')(DataTableContainer)
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(DataTable)
