@@ -15,6 +15,7 @@ import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
 import FundingPayment from 'components/FundingPayment'
+import GoToRangeDialog from 'components/GoToRangeDialog'
 import Invoices from 'components/Invoices'
 import Ledgers from 'components/Ledgers'
 import LoanReport from 'components/LoanReport'
@@ -321,6 +322,7 @@ class Main extends PureComponent {
         <PaginationDialog />
         <Preferences />
         <TimeFrameDialog />
+        <GoToRangeDialog />
       </Fragment>
     ) : ''
   }

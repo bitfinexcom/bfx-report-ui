@@ -87,6 +87,15 @@ export function toggleTimeFrameDialog() {
 }
 
 /**
+ * Create an action to show/hide go to range dialog.
+ */
+export function toggleGoToRangeDialog() {
+  return {
+    type: types.TOGGLE_GO_TO_RANGE_DIALOG,
+  }
+}
+
+/**
  * Create an action to proceed with pagination request.
  * @param {boolean} payload indicator of whether pagination request should proceed
  */
@@ -124,5 +133,6 @@ export default {
   togglePaginationDialog,
   togglePreferencesDialog,
   toggleTimeFrameDialog,
+  toggleGoToRangeDialog,
   proceedPaginationRequest,
 }

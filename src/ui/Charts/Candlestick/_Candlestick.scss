@@ -1,6 +1,10 @@
 .candlestick {
   position: relative;
 
+  &--loading {
+    display: none;
+  }
+
   &-tooltip {
     width: 175px;
     height: 78px;

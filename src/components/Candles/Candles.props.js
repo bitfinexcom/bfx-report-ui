@@ -43,6 +43,7 @@ export const propTypes = {
   refresh: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  toggleGoToRangeDialog: PropTypes.func.isRequired,
   trades: TRADES_PROPS,
 }
 

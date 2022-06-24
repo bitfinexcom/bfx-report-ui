@@ -11,6 +11,7 @@ const initialState = {
   isPaginationDialogOpen: false,
   isPreferencesDialogOpen: false,
   isTimeFrameDialogOpen: false,
+  isGoToRangeDialogOpen: false,
   latestPaginationTimestamp: undefined,
   errorMessage: undefined,
   device: getDeviceType(),
@@ -69,6 +70,12 @@ export function uiReducer(state = initialState, action) {
       return {
         ...state,
         isTimeFrameDialogOpen: !state.isTimeFrameDialogOpen,
+      }
+    }
+    case types.TOGGLE_GO_TO_RANGE_DIALOG: {
+      return {
+        ...state,
+        isGoToRangeDialogOpen: !state.isGoToRangeDialogOpen,
       }
     }
     case types.UI_RESIZED:

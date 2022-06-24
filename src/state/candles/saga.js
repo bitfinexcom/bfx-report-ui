@@ -10,6 +10,8 @@ import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
+import goToRangeTypes from 'state/goToRange/constants'
+import { setGoToRange, handleGoToRange } from 'state/goToRange/actions'
 
 import types from './constants'
 import actions from './actions'
@@ -50,7 +52,6 @@ function* fetchData(section, data, method) {
     end,
   })
   yield put(actions.updateData({ [section]: result }))
-
   if (error) {
     yield put(actions.fetchFail({
       id: 'status.fail',
@@ -71,7 +72,6 @@ export function* fetchCandles({ payload: type }) {
     if (type === 'trades') {
       return yield call(fetchData, 'trades', trades, getReqTrades)
     }
-
     yield all([
       call(fetchData, 'candles', candles, getReqCandles),
       call(fetchData, 'trades', trades, getReqTrades),
@@ -94,8 +94,32 @@ function* fetchCandlesFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
+function* nextPageCheck(start) {
+  const candlesNextPage = yield select(selectors.getCandlesNextPage)
+  return start < candlesNextPage
+}
+
+function* handleGoToRangeSaga({ payload }) {
+  const { start } = payload
+  const candlesNextPage = yield select(selectors.getCandlesNextPage)
+  if (candlesNextPage) {
+    const shouldUpdateCandles = yield call(nextPageCheck, start)
+    if (shouldUpdateCandles) {
+      yield call(fetchCandles, { payload: 'candles' })
+      yield put(actions.setChartLoading(true))
+      yield put(handleGoToRange(payload))
+    } else {
+      yield put(actions.setChartLoading(false))
+      yield put(setGoToRange(payload))
+    }
+  } else {
+    yield put(setGoToRange(payload))
+  }
+}
+
 export default function* candlesSaga() {
   yield takeLatest(types.FETCH, fetchCandles)
   yield takeLatest(types.REFRESH, refreshCandles)
   yield takeLatest(types.FETCH_FAIL, fetchCandlesFail)
+  yield takeLatest(goToRangeTypes.HANDLE_GO_TO_RANGE, handleGoToRangeSaga)
 }

@@ -1,0 +1,20 @@
+.range-type-select-row {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  .range-type-select-title {
+    margin-bottom: 10px;
+  } 
+
+  .range-type-select {
+    .bp3-button {
+      display: flex;
+      width: 190px;
+    }
+  }
+} 
+

@@ -6,12 +6,14 @@ import {
   refresh,
   setParams,
 } from 'state/candles/actions'
+import { toggleGoToRangeDialog } from 'state/ui/actions'
 import { getPairs } from 'state/symbols/selectors'
 import {
   getCandles,
   getCurrentFetchParams,
   getDataReceived,
   getPageLoading,
+  getChartLoading,
   getParams,
   getTrades,
 } from 'state/candles/selectors'
@@ -26,12 +28,14 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   pairs: getPairs(state),
   params: getParams(state),
+  isChartLoading: getChartLoading(state),
 })
 
 const mapDispatchToProps = {
   fetchData,
   refresh,
   setParams,
+  toggleGoToRangeDialog,
 }
 
 const CandlesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Candles))
