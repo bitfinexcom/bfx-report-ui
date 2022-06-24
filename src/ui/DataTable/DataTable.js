@@ -105,7 +105,7 @@ class DataTable extends PureComponent {
     }
     tableColumns[index] = updatedColumn
 
-    setColumnsWidth({ section, columns: tableColumns })
+    setColumnsWidth({ section, tableColumns })
   }
 
   render() {
