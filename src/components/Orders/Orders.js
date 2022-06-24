@@ -81,10 +81,14 @@ class Orders extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={pageLoading} />
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
         </Fragment>
       )
     }
