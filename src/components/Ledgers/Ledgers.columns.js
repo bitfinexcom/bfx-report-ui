@@ -1,5 +1,7 @@
 import React from 'react'
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
+import _head from 'lodash/head'
+import _filter from 'lodash/filter'
 
 import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
 import queryConstants from 'state/query/constants'
@@ -8,6 +10,7 @@ import { COLUMN_WIDTHS } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     filteredData,
     getFullTime,
     t,
@@ -15,11 +18,14 @@ export default function getColumns(props) {
     timeOffset,
   } = props
 
+  const getColumnWidth = (id, columns) => _head(_filter(columns,
+    column => column.id === id))?.width
+
   return [
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.LEDGERS_ID,
+      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.LEDGERS_ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
