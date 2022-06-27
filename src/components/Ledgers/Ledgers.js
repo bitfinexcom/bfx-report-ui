@@ -59,6 +59,7 @@ class Ledgers extends PureComponent {
       pageLoading,
       getFullTime,
       dataReceived,
+      columnsWidth,
       targetSymbols,
       existingCoins,
       targetCategory,
@@ -67,6 +68,7 @@ class Ledgers extends PureComponent {
       t,
       timeOffset,
       getFullTime,
+      columnsWidth,
       filteredData: entries,
     }).filter(({ id }) => columns[id])
 
