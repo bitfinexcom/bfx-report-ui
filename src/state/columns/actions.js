@@ -1,8 +1,9 @@
+import { pickColumnsWidth } from 'utils/columns'
+
 import types from './constants'
-import { prepareColumns } from './utils'
 
 export function setColumnsWidth({ section, tableColumns }) {
-  const columns = prepareColumns(tableColumns)
+  const columns = pickColumnsWidth(tableColumns)
   return {
     type: types.SET_COLUMNS_WIDTH,
     payload: { section, columns },
