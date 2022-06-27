@@ -1,4 +1,8 @@
 import React from 'react'
+import _map from 'lodash/map'
+import _pick from 'lodash/pick'
+import _head from 'lodash/head'
+import _filter from 'lodash/filter'
 
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
@@ -67,6 +71,12 @@ const COLUMN_WIDTHS_BIG_SCREENS = {
 export const COLUMN_WIDTHS = window.innerWidth < 2560
   ? COLUMN_WIDTH_STANDARD
   : COLUMN_WIDTHS_BIG_SCREENS
+
+export const pickColumnsWidth = (columns) => _map(columns,
+  column => _pick(column, ['id', 'width']))
+
+export const getColumnWidth = (id, columns) => _head(_filter(columns,
+  column => column.id === id))?.width
 
 export const getFrameworkPositionsColumns = (props) => {
   const {
