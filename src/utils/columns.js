@@ -72,7 +72,7 @@ export const COLUMN_WIDTHS = window.innerWidth < 2560
   ? COLUMN_WIDTH_STANDARD
   : COLUMN_WIDTHS_BIG_SCREENS
 
-export const pickColumnsWidth = (columns) => _map(columns,
+export const pickColumnsWidth = columns => _map(columns,
   column => _pick(column, ['id', 'width']))
 
 export const getColumnWidth = (id, columns) => _head(_filter(columns,
@@ -404,6 +404,8 @@ export const getWalletsTickersColumns = (props) => {
 
 export default {
   COLUMN_WIDTHS,
+  pickColumnsWidth,
+  getColumnWidth,
   getFrameworkPositionsColumns,
   getPositionsTickersColumns,
   getWalletsTickersColumns,
