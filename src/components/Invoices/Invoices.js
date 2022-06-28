@@ -52,6 +52,7 @@ class Invoices extends PureComponent {
       timeOffset,
       getFullTime,
       pageLoading,
+      columnsWidth,
       dataReceived,
       existingCoins,
       targetSymbols,
@@ -61,6 +62,7 @@ class Invoices extends PureComponent {
       t,
       timeOffset,
       getFullTime,
+      columnsWidth,
       filteredData: entries,
     }).filter(({ id }) => columns[id])
 

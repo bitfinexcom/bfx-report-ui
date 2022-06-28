@@ -20,6 +20,7 @@ import {
   getTargetSymbols,
 } from 'state/invoices/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import queryConstants from 'state/query/constants'
 
@@ -33,6 +34,7 @@ const mapStateToProps = state => ({
   existingCoins: getExistingCoins(state),
   targetSymbols: getTargetSymbols(state),
   columns: getColumns(state, queryConstants.MENU_INVOICES),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_INVOICES),
   entries: getFilteredEntries(state, queryConstants.MENU_INVOICES, getEntries(state)),
 })
 
