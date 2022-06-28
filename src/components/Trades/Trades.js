@@ -37,6 +37,7 @@ class Trades extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       entries,
       existingPairs,
       getFullTime,
@@ -48,6 +49,7 @@ class Trades extends PureComponent {
       timeOffset,
     } = this.props
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
