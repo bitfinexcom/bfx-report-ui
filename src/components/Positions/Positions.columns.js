@@ -9,12 +9,13 @@ import {
 import queryConstants from 'state/query/constants'
 import JSONFormat from 'ui/JSONFormat'
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
 
 const { MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT } = queryConstants
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     target,
     filteredData,
     getFullTime,
@@ -40,7 +41,7 @@ export default function getColumns(props) {
       {
         id: 'liquidationPrice',
         name: 'column.liq-price',
-        width: COLUMN_WIDTHS.AMOUNT,
+        width: getColumnWidth('liquidationPrice', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
           const { liquidationPrice } = filteredData[rowIndex]
           const fixedPrice = fixedFloat(liquidationPrice)
@@ -58,7 +59,7 @@ export default function getColumns(props) {
       {
         id: 'pl',
         name: 'column.pl',
-        width: 100,
+        width: getColumnWidth('pl', columnsWidth) || 100,
         renderer: (rowIndex) => {
           const { pl } = filteredData[rowIndex]
           return (
@@ -75,7 +76,7 @@ export default function getColumns(props) {
       {
         id: 'plPerc',
         name: 'column.plperc',
-        width: 100,
+        width: getColumnWidth('plPerc', columnsWidth) || 100,
         renderer: (rowIndex) => {
           const { plPerc } = filteredData[rowIndex]
           return (
@@ -97,7 +98,7 @@ export default function getColumns(props) {
       {
         id: 'collateral',
         name: 'column.collateral',
-        width: COLUMN_WIDTHS.AMOUNT,
+        width: getColumnWidth('collateral', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
         renderer: (rowIndex) => {
           const { collateral } = filteredData[rowIndex]
           const fixedCollateral = fixedFloat(collateral)
@@ -115,7 +116,7 @@ export default function getColumns(props) {
       {
         id: 'meta',
         name: 'column.meta',
-        width: COLUMN_WIDTHS.META,
+        width: getColumnWidth('meta', columnsWidth) || COLUMN_WIDTHS.META,
         renderer: (rowIndex) => {
           const { meta = '' } = filteredData[rowIndex]
           const formattedMeta = JSON.stringify(meta, undefined, 2)
@@ -137,7 +138,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -155,7 +156,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
-      width: COLUMN_WIDTHS.PAIR,
+      width: getColumnWidth('pair', columnsWidth) || COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -169,7 +170,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
@@ -186,7 +187,7 @@ export default function getColumns(props) {
     {
       id: 'basePrice',
       name: 'column.base-price',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('basePrice', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { basePrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(basePrice)
@@ -205,7 +206,7 @@ export default function getColumns(props) {
     {
       id: 'marginFunding',
       name: 'column.fundingCost',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('marginFunding', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { marginFunding } = filteredData[rowIndex]
         const fixedSwap = fixedFloat(marginFunding)
@@ -223,7 +224,7 @@ export default function getColumns(props) {
     {
       id: 'marginFundingType',
       name: 'column.fundingType',
-      width: 130,
+      width: getColumnWidth('marginFundingType', columnsWidth) || 130,
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex])
         return (
@@ -237,7 +238,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'column.status',
-      width: 100,
+      width: getColumnWidth('status', columnsWidth) || 100,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -251,7 +252,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       nameStr: `${t('column.updated')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mtsUpdate', columnsWidth) || COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
