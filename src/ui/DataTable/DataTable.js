@@ -99,13 +99,14 @@ class DataTable extends PureComponent {
   onColumnWidthChanged = (index, width) => {
     const { section, tableColumns, setColumnsWidth } = this.props
 
-    const updatedColumn = {
-      ...tableColumns[index],
-      width,
+    if (section) {
+      const updatedColumn = {
+        ...tableColumns[index],
+        width,
+      }
+      tableColumns[index] = updatedColumn
+      setColumnsWidth({ section, tableColumns })
     }
-    tableColumns[index] = updatedColumn
-
-    setColumnsWidth({ section, tableColumns })
   }
 
   render() {
