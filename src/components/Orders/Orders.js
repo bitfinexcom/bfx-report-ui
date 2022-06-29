@@ -54,6 +54,7 @@ class Orders extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       existingPairs,
       entries,
       dataReceived,
@@ -65,6 +66,7 @@ class Orders extends PureComponent {
       timeOffset,
     } = this.props
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       onIdClick: this.jumpToOrderTrades,
