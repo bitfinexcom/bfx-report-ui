@@ -43,6 +43,7 @@ class Movements extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       entries,
       existingCoins,
       getFullTime,
@@ -55,6 +56,7 @@ class Movements extends PureComponent {
     } = this.props
 
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
