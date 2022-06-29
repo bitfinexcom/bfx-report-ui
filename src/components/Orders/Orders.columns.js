@@ -6,10 +6,11 @@ import {
 
 import JSONFormat from 'ui/JSONFormat'
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     filteredData,
     getFullTime,
     onIdClick,
@@ -21,7 +22,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.ORDER_ID,
+      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.ORDER_ID,
       renderer: (rowIndex) => {
         const { id, pair, amountExecuted } = filteredData[rowIndex]
         /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -41,7 +42,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
-      width: COLUMN_WIDTHS.PAIR,
+      width: getColumnWidth('pair', columnsWidth) || COLUMN_WIDTHS.PAIR,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -55,7 +56,7 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'column.type',
-      width: COLUMN_WIDTHS.ORDER_TYPE,
+      width: getColumnWidth('type', columnsWidth) || COLUMN_WIDTHS.ORDER_TYPE,
       renderer: (rowIndex) => {
         const { type } = filteredData[rowIndex]
         return (
@@ -69,7 +70,7 @@ export default function getColumns(props) {
     {
       id: 'amountOrig',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amountOrig', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amountOrig } = filteredData[rowIndex]
         const fixedAmount = fixedFloat(amountOrig)
@@ -87,7 +88,7 @@ export default function getColumns(props) {
     {
       id: 'amountExecuted',
       name: 'column.amount-exe',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amountExecuted', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amountExecuted } = filteredData[rowIndex]
         return (
@@ -104,7 +105,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'column.price',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('price', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { price } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(price)
@@ -122,7 +123,7 @@ export default function getColumns(props) {
     {
       id: 'priceAvg',
       name: 'column.avgprice',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('priceAvg', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { priceAvg } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(priceAvg)
@@ -140,7 +141,7 @@ export default function getColumns(props) {
     {
       id: 'mtsCreate',
       nameStr: `${t('column.created')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mtsCreate', columnsWidth) || COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (
@@ -156,7 +157,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       nameStr: `${t('column.updated')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mtsUpdate', columnsWidth) || COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
@@ -172,7 +173,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'column.status',
-      width: COLUMN_WIDTHS.ORDER_STATUS,
+      width: getColumnWidth('status', columnsWidth) || COLUMN_WIDTHS.ORDER_STATUS,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -186,7 +187,7 @@ export default function getColumns(props) {
     {
       id: 'priceTrailing',
       name: 'column.pricetrail',
-      width: 125,
+      width: getColumnWidth('priceTrailing', columnsWidth) || 125,
       renderer: (rowIndex) => {
         const { priceTrailing } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(priceTrailing)
@@ -204,7 +205,7 @@ export default function getColumns(props) {
     {
       id: 'typePrev',
       name: 'column.typeprev',
-      width: COLUMN_WIDTHS.ORDER_TYPE,
+      width: getColumnWidth('typePrev', columnsWidth) || COLUMN_WIDTHS.ORDER_TYPE,
       renderer: (rowIndex) => {
         const { typePrev } = filteredData[rowIndex]
         return (
@@ -218,7 +219,7 @@ export default function getColumns(props) {
     {
       id: 'meta',
       name: 'column.meta',
-      width: COLUMN_WIDTHS.META,
+      width: getColumnWidth('meta', columnsWidth) || COLUMN_WIDTHS.META,
       renderer: (rowIndex) => {
         const { meta } = filteredData[rowIndex]
         const formattedMeta = JSON.stringify(meta, undefined, 2)
