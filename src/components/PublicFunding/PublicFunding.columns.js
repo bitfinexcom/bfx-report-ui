@@ -5,10 +5,11 @@ import {
 } from '@blueprintjs/table'
 
 import { fixedFloat, formatAmount } from 'ui/utils'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     filteredData,
     getFullTime,
     t,
@@ -20,7 +21,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.ID,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -34,7 +35,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('column.time')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mts', columnsWidth) || COLUMN_WIDTHS.DATE,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
@@ -50,7 +51,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         const fixedAmount = fixedFloat(amount)
@@ -68,7 +69,7 @@ export default function getColumns(props) {
     {
       id: 'rate',
       name: 'column.rateperc',
-      width: COLUMN_WIDTHS.RATE,
+      width: getColumnWidth('rate', columnsWidth) || COLUMN_WIDTHS.RATE,
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
         return (
@@ -85,7 +86,7 @@ export default function getColumns(props) {
     {
       id: 'period',
       name: 'column.period',
-      width: COLUMN_WIDTHS.PERIOD,
+      width: getColumnWidth('period', columnsWidth) || COLUMN_WIDTHS.PERIOD,
       renderer: (rowIndex) => {
         const period = `${filteredData[rowIndex].period} ${t('column.days')}`
         return (
@@ -105,7 +106,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
-      width: COLUMN_WIDTHS.SYMBOL,
+      width: getColumnWidth('currency', columnsWidth) || COLUMN_WIDTHS.SYMBOL,
       renderer: () => (
         <Cell tooltip={targetSymbol}>
           {targetSymbol}
