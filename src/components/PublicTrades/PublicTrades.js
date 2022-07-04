@@ -40,6 +40,7 @@ class PublicTrades extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       getFullTime,
       entries,
       dataReceived,
@@ -51,6 +52,7 @@ class PublicTrades extends PureComponent {
     } = this.props
 
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
