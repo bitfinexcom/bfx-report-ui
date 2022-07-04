@@ -48,6 +48,7 @@ class PublicFunding extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       getFullTime,
       entries,
       dataReceived,
@@ -59,6 +60,7 @@ class PublicFunding extends PureComponent {
     } = this.props
 
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
@@ -75,6 +77,7 @@ class PublicFunding extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
