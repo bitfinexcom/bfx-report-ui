@@ -55,6 +55,7 @@ class Tickers extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       existingPairs,
       getFullTime,
       entries,
@@ -67,6 +68,7 @@ class Tickers extends PureComponent {
     } = this.props
 
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
@@ -82,6 +84,7 @@ class Tickers extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
