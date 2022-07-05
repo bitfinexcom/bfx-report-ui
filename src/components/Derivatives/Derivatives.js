@@ -55,6 +55,7 @@ class Derivatives extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       inactivePairs,
       pairs,
       existingPairs,
@@ -69,6 +70,7 @@ class Derivatives extends PureComponent {
     } = this.props
     const numRows = entries.length
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
@@ -84,6 +86,7 @@ class Derivatives extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={numRows}
             tableColumns={tableColumns}
           />
