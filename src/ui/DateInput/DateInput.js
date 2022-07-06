@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import moment from 'moment-timezone'
 import { Position } from '@blueprintjs/core'
 import { DateInput as BptDateInput, TimePrecision } from '@blueprintjs/datetime'
@@ -10,8 +9,6 @@ import {
 } from 'state/utils'
 
 import { propTypes, defaultProps } from './DateInput.props'
-
-const currentTimezone = moment.tz.guess()
 
 class DateInput extends PureComponent {
   state = {
@@ -42,13 +39,14 @@ class DateInput extends PureComponent {
       daysOnly,
       defaultValue,
       t,
+      timezone,
       value,
     } = this.props
     const { isOpen } = this.state
 
     const { formatDate, parseDate } = daysOnly
       ? momentFormatterDays()
-      : momentFormatter(DEFAULT_DATETIME_FORMAT, currentTimezone)
+      : momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
 
     const timePrecision = !daysOnly ? TimePrecision.SECOND : undefined
     const icon = isOpen
@@ -83,4 +81,4 @@ class DateInput extends PureComponent {
 DateInput.propTypes = propTypes
 DateInput.defaultProps = defaultProps
 
-export default withTranslation('translations')(DateInput)
+export default DateInput
