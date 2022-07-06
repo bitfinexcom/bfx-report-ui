@@ -1,1 +1,1 @@
-export { default } from './DateInput'
+export { default } from './DateInput.container'
