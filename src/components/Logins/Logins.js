@@ -27,6 +27,7 @@ class Logins extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       getFullTime,
       entries,
       dataReceived,
@@ -37,6 +38,7 @@ class Logins extends PureComponent {
     } = this.props
 
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
@@ -52,6 +54,7 @@ class Logins extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
