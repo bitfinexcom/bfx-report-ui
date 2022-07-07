@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 const LOGINS_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  mts: PropTypes.number.isRequired,
+  mts: PropTypes.number,
   ip: PropTypes.string.isRequired,
   browser: PropTypes.string.isRequired,
   version: PropTypes.string.isRequired,
