@@ -3,6 +3,7 @@ import _map from 'lodash/map'
 import _pick from 'lodash/pick'
 import _head from 'lodash/head'
 import _filter from 'lodash/filter'
+import _toUpper from 'lodash/toUpper'
 
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
@@ -76,7 +77,7 @@ export const pickColumnsWidth = columns => _map(columns,
   column => _pick(column, ['id', 'width']))
 
 export const getColumnWidth = (id, columns) => _head(_filter(columns,
-  column => column.id === id))?.width
+  column => column.id === id))?.width ?? COLUMN_WIDTHS[_toUpper(id)]
 
 export const getFrameworkPositionsColumns = (props) => {
   const {
