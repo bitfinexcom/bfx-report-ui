@@ -5,7 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -20,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
-      width: getColumnWidth('pair', columnsWidth) || 140,
+      width: getColumnWidth('pair', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -34,7 +34,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'column.priceDeriv',
-      width: getColumnWidth('price', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('price', columnsWidth),
       renderer: (rowIndex) => {
         const { price } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(price)
@@ -52,7 +52,7 @@ export default function getColumns(props) {
     {
       id: 'priceSpot',
       name: 'column.priceSpot',
-      width: getColumnWidth('priceSpot', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('priceSpot', columnsWidth),
       renderer: (rowIndex) => {
         const { priceSpot } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(priceSpot)
@@ -70,7 +70,7 @@ export default function getColumns(props) {
     {
       id: 'fundBal',
       name: 'column.fundBalance',
-      width: getColumnWidth('fundBal', columnsWidth) || 205,
+      width: getColumnWidth('fundBal', columnsWidth),
       renderer: (rowIndex) => {
         const { fundBal } = filteredData[rowIndex]
         const fixedBalance = fixedFloat(fundBal)
@@ -88,7 +88,7 @@ export default function getColumns(props) {
     {
       id: 'fundingAccrued',
       name: 'column.fundingAccrued',
-      width: getColumnWidth('fundingAccrued', columnsWidth) || 185,
+      width: getColumnWidth('fundingAccrued', columnsWidth),
       renderer: (rowIndex) => {
         const { fundingAccrued } = filteredData[rowIndex]
         const fixedFunding = fixedFloat(fundingAccrued)
@@ -106,7 +106,7 @@ export default function getColumns(props) {
     {
       id: 'fundingStep',
       name: 'column.fundingStep',
-      width: getColumnWidth('fundingStep', columnsWidth) || 155,
+      width: getColumnWidth('fundingStep', columnsWidth),
       renderer: (rowIndex) => {
         const { fundingStep } = filteredData[rowIndex]
         return (
@@ -123,7 +123,7 @@ export default function getColumns(props) {
     {
       id: 'timestamp',
       nameStr: `${t('column.updated')} (${timeOffset})`,
-      width: getColumnWidth('timestamp', columnsWidth) || COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('timestamp', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].timestamp)
         return (
@@ -139,7 +139,7 @@ export default function getColumns(props) {
     {
       id: 'clampMin',
       name: 'column.clampMin',
-      width: getColumnWidth('clampMin', columnsWidth) || 155,
+      width: getColumnWidth('clampMin', columnsWidth),
       renderer: (rowIndex) => {
         const { clampMin } = filteredData[rowIndex]
         return (
@@ -156,7 +156,7 @@ export default function getColumns(props) {
     {
       id: 'clampMax',
       name: 'column.clampMax',
-      width: getColumnWidth('clampMax', columnsWidth) || 155,
+      width: getColumnWidth('clampMax', columnsWidth),
       renderer: (rowIndex) => {
         const { clampMax } = filteredData[rowIndex]
         return (

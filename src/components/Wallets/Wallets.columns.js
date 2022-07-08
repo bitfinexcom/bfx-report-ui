@@ -26,7 +26,7 @@ export default function getColumns(props) {
     {
       id: 'balance',
       name: 'column.balance',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: COLUMN_WIDTHS.amount,
       renderer: (rowIndex) => {
         const { balance } = filteredData[rowIndex]
         const fixedBalance = fixedFloat(balance)
@@ -45,7 +45,7 @@ export default function getColumns(props) {
       {
         id: 'balanceUsd',
         name: 'column.balanceUsd',
-        width: COLUMN_WIDTHS.BALANCE_USD,
+        width: COLUMN_WIDTHS.balanceUsd,
         renderer: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]
           const fixedBalanceUsd = fixedFloat(balanceUsd)

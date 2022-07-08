@@ -7,7 +7,7 @@ import {
 import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 import Explorer from 'ui/Explorer'
 import config from 'config'
-import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -22,7 +22,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -36,7 +36,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdated',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: getColumnWidth('mtsUpdated', columnsWidth) || COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mtsUpdated', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
         return (
@@ -52,7 +52,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
-      width: getColumnWidth('currency', columnsWidth) || COLUMN_WIDTHS.SYMBOL,
+      width: getColumnWidth('currency', columnsWidth),
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
@@ -66,7 +66,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'column.status',
-      width: getColumnWidth('status', columnsWidth) || COLUMN_WIDTHS.MOVEMENT_STATUS,
+      width: getColumnWidth('status', columnsWidth),
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -80,7 +80,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'column.amount',
-      width: getColumnWidth('amount', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth),
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(amount)} ${currency}`
@@ -99,7 +99,7 @@ export default function getColumns(props) {
       {
         id: 'amountUsd',
         name: 'column.amountUsd',
-        width: getColumnWidth('amountUsd', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+        width: getColumnWidth('amountUsd', columnsWidth),
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
           const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
@@ -118,7 +118,7 @@ export default function getColumns(props) {
     {
       id: 'fees',
       name: 'column.fees',
-      width: getColumnWidth('fees', columnsWidth) || COLUMN_WIDTHS.FEE,
+      width: getColumnWidth('fees', columnsWidth),
       renderer: (rowIndex) => {
         const { fees, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(fees)} ${currency}`
@@ -142,7 +142,7 @@ export default function getColumns(props) {
     {
       id: 'destinationAddress',
       name: 'column.destination',
-      width: getColumnWidth('destinationAddress', columnsWidth) || 400,
+      width: getColumnWidth('destinationAddress', columnsWidth),
       renderer: (rowIndex) => {
         const { currency, destinationAddress } = filteredData[rowIndex]
         return (
@@ -160,7 +160,7 @@ export default function getColumns(props) {
     {
       id: 'transactionId',
       name: 'column.transactionId',
-      width: getColumnWidth('transactionId', columnsWidth) || 135,
+      width: getColumnWidth('transactionId', columnsWidth),
       renderer: (rowIndex) => {
         const { transactionId } = filteredData[rowIndex]
         return (
@@ -174,7 +174,7 @@ export default function getColumns(props) {
     {
       id: 'note',
       name: 'column.note',
-      width: getColumnWidth('note', columnsWidth) || 250,
+      width: getColumnWidth('note', columnsWidth),
       renderer: (rowIndex) => {
         const { note } = filteredData[rowIndex]
         return (

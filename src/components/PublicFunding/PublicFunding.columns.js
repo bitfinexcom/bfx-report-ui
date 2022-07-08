@@ -5,7 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import { fixedFloat, formatAmount } from 'ui/utils'
-import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -21,7 +21,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -35,7 +35,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('column.time')} (${timeOffset})`,
-      width: getColumnWidth('mts', columnsWidth) || COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
@@ -51,7 +51,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'column.amount',
-      width: getColumnWidth('amount', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth),
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         const fixedAmount = fixedFloat(amount)
@@ -69,7 +69,7 @@ export default function getColumns(props) {
     {
       id: 'rate',
       name: 'column.rateperc',
-      width: getColumnWidth('rate', columnsWidth) || COLUMN_WIDTHS.RATE,
+      width: getColumnWidth('rate', columnsWidth),
       renderer: (rowIndex) => {
         const { rate } = filteredData[rowIndex]
         return (
@@ -86,7 +86,7 @@ export default function getColumns(props) {
     {
       id: 'period',
       name: 'column.period',
-      width: getColumnWidth('period', columnsWidth) || COLUMN_WIDTHS.PERIOD,
+      width: getColumnWidth('period', columnsWidth),
       renderer: (rowIndex) => {
         const period = `${filteredData[rowIndex].period} ${t('column.days')}`
         return (
@@ -106,7 +106,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
-      width: getColumnWidth('currency', columnsWidth) || COLUMN_WIDTHS.SYMBOL,
+      width: getColumnWidth('currency', columnsWidth),
       renderer: () => (
         <Cell tooltip={targetSymbol}>
           {targetSymbol}

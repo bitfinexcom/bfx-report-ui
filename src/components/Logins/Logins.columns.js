@@ -5,7 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
-import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -20,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -34,7 +34,7 @@ export default function getColumns(props) {
     {
       id: 'time',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: getColumnWidth('time', columnsWidth) || COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('time', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].time)
         return (
@@ -50,7 +50,7 @@ export default function getColumns(props) {
     {
       id: 'ip',
       name: 'column.ip',
-      width: getColumnWidth('ip', columnsWidth) || COLUMN_WIDTHS.IP,
+      width: getColumnWidth('ip', columnsWidth),
       renderer: (rowIndex) => {
         const { ip } = filteredData[rowIndex]
         return (
@@ -64,7 +64,7 @@ export default function getColumns(props) {
     {
       id: 'browser',
       name: 'column.browser',
-      width: getColumnWidth('browser', columnsWidth) || 120,
+      width: getColumnWidth('browser', columnsWidth),
       renderer: (rowIndex) => {
         const { browser } = filteredData[rowIndex]
         return (
@@ -78,7 +78,7 @@ export default function getColumns(props) {
     {
       id: 'version',
       name: 'column.version',
-      width: getColumnWidth('version', columnsWidth) || 120,
+      width: getColumnWidth('version', columnsWidth),
       renderer: (rowIndex) => {
         const { version } = filteredData[rowIndex]
         return (
@@ -92,7 +92,7 @@ export default function getColumns(props) {
     {
       id: 'mobile',
       name: 'column.mobile',
-      width: getColumnWidth('mobile', columnsWidth) || 90,
+      width: getColumnWidth('mobile', columnsWidth),
       renderer: (rowIndex) => {
         const { mobile } = filteredData[rowIndex]
         return (
@@ -106,7 +106,7 @@ export default function getColumns(props) {
     {
       id: 'extra',
       name: 'column.meta',
-      width: getColumnWidth('extra', columnsWidth) || COLUMN_WIDTHS.META,
+      width: getColumnWidth('extra', columnsWidth),
       renderer: (rowIndex) => {
         const { extra } = filteredData[rowIndex]
         const formattedExtra = JSON.stringify(extra, undefined, 2)

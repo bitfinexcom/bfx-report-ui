@@ -3,7 +3,7 @@ import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 import { demapPairs, demapSymbols } from 'state/symbols/utils'
-import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 const getFeePercent = (entry) => {
   const {
@@ -43,7 +43,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -57,7 +57,7 @@ export default function getColumns(props) {
     {
       id: 'orderID',
       name: 'column.orderid',
-      width: getColumnWidth('orderID', columnsWidth) || COLUMN_WIDTHS.ORDER_ID,
+      width: getColumnWidth('orderID', columnsWidth),
       renderer: (rowIndex) => {
         const { orderID } = filteredData[rowIndex]
         return (
@@ -71,7 +71,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
-      width: getColumnWidth('pair', columnsWidth) || COLUMN_WIDTHS.PAIR,
+      width: getColumnWidth('pair', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -85,7 +85,7 @@ export default function getColumns(props) {
     {
       id: 'execAmount',
       name: 'column.amount',
-      width: getColumnWidth('execAmount', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('execAmount', columnsWidth),
       renderer: (rowIndex) => {
         const { execAmount } = filteredData[rowIndex]
         return (
@@ -102,7 +102,7 @@ export default function getColumns(props) {
     {
       id: 'execPrice',
       name: 'column.price',
-      width: getColumnWidth('execPrice', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('execPrice', columnsWidth),
       renderer: (rowIndex) => {
         const { execPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(execPrice)
@@ -120,7 +120,7 @@ export default function getColumns(props) {
     {
       id: 'fee',
       name: 'column.fee',
-      width: getColumnWidth('fee', columnsWidth) || COLUMN_WIDTHS.FEE,
+      width: getColumnWidth('fee', columnsWidth),
       renderer: (rowIndex) => {
         const { fee, feeCurrency } = filteredData[rowIndex]
         const fixedFee = fixedFloat(fee)
@@ -145,7 +145,7 @@ export default function getColumns(props) {
     {
       id: 'feePercent',
       name: 'column.feePercent',
-      width: getColumnWidth('feePercent', columnsWidth) || COLUMN_WIDTHS.FEE_PERC,
+      width: getColumnWidth('feePercent', columnsWidth),
       renderer: (rowIndex) => {
         const feePercent = getFeePercent(filteredData[rowIndex])
         return (
@@ -162,7 +162,7 @@ export default function getColumns(props) {
     {
       id: 'mtsCreate',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: getColumnWidth('mtsCreate', columnsWidth) || COLUMN_WIDTHS.TRADES_DATE,
+      width: getColumnWidth('mtsCreate', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (

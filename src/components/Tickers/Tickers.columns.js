@@ -5,7 +5,7 @@ import {
 } from '@blueprintjs/table'
 
 import { fixedFloat } from 'ui/utils'
-import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -20,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'symbol',
       name: 'column.pair',
-      width: getColumnWidth('symbol', columnsWidth) || COLUMN_WIDTHS.SYMBOL,
+      width: getColumnWidth('symbol', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -34,7 +34,7 @@ export default function getColumns(props) {
     {
       id: 'bid',
       name: 'column.bid',
-      width: getColumnWidth('bid', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('bid', columnsWidth),
       renderer: (rowIndex) => {
         const { bid } = filteredData[rowIndex]
         const fixedBid = fixedFloat(bid)
@@ -52,7 +52,7 @@ export default function getColumns(props) {
     {
       id: 'ask',
       name: 'column.ask',
-      width: getColumnWidth('ask', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('ask', columnsWidth),
       renderer: (rowIndex) => {
         const { ask } = filteredData[rowIndex]
         const fixedAsk = fixedFloat(ask)
@@ -70,7 +70,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       nameStr: `${t('column.time')} (${timeOffset})`,
-      width: getColumnWidth('mtsUpdate', columnsWidth) || COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mtsUpdate', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (

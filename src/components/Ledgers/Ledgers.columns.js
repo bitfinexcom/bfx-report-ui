@@ -4,7 +4,7 @@ import { Cell, TruncatedFormat } from '@blueprintjs/table'
 import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
 import queryConstants from 'state/query/constants'
 import config from 'config'
-import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -20,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.LEDGERS_ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -35,7 +35,7 @@ export default function getColumns(props) {
       {
         id: 'description',
         name: 'column.description',
-        width: getColumnWidth('description', columnsWidth) || COLUMN_WIDTHS.LEDGERS_DESCRIPTION,
+        width: getColumnWidth('description', columnsWidth),
         renderer: (rowIndex) => {
           const { description } = filteredData[rowIndex]
           return (
@@ -50,7 +50,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
-      width: getColumnWidth('currency', columnsWidth) || COLUMN_WIDTHS.SYMBOL,
+      width: getColumnWidth('currency', columnsWidth),
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
@@ -64,7 +64,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'column.amount',
-      width: getColumnWidth('amount', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth),
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(amount)} ${currency}`
@@ -83,7 +83,7 @@ export default function getColumns(props) {
       {
         id: 'amountUsd',
         name: 'column.amountUsd',
-        width: getColumnWidth('amountUsd', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+        width: getColumnWidth('amountUsd', columnsWidth),
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
           const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
@@ -102,7 +102,7 @@ export default function getColumns(props) {
     {
       id: 'balance',
       name: 'column.balance',
-      width: getColumnWidth('balance', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('balance', columnsWidth),
       renderer: (rowIndex) => {
         const { balance, currency } = filteredData[rowIndex]
         const fixedBalance = fixedFloat(balance)
@@ -122,7 +122,7 @@ export default function getColumns(props) {
       {
         id: 'balanceUsd',
         name: 'column.balanceUsd',
-        width: getColumnWidth('balanceUsd', columnsWidth) || COLUMN_WIDTHS.BALANCE_USD,
+        width: getColumnWidth('balanceUsd', columnsWidth),
         renderer: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]
           const fixedBalanceUsd = fixedFloat(balanceUsd)
@@ -142,7 +142,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: getColumnWidth('mts', columnsWidth) || COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
@@ -158,7 +158,7 @@ export default function getColumns(props) {
     {
       id: 'wallet',
       name: 'column.wallet',
-      width: getColumnWidth('wallet', columnsWidth) || COLUMN_WIDTHS.LEDGERS_WALLET,
+      width: getColumnWidth('wallet', columnsWidth),
       renderer: (rowIndex) => {
         const { wallet } = filteredData[rowIndex]
         return (

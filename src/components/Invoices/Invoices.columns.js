@@ -2,7 +2,7 @@ import React from 'react'
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
-import { COLUMN_WIDTHS, getColumnWidth } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 import { fixedFloat, formatAmount } from 'ui/utils'
 
 export default function getColumns(props) {
@@ -18,7 +18,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: getColumnWidth('id', columnsWidth) || COLUMN_WIDTHS.INVOICES_ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -32,7 +32,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'column.amount',
-      width: getColumnWidth('amount', columnsWidth) || COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth),
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(amount)} ${currency}`
@@ -50,7 +50,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
-      width: getColumnWidth('currency', columnsWidth) || COLUMN_WIDTHS.SYMBOL,
+      width: getColumnWidth('currency', columnsWidth),
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
@@ -64,7 +64,7 @@ export default function getColumns(props) {
     {
       id: 'orderId',
       name: 'column.orderid',
-      width: COLUMN_WIDTHS.ORDER_ID,
+      width: getColumnWidth('orderId', columnsWidth),
       renderer: (rowIndex) => {
         const { orderId } = filteredData[rowIndex]
         return (
@@ -78,7 +78,7 @@ export default function getColumns(props) {
     {
       id: 'payCurrencies',
       name: 'column.payCurrencies',
-      width: getColumnWidth('payCurrencies', columnsWidth) || COLUMN_WIDTHS.META,
+      width: getColumnWidth('payCurrencies', columnsWidth),
       renderer: (rowIndex) => {
         const { payCurrencies } = filteredData[rowIndex]
         const formattedPayCurrenciesInfo = JSON.stringify(payCurrencies, undefined, 2)
@@ -95,7 +95,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'column.status',
-      width: getColumnWidth('status', columnsWidth) || COLUMN_WIDTHS.ORDER_ID,
+      width: getColumnWidth('status', columnsWidth),
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -109,7 +109,7 @@ export default function getColumns(props) {
     {
       id: 'customerInfo',
       name: 'column.customerInfo',
-      width: getColumnWidth('customerInfo', columnsWidth) || COLUMN_WIDTHS.META,
+      width: getColumnWidth('customerInfo', columnsWidth),
       renderer: (rowIndex) => {
         const { customerInfo } = filteredData[rowIndex]
         const formattedCustomerInfo = JSON.stringify(customerInfo, undefined, 2)
@@ -126,7 +126,7 @@ export default function getColumns(props) {
     {
       id: 'invoices',
       name: 'column.invoices',
-      width: getColumnWidth('invoices', columnsWidth) || COLUMN_WIDTHS.META,
+      width: getColumnWidth('invoices', columnsWidth),
       renderer: (rowIndex) => {
         const { invoices } = filteredData[rowIndex]
         const formattedInvoicesInfo = JSON.stringify(invoices, undefined, 2)
@@ -143,7 +143,7 @@ export default function getColumns(props) {
     {
       id: 'payment',
       name: 'column.payment',
-      width: getColumnWidth('payment', columnsWidth) || COLUMN_WIDTHS.META,
+      width: getColumnWidth('payment', columnsWidth),
       renderer: (rowIndex) => {
         const { payment } = filteredData[rowIndex]
         const formattedPayment = JSON.stringify(payment, undefined, 2)
@@ -160,7 +160,7 @@ export default function getColumns(props) {
     {
       id: 'duration',
       name: 'column.duration',
-      width: getColumnWidth('duration', columnsWidth) || COLUMN_WIDTHS.INVOICES_DURATION,
+      width: getColumnWidth('duration', columnsWidth),
       renderer: (rowIndex) => {
         const { duration } = filteredData[rowIndex]
         return (
@@ -174,7 +174,7 @@ export default function getColumns(props) {
     {
       id: 'merchantName',
       name: 'column.merchantName',
-      width: COLUMN_WIDTHS.INVOICES_MERCHANT_NAME,
+      width: getColumnWidth('merchantName', columnsWidth),
       renderer: (rowIndex) => {
         const { merchantName } = filteredData[rowIndex]
         return (
@@ -188,7 +188,7 @@ export default function getColumns(props) {
     {
       id: 'redirectUrl',
       name: 'column.redirectUrl',
-      width: getColumnWidth('redirectUrl', columnsWidth) || COLUMN_WIDTHS.INVOICES_REDIRECT_URL,
+      width: getColumnWidth('redirectUrl', columnsWidth),
       renderer: (rowIndex) => {
         const { redirectUrl } = filteredData[rowIndex]
         return (
@@ -210,7 +210,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: getColumnWidth('mts', columnsWidth) || COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
@@ -226,7 +226,7 @@ export default function getColumns(props) {
     {
       id: 'webhook',
       name: 'column.webhook',
-      width: getColumnWidth('webhook', columnsWidth) || COLUMN_WIDTHS.INVOICES_WEBHOOK,
+      width: getColumnWidth('webhook', columnsWidth),
       renderer: (rowIndex) => {
         const { webhook } = filteredData[rowIndex]
         return (
