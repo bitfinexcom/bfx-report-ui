@@ -150,7 +150,7 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
   nameStr: PropTypes.string,
   renderer: PropTypes.func.isRequired,
   copyText: PropTypes.func.isRequired,
-  width: PropTypes.number.isRequired,
+  width: PropTypes.number,
 })
 
 DataTable.propTypes = {
