@@ -3,70 +3,162 @@ import _map from 'lodash/map'
 import _pick from 'lodash/pick'
 import _head from 'lodash/head'
 import _filter from 'lodash/filter'
-import _toUpper from 'lodash/toUpper'
 
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 
 const COLUMN_WIDTH_STANDARD = {
-  AMOUNT: 132, // -33942.556789
-  BALANCE_USD: 137, // -33942.556789
-  DATE: 150, // 18-09-19 17:10:37
-  ID: 90, // 123456789
-  IP: 125, // 128.128.128.128
-  META: 160, // stringified object
-  ORDER_ID: 105, // 12345678901
-  PAIR: 110, // BTCF0/USTF0
-  PERIOD: 80, // 30 Day(s)
-  RATE: 120, // 0.00063000
-  SYMBOL: 92, // USTF0
-  FEE: 145,
-  FEE_PERC: 90,
-
-  LEDGERS_ID: 95,
-  LEDGERS_DESCRIPTION: 520,
-  LEDGERS_WALLET: 80,
-  TRADES_DATE: 150,
-  ORDER_TYPE: 135,
-  ORDER_STATUS: 165,
-  MOVEMENT_STATUS: 125,
-
-  INVOICES_ID: 270,
-  INVOICES_DURATION: 70,
-  INVOICES_MERCHANT_NAME: 120,
-  INVOICES_REDIRECT_URL: 300,
-  INVOICES_WEBHOOK: 150,
+  actualPrice: 132,
+  amount: 132,
+  amountOrig: 132,
+  amountUsd: 132,
+  amountExecuted: 132,
+  ask: 132,
+  balance: 132,
+  balanceUsd: 137,
+  basePrice: 132,
+  bid: 132,
+  browser: 120,
+  clampMin: 155,
+  clampMax: 155,
+  collateral: 132,
+  currency: 92,
+  customerInfo: 160,
+  date: 150,
+  description: 520,
+  destinationAddress: 400,
+  duration: 70,
+  execAmount: 132,
+  execPrice: 132,
+  extra: 160,
+  fee: 145,
+  fees: 145,
+  feePercent: 90,
+  fundBal: 205,
+  fundingAccrued: 185,
+  fundingStep: 155,
+  id: 95,
+  invoices: 160,
+  ip: 125,
+  liquidationPrice: 132,
+  log: 200,
+  marginFunding: 132,
+  marginFundingType: 130,
+  meta: 160,
+  merchantName: 120,
+  mobile: 90,
+  mts: 150,
+  mtsCreate: 150,
+  mtsOpening: 150,
+  mtsLastPayout: 150,
+  mtsUpdate: 150,
+  mtsUpdated: 150,
+  orderID: 105,
+  pair: 110,
+  payCurrencies: 160,
+  payment: 160,
+  period: 80,
+  pl: 110,
+  plPerc: 110,
+  positionPair: 120,
+  price: 132,
+  priceAvg: 132,
+  priceLiq: 132,
+  priceSpot: 132,
+  priceTrailing: 132,
+  rate: 120,
+  redirectUrl: 300,
+  side: 100,
+  status: 105,
+  symbol: 92,
+  swap: 132,
+  time: 150,
+  timestamp: 150,
+  transactionId: 135,
+  type: 135,
+  typePrev: 135,
+  userAgent: 160,
+  version: 120,
+  wallet: 80,
+  webhook: 150,
 }
 
 const COLUMN_WIDTHS_BIG_SCREENS = {
-  AMOUNT: 160,
-  BALANCE_USD: 160,
-  DATE: 170,
-  ID: 140,
-  IP: 115,
-  META: 160,
-  ORDER_ID: 124,
-  PAIR: 120,
-  PERIOD: 100,
-  RATE: 130,
-  SYMBOL: 110,
-  FEE: 180,
-  FEE_PERC: 115,
-
-  LEDGERS_ID: 118,
-  LEDGERS_DESCRIPTION: 640,
-  LEDGERS_WALLET: 120,
-  TRADES_DATE: 180,
-  ORDER_TYPE: 165,
-  ORDER_STATUS: 260,
-  MOVEMENT_STATUS: 150,
-
-  INVOICES_ID: 320,
-  INVOICES_DURATION: 90,
-  INVOICES_MERCHANT_NAME: 140,
-  INVOICES_REDIRECT_URL: 400,
-  INVOICES_WEBHOOK: 250,
+  actualPrice: 160,
+  amount: 160,
+  amountOrig: 160,
+  amountUsd: 160,
+  amountExecuted: 160,
+  ask: 160,
+  balance: 160,
+  balanceUsd: 160,
+  basePrice: 160,
+  bid: 160,
+  browser: 120,
+  clampMin: 155,
+  clampMax: 155,
+  collateral: 160,
+  currency: 110,
+  customerInfo: 160,
+  description: 640,
+  destinationAddress: 400,
+  duration: 90,
+  date: 170,
+  execAmount: 160,
+  execPrice: 160,
+  extra: 160,
+  fee: 180,
+  fees: 180,
+  feePercent: 115,
+  fundBal: 205,
+  fundingAccrued: 185,
+  fundingStep: 155,
+  id: 140,
+  ip: 115,
+  invoices: 160,
+  liquidationPrice: 160,
+  log: 200,
+  marginFunding: 160,
+  marginFundingType: 130,
+  meta: 160,
+  merchantName: 140,
+  mobile: 90,
+  mts: 170,
+  mtsCreate: 180,
+  mtsOpening: 180,
+  mtsLastPayout: 180,
+  mtsUpdate: 180,
+  mtsUpdated: 180,
+  note: 250,
+  orderID: 124,
+  pair: 120,
+  payCurrencies: 160,
+  payment: 160,
+  period: 100,
+  pl: 110,
+  plPerc: 110,
+  positionPair: 120,
+  price: 160,
+  priceAvg: 160,
+  priceSpot: 160,
+  priceLiq: 160,
+  priceTrailing: 160,
+  rate: 130,
+  redirectUrl: 400,
+  side: 100,
+  status: 124,
+  symbol: 110,
+  swap: 160,
+  time: 170,
+  timestamp: 170,
+  transactionId: 165,
+  type: 165,
+  typePrev: 165,
+  userAgent: 160,
+  version: 120,
+  wallet: 120,
+  webhook: 250,
 }
 
 export const COLUMN_WIDTHS = window.innerWidth < 2560
@@ -77,7 +169,7 @@ export const pickColumnsWidth = columns => _map(columns,
   column => _pick(column, ['id', 'width']))
 
 export const getColumnWidth = (id, columns) => _head(_filter(columns,
-  column => column.id === id))?.width ?? COLUMN_WIDTHS[_toUpper(id)]
+  column => column.id === id))?.width ?? COLUMN_WIDTHS[id]
 
 export const getFrameworkPositionsColumns = (props) => {
   const {
@@ -111,7 +203,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'pair',
       name: 'column.pair',
-      width: COLUMN_WIDTHS.PAIR,
+      width: COLUMN_WIDTHS.pair,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -125,7 +217,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'amount',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: COLUMN_WIDTHS.amount,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
@@ -142,7 +234,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'basePrice',
       name: 'column.base-price',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: COLUMN_WIDTHS.basePrice,
       renderer: (rowIndex) => {
         const { basePrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(basePrice)
@@ -160,7 +252,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'actualPrice',
       name: 'column.actual-price',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: COLUMN_WIDTHS.actualPrice,
       renderer: (rowIndex) => {
         const { actualPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(actualPrice)
@@ -178,7 +270,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'priceLiq',
       name: 'column.liq-price',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: COLUMN_WIDTHS.priceLiq,
       renderer: (rowIndex) => {
         const { liquidationPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(liquidationPrice)
@@ -247,7 +339,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'swap',
       name: 'column.fundingCost',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: COLUMN_WIDTHS.swap,
       renderer: (rowIndex) => {
         const { marginFunding } = filteredData[rowIndex]
         const fixedSwap = fixedFloat(marginFunding)
@@ -293,7 +385,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'mtsUpdate',
       nameStr: `${t('column.updated')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: COLUMN_WIDTHS.mtsUpdate,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
@@ -316,7 +408,7 @@ export const getPositionsTickersColumns = (props) => {
     {
       id: 'pair',
       name: 'column.pair',
-      width: COLUMN_WIDTHS.PAIR,
+      width: COLUMN_WIDTHS.pair,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -330,7 +422,7 @@ export const getPositionsTickersColumns = (props) => {
     {
       id: 'amount',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: COLUMN_WIDTHS.amount,
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
