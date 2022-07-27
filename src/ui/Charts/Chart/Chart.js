@@ -9,6 +9,7 @@ import {
   Tooltip,
   AreaChart,
   CartesianGrid,
+  ReferenceArea,
   ResponsiveContainer,
 } from 'recharts'
 
@@ -25,6 +26,8 @@ const COLORS = [
 class Chart extends React.PureComponent {
   state = {
     hiddenKeys: {},
+    refAreaLeft: '',
+    refAreaRight: '',
   }
 
   getGradients = () => {
@@ -75,8 +78,29 @@ class Chart extends React.PureComponent {
     }))
   }
 
+  onMouseUp = () => {
+    const { refAreaLeft, refAreaRight } = this.state
+    // const { data } = this.state
+
+    if (refAreaLeft === refAreaRight || refAreaRight === '') {
+      this.setState(() => ({
+        refAreaLeft: '',
+        refAreaRight: '',
+      }))
+      return
+    }
+
+    this.setState(() => ({
+      refAreaLeft: '',
+      refAreaRight: '',
+    }))
+  }
+
   render() {
     const { data, className } = this.props
+    const { refAreaLeft, refAreaRight } = this.state
+
+    console.log('+++Chart state', this.state)
 
     if (!data.length) {
       return null
@@ -89,6 +113,9 @@ class Chart extends React.PureComponent {
         <ResponsiveContainer aspect={4.0 / 1.8}>
           <AreaChart
             data={data}
+            onMouseDown={e => this.setState({ refAreaLeft: e.activeLabel })}
+            onMouseMove={e => (refAreaLeft && this.setState({ refAreaRight: e.activeLabel }))}
+            onMouseUp={this.onMouseUp}
           >
             <defs>
               {this.getGradients()}
@@ -106,6 +133,13 @@ class Chart extends React.PureComponent {
               isAnimationActive={false}
               formatter={formatChartData}
             />
+            {refAreaLeft && refAreaRight ? (
+              <ReferenceArea
+                x1={refAreaLeft}
+                x2={refAreaRight}
+                strokeOpacity={0.3}
+              />
+            ) : null}
             <CartesianGrid
               stroke='#57636b'
               strokeDasharray='3 3'
