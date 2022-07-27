@@ -43,6 +43,7 @@ class Movements extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       entries,
       existingCoins,
       getFullTime,
@@ -55,6 +56,7 @@ class Movements extends PureComponent {
     } = this.props
 
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
@@ -71,10 +73,14 @@ class Movements extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={pageLoading} />
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
         </Fragment>
       )
     }

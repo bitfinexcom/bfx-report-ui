@@ -19,12 +19,14 @@ import {
   getTargetPairs,
 } from 'state/orders/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import Orders from './Orders'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_ORDERS),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_ORDERS),
   entries: getFilteredEntries(state, queryConstants.MENU_ORDERS, getEntries(state)),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),

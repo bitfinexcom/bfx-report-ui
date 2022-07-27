@@ -19,12 +19,14 @@ import {
   getTargetSymbols,
 } from 'state/affiliatesEarnings/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import AffiliatesEarnings from './AffiliatesEarnings'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_AFFILIATES_EARNINGS),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_AFFILIATES_EARNINGS),
   entries: getFilteredEntries(state, queryConstants.MENU_AFFILIATES_EARNINGS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),

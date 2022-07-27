@@ -20,12 +20,14 @@ import {
   getTargetSymbols,
 } from 'state/movements/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import Movements from './Movements'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_MOVEMENTS),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_MOVEMENTS),
   entries: getFilteredEntries(state, queryConstants.MENU_MOVEMENTS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),

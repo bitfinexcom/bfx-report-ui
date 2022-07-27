@@ -45,6 +45,7 @@ class Positions extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       existingPairs,
       getFullTime,
       entries,
@@ -56,6 +57,7 @@ class Positions extends PureComponent {
       timeOffset,
     } = this.props
     const tableColumns = getColumns({
+      columnsWidth,
       target: TYPE,
       filteredData: entries,
       getFullTime,
@@ -73,6 +75,7 @@ class Positions extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />

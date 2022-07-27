@@ -19,12 +19,14 @@ import {
   getTargetSymbols,
 } from 'state/stakingPayments/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import StakingPayments from './StakingPayments'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_SPAYMENTS),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_SPAYMENTS),
   entries: getFilteredEntries(state, queryConstants.MENU_SPAYMENTS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),

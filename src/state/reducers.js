@@ -14,6 +14,7 @@ import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import candlesReducer from './candles/reducer'
 import changeLogsReducer from './changeLogs/reducer'
+import columnsReducer from './columns/reducer'
 import derivativesReducer from './derivatives/reducer'
 import feesReportReducer from './feesReport/reducer'
 import filtersReducer from './filters/reducer'
@@ -77,6 +78,7 @@ const BASE_REDUCERS = {
   base: baseReducer,
   candles: candlesReducer,
   changeLogs: changeLogsReducer,
+  columns: columnsReducer,
   derivatives: derivativesReducer,
   fcredit: fundingCreditHistoryReducer,
   filters: filtersReducer,

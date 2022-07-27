@@ -19,12 +19,14 @@ import {
   getTargetSymbols,
 } from 'state/fundingOfferHistory/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import FundingOfferHistory from './FundingOfferHistory'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_FOFFER),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_FOFFER),
   entries: getFilteredEntries(state, queryConstants.MENU_FOFFER, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),

@@ -19,12 +19,14 @@ import {
   getTargetPairs,
 } from 'state/derivatives/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import Derivatives from './Derivatives'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_DERIVATIVES),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_DERIVATIVES),
   entries: getEntries(state),
   inactivePairs: getInactivePairs(state),
   pairs: getPairs(state),

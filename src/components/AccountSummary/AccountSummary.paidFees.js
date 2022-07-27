@@ -16,7 +16,7 @@ export const getColumns = (props) => {
       name: 'column.currency',
       width: window.innerWidth > 390
         ? 250
-        : COLUMN_WIDTHS.SYMBOL,
+        : COLUMN_WIDTHS.currency,
       renderer: (rowIndex) => {
         const { curr } = data[rowIndex]
         return (
@@ -30,7 +30,7 @@ export const getColumns = (props) => {
     {
       id: 'volume',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: COLUMN_WIDTHS.amount,
       renderer: (rowIndex) => {
         const { curr, amount } = data[rowIndex]
         const fixedAmount = fixedFloat(amount)

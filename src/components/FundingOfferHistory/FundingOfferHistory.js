@@ -36,6 +36,7 @@ class FundingOfferHistory extends PureComponent {
   render() {
     const {
       columns,
+      columnsWidth,
       getFullTime,
       targetSymbols,
       entries,
@@ -47,6 +48,7 @@ class FundingOfferHistory extends PureComponent {
       timeOffset,
     } = this.props
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
@@ -62,6 +64,7 @@ class FundingOfferHistory extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
