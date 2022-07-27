@@ -133,13 +133,6 @@ class Chart extends React.PureComponent {
               isAnimationActive={false}
               formatter={formatChartData}
             />
-            {refAreaLeft && refAreaRight ? (
-              <ReferenceArea
-                x1={refAreaLeft}
-                x2={refAreaRight}
-                strokeOpacity={0.3}
-              />
-            ) : null}
             <CartesianGrid
               stroke='#57636b'
               strokeDasharray='3 3'
@@ -151,6 +144,13 @@ class Chart extends React.PureComponent {
               wrapperStyle={{ paddingBottom: 15 }}
             />
             {this.getAreas()}
+            {refAreaLeft && refAreaRight ? (
+              <ReferenceArea
+                x1={refAreaLeft}
+                x2={refAreaRight}
+                strokeOpacity={0.3}
+              />
+            ) : null}
           </AreaChart>
         </ResponsiveContainer>
       </div>
