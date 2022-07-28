@@ -12,6 +12,8 @@ import {
   ReferenceArea,
   ResponsiveContainer,
 } from 'recharts'
+import _head from 'lodash/head'
+import _isEmpty from 'lodash/isEmpty'
 
 import { formatChartData } from '../Charts.helpers'
 import { propTypes, defaultProps } from './Chart.props'
@@ -28,6 +30,9 @@ class Chart extends React.PureComponent {
     hiddenKeys: {},
     refAreaLeft: '',
     refAreaRight: '',
+    startValue: null,
+    endValue: null,
+    showSum: false,
   }
 
   getGradients = () => {
@@ -78,6 +83,26 @@ class Chart extends React.PureComponent {
     }))
   }
 
+  onMouseDown = ({ activeLabel = '', activePayload }) => {
+    const { value = null } = _head(activePayload)
+    this.setState({
+      refAreaLeft: activeLabel,
+      startValue: +value,
+      showSum: true,
+    })
+  }
+
+  onMouseMove = ({ activeLabel = '', activePayload }) => {
+    const { refAreaLeft } = this.state
+    const { value = null } = _head(activePayload)
+    if (refAreaLeft) {
+      this.setState({
+        refAreaRight: activeLabel,
+        endValue: +value,
+      })
+    }
+  }
+
   onMouseUp = () => {
     const { refAreaLeft, refAreaRight } = this.state
     // const { data } = this.state
@@ -86,6 +111,9 @@ class Chart extends React.PureComponent {
       this.setState(() => ({
         refAreaLeft: '',
         refAreaRight: '',
+        showSum: false,
+        startValue: null,
+        endValue: null,
       }))
       return
     }
@@ -93,14 +121,26 @@ class Chart extends React.PureComponent {
     this.setState(() => ({
       refAreaLeft: '',
       refAreaRight: '',
+      showSum: false,
+      startValue: null,
+      endValue: null,
     }))
   }
 
   render() {
     const { data, className } = this.props
-    const { refAreaLeft, refAreaRight } = this.state
+    const {
+      refAreaLeft,
+      refAreaRight,
+      showSum,
+      startValue,
+      endValue,
+    } = this.state
 
-    // console.log('+++Chart state', this.state)
+    console.log('+++Chart state', this.state)
+    console.log('+++startValue', startValue)
+    console.log('+++endValue', endValue)
+    console.log('+++SUM', startValue + endValue)
 
     if (!data.length) {
       return null
@@ -108,12 +148,12 @@ class Chart extends React.PureComponent {
 
     const CustomTooltip = (props) => {
       const { active, payload, label } = props
-      console.log('+++ props', props)
+      // console.log('+++ props', props)
       if (active && payload && payload.length) {
         return (
           <div className='custom-tooltip'>
             <p className='title'>Sum up:</p>
-            <p className='label'>{`USD: ${payload[0].value}`}</p>
+            <p className='label'>{`USD: ${startValue + endValue}`}</p>
           </div>
         )
       }
@@ -127,8 +167,8 @@ class Chart extends React.PureComponent {
         <ResponsiveContainer aspect={4.0 / 1.8}>
           <AreaChart
             data={data}
-            onMouseDown={e => this.setState({ refAreaLeft: e.activeLabel })}
-            onMouseMove={e => (refAreaLeft && this.setState({ refAreaRight: e.activeLabel }))}
+            onMouseDown={this.onMouseDown}
+            onMouseMove={refAreaLeft && this.onMouseMove}
             onMouseUp={this.onMouseUp}
           >
             <defs>
@@ -144,7 +184,7 @@ class Chart extends React.PureComponent {
               tickFormatter={formatChartData}
             />
             <Tooltip
-              content={<CustomTooltip />}
+              content={showSum && <CustomTooltip />}
               isAnimationActive={false}
               formatter={formatChartData}
             />
