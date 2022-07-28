@@ -25,6 +25,10 @@
           padding: 8px;
           color: black;
           background-color: white;
+
+          .label {
+            color: var(--buttonBg);
+          }
         }
       }
 
