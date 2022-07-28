@@ -20,6 +20,14 @@
     }
 
     &-tooltip {
+      &-wrapper {
+        .custom-tooltip {
+          padding: 8px;
+          color: black;
+          background-color: white;
+        }
+      }
+
       &-cursor {
         fill: white;
         opacity: 0.05;
