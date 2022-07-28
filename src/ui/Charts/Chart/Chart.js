@@ -100,9 +100,23 @@ class Chart extends React.PureComponent {
     const { data, className } = this.props
     const { refAreaLeft, refAreaRight } = this.state
 
-    console.log('+++Chart state', this.state)
+    // console.log('+++Chart state', this.state)
 
     if (!data.length) {
+      return null
+    }
+
+    const CustomTooltip = (props) => {
+      const { active, payload, label } = props
+      console.log('+++ props', props)
+      if (active && payload && payload.length) {
+        return (
+          <div className='custom-tooltip'>
+            <p className='title'>Sum up:</p>
+            <p className='label'>{`USD: ${payload[0].value}`}</p>
+          </div>
+        )
+      }
       return null
     }
 
@@ -130,6 +144,7 @@ class Chart extends React.PureComponent {
               tickFormatter={formatChartData}
             />
             <Tooltip
+              content={<CustomTooltip />}
               isAnimationActive={false}
               formatter={formatChartData}
             />
