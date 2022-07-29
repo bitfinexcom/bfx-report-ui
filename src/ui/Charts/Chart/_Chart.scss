@@ -9,6 +9,10 @@
       margin: 0 auto;
     }
 
+    &-cartesian-axis {
+      user-select: none;
+    }
+
     &-default-legend {
       margin-left: 67px !important;
     }
