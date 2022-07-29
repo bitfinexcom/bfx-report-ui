@@ -15,6 +15,7 @@ import {
 import _head from 'lodash/head'
 import _isEmpty from 'lodash/isEmpty'
 
+import SumUpTooltip from './Chart.tooltip'
 import { formatChartData } from '../Charts.helpers'
 import { propTypes, defaultProps } from './Chart.props'
 
@@ -137,26 +138,7 @@ class Chart extends React.PureComponent {
       endValue,
     } = this.state
 
-    console.log('+++Chart state', this.state)
-    console.log('+++startValue', startValue)
-    console.log('+++endValue', endValue)
-    console.log('+++SUM', startValue + endValue)
-
-    if (!data.length) {
-      return null
-    }
-
-    const CustomTooltip = (props) => {
-      const { active, payload, label } = props
-      // console.log('+++ props', props)
-      if (active && payload && payload.length) {
-        return (
-          <div className='custom-tooltip'>
-            <p className='title'>Sum up:</p>
-            <p className='label'>{`USD: ${startValue + endValue}`}</p>
-          </div>
-        )
-      }
+    if (_isEmpty(data)) {
       return null
     }
 
@@ -184,9 +166,14 @@ class Chart extends React.PureComponent {
               tickFormatter={formatChartData}
             />
             <Tooltip
-              content={showSum && <CustomTooltip />}
               isAnimationActive={false}
               formatter={formatChartData}
+              content={showSum && (
+                <SumUpTooltip
+                  startValue={startValue}
+                  endValue={endValue}
+                />
+              )}
             />
             <CartesianGrid
               stroke='#57636b'
