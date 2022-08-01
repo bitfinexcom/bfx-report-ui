@@ -1,19 +1,16 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-import { formatSumUpValue } from '../Charts.helpers'
-
 const SumUpTooltip = ({
   t,
   active,
-  endValue,
-  startValue,
+  sumUpValue,
 }) => {
-  if (active && startValue) {
+  if (active && sumUpValue) {
     return (
       <div className='custom-tooltip'>
         <p className='title'>{t('sum_up_tooltip.title')}</p>
-        <p className='label'>{`${formatSumUpValue(startValue, endValue)} USD`}</p>
+        <p className='label'>{`${sumUpValue} USD`}</p>
       </div>
     )
   }
@@ -23,13 +20,11 @@ const SumUpTooltip = ({
 SumUpTooltip.propTypes = {
   active: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
-  startValue: PropTypes.number,
-  endValue: PropTypes.number,
+  sumUpValue: PropTypes.string,
 }
 
 SumUpTooltip.defaultProps = {
-  startValue: null,
-  endValue: null,
+  sumUpValue: null,
 }
 
 export default memo(SumUpTooltip)
