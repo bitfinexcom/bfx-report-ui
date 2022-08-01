@@ -67,11 +67,11 @@ export const formatAmount = (val, options = {}) => {
   })
 
   if (fixFraction) {
-    roundedValue = formatFraction(roundedValue, { digits, minDigits }) // eslint-disable-line no-param-reassign
+    roundedValue = formatFraction(roundedValue, { digits, minDigits })
   }
 
   if (shouldFormatThousands) {
-    roundedValue = formatThousands(roundedValue) // eslint-disable-line no-param-reassign
+    roundedValue = formatThousands(roundedValue)
   }
 
   const [integer, fraction] = roundedValue.toString().split('.')
