@@ -12,7 +12,6 @@ import {
   ReferenceArea,
   ResponsiveContainer,
 } from 'recharts'
-import _head from 'lodash/head'
 import _isEmpty from 'lodash/isEmpty'
 
 import SumUpTooltip from './Chart.tooltip'
@@ -84,22 +83,23 @@ class Chart extends React.PureComponent {
     }))
   }
 
-  onMouseDown = ({ activeLabel = '', activePayload }) => {
-    const { value = null } = _head(activePayload)
+  onMouseDown = e => {
+    const startValue = +e?.activePayload[0]?.value ?? null
     this.setState({
-      refAreaLeft: activeLabel,
-      startValue: +value,
+      refAreaLeft: e?.activeLabel ?? '',
       showSum: true,
+      startValue,
     })
   }
 
-  onMouseMove = ({ activeLabel = '', activePayload }) => {
+  onMouseMove = e => {
     const { refAreaLeft } = this.state
-    const { value = null } = _head(activePayload)
     if (refAreaLeft) {
+      const endValue = +e?.activePayload[0]?.value ?? null
       this.setState({
-        refAreaRight: activeLabel,
-        endValue: +value,
+        // refAreaRight: chartX.toString(),
+        refAreaRight: e?.activeLabel ?? '',
+        endValue,
       })
     }
   }
@@ -129,7 +129,7 @@ class Chart extends React.PureComponent {
   }
 
   render() {
-    const { data, className } = this.props
+    const { data, className, t } = this.props
     const {
       refAreaLeft,
       refAreaRight,
@@ -137,6 +137,9 @@ class Chart extends React.PureComponent {
       startValue,
       endValue,
     } = this.state
+
+    console.log('++ Charts state', this.state)
+    // console.log('++ data', data)
 
     if (_isEmpty(data)) {
       return null
@@ -149,9 +152,9 @@ class Chart extends React.PureComponent {
         <ResponsiveContainer aspect={4.0 / 1.8}>
           <AreaChart
             data={data}
+            onMouseUp={this.onMouseUp}
             onMouseDown={this.onMouseDown}
             onMouseMove={refAreaLeft && this.onMouseMove}
-            onMouseUp={this.onMouseUp}
           >
             <defs>
               {this.getGradients()}
@@ -170,6 +173,7 @@ class Chart extends React.PureComponent {
               formatter={formatChartData}
               content={showSum && (
                 <SumUpTooltip
+                  t={t}
                   startValue={startValue}
                   endValue={endValue}
                 />
