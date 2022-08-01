@@ -1,5 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
+import _round from 'lodash/round'
 
 export const amountStyle = (amount) => {
   const val = parseFloat(amount)
@@ -58,21 +59,22 @@ export const formatAmount = (val, options = {}) => {
     formatThousands: shouldFormatThousands = false,
     dollarSign = false,
   } = options
+  let roundedValue = _round(val, 8)
 
   const classes = classNames('bitfinex-amount', {
-    'bitfinex-green-text': color ? color === 'green' : val > 0,
-    'bitfinex-red-text': color ? color === 'red' : val < 0,
+    'bitfinex-green-text': color ? color === 'green' : roundedValue > 0,
+    'bitfinex-red-text': color ? color === 'red' : roundedValue < 0,
   })
 
   if (fixFraction) {
-    val = formatFraction(val, { digits, minDigits }) // eslint-disable-line no-param-reassign
+    roundedValue = formatFraction(roundedValue, { digits, minDigits }) // eslint-disable-line no-param-reassign
   }
 
   if (shouldFormatThousands) {
-    val = formatThousands(val) // eslint-disable-line no-param-reassign
+    roundedValue = formatThousands(roundedValue) // eslint-disable-line no-param-reassign
   }
 
-  const [integer, fraction] = val.toString().split('.')
+  const [integer, fraction] = roundedValue.toString().split('.')
 
   return (
     <>
