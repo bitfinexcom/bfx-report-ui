@@ -15,7 +15,7 @@ import {
 import _isEmpty from 'lodash/isEmpty'
 
 import SumUpTooltip from './Chart.tooltip'
-import { formatChartData } from '../Charts.helpers'
+import { formatChartData, getSumUpRangeValue } from '../Charts.helpers'
 import { propTypes, defaultProps } from './Chart.props'
 
 const COLORS = [
@@ -28,10 +28,8 @@ const COLORS = [
 class Chart extends React.PureComponent {
   state = {
     hiddenKeys: {},
-    refAreaLeft: '',
-    refAreaRight: '',
-    startValue: null,
-    endValue: null,
+    refAreaStart: '',
+    refAreaEnd: '',
     showSum: false,
   }
 
@@ -84,62 +82,54 @@ class Chart extends React.PureComponent {
   }
 
   onMouseDown = e => {
-    const startValue = +e?.activePayload[0]?.value ?? null
     this.setState({
-      refAreaLeft: e?.activeLabel ?? '',
+      refAreaStart: e?.activeLabel ?? '',
+      refAreaEnd: e?.activeLabel ?? '',
       showSum: true,
-      startValue,
     })
   }
 
   onMouseMove = e => {
-    const { refAreaLeft } = this.state
-    if (refAreaLeft) {
-      const endValue = +e?.activePayload[0]?.value ?? null
+    const { refAreaStart } = this.state
+    if (refAreaStart) {
       this.setState({
-        // refAreaRight: chartX.toString(),
-        refAreaRight: e?.activeLabel ?? '',
-        endValue,
+        refAreaEnd: e?.activeLabel ?? '',
       })
     }
   }
 
   onMouseUp = () => {
-    const { refAreaLeft, refAreaRight } = this.state
-    // const { data } = this.state
+    const { refAreaStart, refAreaEnd } = this.state
 
-    if (refAreaLeft === refAreaRight || refAreaRight === '') {
+    if (refAreaStart === refAreaEnd || refAreaEnd === '') {
       this.setState(() => ({
-        refAreaLeft: '',
-        refAreaRight: '',
+        refAreaStart: '',
+        refAreaEnd: '',
         showSum: false,
-        startValue: null,
-        endValue: null,
       }))
       return
     }
 
     this.setState(() => ({
-      refAreaLeft: '',
-      refAreaRight: '',
+      refAreaStart: '',
+      refAreaEnd: '',
       showSum: false,
-      startValue: null,
-      endValue: null,
     }))
   }
 
   render() {
     const { data, className, t } = this.props
     const {
-      refAreaLeft,
-      refAreaRight,
+      refAreaStart,
+      refAreaEnd,
       showSum,
-      startValue,
-      endValue,
     } = this.state
 
     console.log('++ Charts state', this.state)
-    // console.log('++ data', data)
+    console.log('++ data', data)
+    const sumUpValue = getSumUpRangeValue(data, refAreaStart, refAreaEnd)
+
+    console.log('++ sumValue', sumUpValue)
 
     if (_isEmpty(data)) {
       return null
@@ -154,7 +144,7 @@ class Chart extends React.PureComponent {
             data={data}
             onMouseUp={this.onMouseUp}
             onMouseDown={this.onMouseDown}
-            onMouseMove={refAreaLeft && this.onMouseMove}
+            onMouseMove={refAreaStart && this.onMouseMove}
           >
             <defs>
               {this.getGradients()}
@@ -174,8 +164,7 @@ class Chart extends React.PureComponent {
               content={showSum && (
                 <SumUpTooltip
                   t={t}
-                  startValue={startValue}
-                  endValue={endValue}
+                  sumUpValue={sumUpValue}
                 />
               )}
             />
@@ -190,10 +179,10 @@ class Chart extends React.PureComponent {
               wrapperStyle={{ paddingBottom: 15 }}
             />
             {this.getAreas()}
-            {refAreaLeft && refAreaRight ? (
+            {refAreaStart && refAreaEnd ? (
               <ReferenceArea
-                x1={refAreaLeft}
-                x2={refAreaRight}
+                x1={refAreaStart}
+                x2={refAreaEnd}
                 strokeOpacity={0.3}
               />
             ) : null}
