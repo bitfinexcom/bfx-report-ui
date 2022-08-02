@@ -1,7 +1,8 @@
 import moment from 'moment-timezone'
+import _sumBy from 'lodash/sumBy'
+import _slice from 'lodash/slice'
 import _reduce from 'lodash/reduce'
 import _values from 'lodash/values'
-import _slice from 'lodash/slice'
 import _findIndex from 'lodash/findIndex'
 
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
@@ -112,11 +113,13 @@ export const formatChartData = value => new Intl.NumberFormat('en').format(value
 
 export const formatSumUpValue = (start, end) => formatChartData((start + end).toFixed(2))
 
-export const getSumUpRange = (data, start, end) => {
+export const getSumUpRangeValue = (data, start, end) => {
   const rangeStart = _findIndex(data, entry => entry?.name === start)
   const rangeEnd = _findIndex(data, entry => entry?.name === end)
   const dataRange = [rangeStart, rangeEnd].sort((a, b) => a - b)
-  return _slice(data, dataRange[0], dataRange[1] + 1)
+  return formatChartData(_sumBy(
+    _slice(data, dataRange[0], dataRange[1] + 1), 'USD',
+  ).toFixed(2))
 }
 
 export default parseChartData
