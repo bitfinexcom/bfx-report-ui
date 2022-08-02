@@ -10,7 +10,7 @@ const SumUpTooltip = ({
     return (
       <div className='custom-tooltip'>
         <p className='title'>{t('sum_up_tooltip.title')}</p>
-        <p className='label'>{`${sumUpValue} USD`}</p>
+        <p className='label'>{`USD : ${sumUpValue}`}</p>
       </div>
     )
   }
@@ -18,9 +18,9 @@ const SumUpTooltip = ({
 }
 
 SumUpTooltip.propTypes = {
-  active: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
   sumUpValue: PropTypes.string,
+  active: PropTypes.bool.isRequired,
 }
 
 SumUpTooltip.defaultProps = {
