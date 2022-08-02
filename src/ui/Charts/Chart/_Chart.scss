@@ -26,11 +26,17 @@
     &-tooltip {
       &-wrapper {
         .custom-tooltip {
-          padding: 8px;
-          color: black;
-          background-color: white;
+          color: #000;
+          padding: 11px 10px;
+          background-color: #fff;
+          border: 1px solid #d3d3d3;
+
+          .title{
+            margin-bottom: 3px;
+          }
 
           .label {
+            margin-bottom: 3px;
             color: var(--buttonBg);
           }
         }
