@@ -4,6 +4,9 @@ export const propTypes = {
   data: PropTypes.array.isRequired,
   dataKeys: PropTypes.array.isRequired,
   t: PropTypes.func.isRequired,
+  isSumUpEnabled: PropTypes.bool,
 }
 
-export const defaultProps = {}
+export const defaultProps = {
+  isSumUpEnabled: false,
+}
