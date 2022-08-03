@@ -119,7 +119,7 @@ class Chart extends React.PureComponent {
       refAreaStart,
     } = this.state
     const sumUpValue = getSumUpRangeValue(data, refAreaStart, refAreaEnd)
-    const shouldRenderReferenceArea = isSumUpEnabled && refAreaStart && refAreaEnd
+    const shouldShowReferenceArea = isSumUpEnabled && refAreaStart && refAreaEnd
 
     if (_isEmpty(data)) {
       return null
@@ -169,7 +169,7 @@ class Chart extends React.PureComponent {
               wrapperStyle={{ paddingBottom: 15 }}
             />
             {this.getAreas()}
-            {shouldRenderReferenceArea ? (
+            {shouldShowReferenceArea ? (
               <ReferenceArea
                 x1={refAreaStart}
                 x2={refAreaEnd}
