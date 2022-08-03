@@ -61,19 +61,19 @@ class TradedVolume extends PureComponent {
 
   render() {
     const {
+      t,
+      refresh,
       entries,
       targetPairs,
-      params: { timeframe },
-      dataReceived,
       pageLoading,
-      refresh,
-      t,
+      dataReceived,
+      params: { timeframe },
     } = this.props
     const hasChanges = this.hasChanges()
 
     const { chartData, presentCurrencies } = parseChartData({
-      data: _sortBy(entries, ['mts']),
       timeframe,
+      data: _sortBy(entries, ['mts']),
     })
 
     let showContent
@@ -91,9 +91,14 @@ class TradedVolume extends PureComponent {
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('tradedvolume.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('tradedvolume.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -115,7 +120,6 @@ class TradedVolume extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-
             <QueryButton
               disabled={!hasChanges}
               onClick={this.handleQuery}
