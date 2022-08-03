@@ -28,9 +28,9 @@ const COLORS = [
 class Chart extends React.PureComponent {
   state = {
     hiddenKeys: {},
-    refAreaStart: '',
-    refAreaEnd: '',
     showSum: false,
+    refAreaEnd: '',
+    refAreaStart: '',
   }
 
   getGradients = () => {
@@ -99,17 +99,6 @@ class Chart extends React.PureComponent {
   }
 
   onMouseUp = () => {
-    const { refAreaStart, refAreaEnd } = this.state
-
-    if (refAreaStart === refAreaEnd || refAreaEnd === '') {
-      this.setState(() => ({
-        refAreaStart: '',
-        refAreaEnd: '',
-        showSum: false,
-      }))
-      return
-    }
-
     this.setState(() => ({
       refAreaStart: '',
       refAreaEnd: '',
@@ -118,18 +107,19 @@ class Chart extends React.PureComponent {
   }
 
   render() {
-    const { data, className, t } = this.props
     const {
-      refAreaStart,
-      refAreaEnd,
+      t,
+      data,
+      className,
+      isSumUpEnabled,
+    } = this.props
+    const {
       showSum,
+      refAreaEnd,
+      refAreaStart,
     } = this.state
-
-    console.log('++ Charts state', this.state)
-    console.log('++ data', data)
     const sumUpValue = getSumUpRangeValue(data, refAreaStart, refAreaEnd)
-
-    console.log('++ sumValue', sumUpValue)
+    const shouldRenderReferenceArea = isSumUpEnabled && refAreaStart && refAreaEnd
 
     if (_isEmpty(data)) {
       return null
@@ -143,7 +133,7 @@ class Chart extends React.PureComponent {
           <AreaChart
             data={data}
             onMouseUp={this.onMouseUp}
-            onMouseDown={this.onMouseDown}
+            onMouseDown={isSumUpEnabled && this.onMouseDown}
             onMouseMove={refAreaStart && this.onMouseMove}
           >
             <defs>
@@ -179,7 +169,7 @@ class Chart extends React.PureComponent {
               wrapperStyle={{ paddingBottom: 15 }}
             />
             {this.getAreas()}
-            {refAreaStart && refAreaEnd ? (
+            {shouldRenderReferenceArea ? (
               <ReferenceArea
                 x1={refAreaStart}
                 x2={refAreaEnd}
