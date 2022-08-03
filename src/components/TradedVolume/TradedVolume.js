@@ -84,6 +84,7 @@ class TradedVolume extends PureComponent {
     } else {
       showContent = (
         <Chart
+          isSumUpEnabled
           data={chartData}
           dataKeys={presentCurrencies}
         />
