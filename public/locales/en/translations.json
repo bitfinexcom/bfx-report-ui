@@ -472,6 +472,9 @@
       "canceled": "Canceled old Sync Watcher"
     }
   },
+  "sum_up_tooltip": {
+    "title": "Sum Up"
+  },
   "taxreport": {
     "title": "Tax Report",
     "sections": {

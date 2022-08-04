@@ -9,6 +9,10 @@
       margin: 0 auto;
     }
 
+    &-cartesian-axis {
+      user-select: none;
+    }
+
     &-default-legend {
       margin-left: 67px !important;
     }
@@ -20,6 +24,24 @@
     }
 
     &-tooltip {
+      &-wrapper {
+        .custom-tooltip {
+          color: #000;
+          padding: 11px 10px;
+          background-color: #fff;
+          border: 1px solid #d3d3d3;
+
+          .title{
+            margin-bottom: 3px;
+          }
+
+          .label {
+            margin-bottom: 3px;
+            color: var(--buttonBg);
+          }
+        }
+      }
+
       &-cursor {
         fill: white;
         opacity: 0.05;

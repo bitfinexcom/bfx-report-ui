@@ -6,9 +6,9 @@ import _isEqual from 'lodash/isEqual'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import NoData from 'ui/NoData'
@@ -61,19 +61,19 @@ class FeesReport extends PureComponent {
 
   render() {
     const {
-      entries,
-      targetPairs,
-      params: { timeframe },
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      entries,
+      refresh,
+      targetPairs,
+      pageLoading,
+      dataReceived,
+      params: { timeframe },
     } = this.props
     const hasChanges = this.hasChanges()
 
     const { chartData, presentCurrencies } = parseChartData({
-      data: _sortBy(entries, ['mts']),
       timeframe,
+      data: _sortBy(entries, ['mts']),
     })
 
     let showContent
@@ -84,15 +84,21 @@ class FeesReport extends PureComponent {
     } else {
       showContent = (
         <Chart
+          isSumUpEnabled
           data={chartData}
           dataKeys={presentCurrencies}
         />
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('feesreport.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('feesreport.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -114,7 +120,6 @@ class FeesReport extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-
             <QueryButton
               disabled={!hasChanges}
               onClick={this.handleQuery}
