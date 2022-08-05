@@ -84,7 +84,7 @@ const SECTION_COLUMNS = {
   [MENU_INVOICES]: INVOICES_COLUMNS,
 
   [MENU_TRADES]: [
-    { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
+    { id: 'id', name: 'id', type: INTEGER, filter: true },
     { id: 'orderID', name: 'orderid', type: INTEGER, filter: true },
     { id: 'pair', name: 'pair' },
     { id: 'execAmount', name: 'amount', type: NUMBER, filter: true },
