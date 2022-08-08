@@ -432,7 +432,8 @@
     },
     "signInFail": "Invalid credentials",
     "timeframe_update": "Time frame updated",
-    "signUpFail": "Invalid API Key or Secret"
+    "signUpFail": "Invalid API Key or Secret",
+    "netError": "Fetching data paused due broken internet connection"
   },
   "subaccounts": {
     "add_account": "Add Account",
