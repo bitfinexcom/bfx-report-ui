@@ -91,8 +91,6 @@ class DataTable extends PureComponent {
   onSelection = (selection) => {
     const isWholeColumnSelected = selection.find(({ rows }) => !rows)
 
-    console.log('+++selection', selection)
-
     if (!isWholeColumnSelected) {
       this.selectedColumns = {}
       return
@@ -118,10 +116,8 @@ class DataTable extends PureComponent {
 
 
     navigator.clipboard.readText().then((text) => {
-      console.log('++text', text)
       const columnHeaders = []
       const selectedColumns = _keys(this.selectedColumns).sort()
-      console.log('++selectedColumns', selectedColumns)
       const start = +selectedColumns[0]
       const end = +selectedColumns[selectedColumns.length - 1]
       let cur = start
@@ -154,8 +150,6 @@ class DataTable extends PureComponent {
 
   getCellClipboardData = (row, col) => {
     const { tableColumns } = this.props
-
-    console.log('++getCellClipboardData', typeof +tableColumns[col].copyText(row), tableColumns[col].copyText(row))
 
     return tableColumns[col].copyText(row)
   }
