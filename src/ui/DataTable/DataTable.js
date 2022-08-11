@@ -13,6 +13,10 @@ import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 import DEVICES from 'var/devices'
 
 class DataTable extends PureComponent {
+  state = {
+    sumValue: null,
+  }
+
   selectedColumns = {}
 
   getCellData = (rowIndex, columnIndex) => {
@@ -21,18 +25,60 @@ class DataTable extends PureComponent {
     return tableColumns[columnIndex].copyText(rowIndex)
   }
 
+  getCellSum = (rowIndex, columnIndex) => {
+    const { tableColumns } = this.props
+    // const { sumValue } = this.state
+
+    const { isNumericValue } = tableColumns[columnIndex]
+
+    if (isNumericValue) {
+      console.log('+++isNumericValue', isNumericValue)
+      console.log('+++getCellSum', tableColumns[columnIndex]?.getSumValue(rowIndex))
+      console.log('+++getCellSum value', typeof tableColumns[columnIndex]?.getSumValue(rowIndex))
+
+      const colValue = tableColumns[columnIndex]?.getSumValue(rowIndex) ?? null 
+
+      this.setState(state => ({
+        sumValue: state.sumValue + colValue,
+      }))
+
+      return tableColumns[columnIndex]?.getSumValue(rowIndex) ?? null
+    }
+
+    return isNumericValue
+  }
+
   renderBodyContextMenu = (context) => {
     const { t } = this.props
 
+    console.log('++context', context)
+
+    const isSingleColumnSelected = context.selectedRegions[0].cols[0] === context.selectedRegions[0].cols[1]
+
     return (
       <Menu>
-        <CopyCellsMenuItem context={context} getCellData={this.getCellData} text={t('copy')} />
+        <CopyCellsMenuItem
+          text={t('copy')}
+          context={context}
+          getCellData={this.getCellData}
+        />
+        {
+          isSingleColumnSelected && (
+            <CopyCellsMenuItem
+              text={t('sum')}
+              context={context}
+              getCellData={this.getCellSum}
+            />
+          )
+        }
       </Menu>
     )
   }
 
   onSelection = (selection) => {
     const isWholeColumnSelected = selection.find(({ rows }) => !rows)
+
+    console.log('+++selection', selection)
 
     if (!isWholeColumnSelected) {
       this.selectedColumns = {}
@@ -57,9 +103,12 @@ class DataTable extends PureComponent {
   onCopy = () => {
     const { tableColumns, t } = this.props
 
+
     navigator.clipboard.readText().then((text) => {
+      console.log('++text', text)
       const columnHeaders = []
       const selectedColumns = _keys(this.selectedColumns).sort()
+      console.log('++selectedColumns', selectedColumns)
       const start = +selectedColumns[0]
       const end = +selectedColumns[selectedColumns.length - 1]
       let cur = start
@@ -93,6 +142,8 @@ class DataTable extends PureComponent {
   getCellClipboardData = (row, col) => {
     const { tableColumns } = this.props
 
+    console.log('++getCellClipboardData', typeof +tableColumns[col].copyText(row), tableColumns[col].copyText(row))
+
     return tableColumns[col].copyText(row)
   }
 
@@ -110,10 +161,16 @@ class DataTable extends PureComponent {
   }
 
   render() {
+    const { sumValue } = this.state
+    console.log('++sumValue', sumValue)
     const {
       className, numRows, t, tableColumns, device, tableScroll,
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
+
+    console.log('++Table props', this.props)
+
+    console.log('++selectedColumns', this.selectedColumns)
 
     if (device === DEVICES.PHONE && tableColumns.length > 2) {
       return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
@@ -150,7 +207,9 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
   nameStr: PropTypes.string,
   renderer: PropTypes.func.isRequired,
   copyText: PropTypes.func.isRequired,
+  getSumValue: PropTypes.func,
   width: PropTypes.number,
+  isNumericValue: PropTypes.bool,
 })
 
 DataTable.propTypes = {
