@@ -19,6 +19,11 @@ const singleColumnSelectedCheck = context => _isEqual(
   _get(context, 'selectedRegions[0].cols[1]'),
 )
 
+const columnHasNumericValueCheck = (context, columns) => {
+  const columnIndex = _get(context, 'selectedRegions[0].cols[0]')
+  return columns[columnIndex]?.isNumericValue ?? false
+}
+
 class DataTable extends PureComponent {
   state = {
     sumValue: null,
@@ -28,6 +33,9 @@ class DataTable extends PureComponent {
 
   getCellData = (rowIndex, columnIndex) => {
     const { tableColumns } = this.props
+
+    // console.log('+++rowIndex', rowIndex)
+    // console.log('+++columnIndex', columnIndex)
 
     return tableColumns[columnIndex].copyText(rowIndex)
   }
@@ -39,11 +47,11 @@ class DataTable extends PureComponent {
     const { isNumericValue } = tableColumns[columnIndex]
 
     if (isNumericValue) {
-      console.log('+++isNumericValue', isNumericValue)
-      console.log('+++getCellSum', tableColumns[columnIndex]?.getSumValue(rowIndex))
-      console.log('+++getCellSum value', typeof tableColumns[columnIndex]?.getSumValue(rowIndex))
+      // console.log('+++isNumericValue', isNumericValue)
+      // console.log('+++getCellSum', tableColumns[columnIndex]?.getSumValue(rowIndex))
+      // console.log('+++getCellSum value', typeof tableColumns[columnIndex]?.getSumValue(rowIndex))
 
-      const colValue = tableColumns[columnIndex]?.getSumValue(rowIndex) ?? null 
+      const colValue = tableColumns[columnIndex]?.getSumValue(rowIndex) ?? null
 
       this.setState(state => ({
         sumValue: state.sumValue + colValue,
@@ -56,8 +64,10 @@ class DataTable extends PureComponent {
   }
 
   renderBodyContextMenu = (context) => {
-    const { t } = this.props
+    const { t, tableColumns } = this.props
     const isSingleColumnSelected = singleColumnSelectedCheck(context)
+    const hasNumericValue = columnHasNumericValueCheck(context, tableColumns)
+    const shouldShowSum = isSingleColumnSelected && hasNumericValue
 
     return (
       <Menu>
@@ -66,14 +76,13 @@ class DataTable extends PureComponent {
           context={context}
           getCellData={this.getCellData}
         />
-        {
-          isSingleColumnSelected && (
-            <CopyCellsMenuItem
-              text={t('sum')}
-              context={context}
-              getCellData={this.getCellSum}
-            />
-          )
+        { shouldShowSum && (
+          <CopyCellsMenuItem
+            text={t('sum')}
+            context={context}
+            getCellData={this.getCellSum}
+          />
+        )
         }
       </Menu>
     )
