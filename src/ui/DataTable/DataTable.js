@@ -7,10 +7,17 @@ import {
   CopyCellsMenuItem,
   Table,
 } from '@blueprintjs/table'
+import _get from 'lodash/get'
 import _keys from 'lodash/keys'
+import _isEqual from 'lodash/isEqual'
 
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 import DEVICES from 'var/devices'
+
+const singleColumnSelectedCheck = context => _isEqual(
+  _get(context, 'selectedRegions[0].cols[0]'),
+  _get(context, 'selectedRegions[0].cols[1]'),
+)
 
 class DataTable extends PureComponent {
   state = {
@@ -50,10 +57,7 @@ class DataTable extends PureComponent {
 
   renderBodyContextMenu = (context) => {
     const { t } = this.props
-
-    console.log('++context', context)
-
-    const isSingleColumnSelected = context.selectedRegions[0].cols[0] === context.selectedRegions[0].cols[1]
+    const isSingleColumnSelected = singleColumnSelectedCheck(context)
 
     return (
       <Menu>
