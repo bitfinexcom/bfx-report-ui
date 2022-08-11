@@ -83,7 +83,9 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountOrig),
+      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].amountOrig),
     },
     {
       id: 'amountExecuted',
@@ -100,7 +102,9 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountExecuted),
+      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].amountExecuted),
     },
     {
       id: 'price',
@@ -118,7 +122,9 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].price),
+      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].price),
     },
     {
       id: 'priceAvg',
@@ -136,7 +142,9 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].priceAvg),
+      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].priceAvg),
     },
     {
       id: 'mtsCreate',
@@ -200,7 +208,9 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].priceTrailing),
+      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].priceTrailing),
     },
     {
       id: 'typePrev',
