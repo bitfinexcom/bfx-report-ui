@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import _endsWith from 'lodash/endsWith'
 
 import {
@@ -54,6 +54,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].liquidationPrice),
       },
       {
@@ -71,6 +72,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].pl),
       },
       {
@@ -88,6 +90,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].plPerc),
       },
     ]
@@ -111,6 +114,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].collateral),
       },
       {
@@ -144,9 +148,9 @@ export default function getColumns(props) {
         /* eslint-disable jsx-a11y/anchor-is-valid */
         return (
           <Cell tooltip={id}>
-            <Fragment>
+            <>
               <a href='#' onClick={onIdClick} value={id}>{id}</a>
-            </Fragment>
+            </>
           </Cell>
         )
         /* eslint-enable jsx-a11y/anchor-is-valid */
@@ -182,6 +186,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
     {
@@ -200,6 +205,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].basePrice),
     },
     ...ACTIVE_POSITIONS_COLS,
@@ -219,6 +225,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].marginFunding),
     },
     {
