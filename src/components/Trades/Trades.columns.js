@@ -99,7 +99,6 @@ export default function getColumns(props) {
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].execAmount),
-      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].execAmount),
     },
     {
       id: 'execPrice',
@@ -119,7 +118,6 @@ export default function getColumns(props) {
       },
       isNumericValue: true,
       copyText: rowIndex => filteredData[rowIndex].execPrice,
-      getSumValue: rowIndex => +filteredData[rowIndex].execPrice,
     },
     {
       id: 'fee',
@@ -146,7 +144,6 @@ export default function getColumns(props) {
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].fee),
-      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].fee),
     },
     {
       id: 'feePercent',

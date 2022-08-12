@@ -79,7 +79,6 @@ export default function getColumns(props) {
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
-      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].amount),
     },
     ...insertIf(config.showFrameworkMode, (
       {
@@ -100,7 +99,6 @@ export default function getColumns(props) {
         },
         isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
-        getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].amountUsd),
       }
     )),
     {
@@ -122,7 +120,6 @@ export default function getColumns(props) {
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
-      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].balance),
     },
     ...insertIf(config.showFrameworkMode, (
       {
@@ -144,7 +141,6 @@ export default function getColumns(props) {
         },
         isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].balanceUsd),
-        getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].balanceUsd),
       }
     )),
     {

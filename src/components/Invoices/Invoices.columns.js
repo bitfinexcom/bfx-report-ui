@@ -47,7 +47,6 @@ export default function getColumns(props) {
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
-      getSumValue: rowIndex => +fixedFloat(filteredData[rowIndex].amount),
     },
     {
       id: 'currency',
