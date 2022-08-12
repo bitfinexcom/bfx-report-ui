@@ -7,22 +7,14 @@ import {
   CopyCellsMenuItem,
   Table,
 } from '@blueprintjs/table'
-import _get from 'lodash/get'
 import _keys from 'lodash/keys'
-import _isEqual from 'lodash/isEqual'
 
-import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
+import {
+  singleColumnSelectedCheck,
+  columnHasNumericValueCheck,
+} from 'utils/columns'
 import DEVICES from 'var/devices'
-
-const singleColumnSelectedCheck = context => _isEqual(
-  _get(context, 'selectedRegions[0].cols[0]'),
-  _get(context, 'selectedRegions[0].cols[1]'),
-)
-
-const columnHasNumericValueCheck = (context, columns) => {
-  const columnIndex = _get(context, 'selectedRegions[0].cols[0]')
-  return columns?.[columnIndex]?.isNumericValue ?? false
-}
+import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 
 class DataTable extends PureComponent {
   state = {
