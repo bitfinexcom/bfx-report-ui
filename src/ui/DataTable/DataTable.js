@@ -21,7 +21,7 @@ const singleColumnSelectedCheck = context => _isEqual(
 
 const columnHasNumericValueCheck = (context, columns) => {
   const columnIndex = _get(context, 'selectedRegions[0].cols[0]')
-  return columns[columnIndex]?.isNumericValue ?? false
+  return columns?.[columnIndex]?.isNumericValue ?? false
 }
 
 class DataTable extends PureComponent {
@@ -34,33 +34,19 @@ class DataTable extends PureComponent {
   getCellData = (rowIndex, columnIndex) => {
     const { tableColumns } = this.props
 
-    // console.log('+++rowIndex', rowIndex)
-    // console.log('+++columnIndex', columnIndex)
-
     return tableColumns[columnIndex].copyText(rowIndex)
   }
 
   getCellSum = (rowIndex, columnIndex) => {
     const { tableColumns } = this.props
-    // const { sumValue } = this.state
-
     const { isNumericValue } = tableColumns[columnIndex]
 
     if (isNumericValue) {
-      // console.log('+++isNumericValue', isNumericValue)
-      // console.log('+++getCellSum', tableColumns[columnIndex]?.getSumValue(rowIndex))
-      // console.log('+++getCellSum value', typeof tableColumns[columnIndex]?.getSumValue(rowIndex))
-
-      const colValue = tableColumns[columnIndex]?.getSumValue(rowIndex) ?? null
-
+      const colValue = +tableColumns[columnIndex].copyText(rowIndex)
       this.setState(state => ({
         sumValue: state.sumValue + colValue,
       }))
-
-      return tableColumns[columnIndex]?.getSumValue(rowIndex) ?? null
     }
-
-    return isNumericValue
   }
 
   renderBodyContextMenu = (context) => {
@@ -175,9 +161,9 @@ class DataTable extends PureComponent {
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
 
-    console.log('++Table props', this.props)
+    // console.log('++Table props', this.props)
 
-    console.log('++selectedColumns', this.selectedColumns)
+    // console.log('++selectedColumns', this.selectedColumns)
 
     if (device === DEVICES.PHONE && tableColumns.length > 2) {
       return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
@@ -214,7 +200,6 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
   nameStr: PropTypes.string,
   renderer: PropTypes.func.isRequired,
   copyText: PropTypes.func.isRequired,
-  getSumValue: PropTypes.func,
   width: PropTypes.number,
   isNumericValue: PropTypes.bool,
 })
