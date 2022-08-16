@@ -8,6 +8,7 @@ import {
   Table,
 } from '@blueprintjs/table'
 import _keys from 'lodash/keys'
+import _isNull from 'lodash/isNull'
 
 import {
   singleColumnSelectedCheck,
@@ -22,6 +23,16 @@ class DataTable extends PureComponent {
   }
 
   selectedColumns = {}
+
+  componentDidUpdate() {
+    const { getColumnsSum } = this.props
+    const { sumValue } = this.state
+
+    if (!_isNull(sumValue)) {
+      getColumnsSum(sumValue)
+      this.clearSumValue()
+    }
+  }
 
   getCellData = (rowIndex, columnIndex) => {
     const { tableColumns } = this.props
@@ -39,6 +50,10 @@ class DataTable extends PureComponent {
         sumValue: state.sumValue + colValue,
       }))
     }
+  }
+
+  clearSumValue = () => {
+    this.setState({ sumValue: null })
   }
 
   renderBodyContextMenu = (context) => {
@@ -153,10 +168,6 @@ class DataTable extends PureComponent {
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
 
-    // console.log('++Table props', this.props)
-
-    // console.log('++selectedColumns', this.selectedColumns)
-
     if (device === DEVICES.PHONE && tableColumns.length > 2) {
       return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
     }
@@ -204,6 +215,7 @@ DataTable.propTypes = {
   device: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
   setColumnsWidth: PropTypes.func.isRequired,
+  getColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
 }
 
