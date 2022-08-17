@@ -10,29 +10,14 @@ export function setColumnsWidth({ section, tableColumns }) {
   }
 }
 
-export function getColumnsSum(payload) {
-  return {
-    type: types.GET_COLUMNS_SUM,
-    payload,
-  }
-}
-
-export function setColumnsSum(payload) {
-  return {
-    type: types.SET_COLUMNS_SUM,
-    payload,
-  }
-}
-
-export function showColumnsSum() {
+export function showColumnsSum(payload) {
   return {
     type: types.SHOW_COLUMNS_SUM,
+    payload,
   }
 }
 
 export default {
-  getColumnsSum,
-  setColumnsSum,
   showColumnsSum,
   setColumnsWidth,
 }
