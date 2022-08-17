@@ -17,5 +17,5 @@ function* showColumnSumUp({ payload }) {
 }
 
 export default function* columnsSaga() {
-  yield takeLatest(types.GET_COLUMNS_SUM, showColumnSumUp)
+  yield takeLatest(types.SHOW_COLUMNS_SUM, showColumnSumUp)
 }
