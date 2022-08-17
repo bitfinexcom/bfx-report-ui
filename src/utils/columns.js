@@ -436,6 +436,7 @@ export const getPositionsTickersColumns = (props) => {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => filteredData[rowIndex].amount,
     },
   ]
@@ -492,6 +493,7 @@ export const getWalletsTickersColumns = (props) => {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => filteredData[rowIndex].amount,
     },
   ]
@@ -507,6 +509,8 @@ export const columnHasNumericValueCheck = (context, columns) => {
   return columns?.[columnIndex]?.isNumericValue ?? false
 }
 
+export const formatSumUpValue = value => parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+
 export default {
   COLUMN_WIDTHS,
   pickColumnsWidth,
@@ -516,4 +520,5 @@ export default {
   getWalletsTickersColumns,
   singleColumnSelectedCheck,
   columnHasNumericValueCheck,
+  formatSumUpValue,
 }
