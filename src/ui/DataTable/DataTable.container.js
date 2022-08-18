@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next'
 
 import { getDevice } from 'state/ui/selectors'
 import { getTableScroll } from 'state/base/selectors'
-import { getColumnsSum, setColumnsWidth } from 'state/columns/actions'
+import { showColumnsSum, setColumnsWidth } from 'state/columns/actions'
 
 import DataTable from './DataTable'
 
@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  getColumnsSum,
+  showColumnsSum,
   setColumnsWidth,
 }
 
