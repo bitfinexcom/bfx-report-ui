@@ -3,6 +3,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 
+import { formatSumUpValue } from 'utils/columns'
 import { updateStatus } from 'state/status/actions'
 
 import types from './constants'
@@ -11,7 +12,7 @@ function* showColumnSumUp({ payload }) {
   if (payload) {
     yield put(updateStatus({
       id: 'sum_up_cols',
-      sum: payload.toFixed(8),
+      sum: formatSumUpValue(payload),
     }))
   }
 }
