@@ -25,11 +25,11 @@ class DataTable extends PureComponent {
   selectedColumns = {}
 
   componentDidUpdate() {
-    const { getColumnsSum } = this.props
+    const { showColumnsSum } = this.props
     const { sumValue } = this.state
 
     if (!_isNull(sumValue)) {
-      getColumnsSum(sumValue)
+      showColumnsSum(sumValue)
       this.clearSumValue()
     }
   }
@@ -69,14 +69,13 @@ class DataTable extends PureComponent {
           context={context}
           getCellData={this.getCellData}
         />
-        { shouldShowSum && (
+        {shouldShowSum && (
           <CopyCellsMenuItem
             text={t('sum')}
             context={context}
             getCellData={this.getCellSum}
           />
-        )
-        }
+        )}
       </Menu>
     )
   }
@@ -161,8 +160,6 @@ class DataTable extends PureComponent {
   }
 
   render() {
-    const { sumValue } = this.state
-    console.log('++sumValue', sumValue)
     const {
       className, numRows, t, tableColumns, device, tableScroll,
     } = this.props
@@ -215,7 +212,7 @@ DataTable.propTypes = {
   device: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
   setColumnsWidth: PropTypes.func.isRequired,
-  getColumnsSum: PropTypes.func.isRequired,
+  showColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
 }
 
