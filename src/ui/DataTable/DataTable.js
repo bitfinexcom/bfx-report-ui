@@ -106,7 +106,6 @@ class DataTable extends PureComponent {
   onCopy = () => {
     const { tableColumns, t } = this.props
 
-
     navigator.clipboard.readText().then((text) => {
       const columnHeaders = []
       const selectedColumns = _keys(this.selectedColumns).sort()
