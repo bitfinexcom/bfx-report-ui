@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import {
   Card,
@@ -19,7 +20,6 @@ import {
 } from 'state/utils'
 
 import getColumns from 'components/Ledgers/Ledgers.columns'
-import { propTypes, defaultProps } from 'components/Ledgers/Ledgers.SubCategory.props'
 
 const TYPE = queryConstants.MENU_SPAYMENTS
 
@@ -27,6 +27,49 @@ const TYPE = queryConstants.MENU_SPAYMENTS
  * Staking Payments has the same state and columns as Ledgers
  */
 class StakingPayments extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amount: PropTypes.bool,
+      amountUsd: PropTypes.bool,
+      balance: PropTypes.bool,
+      balanceUsd: PropTypes.bool,
+      currency: PropTypes.bool,
+      description: PropTypes.bool,
+      id: PropTypes.bool,
+      mts: PropTypes.bool,
+      wallet: PropTypes.bool,
+    }),
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string,
+      width: PropTypes.number,
+    })),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      amount: PropTypes.number,
+      balance: PropTypes.number,
+      currency: PropTypes.string,
+      description: PropTypes.string,
+      mts: PropTypes.number,
+      wallet: PropTypes.string,
+    })),
+    existingCoins: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    entries: [],
+    columnsWidth: [],
+    existingCoins: [],
+    targetSymbols: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -97,8 +140,5 @@ class StakingPayments extends PureComponent {
     )
   }
 }
-
-StakingPayments.propTypes = propTypes
-StakingPayments.defaultProps = defaultProps
 
 export default withTranslation('translations')(StakingPayments)
