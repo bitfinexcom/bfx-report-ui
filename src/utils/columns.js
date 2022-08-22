@@ -1,8 +1,10 @@
 import React from 'react'
+import _get from 'lodash/get'
 import _map from 'lodash/map'
-import _pick from 'lodash/pick'
 import _head from 'lodash/head'
+import _pick from 'lodash/pick'
 import _filter from 'lodash/filter'
+import _isEqual from 'lodash/isEqual'
 
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
@@ -434,6 +436,7 @@ export const getPositionsTickersColumns = (props) => {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => filteredData[rowIndex].amount,
     },
   ]
@@ -490,10 +493,23 @@ export const getWalletsTickersColumns = (props) => {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => filteredData[rowIndex].amount,
     },
   ]
 }
+
+export const singleColumnSelectedCheck = context => _isEqual(
+  _get(context, 'selectedRegions[0].cols[0]'),
+  _get(context, 'selectedRegions[0].cols[1]'),
+)
+
+export const columnHasNumericValueCheck = (context, columns) => {
+  const columnIndex = _get(context, 'selectedRegions[0].cols[0]')
+  return columns?.[columnIndex]?.isNumericValue ?? false
+}
+
+export const formatSumUpValue = value => parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 
 export default {
   COLUMN_WIDTHS,
@@ -502,4 +518,7 @@ export default {
   getFrameworkPositionsColumns,
   getPositionsTickersColumns,
   getWalletsTickersColumns,
+  singleColumnSelectedCheck,
+  columnHasNumericValueCheck,
+  formatSumUpValue,
 }

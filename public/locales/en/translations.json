@@ -474,6 +474,8 @@
       "canceled": "Canceled old Sync Watcher"
     }
   },
+  "sum": "Sum",
+  "sum_up_cols": "Sum Up: {{sum}}",
   "sum_up_tooltip": {
     "title": "Sum Up"
   },

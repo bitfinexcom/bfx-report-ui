@@ -8,12 +8,31 @@ import {
   Table,
 } from '@blueprintjs/table'
 import _keys from 'lodash/keys'
+import _isNull from 'lodash/isNull'
 
-import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
+import {
+  singleColumnSelectedCheck,
+  columnHasNumericValueCheck,
+} from 'utils/columns'
 import DEVICES from 'var/devices'
+import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 
 class DataTable extends PureComponent {
+  state = {
+    sumValue: null,
+  }
+
   selectedColumns = {}
+
+  componentDidUpdate() {
+    const { showColumnsSum } = this.props
+    const { sumValue } = this.state
+
+    if (!_isNull(sumValue)) {
+      showColumnsSum(sumValue)
+      this.clearSumValue()
+    }
+  }
 
   getCellData = (rowIndex, columnIndex) => {
     const { tableColumns } = this.props
@@ -21,12 +40,42 @@ class DataTable extends PureComponent {
     return tableColumns[columnIndex].copyText(rowIndex)
   }
 
+  getCellSum = (rowIndex, columnIndex) => {
+    const { tableColumns } = this.props
+    const { isNumericValue } = tableColumns[columnIndex]
+
+    if (isNumericValue) {
+      const colValue = +tableColumns[columnIndex].copyText(rowIndex)
+      this.setState(state => ({
+        sumValue: state.sumValue + colValue,
+      }))
+    }
+  }
+
+  clearSumValue = () => {
+    this.setState({ sumValue: null })
+  }
+
   renderBodyContextMenu = (context) => {
-    const { t } = this.props
+    const { t, tableColumns } = this.props
+    const isSingleColumnSelected = singleColumnSelectedCheck(context)
+    const hasNumericValue = columnHasNumericValueCheck(context, tableColumns)
+    const shouldShowSum = isSingleColumnSelected && hasNumericValue
 
     return (
       <Menu>
-        <CopyCellsMenuItem context={context} getCellData={this.getCellData} text={t('copy')} />
+        <CopyCellsMenuItem
+          text={t('copy')}
+          context={context}
+          getCellData={this.getCellData}
+        />
+        {shouldShowSum && (
+          <CopyCellsMenuItem
+            text={t('sum')}
+            context={context}
+            getCellData={this.getCellSum}
+          />
+        )}
       </Menu>
     )
   }
@@ -151,6 +200,7 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
   renderer: PropTypes.func.isRequired,
   copyText: PropTypes.func.isRequired,
   width: PropTypes.number,
+  isNumericValue: PropTypes.bool,
 })
 
 DataTable.propTypes = {
@@ -161,6 +211,7 @@ DataTable.propTypes = {
   device: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
   setColumnsWidth: PropTypes.func.isRequired,
+  showColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
 }
 

@@ -39,6 +39,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
     },
     ...insertIf(config.showFrameworkMode, (
@@ -58,6 +59,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].balanceUsd),
       }
     )),

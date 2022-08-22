@@ -9,6 +9,7 @@ import authSaga from './auth/saga'
 import baseSaga from './base/saga'
 import candlesSaga from './candles/saga'
 import changeLogsSaga from './changeLogs/saga'
+import columnsSaga from './columns/saga'
 import derivativesSaga from './derivatives/saga'
 import fcreditSaga from './fundingCreditHistory/saga'
 import feesReportSaga from './feesReport/saga'
@@ -52,6 +53,7 @@ export default function* rootSaga() {
   yield fork(baseSaga)
   yield fork(candlesSaga)
   yield fork(changeLogsSaga)
+  yield fork(columnsSaga)
   yield fork(derivativesSaga)
   yield fork(fcreditSaga)
   yield fork(filtersSaga)

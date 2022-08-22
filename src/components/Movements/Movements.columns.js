@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import {
   Cell,
   TruncatedFormat,
@@ -93,6 +93,7 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
     ...insertIf(config.showFrameworkMode, (
@@ -112,6 +113,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
       }
     )),
@@ -127,16 +129,17 @@ export default function getColumns(props) {
             className='bitfinex-text-align-right'
             tooltip={tooltip}
           >
-            <Fragment>
+            <>
               {formatAmount(fees)}
               {' '}
               <span className='bitfinex-show-soft'>
                 {currency}
               </span>
-            </Fragment>
+            </>
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].fees),
     },
     {
@@ -147,11 +150,11 @@ export default function getColumns(props) {
         const { currency, destinationAddress } = filteredData[rowIndex]
         return (
           <Cell tooltip={destinationAddress}>
-            <Fragment>
+            <>
               {destinationAddress}
               {' '}
               <Explorer currency={currency} destinationAddress={destinationAddress} />
-            </Fragment>
+            </>
           </Cell>
         )
       },
