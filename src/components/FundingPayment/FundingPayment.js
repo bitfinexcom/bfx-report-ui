@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import {
   Card,
@@ -19,7 +20,6 @@ import {
 } from 'state/utils'
 
 import getColumns from 'components/Ledgers/Ledgers.columns'
-import { propTypes, defaultProps } from 'components/Ledgers/Ledgers.SubCategory.props'
 
 const TYPE = queryConstants.MENU_FPAYMENT
 
@@ -27,6 +27,47 @@ const TYPE = queryConstants.MENU_FPAYMENT
  * Funding Payment has the same state and columns as Ledgers
  */
 class FundingPayment extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amount: PropTypes.bool,
+      amountUsd: PropTypes.bool,
+      balance: PropTypes.bool,
+      balanceUsd: PropTypes.bool,
+      currency: PropTypes.bool,
+      id: PropTypes.bool,
+      mts: PropTypes.bool,
+      wallet: PropTypes.bool,
+    }),
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string,
+      width: PropTypes.number,
+    })),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      amount: PropTypes.number.isRequired,
+      balance: PropTypes.number.isRequired,
+      currency: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      mts: PropTypes.number.isRequired,
+      wallet: PropTypes.string,
+    })).isRequired,
+    existingCoins: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    columnsWidth: [],
+    existingCoins: [],
+    targetSymbols: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -97,8 +138,5 @@ class FundingPayment extends PureComponent {
     )
   }
 }
-
-FundingPayment.propTypes = propTypes
-FundingPayment.defaultProps = defaultProps
 
 export default withTranslation('translations')(FundingPayment)
