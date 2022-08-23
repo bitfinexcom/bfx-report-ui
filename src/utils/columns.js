@@ -5,6 +5,7 @@ import _head from 'lodash/head'
 import _pick from 'lodash/pick'
 import _filter from 'lodash/filter'
 import _isEqual from 'lodash/isEqual'
+import _toString from 'lodash/toString'
 
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
@@ -510,7 +511,7 @@ export const columnHasNumericValueCheck = (context, columns) => {
 }
 
 export const formatSumUpValue = value => {
-  if (value === 0) return value
+  if (value === 0) return _toString(value)
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
