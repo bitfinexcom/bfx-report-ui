@@ -509,7 +509,10 @@ export const columnHasNumericValueCheck = (context, columns) => {
   return columns?.[columnIndex]?.isNumericValue ?? false
 }
 
-export const formatSumUpValue = value => parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+export const formatSumUpValue = value => {
+  if (value === 0) return value
+  return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+}
 
 export default {
   COLUMN_WIDTHS,
