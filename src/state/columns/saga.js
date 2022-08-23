@@ -9,12 +9,10 @@ import { updateStatus } from 'state/status/actions'
 import types from './constants'
 
 function* showColumnSumUp({ payload }) {
-  if (payload) {
-    yield put(updateStatus({
-      id: 'sum_up_cols',
-      sum: formatSumUpValue(payload),
-    }))
-  }
+  yield put(updateStatus({
+    id: 'sum_up_cols',
+    sum: formatSumUpValue(payload),
+  }))
 }
 
 export default function* columnsSaga() {
