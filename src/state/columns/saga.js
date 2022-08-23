@@ -8,7 +8,7 @@ import { updateStatus, updateErrorStatus } from 'state/status/actions'
 
 import types from './constants'
 
-function* showColumnSumUp({ payload }) {
+function* showColumnSumUp({ payload = 0 }) {
   const sum = formatSumUpValue(payload)
   try {
     yield put(updateStatus({
