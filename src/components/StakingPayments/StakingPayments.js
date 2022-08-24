@@ -1,15 +1,14 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import {
   Card,
   Elevation,
 } from '@blueprintjs/core'
 
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import {
@@ -84,25 +83,25 @@ class StakingPayments extends PureComponent {
 
   render() {
     const {
-      columns,
-      columnsWidth,
-      getFullTime,
-      targetSymbols,
-      entries,
-      existingCoins,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      columns,
+      entries,
+      refresh,
       timeOffset,
+      pageLoading,
+      getFullTime,
+      columnsWidth,
+      dataReceived,
+      targetSymbols,
+      existingCoins,
     } = this.props
     const tableColumns = getColumns({
+      t,
+      timeOffset,
+      getFullTime,
+      target: TYPE,
       columnsWidth,
       filteredData: entries,
-      getFullTime,
-      t,
-      target: TYPE,
-      timeOffset,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -112,27 +111,33 @@ class StakingPayments extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={pageLoading} />
-        </Fragment>
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
+        </>
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
-          title='spayments.title'
           target={TYPE}
+          refresh={refresh}
+          title='spayments.title'
           symbolsSelectorProps={{
-            currentFilters: targetSymbols,
             existingCoins,
+            currentFilters: targetSymbols,
             toggleSymbol: this.toggleSymbol,
           }}
-          refresh={refresh}
           clearTargetSymbols={this.clearSymbols}
         />
         {showContent}
@@ -141,4 +146,4 @@ class StakingPayments extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(StakingPayments)
+export default StakingPayments
