@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import {
   Card,
   Elevation,
@@ -145,4 +144,4 @@ class FundingPayment extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(FundingPayment)
+export default FundingPayment
