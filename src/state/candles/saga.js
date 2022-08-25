@@ -7,11 +7,13 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { updateErrorStatus } from 'state/status/actions'
-import { getTimeFrame } from 'state/timeRange/selectors'
-import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
+import rangeTypes from 'state/timeRange/constants'
+import { setTimeRange } from 'state/timeRange/actions'
 import goToRangeTypes from 'state/goToRange/constants'
-import { setGoToRange, handleGoToRange } from 'state/goToRange/actions'
+import { setGoToRange } from 'state/goToRange/actions'
+import { getTimeFrame } from 'state/timeRange/selectors'
+import { updateErrorStatus } from 'state/status/actions'
+import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
@@ -100,21 +102,10 @@ function* nextPageCheck(start) {
 }
 
 function* handleGoToRangeSaga({ payload }) {
-  const { start } = payload
-  const candlesNextPage = yield select(selectors.getCandlesNextPage)
-  if (candlesNextPage) {
-    const shouldUpdateCandles = yield call(nextPageCheck, start)
-    if (shouldUpdateCandles) {
-      yield call(fetchCandles, { payload: 'candles' })
-      yield put(actions.setChartLoading(true))
-      yield put(handleGoToRange(payload))
-    } else {
-      yield put(actions.setChartLoading(false))
-      yield put(setGoToRange(payload))
-    }
-  } else {
-    yield put(setGoToRange(payload))
-  }
+  const { start, end } = payload
+  yield put(setTimeRange({ start, end, range: rangeTypes.CUSTOM }))
+  yield call(fetchCandles, { payload: 'candles' })
+  yield put(setGoToRange(payload))
 }
 
 export default function* candlesSaga() {
