@@ -8,7 +8,7 @@ export default {
 }
 
 export const OFFSETS = {
-  '1m': 1800000,
+  '1m': 3600000,
   '5m': 7200000,
   '15m': 14400000,
   '30m': 28800000,
