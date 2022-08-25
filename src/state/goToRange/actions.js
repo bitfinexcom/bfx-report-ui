@@ -3,7 +3,7 @@ import { isValidTimeStamp } from 'state/query/utils'
 
 import types, { OFFSETS } from './constants'
 
-export function setGoToRange({
+export function handleGoToRange({
   range, start, end, timeFrame = '1h',
 }) {
   if ((start > end) || !isValidTimeStamp(start) || !isValidTimeStamp(end)) {
@@ -16,7 +16,7 @@ export function setGoToRange({
 
   if (range === types.DATE) {
     return {
-      type: types.SET_GO_TO_RANGE,
+      type: types.HANDLE_GO_TO_RANGE,
       payload: {
         range,
         // -+ offsets to center single selected date on the chart range
@@ -27,7 +27,7 @@ export function setGoToRange({
   }
 
   return {
-    type: types.SET_GO_TO_RANGE,
+    type: types.HANDLE_GO_TO_RANGE,
     payload: {
       range,
       start,
@@ -43,9 +43,9 @@ export function setGoToRangePreserve(payload) {
   }
 }
 
-export function handleGoToRange(payload) {
+export function setGoToRange(payload) {
   return {
-    type: types.HANDLE_GO_TO_RANGE,
+    type: types.SET_GO_TO_RANGE,
     payload,
   }
 }
