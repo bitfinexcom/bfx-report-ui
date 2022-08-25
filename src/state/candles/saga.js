@@ -96,11 +96,6 @@ function* fetchCandlesFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
-function* nextPageCheck(start) {
-  const candlesNextPage = yield select(selectors.getCandlesNextPage)
-  return start < candlesNextPage
-}
-
 function* handleGoToRangeSaga({ payload }) {
   const { start, end } = payload
   yield put(setTimeRange({ start, end, range: rangeTypes.CUSTOM }))
