@@ -99,8 +99,16 @@ function* fetchCandlesFail({ payload }) {
 function* handleGoToRangeSaga({ payload }) {
   const { start, end } = payload
   yield put(setTimeRange({ start, end, range: rangeTypes.CUSTOM }))
-  yield call(fetchCandles, { payload: 'candles' })
-  yield put(setGoToRange(payload))
+  try {
+    yield call(fetchCandles, { payload: 'candles' })
+    yield put(setGoToRange(payload))
+  } catch (fail) {
+    yield put(actions.fetchFail({
+      id: 'status.request.error',
+      topic: 'candles.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
 }
 
 export default function* candlesSaga() {
