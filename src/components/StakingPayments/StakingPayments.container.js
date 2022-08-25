@@ -27,24 +27,24 @@ import queryConstants from 'state/query/constants'
 import StakingPayments from './StakingPayments'
 
 const mapStateToProps = state => ({
-  getFullTime: getFullTime(state),
-  timeOffset: getTimeOffset(state),
-  pageLoading: getPageLoading(state),
-  dataReceived: getDataReceived(state),
-  existingCoins: getExistingCoins(state),
-  targetSymbols: getTargetSymbols(state),
   columns: getColumns(state, queryConstants.MENU_SPAYMENTS),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_SPAYMENTS),
+  dataReceived: getDataReceived(state),
   entries: getFilteredEntries(state, queryConstants.MENU_SPAYMENTS, getEntries(state)),
+  existingCoins: getExistingCoins(state),
+  getFullTime: getFullTime(state),
+  pageLoading: getPageLoading(state),
+  targetSymbols: getTargetSymbols(state),
+  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {
-  refresh,
-  fetchData,
   addTargetSymbol,
-  setTargetSymbols,
-  removeTargetSymbol,
   clearTargetSymbols,
+  fetchData,
+  refresh,
+  removeTargetSymbol,
+  setTargetSymbols,
 }
 
 export default compose(

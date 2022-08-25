@@ -27,24 +27,24 @@ import { getColumnsWidth } from 'state/columns/selectors'
 import FundingPayment from './FundingPayment'
 
 const mapStateToProps = state => ({
-  getFullTime: getFullTime(state),
-  timeOffset: getTimeOffset(state),
-  pageLoading: getPageLoading(state),
-  dataReceived: getDataReceived(state),
-  existingCoins: getExistingCoins(state),
-  targetSymbols: getTargetSymbols(state),
   columns: getColumns(state, queryConstants.MENU_FPAYMENT),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_FPAYMENT),
+  dataReceived: getDataReceived(state),
   entries: getFilteredEntries(state, queryConstants.MENU_FPAYMENT, getEntries(state)),
+  existingCoins: getExistingCoins(state),
+  getFullTime: getFullTime(state),
+  pageLoading: getPageLoading(state),
+  targetSymbols: getTargetSymbols(state),
+  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {
-  refresh,
   addTargetSymbol,
-  setTargetSymbols,
-  removeTargetSymbol,
   clearTargetSymbols,
   fetchData: fetchFPayment,
+  refresh,
+  removeTargetSymbol,
+  setTargetSymbols,
 }
 
 export default compose(
