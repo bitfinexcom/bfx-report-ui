@@ -80,24 +80,24 @@ class AffiliatesEarnings extends PureComponent {
 
   render() {
     const {
-      t,
       columns,
-      entries,
-      refresh,
-      timeOffset,
-      getFullTime,
-      pageLoading,
       columnsWidth,
       dataReceived,
-      targetSymbols,
+      entries,
       existingCoins,
+      getFullTime,
+      pageLoading,
+      refresh,
+      t,
+      targetSymbols,
+      timeOffset,
     } = this.props
     const tableColumns = getColumns({
-      t,
-      timeOffset,
-      getFullTime,
       columnsWidth,
       filteredData: entries,
+      getFullTime,
+      t,
+      timeOffset,
     }).filter(({ id }) => columns[id])
 
     let showContent

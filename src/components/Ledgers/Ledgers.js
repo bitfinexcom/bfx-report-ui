@@ -96,25 +96,25 @@ class Ledgers extends PureComponent {
 
   render() {
     const {
-      t,
       columns,
-      entries,
-      refresh,
-      timeOffset,
-      pageLoading,
-      getFullTime,
-      dataReceived,
       columnsWidth,
-      targetSymbols,
+      dataReceived,
+      entries,
       existingCoins,
+      getFullTime,
+      pageLoading,
+      refresh,
+      t,
+      targetSymbols,
       targetCategory,
+      timeOffset,
     } = this.props
     const tableColumns = getColumns({
-      t,
-      timeOffset,
-      getFullTime,
       columnsWidth,
       filteredData: entries,
+      getFullTime,
+      t,
+      timeOffset,
     }).filter(({ id }) => columns[id])
 
     let showContent

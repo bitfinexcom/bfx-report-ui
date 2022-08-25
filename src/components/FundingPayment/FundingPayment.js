@@ -81,17 +81,17 @@ class FundingPayment extends PureComponent {
 
   render() {
     const {
-      t,
       columns,
-      entries,
-      refresh,
-      timeOffset,
-      getFullTime,
-      pageLoading,
       columnsWidth,
       dataReceived,
+      entries,
       existingCoins,
+      getFullTime,
+      pageLoading,
+      refresh,
+      t,
       targetSymbols,
+      timeOffset,
     } = this.props
     const tableColumns = getColumns({
       columnsWidth,

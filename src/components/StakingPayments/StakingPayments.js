@@ -83,25 +83,25 @@ class StakingPayments extends PureComponent {
 
   render() {
     const {
-      t,
       columns,
-      entries,
-      refresh,
-      timeOffset,
-      pageLoading,
-      getFullTime,
       columnsWidth,
       dataReceived,
-      targetSymbols,
+      entries,
       existingCoins,
+      getFullTime,
+      pageLoading,
+      refresh,
+      t,
+      targetSymbols,
+      timeOffset,
     } = this.props
     const tableColumns = getColumns({
-      t,
-      timeOffset,
-      getFullTime,
-      target: TYPE,
       columnsWidth,
       filteredData: entries,
+      getFullTime,
+      t,
+      target: TYPE,
+      timeOffset,
     }).filter(({ id }) => columns[id])
 
     let showContent
