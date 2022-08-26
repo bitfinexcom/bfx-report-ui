@@ -1,9 +1,11 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchData,
   refresh,
+  fetchData,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
@@ -12,10 +14,10 @@ import {
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import {
-  getDataReceived,
   getEntries,
-  getExistingCoins,
   getPageLoading,
+  getDataReceived,
+  getExistingCoins,
   getTargetSymbols,
 } from 'state/stakingPayments/selectors'
 import { getColumns } from 'state/filters/selectors'
@@ -27,24 +29,26 @@ import StakingPayments from './StakingPayments'
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_SPAYMENTS),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_SPAYMENTS),
+  dataReceived: getDataReceived(state),
   entries: getFilteredEntries(state, queryConstants.MENU_SPAYMENTS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
-  dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
   timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {
+  addTargetSymbol,
+  clearTargetSymbols,
   fetchData,
   refresh,
-  addTargetSymbol,
-  setTargetSymbols,
   removeTargetSymbol,
-  clearTargetSymbols,
+  setTargetSymbols,
 }
 
-const StakingPaymentsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(StakingPayments))
-
-export default StakingPaymentsContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(StakingPayments)

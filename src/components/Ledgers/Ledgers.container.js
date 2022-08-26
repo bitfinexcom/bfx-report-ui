@@ -29,26 +29,26 @@ import queryConstants from 'state/query/constants'
 import Ledgers from './Ledgers'
 
 const mapStateToProps = state => ({
-  getFullTime: getFullTime(state),
-  timeOffset: getTimeOffset(state),
-  pageLoading: getPageLoading(state),
-  dataReceived: getDataReceived(state),
-  targetSymbols: getTargetSymbols(state),
-  existingCoins: getExistingCoins(state),
-  targetCategory: getTargetCategory(state),
   columns: getColumns(state, queryConstants.MENU_LEDGERS),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_LEDGERS),
+  dataReceived: getDataReceived(state),
   entries: getFilteredEntries(state, queryConstants.MENU_LEDGERS, getEntries(state)),
+  existingCoins: getExistingCoins(state),
+  getFullTime: getFullTime(state),
+  pageLoading: getPageLoading(state),
+  targetCategory: getTargetCategory(state),
+  targetSymbols: getTargetSymbols(state),
+  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {
-  refresh,
-  setParams,
   addTargetSymbol,
-  setTargetSymbols,
-  removeTargetSymbol,
   clearTargetSymbols,
   fetchData: fetchLedgers,
+  refresh,
+  removeTargetSymbol,
+  setParams,
+  setTargetSymbols,
 }
 
 export default compose(
