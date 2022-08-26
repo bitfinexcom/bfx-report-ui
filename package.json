@@ -45,7 +45,7 @@
     "react-router-dom": "^5.0.0",
     "react-swipeable": "^5.5.1",
     "react-transition-group": "^2.6.1",
-    "recharts": "^2.1.4",
+    "recharts": "2.1.13",
     "redux": "4.2.0",
     "redux-logger": "3.0.6",
     "redux-persist": "6.0.0",
