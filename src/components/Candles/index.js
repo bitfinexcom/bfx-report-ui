@@ -1,3 +1,1 @@
-import Candles from './Candles.container'
-
-export default Candles
+export { default } from './Candles.container'
