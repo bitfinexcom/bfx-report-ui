@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import {
   FormGroup,
   InputGroup,
 } from '@blueprintjs/core'
-
-import { propTypes, defaultProps } from './InputKey.props'
 
 export const InputKey = ({
   t, label, onChange, name, placeholder, value,
@@ -17,16 +16,30 @@ export const InputKey = ({
     />
     <InputGroup
       id={name}
-      type='password'
       name={name}
-      placeholder={placeholder && t(placeholder)}
       value={value}
+      type='password'
       onChange={onChange}
+      placeholder={placeholder && t(placeholder)}
     />
   </div>
 )
 
-InputKey.propTypes = propTypes
-InputKey.defaultProps = defaultProps
+InputKey.propTypes = {
+  name: PropTypes.string,
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  t: PropTypes.func.isRequired,
+}
 
-export default withTranslation('translations')(InputKey)
+InputKey.defaultProps = {
+  name: '',
+  value: '',
+  label: '',
+  placeholder: '',
+  onChange: () => {},
+}
+
+export default withTranslation('translations')(memo(InputKey))
