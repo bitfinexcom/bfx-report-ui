@@ -1,5 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Button,
@@ -11,17 +11,25 @@ import {
 import Icon from 'icons'
 import config from 'config'
 
-import { propTypes, defaultProps } from './PasswordRecovery.props'
+import { MODES } from '../Auth'
 import InputKey from '../InputKey'
 import ErrorLabel from '../ErrorLabel'
-import { MODES } from '../Auth'
 
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
 
 class PasswordRecovery extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
+  static propTypes = {
+    authData: PropTypes.shape({
+      apiKey: PropTypes.string,
+      apiSecret: PropTypes.string,
+      isPersisted: PropTypes.bool.isRequired,
+    }).isRequired,
+    loading: PropTypes.bool.isRequired,
+    t: PropTypes.func.isRequired,
+    recoverPassword: PropTypes.func.isRequired,
+    switchMode: PropTypes.func.isRequired,
+    updateAuth: PropTypes.func.isRequired,
+  }
 
   constructor(props) {
     super()
@@ -176,7 +184,7 @@ class PasswordRecovery extends PureComponent {
             onChange={this.handleInputChange}
           />
           {config.showFrameworkMode && isPasswordProtected && (
-            <Fragment>
+            <>
               <InputKey
                 label='auth.enterPassword'
                 name='password'
@@ -191,7 +199,7 @@ class PasswordRecovery extends PureComponent {
                 onChange={this.handleInputChange}
               />
               <ErrorLabel text={passwordRepeatError} />
-            </Fragment>
+            </>
           )}
           <div className='bitfinex-auth-checkboxes'>
             <Checkbox
@@ -236,4 +244,4 @@ class PasswordRecovery extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(PasswordRecovery)
+export default PasswordRecovery
