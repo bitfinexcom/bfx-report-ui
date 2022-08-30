@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 
@@ -117,8 +116,8 @@ class Candles extends PureComponent {
         <>
           {isChartLoading && (<Loading />)}
           <Candlestick
-            candles={candles}
             trades={trades}
+            candles={candles}
             fetchData={fetchData}
             className={chartClassName}
           />
@@ -127,9 +126,14 @@ class Candles extends PureComponent {
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('candles.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('candles.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -164,4 +168,4 @@ class Candles extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(Candles)
+export default Candles
