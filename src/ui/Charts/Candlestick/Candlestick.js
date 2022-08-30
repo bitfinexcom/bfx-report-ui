@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import moment from 'moment'
 import classNames from 'classnames'
 import { createChart, CrosshairMode } from 'lightweight-charts'
@@ -44,7 +43,13 @@ class Candlestick extends React.PureComponent {
       isLoading: PropTypes.bool.isRequired,
       nextPage: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired,
     }),
+    timeRange: PropTypes.shape({
+      start: PropTypes.number,
+      end: PropTypes.number,
+    }),
+    setGoToRangePreserve: PropTypes.func,
     className: PropTypes.string,
+    isGoToRangePreserved: PropTypes.bool,
     trades: PropTypes.shape({
       entries: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number,
@@ -64,9 +69,12 @@ class Candlestick extends React.PureComponent {
   }
 
   static defaultProps = {
-    trades: {},
     candles: {},
     className: undefined,
+    isGoToRangePreserved: false,
+    timeRange: {},
+    trades: {},
+    setGoToRangePreserve: () => {},
   }
 
   state = {
@@ -318,11 +326,9 @@ class Candlestick extends React.PureComponent {
 
   render() {
     const {
-      className,
       candles: { entries: candles },
-      timeRange,
+      className,
     } = this.props
-    console.log('+timeRange', timeRange)
     const {
       width,
       height,
@@ -361,4 +367,4 @@ class Candlestick extends React.PureComponent {
   }
 }
 
-export default withTranslation('translations')(Candlestick)
+export default Candlestick
