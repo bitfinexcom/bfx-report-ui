@@ -31,22 +31,22 @@ class AccountBalance extends PureComponent {
       isUnrealizedProfitExcluded: PropTypes.bool,
     }),
     dataReceived: PropTypes.bool.isRequired,
-    isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
     entries: PropTypes.arrayOf(PropTypes.shape({
       mts: PropTypes.number,
       USD: PropTypes.number,
     })),
     fetchData: PropTypes.func.isRequired,
+    isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    timeframe: PropTypes.string.isRequired,
     refresh: PropTypes.func.isRequired,
     setParams: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
+    timeframe: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
-    entries: [],
     currentFetchParams: {},
+    entries: [],
   }
 
   componentDidMount() {
@@ -74,12 +74,12 @@ class AccountBalance extends PureComponent {
 
   hasChanges = () => {
     const {
-      timeframe,
-      isUnrealizedProfitExcluded,
       currentFetchParams: {
         timeframe: currTimeframe,
         isUnrealizedProfitExcluded: currUnrealizedProfitState,
       },
+      isUnrealizedProfitExcluded,
+      timeframe,
     } = this.props
     return currTimeframe !== timeframe
       || currUnrealizedProfitState !== isUnrealizedProfitExcluded
@@ -87,14 +87,14 @@ class AccountBalance extends PureComponent {
 
   render() {
     const {
-      t,
-      refresh,
-      entries,
-      timeframe,
-      pageLoading,
-      dataReceived,
-      isUnrealizedProfitExcluded,
       currentFetchParams: { timeframe: currTimeframe },
+      dataReceived,
+      entries,
+      isUnrealizedProfitExcluded,
+      pageLoading,
+      refresh,
+      t,
+      timeframe,
     } = this.props
     const hasChanges = this.hasChanges()
 
