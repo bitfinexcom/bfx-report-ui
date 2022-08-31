@@ -1,4 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import memoizeOne from 'memoize-one'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -27,11 +28,44 @@ import {
 } from 'state/utils'
 
 import getColumns from './Derivatives.columns'
-import { propTypes, defaultProps } from './Derivatives.props'
 
 const TYPE = queryConstants.MENU_DERIVATIVES
 
 class Derivatives extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      clampMax: PropTypes.bool,
+      clampMin: PropTypes.bool,
+      fundBal: PropTypes.bool,
+      fundingAccrued: PropTypes.bool,
+      fundingStep: PropTypes.bool,
+      pair: PropTypes.bool,
+      price: PropTypes.bool,
+      priceSpot: PropTypes.bool,
+      timestamp: PropTypes.bool,
+    }),
+    entries: PropTypes.arrayOf(PropTypes.object),
+    inactivePairs: PropTypes.arrayOf(PropTypes.string),
+    pairs: PropTypes.arrayOf(PropTypes.string),
+    existingPairs: PropTypes.arrayOf(PropTypes.string),
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    pairs: [],
+    columns: {},
+    entries: [],
+    targetPairs: [],
+    existingPairs: [],
+    inactivePairs: [],
+  }
+
   constructor() {
     super()
 
@@ -122,8 +156,5 @@ class Derivatives extends PureComponent {
     )
   }
 }
-
-Derivatives.propTypes = propTypes
-Derivatives.defaultProps = defaultProps
 
 export default withTranslation('translations')(Derivatives)
