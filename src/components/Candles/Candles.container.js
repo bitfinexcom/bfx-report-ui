@@ -1,34 +1,36 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchData,
   refresh,
+  fetchData,
   setParams,
 } from 'state/candles/actions'
-import { toggleGoToRangeDialog } from 'state/ui/actions'
 import { getPairs } from 'state/symbols/selectors'
+import { toggleGoToRangeDialog } from 'state/ui/actions'
 import {
-  getCandles,
-  getCurrentFetchParams,
-  getDataReceived,
-  getPageLoading,
-  getChartLoading,
   getParams,
   getTrades,
+  getCandles,
+  getPageLoading,
+  getChartLoading,
+  getDataReceived,
+  getCurrentFetchParams,
 } from 'state/candles/selectors'
 
 import Candles from './Candles'
 
 const mapStateToProps = state => ({
-  currentFetchParams: getCurrentFetchParams(state),
   candles: getCandles(state),
-  trades: getTrades(state),
+  currentFetchParams: getCurrentFetchParams(state),
   dataReceived: getDataReceived(state),
-  pageLoading: getPageLoading(state),
-  pairs: getPairs(state),
-  params: getParams(state),
   isChartLoading: getChartLoading(state),
+  pairs: getPairs(state),
+  pageLoading: getPageLoading(state),
+  params: getParams(state),
+  trades: getTrades(state),
 })
 
 const mapDispatchToProps = {
@@ -38,6 +40,8 @@ const mapDispatchToProps = {
   toggleGoToRangeDialog,
 }
 
-const CandlesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Candles))
-
-export default CandlesContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(Candles)

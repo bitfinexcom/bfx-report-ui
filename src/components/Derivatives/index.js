@@ -1,3 +1,1 @@
-import Derivatives from './Derivatives.container'
-
-export default Derivatives
+export { default } from './Derivatives.container'

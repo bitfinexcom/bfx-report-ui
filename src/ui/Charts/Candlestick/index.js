@@ -1,3 +1,1 @@
-import Candlestick from './Candlestick.container'
-
-export default Candlestick
+export { default } from './Candlestick.container'

@@ -1,5 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import memoizeOne from 'memoize-one'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -8,10 +8,10 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import {
   SectionHeader,
-  SectionHeaderItem,
-  SectionHeaderItemLabel,
   SectionHeaderRow,
+  SectionHeaderItem,
   SectionHeaderTitle,
+  SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
@@ -27,11 +27,49 @@ import {
 } from 'state/utils'
 
 import getColumns from './Derivatives.columns'
-import { propTypes, defaultProps } from './Derivatives.props'
 
 const TYPE = queryConstants.MENU_DERIVATIVES
 
 class Derivatives extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      clampMax: PropTypes.bool,
+      clampMin: PropTypes.bool,
+      fundBal: PropTypes.bool,
+      fundingAccrued: PropTypes.bool,
+      fundingStep: PropTypes.bool,
+      pair: PropTypes.bool,
+      price: PropTypes.bool,
+      priceSpot: PropTypes.bool,
+      timestamp: PropTypes.bool,
+    }),
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string,
+      width: PropTypes.number,
+    })),
+    dataReceived: PropTypes.bool.isRequired,
+    entries: PropTypes.arrayOf(PropTypes.object),
+    existingPairs: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    inactivePairs: PropTypes.arrayOf(PropTypes.string),
+    pairs: PropTypes.arrayOf(PropTypes.string),
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    columnsWidth: [],
+    entries: [],
+    existingPairs: [],
+    inactivePairs: [],
+    pairs: [],
+    targetPairs: [],
+  }
+
   constructor() {
     super()
 
@@ -56,12 +94,12 @@ class Derivatives extends PureComponent {
     const {
       columns,
       columnsWidth,
-      inactivePairs,
-      pairs,
-      existingPairs,
-      getFullTime,
-      entries,
       dataReceived,
+      entries,
+      existingPairs,
+      inactivePairs,
+      getFullTime,
+      pairs,
       pageLoading,
       refresh,
       t,
@@ -84,20 +122,25 @@ class Derivatives extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={numRows}
             tableColumns={tableColumns}
           />
-        </Fragment>
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('derivatives.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('derivatives.title')}
+          </SectionHeaderTitle>
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
@@ -105,10 +148,10 @@ class Derivatives extends PureComponent {
               </SectionHeaderItemLabel>
               <MultiPairSelector
                 currentFilters={targetPairs}
-                existingPairs={existingPairs}
-                inactivePairs={this.getFilteredPairs(inactivePairs)}
-                pairs={this.getFilteredPairs(pairs)}
                 togglePair={this.togglePair}
+                existingPairs={existingPairs}
+                pairs={this.getFilteredPairs(pairs)}
+                inactivePairs={this.getFilteredPairs(inactivePairs)}
               />
             </SectionHeaderItem>
             <ClearFiltersButton onClick={this.clearPairs} />
@@ -123,7 +166,4 @@ class Derivatives extends PureComponent {
   }
 }
 
-Derivatives.propTypes = propTypes
-Derivatives.defaultProps = defaultProps
-
-export default withTranslation('translations')(Derivatives)
+export default Derivatives
