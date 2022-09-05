@@ -14,6 +14,7 @@ export const initialState = {
   dataReceived: false,
   currentFetchParams: {},
   timeframe: timeframeConstants.DAY,
+  isVSPrevDayBalance: reportTypeConstants.FALSE,
   isVsAccountBalanceSelected: reportTypeConstants.FALSE,
   isUnrealizedProfitExcluded: unrealizedProfitConstants.FALSE,
 }
