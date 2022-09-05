@@ -403,7 +403,9 @@
     },
     "report-type": {
       "title": "Select Report Type",
-      "win_loss": "Win/Loss",
+      "win_loss": {
+        "title": "Win/Loss"
+      }, 
       "gains_deposits": {
         "title": "Percentage Gains (gains/deposits)",
         "description": "% gains are being calculated vs the deposits made to the account"
