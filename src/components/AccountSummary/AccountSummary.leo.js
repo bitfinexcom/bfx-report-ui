@@ -1,14 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
 import { fixedFloat, formatAmount } from 'ui/utils'
 
-const getColumns = (props) => {
-  const { leoLev, leoAmountAvg } = props
-
+const getColumns = ({ leoLev, leoAmountAvg }) => {
   const formattedLeoAmountAvg = fixedFloat(leoAmountAvg)
 
   return [
@@ -37,8 +34,7 @@ const getColumns = (props) => {
   ]
 }
 
-const AccountSummaryLeo = (props) => {
-  const { data } = props
+const AccountSummaryLeo = ({ data }) => {
   const { leoLev, leoAmountAvg } = data
 
   const columns = getColumns({ leoLev, leoAmountAvg })
@@ -60,4 +56,4 @@ AccountSummaryLeo.propTypes = {
   }).isRequired,
 }
 
-export default withTranslation('translations')(AccountSummaryLeo)
+export default memo(AccountSummaryLeo)
