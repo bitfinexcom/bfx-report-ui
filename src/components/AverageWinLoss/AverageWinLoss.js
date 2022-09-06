@@ -87,9 +87,11 @@ class AverageWinLoss extends PureComponent {
     setParams({ isUnrealizedProfitExcluded })
   }
 
-  handleReportTypeChange = (isVsAccountBalanceSelected) => {
-    const { setParams } = this.props
-    setParams({ isVsAccountBalanceSelected })
+  handleReportTypeChange = (type) => {
+    const { setParams, setReportType } = this.props
+    const params = getReportTypeParams(type)
+    setReportType(type)
+    setParams(params)
   }
 
   hasChanges = () => {
