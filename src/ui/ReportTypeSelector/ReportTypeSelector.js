@@ -5,13 +5,21 @@ import { withTranslation } from 'react-i18next'
 import Select from 'ui/Select'
 
 import constants from './constants'
+import Item from './ReportTypeSelector.item'
 
-const { TRUE, FALSE } = constants
+const {
+  TRUE,
+  FALSE,
+  WIN_LOSS,
+  GAINS_DEPOSITS,
+  GAINS_BALANCE,
+} = constants
 
-const ReportTypeSelector = ({ onChange, t, value }) => {
+const ReportTypeSelector = ({ onChange, value }) => {
   const items = [
-    { value: FALSE, label: t('selector.report-type.win_loss') },
-    { value: TRUE, label: t('selector.report-type.win_loss_vs_acc_balance') },
+    { value: WIN_LOSS, label: <Item type={WIN_LOSS} /> },
+    { value: GAINS_DEPOSITS, label: <Item type={GAINS_DEPOSITS} showIcon /> },
+    { value: GAINS_BALANCE, label: <Item type={GAINS_BALANCE} showIcon /> },
   ]
 
   return (
