@@ -114,6 +114,7 @@ class AverageWinLoss extends PureComponent {
         isUnrealizedProfitExcluded,
         isVsAccountBalanceSelected,
       },
+      reportType,
     } = this.props
 
     const { chartData, dataKeys } = prepareChartData(
@@ -167,7 +168,7 @@ class AverageWinLoss extends PureComponent {
                 {t('selector.report-type.title')}
               </SectionHeaderItemLabel>
               <ReportTypeSelector
-                value={isVsAccountBalanceSelected}
+                value={reportType}
                 onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
