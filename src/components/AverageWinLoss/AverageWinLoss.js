@@ -25,6 +25,7 @@ import ReportTypeSelector from 'ui/ReportTypeSelector'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
+import constants from 'ui/ReportTypeSelector/constants'
 
 import { propTypes, defaultProps } from './AverageWinLoss.props'
 
@@ -47,6 +48,19 @@ const prepareChartData = (
     timeframe,
   })
   return { chartData, dataKeys: presentCurrencies }
+}
+
+const getReportTypeParams = (type) => {
+  switch (type) {
+    case constants.WIN_LOSS:
+      return { isVsAccountBalanceSelected: false }
+    case constants.GAINS_DEPOSITS:
+      return { isVsAccountBalanceSelected: true, isVSPrevDayBalance: false }
+    case constants.GAINS_BALANCE:
+      return { isVsAccountBalanceSelected: true, isVSPrevDayBalance: true }
+    default:
+      return { isVsAccountBalanceSelected: false }
+  }
 }
 
 class AverageWinLoss extends PureComponent {
