@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 
 import Icon from 'icons'
 import Tooltip from 'ui/Tooltip'
+
+import constants from './constants'
 
 const ReportTypeItem = ({
   t,
@@ -30,6 +32,13 @@ const ReportTypeItem = ({
 
 ReportTypeItem.propTypes = {
   t: PropTypes.func.isRequired,
+  type: PropTypes.string,
+  showIcon: PropTypes.bool,
 }
 
-export default withTranslation('translations')(ReportTypeItem)
+ReportTypeItem.defaultProps = {
+  showIcon: false,
+  type: constants.WIN_LOSS,
+}
+
+export default withTranslation('translations')(memo(ReportTypeItem))
