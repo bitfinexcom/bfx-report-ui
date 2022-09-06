@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 
 import Select from 'ui/Select'
 
@@ -8,8 +7,6 @@ import constants from './constants'
 import Item from './ReportTypeSelector.item'
 
 const {
-  TRUE,
-  FALSE,
   WIN_LOSS,
   GAINS_DEPOSITS,
   GAINS_BALANCE,
@@ -34,9 +31,12 @@ const ReportTypeSelector = ({ onChange, value }) => {
 }
 
 ReportTypeSelector.propTypes = {
-  t: PropTypes.func.isRequired,
-  value: PropTypes.bool.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(ReportTypeSelector)
+ReportTypeSelector.defaultProps = {
+  value: WIN_LOSS,
+}
+
+export default ReportTypeSelector
