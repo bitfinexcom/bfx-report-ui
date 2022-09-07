@@ -19,7 +19,7 @@ const ReportTypeItem = ({
     {showIcon && (
       <Tooltip
         usePortal
-        placement='top'
+        placement='bottom'
         targetClassName='report_type_icon'
         content={t(`${type}.description`)}
       >
