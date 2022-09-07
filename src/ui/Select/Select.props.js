@@ -12,7 +12,10 @@ export const propTypes = {
         PropTypes.bool,
         PropTypes.string,
         PropTypes.number]).isRequired,
-      label: PropTypes.string.isRequired,
+      label: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.node.isRequired,
+      ]),
     }),
   ])).isRequired,
   onChange: PropTypes.func.isRequired,
