@@ -7,10 +7,12 @@ import {
   refresh,
   setParams,
   fetchWinLoss,
+  setReportType,
 } from 'state/winLoss/actions'
 import {
   getParams,
   getEntries,
+  getReportType,
   getPageLoading,
   getDataReceived,
   getCurrentFetchParams,
@@ -21,6 +23,7 @@ import AverageWinLoss from './AverageWinLoss'
 const mapStateToProps = state => ({
   params: getParams(state),
   entries: getEntries(state),
+  reportType: getReportType(state),
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   currentFetchParams: getCurrentFetchParams(state),
@@ -29,6 +32,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   refresh,
   setParams,
+  setReportType,
   fetchData: fetchWinLoss,
 }
 
