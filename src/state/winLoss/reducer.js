@@ -29,11 +29,13 @@ export function winLossReducer(state = initialState, action) {
         pageLoading: true,
         currentFetchParams: {
           timeframe: state.timeframe,
+          isVSPrevDayBalance: state.isVSPrevDayBalance,
           isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
           isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
         },
         timeframe: state.timeframe,
         reportType: state.reportType,
+        isVSPrevDayBalance: state.isVSPrevDayBalance,
         isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
         isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
       }
