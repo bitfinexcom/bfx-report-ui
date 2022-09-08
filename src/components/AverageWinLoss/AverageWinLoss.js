@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
@@ -26,8 +27,6 @@ import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
 import constants from 'ui/ReportTypeSelector/constants'
-
-import { propTypes, defaultProps } from './AverageWinLoss.props'
 
 const TYPE = queryConstants.MENU_WIN_LOSS
 
@@ -64,6 +63,37 @@ const getReportTypeParams = (type) => {
 }
 
 class AverageWinLoss extends PureComponent {
+  static propTypes = {
+    currentFetchParams: PropTypes.shape({
+      timeframe: PropTypes.string,
+      isUnrealizedProfitExcluded: PropTypes.bool,
+      isVsAccountBalanceSelected: PropTypes.bool,
+    }),
+    dataReceived: PropTypes.bool.isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      mts: PropTypes.number,
+      USD: PropTypes.number,
+    })),
+    fetchData: PropTypes.func.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    params: PropTypes.shape({
+      timeframe: PropTypes.string,
+      isUnrealizedProfitExcluded: PropTypes.bool,
+      isVsAccountBalanceSelected: PropTypes.bool,
+    }),
+    refresh: PropTypes.func.isRequired,
+    reportType: PropTypes.string.isRequired,
+    setParams: PropTypes.func.isRequired,
+    setReportType: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    currentFetchParams: {},
+    entries: [],
+    params: {},
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -184,8 +214,5 @@ class AverageWinLoss extends PureComponent {
     )
   }
 }
-
-AverageWinLoss.propTypes = propTypes
-AverageWinLoss.defaultProps = defaultProps
 
 export default AverageWinLoss
