@@ -23,7 +23,17 @@
   }
 
   &--report-type .bp3-button {
-    width: 290px;
+    width: fit-content;
+
+    .bp3-button-text {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+     
+      .bp3-popover-wrapper {
+        display: none;
+      }
+    }
   }
 
   &--timeframe .bp3-button {
@@ -78,7 +88,7 @@
     }
 
     &--report-type .bp3-popover-content {
-      width: 290px;
+      width: 300px;
 
       .bp3-menu {
         min-width: unset;
@@ -122,6 +132,18 @@
         color: var(--color);
         border-bottom: 1px solid var(--borderColor);
         border-radius: 0;
+
+        .bp3-fill {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .bp3-popover-wrapper {
+            opacity: 0.8;
+            margin-bottom: -4px;
+            transform: scale(0.8);
+          }
+        }
 
         .bp3-text-overflow-ellipsis {
           white-space: normal;
