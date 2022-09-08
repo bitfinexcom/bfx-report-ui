@@ -23,6 +23,7 @@ export function* fetchWinLoss() {
     const { start, end } = yield select(getTimeFrame)
     const {
       timeframe,
+      isVSPrevDayBalance,
       isUnrealizedProfitExcluded,
       isVsAccountBalanceSelected,
     } = yield select(selectors.getParams)
@@ -34,6 +35,7 @@ export function* fetchWinLoss() {
       end,
       timeframe,
       isUnrealizedProfitExcluded,
+      ...(isVsAccountBalanceSelected && { isVSPrevDayBalance }),
     })
     yield put(actions.updateWinLoss(result))
 
