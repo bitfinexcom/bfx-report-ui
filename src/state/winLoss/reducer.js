@@ -71,6 +71,10 @@ export function winLossReducer(state = initialState, action) {
       return {
         ...initialState,
         timeframe: state.timeframe,
+        reportType: state.reportType,
+        isVSPrevDayBalance: state.isVSPrevDayBalance,
+        isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
+        isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
       }
     case authTypes.LOGOUT:
       return initialState
