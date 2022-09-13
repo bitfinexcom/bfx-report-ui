@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 
 import { getTheme } from 'state/base/selectors'
-import { setChartScrollTime } from 'state/candles/actions'
 import { getChartScrollTime } from 'state/candles/selectors'
 import { setGoToRangePreserve } from 'state/goToRange/actions'
+import { setChartScrollTime, handleChartScrollTime } from 'state/candles/actions'
 import { getGoToRange, getIsGoToRangePreserved } from 'state/goToRange/selectors'
 
 import Candlestick from './Candlestick'
@@ -16,6 +16,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
+  handleChartScrollTime,
   setChartScrollTime,
   setGoToRangePreserve,
 }

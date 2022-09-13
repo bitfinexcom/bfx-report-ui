@@ -66,16 +66,16 @@ export function setChartLoading(payload) {
   }
 }
 
-export function handleChartScrollTime(payload) {
+export function setChartScrollTime(payload) {
   return {
-    type: types.HANDLE_CHART_SCROLL_TIME,
+    type: types.SET_CHART_SCROLL_TIME,
     payload,
   }
 }
 
-export function setChartScrollTime(payload) {
+export function handleChartScrollTime(payload) {
   return {
-    type: types.SET_CHART_SCROLL_TIME,
+    type: types.HANDLE_CHART_SCROLL_TIME,
     payload,
   }
 }
@@ -88,4 +88,5 @@ export default {
   updateData,
   setChartLoading,
   setChartScrollTime,
+  handleChartScrollTime,
 }
