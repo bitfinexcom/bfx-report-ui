@@ -109,23 +109,31 @@ class Candlestick extends React.PureComponent {
   componentDidUpdate(prevProps) {
     const { isTradesVisible } = this.state
     const {
-      candles, trades, theme, timeRange, isGoToRangePreserved, chartScrollTime, handleChartScrollTime,
+      candles,
+      chartScrollTime,
+      handleChartScrollTime,
+      isGoToRangePreserved,
+      theme,
+      timeRange,
+      trades,
     } = this.props
-    if (candles.entries !== prevProps.candles.entries) {
+    if (candles?.entries !== prevProps?.candles?.entries) {
       this.candleSeries.setData(candles.entries)
     }
-    if (trades.entries !== prevProps.trades.entries && isTradesVisible) {
+    if (trades?.entries !== prevProps?.trades?.entries && isTradesVisible) {
       this.setTradeSeries()
     }
-    if (theme !== prevProps.theme) {
+    if (theme !== prevProps?.theme) {
       this.recreateChart()
     }
-    if (isGoToRangePreserved && !_isEqual(timeRange, prevProps.timeRange)) {
+    if (isGoToRangePreserved && !_isEqual(timeRange, prevProps?.timeRange)) {
       this.recreateChart()
     }
     if (!_isEqual(prevProps?.chartScrollTime, chartScrollTime)) {
-      console.log('++PREVchartScrollTime', prevProps.chartScrollTime)
-      console.log('++chartScrollTime', chartScrollTime)
+      handleChartScrollTime({
+        prevScrollTime: prevProps?.chartScrollTime,
+        currentScrollTime: chartScrollTime,
+      })
     }
   }
 
