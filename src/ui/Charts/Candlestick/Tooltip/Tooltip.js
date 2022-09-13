@@ -50,22 +50,24 @@ class Tooltip extends React.PureComponent {
 
     const tooltip = document.getElementsByClassName('candlestick-tooltip')[0]
 
-    const { x, y } = point
-    if (!trade || !time || x < 0 || x > width || y < 0 || y > height) {
-      tooltip.style.display = 'none'
-      return
+    if (tooltip) {
+      const { x, y } = point
+      if (!trade || !time || x < 0 || x > width || y < 0 || y > height) {
+        tooltip.style.display = 'none'
+        return
+      }
+
+      tooltip.style.display = 'block'
+      tooltip.style.borderColor = trade.open.execAmount > 0 ? '#16b157' : '#f05359'
+
+      if (trade) {
+        this.setState({
+          trade: trade.open,
+        })
+      }
+
+      this.setOffset(tooltip, point)
     }
-
-    tooltip.style.display = 'block'
-    tooltip.style.borderColor = trade.open.execAmount > 0 ? '#16b157' : '#f05359'
-
-    if (trade) {
-      this.setState({
-        trade: trade.open,
-      })
-    }
-
-    this.setOffset(tooltip, point)
   }
 
   /* eslint-disable no-param-reassign */
