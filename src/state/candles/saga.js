@@ -11,13 +11,58 @@ import rangeTypes from 'state/timeRange/constants'
 import { setTimeRange } from 'state/timeRange/actions'
 import goToRangeTypes from 'state/goToRange/constants'
 import { setGoToRange } from 'state/goToRange/actions'
-import { getTimeFrame } from 'state/timeRange/selectors'
 import { updateErrorStatus } from 'state/status/actions'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
+
+// export const OFFSETS = {
+//   '1m': 2629800000,
+//   '5m': 5259600000,
+//   '15m': 7889400000,
+//   '30m': 7889400000,
+//   '1h': 10519200000,
+//   '3h': 13149000000,
+//   '6h': 13149000000,
+//   '12h': 15778800000,
+//   '1D': 15778800000,
+//   '7D': 15778800000,
+//   '14D': 15778800000,
+//   '1M': 15778800000,
+// }
+
+export const OFFSETS = {
+  '1m': 2629800000,
+  '5m': 2629800000,
+  '15m': 2629800000,
+  '30m': 2629800000,
+  '1h': 432000000,
+  '3h': 2629800000,
+  '6h': 2629800000,
+  '12h': 2629800000,
+  '1D': 2629800000,
+  '7D': 2629800000,
+  '14D': 2629800000,
+  '1M': 2629800000,
+}
+
+export const OFFSETS2 = {
+  '1m': 604800016,
+  '5m': 604800016,
+  '15m': 604800016,
+  '30m': 604800016,
+  '1h': 604800016,
+  '3h': 2629800000,
+  '6h': 2629800000,
+  '12h': 2629800000,
+  '1D': 2629800000,
+  '7D': 2629800000,
+  '14D': 2629800000,
+  '1M': 2629800000,
+}
 
 const getReqCandles = (params) => {
   const {
@@ -26,6 +71,8 @@ const getReqCandles = (params) => {
     pair,
     timeframe,
   } = params
+
+  console.log('+++getReqCandles params', params)
 
   return makeFetchCall('getCandles', {
     start,
@@ -45,9 +92,18 @@ const getReqTrades = (params) => {
   })
 }
 
-function* fetchData(section, data, method) {
+function* fetchData(section, data, method, customTimeframe = null) {
   const params = yield select(selectors.getParams)
-  const { start, end } = yield select(getTimeFrame, data.nextPage)
+  let start
+  let end
+  if (customTimeframe) {
+    start = customTimeframe?.start
+    end = customTimeframe?.end
+  } else {
+    const timeframe = yield select(getTimeFrame, data.nextPage)
+    start = timeframe?.start
+    end = timeframe?.end
+  }
   const { result, error } = yield call(method, {
     ...params,
     start,
@@ -98,9 +154,17 @@ function* fetchCandlesFail({ payload }) {
 
 function* handleGoToRangeSaga({ payload }) {
   const { start, end } = payload
-  yield put(setTimeRange({ start, end, range: rangeTypes.CUSTOM }))
+  const timeframe = yield select(selectors.getCandlesTimeFrame)
+  console.log('++payload', payload)
+
+  yield put(setTimeRange({
+    start: (start - OFFSETS[timeframe]),
+    end: (end + OFFSETS[timeframe]),
+    range: rangeTypes.CUSTOM,
+  }))
   try {
     yield call(fetchCandles, { payload: 'candles' })
+    yield call(fetchCandles, { payload: 'trades' })
     yield put(setGoToRange(payload))
   } catch (fail) {
     yield put(actions.fetchFail({
@@ -111,9 +175,48 @@ function* handleGoToRangeSaga({ payload }) {
   }
 }
 
+function* handleChartScrollTime({ payload }) {
+  const { prevScrollTime, currentScrollTime } = payload
+  const { start, end } = yield select(getTimeFrame)
+  const timeframe = yield select(selectors.getCandlesTimeFrame)
+
+  // console.log('++prevScrollTime > currentScrollTime', prevScrollTime > currentScrollTime)
+
+  // console.log('+++DateNow', new Date().getTime())
+  const currentTime = new Date().getTime()
+  const halfOneDay = (86400000 / 2)
+  // const oneWeek = 604800016.56
+  // const oneMonth = 2629800000
+  // const oneYear = 31557600000
+  if ((prevScrollTime > currentScrollTime) && (currentScrollTime - OFFSETS2[timeframe]) < start) {
+    yield put(setTimeRange({
+      start: (start - OFFSETS2[timeframe]),
+      end: (currentScrollTime + halfOneDay),
+      range: rangeTypes.CUSTOM,
+    }))
+  } else if ((prevScrollTime < currentScrollTime) && (currentScrollTime + OFFSETS2[timeframe]) > end) {
+    console.log('+++SHOULD UPDATE EDTIME)')
+    yield put(setTimeRange({
+      start: currentScrollTime,
+      end: end + OFFSETS2[timeframe],
+      range: rangeTypes.CUSTOM,
+    }))
+  }
+  // if ((prevScrollTime < currentScrollTime) && (currentScrollTime + OFFSETS2[timeframe]) > end) {
+  //   // const isValidEndTime = end + OFFSETS2[timeframe] < currentTime
+  //   console.log('+++SHOULD UPDATE EDTIME)')
+  //   yield put(setTimeRange({
+  //     start: (currentScrollTime - halfOneDay),
+  //     end: currentTime,
+  //     range: rangeTypes.CUSTOM,
+  //   }))
+  // }
+}
+
 export default function* candlesSaga() {
   yield takeLatest(types.FETCH, fetchCandles)
   yield takeLatest(types.REFRESH, refreshCandles)
   yield takeLatest(types.FETCH_FAIL, fetchCandlesFail)
+  yield takeLatest(types.HANDLE_CHART_SCROLL_TIME, handleChartScrollTime)
   yield takeLatest(goToRangeTypes.HANDLE_GO_TO_RANGE, handleGoToRangeSaga)
 }
