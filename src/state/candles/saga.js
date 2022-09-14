@@ -10,7 +10,7 @@ import { makeFetchCall } from 'state/utils'
 import rangeTypes from 'state/timeRange/constants'
 import { setTimeRange } from 'state/timeRange/actions'
 import goToRangeTypes from 'state/goToRange/constants'
-import { setGoToRange } from 'state/goToRange/actions'
+import { setGoToRange, handleGoToRange } from 'state/goToRange/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
@@ -20,7 +20,7 @@ import actions from './actions'
 import selectors from './selectors'
 
 // export const OFFSETS = {
-//   '1m': 2629800000,
+//   '1m': 2629800000, 1 month
 //   '5m': 5259600000,
 //   '15m': 7889400000,
 //   '30m': 7889400000,
@@ -50,11 +50,11 @@ export const OFFSETS = {
 }
 
 export const OFFSETS2 = {
-  '1m': 604800016,
-  '5m': 604800016,
-  '15m': 604800016,
-  '30m': 604800016,
-  '1h': 604800016,
+  '1m': 86400000,
+  '5m': 86400000,
+  '15m': 86400000,
+  '30m': 86400000,
+  '1h': 86400000,
   '3h': 2629800000,
   '6h': 2629800000,
   '12h': 2629800000,
@@ -158,8 +158,8 @@ function* handleGoToRangeSaga({ payload }) {
   console.log('++payload', payload)
 
   yield put(setTimeRange({
-    start: (start - OFFSETS[timeframe]),
-    end: (end + OFFSETS[timeframe]),
+    start: (start - OFFSETS2[timeframe]),
+    end: (end + OFFSETS2[timeframe]),
     range: rangeTypes.CUSTOM,
   }))
   try {
@@ -178,39 +178,18 @@ function* handleGoToRangeSaga({ payload }) {
 function* handleChartScrollTime({ payload }) {
   const { prevScrollTime, currentScrollTime } = payload
   const { start, end } = yield select(getTimeFrame)
-  const timeframe = yield select(selectors.getCandlesTimeFrame)
+  const timeFrame = yield select(selectors.getCandlesTimeFrame)
 
-  // console.log('++prevScrollTime > currentScrollTime', prevScrollTime > currentScrollTime)
-
-  // console.log('+++DateNow', new Date().getTime())
-  const currentTime = new Date().getTime()
-  const halfOneDay = (86400000 / 2)
-  // const oneWeek = 604800016.56
-  // const oneMonth = 2629800000
-  // const oneYear = 31557600000
-  if ((prevScrollTime > currentScrollTime) && (currentScrollTime - OFFSETS2[timeframe]) < start) {
-    yield put(setTimeRange({
-      start: (start - OFFSETS2[timeframe]),
-      end: (currentScrollTime + halfOneDay),
-      range: rangeTypes.CUSTOM,
-    }))
-  } else if ((prevScrollTime < currentScrollTime) && (currentScrollTime + OFFSETS2[timeframe]) > end) {
+  if (((currentScrollTime - OFFSETS2[timeFrame]) < start) || ((currentScrollTime + OFFSETS2[timeFrame]) > end)) {
     console.log('+++SHOULD UPDATE EDTIME)')
-    yield put(setTimeRange({
+    const params = {
+      range: 'date',
       start: currentScrollTime,
-      end: end + OFFSETS2[timeframe],
-      range: rangeTypes.CUSTOM,
-    }))
+      end: currentScrollTime,
+      timeFrame,
+    }
+    yield put(handleGoToRange(params))
   }
-  // if ((prevScrollTime < currentScrollTime) && (currentScrollTime + OFFSETS2[timeframe]) > end) {
-  //   // const isValidEndTime = end + OFFSETS2[timeframe] < currentTime
-  //   console.log('+++SHOULD UPDATE EDTIME)')
-  //   yield put(setTimeRange({
-  //     start: (currentScrollTime - halfOneDay),
-  //     end: currentTime,
-  //     range: rangeTypes.CUSTOM,
-  //   }))
-  // }
 }
 
 export default function* candlesSaga() {
