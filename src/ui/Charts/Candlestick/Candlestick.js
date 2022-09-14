@@ -131,8 +131,8 @@ class Candlestick extends React.PureComponent {
     }
     if (!_isEqual(prevProps?.chartScrollTime, chartScrollTime)) {
       handleChartScrollTime({
-        prevScrollTime: prevProps?.chartScrollTime,
-        currentScrollTime: chartScrollTime,
+        prevScrollTime: (prevProps?.chartScrollTime * 1000),
+        currentScrollTime: (chartScrollTime * 1000),
       })
     }
   }
