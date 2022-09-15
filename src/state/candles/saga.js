@@ -10,7 +10,7 @@ import { makeFetchCall } from 'state/utils'
 import rangeTypes from 'state/timeRange/constants'
 import { setTimeRange } from 'state/timeRange/actions'
 import goToRangeTypes from 'state/goToRange/constants'
-import { setGoToRange, handleGoToRange } from 'state/goToRange/actions'
+import { setGoToRange, handleGoToRange, setGoToRangePreserve } from 'state/goToRange/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
@@ -39,7 +39,8 @@ export const OFFSETS = {
   '5m': 2629800000,
   '15m': 2629800000,
   '30m': 2629800000,
-  '1h': 432000000,
+  // '1h': 432000000, // 5day
+  '1h': 691200000, // 8day
   '3h': 2629800000,
   '6h': 2629800000,
   '12h': 2629800000,
@@ -49,13 +50,13 @@ export const OFFSETS = {
   '1M': 2629800000,
 }
 
-export const OFFSETS2 = {
-  '1m': 86400000,
+export const SCROLL_THRESHOLD = {
+  '1m': 86400000, // 1day
   '5m': 86400000,
   '15m': 86400000,
   '30m': 86400000,
   '1h': 86400000,
-  '3h': 2629800000,
+  '3h': 2629800000, // 1month
   '6h': 2629800000,
   '12h': 2629800000,
   '1D': 2629800000,
@@ -71,8 +72,6 @@ const getReqCandles = (params) => {
     pair,
     timeframe,
   } = params
-
-  console.log('+++getReqCandles params', params)
 
   return makeFetchCall('getCandles', {
     start,
@@ -155,17 +154,17 @@ function* fetchCandlesFail({ payload }) {
 function* handleGoToRangeSaga({ payload }) {
   const { start, end } = payload
   const timeframe = yield select(selectors.getCandlesTimeFrame)
-  console.log('++payload', payload)
 
   yield put(setTimeRange({
-    start: (start - OFFSETS2[timeframe]),
-    end: (end + OFFSETS2[timeframe]),
+    start: (start - OFFSETS[timeframe]),
+    end: (end + OFFSETS[timeframe]),
     range: rangeTypes.CUSTOM,
   }))
   try {
     yield call(fetchCandles, { payload: 'candles' })
     yield call(fetchCandles, { payload: 'trades' })
     yield put(setGoToRange(payload))
+    yield put(setGoToRangePreserve(true))
   } catch (fail) {
     yield put(actions.fetchFail({
       id: 'status.request.error',
@@ -179,9 +178,10 @@ function* handleChartScrollTime({ payload }) {
   const { prevScrollTime, currentScrollTime } = payload
   const { start, end } = yield select(getTimeFrame)
   const timeFrame = yield select(selectors.getCandlesTimeFrame)
+  const shouldUpdateStart = (currentScrollTime - SCROLL_THRESHOLD[timeFrame]) < start
+  const shouldUpdateEnd = (currentScrollTime + SCROLL_THRESHOLD[timeFrame]) > end
 
-  if (((currentScrollTime - OFFSETS2[timeFrame]) < start) || ((currentScrollTime + OFFSETS2[timeFrame]) > end)) {
-    console.log('+++SHOULD UPDATE EDTIME)')
+  if (shouldUpdateStart || shouldUpdateEnd) {
     const params = {
       range: 'date',
       start: currentScrollTime,
@@ -189,6 +189,7 @@ function* handleChartScrollTime({ payload }) {
       timeFrame,
     }
     yield put(handleGoToRange(params))
+    yield put(setGoToRangePreserve(true))
   }
 }
 
