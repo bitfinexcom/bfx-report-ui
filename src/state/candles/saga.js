@@ -9,61 +9,15 @@ import {
 import { makeFetchCall } from 'state/utils'
 import rangeTypes from 'state/timeRange/constants'
 import { setTimeRange } from 'state/timeRange/actions'
-import goToRangeTypes from 'state/goToRange/constants'
+import goToRangeTypes, { OFFSETS } from 'state/goToRange/constants'
 import { setGoToRange, handleGoToRange, setGoToRangePreserve } from 'state/goToRange/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 
-import types from './constants'
+import types, { SCROLL_THRESHOLD } from './constants'
 import actions from './actions'
 import selectors from './selectors'
-
-// export const OFFSETS = {
-//   '1m': 2629800000, 1 month
-//   '5m': 5259600000,
-//   '15m': 7889400000,
-//   '30m': 7889400000,
-//   '1h': 10519200000,
-//   '3h': 13149000000,
-//   '6h': 13149000000,
-//   '12h': 15778800000,
-//   '1D': 15778800000,
-//   '7D': 15778800000,
-//   '14D': 15778800000,
-//   '1M': 15778800000,
-// }
-
-export const OFFSETS = {
-  '1m': 2629800000,
-  '5m': 2629800000,
-  '15m': 2629800000,
-  '30m': 2629800000,
-  // '1h': 432000000, // 5day
-  '1h': 691200000, // 8day
-  '3h': 2629800000,
-  '6h': 2629800000,
-  '12h': 2629800000,
-  '1D': 2629800000,
-  '7D': 2629800000,
-  '14D': 2629800000,
-  '1M': 2629800000,
-}
-
-export const SCROLL_THRESHOLD = {
-  '1m': 86400000, // 1day
-  '5m': 86400000,
-  '15m': 86400000,
-  '30m': 86400000,
-  '1h': 86400000,
-  '3h': 2629800000, // 1month
-  '6h': 2629800000,
-  '12h': 2629800000,
-  '1D': 2629800000,
-  '7D': 2629800000,
-  '14D': 2629800000,
-  '1M': 2629800000,
-}
 
 const getReqCandles = (params) => {
   const {
@@ -154,10 +108,9 @@ function* fetchCandlesFail({ payload }) {
 function* handleGoToRangeSaga({ payload }) {
   const { start, end } = payload
   const timeframe = yield select(selectors.getCandlesTimeFrame)
-
   yield put(setTimeRange({
-    start: (start - OFFSETS[timeframe]),
-    end: (end + OFFSETS[timeframe]),
+    start: (start - (OFFSETS[timeframe] * 4)),
+    end: (end + (OFFSETS[timeframe] * 4)),
     range: rangeTypes.CUSTOM,
   }))
   try {
@@ -178,10 +131,16 @@ function* handleChartScrollTime({ payload }) {
   const { prevScrollTime, currentScrollTime } = payload
   const { start, end } = yield select(getTimeFrame)
   const timeFrame = yield select(selectors.getCandlesTimeFrame)
+  console.log('+++timeFrame', timeFrame)
+  console.log('+++SCROLL_THRESHOLD[timeFrame]', SCROLL_THRESHOLD[timeFrame])
   const shouldUpdateStart = (currentScrollTime - SCROLL_THRESHOLD[timeFrame]) < start
   const shouldUpdateEnd = (currentScrollTime + SCROLL_THRESHOLD[timeFrame]) > end
 
+  console.log('+++shouldUpdateStart', shouldUpdateStart)
+  console.log('+++shouldUpdateEnd', shouldUpdateEnd)
+
   if (shouldUpdateStart || shouldUpdateEnd) {
+    console.log('+++SCROLL_THRESHOLD')
     const params = {
       range: 'date',
       start: currentScrollTime,
