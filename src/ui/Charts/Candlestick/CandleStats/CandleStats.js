@@ -1,10 +1,20 @@
 import React from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import _throttle from 'lodash/throttle'
 
-import { propTypes, defaultProps } from './CandleStats.props'
-
 class CandleStats extends React.PureComponent {
+  static propTypes = {
+    chart: PropTypes.objectOf(PropTypes.object),
+    candleSeries: PropTypes.objectOf(PropTypes.object),
+    defaultCandle: PropTypes.objectOf(PropTypes.number),
+  }
+
+  static defaultProps = {
+    chart: {},
+    candleSeries: {},
+    defaultCandle: {},
+  }
+
   constructor(props) {
     super()
 
@@ -90,7 +100,4 @@ class CandleStats extends React.PureComponent {
   }
 }
 
-CandleStats.propTypes = propTypes
-CandleStats.defaultProps = defaultProps
-
-export default withTranslation('translations')(CandleStats)
+export default CandleStats
