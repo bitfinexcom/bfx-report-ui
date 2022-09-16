@@ -1,16 +1,28 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import _throttle from 'lodash/throttle'
 
 import { formatAmount, formatExecPrice } from 'ui/utils'
-
-import { propTypes, defaultProps } from './Tooltip.props'
 
 const tooltipWidth = 150
 const tooltipHeight = 78
 const tooltipMargin = 15
 
 class Tooltip extends React.PureComponent {
+  static propTypes = {
+    chart: PropTypes.objectOf(PropTypes.object),
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    tradeSeries: PropTypes.objectOf(PropTypes.object),
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    chart: {},
+    tradeSeries: {},
+  }
+
   state = {
     trade: undefined,
   }
@@ -129,8 +141,5 @@ class Tooltip extends React.PureComponent {
     )
   }
 }
-
-Tooltip.propTypes = propTypes
-Tooltip.defaultProps = defaultProps
 
 export default withTranslation('translations')(Tooltip)
