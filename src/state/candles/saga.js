@@ -98,10 +98,14 @@ function* fetchCandlesFail({ payload }) {
 
 function* handleGoToRangeSaga({ payload }) {
   const { start, end } = payload
-  const timeframe = yield select(selectors.getCandlesTimeFrame)
+  const now = new Date().getTime()
+  const timeFrame = yield select(selectors.getCandlesTimeFrame)
+  const endRange = (end + (OFFSETS[timeFrame] * 4) < now)
+    ? end + (OFFSETS[timeFrame] * 4)
+    : now
   yield put(setTimeRange({
-    start: (start - (OFFSETS[timeframe] * 4)),
-    end: (end + (OFFSETS[timeframe] * 4)),
+    start: (start - (OFFSETS[timeFrame] * 4)),
+    end: endRange,
     range: rangeTypes.CUSTOM,
   }))
   try {
