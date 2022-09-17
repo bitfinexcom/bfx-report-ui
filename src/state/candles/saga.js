@@ -19,6 +19,8 @@ import types, { SCROLL_THRESHOLD } from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
+const now = new Date().getTime()
+
 const getReqCandles = (params) => {
   const {
     start,
@@ -98,7 +100,6 @@ function* fetchCandlesFail({ payload }) {
 
 function* handleGoToRangeSaga({ payload }) {
   const { start, end } = payload
-  const now = new Date().getTime()
   const timeFrame = yield select(selectors.getCandlesTimeFrame)
   const endRange = (end + (OFFSETS[timeFrame] * 4) < now)
     ? end + (OFFSETS[timeFrame] * 4)
@@ -127,7 +128,8 @@ function* handleChartScrollTime({ payload }) {
   const { start, end } = yield select(getTimeFrame)
   const timeFrame = yield select(selectors.getCandlesTimeFrame)
   const shouldUpdateStart = (currentScrollTime - SCROLL_THRESHOLD[timeFrame]) < start
-  const shouldUpdateEnd = (currentScrollTime + SCROLL_THRESHOLD[timeFrame]) > end
+  const shouldUpdateEnd = ((currentScrollTime + SCROLL_THRESHOLD[timeFrame]) > end)
+    && (currentScrollTime + SCROLL_THRESHOLD[timeFrame] < now)
   if (shouldUpdateStart || shouldUpdateEnd) {
     const params = {
       range: goToRangeTypes.DATE,
