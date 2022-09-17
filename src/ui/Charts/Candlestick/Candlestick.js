@@ -295,14 +295,11 @@ class Candlestick extends React.PureComponent {
   }
 
   onTimeRangeChange = ({ from }) => {
-    // console.log('+++from', from)
     const {
       candles, trades, fetchData, setChartScrollTime,
     } = this.props
     setChartScrollTime(from)
-    // console.log('++candles', candles)
     const candleScrollTime = candles.entries[SCROLL_THRESHOLD] && candles.entries[SCROLL_THRESHOLD].time
-    // console.log('+++candleScrollTime', candleScrollTime)
     if (candles.nextPage && !candles.isLoading && from < candleScrollTime) {
       fetchData('candles')
     }
