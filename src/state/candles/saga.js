@@ -45,18 +45,9 @@ const getReqTrades = (params) => {
   })
 }
 
-function* fetchData(section, data, method, customTimeframe = null) {
+function* fetchData(section, data, method) {
   const params = yield select(selectors.getParams)
-  let start
-  let end
-  if (customTimeframe) {
-    start = customTimeframe?.start
-    end = customTimeframe?.end
-  } else {
-    const timeframe = yield select(getTimeFrame, data.nextPage)
-    start = timeframe?.start
-    end = timeframe?.end
-  }
+  const { start, end } = yield select(getTimeFrame, data.nextPage)
   const { result, error } = yield call(method, {
     ...params,
     start,
@@ -128,27 +119,19 @@ function* handleGoToRangeSaga({ payload }) {
 }
 
 function* handleChartScrollTime({ payload }) {
-  const { prevScrollTime, currentScrollTime } = payload
+  const { currentScrollTime } = payload
   const { start, end } = yield select(getTimeFrame)
   const timeFrame = yield select(selectors.getCandlesTimeFrame)
-  console.log('+++timeFrame', timeFrame)
-  console.log('+++SCROLL_THRESHOLD[timeFrame]', SCROLL_THRESHOLD[timeFrame])
   const shouldUpdateStart = (currentScrollTime - SCROLL_THRESHOLD[timeFrame]) < start
   const shouldUpdateEnd = (currentScrollTime + SCROLL_THRESHOLD[timeFrame]) > end
-
-  console.log('+++shouldUpdateStart', shouldUpdateStart)
-  console.log('+++shouldUpdateEnd', shouldUpdateEnd)
-
   if (shouldUpdateStart || shouldUpdateEnd) {
-    console.log('+++SCROLL_THRESHOLD')
     const params = {
-      range: 'date',
+      range: goToRangeTypes.DATE,
       start: currentScrollTime,
       end: currentScrollTime,
       timeFrame,
     }
     yield put(handleGoToRange(params))
-    yield put(setGoToRangePreserve(true))
   }
 }
 
