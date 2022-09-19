@@ -14,7 +14,9 @@ export const initialState = {
   dataReceived: false,
   currentFetchParams: {},
   timeframe: timeframeConstants.DAY,
-  isVsAccountBalanceSelected: reportTypeConstants.FALSE,
+  reportType: reportTypeConstants.WIN_LOSS,
+  isVSPrevDayBalance: false,
+  isVsAccountBalanceSelected: false,
   isUnrealizedProfitExcluded: unrealizedProfitConstants.FALSE,
 }
 
@@ -27,10 +29,13 @@ export function winLossReducer(state = initialState, action) {
         pageLoading: true,
         currentFetchParams: {
           timeframe: state.timeframe,
+          isVSPrevDayBalance: state.isVSPrevDayBalance,
           isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
           isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
         },
         timeframe: state.timeframe,
+        reportType: state.reportType,
+        isVSPrevDayBalance: state.isVSPrevDayBalance,
         isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
         isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
       }
@@ -54,6 +59,11 @@ export function winLossReducer(state = initialState, action) {
         ...state,
         ...payload,
       }
+    case types.SET_REPORT_TYPE:
+      return {
+        ...state,
+        reportType: payload,
+      }
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.REFRESH:
@@ -61,6 +71,10 @@ export function winLossReducer(state = initialState, action) {
       return {
         ...initialState,
         timeframe: state.timeframe,
+        reportType: state.reportType,
+        isVSPrevDayBalance: state.isVSPrevDayBalance,
+        isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
+        isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
       }
     case authTypes.LOGOUT:
       return initialState

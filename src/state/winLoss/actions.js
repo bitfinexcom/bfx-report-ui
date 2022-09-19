@@ -53,6 +53,13 @@ export function updateWinLoss(payload) {
   }
 }
 
+export function setReportType(payload) {
+  return {
+    type: types.SET_REPORT_TYPE,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   fetchWinLoss,

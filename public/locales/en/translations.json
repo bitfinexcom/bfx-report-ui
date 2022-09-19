@@ -403,8 +403,17 @@
     },
     "report-type": {
       "title": "Select Report Type",
-      "win_loss": "Win/Loss",
-      "win_loss_vs_acc_balance": "Win/Loss vs Account Balance"
+      "win_loss": {
+        "title": "Win/Loss"
+      }, 
+      "gains_deposits": {
+        "title": "Percentage Gains (gains/deposits)",
+        "description": "% gains are being calculated vs the deposits made to the account"
+      },
+      "gains_balance": {
+        "title": "Percentage Gains (gains/balance)",
+        "description": "% gains are being calculated daily vs the balance of the day before and compounded"
+      }
     },
     "unrealized-profits": {
       "title": "Show Unrealized Profits",

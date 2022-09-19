@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
@@ -25,8 +26,7 @@ import ReportTypeSelector from 'ui/ReportTypeSelector'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
-
-import { propTypes, defaultProps } from './AverageWinLoss.props'
+import constants from 'ui/ReportTypeSelector/constants'
 
 const TYPE = queryConstants.MENU_WIN_LOSS
 
@@ -49,7 +49,51 @@ const prepareChartData = (
   return { chartData, dataKeys: presentCurrencies }
 }
 
+const getReportTypeParams = (type) => {
+  switch (type) {
+    case constants.WIN_LOSS:
+      return { isVsAccountBalanceSelected: false }
+    case constants.GAINS_DEPOSITS:
+      return { isVsAccountBalanceSelected: true, isVSPrevDayBalance: false }
+    case constants.GAINS_BALANCE:
+      return { isVsAccountBalanceSelected: true, isVSPrevDayBalance: true }
+    default:
+      return { isVsAccountBalanceSelected: false }
+  }
+}
+
 class AverageWinLoss extends PureComponent {
+  static propTypes = {
+    currentFetchParams: PropTypes.shape({
+      timeframe: PropTypes.string,
+      isUnrealizedProfitExcluded: PropTypes.bool,
+      isVsAccountBalanceSelected: PropTypes.bool,
+    }),
+    dataReceived: PropTypes.bool.isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      mts: PropTypes.number,
+      USD: PropTypes.number,
+    })),
+    fetchData: PropTypes.func.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    params: PropTypes.shape({
+      timeframe: PropTypes.string,
+      isUnrealizedProfitExcluded: PropTypes.bool,
+      isVsAccountBalanceSelected: PropTypes.bool,
+    }),
+    refresh: PropTypes.func.isRequired,
+    reportType: PropTypes.string.isRequired,
+    setParams: PropTypes.func.isRequired,
+    setReportType: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    currentFetchParams: {},
+    entries: [],
+    params: {},
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -73,9 +117,11 @@ class AverageWinLoss extends PureComponent {
     setParams({ isUnrealizedProfitExcluded })
   }
 
-  handleReportTypeChange = (isVsAccountBalanceSelected) => {
-    const { setParams } = this.props
-    setParams({ isVsAccountBalanceSelected })
+  handleReportTypeChange = (type) => {
+    const { setParams, setReportType } = this.props
+    const params = getReportTypeParams(type)
+    setReportType(type)
+    setParams(params)
   }
 
   hasChanges = () => {
@@ -98,6 +144,7 @@ class AverageWinLoss extends PureComponent {
         isUnrealizedProfitExcluded,
         isVsAccountBalanceSelected,
       },
+      reportType,
     } = this.props
 
     const { chartData, dataKeys } = prepareChartData(
@@ -151,7 +198,7 @@ class AverageWinLoss extends PureComponent {
                 {t('selector.report-type.title')}
               </SectionHeaderItemLabel>
               <ReportTypeSelector
-                value={isVsAccountBalanceSelected}
+                value={reportType}
                 onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
@@ -167,8 +214,5 @@ class AverageWinLoss extends PureComponent {
     )
   }
 }
-
-AverageWinLoss.propTypes = propTypes
-AverageWinLoss.defaultProps = defaultProps
 
 export default AverageWinLoss
