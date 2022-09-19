@@ -36,7 +36,12 @@ import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors
 import { getTargetSymbols as getSPaymentsSymbols } from 'state/stakingPayments/selectors'
 import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
-import { getTimeframe as getWinLossTimeframe } from 'state/winLoss/selectors'
+import {
+  getIsVSPrevDayBalance,
+  getIsUnrealizedProfitExcluded,
+  getIsVsAccountBalanceSelected,
+  getTimeframe as getWinLossTimeframe,
+} from 'state/winLoss/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import { toggleExportSuccessDialog } from 'state/ui/actions'
 import LEDGERS_CATEGORIES from 'var/ledgersCategories'
@@ -222,11 +227,16 @@ function* getOptions({ target }) {
   options.filter = yield select(getFilterQuery, target)
   const selector = getSelector(target)
   const sign = selector ? yield select(selector) : ''
+  const isVSPrevDayBalance = yield select(getIsVSPrevDayBalance)
+  const isUnrealizedProfitExcluded = yield select(getIsUnrealizedProfitExcluded)
+  const isVsAccountBalanceSelected = yield select(getIsVsAccountBalanceSelected)
 
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
     case MENU_WIN_LOSS:
       options.timeframe = sign
+      options.isUnrealizedProfitExcluded = isUnrealizedProfitExcluded
+      if (isVsAccountBalanceSelected) options.isVSPrevDayBalance = isVSPrevDayBalance
       break
     case MENU_CANDLES:
       options.timeframe = sign.timeframe
@@ -359,7 +369,9 @@ function* getOptions({ target }) {
       options.method = 'getWalletsCsv'
       break
     case MENU_WIN_LOSS:
-      options.method = 'getWinLossCsv'
+      options.method = isVsAccountBalanceSelected
+        ? 'getWinLossVSAccountBalanceCsv'
+        : 'getWinLossCsv'
       break
     default:
       options.method = 'getLedgersCsv'
