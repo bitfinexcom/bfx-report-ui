@@ -1,16 +1,28 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import _throttle from 'lodash/throttle'
 
 import { formatAmount, formatExecPrice } from 'ui/utils'
-
-import { propTypes, defaultProps } from './Tooltip.props'
 
 const tooltipWidth = 150
 const tooltipHeight = 78
 const tooltipMargin = 15
 
 class Tooltip extends React.PureComponent {
+  static propTypes = {
+    chart: PropTypes.objectOf(PropTypes.object),
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    tradeSeries: PropTypes.objectOf(PropTypes.object),
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    chart: {},
+    tradeSeries: {},
+  }
+
   state = {
     trade: undefined,
   }
@@ -50,22 +62,24 @@ class Tooltip extends React.PureComponent {
 
     const tooltip = document.getElementsByClassName('candlestick-tooltip')[0]
 
-    const { x, y } = point
-    if (!trade || !time || x < 0 || x > width || y < 0 || y > height) {
-      tooltip.style.display = 'none'
-      return
+    if (tooltip) {
+      const { x, y } = point
+      if (!trade || !time || x < 0 || x > width || y < 0 || y > height) {
+        tooltip.style.display = 'none'
+        return
+      }
+
+      tooltip.style.display = 'block'
+      tooltip.style.borderColor = trade.open.execAmount > 0 ? '#16b157' : '#f05359'
+
+      if (trade) {
+        this.setState({
+          trade: trade.open,
+        })
+      }
+
+      this.setOffset(tooltip, point)
     }
-
-    tooltip.style.display = 'block'
-    tooltip.style.borderColor = trade.open.execAmount > 0 ? '#16b157' : '#f05359'
-
-    if (trade) {
-      this.setState({
-        trade: trade.open,
-      })
-    }
-
-    this.setOffset(tooltip, point)
   }
 
   /* eslint-disable no-param-reassign */
@@ -127,8 +141,5 @@ class Tooltip extends React.PureComponent {
     )
   }
 }
-
-Tooltip.propTypes = propTypes
-Tooltip.defaultProps = defaultProps
 
 export default withTranslation('translations')(Tooltip)
