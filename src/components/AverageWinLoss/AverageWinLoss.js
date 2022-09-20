@@ -198,6 +198,7 @@ class AverageWinLoss extends PureComponent {
                 {t('selector.report-type.title')}
               </SectionHeaderItemLabel>
               <ReportTypeSelector
+                section={TYPE}
                 value={reportType}
                 onChange={this.handleReportTypeChange}
               />
