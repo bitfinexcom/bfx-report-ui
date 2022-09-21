@@ -8,12 +8,14 @@ import {
   removeTargetPair,
   setTargetPairs,
   setParams,
+  setReportType,
   clearTargetPairs,
 } from 'state/feesReport/actions'
 import {
   getCurrentFetchParams,
   getDataReceived,
   getEntries,
+  getReportType,
   getPageLoading,
   getParams,
   getTargetPairs,
@@ -25,6 +27,7 @@ const mapStateToProps = state => ({
   currentFetchParams: getCurrentFetchParams(state),
   entries: getEntries(state),
   params: getParams(state),
+  reportType: getReportType(state),
   targetPairs: getTargetPairs(state),
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
@@ -36,6 +39,7 @@ const mapDispatchToProps = {
   setParams,
   addTargetPair,
   setTargetPairs,
+  setReportType,
   removeTargetPair,
   clearTargetPairs,
 }
