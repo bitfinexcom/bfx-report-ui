@@ -1,12 +1,16 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 import Select from 'ui/Select'
 
 import { getItems } from './ReportTypeSelector.helpers'
 
-const ReportTypeSelector = ({ onChange, section, value }) => {
-  const items = getItems(section)
+const ReportTypeSelector = ({
+  value,
+  section,
+  onChange,
+}) => {
+  const items = useMemo(() => getItems(section), [section])
   return (
     <Select
       value={value}
