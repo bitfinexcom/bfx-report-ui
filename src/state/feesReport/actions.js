@@ -93,14 +93,22 @@ export function clearTargetPairs() {
   }
 }
 
+export function setReportType(payload) {
+  return {
+    type: types.SET_REPORT_TYPE,
+    payload,
+  }
+}
+
 export default {
+  addTargetPair,
+  clearTargetPairs,
   fetchFail,
   fetchFeesReport,
   refresh,
-  setParams,
-  updateFeesReport,
-  setTargetPairs,
-  addTargetPair,
   removeTargetPair,
-  clearTargetPairs,
+  setParams,
+  setReportType,
+  setTargetPairs,
+  updateFeesReport,
 }
