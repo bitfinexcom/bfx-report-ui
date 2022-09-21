@@ -3,14 +3,18 @@ import _map from 'lodash/map'
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
+import reportTypeConstants from 'ui/ReportTypeSelector/constants'
 
 import types from './constants'
 
 export const initialState = {
-  dataReceived: false,
-  pageLoading: false,
   currentFetchParams: {},
+  dataReceived: false,
   entries: [],
+  isTradingFees: true,
+  isFundingFees: false,
+  pageLoading: false,
+  reportType: reportTypeConstants.TRADING_FEES,
   targetPairs: [],
   timeframe: timeframeConstants.DAY,
 }
