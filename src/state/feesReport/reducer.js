@@ -49,6 +49,11 @@ export function feesReportReducer(state = initialState, action) {
         ...state,
         ...payload,
       }
+    case types.SET_REPORT_TYPE:
+      return {
+        ...state,
+        reportType: payload,
+      }
     case types.FETCH_FAIL:
       return {
         ...state,
