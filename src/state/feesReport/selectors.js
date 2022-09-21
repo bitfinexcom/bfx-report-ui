@@ -5,6 +5,7 @@ export const getDataReceived = state => getFeesReport(state).dataReceived
 export const getEntries = state => getFeesReport(state).entries
 export const getTargetPairs = state => getFeesReport(state).targetPairs
 export const getPageLoading = state => getFeesReport(state).pageLoading
+export const getReportType = state => getFeesReport(state).reportType
 export const getParams = (state) => {
   const {
     targetPairs,
@@ -20,7 +21,8 @@ export default {
   getCurrentFetchParams,
   getDataReceived,
   getEntries,
+  getFeesReport,
   getPageLoading,
   getParams,
-  getFeesReport,
+  getReportType,
 }
