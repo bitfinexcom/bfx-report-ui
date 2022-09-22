@@ -91,6 +91,9 @@ export function feesReportReducer(state = initialState, action) {
         ...initialState,
         timeframe: state.timeframe,
         targetPairs: state.targetPairs,
+        reportType: state.reportType,
+        isTradingFees: state.isTradingFees,
+        isFundingFees: state.isFundingFees,
       }
     case authTypes.LOGOUT:
       return initialState
