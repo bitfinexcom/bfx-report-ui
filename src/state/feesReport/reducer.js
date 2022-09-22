@@ -29,9 +29,14 @@ export function feesReportReducer(state = initialState, action) {
         currentFetchParams: {
           targetPairs: state.targetPairs,
           timeframe: state.timeframe,
+          isTradingFees: state.isTradingFees,
+          isFundingFees: state.isFundingFees,
         },
         targetPairs: state.targetPairs,
         timeframe: state.timeframe,
+        reportType: state.reportType,
+        isTradingFees: state.isTradingFees,
+        isFundingFees: state.isFundingFees,
       }
     case types.UPDATE_FEES_REPORT: {
       return {
