@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
@@ -31,8 +32,6 @@ import {
   clearAllPairs,
 } from 'state/utils'
 
-import { propTypes, defaultProps } from './FeesReport.props'
-
 const TYPE = queryConstants.MENU_FEES_REPORT
 
 const getReportTypeParams = (type) => {
@@ -49,6 +48,36 @@ const getReportTypeParams = (type) => {
 }
 
 class FeesReport extends PureComponent {
+  static propTypes = {
+    currentFetchParams: PropTypes.shape({
+      timeframe: PropTypes.string,
+      targetPairs: PropTypes.arrayOf(PropTypes.string),
+    }),
+    dataReceived: PropTypes.bool.isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      mts: PropTypes.number.isRequired,
+    })),
+    fetchData: PropTypes.func.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    params: PropTypes.shape({
+      timeframe: PropTypes.string,
+      targetPairs: PropTypes.arrayOf(PropTypes.string),
+    }),
+    refresh: PropTypes.func.isRequired,
+    reportType: PropTypes.string.isRequired,
+    setParams: PropTypes.func.isRequired,
+    setReportType: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetPairs: PropTypes.arrayOf(PropTypes.string),
+  }
+
+  static defaultProps = {
+    params: {},
+    entries: [],
+    targetPairs: [],
+    currentFetchParams: {},
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -165,8 +194,5 @@ class FeesReport extends PureComponent {
     )
   }
 }
-
-FeesReport.propTypes = propTypes
-FeesReport.defaultProps = defaultProps
 
 export default withTranslation('translations')(FeesReport)
