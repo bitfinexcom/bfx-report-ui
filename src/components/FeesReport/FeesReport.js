@@ -19,9 +19,11 @@ import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
+import ReportTypeSelector from 'ui/ReportTypeSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import queryConstants from 'state/query/constants'
+import constants from 'ui/ReportTypeSelector/constants'
 import {
   checkInit,
   checkFetch,
@@ -32,6 +34,19 @@ import {
 import { propTypes, defaultProps } from './FeesReport.props'
 
 const TYPE = queryConstants.MENU_FEES_REPORT
+
+const getReportTypeParams = (type) => {
+  switch (type) {
+    case constants.TRADING_FEES:
+      return { isTradingFees: true, isFundingFees: false }
+    case constants.FUNDING_FEES:
+      return { isTradingFees: false, isFundingFees: true }
+    case constants.FUNDING_TRADING_FEES:
+      return { isTradingFees: true, isFundingFees: true }
+    default:
+      return { isTradingFees: true, isFundingFees: false }
+  }
+}
 
 class FeesReport extends PureComponent {
   componentDidMount() {
@@ -59,6 +74,13 @@ class FeesReport extends PureComponent {
 
   clearPairs = () => clearAllPairs(TYPE, this.props)
 
+  handleReportTypeChange = (type) => {
+    const { setParams, setReportType } = this.props
+    const params = getReportTypeParams(type)
+    setReportType(type)
+    setParams(params)
+  }
+
   render() {
     const {
       t,
@@ -68,6 +90,7 @@ class FeesReport extends PureComponent {
       pageLoading,
       dataReceived,
       params: { timeframe },
+      reportType,
     } = this.props
     const hasChanges = this.hasChanges()
 
@@ -118,6 +141,16 @@ class FeesReport extends PureComponent {
               <TimeFrameSelector
                 value={timeframe}
                 onChange={this.handleTimeframeChange}
+              />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.report-type.title')}
+              </SectionHeaderItemLabel>
+              <ReportTypeSelector
+                section={TYPE}
+                value={reportType}
+                onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
             <QueryButton
