@@ -4,6 +4,7 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+import _isEmpty from 'lodash/isEmpty'
 
 import { makeFetchCall } from 'state/utils'
 import { toggleErrorDialog } from 'state/ui/actions'
@@ -29,7 +30,9 @@ export const getFeesReport = ({
     timeframe,
     isTradingFees,
     isFundingFees,
-    symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
+    symbol: !_isEmpty(targetSymbols)
+      ? mapRequestSymbols(targetSymbols)
+      : undefined,
   }
   return makeFetchCall('getTotalFeesReport', params)
 }
