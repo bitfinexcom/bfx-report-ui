@@ -6,14 +6,19 @@ export const getEntries = state => getFeesReport(state).entries
 export const getTargetPairs = state => getFeesReport(state).targetPairs
 export const getPageLoading = state => getFeesReport(state).pageLoading
 export const getReportType = state => getFeesReport(state).reportType
+export const getTargetSymbols = state => getFeesReport(state).targetSymbols
 export const getParams = (state) => {
   const {
-    targetPairs,
     timeframe,
+    targetSymbols,
+    isTradingFees,
+    isFundingFees,
   } = getFeesReport(state)
   return {
-    targetPairs,
     timeframe,
+    targetSymbols,
+    isTradingFees,
+    isFundingFees,
   }
 }
 
@@ -25,4 +30,5 @@ export default {
   getPageLoading,
   getParams,
   getReportType,
+  getTargetSymbols,
 }
