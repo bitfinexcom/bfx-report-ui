@@ -6,12 +6,12 @@ import { withTranslation } from 'react-i18next'
 import {
   refresh,
   setParams,
-  addTargetPair,
   setReportType,
-  setTargetPairs,
   fetchFeesReport,
-  removeTargetPair,
-  clearTargetPairs,
+  addTargetSymbol,
+  setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
 } from 'state/feesReport/actions'
 import {
   getParams,
@@ -21,6 +21,7 @@ import {
   getTargetPairs,
   getDataReceived,
   getCurrentFetchParams,
+  getTargetSymbols,
 } from 'state/feesReport/selectors'
 
 import FeesReport from './FeesReport'
@@ -33,17 +34,18 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   currentFetchParams: getCurrentFetchParams(state),
+  targetSymbols: getTargetSymbols(state),
 })
 
 const mapDispatchToProps = {
   refresh,
   setParams,
-  addTargetPair,
-  setTargetPairs,
   setReportType,
-  removeTargetPair,
-  clearTargetPairs,
+  addTargetSymbol,
+  removeTargetSymbol,
+  clearTargetSymbols,
   fetchData: fetchFeesReport,
+  setTargetSymbols,
 }
 
 export default compose(
