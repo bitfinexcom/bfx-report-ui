@@ -9,7 +9,7 @@ import { makeFetchCall } from 'state/utils'
 import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getParams } from 'state/feesReport/selectors'
-import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
+import { mapRequestSymbols } from 'state/symbols/utils'
 import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
@@ -19,26 +19,38 @@ export const getFeesReport = ({
   start,
   end,
   timeframe,
-  targetPairs,
+  targetSymbols,
+  isTradingFees,
+  isFundingFees,
 }) => {
-  const params = { start, end, timeframe }
-  if (targetPairs.length) {
-    params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
+  const params = {
+    start,
+    end,
+    timeframe,
+    isTradingFees,
+    isFundingFees,
+    symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
   }
-  return makeFetchCall('getFeesReport', params)
+  return makeFetchCall('getTotalFeesReport', params)
 }
 
 /* eslint-disable-next-line consistent-return */
 export function* fetchFeesReport() {
   try {
-    const { timeframe, targetPairs } = yield select(getParams)
+    const {
+      timeframe,
+      targetSymbols,
+      isTradingFees,
+      isFundingFees,
+    } = yield select(getParams)
     const { start, end } = yield select(getTimeFrame)
-
     const { result = [], error } = yield call(getFeesReport, {
       start,
       end,
       timeframe,
-      targetPairs,
+      targetSymbols,
+      isTradingFees,
+      isFundingFees,
     })
     yield put(actions.updateFeesReport(result))
 
@@ -63,7 +75,7 @@ function* fetchFeesReportFail({ payload }) {
 }
 
 export default function* feesReportSaga() {
-  yield takeLatest(types.FETCH_FEES_REPORT, fetchFeesReport)
-  yield takeLatest([types.REFRESH, types.SET_PARAMS, types.CLEAR_PAIRS], refreshFeesReport)
   yield takeLatest(types.FETCH_FAIL, fetchFeesReportFail)
+  yield takeLatest(types.FETCH_FEES_REPORT, fetchFeesReport)
+  yield takeLatest([types.REFRESH, types.SET_PARAMS, types.CLEAR_SYMBOLS], refreshFeesReport)
 }
