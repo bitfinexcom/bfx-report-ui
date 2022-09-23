@@ -100,6 +100,33 @@ export function setReportType(payload) {
   }
 }
 
+export function setTargetSymbols(symbols) {
+  return {
+    type: types.SET_SYMBOLS,
+    payload: symbols,
+  }
+}
+
+export function addTargetSymbol(symbol) {
+  return {
+    type: types.ADD_SYMBOL,
+    payload: symbol,
+  }
+}
+
+export function removeTargetSymbol(symbol) {
+  return {
+    type: types.REMOVE_SYMBOL,
+    payload: symbol,
+  }
+}
+
+export function clearTargetSymbols() {
+  return {
+    type: types.CLEAR_SYMBOLS,
+  }
+}
+
 export default {
   addTargetPair,
   clearTargetPairs,
@@ -111,4 +138,7 @@ export default {
   setReportType,
   setTargetPairs,
   updateFeesReport,
+  addTargetSymbol,
+  removeTargetSymbol,
+  clearTargetSymbols,
 }
