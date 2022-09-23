@@ -51,48 +51,6 @@ export function updateFeesReport(payload) {
   }
 }
 
-/**
- * Create an action to set current pair.
- * @param {string[]} pairs
- */
-export function setTargetPairs(pairs) {
-  return {
-    type: types.SET_PAIRS,
-    payload: pairs,
-  }
-}
-
-/**
- * Create an action to add target pair.
- * @param {string} pair
- */
-export function addTargetPair(pair) {
-  return {
-    type: types.ADD_PAIR,
-    payload: pair,
-  }
-}
-
-/**
- * Create an action to remove target pair.
- * @param {string} pair
- */
-export function removeTargetPair(pair) {
-  return {
-    type: types.REMOVE_PAIR,
-    payload: pair,
-  }
-}
-
-/**
- * Create an action to clear target pairs.
- */
-export function clearTargetPairs() {
-  return {
-    type: types.CLEAR_PAIRS,
-  }
-}
-
 export function setReportType(payload) {
   return {
     type: types.SET_REPORT_TYPE,
@@ -128,17 +86,13 @@ export function clearTargetSymbols() {
 }
 
 export default {
-  addTargetPair,
-  clearTargetPairs,
+  addTargetSymbol,
+  clearTargetSymbols,
   fetchFail,
   fetchFeesReport,
   refresh,
-  removeTargetPair,
+  removeTargetSymbol,
   setParams,
   setReportType,
-  setTargetPairs,
   updateFeesReport,
-  addTargetSymbol,
-  removeTargetSymbol,
-  clearTargetSymbols,
 }
