@@ -18,10 +18,9 @@ import {
   getEntries,
   getReportType,
   getPageLoading,
-  getTargetPairs,
   getDataReceived,
-  getCurrentFetchParams,
   getTargetSymbols,
+  getCurrentFetchParams,
 } from 'state/feesReport/selectors'
 
 import FeesReport from './FeesReport'
@@ -30,7 +29,6 @@ const mapStateToProps = state => ({
   params: getParams(state),
   entries: getEntries(state),
   reportType: getReportType(state),
-  targetPairs: getTargetPairs(state),
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   currentFetchParams: getCurrentFetchParams(state),
@@ -42,10 +40,10 @@ const mapDispatchToProps = {
   setParams,
   setReportType,
   addTargetSymbol,
+  setTargetSymbols,
   removeTargetSymbol,
   clearTargetSymbols,
   fetchData: fetchFeesReport,
-  setTargetSymbols,
 }
 
 export default compose(
