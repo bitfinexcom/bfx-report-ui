@@ -190,6 +190,7 @@ function formatSymbol(target, symbols) {
     case MENU_FPAYMENT:
     case MENU_SPAYMENTS:
     case MENU_LOAN_REPORT:
+    case MENU_FEES_REPORT:
       return mapRequestSymbols(symbols)
     case MENU_PUBLIC_FUNDING:
       return `f${mapRequestSymbols(symbols)}`
@@ -200,7 +201,6 @@ function formatSymbol(target, symbols) {
     case MENU_ORDER_TRADES:
     case MENU_TICKERS:
     case MENU_TRADED_VOLUME:
-    case MENU_FEES_REPORT:
     case MENU_TRADES:
     case MENU_POSITIONS:
     case MENU_POSITIONS_ACTIVE:
@@ -257,7 +257,7 @@ function* getOptions({ target }) {
     case MENU_TRADED_VOLUME:
     case MENU_FEES_REPORT:
       options.timeframe = sign.timeframe
-      options.symbol = formatSymbol(target, sign.targetPairs)
+      options.symbol = formatSymbol(target, sign.targetSymbols)
       break
     case MENU_TAX_REPORT:
     case MENU_LOGINS:
@@ -363,7 +363,7 @@ function* getOptions({ target }) {
       options.method = 'getTradedVolumeCsv'
       break
     case MENU_FEES_REPORT:
-      options.method = 'getFeesReportCsv'
+      options.method = 'getTotalFeesReportCsv'
       break
     case MENU_WALLETS:
       options.method = 'getWalletsCsv'
