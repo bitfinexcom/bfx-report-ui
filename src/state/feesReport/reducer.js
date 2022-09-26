@@ -84,37 +84,16 @@ export function feesReportReducer(state = initialState, action) {
       return {
         ...initialState,
       }
-    case types.ADD_PAIR:
-      return {
-        ...state,
-        targetPairs: [...state.targetPairs, payload],
-      }
-    case types.REMOVE_PAIR:
-      return {
-        ...state,
-        targetPairs: state.targetPairs.filter(pair => pair !== payload),
-      }
-    case types.SET_PAIRS:
-      return {
-        ...state,
-        targetPairs: payload,
-      }
     case types.SET_SYMBOLS:
       return {
         ...initialState,
         targetSymbols: payload,
-      }
-    case types.CLEAR_PAIRS:
-      return {
-        ...state,
-        targetPairs: [],
       }
     case types.REFRESH:
     case timeRangeTypes.SET_TIME_RANGE:
       return {
         ...initialState,
         timeframe: state.timeframe,
-        targetPairs: state.targetPairs,
         reportType: state.reportType,
         isTradingFees: state.isTradingFees,
         isFundingFees: state.isFundingFees,
