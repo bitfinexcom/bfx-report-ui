@@ -80,5 +80,5 @@ function* fetchFeesReportFail({ payload }) {
 export default function* feesReportSaga() {
   yield takeLatest(types.FETCH_FAIL, fetchFeesReportFail)
   yield takeLatest(types.FETCH_FEES_REPORT, fetchFeesReport)
-  yield takeLatest([types.REFRESH, types.SET_PARAMS, types.CLEAR_SYMBOLS], refreshFeesReport)
+  yield takeLatest([types.REFRESH, types.CLEAR_SYMBOLS], refreshFeesReport)
 }
