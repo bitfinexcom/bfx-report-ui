@@ -67,7 +67,6 @@ class FeesReport extends PureComponent {
     setReportType: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetSymbols: PropTypes.arrayOf(PropTypes.string),
-
   }
 
   static defaultProps = {
