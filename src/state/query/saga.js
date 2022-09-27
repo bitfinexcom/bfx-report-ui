@@ -17,7 +17,6 @@ import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliat
 import { getParams as getCandlesParams } from 'state/candles/selectors'
 import { getTargetPairs as getDerivativesPairs } from 'state/derivatives/selectors'
 import { getTargetSymbols as getFCreditSymbols } from 'state/fundingCreditHistory/selectors'
-import { getParams as getFeesReportParams } from 'state/feesReport/selectors'
 import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
 import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
 import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/selectors'
@@ -36,6 +35,11 @@ import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors
 import { getTargetSymbols as getSPaymentsSymbols } from 'state/stakingPayments/selectors'
 import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
+import {
+  getIsFundingFees,
+  getIsTradingFees,
+  getParams as getFeesReportParams,
+} from 'state/feesReport/selectors'
 import {
   getIsVSPrevDayBalance,
   getIsUnrealizedProfitExcluded,
@@ -227,6 +231,8 @@ function* getOptions({ target }) {
   options.filter = yield select(getFilterQuery, target)
   const selector = getSelector(target)
   const sign = selector ? yield select(selector) : ''
+  const isFundingFees = yield select(getIsFundingFees)
+  const isTradingFees = yield select(getIsTradingFees)
   const isVSPrevDayBalance = yield select(getIsVSPrevDayBalance)
   const isUnrealizedProfitExcluded = yield select(getIsUnrealizedProfitExcluded)
   const isVsAccountBalanceSelected = yield select(getIsVsAccountBalanceSelected)
@@ -255,8 +261,13 @@ function* getOptions({ target }) {
       options.symbol = formatSymbol(target, sign.targetSymbols)
       break
     case MENU_TRADED_VOLUME:
+      options.timeframe = sign.timeframe
+      options.symbol = formatSymbol(target, sign.targetPairs)
+      break
     case MENU_FEES_REPORT:
       options.timeframe = sign.timeframe
+      options.isFundingFees = isFundingFees
+      options.isTradingFees = isTradingFees
       options.symbol = formatSymbol(target, sign.targetSymbols)
       break
     case MENU_TAX_REPORT:
