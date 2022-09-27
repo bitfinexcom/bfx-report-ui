@@ -17,18 +17,17 @@ import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import MultiPairSelector from 'ui/MultiPairSelector'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import ReportTypeSelector from 'ui/ReportTypeSelector'
-import parseChartData from 'ui/Charts/Charts.helpers'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
+import { parseFeesReportChartData } from 'ui/Charts/Charts.helpers'
 import queryConstants from 'state/query/constants'
 import constants from 'ui/ReportTypeSelector/constants'
 import {
   checkInit,
-  checkFetch,
-  togglePair,
-  clearAllPairs,
+  toggleSymbol,
+  clearAllSymbols,
 } from 'state/utils'
 
 const TYPE = queryConstants.MENU_FEES_REPORT
@@ -67,22 +66,19 @@ class FeesReport extends PureComponent {
     setParams: PropTypes.func.isRequired,
     setReportType: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
-    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
+
   }
 
   static defaultProps = {
     params: {},
     entries: [],
-    targetPairs: [],
+    targetSymbols: [],
     currentFetchParams: {},
   }
 
   componentDidMount() {
     checkInit(this.props, TYPE)
-  }
-
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
   }
 
   handleQuery = () => {
@@ -100,7 +96,9 @@ class FeesReport extends PureComponent {
     return !_isEqual(currentFetchParams, params)
   }
 
-  clearPairs = () => clearAllPairs(TYPE, this.props)
+  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
+
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
 
   handleReportTypeChange = (type) => {
     const { setParams, setReportType } = this.props
@@ -115,16 +113,15 @@ class FeesReport extends PureComponent {
       entries,
       refresh,
       reportType,
-      targetPairs,
       pageLoading,
       dataReceived,
+      targetSymbols,
       params: { timeframe },
     } = this.props
-    const hasChanges = this.hasChanges()
-
-    const { chartData, presentCurrencies } = parseChartData({
-      timeframe,
+    const { chartData, dataKeys } = parseFeesReportChartData({
       data: _sortBy(entries, ['mts']),
+      timeframe,
+      t,
     })
 
     let showContent
@@ -137,7 +134,7 @@ class FeesReport extends PureComponent {
         <Chart
           isSumUpEnabled
           data={chartData}
-          dataKeys={presentCurrencies}
+          dataKeys={dataKeys}
         />
       )
     }
@@ -156,12 +153,12 @@ class FeesReport extends PureComponent {
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
-              <MultiPairSelector
-                currentFilters={targetPairs}
-                togglePair={pair => togglePair(TYPE, this.props, pair)}
+              <MultiSymbolSelector
+                currentFilters={targetSymbols}
+                toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
-            <ClearFiltersButton onClick={this.clearPairs} />
+            <ClearFiltersButton onClick={this.clearSymbols} />
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.select')}
@@ -182,8 +179,8 @@ class FeesReport extends PureComponent {
               />
             </SectionHeaderItem>
             <QueryButton
-              disabled={!hasChanges}
               onClick={this.handleQuery}
+              disabled={!this.hasChanges()}
             />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
