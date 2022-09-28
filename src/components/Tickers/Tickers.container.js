@@ -7,6 +7,7 @@ import {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 } from 'state/tickers/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -19,12 +20,14 @@ import {
   getTargetPairs,
 } from 'state/tickers/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import Tickers from './Tickers'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_TICKERS),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_TICKERS),
   entries: getFilteredEntries(state, queryConstants.MENU_TICKERS, getEntries(state)),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
@@ -41,6 +44,7 @@ const mapDispatchToProps = {
   setTargetPairs,
   removeTargetPair,
   updateErrorStatus,
+  clearTargetPairs,
 }
 
 const TickersContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Tickers))

@@ -1,5 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Button,
@@ -11,19 +11,35 @@ import {
 } from '@blueprintjs/core'
 import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
-import { platform } from 'var/config'
+import config from 'config'
 
-import { propTypes, defaultProps } from './SignUp.props'
+import AuthTypeSelector from '../AuthTypeSelector'
 import InputKey from '../InputKey'
 import ErrorLabel from '../ErrorLabel'
+import { MODES } from '../Auth'
 
-const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
 
 // handles framework sign up and online version login
 class SignUp extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
+  static propTypes = {
+    authType: PropTypes.string.isRequired,
+    authData: PropTypes.shape({
+      apiKey: PropTypes.string,
+      apiSecret: PropTypes.string,
+      isPersisted: PropTypes.bool.isRequired,
+    }).isRequired,
+    loading: PropTypes.bool.isRequired,
+    t: PropTypes.func.isRequired,
+    signUp: PropTypes.func.isRequired,
+    switchMode: PropTypes.func.isRequired,
+    switchAuthType: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      isSubAccount: PropTypes.bool.isRequired,
+      isNotProtected: PropTypes.bool.isRequired,
+    })).isRequired,
+  }
 
   constructor(props) {
     super()
@@ -35,7 +51,7 @@ class SignUp extends PureComponent {
       password: '',
       passwordRepeat: '',
       isBeingValidated: false,
-      isPasswordProtected: false,
+      isPasswordProtected: config.hostedFrameworkMode,
       isPersisted,
       passwordError: '',
       passwordRepeatError: '',
@@ -76,7 +92,7 @@ class SignUp extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    if (!platform.showFrameworkMode || !isPasswordProtected) {
+    if (!config.showFrameworkMode || !isPasswordProtected) {
       return true
     }
 
@@ -125,8 +141,10 @@ class SignUp extends PureComponent {
 
   render() {
     const {
+      authType,
       loading,
       switchMode,
+      switchAuthType,
       t,
       users,
     } = this.props
@@ -141,14 +159,14 @@ class SignUp extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    const title = platform.showFrameworkMode ? t('auth.signUp') : t('auth.title')
-    const icon = platform.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
+    const title = config.showFrameworkMode ? t('auth.signUp') : t('auth.title')
+    const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
+    const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
     const isSignUpDisabled = !apiKey || !apiSecret
-      || (platform.showFrameworkMode && isPasswordProtected
+      || (config.showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
-
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
-      'bitfinex-auth-sign-up--framework': platform.showFrameworkMode,
+      'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
     })
 
     return (
@@ -161,11 +179,17 @@ class SignUp extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
+          {config.showFrameworkMode && (
+            <AuthTypeSelector
+              authType={authType}
+              switchAuthType={switchAuthType}
+            />
+          )}
           <PlatformLogo />
           <Callout>
             {t('auth.note1')}
-            <a href={platform.KEY_URL} target='_blank' rel='noopener noreferrer'>
-              {platform.KEY_URL.split('https://')[1]}
+            <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
+              {config.KEY_URL.split('https://')[1]}
             </a>
             {t('auth.note2')}
           </Callout>
@@ -181,8 +205,8 @@ class SignUp extends PureComponent {
             value={apiSecret}
             onChange={this.handleInputChange}
           />
-          {platform.showFrameworkMode && isPasswordProtected && (
-            <Fragment>
+          {config.showFrameworkMode && isPasswordProtected && (
+            <>
               <InputKey
                 label='auth.enterPassword'
                 name='password'
@@ -197,7 +221,7 @@ class SignUp extends PureComponent {
                 onChange={this.handleInputChange}
               />
               <ErrorLabel text={passwordRepeatError} />
-            </Fragment>
+            </>
           )}
           <div className='bitfinex-auth-checkboxes'>
             <Checkbox
@@ -208,20 +232,22 @@ class SignUp extends PureComponent {
             >
               {t('auth.rememberMe')}
             </Checkbox>
-            <Checkbox
-              className='bitfinex-auth-remember-me'
-              name='isPasswordProtected'
-              checked={isPasswordProtected}
-              onChange={this.handleCheckboxChange}
-            >
-              {t('auth.passwordProtection')}
-            </Checkbox>
+            {showPasswordProtection && (
+              <Checkbox
+                className='bitfinex-auth-remember-me'
+                name='isPasswordProtected'
+                checked={isPasswordProtected}
+                onChange={this.handleCheckboxChange}
+              >
+                {t('auth.passwordProtection')}
+              </Checkbox>
+            )}
           </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            {platform.showFrameworkMode && users.length > 0 && (
-              <div className='bitfinex-auth-mode-switch' onClick={switchMode}>
+            {config.showFrameworkMode && users.length > 0 && (
+              <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
                 {t('auth.signIn')}
               </div>
             )}
@@ -242,4 +268,4 @@ class SignUp extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(SignUp)
+export default SignUp

@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import moment from 'moment-timezone'
 import { Position } from '@blueprintjs/core'
 import { DateInput as BptDateInput, TimePrecision } from '@blueprintjs/datetime'
@@ -8,7 +7,6 @@ import Icon from 'icons'
 import {
   DEFAULT_DATETIME_FORMAT, momentFormatter, momentFormatterDays,
 } from 'state/utils'
-import { platform } from 'var/config'
 
 import { propTypes, defaultProps } from './DateInput.props'
 
@@ -32,34 +30,35 @@ class DateInput extends PureComponent {
     this.setState({ isOpen })
   }
 
+  // automatically creates date from timestamp
+  formatDate = date => (typeof date === 'object' ? date : date && new Date(date))
+
   render() {
     const {
+      className,
       daysOnly,
       defaultValue,
-      inputTimezone,
       t,
+      timezone,
+      value,
     } = this.props
     const { isOpen } = this.state
 
-    // automatically create date from timestamp
-    const defaultDate = (typeof defaultValue === 'object')
-      ? defaultValue
-      : defaultValue && new Date(defaultValue)
-
     const { formatDate, parseDate } = daysOnly
       ? momentFormatterDays()
-      : momentFormatter(DEFAULT_DATETIME_FORMAT, inputTimezone)
+      : momentFormatter(DEFAULT_DATETIME_FORMAT, timezone)
 
-    const timePrecision = (platform.showFrameworkMode && !daysOnly) ? TimePrecision.SECOND : undefined
+    const timePrecision = !daysOnly ? TimePrecision.SECOND : undefined
     const icon = isOpen
       ? <Icon.CHEVRON_UP />
       : <Icon.CHEVRON_DOWN />
 
     return (
       <BptDateInput
-        defaultValue={defaultDate}
+        defaultValue={this.formatDate(defaultValue)}
         formatDate={formatDate}
         inputProps={{
+          className,
           rightElement: icon,
         }}
         onChange={this.onChange}
@@ -73,6 +72,7 @@ class DateInput extends PureComponent {
           position: Position.BOTTOM_LEFT,
         }}
         timePrecision={timePrecision}
+        value={this.formatDate(value)}
       />
     )
   }
@@ -81,4 +81,4 @@ class DateInput extends PureComponent {
 DateInput.propTypes = propTypes
 DateInput.defaultProps = defaultProps
 
-export default withTranslation('translations')(DateInput)
+export default DateInput

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import {
   Cell,
   TruncatedFormat,
@@ -6,11 +6,12 @@ import {
 
 import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 import Explorer from 'ui/Explorer'
-import { platform } from 'var/config'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import config from 'config'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     filteredData,
     getFullTime,
     t,
@@ -21,7 +22,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -35,7 +36,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdated',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mtsUpdated', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
         return (
@@ -51,7 +52,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
-      width: COLUMN_WIDTHS.SYMBOL,
+      width: getColumnWidth('currency', columnsWidth),
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
@@ -65,7 +66,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'column.status',
-      width: COLUMN_WIDTHS.MOVEMENT_STATUS,
+      width: getColumnWidth('status', columnsWidth),
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -79,7 +80,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth),
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(amount)} ${currency}`
@@ -92,13 +93,14 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
-    ...insertIf(platform.showFrameworkMode, (
+    ...insertIf(config.showFrameworkMode, (
       {
         id: 'amountUsd',
         name: 'column.amountUsd',
-        width: COLUMN_WIDTHS.AMOUNT,
+        width: getColumnWidth('amountUsd', columnsWidth),
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
           const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
@@ -111,13 +113,14 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
       }
     )),
     {
       id: 'fees',
       name: 'column.fees',
-      width: COLUMN_WIDTHS.FEE,
+      width: getColumnWidth('fees', columnsWidth),
       renderer: (rowIndex) => {
         const { fees, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(fees)} ${currency}`
@@ -126,31 +129,32 @@ export default function getColumns(props) {
             className='bitfinex-text-align-right'
             tooltip={tooltip}
           >
-            <Fragment>
+            <>
               {formatAmount(fees)}
               {' '}
               <span className='bitfinex-show-soft'>
                 {currency}
               </span>
-            </Fragment>
+            </>
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].fees),
     },
     {
       id: 'destinationAddress',
       name: 'column.destination',
-      width: 400,
+      width: getColumnWidth('destinationAddress', columnsWidth),
       renderer: (rowIndex) => {
         const { currency, destinationAddress } = filteredData[rowIndex]
         return (
           <Cell tooltip={destinationAddress}>
-            <Fragment>
+            <>
               {destinationAddress}
               {' '}
               <Explorer currency={currency} destinationAddress={destinationAddress} />
-            </Fragment>
+            </>
           </Cell>
         )
       },
@@ -159,7 +163,7 @@ export default function getColumns(props) {
     {
       id: 'transactionId',
       name: 'column.transactionId',
-      width: 135,
+      width: getColumnWidth('transactionId', columnsWidth),
       renderer: (rowIndex) => {
         const { transactionId } = filteredData[rowIndex]
         return (
@@ -169,6 +173,20 @@ export default function getColumns(props) {
         )
       },
       copyText: rowIndex => filteredData[rowIndex].transactionId,
+    },
+    {
+      id: 'note',
+      name: 'column.note',
+      width: getColumnWidth('note', columnsWidth),
+      renderer: (rowIndex) => {
+        const { note } = filteredData[rowIndex]
+        return (
+          <Cell tooltip={note}>
+            {note}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].note,
     },
   ]
 }

@@ -6,22 +6,28 @@ import _isEqual from 'lodash/isEqual'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import MultiPairSelector from 'ui/MultiPairSelector'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
-import parseChartData from 'ui/Charts/Charts.helpers'
-import TimeFrameSelector from 'ui/TimeFrameSelector'
+import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import TimeRange from 'ui/TimeRange'
+import MultiPairSelector from 'ui/MultiPairSelector'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
+import parseChartData from 'ui/Charts/Charts.helpers'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import queryConstants from 'state/query/constants'
-import { checkFetch, checkInit, togglePair } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  togglePair,
+  clearAllPairs,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './FeesReport.props'
 
@@ -51,21 +57,23 @@ class FeesReport extends PureComponent {
     return !_isEqual(currentFetchParams, params)
   }
 
+  clearPairs = () => clearAllPairs(TYPE, this.props)
+
   render() {
     const {
-      entries,
-      targetPairs,
-      params: { timeframe },
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      entries,
+      refresh,
+      targetPairs,
+      pageLoading,
+      dataReceived,
+      params: { timeframe },
     } = this.props
     const hasChanges = this.hasChanges()
 
     const { chartData, presentCurrencies } = parseChartData({
-      data: _sortBy(entries, ['mts']),
       timeframe,
+      data: _sortBy(entries, ['mts']),
     })
 
     let showContent
@@ -76,15 +84,21 @@ class FeesReport extends PureComponent {
     } else {
       showContent = (
         <Chart
+          isSumUpEnabled
           data={chartData}
           dataKeys={presentCurrencies}
         />
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('feesreport.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('feesreport.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -96,6 +110,7 @@ class FeesReport extends PureComponent {
                 togglePair={pair => togglePair(TYPE, this.props, pair)}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={this.clearPairs} />
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.select')}
@@ -105,7 +120,6 @@ class FeesReport extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-
             <QueryButton
               disabled={!hasChanges}
               onClick={this.handleQuery}

@@ -79,6 +79,6 @@ function* fetchTradesFail({ payload }) {
 
 export default function* tradesSaga() {
   yield takeLatest(types.FETCH_TRADES, fetchTrades)
-  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR], refreshTrades)
+  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR, types.CLEAR_PAIRS], refreshTrades)
   yield takeLatest(types.FETCH_FAIL, fetchTradesFail)
 }

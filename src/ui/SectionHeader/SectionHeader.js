@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import PairSelector from 'ui/PairSelector'
@@ -51,26 +52,35 @@ class SectionHeader extends PureComponent {
       target,
       timeframe,
       title,
+      getTitleLink,
+      clearTargetPairs,
+      clearTargetSymbols,
     } = this.props
 
     const selector = this.getSelector()
 
     return (
       <SectionHeaderWrapper>
-        <SectionHeaderTitle>{t(title)}</SectionHeaderTitle>
+        <SectionHeaderTitle getTitleLink={getTitleLink}>
+          {t(title)}
+        </SectionHeaderTitle>
         {timeframe && <TimeRange className='section-header-time-range' />}
-        <SectionHeaderRow>
-          {selector && (
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
-              </SectionHeaderItemLabel>
-              {selector}
-            </SectionHeaderItem>
-          )}
-          {filter && <ColumnsFilter target={target} />}
-          {refresh && <RefreshButton onClick={refresh} />}
-        </SectionHeaderRow>
+        {(selector || filter || refresh || clearTargetPairs) && (
+          <SectionHeaderRow>
+            {selector && (
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('selector.filter.symbol')}
+                </SectionHeaderItemLabel>
+                {selector}
+              </SectionHeaderItem>
+            )}
+            {clearTargetPairs && <ClearFiltersButton onClick={clearTargetPairs} />}
+            {clearTargetSymbols && <ClearFiltersButton onClick={clearTargetSymbols} />}
+            {filter && <ColumnsFilter target={target} />}
+            {refresh && <RefreshButton onClick={refresh} />}
+          </SectionHeaderRow>
+        )}
       </SectionHeaderWrapper>
     )
   }

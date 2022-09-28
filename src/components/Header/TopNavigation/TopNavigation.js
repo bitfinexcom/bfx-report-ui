@@ -9,13 +9,11 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import DateRangePicker from 'ui/DateRangePicker'
-import TimeRange from 'ui/TimeRange'
-import timeRangeTypes from 'state/timeRange/constants'
+import config from 'config'
 
 import SyncMode from '../SyncMode'
+import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
-import TimeFrameShortcut from '../TimeFrameShortcut'
 import { propTypes, defaultProps } from './TopNavigation.props'
 
 const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
@@ -49,60 +47,35 @@ class TopNavigation extends PureComponent {
       'top-navigation--open': isOpen,
     })
 
+    if (window.innerWidth > 855) {
+      return null
+    }
+
     return (
       <div className={classes}>
         <Popover
           minimal
           autoFocus={false}
-          hasBackdrop
-          position={Position.BOTTOM}
+          position={Position.BOTTOM_RIGHT}
           portalClassName='top-navigation-portal'
           onOpening={() => this.togglePopover(true)}
           onClosing={() => this.togglePopover(false)}
-          boundary='viewport'
           content={(
             <div className='top-navigation-content'>
               <Menu>
                 <MenuItem
-                  className='bp3-menu-item--timeframe'
-                  icon={<Icon.CALENDAR />}
-                  shouldDismissPopover={false}
-                  text={<TimeRange icon={false} />}
-                />
-                <MenuItem
-                  className='bp3-menu-item--subitem bp3-menu-item--timeframe-custom'
-                  shouldDismissPopover={false}
-                  text={(
-                    <DateRangePicker>
-                      {t('timeframe.custom_time')}
-                    </DateRangePicker>
-                  )}
-                />
-                <MenuItem
-                  className='bp3-menu-item--subitem'
-                  shouldDismissPopover={false}
-                  text={(
-                    <TimeFrameShortcut
-                      icon={false}
-                      title='timeframe.2w'
-                      type={timeRangeTypes.LAST_2WEEKS}
-                    />
-                  )}
-                />
-                <MenuItem
-                  className='bp3-menu-item--subitem'
-                  shouldDismissPopover={false}
-                  text={(
-                    <TimeFrameShortcut
-                      icon={false}
-                      title='timeframe.past_month'
-                      type={timeRangeTypes.PAST_MONTH}
-                    />
-                  )}
-                />
-                <MenuItem
+                  className={classNames('bp3-menu-item--sync', {
+                    'bp3-menu-item--sync--removed': !config.showFrameworkMode,
+                  })}
                   shouldDismissPopover={false}
                   text={<SyncMode />}
+                />
+                <MenuItem
+                  className={classNames('bp3-menu-item--query', {
+                    'bp3-menu-item--query--disabled': !config.showFrameworkMode,
+                  })}
+                  shouldDismissPopover={false}
+                  text={<QueryMode />}
                 />
                 <MenuItem
                   className='bp3-menu-item--account'
@@ -134,7 +107,7 @@ class TopNavigation extends PureComponent {
           <span>
             <Icon.CLOSE />
             <Icon.HAMBURGER_MENU />
-            {isOpen && <span className='top-navigation-title'>Top Navigation</span>}
+            {isOpen && <span className='top-navigation-title'>{t('header.top_navigation')}</span>}
           </span>
         </Popover>
       </div>

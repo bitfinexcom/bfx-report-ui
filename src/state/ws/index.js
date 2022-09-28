@@ -1,11 +1,11 @@
 import { store } from 'state/store'
 
 import { getAuthData, selectAuth } from 'state/auth/selectors'
-import { platform } from 'var/config'
+import config from 'config'
 
 import types from './constants'
 
-const { NODE_ENV } = process.env
+const { REACT_APP_ENV } = process.env
 
 const getAuth = () => {
   const state = store.getState()
@@ -35,11 +35,11 @@ class WS {
   }
 
   connect = () => {
-    if (!platform.showFrameworkMode || this.isConnected) {
+    if (!config.showFrameworkMode || this.isConnected) {
       return
     }
 
-    const websocket = new WebSocket(platform.WS_ADDRESS)
+    const websocket = new WebSocket(config.WS_ADDRESS)
     this.websocket = websocket
 
     // allows async use from sagas
@@ -69,7 +69,7 @@ class WS {
     websocket.onmessage = this.onMessage
 
     websocket.onerror = (err) => {
-      if (NODE_ENV === 'development') {
+      if (REACT_APP_ENV === 'development') {
         console.error(err) // eslint-disable-line no-console
       }
       resolver()
@@ -109,7 +109,7 @@ class WS {
 
       this.websocket.send(JSON.stringify(data))
     } catch (err) {
-      if (NODE_ENV === 'development') {
+      if (REACT_APP_ENV === 'development') {
         console.error(err) // eslint-disable-line no-console
       }
     }

@@ -1,28 +1,33 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
-import { fetchTaxReport } from 'state/taxReport/actions'
+import { fetchTaxReport, refresh } from 'state/taxReport/actions'
 import {
-  getDataReceived,
   getData,
+  getDataReceived,
   getPageLoading,
 } from 'state/taxReport/selectors'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 
-import TaxReportResult from './Result'
+import Result from './Result'
 
 const mapStateToProps = state => ({
   data: getData(state),
-  dataReceived: getDataReceived(state),
-  pageLoading: getPageLoading(state),
   getFullTime: getFullTime(state),
   timeOffset: getTimeOffset(state),
+  pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
 })
 
 const mapDispatchToProps = {
+  refresh,
   fetchData: fetchTaxReport,
 }
 
-const TaxReportResultContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(TaxReportResult))
-
-export default TaxReportResultContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(Result)

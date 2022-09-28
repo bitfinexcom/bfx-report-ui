@@ -9,6 +9,7 @@ import queryTypes from 'state/query/constants'
 import {
   addPair,
   basePairState,
+  clearPairs,
   fetch,
   fetchFail,
   refresh,
@@ -91,6 +92,8 @@ export function positionsReducer(state = initialState, action) {
       return setPairs(state, payload, initialState)
     case types.REFRESH:
       return refresh(TYPE, state, initialState)
+    case types.CLEAR_PAIRS:
+      return clearPairs(state, initialState)
     case timeRangeTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:

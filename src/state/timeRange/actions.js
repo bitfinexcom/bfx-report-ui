@@ -28,6 +28,16 @@ export function setTimeRange({ range, start, end }) {
   }
 }
 
+/**
+ * Create an action to toggle timeframe preserve setting.
+ */
+export function toggleTimeRangePreserve() {
+  return {
+    type: types.TOGGLE_TIME_RANGE_PRESERVE,
+  }
+}
+
 export default {
   setTimeRange,
+  toggleTimeRangePreserve,
 }

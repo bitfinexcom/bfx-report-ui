@@ -6,8 +6,8 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
-import { frameworkCheck } from 'state/ui/saga'
 import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
@@ -15,32 +15,32 @@ import actions from './actions'
 import selectors from './selectors'
 
 export const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
+export const getReqWinLossVSAccountBalance = params => makeFetchCall('getWinLossVSAccountBalance', params)
 
 /* eslint-disable-next-line consistent-return */
 export function* fetchWinLoss() {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateWinLoss())
-    }
-
     const { start, end } = yield select(getTimeFrame)
-    const { timeframe } = yield select(selectors.getParams)
+    const {
+      timeframe,
+      isVSPrevDayBalance,
+      isUnrealizedProfitExcluded,
+      isVsAccountBalanceSelected,
+    } = yield select(selectors.getParams)
 
-    const { result = [], error } = yield call(getReqWinLoss, {
+    const { result = [], error } = yield call((isVsAccountBalanceSelected
+      ? getReqWinLossVSAccountBalance
+      : getReqWinLoss), {
       start,
       end,
       timeframe,
+      isUnrealizedProfitExcluded,
+      ...(isVsAccountBalanceSelected && { isVSPrevDayBalance }),
     })
     yield put(actions.updateWinLoss(result))
 
     if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'averagewinloss.title',
-        detail: JSON.stringify(error),
-      }))
+      yield put(toggleErrorDialog(true, error.message))
     }
   } catch (fail) {
     yield put(actions.fetchFail({

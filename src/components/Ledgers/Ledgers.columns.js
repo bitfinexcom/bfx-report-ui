@@ -3,11 +3,12 @@ import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
 import queryConstants from 'state/query/constants'
-import { platform } from 'var/config'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import config from 'config'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     filteredData,
     getFullTime,
     t,
@@ -19,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.LEDGERS_ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -34,7 +35,7 @@ export default function getColumns(props) {
       {
         id: 'description',
         name: 'column.description',
-        width: COLUMN_WIDTHS.LEDGERS_DESCRIPTION,
+        width: getColumnWidth('description', columnsWidth),
         renderer: (rowIndex) => {
           const { description } = filteredData[rowIndex]
           return (
@@ -49,7 +50,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
-      width: COLUMN_WIDTHS.SYMBOL,
+      width: getColumnWidth('currency', columnsWidth),
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
@@ -63,7 +64,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth),
       renderer: (rowIndex) => {
         const { amount, currency } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(amount)} ${currency}`
@@ -76,13 +77,14 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
-    ...insertIf(platform.showFrameworkMode, (
+    ...insertIf(config.showFrameworkMode, (
       {
         id: 'amountUsd',
         name: 'column.amountUsd',
-        width: COLUMN_WIDTHS.AMOUNT,
+        width: getColumnWidth('amountUsd', columnsWidth),
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
           const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
@@ -95,13 +97,14 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
       }
     )),
     {
       id: 'balance',
       name: 'column.balance',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('balance', columnsWidth),
       renderer: (rowIndex) => {
         const { balance, currency } = filteredData[rowIndex]
         const fixedBalance = fixedFloat(balance)
@@ -115,13 +118,14 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
     },
-    ...insertIf(platform.showFrameworkMode, (
+    ...insertIf(config.showFrameworkMode, (
       {
         id: 'balanceUsd',
         name: 'column.balanceUsd',
-        width: COLUMN_WIDTHS.BALANCE_USD,
+        width: getColumnWidth('balanceUsd', columnsWidth),
         renderer: (rowIndex) => {
           const { balanceUsd } = filteredData[rowIndex]
           const fixedBalanceUsd = fixedFloat(balanceUsd)
@@ -135,13 +139,14 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].balanceUsd),
       }
     )),
     {
       id: 'mts',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
@@ -157,7 +162,7 @@ export default function getColumns(props) {
     {
       id: 'wallet',
       name: 'column.wallet',
-      width: COLUMN_WIDTHS.LEDGERS_WALLET,
+      width: getColumnWidth('wallet', columnsWidth),
       renderer: (rowIndex) => {
         const { wallet } = filteredData[rowIndex]
         return (

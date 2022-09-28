@@ -32,8 +32,6 @@
     padding: 5px 0;
 
     .bitfinex-select {
-      width: 138px;
-      margin-right: 20px;
       vertical-align: middle;
 
       .bp3-button {
@@ -42,7 +40,8 @@
     }
 
     &-column {
-      margin-right: 10px;
+      width: 138px;
+      margin-right: 20px;
 
       &.bitfinex-select {
         .bp3-button {
@@ -52,7 +51,8 @@
     }
 
     &-filter {
-      margin-right: 10px;
+      width: 138px;
+      margin-right: 20px;
     }
 
     &-input {
@@ -63,6 +63,16 @@
       .bp3-input {
         height: 40px;
         line-height: 40px;
+      }
+
+      &--select {
+        width: 180px;
+
+        &.bitfinex-select {
+          .bp3-button {
+            width: 180px;
+          }
+        }
       }
     }
 

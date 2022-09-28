@@ -1,27 +1,32 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import MultiSymbolSelector from 'ui/MultiSymbolSelector'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
-import { parseLoanReportChartData } from 'ui/Charts/Charts.helpers'
-import TimeFrameSelector from 'ui/TimeFrameSelector'
+import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import TimeRange from 'ui/TimeRange'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
+import { parseLoanReportChartData } from 'ui/Charts/Charts.helpers'
 import queryConstants from 'state/query/constants'
-import { checkFetch, checkInit, toggleSymbol } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  toggleSymbol,
+  clearAllSymbols,
+} from 'state/utils'
 
 import { propTypes, defaultProps } from './LoanReport.props'
 
@@ -51,16 +56,22 @@ class LoanReport extends PureComponent {
     return !_isEqual(currentFetchParams, params)
   }
 
+  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
+
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
+
   render() {
     const {
-      currentFetchParams: { timeframe: currTimeframe },
-      entries,
-      targetSymbols,
-      params,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      params,
+      refresh,
+      entries,
+      pageLoading,
+      dataReceived,
+      targetSymbols,
+      currentFetchParams: {
+        timeframe: currTimeframe,
+      },
     } = this.props
     const { timeframe } = params
     const hasChanges = this.hasChanges()
@@ -85,9 +96,14 @@ class LoanReport extends PureComponent {
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('loanreport.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('loanreport.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -96,9 +112,10 @@ class LoanReport extends PureComponent {
               </SectionHeaderItemLabel>
               <MultiSymbolSelector
                 currentFilters={targetSymbols}
-                toggleSymbol={symbol => toggleSymbol(TYPE, this.props, symbol)}
+                toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={this.clearSymbols} />
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.select')}
@@ -108,7 +125,6 @@ class LoanReport extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-
             <QueryButton
               disabled={!hasChanges}
               onClick={this.handleQuery}
@@ -125,4 +141,4 @@ class LoanReport extends PureComponent {
 LoanReport.propTypes = propTypes
 LoanReport.defaultProps = defaultProps
 
-export default withTranslation('translations')(LoanReport)
+export default LoanReport

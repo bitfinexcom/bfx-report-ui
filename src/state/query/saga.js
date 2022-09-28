@@ -7,7 +7,7 @@ import {
 import queryString from 'query-string'
 import _includes from 'lodash/includes'
 
-import { LANGUAGES_MAP } from 'locales/i18n'
+import { LANGUAGES } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus } from 'state/status/actions'
@@ -21,7 +21,8 @@ import { getParams as getFeesReportParams } from 'state/feesReport/selectors'
 import { getTargetSymbols as getFLoanSymbols } from 'state/fundingLoanHistory/selectors'
 import { getTargetSymbols as getFOfferSymbols } from 'state/fundingOfferHistory/selectors'
 import { getTargetSymbols as getFPaymentSymbols } from 'state/fundingPayment/selectors'
-import { getTargetSymbols as getLedgersSymbols } from 'state/ledgers/selectors'
+import { getTargetSymbols as getLedgersSymbols, getTargetCategory as getLedgersCategory } from 'state/ledgers/selectors'
+import { getTargetSymbols as getInvoicesSymbols } from 'state/invoices/selectors'
 import { getParams as getLoanReportParams } from 'state/loanReport/selectors'
 import { getTargetSymbols as getMovementsSymbols } from 'state/movements/selectors'
 import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
@@ -35,15 +36,21 @@ import { getTimestamp as getSnapshotsTimestamp } from 'state/snapshots/selectors
 import { getTargetSymbols as getSPaymentsSymbols } from 'state/stakingPayments/selectors'
 import { getParams as getTradedVolumeParams } from 'state/tradedVolume/selectors'
 import { getTimestamp } from 'state/wallets/selectors'
-import { getTimeframe as getWinLossTimeframe } from 'state/winLoss/selectors'
+import {
+  getIsVSPrevDayBalance,
+  getIsUnrealizedProfitExcluded,
+  getIsVsAccountBalanceSelected,
+  getTimeframe as getWinLossTimeframe,
+} from 'state/winLoss/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
 import { toggleExportSuccessDialog } from 'state/ui/actions'
+import LEDGERS_CATEGORIES from 'var/ledgersCategories'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
 } from 'state/base/selectors'
 import { getEmail } from 'state/auth/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { getExportEmail } from './selectors'
 import actions from './actions'
@@ -61,6 +68,7 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -128,6 +136,8 @@ function getSelector(target) {
       return getFOfferSymbols
     case MENU_FPAYMENT:
       return getFPaymentSymbols
+    case MENU_INVOICES:
+      return getInvoicesSymbols
     case MENU_LEDGERS:
       return getLedgersSymbols
     case MENU_LOAN_REPORT:
@@ -217,11 +227,16 @@ function* getOptions({ target }) {
   options.filter = yield select(getFilterQuery, target)
   const selector = getSelector(target)
   const sign = selector ? yield select(selector) : ''
+  const isVSPrevDayBalance = yield select(getIsVSPrevDayBalance)
+  const isUnrealizedProfitExcluded = yield select(getIsUnrealizedProfitExcluded)
+  const isVsAccountBalanceSelected = yield select(getIsVsAccountBalanceSelected)
 
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
     case MENU_WIN_LOSS:
       options.timeframe = sign
+      options.isUnrealizedProfitExcluded = isUnrealizedProfitExcluded
+      if (isVsAccountBalanceSelected) options.isVSPrevDayBalance = isVSPrevDayBalance
       break
     case MENU_CANDLES:
       options.timeframe = sign.timeframe
@@ -267,7 +282,7 @@ function* getOptions({ target }) {
       break
     case MENU_AFFILIATES_EARNINGS:
       options.method = 'getLedgersCsv'
-      options.isAffiliateRebate = true
+      options.category = LEDGERS_CATEGORIES.AFFILIATE_REBATE
       break
     case MENU_CANDLES:
       options.method = 'getCandlesCsv'
@@ -289,7 +304,14 @@ function* getOptions({ target }) {
       break
     case MENU_FPAYMENT:
       options.method = 'getLedgersCsv'
-      options.isMarginFundingPayment = true
+      options.category = LEDGERS_CATEGORIES.FUNDING_PAYMENT
+      break
+    case MENU_INVOICES:
+      options.method = 'getPayInvoiceListCsv'
+      break
+    case MENU_LEDGERS:
+      options.method = 'getLedgersCsv'
+      options.category = yield select(getLedgersCategory)
       break
     case MENU_LOAN_REPORT:
       options.method = 'getPerformingLoanCsv'
@@ -305,7 +327,7 @@ function* getOptions({ target }) {
       break
     case MENU_SPAYMENTS:
       options.method = 'getLedgersCsv'
-      options.isStakingPayments = true
+      options.category = LEDGERS_CATEGORIES.STAKING_PAYMENT
       break
     case MENU_TICKERS:
       options.method = 'getTickersHistoryCsv'
@@ -347,9 +369,10 @@ function* getOptions({ target }) {
       options.method = 'getWalletsCsv'
       break
     case MENU_WIN_LOSS:
-      options.method = 'getWinLossCsv'
+      options.method = isVsAccountBalanceSelected
+        ? 'getWinLossVSAccountBalanceCsv'
+        : 'getWinLossCsv'
       break
-    case MENU_LEDGERS:
     default:
       options.method = 'getLedgersCsv'
       break
@@ -369,29 +392,31 @@ function* exportCSV({ payload: targets }) {
 
       // add 2 additional snapshot reports
       if (target === MENU_TAX_REPORT) {
-        const { start, end } = yield select(getTimeFrame)
-        const snapshotOptions = yield call(getOptions, { target: MENU_SNAPSHOTS })
         multiExport.push({
-          ...snapshotOptions,
-          end: start || undefined,
+          ...options,
+          isStartSnapshot: true,
         })
         multiExport.push({
-          ...snapshotOptions,
-          end: end || undefined,
+          ...options,
+          isEndSnapshot: true,
         })
       }
     }
 
     const locale = yield select(getLocale)
     const params = {
-      language: LANGUAGES_MAP[locale],
+      language: LANGUAGES[locale],
       multiExport,
     }
     if (exportEmail) {
       params.email = exportEmail
     }
     const { result, error } = yield call(getMultipleCsv, params)
+
     if (result) {
+      const { localCsvFolderPath, remoteCsvUrn = null } = result
+      yield put(actions.setRemoteUrn(remoteCsvUrn))
+      yield put(actions.setLocalExportPath(localCsvFolderPath))
       yield put(toggleExportSuccessDialog())
     }
 
@@ -413,7 +438,7 @@ function* exportCSV({ payload: targets }) {
 
 function* prepareExport() {
   try {
-    if (platform.localExport) {
+    if (config.localExport) {
       yield put(actions.setExportEmail(''))
       return
     }

@@ -1,8 +1,12 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withTranslation } from 'react-i18next'
 
 import { editPublicTradesSymbolPref } from 'state/sync/actions'
 import {
-  getSyncMode, getPublicFundingStartTime, getPublicFundingSymbols,
+  getIsSyncing,
+  getPublicFundingSymbols,
+  getPublicFundingStartTime,
 } from 'state/sync/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 
@@ -13,7 +17,7 @@ const mapStateToProps = (state) => {
   const startTime = getPublicFundingStartTime(state)
 
   return {
-    syncMode: getSyncMode(state),
+    isSyncing: getIsSyncing(state),
     syncSymbols,
     startTime: startTime || getTimeFrame(state).start,
   }
@@ -23,6 +27,7 @@ const mapDispatchToProps = {
   setSyncPref: (symbol, startTime) => editPublicTradesSymbolPref(symbol, startTime.getTime()),
 }
 
-const SyncSymbolPrefButtonContainer = connect(mapStateToProps, mapDispatchToProps)(SyncSymbolPrefButton)
-
-export default SyncSymbolPrefButtonContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(SyncSymbolPrefButton)

@@ -8,6 +8,12 @@
     }
   }
 
+  .bp3-table-container {
+    &:last-child {
+      margin-bottom: 40px;
+    }  
+  }
+
   .movements-table {
     margin-bottom: 40px;
   }

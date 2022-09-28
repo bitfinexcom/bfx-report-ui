@@ -59,10 +59,34 @@ export function updateData(payload) {
   }
 }
 
+export function setChartLoading(payload) {
+  return {
+    type: types.LOADING,
+    payload,
+  }
+}
+
+export function setChartScrollTime(payload) {
+  return {
+    type: types.SET_CHART_SCROLL_TIME,
+    payload,
+  }
+}
+
+export function handleChartScrollTime(payload) {
+  return {
+    type: types.HANDLE_CHART_SCROLL_TIME,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   fetchData,
   refresh,
   setParams,
   updateData,
+  setChartLoading,
+  setChartScrollTime,
+  handleChartScrollTime,
 }

@@ -1,3 +1,6 @@
+import _get from 'lodash/get'
+import _defaultTo from 'lodash/defaultTo'
+
 import authTypes from 'state/auth/constants'
 import { FILTERS_WHITELIST } from 'state/query/utils'
 import DEFAULT_FILTERS from 'ui/ColumnsFilter/var/defaultFilters'
@@ -16,13 +19,25 @@ const getDefaultQueries = () => FILTERS_WHITELIST.reduce((acc, section) => {
   return acc
 }, {})
 
-const getSectionsColumns = () => FILTERS_WHITELIST.reduce((acc, section) => {
-  acc[section] = SECTION_COLUMNS[section].reduce((columns, { id, hidden }) => {
-    columns[id] = !hidden // eslint-disable-line no-param-reassign
-    return columns
+const updateColumnsVisibility = (columns) => {
+  localStorage.setItem('columnsVisibility', JSON.stringify(columns))
+}
+
+const getSectionsColumns = () => {
+  const storedData = JSON.parse(localStorage.getItem('columnsVisibility') || '{}')
+
+  const sectionsColumns = FILTERS_WHITELIST.reduce((acc, section) => {
+    acc[section] = SECTION_COLUMNS[section].reduce((columns, { id, hidden }) => {
+      const storedParam = _get(storedData, [section, id])
+      columns[id] = _defaultTo(storedParam, !hidden) // eslint-disable-line no-param-reassign
+      return columns
+    }, {})
+    return acc
   }, {})
-  return acc
-}, {})
+  updateColumnsVisibility(sectionsColumns)
+
+  return sectionsColumns
+}
 
 const initialState = {
   ...getDefaultFilters(),
@@ -36,12 +51,15 @@ function filtersReducer(state = initialState, action) {
   switch (type) {
     case types.SET_COLUMNS: {
       const { section, columns } = payload
+      const nextColumns = {
+        ...state.columns,
+        [section]: columns,
+      }
+      updateColumnsVisibility(nextColumns)
+
       return {
         ...state,
-        columns: {
-          ...state.columns,
-          [section]: columns,
-        },
+        columns: nextColumns,
       }
     }
     case types.SET_FILTERS: {

@@ -1,5 +1,7 @@
 @import './InputKey/InputKey';
 @import './ErrorLabel/ErrorLabel';
+@import './AuthTypeSelector/AuthTypeSelector';
+@import './RegisterSubAccounts/RegisterSubAccounts';
 
 .bitfinex-auth {
   .bp3-dialog {
@@ -65,6 +67,23 @@
     justify-content: space-between;
   }
 
+  &-sign-in {
+    &-checkboxes {
+      .bp3-checkbox {
+        display: inline-block;
+        width: 50%;
+      }
+    }
+
+    .bp3-dialog {
+      &-footer {
+        &-actions {
+          justify-content: space-between;
+        }
+      }
+    }
+  }
+
   &-remember-me {
     &.bp3-checkbox {
       line-height: 30px;
@@ -83,9 +102,22 @@
         margin-bottom: 60px;
       }
     }
+
+    &--sub-accounts {
+      &.bp3-checkbox {
+        color: #fff;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &-password-recovery {
+    line-height: 30px;
+    cursor: pointer;
   }
 
   &-mode-switch {
+    display: inline-flex;
     margin-right: 10px;
     line-height: 30px;
     cursor: pointer;

@@ -1,5 +1,6 @@
 import {
   call,
+  fork,
   take,
   race,
   put,
@@ -14,9 +15,11 @@ import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
 import { selectAuth } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
+import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
-import { platform } from 'var/config'
+import { refreshToken, tokenRefreshStart, tokenRefreshStop } from 'state/auth/tokenRefresh/actions'
+import config from 'config'
 
 import types from './constants'
 import actions from './actions'
@@ -32,7 +35,7 @@ function* onAuthSuccess(result) {
     yield put(actions.updateAuth(result))
     yield put(fetchSymbols())
 
-    if (platform.showFrameworkMode) {
+    if (config.showFrameworkMode) {
       if (!WS.isConnected) {
         WS.connect()
 
@@ -55,6 +58,10 @@ function* onAuthSuccess(result) {
 
         return
       }
+    } else {
+      // on app load try to refresh the token in case user refreshed the page and some time have already passed
+      yield put(refreshToken())
+      yield put(tokenRefreshStart())
     }
 
     yield put(updateSuccessStatus({
@@ -85,10 +92,10 @@ function* signUp({ payload }) {
       apiKey,
       apiSecret,
       password: isNotProtected ? undefined : password,
-      isNotProtected: platform.showFrameworkMode ? isNotProtected : undefined,
+      isNotProtected: config.showFrameworkMode ? isNotProtected : undefined,
     }
 
-    const method = platform.showFrameworkMode ? 'signUp' : 'verifyUser'
+    const method = config.showFrameworkMode ? 'signUp' : 'verifyUser'
     const { result, error } = yield call(makeFetchCall, method, null, authParams)
 
     if (result) {
@@ -110,7 +117,7 @@ function* signUp({ payload }) {
         yield put(actions.updateAuth({ authToken: '' }))
       }
 
-      if (platform.showFrameworkMode) {
+      if (config.showFrameworkMode) {
         yield put(updateErrorStatus({
           id: 'status.signUpFail',
         }))
@@ -132,12 +139,14 @@ function* signIn({ payload }) {
     const {
       email,
       isNotProtected,
+      isSubAccount,
       password,
     } = payload
 
     const authParams = {
       email,
       password: isNotProtected ? undefined : password,
+      isSubAccount,
     }
     const { result, error } = yield call(makeFetchCall, 'signIn', null, authParams)
 
@@ -169,10 +178,13 @@ function* signIn({ payload }) {
 
 function* fetchUsers() {
   try {
-    const { result } = yield call(makeFetchCall, 'getUsers')
+    const { result: users } = yield call(makeFetchCall, 'getUsers')
 
-    if (result) {
-      yield put(actions.setUsers(result))
+    if (users) {
+      yield put(actions.setUsers(users))
+      if (!users.length) {
+        yield put(actions.clearAuth())
+      }
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
@@ -181,7 +193,7 @@ function* fetchUsers() {
 
 function* checkAuth() {
   try {
-    if (platform.showFrameworkMode) {
+    if (config.showFrameworkMode) {
       yield put(actions.fetchUsers())
     }
 
@@ -190,7 +202,7 @@ function* checkAuth() {
       return
     }
 
-    if (platform.showFrameworkMode) {
+    if (config.showFrameworkMode) {
       yield put(actions.signIn(auth))
       return
     }
@@ -201,9 +213,52 @@ function* checkAuth() {
   }
 }
 
+function* recoverPassword({ payload }) {
+  try {
+    const {
+      apiKey,
+      apiSecret,
+      password,
+      isNotProtected,
+    } = payload
+    const newPassword = isNotProtected ? undefined : password
+    const { result, error } = yield call(makeFetchCall, 'recoverPassword', null, {
+      apiKey,
+      apiSecret,
+      newPassword,
+      isSubAccount: false,
+      isNotProtected,
+    })
+
+    if (result) {
+      yield call(onAuthSuccess, { ...payload, ...result })
+      return
+    }
+
+    yield put(actions.updateAuthStatus())
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.auth',
+        detail: JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
+function* logout() {
+  yield put(tokenRefreshStop())
+}
+
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.FETCH_USERS, fetchUsers)
+  yield takeLatest(types.RECOVER_PASSWORD, recoverPassword)
   yield takeLatest(types.SIGN_UP, signUp)
   yield takeLatest(types.SIGN_IN, signIn)
+  yield takeLatest(types.LOGOUT, logout)
+  yield fork(tokenRefreshSaga)
 }

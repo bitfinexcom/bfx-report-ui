@@ -3,7 +3,7 @@ import { persistReducer, createMigrate } from 'redux-persist'
 import { connectRouter } from 'connected-react-router'
 import storage from 'redux-persist/lib/storage'
 
-import { platform } from 'var/config'
+import config from 'config'
 import persistMigrations from 'state/persist.migrations'
 
 import history from './createdHistory'
@@ -14,6 +14,7 @@ import authReducer from './auth/reducer'
 import baseReducer from './base/reducer'
 import candlesReducer from './candles/reducer'
 import changeLogsReducer from './changeLogs/reducer'
+import columnsReducer from './columns/reducer'
 import derivativesReducer from './derivatives/reducer'
 import feesReportReducer from './feesReport/reducer'
 import filtersReducer from './filters/reducer'
@@ -21,6 +22,8 @@ import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
 import fundingLoanHistoryReducer from './fundingLoanHistory/reducer'
 import fundingOfferHistoryReducer from './fundingOfferHistory/reducer'
 import fundingPaymentReducer from './fundingPayment/reducer'
+import goToRangeReducer from './goToRange/reducer'
+import invoicesReducer from './invoices/reducer'
 import ledgersReducer from './ledgers/reducer'
 import loanReportReducer from './loanReport/reducer'
 import loginsReducer from './logins/reducer'
@@ -75,12 +78,15 @@ const BASE_REDUCERS = {
   base: baseReducer,
   candles: candlesReducer,
   changeLogs: changeLogsReducer,
+  columns: columnsReducer,
   derivatives: derivativesReducer,
   fcredit: fundingCreditHistoryReducer,
   filters: filtersReducer,
   floan: fundingLoanHistoryReducer,
   foffer: fundingOfferHistoryReducer,
   fpayment: fundingPaymentReducer,
+  goToRange: goToRangeReducer,
+  invoices: invoicesReducer,
   ledgers: ledgersReducer,
   logins: loginsReducer,
   movements: movementsReducer,
@@ -116,7 +122,7 @@ const FRAMEWORK_REDUCERS = {
 
 const REDUCERS = {
   ...BASE_REDUCERS,
-  ...(platform.showFrameworkMode ? FRAMEWORK_REDUCERS : {}),
+  ...(config.showFrameworkMode ? FRAMEWORK_REDUCERS : {}),
 }
 
 const rootReducer = combineReducers(REDUCERS)

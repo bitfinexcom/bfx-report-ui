@@ -43,17 +43,6 @@ export function setTimezone(timezone) {
 }
 
 /**
- * Create an action to store the input timezone.
- * @param {string} timezone
- */
-export function setInputTimezone(timezone) {
-  return {
-    type: types.SET_DISPLAY_TIMEZONE,
-    payload: timezone,
-  }
-}
-
-/**
  * Create an action to store date format.
  * @param {string} format date format
  */
@@ -89,7 +78,6 @@ export default {
   setLang,
   setTheme,
   setTimezone,
-  setInputTimezone,
   showMilliseconds,
   toggleTableScroll,
   updateTheme,

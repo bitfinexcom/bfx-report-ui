@@ -6,8 +6,8 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
-import { frameworkCheck } from 'state/ui/saga'
 import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
@@ -19,28 +19,20 @@ export const getReqBalance = params => makeFetchCall('getBalanceHistory', params
 /* eslint-disable-next-line consistent-return */
 export function* fetchAccountBalance() {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateBalance([]))
-    }
-
     const timeframe = yield select(selectors.getTimeframe)
+    const isUnrealizedProfitExcluded = yield select(selectors.getIsUnrealizedProfitExcluded)
     const { start, end } = yield select(getTimeFrame)
     const params = {
-      timeframe,
       start,
       end,
+      timeframe,
+      isUnrealizedProfitExcluded,
     }
     const { result = [], error } = yield call(getReqBalance, params)
     yield put(actions.updateBalance(result))
 
     if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'accountbalance.title',
-        detail: JSON.stringify(error),
-      }))
+      yield put(toggleErrorDialog(true, error.message))
     }
   } catch (fail) {
     yield put(actions.fetchFail({

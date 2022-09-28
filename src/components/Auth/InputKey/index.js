@@ -1,3 +1,1 @@
-import InputKey from './InputKey'
-
-export default InputKey
+export { default } from './InputKey'

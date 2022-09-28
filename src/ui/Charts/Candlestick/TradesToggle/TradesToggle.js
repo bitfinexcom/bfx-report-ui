@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { Icon } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
 import Tooltip from 'ui/Tooltip'
-
-import { propTypes, defaultProps } from './TradesToggle.props'
 
 class TradesToggle extends React.PureComponent {
   onChange = () => {
@@ -35,7 +34,10 @@ class TradesToggle extends React.PureComponent {
   }
 }
 
-TradesToggle.propTypes = propTypes
-TradesToggle.defaultProps = defaultProps
+TradesToggle.propTypes = {
+  value: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
+}
 
-export default withTranslation('translations')(TradesToggle)
+export default withTranslation('translations')(memo(TradesToggle))

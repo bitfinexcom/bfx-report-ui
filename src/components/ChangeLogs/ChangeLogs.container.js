@@ -13,12 +13,14 @@ import {
   getPageLoading,
 } from 'state/changeLogs/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import ChangeLogs from './ChangeLogs'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_CHANGE_LOGS),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_CHANGE_LOGS),
   entries: getFilteredEntries(state, queryConstants.MENU_CHANGE_LOGS, getEntries(state)),
   getFullTime: getFullTime(state),
   dataReceived: getDataReceived(state),

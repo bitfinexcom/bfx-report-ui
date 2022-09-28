@@ -3,6 +3,7 @@ import { FILTERS, EMPTY_FILTER } from 'var/filterTypes'
 import DATA_TYPES from 'var/dataTypes'
 
 const {
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_TRADES,
   MENU_ORDERS,
@@ -42,8 +43,15 @@ const DEFAULT_LEDGERS = [
   { column: 'balance', type: GREATER_THAN, dataType: NUMBER, value: '' },
 ]
 
+const DEFAULT_INVOICES = [
+  { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  { column: 'orderId', type: CONTAINS, dataType: STRING, value: '' },
+  { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
+]
+
 const DEFAULT_FILTERS = {
   [MENU_LEDGERS]: DEFAULT_LEDGERS,
+  [MENU_INVOICES]: DEFAULT_INVOICES,
   [MENU_TRADES]: [
     { column: 'orderID', type: EQUAL_TO, dataType: INTEGER, value: '' },
     { column: 'execAmount', type: GREATER_THAN, dataType: NUMBER, value: '' },
@@ -79,7 +87,11 @@ const DEFAULT_FILTERS = {
     { column: 'status', type: CONTAINS, dataType: STRING, value: '' },
     EMPTY_FILTER,
   ],
-  [MENU_FPAYMENT]: DEFAULT_LEDGERS,
+  [MENU_FPAYMENT]: [
+    { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
+    { column: 'balance', type: GREATER_THAN, dataType: NUMBER, value: '' },
+    { column: 'wallet', type: CONTAINS, dataType: STRING, value: '' },
+  ],
   [MENU_SPAYMENTS]: DEFAULT_LEDGERS,
   [MENU_AFFILIATES_EARNINGS]: DEFAULT_LEDGERS,
   [MENU_PUBLIC_TRADES]: [
@@ -103,9 +115,8 @@ const DEFAULT_FILTERS = {
     EMPTY_FILTER,
   ],
   [MENU_LOGINS]: [
-    { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
-    { column: 'browser', type: CONTAINS, dataType: STRING, value: '' },
-    { column: 'version', type: CONTAINS, dataType: STRING, value: '' },
+    { column: 'id', type: EQUAL_TO, dataType: INTEGER, value: '' },
+    { column: 'ip', type: CONTAINS, dataType: STRING, value: '' },
   ],
   [MENU_CHANGE_LOGS]: [
     { column: 'log', type: CONTAINS, dataType: STRING, value: '' },
@@ -157,7 +168,7 @@ const DEFAULT_FILTERS_MIN = {
     { column: 'price', type: GREATER_THAN, dataType: NUMBER, value: '' },
   ],
   [MENU_LOGINS]: [
-    { column: 'ip', type: EQUAL_TO, dataType: INTEGER, value: '' },
+    { column: 'ip', type: CONTAINS, dataType: STRING, value: '' },
   ],
   [MENU_CHANGE_LOGS]: [
     { column: 'log', type: CONTAINS, dataType: STRING, value: '' },

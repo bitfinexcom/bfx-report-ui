@@ -1,9 +1,16 @@
 // https://docs.bitfinex.com/v2/reference#rest-public-status
 import _get from 'lodash/get'
+import _sortBy from 'lodash/sortBy'
 
 import authTypes from 'state/auth/constants'
 import {
-  addPair, basePairState, fetch, fetchFail, removePair, setPairs,
+  addPair,
+  basePairState,
+  clearPairs,
+  fetch,
+  fetchFail,
+  removePair,
+  setPairs,
 } from 'state/reducers.helper'
 import { formatPair, mapPair } from 'state/symbols/utils'
 
@@ -29,6 +36,8 @@ export function derivativesReducer(state = initialState, action) {
       const { data: { res } } = payload
       const entries = res.map((entry) => {
         const {
+          clampMin,
+          clampMax,
           key,
           timestamp,
           price,
@@ -39,6 +48,8 @@ export function derivativesReducer(state = initialState, action) {
         } = entry
 
         return {
+          clampMin,
+          clampMax,
           pair: mapPair(formatPair(key)),
           timestamp,
           price,
@@ -53,7 +64,7 @@ export function derivativesReducer(state = initialState, action) {
         ...state,
         dataReceived: true,
         pageLoading: false,
-        entries,
+        entries: _sortBy(entries, (o) => o.pair),
       }
     }
     case types.FETCH_FAIL:
@@ -64,6 +75,8 @@ export function derivativesReducer(state = initialState, action) {
       return removePair(state, payload, initialState)
     case types.SET_PAIRS:
       return setPairs(state, payload, initialState)
+    case types.CLEAR_PAIRS:
+      return clearPairs(state, initialState)
     case types.REFRESH:
     case authTypes.LOGOUT:
       return initialState

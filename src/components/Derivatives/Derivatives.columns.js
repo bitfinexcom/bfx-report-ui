@@ -5,10 +5,11 @@ import {
 } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     filteredData,
     getFullTime,
     t,
@@ -19,7 +20,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
-      width: COLUMN_WIDTHS.PAIR,
+      width: getColumnWidth('pair', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -33,7 +34,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'column.priceDeriv',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('price', columnsWidth),
       renderer: (rowIndex) => {
         const { price } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(price)
@@ -46,12 +47,13 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].price),
     },
     {
       id: 'priceSpot',
       name: 'column.priceSpot',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('priceSpot', columnsWidth),
       renderer: (rowIndex) => {
         const { priceSpot } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(priceSpot)
@@ -64,12 +66,13 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].priceSpot),
     },
     {
       id: 'fundBal',
       name: 'column.fundBalance',
-      width: 205,
+      width: getColumnWidth('fundBal', columnsWidth),
       renderer: (rowIndex) => {
         const { fundBal } = filteredData[rowIndex]
         const fixedBalance = fixedFloat(fundBal)
@@ -82,12 +85,13 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].fundBal),
     },
     {
       id: 'fundingAccrued',
       name: 'column.fundingAccrued',
-      width: 185,
+      width: getColumnWidth('fundingAccrued', columnsWidth),
       renderer: (rowIndex) => {
         const { fundingAccrued } = filteredData[rowIndex]
         const fixedFunding = fixedFloat(fundingAccrued)
@@ -100,12 +104,13 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].fundingAccrued),
     },
     {
       id: 'fundingStep',
       name: 'column.fundingStep',
-      width: 155,
+      width: getColumnWidth('fundingStep', columnsWidth),
       renderer: (rowIndex) => {
         const { fundingStep } = filteredData[rowIndex]
         return (
@@ -120,9 +125,9 @@ export default function getColumns(props) {
       copyText: rowIndex => filteredData[rowIndex].fundingStep,
     },
     {
-      id: 'mts',
+      id: 'timestamp',
       nameStr: `${t('column.updated')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('timestamp', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].timestamp)
         return (
@@ -134,6 +139,40 @@ export default function getColumns(props) {
         )
       },
       copyText: rowIndex => getFullTime(filteredData[rowIndex].timestamp),
+    },
+    {
+      id: 'clampMin',
+      name: 'column.clampMin',
+      width: getColumnWidth('clampMin', columnsWidth),
+      renderer: (rowIndex) => {
+        const { clampMin } = filteredData[rowIndex]
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={clampMin}
+          >
+            {clampMin}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].clampMin,
+    },
+    {
+      id: 'clampMax',
+      name: 'column.clampMax',
+      width: getColumnWidth('clampMax', columnsWidth),
+      renderer: (rowIndex) => {
+        const { clampMax } = filteredData[rowIndex]
+        return (
+          <Cell
+            className='bitfinex-text-align-right'
+            tooltip={clampMax}
+          >
+            {clampMax}
+          </Cell>
+        )
+      },
+      copyText: rowIndex => filteredData[rowIndex].clampMax,
     },
   ]
 }

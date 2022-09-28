@@ -3,13 +3,17 @@ import getDeviceType from 'utils/getDeviceType'
 import types from './constants'
 
 const initialState = {
+  isElectronBackendLoaded: false,
   isExportDialogOpen: false,
+  isErrorDialogDisabled: false,
+  isErrorDialogOpen: false,
   isExportSuccessDialogOpen: false,
-  isFrameworkDialogOpen: false,
   isPaginationDialogOpen: false,
   isPreferencesDialogOpen: false,
   isTimeFrameDialogOpen: false,
+  isGoToRangeDialogOpen: false,
   latestPaginationTimestamp: undefined,
+  errorMessage: undefined,
   device: getDeviceType(),
   windowWidth: window.innerWidth,
 }
@@ -17,6 +21,26 @@ const initialState = {
 export function uiReducer(state = initialState, action) {
   const { type, payload = {} } = action
   switch (type) {
+    case types.ELECTRON_BACKEND_LOADED:
+      return {
+        ...state,
+        isElectronBackendLoaded: true,
+      }
+    case types.TOGGLE_ERROR_DIALOG: {
+      const { isErrorDialogOpen, errorMessage } = payload
+
+      return {
+        ...state,
+        isErrorDialogOpen,
+        errorMessage,
+      }
+    }
+    case types.DISABLE_ERROR_DIALOG: {
+      return {
+        ...state,
+        isErrorDialogDisabled: payload,
+      }
+    }
     case types.TOGGLE_EXPORT_DIALOG:
       return {
         ...state,
@@ -26,11 +50,6 @@ export function uiReducer(state = initialState, action) {
       return {
         ...state,
         isExportSuccessDialogOpen: !state.isExportSuccessDialogOpen,
-      }
-    case types.TOGGLE_FRAMEWORK_DIALOG:
-      return {
-        ...state,
-        isFrameworkDialogOpen: !state.isFrameworkDialogOpen,
       }
     case types.TOGGLE_PAGINATION_DIALOG: {
       const { isOpen, latestPaginationTimestamp } = payload
@@ -50,7 +69,13 @@ export function uiReducer(state = initialState, action) {
     case types.TOGGLE_TIMEFRAME_DIALOG: {
       return {
         ...state,
-        isTimeFrameDialogOpen: payload,
+        isTimeFrameDialogOpen: !state.isTimeFrameDialogOpen,
+      }
+    }
+    case types.TOGGLE_GO_TO_RANGE_DIALOG: {
+      return {
+        ...state,
+        isGoToRangeDialogOpen: !state.isGoToRangeDialogOpen,
       }
     }
     case types.UI_RESIZED:

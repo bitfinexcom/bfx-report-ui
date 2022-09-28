@@ -3,33 +3,36 @@
 // refer https://github.com/bitfinexcom/bfxuilib/blob/master/functions/i18n.spa.js
 
 import i18n from 'i18next'
-import backend from 'i18next-xhr-backend'
+import backend from 'i18next-http-backend'
 import detector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
+const { REACT_APP_ENV } = process.env
+
 export const LANGUAGES = {
-  en: 'en-US',
+  en: 'en',
+  'en-US': 'en',
   ru: 'ru',
-  cn: 'zh-CN',
-  tw: 'zh-TW',
+  'zh-CN': 'zh-CN',
+  'zh-TW': 'zh-TW',
+  tr: 'tr',
+  'tr-TR': 'tr',
+  es: 'es-EM',
+  'es-EM': 'es-EM',
+  pt: 'pt-BR',
+  'pt-PT': 'pt-BR',
+  'pt-BR': 'pt-BR',
 }
 
 export const LANGUAGE_NAMES = {
   en: 'English',
   ru: 'Русский',
-  cn: '中文 (简化)',
-  tw: '中文 (繁體)',
+  'zh-CN': '中文 (简化)',
+  'zh-TW': '中文 (繁體)',
+  tr: 'Türkçe',
+  'es-EM': 'Español',
+  'pt-BR': 'Português',
 }
-
-// email templates language mapping
-export const LANGUAGES_MAP = {
-  en: 'en',
-  ru: 'ru',
-  cn: 'zh-CN',
-  tw: 'zh-TW',
-}
-
-const { NODE_ENV } = process.env
 
 i18n
   .use(backend)
@@ -58,7 +61,7 @@ i18n
     ns: ['translations'],
     defaultNS: 'translations',
 
-    debug: (NODE_ENV === 'development'),
+    debug: (REACT_APP_ENV === 'development'),
 
     react: {
       wait: true,

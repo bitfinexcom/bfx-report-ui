@@ -4,8 +4,7 @@ export const propTypes = {
   syncPairs: PropTypes.arrayOf(String),
   startTime: PropTypes.number,
   t: PropTypes.func.isRequired,
-
-  syncMode: PropTypes.string.isRequired,
+  isSyncing: PropTypes.bool.isRequired,
   config: PropTypes.array.isRequired,
   defaultStartTime: PropTypes.number.isRequired,
   editConfig: PropTypes.func.isRequired,

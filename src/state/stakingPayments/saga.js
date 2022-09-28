@@ -6,6 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { toggleErrorDialog } from 'state/ui/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getQueryLimit } from 'state/query/utils'
 import { getFilterQuery } from 'state/filters/selectors'
@@ -14,8 +15,8 @@ import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
-import { frameworkCheck } from 'state/ui/saga'
 import { fetchDataWithPagination } from 'state/sagas.helper'
+import LEDGERS_CATEGORIES from 'var/ledgersCategories'
 
 import types from './constants'
 import actions from './actions'
@@ -34,7 +35,7 @@ function getReqLedgers({
     end,
     filter,
     limit: getQueryLimit(TYPE),
-    isStakingPayments: true,
+    category: LEDGERS_CATEGORIES.STAKING_PAYMENT,
     symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
   }
   return makeFetchCall('getLedgers', params)
@@ -43,12 +44,6 @@ function getReqLedgers({
 /* eslint-disable-next-line consistent-return */
 function* fetchSPayments() {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateData())
-    }
-
     const targetSymbols = yield select(selectors.getTargetSymbols, TYPE)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const { start, end } = yield select(getTimeFrame, smallestMts)
@@ -63,11 +58,7 @@ function* fetchSPayments() {
     yield put(updatePagination(TYPE, result))
 
     if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'spayments.title',
-        detail: JSON.stringify(error),
-      }))
+      yield put(toggleErrorDialog(true, error.message))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
@@ -88,6 +79,6 @@ function* fetchSPaymentsFail({ payload }) {
 
 export default function* sPaymentsSaga() {
   yield takeLatest(types.FETCH_DATA, fetchSPayments)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshSPayments)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS], refreshSPayments)
   yield takeLatest(types.FETCH_FAIL, fetchSPaymentsFail)
 }

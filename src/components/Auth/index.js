@@ -1,3 +1,1 @@
-import Auth from './Auth.container'
-
-export default Auth
+export { default } from './Auth.container'

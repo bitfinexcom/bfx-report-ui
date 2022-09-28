@@ -1,17 +1,18 @@
-import React, { Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React from 'react'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
 import { createChart, CrosshairMode } from 'lightweight-charts'
+import _isEqual from 'lodash/isEqual'
 import _debounce from 'lodash/debounce'
 
 import { THEME_CLASSES } from 'utils/themes'
+import { getPriceFormat, mergeSimilarTrades } from '../Charts.helpers'
 
+import Tooltip from './Tooltip'
 import CandleStats from './CandleStats'
 import TradesToggle from './TradesToggle'
-import Tooltip from './Tooltip'
 import TradingViewLink from './TradingViewLink'
-import { propTypes, defaultProps } from './Candlestick.props'
 
 const STYLES = {
   [THEME_CLASSES.DARK]: {
@@ -29,6 +30,59 @@ const STYLES = {
 const SCROLL_THRESHOLD = 200
 
 class Candlestick extends React.PureComponent {
+  static propTypes = {
+    candles: PropTypes.shape({
+      entries: PropTypes.arrayOf(PropTypes.shape({
+        time: PropTypes.number,
+        open: PropTypes.number,
+        close: PropTypes.number,
+        high: PropTypes.number,
+        low: PropTypes.number,
+        volume: PropTypes.number,
+      })),
+      isLoading: PropTypes.bool.isRequired,
+      nextPage: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired,
+    }),
+    chartScrollTime: PropTypes.number,
+    className: PropTypes.string,
+    fetchData: PropTypes.func.isRequired,
+    handleChartScrollTime: PropTypes.func,
+    setChartScrollTime: PropTypes.func,
+    isGoToRangePreserved: PropTypes.bool,
+    timeRange: PropTypes.shape({
+      start: PropTypes.number,
+      end: PropTypes.number,
+    }),
+    trades: PropTypes.shape({
+      entries: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+        time: PropTypes.number,
+        execAmount: PropTypes.number,
+        execPrice: PropTypes.number,
+        fee: PropTypes.number,
+        feeCurrency: PropTypes.string,
+        mtsCreate: PropTypes.number,
+        orderID: PropTypes.number,
+      })),
+      isLoading: PropTypes.bool.isRequired,
+      nextPage: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]).isRequired,
+    }),
+    setGoToRangePreserve: PropTypes.func,
+    theme: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    candles: {},
+    chartScrollTime: undefined,
+    className: undefined,
+    handleChartScrollTime: () => {},
+    isGoToRangePreserved: false,
+    timeRange: {},
+    trades: {},
+    setChartScrollTime: () => {},
+    setGoToRangePreserve: () => {},
+  }
+
   state = {
     width: null,
     height: null,
@@ -54,23 +108,43 @@ class Candlestick extends React.PureComponent {
 
   componentDidUpdate(prevProps) {
     const { isTradesVisible } = this.state
-    const { candles, trades, theme } = this.props
-    if (candles.entries !== prevProps.candles.entries) {
+    const {
+      candles,
+      chartScrollTime,
+      handleChartScrollTime,
+      isGoToRangePreserved,
+      theme,
+      timeRange,
+      trades,
+    } = this.props
+    if (candles?.entries !== prevProps?.candles?.entries) {
       this.candleSeries.setData(candles.entries)
     }
-    if (trades.entries !== prevProps.trades.entries && isTradesVisible) {
+    if (trades?.entries !== prevProps?.trades?.entries && isTradesVisible) {
       this.setTradeSeries()
     }
-
-    if (theme !== prevProps.theme) {
+    if (theme !== prevProps?.theme) {
       this.recreateChart()
+    }
+    if (isGoToRangePreserved && !_isEqual(timeRange, prevProps?.timeRange)) {
+      this.recreateChart()
+    }
+    if (!_isEqual(prevProps?.chartScrollTime, chartScrollTime)) {
+      handleChartScrollTime({
+        currentScrollTime: (chartScrollTime * 1000),
+      })
     }
   }
 
   componentWillUnmount() {
+    const {
+      isGoToRangePreserved,
+      setGoToRangePreserve,
+    } = this.props
     if (this.chart) {
       this.cleanChartData()
     }
+    if (isGoToRangePreserved) setGoToRangePreserve(false)
     window.removeEventListener('resize', this.onResize)
   }
 
@@ -80,7 +154,9 @@ class Candlestick extends React.PureComponent {
 
   createChart = () => {
     const { isTradesVisible } = this.state
-    const { candles: { entries: candles }, theme } = this.props
+    const {
+      candles: { entries: candles }, theme, timeRange, isGoToRangePreserved,
+    } = this.props
     const { backgroundColor, textColor } = STYLES[theme]
 
     const element = document.getElementById('candlestick')
@@ -124,6 +200,20 @@ class Candlestick extends React.PureComponent {
         barSpacing: 15,
       },
     })
+
+    const priceFormat = getPriceFormat(candles)
+
+    chart.addLineSeries({ priceFormat })
+
+    const { start, end } = timeRange
+
+    if (isGoToRangePreserved) {
+      chart.timeScale().setVisibleRange({
+        from: start / 1000,
+        to: end / 1000,
+      })
+    }
+
     this.chart = chart
 
     chart.subscribeVisibleTimeRangeChange(this.onTimeRangeChange)
@@ -163,12 +253,14 @@ class Candlestick extends React.PureComponent {
       this.forceUpdate()
     }
 
-    this.tradeSeries.setData(trades.map(trade => ({
+    const preparedTrades = mergeSimilarTrades(trades)
+
+    this.tradeSeries.setData(preparedTrades.map(trade => ({
       ...trade,
       open: trade,
     })))
 
-    this.tradeSeries.setMarkers(trades.map(trade => ({
+    this.tradeSeries.setMarkers(preparedTrades.map(trade => ({
       time: trade.time,
       position: 'inBar',
       shape: 'circle',
@@ -203,8 +295,10 @@ class Candlestick extends React.PureComponent {
   }
 
   onTimeRangeChange = ({ from }) => {
-    const { candles, trades, fetchData } = this.props
-
+    const {
+      candles, trades, fetchData, setChartScrollTime,
+    } = this.props
+    setChartScrollTime(from)
     const candleScrollTime = candles.entries[SCROLL_THRESHOLD] && candles.entries[SCROLL_THRESHOLD].time
     if (candles.nextPage && !candles.isLoading && from < candleScrollTime) {
       fetchData('candles')
@@ -251,19 +345,21 @@ class Candlestick extends React.PureComponent {
   }
 
   render() {
-    const { className, candles: { entries: candles } } = this.props
+    const {
+      candles: { entries: candles },
+      className,
+    } = this.props
     const {
       width,
       height,
       isTradesVisible,
     } = this.state
-
     const classes = classNames('candlestick', className)
 
     return (
       <div id='candlestick' className={classes}>
         {this.chart && (
-          <Fragment>
+          <>
             {this.tradeSeries && (
               <Tooltip
                 chart={this.chart}
@@ -284,14 +380,11 @@ class Candlestick extends React.PureComponent {
               onChange={this.onTradesVisibilityChange}
             />
             <TradingViewLink />
-          </Fragment>
+          </>
         )}
       </div>
     )
   }
 }
 
-Candlestick.propTypes = propTypes
-Candlestick.defaultProps = defaultProps
-
-export default withTranslation('translations')(Candlestick)
+export default Candlestick

@@ -4,6 +4,11 @@ export const getCandles = state => getCandlesData(state).candles || {}
 export const getCurrentFetchParams = state => getCandlesData(state).currentFetchParams
 export const getDataReceived = state => getCandlesData(state).dataReceived
 export const getPageLoading = state => getCandlesData(state).pageLoading
+export const getChartLoading = state => getCandlesData(state).chartLoading
+export const getChartScrollTime = state => getCandlesData(state).chartScrollTime
+export const getCandlesNextPage = state => getCandles(state).nextPage
+export const getCandlesTimeFrame = state => getCandlesData(state).timeframe
+
 export const getParams = (state) => {
   const {
     timeframe,
@@ -21,6 +26,10 @@ export default {
   getCurrentFetchParams,
   getDataReceived,
   getPageLoading,
+  getChartLoading,
+  getCandlesNextPage,
+  getCandlesTimeFrame,
+  getChartScrollTime,
   getParams,
   getTrades,
 }

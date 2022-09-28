@@ -1,22 +1,20 @@
 import React from 'react'
 
 import Status from 'components/Status'
-import DateRangePicker from 'ui/DateRangePicker'
 import PlatformLogo from 'ui/PlatformLogo'
 import timeRangeTypes from 'state/timeRange/constants'
-import { platform } from 'var/config'
+import config from 'config'
 
 import TimeFrame from './TimeFrame'
 import TimeFrameShortcut from './TimeFrameShortcut'
 import Export from './Export'
 import SyncMode from './SyncMode'
+import QueryMode from './QueryMode'
 import AccountMenu from './AccountMenu'
 import TopNavigation from './TopNavigation'
 
-const { REACT_APP_ELECTRON } = process.env
-
 const Header = () => {
-  const HOME_URL = REACT_APP_ELECTRON ? '/' : platform.HOME_URL
+  const HOME_URL = config.isElectronApp ? '/' : config.HOME_URL
 
   return (
     <div className='header'>
@@ -27,7 +25,6 @@ const Header = () => {
       </div>
       <div className='header-timeframe'>
         <TimeFrame />
-        <DateRangePicker className='date-range-picker-popover--dialog' controlledFromRedux />
       </div>
       <TimeFrameShortcut
         title='timeframe.2w'
@@ -39,6 +36,7 @@ const Header = () => {
       />
       <Export />
       <SyncMode />
+      <QueryMode />
       <Status />
       <AccountMenu />
 

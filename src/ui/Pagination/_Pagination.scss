@@ -21,8 +21,12 @@
 
   &-input {
     width: 45px;
-    margin: 0 2px;
+    height: 22px;
+    margin: 0 3px;
     text-align: center;
+    background-color: var(--bgColor);
+    border: 1px solid var(--borderColor);
+    color: var(--color);
   }
 
   &-loading {
@@ -60,7 +64,7 @@
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 390px) {
   .pagination {
     margin: 10px auto 25px auto;
 

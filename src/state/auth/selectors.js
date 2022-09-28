@@ -1,12 +1,14 @@
-import { platform } from 'var/config'
+import config from 'config'
 
 const getAuth = state => state.auth
 
 export const getAuthStatus = state => getAuth(state).authStatus
+export const getIsSubAccount = state => getAuth(state).isSubAccount
 export const getIsShown = state => getAuth(state).isShown
 export const getIsLoading = state => getAuth(state).loading
 export const getEmail = state => getAuth(state).email
 export const getUsers = state => getAuth(state).users
+export const getUsersLoaded = state => getAuth(state).usersLoaded
 export const getUsersLoading = state => getAuth(state).usersLoading
 export const getAuthData = state => {
   const {
@@ -19,6 +21,7 @@ export const getAuthData = state => {
     hasAuthData,
     isNotProtected,
     isPersisted,
+    isSubAccount,
   } = getAuth(state)
 
   return {
@@ -31,6 +34,7 @@ export const getAuthData = state => {
     hasAuthData,
     isNotProtected,
     isPersisted,
+    isSubAccount,
   }
 }
 
@@ -44,9 +48,10 @@ export function selectAuth(state) {
     password,
     token,
     isNotProtected,
+    isSubAccount,
   } = getAuthData(state)
 
-  if (!platform.showFrameworkMode) {
+  if (!config.showFrameworkMode) {
     if (authToken) {
       return { authToken }
     }
@@ -57,11 +62,18 @@ export function selectAuth(state) {
   }
 
   if (token) {
-    return { token }
+    return {
+      token,
+      isSubAccount: isSubAccount || undefined,
+    }
   }
 
   if (email && (isNotProtected || password)) {
-    return { email, password }
+    return {
+      email,
+      password,
+      isSubAccount: isSubAccount || undefined,
+    }
   }
   return {}
 }
@@ -69,9 +81,11 @@ export function selectAuth(state) {
 export default {
   getAuthData,
   getAuthStatus,
+  getIsSubAccount,
   getIsLoading,
   getIsShown,
   getUsers,
+  getUsersLoaded,
   getUsersLoading,
   selectAuth,
 }

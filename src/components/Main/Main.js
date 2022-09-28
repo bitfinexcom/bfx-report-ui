@@ -10,11 +10,13 @@ import ChangeLogs from 'components/ChangeLogs'
 import ConcentrationRisk from 'components/ConcentrationRisk'
 import Derivatives from 'components/Derivatives'
 import FeesReport from 'components/FeesReport'
-import FrameworkDialog from 'components/FrameworkDialog'
+import ErrorDialog from 'components/ErrorDialog'
 import FundingCreditHistory from 'components/FundingCreditHistory'
 import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
 import FundingPayment from 'components/FundingPayment'
+import GoToRangeDialog from 'components/GoToRangeDialog'
+import Invoices from 'components/Invoices'
 import Ledgers from 'components/Ledgers'
 import LoanReport from 'components/LoanReport'
 import Logins from 'components/Logins'
@@ -30,6 +32,7 @@ import PublicFunding from 'components/PublicFunding'
 import PublicTrades from 'components/PublicTrades'
 import Snapshots from 'components/Snapshots'
 import StakingPayments from 'components/StakingPayments'
+import SubAccounts from 'components/SubAccounts'
 import TaxReport from 'components/TaxReport'
 import Tickers from 'components/Tickers'
 import TradedVolume from 'components/TradedVolume'
@@ -38,10 +41,11 @@ import Wallets from 'components/Wallets'
 import ExportDialog from 'components/ExportDialog'
 import ExportSuccessDialog from 'components/ExportSuccessDialog'
 import Preferences from 'components/Preferences'
+import TimeFrameDialog from 'components/TimeFrameDialog'
 import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import NavMenu from 'ui/NavMenu'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './Main.props'
 
@@ -58,6 +62,7 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -72,6 +77,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
   MENU_SPAYMENTS,
+  MENU_SUB_ACCOUNTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
@@ -80,7 +86,8 @@ const {
 } = queryType
 
 const PATHS = {
-  MENU_LEDGERS: [...getPath(MENU_LEDGERS), `${getPath(MENU_LEDGERS)[0]}/:symbol`],
+  MENU_LEDGERS: [getPath(MENU_LEDGERS), `${getPath(MENU_LEDGERS)}/:symbol`],
+  MENU_INVOICES: [getPath(MENU_INVOICES), `${getPath(MENU_INVOICES)}/:symbol`],
   MENU_CANDLES: [getPath(MENU_CANDLES)],
   MENU_TRADES: [getPath(MENU_TRADES), `${getPath(MENU_TRADES)}/:pair`],
   MENU_ORDERS: [getPath(MENU_ORDERS), `${getPath(MENU_ORDERS)}/:pair`],
@@ -104,9 +111,10 @@ const PATHS = {
     getPath(MENU_TAX_REPORT),
     `${getPath(MENU_TAX_REPORT)}/:section(result)`,
     `${getPath(MENU_TAX_REPORT)}/:section(start_snapshot|end_snapshot|result)/:subsection(positions|tickers|wallets)`],
-  MENU_ACCOUNT_SUMMARY: [getPath(MENU_ACCOUNT_SUMMARY)],
+  MENU_ACCOUNT_SUMMARY: [...getPath(MENU_ACCOUNT_SUMMARY)],
   MENU_LOGINS: [getPath(MENU_LOGINS)],
   MENU_CHANGE_LOGS: [getPath(MENU_CHANGE_LOGS)],
+  MENU_SUB_ACCOUNTS: [getPath(MENU_SUB_ACCOUNTS)],
 }
 
 class Main extends PureComponent {
@@ -114,6 +122,7 @@ class Main extends PureComponent {
     const {
       authStatus,
       authIsShown,
+      errorDialogDisabled,
     } = this.props
 
     return authStatus && !authIsShown ? (
@@ -125,6 +134,11 @@ class Main extends PureComponent {
               exact
               path={PATHS.MENU_LEDGERS}
               component={Ledgers}
+            />
+            <Route
+              exact
+              path={PATHS.MENU_INVOICES}
+              component={Invoices}
             />
             <Route
               exact
@@ -226,7 +240,7 @@ class Main extends PureComponent {
               path={getPath(MENU_WALLETS)}
               component={Wallets}
             />
-            {platform.showFrameworkMode && (
+            {config.showFrameworkMode && (
               [
                 <Route
                   exact
@@ -293,13 +307,22 @@ class Main extends PureComponent {
               path={PATHS.MENU_CHANGE_LOGS}
               component={ChangeLogs}
             />
+            {config.showFrameworkMode && (
+              <Route
+                exact
+                path={PATHS.MENU_SUB_ACCOUNTS}
+                component={SubAccounts}
+              />
+            )}
           </Switch>
         </div>
         <ExportDialog />
         <ExportSuccessDialog />
-        {platform.showFrameworkMode && <FrameworkDialog />}
+        {config.showFrameworkMode && !errorDialogDisabled && <ErrorDialog />}
         <PaginationDialog />
         <Preferences />
+        <TimeFrameDialog />
+        <GoToRangeDialog />
       </Fragment>
     ) : ''
   }

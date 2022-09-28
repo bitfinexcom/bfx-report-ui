@@ -15,6 +15,7 @@ import {
   getTargetPair,
 } from 'state/publicTrades/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import PublicTrades from './PublicTrades'
@@ -22,6 +23,7 @@ import PublicTrades from './PublicTrades'
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_PUBLIC_TRADES),
   entries: getFilteredEntries(state, queryConstants.MENU_PUBLIC_TRADES, getEntries(state)),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_PUBLIC_TRADES),
   getFullTime: getFullTime(state),
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),

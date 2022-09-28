@@ -1,20 +1,23 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withTranslation } from 'react-i18next'
 
-import { startSyncing, stopSyncing } from 'state/sync/actions'
-import { getSyncMode, getSyncProgress } from 'state/sync/selectors'
+import { startSyncNow, stopSyncNow } from 'state/sync/actions'
+import { getSyncProgress, getIsSyncing } from 'state/sync/selectors'
 
 import SyncMode from './SyncMode'
 
 const mapStateToProps = state => ({
-  syncMode: getSyncMode(state),
+  isSyncing: getIsSyncing(state),
   syncProgress: getSyncProgress(state),
 })
 
 const mapDispatchToProps = {
-  startSyncing,
-  stopSyncing,
+  startSyncNow,
+  stopSyncNow,
 }
 
-const SyncModeContainer = connect(mapStateToProps, mapDispatchToProps)(SyncMode)
-
-export default SyncModeContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(SyncMode)

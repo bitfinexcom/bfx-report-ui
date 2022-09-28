@@ -1,6 +1,6 @@
 import { fork } from 'redux-saga/effects'
 
-import { platform } from 'var/config'
+import config from 'config'
 
 import accountBalanceSaga from './accountBalance/saga'
 import accountSummarySaga from './accountSummary/saga'
@@ -9,6 +9,7 @@ import authSaga from './auth/saga'
 import baseSaga from './base/saga'
 import candlesSaga from './candles/saga'
 import changeLogsSaga from './changeLogs/saga'
+import columnsSaga from './columns/saga'
 import derivativesSaga from './derivatives/saga'
 import fcreditSaga from './fundingCreditHistory/saga'
 import feesReportSaga from './feesReport/saga'
@@ -16,6 +17,7 @@ import filtersSaga from './filters/saga'
 import floanSaga from './fundingLoanHistory/saga'
 import fofferSaga from './fundingOfferHistory/saga'
 import fpaymentSaga from './fundingPayment/saga'
+import invoicesSaga from './invoices/saga'
 import ledgersSaga from './ledgers/saga'
 import loanReportSaga from './loanReport/saga'
 import loginsSaga from './logins/saga'
@@ -36,6 +38,7 @@ import querySaga from './query/saga'
 import tickersSaga from './tickers/saga'
 import tradedVolumeSaga from './tradedVolume/saga'
 import tradesSaga from './trades/saga'
+import subAccountsSaga from './subAccounts/saga'
 import symbolsSaga from './symbols/saga'
 import syncSaga from './sync/saga'
 import uiSaga from './ui/saga'
@@ -50,11 +53,13 @@ export default function* rootSaga() {
   yield fork(baseSaga)
   yield fork(candlesSaga)
   yield fork(changeLogsSaga)
+  yield fork(columnsSaga)
   yield fork(derivativesSaga)
   yield fork(fcreditSaga)
   yield fork(filtersSaga)
   yield fork(floanSaga)
   yield fork(fofferSaga)
+  yield fork(invoicesSaga)
   yield fork(ledgersSaga)
   yield fork(loginsSaga)
   yield fork(fpaymentSaga)
@@ -75,11 +80,12 @@ export default function* rootSaga() {
   yield fork(tradesSaga)
   yield fork(uiSaga)
   yield fork(walletsSaga)
-  if (platform.showFrameworkMode) {
+  if (config.showFrameworkMode) {
     yield fork(accountBalanceSaga)
     yield fork(feesReportSaga)
     yield fork(loanReportSaga)
     yield fork(snapshotsSaga)
+    yield fork(subAccountsSaga)
     yield fork(syncSaga)
     yield fork(taxReportSaga)
     yield fork(tradedVolumeSaga)

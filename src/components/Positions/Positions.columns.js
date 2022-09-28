@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import _endsWith from 'lodash/endsWith'
 
 import {
   Cell,
@@ -8,12 +9,13 @@ import {
 import queryConstants from 'state/query/constants'
 import JSONFormat from 'ui/JSONFormat'
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 const { MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT } = queryConstants
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     target,
     filteredData,
     getFullTime,
@@ -22,8 +24,14 @@ export default function getColumns(props) {
     timeOffset,
   } = props
 
-  function showType(swapType) {
-    return swapType
+  function showType(data) {
+    const { marginFundingType, pair } = data
+
+    if (_endsWith(pair, 'PERP')) {
+      return t('positions.swap.period')
+    }
+
+    return marginFundingType
       ? t('positions.swap.term')
       : t('positions.swap.daily')
   }
@@ -33,7 +41,7 @@ export default function getColumns(props) {
       {
         id: 'liquidationPrice',
         name: 'column.liq-price',
-        width: COLUMN_WIDTHS.AMOUNT,
+        width: getColumnWidth('liquidationPrice', columnsWidth),
         renderer: (rowIndex) => {
           const { liquidationPrice } = filteredData[rowIndex]
           const fixedPrice = fixedFloat(liquidationPrice)
@@ -46,12 +54,13 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].liquidationPrice),
       },
       {
         id: 'pl',
         name: 'column.pl',
-        width: 100,
+        width: getColumnWidth('pl', columnsWidth),
         renderer: (rowIndex) => {
           const { pl } = filteredData[rowIndex]
           return (
@@ -63,12 +72,13 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].pl),
       },
       {
         id: 'plPerc',
         name: 'column.plperc',
-        width: 100,
+        width: getColumnWidth('plPerc', columnsWidth),
         renderer: (rowIndex) => {
           const { plPerc } = filteredData[rowIndex]
           return (
@@ -80,6 +90,7 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].plPerc),
       },
     ]
@@ -90,7 +101,7 @@ export default function getColumns(props) {
       {
         id: 'collateral',
         name: 'column.collateral',
-        width: COLUMN_WIDTHS.AMOUNT,
+        width: getColumnWidth('collateral', columnsWidth),
         renderer: (rowIndex) => {
           const { collateral } = filteredData[rowIndex]
           const fixedCollateral = fixedFloat(collateral)
@@ -103,12 +114,13 @@ export default function getColumns(props) {
             </Cell>
           )
         },
+        isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].collateral),
       },
       {
         id: 'meta',
         name: 'column.meta',
-        width: COLUMN_WIDTHS.META,
+        width: getColumnWidth('meta', columnsWidth),
         renderer: (rowIndex) => {
           const { meta = '' } = filteredData[rowIndex]
           const formattedMeta = JSON.stringify(meta, undefined, 2)
@@ -130,15 +142,15 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         /* eslint-disable jsx-a11y/anchor-is-valid */
         return (
           <Cell tooltip={id}>
-            <Fragment>
+            <>
               <a href='#' onClick={onIdClick} value={id}>{id}</a>
-            </Fragment>
+            </>
           </Cell>
         )
         /* eslint-enable jsx-a11y/anchor-is-valid */
@@ -148,7 +160,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
-      width: COLUMN_WIDTHS.PAIR,
+      width: getColumnWidth('pair', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -162,7 +174,7 @@ export default function getColumns(props) {
     {
       id: 'amount',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth),
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         return (
@@ -174,12 +186,13 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
     {
       id: 'basePrice',
       name: 'column.base-price',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('basePrice', columnsWidth),
       renderer: (rowIndex) => {
         const { basePrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(basePrice)
@@ -192,13 +205,14 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].basePrice),
     },
     ...ACTIVE_POSITIONS_COLS,
     {
       id: 'marginFunding',
       name: 'column.fundingCost',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('marginFunding', columnsWidth),
       renderer: (rowIndex) => {
         const { marginFunding } = filteredData[rowIndex]
         const fixedSwap = fixedFloat(marginFunding)
@@ -211,26 +225,27 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].marginFunding),
     },
     {
       id: 'marginFundingType',
       name: 'column.fundingType',
-      width: 130,
+      width: getColumnWidth('marginFundingType', columnsWidth),
       renderer: (rowIndex) => {
-        const swapType = showType(filteredData[rowIndex].marginFundingType)
+        const swapType = showType(filteredData[rowIndex])
         return (
           <Cell tooltip={swapType}>
             {swapType}
           </Cell>
         )
       },
-      copyText: rowIndex => showType(filteredData[rowIndex].marginFundingType),
+      copyText: rowIndex => showType(filteredData[rowIndex]),
     },
     {
       id: 'status',
       name: 'column.status',
-      width: 100,
+      width: getColumnWidth('status', columnsWidth),
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
@@ -244,7 +259,7 @@ export default function getColumns(props) {
     {
       id: 'mtsUpdate',
       nameStr: `${t('column.updated')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mtsUpdate', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (

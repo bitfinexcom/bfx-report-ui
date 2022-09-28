@@ -5,6 +5,7 @@ export const propTypes = {
   currencies: PropTypes.objectOf(PropTypes.string),
   currentFilters: PropTypes.arrayOf(PropTypes.string),
   existingCoins: PropTypes.arrayOf(PropTypes.string),
+  inactiveCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   toggleSymbol: PropTypes.func.isRequired,
 }
 

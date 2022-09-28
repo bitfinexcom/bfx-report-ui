@@ -7,20 +7,27 @@ import {
   Intent,
 } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
+import _isString from 'lodash/isString'
 
 import ColumnsSelect from 'ui/ColumnsSelect'
+import DateInput from 'ui/DateInput'
 import Icon from 'icons'
 import { selectTextOnFocus } from 'utils/inputs'
 import { getValidSortedFilters } from 'state/filters/utils'
 import { EMPTY_FILTER } from 'var/filterTypes'
 import DEFAULT_FILTERS from 'ui/ColumnsFilter/var/defaultFilters'
+import DATA_TYPES from 'var/dataTypes'
 
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
 import FilterTypeSelector from './FilterTypeSelector'
 import { propTypes, defaultProps } from './ColumnsFilter.props'
+import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
+import SideSelector from './Selectors/SideSelector'
+import WalletSelector from './Selectors/WalletSelector'
 
 const MAX_FILTERS = 7
+const { DATE } = DATA_TYPES
 
 /* eslint-disable react/no-array-index-key */
 class ColumnsFilter extends PureComponent {
@@ -62,7 +69,9 @@ class ColumnsFilter extends PureComponent {
 
     const trimmedFilters = filters.map(filter => ({
       ...filter,
-      value: filter.value.trim(),
+      value: _isString(filter.value)
+        ? filter.value.trim()
+        : filter.value,
     }))
 
     this.toggleDialog()
@@ -99,6 +108,27 @@ class ColumnsFilter extends PureComponent {
     })
   }
 
+  onColumnChange = (params) => {
+    const { index, ...filterParams } = params
+    const { filters } = this.state
+
+    const updatedFilters = filters.map((filter, i) => {
+      if (i === index) {
+        return {
+          type: '',
+          value: '',
+          ...filterParams,
+        }
+      }
+
+      return filter
+    })
+
+    this.setState({
+      filters: updatedFilters,
+    })
+  }
+
   updateFilter = (params) => {
     const { index, ...filterParams } = params
     const { filters } = this.state
@@ -119,8 +149,16 @@ class ColumnsFilter extends PureComponent {
     })
   }
 
+  onDateChange = (index, date) => {
+    this.updateFilter({ index, value: +date })
+  }
+
   onInputChange = (index, e) => {
     const { value } = e.target
+    this.updateFilter({ index, value })
+  }
+
+  onSelectChange = (index, value) => {
     this.updateFilter({ index, value })
   }
 
@@ -135,6 +173,25 @@ class ColumnsFilter extends PureComponent {
       .some((filter, index) => !_isEqual(filter, currentValidFilters[index]))
 
     return currentValidFilters.length !== nextValidFilters.length || hasFilterValueChanged
+  }
+
+  renderSelect = ({ filter, index }) => {
+    const { select, value } = filter
+    // eslint-disable-next-line no-unused-vars
+    const selectProps = {
+      className: 'columns-filter-item-input columns-filter-item-input--select',
+      value,
+      onChange: itemValue => this.onSelectChange(index, itemValue),
+    }
+
+    switch (select) {
+      case FILTERS_SELECTOR.SIDE:
+        return <SideSelector {...selectProps} />
+      case FILTERS_SELECTOR.WALLET:
+        return <WalletSelector {...selectProps} />
+      default:
+        return null
+    }
   }
 
   /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events, no-shadow */
@@ -169,27 +226,38 @@ class ColumnsFilter extends PureComponent {
             <div>
               {filters.map((filter, index) => {
                 const {
-                  column, type, dataType, value,
+                  column, type, dataType, select, value,
                 } = filter
 
                 return (
-                  <div key={index} className='columns-filter-item'>
+                  <div key={`${column}_${index}`} className='columns-filter-item'>
                     <ColumnSelector
                       section={target}
                       value={column}
-                      onChange={({ column, dataType }) => this.updateFilter({ index, column, dataType })}
+                      onChange={(column) => this.onColumnChange({ index, ...column })}
                     />
                     <FilterTypeSelector
+                      isSelect={!!select}
                       value={type}
                       dataType={dataType}
                       onChange={filterType => this.updateFilter({ index, type: filterType })}
                     />
-                    <InputGroup
-                      className='columns-filter-item-input'
-                      value={value}
-                      onChange={e => this.onInputChange(index, e)}
-                      onFocus={selectTextOnFocus}
-                    />
+                    {select && this.renderSelect({ filter, index })}
+                    {dataType !== DATE && !select && (
+                      <InputGroup
+                        className='columns-filter-item-input'
+                        value={value}
+                        onChange={e => this.onInputChange(index, e)}
+                        onFocus={selectTextOnFocus}
+                      />
+                    )}
+                    {dataType === DATE && (
+                      <DateInput
+                        className='columns-filter-item-input'
+                        defaultValue={value || null}
+                        onChange={e => this.onDateChange(index, e)}
+                      />
+                    )}
                     <Icon.BIN
                       className='columns-filter-item-remove'
                       onClick={() => this.onFilterRemove(index)}

@@ -1,43 +1,49 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchLoanReport,
   refresh,
-  addTargetSymbol,
-  removeTargetSymbol,
-  setTargetSymbols,
   setParams,
+  addTargetSymbol,
+  fetchLoanReport,
+  setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
 } from 'state/loanReport/actions'
 import {
-  getCurrentFetchParams,
-  getDataReceived,
+  getParams,
   getEntries,
   getPageLoading,
-  getParams,
+  getDataReceived,
   getTargetSymbols,
+  getCurrentFetchParams,
 } from 'state/loanReport/selectors'
 
 import LoanReport from './LoanReport'
 
 const mapStateToProps = state => ({
-  currentFetchParams: getCurrentFetchParams(state),
-  entries: getEntries(state),
   params: getParams(state),
-  targetSymbols: getTargetSymbols(state),
-  dataReceived: getDataReceived(state),
+  entries: getEntries(state),
   pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
+  targetSymbols: getTargetSymbols(state),
+  currentFetchParams: getCurrentFetchParams(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchLoanReport,
   refresh,
   setParams,
   addTargetSymbol,
-  removeTargetSymbol,
   setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
+  fetchData: fetchLoanReport,
 }
 
-const LoanReportContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(LoanReport))
-
-export default LoanReportContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(LoanReport)

@@ -6,8 +6,8 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
-import { frameworkCheck } from 'state/ui/saga'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
 
@@ -27,12 +27,6 @@ const getReqTaxReportSnapshot = (end) => {
 /* eslint-disable-next-line consistent-return */
 export function* fetchTaxReport() {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateTaxReport())
-    }
-
     const { start, end } = yield select(getTimeFrame)
     const { result, error } = yield call(getReqTaxReport, {
       start,
@@ -42,11 +36,7 @@ export function* fetchTaxReport() {
     yield put(actions.updateTaxReport(result))
 
     if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'taxreport.title',
-        detail: JSON.stringify(error),
-      }))
+      yield put(toggleErrorDialog(true, error.message))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
@@ -60,12 +50,6 @@ export function* fetchTaxReport() {
 /* eslint-disable-next-line consistent-return */
 function* fetchTaxReportSnapshot({ payload: section }) {
   try {
-    const shouldProceed = yield call(frameworkCheck)
-    if (!shouldProceed) {
-      // stop loading for first request
-      return yield put(actions.updateTaxReportSnapshot({ section }))
-    }
-
     const { start, end } = yield select(getTimeFrame)
     const timestamp = (section === TAX_REPORT_SECTIONS.START_SNAPSHOT)
       ? start
@@ -76,11 +60,7 @@ function* fetchTaxReportSnapshot({ payload: section }) {
     yield put(actions.updateTaxReportSnapshot({ result, section }))
 
     if (error) {
-      yield put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'taxreport.title',
-        detail: JSON.stringify(error),
-      }))
+      yield put(toggleErrorDialog(true, error.message))
     }
   } catch (fail) {
     yield put(actions.fetchFail({

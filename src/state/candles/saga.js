@@ -7,13 +7,19 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import rangeTypes from 'state/timeRange/constants'
+import { setTimeRange } from 'state/timeRange/actions'
+import goToRangeTypes, { OFFSETS } from 'state/goToRange/constants'
+import { setGoToRange, handleGoToRange, setGoToRangePreserve } from 'state/goToRange/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 
-import types from './constants'
+import types, { SCROLL_THRESHOLD } from './constants'
 import actions from './actions'
 import selectors from './selectors'
+
+const now = new Date().getTime()
 
 const getReqCandles = (params) => {
   const {
@@ -50,7 +56,6 @@ function* fetchData(section, data, method) {
     end,
   })
   yield put(actions.updateData({ [section]: result }))
-
   if (error) {
     yield put(actions.fetchFail({
       id: 'status.fail',
@@ -71,7 +76,6 @@ export function* fetchCandles({ payload: type }) {
     if (type === 'trades') {
       return yield call(fetchData, 'trades', trades, getReqTrades)
     }
-
     yield all([
       call(fetchData, 'candles', candles, getReqCandles),
       call(fetchData, 'trades', trades, getReqTrades),
@@ -94,8 +98,53 @@ function* fetchCandlesFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
+function* handleGoToRangeSaga({ payload }) {
+  const { start, end } = payload
+  const timeFrame = yield select(selectors.getCandlesTimeFrame)
+  const endRange = (end + (OFFSETS[timeFrame] * 4) < now)
+    ? end + (OFFSETS[timeFrame] * 4)
+    : now
+  yield put(setTimeRange({
+    start: (start - (OFFSETS[timeFrame] * 4)),
+    end: endRange,
+    range: rangeTypes.CUSTOM,
+  }))
+  try {
+    yield call(fetchCandles, { payload: 'candles' })
+    yield call(fetchCandles, { payload: 'trades' })
+    yield put(setGoToRange(payload))
+    yield put(setGoToRangePreserve(true))
+  } catch (fail) {
+    yield put(actions.fetchFail({
+      id: 'status.request.error',
+      topic: 'candles.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
+function* handleChartScrollTime({ payload }) {
+  const { currentScrollTime } = payload
+  const { start, end } = yield select(getTimeFrame)
+  const timeFrame = yield select(selectors.getCandlesTimeFrame)
+  const shouldUpdateStart = (currentScrollTime - SCROLL_THRESHOLD[timeFrame]) < start
+  const shouldUpdateEnd = ((currentScrollTime + SCROLL_THRESHOLD[timeFrame]) > end)
+    && (currentScrollTime + SCROLL_THRESHOLD[timeFrame] < now)
+  if (shouldUpdateStart || shouldUpdateEnd) {
+    const params = {
+      range: goToRangeTypes.DATE,
+      start: currentScrollTime,
+      end: currentScrollTime,
+      timeFrame,
+    }
+    yield put(handleGoToRange(params))
+  }
+}
+
 export default function* candlesSaga() {
   yield takeLatest(types.FETCH, fetchCandles)
   yield takeLatest(types.REFRESH, refreshCandles)
   yield takeLatest(types.FETCH_FAIL, fetchCandlesFail)
+  yield takeLatest(types.HANDLE_CHART_SCROLL_TIME, handleChartScrollTime)
+  yield takeLatest(goToRangeTypes.HANDLE_GO_TO_RANGE, handleGoToRangeSaga)
 }

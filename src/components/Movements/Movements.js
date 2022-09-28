@@ -8,7 +8,12 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
-import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  toggleSymbol,
+  clearAllSymbols,
+} from 'state/utils'
 
 import getColumns from './Movements.columns'
 import { propTypes, defaultProps } from './Movements.props'
@@ -33,9 +38,12 @@ class Movements extends PureComponent {
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
 
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
+
   render() {
     const {
       columns,
+      columnsWidth,
       entries,
       existingCoins,
       getFullTime,
@@ -48,6 +56,7 @@ class Movements extends PureComponent {
     } = this.props
 
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
@@ -64,10 +73,14 @@ class Movements extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={pageLoading} />
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
         </Fragment>
       )
     }
@@ -82,6 +95,7 @@ class Movements extends PureComponent {
             toggleSymbol: this.toggleSymbol,
           }}
           refresh={refresh}
+          clearTargetSymbols={this.clearSymbols}
         />
         {showContent}
       </Card>

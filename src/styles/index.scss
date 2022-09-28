@@ -8,15 +8,19 @@
 
 @import "components/AccountSummary/_AccountSummary.scss";
 @import "components/Auth/_Auth.scss";
+@import "components/Candles/_Candles.scss";
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
+@import "components/ErrorDialog/_ErrorDialog.scss";
 @import "components/ExportDialog/_ExportDialog.scss";
 @import "components/ExportSuccessDialog/_ExportSuccessDialog.scss";
-@import "components/FrameworkDialog/_FrameworkDialog.scss";
 @import "components/Header/_Header.scss";
 @import "components/Header/TimeFrame/_TimeFrame.scss";
 @import "components/Preferences/_Preferences.scss";
 @import "components/Status/_Status.scss";
+@import "components/SubAccounts/_SubAccounts.scss";
 @import "components/TaxReport/_TaxReport.scss";
+@import "components/TimeFrameDialog/_TimeFrameDialog.scss";
+@import "components/GoToRangeDialog/_GoToRangeDialog.scss";
 @import "icons/_icons.scss";
 @import "ui/_index.scss";
 @import "themes";
@@ -85,6 +89,11 @@ html {
   box-shadow: none;
 }
 
+.subtitle {
+  font-size: 20px;
+  color: var(--activeColor);
+}
+
 .bp3-input {
   background-color: var(--bgColor2);
   box-shadow: none;
@@ -110,6 +119,18 @@ a {
   border-bottom-color: var(--borderColor);
 }
 
+.mt {
+  &20 {
+    margin-top: 20px;
+  }
+}
+
+.ml {
+  &20 {
+    margin-left: 20px;
+  }
+}
+
 .tables-row {
   &-item {
     display: inline-block;
@@ -123,7 +144,6 @@ a {
     }
   }
 }
-
 
 .total-stats {
   margin-bottom: 20px;
@@ -242,7 +262,7 @@ a {
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 390px) {
   html {
     font-size: 13px;
   }
@@ -254,7 +274,7 @@ a {
 
     .bp3-card {
       display: flex;
-      padding: 12px 18px 0 18px;
+      padding: 12px 10px 0 10px;
     }
   }
 

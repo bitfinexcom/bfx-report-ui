@@ -7,8 +7,12 @@
     "fees": "您在Bitfinex交易的手續費率",
     "fees_explain": "（基於您的交易量）",
     "fees_deriv": "您於衍生品交易的手續費率",
+    "fee_tier_volume": "過去30天交易量（符合手續費等級計算）",
     "30dVolume": "過去30天交易量",
-    "margin_funds": "過去30天提供的保證金融資之總收益"
+    "margin_funds": "過去30天提供的保證金融資之總收益",
+    "trading_funds": "過去30天交易手續費",
+    "leo_level": "LEO級別",
+    "average_amount": "平均數量"
   },
   "activepositions": {
     "title": "活躍的倉位"
@@ -19,11 +23,23 @@
   "auth": {
     "auth": "驗證",
     "title": "請先登入",
+    "signUp": "註冊",
+    "signIn": "登入",
+    "passwordRecovery": "密碼找回",
+    "subAccount": "子帳戶",
     "enterAPIKey": "輸入 API Key:",
     "enterAPISecret": "輸入 API Secret:",
+    "enterPassword": "輸入密碼：",
+    "repeatPassword": "再次輸入密碼：",
+    "enterEmail": "輸入電子郵箱：",
     "checkAuth": "開始驗證",
     "note1": "請先前往 ",
     "note2": " 取得唯讀的API金鑰與密鑰對。",
+    "passwordProtection": "啟動密碼保護機制",
+    "passwordLengthValidationError": "密碼長度必須至少八位數",
+    "passwordCharactersValidationError": "密碼必須包含英文大小寫字母",
+    "passwordRepeatValidationError": "密碼不一致",
+    "rememberMe": "自動儲存",
     "required": "（必填）",
     "nonideal": {
       "title": "報告 2.0",
@@ -33,9 +49,19 @@
   "averagewinloss": {
     "title": "平均淨/損失"
   },
+  "candles": {
+    "title": "陰陽燭",
+    "amount": "數量",
+    "orderid": "訂單ID",
+    "fee": "手續費",
+    "toggle_trades": "切換交易"
+  },
+  "changelogs": {
+    "title": "變更紀錄"
+  },
   "charts": {
     "cumulative": "累計",
-    "percentage": "百分比"
+    "percent": "%"
   },
   "column": {
     "actual-price": "實際價格",
@@ -49,14 +75,17 @@
     "base-price": "基價",
     "bid": "買價",
     "browser": "瀏覽器",
+    "category": "分類",
+    "clampMax": "最大值",
+    "clampMin": "最小值",
     "closed": "結束",
     "collateral": "抵押品",
     "created": "建立",
-    "currency": "貨幣",
+    "currency": "幣別",
     "date": "日期",
     "days": "天",
     "description": "描述",
-    "destination": "去處",
+    "destination": "目的地",
     "fee": "手續費",
     "feePercent": "費用百分比",
     "fees": "費用",
@@ -67,9 +96,12 @@
     "ip": "IP",
     "lastpayout": "結束",
     "liq-price": "清算價格",
+    "maker_fees": "掛單手續費",
+    "maker_rebate": "做市商返利",
     "meta": "後設資料",
     "mobile": "行動裝置",
     "movementsTotal": "運用資金總額 (美元)",
+    "note": "附註",
     "opened": "開始",
     "orderid": "訂單 ID",
     "pair": "對",
@@ -90,6 +122,14 @@
     "status": "狀態",
     "fundingCost": "互換成本",
     "fundingType": "互換類型",
+    "taker_fees": "吃單手續費",
+    "taker_fees_crypto": "吃單手續費（加密貨幣）",
+    "taker_fees_fiat": "吃單手續費（法幣）",
+    "taker_fees_stable": "吃單手續費（穩定幣）",
+    "taker_rebate": "受價者返利",
+    "taker_rebate_crypto": "吃單手續費返利（加密貨幣）",
+    "taker_rebate_fiat": "吃單手續費返利（法幣）",
+    "taker_rebate_stable": "吃單手續費返利（穩定幣）",
     "time": "時間",
     "totalResult": "總額 (美元)",
     "transactionId": "交易編號",
@@ -116,7 +156,9 @@
       "greaterThan": "大於",
       "greaterThanEqual": "大於/等於",
       "lessThan": "少於",
-      "lessThanEqual": "小於/等於"
+      "lessThanEqual": "小於/等於",
+      "after": "此日期之後",
+      "before": "此日期之前"
     }
   },
   "columnsselect": {
@@ -151,6 +193,7 @@
       "local": "已產生{{topic}}的csv檔，請查看您本地的'csv'資料夾。",
       "email": "正在生成您的 CSV 格式報告。生成後將立即透過 Email 送出。"
     },
+    "success": "成功",
     "targets": "匯出項目"
   },
   "fcredit": {
@@ -185,15 +228,58 @@
     "no_sync": "未啟動同步功能",
     "proceed": "選擇繼續",
     "cancel": "取消",
-    "notagain": "不要再顯示此信息"
+    "notagain": "不要再顯示此信息",
+    "continue": "繼續",
+    "warning": "提醒"
   },
   "header": {
     "logout": "登出",
     "preferences": "偏好設定",
-    "help": "說明"
+    "help": "說明",
+    "top_navigation": "Top Navigation"
+  },
+  "inputs": {
+    "filter_placeholder": "篩選...",
+    "timezone_local": "目前時區",
+    "timezone_placeholder": "搜尋時區..."
   },
   "ledgers": {
-    "title": "餘額"
+    "title": "餘額",
+    "categories": {
+      "exchange": "兌換",
+      "position_modified": "倉位修改、關閉或清算",
+      "position_claim": "倉位贖回",
+      "position_transfer": "倉位轉移",
+      "position_swap": "倉位翻轉",
+      "position_funding_cost": "倉位利息費用",
+      "interest_payment": "保證金利息費用",
+      "derivatives_funding_event": "衍生品資金費用結算",
+      "settlement": "結清",
+      "transfer": "轉移",
+      "deposit": "存款",
+      "withdrawal": "提款",
+      "cancelled_withdrawal": "取消提款請求",
+      "trading_fee": "交易手續費",
+      "trading_rebate": "交易返利",
+      "hidden_order_fee": "隱藏單手續費",
+      "otc_trade_fee": "OTC交易手續費",
+      "swap_fee": "倉位翻轉手續費",
+      "claiming_fee": "贖回手續費",
+      "margin_funding_charge": "資金使用於倉位之費用",
+      "margin_funding_fee": "資金未使用於倉位之費用",
+      "affiliate_rebate": "推薦計畫返利",
+      "ethfx_loyalty_fee": "ETHFX忠誠返利",
+      "deposit_fee": "存款手續費",
+      "withdrawal_fee": "提款手續費",
+      "withdrawal_express_fee": "快速提款手續費",
+      "miner_fee": "礦工費",
+      "staking_payment": "Staking收益",
+      "adjustment": "調整",
+      "expense": "費用",
+      "currency_conversion": "貨幣轉換",
+      "monthly_profit_payment": "每月獲利收益",
+      "losses": "損失"
+    }
   },
   "loading": "讀取中...",
   "loanreport": {
@@ -241,6 +327,7 @@
     "no_active": "目前沒有未平倉位。",
     "swap": {
       "daily": "每日",
+      "period": "期間",
       "term": "條件"
     }
   },
@@ -250,9 +337,10 @@
     "language": "語言",
     "theme": "主題",
     "timezone": "時區",
-    "timezone-input": "輸入時區",
     "dateformat": "日期格式",
     "milliseconds": "顯示毫秒",
+    "table_scroll": "顯示捲軸",
+    "preserve_timeframe": "保留指定時間",
     "sync": {
       "add-filter": "增加篩選條件",
       "add-pair": "增加交易對",
@@ -285,9 +373,12 @@
   },
   "selector": {
     "select": "選取",
+    "all": "全部",
+    "inactive": "無交易對之代幣",
     "filter": {
       "symbol": "代幣過濾器",
-      "pair": "代幣對過濾器"
+      "pair": "代幣對過濾器",
+      "category": "分類篩選"
     }
   },
   "snapshots": {
@@ -297,14 +388,30 @@
       "tooltip": "選擇快照的時間"
     }
   },
-  "status":{
+  "spayments": {
+    "title": "Staking收益"
+  },
+  "status": {
     "success": "於 {{time}} {{topic}}成功",
     "warn": "{{topic}}",
     "fail": "{{topic}} 失敗 {{detail}}",
     "noid": "dev: the status action should contain the id param",
-    "request":{
+    "request": {
       "error": "{{topic}} 請求失敗 {{detail}}"
-    }
+    },
+    "signInFail": "憑證無效",
+    "timeframe_update": "時間已更新",
+    "signUpFail": "無效的API金鑰或密碼"
+  },
+  "subaccounts": {
+    "add_account": "新增帳號",
+    "title": "子帳戶",
+    "create": "建立子帳戶",
+    "api_key": "API 金鑰",
+    "api_secret": "API 密碼",
+    "password": "密碼",
+    "remove": "移除子帳戶",
+    "login": "登入子帳戶"
   },
   "symbols": {
     "title": "取得貨幣資訊"
@@ -312,14 +419,21 @@
   "sync": {
     "title": "同步",
     "switch-mode": "切換同步模式",
-    "online": "目前為連線查詢模式。",
-    "offline": "目前為離線查詢模式。",
-    "insync": "同步中。",
+    "online": "目前為連線查詢模式",
+    "online_tooltip": "點擊切換到離線查詢模式",
+    "offline": "目前為離線查詢模式",
+    "offline_tooltip": "點擊切換到連線查詢模式",
+    "insync": "目前為連線查詢模式。點擊停止同步",
+    "insync_tooltip": "點擊停止同步",
     "description": "我們即將將您的資料快取到本地中。一旦同步完成您將可以離線查詢您的資料。在同步期間您依然可以繼續連線查詢。",
     "sync-description": "資料正在同步到本地中。您希望停止同步並繼續使用連線查詢模式嗎？",
     "close": "取消",
     "start": "開始同步",
+    "start-sync": "已開始同步",
+    "start_sync_tooltip": "點擊開始同步",
     "stop-sync": "停止同步",
+    "sync-done": "已同步",
+    "go-online": "正在切換到連線查詢模式",
     "go-offline": "切換至離線查詢模式",
     "logout": "同步已停止",
     "message": {
@@ -341,7 +455,8 @@
   },
   "theme": {
     "light": "白",
-    "dark": "黑"
+    "dark": "黑",
+    "midnight": "午夜"
   },
   "tickers": {
     "title": "牌價",
@@ -350,8 +465,9 @@
   "timeframe": {
     "custom": {
       "cancel": "取消",
+      "confirm": "確認",
       "title": "選擇查詢時段",
-      "view" : "查詢"
+      "view": "查詢"
     },
     "day": "日",
     "refresh": "重新載入",
@@ -370,8 +486,10 @@
     "past_2y": "過去兩年",
     "range_limit": "無法查詢實際日期後六年以上的資訊",
     "start-date-placeholder": "開始日期時間",
+    "end-date-placeholder": "結束日期時間",
     "today": "今日",
-    "year": "年"
+    "year": "年",
+    "week": "星期"
   },
   "tradedvolume": {
     "title": "交易量"
@@ -386,7 +504,8 @@
     "header": {
       "exchange": "交易",
       "margin": "保證金",
-      "funding": "融資"
+      "funding": "融資",
+      "token-sales": "令牌銷售"
     },
     "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。",
     "query": {

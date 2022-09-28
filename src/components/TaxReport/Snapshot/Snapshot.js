@@ -1,12 +1,11 @@
-import React, { Fragment, PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 
-import PositionsSnapshot from 'components/Snapshots/PositionsSnapshot'
-import TickersSnapshot from 'components/Snapshots/TickersSnapshot'
-import WalletsSnapshot from 'components/Snapshots/WalletsSnapshot'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
+import WalletsSnapshot from 'components/Snapshots/WalletsSnapshot'
+import TickersSnapshot from 'components/Snapshots/TickersSnapshot'
+import PositionsSnapshot from 'components/Snapshots/PositionsSnapshot'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
 
@@ -46,7 +45,6 @@ class Snapshot extends PureComponent {
 
   switchSection = (section) => {
     const { history } = this.props
-
     const path = this.getSectionURL(section)
 
     history.push(`${path}${window.location.search}`)
@@ -54,19 +52,20 @@ class Snapshot extends PureComponent {
 
   render() {
     const {
-      data,
-      dataReceived,
-      pageLoading,
-      match,
       t,
+      data,
+      match,
+      refresh,
+      pageLoading,
+      dataReceived,
     } = this.props
     const {
-      positionsTotalPlUsd,
-      positionsEntries,
-      positionsTickersEntries,
-      walletsTotalBalanceUsd,
-      walletsTickersEntries,
       walletsEntries,
+      positionsEntries,
+      positionsTotalPlUsd,
+      walletsTickersEntries,
+      walletsTotalBalanceUsd,
+      positionsTickersEntries,
     } = data
 
     if (!dataReceived && pageLoading) {
@@ -79,7 +78,7 @@ class Snapshot extends PureComponent {
       || walletsTickersEntries.length || walletsEntries.length)
 
     if (!isNotEmpty) {
-      return <NoData />
+      return <NoData refresh={refresh} />
     }
 
     const isEmpty = (subsection === MENU_POSITIONS && !positionsEntries.length)
@@ -89,30 +88,30 @@ class Snapshot extends PureComponent {
     let showContent
     if (isEmpty) {
       showContent = (
-        <Fragment>
+        <>
           <br />
-          <NoData />
-        </Fragment>
+          <NoData refresh={refresh} />
+        </>
       )
     } else if (subsection === MENU_WALLETS) {
       showContent = (
         <WalletsSnapshot
-          totalBalanceUsd={walletsTotalBalanceUsd}
           entries={walletsEntries}
+          totalBalanceUsd={walletsTotalBalanceUsd}
         />
       )
     } else if (subsection === MENU_POSITIONS) {
       showContent = (
         <PositionsSnapshot
-          totalPlUsd={positionsTotalPlUsd}
           entries={positionsEntries}
+          totalPlUsd={positionsTotalPlUsd}
         />
       )
     } else {
       showContent = (
         <TickersSnapshot
-          positionsTickersEntries={positionsTickersEntries}
           walletsTickersEntries={walletsTickersEntries}
+          positionsTickersEntries={positionsTickersEntries}
         />
       )
     }
@@ -121,20 +120,20 @@ class Snapshot extends PureComponent {
       <div className='snapshot'>
         <ButtonGroup>
           <Button
-            intent={subsection === MENU_POSITIONS ? Intent.PRIMARY : undefined}
             onClick={() => this.switchSection(MENU_POSITIONS)}
+            intent={subsection === MENU_POSITIONS ? Intent.PRIMARY : undefined}
           >
             {t('positions.title')}
           </Button>
           <Button
-            intent={subsection === MENU_TICKERS ? Intent.PRIMARY : undefined}
             onClick={() => this.switchSection(MENU_TICKERS)}
+            intent={subsection === MENU_TICKERS ? Intent.PRIMARY : undefined}
           >
             {t('tickers.title')}
           </Button>
           <Button
-            intent={subsection === MENU_WALLETS ? Intent.PRIMARY : undefined}
             onClick={() => this.switchSection(MENU_WALLETS)}
+            intent={subsection === MENU_WALLETS ? Intent.PRIMARY : undefined}
           >
             {t('wallets.title')}
           </Button>
@@ -148,4 +147,4 @@ class Snapshot extends PureComponent {
 Snapshot.propTypes = propTypes
 Snapshot.defaultProps = defaultProps
 
-export default withTranslation('translations')(Snapshot)
+export default Snapshot

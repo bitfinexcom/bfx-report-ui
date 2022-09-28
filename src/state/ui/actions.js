@@ -1,6 +1,15 @@
 import types from './constants'
 
 /**
+ * Create an action to toggle electron backend loaded event.
+ */
+export function electronBackendLoaded() {
+  return {
+    type: types.ELECTRON_BACKEND_LOADED,
+  }
+}
+
+/**
  * Create an action to show/hide export dialog.
  */
 export function toggleExportDialog() {
@@ -19,22 +28,28 @@ export function toggleExportSuccessDialog() {
 }
 
 /**
- * Create an action to show/hide framework dialog.
+ * Create an action to show/hide error dialog.
+ * @param {boolean} isErrorDialogOpen dialog state
+ * @param {string} errorMessage error message
  */
-export function toggleFrameworkDialog() {
+export function toggleErrorDialog(isErrorDialogOpen, errorMessage) {
   return {
-    type: types.TOGGLE_FRAMEWORK_DIALOG,
+    type: types.TOGGLE_ERROR_DIALOG,
+    payload: {
+      isErrorDialogOpen,
+      errorMessage,
+    },
   }
 }
 
 /**
- * Create an action to proceed with framework request.
- * @param {object} payload object with boolean properties shouldProceed and isFrameworkDialogDisabled
+ * Create an action to disable error dialog.
+ * @param {boolean} isErrorDialogDisabled dialog state
  */
-export function proceedFrameworkRequest(payload) {
+export function disableErrorDialog(isErrorDialogDisabled) {
   return {
-    type: types.PROCEED_FRAMEWORK_REQUEST,
-    payload,
+    type: types.DISABLE_ERROR_DIALOG,
+    payload: isErrorDialogDisabled,
   }
 }
 
@@ -65,10 +80,18 @@ export function togglePreferencesDialog() {
 /**
  * Create an action to show/hide timeframe dialog.
  */
-export function toggleTimeFrameDialog(payload) {
+export function toggleTimeFrameDialog() {
   return {
     type: types.TOGGLE_TIMEFRAME_DIALOG,
-    payload,
+  }
+}
+
+/**
+ * Create an action to show/hide go to range dialog.
+ */
+export function toggleGoToRangeDialog() {
+  return {
+    type: types.TOGGLE_GO_TO_RANGE_DIALOG,
   }
 }
 
@@ -102,12 +125,14 @@ export function uiResized() {
 }
 
 export default {
+  electronBackendLoaded,
+  disableErrorDialog,
+  toggleErrorDialog,
   toggleExportDialog,
   toggleExportSuccessDialog,
-  toggleFrameworkDialog,
-  proceedFrameworkRequest,
   togglePaginationDialog,
   togglePreferencesDialog,
   toggleTimeFrameDialog,
+  toggleGoToRangeDialog,
   proceedPaginationRequest,
 }

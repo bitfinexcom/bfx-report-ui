@@ -1,3 +1,1 @@
-import AccountBalance from './AccountBalance.container'
-
-export default AccountBalance
+export { default } from './AccountBalance.container'

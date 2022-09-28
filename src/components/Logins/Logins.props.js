@@ -2,12 +2,12 @@ import PropTypes from 'prop-types'
 
 const LOGINS_ENTRIES_PROPS = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  mts: PropTypes.number.isRequired,
+  time: PropTypes.number.isRequired,
   ip: PropTypes.string.isRequired,
   browser: PropTypes.string.isRequired,
   version: PropTypes.string.isRequired,
   mobile: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
-  extra: PropTypes.object.isRequired,
+  extra: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 })
 
 export const propTypes = {

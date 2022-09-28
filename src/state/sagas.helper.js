@@ -22,7 +22,7 @@ export function* fetchDataWithPagination(requestFunction, options) {
       requestsCounter = 0
     }
 
-    options.smallestMts = nextPage // eslint-disable-line no-param-reassign
+    options.end = nextPage // eslint-disable-line no-param-reassign
     response = yield call(requestFunction, options)
   }
 

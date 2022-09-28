@@ -1,5 +1,15 @@
-svg:not(.recharts-surface) path {
-  fill: var(--iconColor);
+svg {
+  &:not(.recharts-surface) path {
+    fill: var(--iconColor);
+  }
+
+  path.icon-affiliates {
+    fill: var(--activeColor);
+  }
+
+  path.icon--go-to{
+    fill: none;
+  }
 }
 
 svg.icon {

@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import { refresh } from 'state/taxReport/actions'
 
@@ -9,6 +11,8 @@ const mapDispatchToProps = {
   refresh,
 }
 
-const TaxReportContainer = withRouter(connect(null, mapDispatchToProps)(TaxReport))
-
-export default TaxReportContainer
+export default compose(
+  connect(null, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(TaxReport)

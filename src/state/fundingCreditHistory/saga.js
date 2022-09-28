@@ -80,6 +80,6 @@ function* fetchFCreditFail({ payload }) {
 
 export default function* fundingCreditHistorySaga() {
   yield takeLatest(types.FETCH_FCREDIT, fetchFCredit)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshFCredit)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS], refreshFCredit)
   yield takeLatest(types.FETCH_FAIL, fetchFCreditFail)
 }

@@ -5,6 +5,7 @@ export const propTypes = {
   logout: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   togglePrefDialog: PropTypes.func.isRequired,
+  windowWidth: PropTypes.number.isRequired,
 }
 
 export const defaultProps = {}

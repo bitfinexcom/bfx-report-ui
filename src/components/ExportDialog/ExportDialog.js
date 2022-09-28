@@ -1,5 +1,4 @@
 import React, { Fragment, PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -172,4 +171,4 @@ class ExportDialog extends PureComponent {
 ExportDialog.propTypes = propTypes
 ExportDialog.defaultProps = defaultProps
 
-export default withTranslation('translations')(ExportDialog)
+export default ExportDialog

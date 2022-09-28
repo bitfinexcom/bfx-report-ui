@@ -1,3 +1,1 @@
-import TradesToggle from './TradesToggle'
-
-export default TradesToggle
+export { default } from './TradesToggle'

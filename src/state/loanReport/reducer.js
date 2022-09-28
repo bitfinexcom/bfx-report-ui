@@ -61,6 +61,11 @@ export function loanReportReducer(state = initialState, action) {
         ...state,
         targetSymbols: payload,
       }
+    case types.CLEAR_SYMBOLS:
+      return {
+        ...state,
+        targetSymbols: [],
+      }
     case types.REFRESH:
     case timeRangeTypes.SET_TIME_RANGE:
       return {

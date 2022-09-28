@@ -7,6 +7,7 @@ import {
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
 } from 'state/movements/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
@@ -19,12 +20,14 @@ import {
   getTargetSymbols,
 } from 'state/movements/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import Movements from './Movements'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_MOVEMENTS),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_MOVEMENTS),
   entries: getFilteredEntries(state, queryConstants.MENU_MOVEMENTS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
@@ -41,6 +44,7 @@ const mapDispatchToProps = {
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
 }
 
 const MovementsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Movements))

@@ -6,10 +6,11 @@ import {
 
 import { formatAmount, fixedFloat, amountStyle } from 'ui/utils'
 import { formatPair } from 'state/symbols/utils'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     filteredData,
     getFullTime,
     t,
@@ -21,7 +22,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -35,7 +36,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('column.time')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
@@ -51,7 +52,7 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'column.type',
-      width: 70,
+      width: getColumnWidth('type', columnsWidth),
       renderer: (rowIndex) => {
         const { type, amount } = filteredData[rowIndex]
         const classes = amountStyle(amount)
@@ -69,7 +70,7 @@ export default function getColumns(props) {
     {
       id: 'price',
       name: 'column.price',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('price', columnsWidth),
       renderer: (rowIndex) => {
         const { price, amount } = filteredData[rowIndex]
         const color = (amount > 0)
@@ -80,16 +81,17 @@ export default function getColumns(props) {
             className='bitfinex-text-align-right'
             tooltip={fixedFloat(price)}
           >
-            {formatAmount(price, color)}
+            {formatAmount(price, { color })}
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].price),
     },
     {
       id: 'amount',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('amount', columnsWidth),
       renderer: (rowIndex) => {
         const { amount } = filteredData[rowIndex]
         const fixedAmount = fixedFloat(amount)
@@ -102,12 +104,13 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
     {
       id: 'pair',
       name: 'column.pair',
-      width: COLUMN_WIDTHS.PAIR,
+      width: getColumnWidth('pair', columnsWidth),
       renderer: () => {
         const formattedCurrentPair = formatPair(targetPair)
         return (

@@ -1,5 +1,19 @@
+import subAccountsTypes from 'state/subAccounts/constants'
+
 import Authenticator from './Authenticator'
 import types from './constants'
+
+const initialAuthData = {
+  apiKey: '',
+  apiSecret: '',
+  authToken: '',
+  email: '',
+  password: '',
+  hasAuthData: false,
+  isPersisted: true,
+  isNotProtected: true,
+  isSubAccount: false,
+}
 
 const getStoredAuth = () => {
   const auth = Authenticator.getStored()
@@ -12,6 +26,7 @@ const getStoredAuth = () => {
     hasAuthData = Authenticator.hasData(),
     isPersisted = true,
     isNotProtected = true,
+    isSubAccount = false,
   } = auth
 
   return {
@@ -23,16 +38,18 @@ const getStoredAuth = () => {
     hasAuthData,
     isPersisted,
     isNotProtected,
+    isSubAccount,
   }
 }
 
 const initialState = {
-  authStatus: null,
+  authStatus: false,
   ...getStoredAuth(),
   token: '',
   isShown: true,
   loading: false,
   users: [],
+  usersLoaded: false,
   usersLoading: false,
 }
 
@@ -42,6 +59,7 @@ export function authReducer(state = initialState, action) {
     case types.FETCH_USERS:
       return {
         ...state,
+        usersLoaded: false,
         usersLoading: true,
       }
     case types.ADD_USER:
@@ -49,14 +67,21 @@ export function authReducer(state = initialState, action) {
         ...state,
         users: [...state.users, payload],
       }
+    case subAccountsTypes.REMOVE_SUCCESS:
+      return {
+        ...state,
+        users: state.users.filter((user) => !(user.isSubAccount && user.email === payload)),
+      }
     case types.SET_USERS:
       return {
         ...state,
         users: payload,
+        usersLoaded: true,
         usersLoading: false,
       }
     case types.SIGN_UP:
     case types.SIGN_IN:
+    case types.RECOVER_PASSWORD:
       return {
         ...state,
         loading: true,
@@ -75,10 +100,16 @@ export function authReducer(state = initialState, action) {
         ...state,
         ...payload,
       }
+    case types.CLEAR_AUTH:
+      Authenticator.clear()
+      return {
+        ...state,
+        ...initialAuthData,
+      }
     case types.UPDATE_AUTH_STATUS:
       return {
         ...state,
-        authStatus: payload || null,
+        authStatus: !!payload,
         loading: payload || false, // eject from loading if auth fail
       }
     case types.SHOW_AUTH:

@@ -1,11 +1,12 @@
 .json-format {
+  width: #{"max(500px, 40vw);"};
+  overflow: hidden;
   white-space: pre-wrap;
+  word-break: break-all;
+}
 
-  &-target {
-    width: 100%;
-  }
-
-  &-popover {
-    margin-left: 10px;
+@media screen and (max-width: 767px) {
+  .json-format-popover {
+    display: none;
   }
 }

@@ -80,6 +80,6 @@ function* fetchFOfferFail({ payload }) {
 
 export default function* fundingOfferSaga() {
   yield takeLatest(types.FETCH_FOFFER, fetchFOffer)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshFOffer)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS], refreshFOffer)
   yield takeLatest(types.FETCH_FAIL, fetchFOfferFail)
 }

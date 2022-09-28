@@ -8,7 +8,12 @@ import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
-import { checkInit, checkFetch, toggleSymbol } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  toggleSymbol,
+  clearAllSymbols,
+} from 'state/utils'
 
 import getColumns from './FundingOfferHistory.columns'
 import { propTypes, defaultProps } from './FundingOfferHistory.props'
@@ -26,9 +31,12 @@ class FundingOfferHistory extends PureComponent {
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
 
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
+
   render() {
     const {
       columns,
+      columnsWidth,
       getFullTime,
       targetSymbols,
       entries,
@@ -40,6 +48,7 @@ class FundingOfferHistory extends PureComponent {
       timeOffset,
     } = this.props
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
@@ -55,6 +64,7 @@ class FundingOfferHistory extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
@@ -74,6 +84,7 @@ class FundingOfferHistory extends PureComponent {
             toggleSymbol: this.toggleSymbol,
           }}
           refresh={refresh}
+          clearTargetSymbols={this.clearSymbols}
         />
         {showContent}
       </Card>

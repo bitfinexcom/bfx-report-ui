@@ -1,27 +1,31 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchBalance,
   refresh,
   setParams,
+  fetchBalance,
 } from 'state/accountBalance/actions'
 import {
-  getCurrentFetchParams,
-  getDataReceived,
   getEntries,
-  getPageLoading,
   getTimeframe,
+  getPageLoading,
+  getDataReceived,
+  getCurrentFetchParams,
+  getIsUnrealizedProfitExcluded,
 } from 'state/accountBalance/selectors'
 
 import AccountBalance from './AccountBalance'
 
 const mapStateToProps = state => ({
   currentFetchParams: getCurrentFetchParams(state),
-  entries: getEntries(state),
-  timeframe: getTimeframe(state),
   dataReceived: getDataReceived(state),
+  entries: getEntries(state),
+  isUnrealizedProfitExcluded: getIsUnrealizedProfitExcluded(state),
   pageLoading: getPageLoading(state),
+  timeframe: getTimeframe(state),
 })
 
 const mapDispatchToProps = {
@@ -30,6 +34,8 @@ const mapDispatchToProps = {
   setParams,
 }
 
-const AccountBalanceContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AccountBalance))
-
-export default AccountBalanceContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(AccountBalance)

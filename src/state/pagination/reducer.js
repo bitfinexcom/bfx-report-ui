@@ -23,6 +23,7 @@ const getInitialState = () => TYPE_WHITELIST.reduce((acc, section) => {
 export const initialState = getInitialState()
 
 const SMALLEST_MTS_MAP = {
+  [queryTypes.MENU_INVOICES]: 'mts',
   [queryTypes.MENU_LEDGERS]: 'mts',
   [queryTypes.MENU_TRADES]: 'mtsCreate',
   [queryTypes.MENU_ORDERS]: 'mtsUpdate',

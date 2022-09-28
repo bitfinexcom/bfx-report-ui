@@ -9,7 +9,6 @@ import _toString from 'lodash/toString'
 import _findKey from 'lodash/findKey'
 import _sortBy from 'lodash/sortBy'
 import _find from 'lodash/find'
-import _isNumber from 'lodash/isNumber'
 import _isNaN from 'lodash/isNaN'
 
 import SECTION_COLUMNS, { TRANSFORMS } from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
@@ -20,14 +19,18 @@ const {
   NUMBER,
   INTEGER,
   STRING,
+  DATE,
 } = DATA_TYPES
 
 const getValue = ({ dataType, value }) => {
   switch (dataType) {
     case NUMBER:
+    case DATE:
       return _toNumber(value)
-    case INTEGER:
-      return _isNumber(value) ? _toInteger(value) : NaN
+    case INTEGER: {
+      const number = _toNumber(value)
+      return _isNaN(number) ? NaN : _toInteger(number)
+    }
     case STRING:
       return _toString(value)
     default:
@@ -136,12 +139,15 @@ export const decodeFilters = ({ query, section }) => {
   return filterParams.map((param) => {
     const [column, val] = param.split('=')
     const [type, value] = val.split(',')
+    const filterData = _find(SECTION_COLUMNS[section], { id: column })
+    const { type: dataType, select } = filterData
 
     return {
       column,
       type: _findKey(FILTER_QUERY_TYPES, filterType => filterType === type),
-      dataType: _find(SECTION_COLUMNS[section], { id: column }).type,
-      value: decodeURIComponent(value),
+      dataType,
+      select,
+      value: getValue({ dataType, value: decodeURIComponent(value) }),
     }
   })
 }

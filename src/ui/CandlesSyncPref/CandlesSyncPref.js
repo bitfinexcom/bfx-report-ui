@@ -1,5 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import {
   Button,
   AnchorButton,
@@ -16,8 +15,7 @@ import PairSelector from 'ui/PairSelector'
 import SyncButton from 'ui/SyncButton'
 import Timeframe from 'ui/CandlesTimeframe'
 import DateInput from 'ui/DateInput'
-import mode from 'state/sync/constants'
-import { platform } from 'var/config'
+import appConfig from 'config'
 
 import { propTypes, defaultProps } from './CandlesSyncPref.props'
 
@@ -146,17 +144,17 @@ class CandlesSyncPref extends PureComponent {
   }
 
   render() {
-    const { syncMode, t } = this.props
+    const { isSyncing, t } = this.props
     const { isOpen, options } = this.state
 
-    if (!platform.showFrameworkMode) {
+    if (!appConfig.showFrameworkMode) {
       return null
     }
 
     const hasChanges = this.hasChanges()
     const canSave = this.canSave()
 
-    const renderInSyncWarning = syncMode === mode.MODE_SYNCING
+    const renderInSyncWarning = isSyncing
       ? (
         <Callout>
           {t('preferences.sync.insync-warning')}
@@ -165,7 +163,7 @@ class CandlesSyncPref extends PureComponent {
       : null
 
     return (
-      <Fragment>
+      <>
         <SyncButton onClick={this.handleOpen} />
         <Dialog
           className='sync-pref-dialog candles-sync-pref'
@@ -230,7 +228,7 @@ class CandlesSyncPref extends PureComponent {
                 <AnchorButton
                   onClick={this.handleApply}
                   intent={Intent.PRIMARY}
-                  disabled={(syncMode === mode.MODE_SYNCING || !hasChanges || !canSave)}
+                  disabled={(isSyncing || !hasChanges || !canSave)}
                 >
                   {t('preferences.sync.btn-apply')}
                 </AnchorButton>
@@ -238,9 +236,9 @@ class CandlesSyncPref extends PureComponent {
             </div>
           </div>
         </Dialog>
-      </Fragment>
+      </>
     )
   }
 }
 
-export default withTranslation('translations')(CandlesSyncPref)
+export default CandlesSyncPref

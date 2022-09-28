@@ -1,6 +1,8 @@
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { withTranslation } from 'react-i18next'
 
-import { getSyncMode } from 'state/sync/selectors'
+import { getIsSyncing } from 'state/sync/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 
 import SyncPrefButton from './SyncPrefButton'
@@ -13,7 +15,7 @@ const mapStateToProps = (state, props) => {
   const { pairs, startTime } = getSyncPref(state, sectionType)
 
   return {
-    syncMode: getSyncMode(state),
+    isSyncing: getIsSyncing(state),
     syncPairs: pairs,
     startTime: startTime || getTimeFrame(state).start,
   }
@@ -28,6 +30,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-const SyncPrefButtonContainer = connect(mapStateToProps, mapDispatchToProps)(SyncPrefButton)
-
-export default SyncPrefButtonContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(SyncPrefButton)

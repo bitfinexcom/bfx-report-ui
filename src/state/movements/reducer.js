@@ -7,6 +7,7 @@ import queryTypes from 'state/query/constants'
 import {
   addSymbol,
   baseSymbolState,
+  clearSymbols,
   fetch,
   fetchFail,
   refresh,
@@ -53,6 +54,7 @@ export function movementsReducer(state = initialState, action) {
           mtsUpdated,
           status,
           transactionId,
+          note,
         } = entry
         const mappedCurrency = mapSymbol(currency)
         // save new symbol to updateCoins list
@@ -71,6 +73,7 @@ export function movementsReducer(state = initialState, action) {
           fees,
           destinationAddress,
           transactionId,
+          note,
         }
       })
       return {
@@ -91,6 +94,8 @@ export function movementsReducer(state = initialState, action) {
       return setSymbols(state, payload, initialState)
     case types.REFRESH:
       return refresh(TYPE, state, initialState)
+    case types.CLEAR_SYMBOLS:
+      return clearSymbols(state, initialState)
     case timeRangeTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case authTypes.LOGOUT:

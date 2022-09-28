@@ -2,7 +2,8 @@ import React, { Fragment } from 'react'
 import { Cell, TruncatedFormat } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import { demapPairs, demapSymbols } from 'state/symbols/utils'
+import { getColumnWidth } from 'utils/columns'
 
 const getFeePercent = (entry) => {
   const {
@@ -13,12 +14,14 @@ const getFeePercent = (entry) => {
     feeCurrency,
   } = entry
 
-  const [firstCurr, secondCurr] = pair.split(':')
+  const demappedPair = demapPairs(pair, true)
+  const demappedFeeCurrency = demapSymbols(feeCurrency, true)
+  const [firstCurr, secondCurr] = demappedPair.split(':')
   let val
-  if (feeCurrency === firstCurr) {
+  if (demappedFeeCurrency === firstCurr) {
     val = fee / execAmount
   }
-  if (feeCurrency === secondCurr) {
+  if (demappedFeeCurrency === secondCurr) {
     val = fee / (execAmount * execPrice)
   }
   if (val) {
@@ -29,6 +32,7 @@ const getFeePercent = (entry) => {
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     filteredData,
     getFullTime,
     t,
@@ -39,7 +43,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
-      width: COLUMN_WIDTHS.ID,
+      width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
@@ -53,7 +57,7 @@ export default function getColumns(props) {
     {
       id: 'orderID',
       name: 'column.orderid',
-      width: COLUMN_WIDTHS.ORDER_ID,
+      width: getColumnWidth('orderID', columnsWidth),
       renderer: (rowIndex) => {
         const { orderID } = filteredData[rowIndex]
         return (
@@ -67,7 +71,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
-      width: COLUMN_WIDTHS.PAIR,
+      width: getColumnWidth('pair', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
@@ -81,7 +85,7 @@ export default function getColumns(props) {
     {
       id: 'execAmount',
       name: 'column.amount',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('execAmount', columnsWidth),
       renderer: (rowIndex) => {
         const { execAmount } = filteredData[rowIndex]
         return (
@@ -93,12 +97,13 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].execAmount),
     },
     {
       id: 'execPrice',
       name: 'column.price',
-      width: COLUMN_WIDTHS.AMOUNT,
+      width: getColumnWidth('execPrice', columnsWidth),
       renderer: (rowIndex) => {
         const { execPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(execPrice)
@@ -111,12 +116,13 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => filteredData[rowIndex].execPrice,
     },
     {
       id: 'fee',
       name: 'column.fee',
-      width: COLUMN_WIDTHS.FEE,
+      width: getColumnWidth('fee', columnsWidth),
       renderer: (rowIndex) => {
         const { fee, feeCurrency } = filteredData[rowIndex]
         const fixedFee = fixedFloat(fee)
@@ -136,12 +142,13 @@ export default function getColumns(props) {
           </Cell>
         )
       },
+      isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].fee),
     },
     {
       id: 'feePercent',
       name: 'column.feePercent',
-      width: COLUMN_WIDTHS.FEE_PERC,
+      width: getColumnWidth('feePercent', columnsWidth),
       renderer: (rowIndex) => {
         const feePercent = getFeePercent(filteredData[rowIndex])
         return (
@@ -158,7 +165,7 @@ export default function getColumns(props) {
     {
       id: 'mtsCreate',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.TRADES_DATE,
+      width: getColumnWidth('mtsCreate', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (

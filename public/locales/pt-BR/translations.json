@@ -1,0 +1,520 @@
+{
+  "accountbalance": {
+    "title": "Saldo da conta"
+  },
+  "accountsummary": {
+    "title": "Resumo da conta",
+    "fees": "Suas taxas na Bitfinex",
+    "fees_explain": "(com base no seu volume de negociação)",
+    "fees_deriv": "Suas taxas em Derivados Bitfinex",
+    "fee_tier_volume": "Volume (elegível para cálculo de nível) nos últimos 30 dias",
+    "30dVolume": "Seu volume nos últimos 30 dias",
+    "margin_funds": "Retorno total nos seus fundos com margem nos últimos 30 dias",
+    "trading_funds": "Taxas de negociação cobradas nos últimos 30 dias",
+    "leo_level": "Nível de LEO",
+    "average_amount": "Montante médio"
+  },
+  "activepositions": {
+    "title": "Posições ativas"
+  },
+  "affiliatesearnings": {
+    "title": "Ganhos de afiliados"
+  },
+  "auth": {
+    "auth": "Autenticação",
+    "title": "Login",
+    "signUp": "Cadastre-se",
+    "signIn": "Conectar-se",
+    "passwordRecovery": "Recuperação de senha",
+    "subAccount": "Subconta",
+    "enterAPIKey": "Inserir chave de API:",
+    "enterAPISecret": "Inserir segredo de API:",
+    "enterPassword": "Inserir senha:",
+    "repeatPassword": "Repetir senha:",
+    "enterEmail": "Inserir e-mail:",
+    "checkAuth": "Verificar autenticação",
+    "note1": "Visite ",
+    "note2": " para obter chave de API de apenas leitura e par secreto.",
+    "passwordProtection": "Habilitar proteção por senha",
+    "passwordLengthValidationError": "A senha deve ter pelo menos 8 caracteres",
+    "passwordCharactersValidationError": "A senha deve incluir caracteres maiúsculos e minúsculos",
+    "passwordRepeatValidationError": "A senha não corresponde",
+    "rememberMe": "Lembrar",
+    "required": "(obrigatório)",
+    "nonideal": {
+      "title": "Reports 2.0",
+      "description": "Login no Reports com token..."
+    }
+  },
+  "averagewinloss": {
+    "title": "Média de perda/ganho"
+  },
+  "candles": {
+    "title": "Velas",
+    "amount": "Quantidade",
+    "orderid": "ID de Ordem",
+    "fee": "Taxa",
+    "toggle_trades": "Alternar negociações"
+  },
+  "changelogs": {
+    "title": "Registro de alterações"
+  },
+  "charts": {
+    "cumulative": "Acumulativo",
+    "percentage": "Porcentagem"
+  },
+  "column": {
+    "actual-price": "Preço real",
+    "amount": "Quantidade",
+    "amount-exe": "Quantidade executada",
+    "amountUsd": "Quantidade (USD)",
+    "ask": "Venda",
+    "avgprice": "Preço médio de execução",
+    "balance": "Saldo",
+    "balanceUsd": "Saldo (USD)",
+    "base-price": "Preço base",
+    "bid": "Bid",
+    "browser": "Navegador",
+    "category": "Categoria",
+    "clampMax": "Clamp máx",
+    "clampMin": "Trava mín",
+    "closed": "Fechado",
+    "collateral": "Colateral",
+    "created": "Criado",
+    "currency": "Moeda",
+    "date": "Data",
+    "days": "Dias",
+    "description": "Descrição",
+    "destination": "Destino",
+    "fee": "Taxa",
+    "feePercent": "Perc taxa",
+    "fees": "Taxas",
+    "fundBalance": "Saldo do fundo de seguro",
+    "fundingAccrued": "Próximo finaciamento calculado",
+    "fundingCost": "Custo de financiamento",
+    "fundingStep": "Próximo etapa do finaciamento",
+    "fundingType": "Tipo de financiamento",
+    "id": "#",
+    "ip": "IP",
+    "lastpayout": "Último pagamento",
+    "liq-price": "Preço de liquidação",
+    "maker_fees": "Taxas Maker",
+    "maker_rebate": "Reembolso de maker",
+    "meta": "Metadados",
+    "mobile": "Móvel",
+    "movementsTotal": "Quantidade total de movimentos (USD)",
+    "note": "Nota",
+    "opened": "Aberta",
+    "orderid": "ID da ordem",
+    "pair": "Par",
+    "percent": "Percentagem",
+    "period": "Período",
+    "pl": "P/L",
+    "plUsd": "P/L (USD)",
+    "plperc": "P/L%",
+    "positionpair": "Par da posição",
+    "positionsTotal": "P/L total das posições (USD)",
+    "price": "Preço",
+    "priceDeriv": "Preço deriv",
+    "priceSpot": "Preço Spot",
+    "pricetrail": "Preço dinâmico",
+    "rate": "Taxa",
+    "rateperc": "Taxa %",
+    "side": "Lado",
+    "status": "Status",
+    "taker_fees": "Taxas taker",
+    "taker_fees_crypto": "Taxas taker Cripto",
+    "taker_fees_fiat": "Taxas taker Fiat",
+    "taker_fees_stable": "Taxas taker Stable",
+    "taker_rebate": "Reembolso de taker",
+    "taker_rebate_crypto": "Reembolso de taker Cripto",
+    "taker_rebate_fiat": "Reembolso de Taker Fiat",
+    "taker_rebate_stable": "Rembolso de Taker Stable",
+    "time": "Hora",
+    "totalResult": "Resultado total (USD)",
+    "transactionId": "ID da transação",
+    "type": "Tipo",
+    "typeprev": "Tipo de pedido anterior",
+    "updated": "Atualizado",
+    "usd": "USD",
+    "version": "Versão",
+    "volume": "Volume",
+    "wallet": "Carteira",
+    "walletsTotal": "Saldo total das carteiras (USD)"
+  },
+  "columnsfilter": {
+    "title": "Filtrar colunas",
+    "clear": "Limpar",
+    "cancel": "Cancelar",
+    "apply": "Aplicar",
+    "filters": {
+      "contains": "Contém",
+      "beginsWith": "Começa com",
+      "endsWith": "Termina com",
+      "equalTo": "Igual a",
+      "notEqualTo": "Diferente de",
+      "greaterThan": "Maior que",
+      "greaterThanEqual": "Maior ou igual a",
+      "lessThan": "Menor que",
+      "lessThanEqual": "Menor ou igual a",
+      "after": "Após",
+      "before": "Antes"
+    }
+  },
+  "columnsselect": {
+    "title": "Seleção de coluna",
+    "cancel": "Cancelar",
+    "apply": "Aplicar"
+  },
+  "concentrationrisk": {
+    "title": "Risco de concentração",
+    "query": {
+      "title": "Consulta",
+      "tooltip": "Selecione um horário para consultar os snapshots da carteira"
+    }
+  },
+  "copy": "Copiar",
+  "deposits": {
+    "title": "Depósitos"
+  },
+  "derivatives": {
+    "title": "Derivativos"
+  },
+  "download": {
+    "query": "Preparar exportação",
+    "title": "Exportar CSV",
+    "prepare": "A Bitfinex vai preparar os seus dados durantee",
+    "send": "e enviar para {{email}}.",
+    "store": "e armazenar na sua pasta local.",
+    "export": "Exportar",
+    "cancel": "Cancelar",
+    "okay": "Ok",
+    "status": {
+      "local": "Csv para exportação gerado, verifique a sua pasta \"csv\" local",
+      "email": "Gerando seu relatório CSV, enviaremos para você por e-mail assim que estiver pronto..."
+    },
+    "success": "Sucesso",
+    "targets": "Dados a exportar"
+  },
+  "fcredit": {
+    "title": "Crédito de fundos (usado)",
+    "side": {
+      "provided": "FORNECIDO",
+      "taken": "TOMADO",
+      "both": "AMBOS",
+      "null": "nulo"
+    }
+  },
+  "feesreport": {
+    "title": "Relatório de taxas"
+  },
+  "floan": {
+    "title": "Empréstimos de financiamento (não usado)",
+    "side": {
+      "provided": "FORNECIDO",
+      "taken": "TOMADO",
+      "both": "AMBOS",
+      "null": "nulo"
+    }
+  },
+  "foffer": {
+    "title": "Propostas e ofertas de financiamento"
+  },
+  "fpayment": {
+    "title": "Ganhos de financiamento"
+  },
+  "framework": {
+    "title": "Aguarde até que a sincronização seja concluída",
+    "no_sync": "A sincronização não está ativada",
+    "proceed": "Continuar de qualquer maneira",
+    "cancel": "Cancelar",
+    "notagain": "Não mostrar esta mensagem novamente",
+    "continue": "Continuar",
+    "warning": "Aviso"
+  },
+  "header": {
+    "logout": "Logout",
+    "preferences": "Preferências",
+    "help": "Ajuda",
+    "top_navigation": "Navegação superior"
+  },
+  "inputs": {
+    "filter_placeholder": "Filtro...",
+    "timezone_local": "Fuso horário atual",
+    "timezone_placeholder": "Pesquisar fusos horários..."
+  },
+  "ledgers": {
+    "title": "Livro-razão",
+    "categories": {
+      "exchange": "Corretora",
+      "position_modified": "Posição modificada, fechada ou liquidada",
+      "position_claim": "Posição reinvindicada",
+      "position_transfer": "Transferência de posição",
+      "position_swap": "Troca de posição",
+      "position_funding_cost": "Custo de financiamento de posição",
+      "interest_payment": "Pagamento de juros de margem",
+      "derivatives_funding_event": "Evento de financiamento de derivativos",
+      "settlement": "Ajuste",
+      "transfer": "Transferência",
+      "deposit": "Depósito",
+      "withdrawal": "Retirada",
+      "cancelled_withdrawal": "Retirada cancelada",
+      "trading_fee": "Taxa de negociação",
+      "trading_rebate": "Reembolsoo de trading",
+      "hidden_order_fee": "Taxa de ordem oculta",
+      "otc_trade_fee": "Taxa de negociação OTC",
+      "swap_fee": "Taxa de swap",
+      "claiming_fee": "Taxa de requisição",
+      "margin_funding_charge": "Taxa de financiamento de margem usada",
+      "margin_funding_fee": "Taxa de financiamento de margem não usada",
+      "affiliate_rebate": "Reembolso de afiliado",
+      "ethfx_loyalty_fee": "Taxa de fidelidade ETHFX",
+      "deposit_fee": "Taxa de depósito",
+      "withdrawal_fee": "Taxa de retirada",
+      "withdrawal_express_fee": "Taxa expressa de retirada",
+      "miner_fee": "Taxa de minerador",
+      "staking_payment": "Pagamento de staking",
+      "adjustment": "Ajuste",
+      "expense": "Despesa",
+      "currency_conversion": "Conversão de moeda",
+      "monthly_profit_payment": "Pagamento de lucro mensal",
+      "losses": "Perdas"
+    }
+  },
+  "loading": "Carregando...",
+  "loanreport": {
+    "title": "Relatório de empréstimo"
+  },
+  "logins": {
+    "title": "Logins"
+  },
+  "movements": {
+    "title": "Movimentos"
+  },
+  "nodata": "Nenhum dado relacionado neste intervalo de tempo. Você pode tentar outro intervalo.",
+  "orders": {
+    "title": "Ordens"
+  },
+  "ordertrades": {
+    "title": "Ordens negociadas",
+    "noid": {
+      "title": "Sem ID da ordem",
+      "description": "Por favor selecione da Página de Ordens para consultar o changelog de Ordens por ID."
+    }
+  },
+  "pagination": {
+    "page": "Página",
+    "of": "de",
+    "loading": "carregando...",
+    "no_results": "Nenhum resultado encontrado",
+    "proceed": "Continuar pesquisa",
+    "last_data_timestamp": "Últimos dados recebidos em: {{date}}"
+  },
+  "paudit": {
+    "title": "Auditoria de posições",
+    "input": {
+      "ids": "ID de posições"
+    },
+    "noid": {
+      "title": "Sem ID de posições",
+      "description": "Selecione uma ID de posição na página Posições para fazer a consulta."
+    }
+  },
+  "positions": {
+    "title": "Posições",
+    "active": "Ativas",
+    "closed": "Fechadas",
+    "no_active": "Nenhuma posição ativa no momento.",
+    "swap": {
+      "daily": "Diário",
+      "period": "Período",
+      "term": "Termo"
+    }
+  },
+  "preferences": {
+    "title": "Preferências",
+    "close": "Fechar",
+    "language": "Idioma",
+    "theme": "Tema",
+    "timezone": "Fuso horário",
+    "dateformat": "Formato de data",
+    "milliseconds": "Exibir milissegundos",
+    "table_scroll": "Rolagem de tabela",
+    "preserve_timeframe": "Preservar período",
+    "sync": {
+      "add-filter": "Adicionar filtro",
+      "add-pair": "Adicionar par",
+      "title": "Sincronizar preferências",
+      "notset": "As preferências de sincronização ainda não estão definidas",
+      "description": "Para acessar Trades públicas e tickers offline, você precisa configurar pares disponíveis offline e a hora de início da consulta.",
+      "symbol-description": "Para acessar Trades públicas offline, você precisa configurar moedas disponíveis offline e a hora de início da consulta.",
+      "setup": "Configurar preferências de sincronização",
+      "symbols": "Moedas offline",
+      "pairs": "Pares offline",
+      "starttime": "Hora de início",
+      "btn-apply": "Aplicar",
+      "apply-tooltip": "As alterações serão aplicadas na próxima sincronização.",
+      "insync-warning": "Não é possível aplicar durante a sincronização. Aguarde até terminar a sincronização."
+    }
+  },
+  "publicfunding": {
+    "title": "Financiamento público"
+  },
+  "publictrades": {
+    "title": "Negociações públicas"
+  },
+  "query": {
+    "title": "Consulta",
+    "startTime": "Hora de início",
+    "endTime": "Hora de fim"
+  },
+  "querylimit": {
+    "tooltip": "Escolha o tamanho por consulta. Quanto maior o tamanho maior a duração da consulta"
+  },
+  "selector": {
+    "select": "Selecionar",
+    "all": "Tudo",
+    "inactive": "Inativo",
+    "filter": {
+      "symbol": "Filtro de símbolos",
+      "pair": "Filtro de pares",
+      "category": "Filtro de categorias"
+    }
+  },
+  "snapshots": {
+    "title": "Snapshots",
+    "query": {
+      "title": "Consulta",
+      "tooltip": "Selecione um horário para consultar snapshots"
+    }
+  },
+  "spayments": {
+    "title": "Ganhos em Staking"
+  },
+  "status": {
+    "success": "{{topic}} Sucesso às {{time}}",
+    "warn": "{{topic}}",
+    "fail": "{{topic}} falha {{detail}}",
+    "noid": "dev: a ação de status deve contar o param id",
+    "request": {
+      "error": "{{topic}} falha da solicitação {{detail}}"
+    },
+    "signInFail": "Credenciais inválidas",
+    "timeframe_update": "Período atualizado",
+    "signUpFail": "Chave ou segreto de API inválido"
+  },
+  "subaccounts": {
+    "add_account": "Adicionar conta",
+    "title": "Subcontas",
+    "create": "Criar subconta",
+    "api_key": "Chave de API",
+    "api_secret": "Segredo de API",
+    "password": "Senha",
+    "remove": "Remover subconta",
+    "login": "Fazer login na subconta"
+  },
+  "symbols": {
+    "title": "Obter símbolos"
+  },
+  "sync": {
+    "title": "Sincronizar",
+    "switch-mode": "Trocar modo de sincronização",
+    "online": "Consulta online",
+    "online_tooltip": "Clique para trocar para o modo de consult offline",
+    "offline": "Consulta offline",
+    "offline_tooltip": "Clique para trocar para o modo de consulta online",
+    "insync": "Sincronizando",
+    "insync_tooltip": "Clique para parar o processo de sincronização",
+    "description": "Começaremos a fazer o cache dos seus dados localmente. Quando a sincronização estiver concluída, você pode consultar localmente no modo offline. Você ainda pode fazer consultas online durante a sincronização.",
+    "sync-description": "Seus dados estão sincronizando localmente, Gostaria de parar o processo de sincronização e manter o modo de consulta online?",
+    "close": "Cancelar",
+    "start": "Iniciar sincronização",
+    "start-sync": "Sincronização iniciada",
+    "start_sync_tooltip": "Clique para iniciar o procedimento de sincronziação",
+    "stop-sync": "Parar sincronização",
+    "sync-done": "Sincronizado",
+    "go-online": "Trocando para o modo de consulta online",
+    "go-offline": "Trocando para o modo de consulta offline (consulta de db)",
+    "logout": "Sincronização parada",
+    "message": {
+      "canceled": "Cancelar antigo Sync Watcher"
+    }
+  },
+  "taxreport": {
+    "title": "Relatório de impostos",
+    "sections": {
+      "startSnapshot": "Iniciar Snapshot",
+      "endSnapshot": "Encerrar Snapshot",
+      "finalResult": "Resultado final"
+    },
+    "startingPeriodBalances": "Saldos do início do período",
+    "endingPeriodBalances": "Saldos do fim do período",
+    "startPositions": "Snapshot das posições iniciais",
+    "endPositions": "Snapshot das posições finais",
+    "movements": "Movimentos"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Escuro",
+    "midnight": "Meia noite"
+  },
+  "tickers": {
+    "title": "Tickers",
+    "minlength": "Deve selecionar pelo menos um par"
+  },
+  "timeframe": {
+    "custom": {
+      "cancel": "Cancelar",
+      "confirm": "Confirmar",
+      "title": "Selecionar intervalo de consulta",
+      "view": "Visualizar"
+    },
+    "day": "Dia",
+    "refresh": "Atualizar",
+    "custom_time": "Personalizar",
+    "custom-timerange": "Período personalizado",
+    "custom_year": "{{year}} ano",
+    "24h": "Últimas 24h",
+    "yesterday": "Ontem",
+    "2w": "Útimas 2 semanas",
+    "month": "Mês",
+    "month_to_date": "Do mês até hoje",
+    "past_month": "Último mês",
+    "past_3m": "Últimos 3 meses",
+    "past_week": "Última semana",
+    "past_year": "Último ano",
+    "past_2y": "Últimos 2 anos",
+    "range_limit": "Consultas anteriores a seis anos da data atual não são permitidas",
+    "start-date-placeholder": "Data de início",
+    "end-date-placeholder": "Data final",
+    "today": "Hoje",
+    "query_range": "Intervalo da consulta",
+    "year": "Ano",
+    "week": "Semana"
+  },
+  "tradedvolume": {
+    "title": "Volume negociado"
+  },
+  "trades": {
+    "title": "Negociações"
+  },
+  "update": "Atualizar",
+  "updated": "Atualizado",
+  "wallets": {
+    "title": "Carteiras",
+    "header": {
+      "exchange": "Corretora",
+      "margin": "Margem",
+      "funding": "Financiamento",
+      "token-sales": "Token Sales"
+    },
+    "nodata": "Nenhum dado relacionado nesta data. Você pode tentar outro intervalo.",
+    "query": {
+      "title": "Consulta",
+      "tooltip": "Selecione um horário para consultar os snapshots da carteira"
+    }
+  },
+  "withdrawals": {
+    "title": "Retiradas"
+  }
+}

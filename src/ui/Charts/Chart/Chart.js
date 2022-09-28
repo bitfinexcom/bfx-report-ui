@@ -1,10 +1,21 @@
 import React from 'react'
-import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
+import { withTranslation } from 'react-i18next'
 import {
-  ResponsiveContainer, Area, AreaChart, XAxis, YAxis, Tooltip, CartesianGrid, Legend,
+  Area,
+  XAxis,
+  YAxis,
+  Legend,
+  Tooltip,
+  AreaChart,
+  CartesianGrid,
+  ReferenceArea,
+  ResponsiveContainer,
 } from 'recharts'
+import _isEmpty from 'lodash/isEmpty'
 
+import SumUpTooltip from './Chart.tooltip'
+import { formatChartData, getSumUpRangeValue } from '../Charts.helpers'
 import { propTypes, defaultProps } from './Chart.props'
 
 const COLORS = [
@@ -17,6 +28,9 @@ const COLORS = [
 class Chart extends React.PureComponent {
   state = {
     hiddenKeys: {},
+    showSum: false,
+    refAreaEnd: '',
+    refAreaStart: '',
   }
 
   getGradients = () => {
@@ -45,13 +59,13 @@ class Chart extends React.PureComponent {
         <Area
           key={key}
           name={name}
-          type='monotone'
+          dot={false}
+          connectNulls
           dataKey={key}
-          stroke={COLORS[i]}
+          type='monotone'
           strokeWidth={1.2}
           fill={`url(#${key})`}
-          connectNulls
-          dot={false}
+          stroke={COLORS[i]}
           hide={hiddenKeys[key]}
         />
       )
@@ -67,10 +81,47 @@ class Chart extends React.PureComponent {
     }))
   }
 
-  render() {
-    const { data, className } = this.props
+  onMouseDown = e => {
+    this.setState({
+      refAreaStart: e?.activeLabel ?? '',
+      refAreaEnd: e?.activeLabel ?? '',
+      showSum: true,
+    })
+  }
 
-    if (!data.length) {
+  onMouseMove = e => {
+    const { refAreaStart } = this.state
+    if (refAreaStart) {
+      this.setState({
+        refAreaEnd: e?.activeLabel ?? '',
+      })
+    }
+  }
+
+  onMouseUp = () => {
+    this.setState(() => ({
+      refAreaStart: '',
+      refAreaEnd: '',
+      showSum: false,
+    }))
+  }
+
+  render() {
+    const {
+      t,
+      data,
+      className,
+      isSumUpEnabled,
+    } = this.props
+    const {
+      showSum,
+      refAreaEnd,
+      refAreaStart,
+    } = this.state
+    const sumUpValue = getSumUpRangeValue(data, refAreaStart, refAreaEnd)
+    const shouldShowReferenceArea = isSumUpEnabled && refAreaStart && refAreaEnd
+
+    if (_isEmpty(data)) {
       return null
     }
 
@@ -81,21 +132,50 @@ class Chart extends React.PureComponent {
         <ResponsiveContainer aspect={4.0 / 1.8}>
           <AreaChart
             data={data}
+            onMouseUp={this.onMouseUp}
+            onMouseDown={isSumUpEnabled && this.onMouseDown}
+            onMouseMove={refAreaStart && this.onMouseMove}
           >
             <defs>
               {this.getGradients()}
             </defs>
-            <XAxis dataKey='name' stroke='#9e9494' />
-            <YAxis stroke='#9e9494' />
-            <Tooltip animationDuration={150} />
-            <CartesianGrid stroke='#57636b' strokeDasharray='3 3' />
+            <XAxis
+              dataKey='name'
+              stroke='#9e9494'
+            />
+            <YAxis
+              width={90}
+              stroke='#9e9494'
+              tickFormatter={formatChartData}
+            />
+            <Tooltip
+              isAnimationActive={false}
+              formatter={formatChartData}
+              content={showSum && (
+                <SumUpTooltip
+                  t={t}
+                  sumUpValue={sumUpValue}
+                />
+              )}
+            />
+            <CartesianGrid
+              stroke='#57636b'
+              strokeDasharray='3 3'
+            />
             <Legend
-              verticalAlign='top'
-              wrapperStyle={{ paddingBottom: 15 }}
               iconType='rect'
+              verticalAlign='top'
               onClick={this.onLegendClick}
+              wrapperStyle={{ paddingBottom: 15 }}
             />
             {this.getAreas()}
+            {shouldShowReferenceArea ? (
+              <ReferenceArea
+                x1={refAreaStart}
+                x2={refAreaEnd}
+                strokeOpacity={0.3}
+              />
+            ) : null}
           </AreaChart>
         </ResponsiveContainer>
       </div>

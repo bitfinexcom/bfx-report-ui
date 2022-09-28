@@ -5,10 +5,11 @@ import {
 } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
-import { COLUMN_WIDTHS } from 'utils/columns'
+import { getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
+    columnsWidth,
     filteredData,
     getFullTime,
     t,
@@ -17,11 +18,11 @@ export default function getColumns(props) {
 
   return [
     {
-      id: 'mts',
+      id: 'mtsCreate',
       nameStr: `${t('column.date')} (${timeOffset})`,
-      width: COLUMN_WIDTHS.DATE,
+      width: getColumnWidth('mtsCreate', columnsWidth),
       renderer: (rowIndex) => {
-        const timestamp = getFullTime(filteredData[rowIndex].mts)
+        const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (
           <Cell tooltip={timestamp}>
             <TruncatedFormat>
@@ -30,12 +31,12 @@ export default function getColumns(props) {
           </Cell>
         )
       },
-      copyText: rowIndex => getFullTime(filteredData[rowIndex].mts),
+      copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsCreate),
     },
     {
       id: 'log',
       name: 'column.description',
-      width: 200,
+      width: getColumnWidth('log', columnsWidth),
       renderer: (rowIndex) => {
         const { log } = filteredData[rowIndex]
         return (
@@ -51,7 +52,7 @@ export default function getColumns(props) {
     {
       id: 'ip',
       name: 'column.ip',
-      width: COLUMN_WIDTHS.IP,
+      width: getColumnWidth('ip', columnsWidth),
       renderer: (rowIndex) => {
         const { ip } = filteredData[rowIndex]
         return (
@@ -65,7 +66,7 @@ export default function getColumns(props) {
     {
       id: 'userAgent',
       name: 'column.meta',
-      width: COLUMN_WIDTHS.META,
+      width: getColumnWidth('userAgent', columnsWidth),
       renderer: (rowIndex) => {
         const { userAgent } = filteredData[rowIndex]
 

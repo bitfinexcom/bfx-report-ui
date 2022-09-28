@@ -8,6 +8,7 @@ import {
   removeTargetPair,
   setTargetPairs,
   setParams,
+  clearTargetPairs,
 } from 'state/tradedVolume/actions'
 import {
   getCurrentFetchParams,
@@ -36,6 +37,7 @@ const mapDispatchToProps = {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 }
 
 const TradedVolumeContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(TradedVolume))

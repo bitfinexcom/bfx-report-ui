@@ -16,6 +16,7 @@ import { getPaginationData } from 'state/pagination/selectors'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
 import { fetchDataWithPagination } from 'state/sagas.helper'
+import LEDGERS_CATEGORIES from 'var/ledgersCategories'
 
 import types from './constants'
 import actions from './actions'
@@ -33,7 +34,7 @@ function getReqLedgers({
     end,
     filter,
     limit: getQueryLimit(TYPE),
-    isAffiliateRebate: true,
+    category: LEDGERS_CATEGORIES.AFFILIATE_REBATE,
     symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
   }
   return makeFetchCall('getLedgers', params)
@@ -82,6 +83,8 @@ function* fetchAffiliatesEarningsFail({ payload }) {
 
 export default function* affiliatesEarningsSaga() {
   yield takeLatest(types.FETCH_AFFILIATES_EARNINGS, fetchAffiliatesEarnings)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshAffiliatesEarnings)
+  yield takeLatest([
+    types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS,
+  ], refreshAffiliatesEarnings)
   yield takeLatest(types.FETCH_FAIL, fetchAffiliatesEarningsFail)
 }

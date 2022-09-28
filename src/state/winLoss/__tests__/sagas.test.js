@@ -1,36 +1,11 @@
 import { put, call } from 'redux-saga/effects'
 import { cloneableGenerator } from 'redux-saga/utils'
 
-import { frameworkCheck } from 'state/ui/saga'
-
 import { fetchWinLoss, getReqWinLoss } from '../saga'
 import actions from '../actions'
 
 describe('WinLoss saga', () => {
   const generator = cloneableGenerator(fetchWinLoss)(actions.fetchWinLoss())
-
-  it('framework check', () => {
-    const result = generator.next().value
-    expect(result).toEqual(call(frameworkCheck))
-  })
-
-  describe('fails framework check', () => {
-    let clone
-
-    beforeAll(() => {
-      clone = generator.clone()
-    })
-
-    it('updates data', () => {
-      const result = clone.next(false).value
-      expect(result).toEqual(put(actions.updateWinLoss()))
-    })
-
-    it('performs no further work', () => {
-      const result = clone.next().done
-      expect(result).toBe(true)
-    })
-  })
 
   it('sets params from the payload', () => {
     const result = generator.next(true).value

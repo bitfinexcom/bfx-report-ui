@@ -44,7 +44,7 @@ export function loginsReducer(state = initialState, action) {
 
         return {
           id,
-          mts: time,
+          time,
           ip,
           browser,
           version,

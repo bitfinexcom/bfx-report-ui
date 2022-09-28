@@ -80,6 +80,6 @@ function* fetchMovementsFail({ payload }) {
 
 export default function* movementsSaga() {
   yield takeLatest(types.FETCH_MOVEMENTS, fetchMovements)
-  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL], refreshMovements)
+  yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS], refreshMovements)
   yield takeLatest(types.FETCH_FAIL, fetchMovementsFail)
 }

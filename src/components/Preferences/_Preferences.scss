@@ -13,15 +13,13 @@
   }
 
   &-row {
-    margin-bottom: 25px;
-
-    &:last-of-type {
-      margin-top: -10px;
-      margin-bottom: 0;
-    }
+    display: block;
+    margin-bottom: 20px;
   }
 
   &-item {
+    display: inline-block;
+
     &:not(:last-child) {
       margin-right: 20px;
     }
@@ -33,8 +31,6 @@
   }
 
   .theme-switcher {
-    margin-bottom: 25px;
-
     &-theme {
       &--light svg {
         box-shadow: var(--lightThemeBorder);
@@ -63,6 +59,7 @@
     width: 14px;
   }
 }
+
 
 @media screen and (min-width: 2560px) {
   .preferences {

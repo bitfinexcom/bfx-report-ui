@@ -1,17 +1,23 @@
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
+import reportTypeConstants from 'ui/ReportTypeSelector/constants'
+import unrealizedProfitConstants from 'ui/UnrealizedProfitSelector/constants'
 
 import { fetchFail } from 'state/reducers.helper'
 
 import types from './constants'
 
 export const initialState = {
-  currentFetchParams: {},
-  dataReceived: false,
-  pageLoading: false,
   entries: [],
+  pageLoading: false,
+  dataReceived: false,
+  currentFetchParams: {},
   timeframe: timeframeConstants.DAY,
+  reportType: reportTypeConstants.WIN_LOSS,
+  isVSPrevDayBalance: false,
+  isVsAccountBalanceSelected: false,
+  isUnrealizedProfitExcluded: unrealizedProfitConstants.FALSE,
 }
 
 export function winLossReducer(state = initialState, action) {
@@ -23,8 +29,15 @@ export function winLossReducer(state = initialState, action) {
         pageLoading: true,
         currentFetchParams: {
           timeframe: state.timeframe,
+          isVSPrevDayBalance: state.isVSPrevDayBalance,
+          isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
+          isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
         },
         timeframe: state.timeframe,
+        reportType: state.reportType,
+        isVSPrevDayBalance: state.isVSPrevDayBalance,
+        isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
+        isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
       }
     case types.UPDATE_WIN_LOSS: {
       if (!payload) {
@@ -46,6 +59,11 @@ export function winLossReducer(state = initialState, action) {
         ...state,
         ...payload,
       }
+    case types.SET_REPORT_TYPE:
+      return {
+        ...state,
+        reportType: payload,
+      }
     case types.FETCH_FAIL:
       return fetchFail(state)
     case types.REFRESH:
@@ -53,6 +71,10 @@ export function winLossReducer(state = initialState, action) {
       return {
         ...initialState,
         timeframe: state.timeframe,
+        reportType: state.reportType,
+        isVSPrevDayBalance: state.isVSPrevDayBalance,
+        isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
+        isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
       }
     case authTypes.LOGOUT:
       return initialState

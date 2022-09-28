@@ -1,13 +1,16 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
-import { getInputTimezone } from 'state/base/selectors'
+import { getTimezone } from 'state/base/selectors'
 
 import DateInput from './DateInput'
 
-const mapStateToProps = state => ({
-  inputTimezone: getInputTimezone(state),
+const mapStateToProps = (state) => ({
+  timezone: getTimezone(state),
 })
 
-const DateInputContainer = connect(mapStateToProps)(DateInput)
-
-export default DateInputContainer
+export default compose(
+  withTranslation('translations'),
+  connect(mapStateToProps),
+)(DateInput)

@@ -18,6 +18,13 @@ export function setTimestamp(timestamp) {
   }
 }
 
+export function setExactBalance(payload) {
+  return {
+    type: types.SET_EXACT_BALANCE,
+    payload,
+  }
+}
+
 /**
  * Create an action to note fetch fail.
  * @param {Object} payload fail message

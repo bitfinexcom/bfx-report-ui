@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next'
 import _find from 'lodash/find'
 
 import Select from 'ui/Select'
-import { platform } from 'var/config'
+import config from 'config'
 
 import SECTION_COLUMNS from './ColumnSelector.columns'
 import { propTypes, defaultProps } from './ColumnSelector.props'
@@ -11,25 +11,27 @@ import { propTypes, defaultProps } from './ColumnSelector.props'
 class ColumnSelector extends React.PureComponent {
   onColumnChange = (column) => {
     const { onChange } = this.props
-    const columnDataType = this.getColumnDataType(column)
+    const columnData = this.getColumnData(column)
+    const {
+      id, type, dataType, ...rest
+    } = columnData
 
     onChange({
-      column,
-      dataType: columnDataType,
+      ...rest,
+      column: id,
+      dataType: type,
     })
   }
 
   getSectionColumns = () => {
     const { section } = this.props
     const columns = SECTION_COLUMNS[section] || []
-    return columns.filter(column => column.filter && (!column.frameworkOnly || platform.showFrameworkMode))
+    return columns.filter(column => column.filter && (!column.frameworkOnly || config.showFrameworkMode))
   }
 
-  getColumnDataType = (id) => {
+  getColumnData = (id) => {
     const columns = this.getSectionColumns()
-    const { type } = _find(columns, { id }) || {}
-
-    return type
+    return _find(columns, { id }) || {}
   }
 
   render() {

@@ -19,6 +19,8 @@ const initDataState = {
 export const initialState = {
   dataReceived: false,
   pageLoading: false,
+  chartLoading: false,
+  chartScrollTime: null,
   candles: initDataState,
   trades: initDataState,
   ...initialParams,
@@ -142,6 +144,18 @@ export function candlesReducer(state = initialState, action) {
         pageLoading: false,
         candles: getUpdatedCandles(state, candles),
         trades: getUpdatedTrades(state, trades),
+      }
+    }
+    case types.LOADING: {
+      return {
+        ...state,
+        chartLoading: payload,
+      }
+    }
+    case types.SET_CHART_SCROLL_TIME: {
+      return {
+        ...state,
+        chartScrollTime: payload,
       }
     }
     case types.SET_PARAMS:

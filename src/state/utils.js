@@ -8,15 +8,13 @@ import _isEqual from 'lodash/isEqual'
 import _sortBy from 'lodash/sortBy'
 
 import { store } from 'state/store'
-import { platform } from 'var/config'
+import config from 'config'
 import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import queryType from 'state/query/constants'
 import {
   getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol, getMappedSymbolsFromUrl,
 } from 'state/symbols/utils'
 import { selectAuth } from 'state/auth/selectors'
-
-const { REACT_APP_ELECTRON } = process.env
 
 const {
   MENU_ACCOUNT_BALANCE,
@@ -29,6 +27,7 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -52,7 +51,7 @@ export const getAuthFromStore = () => {
 }
 
 // turned off for firefox
-export const getDefaultTableScrollSetting = () => REACT_APP_ELECTRON || !navigator.userAgent.includes('Firefox')
+export const getDefaultTableScrollSetting = () => config.isElectronApp || !navigator.userAgent.includes('Firefox')
 
 export function postJsonfetch(url, bodyJson) {
   return fetch(url, {
@@ -69,7 +68,7 @@ export function postJsonfetch(url, bodyJson) {
 }
 
 export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
-  return postJsonfetch(`${platform.API_URL}/json-rpc`, {
+  return postJsonfetch(`${config.API_URL}/json-rpc`, {
     auth,
     method,
     params: params || undefined,
@@ -77,6 +76,10 @@ export function makeFetchCall(method, params = undefined, auth = getAuthFromStor
 }
 
 export const formatAuthDate = mts => moment(mts).format('M/D/YYYY, h:mm:ss A')
+
+export const dispatchAction = (action) => {
+  store.dispatch(action)
+}
 
 /**
  * Format time.
@@ -174,6 +177,7 @@ export const checkInit = (props, type) => {
       break
     }
     case MENU_LEDGERS:
+    case MENU_INVOICES:
     case MENU_MOVEMENTS:
     case MENU_FOFFER:
     case MENU_FLOAN:
@@ -317,6 +321,18 @@ export function setPair(type, props, pair) {
   }
 }
 
+export const clearAllPairs = (type, props) => {
+  const { history, clearTargetPairs } = props
+  clearTargetPairs()
+  history.push(generateUrl(type, window.location.search))
+}
+
+export const clearAllSymbols = (type, props) => {
+  const { history, clearTargetSymbols } = props
+  clearTargetSymbols()
+  history.push(generateUrl(type, window.location.search))
+}
+
 export function togglePair(type, props, pair) {
   const {
     history, targetPairs, addTargetPair, removeTargetPair,
@@ -371,6 +387,18 @@ export function getSideMsg(side) {
       return 'taken'
     default:
       return 'null'
+  }
+}
+
+export const getSideColor = (side) => {
+  switch (side) {
+    case 1:
+      return 'green'
+    case -1:
+      return 'red'
+    case 0:
+    default:
+      return null
   }
 }
 
@@ -460,6 +488,8 @@ export const getWalletsEntries = entries => entries.map((entry) => {
 
 export default {
   checkFetch,
+  clearAllPairs,
+  clearAllSymbols,
   DEFAULT_DATETIME_FORMAT,
   getDefaultTableScrollSetting,
   getQueryWithoutParams,
@@ -472,6 +502,7 @@ export default {
   getLastMonth,
   getParsedUrlParams,
   getSideMsg,
+  getSideColor,
   generateUrl,
   isValidTimezone,
   isValidateType,

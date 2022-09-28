@@ -1,31 +1,54 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
-import parseChartData from 'ui/Charts/Charts.helpers'
-import TimeFrameSelector from 'ui/TimeFrameSelector'
+import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import TimeRange from 'ui/TimeRange'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
+import parseChartData from 'ui/Charts/Charts.helpers'
+import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
-
-import { propTypes, defaultProps } from './AccountBalance.props'
 
 const TYPE = queryConstants.MENU_ACCOUNT_BALANCE
 
 class AccountBalance extends PureComponent {
+  static propTypes = {
+    currentFetchParams: PropTypes.shape({
+      timeframe: PropTypes.string,
+      isUnrealizedProfitExcluded: PropTypes.bool,
+    }),
+    dataReceived: PropTypes.bool.isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      mts: PropTypes.number,
+      USD: PropTypes.number,
+    })),
+    fetchData: PropTypes.func.isRequired,
+    isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    setParams: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    timeframe: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    currentFetchParams: {},
+    entries: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -44,20 +67,34 @@ class AccountBalance extends PureComponent {
     setParams({ timeframe })
   }
 
+  handleUnrealizedProfitChange = (isUnrealizedProfitExcluded) => {
+    const { setParams } = this.props
+    setParams({ isUnrealizedProfitExcluded })
+  }
+
   hasChanges = () => {
-    const { currentFetchParams: { timeframe: currTimeframe }, timeframe } = this.props
+    const {
+      currentFetchParams: {
+        timeframe: currTimeframe,
+        isUnrealizedProfitExcluded: currUnrealizedProfitState,
+      },
+      isUnrealizedProfitExcluded,
+      timeframe,
+    } = this.props
     return currTimeframe !== timeframe
+      || currUnrealizedProfitState !== isUnrealizedProfitExcluded
   }
 
   render() {
     const {
       currentFetchParams: { timeframe: currTimeframe },
-      entries,
-      timeframe,
       dataReceived,
+      entries,
+      isUnrealizedProfitExcluded,
       pageLoading,
       refresh,
       t,
+      timeframe,
     } = this.props
     const hasChanges = this.hasChanges()
 
@@ -80,9 +117,14 @@ class AccountBalance extends PureComponent {
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('accountbalance.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('accountbalance.title')}
+          </SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -94,7 +136,15 @@ class AccountBalance extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.unrealized-profits.title')}
+              </SectionHeaderItemLabel>
+              <UnrealizedProfitSelector
+                value={isUnrealizedProfitExcluded}
+                onChange={this.handleUnrealizedProfitChange}
+              />
+            </SectionHeaderItem>
             <QueryButton
               disabled={!hasChanges}
               onClick={this.handleQuery}
@@ -108,7 +158,4 @@ class AccountBalance extends PureComponent {
   }
 }
 
-AccountBalance.propTypes = propTypes
-AccountBalance.defaultProps = defaultProps
-
-export default withTranslation('translations')(AccountBalance)
+export default AccountBalance

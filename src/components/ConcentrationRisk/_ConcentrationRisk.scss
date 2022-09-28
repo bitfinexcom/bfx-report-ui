@@ -36,3 +36,12 @@
     }
   }
 }
+
+@media screen and (max-width: 390px) {
+  .concentration-risk-data {
+    &-chart {
+      margin-bottom: 10px;
+    }
+  }
+}
+

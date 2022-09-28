@@ -9,7 +9,12 @@ import NoData from 'ui/NoData'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
-import { checkInit, checkFetch, togglePair } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  togglePair,
+  clearAllPairs,
+} from 'state/utils'
 
 import getColumns from './Positions.columns'
 import { propTypes, defaultProps } from './Positions.props'
@@ -35,9 +40,12 @@ class Positions extends PureComponent {
 
   togglePair = pair => togglePair(TYPE, this.props, pair)
 
+  clearPairs = () => clearAllPairs(TYPE, this.props)
+
   render() {
     const {
       columns,
+      columnsWidth,
       existingPairs,
       getFullTime,
       entries,
@@ -49,6 +57,7 @@ class Positions extends PureComponent {
       timeOffset,
     } = this.props
     const tableColumns = getColumns({
+      columnsWidth,
       target: TYPE,
       filteredData: entries,
       getFullTime,
@@ -66,6 +75,7 @@ class Positions extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
@@ -85,6 +95,7 @@ class Positions extends PureComponent {
             togglePair: this.togglePair,
           }}
           refresh={refresh}
+          clearTargetPairs={this.clearPairs}
         />
         <PositionsSwitch target={TYPE} />
         {showContent}

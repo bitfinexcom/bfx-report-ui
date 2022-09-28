@@ -1,40 +1,115 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
+import _filter from 'lodash/filter'
+import _isEmpty from 'lodash/isEmpty'
 import {
-  Button, Checkbox,
+  Button,
+  Checkbox,
   Classes,
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+
+import config from 'config'
 import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
 import Select from 'ui/Select'
 
-import { propTypes, defaultProps } from './SignIn.props'
 import InputKey from '../InputKey'
+import { MODES } from '../Auth'
+import AuthTypeSelector from '../AuthTypeSelector'
+
+const getPreparedUsers = (users, multi = false) => (multi
+  ? _filter(users, 'isSubAccount').map(user => user.email)
+  : _filter(users, ['isSubAccount', false]).map(user => user.email))
 
 class SignIn extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
+  static propTypes = {
+    authType: PropTypes.string.isRequired,
+    authData: PropTypes.shape({
+      email: PropTypes.string,
+      password: PropTypes.string,
+      isPersisted: PropTypes.bool,
+      isSubAccount: PropTypes.bool,
+    }).isRequired,
+    isMultipleAccsSelected: PropTypes.bool.isRequired,
+    isElectronBackendLoaded: PropTypes.bool.isRequired,
+    isSubAccount: PropTypes.bool.isRequired,
+    isUsersLoaded: PropTypes.bool.isRequired,
+    loading: PropTypes.bool.isRequired,
+    signIn: PropTypes.func.isRequired,
+    switchMode: PropTypes.func.isRequired,
+    switchAuthType: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    updateAuth: PropTypes.func.isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      isSubAccount: PropTypes.bool.isRequired,
+      isNotProtected: PropTypes.bool.isRequired,
+    })).isRequired,
+  }
 
   constructor(props) {
     super()
 
-    const { authData: { email, password }, users } = props
+    const { authData: { email, password }, users, isMultipleAccsSelected } = props
     const { email: firstUserEmail } = users[0] || {}
+    const multiAccsUsers = getPreparedUsers(users, isMultipleAccsSelected)
+    const multiAccsEmail = multiAccsUsers[0]
+    const initialEmail = isMultipleAccsSelected
+      ? multiAccsEmail || ''
+      : email || firstUserEmail
     this.state = {
-      email: email || firstUserEmail,
+      email: initialEmail,
       password,
     }
   }
 
+  componentDidMount() {
+    this.handleSubAccounts()
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      users,
+      switchMode,
+      isUsersLoaded,
+      authData: { email },
+      isMultipleAccsSelected,
+    } = this.props
+
+    if (!prevProps.isUsersLoaded && isUsersLoaded) {
+      if (users.length) {
+        const { email: firstUserEmail } = users[0] || {}
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({
+          email: email || firstUserEmail,
+        })
+      } else {
+        switchMode(MODES.SIGN_UP)
+      }
+    }
+
+    if (!prevProps.isMultipleAccsSelected && isMultipleAccsSelected) {
+      const multiAccsUsers = getPreparedUsers(users, isMultipleAccsSelected)
+      const updatedEmail = multiAccsUsers[0]
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        email: updatedEmail || '',
+      })
+    }
+
+    this.handleSubAccounts()
+  }
+
   onSignIn = () => {
-    const { signIn } = this.props
+    const { isSubAccount, signIn, users } = this.props
     const { email, password } = this.state
+    const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
     signIn({
       email,
       isNotProtected: !password,
+      isSubAccount: isCurrentUserHasSubAccount ? isSubAccount : false,
       password,
     })
   }
@@ -42,6 +117,14 @@ class SignIn extends PureComponent {
   togglePersistence = () => {
     const { authData: { isPersisted }, updateAuth } = this.props
     updateAuth({ isPersisted: !isPersisted })
+  }
+
+  handleSubAccounts = () => {
+    const {
+      isSubAccount, updateAuth, isMultipleAccsSelected,
+    } = this.props
+    if (isMultipleAccsSelected && !isSubAccount) updateAuth({ isSubAccount: true })
+    if (!isMultipleAccsSelected && isSubAccount) updateAuth({ isSubAccount: false })
   }
 
   handleInputChange = (event) => {
@@ -52,25 +135,40 @@ class SignIn extends PureComponent {
   }
 
   onEmailChange = (email) => {
-    this.setState({ email })
+    const { authData: { email: preservedEmail, password } } = this.props
+    this.setState({
+      email,
+      password: email === preservedEmail ? password : undefined,
+    })
   }
 
   render() {
     const {
-      authData: { isPersisted },
-      loading,
-      switchMode,
       t,
       users,
+      loading,
+      authType,
+      switchMode,
+      isSubAccount,
+      switchAuthType,
+      isMultipleAccsSelected,
+      isElectronBackendLoaded,
+      authData: { isPersisted },
     } = this.props
     const { email, password } = this.state
 
-    const { isNotProtected } = users.find(user => user.email === email) || {}
-    const isSignInDisabled = !email || (!isNotProtected && !password)
+    const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
+    const isSignInDisabled = !email || (config.isElectronApp && !isElectronBackendLoaded)
+      || (!isNotProtected && !password)
+    const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
+    const showSubAccount = isCurrentUserHasSubAccount && isMultipleAccsSelected
+    const preparedUsers = getPreparedUsers(users, isMultipleAccsSelected)
+    const isEmailSelected = !_isEmpty(email)
+
 
     return (
       <Dialog
-        className='bitfinex-auth'
+        className='bitfinex-auth bitfinex-auth-sign-in'
         title={t('auth.signIn')}
         isOpen
         icon={<Icon.SIGN_IN />}
@@ -78,16 +176,22 @@ class SignIn extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
+          {config.showFrameworkMode && (
+            <AuthTypeSelector
+              authType={authType}
+              switchAuthType={switchAuthType}
+            />
+          )}
           <PlatformLogo />
           <Select
             className='bitfinex-auth-email'
-            items={users.map(user => user.email)}
+            items={preparedUsers}
             onChange={this.onEmailChange}
             popoverClassName='bitfinex-auth-email-popover'
             value={email}
             loading
           />
-          {!isNotProtected && (
+          {!isNotProtected && isEmailSelected && users.length > 0 && (
             <InputKey
               label='auth.enterPassword'
               name='password'
@@ -95,30 +199,55 @@ class SignIn extends PureComponent {
               onChange={this.handleInputChange}
             />
           )}
-          <Checkbox
-            className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
-            name='isPersisted'
-            checked={isPersisted}
-            onChange={this.togglePersistence}
-          >
-            {t('auth.rememberMe')}
-          </Checkbox>
+          <div className='bitfinex-auth-checkboxes'>
+            {isEmailSelected && (
+              <Checkbox
+                className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
+                name='isPersisted'
+                checked={isPersisted}
+                onChange={this.togglePersistence}
+              >
+                {t('auth.rememberMe')}
+              </Checkbox>
+            )}
+            {showSubAccount && (
+              <Checkbox
+                className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sub-accounts'
+                name='isSubAccount'
+                checked={isSubAccount}
+                disabled
+              >
+                {t('auth.subAccount')}
+              </Checkbox>
+            )}
+          </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <div className='bitfinex-auth-mode-switch' onClick={switchMode}>
-              {t('auth.signUp')}
-            </div>
-            <Button
-              className='bitfinex-auth-check'
-              name='check'
-              intent={Intent.SUCCESS}
-              onClick={this.onSignIn}
-              disabled={isSignInDisabled}
-              loading={loading}
+            <div
+              className='bitfinex-auth-password-recovery'
+              onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
             >
-              {t('auth.signIn')}
-            </Button>
+              {t('auth.passwordRecovery')}
+            </div>
+            <div>
+              <div
+                className='bitfinex-auth-mode-switch'
+                onClick={() => switchMode(MODES.SIGN_UP)}
+              >
+                {t('auth.signUp')}
+              </div>
+              <Button
+                className='bitfinex-auth-check'
+                name='check'
+                intent={Intent.SUCCESS}
+                onClick={this.onSignIn}
+                disabled={isSignInDisabled}
+                loading={loading}
+              >
+                {t('auth.signIn')}
+              </Button>
+            </div>
           </div>
         </div>
       </Dialog>
@@ -126,4 +255,4 @@ class SignIn extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(SignIn)
+export default SignIn

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withTranslation } from 'react-i18next'
 import {
@@ -12,9 +13,42 @@ import _isObject from 'lodash/isObject'
 import Icons from 'icons'
 import { filterSelectorItem } from 'ui/utils'
 
-import { propTypes, defaultProps } from './Select.props'
-
 class Select extends PureComponent {
+  static propTypes = {
+    className: PropTypes.string,
+    filterable: PropTypes.bool,
+    itemPredicate: PropTypes.func,
+    itemRenderer: PropTypes.func,
+    items: PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        value: PropTypes.oneOfType([
+          PropTypes.bool,
+          PropTypes.string,
+          PropTypes.number]).isRequired,
+        label: PropTypes.oneOfType([
+          PropTypes.string.isRequired,
+          PropTypes.node.isRequired,
+        ]),
+      }),
+    ])).isRequired,
+    onChange: PropTypes.func.isRequired,
+    popoverClassName: PropTypes.string,
+    t: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string,
+      PropTypes.number]).isRequired,
+  }
+
+  static defaultProps = {
+    className: '',
+    filterable: false,
+    popoverClassName: '',
+    itemRenderer: undefined,
+    itemPredicate: undefined,
+  }
+
   state = {
     isOpen: false,
   }
@@ -69,6 +103,7 @@ class Select extends PureComponent {
     const {
       className,
       filterable,
+      itemPredicate,
       itemRenderer,
       items,
       popoverClassName,
@@ -99,7 +134,7 @@ class Select extends PureComponent {
         }}
         items={items}
         itemRenderer={itemRenderer || this.itemRenderer}
-        itemPredicate={filterable && filterSelectorItem}
+        itemPredicate={itemPredicate || (filterable && filterSelectorItem)}
         onItemSelect={this.onChange}
         popoverProps={{
           minimal: true,
@@ -115,8 +150,5 @@ class Select extends PureComponent {
     )
   }
 }
-
-Select.propTypes = propTypes
-Select.defaultProps = defaultProps
 
 export default withTranslation('translations')(Select)

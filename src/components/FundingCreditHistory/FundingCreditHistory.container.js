@@ -7,6 +7,7 @@ import {
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
 } from 'state/fundingCreditHistory/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
@@ -18,12 +19,14 @@ import {
   getTargetSymbols,
 } from 'state/fundingCreditHistory/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import FundingCreditHistory from './FundingCreditHistory'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_FCREDIT),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_FCREDIT),
   entries: getFilteredEntries(state, queryConstants.MENU_FCREDIT, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
@@ -39,6 +42,7 @@ const mapDispatchToProps = {
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
+  clearTargetSymbols,
 }
 
 const FundingCreditHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FundingCreditHistory))

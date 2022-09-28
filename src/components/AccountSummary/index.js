@@ -1,3 +1,1 @@
-import AccountSummary from './AccountSummary.container'
-
-export default AccountSummary
+export { default } from './AccountSummary.container'

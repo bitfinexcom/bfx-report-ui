@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { Radio } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './ThemeSwitcher.props'
 
@@ -21,7 +21,7 @@ class ThemeSwitcher extends PureComponent {
   render() {
     const { theme, t } = this.props
 
-    if (platform.hideSwitchTheme) {
+    if (config.hideSwitchTheme) {
       return null
     }
 

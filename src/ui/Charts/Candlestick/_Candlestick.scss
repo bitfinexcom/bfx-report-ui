@@ -1,8 +1,12 @@
 .candlestick {
   position: relative;
 
+  &--loading {
+    display: none;
+  }
+
   &-tooltip {
-    width: 150px;
+    width: 175px;
     height: 78px;
     position: absolute;
     display: none;

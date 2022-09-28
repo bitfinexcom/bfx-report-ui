@@ -10,7 +10,10 @@ import SectionHeader from 'ui/SectionHeader'
 import { propTypes, defaultProps } from './AccountSummary.props'
 import Volume from './AccountSummary.volume'
 import Fees from './AccountSummary.fees'
-import MarginFunds from './AccountSummary.marginFunds'
+import DerivFees from './AccountSummary.derivFees'
+import Leo from './AccountSummary.leo'
+import PaidFees from './AccountSummary.paidFees'
+import FeeTierVolume from './AccountSummary.feeTierVolume'
 
 class AccountSummary extends PureComponent {
   componentDidMount() {
@@ -40,22 +43,32 @@ class AccountSummary extends PureComponent {
         <div className='section-account-summary-data'>
           <Volume data={_get(data, 'trade_vol_30d', [])} />
           <Fees
+            data={data}
             title='accountsummary.fees'
-            makerFee={data.maker_fee || data.maker_rebate || 0}
-            takerFee={data.taker_fee || data.taker_rebate || 0}
           />
-          <Fees
+          <DerivFees
             title='accountsummary.fees_deriv'
-            makerFee={data.deriv_maker_fee || data.deriv_maker_rebate || 0}
-            takerFee={data.deriv_taker_fee || data.deriv_taker_rebate || 0}
+            makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
+            takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
           />
           <br />
-          <MarginFunds data={_get(data, 'fees_funding_30d', {})} />
+          <PaidFees
+            data={_get(data, 'fees_funding_30d', {})}
+            title='accountsummary.margin_funds'
+            total={_get(data, 'fees_funding_total_30d', 0)}
+          />
+          <PaidFees
+            data={_get(data, 'fees_trading_30d', {})}
+            title='accountsummary.trading_funds'
+            total={_get(data, 'fees_trading_total_30d', 0)}
+          />
+          <FeeTierVolume data={_get(data, 'trade_vol_30d', {})} />
+          <Leo data={data} />
         </div>
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12 no-table-scroll'>
         <SectionHeader
           filter={false}
           timeframe={false}

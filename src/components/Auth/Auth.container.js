@@ -1,10 +1,12 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
 import {
   getAuthData,
   getIsShown,
   getUsers,
-  getUsersLoading,
+  getUsersLoaded,
 } from 'state/auth/selectors'
 
 import Auth from './Auth'
@@ -12,10 +14,11 @@ import Auth from './Auth'
 const mapStateToProps = state => ({
   authData: getAuthData(state),
   isShown: getIsShown(state),
+  isUsersLoaded: getUsersLoaded(state),
   users: getUsers(state),
-  usersLoading: getUsersLoading(state),
 })
 
-const AuthContainer = connect(mapStateToProps, null)(Auth)
-
-export default AuthContainer
+export default compose(
+  withTranslation('translations'),
+  connect(mapStateToProps),
+)(Auth)

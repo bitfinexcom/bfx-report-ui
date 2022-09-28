@@ -1,5 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
 import {
   Button,
   AnchorButton,
@@ -15,8 +14,7 @@ import Icon from 'icons'
 import SyncButton from 'ui/SyncButton'
 import DateInput from 'ui/DateInput'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
-import mode from 'state/sync/constants'
-import { platform } from 'var/config'
+import config from 'config'
 
 import { propTypes, defaultProps } from './SyncSymbolPrefButton.props'
 
@@ -83,7 +81,7 @@ class SyncSymbolPrefButton extends PureComponent {
 
   render() {
     const {
-      syncMode,
+      isSyncing,
       syncSymbols,
       startTime,
       t,
@@ -93,16 +91,16 @@ class SyncSymbolPrefButton extends PureComponent {
       symbols,
       start,
     } = this.state
-    const renderInSyncWarning = syncMode === mode.MODE_SYNCING
+    const renderInSyncWarning = isSyncing
       ? (
         <Callout>
           {t('preferences.sync.insync-warning')}
         </Callout>
       )
       : null
-    return platform.showFrameworkMode
+    return config.showFrameworkMode
       ? (
-        <Fragment>
+        <>
           <SyncButton onClick={this.handleOpen} />
           <Dialog
             className='sync-pref-dialog'
@@ -148,7 +146,7 @@ class SyncSymbolPrefButton extends PureComponent {
                   <AnchorButton
                     onClick={this.handleApply}
                     intent={Intent.PRIMARY}
-                    disabled={(syncMode === mode.MODE_SYNCING || !symbols.length || !start)}
+                    disabled={(isSyncing || !symbols.length || !start)}
                   >
                     {t('preferences.sync.btn-apply')}
                   </AnchorButton>
@@ -156,10 +154,10 @@ class SyncSymbolPrefButton extends PureComponent {
               </div>
             </div>
           </Dialog>
-        </Fragment>
+        </>
       )
       : null
   }
 }
 
-export default withTranslation('translations')(SyncSymbolPrefButton)
+export default SyncSymbolPrefButton

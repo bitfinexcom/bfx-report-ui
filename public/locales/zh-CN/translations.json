@@ -7,8 +7,12 @@
     "fees": "您于Bitfinex交易的手续费率",
     "fees_explain": "（基于您的交易量）",
     "fees_deriv": "您于衍生品交易的手续费率",
+    "fee_tier_volume": "过去30天交易量（符合手续费等级计算）",
     "30dVolume": "过去30天交易量",
-    "margin_funds": "过去30天提供的保证金借贷之总收益"
+    "margin_funds": "过去30天提供的保证金借贷之总收益",
+    "trading_funds": "过去30天交易手续费",
+    "leo_level": "LEO级别",
+    "average_amount": "平均数量"
   },
   "activepositions": {
     "title": "有效仓位"
@@ -19,11 +23,23 @@
   "auth": {
     "auth": "验证",
     "title": "请登录",
+    "signUp": "注册",
+    "signIn": "登录",
+    "passwordRecovery": "找回密码",
+    "subAccount": "子账号",
     "enterAPIKey": "输入 API 密钥：",
     "enterAPISecret": "输入 API 密码：",
+    "enterPassword": "输入密码：",
+    "repeatPassword": "再次输入密码：",
+    "enterEmail": "输入电子邮箱",
     "checkAuth": "检查验证",
     "note1": "访问",
     "note2": "以获取随机的 API 密钥和密码对。",
+    "passwordProtection": "启用密码保护机制",
+    "passwordLengthValidationError": "密码至少应为 8 个字符",
+    "passwordCharactersValidationError": "密码须包含大小写字母",
+    "passwordRepeatValidationError": "密码不相符",
+    "rememberMe": "自动储存",
     "required": "(必需)",
     "nonideal": {
       "title": "Reports 2.0",
@@ -33,22 +49,35 @@
   "averagewinloss": {
     "title": "平均盈利/损失"
   },
+  "candles": {
+    "title": "蜡烛",
+    "amount": "数量",
+    "orderid": "订单ID",
+    "fee": "费用",
+    "toggle_trades": "切换交易"
+  },
+  "changelogs": {
+    "title": "更改日志"
+  },
   "charts": {
     "cumulative": "累计",
-    "percentage": "百分比"
+    "percent": "%"
   },
   "column": {
     "actual-price": "实际价格",
     "amount": "金额",
     "amount-exe": "已执行的金额",
     "amountUsd": "金额 (USD)",
-    "ask": "委卖",
+    "ask": "卖出价",
     "avgprice": "平均执行价格",
     "balance": "余额",
     "balanceUsd": "余额 (USD)",
     "base-price": "基价",
-    "bid": "委买",
+    "bid": "买入价",
     "browser": "浏览器",
+    "category": "分类",
+    "clampMax": "最大值",
+    "clampMin": "最小值",
     "closed": "CLOSED",
     "collateral": "抵押品",
     "created": "创建时间",
@@ -67,9 +96,12 @@
     "ip": "IP",
     "lastpayout": "上一次支出",
     "liq-price": "清算价格",
+    "maker_fees": "挂单手续费",
+    "maker_rebate": "做市商返点奖励",
     "meta": "元数据",
     "mobile": "移动设备",
     "movementsTotal": "运用资金总额 (美元)",
+    "note": "备注",
     "opened": "已打开",
     "orderid": "订单 ID",
     "pair": "货币对",
@@ -90,6 +122,14 @@
     "status": "状态",
     "fundingCost": "融资成本",
     "fundingType": "融资类型",
+    "taker_fees": "吃单手续费",
+    "taker_fees_crypto": "吃单手续费 (加密货币）",
+    "taker_fees_fiat": "吃单手续费 (法币)",
+    "taker_fees_stable": "吃单手续费 (稳定币)",
+    "taker_rebate": "吃单者返点奖励",
+    "taker_rebate_crypto": "吃单手续费返佣 (加密货币)",
+    "taker_rebate_fiat": "吃单手续费返佣 (法币)",
+    "taker_rebate_stable": "吃单手续费返佣 (稳定币)",
     "time": "日期",
     "totalResult": "总额 (美元)",
     "transactionId": "交易 ID",
@@ -116,7 +156,9 @@
       "greaterThan": "大于",
       "greaterThanEqual": "大于/等于",
       "lessThan": "少于",
-      "lessThanEqual": "小于/等于"
+      "lessThanEqual": "小于/等于",
+      "after": "此日期之后",
+      "before": "此日期之前"
     }
   },
   "columnsselect": {
@@ -151,6 +193,7 @@
       "local": "已生成{{topic}} csv，请查看您本地的“csv”文件夹",
       "email": "正在生成您的 CSV 报告，我们会在报告就绪后通过电子邮件发送给您…"
     },
+    "success": "成功",
     "targets": "要导出的数据"
   },
   "fcredit": {
@@ -185,15 +228,58 @@
     "no_sync": "未启动同步功能",
     "proceed": "仍然继续",
     "cancel": "取消",
-    "notagain": "不再显示此消息"
+    "notagain": "不再显示此消息",
+    "continue": "继续",
+    "warning": "提醒"
   },
   "header": {
     "logout": "注销",
     "preferences": "首选项",
-    "help": "帮助"
+    "help": "帮助",
+    "top_navigation": "Top Navigation"
+  },
+  "inputs": {
+    "filter_placeholder": "筛选...",
+    "timezone_local": "目前时区",
+    "timezone_placeholder": "搜索时区"
   },
   "ledgers": {
-    "title": "分类账"
+    "title": "分类账",
+    "categories": {
+      "exchange": "兌換",
+      "position_modified": "仓位调整、关闭或清算",
+      "position_claim": "仓位赎回",
+      "position_transfer": "仓位转移",
+      "position_swap": "仓位反转",
+      "position_funding_cost": "仓位借贷费用",
+      "interest_payment": "保证金利息费用",
+      "derivatives_funding_event": "衍生品资金费用结算",
+      "settlement": "结清",
+      "transfer": "转移",
+      "deposit": "充值",
+      "withdrawal": "提现",
+      "cancelled_withdrawal": "已取消提现请求",
+      "trading_fee": "交易手续费",
+      "trading_rebate": "交易返利",
+      "hidden_order_fee": "隐藏单手续费",
+      "otc_trade_fee": "OTC交易手续费",
+      "swap_fee": "仓位翻转手续费",
+      "claiming_fee": "赎回手续费",
+      "margin_funding_charge": "资金用于仓位的费用",
+      "margin_funding_fee": "资金未用于仓位的费用",
+      "affiliate_rebate": "推荐计划返利",
+      "ethfx_loyalty_fee": "ETHFX忠诚返利",
+      "deposit_fee": "充值手续费",
+      "withdrawal_fee": "提现手续费",
+      "withdrawal_express_fee": "快速提现手续费",
+      "miner_fee": "矿工手续费",
+      "staking_payment": "Staking收益",
+      "adjustment": "调整",
+      "expense": "费用",
+      "currency_conversion": "货币转换",
+      "monthly_profit_payment": "每月获利收益",
+      "losses": "损失"
+    }
   },
   "loading": "正在加载...",
   "loanreport": {
@@ -241,6 +327,7 @@
     "no_active": "无有效仓位。",
     "swap": {
       "daily": "每日",
+      "period": "期间",
       "term": "期限"
     }
   },
@@ -250,9 +337,10 @@
     "language": "语言",
     "theme": "主题",
     "timezone": "时区",
-    "timezone-input": "输入时区",
     "dateformat": "日期格式",
     "milliseconds": "显示毫秒",
+    "table_scroll": "滚动条",
+    "preserve_timeframe": "指定的保持时间",
     "sync": {
       "add-filter": "增加筛选条件",
       "add-pair": "增加交易对",
@@ -285,9 +373,12 @@
   },
   "selector": {
     "select": "选取",
+    "all": "全部",
+    "inactive": "无相关交易对的数据",
     "filter": {
       "symbol": "符号筛选器",
-      "pair": "货币对筛选器"
+      "pair": "货币对筛选器",
+      "category": "分类筛选"
     }
   },
   "snapshots": {
@@ -297,6 +388,9 @@
       "tooltip": "选择快照的时间"
     }
   },
+  "spayments": {
+    "title": "Staking收益"
+  },
   "status": {
     "success": "{{topic}}在 {{time}} 成功",
     "warn": "{{topic}}",
@@ -304,7 +398,20 @@
     "noid": "dev：状态操作应包含 id 参数",
     "request": {
       "error": "{{topic}}请求失败{{detail}}"
-    }
+    },
+    "signInFail": "凭证无效",
+    "timeframe_update": "时间已更新",
+    "signUpFail": "无效的API金钥或密钥"
+  },
+  "subaccounts": {
+    "add_account": "新增账号",
+    "title": "子账号",
+    "create": "创建子账号",
+    "api_key": "API密钥",
+    "api_secret": "API密码",
+    "password": "密码",
+    "remove": "移除子账号",
+    "login": "登录子账号"
   },
   "symbols": {
     "title": "获取符号"
@@ -312,14 +419,21 @@
   "sync": {
     "title": "同步",
     "switch-mode": "切换同步模式",
-    "online": "当前为在线查询。",
-    "offline": "当前为离线查询。",
-    "insync": "同步中。",
+    "online": "当前为在线查询。单击可以切换到离线查询模式",
+    "online_tooltip": "单击切换到离线查询模式",
+    "offline": "当前为离线查询。单击可以切换到在线查询模式",
+    "offline_tooltip": "单击切换到在线查询模式",
+    "insync": "当前为在线查询。单击可以加快同步过程",
+    "insync_tooltip": "单击中止同步",
     "description": "我们将开始在本地缓存您的数据。在同步完成后，您可以在离线模式下进行本地查询。在同步期间，您仍然可以在线查询。",
     "sync-description": "您的数据正在进行本地同步。想要停止同步过程并保持处于在线查询模式？",
     "close": "取消",
     "start": "开始同步",
+    "start-sync": "已开始同步",
+    "start_sync_tooltip": "单击开始同步",
     "stop-sync": "停止同步",
+    "sync-done": "已同步",
+    "go-online": "正在转换为连线查询模式",
     "go-offline": "正在切换到离线查询模式（在数据库中查询）",
     "logout": "已停止同步",
     "message": {
@@ -341,7 +455,8 @@
   },
   "theme": {
     "light": "浅色",
-    "dark": "深色"
+    "dark": "深色",
+    "midnight": "午夜"
   },
   "tickers": {
     "title": "牌价",
@@ -350,13 +465,14 @@
   "timeframe": {
     "custom": {
       "cancel": "取消",
+      "confirm": "确认",
       "title": "选择查询范围",
       "view": "查看"
     },
     "day": "天",
     "refresh": "刷新",
-    "custom-timerange": "自定义时间范围",
     "custom_time": "自定义",
+    "custom-timerange": "自定义时间范围",
     "custom_year": "{{year}}年",
     "24h": "过去 24 小时",
     "yesterday": "昨天",
@@ -370,8 +486,10 @@
     "past_2y": "过去两年",
     "range_limit": "无法查询实际日期后六年以上的资讯",
     "start-date-placeholder": "开始日期时间",
+    "end-date-placeholder": "结束日期",
     "today": "今日",
-    "year": "年"
+    "year": "年",
+    "week": "星期"
   },
   "tradedvolume": {
     "title": "交易量"
@@ -384,9 +502,10 @@
   "wallets": {
     "title": "钱包",
     "header": {
-      "exchange": "交易所",
+      "exchange": "兌換",
       "margin": "保证金",
-      "funding": "融资"
+      "funding": "融资",
+      "token-sales": "通证发布"
     },
     "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。",
     "query": {

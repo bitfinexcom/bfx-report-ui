@@ -7,8 +7,8 @@ export const propTypes = {
     onPairSelect: PropTypes.func.isRequired,
   }),
   pairsSelectorProps: PropTypes.shape({
-    currentFilters: PropTypes.array.isRequired,
-    existingPairs: PropTypes.array.isRequired,
+    currentFilters: PropTypes.arrayOf(PropTypes.string).isRequired,
+    existingPairs: PropTypes.arrayOf(PropTypes.string).isRequired,
     togglePair: PropTypes.func.isRequired,
   }),
   refresh: PropTypes.func,
@@ -17,8 +17,8 @@ export const propTypes = {
     onSymbolSelect: PropTypes.func.isRequired,
   }),
   symbolsSelectorProps: PropTypes.shape({
-    currentFilters: PropTypes.array.isRequired,
-    existingCoins: PropTypes.array.isRequired,
+    currentFilters: PropTypes.arrayOf(PropTypes.string).isRequired,
+    existingCoins: PropTypes.arrayOf(PropTypes.string).isRequired,
     toggleSymbol: PropTypes.func.isRequired,
   }),
   t: PropTypes.func.isRequired,

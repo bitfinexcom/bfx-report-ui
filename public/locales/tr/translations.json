@@ -1,0 +1,520 @@
+{
+  "accountbalance": {
+    "title": "Hesap Bakiyesi"
+  },
+  "accountsummary": {
+    "title": "Hesap Özeti",
+    "fees": "Bitfinex'teki ücretleriniz",
+    "fees_explain": "(al-sat hacminize göre)",
+    "fees_deriv": "Bitfinex Türevler ile ilgili ücretleriniz",
+    "fee_tier_volume": "Son 30 gündeki hacim (ücret seviyesi hesaplaması için uygun)",
+    "30dVolume": "Son 30 gündeki hacminiz",
+    "margin_funds": "Son 30 günde sağlanan marjin fonlarınızın toplam getirisi",
+    "trading_funds": "Son 30 gün içinde alınan işlem ücretleri",
+    "leo_level": "LEO seviyesi",
+    "average_amount": "Ortalama miktar"
+  },
+  "activepositions": {
+    "title": "Aktif Pozisyonlar"
+  },
+  "affiliatesearnings": {
+    "title": "İş Ortağı Kazançları"
+  },
+  "auth": {
+    "auth": "Doğrulama",
+    "title": "Giriş",
+    "signUp": "Kaydol",
+    "signIn": "Giriş Yap",
+    "passwordRecovery": "Parola Kurtarma",
+    "subAccount": "Alt Hesap",
+    "enterAPIKey": "API Anahtarı Girin:",
+    "enterAPISecret": "API Gizli Dizisini Girin:",
+    "enterPassword": "Parola Girin:",
+    "repeatPassword": "Parolayı Tekrarlayın:",
+    "enterEmail": "E-posta Girin:",
+    "checkAuth": "Doğrulama Kontrolü",
+    "note1": "Salt okunur API anahtarı ve gizli dizi çiftini almak için ",
+    "note2": " sayfasını ziyaret edin.",
+    "passwordProtection": "Parola korumasını etkinleştir",
+    "passwordLengthValidationError": "Parola en az 8 karakter olmalıdır",
+    "passwordCharactersValidationError": "Parola hem büyük hem küçük harf karakterleri içermelidir",
+    "passwordRepeatValidationError": "Parolalar eşleşmiyor",
+    "rememberMe": "Beni Hatırla",
+    "required": "(gerekli)",
+    "nonideal": {
+      "title": "Raporlar 2.0",
+      "description": "Raporlar'a token ile giriş yapın..."
+    }
+  },
+  "averagewinloss": {
+    "title": "Ortalama Kazanç/Kayıp"
+  },
+  "candles": {
+    "title": "Mumlar",
+    "amount": "Tutar",
+    "orderid": "Emir Kimliği",
+    "fee": "Ücret",
+    "toggle_trades": "Al-Sat İşlemlerini Göster/Gizle"
+  },
+  "changelogs": {
+    "title": "Değişiklik Günlükleri"
+  },
+  "charts": {
+    "cumulative": "Kümülatif",
+    "percent": "%"
+  },
+  "column": {
+    "actual-price": "Gerçek Fiyat",
+    "amount": "Tutar",
+    "amount-exe": "Yürütülen Tutar",
+    "amountUsd": "Tutar (USD)",
+    "ask": "Sat",
+    "avgprice": "Ortalama Yürütme Fiyatı",
+    "balance": "Bakiye",
+    "balanceUsd": "Bakiye (USD)",
+    "base-price": "Baz Fiyat",
+    "bid": "Al",
+    "browser": "Tarayıcı",
+    "category": "Kategori",
+    "clampMax": "Maks. Kıskaç",
+    "clampMin": "Min. Kıskaç",
+    "closed": "Kapalı",
+    "collateral": "Teminat",
+    "created": "Oluşturuldu",
+    "currency": "Para birimi",
+    "date": "Tarih",
+    "days": "Gün",
+    "description": "Açıklama",
+    "destination": "Hedef",
+    "fee": "Ücret",
+    "feePercent": "Ücret Yüzdesi",
+    "fees": "Ücretler",
+    "fundBalance": "Sigorta Fon Bakiyesi",
+    "fundingAccrued": "Tahakkuk Eden Sonraki Fonlama",
+    "fundingCost": "Fonlama Maliyeti",
+    "fundingStep": "Sonraki Fonlama Adımı",
+    "fundingType": "Fonlama Türü",
+    "id": "No.",
+    "ip": "IP",
+    "lastpayout": "Son Ödeme",
+    "liq-price": "Likidasyon Fiyatı",
+    "maker_fees": "Yapıcı Ücretleri",
+    "maker_rebate": "Yapıcı Geri Ödemesi",
+    "meta": "Meta Veri",
+    "mobile": "Mobil",
+    "movementsTotal": "Toplam Hareket Tutarı (USD)",
+    "note": "Not",
+    "opened": "Açıldı",
+    "orderid": "Emir Kimliği",
+    "pair": "Parite",
+    "percent": "Yüzde",
+    "period": "Dönem",
+    "pl": "K/Z",
+    "plUsd": "K/Z (USD)",
+    "plperc": "K/Z %",
+    "positionpair": "Pozisyon Paritesi",
+    "positionsTotal": "Toplam Pozisyon K/Z (USD)",
+    "price": "Fiyat",
+    "priceDeriv": "Türev Fiyatı",
+    "priceSpot": "Spot Fiyatı",
+    "pricetrail": "Takip Eden Fiyat",
+    "rate": "Oran",
+    "rateperc": "Oran %",
+    "side": "Taraf",
+    "status": "Durum",
+    "taker_fees": "Alıcı Ücretleri",
+    "taker_fees_crypto": "Kripto Alıcı Ücretleri",
+    "taker_fees_fiat": "İtibari Para Alıcı Ücretleri",
+    "taker_fees_stable": "Sabit Alıcı Ücretleri",
+    "taker_rebate": "Alıcı Geri Ödemesi",
+    "taker_rebate_crypto": "Kripto Alıcı Geri Ödemesi",
+    "taker_rebate_fiat": "İtibari Para Alıcı Geri Ödemesi",
+    "taker_rebate_stable": "Sabit Alıcı Geri Ödemesi",
+    "time": "Zaman",
+    "totalResult": "Toplam Sonuç (USD)",
+    "transactionId": "İşlem Kimliği",
+    "type": "Tür",
+    "typeprev": "Önceki Emir Türü",
+    "updated": "Güncellendi",
+    "usd": "USD",
+    "version": "Sürüm",
+    "volume": "Hacim",
+    "wallet": "Cüzdan",
+    "walletsTotal": "Cüzdanların Toplam Bakiyesi (USD)"
+  },
+  "columnsfilter": {
+    "title": "Sütunları Filtrele",
+    "clear": "Temizle",
+    "cancel": "İptal Et",
+    "apply": "Uygula",
+    "filters": {
+      "contains": "Şunu içeriyor",
+      "beginsWith": "Şununla başlıyor",
+      "endsWith": "Şununla bitiyor",
+      "equalTo": "Şuna eşit",
+      "notEqualTo": "Şuna eşit değil",
+      "greaterThan": "Şundan fazla",
+      "greaterThanEqual": "Şundan fazla veya şuna eşit",
+      "lessThan": "Daha az",
+      "lessThanEqual": "Şundan az veya şuna eşit",
+      "after": "Şundan sonra",
+      "before": "Şundan önce"
+    }
+  },
+  "columnsselect": {
+    "title": "Sütun Seçimi",
+    "cancel": "İptal Et",
+    "apply": "Uygula"
+  },
+  "concentrationrisk": {
+    "title": "Toplanma Riski",
+    "query": {
+      "title": "Sorgu",
+      "tooltip": "Cüzdan anlık görüntüsünü sorgulamak için bir zaman seçin"
+    }
+  },
+  "copy": "Kopyala",
+  "deposits": {
+    "title": "Para Yatırmalar"
+  },
+  "derivatives": {
+    "title": "Türevler"
+  },
+  "download": {
+    "query": "Dışa Aktarım Hazırla",
+    "title": "CSV Dışa Aktar",
+    "prepare": "Bitfinex",
+    "send": "sırasında verilerinizi hazırlayacak ve {{email}} adresine gönderecek.",
+    "store": "sırasında verilerinizi hazırlayacak ve yerel dosyanıza kaydedecek.",
+    "export": "Dışa Aktar",
+    "cancel": "İptal Et",
+    "okay": "Tamam",
+    "status": {
+      "local": "CSV dışa aktarımı oluşturuldu, lütfen yerel \"csv\" klasörünüzü kontrol edin",
+      "email": "CSV raporunuz oluşturuluyor. Hazır olur olmaz size e-posta ile göndereceğiz..."
+    },
+    "success": "Başarılı",
+    "targets": "Dışa Aktarılacak Veriler"
+  },
+  "fcredit": {
+    "title": "Fonlama Kredisi (Kullanılan)",
+    "side": {
+      "provided": "SAĞLANAN",
+      "taken": "ALINAN",
+      "both": "HER İKİSİ",
+      "null": "boş"
+    }
+  },
+  "feesreport": {
+    "title": "Ücret Raporu"
+  },
+  "floan": {
+    "title": "Fonlama Kredileri (Kullanılmayan)",
+    "side": {
+      "provided": "SAĞLANAN",
+      "taken": "ALINAN",
+      "both": "HER İKİSİ",
+      "null": "boş"
+    }
+  },
+  "foffer": {
+    "title": "Fonlama Alımları ve Teklifleri"
+  },
+  "fpayment": {
+    "title": "Fonlama Kazançları"
+  },
+  "framework": {
+    "title": "Lütfen senkronizasyon tamamlanana kadar bekleyin",
+    "no_sync": "Senkronizasyon etkinleştirilmedi",
+    "proceed": "Yine de devam et",
+    "cancel": "İptal Et",
+    "notagain": "Bu mesajı bir daha gösterme",
+    "continue": "Devam Et",
+    "warning": "Uyarı"
+  },
+  "header": {
+    "logout": "Çıkış yap",
+    "preferences": "Tercihler",
+    "help": "Yardım",
+    "top_navigation": "En İyi Gezinme"
+  },
+  "inputs": {
+    "filter_placeholder": "Filtre...",
+    "timezone_local": "Geçerli zaman dilimi",
+    "timezone_placeholder": "Zaman dilimi ara..."
+  },
+  "ledgers": {
+    "title": "Kayıt defterleri",
+    "categories": {
+      "exchange": "Borsa",
+      "position_modified": "Değiştirilen, kapatılan veya likide edilen pozisyon",
+      "position_claim": "Pozisyon alma",
+      "position_transfer": "Pozisyon transferi",
+      "position_swap": "Pozisyon swap'ı",
+      "position_funding_cost": "Pozisyon fonlama maliyeti",
+      "interest_payment": "Marjin faiz ödemesi",
+      "derivatives_funding_event": "Türev fonlama etkinliği",
+      "settlement": "Mahsuplaşma",
+      "transfer": "Transfer",
+      "deposit": "Para yatırma",
+      "withdrawal": "Para çekme",
+      "cancelled_withdrawal": "İptal edilen para çekme",
+      "trading_fee": "Alım satım ücreti",
+      "trading_rebate": "Al-sat geri ödemesi",
+      "hidden_order_fee": "Gizli emir ücreti",
+      "otc_trade_fee": "OTC al-sat ücreti",
+      "swap_fee": "Swap ücreti",
+      "claiming_fee": "Alma ücreti",
+      "margin_funding_charge": "Kullanılan marjin fonlama ücreti",
+      "margin_funding_fee": "Kullanılmayan marjin fonlama ücreti",
+      "affiliate_rebate": "İş ortağı geri ödemesi",
+      "ethfx_loyalty_fee": "ETHFX bağlılık ücreti",
+      "deposit_fee": "Para yatırma ücreti",
+      "withdrawal_fee": "Para çekme ücreti",
+      "withdrawal_express_fee": "Hızlı para çekme ücreti",
+      "miner_fee": "Madenci ücreti",
+      "staking_payment": "Staking ödemesi",
+      "adjustment": "Ayarlama",
+      "expense": "Harcama",
+      "currency_conversion": "Para birimi dönüştürmesi",
+      "monthly_profit_payment": "Aylık kâr ödemesi",
+      "losses": "Kayıplar"
+    }
+  },
+  "loading": "Yükleniyor...",
+  "loanreport": {
+    "title": "Kredi Raporu"
+  },
+  "logins": {
+    "title": "Girişler"
+  },
+  "movements": {
+    "title": "Hareketler"
+  },
+  "nodata": "Bu zaman aralığında ilgili veri yok. Başka bir zaman aralığı deneyebilirsiniz.",
+  "orders": {
+    "title": "Emirler"
+  },
+  "ordertrades": {
+    "title": "Emir Al-Sat İşlemleri",
+    "noid": {
+      "title": "Emir Kimliği yok",
+      "description": "Emir değişiklik günlüğünü kimliğe göre sorgulamak için lütfen Emirler sayfasından seçim yapın."
+    }
+  },
+  "pagination": {
+    "page": "Sayfa",
+    "of": "/",
+    "loading": "yükleniyor...",
+    "no_results": "Sonuç bulunamadı",
+    "proceed": "Aramaya devam et",
+    "last_data_timestamp": "Son alınan verinin tarihi: {{date}}"
+  },
+  "paudit": {
+    "title": "Pozisyon Denetimi",
+    "input": {
+      "ids": "pozisyon kimliği"
+    },
+    "noid": {
+      "title": "Pozisyon kimliği yok",
+      "description": "Sorgu yapmak için lütfen Pozisyonlar sayfasından bir pozisyon kimliği seçin."
+    }
+  },
+  "positions": {
+    "title": "Pozisyonlar",
+    "active": "Aktif",
+    "closed": "Kapalı",
+    "no_active": "Şu anda aktif pozisyon yok.",
+    "swap": {
+      "daily": "Günlük",
+      "period": "Dönem",
+      "term": "Dönem"
+    }
+  },
+  "preferences": {
+    "title": "Tercihler",
+    "close": "Kapat",
+    "language": "Dil",
+    "theme": "Tema",
+    "timezone": "Zaman dilimi",
+    "dateformat": "Tarih Biçimi",
+    "milliseconds": "Milisaniyeleri Görüntüle",
+    "table_scroll": "Tablo Kaydırma",
+    "preserve_timeframe": "Zaman Dilimini Koru",
+    "sync": {
+      "add-filter": "Filtre Ekle",
+      "add-pair": "Parite Ekle",
+      "title": "Senkronizasyon Tercihleri",
+      "notset": "Senkronizasyon tercihleri henüz ayarlanmadı",
+      "description": "Genel Al-Satlara ve Markete çevrimdışı erişmek için çevrimdışı kullanılabilen pariteleri ve sorgu başlangıç zamanını ayarlamanız gerekir.",
+      "symbol-description": "Genel Fonlamaya çevrimdışı erişmek için çevrimdışı kullanılabilen para birimlerini ve sorgu başlangıç zamanını ayarlamanız gerekir.",
+      "setup": "Senkronizasyon tercihlerini ayarla",
+      "symbols": "Çevrimdışı Para Birimleri",
+      "pairs": "Çevrimdışı Pariteler",
+      "starttime": "Başlangıç Zamanı",
+      "btn-apply": "Uygula",
+      "apply-tooltip": "Değişiklikler bir sonraki senkronizasyonda uygulanacak.",
+      "insync-warning": "Senkronizasyon sırasında uygulanamaz. Lütfen senkronizasyonun tamamlanmasını bekleyin."
+    }
+  },
+  "publicfunding": {
+    "title": "Genel Fonlama"
+  },
+  "publictrades": {
+    "title": "Genel Al-Satlar"
+  },
+  "query": {
+    "title": "Sorgu",
+    "startTime": "Başlangıç Zamanı",
+    "endTime": "Bitiş Zamanı"
+  },
+  "querylimit": {
+    "tooltip": "Sorgu başına boyutu seçin. Boyutun daha büyük olması sorgu süresini uzatır"
+  },
+  "selector": {
+    "select": "Seç",
+    "all": "Tümü",
+    "inactive": "Pasif",
+    "filter": {
+      "symbol": "Sembol Filtresi",
+      "pair": "Parite Filtresi",
+      "category": "Kategori Filtresi"
+    }
+  },
+  "snapshots": {
+    "title": "Anlık Görüntüler",
+    "query": {
+      "title": "Sorgu",
+      "tooltip": "Anlık görüntüleri sorgulamak için bir zaman seçin"
+    }
+  },
+  "spayments": {
+    "title": "Staking Kazançları"
+  },
+  "status": {
+    "success": "{{topic}} Başarılı: {{time}}",
+    "warn": "{{topic}}",
+    "fail": "{{topic}} başarısız: {{detail}}",
+    "noid": "dev: durum eylemi kimlik parametresini içermelidir",
+    "request": {
+      "error": "{{topic}} talebi başarısız: {{detail}}"
+    },
+    "signInFail": "Geçersiz kimlik bilgileri",
+    "timeframe_update": "Zaman aralığı güncellendi",
+    "signUpFail": "Geçersiz API Anahtarı veya Gizli Dizisi"
+  },
+  "subaccounts": {
+    "add_account": "Hesap Ekle",
+    "title": "Alt Hesaplar",
+    "create": "Alt Hesap Oluştur",
+    "api_key": "API Anahtarı",
+    "api_secret": "API Gizli Dizisi",
+    "password": "Parola",
+    "remove": "Alt Hesabı Kaldır",
+    "login": "Alt Hesaba Giriş Yap"
+  },
+  "symbols": {
+    "title": "Sembolleri al"
+  },
+  "sync": {
+    "title": "Senkronize Et",
+    "switch-mode": "Senkronizasyon Moduna Geç",
+    "online": "Çevrimiçi Sorgula",
+    "online_tooltip": "Çevrimdışı sorgu moduna geçmek için tıklayın",
+    "offline": "Çevrimdışı Sorgula",
+    "offline_tooltip": "Çevrimiçi sorgu moduna geçmek için tıklayın",
+    "insync": "Senkronize Ediliyor",
+    "insync_tooltip": "Senkronizasyon prosedürünü durdurmak için tıklayın",
+    "description": "Verilerinizi yerel olarak saklamaya başlayacağız. Senkronizasyon tamamlandıktan sonra çevrimdışı modda yerel olarak sorgu yapabilirsiniz. Senkronizasyon sırasında çevrimiçi sorgu yapmaya da devam edebilirsiniz.",
+    "sync-description": "Verileriniz yerel olarak senkronize ediliyor. Senkronizasyon sürecini durdurmak ve çevrimiçi sorgu modunda kalmak istiyor musunuz?",
+    "close": "İptal Et",
+    "start": "Senkronizasyonu Başlat",
+    "start-sync": "Senkronizasyon Başlatıldı",
+    "start_sync_tooltip": "Senkronizasyon prosedürünü başlatmak için tıklayın",
+    "stop-sync": "Senkronizasyonu Durdur",
+    "sync-done": "Senkronize",
+    "go-online": "Çevrimiçi sorgu moduna geçiş",
+    "go-offline": "Çevrimdışı sorgu (veritabanından sorgu) moduna geçiliyor",
+    "logout": "Senkronizasyon Durduruldu",
+    "message": {
+      "canceled": "Eski Senkronizasyon Takipçisi iptal edildi"
+    }
+  },
+  "taxreport": {
+    "title": "Vergi Raporu",
+    "sections": {
+      "startSnapshot": "Anlık Görüntü Başlat",
+      "endSnapshot": "Anlık Görüntüyü Bitir",
+      "finalResult": "Nihai Sonuç"
+    },
+    "startingPeriodBalances": "Başlangıç Dönemi Bakiyeleri",
+    "endingPeriodBalances": "Bitiş Dönemi Bakiyeleri",
+    "startPositions": "Başlangıç Pozisyonlarının Anlık Görüntüsü",
+    "endPositions": "Bitiş Pozisyonlarının Anlık Görüntüsü",
+    "movements": "Hareketler"
+  },
+  "theme": {
+    "light": "Açık",
+    "dark": "Koyu",
+    "midnight": "Gece Yarısı"
+  },
+  "tickers": {
+    "title": "Market",
+    "minlength": "En az bir parite seçilmeli"
+  },
+  "timeframe": {
+    "custom": {
+      "cancel": "İptal Et",
+      "confirm": "Onayla",
+      "title": "Sorgu Aralığı Seçin",
+      "view": "Görüntüle"
+    },
+    "day": "Gün",
+    "refresh": "Yenile",
+    "custom_time": "Özel",
+    "custom-timerange": "Özel zaman aralığı",
+    "custom_year": "{{year}} yıl",
+    "24h": "Son 24 saat",
+    "yesterday": "Dün",
+    "2w": "Son 2 Hafta",
+    "month": "Ay",
+    "month_to_date": "Ay başından bugüne",
+    "past_month": "Önceki Ay",
+    "past_3m": "Önceki 3 Ay",
+    "past_week": "Önceki Hafta",
+    "past_year": "Önceki Yıl",
+    "past_2y": "Önceki 2 Yıl",
+    "range_limit": "Geçerli tarihten geriye doğru altı yıldan fazla sorgu yapılmasına izin verilmez",
+    "start-date-placeholder": "Başlangıç Tarihi",
+    "end-date-placeholder": "Bitiş Tarihi",
+    "today": "Bugün",
+    "query_range": "Sorgu Aralığı",
+    "year": "Yıl",
+    "week": "Hafta"
+  },
+  "tradedvolume": {
+    "title": "Al-Sat Hacmi"
+  },
+  "trades": {
+    "title": "Al-Sat İşlemleri"
+  },
+  "update": "Güncelle",
+  "updated": "Güncellendi",
+  "wallets": {
+    "title": "Cüzdanlar",
+    "header": {
+      "exchange": "Spot",
+      "margin": "Marjin",
+      "funding": "Fonlama",
+      "token-sales": "Token Satışları"
+    },
+    "nodata": "Bu tarih ve saatte ilgili veri yok. Başka bir tarih ve saat deneyebilirsiniz.",
+    "query": {
+      "title": "Sorgu",
+      "tooltip": "Cüzdan anlık görüntüsünü sorgulamak için bir zaman seçin"
+    }
+  },
+  "withdrawals": {
+    "title": "Para çekme işlemleri"
+  }
+}

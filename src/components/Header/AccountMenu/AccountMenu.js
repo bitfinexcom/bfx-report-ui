@@ -13,6 +13,7 @@ import Icon from 'icons'
 
 import { propTypes, defaultProps } from './AccountMenu.props'
 import SyncMode from '../SyncMode'
+import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
 
 const formatUsername = (email = '') => {
@@ -25,6 +26,7 @@ const formatUsername = (email = '') => {
 class AccountMenu extends PureComponent {
   render() {
     const {
+      authStatus,
       email,
       logout,
       t,
@@ -33,7 +35,7 @@ class AccountMenu extends PureComponent {
     } = this.props
 
     return (
-      <div className={classNames('account-menu', { 'account-menu--no-email': !email })}>
+      <div className={classNames('account-menu', { 'account-menu--no-email': !authStatus || !email })}>
         <Popover
           minimal
           position={Position.BOTTOM_LEFT}
@@ -62,6 +64,11 @@ class AccountMenu extends PureComponent {
                   text={<SyncMode />}
                 />
                 <MenuItem
+                  className='account-menu-query'
+                  shouldDismissPopover={false}
+                  text={<QueryMode />}
+                />
+                <MenuItem
                   onClick={logout}
                   icon={<Icon.SIGN_OUT />}
                   text={t('header.logout')}
@@ -75,7 +82,7 @@ class AccountMenu extends PureComponent {
             <div className='account-menu-target'>
               <Icon.USER_CIRCLE />
               <span className='account-menu-username'>
-                {formatUsername(email)}
+                {authStatus ? formatUsername(email) : ''}
               </span>
               <Icon.CHEVRON_DOWN />
               <Icon.CHEVRON_UP />

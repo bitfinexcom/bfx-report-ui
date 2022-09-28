@@ -12,12 +12,12 @@ import _includes from 'lodash/includes'
 
 import queryType from 'state/query/constants'
 import { getIcon, getPath, getTarget } from 'state/query/utils'
-import { platform } from 'var/config'
+import config from 'config'
 
 import NavMenuPopover from './NavMenuPopover'
 import { propTypes, defaultProps } from './NavMenu.props'
 
-const { showFrameworkMode } = platform
+const { showFrameworkMode } = config
 
 const {
   MENU_ACCOUNT_BALANCE,
@@ -32,6 +32,7 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
+  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -45,6 +46,7 @@ const {
   MENU_PUBLIC_TRADES,
   MENU_SNAPSHOTS,
   MENU_SPAYMENTS,
+  MENU_SUB_ACCOUNTS,
   MENU_TAX_REPORT,
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
@@ -60,6 +62,7 @@ class NavMenu extends PureComponent {
 
   sections = [
     [MENU_LEDGERS, 'ledgers.title'],
+    [MENU_INVOICES, 'invoices.title'],
     [[MENU_TRADES, MENU_CANDLES], 'trades.title'],
     [[MENU_ORDERS, MENU_ORDER_TRADES], 'orders.title'],
     [MENU_MOVEMENTS, 'movements.title'],
@@ -90,6 +93,7 @@ class NavMenu extends PureComponent {
     [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
     [MENU_LOGINS, 'logins.title'],
     [MENU_CHANGE_LOGS, 'changelogs.title'],
+    [MENU_SUB_ACCOUNTS, 'subaccounts.title', !showFrameworkMode],
   ]
 
   handleClick = (e, nextTarget) => {
@@ -123,13 +127,13 @@ class NavMenu extends PureComponent {
       showMenuPopover,
       t,
     } = this.props
-    const target = getTarget(history.location.pathname)
+    const target = getTarget(history.location.pathname, false)
 
     const classes = classNames('bitfinex-nav-menu', className)
 
     return (
       <Menu large className={classes}>
-        {showMenuPopover && window.innerWidth > 375 && window.innerWidth <= 1024 && <NavMenuPopover />}
+        {showMenuPopover && window.innerWidth > 390 && window.innerWidth <= 1024 && <NavMenuPopover />}
         {this.sections.map((section, index) => {
           const [type, title, isSkipped] = section
 

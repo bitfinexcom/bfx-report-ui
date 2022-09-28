@@ -80,6 +80,6 @@ function* fetchTickersFail({ payload }) {
 
 export default function* tickersSaga() {
   yield takeLatest(types.FETCH_TICKERS, fetchTickers)
-  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR], refreshTickers)
+  yield takeLatest([types.REFRESH, types.ADD_PAIR, types.REMOVE_PAIR, types.CLEAR_PAIRS], refreshTickers)
   yield takeLatest(types.FETCH_FAIL, fetchTickersFail)
 }

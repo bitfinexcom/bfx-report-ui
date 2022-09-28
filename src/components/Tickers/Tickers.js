@@ -15,11 +15,17 @@ import RefreshButton from 'ui/RefreshButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import DataTable from 'ui/DataTable'
 import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
 import queryConstants from 'state/query/constants'
-import { checkInit, checkFetch, togglePair } from 'state/utils'
+import {
+  checkInit,
+  checkFetch,
+  togglePair,
+  clearAllPairs,
+} from 'state/utils'
 
 import getColumns from './Tickers.columns'
 import { propTypes, defaultProps } from './Tickers.props'
@@ -44,9 +50,12 @@ class Tickers extends PureComponent {
     }
   }
 
+  clearPairs = () => clearAllPairs(TYPE, this.props)
+
   render() {
     const {
       columns,
+      columnsWidth,
       existingPairs,
       getFullTime,
       entries,
@@ -59,6 +68,7 @@ class Tickers extends PureComponent {
     } = this.props
 
     const tableColumns = getColumns({
+      columnsWidth,
       filteredData: entries,
       getFullTime,
       t,
@@ -74,6 +84,7 @@ class Tickers extends PureComponent {
       showContent = (
         <Fragment>
           <DataTable
+            section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
@@ -98,6 +109,7 @@ class Tickers extends PureComponent {
                 togglePair={this.togglePair}
               />
             </SectionHeaderItem>
+            <ClearFiltersButton onClick={this.clearPairs} />
             <ColumnsFilter target={TYPE} />
             <RefreshButton onClick={refresh} />
             <SyncPrefButton sectionType={TYPE} />

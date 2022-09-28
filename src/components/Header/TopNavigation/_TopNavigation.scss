@@ -1,10 +1,16 @@
 .top-navigation {
   display: none;
   float: right;
-  height: 45px;
+  height: 44px;
   line-height: 44px;
   margin-right: 15px;
   cursor: pointer;
+
+  &-portal {
+    .bp3-transition-container {
+      left: 10px !important;
+    }
+  }
 
   .icon--close {
     display: none;
@@ -62,7 +68,10 @@
         }
 
         &--timeframe {
+          pointer-events: none;
+
           .time-range {
+            min-width: 164px;
             height: 39px;
             font-size: 13px;
             color: var(--color);
@@ -78,7 +87,20 @@
           }
         }
 
-        .sync-mode {
+        &--sync,
+        &--query {
+          &--disabled {
+            pointer-events: none;
+          }
+          &--removed {
+            display: none;
+          }
+        }
+
+        .sync-mode, 
+        .query-mode {
+          height: 40px;
+
           .bp3-popover-target {
             height: 40px;
           }
@@ -96,6 +118,10 @@
             vertical-align: top;
           }
         }
+
+        &--account {
+          pointer-events: none;
+        }
       }
 
       &-divider {
@@ -112,7 +138,7 @@
   }
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 390px) {
   .top-navigation {
     &-title {
       display: inline-block;
@@ -131,13 +157,13 @@
     &-portal {
       &.bp3-overlay-open {
         margin-top: 50px;
-        height: 100vh;
+        height: calc(100vh - 50px);
         background-color: var(--bgColor);
       }
-    }
 
-    &-popover.bp3-popover {
-      margin-left: 5px !important;
+      .bp3-transition-container {
+        left: -5px !important;
+      }
     }
 
     &-content {
@@ -175,7 +201,8 @@
             }
           }
 
-          .sync-mode {
+          .sync-mode,
+          .query-mode {
             .bp3-popover-target {
               height: 35px;
             }
@@ -189,14 +216,6 @@
           }
         }
       }
-    }
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .top-navigation {
-    &-popover.bp3-popover {
-      margin-left: 4px !important;
     }
   }
 }

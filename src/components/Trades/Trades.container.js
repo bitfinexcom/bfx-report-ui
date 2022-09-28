@@ -5,7 +5,9 @@ import {
   fetchTrades,
   refresh,
   addTargetPair,
-  removeTargetPair, setTargetPairs,
+  setTargetPairs,
+  removeTargetPair,
+  clearTargetPairs,
 } from 'state/trades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
@@ -17,12 +19,14 @@ import {
   getTargetPairs,
 } from 'state/trades/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import Trades from './Trades'
 
 const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_TRADES),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_TRADES),
   entries: getFilteredEntries(state, queryConstants.MENU_TRADES, getEntries(state)),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
@@ -38,6 +42,7 @@ const mapDispatchToProps = {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
+  clearTargetPairs,
 }
 
 const TradesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Trades))
