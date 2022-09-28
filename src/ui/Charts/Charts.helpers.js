@@ -88,6 +88,26 @@ export const parseLoanReportChartData = ({ data, timeframe, t }) => {
   }
 }
 
+export const parseFeesReportChartData = ({ data, timeframe, t }) => {
+  const chartData = data.map((entry) => {
+    const { mts } = entry
+
+    return {
+      name: formatTimestamp(mts, timeframe),
+      [CURRENCY_USD]: formatValue(entry[CURRENCY_USD]),
+      cumulative: formatValue(entry.cumulative),
+    }
+  })
+
+  return {
+    chartData,
+    dataKeys: [
+      CURRENCY_USD,
+      { key: 'cumulative', name: t('charts.cumulative') },
+    ],
+  }
+}
+
 export const getPriceFormat = (candles) => {
   const price = +candles[0]?.high
   if (price >= 100) return { minMove: 0.01, precision: 2 }

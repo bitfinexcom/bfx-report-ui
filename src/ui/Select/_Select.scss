@@ -88,7 +88,7 @@
     }
 
     &--report-type .bp3-popover-content {
-      width: 300px;
+      width: fit-content;
 
       .bp3-menu {
         min-width: unset;
@@ -140,6 +140,7 @@
 
           .bp3-popover-wrapper {
             opacity: 0.8;
+            margin-left: 10px;
             margin-bottom: -4px;
             transform: scale(0.8);
           }

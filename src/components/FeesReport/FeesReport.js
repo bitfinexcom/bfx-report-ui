@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
@@ -17,29 +17,67 @@ import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import MultiPairSelector from 'ui/MultiPairSelector'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
-import parseChartData from 'ui/Charts/Charts.helpers'
+import ReportTypeSelector from 'ui/ReportTypeSelector'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
+import { parseFeesReportChartData } from 'ui/Charts/Charts.helpers'
 import queryConstants from 'state/query/constants'
+import constants from 'ui/ReportTypeSelector/constants'
 import {
   checkInit,
-  checkFetch,
-  togglePair,
-  clearAllPairs,
+  toggleSymbol,
+  clearAllSymbols,
 } from 'state/utils'
-
-import { propTypes, defaultProps } from './FeesReport.props'
 
 const TYPE = queryConstants.MENU_FEES_REPORT
 
+const getReportTypeParams = (type) => {
+  switch (type) {
+    case constants.TRADING_FEES:
+      return { isTradingFees: true, isFundingFees: false }
+    case constants.FUNDING_FEES:
+      return { isTradingFees: false, isFundingFees: true }
+    case constants.FUNDING_TRADING_FEES:
+      return { isTradingFees: true, isFundingFees: true }
+    default:
+      return { isTradingFees: true, isFundingFees: false }
+  }
+}
+
 class FeesReport extends PureComponent {
-  componentDidMount() {
-    checkInit(this.props, TYPE)
+  static propTypes = {
+    currentFetchParams: PropTypes.shape({
+      timeframe: PropTypes.string,
+      targetPairs: PropTypes.arrayOf(PropTypes.string),
+    }),
+    dataReceived: PropTypes.bool.isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      mts: PropTypes.number.isRequired,
+    })),
+    fetchData: PropTypes.func.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    params: PropTypes.shape({
+      timeframe: PropTypes.string,
+      targetPairs: PropTypes.arrayOf(PropTypes.string),
+    }),
+    refresh: PropTypes.func.isRequired,
+    reportType: PropTypes.string.isRequired,
+    setParams: PropTypes.func.isRequired,
+    setReportType: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
   }
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
+  static defaultProps = {
+    params: {},
+    entries: [],
+    targetSymbols: [],
+    currentFetchParams: {},
+  }
+
+  componentDidMount() {
+    checkInit(this.props, TYPE)
   }
 
   handleQuery = () => {
@@ -57,23 +95,32 @@ class FeesReport extends PureComponent {
     return !_isEqual(currentFetchParams, params)
   }
 
-  clearPairs = () => clearAllPairs(TYPE, this.props)
+  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
+
+  clearSymbols = () => clearAllSymbols(TYPE, this.props)
+
+  handleReportTypeChange = (type) => {
+    const { setParams, setReportType } = this.props
+    const params = getReportTypeParams(type)
+    setReportType(type)
+    setParams(params)
+  }
 
   render() {
     const {
       t,
       entries,
       refresh,
-      targetPairs,
+      reportType,
       pageLoading,
       dataReceived,
+      targetSymbols,
       params: { timeframe },
     } = this.props
-    const hasChanges = this.hasChanges()
-
-    const { chartData, presentCurrencies } = parseChartData({
-      timeframe,
+    const { chartData, dataKeys } = parseFeesReportChartData({
       data: _sortBy(entries, ['mts']),
+      timeframe,
+      t,
     })
 
     let showContent
@@ -86,7 +133,7 @@ class FeesReport extends PureComponent {
         <Chart
           isSumUpEnabled
           data={chartData}
-          dataKeys={presentCurrencies}
+          dataKeys={dataKeys}
         />
       )
     }
@@ -105,12 +152,12 @@ class FeesReport extends PureComponent {
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
-              <MultiPairSelector
-                currentFilters={targetPairs}
-                togglePair={pair => togglePair(TYPE, this.props, pair)}
+              <MultiSymbolSelector
+                currentFilters={targetSymbols}
+                toggleSymbol={this.toggleSymbol}
               />
             </SectionHeaderItem>
-            <ClearFiltersButton onClick={this.clearPairs} />
+            <ClearFiltersButton onClick={this.clearSymbols} />
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.select')}
@@ -120,9 +167,19 @@ class FeesReport extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.report-type.title')}
+              </SectionHeaderItemLabel>
+              <ReportTypeSelector
+                section={TYPE}
+                value={reportType}
+                onChange={this.handleReportTypeChange}
+              />
+            </SectionHeaderItem>
             <QueryButton
-              disabled={!hasChanges}
               onClick={this.handleQuery}
+              disabled={!this.hasChanges()}
             />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
@@ -133,7 +190,4 @@ class FeesReport extends PureComponent {
   }
 }
 
-FeesReport.propTypes = propTypes
-FeesReport.defaultProps = defaultProps
-
-export default withTranslation('translations')(FeesReport)
+export default FeesReport

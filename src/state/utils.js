@@ -185,6 +185,7 @@ export const checkInit = (props, type) => {
     case MENU_FPAYMENT:
     case MENU_SPAYMENTS:
     case MENU_AFFILIATES_EARNINGS:
+    case MENU_FEES_REPORT:
     case MENU_LOAN_REPORT: {
       if (!dataReceived && !pageLoading) {
         const symbols = (match.params && match.params.symbol) || ''
@@ -200,8 +201,7 @@ export const checkInit = (props, type) => {
     case MENU_POSITIONS:
     case MENU_TICKERS:
     case MENU_DERIVATIVES:
-    case MENU_TRADED_VOLUME:
-    case MENU_FEES_REPORT: {
+    case MENU_TRADED_VOLUME: {
       if (!dataReceived && !pageLoading) {
         const pairs = (match.params && match.params.pair) || ''
         if (pairs) {

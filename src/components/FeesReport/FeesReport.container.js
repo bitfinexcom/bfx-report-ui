@@ -1,45 +1,53 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchFeesReport,
   refresh,
-  addTargetPair,
-  removeTargetPair,
-  setTargetPairs,
   setParams,
-  clearTargetPairs,
+  setReportType,
+  fetchFeesReport,
+  addTargetSymbol,
+  setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
 } from 'state/feesReport/actions'
 import {
-  getCurrentFetchParams,
-  getDataReceived,
-  getEntries,
-  getPageLoading,
   getParams,
-  getTargetPairs,
+  getEntries,
+  getReportType,
+  getPageLoading,
+  getDataReceived,
+  getTargetSymbols,
+  getCurrentFetchParams,
 } from 'state/feesReport/selectors'
 
 import FeesReport from './FeesReport'
 
 const mapStateToProps = state => ({
-  currentFetchParams: getCurrentFetchParams(state),
-  entries: getEntries(state),
   params: getParams(state),
-  targetPairs: getTargetPairs(state),
-  dataReceived: getDataReceived(state),
+  entries: getEntries(state),
+  reportType: getReportType(state),
   pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
+  currentFetchParams: getCurrentFetchParams(state),
+  targetSymbols: getTargetSymbols(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchFeesReport,
   refresh,
   setParams,
-  addTargetPair,
-  setTargetPairs,
-  removeTargetPair,
-  clearTargetPairs,
+  setReportType,
+  addTargetSymbol,
+  setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
+  fetchData: fetchFeesReport,
 }
 
-const FeesReportContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FeesReport))
-
-export default FeesReportContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(FeesReport)

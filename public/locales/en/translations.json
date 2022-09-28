@@ -413,6 +413,15 @@
       "gains_balance": {
         "title": "Percentage Gains (gains/balance)",
         "description": "% gains are being calculated daily vs the balance of the day before and compounded"
+      },
+      "trading_fees": {
+        "title": "Trading Fees"
+      },
+      "funding_fees": {
+        "title": "Funding Fees"
+      },
+      "funding_trading_fees": {
+        "title": "Funding + Trading Fees"
       }
     },
     "unrealized-profits": {
