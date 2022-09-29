@@ -1,3 +1,1 @@
-import FeesReport from './FeesReport.container'
-
-export default FeesReport
+export { default } from './FeesReport.container'

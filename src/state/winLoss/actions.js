@@ -65,5 +65,6 @@ export default {
   fetchWinLoss,
   refresh,
   setParams,
+  setReportType,
   updateWinLoss,
 }
