@@ -1,3 +1,1 @@
-import FundingCreditHistory from './FundingCreditHistory.container'
-
-export default FundingCreditHistory
+export { default } from './FundingCreditHistory.container'
