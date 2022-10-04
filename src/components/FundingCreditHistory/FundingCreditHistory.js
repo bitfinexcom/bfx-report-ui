@@ -1,12 +1,11 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import {
@@ -16,7 +15,7 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
-import getColumns from './FundingCreditHistory.columns'
+import { getColumns } from './FundingCreditHistory.columns'
 
 const TYPE = queryConstants.MENU_FCREDIT
 
@@ -115,25 +114,28 @@ class FundingCreditHistory extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
           <Pagination target={TYPE} loading={pageLoading} />
-        </Fragment>
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
-          title='fcredit.title'
           target={TYPE}
+          title='fcredit.title'
           symbolsSelectorProps={{
-            currentFilters: targetSymbols,
             existingCoins,
+            currentFilters: targetSymbols,
             toggleSymbol: this.toggleSymbol,
           }}
           refresh={refresh}
@@ -145,4 +147,4 @@ class FundingCreditHistory extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(FundingCreditHistory)
+export default FundingCreditHistory
