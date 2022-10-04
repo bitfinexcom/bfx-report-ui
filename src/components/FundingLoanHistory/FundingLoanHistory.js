@@ -15,7 +15,7 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
-import getColumns from './FundingLoanHistory.columns'
+import { getColumns } from './FundingLoanHistory.columns'
 import { propTypes, defaultProps } from './FundingLoanHistory.props'
 
 const TYPE = queryConstants.MENU_FLOAN
