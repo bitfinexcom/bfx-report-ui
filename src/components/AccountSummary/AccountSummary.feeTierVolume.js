@@ -1,14 +1,12 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import _get from 'lodash/get'
 
 import DataTable from 'ui/DataTable'
 
 import { getColumns } from './AccountSummary.paidFees'
 
-const AccountSummaryFeeTierVolume = (props) => {
-  const { data, t } = props
+const AccountSummaryFeeTierVolume = ({ data, t }) => {
   const lastVolumeItem = _get(data, [data.length - 1], {})
   const { curr, vol_safe: amount } = lastVolumeItem
 
@@ -26,8 +24,8 @@ const AccountSummaryFeeTierVolume = (props) => {
 }
 
 AccountSummaryFeeTierVolume.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   t: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
-export default withTranslation('translations')(AccountSummaryFeeTierVolume)
+export default memo(AccountSummaryFeeTierVolume)

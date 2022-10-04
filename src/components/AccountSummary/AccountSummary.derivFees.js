@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
@@ -8,8 +7,7 @@ import { formatAmount, formatFraction } from 'ui/utils'
 
 const getColor = val => (val > 0 ? 'red' : 'green')
 
-const getColumns = (props) => {
-  const { makerFee, takerFee } = props
+const getColumns = ({ makerFee, takerFee }) => {
   const formattedMakerFee = `${formatFraction(makerFee * 100, { minDigits: 2 })}%`
   const formattedTakerFee = `${formatFraction(takerFee * 100, { minDigits: 2 })}%`
 
@@ -41,14 +39,12 @@ const getColumns = (props) => {
   ]
 }
 
-const AccountSummaryDerivFees = (props) => {
-  const {
-    title,
-    makerFee,
-    takerFee,
-    t,
-  } = props
-
+const AccountSummaryDerivFees = ({
+  t,
+  title,
+  makerFee,
+  takerFee,
+}) => {
   const columns = getColumns({ makerFee, takerFee })
 
   return (
@@ -66,10 +62,10 @@ const AccountSummaryDerivFees = (props) => {
 }
 
 AccountSummaryDerivFees.propTypes = {
+  t: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   makerFee: PropTypes.number.isRequired,
   takerFee: PropTypes.number.isRequired,
-  t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(AccountSummaryDerivFees)
+export default memo(AccountSummaryDerivFees)
