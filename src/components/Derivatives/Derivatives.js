@@ -26,7 +26,7 @@ import {
   clearAllPairs,
 } from 'state/utils'
 
-import getColumns from './Derivatives.columns'
+import { getColumns } from './Derivatives.columns'
 
 const TYPE = queryConstants.MENU_DERIVATIVES
 

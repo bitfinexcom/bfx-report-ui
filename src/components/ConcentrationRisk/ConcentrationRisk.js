@@ -21,7 +21,7 @@ import RefreshButton from 'ui/RefreshButton'
 import { fixedFloat } from 'ui/utils'
 import { isValidTimeStamp } from 'state/query/utils'
 
-import getColumns from './ConcentrationRisk.columns'
+import { getColumns } from './ConcentrationRisk.columns'
 
 class ConcentrationRisk extends PureComponent {
   static propTypes = {
