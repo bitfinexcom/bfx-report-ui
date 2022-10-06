@@ -1,4 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -15,12 +16,59 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
-import getColumns from './FundingOfferHistory.columns'
-import { propTypes, defaultProps } from './FundingOfferHistory.props'
+import { getColumns } from './FundingOfferHistory.columns'
 
 const TYPE = queryConstants.MENU_FOFFER
 
 class FundingOfferHistory extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amountExecuted: PropTypes.bool,
+      amountOrig: PropTypes.bool,
+      id: PropTypes.bool,
+      mtsUpdate: PropTypes.bool,
+      period: PropTypes.bool,
+      rate: PropTypes.bool,
+      status: PropTypes.bool,
+      symbol: PropTypes.bool,
+      type: PropTypes.bool,
+    }),
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+    })),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      symbol: PropTypes.string.isRequired,
+      amountOrig: PropTypes.number.isRequired,
+      amountExecuted: PropTypes.number.isRequired,
+      type: PropTypes.string,
+      status: PropTypes.string,
+      rate: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      period: PropTypes.number,
+      mtsUpdate: PropTypes.number.isRequired,
+    })),
+    existingCoins: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    entries: [],
+    columnsWidth: [],
+    existingCoins: [],
+    targetSymbols: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -91,8 +139,5 @@ class FundingOfferHistory extends PureComponent {
     )
   }
 }
-
-FundingOfferHistory.propTypes = propTypes
-FundingOfferHistory.defaultProps = defaultProps
 
 export default withTranslation('translations')(FundingOfferHistory)
