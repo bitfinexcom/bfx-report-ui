@@ -1,14 +1,16 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
-import { getAuthStatus, getEmail } from 'state/auth/selectors'
 import { logout } from 'state/auth/actions'
+import { getAuthStatus, getEmail } from 'state/auth/selectors'
 import { toggleExportDialog, togglePreferencesDialog } from 'state/ui/actions'
 
 import AccountMenu from './AccountMenu'
 
 const mapStateToProps = state => ({
-  authStatus: getAuthStatus(state),
   email: getEmail(state),
+  authStatus: getAuthStatus(state),
 })
 
 const mapDispatchToProps = {
@@ -17,6 +19,7 @@ const mapDispatchToProps = {
   togglePrefDialog: togglePreferencesDialog,
 }
 
-const AccountMenuContainer = connect(mapStateToProps, mapDispatchToProps)(AccountMenu)
-
-export default AccountMenuContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(AccountMenu)
