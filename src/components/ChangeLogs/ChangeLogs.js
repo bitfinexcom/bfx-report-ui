@@ -10,7 +10,7 @@ import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
-import getColumns from './ChangeLogs.columns'
+import { getColumns } from './ChangeLogs.columns'
 
 const TYPE = queryConstants.MENU_CHANGE_LOGS
 

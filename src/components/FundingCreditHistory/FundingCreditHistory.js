@@ -1,11 +1,11 @@
-import React, { Fragment, PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import {
@@ -15,12 +15,64 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
-import { propTypes, defaultProps } from './FundingCreditHistory.props'
-import getColumns from './FundingCreditHistory.columns'
+import { getColumns } from './FundingCreditHistory.columns'
 
 const TYPE = queryConstants.MENU_FCREDIT
 
 class FundingCreditHistory extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amount: PropTypes.bool,
+      id: PropTypes.bool,
+      mtsLastPayout: PropTypes.bool,
+      mtsOpening: PropTypes.bool,
+      mtsUpdate: PropTypes.bool,
+      period: PropTypes.bool,
+      positionPair: PropTypes.bool,
+      rate: PropTypes.bool,
+      wallet: PropTypes.bool,
+      side: PropTypes.bool,
+      status: PropTypes.bool,
+      symbol: PropTypes.bool,
+      type: PropTypes.bool,
+    }),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      symbol: PropTypes.string.isRequired,
+      side: PropTypes.number.isRequired,
+      amount: PropTypes.number,
+      status: PropTypes.string,
+      rate: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+      ]),
+      period: PropTypes.number,
+      mtsUpdate: PropTypes.number.isRequired,
+      mtsOpening: PropTypes.number,
+      mtsLastPayout: PropTypes.number,
+      positionPair: PropTypes.string,
+    })).isRequired,
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+    })),
+    existingCoins: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    columnsWidth: [],
+    existingCoins: [],
+    targetSymbols: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -62,25 +114,28 @@ class FundingCreditHistory extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
           <Pagination target={TYPE} loading={pageLoading} />
-        </Fragment>
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
-          title='fcredit.title'
           target={TYPE}
+          title='fcredit.title'
           symbolsSelectorProps={{
-            currentFilters: targetSymbols,
             existingCoins,
+            currentFilters: targetSymbols,
             toggleSymbol: this.toggleSymbol,
           }}
           refresh={refresh}
@@ -92,7 +147,4 @@ class FundingCreditHistory extends PureComponent {
   }
 }
 
-FundingCreditHistory.propTypes = propTypes
-FundingCreditHistory.defaultProps = defaultProps
-
-export default withTranslation('translations')(FundingCreditHistory)
+export default FundingCreditHistory

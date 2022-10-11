@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   Classes,
@@ -8,8 +9,6 @@ import {
 
 import Icon from 'icons'
 import config from 'config'
-
-import { propTypes, defaultProps } from './ExportSuccessDialog.props'
 
 const ExportSuccessDialog = ({
   t,
@@ -62,7 +61,16 @@ const ExportSuccessDialog = ({
   )
 }
 
-ExportSuccessDialog.propTypes = propTypes
-ExportSuccessDialog.defaultProps = defaultProps
+ExportSuccessDialog.propTypes = {
+  remoteUrn: PropTypes.string,
+  localExportPath: PropTypes.string,
+  t: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
+}
+ExportSuccessDialog.defaultProps = {
+  remoteUrn: null,
+  localExportPath: null,
+}
 
 export default memo(ExportSuccessDialog)

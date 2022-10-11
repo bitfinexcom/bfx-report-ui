@@ -1,9 +1,11 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchFCredit,
   refresh,
+  fetchFCredit,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
@@ -12,10 +14,10 @@ import {
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import {
-  getDataReceived,
   getEntries,
-  getExistingCoins,
   getPageLoading,
+  getDataReceived,
+  getExistingCoins,
   getTargetSymbols,
 } from 'state/fundingCreditHistory/selectors'
 import { getColumns } from 'state/filters/selectors'
@@ -25,26 +27,28 @@ import queryConstants from 'state/query/constants'
 import FundingCreditHistory from './FundingCreditHistory'
 
 const mapStateToProps = state => ({
+  getFullTime: getFullTime(state),
+  timeOffset: getTimeOffset(state),
+  pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
+  existingCoins: getExistingCoins(state),
+  targetSymbols: getTargetSymbols(state),
   columns: getColumns(state, queryConstants.MENU_FCREDIT),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_FCREDIT),
   entries: getFilteredEntries(state, queryConstants.MENU_FCREDIT, getEntries(state)),
-  existingCoins: getExistingCoins(state),
-  getFullTime: getFullTime(state),
-  dataReceived: getDataReceived(state),
-  pageLoading: getPageLoading(state),
-  targetSymbols: getTargetSymbols(state),
-  timeOffset: getTimeOffset(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchFCredit,
   refresh,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
   clearTargetSymbols,
+  fetchData: fetchFCredit,
 }
 
-const FundingCreditHistoryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(FundingCreditHistory))
-
-export default FundingCreditHistoryContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(FundingCreditHistory)
