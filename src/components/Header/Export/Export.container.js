@@ -1,5 +1,7 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import { toggleExportDialog } from 'state/ui/actions'
 
@@ -9,6 +11,8 @@ const mapDispatchToProps = {
   toggleDialog: toggleExportDialog,
 }
 
-const ExportContainer = withRouter(connect(null, mapDispatchToProps)(Export))
-
-export default ExportContainer
+export default compose(
+  connect(null, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(Export)
