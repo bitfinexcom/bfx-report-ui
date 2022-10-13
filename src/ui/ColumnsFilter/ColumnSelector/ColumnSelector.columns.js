@@ -201,7 +201,7 @@ const SECTION_COLUMNS = {
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
     { id: 'mts', name: 'time', type: DATE, filter: true },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
-    { id: 'rate', name: 'rate', type: NUMBER, filter: true, transform: TRANSFORMS.PERCENTAGE },
+    { id: 'rate', name: 'rate', type: NUMBER, filter: true },
     { id: 'period', name: 'period', type: INTEGER, filter: true },
     { id: 'currency', name: 'currency', hidden: true },
   ],

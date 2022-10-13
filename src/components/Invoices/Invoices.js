@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
@@ -25,12 +26,63 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
-import getColumns from './Invoices.columns'
-import { propTypes, defaultProps } from './Invoices.props'
+import { getColumns } from './Invoices.columns'
 
 const TYPE = queryConstants.MENU_INVOICES
 
 class Invoices extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amount: PropTypes.bool,
+      currency: PropTypes.bool,
+      customerInfo: PropTypes.bool,
+      duration: PropTypes.bool,
+      id: PropTypes.bool,
+      invoices: PropTypes.bool,
+      merchantName: PropTypes.bool,
+      mts: PropTypes.bool,
+      orderId: PropTypes.bool,
+      payCurrencies: PropTypes.bool,
+      payment: PropTypes.bool,
+      redirectUrl: PropTypes.bool,
+      status: PropTypes.bool,
+      webhook: PropTypes.bool,
+    }),
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+    })),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      amount: PropTypes.number.isRequired,
+      currency: PropTypes.string.isRequired,
+      orderId: PropTypes.string.isRequired,
+      payCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+      status: PropTypes.string.isRequired,
+      invoices: PropTypes.arrayOf(PropTypes.object).isRequired,
+      duration: PropTypes.number.isRequired,
+      merchantName: PropTypes.string.isRequired,
+      redirectUrl: PropTypes.string.isRequired,
+      mts: PropTypes.number.isRequired,
+      webhook: PropTypes.string.isRequired,
+    })).isRequired,
+    existingCoins: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    columnsWidth: [],
+    existingCoins: [],
+    targetSymbols: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -116,8 +168,5 @@ class Invoices extends PureComponent {
     )
   }
 }
-
-Invoices.propTypes = propTypes
-Invoices.defaultProps = defaultProps
 
 export default Invoices

@@ -1,3 +1,1 @@
-import ConcentrationRisk from './ConcentrationRisk.container'
-
-export default ConcentrationRisk
+export { default } from './ConcentrationRisk.container'

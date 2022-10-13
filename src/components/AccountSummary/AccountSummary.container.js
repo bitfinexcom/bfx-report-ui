@@ -1,29 +1,33 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchData,
   refresh,
+  fetchData,
 } from 'state/accountSummary/actions'
 import {
   getData,
-  getDataReceived,
   getPageLoading,
+  getDataReceived,
 } from 'state/accountSummary/selectors'
 
 import AccountSummary from './AccountSummary'
 
 const mapStateToProps = state => ({
   data: getData(state),
-  dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
 })
 
 const mapDispatchToProps = {
-  fetchData,
   refresh,
+  fetchData,
 }
 
-const AccountSummaryContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(AccountSummary))
-
-export default AccountSummaryContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(AccountSummary)

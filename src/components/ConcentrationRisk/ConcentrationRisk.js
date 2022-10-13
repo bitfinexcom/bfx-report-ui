@@ -1,30 +1,47 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _keys from 'lodash/keys'
 import _sortBy from 'lodash/sortBy'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import DateInput from 'ui/DateInput'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import QueryButton from 'ui/QueryButton'
-import RefreshButton from 'ui/RefreshButton'
+import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
+import DateInput from 'ui/DateInput'
+import QueryButton from 'ui/QueryButton'
 import PieChart from 'ui/Charts/PieChart'
+import RefreshButton from 'ui/RefreshButton'
 import { fixedFloat } from 'ui/utils'
 import { isValidTimeStamp } from 'state/query/utils'
 
-import getColumns from './ConcentrationRisk.columns'
-import { propTypes, defaultProps } from './ConcentrationRisk.props'
+import { getColumns } from './ConcentrationRisk.columns'
 
 class ConcentrationRisk extends PureComponent {
+  static propTypes = {
+    currentTime: PropTypes.number,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      currency: PropTypes.string,
+      balanceUsd: PropTypes.number,
+    })),
+    fetchWallets: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
+    currentTime: null,
+  }
+
   constructor(props) {
     super(props)
     const { currentTime } = props
@@ -133,18 +150,19 @@ class ConcentrationRisk extends PureComponent {
         className='col-lg-12 col-md-12 col-sm-12 col-xs-12 concentration-risk no-table-scroll'
       >
         <SectionHeader>
-          <SectionHeaderTitle>{t('concentrationrisk.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('concentrationrisk.title')}
+          </SectionHeaderTitle>
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('query.endTime')}
               </SectionHeaderItemLabel>
               <DateInput
-                onChange={this.handleDateChange}
                 defaultValue={timestamp}
+                onChange={this.handleDateChange}
               />
             </SectionHeaderItem>
-
             <QueryButton
               disabled={!hasNewTime}
               onClick={this.handleQuery}
@@ -158,7 +176,4 @@ class ConcentrationRisk extends PureComponent {
   }
 }
 
-ConcentrationRisk.propTypes = propTypes
-ConcentrationRisk.defaultProps = defaultProps
-
-export default withTranslation('translations')(ConcentrationRisk)
+export default ConcentrationRisk

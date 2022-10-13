@@ -1,4 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   Classes,
@@ -14,9 +15,31 @@ import { getTarget } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
 import ExportTargetsSelector from './ExportDialog.TargetsSelector'
-import { propTypes, defaultProps } from './ExportDialog.props'
 
 class ExportDialog extends PureComponent {
+  static propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    t: PropTypes.func.isRequired,
+    start: PropTypes.number,
+    end: PropTypes.number,
+    email: PropTypes.string,
+    toggleDialog: PropTypes.func.isRequired,
+    exportCsv: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+    getFullTime: PropTypes.func.isRequired,
+    timestamp: PropTypes.number,
+    timezone: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    start: 0,
+    end: 0,
+    email: '',
+    timestamp: null,
+  }
+
   state = {
     currentTargets: [],
     target: '',
@@ -72,16 +95,16 @@ class ExportDialog extends PureComponent {
 
   render() {
     const {
-      email,
-      end,
-      getFullTime,
-      isOpen,
-      start,
       t,
-      timestamp,
-      timezone,
-      toggleDialog,
+      end,
+      email,
+      start,
+      isOpen,
       location,
+      timezone,
+      timestamp,
+      getFullTime,
+      toggleDialog,
     } = this.props
     const { currentTargets } = this.state
     if (!isOpen) {
@@ -93,7 +116,7 @@ class ExportDialog extends PureComponent {
     const timeSpan = `${formatDate(start, timezone)} — ${formatDate(end, timezone)}`
     const intlType = t(`${target}.title`)
     const renderMessage = !email ? (
-      <Fragment>
+      <>
         {t('download.prepare', { intlType })}
         {' '}
         <span className='bitfinex-show-soft'>
@@ -101,9 +124,9 @@ class ExportDialog extends PureComponent {
         </span>
         {' '}
         {t('download.store', { intlType })}
-      </Fragment>
+      </>
     ) : (
-      <Fragment>
+      <>
         {t('download.prepare', { intlType })}
         {' '}
         <span className='bitfinex-show-soft'>
@@ -111,7 +134,7 @@ class ExportDialog extends PureComponent {
         </span>
         {' '}
         {t('download.send', { intlType, email })}
-      </Fragment>
+      </>
     )
 
     return (
@@ -167,8 +190,5 @@ class ExportDialog extends PureComponent {
     )
   }
 }
-
-ExportDialog.propTypes = propTypes
-ExportDialog.defaultProps = defaultProps
 
 export default ExportDialog

@@ -1,4 +1,5 @@
 import React, { memo, useState } from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   Checkbox,
@@ -8,8 +9,6 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-
-import { propTypes, defaultProps } from './ErrorDialog.props'
 
 const ErrorDialog = ({
   t,
@@ -60,7 +59,17 @@ const ErrorDialog = ({
   )
 }
 
-ErrorDialog.propTypes = propTypes
-ErrorDialog.defaultProps = defaultProps
+ErrorDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
+  disableDialog: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+  t: PropTypes.func.isRequired,
+}
+
+ErrorDialog.defaultProps = {
+  errorMessage: 'Something went wrong',
+}
 
 export default memo(ErrorDialog)
