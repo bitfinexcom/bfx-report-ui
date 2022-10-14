@@ -1,3 +1,1 @@
-import TimeFrameShortcut from './TimeFrameShortcut.container'
-
-export default TimeFrameShortcut
+export { default } from './TimeFrameShortcut.container'
