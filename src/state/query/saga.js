@@ -61,6 +61,7 @@ import actions from './actions'
 import { getQueryLimit, NO_QUERY_LIMIT_TARGETS } from './utils'
 import types from './constants'
 
+const { showFrameworkMode } = config
 const {
   MENU_ACCOUNT_BALANCE,
   MENU_AFFILIATES_EARNINGS,
@@ -231,11 +232,11 @@ function* getOptions({ target }) {
   options.filter = yield select(getFilterQuery, target)
   const selector = getSelector(target)
   const sign = selector ? yield select(selector) : ''
-  const isFundingFees = yield select(getIsFundingFees)
-  const isTradingFees = yield select(getIsTradingFees)
-  const isVSPrevDayBalance = yield select(getIsVSPrevDayBalance)
-  const isUnrealizedProfitExcluded = yield select(getIsUnrealizedProfitExcluded)
-  const isVsAccountBalanceSelected = yield select(getIsVsAccountBalanceSelected)
+  const isFundingFees = showFrameworkMode ? yield select(getIsFundingFees) : ''
+  const isTradingFees = showFrameworkMode ? yield select(getIsTradingFees) : ''
+  const isVSPrevDayBalance = showFrameworkMode ? yield select(getIsVSPrevDayBalance) : ''
+  const isUnrealizedProfitExcluded = showFrameworkMode ? yield select(getIsUnrealizedProfitExcluded) : ''
+  const isVsAccountBalanceSelected = showFrameworkMode ? yield select(getIsVsAccountBalanceSelected) : ''
 
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
