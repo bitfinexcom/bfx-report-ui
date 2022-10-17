@@ -11,6 +11,7 @@ import { updateInvoices } from './utils'
 
 const initialState = {
   ...baseSymbolState,
+  isMerchant: true,
 }
 
 export function invoicesReducer(state = initialState, action) {
@@ -59,6 +60,11 @@ export function invoicesReducer(state = initialState, action) {
         ...initialState,
         existingCoins: state.existingCoins,
         targetCategory: state.targetCategory,
+      }
+    case types.SET_MERCHANT:
+      return {
+        ...state,
+        isMerchant: payload,
       }
     case timeRangeTypes.SET_TIME_RANGE:
       return {
