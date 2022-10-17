@@ -443,7 +443,7 @@
   "status": {
     "success": "{{topic}} Success at {{time}}",
     "warn": "{{topic}}",
-    "fail": "{{topic}} fail {{detail}}",
+    "fail": "{{topic}} fail: {{detail}}",
     "noid": "dev: the status action should contain the id param",
     "request": {
       "error": "{{topic}} request fail {{detail}}"
