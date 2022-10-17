@@ -8,14 +8,17 @@ const NoMerchant = ({ t }) => (
   <div className='no-data'>
     <div className='no-data-wrapper'>
       <Icon.WARNING />
-      <div>
-        This section is only available for
-        {' '}
-        <a href='https://pay.bitfinex.com/'>
-          merchant accounts
+      <>
+        {t('no_merchant.title')}
+        <a
+          target='_blank'
+          rel='noreferrer'
+          href='https://pay.bitfinex.com/'
+        >
+          {t('no_merchant.link')}
         </a>
         .
-      </div>
+      </>
     </div>
   </div>
 )
