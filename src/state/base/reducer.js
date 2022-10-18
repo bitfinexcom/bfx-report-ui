@@ -8,6 +8,7 @@ const initialState = {
   theme: types.DEFAULT_THEME,
   timezone: types.DEFAULT_TIMEZONE,
   milliseconds: false,
+  src: types.DEFAULT_SRC,
   tableScroll: getDefaultTableScrollSetting(),
 }
 
@@ -33,6 +34,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         dateFormat: payload,
+      }
+    case types.SET_SRC:
+      return {
+        ...state,
+        src: payload,
       }
     case types.SHOW_MILLISECONDS:
       return {
