@@ -10,6 +10,7 @@ export default {
     'YYYY-MM-DD',
   ],
   DEFAULT_SRC: 'bfx',
+  TR_SRC: 'bfx-tr',
   DEFAULT_TIMEZONE: 'Etc/UTC',
   SET_SYNC_STATE: 'BITFINEX/SYNC/SET_STATE',
   SET_DATE_FORMAT: 'BITFINEX/DATEFORMAT/SET',
