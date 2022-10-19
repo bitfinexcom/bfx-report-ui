@@ -3,20 +3,23 @@ import {
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
 
-import { setTimezone, setTheme, setLang } from 'state/base/actions'
-import { checkAuth, updateAuth } from 'state/auth/actions'
-import { setTimeRange } from 'state/timeRange/actions'
-import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
-import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
 import config from 'config'
-import timeRangeTypes from 'state/timeRange/constants'
-import { getTheme } from 'state/base/selectors'
 import { LANGUAGES } from 'locales/i18n'
+import {
+  setTimezone, setTheme, setLang, setSrc,
+} from 'state/base/actions'
+import { getTheme } from 'state/base/selectors'
+import { setTimeRange } from 'state/timeRange/actions'
+import timeRangeTypes from 'state/timeRange/constants'
 import handleElectronLoad from 'utils/handleElectronLoad'
+import { checkAuth, updateAuth } from 'state/auth/actions'
+import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
+import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 
 import types from './constants'
-import { togglePaginationDialog } from './actions'
 import selectors from './selectors'
+import { togglePaginationDialog } from './actions'
+
 
 function* uiLoaded() {
   if (config.isElectronApp) {
@@ -25,8 +28,12 @@ function* uiLoaded() {
 
   const parsed = getParsedUrlParams(window.location.search)
   const {
-    authToken, apiKey, apiSecret, timezone, theme, locale, range,
+    authToken, apiKey, apiSecret, timezone, theme, locale, range, src,
   } = parsed
+
+  if (src) {
+    yield put(setSrc(src))
+  }
 
   removeUrlParams(['timezone', 'theme', 'locale', 'authToken', 'apiKey', 'apiSecret'])
 
