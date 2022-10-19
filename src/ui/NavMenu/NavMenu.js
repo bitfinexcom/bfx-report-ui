@@ -60,26 +60,26 @@ class NavMenu extends PureComponent {
 
   static defaultProps = defaultProps
 
-  sections = [
+  getSections = (isTurkishSite) => [
     [MENU_LEDGERS, 'ledgers.title'],
-    [MENU_INVOICES, 'invoices.title'],
+    [MENU_INVOICES, 'invoices.title', isTurkishSite],
     [[MENU_TRADES, MENU_CANDLES], 'trades.title'],
     [[MENU_ORDERS, MENU_ORDER_TRADES], 'orders.title'],
     [MENU_MOVEMENTS, 'movements.title'],
     [[MENU_POSITIONS, MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT], 'positions.title'],
     [MENU_WALLETS, 'wallets.title'],
     ['divider'],
-    [MENU_FOFFER, 'foffer.title'],
-    [MENU_FLOAN, 'floan.title'],
-    [MENU_FCREDIT, 'fcredit.title'],
-    [MENU_FPAYMENT, 'fpayment.title'],
-    [MENU_SPAYMENTS, 'spayments.title'],
+    [MENU_FOFFER, 'foffer.title', isTurkishSite],
+    [MENU_FLOAN, 'floan.title', isTurkishSite],
+    [MENU_FCREDIT, 'fcredit.title', isTurkishSite],
+    [MENU_FPAYMENT, 'fpayment.title', isTurkishSite],
+    [MENU_SPAYMENTS, 'spayments.title', isTurkishSite],
     [MENU_AFFILIATES_EARNINGS, 'affiliatesearnings.title'],
-    ['divider'],
+    ['divider', '', isTurkishSite],
     [MENU_PUBLIC_TRADES, 'publictrades.title'],
-    [MENU_PUBLIC_FUNDING, 'publicfunding.title'],
+    [MENU_PUBLIC_FUNDING, 'publicfunding.title', isTurkishSite],
     [MENU_TICKERS, 'tickers.title'],
-    [MENU_DERIVATIVES, 'derivatives.title'],
+    [MENU_DERIVATIVES, 'derivatives.title', isTurkishSite],
     ['divider', '', !showFrameworkMode],
     [MENU_ACCOUNT_BALANCE, 'accountbalance.title', !showFrameworkMode],
     [MENU_LOAN_REPORT, 'loanreport.title', !showFrameworkMode],
@@ -122,10 +122,11 @@ class NavMenu extends PureComponent {
 
   render() {
     const {
-      className,
-      history,
-      showMenuPopover,
       t,
+      history,
+      className,
+      isTurkishSite,
+      showMenuPopover,
     } = this.props
     const target = getTarget(history.location.pathname, false)
 
@@ -134,7 +135,7 @@ class NavMenu extends PureComponent {
     return (
       <Menu large className={classes}>
         {showMenuPopover && window.innerWidth > 390 && window.innerWidth <= 1024 && <NavMenuPopover />}
-        {this.sections.map((section, index) => {
+        {this.getSections(isTurkishSite).map((section, index) => {
           const [type, title, isSkipped] = section
 
           if (isSkipped) {
