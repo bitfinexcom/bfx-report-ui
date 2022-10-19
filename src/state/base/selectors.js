@@ -1,4 +1,5 @@
 import memoizeOne from 'memoize-one'
+import _isEqual from 'lodash/isEqual'
 
 import { formatTime, timeOffset } from 'state/utils'
 
@@ -13,6 +14,7 @@ export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FO
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
 export const getTableScroll = state => getBase(state).tableScroll || false
 export const getSrc = state => getBase(state)?.src ?? types.DEFAULT_SRC
+export const getIsTurkishSite = state => _isEqual(getSrc(state), types.TR_SRC)
 
 export const getTimeOffset = state => timeOffset(getTimezone(state))
 
@@ -44,6 +46,7 @@ export default {
   getBase,
   getDateFormat,
   getFullTime,
+  getIsTurkishSite,
   getLocale,
   getShowMilliseconds,
   getSrc,
