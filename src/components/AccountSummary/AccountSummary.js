@@ -40,6 +40,7 @@ class AccountSummary extends PureComponent {
     }),
     dataReceived: PropTypes.bool.isRequired,
     fetchData: PropTypes.func.isRequired,
+    isTurkishSite: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
@@ -65,6 +66,7 @@ class AccountSummary extends PureComponent {
       refresh,
       pageLoading,
       dataReceived,
+      isTurkishSite,
     } = this.props
 
     let showContent
@@ -84,19 +86,23 @@ class AccountSummary extends PureComponent {
             data={data}
             title='accountsummary.fees'
           />
-          <DerivFees
-            t={t}
-            title='accountsummary.fees_deriv'
-            makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
-            takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
-          />
+          {!isTurkishSite && (
+            <>
+              <DerivFees
+                t={t}
+                title='accountsummary.fees_deriv'
+                makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
+                takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
+              />
+              <PaidFees
+                t={t}
+                title='accountsummary.margin_funds'
+                data={_get(data, 'fees_funding_30d', {})}
+                total={_get(data, 'fees_funding_total_30d', 0)}
+              />
+            </>
+          )}
           <br />
-          <PaidFees
-            t={t}
-            title='accountsummary.margin_funds'
-            data={_get(data, 'fees_funding_30d', {})}
-            total={_get(data, 'fees_funding_total_30d', 0)}
-          />
           <PaidFees
             t={t}
             title='accountsummary.trading_funds'
