@@ -169,33 +169,33 @@ class Main extends PureComponent {
               component={Movements}
             />
             {!isTurkishSite && (
-              <>
+              [
                 <Route
                   exact
                   path={PATHS.MENU_FCREDIT}
                   component={FundingCreditHistory}
-                />
+                />,
                 <Route
                   exact
                   path={PATHS.MENU_FLOAN}
                   component={FundingLoanHistory}
-                />
+                />,
                 <Route
                   exact
                   path={PATHS.MENU_FOFFER}
                   component={FundingOfferHistory}
-                />
+                />,
                 <Route
                   exact
                   path={PATHS.MENU_FPAYMENT}
                   component={FundingPayment}
-                />
+                />,
                 <Route
                   exact
                   path={PATHS.MENU_SPAYMENTS}
                   component={StakingPayments}
-                />
-              </>
+                />,
+              ]
             )}
             <Route
               exact
