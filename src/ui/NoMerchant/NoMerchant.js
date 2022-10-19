@@ -5,8 +5,8 @@ import { withTranslation } from 'react-i18next'
 import Icon from 'icons'
 
 const NoMerchant = ({ t }) => (
-  <div className='no-data'>
-    <div className='no-data-wrapper'>
+  <div className='no_merchant'>
+    <div className='no_merchant-wrapper'>
       <Icon.WARNING />
       <>
         {t('no_merchant.title')}
