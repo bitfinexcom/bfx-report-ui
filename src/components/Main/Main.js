@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 import AccountBalance from 'components/AccountBalance'
@@ -127,7 +127,7 @@ class Main extends PureComponent {
     } = this.props
 
     return authStatus && !authIsShown ? (
-      <Fragment>
+      <>
         <NavMenu className='bitfinex-nav-menu--main' />
         <div className='bitfinex-dataset'>
           <Switch>
@@ -334,7 +334,7 @@ class Main extends PureComponent {
         <Preferences />
         <TimeFrameDialog />
         <GoToRangeDialog />
-      </Fragment>
+      </>
     ) : ''
   }
 }
