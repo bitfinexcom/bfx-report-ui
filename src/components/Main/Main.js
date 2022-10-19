@@ -122,6 +122,7 @@ class Main extends PureComponent {
     const {
       authStatus,
       authIsShown,
+      isTurkishSite,
       errorDialogDisabled,
     } = this.props
 
@@ -135,11 +136,13 @@ class Main extends PureComponent {
               path={PATHS.MENU_LEDGERS}
               component={Ledgers}
             />
-            <Route
-              exact
-              path={PATHS.MENU_INVOICES}
-              component={Invoices}
-            />
+            {!isTurkishSite && (
+              <Route
+                exact
+                path={PATHS.MENU_INVOICES}
+                component={Invoices}
+              />
+            )}
             <Route
               exact
               path={PATHS.MENU_CANDLES}
@@ -165,41 +168,47 @@ class Main extends PureComponent {
               path={PATHS.MENU_MOVEMENTS}
               component={Movements}
             />
-            <Route
-              exact
-              path={PATHS.MENU_FCREDIT}
-              component={FundingCreditHistory}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FLOAN}
-              component={FundingLoanHistory}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FOFFER}
-              component={FundingOfferHistory}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FPAYMENT}
-              component={FundingPayment}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_SPAYMENTS}
-              component={StakingPayments}
-            />
+            {!isTurkishSite && (
+              <>
+                <Route
+                  exact
+                  path={PATHS.MENU_FCREDIT}
+                  component={FundingCreditHistory}
+                />
+                <Route
+                  exact
+                  path={PATHS.MENU_FLOAN}
+                  component={FundingLoanHistory}
+                />
+                <Route
+                  exact
+                  path={PATHS.MENU_FOFFER}
+                  component={FundingOfferHistory}
+                />
+                <Route
+                  exact
+                  path={PATHS.MENU_FPAYMENT}
+                  component={FundingPayment}
+                />
+                <Route
+                  exact
+                  path={PATHS.MENU_SPAYMENTS}
+                  component={StakingPayments}
+                />
+              </>
+            )}
             <Route
               exact
               path={PATHS.MENU_AFFILIATES_EARNINGS}
               component={AffiliatesEarnings}
             />
-            <Route
-              exact
-              path={PATHS.MENU_PUBLIC_FUNDING}
-              component={PublicFunding}
-            />
+            {!isTurkishSite && (
+              <Route
+                exact
+                path={PATHS.MENU_PUBLIC_FUNDING}
+                component={PublicFunding}
+              />
+            )}
             <Route
               exact
               path={PATHS.MENU_PUBLIC_TRADES}
@@ -210,11 +219,13 @@ class Main extends PureComponent {
               path={PATHS.MENU_TICKERS}
               component={Tickers}
             />
-            <Route
-              exact
-              path={PATHS.MENU_DERIVATIVES}
-              component={Derivatives}
-            />
+            {!isTurkishSite && (
+              <Route
+                exact
+                path={PATHS.MENU_DERIVATIVES}
+                component={Derivatives}
+              />
+            )}
             <Route
               exact
               path={getPath(MENU_POSITIONS_AUDIT)}
