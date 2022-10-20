@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 
 import AccountBalance from 'components/AccountBalance'
@@ -46,8 +47,6 @@ import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import NavMenu from 'ui/NavMenu'
 import config from 'config'
-
-import { propTypes, defaultProps } from './Main.props'
 
 const {
   MENU_ACCOUNT_BALANCE,
@@ -118,6 +117,17 @@ const PATHS = {
 }
 
 class Main extends PureComponent {
+  static propTypes = {
+    authIsShown: PropTypes.bool,
+    authStatus: PropTypes.bool.isRequired,
+    isTurkishSite: PropTypes.bool.isRequired,
+    errorDialogDisabled: PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    authIsShown: false,
+  }
+
   render() {
     const {
       authStatus,
@@ -174,26 +184,31 @@ class Main extends PureComponent {
                   exact
                   path={PATHS.MENU_FCREDIT}
                   component={FundingCreditHistory}
+                  key={PATHS.MENU_FCREDIT}
                 />,
                 <Route
                   exact
                   path={PATHS.MENU_FLOAN}
                   component={FundingLoanHistory}
+                  key={PATHS.MENU_FLOAN}
                 />,
                 <Route
                   exact
                   path={PATHS.MENU_FOFFER}
                   component={FundingOfferHistory}
+                  key={PATHS.MENU_FOFFER}
                 />,
                 <Route
                   exact
                   path={PATHS.MENU_FPAYMENT}
                   component={FundingPayment}
+                  key={PATHS.MENU_FPAYMENT}
                 />,
                 <Route
                   exact
                   path={PATHS.MENU_SPAYMENTS}
                   component={StakingPayments}
+                  key={PATHS.MENU_SPAYMENTS}
                 />,
               ]
             )}
@@ -338,8 +353,5 @@ class Main extends PureComponent {
     ) : ''
   }
 }
-
-Main.propTypes = propTypes
-Main.defaultProps = defaultProps
 
 export default Main
