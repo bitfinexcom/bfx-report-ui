@@ -7,12 +7,13 @@ import {
   MenuDivider,
   MenuItem,
 } from '@blueprintjs/core'
-import _castArray from 'lodash/castArray'
+import _map from 'lodash/map'
 import _includes from 'lodash/includes'
+import _castArray from 'lodash/castArray'
 
+import config from 'config'
 import queryType from 'state/query/constants'
 import { getIcon, getPath, getTarget } from 'state/query/utils'
-import config from 'config'
 
 import NavMenuPopover from './NavMenuPopover'
 import { propTypes, defaultProps } from './NavMenu.props'
@@ -135,7 +136,7 @@ class NavMenu extends PureComponent {
     return (
       <Menu large className={classes}>
         {showMenuPopover && window.innerWidth > 390 && window.innerWidth <= 1024 && <NavMenuPopover />}
-        {this.getSections(isTurkishSite).map((section, index) => {
+        {_map(this.getSections(isTurkishSite), (section, index) => {
           const [type, title, isSkipped] = section
 
           if (isSkipped) {
@@ -147,7 +148,6 @@ class NavMenu extends PureComponent {
             return <MenuDivider key={index} />
           }
 
-
           const types = _castArray(type)
           const mainType = types[0]
 
@@ -156,12 +156,12 @@ class NavMenu extends PureComponent {
 
           return (
             <MenuItem
-              icon={<Icon />}
+              href={path}
               key={mainType}
               text={t(title)}
-              onClick={(e) => this.handleClick(e, mainType)}
-              href={path}
+              icon={<Icon />}
               active={_includes(types, target)}
+              onClick={(e) => this.handleClick(e, mainType)}
             />
           )
         })}
