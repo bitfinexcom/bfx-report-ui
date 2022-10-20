@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Classes,
@@ -16,7 +16,6 @@ import queryType from 'state/query/constants'
 import { getIcon, getPath, getTarget } from 'state/query/utils'
 
 import NavMenuPopover from './NavMenuPopover'
-import { propTypes, defaultProps } from './NavMenu.props'
 
 const { showFrameworkMode } = config
 
@@ -57,9 +56,26 @@ const {
 } = queryType
 
 class NavMenu extends PureComponent {
-  static propTypes = propTypes
+  static propTypes = {
+    target: PropTypes.string,
+    className: PropTypes.string,
+    history: PropTypes.shape({
+      location: PropTypes.shape({
+        pathname: PropTypes.string.isRequired,
+        search: PropTypes.string.isRequired,
+      }).isRequired,
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    showMenuPopover: PropTypes.bool,
+    t: PropTypes.func.isRequired,
+    isTurkishSite: PropTypes.bool.isRequired,
+  }
 
-  static defaultProps = defaultProps
+  static defaultProps = {
+    className: '',
+    target: undefined,
+    showMenuPopover: true,
+  }
 
   getSections = (isTurkishSite) => [
     [MENU_LEDGERS, 'ledgers.title'],
@@ -170,4 +186,4 @@ class NavMenu extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(NavMenu)
+export default NavMenu
