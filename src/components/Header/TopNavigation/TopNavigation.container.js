@@ -1,5 +1,6 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
-
+import { withTranslation } from 'react-i18next'
 import { getEmail } from 'state/auth/selectors'
 import { getWindowWidth } from 'state/ui/selectors'
 import { togglePreferencesDialog } from 'state/ui/actions'
@@ -17,6 +18,7 @@ const mapDispatchToProps = {
   togglePrefDialog: togglePreferencesDialog,
 }
 
-const TopNavigationContainer = connect(mapStateToProps, mapDispatchToProps)(TopNavigation)
-
-export default TopNavigationContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(TopNavigation)

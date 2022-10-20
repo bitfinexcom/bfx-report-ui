@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Menu,
-  MenuItem,
   Popover,
+  MenuItem,
   Position,
 } from '@blueprintjs/core'
 
@@ -14,11 +14,17 @@ import config from 'config'
 import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
-import { propTypes, defaultProps } from './TopNavigation.props'
 
 const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
 
 class TopNavigation extends PureComponent {
+  static propTypes = {
+    t: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
+    email: PropTypes.string.isRequired,
+    togglePrefDialog: PropTypes.func.isRequired,
+  }
+
   state = {
     isOpen: false,
   }
@@ -36,9 +42,9 @@ class TopNavigation extends PureComponent {
 
   render() {
     const {
+      t,
       email,
       logout,
-      t,
       togglePrefDialog,
     } = this.props
     const { isOpen } = this.state
@@ -115,7 +121,4 @@ class TopNavigation extends PureComponent {
   }
 }
 
-TopNavigation.propTypes = propTypes
-TopNavigation.defaultProps = defaultProps
-
-export default withTranslation('translations')(TopNavigation)
+export default TopNavigation

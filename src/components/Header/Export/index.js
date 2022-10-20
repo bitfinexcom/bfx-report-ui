@@ -1,3 +1,1 @@
-import Export from './Export.container'
-
-export default Export
+export { default } from './Export.container'

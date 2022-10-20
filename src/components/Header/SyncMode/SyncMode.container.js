@@ -1,5 +1,5 @@
-import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
 import { startSyncNow, stopSyncNow } from 'state/sync/actions'
