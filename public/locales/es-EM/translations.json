@@ -61,7 +61,7 @@
   },
   "charts": {
     "cumulative": "Acumulativo",
-    "percent": "%"
+    "percentage": "Porcentaje"
   },
   "column": {
     "actual-price": "Precio Actual",
@@ -91,7 +91,9 @@
     "fees": "Comisiones",
     "fundBalance": "Balance del fondo del seguro",
     "fundingAccrued": "Próxima financiación acumulada",
+    "fundingCost": "Costo de Financimiento",
     "fundingStep": "Siguiente paso de financiación",
+    "fundingType": "Tipo de Financiamiento",
     "id": "#",
     "ip": "IP",
     "lastpayout": "Último pago",
@@ -120,8 +122,6 @@
     "rateperc": "Tasa %",
     "side": "Lado",
     "status": "Estado",
-    "fundingCost": "Costo de Financimiento",
-    "fundingType": "Tipo de Financiamiento",
     "taker_fees": "Tarifas de tomador",
     "taker_fees_crypto": "Comisiones del Tomador Crypto",
     "taker_fees_fiat": "Comisiones del Tomador Fiat",
@@ -206,7 +206,7 @@
     }
   },
   "feesreport": {
-    "title": "Informe de comisiones"
+    "title": "Reporte de comisiones"
   },
   "floan": {
     "title": "Préstamos de financiamiento (no utilizados)",
@@ -283,7 +283,7 @@
   },
   "loading": "Cargando...",
   "loanreport": {
-    "title": "Informe de préstamo"
+    "title": "Reporte de préstamo"
   },
   "logins": {
     "title": "Inicios de sesión"
@@ -337,6 +337,7 @@
     "language": "Idioma",
     "theme": "Temática",
     "timezone": "Zona horaria",
+    "timezone-input": "Ingresar Zona horaria",
     "dateformat": "Formato de fecha",
     "milliseconds": "Mostrar milisegundos",
     "table_scroll": "Desplazamiento de tabla",
@@ -441,14 +442,14 @@
     }
   },
   "taxreport": {
-    "title": "Informe de impuestos",
+    "title": "Reporte de impuestos",
     "sections": {
       "startSnapshot": "Empezar instantánea",
       "endSnapshot": "Finalizar Instantánea",
       "finalResult": "Resultado Final"
     },
-    "startingPeriodBalances": "Balance del período inicial",
-    "endingPeriodBalances": "Saldos del período concluido",
+    "startingPeriodBalances": "Balances del período inicial",
+    "endingPeriodBalances": "Balances del período concluido",
     "startPositions": "Instantánea del periodo inicial",
     "endPositions": "Instantánea del periodo concluido",
     "movements": "Movimientos"
@@ -488,6 +489,7 @@
     "start-date-placeholder": "Fecha de Inicio",
     "end-date-placeholder": "Fecha Final",
     "today": "Hoy",
+    "query_range": "Rango de Consulta",
     "year": "Año",
     "week": "Semana"
   },
