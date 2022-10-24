@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
@@ -28,11 +29,37 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
-import { propTypes, defaultProps } from './LoanReport.props'
-
 const TYPE = queryConstants.MENU_LOAN_REPORT
 
 class LoanReport extends PureComponent {
+  static propTypes = {
+    currentFetchParams: PropTypes.shape({
+      timeframe: PropTypes.string,
+      targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    }),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      mts: PropTypes.number.isRequired,
+    })),
+    targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    params: PropTypes.shape({
+      timeframe: PropTypes.string,
+      targetSymbols: PropTypes.arrayOf(PropTypes.string),
+    }),
+    fetchData: PropTypes.func.isRequired,
+    setParams: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    params: [],
+    entries: [],
+    targetSymbols: [],
+    currentFetchParams: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -137,8 +164,5 @@ class LoanReport extends PureComponent {
     )
   }
 }
-
-LoanReport.propTypes = propTypes
-LoanReport.defaultProps = defaultProps
 
 export default LoanReport
