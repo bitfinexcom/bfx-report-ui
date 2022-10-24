@@ -10,7 +10,7 @@ import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
-import getColumns from './Logins.columns'
+import { getColumns } from './Logins.columns'
 import { propTypes, defaultProps } from './Logins.props'
 
 const TYPE = queryConstants.MENU_LOGINS
