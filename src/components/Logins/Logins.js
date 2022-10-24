@@ -1,4 +1,5 @@
 import React, { PureComponent, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -11,11 +12,47 @@ import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
 import { getColumns } from './Logins.columns'
-import { propTypes, defaultProps } from './Logins.props'
 
 const TYPE = queryConstants.MENU_LOGINS
 
 class Logins extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      browser: PropTypes.bool,
+      amount: PropTypes.bool,
+      extra: PropTypes.bool,
+      id: PropTypes.bool,
+      ip: PropTypes.bool,
+      mobile: PropTypes.bool,
+      time: PropTypes.bool,
+      version: PropTypes.bool,
+    }),
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+    })),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      mts: PropTypes.number,
+      ip: PropTypes.string,
+      browser: PropTypes.string,
+      version: PropTypes.string,
+      mobile: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    })),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    entries: [],
+    columnsWidth: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -74,8 +111,5 @@ class Logins extends PureComponent {
     )
   }
 }
-
-Logins.propTypes = propTypes
-Logins.defaultProps = defaultProps
 
 export default withTranslation('translations')(Logins)
