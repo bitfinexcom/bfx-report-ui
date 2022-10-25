@@ -1,4 +1,4 @@
-.no-data {
+.no_merchant {
   position: relative;
 
   &-wrapper {
@@ -12,17 +12,10 @@
       margin: 0 auto 38px auto;
     }
   }
-
-  .no-data-update {
-    display: flex;
-    margin: 30px auto 0 auto;
-    width: unset;
-    min-width: 100px;
-  }
 }
 
 @media screen and (min-width: 2560px) {
-  .no-data {
+  .no_merchant {
     &-wrapper {
       margin: 262px auto 0 auto;
     }
@@ -30,7 +23,7 @@
 }
 
 @media screen and (max-width: 390px) {
-  .no-data {
+  .no_merchant {
     &-wrapper {
       margin: 40px auto 0 auto;
     }
