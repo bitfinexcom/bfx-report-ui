@@ -1,3 +1,1 @@
-import Logins from './Logins.container'
-
-export default Logins
+export { default } from './Logins.container'
