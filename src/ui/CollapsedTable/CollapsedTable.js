@@ -37,7 +37,7 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
   nameStr: PropTypes.string,
   renderer: PropTypes.func.isRequired,
   copyText: PropTypes.func.isRequired,
-  width: PropTypes.number.isRequired,
+  width: PropTypes.number,
 })
 
 CollapsedTable.propTypes = {
@@ -45,7 +45,5 @@ CollapsedTable.propTypes = {
   t: PropTypes.func.isRequired,
   tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
 }
-
-CollapsedTable.defaultProps = {}
 
 export default withTranslation('translations')(CollapsedTable)
