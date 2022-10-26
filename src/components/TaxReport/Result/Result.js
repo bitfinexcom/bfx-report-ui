@@ -8,7 +8,7 @@ import { fixedFloat } from 'ui/utils'
 import queryConstants from 'state/query/constants'
 import { checkFetch, checkInit } from 'state/utils'
 import { getFrameworkPositionsColumns } from 'utils/columns'
-import { getColumns as getMovementsColumns } from 'components/Movements/Movements.columns'
+import getMovementsColumns from 'components/Movements/Movements.columns'
 
 import { propTypes } from './Result.props'
 import getBalancesColumns from './Balances.columns'

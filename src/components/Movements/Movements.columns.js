@@ -9,7 +9,7 @@ import Explorer from 'ui/Explorer'
 import config from 'config'
 import { getColumnWidth } from 'utils/columns'
 
-export const getColumns = ({
+const getColumns = ({
   t,
   timeOffset,
   getFullTime,
@@ -186,3 +186,5 @@ export const getColumns = ({
     copyText: rowIndex => filteredData[rowIndex].note,
   },
 ]
+
+export default getColumns
