@@ -18,7 +18,7 @@ import {
 } from 'state/utils'
 import { getPath } from 'state/query/utils'
 
-import getColumns from './Orders.columns'
+import { getColumns } from './Orders.columns'
 import { propTypes, defaultProps } from './Orders.props'
 
 const TYPE = queryConstants.MENU_ORDERS
