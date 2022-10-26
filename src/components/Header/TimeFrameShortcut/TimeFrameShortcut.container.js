@@ -1,5 +1,7 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import { setTimeRange } from 'state/timeRange/actions'
 
@@ -9,6 +11,8 @@ const mapDispatchToProps = {
   setTimeRange,
 }
 
-const TimeFrameShortcutContainer = withRouter(connect(null, mapDispatchToProps)(TimeFrameShortcut))
-
-export default TimeFrameShortcutContainer
+export default compose(
+  connect(null, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(TimeFrameShortcut)

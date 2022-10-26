@@ -73,9 +73,17 @@ export function toggleTableScroll() {
   }
 }
 
+export function setSrc(src) {
+  return {
+    type: types.SET_SRC,
+    payload: src,
+  }
+}
+
 export default {
   setDateFormat,
   setLang,
+  setSrc,
   setTheme,
   setTimezone,
   showMilliseconds,

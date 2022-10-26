@@ -1,3 +1,1 @@
-import AccountMenu from './AccountMenu.container'
-
-export default AccountMenu
+export { default } from './AccountMenu.container'

@@ -12,6 +12,7 @@ import {
   getPageLoading,
   getDataReceived,
 } from 'state/accountSummary/selectors'
+import { getIsTurkishSite } from 'state/base/selectors'
 
 import AccountSummary from './AccountSummary'
 
@@ -19,6 +20,7 @@ const mapStateToProps = state => ({
   data: getData(state),
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
+  isTurkishSite: getIsTurkishSite(state),
 })
 
 const mapDispatchToProps = {

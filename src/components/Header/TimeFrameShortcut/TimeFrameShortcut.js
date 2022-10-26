@@ -1,12 +1,29 @@
 import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import queryString from 'query-string'
 
 import Icon from 'icons'
 
-import { propTypes, defaultProps } from './TimeFrameShortcut.props'
-
 class TimeFrameShortcut extends PureComponent {
+  static propTypes = {
+    icon: PropTypes.bool,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    setTimeRange: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string.isRequired,
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }
+
+  static defaultProps = {
+    icon: true,
+  }
+
   onClick = () => {
     const { type, setTimeRange } = this.props
     this.resetRangeQuery()
@@ -22,13 +39,16 @@ class TimeFrameShortcut extends PureComponent {
 
   render() {
     const {
+      t,
       icon,
       title,
-      t,
     } = this.props
 
     return (
-      <div className='timeframe-shortcut' onClick={this.onClick}>
+      <div
+        onClick={this.onClick}
+        className='timeframe-shortcut'
+      >
         {icon && <Icon.CALENDAR />}
         <span>{t(title)}</span>
       </div>
@@ -36,7 +56,4 @@ class TimeFrameShortcut extends PureComponent {
   }
 }
 
-TimeFrameShortcut.propTypes = propTypes
-TimeFrameShortcut.defaultProps = defaultProps
-
-export default withTranslation('translations')(TimeFrameShortcut)
+export default TimeFrameShortcut

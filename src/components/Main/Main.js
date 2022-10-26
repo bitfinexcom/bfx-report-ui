@@ -1,4 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 
 import AccountBalance from 'components/AccountBalance'
@@ -46,8 +47,6 @@ import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import NavMenu from 'ui/NavMenu'
 import config from 'config'
-
-import { propTypes, defaultProps } from './Main.props'
 
 const {
   MENU_ACCOUNT_BALANCE,
@@ -118,15 +117,27 @@ const PATHS = {
 }
 
 class Main extends PureComponent {
+  static propTypes = {
+    authIsShown: PropTypes.bool,
+    authStatus: PropTypes.bool.isRequired,
+    isTurkishSite: PropTypes.bool.isRequired,
+    errorDialogDisabled: PropTypes.bool.isRequired,
+  }
+
+  static defaultProps = {
+    authIsShown: false,
+  }
+
   render() {
     const {
       authStatus,
       authIsShown,
+      isTurkishSite,
       errorDialogDisabled,
     } = this.props
 
     return authStatus && !authIsShown ? (
-      <Fragment>
+      <>
         <NavMenu className='bitfinex-nav-menu--main' />
         <div className='bitfinex-dataset'>
           <Switch>
@@ -135,11 +146,13 @@ class Main extends PureComponent {
               path={PATHS.MENU_LEDGERS}
               component={Ledgers}
             />
-            <Route
-              exact
-              path={PATHS.MENU_INVOICES}
-              component={Invoices}
-            />
+            {!isTurkishSite && (
+              <Route
+                exact
+                path={PATHS.MENU_INVOICES}
+                component={Invoices}
+              />
+            )}
             <Route
               exact
               path={PATHS.MENU_CANDLES}
@@ -165,41 +178,52 @@ class Main extends PureComponent {
               path={PATHS.MENU_MOVEMENTS}
               component={Movements}
             />
-            <Route
-              exact
-              path={PATHS.MENU_FCREDIT}
-              component={FundingCreditHistory}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FLOAN}
-              component={FundingLoanHistory}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FOFFER}
-              component={FundingOfferHistory}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FPAYMENT}
-              component={FundingPayment}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_SPAYMENTS}
-              component={StakingPayments}
-            />
+            {!isTurkishSite && (
+              [
+                <Route
+                  exact
+                  path={PATHS.MENU_FCREDIT}
+                  component={FundingCreditHistory}
+                  key={PATHS.MENU_FCREDIT}
+                />,
+                <Route
+                  exact
+                  path={PATHS.MENU_FLOAN}
+                  component={FundingLoanHistory}
+                  key={PATHS.MENU_FLOAN}
+                />,
+                <Route
+                  exact
+                  path={PATHS.MENU_FOFFER}
+                  component={FundingOfferHistory}
+                  key={PATHS.MENU_FOFFER}
+                />,
+                <Route
+                  exact
+                  path={PATHS.MENU_FPAYMENT}
+                  component={FundingPayment}
+                  key={PATHS.MENU_FPAYMENT}
+                />,
+                <Route
+                  exact
+                  path={PATHS.MENU_SPAYMENTS}
+                  component={StakingPayments}
+                  key={PATHS.MENU_SPAYMENTS}
+                />,
+              ]
+            )}
             <Route
               exact
               path={PATHS.MENU_AFFILIATES_EARNINGS}
               component={AffiliatesEarnings}
             />
-            <Route
-              exact
-              path={PATHS.MENU_PUBLIC_FUNDING}
-              component={PublicFunding}
-            />
+            {!isTurkishSite && (
+              <Route
+                exact
+                path={PATHS.MENU_PUBLIC_FUNDING}
+                component={PublicFunding}
+              />
+            )}
             <Route
               exact
               path={PATHS.MENU_PUBLIC_TRADES}
@@ -210,11 +234,13 @@ class Main extends PureComponent {
               path={PATHS.MENU_TICKERS}
               component={Tickers}
             />
-            <Route
-              exact
-              path={PATHS.MENU_DERIVATIVES}
-              component={Derivatives}
-            />
+            {!isTurkishSite && (
+              <Route
+                exact
+                path={PATHS.MENU_DERIVATIVES}
+                component={Derivatives}
+              />
+            )}
             <Route
               exact
               path={getPath(MENU_POSITIONS_AUDIT)}
@@ -323,12 +349,9 @@ class Main extends PureComponent {
         <Preferences />
         <TimeFrameDialog />
         <GoToRangeDialog />
-      </Fragment>
+      </>
     ) : ''
   }
 }
-
-Main.propTypes = propTypes
-Main.defaultProps = defaultProps
 
 export default Main

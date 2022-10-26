@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import {
   Position,
   Tooltip,
@@ -6,7 +7,6 @@ import {
 
 import config from 'config'
 
-import { propTypes, defaultProps } from './SyncMode.props'
 import {
   getSyncIcon,
   getSyncTitle,
@@ -14,11 +14,11 @@ import {
 } from './SyncMode.helpers'
 
 const SyncMode = ({
+  t,
   isSyncing,
+  stopSyncNow,
   syncProgress,
   startSyncNow,
-  stopSyncNow,
-  t,
 }) => {
   const handleSync = () => {
     if (isSyncing) {
@@ -54,8 +54,17 @@ const SyncMode = ({
   )
 }
 
+SyncMode.propTypes = {
+  t: PropTypes.func.isRequired,
+  stopSyncNow: PropTypes.func,
+  startSyncNow: PropTypes.func,
+  isSyncing: PropTypes.bool.isRequired,
+  syncProgress: PropTypes.number.isRequired,
+}
 
-SyncMode.propTypes = propTypes
-SyncMode.defaultProps = defaultProps
+SyncMode.defaultProps = {
+  startSyncNow: () => {},
+  stopSyncNow: () => {},
+}
 
 export default memo(SyncMode)

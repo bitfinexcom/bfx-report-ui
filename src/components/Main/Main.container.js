@@ -1,13 +1,15 @@
 import { connect } from 'react-redux'
 
-import { getAuthStatus, getIsShown } from 'state/auth/selectors'
+import { getIsTurkishSite } from 'state/base/selectors'
 import { getIsErrorDialogDisabled } from 'state/ui/selectors'
+import { getAuthStatus, getIsShown } from 'state/auth/selectors'
 
 import Main from './Main'
 
 const mapStateToProps = state => ({
   authIsShown: getIsShown(state),
   authStatus: getAuthStatus(state),
+  isTurkishSite: getIsTurkishSite(state),
   errorDialogDisabled: getIsErrorDialogDisabled(state),
 })
 

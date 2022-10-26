@@ -1,3 +1,1 @@
-import TopNavigation from './TopNavigation.container'
-
-export default TopNavigation
+export { default } from './TopNavigation.container'
