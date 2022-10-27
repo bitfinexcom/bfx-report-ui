@@ -21,9 +21,9 @@ import {
   getExistingCoins,
   getTargetSymbols,
 } from 'state/movements/selectors'
+import queryConstants from 'state/query/constants'
 import { getColumns } from 'state/filters/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
-import queryConstants from 'state/query/constants'
 
 import Movements from './Movements'
 
