@@ -1,12 +1,11 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import {
@@ -88,25 +87,25 @@ class Movements extends PureComponent {
 
   render() {
     const {
-      columns,
-      columnsWidth,
-      entries,
-      existingCoins,
-      getFullTime,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
-      targetSymbols,
+      columns,
+      entries,
+      refresh,
       timeOffset,
+      getFullTime,
+      pageLoading,
+      columnsWidth,
+      dataReceived,
+      existingCoins,
+      targetSymbols,
     } = this.props
 
     const tableColumns = getColumns({
-      columnsWidth,
-      filteredData: entries,
-      getFullTime,
       t,
       timeOffset,
+      getFullTime,
+      columnsWidth,
+      filteredData: entries,
     }).filter(({ id }) => columns[id])
 
     const title = 'movements.title'
@@ -117,7 +116,7 @@ class Movements extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
@@ -127,11 +126,14 @@ class Movements extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </Fragment>
+        </>
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
           title={title}
           target={TYPE}
@@ -149,4 +151,4 @@ class Movements extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(Movements)
+export default Movements
