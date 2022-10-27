@@ -32,17 +32,17 @@ class CollapsedTable extends PureComponent {
 }
 
 const TABLE_COLUMNS_PROPS = PropTypes.shape({
-  id: PropTypes.string.isRequired,
   name: PropTypes.string,
+  width: PropTypes.number,
   nameStr: PropTypes.string,
+  id: PropTypes.string.isRequired,
   renderer: PropTypes.func.isRequired,
   copyText: PropTypes.func.isRequired,
-  width: PropTypes.number,
 })
 
 CollapsedTable.propTypes = {
-  numRows: PropTypes.number.isRequired,
   t: PropTypes.func.isRequired,
+  numRows: PropTypes.number.isRequired,
   tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
 }
 
