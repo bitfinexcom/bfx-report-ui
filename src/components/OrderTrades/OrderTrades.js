@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import queryString from 'query-string'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -13,11 +14,39 @@ import { checkFetch } from 'state/utils'
 
 import OrderTradesNoData from './OrderTrades.NoData'
 import getColumns from '../Trades/Trades.columns'
-import { propTypes, defaultProps } from './OrderTrades.props'
 
 const { MENU_ORDER_TRADES } = queryConstants
 
 class OrderTrades extends PureComponent {
+  static propTypes = {
+    match: PropTypes.shape({
+      params: PropTypes.shape({ pair: PropTypes.string }),
+    }).isRequired,
+    location: PropTypes.shape({
+      search: PropTypes.string,
+    }).isRequired,
+    setParams: PropTypes.func.isRequired,
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      execAmount: PropTypes.number.isRequired,
+      execPrice: PropTypes.number.isRequired,
+      fee: PropTypes.number,
+      feeCurrency: PropTypes.string,
+      mtsCreate: PropTypes.number.isRequired,
+      orderID: PropTypes.number.isRequired,
+    })).isRequired,
+    fetchData: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    params: PropTypes.shape({
+      targetPair: PropTypes.string,
+      id: PropTypes.number,
+    }).isRequired,
+    t: PropTypes.func.isRequired,
+    getFullTime: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
   componentDidMount() {
     const {
       dataReceived, pageLoading, setParams, fetchData, match, location, params,
@@ -85,8 +114,5 @@ class OrderTrades extends PureComponent {
     )
   }
 }
-
-OrderTrades.propTypes = propTypes
-OrderTrades.defaultProps = defaultProps
 
 export default withTranslation('translations')(OrderTrades)
