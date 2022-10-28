@@ -1,6 +1,5 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import queryString from 'query-string'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -111,17 +110,17 @@ class Orders extends PureComponent {
 
   render() {
     const {
+      t,
       columns,
-      columnsWidth,
-      existingPairs,
       entries,
-      dataReceived,
-      pageLoading,
       refresh,
+      timeOffset,
       targetPairs,
       getFullTime,
-      t,
-      timeOffset,
+      pageLoading,
+      dataReceived,
+      columnsWidth,
+      existingPairs,
     } = this.props
     const tableColumns = getColumns({
       columnsWidth,
@@ -139,7 +138,7 @@ class Orders extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
@@ -149,21 +148,24 @@ class Orders extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </Fragment>
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
-          title='orders.title'
           target={TYPE}
+          refresh={refresh}
+          title='orders.title'
           pairsSelectorProps={{
             currentFilters: targetPairs,
             existingPairs,
             togglePair: this.togglePair,
           }}
-          refresh={refresh}
           clearTargetPairs={this.clearPairs}
         />
         {showContent}
@@ -172,4 +174,4 @@ class Orders extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(Orders)
+export default Orders
