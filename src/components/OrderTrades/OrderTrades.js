@@ -1,16 +1,15 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import queryString from 'query-string'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import { SectionHeader, SectionHeaderTitle } from 'ui/SectionHeader'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import { checkFetch } from 'state/utils'
 import queryConstants from 'state/query/constants'
 import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
-import { checkFetch } from 'state/utils'
+import { SectionHeader, SectionHeaderTitle } from 'ui/SectionHeader'
 
 import OrderTradesNoData from './OrderTrades.NoData'
 import getColumns from '../Trades/Trades.columns'
@@ -49,7 +48,13 @@ class OrderTrades extends PureComponent {
 
   componentDidMount() {
     const {
-      dataReceived, pageLoading, setParams, fetchData, match, location, params,
+      match,
+      params,
+      location,
+      fetchData,
+      setParams,
+      pageLoading,
+      dataReceived,
     } = this.props
     const { targetPair, id } = params
     const { pair } = match.params
@@ -70,13 +75,13 @@ class OrderTrades extends PureComponent {
 
   render() {
     const {
-      entries,
-      dataReceived,
-      pageLoading,
-      getFullTime,
-      params: { targetPair, id },
       t,
+      entries,
       timeOffset,
+      getFullTime,
+      pageLoading,
+      dataReceived,
+      params: { targetPair, id },
     } = this.props
 
     if (!targetPair || !id) {
@@ -84,10 +89,10 @@ class OrderTrades extends PureComponent {
     }
 
     const tableColumns = getColumns({
-      filteredData: entries,
-      getFullTime,
       t,
       timeOffset,
+      getFullTime,
+      filteredData: entries,
     })
 
     let showContent
@@ -105,9 +110,14 @@ class OrderTrades extends PureComponent {
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader>
-          <SectionHeaderTitle>{t('ordertrades.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>
+            {t('ordertrades.title')}
+          </SectionHeaderTitle>
         </SectionHeader>
         {showContent}
       </Card>
@@ -115,4 +125,4 @@ class OrderTrades extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(OrderTrades)
+export default OrderTrades
