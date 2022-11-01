@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -9,7 +8,6 @@ import {
 } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
-import { propTypes, defaultProps } from './PaginationDialog.props'
 
 class PaginationDialog extends PureComponent {
   static propTypes = {
@@ -34,7 +32,10 @@ class PaginationDialog extends PureComponent {
 
   render() {
     const {
-      isOpen, latestPaginationTimestamp, getFullTime, t,
+      t,
+      isOpen,
+      getFullTime,
+      latestPaginationTimestamp,
     } = this.props
     if (!isOpen) {
       return null
@@ -42,11 +43,11 @@ class PaginationDialog extends PureComponent {
 
     return (
       <Dialog
+        isOpen={isOpen}
         icon={IconNames.CONFIRM}
         isCloseButtonShown={false}
-        isOpen={isOpen}
-        onClose={() => this.handleProceed(false)}
         title={t('pagination.no_results')}
+        onClose={() => this.handleProceed(false)}
       >
         <div className={Classes.DIALOG_BODY}>
           {t('pagination.last_data_timestamp', { date: getFullTime(latestPaginationTimestamp) })}
@@ -56,7 +57,10 @@ class PaginationDialog extends PureComponent {
             <Button onClick={() => this.handleProceed(false)}>
               {t('framework.cancel')}
             </Button>
-            <Button intent={Intent.PRIMARY} onClick={() => this.handleProceed(true)}>
+            <Button
+              intent={Intent.PRIMARY}
+              onClick={() => this.handleProceed(true)}
+            >
               {t('pagination.proceed')}
             </Button>
           </div>
@@ -66,7 +70,4 @@ class PaginationDialog extends PureComponent {
   }
 }
 
-PaginationDialog.propTypes = propTypes
-PaginationDialog.defaultProps = defaultProps
-
-export default withTranslation('translations')(PaginationDialog)
+export default PaginationDialog
