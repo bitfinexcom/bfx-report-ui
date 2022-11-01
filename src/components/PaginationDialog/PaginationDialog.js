@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import {
   Button,
@@ -11,6 +12,19 @@ import { IconNames } from '@blueprintjs/icons'
 import { propTypes, defaultProps } from './PaginationDialog.props'
 
 class PaginationDialog extends PureComponent {
+  static propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    latestPaginationTimestamp: PropTypes.number,
+    getFullTime: PropTypes.func.isRequired,
+    toggleDialog: PropTypes.func.isRequired,
+    proceedRequest: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    latestPaginationTimestamp: undefined,
+  }
+
   handleProceed = (shouldProceed) => {
     const { toggleDialog, proceedRequest } = this.props
 
