@@ -1,4 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -23,6 +24,48 @@ import PositionsSwitch from './PositionsSwitch'
 const TYPE = queryConstants.MENU_POSITIONS
 
 class Positions extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      amount: PropTypes.bool,
+      basePrice: PropTypes.bool,
+      id: PropTypes.bool,
+      marginFunding: PropTypes.bool,
+      marginFundingType: PropTypes.bool,
+      mtsUpdate: PropTypes.bool,
+      pair: PropTypes.bool,
+      status: PropTypes.bool,
+    }),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      amount: PropTypes.number,
+      basePrice: PropTypes.number,
+      liquidationPrice: PropTypes.number,
+      marginFunding: PropTypes.number,
+      marginFundingType: PropTypes.number,
+      mtsUpdate: PropTypes.number,
+      pair: PropTypes.string.isRequired,
+      pl: PropTypes.number,
+      plPerc: PropTypes.number,
+    })),
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    existingPairs: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    entries: [],
+    targetPairs: [],
+    existingPairs: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
