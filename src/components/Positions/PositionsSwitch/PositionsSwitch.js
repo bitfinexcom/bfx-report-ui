@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 
@@ -9,6 +10,20 @@ import queryConstants from 'state/query/constants'
 import { propTypes, defaultProps } from './PositionsSwitch.props'
 
 class PositionsSwitch extends React.PureComponent {
+  static propTypes = {
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+      location: PropTypes.shape({ search: PropTypes.string }),
+    }).isRequired,
+    refresh: PropTypes.func,
+    t: PropTypes.func.isRequired,
+    target: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    refresh: () => {},
+  }
+
   switchSection = (e) => {
     const { value } = e.currentTarget
     const { target, history } = this.props
