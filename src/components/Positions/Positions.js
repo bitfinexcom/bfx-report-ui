@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -18,7 +18,6 @@ import {
 } from 'state/utils'
 
 import getColumns from './Positions.columns'
-import { propTypes, defaultProps } from './Positions.props'
 import PositionsSwitch from './PositionsSwitch'
 
 const TYPE = queryConstants.MENU_POSITIONS
@@ -35,6 +34,10 @@ class Positions extends PureComponent {
       pair: PropTypes.bool,
       status: PropTypes.bool,
     }),
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+    })),
     entries: PropTypes.arrayOf(PropTypes.shape({
       amount: PropTypes.number,
       basePrice: PropTypes.number,
@@ -63,6 +66,7 @@ class Positions extends PureComponent {
     columns: {},
     entries: [],
     targetPairs: [],
+    columnsWidth: [],
     existingPairs: [],
   }
 
@@ -87,26 +91,26 @@ class Positions extends PureComponent {
 
   render() {
     const {
-      columns,
-      columnsWidth,
-      existingPairs,
-      getFullTime,
-      entries,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
-      targetPairs,
+      columns,
+      entries,
+      refresh,
       timeOffset,
+      getFullTime,
+      targetPairs,
+      pageLoading,
+      columnsWidth,
+      dataReceived,
+      existingPairs,
     } = this.props
     const tableColumns = getColumns({
+      t,
+      timeOffset,
+      getFullTime,
       columnsWidth,
       target: TYPE,
       filteredData: entries,
-      getFullTime,
-      t,
       onIdClick: this.jumpToPositionsAudit,
-      timeOffset,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -116,25 +120,31 @@ class Positions extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination target={TYPE} loading={pageLoading} />
-        </Fragment>
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
+        </>
       )
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
           title='positions.title'
           target={TYPE}
           pairsSelectorProps={{
-            currentFilters: targetPairs,
             existingPairs,
+            currentFilters: targetPairs,
             togglePair: this.togglePair,
           }}
           refresh={refresh}
@@ -146,8 +156,5 @@ class Positions extends PureComponent {
     )
   }
 }
-
-Positions.propTypes = propTypes
-Positions.defaultProps = defaultProps
 
 export default withTranslation('translations')(Positions)
