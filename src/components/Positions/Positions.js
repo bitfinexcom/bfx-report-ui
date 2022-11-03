@@ -1,15 +1,14 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import Pagination from 'ui/Pagination'
+import { getPath } from 'state/query/utils'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
 import {
   checkInit,
   checkFetch,
@@ -157,4 +156,4 @@ class Positions extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(Positions)
+export default Positions
