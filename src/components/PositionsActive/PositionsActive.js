@@ -1,18 +1,16 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
-import PositionsSwitch from 'components/Positions/PositionsSwitch'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import { checkFetch } from 'state/utils'
+import { getPath } from 'state/query/utils'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
-import { getPath } from 'state/query/utils'
-import { checkFetch } from 'state/utils'
-
 import getColumns from 'components/Positions/Positions.columns'
+import PositionsSwitch from 'components/Positions/PositionsSwitch'
 
 const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
 
@@ -65,21 +63,21 @@ class PositionsActive extends PureComponent {
 
   render() {
     const {
-      getFullTime,
-      entries,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      entries,
+      refresh,
       timeOffset,
+      getFullTime,
+      pageLoading,
+      dataReceived,
     } = this.props
     const tableColumns = getColumns({
+      t,
+      timeOffset,
+      getFullTime,
       target: TYPE,
       filteredData: entries,
-      getFullTime,
-      t,
       onIdClick: this.jumpToPositionsAudit,
-      timeOffset,
     })
 
     let showContent
@@ -97,7 +95,10 @@ class PositionsActive extends PureComponent {
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='section-positions-active col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='section-positions-active col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
           filter={false}
           target={TYPE}
@@ -114,4 +115,4 @@ class PositionsActive extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(PositionsActive)
+export default PositionsActive
