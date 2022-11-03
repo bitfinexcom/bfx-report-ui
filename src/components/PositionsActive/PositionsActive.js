@@ -13,7 +13,6 @@ import { getPath } from 'state/query/utils'
 import { checkFetch } from 'state/utils'
 
 import getColumns from 'components/Positions/Positions.columns'
-import { propTypes, defaultProps } from './PositionsActive.props'
 
 const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
 
@@ -114,8 +113,5 @@ class PositionsActive extends PureComponent {
     )
   }
 }
-
-PositionsActive.propTypes = propTypes
-PositionsActive.defaultProps = defaultProps
 
 export default withTranslation('translations')(PositionsActive)
