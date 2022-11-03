@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -17,6 +18,34 @@ import { propTypes, defaultProps } from './PositionsActive.props'
 const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
 
 class PositionsActive extends PureComponent {
+  static propTypes = {
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      amount: PropTypes.number,
+      basePrice: PropTypes.number,
+      liquidationPrice: PropTypes.number,
+      marginFunding: PropTypes.number,
+      marginFundingType: PropTypes.number,
+      mtsUpdate: PropTypes.number,
+      pair: PropTypes.string,
+      pl: PropTypes.number,
+      plPerc: PropTypes.number,
+    })),
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+    fetchData: PropTypes.func.isRequired,
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
+  }
+
   componentDidMount() {
     const { dataReceived, pageLoading, fetchData } = this.props
     if (!dataReceived && !pageLoading) {
