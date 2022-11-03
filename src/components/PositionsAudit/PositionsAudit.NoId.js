@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import compose from 'lodash/fp/compose'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 import { IconNames } from '@blueprintjs/icons'
 import { Button, Intent, NonIdealState } from '@blueprintjs/core'
 
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
-const PositionsAuditNoId = (props) => {
-  const { t, history } = props
-
+const PositionsAuditNoId = ({ t, history }) => {
   const jumpToPositions = (e) => {
     e.preventDefault()
     history.push(`${getPath(queryConstants.MENU_POSITIONS)}${window.location.search}`)
@@ -19,8 +18,8 @@ const PositionsAuditNoId = (props) => {
   return (
     <NonIdealState
       className='bitfinex-nonideal'
-      icon={IconNames.NUMBERED_LIST}
       title={t('paudit.noid.title')}
+      icon={IconNames.NUMBERED_LIST}
       description={t('paudit.noid.description')}
     >
       <Button
@@ -43,4 +42,8 @@ PositionsAuditNoId.propTypes = {
   }).isRequired,
 }
 
-export default withTranslation('translations')(withRouter(PositionsAuditNoId))
+export default compose(
+  withTranslation('translations'),
+  withRouter,
+  memo,
+)(PositionsAuditNoId)
