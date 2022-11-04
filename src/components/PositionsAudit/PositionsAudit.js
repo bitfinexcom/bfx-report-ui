@@ -14,8 +14,6 @@ import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
 
-import { propTypes, defaultProps } from './PositionsAudit.props'
-
 const TYPE = queryConstants.MENU_POSITIONS_AUDIT
 
 class PositionsAudit extends PureComponent {
@@ -108,8 +106,5 @@ class PositionsAudit extends PureComponent {
     )
   }
 }
-
-PositionsAudit.propTypes = propTypes
-PositionsAudit.defaultProps = defaultProps
 
 export default withTranslation('translations')(PositionsAudit)
