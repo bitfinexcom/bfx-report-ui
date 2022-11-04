@@ -15,8 +15,8 @@ const getAuth = () => {
 // initial auth with /login requires email/password even if token already present
 const getLoginAuth = () => {
   const state = store.getState()
-  const { email, password } = getAuthData(state)
-  return { email, password }
+  const { email, password, isSubAccount } = getAuthData(state)
+  return { email, password, isSubAccount }
 }
 
 class WS {
@@ -87,11 +87,11 @@ class WS {
   }
 
   signIn = (auth = getLoginAuth()) => {
-    const { email, password } = auth
+    const { email, password, isSubAccount } = auth
     this.send('signIn', {}, {
       email,
       password,
-      isSubAccount: false,
+      isSubAccount,
     })
   }
 
