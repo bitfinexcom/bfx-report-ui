@@ -1,3 +1,1 @@
-import PaginationDialog from './PaginationDialog.container'
-
-export default PaginationDialog
+export { default } from './PaginationDialog.container'

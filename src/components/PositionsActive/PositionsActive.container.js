@@ -1,15 +1,17 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchAPositions,
   refresh,
+  fetchAPositions,
 } from 'state/positionsActive/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
-  getDataReceived,
   getEntries,
   getPageLoading,
+  getDataReceived,
 } from 'state/positionsActive/selectors'
 
 import PositionsActive from './PositionsActive'
@@ -17,16 +19,18 @@ import PositionsActive from './PositionsActive'
 const mapStateToProps = state => ({
   entries: getEntries(state),
   getFullTime: getFullTime(state),
-  dataReceived: getDataReceived(state),
-  pageLoading: getPageLoading(state),
   timeOffset: getTimeOffset(state),
+  pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchAPositions,
   refresh,
+  fetchData: fetchAPositions,
 }
 
-const PositionsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(PositionsActive))
-
-export default PositionsContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(PositionsActive)
