@@ -25,6 +25,7 @@ class Auth extends PureComponent {
   static propTypes = {
     authData: PropTypes.shape({
       hasAuthData: PropTypes.bool.isRequired,
+      isSubAccount: PropTypes.bool.isRequired,
     }).isRequired,
     isShown: PropTypes.bool,
     isUsersLoaded: PropTypes.bool,
@@ -42,21 +43,21 @@ class Auth extends PureComponent {
   constructor(props) {
     super()
 
-    const { authData: { hasAuthData } } = props
+    const { authData: { hasAuthData, isSubAccount } } = props
 
     this.state = {
       mode: (!config.showFrameworkMode || !hasAuthData) ? MODES.SIGN_UP : MODES.SIGN_IN,
-      authType: AUTH_TYPES.SIMPLE_ACCOUNTS,
+      authType: isSubAccount ? AUTH_TYPES.MULTIPLE_ACCOUNTS : AUTH_TYPES.SIMPLE_ACCOUNTS,
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { isUsersLoaded, users } = this.props
     const { authType } = this.state
+    const { isUsersLoaded, users, authData: { isSubAccount } } = this.props
     const isMultipleAccsSelected = authType === AUTH_TYPES.MULTIPLE_ACCOUNTS
     if (config.showFrameworkMode && !prevProps.isUsersLoaded && isUsersLoaded && users.length) {
       // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ mode: isMultipleAccsSelected ? MODES.SIGN_UP : MODES.SIGN_IN })
+      this.setState({ mode: isMultipleAccsSelected && !isSubAccount ? MODES.SIGN_UP : MODES.SIGN_IN })
     }
   }
 
