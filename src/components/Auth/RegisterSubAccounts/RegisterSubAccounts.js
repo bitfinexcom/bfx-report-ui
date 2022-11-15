@@ -104,7 +104,7 @@ class RegisterSubAccounts extends PureComponent {
               users={users}
               authData={authData}
               masterAccount={masterAccEmail}
-              addMultipleAccsEnabled={!isMultipleAccsSelected}
+              addMultipleAccsEnabled={isMultipleAccsSelected}
             />
           </>
         </div>
