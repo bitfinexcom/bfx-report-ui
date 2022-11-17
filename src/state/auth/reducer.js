@@ -51,6 +51,7 @@ const initialState = {
   users: [],
   usersLoaded: false,
   usersLoading: false,
+  subAccountsLoading: false,
 }
 
 export function authReducer(state = initialState, action) {
@@ -71,6 +72,11 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         users: state.users.filter((user) => !(user.isSubAccount && user.email === payload)),
+      }
+    case subAccountsTypes.LOADING:
+      return {
+        ...state,
+        subAccountsLoading: payload,
       }
     case types.SET_USERS:
       return {
