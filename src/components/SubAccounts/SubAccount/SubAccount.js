@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 import _get from 'lodash/get'
 
+import Loading from 'ui/Loading'
 import SubUsersList from './SubUsersList'
 import { propTypes, defaultProps } from './SubAccount.props'
 import RemoveSubAccount from './SubAccountRemove'
@@ -77,6 +78,7 @@ class SubAccount extends PureComponent {
       users,
       authData,
       masterAccount,
+      isSubAccountsLoading,
       addMultipleAccsEnabled,
     } = this.props
     const { accounts, subUsersToRemove } = this.state
@@ -86,6 +88,47 @@ class SubAccount extends PureComponent {
     const subUsers = _get(subAccountData, 'subUsers', [])
     const hasFilledAccounts = getFilledAccounts(accounts).length > 0
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
+    let showContent
+    if (isSubAccountsLoading) {
+      showContent = <Loading />
+    } else {
+      showContent = (
+        <>
+          {subUsers.length > 0 && (
+          <SubUsersList
+            subUsers={subUsers}
+            email={masterAccountEmail}
+            onToggle={this.onSubUserToggle}
+            subUsersToRemove={subUsersToRemove}
+            isRemovalEnabled={masterAccount || isSubAccount}
+          />
+          )}
+          {(masterAccount || (!isSubAccount && !hasSubAccount)) && (
+          <div className='subtitle'>{t('subaccounts.create')}</div>
+          )}
+          {(masterAccount || (isSubAccount || !hasSubAccount)) && (
+            <>
+              <SubUsersAdd
+                users={users}
+                accounts={accounts}
+                authData={authData}
+                onChange={this.onSubUsersChange}
+                masterAccount={masterAccount}
+                addMultipleAccsEnabled={addMultipleAccsEnabled}
+              />
+              <Button
+                className='sub-account-confirm'
+                intent={Intent.PRIMARY}
+                disabled={!hasFilledAccounts && !subUsersToRemove.length}
+                onClick={subUsers.length > 0 ? this.updateSubAccount : this.createSubAccount}
+              >
+                {subUsers.length > 0 ? t('update') : t('timeframe.custom.confirm')}
+              </Button>
+            </>
+          )}
+        </>
+      )
+    }
 
     return (
       <div className='sub-account'>
@@ -97,38 +140,7 @@ class SubAccount extends PureComponent {
             />
           </div>
         )}
-        {subUsers.length > 0 && (
-          <SubUsersList
-            subUsers={subUsers}
-            email={masterAccountEmail}
-            onToggle={this.onSubUserToggle}
-            subUsersToRemove={subUsersToRemove}
-            isRemovalEnabled={masterAccount || isSubAccount}
-          />
-        )}
-        {(masterAccount || (!isSubAccount && !hasSubAccount)) && (
-          <div className='subtitle'>{t('subaccounts.create')}</div>
-        )}
-        {(masterAccount || (isSubAccount || !hasSubAccount)) && (
-          <>
-            <SubUsersAdd
-              users={users}
-              accounts={accounts}
-              authData={authData}
-              onChange={this.onSubUsersChange}
-              masterAccount={masterAccount}
-              addMultipleAccsEnabled={addMultipleAccsEnabled}
-            />
-            <Button
-              className='sub-account-confirm'
-              intent={Intent.PRIMARY}
-              disabled={!hasFilledAccounts && !subUsersToRemove.length}
-              onClick={subUsers.length > 0 ? this.updateSubAccount : this.createSubAccount}
-            >
-              {subUsers.length > 0 ? t('update') : t('timeframe.custom.confirm')}
-            </Button>
-          </>
-        )}
+        {showContent}
       </div>
     )
   }
