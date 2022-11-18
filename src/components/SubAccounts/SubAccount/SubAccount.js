@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 import _get from 'lodash/get'
+import _isEmpty from 'lodash/isEmpty'
 
 import Loading from 'ui/Loading'
+
 import SubUsersList from './SubUsersList'
 import { propTypes, defaultProps } from './SubAccount.props'
 import RemoveSubAccount from './SubAccountRemove'
@@ -94,14 +96,14 @@ class SubAccount extends PureComponent {
     } else {
       showContent = (
         <>
-          {subUsers.length > 0 && (
-          <SubUsersList
-            subUsers={subUsers}
-            email={masterAccountEmail}
-            onToggle={this.onSubUserToggle}
-            subUsersToRemove={subUsersToRemove}
-            isRemovalEnabled={masterAccount || isSubAccount}
-          />
+          {!_isEmpty(subUsers) && (
+            <SubUsersList
+              subUsers={subUsers}
+              email={masterAccountEmail}
+              onToggle={this.onSubUserToggle}
+              subUsersToRemove={subUsersToRemove}
+              isRemovalEnabled={masterAccount || isSubAccount}
+            />
           )}
           {(masterAccount || (!isSubAccount && !hasSubAccount)) && (
           <div className='subtitle'>{t('subaccounts.create')}</div>
