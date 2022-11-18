@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 import _get from 'lodash/get'
 import _isEmpty from 'lodash/isEmpty'
@@ -130,7 +129,7 @@ class SubAccount extends PureComponent {
             />
           )}
           {(masterAccount || (!isSubAccount && !hasSubAccount)) && (
-          <div className='subtitle'>{t('subaccounts.create')}</div>
+            <div className='subtitle'>{t('subaccounts.create')}</div>
           )}
           {(masterAccount || (isSubAccount || !hasSubAccount)) && (
             <>
@@ -143,8 +142,8 @@ class SubAccount extends PureComponent {
                 addMultipleAccsEnabled={addMultipleAccsEnabled}
               />
               <Button
-                className='sub-account-confirm'
                 intent={Intent.PRIMARY}
+                className='sub-account-confirm'
                 disabled={!hasFilledAccounts && !subUsersToRemove.length}
                 onClick={subUsers.length > 0 ? this.updateSubAccount : this.createSubAccount}
               >
@@ -172,4 +171,4 @@ class SubAccount extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(SubAccount)
+export default SubAccount
