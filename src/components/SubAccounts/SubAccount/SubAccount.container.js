@@ -1,4 +1,6 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
 import { getSubAccountsLoading } from 'state/auth/selectors'
 import { addSubAccount, updateSubAccount } from 'state/subAccounts/actions'
@@ -14,6 +16,7 @@ const mapDispatchToProps = {
   updateSubAccount,
 }
 
-const SubAccountContainer = connect(mapStateToProps, mapDispatchToProps)(SubAccount)
-
-export default SubAccountContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(SubAccount)
