@@ -144,11 +144,14 @@ export function* updateSubAccount({ payload }) {
       params.removingSubUsersByEmails = removedSubUsers.map(subUserEmail => ({ email: subUserEmail }))
     }
     const { result, error } = yield call(getReqUpdateSubAccount, params, auth)
+    yield put(setSubAccountLoadingStatus(true))
     if (result) {
+      yield put(setSubAccountLoadingStatus(false))
       yield put(fetchUsers())
     }
 
     if (error) {
+      yield put(setSubAccountLoadingStatus(false))
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'subaccounts.title',
@@ -156,6 +159,7 @@ export function* updateSubAccount({ payload }) {
       }))
     }
   } catch (fail) {
+    yield put(setSubAccountLoadingStatus(false))
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'subaccounts.title',
