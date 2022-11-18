@@ -12,6 +12,7 @@ import { getAuthData, selectAuth } from 'state/auth/selectors'
 import Authenticator from 'state/auth/Authenticator'
 
 import types from './constants'
+import { setSubAccountLoadingStatus } from './actions'
 
 const getReqCreateSubAccount = ({
   masterAccount,
@@ -50,11 +51,14 @@ export function* createSubAccount({ payload }) {
   const params = { subAccountApiKeys: preparedAccountData, masterAccount }
   try {
     const { result, error } = yield call(getReqCreateSubAccount, params)
+    yield put(setSubAccountLoadingStatus(true))
     if (result) {
+      yield put(setSubAccountLoadingStatus(false))
       yield put(fetchUsers())
     }
 
     if (error) {
+      yield put(setSubAccountLoadingStatus(false))
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'subaccounts.title',
@@ -62,6 +66,7 @@ export function* createSubAccount({ payload }) {
       }))
     }
   } catch (fail) {
+    yield put(setSubAccountLoadingStatus(false))
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'subaccounts.title',
