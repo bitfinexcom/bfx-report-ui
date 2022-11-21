@@ -145,9 +145,9 @@ class SubAccount extends PureComponent {
                 intent={Intent.PRIMARY}
                 className='sub-account-confirm'
                 disabled={!hasFilledAccounts && _isEmpty(subUsersToRemove)}
-                onClick={!_isEmpty(subUsers) ? this.updateSubAccount : this.createSubAccount}
+                onClick={_isEmpty(subUsers) ? this.createSubAccount : this.updateSubAccount}
               >
-                {!_isEmpty(subUsers) ? t('update') : t('timeframe.custom.confirm')}
+                {_isEmpty(subUsers) ? t('timeframe.custom.confirm') : t('update')}
               </Button>
             </>
           )}
