@@ -50,8 +50,8 @@ export function* createSubAccount({ payload }) {
   const { preparedAccountData, masterAccount } = payload
   const params = { subAccountApiKeys: preparedAccountData, masterAccount }
   try {
-    const { result, error } = yield call(getReqCreateSubAccount, params)
     yield put(setSubAccountLoadingStatus(true))
+    const { result, error } = yield call(getReqCreateSubAccount, params)
     if (result) {
       yield put(setSubAccountLoadingStatus(false))
       yield put(fetchUsers())
@@ -143,8 +143,8 @@ export function* updateSubAccount({ payload }) {
     if (removedSubUsers.length) {
       params.removingSubUsersByEmails = removedSubUsers.map(subUserEmail => ({ email: subUserEmail }))
     }
-    const { result, error } = yield call(getReqUpdateSubAccount, params, auth)
     yield put(setSubAccountLoadingStatus(true))
+    const { result, error } = yield call(getReqUpdateSubAccount, params, auth)
     if (result) {
       yield put(setSubAccountLoadingStatus(false))
       yield put(fetchUsers())
