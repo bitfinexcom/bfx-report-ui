@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Button, Intent } from '@blueprintjs/core'
 import _get from 'lodash/get'
 import _isEmpty from 'lodash/isEmpty'
+import _differenceBy from 'lodash/differenceBy'
 
 import Loading from 'ui/Loading'
 
@@ -113,6 +114,7 @@ class SubAccount extends PureComponent {
     const subUsers = _get(subAccountData, 'subUsers', [])
     const hasFilledAccounts = getFilledAccounts(accounts).length > 0
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
+    const preparedUsers = _differenceBy(users, subUsers, 'email')
     let showContent
     if (isSubAccountsLoading) {
       showContent = <Loading />
@@ -134,9 +136,9 @@ class SubAccount extends PureComponent {
           {(masterAccount || (isSubAccount || !hasSubAccount)) && (
             <>
               <SubUsersAdd
-                users={users}
                 accounts={accounts}
                 authData={authData}
+                users={preparedUsers}
                 onChange={this.onSubUsersChange}
                 masterAccount={masterAccount}
                 addMultipleAccsEnabled={addMultipleAccsEnabled}
