@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _filter from 'lodash/filter'
+import _isEmpty from 'lodash/isEmpty'
 import { Classes, Dialog } from '@blueprintjs/core'
 
 import Icon from 'icons'
@@ -43,9 +44,22 @@ class RegisterSubAccounts extends PureComponent {
     }
   }
 
+  componentDidUpdate() {
+    const { users } = this.props
+    if (_isEmpty(users)) {
+      this.clearMasterAccEmail()
+    }
+  }
+
   onEmailChange = (email) => {
     this.setState({
       masterAccEmail: email,
+    })
+  }
+
+  clearMasterAccEmail = () => {
+    this.setState({
+      masterAccEmail: undefined,
     })
   }
 
