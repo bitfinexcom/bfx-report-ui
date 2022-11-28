@@ -30,6 +30,7 @@ class Preferences extends PureComponent {
       t,
       timezone,
       toggleDialog,
+      removeAccount,
     } = this.props
 
     return (
@@ -82,6 +83,12 @@ class Preferences extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+            <Button
+              onClick={removeAccount}
+              intent={Intent.PRIMARY}
+            >
+              {t('preferences.remove_account')}
+            </Button>
             <Button
               onClick={toggleDialog}
               intent={Intent.PRIMARY}
