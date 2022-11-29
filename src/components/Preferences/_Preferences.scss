@@ -9,6 +9,16 @@
         margin-left: 20px;
         margin-right: 20px;
       }
+
+      &-footer-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .bp3-button{
+          margin-left: 0;
+        }
+      }
     }
   }
 
