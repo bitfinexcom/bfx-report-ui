@@ -84,14 +84,16 @@ class Preferences extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            {config.showFrameworkMode && (
-              <Button
-                onClick={removeAccount}
-                intent={Intent.PRIMARY}
-              >
-                {t('preferences.remove_account')}
-              </Button>
-            )}
+            <div className='remove-account-wrapper'>
+              {config.showFrameworkMode && (
+                <Button
+                  onClick={removeAccount}
+                  intent={Intent.PRIMARY}
+                >
+                  {t('preferences.remove_account')}
+                </Button>
+              )}
+            </div>
             <Button
               onClick={toggleDialog}
               intent={Intent.PRIMARY}
