@@ -20,10 +20,9 @@ export function addUser(payload) {
   }
 }
 
-export function removeUser(payload) {
+export function removeUser() {
   return {
     type: types.REMOVE_USER,
-    payload,
   }
 }
 
