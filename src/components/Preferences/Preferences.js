@@ -8,6 +8,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
+import config from 'config'
 import DateFormatSelector from 'ui/DateFormatSelector'
 import LangMenu from 'ui/LangMenu'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
@@ -83,12 +84,14 @@ class Preferences extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <Button
-              onClick={removeAccount}
-              intent={Intent.PRIMARY}
-            >
-              {t('preferences.remove_account')}
-            </Button>
+            {config.showFrameworkMode && (
+              <Button
+                onClick={removeAccount}
+                intent={Intent.PRIMARY}
+              >
+                {t('preferences.remove_account')}
+              </Button>
+            )}
             <Button
               onClick={toggleDialog}
               intent={Intent.PRIMARY}
