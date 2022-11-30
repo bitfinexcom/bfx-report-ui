@@ -13,7 +13,8 @@ import _isEmpty from 'lodash/isEmpty'
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-import { selectAuth } from 'state/auth/selectors'
+// import Authenticator from 'state/auth/Authenticator'
+import { selectAuth, getAuthData } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
@@ -191,6 +192,29 @@ function* fetchUsers() {
   }
 }
 
+function* removeUser() {
+  yield console.log('+++ removeUser saga')
+  const {
+    email, password, isSubAccount, token,
+  } = yield select(getAuthData)
+  // const auth2 = yield select(selectAuth)
+  // yield console.log('+++ auth', auth)
+  // yield console.log('+++ auth2', auth2)
+  const auth = {
+    email, password, isSubAccount, token,
+  }
+
+  const { result, error } = yield call(makeFetchCall, 'removeUser', auth)
+  if (result) {
+    yield put(actions.logout())
+    yield put(actions.clearAuth())
+    yield put(actions.fetchUsers())
+    // yield call(Authenticator.clearData)
+  }
+  console.log('+++result', result)
+  console.log('+++error', error)
+}
+
 function* checkAuth() {
   try {
     if (config.showFrameworkMode) {
@@ -260,5 +284,6 @@ export default function* authSaga() {
   yield takeLatest(types.SIGN_UP, signUp)
   yield takeLatest(types.SIGN_IN, signIn)
   yield takeLatest(types.LOGOUT, logout)
+  yield takeLatest(types.REMOVE_USER, removeUser)
   yield fork(tokenRefreshSaga)
 }
