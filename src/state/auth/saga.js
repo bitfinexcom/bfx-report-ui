@@ -17,6 +17,7 @@ import wsSignIn from 'state/ws/signIn'
 import { selectAuth, getAuthData } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
+import { togglePreferencesDialog } from 'state/ui/actions'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { refreshToken, tokenRefreshStart, tokenRefreshStop } from 'state/auth/tokenRefresh/actions'
@@ -193,13 +194,10 @@ function* fetchUsers() {
 }
 
 function* removeUser() {
-  yield console.log('+++ removeUser saga')
   const {
     email, password, isSubAccount, token,
   } = yield select(getAuthData)
-  // const auth2 = yield select(selectAuth)
-  // yield console.log('+++ auth', auth)
-  // yield console.log('+++ auth2', auth2)
+
   const auth = {
     email, password, isSubAccount, token,
   }
@@ -209,6 +207,7 @@ function* removeUser() {
     yield put(actions.logout())
     yield put(actions.clearAuth())
     yield put(actions.fetchUsers())
+    yield put(togglePreferencesDialog())
     // yield call(Authenticator.clearData)
   }
   console.log('+++result', result)
