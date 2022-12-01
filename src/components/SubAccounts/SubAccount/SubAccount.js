@@ -115,6 +115,7 @@ class SubAccount extends PureComponent {
     const hasFilledAccounts = getFilledAccounts(accounts).length > 0
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
     const preparedUsers = _differenceBy(users, subUsers, 'email')
+    const isConfirmDisabled = _isEmpty(masterAccount) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
     let showContent
     if (isSubAccountsLoading) {
       showContent = <Loading />
@@ -145,9 +146,9 @@ class SubAccount extends PureComponent {
               />
               <Button
                 intent={Intent.PRIMARY}
+                disabled={isConfirmDisabled}
                 className='sub-account-confirm'
                 onClick={_isEmpty(subUsers) ? this.createSubAccount : this.updateSubAccount}
-                disabled={_isEmpty(masterAccount) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))}
               >
                 {_isEmpty(subUsers) ? t('timeframe.custom.confirm') : t('update')}
               </Button>
