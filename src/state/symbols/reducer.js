@@ -51,6 +51,8 @@ export function symbolsReducer(state = initialState, action) {
         coins.push(id)
       })
 
+      const preparedCoins = [...new Set(coins)].sort()
+
       const pairMapping = mapSymbols.reduce((acc, symbol) => {
         const [from, to] = symbol
         acc[from] = to
@@ -66,7 +68,7 @@ export function symbolsReducer(state = initialState, action) {
 
       return {
         ...state,
-        coins: coins.sort(),
+        coins: preparedCoins,
         currencies: dict,
         explorers: explorersDict,
         inactiveCurrencies: formattedInactiveCurrencies,
