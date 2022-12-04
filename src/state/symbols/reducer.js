@@ -39,7 +39,12 @@ export function symbolsReducer(state = initialState, action) {
           if (id.includes('F0')) {
             symbol = `${symbol} (deriv)`
           }
-          symbolMapping[id] = symbol
+          if (symbol === 'USDt') {
+            symbolMapping.UST = symbol
+          } else {
+            symbolMapping[id] = symbol
+          }
+
           explorersDict[symbol] = explorer
           dict[symbol] = name
           coins.push(symbol)
