@@ -18,6 +18,7 @@ class SubUsersAdd extends PureComponent {
       apiSecret: PropTypes.string,
     })).isRequired,
     addMultipleAccsEnabled: PropTypes.bool.isRequired,
+    shouldFilterCurrentUser: PropTypes.bool.isRequired,
     masterAccount: PropTypes.string,
     authData: PropTypes.shape({
       email: PropTypes.string,
@@ -98,13 +99,15 @@ class SubUsersAdd extends PureComponent {
       authData,
       masterAccount,
       addMultipleAccsEnabled,
+      shouldFilterCurrentUser,
     } = this.props
     const { email: currentUserEmail } = authData
 
     const subAccountOptions = users.filter((account) => (
       !account.isSubAccount
-      && account.email !== currentUserEmail
-      && account.email !== masterAccount))
+      && account.email !== masterAccount
+      && (shouldFilterCurrentUser ? account.email !== currentUserEmail : true)
+    ))
     const takenAccountOptions = this.getTakenAccountOptions(accounts)
     const selectClassName = addMultipleAccsEnabled
       ? 'sub-account-create-select' : 'bitfinex-auth-email'
@@ -130,6 +133,8 @@ class SubUsersAdd extends PureComponent {
               '',
               ...accountOptions,
             ]
+
+            console.log('+++subAccountOptionsItems', subAccountOptionsItems)
 
             return (
               /* eslint-disable-next-line react/no-array-index-key */
