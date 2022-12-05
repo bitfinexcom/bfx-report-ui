@@ -134,8 +134,6 @@ class SubUsersAdd extends PureComponent {
               ...accountOptions,
             ]
 
-            console.log('+++subAccountOptionsItems', subAccountOptionsItems)
-
             return (
               /* eslint-disable-next-line react/no-array-index-key */
               <div className='sub-users-add-accounts-account' key={index}>
