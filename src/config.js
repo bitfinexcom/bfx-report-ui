@@ -5,7 +5,7 @@ const { REACT_APP_ENV } = process.env
 const environments = {
   development: {
     API_URL: 'http://localhost:31339/api',
-    KEY_URL: 'https://www.bitfinex.com',
+    KEY_URL: 'https://setting.bitfinex.com/api',
     HOME_URL: 'http://localhost:3000',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: true,
@@ -15,7 +15,7 @@ const environments = {
   },
   testing: {
     API_URL: 'https://bfx-report-ui.staging.bitfinex.com/api',
-    KEY_URL: 'https://www.staging.bitfinex.com',
+    KEY_URL: 'https://bfx-ui-settings.staging.bitfinex.com/api',
     HOME_URL: 'https://staging.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: false,
@@ -25,7 +25,7 @@ const environments = {
   },
   staging: {
     API_URL: 'https://bfx-report-ui.staging.bitfinex.com/api',
-    KEY_URL: 'https://www.staging.bitfinex.com',
+    KEY_URL: 'https://bfx-ui-settings.staging.bitfinex.com/api',
     HOME_URL: 'https://staging.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: false,
@@ -35,7 +35,7 @@ const environments = {
   },
   production: {
     API_URL: 'https://report.bitfinex.com/api',
-    KEY_URL: 'https://www.bitfinex.com',
+    KEY_URL: 'https://setting.bitfinex.com/api',
     HOME_URL: 'https://www.bitfinex.com/t',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: false,
