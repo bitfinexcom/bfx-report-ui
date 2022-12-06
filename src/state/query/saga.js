@@ -5,6 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import queryString from 'query-string'
+import _assign from 'lodash/assign'
 import _includes from 'lodash/includes'
 
 import { LANGUAGES } from 'locales/i18n'
@@ -56,10 +57,15 @@ import { getEmail } from 'state/auth/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import config from 'config'
 
-import { getExportEmail } from './selectors'
 import actions from './actions'
-import { getQueryLimit, NO_QUERY_LIMIT_TARGETS } from './utils'
 import types from './constants'
+import { getExportEmail } from './selectors'
+import {
+  getQueryLimit,
+  NO_TIME_FRAME_TARGETS,
+  NO_QUERY_LIMIT_TARGETS,
+} from './utils'
+
 
 const { showFrameworkMode } = config
 const {
@@ -221,9 +227,11 @@ function formatSymbol(target, symbols) {
 
 function* getOptions({ target }) {
   const options = {}
-  if (!_includes(NO_QUERY_LIMIT_TARGETS, target)) {
+  if (!_includes(NO_TIME_FRAME_TARGETS, target)) {
     const timeFrame = yield select(getTimeFrame)
-    Object.assign(options, timeFrame)
+    _assign(options, timeFrame)
+  }
+  if (!_includes(NO_QUERY_LIMIT_TARGETS, target)) {
     options.limit = getQueryLimit(target)
   }
   options.timezone = yield select(getTimezone)

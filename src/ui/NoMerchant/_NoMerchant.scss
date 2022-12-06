@@ -1,0 +1,31 @@
+.no_merchant {
+  position: relative;
+
+  &-wrapper {
+    width: fit-content;
+    height: fit-content;
+    margin: 180px auto 0 auto;
+    text-align: center;
+
+    svg {
+      display: block;
+      margin: 0 auto 38px auto;
+    }
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .no_merchant {
+    &-wrapper {
+      margin: 262px auto 0 auto;
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .no_merchant {
+    &-wrapper {
+      margin: 40px auto 0 auto;
+    }
+  }
+}

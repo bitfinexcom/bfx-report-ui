@@ -200,6 +200,12 @@ export const NO_QUERY_LIMIT_TARGETS = [
   MENU_WIN_LOSS,
 ]
 
+export const NO_TIME_FRAME_TARGETS = [
+  MENU_DERIVATIVES,
+  MENU_WALLETS,
+  MENU_SNAPSHOTS,
+]
+
 export function isValidTimeStamp(n) {
   return (`${n}`).length === 13
     && (new Date(n)).getTime() === n

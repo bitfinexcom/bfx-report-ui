@@ -12,6 +12,7 @@ import { getAuthData, selectAuth } from 'state/auth/selectors'
 import Authenticator from 'state/auth/Authenticator'
 
 import types from './constants'
+import { setSubAccountLoadingStatus } from './actions'
 
 const getReqCreateSubAccount = ({
   masterAccount,
@@ -49,12 +50,15 @@ export function* createSubAccount({ payload }) {
   const { preparedAccountData, masterAccount } = payload
   const params = { subAccountApiKeys: preparedAccountData, masterAccount }
   try {
+    yield put(setSubAccountLoadingStatus(true))
     const { result, error } = yield call(getReqCreateSubAccount, params)
     if (result) {
+      yield put(setSubAccountLoadingStatus(false))
       yield put(fetchUsers())
     }
 
     if (error) {
+      yield put(setSubAccountLoadingStatus(false))
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'subaccounts.title',
@@ -62,6 +66,7 @@ export function* createSubAccount({ payload }) {
       }))
     }
   } catch (fail) {
+    yield put(setSubAccountLoadingStatus(false))
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'subaccounts.title',
@@ -138,12 +143,15 @@ export function* updateSubAccount({ payload }) {
     if (removedSubUsers.length) {
       params.removingSubUsersByEmails = removedSubUsers.map(subUserEmail => ({ email: subUserEmail }))
     }
+    yield put(setSubAccountLoadingStatus(true))
     const { result, error } = yield call(getReqUpdateSubAccount, params, auth)
     if (result) {
+      yield put(setSubAccountLoadingStatus(false))
       yield put(fetchUsers())
     }
 
     if (error) {
+      yield put(setSubAccountLoadingStatus(false))
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'subaccounts.title',
@@ -151,6 +159,7 @@ export function* updateSubAccount({ payload }) {
       }))
     }
   } catch (fail) {
+    yield put(setSubAccountLoadingStatus(false))
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'subaccounts.title',

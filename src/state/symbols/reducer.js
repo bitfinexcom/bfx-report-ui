@@ -39,7 +39,12 @@ export function symbolsReducer(state = initialState, action) {
           if (id.includes('F0')) {
             symbol = `${symbol} (deriv)`
           }
-          symbolMapping[id] = symbol
+          if (symbol === 'USDt') {
+            symbolMapping.UST = symbol
+          } else {
+            symbolMapping[id] = symbol
+          }
+
           explorersDict[symbol] = explorer
           dict[symbol] = name
           coins.push(symbol)
@@ -50,6 +55,8 @@ export function symbolsReducer(state = initialState, action) {
         dict[id] = name
         coins.push(id)
       })
+
+      const preparedCoins = [...new Set(coins)].sort()
 
       const pairMapping = mapSymbols.reduce((acc, symbol) => {
         const [from, to] = symbol
@@ -66,7 +73,7 @@ export function symbolsReducer(state = initialState, action) {
 
       return {
         ...state,
-        coins: coins.sort(),
+        coins: preparedCoins,
         currencies: dict,
         explorers: explorersDict,
         inactiveCurrencies: formattedInactiveCurrencies,

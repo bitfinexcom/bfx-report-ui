@@ -25,7 +25,7 @@ const getFeePercent = (entry) => {
     val = fee / (execAmount * execPrice)
   }
   if (val) {
-    return `${fixedFloat(Math.abs(val) * 100, 2)}%`
+    return `${fixedFloat(Math.abs(val) * 100, 3)}%`
   }
   return '-'
 }

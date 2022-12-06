@@ -2,6 +2,17 @@
 @import 'SubUsersList/SubUsersList';
 
 .sub-account {
+  .loading-container {
+    display: flex;
+    min-height: 300px;
+    align-items: center;
+    justify-content: center;
+
+    .loading {
+      margin: auto;
+    }
+  }
+
   &-controls {
     margin-bottom: 30px;
 

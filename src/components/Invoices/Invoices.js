@@ -13,6 +13,7 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import TimeRange from 'ui/TimeRange'
+import NoMerchant from 'ui/NoMerchant'
 import Pagination from 'ui/Pagination'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
@@ -52,6 +53,7 @@ class Invoices extends PureComponent {
       id: PropTypes.string.isRequired,
       width: PropTypes.number.isRequired,
     })),
+    dataReceived: PropTypes.bool.isRequired,
     entries: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       amount: PropTypes.number.isRequired,
@@ -68,7 +70,7 @@ class Invoices extends PureComponent {
     })).isRequired,
     existingCoins: PropTypes.arrayOf(PropTypes.string),
     getFullTime: PropTypes.func.isRequired,
-    dataReceived: PropTypes.bool.isRequired,
+    isMerchant: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
@@ -102,6 +104,7 @@ class Invoices extends PureComponent {
       refresh,
       columns,
       timeOffset,
+      isMerchant,
       getFullTime,
       pageLoading,
       columnsWidth,
@@ -121,6 +124,8 @@ class Invoices extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
+    } else if (!isMerchant) {
+      showContent = <NoMerchant />
     } else if (!entries.length) {
       showContent = <NoData />
     } else {

@@ -66,6 +66,10 @@ html {
 .app {
   display: flex;
   flex-direction: row;
+
+  .bp3-overlay-inline .bp3-overlay-backdrop {
+    position: fixed;
+  }
 }
 
 .bitfinex-dataset {

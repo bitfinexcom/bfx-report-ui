@@ -1,21 +1,57 @@
-import React, { PureComponent, Fragment } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 
-import getColumns from './Logins.columns'
-import { propTypes, defaultProps } from './Logins.props'
+import { getColumns } from './Logins.columns'
 
 const TYPE = queryConstants.MENU_LOGINS
 
 class Logins extends PureComponent {
+  static propTypes = {
+    columns: PropTypes.shape({
+      browser: PropTypes.bool,
+      amount: PropTypes.bool,
+      extra: PropTypes.bool,
+      id: PropTypes.bool,
+      ip: PropTypes.bool,
+      mobile: PropTypes.bool,
+      time: PropTypes.bool,
+      version: PropTypes.bool,
+    }),
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+    })),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      mts: PropTypes.number,
+      ip: PropTypes.string,
+      browser: PropTypes.string,
+      version: PropTypes.string,
+      mobile: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+    })),
+    getFullTime: PropTypes.func.isRequired,
+    dataReceived: PropTypes.bool.isRequired,
+    pageLoading: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    timeOffset: PropTypes.string.isRequired,
+  }
+
+  static defaultProps = {
+    columns: {},
+    entries: [],
+    columnsWidth: [],
+  }
+
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -52,22 +88,28 @@ class Logins extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
-          <Pagination loading={pageLoading} target={TYPE} />
-        </Fragment>
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
+        </>
       )
     }
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card
+        elevation={Elevation.ZERO}
+        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      >
         <SectionHeader
-          title='logins.title'
           target={TYPE}
           refresh={refresh}
+          title='logins.title'
         />
         {showContent}
       </Card>
@@ -75,7 +117,4 @@ class Logins extends PureComponent {
   }
 }
 
-Logins.propTypes = propTypes
-Logins.defaultProps = defaultProps
-
-export default withTranslation('translations')(Logins)
+export default Logins

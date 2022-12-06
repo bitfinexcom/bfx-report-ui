@@ -33,8 +33,16 @@ export function updateSubAccount(data) {
   }
 }
 
+export function setSubAccountLoadingStatus(status) {
+  return {
+    type: types.LOADING,
+    payload: status,
+  }
+}
+
 export default {
   addSubAccount,
   removeSubAccount,
   updateSubAccount,
+  setSubAccountLoadingStatus,
 }

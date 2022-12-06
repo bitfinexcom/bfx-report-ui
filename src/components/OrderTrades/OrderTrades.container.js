@@ -1,36 +1,40 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import {
-  fetchOrderTrades,
   refresh,
   setParams,
+  fetchOrderTrades,
 } from 'state/orderTrades/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
-  getDataReceived,
+  getParams,
   getEntries,
   getPageLoading,
-  getParams,
+  getDataReceived,
 } from 'state/orderTrades/selectors'
 
 import OrderTrades from './OrderTrades'
 
 const mapStateToProps = state => ({
+  params: getParams(state),
   entries: getEntries(state),
   getFullTime: getFullTime(state),
-  dataReceived: getDataReceived(state),
-  pageLoading: getPageLoading(state),
-  params: getParams(state),
   timeOffset: getTimeOffset(state),
+  pageLoading: getPageLoading(state),
+  dataReceived: getDataReceived(state),
 })
 
 const mapDispatchToProps = {
-  fetchData: fetchOrderTrades,
   refresh,
   setParams,
+  fetchData: fetchOrderTrades,
 }
 
-const OrderTradesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(OrderTrades))
-
-export default OrderTradesContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+  withRouter,
+)(OrderTrades)
