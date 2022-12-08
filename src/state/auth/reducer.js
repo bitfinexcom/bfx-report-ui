@@ -135,6 +135,7 @@ export function authReducer(state = initialState, action) {
         ...initialState,
         ...getStoredAuth(),
         users: state.users,
+        token: state.token,
       }
     default:
       return state
