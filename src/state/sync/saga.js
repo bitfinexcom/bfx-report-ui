@@ -159,6 +159,7 @@ export function* initSync() {
   const { result: syncProgress } = yield call(fetchSyncProgress)
   if (syncProgress === types.SYNC_NOT_STARTED) {
     yield put(actions.setIsSyncing(false))
+    yield call(startSyncing)
   } else {
     yield put(actions.setIsSyncing(true))
     const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
