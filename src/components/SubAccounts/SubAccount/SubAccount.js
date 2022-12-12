@@ -19,8 +19,8 @@ class SubAccount extends PureComponent {
       isSubAccount: PropTypes.bool,
     }).isRequired,
     addSubAccount: PropTypes.func.isRequired,
-    addMultipleAccsEnabled: PropTypes.bool,
     isSubAccountsLoading: PropTypes.bool,
+    isMultipleAccsSelected: PropTypes.bool,
     masterAccount: PropTypes.string,
     updateSubAccount: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
@@ -34,7 +34,7 @@ class SubAccount extends PureComponent {
   static defaultProps = {
     masterAccount: undefined,
     isSubAccountsLoading: false,
-    addMultipleAccsEnabled: true,
+    isMultipleAccsSelected: false,
   }
 
   state = {
@@ -105,7 +105,7 @@ class SubAccount extends PureComponent {
       authData,
       masterAccount,
       isSubAccountsLoading,
-      addMultipleAccsEnabled,
+      isMultipleAccsSelected,
     } = this.props
     const { accounts, subUsersToRemove } = this.state
     const { email: currentUserEmail, isSubAccount } = authData
@@ -140,9 +140,10 @@ class SubAccount extends PureComponent {
                 accounts={accounts}
                 authData={authData}
                 users={preparedUsers}
-                onChange={this.onSubUsersChange}
+                addMultipleAccsEnabled
                 masterAccount={masterAccount}
-                addMultipleAccsEnabled={addMultipleAccsEnabled}
+                onChange={this.onSubUsersChange}
+                shouldFilterCurrentUser={!isMultipleAccsSelected}
               />
               <Button
                 intent={Intent.PRIMARY}

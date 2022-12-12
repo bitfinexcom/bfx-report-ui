@@ -154,26 +154,29 @@ function* initQueryMode() {
   }
 }
 
-function* initSync() {
+export function* initSync() {
   yield call(initQueryMode)
   const { result: syncProgress } = yield call(fetchSyncProgress)
-
-  const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
-  if (isSyncing) {
-    yield put(actions.setSyncPref({
-      progress: syncProgress,
-      isSyncing: true,
-    }))
-  } else {
+  if (syncProgress === types.SYNC_NOT_STARTED) {
+    yield put(actions.setIsSyncing(false))
     yield call(startSyncing)
+  } else {
+    yield put(actions.setIsSyncing(true))
+    const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
+    if (isSyncing) {
+      yield put(actions.setSyncPref({
+        progress: syncProgress,
+        isSyncing: true,
+      }))
+    } else {
+      yield call(startSyncing)
+    }
+    yield call(getSyncConf)
   }
-
-  yield call(getSyncConf)
 }
 
 function* progressUpdate({ payload }) {
   const { result } = payload
-
   if (result === types.SYNC_INTERRUPTED) {
     yield put(actions.setIsSyncing(false))
   } else {

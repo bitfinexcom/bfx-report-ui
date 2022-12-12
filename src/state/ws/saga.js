@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 
+import { initSync } from 'state/sync/saga'
 import { updateSyncStatus } from 'state/sync/actions'
 import { updateStatus, updateWarningStatus } from 'state/status/actions'
 
@@ -8,8 +9,8 @@ import login from './signIn'
 
 function* reconnect() {
   const wsAuth = yield call(login)
-
   if (wsAuth) {
+    yield call(initSync)
     yield put(updateSyncStatus())
   }
 }
