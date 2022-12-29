@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import {
   Button,
@@ -17,12 +18,15 @@ import TimeRangePreservePref from 'ui/TimeRangePreservePref'
 import TimezonePicker from 'ui/TimezonePicker'
 import ThemeSwitcher from 'ui/ThemeSwitcher'
 
-import { propTypes, defaultProps } from './Preferences.props'
-
 class Preferences extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
+  static propTypes = {
+    setTimezone: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    timezone: PropTypes.string.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    toggleDialog: PropTypes.func.isRequired,
+    removeAccount: PropTypes.func.isRequired,
+  }
 
   render() {
     const {
