@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -111,4 +110,4 @@ class Preferences extends PureComponent {
   }
 }
 
-export default withTranslation('translations')(Preferences)
+export default Preferences
