@@ -11,6 +11,19 @@ export const getUsers = state => getAuth(state).users
 export const getUsersLoaded = state => getAuth(state).usersLoaded
 export const getUsersLoading = state => getAuth(state).usersLoading
 export const getSubAccountsLoading = state => getAuth(state)?.subAccountsLoading ?? false
+export const getRemoveUserAuth = state => {
+  const {
+    email, password, isSubAccount, token,
+  } = getAuth(state)
+
+  return {
+    email,
+    password,
+    isSubAccount,
+    token,
+  }
+}
+
 export const getAuthData = state => {
   const {
     apiKey,
@@ -82,6 +95,7 @@ export function selectAuth(state) {
 export default {
   getAuthData,
   getAuthStatus,
+  getRemoveUserAuth,
   getIsSubAccount,
   getIsLoading,
   getIsShown,
