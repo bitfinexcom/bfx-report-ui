@@ -13,8 +13,7 @@ import _isEmpty from 'lodash/isEmpty'
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-// import Authenticator from 'state/auth/Authenticator'
-import { selectAuth, getAuthData } from 'state/auth/selectors'
+import { selectAuth, getRemoveUserAuth } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
@@ -194,24 +193,26 @@ function* fetchUsers() {
 }
 
 function* removeUser() {
-  const {
-    email, password, isSubAccount, token,
-  } = yield select(getAuthData)
+  try {
+    const auth = yield select(getRemoveUserAuth)
+    const { result, error } = yield call(makeFetchCall, 'removeUser', auth)
 
-  const auth = {
-    email, password, isSubAccount, token,
+    if (result) {
+      yield put(actions.logout())
+      yield put(actions.clearAuth())
+      yield put(actions.fetchUsers())
+      yield put(togglePreferencesDialog())
+    }
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.auth',
+        detail: JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
   }
-
-  const { result, error } = yield call(makeFetchCall, 'removeUser', auth)
-  if (result) {
-    yield put(actions.logout())
-    yield put(actions.clearAuth())
-    yield put(actions.fetchUsers())
-    yield put(togglePreferencesDialog())
-    // yield call(Authenticator.clearData)
-  }
-  console.log('+++result', result)
-  console.log('+++error', error)
 }
 
 function* checkAuth() {
