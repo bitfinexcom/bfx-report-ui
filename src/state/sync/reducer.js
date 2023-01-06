@@ -19,6 +19,7 @@ const initialState = {
   },
   isSyncing: false,
   progress: 0,
+  estimatedSyncTime: {},
 }
 
 export function syncReducer(state = initialState, action) {
@@ -112,6 +113,12 @@ export function syncReducer(state = initialState, action) {
       return {
         ...state,
         progress: payload,
+      }
+    }
+    case types.SET_ESTIMATED_TIME: {
+      return {
+        ...state,
+        estimatedSyncTime: payload,
       }
     }
     default: {
