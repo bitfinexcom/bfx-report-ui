@@ -176,14 +176,14 @@ export function* initSync() {
 }
 
 function* progressUpdate({ payload }) {
-  const { result } = payload
-  if (result === types.SYNC_INTERRUPTED) {
+  const { result: { progress } } = payload
+  if (progress === types.SYNC_INTERRUPTED) {
     yield put(actions.setIsSyncing(false))
   } else {
-    const progress = Number.isInteger(result)
-      ? result
+    const syncProgress = Number.isInteger(progress)
+      ? progress
       : 0
-    yield put(actions.setSyncProgress(progress))
+    yield put(actions.setSyncProgress(syncProgress))
   }
 }
 
