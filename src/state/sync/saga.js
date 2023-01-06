@@ -156,16 +156,16 @@ function* initQueryMode() {
 
 export function* initSync() {
   yield call(initQueryMode)
-  const { result: syncProgress } = yield call(fetchSyncProgress)
-  if (syncProgress === types.SYNC_NOT_STARTED) {
+  const { result: { progress } } = yield call(fetchSyncProgress)
+  if (progress === types.SYNC_NOT_STARTED) {
     yield put(actions.setIsSyncing(false))
     yield call(startSyncing)
   } else {
     yield put(actions.setIsSyncing(true))
-    const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
+    const isSyncing = Number.isInteger(progress) && progress !== 100
     if (isSyncing) {
       yield put(actions.setSyncPref({
-        progress: syncProgress,
+        progress,
         isSyncing: true,
       }))
     } else {
