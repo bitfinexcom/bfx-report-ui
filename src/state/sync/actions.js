@@ -88,6 +88,13 @@ export function setSyncProgress(payload) {
   }
 }
 
+export function setEstimatedTime(payload) {
+  return {
+    type: types.SET_ESTIMATED_TIME,
+    payload,
+  }
+}
+
 /**
  * Create an action to set preferences.
  */
@@ -196,6 +203,7 @@ export default {
   setSyncMode,
   switchSyncMode,
   setSyncProgress,
+  setEstimatedTime,
   setIsSyncing,
   setSyncPref,
   startSyncing,
