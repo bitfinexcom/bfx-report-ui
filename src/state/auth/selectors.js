@@ -11,7 +11,6 @@ export const getUsers = state => getAuth(state).users
 export const getUsersLoaded = state => getAuth(state).usersLoaded
 export const getUsersLoading = state => getAuth(state).usersLoading
 export const getSubAccountsLoading = state => getAuth(state)?.subAccountsLoading ?? false
-
 export const getAuthData = state => {
   const {
     apiKey,
