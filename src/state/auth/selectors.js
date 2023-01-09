@@ -12,13 +12,9 @@ export const getUsersLoaded = state => getAuth(state).usersLoaded
 export const getUsersLoading = state => getAuth(state).usersLoading
 export const getSubAccountsLoading = state => getAuth(state)?.subAccountsLoading ?? false
 export const getRemoveUserAuth = state => {
-  const {
-    email, password, isSubAccount, token,
-  } = getAuth(state)
+  const { isSubAccount, token } = getAuth(state)
 
   return {
-    email,
-    password,
     isSubAccount,
     token,
   }
