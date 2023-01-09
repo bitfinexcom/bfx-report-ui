@@ -13,7 +13,7 @@ import _isEmpty from 'lodash/isEmpty'
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-import { selectAuth, getRemoveUserAuth } from 'state/auth/selectors'
+import { selectAuth } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
@@ -194,11 +194,10 @@ function* fetchUsers() {
 
 function* removeUser() {
   try {
-    const auth = yield select(getRemoveUserAuth)
-    const { result, error } = yield call(makeFetchCall, 'removeUser', auth)
+    const { result, error } = yield call(makeFetchCall, 'removeUser')
 
     if (result) {
-      yield put(actions.logout())
+      yield put(actions.showAuth())
       yield put(actions.clearAuth())
       yield put(actions.fetchUsers())
       yield put(togglePreferencesDialog())
