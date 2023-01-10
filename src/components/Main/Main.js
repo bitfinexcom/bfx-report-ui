@@ -39,6 +39,7 @@ import Tickers from 'components/Tickers'
 import TradedVolume from 'components/TradedVolume'
 import Trades from 'components/Trades'
 import Wallets from 'components/Wallets'
+import WeightedAverages from 'components/WeightedAverages'
 import ExportDialog from 'components/ExportDialog'
 import ExportSuccessDialog from 'components/ExportSuccessDialog'
 import Preferences from 'components/Preferences'
@@ -275,6 +276,12 @@ class Main extends PureComponent {
                   path={getPath(MENU_ACCOUNT_BALANCE)}
                   component={AccountBalance}
                   key={MENU_ACCOUNT_BALANCE}
+                />,
+                <Route
+                  exact
+                  path={getPath(MENU_WEIGHTED_AVERAGES)}
+                  component={WeightedAverages}
+                  key={MENU_WEIGHTED_AVERAGES}
                 />,
                 <Route
                   exact
