@@ -589,6 +589,9 @@
       "tooltip": "Select a time to query the wallets snapshot"
     }
   },
+  "weightedaverages": {
+    "title": "Weighted Averages"
+  },
   "withdrawals": {
     "title": "Withdrawals"
   }
