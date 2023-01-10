@@ -6,18 +6,6 @@ import _isNull from 'lodash/isNull'
 import Icon from 'icons'
 import { getFormattedDate } from 'utils/dates'
 
-export const getSyncTitle = (isSyncing) => (
-  isSyncing
-    ? 'sync.stop-sync'
-    : 'sync.start'
-)
-
-export const getSyncTooltipMessage = (isSyncing) => (
-  isSyncing
-    ? 'sync.insync_tooltip'
-    : 'sync.start_sync_tooltip'
-)
-
 const getEstimatedSyncTime = ({
   leftTime = null,
   spentTime = null,
@@ -41,6 +29,12 @@ const getEstimatedSyncTime = ({
     left,
   }
 }
+
+export const getSyncTitle = (isSyncing) => (
+  isSyncing
+    ? 'sync.stop-sync'
+    : 'sync.start'
+)
 
 export const getSyncTooltipContent = (t, isSyncing, estimatedSyncTime) => {
   const { start, spent, left } = getEstimatedSyncTime(estimatedSyncTime, t)
@@ -84,6 +78,5 @@ export const getSyncIcon = (isSyncing, syncProgress) => {
 export default {
   getSyncIcon,
   getSyncTitle,
-  getSyncTooltipMessage,
   getSyncTooltipContent,
 }
