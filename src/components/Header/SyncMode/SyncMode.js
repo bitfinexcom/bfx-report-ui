@@ -10,7 +10,7 @@ import config from 'config'
 import {
   getSyncIcon,
   getSyncTitle,
-  getSyncTooltipMessage,
+  getSyncTooltipContent,
 } from './SyncMode.helpers'
 
 const SyncMode = ({
@@ -19,6 +19,7 @@ const SyncMode = ({
   stopSyncNow,
   syncProgress,
   startSyncNow,
+  estimatedSyncTime,
 }) => {
   const handleSync = () => {
     if (isSyncing) {
@@ -38,8 +39,8 @@ const SyncMode = ({
     <>
       <Tooltip
         className='sync-mode'
-        content={t(getSyncTooltipMessage(isSyncing))}
         position={Position.BOTTOM}
+        content={getSyncTooltipContent(t, isSyncing, estimatedSyncTime)}
       >
         <div className='sync-mode-wrapper' onClick={handleSync}>
           <div className='sync-mode-icon-wrapper'>
@@ -60,11 +61,16 @@ SyncMode.propTypes = {
   startSyncNow: PropTypes.func,
   isSyncing: PropTypes.bool.isRequired,
   syncProgress: PropTypes.number.isRequired,
+  estimatedSyncTime: PropTypes.shape({
+    leftTime: PropTypes.number,
+    spentTime: PropTypes.number,
+    syncStartedAt: PropTypes.number,
+  }).isRequired,
 }
 
 SyncMode.defaultProps = {
-  startSyncNow: () => {},
   stopSyncNow: () => {},
+  startSyncNow: () => {},
 }
 
 export default memo(SyncMode)
