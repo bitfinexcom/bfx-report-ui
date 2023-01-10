@@ -41,6 +41,7 @@ const {
   MENU_TRADED_VOLUME,
   MENU_TRADES,
   MENU_WALLETS,
+  MENU_WEIGHTED_AVERAGES,
   MENU_WIN_LOSS,
 } = queryType
 
@@ -170,6 +171,7 @@ const PUBLIC_TARGETS = [
 const FRAMEWORK = config.showFrameworkMode
   ? [
     MENU_ACCOUNT_BALANCE,
+    MENU_WEIGHTED_AVERAGES,
     MENU_LOAN_REPORT,
     MENU_TRADED_VOLUME,
     MENU_FEES_REPORT,
@@ -197,6 +199,7 @@ export const NO_QUERY_LIMIT_TARGETS = [
   MENU_LOAN_REPORT,
   MENU_TRADED_VOLUME,
   MENU_FEES_REPORT,
+  MENU_WEIGHTED_AVERAGES,
   MENU_WIN_LOSS,
 ]
 
@@ -243,6 +246,11 @@ const MAPPING = {
     icon: Icons.DERIVATIVES,
     filterType: FILTER_PAIR,
     path: '/derivatives',
+  },
+  [MENU_WEIGHTED_AVERAGES]: {
+    icon: Icons.NOTEBOOK,
+    filterType: FILTER_PAIR,
+    path: '/weighted_averages',
   },
   [MENU_FCREDIT]: {
     icon: Icons.NOTEBOOK,
