@@ -1,15 +1,15 @@
-export const getDerivatives = state => state.derivatives
+export const getWeightedAverages = state => state.weightedAverages
 
-export const getDataReceived = state => getDerivatives(state).dataReceived
-export const getEntries = state => getDerivatives(state).entries
-export const getExistingPairs = state => getDerivatives(state).existingPairs
-export const getPageLoading = state => getDerivatives(state).pageLoading
-export const getTargetPairs = state => getDerivatives(state).targetPairs
+export const getDataReceived = state => getWeightedAverages(state)?.dataReceived
+export const getEntries = state => getWeightedAverages(state)?.entries
+export const getExistingPairs = state => getWeightedAverages(state)?.existingPairs
+export const getPageLoading = state => getWeightedAverages(state)?.pageLoading
+export const getTargetPairs = state => getWeightedAverages(state)?.targetPairs
 
 export default {
   getDataReceived,
   getEntries,
   getExistingPairs,
   getPageLoading,
-  getDerivatives,
+  getWeightedAverages,
 }
