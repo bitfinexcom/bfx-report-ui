@@ -17,7 +17,7 @@ const getEstimatedSyncTime = ({
 
   const spent = _isNull(spentTime)
     ? t('sync.estimated_time.estimating')
-    : ` ${_round(spentTime)} ms`
+    : `${_round(spentTime)} ms`
 
   const left = _isNull(leftTime)
     ? t('sync.estimated_time.estimating')
