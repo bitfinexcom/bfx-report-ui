@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import memoizeOne from 'memoize-one'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import DataTable from 'ui/DataTable'
@@ -70,12 +69,6 @@ class WeightedAverages extends PureComponent {
     targetPairs: [],
   }
 
-  constructor() {
-    super()
-
-    this.getFilteredPairs = memoizeOne(this.getFilteredPairs)
-  }
-
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -83,8 +76,6 @@ class WeightedAverages extends PureComponent {
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, TYPE)
   }
-
-  getFilteredPairs = pairs => pairs.filter(pair => pair.includes('F0') || pair.includes('PERP'))
 
   togglePair = pair => togglePair(TYPE, this.props, pair)
 
@@ -106,6 +97,7 @@ class WeightedAverages extends PureComponent {
       targetPairs,
       timeOffset,
     } = this.props
+
     const numRows = entries.length
     const tableColumns = getColumns({
       columnsWidth,
@@ -147,11 +139,11 @@ class WeightedAverages extends PureComponent {
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
               <MultiPairSelector
+                pairs={pairs}
                 currentFilters={targetPairs}
                 togglePair={this.togglePair}
                 existingPairs={existingPairs}
-                pairs={this.getFilteredPairs(pairs)}
-                inactivePairs={this.getFilteredPairs(inactivePairs)}
+                inactivePairs={inactivePairs}
               />
             </SectionHeaderItem>
             <ClearFiltersButton onClick={this.clearPairs} />
