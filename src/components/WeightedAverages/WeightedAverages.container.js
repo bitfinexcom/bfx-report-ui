@@ -10,7 +10,7 @@ import {
   removeTargetPair,
   clearTargetPairs,
   fetchDerivatives,
-} from 'state/derivatives/actions'
+} from 'state/weightedAverages/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getInactivePairs, getPairs } from 'state/symbols/selectors'
 import {
@@ -19,7 +19,7 @@ import {
   getTargetPairs,
   getDataReceived,
   getExistingPairs,
-} from 'state/derivatives/selectors'
+} from 'state/weightedAverages/selectors'
 import { getColumns } from 'state/filters/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
