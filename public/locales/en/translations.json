@@ -361,6 +361,7 @@
     "milliseconds": "Display Milliseconds",
     "table_scroll": "Table Scroll",
     "preserve_timeframe": "Preserve Timeframe",
+    "remove_account": "Remove Account",
     "sync": {
       "add-filter": "Add Filter",
       "add-pair": "Add Pair",

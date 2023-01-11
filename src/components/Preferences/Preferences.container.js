@@ -1,5 +1,8 @@
+import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withTranslation } from 'react-i18next'
 
+import { removeUser } from 'state/auth/actions'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
 import { togglePreferencesDialog } from 'state/ui/actions'
@@ -14,9 +17,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setTimezone,
+  removeAccount: removeUser,
   toggleDialog: togglePreferencesDialog,
 }
 
-const PreferencesContainer = connect(mapStateToProps, mapDispatchToProps)(Preferences)
-
-export default PreferencesContainer
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withTranslation('translations'),
+)(Preferences)

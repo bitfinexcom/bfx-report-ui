@@ -20,6 +20,12 @@ export function addUser(payload) {
   }
 }
 
+export function removeUser() {
+  return {
+    type: types.REMOVE_USER,
+  }
+}
+
 /**
  * Create an action to fetch users.
  */
@@ -145,6 +151,7 @@ export function updateAuthStatus(result) {
 export default {
   checkAuth,
   addUser,
+  removeUser,
   fetchUsers,
   logout,
   recoverPassword,

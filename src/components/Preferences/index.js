@@ -1,3 +1,1 @@
-import Preferences from './Preferences.container'
-
-export default Preferences
+export { default } from './Preferences.container'
