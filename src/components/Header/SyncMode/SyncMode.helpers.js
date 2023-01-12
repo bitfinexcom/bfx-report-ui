@@ -1,10 +1,9 @@
 import React from 'react'
 import { Spinner } from '@blueprintjs/core'
-import _round from 'lodash/round'
 import _isNull from 'lodash/isNull'
 
 import Icon from 'icons'
-import { getFormattedDate } from 'utils/dates'
+import { getFormattedTime } from 'utils/dates'
 
 const getEstimatedSyncTime = ({
   leftTime = null,
@@ -13,15 +12,15 @@ const getEstimatedSyncTime = ({
 }, t) => {
   const start = _isNull(syncStartedAt)
     ? t('sync.estimated_time.estimating')
-    : getFormattedDate(syncStartedAt)
+    : getFormattedTime(syncStartedAt, 'MMMM DD, YYYY HH:mm')
 
   const spent = _isNull(spentTime)
     ? t('sync.estimated_time.estimating')
-    : `${_round(spentTime)} ms`
+    : getFormattedTime(spentTime, 'mm:ss')
 
   const left = _isNull(leftTime)
     ? t('sync.estimated_time.estimating')
-    : `${_round(leftTime)} ms`
+    : getFormattedTime(leftTime, 'mm:ss')
 
   return {
     start,
