@@ -68,6 +68,7 @@ function* stopSyncNow() {
   const { result, error } = yield call(syncNowStop)
   if (result) {
     yield put(actions.setIsSyncing(false))
+    yield put(actions.setEstimatedTime({}))
     yield put(updateStatus({ id: 'sync.logout' }))
   }
   if (error) {
@@ -80,6 +81,7 @@ function* stopSyncing() {
   const { result, error } = yield call(disableSyncMode)
   if (result) {
     yield put(actions.setIsSyncing(false))
+    yield put(actions.setEstimatedTime({}))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
   }
   if (error) {
