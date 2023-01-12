@@ -12,11 +12,11 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
+import TimeRange from 'ui/TimeRange'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
-import DerivativesSyncPref from 'ui/DerivativesSyncPref'
-import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
 import queryConstants from 'state/query/constants'
 import {
   checkInit,
@@ -98,6 +98,8 @@ class WeightedAverages extends PureComponent {
       timeOffset,
     } = this.props
 
+    console.log('+++WA props', this.props)
+
     const numRows = entries.length
     const tableColumns = getColumns({
       columnsWidth,
@@ -106,6 +108,10 @@ class WeightedAverages extends PureComponent {
       t,
       timeOffset,
     }).filter(({ id }) => columns[id])
+
+    // console.log('++entries', entries)
+    // console.log('++tableColumns', tableColumns)
+    // console.log('++columnsWidth', columnsWidth)
 
     let showContent
     if (!dataReceived && pageLoading) {
@@ -133,6 +139,7 @@ class WeightedAverages extends PureComponent {
           <SectionHeaderTitle>
             {t('weightedaverages.title')}
           </SectionHeaderTitle>
+          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
@@ -149,7 +156,6 @@ class WeightedAverages extends PureComponent {
             <ClearFiltersButton onClick={this.clearPairs} />
             <ColumnsFilter target={TYPE} />
             <RefreshButton onClick={refresh} />
-            <DerivativesSyncPref />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
