@@ -43,6 +43,7 @@ const {
   MENU_TRADED_VOLUME,
   MENU_TRADES,
   MENU_WIN_LOSS,
+  MENU_WEIGHTED_AVERAGES,
 } = queryType
 
 export const getAuthFromStore = () => {
@@ -201,6 +202,7 @@ export const checkInit = (props, type) => {
     case MENU_POSITIONS:
     case MENU_TICKERS:
     case MENU_DERIVATIVES:
+    case MENU_WEIGHTED_AVERAGES:
     case MENU_TRADED_VOLUME: {
       if (!dataReceived && !pageLoading) {
         const pairs = (match.params && match.params.pair) || ''
