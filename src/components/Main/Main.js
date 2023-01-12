@@ -279,7 +279,7 @@ class Main extends PureComponent {
                 />,
                 <Route
                   exact
-                  path={getPath(MENU_WEIGHTED_AVERAGES)}
+                  path={PATHS.MENU_WEIGHTED_AVERAGES}
                   component={WeightedAverages}
                   key={MENU_WEIGHTED_AVERAGES}
                 />,
