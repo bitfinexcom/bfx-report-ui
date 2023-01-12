@@ -27,7 +27,7 @@ import {
 
 import { getColumns } from './WeightedAverages.columns'
 
-const TYPE = queryConstants.MENU_DERIVATIVES
+const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
 
 class WeightedAverages extends PureComponent {
   static propTypes = {
