@@ -137,6 +137,7 @@ export const FILTERS_WHITELIST = [
   MENU_DERIVATIVES,
   MENU_LOGINS,
   MENU_CHANGE_LOGS,
+  MENU_WEIGHTED_AVERAGES,
 ]
 
 // Should keep the order, which used in ExportTargetsSelector
