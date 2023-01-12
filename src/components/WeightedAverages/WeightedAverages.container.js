@@ -27,8 +27,8 @@ import queryConstants from 'state/query/constants'
 import WeightedAverages from './WeightedAverages'
 
 const mapStateToProps = state => ({
-  columns: getColumns(state, queryConstants.MENU_DERIVATIVES),
-  columnsWidth: getColumnsWidth(state, queryConstants.MENU_DERIVATIVES),
+  columns: getColumns(state, queryConstants.MENU_WEIGHTED_AVERAGES),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_WEIGHTED_AVERAGES),
   dataReceived: getDataReceived(state),
   entries: getEntries(state),
   existingPairs: getExistingPairs(state),
