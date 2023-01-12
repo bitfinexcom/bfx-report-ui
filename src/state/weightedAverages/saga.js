@@ -15,7 +15,7 @@ import types from './constants'
 import actions from './actions'
 import { getTargetPairs } from './selectors'
 
-const TYPE = queryTypes.MENU_DERIVATIVES
+const TYPE = queryTypes.MENU_WEIGHTED_AVERAGES
 
 function getReqDerivatives({ targetPairs, filter }) {
   const params = { filter }
