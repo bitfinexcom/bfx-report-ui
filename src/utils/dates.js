@@ -12,5 +12,6 @@ export const getFormattedTime = (time, format) => moment(time).format(format)
 
 export default {
   getFormattedDate,
+  getFormattedTime,
   makeDate,
 }
