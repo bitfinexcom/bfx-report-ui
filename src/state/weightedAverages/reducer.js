@@ -26,37 +26,33 @@ export function weightedAveragesReducer(state = initialState, action) {
     case types.FETCH_WEIGHTED_AVERAGES:
       return fetch(state)
     case types.UPDATE_WEIGHTED_AVERAGES: {
-      if (!_get(payload, ['data', 'res'])) {
+      if (!_get(payload, ['data'])) {
         return {
           ...state,
           dataReceived: true,
           pageLoading: false,
         }
       }
-      const { data: { res } } = payload
-      const entries = res.map((entry) => {
+      const { data } = payload
+      const entries = data.map((entry) => {
         const {
-          clampMin,
-          clampMax,
-          key,
-          timestamp,
-          price,
-          priceSpot,
-          fundBal,
-          fundingAccrued,
-          fundingStep,
+          buyingAmount,
+          buyingWeightedPrice,
+          cumulativeAmount,
+          cumulativeWeightedPrice,
+          sellingAmount,
+          sellingWeightedPrice,
+          symbol,
         } = entry
 
         return {
-          clampMin,
-          clampMax,
-          pair: mapPair(formatPair(key)),
-          timestamp,
-          price,
-          priceSpot,
-          fundBal,
-          fundingAccrued,
-          fundingStep,
+          buyingAmount,
+          buyingWeightedPrice,
+          cumulativeAmount,
+          cumulativeWeightedPrice,
+          sellingAmount,
+          sellingWeightedPrice,
+          pair: mapPair(formatPair(symbol)),
         }
       })
 
