@@ -9,7 +9,7 @@ import {
   setTargetPairs,
   removeTargetPair,
   clearTargetPairs,
-  fetchDerivatives,
+  fetchWeightedAwerages,
 } from 'state/weightedAverages/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getInactivePairs, getPairs } from 'state/symbols/selectors'
@@ -43,7 +43,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   addTargetPair,
   clearTargetPairs,
-  fetchData: fetchDerivatives,
+  fetchData: fetchWeightedAwerages,
   refresh,
   removeTargetPair,
   setTargetPairs,

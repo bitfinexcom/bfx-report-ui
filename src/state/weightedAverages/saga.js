@@ -43,7 +43,7 @@ function* fetchWeightedAverages() {
 
     console.log('++result', result)
 
-    yield put(actions.updateDerivatives(result))
+    yield put(actions.updateWeightedAwerages(result))
 
     if (error) {
       yield put(actions.fetchFail({

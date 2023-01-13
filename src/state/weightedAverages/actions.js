@@ -3,9 +3,9 @@ import types from './constants'
 /**
  * Create an action to fetch derivatives status data.
  */
-export function fetchDerivatives() {
+export function fetchWeightedAwerages() {
   return {
-    type: types.FETCH_DERIVATIVES,
+    type: types.FETCH_WEIGHTED_AVERAGES,
   }
 }
 
@@ -33,9 +33,9 @@ export function refresh() {
  * Create an action to update derivatives.
  * @param {Object[]} data
  */
-export function updateDerivatives(data) {
+export function updateWeightedAwerages(data) {
   return {
-    type: types.UPDATE_DERIVATIVES,
+    type: types.UPDATE_WEIGHTED_AVERAGES,
     payload: {
       data,
     },
@@ -85,11 +85,11 @@ export function clearTargetPairs() {
 }
 
 export default {
-  fetchDerivatives,
+  fetchWeightedAwerages,
   clearTargetPairs,
   fetchFail,
   refresh,
-  updateDerivatives,
+  updateWeightedAwerages,
   setTargetPairs,
   addTargetPair,
   removeTargetPair,
