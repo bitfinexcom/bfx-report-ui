@@ -23,9 +23,9 @@ const initialState = {
 export function derivativesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
-    case types.FETCH_DERIVATIVES:
+    case types.FETCH_WEIGHTED_AVERAGES:
       return fetch(state)
-    case types.UPDATE_DERIVATIVES: {
+    case types.UPDATE_WEIGHTED_AVERAGES: {
       if (!_get(payload, ['data', 'res'])) {
         return {
           ...state,
