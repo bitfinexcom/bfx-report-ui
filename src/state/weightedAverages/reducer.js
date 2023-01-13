@@ -36,23 +36,23 @@ export function weightedAveragesReducer(state = initialState, action) {
       const { data } = payload
       const entries = data.map((entry) => {
         const {
-          buyingAmount,
-          buyingWeightedPrice,
-          cumulativeAmount,
-          cumulativeWeightedPrice,
-          sellingAmount,
-          sellingWeightedPrice,
           symbol,
+          buyingWeightedPrice,
+          buyingAmount,
+          sellingWeightedPrice,
+          sellingAmount,
+          cumulativeWeightedPrice,
+          cumulativeAmount,
         } = entry
 
         return {
-          buyingAmount,
-          buyingWeightedPrice,
-          cumulativeAmount,
-          cumulativeWeightedPrice,
-          sellingAmount,
-          sellingWeightedPrice,
           pair: mapPair(formatPair(symbol)),
+          buyingWeightedPrice,
+          buyingAmount,
+          sellingWeightedPrice,
+          sellingAmount,
+          cumulativeWeightedPrice,
+          cumulativeAmount,
         }
       })
 
