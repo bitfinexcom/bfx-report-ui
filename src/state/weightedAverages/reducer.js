@@ -20,7 +20,7 @@ const initialState = {
   ...basePairState,
 }
 
-export function derivativesReducer(state = initialState, action) {
+export function weightedAveragesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.FETCH_WEIGHTED_AVERAGES:
@@ -86,4 +86,4 @@ export function derivativesReducer(state = initialState, action) {
   }
 }
 
-export default derivativesReducer
+export default weightedAveragesReducer
