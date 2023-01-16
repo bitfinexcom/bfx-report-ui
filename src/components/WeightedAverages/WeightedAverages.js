@@ -13,7 +13,6 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
-import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
@@ -32,15 +31,13 @@ const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
 class WeightedAverages extends PureComponent {
   static propTypes = {
     columns: PropTypes.shape({
-      clampMax: PropTypes.bool,
-      clampMin: PropTypes.bool,
-      fundBal: PropTypes.bool,
-      fundingAccrued: PropTypes.bool,
-      fundingStep: PropTypes.bool,
       pair: PropTypes.bool,
-      price: PropTypes.bool,
-      priceSpot: PropTypes.bool,
-      timestamp: PropTypes.bool,
+      buyingWeightedPrice: PropTypes.bool,
+      buyingAmount: PropTypes.bool,
+      sellingWeightedPrice: PropTypes.bool,
+      sellingAmount: PropTypes.bool,
+      cumulativeWeightedPrice: PropTypes.bool,
+      cumulativeAmount: PropTypes.bool,
     }),
     columnsWidth: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,
@@ -154,7 +151,6 @@ class WeightedAverages extends PureComponent {
               />
             </SectionHeaderItem>
             <ClearFiltersButton onClick={this.clearPairs} />
-            <ColumnsFilter target={TYPE} />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
