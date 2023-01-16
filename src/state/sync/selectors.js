@@ -4,6 +4,7 @@ const getSyncConf = state => getSync(state).config || {}
 export const getSyncMode = state => getSync(state).syncMode || false
 export const getSyncProgress = state => getSync(state).progress || 0
 export const getIsSyncing = state => getSync(state).isSyncing || false
+export const getEstimatedSyncTime = state => getSync(state)?.estimatedSyncTime ?? {}
 
 export const getPublicTradesPref = state => getSyncConf(state).publicTradesConf || {}
 export const getPublicTradesStartTime = state => getPublicTradesPref(state).startTime
@@ -22,7 +23,9 @@ export const getStatusMessagesConf = state => getSyncConf(state).statusMessagesC
 
 export default {
   getSyncMode,
+  getSyncProgress,
   getIsSyncing,
+  getEstimatedSyncTime,
   getPublicTradesPref,
   getPublicTradesStartTime,
   getPublicTradesPairs,

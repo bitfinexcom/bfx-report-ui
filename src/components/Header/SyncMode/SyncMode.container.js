@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
 import { startSyncNow, stopSyncNow } from 'state/sync/actions'
-import { getSyncProgress, getIsSyncing } from 'state/sync/selectors'
+import { getSyncProgress, getIsSyncing, getEstimatedSyncTime } from 'state/sync/selectors'
 
 import SyncMode from './SyncMode'
 
 const mapStateToProps = state => ({
   isSyncing: getIsSyncing(state),
   syncProgress: getSyncProgress(state),
+  estimatedSyncTime: getEstimatedSyncTime(state),
 })
 
 const mapDispatchToProps = {
