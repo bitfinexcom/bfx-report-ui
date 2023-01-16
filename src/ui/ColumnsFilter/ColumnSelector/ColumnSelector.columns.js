@@ -228,14 +228,12 @@ const SECTION_COLUMNS = {
 
   [MENU_WEIGHTED_AVERAGES]: [
     { id: 'pair', name: 'pair' },
-    { id: 'price', name: 'priceDeriv', type: NUMBER, filter: true },
-    { id: 'priceSpot', name: 'priceSpot', type: NUMBER, filter: true },
-    { id: 'fundBal', name: 'fundBalance', type: NUMBER, filter: true },
-    { id: 'fundingAccrued', name: 'fundingAccrued', type: NUMBER, filter: true },
-    { id: 'fundingStep', name: 'fundingStep', type: NUMBER, filter: true },
-    { id: 'timestamp', name: 'updated', type: DATE, filter: true, hidden: true },
-    { id: 'clampMin', name: 'clampMin', type: NUMBER, filter: true },
-    { id: 'clampMax', name: 'clampMax', type: NUMBER, filter: true },
+    { id: 'buyingWeightedPrice', name: 'buyingWeightedPrice', type: NUMBER },
+    { id: 'buyingAmount', name: 'buyingAmount', type: NUMBER },
+    { id: 'sellingWeightedPrice', name: 'sellingWeightedPrice', type: NUMBER },
+    { id: 'sellingAmount', name: 'sellingAmount', type: NUMBER },
+    { id: 'cumulativeWeightedPrice', name: 'cumulativeWeightedPrice', type: NUMBER },
+    { id: 'cumulativeAmount', name: 'cumulativeAmount', type: NUMBER },
   ],
 
   [MENU_LOGINS]: [
