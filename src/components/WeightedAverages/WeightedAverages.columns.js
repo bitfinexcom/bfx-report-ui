@@ -1,17 +1,11 @@
 
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
-import { formatAmount, fixedFloat } from 'ui/utils'
 import { getColumnWidth } from 'utils/columns'
+import { formatAmount, fixedFloat } from 'ui/utils'
 
 export const getColumns = ({
-  t,
-  timeOffset,
-  getFullTime,
   filteredData,
   columnsWidth,
 }) => [
@@ -30,12 +24,12 @@ export const getColumns = ({
     copyText: rowIndex => filteredData[rowIndex].pair,
   },
   {
-    id: 'price',
-    name: 'column.priceDeriv',
-    width: getColumnWidth('price', columnsWidth),
+    id: 'buyingWeightedPrice',
+    name: 'column.buyingWeightedPrice',
+    width: getColumnWidth('buyingWeightedPrice', columnsWidth),
     renderer: (rowIndex) => {
-      const { price } = filteredData[rowIndex]
-      const fixedPrice = fixedFloat(price)
+      const { buyingWeightedPrice } = filteredData[rowIndex]
+      const fixedPrice = fixedFloat(buyingWeightedPrice)
       return (
         <Cell
           className='bitfinex-text-align-right'
@@ -46,15 +40,34 @@ export const getColumns = ({
       )
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].price),
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].buyingWeightedPrice),
   },
   {
-    id: 'priceSpot',
-    name: 'column.priceSpot',
-    width: getColumnWidth('priceSpot', columnsWidth),
+    id: 'buyingAmount',
+    name: 'column.buyingAmount',
+    width: getColumnWidth('buyingAmount', columnsWidth),
     renderer: (rowIndex) => {
-      const { priceSpot } = filteredData[rowIndex]
-      const fixedPrice = fixedFloat(priceSpot)
+      const { buyingAmount } = filteredData[rowIndex]
+      const tooltip = fixedFloat(buyingAmount)
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={tooltip}
+        >
+          {formatAmount(buyingAmount)}
+        </Cell>
+      )
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].buyingAmount),
+  },
+  {
+    id: 'sellingWeightedPrice',
+    name: 'column.sellingWeightedPrice',
+    width: getColumnWidth('sellingWeightedPrice', columnsWidth),
+    renderer: (rowIndex) => {
+      const { sellingWeightedPrice } = filteredData[rowIndex]
+      const fixedPrice = fixedFloat(sellingWeightedPrice)
       return (
         <Cell
           className='bitfinex-text-align-right'
@@ -65,111 +78,63 @@ export const getColumns = ({
       )
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].priceSpot),
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].sellingWeightedPrice),
   },
   {
-    id: 'fundBal',
-    name: 'column.fundBalance',
-    width: getColumnWidth('fundBal', columnsWidth),
+    id: 'sellingAmount',
+    name: 'column.sellingAmount',
+    width: getColumnWidth('sellingAmount', columnsWidth),
     renderer: (rowIndex) => {
-      const { fundBal } = filteredData[rowIndex]
-      const fixedBalance = fixedFloat(fundBal)
+      const { sellingAmount } = filteredData[rowIndex]
+      const tooltip = fixedFloat(sellingAmount)
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedBalance}
+          tooltip={tooltip}
         >
-          {fixedBalance}
+          {formatAmount(sellingAmount)}
         </Cell>
       )
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].fundBal),
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].sellingAmount),
   },
   {
-    id: 'fundingAccrued',
-    name: 'column.fundingAccrued',
-    width: getColumnWidth('fundingAccrued', columnsWidth),
+    id: 'cumulativeWeightedPrice',
+    name: 'column.cumulativeWeightedPrice',
+    width: getColumnWidth('cumulativeWeightedPrice', columnsWidth),
     renderer: (rowIndex) => {
-      const { fundingAccrued } = filteredData[rowIndex]
-      const fixedFunding = fixedFloat(fundingAccrued)
+      const { cumulativeWeightedPrice } = filteredData[rowIndex]
+      const fixedPrice = fixedFloat(cumulativeWeightedPrice)
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedFunding}
+          tooltip={fixedPrice}
         >
-          {formatAmount(fundingAccrued)}
+          {fixedPrice}
         </Cell>
       )
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].fundingAccrued),
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].cumulativeWeightedPrice),
   },
   {
-    id: 'fundingStep',
-    name: 'column.fundingStep',
-    width: getColumnWidth('fundingStep', columnsWidth),
+    id: 'cumulativeAmount',
+    name: 'column.cumulativeAmount',
+    width: getColumnWidth('cumulativeAmount', columnsWidth),
     renderer: (rowIndex) => {
-      const { fundingStep } = filteredData[rowIndex]
+      const { cumulativeAmount } = filteredData[rowIndex]
+      const tooltip = fixedFloat(cumulativeAmount)
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fundingStep}
+          tooltip={tooltip}
         >
-          {fundingStep}
+          {formatAmount(cumulativeAmount)}
         </Cell>
       )
     },
-    copyText: rowIndex => filteredData[rowIndex].fundingStep,
-  },
-  {
-    id: 'timestamp',
-    nameStr: `${t('column.updated')} (${timeOffset})`,
-    width: getColumnWidth('timestamp', columnsWidth),
-    renderer: (rowIndex) => {
-      const timestamp = getFullTime(filteredData[rowIndex].timestamp)
-      return (
-        <Cell tooltip={timestamp}>
-          <TruncatedFormat>
-            {timestamp}
-          </TruncatedFormat>
-        </Cell>
-      )
-    },
-    copyText: rowIndex => getFullTime(filteredData[rowIndex].timestamp),
-  },
-  {
-    id: 'clampMin',
-    name: 'column.clampMin',
-    width: getColumnWidth('clampMin', columnsWidth),
-    renderer: (rowIndex) => {
-      const { clampMin } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={clampMin}
-        >
-          {clampMin}
-        </Cell>
-      )
-    },
-    copyText: rowIndex => filteredData[rowIndex].clampMin,
-  },
-  {
-    id: 'clampMax',
-    name: 'column.clampMax',
-    width: getColumnWidth('clampMax', columnsWidth),
-    renderer: (rowIndex) => {
-      const { clampMax } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={clampMax}
-        >
-          {clampMax}
-        </Cell>
-      )
-    },
-    copyText: rowIndex => filteredData[rowIndex].clampMax,
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].cumulativeAmount),
   },
 ]
