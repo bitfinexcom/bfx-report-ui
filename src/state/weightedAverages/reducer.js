@@ -3,6 +3,8 @@ import _get from 'lodash/get'
 import _sortBy from 'lodash/sortBy'
 
 import authTypes from 'state/auth/constants'
+import queryTypes from 'state/query/constants'
+import timeRangeTypes from 'state/timeRange/constants'
 import {
   addPair,
   basePairState,
@@ -11,6 +13,7 @@ import {
   fetchFail,
   removePair,
   setPairs,
+  setTimeRange,
 } from 'state/reducers.helper'
 import { formatPair, mapPair } from 'state/symbols/utils'
 
@@ -19,6 +22,8 @@ import types from './constants'
 const initialState = {
   ...basePairState,
 }
+
+const TYPE = queryTypes.MENU_TRADES
 
 export function weightedAveragesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
@@ -73,6 +78,8 @@ export function weightedAveragesReducer(state = initialState, action) {
       return setPairs(state, payload, initialState)
     case types.CLEAR_PAIRS:
       return clearPairs(state, initialState)
+    case timeRangeTypes.SET_TIME_RANGE:
+      return setTimeRange(TYPE, state, initialState)
     case types.REFRESH:
     case authTypes.LOGOUT:
       return initialState
