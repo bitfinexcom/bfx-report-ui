@@ -11,7 +11,6 @@ import {
   clearTargetPairs,
   fetchWeightedAwerages,
 } from 'state/weightedAverages/actions'
-import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getInactivePairs, getPairs } from 'state/symbols/selectors'
 import {
   getEntries,
@@ -27,26 +26,24 @@ import queryConstants from 'state/query/constants'
 import WeightedAverages from './WeightedAverages'
 
 const mapStateToProps = state => ({
-  columns: getColumns(state, queryConstants.MENU_WEIGHTED_AVERAGES),
-  columnsWidth: getColumnsWidth(state, queryConstants.MENU_WEIGHTED_AVERAGES),
-  dataReceived: getDataReceived(state),
-  entries: getEntries(state),
-  existingPairs: getExistingPairs(state),
-  getFullTime: getFullTime(state),
-  inactivePairs: getInactivePairs(state),
   pairs: getPairs(state),
+  entries: getEntries(state),
   pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
-  timeOffset: getTimeOffset(state),
+  dataReceived: getDataReceived(state),
+  existingPairs: getExistingPairs(state),
+  inactivePairs: getInactivePairs(state),
+  columns: getColumns(state, queryConstants.MENU_WEIGHTED_AVERAGES),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_WEIGHTED_AVERAGES),
 })
 
 const mapDispatchToProps = {
-  addTargetPair,
-  clearTargetPairs,
-  fetchData: fetchWeightedAwerages,
   refresh,
-  removeTargetPair,
+  addTargetPair,
   setTargetPairs,
+  clearTargetPairs,
+  removeTargetPair,
+  fetchData: fetchWeightedAwerages,
 }
 
 export default compose(
