@@ -8,7 +8,10 @@ export const makeDate = (action) => {
   return returnVal.getTime()
 }
 
+export const getFormattedTime = (time, format) => moment(time).format(format)
+
 export default {
   getFormattedDate,
+  getFormattedTime,
   makeDate,
 }

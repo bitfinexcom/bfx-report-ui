@@ -1,7 +1,33 @@
 import React from 'react'
 import { Spinner } from '@blueprintjs/core'
+import _isNull from 'lodash/isNull'
 
 import Icon from 'icons'
+import { getFormattedTime } from 'utils/dates'
+
+const getEstimatedSyncTime = ({
+  leftTime = null,
+  spentTime = null,
+  syncStartedAt = null,
+}, t) => {
+  const start = _isNull(syncStartedAt)
+    ? t('sync.estimated_time.estimating')
+    : getFormattedTime(syncStartedAt, 'MMMM DD, YYYY HH:mm')
+
+  const spent = _isNull(spentTime)
+    ? t('sync.estimated_time.estimating')
+    : getFormattedTime(spentTime, 'mm:ss')
+
+  const left = _isNull(leftTime)
+    ? t('sync.estimated_time.estimating')
+    : getFormattedTime(leftTime, 'mm:ss')
+
+  return {
+    start,
+    spent,
+    left,
+  }
+}
 
 export const getSyncTitle = (isSyncing) => (
   isSyncing
@@ -9,11 +35,30 @@ export const getSyncTitle = (isSyncing) => (
     : 'sync.start'
 )
 
-export const getSyncTooltipMessage = (isSyncing) => (
-  isSyncing
-    ? 'sync.insync_tooltip'
-    : 'sync.start_sync_tooltip'
-)
+export const getSyncTooltipContent = (t, isSyncing, estimatedSyncTime) => {
+  const { start, spent, left } = getEstimatedSyncTime(estimatedSyncTime, t)
+
+  if (isSyncing) {
+    return (
+      <>
+        <p>{t('sync.insync_tooltip')}</p>
+        <p>
+          {t('sync.estimated_time.started_at')}
+          {start}
+        </p>
+        <p>
+          {t('sync.estimated_time.spent_time')}
+          {spent}
+        </p>
+        <p>
+          {t('sync.estimated_time.left_time')}
+          {left}
+        </p>
+      </>
+    )
+  }
+  return <>{t('sync.start_sync_tooltip')}</>
+}
 
 export const getSyncIcon = (isSyncing, syncProgress) => {
   if (isSyncing) {
@@ -32,5 +77,5 @@ export const getSyncIcon = (isSyncing, syncProgress) => {
 export default {
   getSyncIcon,
   getSyncTitle,
-  getSyncTooltipMessage,
+  getSyncTooltipContent,
 }

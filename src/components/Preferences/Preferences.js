@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   Classes,
@@ -8,91 +8,100 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import DateFormatSelector from 'ui/DateFormatSelector'
+import config from 'config'
 import LangMenu from 'ui/LangMenu'
-import ShowMilliseconds from 'ui/ShowMilliseconds'
-import TableScrollPref from 'ui/TableScrollPref'
-import TimeRangePreservePref from 'ui/TimeRangePreservePref'
-import TimezonePicker from 'ui/TimezonePicker'
 import ThemeSwitcher from 'ui/ThemeSwitcher'
+import TimezonePicker from 'ui/TimezonePicker'
+import TableScrollPref from 'ui/TableScrollPref'
+import ShowMilliseconds from 'ui/ShowMilliseconds'
+import DateFormatSelector from 'ui/DateFormatSelector'
+import TimeRangePreservePref from 'ui/TimeRangePreservePref'
 
-import { propTypes, defaultProps } from './Preferences.props'
-
-class Preferences extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
-
-  render() {
-    const {
-      isOpen,
-      setTimezone,
-      t,
-      timezone,
-      toggleDialog,
-    } = this.props
-
-    return (
-      <Dialog
-        className='preferences'
-        icon={<Icon.SLIDER_CIRCLE_H />}
-        onClose={toggleDialog}
-        title={t('preferences.title')}
-        isCloseButtonShown={false}
-        isOpen={isOpen}
-      >
-        <div className={Classes.DIALOG_BODY}>
-          <div className='preferences-row'>
-            <div className='preferences-item'>
-              <div>{t('preferences.language')}</div>
-              <LangMenu />
-            </div>
-          </div>
-          <div className='preferences-row'>
-            <div className='preferences-item'>
-              <div>{t('preferences.theme')}</div>
-              <ThemeSwitcher />
-            </div>
-          </div>
-          <div className='preferences-row preferences-timezones'>
-            <div className='preferences-item'>
-              <div>{t('preferences.timezone')}</div>
-              <TimezonePicker
-                onChange={setTimezone}
-                value={timezone}
-              />
-            </div>
-            <div className='preferences-item'>
-              <div>{t('preferences.dateformat')}</div>
-              <DateFormatSelector />
-            </div>
-          </div>
-          <div className='preferences-row'>
-            <span>{t('preferences.milliseconds')}</span>
-            <ShowMilliseconds />
-          </div>
-          <div className='preferences-row'>
-            <span>{t('preferences.table_scroll')}</span>
-            <TableScrollPref />
-          </div>
-          <div className='preferences-row'>
-            <span>{t('preferences.preserve_timeframe')}</span>
-            <TimeRangePreservePref />
-          </div>
+const Preferences = ({
+  t,
+  isOpen,
+  timezone,
+  setTimezone,
+  toggleDialog,
+  removeAccount,
+}) => (
+  <Dialog
+    isOpen={isOpen}
+    onClose={toggleDialog}
+    className='preferences'
+    isCloseButtonShown={false}
+    title={t('preferences.title')}
+    icon={<Icon.SLIDER_CIRCLE_H />}
+  >
+    <div className={Classes.DIALOG_BODY}>
+      <div className='preferences-row'>
+        <div className='preferences-item'>
+          <div>{t('preferences.language')}</div>
+          <LangMenu />
         </div>
-        <div className={Classes.DIALOG_FOOTER}>
-          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+      </div>
+      <div className='preferences-row'>
+        <div className='preferences-item'>
+          <div>{t('preferences.theme')}</div>
+          <ThemeSwitcher />
+        </div>
+      </div>
+      <div className='preferences-row preferences-timezones'>
+        <div className='preferences-item'>
+          <div>{t('preferences.timezone')}</div>
+          <TimezonePicker
+            onChange={setTimezone}
+            value={timezone}
+          />
+        </div>
+        <div className='preferences-item'>
+          <div>{t('preferences.dateformat')}</div>
+          <DateFormatSelector />
+        </div>
+      </div>
+      <div className='preferences-row'>
+        <span>{t('preferences.milliseconds')}</span>
+        <ShowMilliseconds />
+      </div>
+      <div className='preferences-row'>
+        <span>{t('preferences.table_scroll')}</span>
+        <TableScrollPref />
+      </div>
+      <div className='preferences-row'>
+        <span>{t('preferences.preserve_timeframe')}</span>
+        <TimeRangePreservePref />
+      </div>
+    </div>
+    <div className={Classes.DIALOG_FOOTER}>
+      <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+        <div className='remove-account-wrapper'>
+          {config.showFrameworkMode && (
             <Button
-              onClick={toggleDialog}
+              onClick={removeAccount}
               intent={Intent.PRIMARY}
             >
-              {t('preferences.close')}
+              {t('preferences.remove_account')}
             </Button>
-          </div>
+          )}
         </div>
-      </Dialog>
-    )
-  }
+        <Button
+          onClick={toggleDialog}
+          intent={Intent.PRIMARY}
+        >
+          {t('preferences.close')}
+        </Button>
+      </div>
+    </div>
+  </Dialog>
+)
+
+Preferences.propTypes = {
+  t: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  timezone: PropTypes.string.isRequired,
+  setTimezone: PropTypes.func.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
+  removeAccount: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(Preferences)
+export default memo(Preferences)

@@ -16,6 +16,7 @@ import wsSignIn from 'state/ws/signIn'
 import { selectAuth } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
+import { togglePreferencesDialog } from 'state/ui/actions'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { refreshToken, tokenRefreshStart, tokenRefreshStop } from 'state/auth/tokenRefresh/actions'
@@ -191,6 +192,28 @@ function* fetchUsers() {
   }
 }
 
+function* removeUser() {
+  try {
+    const { result, error } = yield call(makeFetchCall, 'removeUser')
+
+    if (result) {
+      yield put(actions.showAuth())
+      yield put(actions.clearAuth())
+      yield put(actions.fetchUsers())
+      yield put(togglePreferencesDialog())
+    }
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.auth',
+        detail: JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 function* checkAuth() {
   try {
     if (config.showFrameworkMode) {
@@ -260,5 +283,6 @@ export default function* authSaga() {
   yield takeLatest(types.SIGN_UP, signUp)
   yield takeLatest(types.SIGN_IN, signIn)
   yield takeLatest(types.LOGOUT, logout)
+  yield takeLatest(types.REMOVE_USER, removeUser)
   yield fork(tokenRefreshSaga)
 }
