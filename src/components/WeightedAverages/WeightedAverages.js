@@ -46,14 +46,12 @@ class WeightedAverages extends PureComponent {
     dataReceived: PropTypes.bool.isRequired,
     entries: PropTypes.arrayOf(PropTypes.object),
     existingPairs: PropTypes.arrayOf(PropTypes.string),
-    getFullTime: PropTypes.func.isRequired,
     inactivePairs: PropTypes.arrayOf(PropTypes.string),
     pairs: PropTypes.arrayOf(PropTypes.string),
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetPairs: PropTypes.arrayOf(PropTypes.string),
-    timeOffset: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -80,35 +78,24 @@ class WeightedAverages extends PureComponent {
 
   render() {
     const {
+      t,
+      pairs,
       columns,
+      entries,
+      refresh,
+      targetPairs,
+      pageLoading,
       columnsWidth,
       dataReceived,
-      entries,
       existingPairs,
       inactivePairs,
-      getFullTime,
-      pairs,
-      pageLoading,
-      refresh,
-      t,
-      targetPairs,
-      timeOffset,
     } = this.props
-
-    console.log('+++WA props', this.props)
 
     const numRows = entries.length
     const tableColumns = getColumns({
       columnsWidth,
       filteredData: entries,
-      getFullTime,
-      t,
-      timeOffset,
     }).filter(({ id }) => columns[id])
-
-    // console.log('++entries', entries)
-    // console.log('++tableColumns', tableColumns)
-    // console.log('++columnsWidth', columnsWidth)
 
     let showContent
     if (!dataReceived && pageLoading) {
