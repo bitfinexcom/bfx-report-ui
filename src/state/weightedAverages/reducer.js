@@ -1,6 +1,5 @@
-// https://docs.bitfinex.com/v2/reference#rest-public-status
-import _get from 'lodash/get'
 import _sortBy from 'lodash/sortBy'
+import _isUndefined from 'lodash/isUndefined'
 
 import authTypes from 'state/auth/constants'
 import queryTypes from 'state/query/constants'
@@ -31,7 +30,7 @@ export function weightedAveragesReducer(state = initialState, action) {
     case types.FETCH_WEIGHTED_AVERAGES:
       return fetch(state)
     case types.UPDATE_WEIGHTED_AVERAGES: {
-      if (!_get(payload, ['data'])) {
+      if (_isUndefined(payload?.data)) {
         return {
           ...state,
           dataReceived: true,
