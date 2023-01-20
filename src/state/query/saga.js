@@ -29,6 +29,7 @@ import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
 import { getParams as getOrderTradesParams } from 'state/orderTrades/selectors'
 import { getTargetPairs as getTickersPairs } from 'state/tickers/selectors'
 import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
+import { getTargetPairs as getWeightedAveragesPairs } from 'state/weightedAverages/selectors'
 import { getTargetSymbol as getPublicTradesSymbol } from 'state/publicFunding/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
@@ -97,6 +98,7 @@ const {
   MENU_SPAYMENTS,
   MENU_TAX_REPORT,
   MENU_TRADED_VOLUME,
+  MENU_WEIGHTED_AVERAGES,
   MENU_WALLETS,
   MENU_WIN_LOSS,
 } = types
@@ -179,6 +181,8 @@ function getSelector(target) {
       return getTradedVolumeParams
     case MENU_FEES_REPORT:
       return getFeesReportParams
+    case MENU_WEIGHTED_AVERAGES:
+      return getWeightedAveragesPairs
     case MENU_WALLETS:
       return getTimestamp
     case MENU_WIN_LOSS:
@@ -213,6 +217,7 @@ function formatSymbol(target, symbols) {
     case MENU_TICKERS:
     case MENU_TRADED_VOLUME:
     case MENU_TRADES:
+    case MENU_WEIGHTED_AVERAGES:
     case MENU_POSITIONS:
     case MENU_POSITIONS_ACTIVE:
     case MENU_PUBLIC_TRADES:
@@ -272,6 +277,9 @@ function* getOptions({ target }) {
     case MENU_TRADED_VOLUME:
       options.timeframe = sign.timeframe
       options.symbol = formatSymbol(target, sign.targetPairs)
+      break
+    case MENU_WEIGHTED_AVERAGES:
+      options.symbol = formatSymbol(target, sign)
       break
     case MENU_FEES_REPORT:
       options.timeframe = sign.timeframe
@@ -387,6 +395,9 @@ function* getOptions({ target }) {
       break
     case MENU_WALLETS:
       options.method = 'getWalletsCsv'
+      break
+    case MENU_WEIGHTED_AVERAGES:
+      options.method = 'getWeightedAveragesReportCsv'
       break
     case MENU_WIN_LOSS:
       options.method = isVsAccountBalanceSelected
