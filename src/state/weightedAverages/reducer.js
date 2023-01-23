@@ -12,6 +12,7 @@ import {
   fetch,
   fetchFail,
   removePair,
+  refresh,
   setPairs,
   setTimeRange,
 } from 'state/reducers.helper'
@@ -81,6 +82,7 @@ export function weightedAveragesReducer(state = initialState, action) {
     case timeRangeTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case types.REFRESH:
+      return refresh(TYPE, state, initialState)
     case authTypes.LOGOUT:
       return initialState
     default: {
