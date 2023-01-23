@@ -17,7 +17,7 @@ import { getTargetPairs } from './selectors'
 
 function getWeightedAverages({ targetPairs, start, end }) {
   const params = { start, end }
-  if (!_isEmpty.targetPairs) {
+  if (!_isEmpty(targetPairs)) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
   }
 
