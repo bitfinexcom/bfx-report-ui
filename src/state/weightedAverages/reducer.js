@@ -1,5 +1,6 @@
+import _map from 'lodash/map'
+import _isNil from 'lodash/isNil'
 import _sortBy from 'lodash/sortBy'
-import _isUndefined from 'lodash/isUndefined'
 
 import authTypes from 'state/auth/constants'
 import queryTypes from 'state/query/constants'
@@ -22,7 +23,7 @@ const initialState = {
   ...basePairState,
 }
 
-const TYPE = queryTypes.MENU_TRADES
+const TYPE = queryTypes.MENU_WEIGHTED_AVERAGES
 
 export function weightedAveragesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
@@ -30,7 +31,7 @@ export function weightedAveragesReducer(state = initialState, action) {
     case types.FETCH_WEIGHTED_AVERAGES:
       return fetch(state)
     case types.UPDATE_WEIGHTED_AVERAGES: {
-      if (_isUndefined(payload?.data)) {
+      if (_isNil(payload?.data)) {
         return {
           ...state,
           dataReceived: true,
@@ -38,7 +39,7 @@ export function weightedAveragesReducer(state = initialState, action) {
         }
       }
       const { data } = payload
-      const entries = data.map((entry) => {
+      const entries = _map(data, (entry) => {
         const {
           symbol,
           buyingWeightedPrice,
