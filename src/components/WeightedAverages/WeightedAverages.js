@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
 import {
   SectionHeader,
   SectionHeaderRow,
@@ -16,13 +16,13 @@ import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
-import queryConstants from 'state/query/constants'
 import {
   checkInit,
   checkFetch,
   togglePair,
   clearAllPairs,
 } from 'state/utils'
+import queryConstants from 'state/query/constants'
 
 import { getColumns } from './WeightedAverages.columns'
 
