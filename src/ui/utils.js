@@ -83,8 +83,12 @@ export const formatAmount = (val, options = {}) => {
           {dollarSign && '$'}
           {integer}
         </span>
-        {'.'}
-        <span className='bitfinex-amount-fraction'>{fraction}</span>
+        {fraction && (
+          <>
+            {'.'}
+            <span className='bitfinex-amount-fraction'>{fraction}</span>
+          </>
+        )}
       </div>
     </>
   )
