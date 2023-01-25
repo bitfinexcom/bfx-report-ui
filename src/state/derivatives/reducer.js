@@ -11,6 +11,7 @@ import {
   fetch,
   fetchFail,
   removePair,
+  refresh,
   setPairs,
 } from 'state/reducers.helper'
 import { formatPair, mapPair } from 'state/symbols/utils'
@@ -81,6 +82,7 @@ export function derivativesReducer(state = initialState, action) {
     case types.CLEAR_PAIRS:
       return clearPairs(state, initialState)
     case types.REFRESH:
+      return refresh(TYPE, state, initialState)
     case authTypes.LOGOUT:
       return initialState
     default: {
