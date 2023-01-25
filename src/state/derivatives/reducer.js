@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 import _sortBy from 'lodash/sortBy'
 
 import authTypes from 'state/auth/constants'
+import queryTypes from 'state/query/constants'
 import {
   addPair,
   basePairState,
@@ -19,6 +20,8 @@ import types from './constants'
 const initialState = {
   ...basePairState,
 }
+
+const TYPE = queryTypes.MENU_DERIVATIVES
 
 export function derivativesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
