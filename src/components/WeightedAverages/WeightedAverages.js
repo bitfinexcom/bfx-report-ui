@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
+import _size from 'lodash/size'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
@@ -91,7 +92,7 @@ class WeightedAverages extends PureComponent {
       inactivePairs,
     } = this.props
 
-    const numRows = entries.length
+    const numRows = _size(entries)
     const tableColumns = getColumns({
       columnsWidth,
       filteredData: entries,
