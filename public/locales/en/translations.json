@@ -325,6 +325,11 @@
       "title": "My History",
       "general": "General",
       "funding": "Funding",
+      "fundingTabs": {
+        "bidsOffers": "Bids & offers",
+        "loans": "Loans",
+        "credits": "Credits"
+      },
       "earnings":"Earnings",
       "wallets": "Wallets" 
     },
