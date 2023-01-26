@@ -1,7 +1,10 @@
+import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
+import { withTranslation } from 'react-i18next'
 
 import FundingSwitch from './FundingSwitch'
 
-const FundingSwitchContainer = withRouter(FundingSwitch)
-
-export default FundingSwitchContainer
+export default compose(
+  withTranslation('translations'),
+  withRouter,
+)(FundingSwitch)
