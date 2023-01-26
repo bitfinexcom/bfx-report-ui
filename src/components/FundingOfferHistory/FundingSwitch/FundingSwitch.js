@@ -1,13 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
-import { propTypes, defaultProps } from './FundingSwitch.props'
-
 class FundingSwitch extends React.PureComponent {
+  static propTypes = {
+    target: PropTypes.string.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+      location: PropTypes.shape({
+        search: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+    t: PropTypes.func.isRequired,
+  }
+
   switchSection = (e) => {
     const { value } = e.currentTarget
     const { target, history } = this.props
@@ -55,8 +65,5 @@ class FundingSwitch extends React.PureComponent {
     )
   }
 }
-
-FundingSwitch.propTypes = propTypes
-FundingSwitch.defaultProps = defaultProps
 
 export default withTranslation('translations')(FundingSwitch)
