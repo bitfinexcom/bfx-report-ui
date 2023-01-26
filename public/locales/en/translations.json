@@ -313,6 +313,32 @@
   "movements": {
     "title": "Movements"
   },
+  "navItems": {
+    "myAccount": {
+      "title": "My Account",
+      "summary": "Summary",
+      "balance": "Balance",
+      "analysisStat": "Analysis/Statistics",
+      "snapshotsTax": "Snapshots & Tax Report"
+    },
+    "myHistory": {
+      "title": "My History",
+      "general": "General",
+      "funding": "Funding",
+      "earnings":"Earnings",
+      "wallets": "Wallets" 
+    },
+    "merchantHistory": {
+      "title": "Merchant History",
+      "invoices": "Invoices"
+    },
+    "marketHistory": {
+      "title": "Market History",
+      "trades": "Trades",
+      "spot": "Spot",
+      "derivatives": "Derivatives"
+    }
+  },
   "nodata": "No related data in this time range. You can try another time range.",
   "no_merchant": {
     "title": "This section is only available for ",
