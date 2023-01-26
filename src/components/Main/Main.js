@@ -39,6 +39,7 @@ import Tickers from 'components/Tickers'
 import TradedVolume from 'components/TradedVolume'
 import Trades from 'components/Trades'
 import Wallets from 'components/Wallets'
+import WeightedAverages from 'components/WeightedAverages'
 import ExportDialog from 'components/ExportDialog'
 import ExportSuccessDialog from 'components/ExportSuccessDialog'
 import Preferences from 'components/Preferences'
@@ -81,6 +82,7 @@ const {
   MENU_TICKERS,
   MENU_TRADED_VOLUME,
   MENU_WALLETS,
+  MENU_WEIGHTED_AVERAGES,
   MENU_WIN_LOSS,
 } = queryType
 
@@ -102,6 +104,7 @@ const PATHS = {
   MENU_PUBLIC_TRADES: [getPath(MENU_PUBLIC_TRADES), `${getPath(MENU_PUBLIC_TRADES)}/:pair`],
   MENU_TICKERS: [getPath(MENU_TICKERS), `${getPath(MENU_TICKERS)}/:pair`],
   MENU_DERIVATIVES: [getPath(MENU_DERIVATIVES), `${getPath(MENU_DERIVATIVES)}/:pair`],
+  MENU_WEIGHTED_AVERAGES: [getPath(MENU_WEIGHTED_AVERAGES), `${getPath(MENU_WEIGHTED_AVERAGES)}/:pair`],
   MENU_POSITIONS: [getPath(MENU_POSITIONS), `${getPath(MENU_POSITIONS)}/:pair`],
   MENU_FEES_REPORT: [getPath(MENU_FEES_REPORT), `${getPath(MENU_FEES_REPORT)}/:symbol`],
   MENU_LOAN_REPORT: [getPath(MENU_LOAN_REPORT), `${getPath(MENU_LOAN_REPORT)}/:symbol`],
@@ -273,6 +276,12 @@ class Main extends PureComponent {
                   path={getPath(MENU_ACCOUNT_BALANCE)}
                   component={AccountBalance}
                   key={MENU_ACCOUNT_BALANCE}
+                />,
+                <Route
+                  exact
+                  path={PATHS.MENU_WEIGHTED_AVERAGES}
+                  component={WeightedAverages}
+                  key={MENU_WEIGHTED_AVERAGES}
                 />,
                 <Route
                   exact

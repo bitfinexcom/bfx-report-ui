@@ -21,6 +21,7 @@ const {
   MENU_DERIVATIVES,
   MENU_LOGINS,
   MENU_CHANGE_LOGS,
+  MENU_WEIGHTED_AVERAGES,
 } = queryConstants
 
 const {
@@ -165,6 +166,9 @@ const DEFAULT_FILTERS_MIN = {
     { column: 'bid', type: GREATER_THAN, dataType: NUMBER, value: '' },
   ],
   [MENU_DERIVATIVES]: [
+    { column: 'price', type: GREATER_THAN, dataType: NUMBER, value: '' },
+  ],
+  [MENU_WEIGHTED_AVERAGES]: [
     { column: 'price', type: GREATER_THAN, dataType: NUMBER, value: '' },
   ],
   [MENU_LOGINS]: [

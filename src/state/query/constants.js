@@ -32,6 +32,7 @@ export default {
   MENU_TRADED_VOLUME: 'tradedvolume',
   MENU_WALLETS: 'wallets',
   MENU_WIN_LOSS: 'averagewinloss',
+  MENU_WEIGHTED_AVERAGES: 'weightedaverages',
   TIME_TYPE_UTC: 'utc',
   TIME_TYPE_LOCALTIME: 'local',
   DEFAULT_QUERY_LIMIT: 500,

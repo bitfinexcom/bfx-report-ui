@@ -21,6 +21,7 @@ const {
   MENU_DERIVATIVES,
   MENU_LOGINS,
   MENU_CHANGE_LOGS,
+  MENU_WEIGHTED_AVERAGES,
 } = queryConstants
 
 const {
@@ -223,6 +224,16 @@ const SECTION_COLUMNS = {
     { id: 'timestamp', name: 'updated', type: DATE, filter: true, hidden: true },
     { id: 'clampMin', name: 'clampMin', type: NUMBER, filter: true },
     { id: 'clampMax', name: 'clampMax', type: NUMBER, filter: true },
+  ],
+
+  [MENU_WEIGHTED_AVERAGES]: [
+    { id: 'pair', name: 'pair' },
+    { id: 'buyingWeightedPrice', name: 'buyingWeightedPrice', type: NUMBER },
+    { id: 'buyingAmount', name: 'buyingAmount', type: NUMBER },
+    { id: 'sellingWeightedPrice', name: 'sellingWeightedPrice', type: NUMBER },
+    { id: 'sellingAmount', name: 'sellingAmount', type: NUMBER },
+    { id: 'cumulativeWeightedPrice', name: 'cumulativeWeightedPrice', type: NUMBER },
+    { id: 'cumulativeAmount', name: 'cumulativeAmount', type: NUMBER },
   ],
 
   [MENU_LOGINS]: [
