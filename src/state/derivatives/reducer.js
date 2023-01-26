@@ -3,6 +3,7 @@ import _get from 'lodash/get'
 import _sortBy from 'lodash/sortBy'
 
 import authTypes from 'state/auth/constants'
+import queryTypes from 'state/query/constants'
 import {
   addPair,
   basePairState,
@@ -10,6 +11,7 @@ import {
   fetch,
   fetchFail,
   removePair,
+  refresh,
   setPairs,
 } from 'state/reducers.helper'
 import { formatPair, mapPair } from 'state/symbols/utils'
@@ -19,6 +21,8 @@ import types from './constants'
 const initialState = {
   ...basePairState,
 }
+
+const TYPE = queryTypes.MENU_DERIVATIVES
 
 export function derivativesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
@@ -78,6 +82,7 @@ export function derivativesReducer(state = initialState, action) {
     case types.CLEAR_PAIRS:
       return clearPairs(state, initialState)
     case types.REFRESH:
+      return refresh(TYPE, state, initialState)
     case authTypes.LOGOUT:
       return initialState
     default: {
