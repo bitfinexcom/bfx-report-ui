@@ -15,6 +15,7 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
+import FundingSwitch from './FundingSwitch'
 import { getColumns } from './FundingOfferHistory.columns'
 
 const TYPE = queryConstants.MENU_FOFFER
@@ -139,6 +140,7 @@ class FundingOfferHistory extends PureComponent {
           }}
           clearTargetSymbols={this.clearSymbols}
         />
+        <FundingSwitch target={TYPE} />
         {showContent}
       </Card>
     )
