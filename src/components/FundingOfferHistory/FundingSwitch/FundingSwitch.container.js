@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom'
 
-import TradesSwitch from './TradesSwitch'
+import FundingSwitch from './FundingSwitch'
 
-const TradesSwitchContainer = withRouter(TradesSwitch)
+const FundingSwitchContainer = withRouter(FundingSwitch)
 
-export default TradesSwitchContainer
+export default FundingSwitchContainer
