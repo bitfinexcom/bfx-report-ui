@@ -216,7 +216,7 @@
     "targets": "Data to Export"
   },
   "fcredit": {
-    "title": "Funding Credit (Used)",
+    "title": "Funding Credits (Used)",
     "side": {
       "provided": "PROVIDED",
       "taken": "TAKEN",
