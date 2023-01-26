@@ -5,9 +5,9 @@ import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
-import { propTypes, defaultProps } from './TradesSwitch.props'
+import { propTypes, defaultProps } from './FundingSwitch.props'
 
-class TradesSwitch extends React.PureComponent {
+class FundingSwitch extends React.PureComponent {
   switchSection = (e) => {
     const { value } = e.currentTarget
     const { target, history } = this.props
@@ -31,25 +31,32 @@ class TradesSwitch extends React.PureComponent {
     return (
       <ButtonGroup className='section-switch'>
         <Button
-          value={queryConstants.MENU_TRADES}
-          intent={target === queryConstants.MENU_TRADES ? Intent.PRIMARY : undefined}
+          value={queryConstants.MENU_FOFFER}
+          intent={target === queryConstants.MENU_FOFFER ? Intent.PRIMARY : undefined}
           onClick={this.switchSection}
         >
-          {t('trades.title')}
+          {t('navItems.myHistory.fundingTabs.bidsOffers')}
         </Button>
         <Button
-          value={queryConstants.MENU_CANDLES}
-          intent={target === queryConstants.MENU_CANDLES ? Intent.PRIMARY : undefined}
+          value={queryConstants.MENU_FLOAN}
+          intent={target === queryConstants.MENU_FLOAN ? Intent.PRIMARY : undefined}
           onClick={this.switchSection}
         >
-          {t('candles.title')}
+          {t('navItems.myHistory.fundingTabs.loans')}
+        </Button>
+        <Button
+          value={queryConstants.MENU_FCREDIT}
+          intent={target === queryConstants.MENU_FCREDIT ? Intent.PRIMARY : undefined}
+          onClick={this.switchSection}
+        >
+          {t('navItems.myHistory.fundingTabs.credits')}
         </Button>
       </ButtonGroup>
     )
   }
 }
 
-TradesSwitch.propTypes = propTypes
-TradesSwitch.defaultProps = defaultProps
+FundingSwitch.propTypes = propTypes
+FundingSwitch.defaultProps = defaultProps
 
-export default withTranslation('translations')(TradesSwitch)
+export default withTranslation('translations')(FundingSwitch)
