@@ -141,7 +141,6 @@ class FundingOfferHistory extends PureComponent {
           clearTargetSymbols={this.clearSymbols}
         />
         <SectionSwitch target={TYPE} />
-        {/* <FundingSwitch target={TYPE} /> */}
         {showContent}
       </Card>
     )
