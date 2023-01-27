@@ -8,6 +8,7 @@ import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
 import queryConstants from 'state/query/constants'
+import FundingSwitch from 'components/FundingOfferHistory/FundingSwitch'
 import {
   checkInit,
   checkFetch,
@@ -142,6 +143,7 @@ class FundingLoanHistory extends PureComponent {
           }}
           clearTargetSymbols={this.clearSymbols}
         />
+        <FundingSwitch target={TYPE} />
         {showContent}
       </Card>
     )
