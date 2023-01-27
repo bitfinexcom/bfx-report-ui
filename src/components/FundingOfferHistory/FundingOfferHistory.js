@@ -7,6 +7,7 @@ import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
+import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import {
   checkInit,
@@ -15,7 +16,6 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
-import FundingSwitch from './FundingSwitch'
 import { getColumns } from './FundingOfferHistory.columns'
 
 const TYPE = queryConstants.MENU_FOFFER
@@ -140,7 +140,8 @@ class FundingOfferHistory extends PureComponent {
           }}
           clearTargetSymbols={this.clearSymbols}
         />
-        <FundingSwitch target={TYPE} />
+        <SectionSwitch target={TYPE} />
+        {/* <FundingSwitch target={TYPE} /> */}
         {showContent}
       </Card>
     )
