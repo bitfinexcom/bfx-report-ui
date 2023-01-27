@@ -30,6 +30,7 @@ const SectionSwitch = ({
     <ButtonGroup className='section-switch'>
       {_map(sections, ({ targetSection, description }) => (
         <Button
+          key={description}
           value={targetSection}
           onClick={switchSection}
           intent={target === targetSection ? Intent.PRIMARY : undefined}
