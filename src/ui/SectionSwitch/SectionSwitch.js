@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 import _map from 'lodash/map'
 
 import { getPath } from 'state/query/utils'
 
-import { FUNDING_SECTIONS } from './SectionSwitch.constants'
+import getSections from './SectionSwitch.constants'
 
 const SectionSwitch = ({
   t,
@@ -24,9 +24,11 @@ const SectionSwitch = ({
     })
   }
 
+  const sections = useMemo(() => getSections(target), [target])
+
   return (
     <ButtonGroup className='section-switch'>
-      {_map(FUNDING_SECTIONS, ({ targetSection, description }) => (
+      {_map(sections, ({ targetSection, description }) => (
         <Button
           value={targetSection}
           onClick={switchSection}
