@@ -1,4 +1,11 @@
+import _includes from 'lodash/includes'
 import queryConstants from 'state/query/constants'
+
+const FUNDING_TARGETS = [
+  queryConstants.MENU_FLOAN,
+  queryConstants.MENU_FOFFER,
+  queryConstants.MENU_FCREDIT,
+]
 
 export const FUNDING_SECTIONS = [
   {
@@ -15,6 +22,10 @@ export const FUNDING_SECTIONS = [
   },
 ]
 
-export default {
-  FUNDING_SECTIONS,
+export const getSections = (target) => {
+  if (_includes(FUNDING_TARGETS, target)) return FUNDING_SECTIONS
+
+  return []
 }
+
+export default getSections
