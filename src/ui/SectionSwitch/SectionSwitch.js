@@ -5,7 +5,7 @@ import _map from 'lodash/map'
 
 import { getPath } from 'state/query/utils'
 
-import getSections from './SectionSwitch.constants'
+import getSections from './SectionSwitch.helpers'
 
 const SectionSwitch = ({
   t,
