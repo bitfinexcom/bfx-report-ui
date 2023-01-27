@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 
 import { getPath } from 'state/query/utils'
@@ -66,4 +65,4 @@ class FundingSwitch extends React.PureComponent {
   }
 }
 
-export default withTranslation('translations')(FundingSwitch)
+export default FundingSwitch
