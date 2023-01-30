@@ -33,6 +33,21 @@ export const FUNDING_SECTIONS = [
   },
 ]
 
+export const EARNINGS_SECTIONS = [
+  {
+    targetSection: queryConstants.MENU_FPAYMENT,
+    description: 'navItems.myHistory.earningsTabs.funding',
+  },
+  {
+    targetSection: queryConstants.MENU_SPAYMENTS,
+    description: 'navItems.myHistory.earningsTabs.staking',
+  },
+  {
+    targetSection: queryConstants.MENU_AFFILIATES_EARNINGS,
+    description: 'navItems.myHistory.earningsTabs.affiliates',
+  },
+]
+
 export const TRADES_SECTIONS = [
   {
     targetSection: queryConstants.MENU_TRADES,
