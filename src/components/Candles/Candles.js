@@ -18,11 +18,11 @@ import QueryButton from 'ui/QueryButton'
 import PairSelector from 'ui/PairSelector'
 import Timeframe from 'ui/CandlesTimeframe'
 import RefreshButton from 'ui/RefreshButton'
+import SectionSwitch from 'ui/SectionSwitch'
 import Candlestick from 'ui/Charts/Candlestick'
 import CandlesSyncPref from 'ui/CandlesSyncPref'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
-import TradesSwitch from 'components/Trades/TradesSwitch'
 
 const TYPE = queryConstants.MENU_CANDLES
 
@@ -159,7 +159,7 @@ class Candles extends PureComponent {
           </SectionHeaderRow>
         </SectionHeader>
         <div className='candles-header'>
-          <TradesSwitch target={TYPE} />
+          <SectionSwitch target={TYPE} />
           <GoToButton onClick={toggleGoToRangeDialog} />
         </div>
         {showContent}
