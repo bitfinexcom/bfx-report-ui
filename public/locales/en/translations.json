@@ -331,6 +331,11 @@
         "credits": "Credits"
       },
       "earnings":"Earnings",
+      "earningsTabs": {
+        "funding": "Funding",
+        "staking": "Staking",
+        "affiliates": "Affiliates"
+      },
       "wallets": "Wallets" 
     },
     "merchantHistory": {
