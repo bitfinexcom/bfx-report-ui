@@ -2,11 +2,12 @@ import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
+import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
+import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import {
   checkInit,
@@ -15,7 +16,6 @@ import {
   clearAllPairs,
 } from 'state/utils'
 
-import TradesSwitch from './TradesSwitch'
 import getColumns from './Trades.columns'
 import { propTypes, defaultProps } from './Trades.props'
 
@@ -90,7 +90,7 @@ class Trades extends PureComponent {
           refresh={refresh}
           clearTargetPairs={this.clearPairs}
         />
-        <TradesSwitch target={TYPE} />
+        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )
