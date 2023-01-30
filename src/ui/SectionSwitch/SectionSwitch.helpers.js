@@ -12,6 +12,12 @@ const FUNDING_TARGETS = [
   queryConstants.MENU_FCREDIT,
 ]
 
+const EARNINGS_TARGETS = [
+  queryConstants.MENU_FPAYMENT,
+  queryConstants.MENU_SPAYMENTS,
+  queryConstants.MENU_AFFILIATES_EARNINGS,
+]
+
 export const FUNDING_SECTIONS = [
   {
     targetSection: queryConstants.MENU_FOFFER,
