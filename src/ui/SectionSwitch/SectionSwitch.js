@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 import _map from 'lodash/map'
+import _isEqual from 'lodash/isEqual'
 
 import { getPath } from 'state/query/utils'
 
@@ -14,7 +15,7 @@ const SectionSwitch = ({
 }) => {
   const switchSection = (e) => {
     const { value } = e.currentTarget
-    if (value === target) {
+    if (_isEqual(value, target)) {
       return
     }
 
