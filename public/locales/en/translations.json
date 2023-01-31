@@ -324,6 +324,12 @@
     "myHistory": {
       "title": "My History",
       "general": "General",
+      "generalTabs": {
+        "ledgers": "Ledgers",
+        "trades": "Trades",
+        "orders": "Orders",
+        "positions": "Positions"
+      },
       "funding": "Funding",
       "fundingTabs": {
         "bidsOffers": "Bids & Offers",
