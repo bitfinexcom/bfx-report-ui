@@ -6,6 +6,13 @@ const TRADES_TARGETS = [
   queryConstants.MENU_CANDLES,
 ]
 
+const GENERAL_TARGETS = [
+  queryConstants.MENU_LEDGERS,
+  queryConstants.MENU_TRADES,
+  queryConstants.MENU_ORDERS,
+  queryConstants.MENU_POSITIONS,
+]
+
 const FUNDING_TARGETS = [
   queryConstants.MENU_FLOAN,
   queryConstants.MENU_FOFFER,
