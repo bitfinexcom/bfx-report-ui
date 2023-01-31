@@ -28,7 +28,7 @@ const EARNINGS_TARGETS = [
 export const GENERAL_SECTIONS = [
   {
     targetSection: queryConstants.MENU_LEDGERS,
-    description: 'navItems.myHistory.generalTabs.bidsOffers',
+    description: 'navItems.myHistory.generalTabs.ledgers',
   },
   {
     targetSection: queryConstants.MENU_TRADES,
@@ -87,6 +87,7 @@ export const TRADES_SECTIONS = [
 
 export const getSections = (target) => {
   if (_includes(TRADES_TARGETS, target)) return TRADES_SECTIONS
+  if (_includes(GENERAL_TARGETS, target)) return GENERAL_SECTIONS
   if (_includes(FUNDING_TARGETS, target)) return FUNDING_SECTIONS
   if (_includes(EARNINGS_TARGETS, target)) return EARNINGS_SECTIONS
 
