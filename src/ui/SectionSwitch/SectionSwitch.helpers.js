@@ -25,6 +25,25 @@ const EARNINGS_TARGETS = [
   queryConstants.MENU_AFFILIATES_EARNINGS,
 ]
 
+export const GENERAL_SECTIONS = [
+  {
+    targetSection: queryConstants.MENU_LEDGERS,
+    description: 'navItems.myHistory.generalTabs.bidsOffers',
+  },
+  {
+    targetSection: queryConstants.MENU_TRADES,
+    description: 'navItems.myHistory.generalTabs.trades',
+  },
+  {
+    targetSection: queryConstants.MENU_ORDERS,
+    description: 'navItems.myHistory.generalTabs.orders',
+  },
+  {
+    targetSection: queryConstants.MENU_POSITIONS,
+    description: 'navItems.myHistory.generalTabs.positions',
+  },
+]
+
 export const FUNDING_SECTIONS = [
   {
     targetSection: queryConstants.MENU_FOFFER,
