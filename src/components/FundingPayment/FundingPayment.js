@@ -139,7 +139,7 @@ class FundingPayment extends PureComponent {
           }}
           clearTargetSymbols={this.clearSymbols}
         />
-         <SectionSwitch target={TYPE} />
+        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )
