@@ -12,6 +12,7 @@ const SectionSwitch = ({
   t,
   target,
   history,
+  hasSubSections,
 }) => {
   const switchSection = (e) => {
     const { value } = e.currentTarget
@@ -25,7 +26,10 @@ const SectionSwitch = ({
     })
   }
 
-  const sections = useMemo(() => getSections(target), [target])
+  const sections = useMemo(
+    () => getSections(target, hasSubSections),
+    [target, hasSubSections],
+  )
 
   return (
     <ButtonGroup className='section-switch'>
@@ -45,6 +49,7 @@ const SectionSwitch = ({
 }
 
 SectionSwitch.propTypes = {
+  hasSubSections: PropTypes.bool,
   target: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
@@ -53,6 +58,10 @@ SectionSwitch.propTypes = {
     }).isRequired,
   }).isRequired,
   t: PropTypes.func.isRequired,
+}
+
+SectionSwitch.defaultProps = {
+  hasSubSections: false,
 }
 
 export default SectionSwitch
