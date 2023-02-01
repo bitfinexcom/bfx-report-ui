@@ -85,8 +85,8 @@ export const TRADES_SECTIONS = [
   },
 ]
 
-export const getSections = (target) => {
-  if (_includes(TRADES_TARGETS, target)) return TRADES_SECTIONS
+export const getSections = (target, hasSubSections) => {
+  if (_includes(TRADES_TARGETS, target) && hasSubSections) return TRADES_SECTIONS
   if (_includes(GENERAL_TARGETS, target)) return GENERAL_SECTIONS
   if (_includes(FUNDING_TARGETS, target)) return FUNDING_SECTIONS
   if (_includes(EARNINGS_TARGETS, target)) return EARNINGS_SECTIONS
