@@ -9,16 +9,17 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import Pagination from 'ui/Pagination'
-import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
 import NoData from 'ui/NoData'
+import Loading from 'ui/Loading'
+import DataTable from 'ui/DataTable'
 import TimeRange from 'ui/TimeRange'
+import Pagination from 'ui/Pagination'
+import ColumnsFilter from 'ui/ColumnsFilter'
+import SectionSwitch from 'ui/SectionSwitch'
 import RefreshButton from 'ui/RefreshButton'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import LedgersCategorySelect from 'ui/LedgersCategorySelect'
-import ColumnsFilter from 'ui/ColumnsFilter'
 import queryConstants from 'state/query/constants'
 import {
   checkInit,
@@ -171,6 +172,7 @@ class Ledgers extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
+        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )
