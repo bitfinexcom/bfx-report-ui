@@ -8,6 +8,7 @@ import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
+import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import { mapRequestPairs } from 'state/symbols/utils'
 import {
@@ -123,12 +124,12 @@ class Orders extends PureComponent {
       existingPairs,
     } = this.props
     const tableColumns = getColumns({
-      columnsWidth,
-      filteredData: entries,
-      getFullTime,
-      onIdClick: this.jumpToOrderTrades,
       t,
       timeOffset,
+      getFullTime,
+      columnsWidth,
+      filteredData: entries,
+      onIdClick: this.jumpToOrderTrades,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -168,6 +169,7 @@ class Orders extends PureComponent {
           }}
           clearTargetPairs={this.clearPairs}
         />
+        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )
