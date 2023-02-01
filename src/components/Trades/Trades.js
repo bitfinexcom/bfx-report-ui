@@ -91,6 +91,7 @@ class Trades extends PureComponent {
           clearTargetPairs={this.clearPairs}
         />
         <SectionSwitch target={TYPE} />
+        <SectionSwitch target={TYPE} hasSubSections />
         {showContent}
       </Card>
     )
