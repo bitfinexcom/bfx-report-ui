@@ -159,7 +159,7 @@ class Candles extends PureComponent {
           </SectionHeaderRow>
         </SectionHeader>
         <div className='candles-header'>
-          <SectionSwitch target={TYPE} />
+          <SectionSwitch target={TYPE} hasSubSections />
           <GoToButton onClick={toggleGoToRangeDialog} />
         </div>
         {showContent}
