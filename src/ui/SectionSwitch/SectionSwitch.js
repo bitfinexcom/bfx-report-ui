@@ -5,6 +5,7 @@ import _map from 'lodash/map'
 import _isEqual from 'lodash/isEqual'
 
 import { getPath } from 'state/query/utils'
+import RefreshButton from 'ui/RefreshButton'
 
 import getSections from './SectionSwitch.helpers'
 
@@ -12,6 +13,7 @@ const SectionSwitch = ({
   t,
   target,
   history,
+  refresh,
   hasSubSections,
 }) => {
   const switchSection = (e) => {
@@ -32,23 +34,26 @@ const SectionSwitch = ({
   )
 
   return (
-    <ButtonGroup className='section-switch'>
-      {_map(sections, ({ targetSection, description }) => (
-        <Button
-          key={description}
-          value={targetSection}
-          onClick={switchSection}
-          intent={target === targetSection ? Intent.PRIMARY : undefined}
-        >
-          {t(description)}
-        </Button>
-
-      ))}
-    </ButtonGroup>
+    <div className='section-switch'>
+      <ButtonGroup>
+        {_map(sections, ({ targetSection, description }) => (
+          <Button
+            key={description}
+            value={targetSection}
+            onClick={switchSection}
+            intent={target === targetSection ? Intent.PRIMARY : undefined}
+          >
+            {t(description)}
+          </Button>
+        ))}
+      </ButtonGroup>
+      {refresh && <RefreshButton onClick={refresh} />}
+    </div>
   )
 }
 
 SectionSwitch.propTypes = {
+  refresh: PropTypes.func,
   hasSubSections: PropTypes.bool,
   target: PropTypes.string.isRequired,
   history: PropTypes.shape({
@@ -61,6 +66,7 @@ SectionSwitch.propTypes = {
 }
 
 SectionSwitch.defaultProps = {
+  refresh: undefined,
   hasSubSections: false,
 }
 
