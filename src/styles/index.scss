@@ -209,15 +209,6 @@ a {
   }
 }
 
-.section-positions-active, .section-positions-audit {
-  .section-switch {
-    .refresh-button {
-      vertical-align: middle;
-      margin-bottom: 1px;
-    }
-  }
-}
-
 .section-switch {
   margin-left: 1px;
   margin-bottom: 30px;
@@ -228,6 +219,19 @@ a {
 
   .refresh-button {
     margin-left: 23px;
+  }
+}
+
+.section-positions-active, .section-positions-audit {
+  .section-switch {
+    .bp3-button-group  {
+      display: inline-flex;
+    }
+
+    .refresh-button {
+      vertical-align: middle;
+      margin-bottom: 1px;
+    }
   }
 }
 
