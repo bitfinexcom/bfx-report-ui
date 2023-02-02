@@ -8,9 +8,9 @@ import DataTable from 'ui/DataTable'
 import { checkFetch } from 'state/utils'
 import { getPath } from 'state/query/utils'
 import SectionHeader from 'ui/SectionHeader'
+import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import getColumns from 'components/Positions/Positions.columns'
-import PositionsSwitch from 'components/Positions/PositionsSwitch'
 
 const TYPE = queryConstants.MENU_POSITIONS_ACTIVE
 
@@ -105,8 +105,9 @@ class PositionsActive extends PureComponent {
           timeframe={false}
           title='activepositions.title'
         />
-        <PositionsSwitch
+        <SectionSwitch
           target={TYPE}
+          hasSubSections
           refresh={refresh}
         />
         {showContent}
