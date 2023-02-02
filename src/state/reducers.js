@@ -51,6 +51,7 @@ import syncReducer from './sync/reducer'
 import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
+import weightedAveragesReducer from './weightedAverages/reducer'
 
 const PERSIST_WHITELIST = [
   'base',
@@ -118,6 +119,7 @@ const FRAMEWORK_REDUCERS = {
   snapshots: snapshotsReducer,
   sync: syncReducer,
   taxReport: taxReportReducer,
+  weightedAverages: weightedAveragesReducer,
 }
 
 const REDUCERS = {

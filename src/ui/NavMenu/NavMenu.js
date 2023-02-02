@@ -53,6 +53,7 @@ const {
   MENU_TRADES,
   MENU_WIN_LOSS,
   MENU_WALLETS,
+  MENU_WEIGHTED_AVERAGES,
 } = queryType
 
 class NavMenu extends PureComponent {
@@ -99,6 +100,7 @@ class NavMenu extends PureComponent {
     [MENU_DERIVATIVES, 'derivatives.title', isTurkishSite],
     ['divider', '', !showFrameworkMode],
     [MENU_ACCOUNT_BALANCE, 'accountbalance.title', !showFrameworkMode],
+    [MENU_WEIGHTED_AVERAGES, 'weightedaverages.title', !showFrameworkMode],
     [MENU_LOAN_REPORT, 'loanreport.title', !showFrameworkMode],
     [MENU_TRADED_VOLUME, 'tradedvolume.title', !showFrameworkMode],
     [MENU_FEES_REPORT, 'feesreport.title', !showFrameworkMode],

@@ -1,9 +1,10 @@
-// https://docs.bitfinex.com/v2/reference#rest-public-status
-import _get from 'lodash/get'
+import _map from 'lodash/map'
+import _isNil from 'lodash/isNil'
 import _sortBy from 'lodash/sortBy'
 
 import authTypes from 'state/auth/constants'
 import queryTypes from 'state/query/constants'
+import timeRangeTypes from 'state/timeRange/constants'
 import {
   addPair,
   basePairState,
@@ -13,6 +14,7 @@ import {
   removePair,
   refresh,
   setPairs,
+  setTimeRange,
 } from 'state/reducers.helper'
 import { formatPair, mapPair } from 'state/symbols/utils'
 
@@ -22,45 +24,41 @@ const initialState = {
   ...basePairState,
 }
 
-const TYPE = queryTypes.MENU_DERIVATIVES
+const TYPE = queryTypes.MENU_WEIGHTED_AVERAGES
 
-export function derivativesReducer(state = initialState, action) {
+export function weightedAveragesReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
-    case types.FETCH_DERIVATIVES:
+    case types.FETCH_WEIGHTED_AVERAGES:
       return fetch(state)
-    case types.UPDATE_DERIVATIVES: {
-      if (!_get(payload, ['data', 'res'])) {
+    case types.UPDATE_WEIGHTED_AVERAGES: {
+      if (_isNil(payload?.data)) {
         return {
           ...state,
           dataReceived: true,
           pageLoading: false,
         }
       }
-      const { data: { res } } = payload
-      const entries = res.map((entry) => {
+      const { data } = payload
+      const entries = _map(data, (entry) => {
         const {
-          clampMin,
-          clampMax,
-          key,
-          timestamp,
-          price,
-          priceSpot,
-          fundBal,
-          fundingAccrued,
-          fundingStep,
+          symbol,
+          buyingWeightedPrice,
+          buyingAmount,
+          sellingWeightedPrice,
+          sellingAmount,
+          cumulativeWeightedPrice,
+          cumulativeAmount,
         } = entry
 
         return {
-          clampMin,
-          clampMax,
-          pair: mapPair(formatPair(key)),
-          timestamp,
-          price,
-          priceSpot,
-          fundBal,
-          fundingAccrued,
-          fundingStep,
+          pair: mapPair(formatPair(symbol)),
+          buyingWeightedPrice,
+          buyingAmount,
+          sellingWeightedPrice,
+          sellingAmount,
+          cumulativeWeightedPrice,
+          cumulativeAmount,
         }
       })
 
@@ -81,6 +79,8 @@ export function derivativesReducer(state = initialState, action) {
       return setPairs(state, payload, initialState)
     case types.CLEAR_PAIRS:
       return clearPairs(state, initialState)
+    case timeRangeTypes.SET_TIME_RANGE:
+      return setTimeRange(TYPE, state, initialState)
     case types.REFRESH:
       return refresh(TYPE, state, initialState)
     case authTypes.LOGOUT:
@@ -91,4 +91,4 @@ export function derivativesReducer(state = initialState, action) {
   }
 }
 
-export default derivativesReducer
+export default weightedAveragesReducer
