@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Classes,
+  Collapse,
   Menu,
   MenuDivider,
   MenuItem,
@@ -78,6 +79,10 @@ class NavMenu extends PureComponent {
     showMenuPopover: true,
   }
 
+  state ={
+    isOpen: false,
+  }
+
   getSections = (isTurkishSite) => [
     [MENU_LEDGERS, 'ledgers.title'],
     [MENU_INVOICES, 'invoices.title', isTurkishSite],
@@ -139,6 +144,11 @@ class NavMenu extends PureComponent {
     window.scrollTo(0, 0) // scroll to the top of page on section change
   }
 
+  toggleCollapse = () => {
+    const { isOpen } = this.state
+    this.setState({ isOpen: !isOpen })
+  }
+
   render() {
     const {
       t,
@@ -147,13 +157,50 @@ class NavMenu extends PureComponent {
       isTurkishSite,
       showMenuPopover,
     } = this.props
+    const { isOpen } = this.state
     const target = getTarget(history.location.pathname, false)
 
     const classes = classNames('bitfinex-nav-menu', className)
 
     return (
       <Menu large className={classes}>
+        <MenuItem
+          text={'Toggle collapse'}
+          onClick={() => this.toggleCollapse()}
+        />
+        <Collapse isOpen={isOpen}>
+          {_map(this.getSections(isTurkishSite), (section, index) => {
+            const [type, title, isSkipped] = section
+
+            if (isSkipped) {
+              return null
+            }
+
+            if (type === 'divider') {
+            /* eslint-disable-next-line react/no-array-index-key */
+              return <MenuDivider key={index} />
+            }
+
+            const types = _castArray(type)
+            const mainType = types[0]
+
+            const Icon = getIcon(mainType)
+            const [path] = _castArray(getPath(mainType))
+
+            return (
+              <MenuItem
+                href={path}
+                key={mainType}
+                text={t(title)}
+                icon={<Icon />}
+                active={_includes(types, target)}
+                onClick={(e) => this.handleClick(e, mainType)}
+              />
+            )
+          })}
+        </Collapse>
         {showMenuPopover && window.innerWidth > 390 && window.innerWidth <= 1024 && <NavMenuPopover />}
+
         {_map(this.getSections(isTurkishSite), (section, index) => {
           const [type, title, isSkipped] = section
 
