@@ -18,7 +18,6 @@ import {
 } from 'state/utils'
 
 import getColumns from './Positions.columns'
-import PositionsSwitch from './PositionsSwitch'
 
 const TYPE = queryConstants.MENU_POSITIONS
 
@@ -151,7 +150,7 @@ class Positions extends PureComponent {
           clearTargetPairs={this.clearPairs}
         />
         <SectionSwitch target={TYPE} />
-        <PositionsSwitch target={TYPE} />
+        <SectionSwitch target={TYPE} hasSubSections />
         {showContent}
       </Card>
     )
