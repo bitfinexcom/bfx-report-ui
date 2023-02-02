@@ -90,8 +90,20 @@ export const TRADES_SECTIONS = [
   },
 ]
 
+export const POSITIONS_SECTIONS = [
+  {
+    targetSection: queryConstants.MENU_POSITIONS,
+    description: 'positions.closed',
+  },
+  {
+    targetSection: queryConstants.MENU_POSITIONS_ACTIVE,
+    description: 'positions.active',
+  },
+]
+
 export const getSections = (target, hasSubSections) => {
   if (_includes(TRADES_TARGETS, target) && hasSubSections) return TRADES_SECTIONS
+  if (_includes(POSITIONS_TARGETS, target) && hasSubSections) return POSITIONS_SECTIONS
   if (_includes(GENERAL_TARGETS, target)) return GENERAL_SECTIONS
   if (_includes(FUNDING_TARGETS, target)) return FUNDING_SECTIONS
   if (_includes(EARNINGS_TARGETS, target)) return EARNINGS_SECTIONS
