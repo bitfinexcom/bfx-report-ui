@@ -9,6 +9,7 @@ const TRADES_TARGETS = [
 const POSITIONS_TARGETS = [
   queryConstants.MENU_POSITIONS,
   queryConstants.MENU_POSITIONS_ACTIVE,
+  queryConstants.MENU_POSITIONS_AUDIT,
 ]
 
 const GENERAL_TARGETS = [
