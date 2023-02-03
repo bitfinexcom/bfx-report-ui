@@ -12,6 +12,7 @@ import _map from 'lodash/map'
 import _includes from 'lodash/includes'
 import _castArray from 'lodash/castArray'
 
+import Icons from 'icons'
 import { getIcon, getPath, getTarget } from 'state/query/utils'
 
 import NavMenuPopover from './NavMenuPopover'
@@ -87,6 +88,12 @@ class NavMenu extends PureComponent {
 
     return (
       <Menu large className={classes}>
+        <MenuItem
+          className='reports_title'
+          icon={<Icons.PIE_CHART />}
+          text={t('navItems.reports')}
+        />
+        <MenuDivider />
         <MenuItem
           text={'Toggle collapse'}
           onClick={() => this.toggleCollapse()}
