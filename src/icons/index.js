@@ -34,6 +34,7 @@ import { ReactComponent as MOVEMENTS } from './movements.svg'
 import { ReactComponent as NOTEBOOK } from './notebook.svg'
 import { ReactComponent as OFFLINE } from './offline.svg'
 import { ReactComponent as ORDERS } from './orders.svg'
+import { ReactComponent as PIE_CHART } from './pie-chart.svg'
 import { ReactComponent as REFRESH_DOUBLE } from './refresh-double.svg'
 import { ReactComponent as SEARCH } from './search.svg'
 import { ReactComponent as SIGN_IN } from './sign-in.svg'
@@ -85,6 +86,7 @@ export default {
   NOTEBOOK,
   OFFLINE,
   ORDERS,
+  PIE_CHART,
   REFRESH_DOUBLE,
   SEARCH,
   SIGN_IN,
