@@ -314,11 +314,20 @@
     "title": "Movements"
   },
   "navItems": {
+    "reports":"Reports",
     "myAccount": {
       "title": "My Account",
       "summary": "Summary",
       "balance": "Balance",
       "analysisStat": "Analysis/Statistics",
+      "analysisStatTabs": {
+        "weightedAvgs": "Weighted Averages",
+        "volume": "Volume",
+        "winLoss": "Win/Loss",
+        "conRisk": "Concentration Risk",
+        "loan": "Loan Report",
+        "fee": "Fee Report"
+      },
       "snapshotsTax": "Snapshots & Tax Report"
     },
     "myHistory": {
