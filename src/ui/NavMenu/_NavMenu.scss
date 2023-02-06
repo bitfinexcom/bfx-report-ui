@@ -82,6 +82,14 @@
     border-top: 1px solid var(--borderColor);
   }
 
+  .sub_items_menu {
+    .bp3-collapse-body {
+      li {
+        padding-left: 40px;
+      }
+    }
+  }
+
   &--mobile {
     display: none;
     width: 100vw;
