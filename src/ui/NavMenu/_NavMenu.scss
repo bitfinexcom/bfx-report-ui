@@ -6,6 +6,10 @@
   box-shadow: 0 1px 0 1px var(--borderColor);
   clip-path: inset(0 -1px 0 0);
 
+  .reports_title {
+    pointer-events: none;
+  }
+
   &--popover {
     box-shadow: 0 0 1px var(--menuPopoverShadow);
 
