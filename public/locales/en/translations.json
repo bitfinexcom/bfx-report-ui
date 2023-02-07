@@ -585,6 +585,7 @@
   },
   "tickers": {
     "title": "Tickers",
+    "spot": "Spot",
     "minlength": "Should pick at least one pair"
   },
   "timeframe": {
