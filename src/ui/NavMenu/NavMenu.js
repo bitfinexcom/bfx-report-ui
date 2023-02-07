@@ -15,8 +15,16 @@ import _castArray from 'lodash/castArray'
 import Icons from 'icons'
 import { getIcon, getPath, getTarget } from 'state/query/utils'
 
+import menuTypes from './NavMenu.constants'
 import NavMenuPopover from './NavMenuPopover'
-import { getSections } from './NavMenu.helpers'
+import { getSections, getSubSections } from './NavMenu.helpers'
+
+const {
+  MENU_MY_ACCOUNT,
+  MENU_MY_HISTORY,
+  MENU_MERCHANT_HISTORY,
+  MENU_MARKET_HISTORY,
+} = menuTypes
 
 class NavMenu extends PureComponent {
   static propTypes = {
@@ -86,6 +94,9 @@ class NavMenu extends PureComponent {
 
     const classes = classNames('bitfinex-nav-menu', className)
 
+    console.log('++className', className)
+
+
     return (
       <Menu large className={classes}>
         <MenuItem
@@ -95,11 +106,12 @@ class NavMenu extends PureComponent {
         />
         <MenuDivider />
         <MenuItem
-          text={'Toggle collapse'}
+          icon={<Icons.NOTEBOOK />}
+          text={t('navItems.myAccount.title')}
           onClick={() => this.toggleCollapse()}
         />
-        <Collapse isOpen={isOpen}>
-          {_map(getSections(isTurkishSite), (section, index) => {
+        <Collapse className='sub_items_menu' isOpen={isOpen}>
+          {_map(getSubSections(menuTypes.MENU_MY_ACCOUNT, isTurkishSite), (section, index) => {
             const [type, title, isSkipped] = section
 
             if (isSkipped) {
@@ -114,7 +126,7 @@ class NavMenu extends PureComponent {
             const types = _castArray(type)
             const mainType = types[0]
 
-            const Icon = getIcon(mainType)
+            {/* const Icon = getIcon(mainType) */}
             const [path] = _castArray(getPath(mainType))
 
             return (
@@ -122,7 +134,45 @@ class NavMenu extends PureComponent {
                 href={path}
                 key={mainType}
                 text={t(title)}
-                icon={<Icon />}
+                // icon={<Icon />}
+                className='menu_sub_item'
+                active={_includes(types, target)}
+                onClick={(e) => this.handleClick(e, mainType)}
+              />
+            )
+          })}
+        </Collapse>
+        <MenuItem
+          icon={<Icons.NOTEBOOK />}
+          text={t('navItems.myHistory.title')}
+          onClick={() => this.toggleCollapse()}
+        />
+        <Collapse className='sub_items_menu' isOpen={isOpen}>
+          {_map(getSubSections(MENU_MY_HISTORY, isTurkishSite), (section, index) => {
+            const [type, title, isSkipped] = section
+
+            if (isSkipped) {
+              return null
+            }
+
+            if (type === 'divider') {
+            /* eslint-disable-next-line react/no-array-index-key */
+              return <MenuDivider key={index} />
+            }
+
+            const types = _castArray(type)
+            const mainType = types[0]
+
+            {/* const Icon = getIcon(mainType) */}
+            const [path] = _castArray(getPath(mainType))
+
+            return (
+              <MenuItem
+                href={path}
+                key={mainType}
+                text={t(title)}
+                // icon={<Icon />}
+                className='menu_sub_item'
                 active={_includes(types, target)}
                 onClick={(e) => this.handleClick(e, mainType)}
               />
@@ -146,7 +196,7 @@ class NavMenu extends PureComponent {
           const types = _castArray(type)
           const mainType = types[0]
 
-          const Icon = getIcon(mainType)
+          {/* const Icon = getIcon(mainType) */}
           const [path] = _castArray(getPath(mainType))
 
           return (
@@ -154,7 +204,7 @@ class NavMenu extends PureComponent {
               href={path}
               key={mainType}
               text={t(title)}
-              icon={<Icon />}
+              // icon={<Icon />}
               active={_includes(types, target)}
               onClick={(e) => this.handleClick(e, mainType)}
             />
