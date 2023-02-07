@@ -360,6 +360,7 @@
     "marketHistory": {
       "title": "Market History",
       "trades": "Trades",
+      "funding": "Funding",
       "spot": "Spot",
       "derivatives": "Derivatives"
     }
