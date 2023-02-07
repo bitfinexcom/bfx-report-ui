@@ -85,6 +85,10 @@ export const getSubSections = (menuType, isTurkishSite) => {
         [MENU_FPAYMENT, 'navItems.myHistory.earnings', isTurkishSite],
         [MENU_WALLETS, 'wallets.title'],
       ]
+    case MENU_MERCHANT_HISTORY:
+      return [
+        [MENU_INVOICES, 'invoices.title', isTurkishSite],
+      ]
     default:
       return []
   }
