@@ -91,10 +91,10 @@ export const getSubSections = (menuType, isTurkishSite) => {
       ]
     case MENU_MARKET_HISTORY:
       return [
-        [MENU_PUBLIC_TRADES, 'navItems.myHistory.trades'],
-        [MENU_PUBLIC_FUNDING, 'navItems.myHistory.funding', isTurkishSite],
-        [MENU_TICKERS, 'navItems.myHistory.spot'],
-        [MENU_DERIVATIVES, 'navItems.myHistory.derivatives', isTurkishSite],
+        [MENU_PUBLIC_TRADES, 'navItems.marketHistory.trades'],
+        [MENU_PUBLIC_FUNDING, 'navItems.marketHistory.funding', isTurkishSite],
+        [MENU_TICKERS, 'navItems.marketHistory.spot'],
+        [MENU_DERIVATIVES, 'navItems.marketHistory.derivatives', isTurkishSite],
       ]
     default:
       return []
