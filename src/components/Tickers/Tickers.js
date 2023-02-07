@@ -96,7 +96,7 @@ class Tickers extends PureComponent {
     return (
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
-          <SectionHeaderTitle>{t('tickers.title')}</SectionHeaderTitle>
+          <SectionHeaderTitle>{t('tickers.spot')}</SectionHeaderTitle>
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
