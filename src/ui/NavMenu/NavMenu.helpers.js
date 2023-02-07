@@ -89,6 +89,13 @@ export const getSubSections = (menuType, isTurkishSite) => {
       return [
         [MENU_INVOICES, 'invoices.title', isTurkishSite],
       ]
+    case MENU_MARKET_HISTORY:
+      return [
+        [MENU_PUBLIC_TRADES, 'navItems.myHistory.trades'],
+        [MENU_PUBLIC_FUNDING, 'navItems.myHistory.funding', isTurkishSite],
+        [MENU_TICKERS, 'navItems.myHistory.spot'],
+        [MENU_DERIVATIVES, 'navItems.myHistory.derivatives', isTurkishSite],
+      ]
     default:
       return []
   }
@@ -149,7 +156,7 @@ export const getSections = (isTurkishSite) => [
   ['divider', '', isTurkishSite],
   [MENU_PUBLIC_TRADES, 'publictrades.title'],
   [MENU_PUBLIC_FUNDING, 'publicfunding.title', isTurkishSite],
-  [MENU_TICKERS, 'tickers.title'],
+  [MENU_TICKERS, 'tickers.spot'],
   [MENU_DERIVATIVES, 'derivatives.title', isTurkishSite],
   ['divider', '', !showFrameworkMode],
   [MENU_ACCOUNT_BALANCE, 'accountbalance.title', !showFrameworkMode],
