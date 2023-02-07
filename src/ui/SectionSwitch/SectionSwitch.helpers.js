@@ -12,6 +12,14 @@ const POSITIONS_TARGETS = [
   queryConstants.MENU_POSITIONS_AUDIT,
 ]
 
+const ANALYSIS_STAT_TARGETS = [
+  queryConstants.MENU_WEIGHTED_AVERAGES,
+  queryConstants.MENU_TRADED_VOLUME,
+  queryConstants.MENU_CONCENTRATION_RISK,
+  queryConstants.MENU_LOAN_REPORT,
+  queryConstants.MENU_FEES_REPORT,
+]
+
 const GENERAL_TARGETS = [
   queryConstants.MENU_LEDGERS,
   queryConstants.MENU_TRADES,
