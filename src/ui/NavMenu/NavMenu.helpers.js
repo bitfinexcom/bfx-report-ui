@@ -71,7 +71,6 @@ const {
 export const getSubSections = (menuType, isTurkishSite) => {
   switch (menuType) {
     case MENU_MY_ACCOUNT:
-    default:
       return [
         [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
         [MENU_ACCOUNT_BALANCE, 'accountbalance.title', !showFrameworkMode],
@@ -79,6 +78,15 @@ export const getSubSections = (menuType, isTurkishSite) => {
         [MENU_SNAPSHOTS, 'snapshots.title', !showFrameworkMode],
         [MENU_TAX_REPORT, 'taxreport.title', !showFrameworkMode],
       ]
+    case MENU_MY_HISTORY:
+      return [
+        [MENU_LEDGERS, 'navItems.myHistory.general'],
+        [MENU_FOFFER, 'navItems.myHistory.funding', isTurkishSite],
+        [MENU_FPAYMENT, 'navItems.myHistory.earnings', isTurkishSite],
+        [MENU_WALLETS, 'wallets.title'],
+      ]
+    default:
+      return []
   }
 }
 
