@@ -18,10 +18,14 @@ import DateInput from 'ui/DateInput'
 import QueryButton from 'ui/QueryButton'
 import PieChart from 'ui/Charts/PieChart'
 import RefreshButton from 'ui/RefreshButton'
+import SectionSwitch from 'ui/SectionSwitch'
 import { fixedFloat } from 'ui/utils'
+import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
 
 import { getColumns } from './ConcentrationRisk.columns'
+
+const TYPE = queryConstants.MENU_CONCENTRATION_RISK
 
 class ConcentrationRisk extends PureComponent {
   static propTypes = {
@@ -170,6 +174,7 @@ class ConcentrationRisk extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
+        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )
