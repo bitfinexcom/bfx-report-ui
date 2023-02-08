@@ -15,6 +15,7 @@ import {
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
+import SectionSwitch from 'ui/SectionSwitch'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import {
@@ -142,6 +143,7 @@ class WeightedAverages extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
+        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )
