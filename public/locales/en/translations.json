@@ -326,7 +326,7 @@
         "winLoss": "Win/Loss",
         "conRisk": "Concentration Risk",
         "loan": "Loan Report",
-        "fee": "Fee Report"
+        "fees": "Fees Report"
       },
       "snapshotsTax": "Snapshots & Tax Report"
     },

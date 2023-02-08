@@ -15,6 +15,7 @@ const POSITIONS_TARGETS = [
 const ANALYSIS_STAT_TARGETS = [
   queryConstants.MENU_WEIGHTED_AVERAGES,
   queryConstants.MENU_TRADED_VOLUME,
+  queryConstants.MENU_WIN_LOSS,
   queryConstants.MENU_CONCENTRATION_RISK,
   queryConstants.MENU_LOAN_REPORT,
   queryConstants.MENU_FEES_REPORT,
@@ -37,6 +38,34 @@ const EARNINGS_TARGETS = [
   queryConstants.MENU_FPAYMENT,
   queryConstants.MENU_SPAYMENTS,
   queryConstants.MENU_AFFILIATES_EARNINGS,
+]
+
+
+export const ANALYSIS_STAT_SECTIONS = [
+  {
+    targetSection: queryConstants.MENU_WEIGHTED_AVERAGES,
+    description: 'navItems.myAccount.analysisStatTabs.weightedAvgs',
+  },
+  {
+    targetSection: queryConstants.MENU_TRADED_VOLUME,
+    description: 'navItems.myAccount.analysisStatTabs.volume',
+  },
+  {
+    targetSection: queryConstants.MENU_WIN_LOSS,
+    description: 'navItems.myAccount.analysisStatTabs.winLoss',
+  },
+  {
+    targetSection: queryConstants.MENU_CONCENTRATION_RISK,
+    description: 'navItems.myAccount.analysisStatTabs.conRisk',
+  },
+  {
+    targetSection: queryConstants.MENU_LOAN_REPORT,
+    description: 'navItems.myAccount.analysisStatTabs.loan',
+  },
+  {
+    targetSection: queryConstants.MENU_FEES_REPORT,
+    description: 'navItems.myAccount.analysisStatTabs.fees',
+  },
 ]
 
 export const GENERAL_SECTIONS = [
