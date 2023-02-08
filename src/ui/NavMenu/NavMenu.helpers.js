@@ -49,15 +49,6 @@ const {
   MENU_MARKET_HISTORY,
 } = constants
 
-
-// My Account
-// Summary
-// Balance
-// Analysis/Statistics
-// Tabs: Weighted Averages| Volume | Win/Loss | Concentration Risk | Loan report | Fee report
-// Snapshots & Tax Report
-
-
 export const getSubSections = (menuType, isTurkishSite) => {
   switch (menuType) {
     case MENU_MY_ACCOUNT:
@@ -90,7 +81,6 @@ export const getSubSections = (menuType, isTurkishSite) => {
       return []
   }
 }
-
 
 export const getSections = (isTurkishSite) => [
   [MENU_LEDGERS, 'ledgers.title'],
