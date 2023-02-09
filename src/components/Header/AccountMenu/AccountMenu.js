@@ -10,10 +10,13 @@ import {
 import _isString from 'lodash/isString'
 
 import Icon from 'icons'
+import queryConstants from 'state/query/constants'
 
 import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
-import { openHelp } from '../utils'
+import { openHelp, openChangelog } from '../utils'
+
+const { MENU_LOGINS, MENU_SUB_ACCOUNTS } = queryConstants
 
 const formatUsername = (email = '') => {
   if (!_isString(email)) {
@@ -48,10 +51,25 @@ const AccountMenu = ({
               text={t('header.preferences')}
             />
             <MenuItem
+              onClick={togglePrefDialog}
+              icon={<Icon.SIGN_IN />}
+              text={t('navItems.loginHistory')}
+            />
+            <MenuItem
               className='account-menu-export'
               onClick={toggleExportDialog}
               icon={<Icon.FILE_EXPORT />}
               text={t('download.export')}
+            />
+            <MenuItem
+              onClick={openHelp}
+              icon={<Icon.USER_CIRCLE />}
+              text={t('navItems.subAccounts')}
+            />
+            <MenuItem
+              onClick={openChangelog}
+              icon={<Icon.INFO_CIRCLE />}
+              text={t('navItems.changeLogs')}
             />
             <MenuItem
               onClick={openHelp}
