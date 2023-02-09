@@ -92,9 +92,6 @@ class NavMenu extends PureComponent {
 
     const classes = classNames('bitfinex-nav-menu', className)
 
-    console.log('++className', className)
-
-
     return (
       <Menu large className={classes}>
         <MenuItem
@@ -177,41 +174,45 @@ class NavMenu extends PureComponent {
             )
           })}
         </Collapse>
-        <MenuItem
-          icon={<Icons.NOTEBOOK />}
-          onClick={() => this.toggleCollapse()}
-          text={t('navItems.merchantHistory.title')}
-        />
-        <Collapse className='sub_items_menu' isOpen={isOpen}>
-          {_map(getSubSections(MENU_MERCHANT_HISTORY, isTurkishSite), (section, index) => {
-            const [type, title, isSkipped] = section
+        {!isTurkishSite && (
+          <>
+            <MenuItem
+              icon={<Icons.NOTEBOOK />}
+              onClick={() => this.toggleCollapse()}
+              text={t('navItems.merchantHistory.title')}
+            />
+            <Collapse className='sub_items_menu' isOpen={isOpen}>
+              {_map(getSubSections(MENU_MERCHANT_HISTORY, isTurkishSite), (section, index) => {
+                const [type, title, isSkipped] = section
 
-            if (isSkipped) {
-              return null
-            }
+                if (isSkipped) {
+                  return null
+                }
 
-            if (type === 'divider') {
-            /* eslint-disable-next-line react/no-array-index-key */
-              return <MenuDivider key={index} />
-            }
+                if (type === 'divider') {
+                /* eslint-disable-next-line react/no-array-index-key */
+                  return <MenuDivider key={index} />
+                }
 
-            const types = _castArray(type)
-            const mainType = types[0]
+                const types = _castArray(type)
+                const mainType = types[0]
 
-            const [path] = _castArray(getPath(mainType))
+                const [path] = _castArray(getPath(mainType))
 
-            return (
-              <MenuItem
-                href={path}
-                key={mainType}
-                text={t(title)}
-                className='menu_sub_item'
-                active={_includes(types, target)}
-                onClick={(e) => this.handleClick(e, mainType)}
-              />
-            )
-          })}
-        </Collapse>
+                return (
+                  <MenuItem
+                    href={path}
+                    key={mainType}
+                    text={t(title)}
+                    className='menu_sub_item'
+                    active={_includes(types, target)}
+                    onClick={(e) => this.handleClick(e, mainType)}
+                  />
+                )
+              })}
+            </Collapse>
+          </>
+        )}
         <MenuItem
           icon={<Icons.NOTEBOOK />}
           onClick={() => this.toggleCollapse()}
