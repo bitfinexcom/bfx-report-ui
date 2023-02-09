@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
-import _includes from 'lodash/includes'
+import _isEqual from 'lodash/isEqual'
 import _castArray from 'lodash/castArray'
 
 import Icons from 'icons'
@@ -64,19 +64,16 @@ class NavMenu extends PureComponent {
         if (isSkipped) {
           return null
         }
-
-        const types = _castArray(type)
-        const mainType = types[0]
-        const [path] = _castArray(getPath(mainType))
+        const path = getPath(type)
 
         return (
           <MenuItem
             href={path}
-            key={mainType}
+            key={type}
             text={t(title)}
             className='menu_sub_item'
-            active={_includes(types, target)}
-            onClick={(e) => this.handleClick(e, mainType)}
+            active={_isEqual(type, target)}
+            onClick={(e) => this.handleClick(e, type)}
           />
         )
       })
@@ -121,6 +118,7 @@ class NavMenu extends PureComponent {
     } = this.props
     const { isOpen } = this.state
     const target = getTarget(history.location.pathname, false)
+    console.log('++target', target)
 
     const classes = classNames('bitfinex-nav-menu', className)
 
