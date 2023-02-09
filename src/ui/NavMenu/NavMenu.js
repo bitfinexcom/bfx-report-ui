@@ -16,7 +16,7 @@ import Icons from 'icons'
 import { getPath, getTarget } from 'state/query/utils'
 
 import menuTypes from './NavMenu.constants'
-import { getSubSections } from './NavMenu.helpers'
+import { getSections } from './NavMenu.helpers'
 
 const {
   MENU_MY_ACCOUNT,
@@ -58,7 +58,7 @@ class NavMenu extends PureComponent {
     } = this.props
 
     return (
-      _map(getSubSections(menuType, isTurkishSite), (section) => {
+      _map(getSections(menuType, isTurkishSite), (section) => {
         const [type, title, isSkipped] = section
 
         if (isSkipped) {
