@@ -47,8 +47,40 @@ class NavMenu extends PureComponent {
     showMenuPopover: true,
   }
 
-  state ={
+  state = {
     isOpen: false,
+  }
+
+  getMenuItems = (menuType, target) => {
+    const {
+      t,
+      isTurkishSite,
+    } = this.props
+
+    return (
+      _map(getSubSections(menuType, isTurkishSite), (section) => {
+        const [type, title, isSkipped] = section
+
+        if (isSkipped) {
+          return null
+        }
+
+        const types = _castArray(type)
+        const mainType = types[0]
+        const [path] = _castArray(getPath(mainType))
+
+        return (
+          <MenuItem
+            href={path}
+            key={mainType}
+            text={t(title)}
+            className='menu_sub_item'
+            active={_includes(types, target)}
+            onClick={(e) => this.handleClick(e, mainType)}
+          />
+        )
+      })
+    )
   }
 
   handleClick = (e, nextTarget) => {
@@ -110,34 +142,7 @@ class NavMenu extends PureComponent {
           keepChildrenMounted
           className='sub_items_menu'
         >
-          {_map(getSubSections(MENU_MY_ACCOUNT, isTurkishSite), (section, index) => {
-            const [type, title, isSkipped] = section
-
-            if (isSkipped) {
-              return null
-            }
-
-            if (type === 'divider') {
-            /* eslint-disable-next-line react/no-array-index-key */
-              return <MenuDivider key={index} />
-            }
-
-            const types = _castArray(type)
-            const mainType = types[0]
-
-            const [path] = _castArray(getPath(mainType))
-
-            return (
-              <MenuItem
-                href={path}
-                key={mainType}
-                text={t(title)}
-                className='menu_sub_item'
-                active={_includes(types, target)}
-                onClick={(e) => this.handleClick(e, mainType)}
-              />
-            )
-          })}
+          {this.getMenuItems(MENU_MY_ACCOUNT, target)}
         </Collapse>
         <MenuItem
           icon={<Icons.NOTEBOOK />}
@@ -145,34 +150,7 @@ class NavMenu extends PureComponent {
           onClick={() => this.toggleCollapse()}
         />
         <Collapse className='sub_items_menu' isOpen={isOpen}>
-          {_map(getSubSections(MENU_MY_HISTORY, isTurkishSite), (section, index) => {
-            const [type, title, isSkipped] = section
-
-            if (isSkipped) {
-              return null
-            }
-
-            if (type === 'divider') {
-            /* eslint-disable-next-line react/no-array-index-key */
-              return <MenuDivider key={index} />
-            }
-
-            const types = _castArray(type)
-            const mainType = types[0]
-
-            const [path] = _castArray(getPath(mainType))
-
-            return (
-              <MenuItem
-                href={path}
-                key={mainType}
-                text={t(title)}
-                className='menu_sub_item'
-                active={_includes(types, target)}
-                onClick={(e) => this.handleClick(e, mainType)}
-              />
-            )
-          })}
+          {this.getMenuItems(MENU_MY_HISTORY, target)}
         </Collapse>
         {!isTurkishSite && (
           <>
@@ -182,34 +160,7 @@ class NavMenu extends PureComponent {
               text={t('navItems.merchantHistory.title')}
             />
             <Collapse className='sub_items_menu' isOpen={isOpen}>
-              {_map(getSubSections(MENU_MERCHANT_HISTORY, isTurkishSite), (section, index) => {
-                const [type, title, isSkipped] = section
-
-                if (isSkipped) {
-                  return null
-                }
-
-                if (type === 'divider') {
-                /* eslint-disable-next-line react/no-array-index-key */
-                  return <MenuDivider key={index} />
-                }
-
-                const types = _castArray(type)
-                const mainType = types[0]
-
-                const [path] = _castArray(getPath(mainType))
-
-                return (
-                  <MenuItem
-                    href={path}
-                    key={mainType}
-                    text={t(title)}
-                    className='menu_sub_item'
-                    active={_includes(types, target)}
-                    onClick={(e) => this.handleClick(e, mainType)}
-                  />
-                )
-              })}
+              {this.getMenuItems(MENU_MERCHANT_HISTORY, target)}
             </Collapse>
           </>
         )}
@@ -219,34 +170,7 @@ class NavMenu extends PureComponent {
           text={t('navItems.marketHistory.title')}
         />
         <Collapse className='sub_items_menu' isOpen={isOpen}>
-          {_map(getSubSections(MENU_MARKET_HISTORY, isTurkishSite), (section, index) => {
-            const [type, title, isSkipped] = section
-
-            if (isSkipped) {
-              return null
-            }
-
-            if (type === 'divider') {
-            /* eslint-disable-next-line react/no-array-index-key */
-              return <MenuDivider key={index} />
-            }
-
-            const types = _castArray(type)
-            const mainType = types[0]
-
-            const [path] = _castArray(getPath(mainType))
-
-            return (
-              <MenuItem
-                href={path}
-                key={mainType}
-                text={t(title)}
-                className='menu_sub_item'
-                active={_includes(types, target)}
-                onClick={(e) => this.handleClick(e, mainType)}
-              />
-            )
-          })}
+          {this.getMenuItems(MENU_MARKET_HISTORY, target)}
         </Collapse>
       </Menu>
     )
