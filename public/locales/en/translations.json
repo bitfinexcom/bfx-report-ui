@@ -363,7 +363,10 @@
       "funding": "Funding",
       "spot": "Spot",
       "derivatives": "Derivatives"
-    }
+    },
+    "loginHistory": "Login History",
+    "subAccounts": "Sub Accounts",
+    "changeLogs": "Change Logs"
   },
   "nodata": "No related data in this time range. You can try another time range.",
   "no_merchant": {
