@@ -7,7 +7,6 @@ import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
-import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import {
   checkInit,
@@ -133,6 +132,7 @@ class FundingCreditHistory extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
+          showHeaderTabs
           title='fcredit.title'
           symbolsSelectorProps={{
             existingCoins,
@@ -142,7 +142,6 @@ class FundingCreditHistory extends PureComponent {
           refresh={refresh}
           clearTargetSymbols={this.clearSymbols}
         />
-        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )
