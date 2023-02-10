@@ -118,7 +118,6 @@ class NavMenu extends PureComponent {
     } = this.props
     const { isOpen } = this.state
     const target = getTarget(history.location.pathname, false)
-    console.log('++target', target)
 
     const classes = classNames('bitfinex-nav-menu', className)
 
