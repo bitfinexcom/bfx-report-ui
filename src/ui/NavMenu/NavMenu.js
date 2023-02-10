@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
-  Classes,
   Collapse,
   Menu,
   MenuDivider,
@@ -36,7 +35,6 @@ class NavMenu extends PureComponent {
       }).isRequired,
       push: PropTypes.func.isRequired,
     }).isRequired,
-    showMenuPopover: PropTypes.bool,
     t: PropTypes.func.isRequired,
     isTurkishSite: PropTypes.bool.isRequired,
   }
@@ -44,7 +42,6 @@ class NavMenu extends PureComponent {
   static defaultProps = {
     className: '',
     target: undefined,
-    showMenuPopover: true,
   }
 
   state = {
@@ -81,16 +78,7 @@ class NavMenu extends PureComponent {
   }
 
   handleClick = (e, nextTarget) => {
-    const { showMenuPopover } = this.props
     e.preventDefault()
-
-    // imitate click to close the popover only in popover view
-    if (!showMenuPopover) {
-      // dismiss popover mode
-      const { parentElement } = e.target
-      parentElement.classList.add(Classes.POPOVER_DISMISS)
-      parentElement.click()
-    }
 
     const { target, history } = this.props
     if (target === nextTarget) {
@@ -146,7 +134,11 @@ class NavMenu extends PureComponent {
           text={t('navItems.myHistory.title')}
           onClick={() => this.toggleCollapse()}
         />
-        <Collapse className='sub_items_menu' isOpen={isOpen}>
+        <Collapse
+          isOpen={isOpen}
+          keepChildrenMounted
+          className='sub_items_menu'
+        >
           {this.getMenuItems(MENU_MY_HISTORY, target)}
         </Collapse>
         {!isTurkishSite && (
@@ -156,7 +148,11 @@ class NavMenu extends PureComponent {
               onClick={() => this.toggleCollapse()}
               text={t('navItems.merchantHistory.title')}
             />
-            <Collapse className='sub_items_menu' isOpen={isOpen}>
+            <Collapse
+              isOpen={isOpen}
+              keepChildrenMounted
+              className='sub_items_menu'
+            >
               {this.getMenuItems(MENU_MERCHANT_HISTORY, target)}
             </Collapse>
           </>
@@ -166,7 +162,11 @@ class NavMenu extends PureComponent {
           onClick={() => this.toggleCollapse()}
           text={t('navItems.marketHistory.title')}
         />
-        <Collapse className='sub_items_menu' isOpen={isOpen}>
+        <Collapse
+          isOpen={isOpen}
+          keepChildrenMounted
+          className='sub_items_menu'
+        >
           {this.getMenuItems(MENU_MARKET_HISTORY, target)}
         </Collapse>
       </Menu>
