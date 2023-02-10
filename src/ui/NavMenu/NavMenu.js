@@ -80,7 +80,7 @@ const NavMenu = ({
       />
       <MenuDivider />
       <MenuItem
-        icon={<Icons.NOTEBOOK />}
+        icon={<Icons.USER_CIRCLE />}
         text={t('navItems.myAccount.title')}
         onClick={() => setIsMyAccountOpen(!isMyAccountOpen)}
       />
@@ -106,7 +106,7 @@ const NavMenu = ({
       {!isTurkishSite && (
         <>
           <MenuItem
-            icon={<Icons.NOTEBOOK />}
+            icon={<Icons.ACCOUNT_BALANCE />}
             text={t('navItems.merchantHistory.title')}
             onClick={() => setIsMerchantHistoryOpen(!isMerchantHistoryOpen)}
           />
@@ -120,7 +120,7 @@ const NavMenu = ({
         </>
       )}
       <MenuItem
-        icon={<Icons.NOTEBOOK />}
+        icon={<Icons.DERIVATIVES />}
         text={t('navItems.marketHistory.title')}
         onClick={() => setIsMarketHistoryOpen(!isMarketHistoryOpen)}
       />
