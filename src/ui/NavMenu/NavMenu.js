@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
-  Collapse,
   Menu,
-  MenuDivider,
+  Collapse,
   MenuItem,
+  MenuDivider,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
 import _isEqual from 'lodash/isEqual'
@@ -20,8 +20,8 @@ import { getSections } from './NavMenu.helpers'
 const {
   MENU_MY_ACCOUNT,
   MENU_MY_HISTORY,
-  MENU_MERCHANT_HISTORY,
   MENU_MARKET_HISTORY,
+  MENU_MERCHANT_HISTORY,
 } = menuTypes
 
 const NavMenu = ({
@@ -30,11 +30,12 @@ const NavMenu = ({
   className,
   isTurkishSite,
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isMyAccountOpen, setIsMyAccountOpen] = useState(false)
+  const [isMyHistoryOpen, setIsMyHistoryOpen] = useState(false)
+  const [isMarketHistoryOpen, setIsMarketHistoryOpen] = useState(false)
+  const [isMerchantHistoryOpen, setIsMerchantHistoryOpen] = useState(false)
 
-  const toggleCollapse = () => setIsOpen(!isOpen)
-
-  const handleClick = (e, nextTarget) => {
+  const handleItemClick = (e, nextTarget) => {
     e.preventDefault()
 
     const [path] = _castArray(getPath(nextTarget))
@@ -61,7 +62,7 @@ const NavMenu = ({
           text={t(title)}
           className='menu_sub_item'
           active={_isEqual(type, target)}
-          onClick={(e) => handleClick(e, type)}
+          onClick={(e) => handleItemClick(e, type)}
         />
       )
     })
@@ -81,11 +82,11 @@ const NavMenu = ({
       <MenuItem
         icon={<Icons.NOTEBOOK />}
         text={t('navItems.myAccount.title')}
-        onClick={() => toggleCollapse()}
+        onClick={() => setIsMyAccountOpen(!isMyAccountOpen)}
       />
       <Collapse
-        isOpen={isOpen}
         keepChildrenMounted
+        isOpen={isMyAccountOpen}
         className='sub_items_menu'
       >
         {getMenuItems(MENU_MY_ACCOUNT, target)}
@@ -93,11 +94,11 @@ const NavMenu = ({
       <MenuItem
         icon={<Icons.NOTEBOOK />}
         text={t('navItems.myHistory.title')}
-        onClick={() => toggleCollapse()}
+        onClick={() => setIsMyHistoryOpen(!isMyHistoryOpen)}
       />
       <Collapse
-        isOpen={isOpen}
         keepChildrenMounted
+        isOpen={isMyHistoryOpen}
         className='sub_items_menu'
       >
         {getMenuItems(MENU_MY_HISTORY, target)}
@@ -106,12 +107,12 @@ const NavMenu = ({
         <>
           <MenuItem
             icon={<Icons.NOTEBOOK />}
-            onClick={() => toggleCollapse()}
             text={t('navItems.merchantHistory.title')}
+            onClick={() => setIsMerchantHistoryOpen(!isMerchantHistoryOpen)}
           />
           <Collapse
-            isOpen={isOpen}
             keepChildrenMounted
+            isOpen={isMerchantHistoryOpen}
             className='sub_items_menu'
           >
             {getMenuItems(MENU_MERCHANT_HISTORY, target)}
@@ -120,13 +121,13 @@ const NavMenu = ({
       )}
       <MenuItem
         icon={<Icons.NOTEBOOK />}
-        onClick={() => toggleCollapse()}
         text={t('navItems.marketHistory.title')}
+        onClick={() => setIsMarketHistoryOpen(!isMarketHistoryOpen)}
       />
       <Collapse
-        isOpen={isOpen}
         keepChildrenMounted
         className='sub_items_menu'
+        isOpen={isMarketHistoryOpen}
       >
         {getMenuItems(MENU_MARKET_HISTORY, target)}
       </Collapse>
