@@ -25,6 +25,7 @@ const GENERAL_TARGETS = [
   queryConstants.MENU_LEDGERS,
   queryConstants.MENU_TRADES,
   queryConstants.MENU_ORDERS,
+  queryConstants.MENU_MOVEMENTS,
   queryConstants.MENU_POSITIONS,
 ]
 
@@ -80,6 +81,10 @@ export const GENERAL_SECTIONS = [
   {
     targetSection: queryConstants.MENU_ORDERS,
     description: 'navItems.myHistory.generalTabs.orders',
+  },
+  {
+    targetSection: queryConstants.MENU_MOVEMENTS,
+    description: 'navItems.myHistory.generalTabs.movements',
   },
   {
     targetSection: queryConstants.MENU_POSITIONS,
