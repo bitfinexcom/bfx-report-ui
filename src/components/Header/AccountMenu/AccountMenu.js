@@ -15,9 +15,9 @@ import queryConstants from 'state/query/constants'
 
 import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
-import { openHelp, openChangelog } from '../utils'
+import { openHelp } from '../utils'
 
-const { MENU_LOGINS, MENU_SUB_ACCOUNTS } = queryConstants
+const { MENU_LOGINS, MENU_SUB_ACCOUNTS, MENU_CHANGE_LOGS } = queryConstants
 
 const formatUsername = (email = '') => {
   if (!_isString(email)) {
@@ -74,8 +74,8 @@ const AccountMenu = ({
                 text={t('navItems.subAccounts')}
               />
               <MenuItem
-                onClick={openChangelog}
-                icon={<Icon.INFO_CIRCLE />}
+                onClick={() => switchSection(MENU_CHANGE_LOGS)}
+                icon={<Icon.NOTEBOOK />}
                 text={t('navItems.changeLogs')}
               />
               <MenuItem
