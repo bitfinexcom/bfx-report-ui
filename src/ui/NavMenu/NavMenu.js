@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
@@ -152,4 +152,4 @@ NavMenu.defaultProps = {
   className: '',
 }
 
-export default NavMenu
+export default memo(NavMenu)
