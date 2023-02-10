@@ -337,6 +337,7 @@
         "ledgers": "Ledgers",
         "trades": "Trades",
         "orders": "Orders",
+        "movements": "Movements",
         "positions": "Positions"
       },
       "funding": "Funding",
