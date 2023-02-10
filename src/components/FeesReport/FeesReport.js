@@ -147,6 +147,7 @@ class FeesReport extends PureComponent {
           <SectionHeaderTitle>
             {t('feesreport.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -185,7 +186,6 @@ class FeesReport extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
-        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )

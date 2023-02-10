@@ -100,6 +100,7 @@ class TradedVolume extends PureComponent {
           <SectionHeaderTitle>
             {t('tradedvolume.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -128,7 +129,6 @@ class TradedVolume extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
-        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )

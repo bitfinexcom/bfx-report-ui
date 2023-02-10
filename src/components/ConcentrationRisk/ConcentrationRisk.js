@@ -157,6 +157,7 @@ class ConcentrationRisk extends PureComponent {
           <SectionHeaderTitle>
             {t('concentrationrisk.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
@@ -174,7 +175,6 @@ class ConcentrationRisk extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
-        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )

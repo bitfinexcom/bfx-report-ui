@@ -174,6 +174,7 @@ class AverageWinLoss extends PureComponent {
           <SectionHeaderTitle>
             {t('averagewinloss.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -211,7 +212,6 @@ class AverageWinLoss extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
-        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )
