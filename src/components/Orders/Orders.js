@@ -8,7 +8,6 @@ import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
-import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import { mapRequestPairs } from 'state/symbols/utils'
 import {
@@ -160,6 +159,7 @@ class Orders extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
+          showHeaderTabs
           refresh={refresh}
           title='orders.title'
           pairsSelectorProps={{
@@ -169,7 +169,6 @@ class Orders extends PureComponent {
           }}
           clearTargetPairs={this.clearPairs}
         />
-        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )

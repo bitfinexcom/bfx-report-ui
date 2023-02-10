@@ -139,8 +139,9 @@ class Positions extends PureComponent {
         className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader
-          title='positions.title'
           target={TYPE}
+          showHeaderTabs
+          title='positions.title'
           pairsSelectorProps={{
             existingPairs,
             currentFilters: targetPairs,
@@ -149,7 +150,6 @@ class Positions extends PureComponent {
           refresh={refresh}
           clearTargetPairs={this.clearPairs}
         />
-        <SectionSwitch target={TYPE} />
         <SectionSwitch target={TYPE} hasSubSections />
         {showContent}
       </Card>

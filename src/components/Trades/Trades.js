@@ -82,6 +82,7 @@ class Trades extends PureComponent {
         <SectionHeader
           title='trades.title'
           target={TYPE}
+          showHeaderTabs
           pairsSelectorProps={{
             currentFilters: targetPairs,
             existingPairs,
@@ -90,7 +91,6 @@ class Trades extends PureComponent {
           refresh={refresh}
           clearTargetPairs={this.clearPairs}
         />
-        <SectionSwitch target={TYPE} />
         <SectionSwitch target={TYPE} hasSubSections />
         {showContent}
       </Card>

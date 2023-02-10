@@ -146,6 +146,7 @@ class Ledgers extends PureComponent {
       >
         <SectionHeader>
           <SectionHeaderTitle>{t('ledgers.title')}</SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
@@ -172,7 +173,6 @@ class Ledgers extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
-        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )

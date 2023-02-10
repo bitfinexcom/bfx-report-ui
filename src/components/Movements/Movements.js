@@ -138,6 +138,7 @@ class Movements extends PureComponent {
         <SectionHeader
           title={title}
           target={TYPE}
+          showHeaderTabs
           symbolsSelectorProps={{
             currentFilters: targetSymbols,
             existingCoins,
@@ -146,7 +147,6 @@ class Movements extends PureComponent {
           refresh={refresh}
           clearTargetSymbols={this.clearSymbols}
         />
-        <SectionSwitch target={TYPE} />
         {showContent}
       </Card>
     )
