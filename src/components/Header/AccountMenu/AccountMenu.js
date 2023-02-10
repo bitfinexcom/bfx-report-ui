@@ -10,6 +10,7 @@ import {
 import _isString from 'lodash/isString'
 
 import Icon from 'icons'
+import config from 'config'
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
@@ -17,6 +18,7 @@ import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
 
+const { showFrameworkMode } = config
 const { MENU_LOGINS, MENU_SUB_ACCOUNTS, MENU_CHANGE_LOGS } = queryConstants
 
 const formatUsername = (email = '') => {
@@ -68,11 +70,13 @@ const AccountMenu = ({
                 icon={<Icon.FILE_EXPORT />}
                 text={t('download.export')}
               />
-              <MenuItem
-                onClick={() => switchSection(MENU_SUB_ACCOUNTS)}
-                icon={<Icon.USER_CIRCLE />}
-                text={t('navItems.subAccounts')}
-              />
+              {showFrameworkMode && (
+                <MenuItem
+                  onClick={() => switchSection(MENU_SUB_ACCOUNTS)}
+                  icon={<Icon.USER_CIRCLE />}
+                  text={t('navItems.subAccounts')}
+                />
+              )}
               <MenuItem
                 onClick={() => switchSection(MENU_CHANGE_LOGS)}
                 icon={<Icon.NOTEBOOK />}
