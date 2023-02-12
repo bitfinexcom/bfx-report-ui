@@ -8,6 +8,14 @@
 
   .reports_title {
     pointer-events: none;
+
+    svg {
+      margin-left: 4px;
+    }
+
+    .bp3-fill {
+      width: 200px;
+    }
   }
 
   &--popover {
