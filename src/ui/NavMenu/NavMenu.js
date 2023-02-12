@@ -8,6 +8,7 @@ import {
   MenuDivider,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
+import _isNull from 'lodash/isNull'
 import _includes from 'lodash/includes'
 import _castArray from 'lodash/castArray'
 
@@ -48,7 +49,7 @@ const NavMenu = ({
 
   const getMenuItems = (menuType, target) => (
     _map(getSections(menuType, isTurkishSite), (section) => {
-      const [type, title, isSkipped] = section
+      const [type, title, isSkipped, sectionTargets = null] = section
 
       if (isSkipped) {
         return null
@@ -57,6 +58,8 @@ const NavMenu = ({
       const types = _castArray(type)
       const mainType = types[0]
       const [path] = _castArray(getPath(mainType))
+      const isSubsectionActive = !_isNull(sectionTargets)
+        && _includes(sectionTargets, target)
 
       return (
         <MenuItem
@@ -64,8 +67,8 @@ const NavMenu = ({
           key={mainType}
           text={t(title)}
           className='menu_sub_item'
-          active={_includes(types, target)}
           onClick={(e) => handleItemClick(e, type)}
+          active={_includes(types, target) || isSubsectionActive}
         />
       )
     })
@@ -73,6 +76,8 @@ const NavMenu = ({
 
   const classes = classNames('bitfinex-nav-menu', className)
   const target = getTarget(history.location.pathname, false)
+
+  console.log('__target', target)
 
   return (
     <Menu large className={classes}>
