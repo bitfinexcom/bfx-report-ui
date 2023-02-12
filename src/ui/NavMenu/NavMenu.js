@@ -77,8 +77,6 @@ const NavMenu = ({
   const classes = classNames('bitfinex-nav-menu', className)
   const target = getTarget(history.location.pathname, false)
 
-  console.log('__target', target)
-
   return (
     <Menu large className={classes}>
       <MenuItem
