@@ -8,7 +8,7 @@ import {
   MenuDivider,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
-import _isEqual from 'lodash/isEqual'
+import _includes from 'lodash/includes'
 import _castArray from 'lodash/castArray'
 
 import Icons from 'icons'
@@ -53,15 +53,18 @@ const NavMenu = ({
       if (isSkipped) {
         return null
       }
-      const path = getPath(type)
+
+      const types = _castArray(type)
+      const mainType = types[0]
+      const [path] = _castArray(getPath(mainType))
 
       return (
         <MenuItem
-          key={type}
           href={path}
+          key={mainType}
           text={t(title)}
           className='menu_sub_item'
-          active={_isEqual(type, target)}
+          active={_includes(types, target)}
           onClick={(e) => handleItemClick(e, type)}
         />
       )
