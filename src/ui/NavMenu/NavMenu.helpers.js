@@ -1,5 +1,11 @@
 import config from 'config'
 import queryType from 'state/query/constants'
+import {
+  ANALYSIS_STAT_TARGETS,
+  GENERAL_TARGETS,
+  FUNDING_TARGETS,
+  EARNINGS_TARGETS,
+} from 'ui/SectionSwitch/SectionSwitch.helpers'
 
 import constants from './NavMenu.constants'
 
@@ -35,15 +41,15 @@ export const getSections = (menuType, isTurkishSite) => {
       return [
         [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
         [MENU_ACCOUNT_BALANCE, 'accountbalance.title', !showFrameworkMode],
-        [MENU_WEIGHTED_AVERAGES, 'navItems.myAccount.analysisStat', !showFrameworkMode],
+        [MENU_WEIGHTED_AVERAGES, 'navItems.myAccount.analysisStat', !showFrameworkMode, ANALYSIS_STAT_TARGETS],
         [MENU_SNAPSHOTS, 'snapshots.title', !showFrameworkMode],
         [MENU_TAX_REPORT, 'taxreport.title', !showFrameworkMode],
       ]
     case MENU_MY_HISTORY:
       return [
-        [MENU_LEDGERS, 'navItems.myHistory.general'],
-        [MENU_FOFFER, 'navItems.myHistory.funding', isTurkishSite],
-        [MENU_FPAYMENT, 'navItems.myHistory.earnings', isTurkishSite],
+        [MENU_LEDGERS, 'navItems.myHistory.general', false, GENERAL_TARGETS],
+        [MENU_FOFFER, 'navItems.myHistory.funding', isTurkishSite, FUNDING_TARGETS],
+        [MENU_FPAYMENT, 'navItems.myHistory.earnings', isTurkishSite, EARNINGS_TARGETS],
         [MENU_WALLETS, 'wallets.title'],
       ]
     case MENU_MERCHANT_HISTORY:
