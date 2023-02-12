@@ -39,8 +39,8 @@ export const getSections = (menuType, isTurkishSite) => {
   switch (menuType) {
     case MENU_MY_ACCOUNT:
       return [
-        [MENU_ACCOUNT_SUMMARY, 'accountsummary.title'],
-        [MENU_ACCOUNT_BALANCE, 'accountbalance.title', !showFrameworkMode],
+        [MENU_ACCOUNT_SUMMARY, 'navItems.myAccount.summary'],
+        [MENU_ACCOUNT_BALANCE, 'navItems.myAccount.balance', !showFrameworkMode],
         [MENU_WEIGHTED_AVERAGES, 'navItems.myAccount.analysisStat', !showFrameworkMode, ANALYSIS_STAT_TARGETS],
         [MENU_SNAPSHOTS, 'snapshots.title', !showFrameworkMode],
         [MENU_TAX_REPORT, 'taxreport.title', !showFrameworkMode],
