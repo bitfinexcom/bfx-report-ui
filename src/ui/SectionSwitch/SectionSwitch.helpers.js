@@ -12,7 +12,7 @@ const POSITIONS_TARGETS = [
   queryConstants.MENU_POSITIONS_AUDIT,
 ]
 
-const ANALYSIS_STAT_TARGETS = [
+export const ANALYSIS_STAT_TARGETS = [
   queryConstants.MENU_WEIGHTED_AVERAGES,
   queryConstants.MENU_TRADED_VOLUME,
   queryConstants.MENU_WIN_LOSS,
@@ -21,7 +21,7 @@ const ANALYSIS_STAT_TARGETS = [
   queryConstants.MENU_FEES_REPORT,
 ]
 
-const GENERAL_TARGETS = [
+export const GENERAL_TARGETS = [
   queryConstants.MENU_LEDGERS,
   queryConstants.MENU_TRADES,
   queryConstants.MENU_ORDERS,
@@ -29,13 +29,13 @@ const GENERAL_TARGETS = [
   queryConstants.MENU_POSITIONS,
 ]
 
-const FUNDING_TARGETS = [
+export const FUNDING_TARGETS = [
   queryConstants.MENU_FLOAN,
   queryConstants.MENU_FOFFER,
   queryConstants.MENU_FCREDIT,
 ]
 
-const EARNINGS_TARGETS = [
+export const EARNINGS_TARGETS = [
   queryConstants.MENU_FPAYMENT,
   queryConstants.MENU_SPAYMENTS,
   queryConstants.MENU_AFFILIATES_EARNINGS,
