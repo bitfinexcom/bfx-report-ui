@@ -16,6 +16,7 @@ import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
 
+const { showFrameworkMode } = config
 const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
 
 class TopNavigation extends PureComponent {
@@ -47,12 +48,16 @@ class TopNavigation extends PureComponent {
     }
   }
 
+  switchSection = (type) => {
+    const { history } = this.props
+    history.push({ pathname: getPath(type) })
+  }
+
   render() {
     const {
       t,
       email,
       logout,
-      history,
       togglePrefDialog,
     } = this.props
     const { isOpen } = this.state
@@ -61,9 +66,6 @@ class TopNavigation extends PureComponent {
       'top-navigation--open': isOpen,
     })
 
-    const switchSection = (type) => {
-      history.push({ pathname: getPath(type) })
-    }
 
     if (window.innerWidth > 855) {
       return null
@@ -83,14 +85,14 @@ class TopNavigation extends PureComponent {
               <Menu>
                 <MenuItem
                   className={classNames('bp3-menu-item--sync', {
-                    'bp3-menu-item--sync--removed': !config.showFrameworkMode,
+                    'bp3-menu-item--sync--removed': !showFrameworkMode,
                   })}
                   shouldDismissPopover={false}
                   text={<SyncMode />}
                 />
                 <MenuItem
                   className={classNames('bp3-menu-item--query', {
-                    'bp3-menu-item--query--disabled': !config.showFrameworkMode,
+                    'bp3-menu-item--query--disabled': !showFrameworkMode,
                   })}
                   shouldDismissPopover={false}
                   text={<QueryMode />}
