@@ -86,6 +86,12 @@ class TopNavigation extends PureComponent {
             <div className='top-navigation-content'>
               <Menu>
                 <MenuItem
+                  className='bp3-menu-item--account'
+                  icon={<Icon.USER_CIRCLE />}
+                  shouldDismissPopover={false}
+                  text={formatUsername(email)}
+                />
+                <MenuItem
                   className={classNames('bp3-menu-item--sync', {
                     'bp3-menu-item--sync--removed': !showFrameworkMode,
                   })}
@@ -98,12 +104,6 @@ class TopNavigation extends PureComponent {
                   })}
                   shouldDismissPopover={false}
                   text={<QueryMode />}
-                />
-                <MenuItem
-                  className='bp3-menu-item--account'
-                  icon={<Icon.USER_CIRCLE />}
-                  shouldDismissPopover={false}
-                  text={formatUsername(email)}
                 />
                 <MenuItem
                   onClick={togglePrefDialog}
