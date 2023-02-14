@@ -10,6 +10,7 @@ import {
 
 import Icon from 'icons'
 import config from 'config'
+import { getPath } from 'state/query/utils'
 
 import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
@@ -23,6 +24,12 @@ class TopNavigation extends PureComponent {
     logout: PropTypes.func.isRequired,
     email: PropTypes.string.isRequired,
     togglePrefDialog: PropTypes.func.isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+      location: PropTypes.shape({
+        search: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
   }
 
   state = {
@@ -45,6 +52,7 @@ class TopNavigation extends PureComponent {
       t,
       email,
       logout,
+      history,
       togglePrefDialog,
     } = this.props
     const { isOpen } = this.state
@@ -52,6 +60,10 @@ class TopNavigation extends PureComponent {
     const classes = classNames('top-navigation', {
       'top-navigation--open': isOpen,
     })
+
+    const switchSection = (type) => {
+      history.push({ pathname: getPath(type) })
+    }
 
     if (window.innerWidth > 855) {
       return null
