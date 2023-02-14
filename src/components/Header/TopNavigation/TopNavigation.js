@@ -11,12 +11,14 @@ import {
 import Icon from 'icons'
 import config from 'config'
 import { getPath } from 'state/query/utils'
+import queryConstants from 'state/query/constants'
 
 import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
 
 const { showFrameworkMode } = config
+const { MENU_LOGINS, MENU_SUB_ACCOUNTS, MENU_CHANGE_LOGS } = queryConstants
 const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
 
 class TopNavigation extends PureComponent {
@@ -107,6 +109,23 @@ class TopNavigation extends PureComponent {
                   className='bp3-menu-item--subitem'
                   onClick={togglePrefDialog}
                   text={t('header.preferences')}
+                />
+                <MenuItem
+                  icon={<Icon.SIGN_IN />}
+                  text={t('navItems.loginHistory')}
+                  onClick={() => this.switchSection(MENU_LOGINS)}
+                />
+                {showFrameworkMode && (
+                  <MenuItem
+                    icon={<Icon.USER_CIRCLE />}
+                    text={t('navItems.subAccounts')}
+                    onClick={() => this.switchSection(MENU_SUB_ACCOUNTS)}
+                  />
+                )}
+                <MenuItem
+                  icon={<Icon.NOTEBOOK />}
+                  text={t('navItems.changeLogs')}
+                  onClick={() => this.switchSection(MENU_CHANGE_LOGS)}
                 />
                 <MenuItem
                   className='bp3-menu-item--subitem'
