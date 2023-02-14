@@ -106,8 +106,8 @@ class TopNavigation extends PureComponent {
                   text={formatUsername(email)}
                 />
                 <MenuItem
-                  className='bp3-menu-item--subitem'
                   onClick={togglePrefDialog}
+                  icon={<Icon.SLIDER_CIRCLE_H />}
                   text={t('header.preferences')}
                 />
                 <MenuItem
@@ -128,13 +128,13 @@ class TopNavigation extends PureComponent {
                   onClick={() => this.switchSection(MENU_CHANGE_LOGS)}
                 />
                 <MenuItem
-                  className='bp3-menu-item--subitem'
                   onClick={openHelp}
                   text={t('header.help')}
+                  icon={<Icon.INFO_CIRCLE />}
                 />
                 <MenuItem
-                  className='bp3-menu-item--subitem'
                   onClick={logout}
+                  icon={<Icon.SIGN_OUT />}
                   text={t('header.logout')}
                 />
               </Menu>
