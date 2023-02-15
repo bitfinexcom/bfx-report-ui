@@ -20,12 +20,15 @@
     font-size: 15px;
   }
 
-  .icon--user-circle, .icon--close {
+  .icon--user-circle,
+  .icon--chevron-down,
+  .icon--chevron-up {
     vertical-align: middle;
   }
 
   &--open {
-    .icon--close {
+    .icon--user-circle,
+    .icon--chevron-up {
       path {
         fill: var(--activeColor);
       }
@@ -138,16 +141,6 @@
   .top-navigation {
     &-title {
       display: inline-block;
-    }
-
-    &--open {
-      .icon--close {
-        display: inline-block;
-      }
-
-      .icon--hamburger-menu {
-        display: none;
-      }
     }
 
     &-portal {
