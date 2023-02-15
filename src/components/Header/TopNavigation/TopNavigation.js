@@ -12,6 +12,7 @@ import Icon from 'icons'
 import config from 'config'
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
+import { getMenuItemChevron } from 'ui/NavMenu/NavMenu.helpers'
 
 import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
@@ -123,9 +124,9 @@ const TopNavigation = ({
         targetTagName='div'
         popoverClassName='top-navigation-popover'
       >
-        <span className='top-navigation-icon-wrapper'>
-          {isOpen ? <Icon.CLOSE /> : <Icon.USER_CIRCLE />}
-
+        <span>
+          <Icon.USER_CIRCLE />
+          {getMenuItemChevron(isOpen)}
         </span>
       </Popover>
     </div>
