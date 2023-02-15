@@ -123,10 +123,9 @@ const TopNavigation = ({
         targetTagName='div'
         popoverClassName='top-navigation-popover'
       >
-        <span>
-          <Icon.CLOSE />
-          <Icon.HAMBURGER_MENU />
-          {isOpen && <span className='top-navigation-title'>{t('header.top_navigation')}</span>}
+        <span className='top-navigation-icon-wrapper'>
+          {isOpen ? <Icon.CLOSE /> : <Icon.USER_CIRCLE />}
+
         </span>
       </Popover>
     </div>
