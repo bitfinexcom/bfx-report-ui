@@ -12,10 +12,6 @@
     }
   }
 
-  .icon--close {
-    display: none;
-  }
-
   &-title {
     display: none;
     position: absolute;
@@ -24,12 +20,12 @@
     font-size: 15px;
   }
 
-  .icon--hamburger-menu, .icon--close {
+  .icon--user-circle, .icon--close {
     vertical-align: middle;
   }
 
   &--open {
-    .icon--hamburger-menu {
+    .icon--close {
       path {
         fill: var(--activeColor);
       }
