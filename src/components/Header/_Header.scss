@@ -175,21 +175,6 @@
   }
 }
 
-@media screen and (max-width: 600px) {
-  .header {
-    &-brand {
-      width: 140px;
-      margin-left: 15px;
-      border-right: none;
-
-      &-logo {
-        width: 140px;
-        height: 20px;
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 375px) {
   .header {
     &-brand {
