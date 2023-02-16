@@ -13,10 +13,14 @@
 
   &-brand {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
     width: 283px;
     height: 100%;
     border-right: 1px solid var(--borderColor);
+
+    .hamburger-menu {
+      display: none;
+    }
 
     &-logo {
       display: block;
@@ -152,6 +156,16 @@
   .header {
     &-brand {
       border-right: none;
+
+      &-logo {
+        width: 175px;
+      }
+
+      .hamburger-menu {
+        display: block;
+        margin-top: 6px;
+        margin-right: 20px;
+      }
     }
 
     .header-timeframe, .account-menu {

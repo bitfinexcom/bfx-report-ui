@@ -47,7 +47,7 @@ class HamburgerMenu extends PureComponent {
     return (
       <div
         onClick={this.onClick}
-        className='timeframe-shortcut'
+        className='hamburger-menu'
       >
         <Icon.HAMBURGER_MENU />
       </div>
