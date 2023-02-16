@@ -30,7 +30,6 @@ class SectionHeaderTitle extends PureComponent {
         {getTitleLink && <>{getTitleLink()}</>}
         <div className='section-header-title--mobile'>
           <div className='section-header-title--mobile-section' onClick={this.onToggle}>
-            <Icon.NOTEBOOK className='section-header-title--mobile-icon' />
             <span>{children}</span>
             {icon}
           </div>
