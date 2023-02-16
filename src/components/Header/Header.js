@@ -7,6 +7,7 @@ import config from 'config'
 
 import TimeFrame from './TimeFrame'
 import TimeFrameShortcut from './TimeFrameShortcut'
+import HamburgerMenu from './HamburgerMenu'
 import Export from './Export'
 import SyncMode from './SyncMode'
 import QueryMode from './QueryMode'
@@ -19,6 +20,7 @@ const Header = () => {
   return (
     <div className='header'>
       <div className='header-brand'>
+        <HamburgerMenu />
         <a href={HOME_URL} className='header-brand-logo'>
           <PlatformLogo />
         </a>
