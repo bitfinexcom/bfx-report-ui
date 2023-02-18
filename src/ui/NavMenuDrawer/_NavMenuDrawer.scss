@@ -1,0 +1,34 @@
+.nav-menu-drawer {
+  background-color: var(--bgColor2);
+
+  .bp3-drawer-header {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    line-height: 44px;
+    padding: 0 0 0 24px;
+
+    svg {
+      margin-right: 14px;
+    }
+
+    .bp3-heading {
+      font-size: 16px;
+      color: var(--color);
+    }
+  }
+
+  .bp3-dialog-body {
+    margin: 0;
+
+    .bitfinex-nav-menu {
+      width: 100%;
+
+      li:first-child {
+        display: none;
+      }
+    }
+  }
+}
+
+
