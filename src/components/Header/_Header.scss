@@ -154,13 +154,3 @@
     }
   }
 }
-
-@media screen and (max-width: 375px) {
-  .header {
-    &-brand {
-      &.top-navigation--open {
-        display: none;
-      }
-    }
-  }
-}
