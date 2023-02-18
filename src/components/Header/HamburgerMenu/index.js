@@ -1,1 +1,1 @@
-export { default } from './HamburgerMenu.container'
+export { default } from './HamburgerMenu'
