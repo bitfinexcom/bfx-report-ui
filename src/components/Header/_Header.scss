@@ -1,5 +1,4 @@
 @import './AccountMenu/_AccountMenu.scss';
-@import './TimeFrame/_TimeFrame.scss';
 @import './TopNavigation/_TopNavigation.scss';
 @import './SyncMode/_SyncMode.scss';
 @import './QueryMode/_QueryMode.scss';
@@ -10,6 +9,8 @@
   box-shadow: 0 0 0 1px var(--borderColor);
   margin-bottom: 1px;
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 
   &-brand {
     position: relative;
@@ -36,17 +37,17 @@
     }
   }
 
-  .timeframe-shortcut,
   .export,
   .sync-mode,
   .query-mode {
-    display: inline-block;
-    padding: 0 13px;
+    cursor: pointer;
     height: 100%;
+    padding: 0 13px;
     line-height: 44px;
     user-select: none;
     vertical-align: top;
-    cursor: pointer;
+    display: inline-block;
+    border-left: 1px solid var(--borderColor);
     border-right: 1px solid var(--borderColor);
 
     svg {
@@ -74,14 +75,6 @@
       margin-left: 0;
     }
   }
-
-  &-timeframe {
-    display: inline-block;
-    vertical-align: top;
-    width: 273px;
-    height: 100%;
-    border-right: 1px solid var(--borderColor);
-  }
 }
 
 @media screen and (min-width: 2560px) {
@@ -97,7 +90,6 @@
       }
     }
 
-    .timeframe-shortcut,
     .export,
     .sync-mode,
     .query-mode {
@@ -119,21 +111,9 @@
         height: 56px;
       }
     }
-
-    &-timeframe {
-      width: 371px;
-      height: 100%;
-    }
   }
 }
 
-@media screen and (max-width: 1455px) {
-  .header {
-    .timeframe-shortcut {
-      display: none;
-    }
-  }
-}
 
 @media screen and (max-width: 1170px) {
   .header {
@@ -168,8 +148,8 @@
         margin-left: 15px;
       }
     }
-
-    .header-timeframe, .account-menu {
+    
+    .account-menu {
       display: none;
     }
   }
