@@ -1,1 +1,1 @@
-export { default } from './NavMenuDrawer.container'
+export { default } from './NavMenuDrawer'
