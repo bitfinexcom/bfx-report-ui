@@ -124,6 +124,12 @@ export function uiResized() {
   }
 }
 
+export function toggleNavigationDrawer() {
+  return {
+    type: types.TOGGLE_NAVIGATION_DRAWER,
+  }
+}
+
 export default {
   electronBackendLoaded,
   disableErrorDialog,
@@ -134,5 +140,6 @@ export default {
   togglePreferencesDialog,
   toggleTimeFrameDialog,
   toggleGoToRangeDialog,
+  toggleNavigationDrawer,
   proceedPaginationRequest,
 }
