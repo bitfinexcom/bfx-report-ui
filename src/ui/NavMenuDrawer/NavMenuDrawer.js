@@ -1,29 +1,28 @@
-import React, { memo } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
 import { Drawer, Position, Classes } from '@blueprintjs/core'
-import NavMenu from 'ui/NavMenu'
 
 import Icons from 'icons'
+import NavMenu from 'ui/NavMenu'
 import { toggleNavigationDrawer } from 'state/ui/actions'
+import { getIsNavigationDrawerOpen } from 'state/ui/selectors'
 
 
-const NavMenuDrawer = ({
-  // t,
-  isNavigationDrawerOpen,
-}) => {
+const NavMenuDrawer = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
+  const isNavigationDrawerOpen = useSelector(getIsNavigationDrawerOpen)
 
   return (
     <div>
       <Drawer
+        position={Position.LEFT}
         icon={<Icons.PIE_CHART />}
-        title='Reports'
         className='nav-menu-drawer'
+        title={t('navItems.reports')}
         isOpen={isNavigationDrawerOpen}
         onClose={() => dispatch(toggleNavigationDrawer())}
-        position={Position.LEFT}
       >
         <div className={Classes.DRAWER_BODY}>
           <div className={Classes.DIALOG_BODY}>
@@ -35,8 +34,4 @@ const NavMenuDrawer = ({
   )
 }
 
-NavMenuDrawer.propTypes = {
-  isNavigationDrawerOpen: PropTypes.bool.isRequired,
-}
-
-export default memo(NavMenuDrawer)
+export default NavMenuDrawer
