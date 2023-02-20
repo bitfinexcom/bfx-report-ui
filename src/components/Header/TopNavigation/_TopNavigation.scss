@@ -8,6 +8,10 @@
   cursor: pointer;
   border-left: 1px var(--borderColor) solid;
 
+  .bp3-popover-wrapper {
+    min-width: 48px;
+  }
+
   &-portal {
     .bp3-transition-container {
       left: 10px !important;
