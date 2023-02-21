@@ -148,10 +148,12 @@
 
 @media screen and (max-width: 855px) {
   .bitfinex-nav-menu {
+    border-bottom: none;
+
     &--main {
       display: none;
     }
-
+    
     &--mobile {
       display: block;
     }
