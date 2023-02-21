@@ -5,6 +5,7 @@ import { ReactComponent as BIN } from './bin.svg'
 import { ReactComponent as BOOK } from './book.svg'
 import { ReactComponent as CALENDAR } from './calendar.svg'
 import { ReactComponent as CART } from './cart.svg'
+import { ReactComponent as CHART } from './chart.svg'
 import { ReactComponent as CHECKBOX_ACTIVE } from './checkbox-active.svg'
 import { ReactComponent as CHECKED } from './checked.svg'
 import { ReactComponent as CHECKMARK } from './checkmark.svg'
@@ -60,6 +61,7 @@ export default {
   BOOK,
   CALENDAR,
   CART,
+  CHART,
   CHECKBOX_ACTIVE,
   CHECKED,
   CHECKMARK,
