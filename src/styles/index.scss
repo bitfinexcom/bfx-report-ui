@@ -76,6 +76,8 @@ html {
   padding: 0;
   margin: 10px 10px 10px 20px;
   background-color: var(--bgColor2);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .bitfinex-dataset {
@@ -86,6 +88,8 @@ html {
   margin:10px;
   min-width: 1px;
   padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .color--active {
@@ -288,6 +292,11 @@ a {
   body {
     .app {
       flex-direction: column;
+      
+      .nav-menu-card {
+        display: none;
+      }
+  
     }
 
     .bp3-card {
