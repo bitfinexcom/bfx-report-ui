@@ -292,16 +292,20 @@ a {
   body {
     .app {
       flex-direction: column;
-      
+
       .nav-menu-card {
         display: none;
-      }
-  
+      } 
     }
 
     .bp3-card {
       display: flex;
       padding: 12px 10px 0 15px;
+    }
+
+    .bitfinex-dataset {
+      margin: 0;
+      border-radius: 0;
     }
   }
 
