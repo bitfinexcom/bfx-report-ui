@@ -3,7 +3,6 @@
   width: 282px;
   padding: 0;
   border-radius: 0;
-  box-shadow: 0 1px 0 1px var(--borderColor);
   clip-path: inset(0 -1px 0 0);
 
   .reports_title {
@@ -67,7 +66,7 @@
 
     &.bp3-active {
       background-color: var(--menuActive);
-      border-right: 6px solid var(--menuActiveBorder);
+      border-right: 2px solid var(--menuActiveBorder);
       color: var(--activeColor);
 
       svg path {
