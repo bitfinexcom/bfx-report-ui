@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
+import { Card } from '@blueprintjs/core'
 
 import AccountBalance from 'components/AccountBalance'
 import AccountSummary from 'components/AccountSummary'
@@ -142,7 +143,9 @@ class Main extends PureComponent {
 
     return authStatus && !authIsShown ? (
       <>
-        <NavMenu className='bitfinex-nav-menu--main' />
+        <Card className='nav-menu-card'>
+          <NavMenu className='bitfinex-nav-menu--main' />
+        </Card>
         <div className='bitfinex-dataset'>
           <Switch>
             <Route
@@ -352,6 +355,7 @@ class Main extends PureComponent {
             )}
           </Switch>
         </div>
+
         <ExportDialog />
         <ExportSuccessDialog />
         {config.showFrameworkMode && !errorDialogDisabled && <ErrorDialog />}
