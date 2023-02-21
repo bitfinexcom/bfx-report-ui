@@ -1,6 +1,7 @@
 import { ReactComponent as ACCOUNT_BALANCE } from './account-balance.svg'
 import { ReactComponent as AFFILIATES } from './affiliates.svg'
 import { ReactComponent as BIN } from './bin.svg'
+import { ReactComponent as BOOK } from './book.svg'
 import { ReactComponent as CALENDAR } from './calendar.svg'
 import { ReactComponent as CHECKBOX_ACTIVE } from './checkbox-active.svg'
 import { ReactComponent as CHECKED } from './checked.svg'
@@ -53,6 +54,7 @@ export default {
   ACCOUNT_BALANCE,
   AFFILIATES,
   BIN,
+  BOOK,
   CALENDAR,
   CHECKBOX_ACTIVE,
   CHECKED,
