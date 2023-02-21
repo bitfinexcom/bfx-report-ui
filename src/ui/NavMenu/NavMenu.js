@@ -86,7 +86,7 @@ const NavMenu = ({
       />
       <MenuDivider />
       <MenuItem
-        icon={<Icons.USER_CIRCLE />}
+        icon={<Icons.ADDRESS_BOOK />}
         text={t('navItems.myAccount.title')}
         labelElement={getMenuItemChevron(isMyAccountOpen)}
         onClick={() => setIsMyAccountOpen(!isMyAccountOpen)}
@@ -99,7 +99,7 @@ const NavMenu = ({
         {getMenuItems(MENU_MY_ACCOUNT, target)}
       </Collapse>
       <MenuItem
-        icon={<Icons.NOTEBOOK />}
+        icon={<Icons.BOOK />}
         text={t('navItems.myHistory.title')}
         labelElement={getMenuItemChevron(isMyHistoryOpen)}
         onClick={() => setIsMyHistoryOpen(!isMyHistoryOpen)}
@@ -114,7 +114,7 @@ const NavMenu = ({
       {!isTurkishSite && (
         <>
           <MenuItem
-            icon={<Icons.ACCOUNT_BALANCE />}
+            icon={<Icons.CART />}
             text={t('navItems.merchantHistory.title')}
             labelElement={getMenuItemChevron(isMerchantHistoryOpen)}
             onClick={() => setIsMerchantHistoryOpen(!isMerchantHistoryOpen)}
@@ -129,7 +129,7 @@ const NavMenu = ({
         </>
       )}
       <MenuItem
-        icon={<Icons.DERIVATIVES />}
+        icon={<Icons.CHART />}
         text={t('navItems.marketHistory.title')}
         labelElement={getMenuItemChevron(isMarketHistoryOpen)}
         onClick={() => setIsMarketHistoryOpen(!isMarketHistoryOpen)}
