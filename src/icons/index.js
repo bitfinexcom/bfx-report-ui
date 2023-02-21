@@ -1,4 +1,5 @@
 import { ReactComponent as ACCOUNT_BALANCE } from './account-balance.svg'
+import { ReactComponent as ADDRESS_BOOK } from './address-book.svg'
 import { ReactComponent as AFFILIATES } from './affiliates.svg'
 import { ReactComponent as BIN } from './bin.svg'
 import { ReactComponent as BOOK } from './book.svg'
@@ -52,6 +53,7 @@ import { ReactComponent as WARNING } from './warning.svg'
 
 export default {
   ACCOUNT_BALANCE,
+  ADDRESS_BOOK,
   AFFILIATES,
   BIN,
   BOOK,
