@@ -6,6 +6,18 @@
   box-shadow: 0 1px 0 1px var(--borderColor);
   clip-path: inset(0 -1px 0 0);
 
+  .reports_title {
+    pointer-events: none;
+
+    svg {
+      margin-left: 4px;
+    }
+
+    .bp3-fill {
+      width: 200px;
+    }
+  }
+
   &--popover {
     box-shadow: 0 0 1px var(--menuPopoverShadow);
 
@@ -78,6 +90,14 @@
     border-top: 1px solid var(--borderColor);
   }
 
+  .sub_items_menu {
+    .bp3-collapse-body {
+      li {
+        padding-left: 40px;
+      }
+    }
+  }
+
   &--mobile {
     display: none;
     width: 100vw;
@@ -125,32 +145,8 @@
   }
 }
 
-@media screen and (min-width: 391px) and (max-width: 1024px) {
-  .bitfinex-nav-menu:not(.bitfinex-nav-menu--popover-menu) {
-    width: 40px;
-    min-width: 40px;
 
-    .bp3-menu {
-      &-item {
-        padding: 0 8px;
-
-        svg {
-          margin-right: 0;
-        }
-
-        div {
-          display: none;
-        }
-
-        &.bp3-active {
-          border-right: none;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 650px) {
   .bitfinex-nav-menu {
     &--main {
       display: none;

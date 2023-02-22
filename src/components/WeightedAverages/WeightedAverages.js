@@ -15,6 +15,7 @@ import {
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
+import SectionSwitch from 'ui/SectionSwitch'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import {
@@ -124,6 +125,7 @@ class WeightedAverages extends PureComponent {
           <SectionHeaderTitle>
             {t('weightedaverages.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>

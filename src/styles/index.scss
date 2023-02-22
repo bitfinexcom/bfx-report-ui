@@ -209,21 +209,29 @@ a {
   }
 }
 
-.section-positions-active, .section-positions-audit {
-  .section-switch {
-    .refresh-button {
-      vertical-align: middle;
-      margin-bottom: 1px;
-    }
-  }
-}
-
 .section-switch {
   margin-left: 1px;
   margin-bottom: 30px;
 
+  .bp3-button-group  {
+    display: block;
+  }
+
   .refresh-button {
     margin-left: 23px;
+  }
+}
+
+.section-positions-active, .section-positions-audit {
+  .section-switch {
+    .bp3-button-group  {
+      display: inline-flex;
+    }
+
+    .refresh-button {
+      vertical-align: middle;
+      margin-bottom: 1px;
+    }
   }
 }
 
@@ -266,7 +274,7 @@ a {
   }
 }
 
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 650px) {
   html {
     font-size: 13px;
   }

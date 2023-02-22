@@ -216,7 +216,7 @@
     "targets": "Data to Export"
   },
   "fcredit": {
-    "title": "Funding Credit (Used)",
+    "title": "Funding Credits (Used)",
     "side": {
       "provided": "PROVIDED",
       "taken": "TAKEN",
@@ -312,6 +312,62 @@
   },
   "movements": {
     "title": "Movements"
+  },
+  "navItems": {
+    "reports":"Reports",
+    "myAccount": {
+      "title": "My Account",
+      "summary": "Summary",
+      "balance": "Balance",
+      "analysisStat": "Analysis/Statistics",
+      "analysisStatTabs": {
+        "weightedAvgs": "Weighted Averages",
+        "volume": "Volume",
+        "winLoss": "Win/Loss",
+        "conRisk": "Concentration Risk",
+        "loan": "Loan Report",
+        "fees": "Fees Report"
+      },
+      "snapshotsTax": "Snapshots & Tax Report"
+    },
+    "myHistory": {
+      "title": "My History",
+      "general": "General",
+      "generalTabs": {
+        "ledgers": "Ledgers",
+        "trades": "Trades",
+        "orders": "Orders",
+        "movements": "Movements",
+        "positions": "Positions"
+      },
+      "funding": "Funding",
+      "fundingTabs": {
+        "bidsOffers": "Bids & Offers",
+        "loans": "Loans",
+        "credits": "Credits"
+      },
+      "earnings":"Earnings",
+      "earningsTabs": {
+        "funding": "Funding",
+        "staking": "Staking",
+        "affiliates": "Affiliates"
+      },
+      "wallets": "Wallets" 
+    },
+    "merchantHistory": {
+      "title": "Merchant History",
+      "invoices": "Invoices"
+    },
+    "marketHistory": {
+      "title": "Market History",
+      "trades": "Trades",
+      "funding": "Funding",
+      "spot": "Spot",
+      "derivatives": "Derivatives"
+    },
+    "loginHistory": "Login History",
+    "subAccounts": "Sub Accounts",
+    "changeLogs": "Change Logs"
   },
   "nodata": "No related data in this time range. You can try another time range.",
   "no_merchant": {
@@ -534,6 +590,7 @@
   },
   "tickers": {
     "title": "Tickers",
+    "spot": "Spot",
     "minlength": "Should pick at least one pair"
   },
   "timeframe": {

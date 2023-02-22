@@ -8,10 +8,10 @@ import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import { getPath } from 'state/query/utils'
 import SectionHeader from 'ui/SectionHeader'
+import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 import getColumns from 'components/Positions/Positions.columns'
-import PositionsSwitch from 'components/Positions/PositionsSwitch'
 
 const TYPE = queryConstants.MENU_POSITIONS_AUDIT
 
@@ -105,8 +105,9 @@ class PositionsAudit extends PureComponent {
           target={TYPE}
           title='paudit.title'
         />
-        <PositionsSwitch
+        <SectionSwitch
           target={TYPE}
+          hasSubSections
           refresh={refresh}
         />
         {showContent}

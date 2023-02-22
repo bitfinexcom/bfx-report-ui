@@ -130,6 +130,7 @@ class FundingOfferHistory extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
+          showHeaderTabs
           refresh={refresh}
           title='foffer.title'
           symbolsSelectorProps={{

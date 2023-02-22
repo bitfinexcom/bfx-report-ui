@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
+import SectionSwitch from 'ui/SectionSwitch'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
@@ -55,6 +56,7 @@ class SectionHeader extends PureComponent {
       getTitleLink,
       clearTargetPairs,
       clearTargetSymbols,
+      showHeaderTabs,
     } = this.props
 
     const selector = this.getSelector()
@@ -64,6 +66,7 @@ class SectionHeader extends PureComponent {
         <SectionHeaderTitle getTitleLink={getTitleLink}>
           {t(title)}
         </SectionHeaderTitle>
+        {showHeaderTabs && <SectionSwitch target={target} />}
         {timeframe && <TimeRange className='section-header-time-range' />}
         {(selector || filter || refresh || clearTargetPairs) && (
           <SectionHeaderRow>
