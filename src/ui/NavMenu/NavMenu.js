@@ -16,7 +16,7 @@ import Icons from 'icons'
 import { getPath, getTarget } from 'state/query/utils'
 
 import menuTypes from './NavMenu.constants'
-import { getSections } from './NavMenu.helpers'
+import { getSections, getMenuItemChevron } from './NavMenu.helpers'
 
 const {
   MENU_MY_ACCOUNT,
@@ -88,6 +88,7 @@ const NavMenu = ({
       <MenuItem
         icon={<Icons.USER_CIRCLE />}
         text={t('navItems.myAccount.title')}
+        labelElement={getMenuItemChevron(isMyAccountOpen)}
         onClick={() => setIsMyAccountOpen(!isMyAccountOpen)}
       />
       <Collapse
@@ -100,6 +101,7 @@ const NavMenu = ({
       <MenuItem
         icon={<Icons.NOTEBOOK />}
         text={t('navItems.myHistory.title')}
+        labelElement={getMenuItemChevron(isMyHistoryOpen)}
         onClick={() => setIsMyHistoryOpen(!isMyHistoryOpen)}
       />
       <Collapse
@@ -114,6 +116,7 @@ const NavMenu = ({
           <MenuItem
             icon={<Icons.ACCOUNT_BALANCE />}
             text={t('navItems.merchantHistory.title')}
+            labelElement={getMenuItemChevron(isMerchantHistoryOpen)}
             onClick={() => setIsMerchantHistoryOpen(!isMerchantHistoryOpen)}
           />
           <Collapse
@@ -128,6 +131,7 @@ const NavMenu = ({
       <MenuItem
         icon={<Icons.DERIVATIVES />}
         text={t('navItems.marketHistory.title')}
+        labelElement={getMenuItemChevron(isMarketHistoryOpen)}
         onClick={() => setIsMarketHistoryOpen(!isMarketHistoryOpen)}
       />
       <Collapse

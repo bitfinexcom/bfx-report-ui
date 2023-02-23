@@ -1,5 +1,6 @@
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 import { getEmail } from 'state/auth/selectors'
 import { getWindowWidth } from 'state/ui/selectors'
@@ -21,4 +22,5 @@ const mapDispatchToProps = {
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withTranslation('translations'),
+  withRouter,
 )(TopNavigation)

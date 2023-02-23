@@ -14,7 +14,6 @@
 @import "components/ExportDialog/_ExportDialog.scss";
 @import "components/ExportSuccessDialog/_ExportSuccessDialog.scss";
 @import "components/Header/_Header.scss";
-@import "components/Header/TimeFrame/_TimeFrame.scss";
 @import "components/Preferences/_Preferences.scss";
 @import "components/Status/_Status.scss";
 @import "components/SubAccounts/_SubAccounts.scss";
@@ -274,7 +273,7 @@ a {
   }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 855px) {
   html {
     font-size: 13px;
   }
@@ -286,7 +285,7 @@ a {
 
     .bp3-card {
       display: flex;
-      padding: 12px 10px 0 10px;
+      padding: 12px 10px 0 15px;
     }
   }
 

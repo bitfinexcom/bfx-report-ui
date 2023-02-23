@@ -47,6 +47,7 @@ import TimeFrameDialog from 'components/TimeFrameDialog'
 import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import NavMenu from 'ui/NavMenu'
+import NavMenuDrawer from 'ui/NavMenuDrawer'
 import config from 'config'
 
 const {
@@ -358,6 +359,7 @@ class Main extends PureComponent {
         <Preferences />
         <TimeFrameDialog />
         <GoToRangeDialog />
+        <NavMenuDrawer />
       </>
     ) : ''
   }

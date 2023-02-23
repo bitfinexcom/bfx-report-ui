@@ -1,3 +1,6 @@
+import React from 'react'
+
+import Icons from 'icons'
 import config from 'config'
 import queryType from 'state/query/constants'
 import {
@@ -34,6 +37,12 @@ const {
   MENU_MERCHANT_HISTORY,
   MENU_MARKET_HISTORY,
 } = constants
+
+export const getMenuItemChevron = (isActive) => (
+  isActive
+    ? <Icons.CHEVRON_UP />
+    : <Icons.CHEVRON_DOWN />
+)
 
 export const getSections = (menuType, isTurkishSite) => {
   switch (menuType) {

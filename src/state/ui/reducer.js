@@ -12,6 +12,7 @@ const initialState = {
   isPreferencesDialogOpen: false,
   isTimeFrameDialogOpen: false,
   isGoToRangeDialogOpen: false,
+  isNavigationDrawerOpen: false,
   latestPaginationTimestamp: undefined,
   errorMessage: undefined,
   device: getDeviceType(),
@@ -76,6 +77,12 @@ export function uiReducer(state = initialState, action) {
       return {
         ...state,
         isGoToRangeDialogOpen: !state.isGoToRangeDialogOpen,
+      }
+    }
+    case types.TOGGLE_NAVIGATION_DRAWER: {
+      return {
+        ...state,
+        isNavigationDrawerOpen: !state.isNavigationDrawerOpen,
       }
     }
     case types.UI_RESIZED:
