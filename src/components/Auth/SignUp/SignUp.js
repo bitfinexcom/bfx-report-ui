@@ -48,13 +48,14 @@ class SignUp extends PureComponent {
     this.state = {
       apiKey,
       apiSecret,
+      isPersisted,
       password: '',
+      useApiKey: false,
+      passwordError: '',
       passwordRepeat: '',
       isBeingValidated: false,
-      isPasswordProtected: config.hostedFrameworkMode,
-      isPersisted,
-      passwordError: '',
       passwordRepeatError: '',
+      isPasswordProtected: config.hostedFrameworkMode,
     }
   }
 
@@ -157,6 +158,7 @@ class SignUp extends PureComponent {
       isPersisted,
       passwordError,
       passwordRepeatError,
+      useApiKey,
     } = this.state
 
     const title = config.showFrameworkMode ? t('auth.signUp') : t('auth.title')
@@ -228,7 +230,7 @@ class SignUp extends PureComponent {
               <Checkbox
                 className='bitfinex-auth-remember-me'
                 name='useApiKey'
-                checked={isPersisted}
+                checked={useApiKey}
                 onChange={this.handleCheckboxChange}
               >
                 {t('auth.useApiKey')}
