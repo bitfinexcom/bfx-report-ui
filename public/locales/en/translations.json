@@ -24,6 +24,7 @@
   "auth": {
     "auth": "Auth",
     "title": "Login",
+    "useApiKey": "Use API Key",
     "simpleAccounts": "Simple Accounts",
     "multipleAccounts": "Multiple Accounts",
     "signUp": "Sign Up",
