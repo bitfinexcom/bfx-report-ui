@@ -170,6 +170,7 @@ class SignUp extends PureComponent {
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
       'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
     })
+    const showAuthTypeSelector = config.showFrameworkMode && useApiKey
 
     return (
       <Dialog
@@ -181,7 +182,7 @@ class SignUp extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          {config.showFrameworkMode && (
+          {showAuthTypeSelector && (
             <AuthTypeSelector
               authType={authType}
               switchAuthType={switchAuthType}
