@@ -189,13 +189,15 @@ class SignUp extends PureComponent {
             />
           )}
           <PlatformLogo />
-          <Callout>
-            {t('auth.note1')}
-            <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
-              {config.KEY_URL.split('https://')[1]}
-            </a>
-            {t('auth.note2')}
-          </Callout>
+          {useApiKey && (
+            <Callout>
+              {t('auth.note1')}
+              <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
+                {config.KEY_URL.split('https://')[1]}
+              </a>
+              {t('auth.note2')}
+            </Callout>
+          )}
           <InputKey
             label='auth.enterAPIKey'
             name='apiKey'
