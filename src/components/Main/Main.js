@@ -355,7 +355,6 @@ class Main extends PureComponent {
             )}
           </Switch>
         </div>
-
         <ExportDialog />
         <ExportSuccessDialog />
         {config.showFrameworkMode && !errorDialogDisabled && <ErrorDialog />}
