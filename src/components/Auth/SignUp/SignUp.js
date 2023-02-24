@@ -224,14 +224,24 @@ class SignUp extends PureComponent {
             </>
           )}
           <div className='bitfinex-auth-checkboxes'>
-            <Checkbox
-              className='bitfinex-auth-remember-me'
-              name='isPersisted'
-              checked={isPersisted}
-              onChange={this.handleCheckboxChange}
-            >
-              {t('auth.rememberMe')}
-            </Checkbox>
+            <div className='bitfinex-auth-checkboxes--group'>
+              <Checkbox
+                className='bitfinex-auth-remember-me'
+                name='useApiKey'
+                checked={isPersisted}
+                onChange={this.handleCheckboxChange}
+              >
+                {t('auth.useApiKey')}
+              </Checkbox>
+              <Checkbox
+                className='bitfinex-auth-remember-me'
+                name='isPersisted'
+                checked={isPersisted}
+                onChange={this.handleCheckboxChange}
+              >
+                {t('auth.rememberMe')}
+              </Checkbox>
+            </div>
             {showPasswordProtection && (
               <Checkbox
                 className='bitfinex-auth-remember-me'
