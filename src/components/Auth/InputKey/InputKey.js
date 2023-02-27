@@ -7,7 +7,7 @@ import {
 } from '@blueprintjs/core'
 
 export const InputKey = ({
-  t, label, onChange, name, placeholder, value,
+  t, label, onChange, name, placeholder, value, type,
 }) => (
   <div className='bitfinex-auth-form-input'>
     <FormGroup
@@ -17,8 +17,8 @@ export const InputKey = ({
     <InputGroup
       id={name}
       name={name}
+      type={type}
       value={value}
-      type='password'
       onChange={onChange}
       placeholder={placeholder && t(placeholder)}
     />
@@ -31,6 +31,7 @@ InputKey.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
+  type: PropTypes.string,
   t: PropTypes.func.isRequired,
 }
 
@@ -39,6 +40,7 @@ InputKey.defaultProps = {
   value: '',
   label: '',
   placeholder: '',
+  type: 'password',
   onChange: () => {},
 }
 
