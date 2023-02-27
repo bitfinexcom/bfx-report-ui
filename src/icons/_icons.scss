@@ -2,7 +2,15 @@ svg {
   &:not(.recharts-surface) path {
     fill: var(--iconColor);
   }
-
+  
+  path.icon--book,
+  path.icon--cart,
+  path.icon--chart,
+  path.icon--address-book,
+  path.icon--pie-chart {
+    stroke: var(--iconColor);
+  }
+  
   path.icon-affiliates {
     fill: var(--activeColor);
   }

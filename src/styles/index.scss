@@ -65,18 +65,31 @@ html {
 .app {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 
   .bp3-overlay-inline .bp3-overlay-backdrop {
     position: fixed;
   }
 }
 
+.nav-menu-card {
+  padding: 0;
+  margin: 10px 10px 10px 20px;
+  background-color: var(--bgColor2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .bitfinex-dataset {
   display: inline-block;
   min-height: calc(100vh - 46px); // minus header height
   flex: 1;
+  background-color: var(--bgColor2);
+  margin:10px;
   min-width: 1px;
   padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .color--active {
@@ -239,8 +252,6 @@ a {
 }
 
 .bp3-card {
-  padding: 30px 30px 0 30px;
-
   & > h4 {
     margin: 10px 0;
   }
@@ -280,12 +291,19 @@ a {
 
   body {
     .app {
-      flex-direction: column;
+      .nav-menu-card {
+        display: none;
+      } 
     }
 
     .bp3-card {
       display: flex;
-      padding: 12px 10px 0 15px;
+      padding: 12px 15px 0 15px;
+    }
+
+    .bitfinex-dataset {
+      margin: 0;
+      border-radius: 0;
     }
   }
 
