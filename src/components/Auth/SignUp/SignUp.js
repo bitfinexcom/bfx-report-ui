@@ -55,6 +55,8 @@ class SignUp extends PureComponent {
       passwordRepeat: '',
       isBeingValidated: false,
       passwordRepeatError: '',
+      userName: '',
+      userPassword: '',
       isPasswordProtected: config.hostedFrameworkMode,
     }
   }
@@ -159,6 +161,8 @@ class SignUp extends PureComponent {
       passwordError,
       passwordRepeatError,
       useApiKey,
+      userName,
+      userPassword,
     } = this.state
 
     const title = config.showFrameworkMode ? t('auth.signUp') : t('auth.title')
@@ -189,27 +193,45 @@ class SignUp extends PureComponent {
             />
           )}
           <PlatformLogo />
-          {useApiKey && (
-            <Callout>
-              {t('auth.note1')}
-              <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
-                {config.KEY_URL.split('https://')[1]}
-              </a>
-              {t('auth.note2')}
-            </Callout>
+          {!useApiKey && (
+            <>
+              <InputKey
+                label='auth.loginEmail.emailOrUserName'
+                name='userName'
+                value={userName}
+                onChange={this.handleInputChange}
+              />
+              <InputKey
+                label='auth.loginEmail.password'
+                name='userPassword'
+                value={userPassword}
+                onChange={this.handleInputChange}
+              />
+            </>
           )}
-          <InputKey
-            label='auth.enterAPIKey'
-            name='apiKey'
-            value={apiKey}
-            onChange={this.handleInputChange}
-          />
-          <InputKey
-            label='auth.enterAPISecret'
-            name='apiSecret'
-            value={apiSecret}
-            onChange={this.handleInputChange}
-          />
+          {useApiKey && (
+            <>
+              <Callout>
+                {t('auth.note1')}
+                <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
+                  {config.KEY_URL.split('https://')[1]}
+                </a>
+                {t('auth.note2')}
+              </Callout>
+              <InputKey
+                label='auth.enterAPIKey'
+                name='apiKey'
+                value={apiKey}
+                onChange={this.handleInputChange}
+              />
+              <InputKey
+                label='auth.enterAPISecret'
+                name='apiSecret'
+                value={apiSecret}
+                onChange={this.handleInputChange}
+              />
+            </>
+          )}
           {config.showFrameworkMode && isPasswordProtected && (
             <>
               <InputKey
