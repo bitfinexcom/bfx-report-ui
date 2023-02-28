@@ -79,6 +79,13 @@ export function signUp(payload) {
   }
 }
 
+export function signUpEmail(payload) {
+  return {
+    type: types.SIGN_UP_EMAIL,
+    payload,
+  }
+}
+
 /**
  * Create an action to show auth dialog.
  */
