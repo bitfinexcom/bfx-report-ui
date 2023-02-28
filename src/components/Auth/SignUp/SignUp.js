@@ -32,6 +32,7 @@ class SignUp extends PureComponent {
     loading: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
+    signUpEmail: PropTypes.func.isRequired,
     switchMode: PropTypes.func.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
@@ -62,26 +63,35 @@ class SignUp extends PureComponent {
   }
 
   onSignUp = () => {
-    const { signUp } = this.props
+    const { signUp, signUpEmail } = this.props
     const {
       apiKey,
       apiSecret,
       password,
       isPasswordProtected,
       isPersisted,
+      useApiKey,
+      userName,
+      userPassword,
     } = this.state
     this.setState({
       isBeingValidated: true,
     })
-    const isValid = this.validateForm()
-
-    if (isValid) {
-      signUp({
-        apiKey,
-        apiSecret,
-        password,
-        isNotProtected: !isPasswordProtected,
-        isPersisted,
+    if (useApiKey) {
+      const isValid = this.validateForm()
+      if (isValid) {
+        signUp({
+          apiKey,
+          apiSecret,
+          password,
+          isNotProtected: !isPasswordProtected,
+          isPersisted,
+        })
+      }
+    } else {
+      signUpEmail({
+        userName,
+        userPassword,
       })
     }
   }
