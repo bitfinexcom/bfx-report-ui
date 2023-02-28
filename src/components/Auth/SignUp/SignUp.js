@@ -90,8 +90,8 @@ class SignUp extends PureComponent {
       }
     } else {
       signUpEmail({
-        userName,
-        userPassword,
+        login: userName,
+        password: userPassword,
       })
     }
   }
