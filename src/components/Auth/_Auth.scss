@@ -65,6 +65,7 @@
   &-checkboxes {
     display: flex;
     justify-content: space-between;
+    padding: 0 2px 0 2px;
 
     &--group {
       display: flex;
@@ -92,21 +93,7 @@
   &-remember-me {
     &.bp3-checkbox {
       line-height: 30px;
-
-      &:first-child {
-        margin: 0 0 0 2px;
-      }
-
-      &:last-child {
-        margin: 0 2px 0 0;
-      }
-    }
-
-    &--sign-in {
-      &.bp3-checkbox {
-        margin-bottom: 60px;
-      }
-    }
+      margin-left: 0;
 
     &--sub-accounts {
       &.bp3-checkbox {
