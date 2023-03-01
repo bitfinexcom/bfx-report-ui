@@ -58,6 +58,7 @@ export function postJsonFetch(url, bodyJson) {
   return fetch(url, {
     method: 'POST',
     headers: {
+      Origin: config.HOME_URL,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
