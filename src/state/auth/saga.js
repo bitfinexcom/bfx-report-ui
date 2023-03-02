@@ -8,7 +8,9 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import _isArray from 'lodash/isArray'
 import _isEmpty from 'lodash/isEmpty'
+import _isEqual from 'lodash/isEqual'
 
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
@@ -132,6 +134,26 @@ function* signUp({ payload }) {
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
+  }
+}
+
+function* signUpEmail({ payload }) {
+  const { login, password } = payload
+
+  const response = yield call(
+    postJsonFetch,
+    types.LOGIN_URL,
+    { login, password },
+  )
+
+  if (_isArray(response)) {
+    yield console.log('+++signUpEmail response', response)
+    const [responseType] = response
+    if (_isEqual(responseType, types.LOGIN_ERROR)) {
+      console.error('+++LOGIN ERROR')
+    } else {
+      yield console.log('+++responseType', responseType)
+    }
   }
 }
 
@@ -282,6 +304,7 @@ export default function* authSaga() {
   yield takeLatest(types.FETCH_USERS, fetchUsers)
   yield takeLatest(types.RECOVER_PASSWORD, recoverPassword)
   yield takeLatest(types.SIGN_UP, signUp)
+  yield takeLatest(types.SIGN_UP_EMAIL, signUpEmail)
   yield takeLatest(types.SIGN_IN, signIn)
   yield takeLatest(types.LOGOUT, logout)
   yield takeLatest(types.REMOVE_USER, removeUser)
