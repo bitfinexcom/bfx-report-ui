@@ -127,6 +127,7 @@ class AffiliatesEarnings extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
+          showHeaderTabs
           refresh={refresh}
           title='affiliatesearnings.title'
           getTitleLink={() => <AffiliatesLink />}

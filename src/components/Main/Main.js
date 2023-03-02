@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
+import { Card } from '@blueprintjs/core'
 
 import AccountBalance from 'components/AccountBalance'
 import AccountSummary from 'components/AccountSummary'
@@ -47,6 +48,7 @@ import TimeFrameDialog from 'components/TimeFrameDialog'
 import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import NavMenu from 'ui/NavMenu'
+import NavMenuDrawer from 'ui/NavMenuDrawer'
 import config from 'config'
 
 const {
@@ -141,7 +143,9 @@ class Main extends PureComponent {
 
     return authStatus && !authIsShown ? (
       <>
-        <NavMenu className='bitfinex-nav-menu--main' />
+        <Card className='nav-menu-card'>
+          <NavMenu className='bitfinex-nav-menu--main' />
+        </Card>
         <div className='bitfinex-dataset'>
           <Switch>
             <Route
@@ -358,6 +362,7 @@ class Main extends PureComponent {
         <Preferences />
         <TimeFrameDialog />
         <GoToRangeDialog />
+        <NavMenuDrawer />
       </>
     ) : ''
   }

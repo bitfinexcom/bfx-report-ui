@@ -132,6 +132,7 @@ class FundingCreditHistory extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
+          showHeaderTabs
           title='fcredit.title'
           symbolsSelectorProps={{
             existingCoins,

@@ -123,12 +123,12 @@ class Orders extends PureComponent {
       existingPairs,
     } = this.props
     const tableColumns = getColumns({
-      columnsWidth,
-      filteredData: entries,
-      getFullTime,
-      onIdClick: this.jumpToOrderTrades,
       t,
       timeOffset,
+      getFullTime,
+      columnsWidth,
+      filteredData: entries,
+      onIdClick: this.jumpToOrderTrades,
     }).filter(({ id }) => columns[id])
 
     let showContent
@@ -159,6 +159,7 @@ class Orders extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
+          showHeaderTabs
           refresh={refresh}
           title='orders.title'
           pairsSelectorProps={{

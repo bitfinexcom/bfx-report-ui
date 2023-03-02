@@ -111,23 +111,20 @@
   }
 }
 
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 855px) {
   .section-header {
     margin-bottom: 21px;
 
     &-title {
+      margin-bottom: 10px;
+
       .bp3-popover-wrapper {
         margin-top: 6px;
-        margin-left: 170px;
         transform: scale(0.75);
       }
 
       &--main {
-        display: none;
-      }
-
-      &--mobile {
-        display: block;
+        font-size: 23px;
       }
     }
 

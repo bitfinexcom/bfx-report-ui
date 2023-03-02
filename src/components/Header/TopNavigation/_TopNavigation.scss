@@ -3,17 +3,19 @@
   float: right;
   height: 44px;
   line-height: 44px;
-  margin-right: 15px;
+  padding-left: 10px;
+  margin-right: 5px;
   cursor: pointer;
+  border-left: 1px var(--borderColor) solid;
+
+  .bp3-popover-wrapper {
+    min-width: 48px;
+  }
 
   &-portal {
     .bp3-transition-container {
       left: 10px !important;
     }
-  }
-
-  .icon--close {
-    display: none;
   }
 
   &-title {
@@ -24,12 +26,15 @@
     font-size: 15px;
   }
 
-  .icon--hamburger-menu, .icon--close {
+  .icon--user-circle,
+  .icon--chevron-down,
+  .icon--chevron-up {
     vertical-align: middle;
   }
 
   &--open {
-    .icon--hamburger-menu {
+    .icon--user-circle,
+    .icon--chevron-up {
       path {
         fill: var(--activeColor);
       }
@@ -142,16 +147,6 @@
   .top-navigation {
     &-title {
       display: inline-block;
-    }
-
-    &--open {
-      .icon--close {
-        display: inline-block;
-      }
-
-      .icon--hamburger-menu {
-        display: none;
-      }
     }
 
     &-portal {

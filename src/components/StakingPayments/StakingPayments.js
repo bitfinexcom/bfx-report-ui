@@ -131,6 +131,7 @@ class StakingPayments extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
+          showHeaderTabs
           refresh={refresh}
           title='spayments.title'
           symbolsSelectorProps={{

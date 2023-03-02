@@ -129,6 +129,7 @@ class FundingPayment extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
+          showHeaderTabs
           refresh={refresh}
           title='fpayment.title'
           symbolsSelectorProps={{

@@ -17,6 +17,7 @@ import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
+import SectionSwitch from 'ui/SectionSwitch'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import {
   parseChartData,
@@ -173,6 +174,7 @@ class AverageWinLoss extends PureComponent {
           <SectionHeaderTitle>
             {t('averagewinloss.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>

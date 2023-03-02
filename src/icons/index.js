@@ -1,7 +1,11 @@
 import { ReactComponent as ACCOUNT_BALANCE } from './account-balance.svg'
+import { ReactComponent as ADDRESS_BOOK } from './address-book.svg'
 import { ReactComponent as AFFILIATES } from './affiliates.svg'
 import { ReactComponent as BIN } from './bin.svg'
+import { ReactComponent as BOOK } from './book.svg'
 import { ReactComponent as CALENDAR } from './calendar.svg'
+import { ReactComponent as CART } from './cart.svg'
+import { ReactComponent as CHART } from './chart.svg'
 import { ReactComponent as CHECKBOX_ACTIVE } from './checkbox-active.svg'
 import { ReactComponent as CHECKED } from './checked.svg'
 import { ReactComponent as CHECKMARK } from './checkmark.svg'
@@ -34,6 +38,7 @@ import { ReactComponent as MOVEMENTS } from './movements.svg'
 import { ReactComponent as NOTEBOOK } from './notebook.svg'
 import { ReactComponent as OFFLINE } from './offline.svg'
 import { ReactComponent as ORDERS } from './orders.svg'
+import { ReactComponent as PIE_CHART } from './pie-chart.svg'
 import { ReactComponent as REFRESH_DOUBLE } from './refresh-double.svg'
 import { ReactComponent as SEARCH } from './search.svg'
 import { ReactComponent as SIGN_IN } from './sign-in.svg'
@@ -50,9 +55,13 @@ import { ReactComponent as WARNING } from './warning.svg'
 
 export default {
   ACCOUNT_BALANCE,
+  ADDRESS_BOOK,
   AFFILIATES,
   BIN,
+  BOOK,
   CALENDAR,
+  CART,
+  CHART,
   CHECKBOX_ACTIVE,
   CHECKED,
   CHECKMARK,
@@ -85,6 +94,7 @@ export default {
   NOTEBOOK,
   OFFLINE,
   ORDERS,
+  PIE_CHART,
   REFRESH_DOUBLE,
   SEARCH,
   SIGN_IN,

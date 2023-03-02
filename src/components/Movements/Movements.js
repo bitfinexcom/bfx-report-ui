@@ -137,6 +137,7 @@ class Movements extends PureComponent {
         <SectionHeader
           title={title}
           target={TYPE}
+          showHeaderTabs
           symbolsSelectorProps={{
             currentFilters: targetSymbols,
             existingCoins,

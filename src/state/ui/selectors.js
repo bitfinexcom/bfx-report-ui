@@ -9,6 +9,7 @@ export const getIsPaginationDialogOpen = state => getUI(state).isPaginationDialo
 export const getIsPreferencesDialogOpen = state => getUI(state).isPreferencesDialogOpen
 export const getIsTimeFrameDialogOpen = state => getUI(state).isTimeFrameDialogOpen
 export const getIsGoToRangeDialogOpen = state => getUI(state).isGoToRangeDialogOpen
+export const getIsNavigationDrawerOpen = state => getUI(state).isNavigationDrawerOpen
 export const getLatestPaginationTimestamp = state => getUI(state).latestPaginationTimestamp
 export const getErrorDialogMessage = state => getUI(state).errorMessage
 export const getDevice = state => getUI(state).device
@@ -24,6 +25,7 @@ export default {
   getIsPreferencesDialogOpen,
   getIsTimeFrameDialogOpen,
   getIsGoToRangeDialogOpen,
+  getIsNavigationDrawerOpen,
   getLatestPaginationTimestamp,
   getErrorDialogMessage,
   getDevice,

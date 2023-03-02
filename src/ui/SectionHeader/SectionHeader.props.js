@@ -21,6 +21,7 @@ export const propTypes = {
     existingCoins: PropTypes.arrayOf(PropTypes.string).isRequired,
     toggleSymbol: PropTypes.func.isRequired,
   }),
+  showHeaderTabs: PropTypes.bool,
   t: PropTypes.func.isRequired,
   target: PropTypes.string,
   timeframe: PropTypes.bool,
@@ -30,4 +31,5 @@ export const propTypes = {
 export const defaultProps = {
   filter: true,
   timeframe: true,
+  showHeaderTabs: false,
 }

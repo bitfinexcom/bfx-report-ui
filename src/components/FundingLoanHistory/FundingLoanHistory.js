@@ -133,6 +133,7 @@ class FundingLoanHistory extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
+          showHeaderTabs
           refresh={refresh}
           title='floan.title'
           symbolsSelectorProps={{

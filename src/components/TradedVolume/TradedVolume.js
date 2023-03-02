@@ -17,6 +17,7 @@ import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
+import SectionSwitch from 'ui/SectionSwitch'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
@@ -99,6 +100,7 @@ class TradedVolume extends PureComponent {
           <SectionHeaderTitle>
             {t('tradedvolume.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>

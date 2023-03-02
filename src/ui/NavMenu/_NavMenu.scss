@@ -3,8 +3,21 @@
   width: 282px;
   padding: 0;
   border-radius: 0;
-  box-shadow: 0 1px 0 1px var(--borderColor);
   clip-path: inset(0 -1px 0 0);
+  border-bottom: 1px solid var(--bgColor2);
+
+  .reports_title {
+    pointer-events: none;
+
+    svg {
+      margin-left: 1px;
+      margin-right: 9px;
+    }
+
+    .bp3-fill {
+      width: 200px;
+    }
+  }
 
   &--popover {
     box-shadow: 0 0 1px var(--menuPopoverShadow);
@@ -35,7 +48,7 @@
   }
 
   .bp3-menu-item {
-    display: block;
+    display: flex;
     width: 100%;
     height: 44px;
     line-height: 44px;
@@ -55,7 +68,7 @@
 
     &.bp3-active {
       background-color: var(--menuActive);
-      border-right: 6px solid var(--menuActiveBorder);
+      border-right: 2px solid var(--menuActiveBorder);
       color: var(--activeColor);
 
       svg path {
@@ -76,6 +89,14 @@
   .bp3-menu-divider {
     margin: 0;
     border-top: 1px solid var(--borderColor);
+  }
+
+  .sub_items_menu {
+    .bp3-collapse-body {
+      li {
+        padding-left: 40px;
+      }
+    }
   }
 
   &--mobile {
@@ -125,32 +146,8 @@
   }
 }
 
-@media screen and (min-width: 391px) and (max-width: 1024px) {
-  .bitfinex-nav-menu:not(.bitfinex-nav-menu--popover-menu) {
-    width: 40px;
-    min-width: 40px;
 
-    .bp3-menu {
-      &-item {
-        padding: 0 8px;
-
-        svg {
-          margin-right: 0;
-        }
-
-        div {
-          display: none;
-        }
-
-        &.bp3-active {
-          border-right: none;
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 855px) {
   .bitfinex-nav-menu {
     &--main {
       display: none;

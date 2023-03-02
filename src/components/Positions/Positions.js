@@ -8,6 +8,7 @@ import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import { getPath } from 'state/query/utils'
 import SectionHeader from 'ui/SectionHeader'
+import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import {
   checkInit,
@@ -17,7 +18,6 @@ import {
 } from 'state/utils'
 
 import getColumns from './Positions.columns'
-import PositionsSwitch from './PositionsSwitch'
 
 const TYPE = queryConstants.MENU_POSITIONS
 
@@ -139,8 +139,9 @@ class Positions extends PureComponent {
         className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader
-          title='positions.title'
           target={TYPE}
+          showHeaderTabs
+          title='positions.title'
           pairsSelectorProps={{
             existingPairs,
             currentFilters: targetPairs,
@@ -149,7 +150,7 @@ class Positions extends PureComponent {
           refresh={refresh}
           clearTargetPairs={this.clearPairs}
         />
-        <PositionsSwitch target={TYPE} />
+        <SectionSwitch target={TYPE} hasSubSections />
         {showContent}
       </Card>
     )
