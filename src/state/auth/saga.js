@@ -147,12 +147,12 @@ function* signUpEmail({ payload }) {
   )
 
   if (_isArray(response)) {
-    yield console.log('+++signUpEmail response', response)
-    const [responseType] = response
-    if (_isEqual(responseType, types.LOGIN_ERROR)) {
+    if (_isEqual(response?.[0], types.LOGIN_ERROR)) {
       console.error('+++LOGIN ERROR')
     } else {
-      yield console.log('+++responseType', responseType)
+      const [loginToken, twoFaTypes] = response
+      yield console.log('+++loginToken', loginToken)
+      yield console.log('+++twoFaTypes', twoFaTypes)
     }
   }
 }
