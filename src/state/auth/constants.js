@@ -19,4 +19,5 @@ export default {
   WS_SIGN_IN: 'ws_signIn',
   LOGIN_URL: 'https://api-pub.bitfinex.com/v2/login',
   LOGIN_ERROR: 'error',
+  LOGIN_2FA_OTP: 'otp',
 }
