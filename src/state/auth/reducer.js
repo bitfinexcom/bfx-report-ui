@@ -53,6 +53,7 @@ const initialState = {
   usersLoading: false,
   subAccountsLoading: false,
   showOtpLogin: false,
+  loginToken: '',
 }
 
 export function authReducer(state = initialState, action) {
@@ -129,6 +130,11 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         showOtpLogin: payload,
+      }
+    case types.SET_LOGIN_TOKEN:
+      return {
+        ...state,
+        loginToken: payload,
       }
     case types.HIDE_AUTH:
       return {
