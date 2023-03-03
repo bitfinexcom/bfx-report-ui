@@ -86,9 +86,10 @@ export function signUpEmail(payload) {
   }
 }
 
-export function showOtpLogin() {
+export function showOtpLogin(payload) {
   return {
     type: types.SHOW_OTP_LOGIN,
+    payload,
   }
 }
 
