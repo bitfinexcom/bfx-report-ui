@@ -8,6 +8,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import _last from 'lodash/last'
 import _isArray from 'lodash/isArray'
 import _isEmpty from 'lodash/isEmpty'
 import _isEqual from 'lodash/isEqual'
@@ -148,10 +149,19 @@ function* signUpEmail({ payload }) {
 
   if (_isArray(response)) {
     if (_isEqual(response?.[0], types.LOGIN_ERROR)) {
-      console.error('+++LOGIN ERROR')
+      yield put(updateErrorStatus({
+        id: 'auth.loginEmail.loginEmailError',
+      }))
     } else {
       const [loginToken, twoFaTypes] = response
-      yield console.log('+++loginToken', loginToken)
+      const [twoFaMain] = _last(twoFaTypes)
+      if (_isEqual(twoFaMain, types.LOGIN_2FA_OTP)) {
+        yield console.log('+++loginToken', loginToken)
+        yield console.log('+++twoFaMain', twoFaMain)
+      } else {
+        console.warn('+++Please setup 2FA or use API key')
+      }
+
       yield console.log('+++twoFaTypes', twoFaTypes)
     }
   }
