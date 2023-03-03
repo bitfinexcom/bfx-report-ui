@@ -139,31 +139,34 @@ function* signUp({ payload }) {
 }
 
 function* signUpEmail({ payload }) {
-  const { login, password } = payload
+  try {
+    const { login, password } = payload
+    const response = yield call(
+      postJsonFetch,
+      types.LOGIN_URL,
+      { login, password },
+    )
 
-  const response = yield call(
-    postJsonFetch,
-    types.LOGIN_URL,
-    { login, password },
-  )
-
-  if (_isArray(response)) {
-    if (_isEqual(response?.[0], types.LOGIN_ERROR)) {
-      yield put(updateErrorStatus({
-        id: 'auth.loginEmail.loginEmailError',
-      }))
-    } else {
-      const [loginToken, twoFaTypes] = response
-      const [twoFaMain] = _last(twoFaTypes)
-      if (_isEqual(twoFaMain, types.LOGIN_2FA_OTP)) {
-        yield console.log('+++loginToken', loginToken)
-        yield console.log('+++twoFaMain', twoFaMain)
+    if (_isArray(response)) {
+      if (_isEqual(response?.[0], types.LOGIN_ERROR)) {
+        yield put(updateErrorStatus({
+          id: 'auth.loginEmail.loginEmailError',
+        }))
       } else {
-        console.warn('+++Please setup 2FA or use API key')
+        const [loginToken, twoFaTypes] = response
+        const [twoFaMain] = _last(twoFaTypes)
+        if (_isEqual(twoFaMain, types.LOGIN_2FA_OTP)) {
+          yield console.log('+++loginToken', loginToken)
+          yield console.log('+++twoFaMain', twoFaMain)
+        } else {
+          yield put(updateErrorStatus({
+            id: 'auth.loginEmail.loginEmailNo2FA',
+          }))
+        }
       }
-
-      yield console.log('+++twoFaTypes', twoFaTypes)
     }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
   }
 }
 
