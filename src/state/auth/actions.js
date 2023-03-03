@@ -86,6 +86,12 @@ export function signUpEmail(payload) {
   }
 }
 
+export function showOtpLogin() {
+  return {
+    type: types.SHOW_OTP_LOGIN,
+  }
+}
+
 /**
  * Create an action to show auth dialog.
  */
@@ -171,4 +177,6 @@ export default {
   updateAuth,
   clearAuth,
   updateAuthStatus,
+  signUpEmail,
+  showOtpLogin,
 }
