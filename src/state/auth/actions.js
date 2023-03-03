@@ -57,6 +57,13 @@ export function setUsers(payload) {
   }
 }
 
+export function setLoginToken(payload) {
+  return {
+    type: types.SET_LOGIN_TOKEN,
+    payload,
+  }
+}
+
 /**
  * Create an action to sign in.
  * @param {Object} payload auth data
@@ -180,4 +187,5 @@ export default {
   updateAuthStatus,
   signUpEmail,
   showOtpLogin,
+  setLoginToken,
 }
