@@ -27,7 +27,9 @@
     "useApiKey": "Use API Key",
     "loginEmail": {
      "emailOrUserName": "Email or Username",
-     "password": "Password"
+     "password": "Password",
+     "loginEmailError": "The email/username or password is incorrect",
+     "loginEmailNo2FA": "Please setup 2FA for your account or use the API key to login"
     },
     "simpleAccounts": "Simple Accounts",
     "multipleAccounts": "Multiple Accounts",
