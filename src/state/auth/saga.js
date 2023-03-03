@@ -156,7 +156,7 @@ function* signUpEmail({ payload }) {
         const [loginToken, twoFaTypes] = response
         const [twoFaMain] = _last(twoFaTypes)
         if (_isEqual(twoFaMain, types.LOGIN_2FA_OTP)) {
-          yield console.log('+++loginToken', loginToken)
+          yield put(actions.setLoginToken(loginToken))
           yield put(actions.showOtpLogin(true))
         } else {
           yield put(updateErrorStatus({
