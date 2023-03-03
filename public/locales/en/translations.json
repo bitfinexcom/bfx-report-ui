@@ -35,7 +35,8 @@
       "title": "Two-Factor Authentication",
       "auth": "Authenticate",
       "cancel": "Cancel",
-      "invalidToken": "Invalid token, please try again"
+      "invalidToken": "Invalid token, please try again",
+      "loginSessionExpired": "Your login session has expired, please try again"
     },
     "simpleAccounts": "Simple Accounts",
     "multipleAccounts": "Multiple Accounts",
