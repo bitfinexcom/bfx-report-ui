@@ -3,14 +3,20 @@ import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
 import { signUp, signUpEmail, updateAuth } from 'state/auth/actions'
-import { getAuthData, getIsLoading, getUsers } from 'state/auth/selectors'
+import {
+  getUsers,
+  getAuthData,
+  getIsLoading,
+  getShowOtpLogin,
+} from 'state/auth/selectors'
 
 import SignUp from './SignUp'
 
 const mapStateToProps = state => ({
+  users: getUsers(state),
   authData: getAuthData(state),
   loading: getIsLoading(state),
-  users: getUsers(state),
+  showOtpLogin: getShowOtpLogin(state),
 })
 
 const mapDispatchToProps = {
