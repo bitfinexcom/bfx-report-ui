@@ -57,6 +57,7 @@ class SignUp extends PureComponent {
       passwordError: '',
       passwordRepeat: '',
       isBeingValidated: false,
+      otp: '',
       passwordRepeatError: '',
       userName: '',
       userPassword: '',
@@ -171,6 +172,7 @@ class SignUp extends PureComponent {
       passwordRepeat,
       isPasswordProtected,
       isPersisted,
+      otp,
       passwordError,
       passwordRepeatError,
       useApiKey,
@@ -208,6 +210,17 @@ class SignUp extends PureComponent {
             />
           )}
           <PlatformLogo />
+          {showOtpLogin && (
+            <>
+              <InputKey
+                label='auth.2FA.GAToken'
+                type='text'
+                name='otp'
+                value={otp}
+                onChange={this.handleInputChange}
+              />
+            </>
+          )}
           {!useApiKey && (
             <>
               <InputKey
