@@ -18,6 +18,11 @@
         margin: 15px auto 30px auto;
       }
 
+      > .buttons-row {
+        display: flex;
+        justify-content: space-between;
+      }
+
       > .bp3-callout {
         border-radius: 4px;
         margin: 0 auto 24px;
