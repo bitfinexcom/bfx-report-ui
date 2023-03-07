@@ -178,7 +178,7 @@ class SignUp extends PureComponent {
       userPassword,
     } = this.state
 
-    const frameworkTitle = !showOtpLogin ? t('auth.2FA.title') : t('auth.signUp')
+    const frameworkTitle = showOtpLogin ? t('auth.2FA.title') : t('auth.signUp')
     const title = showFrameworkMode ? frameworkTitle : t('auth.signUp')
     const icon = showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
@@ -193,12 +193,12 @@ class SignUp extends PureComponent {
 
     return (
       <Dialog
-        className={classes}
-        title={title}
         isOpen
+        usePortal
         icon={icon}
+        title={title}
+        className={classes}
         isCloseButtonShown={false}
-        usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
           {showAuthTypeSelector && (
