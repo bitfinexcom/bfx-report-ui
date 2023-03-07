@@ -178,7 +178,8 @@ class SignUp extends PureComponent {
       userPassword,
     } = this.state
 
-    const title = showFrameworkMode ? t('auth.signUp') : t('auth.title')
+    const frameworkTitle = !showOtpLogin ? t('auth.2FA.title') : t('auth.signUp')
+    const title = showFrameworkMode ? frameworkTitle : t('auth.signUp')
     const icon = showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
     const isSignUpDisabled = !userName || !userPassword
