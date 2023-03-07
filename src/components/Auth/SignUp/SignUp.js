@@ -210,143 +210,149 @@ class SignUp extends PureComponent {
             />
           )}
           <PlatformLogo />
-          {!showOtpLogin && (
-            <>
-              <InputKey
-                label='auth.2FA.GAToken'
-                type='text'
-                name='otp'
-                value={otp}
-                onChange={this.handleInputChange}
-              />
-              <div className='buttons-row'>
-                <Button
-                  name='check'
-                  intent={Intent.NONE}
-                  onClick={this.onSignUp}
-                  className='bitfinex-auth-check'
-                >
-                  {t('auth.2FA.cancel')}
-                </Button>
-                <Button
-                  name='check'
-                  intent={Intent.SUCCESS}
-                  onClick={this.onSignUp}
-                  className='bitfinex-auth-check'
-                >
-                  {t('auth.2FA.auth')}
-                </Button>
-              </div>
-            </>
-          )}
-          {!useApiKey && (
-            <>
-              <InputKey
-                label='auth.loginEmail.emailOrUserName'
-                type='text'
-                name='userName'
-                value={userName}
-                onChange={this.handleInputChange}
-              />
-              <InputKey
-                label='auth.loginEmail.password'
-                name='userPassword'
-                value={userPassword}
-                onChange={this.handleInputChange}
-              />
-            </>
-          )}
-          {useApiKey && (
-            <>
-              <Callout>
-                {t('auth.note1')}
-                <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
-                  {config.KEY_URL.split('https://')[1]}
-                </a>
-                {t('auth.note2')}
-              </Callout>
-              <InputKey
-                label='auth.enterAPIKey'
-                name='apiKey'
-                value={apiKey}
-                onChange={this.handleInputChange}
-              />
-              <InputKey
-                label='auth.enterAPISecret'
-                name='apiSecret'
-                value={apiSecret}
-                onChange={this.handleInputChange}
-              />
-            </>
-          )}
-          {showFrameworkMode && isPasswordProtected && (
-            <>
-              <InputKey
-                label='auth.enterPassword'
-                name='password'
-                value={password}
-                onChange={this.handleInputChange}
-              />
-              <ErrorLabel text={passwordError} />
-              <InputKey
-                label='auth.repeatPassword'
-                name='passwordRepeat'
-                value={passwordRepeat}
-                onChange={this.handleInputChange}
-              />
-              <ErrorLabel text={passwordRepeatError} />
-            </>
-          )}
-          <div className='bitfinex-auth-checkboxes'>
-            <div className='bitfinex-auth-checkboxes--group'>
-              <Checkbox
-                className='bitfinex-auth-remember-me'
-                name='useApiKey'
-                checked={useApiKey}
-                onChange={this.handleCheckboxChange}
-              >
-                {t('auth.useApiKey')}
-              </Checkbox>
-              <Checkbox
-                className='bitfinex-auth-remember-me'
-                name='isPersisted'
-                checked={isPersisted}
-                onChange={this.handleCheckboxChange}
-              >
-                {t('auth.rememberMe')}
-              </Checkbox>
-            </div>
-            {showPasswordProtection && (
-              <Checkbox
-                className='bitfinex-auth-remember-me'
-                name='isPasswordProtected'
-                checked={isPasswordProtected}
-                onChange={this.handleCheckboxChange}
-              >
-                {t('auth.passwordProtection')}
-              </Checkbox>
+          {showOtpLogin
+            ? (
+              <>
+                <InputKey
+                  label='auth.2FA.GAToken'
+                  type='text'
+                  name='otp'
+                  value={otp}
+                  onChange={this.handleInputChange}
+                />
+                <div className='buttons-row'>
+                  <Button
+                    name='check'
+                    intent={Intent.NONE}
+                    onClick={this.onSignUp}
+                    className='bitfinex-auth-check'
+                  >
+                    {t('auth.2FA.cancel')}
+                  </Button>
+                  <Button
+                    name='check'
+                    intent={Intent.SUCCESS}
+                    onClick={this.onSignUp}
+                    className='bitfinex-auth-check'
+                  >
+                    {t('auth.2FA.auth')}
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                {!useApiKey && (
+                  <>
+                    <InputKey
+                      label='auth.loginEmail.emailOrUserName'
+                      type='text'
+                      name='userName'
+                      value={userName}
+                      onChange={this.handleInputChange}
+                    />
+                    <InputKey
+                      label='auth.loginEmail.password'
+                      name='userPassword'
+                      value={userPassword}
+                      onChange={this.handleInputChange}
+                    />
+                  </>
+                )}
+                {useApiKey && (
+                  <>
+                    <Callout>
+                      {t('auth.note1')}
+                      <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
+                        {config.KEY_URL.split('https://')[1]}
+                      </a>
+                      {t('auth.note2')}
+                    </Callout>
+                    <InputKey
+                      label='auth.enterAPIKey'
+                      name='apiKey'
+                      value={apiKey}
+                      onChange={this.handleInputChange}
+                    />
+                    <InputKey
+                      label='auth.enterAPISecret'
+                      name='apiSecret'
+                      value={apiSecret}
+                      onChange={this.handleInputChange}
+                    />
+                  </>
+                )}
+                {showFrameworkMode && isPasswordProtected && (
+                  <>
+                    <InputKey
+                      label='auth.enterPassword'
+                      name='password'
+                      value={password}
+                      onChange={this.handleInputChange}
+                    />
+                    <ErrorLabel text={passwordError} />
+                    <InputKey
+                      label='auth.repeatPassword'
+                      name='passwordRepeat'
+                      value={passwordRepeat}
+                      onChange={this.handleInputChange}
+                    />
+                    <ErrorLabel text={passwordRepeatError} />
+                  </>
+                )}
+                <div className='bitfinex-auth-checkboxes'>
+                  <div className='bitfinex-auth-checkboxes--group'>
+                    <Checkbox
+                      className='bitfinex-auth-remember-me'
+                      name='useApiKey'
+                      checked={useApiKey}
+                      onChange={this.handleCheckboxChange}
+                    >
+                      {t('auth.useApiKey')}
+                    </Checkbox>
+                    <Checkbox
+                      className='bitfinex-auth-remember-me'
+                      name='isPersisted'
+                      checked={isPersisted}
+                      onChange={this.handleCheckboxChange}
+                    >
+                      {t('auth.rememberMe')}
+                    </Checkbox>
+                  </div>
+                  {showPasswordProtection && (
+                  <Checkbox
+                    className='bitfinex-auth-remember-me'
+                    name='isPasswordProtected'
+                    checked={isPasswordProtected}
+                    onChange={this.handleCheckboxChange}
+                  >
+                    {t('auth.passwordProtection')}
+                  </Checkbox>
+                  )}
+                </div>
+              </>
             )}
-          </div>
         </div>
-        <div className={Classes.DIALOG_FOOTER}>
-          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            {showFrameworkMode && users.length > 0 && (
+        {!showOtpLogin && (
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              {showFrameworkMode && users.length > 0 && (
               <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
                 {t('auth.signIn')}
               </div>
-            )}
-            <Button
-              className='bitfinex-auth-check'
-              name='check'
-              intent={Intent.SUCCESS}
-              onClick={this.onSignUp}
-              disabled={isSignUpDisabled}
-              loading={loading}
-            >
-              {title}
-            </Button>
+              )}
+              <Button
+                className='bitfinex-auth-check'
+                name='check'
+                intent={Intent.SUCCESS}
+                onClick={this.onSignUp}
+                disabled={isSignUpDisabled}
+                loading={loading}
+              >
+                {title}
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </Dialog>
     )
   }
