@@ -210,7 +210,7 @@ class SignUp extends PureComponent {
             />
           )}
           <PlatformLogo />
-          {showOtpLogin && (
+          {!showOtpLogin && (
             <>
               <InputKey
                 label='auth.2FA.GAToken'
@@ -219,6 +219,24 @@ class SignUp extends PureComponent {
                 value={otp}
                 onChange={this.handleInputChange}
               />
+              <div className='buttons-row'>
+                <Button
+                  name='check'
+                  intent={Intent.NONE}
+                  onClick={this.onSignUp}
+                  className='bitfinex-auth-check'
+                >
+                  {t('auth.2FA.cancel')}
+                </Button>
+                <Button
+                  name='check'
+                  intent={Intent.SUCCESS}
+                  onClick={this.onSignUp}
+                  className='bitfinex-auth-check'
+                >
+                  {t('auth.2FA.auth')}
+                </Button>
+              </div>
             </>
           )}
           {!useApiKey && (
