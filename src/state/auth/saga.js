@@ -14,7 +14,7 @@ import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
 import { selectAuth } from 'state/auth/selectors'
-import { formatAuthDate, makeFetchCall } from 'state/utils'
+import { formatAuthDate, makeFetchCall, postJsonFetch } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
 import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
@@ -179,7 +179,8 @@ function* signIn({ payload }) {
 
 function* fetchUsers() {
   try {
-    const { result: users } = yield call(makeFetchCall, 'getUsers')
+    const { result: users } = yield call(postJsonFetch,
+      `${config.API_URL}/json-rpc`, { method: 'getUsers' })
 
     if (users) {
       yield put(actions.setUsers(users))
