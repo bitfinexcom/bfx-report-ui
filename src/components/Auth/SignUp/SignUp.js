@@ -18,6 +18,7 @@ import InputKey from '../InputKey'
 import ErrorLabel from '../ErrorLabel'
 import { MODES } from '../Auth'
 
+const { showFrameworkMode, hostedFrameworkMode } = config
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
 
 // handles framework sign up and online version login
@@ -106,7 +107,7 @@ class SignUp extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    if (!config.showFrameworkMode || !isPasswordProtected) {
+    if (!showFrameworkMode || !isPasswordProtected) {
       return true
     }
 
@@ -177,17 +178,17 @@ class SignUp extends PureComponent {
       userPassword,
     } = this.state
 
-    const title = config.showFrameworkMode ? t('auth.signUp') : t('auth.title')
-    const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
-    const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
+    const title = showFrameworkMode ? t('auth.signUp') : t('auth.title')
+    const icon = showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
+    const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
     const isSignUpDisabled = !userName || !userPassword
       || (useApiKey && (!apiKey || !apiSecret))
-      || (config.showFrameworkMode && isPasswordProtected
+      || (showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
-      'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
+      'bitfinex-auth-sign-up--framework': showFrameworkMode,
     })
-    const showAuthTypeSelector = config.showFrameworkMode && useApiKey
+    const showAuthTypeSelector = showFrameworkMode && useApiKey
 
     return (
       <Dialog
@@ -246,7 +247,7 @@ class SignUp extends PureComponent {
               />
             </>
           )}
-          {config.showFrameworkMode && isPasswordProtected && (
+          {showFrameworkMode && isPasswordProtected && (
             <>
               <InputKey
                 label='auth.enterPassword'
@@ -297,7 +298,7 @@ class SignUp extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            {config.showFrameworkMode && users.length > 0 && (
+            {showFrameworkMode && users.length > 0 && (
               <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
                 {t('auth.signIn')}
               </div>
