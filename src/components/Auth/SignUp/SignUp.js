@@ -33,6 +33,7 @@ class SignUp extends PureComponent {
     t: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
+    showOtpLogin: PropTypes.bool.isRequired,
     switchMode: PropTypes.func.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
@@ -156,6 +157,7 @@ class SignUp extends PureComponent {
     const {
       authType,
       loading,
+      showOtpLogin,
       switchMode,
       switchAuthType,
       t,
