@@ -223,11 +223,12 @@ class SignUp extends PureComponent {
             ? (
               <>
                 <InputKey
-                  label='auth.2FA.GAToken'
-                  type='text'
                   name='otp'
+                  type='text'
                   value={otp}
+                  label='auth.2FA.GAToken'
                   onChange={this.handleInputChange}
+                  placeholder={t('auth.2FA.sixDigits')}
                 />
                 <div className='buttons-row'>
                   <Button
