@@ -158,6 +158,7 @@ class SignUp extends PureComponent {
 
   on2FACancel = () => {
     const { showOtpLogin } = this.props
+    this.setState({ otp: '' })
     showOtpLogin(false)
   }
 
@@ -185,6 +186,8 @@ class SignUp extends PureComponent {
       userName,
       userPassword,
     } = this.state
+
+    console.log('+++OTP', otp)
 
     const frameworkTitle = isOtpLoginShown ? t('auth.2FA.title') : t('auth.signUp')
     const title = showFrameworkMode ? frameworkTitle : t('auth.signUp')
