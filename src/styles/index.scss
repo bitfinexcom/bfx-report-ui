@@ -117,7 +117,8 @@ html {
   color: var(--color);
 
   &::placeholder {
-    color: var(--color)
+    color: var(--color);
+    opacity: 0.4;
   }
 }
 
