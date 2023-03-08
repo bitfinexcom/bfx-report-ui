@@ -173,7 +173,7 @@ class SignIn extends PureComponent {
         isOpen
         icon={<Icon.SIGN_IN />}
         isCloseButtonShown={false}
-        usePortal={false}
+        usePortal
       >
         <div className={Classes.DIALOG_BODY}>
           {config.showFrameworkMode && (
