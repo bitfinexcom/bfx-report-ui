@@ -35,7 +35,7 @@
       "title": "Two-Factor Authentication",
       "auth": "Authenticate",
       "cancel": "Cancel",
-      "sixDigits": "6 digits",
+      "sixDigits": "6 Digits",
       "GAToken": "Google Authenticator 2FA token",
       "invalidToken": "Invalid token, please try again",
       "loginSessionExpired": "Your login session has expired, please try again"
