@@ -34,7 +34,8 @@ class SignUp extends PureComponent {
     t: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
-    showOtpLogin: PropTypes.bool.isRequired,
+    showOtpLogin: PropTypes.func.isRequired,
+    isOtpLoginShown: PropTypes.bool.isRequired,
     switchMode: PropTypes.func.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
@@ -155,11 +156,16 @@ class SignUp extends PureComponent {
     })
   }
 
+  on2FACancel = () => {
+    const { showOtpLogin } = this.props
+    showOtpLogin(false)
+  }
+
   render() {
     const {
       authType,
       loading,
-      showOtpLogin,
+      isOtpLoginShown,
       switchMode,
       switchAuthType,
       t,
@@ -180,7 +186,7 @@ class SignUp extends PureComponent {
       userPassword,
     } = this.state
 
-    const frameworkTitle = showOtpLogin ? t('auth.2FA.title') : t('auth.signUp')
+    const frameworkTitle = isOtpLoginShown ? t('auth.2FA.title') : t('auth.signUp')
     const title = showFrameworkMode ? frameworkTitle : t('auth.signUp')
     const icon = showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
@@ -210,7 +216,7 @@ class SignUp extends PureComponent {
             />
           )}
           <PlatformLogo />
-          {showOtpLogin
+          {isOtpLoginShown
             ? (
               <>
                 <InputKey
@@ -222,15 +228,15 @@ class SignUp extends PureComponent {
                 />
                 <div className='buttons-row'>
                   <Button
-                    name='check'
+                    name='cancel'
                     intent={Intent.NONE}
-                    onClick={this.onSignUp}
+                    onClick={this.on2FACancel}
                     className='bitfinex-auth-check'
                   >
                     {t('auth.2FA.cancel')}
                   </Button>
                   <Button
-                    name='check'
+                    name='auth'
                     intent={Intent.SUCCESS}
                     onClick={this.onSignUp}
                     className='bitfinex-auth-check'
@@ -332,7 +338,7 @@ class SignUp extends PureComponent {
               </>
             )}
         </div>
-        {!showOtpLogin && (
+        {!isOtpLoginShown && (
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               {showFrameworkMode && users.length > 0 && (
