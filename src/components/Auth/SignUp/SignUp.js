@@ -156,7 +156,7 @@ class SignUp extends PureComponent {
     })
   }
 
-  on2FACancel = () => {
+  handle2FACancel = () => {
     const { showOtpLogin } = this.props
     this.setState({ otp: '' })
     showOtpLogin(false)
@@ -234,7 +234,7 @@ class SignUp extends PureComponent {
                   <Button
                     name='cancel'
                     intent={Intent.NONE}
-                    onClick={this.on2FACancel}
+                    onClick={this.handle2FACancel}
                     className='bitfinex-auth-check'
                   >
                     {t('auth.2FA.cancel')}
