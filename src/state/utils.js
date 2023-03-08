@@ -54,7 +54,7 @@ export const getAuthFromStore = () => {
 // turned off for firefox
 export const getDefaultTableScrollSetting = () => config.isElectronApp || !navigator.userAgent.includes('Firefox')
 
-export function postJsonfetch(url, bodyJson) {
+export function postJsonFetch(url, bodyJson) {
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -69,7 +69,7 @@ export function postJsonfetch(url, bodyJson) {
 }
 
 export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
-  return postJsonfetch(`${config.API_URL}/json-rpc`, {
+  return postJsonFetch(`${config.API_URL}/json-rpc`, {
     auth,
     method,
     params: params || undefined,
@@ -510,7 +510,7 @@ export default {
   isValidateType,
   momentFormatter,
   momentFormatterDays,
-  postJsonfetch,
+  postJsonFetch,
   removeUrlParams,
   getFrameworkPositionsEntries,
   getFrameworkPositionsTickersEntries,
