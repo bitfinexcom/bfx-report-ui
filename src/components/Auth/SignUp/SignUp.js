@@ -164,30 +164,28 @@ class SignUp extends PureComponent {
 
   render() {
     const {
-      authType,
-      loading,
-      isOtpLoginShown,
-      switchMode,
-      switchAuthType,
       t,
       users,
+      loading,
+      authType,
+      switchMode,
+      switchAuthType,
+      isOtpLoginShown,
     } = this.props
     const {
-      apiKey,
-      apiSecret,
-      password,
-      passwordRepeat,
-      isPasswordProtected,
-      isPersisted,
       otp,
-      passwordError,
-      passwordRepeatError,
-      useApiKey,
+      apiKey,
       userName,
+      password,
+      useApiKey,
+      apiSecret,
+      isPersisted,
       userPassword,
+      passwordError,
+      passwordRepeat,
+      passwordRepeatError,
+      isPasswordProtected,
     } = this.state
-
-    console.log('+++OTP', otp)
 
     const frameworkTitle = isOtpLoginShown ? t('auth.2FA.title') : t('auth.signUp')
     const title = showFrameworkMode ? frameworkTitle : t('auth.signUp')
@@ -254,16 +252,16 @@ class SignUp extends PureComponent {
                 {!useApiKey && (
                   <>
                     <InputKey
-                      label='auth.loginEmail.emailOrUserName'
                       type='text'
                       name='userName'
                       value={userName}
                       onChange={this.handleInputChange}
+                      label='auth.loginEmail.emailOrUserName'
                     />
                     <InputKey
-                      label='auth.loginEmail.password'
                       name='userPassword'
                       value={userPassword}
+                      label='auth.loginEmail.password'
                       onChange={this.handleInputChange}
                     />
                   </>
@@ -278,15 +276,15 @@ class SignUp extends PureComponent {
                       {t('auth.note2')}
                     </Callout>
                     <InputKey
-                      label='auth.enterAPIKey'
                       name='apiKey'
                       value={apiKey}
+                      label='auth.enterAPIKey'
                       onChange={this.handleInputChange}
                     />
                     <InputKey
-                      label='auth.enterAPISecret'
                       name='apiSecret'
                       value={apiSecret}
+                      label='auth.enterAPISecret'
                       onChange={this.handleInputChange}
                     />
                   </>
@@ -294,16 +292,16 @@ class SignUp extends PureComponent {
                 {showFrameworkMode && isPasswordProtected && (
                   <>
                     <InputKey
-                      label='auth.enterPassword'
                       name='password'
                       value={password}
+                      label='auth.enterPassword'
                       onChange={this.handleInputChange}
                     />
                     <ErrorLabel text={passwordError} />
                     <InputKey
-                      label='auth.repeatPassword'
                       name='passwordRepeat'
                       value={passwordRepeat}
+                      label='auth.repeatPassword'
                       onChange={this.handleInputChange}
                     />
                     <ErrorLabel text={passwordRepeatError} />
@@ -312,28 +310,28 @@ class SignUp extends PureComponent {
                 <div className='bitfinex-auth-checkboxes'>
                   <div className='bitfinex-auth-checkboxes--group'>
                     <Checkbox
-                      className='bitfinex-auth-remember-me'
                       name='useApiKey'
                       checked={useApiKey}
                       onChange={this.handleCheckboxChange}
+                      className='bitfinex-auth-remember-me'
                     >
                       {t('auth.useApiKey')}
                     </Checkbox>
                     <Checkbox
-                      className='bitfinex-auth-remember-me'
                       name='isPersisted'
                       checked={isPersisted}
                       onChange={this.handleCheckboxChange}
+                      className='bitfinex-auth-remember-me'
                     >
                       {t('auth.rememberMe')}
                     </Checkbox>
                   </div>
                   {showPasswordProtection && (
                   <Checkbox
-                    className='bitfinex-auth-remember-me'
                     name='isPasswordProtected'
                     checked={isPasswordProtected}
                     onChange={this.handleCheckboxChange}
+                    className='bitfinex-auth-remember-me'
                   >
                     {t('auth.passwordProtection')}
                   </Checkbox>
@@ -351,12 +349,12 @@ class SignUp extends PureComponent {
               </div>
               )}
               <Button
-                className='bitfinex-auth-check'
                 name='check'
+                loading={loading}
                 intent={Intent.SUCCESS}
                 onClick={this.onSignUp}
                 disabled={isSignUpDisabled}
-                loading={loading}
+                className='bitfinex-auth-check'
               >
                 {title}
               </Button>
