@@ -33,6 +33,7 @@ class SignUp extends PureComponent {
     loading: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
+    signUpOtp: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
     showOtpLogin: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
@@ -162,6 +163,12 @@ class SignUp extends PureComponent {
     showOtpLogin(false)
   }
 
+  handleOneTimePassword = () => {
+    const { signUpOtp } = this.props
+    const { otp } = this.state
+    signUpOtp(otp)
+  }
+
   render() {
     const {
       t,
@@ -240,7 +247,7 @@ class SignUp extends PureComponent {
                   <Button
                     name='auth'
                     intent={Intent.SUCCESS}
-                    onClick={this.onSignUp}
+                    onClick={this.handleOneTimePassword}
                     className='bitfinex-auth-check'
                   >
                     {t('auth.2FA.auth')}
