@@ -4,9 +4,10 @@ import { withTranslation } from 'react-i18next'
 
 import {
   signUp,
+  signUpOtp,
+  updateAuth,
   signUpEmail,
   showOtpLogin,
-  updateAuth,
 } from 'state/auth/actions'
 import {
   getUsers,
@@ -26,8 +27,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   signUp,
-  signUpEmail,
+  signUpOtp,
   updateAuth,
+  signUpEmail,
   showOtpLogin,
 }
 
