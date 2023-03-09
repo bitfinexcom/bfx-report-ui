@@ -93,6 +93,13 @@ export function signUpEmail(payload) {
   }
 }
 
+export function signUpOtp(payload) {
+  return {
+    type: types.SIGN_UP_OTP,
+    payload,
+  }
+}
+
 export function showOtpLogin(payload) {
   return {
     type: types.SHOW_OTP_LOGIN,
@@ -186,6 +193,7 @@ export default {
   clearAuth,
   updateAuthStatus,
   signUpEmail,
+  signUpOtp,
   showOtpLogin,
   setLoginToken,
 }
