@@ -9,14 +9,16 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
-import Icon from 'icons'
-import PlatformLogo from 'ui/PlatformLogo'
-import config from 'config'
+import _isEmpty from 'lodash/isEmpty'
 
-import AuthTypeSelector from '../AuthTypeSelector'
+import Icon from 'icons'
+import config from 'config'
+import PlatformLogo from 'ui/PlatformLogo'
+
+import { MODES } from '../Auth'
 import InputKey from '../InputKey'
 import ErrorLabel from '../ErrorLabel'
-import { MODES } from '../Auth'
+import AuthTypeSelector from '../AuthTypeSelector'
 
 const { showFrameworkMode, hostedFrameworkMode } = config
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
@@ -247,8 +249,9 @@ class SignUp extends PureComponent {
                   <Button
                     name='auth'
                     intent={Intent.SUCCESS}
-                    onClick={this.handleOneTimePassword}
+                    disabled={_isEmpty(otp)}
                     className='bitfinex-auth-check'
+                    onClick={this.handleOneTimePassword}
                   >
                     {t('auth.2FA.auth')}
                   </Button>
