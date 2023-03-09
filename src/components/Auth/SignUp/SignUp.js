@@ -168,7 +168,7 @@ class SignUp extends PureComponent {
   handleOneTimePassword = () => {
     const { signUpOtp } = this.props
     const { otp } = this.state
-    signUpOtp(otp)
+    signUpOtp({ otp })
   }
 
   render() {
