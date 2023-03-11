@@ -200,8 +200,8 @@ class SignUp extends PureComponent {
     const title = showFrameworkMode ? frameworkTitle : t('auth.signUp')
     const icon = showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
-    const isSignUpDisabled = !userName || !userPassword
-      || (useApiKey && (!apiKey || !apiSecret))
+    const isSignUpDisabled = (useApiKey && (!apiKey || !apiSecret))
+      || (!useApiKey && (!userName || !userPassword))
       || (showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
