@@ -84,9 +84,9 @@ class SignUp extends PureComponent {
     this.setState({
       isBeingValidated: true,
     })
-    if (useApiKey) {
-      const isValid = this.validateForm()
-      if (isValid) {
+    const isValid = this.validateForm()
+    if (isValid) {
+      if (useApiKey) {
         signUp({
           apiKey,
           apiSecret,
@@ -94,12 +94,12 @@ class SignUp extends PureComponent {
           isNotProtected: !isPasswordProtected,
           isPersisted,
         })
+      } else {
+        signUpEmail({
+          login: userName,
+          password: userPassword,
+        })
       }
-    } else {
-      signUpEmail({
-        login: userName,
-        password: userPassword,
-      })
     }
   }
 
