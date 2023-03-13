@@ -16,7 +16,7 @@ import _isEqual from 'lodash/isEqual'
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-import { selectAuth } from 'state/auth/selectors'
+import { selectAuth, getLoginToken } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall, postJsonFetch } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
@@ -111,6 +111,7 @@ function* signUp({ payload }) {
         isNotProtected,
       }
       yield put(actions.addUser(newUser))
+      yield put(actions.showOtpLogin(false))
       return
     }
 
@@ -163,6 +164,31 @@ function* signUpEmail({ payload }) {
             id: 'auth.loginEmail.loginEmailNo2FA',
           }))
         }
+      }
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
+function* signUpOTP({ payload }) {
+  try {
+    const { otp } = payload
+    const loginToken = yield select(getLoginToken)
+    const response = yield call(
+      postJsonFetch,
+      types.LOGIN_VERIFY_URL,
+      { loginToken, token: otp, verifyMethod: types.LOGIN_2FA_OTP },
+    )
+
+    if (_isArray(response)) {
+      if (_isEqual(response?.[0], types.LOGIN_ERROR)) {
+        yield put(updateErrorStatus({
+          id: 'auth.2FA.invalidToken',
+        }))
+      } else {
+        const [bfxToken] = response
+        yield put(actions.signUp({ authToken: bfxToken, isNotProtected: true }))
       }
     }
   } catch (fail) {
@@ -317,6 +343,7 @@ export default function* authSaga() {
   yield takeLatest(types.FETCH_USERS, fetchUsers)
   yield takeLatest(types.RECOVER_PASSWORD, recoverPassword)
   yield takeLatest(types.SIGN_UP, signUp)
+  yield takeLatest(types.SIGN_UP_OTP, signUpOTP)
   yield takeLatest(types.SIGN_UP_EMAIL, signUpEmail)
   yield takeLatest(types.SIGN_IN, signIn)
   yield takeLatest(types.LOGOUT, logout)
