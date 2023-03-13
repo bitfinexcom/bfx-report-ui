@@ -271,7 +271,7 @@ class SignUp extends PureComponent {
                     <InputKey
                       name='userPassword'
                       value={userPassword}
-                      label='auth.loginEmail.password'
+                      label='auth.loginEmail.bfxAccPassword'
                       onChange={this.handleInputChange}
                     />
                   </>
