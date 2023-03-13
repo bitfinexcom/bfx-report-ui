@@ -173,7 +173,7 @@ function* signUpEmail({ payload }) {
 
 function* signUpOTP({ payload }) {
   try {
-    const { otp } = payload
+    const { otp, password, isNotProtected } = payload
     const loginToken = yield select(getLoginToken)
     const response = yield call(
       postJsonFetch,
@@ -188,7 +188,12 @@ function* signUpOTP({ payload }) {
         }))
       } else {
         const [bfxToken] = response
-        yield put(actions.signUp({ authToken: bfxToken, isNotProtected: true }))
+        const authParams = {
+          authToken: bfxToken,
+          password,
+          isNotProtected,
+        }
+        yield put(actions.signUp(authParams))
       }
     }
   } catch (fail) {
