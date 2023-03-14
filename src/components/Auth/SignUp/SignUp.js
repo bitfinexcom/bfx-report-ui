@@ -17,6 +17,7 @@ import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
 import InputKey from '../InputKey'
+import LoginEmail from '../LoginEmail'
 import ErrorLabel from '../ErrorLabel'
 import AuthTypeSelector from '../AuthTypeSelector'
 
@@ -264,21 +265,11 @@ class SignUp extends PureComponent {
             ) : (
               <>
                 {!useApiKey && (
-                  <>
-                    <InputKey
-                      type='text'
-                      name='userName'
-                      value={userName}
-                      onChange={this.handleInputChange}
-                      label='auth.loginEmail.emailOrUserName'
-                    />
-                    <InputKey
-                      name='userPassword'
-                      value={userPassword}
-                      label='auth.loginEmail.bfxAccPassword'
-                      onChange={this.handleInputChange}
-                    />
-                  </>
+                  <LoginEmail
+                    userName={userName}
+                    userPassword={userPassword}
+                    onChange={this.handleInputChange}
+                  />
                 )}
                 {useApiKey && (
                   <>
