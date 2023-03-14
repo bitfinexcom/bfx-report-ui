@@ -9,7 +9,6 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
-import _isEmpty from 'lodash/isEmpty'
 
 import Icon from 'icons'
 import config from 'config'
@@ -17,6 +16,7 @@ import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
 import InputKey from '../InputKey'
+import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import ErrorLabel from '../ErrorLabel'
 import AuthTypeSelector from '../AuthTypeSelector'
@@ -233,35 +233,12 @@ class SignUp extends PureComponent {
           <PlatformLogo />
           {isOtpLoginShown
             ? (
-              <>
-                <InputKey
-                  name='otp'
-                  type='text'
-                  value={otp}
-                  label='auth.2FA.GAToken'
-                  onChange={this.handleInputChange}
-                  placeholder={t('auth.2FA.sixDigits')}
-                />
-                <div className='buttons-row'>
-                  <Button
-                    name='cancel'
-                    intent={Intent.NONE}
-                    onClick={this.handle2FACancel}
-                    className='bitfinex-auth-check'
-                  >
-                    {t('auth.2FA.cancel')}
-                  </Button>
-                  <Button
-                    name='auth'
-                    intent={Intent.SUCCESS}
-                    disabled={_isEmpty(otp)}
-                    className='bitfinex-auth-check'
-                    onClick={this.handleOneTimePassword}
-                  >
-                    {t('auth.2FA.auth')}
-                  </Button>
-                </div>
-              </>
+              <LoginOtp
+                otp={otp}
+                handle2FACancel={this.handle2FACancel}
+                handleInputChange={this.handleInputChange}
+                handleOneTimePassword={this.handleOneTimePassword}
+              />
             ) : (
               <>
                 {!useApiKey && (
