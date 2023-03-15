@@ -7,6 +7,7 @@ import {
   signUpEmail,
   showOtpLogin,
   recoverPassword,
+  recoverPasswordOtp,
 } from 'state/auth/actions'
 import {
   getAuthData,
@@ -27,6 +28,7 @@ const mapDispatchToProps = {
   signUpEmail,
   showOtpLogin,
   recoverPassword,
+  recoverPasswordOtp,
 }
 
 export default compose(
