@@ -29,6 +29,7 @@ class PasswordRecovery extends PureComponent {
     loading: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     recoverPassword: PropTypes.func.isRequired,
+    recoverPasswordOtp: PropTypes.func.isRequired,
     switchMode: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
     showOtpLogin: PropTypes.func.isRequired,
@@ -160,6 +161,16 @@ class PasswordRecovery extends PureComponent {
     showOtpLogin(false)
   }
 
+  handleOtpPasswordRecovery = () => {
+    const { recoverPasswordOtp } = this.props
+    const { otp, password, isPasswordProtected } = this.state
+    recoverPasswordOtp({
+      otp,
+      password,
+      isNotProtected: !isPasswordProtected,
+    })
+  }
+
   render() {
     const {
       loading,
@@ -208,7 +219,7 @@ class PasswordRecovery extends PureComponent {
                 otp={otp}
                 handle2FACancel={this.handle2FACancel}
                 handleInputChange={this.handleInputChange}
-                handleOneTimePassword={this.handleOneTimePassword}
+                handleOneTimePassword={this.handleOtpPasswordRecovery}
               />
             ) : (
               <>
