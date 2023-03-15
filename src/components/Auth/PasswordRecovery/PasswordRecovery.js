@@ -161,7 +161,8 @@ class PasswordRecovery extends PureComponent {
 
     const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
-    const isPasswordRecoveryDisabled = !apiKey || !apiSecret
+    const isPasswordRecoveryDisabled = (useApiKey && (!apiKey || !apiSecret))
+      || (!useApiKey && (!userName || !userPassword))
       || (config.showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
