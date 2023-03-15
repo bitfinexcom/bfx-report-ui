@@ -171,7 +171,7 @@ function* signUpEmail({ payload }) {
   }
 }
 
-function* signUpOTP({ payload }) {
+function* signUpOtp({ payload }) {
   try {
     const { otp, password, isNotProtected } = payload
     const loginToken = yield select(getLoginToken)
@@ -308,6 +308,7 @@ function* recoverPassword({ payload }) {
     const {
       apiKey,
       apiSecret,
+      authToken,
       password,
       isNotProtected,
     } = payload
@@ -315,6 +316,7 @@ function* recoverPassword({ payload }) {
     const { result, error } = yield call(makeFetchCall, 'recoverPassword', null, {
       apiKey,
       apiSecret,
+      authToken,
       newPassword,
       isSubAccount: false,
       isNotProtected,
@@ -322,6 +324,7 @@ function* recoverPassword({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
+      yield put(actions.showOtpLogin(false))
       return
     }
 
@@ -339,6 +342,36 @@ function* recoverPassword({ payload }) {
   }
 }
 
+function* recoverPasswordOtp({ payload }) {
+  try {
+    const { otp, password, isNotProtected } = payload
+    const loginToken = yield select(getLoginToken)
+    const response = yield call(
+      postJsonFetch,
+      types.LOGIN_VERIFY_URL,
+      { loginToken, token: otp, verifyMethod: types.LOGIN_2FA_OTP },
+    )
+
+    if (_isArray(response)) {
+      if (_isEqual(response?.[0], types.LOGIN_ERROR)) {
+        yield put(updateErrorStatus({
+          id: 'auth.2FA.invalidToken',
+        }))
+      } else {
+        const [bfxToken] = response
+        const authParams = {
+          authToken: bfxToken,
+          password,
+          isNotProtected,
+        }
+        yield put(actions.recoverPassword(authParams))
+      }
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 function* logout() {
   yield put(tokenRefreshStop())
 }
@@ -347,8 +380,9 @@ export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.FETCH_USERS, fetchUsers)
   yield takeLatest(types.RECOVER_PASSWORD, recoverPassword)
+  yield takeLatest(types.RECOVER_PASSWORD_OTP, recoverPasswordOtp)
   yield takeLatest(types.SIGN_UP, signUp)
-  yield takeLatest(types.SIGN_UP_OTP, signUpOTP)
+  yield takeLatest(types.SIGN_UP_OTP, signUpOtp)
   yield takeLatest(types.SIGN_UP_EMAIL, signUpEmail)
   yield takeLatest(types.SIGN_IN, signIn)
   yield takeLatest(types.LOGOUT, logout)
