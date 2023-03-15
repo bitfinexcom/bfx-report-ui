@@ -14,6 +14,10 @@ import SubAccount from 'components/SubAccounts/SubAccount'
 import { MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
 
+const filterRestrictedUsers = users => _filter(
+  users, ['isRestrictedToBeAddedToSubAccount', false],
+)
+
 class RegisterSubAccounts extends PureComponent {
   static propTypes = {
     authType: PropTypes.string.isRequired,
@@ -31,6 +35,7 @@ class RegisterSubAccounts extends PureComponent {
       email: PropTypes.string.isRequired,
       isSubAccount: PropTypes.bool.isRequired,
       isNotProtected: PropTypes.bool.isRequired,
+      isRestrictedToBeAddedToSubAccount: PropTypes.bool.isRequired,
     })).isRequired,
   }
 
@@ -38,7 +43,7 @@ class RegisterSubAccounts extends PureComponent {
     super()
 
     const { authData: { email }, users } = props
-    const { email: firstUserEmail } = users[0] || {}
+    const { email: firstUserEmail } = filterRestrictedUsers(users)[0] || {}
     this.state = {
       masterAccEmail: email || firstUserEmail,
     }
@@ -75,7 +80,12 @@ class RegisterSubAccounts extends PureComponent {
     } = this.props
     const { masterAccEmail } = this.state
 
-    const preparedUsers = _filter(users, ['isSubAccount', false]).map(user => user.email)
+    console.log('++authData', authData)
+    console.log('++users', users)
+    console.log('++FFusers', filterRestrictedUsers(users))
+
+    const preparedUsers = filterRestrictedUsers(users)
+    const masterAccUsers = _filter(preparedUsers, ['isSubAccount', false]).map(user => user.email)
 
     const classes = classNames(
       'bitfinex-auth',
@@ -107,7 +117,7 @@ class RegisterSubAccounts extends PureComponent {
           </h3>
           <Select
             loading
-            items={preparedUsers}
+            items={masterAccUsers}
             value={masterAccEmail}
             onChange={this.onEmailChange}
             className='bitfinex-auth-email'
@@ -115,8 +125,8 @@ class RegisterSubAccounts extends PureComponent {
           />
           <>
             <SubAccount
-              users={users}
               authData={authData}
+              users={preparedUsers}
               masterAccount={masterAccEmail}
               isMultipleAccsSelected={isMultipleAccsSelected}
             />
