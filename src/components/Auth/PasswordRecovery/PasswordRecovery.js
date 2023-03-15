@@ -46,6 +46,7 @@ class PasswordRecovery extends PureComponent {
       isPersisted,
       passwordError: '',
       passwordRepeatError: '',
+      useApiKey: false,
     }
   }
 
@@ -150,6 +151,7 @@ class PasswordRecovery extends PureComponent {
       isPersisted,
       passwordError,
       passwordRepeatError,
+      useApiKey,
     } = this.state
 
     const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
@@ -202,14 +204,24 @@ class PasswordRecovery extends PureComponent {
             </>
           )}
           <div className='bitfinex-auth-checkboxes'>
-            <Checkbox
-              className='bitfinex-auth-remember-me'
-              name='isPersisted'
-              checked={isPersisted}
-              onChange={this.handleCheckboxChange}
-            >
-              {t('auth.rememberMe')}
-            </Checkbox>
+            <div className='bitfinex-auth-checkboxes--group'>
+              <Checkbox
+                name='useApiKey'
+                checked={useApiKey}
+                onChange={this.handleCheckboxChange}
+                className='bitfinex-auth-remember-me'
+              >
+                {t('auth.useApiKey')}
+              </Checkbox>
+              <Checkbox
+                className='bitfinex-auth-remember-me'
+                name='isPersisted'
+                checked={isPersisted}
+                onChange={this.handleCheckboxChange}
+              >
+                {t('auth.rememberMe')}
+              </Checkbox>
+            </div>
             {showPasswordProtection && (
               <Checkbox
                 className='bitfinex-auth-remember-me'
