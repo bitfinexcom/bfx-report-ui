@@ -2,7 +2,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
-import { recoverPassword, updateAuth } from 'state/auth/actions'
+import { recoverPassword, updateAuth, signUpEmail } from 'state/auth/actions'
 import { getAuthData, getIsLoading } from 'state/auth/selectors'
 
 import PasswordRecovery from './PasswordRecovery'
@@ -14,6 +14,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   updateAuth,
+  signUpEmail,
   recoverPassword,
 }
 
