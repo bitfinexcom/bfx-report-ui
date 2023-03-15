@@ -59,7 +59,8 @@
 
     &--symbol, &--pair {
       .bp3-popover-content {
-        width: 180px;
+        min-width: 180px;
+        width: fit-content;
       }
     }
 
