@@ -46,6 +46,13 @@ export function recoverPassword(payload) {
   }
 }
 
+export function recoverPasswordOtp(payload) {
+  return {
+    type: types.RECOVER_PASSWORD_OTP,
+    payload,
+  }
+}
+
 /**
  * Create an action to set users data.
  * @param {array} payload users data
@@ -183,6 +190,7 @@ export default {
   fetchUsers,
   logout,
   recoverPassword,
+  recoverPasswordOtp,
   setUsers,
   signIn,
   signUp,
