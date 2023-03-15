@@ -29,6 +29,7 @@ class PasswordRecovery extends PureComponent {
     t: PropTypes.func.isRequired,
     recoverPassword: PropTypes.func.isRequired,
     switchMode: PropTypes.func.isRequired,
+    signUpEmail: PropTypes.func.isRequired,
     updateAuth: PropTypes.func.isRequired,
   }
 
@@ -54,13 +55,16 @@ class PasswordRecovery extends PureComponent {
   }
 
   onPasswordRecovery = () => {
-    const { recoverPassword } = this.props
+    const { recoverPassword, signUpEmail } = this.props
     const {
       apiKey,
       apiSecret,
       password,
       isPasswordProtected,
       isPersisted,
+      useApiKey,
+      userName,
+      userPassword,
     } = this.state
     this.setState({
       isBeingValidated: true,
@@ -68,13 +72,20 @@ class PasswordRecovery extends PureComponent {
     const isValid = this.validateForm()
 
     if (isValid) {
-      recoverPassword({
-        apiKey,
-        apiSecret,
-        password,
-        isNotProtected: !isPasswordProtected,
-        isPersisted,
-      })
+      if (useApiKey) {
+        recoverPassword({
+          apiKey,
+          apiSecret,
+          password,
+          isNotProtected: !isPasswordProtected,
+          isPersisted,
+        })
+      } else {
+        signUpEmail({
+          login: userName,
+          password: userPassword,
+        })
+      }
     }
   }
 
