@@ -31,7 +31,7 @@ class PasswordRecovery extends PureComponent {
     recoverPassword: PropTypes.func.isRequired,
     switchMode: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
-    // showOtpLogin: PropTypes.func.isRequired,
+    showOtpLogin: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     updateAuth: PropTypes.func.isRequired,
   }
@@ -152,6 +152,12 @@ class PasswordRecovery extends PureComponent {
     this.setState({
       [name]: checked,
     })
+  }
+
+  handle2FACancel = () => {
+    const { showOtpLogin } = this.props
+    this.setState({ otp: '' })
+    showOtpLogin(false)
   }
 
   render() {
