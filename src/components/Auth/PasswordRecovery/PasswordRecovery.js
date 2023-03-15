@@ -13,6 +13,7 @@ import config from 'config'
 
 import { MODES } from '../Auth'
 import InputKey from '../InputKey'
+import LoginEmail from '../LoginEmail'
 import ErrorLabel from '../ErrorLabel'
 
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
@@ -47,6 +48,8 @@ class PasswordRecovery extends PureComponent {
       passwordError: '',
       passwordRepeatError: '',
       useApiKey: false,
+      userName: '',
+      userPassword: '',
     }
   }
 
@@ -152,6 +155,8 @@ class PasswordRecovery extends PureComponent {
       passwordError,
       passwordRepeatError,
       useApiKey,
+      userName,
+      userPassword,
     } = this.state
 
     const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
@@ -173,18 +178,31 @@ class PasswordRecovery extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          <InputKey
-            label='auth.enterAPIKey'
-            name='apiKey'
-            value={apiKey}
-            onChange={this.handleInputChange}
-          />
-          <InputKey
-            label='auth.enterAPISecret'
-            name='apiSecret'
-            value={apiSecret}
-            onChange={this.handleInputChange}
-          />
+          <>
+            {!useApiKey && (
+              <LoginEmail
+                userName={userName}
+                userPassword={userPassword}
+                onChange={this.handleInputChange}
+              />
+            )}
+            {useApiKey && (
+              <>
+                <InputKey
+                  label='auth.enterAPIKey'
+                  name='apiKey'
+                  value={apiKey}
+                  onChange={this.handleInputChange}
+                />
+                <InputKey
+                  label='auth.enterAPISecret'
+                  name='apiSecret'
+                  value={apiSecret}
+                  onChange={this.handleInputChange}
+                />
+              </>
+            )}
+          </>
           {config.showFrameworkMode && isPasswordProtected && (
             <>
               <InputKey
