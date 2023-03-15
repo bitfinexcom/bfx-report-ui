@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import _map from 'lodash/map'
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
 import { Classes, Dialog } from '@blueprintjs/core'
@@ -14,8 +15,13 @@ import SubAccount from 'components/SubAccounts/SubAccount'
 import { MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
 
-const filterRestrictedUsers = users => _filter(
+const filterRestrictedUsers = (users) => _filter(
   users, ['isRestrictedToBeAddedToSubAccount', false],
+)
+
+const prepareMasterAccUsers = (users) => _map(
+  _filter(users, ['isSubAccount', false]),
+  user => user.email,
 )
 
 class RegisterSubAccounts extends PureComponent {
@@ -79,14 +85,8 @@ class RegisterSubAccounts extends PureComponent {
       isMultipleAccsSelected,
     } = this.props
     const { masterAccEmail } = this.state
-
-    console.log('++authData', authData)
-    console.log('++users', users)
-    console.log('++FFusers', filterRestrictedUsers(users))
-
     const preparedUsers = filterRestrictedUsers(users)
-    const masterAccUsers = _filter(preparedUsers, ['isSubAccount', false]).map(user => user.email)
-
+    const masterAccUsers = prepareMasterAccUsers(preparedUsers)
     const classes = classNames(
       'bitfinex-auth',
       'bitfinex-auth-sign-up',
