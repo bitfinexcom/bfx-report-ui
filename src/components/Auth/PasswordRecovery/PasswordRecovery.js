@@ -224,11 +224,11 @@ class PasswordRecovery extends PureComponent {
             ) : (
               <>
                 {!useApiKey && (
-                <LoginEmail
-                  userName={userName}
-                  userPassword={userPassword}
-                  onChange={this.handleInputChange}
-                />
+                  <LoginEmail
+                    userName={userName}
+                    userPassword={userPassword}
+                    onChange={this.handleInputChange}
+                  />
                 )}
                 {useApiKey && (
                   <>
