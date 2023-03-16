@@ -29,7 +29,8 @@
       "emailOrUserName": "Email or Username",
       "bfxAccPassword": "Bitfinex Account Password",
       "loginEmailError": "The email/username or password is incorrect",
-      "loginEmailNo2FA": "Please setup 2FA for your account or use the API key to login"
+      "loginEmailNo2FA": "Please setup 2FA for your account or use the API key to login",
+      "loginTokenExpired": "The last login has expired, please sign in again"
     },
     "2FA":{
       "title": "Two-Factor Authentication",
