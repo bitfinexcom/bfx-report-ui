@@ -54,6 +54,7 @@ const initialState = {
   subAccountsLoading: false,
   showOtpLogin: false,
   loginToken: '',
+  userShouldReLogin: '',
 }
 
 export function authReducer(state = initialState, action) {
@@ -136,6 +137,11 @@ export function authReducer(state = initialState, action) {
         ...state,
         loginToken: payload,
       }
+    case types.SET_USER_SHOULD_RE_LOGIN:
+      return {
+        ...state,
+        userShouldReLogin: payload,
+      }
     case types.HIDE_AUTH:
       return {
         ...state,
@@ -148,6 +154,7 @@ export function authReducer(state = initialState, action) {
         ...getStoredAuth(),
         users: state.users,
         token: state.token,
+        userShouldReLogin: state.userShouldReLogin,
       }
     default:
       return state
