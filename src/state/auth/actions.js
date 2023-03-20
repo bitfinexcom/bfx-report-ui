@@ -183,6 +183,12 @@ export function updateAuthStatus(result) {
   }
 }
 
+export function authExpired() {
+  return {
+    type: types.AUTH_EXPIRED,
+  }
+}
+
 export default {
   checkAuth,
   addUser,
@@ -204,4 +210,5 @@ export default {
   signUpOtp,
   showOtpLogin,
   setLoginToken,
+  authExpired,
 }
