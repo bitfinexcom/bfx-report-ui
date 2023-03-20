@@ -13,6 +13,7 @@ export const getUsersLoading = state => getAuth(state).usersLoading
 export const getSubAccountsLoading = state => getAuth(state)?.subAccountsLoading ?? false
 export const getShowOtpLogin = state => getAuth(state)?.showOtpLogin ?? false
 export const getLoginToken = state => getAuth(state)?.loginToken ?? ''
+export const getUserShouldReLogin = state => getAuth(state)?.UserShouldReLogin ?? ''
 export const getAuthData = state => {
   const {
     apiKey,
@@ -94,4 +95,5 @@ export default {
   getShowOtpLogin,
   selectAuth,
   getLoginToken,
+  getUserShouldReLogin,
 }
