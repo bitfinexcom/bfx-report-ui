@@ -71,6 +71,13 @@ export function setLoginToken(payload) {
   }
 }
 
+export function setUserShouldReLogin(payload) {
+  return {
+    type: types.SET_USER_SHOULD_RE_LOGIN,
+    payload,
+  }
+}
+
 /**
  * Create an action to sign in.
  * @param {Object} payload auth data
@@ -211,4 +218,5 @@ export default {
   showOtpLogin,
   setLoginToken,
   authExpired,
+  setUserShouldReLogin,
 }
