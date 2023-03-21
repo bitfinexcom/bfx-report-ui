@@ -45,6 +45,7 @@ class SignIn extends PureComponent {
     switchAuthType: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     updateAuth: PropTypes.func.isRequired,
+    userShouldReLogin: PropTypes.string.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string.isRequired,
       isSubAccount: PropTypes.bool.isRequired,
@@ -154,6 +155,7 @@ class SignIn extends PureComponent {
       switchMode,
       isSubAccount,
       switchAuthType,
+      userShouldReLogin,
       isMultipleAccsSelected,
       isElectronBackendLoaded,
       authData: { isPersisted },
@@ -171,6 +173,7 @@ class SignIn extends PureComponent {
       user => _isEqual(user?.email, email) && !user?.isRestrictedToBeAddedToSubAccount)
       || !isEmailSelected
     const showAuthTypeSelector = showFrameworkMode && isSubAccsAvailableForCurrentUser
+    const isCurrentUserShouldReLogin = _isEqual(email, userShouldReLogin)
 
     return (
       <Dialog
