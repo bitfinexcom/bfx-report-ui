@@ -331,6 +331,7 @@ function* recoverPassword({ payload }) {
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
       yield put(actions.showOtpLogin(false))
+      yield put(actions.fetchUsers())
       return
     }
 

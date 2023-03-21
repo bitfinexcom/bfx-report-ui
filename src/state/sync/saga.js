@@ -11,7 +11,6 @@ import _includes from 'lodash/includes'
 
 import authTypes from 'state/auth/constants'
 import { makeFetchCall } from 'state/utils'
-import { fetchUsers } from 'state/auth/actions'
 import { selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 
@@ -132,7 +131,6 @@ function* syncLogout() {
   if (isLoggedIn) {
     const { result, error } = yield call(logout)
     if (result) {
-      yield put(fetchUsers())
       const syncMode = yield select(getSyncMode)
       if (syncMode !== types.MODE_ONLINE) {
         yield put(actions.setSyncMode(types.MODE_ONLINE))
