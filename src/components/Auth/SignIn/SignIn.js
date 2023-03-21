@@ -201,16 +201,14 @@ class SignIn extends PureComponent {
             value={email}
             loading
           />
-          {isCurrentUserShouldReLogin
-            && (
+          {isCurrentUserShouldReLogin && (
             <InputKey
               name='userPassword'
               value={userPassword}
               onChange={this.handleInputChange}
               label='auth.loginEmail.bfxAccPassword'
             />
-            )
-          }
+          )}
           {!isNotProtected && isEmailSelected && users.length > 0 && (
             <InputKey
               label='auth.enterPassword'
