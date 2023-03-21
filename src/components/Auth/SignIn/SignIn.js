@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import _find from 'lodash/find'
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
+import _isEqual from 'lodash/isEqual'
 import {
   Button,
   Checkbox,
@@ -19,6 +21,7 @@ import InputKey from '../InputKey'
 import { MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
 
+const { showFrameworkMode, isElectronApp } = config
 const getPreparedUsers = (users, multi = false) => (multi
   ? _filter(users, 'isSubAccount').map(user => user.email)
   : _filter(users, ['isSubAccount', false]).map(user => user.email))
@@ -158,13 +161,15 @@ class SignIn extends PureComponent {
     const { email, password } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
-    const isSignInDisabled = !email || (config.isElectronApp && !isElectronBackendLoaded)
+    const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
     const showSubAccount = isCurrentUserHasSubAccount && isMultipleAccsSelected
     const preparedUsers = getPreparedUsers(users, isMultipleAccsSelected)
     const isEmailSelected = !_isEmpty(email)
-
+    const isSubAccsAvailableForCurrentUser = !!_find(users,
+      user => _isEqual(user?.email, email) && !user?.isRestrictedToBeAddedToSubAccount)
+    const showAuthTypeSelector = showFrameworkMode && isSubAccsAvailableForCurrentUser
 
     return (
       <Dialog
@@ -176,7 +181,7 @@ class SignIn extends PureComponent {
         usePortal
       >
         <div className={Classes.DIALOG_BODY}>
-          {config.showFrameworkMode && (
+          {showAuthTypeSelector && (
             <AuthTypeSelector
               authType={authType}
               switchAuthType={switchAuthType}
