@@ -16,7 +16,7 @@ import _isEqual from 'lodash/isEqual'
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-import { selectAuth, getLoginToken } from 'state/auth/selectors'
+import { selectAuth, getLoginToken, getAuthData } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall, postJsonFetch } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
@@ -303,6 +303,12 @@ function* checkAuth() {
   }
 }
 
+function* handleExpiredAuth() {
+  const { email } = yield select(getAuthData)
+  yield put(actions.setUserShouldReLogin(email))
+  yield put(actions.logout())
+}
+
 function* recoverPassword({ payload }) {
   try {
     const {
@@ -387,5 +393,6 @@ export default function* authSaga() {
   yield takeLatest(types.SIGN_IN, signIn)
   yield takeLatest(types.LOGOUT, logout)
   yield takeLatest(types.REMOVE_USER, removeUser)
+  yield takeLatest(types.AUTH_EXPIRED, handleExpiredAuth)
   yield fork(tokenRefreshSaga)
 }
