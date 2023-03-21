@@ -66,6 +66,7 @@ class SignIn extends PureComponent {
     this.state = {
       email: initialEmail,
       password,
+      userPassword: '',
     }
   }
 
@@ -160,7 +161,7 @@ class SignIn extends PureComponent {
       isElectronBackendLoaded,
       authData: { isPersisted },
     } = this.props
-    const { email, password } = this.state
+    const { email, password, userPassword } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
     const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
@@ -200,6 +201,16 @@ class SignIn extends PureComponent {
             value={email}
             loading
           />
+          {isCurrentUserShouldReLogin
+            && (
+            <InputKey
+              name='userPassword'
+              value={userPassword}
+              onChange={this.handleInputChange}
+              label='auth.loginEmail.bfxAccPassword'
+            />
+            )
+          }
           {!isNotProtected && isEmailSelected && users.length > 0 && (
             <InputKey
               label='auth.enterPassword'
