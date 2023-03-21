@@ -169,6 +169,7 @@ class SignIn extends PureComponent {
     const isEmailSelected = !_isEmpty(email)
     const isSubAccsAvailableForCurrentUser = !!_find(users,
       user => _isEqual(user?.email, email) && !user?.isRestrictedToBeAddedToSubAccount)
+      || !isEmailSelected
     const showAuthTypeSelector = showFrameworkMode && isSubAccsAvailableForCurrentUser
 
     return (
