@@ -203,12 +203,12 @@ class SignIn extends PureComponent {
 
     return (
       <Dialog
-        className='bitfinex-auth bitfinex-auth-sign-in'
-        title={t('auth.signIn')}
         isOpen
+        usePortal
+        title={t('auth.signIn')}
         icon={<Icon.SIGN_IN />}
         isCloseButtonShown={false}
-        usePortal
+        className='bitfinex-auth bitfinex-auth-sign-in'
       >
         <div className={Classes.DIALOG_BODY}>
           {showAuthTypeSelector && (
@@ -229,12 +229,12 @@ class SignIn extends PureComponent {
             ) : (
               <>
                 <Select
-                  className='bitfinex-auth-email'
+                  loading
+                  value={email}
                   items={preparedUsers}
                   onChange={this.onEmailChange}
+                  className='bitfinex-auth-email'
                   popoverClassName='bitfinex-auth-email-popover'
-                  value={email}
-                  loading
                 />
                 {isCurrentUserShouldReLogin && (
                 <InputKey
@@ -246,29 +246,29 @@ class SignIn extends PureComponent {
                 )}
                 {!isNotProtected && isEmailSelected && users.length > 0 && (
                 <InputKey
-                  label='auth.enterPassword'
                   name='password'
                   value={password}
+                  label='auth.enterPassword'
                   onChange={this.handleInputChange}
                 />
                 )}
                 <div className='bitfinex-auth-checkboxes'>
                   {isEmailSelected && (
                   <Checkbox
-                    className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
                     name='isPersisted'
                     checked={isPersisted}
                     onChange={this.togglePersistence}
+                    className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
                   >
                     {t('auth.rememberMe')}
                   </Checkbox>
                   )}
                   {showSubAccount && (
                   <Checkbox
-                    className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sub-accounts'
+                    disabled
                     name='isSubAccount'
                     checked={isSubAccount}
-                    disabled
+                    className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sub-accounts'
                   >
                     {t('auth.subAccount')}
                   </Checkbox>
@@ -294,12 +294,12 @@ class SignIn extends PureComponent {
                   {t('auth.signUp')}
                 </div>
                 <Button
-                  className='bitfinex-auth-check'
                   name='check'
+                  loading={loading}
                   intent={Intent.SUCCESS}
                   onClick={this.onSignIn}
                   disabled={isSignInDisabled}
-                  loading={loading}
+                  className='bitfinex-auth-check'
                 >
                   {t('auth.signIn')}
                 </Button>
