@@ -204,6 +204,7 @@ function* signUpOtp({ payload }) {
 function* signIn({ payload }) {
   try {
     const {
+      authToken,
       email,
       isNotProtected,
       isSubAccount,
@@ -211,6 +212,7 @@ function* signIn({ payload }) {
     } = payload
 
     const authParams = {
+      authToken,
       email,
       password: isNotProtected ? undefined : password,
       isSubAccount,
@@ -219,6 +221,7 @@ function* signIn({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
+      yield select()
       return
     }
 
@@ -244,6 +247,42 @@ function* signIn({ payload }) {
         topic: 'auth.auth',
         detail: JSON.stringify(error),
       }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
+
+function* signInOtp({ payload }) {
+  yield console.log('+++signInOtp', payload)
+  try {
+    const {
+      otp, password, email, isNotProtected, isSubAccount,
+    } = payload
+    const loginToken = yield select(getLoginToken)
+    const response = yield call(
+      postJsonFetch,
+      types.LOGIN_VERIFY_URL,
+      { loginToken, token: otp, verifyMethod: types.LOGIN_2FA_OTP },
+    )
+
+    if (_isArray(response)) {
+      if (_isEqual(response?.[0], types.LOGIN_ERROR)) {
+        yield put(updateErrorStatus({
+          id: 'auth.2FA.invalidToken',
+        }))
+      } else {
+        const [bfxToken] = response
+        const authParams = {
+          authToken: bfxToken,
+          email,
+          password,
+          isSubAccount,
+          isNotProtected,
+        }
+        yield put(actions.signIn(authParams))
+      }
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
@@ -400,6 +439,7 @@ export default function* authSaga() {
   yield takeLatest(types.SIGN_UP_OTP, signUpOtp)
   yield takeLatest(types.SIGN_UP_EMAIL, signUpEmail)
   yield takeLatest(types.SIGN_IN, signIn)
+  yield takeLatest(types.SIGN_IN_OTP, signInOtp)
   yield takeLatest(types.LOGOUT, logout)
   yield takeLatest(types.REMOVE_USER, removeUser)
   yield takeLatest(types.AUTH_EXPIRED, handleExpiredAuth)
