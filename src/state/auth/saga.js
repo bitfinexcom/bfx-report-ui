@@ -261,7 +261,6 @@ function* signIn({ payload }) {
   }
 }
 
-
 function* signInOtp({ payload }) {
   try {
     const {
