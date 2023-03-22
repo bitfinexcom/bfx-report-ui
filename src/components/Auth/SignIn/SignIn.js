@@ -19,6 +19,7 @@ import Select from 'ui/Select'
 
 import InputKey from '../InputKey'
 import { MODES } from '../Auth'
+import LoginOtp from '../LoginOtp'
 import AuthTypeSelector from '../AuthTypeSelector'
 
 const { showFrameworkMode, isElectronApp } = config
@@ -43,6 +44,7 @@ class SignIn extends PureComponent {
     signIn: PropTypes.func.isRequired,
     switchMode: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
+    isOtpLoginShown: PropTypes.bool.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     updateAuth: PropTypes.func.isRequired,
@@ -166,12 +168,18 @@ class SignIn extends PureComponent {
       switchMode,
       isSubAccount,
       switchAuthType,
+      isOtpLoginShown,
       userShouldReLogin,
       isMultipleAccsSelected,
       isElectronBackendLoaded,
       authData: { isPersisted },
     } = this.props
-    const { email, password, userPassword } = this.state
+    const {
+      otp,
+      email,
+      password,
+      userPassword,
+    } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
     const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
@@ -203,52 +211,64 @@ class SignIn extends PureComponent {
             />
           )}
           <PlatformLogo />
-          <Select
-            className='bitfinex-auth-email'
-            items={preparedUsers}
-            onChange={this.onEmailChange}
-            popoverClassName='bitfinex-auth-email-popover'
-            value={email}
-            loading
-          />
-          {isCurrentUserShouldReLogin && (
-            <InputKey
-              name='userPassword'
-              value={userPassword}
-              onChange={this.handleInputChange}
-              label='auth.loginEmail.bfxAccPassword'
-            />
-          )}
-          {!isNotProtected && isEmailSelected && users.length > 0 && (
-            <InputKey
-              label='auth.enterPassword'
-              name='password'
-              value={password}
-              onChange={this.handleInputChange}
-            />
-          )}
-          <div className='bitfinex-auth-checkboxes'>
-            {isEmailSelected && (
-              <Checkbox
-                className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
-                name='isPersisted'
-                checked={isPersisted}
-                onChange={this.togglePersistence}
-              >
-                {t('auth.rememberMe')}
-              </Checkbox>
+          {isOtpLoginShown
+            ? (
+              <LoginOtp
+                otp={otp}
+                handle2FACancel={this.handle2FACancel}
+                handleInputChange={this.handleInputChange}
+                handleOneTimePassword={this.handleOneTimePassword}
+              />
+            ) : (
+              <>
+                <Select
+                  className='bitfinex-auth-email'
+                  items={preparedUsers}
+                  onChange={this.onEmailChange}
+                  popoverClassName='bitfinex-auth-email-popover'
+                  value={email}
+                  loading
+                />
+                {isCurrentUserShouldReLogin && (
+                <InputKey
+                  name='userPassword'
+                  value={userPassword}
+                  onChange={this.handleInputChange}
+                  label='auth.loginEmail.bfxAccPassword'
+                />
+                )}
+                {!isNotProtected && isEmailSelected && users.length > 0 && (
+                <InputKey
+                  label='auth.enterPassword'
+                  name='password'
+                  value={password}
+                  onChange={this.handleInputChange}
+                />
+                )}
+                <div className='bitfinex-auth-checkboxes'>
+                  {isEmailSelected && (
+                  <Checkbox
+                    className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
+                    name='isPersisted'
+                    checked={isPersisted}
+                    onChange={this.togglePersistence}
+                  >
+                    {t('auth.rememberMe')}
+                  </Checkbox>
+                  )}
+                  {showSubAccount && (
+                  <Checkbox
+                    className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sub-accounts'
+                    name='isSubAccount'
+                    checked={isSubAccount}
+                    disabled
+                  >
+                    {t('auth.subAccount')}
+                  </Checkbox>
+                  )}
+                </div>
+              </>
             )}
-            {showSubAccount && (
-              <Checkbox
-                className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sub-accounts'
-                name='isSubAccount'
-                checked={isSubAccount}
-                disabled
-              >
-                {t('auth.subAccount')}
-              </Checkbox>
-            )}
-          </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
