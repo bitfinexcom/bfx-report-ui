@@ -270,34 +270,36 @@ class SignIn extends PureComponent {
               </>
             )}
         </div>
-        <div className={Classes.DIALOG_FOOTER}>
-          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <div
-              className='bitfinex-auth-password-recovery'
-              onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
-            >
-              {t('auth.passwordRecovery')}
-            </div>
-            <div>
+        {!isOtpLoginShown && (
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <div
-                className='bitfinex-auth-mode-switch'
-                onClick={() => switchMode(MODES.SIGN_UP)}
+                className='bitfinex-auth-password-recovery'
+                onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
               >
-                {t('auth.signUp')}
+                {t('auth.passwordRecovery')}
               </div>
-              <Button
-                className='bitfinex-auth-check'
-                name='check'
-                intent={Intent.SUCCESS}
-                onClick={this.onSignIn}
-                disabled={isSignInDisabled}
-                loading={loading}
-              >
-                {t('auth.signIn')}
-              </Button>
+              <div>
+                <div
+                  className='bitfinex-auth-mode-switch'
+                  onClick={() => switchMode(MODES.SIGN_UP)}
+                >
+                  {t('auth.signUp')}
+                </div>
+                <Button
+                  className='bitfinex-auth-check'
+                  name='check'
+                  intent={Intent.SUCCESS}
+                  onClick={this.onSignIn}
+                  disabled={isSignInDisabled}
+                  loading={loading}
+                >
+                  {t('auth.signIn')}
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </Dialog>
     )
   }
