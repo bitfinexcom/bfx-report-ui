@@ -91,7 +91,7 @@ export function signIn(payload) {
 
 export function signInOtp(payload) {
   return {
-    type: types.SIGN_UP_OTP,
+    type: types.SIGN_IN_OTP,
     payload,
   }
 }
