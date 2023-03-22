@@ -9,6 +9,7 @@ import {
   getUsers,
   getUsersLoaded,
   getIsSubAccount,
+  getShowOtpLogin,
   getUserShouldReLogin,
 } from 'state/auth/selectors'
 import { getIsElectronBackendLoaded } from 'state/ui/selectors'
@@ -22,6 +23,7 @@ const mapStateToProps = state => ({
   loading: getIsLoading(state),
   users: getUsers(state),
   isSubAccount: getIsSubAccount(state),
+  isOtpLoginShown: getShowOtpLogin(state),
   userShouldReLogin: getUserShouldReLogin(state),
 })
 
