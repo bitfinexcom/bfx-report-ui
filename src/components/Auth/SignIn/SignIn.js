@@ -170,13 +170,14 @@ class SignIn extends PureComponent {
   handle2FASignIn = () => {
     const { signInOtp } = this.props
     const {
-      otp, password, email, isPasswordProtected,
+      otp, password, email,
     } = this.state
     signInOtp({
       otp,
       email,
       password,
-      isNotProtected: !isPasswordProtected,
+      isSubAccount: false,
+      isNotProtected: !password,
     })
   }
 
