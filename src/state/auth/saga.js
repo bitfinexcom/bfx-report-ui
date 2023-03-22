@@ -263,7 +263,6 @@ function* signIn({ payload }) {
 
 
 function* signInOtp({ payload }) {
-  yield console.log('+++signInOtp', payload)
   try {
     const {
       otp, password, email, isNotProtected, isSubAccount,
