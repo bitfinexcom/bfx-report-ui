@@ -16,7 +16,12 @@ import _isEqual from 'lodash/isEqual'
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-import { selectAuth, getLoginToken, getAuthData } from 'state/auth/selectors'
+import {
+  selectAuth,
+  getAuthData,
+  getLoginToken,
+  getUserShouldReLogin,
+} from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall, postJsonFetch } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
@@ -221,7 +226,10 @@ function* signIn({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
-      yield select()
+      const userShouldReLogin = yield select(getUserShouldReLogin)
+      if (_isEqual(email, userShouldReLogin)) {
+        yield put(actions.setUserShouldReLogin(''))
+      }
       return
     }
 
