@@ -226,9 +226,15 @@ function* signIn({ payload }) {
 
     if (error) {
       if (error.code === 401) {
-        yield put(updateErrorStatus({
-          id: 'status.signInFail',
-        }))
+        const { data } = error
+        if (data?.isAuthTokenGenerationError) {
+          yield put(actions.setUserShouldReLogin(email))
+        } else {
+          yield put(updateErrorStatus({
+            id: 'status.signInFail',
+          }))
+        }
+
         return
       }
 
