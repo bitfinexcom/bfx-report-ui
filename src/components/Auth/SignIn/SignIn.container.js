@@ -2,7 +2,12 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
-import { signIn, updateAuth, signUpEmail } from 'state/auth/actions'
+import {
+  signIn,
+  updateAuth,
+  signUpEmail,
+  showOtpLogin,
+} from 'state/auth/actions'
 import {
   getAuthData,
   getIsLoading,
@@ -31,6 +36,7 @@ const mapDispatchToProps = {
   signIn,
   updateAuth,
   signUpEmail,
+  showOtpLogin,
 }
 
 export default compose(
