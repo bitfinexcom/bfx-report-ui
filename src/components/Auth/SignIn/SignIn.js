@@ -42,6 +42,7 @@ class SignIn extends PureComponent {
     loading: PropTypes.bool.isRequired,
     signIn: PropTypes.func.isRequired,
     switchMode: PropTypes.func.isRequired,
+    signUpEmail: PropTypes.func.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     updateAuth: PropTypes.func.isRequired,
@@ -108,15 +109,24 @@ class SignIn extends PureComponent {
   }
 
   onSignIn = () => {
-    const { isSubAccount, signIn, users } = this.props
-    const { email, password } = this.state
+    const {
+      isSubAccount, signIn, users, userShouldReLogin, signUpEmail,
+    } = this.props
+    const { email, password, userPassword } = this.state
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
-    signIn({
-      email,
-      isNotProtected: !password,
-      isSubAccount: isCurrentUserHasSubAccount ? isSubAccount : false,
-      password,
-    })
+    if (_isEqual(email, userShouldReLogin)) {
+      signUpEmail({
+        login: email,
+        password: userPassword,
+      })
+    } else {
+      signIn({
+        email,
+        isNotProtected: !password,
+        isSubAccount: isCurrentUserHasSubAccount ? isSubAccount : false,
+        password,
+      })
+    }
   }
 
   togglePersistence = () => {
