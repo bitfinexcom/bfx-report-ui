@@ -20,7 +20,7 @@ import { selectAuth, getLoginToken, getAuthData } from 'state/auth/selectors'
 import { formatAuthDate, makeFetchCall, postJsonFetch } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
-import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { updateErrorStatus, updateSuccessStatus, updateWarningStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { refreshToken, tokenRefreshStart, tokenRefreshStop } from 'state/auth/tokenRefresh/actions'
 import config from 'config'
@@ -229,6 +229,7 @@ function* signIn({ payload }) {
         const { data } = error
         if (data?.isAuthTokenGenerationError) {
           yield put(actions.setUserShouldReLogin(email))
+          yield put(updateWarningStatus({ id: 'auth.loginEmail.loginTokenExpired' }))
         } else {
           yield put(updateErrorStatus({
             id: 'status.signInFail',
@@ -313,6 +314,7 @@ function* handleExpiredAuth() {
   const { email } = yield select(getAuthData)
   yield put(actions.setUserShouldReLogin(email))
   yield put(actions.logout())
+  yield put(updateWarningStatus({ id: 'auth.loginEmail.loginTokenExpired' }))
 }
 
 function* recoverPassword({ payload }) {
