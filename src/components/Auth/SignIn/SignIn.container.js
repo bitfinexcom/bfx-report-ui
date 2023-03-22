@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next'
 
 import {
   signIn,
+  signInOtp,
   updateAuth,
   signUpEmail,
   showOtpLogin,
@@ -34,6 +35,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   signIn,
+  signInOtp,
   updateAuth,
   signUpEmail,
   showOtpLogin,
