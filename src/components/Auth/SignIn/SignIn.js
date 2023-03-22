@@ -42,6 +42,7 @@ class SignIn extends PureComponent {
     isUsersLoaded: PropTypes.bool.isRequired,
     loading: PropTypes.bool.isRequired,
     signIn: PropTypes.func.isRequired,
+    signInOtp: PropTypes.func.isRequired,
     switchMode: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
     showOtpLogin: PropTypes.func.isRequired,
@@ -166,6 +167,19 @@ class SignIn extends PureComponent {
     showOtpLogin(false)
   }
 
+  handle2FASignIn = () => {
+    const { signInOtp } = this.props
+    const {
+      otp, password, email, isPasswordProtected,
+    } = this.state
+    signInOtp({
+      otp,
+      email,
+      password,
+      isNotProtected: !isPasswordProtected,
+    })
+  }
+
   render() {
     const {
       t,
@@ -224,7 +238,7 @@ class SignIn extends PureComponent {
                 otp={otp}
                 handle2FACancel={this.handle2FACancel}
                 handleInputChange={this.handleInputChange}
-                handleOneTimePassword={this.handleOneTimePassword}
+                handleOneTimePassword={this.handle2FASignIn}
               />
             ) : (
               <>
