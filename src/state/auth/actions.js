@@ -89,6 +89,13 @@ export function signIn(payload) {
   }
 }
 
+export function signInOtp(payload) {
+  return {
+    type: types.SIGN_UP_OTP,
+    payload,
+  }
+}
+
 /**
  * Create an action to sign up.
  * @param {Object} payload auth data
@@ -219,4 +226,5 @@ export default {
   setLoginToken,
   authExpired,
   setUserShouldReLogin,
+  signInOtp,
 }
