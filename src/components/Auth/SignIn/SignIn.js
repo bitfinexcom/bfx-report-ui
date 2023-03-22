@@ -44,6 +44,7 @@ class SignIn extends PureComponent {
     signIn: PropTypes.func.isRequired,
     switchMode: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
+    showOtpLogin: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
@@ -157,6 +158,12 @@ class SignIn extends PureComponent {
       email,
       password: email === preservedEmail ? password : undefined,
     })
+  }
+
+  handle2FACancel = () => {
+    const { showOtpLogin } = this.props
+    this.setState({ otp: '' })
+    showOtpLogin(false)
   }
 
   render() {
