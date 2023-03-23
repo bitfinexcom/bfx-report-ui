@@ -28,6 +28,9 @@ class SubAccount extends PureComponent {
       isSubAccount: PropTypes.bool.isRequired,
       isNotProtected: PropTypes.bool.isRequired,
     })).isRequired,
+    allowedUsers: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string.isRequired,
+    })).isRequired,
     t: PropTypes.func.isRequired,
   }
 
@@ -103,6 +106,7 @@ class SubAccount extends PureComponent {
       t,
       users,
       authData,
+      allowedUsers,
       masterAccount,
       isSubAccountsLoading,
       isMultipleAccsSelected,
@@ -114,7 +118,7 @@ class SubAccount extends PureComponent {
     const subUsers = _get(subAccountData, 'subUsers', [])
     const hasFilledAccounts = getFilledAccounts(accounts).length > 0
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
-    const preparedUsers = _differenceBy(users, subUsers, 'email')
+    const preparedUsers = _differenceBy(allowedUsers, subUsers, 'email')
     const isConfirmDisabled = _isEmpty(masterAccountEmail) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
     let showContent
     if (isSubAccountsLoading) {
