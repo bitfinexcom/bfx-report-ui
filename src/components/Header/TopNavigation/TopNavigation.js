@@ -7,6 +7,9 @@ import {
   MenuItem,
   Position,
 } from '@blueprintjs/core'
+import _first from 'lodash/first'
+import _filter from 'lodash/filter'
+import _isEqual from 'lodash/isEqual'
 
 import Icon from 'icons'
 import config from 'config'
@@ -25,11 +28,17 @@ const formatUsername = (username = '') => (username.includes('@') ? `${username.
 const TopNavigation = ({
   t,
   email,
+  users,
   logout,
   history,
   togglePrefDialog,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const isSubAccountRestricted = _first(
+    _filter(users, user => _isEqual(user?.email, email)),
+  )?.isRestrictedToBeAddedToSubAccount
+  const showSubAccounts = showFrameworkMode && !isSubAccountRestricted
 
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
@@ -96,12 +105,12 @@ const TopNavigation = ({
                 text={t('navItems.loginHistory')}
                 onClick={() => switchSection(MENU_LOGINS)}
               />
-              {showFrameworkMode && (
-              <MenuItem
-                icon={<Icon.USER_CIRCLE />}
-                text={t('navItems.subAccounts')}
-                onClick={() => switchSection(MENU_SUB_ACCOUNTS)}
-              />
+              {showSubAccounts && (
+                <MenuItem
+                  icon={<Icon.USER_CIRCLE />}
+                  text={t('navItems.subAccounts')}
+                  onClick={() => switchSection(MENU_SUB_ACCOUNTS)}
+                />
               )}
               <MenuItem
                 icon={<Icon.NOTEBOOK />}
@@ -138,6 +147,9 @@ TopNavigation.propTypes = {
   logout: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   togglePrefDialog: PropTypes.func.isRequired,
+  users: PropTypes.arrayOf(PropTypes.shape({
+    email: PropTypes.string.isRequired,
+  })).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
     location: PropTypes.shape({
