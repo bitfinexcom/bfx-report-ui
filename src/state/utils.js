@@ -69,6 +69,13 @@ export function postJsonFetch(url, bodyJson) {
     .then(data => data)
 }
 
+export function makePublicFetchCall(method, params = undefined) {
+  return postJsonFetch(`${config.API_URL}/json-rpc`, {
+    method,
+    params: params || undefined,
+  })
+}
+
 export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
   return postJsonFetch(`${config.API_URL}/json-rpc`, {
     auth,
