@@ -148,30 +148,25 @@ function* signUp({ payload }) {
 
 function* signUpEmail({ payload }) {
   try {
-    const { login, password } = payload
-    const response = yield call(
-      postJsonFetch,
-      types.LOGIN_URL,
-      { login, password },
-    )
+    const { result, error } = yield call(makePublicFetchCall, 'loginToBFX', payload)
 
-    if (_isArray(response)) {
-      if (_isEqual(response?.[0], types.LOGIN_ERROR)) {
-        yield put(updateErrorStatus({
-          id: 'auth.loginEmail.loginEmailError',
-        }))
+    if (_isArray(result)) {
+      const [loginToken, twoFaTypes] = result
+      const [twoFaMain] = _last(twoFaTypes)
+      if (_isEqual(twoFaMain, types.LOGIN_2FA_OTP)) {
+        yield put(actions.setLoginToken(loginToken))
+        yield put(actions.showOtpLogin(true))
       } else {
-        const [loginToken, twoFaTypes] = response
-        const [twoFaMain] = _last(twoFaTypes)
-        if (_isEqual(twoFaMain, types.LOGIN_2FA_OTP)) {
-          yield put(actions.setLoginToken(loginToken))
-          yield put(actions.showOtpLogin(true))
-        } else {
-          yield put(updateErrorStatus({
-            id: 'auth.loginEmail.loginEmailNo2FA',
-          }))
-        }
+        yield put(updateErrorStatus({
+          id: 'auth.loginEmail.loginEmailNo2FA',
+        }))
       }
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'auth.loginEmail.loginEmailError',
+      }))
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
