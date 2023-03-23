@@ -16,7 +16,8 @@ import { MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
 
 const filterRestrictedUsers = (users) => _filter(
-  users, ['isRestrictedToBeAddedToSubAccount', false],
+  users, user => !user?.isRestrictedToBeAddedToSubAccount
+  && _isEmpty(user?.subUsers),
 )
 
 const prepareMasterAccUsers = (users) => _map(
@@ -126,7 +127,8 @@ class RegisterSubAccounts extends PureComponent {
           <>
             <SubAccount
               authData={authData}
-              users={preparedUsers}
+              users={users}
+              allowedUsers={preparedUsers}
               masterAccount={masterAccEmail}
               isMultipleAccsSelected={isMultipleAccsSelected}
             />
