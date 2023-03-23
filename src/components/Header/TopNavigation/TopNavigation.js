@@ -7,9 +7,6 @@ import {
   MenuItem,
   Position,
 } from '@blueprintjs/core'
-import _first from 'lodash/first'
-import _filter from 'lodash/filter'
-import _isEqual from 'lodash/isEqual'
 
 import Icon from 'icons'
 import config from 'config'
@@ -28,17 +25,13 @@ const formatUsername = (username = '') => (username.includes('@') ? `${username.
 const TopNavigation = ({
   t,
   email,
-  users,
   logout,
   history,
   togglePrefDialog,
+  isSubAccsRestricted,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
-
-  const isSubAccountRestricted = _first(
-    _filter(users, user => _isEqual(user?.email, email)),
-  )?.isRestrictedToBeAddedToSubAccount
-  const showSubAccounts = showFrameworkMode && !isSubAccountRestricted
+  const showSubAccounts = showFrameworkMode && !isSubAccsRestricted
 
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
@@ -147,9 +140,7 @@ TopNavigation.propTypes = {
   logout: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   togglePrefDialog: PropTypes.func.isRequired,
-  users: PropTypes.arrayOf(PropTypes.shape({
-    email: PropTypes.string.isRequired,
-  })).isRequired,
+  isSubAccsRestricted: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
     location: PropTypes.shape({
