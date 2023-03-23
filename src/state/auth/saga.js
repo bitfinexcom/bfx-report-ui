@@ -22,7 +22,9 @@ import {
   getLoginToken,
   getUserShouldReLogin,
 } from 'state/auth/selectors'
-import { formatAuthDate, makeFetchCall, postJsonFetch } from 'state/utils'
+import {
+  formatAuthDate, makeFetchCall, postJsonFetch, makePublicFetchCall,
+} from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
 import { updateErrorStatus, updateSuccessStatus, updateWarningStatus } from 'state/status/actions'
@@ -297,8 +299,7 @@ function* signInOtp({ payload }) {
 
 function* fetchUsers() {
   try {
-    const { result: users } = yield call(postJsonFetch,
-      `${config.API_URL}/json-rpc`, { method: 'getUsers' })
+    const { result: users } = yield call(makePublicFetchCall, 'getUsers')
 
     if (users) {
       yield put(actions.setUsers(users))
