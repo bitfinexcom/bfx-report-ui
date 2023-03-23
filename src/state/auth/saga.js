@@ -405,26 +405,28 @@ function* recoverPasswordOtp({ payload }) {
   try {
     const { otp, password, isNotProtected } = payload
     const loginToken = yield select(getLoginToken)
-    const response = yield call(
-      postJsonFetch,
-      types.LOGIN_VERIFY_URL,
-      { loginToken, token: otp, verifyMethod: types.LOGIN_2FA_OTP },
-    )
+    const params = {
+      loginToken,
+      token: otp,
+      verifyMethod: types.LOGIN_2FA_OTP,
+    }
 
-    if (_isArray(response)) {
-      if (_isEqual(response?.[0], types.LOGIN_ERROR)) {
-        yield put(updateErrorStatus({
-          id: 'auth.2FA.invalidToken',
-        }))
-      } else {
-        const [bfxToken] = response
-        const authParams = {
-          authToken: bfxToken,
-          password,
-          isNotProtected,
-        }
-        yield put(actions.recoverPassword(authParams))
+    const { result, error } = yield call(makePublicFetchCall, 'verifyOnBFX', params)
+
+    if (_isArray(result)) {
+      const [bfxToken] = result
+      const authParams = {
+        authToken: bfxToken,
+        password,
+        isNotProtected,
       }
+      yield put(actions.recoverPassword(authParams))
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'auth.2FA.invalidToken',
+      }))
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
