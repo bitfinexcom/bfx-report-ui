@@ -23,7 +23,7 @@ import {
   getUserShouldReLogin,
 } from 'state/auth/selectors'
 import {
-  formatAuthDate, makeFetchCall, postJsonFetch, makePublicFetchCall,
+  formatAuthDate, makeFetchCall, makePublicFetchCall,
 } from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
