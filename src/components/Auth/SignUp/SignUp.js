@@ -292,7 +292,7 @@ class SignUp extends PureComponent {
                 )}
                 <div className='bitfinex-auth-checkboxes'>
                   <div className='bitfinex-auth-checkboxes--group'>
-                    {showLoginEmail && (
+                    {showFrameworkMode && (
                       <Checkbox
                         name='useApiKey'
                         checked={useApiKey}
