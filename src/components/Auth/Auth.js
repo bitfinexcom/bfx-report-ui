@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { NonIdealState } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
-// import _isEqual from 'lodash/isEqual'
+import _isEqual from 'lodash/isEqual'
 
 import config from 'config'
 
@@ -75,16 +75,12 @@ class Auth extends PureComponent {
   render() {
     const {
       authData: { hasAuthData },
-      authData,
       isShown,
       t,
       usersLoading,
     } = this.props
     const { mode, authType } = this.state
-    const isMultipleAccsSelected = (authType === AUTH_TYPES.MULTIPLE_ACCOUNTS && showFrameworkMode)
-
-    console.log('+++isMultipleAccsSelected', isMultipleAccsSelected)
-    console.log('+++authData', authData)
+    const isMultipleAccsSelected = (_isEqual(authType, AUTH_TYPES.MULTIPLE_ACCOUNTS) && showFrameworkMode)
 
     if (!isShown || (showFrameworkMode && !hasAuthData && usersLoading)) {
       return null
