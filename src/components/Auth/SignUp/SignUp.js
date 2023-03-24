@@ -58,7 +58,7 @@ class SignUp extends PureComponent {
       apiSecret,
       isPersisted,
       password: '',
-      useApiKey: false,
+      useApiKey: !showFrameworkMode,
       passwordError: '',
       passwordRepeat: '',
       isBeingValidated: false,
@@ -213,6 +213,7 @@ class SignUp extends PureComponent {
       'bitfinex-auth-sign-up--framework': showFrameworkMode,
     })
     const showAuthTypeSelector = showFrameworkMode && useApiKey
+    const showLoginEmail = showFrameworkMode && !useApiKey
 
     return (
       <Dialog
@@ -241,7 +242,7 @@ class SignUp extends PureComponent {
               />
             ) : (
               <>
-                {!useApiKey && (
+                {showLoginEmail && (
                   <LoginEmail
                     userName={userName}
                     userPassword={userPassword}
@@ -291,14 +292,16 @@ class SignUp extends PureComponent {
                 )}
                 <div className='bitfinex-auth-checkboxes'>
                   <div className='bitfinex-auth-checkboxes--group'>
-                    <Checkbox
-                      name='useApiKey'
-                      checked={useApiKey}
-                      onChange={this.handleCheckboxChange}
-                      className='bitfinex-auth-remember-me'
-                    >
-                      {t('auth.useApiKey')}
-                    </Checkbox>
+                    {showLoginEmail && (
+                      <Checkbox
+                        name='useApiKey'
+                        checked={useApiKey}
+                        onChange={this.handleCheckboxChange}
+                        className='bitfinex-auth-remember-me'
+                      >
+                        {t('auth.useApiKey')}
+                      </Checkbox>
+                    )}
                     <Checkbox
                       name='isPersisted'
                       checked={isPersisted}
