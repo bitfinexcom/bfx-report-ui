@@ -30,11 +30,12 @@ class SubAccount extends PureComponent {
     })).isRequired,
     allowedUsers: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string.isRequired,
-    })).isRequired,
+    })),
     t: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
+    allowedUsers: [],
     masterAccount: undefined,
     isSubAccountsLoading: false,
     isMultipleAccsSelected: false,
