@@ -38,10 +38,11 @@ class Select extends PureComponent {
     value: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
-      PropTypes.number]).isRequired,
+      PropTypes.number]),
   }
 
   static defaultProps = {
+    value: '',
     className: '',
     filterable: false,
     popoverClassName: '',
