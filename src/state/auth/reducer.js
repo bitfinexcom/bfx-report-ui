@@ -1,7 +1,7 @@
 import subAccountsTypes from 'state/subAccounts/constants'
 
-import Authenticator from './Authenticator'
 import types from './constants'
+import Authenticator from './Authenticator'
 
 const initialAuthData = {
   apiKey: '',
@@ -10,7 +10,7 @@ const initialAuthData = {
   email: '',
   password: '',
   hasAuthData: false,
-  isPersisted: true,
+  isPersisted: false,
   isNotProtected: true,
   isSubAccount: false,
 }
@@ -24,7 +24,7 @@ const getStoredAuth = () => {
     email = '',
     password = '',
     hasAuthData = Authenticator.hasData(),
-    isPersisted = true,
+    isPersisted = false,
     isNotProtected = true,
     isSubAccount = false,
   } = auth
