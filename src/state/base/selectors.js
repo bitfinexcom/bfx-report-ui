@@ -1,9 +1,13 @@
 import memoizeOne from 'memoize-one'
+import _isNull from 'lodash/isNull'
 import _isEqual from 'lodash/isEqual'
 
+import config from 'config'
 import { formatTime, timeOffset } from 'state/utils'
 
 import types from './constants'
+
+const { showFrameworkMode, API_URL, WS_ADDRESS } = config
 
 export const getBase = state => state.base
 
@@ -43,7 +47,17 @@ export const getFullTime = (state) => {
   return getFormattedTimeMemo(timezone, dateFormat, milliseconds)
 }
 
+export const getApiUrl = (state) => {
+  const apiPort = getCustomApiPort(state)
+  if (showFrameworkMode && !_isNull(apiPort)) {
+    return `http://localhost:${apiPort}/api`
+  }
+
+  return API_URL
+}
+
 export default {
+  getApiUrl,
   getBase,
   getCustomApiPort,
   getDateFormat,
