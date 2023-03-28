@@ -56,6 +56,15 @@ export const getApiUrl = (state) => {
   return API_URL
 }
 
+export const getWsAddress = (state) => {
+  const apiPort = getCustomApiPort(state)
+  if (showFrameworkMode && !_isNull(apiPort)) {
+    return `ws://127.0.0.1:${apiPort}/ws`
+  }
+
+  return WS_ADDRESS
+}
+
 export default {
   getApiUrl,
   getBase,
@@ -69,4 +78,5 @@ export default {
   getTheme,
   getTimeOffset,
   getTimezone,
+  getWsAddress,
 }
