@@ -76,14 +76,16 @@ export function postJsonFetch(url, bodyJson) {
 }
 
 export function makePublicFetchCall(method, params = undefined) {
-  return postJsonFetch(`${config.API_URL}/json-rpc`, {
+  const apiUrl = getApiUrlFromStore()
+  return postJsonFetch(`${apiUrl}/json-rpc`, {
     method,
     params: params || undefined,
   })
 }
 
 export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
-  return postJsonFetch(`${config.API_URL}/json-rpc`, {
+  const apiUrl = getApiUrlFromStore()
+  return postJsonFetch(`${apiUrl}/json-rpc`, {
     auth,
     method,
     params: params || undefined,
