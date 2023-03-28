@@ -14,6 +14,7 @@ import queryType from 'state/query/constants'
 import {
   getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol, getMappedSymbolsFromUrl,
 } from 'state/symbols/utils'
+import { getApiUrl } from 'state/base/selectors'
 import { selectAuth } from 'state/auth/selectors'
 
 const {
@@ -49,6 +50,11 @@ const {
 export const getAuthFromStore = () => {
   const state = store.getState()
   return selectAuth(state)
+}
+
+export const getApiUrlFromStore = () => {
+  const state = store.getState()
+  return getApiUrl(state)
 }
 
 // turned off for firefox
