@@ -80,7 +80,15 @@ export function setSrc(src) {
   }
 }
 
+export function setApiPort(apiPort) {
+  return {
+    type: types.SET_CUSTOM_API_PORT,
+    payload: apiPort,
+  }
+}
+
 export default {
+  setApiPort,
   setDateFormat,
   setLang,
   setSrc,
