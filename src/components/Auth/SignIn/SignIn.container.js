@@ -2,13 +2,21 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
-import { signIn, updateAuth } from 'state/auth/actions'
+import {
+  signIn,
+  signInOtp,
+  updateAuth,
+  signUpEmail,
+  showOtpLogin,
+} from 'state/auth/actions'
 import {
   getAuthData,
   getIsLoading,
   getUsers,
   getUsersLoaded,
   getIsSubAccount,
+  getShowOtpLogin,
+  getUserShouldReLogin,
 } from 'state/auth/selectors'
 import { getIsElectronBackendLoaded } from 'state/ui/selectors'
 
@@ -21,11 +29,16 @@ const mapStateToProps = state => ({
   loading: getIsLoading(state),
   users: getUsers(state),
   isSubAccount: getIsSubAccount(state),
+  isOtpLoginShown: getShowOtpLogin(state),
+  userShouldReLogin: getUserShouldReLogin(state),
 })
 
 const mapDispatchToProps = {
   signIn,
+  signInOtp,
   updateAuth,
+  signUpEmail,
+  showOtpLogin,
 }
 
 export default compose(

@@ -58,6 +58,7 @@ export function postJsonFetch(url, bodyJson) {
   return fetch(url, {
     method: 'POST',
     headers: {
+      Origin: config.HOME_URL,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
@@ -66,6 +67,13 @@ export function postJsonFetch(url, bodyJson) {
     .then(response => response.json())
     .catch(error => error)
     .then(data => data)
+}
+
+export function makePublicFetchCall(method, params = undefined) {
+  return postJsonFetch(`${config.API_URL}/json-rpc`, {
+    method,
+    params: params || undefined,
+  })
 }
 
 export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {

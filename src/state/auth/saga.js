@@ -8,16 +8,26 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import _last from 'lodash/last'
+import _isArray from 'lodash/isArray'
 import _isEmpty from 'lodash/isEmpty'
+import _isEqual from 'lodash/isEqual'
 
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
 import wsSignIn from 'state/ws/signIn'
-import { selectAuth } from 'state/auth/selectors'
-import { formatAuthDate, makeFetchCall, postJsonFetch } from 'state/utils'
+import {
+  selectAuth,
+  getAuthData,
+  getLoginToken,
+  getUserShouldReLogin,
+} from 'state/auth/selectors'
+import {
+  formatAuthDate, makeFetchCall, makePublicFetchCall,
+} from 'state/utils'
 import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
-import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
+import { updateErrorStatus, updateSuccessStatus, updateWarningStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
 import { refreshToken, tokenRefreshStart, tokenRefreshStop } from 'state/auth/tokenRefresh/actions'
 import config from 'config'
@@ -108,6 +118,7 @@ function* signUp({ payload }) {
         isNotProtected,
       }
       yield put(actions.addUser(newUser))
+      yield put(actions.showOtpLogin(false))
       return
     }
 
@@ -135,9 +146,68 @@ function* signUp({ payload }) {
   }
 }
 
+function* signUpEmail({ payload }) {
+  try {
+    const { result, error } = yield call(makePublicFetchCall, 'loginToBFX', payload)
+
+    if (_isArray(result)) {
+      const [loginToken, twoFaTypes] = result
+      const [twoFaMain] = _last(twoFaTypes)
+      if (_isEqual(twoFaMain, types.LOGIN_2FA_OTP)) {
+        yield put(actions.setLoginToken(loginToken))
+        yield put(actions.showOtpLogin(true))
+      } else {
+        yield put(updateErrorStatus({
+          id: 'auth.loginEmail.loginEmailNo2FA',
+        }))
+      }
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'auth.loginEmail.loginEmailError',
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
+function* signUpOtp({ payload }) {
+  try {
+    const { otp, password, isNotProtected } = payload
+    const loginToken = yield select(getLoginToken)
+    const params = {
+      loginToken,
+      token: otp,
+      verifyMethod: types.LOGIN_2FA_OTP,
+    }
+    const { result, error } = yield call(makePublicFetchCall, 'verifyOnBFX', params)
+
+    if (_isArray(result)) {
+      const [bfxToken] = result
+      const authParams = {
+        authToken: bfxToken,
+        password,
+        isNotProtected,
+      }
+      yield put(actions.signUp(authParams))
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'auth.2FA.invalidToken',
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 function* signIn({ payload }) {
   try {
     const {
+      authToken,
       email,
       isNotProtected,
       isSubAccount,
@@ -145,6 +215,7 @@ function* signIn({ payload }) {
     } = payload
 
     const authParams = {
+      authToken,
       email,
       password: isNotProtected ? undefined : password,
       isSubAccount,
@@ -153,6 +224,10 @@ function* signIn({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
+      const userShouldReLogin = yield select(getUserShouldReLogin)
+      if (_isEqual(email, userShouldReLogin)) {
+        yield put(actions.setUserShouldReLogin(''))
+      }
       return
     }
 
@@ -160,9 +235,16 @@ function* signIn({ payload }) {
 
     if (error) {
       if (error.code === 401) {
-        yield put(updateErrorStatus({
-          id: 'status.signInFail',
-        }))
+        const { data } = error
+        if (data?.isAuthTokenGenerationError) {
+          yield put(actions.setUserShouldReLogin(email))
+          yield put(updateWarningStatus({ id: 'auth.loginEmail.loginTokenExpired' }))
+        } else {
+          yield put(updateErrorStatus({
+            id: 'status.signInFail',
+          }))
+        }
+
         return
       }
 
@@ -177,10 +259,45 @@ function* signIn({ payload }) {
   }
 }
 
+function* signInOtp({ payload }) {
+  try {
+    const {
+      otp, password, email, isNotProtected, isSubAccount,
+    } = payload
+    const loginToken = yield select(getLoginToken)
+    const params = {
+      loginToken,
+      token: otp,
+      verifyMethod: types.LOGIN_2FA_OTP,
+    }
+
+    const { result, error } = yield call(makePublicFetchCall, 'verifyOnBFX', params)
+
+    if (_isArray(result)) {
+      const [bfxToken] = result
+      const authParams = {
+        authToken: bfxToken,
+        email,
+        password,
+        isSubAccount,
+        isNotProtected,
+      }
+      yield put(actions.signIn(authParams))
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'auth.2FA.invalidToken',
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 function* fetchUsers() {
   try {
-    const { result: users } = yield call(postJsonFetch,
-      `${config.API_URL}/json-rpc`, { method: 'getUsers' })
+    const { result: users } = yield call(makePublicFetchCall, 'getUsers')
 
     if (users) {
       yield put(actions.setUsers(users))
@@ -237,11 +354,19 @@ function* checkAuth() {
   }
 }
 
+function* handleExpiredAuth() {
+  const { email } = yield select(getAuthData)
+  yield put(actions.setUserShouldReLogin(email))
+  yield put(actions.logout())
+  yield put(updateWarningStatus({ id: 'auth.loginEmail.loginTokenExpired' }))
+}
+
 function* recoverPassword({ payload }) {
   try {
     const {
       apiKey,
       apiSecret,
+      authToken,
       password,
       isNotProtected,
     } = payload
@@ -249,6 +374,7 @@ function* recoverPassword({ payload }) {
     const { result, error } = yield call(makeFetchCall, 'recoverPassword', null, {
       apiKey,
       apiSecret,
+      authToken,
       newPassword,
       isSubAccount: false,
       isNotProtected,
@@ -256,6 +382,8 @@ function* recoverPassword({ payload }) {
 
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
+      yield put(actions.showOtpLogin(false))
+      yield put(actions.fetchUsers())
       return
     }
 
@@ -273,6 +401,38 @@ function* recoverPassword({ payload }) {
   }
 }
 
+function* recoverPasswordOtp({ payload }) {
+  try {
+    const { otp, password, isNotProtected } = payload
+    const loginToken = yield select(getLoginToken)
+    const params = {
+      loginToken,
+      token: otp,
+      verifyMethod: types.LOGIN_2FA_OTP,
+    }
+
+    const { result, error } = yield call(makePublicFetchCall, 'verifyOnBFX', params)
+
+    if (_isArray(result)) {
+      const [bfxToken] = result
+      const authParams = {
+        authToken: bfxToken,
+        password,
+        isNotProtected,
+      }
+      yield put(actions.recoverPassword(authParams))
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'auth.2FA.invalidToken',
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 function* logout() {
   yield put(tokenRefreshStop())
 }
@@ -281,9 +441,14 @@ export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.FETCH_USERS, fetchUsers)
   yield takeLatest(types.RECOVER_PASSWORD, recoverPassword)
+  yield takeLatest(types.RECOVER_PASSWORD_OTP, recoverPasswordOtp)
   yield takeLatest(types.SIGN_UP, signUp)
+  yield takeLatest(types.SIGN_UP_OTP, signUpOtp)
+  yield takeLatest(types.SIGN_UP_EMAIL, signUpEmail)
   yield takeLatest(types.SIGN_IN, signIn)
+  yield takeLatest(types.SIGN_IN_OTP, signInOtp)
   yield takeLatest(types.LOGOUT, logout)
   yield takeLatest(types.REMOVE_USER, removeUser)
+  yield takeLatest(types.AUTH_EXPIRED, handleExpiredAuth)
   yield fork(tokenRefreshSaga)
 }

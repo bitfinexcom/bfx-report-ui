@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import _map from 'lodash/map'
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
 import { Classes, Dialog } from '@blueprintjs/core'
@@ -13,6 +14,16 @@ import SubAccount from 'components/SubAccounts/SubAccount'
 
 import { MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
+
+const filterRestrictedUsers = (users) => _filter(
+  users, user => !user?.isRestrictedToBeAddedToSubAccount
+  && _isEmpty(user?.subUsers),
+)
+
+const prepareMasterAccUsers = (users) => _map(
+  _filter(users, ['isSubAccount', false]),
+  user => user.email,
+)
 
 class RegisterSubAccounts extends PureComponent {
   static propTypes = {
@@ -31,6 +42,7 @@ class RegisterSubAccounts extends PureComponent {
       email: PropTypes.string.isRequired,
       isSubAccount: PropTypes.bool.isRequired,
       isNotProtected: PropTypes.bool.isRequired,
+      isRestrictedToBeAddedToSubAccount: PropTypes.bool.isRequired,
     })).isRequired,
   }
 
@@ -38,7 +50,7 @@ class RegisterSubAccounts extends PureComponent {
     super()
 
     const { authData: { email }, users } = props
-    const { email: firstUserEmail } = users[0] || {}
+    const { email: firstUserEmail } = filterRestrictedUsers(users)[0] || {}
     this.state = {
       masterAccEmail: email || firstUserEmail,
     }
@@ -74,9 +86,8 @@ class RegisterSubAccounts extends PureComponent {
       isMultipleAccsSelected,
     } = this.props
     const { masterAccEmail } = this.state
-
-    const preparedUsers = _filter(users, ['isSubAccount', false]).map(user => user.email)
-
+    const preparedUsers = filterRestrictedUsers(users)
+    const masterAccUsers = prepareMasterAccUsers(preparedUsers)
     const classes = classNames(
       'bitfinex-auth',
       'bitfinex-auth-sign-up',
@@ -107,7 +118,7 @@ class RegisterSubAccounts extends PureComponent {
           </h3>
           <Select
             loading
-            items={preparedUsers}
+            items={masterAccUsers}
             value={masterAccEmail}
             onChange={this.onEmailChange}
             className='bitfinex-auth-email'
@@ -115,8 +126,9 @@ class RegisterSubAccounts extends PureComponent {
           />
           <>
             <SubAccount
-              users={users}
               authData={authData}
+              users={users}
+              allowedUsers={preparedUsers}
               masterAccount={masterAccEmail}
               isMultipleAccsSelected={isMultipleAccsSelected}
             />

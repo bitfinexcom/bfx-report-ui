@@ -36,7 +36,7 @@ const environments = {
   production: {
     API_URL: 'https://report.bitfinex.com/api',
     KEY_URL: 'https://setting.bitfinex.com/api',
-    HOME_URL: 'https://www.bitfinex.com/t',
+    HOME_URL: 'https://www.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: false,
     showAuthPage: false,

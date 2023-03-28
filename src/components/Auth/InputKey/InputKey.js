@@ -1,29 +1,37 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import {
   FormGroup,
   InputGroup,
 } from '@blueprintjs/core'
 
 export const InputKey = ({
-  t, label, onChange, name, placeholder, value,
-}) => (
-  <div className='bitfinex-auth-form-input'>
-    <FormGroup
-      label={t(label)}
-      labelFor={name}
-    />
-    <InputGroup
-      id={name}
-      name={name}
-      value={value}
-      type='password'
-      onChange={onChange}
-      placeholder={placeholder && t(placeholder)}
-    />
-  </div>
-)
+  name,
+  type,
+  label,
+  value,
+  onChange,
+  placeholder,
+}) => {
+  const { t } = useTranslation()
+  return (
+    <div className='bitfinex-auth-form-input'>
+      <FormGroup
+        label={t(label)}
+        labelFor={name}
+      />
+      <InputGroup
+        id={name}
+        name={name}
+        type={type}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder && t(placeholder)}
+      />
+    </div>
+  )
+}
 
 InputKey.propTypes = {
   name: PropTypes.string,
@@ -31,7 +39,7 @@ InputKey.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  t: PropTypes.func.isRequired,
+  type: PropTypes.string,
 }
 
 InputKey.defaultProps = {
@@ -39,7 +47,8 @@ InputKey.defaultProps = {
   value: '',
   label: '',
   placeholder: '',
+  type: 'password',
   onChange: () => {},
 }
 
-export default withTranslation('translations')(memo(InputKey))
+export default memo(InputKey)

@@ -10,6 +10,7 @@
       font-size: 15px;
       flex-direction: column;
       display: flex;
+      margin-bottom: 5px;
 
       > .platform-logo {
         position: relative;
@@ -18,8 +19,14 @@
         margin: 15px auto 30px auto;
       }
 
+      > .buttons-row {
+        display: flex;
+        margin-top: 10px;
+        justify-content: space-between;
+      }
+
       > .bp3-callout {
-        border-radius: 0;
+        border-radius: 4px;
         margin: 0 auto 24px;
         padding: 10px 21px 9px;
         font-size: 15px;
@@ -65,6 +72,12 @@
   &-checkboxes {
     display: flex;
     justify-content: space-between;
+    padding: 0 2px 0 2px;
+
+    &--group {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &-sign-in {
@@ -87,20 +100,7 @@
   &-remember-me {
     &.bp3-checkbox {
       line-height: 30px;
-
-      &:first-child {
-        margin: 0 0 0 2px;
-      }
-
-      &:last-child {
-        margin: 0 2px 0 0;
-      }
-    }
-
-    &--sign-in {
-      &.bp3-checkbox {
-        margin-bottom: 60px;
-      }
+      margin-left: 0;
     }
 
     &--sub-accounts {

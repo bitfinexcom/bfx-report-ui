@@ -51,6 +51,8 @@ import NavMenu from 'ui/NavMenu'
 import NavMenuDrawer from 'ui/NavMenuDrawer'
 import config from 'config'
 
+const { showFrameworkMode } = config
+
 const {
   MENU_ACCOUNT_BALANCE,
   MENU_ACCOUNT_SUMMARY,
@@ -126,6 +128,7 @@ class Main extends PureComponent {
     authIsShown: PropTypes.bool,
     authStatus: PropTypes.bool.isRequired,
     isTurkishSite: PropTypes.bool.isRequired,
+    isSubAccsRestricted: PropTypes.bool.isRequired,
     errorDialogDisabled: PropTypes.bool.isRequired,
   }
 
@@ -138,8 +141,10 @@ class Main extends PureComponent {
       authStatus,
       authIsShown,
       isTurkishSite,
+      isSubAccsRestricted,
       errorDialogDisabled,
     } = this.props
+    const showSubAccounts = showFrameworkMode && !isSubAccsRestricted
 
     return authStatus && !authIsShown ? (
       <>
@@ -346,7 +351,7 @@ class Main extends PureComponent {
               path={PATHS.MENU_CHANGE_LOGS}
               component={ChangeLogs}
             />
-            {config.showFrameworkMode && (
+            {showSubAccounts && (
               <Route
                 exact
                 path={PATHS.MENU_SUB_ACCOUNTS}
