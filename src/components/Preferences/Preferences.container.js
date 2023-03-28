@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next'
 import { removeUser } from 'state/auth/actions'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
+import { getIsSyncing } from 'state/sync/selectors'
 import { togglePreferencesDialog } from 'state/ui/actions'
 import { getIsPreferencesDialogOpen } from 'state/ui/selectors'
 
@@ -12,6 +13,7 @@ import Preferences from './Preferences'
 
 const mapStateToProps = state => ({
   timezone: getTimezone(state),
+  isSyncing: getIsSyncing(state),
   isOpen: getIsPreferencesDialogOpen(state),
 })
 

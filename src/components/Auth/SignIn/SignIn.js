@@ -306,7 +306,7 @@ class SignIn extends PureComponent {
                   className='bitfinex-auth-mode-switch'
                   onClick={() => switchMode(MODES.SIGN_UP)}
                 >
-                  {t('auth.signUp')}
+                  {t('auth.addAccount')}
                 </div>
                 <Button
                   name='check'
