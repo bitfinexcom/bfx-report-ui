@@ -28,8 +28,10 @@ const TopNavigation = ({
   logout,
   history,
   togglePrefDialog,
+  isSubAccsRestricted,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const showSubAccounts = showFrameworkMode && !isSubAccsRestricted
 
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
@@ -96,12 +98,12 @@ const TopNavigation = ({
                 text={t('navItems.loginHistory')}
                 onClick={() => switchSection(MENU_LOGINS)}
               />
-              {showFrameworkMode && (
-              <MenuItem
-                icon={<Icon.USER_CIRCLE />}
-                text={t('navItems.subAccounts')}
-                onClick={() => switchSection(MENU_SUB_ACCOUNTS)}
-              />
+              {showSubAccounts && (
+                <MenuItem
+                  icon={<Icon.USER_CIRCLE />}
+                  text={t('navItems.subAccounts')}
+                  onClick={() => switchSection(MENU_SUB_ACCOUNTS)}
+                />
               )}
               <MenuItem
                 icon={<Icon.NOTEBOOK />}
@@ -138,6 +140,7 @@ TopNavigation.propTypes = {
   logout: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   togglePrefDialog: PropTypes.func.isRequired,
+  isSubAccsRestricted: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
     location: PropTypes.shape({

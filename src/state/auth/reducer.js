@@ -1,7 +1,7 @@
 import subAccountsTypes from 'state/subAccounts/constants'
 
-import Authenticator from './Authenticator'
 import types from './constants'
+import Authenticator from './Authenticator'
 
 const initialAuthData = {
   apiKey: '',
@@ -10,7 +10,7 @@ const initialAuthData = {
   email: '',
   password: '',
   hasAuthData: false,
-  isPersisted: true,
+  isPersisted: false,
   isNotProtected: true,
   isSubAccount: false,
 }
@@ -24,7 +24,7 @@ const getStoredAuth = () => {
     email = '',
     password = '',
     hasAuthData = Authenticator.hasData(),
-    isPersisted = true,
+    isPersisted = false,
     isNotProtected = true,
     isSubAccount = false,
   } = auth
@@ -52,6 +52,9 @@ const initialState = {
   usersLoaded: false,
   usersLoading: false,
   subAccountsLoading: false,
+  showOtpLogin: false,
+  loginToken: '',
+  userShouldReLogin: '',
 }
 
 export function authReducer(state = initialState, action) {
@@ -124,6 +127,21 @@ export function authReducer(state = initialState, action) {
         isShown: true,
         loading: false,
       }
+    case types.SHOW_OTP_LOGIN:
+      return {
+        ...state,
+        showOtpLogin: payload,
+      }
+    case types.SET_LOGIN_TOKEN:
+      return {
+        ...state,
+        loginToken: payload,
+      }
+    case types.SET_USER_SHOULD_RE_LOGIN:
+      return {
+        ...state,
+        userShouldReLogin: payload,
+      }
     case types.HIDE_AUTH:
       return {
         ...state,
@@ -136,6 +154,7 @@ export function authReducer(state = initialState, action) {
         ...getStoredAuth(),
         users: state.users,
         token: state.token,
+        userShouldReLogin: state.userShouldReLogin,
       }
     default:
       return state

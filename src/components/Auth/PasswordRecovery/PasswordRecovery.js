@@ -13,6 +13,8 @@ import config from 'config'
 
 import { MODES } from '../Auth'
 import InputKey from '../InputKey'
+import LoginOtp from '../LoginOtp'
+import LoginEmail from '../LoginEmail'
 import ErrorLabel from '../ErrorLabel'
 
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
@@ -27,7 +29,11 @@ class PasswordRecovery extends PureComponent {
     loading: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     recoverPassword: PropTypes.func.isRequired,
+    recoverPasswordOtp: PropTypes.func.isRequired,
     switchMode: PropTypes.func.isRequired,
+    signUpEmail: PropTypes.func.isRequired,
+    showOtpLogin: PropTypes.func.isRequired,
+    isOtpLoginShown: PropTypes.bool.isRequired,
     updateAuth: PropTypes.func.isRequired,
   }
 
@@ -39,6 +45,7 @@ class PasswordRecovery extends PureComponent {
     this.state = {
       apiKey: '',
       apiSecret: '',
+      otp: '',
       password: '',
       passwordRepeat: '',
       isBeingValidated: false,
@@ -46,17 +53,23 @@ class PasswordRecovery extends PureComponent {
       isPersisted,
       passwordError: '',
       passwordRepeatError: '',
+      useApiKey: false,
+      userName: '',
+      userPassword: '',
     }
   }
 
   onPasswordRecovery = () => {
-    const { recoverPassword } = this.props
+    const { recoverPassword, signUpEmail } = this.props
     const {
       apiKey,
       apiSecret,
       password,
       isPasswordProtected,
       isPersisted,
+      useApiKey,
+      userName,
+      userPassword,
     } = this.state
     this.setState({
       isBeingValidated: true,
@@ -64,13 +77,20 @@ class PasswordRecovery extends PureComponent {
     const isValid = this.validateForm()
 
     if (isValid) {
-      recoverPassword({
-        apiKey,
-        apiSecret,
-        password,
-        isNotProtected: !isPasswordProtected,
-        isPersisted,
-      })
+      if (useApiKey) {
+        recoverPassword({
+          apiKey,
+          apiSecret,
+          password,
+          isNotProtected: !isPasswordProtected,
+          isPersisted,
+        })
+      } else {
+        signUpEmail({
+          login: userName,
+          password: userPassword,
+        })
+      }
     }
   }
 
@@ -135,26 +155,48 @@ class PasswordRecovery extends PureComponent {
     })
   }
 
+  handle2FACancel = () => {
+    const { showOtpLogin } = this.props
+    this.setState({ otp: '' })
+    showOtpLogin(false)
+  }
+
+  handleOtpPasswordRecovery = () => {
+    const { recoverPasswordOtp } = this.props
+    const { otp, password, isPasswordProtected } = this.state
+    recoverPasswordOtp({
+      otp,
+      password,
+      isNotProtected: !isPasswordProtected,
+    })
+  }
+
   render() {
     const {
       loading,
       switchMode,
       t,
+      isOtpLoginShown,
     } = this.props
     const {
       apiKey,
       apiSecret,
+      otp,
       password,
       passwordRepeat,
       isPasswordProtected,
       isPersisted,
       passwordError,
       passwordRepeatError,
+      useApiKey,
+      userName,
+      userPassword,
     } = this.state
 
     const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
-    const isPasswordRecoveryDisabled = !apiKey || !apiSecret
+    const isPasswordRecoveryDisabled = (useApiKey && (!apiKey || !apiSecret))
+      || (!useApiKey && (!userName || !userPassword))
       || (config.showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
@@ -171,74 +213,110 @@ class PasswordRecovery extends PureComponent {
         usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          <InputKey
-            label='auth.enterAPIKey'
-            name='apiKey'
-            value={apiKey}
-            onChange={this.handleInputChange}
-          />
-          <InputKey
-            label='auth.enterAPISecret'
-            name='apiSecret'
-            value={apiSecret}
-            onChange={this.handleInputChange}
-          />
-          {config.showFrameworkMode && isPasswordProtected && (
-            <>
-              <InputKey
-                label='auth.enterPassword'
-                name='password'
-                value={password}
-                onChange={this.handleInputChange}
+          {isOtpLoginShown
+            ? (
+              <LoginOtp
+                otp={otp}
+                handle2FACancel={this.handle2FACancel}
+                handleInputChange={this.handleInputChange}
+                handleOneTimePassword={this.handleOtpPasswordRecovery}
               />
-              <ErrorLabel text={passwordError} />
-              <InputKey
-                label='auth.repeatPassword'
-                name='passwordRepeat'
-                value={passwordRepeat}
-                onChange={this.handleInputChange}
-              />
-              <ErrorLabel text={passwordRepeatError} />
-            </>
-          )}
-          <div className='bitfinex-auth-checkboxes'>
-            <Checkbox
-              className='bitfinex-auth-remember-me'
-              name='isPersisted'
-              checked={isPersisted}
-              onChange={this.handleCheckboxChange}
-            >
-              {t('auth.rememberMe')}
-            </Checkbox>
-            {showPasswordProtection && (
-              <Checkbox
-                className='bitfinex-auth-remember-me'
-                name='isPasswordProtected'
-                checked={isPasswordProtected}
-                onChange={this.handleCheckboxChange}
-              >
-                {t('auth.passwordProtection')}
-              </Checkbox>
+            ) : (
+              <>
+                {!useApiKey && (
+                  <LoginEmail
+                    userName={userName}
+                    userPassword={userPassword}
+                    onChange={this.handleInputChange}
+                  />
+                )}
+                {useApiKey && (
+                  <>
+                    <InputKey
+                      label='auth.enterAPIKey'
+                      name='apiKey'
+                      value={apiKey}
+                      onChange={this.handleInputChange}
+                    />
+                    <InputKey
+                      label='auth.enterAPISecret'
+                      name='apiSecret'
+                      value={apiSecret}
+                      onChange={this.handleInputChange}
+                    />
+                  </>
+                )}
+
+                {config.showFrameworkMode && isPasswordProtected && (
+                  <>
+                    <InputKey
+                      label='auth.enterPassword'
+                      name='password'
+                      value={password}
+                      onChange={this.handleInputChange}
+                    />
+                    <ErrorLabel text={passwordError} />
+                    <InputKey
+                      label='auth.repeatPassword'
+                      name='passwordRepeat'
+                      value={passwordRepeat}
+                      onChange={this.handleInputChange}
+                    />
+                    <ErrorLabel text={passwordRepeatError} />
+                  </>
+                )}
+                <div className='bitfinex-auth-checkboxes'>
+                  <div className='bitfinex-auth-checkboxes--group'>
+                    <Checkbox
+                      name='useApiKey'
+                      checked={useApiKey}
+                      onChange={this.handleCheckboxChange}
+                      className='bitfinex-auth-remember-me'
+                    >
+                      {t('auth.useApiKey')}
+                    </Checkbox>
+                    <Checkbox
+                      className='bitfinex-auth-remember-me'
+                      name='isPersisted'
+                      checked={isPersisted}
+                      onChange={this.handleCheckboxChange}
+                    >
+                      {t('auth.rememberMe')}
+                    </Checkbox>
+                  </div>
+                  {showPasswordProtection && (
+                  <Checkbox
+                    className='bitfinex-auth-remember-me'
+                    name='isPasswordProtected'
+                    checked={isPasswordProtected}
+                    onChange={this.handleCheckboxChange}
+                  >
+                    {t('auth.passwordProtection')}
+                  </Checkbox>
+                  )}
+                </div>
+              </>
             )}
-          </div>
         </div>
-        <div className={Classes.DIALOG_FOOTER}>
-          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
-              {t('auth.signIn')}
+        {!isOtpLoginShown && (
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
+                {t('auth.signIn')}
+              </div>
+              <Button
+                className='bitfinex-auth-check'
+                name='check'
+                intent={Intent.SUCCESS}
+                onClick={this.onPasswordRecovery}
+                disabled={isPasswordRecoveryDisabled}
+                loading={loading}
+              >
+                {t('timeframe.custom.confirm')}
+              </Button>
             </div>
-            <Button
-              className='bitfinex-auth-check'
-              name='check'
-              intent={Intent.SUCCESS}
-              onClick={this.onPasswordRecovery}
-              disabled={isPasswordRecoveryDisabled}
-              loading={loading}
-            >
-              {t('timeframe.custom.confirm')}
-            </Button>
           </div>
-        </div>
+        )}
       </Dialog>
     )
   }

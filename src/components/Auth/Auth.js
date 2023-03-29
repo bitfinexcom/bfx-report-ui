@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { NonIdealState } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
+import _isEqual from 'lodash/isEqual'
 
 import config from 'config'
 
@@ -9,6 +10,8 @@ import SignUp from './SignUp'
 import SignIn from './SignIn'
 import RegisterSubAccounts from './RegisterSubAccounts'
 import PasswordRecovery from './PasswordRecovery'
+
+const { showFrameworkMode, showAuthPage } = config
 
 export const AUTH_TYPES = {
   SIMPLE_ACCOUNTS: 'simpleAccounts',
@@ -46,7 +49,7 @@ class Auth extends PureComponent {
     const { authData: { hasAuthData, isSubAccount } } = props
 
     this.state = {
-      mode: (!config.showFrameworkMode || !hasAuthData) ? MODES.SIGN_UP : MODES.SIGN_IN,
+      mode: (!showFrameworkMode || !hasAuthData) ? MODES.SIGN_UP : MODES.SIGN_IN,
       authType: isSubAccount ? AUTH_TYPES.MULTIPLE_ACCOUNTS : AUTH_TYPES.SIMPLE_ACCOUNTS,
     }
   }
@@ -55,7 +58,7 @@ class Auth extends PureComponent {
     const { authType } = this.state
     const { isUsersLoaded, users } = this.props
     const isMultipleAccsSelected = authType === AUTH_TYPES.MULTIPLE_ACCOUNTS
-    if (config.showFrameworkMode && !prevProps.isUsersLoaded && isUsersLoaded && users.length) {
+    if (showFrameworkMode && !prevProps.isUsersLoaded && isUsersLoaded && users.length) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ mode: isMultipleAccsSelected ? MODES.SIGN_UP : MODES.SIGN_IN })
     }
@@ -77,13 +80,13 @@ class Auth extends PureComponent {
       usersLoading,
     } = this.props
     const { mode, authType } = this.state
-    const isMultipleAccsSelected = authType === AUTH_TYPES.MULTIPLE_ACCOUNTS
+    const isMultipleAccsSelected = (_isEqual(authType, AUTH_TYPES.MULTIPLE_ACCOUNTS) && showFrameworkMode)
 
-    if (!isShown || (config.showFrameworkMode && !hasAuthData && usersLoading)) {
+    if (!isShown || (showFrameworkMode && !hasAuthData && usersLoading)) {
       return null
     }
 
-    if (!config.showAuthPage) {
+    if (!showAuthPage) {
       return (
         <NonIdealState
           className='bitfinex-nonideal'

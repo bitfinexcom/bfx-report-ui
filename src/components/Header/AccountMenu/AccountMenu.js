@@ -36,7 +36,10 @@ const AccountMenu = ({
   authStatus,
   togglePrefDialog,
   toggleExportDialog,
+  isSubAccsRestricted,
 }) => {
+  const showSubAccounts = showFrameworkMode && !isSubAccsRestricted
+
   const switchSection = (type) => {
     history.push({ pathname: getPath(type) })
   }
@@ -70,7 +73,7 @@ const AccountMenu = ({
                 icon={<Icon.FILE_EXPORT />}
                 text={t('download.export')}
               />
-              {showFrameworkMode && (
+              {showSubAccounts && (
                 <MenuItem
                   onClick={() => switchSection(MENU_SUB_ACCOUNTS)}
                   icon={<Icon.USER_CIRCLE />}
@@ -128,8 +131,9 @@ AccountMenu.propTypes = {
   email: PropTypes.string.isRequired,
   logout: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  toggleExportDialog: PropTypes.func.isRequired,
   togglePrefDialog: PropTypes.func.isRequired,
+  toggleExportDialog: PropTypes.func.isRequired,
+  isSubAccsRestricted: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
     location: PropTypes.shape({

@@ -111,14 +111,14 @@ html {
 }
 
 .bp3-input {
-  background-color: var(--bgColor2);
+  background-color: var(--multiBg);
   box-shadow: none;
-  border: 1px solid var(--borderColor);
-  border-radius: 2px;
+  border-radius: 4px;
   color: var(--color);
 
   &::placeholder {
-    color: var(--color)
+    color: var(--color);
+    opacity: 0.4;
   }
 }
 

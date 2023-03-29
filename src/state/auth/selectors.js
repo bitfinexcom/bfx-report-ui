@@ -1,4 +1,7 @@
 import config from 'config'
+import _first from 'lodash/first'
+import _filter from 'lodash/filter'
+import _isEqual from 'lodash/isEqual'
 
 const getAuth = state => state.auth
 
@@ -11,6 +14,13 @@ export const getUsers = state => getAuth(state).users
 export const getUsersLoaded = state => getAuth(state).usersLoaded
 export const getUsersLoading = state => getAuth(state).usersLoading
 export const getSubAccountsLoading = state => getAuth(state)?.subAccountsLoading ?? false
+export const getShowOtpLogin = state => getAuth(state)?.showOtpLogin ?? false
+export const getLoginToken = state => getAuth(state)?.loginToken ?? ''
+export const getUserShouldReLogin = state => getAuth(state)?.userShouldReLogin ?? ''
+export const getIsSubAccsRestricted = state => _first(
+  _filter(getUsers(state), user => _isEqual(user?.email, getEmail(state))),
+)?.isRestrictedToBeAddedToSubAccount ?? false
+
 export const getAuthData = state => {
   const {
     apiKey,
@@ -89,5 +99,8 @@ export default {
   getUsersLoaded,
   getUsersLoading,
   getSubAccountsLoading,
+  getShowOtpLogin,
   selectAuth,
+  getLoginToken,
+  getUserShouldReLogin,
 }

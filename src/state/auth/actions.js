@@ -46,6 +46,13 @@ export function recoverPassword(payload) {
   }
 }
 
+export function recoverPasswordOtp(payload) {
+  return {
+    type: types.RECOVER_PASSWORD_OTP,
+    payload,
+  }
+}
+
 /**
  * Create an action to set users data.
  * @param {array} payload users data
@@ -53,6 +60,20 @@ export function recoverPassword(payload) {
 export function setUsers(payload) {
   return {
     type: types.SET_USERS,
+    payload,
+  }
+}
+
+export function setLoginToken(payload) {
+  return {
+    type: types.SET_LOGIN_TOKEN,
+    payload,
+  }
+}
+
+export function setUserShouldReLogin(payload) {
+  return {
+    type: types.SET_USER_SHOULD_RE_LOGIN,
     payload,
   }
 }
@@ -68,6 +89,13 @@ export function signIn(payload) {
   }
 }
 
+export function signInOtp(payload) {
+  return {
+    type: types.SIGN_IN_OTP,
+    payload,
+  }
+}
+
 /**
  * Create an action to sign up.
  * @param {Object} payload auth data
@@ -75,6 +103,27 @@ export function signIn(payload) {
 export function signUp(payload) {
   return {
     type: types.SIGN_UP,
+    payload,
+  }
+}
+
+export function signUpEmail(payload) {
+  return {
+    type: types.SIGN_UP_EMAIL,
+    payload,
+  }
+}
+
+export function signUpOtp(payload) {
+  return {
+    type: types.SIGN_UP_OTP,
+    payload,
+  }
+}
+
+export function showOtpLogin(payload) {
+  return {
+    type: types.SHOW_OTP_LOGIN,
     payload,
   }
 }
@@ -148,6 +197,12 @@ export function updateAuthStatus(result) {
   }
 }
 
+export function authExpired() {
+  return {
+    type: types.AUTH_EXPIRED,
+  }
+}
+
 export default {
   checkAuth,
   addUser,
@@ -155,6 +210,7 @@ export default {
   fetchUsers,
   logout,
   recoverPassword,
+  recoverPasswordOtp,
   setUsers,
   signIn,
   signUp,
@@ -164,4 +220,11 @@ export default {
   updateAuth,
   clearAuth,
   updateAuthStatus,
+  signUpEmail,
+  signUpOtp,
+  showOtpLogin,
+  setLoginToken,
+  authExpired,
+  setUserShouldReLogin,
+  signInOtp,
 }

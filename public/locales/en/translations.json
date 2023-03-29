@@ -24,6 +24,24 @@
   "auth": {
     "auth": "Auth",
     "title": "Login",
+    "addAccount": "Add Account",
+    "useApiKey": "Use API Key",
+    "loginEmail": {
+      "emailOrUserName": "Email or Username",
+      "bfxAccPassword": "Password",
+      "loginEmailError": "The email/username or password is incorrect",
+      "loginEmailNo2FA": "Please setup 2FA for your account or use the API key to login",
+      "loginTokenExpired": "The last login has expired, please sign in again"
+    },
+    "2FA":{
+      "title": "Two-Factor Authentication",
+      "auth": "Authenticate",
+      "cancel": "Cancel",
+      "sixDigits": "6 Digits",
+      "GAToken": "Google Authenticator 2FA token",
+      "invalidToken": "Invalid token, please try again",
+      "loginSessionExpired": "Your login session has expired, please try again"
+    },
     "simpleAccounts": "Simple Accounts",
     "multipleAccounts": "Multiple Accounts",
     "signUp": "Sign Up",
@@ -33,8 +51,8 @@
     "subAccount": "Sub Account",
     "enterAPIKey": "Enter API Key:",
     "enterAPISecret": "Enter API Secret:",
-    "enterPassword": "Enter Password:",
-    "repeatPassword": "Repeat Password:",
+    "enterPassword": "Enter Bitfinex Report App Password",
+    "repeatPassword": "Repeat Bitfinex Report App Password",
     "enterEmail": "Enter Email:",
     "checkAuth": "Check Auth",
     "note1": "Visit ",

@@ -9,15 +9,19 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+
 import Icon from 'icons'
-import PlatformLogo from 'ui/PlatformLogo'
 import config from 'config'
+import PlatformLogo from 'ui/PlatformLogo'
 
-import AuthTypeSelector from '../AuthTypeSelector'
-import InputKey from '../InputKey'
-import ErrorLabel from '../ErrorLabel'
 import { MODES } from '../Auth'
+import InputKey from '../InputKey'
+import LoginOtp from '../LoginOtp'
+import LoginEmail from '../LoginEmail'
+import ErrorLabel from '../ErrorLabel'
+import AuthTypeSelector from '../AuthTypeSelector'
 
+const { showFrameworkMode, hostedFrameworkMode } = config
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
 
 // handles framework sign up and online version login
@@ -32,6 +36,10 @@ class SignUp extends PureComponent {
     loading: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
+    signUpOtp: PropTypes.func.isRequired,
+    signUpEmail: PropTypes.func.isRequired,
+    showOtpLogin: PropTypes.func.isRequired,
+    isOtpLoginShown: PropTypes.bool.isRequired,
     switchMode: PropTypes.func.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
@@ -48,38 +56,51 @@ class SignUp extends PureComponent {
     this.state = {
       apiKey,
       apiSecret,
+      isPersisted,
       password: '',
+      useApiKey: !showFrameworkMode,
+      passwordError: '',
       passwordRepeat: '',
       isBeingValidated: false,
-      isPasswordProtected: config.hostedFrameworkMode,
-      isPersisted,
-      passwordError: '',
+      otp: '',
       passwordRepeatError: '',
+      userName: '',
+      userPassword: '',
+      isPasswordProtected: config.hostedFrameworkMode,
     }
   }
 
   onSignUp = () => {
-    const { signUp } = this.props
+    const { signUp, signUpEmail } = this.props
     const {
       apiKey,
       apiSecret,
       password,
       isPasswordProtected,
       isPersisted,
+      useApiKey,
+      userName,
+      userPassword,
     } = this.state
     this.setState({
       isBeingValidated: true,
     })
     const isValid = this.validateForm()
-
     if (isValid) {
-      signUp({
-        apiKey,
-        apiSecret,
-        password,
-        isNotProtected: !isPasswordProtected,
-        isPersisted,
-      })
+      if (useApiKey) {
+        signUp({
+          apiKey,
+          apiSecret,
+          password,
+          isNotProtected: !isPasswordProtected,
+          isPersisted,
+        })
+      } else {
+        signUpEmail({
+          login: userName,
+          password: userPassword,
+        })
+      }
     }
   }
 
@@ -92,7 +113,7 @@ class SignUp extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    if (!config.showFrameworkMode || !isPasswordProtected) {
+    if (!showFrameworkMode || !isPasswordProtected) {
       return true
     }
 
@@ -139,130 +160,192 @@ class SignUp extends PureComponent {
     })
   }
 
+  handle2FACancel = () => {
+    const { showOtpLogin } = this.props
+    this.setState({ otp: '' })
+    showOtpLogin(false)
+  }
+
+  handleOneTimePassword = () => {
+    const { signUpOtp } = this.props
+    const { otp, password, isPasswordProtected } = this.state
+    signUpOtp({
+      otp,
+      password,
+      isNotProtected: !isPasswordProtected,
+    })
+  }
+
   render() {
     const {
-      authType,
-      loading,
-      switchMode,
-      switchAuthType,
       t,
       users,
+      loading,
+      authType,
+      switchMode,
+      switchAuthType,
+      isOtpLoginShown,
     } = this.props
     const {
+      otp,
       apiKey,
-      apiSecret,
+      userName,
       password,
-      passwordRepeat,
-      isPasswordProtected,
+      useApiKey,
+      apiSecret,
       isPersisted,
+      userPassword,
       passwordError,
+      passwordRepeat,
       passwordRepeatError,
+      isPasswordProtected,
     } = this.state
 
-    const title = config.showFrameworkMode ? t('auth.signUp') : t('auth.title')
-    const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
-    const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
-    const isSignUpDisabled = !apiKey || !apiSecret
-      || (config.showFrameworkMode && isPasswordProtected
+    const frameworkTitle = isOtpLoginShown ? t('auth.2FA.title') : t('auth.addAccount')
+    const title = showFrameworkMode ? frameworkTitle : t('auth.title')
+    const icon = showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
+    const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
+    const isSignUpDisabled = (useApiKey && (!apiKey || !apiSecret))
+      || (!useApiKey && (!userName || !userPassword))
+      || (showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
-      'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
+      'bitfinex-auth-sign-up--framework': showFrameworkMode,
     })
+    const showAuthTypeSelector = showFrameworkMode && useApiKey
+    const showLoginEmail = showFrameworkMode && !useApiKey
 
     return (
       <Dialog
-        className={classes}
-        title={title}
         isOpen
+        usePortal
         icon={icon}
+        title={title}
+        className={classes}
         isCloseButtonShown={false}
-        usePortal={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          {config.showFrameworkMode && (
+          {showAuthTypeSelector && (
             <AuthTypeSelector
               authType={authType}
               switchAuthType={switchAuthType}
             />
           )}
           <PlatformLogo />
-          <Callout>
-            {t('auth.note1')}
-            <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
-              {config.KEY_URL.split('https://')[1]}
-            </a>
-            {t('auth.note2')}
-          </Callout>
-          <InputKey
-            label='auth.enterAPIKey'
-            name='apiKey'
-            value={apiKey}
-            onChange={this.handleInputChange}
-          />
-          <InputKey
-            label='auth.enterAPISecret'
-            name='apiSecret'
-            value={apiSecret}
-            onChange={this.handleInputChange}
-          />
-          {config.showFrameworkMode && isPasswordProtected && (
-            <>
-              <InputKey
-                label='auth.enterPassword'
-                name='password'
-                value={password}
-                onChange={this.handleInputChange}
+          {isOtpLoginShown
+            ? (
+              <LoginOtp
+                otp={otp}
+                handle2FACancel={this.handle2FACancel}
+                handleInputChange={this.handleInputChange}
+                handleOneTimePassword={this.handleOneTimePassword}
               />
-              <ErrorLabel text={passwordError} />
-              <InputKey
-                label='auth.repeatPassword'
-                name='passwordRepeat'
-                value={passwordRepeat}
-                onChange={this.handleInputChange}
-              />
-              <ErrorLabel text={passwordRepeatError} />
-            </>
-          )}
-          <div className='bitfinex-auth-checkboxes'>
-            <Checkbox
-              className='bitfinex-auth-remember-me'
-              name='isPersisted'
-              checked={isPersisted}
-              onChange={this.handleCheckboxChange}
-            >
-              {t('auth.rememberMe')}
-            </Checkbox>
-            {showPasswordProtection && (
-              <Checkbox
-                className='bitfinex-auth-remember-me'
-                name='isPasswordProtected'
-                checked={isPasswordProtected}
-                onChange={this.handleCheckboxChange}
-              >
-                {t('auth.passwordProtection')}
-              </Checkbox>
+            ) : (
+              <>
+                {showLoginEmail && (
+                  <LoginEmail
+                    userName={userName}
+                    userPassword={userPassword}
+                    onChange={this.handleInputChange}
+                  />
+                )}
+                {useApiKey && (
+                  <>
+                    <Callout>
+                      {t('auth.note1')}
+                      <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
+                        {config.KEY_URL.split('https://')[1]}
+                      </a>
+                      {t('auth.note2')}
+                    </Callout>
+                    <InputKey
+                      name='apiKey'
+                      value={apiKey}
+                      label='auth.enterAPIKey'
+                      onChange={this.handleInputChange}
+                    />
+                    <InputKey
+                      name='apiSecret'
+                      value={apiSecret}
+                      label='auth.enterAPISecret'
+                      onChange={this.handleInputChange}
+                    />
+                  </>
+                )}
+                {showFrameworkMode && isPasswordProtected && (
+                  <>
+                    <InputKey
+                      name='password'
+                      value={password}
+                      label='auth.enterPassword'
+                      onChange={this.handleInputChange}
+                    />
+                    <ErrorLabel text={passwordError} />
+                    <InputKey
+                      name='passwordRepeat'
+                      value={passwordRepeat}
+                      label='auth.repeatPassword'
+                      onChange={this.handleInputChange}
+                    />
+                    <ErrorLabel text={passwordRepeatError} />
+                  </>
+                )}
+                <div className='bitfinex-auth-checkboxes'>
+                  <div className='bitfinex-auth-checkboxes--group'>
+                    {showFrameworkMode && (
+                      <Checkbox
+                        name='useApiKey'
+                        checked={useApiKey}
+                        onChange={this.handleCheckboxChange}
+                        className='bitfinex-auth-remember-me'
+                      >
+                        {t('auth.useApiKey')}
+                      </Checkbox>
+                    )}
+                    <Checkbox
+                      name='isPersisted'
+                      checked={isPersisted}
+                      onChange={this.handleCheckboxChange}
+                      className='bitfinex-auth-remember-me'
+                    >
+                      {t('auth.rememberMe')}
+                    </Checkbox>
+                  </div>
+                  {showPasswordProtection && (
+                  <Checkbox
+                    name='isPasswordProtected'
+                    checked={isPasswordProtected}
+                    onChange={this.handleCheckboxChange}
+                    className='bitfinex-auth-remember-me'
+                  >
+                    {t('auth.passwordProtection')}
+                  </Checkbox>
+                  )}
+                </div>
+              </>
             )}
-          </div>
         </div>
-        <div className={Classes.DIALOG_FOOTER}>
-          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            {config.showFrameworkMode && users.length > 0 && (
+        {!isOtpLoginShown && (
+          <div className={Classes.DIALOG_FOOTER}>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              {showFrameworkMode && users.length > 0 && (
               <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
                 {t('auth.signIn')}
               </div>
-            )}
-            <Button
-              className='bitfinex-auth-check'
-              name='check'
-              intent={Intent.SUCCESS}
-              onClick={this.onSignUp}
-              disabled={isSignUpDisabled}
-              loading={loading}
-            >
-              {title}
-            </Button>
+              )}
+              <Button
+                name='check'
+                loading={loading}
+                intent={Intent.SUCCESS}
+                onClick={this.onSignUp}
+                disabled={isSignUpDisabled}
+                className='bitfinex-auth-check'
+              >
+                {title}
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </Dialog>
     )
   }
