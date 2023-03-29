@@ -1,5 +1,6 @@
 import { store } from 'state/store'
 
+import { getWsAddress } from 'state/base/selectors'
 import { getAuthData, selectAuth } from 'state/auth/selectors'
 import config from 'config'
 
@@ -10,6 +11,11 @@ const { REACT_APP_ENV } = process.env
 const getAuth = () => {
   const state = store.getState()
   return selectAuth(state)
+}
+
+const getWsAddressFromStore = () => {
+  const state = store.getState()
+  return getWsAddress(state)
 }
 
 // initial auth with /login requires email/password even if token already present
@@ -39,7 +45,8 @@ class WS {
       return
     }
 
-    const websocket = new WebSocket(config.WS_ADDRESS)
+    const wsAddress = getWsAddressFromStore()
+    const websocket = new WebSocket(wsAddress)
     this.websocket = websocket
 
     // allows async use from sagas
