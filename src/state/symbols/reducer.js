@@ -1,5 +1,3 @@
-import _map from 'lodash/map'
-
 import authTypes from 'state/auth/constants'
 import { formatPair, mapPair, mapSymbol } from 'state/symbols/utils'
 
@@ -69,8 +67,8 @@ export function symbolsReducer(state = initialState, action) {
       SymbolMap.setSymbols(symbolMapping)
       SymbolMap.setPairs(pairMapping)
 
-      const formattedPairs = _map(pairs, formatPair).sort()
       const formattedInactiveCurrencies = inactiveCurrencies.map(mapSymbol).sort()
+      const formattedPairs = pairs.map(formatPair).map(mapPair).sort()
       const formattedInactivePairs = inactiveSymbols.map(formatPair).map(mapPair).sort()
 
       return {
