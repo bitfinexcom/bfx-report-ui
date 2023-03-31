@@ -1,6 +1,7 @@
 .bitfinex-select {
   .bp3-button {
-    width: 180px;
+    min-width: 180px;
+    width: fit-content;
     height: 40px;
     padding-right: 8px;
     background-color: var(--multiBg);

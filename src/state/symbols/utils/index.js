@@ -8,7 +8,7 @@ export * from './mapping'
 // BTCUSD -> tBTCUSD
 // BTCF0:USDF0 -> tBTCF0:USDF0
 // USD -> fUSD
-const addPrefix = (symbol = '', isFunding = false) => (
+export const addPrefix = (symbol = '', isFunding = false) => (
   (isFunding || symbol.length < 6) ? `f${symbol}` : `t${symbol}`
 )
 
@@ -61,7 +61,7 @@ export const getSymbolsURL = (symbols) => {
 
 // BTC:USD -> BTCUSD
 // BTCF0:USTF0 -> BTCF0:USTF0
-const deformatPair = pair => ((pair.length === 7) ? pair.replace(':', '') : pair)
+export const deformatPair = pair => ((pair.length === 7) ? pair.replace(':', '') : pair)
 
 // BTCUSD -> tBTCUSD
 // ['BTCUSD'] -> 'tBTCUSD'
@@ -80,7 +80,9 @@ export const formatRawSymbols = (symbols, isFunding) => {
 }
 
 export default {
+  addPrefix,
   formatPair,
+  deformatPair,
   formatRawSymbols,
   getMappedSymbolsFromUrl,
   getSymbolsURL,

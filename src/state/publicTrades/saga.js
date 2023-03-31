@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
+import { formatRawSymbols, deformatPair } from 'state/symbols/utils'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
@@ -33,8 +33,9 @@ function getReqPublicTrades({
     end,
     filter,
     limit: getQueryLimit(TYPE),
-    symbol: formatRawSymbols(mapRequestPairs(targetPair, true)),
+    symbol: formatRawSymbols(deformatPair(targetPair)),
   }
+
   return makeFetchCall('getPublicTrades', params)
 }
 

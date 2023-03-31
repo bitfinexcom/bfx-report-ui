@@ -179,7 +179,7 @@ export const checkInit = (props, type) => {
       if (!dataReceived && !pageLoading) {
         const pair = (match.params && match.params.pair) || ''
         if (pair) {
-          setTargetPair(getMappedSymbolsFromUrl(pair)[0])
+          setTargetPair(pair)
         }
         fetchData()
       }
@@ -327,7 +327,7 @@ export function setPair(type, props, pair) {
 
   if (targetPair !== pair) {
     setTargetPair(pair)
-    history.push(generateUrl(type, window.location.search, demapPairs(pair)))
+    history.push(generateUrl(type, window.location.search, [pair]))
   }
 }
 
