@@ -1,5 +1,6 @@
 import authTypes from 'state/auth/constants'
 import { formatPair, mapPair, mapSymbol } from 'state/symbols/utils'
+import _replace from 'lodash/replace'
 
 import SymbolMap from './map'
 import types from './constants'
@@ -42,7 +43,7 @@ export function symbolsReducer(state = initialState, action) {
           if (symbol === 'USDt') {
             symbolMapping.UST = symbol
           } else {
-            symbolMapping[id] = symbol
+            symbolMapping[_replace(id, 'TEST', '')] = symbol
           }
 
           explorersDict[symbol] = explorer
