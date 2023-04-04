@@ -50,7 +50,7 @@ export const getSections = (menuType, isTurkishSite) => {
       return [
         [MENU_ACCOUNT_SUMMARY, 'navItems.myAccount.summary'],
         [MENU_ACCOUNT_BALANCE, 'navItems.myAccount.balance', !showFrameworkMode],
-        [MENU_WEIGHTED_AVERAGES, 'navItems.myAccount.analysisStat', !showFrameworkMode, ANALYSIS_STAT_TARGETS],
+        [MENU_WEIGHTED_AVERAGES, 'navItems.myAccount.analysisStat', false, ANALYSIS_STAT_TARGETS],
         [MENU_SNAPSHOTS, 'snapshots.title', !showFrameworkMode],
         [MENU_TAX_REPORT, 'taxreport.title', !showFrameworkMode],
       ]
