@@ -108,6 +108,7 @@ const BASE_REDUCERS = {
   symbols: symbolsReducer,
   ui: uiReducer,
   wallets: walletsReducer,
+  weightedAverages: weightedAveragesReducer,
 }
 
 const FRAMEWORK_REDUCERS = {
@@ -119,7 +120,6 @@ const FRAMEWORK_REDUCERS = {
   snapshots: snapshotsReducer,
   sync: syncReducer,
   taxReport: taxReportReducer,
-  weightedAverages: weightedAveragesReducer,
 }
 
 const REDUCERS = {
