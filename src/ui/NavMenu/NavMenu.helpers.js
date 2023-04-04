@@ -44,13 +44,19 @@ export const getMenuItemChevron = (isActive) => (
     : <Icons.CHEVRON_DOWN />
 )
 
+const getSubSectionsTitle = (isFrameworkMode) => (
+  isFrameworkMode
+    ? 'navItems.myAccount.analysisStat'
+    : 'weightedaverages.title'
+)
+
 export const getSections = (menuType, isTurkishSite) => {
   switch (menuType) {
     case MENU_MY_ACCOUNT:
       return [
         [MENU_ACCOUNT_SUMMARY, 'navItems.myAccount.summary'],
         [MENU_ACCOUNT_BALANCE, 'navItems.myAccount.balance', !showFrameworkMode],
-        [MENU_WEIGHTED_AVERAGES, 'navItems.myAccount.analysisStat', false, ANALYSIS_STAT_TARGETS],
+        [MENU_WEIGHTED_AVERAGES, getSubSectionsTitle(showFrameworkMode), false, ANALYSIS_STAT_TARGETS],
         [MENU_SNAPSHOTS, 'snapshots.title', !showFrameworkMode],
         [MENU_TAX_REPORT, 'taxreport.title', !showFrameworkMode],
       ]
