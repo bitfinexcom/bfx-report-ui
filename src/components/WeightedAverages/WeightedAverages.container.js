@@ -21,12 +21,14 @@ import {
   getExistingPairs,
 } from 'state/weightedAverages/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
 import WeightedAverages from './WeightedAverages'
 
 const mapStateToProps = state => ({
+  ...getTimeFrame(state),
   pairs: getPairs(state),
   entries: getEntries(state),
   nextPage: getNextPage(state),
