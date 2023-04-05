@@ -27,6 +27,7 @@ import {
 } from 'state/utils'
 import queryConstants from 'state/query/constants'
 
+import LimitNote from './WeightedAverages.note'
 import { getColumns } from './WeightedAverages.columns'
 
 const { showFrameworkMode } = config
@@ -55,6 +56,7 @@ class WeightedAverages extends PureComponent {
       PropTypes.number,
       PropTypes.bool,
     ]),
+    end: PropTypes.number.isRequired,
     pairs: PropTypes.arrayOf(PropTypes.string),
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
@@ -88,6 +90,7 @@ class WeightedAverages extends PureComponent {
   render() {
     const {
       t,
+      end,
       pairs,
       columns,
       entries,
@@ -137,6 +140,7 @@ class WeightedAverages extends PureComponent {
             <SectionSwitch target={TYPE} />
           )}
           <TimeRange className='section-header-time-range' />
+          <LimitNote start={nextPage} end={end} />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
