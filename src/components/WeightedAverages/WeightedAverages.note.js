@@ -1,37 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+// import { useTranslation } from 'react-i18next'
 
+import { formatDate } from 'state/utils'
+import { getTimezone } from 'state/base/selectors'
 
-import Icon from 'icons'
-import Tooltip from 'ui/Tooltip'
-// import { getTimezone } from 'state/base/selectors'
-
-// import { formatDate } from 'state/utils'
 
 const REPORTS_LINK = 'https://reporting.bitfinex.com/'
 
-const LimitNote = ({ t }) => (
-  <Tooltip
-    usePortal
-    targetClassName='affiliates_link'
-    content={t('affiliatesearnings.dashboard_link')}
-  >
-    <a
-      target='_blank'
-      rel='noreferrer'
-      href={REPORTS_LINK}
-    >
-      <Icon.AFFILIATES />
-    </a>
-  </Tooltip>
-)
-
-LimitNote.propTypes = {
-  t: PropTypes.func.isRequired,
+const LimitNote = ({ start, end }) => {
+  // const { t } = useTranslation()
+  const timezone = useSelector(getTimezone)
+  return (
+    <div className='limit-note'>
+      <p className='limit-note--header'>
+        {`${formatDate(start, timezone)} - ${formatDate(end, timezone)} *`}
+      </p>
+      <a
+        target='_blank'
+        rel='noreferrer'
+        href={REPORTS_LINK}
+      >
+        link
+      </a>
+    </div>
+  )
 }
 
-export default withTranslation('translations')(LimitNote)
+LimitNote.propTypes = {
+  start: PropTypes.number.isRequired,
+  end: PropTypes.number.isRequired,
+}
+
+export default LimitNote
 
 
 // <Callout>
