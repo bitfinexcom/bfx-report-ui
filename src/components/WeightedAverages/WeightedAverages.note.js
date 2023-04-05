@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 import { formatDate } from 'state/utils'
 import { getTimezone } from 'state/base/selectors'
@@ -10,11 +10,12 @@ import { getTimezone } from 'state/base/selectors'
 const REPORTS_LINK = 'https://reporting.bitfinex.com/'
 
 const LimitNote = ({ start, end }) => {
-  // const { t } = useTranslation()
+  const { t } = useTranslation()
   const timezone = useSelector(getTimezone)
   return (
     <div className='limit-note'>
       <p className='limit-note--header'>
+        {t('weightedaverages.limitNote.displayDate')}
         {`${formatDate(start, timezone)} - ${formatDate(end, timezone)} *`}
       </p>
       <a
