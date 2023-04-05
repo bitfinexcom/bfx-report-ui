@@ -671,7 +671,10 @@
     }
   },
   "weightedaverages": {
-    "title": "Weighted Averages"
+    "title": "Weighted Averages",
+    "limitNote":{
+      "displayDate": "Display date: "
+    }
   },
   "withdrawals": {
     "title": "Withdrawals"
