@@ -140,7 +140,9 @@ class WeightedAverages extends PureComponent {
             <SectionSwitch target={TYPE} />
           )}
           <TimeRange className='section-header-time-range' />
-          <LimitNote start={nextPage} end={end} />
+          {nextPage && (
+            <LimitNote start={nextPage} end={end} />
+          )}
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
