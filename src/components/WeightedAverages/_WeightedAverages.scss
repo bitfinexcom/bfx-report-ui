@@ -1,8 +1,11 @@
 .weighted-averages {
   .limit-note {
-
     &--header {
       color: var(--validationErrorColor)
+    }
+
+    &--body {
+      color: var(--color2)
     }
   }
 }
