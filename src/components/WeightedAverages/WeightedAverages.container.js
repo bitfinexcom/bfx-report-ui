@@ -14,6 +14,7 @@ import {
 import { getInactivePairs, getPairs } from 'state/symbols/selectors'
 import {
   getEntries,
+  getNextPage,
   getPageLoading,
   getTargetPairs,
   getDataReceived,
@@ -28,6 +29,7 @@ import WeightedAverages from './WeightedAverages'
 const mapStateToProps = state => ({
   pairs: getPairs(state),
   entries: getEntries(state),
+  nextPage: getNextPage(state),
   pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
   dataReceived: getDataReceived(state),
