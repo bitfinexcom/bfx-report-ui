@@ -51,6 +51,10 @@ class WeightedAverages extends PureComponent {
     entries: PropTypes.arrayOf(PropTypes.object),
     existingPairs: PropTypes.arrayOf(PropTypes.string),
     inactivePairs: PropTypes.arrayOf(PropTypes.string),
+    nextPage: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.bool,
+    ]),
     pairs: PropTypes.arrayOf(PropTypes.string),
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
@@ -66,6 +70,7 @@ class WeightedAverages extends PureComponent {
     inactivePairs: [],
     pairs: [],
     targetPairs: [],
+    nextPage: false,
   }
 
   componentDidMount() {
@@ -87,6 +92,7 @@ class WeightedAverages extends PureComponent {
       columns,
       entries,
       refresh,
+      nextPage,
       targetPairs,
       pageLoading,
       columnsWidth,
