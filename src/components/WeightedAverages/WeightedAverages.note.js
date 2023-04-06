@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import { formatDate } from 'state/utils'
 import { getTimezone } from 'state/base/selectors'
-
 
 const REPORTS_LINK = 'https://reporting.bitfinex.com/'
 
@@ -40,13 +39,4 @@ LimitNote.propTypes = {
   end: PropTypes.number.isRequired,
 }
 
-export default LimitNote
-
-
-// <Callout>
-// {t('auth.note1')}
-// <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
-//   {config.KEY_URL.split('https://')[1]}
-// </a>
-// {t('auth.note2')}
-// </Callout>
+export default memo(LimitNote)
