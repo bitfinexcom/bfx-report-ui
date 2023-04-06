@@ -18,13 +18,19 @@ const LimitNote = ({ start, end }) => {
         {t('weightedaverages.limitNote.displayDate')}
         {`${formatDate(start, timezone)} - ${formatDate(end, timezone)} *`}
       </p>
-      <a
-        target='_blank'
-        rel='noreferrer'
-        href={REPORTS_LINK}
-      >
-        link
-      </a>
+      <div className='limit-note--body'>
+        {t('weightedaverages.limitNote.note1')}
+        <br />
+        {t('weightedaverages.limitNote.note2')}
+        <a
+          target='_blank'
+          href={REPORTS_LINK}
+          rel='noopener noreferrer'
+        >
+          {t('weightedaverages.limitNote.link')}
+        </a>
+        {t('weightedaverages.limitNote.note3')}
+      </div>
     </div>
   )
 }
