@@ -675,9 +675,9 @@
     "limitNote":{
       "displayDate": "Display date: ",
       "note1": "Note that the selected dates are not the same as the display dates. This is because the web version is limited to displaying 2,000 transactions at a time.",
-      "note2": "In case a bigger period of time is intended, can try by just selecting one symbol or by downloading",
-      "link": " our software ",
-      "note3": "that does not have this limit."
+      "note2": "In case a bigger period of time is intended, can try by just selecting one symbol or by downloading ",
+      "link": "our software",
+      "note3": " that does not have this limit."
     }
   },
   "withdrawals": {
