@@ -9,6 +9,7 @@ const initialState = {
   timezone: types.DEFAULT_TIMEZONE,
   milliseconds: false,
   src: types.DEFAULT_SRC,
+  customApiPort: null,
   tableScroll: getDefaultTableScrollSetting(),
 }
 
@@ -39,6 +40,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         src: payload,
+      }
+    case types.SET_CUSTOM_API_PORT:
+      return {
+        ...state,
+        customApiPort: payload,
       }
     case types.SHOW_MILLISECONDS:
       return {

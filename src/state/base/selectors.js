@@ -1,9 +1,13 @@
 import memoizeOne from 'memoize-one'
+import _isNull from 'lodash/isNull'
 import _isEqual from 'lodash/isEqual'
 
+import config from 'config'
 import { formatTime, timeOffset } from 'state/utils'
 
 import types from './constants'
+
+const { showFrameworkMode, API_URL, WS_ADDRESS } = config
 
 export const getBase = state => state.base
 
@@ -15,6 +19,7 @@ export const getShowMilliseconds = state => getBase(state).milliseconds || false
 export const getTableScroll = state => getBase(state).tableScroll || false
 export const getSrc = state => getBase(state)?.src ?? types.DEFAULT_SRC
 export const getIsTurkishSite = state => _isEqual(getSrc(state), types.TR_SRC)
+export const getCustomApiPort = state => getBase(state)?.customApiPort ?? null
 
 export const getTimeOffset = state => timeOffset(getTimezone(state))
 
@@ -42,8 +47,28 @@ export const getFullTime = (state) => {
   return getFormattedTimeMemo(timezone, dateFormat, milliseconds)
 }
 
+export const getApiUrl = (state) => {
+  const apiPort = getCustomApiPort(state)
+  if (showFrameworkMode && !_isNull(apiPort)) {
+    return `http://localhost:${apiPort}/api`
+  }
+
+  return API_URL
+}
+
+export const getWsAddress = (state) => {
+  const apiPort = getCustomApiPort(state)
+  if (showFrameworkMode && !_isNull(apiPort)) {
+    return `ws://127.0.0.1:${apiPort}/ws`
+  }
+
+  return WS_ADDRESS
+}
+
 export default {
+  getApiUrl,
   getBase,
+  getCustomApiPort,
   getDateFormat,
   getFullTime,
   getIsTurkishSite,
@@ -53,4 +78,5 @@ export default {
   getTheme,
   getTimeOffset,
   getTimezone,
+  getWsAddress,
 }

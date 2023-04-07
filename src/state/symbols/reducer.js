@@ -1,7 +1,6 @@
-import _map from 'lodash/map'
-
 import authTypes from 'state/auth/constants'
 import { formatPair, mapPair, mapSymbol } from 'state/symbols/utils'
+import _replace from 'lodash/replace'
 
 import SymbolMap from './map'
 import types from './constants'
@@ -44,7 +43,7 @@ export function symbolsReducer(state = initialState, action) {
           if (symbol === 'USDt') {
             symbolMapping.UST = symbol
           } else {
-            symbolMapping[id] = symbol
+            symbolMapping[_replace(id, 'TEST', '')] = symbol
           }
 
           explorersDict[symbol] = explorer
@@ -69,8 +68,8 @@ export function symbolsReducer(state = initialState, action) {
       SymbolMap.setSymbols(symbolMapping)
       SymbolMap.setPairs(pairMapping)
 
-      const formattedPairs = _map(pairs, formatPair).sort()
       const formattedInactiveCurrencies = inactiveCurrencies.map(mapSymbol).sort()
+      const formattedPairs = pairs.map(formatPair).map(mapPair).sort()
       const formattedInactivePairs = inactiveSymbols.map(formatPair).map(mapPair).sort()
 
       return {
