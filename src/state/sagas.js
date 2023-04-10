@@ -47,6 +47,8 @@ import winLossSaga from './winLoss/saga'
 import wsSaga from './ws/saga'
 import weightedAveragesSaga from './weightedAverages/saga'
 
+const { showFrameworkMode } = config
+
 export default function* rootSaga() {
   yield fork(authSaga)
   yield fork(accountSummarySaga)
@@ -81,9 +83,9 @@ export default function* rootSaga() {
   yield fork(tradesSaga)
   yield fork(uiSaga)
   yield fork(walletsSaga)
-  if (config.showFrameworkMode) {
+  yield fork(weightedAveragesSaga)
+  if (showFrameworkMode) {
     yield fork(accountBalanceSaga)
-    yield fork(weightedAveragesSaga)
     yield fork(feesReportSaga)
     yield fork(loanReportSaga)
     yield fork(snapshotsSaga)

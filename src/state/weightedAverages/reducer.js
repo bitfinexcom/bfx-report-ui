@@ -37,10 +37,12 @@ export function weightedAveragesReducer(state = initialState, action) {
           ...state,
           dataReceived: true,
           pageLoading: false,
+          nextPage: false,
         }
       }
       const { data } = payload
-      const entries = _map(data, (entry) => {
+      const { res, nextPage } = data
+      const entries = _map(res, (entry) => {
         const {
           symbol,
           buyingWeightedPrice,
@@ -66,6 +68,7 @@ export function weightedAveragesReducer(state = initialState, action) {
         ...state,
         dataReceived: true,
         pageLoading: false,
+        nextPage,
         entries: _sortBy(entries, (o) => o.pair),
       }
     }

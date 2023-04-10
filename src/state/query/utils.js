@@ -5,6 +5,8 @@ import config from 'config'
 
 import queryType from './constants'
 
+const { showFrameworkMode } = config
+
 const {
   FILTER_ID,
   FILTER_PAIR,
@@ -169,12 +171,12 @@ const PUBLIC_TARGETS = [
   MENU_PUBLIC_FUNDING,
   MENU_TICKERS,
   MENU_DERIVATIVES,
+  MENU_WEIGHTED_AVERAGES,
 ]
 
-const FRAMEWORK = config.showFrameworkMode
+const FRAMEWORK = showFrameworkMode
   ? [
     MENU_ACCOUNT_BALANCE,
-    MENU_WEIGHTED_AVERAGES,
     MENU_LOAN_REPORT,
     MENU_TRADED_VOLUME,
     MENU_FEES_REPORT,

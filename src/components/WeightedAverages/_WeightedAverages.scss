@@ -1,0 +1,13 @@
+.weighted-averages {
+  .limit-note {
+    margin-bottom: 25px;
+    
+    &--header {
+      color: var(--validationErrorColor)
+    }
+
+    &--body {
+      color: var(--color2)
+    }
+  }
+}
