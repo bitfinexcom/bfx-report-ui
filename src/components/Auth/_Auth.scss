@@ -4,6 +4,8 @@
 @import './RegisterSubAccounts/RegisterSubAccounts';
 
 .bitfinex-auth {
+  min-width: 500px;
+  min-height: 534px;
   .bp3-dialog {
     &-body {
       margin-top: 10px;
