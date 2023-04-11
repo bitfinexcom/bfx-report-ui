@@ -103,6 +103,15 @@
     &.bp3-checkbox {
       line-height: 30px;
       margin-left: 0;
+
+      .bp3-control-indicator {
+        box-shadow: none;
+        background-color: var(--multiBg);
+
+        &:hover {
+          background-color: var(--multiBg);
+        }
+      }
     }
 
     &--sub-accounts {
