@@ -300,14 +300,14 @@ class SignUp extends PureComponent {
                     )}
                   </div>
                   {showPasswordProtection && (
-                  <Checkbox
-                    name='isPasswordProtected'
-                    checked={isPasswordProtected}
-                    onChange={this.handleCheckboxChange}
-                    className='bitfinex-auth-remember-me'
-                  >
-                    {t('auth.passwordProtection')}
-                  </Checkbox>
+                    <Checkbox
+                      name='isPasswordProtected'
+                      checked={isPasswordProtected}
+                      onChange={this.handleCheckboxChange}
+                      className='bitfinex-auth-remember-me'
+                    >
+                      {t('auth.passwordProtection')}
+                    </Checkbox>
                   )}
                 </div>
               </>
