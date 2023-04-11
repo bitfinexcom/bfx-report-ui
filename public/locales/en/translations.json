@@ -57,7 +57,7 @@
     "checkAuth": "Check Auth",
     "note1": "Visit ",
     "note2": " to get the readonly API key and secret pair.",
-    "passwordProtection": "Enable password protection",
+    "passwordProtection": "Require Password on Login",
     "passwordLengthValidationError": "The password must be at least 8 characters long",
     "passwordCharactersValidationError": "The password must include both uppercase and lowercase characters",
     "passwordRepeatValidationError": "The password does not match",
