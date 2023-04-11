@@ -10,7 +10,6 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import Icon from 'icons'
 import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 
@@ -202,7 +201,6 @@ class SignUp extends PureComponent {
 
     const frameworkTitle = isOtpLoginShown ? t('auth.2FA.title') : t('auth.addAccount')
     const title = showFrameworkMode ? frameworkTitle : t('auth.title')
-    const icon = showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
     const isSignUpDisabled = (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
@@ -218,7 +216,6 @@ class SignUp extends PureComponent {
       <Dialog
         isOpen
         usePortal
-        icon={icon}
         title={title}
         className={classes}
         isCloseButtonShown={false}
