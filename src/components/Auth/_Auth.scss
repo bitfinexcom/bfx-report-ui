@@ -8,11 +8,10 @@
   min-height: 534px;
   .bp3-dialog {
     &-body {
-      margin-top: 10px;
-      font-size: 15px;
-      flex-direction: column;
       display: flex;
-      margin-bottom: 5px;
+      flex-direction: column;
+      font-size: 15px;
+      margin: 30px 60px 5px 60px;
 
       > .platform-logo {
         position: relative;
