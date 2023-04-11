@@ -193,7 +193,6 @@ class SignUp extends PureComponent {
       password,
       useApiKey,
       apiSecret,
-      isPersisted,
       userPassword,
       passwordError,
       passwordRepeat,
@@ -302,14 +301,6 @@ class SignUp extends PureComponent {
                         {t('auth.useApiKey')}
                       </Checkbox>
                     )}
-                    <Checkbox
-                      name='isPersisted'
-                      checked={isPersisted}
-                      onChange={this.handleCheckboxChange}
-                      className='bitfinex-auth-remember-me'
-                    >
-                      {t('auth.rememberMe')}
-                    </Checkbox>
                   </div>
                   {showPasswordProtection && (
                   <Checkbox
