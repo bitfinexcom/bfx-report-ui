@@ -211,6 +211,7 @@ class SignUp extends PureComponent {
     })
     const showAuthTypeSelector = showFrameworkMode && useApiKey
     const showLoginEmail = showFrameworkMode && !useApiKey
+    const showLoginPassword = showFrameworkMode && isPasswordProtected
 
     return (
       <Dialog
@@ -252,7 +253,7 @@ class SignUp extends PureComponent {
                     onChange={this.handleInputChange}
                   />
                 )}
-                {showFrameworkMode && isPasswordProtected && (
+                {showLoginPassword && (
                   <>
                     <InputKey
                       name='password'
