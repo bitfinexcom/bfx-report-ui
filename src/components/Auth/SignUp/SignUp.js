@@ -17,6 +17,7 @@ import { MODES } from '../Auth'
 import InputKey from '../InputKey'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
+import LoginApiKey from '../LoginApiKey'
 import ErrorLabel from '../ErrorLabel'
 import AuthTypeSelector from '../AuthTypeSelector'
 
@@ -246,27 +247,11 @@ class SignUp extends PureComponent {
                   />
                 )}
                 {useApiKey && (
-                  <>
-                    <Callout>
-                      {t('auth.note1')}
-                      <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
-                        {config.KEY_URL.split('https://')[1]}
-                      </a>
-                      {t('auth.note2')}
-                    </Callout>
-                    <InputKey
-                      name='apiKey'
-                      value={apiKey}
-                      label='auth.enterAPIKey'
-                      onChange={this.handleInputChange}
-                    />
-                    <InputKey
-                      name='apiSecret'
-                      value={apiSecret}
-                      label='auth.enterAPISecret'
-                      onChange={this.handleInputChange}
-                    />
-                  </>
+                  <LoginApiKey
+                    apiKey={apiKey}
+                    apiSecret={apiSecret}
+                    handleInputChange={this.handleInputChange}
+                  />
                 )}
                 {showFrameworkMode && isPasswordProtected && (
                   <>
