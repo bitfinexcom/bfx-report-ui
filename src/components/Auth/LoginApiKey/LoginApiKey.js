@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { Callout } from '@blueprintjs/core'
+import _split from 'lodash/split'
 
 import config from 'config'
 import InputKey from '../InputKey'
@@ -23,7 +24,7 @@ export const LoginApiKey = ({
           target='_blank'
           rel='noopener noreferrer'
         >
-          {KEY_URL.split('https://')[1]}
+          {_split(KEY_URL, 'https://')[1]}
         </a>
         {t('auth.note2')}
       </Callout>
