@@ -13,12 +13,10 @@ import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
-import InputKey from '../InputKey'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import LoginApiKey from '../LoginApiKey'
 import LoginPassword from '../LoginPassword'
-import ErrorLabel from '../ErrorLabel'
 import AuthTypeSelector from '../AuthTypeSelector'
 
 const { showFrameworkMode, hostedFrameworkMode } = config
