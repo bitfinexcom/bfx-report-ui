@@ -17,6 +17,7 @@ import InputKey from '../InputKey'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import LoginApiKey from '../LoginApiKey'
+import LoginPassword from '../LoginPassword'
 import ErrorLabel from '../ErrorLabel'
 import AuthTypeSelector from '../AuthTypeSelector'
 
@@ -254,22 +255,13 @@ class SignUp extends PureComponent {
                   />
                 )}
                 {showLoginPassword && (
-                  <>
-                    <InputKey
-                      name='password'
-                      value={password}
-                      label='auth.enterPassword'
-                      onChange={this.handleInputChange}
-                    />
-                    <ErrorLabel text={passwordError} />
-                    <InputKey
-                      name='passwordRepeat'
-                      value={passwordRepeat}
-                      label='auth.repeatPassword'
-                      onChange={this.handleInputChange}
-                    />
-                    <ErrorLabel text={passwordRepeatError} />
-                  </>
+                  <LoginPassword
+                    password={password}
+                    passwordError={passwordError}
+                    passwordRepeat={passwordRepeat}
+                    onChange={this.handleInputChange}
+                    passwordRepeatError={passwordRepeatError}
+                  />
                 )}
                 <div className='bitfinex-auth-checkboxes'>
                   <div className='bitfinex-auth-checkboxes--group'>
