@@ -44,6 +44,8 @@
     },
     "apiKey": "API Key",
     "apiSecret": "API Secret",
+    "accWithApiKey": "Add account with API key",
+    "accWithoutApiKey": "Add account without API key",
     "simpleAccounts": "Simple Accounts",
     "multipleAccounts": "Multiple Accounts",
     "signUp": "Sign Up",
