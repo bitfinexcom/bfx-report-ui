@@ -30,13 +30,13 @@ export const LoginApiKey = ({
       <InputKey
         name='apiKey'
         value={apiKey}
-        label='auth.enterAPIKey'
+        label='auth.apiKey'
         onChange={onChange}
       />
       <InputKey
         name='apiSecret'
         value={apiSecret}
-        label='auth.enterAPISecret'
+        label='auth.apiSecret'
         onChange={onChange}
       />
     </>
