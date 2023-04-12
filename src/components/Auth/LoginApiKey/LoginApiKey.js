@@ -6,6 +6,8 @@ import { Callout } from '@blueprintjs/core'
 import config from 'config'
 import InputKey from '../InputKey'
 
+const { KEY_URL } = config
+
 export const LoginApiKey = ({
   apiKey,
   onChange,
@@ -16,8 +18,12 @@ export const LoginApiKey = ({
     <>
       <Callout>
         {t('auth.note1')}
-        <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
-          {config.KEY_URL.split('https://')[1]}
+        <a
+          href={KEY_URL}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {KEY_URL.split('https://')[1]}
         </a>
         {t('auth.note2')}
       </Callout>
