@@ -1,12 +1,8 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { useTranslation } from 'react-i18next'
-import _split from 'lodash/split'
 
-import config from 'config'
 import InputKey from '../InputKey'
-
-const { KEY_URL } = config
+import ErrorLabel from '../ErrorLabel'
 
 export const LoginPassword = ({
   onChange,
@@ -19,15 +15,15 @@ export const LoginPassword = ({
     <InputKey
       name='password'
       value={password}
-      label='auth.enterPassword'
       onChange={onChange}
+      label='auth.enterPassword'
     />
     <ErrorLabel text={passwordError} />
     <InputKey
+      onChange={onChange}
       name='passwordRepeat'
       value={passwordRepeat}
       label='auth.repeatPassword'
-      onChange={this.handleInputChange}
     />
     <ErrorLabel text={passwordRepeatError} />
   </>
@@ -35,8 +31,10 @@ export const LoginPassword = ({
 
 LoginPassword.propTypes = {
   onChange: PropTypes.func.isRequired,
-  apiKey: PropTypes.string.isRequired,
-  apiSecret: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  passwordError: PropTypes.string.isRequired,
+  passwordRepeat: PropTypes.string.isRequired,
+  passwordRepeatError: PropTypes.string.isRequired,
 }
 
 export default memo(LoginPassword)
