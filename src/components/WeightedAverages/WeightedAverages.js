@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _size from 'lodash/size'
 
+import config from 'config'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
@@ -26,8 +27,10 @@ import {
 } from 'state/utils'
 import queryConstants from 'state/query/constants'
 
+import LimitNote from './WeightedAverages.note'
 import { getColumns } from './WeightedAverages.columns'
 
+const { showFrameworkMode } = config
 const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
 
 class WeightedAverages extends PureComponent {
@@ -49,6 +52,11 @@ class WeightedAverages extends PureComponent {
     entries: PropTypes.arrayOf(PropTypes.object),
     existingPairs: PropTypes.arrayOf(PropTypes.string),
     inactivePairs: PropTypes.arrayOf(PropTypes.string),
+    nextPage: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.bool,
+    ]),
+    end: PropTypes.number.isRequired,
     pairs: PropTypes.arrayOf(PropTypes.string),
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
@@ -64,6 +72,7 @@ class WeightedAverages extends PureComponent {
     inactivePairs: [],
     pairs: [],
     targetPairs: [],
+    nextPage: false,
   }
 
   componentDidMount() {
@@ -81,10 +90,12 @@ class WeightedAverages extends PureComponent {
   render() {
     const {
       t,
+      end,
       pairs,
       columns,
       entries,
       refresh,
+      nextPage,
       targetPairs,
       pageLoading,
       columnsWidth,
@@ -119,14 +130,19 @@ class WeightedAverages extends PureComponent {
     return (
       <Card
         elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+        className='weighted-averages col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader>
           <SectionHeaderTitle>
             {t('weightedaverages.title')}
           </SectionHeaderTitle>
-          <SectionSwitch target={TYPE} />
+          {showFrameworkMode && (
+            <SectionSwitch target={TYPE} />
+          )}
           <TimeRange className='section-header-time-range' />
+          {nextPage && (
+            <LimitNote start={nextPage} end={end} />
+          )}
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>

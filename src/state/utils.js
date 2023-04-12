@@ -14,6 +14,7 @@ import queryType from 'state/query/constants'
 import {
   getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol, getMappedSymbolsFromUrl,
 } from 'state/symbols/utils'
+import { getApiUrl } from 'state/base/selectors'
 import { selectAuth } from 'state/auth/selectors'
 
 const {
@@ -51,6 +52,11 @@ export const getAuthFromStore = () => {
   return selectAuth(state)
 }
 
+export const getApiUrlFromStore = () => {
+  const state = store.getState()
+  return getApiUrl(state)
+}
+
 // turned off for firefox
 export const getDefaultTableScrollSetting = () => config.isElectronApp || !navigator.userAgent.includes('Firefox')
 
@@ -70,14 +76,16 @@ export function postJsonFetch(url, bodyJson) {
 }
 
 export function makePublicFetchCall(method, params = undefined) {
-  return postJsonFetch(`${config.API_URL}/json-rpc`, {
+  const apiUrl = getApiUrlFromStore()
+  return postJsonFetch(`${apiUrl}/json-rpc`, {
     method,
     params: params || undefined,
   })
 }
 
 export function makeFetchCall(method, params = undefined, auth = getAuthFromStore()) {
-  return postJsonFetch(`${config.API_URL}/json-rpc`, {
+  const apiUrl = getApiUrlFromStore()
+  return postJsonFetch(`${apiUrl}/json-rpc`, {
     auth,
     method,
     params: params || undefined,

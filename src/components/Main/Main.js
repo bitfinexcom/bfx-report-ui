@@ -278,19 +278,19 @@ class Main extends PureComponent {
               path={getPath(MENU_WALLETS)}
               component={Wallets}
             />
-            {config.showFrameworkMode && (
+            <Route
+              exact
+              path={PATHS.MENU_WEIGHTED_AVERAGES}
+              component={WeightedAverages}
+              key={MENU_WEIGHTED_AVERAGES}
+            />
+            {showFrameworkMode && (
               [
                 <Route
                   exact
                   path={getPath(MENU_ACCOUNT_BALANCE)}
                   component={AccountBalance}
                   key={MENU_ACCOUNT_BALANCE}
-                />,
-                <Route
-                  exact
-                  path={PATHS.MENU_WEIGHTED_AVERAGES}
-                  component={WeightedAverages}
-                  key={MENU_WEIGHTED_AVERAGES}
                 />,
                 <Route
                   exact
@@ -362,7 +362,7 @@ class Main extends PureComponent {
         </div>
         <ExportDialog />
         <ExportSuccessDialog />
-        {config.showFrameworkMode && !errorDialogDisabled && <ErrorDialog />}
+        {showFrameworkMode && !errorDialogDisabled && <ErrorDialog />}
         <PaginationDialog />
         <Preferences />
         <TimeFrameDialog />
