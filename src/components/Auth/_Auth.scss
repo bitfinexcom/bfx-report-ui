@@ -40,7 +40,11 @@
     }
 
     &-footer {
-      margin : 0 15px;
+      margin : 0 60px;
+
+      &-actions {
+        justify-content: space-between;
+      }
     }
 
     .bitfinex-auth-check {
