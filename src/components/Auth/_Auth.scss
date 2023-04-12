@@ -43,7 +43,13 @@
       margin : 0 60px;
 
       &-actions {
+        margin-bottom: 40px;
         justify-content: space-between;
+
+        &:last-child{
+          justify-content: center;
+          border-top: 1px solid var(--borderColor);
+        }
       }
     }
 
