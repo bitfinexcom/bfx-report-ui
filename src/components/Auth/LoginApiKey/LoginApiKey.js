@@ -1,7 +1,6 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import { Callout } from '@blueprintjs/core'
 import _split from 'lodash/split'
 
 import config from 'config'
@@ -17,7 +16,7 @@ export const LoginApiKey = ({
   const { t } = useTranslation()
   return (
     <>
-      <Callout>
+      <div className='api-key-note'>
         {t('auth.note1')}
         <a
           href={KEY_URL}
@@ -27,7 +26,7 @@ export const LoginApiKey = ({
           {_split(KEY_URL, 'https://')[1]}
         </a>
         {t('auth.note2')}
-      </Callout>
+      </div>
       <InputKey
         name='apiKey'
         value={apiKey}
