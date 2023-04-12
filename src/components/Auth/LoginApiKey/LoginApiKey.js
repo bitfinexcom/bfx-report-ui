@@ -8,8 +8,8 @@ import InputKey from '../InputKey'
 
 export const LoginApiKey = ({
   apiKey,
+  onChange,
   apiSecret,
-  handleInputChange,
 }) => {
   const { t } = useTranslation()
   return (
@@ -25,22 +25,22 @@ export const LoginApiKey = ({
         name='apiKey'
         value={apiKey}
         label='auth.enterAPIKey'
-        onChange={handleInputChange}
+        onChange={onChange}
       />
       <InputKey
         name='apiSecret'
         value={apiSecret}
         label='auth.enterAPISecret'
-        onChange={handleInputChange}
+        onChange={onChange}
       />
     </>
   )
 }
 
 LoginApiKey.propTypes = {
+  onChange: PropTypes.func.isRequired,
   apiKey: PropTypes.string.isRequired,
   apiSecret: PropTypes.string.isRequired,
-  handleInputChange: PropTypes.func.isRequired,
 }
 
 export default memo(LoginApiKey)

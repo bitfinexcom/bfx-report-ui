@@ -250,7 +250,7 @@ class SignUp extends PureComponent {
                   <LoginApiKey
                     apiKey={apiKey}
                     apiSecret={apiSecret}
-                    handleInputChange={this.handleInputChange}
+                    onChange={this.handleInputChange}
                   />
                 )}
                 {showFrameworkMode && isPasswordProtected && (
