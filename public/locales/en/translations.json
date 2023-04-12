@@ -42,6 +42,8 @@
       "invalidToken": "Invalid token, please try again",
       "loginSessionExpired": "Your login session has expired, please try again"
     },
+    "api_key": "API Key",
+    "api_secret": "API Secret",
     "simpleAccounts": "Simple Accounts",
     "multipleAccounts": "Multiple Accounts",
     "signUp": "Sign Up",
