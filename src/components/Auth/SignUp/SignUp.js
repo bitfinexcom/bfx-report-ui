@@ -284,19 +284,9 @@ class SignUp extends PureComponent {
         {!isOtpLoginShown && (
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              {showFrameworkMode && (
-              <Checkbox
-                name='useApiKey'
-                checked={useApiKey}
-                onChange={this.handleCheckboxChange}
-                className='bitfinex-auth-remember-me'
-              >
-                {t('auth.useApiKey')}
-              </Checkbox>
-              )}
               {showFrameworkMode && users.length > 0 && (
               <div className='bitfinex-auth-mode-switch' onClick={() => this.toggleUseApiKey()}>
-                {t('auth.signIn')}
+                {t('auth.accWithApiKey')}
               </div>
               )}
               <Button
