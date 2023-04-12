@@ -5,7 +5,7 @@
 
 .bitfinex-auth {
   min-width: 500px;
-  min-height: 534px;
+  // min-height: 534px;
   .bp3-dialog {
     &-body {
       display: flex;
@@ -18,6 +18,10 @@
         width: 165px;
         height: 20px;
         margin: 15px auto 35px auto;
+      }
+
+      > .api-key-note {
+        margin-bottom: 40px;
       }
 
       > .buttons-row {
