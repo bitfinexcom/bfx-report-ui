@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Button,
-  Callout,
   Checkbox,
   Classes,
   Dialog,
