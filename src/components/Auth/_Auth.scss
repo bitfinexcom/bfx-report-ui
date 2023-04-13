@@ -5,7 +5,6 @@
 
 .bitfinex-auth {
   min-width: 500px;
-  // min-height: 534px;
   .bp3-dialog {
     &-body {
       display: flex;
@@ -155,8 +154,16 @@
     line-height: 30px;
     cursor: pointer;
     align-items: center;
-    color: var(--color2)
-  }
+    color: var(--color2);
+
+    svg {
+      margin-right: 7px;
+      
+      .icon-sign-in {
+        fill: var(--color2);
+      }
+    }
+  } 
 
   .api-key-switch {
     color: var(--activeColor);
