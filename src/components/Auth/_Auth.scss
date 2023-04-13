@@ -46,11 +46,16 @@
         margin-bottom: 40px;
         justify-content: space-between;
 
+        &:last-child {
+          margin-bottom: 0;
+        }
+
         .auth-mode-switch-wrapper {
           width: 100%;
           display: flex;
           justify-content: center;
           border-top: 1px solid var(--borderColor);
+          padding-top: 16px;
         }
       }
     }
