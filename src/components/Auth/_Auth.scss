@@ -147,8 +147,11 @@
     margin-right: 10px;
     line-height: 30px;
     cursor: pointer;
-    color: var(--activeColor);
     align-items: center;
+  }
+
+  .api-key-switch {
+    color: var(--activeColor);
   }
 
   &-check {
