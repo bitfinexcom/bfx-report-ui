@@ -9,6 +9,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
+import Icon from 'icons'
 import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 
@@ -308,6 +309,7 @@ class SignUp extends PureComponent {
                     className='bitfinex-auth-mode-switch'
                     onClick={() => switchMode(MODES.SIGN_IN)}
                   >
+                    <Icon.SIGN_IN />
                     {t('auth.signInToExistingAcc')}
                   </div>
                 </div>
