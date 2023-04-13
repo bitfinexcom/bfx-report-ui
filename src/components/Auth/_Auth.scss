@@ -46,7 +46,9 @@
         margin-bottom: 40px;
         justify-content: space-between;
 
-        &:last-child{
+        .auth-mode-switch-wrapper {
+          width: 100%;
+          display: flex;
           justify-content: center;
           border-top: 1px solid var(--borderColor);
         }
