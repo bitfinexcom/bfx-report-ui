@@ -55,7 +55,7 @@
           display: flex;
           justify-content: center;
           border-top: 1px solid var(--borderColor);
-          padding-top: 16px;
+          padding-top: 18px;
         }
       }
     }
@@ -155,6 +155,7 @@
     line-height: 30px;
     cursor: pointer;
     align-items: center;
+    color: var(--color2)
   }
 
   .api-key-switch {
