@@ -285,7 +285,7 @@ class SignUp extends PureComponent {
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <div
-                className='bitfinex-auth-mode-switch'
+                className='bitfinex-auth-mode-switch api-key-switch'
                 onClick={() => this.toggleUseApiKey()}
               >
                 {useApiKey ? t('auth.accWithoutApiKey') : t('auth.accWithApiKey')}
