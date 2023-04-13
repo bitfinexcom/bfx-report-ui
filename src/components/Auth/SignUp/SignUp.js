@@ -305,9 +305,11 @@ class SignUp extends PureComponent {
 
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               {showFrameworkMode && users.length > 0 && (
-              <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
-                {t('auth.signIn')}
-              </div>
+                <div className='auth-mode-switch-wrapper'>
+                  <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
+                    {t('auth.signIn')}
+                  </div>
+                </div>
               )}
             </div>
           </div>
