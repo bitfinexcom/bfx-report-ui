@@ -137,6 +137,10 @@
       color: var(--color2);
       margin-bottom: 35px;
 
+      &:first-child{
+        margin-right: 60px;
+      }
+
       .bp3-control-indicator {
         box-shadow: none;
         background-color: var(--multiBg);
