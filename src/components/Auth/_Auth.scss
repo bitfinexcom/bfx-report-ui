@@ -10,7 +10,7 @@
       display: flex;
       flex-direction: column;
       font-size: 15px;
-      margin: 30px 60px 5px 60px;
+      margin: 30px 20px 5px 20px;
 
       > .platform-logo {
         position: relative;
@@ -39,7 +39,7 @@
     }
 
     &-footer {
-      margin : 0 60px;
+      margin : 0 20px;
 
       &-actions {
         margin-bottom: 40px;
@@ -118,6 +118,18 @@
     }
   }
 
+  &-sign-up {
+    .bp3-dialog {
+      &-body {
+        margin: 30px 60px 5px 60px;
+      }
+
+      &-footer {
+        margin : 0 60px;
+      }
+    }
+  }
+
   &-remember-me {
     &.bp3-checkbox {
       line-height: 30px;
@@ -144,8 +156,9 @@
   }
 
   &-password-recovery {
-    line-height: 30px;
+    line-height: 38px;
     cursor: pointer;
+    color: var(--color2);
   }
 
   &-mode-switch {
