@@ -122,6 +122,10 @@
     .bp3-dialog {
       &-body {
         margin: 30px 60px 5px 60px;
+
+        .sub-account {
+          margin-bottom: 15px;
+        }
       }
 
       &-footer {
