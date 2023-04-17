@@ -1,9 +1,8 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-import Icon from 'icons'
-
 export const ModeSwitcher = ({
+  icon,
   mode,
   title,
   switchMode,
@@ -13,16 +12,21 @@ export const ModeSwitcher = ({
       onClick={() => switchMode(mode)}
       className='bitfinex-auth-mode-switch'
     >
-      <Icon.SIGN_IN />
+      {icon}
       {title}
     </div>
   </div>
 )
 
 ModeSwitcher.propTypes = {
+  icon: PropTypes.node,
   mode: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   switchMode: PropTypes.func.isRequired,
+}
+
+ModeSwitcher.defaultProps = {
+  icon: null,
 }
 
 export default memo(ModeSwitcher)
