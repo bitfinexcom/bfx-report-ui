@@ -9,7 +9,6 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
-import Icon from 'icons'
 import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 
