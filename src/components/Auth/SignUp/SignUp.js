@@ -9,6 +9,7 @@ import {
   Intent,
 } from '@blueprintjs/core'
 
+import Icon from 'icons'
 import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 
@@ -308,6 +309,7 @@ class SignUp extends PureComponent {
               {showFrameworkMode && users.length > 0 && (
                 <ModeSwitcher
                   mode={MODES.SIGN_IN}
+                  icon={<Icon.SIGN_IN />}
                   switchMode={switchMode}
                   title={t('auth.signInToExistingAcc')}
                 />
