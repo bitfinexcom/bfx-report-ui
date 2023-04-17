@@ -17,6 +17,7 @@ import { MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import LoginApiKey from '../LoginApiKey'
+import ModeSwitcher from '../ModeSwitcher'
 import LoginPassword from '../LoginPassword'
 import AuthTypeSelector from '../AuthTypeSelector'
 
@@ -306,15 +307,11 @@ class SignUp extends PureComponent {
             </div>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               {showFrameworkMode && users.length > 0 && (
-                <div className='auth-mode-switch-wrapper'>
-                  <div
-                    className='bitfinex-auth-mode-switch'
-                    onClick={() => switchMode(MODES.SIGN_IN)}
-                  >
-                    <Icon.SIGN_IN />
-                    {t('auth.signInToExistingAcc')}
-                  </div>
-                </div>
+                <ModeSwitcher
+                  mode={MODES.SIGN_IN}
+                  switchMode={switchMode}
+                  title={t('auth.signInToExistingAcc')}
+                />
               )}
             </div>
           </div>
