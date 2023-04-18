@@ -8,7 +8,9 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+
 import config from 'config'
+import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
 import InputKey from '../InputKey'
@@ -209,6 +211,7 @@ class PasswordRecovery extends PureComponent {
         title={t('auth.forgotPassword')}
       >
         <div className={Classes.DIALOG_BODY}>
+          <PlatformLogo />
           {isOtpLoginShown
             ? (
               <LoginOtp
