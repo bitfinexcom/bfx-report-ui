@@ -192,7 +192,6 @@ class PasswordRecovery extends PureComponent {
       userPassword,
     } = this.state
 
-    const icon = config.showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
     const isPasswordRecoveryDisabled = (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
@@ -204,12 +203,11 @@ class PasswordRecovery extends PureComponent {
 
     return (
       <Dialog
-        className={classes}
-        title={t('auth.passwordRecovery')}
         isOpen
-        icon={icon}
+        className={classes}
         isCloseButtonShown={false}
-        usePortal={false}
+        usePortal={true}
+        title={t('auth.forgotPassword')}
       >
         <div className={Classes.DIALOG_BODY}>
           {isOtpLoginShown
