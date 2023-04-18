@@ -21,19 +21,19 @@ export const LoginApiKey = ({
   return (
     <>
       {showNote && (
-      <Callout icon={<Icon.INFO_CIRCLE />}>
-        <div className='api-key-note'>
-          {t('auth.note1')}
-          <a
-            href={KEY_URL}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            {_split(KEY_URL, 'https://')[1]}
-          </a>
-          {t('auth.note2')}
-        </div>
-      </Callout>
+        <Callout icon={<Icon.INFO_CIRCLE />}>
+          <div className='api-key-note'>
+            {t('auth.note1')}
+            <a
+              href={KEY_URL}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {_split(KEY_URL, 'https://')[1]}
+            </a>
+            {t('auth.note2')}
+          </div>
+        </Callout>
       )
     }
       <InputKey
