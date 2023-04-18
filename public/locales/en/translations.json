@@ -52,7 +52,7 @@
     "signIn": "Sign In",
     "signInToExistingAcc": "Sign in to an existing account",
     "selectMasterAccount": "Select Master Account",
-    "passwordRecovery": "Password Recovery",
+    "forgotPassword": "Forgot Password",
     "subAccount": "Sub Account",
     "enterAPIKey": "Enter API Key:",
     "enterAPISecret": "Enter API Secret:",
