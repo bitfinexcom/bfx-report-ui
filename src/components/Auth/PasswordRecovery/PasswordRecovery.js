@@ -5,10 +5,12 @@ import {
   Button,
   Checkbox,
   Classes,
+  Callout,
   Dialog,
   Intent,
 } from '@blueprintjs/core'
 
+import Icon from 'icons'
 import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 
@@ -212,6 +214,9 @@ class PasswordRecovery extends PureComponent {
       >
         <div className={Classes.DIALOG_BODY}>
           <PlatformLogo />
+          <Callout icon={<Icon.INFO_CIRCLE />}>
+            {t('auth.forgotPasswordNote')}
+          </Callout>
           {isOtpLoginShown
             ? (
               <LoginOtp
