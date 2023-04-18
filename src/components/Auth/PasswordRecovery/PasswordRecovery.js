@@ -172,23 +172,23 @@ class PasswordRecovery extends PureComponent {
 
   render() {
     const {
+      t,
       loading,
       switchMode,
-      t,
       isOtpLoginShown,
     } = this.props
     const {
-      apiKey,
-      apiSecret,
       otp,
+      apiKey,
       password,
-      passwordRepeat,
-      isPasswordProtected,
-      passwordError,
-      passwordRepeatError,
-      useApiKey,
       userName,
+      apiSecret,
+      useApiKey,
       userPassword,
+      passwordError,
+      passwordRepeat,
+      passwordRepeatError,
+      isPasswordProtected,
     } = this.state
 
     const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
