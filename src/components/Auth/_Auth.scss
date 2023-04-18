@@ -36,6 +36,18 @@
         font-size: 15px;
         background-color: var(--authNoticeBg);
       }
+
+      > .bp3-callout-icon {
+        display: flex;
+
+        svg {
+          margin-right: 10px;
+
+          .icon--info-circle  {
+            fill: var(--activeColor)
+          }
+        }
+      }
     }
 
     &-footer {
