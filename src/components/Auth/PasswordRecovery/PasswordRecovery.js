@@ -8,7 +8,6 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
-import Icon from 'icons'
 import config from 'config'
 
 import { MODES } from '../Auth'
@@ -204,9 +203,9 @@ class PasswordRecovery extends PureComponent {
     return (
       <Dialog
         isOpen
+        usePortal
         className={classes}
         isCloseButtonShown={false}
-        usePortal={true}
         title={t('auth.forgotPassword')}
       >
         <div className={Classes.DIALOG_BODY}>
