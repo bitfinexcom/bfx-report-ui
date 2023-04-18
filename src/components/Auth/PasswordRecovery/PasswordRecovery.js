@@ -19,6 +19,7 @@ import InputKey from '../InputKey'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import ErrorLabel from '../ErrorLabel'
+import LoginApiKey from '../LoginApiKey'
 
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
 
@@ -235,22 +236,12 @@ class PasswordRecovery extends PureComponent {
                   />
                 )}
                 {useApiKey && (
-                  <>
-                    <InputKey
-                      label='auth.enterAPIKey'
-                      name='apiKey'
-                      value={apiKey}
-                      onChange={this.handleInputChange}
-                    />
-                    <InputKey
-                      label='auth.enterAPISecret'
-                      name='apiSecret'
-                      value={apiSecret}
-                      onChange={this.handleInputChange}
-                    />
-                  </>
+                  <LoginApiKey
+                    apiKey={apiKey}
+                    apiSecret={apiSecret}
+                    onChange={this.handleInputChange}
+                  />
                 )}
-
                 {config.showFrameworkMode && isPasswordProtected && (
                   <>
                     <InputKey
