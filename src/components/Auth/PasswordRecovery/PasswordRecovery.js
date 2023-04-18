@@ -254,14 +254,14 @@ class PasswordRecovery extends PureComponent {
                 {config.showFrameworkMode && isPasswordProtected && (
                   <>
                     <InputKey
-                      label='auth.enterPassword'
+                      label='auth.enterNewPassword'
                       name='password'
                       value={password}
                       onChange={this.handleInputChange}
                     />
                     <ErrorLabel text={passwordError} />
                     <InputKey
-                      label='auth.repeatPassword'
+                      label='auth.repeatNewPassword'
                       name='passwordRepeat'
                       value={passwordRepeat}
                       onChange={this.handleInputChange}
