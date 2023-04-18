@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { Callout } from '@blueprintjs/core'
 import _split from 'lodash/split'
 
+import Icon from 'icons'
 import config from 'config'
+
 import InputKey from '../InputKey'
 
 const { KEY_URL } = config
@@ -17,7 +19,7 @@ export const LoginApiKey = ({
   const { t } = useTranslation()
   return (
     <>
-      <Callout>
+      <Callout icon={<Icon.INFO_CIRCLE />}>
         <div className='api-key-note'>
           {t('auth.note1')}
           <a
