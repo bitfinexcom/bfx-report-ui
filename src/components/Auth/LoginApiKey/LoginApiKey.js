@@ -14,11 +14,13 @@ const { KEY_URL } = config
 export const LoginApiKey = ({
   apiKey,
   onChange,
+  showNote,
   apiSecret,
 }) => {
   const { t } = useTranslation()
   return (
     <>
+      { showNote && (
       <Callout icon={<Icon.INFO_CIRCLE />}>
         <div className='api-key-note'>
           {t('auth.note1')}
@@ -32,6 +34,8 @@ export const LoginApiKey = ({
           {t('auth.note2')}
         </div>
       </Callout>
+      )
+    }
       <InputKey
         name='apiKey'
         value={apiKey}
@@ -49,9 +53,14 @@ export const LoginApiKey = ({
 }
 
 LoginApiKey.propTypes = {
+  showNote: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   apiKey: PropTypes.string.isRequired,
   apiSecret: PropTypes.string.isRequired,
+}
+
+LoginApiKey.defaultProps = {
+  showNote: false,
 }
 
 export default memo(LoginApiKey)
