@@ -59,6 +59,8 @@
     "enterAPISecret": "Enter API Secret:",
     "enterPassword": "Enter Bitfinex Report App Password",
     "repeatPassword": "Repeat Bitfinex Report App Password",
+    "enterNewPassword": "Enter New Bitfinex Report App Password",
+    "repeatNewPassword": "Repeat New Bitfinex Report App Password",
     "enterEmail": "Enter Email:",
     "checkAuth": "Check Auth",
     "note1": "Visit ",
