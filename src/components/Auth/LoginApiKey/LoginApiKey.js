@@ -20,7 +20,7 @@ export const LoginApiKey = ({
   const { t } = useTranslation()
   return (
     <>
-      { showNote && (
+      {showNote && (
       <Callout icon={<Icon.INFO_CIRCLE />}>
         <div className='api-key-note'>
           {t('auth.note1')}

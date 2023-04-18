@@ -253,6 +253,7 @@ class SignUp extends PureComponent {
                 )}
                 {useApiKey && (
                   <LoginApiKey
+                    showNote
                     apiKey={apiKey}
                     apiSecret={apiSecret}
                     onChange={this.handleInputChange}
