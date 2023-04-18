@@ -53,6 +53,7 @@
     "signInToExistingAcc": "Sign in to an existing account",
     "selectMasterAccount": "Select Master Account",
     "forgotPassword": "Forgot Password",
+    "forgotPasswordNote": "Reset your Reports App account by entering your account details and a new password.",
     "subAccount": "Sub Account",
     "enterAPIKey": "Enter API Key:",
     "enterAPISecret": "Enter API Secret:",
