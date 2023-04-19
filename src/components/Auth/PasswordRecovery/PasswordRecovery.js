@@ -287,7 +287,7 @@ class PasswordRecovery extends PureComponent {
                 onClick={() => this.toggleUseApiKey()}
                 className='bitfinex-auth-mode-switch api-key-switch'
               >
-                {useApiKey ? t('auth.accWithoutApiKey') : t('auth.accWithApiKey')}
+                {useApiKey ? t('auth.resetAccWithoutApiKey') : t('auth.resetAccWithApiKey')}
               </div>
               <Button
                 className='bitfinex-auth-check'
