@@ -64,6 +64,8 @@
     "repeatNewPassword": "Repeat New Bitfinex Report App Password",
     "resetPassword": "Reset Password",
     "removeLoginPassword": "Remove Password on Login",
+    "resetAccWithApiKey": "Reset account with API key",
+    "resetAccWithoutApiKey": "Reset account without API key",
     "enterEmail": "Enter Email:",
     "checkAuth": "Check Auth",
     "note1": "Visit ",
