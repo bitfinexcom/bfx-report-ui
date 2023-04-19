@@ -261,16 +261,7 @@ class PasswordRecovery extends PureComponent {
                     <ErrorLabel text={passwordRepeatError} />
                   </>
                 )}
-                <div className='bitfinex-auth-checkboxes'>
-                  <Checkbox
-                    name='useApiKey'
-                    checked={useApiKey}
-                    onChange={this.handleCheckboxChange}
-                    className='bitfinex-auth-remember-me'
-                  >
-                    {t('auth.useApiKey')}
-                  </Checkbox>
-                  {showPasswordProtection && (
+                {showPasswordProtection && (
                   <Checkbox
                     className='bitfinex-auth-remember-me'
                     name='isPasswordProtected'
@@ -279,8 +270,7 @@ class PasswordRecovery extends PureComponent {
                   >
                     {t('auth.passwordProtection')}
                   </Checkbox>
-                  )}
-                </div>
+                )}
               </>
             )}
         </div>
