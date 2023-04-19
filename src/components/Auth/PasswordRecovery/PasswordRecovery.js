@@ -22,6 +22,7 @@ import ModeSwitcher from '../ModeSwitcher'
 import ErrorLabel from '../ErrorLabel'
 import LoginApiKey from '../LoginApiKey'
 
+const { showFrameworkMode, hostedFrameworkMode } = config
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
 
 class PasswordRecovery extends PureComponent {
@@ -54,7 +55,7 @@ class PasswordRecovery extends PureComponent {
       password: '',
       passwordRepeat: '',
       isBeingValidated: false,
-      isNotPasswordProtected: config.hostedFrameworkMode,
+      isNotPasswordProtected: hostedFrameworkMode,
       isPersisted,
       passwordError: '',
       passwordRepeatError: '',
@@ -113,7 +114,7 @@ class PasswordRecovery extends PureComponent {
       passwordRepeatError,
     } = this.state
 
-    if (!config.showFrameworkMode || isNotPasswordProtected) {
+    if (!showFrameworkMode || isNotPasswordProtected) {
       return true
     }
 
@@ -201,15 +202,15 @@ class PasswordRecovery extends PureComponent {
       isNotPasswordProtected,
     } = this.state
 
-    const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
+    const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
     const isPasswordRecoveryDisabled = (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
-      || (config.showFrameworkMode && !isNotPasswordProtected
+      || (showFrameworkMode && !isNotPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
-      'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
+      'bitfinex-auth-sign-up--framework': showFrameworkMode,
     })
-    const showEnterPassword = config.showFrameworkMode && !isNotPasswordProtected
+    const showEnterPassword = showFrameworkMode && !isNotPasswordProtected
 
     return (
       <Dialog
@@ -250,7 +251,7 @@ class PasswordRecovery extends PureComponent {
                     onChange={this.handleInputChange}
                   />
                 )}
-                {config.showFrameworkMode && !isNotPasswordProtected && (
+                {showEnterPassword && (
                   <>
                     <InputKey
                       label='auth.enterNewPassword'
