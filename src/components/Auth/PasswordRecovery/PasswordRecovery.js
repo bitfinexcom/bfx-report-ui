@@ -209,6 +209,7 @@ class PasswordRecovery extends PureComponent {
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
       'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
     })
+    const showEnterPassword = config.showFrameworkMode && !isNotPasswordProtected
 
     return (
       <Dialog
