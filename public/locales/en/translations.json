@@ -63,6 +63,7 @@
     "enterNewPassword": "Enter New Bitfinex Report App Password",
     "repeatNewPassword": "Repeat New Bitfinex Report App Password",
     "resetPassword": "Reset Password",
+    "resetLoginPassword": "Reset Password on Login",
     "enterEmail": "Enter Email:",
     "checkAuth": "Check Auth",
     "note1": "Visit ",
