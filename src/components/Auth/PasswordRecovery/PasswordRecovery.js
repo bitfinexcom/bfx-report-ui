@@ -243,7 +243,7 @@ class PasswordRecovery extends PureComponent {
                     onChange={this.handleInputChange}
                   />
                 )}
-                {config.showFrameworkMode && isPasswordProtected && (
+                {config.showFrameworkMode && !isPasswordProtected && (
                   <>
                     <InputKey
                       label='auth.enterNewPassword'
@@ -268,7 +268,7 @@ class PasswordRecovery extends PureComponent {
                     checked={isPasswordProtected}
                     onChange={this.handleCheckboxChange}
                   >
-                    {t('auth.passwordProtection')}
+                    {t('auth.removeLoginPassword')}
                   </Checkbox>
                 )}
               </>
