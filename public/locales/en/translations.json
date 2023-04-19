@@ -51,6 +51,7 @@
     "signUp": "Sign Up",
     "signIn": "Sign In",
     "signInToExistingAcc": "Sign in to an existing account",
+    "signInToDifferentAcc": "Sign in to a different account",
     "selectMasterAccount": "Select Master Account",
     "forgotPassword": "Forgot Password",
     "forgotPasswordNote": "Reset your Reports App account by entering your account details and a new password.",
