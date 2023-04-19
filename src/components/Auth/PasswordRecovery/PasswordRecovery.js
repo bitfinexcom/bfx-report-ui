@@ -87,7 +87,7 @@ class PasswordRecovery extends PureComponent {
           apiKey,
           apiSecret,
           password,
-          isNotProtected: !isNotPasswordProtected,
+          isNotProtected: isNotPasswordProtected,
           isPersisted,
         })
       } else {
