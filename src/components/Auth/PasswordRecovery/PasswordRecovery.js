@@ -18,6 +18,7 @@ import { MODES } from '../Auth'
 import InputKey from '../InputKey'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
+import ModeSwitcher from '../ModeSwitcher'
 import ErrorLabel from '../ErrorLabel'
 import LoginApiKey from '../LoginApiKey'
 
@@ -286,9 +287,6 @@ class PasswordRecovery extends PureComponent {
         {!isOtpLoginShown && (
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
-                {t('auth.signIn')}
-              </div>
               <Button
                 className='bitfinex-auth-check'
                 name='check'
@@ -299,6 +297,14 @@ class PasswordRecovery extends PureComponent {
               >
                 {t('auth.resetPassword')}
               </Button>
+            </div>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              <ModeSwitcher
+                mode={MODES.SIGN_IN}
+                icon={<Icon.SIGN_IN />}
+                switchMode={switchMode}
+                title={t('auth.signInToExistingAcc')}
+              />
             </div>
           </div>
         )}
