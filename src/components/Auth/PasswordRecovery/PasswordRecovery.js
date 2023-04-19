@@ -297,7 +297,7 @@ class PasswordRecovery extends PureComponent {
                 disabled={isPasswordRecoveryDisabled}
                 loading={loading}
               >
-                {t('timeframe.custom.confirm')}
+                {t('auth.resetPassword')}
               </Button>
             </div>
           </div>
