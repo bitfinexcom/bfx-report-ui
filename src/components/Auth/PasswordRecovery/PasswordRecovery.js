@@ -303,7 +303,7 @@ class PasswordRecovery extends PureComponent {
                 mode={MODES.SIGN_IN}
                 icon={<Icon.SIGN_IN />}
                 switchMode={switchMode}
-                title={t('auth.signInToExistingAcc')}
+                title={t('auth.signInToDifferentAcc')}
               />
             </div>
           </div>
