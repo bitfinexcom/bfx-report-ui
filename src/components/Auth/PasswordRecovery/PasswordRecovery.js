@@ -21,6 +21,7 @@ import LoginEmail from '../LoginEmail'
 import ModeSwitcher from '../ModeSwitcher'
 import ErrorLabel from '../ErrorLabel'
 import LoginApiKey from '../LoginApiKey'
+import LoginPassword from '../LoginPassword'
 
 const { showFrameworkMode, hostedFrameworkMode } = config
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
@@ -252,22 +253,15 @@ class PasswordRecovery extends PureComponent {
                   />
                 )}
                 {showEnterPassword && (
-                  <>
-                    <InputKey
-                      label='auth.enterNewPassword'
-                      name='password'
-                      value={password}
-                      onChange={this.handleInputChange}
-                    />
-                    <ErrorLabel text={passwordError} />
-                    <InputKey
-                      label='auth.repeatNewPassword'
-                      name='passwordRepeat'
-                      value={passwordRepeat}
-                      onChange={this.handleInputChange}
-                    />
-                    <ErrorLabel text={passwordRepeatError} />
-                  </>
+                  <LoginPassword
+                    password={password}
+                    passwordError={passwordError}
+                    passwordRepeat={passwordRepeat}
+                    onChange={this.handleInputChange}
+                    passwordLabel={'auth.enterNewPassword'}
+                    passwordRepeatError={passwordRepeatError}
+                    passwordRepeatLabel={'auth.repeatNewPassword'}
+                  />
                 )}
                 {showPasswordProtection && (
                   <Checkbox
