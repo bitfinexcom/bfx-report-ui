@@ -8,7 +8,9 @@ export const LoginPassword = ({
   onChange,
   password,
   passwordError,
+  passwordLabel,
   passwordRepeat,
+  passwordRepeatLabel,
   passwordRepeatError,
 }) => (
   <>
@@ -16,14 +18,14 @@ export const LoginPassword = ({
       name='password'
       value={password}
       onChange={onChange}
-      label='auth.enterPassword'
+      label={passwordLabel}
     />
     <ErrorLabel text={passwordError} />
     <InputKey
       onChange={onChange}
       name='passwordRepeat'
       value={passwordRepeat}
-      label='auth.repeatPassword'
+      label={passwordRepeatLabel}
     />
     <ErrorLabel text={passwordRepeatError} />
   </>
@@ -33,7 +35,9 @@ LoginPassword.propTypes = {
   onChange: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   passwordError: PropTypes.string.isRequired,
+  passwordLabel: PropTypes.string.isRequired,
   passwordRepeat: PropTypes.string.isRequired,
+  passwordRepeatLabel: PropTypes.string.isRequired,
   passwordRepeatError: PropTypes.string.isRequired,
 }
 
