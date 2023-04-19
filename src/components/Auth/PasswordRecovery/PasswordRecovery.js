@@ -15,12 +15,10 @@ import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
-import InputKey from '../InputKey'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
-import ModeSwitcher from '../ModeSwitcher'
-import ErrorLabel from '../ErrorLabel'
 import LoginApiKey from '../LoginApiKey'
+import ModeSwitcher from '../ModeSwitcher'
 import LoginPassword from '../LoginPassword'
 
 const { showFrameworkMode, hostedFrameworkMode } = config
@@ -203,6 +201,7 @@ class PasswordRecovery extends PureComponent {
       isNotPasswordProtected,
     } = this.state
 
+    const showEnterPassword = showFrameworkMode && !isNotPasswordProtected
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
     const isPasswordRecoveryDisabled = (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
@@ -211,7 +210,6 @@ class PasswordRecovery extends PureComponent {
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
       'bitfinex-auth-sign-up--framework': showFrameworkMode,
     })
-    const showEnterPassword = showFrameworkMode && !isNotPasswordProtected
 
     return (
       <Dialog
