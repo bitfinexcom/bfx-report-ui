@@ -54,7 +54,7 @@ class PasswordRecovery extends PureComponent {
       password: '',
       passwordRepeat: '',
       isBeingValidated: false,
-      isPasswordProtected: config.hostedFrameworkMode,
+      isNotPasswordProtected: config.hostedFrameworkMode,
       isPersisted,
       passwordError: '',
       passwordRepeatError: '',
@@ -70,7 +70,7 @@ class PasswordRecovery extends PureComponent {
       apiKey,
       apiSecret,
       password,
-      isPasswordProtected,
+      isNotPasswordProtected,
       isPersisted,
       useApiKey,
       userName,
@@ -87,7 +87,7 @@ class PasswordRecovery extends PureComponent {
           apiKey,
           apiSecret,
           password,
-          isNotProtected: !isPasswordProtected,
+          isNotProtected: !isNotPasswordProtected,
           isPersisted,
         })
       } else {
@@ -108,12 +108,12 @@ class PasswordRecovery extends PureComponent {
     const {
       password,
       passwordRepeat,
-      isPasswordProtected,
+      isNotPasswordProtected,
       passwordError,
       passwordRepeatError,
     } = this.state
 
-    if (!config.showFrameworkMode || !isPasswordProtected) {
+    if (!config.showFrameworkMode || isNotPasswordProtected) {
       return true
     }
 
@@ -168,11 +168,11 @@ class PasswordRecovery extends PureComponent {
 
   handleOtpPasswordRecovery = () => {
     const { recoverPasswordOtp } = this.props
-    const { otp, password, isPasswordProtected } = this.state
+    const { otp, password, isNotPasswordProtected } = this.state
     recoverPasswordOtp({
       otp,
       password,
-      isNotProtected: !isPasswordProtected,
+      isNotProtected: isNotPasswordProtected,
     })
   }
 
@@ -194,13 +194,13 @@ class PasswordRecovery extends PureComponent {
       passwordError,
       passwordRepeat,
       passwordRepeatError,
-      isPasswordProtected,
+      isNotPasswordProtected,
     } = this.state
 
     const showPasswordProtection = config.showFrameworkMode && !config.hostedFrameworkMode
     const isPasswordRecoveryDisabled = (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
-      || (config.showFrameworkMode && isPasswordProtected
+      || (config.showFrameworkMode && !isNotPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
       'bitfinex-auth-sign-up--framework': config.showFrameworkMode,
@@ -243,7 +243,7 @@ class PasswordRecovery extends PureComponent {
                     onChange={this.handleInputChange}
                   />
                 )}
-                {config.showFrameworkMode && !isPasswordProtected && (
+                {config.showFrameworkMode && !isNotPasswordProtected && (
                   <>
                     <InputKey
                       label='auth.enterNewPassword'
@@ -264,8 +264,8 @@ class PasswordRecovery extends PureComponent {
                 {showPasswordProtection && (
                   <Checkbox
                     className='bitfinex-auth-remember-me'
-                    name='isPasswordProtected'
-                    checked={isPasswordProtected}
+                    name='isNotPasswordProtected'
+                    checked={isNotPasswordProtected}
                     onChange={this.handleCheckboxChange}
                   >
                     {t('auth.removeLoginPassword')}
