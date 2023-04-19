@@ -216,9 +216,11 @@ class PasswordRecovery extends PureComponent {
       >
         <div className={Classes.DIALOG_BODY}>
           <PlatformLogo />
-          <Callout icon={<Icon.INFO_CIRCLE />}>
-            {t('auth.forgotPasswordNote')}
-          </Callout>
+          {!isOtpLoginShown && (
+            <Callout icon={<Icon.INFO_CIRCLE />}>
+              {t('auth.forgotPasswordNote')}
+            </Callout>
+          )}
           {isOtpLoginShown
             ? (
               <LoginOtp
