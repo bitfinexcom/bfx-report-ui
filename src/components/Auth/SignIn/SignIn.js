@@ -181,6 +181,10 @@ class SignIn extends PureComponent {
     })
   }
 
+  handleUserItemSelect =(email) => {
+    this.setState({ email })
+  }
+
   render() {
     const {
       t,
@@ -231,7 +235,10 @@ class SignIn extends PureComponent {
             />
           )}
           <PlatformLogo />
-          <SignInList users={users} />
+          <SignInList
+            users={users}
+            handleUserItemSelect={this.handleUserItemSelect}
+          />
           {isOtpLoginShown
             ? (
               <LoginOtp
