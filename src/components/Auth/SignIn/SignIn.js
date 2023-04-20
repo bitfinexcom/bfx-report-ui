@@ -13,13 +13,12 @@ import {
 } from '@blueprintjs/core'
 
 import config from 'config'
-import Icon from 'icons'
-import PlatformLogo from 'ui/PlatformLogo'
 import Select from 'ui/Select'
+import PlatformLogo from 'ui/PlatformLogo'
 
-import InputKey from '../InputKey'
 import { MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
+import InputKey from '../InputKey'
 import AuthTypeSelector from '../AuthTypeSelector'
 
 const { showFrameworkMode, isElectronApp } = config
@@ -220,7 +219,6 @@ class SignIn extends PureComponent {
         isOpen
         usePortal
         title={t('auth.signIn')}
-        icon={<Icon.SIGN_IN />}
         isCloseButtonShown={false}
         className='bitfinex-auth bitfinex-auth-sign-in'
       >
