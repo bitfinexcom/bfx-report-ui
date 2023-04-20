@@ -5,12 +5,17 @@ import _map from 'lodash/map'
 
 import UserItem from './SignInList.item'
 
-export const SignInList = ({ users }) => {
+export const SignInList = ({ users, handleUserItemSelect }) => {
   // const { t } = useTranslation()
   console.log('++SignInList users', users)
   return (
     <div className='sign-in-list'>
-      {_map(users, user => (<UserItem user={user} />))}
+      {_map(users, user => (
+        <UserItem
+          user={user}
+          handleUserSelect={handleUserItemSelect}
+        />
+      ))}
     </div>
   )
 }
@@ -21,6 +26,7 @@ SignInList.propTypes = {
     isSubAccount: PropTypes.bool.isRequired,
     isNotProtected: PropTypes.bool.isRequired,
   })).isRequired,
+  handleUserItemSelect: PropTypes.func.isRequired,
 }
 
 export default memo(SignInList)
