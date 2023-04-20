@@ -123,6 +123,10 @@
     }
 
     .bp3-dialog {
+      &-body{
+        margin: 30px 0 5px 0;
+      }
+
       &-footer {
         &-actions {
           justify-content: space-between;
