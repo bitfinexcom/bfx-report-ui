@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 
 export const SignInListItem = ({ user }) => {
   // const { t } = useTranslation()
-  console.log('++user')
+  console.log('++user', user)
   const { email } = user
   return (
-    <div>
+    <div className='sign-in-list--item'>
       <p>{email}</p>
     </div>
   )

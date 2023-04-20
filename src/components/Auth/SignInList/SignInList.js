@@ -9,12 +9,11 @@ export const SignInList = ({ users }) => {
   // const { t } = useTranslation()
   console.log('++SignInList users', users)
   return (
-    <>
+    <div className='sign-in-list'>
       {_map(users, user => (<UserItem user={user} />))}
-    </>
+    </div>
   )
 }
-
 
 SignInList.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
