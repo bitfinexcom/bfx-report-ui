@@ -50,6 +50,7 @@
     "multipleAccounts": "Multiple Accounts",
     "signUp": "Sign Up",
     "signIn": "Sign In",
+    "signInTo": "Sign in to:",
     "signInToExistingAcc": "Sign in to an existing account",
     "signInToDifferentAcc": "Sign in to a different account",
     "selectMasterAccount": "Select Master Account",
