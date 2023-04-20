@@ -19,6 +19,7 @@ import PlatformLogo from 'ui/PlatformLogo'
 import { MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
 import InputKey from '../InputKey'
+import SignInList from '../SignInList'
 import AuthTypeSelector from '../AuthTypeSelector'
 
 const { showFrameworkMode, isElectronApp } = config
@@ -230,6 +231,7 @@ class SignIn extends PureComponent {
             />
           )}
           <PlatformLogo />
+          <SignInList users={users} />
           {isOtpLoginShown
             ? (
               <LoginOtp
