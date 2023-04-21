@@ -10,8 +10,9 @@ export const SignInList = ({ users, handleUserItemSelect }) => {
   console.log('++SignInList users', users)
   return (
     <div className='sign-in-list'>
-      {_map(users, user => (
+      {_map(users, (user, index) => (
         <UserItem
+          key={index}
           user={user}
           handleUserSelect={handleUserItemSelect}
         />
