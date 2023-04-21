@@ -132,6 +132,10 @@
 
         .sign-in-user--item {
           cursor: pointer;
+
+          &-title {
+            min-height: 40px;
+          }
         }
       }
 

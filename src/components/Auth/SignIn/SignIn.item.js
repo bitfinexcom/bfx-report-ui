@@ -6,7 +6,9 @@ export const SignInUserItem = ({ user, backToUsersList }) => (
     className='sign-in-user--item'
     onClick={() => backToUsersList()}
   >
-    <p>{user}</p>
+    <p className='sign-in-user--item-title'>
+      {user}
+    </p>
   </div>
 )
 
