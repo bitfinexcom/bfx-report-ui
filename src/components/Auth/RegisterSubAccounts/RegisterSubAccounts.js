@@ -49,10 +49,10 @@ class RegisterSubAccounts extends PureComponent {
   constructor(props) {
     super()
 
-    const { authData: { email }, users } = props
-    const { email: firstUserEmail } = filterRestrictedUsers(users)[0] || {}
+    const { users } = props
+    const { email } = filterRestrictedUsers(users)[0] || {}
     this.state = {
-      masterAccEmail: email || firstUserEmail,
+      masterAccEmail: email,
     }
   }
 
