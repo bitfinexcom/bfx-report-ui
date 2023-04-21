@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 // import { useTranslation } from 'react-i18next'
+import Icon from 'icons'
 
 export const SignInListItem = ({ user, handleUserSelect }) => {
   // const { t } = useTranslation()
@@ -11,7 +12,10 @@ export const SignInListItem = ({ user, handleUserSelect }) => {
       className='sign-in-list--item'
       onClick={() => handleUserSelect(email)}
     >
-      <p>{email}</p>
+      <Icon.USER_CIRCLE />
+      <p className='sign-in-list--item-title'>
+        {email}
+      </p>
     </div>
   )
 }
