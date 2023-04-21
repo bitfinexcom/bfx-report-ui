@@ -126,8 +126,11 @@
       &-body{
         margin: 30px 0 5px 0;
 
-        .sign-in-user--item {
+        .sign-in-wrapper {
           margin: 0 60px;
+        }
+
+        .sign-in-user--item {
           cursor: pointer;
         }
       }
