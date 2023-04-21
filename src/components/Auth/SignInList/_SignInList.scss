@@ -1,6 +1,18 @@
 .sign-in-list {
   &--item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 54px;
     min-height: 76px;
+
+    svg {
+      margin-right: 24px;
+    }
+
+    &-title {
+      margin: 0;
+    }
 
     &:hover {
       cursor: pointer;
