@@ -72,6 +72,7 @@ class SignIn extends PureComponent {
       email: initialEmail,
       password,
       userPassword: '',
+      showUsersList: true,
     }
   }
 
@@ -204,6 +205,7 @@ class SignIn extends PureComponent {
       email,
       password,
       userPassword,
+      showUsersList,
     } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
@@ -235,10 +237,12 @@ class SignIn extends PureComponent {
             />
           )}
           <PlatformLogo />
-          <SignInList
-            users={users}
-            handleUserItemSelect={this.handleUserItemSelect}
-          />
+          {showUsersList && (
+            <SignInList
+              users={users}
+              handleUserItemSelect={this.handleUserItemSelect}
+            />
+          )}
           {isOtpLoginShown
             ? (
               <LoginOtp
