@@ -13,7 +13,6 @@ import {
 } from '@blueprintjs/core'
 
 import config from 'config'
-// import Select from 'ui/Select'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
@@ -219,7 +218,6 @@ class SignIn extends PureComponent {
       || (!isNotProtected && !password)
     const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
     const showSubAccount = isCurrentUserHasSubAccount && isMultipleAccsSelected
-    // const preparedUsers = getPreparedUsers(users, isMultipleAccsSelected)
     const isEmailSelected = !_isEmpty(email)
     const isSubAccsAvailableForCurrentUser = !!_find(users,
       user => _isEqual(user?.email, email) && !user?.isRestrictedToBeAddedToSubAccount)
@@ -259,15 +257,6 @@ class SignIn extends PureComponent {
               />
             ) : (
               <>
-                {/* <Select
-                  loading
-                  value={email}
-                  items={preparedUsers}
-                  onClick={() => this.setState({ showUsersList: true })}
-                  onChange={this.onEmailChange}
-                  className='bitfinex-auth-email'
-                  popoverClassName='bitfinex-auth-email-popover'
-                /> */}
                 <SelectedUserItem
                   user={email}
                   backToUsersList={this.backToUsersList}
