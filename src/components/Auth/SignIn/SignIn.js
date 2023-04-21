@@ -225,6 +225,8 @@ class SignIn extends PureComponent {
     const showAuthTypeSelector = showFrameworkMode && isSubAccsAvailableForCurrentUser
     const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin)
 
+    console.log('++showUsersList', showUsersList)
+
     return (
       <Dialog
         isOpen
@@ -259,10 +261,12 @@ class SignIn extends PureComponent {
               </div>
             ) : (
               <div className='sign-in-wrapper'>
-                <SelectedUserItem
-                  user={email}
-                  backToUsersList={this.backToUsersList}
-                />
+                {isEmailSelected && (
+                  <SelectedUserItem
+                    user={email}
+                    backToUsersList={this.backToUsersList}
+                  />
+                )}
                 {isCurrentUserShouldReLogin && (
                   <InputKey
                     name='userPassword'
