@@ -73,7 +73,7 @@ class SignIn extends PureComponent {
       email: initialEmail,
       password,
       userPassword: '',
-      showUsersList: true,
+      showUsersList: false,
     }
   }
 
@@ -249,14 +249,16 @@ class SignIn extends PureComponent {
           )}
           {isOtpLoginShown
             ? (
-              <LoginOtp
-                otp={otp}
-                handle2FACancel={this.handle2FACancel}
-                handleInputChange={this.handleInputChange}
-                handleOneTimePassword={this.handle2FASignIn}
-              />
+              <div className='sign-in-wrapper'>
+                <LoginOtp
+                  otp={otp}
+                  handle2FACancel={this.handle2FACancel}
+                  handleInputChange={this.handleInputChange}
+                  handleOneTimePassword={this.handle2FASignIn}
+                />
+              </div>
             ) : (
-              <>
+              <div className='sign-in-wrapper'>
                 <SelectedUserItem
                   user={email}
                   backToUsersList={this.backToUsersList}
@@ -289,7 +291,7 @@ class SignIn extends PureComponent {
                     </Checkbox>
                   )}
                 </div>
-              </>
+              </div>
             )}
         </div>
         {!isOtpLoginShown && (
