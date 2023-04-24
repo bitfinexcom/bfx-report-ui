@@ -288,7 +288,7 @@ class SignIn extends PureComponent {
                 className='bitfinex-auth-password-recovery'
                 onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
               >
-                {t('auth.passwordRecovery')}
+                {t('auth.forgotPassword')}
               </div>
               <div>
                 <div

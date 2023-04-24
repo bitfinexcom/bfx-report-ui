@@ -253,6 +253,7 @@ class SignUp extends PureComponent {
                 )}
                 {useApiKey && (
                   <LoginApiKey
+                    showNote
                     apiKey={apiKey}
                     apiSecret={apiSecret}
                     onChange={this.handleInputChange}
@@ -264,7 +265,9 @@ class SignUp extends PureComponent {
                     passwordError={passwordError}
                     passwordRepeat={passwordRepeat}
                     onChange={this.handleInputChange}
+                    passwordLabel={'auth.enterPassword'}
                     passwordRepeatError={passwordRepeatError}
+                    passwordRepeatLabel={'auth.repeatPassword'}
                   />
                 )}
                 <div className='bitfinex-auth-checkboxes'>
