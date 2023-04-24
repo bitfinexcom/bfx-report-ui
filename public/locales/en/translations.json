@@ -25,6 +25,7 @@
     "auth": "Auth",
     "title": "Login",
     "addAccount": "Add Account",
+    "addAccountsTo": "Add accounts to:",
     "useApiKey": "Use API Key",
     "loginEmail": {
       "emailOrUserName": "Email or Username",
