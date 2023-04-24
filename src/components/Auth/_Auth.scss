@@ -145,7 +145,7 @@
           background-color: var(--multiBg);
           min-height: 40px;
           border-radius: 4px;
-          margin-bottom: 4px;
+          margin-bottom: 20px;
           padding: 0 15px;
           
           &-title {
@@ -214,6 +214,7 @@
     cursor: pointer;
     color: var(--activeColor);
     margin-bottom: 25px;
+    margin-top: -15px;
   }
 
   &-mode-switch {
