@@ -73,7 +73,7 @@ class SignIn extends PureComponent {
       email: initialEmail,
       password,
       userPassword: '',
-      showUsersList: false,
+      showUsersList: true,
     }
   }
 
@@ -224,6 +224,7 @@ class SignIn extends PureComponent {
       || !isEmailSelected
     const showAuthTypeSelector = showFrameworkMode && isSubAccsAvailableForCurrentUser
     const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin)
+    const showSelectedUser = !showUsersList && isEmailSelected
 
     console.log('++showUsersList', showUsersList)
 
@@ -262,7 +263,7 @@ class SignIn extends PureComponent {
               </div>
             ) : (
               <div className='sign-in-wrapper'>
-                {isEmailSelected && (
+                {showSelectedUser && (
                   <SelectedUserItem
                     user={email}
                     backToUsersList={this.backToUsersList}
