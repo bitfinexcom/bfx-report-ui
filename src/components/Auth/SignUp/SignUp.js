@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
   Button,
-  Callout,
   Checkbox,
   Classes,
   Dialog,
@@ -15,10 +14,11 @@ import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
-import InputKey from '../InputKey'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
-import ErrorLabel from '../ErrorLabel'
+import LoginApiKey from '../LoginApiKey'
+import ModeSwitcher from '../ModeSwitcher'
+import LoginPassword from '../LoginPassword'
 import AuthTypeSelector from '../AuthTypeSelector'
 
 const { showFrameworkMode, hostedFrameworkMode } = config
@@ -176,6 +176,10 @@ class SignUp extends PureComponent {
     })
   }
 
+  toggleUseApiKey =() => {
+    this.setState((state) => ({ useApiKey: !state.useApiKey }))
+  }
+
   render() {
     const {
       t,
@@ -193,7 +197,6 @@ class SignUp extends PureComponent {
       password,
       useApiKey,
       apiSecret,
-      isPersisted,
       userPassword,
       passwordError,
       passwordRepeat,
@@ -203,7 +206,6 @@ class SignUp extends PureComponent {
 
     const frameworkTitle = isOtpLoginShown ? t('auth.2FA.title') : t('auth.addAccount')
     const title = showFrameworkMode ? frameworkTitle : t('auth.title')
-    const icon = showFrameworkMode ? <Icon.SIGN_UP /> : <Icon.SIGN_IN />
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
     const isSignUpDisabled = (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
@@ -214,12 +216,12 @@ class SignUp extends PureComponent {
     })
     const showAuthTypeSelector = showFrameworkMode && useApiKey
     const showLoginEmail = showFrameworkMode && !useApiKey
+    const showLoginPassword = showFrameworkMode && isPasswordProtected
 
     return (
       <Dialog
         isOpen
         usePortal
-        icon={icon}
         title={title}
         className={classes}
         isCloseButtonShown={false}
@@ -250,76 +252,32 @@ class SignUp extends PureComponent {
                   />
                 )}
                 {useApiKey && (
-                  <>
-                    <Callout>
-                      {t('auth.note1')}
-                      <a href={config.KEY_URL} target='_blank' rel='noopener noreferrer'>
-                        {config.KEY_URL.split('https://')[1]}
-                      </a>
-                      {t('auth.note2')}
-                    </Callout>
-                    <InputKey
-                      name='apiKey'
-                      value={apiKey}
-                      label='auth.enterAPIKey'
-                      onChange={this.handleInputChange}
-                    />
-                    <InputKey
-                      name='apiSecret'
-                      value={apiSecret}
-                      label='auth.enterAPISecret'
-                      onChange={this.handleInputChange}
-                    />
-                  </>
+                  <LoginApiKey
+                    apiKey={apiKey}
+                    apiSecret={apiSecret}
+                    onChange={this.handleInputChange}
+                  />
                 )}
-                {showFrameworkMode && isPasswordProtected && (
-                  <>
-                    <InputKey
-                      name='password'
-                      value={password}
-                      label='auth.enterPassword'
-                      onChange={this.handleInputChange}
-                    />
-                    <ErrorLabel text={passwordError} />
-                    <InputKey
-                      name='passwordRepeat'
-                      value={passwordRepeat}
-                      label='auth.repeatPassword'
-                      onChange={this.handleInputChange}
-                    />
-                    <ErrorLabel text={passwordRepeatError} />
-                  </>
+                {showLoginPassword && (
+                  <LoginPassword
+                    password={password}
+                    passwordError={passwordError}
+                    passwordRepeat={passwordRepeat}
+                    onChange={this.handleInputChange}
+                    passwordRepeatError={passwordRepeatError}
+                  />
                 )}
                 <div className='bitfinex-auth-checkboxes'>
-                  <div className='bitfinex-auth-checkboxes--group'>
-                    {showFrameworkMode && (
-                      <Checkbox
-                        name='useApiKey'
-                        checked={useApiKey}
-                        onChange={this.handleCheckboxChange}
-                        className='bitfinex-auth-remember-me'
-                      >
-                        {t('auth.useApiKey')}
-                      </Checkbox>
-                    )}
+                  <div className='bitfinex-auth-checkboxes--group' />
+                  {showPasswordProtection && (
                     <Checkbox
-                      name='isPersisted'
-                      checked={isPersisted}
+                      name='isPasswordProtected'
+                      checked={isPasswordProtected}
                       onChange={this.handleCheckboxChange}
                       className='bitfinex-auth-remember-me'
                     >
-                      {t('auth.rememberMe')}
+                      {t('auth.passwordProtection')}
                     </Checkbox>
-                  </div>
-                  {showPasswordProtection && (
-                  <Checkbox
-                    name='isPasswordProtected'
-                    checked={isPasswordProtected}
-                    onChange={this.handleCheckboxChange}
-                    className='bitfinex-auth-remember-me'
-                  >
-                    {t('auth.passwordProtection')}
-                  </Checkbox>
                   )}
                 </div>
               </>
@@ -328,10 +286,13 @@ class SignUp extends PureComponent {
         {!isOtpLoginShown && (
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              {showFrameworkMode && users.length > 0 && (
-              <div className='bitfinex-auth-mode-switch' onClick={() => switchMode(MODES.SIGN_IN)}>
-                {t('auth.signIn')}
-              </div>
+              {showFrameworkMode && (
+                <div
+                  onClick={() => this.toggleUseApiKey()}
+                  className='bitfinex-auth-mode-switch api-key-switch'
+                >
+                  {useApiKey ? t('auth.accWithoutApiKey') : t('auth.accWithApiKey')}
+                </div>
               )}
               <Button
                 name='check'
@@ -343,6 +304,16 @@ class SignUp extends PureComponent {
               >
                 {title}
               </Button>
+            </div>
+            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+              {showFrameworkMode && users.length > 0 && (
+                <ModeSwitcher
+                  mode={MODES.SIGN_IN}
+                  icon={<Icon.SIGN_IN />}
+                  switchMode={switchMode}
+                  title={t('auth.signInToExistingAcc')}
+                />
+              )}
             </div>
           </div>
         )}

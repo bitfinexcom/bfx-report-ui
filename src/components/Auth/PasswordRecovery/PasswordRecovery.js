@@ -185,7 +185,6 @@ class PasswordRecovery extends PureComponent {
       password,
       passwordRepeat,
       isPasswordProtected,
-      isPersisted,
       passwordError,
       passwordRepeatError,
       useApiKey,
@@ -266,24 +265,14 @@ class PasswordRecovery extends PureComponent {
                   </>
                 )}
                 <div className='bitfinex-auth-checkboxes'>
-                  <div className='bitfinex-auth-checkboxes--group'>
-                    <Checkbox
-                      name='useApiKey'
-                      checked={useApiKey}
-                      onChange={this.handleCheckboxChange}
-                      className='bitfinex-auth-remember-me'
-                    >
-                      {t('auth.useApiKey')}
-                    </Checkbox>
-                    <Checkbox
-                      className='bitfinex-auth-remember-me'
-                      name='isPersisted'
-                      checked={isPersisted}
-                      onChange={this.handleCheckboxChange}
-                    >
-                      {t('auth.rememberMe')}
-                    </Checkbox>
-                  </div>
+                  <Checkbox
+                    name='useApiKey'
+                    checked={useApiKey}
+                    onChange={this.handleCheckboxChange}
+                    className='bitfinex-auth-remember-me'
+                  >
+                    {t('auth.useApiKey')}
+                  </Checkbox>
                   {showPasswordProtection && (
                   <Checkbox
                     className='bitfinex-auth-remember-me'
