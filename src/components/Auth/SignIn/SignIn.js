@@ -226,6 +226,7 @@ class SignIn extends PureComponent {
     const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin)
     const showSelectedUser = !showUsersList && isEmailSelected
     const showInputPassword = !isNotProtected && isEmailSelected && users.length > 0
+    const showSignInActions = !isOtpLoginShown && !showUsersList
 
     console.log('++showUsersList', showUsersList)
 
@@ -301,7 +302,7 @@ class SignIn extends PureComponent {
               </div>
             )}
         </div>
-        {!isOtpLoginShown && (
+        {showSignInActions && (
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
               <div
