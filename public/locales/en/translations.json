@@ -49,6 +49,8 @@
     "accWithoutApiKey": "Add account without API key",
     "simpleAccounts": "Simple Accounts",
     "multipleAccounts": "Multiple Accounts",
+    "login": "Login",
+    "multyAccsApi": "Multiple accounts — API Key",
     "signUp": "Sign Up",
     "signIn": "Sign In",
     "signInTo": "Sign in to:",
