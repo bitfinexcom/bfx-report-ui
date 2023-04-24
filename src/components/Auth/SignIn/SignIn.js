@@ -225,6 +225,7 @@ class SignIn extends PureComponent {
     const showAuthTypeSelector = showFrameworkMode && isSubAccsAvailableForCurrentUser
     const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin)
     const showSelectedUser = !showUsersList && isEmailSelected
+    const showInputPassword = !isNotProtected && isEmailSelected && users.length > 0
 
     console.log('++showUsersList', showUsersList)
 
@@ -277,7 +278,7 @@ class SignIn extends PureComponent {
                     label='auth.loginEmail.bfxAccPassword'
                   />
                 )}
-                {!isNotProtected && isEmailSelected && users.length > 0 && (
+                {showInputPassword && (
                   <InputKey
                     name='password'
                     value={password}
