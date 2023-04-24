@@ -169,6 +169,13 @@
       &-body {
         margin: 30px 60px 5px 60px;
 
+        .sign-in--otp {
+          .buttons-row {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+
         .sub-account {
           margin-bottom: 15px;
         }
