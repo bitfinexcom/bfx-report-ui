@@ -246,6 +246,7 @@ class SignIn extends PureComponent {
           {showUsersList && (
             <SignInList
               users={users}
+              switchMode={switchMode}
               handleUserItemSelect={this.handleUserItemSelect}
             />
           )}
@@ -308,12 +309,6 @@ class SignIn extends PureComponent {
                 {t('auth.forgotPassword')}
               </div>
               <div>
-                <div
-                  className='bitfinex-auth-mode-switch'
-                  onClick={() => switchMode(MODES.SIGN_UP)}
-                >
-                  {t('auth.addAccount')}
-                </div>
                 <Button
                   name='check'
                   loading={loading}
