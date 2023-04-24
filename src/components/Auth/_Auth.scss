@@ -155,10 +155,10 @@
       }
 
       &-footer {
-        margin: 0 60px;
+        margin: 0 60px 27px 60px;
 
         &-actions {
-          justify-content: space-between;
+          justify-content: flex-end;
         }
       }
     }
@@ -213,7 +213,7 @@
     line-height: 38px;
     cursor: pointer;
     color: var(--activeColor);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
 
   &-mode-switch {
