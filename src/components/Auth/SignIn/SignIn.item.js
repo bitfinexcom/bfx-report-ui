@@ -2,6 +2,8 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
+import Icon from 'icons'
+
 export const SignInUserItem = ({
   user,
   backToUsersList,
@@ -19,6 +21,7 @@ export const SignInUserItem = ({
         <p className='sign-in-user--item-title'>
           {user}
         </p>
+        <Icon.CHEVRON_DOWN />
       </div>
     </>
   )
