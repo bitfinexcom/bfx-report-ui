@@ -54,7 +54,7 @@ class PasswordRecovery extends PureComponent {
       password: '',
       passwordRepeat: '',
       isBeingValidated: false,
-      isNotPasswordProtected: hostedFrameworkMode,
+      isPasswordProtectionDisabled: hostedFrameworkMode,
       isPersisted,
       passwordError: '',
       passwordRepeatError: '',
@@ -70,7 +70,7 @@ class PasswordRecovery extends PureComponent {
       apiKey,
       apiSecret,
       password,
-      isNotPasswordProtected,
+      isPasswordProtectionDisabled,
       isPersisted,
       useApiKey,
       userName,
@@ -87,7 +87,7 @@ class PasswordRecovery extends PureComponent {
           apiKey,
           apiSecret,
           password,
-          isNotProtected: isNotPasswordProtected,
+          isNotProtected: isPasswordProtectionDisabled,
           isPersisted,
         })
       } else {
@@ -108,12 +108,12 @@ class PasswordRecovery extends PureComponent {
     const {
       password,
       passwordRepeat,
-      isNotPasswordProtected,
+      isPasswordProtectionDisabled,
       passwordError,
       passwordRepeatError,
     } = this.state
 
-    if (!showFrameworkMode || isNotPasswordProtected) {
+    if (!showFrameworkMode || isPasswordProtectionDisabled) {
       return true
     }
 
@@ -168,11 +168,11 @@ class PasswordRecovery extends PureComponent {
 
   handleOtpPasswordRecovery = () => {
     const { recoverPasswordOtp } = this.props
-    const { otp, password, isNotPasswordProtected } = this.state
+    const { otp, password, isPasswordProtectionDisabled } = this.state
     recoverPasswordOtp({
       otp,
       password,
-      isNotProtected: isNotPasswordProtected,
+      isNotProtected: isPasswordProtectionDisabled,
     })
   }
 
@@ -198,14 +198,14 @@ class PasswordRecovery extends PureComponent {
       passwordError,
       passwordRepeat,
       passwordRepeatError,
-      isNotPasswordProtected,
+      isPasswordProtectionDisabled,
     } = this.state
 
-    const showEnterPassword = showFrameworkMode && !isNotPasswordProtected
+    const showEnterPassword = showFrameworkMode && !isPasswordProtectionDisabled
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
     const isPasswordRecoveryDisabled = (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
-      || (showFrameworkMode && !isNotPasswordProtected
+      || (showFrameworkMode && !isPasswordProtectionDisabled
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
       'bitfinex-auth-sign-up--framework': showFrameworkMode,
@@ -264,8 +264,8 @@ class PasswordRecovery extends PureComponent {
                 {showPasswordProtection && (
                   <Checkbox
                     className='bitfinex-auth-remember-me'
-                    name='isNotPasswordProtected'
-                    checked={isNotPasswordProtected}
+                    name='isPasswordProtectionDisabled'
+                    checked={isPasswordProtectionDisabled}
                     onChange={this.handleCheckboxChange}
                   >
                     {t('auth.removeLoginPassword')}
