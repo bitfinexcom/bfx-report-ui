@@ -287,6 +287,14 @@ class SignIn extends PureComponent {
                     onChange={this.handleInputChange}
                   />
                 )}
+                {showSignInActions && (
+                  <div
+                    className='bitfinex-auth-password-recovery'
+                    onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
+                  >
+                    {t('auth.forgotPasswordLink')}
+                  </div>
+                )}
                 <div className='bitfinex-auth-checkboxes'>
                   {showSubAccount && (
                     <Checkbox
@@ -305,12 +313,6 @@ class SignIn extends PureComponent {
         {showSignInActions && (
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              <div
-                className='bitfinex-auth-password-recovery'
-                onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
-              >
-                {t('auth.forgotPassword')}
-              </div>
               <div>
                 <Button
                   name='check'
