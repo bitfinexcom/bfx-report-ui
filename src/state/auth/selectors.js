@@ -17,9 +17,9 @@ export const getSubAccountsLoading = state => getAuth(state)?.subAccountsLoading
 export const getShowOtpLogin = state => getAuth(state)?.showOtpLogin ?? false
 export const getLoginToken = state => getAuth(state)?.loginToken ?? ''
 export const getUserShouldReLogin = state => getAuth(state)?.userShouldReLogin ?? ''
-export const getIsSubAccsRestricted = state => _first(
+export const getIsSubAccsAvailable = state => _first(
   _filter(getUsers(state), user => _isEqual(user?.email, getEmail(state))),
-)?.isRestrictedToBeAddedToSubAccount ?? false
+)?.isApiKeysAuth ?? true
 
 export const getAuthData = state => {
   const {
@@ -103,4 +103,5 @@ export default {
   selectAuth,
   getLoginToken,
   getUserShouldReLogin,
+  getIsSubAccsAvailable,
 }
