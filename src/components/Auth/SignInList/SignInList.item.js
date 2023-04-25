@@ -13,7 +13,7 @@ export const SignInListItem = ({ user, handleUserSelect }) => {
   return (
     <div
       className='sign-in-list--item'
-      onClick={() => handleUserSelect(email)}
+      onClick={() => handleUserSelect(user)}
     >
       <Icon.USER_CIRCLE />
       <div className='sign-in-list--item-description'>
