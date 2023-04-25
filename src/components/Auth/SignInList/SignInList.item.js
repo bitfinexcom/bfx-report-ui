@@ -31,7 +31,6 @@ export const SignInListItem = ({ user, handleUserSelect }) => {
         <Icons.MORE />
       </div>
     </div>
-
   )
 }
 
