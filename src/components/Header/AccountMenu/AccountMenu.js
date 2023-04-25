@@ -36,9 +36,9 @@ const AccountMenu = ({
   authStatus,
   togglePrefDialog,
   toggleExportDialog,
-  isSubAccsRestricted,
+  isSubAccsAvailable,
 }) => {
-  const showSubAccounts = showFrameworkMode && !isSubAccsRestricted
+  const showSubAccounts = showFrameworkMode && isSubAccsAvailable
 
   const switchSection = (type) => {
     history.push({ pathname: getPath(type) })
@@ -133,7 +133,7 @@ AccountMenu.propTypes = {
   t: PropTypes.func.isRequired,
   togglePrefDialog: PropTypes.func.isRequired,
   toggleExportDialog: PropTypes.func.isRequired,
-  isSubAccsRestricted: PropTypes.bool.isRequired,
+  isSubAccsAvailable: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
     location: PropTypes.shape({

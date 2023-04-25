@@ -128,7 +128,7 @@ class Main extends PureComponent {
     authIsShown: PropTypes.bool,
     authStatus: PropTypes.bool.isRequired,
     isTurkishSite: PropTypes.bool.isRequired,
-    isSubAccsRestricted: PropTypes.bool.isRequired,
+    isSubAccsAvailable: PropTypes.bool.isRequired,
     errorDialogDisabled: PropTypes.bool.isRequired,
   }
 
@@ -141,10 +141,10 @@ class Main extends PureComponent {
       authStatus,
       authIsShown,
       isTurkishSite,
-      isSubAccsRestricted,
+      isSubAccsAvailable,
       errorDialogDisabled,
     } = this.props
-    const showSubAccounts = showFrameworkMode && !isSubAccsRestricted
+    const showSubAccounts = showFrameworkMode && isSubAccsAvailable
 
     return authStatus && !authIsShown ? (
       <>
