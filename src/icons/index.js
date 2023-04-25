@@ -35,6 +35,7 @@ import { ReactComponent as LIGHT_THEME } from './light-theme.svg'
 import { ReactComponent as LIST_NUMBER } from './list-number.svg'
 import { ReactComponent as LOOP } from './loop.svg'
 import { ReactComponent as MOVEMENTS } from './movements.svg'
+import { ReactComponent as MORE } from './more.svg'
 import { ReactComponent as NOTEBOOK } from './notebook.svg'
 import { ReactComponent as OFFLINE } from './offline.svg'
 import { ReactComponent as ORDERS } from './orders.svg'
@@ -91,6 +92,7 @@ export default {
   LIST_NUMBER,
   LOOP,
   MOVEMENTS,
+  MORE,
   NOTEBOOK,
   OFFLINE,
   ORDERS,
