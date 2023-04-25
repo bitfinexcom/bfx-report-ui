@@ -15,7 +15,7 @@ import {
 import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 
-import { MODES } from '../Auth'
+import { AUTH_TYPES, MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
 import InputKey from '../InputKey'
 import SignInList from '../SignInList'
@@ -74,6 +74,7 @@ class SignIn extends PureComponent {
       password,
       userPassword: '',
       showUsersList: true,
+      isSubAccount: false,
     }
   }
 
@@ -116,10 +117,11 @@ class SignIn extends PureComponent {
 
   onSignIn = () => {
     const {
-      isSubAccount, signIn, users, userShouldReLogin, signUpEmail,
+      signIn, userShouldReLogin, signUpEmail,
     } = this.props
-    const { email, password, userPassword } = this.state
-    const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
+    const {
+      email, password, userPassword, isSubAccount,
+    } = this.state
     if (_isEqual(email, userShouldReLogin)) {
       signUpEmail({
         login: email,
@@ -129,7 +131,7 @@ class SignIn extends PureComponent {
       signIn({
         email,
         isNotProtected: !password,
-        isSubAccount: isCurrentUserHasSubAccount ? isSubAccount : false,
+        isSubAccount,
         password,
       })
     }
@@ -183,12 +185,23 @@ class SignIn extends PureComponent {
     })
   }
 
-  handleUserItemSelect = (email) => {
-    this.setState({ email, showUsersList: false })
+  handleUserItemSelect = ({ email, isSubAccount }) => {
+    const { switchAuthType } = this.props
+    if (isSubAccount) {
+      switchAuthType(AUTH_TYPES.MULTIPLE_ACCOUNTS)
+    } else {
+      switchAuthType(AUTH_TYPES.SIMPLE_ACCOUNTS)
+    }
+    this.setState({ email, isSubAccount, showUsersList: false })
   }
 
+
   backToUsersList = () => {
-    this.setState({ email: '', showUsersList: true })
+    this.setState({
+      email: '',
+      isSubAccount: false,
+      showUsersList: true,
+    })
   }
 
   render() {
