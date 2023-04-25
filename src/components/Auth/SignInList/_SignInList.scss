@@ -14,6 +14,11 @@
       margin: 0;
     }
 
+    &-type {
+      margin: 0;
+      color: var(--color2);
+    }
+
     &:hover {
       cursor: pointer;
       background-color: var(--bgColor);
