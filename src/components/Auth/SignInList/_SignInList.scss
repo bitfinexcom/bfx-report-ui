@@ -1,6 +1,21 @@
 .sign-in-list {
-  &--item {
+  &--wrapper {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &--icon {
+    cursor: pointer;
+    margin-right: 54px;
+
+    &:hover{
+      opacity: 0.8;
+    }
+  }
+
+  &--item {
+    display: flex; 
     align-items: center;
     justify-content: flex-start;
     padding: 0 54px;
