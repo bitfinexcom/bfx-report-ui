@@ -3,6 +3,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--bgColor);
+    }
   }
 
   &--icon {
@@ -32,11 +37,6 @@
     &-type {
       margin: 0;
       color: var(--color2);
-    }
-
-    &:hover {
-      cursor: pointer;
-      background-color: var(--bgColor);
     }
   }
 }
