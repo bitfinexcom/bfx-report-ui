@@ -6,7 +6,6 @@ import _isEmpty from 'lodash/isEmpty'
 import _isEqual from 'lodash/isEqual'
 import {
   Button,
-  Checkbox,
   Classes,
   Dialog,
   Intent,
@@ -217,7 +216,6 @@ class SignIn extends PureComponent {
       switchAuthType,
       isOtpLoginShown,
       userShouldReLogin,
-      isMultipleAccsSelected,
       isElectronBackendLoaded,
     } = this.props
     const {
@@ -231,8 +229,6 @@ class SignIn extends PureComponent {
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
     const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
-    const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
-    const showSubAccount = isCurrentUserHasSubAccount && isMultipleAccsSelected
     const isEmailSelected = !_isEmpty(email)
     const isSubAccsAvailableForCurrentUser = !!_find(users,
       user => _isEqual(user?.email, email) && !user?.isRestrictedToBeAddedToSubAccount)
@@ -310,18 +306,6 @@ class SignIn extends PureComponent {
                     {t('auth.forgotPasswordLink')}
                   </div>
                 )}
-                <div className='bitfinex-auth-checkboxes'>
-                  {showSubAccount && (
-                    <Checkbox
-                      disabled
-                      name='isSubAccount'
-                      checked={isSubAccount}
-                      className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sub-accounts'
-                    >
-                      {t('auth.subAccount')}
-                    </Checkbox>
-                  )}
-                </div>
               </div>
             )}
         </div>
