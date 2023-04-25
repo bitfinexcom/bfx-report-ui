@@ -1,21 +1,35 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-// import { useTranslation } from 'react-i18next'
+import _isEmpty from 'lodash/isEmpty'
+import { useTranslation } from 'react-i18next'
 import Icon from 'icons'
 
 export const SignInListItem = ({ user, handleUserSelect }) => {
-  // const { t } = useTranslation()
+  const { t } = useTranslation()
   console.log('++user', user)
   const { email } = user
+
+  const getUserType = ({ isApiKeysAuth, subUsers }) => {
+    if (!isApiKeysAuth) return 'auth.login'
+    if (isApiKeysAuth && !_isEmpty(subUsers)) return 'auth.multyAccsApi'
+    return 'auth.apiKey'
+  }
+
+
   return (
     <div
       className='sign-in-list--item'
       onClick={() => handleUserSelect(email)}
     >
       <Icon.USER_CIRCLE />
-      <p className='sign-in-list--item-title'>
-        {email}
-      </p>
+      <div className='sign-in-list--item-description'>
+        <p className='sign-in-list--item-title'>
+          {email}
+        </p>
+        <p className='sign-in-list--item-type'>
+          {t(getUserType(user))}
+        </p>
+      </div>
     </div>
   )
 }
