@@ -16,30 +16,21 @@ const UserItemMenu = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
 
-
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
-
-    // const headerBrand = document.getElementsByClassName('header-brand')[0]
-    // if (isOpen) {
-    //   headerBrand.classList.add('top-navigation--open')
-    // } else {
-    //   headerBrand.classList.remove('top-navigation--open')
-    // }
   }
 
   const classes = classNames('.sign-in-list--menu', {
     '.sign-in-list--menu-open': isOpen,
   })
 
-
   return (
     <div className={classes}>
       <Popover
         minimal
         autoFocus={false}
+        usePortal={false}
         position={Position.BOTTOM_RIGHT}
-        portalClassName='sign-in-list--menu-portal'
         onOpening={() => togglePopover(true)}
         onClosing={() => togglePopover(false)}
         content={(
@@ -66,7 +57,6 @@ const UserItemMenu = ({
 }
 
 UserItemMenu.propTypes = {
-  email: PropTypes.string.isRequired,
   togglePrefDialog: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
