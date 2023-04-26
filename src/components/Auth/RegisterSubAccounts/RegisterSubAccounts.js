@@ -12,7 +12,7 @@ import Select from 'ui/Select'
 import PlatformLogo from 'ui/PlatformLogo'
 import SubAccount from 'components/SubAccounts/SubAccount'
 
-import { MODES } from '../Auth'
+import { AUTH_TYPES, MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
 
 const filterRestrictedUsers = (users) => _filter(
@@ -77,13 +77,18 @@ class RegisterSubAccounts extends PureComponent {
     })
   }
 
+  handleBackToSignIn = () => {
+    const { switchMode, switchAuthType } = this.props
+    switchMode(MODES.SIGN_IN)
+    switchAuthType(AUTH_TYPES.SIMPLE_ACCOUNTS)
+  }
+
   render() {
     const {
       t,
       users,
       authType,
       authData,
-      switchMode,
       switchAuthType,
       isMultipleAccsSelected,
     } = this.props
@@ -142,7 +147,7 @@ class RegisterSubAccounts extends PureComponent {
               <div className='auth-mode-switch-wrapper'>
                 <div
                   className='bitfinex-auth-mode-switch'
-                  onClick={() => switchMode(MODES.SIGN_IN)}
+                  onClick={() => this.handleBackToSignIn()}
                 >
                   <Icon.SIGN_IN />
                   {t('auth.signInToExistingAcc')}
