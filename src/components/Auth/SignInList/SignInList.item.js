@@ -16,6 +16,8 @@ export const SignInListItem = ({
   console.log('++user', user)
   const { email } = user
 
+  const addAccounts = () => handleAddAccounts(email)
+
   return (
     <div className='sign-in-list--wrapper'>
       <div
@@ -33,7 +35,7 @@ export const SignInListItem = ({
         </div>
       </div>
       <div className='sign-in-list--icon'>
-        <UserItemMenu handleAddAccounts={handleAddAccounts} />
+        <UserItemMenu handleAddAccounts={addAccounts} />
       </div>
     </div>
   )
