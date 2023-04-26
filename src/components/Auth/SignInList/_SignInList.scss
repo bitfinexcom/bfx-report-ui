@@ -10,6 +10,23 @@
 
       .sign-in-list--icon {
         opacity: 1;
+
+        .sign-in-list--menu {
+          &-content { 
+            .bp3-menu {
+               li {
+                .bp3-menu-item {
+                  border-radius: 3px;
+
+                  &:active,
+                  &:hover {
+                    background-color: var(--bgColor);
+                  }
+                }        
+              }
+            }
+          }
+        }
       }
     }
   }
