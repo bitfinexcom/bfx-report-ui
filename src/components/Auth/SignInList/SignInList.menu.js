@@ -1,5 +1,6 @@
 import React, { useState, memo } from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
   Menu,
@@ -14,6 +15,7 @@ import Icon from 'icons'
 const UserItemMenu = ({
   togglePrefDialog,
 }) => {
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
 
   const togglePopover = (isPopoverOpen) => {
@@ -37,10 +39,10 @@ const UserItemMenu = ({
           <div className='sign-in-list--menu-content'>
             <Menu>
               <MenuItem
-                shouldDismissPopover={false}
-                text={'Add accounts'}
                 onClick={togglePrefDialog}
+                shouldDismissPopover={false}
                 className='bp3-menu-item--account'
+                text={t('auth.addAccountsToThisAcc')}
               />
             </Menu>
           </div>
@@ -58,12 +60,6 @@ const UserItemMenu = ({
 
 UserItemMenu.propTypes = {
   togglePrefDialog: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-    location: PropTypes.shape({
-      search: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
 }
 
 export default memo(UserItemMenu)
