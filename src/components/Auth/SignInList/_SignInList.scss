@@ -26,6 +26,11 @@
     padding: 0 54px;
     min-height: 76px;
 
+    &:hover {
+      cursor: pointer;
+      background-color: var(--bgColor);
+    }
+
     svg {
       margin-right: 24px;
     }
