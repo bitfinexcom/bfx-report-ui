@@ -30,6 +30,7 @@ const { showFrameworkMode } = config
 class RegisterSubAccounts extends PureComponent {
   static propTypes = {
     authType: PropTypes.string.isRequired,
+    masterAccount: PropTypes.string.isRequired,
     authData: PropTypes.shape({
       apiKey: PropTypes.string,
       email: PropTypes.string,
@@ -81,6 +82,7 @@ class RegisterSubAccounts extends PureComponent {
     const { switchMode, switchAuthType } = this.props
     switchMode(MODES.SIGN_IN)
     switchAuthType(AUTH_TYPES.SIMPLE_ACCOUNTS)
+    this.clearMasterAccEmail()
   }
 
   render() {
@@ -90,8 +92,10 @@ class RegisterSubAccounts extends PureComponent {
       authType,
       authData,
       switchAuthType,
+      masterAccount,
       isMultipleAccsSelected,
     } = this.props
+    console.log('+++REG masterAccount', masterAccount)
     const { masterAccEmail } = this.state
     const preparedUsers = filterRestrictedUsers(users)
     const masterAccUsers = prepareMasterAccUsers(preparedUsers)
