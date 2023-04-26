@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import Icons from 'icons'
 
+import UserItemMenu from './SignInList.menu'
 import { getUserType } from './SignInList.helpers'
 
 export const SignInListItem = ({ user, handleUserSelect }) => {
@@ -28,7 +29,7 @@ export const SignInListItem = ({ user, handleUserSelect }) => {
         </div>
       </div>
       <div className='sign-in-list--icon'>
-        <Icons.MORE />
+        <UserItemMenu />
       </div>
     </div>
   )
