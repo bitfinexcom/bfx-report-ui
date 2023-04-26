@@ -48,6 +48,7 @@ class SignIn extends PureComponent {
     showOtpLogin: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchAuthType: PropTypes.func.isRequired,
+    setMasterAccount: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     updateAuth: PropTypes.func.isRequired,
     userShouldReLogin: PropTypes.string.isRequired,
@@ -205,10 +206,11 @@ class SignIn extends PureComponent {
     })
   }
 
-  handleAddAccountToSelectedUser = () => {
-    const { switchMode, switchAuthType } = this.props
+  handleAddAccountToSelectedUser = (email) => {
+    const { switchMode, switchAuthType, setMasterAccount } = this.props
     switchAuthType(AUTH_TYPES.MULTIPLE_ACCOUNTS)
     switchMode(MODES.SIGN_UP)
+    setMasterAccount(email)
   }
 
   render() {
