@@ -7,7 +7,11 @@ import Icons from 'icons'
 import UserItemMenu from './SignInList.menu'
 import { getUserType } from './SignInList.helpers'
 
-export const SignInListItem = ({ user, handleUserSelect }) => {
+export const SignInListItem = ({
+  user,
+  handleUserSelect,
+  handleAddAccounts,
+}) => {
   const { t } = useTranslation()
   console.log('++user', user)
   const { email } = user
@@ -29,7 +33,7 @@ export const SignInListItem = ({ user, handleUserSelect }) => {
         </div>
       </div>
       <div className='sign-in-list--icon'>
-        <UserItemMenu />
+        <UserItemMenu handleAddAccounts={handleAddAccounts} />
       </div>
     </div>
   )
@@ -42,6 +46,7 @@ SignInListItem.propTypes = {
     isNotProtected: PropTypes.bool.isRequired,
   }).isRequired,
   handleUserSelect: PropTypes.func.isRequired,
+  handleAddAccounts: PropTypes.func.isRequired,
 }
 
 export default memo(SignInListItem)

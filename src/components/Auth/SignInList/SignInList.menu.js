@@ -11,9 +11,8 @@ import {
 
 import Icon from 'icons'
 
-
 const UserItemMenu = ({
-  togglePrefDialog,
+  handleAddAccounts,
 }) => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
@@ -39,8 +38,8 @@ const UserItemMenu = ({
           <div className='sign-in-list--menu-content'>
             <Menu>
               <MenuItem
-                onClick={togglePrefDialog}
                 shouldDismissPopover={false}
+                onClick={() => handleAddAccounts()}
                 className='bp3-menu-item--account'
                 text={t('auth.addAccountsToThisAcc')}
               />
@@ -59,7 +58,7 @@ const UserItemMenu = ({
 }
 
 UserItemMenu.propTypes = {
-  togglePrefDialog: PropTypes.func.isRequired,
+  handleAddAccounts: PropTypes.func.isRequired,
 }
 
 export default memo(UserItemMenu)

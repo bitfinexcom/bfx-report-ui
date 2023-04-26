@@ -12,6 +12,7 @@ import UserItem from './SignInList.item'
 export const SignInList = ({
   users,
   switchMode,
+  handleAddAccounts,
   handleUserItemSelect,
 }) => {
   const { t } = useTranslation()
@@ -22,6 +23,7 @@ export const SignInList = ({
         <UserItem
           key={index}
           user={user}
+          handleAddAccounts={handleAddAccounts}
           handleUserSelect={handleUserItemSelect}
         />
       ))}
@@ -45,6 +47,7 @@ SignInList.propTypes = {
     isNotProtected: PropTypes.bool.isRequired,
   })).isRequired,
   switchMode: PropTypes.func.isRequired,
+  handleAddAccounts: PropTypes.func.isRequired,
   handleUserItemSelect: PropTypes.func.isRequired,
 }
 
