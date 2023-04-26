@@ -205,6 +205,12 @@ class SignIn extends PureComponent {
     })
   }
 
+  handleAddAccountToSelectedUser = () => {
+    const { switchMode, switchAuthType } = this.props
+    switchAuthType(AUTH_TYPES.MULTIPLE_ACCOUNTS)
+    switchMode(MODES.SIGN_UP)
+  }
+
   render() {
     const {
       t,
@@ -262,6 +268,7 @@ class SignIn extends PureComponent {
               users={users}
               switchMode={switchMode}
               handleUserItemSelect={this.handleUserItemSelect}
+              handleAddAccounts={this.handleAddAccountToSelectedUser}
             />
           )}
           {isOtpLoginShown
