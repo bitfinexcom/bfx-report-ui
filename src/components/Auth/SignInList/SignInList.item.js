@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -16,7 +16,10 @@ export const SignInListItem = ({
   console.log('++user', user)
   const { email } = user
 
-  const addAccounts = () => handleAddAccounts(email)
+  const addAccounts = useCallback(
+    () => handleAddAccounts(email),
+    [email],
+  )
 
   return (
     <div className='sign-in-list--wrapper'>
