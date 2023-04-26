@@ -7,16 +7,17 @@
     &:hover {
       cursor: pointer;
       background-color: var(--bgColor);
+
+      .sign-in-list--icon {
+        opacity: 1;
+      }
     }
   }
 
   &--icon {
     cursor: pointer;
     margin-right: 54px;
-
-    &:hover{
-      opacity: 0.8;
-    }
+    opacity: 0;
   }
 
   &--item {
