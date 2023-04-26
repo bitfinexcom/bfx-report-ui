@@ -194,7 +194,6 @@ class SignIn extends PureComponent {
       userShouldReLogin,
       isMultipleAccsSelected,
       isElectronBackendLoaded,
-      authData: { isPersisted },
     } = this.props
     const {
       otp,
@@ -268,16 +267,6 @@ class SignIn extends PureComponent {
                   />
                 )}
                 <div className='bitfinex-auth-checkboxes'>
-                  {isEmailSelected && (
-                    <Checkbox
-                      name='isPersisted'
-                      checked={isPersisted}
-                      onChange={this.togglePersistence}
-                      className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sign-in'
-                    >
-                      {t('auth.rememberMe')}
-                    </Checkbox>
-                  )}
                   {showSubAccount && (
                     <Checkbox
                       disabled
@@ -299,7 +288,7 @@ class SignIn extends PureComponent {
                 className='bitfinex-auth-password-recovery'
                 onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
               >
-                {t('auth.passwordRecovery')}
+                {t('auth.forgotPassword')}
               </div>
               <div>
                 <div

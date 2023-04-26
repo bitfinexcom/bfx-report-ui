@@ -25,6 +25,8 @@ const prepareMasterAccUsers = (users) => _map(
   user => user.email,
 )
 
+const { showFrameworkMode } = config
+
 class RegisterSubAccounts extends PureComponent {
   static propTypes = {
     authType: PropTypes.string.isRequired,
@@ -49,10 +51,10 @@ class RegisterSubAccounts extends PureComponent {
   constructor(props) {
     super()
 
-    const { authData: { email }, users } = props
-    const { email: firstUserEmail } = filterRestrictedUsers(users)[0] || {}
+    const { users } = props
+    const { email } = filterRestrictedUsers(users)[0] || {}
     this.state = {
-      masterAccEmail: email || firstUserEmail,
+      masterAccEmail: email,
     }
   }
 
@@ -136,12 +138,15 @@ class RegisterSubAccounts extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            {config.showFrameworkMode && users.length > 0 && (
-              <div
-                className='bitfinex-auth-mode-switch'
-                onClick={() => switchMode(MODES.SIGN_IN)}
-              >
-                {t('auth.signIn')}
+            {showFrameworkMode && users.length > 0 && (
+              <div className='auth-mode-switch-wrapper'>
+                <div
+                  className='bitfinex-auth-mode-switch'
+                  onClick={() => switchMode(MODES.SIGN_IN)}
+                >
+                  <Icon.SIGN_IN />
+                  {t('auth.signInToExistingAcc')}
+                </div>
               </div>
             )}
           </div>

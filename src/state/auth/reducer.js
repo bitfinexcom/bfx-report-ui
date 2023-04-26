@@ -10,7 +10,7 @@ const initialAuthData = {
   email: '',
   password: '',
   hasAuthData: false,
-  isPersisted: false,
+  isPersisted: true,
   isNotProtected: true,
   isSubAccount: false,
 }
@@ -24,7 +24,7 @@ const getStoredAuth = () => {
     email = '',
     password = '',
     hasAuthData = Authenticator.hasData(),
-    isPersisted = false,
+    isPersisted = true,
     isNotProtected = true,
     isSubAccount = false,
   } = auth

@@ -4,19 +4,23 @@
 @import './RegisterSubAccounts/RegisterSubAccounts';
 
 .bitfinex-auth {
+  min-width: 500px;
   .bp3-dialog {
     &-body {
-      margin-top: 10px;
-      font-size: 15px;
-      flex-direction: column;
       display: flex;
-      margin-bottom: 5px;
+      flex-direction: column;
+      font-size: 15px;
+      margin: 30px 20px 5px 20px;
 
       > .platform-logo {
         position: relative;
-        width: 240px;
-        height: 28px;
-        margin: 15px auto 30px auto;
+        width: 165px;
+        height: 20px;
+        margin: 15px auto 35px auto;
+      }
+
+      > .api-key-note {
+        margin-bottom: 40px;
       }
 
       > .buttons-row {
@@ -32,10 +36,39 @@
         font-size: 15px;
         background-color: var(--authNoticeBg);
       }
+
+      > .bp3-callout-icon {
+        display: flex;
+
+        svg {
+          margin-right: 10px;
+
+          .icon--info-circle  {
+            fill: var(--activeColor)
+          }
+        }
+      }
     }
 
     &-footer {
-      margin : 0 15px;
+      margin : 0 20px;
+
+      &-actions {
+        margin-bottom: 40px;
+        justify-content: space-between;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .auth-mode-switch-wrapper {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          border-top: 1px solid var(--borderColor);
+          padding-top: 18px;
+        }
+      }
     }
 
     .bitfinex-auth-check {
@@ -71,7 +104,7 @@
 
   &-checkboxes {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 0 2px 0 2px;
 
     &--group {
@@ -97,10 +130,41 @@
     }
   }
 
+  &-sign-up {
+    .bp3-dialog {
+      &-body {
+        margin: 30px 60px 5px 60px;
+
+        .sub-account {
+          margin-bottom: 15px;
+        }
+      }
+
+      &-footer {
+        margin : 0 60px;
+      }
+    }
+  }
+
   &-remember-me {
     &.bp3-checkbox {
       line-height: 30px;
       margin-left: 0;
+      color: var(--color2);
+      margin-bottom: 35px;
+
+      &:first-child{
+        margin-right: 60px;
+      }
+
+      .bp3-control-indicator {
+        box-shadow: none;
+        background-color: var(--multiBg);
+
+        &:hover {
+          background-color: var(--multiBg);
+        }
+      }
     }
 
     &--sub-accounts {
@@ -112,8 +176,9 @@
   }
 
   &-password-recovery {
-    line-height: 30px;
+    line-height: 38px;
     cursor: pointer;
+    color: var(--color2);
   }
 
   &-mode-switch {
@@ -121,9 +186,24 @@
     margin-right: 10px;
     line-height: 30px;
     cursor: pointer;
+    align-items: center;
+    color: var(--color2);
+
+    svg {
+      margin-right: 7px;
+      
+      .icon-sign-in {
+        fill: var(--color2);
+      }
+    }
+  } 
+
+  .api-key-switch {
+    color: var(--activeColor);
   }
 
   &-check {
+    min-height: 40px;
     min-width: 136px;
   }
 }
