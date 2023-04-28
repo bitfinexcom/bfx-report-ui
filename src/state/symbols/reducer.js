@@ -1,6 +1,8 @@
 import authTypes from 'state/auth/constants'
 import { formatPair, mapPair, mapSymbol } from 'state/symbols/utils'
 import _replace from 'lodash/replace'
+import _filter from 'lodash/filter'
+import _includes from 'lodash/includes'
 
 import SymbolMap from './map'
 import types from './constants'
@@ -14,6 +16,8 @@ const initialState = {
   isFetched: false,
   pairs: [], // pair
 }
+
+const isTestAccount = false
 
 export function symbolsReducer(state = initialState, action) {
   const { type, payload } = action
@@ -59,11 +63,23 @@ export function symbolsReducer(state = initialState, action) {
 
       const preparedCoins = [...new Set(coins)].sort()
 
-      const pairMapping = mapSymbols.reduce((acc, symbol) => {
+      console.log('++mapSymbols', mapSymbols)
+
+      const preparedMapSymbols = isTestAccount
+        ? _filter(mapSymbols, item => _includes(item?.[0], 'TEST'))
+        : _filter(mapSymbols, item => !_includes(item?.[0], 'TEST'))
+
+
+      console.log('++preparedMapSymbols', preparedMapSymbols)
+
+      const pairMapping = preparedMapSymbols.reduce((acc, symbol) => {
         const [from, to] = symbol
+        console.log('++from', from)
         acc[from] = to
         return acc
       }, {})
+
+      console.log('++pairMapping', pairMapping)
 
       SymbolMap.setSymbols(symbolMapping)
       SymbolMap.setPairs(pairMapping)
