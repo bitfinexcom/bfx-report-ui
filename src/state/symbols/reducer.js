@@ -1,6 +1,5 @@
 import authTypes from 'state/auth/constants'
 import { formatPair, mapPair, mapSymbol } from 'state/symbols/utils'
-import _replace from 'lodash/replace'
 import _filter from 'lodash/filter'
 import _includes from 'lodash/includes'
 
@@ -36,20 +35,13 @@ export function symbolsReducer(state = initialState, action) {
       const explorersDict = {}
       const symbolMapping = {}
 
-      console.log('+++currencies', currencies)
-
       const preparedCurrencies = isTestAccount
         ? _filter(currencies, item => _includes(item?.id, 'TEST'))
         : _filter(currencies, item => !_includes(item?.id, 'TEST'))
 
-      console.log('+++preparedCurrencies', preparedCurrencies)
-
       preparedCurrencies.forEach((currency) => {
         const { id, explorer, name } = currency
         let { symbol } = currency
-
-        console.log('++id', id)
-        console.log('++symbol', symbol)
 
         if (symbol && id !== symbol) {
           if (id.includes('F0')) {
@@ -58,7 +50,6 @@ export function symbolsReducer(state = initialState, action) {
           if (symbol === 'USDt') {
             symbolMapping.UST = symbol
           } else {
-            // symbolMapping[_replace(id, 'TEST', '')] = symbol
             symbolMapping[id] = symbol
           }
 
@@ -75,24 +66,15 @@ export function symbolsReducer(state = initialState, action) {
 
       const preparedCoins = [...new Set(coins)].sort()
 
-      console.log('++symbolMapping', symbolMapping)
-      // console.log('++mapSymbols', mapSymbols)
-
       const preparedMapSymbols = isTestAccount
         ? _filter(mapSymbols, item => _includes(item?.[0], 'TEST'))
         : _filter(mapSymbols, item => !_includes(item?.[0], 'TEST'))
 
-
-      // console.log('++preparedMapSymbols', preparedMapSymbols)
-
       const pairMapping = preparedMapSymbols.reduce((acc, symbol) => {
         const [from, to] = symbol
-        // console.log('++from', from)
         acc[from] = to
         return acc
       }, {})
-
-      // console.log('++pairMapping', pairMapping)
 
       SymbolMap.setSymbols(symbolMapping)
       SymbolMap.setPairs(pairMapping)
