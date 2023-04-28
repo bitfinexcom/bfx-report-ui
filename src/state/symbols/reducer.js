@@ -83,6 +83,10 @@ export function symbolsReducer(state = initialState, action) {
       const formattedPairs = pairs.map(formatPair).map(mapPair).sort()
       const formattedInactivePairs = inactiveSymbols.map(formatPair).map(mapPair).sort()
 
+      const preparedPairs = isTestAccount
+        ? _filter(formattedPairs, item => _includes(item, 'TEST'))
+        : _filter(formattedPairs, item => !_includes(item, 'TEST'))
+
       return {
         ...state,
         coins: preparedCoins,
@@ -91,7 +95,7 @@ export function symbolsReducer(state = initialState, action) {
         inactiveCurrencies: formattedInactiveCurrencies,
         inactivePairs: formattedInactivePairs,
         isFetched: true,
-        pairs: formattedPairs,
+        pairs: preparedPairs,
       }
     }
     case authTypes.LOGOUT:
