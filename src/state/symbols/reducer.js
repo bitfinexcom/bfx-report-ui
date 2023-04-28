@@ -36,9 +36,20 @@ export function symbolsReducer(state = initialState, action) {
       const explorersDict = {}
       const symbolMapping = {}
 
-      currencies.forEach((currency) => {
+      console.log('+++currencies', currencies)
+
+      const preparedCurrencies = isTestAccount
+        ? _filter(currencies, item => _includes(item?.id, 'TEST'))
+        : _filter(currencies, item => !_includes(item?.id, 'TEST'))
+
+      console.log('+++preparedCurrencies', preparedCurrencies)
+
+      preparedCurrencies.forEach((currency) => {
         const { id, explorer, name } = currency
         let { symbol } = currency
+
+        console.log('++id', id)
+        console.log('++symbol', symbol)
 
         if (symbol && id !== symbol) {
           if (id.includes('F0')) {
@@ -47,7 +58,8 @@ export function symbolsReducer(state = initialState, action) {
           if (symbol === 'USDt') {
             symbolMapping.UST = symbol
           } else {
-            symbolMapping[_replace(id, 'TEST', '')] = symbol
+            // symbolMapping[_replace(id, 'TEST', '')] = symbol
+            symbolMapping[id] = symbol
           }
 
           explorersDict[symbol] = explorer
@@ -63,23 +75,24 @@ export function symbolsReducer(state = initialState, action) {
 
       const preparedCoins = [...new Set(coins)].sort()
 
-      console.log('++mapSymbols', mapSymbols)
+      console.log('++symbolMapping', symbolMapping)
+      // console.log('++mapSymbols', mapSymbols)
 
       const preparedMapSymbols = isTestAccount
         ? _filter(mapSymbols, item => _includes(item?.[0], 'TEST'))
         : _filter(mapSymbols, item => !_includes(item?.[0], 'TEST'))
 
 
-      console.log('++preparedMapSymbols', preparedMapSymbols)
+      // console.log('++preparedMapSymbols', preparedMapSymbols)
 
       const pairMapping = preparedMapSymbols.reduce((acc, symbol) => {
         const [from, to] = symbol
-        console.log('++from', from)
+        // console.log('++from', from)
         acc[from] = to
         return acc
       }, {})
 
-      console.log('++pairMapping', pairMapping)
+      // console.log('++pairMapping', pairMapping)
 
       SymbolMap.setSymbols(symbolMapping)
       SymbolMap.setPairs(pairMapping)
