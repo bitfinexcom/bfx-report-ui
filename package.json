@@ -81,6 +81,10 @@
       "pre-push": "npm run lint"
     }
   },
+  "engines": {
+    "node": "16.20.0",
+    "npm": "8.19.4"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
