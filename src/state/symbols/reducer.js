@@ -1,5 +1,6 @@
 import authTypes from 'state/auth/constants'
 import { formatPair, mapPair, mapSymbol } from 'state/symbols/utils'
+import _map from 'lodash/map'
 import _filter from 'lodash/filter'
 import _reduce from 'lodash/reduce'
 import _includes from 'lodash/includes'
@@ -67,9 +68,11 @@ export function symbolsReducer(state = initialState, action) {
 
       const preparedCoins = [...new Set(coins)].sort()
 
-      const preparedMapSymbols = isTestAccount
-        ? _filter(mapSymbols, item => _includes(item?.[0], 'TEST'))
-        : _filter(mapSymbols, item => !_includes(item?.[0], 'TEST'))
+      const preparedMapSymbols = _map(mapSymbols, item => {
+        const [itemId, itemName] = item
+        if (_includes(itemId, 'TEST')) return [itemId, `${itemName} (Test)`]
+        return item
+      })
 
       const pairMapping = _reduce(preparedMapSymbols, (acc, symbol) => {
         const [from, to] = symbol
