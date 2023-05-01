@@ -37,15 +37,14 @@ export function symbolsReducer(state = initialState, action) {
       const explorersDict = {}
       const symbolMapping = {}
 
-      const preparedCurrencies = isTestAccount
-        ? _filter(currencies, item => _includes(item?.id, 'TEST'))
-        : _filter(currencies, item => !_includes(item?.id, 'TEST'))
-
-      preparedCurrencies.forEach((currency) => {
+      currencies.forEach((currency) => {
         const { id, explorer, name } = currency
         let { symbol } = currency
 
         if (symbol && id !== symbol) {
+          if (id.includes('TEST')) {
+            symbol = `${symbol} (Test)`
+          }
           if (id.includes('F0')) {
             symbol = `${symbol} (deriv)`
           }
