@@ -1,8 +1,12 @@
 import authTypes from 'state/auth/constants'
-import { formatPair, mapPair, mapSymbol } from 'state/symbols/utils'
+import {
+  formatPair, mapPair, mapSymbol, isTestSymbol,
+} from 'state/symbols/utils'
 import _map from 'lodash/map'
-import _filter from 'lodash/filter'
+import _join from 'lodash/join'
+import _split from 'lodash/split'
 import _reduce from 'lodash/reduce'
+import _replace from 'lodash/replace'
 import _includes from 'lodash/includes'
 
 import SymbolMap from './map'
@@ -17,8 +21,6 @@ const initialState = {
   isFetched: false,
   pairs: [], // pair
 }
-
-const isTestAccount = false
 
 export function symbolsReducer(state = initialState, action) {
   const { type, payload } = action
@@ -86,9 +88,14 @@ export function symbolsReducer(state = initialState, action) {
       const formattedPairs = pairs.map(formatPair).map(mapPair).sort()
       const formattedInactivePairs = inactiveSymbols.map(formatPair).map(mapPair).sort()
 
-      const preparedPairs = isTestAccount
-        ? _filter(formattedPairs, item => _includes(item, 'TEST'))
-        : _filter(formattedPairs, item => !_includes(item, 'TEST'))
+
+      const preparedPairs = _map(formattedPairs, pair => {
+        const [firstSymbol, secondSymbol] = _split(pair, ':')
+        if (isTestSymbol(firstSymbol) && isTestSymbol(secondSymbol)) {
+          return _join([_replace(firstSymbol, ' (Test)', ''), secondSymbol], ':')
+        }
+        return pair
+      })
 
       return {
         ...state,
