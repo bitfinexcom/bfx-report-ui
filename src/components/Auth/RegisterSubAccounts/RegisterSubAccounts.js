@@ -127,6 +127,7 @@ class RegisterSubAccounts extends PureComponent {
           <PlatformLogo />
           <SelectedUserItem
             user={masterAccount}
+            title={'auth.addAccountsTo'}
             backToUsersList={this.handleBackToSignIn}
           />
           <h3 className='master-acc-selector--title'>
