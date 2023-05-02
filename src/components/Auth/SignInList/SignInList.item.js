@@ -14,7 +14,7 @@ export const SignInListItem = ({
 }) => {
   const { t } = useTranslation()
   console.log('++user', user)
-  const { email } = user
+  const { email, isApiKeysAuth } = user
 
   const addAccounts = useCallback(
     () => handleAddAccounts(email),
@@ -37,9 +37,11 @@ export const SignInListItem = ({
           </p>
         </div>
       </div>
-      <div className='sign-in-list--icon'>
-        <UserItemMenu handleAddAccounts={addAccounts} />
-      </div>
+      {isApiKeysAuth && (
+        <div className='sign-in-list--icon'>
+          <UserItemMenu handleAddAccounts={addAccounts} />
+        </div>
+      )}
     </div>
   )
 }
@@ -48,6 +50,7 @@ SignInListItem.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
     isSubAccount: PropTypes.bool.isRequired,
+    isApiKeysAuth: PropTypes.bool.isRequired,
     isNotProtected: PropTypes.bool.isRequired,
   }).isRequired,
   handleUserSelect: PropTypes.func.isRequired,
