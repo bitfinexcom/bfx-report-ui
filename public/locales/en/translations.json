@@ -25,6 +25,7 @@
     "auth": "Auth",
     "title": "Login",
     "addAccount": "Add Account",
+    "addAccounts": "Add Accounts",
     "addAccountsTo": "Add accounts to:",
     "addAccountsToThisAcc": "Add accounts to this account",
     "useApiKey": "Use API Key",
