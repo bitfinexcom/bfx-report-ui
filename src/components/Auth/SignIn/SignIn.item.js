@@ -6,13 +6,14 @@ import Icon from 'icons'
 
 export const SignInUserItem = ({
   user,
+  title,
   backToUsersList,
 }) => {
   const { t } = useTranslation()
   return (
     <>
       <p className='sign-in-user--title'>
-        {t('auth.signInTo')}
+        {t(title)}
       </p>
       <div
         className='sign-in-user--item'
@@ -29,6 +30,7 @@ export const SignInUserItem = ({
 
 SignInUserItem.propTypes = {
   user: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   backToUsersList: PropTypes.func.isRequired,
 }
 
