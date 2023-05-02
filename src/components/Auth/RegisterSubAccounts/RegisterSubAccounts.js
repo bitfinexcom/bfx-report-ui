@@ -1,14 +1,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import _map from 'lodash/map'
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
 import { Classes, Dialog } from '@blueprintjs/core'
 
 import Icon from 'icons'
 import config from 'config'
-import Select from 'ui/Select'
 import PlatformLogo from 'ui/PlatformLogo'
 import SubAccount from 'components/SubAccounts/SubAccount'
 
@@ -19,11 +17,6 @@ import SelectedUserItem from '../SignIn/SignIn.item'
 const filterRestrictedUsers = (users) => _filter(
   users, user => !user?.isRestrictedToBeAddedToSubAccount
   && _isEmpty(user?.subUsers),
-)
-
-const prepareMasterAccUsers = (users) => _map(
-  _filter(users, ['isSubAccount', false]),
-  user => user.email,
 )
 
 const { showFrameworkMode } = config
@@ -53,10 +46,9 @@ class RegisterSubAccounts extends PureComponent {
   constructor(props) {
     super()
 
-    const { users } = props
-    const { email } = filterRestrictedUsers(users)[0] || {}
+    const { masterAccount } = props
     this.state = {
-      masterAccEmail: email,
+      masterAccEmail: masterAccount,
     }
   }
 
@@ -65,12 +57,6 @@ class RegisterSubAccounts extends PureComponent {
     if (_isEmpty(users)) {
       this.clearMasterAccEmail()
     }
-  }
-
-  onEmailChange = (email) => {
-    this.setState({
-      masterAccEmail: email,
-    })
   }
 
   clearMasterAccEmail = () => {
@@ -96,10 +82,8 @@ class RegisterSubAccounts extends PureComponent {
       masterAccount,
       isMultipleAccsSelected,
     } = this.props
-    console.log('+++REG masterAccount', masterAccount)
     const { masterAccEmail } = this.state
     const preparedUsers = filterRestrictedUsers(users)
-    const masterAccUsers = prepareMasterAccUsers(preparedUsers)
     const classes = classNames(
       'bitfinex-auth',
       'bitfinex-auth-sign-up',
@@ -129,17 +113,6 @@ class RegisterSubAccounts extends PureComponent {
             user={masterAccount}
             title={'auth.addAccountsTo'}
             backToUsersList={this.handleBackToSignIn}
-          />
-          <h3 className='master-acc-selector--title'>
-            {t('auth.selectMasterAccount')}
-          </h3>
-          <Select
-            loading
-            items={masterAccUsers}
-            value={masterAccEmail}
-            onChange={this.onEmailChange}
-            className='bitfinex-auth-email'
-            popoverClassName='bitfinex-auth-email-popover'
           />
           <>
             <SubAccount
