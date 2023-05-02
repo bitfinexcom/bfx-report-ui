@@ -1,7 +1,19 @@
+import _join from 'lodash/join'
+import _split from 'lodash/split'
 import _includes from 'lodash/includes'
 import _castArray from 'lodash/castArray'
 
+import { isTestSymbol } from 'state/symbols/utils'
+
 import SymbolMap from '../map'
+
+const preparePair = (pair) => {
+  const [firstSymbol, secondSymbol] = _split(pair, ':')
+  if (isTestSymbol(secondSymbol)) {
+    return _join([`${firstSymbol} (Test)`, secondSymbol], ':')
+  }
+  return pair
+}
 
 // BAB -> BCH
 export const mapSymbol = symbol => SymbolMap.symbols[symbol] || symbol
@@ -51,7 +63,8 @@ export const demapPairs = (pairs, returnString = false) => {
     if (SymbolMap.pairsDemap[pair]) {
       return SymbolMap.pairsDemap[pair]
     }
-    return demapSymbols(pair.split(':')).join(':')
+    const preparedPair = preparePair(pair)
+    return demapSymbols(preparedPair.split(':')).join(':')
   })
 
   return returnString
