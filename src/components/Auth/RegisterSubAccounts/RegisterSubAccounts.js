@@ -11,7 +11,6 @@ import PlatformLogo from 'ui/PlatformLogo'
 import SubAccount from 'components/SubAccounts/SubAccount'
 
 import { AUTH_TYPES, MODES } from '../Auth'
-import AuthTypeSelector from '../AuthTypeSelector'
 import SelectedUserItem from '../SignIn/SignIn.item'
 
 const filterRestrictedUsers = (users) => _filter(
@@ -23,7 +22,6 @@ const { showFrameworkMode } = config
 
 class RegisterSubAccounts extends PureComponent {
   static propTypes = {
-    authType: PropTypes.string.isRequired,
     masterAccount: PropTypes.string.isRequired,
     authData: PropTypes.shape({
       apiKey: PropTypes.string,
@@ -76,9 +74,7 @@ class RegisterSubAccounts extends PureComponent {
     const {
       t,
       users,
-      authType,
       authData,
-      switchAuthType,
       masterAccount,
       isMultipleAccsSelected,
     } = this.props
@@ -102,12 +98,6 @@ class RegisterSubAccounts extends PureComponent {
         isCloseButtonShown={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          {config.showFrameworkMode && (
-            <AuthTypeSelector
-              authType={authType}
-              switchAuthType={switchAuthType}
-            />
-          )}
           <PlatformLogo />
           <SelectedUserItem
             user={masterAccount}
