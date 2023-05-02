@@ -107,7 +107,6 @@ class Auth extends PureComponent {
       case isMultipleAccsSelected && MODES.SIGN_UP:
         return (
           <RegisterSubAccounts
-            authType={authType}
             switchMode={this.switchMode}
             masterAccount={masterAccount}
             switchAuthType={this.switchAuthType}
