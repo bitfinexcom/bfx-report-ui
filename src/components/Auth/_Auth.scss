@@ -179,6 +179,22 @@
         .sub-account {
           margin-bottom: 15px;
         }
+
+        .sign-in-user--item {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background-color: var(--multiBg);
+          min-height: 40px;
+          border-radius: 4px;
+          margin-bottom: 20px;
+          padding: 0 15px;
+          
+          &-title {
+           margin: 0;
+          }
+        }
       }
 
       &-footer {
