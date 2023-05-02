@@ -288,6 +288,7 @@ class SignIn extends PureComponent {
                 {showSelectedUser && (
                   <SelectedUserItem
                     user={email}
+                    title={'auth.signInTo'}
                     backToUsersList={this.backToUsersList}
                   />
                 )}
