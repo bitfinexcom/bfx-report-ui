@@ -93,8 +93,7 @@ class RegisterSubAccounts extends PureComponent {
         isOpen
         usePortal={false}
         className={classes}
-        icon={<Icon.SIGN_UP />}
-        title={t('auth.signUp')}
+        title={t('auth.addAccounts')}
         isCloseButtonShown={false}
       >
         <div className={Classes.DIALOG_BODY}>
