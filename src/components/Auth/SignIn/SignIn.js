@@ -247,8 +247,6 @@ class SignIn extends PureComponent {
     const showInputPassword = !isNotProtected && isEmailSelected && users.length > 0
     const showSignInActions = !isOtpLoginShown && !showUsersList
 
-    console.log('++showUsersList', showUsersList)
-
     return (
       <Dialog
         isOpen
