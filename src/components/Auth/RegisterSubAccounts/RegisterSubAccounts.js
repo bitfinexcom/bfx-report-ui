@@ -14,6 +14,7 @@ import SubAccount from 'components/SubAccounts/SubAccount'
 
 import { AUTH_TYPES, MODES } from '../Auth'
 import AuthTypeSelector from '../AuthTypeSelector'
+import SelectedUserItem from '../SignIn/SignIn.item'
 
 const filterRestrictedUsers = (users) => _filter(
   users, user => !user?.isRestrictedToBeAddedToSubAccount
@@ -124,6 +125,10 @@ class RegisterSubAccounts extends PureComponent {
             />
           )}
           <PlatformLogo />
+          <SelectedUserItem
+            user={masterAccount}
+            backToUsersList={this.handleBackToSignIn}
+          />
           <h3 className='master-acc-selector--title'>
             {t('auth.selectMasterAccount')}
           </h3>
