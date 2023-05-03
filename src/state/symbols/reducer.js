@@ -1,6 +1,13 @@
 import authTypes from 'state/auth/constants'
-import { formatPair, mapPair, mapSymbol } from 'state/symbols/utils'
+import {
+  formatPair, mapPair, mapSymbol, isTestSymbol,
+} from 'state/symbols/utils'
+import _map from 'lodash/map'
+import _join from 'lodash/join'
+import _split from 'lodash/split'
+import _reduce from 'lodash/reduce'
 import _replace from 'lodash/replace'
+import _includes from 'lodash/includes'
 
 import SymbolMap from './map'
 import types from './constants'
@@ -37,13 +44,16 @@ export function symbolsReducer(state = initialState, action) {
         let { symbol } = currency
 
         if (symbol && id !== symbol) {
+          if (id.includes('TEST')) {
+            symbol = `${symbol} (Test)`
+          }
           if (id.includes('F0')) {
             symbol = `${symbol} (deriv)`
           }
           if (symbol === 'USDt') {
             symbolMapping.UST = symbol
           } else {
-            symbolMapping[_replace(id, 'TEST', '')] = symbol
+            symbolMapping[id] = symbol
           }
 
           explorersDict[symbol] = explorer
@@ -59,7 +69,13 @@ export function symbolsReducer(state = initialState, action) {
 
       const preparedCoins = [...new Set(coins)].sort()
 
-      const pairMapping = mapSymbols.reduce((acc, symbol) => {
+      const preparedMapSymbols = _map(mapSymbols, item => {
+        const [itemId, itemName] = item
+        if (_includes(itemId, 'TEST')) return [itemId, `${itemName} (Test)`]
+        return item
+      })
+
+      const pairMapping = _reduce(preparedMapSymbols, (acc, symbol) => {
         const [from, to] = symbol
         acc[from] = to
         return acc
@@ -72,6 +88,15 @@ export function symbolsReducer(state = initialState, action) {
       const formattedPairs = pairs.map(formatPair).map(mapPair).sort()
       const formattedInactivePairs = inactiveSymbols.map(formatPair).map(mapPair).sort()
 
+
+      const preparedPairs = _map(formattedPairs, pair => {
+        const [firstSymbol, secondSymbol] = _split(pair, ':')
+        if (isTestSymbol(firstSymbol) && isTestSymbol(secondSymbol)) {
+          return _join([_replace(firstSymbol, ' (Test)', ''), secondSymbol], ':')
+        }
+        return pair
+      })
+
       return {
         ...state,
         coins: preparedCoins,
@@ -80,7 +105,7 @@ export function symbolsReducer(state = initialState, action) {
         inactiveCurrencies: formattedInactiveCurrencies,
         inactivePairs: formattedInactivePairs,
         isFetched: true,
-        pairs: formattedPairs,
+        pairs: preparedPairs,
       }
     }
     case authTypes.LOGOUT:

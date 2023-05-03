@@ -79,6 +79,8 @@ export const formatRawSymbols = (symbols, isFunding) => {
     : symbolsArray[0]
 }
 
+export const isTestSymbol = (symbol) => _includes(symbol, ' (Test)')
+
 export default {
   formatPair,
   formatRawSymbols,
@@ -87,4 +89,5 @@ export default {
   isFundingSymbol,
   isTradingPair,
   removePrefix,
+  isTestSymbol,
 }
