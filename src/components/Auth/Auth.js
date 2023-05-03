@@ -34,7 +34,9 @@ class Auth extends PureComponent {
     isUsersLoaded: PropTypes.bool,
     t: PropTypes.func.isRequired,
     usersLoading: PropTypes.bool,
-    users: PropTypes.arrayOf(PropTypes.object).isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string,
+    })).isRequired,
   }
 
   static defaultProps = {

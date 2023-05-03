@@ -48,7 +48,9 @@ class Derivatives extends PureComponent {
       width: PropTypes.number,
     })),
     dataReceived: PropTypes.bool.isRequired,
-    entries: PropTypes.arrayOf(PropTypes.object),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      pair: PropTypes.string,
+    })),
     existingPairs: PropTypes.arrayOf(PropTypes.string),
     getFullTime: PropTypes.func.isRequired,
     inactivePairs: PropTypes.arrayOf(PropTypes.string),
