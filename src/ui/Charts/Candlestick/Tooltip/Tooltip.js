@@ -137,6 +137,7 @@ class Tooltip extends React.PureComponent {
 
   render() {
     const { trade } = this.state
+
     return (
       <div className='candlestick-tooltip'>
         {trade && this.getTradeData()}
