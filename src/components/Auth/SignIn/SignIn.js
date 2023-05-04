@@ -192,7 +192,6 @@ class SignIn extends PureComponent {
     this.setState({ email, isSubAccount, showUsersList: false })
   }
 
-
   backToUsersList = () => {
     const { switchAuthType } = this.props
     switchAuthType(AUTH_TYPES.SIMPLE_ACCOUNTS)
