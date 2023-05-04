@@ -563,6 +563,8 @@
     "add_account": "Add Account",
     "title": "Sub Accounts",
     "create": "Create Sub Account",
+    "select": "Select Sub Account",
+    "remove_item": "Remove",
     "api_key": "API Key",
     "api_secret": "API Secret",
     "password": "Password",
