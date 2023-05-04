@@ -136,9 +136,6 @@ class SubAccount extends PureComponent {
               isRemovalEnabled={masterAccount || isSubAccount}
             />
           )}
-          {(masterAccount || (!isSubAccount && !hasSubAccount)) && (
-            <div className='subtitle'>{t('subaccounts.create')}</div>
-          )}
           {(masterAccount || (isSubAccount || !hasSubAccount)) && (
             <>
               <SubUsersAdd
