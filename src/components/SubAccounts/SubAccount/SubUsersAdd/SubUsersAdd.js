@@ -138,14 +138,28 @@ class SubUsersAdd extends PureComponent {
               /* eslint-disable-next-line react/no-array-index-key */
               <div className='sub-users-add-accounts-account' key={index}>
                 {accountOptions.length > 0 && !apiKey && !apiSecret && (
-                  <Select
-                    loading
-                    value={email}
-                    className={selectClassName}
-                    items={subAccountOptionsItems}
-                    popoverClassName={selectPopoverClassName}
-                    onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
-                  />
+                  <>
+                    <div className='account-title'>
+                      <div className='account-title--label'>
+                        {t('subaccounts.select')}
+                      </div>
+                      <div
+                        className='account-title--remove'
+                        onClick={() => this.onAccountRemove(index)}
+                      >
+                        {t('subaccounts.remove_item')}
+                      </div>
+                    </div>
+                    <Select
+                      loading
+                      value={email}
+                      className={selectClassName}
+                      items={subAccountOptionsItems}
+                      popoverClassName={selectPopoverClassName}
+                      onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
+                    />
+
+                  </>
                 )}
                 {!isNotProtected && (
                   <InputGroup
@@ -171,10 +185,6 @@ class SubUsersAdd extends PureComponent {
                     />
                   </>
                 )}
-                <Icon.BIN
-                  onClick={() => this.onAccountRemove(index)}
-                  className='sub-users-add-accounts-account-remove'
-                />
               </div>
             )
           })}
