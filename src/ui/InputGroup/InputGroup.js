@@ -10,11 +10,30 @@ export const InputGroup = (props) => {
     onChange,
     type,
     value,
+    linkLabel,
+    onRemove,
+    showRemoveLink,
   } = props
+
 
   return (
     <div className='input-group'>
-      {label && <div className='input-group-label'>{label}</div>}
+      {label && !showRemoveLink && (
+        <div className='input-group-label'>{label}</div>
+      )}
+      {label && showRemoveLink && (
+        <div className='account-title'>
+          <div className='account-title--label'>
+            {label}
+          </div>
+          <div
+            onClick={() => onRemove()}
+            className='account-title--remove'
+          >
+            {linkLabel}
+          </div>
+        </div>
+      )}
       <BlueprintInputGroup
         id={name}
         name={name}
