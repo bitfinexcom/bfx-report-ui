@@ -31,6 +31,10 @@
       .input-group {
         display: inline-block;
 
+        &-label {
+          margin-bottom: 5px;
+        }
+
         .bp3-input {
           height: 40px;
         }
