@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import _find from 'lodash/find'
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
 import _isEqual from 'lodash/isEqual'
@@ -18,18 +17,16 @@ import { AUTH_TYPES, MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
 import InputKey from '../InputKey'
 import SignInList from '../SignInList'
-import AuthTypeSelector from '../AuthTypeSelector'
 
 import SelectedUserItem from './SignIn.item'
 
-const { showFrameworkMode, isElectronApp } = config
+const { isElectronApp } = config
 const getPreparedUsers = (users, multi = false) => (multi
   ? _filter(users, 'isSubAccount').map(user => user.email)
   : _filter(users, ['isSubAccount', false]).map(user => user.email))
 
 class SignIn extends PureComponent {
   static propTypes = {
-    authType: PropTypes.string.isRequired,
     authData: PropTypes.shape({
       email: PropTypes.string,
       password: PropTypes.string,
@@ -218,10 +215,8 @@ class SignIn extends PureComponent {
       t,
       users,
       loading,
-      authType,
       switchMode,
       isSubAccount,
-      switchAuthType,
       isOtpLoginShown,
       userShouldReLogin,
       isElectronBackendLoaded,
@@ -238,10 +233,6 @@ class SignIn extends PureComponent {
     const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isEmailSelected = !_isEmpty(email)
-    const isSubAccsAvailableForCurrentUser = !!_find(users,
-      user => _isEqual(user?.email, email) && !user?.isRestrictedToBeAddedToSubAccount)
-      || !isEmailSelected
-    const showAuthTypeSelector = showFrameworkMode && isSubAccsAvailableForCurrentUser
     const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin)
     const showSelectedUser = !showUsersList && isEmailSelected
     const showInputPassword = !isNotProtected && isEmailSelected && users.length > 0
@@ -256,12 +247,6 @@ class SignIn extends PureComponent {
         className='bitfinex-auth bitfinex-auth-sign-in'
       >
         <div className={Classes.DIALOG_BODY}>
-          {showAuthTypeSelector && (
-            <AuthTypeSelector
-              authType={authType}
-              switchAuthType={switchAuthType}
-            />
-          )}
           <PlatformLogo />
           {showUsersList && (
             <SignInList
