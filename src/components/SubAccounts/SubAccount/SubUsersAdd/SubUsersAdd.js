@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 
-import Icon from 'icons'
 import Select from 'ui/Select'
 import InputGroup from 'ui/InputGroup'
 
@@ -133,11 +132,12 @@ class SubUsersAdd extends PureComponent {
               '',
               ...accountOptions,
             ]
+            const showSubAccountsSelect = accountOptions.length > 0 && !apiKey && !apiSecret
 
             return (
               /* eslint-disable-next-line react/no-array-index-key */
               <div className='sub-users-add-accounts-account' key={index}>
-                {accountOptions.length > 0 && !apiKey && !apiSecret && (
+                {showSubAccountsSelect && (
                   <>
                     <div className='account-title'>
                       <div className='account-title--label'>
@@ -175,6 +175,9 @@ class SubUsersAdd extends PureComponent {
                       name='apiKey'
                       value={apiKey}
                       label={t('subaccounts.api_key')}
+                      showRemoveLink={!showSubAccountsSelect}
+                      linkLabel={t('subaccounts.remove_item')}
+                      onRemove={() => this.onAccountRemove(index)}
                       onChange={(e) => this.onInputChange(e, index)}
                     />
                     <InputGroup
