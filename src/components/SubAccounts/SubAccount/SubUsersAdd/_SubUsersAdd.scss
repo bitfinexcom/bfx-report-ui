@@ -11,8 +11,6 @@
       border-bottom: 1px solid var(--borderColor);
 
       & > * {
-        align-self: flex-end;
-
         &:not(:last-child) {
           margin-right: 15px;
           margin-bottom: 15px;
