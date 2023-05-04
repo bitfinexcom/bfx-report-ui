@@ -6,7 +6,9 @@
       vertical-align: middle;
       min-height: 74px;
       margin-top:10px;
-      margin-bottom: 20px;
+      padding-bottom: 24px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid var(--borderColor);
 
       & > * {
         align-self: flex-end;
