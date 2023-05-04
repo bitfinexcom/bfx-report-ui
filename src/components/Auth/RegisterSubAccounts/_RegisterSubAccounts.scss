@@ -38,6 +38,11 @@
           margin: 0 0 5px 5px;
         }
       }
+
+      &-add-accounts {
+        max-height: 500px;
+        overflow-y: scroll;
+      }
   
       &-add-accounts-account > * {
         align-self: flex-start;
