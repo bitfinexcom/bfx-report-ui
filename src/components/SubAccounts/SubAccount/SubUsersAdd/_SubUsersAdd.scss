@@ -52,6 +52,13 @@
 
     &-btn {
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .add-new-btn-title {
+        margin-left: 10px;
+      }
     }
   }
 }
