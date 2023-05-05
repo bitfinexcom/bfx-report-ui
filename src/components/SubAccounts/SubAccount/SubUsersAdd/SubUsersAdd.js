@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 
+import Icon from 'icons'
 import Select from 'ui/Select'
 import InputGroup from 'ui/InputGroup'
 
@@ -199,7 +200,9 @@ class SubUsersAdd extends PureComponent {
               onClick={this.onAccountAdd}
               className='sub-users-add-new-btn color--active'
             >
-              {`+ ${t('subaccounts.add_account')}`}
+              <Icon.PLUS_CIRCLE />
+              <span className='add-new-btn-title' />
+              {t('subaccounts.add_account')}
             </span>
           </div>
         )}
