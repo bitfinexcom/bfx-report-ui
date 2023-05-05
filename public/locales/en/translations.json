@@ -560,7 +560,7 @@
     "netResumed": "Internet connection restored fetching data resumed"
   },
   "subaccounts": {
-    "add_account": "Add Account",
+    "add_account": "Add another account",
     "title": "Sub Accounts",
     "create": "Create Sub Account",
     "select": "Select Sub Account",
