@@ -562,6 +562,8 @@
   "subaccounts": {
     "add_account": "Add another account",
     "title": "Sub Accounts",
+    "add_accounts": "Add Accounts",
+    "update_accounts": "Update Accounts",
     "create": "Create Sub Account",
     "select": "Select Sub Account",
     "remove_item": "Remove",
