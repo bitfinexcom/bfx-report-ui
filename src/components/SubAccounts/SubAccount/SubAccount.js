@@ -147,14 +147,19 @@ class SubAccount extends PureComponent {
                 onChange={this.onSubUsersChange}
                 shouldFilterCurrentUser={!isMultipleAccsSelected}
               />
-              <Button
-                intent={Intent.PRIMARY}
-                disabled={isConfirmDisabled}
-                className='sub-account-confirm'
-                onClick={_isEmpty(subUsers) ? this.createSubAccount : this.updateSubAccount}
-              >
-                {_isEmpty(subUsers) ? t('timeframe.custom.confirm') : t('update')}
-              </Button>
+              <div className='sub-account-confirm'>
+                <Button
+                  intent={Intent.SUCCESS}
+                  disabled={isConfirmDisabled}
+                  className='sub-account-confirm-btn'
+                  onClick={_isEmpty(subUsers) ? this.createSubAccount : this.updateSubAccount}
+                >
+                  {_isEmpty(subUsers)
+                    ? t('subaccounts.add_accounts')
+                    : t('subaccounts.update_accounts')}
+                </Button>
+
+              </div>
             </>
           )}
         </>
