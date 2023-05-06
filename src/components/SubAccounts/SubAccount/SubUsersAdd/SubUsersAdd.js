@@ -159,7 +159,6 @@ class SubUsersAdd extends PureComponent {
                       popoverClassName={selectPopoverClassName}
                       onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
                     />
-
                   </>
                 )}
                 {!isNotProtected && (
