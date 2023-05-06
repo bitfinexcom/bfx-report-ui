@@ -16,6 +16,7 @@ export const SignInList = ({
   handleUserItemSelect,
 }) => {
   const { t } = useTranslation()
+
   return (
     <div className='sign-in-list'>
       {_map(users, (user, index) => (

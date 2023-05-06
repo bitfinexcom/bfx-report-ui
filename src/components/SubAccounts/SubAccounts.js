@@ -12,6 +12,7 @@ const SubAccounts = ({ authData, users }) => {
     () => filterRestrictedUsers(users),
     [users],
   )
+
   return (
     <Card
       elevation={Elevation.ZERO}
