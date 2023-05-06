@@ -1,24 +1,35 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import SectionHeader from 'ui/SectionHeader'
+import { filterRestrictedUsers } from './SubAccount/utils'
 
 import SubAccount from './SubAccount'
 
-const SubAccounts = ({ authData, users }) => (
-  <Card
-    elevation={Elevation.ZERO}
-    className='sub-accounts col-lg-12 col-md-12 col-sm-12 col-xs-12'
-  >
-    <SectionHeader
-      filter={false}
-      timeframe={false}
-      title='subaccounts.title'
-    />
-    <SubAccount authData={authData} users={users} />
-  </Card>
-)
+const SubAccounts = ({ authData, users }) => {
+  const preparedUsers = useMemo(
+    () => filterRestrictedUsers(users),
+    [users],
+  )
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='sub-accounts col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader
+        filter={false}
+        timeframe={false}
+        title='subaccounts.title'
+      />
+      <SubAccount
+        users={users}
+        authData={authData}
+        allowedUsers={preparedUsers}
+      />
+    </Card>
+  )
+}
 
 SubAccounts.propTypes = {
   authData: PropTypes.shape({
