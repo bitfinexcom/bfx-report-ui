@@ -13,7 +13,6 @@ export const SignInListItem = ({
   handleAddAccounts,
 }) => {
   const { t } = useTranslation()
-  console.log('++user', user)
   const { email, isApiKeysAuth } = user
 
   const addAccounts = useCallback(
