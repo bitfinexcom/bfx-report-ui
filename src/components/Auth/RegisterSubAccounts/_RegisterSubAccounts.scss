@@ -22,6 +22,16 @@
       }   
     }
 
+    &-confirm {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      &-btn {
+        min-height: 40px;
+      }
+    }
+
     .subtitle {
       font-size:15px;
       margin: 0 0 5px 5px;
