@@ -19,6 +19,7 @@ class SubAccount extends PureComponent {
       isSubAccount: PropTypes.bool,
     }).isRequired,
     addSubAccount: PropTypes.func.isRequired,
+    isSyncing: PropTypes.bool,
     isSubAccountsLoading: PropTypes.bool,
     isMultipleAccsSelected: PropTypes.bool,
     masterAccount: PropTypes.string,
@@ -36,6 +37,7 @@ class SubAccount extends PureComponent {
 
   static defaultProps = {
     allowedUsers: [],
+    isSyncing: false,
     masterAccount: undefined,
     isSubAccountsLoading: false,
     isMultipleAccsSelected: false,
@@ -107,6 +109,7 @@ class SubAccount extends PureComponent {
       t,
       users,
       authData,
+      isSyncing,
       allowedUsers,
       masterAccount,
       isSubAccountsLoading,
@@ -121,6 +124,8 @@ class SubAccount extends PureComponent {
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
     const preparedUsers = _differenceBy(allowedUsers, subUsers, 'email')
     const isConfirmDisabled = _isEmpty(masterAccountEmail) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
+    const showRemoveSubAccount = (masterAccount || isSubAccount) && !isSyncing
+
     let showContent
     if (isSubAccountsLoading) {
       showContent = <Loading />
@@ -168,7 +173,7 @@ class SubAccount extends PureComponent {
 
     return (
       <div className='sub-account'>
-        {(masterAccount || isSubAccount) && (
+        {showRemoveSubAccount && (
           <div className='sub-account-controls'>
             <RemoveSubAccount
               subUsers={subUsers}
