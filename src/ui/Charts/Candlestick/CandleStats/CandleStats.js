@@ -4,8 +4,12 @@ import _throttle from 'lodash/throttle'
 
 class CandleStats extends React.PureComponent {
   static propTypes = {
-    chart: PropTypes.objectOf(PropTypes.object),
-    candleSeries: PropTypes.objectOf(PropTypes.object),
+    chart: PropTypes.objectOf(PropTypes.shape({
+      ve: PropTypes.string,
+    })),
+    candleSeries: PropTypes.objectOf(PropTypes.shape({
+      _series: PropTypes.string,
+    })),
     defaultCandle: PropTypes.objectOf(PropTypes.number),
   }
 

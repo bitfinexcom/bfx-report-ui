@@ -49,7 +49,9 @@ class WeightedAverages extends PureComponent {
       width: PropTypes.number,
     })),
     dataReceived: PropTypes.bool.isRequired,
-    entries: PropTypes.arrayOf(PropTypes.object),
+    entries: PropTypes.arrayOf(PropTypes.shape({
+      pair: PropTypes.string,
+    })),
     existingPairs: PropTypes.arrayOf(PropTypes.string),
     inactivePairs: PropTypes.arrayOf(PropTypes.string),
     nextPage: PropTypes.oneOfType([

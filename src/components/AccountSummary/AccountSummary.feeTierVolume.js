@@ -25,7 +25,9 @@ const AccountSummaryFeeTierVolume = ({ data, t }) => {
 
 AccountSummaryFeeTierVolume.propTypes = {
   t: PropTypes.func.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    curr: PropTypes.string,
+  })).isRequired,
 }
 
 export default memo(AccountSummaryFeeTierVolume)

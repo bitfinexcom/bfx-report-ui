@@ -11,10 +11,14 @@ const tooltipMargin = 15
 
 class Tooltip extends React.PureComponent {
   static propTypes = {
-    chart: PropTypes.objectOf(PropTypes.object),
+    chart: PropTypes.objectOf(PropTypes.shape({
+      ve: PropTypes.string,
+    })),
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    tradeSeries: PropTypes.objectOf(PropTypes.object),
+    tradeSeries: PropTypes.objectOf(PropTypes.shape({
+      _series: PropTypes.string,
+    })),
     t: PropTypes.func.isRequired,
   }
 
