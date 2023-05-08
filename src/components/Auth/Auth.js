@@ -127,12 +127,7 @@ class Auth extends PureComponent {
       case MODES.SIGN_UP:
       default:
         return (
-          <SignUp
-            authType={authType}
-            switchMode={this.switchMode}
-            switchAuthType={this.switchAuthType}
-            isMultipleAccsSelected={isMultipleAccsSelected}
-          />
+          <SignUp switchMode={this.switchMode} />
         )
       case MODES.PASSWORD_RECOVERY:
         return <PasswordRecovery switchMode={this.switchMode} />
