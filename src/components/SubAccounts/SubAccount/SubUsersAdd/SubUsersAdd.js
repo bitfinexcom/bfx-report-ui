@@ -200,8 +200,9 @@ class SubUsersAdd extends PureComponent {
               className='sub-users-add-new-btn color--active'
             >
               <Icon.PLUS_CIRCLE />
-              <span className='add-new-btn-title' />
-              {t('subaccounts.add_account')}
+              <span className='add-new-btn-title'>
+                {t('subaccounts.add_account')}
+              </span>
             </span>
           </div>
         )}
