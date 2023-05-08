@@ -124,7 +124,7 @@ class SubAccount extends PureComponent {
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
     const preparedUsers = _differenceBy(allowedUsers, subUsers, 'email')
     const isConfirmDisabled = _isEmpty(masterAccountEmail) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
-    const showRemoveSubAccount = (masterAccount || isSubAccount) && !isSyncing
+    const showRemoveSubAccountBtn = (masterAccount || isSubAccount) && !isSyncing
 
     let showContent
     if (isSubAccountsLoading) {
@@ -173,7 +173,7 @@ class SubAccount extends PureComponent {
 
     return (
       <div className='sub-account'>
-        {showRemoveSubAccount && (
+        {showRemoveSubAccountBtn && (
           <div className='sub-account-controls'>
             <RemoveSubAccount
               subUsers={subUsers}
