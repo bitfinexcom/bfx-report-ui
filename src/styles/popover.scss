@@ -15,6 +15,14 @@
   }
 }
 
+.sign-in-list--menu-popover {
+  border: 1px solid var(--borderColor);
+
+  .bp3-popover-content {
+    background-color: var(--bgColor2);
+  }
+}
+
 .bp3-tooltip {
   .bp3-popover {
     &-content {

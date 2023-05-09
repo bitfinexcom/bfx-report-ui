@@ -19,6 +19,7 @@ class SubAccount extends PureComponent {
       isSubAccount: PropTypes.bool,
     }).isRequired,
     addSubAccount: PropTypes.func.isRequired,
+    isSyncing: PropTypes.bool,
     isSubAccountsLoading: PropTypes.bool,
     isMultipleAccsSelected: PropTypes.bool,
     masterAccount: PropTypes.string,
@@ -36,6 +37,7 @@ class SubAccount extends PureComponent {
 
   static defaultProps = {
     allowedUsers: [],
+    isSyncing: false,
     masterAccount: undefined,
     isSubAccountsLoading: false,
     isMultipleAccsSelected: false,
@@ -107,6 +109,7 @@ class SubAccount extends PureComponent {
       t,
       users,
       authData,
+      isSyncing,
       allowedUsers,
       masterAccount,
       isSubAccountsLoading,
@@ -121,6 +124,8 @@ class SubAccount extends PureComponent {
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
     const preparedUsers = _differenceBy(allowedUsers, subUsers, 'email')
     const isConfirmDisabled = _isEmpty(masterAccountEmail) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
+    const showRemoveSubAccountBtn = (masterAccount || isSubAccount) && !isSyncing
+
     let showContent
     if (isSubAccountsLoading) {
       showContent = <Loading />
@@ -136,9 +141,6 @@ class SubAccount extends PureComponent {
               isRemovalEnabled={masterAccount || isSubAccount}
             />
           )}
-          {(masterAccount || (!isSubAccount && !hasSubAccount)) && (
-            <div className='subtitle'>{t('subaccounts.create')}</div>
-          )}
           {(masterAccount || (isSubAccount || !hasSubAccount)) && (
             <>
               <SubUsersAdd
@@ -150,14 +152,19 @@ class SubAccount extends PureComponent {
                 onChange={this.onSubUsersChange}
                 shouldFilterCurrentUser={!isMultipleAccsSelected}
               />
-              <Button
-                intent={Intent.PRIMARY}
-                disabled={isConfirmDisabled}
-                className='sub-account-confirm'
-                onClick={_isEmpty(subUsers) ? this.createSubAccount : this.updateSubAccount}
-              >
-                {_isEmpty(subUsers) ? t('timeframe.custom.confirm') : t('update')}
-              </Button>
+              <div className='sub-account-confirm'>
+                <Button
+                  intent={Intent.SUCCESS}
+                  disabled={isConfirmDisabled}
+                  className='sub-account-confirm-btn'
+                  onClick={_isEmpty(subUsers) ? this.createSubAccount : this.updateSubAccount}
+                >
+                  {_isEmpty(subUsers)
+                    ? t('subaccounts.add_accounts')
+                    : t('subaccounts.update_accounts')}
+                </Button>
+
+              </div>
             </>
           )}
         </>
@@ -166,7 +173,7 @@ class SubAccount extends PureComponent {
 
     return (
       <div className='sub-account'>
-        {(masterAccount || isSubAccount) && (
+        {showRemoveSubAccountBtn && (
           <div className='sub-account-controls'>
             <RemoveSubAccount
               subUsers={subUsers}

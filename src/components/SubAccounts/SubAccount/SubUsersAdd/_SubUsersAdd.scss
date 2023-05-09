@@ -6,18 +6,33 @@
       vertical-align: middle;
       min-height: 74px;
       margin-top:10px;
+      padding-bottom: 24px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--borderColor);
 
       & > * {
-        align-self: flex-end;
-
         &:not(:last-child) {
-          margin-right: 15px;
           margin-bottom: 15px;
+        }
+      }
+
+      .account-title {
+        display: flex;
+        margin-bottom: 5px;
+        justify-content: space-between;
+
+        &--remove {
+          cursor: pointer;
+          color: var(--activeColor);
         }
       }
 
       .input-group {
         display: inline-block;
+
+        &-label {
+          margin-bottom: 5px;
+        }
 
         .bp3-input {
           height: 40px;
@@ -33,9 +48,18 @@
 
   &-new {
     margin-top: 5px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--borderColor);
 
     &-btn {
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .add-new-btn-title {
+        margin-left: 10px;
+      }
     }
   }
 }

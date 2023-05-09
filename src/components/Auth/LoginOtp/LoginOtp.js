@@ -14,7 +14,7 @@ export const LoginOtp = ({
 }) => {
   const { t } = useTranslation()
   return (
-    <>
+    <div className='sign-in--otp'>
       <InputKey
         name='otp'
         type='text'
@@ -42,7 +42,7 @@ export const LoginOtp = ({
           {t('auth.2FA.auth')}
         </Button>
       </div>
-    </>
+    </div>
   )
 }
 

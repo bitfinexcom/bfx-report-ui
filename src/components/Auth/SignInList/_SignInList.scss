@@ -1,0 +1,65 @@
+.sign-in-list {
+  &--wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--bgColor);
+
+      .sign-in-list--icon {
+        opacity: 1;
+
+        .sign-in-list--menu {
+          &-content { 
+            .bp3-menu {
+               li {
+                .bp3-menu-item {
+                  border-radius: 3px;
+
+                  &:active,
+                  &:hover {
+                    background-color: var(--bgColor);
+                  }
+                }        
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &--icon {
+    cursor: pointer;
+    margin-right: 54px;
+    opacity: 0;
+  }
+
+  &--item {
+    display: flex; 
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 54px;
+    min-height: 76px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--bgColor);
+    }
+
+    svg {
+      margin-right: 24px;
+    }
+
+    &-title {
+      margin: 0;
+    }
+
+    &-type {
+      margin: 0;
+      color: var(--color2);
+    }
+  }
+}
