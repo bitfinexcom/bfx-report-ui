@@ -201,6 +201,10 @@ class SignIn extends PureComponent {
     setLocalUsername(localUsername)
   }
 
+  handleDeleteUser = (user) => {
+    console.log('+++handleDeleteSelectedUser', user)
+  }
+
   render() {
     const {
       t,
@@ -243,6 +247,7 @@ class SignIn extends PureComponent {
             <SignInList
               users={users}
               switchMode={switchMode}
+              handleDeleteAccount={this.handleDeleteUser}
               handleUserItemSelect={this.handleUserItemSelect}
               handleAddAccounts={this.handleAddAccountToSelectedUser}
             />
