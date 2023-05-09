@@ -11,6 +11,7 @@ export const SignInListItem = ({
   user,
   handleUserSelect,
   handleAddAccounts,
+  handleDeleteAccount,
 }) => {
   const { t } = useTranslation()
   const { email, isApiKeysAuth, localUsername } = user
@@ -18,6 +19,11 @@ export const SignInListItem = ({
   const addAccounts = useCallback(
     () => handleAddAccounts(email, localUsername),
     [email, localUsername],
+  )
+
+  const deleteAccount = useCallback(
+    () => handleDeleteAccount(user),
+    [user],
   )
 
   return (
@@ -41,6 +47,7 @@ export const SignInListItem = ({
           <UserItemMenu
             handleAddAccounts={addAccounts}
             handleAccountsTitle={getMenuOptionTitle(user)}
+            handleDeleteAccount={deleteAccount}
           />
         </div>
       )}
@@ -58,6 +65,7 @@ SignInListItem.propTypes = {
   }).isRequired,
   handleUserSelect: PropTypes.func.isRequired,
   handleAddAccounts: PropTypes.func.isRequired,
+  handleDeleteAccount: PropTypes.func.isRequired,
 }
 
 export default memo(SignInListItem)
