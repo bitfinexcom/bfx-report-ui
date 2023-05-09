@@ -42,15 +42,14 @@ export const SignInListItem = ({
           </p>
         </div>
       </div>
-      {isApiKeysAuth && (
-        <div className='sign-in-list--icon'>
-          <UserItemMenu
-            handleAddAccounts={addAccounts}
-            handleAccountsTitle={getMenuOptionTitle(user)}
-            handleDeleteAccount={deleteAccount}
-          />
-        </div>
-      )}
+      <div className='sign-in-list--icon'>
+        <UserItemMenu
+          showAddAccounts={isApiKeysAuth}
+          handleAddAccounts={addAccounts}
+          handleDeleteAccount={deleteAccount}
+          handleAccountsTitle={getMenuOptionTitle(user)}
+        />
+      </div>
     </div>
   )
 }
