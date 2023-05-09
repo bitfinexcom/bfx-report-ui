@@ -18,24 +18,59 @@
     "title": "Активные позиции"
   },
   "affiliatesearnings": {
-    "title": "Доходы аффилиатов"
+    "title": "Доходы аффилиатов",
+    "dashboard_link": "Панель партнерской программы"
   },
   "auth": {
     "auth": "Аутент.",
     "title": "Пожалуйста, авторизуйтесь",
+    "addAccount": "Добавить аккаунт",
+    "useApiKey": "Использовать ключ API",
+    "loginEmail": {
+      "emailOrUserName": "Имя пользователя или эл. почта",
+      "bfxAccPassword": "Пароль",
+      "loginEmailError": "Электронная почта/имя пользователя, либо пароль введены неверно",
+      "loginEmailNo2FA": "Пожалуйста, настройте 2FA для своей учетной записи или используйте ключ API для входа",
+      "loginTokenExpired": "Срок действия последней авторизации истек, пожалуйста, войдите снова"
+    },
+    "2FA": {
+      "title": "Двухфакторная аутентификация",
+      "auth": "Аутентификация",
+      "cancel": "Отмена",
+      "sixDigits": "6 цифр",
+      "GAToken": "2FA токен из Google-аутентификатора",
+      "invalidToken": "Неверный токен, пожалуйста, попробуйте еще раз",
+      "loginSessionExpired": "Ваша сессия истекла, попробуйте еще раз"
+    },
+    "apiKey": "Ключ API",
+    "apiSecret": "Секретный ключ API",
+    "accWithApiKey": "Добавить аккаунт с ключом API",
+    "accWithoutApiKey": "Добавить аккаунт без ключа API",
+    "simpleAccounts": "Простые учетные записи",
+    "multipleAccounts": "Несколько учетных записей",
     "signUp": "Регистрация",
     "signIn": "Войти",
-    "passwordRecovery": "Восстановление пароля",
+    "signInToExistingAcc": "Войдите в существующий аккаунт",
+    "signInToDifferentAcc": "Войти в другой аккаунт",
+    "selectMasterAccount": "Выберите мастер аккаунт",
+    "forgotPassword": "Забыли пароль",
+    "forgotPasswordNote": "Сбросьте свой аккаунт в приложении отчетности, введя данные учетной записи и новый пароль.",
     "subAccount": "Субаккаунты",
     "enterAPIKey": "Введите ключ API:",
     "enterAPISecret": "Введите секретный ключ API:",
-    "enterPassword": "Введите пароль:",
-    "repeatPassword": "Повторите пароль:",
+    "enterPassword": "Введите пароль приложения отчетности Bitfinex",
+    "repeatPassword": "Повторите пароль приложения отчетности Bitfinex",
+    "enterNewPassword": "Введите новый пароль приложения отчетности Bitfinex",
+    "repeatNewPassword": "Повторите новый пароль приложения отчетности Bitfinex",
+    "resetPassword": "Сбросить пароль",
+    "removeLoginPassword": "Удалить пароль при входе",
+    "resetAccWithApiKey": "Сбросить аккаунт с ключом API",
+    "resetAccWithoutApiKey": "Сбросить аккаунт без ключа API",
     "enterEmail": "Введите электронную почту:",
     "checkAuth": "Проверка аутент.",
     "note1": "Посетите ",
     "note2": " для получения пары ключ API для чтения/секретный ключ.",
-    "passwordProtection": "Защитить паролем",
+    "passwordProtection": "Требовать пароль при входе",
     "passwordLengthValidationError": "Пароль должен состоять не менее чем из 8-ми символов",
     "passwordCharactersValidationError": "Пароль должен включать как заглавные, так и строчные буквы",
     "passwordRepeatValidationError": "Пароль не совпадает",
@@ -75,29 +110,39 @@
     "base-price": "Базовая цена",
     "bid": "Заявка",
     "browser": "Браузер",
+    "buyingAmount": "Сумма покупки",
+    "buyingWeightedPrice": "Взвешенная цена покупки",
     "category": "Категория",
     "clampMax": "Макс огранич.",
     "clampMin": "Мин огранич.",
     "closed": "Закрыто",
     "collateral": "Обеспечение",
     "created": "Создано",
+    "cumulativeAmount": "Совокупная сумма",
+    "cumulativeWeightedPrice": "Совокупная взвешенная цена",
     "currency": "Валюта",
+    "customerInfo": "Информация о клиенте",
     "date": "Дата",
     "days": "Дней",
     "description": "Описание",
     "destination": "Назначение",
+    "duration": "Продолжительность",
     "fee": "Комиссия",
     "feePercent": "Комиссия проц",
     "fees": "Комиссии",
     "fundBalance": "Баланс резервного фонда",
     "fundingAccrued": "Следующее финансирование накоплено",
+    "fundingCost": "Стоимость обеспечения",
     "fundingStep": "Следующий шаг финансирования",
+    "fundingType": "Тип обеспечения",
     "id": "№",
     "ip": "IP",
+    "invoices": "Инвойсы",
     "lastpayout": "Последняя выплата",
     "liq-price": "Цена ликв.",
     "maker_fees": "Комиссии маркет-мейкера",
     "maker_rebate": "Вознаграждение маркет-мейкера",
+    "merchantName": "Имя продавца",
     "meta": "Метаданные",
     "mobile": "Мобильный",
     "movementsTotal": "Сумма движений (USD)",
@@ -105,6 +150,8 @@
     "opened": "Открыто",
     "orderid": "ID ордера",
     "pair": "Пара",
+    "payCurrencies": "Валюты оплаты",
+    "payment": "Оплата",
     "percent": "Процент",
     "period": "Период",
     "pl": "P/L",
@@ -118,10 +165,11 @@
     "pricetrail": "Трейлинговая цена",
     "rate": "Ставка",
     "rateperc": "Ставка %",
+    "redirectUrl": "URL переадресации",
+    "sellingAmount": "Сумма продажи",
+    "sellingWeightedPrice": "Взвешенная цена продажи",
     "side": "Сторона",
     "status": "Статус",
-    "fundingCost": "Стоимость обеспечения",
-    "fundingType": "Тип обеспечения",
     "taker_fees": "Комиссии маркет-тейкера",
     "taker_fees_crypto": "Комиссия тейкера (Криптовалюта)",
     "taker_fees_fiat": "Комиссия тейкера (Фиат)",
@@ -140,7 +188,8 @@
     "version": "Версия",
     "volume": "Объем",
     "wallet": "Кошелек",
-    "walletsTotal": "Итого баланса на кошельках (USD)"
+    "walletsTotal": "Итого баланса на кошельках (USD)",
+    "webhook": "Webhook"
   },
   "columnsfilter": {
     "title": "Фильтровать столбцы",
@@ -189,8 +238,9 @@
     "export": "Экспорт",
     "cancel": "Отмена",
     "okay": "OK",
+    "remoteStorage": "Удаленное хранилище",
     "status": {
-      "local": "CSV-файл для {{topic}} создан, проверьте локальную папку \"csv\"",
+      "local": "Файлы созданы в формате csv и сохраняются в: ",
       "email": "CSV-отчет сейчас создается. Мы отправим его на вашу почту, когда он будет готов..."
     },
     "success": "Выполнено",
@@ -235,12 +285,16 @@
   "header": {
     "logout": "Выйти",
     "preferences": "Предпочтения",
-    "help": "Справка"
+    "help": "Справка",
+    "top_navigation": "Главное меню"
   },
   "inputs": {
     "filter_placeholder": "Фильтр...",
     "timezone_local": "Текущий часовой пояс",
     "timezone_placeholder": "Поиск часовых поясов..."
+  },
+  "invoices": {
+    "title": "Инвойсы"
   },
   "ledgers": {
     "title": "Журналы",
@@ -290,7 +344,67 @@
   "movements": {
     "title": "Движения"
   },
+  "navItems": {
+    "reports": "Отчеты",
+    "myAccount": {
+      "title": "Мой аккаунт",
+      "summary": "Сводка",
+      "balance": "Баланс",
+      "analysisStat": "Анализ/Статистика",
+      "analysisStatTabs": {
+        "weightedAvgs": "Средневзвешенные значения",
+        "volume": "Объем",
+        "winLoss": "Прибыль/Убыток",
+        "conRisk": "Риск концентрации",
+        "loan": "Отчет о займах",
+        "fees": "Отчет о размерах комиссии"
+      },
+      "snapshotsTax": "Снимки и налоговый отчет"
+    },
+    "myHistory": {
+      "title": "Моя история",
+      "general": "Общие",
+      "generalTabs": {
+        "ledgers": "Журналы",
+        "trades": "Сделки",
+        "orders": "Ордеры",
+        "movements": "Движения",
+        "positions": "Позиции"
+      },
+      "funding": "Обеспечение",
+      "fundingTabs": {
+        "bidsOffers": "Заявки и предложения",
+        "loans": "Предоставленное обеспечение",
+        "credits": "Кредиты"
+      },
+      "earnings": "Доходы",
+      "earningsTabs": {
+        "funding": "Обеспечение",
+        "staking": "Стекинг",
+        "affiliates": "Партнерская программа"
+      },
+      "wallets": "Кошельки"
+    },
+    "merchantHistory": {
+      "title": "История Продавца",
+      "invoices": "Инвойсы"
+    },
+    "marketHistory": {
+      "title": "История рынка",
+      "trades": "Сделки",
+      "funding": "Обеспечение",
+      "spot": "Спот",
+      "derivatives": "Деривативы"
+    },
+    "loginHistory": "История входов",
+    "subAccounts": "Суб-аккаунты",
+    "changeLogs": "Журналы изменений"
+  },
   "nodata": "Нет связанных данных для этого периода времени. Задайте другой период.",
+  "no_merchant": {
+    "title": "Этот раздел доступен только для ",
+    "link": "учетных записей продавца"
+  },
   "orders": {
     "title": "Ордеры"
   },
@@ -340,6 +454,7 @@
     "milliseconds": "Показать миллисекунды",
     "table_scroll": "Прокрутка таблицы",
     "preserve_timeframe": "Сохранить временной промежуток",
+    "remove_account": "Удалить аккаунт",
     "sync": {
       "add-filter": "Добавить Фильтр",
       "add-pair": "Добавить Пару",
@@ -374,10 +489,43 @@
     "select": "Выбрать",
     "all": "Bсе",
     "inactive": "Неактивные",
+    "balance-precision": {
+      "title": "Баланс (USD)",
+      "approximate": "Приблизительный",
+      "exact": "Точный"
+    },
     "filter": {
       "symbol": "Фильтр по символу",
       "pair": "Фильтр по паре",
       "category": "Категории-фильтры"
+    },
+    "report-type": {
+      "title": "Выберите тип отчета",
+      "win_loss": {
+        "title": "Прибыль/Убыток"
+      },
+      "gains_deposits": {
+        "title": "Процентная прибыль (прибыль/депозиты)",
+        "description": "% прибыли рассчитываются по сравнению с депозитами, внесенными на счет"
+      },
+      "gains_balance": {
+        "title": "Процентная прибыль (прибыль/баланс)",
+        "description": "% прибыли рассчитываются ежедневно по сравнению с балансом за день до этого и суммируются"
+      },
+      "trading_fees": {
+        "title": "Комиссии на сделки"
+      },
+      "funding_fees": {
+        "title": "Комиссии на финансирование"
+      },
+      "funding_trading_fees": {
+        "title": "Комиссии на финансирование + сделки"
+      }
+    },
+    "unrealized-profits": {
+      "title": "Показать нереализованную прибыль",
+      "yes": "Да",
+      "no": "Нет"
     }
   },
   "snapshots": {
@@ -393,14 +541,16 @@
   "status": {
     "success": "{{topic}} Выполнено в {{time}}",
     "warn": "{{topic}}",
-    "fail": "{{topic}} Ошибка {{detail}}",
+    "fail": "{{topic}} ошибка: {{detail}}",
     "noid": "dev: the status action should contain the id param",
     "request": {
       "error": "{{topic}} Ошибка запроса {{detail}}"
     },
     "signInFail": "Неверные учетные данные",
     "timeframe_update": "Временной диапазон обновлен",
-    "signUpFail": "Неверный API ключ или секрет"
+    "signUpFail": "Неверный API ключ или секрет",
+    "netError": "Получение данных приостановлено из-за разрыва подключения к Интернету",
+    "netResumed": "Подключение к Интернету восстановлено, получение данных возобновлено"
   },
   "subaccounts": {
     "add_account": "Добавить аккаунт",
@@ -413,7 +563,8 @@
     "login": "Войти в субаккаунт"
   },
   "symbols": {
-    "title": "Получить символы"
+    "title": "Получить символы",
+    "clear_symbols": "Удалить символы"
   },
   "sync": {
     "title": "Синхр.",
@@ -437,7 +588,18 @@
     "logout": "Синхронизация остановлена",
     "message": {
       "canceled": "Отмененный старый Sync Watcher"
+    },
+    "estimated_time": {
+      "started_at": "Синхронизация началась: ",
+      "spent_time": "Проведенное время: ",
+      "left_time": "Оставшееся время: ",
+      "estimating": "Оценка..."
     }
+  },
+  "sum": "Сумма",
+  "sum_up_cols": "Суммарно: {{sum}}",
+  "sum_up_tooltip": {
+    "title": "Суммировать"
   },
   "taxreport": {
     "title": "Налоговый отчет",
@@ -459,6 +621,7 @@
   },
   "tickers": {
     "title": "Тикеры",
+    "spot": "Спот",
     "minlength": "Нужно выбрать хотя бы одну пару"
   },
   "timeframe": {
@@ -468,9 +631,12 @@
       "title": "Выберите период для запроса",
       "view": "Просмотр"
     },
+    "go_to": "Перейти к",
     "day": "День",
+    "date": "Дата",
     "refresh": "Обновить",
     "custom_time": "Другое",
+    "custom_range": "Другой диапазон",
     "custom-timerange": "Другой временной диапазон",
     "custom_year": "{{year}} год",
     "24h": "Последние 24 часа",
@@ -486,7 +652,11 @@
     "range_limit": "Запросы более шестилетней давности от текущего дня невозможны",
     "start-date-placeholder": "Начальная дата и время",
     "end-date-placeholder": "Конечная дата",
+    "select-date": "Выберите дату",
+    "from": "С",
+    "to": "До",
     "today": "Сегодня",
+    "query_range": "Диапазон запроса",
     "year": "Год",
     "week": "Неделя"
   },
@@ -501,6 +671,7 @@
   "wallets": {
     "title": "Кошельки",
     "header": {
+      "capital-raise": "Привлечение капитала",
       "exchange": "Биржа",
       "margin": "Маржинальное",
       "funding": "Обеспечение",
@@ -510,6 +681,16 @@
     "query": {
       "title": "Запрос",
       "tooltip": "Выберите время для запроса снимка кошельков"
+    }
+  },
+  "weightedaverages": {
+    "title": "Средневзвешенные значения",
+    "limitNote": {
+      "displayDate": "Дата показа: ",
+      "note1": "Обратите внимание, что выбранные даты не совпадают с отображаемыми датами. Это связано с тем, что веб-версия ограничена отображением 2000 транзакций за раз.",
+      "note2": "Если предполагается больший период времени, можно выбрать один символ или загрузить ",
+      "link": "наше приложение",
+      "note3": " у которого нет этого ограничения."
     }
   },
   "withdrawals": {
