@@ -12,6 +12,7 @@ import {
 import Icon from 'icons'
 
 const UserItemMenu = ({
+  showAddAccounts,
   handleAddAccounts,
   handleAccountsTitle,
   handleDeleteAccount,
@@ -45,12 +46,15 @@ const UserItemMenu = ({
                 className='bp3-menu-item--account'
                 text={t('auth.removeAccount')}
               />
-              <MenuItem
-                shouldDismissPopover={false}
-                onClick={() => handleAddAccounts()}
-                className='bp3-menu-item--account'
-                text={t(handleAccountsTitle)}
-              />
+              {showAddAccounts && (
+                <MenuItem
+                  shouldDismissPopover={false}
+                  onClick={() => handleAddAccounts()}
+                  className='bp3-menu-item--account'
+                  text={t(handleAccountsTitle)}
+                />
+              )
+             }
             </Menu>
           </div>
           )}
@@ -66,6 +70,7 @@ const UserItemMenu = ({
 }
 
 UserItemMenu.propTypes = {
+  showAddAccounts: PropTypes.bool.isRequired,
   handleAddAccounts: PropTypes.func.isRequired,
   handleAccountsTitle: PropTypes.string.isRequired,
   handleDeleteAccount: PropTypes.func.isRequired,
