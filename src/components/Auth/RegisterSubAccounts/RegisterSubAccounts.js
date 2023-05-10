@@ -120,9 +120,10 @@ class RegisterSubAccounts extends PureComponent {
           />
           <>
             <SubAccount
-              authData={authData}
               users={users}
+              authData={authData}
               allowedUsers={preparedUsers}
+              localUsername={localUsername}
               masterAccount={masterAccEmail}
               isMultipleAccsSelected={isMultipleAccsSelected}
             />
