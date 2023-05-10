@@ -6,6 +6,15 @@
     color: var(--activeColor);
   }
 
+  .bp3-dialog-body {
+    .bitfinex-auth-form-input {
+      .bp3-form-group {
+        margin-left: 1px;
+        margin-bottom: 2px;
+      }
+    }
+  }
+
   .sub-account {
     &-controls {
       margin-bottom: 20px;
