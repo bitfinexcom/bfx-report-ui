@@ -17,6 +17,7 @@ import { setSubAccountLoadingStatus } from './actions'
 const getReqCreateSubAccount = ({
   masterAccount,
   subAccountApiKeys,
+  localUsername,
 }) => {
   if (masterAccount) {
     const auth = {
@@ -25,10 +26,12 @@ const getReqCreateSubAccount = ({
     }
     return makeFetchCall('createSubAccount', {
       subAccountApiKeys,
+      localUsername,
     }, auth)
   }
   return makeFetchCall('createSubAccount', {
     subAccountApiKeys,
+    localUsername,
   })
 }
 
@@ -47,11 +50,13 @@ const getReqUpdateSubAccount = (params, auth) => {
 }
 
 export function* createSubAccount({ payload }) {
-  const { preparedAccountData, masterAccount } = payload
-  const params = { subAccountApiKeys: preparedAccountData, masterAccount }
+  const { preparedAccountData, masterAccount, localUsername } = payload
+  const params = { subAccountApiKeys: preparedAccountData, masterAccount, localUsername }
+  console.log('+++createSubAccount1', payload)
   try {
     yield put(setSubAccountLoadingStatus(true))
     const { result, error } = yield call(getReqCreateSubAccount, params)
+    console.log('+++createSubAccount2', result)
     if (result) {
       yield put(setSubAccountLoadingStatus(false))
       yield put(fetchUsers())
