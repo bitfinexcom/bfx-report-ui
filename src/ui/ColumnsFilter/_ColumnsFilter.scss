@@ -5,7 +5,8 @@
   }
 
   &-dialog {
-    width: 576px;
+    min-width: 576px;
+    width: fit-content;
 
     .bp3-dialog-body, .bp3-dialog-footer {
       margin-left: 15px;
