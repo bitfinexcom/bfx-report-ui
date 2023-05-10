@@ -1,9 +1,13 @@
 .time-range {
-  width: fit-content;
-  font-size: 18px;
-  color: var(--timeRangeColor);
-  vertical-align: middle;
   cursor: pointer;
+  font-size: 18px;
+  padding: 5px 8px;
+  width: fit-content;
+  vertical-align: middle;
+  color: var(--timeRangeColor);
+  background-color: var(--multiBg);
+  border: 1px solid var(--borderColor);
+  border-radius: 4px;
 
   svg {
     margin-right: 12px;

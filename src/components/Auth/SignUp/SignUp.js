@@ -19,7 +19,6 @@ import LoginEmail from '../LoginEmail'
 import LoginApiKey from '../LoginApiKey'
 import ModeSwitcher from '../ModeSwitcher'
 import LoginPassword from '../LoginPassword'
-import AuthTypeSelector from '../AuthTypeSelector'
 
 const { showFrameworkMode, hostedFrameworkMode } = config
 const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=|\d-]{8,}$/
@@ -27,7 +26,6 @@ const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*.!@#$%^&(){}:;<>,?/\\~_+=
 // handles framework sign up and online version login
 class SignUp extends PureComponent {
   static propTypes = {
-    authType: PropTypes.string.isRequired,
     authData: PropTypes.shape({
       apiKey: PropTypes.string,
       apiSecret: PropTypes.string,
@@ -41,7 +39,6 @@ class SignUp extends PureComponent {
     showOtpLogin: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchMode: PropTypes.func.isRequired,
-    switchAuthType: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string.isRequired,
       isSubAccount: PropTypes.bool.isRequired,
@@ -185,9 +182,7 @@ class SignUp extends PureComponent {
       t,
       users,
       loading,
-      authType,
       switchMode,
-      switchAuthType,
       isOtpLoginShown,
     } = this.props
     const {
@@ -214,7 +209,6 @@ class SignUp extends PureComponent {
     const classes = classNames('bitfinex-auth', 'bitfinex-auth-sign-up', {
       'bitfinex-auth-sign-up--framework': showFrameworkMode,
     })
-    const showAuthTypeSelector = showFrameworkMode && useApiKey
     const showLoginEmail = showFrameworkMode && !useApiKey
     const showLoginPassword = showFrameworkMode && isPasswordProtected
 
@@ -227,12 +221,6 @@ class SignUp extends PureComponent {
         isCloseButtonShown={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          {showAuthTypeSelector && (
-            <AuthTypeSelector
-              authType={authType}
-              switchAuthType={switchAuthType}
-            />
-          )}
           <PlatformLogo />
           {isOtpLoginShown
             ? (

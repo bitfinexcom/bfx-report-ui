@@ -18,24 +18,59 @@
     "title": "Posições ativas"
   },
   "affiliatesearnings": {
-    "title": "Ganhos de afiliados"
+    "title": "Ganhos de afiliados",
+    "dashboard_link": "Painel de Afiliados"
   },
   "auth": {
     "auth": "Autenticação",
     "title": "Login",
+    "addAccount": "Adicionar conta",
+    "useApiKey": "Usar Chave API",
+    "loginEmail": {
+      "emailOrUserName": "E-mail ou usuário",
+      "bfxAccPassword": "Senha",
+      "loginEmailError": "O e-mail/nome de usuário ou senha está incorreto",
+      "loginEmailNo2FA": "Configure o 2FA para sua conta ou use a chave API para fazer login",
+      "loginTokenExpired": "O último login expirou, faça login novamente"
+    },
+    "2FA": {
+      "title": "Autenticação de dois fatores",
+      "auth": "Autenticar",
+      "cancel": "Cancelar",
+      "sixDigits": "6 dígitos",
+      "GAToken": "Token de 2FA do Google Authenticator",
+      "invalidToken": "Token inválido. Tente novamente",
+      "loginSessionExpired": "Sua sessão de login expirou, por favor tente novamente"
+    },
+    "apiKey": "Chave de API",
+    "apiSecret": "Segredo de API",
+    "accWithApiKey": "Adicionar conta com chave de API",
+    "accWithoutApiKey": "Adicionar conta sem chave de API",
+    "simpleAccounts": "Contas simples",
+    "multipleAccounts": "Múltiplas contas",
     "signUp": "Cadastre-se",
     "signIn": "Conectar-se",
-    "passwordRecovery": "Recuperação de senha",
+    "signInToExistingAcc": "Entrar com uma conta existente",
+    "signInToDifferentAcc": "Entrar com uma conta diferente",
+    "selectMasterAccount": "Selecione a conta mestra",
+    "forgotPassword": "Esqueceu a senha",
+    "forgotPasswordNote": "Redefina sua conta do Reports App inserindo os detalhes da sua conta e uma nova senha.",
     "subAccount": "Subconta",
     "enterAPIKey": "Inserir chave de API:",
     "enterAPISecret": "Inserir segredo de API:",
-    "enterPassword": "Inserir senha:",
-    "repeatPassword": "Repetir senha:",
+    "enterPassword": "Digite a senha do aplicativo Bitfinex Report",
+    "repeatPassword": "Repita a senha do aplicativo Bitfinex Report",
+    "enterNewPassword": "Digite a nova senha do aplicativo Bitfinex Report",
+    "repeatNewPassword": "Repita a nova senha do aplicativo Bitfinex Report",
+    "resetPassword": "Redefinir senha",
+    "removeLoginPassword": "Remover senha no login",
+    "resetAccWithApiKey": "Redefinir conta com chave de API",
+    "resetAccWithoutApiKey": "Redefinir conta com chave de API",
     "enterEmail": "Inserir e-mail:",
     "checkAuth": "Verificar autenticação",
     "note1": "Visite ",
     "note2": " para obter chave de API de apenas leitura e par secreto.",
-    "passwordProtection": "Habilitar proteção por senha",
+    "passwordProtection": "Exigir Senha no Login",
     "passwordLengthValidationError": "A senha deve ter pelo menos 8 caracteres",
     "passwordCharactersValidationError": "A senha deve incluir caracteres maiúsculos e minúsculos",
     "passwordRepeatValidationError": "A senha não corresponde",
@@ -61,7 +96,7 @@
   },
   "charts": {
     "cumulative": "Acumulativo",
-    "percentage": "Porcentagem"
+    "percent": "%"
   },
   "column": {
     "actual-price": "Preço real",
@@ -75,17 +110,23 @@
     "base-price": "Preço base",
     "bid": "Bid",
     "browser": "Navegador",
+    "buyingAmount": "Quantidade de compra",
+    "buyingWeightedPrice": "Preço Ponderado de Compra",
     "category": "Categoria",
     "clampMax": "Clamp máx",
     "clampMin": "Trava mín",
     "closed": "Fechado",
     "collateral": "Colateral",
     "created": "Criado",
+    "cumulativeAmount": "Valor cumulativo",
+    "cumulativeWeightedPrice": "Preço ponderado cumulativo",
     "currency": "Moeda",
+    "customerInfo": "Informação do cliente",
     "date": "Data",
     "days": "Dias",
     "description": "Descrição",
     "destination": "Destino",
+    "duration": "Duração",
     "fee": "Taxa",
     "feePercent": "Perc taxa",
     "fees": "Taxas",
@@ -96,10 +137,12 @@
     "fundingType": "Tipo de financiamento",
     "id": "#",
     "ip": "IP",
+    "invoices": "Faturas",
     "lastpayout": "Último pagamento",
     "liq-price": "Preço de liquidação",
-    "maker_fees": "Taxas Maker",
+    "maker_fees": "Taxas de maker",
     "maker_rebate": "Reembolso de maker",
+    "merchantName": "Nome do comerciante",
     "meta": "Metadados",
     "mobile": "Móvel",
     "movementsTotal": "Quantidade total de movimentos (USD)",
@@ -107,6 +150,8 @@
     "opened": "Aberta",
     "orderid": "ID da ordem",
     "pair": "Par",
+    "payCurrencies": "Moedas de pagamento",
+    "payment": "Pagamento",
     "percent": "Percentagem",
     "period": "Período",
     "pl": "P/L",
@@ -120,12 +165,15 @@
     "pricetrail": "Preço dinâmico",
     "rate": "Taxa",
     "rateperc": "Taxa %",
+    "redirectUrl": "URL de redirecionamento",
+    "sellingAmount": "Quantidade de venda",
+    "sellingWeightedPrice": "Preço Ponderado de Venda",
     "side": "Lado",
     "status": "Status",
-    "taker_fees": "Taxas taker",
-    "taker_fees_crypto": "Taxas taker Cripto",
-    "taker_fees_fiat": "Taxas taker Fiat",
-    "taker_fees_stable": "Taxas taker Stable",
+    "taker_fees": "Taxas de taker",
+    "taker_fees_crypto": "Taxas de taker Cripto",
+    "taker_fees_fiat": "Taxas de taker Fiat",
+    "taker_fees_stable": "Taxas de taker Stable",
     "taker_rebate": "Reembolso de taker",
     "taker_rebate_crypto": "Reembolso de taker Cripto",
     "taker_rebate_fiat": "Reembolso de Taker Fiat",
@@ -140,7 +188,8 @@
     "version": "Versão",
     "volume": "Volume",
     "wallet": "Carteira",
-    "walletsTotal": "Saldo total das carteiras (USD)"
+    "walletsTotal": "Saldo total das carteiras (USD)",
+    "webhook": "Webhook"
   },
   "columnsfilter": {
     "title": "Filtrar colunas",
@@ -189,15 +238,16 @@
     "export": "Exportar",
     "cancel": "Cancelar",
     "okay": "Ok",
+    "remoteStorage": "Armazenamento remoto",
     "status": {
-      "local": "Csv para exportação gerado, verifique a sua pasta \"csv\" local",
+      "local": "Exportar csv gerado, os arquivos são salvos em: ",
       "email": "Gerando seu relatório CSV, enviaremos para você por e-mail assim que estiver pronto..."
     },
     "success": "Sucesso",
     "targets": "Dados a exportar"
   },
   "fcredit": {
-    "title": "Crédito de fundos (usado)",
+    "title": "Créditos de financiamento (usados)",
     "side": {
       "provided": "FORNECIDO",
       "taken": "TOMADO",
@@ -242,6 +292,9 @@
     "filter_placeholder": "Filtro...",
     "timezone_local": "Fuso horário atual",
     "timezone_placeholder": "Pesquisar fusos horários..."
+  },
+  "invoices": {
+    "title": "Faturas"
   },
   "ledgers": {
     "title": "Livro-razão",
@@ -291,7 +344,67 @@
   "movements": {
     "title": "Movimentos"
   },
+  "navItems": {
+    "reports": "Relatórios",
+    "myAccount": {
+      "title": "Minha Conta",
+      "summary": "Resumo",
+      "balance": "Saldo",
+      "analysisStat": "Análise/Estatística",
+      "analysisStatTabs": {
+        "weightedAvgs": "Médias ponderadas",
+        "volume": "Volume",
+        "winLoss": "Ganhos/Perdas",
+        "conRisk": "Risco de concentração",
+        "loan": "Relatório de empréstimo",
+        "fees": "Relatório de taxas"
+      },
+      "snapshotsTax": "Instantâneos e Relatório Fiscal"
+    },
+    "myHistory": {
+      "title": "Histórico",
+      "general": "Geral",
+      "generalTabs": {
+        "ledgers": "Livro-razão",
+        "trades": "Trades",
+        "orders": "Ordens",
+        "movements": "Movimentos",
+        "positions": "Posições"
+      },
+      "funding": "Financiamento",
+      "fundingTabs": {
+        "bidsOffers": "Compras e ofertas",
+        "loans": "Empréstimos",
+        "credits": "Crédito"
+      },
+      "earnings": "Ganhos",
+      "earningsTabs": {
+        "funding": "Financiamento",
+        "staking": "Staking",
+        "affiliates": "Afiliados"
+      },
+      "wallets": "Carteiras"
+    },
+    "merchantHistory": {
+      "title": "Histórico do Comerciante",
+      "invoices": "Faturas"
+    },
+    "marketHistory": {
+      "title": "Histórico de mercado",
+      "trades": "Trades",
+      "funding": "Financiamento",
+      "spot": "À vista",
+      "derivatives": "Derivativos"
+    },
+    "loginHistory": "Histórico de acesso",
+    "subAccounts": "Subcontas",
+    "changeLogs": "Registro de alterações"
+  },
   "nodata": "Nenhum dado relacionado neste intervalo de tempo. Você pode tentar outro intervalo.",
+  "no_merchant": {
+    "title": "Esta seção está disponível apenas para ",
+    "link": "contas de comerciante"
+  },
   "orders": {
     "title": "Ordens"
   },
@@ -341,6 +454,7 @@
     "milliseconds": "Exibir milissegundos",
     "table_scroll": "Rolagem de tabela",
     "preserve_timeframe": "Preservar período",
+    "remove_account": "Remover conta",
     "sync": {
       "add-filter": "Adicionar filtro",
       "add-pair": "Adicionar par",
@@ -375,10 +489,43 @@
     "select": "Selecionar",
     "all": "Tudo",
     "inactive": "Inativo",
+    "balance-precision": {
+      "title": "Saldo (USD)",
+      "approximate": "Aproximadamente",
+      "exact": "Exato"
+    },
     "filter": {
       "symbol": "Filtro de símbolos",
       "pair": "Filtro de pares",
       "category": "Filtro de categorias"
+    },
+    "report-type": {
+      "title": "Selecione o tipo de relatório",
+      "win_loss": {
+        "title": "Ganhos/Perdas"
+      },
+      "gains_deposits": {
+        "title": "Ganhos Percentuais (ganhos/depósitos)",
+        "description": "% de ganhos estão sendo calculados em relação aos depósitos feitos na conta"
+      },
+      "gains_balance": {
+        "title": "Ganhos Percentuais (ganhos/saldos)",
+        "description": "Os ganhos percentuais estão sendo calculados diariamente em relação ao saldo do dia anterior e compostos"
+      },
+      "trading_fees": {
+        "title": "Taxa de negociação"
+      },
+      "funding_fees": {
+        "title": "Taxas de Financiamento"
+      },
+      "funding_trading_fees": {
+        "title": "Financiamento + Taxas de Negociação"
+      }
+    },
+    "unrealized-profits": {
+      "title": "Mostrar lucros não realizados",
+      "yes": "Sim",
+      "no": "Não"
     }
   },
   "snapshots": {
@@ -394,14 +541,16 @@
   "status": {
     "success": "{{topic}} Sucesso às {{time}}",
     "warn": "{{topic}}",
-    "fail": "{{topic}} falha {{detail}}",
+    "fail": "{{topic}} falha: {{detail}}",
     "noid": "dev: a ação de status deve contar o param id",
     "request": {
       "error": "{{topic}} falha da solicitação {{detail}}"
     },
     "signInFail": "Credenciais inválidas",
     "timeframe_update": "Período atualizado",
-    "signUpFail": "Chave ou segreto de API inválido"
+    "signUpFail": "Chave ou segreto de API inválido",
+    "netError": "A busca de dados foi pausada devido à interrupção da conexão com a Internet",
+    "netResumed": "Conexão com a Internet restaurada, busca de dados retomada"
   },
   "subaccounts": {
     "add_account": "Adicionar conta",
@@ -414,7 +563,8 @@
     "login": "Fazer login na subconta"
   },
   "symbols": {
-    "title": "Obter símbolos"
+    "title": "Obter símbolos",
+    "clear_symbols": "Limpar Símbolos"
   },
   "sync": {
     "title": "Sincronizar",
@@ -438,7 +588,18 @@
     "logout": "Sincronização parada",
     "message": {
       "canceled": "Cancelar antigo Sync Watcher"
+    },
+    "estimated_time": {
+      "started_at": "Sincronização iniciada em: ",
+      "spent_time": "Tempo gasto: ",
+      "left_time": "Tempo restante: ",
+      "estimating": "Calculando..."
     }
+  },
+  "sum": "Soma",
+  "sum_up_cols": "Soma: {{soma}}",
+  "sum_up_tooltip": {
+    "title": "Soma"
   },
   "taxreport": {
     "title": "Relatório de impostos",
@@ -460,6 +621,7 @@
   },
   "tickers": {
     "title": "Tickers",
+    "spot": "À vista",
     "minlength": "Deve selecionar pelo menos um par"
   },
   "timeframe": {
@@ -469,9 +631,12 @@
       "title": "Selecionar intervalo de consulta",
       "view": "Visualizar"
     },
+    "go_to": "Ir para",
     "day": "Dia",
+    "date": "Data",
     "refresh": "Atualizar",
     "custom_time": "Personalizar",
+    "custom_range": "Período personalizado",
     "custom-timerange": "Período personalizado",
     "custom_year": "{{year}} ano",
     "24h": "Últimas 24h",
@@ -487,6 +652,9 @@
     "range_limit": "Consultas anteriores a seis anos da data atual não são permitidas",
     "start-date-placeholder": "Data de início",
     "end-date-placeholder": "Data final",
+    "select-date": "Selecionar a Data",
+    "from": "De",
+    "to": "Para",
     "today": "Hoje",
     "query_range": "Intervalo da consulta",
     "year": "Ano",
@@ -503,6 +671,7 @@
   "wallets": {
     "title": "Carteiras",
     "header": {
+      "capital-raise": "Levantamento de Capital",
       "exchange": "Corretora",
       "margin": "Margem",
       "funding": "Financiamento",
@@ -512,6 +681,16 @@
     "query": {
       "title": "Consulta",
       "tooltip": "Selecione um horário para consultar os snapshots da carteira"
+    }
+  },
+  "weightedaverages": {
+    "title": "Médias Ponderadas",
+    "limitNote": {
+      "displayDate": "Data de exibição: ",
+      "note1": "Observe que as datas selecionadas não são iguais às datas de exibição. Isso ocorre porque a versão da web é limitada a exibir 2.000 transações por vez.",
+      "note2": "Caso deseje um período de tempo maior, você pode tentar selecionando apenas um símbolo ou baixando ",
+      "link": "nosso software",
+      "note3": " que nao tenha esse limite."
     }
   },
   "withdrawals": {

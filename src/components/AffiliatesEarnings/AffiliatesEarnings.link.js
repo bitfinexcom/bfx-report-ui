@@ -15,8 +15,8 @@ const AffiliatesLink = ({ t }) => (
   >
     <a
       target='_blank'
-      rel='noreferrer'
       href={AFFILIATES_LINK}
+      rel='noopener noreferrer'
     >
       <Icon.AFFILIATES />
     </a>

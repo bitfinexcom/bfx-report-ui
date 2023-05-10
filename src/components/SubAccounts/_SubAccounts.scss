@@ -8,4 +8,12 @@
   .subtitle {
     margin-bottom: 15px;
   }
+
+  .sub-users-add {
+    &-accounts {
+      &-account {
+        flex-direction: column;
+      }
+    }
+  }
 }

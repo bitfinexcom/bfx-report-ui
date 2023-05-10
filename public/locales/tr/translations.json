@@ -18,24 +18,59 @@
     "title": "Aktif Pozisyonlar"
   },
   "affiliatesearnings": {
-    "title": "İş Ortağı Kazançları"
+    "title": "İş Ortağı Kazançları",
+    "dashboard_link": "Iş ortakları paneli"
   },
   "auth": {
     "auth": "Doğrulama",
     "title": "Giriş",
+    "addAccount": "Hesap Ekle",
+    "useApiKey": "API Anahtarını Kullan",
+    "loginEmail": {
+      "emailOrUserName": "E-posta veya Kullanıcı adı",
+      "bfxAccPassword": "Parola",
+      "loginEmailError": "E-posta/kullanıcı adı veya şifre yanlış",
+      "loginEmailNo2FA": "Lütfen hesabınız için 2FA kurun veya giriş yapmak için API anahtarını kullanın",
+      "loginTokenExpired": "Son girişin süresi doldu, lütfen tekrar giriş yapın"
+    },
+    "2FA": {
+      "title": "İki Adımlı Kimlik Doğrulama",
+      "auth": "Doğrula",
+      "cancel": "İptal Et",
+      "sixDigits": "6 Haneli",
+      "GAToken": "Google Authenticator 2FA tokeni",
+      "invalidToken": "Geçersiz token, lütfen tekrar deneyin",
+      "loginSessionExpired": "Oturumunuzun süresi doldu, lütfen tekrar deneyin"
+    },
+    "apiKey": "API Anahtarı",
+    "apiSecret": "API Gizli Dizisi",
+    "accWithApiKey": "API anahtarıyla hesap ekle",
+    "accWithoutApiKey": "API anahtarı olmadan hesap ekle",
+    "simpleAccounts": "Basit Hesaplar",
+    "multipleAccounts": "Çoklu Hesap",
     "signUp": "Kaydol",
     "signIn": "Giriş Yap",
-    "passwordRecovery": "Parola Kurtarma",
+    "signInToExistingAcc": "Mevcut bir hesapta oturum açın",
+    "signInToDifferentAcc": "Farklı bir hesapta oturum açın",
+    "selectMasterAccount": "Ana Hesabı Seçin",
+    "forgotPassword": "Şifremi unuttum",
+    "forgotPasswordNote": "Hesap ayrıntılarınızı ve yeni bir parola girerek Raporlar Uygulaması hesabınızı sıfırlayın.",
     "subAccount": "Alt Hesap",
     "enterAPIKey": "API Anahtarı Girin:",
     "enterAPISecret": "API Gizli Dizisini Girin:",
-    "enterPassword": "Parola Girin:",
-    "repeatPassword": "Parolayı Tekrarlayın:",
+    "enterPassword": "Bitfinex Raporlar Uygulaması Şifresini Girin",
+    "repeatPassword": "Bitfinex Raporlar Uygulaması Şifresini Tekrarla",
+    "enterNewPassword": "Yeni Bitfinex Raporlar Uygulaması Şifresini Girin",
+    "repeatNewPassword": "Yeni Bitfinex Raporlar Uygulaması Şifresini Tekrarlayın",
+    "resetPassword": "Şifreyi Sıfırla",
+    "removeLoginPassword": "Girişte Şifreyi Kaldır",
+    "resetAccWithApiKey": "API anahtarı ile hesabı sıfırlayın",
+    "resetAccWithoutApiKey": "API anahtarı olmadan hesabı sıfırla",
     "enterEmail": "E-posta Girin:",
     "checkAuth": "Doğrulama Kontrolü",
     "note1": "Salt okunur API anahtarı ve gizli dizi çiftini almak için ",
     "note2": " sayfasını ziyaret edin.",
-    "passwordProtection": "Parola korumasını etkinleştir",
+    "passwordProtection": "Girişte Şifre ile Giriş Yap",
     "passwordLengthValidationError": "Parola en az 8 karakter olmalıdır",
     "passwordCharactersValidationError": "Parola hem büyük hem küçük harf karakterleri içermelidir",
     "passwordRepeatValidationError": "Parolalar eşleşmiyor",
@@ -75,17 +110,23 @@
     "base-price": "Baz Fiyat",
     "bid": "Al",
     "browser": "Tarayıcı",
+    "buyingAmount": "Alış Miktarı",
+    "buyingWeightedPrice": "Alış Ağırlıklı Fiyat",
     "category": "Kategori",
     "clampMax": "Maks. Kıskaç",
     "clampMin": "Min. Kıskaç",
     "closed": "Kapalı",
     "collateral": "Teminat",
     "created": "Oluşturuldu",
+    "cumulativeAmount": "Kümülatif Tutar",
+    "cumulativeWeightedPrice": "Kümülatif Ağırlıklı Fiyat",
     "currency": "Para birimi",
+    "customerInfo": "Müşteri Bilgisi",
     "date": "Tarih",
     "days": "Gün",
     "description": "Açıklama",
     "destination": "Hedef",
+    "duration": "Süre",
     "fee": "Ücret",
     "feePercent": "Ücret Yüzdesi",
     "fees": "Ücretler",
@@ -96,10 +137,12 @@
     "fundingType": "Fonlama Türü",
     "id": "No.",
     "ip": "IP",
+    "invoices": "Faturalar",
     "lastpayout": "Son Ödeme",
     "liq-price": "Likidasyon Fiyatı",
     "maker_fees": "Yapıcı Ücretleri",
     "maker_rebate": "Yapıcı Geri Ödemesi",
+    "merchantName": "Satıcı Adı",
     "meta": "Meta Veri",
     "mobile": "Mobil",
     "movementsTotal": "Toplam Hareket Tutarı (USD)",
@@ -107,6 +150,8 @@
     "opened": "Açıldı",
     "orderid": "Emir Kimliği",
     "pair": "Parite",
+    "payCurrencies": "Ödeme Para Birimleri",
+    "payment": "Ödeme",
     "percent": "Yüzde",
     "period": "Dönem",
     "pl": "K/Z",
@@ -120,6 +165,9 @@
     "pricetrail": "Takip Eden Fiyat",
     "rate": "Oran",
     "rateperc": "Oran %",
+    "redirectUrl": "Yönlendirme URL'si",
+    "sellingAmount": "Satış Tutarı",
+    "sellingWeightedPrice": "Satış Ağırlıklı Fiyat",
     "side": "Taraf",
     "status": "Durum",
     "taker_fees": "Alıcı Ücretleri",
@@ -140,7 +188,8 @@
     "version": "Sürüm",
     "volume": "Hacim",
     "wallet": "Cüzdan",
-    "walletsTotal": "Cüzdanların Toplam Bakiyesi (USD)"
+    "walletsTotal": "Cüzdanların Toplam Bakiyesi (USD)",
+    "webhook": "Webhook"
   },
   "columnsfilter": {
     "title": "Sütunları Filtrele",
@@ -189,15 +238,16 @@
     "export": "Dışa Aktar",
     "cancel": "İptal Et",
     "okay": "Tamam",
+    "remoteStorage": "Uzaktan depolama",
     "status": {
-      "local": "CSV dışa aktarımı oluşturuldu, lütfen yerel \"csv\" klasörünüzü kontrol edin",
+      "local": "Oluşturulan csv'yi dışa aktarın, dosyalar şuraya kaydedilir: ",
       "email": "CSV raporunuz oluşturuluyor. Hazır olur olmaz size e-posta ile göndereceğiz..."
     },
     "success": "Başarılı",
     "targets": "Dışa Aktarılacak Veriler"
   },
   "fcredit": {
-    "title": "Fonlama Kredisi (Kullanılan)",
+    "title": "Fonlama Kredileri (Kullanılmış)",
     "side": {
       "provided": "SAĞLANAN",
       "taken": "ALINAN",
@@ -242,6 +292,9 @@
     "filter_placeholder": "Filtre...",
     "timezone_local": "Geçerli zaman dilimi",
     "timezone_placeholder": "Zaman dilimi ara..."
+  },
+  "invoices": {
+    "title": "Faturalar"
   },
   "ledgers": {
     "title": "Kayıt defterleri",
@@ -291,7 +344,67 @@
   "movements": {
     "title": "Hareketler"
   },
+  "navItems": {
+    "reports": "Raporlar",
+    "myAccount": {
+      "title": "Hesabım",
+      "summary": "Özet",
+      "balance": "Bakiye",
+      "analysisStat": "Analiz/İstatistik",
+      "analysisStatTabs": {
+        "weightedAvgs": "Ağırlıklı Ortalamalar",
+        "volume": "Hacim",
+        "winLoss": "Kazanç/Kayıp",
+        "conRisk": "Toplanma Riski",
+        "loan": "Kredi Raporu",
+        "fees": "Ücret Raporu"
+      },
+      "snapshotsTax": "Anlık Görüntüler ve Vergi Raporu"
+    },
+    "myHistory": {
+      "title": "Geçmişim",
+      "general": "Genel",
+      "generalTabs": {
+        "ledgers": "Kayıt defterleri",
+        "trades": "Al-Sat İşlemleri",
+        "orders": "Emirler",
+        "movements": "Hareketler",
+        "positions": "Pozisyonlar"
+      },
+      "funding": "Fonlama",
+      "fundingTabs": {
+        "bidsOffers": "Alımlar ve Teklifler",
+        "loans": "Krediler",
+        "credits": "Krediler"
+      },
+      "earnings": "Kazançlar",
+      "earningsTabs": {
+        "funding": "Fonlama",
+        "staking": "Staking",
+        "affiliates": "İş Ortakları"
+      },
+      "wallets": "Cüzdanlar"
+    },
+    "merchantHistory": {
+      "title": "Satıcı Geçmişi",
+      "invoices": "Faturalar"
+    },
+    "marketHistory": {
+      "title": "Piyasa Geçmişi",
+      "trades": "Al-Sat İşlemleri",
+      "funding": "Fonlama",
+      "spot": "Spot",
+      "derivatives": "Türevler"
+    },
+    "loginHistory": "Giriş Geçmişi",
+    "subAccounts": "Alt Hesaplar",
+    "changeLogs": "Değişiklik Günlükleri"
+  },
   "nodata": "Bu zaman aralığında ilgili veri yok. Başka bir zaman aralığı deneyebilirsiniz.",
+  "no_merchant": {
+    "title": "Bu bölüm yalnızca şunlar için mevcuttur ",
+    "link": "satıcı hesapları"
+  },
   "orders": {
     "title": "Emirler"
   },
@@ -341,6 +454,7 @@
     "milliseconds": "Milisaniyeleri Görüntüle",
     "table_scroll": "Tablo Kaydırma",
     "preserve_timeframe": "Zaman Dilimini Koru",
+    "remove_account": "Hesabı Kaldır",
     "sync": {
       "add-filter": "Filtre Ekle",
       "add-pair": "Parite Ekle",
@@ -375,10 +489,43 @@
     "select": "Seç",
     "all": "Tümü",
     "inactive": "Pasif",
+    "balance-precision": {
+      "title": "Bakiye (USD)",
+      "approximate": "Yaklaşık",
+      "exact": "Tam"
+    },
     "filter": {
       "symbol": "Sembol Filtresi",
       "pair": "Parite Filtresi",
       "category": "Kategori Filtresi"
+    },
+    "report-type": {
+      "title": "Rapor Türünü Seçin",
+      "win_loss": {
+        "title": "Kazanç/Kayıp"
+      },
+      "gains_deposits": {
+        "title": "Kazanç Yüzdesi (kazançlar/hesaba yatırılan miktar)",
+        "description": "Hesaba yapılan yatırma işlemleri miktarlarına göre kazanç yüzdesi hesaplanıyor"
+      },
+      "gains_balance": {
+        "title": "Kazanç Yüzdesi (kazançlar/bakiye)",
+        "description": "% kazançlar, bir önceki günün bakiyesine göre günlük olarak hesaplanır ve birleştirilir"
+      },
+      "trading_fees": {
+        "title": "İşlem Ücretleri"
+      },
+      "funding_fees": {
+        "title": "Fonlama Ücretleri"
+      },
+      "funding_trading_fees": {
+        "title": "Fonlama + İşlem Ücretleri"
+      }
+    },
+    "unrealized-profits": {
+      "title": "Gerçekleşmemiş Kârları Göster",
+      "yes": "Evet",
+      "no": "Hayır"
     }
   },
   "snapshots": {
@@ -401,7 +548,9 @@
     },
     "signInFail": "Geçersiz kimlik bilgileri",
     "timeframe_update": "Zaman aralığı güncellendi",
-    "signUpFail": "Geçersiz API Anahtarı veya Gizli Dizisi"
+    "signUpFail": "Geçersiz API Anahtarı veya Gizli Dizisi",
+    "netError": "Bozuk internet bağlantısı nedeniyle verilerin getirilmesi duraklatıldı",
+    "netResumed": "İnternet bağlantısı yenilendi, veri alımına devam edildi"
   },
   "subaccounts": {
     "add_account": "Hesap Ekle",
@@ -414,7 +563,8 @@
     "login": "Alt Hesaba Giriş Yap"
   },
   "symbols": {
-    "title": "Sembolleri al"
+    "title": "Sembolleri al",
+    "clear_symbols": "Sembolleri Temizle"
   },
   "sync": {
     "title": "Senkronize Et",
@@ -438,7 +588,18 @@
     "logout": "Senkronizasyon Durduruldu",
     "message": {
       "canceled": "Eski Senkronizasyon Takipçisi iptal edildi"
+    },
+    "estimated_time": {
+      "started_at": "Senkronizasyon şu andan itibaren başladı: ",
+      "spent_time": "Harcanan zaman: ",
+      "left_time": "Kalan süre: ",
+      "estimating": "Tahmin ediliyor..."
     }
+  },
+  "sum": "Toplam",
+  "sum_up_cols": "Özetle: {{sum}}",
+  "sum_up_tooltip": {
+    "title": "Özetle"
   },
   "taxreport": {
     "title": "Vergi Raporu",
@@ -459,7 +620,8 @@
     "midnight": "Gece Yarısı"
   },
   "tickers": {
-    "title": "Market",
+    "title": "Semboller",
+    "spot": "Spot",
     "minlength": "En az bir parite seçilmeli"
   },
   "timeframe": {
@@ -469,9 +631,12 @@
       "title": "Sorgu Aralığı Seçin",
       "view": "Görüntüle"
     },
+    "go_to": "Şuraya git",
     "day": "Gün",
+    "date": "Tarih",
     "refresh": "Yenile",
     "custom_time": "Özel",
+    "custom_range": "Özel zaman aralığı",
     "custom-timerange": "Özel zaman aralığı",
     "custom_year": "{{year}} yıl",
     "24h": "Son 24 saat",
@@ -487,6 +652,9 @@
     "range_limit": "Geçerli tarihten geriye doğru altı yıldan fazla sorgu yapılmasına izin verilmez",
     "start-date-placeholder": "Başlangıç Tarihi",
     "end-date-placeholder": "Bitiş Tarihi",
+    "select-date": "Tarih seç",
+    "from": "Başlangıç",
+    "to": "Bitiş",
     "today": "Bugün",
     "query_range": "Sorgu Aralığı",
     "year": "Yıl",
@@ -503,6 +671,7 @@
   "wallets": {
     "title": "Cüzdanlar",
     "header": {
+      "capital-raise": "Sermaye Artırma",
       "exchange": "Spot",
       "margin": "Marjin",
       "funding": "Fonlama",
@@ -512,6 +681,16 @@
     "query": {
       "title": "Sorgu",
       "tooltip": "Cüzdan anlık görüntüsünü sorgulamak için bir zaman seçin"
+    }
+  },
+  "weightedaverages": {
+    "title": "Ağırlıklı Ortalamalar",
+    "limitNote": {
+      "displayDate": "Gösterim tarihi: ",
+      "note1": "Seçilen tarihlerin görüntüleme tarihleriyle aynı olmadığını unutmayın. Bunun nedeni, web sürümünün bir seferde 2.000 işlem görüntülemekle sınırlı olmasıdır.",
+      "note2": "Daha uzun bir süre amaçlanıyorsa, sadece bir sembol seçerek veya indirerek deneyebilirsiniz.",
+      "link": "yazılımımız",
+      "note3": " bu sınıra sahip olmayan."
     }
   },
   "withdrawals": {

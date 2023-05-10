@@ -12,7 +12,7 @@ const NoMerchant = ({ t }) => (
         {t('no_merchant.title')}
         <a
           target='_blank'
-          rel='noreferrer'
+          rel='noopener noreferrer'
           href='https://pay.bitfinex.com/'
         >
           {t('no_merchant.link')}

@@ -29,7 +29,9 @@ const TYPE = queryConstants.MENU_CANDLES
 class Candles extends PureComponent {
   static propTypes = {
     candles: PropTypes.shape({
-      entries: PropTypes.arrayOf(PropTypes.object),
+      entries: PropTypes.arrayOf(PropTypes.shape({
+        time: PropTypes.number,
+      })),
       isLoading: PropTypes.bool,
       nextPage: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
     }),
@@ -49,7 +51,9 @@ class Candles extends PureComponent {
     t: PropTypes.func.isRequired,
     toggleGoToRangeDialog: PropTypes.func.isRequired,
     trades: PropTypes.shape({
-      entries: PropTypes.arrayOf(PropTypes.object),
+      entries: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number,
+      })),
       isLoading: PropTypes.bool,
       nextPage: PropTypes.oneOfType([PropTypes.bool, PropTypes.number]),
     }),

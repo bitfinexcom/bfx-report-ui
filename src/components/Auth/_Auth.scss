@@ -1,6 +1,6 @@
 @import './InputKey/InputKey';
 @import './ErrorLabel/ErrorLabel';
-@import './AuthTypeSelector/AuthTypeSelector';
+@import './SignInList/SignInList';
 @import './RegisterSubAccounts/RegisterSubAccounts';
 
 .bitfinex-auth {
@@ -122,9 +122,42 @@
     }
 
     .bp3-dialog {
-      &-footer {
-        &-actions {
+      &-body{
+        margin: 30px 0 5px 0;
+
+        .sign-in-wrapper {
+          margin: 0 60px;
+
+          .sign-in--otp {
+            .buttons-row {
+              display: flex;
+              justify-content: space-between;
+            }
+          }
+        }
+
+        .sign-in-user--item {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
           justify-content: space-between;
+          background-color: var(--multiBg);
+          min-height: 40px;
+          border-radius: 4px;
+          margin-bottom: 20px;
+          padding: 0 15px;
+          
+          &-title {
+           margin: 0;
+          }
+        }
+      }
+
+      &-footer {
+        margin: 0 60px 27px 60px;
+
+        &-actions {
+          justify-content: flex-end;
         }
       }
     }
@@ -135,8 +168,31 @@
       &-body {
         margin: 30px 60px 5px 60px;
 
+        .sign-in--otp {
+          .buttons-row {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+
         .sub-account {
-          margin-bottom: 15px;
+          margin-bottom: 25px;
+        }
+
+        .sign-in-user--item {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background-color: var(--multiBg);
+          min-height: 40px;
+          border-radius: 4px;
+          margin-bottom: 20px;
+          padding: 0 15px;
+          
+          &-title {
+           margin: 0;
+          }
         }
       }
 
@@ -178,7 +234,9 @@
   &-password-recovery {
     line-height: 38px;
     cursor: pointer;
-    color: var(--color2);
+    color: var(--activeColor);
+    margin-bottom: 25px;
+    margin-top: -15px;
   }
 
   &-mode-switch {

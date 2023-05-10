@@ -1,35 +1,28 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import _map from 'lodash/map'
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
 import { Classes, Dialog } from '@blueprintjs/core'
 
 import Icon from 'icons'
 import config from 'config'
-import Select from 'ui/Select'
 import PlatformLogo from 'ui/PlatformLogo'
 import SubAccount from 'components/SubAccounts/SubAccount'
 
-import { MODES } from '../Auth'
-import AuthTypeSelector from '../AuthTypeSelector'
+import { AUTH_TYPES, MODES } from '../Auth'
+import SelectedUserItem from '../SignIn/SignIn.item'
 
 const filterRestrictedUsers = (users) => _filter(
   users, user => !user?.isRestrictedToBeAddedToSubAccount
   && _isEmpty(user?.subUsers),
 )
 
-const prepareMasterAccUsers = (users) => _map(
-  _filter(users, ['isSubAccount', false]),
-  user => user.email,
-)
-
 const { showFrameworkMode } = config
 
 class RegisterSubAccounts extends PureComponent {
   static propTypes = {
-    authType: PropTypes.string.isRequired,
+    masterAccount: PropTypes.string.isRequired,
     authData: PropTypes.shape({
       apiKey: PropTypes.string,
       email: PropTypes.string,
@@ -51,10 +44,9 @@ class RegisterSubAccounts extends PureComponent {
   constructor(props) {
     super()
 
-    const { users } = props
-    const { email } = filterRestrictedUsers(users)[0] || {}
+    const { masterAccount } = props
     this.state = {
-      masterAccEmail: email,
+      masterAccEmail: masterAccount,
     }
   }
 
@@ -65,31 +57,29 @@ class RegisterSubAccounts extends PureComponent {
     }
   }
 
-  onEmailChange = (email) => {
-    this.setState({
-      masterAccEmail: email,
-    })
-  }
-
   clearMasterAccEmail = () => {
     this.setState({
       masterAccEmail: undefined,
     })
   }
 
+  handleBackToSignIn = () => {
+    const { switchMode, switchAuthType } = this.props
+    switchMode(MODES.SIGN_IN)
+    switchAuthType(AUTH_TYPES.SIMPLE_ACCOUNTS)
+    this.clearMasterAccEmail()
+  }
+
   render() {
     const {
       t,
       users,
-      authType,
       authData,
-      switchMode,
-      switchAuthType,
+      masterAccount,
       isMultipleAccsSelected,
     } = this.props
     const { masterAccEmail } = this.state
     const preparedUsers = filterRestrictedUsers(users)
-    const masterAccUsers = prepareMasterAccUsers(preparedUsers)
     const classes = classNames(
       'bitfinex-auth',
       'bitfinex-auth-sign-up',
@@ -103,28 +93,15 @@ class RegisterSubAccounts extends PureComponent {
         isOpen
         usePortal={false}
         className={classes}
-        icon={<Icon.SIGN_UP />}
-        title={t('auth.signUp')}
+        title={t('auth.addAccounts')}
         isCloseButtonShown={false}
       >
         <div className={Classes.DIALOG_BODY}>
-          {config.showFrameworkMode && (
-            <AuthTypeSelector
-              authType={authType}
-              switchAuthType={switchAuthType}
-            />
-          )}
           <PlatformLogo />
-          <h3 className='master-acc-selector--title'>
-            {t('auth.selectMasterAccount')}
-          </h3>
-          <Select
-            loading
-            items={masterAccUsers}
-            value={masterAccEmail}
-            onChange={this.onEmailChange}
-            className='bitfinex-auth-email'
-            popoverClassName='bitfinex-auth-email-popover'
+          <SelectedUserItem
+            user={masterAccount}
+            title={'auth.addAccountsTo'}
+            backToUsersList={this.handleBackToSignIn}
           />
           <>
             <SubAccount
@@ -142,7 +119,7 @@ class RegisterSubAccounts extends PureComponent {
               <div className='auth-mode-switch-wrapper'>
                 <div
                   className='bitfinex-auth-mode-switch'
-                  onClick={() => switchMode(MODES.SIGN_IN)}
+                  onClick={() => this.handleBackToSignIn()}
                 >
                   <Icon.SIGN_IN />
                   {t('auth.signInToExistingAcc')}

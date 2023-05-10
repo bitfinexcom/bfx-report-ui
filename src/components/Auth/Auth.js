@@ -34,7 +34,9 @@ class Auth extends PureComponent {
     isUsersLoaded: PropTypes.bool,
     t: PropTypes.func.isRequired,
     usersLoading: PropTypes.bool,
-    users: PropTypes.arrayOf(PropTypes.object).isRequired,
+    users: PropTypes.arrayOf(PropTypes.shape({
+      email: PropTypes.string,
+    })).isRequired,
   }
 
   static defaultProps = {
@@ -49,6 +51,7 @@ class Auth extends PureComponent {
     const { authData: { hasAuthData, isSubAccount } } = props
 
     this.state = {
+      masterAccount: '',
       mode: (!showFrameworkMode || !hasAuthData) ? MODES.SIGN_UP : MODES.SIGN_IN,
       authType: isSubAccount ? AUTH_TYPES.MULTIPLE_ACCOUNTS : AUTH_TYPES.SIMPLE_ACCOUNTS,
     }
@@ -72,6 +75,10 @@ class Auth extends PureComponent {
     this.setState({ authType })
   }
 
+  setMasterAccount = (email) => {
+    this.setState({ masterAccount: email })
+  }
+
   render() {
     const {
       authData: { hasAuthData },
@@ -79,7 +86,7 @@ class Auth extends PureComponent {
       t,
       usersLoading,
     } = this.props
-    const { mode, authType } = this.state
+    const { mode, authType, masterAccount } = this.state
     const isMultipleAccsSelected = (_isEqual(authType, AUTH_TYPES.MULTIPLE_ACCOUNTS) && showFrameworkMode)
 
     if (!isShown || (showFrameworkMode && !hasAuthData && usersLoading)) {
@@ -100,9 +107,10 @@ class Auth extends PureComponent {
       case isMultipleAccsSelected && MODES.SIGN_UP:
         return (
           <RegisterSubAccounts
-            authType={authType}
             switchMode={this.switchMode}
+            masterAccount={masterAccount}
             switchAuthType={this.switchAuthType}
+            setMasterAccount={this.setMasterAccount}
             isMultipleAccsSelected={isMultipleAccsSelected}
           />
         )
@@ -112,18 +120,14 @@ class Auth extends PureComponent {
             authType={authType}
             switchMode={this.switchMode}
             switchAuthType={this.switchAuthType}
+            setMasterAccount={this.setMasterAccount}
             isMultipleAccsSelected={isMultipleAccsSelected}
           />
         )
       case MODES.SIGN_UP:
       default:
         return (
-          <SignUp
-            authType={authType}
-            switchMode={this.switchMode}
-            switchAuthType={this.switchAuthType}
-            isMultipleAccsSelected={isMultipleAccsSelected}
-          />
+          <SignUp switchMode={this.switchMode} />
         )
       case MODES.PASSWORD_RECOVERY:
         return <PasswordRecovery switchMode={this.switchMode} />

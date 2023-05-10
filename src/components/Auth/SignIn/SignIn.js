@@ -1,35 +1,32 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import _find from 'lodash/find'
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
 import _isEqual from 'lodash/isEqual'
 import {
   Button,
-  Checkbox,
   Classes,
   Dialog,
   Intent,
 } from '@blueprintjs/core'
 
 import config from 'config'
-import Icon from 'icons'
 import PlatformLogo from 'ui/PlatformLogo'
-import Select from 'ui/Select'
 
-import InputKey from '../InputKey'
-import { MODES } from '../Auth'
+import { AUTH_TYPES, MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
-import AuthTypeSelector from '../AuthTypeSelector'
+import InputKey from '../InputKey'
+import SignInList from '../SignInList'
 
-const { showFrameworkMode, isElectronApp } = config
+import SelectedUserItem from './SignIn.item'
+
+const { isElectronApp } = config
 const getPreparedUsers = (users, multi = false) => (multi
   ? _filter(users, 'isSubAccount').map(user => user.email)
   : _filter(users, ['isSubAccount', false]).map(user => user.email))
 
 class SignIn extends PureComponent {
   static propTypes = {
-    authType: PropTypes.string.isRequired,
     authData: PropTypes.shape({
       email: PropTypes.string,
       password: PropTypes.string,
@@ -48,6 +45,7 @@ class SignIn extends PureComponent {
     showOtpLogin: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchAuthType: PropTypes.func.isRequired,
+    setMasterAccount: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     updateAuth: PropTypes.func.isRequired,
     userShouldReLogin: PropTypes.string.isRequired,
@@ -72,6 +70,8 @@ class SignIn extends PureComponent {
       email: initialEmail,
       password,
       userPassword: '',
+      showUsersList: true,
+      isSubAccount: false,
     }
   }
 
@@ -114,10 +114,11 @@ class SignIn extends PureComponent {
 
   onSignIn = () => {
     const {
-      isSubAccount, signIn, users, userShouldReLogin, signUpEmail,
+      signIn, userShouldReLogin, signUpEmail,
     } = this.props
-    const { email, password, userPassword } = this.state
-    const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
+    const {
+      email, password, userPassword, isSubAccount,
+    } = this.state
     if (_isEqual(email, userShouldReLogin)) {
       signUpEmail({
         login: email,
@@ -127,7 +128,7 @@ class SignIn extends PureComponent {
       signIn({
         email,
         isNotProtected: !password,
-        isSubAccount: isCurrentUserHasSubAccount ? isSubAccount : false,
+        isSubAccount,
         password,
       })
     }
@@ -181,18 +182,48 @@ class SignIn extends PureComponent {
     })
   }
 
+  handleUserItemSelect = ({ email, isSubAccount }) => {
+    const { switchAuthType } = this.props
+    if (isSubAccount) {
+      switchAuthType(AUTH_TYPES.MULTIPLE_ACCOUNTS)
+    } else {
+      switchAuthType(AUTH_TYPES.SIMPLE_ACCOUNTS)
+    }
+    this.setState({
+      email,
+      password: '',
+      isSubAccount,
+      showUsersList: false,
+    })
+  }
+
+  backToUsersList = () => {
+    const { switchAuthType } = this.props
+    switchAuthType(AUTH_TYPES.SIMPLE_ACCOUNTS)
+    this.setState({
+      email: '',
+      password: '',
+      isSubAccount: false,
+      showUsersList: true,
+    })
+  }
+
+  handleAddAccountToSelectedUser = (email) => {
+    const { switchMode, switchAuthType, setMasterAccount } = this.props
+    switchAuthType(AUTH_TYPES.MULTIPLE_ACCOUNTS)
+    switchMode(MODES.SIGN_UP)
+    setMasterAccount(email)
+  }
+
   render() {
     const {
       t,
       users,
       loading,
-      authType,
       switchMode,
       isSubAccount,
-      switchAuthType,
       isOtpLoginShown,
       userShouldReLogin,
-      isMultipleAccsSelected,
       isElectronBackendLoaded,
     } = this.props
     const {
@@ -200,56 +231,55 @@ class SignIn extends PureComponent {
       email,
       password,
       userPassword,
+      showUsersList,
     } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
     const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
-    const isCurrentUserHasSubAccount = !!users.find(user => user.email === email && user.isSubAccount)
-    const showSubAccount = isCurrentUserHasSubAccount && isMultipleAccsSelected
-    const preparedUsers = getPreparedUsers(users, isMultipleAccsSelected)
     const isEmailSelected = !_isEmpty(email)
-    const isSubAccsAvailableForCurrentUser = !!_find(users,
-      user => _isEqual(user?.email, email) && !user?.isRestrictedToBeAddedToSubAccount)
-      || !isEmailSelected
-    const showAuthTypeSelector = showFrameworkMode && isSubAccsAvailableForCurrentUser
     const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin)
+    const showSelectedUser = !showUsersList && isEmailSelected
+    const showInputPassword = !isNotProtected && !showUsersList && isEmailSelected && users.length > 0
+    const showSignInActions = !isOtpLoginShown && !showUsersList
 
     return (
       <Dialog
         isOpen
         usePortal
         title={t('auth.signIn')}
-        icon={<Icon.SIGN_IN />}
         isCloseButtonShown={false}
         className='bitfinex-auth bitfinex-auth-sign-in'
       >
         <div className={Classes.DIALOG_BODY}>
-          {showAuthTypeSelector && (
-            <AuthTypeSelector
-              authType={authType}
-              switchAuthType={switchAuthType}
+          <PlatformLogo />
+          {showUsersList && (
+            <SignInList
+              users={users}
+              switchMode={switchMode}
+              handleUserItemSelect={this.handleUserItemSelect}
+              handleAddAccounts={this.handleAddAccountToSelectedUser}
             />
           )}
-          <PlatformLogo />
           {isOtpLoginShown
             ? (
-              <LoginOtp
-                otp={otp}
-                handle2FACancel={this.handle2FACancel}
-                handleInputChange={this.handleInputChange}
-                handleOneTimePassword={this.handle2FASignIn}
-              />
-            ) : (
-              <>
-                <Select
-                  loading
-                  value={email}
-                  items={preparedUsers}
-                  onChange={this.onEmailChange}
-                  className='bitfinex-auth-email'
-                  popoverClassName='bitfinex-auth-email-popover'
+              <div className='sign-in-wrapper'>
+                <LoginOtp
+                  otp={otp}
+                  handle2FACancel={this.handle2FACancel}
+                  handleInputChange={this.handleInputChange}
+                  handleOneTimePassword={this.handle2FASignIn}
                 />
+              </div>
+            ) : (
+              <div className='sign-in-wrapper'>
+                {showSelectedUser && (
+                  <SelectedUserItem
+                    user={email}
+                    title={'auth.signInTo'}
+                    backToUsersList={this.backToUsersList}
+                  />
+                )}
                 {isCurrentUserShouldReLogin && (
                   <InputKey
                     name='userPassword'
@@ -258,7 +288,7 @@ class SignIn extends PureComponent {
                     label='auth.loginEmail.bfxAccPassword'
                   />
                 )}
-                {!isNotProtected && isEmailSelected && users.length > 0 && (
+                {showInputPassword && (
                   <InputKey
                     name='password'
                     value={password}
@@ -266,37 +296,21 @@ class SignIn extends PureComponent {
                     onChange={this.handleInputChange}
                   />
                 )}
-                <div className='bitfinex-auth-checkboxes'>
-                  {showSubAccount && (
-                    <Checkbox
-                      disabled
-                      name='isSubAccount'
-                      checked={isSubAccount}
-                      className='bitfinex-auth-remember-me bitfinex-auth-remember-me--sub-accounts'
-                    >
-                      {t('auth.subAccount')}
-                    </Checkbox>
-                  )}
-                </div>
-              </>
+                {showSignInActions && (
+                  <div
+                    className='bitfinex-auth-password-recovery'
+                    onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
+                  >
+                    {t('auth.forgotPasswordLink')}
+                  </div>
+                )}
+              </div>
             )}
         </div>
-        {!isOtpLoginShown && (
+        {showSignInActions && (
           <div className={Classes.DIALOG_FOOTER}>
             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-              <div
-                className='bitfinex-auth-password-recovery'
-                onClick={() => switchMode(MODES.PASSWORD_RECOVERY)}
-              >
-                {t('auth.forgotPassword')}
-              </div>
               <div>
-                <div
-                  className='bitfinex-auth-mode-switch'
-                  onClick={() => switchMode(MODES.SIGN_UP)}
-                >
-                  {t('auth.addAccount')}
-                </div>
                 <Button
                   name='check'
                   loading={loading}

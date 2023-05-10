@@ -36,7 +36,9 @@ class AccountSummary extends PureComponent {
       takerFeeToCrypto: PropTypes.number,
       takerFeeToFiat: PropTypes.number,
       takerFeeToStable: PropTypes.number,
-      trade_vol_30d: PropTypes.arrayOf(PropTypes.object),
+      trade_vol_30d: PropTypes.arrayOf(PropTypes.shape({
+        curr: PropTypes.string,
+      })),
     }),
     dataReceived: PropTypes.bool.isRequired,
     fetchData: PropTypes.func.isRequired,

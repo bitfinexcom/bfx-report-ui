@@ -133,19 +133,33 @@ class SubUsersAdd extends PureComponent {
               '',
               ...accountOptions,
             ]
+            const showSubAccountsSelect = accountOptions.length > 0 && !apiKey && !apiSecret
 
             return (
               /* eslint-disable-next-line react/no-array-index-key */
               <div className='sub-users-add-accounts-account' key={index}>
-                {accountOptions.length > 0 && !apiKey && !apiSecret && (
-                  <Select
-                    loading
-                    value={email}
-                    className={selectClassName}
-                    items={subAccountOptionsItems}
-                    popoverClassName={selectPopoverClassName}
-                    onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
-                  />
+                {showSubAccountsSelect && (
+                  <>
+                    <div className='account-title'>
+                      <div className='account-title--label'>
+                        {t('subaccounts.select')}
+                      </div>
+                      <div
+                        className='account-title--remove'
+                        onClick={() => this.onAccountRemove(index)}
+                      >
+                        {t('subaccounts.remove_item')}
+                      </div>
+                    </div>
+                    <Select
+                      loading
+                      value={email}
+                      className={selectClassName}
+                      items={subAccountOptionsItems}
+                      popoverClassName={selectPopoverClassName}
+                      onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
+                    />
+                  </>
                 )}
                 {!isNotProtected && (
                   <InputGroup
@@ -161,6 +175,9 @@ class SubUsersAdd extends PureComponent {
                       name='apiKey'
                       value={apiKey}
                       label={t('subaccounts.api_key')}
+                      showRemoveLink={!showSubAccountsSelect}
+                      linkLabel={t('subaccounts.remove_item')}
+                      onRemove={() => this.onAccountRemove(index)}
                       onChange={(e) => this.onInputChange(e, index)}
                     />
                     <InputGroup
@@ -171,10 +188,6 @@ class SubUsersAdd extends PureComponent {
                     />
                   </>
                 )}
-                <Icon.BIN
-                  onClick={() => this.onAccountRemove(index)}
-                  className='sub-users-add-accounts-account-remove'
-                />
               </div>
             )
           })}
@@ -186,7 +199,10 @@ class SubUsersAdd extends PureComponent {
               onClick={this.onAccountAdd}
               className='sub-users-add-new-btn color--active'
             >
-              {`+ ${t('subaccounts.add_account')}`}
+              <Icon.PLUS_CIRCLE />
+              <span className='add-new-btn-title'>
+                {t('subaccounts.add_account')}
+              </span>
             </span>
           </div>
         )}

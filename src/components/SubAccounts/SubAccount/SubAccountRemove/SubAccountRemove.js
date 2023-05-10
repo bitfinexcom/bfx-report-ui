@@ -29,7 +29,9 @@ SubAccountRemove.propTypes = {
   t: PropTypes.func.isRequired,
   masterAccount: PropTypes.string,
   removeSubAccount: PropTypes.func.isRequired,
-  subUsers: PropTypes.arrayOf(PropTypes.object),
+  subUsers: PropTypes.arrayOf(PropTypes.shape({
+    email: PropTypes.string,
+  })),
 }
 SubAccountRemove.defaultProps = {
   subUsers: [],

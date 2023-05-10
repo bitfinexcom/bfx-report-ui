@@ -61,7 +61,9 @@ class Invoices extends PureComponent {
       orderId: PropTypes.string.isRequired,
       payCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
       status: PropTypes.string.isRequired,
-      invoices: PropTypes.arrayOf(PropTypes.object).isRequired,
+      invoices: PropTypes.arrayOf(PropTypes.shape({
+        currency: PropTypes.string,
+      })).isRequired,
       duration: PropTypes.number.isRequired,
       merchantName: PropTypes.string.isRequired,
       redirectUrl: PropTypes.string.isRequired,

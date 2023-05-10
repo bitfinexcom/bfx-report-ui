@@ -2,6 +2,8 @@
 @import 'SubUsersList/SubUsersList';
 
 .sub-account {
+  max-width: 385px;
+
   .loading-container {
     display: flex;
     min-height: 300px;
