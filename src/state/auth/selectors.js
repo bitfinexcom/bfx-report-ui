@@ -20,7 +20,7 @@ export const getUserShouldReLogin = state => getAuth(state)?.userShouldReLogin ?
 export const getIsSubAccsAvailable = state => _first(
   _filter(getUsers(state), user => _isEqual(user?.email, getEmail(state))),
 )?.isApiKeysAuth ?? true
-export const getLocalUsername = state => getAuth(state)?.localUsername ?? false
+export const getLocalUsername = state => getAuth(state)?.localUsername ?? null
 
 export const getAuthData = state => {
   const {
