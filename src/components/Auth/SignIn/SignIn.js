@@ -144,14 +144,6 @@ class SignIn extends PureComponent {
     })
   }
 
-  onEmailChange = (email) => {
-    const { authData: { email: preservedEmail, password } } = this.props
-    this.setState({
-      email,
-      password: email === preservedEmail ? password : undefined,
-    })
-  }
-
   handle2FACancel = () => {
     const { showOtpLogin } = this.props
     this.setState({ otp: '' })
