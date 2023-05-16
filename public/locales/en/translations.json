@@ -27,6 +27,7 @@
     "addAccount": "Add Account",
     "addAccounts": "Add Accounts",
     "addAccountsTo": "Add accounts to:",
+    "primaryAccount": "Primary account:", 
     "addAccountsToThisAcc": "Add accounts to this account",
     "manageAccounts": "Manage Accounts",
     "manageMultipleAccs": "Manage multiple accounts",
