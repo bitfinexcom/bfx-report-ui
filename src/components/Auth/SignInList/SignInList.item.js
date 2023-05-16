@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Icons from 'icons'
 
 import UserItemMenu from './SignInList.menu'
-import { getUserType } from './SignInList.helpers'
+import { getUserType, getMenuOptionTitle } from './SignInList.helpers'
 
 export const SignInListItem = ({
   user,
@@ -38,7 +38,10 @@ export const SignInListItem = ({
       </div>
       {isApiKeysAuth && (
         <div className='sign-in-list--icon'>
-          <UserItemMenu handleAddAccounts={addAccounts} />
+          <UserItemMenu
+            handleAddAccounts={addAccounts}
+            handleAccountsTitle={getMenuOptionTitle(user)}
+          />
         </div>
       )}
     </div>
