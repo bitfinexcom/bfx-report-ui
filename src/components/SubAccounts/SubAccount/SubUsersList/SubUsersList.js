@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { useTranslation } from 'react-i18next'
 
 import Icon from 'icons'
 
@@ -11,6 +12,7 @@ const SubUsersList = ({
   subUsersToRemove,
   isRemovalEnabled,
 }) => {
+  const { t } = useTranslation()
   const mainAccount = subUsers.find((subUser) => subUser.email === email)
   const subUsersWithoutMainAccount = subUsers.filter((subUser) => subUser.email !== email)
   const usersList = [mainAccount, ...subUsersWithoutMainAccount]
@@ -24,6 +26,17 @@ const SubUsersList = ({
 
         return (
           <div className={classes} key={accountEmail}>
+            <div className='account-title'>
+              <div className='account-title--label'>
+                {t('subaccounts.sub_account')}
+              </div>
+              <div
+                className='account-title--remove'
+                onClick={() => onToggle(accountEmail)}
+              >
+                {t('subaccounts.remove_item')}
+              </div>
+            </div>
             <div className='sub-users-list-item-user'>{accountEmail}</div>
             {isRemovalEnabled && email !== accountEmail && (
               <Icon.BIN
