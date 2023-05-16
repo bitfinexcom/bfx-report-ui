@@ -117,7 +117,7 @@ class RegisterSubAccounts extends PureComponent {
           <SelectedUserItem
             user={masterAccount}
             title={userHasSubAccounts
-              ? 'auth.manageMultipleAccs'
+              ? 'auth.primaryAccount'
               : 'auth.addAccountsTo'
             }
             backToUsersList={this.handleBackToSignIn}
