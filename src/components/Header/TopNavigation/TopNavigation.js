@@ -7,6 +7,10 @@ import {
   MenuItem,
   Position,
 } from '@blueprintjs/core'
+import _isNull from 'lodash/isNull'
+import _includes from 'lodash/includes'
+import _isString from 'lodash/isString'
+import _toString from 'lodash/toString'
 
 import Icon from 'icons'
 import config from 'config'
@@ -20,13 +24,23 @@ import { openHelp } from '../utils'
 
 const { showFrameworkMode } = config
 const { MENU_LOGINS, MENU_SUB_ACCOUNTS, MENU_CHANGE_LOGS } = queryConstants
-const formatUsername = (username = '') => (username.includes('@') ? `${username.split('@')[0]}` : username)
+
+const formatUsername = (email = '', localUsername) => {
+  if (!_isNull(localUsername)) {
+    return _toString(localUsername)
+  }
+  if (!_isString(email)) {
+    return ''
+  }
+  return _includes(email, '@') ? `${email.split('@')[0]}` : email
+}
 
 const TopNavigation = ({
   t,
   email,
   logout,
   history,
+  localUsername,
   togglePrefDialog,
   isSubAccsAvailable,
 }) => {
@@ -71,8 +85,8 @@ const TopNavigation = ({
               <MenuItem
                 icon={<Icon.USER_CIRCLE />}
                 shouldDismissPopover={false}
-                text={formatUsername(email)}
                 className='bp3-menu-item--account'
+                text={formatUsername(email, localUsername)}
               />
               <MenuItem
                 text={<SyncMode />}
@@ -147,6 +161,11 @@ TopNavigation.propTypes = {
       search: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  localUsername: PropTypes.string,
+}
+
+TopNavigation.defaultProps = {
+  localUsername: null,
 }
 
 export default memo(TopNavigation)
