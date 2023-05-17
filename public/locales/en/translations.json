@@ -577,7 +577,8 @@
     "remove": "Remove Sub Account",
     "login": "Login To Sub Account",
     "name_label": "Name",
-    "name_placeholder": "Accounts group name (optional)"
+    "name_placeholder": "Accounts group name (optional)",
+    "use_api_key": "Use API key"
   },
   "symbols": {
     "title": "Get symbols",
