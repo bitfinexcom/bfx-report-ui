@@ -1,6 +1,8 @@
 import { REHYDRATE } from 'redux-persist'
 import _get from 'lodash/get'
 
+import authTypes from 'state/auth/constants'
+
 import types from './constants'
 
 const initialState = {
@@ -40,6 +42,8 @@ export function timeRangeReducer(state = initialState, action) {
         ...state,
         isTimeRangePreserved: !state.isTimeRangePreserved,
       }
+    case authTypes.LOGOUT:
+      return state.isTimeRangePreserved ? state : initialState
     default:
       return state
   }
