@@ -7,7 +7,7 @@ const initialState = {
   range: types.DEFAULT_RANGE,
   start: undefined,
   end: undefined,
-  isTimeRangePreserved: true,
+  isTimeRangePreserved: false,
 }
 
 export function timeRangeReducer(state = initialState, action) {
