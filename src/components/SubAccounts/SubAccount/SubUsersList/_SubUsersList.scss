@@ -31,16 +31,17 @@
       cursor: pointer;
     }
 
-    &--removing & {
-      &-user {
+    &--removing {
+      .account-title {
+        &--remove {
+          cursor: pointer;
+          color: var(--iconWarning);
+        }
+      }
+      
+      .sub-users-list-item-user {
         border: 1px solid;
         border-color: var(--iconWarning);
-      }
-
-      &-icon {
-        path {
-          fill: var(--iconWarning);
-        }
       }
     }
   }
