@@ -131,7 +131,6 @@ const AccountMenu = ({
   )
 }
 
-
 AccountMenu.propTypes = {
   authStatus: PropTypes.bool.isRequired,
   email: PropTypes.string.isRequired,
