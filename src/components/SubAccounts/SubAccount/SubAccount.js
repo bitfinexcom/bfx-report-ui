@@ -11,7 +11,6 @@ import Loading from 'ui/Loading'
 
 import SubUsersAdd from './SubUsersAdd'
 import SubUsersList from './SubUsersList'
-// import RemoveSubAccount from './SubAccountRemove'
 import { getFilledAccounts, EMPTY_ACCOUNT, USE_API_KEY } from './utils'
 
 class SubAccount extends PureComponent {
@@ -21,7 +20,6 @@ class SubAccount extends PureComponent {
       isSubAccount: PropTypes.bool,
     }).isRequired,
     addSubAccount: PropTypes.func.isRequired,
-    // isSyncing: PropTypes.bool,
     isSubAccountsLoading: PropTypes.bool,
     isMultipleAccsSelected: PropTypes.bool,
     masterAccount: PropTypes.string,
@@ -40,7 +38,6 @@ class SubAccount extends PureComponent {
 
   static defaultProps = {
     allowedUsers: [],
-    // isSyncing: false,
     localUsername: null,
     masterAccount: undefined,
     isSubAccountsLoading: false,
@@ -79,7 +76,6 @@ class SubAccount extends PureComponent {
   }
 
   onSubUsersChange = (accounts) => {
-    console.log('++accounts', accounts)
     this.setState({ accounts })
   }
 
@@ -106,7 +102,6 @@ class SubAccount extends PureComponent {
       return account
     })
 
-    console.log('+++preparedAccounts', preparedAccounts)
     if (preparedAccounts.length || subUsersToRemove.length) {
       updateSubAccount({
         masterAccount,
@@ -127,7 +122,6 @@ class SubAccount extends PureComponent {
       t,
       users,
       authData,
-      // isSyncing,
       allowedUsers,
       masterAccount,
       isSubAccountsLoading,
@@ -142,7 +136,6 @@ class SubAccount extends PureComponent {
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
     const preparedUsers = _differenceBy(allowedUsers, subUsers, 'email')
     const isConfirmDisabled = _isEmpty(masterAccountEmail) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
-    // const showRemoveSubAccountBtn = (masterAccount || isSubAccount) && !isSyncing
 
     let showContent
     if (isSubAccountsLoading) {
@@ -191,14 +184,6 @@ class SubAccount extends PureComponent {
 
     return (
       <div className='sub-account'>
-        {/* {showRemoveSubAccountBtn && (
-          <div className='sub-account-controls'>
-            <RemoveSubAccount
-              subUsers={subUsers}
-              masterAccount={masterAccount}
-            />
-          </div>
-        )} */}
         {showContent}
       </div>
     )
