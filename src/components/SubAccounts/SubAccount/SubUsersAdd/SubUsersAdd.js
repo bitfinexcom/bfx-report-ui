@@ -136,35 +136,33 @@ class SubUsersAdd extends PureComponent {
               ...accountOptions,
             ]
 
-            const showSubAccountsSelect = !apiKey && !apiSecret
             const showApiInputs = _isEqual(email, t(USE_API_KEY))
 
             return (
               /* eslint-disable-next-line react/no-array-index-key */
               <div className='sub-users-add-accounts-account' key={index}>
-                {showSubAccountsSelect && (
-                  <>
-                    <div className='account-title'>
-                      <div className='account-title--label'>
-                        {t('subaccounts.select')}
-                      </div>
-                      <div
-                        className='account-title--remove'
-                        onClick={() => this.onAccountRemove(index)}
-                      >
-                        {t('subaccounts.remove_item')}
-                      </div>
+                <>
+                  <div className='account-title'>
+                    <div className='account-title--label'>
+                      {t('subaccounts.select')}
                     </div>
-                    <Select
-                      loading
-                      value={email}
-                      className={selectClassName}
-                      items={subAccountOptionsItems}
-                      popoverClassName={selectPopoverClassName}
-                      onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
-                    />
-                  </>
-                )}
+                    <div
+                      className='account-title--remove'
+                      onClick={() => this.onAccountRemove(index)}
+                    >
+                      {t('subaccounts.remove_item')}
+                    </div>
+                  </div>
+                  <Select
+                    loading
+                    value={email}
+                    className={selectClassName}
+                    items={subAccountOptionsItems}
+                    popoverClassName={selectPopoverClassName}
+                    onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
+                  />
+                </>
+
                 {!isNotProtected && (
                   <InputGroup
                     name='password'
@@ -179,7 +177,6 @@ class SubUsersAdd extends PureComponent {
                       name='apiKey'
                       value={apiKey}
                       label={t('subaccounts.api_key')}
-                      showRemoveLink={!showSubAccountsSelect}
                       linkLabel={t('subaccounts.remove_item')}
                       onRemove={() => this.onAccountRemove(index)}
                       onChange={(e) => this.onInputChange(e, index)}
