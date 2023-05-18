@@ -29,9 +29,12 @@ export const filterRestrictedUsers = (users) => _filter(
   && _isEmpty(user?.subUsers),
 )
 
+export const USE_API_KEY = 'subaccounts.use_api_key'
+
 export default {
   getFilledAccounts,
   filterRestrictedUsers,
   EMPTY_ACCOUNT,
   MAX_ACCOUNTS,
+  USE_API_KEY,
 }
