@@ -144,7 +144,7 @@ class SubUsersAdd extends PureComponent {
                 <>
                   <div className='account-title'>
                     <div className='account-title--label'>
-                      {t('subaccounts.select')}
+                      {t('subaccounts.sub_account')}
                     </div>
                     <div
                       className='account-title--remove'
