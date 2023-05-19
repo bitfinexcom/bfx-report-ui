@@ -1,13 +1,26 @@
 .weighted-averages {
   .limit-note {
-    padding: 15px 20px;
-    margin-bottom: 25px;
-    background-color: var(--bgColor);
-    border-radius: 4px;
     font-size: 13px;
+    max-width: 1006px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    background-color: var(--bgColor);
+    display: flex;
+
+    &--icon {
+      margin-right: 12px;
+
+      svg {
+        .icon--info-circle {
+          fill: var(--activeColor);
+        }
+      }
+    }
+    
     
     &--header {
-      color: var(--activeColor)
+      color: var(--activeColor);
     }
 
     &--body {
