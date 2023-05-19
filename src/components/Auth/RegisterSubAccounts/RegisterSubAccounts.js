@@ -53,7 +53,7 @@ class RegisterSubAccounts extends PureComponent {
 
     const { masterAccount } = props
     this.state = {
-      localUsername: null,
+      localUsername: masterAccount,
       masterAccEmail: masterAccount,
     }
   }
