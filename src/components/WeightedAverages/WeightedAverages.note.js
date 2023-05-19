@@ -20,15 +20,15 @@ const LimitNote = ({ start, end }) => {
       <div className='limit-note--body'>
         {t('weightedaverages.limitNote.note1')}
         <br />
-        {t('weightedaverages.limitNote.note2')}
         <a
           target='_blank'
           href={REPORTS_LINK}
           rel='noopener noreferrer'
+          className='limit-note--body-link'
         >
           {t('weightedaverages.limitNote.link')}
         </a>
-        {t('weightedaverages.limitNote.note3')}
+        {t('weightedaverages.limitNote.note2')}
       </div>
     </div>
   )

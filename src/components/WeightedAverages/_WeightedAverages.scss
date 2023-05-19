@@ -4,14 +4,19 @@
     margin-bottom: 25px;
     background-color: var(--bgColor);
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 13px;
     
     &--header {
       color: var(--activeColor)
     }
 
     &--body {
-      color: var(--color2)
+      color: var(--color2);
+
+      &-link {
+        color: var(--color2);
+        text-decoration: underline;
+      }
     }
   }
 }
