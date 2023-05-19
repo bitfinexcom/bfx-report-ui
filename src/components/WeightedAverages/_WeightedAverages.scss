@@ -1,9 +1,13 @@
 .weighted-averages {
   .limit-note {
+    padding: 15px 20px;
     margin-bottom: 25px;
+    background-color: var(--bgColor);
+    border-radius: 4px;
+    font-size: 12px;
     
     &--header {
-      color: var(--validationErrorColor)
+      color: var(--activeColor)
     }
 
     &--body {
