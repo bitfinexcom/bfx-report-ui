@@ -15,7 +15,7 @@ const LimitNote = ({ start, end }) => {
     <div className='limit-note'>
       <p className='limit-note--header'>
         {t('weightedaverages.limitNote.displayDate')}
-        {`${formatDate(start, timezone)} - ${formatDate(end, timezone)} *`}
+        {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
       </p>
       <div className='limit-note--body'>
         {t('weightedaverages.limitNote.note1')}
