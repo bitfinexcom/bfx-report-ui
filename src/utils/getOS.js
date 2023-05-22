@@ -1,3 +1,6 @@
+import _includes from 'lodash/includes'
+import _isUndefined from 'lodash/isUndefined'
+
 export const PLATFORMS = {
   mac: 'mac',
   windows: 'win',
@@ -5,19 +8,22 @@ export const PLATFORMS = {
 }
 
 export const getOS = () => {
-  if (typeof window === 'undefined') {
+  if (_isUndefined(typeof window)) {
     return null
   }
 
   const { userAgent } = window.navigator
 
-  if (userAgent.includes('Win')) {
+  if (_includes(userAgent, 'Win')) {
     return PLATFORMS.windows
   }
-  if (userAgent.includes('Mac')) {
+  if (_includes(userAgent, 'Mac')) {
     return PLATFORMS.mac
   }
   return PLATFORMS.linux
 }
 
-export default getOS
+export default {
+  getOS,
+  PLATFORMS,
+}
