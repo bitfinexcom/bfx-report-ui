@@ -85,7 +85,6 @@ class SignIn extends PureComponent {
       switchMode,
       isUsersLoaded,
       authData: { email },
-      isMultipleAccsSelected,
     } = this.props
 
     if (!prevProps.isUsersLoaded && isUsersLoaded) {
@@ -98,15 +97,6 @@ class SignIn extends PureComponent {
       } else {
         switchMode(MODES.SIGN_UP)
       }
-    }
-
-    if (!prevProps.isMultipleAccsSelected && isMultipleAccsSelected) {
-      const multiAccsUsers = getPreparedUsers(users, isMultipleAccsSelected)
-      const updatedEmail = multiAccsUsers[0]
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({
-        email: updatedEmail || '',
-      })
     }
 
     this.handleSubAccounts()
@@ -151,14 +141,6 @@ class SignIn extends PureComponent {
     const { name, value } = event.target
     this.setState({
       [name]: value,
-    })
-  }
-
-  onEmailChange = (email) => {
-    const { authData: { email: preservedEmail, password } } = this.props
-    this.setState({
-      email,
-      password: email === preservedEmail ? password : undefined,
     })
   }
 

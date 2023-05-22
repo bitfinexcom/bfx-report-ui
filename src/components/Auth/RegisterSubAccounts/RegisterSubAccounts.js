@@ -10,6 +10,7 @@ import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 import SubAccount from 'components/SubAccounts/SubAccount'
 
+import InputKey from '../InputKey'
 import { AUTH_TYPES, MODES } from '../Auth'
 import SelectedUserItem from '../SignIn/SignIn.item'
 
@@ -46,6 +47,7 @@ class RegisterSubAccounts extends PureComponent {
 
     const { masterAccount } = props
     this.state = {
+      localUsername: null,
       masterAccEmail: masterAccount,
     }
   }
@@ -70,6 +72,11 @@ class RegisterSubAccounts extends PureComponent {
     this.clearMasterAccEmail()
   }
 
+  handleInputChange = (e) => {
+    const { name, value } = e.target
+    this.setState({ [name]: value })
+  }
+
   render() {
     const {
       t,
@@ -78,7 +85,7 @@ class RegisterSubAccounts extends PureComponent {
       masterAccount,
       isMultipleAccsSelected,
     } = this.props
-    const { masterAccEmail } = this.state
+    const { masterAccEmail, localUsername } = this.state
     const preparedUsers = filterRestrictedUsers(users)
     const classes = classNames(
       'bitfinex-auth',
@@ -103,11 +110,20 @@ class RegisterSubAccounts extends PureComponent {
             title={'auth.addAccountsTo'}
             backToUsersList={this.handleBackToSignIn}
           />
+          <InputKey
+            type='text'
+            name='localUsername'
+            value={localUsername}
+            label='subaccounts.name_label'
+            onChange={this.handleInputChange}
+            placeholder={t('subaccounts.name_placeholder')}
+          />
           <>
             <SubAccount
-              authData={authData}
               users={users}
+              authData={authData}
               allowedUsers={preparedUsers}
+              localUsername={localUsername}
               masterAccount={masterAccEmail}
               isMultipleAccsSelected={isMultipleAccsSelected}
             />

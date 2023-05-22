@@ -17,6 +17,7 @@ import { setSubAccountLoadingStatus } from './actions'
 const getReqCreateSubAccount = ({
   masterAccount,
   subAccountApiKeys,
+  localUsername,
 }) => {
   if (masterAccount) {
     const auth = {
@@ -25,10 +26,12 @@ const getReqCreateSubAccount = ({
     }
     return makeFetchCall('createSubAccount', {
       subAccountApiKeys,
+      localUsername,
     }, auth)
   }
   return makeFetchCall('createSubAccount', {
     subAccountApiKeys,
+    localUsername,
   })
 }
 
@@ -47,8 +50,8 @@ const getReqUpdateSubAccount = (params, auth) => {
 }
 
 export function* createSubAccount({ payload }) {
-  const { preparedAccountData, masterAccount } = payload
-  const params = { subAccountApiKeys: preparedAccountData, masterAccount }
+  const { preparedAccountData, masterAccount, localUsername } = payload
+  const params = { subAccountApiKeys: preparedAccountData, masterAccount, localUsername }
   try {
     yield put(setSubAccountLoadingStatus(true))
     const { result, error } = yield call(getReqCreateSubAccount, params)
@@ -124,7 +127,9 @@ export function* removeSubAccount({ payload: masterAccount }) {
 
 export function* updateSubAccount({ payload }) {
   try {
-    const { addedSubUsers, removedSubUsers, masterAccount } = payload
+    const {
+      addedSubUsers, removedSubUsers, masterAccount, localUsername,
+    } = payload
 
     let auth
     if (masterAccount) {
@@ -144,6 +149,7 @@ export function* updateSubAccount({ payload }) {
       params.removingSubUsersByEmails = removedSubUsers.map(subUserEmail => ({ email: subUserEmail }))
     }
     yield put(setSubAccountLoadingStatus(true))
+    yield makeFetchCall('updateUser', { localUsername }, auth)
     const { result, error } = yield call(getReqUpdateSubAccount, params, auth)
     if (result) {
       yield put(setSubAccountLoadingStatus(false))

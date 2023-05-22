@@ -23,6 +23,7 @@ class SubAccount extends PureComponent {
     isSubAccountsLoading: PropTypes.bool,
     isMultipleAccsSelected: PropTypes.bool,
     masterAccount: PropTypes.string,
+    localUsername: PropTypes.string,
     updateSubAccount: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string.isRequired,
@@ -38,6 +39,7 @@ class SubAccount extends PureComponent {
   static defaultProps = {
     allowedUsers: [],
     isSyncing: false,
+    localUsername: null,
     masterAccount: undefined,
     isSubAccountsLoading: false,
     isMultipleAccsSelected: false,
@@ -49,7 +51,7 @@ class SubAccount extends PureComponent {
   }
 
   createSubAccount = () => {
-    const { addSubAccount, masterAccount } = this.props
+    const { addSubAccount, masterAccount, localUsername } = this.props
     const { accounts } = this.state
 
     const preparedAccountData = getFilledAccounts(accounts).map((account) => {
@@ -65,7 +67,7 @@ class SubAccount extends PureComponent {
         : { apiKey, apiSecret }
     })
 
-    addSubAccount({ preparedAccountData, masterAccount })
+    addSubAccount({ preparedAccountData, masterAccount, localUsername })
 
     this.setState({
       accounts: [EMPTY_ACCOUNT],
@@ -86,13 +88,14 @@ class SubAccount extends PureComponent {
   }
 
   updateSubAccount = () => {
-    const { masterAccount, updateSubAccount } = this.props
+    const { masterAccount, updateSubAccount, localUsername } = this.props
     const { accounts, subUsersToRemove } = this.state
 
     const filledAccounts = getFilledAccounts(accounts)
     if (filledAccounts.length || subUsersToRemove.length) {
       updateSubAccount({
         masterAccount,
+        localUsername,
         addedSubUsers: filledAccounts,
         removedSubUsers: subUsersToRemove,
       })
