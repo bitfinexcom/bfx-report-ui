@@ -1,6 +1,8 @@
-/* eslint-disable max-len */
+import _replace from 'lodash/replace'
 
 const DEFAULT_ELECTRON_VERSION = '3.0.1'
+
+const APP_RELEASES_URL = 'https://github.com/bitfinexcom/bfx-report-electron/releases'
 
 const config = {
   GITHUB_LINK: 'https://github.com/bitfinexcom/bfx-report-electron',
@@ -11,7 +13,7 @@ const config = {
       ? 'zip'
       : ext
 
-    return `https://github.com/bitfinexcom/bfx-report-electron/releases/download/${version}/BitfinexReport-${version.replace('v', '')}-x64-${platform}.${currExt}`
+    return `${APP_RELEASES_URL}/${version}/BitfinexReport-${_replace(version, 'v', '')}-x64-${platform}.${currExt}`
   },
 }
 
