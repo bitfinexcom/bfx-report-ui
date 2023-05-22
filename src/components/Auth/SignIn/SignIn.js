@@ -220,7 +220,7 @@ class SignIn extends PureComponent {
     const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isEmailSelected = !_isEmpty(email)
-    const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin)
+    const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin) && !showUsersList
     const showSelectedUser = !showUsersList && isEmailSelected
     const showInputPassword = !isNotProtected && !showUsersList && isEmailSelected && users.length > 0
     const showSignInActions = !isOtpLoginShown && !showUsersList
