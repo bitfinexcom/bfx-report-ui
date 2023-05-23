@@ -10,7 +10,7 @@ const environments = {
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: true,
     showAuthPage: true,
-    showFrameworkMode: true,
+    showFrameworkMode: false,
     hostedFrameworkMode: false,
   },
   testing: {
