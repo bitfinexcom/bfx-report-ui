@@ -73,12 +73,18 @@ html {
   }
 }
 
-.nav-menu-card {
-  padding: 0;
-  margin: 10px 10px 10px 20px;
-  background-color: var(--bgColor2);
-  border-radius: 10px;
-  overflow: hidden;
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+
+  &-card {
+    padding: 0;
+    height: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 10px 10px 10px 20px;
+    background-color: var(--bgColor2);
+  }
 }
 
 .bitfinex-dataset {
