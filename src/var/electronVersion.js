@@ -2,7 +2,7 @@ import _replace from 'lodash/replace'
 
 const DEFAULT_ELECTRON_VERSION = '3.0.1'
 
-const APP_RELEASES_URL = 'https://github.com/bitfinexcom/bfx-report-electron/releases'
+const APP_RELEASES_URL = 'https://github.com/bitfinexcom/bfx-report-electron/releases/download/'
 
 const config = {
   GITHUB_LINK: 'https://github.com/bitfinexcom/bfx-report-electron',
