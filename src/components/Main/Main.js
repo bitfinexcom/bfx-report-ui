@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import { Card } from '@blueprintjs/core'
 
+import AppDownload from 'components/AppDownload'
 import AccountBalance from 'components/AccountBalance'
 import AccountSummary from 'components/AccountSummary'
 import AffiliatesEarnings from 'components/AffiliatesEarnings'
@@ -154,7 +155,7 @@ class Main extends PureComponent {
           </Card>
           {!showFrameworkMode && (
             <Card className='nav-menu-card app-download'>
-              <div>Download the app</div>
+              <AppDownload />
             </Card>
           )}
         </div>
