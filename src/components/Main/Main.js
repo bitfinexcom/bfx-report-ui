@@ -148,9 +148,14 @@ class Main extends PureComponent {
 
     return authStatus && !authIsShown ? (
       <>
-        <Card className='nav-menu-card'>
-          <NavMenu className='bitfinex-nav-menu--main' />
-        </Card>
+        <div className='nav-menu'>
+          <Card className='nav-menu-card'>
+            <NavMenu className='bitfinex-nav-menu--main' />
+          </Card>
+          <Card className='nav-menu-card--download'>
+            <div>Download the app</div>
+          </Card>
+        </div>
         <div className='bitfinex-dataset'>
           <Switch>
             <Route
