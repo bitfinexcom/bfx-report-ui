@@ -152,9 +152,11 @@ class Main extends PureComponent {
           <Card className='nav-menu-card'>
             <NavMenu className='bitfinex-nav-menu--main' />
           </Card>
-          <Card className='nav-menu-card--download'>
-            <div>Download the app</div>
-          </Card>
+          {!showFrameworkMode && (
+            <Card className='nav-menu-card app-download'>
+              <div>Download the app</div>
+            </Card>
+          )}
         </div>
         <div className='bitfinex-dataset'>
           <Switch>
