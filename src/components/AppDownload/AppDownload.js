@@ -57,15 +57,18 @@ const AppDownload = () => {
   const { text, link } = getData(latestElectronVersion)
 
   return (
-    <Button
-      className='lp-header-install-btn'
-      onClick={() => {
-        window.open(link)
-      }}
-      loading={isLoading}
-    >
-      {t(text)}
-    </Button>
+    <div className='app-download'>
+      <h2 className='app-download--title'>
+        {t('download_app.title')}
+      </h2>
+      <Button
+        loading={isLoading}
+        className='app-download--btn'
+        onClick={() => window.open(link)}
+      >
+        {t(text)}
+      </Button>
+    </div>
   )
 }
 
