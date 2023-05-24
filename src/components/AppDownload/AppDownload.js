@@ -52,7 +52,7 @@ const AppDownload = () => {
     fetchData()
   }, [])
 
-  const { text, link } = getData(latestAppVersion)
+  const { link } = getData(latestAppVersion)
 
   return (
     <div className='app-download'>
@@ -80,6 +80,5 @@ const AppDownload = () => {
     </div>
   )
 }
-
 
 export default AppDownload
