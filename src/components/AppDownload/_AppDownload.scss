@@ -16,4 +16,14 @@
     color: var(--color2);
     margin-bottom: 15px;
   }
+
+  &--list {
+    padding-left: 20px;
+
+    li {
+      font-size: 14px;
+      color: var(--color2);
+      padding-bottom: 6px;
+    }
+  }
 }
