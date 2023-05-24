@@ -59,6 +59,9 @@ const AppDownload = () => {
       <h2 className='app-download--title'>
         {t('download_app.title')}
       </h2>
+      <h3 className='app-download--sub-title'>
+        {t('download_app.description')}
+      </h3>
       <Button
         loading={isLoading}
         className='app-download--btn'
