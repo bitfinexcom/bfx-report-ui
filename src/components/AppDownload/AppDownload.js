@@ -1,13 +1,15 @@
-import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@blueprintjs/core'
 
 import config from 'var/electronVersion'
 import { getOS, PLATFORMS } from 'utils/getOS'
 
-import PropTypes from 'prop-types'
-
-const { DEFAULT_ELECTRON_VERSION, LATEST_ELECTRON_RELEASE_LINK, getElectronReleaseLink } = config
+const {
+  getElectronReleaseLink,
+  DEFAULT_ELECTRON_VERSION,
+  LATEST_ELECTRON_RELEASE_LINK,
+} = config
 
 const getData = (version) => {
   const platform = getOS()
@@ -34,46 +36,38 @@ const getData = (version) => {
   }
 }
 
-class AppDownload extends PureComponent {
-  static propTypes = {
-    t: PropTypes.func.isRequired,
-  }
+const AppDownload = () => {
+  const { t } = useTranslation()
+  const [isLoading, setIsLoading] = useState(true)
+  const [latestElectronVersion, setLatestElectronVersion] = useState(DEFAULT_ELECTRON_VERSION)
 
-  state = {
-    isLoading: true,
-    latestElectronVersion: DEFAULT_ELECTRON_VERSION,
-  }
-
-  componentDidMount() {
-    fetch(LATEST_ELECTRON_RELEASE_LINK).then(res => res.json()).then(res => {
-      const { tag_name: latestElectronVersion } = res
-      if (latestElectronVersion) {
-        this.setState({ latestElectronVersion })
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetch(LATEST_ELECTRON_RELEASE_LINK)
+      const json = await data.json()
+      const latestVersion = json?.tag_name
+      if (latestVersion) {
+        setLatestElectronVersion(latestVersion)
       }
-    })
-    this.setState({
-      isLoading: false,
-    })
-  }
+      setIsLoading(false)
+    }
+    fetchData()
+  }, [])
 
-  render() {
-    const { isLoading, latestElectronVersion } = this.state
-    const { t } = this.props
+  const { text, link } = getData(latestElectronVersion)
 
-    const { text, link } = getData(latestElectronVersion)
-
-    return (
-      <Button
-        className='lp-header-install-btn'
-        onClick={() => {
-          window.open(link)
-        }}
-        loading={isLoading}
-      >
-        {t(text)}
-      </Button>
-    )
-  }
+  return (
+    <Button
+      className='lp-header-install-btn'
+      onClick={() => {
+        window.open(link)
+      }}
+      loading={isLoading}
+    >
+      {t(text)}
+    </Button>
+  )
 }
 
-export default withTranslation('translations')(AppDownload)
+
+export default AppDownload
