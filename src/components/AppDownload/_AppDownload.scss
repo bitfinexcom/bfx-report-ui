@@ -1,5 +1,4 @@
 .app-download {
-  min-height: 325px;
   padding: 24px;
 
   &--title {
@@ -24,6 +23,16 @@
       font-size: 14px;
       color: var(--color2);
       padding-bottom: 6px;
+    }
+  }
+
+  &--btn {
+    min-height: 40px;
+    padding: 5px 20px;
+
+    .bp3-button-text {
+      font-size: 15px;
+      font-weight: 700;
     }
   }
 }
