@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@blueprintjs/core'
+import { Button, Intent } from '@blueprintjs/core'
 
 import config from 'var/electronVersion'
 import { getOS, PLATFORMS } from 'utils/getOS'
@@ -62,8 +62,16 @@ const AppDownload = () => {
       <h3 className='app-download--sub-title'>
         {t('download_app.description')}
       </h3>
+      <ul className='app-download--list'>
+        <li>{t('download_app.risk')}</li>
+        <li>{t('download_app.win_loss')}</li>
+        <li>{t('download_app.tax')}</li>
+        <li>{t('download_app.snapshots')}</li>
+        <li>{t('download_app.more')}</li>
+      </ul>
       <Button
         loading={isLoading}
+        intent={Intent.SUCCESS}
         className='app-download--btn'
         onClick={() => window.open(link)}
       >
