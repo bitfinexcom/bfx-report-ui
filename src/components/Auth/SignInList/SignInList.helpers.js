@@ -6,6 +6,12 @@ export const getUserType = ({ isApiKeysAuth, subUsers }) => {
   return 'auth.apiKey'
 }
 
+export const getMenuOptionTitle = ({ isApiKeysAuth, subUsers }) => {
+  if (isApiKeysAuth && !_isEmpty(subUsers)) return 'auth.manageMultipleAccs'
+  return 'auth.addAccountsToThisAcc'
+}
+
 export default {
   getUserType,
+  getMenuOptionTitle,
 }

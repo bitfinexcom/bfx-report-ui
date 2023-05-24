@@ -1,7 +1,10 @@
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
+import _isEqual from 'lodash/isEqual'
 
-export const getFilledAccounts = (accounts) => accounts
+export const USE_API_KEY = 'subaccounts.use_api_key'
+
+export const getFilledAccounts = (accounts, t) => accounts
   .filter((account) => {
     const {
       email,
@@ -11,7 +14,11 @@ export const getFilledAccounts = (accounts) => accounts
       apiSecret,
     } = account
 
-    return (apiKey && apiSecret) || (email && (isNotProtected || password))
+    if (_isEqual(email, t(USE_API_KEY))) {
+      return (apiKey && apiSecret)
+    }
+
+    return (email && (isNotProtected || password))
   })
 
 export const EMPTY_ACCOUNT = {
@@ -34,4 +41,5 @@ export default {
   filterRestrictedUsers,
   EMPTY_ACCOUNT,
   MAX_ACCOUNTS,
+  USE_API_KEY,
 }

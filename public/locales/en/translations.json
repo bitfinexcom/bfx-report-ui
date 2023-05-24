@@ -27,7 +27,10 @@
     "addAccount": "Add Account",
     "addAccounts": "Add Accounts",
     "addAccountsTo": "Add accounts to:",
+    "primaryAccount": "Primary account:", 
     "addAccountsToThisAcc": "Add accounts to this account",
+    "manageAccounts": "Manage Accounts",
+    "manageMultipleAccs": "Manage multiple accounts",
     "useApiKey": "Use API Key",
     "loginEmail": {
       "emailOrUserName": "Email or Username",
@@ -566,6 +569,7 @@
     "update_accounts": "Update Accounts",
     "create": "Create Sub Account",
     "select": "Select Sub Account",
+    "sub_account": "Sub Account:",
     "remove_item": "Remove",
     "api_key": "API Key",
     "api_secret": "API Secret",
@@ -573,7 +577,8 @@
     "remove": "Remove Sub Account",
     "login": "Login To Sub Account",
     "name_label": "Name",
-    "name_placeholder": "Accounts group name (optional)"
+    "name_placeholder": "Accounts group name (optional)",
+    "use_api_key": "Use API key"
   },
   "symbols": {
     "title": "Get symbols",

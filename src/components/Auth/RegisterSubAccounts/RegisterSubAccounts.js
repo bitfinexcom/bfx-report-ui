@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import _split from 'lodash/split'
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
+import _isEqual from 'lodash/isEqual'
+import _isString from 'lodash/isString'
+import _includes from 'lodash/includes'
 import { Classes, Dialog } from '@blueprintjs/core'
 
 import Icon from 'icons'
@@ -14,10 +18,20 @@ import InputKey from '../InputKey'
 import { AUTH_TYPES, MODES } from '../Auth'
 import SelectedUserItem from '../SignIn/SignIn.item'
 
+const formatAccountName = (email = '') => {
+  if (!_isString(email)) return ''
+  return _includes(email, '@') ? `${_split(email, '@')[0]}` : email
+}
+
 const filterRestrictedUsers = (users) => _filter(
   users, user => !user?.isRestrictedToBeAddedToSubAccount
   && _isEmpty(user?.subUsers),
 )
+
+const isUserHasSubAccounts = (users, masterAccount) => _filter(
+  users, user => _isEqual(user?.email, masterAccount)
+  && !_isEmpty(user?.subUsers),
+).length > 0
 
 const { showFrameworkMode } = config
 
@@ -47,8 +61,8 @@ class RegisterSubAccounts extends PureComponent {
 
     const { masterAccount } = props
     this.state = {
-      localUsername: null,
       masterAccEmail: masterAccount,
+      localUsername: formatAccountName(masterAccount),
     }
   }
 
@@ -87,6 +101,7 @@ class RegisterSubAccounts extends PureComponent {
     } = this.props
     const { masterAccEmail, localUsername } = this.state
     const preparedUsers = filterRestrictedUsers(users)
+    const userHasSubAccounts = isUserHasSubAccounts(users, masterAccount)
     const classes = classNames(
       'bitfinex-auth',
       'bitfinex-auth-sign-up',
@@ -100,14 +115,19 @@ class RegisterSubAccounts extends PureComponent {
         isOpen
         usePortal={false}
         className={classes}
-        title={t('auth.addAccounts')}
+        title={t(userHasSubAccounts
+          ? 'auth.manageAccounts'
+          : 'auth.addAccounts')}
         isCloseButtonShown={false}
       >
         <div className={Classes.DIALOG_BODY}>
           <PlatformLogo />
           <SelectedUserItem
             user={masterAccount}
-            title={'auth.addAccountsTo'}
+            title={userHasSubAccounts
+              ? 'auth.primaryAccount'
+              : 'auth.addAccountsTo'
+            }
             backToUsersList={this.handleBackToSignIn}
           />
           <InputKey
