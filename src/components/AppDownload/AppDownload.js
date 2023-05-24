@@ -75,7 +75,7 @@ const AppDownload = () => {
         className='app-download--btn'
         onClick={() => window.open(link)}
       >
-        {t(text)}
+        {t('download_app.download_reports')}
       </Button>
     </div>
   )
