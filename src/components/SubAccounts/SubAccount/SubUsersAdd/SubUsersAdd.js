@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
+import _isEqual from 'lodash/isEqual'
 
 import Icon from 'icons'
 import Select from 'ui/Select'
 import InputGroup from 'ui/InputGroup'
 
-import { EMPTY_ACCOUNT, MAX_ACCOUNTS } from '../utils'
+import { EMPTY_ACCOUNT, MAX_ACCOUNTS, USE_API_KEY } from '../utils'
 
 class SubUsersAdd extends PureComponent {
   static propTypes = {
@@ -129,38 +130,39 @@ class SubUsersAdd extends PureComponent {
             const accountOptions = subAccountOptions
               .filter((acc) => acc.email === email || !takenAccountOptions.includes(acc.email))
               .map((accountOption) => accountOption.email)
+
             const subAccountOptionsItems = [
-              '',
+              t(USE_API_KEY),
               ...accountOptions,
             ]
-            const showSubAccountsSelect = accountOptions.length > 0 && !apiKey && !apiSecret
+
+            const showApiInputs = _isEqual(email, t(USE_API_KEY))
 
             return (
               /* eslint-disable-next-line react/no-array-index-key */
               <div className='sub-users-add-accounts-account' key={index}>
-                {showSubAccountsSelect && (
-                  <>
-                    <div className='account-title'>
-                      <div className='account-title--label'>
-                        {t('subaccounts.select')}
-                      </div>
-                      <div
-                        className='account-title--remove'
-                        onClick={() => this.onAccountRemove(index)}
-                      >
-                        {t('subaccounts.remove_item')}
-                      </div>
+                <>
+                  <div className='account-title'>
+                    <div className='account-title--label'>
+                      {t('subaccounts.sub_account')}
                     </div>
-                    <Select
-                      loading
-                      value={email}
-                      className={selectClassName}
-                      items={subAccountOptionsItems}
-                      popoverClassName={selectPopoverClassName}
-                      onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
-                    />
-                  </>
-                )}
+                    <div
+                      className='account-title--remove'
+                      onClick={() => this.onAccountRemove(index)}
+                    >
+                      {t('subaccounts.remove_item')}
+                    </div>
+                  </div>
+                  <Select
+                    loading
+                    value={email}
+                    className={selectClassName}
+                    items={subAccountOptionsItems}
+                    popoverClassName={selectPopoverClassName}
+                    onChange={(accountEmail) => this.onSubAccountEmailChange(accountEmail, index)}
+                  />
+                </>
+
                 {!isNotProtected && (
                   <InputGroup
                     name='password'
@@ -169,13 +171,12 @@ class SubUsersAdd extends PureComponent {
                     onChange={(e) => this.onInputChange(e, index)}
                   />
                 )}
-                {!email && (
+                {showApiInputs && (
                   <>
                     <InputGroup
                       name='apiKey'
                       value={apiKey}
                       label={t('subaccounts.api_key')}
-                      showRemoveLink={!showSubAccountsSelect}
                       linkLabel={t('subaccounts.remove_item')}
                       onRemove={() => this.onAccountRemove(index)}
                       onChange={(e) => this.onInputChange(e, index)}

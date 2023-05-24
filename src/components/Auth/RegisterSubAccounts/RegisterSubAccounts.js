@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import _split from 'lodash/split'
 import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
+import _isEqual from 'lodash/isEqual'
+import _isString from 'lodash/isString'
+import _includes from 'lodash/includes'
 import { Classes, Dialog } from '@blueprintjs/core'
 
 import Icon from 'icons'
@@ -10,13 +14,24 @@ import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
 import SubAccount from 'components/SubAccounts/SubAccount'
 
+import InputKey from '../InputKey'
 import { AUTH_TYPES, MODES } from '../Auth'
 import SelectedUserItem from '../SignIn/SignIn.item'
+
+const formatAccountName = (email = '') => {
+  if (!_isString(email)) return ''
+  return _includes(email, '@') ? `${_split(email, '@')[0]}` : email
+}
 
 const filterRestrictedUsers = (users) => _filter(
   users, user => !user?.isRestrictedToBeAddedToSubAccount
   && _isEmpty(user?.subUsers),
 )
+
+const isUserHasSubAccounts = (users, masterAccount) => _filter(
+  users, user => _isEqual(user?.email, masterAccount)
+  && !_isEmpty(user?.subUsers),
+).length > 0
 
 const { showFrameworkMode } = config
 
@@ -47,6 +62,7 @@ class RegisterSubAccounts extends PureComponent {
     const { masterAccount } = props
     this.state = {
       masterAccEmail: masterAccount,
+      localUsername: formatAccountName(masterAccount),
     }
   }
 
@@ -70,6 +86,11 @@ class RegisterSubAccounts extends PureComponent {
     this.clearMasterAccEmail()
   }
 
+  handleInputChange = (e) => {
+    const { name, value } = e.target
+    this.setState({ [name]: value })
+  }
+
   render() {
     const {
       t,
@@ -78,8 +99,9 @@ class RegisterSubAccounts extends PureComponent {
       masterAccount,
       isMultipleAccsSelected,
     } = this.props
-    const { masterAccEmail } = this.state
+    const { masterAccEmail, localUsername } = this.state
     const preparedUsers = filterRestrictedUsers(users)
+    const userHasSubAccounts = isUserHasSubAccounts(users, masterAccount)
     const classes = classNames(
       'bitfinex-auth',
       'bitfinex-auth-sign-up',
@@ -93,21 +115,35 @@ class RegisterSubAccounts extends PureComponent {
         isOpen
         usePortal={false}
         className={classes}
-        title={t('auth.addAccounts')}
+        title={t(userHasSubAccounts
+          ? 'auth.manageAccounts'
+          : 'auth.addAccounts')}
         isCloseButtonShown={false}
       >
         <div className={Classes.DIALOG_BODY}>
           <PlatformLogo />
           <SelectedUserItem
             user={masterAccount}
-            title={'auth.addAccountsTo'}
+            title={userHasSubAccounts
+              ? 'auth.primaryAccount'
+              : 'auth.addAccountsTo'
+            }
             backToUsersList={this.handleBackToSignIn}
+          />
+          <InputKey
+            type='text'
+            name='localUsername'
+            value={localUsername}
+            label='subaccounts.name_label'
+            onChange={this.handleInputChange}
+            placeholder={t('subaccounts.name_placeholder')}
           />
           <>
             <SubAccount
-              authData={authData}
               users={users}
+              authData={authData}
               allowedUsers={preparedUsers}
+              localUsername={localUsername}
               masterAccount={masterAccEmail}
               isMultipleAccsSelected={isMultipleAccsSelected}
             />

@@ -1,13 +1,35 @@
 .weighted-averages {
   .limit-note {
+    font-size: 13px;
+    max-width: 1006px;
+    padding: 20px;
     margin-bottom: 25px;
+    border-radius: 4px;
+    background-color: var(--bgColor);
+    display: flex;
+
+    &--icon {
+      margin-right: 12px;
+
+      svg {
+        .icon--info-circle {
+          fill: var(--activeColor);
+        }
+      }
+    }
+    
     
     &--header {
-      color: var(--validationErrorColor)
+      color: var(--activeColor);
     }
 
     &--body {
-      color: var(--color2)
+      color: var(--color2);
+
+      &-link {
+        color: var(--color2);
+        text-decoration: underline;
+      }
     }
   }
 }

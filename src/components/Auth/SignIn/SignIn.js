@@ -85,7 +85,6 @@ class SignIn extends PureComponent {
       switchMode,
       isUsersLoaded,
       authData: { email },
-      isMultipleAccsSelected,
     } = this.props
 
     if (!prevProps.isUsersLoaded && isUsersLoaded) {
@@ -98,15 +97,6 @@ class SignIn extends PureComponent {
       } else {
         switchMode(MODES.SIGN_UP)
       }
-    }
-
-    if (!prevProps.isMultipleAccsSelected && isMultipleAccsSelected) {
-      const multiAccsUsers = getPreparedUsers(users, isMultipleAccsSelected)
-      const updatedEmail = multiAccsUsers[0]
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({
-        email: updatedEmail || '',
-      })
     }
 
     this.handleSubAccounts()
@@ -151,14 +141,6 @@ class SignIn extends PureComponent {
     const { name, value } = event.target
     this.setState({
       [name]: value,
-    })
-  }
-
-  onEmailChange = (email) => {
-    const { authData: { email: preservedEmail, password } } = this.props
-    this.setState({
-      email,
-      password: email === preservedEmail ? password : undefined,
     })
   }
 
@@ -238,7 +220,7 @@ class SignIn extends PureComponent {
     const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isEmailSelected = !_isEmpty(email)
-    const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin)
+    const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin) && !showUsersList
     const showSelectedUser = !showUsersList && isEmailSelected
     const showInputPassword = !isNotProtected && !showUsersList && isEmailSelected && users.length > 0
     const showSignInActions = !isOtpLoginShown && !showUsersList

@@ -13,6 +13,7 @@ import Icon from 'icons'
 
 const UserItemMenu = ({
   handleAddAccounts,
+  handleAccountsTitle,
 }) => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
@@ -41,7 +42,7 @@ const UserItemMenu = ({
                 shouldDismissPopover={false}
                 onClick={() => handleAddAccounts()}
                 className='bp3-menu-item--account'
-                text={t('auth.addAccountsToThisAcc')}
+                text={t(handleAccountsTitle)}
               />
             </Menu>
           </div>
@@ -59,6 +60,7 @@ const UserItemMenu = ({
 
 UserItemMenu.propTypes = {
   handleAddAccounts: PropTypes.func.isRequired,
+  handleAccountsTitle: PropTypes.string.isRequired,
 }
 
 export default memo(UserItemMenu)

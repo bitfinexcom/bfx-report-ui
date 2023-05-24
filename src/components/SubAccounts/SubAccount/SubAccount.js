@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Intent } from '@blueprintjs/core'
 import _get from 'lodash/get'
+import _map from 'lodash/map'
+import _isEqual from 'lodash/isEqual'
 import _isEmpty from 'lodash/isEmpty'
 import _differenceBy from 'lodash/differenceBy'
 
@@ -9,8 +11,7 @@ import Loading from 'ui/Loading'
 
 import SubUsersAdd from './SubUsersAdd'
 import SubUsersList from './SubUsersList'
-import RemoveSubAccount from './SubAccountRemove'
-import { getFilledAccounts, EMPTY_ACCOUNT } from './utils'
+import { getFilledAccounts, EMPTY_ACCOUNT, USE_API_KEY } from './utils'
 
 class SubAccount extends PureComponent {
   static propTypes = {
@@ -19,10 +20,10 @@ class SubAccount extends PureComponent {
       isSubAccount: PropTypes.bool,
     }).isRequired,
     addSubAccount: PropTypes.func.isRequired,
-    isSyncing: PropTypes.bool,
     isSubAccountsLoading: PropTypes.bool,
     isMultipleAccsSelected: PropTypes.bool,
     masterAccount: PropTypes.string,
+    localUsername: PropTypes.string,
     updateSubAccount: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string.isRequired,
@@ -37,7 +38,7 @@ class SubAccount extends PureComponent {
 
   static defaultProps = {
     allowedUsers: [],
-    isSyncing: false,
+    localUsername: null,
     masterAccount: undefined,
     isSubAccountsLoading: false,
     isMultipleAccsSelected: false,
@@ -49,10 +50,12 @@ class SubAccount extends PureComponent {
   }
 
   createSubAccount = () => {
-    const { addSubAccount, masterAccount } = this.props
+    const {
+      addSubAccount, masterAccount, localUsername, t,
+    } = this.props
     const { accounts } = this.state
 
-    const preparedAccountData = getFilledAccounts(accounts).map((account) => {
+    const preparedAccountData = getFilledAccounts(accounts, t).map((account) => {
       const {
         email,
         apiKey,
@@ -60,12 +63,12 @@ class SubAccount extends PureComponent {
         apiSecret,
       } = account
 
-      return email
+      return !_isEqual(email, t(USE_API_KEY))
         ? { email, password: password || undefined }
         : { apiKey, apiSecret }
     })
 
-    addSubAccount({ preparedAccountData, masterAccount })
+    addSubAccount({ preparedAccountData, masterAccount, localUsername })
 
     this.setState({
       accounts: [EMPTY_ACCOUNT],
@@ -86,14 +89,24 @@ class SubAccount extends PureComponent {
   }
 
   updateSubAccount = () => {
-    const { masterAccount, updateSubAccount } = this.props
+    const {
+      masterAccount, updateSubAccount, localUsername, t,
+    } = this.props
     const { accounts, subUsersToRemove } = this.state
 
-    const filledAccounts = getFilledAccounts(accounts)
-    if (filledAccounts.length || subUsersToRemove.length) {
+    const filledAccounts = getFilledAccounts(accounts, t)
+    const preparedAccounts = _map(filledAccounts, account => {
+      if (_isEqual(account?.email, t(USE_API_KEY))) {
+        return { ...account, email: '' }
+      }
+      return account
+    })
+
+    if (preparedAccounts.length || subUsersToRemove.length) {
       updateSubAccount({
         masterAccount,
-        addedSubUsers: filledAccounts,
+        localUsername,
+        addedSubUsers: preparedAccounts,
         removedSubUsers: subUsersToRemove,
       })
 
@@ -109,7 +122,6 @@ class SubAccount extends PureComponent {
       t,
       users,
       authData,
-      isSyncing,
       allowedUsers,
       masterAccount,
       isSubAccountsLoading,
@@ -120,11 +132,10 @@ class SubAccount extends PureComponent {
     const masterAccountEmail = masterAccount || currentUserEmail
     const subAccountData = users.find((user) => user.email === masterAccountEmail && user.isSubAccount)
     const subUsers = _get(subAccountData, 'subUsers', [])
-    const hasFilledAccounts = getFilledAccounts(accounts).length > 0
+    const hasFilledAccounts = getFilledAccounts(accounts, t).length > 0
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
     const preparedUsers = _differenceBy(allowedUsers, subUsers, 'email')
     const isConfirmDisabled = _isEmpty(masterAccountEmail) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
-    const showRemoveSubAccountBtn = (masterAccount || isSubAccount) && !isSyncing
 
     let showContent
     if (isSubAccountsLoading) {
@@ -173,14 +184,6 @@ class SubAccount extends PureComponent {
 
     return (
       <div className='sub-account'>
-        {showRemoveSubAccountBtn && (
-          <div className='sub-account-controls'>
-            <RemoveSubAccount
-              subUsers={subUsers}
-              masterAccount={masterAccount}
-            />
-          </div>
-        )}
         {showContent}
       </div>
     )

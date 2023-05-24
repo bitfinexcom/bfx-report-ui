@@ -7,7 +7,9 @@ import {
   Popover,
   Position,
 } from '@blueprintjs/core'
+import _isNull from 'lodash/isNull'
 import _isString from 'lodash/isString'
+import _toString from 'lodash/toString'
 
 import Icon from 'icons'
 import config from 'config'
@@ -21,7 +23,10 @@ import { openHelp } from '../utils'
 const { showFrameworkMode } = config
 const { MENU_LOGINS, MENU_SUB_ACCOUNTS, MENU_CHANGE_LOGS } = queryConstants
 
-const formatUsername = (email = '') => {
+const formatUsername = (email = '', localUsername) => {
+  if (!_isNull(localUsername)) {
+    return _toString(localUsername)
+  }
   if (!_isString(email)) {
     return ''
   }
@@ -34,6 +39,7 @@ const AccountMenu = ({
   logout,
   history,
   authStatus,
+  localUsername,
   togglePrefDialog,
   toggleExportDialog,
   isSubAccsAvailable,
@@ -114,7 +120,7 @@ const AccountMenu = ({
           <div className='account-menu-target'>
             <Icon.USER_CIRCLE />
             <span className='account-menu-username'>
-              {authStatus ? formatUsername(email) : ''}
+              {authStatus ? formatUsername(email, localUsername) : ''}
             </span>
             <Icon.CHEVRON_DOWN />
             <Icon.CHEVRON_UP />
@@ -124,7 +130,6 @@ const AccountMenu = ({
     </div>
   )
 }
-
 
 AccountMenu.propTypes = {
   authStatus: PropTypes.bool.isRequired,
@@ -140,6 +145,11 @@ AccountMenu.propTypes = {
       search: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  localUsername: PropTypes.string,
+}
+
+AccountMenu.defaultProps = {
+  localUsername: null,
 }
 
 export default memo(AccountMenu)

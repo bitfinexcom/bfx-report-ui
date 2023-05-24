@@ -27,7 +27,10 @@
     "addAccount": "Add Account",
     "addAccounts": "Add Accounts",
     "addAccountsTo": "Add accounts to:",
+    "primaryAccount": "Primary account:", 
     "addAccountsToThisAcc": "Add accounts to this account",
+    "manageAccounts": "Manage Accounts",
+    "manageMultipleAccs": "Manage multiple accounts",
     "useApiKey": "Use API Key",
     "loginEmail": {
       "emailOrUserName": "Email or Username",
@@ -566,12 +569,16 @@
     "update_accounts": "Update Accounts",
     "create": "Create Sub Account",
     "select": "Select Sub Account",
+    "sub_account": "Sub Account:",
     "remove_item": "Remove",
     "api_key": "API Key",
     "api_secret": "API Secret",
     "password": "Password",
     "remove": "Remove Sub Account",
-    "login": "Login To Sub Account"
+    "login": "Login To Sub Account",
+    "name_label": "Name",
+    "name_placeholder": "Accounts group name (optional)",
+    "use_api_key": "Use API key"
   },
   "symbols": {
     "title": "Get symbols",
@@ -697,11 +704,10 @@
   "weightedaverages": {
     "title": "Weighted Averages",
     "limitNote":{
-      "displayDate": "Display date: ",
-      "note1": "Note that the selected dates are not the same as the display dates. This is because the web version is limited to displaying 2,000 transactions at a time.",
-      "note2": "In case a bigger period of time is intended, can try by just selecting one symbol or by downloading ",
-      "link": "our software",
-      "note3": " that does not have this limit."
+      "displayDate": "Displaying transactions for period: ",
+      "note1": "Your request exceeds the limit of 2000 transactions to display.",
+      "link": "Download the Reports App",
+      "note2": " to display more or change your filters."
     }
   },
   "withdrawals": {
