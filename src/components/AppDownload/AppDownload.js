@@ -14,8 +14,6 @@ const {
 const getData = (version) => {
   const platform = getOS()
 
-  console.log('+++platform', platform)
-
   switch (platform) {
     case PLATFORMS.mac:
       return {
@@ -39,7 +37,7 @@ const getData = (version) => {
 const AppDownload = () => {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState(true)
-  const [latestElectronVersion, setLatestElectronVersion] = useState(DEFAULT_ELECTRON_VERSION)
+  const [latestAppVersion, setLatestAppVersion] = useState(DEFAULT_ELECTRON_VERSION)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,14 +45,14 @@ const AppDownload = () => {
       const json = await data.json()
       const latestVersion = json?.tag_name
       if (latestVersion) {
-        setLatestElectronVersion(latestVersion)
+        setLatestAppVersion(latestVersion)
       }
       setIsLoading(false)
     }
     fetchData()
   }, [])
 
-  const { text, link } = getData(latestElectronVersion)
+  const { text, link } = getData(latestAppVersion)
 
   return (
     <div className='app-download'>
