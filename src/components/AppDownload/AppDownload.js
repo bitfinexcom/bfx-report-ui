@@ -3,36 +3,13 @@ import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 
 import config from 'var/electronVersion'
-import { getOS, PLATFORMS } from 'utils/getOS'
+
+import getDownloadLink from './AppDownload.helpers'
 
 const {
-  getElectronReleaseLink,
   DEFAULT_ELECTRON_VERSION,
   LATEST_ELECTRON_RELEASE_LINK,
 } = config
-
-const getData = (version) => {
-  const platform = getOS()
-
-  switch (platform) {
-    case PLATFORMS.mac:
-      return {
-        text: 'header.mac',
-        link: getElectronReleaseLink({ version, platform, ext: 'zip' }),
-      }
-    case PLATFORMS.windows:
-      return {
-        text: 'header.windows',
-        link: getElectronReleaseLink({ version, platform, ext: 'exe' }),
-      }
-    case PLATFORMS.linux:
-    default:
-      return {
-        text: 'header.linux',
-        link: getElectronReleaseLink({ version, platform, ext: 'AppImage.zip' }),
-      }
-  }
-}
 
 const AppDownload = () => {
   const { t } = useTranslation()
@@ -52,7 +29,7 @@ const AppDownload = () => {
     fetchData()
   }, [])
 
-  const { link } = getData(latestAppVersion)
+  const link = getDownloadLink(latestAppVersion)
 
   return (
     <div className='app-download'>
