@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 
@@ -29,7 +29,10 @@ const AppDownload = () => {
     fetchData()
   }, [])
 
-  const link = getDownloadLink(latestAppVersion)
+  const link = useMemo(
+    () => getDownloadLink(latestAppVersion),
+    [latestAppVersion],
+  )
 
   return (
     <div className='app-download'>
