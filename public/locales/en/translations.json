@@ -383,7 +383,7 @@
     },
     "myHistory": {
       "title": "My History",
-      "general": "General",
+      "ledgersTrading": "Ledgers & Trading",
       "generalTabs": {
         "ledgers": "Ledgers",
         "trades": "Trades",
