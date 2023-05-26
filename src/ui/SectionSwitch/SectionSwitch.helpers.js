@@ -25,7 +25,6 @@ export const GENERAL_TARGETS = [
   queryConstants.MENU_LEDGERS,
   queryConstants.MENU_TRADES,
   queryConstants.MENU_ORDERS,
-  queryConstants.MENU_MOVEMENTS,
   queryConstants.MENU_POSITIONS,
 ]
 
@@ -39,6 +38,11 @@ export const EARNINGS_TARGETS = [
   queryConstants.MENU_FPAYMENT,
   queryConstants.MENU_SPAYMENTS,
   queryConstants.MENU_AFFILIATES_EARNINGS,
+]
+
+export const WALLETS_TARGETS = [
+  queryConstants.MENU_WALLETS,
+  queryConstants.MENU_MOVEMENTS,
 ]
 
 
