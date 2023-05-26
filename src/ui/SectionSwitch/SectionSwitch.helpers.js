@@ -148,6 +148,17 @@ export const POSITIONS_SECTIONS = [
   },
 ]
 
+export const WALLETS_SECTIONS = [
+  {
+    targetSection: queryConstants.MENU_WALLETS,
+    description: 'navItems.myHistory.walletsTabs.balances',
+  },
+  {
+    targetSection: queryConstants.MENU_MOVEMENTS,
+    description: 'navItems.myHistory.walletsTabs.movements',
+  },
+]
+
 export const getSections = (target, hasSubSections) => {
   if (_includes(TRADES_TARGETS, target) && hasSubSections) return TRADES_SECTIONS
   if (_includes(POSITIONS_TARGETS, target) && hasSubSections) return POSITIONS_SECTIONS
