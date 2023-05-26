@@ -17,6 +17,7 @@ import {
 } from 'ui/SectionHeader'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
+import SectionSwitch from 'ui/SectionSwitch'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
@@ -104,6 +105,7 @@ class Wallets extends PureComponent {
           <SectionHeaderTitle>
             {t('wallets.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           {isFrameworkMode && (
             <SectionHeaderRow>
               <SectionHeaderItem>
