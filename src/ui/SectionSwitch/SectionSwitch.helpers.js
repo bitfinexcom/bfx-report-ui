@@ -166,6 +166,7 @@ export const getSections = (target, hasSubSections) => {
   if (_includes(GENERAL_TARGETS, target)) return GENERAL_SECTIONS
   if (_includes(FUNDING_TARGETS, target)) return FUNDING_SECTIONS
   if (_includes(EARNINGS_TARGETS, target)) return EARNINGS_SECTIONS
+  if (_includes(WALLETS_TARGETS, target)) return WALLETS_SECTIONS
 
   return []
 }
