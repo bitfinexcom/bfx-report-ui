@@ -87,10 +87,6 @@ export const GENERAL_SECTIONS = [
     description: 'navItems.myHistory.generalTabs.orders',
   },
   {
-    targetSection: queryConstants.MENU_MOVEMENTS,
-    description: 'navItems.myHistory.generalTabs.movements',
-  },
-  {
     targetSection: queryConstants.MENU_POSITIONS,
     description: 'navItems.myHistory.generalTabs.positions',
   },
