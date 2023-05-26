@@ -103,7 +103,7 @@ class Wallets extends PureComponent {
       >
         <SectionHeader>
           <SectionHeaderTitle>
-            {t('wallets.title')}
+            {t('navItems.myHistory.walletsTabs.balances')}
           </SectionHeaderTitle>
           <SectionSwitch target={TYPE} />
           {isFrameworkMode && (
