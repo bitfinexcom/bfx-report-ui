@@ -403,7 +403,11 @@
         "staking": "Staking",
         "affiliates": "Affiliates"
       },
-      "wallets": "Wallets" 
+      "wallets": "Wallets",
+      "walletsTabs": {
+        "balances": "Balances",
+        "movements": "Movements"
+      }
     },
     "merchantHistory": {
       "title": "Merchant History",
