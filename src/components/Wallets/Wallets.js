@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _isEmpty from 'lodash/isEmpty'
 
+import config from 'config'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DateInput from 'ui/DateInput'
@@ -17,12 +18,13 @@ import {
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
-import config from 'config'
+import queryConstants from 'state/query/constants'
 
 import WalletsData from './Wallets.data'
 import { propTypes, defaultProps } from './Wallets.props'
 
 const isFrameworkMode = config.showFrameworkMode
+const TYPE = queryConstants.MENU_WALLETS
 
 class Wallets extends PureComponent {
   constructor(props) {
