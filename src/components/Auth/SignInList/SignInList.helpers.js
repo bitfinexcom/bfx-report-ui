@@ -24,7 +24,7 @@ export const getMenuOptionTitle = ({ isApiKeysAuth, subUsers }) => {
 export const getUserTitle = ({
   isApiKeysAuth, subUsers, email, localUsername,
 }) => {
-  if (isApiKeysAuth && !_isEmpty(subUsers) && !_isNull(localUsername)) {
+  if (isApiKeysAuth && !_isEmpty(subUsers) && hasValidUsername(localUsername)) {
     return _toString(localUsername)
   }
   return _toString(email)
