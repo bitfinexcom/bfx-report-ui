@@ -6,10 +6,11 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import Authenticator from 'state/auth/Authenticator'
 import { updateErrorStatus } from 'state/status/actions'
 import { fetchUsers, logout } from 'state/auth/actions'
 import { getAuthData, selectAuth } from 'state/auth/selectors'
-import Authenticator from 'state/auth/Authenticator'
+import { hasValidUsername } from 'components/Auth/SignInList/SignInList.helpers'
 
 import types from './constants'
 import { setSubAccountLoadingStatus } from './actions'
@@ -26,12 +27,12 @@ const getReqCreateSubAccount = ({
     }
     return makeFetchCall('createSubAccount', {
       subAccountApiKeys,
-      localUsername,
+      ...(hasValidUsername(localUsername) && { localUsername }),
     }, auth)
   }
   return makeFetchCall('createSubAccount', {
     subAccountApiKeys,
-    localUsername,
+    ...(hasValidUsername(localUsername) && { localUsername }),
   })
 }
 
