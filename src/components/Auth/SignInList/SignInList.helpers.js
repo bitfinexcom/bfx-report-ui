@@ -1,4 +1,6 @@
+import _isNull from 'lodash/isNull'
 import _isEmpty from 'lodash/isEmpty'
+import _toString from 'lodash/toString'
 
 export const getUserType = ({ isApiKeysAuth, subUsers }) => {
   if (!isApiKeysAuth) return 'auth.login'
@@ -11,7 +13,17 @@ export const getMenuOptionTitle = ({ isApiKeysAuth, subUsers }) => {
   return 'auth.addAccountsToThisAcc'
 }
 
+export const getUserTitle = ({
+  isApiKeysAuth, subUsers, email, localUsername,
+}) => {
+  if (isApiKeysAuth && !_isEmpty(subUsers) && !_isNull(localUsername)) {
+    return _toString(localUsername)
+  }
+  return _toString(email)
+}
+
 export default {
   getUserType,
+  getUserTitle,
   getMenuOptionTitle,
 }
