@@ -1,6 +1,14 @@
+import _trim from 'lodash/trim'
 import _isNull from 'lodash/isNull'
 import _isEmpty from 'lodash/isEmpty'
 import _toString from 'lodash/toString'
+
+export const hasValidUsername = (name) => {
+  if (!_isNull(name)) {
+    return !_isEmpty(_trim(_toString(name)))
+  }
+  return false
+}
 
 export const getUserType = ({ isApiKeysAuth, subUsers }) => {
   if (!isApiKeysAuth) return 'auth.login'
@@ -25,5 +33,6 @@ export const getUserTitle = ({
 export default {
   getUserType,
   getUserTitle,
+  hasValidUsername,
   getMenuOptionTitle,
 }
