@@ -150,7 +150,9 @@ export function* updateSubAccount({ payload }) {
       params.removingSubUsersByEmails = removedSubUsers.map(subUserEmail => ({ email: subUserEmail }))
     }
     yield put(setSubAccountLoadingStatus(true))
-    yield makeFetchCall('updateUser', { localUsername }, auth)
+    if (hasValidUsername(localUsername)) {
+      yield makeFetchCall('updateUser', { localUsername }, auth)
+    }
     const { result, error } = yield call(getReqUpdateSubAccount, params, auth)
     if (result) {
       yield put(setSubAccountLoadingStatus(false))
