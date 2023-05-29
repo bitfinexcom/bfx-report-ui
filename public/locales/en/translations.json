@@ -94,6 +94,16 @@
   "averagewinloss": {
     "title": "Average Win/Loss"
   },
+  "download_app": {
+    "title": "Get the ultimate reporting experience with our desktop app",
+    "description": "Gain access to advanced features that will supercharge your data analysis.",
+    "risk": "Concentration Risk",
+    "win_loss": "Win/Loss Streaks",
+    "tax": "Tax Reports",
+    "snapshots": "Snapshots",
+    "more": "And more...",
+    "download_reports": "Download Bitfinex Reports"
+  },
   "candles": {
     "title": "Candles",
     "amount": "Amount",
