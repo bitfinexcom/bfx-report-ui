@@ -52,6 +52,7 @@ class Auth extends PureComponent {
 
     this.state = {
       masterAccount: '',
+      localUsername: null,
       mode: (!showFrameworkMode || !hasAuthData) ? MODES.SIGN_UP : MODES.SIGN_IN,
       authType: isSubAccount ? AUTH_TYPES.MULTIPLE_ACCOUNTS : AUTH_TYPES.SIMPLE_ACCOUNTS,
     }
@@ -79,14 +80,23 @@ class Auth extends PureComponent {
     this.setState({ masterAccount: email })
   }
 
+  setLocalUsername = (name) => {
+    this.setState({ localUsername: name })
+  }
+
   render() {
     const {
-      authData: { hasAuthData },
-      isShown,
       t,
+      isShown,
       usersLoading,
+      authData: { hasAuthData },
     } = this.props
-    const { mode, authType, masterAccount } = this.state
+    const {
+      mode,
+      authType,
+      masterAccount,
+      localUsername,
+    } = this.state
     const isMultipleAccsSelected = (_isEqual(authType, AUTH_TYPES.MULTIPLE_ACCOUNTS) && showFrameworkMode)
 
     if (!isShown || (showFrameworkMode && !hasAuthData && usersLoading)) {
@@ -109,6 +119,7 @@ class Auth extends PureComponent {
           <RegisterSubAccounts
             switchMode={this.switchMode}
             masterAccount={masterAccount}
+            localUsername={localUsername}
             switchAuthType={this.switchAuthType}
             setMasterAccount={this.setMasterAccount}
             isMultipleAccsSelected={isMultipleAccsSelected}
@@ -120,6 +131,7 @@ class Auth extends PureComponent {
             authType={authType}
             switchMode={this.switchMode}
             switchAuthType={this.switchAuthType}
+            setLocalUsername={this.setLocalUsername}
             setMasterAccount={this.setMasterAccount}
             isMultipleAccsSelected={isMultipleAccsSelected}
           />
