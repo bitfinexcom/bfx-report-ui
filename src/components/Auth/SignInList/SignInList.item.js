@@ -13,11 +13,11 @@ export const SignInListItem = ({
   handleAddAccounts,
 }) => {
   const { t } = useTranslation()
-  const { email, isApiKeysAuth } = user
+  const { email, isApiKeysAuth, localUsername } = user
 
   const addAccounts = useCallback(
-    () => handleAddAccounts(email),
-    [email],
+    () => handleAddAccounts(email, localUsername),
+    [email, localUsername],
   )
 
   return (
@@ -54,6 +54,7 @@ SignInListItem.propTypes = {
     isSubAccount: PropTypes.bool.isRequired,
     isApiKeysAuth: PropTypes.bool.isRequired,
     isNotProtected: PropTypes.bool.isRequired,
+    localUsername: PropTypes.string,
   }).isRequired,
   handleUserSelect: PropTypes.func.isRequired,
   handleAddAccounts: PropTypes.func.isRequired,
