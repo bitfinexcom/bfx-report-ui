@@ -177,8 +177,35 @@ export function* updateSubAccount({ payload }) {
   }
 }
 
+export function* updateLocalUsername({ payload }) {
+  try {
+    const { masterAccount, localUsername } = payload
+    let auth
+    if (masterAccount) {
+      auth = {
+        email: masterAccount,
+        isSubAccount: true,
+      }
+    } else {
+      auth = yield select(selectAuth)
+    }
+
+    if (hasValidUsername(localUsername)) {
+      yield makeFetchCall('updateUser', { localUsername }, auth)
+    }
+  } catch (fail) {
+    yield put(setSubAccountLoadingStatus(false))
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'subaccounts.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
 export default function* subAccountsSaga() {
   yield takeLatest(types.ADD, createSubAccount)
   yield takeLatest(types.REMOVE, removeSubAccount)
   yield takeLatest(types.UPDATE, updateSubAccount)
+  yield takeLatest(types.UPDATE_LOCAL_USERNAME, updateLocalUsername)
 }
