@@ -205,7 +205,6 @@ export function* updateLocalUsername({ payload }) {
       }
     }
   } catch (fail) {
-    yield put(setSubAccountLoadingStatus(false))
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'subaccounts.title',
