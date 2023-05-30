@@ -8,6 +8,7 @@ import _isEmpty from 'lodash/isEmpty'
 import _differenceBy from 'lodash/differenceBy'
 
 import Loading from 'ui/Loading'
+import { hasValidUsername } from 'components/Auth/SignInList/SignInList.helpers'
 
 import SubUsersAdd from './SubUsersAdd'
 import SubUsersList from './SubUsersList'
@@ -25,6 +26,7 @@ class SubAccount extends PureComponent {
     masterAccount: PropTypes.string,
     localUsername: PropTypes.string,
     updateSubAccount: PropTypes.func.isRequired,
+    updateLocalUsername: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string.isRequired,
       isSubAccount: PropTypes.bool.isRequired,
@@ -90,7 +92,11 @@ class SubAccount extends PureComponent {
 
   updateSubAccount = () => {
     const {
-      masterAccount, updateSubAccount, localUsername, t,
+      t,
+      masterAccount,
+      localUsername,
+      updateSubAccount,
+      updateLocalUsername,
     } = this.props
     const { accounts, subUsersToRemove } = this.state
 
@@ -114,6 +120,8 @@ class SubAccount extends PureComponent {
         accounts: [EMPTY_ACCOUNT],
         subUsersToRemove: [],
       })
+    } else if (hasValidUsername(localUsername)) {
+      updateLocalUsername({ masterAccount, localUsername })
     }
   }
 
@@ -124,6 +132,7 @@ class SubAccount extends PureComponent {
       authData,
       allowedUsers,
       masterAccount,
+      localUsername,
       isSubAccountsLoading,
       isMultipleAccsSelected,
     } = this.props
@@ -132,7 +141,7 @@ class SubAccount extends PureComponent {
     const masterAccountEmail = masterAccount || currentUserEmail
     const subAccountData = users.find((user) => user.email === masterAccountEmail && user.isSubAccount)
     const subUsers = _get(subAccountData, 'subUsers', [])
-    const hasFilledAccounts = getFilledAccounts(accounts, t).length > 0
+    const hasFilledAccounts = getFilledAccounts(accounts, t).length > 0 || hasValidUsername(localUsername)
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
     const preparedUsers = _differenceBy(allowedUsers, subUsers, 'email')
     const isConfirmDisabled = _isEmpty(masterAccountEmail) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
