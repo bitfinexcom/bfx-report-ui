@@ -7,7 +7,7 @@ import {
 
 import { makeFetchCall } from 'state/utils'
 import Authenticator from 'state/auth/Authenticator'
-import { updateErrorStatus } from 'state/status/actions'
+import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchUsers, logout } from 'state/auth/actions'
 import { getAuthData, selectAuth } from 'state/auth/selectors'
 import { hasValidUsername } from 'components/Auth/SignInList/SignInList.helpers'
@@ -194,6 +194,7 @@ export function* updateLocalUsername({ payload }) {
       const { result, error } = yield makeFetchCall('updateUser', { localUsername }, auth)
       if (result) {
         yield put(fetchUsers())
+        yield put(updateSuccessStatus({ id: 'subaccounts.name_updated' }))
       }
       if (error) {
         yield put(updateErrorStatus({

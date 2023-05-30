@@ -593,7 +593,7 @@
     "name_label": "Name",
     "name_placeholder": "Accounts group name (optional)",
     "use_api_key": "Use API key",
-    "accs_group_name_updated": "Accounts group name updated"
+    "name_updated": "Accounts group name updated"
   },
   "symbols": {
     "title": "Get symbols",
