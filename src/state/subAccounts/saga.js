@@ -191,7 +191,17 @@ export function* updateLocalUsername({ payload }) {
     }
 
     if (hasValidUsername(localUsername)) {
-      yield makeFetchCall('updateUser', { localUsername }, auth)
+      const { result, error } = yield makeFetchCall('updateUser', { localUsername }, auth)
+      if (result) {
+        yield put(fetchUsers())
+      }
+      if (error) {
+        yield put(updateErrorStatus({
+          id: 'status.fail',
+          topic: 'subaccounts.title',
+          detail: JSON.stringify(error),
+        }))
+      }
     }
   } catch (fail) {
     yield put(setSubAccountLoadingStatus(false))
