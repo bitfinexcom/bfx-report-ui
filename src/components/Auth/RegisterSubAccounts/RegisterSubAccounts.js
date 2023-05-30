@@ -38,6 +38,7 @@ const { showFrameworkMode } = config
 class RegisterSubAccounts extends PureComponent {
   static propTypes = {
     masterAccount: PropTypes.string.isRequired,
+    localUsername: PropTypes.string,
     authData: PropTypes.shape({
       apiKey: PropTypes.string,
       email: PropTypes.string,
@@ -56,13 +57,17 @@ class RegisterSubAccounts extends PureComponent {
     })).isRequired,
   }
 
+  static defaultProps = {
+    localUsername: null,
+  }
+
   constructor(props) {
     super()
 
-    const { masterAccount } = props
+    const { masterAccount, localUsername } = props
     this.state = {
       masterAccEmail: masterAccount,
-      localUsername: formatAccountName(masterAccount),
+      localUsername: localUsername || formatAccountName(masterAccount),
     }
   }
 
