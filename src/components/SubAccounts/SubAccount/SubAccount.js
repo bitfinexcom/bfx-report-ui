@@ -141,7 +141,8 @@ class SubAccount extends PureComponent {
     const masterAccountEmail = masterAccount || currentUserEmail
     const subAccountData = users.find((user) => user.email === masterAccountEmail && user.isSubAccount)
     const subUsers = _get(subAccountData, 'subUsers', [])
-    const hasFilledAccounts = getFilledAccounts(accounts, t).length > 0 || hasValidUsername(localUsername)
+    const hasFilledAccounts = getFilledAccounts(accounts, t).length > 0
+      || (hasValidUsername(localUsername) && !_isEmpty(subUsers))
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
     const preparedUsers = _differenceBy(allowedUsers, subUsers, 'email')
     const isConfirmDisabled = _isEmpty(masterAccountEmail) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
