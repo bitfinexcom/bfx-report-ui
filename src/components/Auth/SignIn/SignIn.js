@@ -43,6 +43,7 @@ class SignIn extends PureComponent {
     switchMode: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
     showOtpLogin: PropTypes.func.isRequired,
+    deleteAccount: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     setMasterAccount: PropTypes.func.isRequired,
@@ -202,7 +203,8 @@ class SignIn extends PureComponent {
   }
 
   handleDeleteUser = (user) => {
-    console.log('+++handleDeleteSelectedUser', user)
+    const { deleteAccount } = this.props
+    deleteAccount(user)
   }
 
   render() {
