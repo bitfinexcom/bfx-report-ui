@@ -203,6 +203,13 @@ export function authExpired() {
   }
 }
 
+export function deleteAccount(payload) {
+  return {
+    type: types.DELETE_ACCOUNT,
+    payload,
+  }
+}
+
 export default {
   checkAuth,
   addUser,
@@ -227,4 +234,5 @@ export default {
   authExpired,
   setUserShouldReLogin,
   signInOtp,
+  deleteAccount,
 }
