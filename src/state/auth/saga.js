@@ -459,8 +459,8 @@ function* deleteAccount({ payload }) {
       if (deleteError) {
         yield put(updateErrorStatus({
           id: 'status.fail',
-          topic: 'auth.auth',
-          detail: JSON.stringify(error),
+          topic: 'auth.accountRemoving',
+          detail: JSON.stringify(deleteError),
         }))
       }
       return
