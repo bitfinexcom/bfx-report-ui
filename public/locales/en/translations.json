@@ -33,6 +33,7 @@
     "manageMultipleAccs": "Manage multiple accounts",
     "removeAccount": "Remove account",
     "accountRemoved": "Account removed",
+    "accountRemoving": "Account removing",
     "useApiKey": "Use API Key",
     "loginEmail": {
       "emailOrUserName": "Email or Username",
