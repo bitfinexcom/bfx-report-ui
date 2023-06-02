@@ -454,6 +454,7 @@ function* deleteAccount({ payload }) {
       console.log('+++deleteUserResult', deleteUserResult)
       if (deleteUserResult) {
         yield put(actions.fetchUsers())
+        yield put(updateSuccessStatus({ id: 'auth.accountRemoved' }))
       }
       return
     }
