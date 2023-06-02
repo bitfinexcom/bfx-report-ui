@@ -448,36 +448,31 @@ function* deleteAccount({ payload }) {
     if (result) {
       const { token } = result
       const {
-        result: deleteUserResult,
-        error: deleteUserError
+        error: deleteError,
+        result: deleteResult,
       } = yield call(makeFetchCall, 'removeUser', null, { token })
-      console.log('+++deleteUserResult', deleteUserResult)
-      if (deleteUserResult) {
+
+      if (deleteResult) {
         yield put(actions.fetchUsers())
         yield put(updateSuccessStatus({ id: 'auth.accountRemoved' }))
+      }
+      if (deleteError) {
+        yield put(updateErrorStatus({
+          id: 'status.fail',
+          topic: 'auth.auth',
+          detail: JSON.stringify(error),
+        }))
       }
       return
     }
 
-    // }
-
-    // const { result, error } = yield call(makePublicFetchCall, 'verifyOnBFX', params)
-
-    // if (_isArray(result)) {
-    //   const [bfxToken] = result
-    //   const authParams = {
-    //     authToken: bfxToken,
-    //     password,
-    //     isNotProtected,
-    //   }
-    //   yield put(actions.recoverPassword(authParams))
-    // }
-
-    // if (error) {
-    //   yield put(updateErrorStatus({
-    //     id: 'auth.2FA.invalidToken',
-    //   }))
-    // }
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.auth',
+        detail: JSON.stringify(error),
+      }))
+    }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
   }
