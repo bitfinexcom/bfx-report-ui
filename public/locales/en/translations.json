@@ -370,7 +370,7 @@
       "title": "My Account",
       "summary": "Summary",
       "balance": "Balance",
-      "analysisStat": "Analysis/Statistics",
+      "analysisStat": "Analysis & Statistics",
       "analysisStatTabs": {
         "weightedAvgs": "Weighted Averages",
         "volume": "Volume",
@@ -383,7 +383,7 @@
     },
     "myHistory": {
       "title": "My History",
-      "general": "General",
+      "ledgersTrading": "Ledgers & Trading",
       "generalTabs": {
         "ledgers": "Ledgers",
         "trades": "Trades",
@@ -403,7 +403,11 @@
         "staking": "Staking",
         "affiliates": "Affiliates"
       },
-      "wallets": "Wallets" 
+      "wallets": "Wallets",
+      "walletsTabs": {
+        "balances": "Balances",
+        "movements": "Movements"
+      }
     },
     "merchantHistory": {
       "title": "Merchant History",

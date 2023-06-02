@@ -62,7 +62,7 @@ export const getSections = (menuType, isTurkishSite) => {
       ]
     case MENU_MY_HISTORY:
       return [
-        [MENU_LEDGERS, 'navItems.myHistory.general', false, GENERAL_TARGETS],
+        [MENU_LEDGERS, 'navItems.myHistory.ledgersTrading', false, GENERAL_TARGETS],
         [MENU_FOFFER, 'navItems.myHistory.funding', isTurkishSite, FUNDING_TARGETS],
         [MENU_FPAYMENT, 'navItems.myHistory.earnings', isTurkishSite, EARNINGS_TARGETS],
         [MENU_WALLETS, 'wallets.title'],
