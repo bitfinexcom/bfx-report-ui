@@ -207,12 +207,16 @@ class SignIn extends PureComponent {
 
   handleDeleteUser = (user) => {
     const { deleteAccount } = this.props
-    const { isNotProtected } = user
+    const { isNotProtected, email } = user
     if (isNotProtected) {
       deleteAccount(user)
     } else {
       console.log('++user', user)
-      this.setState({ showDeleteAccount: true })
+      this.setState({
+        email,
+        showUsersList: false,
+        showDeleteAccount: true,
+      })
       // deleteAccount(user)
     }
   }
