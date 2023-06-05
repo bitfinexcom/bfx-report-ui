@@ -32,6 +32,7 @@
     "manageAccounts": "Manage Accounts",
     "manageMultipleAccs": "Manage multiple accounts",
     "removeAccount": "Remove account",
+    "removeSelectedAccount": "Remove account: ",
     "accountRemoved": "Account removed",
     "accountRemoving": "Account removing",
     "useApiKey": "Use API Key",
