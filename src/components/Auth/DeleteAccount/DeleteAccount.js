@@ -30,7 +30,6 @@ DeleteAccount.propTypes = {
   onChange: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   backToUsersList: PropTypes.func.isRequired,
-  // handleDeleteAccount: PropTypes.func.isRequired,
 }
 
 export default memo(DeleteAccount)
