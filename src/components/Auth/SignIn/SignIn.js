@@ -17,6 +17,7 @@ import { AUTH_TYPES, MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
 import InputKey from '../InputKey'
 import SignInList from '../SignInList'
+import DeleteAccount from '../DeleteAccount'
 
 import SelectedUserItem from './SignIn.item'
 
@@ -74,6 +75,7 @@ class SignIn extends PureComponent {
       userPassword: '',
       showUsersList: true,
       isSubAccount: false,
+      showDeleteAccount: false,
     }
   }
 
@@ -204,7 +206,13 @@ class SignIn extends PureComponent {
 
   handleDeleteUser = (user) => {
     const { deleteAccount } = this.props
-    deleteAccount(user)
+    const { isNotProtected } = user
+    if (isNotProtected) {
+      deleteAccount(user)
+    } else {
+      console.log('++user', user)
+      // deleteAccount(user)
+    }
   }
 
   render() {
@@ -224,6 +232,7 @@ class SignIn extends PureComponent {
       password,
       userPassword,
       showUsersList,
+      showDeleteAccount,
     } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
@@ -247,6 +256,15 @@ class SignIn extends PureComponent {
           <PlatformLogo />
           {showUsersList && (
             <SignInList
+              users={users}
+              switchMode={switchMode}
+              handleDeleteAccount={this.handleDeleteUser}
+              handleUserItemSelect={this.handleUserItemSelect}
+              handleAddAccounts={this.handleAddAccountToSelectedUser}
+            />
+          )}
+          {showDeleteAccount && (
+            <DeleteAccount
               users={users}
               switchMode={switchMode}
               handleDeleteAccount={this.handleDeleteUser}
