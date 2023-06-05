@@ -285,6 +285,7 @@ class SignIn extends PureComponent {
           {showDeleteAccount && (
             <DeleteAccount
               email={email}
+              password={password}
               onChange={this.handleInputChange}
               handleDeleteAccount={deleteAccount}
               backToUsersList={this.backToUsersList}
