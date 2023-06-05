@@ -247,8 +247,8 @@ class SignIn extends PureComponent {
       || (!isNotProtected && !password)
     const isEmailSelected = !_isEmpty(email)
     const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin) && !showUsersList
-    const showSelectedUser = !showUsersList && isEmailSelected
-    const showInputPassword = !isNotProtected && !showUsersList && isEmailSelected && users.length > 0
+    const showSelectedUser = !showUsersList && isEmailSelected && !showDeleteAccount
+    const showInputPassword = !isNotProtected && showSelectedUser && users.length > 0
     const showSignInActions = !isOtpLoginShown && !showUsersList
 
     return (
