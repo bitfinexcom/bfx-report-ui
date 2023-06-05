@@ -207,18 +207,30 @@ class SignIn extends PureComponent {
 
   handleDeleteUser = (user) => {
     const { deleteAccount } = this.props
-    const { isNotProtected, email } = user
+    const { isNotProtected, email, isSubAccount } = user
     if (isNotProtected) {
       deleteAccount(user)
     } else {
       console.log('++user', user)
       this.setState({
         email,
+        isSubAccount,
         showUsersList: false,
         showDeleteAccount: true,
       })
       // deleteAccount(user)
     }
+  }
+
+  deleteProtectedAccount = () => {
+    const { email, password, isSubAccount } = this.state
+    const { deleteAccount } = this.props
+    deleteAccount({
+      email,
+      password,
+      isSubAccount,
+      isNotProtected: !password,
+    })
   }
 
   render() {
@@ -332,11 +344,15 @@ class SignIn extends PureComponent {
                   name='check'
                   loading={loading}
                   intent={Intent.SUCCESS}
-                  onClick={this.onSignIn}
                   disabled={isSignInDisabled}
                   className='bitfinex-auth-check'
+                  onClick={showDeleteAccount
+                    ? this.deleteProtectedAccount
+                    : this.onSignIn}
                 >
-                  {t('auth.signIn')}
+                  {showDeleteAccount
+                    ? t('auth.removeAccount')
+                    : t('auth.signIn')}
                 </Button>
               </div>
             </div>
