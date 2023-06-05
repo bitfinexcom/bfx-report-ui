@@ -211,14 +211,12 @@ class SignIn extends PureComponent {
     if (isNotProtected) {
       deleteAccount(user)
     } else {
-      console.log('++user', user)
       this.setState({
         email,
         isSubAccount,
         showUsersList: false,
         showDeleteAccount: true,
       })
-      // deleteAccount(user)
     }
   }
 
@@ -231,6 +229,7 @@ class SignIn extends PureComponent {
       isSubAccount,
       isNotProtected: !password,
     })
+    this.backToUsersList()
   }
 
   render() {
