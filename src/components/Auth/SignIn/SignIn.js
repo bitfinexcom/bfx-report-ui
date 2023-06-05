@@ -191,6 +191,7 @@ class SignIn extends PureComponent {
       password: '',
       isSubAccount: false,
       showUsersList: true,
+      showDeleteAccount: false,
     })
   }
 
@@ -211,6 +212,7 @@ class SignIn extends PureComponent {
       deleteAccount(user)
     } else {
       console.log('++user', user)
+      this.setState({ showDeleteAccount: true })
       // deleteAccount(user)
     }
   }
@@ -222,6 +224,7 @@ class SignIn extends PureComponent {
       loading,
       switchMode,
       isSubAccount,
+      deleteAccount,
       isOtpLoginShown,
       userShouldReLogin,
       isElectronBackendLoaded,
@@ -265,11 +268,10 @@ class SignIn extends PureComponent {
           )}
           {showDeleteAccount && (
             <DeleteAccount
-              users={users}
-              switchMode={switchMode}
-              handleDeleteAccount={this.handleDeleteUser}
-              handleUserItemSelect={this.handleUserItemSelect}
-              handleAddAccounts={this.handleAddAccountToSelectedUser}
+              email={email}
+              onChange={this.handleInputChange}
+              handleDeleteAccount={deleteAccount}
+              backToUsersList={this.backToUsersList}
             />
           )}
           {isOtpLoginShown
