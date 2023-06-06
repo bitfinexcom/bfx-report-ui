@@ -144,6 +144,7 @@ class SubAccount extends PureComponent {
       users,
       authData,
       allowedUsers,
+      userPassword,
       masterAccount,
       localUsername,
       isSubAccountsLoading,
@@ -170,6 +171,7 @@ class SubAccount extends PureComponent {
             <SubUsersList
               subUsers={subUsers}
               email={masterAccountEmail}
+              password={userPassword}
               onToggle={this.onSubUserToggle}
               subUsersToRemove={subUsersToRemove}
               isRemovalEnabled={masterAccount || isSubAccount}
