@@ -138,7 +138,11 @@ export function* removeSubAccount({ payload: masterAccount }) {
 export function* updateSubAccount({ payload }) {
   try {
     const {
-      addedSubUsers, removedSubUsers, masterAccount, localUsername,
+      userPassword,
+      addedSubUsers,
+      masterAccount,
+      localUsername,
+      removedSubUsers,
     } = payload
 
     let auth
@@ -146,6 +150,7 @@ export function* updateSubAccount({ payload }) {
       auth = {
         email: masterAccount,
         isSubAccount: true,
+        password: userPassword || undefined,
       }
     } else {
       auth = yield select(selectAuth)
