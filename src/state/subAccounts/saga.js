@@ -88,7 +88,8 @@ export function* createSubAccount({ payload }) {
   }
 }
 
-export function* removeSubAccount({ payload: masterAccount }) {
+export function* removeSubAccount({ payload }) {
+  const { masterAccount, password = undefined } = payload
   try {
     let auth
     let accountEmail
@@ -96,6 +97,7 @@ export function* removeSubAccount({ payload: masterAccount }) {
       auth = {
         email: masterAccount,
         isSubAccount: true,
+        password: password || undefined,
       }
       accountEmail = masterAccount
     } else {
