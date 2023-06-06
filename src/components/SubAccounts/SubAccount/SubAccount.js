@@ -55,7 +55,11 @@ class SubAccount extends PureComponent {
 
   createSubAccount = () => {
     const {
-      addSubAccount, masterAccount, localUsername, t, userPassword,
+      t,
+      userPassword,
+      addSubAccount,
+      localUsername,
+      masterAccount,
     } = this.props
     const { accounts } = this.state
 
@@ -100,6 +104,7 @@ class SubAccount extends PureComponent {
   updateSubAccount = () => {
     const {
       t,
+      userPassword,
       masterAccount,
       localUsername,
       updateSubAccount,
@@ -118,6 +123,7 @@ class SubAccount extends PureComponent {
     if (preparedAccounts.length || subUsersToRemove.length) {
       updateSubAccount({
         masterAccount,
+        userPassword,
         localUsername,
         addedSubUsers: preparedAccounts,
         removedSubUsers: subUsersToRemove,
