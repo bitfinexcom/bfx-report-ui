@@ -8,7 +8,7 @@ import { filterRestrictedUsers } from './SubAccount/utils'
 import SubAccount from './SubAccount'
 
 const SubAccounts = ({ authData, users }) => {
-  const { email } = authData
+  const { email, password } = authData
   const preparedUsers = useMemo(
     () => filterRestrictedUsers(users),
     [users],
@@ -28,6 +28,7 @@ const SubAccounts = ({ authData, users }) => {
         users={users}
         authData={authData}
         masterAccount={email}
+        userPassword={password}
         allowedUsers={preparedUsers}
       />
     </Card>
@@ -37,6 +38,7 @@ const SubAccounts = ({ authData, users }) => {
 SubAccounts.propTypes = {
   authData: PropTypes.shape({
     email: PropTypes.string.isRequired,
+    password: PropTypes.string,
   }).isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({
     email: PropTypes.string.isRequired,
