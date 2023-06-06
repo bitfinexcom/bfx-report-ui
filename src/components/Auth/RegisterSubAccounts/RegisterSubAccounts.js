@@ -33,6 +33,10 @@ const isUserHasSubAccounts = (users, masterAccount) => _filter(
   && !_isEmpty(user?.subUsers),
 ).length > 0
 
+const isMasterAccountProtected = (users, masterAccount) => _filter(
+  users, user => _isEqual(user?.email, masterAccount) && !user.isNotProtected,
+).length > 0
+
 const { showFrameworkMode } = config
 
 class RegisterSubAccounts extends PureComponent {
@@ -104,9 +108,12 @@ class RegisterSubAccounts extends PureComponent {
       masterAccount,
       isMultipleAccsSelected,
     } = this.props
+    console.log('++users', users)
     const { masterAccEmail, localUsername } = this.state
     const preparedUsers = filterRestrictedUsers(users)
     const userHasSubAccounts = isUserHasSubAccounts(users, masterAccount)
+    const masterAccountProtected = isMasterAccountProtected(users, masterAccount)
+    console.log('++masterAccountProtected', masterAccountProtected)
     const classes = classNames(
       'bitfinex-auth',
       'bitfinex-auth-sign-up',
