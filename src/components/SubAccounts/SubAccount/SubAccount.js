@@ -24,6 +24,7 @@ class SubAccount extends PureComponent {
     isSubAccountsLoading: PropTypes.bool,
     isMultipleAccsSelected: PropTypes.bool,
     masterAccount: PropTypes.string,
+    userPassword: PropTypes.string,
     localUsername: PropTypes.string,
     updateSubAccount: PropTypes.func.isRequired,
     updateLocalUsername: PropTypes.func.isRequired,
@@ -42,6 +43,7 @@ class SubAccount extends PureComponent {
     allowedUsers: [],
     localUsername: null,
     masterAccount: undefined,
+    userPassword: undefined,
     isSubAccountsLoading: false,
     isMultipleAccsSelected: false,
   }
@@ -53,7 +55,7 @@ class SubAccount extends PureComponent {
 
   createSubAccount = () => {
     const {
-      addSubAccount, masterAccount, localUsername, t,
+      addSubAccount, masterAccount, localUsername, t, userPassword,
     } = this.props
     const { accounts } = this.state
 
@@ -70,7 +72,12 @@ class SubAccount extends PureComponent {
         : { apiKey, apiSecret }
     })
 
-    addSubAccount({ preparedAccountData, masterAccount, localUsername })
+    addSubAccount({
+      preparedAccountData,
+      masterAccount,
+      userPassword,
+      localUsername,
+    })
 
     this.setState({
       accounts: [EMPTY_ACCOUNT],
