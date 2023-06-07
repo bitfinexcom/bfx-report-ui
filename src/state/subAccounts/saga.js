@@ -6,10 +6,11 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { updateErrorStatus } from 'state/status/actions'
+import Authenticator from 'state/auth/Authenticator'
+import { updateErrorStatus, updateSuccessStatus } from 'state/status/actions'
 import { fetchUsers, logout } from 'state/auth/actions'
 import { getAuthData, selectAuth } from 'state/auth/selectors'
-import Authenticator from 'state/auth/Authenticator'
+import { hasValidUsername } from 'components/Auth/SignInList/SignInList.helpers'
 
 import types from './constants'
 import { setSubAccountLoadingStatus } from './actions'
@@ -26,12 +27,12 @@ const getReqCreateSubAccount = ({
     }
     return makeFetchCall('createSubAccount', {
       subAccountApiKeys,
-      localUsername,
+      ...(hasValidUsername(localUsername) && { localUsername }),
     }, auth)
   }
   return makeFetchCall('createSubAccount', {
     subAccountApiKeys,
-    localUsername,
+    ...(hasValidUsername(localUsername) && { localUsername }),
   })
 }
 
@@ -149,7 +150,9 @@ export function* updateSubAccount({ payload }) {
       params.removingSubUsersByEmails = removedSubUsers.map(subUserEmail => ({ email: subUserEmail }))
     }
     yield put(setSubAccountLoadingStatus(true))
-    yield makeFetchCall('updateUser', { localUsername }, auth)
+    if (hasValidUsername(localUsername)) {
+      yield makeFetchCall('updateUser', { localUsername }, auth)
+    }
     const { result, error } = yield call(getReqUpdateSubAccount, params, auth)
     if (result) {
       yield put(setSubAccountLoadingStatus(false))
@@ -174,8 +177,45 @@ export function* updateSubAccount({ payload }) {
   }
 }
 
+export function* updateLocalUsername({ payload }) {
+  try {
+    const { masterAccount, localUsername } = payload
+    let auth
+    if (masterAccount) {
+      auth = {
+        email: masterAccount,
+        isSubAccount: true,
+      }
+    } else {
+      auth = yield select(selectAuth)
+    }
+
+    if (hasValidUsername(localUsername)) {
+      const { result, error } = yield makeFetchCall('updateUser', { localUsername }, auth)
+      if (result) {
+        yield put(fetchUsers())
+        yield put(updateSuccessStatus({ id: 'subaccounts.name_updated' }))
+      }
+      if (error) {
+        yield put(updateErrorStatus({
+          id: 'status.fail',
+          topic: 'subaccounts.title',
+          detail: JSON.stringify(error),
+        }))
+      }
+    }
+  } catch (fail) {
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'subaccounts.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
 export default function* subAccountsSaga() {
   yield takeLatest(types.ADD, createSubAccount)
   yield takeLatest(types.REMOVE, removeSubAccount)
   yield takeLatest(types.UPDATE, updateSubAccount)
+  yield takeLatest(types.UPDATE_LOCAL_USERNAME, updateLocalUsername)
 }
