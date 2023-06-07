@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Icons from 'icons'
 
 import UserItemMenu from './SignInList.menu'
-import { getUserType, getMenuOptionTitle } from './SignInList.helpers'
+import { getUserType, getMenuOptionTitle, getUserTitle } from './SignInList.helpers'
 
 export const SignInListItem = ({
   user,
@@ -13,11 +13,11 @@ export const SignInListItem = ({
   handleAddAccounts,
 }) => {
   const { t } = useTranslation()
-  const { email, isApiKeysAuth } = user
+  const { email, isApiKeysAuth, localUsername } = user
 
   const addAccounts = useCallback(
-    () => handleAddAccounts(email),
-    [email],
+    () => handleAddAccounts(email, localUsername),
+    [email, localUsername],
   )
 
   return (
@@ -29,7 +29,7 @@ export const SignInListItem = ({
         <Icons.USER_CIRCLE />
         <div className='sign-in-list--item-description'>
           <p className='sign-in-list--item-title'>
-            {email}
+            {getUserTitle(user)}
           </p>
           <p className='sign-in-list--item-type'>
             {t(getUserType(user))}
@@ -54,6 +54,7 @@ SignInListItem.propTypes = {
     isSubAccount: PropTypes.bool.isRequired,
     isApiKeysAuth: PropTypes.bool.isRequired,
     isNotProtected: PropTypes.bool.isRequired,
+    localUsername: PropTypes.string,
   }).isRequired,
   handleUserSelect: PropTypes.func.isRequired,
   handleAddAccounts: PropTypes.func.isRequired,

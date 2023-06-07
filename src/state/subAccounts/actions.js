@@ -40,9 +40,17 @@ export function setSubAccountLoadingStatus(status) {
   }
 }
 
+export function updateLocalUsername(data) {
+  return {
+    type: types.UPDATE_LOCAL_USERNAME,
+    payload: data,
+  }
+}
+
 export default {
   addSubAccount,
   removeSubAccount,
   updateSubAccount,
   setSubAccountLoadingStatus,
+  updateLocalUsername,
 }

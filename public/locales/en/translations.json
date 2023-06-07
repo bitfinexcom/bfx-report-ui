@@ -94,6 +94,16 @@
   "averagewinloss": {
     "title": "Average Win/Loss"
   },
+  "download_app": {
+    "title": "Get the ultimate reporting experience with our desktop app",
+    "description": "Gain access to advanced features that will supercharge your data analysis.",
+    "risk": "Concentration Risk",
+    "win_loss": "Win/Loss Streaks",
+    "tax": "Tax Reports",
+    "snapshots": "Snapshots",
+    "more": "And more...",
+    "download_reports": "Download Bitfinex Reports"
+  },
   "candles": {
     "title": "Candles",
     "amount": "Amount",
@@ -360,7 +370,7 @@
       "title": "My Account",
       "summary": "Summary",
       "balance": "Balance",
-      "analysisStat": "Analysis/Statistics",
+      "analysisStat": "Analysis & Statistics",
       "analysisStatTabs": {
         "weightedAvgs": "Weighted Averages",
         "volume": "Volume",
@@ -373,7 +383,7 @@
     },
     "myHistory": {
       "title": "My History",
-      "general": "General",
+      "ledgersTrading": "Ledgers & Trading",
       "generalTabs": {
         "ledgers": "Ledgers",
         "trades": "Trades",
@@ -393,7 +403,11 @@
         "staking": "Staking",
         "affiliates": "Affiliates"
       },
-      "wallets": "Wallets" 
+      "wallets": "Wallets",
+      "walletsTabs": {
+        "balances": "Balances",
+        "movements": "Movements"
+      }
     },
     "merchantHistory": {
       "title": "Merchant History",
@@ -578,7 +592,8 @@
     "login": "Login To Sub Account",
     "name_label": "Name",
     "name_placeholder": "Accounts group name (optional)",
-    "use_api_key": "Use API key"
+    "use_api_key": "Use API key",
+    "name_updated": "Accounts group name updated"
   },
   "symbols": {
     "title": "Get symbols",

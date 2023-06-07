@@ -31,8 +31,8 @@ const NavMenu = ({
   className,
   isTurkishSite,
 }) => {
-  const [isMyAccountOpen, setIsMyAccountOpen] = useState(false)
-  const [isMyHistoryOpen, setIsMyHistoryOpen] = useState(false)
+  const [isMyAccountOpen, setIsMyAccountOpen] = useState(true)
+  const [isMyHistoryOpen, setIsMyHistoryOpen] = useState(true)
   const [isMarketHistoryOpen, setIsMarketHistoryOpen] = useState(false)
   const [isMerchantHistoryOpen, setIsMerchantHistoryOpen] = useState(false)
 

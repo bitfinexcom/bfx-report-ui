@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _isEmpty from 'lodash/isEmpty'
 
+import config from 'config'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DateInput from 'ui/DateInput'
@@ -16,13 +17,15 @@ import {
 } from 'ui/SectionHeader'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
+import SectionSwitch from 'ui/SectionSwitch'
 import { isValidTimeStamp } from 'state/query/utils'
-import config from 'config'
+import queryConstants from 'state/query/constants'
 
 import WalletsData from './Wallets.data'
 import { propTypes, defaultProps } from './Wallets.props'
 
 const isFrameworkMode = config.showFrameworkMode
+const TYPE = queryConstants.MENU_WALLETS
 
 class Wallets extends PureComponent {
   constructor(props) {
@@ -100,8 +103,9 @@ class Wallets extends PureComponent {
       >
         <SectionHeader>
           <SectionHeaderTitle>
-            {t('wallets.title')}
+            {t('navItems.myHistory.walletsTabs.balances')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           {isFrameworkMode && (
             <SectionHeaderRow>
               <SectionHeaderItem>
