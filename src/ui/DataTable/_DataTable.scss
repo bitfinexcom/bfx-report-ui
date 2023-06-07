@@ -100,8 +100,11 @@
   }
 
   &-cell {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--tableColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: inset 0 -1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
 
     &-ledger {
