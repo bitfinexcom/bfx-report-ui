@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 import { getColumnWidth } from 'utils/columns'
@@ -129,9 +126,7 @@ export const getColumns = ({
       const timestamp = getFullTime(filteredData[rowIndex].timestamp)
       return (
         <Cell tooltip={timestamp}>
-          <TruncatedFormat>
-            {timestamp}
-          </TruncatedFormat>
+          {timestamp}
         </Cell>
       )
     },
