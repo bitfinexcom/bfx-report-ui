@@ -56,22 +56,12 @@
 
 .bp3-table {
   &-container {
-    box-shadow: 0 0 0 1px var(--tableBorder);
-
-    .bp3-table-last-in-column {
-      box-shadow: inset -1px 0 0 var(--tableBorder);
-    }
-
     .bp3-table-last-in-row {
       box-shadow: inset 0 -1px 0 var(--tableBorder);
 
       &.bp3-table-header {
         box-shadow: 0 1px 0 var(--tableBorder);
       }
-    }
-
-    .bp3-table-last-in-column.bp3-table-last-in-row {
-      box-shadow: none;
     }
   }
 
@@ -81,7 +71,7 @@
       color: inherit;
 
       .bp3-table-header {
-        box-shadow: 0 1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+        box-shadow: 0 1px 0 var(--tableBorder);
       }
     }
 
@@ -112,7 +102,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    box-shadow: inset 0 -1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+    box-shadow: inset 0 -1px 0 var(--tableBorder);
 
     &-ledger {
       &-even {
