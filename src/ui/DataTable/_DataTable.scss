@@ -88,6 +88,13 @@
     &-name {
       font-size: 14px;
       color: var(--thColor);
+
+      &-text {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
     }
   }
 
