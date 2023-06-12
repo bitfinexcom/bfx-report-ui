@@ -4,6 +4,20 @@
   align-items: center;
   justify-content: center;
 
+  &-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-icon-wrapper {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+
   &-icon {
     margin: 0 2px;
     vertical-align: middle;
