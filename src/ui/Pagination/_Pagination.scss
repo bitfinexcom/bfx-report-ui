@@ -11,11 +11,14 @@
   }
 
   &-icon-wrapper {
+    width: 39px;
+    height: 39px;
+    margin: 0 5px;
     display: inline-flex;
-    width: 40px;
-    height: 40px;
     align-items: center;
     justify-content: center;
+    border: 1px solid var(--color2);
+    border-radius: 4px;
 
     .pagination-icon {
       margin: 0 2px;
