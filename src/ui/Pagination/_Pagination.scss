@@ -30,6 +30,10 @@
     background-color: var(--bgColor);
     border: 1px solid var(--borderColor);
     color: var(--color);
+
+    &::placeholder {
+      color: var(--color);
+    }
   }
 
   &-loading {
