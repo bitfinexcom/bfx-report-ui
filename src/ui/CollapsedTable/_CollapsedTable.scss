@@ -4,9 +4,11 @@
   &-item {
     display: table;
     width: 100%;
+    padding: 16px;
+    border-radius: 6px;
     margin-bottom: 10px;
-    border: 1px solid var(--borderColor);
-    border-radius: 2px;
+    background-color: var(--bgColor);
+    border: 1px solid var(--bgColor);
 
     &:last-child {
       margin-bottom: 0;
@@ -16,11 +18,11 @@
       display: table-row;
 
       &:nth-child(odd) {
-        background-color: var(--tableOddBg);
+        background-color: var(--bgColor);
       }
 
       &:nth-child(even) {
-        background-color: var(--tableEvenBg);
+        background-color: var(--bgColor);
       }
 
       & > div {
@@ -32,7 +34,6 @@
         &:first-child {
           width: 45%;
           color: var(--activeColor);
-          border-right: 1px solid var(--borderColor);
         }
 
         &:last-child {
