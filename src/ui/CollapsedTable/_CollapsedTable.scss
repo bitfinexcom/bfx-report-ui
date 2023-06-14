@@ -10,10 +10,6 @@
     background-color: var(--bgColor);
     border: 1px solid var(--bgColor);
 
-    &:last-child {
-      margin-bottom: 0;
-    }
-
     & > div {
       display: table-row;
 
@@ -41,7 +37,14 @@
           word-break: break-word;
         }
       }
+
+      &:last-child {
+        & > div {
+          border-bottom: none;
+        }
+      }      
     }
+    
   }
 
   .bp3-table-truncated-format-text {
