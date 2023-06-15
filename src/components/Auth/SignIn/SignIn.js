@@ -17,6 +17,7 @@ import { AUTH_TYPES, MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
 import InputKey from '../InputKey'
 import SignInList from '../SignInList'
+import DeleteAccount from '../DeleteAccount'
 
 import SelectedUserItem from './SignIn.item'
 
@@ -43,6 +44,7 @@ class SignIn extends PureComponent {
     switchMode: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
     showOtpLogin: PropTypes.func.isRequired,
+    deleteAccount: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     setMasterAccount: PropTypes.func.isRequired,
@@ -73,6 +75,7 @@ class SignIn extends PureComponent {
       userPassword: '',
       showUsersList: true,
       isSubAccount: false,
+      showDeleteAccount: false,
     }
   }
 
@@ -188,6 +191,7 @@ class SignIn extends PureComponent {
       password: '',
       isSubAccount: false,
       showUsersList: true,
+      showDeleteAccount: false,
     })
   }
 
@@ -201,6 +205,33 @@ class SignIn extends PureComponent {
     setLocalUsername(localUsername)
   }
 
+  handleDeleteUser = (user) => {
+    const { deleteAccount } = this.props
+    const { isNotProtected, email, isSubAccount } = user
+    if (isNotProtected) {
+      deleteAccount(user)
+    } else {
+      this.setState({
+        email,
+        isSubAccount,
+        showUsersList: false,
+        showDeleteAccount: true,
+      })
+    }
+  }
+
+  deleteProtectedAccount = () => {
+    const { email, password, isSubAccount } = this.state
+    const { deleteAccount } = this.props
+    deleteAccount({
+      email,
+      password,
+      isSubAccount,
+      isNotProtected: !password,
+    })
+    this.backToUsersList()
+  }
+
   render() {
     const {
       t,
@@ -208,6 +239,7 @@ class SignIn extends PureComponent {
       loading,
       switchMode,
       isSubAccount,
+      deleteAccount,
       isOtpLoginShown,
       userShouldReLogin,
       isElectronBackendLoaded,
@@ -218,6 +250,7 @@ class SignIn extends PureComponent {
       password,
       userPassword,
       showUsersList,
+      showDeleteAccount,
     } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
@@ -225,8 +258,8 @@ class SignIn extends PureComponent {
       || (!isNotProtected && !password)
     const isEmailSelected = !_isEmpty(email)
     const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin) && !showUsersList
-    const showSelectedUser = !showUsersList && isEmailSelected
-    const showInputPassword = !isNotProtected && !showUsersList && isEmailSelected && users.length > 0
+    const showSelectedUser = !showUsersList && isEmailSelected && !showDeleteAccount
+    const showInputPassword = !isNotProtected && showSelectedUser && users.length > 0
     const showSignInActions = !isOtpLoginShown && !showUsersList
 
     return (
@@ -243,8 +276,18 @@ class SignIn extends PureComponent {
             <SignInList
               users={users}
               switchMode={switchMode}
+              handleDeleteAccount={this.handleDeleteUser}
               handleUserItemSelect={this.handleUserItemSelect}
               handleAddAccounts={this.handleAddAccountToSelectedUser}
+            />
+          )}
+          {showDeleteAccount && (
+            <DeleteAccount
+              email={email}
+              password={password}
+              onChange={this.handleInputChange}
+              handleDeleteAccount={deleteAccount}
+              backToUsersList={this.backToUsersList}
             />
           )}
           {isOtpLoginShown
@@ -301,11 +344,15 @@ class SignIn extends PureComponent {
                   name='check'
                   loading={loading}
                   intent={Intent.SUCCESS}
-                  onClick={this.onSignIn}
                   disabled={isSignInDisabled}
                   className='bitfinex-auth-check'
+                  onClick={showDeleteAccount
+                    ? this.deleteProtectedAccount
+                    : this.onSignIn}
                 >
-                  {t('auth.signIn')}
+                  {showDeleteAccount
+                    ? t('auth.removeAccount')
+                    : t('auth.signIn')}
                 </Button>
               </div>
             </div>

@@ -13,6 +13,7 @@ export const SignInList = ({
   users,
   switchMode,
   handleAddAccounts,
+  handleDeleteAccount,
   handleUserItemSelect,
 }) => {
   const { t } = useTranslation()
@@ -25,6 +26,7 @@ export const SignInList = ({
           user={user}
           handleAddAccounts={handleAddAccounts}
           handleUserSelect={handleUserItemSelect}
+          handleDeleteAccount={handleDeleteAccount}
         />
       ))}
       <div
@@ -48,6 +50,7 @@ SignInList.propTypes = {
   })).isRequired,
   switchMode: PropTypes.func.isRequired,
   handleAddAccounts: PropTypes.func.isRequired,
+  handleDeleteAccount: PropTypes.func.isRequired,
   handleUserItemSelect: PropTypes.func.isRequired,
 }
 

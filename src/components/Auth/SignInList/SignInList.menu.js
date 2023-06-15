@@ -12,8 +12,10 @@ import {
 import Icon from 'icons'
 
 const UserItemMenu = ({
+  showAddAccounts,
   handleAddAccounts,
   handleAccountsTitle,
+  handleDeleteAccount,
 }) => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
@@ -40,10 +42,19 @@ const UserItemMenu = ({
             <Menu>
               <MenuItem
                 shouldDismissPopover={false}
-                onClick={() => handleAddAccounts()}
+                onClick={() => handleDeleteAccount()}
                 className='bp3-menu-item--account'
-                text={t(handleAccountsTitle)}
+                text={t('auth.removeAccount')}
               />
+              {showAddAccounts && (
+                <MenuItem
+                  shouldDismissPopover={false}
+                  onClick={() => handleAddAccounts()}
+                  className='bp3-menu-item--account'
+                  text={t(handleAccountsTitle)}
+                />
+              )
+             }
             </Menu>
           </div>
           )}
@@ -59,8 +70,10 @@ const UserItemMenu = ({
 }
 
 UserItemMenu.propTypes = {
+  showAddAccounts: PropTypes.bool.isRequired,
   handleAddAccounts: PropTypes.func.isRequired,
   handleAccountsTitle: PropTypes.string.isRequired,
+  handleDeleteAccount: PropTypes.func.isRequired,
 }
 
 export default memo(UserItemMenu)
