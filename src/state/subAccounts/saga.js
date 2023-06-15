@@ -195,12 +195,13 @@ export function* updateSubAccount({ payload }) {
 
 export function* updateLocalUsername({ payload }) {
   try {
-    const { masterAccount, localUsername } = payload
+    const { masterAccount, localUsername, userPassword } = payload
     let auth
     if (masterAccount) {
       auth = {
         email: masterAccount,
         isSubAccount: true,
+        password: userPassword || undefined,
       }
     } else {
       auth = yield select(selectAuth)
