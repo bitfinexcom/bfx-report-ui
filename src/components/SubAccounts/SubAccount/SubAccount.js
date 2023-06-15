@@ -134,7 +134,7 @@ class SubAccount extends PureComponent {
         subUsersToRemove: [],
       })
     } else if (hasValidUsername(localUsername)) {
-      updateLocalUsername({ masterAccount, localUsername })
+      updateLocalUsername({ masterAccount, localUsername, userPassword })
     }
   }
 
