@@ -220,7 +220,7 @@
     "webhook": "Webhook"
   },
   "columnsfilter": {
-    "title": "Filter Columns",
+    "title": "Filter",
     "clear": "Clear",
     "cancel": "Cancel",
     "apply": "Apply",
