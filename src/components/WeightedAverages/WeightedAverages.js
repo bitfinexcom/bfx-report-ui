@@ -16,7 +16,6 @@ import {
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
-import SectionSwitch from 'ui/SectionSwitch'
 import PairSelector from 'ui/PairSelector'
 
 import {
@@ -29,7 +28,6 @@ import queryConstants from 'state/query/constants'
 import LimitNote from './WeightedAverages.note'
 import { getColumns } from './WeightedAverages.columns'
 
-const { showFrameworkMode } = config
 const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
 
 class WeightedAverages extends PureComponent {
@@ -131,12 +129,14 @@ class WeightedAverages extends PureComponent {
           <SectionHeaderTitle>
             {t('weightedaverages.title')}
           </SectionHeaderTitle>
-          {showFrameworkMode && (
-            <SectionSwitch target={TYPE} />
-          )}
-          <TimeRange className='section-header-time-range' />
           {nextPage && <LimitNote />}
           <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.date')}
+              </SectionHeaderItemLabel>
+              <TimeRange className='section-header-time-range' />
+            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
