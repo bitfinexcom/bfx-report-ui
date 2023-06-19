@@ -14,7 +14,7 @@ const QueryButton = (props) => {
     <Button
       className='query-button'
       onClick={onClick}
-      intent={Intent.PRIMARY}
+      intent={Intent.SUCCESS}
       disabled={disabled}
     >
       {t('query.title')}
