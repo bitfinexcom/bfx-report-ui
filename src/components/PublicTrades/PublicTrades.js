@@ -85,7 +85,7 @@ class PublicTrades extends PureComponent {
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
+                {t('selector.filter.date')}
               </SectionHeaderItemLabel>
               <TimeRange className='section-header-time-range' />
             </SectionHeaderItem>
@@ -98,7 +98,12 @@ class PublicTrades extends PureComponent {
                 onPairSelect={this.onPairSelect}
               />
             </SectionHeaderItem>
-            <ColumnsFilter target={TYPE} />
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.columns')}
+              </SectionHeaderItemLabel>
+              <ColumnsFilter target={TYPE} />
+            </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
             <SyncPrefButton sectionType={TYPE} />
           </SectionHeaderRow>
