@@ -209,7 +209,7 @@ class ColumnsFilter extends PureComponent {
           <Button
             onClick={this.toggleDialog}
             className={buttonClasses}
-            intent={Intent.PRIMARY}
+            intent={Intent.SUCCESS}
           >
             {t('columnsfilter.title')}
           </Button>
