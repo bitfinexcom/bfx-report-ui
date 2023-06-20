@@ -138,8 +138,13 @@ class Candles extends PureComponent {
           <SectionHeaderTitle>
             {t('candles.title')}
           </SectionHeaderTitle>
-          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.date')}
+              </SectionHeaderItemLabel>
+              <TimeRange className='section-header-time-range' />
+            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
