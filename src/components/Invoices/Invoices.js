@@ -171,7 +171,12 @@ class Invoices extends PureComponent {
               />
             </SectionHeaderItem>
             <ClearFiltersButton onClick={this.clearSymbols} />
-            <ColumnsFilter target={TYPE} />
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.columns')}
+              </SectionHeaderItemLabel>
+              <ColumnsFilter target={TYPE} />
+            </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
