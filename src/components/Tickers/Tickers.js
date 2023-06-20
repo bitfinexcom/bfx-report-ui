@@ -115,7 +115,12 @@ class Tickers extends PureComponent {
               />
             </SectionHeaderItem>
             <ClearFiltersButton onClick={this.clearPairs} />
-            <ColumnsFilter target={TYPE} />
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.columns')}
+              </SectionHeaderItemLabel>
+              <ColumnsFilter target={TYPE} />
+            </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
             <SyncPrefButton sectionType={TYPE} />
           </SectionHeaderRow>

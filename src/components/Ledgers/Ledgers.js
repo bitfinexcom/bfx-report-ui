@@ -172,7 +172,12 @@ class Ledgers extends PureComponent {
                 onChange={this.onCategoryChange}
               />
             </SectionHeaderItem>
-            <ColumnsFilter target={TYPE} />
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.columns')}
+              </SectionHeaderItemLabel>
+              <ColumnsFilter target={TYPE} />
+            </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>

@@ -107,7 +107,12 @@ class PublicFunding extends PureComponent {
                 onSymbolSelect={this.onSymbolSelect}
               />
             </SectionHeaderItem>
-            <ColumnsFilter target={TYPE} />
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.columns')}
+              </SectionHeaderItemLabel>
+              <ColumnsFilter target={TYPE} />
+            </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
             <SyncSymbolPrefButton />
           </SectionHeaderRow>
