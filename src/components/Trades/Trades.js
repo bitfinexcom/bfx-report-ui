@@ -63,7 +63,7 @@ class Trades extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
             numRows={entries.length}
@@ -73,7 +73,7 @@ class Trades extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </Fragment>
+        </div>
       )
     }
 
