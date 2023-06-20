@@ -87,7 +87,14 @@ class SectionHeader extends PureComponent {
             )}
             {clearTargetPairs && <ClearFiltersButton onClick={clearTargetPairs} />}
             {clearTargetSymbols && <ClearFiltersButton onClick={clearTargetSymbols} />}
-            {filter && <ColumnsFilter target={target} />}
+            {filter && (
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('selector.filter.columns')}
+                </SectionHeaderItemLabel>
+                <ColumnsFilter target={target} />
+              </SectionHeaderItem>
+            )}
             {refresh && <RefreshButton onClick={refresh} />}
           </SectionHeaderRow>
         )}
