@@ -33,6 +33,10 @@ const isUserHasSubAccounts = (users, masterAccount) => _filter(
   && !_isEmpty(user?.subUsers),
 ).length > 0
 
+const isMasterAccountProtected = (users, masterAccount) => _filter(
+  users, user => _isEqual(user?.email, masterAccount) && !user.isNotProtected,
+).length > 0
+
 const { showFrameworkMode } = config
 
 class RegisterSubAccounts extends PureComponent {
@@ -68,6 +72,7 @@ class RegisterSubAccounts extends PureComponent {
     this.state = {
       masterAccEmail: masterAccount,
       localUsername: localUsername || formatAccountName(masterAccount),
+      password: undefined,
     }
   }
 
@@ -104,9 +109,10 @@ class RegisterSubAccounts extends PureComponent {
       masterAccount,
       isMultipleAccsSelected,
     } = this.props
-    const { masterAccEmail, localUsername } = this.state
+    const { masterAccEmail, localUsername, password } = this.state
     const preparedUsers = filterRestrictedUsers(users)
     const userHasSubAccounts = isUserHasSubAccounts(users, masterAccount)
+    const showInputPassword = isMasterAccountProtected(users, masterAccount)
     const classes = classNames(
       'bitfinex-auth',
       'bitfinex-auth-sign-up',
@@ -135,6 +141,14 @@ class RegisterSubAccounts extends PureComponent {
             }
             backToUsersList={this.handleBackToSignIn}
           />
+          {showInputPassword && (
+            <InputKey
+              name='password'
+              value={password}
+              label='auth.enterPassword'
+              onChange={this.handleInputChange}
+            />
+          )}
           <InputKey
             type='text'
             name='localUsername'
@@ -147,6 +161,7 @@ class RegisterSubAccounts extends PureComponent {
             <SubAccount
               users={users}
               authData={authData}
+              userPassword={password}
               allowedUsers={preparedUsers}
               localUsername={localUsername}
               masterAccount={masterAccEmail}

@@ -82,7 +82,7 @@ class PositionsAudit extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <>
+        <div className='data-table-wrapper'>
           <DataTable
             numRows={entries.length}
             tableColumns={tableColumns}
@@ -91,7 +91,7 @@ class PositionsAudit extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </>
+        </div>
       )
     }
 

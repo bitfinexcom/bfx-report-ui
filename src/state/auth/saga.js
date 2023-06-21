@@ -433,6 +433,51 @@ function* recoverPasswordOtp({ payload }) {
   }
 }
 
+function* deleteAccount({ payload }) {
+  try {
+    const {
+      email, isSubAccount, password, isNotProtected,
+    } = payload
+    const authParams = {
+      email,
+      isSubAccount,
+      password: isNotProtected ? undefined : password,
+    }
+    const { result, error } = yield call(makeFetchCall, 'signIn', null, authParams)
+
+    if (result) {
+      const { token } = result
+      const {
+        error: deleteError,
+        result: deleteResult,
+      } = yield call(makeFetchCall, 'removeUser', null, { token })
+
+      if (deleteResult) {
+        yield put(actions.fetchUsers())
+        yield put(updateSuccessStatus({ id: 'auth.accountRemoved' }))
+      }
+      if (deleteError) {
+        yield put(updateErrorStatus({
+          id: 'status.fail',
+          topic: 'auth.accountRemoving',
+          detail: JSON.stringify(deleteError),
+        }))
+      }
+      return
+    }
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.auth',
+        detail: JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 function* logout() {
   yield put(tokenRefreshStop())
 }
@@ -440,6 +485,7 @@ function* logout() {
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.FETCH_USERS, fetchUsers)
+  yield takeLatest(types.DELETE_ACCOUNT, deleteAccount)
   yield takeLatest(types.RECOVER_PASSWORD, recoverPassword)
   yield takeLatest(types.RECOVER_PASSWORD_OTP, recoverPasswordOtp)
   yield takeLatest(types.SIGN_UP, signUp)
