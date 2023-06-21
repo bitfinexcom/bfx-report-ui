@@ -24,6 +24,7 @@ class SubAccount extends PureComponent {
     isSubAccountsLoading: PropTypes.bool,
     isMultipleAccsSelected: PropTypes.bool,
     masterAccount: PropTypes.string,
+    userPassword: PropTypes.string,
     localUsername: PropTypes.string,
     updateSubAccount: PropTypes.func.isRequired,
     updateLocalUsername: PropTypes.func.isRequired,
@@ -42,6 +43,7 @@ class SubAccount extends PureComponent {
     allowedUsers: [],
     localUsername: null,
     masterAccount: undefined,
+    userPassword: undefined,
     isSubAccountsLoading: false,
     isMultipleAccsSelected: false,
   }
@@ -53,7 +55,11 @@ class SubAccount extends PureComponent {
 
   createSubAccount = () => {
     const {
-      addSubAccount, masterAccount, localUsername, t,
+      t,
+      userPassword,
+      addSubAccount,
+      localUsername,
+      masterAccount,
     } = this.props
     const { accounts } = this.state
 
@@ -70,7 +76,12 @@ class SubAccount extends PureComponent {
         : { apiKey, apiSecret }
     })
 
-    addSubAccount({ preparedAccountData, masterAccount, localUsername })
+    addSubAccount({
+      preparedAccountData,
+      masterAccount,
+      userPassword,
+      localUsername,
+    })
 
     this.setState({
       accounts: [EMPTY_ACCOUNT],
@@ -93,6 +104,7 @@ class SubAccount extends PureComponent {
   updateSubAccount = () => {
     const {
       t,
+      userPassword,
       masterAccount,
       localUsername,
       updateSubAccount,
@@ -111,6 +123,7 @@ class SubAccount extends PureComponent {
     if (preparedAccounts.length || subUsersToRemove.length) {
       updateSubAccount({
         masterAccount,
+        userPassword,
         localUsername,
         addedSubUsers: preparedAccounts,
         removedSubUsers: subUsersToRemove,
@@ -121,7 +134,7 @@ class SubAccount extends PureComponent {
         subUsersToRemove: [],
       })
     } else if (hasValidUsername(localUsername)) {
-      updateLocalUsername({ masterAccount, localUsername })
+      updateLocalUsername({ masterAccount, localUsername, userPassword })
     }
   }
 
@@ -131,6 +144,7 @@ class SubAccount extends PureComponent {
       users,
       authData,
       allowedUsers,
+      userPassword,
       masterAccount,
       localUsername,
       isSubAccountsLoading,
@@ -157,6 +171,7 @@ class SubAccount extends PureComponent {
             <SubUsersList
               subUsers={subUsers}
               email={masterAccountEmail}
+              password={userPassword}
               onToggle={this.onSubUserToggle}
               subUsersToRemove={subUsersToRemove}
               isRemovalEnabled={masterAccount || isSubAccount}

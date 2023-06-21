@@ -10,6 +10,7 @@ import { removeSubAccount } from 'state/subAccounts/actions'
 
 const SubUsersList = ({
   email,
+  password,
   onToggle,
   subUsers,
   subUsersToRemove,
@@ -37,7 +38,7 @@ const SubUsersList = ({
               {isRemovalEnabled && _isEqual(email, accountEmail) && (
                 <div
                   className='account-title--remove'
-                  onClick={() => dispatch(removeSubAccount(email))}
+                  onClick={() => dispatch(removeSubAccount({ masterAccount: email, password }))}
                 >
                   {t('subaccounts.remove_item')}
                 </div>
@@ -63,6 +64,7 @@ const SubUsersList = ({
 
 SubUsersList.propTypes = {
   email: PropTypes.string.isRequired,
+  password: PropTypes.string,
   isRemovalEnabled: PropTypes.oneOfType([
     PropTypes.bool,
     PropTypes.string,
@@ -78,6 +80,7 @@ SubUsersList.defaultProps = {
   onToggle: () => {},
   subUsersToRemove: [],
   isRemovalEnabled: true,
+  password: undefined,
 }
 
 export default memo(SubUsersList)
