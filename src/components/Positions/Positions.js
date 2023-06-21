@@ -119,7 +119,7 @@ class Positions extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <>
+        <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
             numRows={entries.length}
@@ -129,7 +129,7 @@ class Positions extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </>
+        </div>
       )
     }
 
