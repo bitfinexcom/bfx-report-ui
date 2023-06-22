@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -67,14 +67,14 @@ class PublicTrades extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <div className='data-table-wrapper'>
+        <Fragment>
           <DataTable
             section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
           <Pagination target={TYPE} loading={pageLoading} />
-        </div>
+        </Fragment>
       )
     }
 

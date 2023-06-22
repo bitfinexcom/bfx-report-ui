@@ -116,18 +116,14 @@ class Pagination extends PureComponent {
     return (
       <Swipeable className='pagination' onSwiped={this.onSwiped} delta={50}>
         <div className='pagination-group'>
-          <span className='pagination-icon-wrapper'>
-            <Icon.CHEVRON_DOUBLE_LEFT
-              className={classNames('pagination-icon', { 'pagination-icon--disabled': page === 1 || loading })}
-              onClick={this.jumpToFirstPage}
-            />
-          </span>
-          <span className='pagination-icon-wrapper'>
-            <Icon.CHEVRON_LEFT
-              className={classNames('pagination-icon', { 'pagination-icon--disabled': page === 1 || loading })}
-              onClick={this.backward}
-            />
-          </span>
+          <Icon.CHEVRON_DOUBLE_LEFT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page === 1 || loading })}
+            onClick={this.jumpToFirstPage}
+          />
+          <Icon.CHEVRON_LEFT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page === 1 || loading })}
+            onClick={this.backward}
+          />
           <span className='pagination-page'>
             {t('pagination.page')}
             <input
@@ -143,18 +139,14 @@ class Pagination extends PureComponent {
             {pageLen}
             {renderRestDots}
           </span>
-          <span className='pagination-icon-wrapper'>
-            <Icon.CHEVRON_RIGHT
-              className={classNames('pagination-icon', { 'pagination-icon--disabled': page === pageLen || loading })}
-              onClick={this.forward}
-            />
-          </span>
-          <span className='pagination-icon-wrapper'>
-            <Icon.CHEVRON_DOUBLE_RIGHT
-              className={classNames('pagination-icon', { 'pagination-icon--disabled': !nextPage || loading })}
-              onClick={this.fetchNext}
-            />
-          </span>
+          <Icon.CHEVRON_RIGHT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': page === pageLen || loading })}
+            onClick={this.forward}
+          />
+          <Icon.CHEVRON_DOUBLE_RIGHT
+            className={classNames('pagination-icon', { 'pagination-icon--disabled': !nextPage || loading })}
+            onClick={this.fetchNext}
+          />
           {renderLoading}
         </div>
       </Swipeable>

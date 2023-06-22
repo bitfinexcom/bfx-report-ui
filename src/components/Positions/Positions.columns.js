@@ -1,7 +1,10 @@
 import React from 'react'
 import _endsWith from 'lodash/endsWith'
 
-import { Cell } from '@blueprintjs/table'
+import {
+  Cell,
+  TruncatedFormat,
+} from '@blueprintjs/table'
 
 import queryConstants from 'state/query/constants'
 import JSONFormat from 'ui/JSONFormat'
@@ -261,7 +264,9 @@ export default function getColumns(props) {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
           <Cell tooltip={timestamp}>
-            {timestamp}
+            <TruncatedFormat>
+              {timestamp}
+            </TruncatedFormat>
           </Cell>
         )
       },
