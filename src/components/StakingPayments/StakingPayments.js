@@ -111,7 +111,7 @@ class StakingPayments extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <div className='data-table-wrapper'>
+        <>
           <DataTable
             section={TYPE}
             numRows={entries.length}
@@ -121,7 +121,7 @@ class StakingPayments extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </div>
+        </>
       )
     }
     return (
