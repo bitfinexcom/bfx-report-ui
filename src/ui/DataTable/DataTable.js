@@ -179,7 +179,7 @@ class DataTable extends PureComponent {
         getCellClipboardData={this.getCellClipboardData}
         onCopy={this.onCopy}
         bodyContextMenuRenderer={this.renderBodyContextMenu}
-        defaultRowHeight={50}
+        defaultRowHeight={26}
       >
         {tableColumns.map(column => (
           <Column
