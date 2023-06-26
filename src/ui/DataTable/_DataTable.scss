@@ -73,18 +73,24 @@
 
       .bp3-table-header {
         box-shadow: 0 1px 0 var(--tableBorder);
+
+        &:first-child {
+          .bp3-table-column-name-text {
+            justify-content: flex-start;
+          }
+        }
       }
     }
 
     &-name {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--thColor);
 
       &-text {
         min-height: 50px;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: flex-end;
       }
     }
   }
