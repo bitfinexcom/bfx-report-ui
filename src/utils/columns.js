@@ -6,7 +6,7 @@ import _pick from 'lodash/pick'
 import _filter from 'lodash/filter'
 import _isEqual from 'lodash/isEqual'
 
-import { Cell, TruncatedFormat } from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 
@@ -410,9 +410,7 @@ export const getFrameworkPositionsColumns = (props) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
           <Cell tooltip={timestamp}>
-            <TruncatedFormat>
-              {timestamp}
-            </TruncatedFormat>
+            {timestamp}
           </Cell>
         )
       },

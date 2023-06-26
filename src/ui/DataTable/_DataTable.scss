@@ -5,6 +5,7 @@
   max-height: 517px;
   margin-left: 1px;
   flex: 0 1 auto;
+  border-top: 1px solid var(--tableBorder);
 
   &-full-height {
     max-height: unset;
@@ -56,22 +57,12 @@
 
 .bp3-table {
   &-container {
-    box-shadow: 0 0 0 1px var(--tableBorder);
-
-    .bp3-table-last-in-column {
-      box-shadow: inset -1px 0 0 var(--tableBorder);
-    }
-
     .bp3-table-last-in-row {
       box-shadow: inset 0 -1px 0 var(--tableBorder);
 
       &.bp3-table-header {
         box-shadow: 0 1px 0 var(--tableBorder);
       }
-    }
-
-    .bp3-table-last-in-column.bp3-table-last-in-row {
-      box-shadow: none;
     }
   }
 
@@ -81,13 +72,20 @@
       color: inherit;
 
       .bp3-table-header {
-        box-shadow: 0 1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+        box-shadow: 0 1px 0 var(--tableBorder);
       }
     }
 
     &-name {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--thColor);
+
+      &-text {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
     }
   }
 
@@ -100,9 +98,12 @@
   }
 
   &-cell {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--tableColor);
-    box-shadow: inset 0 -1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-shadow: inset 0 -1px 0 var(--tableBorder);
 
     &-ledger {
       &-even {

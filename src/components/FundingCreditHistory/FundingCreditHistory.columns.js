@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
 import { getColumnWidth } from 'utils/columns'
 import { getSideMsg, getSideColor } from 'state/utils'
@@ -150,9 +147,7 @@ export const getColumns = ({
       const timestamp = getFullTime(filteredData[rowIndex].mtsOpening)
       return (
         <Cell tooltip={timestamp}>
-          <TruncatedFormat>
-            {timestamp}
-          </TruncatedFormat>
+          {timestamp}
         </Cell>
       )
     },
@@ -166,9 +161,7 @@ export const getColumns = ({
       const timestamp = getFullTime(filteredData[rowIndex].mtsLastPayout)
       return (
         <Cell tooltip={timestamp}>
-          <TruncatedFormat>
-            {timestamp}
-          </TruncatedFormat>
+          {timestamp}
         </Cell>
       )
     },
@@ -196,9 +189,7 @@ export const getColumns = ({
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
       return (
         <Cell tooltip={timestamp}>
-          <TruncatedFormat>
-            {timestamp}
-          </TruncatedFormat>
+          {timestamp}
         </Cell>
       )
     },

@@ -52,7 +52,6 @@ export const formatAmount = (val, options = {}) => {
     )
   }
   const {
-    color,
     digits = 8,
     minDigits = false,
     fixFraction = true,
@@ -60,11 +59,6 @@ export const formatAmount = (val, options = {}) => {
     dollarSign = false,
   } = options
   let roundedValue = _round(val, 8)
-
-  const classes = classNames('bitfinex-amount', {
-    'bitfinex-green-text': color ? color === 'green' : roundedValue > 0,
-    'bitfinex-red-text': color ? color === 'red' : roundedValue < 0,
-  })
 
   if (fixFraction) {
     roundedValue = formatFraction(roundedValue, { digits, minDigits })
@@ -78,7 +72,7 @@ export const formatAmount = (val, options = {}) => {
 
   return (
     <>
-      <div className={classes}>
+      <div className='bitfinex-amount'>
         <span>
           {dollarSign && '$'}
           {integer}
