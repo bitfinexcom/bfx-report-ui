@@ -25,7 +25,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
-          <Cell className='cell_align_' tooltip={id}>
+          <Cell tooltip={id}>
             {id}
           </Cell>
         )
