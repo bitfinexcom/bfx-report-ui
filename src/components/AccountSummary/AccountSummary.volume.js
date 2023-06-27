@@ -10,6 +10,7 @@ const getColumns = ({ data }) => [
   {
     id: 'currency',
     name: 'column.currency',
+    className: 'align-left',
     width: COLUMN_WIDTHS.SYMBOL,
     renderer: (rowIndex) => {
       const { curr } = data[rowIndex]

@@ -10,6 +10,7 @@ export const getColumns = ({ data }) => [
   {
     id: 'currency',
     name: 'column.currency',
+    className: 'align-left',
     width: window.innerWidth > 390
       ? 250
       : COLUMN_WIDTHS.SYMBOL,
