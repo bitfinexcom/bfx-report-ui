@@ -20,11 +20,12 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      className: 'align-left',
       width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
-          <Cell tooltip={id}>
+          <Cell className='cell_align_' tooltip={id}>
             {id}
           </Cell>
         )
@@ -35,6 +36,7 @@ export default function getColumns(props) {
       {
         id: 'description',
         name: 'column.description',
+        className: 'align-left',
         width: getColumnWidth('description', columnsWidth),
         renderer: (rowIndex) => {
           const { description } = filteredData[rowIndex]
@@ -50,6 +52,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
+      className: 'align-left',
       width: getColumnWidth('currency', columnsWidth),
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
@@ -146,6 +149,7 @@ export default function getColumns(props) {
     {
       id: 'mts',
       nameStr: `${t('column.date')} (${timeOffset})`,
+      className: 'align-left',
       width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
@@ -160,6 +164,7 @@ export default function getColumns(props) {
     {
       id: 'wallet',
       name: 'column.wallet',
+      className: 'align-left',
       width: getColumnWidth('wallet', columnsWidth),
       renderer: (rowIndex) => {
         const { wallet } = filteredData[rowIndex]
