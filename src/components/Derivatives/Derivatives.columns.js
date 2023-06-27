@@ -14,6 +14,7 @@ export const getColumns = ({
   {
     id: 'pair',
     name: 'column.pair',
+    className: 'align-left',
     width: getColumnWidth('pair', columnsWidth),
     renderer: (rowIndex) => {
       const { pair } = filteredData[rowIndex]
@@ -120,6 +121,7 @@ export const getColumns = ({
   },
   {
     id: 'timestamp',
+    className: 'align-left',
     nameStr: `${t('column.updated')} (${timeOffset})`,
     width: getColumnWidth('timestamp', columnsWidth),
     renderer: (rowIndex) => {

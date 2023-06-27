@@ -15,6 +15,7 @@ export const getColumns = ({
   {
     id: 'id',
     name: 'column.id',
+    className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
@@ -48,6 +49,7 @@ export const getColumns = ({
   {
     id: 'currency',
     name: 'column.currency',
+    className: 'align-left',
     width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
       const { currency } = filteredData[rowIndex]
@@ -62,6 +64,7 @@ export const getColumns = ({
   {
     id: 'orderId',
     name: 'column.orderid',
+    className: 'align-left',
     width: getColumnWidth('orderId', columnsWidth),
     renderer: (rowIndex) => {
       const { orderId } = filteredData[rowIndex]
@@ -93,6 +96,7 @@ export const getColumns = ({
   {
     id: 'status',
     name: 'column.status',
+    className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
       const { status } = filteredData[rowIndex]
@@ -107,6 +111,7 @@ export const getColumns = ({
   {
     id: 'customerInfo',
     name: 'column.customerInfo',
+    className: 'align-left',
     width: getColumnWidth('customerInfo', columnsWidth),
     renderer: (rowIndex) => {
       const { customerInfo } = filteredData[rowIndex]
@@ -124,6 +129,7 @@ export const getColumns = ({
   {
     id: 'invoices',
     name: 'column.invoices',
+    className: 'align-left',
     width: getColumnWidth('invoices', columnsWidth),
     renderer: (rowIndex) => {
       const { invoices } = filteredData[rowIndex]
@@ -141,6 +147,7 @@ export const getColumns = ({
   {
     id: 'payment',
     name: 'column.payment',
+    className: 'align-left',
     width: getColumnWidth('payment', columnsWidth),
     renderer: (rowIndex) => {
       const { payment } = filteredData[rowIndex]
@@ -158,6 +165,7 @@ export const getColumns = ({
   {
     id: 'duration',
     name: 'column.duration',
+    className: 'align-left',
     width: getColumnWidth('duration', columnsWidth),
     renderer: (rowIndex) => {
       const { duration } = filteredData[rowIndex]
@@ -172,6 +180,7 @@ export const getColumns = ({
   {
     id: 'merchantName',
     name: 'column.merchantName',
+    className: 'align-left',
     width: getColumnWidth('merchantName', columnsWidth),
     renderer: (rowIndex) => {
       const { merchantName } = filteredData[rowIndex]
@@ -186,6 +195,7 @@ export const getColumns = ({
   {
     id: 'redirectUrl',
     name: 'column.redirectUrl',
+    className: 'align-left',
     width: getColumnWidth('redirectUrl', columnsWidth),
     renderer: (rowIndex) => {
       const { redirectUrl } = filteredData[rowIndex]
@@ -207,6 +217,7 @@ export const getColumns = ({
   },
   {
     id: 'mts',
+    className: 'align-left',
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mts', columnsWidth),
     renderer: (rowIndex) => {
@@ -222,6 +233,7 @@ export const getColumns = ({
   {
     id: 'webhook',
     name: 'column.webhook',
+    className: 'align-left',
     width: getColumnWidth('webhook', columnsWidth),
     renderer: (rowIndex) => {
       const { webhook } = filteredData[rowIndex]
