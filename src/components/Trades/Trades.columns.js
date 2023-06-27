@@ -43,6 +43,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      className: 'align-left',
       width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
@@ -57,6 +58,7 @@ export default function getColumns(props) {
     {
       id: 'orderID',
       name: 'column.orderid',
+      className: 'align-left',
       width: getColumnWidth('orderID', columnsWidth),
       renderer: (rowIndex) => {
         const { orderID } = filteredData[rowIndex]
@@ -71,6 +73,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: getColumnWidth('pair', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -164,6 +167,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsCreate',
+      className: 'align-left',
       nameStr: `${t('column.date')} (${timeOffset})`,
       width: getColumnWidth('mtsCreate', columnsWidth),
       renderer: (rowIndex) => {
