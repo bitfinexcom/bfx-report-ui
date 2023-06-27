@@ -16,6 +16,7 @@ export const getColumns = ({
   {
     id: 'id',
     name: 'column.id',
+    className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
       const { id, pair, amountExecuted } = filteredData[rowIndex]
@@ -36,6 +37,7 @@ export const getColumns = ({
   {
     id: 'pair',
     name: 'column.pair',
+    className: 'align-left',
     width: getColumnWidth('pair', columnsWidth),
     renderer: (rowIndex) => {
       const { pair } = filteredData[rowIndex]
@@ -50,6 +52,7 @@ export const getColumns = ({
   {
     id: 'type',
     name: 'column.type',
+    className: 'align-left',
     width: getColumnWidth('type', columnsWidth),
     renderer: (rowIndex) => {
       const { type } = filteredData[rowIndex]
@@ -138,6 +141,7 @@ export const getColumns = ({
   },
   {
     id: 'mtsCreate',
+    className: 'align-left',
     nameStr: `${t('column.created')} (${timeOffset})`,
     width: getColumnWidth('mtsCreate', columnsWidth),
     renderer: (rowIndex) => {
@@ -152,6 +156,7 @@ export const getColumns = ({
   },
   {
     id: 'mtsUpdate',
+    className: 'align-left',
     nameStr: `${t('column.updated')} (${timeOffset})`,
     width: getColumnWidth('mtsUpdate', columnsWidth),
     renderer: (rowIndex) => {
@@ -167,6 +172,7 @@ export const getColumns = ({
   {
     id: 'status',
     name: 'column.status',
+    className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
       const { status } = filteredData[rowIndex]
@@ -200,6 +206,7 @@ export const getColumns = ({
   {
     id: 'typePrev',
     name: 'column.typeprev',
+    className: 'align-left',
     width: getColumnWidth('typePrev', columnsWidth),
     renderer: (rowIndex) => {
       const { typePrev } = filteredData[rowIndex]
@@ -214,6 +221,7 @@ export const getColumns = ({
   {
     id: 'meta',
     name: 'column.meta',
+    className: 'align-left',
     width: getColumnWidth('meta', columnsWidth),
     renderer: (rowIndex) => {
       const { meta } = filteredData[rowIndex]
