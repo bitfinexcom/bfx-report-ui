@@ -14,6 +14,7 @@ export const getColumns = ({
   {
     id: 'id',
     name: 'column.id',
+    className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
@@ -28,6 +29,7 @@ export const getColumns = ({
   {
     id: 'symbol',
     name: 'column.currency',
+    className: 'align-left',
     width: getColumnWidth('symbol', columnsWidth),
     renderer: (rowIndex) => {
       const { symbol } = filteredData[rowIndex]
@@ -79,6 +81,7 @@ export const getColumns = ({
   {
     id: 'type',
     name: 'column.type',
+    className: 'align-left',
     width: getColumnWidth('type', columnsWidth),
     renderer: (rowIndex) => {
       const { type } = filteredData[rowIndex]
@@ -93,6 +96,7 @@ export const getColumns = ({
   {
     id: 'status',
     name: 'column.status',
+    className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
       const { status } = filteredData[rowIndex]
@@ -126,6 +130,7 @@ export const getColumns = ({
   {
     id: 'period',
     name: 'column.period',
+    className: 'align-left',
     width: getColumnWidth('period', columnsWidth),
     renderer: (rowIndex) => {
       const period = `${filteredData[rowIndex].period} ${t('column.days')}`
@@ -145,6 +150,7 @@ export const getColumns = ({
   },
   {
     id: 'mtsUpdate',
+    className: 'align-left',
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mtsUpdate', columnsWidth),
     renderer: (rowIndex) => {
