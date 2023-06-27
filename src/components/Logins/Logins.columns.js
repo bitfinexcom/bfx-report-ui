@@ -14,6 +14,7 @@ export const getColumns = ({
   {
     id: 'id',
     name: 'column.id',
+    className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
@@ -27,6 +28,7 @@ export const getColumns = ({
   },
   {
     id: 'time',
+    className: 'align-left',
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('time', columnsWidth),
     renderer: (rowIndex) => {
@@ -42,6 +44,7 @@ export const getColumns = ({
   {
     id: 'ip',
     name: 'column.ip',
+    className: 'align-left',
     width: getColumnWidth('ip', columnsWidth),
     renderer: (rowIndex) => {
       const { ip } = filteredData[rowIndex]
@@ -56,6 +59,7 @@ export const getColumns = ({
   {
     id: 'browser',
     name: 'column.browser',
+    className: 'align-left',
     width: getColumnWidth('browser', columnsWidth),
     renderer: (rowIndex) => {
       const { browser } = filteredData[rowIndex]
@@ -70,6 +74,7 @@ export const getColumns = ({
   {
     id: 'version',
     name: 'column.version',
+    className: 'align-left',
     width: getColumnWidth('version', columnsWidth),
     renderer: (rowIndex) => {
       const { version } = filteredData[rowIndex]
@@ -84,6 +89,7 @@ export const getColumns = ({
   {
     id: 'mobile',
     name: 'column.mobile',
+    className: 'align-left',
     width: getColumnWidth('mobile', columnsWidth),
     renderer: (rowIndex) => {
       const { mobile } = filteredData[rowIndex]
@@ -98,6 +104,7 @@ export const getColumns = ({
   {
     id: 'extra',
     name: 'column.meta',
+    className: 'align-left',
     width: getColumnWidth('extra', columnsWidth),
     renderer: (rowIndex) => {
       const { extra } = filteredData[rowIndex]
