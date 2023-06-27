@@ -117,6 +117,7 @@ export default function getColumns(props) {
       {
         id: 'meta',
         name: 'column.meta',
+        className: 'align-left',
         width: getColumnWidth('meta', columnsWidth),
         renderer: (rowIndex) => {
           const { meta = '' } = filteredData[rowIndex]
@@ -139,6 +140,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      className: 'align-left',
       width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
@@ -157,6 +159,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: getColumnWidth('pair', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -228,6 +231,7 @@ export default function getColumns(props) {
     {
       id: 'marginFundingType',
       name: 'column.fundingType',
+      className: 'align-left',
       width: getColumnWidth('marginFundingType', columnsWidth),
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex])
@@ -242,6 +246,7 @@ export default function getColumns(props) {
     {
       id: 'status',
       name: 'column.status',
+      className: 'align-left',
       width: getColumnWidth('status', columnsWidth),
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
@@ -255,6 +260,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
+      className: 'align-left',
       nameStr: `${t('column.updated')} (${timeOffset})`,
       width: getColumnWidth('mtsUpdate', columnsWidth),
       renderer: (rowIndex) => {
