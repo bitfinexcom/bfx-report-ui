@@ -73,11 +73,17 @@
 
       .bp3-table-header {
         box-shadow: 0 1px 0 var(--tableBorder);
+      }
 
-        &:first-child {
-          .bp3-table-column-name-text {
-            justify-content: flex-start;
-          }
+      .bp3-table-header.align-left {
+        .bp3-table-column-name-text {
+          justify-content: flex-start;
+        }
+      }
+
+      .bp3-table-header.align-right {
+        .bp3-table-column-name-text {
+          justify-content: flex-end;
         }
       }
     }
@@ -90,7 +96,6 @@
         min-height: 50px;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
       }
     }
   }
