@@ -4,7 +4,7 @@
   &-item {
     display: table;
     width: 100%;
-    padding: 16px;
+    padding: 4px 16px;
     border-radius: 6px;
     margin-bottom: 10px;
     background-color: var(--bgColor);
@@ -24,7 +24,7 @@
       & > div {
         display: table-cell;
         min-height: 24px;
-        padding: 12px 11px;
+        padding: 8px;
         vertical-align: middle;
         border-bottom: 1px solid var(--tableBorder);
 
