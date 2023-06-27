@@ -12,6 +12,7 @@ export const getColumns = ({
   {
     id: 'pair',
     name: 'column.pair',
+    className: 'align-left',
     width: getColumnWidth('pair', columnsWidth),
     renderer: (rowIndex) => {
       const { pair } = filteredData[rowIndex]
