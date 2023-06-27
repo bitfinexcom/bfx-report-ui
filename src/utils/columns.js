@@ -209,6 +209,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'id',
       name: 'column.id',
+      className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
@@ -223,6 +224,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: COLUMN_WIDTHS.pair,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -377,6 +379,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'swapType',
       name: 'column.fundingType',
+      className: 'align-left',
       width: 120,
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex].marginFundingType)
@@ -391,6 +394,7 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'status',
       name: 'column.status',
+      className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
@@ -404,6 +408,7 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'mtsUpdate',
+      className: 'align-left',
       nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.mtsUpdate,
       renderer: (rowIndex) => {
@@ -426,6 +431,7 @@ export const getPositionsTickersColumns = (props) => {
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: COLUMN_WIDTHS.pair,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -465,6 +471,7 @@ export const getWalletsTickersColumns = (props) => {
     {
       id: 'type',
       name: 'column.type',
+      className: 'align-left',
       width: 80,
       renderer: (rowIndex) => {
         const { walletType } = filteredData[rowIndex]
@@ -483,6 +490,7 @@ export const getWalletsTickersColumns = (props) => {
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]

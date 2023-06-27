@@ -12,6 +12,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
+      className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
