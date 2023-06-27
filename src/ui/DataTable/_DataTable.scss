@@ -73,17 +73,17 @@
 
       .bp3-table-header {
         box-shadow: 0 1px 0 var(--tableBorder);
-      }
 
-      .bp3-table-header.align-left {
-        .bp3-table-column-name-text {
-          justify-content: flex-start;
+        &.align-left {
+          .bp3-table-column-name-text {
+            justify-content: flex-start;
+          }
         }
-      }
 
-      .bp3-table-header.align-right {
-        .bp3-table-column-name-text {
-          justify-content: flex-end;
+        &.align-right {
+          .bp3-table-column-name-text {
+            justify-content: flex-end;
+          }
         }
       }
     }
@@ -113,8 +113,13 @@
     color: var(--tableColor);
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     box-shadow: inset 0 -1px 0 var(--tableBorder);
+    &.align-left {
+      justify-content: flex-start;
+    }
+    &.align-right {
+      justify-content: flex-end;
+    }
 
     &-ledger {
       &-even {
