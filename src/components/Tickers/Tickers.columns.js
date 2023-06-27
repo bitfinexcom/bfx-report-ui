@@ -17,6 +17,7 @@ export default function getColumns(props) {
     {
       id: 'symbol',
       name: 'column.pair',
+      className: 'align-left',
       width: getColumnWidth('symbol', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
@@ -68,6 +69,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
+      className: 'align-left',
       nameStr: `${t('column.time')} (${timeOffset})`,
       width: getColumnWidth('mtsUpdate', columnsWidth),
       renderer: (rowIndex) => {

@@ -19,6 +19,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      className: 'align-left',
       width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
@@ -32,6 +33,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
+      className: 'align-left',
       nameStr: `${t('column.time')} (${timeOffset})`,
       width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
@@ -47,6 +49,7 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'column.type',
+      className: 'align-left',
       width: getColumnWidth('type', columnsWidth),
       renderer: (rowIndex) => {
         const { type, amount } = filteredData[rowIndex]
@@ -105,6 +108,7 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: getColumnWidth('pair', columnsWidth),
       renderer: () => {
         const formattedCurrentPair = formatPair(targetPair)

@@ -18,6 +18,7 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      className: 'align-left',
       width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
@@ -31,6 +32,7 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
+      className: 'align-left',
       nameStr: `${t('column.time')} (${timeOffset})`,
       width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
@@ -83,6 +85,7 @@ export default function getColumns(props) {
     {
       id: 'period',
       name: 'column.period',
+      className: 'align-left',
       width: getColumnWidth('period', columnsWidth),
       renderer: (rowIndex) => {
         const period = `${filteredData[rowIndex].period} ${t('column.days')}`
@@ -103,6 +106,7 @@ export default function getColumns(props) {
     {
       id: 'currency',
       name: 'column.currency',
+      className: 'align-left',
       width: getColumnWidth('currency', columnsWidth),
       renderer: () => (
         <Cell tooltip={targetSymbol}>
