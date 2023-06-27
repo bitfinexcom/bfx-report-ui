@@ -186,6 +186,7 @@ class DataTable extends PureComponent {
             key={column.id}
             id={column.id}
             name={column.nameStr ? column.nameStr : t(column.name)}
+            className={column?.className ?? 'align-right'}
             cellRenderer={column.renderer}
           />
         ))}
