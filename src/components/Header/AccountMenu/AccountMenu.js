@@ -96,11 +96,13 @@ const AccountMenu = ({
                 icon={<Icon.INFO_CIRCLE />}
                 text={t('header.help')}
               />
-              <MenuItem
-                className='account-menu-sync'
-                shouldDismissPopover={false}
-                text={<SyncMode />}
-              />
+              {showFrameworkMode && (
+                <MenuItem
+                  className='account-menu-sync'
+                  shouldDismissPopover={false}
+                  text={<SyncMode />}
+                />
+              )}
               <MenuItem
                 className='account-menu-query'
                 shouldDismissPopover={false}
