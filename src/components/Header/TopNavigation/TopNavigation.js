@@ -42,6 +42,7 @@ const TopNavigation = ({
   history,
   localUsername,
   togglePrefDialog,
+  toggleExportDialog,
   isSubAccsAvailable,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -112,6 +113,12 @@ const TopNavigation = ({
                 text={t('navItems.loginHistory')}
                 onClick={() => switchSection(MENU_LOGINS)}
               />
+              <MenuItem
+                className='account-menu-export'
+                onClick={toggleExportDialog}
+                icon={<Icon.FILE_EXPORT />}
+                text={t('download.export')}
+              />
               {showSubAccounts && (
                 <MenuItem
                   icon={<Icon.USER_CIRCLE />}
@@ -154,6 +161,7 @@ TopNavigation.propTypes = {
   logout: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   togglePrefDialog: PropTypes.func.isRequired,
+  toggleExportDialog: PropTypes.func.isRequired,
   isSubAccsAvailable: PropTypes.bool.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
