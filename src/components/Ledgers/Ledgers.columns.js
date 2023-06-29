@@ -6,6 +6,11 @@ import queryConstants from 'state/query/constants'
 import config from 'config'
 import { getColumnWidth } from 'utils/columns'
 
+const getTooltipContent = value => (
+  `${value}
+Cmd/Ctrl + click to deselect`
+)
+
 export default function getColumns(props) {
   const {
     columnsWidth,
@@ -25,7 +30,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
-          <Cell tooltip={id}>
+          <Cell tooltip={getTooltipContent(id)}>
             {id}
           </Cell>
         )
@@ -90,7 +95,7 @@ export default function getColumns(props) {
         width: getColumnWidth('amountUsd', columnsWidth),
         renderer: (rowIndex) => {
           const { amountUsd } = filteredData[rowIndex]
-          const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
+          const tooltip = getTooltipContent(`${fixedFloat(amountUsd)} ${t('column.usd')}`)
           return (
             <Cell
               className='bitfinex-text-align-right'
