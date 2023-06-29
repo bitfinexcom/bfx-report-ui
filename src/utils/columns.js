@@ -538,6 +538,11 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
+export const getTooltipContent = (value, t) => {
+  if (t) return `${value}\n${t('column.deselectionHint')}`
+  return `${value}`
+}
+
 export default {
   COLUMN_WIDTHS,
   pickColumnsWidth,
@@ -548,4 +553,5 @@ export default {
   singleColumnSelectedCheck,
   columnHasNumericValueCheck,
   formatSumUpValue,
+  getTooltipContent,
 }
