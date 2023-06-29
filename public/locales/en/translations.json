@@ -148,6 +148,7 @@
     "customerInfo": "Customer Info",
     "date": "Date",
     "days": "Days",
+    "deselectionHint": "Cmd/Ctrl + click to deselect",
     "description": "Description",
     "destination": "Destination",
     "duration": "Duration",
