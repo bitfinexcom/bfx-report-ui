@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
+import { getTooltipContent } from 'utils/columns'
 import { fixedFloat, formatAmount } from 'ui/utils'
 
-const getColumns = ({ leoLev, leoAmountAvg }) => {
+const getColumns = ({ leoLev, leoAmountAvg, t }) => {
   const formattedLeoAmountAvg = fixedFloat(leoAmountAvg)
 
   return [
@@ -14,7 +15,7 @@ const getColumns = ({ leoLev, leoAmountAvg }) => {
       name: 'accountsummary.leo_level',
       width: 100,
       renderer: () => (
-        <Cell tooltip={leoLev}>
+        <Cell tooltip={getTooltipContent(leoLev, t)}>
           {leoLev}
         </Cell>
       ),
@@ -25,7 +26,7 @@ const getColumns = ({ leoLev, leoAmountAvg }) => {
       name: 'accountsummary.average_amount',
       width: 120,
       renderer: () => (
-        <Cell tooltip={formattedLeoAmountAvg}>
+        <Cell tooltip={getTooltipContent(formattedLeoAmountAvg, t)}>
           {formatAmount(formattedLeoAmountAvg)}
         </Cell>
       ),
@@ -34,10 +35,10 @@ const getColumns = ({ leoLev, leoAmountAvg }) => {
   ]
 }
 
-const AccountSummaryLeo = ({ data }) => {
+const AccountSummaryLeo = ({ data, t }) => {
   const { leoLev, leoAmountAvg } = data
 
-  const columns = getColumns({ leoLev, leoAmountAvg })
+  const columns = getColumns({ leoLev, leoAmountAvg, t })
 
   return (
     <div className='section-account-summary-data-item'>
@@ -54,6 +55,7 @@ AccountSummaryLeo.propTypes = {
     leoLev: PropTypes.number.isRequired,
     leoAmountAvg: PropTypes.number.isRequired,
   }).isRequired,
+  t: PropTypes.func.isRequired,
 }
 
 export default memo(AccountSummaryLeo)
