@@ -6,10 +6,10 @@ import queryConstants from 'state/query/constants'
 import config from 'config'
 import { getColumnWidth } from 'utils/columns'
 
-const getTooltipContent = value => (
-  `${value}
-Cmd/Ctrl + click to deselect`
-)
+const getTooltipContent = (value, t) => {
+  if (t) return `${value}\n${t('column.deselectionHint')}`
+  return `${value}`
+}
 
 export default function getColumns(props) {
   const {
