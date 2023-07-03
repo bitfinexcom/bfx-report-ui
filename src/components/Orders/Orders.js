@@ -159,7 +159,6 @@ class Orders extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
-          showHeaderTabs
           refresh={refresh}
           title='orders.title'
           pairsSelectorProps={{
