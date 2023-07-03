@@ -387,7 +387,6 @@
     },
     "myHistory": {
       "title": "My History",
-      "ledgersTrading": "Ledgers & Trading",
       "funding": "Funding",
       "fundingTabs": {
         "bidsOffers": "Bids & Offers",
