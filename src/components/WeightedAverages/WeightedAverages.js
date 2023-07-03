@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _size from 'lodash/size'
+import _includes from 'lodash/includes'
 
 import config from 'config'
 import NoData from 'ui/NoData'
@@ -88,7 +89,7 @@ class WeightedAverages extends PureComponent {
 
   togglePair = (pair) => {
     const { targetPairs, updateErrorStatus } = this.props
-    if (targetPairs.length === 1 && targetPairs.includes(pair)) {
+    if (_size(targetPairs) === 1 && _includes(targetPairs, pair)) {
       updateErrorStatus({ id: 'tickers.minlength' })
     } else {
       togglePair(TYPE, this.props, pair)
