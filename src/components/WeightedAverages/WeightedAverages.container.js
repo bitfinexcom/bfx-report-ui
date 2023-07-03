@@ -11,6 +11,7 @@ import {
   clearTargetPairs,
   fetchWeightedAwerages,
 } from 'state/weightedAverages/actions'
+import { updateErrorStatus } from 'state/status/actions'
 import { getInactivePairs, getPairs } from 'state/symbols/selectors'
 import {
   getEntries,
@@ -47,6 +48,7 @@ const mapDispatchToProps = {
   setTargetPairs,
   clearTargetPairs,
   removeTargetPair,
+  updateErrorStatus,
   fetchData: fetchWeightedAwerages,
 }
 
