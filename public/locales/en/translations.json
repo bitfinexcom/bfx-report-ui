@@ -388,13 +388,6 @@
     "myHistory": {
       "title": "My History",
       "ledgersTrading": "Ledgers & Trading",
-      "generalTabs": {
-        "ledgers": "Ledgers",
-        "trades": "Trades",
-        "orders": "Orders",
-        "movements": "Movements",
-        "positions": "Positions"
-      },
       "funding": "Funding",
       "fundingTabs": {
         "bidsOffers": "Bids & Offers",
