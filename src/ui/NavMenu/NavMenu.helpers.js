@@ -5,7 +5,6 @@ import config from 'config'
 import queryType from 'state/query/constants'
 import {
   ANALYSIS_STAT_TARGETS,
-  GENERAL_TARGETS,
   FUNDING_TARGETS,
   EARNINGS_TARGETS,
   WALLETS_TARGETS,
@@ -70,7 +69,6 @@ export const getSections = (menuType, isTurkishSite) => {
       ]
     case MENU_MY_HISTORY:
       return [
-        [MENU_LEDGERS, 'navItems.myHistory.ledgersTrading', false, GENERAL_TARGETS],
         [MENU_LEDGERS, 'ledgers.title'],
         [[MENU_TRADES, MENU_CANDLES], 'trades.title'],
         [[MENU_ORDERS, MENU_ORDER_TRADES], 'orders.title'],
