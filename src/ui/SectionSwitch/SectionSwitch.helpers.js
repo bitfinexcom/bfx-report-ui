@@ -21,13 +21,6 @@ export const ANALYSIS_STAT_TARGETS = [
   queryConstants.MENU_FEES_REPORT,
 ]
 
-export const GENERAL_TARGETS = [
-  queryConstants.MENU_LEDGERS,
-  queryConstants.MENU_TRADES,
-  queryConstants.MENU_ORDERS,
-  queryConstants.MENU_POSITIONS,
-]
-
 export const FUNDING_TARGETS = [
   queryConstants.MENU_FLOAN,
   queryConstants.MENU_FOFFER,
@@ -70,25 +63,6 @@ export const ANALYSIS_STAT_SECTIONS = [
   {
     targetSection: queryConstants.MENU_FEES_REPORT,
     description: 'navItems.myAccount.analysisStatTabs.fees',
-  },
-]
-
-export const GENERAL_SECTIONS = [
-  {
-    targetSection: queryConstants.MENU_LEDGERS,
-    description: 'navItems.myHistory.generalTabs.ledgers',
-  },
-  {
-    targetSection: queryConstants.MENU_TRADES,
-    description: 'navItems.myHistory.generalTabs.trades',
-  },
-  {
-    targetSection: queryConstants.MENU_ORDERS,
-    description: 'navItems.myHistory.generalTabs.orders',
-  },
-  {
-    targetSection: queryConstants.MENU_POSITIONS,
-    description: 'navItems.myHistory.generalTabs.positions',
   },
 ]
 
@@ -159,7 +133,6 @@ export const getSections = (target, hasSubSections) => {
   if (_includes(TRADES_TARGETS, target) && hasSubSections) return TRADES_SECTIONS
   if (_includes(POSITIONS_TARGETS, target) && hasSubSections) return POSITIONS_SECTIONS
   if (_includes(ANALYSIS_STAT_TARGETS, target)) return ANALYSIS_STAT_SECTIONS
-  if (_includes(GENERAL_TARGETS, target)) return GENERAL_SECTIONS
   if (_includes(FUNDING_TARGETS, target)) return FUNDING_SECTIONS
   if (_includes(EARNINGS_TARGETS, target)) return EARNINGS_SECTIONS
   if (_includes(WALLETS_TARGETS, target)) return WALLETS_SECTIONS
