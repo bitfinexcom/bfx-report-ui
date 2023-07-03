@@ -63,6 +63,7 @@ class WeightedAverages extends PureComponent {
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
+    updateErrorStatus: PropTypes.func.isRequired,
     targetPairs: PropTypes.arrayOf(PropTypes.string),
   }
 
@@ -85,7 +86,14 @@ class WeightedAverages extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  togglePair = pair => togglePair(TYPE, this.props, pair)
+  togglePair = (pair) => {
+    const { targetPairs, updateErrorStatus } = this.props
+    if (targetPairs.length === 1 && targetPairs.includes(pair)) {
+      updateErrorStatus({ id: 'tickers.minlength' })
+    } else {
+      togglePair(TYPE, this.props, pair)
+    }
+  }
 
   clearPairs = () => clearAllPairs(TYPE, this.props)
 
