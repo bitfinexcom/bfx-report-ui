@@ -723,10 +723,10 @@
   "weightedaverages": {
     "title": "Weighted Averages",
     "limitNote":{
-      "displayDate": "Displaying transactions for period: ",
-      "note1": "Your request exceeds the limit of 2000 transactions to display.",
+      "title": "Not all transactions could be displayed",
+      "note1": "Your request exceeds the limit of 100k transactions.",
       "link": "Download the Reports App",
-      "note2": " to display more or change your filters."
+      "note2": " to display more or change your date range."
     }
   },
   "withdrawals": {
