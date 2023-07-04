@@ -83,7 +83,6 @@ class WeightedAverages extends PureComponent {
   render() {
     const {
       t,
-      end,
       columns,
       entries,
       refresh,
@@ -130,9 +129,7 @@ class WeightedAverages extends PureComponent {
             <SectionSwitch target={TYPE} />
           )}
           <TimeRange className='section-header-time-range' />
-          {nextPage && (
-            <LimitNote start={nextPage} end={end} />
-          )}
+          {nextPage && <LimitNote />}
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
