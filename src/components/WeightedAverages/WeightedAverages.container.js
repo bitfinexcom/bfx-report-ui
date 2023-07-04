@@ -5,10 +5,7 @@ import { withTranslation } from 'react-i18next'
 
 import {
   refresh,
-  addTargetPair,
-  setTargetPairs,
-  removeTargetPair,
-  clearTargetPairs,
+  setTargetPair,
   fetchWeightedAwerages,
 } from 'state/weightedAverages/actions'
 import { updateErrorStatus } from 'state/status/actions'
@@ -17,7 +14,7 @@ import {
   getEntries,
   getNextPage,
   getPageLoading,
-  getTargetPairs,
+  getTargetPair,
   getDataReceived,
   getExistingPairs,
 } from 'state/weightedAverages/selectors'
@@ -34,7 +31,7 @@ const mapStateToProps = state => ({
   entries: getEntries(state),
   nextPage: getNextPage(state),
   pageLoading: getPageLoading(state),
-  targetPairs: getTargetPairs(state),
+  targetPair: getTargetPair(state),
   dataReceived: getDataReceived(state),
   existingPairs: getExistingPairs(state),
   inactivePairs: getInactivePairs(state),
@@ -44,10 +41,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   refresh,
-  addTargetPair,
-  setTargetPairs,
-  clearTargetPairs,
-  removeTargetPair,
+  setTargetPair,
   updateErrorStatus,
   fetchData: fetchWeightedAwerages,
 }
