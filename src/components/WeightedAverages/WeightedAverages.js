@@ -55,7 +55,6 @@ class WeightedAverages extends PureComponent {
       PropTypes.number,
       PropTypes.bool,
     ]),
-    end: PropTypes.number.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
