@@ -183,6 +183,7 @@ export const checkInit = (props, type) => {
       }
       break
     }
+    case MENU_WEIGHTED_AVERAGES:
     case MENU_PUBLIC_TRADES: {
       if (!dataReceived && !pageLoading) {
         const pair = (match.params && match.params.pair) || ''
@@ -218,7 +219,6 @@ export const checkInit = (props, type) => {
     case MENU_POSITIONS:
     case MENU_TICKERS:
     case MENU_DERIVATIVES:
-    case MENU_WEIGHTED_AVERAGES:
     case MENU_TRADED_VOLUME: {
       if (!dataReceived && !pageLoading) {
         const pairs = (match.params && match.params.pair) || ''
