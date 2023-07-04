@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _size from 'lodash/size'
-import _includes from 'lodash/includes'
 
 import config from 'config'
 import NoData from 'ui/NoData'
@@ -18,13 +17,12 @@ import {
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
-import MultiPairSelector from 'ui/MultiPairSelector'
-import ClearFiltersButton from 'ui/ClearFiltersButton'
+import PairSelector from 'ui/PairSelector'
+
 import {
   checkInit,
   checkFetch,
-  togglePair,
-  clearAllPairs,
+  setPair,
 } from 'state/utils'
 import queryConstants from 'state/query/constants'
 
@@ -53,29 +51,21 @@ class WeightedAverages extends PureComponent {
     entries: PropTypes.arrayOf(PropTypes.shape({
       pair: PropTypes.string,
     })),
-    existingPairs: PropTypes.arrayOf(PropTypes.string),
-    inactivePairs: PropTypes.arrayOf(PropTypes.string),
     nextPage: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.bool,
     ]),
     end: PropTypes.number.isRequired,
-    pairs: PropTypes.arrayOf(PropTypes.string),
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
-    updateErrorStatus: PropTypes.func.isRequired,
-    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    targetPair: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
     columns: {},
     columnsWidth: [],
     entries: [],
-    existingPairs: [],
-    inactivePairs: [],
-    pairs: [],
-    targetPairs: [],
     nextPage: false,
   }
 
@@ -87,32 +77,21 @@ class WeightedAverages extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  togglePair = (pair) => {
-    const { targetPairs, updateErrorStatus } = this.props
-    if (_size(targetPairs) === 1 && _includes(targetPairs, pair)) {
-      updateErrorStatus({ id: 'tickers.minlength' })
-    } else {
-      togglePair(TYPE, this.props, pair)
-    }
-  }
+  onPairSelect = pair => setPair(TYPE, this.props, pair)
 
-  clearPairs = () => clearAllPairs(TYPE, this.props)
 
   render() {
     const {
       t,
       end,
-      pairs,
       columns,
       entries,
       refresh,
       nextPage,
-      targetPairs,
+      targetPair,
       pageLoading,
       columnsWidth,
       dataReceived,
-      existingPairs,
-      inactivePairs,
     } = this.props
 
     const numRows = _size(entries)
@@ -159,15 +138,11 @@ class WeightedAverages extends PureComponent {
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
-              <MultiPairSelector
-                pairs={pairs}
-                currentFilters={targetPairs}
-                togglePair={this.togglePair}
-                existingPairs={existingPairs}
-                inactivePairs={inactivePairs}
+              <PairSelector
+                currentPair={targetPair}
+                onPairSelect={this.onPairSelect}
               />
             </SectionHeaderItem>
-            <ClearFiltersButton onClick={this.clearPairs} />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
