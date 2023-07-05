@@ -8,6 +8,7 @@ import {
   setTargetPair,
   fetchWeightedAwerages,
 } from 'state/weightedAverages/actions'
+import { getFullTime } from 'state/base/selectors'
 import { getInactivePairs, getPairs } from 'state/symbols/selectors'
 import {
   getEntries,
@@ -36,6 +37,7 @@ const mapStateToProps = state => ({
   inactivePairs: getInactivePairs(state),
   columns: getColumns(state, queryConstants.MENU_WEIGHTED_AVERAGES),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_WEIGHTED_AVERAGES),
+  getFullTime: getFullTime(state),
 })
 
 const mapDispatchToProps = {
