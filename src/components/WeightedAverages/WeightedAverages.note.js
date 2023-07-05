@@ -1,17 +1,12 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import Icon from 'icons'
-import { formatDate } from 'state/utils'
-import { getTimezone } from 'state/base/selectors'
 
 const REPORTS_LINK = 'https://reporting.bitfinex.com/'
 
-const LimitNote = ({ start, end }) => {
+const LimitNote = () => {
   const { t } = useTranslation()
-  const timezone = useSelector(getTimezone)
   return (
     <div className='limit-note'>
       <div className='limit-note--icon'>
@@ -19,8 +14,7 @@ const LimitNote = ({ start, end }) => {
       </div>
       <div className='limit-note--text'>
         <p className='limit-note--header'>
-          {t('weightedaverages.limitNote.displayDate')}
-          {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
+          {t('weightedaverages.limitNote.title')}
         </p>
         <div className='limit-note--body'>
           {t('weightedaverages.limitNote.note1')}
@@ -40,9 +34,4 @@ const LimitNote = ({ start, end }) => {
   )
 }
 
-LimitNote.propTypes = {
-  start: PropTypes.number.isRequired,
-  end: PropTypes.number.isRequired,
-}
-
-export default memo(LimitNote)
+export default LimitNote

@@ -4,7 +4,7 @@ export const getDataReceived = state => getWeightedAverages(state)?.dataReceived
 export const getEntries = state => getWeightedAverages(state)?.entries
 export const getExistingPairs = state => getWeightedAverages(state)?.existingPairs
 export const getPageLoading = state => getWeightedAverages(state)?.pageLoading
-export const getTargetPairs = state => getWeightedAverages(state)?.targetPairs
+export const getTargetPair = state => getWeightedAverages(state)?.targetPair
 export const getNextPage = state => getWeightedAverages(state)?.nextPage ?? false
 
 export default {
@@ -14,4 +14,5 @@ export default {
   getNextPage,
   getPageLoading,
   getWeightedAverages,
+  getTargetPair,
 }
