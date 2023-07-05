@@ -47,6 +47,8 @@ export function weightedAveragesReducer(state = initialState, action) {
           sellingAmount,
           cumulativeWeightedPrice,
           cumulativeAmount,
+          firstTradeMts,
+          lastTradeMts,
         } = entry
 
         return {
@@ -57,6 +59,8 @@ export function weightedAveragesReducer(state = initialState, action) {
           sellingAmount,
           cumulativeWeightedPrice,
           cumulativeAmount,
+          firstTradeMts,
+          lastTradeMts,
         }
       })
 
