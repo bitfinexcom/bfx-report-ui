@@ -42,6 +42,8 @@ class WeightedAverages extends PureComponent {
       sellingAmount: PropTypes.bool,
       cumulativeWeightedPrice: PropTypes.bool,
       cumulativeAmount: PropTypes.bool,
+      firstTradeMts: PropTypes.bool,
+      lastTradeMts: PropTypes.bool,
     }),
     columnsWidth: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,
@@ -58,6 +60,7 @@ class WeightedAverages extends PureComponent {
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
+    getFullTime: PropTypes.func.isRequired,
     targetPair: PropTypes.string.isRequired,
   }
 
@@ -87,6 +90,7 @@ class WeightedAverages extends PureComponent {
       refresh,
       nextPage,
       targetPair,
+      getFullTime,
       pageLoading,
       columnsWidth,
       dataReceived,
@@ -95,6 +99,7 @@ class WeightedAverages extends PureComponent {
     const numRows = _size(entries)
     const tableColumns = getColumns({
       columnsWidth,
+      getFullTime,
       filteredData: entries,
     }).filter(({ id }) => columns[id])
 

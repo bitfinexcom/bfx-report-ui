@@ -5,6 +5,7 @@ import { getColumnWidth } from 'utils/columns'
 import { formatAmount, fixedFloat } from 'ui/utils'
 
 export const getColumns = ({
+  getFullTime,
   filteredData,
   columnsWidth,
 }) => [
@@ -135,5 +136,33 @@ export const getColumns = ({
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].cumulativeAmount),
+  },
+  {
+    id: 'firstTradeMts',
+    name: 'column.firstTrade',
+    width: getColumnWidth('firstTradeMts', columnsWidth),
+    renderer: (rowIndex) => {
+      const timestamp = getFullTime(filteredData[rowIndex].firstTradeMts)
+      return (
+        <Cell tooltip={timestamp}>
+          {timestamp}
+        </Cell>
+      )
+    },
+    copyText: rowIndex => getFullTime(filteredData[rowIndex].firstTradeMts),
+  },
+  {
+    id: 'lastTradeMts',
+    name: 'column.lastTrade',
+    width: getColumnWidth('lastTradeMts', columnsWidth),
+    renderer: (rowIndex) => {
+      const timestamp = getFullTime(filteredData[rowIndex].lastTradeMts)
+      return (
+        <Cell tooltip={timestamp}>
+          {timestamp}
+        </Cell>
+      )
+    },
+    copyText: rowIndex => getFullTime(filteredData[rowIndex].lastTradeMts),
   },
 ]

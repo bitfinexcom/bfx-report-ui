@@ -234,6 +234,8 @@ const SECTION_COLUMNS = {
     { id: 'sellingAmount', name: 'sellingAmount', type: NUMBER },
     { id: 'cumulativeWeightedPrice', name: 'cumulativeWeightedPrice', type: NUMBER },
     { id: 'cumulativeAmount', name: 'cumulativeAmount', type: NUMBER },
+    { id: 'firstTradeMts', name: 'firstTrade', type: DATE },
+    { id: 'lastTradeMts', name: 'lastTrade', type: DATE },
   ],
 
   [MENU_LOGINS]: [
