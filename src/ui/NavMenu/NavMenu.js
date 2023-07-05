@@ -67,7 +67,7 @@ const NavMenu = ({
           key={mainType}
           text={t(title)}
           className='menu_sub_item'
-          onClick={(e) => handleItemClick(e, type)}
+          onClick={(e) => handleItemClick(e, mainType)}
           active={_includes(types, target) || isSubsectionActive}
         />
       )

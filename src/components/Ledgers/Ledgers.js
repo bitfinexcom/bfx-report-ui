@@ -15,7 +15,6 @@ import DataTable from 'ui/DataTable'
 import TimeRange from 'ui/TimeRange'
 import Pagination from 'ui/Pagination'
 import ColumnsFilter from 'ui/ColumnsFilter'
-import SectionSwitch from 'ui/SectionSwitch'
 import RefreshButton from 'ui/RefreshButton'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
@@ -146,7 +145,6 @@ class Ledgers extends PureComponent {
       >
         <SectionHeader>
           <SectionHeaderTitle>{t('ledgers.title')}</SectionHeaderTitle>
-          <SectionSwitch target={TYPE} />
           <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
             <SectionHeaderItem>
