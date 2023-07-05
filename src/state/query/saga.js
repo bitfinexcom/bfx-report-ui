@@ -29,7 +29,7 @@ import { getTargetPairs as getOrdersPairs } from 'state/orders/selectors'
 import { getParams as getOrderTradesParams } from 'state/orderTrades/selectors'
 import { getTargetPairs as getTickersPairs } from 'state/tickers/selectors'
 import { getTargetPairs as getTradesPairs } from 'state/trades/selectors'
-import { getTargetPairs as getWeightedAveragesPairs } from 'state/weightedAverages/selectors'
+import { getTargetPair as getWeightedAveragesPair } from 'state/weightedAverages/selectors'
 import { getTargetSymbol as getPublicTradesSymbol } from 'state/publicFunding/selectors'
 import { getTargetPair as getPublicTradesPair } from 'state/publicTrades/selectors'
 import { getTargetPairs as getPositionsPairs } from 'state/positions/selectors'
@@ -182,7 +182,7 @@ function getSelector(target) {
     case MENU_FEES_REPORT:
       return getFeesReportParams
     case MENU_WEIGHTED_AVERAGES:
-      return getWeightedAveragesPairs
+      return getWeightedAveragesPair
     case MENU_WALLETS:
       return getTimestamp
     case MENU_WIN_LOSS:

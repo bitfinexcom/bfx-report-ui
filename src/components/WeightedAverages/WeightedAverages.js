@@ -17,13 +17,12 @@ import {
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
-import MultiPairSelector from 'ui/MultiPairSelector'
-import ClearFiltersButton from 'ui/ClearFiltersButton'
+import PairSelector from 'ui/PairSelector'
+
 import {
   checkInit,
   checkFetch,
-  togglePair,
-  clearAllPairs,
+  setPair,
 } from 'state/utils'
 import queryConstants from 'state/query/constants'
 
@@ -43,6 +42,8 @@ class WeightedAverages extends PureComponent {
       sellingAmount: PropTypes.bool,
       cumulativeWeightedPrice: PropTypes.bool,
       cumulativeAmount: PropTypes.bool,
+      firstTradeMts: PropTypes.bool,
+      lastTradeMts: PropTypes.bool,
     }),
     columnsWidth: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string,
@@ -52,28 +53,21 @@ class WeightedAverages extends PureComponent {
     entries: PropTypes.arrayOf(PropTypes.shape({
       pair: PropTypes.string,
     })),
-    existingPairs: PropTypes.arrayOf(PropTypes.string),
-    inactivePairs: PropTypes.arrayOf(PropTypes.string),
     nextPage: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.bool,
     ]),
-    end: PropTypes.number.isRequired,
-    pairs: PropTypes.arrayOf(PropTypes.string),
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
-    targetPairs: PropTypes.arrayOf(PropTypes.string),
+    getFullTime: PropTypes.func.isRequired,
+    targetPair: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
     columns: {},
     columnsWidth: [],
     entries: [],
-    existingPairs: [],
-    inactivePairs: [],
-    pairs: [],
-    targetPairs: [],
     nextPage: false,
   }
 
@@ -85,30 +79,27 @@ class WeightedAverages extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  togglePair = pair => togglePair(TYPE, this.props, pair)
+  onPairSelect = pair => setPair(TYPE, this.props, pair)
 
-  clearPairs = () => clearAllPairs(TYPE, this.props)
 
   render() {
     const {
       t,
-      end,
-      pairs,
       columns,
       entries,
       refresh,
       nextPage,
-      targetPairs,
+      targetPair,
+      getFullTime,
       pageLoading,
       columnsWidth,
       dataReceived,
-      existingPairs,
-      inactivePairs,
     } = this.props
 
     const numRows = _size(entries)
     const tableColumns = getColumns({
       columnsWidth,
+      getFullTime,
       filteredData: entries,
     }).filter(({ id }) => columns[id])
 
@@ -142,23 +133,17 @@ class WeightedAverages extends PureComponent {
             <SectionSwitch target={TYPE} />
           )}
           <TimeRange className='section-header-time-range' />
-          {nextPage && (
-            <LimitNote start={nextPage} end={end} />
-          )}
+          {nextPage && <LimitNote />}
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
-              <MultiPairSelector
-                pairs={pairs}
-                currentFilters={targetPairs}
-                togglePair={this.togglePair}
-                existingPairs={existingPairs}
-                inactivePairs={inactivePairs}
+              <PairSelector
+                currentPair={targetPair}
+                onPairSelect={this.onPairSelect}
               />
             </SectionHeaderItem>
-            <ClearFiltersButton onClick={this.clearPairs} />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>

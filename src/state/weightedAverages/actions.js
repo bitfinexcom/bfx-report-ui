@@ -28,40 +28,17 @@ export function updateWeightedAwerages(data) {
   }
 }
 
-export function setTargetPairs(pairs) {
+export function setTargetPair(pair) {
   return {
-    type: types.SET_PAIRS,
-    payload: pairs,
-  }
-}
-
-export function addTargetPair(pair) {
-  return {
-    type: types.ADD_PAIR,
+    type: types.SET_PAIR,
     payload: pair,
-  }
-}
-
-export function removeTargetPair(pair) {
-  return {
-    type: types.REMOVE_PAIR,
-    payload: pair,
-  }
-}
-
-export function clearTargetPairs() {
-  return {
-    type: types.CLEAR_PAIRS,
   }
 }
 
 export default {
   fetchWeightedAwerages,
-  clearTargetPairs,
   fetchFail,
   refresh,
   updateWeightedAwerages,
-  setTargetPairs,
-  addTargetPair,
-  removeTargetPair,
+  setTargetPair,
 }

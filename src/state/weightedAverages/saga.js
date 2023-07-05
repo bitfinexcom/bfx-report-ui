@@ -4,7 +4,6 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
-import _isEmpty from 'lodash/isEmpty'
 
 import { makeFetchCall } from 'state/utils'
 import { getTimeFrame } from 'state/timeRange/selectors'
@@ -13,12 +12,13 @@ import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
 
 import types from './constants'
 import actions from './actions'
-import { getTargetPairs } from './selectors'
+import { getTargetPair } from './selectors'
 
-function getWeightedAverages({ targetPairs, start, end }) {
-  const params = { start, end }
-  if (!_isEmpty(targetPairs)) {
-    params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
+function getWeightedAverages({ targetPair, start, end }) {
+  const params = {
+    start,
+    end,
+    symbol: formatRawSymbols(mapRequestPairs(targetPair, true)),
   }
 
   return makeFetchCall('getWeightedAveragesReport', params)
@@ -26,12 +26,12 @@ function getWeightedAverages({ targetPairs, start, end }) {
 
 function* fetchWeightedAverages() {
   try {
-    const targetPairs = yield select(getTargetPairs)
+    const targetPair = yield select(getTargetPair)
     const { start, end } = yield select(getTimeFrame)
     const { result, error } = yield call(getWeightedAverages, {
       end,
       start,
-      targetPairs,
+      targetPair,
     })
 
     yield put(actions.updateWeightedAwerages(result))

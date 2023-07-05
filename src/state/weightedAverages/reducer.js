@@ -6,14 +6,9 @@ import authTypes from 'state/auth/constants'
 import queryTypes from 'state/query/constants'
 import timeRangeTypes from 'state/timeRange/constants'
 import {
-  addPair,
   basePairState,
-  clearPairs,
   fetch,
   fetchFail,
-  removePair,
-  refresh,
-  setPairs,
   setTimeRange,
 } from 'state/reducers.helper'
 import { formatPair, mapPair } from 'state/symbols/utils'
@@ -22,6 +17,7 @@ import types from './constants'
 
 const initialState = {
   ...basePairState,
+  targetPair: mapPair('BTC:USD'),
 }
 
 const TYPE = queryTypes.MENU_WEIGHTED_AVERAGES
@@ -51,6 +47,8 @@ export function weightedAveragesReducer(state = initialState, action) {
           sellingAmount,
           cumulativeWeightedPrice,
           cumulativeAmount,
+          firstTradeMts,
+          lastTradeMts,
         } = entry
 
         return {
@@ -61,6 +59,8 @@ export function weightedAveragesReducer(state = initialState, action) {
           sellingAmount,
           cumulativeWeightedPrice,
           cumulativeAmount,
+          firstTradeMts,
+          lastTradeMts,
         }
       })
 
@@ -74,18 +74,18 @@ export function weightedAveragesReducer(state = initialState, action) {
     }
     case types.FETCH_FAIL:
       return fetchFail(state)
-    case types.ADD_PAIR:
-      return addPair(state, payload, initialState)
-    case types.REMOVE_PAIR:
-      return removePair(state, payload, initialState)
-    case types.SET_PAIRS:
-      return setPairs(state, payload, initialState)
-    case types.CLEAR_PAIRS:
-      return clearPairs(state, initialState)
+    case types.SET_PAIR:
+      return {
+        ...initialState,
+        targetPair: payload,
+      }
     case timeRangeTypes.SET_TIME_RANGE:
       return setTimeRange(TYPE, state, initialState)
     case types.REFRESH:
-      return refresh(TYPE, state, initialState)
+      return {
+        ...initialState,
+        targetPair: state.targetPair,
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {
