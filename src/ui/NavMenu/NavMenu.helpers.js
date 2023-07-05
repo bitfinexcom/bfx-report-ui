@@ -8,6 +8,7 @@ import {
   GENERAL_TARGETS,
   FUNDING_TARGETS,
   EARNINGS_TARGETS,
+  WALLETS_TARGETS,
 } from 'ui/SectionSwitch/SectionSwitch.helpers'
 
 import constants from './NavMenu.constants'
@@ -65,7 +66,7 @@ export const getSections = (menuType, isTurkishSite) => {
         [MENU_LEDGERS, 'navItems.myHistory.ledgersTrading', false, GENERAL_TARGETS],
         [MENU_FOFFER, 'navItems.myHistory.funding', isTurkishSite, FUNDING_TARGETS],
         [MENU_FPAYMENT, 'navItems.myHistory.earnings', isTurkishSite, EARNINGS_TARGETS],
-        [MENU_WALLETS, 'wallets.title'],
+        [MENU_WALLETS, 'wallets.title', false, WALLETS_TARGETS],
       ]
     case MENU_MERCHANT_HISTORY:
       return [

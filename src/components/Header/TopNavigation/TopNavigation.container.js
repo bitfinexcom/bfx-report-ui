@@ -8,7 +8,7 @@ import {
   getIsSubAccsAvailable,
 } from 'state/auth/selectors'
 import { getWindowWidth } from 'state/ui/selectors'
-import { togglePreferencesDialog } from 'state/ui/actions'
+import { toggleExportDialog, togglePreferencesDialog } from 'state/ui/actions'
 import { logout } from 'state/auth/actions'
 
 import TopNavigation from './TopNavigation'
@@ -22,6 +22,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   logout,
+  toggleExportDialog,
   togglePrefDialog: togglePreferencesDialog,
 }
 
