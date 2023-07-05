@@ -724,7 +724,7 @@
     "title": "Weighted Averages",
     "limitNote":{
       "title": "Not all transactions could be displayed",
-      "note1": "Your request exceeds the limit of 100k transactions.",
+      "note1": "Your request exceeds the limit of 50k transactions.",
       "link": "Download the Reports App",
       "note2": " to display more or change your date range."
     }
