@@ -100,25 +100,6 @@ export const getColumns = ({
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].sellingAmount),
   },
   {
-    id: 'cumulativeWeightedPrice',
-    name: 'column.cumulativeWeightedPrice',
-    width: getColumnWidth('cumulativeWeightedPrice', columnsWidth),
-    renderer: (rowIndex) => {
-      const { cumulativeWeightedPrice } = filteredData[rowIndex]
-      const fixedPrice = fixedFloat(cumulativeWeightedPrice)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={fixedPrice}
-        >
-          {fixedPrice}
-        </Cell>
-      )
-    },
-    isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].cumulativeWeightedPrice),
-  },
-  {
     id: 'cumulativeAmount',
     name: 'column.cumulativeAmount',
     width: getColumnWidth('cumulativeAmount', columnsWidth),
