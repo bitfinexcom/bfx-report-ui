@@ -40,7 +40,6 @@ class WeightedAverages extends PureComponent {
       buyingAmount: PropTypes.bool,
       sellingWeightedPrice: PropTypes.bool,
       sellingAmount: PropTypes.bool,
-      cumulativeWeightedPrice: PropTypes.bool,
       cumulativeAmount: PropTypes.bool,
       firstTradeMts: PropTypes.bool,
       lastTradeMts: PropTypes.bool,
