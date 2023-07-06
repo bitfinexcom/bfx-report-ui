@@ -3,7 +3,7 @@ import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 import { demapPairs, demapSymbols } from 'state/symbols/utils'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 const getFeePercent = (entry) => {
   const {
@@ -48,7 +48,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
-          <Cell tooltip={id}>
+          <Cell tooltip={getTooltipContent(id, t)}>
             {id}
           </Cell>
         )
@@ -63,7 +63,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { orderID } = filteredData[rowIndex]
         return (
-          <Cell tooltip={orderID}>
+          <Cell tooltip={getTooltipContent(orderID, t)}>
             {orderID}
           </Cell>
         )
@@ -78,7 +78,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
-          <Cell tooltip={pair}>
+          <Cell tooltip={getTooltipContent(pair, t)}>
             {pair}
           </Cell>
         )
@@ -94,7 +94,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(execAmount)}
+            tooltip={fixedFloat(getTooltipContent(execAmount, t))}
           >
             {formatAmount(execAmount)}
           </Cell>
@@ -113,7 +113,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedPrice}
+            tooltip={getTooltipContent(fixedPrice, t)}
           >
             {fixedPrice}
           </Cell>
@@ -129,7 +129,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { fee, feeCurrency } = filteredData[rowIndex]
         const fixedFee = fixedFloat(fee)
-        const tooltip = `${fixedFee} ${feeCurrency}`
+        const tooltip = getTooltipContent(`${fixedFee} ${feeCurrency}`, t)
         return (
           <Cell
             className='bitfinex-text-align-right'
@@ -157,7 +157,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={feePercent}
+            tooltip={getTooltipContent(feePercent, t)}
           >
             {feePercent}
           </Cell>
@@ -173,7 +173,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
         return (
-          <Cell tooltip={timestamp}>
+          <Cell tooltip={getTooltipContent(timestamp, t)}>
             {timestamp}
           </Cell>
         )
