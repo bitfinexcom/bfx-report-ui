@@ -57,6 +57,7 @@ class Result extends PureComponent {
   }
 
   getBalances = ({ balances, title }) => {
+    const { t } = this.props
     if (this.isBalancesEmpty(balances)) {
       return null
     }
@@ -68,6 +69,7 @@ class Result extends PureComponent {
     } = balances
 
     const balancesColumns = getBalancesColumns({
+      t,
       totalResult,
       positionsTotalPlUsd,
       walletsTotalBalanceUsd,
