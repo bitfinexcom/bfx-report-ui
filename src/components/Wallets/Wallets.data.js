@@ -22,10 +22,10 @@ const WalletsData = (props) => {
   const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
   const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
   const contributionData = entries.filter(entry => entry.type === WALLET_CONTRIBUTION)
-  const exchangeColumns = getColumns({ filteredData: exchangeData })
-  const marginColumns = getColumns({ filteredData: marginData })
-  const fundingColumns = getColumns({ filteredData: fundingData })
-  const contributionColumns = getColumns({ filteredData: contributionData })
+  const exchangeColumns = getColumns({ filteredData: exchangeData, t })
+  const marginColumns = getColumns({ filteredData: marginData, t })
+  const fundingColumns = getColumns({ filteredData: fundingData, t })
+  const contributionColumns = getColumns({ filteredData: contributionData, t })
 
   return (
     <div className='tables-row no-table-scroll'>
