@@ -2,6 +2,7 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { fixedFloat } from 'ui/utils'
+import { getTooltipContent } from 'utils/columns'
 
 export default function getColumns(props) {
   const { filteredData, t } = props
@@ -15,7 +16,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { currency } = filteredData[rowIndex]
         return (
-          <Cell tooltip={currency}>
+          <Cell tooltip={getTooltipContent(currency, t)}>
             {currency}
           </Cell>
         )
@@ -32,7 +33,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedBalance}
+            tooltip={getTooltipContent(fixedBalance, t)}
           >
             {fixedBalance}
           </Cell>
@@ -50,7 +51,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedBalanceUsd}
+            tooltip={getTooltipContent(fixedBalanceUsd, t)}
           >
             {fixedBalanceUsd}
           </Cell>
