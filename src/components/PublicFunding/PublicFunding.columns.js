@@ -2,7 +2,7 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { fixedFloat, formatAmount } from 'ui/utils'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -23,7 +23,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
-          <Cell tooltip={id}>
+          <Cell tooltip={getTooltipContent(id, t)}>
             {id}
           </Cell>
         )
@@ -38,7 +38,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
-          <Cell tooltip={timestamp}>
+          <Cell tooltip={getTooltipContent(timestamp, t)}>
             {timestamp}
           </Cell>
         )
@@ -55,7 +55,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedAmount}
+            tooltip={getTooltipContent(fixedAmount, t)}
           >
             {formatAmount(amount)}
           </Cell>
@@ -73,7 +73,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(rate)}
+            tooltip={getTooltipContent(fixedFloat(rate), t)}
           >
             {formatAmount(rate, { color: 'red' })}
           </Cell>
@@ -92,7 +92,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={period}
+            tooltip={getTooltipContent(period, t)}
           >
             {period}
           </Cell>
@@ -109,7 +109,7 @@ export default function getColumns(props) {
       className: 'align-left',
       width: getColumnWidth('currency', columnsWidth),
       renderer: () => (
-        <Cell tooltip={targetSymbol}>
+        <Cell tooltip={getTooltipContent(targetSymbol, t)}>
           {targetSymbol}
         </Cell>
       ),
