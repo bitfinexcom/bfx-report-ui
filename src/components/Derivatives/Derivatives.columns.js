@@ -2,7 +2,7 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -19,7 +19,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const { pair } = filteredData[rowIndex]
       return (
-        <Cell tooltip={pair}>
+        <Cell tooltip={getTooltipContent(pair, t)}>
           {pair}
         </Cell>
       )
@@ -36,7 +36,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedPrice}
+          tooltip={getTooltipContent(fixedPrice, t)}
         >
           {fixedPrice}
         </Cell>
@@ -55,7 +55,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedPrice}
+          tooltip={getTooltipContent(fixedPrice, t)}
         >
           {fixedPrice}
         </Cell>
@@ -74,7 +74,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedBalance}
+          tooltip={getTooltipContent(fixedBalance, t)}
         >
           {fixedBalance}
         </Cell>
@@ -93,7 +93,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedFunding}
+          tooltip={getTooltipContent(fixedFunding, t)}
         >
           {formatAmount(fundingAccrued)}
         </Cell>
@@ -111,7 +111,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fundingStep}
+          tooltip={getTooltipContent(fundingStep, t)}
         >
           {fundingStep}
         </Cell>
@@ -127,7 +127,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const timestamp = getFullTime(filteredData[rowIndex].timestamp)
       return (
-        <Cell tooltip={timestamp}>
+        <Cell tooltip={getTooltipContent(timestamp, t)}>
           {timestamp}
         </Cell>
       )
@@ -143,7 +143,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={clampMin}
+          tooltip={getTooltipContent(clampMin, t)}
         >
           {clampMin}
         </Cell>
@@ -160,7 +160,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={clampMax}
+          tooltip={getTooltipContent(clampMax, t)}
         >
           {clampMax}
         </Cell>
