@@ -2,7 +2,7 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { fixedFloat } from 'ui/utils'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -22,7 +22,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
-          <Cell tooltip={pair}>
+          <Cell tooltip={getTooltipContent(pair, t)}>
             {pair}
           </Cell>
         )
@@ -39,7 +39,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedBid}
+            tooltip={getTooltipContent(fixedBid, t)}
           >
             {fixedBid}
           </Cell>
@@ -58,7 +58,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedAsk}
+            tooltip={getTooltipContent(fixedAsk, t)}
           >
             {fixedAsk}
           </Cell>
@@ -75,7 +75,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={timestamp}>
+          <Cell tooltip={getTooltipContent(timestamp, t)}>
             {timestamp}
           </Cell>
         )
