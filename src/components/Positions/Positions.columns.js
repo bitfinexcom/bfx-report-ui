@@ -6,7 +6,7 @@ import { Cell } from '@blueprintjs/table'
 import queryConstants from 'state/query/constants'
 import JSONFormat from 'ui/JSONFormat'
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 const { MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT } = queryConstants
 
@@ -45,7 +45,7 @@ export default function getColumns(props) {
           return (
             <Cell
               className='bitfinex-text-align-right'
-              tooltip={fixedPrice}
+              tooltip={getTooltipContent(fixedPrice, t)}
             >
               {fixedPrice}
             </Cell>
@@ -63,7 +63,7 @@ export default function getColumns(props) {
           return (
             <Cell
               className='bitfinex-text-align-right'
-              tooltip={fixedFloat(pl)}
+              tooltip={getTooltipContent(fixedFloat(pl), t)}
             >
               {formatAmount(pl)}
             </Cell>
@@ -81,7 +81,7 @@ export default function getColumns(props) {
           return (
             <Cell
               className='bitfinex-text-align-right'
-              tooltip={fixedFloat(plPerc)}
+              tooltip={getTooltipContent(fixedFloat(plPerc), t)}
             >
               {formatAmount(plPerc)}
             </Cell>
@@ -105,7 +105,7 @@ export default function getColumns(props) {
           return (
             <Cell
               className='bitfinex-text-align-right'
-              tooltip={fixedCollateral}
+              tooltip={getTooltipContent(fixedCollateral, t)}
             >
               {fixedCollateral}
             </Cell>
@@ -146,7 +146,7 @@ export default function getColumns(props) {
         const { id } = filteredData[rowIndex]
         /* eslint-disable jsx-a11y/anchor-is-valid */
         return (
-          <Cell tooltip={id}>
+          <Cell tooltip={getTooltipContent(id, t)}>
             <>
               <a href='#' onClick={onIdClick} value={id}>{id}</a>
             </>
@@ -164,7 +164,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
-          <Cell tooltip={pair}>
+          <Cell tooltip={getTooltipContent(pair, t)}>
             {pair}
           </Cell>
         )
@@ -180,7 +180,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(amount)}
+            tooltip={getTooltipContent(fixedFloat(amount), t)}
           >
             {formatAmount(amount)}
           </Cell>
@@ -199,7 +199,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedPrice}
+            tooltip={getTooltipContent(fixedPrice, t)}
           >
             {fixedPrice}
           </Cell>
@@ -219,7 +219,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedSwap}
+            tooltip={getTooltipContent(fixedSwap, t)}
           >
             {fixedSwap}
           </Cell>
@@ -236,7 +236,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex])
         return (
-          <Cell tooltip={swapType}>
+          <Cell tooltip={getTooltipContent(swapType, t)}>
             {swapType}
           </Cell>
         )
@@ -251,7 +251,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
-          <Cell tooltip={status}>
+          <Cell tooltip={getTooltipContent(status, t)}>
             {status}
           </Cell>
         )
@@ -266,7 +266,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={timestamp}>
+          <Cell tooltip={getTooltipContent(timestamp, t)}>
             {timestamp}
           </Cell>
         )
