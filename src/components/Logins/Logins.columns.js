@@ -2,7 +2,7 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -19,7 +19,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
       return (
-        <Cell tooltip={id}>
+        <Cell tooltip={getTooltipContent(id, t)}>
           {id}
         </Cell>
       )
@@ -34,7 +34,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const timestamp = getFullTime(filteredData[rowIndex].time)
       return (
-        <Cell tooltip={timestamp}>
+        <Cell tooltip={getTooltipContent(timestamp, t)}>
           {timestamp}
         </Cell>
       )
@@ -49,7 +49,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const { ip } = filteredData[rowIndex]
       return (
-        <Cell tooltip={ip}>
+        <Cell tooltip={getTooltipContent(ip, t)}>
           {ip}
         </Cell>
       )
@@ -64,7 +64,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const { browser } = filteredData[rowIndex]
       return (
-        <Cell tooltip={browser}>
+        <Cell tooltip={getTooltipContent(browser, t)}>
           {browser}
         </Cell>
       )
@@ -79,7 +79,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const { version } = filteredData[rowIndex]
       return (
-        <Cell tooltip={version}>
+        <Cell tooltip={getTooltipContent(version, t)}>
           {version}
         </Cell>
       )
@@ -94,7 +94,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const { mobile } = filteredData[rowIndex]
       return (
-        <Cell tooltip={mobile}>
+        <Cell tooltip={getTooltipContent(mobile, t)}>
           {mobile}
         </Cell>
       )
