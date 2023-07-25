@@ -232,6 +232,8 @@ const SECTION_COLUMNS = {
     { id: 'buyingAmount', name: 'buyingAmount', type: NUMBER },
     { id: 'sellingWeightedPrice', name: 'sellingWeightedPrice', type: NUMBER },
     { id: 'sellingAmount', name: 'sellingAmount', type: NUMBER },
+    { id: 'cost', name: 'cost', type: NUMBER },
+    { id: 'sale', name: 'sale', type: NUMBER },
     { id: 'cumulativeAmount', name: 'cumulativeAmount', type: NUMBER },
     { id: 'firstTradeMts', name: 'firstTrade', type: DATE },
     { id: 'lastTradeMts', name: 'lastTrade', type: DATE },
