@@ -104,8 +104,7 @@ export const getColumns = ({
     name: 'column.cost',
     width: getColumnWidth('cost', columnsWidth),
     renderer: (rowIndex) => {
-      const { buyingWeightedPrice, buyingAmount } = filteredData[rowIndex]
-      const cost = buyingWeightedPrice * buyingAmount
+      const { cost } = filteredData[rowIndex]
       const tooltip = fixedFloat(cost)
       return (
         <Cell
@@ -124,8 +123,7 @@ export const getColumns = ({
     name: 'column.sale',
     width: getColumnWidth('sale', columnsWidth),
     renderer: (rowIndex) => {
-      const { sellingWeightedPrice, sellingAmount } = filteredData[rowIndex]
-      const sale = sellingWeightedPrice * sellingAmount
+      const { sale } = filteredData[rowIndex]
       const tooltip = fixedFloat(sale)
       return (
         <Cell
