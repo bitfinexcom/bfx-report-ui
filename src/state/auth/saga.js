@@ -121,7 +121,7 @@ function* signUp({ payload }) {
       }
       yield put(actions.addUser(newUser))
       yield put(actions.showOtpLogin(false))
-      yield put(actions.fetchUsers())
+      if (showFrameworkMode) yield put(actions.fetchUsers())
       return
     }
 
