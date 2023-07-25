@@ -62,6 +62,25 @@ export const getColumns = ({
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].buyingAmount),
   },
   {
+    id: 'sale',
+    name: 'column.sale',
+    width: getColumnWidth('sale', columnsWidth),
+    renderer: (rowIndex) => {
+      const { sale } = filteredData[rowIndex]
+      const tooltip = fixedFloat(sale)
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={tooltip}
+        >
+          {formatAmount(sale)}
+        </Cell>
+      )
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].sale),
+  },
+  {
     id: 'sellingWeightedPrice',
     name: 'column.sellingWeightedPrice',
     width: getColumnWidth('sellingWeightedPrice', columnsWidth),
@@ -117,25 +136,6 @@ export const getColumns = ({
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].cost),
-  },
-  {
-    id: 'sale',
-    name: 'column.sale',
-    width: getColumnWidth('sale', columnsWidth),
-    renderer: (rowIndex) => {
-      const { sale } = filteredData[rowIndex]
-      const tooltip = fixedFloat(sale)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          {formatAmount(sale)}
-        </Cell>
-      )
-    },
-    isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].sale),
   },
   {
     id: 'cumulativeAmount',
