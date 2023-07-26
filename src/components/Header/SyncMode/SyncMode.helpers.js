@@ -3,7 +3,7 @@ import { Spinner } from '@blueprintjs/core'
 import _isNull from 'lodash/isNull'
 
 import Icon from 'icons'
-import { getFormattedTime } from 'utils/dates'
+import { getFormattedTime, getFormattedDuration } from 'utils/dates'
 
 const getEstimatedSyncTime = ({
   leftTime = null,
@@ -16,11 +16,11 @@ const getEstimatedSyncTime = ({
 
   const spent = _isNull(spentTime)
     ? t('sync.estimated_time.estimating')
-    : getFormattedTime(spentTime, 'mm:ss')
+    : getFormattedDuration(spentTime)
 
   const left = _isNull(leftTime)
     ? t('sync.estimated_time.estimating')
-    : getFormattedTime(leftTime, 'mm:ss')
+    : getFormattedDuration(leftTime)
 
   return {
     start,
