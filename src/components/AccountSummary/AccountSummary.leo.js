@@ -42,6 +42,7 @@ const AccountSummaryLeo = ({ data, t }) => {
 
   return (
     <div className='section-account-summary-data-item'>
+      <div className='data-item--divider' />
       <DataTable
         numRows={1}
         tableColumns={columns}
