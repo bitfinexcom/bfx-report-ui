@@ -99,6 +99,7 @@ class WeightedAverages extends PureComponent {
 
     const numRows = _size(entries)
     const tableColumns = getColumns({
+      t,
       columnsWidth,
       getFullTime,
       filteredData: entries,
