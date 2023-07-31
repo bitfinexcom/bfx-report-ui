@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _size from 'lodash/size'
 
-import config from 'config'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
