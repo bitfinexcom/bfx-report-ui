@@ -33,7 +33,6 @@ export function symbolsReducer(state = initialState, action) {
         inactiveSymbols = [],
         mapSymbols = [],
         pairs = [],
-        marginCurrencyList = [],
       } = payload
 
       const coins = []
