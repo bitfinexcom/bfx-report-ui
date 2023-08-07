@@ -20,7 +20,7 @@ const initialState = {
   inactivePairs: [],
   isFetched: false,
   pairs: [], // pair
-  marginCurrencyList: [],
+  fundingCoins: [],
 }
 
 export function symbolsReducer(state = initialState, action) {
