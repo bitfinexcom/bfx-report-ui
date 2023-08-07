@@ -46,7 +46,7 @@ export function symbolsReducer(state = initialState, action) {
 
       currencies.forEach((currency) => {
         const {
-          id, explorer, name, isInPair, isFunding
+          id, explorer, name, isInPair, isFunding,
         } = currency
         if (!isInPair) return
 
@@ -58,13 +58,9 @@ export function symbolsReducer(state = initialState, action) {
           }
           if (id.includes('F0')) {
             symbol = `${symbol} (deriv)`
-          // }
-          // if (symbol === 'USDt') {
-          //   symbolMapping.UST = symbol
-          } else {
-            symbolMapping[id] = symbol
           }
 
+          symbolMapping[id] = symbol
           explorersDict[symbol] = explorer
           dict[symbol] = name
           coins.push(symbol)
@@ -123,7 +119,7 @@ export function symbolsReducer(state = initialState, action) {
         inactivePairs: formattedInactivePairs,
         isFetched: true,
         pairs: preparedPairs,
-        fundingCoins: marginCurrencyList,
+        fundingCoins,
       }
     }
     case authTypes.LOGOUT:
