@@ -37,15 +37,19 @@ export function symbolsReducer(state = initialState, action) {
       } = payload
 
       const coins = []
+      const fundingCoins = []
       const dict = {}
       const explorersDict = {}
       const symbolMapping = {}
 
+      console.log('+++currencies', currencies)
+
       currencies.forEach((currency) => {
         const {
-          id, explorer, name, isInPair,
+          id, explorer, name, isInPair, isFunding
         } = currency
         if (!isInPair) return
+
         let { symbol } = currency
 
         if (symbol && id !== symbol) {
@@ -54,9 +58,9 @@ export function symbolsReducer(state = initialState, action) {
           }
           if (id.includes('F0')) {
             symbol = `${symbol} (deriv)`
-          }
-          if (symbol === 'USDt') {
-            symbolMapping.UST = symbol
+          // }
+          // if (symbol === 'USDt') {
+          //   symbolMapping.UST = symbol
           } else {
             symbolMapping[id] = symbol
           }
@@ -64,15 +68,23 @@ export function symbolsReducer(state = initialState, action) {
           explorersDict[symbol] = explorer
           dict[symbol] = name
           coins.push(symbol)
+          if (isFunding) fundingCoins.push(symbol)
           return
         }
 
         explorersDict[id] = explorer
         dict[id] = name
         coins.push(id)
+        if (isFunding) fundingCoins.push(id)
       })
 
+      // console.log('+++symbolMapping', symbolMapping)
+      // console.log('+++fundingCoins', fundingCoins)
+
       const preparedCoins = [...new Set(coins)].sort()
+
+      console.log('+++coins', coins)
+      console.log('+++preparedCoins', preparedCoins)
 
       const preparedMapSymbols = _map(mapSymbols, item => {
         const [itemId, itemName] = item
