@@ -41,8 +41,6 @@ export function symbolsReducer(state = initialState, action) {
       const explorersDict = {}
       const symbolMapping = {}
 
-      console.log('+++currencies', currencies)
-
       currencies.forEach((currency) => {
         const {
           id, explorer, name, isInPair, isFunding,
@@ -73,13 +71,7 @@ export function symbolsReducer(state = initialState, action) {
         if (isFunding) fundingCoins.push(id)
       })
 
-      // console.log('+++symbolMapping', symbolMapping)
-      // console.log('+++fundingCoins', fundingCoins)
-
       const preparedCoins = [...new Set(coins)].sort()
-
-      console.log('+++coins', coins)
-      console.log('+++preparedCoins', preparedCoins)
 
       const preparedMapSymbols = _map(mapSymbols, item => {
         const [itemId, itemName] = item
@@ -99,7 +91,6 @@ export function symbolsReducer(state = initialState, action) {
       const formattedInactiveCurrencies = inactiveCurrencies.map(mapSymbol).sort()
       const formattedPairs = pairs.map(formatPair).map(mapPair).sort()
       const formattedInactivePairs = inactiveSymbols.map(formatPair).map(mapPair).sort()
-
 
       const preparedPairs = _map(formattedPairs, pair => {
         const [firstSymbol, secondSymbol] = _split(pair, ':')
