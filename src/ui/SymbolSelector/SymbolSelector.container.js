@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 
-import { getCoins, getCurrencies, getInactiveCurrencies } from 'state/symbols/selectors'
+import { getFundingCoins, getCurrencies, getInactiveCurrencies } from 'state/symbols/selectors'
 
 import SymbolSelector from './SymbolSelector'
 
 const mapStateToProps = state => ({
-  coins: getCoins(state),
+  coins: getFundingCoins(state),
   currencies: getCurrencies(state),
   inactiveCurrencies: getInactiveCurrencies(state),
 })
