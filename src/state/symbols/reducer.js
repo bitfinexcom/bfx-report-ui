@@ -20,6 +20,7 @@ const initialState = {
   inactivePairs: [],
   isFetched: false,
   pairs: [], // pair
+  marginCurrencyList: [],
 }
 
 export function symbolsReducer(state = initialState, action) {
@@ -32,6 +33,7 @@ export function symbolsReducer(state = initialState, action) {
         inactiveSymbols = [],
         mapSymbols = [],
         pairs = [],
+        marginCurrencyList = [],
       } = payload
 
       const coins = []
@@ -106,6 +108,7 @@ export function symbolsReducer(state = initialState, action) {
         inactivePairs: formattedInactivePairs,
         isFetched: true,
         pairs: preparedPairs,
+        fundingCoins: marginCurrencyList,
       }
     }
     case authTypes.LOGOUT:
