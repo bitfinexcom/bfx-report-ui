@@ -42,7 +42,10 @@ export function symbolsReducer(state = initialState, action) {
       const symbolMapping = {}
 
       currencies.forEach((currency) => {
-        const { id, explorer, name } = currency
+        const {
+          id, explorer, name, isInPair,
+        } = currency
+        if (!isInPair) return
         let { symbol } = currency
 
         if (symbol && id !== symbol) {
