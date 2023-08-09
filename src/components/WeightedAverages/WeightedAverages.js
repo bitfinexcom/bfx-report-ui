@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _size from 'lodash/size'
 
+import config from 'config'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
@@ -27,6 +28,7 @@ import queryConstants from 'state/query/constants'
 import LimitNote from './WeightedAverages.note'
 import { getColumns } from './WeightedAverages.columns'
 
+const { showFrameworkMode } = config
 const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
 
 class WeightedAverages extends PureComponent {
@@ -79,7 +81,6 @@ class WeightedAverages extends PureComponent {
 
   onPairSelect = pair => setPair(TYPE, this.props, pair)
 
-
   render() {
     const {
       t,
@@ -128,7 +129,9 @@ class WeightedAverages extends PureComponent {
           <SectionHeaderTitle>
             {t('weightedaverages.title')}
           </SectionHeaderTitle>
-          <SectionSwitch target={TYPE} />
+          {showFrameworkMode && (
+            <SectionSwitch target={TYPE} />
+          )}
           {nextPage && <LimitNote />}
           <SectionHeaderRow>
             <SectionHeaderItem>
