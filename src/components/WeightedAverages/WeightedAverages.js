@@ -16,7 +16,7 @@ import {
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import PairSelector from 'ui/PairSelector'
-
+import SectionSwitch from 'ui/SectionSwitch'
 import {
   checkInit,
   checkFetch,
@@ -128,6 +128,7 @@ class WeightedAverages extends PureComponent {
           <SectionHeaderTitle>
             {t('weightedaverages.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           {nextPage && <LimitNote />}
           <SectionHeaderRow>
             <SectionHeaderItem>
