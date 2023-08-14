@@ -46,15 +46,21 @@ class SymbolSelector extends PureComponent {
       currentCoin,
       inactiveCurrencies,
       onSymbolSelect,
+      isFunding,
+      fundingCoins,
     } = this.props
+
+    const preparedCoins = isFunding
+      ? fundingCoins
+      : coins
 
     const items = inactiveCurrencies.length
       ? [
-        ...coins,
+        ...preparedCoins,
         'inactive',
         ...inactiveCurrencies,
       ]
-      : coins
+      : preparedCoins
 
     return (
       <Select
@@ -77,10 +83,14 @@ SymbolSelector.propTypes = {
   inactiveCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   onSymbolSelect: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  isFunding: PropTypes.bool,
+  fundingCoins: PropTypes.arrayOf(PropTypes.string),
 }
 SymbolSelector.defaultProps = {
   coins: [],
   currencies: {},
+  fundingCoins: [],
+  isFunding: false,
 }
 
 export default withTranslation('translations')(SymbolSelector)

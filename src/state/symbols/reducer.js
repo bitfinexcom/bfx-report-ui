@@ -20,6 +20,7 @@ const initialState = {
   inactivePairs: [],
   isFetched: false,
   pairs: [], // pair
+  fundingCoins: [],
 }
 
 export function symbolsReducer(state = initialState, action) {
@@ -35,12 +36,17 @@ export function symbolsReducer(state = initialState, action) {
       } = payload
 
       const coins = []
+      const fundingCoins = []
       const dict = {}
       const explorersDict = {}
       const symbolMapping = {}
 
       currencies.forEach((currency) => {
-        const { id, explorer, name } = currency
+        const {
+          id, explorer, name, isInPair, isFunding,
+        } = currency
+        if (!isInPair) return
+
         let { symbol } = currency
 
         if (symbol && id !== symbol) {
@@ -50,21 +56,19 @@ export function symbolsReducer(state = initialState, action) {
           if (id.includes('F0')) {
             symbol = `${symbol} (deriv)`
           }
-          if (symbol === 'USDt') {
-            symbolMapping.UST = symbol
-          } else {
-            symbolMapping[id] = symbol
-          }
 
+          symbolMapping[id] = symbol
           explorersDict[symbol] = explorer
           dict[symbol] = name
           coins.push(symbol)
+          if (isFunding) fundingCoins.push(symbol)
           return
         }
 
         explorersDict[id] = explorer
         dict[id] = name
         coins.push(id)
+        if (isFunding) fundingCoins.push(id)
       })
 
       const preparedCoins = [...new Set(coins)].sort()
@@ -88,7 +92,6 @@ export function symbolsReducer(state = initialState, action) {
       const formattedPairs = pairs.map(formatPair).map(mapPair).sort()
       const formattedInactivePairs = inactiveSymbols.map(formatPair).map(mapPair).sort()
 
-
       const preparedPairs = _map(formattedPairs, pair => {
         const [firstSymbol, secondSymbol] = _split(pair, ':')
         if (isTestSymbol(firstSymbol) && isTestSymbol(secondSymbol)) {
@@ -106,6 +109,7 @@ export function symbolsReducer(state = initialState, action) {
         inactivePairs: formattedInactivePairs,
         isFetched: true,
         pairs: preparedPairs,
+        fundingCoins,
       }
     }
     case authTypes.LOGOUT:

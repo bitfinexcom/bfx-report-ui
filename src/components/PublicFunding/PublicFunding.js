@@ -97,6 +97,7 @@ class PublicFunding extends PureComponent {
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
               <SymbolSelector
+                isFunding
                 currentCoin={targetSymbol}
                 onSymbolSelect={this.onSymbolSelect}
               />
