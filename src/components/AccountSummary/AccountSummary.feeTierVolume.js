@@ -10,7 +10,7 @@ const AccountSummaryFeeTierVolume = ({ data, t }) => {
   const lastVolumeItem = _get(data, [data.length - 1], {})
   const { curr, vol_safe: amount } = lastVolumeItem
 
-  const columns = getColumns({ data: [{ curr, amount }] })
+  const columns = getColumns({ data: [{ curr, amount }], t })
 
   return (
     <div className='section-account-summary-data-item'>

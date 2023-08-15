@@ -124,7 +124,7 @@ class Ledgers extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <>
+        <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
             numRows={entries.length}
@@ -134,7 +134,7 @@ class Ledgers extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </>
+        </div>
       )
     }
 

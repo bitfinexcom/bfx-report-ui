@@ -1,11 +1,8 @@
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
 import { fixedFloat } from 'ui/utils'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -20,11 +17,12 @@ export default function getColumns(props) {
     {
       id: 'symbol',
       name: 'column.pair',
+      className: 'align-left',
       width: getColumnWidth('symbol', columnsWidth),
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
-          <Cell tooltip={pair}>
+          <Cell tooltip={getTooltipContent(pair, t)}>
             {pair}
           </Cell>
         )
@@ -41,7 +39,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedBid}
+            tooltip={getTooltipContent(fixedBid, t)}
           >
             {fixedBid}
           </Cell>
@@ -60,7 +58,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedAsk}
+            tooltip={getTooltipContent(fixedAsk, t)}
           >
             {fixedAsk}
           </Cell>
@@ -71,15 +69,14 @@ export default function getColumns(props) {
     },
     {
       id: 'mtsUpdate',
+      className: 'align-left',
       nameStr: `${t('column.time')} (${timeOffset})`,
       width: getColumnWidth('mtsUpdate', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={timestamp}>
-            <TruncatedFormat>
-              {timestamp}
-            </TruncatedFormat>
+          <Cell tooltip={getTooltipContent(timestamp, t)}>
+            {timestamp}
           </Cell>
         )
       },

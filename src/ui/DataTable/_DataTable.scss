@@ -2,9 +2,10 @@
   width: fit-content;
   min-height: unset;
   height: fit-content;
-  max-height: 517px;
+  max-height: 525px;
   margin-left: 1px;
   flex: 0 1 auto;
+  border-top: 1px solid var(--tableBorder);
 
   &-full-height {
     max-height: unset;
@@ -56,22 +57,12 @@
 
 .bp3-table {
   &-container {
-    box-shadow: 0 0 0 1px var(--tableBorder);
-
-    .bp3-table-last-in-column {
-      box-shadow: inset -1px 0 0 var(--tableBorder);
-    }
-
     .bp3-table-last-in-row {
       box-shadow: inset 0 -1px 0 var(--tableBorder);
 
       &.bp3-table-header {
         box-shadow: 0 1px 0 var(--tableBorder);
       }
-    }
-
-    .bp3-table-last-in-column.bp3-table-last-in-row {
-      box-shadow: none;
     }
   }
 
@@ -81,13 +72,31 @@
       color: inherit;
 
       .bp3-table-header {
-        box-shadow: 0 1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+        box-shadow: 0 1px 0 var(--tableBorder);
+
+        &.align-left {
+          .bp3-table-column-name-text {
+            justify-content: flex-start;
+          }
+        }
+
+        &.align-right {
+          .bp3-table-column-name-text {
+            justify-content: flex-end;
+          }
+        }
       }
     }
 
     &-name {
       font-size: 13px;
       color: var(--thColor);
+
+      &-text {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+      }
     }
   }
 
@@ -102,7 +111,15 @@
   &-cell {
     font-size: 13px;
     color: var(--tableColor);
-    box-shadow: inset 0 -1px 0 var(--tableBorder), inset -1px 0 0 var(--tableBorder);
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 -1px 0 var(--tableBorder);
+    &.align-left {
+      justify-content: flex-start;
+    }
+    &.align-right {
+      justify-content: flex-end;
+    }
 
     &-ledger {
       &-even {

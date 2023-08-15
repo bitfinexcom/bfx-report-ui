@@ -4,40 +4,43 @@
   &-item {
     display: table;
     width: 100%;
+    padding: 4px 16px;
+    border-radius: 6px;
     margin-bottom: 10px;
-    border: 1px solid var(--borderColor);
-    border-radius: 2px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+    background-color: var(--bgColor);
+    border: 1px solid var(--bgColor);
 
     & > div {
       display: table-row;
 
       &:nth-child(odd) {
-        background-color: var(--tableOddBg);
+        background-color: var(--bgColor);
       }
 
       &:nth-child(even) {
-        background-color: var(--tableEvenBg);
+        background-color: var(--bgColor);
       }
 
       & > div {
         display: table-cell;
         min-height: 24px;
-        padding: 4px 11px;
+        padding: 8px;
         vertical-align: middle;
+        border-bottom: 1px solid var(--tableBorder);
 
         &:first-child {
           width: 45%;
-          color: var(--activeColor);
-          border-right: 1px solid var(--borderColor);
         }
 
         &:last-child {
           padding: 4px 5px;
           word-break: break-word;
+        }
+      }
+
+      &:last-child {
+        & > div {
+          border-bottom: none;
         }
       }
     }

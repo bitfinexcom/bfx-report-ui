@@ -6,7 +6,7 @@ import _pick from 'lodash/pick'
 import _filter from 'lodash/filter'
 import _isEqual from 'lodash/isEqual'
 
-import { Cell, TruncatedFormat } from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 
@@ -191,6 +191,11 @@ export const pickColumnsWidth = columns => _map(columns,
 export const getColumnWidth = (id, columns) => _head(_filter(columns,
   column => column.id === id))?.width ?? COLUMN_WIDTHS[id]
 
+export const getTooltipContent = (value, t) => {
+  if (t) return `${value}\n${t('column.deselectionHint')}`
+  return `${value}`
+}
+
 export const getFrameworkPositionsColumns = (props) => {
   const {
     filteredData,
@@ -209,11 +214,12 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'id',
       name: 'column.id',
+      className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
-          <Cell tooltip={id}>
+          <Cell tooltip={getTooltipContent(id, t)}>
             {id}
           </Cell>
         )
@@ -223,11 +229,12 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: COLUMN_WIDTHS.pair,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
-          <Cell tooltip={pair}>
+          <Cell tooltip={getTooltipContent(pair, t)}>
             {pair}
           </Cell>
         )
@@ -243,7 +250,7 @@ export const getFrameworkPositionsColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(amount)}
+            tooltip={getTooltipContent(fixedFloat(amount), t)}
           >
             {formatAmount(amount)}
           </Cell>
@@ -261,7 +268,7 @@ export const getFrameworkPositionsColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedPrice}
+            tooltip={getTooltipContent(fixedPrice, t)}
           >
             {fixedPrice}
           </Cell>
@@ -279,7 +286,7 @@ export const getFrameworkPositionsColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedPrice}
+            tooltip={getTooltipContent(fixedPrice, t)}
           >
             {fixedPrice}
           </Cell>
@@ -297,7 +304,7 @@ export const getFrameworkPositionsColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedPrice}
+            tooltip={getTooltipContent(fixedPrice, t)}
           >
             {fixedPrice}
           </Cell>
@@ -314,7 +321,7 @@ export const getFrameworkPositionsColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(pl)}
+            tooltip={getTooltipContent(fixedFloat(pl), t)}
           >
             {formatAmount(pl)}
           </Cell>
@@ -331,7 +338,7 @@ export const getFrameworkPositionsColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(plUsd)}
+            tooltip={getTooltipContent(fixedFloat(plUsd), t)}
           >
             {formatAmount(plUsd)}
           </Cell>
@@ -348,7 +355,7 @@ export const getFrameworkPositionsColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(plPerc)}
+            tooltip={getTooltipContent(fixedFloat(plPerc), t)}
           >
             {formatAmount(plPerc)}
           </Cell>
@@ -366,7 +373,7 @@ export const getFrameworkPositionsColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedSwap}
+            tooltip={getTooltipContent(fixedSwap, t)}
           >
             {fixedSwap}
           </Cell>
@@ -377,11 +384,12 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'swapType',
       name: 'column.fundingType',
+      className: 'align-left',
       width: 120,
       renderer: (rowIndex) => {
         const swapType = showType(filteredData[rowIndex].marginFundingType)
         return (
-          <Cell tooltip={swapType}>
+          <Cell tooltip={getTooltipContent(swapType, t)}>
             {swapType}
           </Cell>
         )
@@ -391,11 +399,12 @@ export const getFrameworkPositionsColumns = (props) => {
     {
       id: 'status',
       name: 'column.status',
+      className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
         const { status } = filteredData[rowIndex]
         return (
-          <Cell tooltip={status}>
+          <Cell tooltip={getTooltipContent(status, t)}>
             {status}
           </Cell>
         )
@@ -404,15 +413,14 @@ export const getFrameworkPositionsColumns = (props) => {
     },
     {
       id: 'mtsUpdate',
+      className: 'align-left',
       nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.mtsUpdate,
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
-          <Cell tooltip={timestamp}>
-            <TruncatedFormat>
-              {timestamp}
-            </TruncatedFormat>
+          <Cell tooltip={getTooltipContent(timestamp, t)}>
+            {timestamp}
           </Cell>
         )
       },
@@ -422,17 +430,18 @@ export const getFrameworkPositionsColumns = (props) => {
 }
 
 export const getPositionsTickersColumns = (props) => {
-  const { filteredData } = props
+  const { filteredData, t } = props
 
   return [
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: COLUMN_WIDTHS.pair,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
-          <Cell tooltip={pair}>
+          <Cell tooltip={getTooltipContent(pair, t)}>
             {pair}
           </Cell>
         )
@@ -448,7 +457,7 @@ export const getPositionsTickersColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(amount)}
+            tooltip={getTooltipContent(fixedFloat(amount), t)}
           >
             {formatAmount(amount)}
           </Cell>
@@ -467,12 +476,13 @@ export const getWalletsTickersColumns = (props) => {
     {
       id: 'type',
       name: 'column.type',
+      className: 'align-left',
       width: 80,
       renderer: (rowIndex) => {
         const { walletType } = filteredData[rowIndex]
         const walletTypeText = t(`wallets.header.${walletType}`)
         return (
-          <Cell tooltip={walletTypeText}>
+          <Cell tooltip={getTooltipContent(walletTypeText, t)}>
             {walletTypeText}
           </Cell>
         )
@@ -485,11 +495,12 @@ export const getWalletsTickersColumns = (props) => {
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
         const { pair } = filteredData[rowIndex]
         return (
-          <Cell tooltip={pair}>
+          <Cell tooltip={getTooltipContent(pair, t)}>
             {pair}
           </Cell>
         )
@@ -505,7 +516,7 @@ export const getWalletsTickersColumns = (props) => {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(amount)}
+            tooltip={getTooltipContent(fixedFloat(amount), t)}
           >
             {formatAmount(amount)}
           </Cell>
@@ -542,4 +553,5 @@ export default {
   singleColumnSelectedCheck,
   columnHasNumericValueCheck,
   formatSumUpValue,
+  getTooltipContent,
 }

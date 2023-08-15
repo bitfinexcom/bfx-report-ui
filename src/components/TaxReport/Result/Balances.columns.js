@@ -1,13 +1,15 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
+import { getTooltipContent } from 'utils/columns'
 import { fixedFloat, formatAmount } from 'ui/utils'
 
 export default function getColumns(props) {
   const {
-    walletsTotalBalanceUsd,
-    positionsTotalPlUsd,
+    t,
     totalResult,
+    positionsTotalPlUsd,
+    walletsTotalBalanceUsd,
   } = props
 
   return [
@@ -18,7 +20,7 @@ export default function getColumns(props) {
       renderer: () => (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedFloat(walletsTotalBalanceUsd)}
+          tooltip={getTooltipContent(fixedFloat(walletsTotalBalanceUsd), t)}
         >
           {formatAmount(walletsTotalBalanceUsd)}
         </Cell>
@@ -32,7 +34,7 @@ export default function getColumns(props) {
       renderer: () => (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedFloat(positionsTotalPlUsd)}
+          tooltip={getTooltipContent(fixedFloat(positionsTotalPlUsd), t)}
         >
           {formatAmount(positionsTotalPlUsd)}
         </Cell>
@@ -46,7 +48,7 @@ export default function getColumns(props) {
       renderer: () => (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedFloat(totalResult)}
+          tooltip={getTooltipContent(fixedFloat(totalResult), t)}
         >
           {formatAmount(totalResult)}
         </Cell>

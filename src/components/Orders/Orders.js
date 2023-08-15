@@ -138,7 +138,7 @@ class Orders extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <>
+        <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
             numRows={entries.length}
@@ -148,7 +148,7 @@ class Orders extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </>
+        </div>
       )
     }
 
