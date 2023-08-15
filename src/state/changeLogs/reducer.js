@@ -4,6 +4,7 @@ import _get from 'lodash/get'
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
 import { fetch, fetchFail } from 'state/reducers.helper'
+import _isString from 'lodash/isString'
 
 import types from './constants'
 
@@ -37,12 +38,16 @@ export function changeLogsReducer(state = initialState, action) {
           userAgent,
         } = entry
 
+        const preparedUserAgent = _isString(userAgent)
+          ? userAgent
+          : userAgent?.raw
+
         return {
           ip,
           log,
           mtsCreate,
           subUserId,
-          userAgent,
+          userAgent: preparedUserAgent,
         }
       })
 
