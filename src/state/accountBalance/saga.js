@@ -29,7 +29,6 @@ export function* fetchAccountBalance() {
       isUnrealizedProfitExcluded,
     }
     const { result = [], error } = yield call(getReqBalance, params)
-
     yield put(actions.updateBalance(result))
 
     if (error) {
