@@ -55,11 +55,10 @@ export default function getColumns(props) {
         const { type, amount } = filteredData[rowIndex]
         const classes = amountStyle(amount)
         return (
-          <Cell
-            className={classes}
-            tooltip={getTooltipContent(type, t)}
-          >
-            {type}
+          <Cell tooltip={getTooltipContent(type, t)}>
+            <span className={classes}>
+              {type}
+            </span>
           </Cell>
         )
       },
