@@ -13,6 +13,24 @@
     & > div {
       display: table-row;
 
+      .bitfinex-green-text, .bitfinex-green-text > div {
+        color: var(--tableAmountPosColor);
+      }
+    
+      .bitfinex-red-text, .bitfinex-red-text > div {
+        color: var(--tableAmountNegColor);
+      }
+    
+      .bitfinex-amount {
+        &.bitfinex-green-text > .bitfinex-amount-fraction {
+          color: var(--tableAmountFractionPosColor);
+        }
+    
+        &.bitfinex-red-text > .bitfinex-amount-fraction {
+          color: var(--tableAmountFractionNegColor);
+        }
+      }
+
       &:nth-child(odd) {
         background-color: var(--bgColor);
       }
