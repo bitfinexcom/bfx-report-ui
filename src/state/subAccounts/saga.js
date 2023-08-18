@@ -75,7 +75,7 @@ export function* createSubAccount({ payload }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'subaccounts.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
@@ -125,7 +125,7 @@ export function* removeSubAccount({ payload }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'subaccounts.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
@@ -180,7 +180,7 @@ export function* updateSubAccount({ payload }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'subaccounts.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
@@ -217,7 +217,7 @@ export function* updateLocalUsername({ payload }) {
         yield put(updateErrorStatus({
           id: 'status.fail',
           topic: 'subaccounts.title',
-          detail: JSON.stringify(error),
+          detail: error?.message ?? JSON.stringify(error),
         }))
       }
     }

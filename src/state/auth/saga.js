@@ -140,7 +140,7 @@ function* signUp({ payload }) {
         yield put(updateErrorStatus({
           id: 'status.fail',
           topic: 'auth.auth',
-          detail: JSON.stringify(error),
+          detail: error?.message ?? JSON.stringify(error),
         }))
       }
     }
@@ -254,7 +254,7 @@ function* signIn({ payload }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'auth.auth',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
@@ -327,7 +327,7 @@ function* removeUser() {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'auth.auth',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
@@ -396,7 +396,7 @@ function* recoverPassword({ payload }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'auth.auth',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
@@ -473,7 +473,7 @@ function* deleteAccount({ payload }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'auth.auth',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {

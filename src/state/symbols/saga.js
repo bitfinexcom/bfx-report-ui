@@ -18,7 +18,7 @@ function* fetchSymbols() {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'symbols.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {

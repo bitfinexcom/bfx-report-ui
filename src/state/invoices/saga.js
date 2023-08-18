@@ -70,7 +70,7 @@ function* fetchInvoices() {
         yield put(actions.fetchFail({
           id: 'status.fail',
           topic: 'invoices.title',
-          detail: JSON.stringify(error),
+          detail: error?.message ?? JSON.stringify(error),
         }))
       }
     }

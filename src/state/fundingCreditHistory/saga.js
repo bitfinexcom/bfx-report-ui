@@ -58,7 +58,7 @@ function* fetchFCredit() {
       yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'fcredit.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
