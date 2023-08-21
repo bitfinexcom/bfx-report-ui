@@ -8,6 +8,13 @@
       min-width: 133px;
       font-size: 14px;
       background-color: var(--multiBg);
+
+      &-text {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
     }
   }
 
