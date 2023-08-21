@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import {
   Button,
   InputGroup,
-  Intent,
 } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 import _isString from 'lodash/isString'
