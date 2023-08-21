@@ -203,15 +203,17 @@ class ColumnsFilter extends PureComponent {
     const hasAppliedFilters = currentFilters.some(filter => filter.value)
     const buttonClasses = classNames('button--large', { 'columns-filter--active': hasAppliedFilters })
 
+    console.log('+++currentFilters', currentFilters)
+
     return (
       <>
         <div className='columns-filter-wrapper'>
           <Button
             onClick={this.toggleDialog}
             className={buttonClasses}
-            intent={Intent.SUCCESS}
           >
-            {t('columnsfilter.title')}
+            <span>{t('columnsfilter.title')}</span>
+            <Icon.PLUS />
           </Button>
         </div>
 
