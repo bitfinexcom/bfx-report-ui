@@ -225,6 +225,7 @@
     "cancel": "Cancel",
     "apply": "Apply",
     "filters": {
+      "title": "Filters",
       "contains": "Contains",
       "beginsWith": "Begins with",
       "endsWith": "Ends with",
