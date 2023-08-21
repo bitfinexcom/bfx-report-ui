@@ -208,10 +208,7 @@ class ColumnsFilter extends PureComponent {
     return (
       <>
         <div className='columns-filter-wrapper'>
-          <Button
-            onClick={this.toggleDialog}
-            // className={buttonClasses}
-          >
+          <Button onClick={this.toggleDialog}>
             <span>
               {filtersTitle}
             </span>
