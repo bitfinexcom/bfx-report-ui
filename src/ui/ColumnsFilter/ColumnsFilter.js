@@ -7,6 +7,10 @@ import {
 } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 import _isString from 'lodash/isString'
+import _size from 'lodash/size'
+import _isEmpty from 'lodash/isEmpty'
+import _filter from 'lodash/filter'
+
 
 import ColumnsSelect from 'ui/ColumnsSelect'
 import DateInput from 'ui/DateInput'
@@ -204,6 +208,18 @@ class ColumnsFilter extends PureComponent {
 
     console.log('+++currentFilters', currentFilters)
 
+    const getFiltersTitle = (filters, t) => {
+      if (_size(filters) > 0) {
+        const activeFilters = _filter(filters,
+          filter => filter?.value && !_isEmpty(filter?.value))
+
+        console.log('+++activeFilters', activeFilters)
+
+        return _size(activeFilters) > 0
+          ? `${_size(activeFilters)} ${t('columnsfilter.filters.title')}`
+          : t('columnsfilter.none')
+      } return t('columnsfilter.none')
+    }
     return (
       <>
         <div className='columns-filter-wrapper'>
@@ -211,7 +227,7 @@ class ColumnsFilter extends PureComponent {
             onClick={this.toggleDialog}
             className={buttonClasses}
           >
-            <span>{t('columnsfilter.title')}</span>
+            <span>{getFiltersTitle(currentFilters, t)}</span>
             <Icon.PLUS />
           </Button>
         </div>
