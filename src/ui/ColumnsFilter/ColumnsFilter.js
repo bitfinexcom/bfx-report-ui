@@ -1,15 +1,11 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import classNames from 'classnames'
 import {
   Button,
   InputGroup,
 } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 import _isString from 'lodash/isString'
-import _size from 'lodash/size'
-import _isEmpty from 'lodash/isEmpty'
-import _filter from 'lodash/filter'
 
 
 import ColumnsSelect from 'ui/ColumnsSelect'
@@ -28,6 +24,7 @@ import { propTypes, defaultProps } from './ColumnsFilter.props'
 import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 import SideSelector from './Selectors/SideSelector'
 import WalletSelector from './Selectors/WalletSelector'
+import { getFiltersTitle } from './ColumnsFilter.helpers'
 
 const MAX_FILTERS = 7
 const { DATE } = DATA_TYPES
@@ -203,31 +200,21 @@ class ColumnsFilter extends PureComponent {
     const { isOpen, filters } = this.state
 
     const hasChanges = this.haveFiltersChanged()
-    const hasAppliedFilters = currentFilters.some(filter => filter.value)
-    const buttonClasses = classNames('button--large', { 'columns-filter--active': hasAppliedFilters })
+    const filtersTitle = getFiltersTitle(currentFilters, t)
 
-    console.log('+++currentFilters', currentFilters)
 
-    const getFiltersTitle = (filters, t) => {
-      if (_size(filters) > 0) {
-        const activeFilters = _filter(filters,
-          filter => filter?.value && !_isEmpty(filter?.value))
+    console.log('+++filtersTitle', filtersTitle)
 
-        console.log('+++activeFilters', activeFilters)
-
-        return _size(activeFilters) > 0
-          ? `${_size(activeFilters)} ${t('columnsfilter.filters.title')}`
-          : t('columnsfilter.none')
-      } return t('columnsfilter.none')
-    }
     return (
       <>
         <div className='columns-filter-wrapper'>
           <Button
             onClick={this.toggleDialog}
-            className={buttonClasses}
+            // className={buttonClasses}
           >
-            <span>{getFiltersTitle(currentFilters, t)}</span>
+            <span>
+              {filtersTitle}
+            </span>
             <Icon.PLUS />
           </Button>
         </div>
