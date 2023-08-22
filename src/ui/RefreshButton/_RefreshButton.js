@@ -1,16 +1,16 @@
-import React from 'react'
-import { Button, Intent } from '@blueprintjs/core'
-import { withTranslation } from 'react-i18next'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
+import { Button, Intent } from '@blueprintjs/core'
 
-const RefreshButton = (props) => {
-  const { onClick, t } = props
+const RefreshButton = ({ onClick }) => {
+  const { t } = useTranslation()
 
   return (
     <Button
       onClick={onClick}
-      className='refresh-button'
       intent={Intent.SUCCESS}
+      className='refresh-button'
     >
       {t('columnsfilter.title')}
     </Button>
@@ -19,7 +19,6 @@ const RefreshButton = (props) => {
 
 RefreshButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(RefreshButton)
+export default memo(RefreshButton)
