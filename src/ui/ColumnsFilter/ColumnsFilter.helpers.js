@@ -7,6 +7,11 @@ const getActiveFilters = (filters) => _filter(
   filters, filter => !_isEmpty(_toString(filter?.value ?? '')),
 )
 
+export const getFiltersClassNames = (filters) => {
+  const activeFilters = getActiveFilters(filters)
+  return _size(activeFilters) > 0 ? '' : 'no-filters'
+}
+
 export const getFiltersTitle = (filters, t) => {
   if (_size(filters) > 0) {
     const activeFilters = getActiveFilters(filters)
@@ -24,4 +29,5 @@ export const getFiltersTitle = (filters, t) => {
 
 export default {
   getFiltersTitle,
+  getFiltersClassNames,
 }
