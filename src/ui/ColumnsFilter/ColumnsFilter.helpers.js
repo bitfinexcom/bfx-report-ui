@@ -3,13 +3,13 @@ import _filter from 'lodash/filter'
 import _isEmpty from 'lodash/isEmpty'
 import _toString from 'lodash/toString'
 
+const getActiveFilters = (filters) => _filter(
+  filters, filter => !_isEmpty(_toString(filter?.value ?? '')),
+)
+
 export const getFiltersTitle = (filters, t) => {
   if (_size(filters) > 0) {
-    const activeFilters = _filter(filters, filter => {
-      const { value = '' } = filter
-      return !_isEmpty(_toString(value))
-    })
-
+    const activeFilters = getActiveFilters(filters)
     const filtersTitle = _size(activeFilters) > 1
       ? t('columnsfilter.filters.title')
       : t('columnsfilter.title')
