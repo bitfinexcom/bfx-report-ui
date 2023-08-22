@@ -181,6 +181,10 @@
 
 @media screen and (max-width: 576px) {
   .columns-filter {
+    &-dialog {
+      min-width: 100%;
+    }
+
     &-item {
       max-width: 380px;
       padding: 30px 0;
