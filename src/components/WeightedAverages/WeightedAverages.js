@@ -16,9 +16,8 @@ import {
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
-import SectionSwitch from 'ui/SectionSwitch'
 import PairSelector from 'ui/PairSelector'
-
+import SectionSwitch from 'ui/SectionSwitch'
 import {
   checkInit,
   checkFetch,
@@ -82,7 +81,6 @@ class WeightedAverages extends PureComponent {
 
   onPairSelect = pair => setPair(TYPE, this.props, pair)
 
-
   render() {
     const {
       t,
@@ -134,9 +132,14 @@ class WeightedAverages extends PureComponent {
           {showFrameworkMode && (
             <SectionSwitch target={TYPE} />
           )}
-          <TimeRange className='section-header-time-range' />
           {nextPage && <LimitNote />}
           <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.date')}
+              </SectionHeaderItemLabel>
+              <TimeRange className='section-header-time-range' />
+            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}

@@ -1,5 +1,5 @@
 .section-header {
-  margin-bottom: 31px;
+  margin-bottom: 20px;
 
   &-title {
     font-size: 30px;
@@ -64,13 +64,14 @@
 
   &-item {
     &-label {
-      margin-bottom: 10px;
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: var(--color2);
     }
   }
 
   .time-range {
-    margin: 0 2px 22px 2px;
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 

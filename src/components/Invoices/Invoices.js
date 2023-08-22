@@ -153,8 +153,13 @@ class Invoices extends PureComponent {
       >
         <SectionHeader>
           <SectionHeaderTitle>{t('invoices.title')}</SectionHeaderTitle>
-          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.date')}
+              </SectionHeaderItemLabel>
+              <TimeRange className='section-header-time-range' />
+            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
@@ -166,7 +171,12 @@ class Invoices extends PureComponent {
               />
             </SectionHeaderItem>
             <ClearFiltersButton onClick={this.clearSymbols} />
-            <ColumnsFilter target={TYPE} />
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.columns')}
+              </SectionHeaderItemLabel>
+              <ColumnsFilter target={TYPE} />
+            </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>

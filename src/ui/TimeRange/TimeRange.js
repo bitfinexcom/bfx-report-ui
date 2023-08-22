@@ -18,10 +18,10 @@ const TimeRange = ({
     className={classNames('time-range', className)}
     onClick={toggleTimeFrameDialog}
   >
-    {icon && <Icon.CALENDAR />}
     <span>
       {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
     </span>
+    {icon && <Icon.CALENDAR />}
   </div>
 )
 

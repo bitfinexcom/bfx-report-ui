@@ -67,9 +67,16 @@ class SectionHeader extends PureComponent {
           {t(title)}
         </SectionHeaderTitle>
         {showHeaderTabs && <SectionSwitch target={target} />}
-        {timeframe && <TimeRange className='section-header-time-range' />}
         {(selector || filter || refresh || clearTargetPairs) && (
           <SectionHeaderRow>
+            {timeframe && (
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('selector.filter.date')}
+                </SectionHeaderItemLabel>
+                <TimeRange className='section-header-time-range' />
+              </SectionHeaderItem>
+            )}
             {selector && (
               <SectionHeaderItem>
                 <SectionHeaderItemLabel>
@@ -80,7 +87,14 @@ class SectionHeader extends PureComponent {
             )}
             {clearTargetPairs && <ClearFiltersButton onClick={clearTargetPairs} />}
             {clearTargetSymbols && <ClearFiltersButton onClick={clearTargetSymbols} />}
-            {filter && <ColumnsFilter target={target} />}
+            {filter && (
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('selector.filter.columns')}
+                </SectionHeaderItemLabel>
+                <ColumnsFilter target={target} />
+              </SectionHeaderItem>
+            )}
             {refresh && <RefreshButton onClick={refresh} />}
           </SectionHeaderRow>
         )}

@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import {
@@ -204,12 +204,12 @@ class ColumnsFilter extends PureComponent {
     const buttonClasses = classNames('button--large', { 'columns-filter--active': hasAppliedFilters })
 
     return (
-      <Fragment>
+      <>
         <div className='columns-filter-wrapper'>
           <Button
             onClick={this.toggleDialog}
             className={buttonClasses}
-            intent={Intent.PRIMARY}
+            intent={Intent.SUCCESS}
           >
             {t('columnsfilter.title')}
           </Button>
@@ -277,7 +277,7 @@ class ColumnsFilter extends PureComponent {
             </div>
           </div>
         </ColumnsFilterDialog>
-      </Fragment>
+      </>
     )
   }
 }

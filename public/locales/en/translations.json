@@ -220,7 +220,7 @@
     "webhook": "Webhook"
   },
   "columnsfilter": {
-    "title": "Filter Columns",
+    "title": "Filter",
     "clear": "Clear",
     "cancel": "Cancel",
     "apply": "Apply",
@@ -519,9 +519,11 @@
       "exact": "Exact"
     },
     "filter": {
-      "symbol": "Symbol Filter",
+      "symbol": "Symbol",
       "pair": "Pair Filter",
-      "category": "Category Filter"
+      "category": "Category Filter",
+      "columns": "Columns",
+      "date": "Date"
     },
     "report-type": {
       "title": "Select Report Type",

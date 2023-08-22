@@ -148,8 +148,13 @@ class FeesReport extends PureComponent {
             {t('feesreport.title')}
           </SectionHeaderTitle>
           <SectionSwitch target={TYPE} />
-          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.date')}
+              </SectionHeaderItemLabel>
+              <TimeRange className='section-header-time-range' />
+            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
