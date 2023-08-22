@@ -24,7 +24,7 @@ import { propTypes, defaultProps } from './ColumnsFilter.props'
 import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 import SideSelector from './Selectors/SideSelector'
 import WalletSelector from './Selectors/WalletSelector'
-import { getFiltersTitle } from './ColumnsFilter.helpers'
+import { getFiltersTitle, getFiltersClassNames } from './ColumnsFilter.helpers'
 
 const MAX_FILTERS = 7
 const { DATE } = DATA_TYPES
@@ -201,15 +201,13 @@ class ColumnsFilter extends PureComponent {
 
     const hasChanges = this.haveFiltersChanged()
     const filtersTitle = getFiltersTitle(currentFilters, t)
-
-
-    console.log('+++filtersTitle', filtersTitle)
+    const filtersClassName = getFiltersClassNames(currentFilters)
 
     return (
       <>
         <div className='columns-filter-wrapper'>
           <Button onClick={this.toggleDialog}>
-            <span>
+            <span className={filtersClassName}>
               {filtersTitle}
             </span>
             <Icon.PLUS />
