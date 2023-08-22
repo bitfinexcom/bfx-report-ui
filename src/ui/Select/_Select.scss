@@ -6,25 +6,45 @@
     padding-right: 8px;
     background-color: var(--multiBg);
     color: var(--color);
-    border: 1px solid var(--borderColor);
+    border: none;
     box-shadow: none;
     justify-content: space-between;
+
+    &:active, &:hover {
+      border: none;
+    }
   }
 
   &--language .bp3-button {
     width: 140px;
+
+    &:active, &:hover {
+      border: none;
+    }
   }
 
   &--balance-precision .bp3-button {
     width: 150px;
+
+    &:active, &:hover {
+      border: none;
+    }
   }
 
   &--unrealized-profit .bp3-button {
     width: 160px;
+
+    &:active, &:hover {
+      border: none;
+    }
   }
 
   &--report-type .bp3-button {
     width: fit-content;
+
+    &:active, &:hover {
+      border: none;
+    }
 
     .bp3-button-text {
       display: flex;
@@ -39,6 +59,10 @@
 
   &--timeframe .bp3-button {
     width: 100px;
+
+    &:active, &:hover {
+      border: none;
+    }
   }
 
   &-menu {
