@@ -8,6 +8,11 @@
       min-width: 133px;
       font-size: 14px;
       background-color: var(--multiBg);
+      border: none;
+
+      &:active, &:hover {
+        border: none;
+      }
 
       &-text {
         width: 100%;
