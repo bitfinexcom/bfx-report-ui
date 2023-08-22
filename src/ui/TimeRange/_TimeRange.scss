@@ -6,8 +6,8 @@
   vertical-align: middle;
   color: var(--timeRangeColor);
   background-color: var(--multiBg);
-  border: 1px solid var(--borderColor);
   border-radius: 4px;
+  min-height: 34px;
 
   svg {
     margin-left: 10px;
