@@ -344,6 +344,14 @@
   }
 }
 
+@media screen and (max-width: 576px) {
+  .bitfinex-select {
+    .bp3-button {
+      min-width: fit-content;
+    }
+  }
+}
+
 @media screen and (max-width: 390px) {
   .bitfinex-select {
     .bp3-button {
