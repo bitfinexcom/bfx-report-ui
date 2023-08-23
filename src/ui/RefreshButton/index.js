@@ -1,3 +1,1 @@
-import RefreshButton from './RefreshButton'
-
-export default RefreshButton
+export { default } from './RefreshButton'
