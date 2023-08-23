@@ -40,7 +40,7 @@ function* fetchDerivatives() {
       yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'derivatives.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {

@@ -124,7 +124,7 @@ class Ledgers extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <>
+        <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
             numRows={entries.length}
@@ -134,7 +134,7 @@ class Ledgers extends PureComponent {
             target={TYPE}
             loading={pageLoading}
           />
-        </>
+        </div>
       )
     }
 
@@ -145,8 +145,13 @@ class Ledgers extends PureComponent {
       >
         <SectionHeader>
           <SectionHeaderTitle>{t('ledgers.title')}</SectionHeaderTitle>
-          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.date')}
+              </SectionHeaderItemLabel>
+              <TimeRange className='section-header-time-range' />
+            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
@@ -167,7 +172,12 @@ class Ledgers extends PureComponent {
                 onChange={this.onCategoryChange}
               />
             </SectionHeaderItem>
-            <ColumnsFilter target={TYPE} />
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.columns')}
+              </SectionHeaderItemLabel>
+              <ColumnsFilter target={TYPE} />
+            </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>

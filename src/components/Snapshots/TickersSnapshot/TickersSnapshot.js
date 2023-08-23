@@ -17,7 +17,7 @@ class TickersSnapshot extends PureComponent {
       t,
     } = this.props
 
-    const positionsTickersColumns = getPositionsTickersColumns({ filteredData: positionsTickersEntries })
+    const positionsTickersColumns = getPositionsTickersColumns({ filteredData: positionsTickersEntries, t })
     const walletsTickersColumns = getWalletsTickersColumns({ filteredData: walletsTickersEntries, t })
 
     return (

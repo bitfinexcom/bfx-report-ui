@@ -1,11 +1,8 @@
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -17,11 +14,12 @@ export const getColumns = ({
   {
     id: 'id',
     name: 'column.id',
+    className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
       return (
-        <Cell tooltip={id}>
+        <Cell tooltip={getTooltipContent(id, t)}>
           {id}
         </Cell>
       )
@@ -30,15 +28,14 @@ export const getColumns = ({
   },
   {
     id: 'time',
+    className: 'align-left',
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('time', columnsWidth),
     renderer: (rowIndex) => {
       const timestamp = getFullTime(filteredData[rowIndex].time)
       return (
-        <Cell tooltip={timestamp}>
-          <TruncatedFormat>
-            {timestamp}
-          </TruncatedFormat>
+        <Cell tooltip={getTooltipContent(timestamp, t)}>
+          {timestamp}
         </Cell>
       )
     },
@@ -47,11 +44,12 @@ export const getColumns = ({
   {
     id: 'ip',
     name: 'column.ip',
+    className: 'align-left',
     width: getColumnWidth('ip', columnsWidth),
     renderer: (rowIndex) => {
       const { ip } = filteredData[rowIndex]
       return (
-        <Cell tooltip={ip}>
+        <Cell tooltip={getTooltipContent(ip, t)}>
           {ip}
         </Cell>
       )
@@ -61,11 +59,12 @@ export const getColumns = ({
   {
     id: 'browser',
     name: 'column.browser',
+    className: 'align-left',
     width: getColumnWidth('browser', columnsWidth),
     renderer: (rowIndex) => {
       const { browser } = filteredData[rowIndex]
       return (
-        <Cell tooltip={browser}>
+        <Cell tooltip={getTooltipContent(browser, t)}>
           {browser}
         </Cell>
       )
@@ -75,11 +74,12 @@ export const getColumns = ({
   {
     id: 'version',
     name: 'column.version',
+    className: 'align-left',
     width: getColumnWidth('version', columnsWidth),
     renderer: (rowIndex) => {
       const { version } = filteredData[rowIndex]
       return (
-        <Cell tooltip={version}>
+        <Cell tooltip={getTooltipContent(version, t)}>
           {version}
         </Cell>
       )
@@ -89,11 +89,12 @@ export const getColumns = ({
   {
     id: 'mobile',
     name: 'column.mobile',
+    className: 'align-left',
     width: getColumnWidth('mobile', columnsWidth),
     renderer: (rowIndex) => {
       const { mobile } = filteredData[rowIndex]
       return (
-        <Cell tooltip={mobile}>
+        <Cell tooltip={getTooltipContent(mobile, t)}>
           {mobile}
         </Cell>
       )
@@ -103,6 +104,7 @@ export const getColumns = ({
   {
     id: 'extra',
     name: 'column.meta',
+    className: 'align-left',
     width: getColumnWidth('extra', columnsWidth),
     renderer: (rowIndex) => {
       const { extra } = filteredData[rowIndex]

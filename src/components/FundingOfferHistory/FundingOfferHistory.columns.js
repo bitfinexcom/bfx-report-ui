@@ -1,11 +1,8 @@
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
-import { getColumnWidth } from 'utils/columns'
 import { formatAmount, fixedFloat } from 'ui/utils'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -17,11 +14,12 @@ export const getColumns = ({
   {
     id: 'id',
     name: 'column.id',
+    className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
       return (
-        <Cell tooltip={id}>
+        <Cell tooltip={getTooltipContent(id, t)}>
           {id}
         </Cell>
       )
@@ -31,11 +29,12 @@ export const getColumns = ({
   {
     id: 'symbol',
     name: 'column.currency',
+    className: 'align-left',
     width: getColumnWidth('symbol', columnsWidth),
     renderer: (rowIndex) => {
       const { symbol } = filteredData[rowIndex]
       return (
-        <Cell tooltip={symbol}>
+        <Cell tooltip={getTooltipContent(symbol, t)}>
           {symbol}
         </Cell>
       )
@@ -52,7 +51,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedAmount}
+          tooltip={getTooltipContent(fixedAmount, t)}
         >
           {fixedAmount}
         </Cell>
@@ -70,7 +69,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedFloat(amountExecuted)}
+          tooltip={getTooltipContent(fixedFloat(amountExecuted), t)}
         >
           {formatAmount(amountExecuted)}
         </Cell>
@@ -82,11 +81,12 @@ export const getColumns = ({
   {
     id: 'type',
     name: 'column.type',
+    className: 'align-left',
     width: getColumnWidth('type', columnsWidth),
     renderer: (rowIndex) => {
       const { type } = filteredData[rowIndex]
       return (
-        <Cell tooltip={type}>
+        <Cell tooltip={getTooltipContent(type, t)}>
           {type}
         </Cell>
       )
@@ -96,11 +96,12 @@ export const getColumns = ({
   {
     id: 'status',
     name: 'column.status',
+    className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
       const { status } = filteredData[rowIndex]
       return (
-        <Cell tooltip={status}>
+        <Cell tooltip={getTooltipContent(status, t)}>
           {status}
         </Cell>
       )
@@ -117,7 +118,7 @@ export const getColumns = ({
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedRate}
+          tooltip={getTooltipContent(fixedRate, t)}
         >
           {fixedRate}
         </Cell>
@@ -129,13 +130,14 @@ export const getColumns = ({
   {
     id: 'period',
     name: 'column.period',
+    className: 'align-left',
     width: getColumnWidth('period', columnsWidth),
     renderer: (rowIndex) => {
       const period = `${filteredData[rowIndex].period} ${t('column.days')}`
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={period}
+          tooltip={getTooltipContent(period, t)}
         >
           {period}
         </Cell>
@@ -148,15 +150,14 @@ export const getColumns = ({
   },
   {
     id: 'mtsUpdate',
+    className: 'align-left',
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mtsUpdate', columnsWidth),
     renderer: (rowIndex) => {
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
       return (
-        <Cell tooltip={timestamp}>
-          <TruncatedFormat>
-            {timestamp}
-          </TruncatedFormat>
+        <Cell tooltip={getTooltipContent(timestamp, t)}>
+          {timestamp}
         </Cell>
       )
     },

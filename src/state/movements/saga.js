@@ -58,7 +58,7 @@ function* fetchMovements() {
       yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'movements.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {

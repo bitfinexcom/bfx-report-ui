@@ -35,6 +35,8 @@ import config from 'config'
 import types from './constants'
 import actions from './actions'
 
+const { showFrameworkMode } = config
+
 const updateAuthErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'auth.auth',
@@ -46,7 +48,7 @@ function* onAuthSuccess(result) {
     yield put(actions.updateAuth(result))
     yield put(fetchSymbols())
 
-    if (config.showFrameworkMode) {
+    if (showFrameworkMode) {
       if (!WS.isConnected) {
         WS.connect()
 
@@ -103,10 +105,10 @@ function* signUp({ payload }) {
       apiKey,
       apiSecret,
       password: isNotProtected ? undefined : password,
-      isNotProtected: config.showFrameworkMode ? isNotProtected : undefined,
+      isNotProtected: showFrameworkMode ? isNotProtected : undefined,
     }
 
-    const method = config.showFrameworkMode ? 'signUp' : 'verifyUser'
+    const method = showFrameworkMode ? 'signUp' : 'verifyUser'
     const { result, error } = yield call(makeFetchCall, method, null, authParams)
 
     if (result) {
@@ -119,7 +121,7 @@ function* signUp({ payload }) {
       }
       yield put(actions.addUser(newUser))
       yield put(actions.showOtpLogin(false))
-      yield put(actions.fetchUsers())
+      if (showFrameworkMode) yield put(actions.fetchUsers())
       return
     }
 
@@ -130,7 +132,7 @@ function* signUp({ payload }) {
         yield put(actions.updateAuth({ authToken: '' }))
       }
 
-      if (config.showFrameworkMode) {
+      if (showFrameworkMode) {
         yield put(updateErrorStatus({
           id: 'status.signUpFail',
         }))
@@ -138,7 +140,7 @@ function* signUp({ payload }) {
         yield put(updateErrorStatus({
           id: 'status.fail',
           topic: 'auth.auth',
-          detail: JSON.stringify(error),
+          detail: error?.message ?? JSON.stringify(error),
         }))
       }
     }
@@ -252,7 +254,7 @@ function* signIn({ payload }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'auth.auth',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
@@ -325,7 +327,7 @@ function* removeUser() {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'auth.auth',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
@@ -335,7 +337,7 @@ function* removeUser() {
 
 function* checkAuth() {
   try {
-    if (config.showFrameworkMode) {
+    if (showFrameworkMode) {
       yield put(actions.fetchUsers())
     }
 
@@ -344,7 +346,7 @@ function* checkAuth() {
       return
     }
 
-    if (config.showFrameworkMode) {
+    if (showFrameworkMode) {
       yield put(actions.signIn(auth))
       return
     }
@@ -394,7 +396,7 @@ function* recoverPassword({ payload }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'auth.auth',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
@@ -471,7 +473,7 @@ function* deleteAccount({ payload }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'auth.auth',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {

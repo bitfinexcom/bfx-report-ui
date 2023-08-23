@@ -40,7 +40,7 @@ function* fetchWeightedAverages() {
       yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'weightedaverages.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {

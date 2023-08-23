@@ -7,6 +7,7 @@ export const getInactiveCurrencies = state => getSymbols(state).inactiveCurrenci
 export const getInactivePairs = state => getSymbols(state).inactivePairs
 export const getPairs = state => getSymbols(state).pairs
 export const getSymbolsFetchStatus = state => getSymbols(state).isFetched
+export const getFundingCoins = state => getSymbols(state)?.fundingCoins ?? []
 
 export default {
   getCoins,
@@ -16,4 +17,5 @@ export default {
   getInactivePairs,
   getPairs,
   getSymbolsFetchStatus,
+  getFundingCoins,
 }

@@ -1,12 +1,9 @@
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat, amountStyle } from 'ui/utils'
 import { formatPair } from 'state/symbols/utils'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -22,11 +19,12 @@ export default function getColumns(props) {
     {
       id: 'id',
       name: 'column.id',
+      className: 'align-left',
       width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
         const { id } = filteredData[rowIndex]
         return (
-          <Cell tooltip={id}>
+          <Cell tooltip={getTooltipContent(id, t)}>
             {id}
           </Cell>
         )
@@ -35,15 +33,14 @@ export default function getColumns(props) {
     },
     {
       id: 'mts',
+      className: 'align-left',
       nameStr: `${t('column.time')} (${timeOffset})`,
       width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
-          <Cell tooltip={timestamp}>
-            <TruncatedFormat>
-              {timestamp}
-            </TruncatedFormat>
+          <Cell tooltip={getTooltipContent(timestamp, t)}>
+            {timestamp}
           </Cell>
         )
       },
@@ -52,16 +49,16 @@ export default function getColumns(props) {
     {
       id: 'type',
       name: 'column.type',
+      className: 'align-left',
       width: getColumnWidth('type', columnsWidth),
       renderer: (rowIndex) => {
         const { type, amount } = filteredData[rowIndex]
         const classes = amountStyle(amount)
         return (
-          <Cell
-            className={classes}
-            tooltip={type}
-          >
-            {type}
+          <Cell tooltip={getTooltipContent(type, t)}>
+            <span className={classes}>
+              {type}
+            </span>
           </Cell>
         )
       },
@@ -79,7 +76,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedFloat(price)}
+            tooltip={getTooltipContent(fixedFloat(price), t)}
           >
             {formatAmount(price, { color })}
           </Cell>
@@ -98,7 +95,7 @@ export default function getColumns(props) {
         return (
           <Cell
             className='bitfinex-text-align-right'
-            tooltip={fixedAmount}
+            tooltip={getTooltipContent(fixedAmount, t)}
           >
             {formatAmount(amount)}
           </Cell>
@@ -110,11 +107,12 @@ export default function getColumns(props) {
     {
       id: 'pair',
       name: 'column.pair',
+      className: 'align-left',
       width: getColumnWidth('pair', columnsWidth),
       renderer: () => {
         const formattedCurrentPair = formatPair(targetPair)
         return (
-          <Cell tooltip={formattedCurrentPair}>
+          <Cell tooltip={getTooltipContent(formattedCurrentPair, t)}>
             {formattedCurrentPair}
           </Cell>
         )

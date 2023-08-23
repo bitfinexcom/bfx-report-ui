@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
+import { getTooltipContent } from 'utils/columns'
 import { formatAmount, formatFraction } from 'ui/utils'
 
 const getColor = val => (val > 0 ? 'red' : 'green')
 
 const getColumns = ({
+  t,
   makerFee,
   takerFeeToFiat,
   takerFeeToStable,
@@ -24,7 +26,7 @@ const getColumns = ({
       name: makerFee > 0 ? 'column.maker_fees' : 'column.maker_rebate',
       width: 100,
       renderer: () => (
-        <Cell tooltip={formattedMakerFee}>
+        <Cell tooltip={getTooltipContent(formattedMakerFee, t)}>
           {formatAmount(makerFee * 100, { color: getColor(makerFee), minDigits: 2 })}
           %
         </Cell>
@@ -36,7 +38,7 @@ const getColumns = ({
       name: takerFeeToCrypto > 0 ? 'column.taker_fees_crypto' : 'column.taker_rebate_crypto',
       width: 140,
       renderer: () => (
-        <Cell tooltip={formattedTakerFeeToCrypto}>
+        <Cell tooltip={getTooltipContent(formattedTakerFeeToCrypto, t)}>
           {formatAmount(takerFeeToCrypto * 100, { color: getColor(takerFeeToCrypto), minDigits: 2 })}
           %
         </Cell>
@@ -48,7 +50,7 @@ const getColumns = ({
       name: takerFeeToFiat > 0 ? 'column.taker_fees_fiat' : 'column.taker_rebate_fiat',
       width: 140,
       renderer: () => (
-        <Cell tooltip={formattedTakerFeeToFiat}>
+        <Cell tooltip={getTooltipContent(formattedTakerFeeToFiat, t)}>
           {formatAmount(takerFeeToFiat * 100, { color: getColor(takerFeeToFiat), minDigits: 2 })}
           %
         </Cell>
@@ -60,7 +62,7 @@ const getColumns = ({
       name: takerFeeToStable > 0 ? 'column.taker_fees_stable' : 'column.taker_rebate_stable',
       width: 140,
       renderer: () => (
-        <Cell tooltip={formattedTakerFeeToStable}>
+        <Cell tooltip={getTooltipContent(formattedTakerFeeToStable, t)}>
           {formatAmount(takerFeeToStable * 100, { color: getColor(takerFeeToStable), minDigits: 2 })}
           %
         </Cell>
@@ -87,6 +89,7 @@ const AccountSummaryFees = ({
   } = data
 
   const columns = getColumns({
+    t,
     makerFee: makerFee || makerRebate || 0,
     takerFeeToCrypto: takerFeeToCrypto || takerRebateToCrypto || 0,
     takerFeeToFiat: takerFeeToFiat || takerRebateToFiat || 0,
