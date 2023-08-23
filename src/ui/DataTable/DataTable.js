@@ -164,7 +164,7 @@ class DataTable extends PureComponent {
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
 
-    if (device === DEVICES.PHONE && tableColumns.length > 2) {
+    if (device === DEVICES.PHONE && tableColumns.length >= 2) {
       return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
     }
 
@@ -179,12 +179,14 @@ class DataTable extends PureComponent {
         getCellClipboardData={this.getCellClipboardData}
         onCopy={this.onCopy}
         bodyContextMenuRenderer={this.renderBodyContextMenu}
+        defaultRowHeight={26}
       >
         {tableColumns.map(column => (
           <Column
             key={column.id}
             id={column.id}
             name={column.nameStr ? column.nameStr : t(column.name)}
+            className={column?.className ?? 'align-right'}
             cellRenderer={column.renderer}
           />
         ))}

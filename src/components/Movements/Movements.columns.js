@@ -1,8 +1,5 @@
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 import Explorer from 'ui/Explorer'
@@ -19,6 +16,7 @@ const getColumns = ({
   {
     id: 'id',
     name: 'column.id',
+    className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
@@ -32,15 +30,14 @@ const getColumns = ({
   },
   {
     id: 'mtsUpdated',
+    className: 'align-left',
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mtsUpdated', columnsWidth),
     renderer: (rowIndex) => {
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
       return (
         <Cell tooltip={timestamp}>
-          <TruncatedFormat>
-            {timestamp}
-          </TruncatedFormat>
+          {timestamp}
         </Cell>
       )
     },
@@ -49,6 +46,7 @@ const getColumns = ({
   {
     id: 'currency',
     name: 'column.currency',
+    className: 'align-left',
     width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
       const { currency } = filteredData[rowIndex]
@@ -63,6 +61,7 @@ const getColumns = ({
   {
     id: 'status',
     name: 'column.status',
+    className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
       const { status } = filteredData[rowIndex]
@@ -142,6 +141,7 @@ const getColumns = ({
   {
     id: 'destinationAddress',
     name: 'column.destination',
+    className: 'align-left',
     width: getColumnWidth('destinationAddress', columnsWidth),
     renderer: (rowIndex) => {
       const { currency, destinationAddress } = filteredData[rowIndex]
@@ -160,6 +160,7 @@ const getColumns = ({
   {
     id: 'transactionId',
     name: 'column.transactionId',
+    className: 'align-left',
     width: getColumnWidth('transactionId', columnsWidth),
     renderer: (rowIndex) => {
       const { transactionId } = filteredData[rowIndex]
@@ -174,6 +175,7 @@ const getColumns = ({
   {
     id: 'note',
     name: 'column.note',
+    className: 'align-left',
     width: getColumnWidth('note', columnsWidth),
     renderer: (rowIndex) => {
       const { note } = filteredData[rowIndex]

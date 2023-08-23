@@ -455,7 +455,7 @@ function* exportCSV({ payload: targets }) {
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'download.export',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {

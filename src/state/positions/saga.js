@@ -60,7 +60,7 @@ function* fetchPositions() {
       yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'positions.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {

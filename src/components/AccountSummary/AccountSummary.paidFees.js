@@ -3,20 +3,21 @@ import PropTypes from 'prop-types'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
-import { COLUMN_WIDTHS } from 'utils/columns'
 import { fixedFloat, formatAmount } from 'ui/utils'
+import { COLUMN_WIDTHS, getTooltipContent } from 'utils/columns'
 
-export const getColumns = ({ data }) => [
+export const getColumns = ({ data, t }) => [
   {
     id: 'currency',
     name: 'column.currency',
+    className: 'align-left',
     width: window.innerWidth > 390
       ? 250
       : COLUMN_WIDTHS.SYMBOL,
     renderer: (rowIndex) => {
       const { curr } = data[rowIndex]
       return (
-        <Cell tooltip={curr}>
+        <Cell tooltip={getTooltipContent(curr, t)}>
           {curr}
         </Cell>
       )
@@ -33,7 +34,7 @@ export const getColumns = ({ data }) => [
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={fixedAmount}
+          tooltip={getTooltipContent(fixedAmount, t)}
         >
           {formatAmount(amount, {
             digits: 2,
@@ -62,7 +63,7 @@ const AccountSummaryPaidFees = ({
     amount: total,
   })
 
-  const columns = getColumns({ data: formattedData })
+  const columns = getColumns({ data: formattedData, t })
 
   return (
     <div className='section-account-summary-data-item'>

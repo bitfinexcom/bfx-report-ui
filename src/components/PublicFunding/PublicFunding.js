@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -75,14 +75,14 @@ class PublicFunding extends PureComponent {
       showContent = <NoData />
     } else {
       showContent = (
-        <Fragment>
+        <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
             numRows={entries.length}
             tableColumns={tableColumns}
           />
           <Pagination target={TYPE} loading={pageLoading} />
-        </Fragment>
+        </div>
       )
     }
 
@@ -90,18 +90,29 @@ class PublicFunding extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('publicfunding.title')}</SectionHeaderTitle>
-          <TimeRange className='section-header-time-range' />
           <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.date')}
+              </SectionHeaderItemLabel>
+              <TimeRange className='section-header-time-range' />
+            </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
               <SymbolSelector
+                isFunding
                 currentCoin={targetSymbol}
                 onSymbolSelect={this.onSymbolSelect}
               />
             </SectionHeaderItem>
-            <ColumnsFilter target={TYPE} />
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.columns')}
+              </SectionHeaderItemLabel>
+              <ColumnsFilter target={TYPE} />
+            </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
             <SyncSymbolPrefButton />
           </SectionHeaderRow>

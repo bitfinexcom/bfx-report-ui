@@ -52,7 +52,7 @@ function* fetchLogins() {
       yield put(actions.fetchFail({
         id: 'status.fail',
         topic: 'logins.title',
-        detail: JSON.stringify(error),
+        detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {

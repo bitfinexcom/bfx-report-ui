@@ -1,7 +1,7 @@
 .bp3-multi-select {
   position: relative;
   min-width: 223px;
-  min-height: 40px;
+  min-height: 34px;
 
   &.bp3-input {
     box-shadow: none;
@@ -11,7 +11,7 @@
 
   &-arrow {
     position: absolute;
-    top: 6px;
+    top: 5px;
     right: 8px;
   }
 

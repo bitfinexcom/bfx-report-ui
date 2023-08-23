@@ -60,7 +60,7 @@ function* fetchData(section, data, method) {
     yield put(actions.fetchFail({
       id: 'status.fail',
       topic: 'candles.title',
-      detail: JSON.stringify(error),
+      detail: error?.message ?? JSON.stringify(error),
     }))
   }
 }

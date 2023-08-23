@@ -1,11 +1,8 @@
 import React from 'react'
-import {
-  Cell,
-  TruncatedFormat,
-} from '@blueprintjs/table'
+import { Cell } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
-import { getColumnWidth } from 'utils/columns'
+import { getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -21,10 +18,8 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
       return (
-        <Cell tooltip={timestamp}>
-          <TruncatedFormat>
-            {timestamp}
-          </TruncatedFormat>
+        <Cell tooltip={getTooltipContent(timestamp, t)}>
+          {timestamp}
         </Cell>
       )
     },
@@ -37,10 +32,8 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const { log } = filteredData[rowIndex]
       return (
-        <Cell tooltip={log}>
-          <TruncatedFormat>
-            {log}
-          </TruncatedFormat>
+        <Cell tooltip={getTooltipContent(log, t)}>
+          {log}
         </Cell>
       )
     },
@@ -53,7 +46,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       const { ip } = filteredData[rowIndex]
       return (
-        <Cell tooltip={ip}>
+        <Cell tooltip={getTooltipContent(ip, t)}>
           {ip}
         </Cell>
       )
