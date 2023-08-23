@@ -75,7 +75,7 @@ class ExportDialog extends PureComponent {
   }
 
   startExport = () => {
-    const { exportCsv, toggleDialog, location } = this.props
+    const { exportCsv, location } = this.props
     const { currentTargets } = this.state
     const target = getTarget(location.pathname)
     const targets = queryConstants.MENU_POSITIONS_AUDIT !== target
@@ -83,7 +83,6 @@ class ExportDialog extends PureComponent {
       : [queryConstants.MENU_POSITIONS_AUDIT]
 
     exportCsv(targets)
-    // toggleDialog()
   }
 
   toggleTarget = (target) => {
@@ -117,7 +116,6 @@ class ExportDialog extends PureComponent {
     if (!isOpen) {
       return null
     }
-    console.log('++++isExporting', isExporting)
     const showLoader = showFrameworkMode && isExporting
     const target = getTarget(location.pathname)
     const isWallets = location && location.pathname && target === queryConstants.MENU_WALLETS
