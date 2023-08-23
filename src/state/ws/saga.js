@@ -34,7 +34,6 @@ function* handleCsvGenerationCompleted() {
   yield put(setIsCsvExporting(false))
   yield put(toggleExportDialog())
   yield put(toggleExportSuccessDialog())
-  yield console.log('+++handleCsvGenerationCompleted DONE')
 }
 
 export default function* wsSaga() {
