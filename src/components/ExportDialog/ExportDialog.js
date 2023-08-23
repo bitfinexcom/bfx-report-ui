@@ -5,16 +5,20 @@ import {
   Classes,
   Dialog,
   Intent,
+  Spinner,
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import DateFormatSelector from 'ui/DateFormatSelector'
-import ShowMilliseconds from 'ui/ShowMilliseconds'
+import config from 'config'
 import { formatDate } from 'state/utils'
 import { getTarget } from 'state/query/utils'
+import ShowMilliseconds from 'ui/ShowMilliseconds'
 import queryConstants from 'state/query/constants'
+import DateFormatSelector from 'ui/DateFormatSelector'
 
 import ExportTargetsSelector from './ExportDialog.TargetsSelector'
+
+const { showFrameworkMode } = config
 
 class ExportDialog extends PureComponent {
   static propTypes = {
@@ -31,6 +35,7 @@ class ExportDialog extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     timestamp: PropTypes.number,
     timezone: PropTypes.string.isRequired,
+    isExporting: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -38,6 +43,7 @@ class ExportDialog extends PureComponent {
     end: 0,
     email: '',
     timestamp: null,
+    isExporting: false,
   }
 
   state = {
@@ -77,7 +83,7 @@ class ExportDialog extends PureComponent {
       : [queryConstants.MENU_POSITIONS_AUDIT]
 
     exportCsv(targets)
-    toggleDialog()
+    // toggleDialog()
   }
 
   toggleTarget = (target) => {
@@ -100,6 +106,7 @@ class ExportDialog extends PureComponent {
       email,
       start,
       isOpen,
+      isExporting,
       location,
       timezone,
       timestamp,
@@ -110,6 +117,8 @@ class ExportDialog extends PureComponent {
     if (!isOpen) {
       return null
     }
+    console.log('++++isExporting', isExporting)
+    const showLoader = showFrameworkMode && isExporting
     const target = getTarget(location.pathname)
     const isWallets = location && location.pathname && target === queryConstants.MENU_WALLETS
     const datetime = getFullTime(timestamp, true, true)
@@ -182,7 +191,10 @@ class ExportDialog extends PureComponent {
               disabled={queryConstants.MENU_POSITIONS_AUDIT !== target && currentTargets.length === 0}
               onClick={this.startExport}
             >
-              {t('download.export')}
+              {showLoader
+                ? <Spinner size={20} />
+                : <>{t('download.export') }</>
+              }
             </Button>
           </div>
         </div>
