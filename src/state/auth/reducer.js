@@ -143,6 +143,11 @@ export function authReducer(state = initialState, action) {
         ...state,
         userShouldReLogin: payload,
       }
+    case types.SET_SYNC_AFTER_UPDATE:
+      return {
+        ...state,
+        shouldNotSyncOnStartupAfterUpdate: payload,
+      }
     case types.HIDE_AUTH:
       return {
         ...state,
