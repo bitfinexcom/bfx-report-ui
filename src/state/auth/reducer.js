@@ -55,6 +55,7 @@ const initialState = {
   showOtpLogin: false,
   loginToken: '',
   userShouldReLogin: '',
+  shouldNotSyncOnStartupAfterUpdate: false,
 }
 
 export function authReducer(state = initialState, action) {
