@@ -1,3 +1,1 @@
-import SyncAfterUpdatePref from './SyncAfterUpdatePref.container'
-
-export default SyncAfterUpdatePref
+export { default } from './SyncAfterUpdatePref.container'
