@@ -6,13 +6,14 @@
   &.bp3-input {
     box-shadow: none;
     background-color: var(--multiBg);
-    border: 1px solid var(--borderColor);
+    border: none;
   }
 
   &-arrow {
     position: absolute;
     top: 5px;
     right: 8px;
+    cursor: pointer;
   }
 
   input {

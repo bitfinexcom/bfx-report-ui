@@ -1,13 +1,12 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
-import classNames from 'classnames'
 import {
   Button,
   InputGroup,
-  Intent,
 } from '@blueprintjs/core'
 import _isEqual from 'lodash/isEqual'
 import _isString from 'lodash/isString'
+
 
 import ColumnsSelect from 'ui/ColumnsSelect'
 import DateInput from 'ui/DateInput'
@@ -25,6 +24,7 @@ import { propTypes, defaultProps } from './ColumnsFilter.props'
 import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 import SideSelector from './Selectors/SideSelector'
 import WalletSelector from './Selectors/WalletSelector'
+import { getFiltersTitle, getFiltersClassNames } from './ColumnsFilter.helpers'
 
 const MAX_FILTERS = 7
 const { DATE } = DATA_TYPES
@@ -200,18 +200,17 @@ class ColumnsFilter extends PureComponent {
     const { isOpen, filters } = this.state
 
     const hasChanges = this.haveFiltersChanged()
-    const hasAppliedFilters = currentFilters.some(filter => filter.value)
-    const buttonClasses = classNames('button--large', { 'columns-filter--active': hasAppliedFilters })
+    const filtersTitle = getFiltersTitle(currentFilters, t)
+    const filtersClassName = getFiltersClassNames(currentFilters)
 
     return (
       <>
         <div className='columns-filter-wrapper'>
-          <Button
-            onClick={this.toggleDialog}
-            className={buttonClasses}
-            intent={Intent.SUCCESS}
-          >
-            {t('columnsfilter.title')}
+          <Button onClick={this.toggleDialog}>
+            <span className={filtersClassName}>
+              {filtersTitle}
+            </span>
+            <Icon.PLUS />
           </Button>
         </div>
 

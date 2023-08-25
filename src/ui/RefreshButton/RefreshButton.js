@@ -1,27 +1,24 @@
-import React from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
+import { Button, Intent } from '@blueprintjs/core'
 
-import Icon from 'icons'
-import Tooltip from 'ui/Tooltip'
-
-const RefreshButton = (props) => {
-  const { onClick, t } = props
+const RefreshButton = ({ onClick }) => {
+  const { t } = useTranslation()
 
   return (
-    <Tooltip
-      content={t('timeframe.refresh')}
-      usePortal={false}
-      targetClassName='refresh-button'
+    <Button
+      onClick={onClick}
+      intent={Intent.SUCCESS}
+      className='refresh-button'
     >
-      <Icon.REFRESH_DOUBLE onClick={onClick} />
-    </Tooltip>
+      {t('columnsfilter.title')}
+    </Button>
   )
 }
 
 RefreshButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(RefreshButton)
+export default memo(RefreshButton)

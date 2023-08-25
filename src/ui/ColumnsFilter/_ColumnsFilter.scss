@@ -5,8 +5,25 @@
 
     .bp3-button {
       height: 34px;
-      min-width: 95px;
+      min-width: 133px;
       font-size: 14px;
+      background-color: var(--multiBg);
+      border: none;
+
+      &:active, &:hover {
+        border: none;
+      }
+
+      &-text {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .no-filters {
+          color: var(--color2);
+        }
+      }
     }
   }
 
@@ -68,8 +85,8 @@
       margin-right: 13px;
 
       .bp3-input {
-        height: 40px;
-        line-height: 40px;
+        height: 33px;
+        line-height: 33px;
       }
 
       &--select {
@@ -164,6 +181,10 @@
 
 @media screen and (max-width: 576px) {
   .columns-filter {
+    &-dialog {
+      min-width: 100%;
+    }
+
     &-item {
       max-width: 380px;
       padding: 30px 0;

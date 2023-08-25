@@ -224,7 +224,9 @@
     "clear": "Clear",
     "cancel": "Cancel",
     "apply": "Apply",
+    "none": "None",
     "filters": {
+      "title": "Filters",
       "contains": "Contains",
       "beginsWith": "Begins with",
       "endsWith": "Ends with",

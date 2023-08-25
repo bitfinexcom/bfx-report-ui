@@ -40,6 +40,7 @@ import { ReactComponent as NOTEBOOK } from './notebook.svg'
 import { ReactComponent as OFFLINE } from './offline.svg'
 import { ReactComponent as ORDERS } from './orders.svg'
 import { ReactComponent as PIE_CHART } from './pie-chart.svg'
+import { ReactComponent as PLUS } from './plus.svg'
 import { ReactComponent as PLUS_CIRCLE } from './plus-circle.svg'
 import { ReactComponent as REFRESH_DOUBLE } from './refresh-double.svg'
 import { ReactComponent as SEARCH } from './search.svg'
@@ -98,6 +99,7 @@ export default {
   OFFLINE,
   ORDERS,
   PIE_CHART,
+  PLUS,
   PLUS_CIRCLE,
   REFRESH_DOUBLE,
   SEARCH,
