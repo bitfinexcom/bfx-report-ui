@@ -3,19 +3,19 @@ import { Checkbox } from '@blueprintjs/core'
 
 import { propTypes, defaultProps } from './SyncAfterUpdatePref.props'
 
-const TableScrollPref = (props) => {
-  const { tableScroll, toggleTableScroll } = props
+const SyncAfterUpdatePref = (props) => {
+  const { shouldSyncAfterUpdate, syncAfterUpdate } = props
 
   return (
     <Checkbox
-      checked={tableScroll}
-      onChange={toggleTableScroll}
       large
+      checked={shouldSyncAfterUpdate}
+      onChange={() => syncAfterUpdate(shouldSyncAfterUpdate)}
     />
   )
 }
 
-TableScrollPref.propTypes = propTypes
-TableScrollPref.defaultProps = defaultProps
+SyncAfterUpdatePref.propTypes = propTypes
+SyncAfterUpdatePref.defaultProps = defaultProps
 
-export default TableScrollPref
+export default SyncAfterUpdatePref
