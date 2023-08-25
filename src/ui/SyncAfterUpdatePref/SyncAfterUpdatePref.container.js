@@ -1,18 +1,18 @@
 import { connect } from 'react-redux'
 
-import { toggleTableScroll } from 'state/base/actions'
-import { getTableScroll } from 'state/base/selectors'
+import { syncAfterUpdate } from 'state/auth/actions'
+import { getShouldNotSyncOnStartupAfterUpdate } from 'state/auth/selectors'
 
-import TableScrollPref from './SyncAfterUpdatePref'
+import SyncAfterUpdatePref from './SyncAfterUpdatePref'
 
 const mapStateToProps = state => ({
-  tableScroll: getTableScroll(state),
+  shouldSyncAfterUpdate: !getShouldNotSyncOnStartupAfterUpdate(state),
 })
 
 const mapDispatchToProps = {
-  toggleTableScroll,
+  syncAfterUpdate,
 }
 
-const TableScrollPrefContainer = connect(mapStateToProps, mapDispatchToProps)(TableScrollPref)
+const SyncAfterUpdatePrefContainer = connect(mapStateToProps, mapDispatchToProps)(SyncAfterUpdatePref)
 
-export default TableScrollPrefContainer
+export default SyncAfterUpdatePrefContainer
