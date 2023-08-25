@@ -486,9 +486,21 @@ function* logout() {
 }
 
 function* handleSyncAfterUpdate({ payload }) {
-  const auth = yield select(selectAuth)
-  const params = { shouldNotSyncOnStartupAfterUpdate: payload }
-  yield makeFetchCall('updateUser', params, auth)
+  try {
+    const auth = yield select(selectAuth)
+    const params = { shouldNotSyncOnStartupAfterUpdate: payload }
+    const { error } = yield makeFetchCall('updateUser', params, auth)
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.updateUser',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
 }
 
 export default function* authSaga() {
