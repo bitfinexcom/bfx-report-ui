@@ -36,6 +36,7 @@
     "accountRemoved": "Account removed",
     "accountRemoving": "Account removing",
     "useApiKey": "Use API Key",
+    "updateUser": "Update user",
     "loginEmail": {
       "emailOrUserName": "Email or Username",
       "bfxAccPassword": "Password",
