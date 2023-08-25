@@ -485,6 +485,12 @@ function* logout() {
   yield put(tokenRefreshStop())
 }
 
+function* handleSyncAfterUpdate({ payload }) {
+  const auth = yield select(selectAuth)
+  const params = { shouldNotSyncOnStartupAfterUpdate: payload }
+  yield makeFetchCall('updateUser', params, auth)
+}
+
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.FETCH_USERS, fetchUsers)
@@ -499,5 +505,6 @@ export default function* authSaga() {
   yield takeLatest(types.LOGOUT, logout)
   yield takeLatest(types.REMOVE_USER, removeUser)
   yield takeLatest(types.AUTH_EXPIRED, handleExpiredAuth)
+  yield takeLatest(types.SET_SYNC_AFTER_UPDATE, handleSyncAfterUpdate)
   yield fork(tokenRefreshSaga)
 }
