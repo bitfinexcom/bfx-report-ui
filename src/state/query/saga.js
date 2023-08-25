@@ -460,6 +460,9 @@ function* exportCSV({ payload: targets }) {
     }
 
     if (error) {
+      if (showFrameworkMode) {
+        yield put(actions.setIsCsvExporting(false))
+      }
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'download.export',
@@ -467,6 +470,9 @@ function* exportCSV({ payload: targets }) {
       }))
     }
   } catch (fail) {
+    if (showFrameworkMode) {
+      yield put(actions.setIsCsvExporting(false))
+    }
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'download.export',
