@@ -1,22 +1,21 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox } from '@blueprintjs/core'
 
-const SyncAfterUpdatePref = (props) => {
-  const { shouldSyncAfterUpdate, syncAfterUpdate } = props
+import { syncAfterUpdate } from 'state/auth/actions'
+import { getShouldNotSyncOnStartupAfterUpdate } from 'state/auth/selectors'
+
+const SyncAfterUpdatePref = () => {
+  const dispatch = useDispatch()
+  const shouldSyncAfterUpdate = !useSelector(getShouldNotSyncOnStartupAfterUpdate)
 
   return (
     <Checkbox
       large
       checked={shouldSyncAfterUpdate}
-      onChange={() => syncAfterUpdate(shouldSyncAfterUpdate)}
+      onChange={() => dispatch(syncAfterUpdate(shouldSyncAfterUpdate))}
     />
   )
-}
-
-SyncAfterUpdatePref.propTypes = {
-  syncAfterUpdate: PropTypes.func.isRequired,
-  shouldSyncAfterUpdate: PropTypes.bool.isRequired,
 }
 
 export default SyncAfterUpdatePref
