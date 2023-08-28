@@ -1,7 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Checkbox } from '@blueprintjs/core'
-
-import { propTypes, defaultProps } from './SyncAfterUpdatePref.props'
 
 const SyncAfterUpdatePref = (props) => {
   const { shouldSyncAfterUpdate, syncAfterUpdate } = props
@@ -15,7 +14,9 @@ const SyncAfterUpdatePref = (props) => {
   )
 }
 
-SyncAfterUpdatePref.propTypes = propTypes
-SyncAfterUpdatePref.defaultProps = defaultProps
+SyncAfterUpdatePref.propTypes = {
+  syncAfterUpdate: PropTypes.func.isRequired,
+  shouldSyncAfterUpdate: PropTypes.bool.isRequired,
+}
 
 export default SyncAfterUpdatePref
