@@ -1,1 +1,1 @@
-export { default } from './SyncAfterUpdatePref.container'
+export { default } from './SyncAfterUpdatePref'
