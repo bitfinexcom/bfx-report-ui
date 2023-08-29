@@ -15,10 +15,10 @@ const getColumns = ({
   onDetailsClick,
 }) => [
   {
-    id: 'id',
+    id: 'moreDetails',
     name: 'column.moreDetails',
     className: 'align-left',
-    width: getColumnWidth('id', columnsWidth),
+    width: getColumnWidth('moreDetails', columnsWidth),
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
       /* eslint-disable jsx-a11y/anchor-is-valid */
