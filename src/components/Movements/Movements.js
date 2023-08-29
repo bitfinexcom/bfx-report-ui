@@ -28,6 +28,7 @@ class Movements extends PureComponent {
       destinationAddress: PropTypes.bool,
       fees: PropTypes.bool,
       id: PropTypes.bool,
+      moreDetails: PropTypes.bool,
       mtsUpdated: PropTypes.bool,
       note: PropTypes.bool,
       status: PropTypes.bool,
@@ -85,6 +86,12 @@ class Movements extends PureComponent {
 
   clearSymbols = () => clearAllSymbols(TYPE, this.props)
 
+  showExtraInfo = (e, { id }) => {
+    e.preventDefault()
+
+    console.log('+++showExtraInfo id', id)
+  }
+
   render() {
     const {
       t,
@@ -106,6 +113,7 @@ class Movements extends PureComponent {
       getFullTime,
       columnsWidth,
       filteredData: entries,
+      onDetailsClick: this.showExtraInfo,
     }).filter(({ id }) => columns[id])
 
     const title = 'movements.title'
