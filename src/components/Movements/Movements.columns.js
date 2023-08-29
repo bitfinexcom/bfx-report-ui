@@ -23,7 +23,7 @@ const getColumns = ({
       const { id } = filteredData[rowIndex]
       /* eslint-disable jsx-a11y/anchor-is-valid */
       return (
-        <Cell tooltip={id}>
+        <Cell tooltip={t('column.moreDetails')}>
           <a
             href='#'
             onClick={e => onDetailsClick(e, { id })}
