@@ -24,12 +24,14 @@ const getColumns = ({
       /* eslint-disable jsx-a11y/anchor-is-valid */
       return (
         <Cell tooltip={t('column.moreDetails')}>
-          <a
-            href='#'
-            onClick={e => onDetailsClick(e, { id })}
-          >
-            {t('column.show')}
-          </a>
+          <>
+            <a
+              href='#'
+              onClick={e => onDetailsClick(e, { id })}
+            >
+              {t('column.show')}
+            </a>
+          </>
         </Cell>
       )
       /* eslint-enable jsx-a11y/anchor-is-valid */
