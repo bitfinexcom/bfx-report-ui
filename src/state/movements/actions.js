@@ -86,6 +86,13 @@ export function clearTargetSymbols() {
   }
 }
 
+export function getMovementInfo(id) {
+  return {
+    type: types.GET_EXTRA_INFO,
+    payload: id,
+  }
+}
+
 export default {
   addTargetSymbol,
   clearTargetSymbols,
@@ -95,4 +102,5 @@ export default {
   removeTargetSymbol,
   setTargetSymbols,
   updateMovements,
+  getMovementInfo,
 }
