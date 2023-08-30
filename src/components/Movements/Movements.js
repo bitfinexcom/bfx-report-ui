@@ -50,6 +50,7 @@ class Movements extends PureComponent {
     jumpPage: PropTypes.func,
     existingCoins: PropTypes.arrayOf(PropTypes.string),
     getFullTime: PropTypes.func.isRequired,
+    getMovementInfo: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
@@ -87,9 +88,9 @@ class Movements extends PureComponent {
   clearSymbols = () => clearAllSymbols(TYPE, this.props)
 
   showExtraInfo = (e, { id }) => {
+    const { getMovementInfo } = this.props
     e.preventDefault()
-
-    console.log('+++showExtraInfo id', id)
+    getMovementInfo(id)
   }
 
   render() {
