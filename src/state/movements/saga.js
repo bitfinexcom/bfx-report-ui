@@ -6,6 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { selectAuth } from 'state/auth/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
@@ -70,6 +71,14 @@ function* fetchMovements() {
   }
 }
 
+function* getExtraInfo({ payload }) {
+  const auth = yield select(selectAuth)
+  const params = { id: payload }
+  const { result, error } = yield makeFetchCall('getMovementInfo', params, auth)
+  yield console.log('+++Saga getExtraInfo result', result)
+  yield console.log('+++Saga getExtraInfo error', error)
+}
+
 function* refreshMovements() {
   yield put(refreshPagination(TYPE))
 }
@@ -82,4 +91,5 @@ export default function* movementsSaga() {
   yield takeLatest(types.FETCH_MOVEMENTS, fetchMovements)
   yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS], refreshMovements)
   yield takeLatest(types.FETCH_FAIL, fetchMovementsFail)
+  yield takeLatest(types.GET_EXTRA_INFO, getExtraInfo)
 }
