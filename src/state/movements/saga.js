@@ -78,7 +78,7 @@ function* getExtraInfo({ payload }) {
     const { result, error } = yield makeFetchCall('getMovementInfo', params, auth)
 
     if (result) {
-      yield console.log('+++getExtraInfo result', result)
+      yield put(actions.setMovementInfo(result))
     }
 
     if (error) {
