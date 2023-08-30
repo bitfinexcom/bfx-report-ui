@@ -72,11 +72,29 @@ function* fetchMovements() {
 }
 
 function* getExtraInfo({ payload }) {
-  const auth = yield select(selectAuth)
-  const params = { id: payload }
-  const { result, error } = yield makeFetchCall('getMovementInfo', params, auth)
-  yield console.log('+++Saga getExtraInfo result', result)
-  yield console.log('+++Saga getExtraInfo error', error)
+  try {
+    const params = { id: payload }
+    const auth = yield select(selectAuth)
+    const { result, error } = yield makeFetchCall('getMovementInfo', params, auth)
+
+    if (result) {
+      yield console.log('+++getExtraInfo result', result)
+    }
+
+    if (error) {
+      yield put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'movements.title',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(actions.fetchFail({
+      id: 'status.request.error',
+      topic: 'movements.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
 }
 
 function* refreshMovements() {
