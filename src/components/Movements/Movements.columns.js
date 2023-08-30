@@ -21,7 +21,6 @@ const getColumns = ({
     width: getColumnWidth('moreDetails', columnsWidth),
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
-      /* eslint-disable jsx-a11y/anchor-is-valid */
       return (
         <Cell tooltip={t('column.moreDetails')}>
           <>
@@ -34,7 +33,6 @@ const getColumns = ({
           </>
         </Cell>
       )
-      /* eslint-enable jsx-a11y/anchor-is-valid */
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   },
