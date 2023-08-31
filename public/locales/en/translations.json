@@ -482,7 +482,7 @@
     "table_scroll": "Table Scroll",
     "preserve_timeframe": "Preserve Timeframe",
     "remove_account": "Remove Account",
-    "sync_after_update": "Auto start sync after the app update",
+    "sync_after_update": "Auto Sync After Update",
     "sync": {
       "add-filter": "Add Filter",
       "add-pair": "Add Pair",
