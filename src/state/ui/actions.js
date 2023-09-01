@@ -130,6 +130,12 @@ export function toggleNavigationDrawer() {
   }
 }
 
+export function toggleExtraInfoDialog() {
+  return {
+    type: types.TOGGLE_EXTRA_INFO_DIALOG,
+  }
+}
+
 export default {
   electronBackendLoaded,
   disableErrorDialog,
@@ -142,4 +148,5 @@ export default {
   toggleGoToRangeDialog,
   toggleNavigationDrawer,
   proceedPaginationRequest,
+  toggleExtraInfoDialog,
 }
