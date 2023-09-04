@@ -310,7 +310,10 @@
     "cancel": "Cancel",
     "notagain": "Don't show this message again",
     "continue": "Continue",
-    "warning": "Warning"
+    "warning": "Warning",
+    "sync-in-progress": "Syncing in Progress",
+    "first-sync-message": "Your data is downloading, please wait until the syncing process is finished.",
+    "okay_btn": "Okay"
   },
   "header": {
     "logout": "Logout",
