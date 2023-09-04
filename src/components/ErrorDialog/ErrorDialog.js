@@ -1,6 +1,4 @@
-import React, {
-  memo, useState, useMemo, useEffect,
-} from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
