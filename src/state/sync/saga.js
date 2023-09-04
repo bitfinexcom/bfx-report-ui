@@ -58,6 +58,10 @@ function* startSyncing() {
 }
 
 function* startSyncNow() {
+  const isSyncing = yield select(getIsSyncing)
+  if (isSyncing) {
+    return
+  }
   const { result, error } = yield call(syncNow)
   if (result) {
     yield put(updateStatus({ id: 'sync.start-sync' }))
