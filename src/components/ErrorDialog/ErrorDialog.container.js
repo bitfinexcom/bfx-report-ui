@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
-import { startSyncNow } from 'state/sync/actions'
+import { startSyncing } from 'state/sync/actions'
 import { toggleErrorDialog, disableErrorDialog } from 'state/ui/actions'
 import {
   getIsErrorDialogOpen,
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  startSync: startSyncNow,
+  startSync: startSyncing,
   toggleDialog: toggleErrorDialog,
   disableDialog: disableErrorDialog,
 }
