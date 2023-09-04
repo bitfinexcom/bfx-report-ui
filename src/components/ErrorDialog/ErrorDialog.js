@@ -1,4 +1,6 @@
-import React, { memo, useState } from 'react'
+import React, {
+  memo, useState, useMemo, useEffect,
+} from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
@@ -26,6 +28,10 @@ const ErrorDialog = ({
   const [isDialogDisabled, setIsDialogDisabled] = useState(isDisabled)
   const isFirstSync = _isEqual(FIRST_SYNC_MESSAGE, errorMessage)
   const shouldStartSync = isFirstSync && isOpen && !isSyncing
+
+  useEffect(() => {
+    if (shouldStartSync) startSync()
+  }, [shouldStartSync])
 
   const handleClose = () => {
     toggleDialog(false)
