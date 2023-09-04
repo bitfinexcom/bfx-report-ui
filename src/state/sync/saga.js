@@ -38,6 +38,10 @@ const updateSyncErrorStatus = msg => updateErrorStatus({
 })
 
 function* startSyncing() {
+  const isSyncing = yield select(getIsSyncing)
+  if (isSyncing) {
+    return
+  }
   const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
   const { result, error } = yield call(enableSyncMode, { isNotSyncRequired })
 
