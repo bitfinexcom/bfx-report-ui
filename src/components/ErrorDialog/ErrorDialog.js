@@ -16,6 +16,8 @@ import { FIRST_SYNC_MESSAGE } from './ErrorDialog.constants'
 const ErrorDialog = ({
   t,
   isOpen,
+  isSyncing,
+  startSync,
   isDisabled,
   errorMessage,
   toggleDialog,
@@ -23,6 +25,7 @@ const ErrorDialog = ({
 }) => {
   const [isDialogDisabled, setIsDialogDisabled] = useState(isDisabled)
   const isFirstSync = _isEqual(FIRST_SYNC_MESSAGE, errorMessage)
+  const shouldStartSync = isFirstSync && isOpen && !isSyncing
 
   const handleClose = () => {
     toggleDialog(false)
@@ -67,6 +70,8 @@ const ErrorDialog = ({
 
 ErrorDialog.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  isSyncing: PropTypes.bool.isRequired,
+  startSync: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   toggleDialog: PropTypes.func.isRequired,
   disableDialog: PropTypes.func.isRequired,
