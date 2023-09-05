@@ -9,6 +9,7 @@ import { makeFetchCall } from 'state/utils'
 import { selectAuth } from 'state/auth/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
+import { toggleExtraInfoDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
@@ -79,6 +80,7 @@ function* getExtraInfo({ payload }) {
 
     if (result) {
       yield put(actions.setMovementInfo(result))
+      yield put(toggleExtraInfoDialog(result))
     }
 
     if (error) {
