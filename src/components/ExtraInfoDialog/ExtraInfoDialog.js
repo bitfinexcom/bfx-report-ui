@@ -18,7 +18,7 @@ const ExtraInfoDialog = ({
     usePortal
     isOpen={isOpen}
     onClose={toggleDialog}
-    className='preferences'
+    className='extra-info'
     isCloseButtonShown={false}
     title={t('movements.moreDetails')}
     icon={<Icon.INFO_CIRCLE />}
