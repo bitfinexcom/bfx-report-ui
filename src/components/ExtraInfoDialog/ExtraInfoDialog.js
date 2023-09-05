@@ -37,8 +37,8 @@ const ExtraInfoDialog = ({
       onClose={toggleDialog}
       className='preferences'
       isCloseButtonShown={false}
-      title={t('preferences.title')}
-      icon={<Icon.SLIDER_CIRCLE_H />}
+      title={t('movements.moreDetails')}
+      icon={<Icon.INFO_CIRCLE />}
     >
       <div className={Classes.DIALOG_BODY}>
         <div className='preferences-row'>
