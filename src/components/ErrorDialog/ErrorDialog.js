@@ -52,7 +52,7 @@ const ErrorDialog = ({
     >
       <div className={Classes.DIALOG_BODY}>
         <div className='error-dialog-message'>
-          {isFirstSync ? t('framework.first-sync-message') : errorMessage }
+          {isFirstSync ? t('framework.first-sync-message') : errorMessage}
         </div>
         <Checkbox
           checked={isDialogDisabled}
