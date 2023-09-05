@@ -6,21 +6,21 @@ import { removeUser } from 'state/auth/actions'
 import { setTimezone } from 'state/base/actions'
 import { getTimezone } from 'state/base/selectors'
 import { getIsSyncing } from 'state/sync/selectors'
-import { togglePreferencesDialog } from 'state/ui/actions'
-import { getIsPreferencesDialogOpen } from 'state/ui/selectors'
+import { toggleExtraInfoDialog } from 'state/ui/actions'
+import { getIsExtraInfoDialogOpen } from 'state/ui/selectors'
 
 import ExtraInfoDialog from './ExtraInfoDialog'
 
 const mapStateToProps = state => ({
   timezone: getTimezone(state),
   isSyncing: getIsSyncing(state),
-  isOpen: getIsPreferencesDialogOpen(state),
+  isOpen: getIsExtraInfoDialogOpen(state),
 })
 
 const mapDispatchToProps = {
   setTimezone,
   removeAccount: removeUser,
-  toggleDialog: togglePreferencesDialog,
+  toggleDialog: toggleExtraInfoDialog,
 }
 
 export default compose(
