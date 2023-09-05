@@ -11,7 +11,7 @@ import _isEqual from 'lodash/isEqual'
 
 import Icon from 'icons'
 
-import { FIRST_SYNC_MESSAGE } from './ErrorDialog.constants'
+import { FIRST_SYNC_ERROR } from './ErrorDialog.constants'
 
 const ErrorDialog = ({
   t,
@@ -24,7 +24,7 @@ const ErrorDialog = ({
   disableDialog,
 }) => {
   const [isDialogDisabled, setIsDialogDisabled] = useState(isDisabled)
-  const isFirstSync = _isEqual(FIRST_SYNC_MESSAGE, errorMessage)
+  const isFirstSync = _isEqual(FIRST_SYNC_ERROR, errorMessage)
   const shouldStartSync = isFirstSync && isOpen && !isSyncing
 
   useEffect(() => {
