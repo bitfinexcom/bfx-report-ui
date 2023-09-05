@@ -378,7 +378,8 @@
     "title": "Logins"
   },
   "movements": {
-    "title": "Movements"
+    "title": "Movements",
+    "moreDetails": "More Details"
   },
   "navItems": {
     "reports":"Reports",
