@@ -1,46 +1,18 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
+import { formatAmount, fixedFloat } from 'ui/utils'
 import Explorer from 'ui/Explorer'
-import config from 'config'
-import { getColumnWidth } from 'utils/columns'
 
 const getColumns = ({
   t,
   timeOffset,
   getFullTime,
   filteredData,
-  columnsWidth,
-  onDetailsClick,
 }) => [
-  {
-    id: 'moreDetails',
-    name: 'column.moreDetails',
-    className: 'align-left',
-    width: getColumnWidth('moreDetails', columnsWidth),
-    renderer: (rowIndex) => {
-      const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={t('column.moreDetails')}>
-          <>
-            <a
-              href='#'
-              onClick={e => onDetailsClick(e, { id })}
-            >
-              {t('column.show')}
-            </a>
-          </>
-        </Cell>
-      )
-    },
-    copyText: rowIndex => filteredData[rowIndex].id,
-  },
   {
     id: 'id',
     name: 'column.id',
-    className: 'align-left',
-    width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
       const { id } = filteredData[rowIndex]
       return (
@@ -49,13 +21,10 @@ const getColumns = ({
         </Cell>
       )
     },
-    copyText: rowIndex => filteredData[rowIndex].id,
   },
   {
     id: 'mtsUpdated',
-    className: 'align-left',
     nameStr: `${t('column.date')} (${timeOffset})`,
-    width: getColumnWidth('mtsUpdated', columnsWidth),
     renderer: (rowIndex) => {
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
       return (
@@ -64,13 +33,10 @@ const getColumns = ({
         </Cell>
       )
     },
-    copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
   },
   {
     id: 'currency',
     name: 'column.currency',
-    className: 'align-left',
-    width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
       const { currency } = filteredData[rowIndex]
       return (
@@ -79,13 +45,10 @@ const getColumns = ({
         </Cell>
       )
     },
-    copyText: rowIndex => filteredData[rowIndex].currency,
   },
   {
     id: 'status',
     name: 'column.status',
-    className: 'align-left',
-    width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
       const { status } = filteredData[rowIndex]
       return (
@@ -94,12 +57,10 @@ const getColumns = ({
         </Cell>
       )
     },
-    copyText: rowIndex => filteredData[rowIndex].status,
   },
   {
     id: 'amount',
     name: 'column.amount',
-    width: getColumnWidth('amount', columnsWidth),
     renderer: (rowIndex) => {
       const { amount, currency } = filteredData[rowIndex]
       const tooltip = `${fixedFloat(amount)} ${currency}`
@@ -112,34 +73,10 @@ const getColumns = ({
         </Cell>
       )
     },
-    isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
   },
-  ...insertIf(config.showFrameworkMode, (
-    {
-      id: 'amountUsd',
-      name: 'column.amountUsd',
-      width: getColumnWidth('amountUsd', columnsWidth),
-      renderer: (rowIndex) => {
-        const { amountUsd } = filteredData[rowIndex]
-        const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={tooltip}
-          >
-            {formatAmount(amountUsd)}
-          </Cell>
-        )
-      },
-      isNumericValue: true,
-      copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
-    }
-  )),
   {
     id: 'fees',
     name: 'column.fees',
-    width: getColumnWidth('fees', columnsWidth),
     renderer: (rowIndex) => {
       const { fees, currency } = filteredData[rowIndex]
       const tooltip = `${fixedFloat(fees)} ${currency}`
@@ -158,14 +95,10 @@ const getColumns = ({
         </Cell>
       )
     },
-    isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].fees),
   },
   {
     id: 'destinationAddress',
     name: 'column.destination',
-    className: 'align-left',
-    width: getColumnWidth('destinationAddress', columnsWidth),
     renderer: (rowIndex) => {
       const { currency, destinationAddress } = filteredData[rowIndex]
       return (
@@ -178,13 +111,11 @@ const getColumns = ({
         </Cell>
       )
     },
-    copyText: rowIndex => filteredData[rowIndex].destinationAddress,
   },
   {
     id: 'transactionId',
     name: 'column.transactionId',
     className: 'align-left',
-    width: getColumnWidth('transactionId', columnsWidth),
     renderer: (rowIndex) => {
       const { transactionId } = filteredData[rowIndex]
       return (
@@ -193,13 +124,10 @@ const getColumns = ({
         </Cell>
       )
     },
-    copyText: rowIndex => filteredData[rowIndex].transactionId,
   },
   {
     id: 'note',
     name: 'column.note',
-    className: 'align-left',
-    width: getColumnWidth('note', columnsWidth),
     renderer: (rowIndex) => {
       const { note } = filteredData[rowIndex]
       return (
@@ -208,7 +136,6 @@ const getColumns = ({
         </Cell>
       )
     },
-    copyText: rowIndex => filteredData[rowIndex].note,
   },
 ]
 
