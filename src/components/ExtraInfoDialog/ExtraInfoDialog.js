@@ -9,15 +9,32 @@ import {
 import _castArray from 'lodash/castArray'
 
 import Icon from 'icons'
-// import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
+import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
+
+import getColumns from './ExtraInfoDialog.columns'
 
 const ExtraInfoDialog = ({
   t,
   isOpen,
   extraInfo,
+  timeOffset,
+  getFullTime,
   toggleDialog,
 }) => {
   console.log('+++extraInfo', _castArray(extraInfo))
+  console.log('+++timeOffset', timeOffset)
+  console.log('+++getFullTime', getFullTime)
+
+  const tableColumns = getColumns({
+    t,
+    timeOffset,
+    getFullTime,
+    filteredData: _castArray(extraInfo),
+  })
+
+  console.log('+++tableColumns', tableColumns)
+
+
   return (
     <Dialog
       usePortal
@@ -28,7 +45,9 @@ const ExtraInfoDialog = ({
       title={t('movements.moreDetails')}
       icon={<Icon.INFO_CIRCLE />}
     >
-      {/* <CollapsedTable numRows={19} /> */}
+      <div className={Classes.DIALOG_BODY}>
+        <CollapsedTable numRows={1} tableColumns={tableColumns} />
+      </div>
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
           <Button
@@ -68,6 +87,8 @@ ExtraInfoDialog.propTypes = {
     status: PropTypes.string,
     transactionId: PropTypes.string,
   }),
+  getFullTime: PropTypes.func.isRequired,
+  timeOffset: PropTypes.string.isRequired,
 }
 
 ExtraInfoDialog.defaultProps = {
