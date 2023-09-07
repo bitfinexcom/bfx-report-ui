@@ -6,6 +6,7 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+import _castArray from 'lodash/castArray'
 
 import Icon from 'icons'
 // import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
@@ -16,7 +17,7 @@ const ExtraInfoDialog = ({
   extraInfo,
   toggleDialog,
 }) => {
-  console.log('+++entries', extraInfo)
+  console.log('+++extraInfo', _castArray(extraInfo))
   return (
     <Dialog
       usePortal
@@ -65,7 +66,7 @@ ExtraInfoDialog.propTypes = {
     note: PropTypes.string,
     remark: PropTypes.string,
     status: PropTypes.string,
-    transactionId: PropTypes.number,
+    transactionId: PropTypes.string,
   }),
 }
 
