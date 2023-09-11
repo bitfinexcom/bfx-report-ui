@@ -19,7 +19,9 @@ import { uiLoaded, uiResized } from 'state/ui/actions'
 import 'styles/index.scss'
 
 import App from './App'
-import { version } from '../package.json'
+import packageInfo from '../package.json'
+
+const { version } = packageInfo
 
 ReactDOM.render(
   <Provider store={store}>
