@@ -37,7 +37,7 @@ const TABLE_COLUMNS_PROPS = PropTypes.shape({
   nameStr: PropTypes.string,
   id: PropTypes.string.isRequired,
   renderer: PropTypes.func.isRequired,
-  copyText: PropTypes.func.isRequired,
+  copyText: PropTypes.func,
 })
 
 CollapsedTable.propTypes = {
