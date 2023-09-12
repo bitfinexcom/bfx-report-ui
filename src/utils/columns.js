@@ -63,6 +63,7 @@ const COLUMN_WIDTH_STANDARD = {
   mtsLastPayout: 150,
   mtsUpdate: 150,
   mtsUpdated: 150,
+  note: 135,
   orderID: 105,
   pair: 110,
   payCurrencies: 160,
