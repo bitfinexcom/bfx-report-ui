@@ -1,7 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { formatAmount} from 'ui/utils'
+import { formatAmount } from 'ui/utils'
 import Explorer from 'ui/Explorer'
 
 const getColumns = ({
@@ -47,13 +47,13 @@ const getColumns = ({
     },
   },
   {
-    id: 'REMARK',
+    id: 'remark',
     name: 'column.remark',
     renderer: (rowIndex) => {
-      const { currency } = filteredData[rowIndex]
+      const { remark } = filteredData[rowIndex]
       return (
         <Cell>
-          {currency}
+          {remark}
         </Cell>
       )
     },
@@ -148,12 +148,11 @@ const getColumns = ({
   {
     id: 'memo',
     name: 'column.memo',
-    className: 'align-left',
     renderer: (rowIndex) => {
-      const { transactionId } = filteredData[rowIndex]
+      const { memo } = filteredData[rowIndex]
       return (
-        <Cell tooltip={transactionId}>
-          {transactionId}
+        <Cell>
+          {memo}
         </Cell>
       )
     },
@@ -184,73 +183,73 @@ const getColumns = ({
     },
   },
   {
-    id: 'BANK_FEES',
+    id: 'bankFees',
     name: 'column.bankFees',
     renderer: (rowIndex) => {
-      const { note } = filteredData[rowIndex]
+      const { bankFees } = filteredData[rowIndex]
       return (
         <Cell>
-          {note}
+          {formatAmount(bankFees)}
         </Cell>
       )
     },
   },
   {
-    id: 'BANK_ROUTER_ID',
+    id: 'bankRouterId',
     name: 'column.bankRouterId',
     renderer: (rowIndex) => {
-      const { note } = filteredData[rowIndex]
+      const { bankRouterId } = filteredData[rowIndex]
       return (
         <Cell>
-          {note}
+          {bankRouterId}
         </Cell>
       )
     },
   },
   {
-    id: 'EXTERNAL_BANK_MOV_ID',
+    id: 'externalProviderId',
     name: 'column.externalProviderId',
     renderer: (rowIndex) => {
-      const { note } = filteredData[rowIndex]
+      const { externalBankMovId } = filteredData[rowIndex]
       return (
         <Cell>
-          {note}
+          {externalBankMovId}
         </Cell>
       )
     },
   },
   {
-    id: 'EXTERNAL_BANK_MOV_STATUS',
+    id: 'externalProviderStatus',
     name: 'column.externalProviderStatus',
     renderer: (rowIndex) => {
-      const { note } = filteredData[rowIndex]
+      const { externalBankMovStatus } = filteredData[rowIndex]
       return (
         <Cell>
-          {note}
+          {externalBankMovStatus}
         </Cell>
       )
     },
   },
   {
-    id: 'EXTERNAL_BANK_MOV_DESCRIPTION',
+    id: 'externalProviderInfo',
     name: 'column.externalProviderInfo',
     renderer: (rowIndex) => {
-      const { note } = filteredData[rowIndex]
+      const { externalBankMovDescription } = filteredData[rowIndex]
       return (
         <Cell>
-          {note}
+          {externalBankMovDescription}
         </Cell>
       )
     },
   },
   {
-    id: 'EXTERNAL_BANK_ACC_INFO',
+    id: 'externalBankAccInfo',
     name: 'column.externalProviderBankAccInfo',
     renderer: (rowIndex) => {
-      const { note } = filteredData[rowIndex]
+      const { externalBankAccInfo } = filteredData[rowIndex]
       return (
         <Cell>
-          {note}
+          {externalBankAccInfo}
         </Cell>
       )
     },
