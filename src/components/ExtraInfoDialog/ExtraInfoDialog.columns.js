@@ -1,7 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { formatAmount, fixedFloat } from 'ui/utils'
+import { formatAmount} from 'ui/utils'
 import Explorer from 'ui/Explorer'
 
 const getColumns = ({
@@ -23,25 +23,61 @@ const getColumns = ({
     },
   },
   {
-    id: 'mtsUpdated',
-    nameStr: `${t('column.date')} (${timeOffset})`,
+    id: 'currency',
+    name: 'column.currency',
     renderer: (rowIndex) => {
-      const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
+      const { currency } = filteredData[rowIndex]
       return (
-        <Cell tooltip={timestamp}>
+        <Cell>
+          {currency}
+        </Cell>
+      )
+    },
+  },
+  {
+    id: 'currencyName',
+    name: 'column.currencyName',
+    renderer: (rowIndex) => {
+      const { currencyName } = filteredData[rowIndex]
+      return (
+        <Cell>
+          {currencyName}
+        </Cell>
+      )
+    },
+  },
+  {
+    id: 'REMARK',
+    name: 'column.remark',
+    renderer: (rowIndex) => {
+      const { currency } = filteredData[rowIndex]
+      return (
+        <Cell>
+          {currency}
+        </Cell>
+      )
+    },
+  },
+  {
+    id: 'mtsStarted',
+    nameStr: `${t('column.started')} (${timeOffset})`,
+    renderer: (rowIndex) => {
+      const timestamp = getFullTime(filteredData[rowIndex].mtsStarted)
+      return (
+        <Cell>
           {timestamp}
         </Cell>
       )
     },
   },
   {
-    id: 'currency',
-    name: 'column.currency',
+    id: 'mtsUpdated',
+    nameStr: `${t('column.updated')} (${timeOffset})`,
     renderer: (rowIndex) => {
-      const { currency } = filteredData[rowIndex]
+      const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
       return (
-        <Cell tooltip={currency}>
-          {currency}
+        <Cell>
+          {timestamp}
         </Cell>
       )
     },
@@ -52,7 +88,7 @@ const getColumns = ({
     renderer: (rowIndex) => {
       const { status } = filteredData[rowIndex]
       return (
-        <Cell tooltip={status}>
+        <Cell>
           {status}
         </Cell>
       )
@@ -62,13 +98,9 @@ const getColumns = ({
     id: 'amount',
     name: 'column.amount',
     renderer: (rowIndex) => {
-      const { amount, currency } = filteredData[rowIndex]
-      const tooltip = `${fixedFloat(amount)} ${currency}`
+      const { amount } = filteredData[rowIndex]
       return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
+        <Cell className='bitfinex-text-align-right'>
           {formatAmount(amount)}
         </Cell>
       )
@@ -79,11 +111,9 @@ const getColumns = ({
     name: 'column.fees',
     renderer: (rowIndex) => {
       const { fees, currency } = filteredData[rowIndex]
-      const tooltip = `${fixedFloat(fees)} ${currency}`
       return (
         <Cell
           className='bitfinex-text-align-right'
-          tooltip={tooltip}
         >
           <>
             {formatAmount(fees)}
@@ -102,19 +132,22 @@ const getColumns = ({
     renderer: (rowIndex) => {
       const { currency, destinationAddress } = filteredData[rowIndex]
       return (
-        <Cell tooltip={destinationAddress}>
+        <Cell>
           <>
             {destinationAddress}
             {' '}
-            <Explorer currency={currency} destinationAddress={destinationAddress} />
+            <Explorer
+              currency={currency}
+              destinationAddress={destinationAddress}
+            />
           </>
         </Cell>
       )
     },
   },
   {
-    id: 'transactionId',
-    name: 'column.transactionId',
+    id: 'memo',
+    name: 'column.memo',
     className: 'align-left',
     renderer: (rowIndex) => {
       const { transactionId } = filteredData[rowIndex]
@@ -126,12 +159,97 @@ const getColumns = ({
     },
   },
   {
+    id: 'transactionId',
+    name: 'column.transactionId',
+    className: 'align-left',
+    renderer: (rowIndex) => {
+      const { transactionId } = filteredData[rowIndex]
+      return (
+        <Cell>
+          {transactionId}
+        </Cell>
+      )
+    },
+  },
+  {
     id: 'note',
     name: 'column.note',
     renderer: (rowIndex) => {
       const { note } = filteredData[rowIndex]
       return (
-        <Cell tooltip={note}>
+        <Cell>
+          {note}
+        </Cell>
+      )
+    },
+  },
+  {
+    id: 'BANK_FEES',
+    name: 'column.bankFees',
+    renderer: (rowIndex) => {
+      const { note } = filteredData[rowIndex]
+      return (
+        <Cell>
+          {note}
+        </Cell>
+      )
+    },
+  },
+  {
+    id: 'BANK_ROUTER_ID',
+    name: 'column.bankRouterId',
+    renderer: (rowIndex) => {
+      const { note } = filteredData[rowIndex]
+      return (
+        <Cell>
+          {note}
+        </Cell>
+      )
+    },
+  },
+  {
+    id: 'EXTERNAL_BANK_MOV_ID',
+    name: 'column.externalProviderId',
+    renderer: (rowIndex) => {
+      const { note } = filteredData[rowIndex]
+      return (
+        <Cell>
+          {note}
+        </Cell>
+      )
+    },
+  },
+  {
+    id: 'EXTERNAL_BANK_MOV_STATUS',
+    name: 'column.externalProviderStatus',
+    renderer: (rowIndex) => {
+      const { note } = filteredData[rowIndex]
+      return (
+        <Cell>
+          {note}
+        </Cell>
+      )
+    },
+  },
+  {
+    id: 'EXTERNAL_BANK_MOV_DESCRIPTION',
+    name: 'column.externalProviderInfo',
+    renderer: (rowIndex) => {
+      const { note } = filteredData[rowIndex]
+      return (
+        <Cell>
+          {note}
+        </Cell>
+      )
+    },
+  },
+  {
+    id: 'EXTERNAL_BANK_ACC_INFO',
+    name: 'column.externalProviderBankAccInfo',
+    renderer: (rowIndex) => {
+      const { note } = filteredData[rowIndex]
+      return (
+        <Cell>
           {note}
         </Cell>
       )
