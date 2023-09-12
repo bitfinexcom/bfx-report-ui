@@ -17,6 +17,7 @@ export const getSubAccountsLoading = state => getAuth(state)?.subAccountsLoading
 export const getShowOtpLogin = state => getAuth(state)?.showOtpLogin ?? false
 export const getLoginToken = state => getAuth(state)?.loginToken ?? ''
 export const getUserShouldReLogin = state => getAuth(state)?.userShouldReLogin ?? ''
+export const getShouldNotSyncOnStartupAfterUpdate = state => getAuth(state)?.shouldNotSyncOnStartupAfterUpdate ?? false
 export const getIsSubAccsAvailable = state => _first(
   _filter(getUsers(state), user => _isEqual(user?.email, getEmail(state))),
 )?.isApiKeysAuth ?? true
@@ -106,4 +107,5 @@ export default {
   getUserShouldReLogin,
   getIsSubAccsAvailable,
   getLocalUsername,
+  getShouldNotSyncOnStartupAfterUpdate,
 }

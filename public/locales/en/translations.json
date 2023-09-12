@@ -36,6 +36,7 @@
     "accountRemoved": "Account removed",
     "accountRemoving": "Account removing",
     "useApiKey": "Use API Key",
+    "updateUser": "Update user",
     "loginEmail": {
       "emailOrUserName": "Email or Username",
       "bfxAccPassword": "Password",
@@ -481,6 +482,7 @@
     "table_scroll": "Table Scroll",
     "preserve_timeframe": "Preserve Timeframe",
     "remove_account": "Remove Account",
+    "sync_after_update": "Auto Sync After Update",
     "sync": {
       "add-filter": "Add Filter",
       "add-pair": "Add Pair",

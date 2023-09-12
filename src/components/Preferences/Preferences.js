@@ -15,6 +15,7 @@ import TimezonePicker from 'ui/TimezonePicker'
 import TableScrollPref from 'ui/TableScrollPref'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
 import DateFormatSelector from 'ui/DateFormatSelector'
+import SyncAfterUpdatePref from 'ui/SyncAfterUpdatePref'
 import TimeRangePreservePref from 'ui/TimeRangePreservePref'
 
 const { showFrameworkMode } = config
@@ -78,6 +79,12 @@ const Preferences = ({
           <span>{t('preferences.preserve_timeframe')}</span>
           <TimeRangePreservePref />
         </div>
+        {showFrameworkMode && (
+          <div className='preferences-row'>
+            <span>{t('preferences.sync_after_update')}</span>
+            <SyncAfterUpdatePref />
+          </div>
+        )}
       </div>
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>

@@ -210,6 +210,13 @@ export function deleteAccount(payload) {
   }
 }
 
+export function syncAfterUpdate(payload) {
+  return {
+    type: types.SET_SYNC_AFTER_UPDATE,
+    payload,
+  }
+}
+
 export default {
   checkAuth,
   addUser,
@@ -235,4 +242,5 @@ export default {
   setUserShouldReLogin,
   signInOtp,
   deleteAccount,
+  syncAfterUpdate,
 }
