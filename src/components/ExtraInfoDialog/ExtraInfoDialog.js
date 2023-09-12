@@ -21,19 +21,12 @@ const ExtraInfoDialog = ({
   getFullTime,
   toggleDialog,
 }) => {
-  console.log('+++extraInfo', _castArray(extraInfo))
-  console.log('+++timeOffset', timeOffset)
-  console.log('+++getFullTime', getFullTime)
-
   const tableColumns = getColumns({
     t,
     timeOffset,
     getFullTime,
     filteredData: _castArray(extraInfo),
   })
-
-  console.log('+++tableColumns', tableColumns)
-
 
   return (
     <Dialog
@@ -73,7 +66,6 @@ ExtraInfoDialog.propTypes = {
     currency: PropTypes.string,
     currencyName: PropTypes.string,
     destinationAddress: PropTypes.string,
-    externalBankAccInfo: PropTypes.string,
     externalBankMovDescription: PropTypes.string,
     externalBankMovId: PropTypes.string,
     externalBankMovStatus: PropTypes.string,
