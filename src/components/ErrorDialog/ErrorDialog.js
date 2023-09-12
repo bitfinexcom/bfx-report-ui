@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
@@ -7,18 +7,29 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+import _isEqual from 'lodash/isEqual'
 
 import Icon from 'icons'
+
+import { FIRST_SYNC_ERROR } from './ErrorDialog.constants'
 
 const ErrorDialog = ({
   t,
   isOpen,
+  isSyncing,
+  startSync,
   isDisabled,
   errorMessage,
   toggleDialog,
   disableDialog,
 }) => {
   const [isDialogDisabled, setIsDialogDisabled] = useState(isDisabled)
+  const isFirstSync = _isEqual(FIRST_SYNC_ERROR, errorMessage)
+  const shouldStartSync = isFirstSync && isOpen && !isSyncing
+
+  useEffect(() => {
+    if (shouldStartSync) startSync()
+  }, [shouldStartSync])
 
   const handleClose = () => {
     toggleDialog(false)
@@ -35,12 +46,14 @@ const ErrorDialog = ({
       className='error-dialog'
       icon={<Icon.INFO_CIRCLE />}
       onClose={handleClose}
-      title={t('framework.warning')}
+      title={isFirstSync ? t('framework.sync-in-progress') : t('framework.warning')}
       isCloseButtonShown={false}
       isOpen={isOpen}
     >
       <div className={Classes.DIALOG_BODY}>
-        <div className='error-dialog-message'>{errorMessage}</div>
+        <div className='error-dialog-message'>
+          {isFirstSync ? t('framework.first-sync-message') : errorMessage}
+        </div>
         <Checkbox
           checked={isDialogDisabled}
           onChange={handleChange}
@@ -51,7 +64,7 @@ const ErrorDialog = ({
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
           <Button intent={Intent.PRIMARY} onClick={handleClose}>
-            {t('framework.continue')}
+            {isFirstSync ? t('framework.okay_btn') : t('framework.continue')}
           </Button>
         </div>
       </div>
@@ -61,6 +74,8 @@ const ErrorDialog = ({
 
 ErrorDialog.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  isSyncing: PropTypes.bool.isRequired,
+  startSync: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   toggleDialog: PropTypes.func.isRequired,
   disableDialog: PropTypes.func.isRequired,
