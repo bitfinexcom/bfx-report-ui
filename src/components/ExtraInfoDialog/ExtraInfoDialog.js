@@ -25,7 +25,7 @@ const ExtraInfoDialog = ({
     t,
     timeOffset,
     getFullTime,
-    filteredData: _castArray(extraInfo),
+    preparedData: _castArray(extraInfo),
   })
 
   return (

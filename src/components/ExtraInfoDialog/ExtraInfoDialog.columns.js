@@ -8,13 +8,13 @@ const getColumns = ({
   t,
   timeOffset,
   getFullTime,
-  filteredData,
+  preparedData,
 }) => [
   {
     id: 'id',
     name: 'column.id',
     renderer: (rowIndex) => {
-      const { id } = filteredData[rowIndex]
+      const { id } = preparedData[rowIndex]
       return (
         <Cell tooltip={id}>
           {id}
@@ -26,7 +26,7 @@ const getColumns = ({
     id: 'currency',
     name: 'column.currency',
     renderer: (rowIndex) => {
-      const { currency } = filteredData[rowIndex]
+      const { currency } = preparedData[rowIndex]
       return (
         <Cell>
           {currency}
@@ -38,7 +38,7 @@ const getColumns = ({
     id: 'currencyName',
     name: 'column.currencyName',
     renderer: (rowIndex) => {
-      const { currencyName } = filteredData[rowIndex]
+      const { currencyName } = preparedData[rowIndex]
       return (
         <Cell>
           {currencyName}
@@ -50,7 +50,7 @@ const getColumns = ({
     id: 'remark',
     name: 'column.remark',
     renderer: (rowIndex) => {
-      const { remark } = filteredData[rowIndex]
+      const { remark } = preparedData[rowIndex]
       return (
         <Cell>
           {remark}
@@ -62,7 +62,7 @@ const getColumns = ({
     id: 'mtsStarted',
     nameStr: `${t('column.started')} (${timeOffset})`,
     renderer: (rowIndex) => {
-      const timestamp = getFullTime(filteredData[rowIndex].mtsStarted)
+      const timestamp = getFullTime(preparedData[rowIndex].mtsStarted)
       return (
         <Cell>
           {timestamp}
@@ -74,7 +74,7 @@ const getColumns = ({
     id: 'mtsUpdated',
     nameStr: `${t('column.updated')} (${timeOffset})`,
     renderer: (rowIndex) => {
-      const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
+      const timestamp = getFullTime(preparedData[rowIndex].mtsUpdated)
       return (
         <Cell>
           {timestamp}
@@ -86,7 +86,7 @@ const getColumns = ({
     id: 'status',
     name: 'column.status',
     renderer: (rowIndex) => {
-      const { status } = filteredData[rowIndex]
+      const { status } = preparedData[rowIndex]
       return (
         <Cell>
           {status}
@@ -98,7 +98,7 @@ const getColumns = ({
     id: 'amount',
     name: 'column.amount',
     renderer: (rowIndex) => {
-      const { amount } = filteredData[rowIndex]
+      const { amount } = preparedData[rowIndex]
       return (
         <Cell className='bitfinex-text-align-right'>
           {formatAmount(amount)}
@@ -110,7 +110,7 @@ const getColumns = ({
     id: 'fees',
     name: 'column.fees',
     renderer: (rowIndex) => {
-      const { fees, currency } = filteredData[rowIndex]
+      const { fees, currency } = preparedData[rowIndex]
       return (
         <Cell
           className='bitfinex-text-align-right'
@@ -130,7 +130,7 @@ const getColumns = ({
     id: 'destinationAddress',
     name: 'column.destination',
     renderer: (rowIndex) => {
-      const { currency, destinationAddress } = filteredData[rowIndex]
+      const { currency, destinationAddress } = preparedData[rowIndex]
       return (
         <Cell>
           <>
@@ -149,7 +149,7 @@ const getColumns = ({
     id: 'memo',
     name: 'column.memo',
     renderer: (rowIndex) => {
-      const { memo } = filteredData[rowIndex]
+      const { memo } = preparedData[rowIndex]
       return (
         <Cell>
           {memo}
@@ -162,7 +162,7 @@ const getColumns = ({
     name: 'column.transactionId',
     className: 'align-left',
     renderer: (rowIndex) => {
-      const { transactionId } = filteredData[rowIndex]
+      const { transactionId } = preparedData[rowIndex]
       return (
         <Cell>
           {transactionId}
@@ -174,7 +174,7 @@ const getColumns = ({
     id: 'note',
     name: 'column.note',
     renderer: (rowIndex) => {
-      const { note } = filteredData[rowIndex]
+      const { note } = preparedData[rowIndex]
       return (
         <Cell>
           {note}
@@ -186,7 +186,7 @@ const getColumns = ({
     id: 'bankFees',
     name: 'column.bankFees',
     renderer: (rowIndex) => {
-      const { bankFees } = filteredData[rowIndex]
+      const { bankFees } = preparedData[rowIndex]
       return (
         <Cell>
           {formatAmount(bankFees)}
@@ -198,7 +198,7 @@ const getColumns = ({
     id: 'bankRouterId',
     name: 'column.bankRouterId',
     renderer: (rowIndex) => {
-      const { bankRouterId } = filteredData[rowIndex]
+      const { bankRouterId } = preparedData[rowIndex]
       return (
         <Cell>
           {bankRouterId}
@@ -210,7 +210,7 @@ const getColumns = ({
     id: 'externalProviderId',
     name: 'column.externalProviderId',
     renderer: (rowIndex) => {
-      const { externalBankMovId } = filteredData[rowIndex]
+      const { externalBankMovId } = preparedData[rowIndex]
       return (
         <Cell>
           {externalBankMovId}
@@ -222,7 +222,7 @@ const getColumns = ({
     id: 'externalProviderStatus',
     name: 'column.externalProviderStatus',
     renderer: (rowIndex) => {
-      const { externalBankMovStatus } = filteredData[rowIndex]
+      const { externalBankMovStatus } = preparedData[rowIndex]
       return (
         <Cell>
           {externalBankMovStatus}
@@ -234,7 +234,7 @@ const getColumns = ({
     id: 'externalProviderInfo',
     name: 'column.externalProviderInfo',
     renderer: (rowIndex) => {
-      const { externalBankMovDescription } = filteredData[rowIndex]
+      const { externalBankMovDescription } = preparedData[rowIndex]
       return (
         <Cell>
           {externalBankMovDescription}
@@ -246,7 +246,7 @@ const getColumns = ({
     id: 'externalBankAccInfo',
     name: 'column.externalProviderBankAccInfo',
     renderer: (rowIndex) => {
-      const { externalBankAccInfo } = filteredData[rowIndex]
+      const { externalBankAccInfo } = preparedData[rowIndex]
       return (
         <Cell>
           {externalBankAccInfo}
