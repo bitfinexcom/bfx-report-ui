@@ -35,8 +35,8 @@ const ExtraInfoDialog = ({
       onClose={toggleDialog}
       className='extra-info'
       isCloseButtonShown={false}
-      title={t('movements.moreDetails')}
       icon={<Icon.INFO_CIRCLE />}
+      title={t('movements.moreDetails')}
     >
       <div className={Classes.DIALOG_BODY}>
         <CollapsedTable numRows={1} tableColumns={tableColumns} />
