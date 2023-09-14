@@ -1,1 +1,1 @@
-export { default } from './ExtraInfoDialog.container'
+export { default } from './ExtraInfoDialog'
