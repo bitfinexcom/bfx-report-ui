@@ -1,5 +1,6 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -9,22 +10,26 @@ import {
 import _castArray from 'lodash/castArray'
 
 import Icon from 'icons'
+import { toggleExtraInfoDialog } from 'state/ui/actions'
+import { getMovementInfo } from 'state/movements/selectors'
+import { getIsExtraInfoDialogOpen } from 'state/ui/selectors'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 
 import getColumns from './ExtraInfoDialog.columns'
 
-const ExtraInfoDialog = ({
-  t,
-  isOpen,
-  extraInfo,
-  timeOffset,
-  getFullTime,
-  toggleDialog,
-}) => {
+const ExtraInfoDialog = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const formatTime = useSelector(getFullTime)
+  const timeOffset = useSelector(getTimeOffset)
+  const extraInfo = useSelector(getMovementInfo)
+  const isOpen = useSelector(getIsExtraInfoDialogOpen)
+
   const tableColumns = getColumns({
     t,
     timeOffset,
-    getFullTime,
+    formatTime,
     preparedData: _castArray(extraInfo),
   })
 
@@ -32,11 +37,11 @@ const ExtraInfoDialog = ({
     <Dialog
       usePortal
       isOpen={isOpen}
-      onClose={toggleDialog}
       className='extra-info'
       isCloseButtonShown={false}
       icon={<Icon.INFO_CIRCLE />}
       title={t('movements.moreDetails')}
+      onClose={() => dispatch(toggleExtraInfoDialog())}
     >
       <div className={Classes.DIALOG_BODY}>
         <CollapsedTable numRows={1} tableColumns={tableColumns} />
@@ -44,8 +49,8 @@ const ExtraInfoDialog = ({
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
           <Button
-            onClick={toggleDialog}
             intent={Intent.PRIMARY}
+            onClick={() => dispatch(toggleExtraInfoDialog())}
           >
             {t('preferences.close')}
           </Button>
@@ -55,36 +60,4 @@ const ExtraInfoDialog = ({
   )
 }
 
-ExtraInfoDialog.propTypes = {
-  t: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  toggleDialog: PropTypes.func.isRequired,
-  extraInfo: PropTypes.shape({
-    amount: PropTypes.number,
-    bankFees: PropTypes.number,
-    bankRouterId: PropTypes.number,
-    currency: PropTypes.string,
-    currencyName: PropTypes.string,
-    destinationAddress: PropTypes.string,
-    externalBankMovDescription: PropTypes.string,
-    externalBankMovId: PropTypes.string,
-    externalBankMovStatus: PropTypes.string,
-    fees: PropTypes.number,
-    id: PropTypes.number,
-    memo: PropTypes.string,
-    mtsStarted: PropTypes.number,
-    mtsUpdated: PropTypes.number,
-    note: PropTypes.string,
-    remark: PropTypes.string,
-    status: PropTypes.string,
-    transactionId: PropTypes.string,
-  }),
-  getFullTime: PropTypes.func.isRequired,
-  timeOffset: PropTypes.string.isRequired,
-}
-
-ExtraInfoDialog.defaultProps = {
-  extraInfo: {},
-}
-
-export default memo(ExtraInfoDialog)
+export default ExtraInfoDialog
