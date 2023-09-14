@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
@@ -23,15 +23,14 @@ const ExtraInfoDialog = () => {
   const dispatch = useDispatch()
   const formatTime = useSelector(getFullTime)
   const timeOffset = useSelector(getTimeOffset)
-  const extraInfo = useSelector(getMovementInfo)
   const isOpen = useSelector(getIsExtraInfoDialogOpen)
+  const preparedData = _castArray(useSelector(getMovementInfo))
 
-  const tableColumns = getColumns({
-    t,
-    timeOffset,
-    formatTime,
-    preparedData: _castArray(extraInfo),
-  })
+  const tableColumns = useMemo(
+    () => getColumns({
+      t, timeOffset, formatTime, preparedData,
+    }), [t, timeOffset, formatTime, preparedData],
+  )
 
   return (
     <Dialog
