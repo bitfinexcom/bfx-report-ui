@@ -1,8 +1,8 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { formatAmount } from 'ui/utils'
 import Explorer from 'ui/Explorer'
+import { formatAmount } from 'ui/utils'
 
 const getColumns = ({
   t,
