@@ -7,7 +7,7 @@ import Explorer from 'ui/Explorer'
 const getColumns = ({
   t,
   timeOffset,
-  getFullTime,
+  formatTime,
   preparedData,
 }) => [
   {
@@ -62,7 +62,7 @@ const getColumns = ({
     id: 'mtsStarted',
     nameStr: `${t('column.started')} (${timeOffset})`,
     renderer: (rowIndex) => {
-      const timestamp = getFullTime(preparedData[rowIndex].mtsStarted)
+      const timestamp = formatTime(preparedData[rowIndex].mtsStarted)
       return (
         <Cell>
           {timestamp}
@@ -74,7 +74,7 @@ const getColumns = ({
     id: 'mtsUpdated',
     nameStr: `${t('column.updated')} (${timeOffset})`,
     renderer: (rowIndex) => {
-      const timestamp = getFullTime(preparedData[rowIndex].mtsUpdated)
+      const timestamp = formatTime(preparedData[rowIndex].mtsUpdated)
       return (
         <Cell>
           {timestamp}
