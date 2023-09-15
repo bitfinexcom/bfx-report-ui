@@ -127,7 +127,7 @@ class AccountSummary extends PureComponent {
         <SectionHeader
           filter={false}
           timeframe={false}
-          title='accountsummary.title'
+          title='summary.title'
         />
         {showContent}
       </Card>
