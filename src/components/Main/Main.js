@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import { Card } from '@blueprintjs/core'
 
 import AppDownload from 'components/AppDownload'
+import AppSummary from 'components/AppSummary'
 import AccountBalance from 'components/AccountBalance'
 import AccountSummary from 'components/AccountSummary'
 import AffiliatesEarnings from 'components/AffiliatesEarnings'
@@ -348,7 +349,7 @@ class Main extends PureComponent {
             <Route
               exact
               path={PATHS.MENU_ACCOUNT_SUMMARY}
-              component={AccountSummary}
+              component={showFrameworkMode ? AppSummary : AccountSummary}
             />
             <Route
               exact
