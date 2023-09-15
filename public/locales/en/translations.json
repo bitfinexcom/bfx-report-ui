@@ -617,6 +617,9 @@
     "use_api_key": "Use API key",
     "name_updated": "Accounts group name updated"
   },
+  "summary": {
+    "title": "Summary"
+  },
   "symbols": {
     "title": "Get symbols",
     "clear_symbols": "Clear Symbols"
