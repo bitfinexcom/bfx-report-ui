@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 
+import Icon from 'icons'
 import { fixedFloat } from 'ui/utils'
 
 const AccountSummaryLeo = ({ data }) => {
@@ -15,6 +16,7 @@ const AccountSummaryLeo = ({ data }) => {
         <div className='leo-level'>
           <div className='leo-level--row'>
             <div className='leo-level--title'>
+              <Icon.LEO />
               {`${t('summary.leo_level')} ${leoLev}`}
             </div>
           </div>
