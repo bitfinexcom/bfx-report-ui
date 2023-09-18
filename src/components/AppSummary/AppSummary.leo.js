@@ -7,14 +7,24 @@ import { fixedFloat } from 'ui/utils'
 const AccountSummaryLeo = ({ data }) => {
   const { t } = useTranslation()
   const { leoLev, leoAmountAvg } = data
-  const formattedLeoAmountAvg = fixedFloat(leoAmountAvg)
+  const formattedLeoAmount = fixedFloat(leoAmountAvg)
 
   return (
-    <div className='section-account-summary-data-item'>
-      <div className='data-item--divider' />
-      <p>{leoLev}</p>
-      <p>{formattedLeoAmountAvg}</p>
-    </div>
+    <>
+      {formattedLeoAmount && (
+        <div className='leo-level'>
+          <div className='leo-level--row'>
+            <div className='leo-level--title'>
+              {`${t('summary.leo_level')} ${leoLev}`}
+            </div>
+          </div>
+          <div className='leo-level--sub-title'>
+            {`${t('summary.avg_amount')} ${formattedLeoAmount}`}
+          </div>
+        </div>
+      )
+    }
+    </>
   )
 }
 
