@@ -7,8 +7,25 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  } 
+}
+
+.leo-level {
+  &--row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  
+
+  &--title {
+    font-size: 15px;
+    color: var(--leoLevelColor);
+  }
+
+  &--sub-title {
+    font-size: 14px;
+    color: var(--color2);
+  }
 }
 
 .section-account-summary {
