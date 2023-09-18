@@ -121,7 +121,7 @@ class AccountSummary extends PureComponent {
     return (
       <Card
         elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12 no-table-scroll'
+        className='app-summary-card col-lg-12 col-md-12 col-sm-12 col-xs-12 no-table-scroll'
       >
         <div className='app-summary-wrapper'>
           <SectionHeader>

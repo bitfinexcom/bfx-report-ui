@@ -1,4 +1,9 @@
 .app-summary {
+  &-card {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
   &-wrapper {
     max-width: 1008px;
   }
