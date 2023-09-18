@@ -124,13 +124,16 @@ class AccountSummary extends PureComponent {
         elevation={Elevation.ZERO}
         className='col-lg-12 col-md-12 col-sm-12 col-xs-12 no-table-scroll'
       >
-        <SectionHeader>
-          <SectionHeaderTitle>
-            {t('summary.title')}
-          </SectionHeaderTitle>
-        </SectionHeader>
-        {showContent}
+        <div className='app-summary-wrapper'>
+          <SectionHeader>
+            <SectionHeaderTitle>
+              {t('summary.title')}
+            </SectionHeaderTitle>
+          </SectionHeader>
+          {showContent}
+        </div>
       </Card>
+
     )
   }
 }
