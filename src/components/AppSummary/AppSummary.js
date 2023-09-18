@@ -127,7 +127,14 @@ class AccountSummary extends PureComponent {
         <div className='app-summary-wrapper'>
           <SectionHeader>
             <SectionHeaderTitle>
-              {t('summary.title')}
+              <div className='app-summary-title-row'>
+                <div className='app-summary-title-item'>
+                  {t('summary.title')}
+                </div>
+                <div className='app-summary-title-item'>
+                  <Leo t={t} data={data} />
+                </div>
+              </div>
             </SectionHeaderTitle>
           </SectionHeader>
           {showContent}
