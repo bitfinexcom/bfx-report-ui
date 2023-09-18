@@ -115,7 +115,6 @@ class AccountSummary extends PureComponent {
             t={t}
             data={_get(data, 'trade_vol_30d', {})}
           /> */}
-          <Leo t={t} data={data} />
         </div>
       )
     }
