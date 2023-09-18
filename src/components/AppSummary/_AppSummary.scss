@@ -18,12 +18,18 @@
   }
 
   &--title {
-    font-size: 15px;
+    font-size: 14px;
+    position: relative;
     color: var(--leoLevelColor);
+
+    .icon-leo {
+      margin-right: 4px;
+      margin-bottom: -2px;
+    }
   }
 
   &--sub-title {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--color2);
   }
 }
