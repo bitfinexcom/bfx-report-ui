@@ -131,7 +131,7 @@ class AccountSummary extends PureComponent {
                   {t('summary.title')}
                 </div>
                 <div className='app-summary-title-item'>
-                  <Leo t={t} data={data} />
+                  <Leo data={data} />
                 </div>
               </div>
             </SectionHeaderTitle>
