@@ -1,9 +1,11 @@
 import React, { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 
 import { fixedFloat } from 'ui/utils'
 
-const AccountSummaryLeo = ({ data, t }) => {
+const AccountSummaryLeo = ({ data }) => {
+  const { t } = useTranslation()
   const { leoLev, leoAmountAvg } = data
   const formattedLeoAmountAvg = fixedFloat(leoAmountAvg)
 
@@ -21,7 +23,6 @@ AccountSummaryLeo.propTypes = {
     leoLev: PropTypes.number.isRequired,
     leoAmountAvg: PropTypes.number.isRequired,
   }).isRequired,
-  t: PropTypes.func.isRequired,
 }
 
 export default memo(AccountSummaryLeo)
