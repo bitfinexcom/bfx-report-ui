@@ -1,5 +1,14 @@
-.app-summary-wrapper {
-  max-width: 1008px;
+.app-summary {
+  &-wrapper {
+    max-width: 1008px;
+  }
+
+  &-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
 }
 
 .section-account-summary {
