@@ -18,24 +18,73 @@
     "title": "有效仓位"
   },
   "affiliatesearnings": {
-    "title": "推荐人计划收益"
+    "title": "推荐人计划收益",
+    "dashboard_link": "推荐计画管理面板"
   },
   "auth": {
     "auth": "验证",
-    "title": "请登录",
+    "title": "登录",
+    "addAccount": "新增账号",
+    "addAccounts": "添加账号",
+    "addAccountsTo": "添加账号到:",
+    "primaryAccount": "主要账号：",
+    "addAccountsToThisAcc": "添加账号到此账号",
+    "manageAccounts": "管理账号",
+    "manageMultipleAccs": "管理多个账号",
+    "removeAccount": "移除账号",
+    "removeSelectedAccount": "移除账号: ",
+    "accountRemoved": "账号已移除",
+    "accountRemoving": "账号移除中",
+    "useApiKey": "使用API密钥",
+    "loginEmail": {
+      "emailOrUserName": "电子邮件或用户名",
+      "bfxAccPassword": "密码",
+      "loginEmailError": "电子邮件/用户名或密码不正确。",
+      "loginEmailNo2FA": "账号请设置2FA或使用API密钥登录",
+      "loginTokenExpired": "前次登录已到期，请重新登录"
+    },
+    "2FA": {
+      "title": "双重认证(2FA)",
+      "auth": "身份认证",
+      "cancel": "取消",
+      "sixDigits": "6字元",
+      "GAToken": "谷歌双重认证验证码",
+      "invalidToken": "无效令牌，请重试",
+      "loginSessionExpired": "登录已超时，请重新登录。"
+    },
+    "apiKey": "API密钥",
+    "apiSecret": "API密码",
+    "accWithApiKey": "使用API密钥添加账号",
+    "accWithoutApiKey": "不使用API密钥添加账号",
+    "simpleAccounts": "简易账号",
+    "multipleAccounts": "多账号",
+    "login": "登录",
+    "multyAccsApi": "多个账号 — API 密钥",
     "signUp": "注册",
     "signIn": "登录",
-    "passwordRecovery": "找回密码",
+    "signInTo": "登录账号到：",
+    "signInToExistingAcc": "登录现有的账号",
+    "signInToDifferentAcc": "登录新的账号",
+    "selectMasterAccount": "选择主账号",
+    "forgotPassword": "忘记密码",
+    "forgotPasswordNote": "请输入账号信息和新密码以重置报告App账号。",
+    "forgotPasswordLink": "忘记密码？",
     "subAccount": "子账号",
     "enterAPIKey": "输入 API 密钥：",
     "enterAPISecret": "输入 API 密码：",
-    "enterPassword": "输入密码：",
-    "repeatPassword": "再次输入密码：",
+    "enterPassword": "请输入Bitfinex报告App密码",
+    "repeatPassword": "请再次输入Bitfinex报告App密码",
+    "enterNewPassword": "请输入Bitfinex报告App新密码",
+    "repeatNewPassword": "请再次输入Bitfinex报告App新密码",
+    "resetPassword": "重置密码",
+    "removeLoginPassword": "移除登录密码",
+    "resetAccWithApiKey": "使用API密钥重置账号",
+    "resetAccWithoutApiKey": "不使用API密钥重置账号",
     "enterEmail": "输入电子邮箱",
     "checkAuth": "检查验证",
     "note1": "访问",
     "note2": "以获取随机的 API 密钥和密码对。",
-    "passwordProtection": "启用密码保护机制",
+    "passwordProtection": "使用密码登录",
     "passwordLengthValidationError": "密码至少应为 8 个字符",
     "passwordCharactersValidationError": "密码须包含大小写字母",
     "passwordRepeatValidationError": "密码不相符",
@@ -48,6 +97,16 @@
   },
   "averagewinloss": {
     "title": "平均盈利/损失"
+  },
+  "download_app": {
+    "title": "通过我们的桌面应用程式，享有优质报表制作体验",
+    "description": "访问进阶功能以获取高级的数据分析。",
+    "risk": "集中风险",
+    "win_loss": "损益报告",
+    "tax": "税务报告",
+    "snapshots": "快照",
+    "more": "更多...",
+    "download_reports": "下载 Bitfinex 报告"
   },
   "candles": {
     "title": "蜡烛",
@@ -65,51 +124,66 @@
   },
   "column": {
     "actual-price": "实际价格",
-    "amount": "金额",
+    "amount": "数量",
     "amount-exe": "已执行的金额",
     "amountUsd": "金额 (USD)",
-    "ask": "卖出价",
+    "ask": "卖出",
     "avgprice": "平均执行价格",
     "balance": "余额",
     "balanceUsd": "余额 (USD)",
     "base-price": "基价",
-    "bid": "买入价",
+    "bid": "买入",
     "browser": "浏览器",
+    "buyingAmount": "买入数量",
+    "buyingWeightedPrice": "买入加权价格",
     "category": "分类",
     "clampMax": "最大值",
     "clampMin": "最小值",
-    "closed": "CLOSED",
-    "collateral": "抵押品",
-    "created": "创建时间",
-    "currency": "货币",
+    "closed": "已结清",
+    "collateral": "保证金",
+    "cost": "成本",
+    "created": "已创建",
+    "cumulativeAmount": "累计数量",
+    "currency": "币种",
+    "customerInfo": "客户信息",
     "date": "日期",
     "days": "天",
+    "deselectionHint": "按压Cmd/Ctrl键并点击以取消选择",
     "description": "描述",
     "destination": "目的地",
+    "duration": "期间",
     "fee": "费用",
     "feePercent": "费用百分比",
     "fees": "费用",
+    "firstTrade": "首次交易",
     "fundBalance": "保险基金余额",
     "fundingAccrued": "下阶段累计资金",
+    "fundingCost": "融资成本",
     "fundingStep": "下阶段累加值",
+    "fundingType": "融资类型",
     "id": "#",
     "ip": "IP",
+    "invoices": "充值单",
+    "lastTrade": "最新交易",
     "lastpayout": "上一次支出",
     "liq-price": "清算价格",
     "maker_fees": "挂单手续费",
     "maker_rebate": "做市商返点奖励",
+    "merchantName": "商店名称",
     "meta": "元数据",
     "mobile": "移动设备",
     "movementsTotal": "运用资金总额 (美元)",
-    "note": "备注",
+    "note": "提现备注",
     "opened": "已打开",
     "orderid": "订单 ID",
     "pair": "货币对",
+    "payCurrencies": "支付币种",
+    "payment": "付款",
     "percent": "百分比",
     "period": "期间",
     "pl": "损益",
     "plUsd": "损益 (USD)",
-    "plperc": "损益 %",
+    "plperc": "损益%",
     "positionpair": "仓位对",
     "positionsTotal": "仓位总损益 (美元)",
     "price": "价格",
@@ -118,10 +192,12 @@
     "pricetrail": "历史价格",
     "rate": "利率",
     "rateperc": "利率 %",
+    "redirectUrl": "重新跳转网址",
+    "sale": "卖出价值",
+    "sellingAmount": "卖出数量",
+    "sellingWeightedPrice": "卖出加权价格",
     "side": "方向",
     "status": "状态",
-    "fundingCost": "融资成本",
-    "fundingType": "融资类型",
     "taker_fees": "吃单手续费",
     "taker_fees_crypto": "吃单手续费 (加密货币）",
     "taker_fees_fiat": "吃单手续费 (法币)",
@@ -138,16 +214,19 @@
     "updated": "更新时间",
     "usd": "美元",
     "version": "版本",
-    "volume": "交易量",
+    "volume": "网络声量",
     "wallet": "钱包",
-    "walletsTotal": "钱包总余额 (美元)"
+    "walletsTotal": "钱包总余额 (美元)",
+    "webhook": "Webhook"
   },
   "columnsfilter": {
-    "title": "筛选栏",
+    "title": "筛选",
     "clear": "清除",
     "cancel": "取消",
     "apply": "应用",
+    "none": "没有",
     "filters": {
+      "title": "筛选",
       "contains": "包含",
       "beginsWith": "开始于",
       "endsWith": "结束于",
@@ -188,16 +267,17 @@
     "store": "，并存储到您的本地文件夹中。",
     "export": "导出",
     "cancel": "取消",
-    "okay": "一般",
+    "okay": "确定",
+    "remoteStorage": "远端储存",
     "status": {
-      "local": "已生成{{topic}} csv，请查看您本地的“csv”文件夹",
+      "local": "已成功汇出CSV，档案保存于： ",
       "email": "正在生成您的 CSV 报告，我们会在报告就绪后通过电子邮件发送给您…"
     },
     "success": "成功",
     "targets": "要导出的数据"
   },
   "fcredit": {
-    "title": "融资额度（已使用）",
+    "title": "融资 (已使用)",
     "side": {
       "provided": "已提供",
       "taken": "已领取",
@@ -230,7 +310,7 @@
     "cancel": "取消",
     "notagain": "不再显示此消息",
     "continue": "继续",
-    "warning": "提醒"
+    "warning": "警告"
   },
   "header": {
     "logout": "注销",
@@ -243,10 +323,13 @@
     "timezone_local": "目前时区",
     "timezone_placeholder": "搜索时区"
   },
+  "invoices": {
+    "title": "充值单"
+  },
   "ledgers": {
     "title": "分类账",
     "categories": {
-      "exchange": "兌換",
+      "exchange": "交易所",
       "position_modified": "仓位调整、关闭或清算",
       "position_claim": "仓位赎回",
       "position_transfer": "仓位转移",
@@ -291,7 +374,63 @@
   "movements": {
     "title": "移动"
   },
+  "navItems": {
+    "reports": "报告",
+    "myAccount": {
+      "title": "我的账号",
+      "summary": "摘要",
+      "balance": "余额",
+      "analysisStat": "分析 & 统计",
+      "analysisStatTabs": {
+        "weightedAvgs": "加权平均",
+        "volume": "网络声量",
+        "winLoss": "获利/亏损",
+        "conRisk": "集中风险",
+        "loan": "借贷报告",
+        "fees": "手续费报告"
+      },
+      "snapshotsTax": "快照和税务报表"
+    },
+    "myHistory": {
+      "title": "账号历史记录",
+      "funding": "融资",
+      "fundingTabs": {
+        "bidsOffers": "买入价和卖出价",
+        "loans": "借贷",
+        "credits": "借贷 (已使用)"
+      },
+      "earnings": "借贷收益",
+      "earningsTabs": {
+        "funding": "融资",
+        "staking": "Staking",
+        "affiliates": "推荐计划"
+      },
+      "wallets": "钱包",
+      "walletsTabs": {
+        "balances": "余额",
+        "movements": "移动"
+      }
+    },
+    "merchantHistory": {
+      "title": "商家历史记录",
+      "invoices": "充值单"
+    },
+    "marketHistory": {
+      "title": "市场历史记录",
+      "trades": "交易",
+      "funding": "融资",
+      "spot": "现货",
+      "derivatives": "衍生品"
+    },
+    "loginHistory": "登录历史记录",
+    "subAccounts": "子账号",
+    "changeLogs": "更改日志"
+  },
   "nodata": "此时间范围没有相关数据。您可以尝试其他时间范围。",
+  "no_merchant": {
+    "title": "此部分仅适用于 ",
+    "link": "商家账号"
+  },
   "orders": {
     "title": "订单"
   },
@@ -333,7 +472,7 @@
   },
   "preferences": {
     "title": "首选项",
-    "close": "结清",
+    "close": "关闭",
     "language": "语言",
     "theme": "主题",
     "timezone": "时区",
@@ -341,6 +480,7 @@
     "milliseconds": "显示毫秒",
     "table_scroll": "滚动条",
     "preserve_timeframe": "指定的保持时间",
+    "remove_account": "移除账号",
     "sync": {
       "add-filter": "增加筛选条件",
       "add-pair": "增加交易对",
@@ -365,7 +505,7 @@
   },
   "query": {
     "title": "查询",
-    "startTime": "Start Time",
+    "startTime": "开始时间",
     "endTime": "End Time"
   },
   "querylimit": {
@@ -374,11 +514,46 @@
   "selector": {
     "select": "选取",
     "all": "全部",
-    "inactive": "无相关交易对的数据",
+    "inactive": "时间",
+    "balance-precision": {
+      "title": "余额 (USD)",
+      "approximate": "约等值",
+      "exact": "Exact"
+    },
     "filter": {
-      "symbol": "符号筛选器",
+      "symbol": "交易对",
       "pair": "货币对筛选器",
-      "category": "分类筛选"
+      "category": "分类筛选",
+      "columns": "栏",
+      "date": "日期"
+    },
+    "report-type": {
+      "title": "选择报告类型",
+      "win_loss": {
+        "title": "获利/亏损"
+      },
+      "gains_deposits": {
+        "title": "收益百分比 (收益/充值)",
+        "description": "收益%为收益相较于充值的占比"
+      },
+      "gains_balance": {
+        "title": "收益百分比 (收益/余额)",
+        "description": "收益百分比为每日收益占前一天余额及合并计算后的比率"
+      },
+      "trading_fees": {
+        "title": "交易手续费"
+      },
+      "funding_fees": {
+        "title": "借贷手续费"
+      },
+      "funding_trading_fees": {
+        "title": "借贷 + 交易手续费"
+      }
+    },
+    "unrealized-profits": {
+      "title": "显示未实现收益",
+      "yes": "是",
+      "no": "否"
     }
   },
   "snapshots": {
@@ -394,27 +569,39 @@
   "status": {
     "success": "{{topic}}在 {{time}} 成功",
     "warn": "{{topic}}",
-    "fail": "{{topic}}失败{{detail}}",
+    "fail": "{{topic}} 失败：{{detail}}",
     "noid": "dev：状态操作应包含 id 参数",
     "request": {
       "error": "{{topic}}请求失败{{detail}}"
     },
     "signInFail": "凭证无效",
     "timeframe_update": "时间已更新",
-    "signUpFail": "无效的API金钥或密钥"
+    "signUpFail": "无效的API金钥或密钥",
+    "netError": "网路连线中断，导致暂停获取数据",
+    "netResumed": "网路连线恢复，重启获取数据"
   },
   "subaccounts": {
-    "add_account": "新增账号",
+    "add_account": "添加另一个账号",
     "title": "子账号",
+    "add_accounts": "添加账号",
+    "update_accounts": "更新账号",
     "create": "创建子账号",
+    "select": "选择子账号",
+    "sub_account": "子账号:",
+    "remove_item": "移除",
     "api_key": "API密钥",
     "api_secret": "API密码",
     "password": "密码",
     "remove": "移除子账号",
-    "login": "登录子账号"
+    "login": "登录子账号",
+    "name_label": "名字",
+    "name_placeholder": "账号群组名称 (选填)",
+    "use_api_key": "使用API密钥",
+    "name_updated": "账号群组名称已更新"
   },
   "symbols": {
-    "title": "获取符号"
+    "title": "获取符号",
+    "clear_symbols": "清除交易对"
   },
   "sync": {
     "title": "同步",
@@ -438,7 +625,18 @@
     "logout": "已停止同步",
     "message": {
       "canceled": "已取消旧同步观察程序"
+    },
+    "estimated_time": {
+      "started_at": "已开始同步: ",
+      "spent_time": "已用时间： ",
+      "left_time": "剩余时间： ",
+      "estimating": "预计仍需..."
     }
+  },
+  "sum": "总计",
+  "sum_up_cols": "加總：{{sum}}",
+  "sum_up_tooltip": {
+    "title": "加總"
   },
   "taxreport": {
     "title": "税务报告",
@@ -460,6 +658,7 @@
   },
   "tickers": {
     "title": "牌价",
+    "spot": "现货",
     "minlength": "应至少选择一个货币对"
   },
   "timeframe": {
@@ -469,9 +668,12 @@
       "title": "选择查询范围",
       "view": "查看"
     },
+    "go_to": "跳转到",
     "day": "天",
+    "date": "日期",
     "refresh": "刷新",
     "custom_time": "自定义",
+    "custom_range": "自定义范围",
     "custom-timerange": "自定义时间范围",
     "custom_year": "{{year}}年",
     "24h": "过去 24 小时",
@@ -487,9 +689,13 @@
     "range_limit": "无法查询实际日期后六年以上的资讯",
     "start-date-placeholder": "开始日期时间",
     "end-date-placeholder": "结束日期",
+    "select-date": "选择日期",
+    "from": "从",
+    "to": "换成",
     "today": "今日",
+    "query_range": "查询范围",
     "year": "年",
-    "week": "星期"
+    "week": "周"
   },
   "tradedvolume": {
     "title": "交易量"
@@ -498,19 +704,29 @@
     "title": "交易"
   },
   "update": "更新",
-  "updated": "已更新",
+  "updated": "更新时间",
   "wallets": {
     "title": "钱包",
     "header": {
-      "exchange": "兌換",
+      "capital-raise": "筹募",
+      "exchange": "交易所",
       "margin": "保证金",
       "funding": "融资",
-      "token-sales": "通证发布"
+      "token-sales": "代币销售"
     },
     "nodata": "此日期与时间没有相关资料，请重新输入其他日期与时间。",
     "query": {
       "title": "查询",
       "tooltip": "选择一个要查询钱包快照的时间"
+    }
+  },
+  "weightedaverages": {
+    "title": "加权平均",
+    "limitNote": {
+      "title": "无法显示所有交易",
+      "note1": "请求最高限制：10万笔交易纪录。",
+      "link": "下载报告应用程式",
+      "note2": " 以显示更多，或变更选定的日期范围。"
     }
   },
   "withdrawals": {
