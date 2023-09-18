@@ -30,8 +30,8 @@ const AccountSummaryLeo = ({ data }) => {
 
 AccountSummaryLeo.propTypes = {
   data: PropTypes.shape({
-    leoLev: PropTypes.number.isRequired,
-    leoAmountAvg: PropTypes.number.isRequired,
+    leoLev: PropTypes.number,
+    leoAmountAvg: PropTypes.number,
   }).isRequired,
 }
 
