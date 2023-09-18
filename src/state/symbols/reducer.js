@@ -45,7 +45,10 @@ export function symbolsReducer(state = initialState, action) {
         const {
           id, explorer, name, isInPair, isFunding,
         } = currency
-        if (!isInPair) return
+
+        if (id !== 'LNX' && !isInPair) {
+          return
+        }
 
         let { symbol } = currency
 
