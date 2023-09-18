@@ -6,14 +6,14 @@ import { Card, Elevation } from '@blueprintjs/core'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
-import SectionHeader from 'ui/SectionHeader'
+import { SectionHeader, SectionHeaderTitle } from 'ui/SectionHeader'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
-import Volume from './AppSummary.volume'
+// import Volume from './AppSummary.volume'
 import PaidFees from './AppSummary.paidFees'
 import DerivFees from './AppSummary.derivFees'
-import FeeTierVolume from './AppSummary.feeTierVolume'
+// import FeeTierVolume from './AppSummary.feeTierVolume'
 
 class AccountSummary extends PureComponent {
   static propTypes = {
@@ -79,10 +79,10 @@ class AccountSummary extends PureComponent {
     } else {
       showContent = (
         <div className='section-account-summary-data'>
-          <Volume
+          {/* <Volume
             t={t}
             data={_get(data, 'trade_vol_30d', [])}
-          />
+          /> */}
           <Fees
             t={t}
             data={data}
@@ -105,7 +105,7 @@ class AccountSummary extends PureComponent {
             </>
           )}
           <br />
-          <PaidFees
+          {/* <PaidFees
             t={t}
             title='accountsummary.trading_funds'
             data={_get(data, 'fees_trading_30d', {})}
@@ -114,7 +114,7 @@ class AccountSummary extends PureComponent {
           <FeeTierVolume
             t={t}
             data={_get(data, 'trade_vol_30d', {})}
-          />
+          /> */}
           <Leo t={t} data={data} />
         </div>
       )
@@ -124,11 +124,11 @@ class AccountSummary extends PureComponent {
         elevation={Elevation.ZERO}
         className='col-lg-12 col-md-12 col-sm-12 col-xs-12 no-table-scroll'
       >
-        <SectionHeader
-          filter={false}
-          timeframe={false}
-          title='summary.title'
-        />
+        <SectionHeader>
+          <SectionHeaderTitle>
+            {t('summary.title')}
+          </SectionHeaderTitle>
+        </SectionHeader>
         {showContent}
       </Card>
     )
