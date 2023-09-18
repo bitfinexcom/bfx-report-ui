@@ -618,7 +618,9 @@
     "name_updated": "Accounts group name updated"
   },
   "summary": {
-    "title": "Summary"
+    "title": "Summary",
+    "leo_level": "LEO level",
+    "avg_amount": "Avg.Amount"
   },
   "symbols": {
     "title": "Get symbols",
