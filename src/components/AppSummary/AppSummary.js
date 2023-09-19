@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import _isEmpty from 'lodash/isEmpty'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -97,4 +97,4 @@ AppSummary.defaultProps = {
   data: {},
 }
 
-export default AppSummary
+export default memo(AppSummary)
