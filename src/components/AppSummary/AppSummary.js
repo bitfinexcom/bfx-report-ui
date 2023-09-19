@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import _get from 'lodash/get'
 import _isEmpty from 'lodash/isEmpty'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -10,10 +9,7 @@ import { SectionHeader, SectionHeaderTitle } from 'ui/SectionHeader'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
-// import Volume from './AppSummary.volume'
-import PaidFees from './AppSummary.paidFees'
 import DerivFees from './AppSummary.derivFees'
-// import FeeTierVolume from './AppSummary.feeTierVolume'
 
 class AccountSummary extends PureComponent {
   static propTypes = {
@@ -79,10 +75,6 @@ class AccountSummary extends PureComponent {
     } else {
       showContent = (
         <div className='section-account-summary-data'>
-          {/* <Volume
-            t={t}
-            data={_get(data, 'trade_vol_30d', [])}
-          /> */}
           <Fees
             t={t}
             data={data}
@@ -96,25 +88,8 @@ class AccountSummary extends PureComponent {
                 makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
                 takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
               />
-              <PaidFees
-                t={t}
-                title='accountsummary.margin_funds'
-                data={_get(data, 'fees_funding_30d', {})}
-                total={_get(data, 'fees_funding_total_30d', 0)}
-              />
             </>
           )}
-          <br />
-          {/* <PaidFees
-            t={t}
-            title='accountsummary.trading_funds'
-            data={_get(data, 'fees_trading_30d', {})}
-            total={_get(data, 'fees_trading_total_30d', 0)}
-          />
-          <FeeTierVolume
-            t={t}
-            data={_get(data, 'trade_vol_30d', {})}
-          /> */}
         </div>
       )
     }
