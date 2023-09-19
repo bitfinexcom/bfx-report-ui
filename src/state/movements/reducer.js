@@ -21,6 +21,7 @@ import types from './constants'
 
 const initialState = {
   ...baseSymbolState,
+  movementInfo: {},
 }
 
 const TYPE = queryTypes.MENU_MOVEMENTS
@@ -82,6 +83,12 @@ export function movementsReducer(state = initialState, action) {
         pageLoading: false,
         entries: [...state.entries, ...entries],
         existingCoins: updateCoins.sort(),
+      }
+    }
+    case types.SET_EXTRA_INFO: {
+      return {
+        ...state,
+        movementInfo: payload,
       }
     }
     case types.FETCH_FAIL:

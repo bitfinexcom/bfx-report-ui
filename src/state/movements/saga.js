@@ -6,8 +6,10 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
+import { selectAuth } from 'state/auth/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getFilterQuery } from 'state/filters/selectors'
+import { toggleExtraInfoDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
@@ -70,6 +72,33 @@ function* fetchMovements() {
   }
 }
 
+function* getExtraInfo({ payload }) {
+  try {
+    const params = { id: payload }
+    const auth = yield select(selectAuth)
+    const { result, error } = yield makeFetchCall('getMovementInfo', params, auth)
+
+    if (result) {
+      yield put(actions.setMovementInfo(result))
+      yield put(toggleExtraInfoDialog(result))
+    }
+
+    if (error) {
+      yield put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'movements.title',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(actions.fetchFail({
+      id: 'status.request.error',
+      topic: 'movements.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
 function* refreshMovements() {
   yield put(refreshPagination(TYPE))
 }
@@ -82,4 +111,5 @@ export default function* movementsSaga() {
   yield takeLatest(types.FETCH_MOVEMENTS, fetchMovements)
   yield takeLatest([types.REFRESH, types.ADD_SYMBOL, types.REMOVE_SYMBOL, types.CLEAR_SYMBOLS], refreshMovements)
   yield takeLatest(types.FETCH_FAIL, fetchMovementsFail)
+  yield takeLatest(types.GET_EXTRA_INFO, getExtraInfo)
 }

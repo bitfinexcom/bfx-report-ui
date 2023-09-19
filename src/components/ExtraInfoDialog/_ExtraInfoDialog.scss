@@ -1,0 +1,26 @@
+.extra-info {
+  &.bp3-dialog {
+    width: 610px;
+
+    .bp3-dialog {
+      &-header {
+        padding-left: 20px;
+      }
+
+      &-body {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+
+      &-footer-actions {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .bp3-button{
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

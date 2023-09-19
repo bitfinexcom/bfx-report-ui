@@ -12,7 +12,30 @@ const getColumns = ({
   getFullTime,
   filteredData,
   columnsWidth,
+  onDetailsClick,
 }) => [
+  {
+    id: 'moreDetails',
+    name: 'column.moreDetails',
+    className: 'align-left',
+    width: getColumnWidth('moreDetails', columnsWidth),
+    renderer: (rowIndex) => {
+      const { id } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={t('column.moreDetails')}>
+          <>
+            <a
+              href='#'
+              onClick={e => onDetailsClick(e, { id })}
+            >
+              {t('column.show')}
+            </a>
+          </>
+        </Cell>
+      )
+    },
+    copyText: rowIndex => filteredData[rowIndex].id,
+  },
   {
     id: 'id',
     name: 'column.id',
