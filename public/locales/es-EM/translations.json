@@ -18,24 +18,73 @@
     "title": "Posiciones activas"
   },
   "affiliatesearnings": {
-    "title": "Ganancias de afiliados"
+    "title": "Ganancias de afiliados",
+    "dashboard_link": "Panel de Afiliados"
   },
   "auth": {
     "auth": "Auth",
-    "title": "Iniciar sesión",
+    "title": "Inicio de sesión",
+    "addAccount": "Agregar cuenta",
+    "addAccounts": "Agregar cuentas",
+    "addAccountsTo": "Agregar cuentas a:",
+    "primaryAccount": "Cuenta principal:",
+    "addAccountsToThisAcc": "Agregar cuentas a esta cuenta",
+    "manageAccounts": "Administrar cuentas",
+    "manageMultipleAccs": "Administrar múltiples cuentas",
+    "removeAccount": "Eliminar cuenta",
+    "removeSelectedAccount": "Eliminar cuenta: ",
+    "accountRemoved": "Cuenta eliminada",
+    "accountRemoving": "Eliminación de la cuenta",
+    "useApiKey": "Usar llave API",
+    "loginEmail": {
+      "emailOrUserName": "Correo electrónico o Nombre de Usuario",
+      "bfxAccPassword": "Contraseña",
+      "loginEmailError": "Tu correo/usuario o contraseña está incorrecto",
+      "loginEmailNo2FA": "Por favor activa tu 2FA para tu cuenta o usa la llave API para iniciar sesión",
+      "loginTokenExpired": "Tu último inicio de sesión ha expirado, por favor inicia sesión nuevamente"
+    },
+    "2FA": {
+      "title": "Autenticación de dos pasos",
+      "auth": "Autenticar",
+      "cancel": "Cancelar",
+      "sixDigits": "6 dígitos",
+      "GAToken": "Token de Autenticador 2FA",
+      "invalidToken": "Token inválido, inténtalo de nuevo",
+      "loginSessionExpired": "Tu login ha expirado, favor de intentar nuevamente"
+    },
+    "apiKey": "Claves API",
+    "apiSecret": "API Secreta",
+    "accWithApiKey": "Agregar cuenta con llave API",
+    "accWithoutApiKey": "Agregar cuenta sin llave API",
+    "simpleAccounts": "Cuentas simples",
+    "multipleAccounts": "Multiples Cuentas",
+    "login": "Inicio de sesión",
+    "multyAccsApi": "Múltiples cuentas - Clave API",
     "signUp": "Registrarse",
     "signIn": "Iniciar sesión",
-    "passwordRecovery": "Recuperar contraseña",
+    "signInTo": "Inicia sesión a:",
+    "signInToExistingAcc": "Ingresa a una cuenta existente",
+    "signInToDifferentAcc": "Inicia sesión con una cuenta diferente",
+    "selectMasterAccount": "Elige cuenta maestra",
+    "forgotPassword": "¿Olvidaste la contraseña?",
+    "forgotPasswordNote": "Reinicia tu aplicación de Reportes al ingresar detalles de tu cuenta y una nueva contraseña.",
+    "forgotPasswordLink": "¿Olvidaste la contraseña?",
     "subAccount": "Sub cuenta",
     "enterAPIKey": "Ingresar clave API:",
     "enterAPISecret": "Ingresar clave API:",
-    "enterPassword": "Ingresar contraseña:",
-    "repeatPassword": "Repetir contraseña:",
+    "enterPassword": "Ingresa la Contraseña de tu aplicación de Reportes Bitfinex",
+    "repeatPassword": "Repite la contraseña para tu aplicación de reportes Bitfinex",
+    "enterNewPassword": "Ingresa una nueva Contraseña de tu aplicación de Reportes Bitfinex",
+    "repeatNewPassword": "Repite la nueva contraseña para tu aplicación de reportes Bitfinex",
+    "resetPassword": "Restablecer contraseña",
+    "removeLoginPassword": "Eliminar contraseña al iniciar sesión",
+    "resetAccWithApiKey": "Restablacer cuenta con llave API",
+    "resetAccWithoutApiKey": "Restablacer cuenta sin llave API",
     "enterEmail": "Ingresar Email:",
     "checkAuth": "Revisar Autenticación",
     "note1": "Visita ",
     "note2": " para obtener la clave API de solo lectura y par secreto.",
-    "passwordProtection": "Habilitar protección de contraseña",
+    "passwordProtection": "Requerir contraseña al iniciar sesión",
     "passwordLengthValidationError": "La contraseña debe tener al menos 8 caracteres",
     "passwordCharactersValidationError": "La contraseña debe incluir caracteres en mayúsculas y minúsculas",
     "passwordRepeatValidationError": "Las contraseñas no coinciden",
@@ -49,11 +98,21 @@
   "averagewinloss": {
     "title": "Pérdida/Ganancia promedio"
   },
+  "download_app": {
+    "title": "Obtén la última experiencia en reportes con nuestra aplicación de escritorio",
+    "description": "Accede a funciones avanzadas que potenciarán tu análisis de datos.",
+    "risk": "Riesgo de concentración",
+    "win_loss": "Rachas de Ganancias/Pérdidas",
+    "tax": "Reportes de impuestos",
+    "snapshots": "Instantánea",
+    "more": "Y más...",
+    "download_reports": "Descargar Bitfinex Reports"
+  },
   "candles": {
     "title": "Velas",
     "amount": "Monto",
     "orderid": "ID de la orden",
-    "fee": "Comisión",
+    "fee": "Comisiones",
     "toggle_trades": "Alternar operaciones"
   },
   "changelogs": {
@@ -61,7 +120,7 @@
   },
   "charts": {
     "cumulative": "Acumulativo",
-    "percentage": "Porcentaje"
+    "percent": "%"
   },
   "column": {
     "actual-price": "Precio Actual",
@@ -75,20 +134,28 @@
     "base-price": "Precio Base",
     "bid": "Bid",
     "browser": "Navegador",
+    "buyingAmount": "Monto de compra",
+    "buyingWeightedPrice": "Precio ponderado de compra",
     "category": "Categoría",
     "clampMax": "Clamp Máx",
     "clampMin": "Clamp Min",
-    "closed": "Cerrado",
+    "closed": "Cerradas",
     "collateral": "Colateral",
+    "cost": "Costo",
     "created": "Creado",
+    "cumulativeAmount": "Cantidad acumulativa",
     "currency": "Moneda",
+    "customerInfo": "Información del Cliente",
     "date": "Fecha",
     "days": "Días",
+    "deselectionHint": "Cmd/Ctrl + clic para anular la selección",
     "description": "Descripción",
     "destination": "Destino",
-    "fee": "Comisión",
+    "duration": "Duración",
+    "fee": "Comisiones",
     "feePercent": "% Comisión",
     "fees": "Comisiones",
+    "firstTrade": "Primer trade",
     "fundBalance": "Balance del fondo del seguro",
     "fundingAccrued": "Próxima financiación acumulada",
     "fundingCost": "Costo de Financimiento",
@@ -96,10 +163,13 @@
     "fundingType": "Tipo de Financiamiento",
     "id": "#",
     "ip": "IP",
+    "invoices": "Facturas",
+    "lastTrade": "Last Trade",
     "lastpayout": "Último pago",
     "liq-price": "Precio de Liq",
     "maker_fees": "Tarifas del Creador",
     "maker_rebate": "Reembolso del Creador",
+    "merchantName": "Nombre del Comerciante",
     "meta": "Metadatos",
     "mobile": "Móvil",
     "movementsTotal": "Monto total de movimientos (USD)",
@@ -107,6 +177,8 @@
     "opened": "Abierto",
     "orderid": "ID de la orden",
     "pair": "Par",
+    "payCurrencies": "Monedas de pago",
+    "payment": "Pago",
     "percent": "Porcentaje",
     "period": "Periodo",
     "pl": "G/P",
@@ -120,6 +192,10 @@
     "pricetrail": "Precio dinámico",
     "rate": "Tasa",
     "rateperc": "Tasa %",
+    "redirectUrl": "Redirigir URL",
+    "sale": "Venta",
+    "sellingAmount": "Monto de venta",
+    "sellingWeightedPrice": "Precio ponderado de venta",
     "side": "Lado",
     "status": "Estado",
     "taker_fees": "Tarifas de tomador",
@@ -140,14 +216,17 @@
     "version": "Versión",
     "volume": "Volumen",
     "wallet": "Cartera",
-    "walletsTotal": "Balance Total en la Cartera (USD)"
+    "walletsTotal": "Balance Total en la Cartera (USD)",
+    "webhook": "Webhook"
   },
   "columnsfilter": {
-    "title": "Filtrar Columnas",
+    "title": "Filtro",
     "clear": "Despejar",
     "cancel": "Cancelar",
     "apply": "Aplicar",
+    "none": "Sin",
     "filters": {
+      "title": "Filtros",
       "contains": "Contiene",
       "beginsWith": "Empieza con",
       "endsWith": "Termina con",
@@ -189,15 +268,16 @@
     "export": "Exportar",
     "cancel": "Cancelar",
     "okay": "Muy bien",
+    "remoteStorage": "Almacenamiento Remoto",
     "status": {
-      "local": "Exportación de csv generado, verifica tu carpeta local 'csv'",
+      "local": "Exportar csv generado, los archivos se guardan en: ",
       "email": "Generando tu reporte CSV, lo enviaremos por correo electrónico tan pronto como esté listo..."
     },
     "success": "Éxito",
     "targets": "Datos para Exportar"
   },
   "fcredit": {
-    "title": "Crédito de financiamiento (usado)",
+    "title": "Créditos de financiamiento (usados)",
     "side": {
       "provided": "PROPORCIONADO",
       "taken": "TOMADO",
@@ -218,10 +298,10 @@
     }
   },
   "foffer": {
-    "title": "Financiamiento Bids & Ofertas"
+    "title": "Financiamiento Oferta y Demanda"
   },
   "fpayment": {
-    "title": "Ganancias de Financiación"
+    "title": "Ganancias de financiamiento"
   },
   "framework": {
     "title": "Espera hasta completar la sincronización",
@@ -229,19 +309,22 @@
     "proceed": "Proceder de todas maneras",
     "cancel": "Cancelar",
     "notagain": "No volver a mostrar este mensaje",
-    "continue": "Continuar",
+    "continue": "Continue",
     "warning": "Advertencia"
   },
   "header": {
     "logout": "Cerrar sesión",
     "preferences": "Preferencias",
     "help": "Ayuda",
-    "top_navigation": "Top Navigation"
+    "top_navigation": "Navegación superior"
   },
   "inputs": {
     "filter_placeholder": "Filtrar...",
     "timezone_local": "Zona horaria actual",
     "timezone_placeholder": "Buscar zonas horarias..."
+  },
+  "invoices": {
+    "title": "Facturas"
   },
   "ledgers": {
     "title": "Libro Mayor",
@@ -255,7 +338,7 @@
       "interest_payment": "Pago de intereses por margen",
       "derivatives_funding_event": "Evento de financiamiento de derivados",
       "settlement": "Acuerdo",
-      "transfer": "Transferencia",
+      "transfer": "Transferir",
       "deposit": "Depósito",
       "withdrawal": "Retiro de fondos",
       "cancelled_withdrawal": "Retiro cancelado",
@@ -291,7 +374,63 @@
   "movements": {
     "title": "Movimientos"
   },
+  "navItems": {
+    "reports": "Reportes",
+    "myAccount": {
+      "title": "Mi cuenta",
+      "summary": "Resumen",
+      "balance": "Balance",
+      "analysisStat": "Análisis y Estadísticas",
+      "analysisStatTabs": {
+        "weightedAvgs": "Promedios ponderados",
+        "volume": "Volumen",
+        "winLoss": "Ganancia/Pérdida",
+        "conRisk": "Riesgo de concentración",
+        "loan": "Reporte de préstamo",
+        "fees": "Reporte de comisiones"
+      },
+      "snapshotsTax": "Capturas y reporte fiscal"
+    },
+    "myHistory": {
+      "title": "Mi historial",
+      "funding": "Financiamiento",
+      "fundingTabs": {
+        "bidsOffers": "Bids y ofertas",
+        "loans": "Préstamos",
+        "credits": "Créditos"
+      },
+      "earnings": "Ganancias",
+      "earningsTabs": {
+        "funding": "Financiamiento",
+        "staking": "Staking",
+        "affiliates": "Affiliates"
+      },
+      "wallets": "Carteras",
+      "walletsTabs": {
+        "balances": "Balances",
+        "movements": "Movimientos"
+      }
+    },
+    "merchantHistory": {
+      "title": "Historial de Comerciante",
+      "invoices": "Facturas"
+    },
+    "marketHistory": {
+      "title": "Historial de Mercado",
+      "trades": "Trades",
+      "funding": "Financiamiento",
+      "spot": "Spot",
+      "derivatives": "Derivados"
+    },
+    "loginHistory": "Historial de inicio de sesión",
+    "subAccounts": "Subcuentas",
+    "changeLogs": "Cambiar registro"
+  },
   "nodata": "No hay datos relacionados en este rango de tiempo. Puedes probar con otras fechas.",
+  "no_merchant": {
+    "title": "Esta sección solo está disponible para ",
+    "link": "cuentas de Comerciante"
+  },
   "orders": {
     "title": "Órdenes"
   },
@@ -337,11 +476,11 @@
     "language": "Idioma",
     "theme": "Temática",
     "timezone": "Zona horaria",
-    "timezone-input": "Ingresar Zona horaria",
     "dateformat": "Formato de fecha",
     "milliseconds": "Mostrar milisegundos",
     "table_scroll": "Desplazamiento de tabla",
     "preserve_timeframe": "Conservar el marco de tiempo",
+    "remove_account": "Elminar cuenta",
     "sync": {
       "add-filter": "Añadir filtro",
       "add-pair": "Agregar par",
@@ -375,11 +514,46 @@
   "selector": {
     "select": "Seleccionar",
     "all": "Todo",
-    "inactive": "Inactivo",
+    "inactive": "Inactive",
+    "balance-precision": {
+      "title": "Balance en (USD)",
+      "approximate": "Aproximado",
+      "exact": "Exacto"
+    },
     "filter": {
-      "symbol": "Filtro de símbolo",
+      "symbol": "Symbol",
       "pair": "Filtro de par",
-      "category": "Filtro de categoría"
+      "category": "Filtro de categoría",
+      "columns": "Columnas",
+      "date": "Fecha"
+    },
+    "report-type": {
+      "title": "Selecciona el tipo de reporte",
+      "win_loss": {
+        "title": "Ganancia/Pérdida"
+      },
+      "gains_deposits": {
+        "title": "Porcentaje de ganancia (ganancia/depósitos)",
+        "description": "% ganancias están siendo calculados contra los depósitos hechos a la cuenta"
+      },
+      "gains_balance": {
+        "title": "Porcentaje de ganancia (ganancia/balance)",
+        "description": "% ganancias están siendo calculados diariamente vs el balance del día anterior y compuesto"
+      },
+      "trading_fees": {
+        "title": "Comisiones de Trading"
+      },
+      "funding_fees": {
+        "title": "Comisiones de financiamiento"
+      },
+      "funding_trading_fees": {
+        "title": "Comisiones de Financiamiento + Trading"
+      }
+    },
+    "unrealized-profits": {
+      "title": "Mostrar ganancias no realizadas",
+      "yes": "Sí",
+      "no": "No"
     }
   },
   "snapshots": {
@@ -395,27 +569,39 @@
   "status": {
     "success": "{{topic}} Éxito a las {{time}}",
     "warn": "{{topic}}",
-    "fail": "{{topic}} falla {{detail}}",
+    "fail": "{{topic}} falla: {{detail}}",
     "noid": "dev: la acción de estado debe contener el parámetro id",
     "request": {
       "error": "{{topic}} solicitud fallida {{detail}}"
     },
     "signInFail": "Credenciales no válidas",
     "timeframe_update": "Marco de tiempo actualizado",
-    "signUpFail": "Clave de API no válida o secreta"
+    "signUpFail": "Clave de API no válida o secreta",
+    "netError": "Obtención de datos en pausa debido a una conexión a Internet interrumpida",
+    "netResumed": "Conexión a Internet restaurada obtención de datos reanudada"
   },
   "subaccounts": {
-    "add_account": "Agregar cuenta",
+    "add_account": "Agregar otra cuenta",
     "title": "Subcuentas",
+    "add_accounts": "Agregar cuentas",
+    "update_accounts": "Actualizar cuentas",
     "create": "Crear Sub Cuentas",
+    "select": "Seleccionar Subcuenta",
+    "sub_account": "Sub cuenta:",
+    "remove_item": "Eliminar",
     "api_key": "Claves API",
     "api_secret": "API Secreta",
     "password": "Contraseña",
     "remove": "Remover Sub Cuentas",
-    "login": "Iniciar sesión en subcuenta"
+    "login": "Iniciar sesión en subcuenta",
+    "name_label": "Nombre",
+    "name_placeholder": "Nombre del grupo de cuentas (opcional)",
+    "use_api_key": "Usar llave API",
+    "name_updated": "Nombre del grupo de cuentas actualizado"
   },
   "symbols": {
-    "title": "Obtener símbolos"
+    "title": "Obtener símbolos",
+    "clear_symbols": "Borrar símbolos"
   },
   "sync": {
     "title": "Sincronizar",
@@ -439,7 +625,18 @@
     "logout": "Sincronización detenida",
     "message": {
       "canceled": "Cancelar antiguo Sync Watcher"
+    },
+    "estimated_time": {
+      "started_at": "Sincronización empezada: ",
+      "spent_time": "Tiempo utilizado: ",
+      "left_time": "Tiempo restante: ",
+      "estimating": "Estimando..."
     }
+  },
+  "sum": "Suma",
+  "sum_up_cols": "Suma: {{sum}}",
+  "sum_up_tooltip": {
+    "title": "Suma"
   },
   "taxreport": {
     "title": "Reporte de impuestos",
@@ -461,6 +658,7 @@
   },
   "tickers": {
     "title": "Cotizaciones",
+    "spot": "Spot",
     "minlength": "Deberías elegir al menos un par"
   },
   "timeframe": {
@@ -470,9 +668,12 @@
       "title": "Seleccionar rango de consulta",
       "view": "Ver"
     },
+    "go_to": "Ir a",
     "day": "Día",
+    "date": "Fecha",
     "refresh": "Actualizar",
     "custom_time": "Personalizar",
+    "custom_range": "Intervalo personalizado",
     "custom-timerange": "Intervalo de tiempo personalizado",
     "custom_year": "{{year}} año",
     "24h": "Últimas 24h",
@@ -488,6 +689,9 @@
     "range_limit": "No se permiten consultas con más de seis años de retraso respecto a la fecha real",
     "start-date-placeholder": "Fecha de Inicio",
     "end-date-placeholder": "Fecha Final",
+    "select-date": "Seleccionar fecha",
+    "from": "De",
+    "to": "A",
     "today": "Hoy",
     "query_range": "Rango de Consulta",
     "year": "Año",
@@ -504,6 +708,7 @@
   "wallets": {
     "title": "Carteras",
     "header": {
+      "capital-raise": "Recaudación de Capital",
       "exchange": "Exchange",
       "margin": "Margen",
       "funding": "Financiamiento",
@@ -513,6 +718,15 @@
     "query": {
       "title": "Consulta",
       "tooltip": "Selecciona un horario para consultar la instantánea de las carteras"
+    }
+  },
+  "weightedaverages": {
+    "title": "Promedios ponderados",
+    "limitNote": {
+      "title": "No se pueden mostrar todas las transacciones",
+      "note1": "Tu solicitud supera el límite de 100 mil transacciones.",
+      "link": "Descarga la app de reportes",
+      "note2": " para ver más o cambiar el intervalo de fechas."
     }
   },
   "withdrawals": {
