@@ -15,26 +15,13 @@ class AccountSummary extends PureComponent {
   static propTypes = {
     data: PropTypes.shape({
       derivMakerRebate: PropTypes.number,
-      derivTakerRebate: PropTypes.number,
       derivTakerFee: PropTypes.number,
-      derivMakerFee: PropTypes.number,
-      fees_funding_30d: PropTypes.shape({
-        USD: PropTypes.number,
-      }),
-      fees_funding_total_30d: PropTypes.number,
-      fees_trading_30d: PropTypes.shape({
-        USD: PropTypes.number,
-      }),
-      fees_trading_total_30d: PropTypes.number,
       leoAmountAvg: PropTypes.number,
       leoLev: PropTypes.number,
       makerFee: PropTypes.number,
       takerFeeToCrypto: PropTypes.number,
       takerFeeToFiat: PropTypes.number,
       takerFeeToStable: PropTypes.number,
-      trade_vol_30d: PropTypes.arrayOf(PropTypes.shape({
-        curr: PropTypes.string,
-      })),
     }),
     dataReceived: PropTypes.bool.isRequired,
     fetchData: PropTypes.func.isRequired,
@@ -85,8 +72,8 @@ class AccountSummary extends PureComponent {
               <DerivFees
                 t={t}
                 title='accountsummary.fees_deriv'
-                makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
-                takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
+                makerFee={data.derivMakerRebate || 0}
+                takerFee={data.derivTakerFee || 0}
               />
             </>
           )}
