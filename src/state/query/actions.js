@@ -53,10 +53,18 @@ export function setExportEmail(email) {
   }
 }
 
+export function setIsCsvExporting(isExporting) {
+  return {
+    type: types.SET_IS_CSV_EXPORTING,
+    payload: isExporting,
+  }
+}
+
 export default {
   exportCsv,
   setRemoteUrn,
   prepareExport,
   setExportEmail,
+  setIsCsvExporting,
   setLocalExportPath,
 }

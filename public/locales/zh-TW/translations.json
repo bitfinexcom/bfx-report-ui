@@ -11,31 +11,80 @@
     "30dVolume": "過去30天交易量",
     "margin_funds": "過去30天提供的保證金融資之總收益",
     "trading_funds": "過去30天交易手續費",
-    "leo_level": "LEO級別",
+    "leo_level": "LEO級別\n",
     "average_amount": "平均數量"
   },
   "activepositions": {
     "title": "活躍的倉位"
   },
   "affiliatesearnings": {
-    "title": "推薦計畫收益"
+    "title": "推薦計畫收益",
+    "dashboard_link": "推薦計畫面板"
   },
   "auth": {
     "auth": "驗證",
-    "title": "請先登入",
+    "title": "登入",
+    "addAccount": "新增帳號",
+    "addAccounts": "新增帳戶",
+    "addAccountsTo": "新增帳戶到：",
+    "primaryAccount": "主帳戶：",
+    "addAccountsToThisAcc": "在此帳戶下新增帳戶",
+    "manageAccounts": "管理帳戶",
+    "manageMultipleAccs": "管理多個帳戶",
+    "removeAccount": "移除帳戶",
+    "removeSelectedAccount": "移除帳戶：",
+    "accountRemoved": "已移除帳戶",
+    "accountRemoving": "正在移除帳戶",
+    "useApiKey": "使用API金鑰",
+    "loginEmail": {
+      "emailOrUserName": "電子郵件或用戶名",
+      "bfxAccPassword": "密碼",
+      "loginEmailError": "電子郵件/用戶名或密碼不正確",
+      "loginEmailNo2FA": "請為您的帳戶啟用雙重驗證或者使用API金鑰登入",
+      "loginTokenExpired": "前次登入作業已逾時，請重新登入"
+    },
+    "2FA": {
+      "title": "雙重驗證（2FA）",
+      "auth": "認證",
+      "cancel": "取消",
+      "sixDigits": "6 位數",
+      "GAToken": "雙重身份驗證 2FA 金鑰",
+      "invalidToken": "令牌無效，請再試一次",
+      "loginSessionExpired": "登入逾時，請重新再試。"
+    },
+    "apiKey": "API 金鑰",
+    "apiSecret": "API 密碼",
+    "accWithApiKey": "使用API 金鑰新增帳戶",
+    "accWithoutApiKey": "不使用API 金鑰新增帳戶",
+    "simpleAccounts": "簡易帳戶",
+    "multipleAccounts": "多個帳戶",
+    "login": "登入",
+    "multyAccsApi": "多個帳戶 - API金鑰",
     "signUp": "註冊",
     "signIn": "登入",
-    "passwordRecovery": "密碼找回",
+    "signInTo": "登入帳戶：",
+    "signInToExistingAcc": "登入現有帳戶",
+    "signInToDifferentAcc": "登入不同帳戶",
+    "selectMasterAccount": "選擇主帳戶",
+    "forgotPassword": "忘記密碼",
+    "forgotPasswordNote": "請輸入您的帳戶資訊和新密碼，以重設您的報告應用程式帳戶。",
+    "forgotPasswordLink": "忘記密碼？",
     "subAccount": "子帳戶",
     "enterAPIKey": "輸入 API Key:",
     "enterAPISecret": "輸入 API Secret:",
-    "enterPassword": "輸入密碼：",
-    "repeatPassword": "再次輸入密碼：",
+    "enterPassword": "請輸入用於Bitfinex報告應用程式之密碼",
+    "repeatPassword": "請再次輸入用於Bitfinex報告應用程式之密碼",
+    "enterNewPassword": "請輸入用於Bitfinex報告應用程式之新密碼",
+    "repeatNewPassword": "請再次輸入用於Bitfinex報告應用程式之新密碼",
+    "resetPassword": "重設密碼",
+    "removeLoginPassword": "移除登入密碼",
+    "resetAccWithApiKey": "使用API 金鑰重設帳戶",
+    "resetAccWithoutApiKey": "不使用API 金鑰重設帳戶",
     "enterEmail": "輸入電子郵箱：",
     "checkAuth": "開始驗證",
     "note1": "請先前往 ",
     "note2": " 取得唯讀的API金鑰與密鑰對。",
-    "passwordProtection": "啟動密碼保護機制",
+    "passwordProtection": "使用登入密碼",
     "passwordLengthValidationError": "密碼長度必須至少八位數",
     "passwordCharactersValidationError": "密碼必須包含英文大小寫字母",
     "passwordRepeatValidationError": "密碼不一致",
@@ -48,6 +97,16 @@
   },
   "averagewinloss": {
     "title": "平均淨/損失"
+  },
+  "download_app": {
+    "title": "使用我們的桌面應用程式，以便獲得最佳的報表製作體驗",
+    "description": "利用進階功能，享有更完善的數據分析體驗",
+    "risk": "集中風險",
+    "win_loss": "損益報告",
+    "tax": "稅務報告",
+    "snapshots": "快照",
+    "more": "以及更多...",
+    "download_reports": "下載Bitfinex報告應用程式"
   },
   "candles": {
     "title": "陰陽燭",
@@ -68,48 +127,63 @@
     "amount": "數量",
     "amount-exe": "執行數量",
     "amountUsd": "數量(美元)",
-    "ask": "賣價",
+    "ask": "賣出",
     "avgprice": "平均執行價格",
     "balance": "金額",
     "balanceUsd": "金額(美元)",
     "base-price": "基價",
-    "bid": "買價",
+    "bid": "買入",
     "browser": "瀏覽器",
+    "buyingAmount": "買入數量",
+    "buyingWeightedPrice": "買入加權價格",
     "category": "分類",
     "clampMax": "最大值",
     "clampMin": "最小值",
-    "closed": "結束",
-    "collateral": "抵押品",
-    "created": "建立",
+    "closed": "已關閉",
+    "collateral": "保證金",
+    "cost": "買進成本",
+    "created": "已建立",
+    "cumulativeAmount": "累計數量",
     "currency": "幣別",
+    "customerInfo": "顧客資訊",
     "date": "日期",
     "days": "天",
-    "description": "描述",
+    "deselectionHint": "按Cmd（或者Ctrl）鍵加點擊滑鼠以取消選擇",
+    "description": "說明",
     "destination": "目的地",
+    "duration": "持續時間",
     "fee": "手續費",
     "feePercent": "費用百分比",
     "fees": "費用",
+    "firstTrade": "首次交易",
     "fundBalance": "保險基金餘額",
     "fundingAccrued": "下階段累計資金",
+    "fundingCost": "互換成本",
     "fundingStep": "下階段累加值",
+    "fundingType": "互換類型",
     "id": "#",
     "ip": "IP",
+    "invoices": "發票",
+    "lastTrade": "上次交易",
     "lastpayout": "結束",
     "liq-price": "清算價格",
     "maker_fees": "掛單手續費",
     "maker_rebate": "做市商返利",
+    "merchantName": "店家名稱",
     "meta": "後設資料",
     "mobile": "行動裝置",
     "movementsTotal": "運用資金總額 (美元)",
-    "note": "附註",
+    "note": "備註",
     "opened": "開始",
     "orderid": "訂單 ID",
     "pair": "對",
+    "payCurrencies": "支付幣別",
+    "payment": "付款",
     "percent": "百分比",
     "period": "期間",
     "pl": "損益",
     "plUsd": "損益 (USD)",
-    "plperc": "損益%",
+    "plperc": "損益率",
     "positionpair": "倉位對",
     "positionsTotal": "倉位總損益 (美元)",
     "price": "價格",
@@ -118,10 +192,12 @@
     "pricetrail": "歷史價格",
     "rate": "利率",
     "rateperc": "利率 %",
+    "redirectUrl": "重新導向網址",
+    "sale": "賣出價值",
+    "sellingAmount": "賣出數量",
+    "sellingWeightedPrice": "賣出加權價格",
     "side": "方向",
     "status": "狀態",
-    "fundingCost": "互換成本",
-    "fundingType": "互換類型",
     "taker_fees": "吃單手續費",
     "taker_fees_crypto": "吃單手續費（加密貨幣）",
     "taker_fees_fiat": "吃單手續費（法幣）",
@@ -132,22 +208,25 @@
     "taker_rebate_stable": "吃單手續費返利（穩定幣）",
     "time": "時間",
     "totalResult": "總額 (美元)",
-    "transactionId": "交易編號",
+    "transactionId": "交易ID",
     "type": "類型",
     "typeprev": "先前訂單類型",
     "updated": "更新",
     "usd": "美元",
     "version": "版本",
-    "volume": "交易量",
+    "volume": "網路聲量",
     "wallet": "錢包",
-    "walletsTotal": "錢包總餘額 (美元)"
+    "walletsTotal": "錢包總餘額 (美元)",
+    "webhook": "Webhook"
   },
   "columnsfilter": {
-    "title": "篩選欄",
+    "title": "篩選",
     "clear": "清除",
     "cancel": "取消",
     "apply": "確認",
+    "none": "沒有",
     "filters": {
+      "title": "篩選",
       "contains": "包含",
       "beginsWith": "開始於",
       "endsWith": "結束於",
@@ -188,16 +267,17 @@
     "store": "期間的資料，並儲存至本地資料夾。",
     "export": "匯出",
     "cancel": "取消",
-    "okay": "好",
+    "okay": "好的",
+    "remoteStorage": "遠端儲存",
     "status": {
-      "local": "已產生{{topic}}的csv檔，請查看您本地的'csv'資料夾。",
+      "local": "已成功匯出至CSV檔，檔案儲存於： ",
       "email": "正在生成您的 CSV 格式報告。生成後將立即透過 Email 送出。"
     },
     "success": "成功",
     "targets": "匯出項目"
   },
   "fcredit": {
-    "title": "信用融資（已使用）",
+    "title": "融資（已使用）",
     "side": {
       "provided": "已提供",
       "taken": "已領取",
@@ -221,7 +301,7 @@
     "title": "保證金融資出價與報價"
   },
   "fpayment": {
-    "title": "融資付款"
+    "title": "放貸收益"
   },
   "framework": {
     "title": "請等待同步完成為止",
@@ -230,7 +310,7 @@
     "cancel": "取消",
     "notagain": "不要再顯示此信息",
     "continue": "繼續",
-    "warning": "提醒"
+    "warning": "警告"
   },
   "header": {
     "logout": "登出",
@@ -243,10 +323,13 @@
     "timezone_local": "目前時區",
     "timezone_placeholder": "搜尋時區..."
   },
+  "invoices": {
+    "title": "發票"
+  },
   "ledgers": {
     "title": "餘額",
     "categories": {
-      "exchange": "兌換",
+      "exchange": "交易",
       "position_modified": "倉位修改、關閉或清算",
       "position_claim": "倉位贖回",
       "position_transfer": "倉位轉移",
@@ -291,7 +374,63 @@
   "movements": {
     "title": "活動"
   },
+  "navItems": {
+    "reports": "報告",
+    "myAccount": {
+      "title": "我的帳戶",
+      "summary": "摘要",
+      "balance": "金額",
+      "analysisStat": "分析及統計",
+      "analysisStatTabs": {
+        "weightedAvgs": "加權平均",
+        "volume": "網路聲量",
+        "winLoss": "獲利／虧損",
+        "conRisk": "集中風險",
+        "loan": "借貸報告",
+        "fees": "手續費報告"
+      },
+      "snapshotsTax": "快照和稅務報表"
+    },
+    "myHistory": {
+      "title": "帳戶歷史紀錄",
+      "funding": "融資",
+      "fundingTabs": {
+        "bidsOffers": "出價和報價",
+        "loans": "出借資金",
+        "credits": "融資（已使用）"
+      },
+      "earnings": "收益",
+      "earningsTabs": {
+        "funding": "融資",
+        "staking": "Staking",
+        "affiliates": "推薦計畫"
+      },
+      "wallets": "錢包",
+      "walletsTabs": {
+        "balances": "餘額",
+        "movements": "活動"
+      }
+    },
+    "merchantHistory": {
+      "title": "店家歷史紀錄",
+      "invoices": "發票"
+    },
+    "marketHistory": {
+      "title": "市場歷史紀錄",
+      "trades": "交易",
+      "funding": "融資",
+      "spot": "現貨",
+      "derivatives": "衍生品"
+    },
+    "loginHistory": "登入記錄",
+    "subAccounts": "子帳戶",
+    "changeLogs": "變更紀錄"
+  },
   "nodata": "沒有相關資料。請試試其他時間範圍。",
+  "no_merchant": {
+    "title": "此部分僅適用於 ",
+    "link": "店家帳戶"
+  },
   "orders": {
     "title": "訂單"
   },
@@ -341,6 +480,7 @@
     "milliseconds": "顯示毫秒",
     "table_scroll": "顯示捲軸",
     "preserve_timeframe": "保留指定時間",
+    "remove_account": "移除帳戶",
     "sync": {
       "add-filter": "增加篩選條件",
       "add-pair": "增加交易對",
@@ -365,7 +505,7 @@
   },
   "query": {
     "title": "查詢",
-    "startTime": "Start Time",
+    "startTime": "起始時間",
     "endTime": "End Time"
   },
   "querylimit": {
@@ -374,11 +514,46 @@
   "selector": {
     "select": "選取",
     "all": "全部",
-    "inactive": "無交易對之代幣",
+    "inactive": "最後更新",
+    "balance-precision": {
+      "title": "金額(美元)",
+      "approximate": "約等值",
+      "exact": "Exact"
+    },
     "filter": {
-      "symbol": "代幣過濾器",
+      "symbol": "符號",
       "pair": "代幣對過濾器",
-      "category": "分類篩選"
+      "category": "分類篩選",
+      "columns": "欄",
+      "date": "日期"
+    },
+    "report-type": {
+      "title": "選擇報告類型",
+      "win_loss": {
+        "title": "獲利／虧損"
+      },
+      "gains_deposits": {
+        "title": "收益百分比（收益／存款）",
+        "description": "收益百分比為收益占存款的比率"
+      },
+      "gains_balance": {
+        "title": "收益百分比（收益／餘額）",
+        "description": "收益百分比為每日收益占前一天餘額及合併計算後的比率"
+      },
+      "trading_fees": {
+        "title": "交易手續費"
+      },
+      "funding_fees": {
+        "title": "融資手續費"
+      },
+      "funding_trading_fees": {
+        "title": "融資＋交易手續費"
+      }
+    },
+    "unrealized-profits": {
+      "title": "顯示未實現利潤",
+      "yes": "是",
+      "no": "否"
     }
   },
   "snapshots": {
@@ -394,27 +569,39 @@
   "status": {
     "success": "於 {{time}} {{topic}}成功",
     "warn": "{{topic}}",
-    "fail": "{{topic}} 失敗 {{detail}}",
+    "fail": "{{topic}} 失敗： {{detail}}",
     "noid": "dev: the status action should contain the id param",
     "request": {
       "error": "{{topic}} 請求失敗 {{detail}}"
     },
     "signInFail": "憑證無效",
     "timeframe_update": "時間已更新",
-    "signUpFail": "無效的API金鑰或密碼"
+    "signUpFail": "無效的API金鑰或密碼",
+    "netError": "網路連線中斷，暫停檢索數據",
+    "netResumed": "網路連線恢復，重新檢索數據"
   },
   "subaccounts": {
-    "add_account": "新增帳號",
+    "add_account": "新增另一個帳戶",
     "title": "子帳戶",
+    "add_accounts": "新增帳戶",
+    "update_accounts": "更新帳戶",
     "create": "建立子帳戶",
+    "select": "選擇子帳戶",
+    "sub_account": "子帳戶：",
+    "remove_item": "移除",
     "api_key": "API 金鑰",
     "api_secret": "API 密碼",
     "password": "密碼",
     "remove": "移除子帳戶",
-    "login": "登入子帳戶"
+    "login": "登入子帳戶",
+    "name_label": "名字",
+    "name_placeholder": "帳戶群組名稱（選填）",
+    "use_api_key": "使用API金鑰",
+    "name_updated": "帳戶群組名稱已更新"
   },
   "symbols": {
-    "title": "取得貨幣資訊"
+    "title": "取得貨幣資訊",
+    "clear_symbols": "清除交易對"
   },
   "sync": {
     "title": "同步",
@@ -438,7 +625,18 @@
     "logout": "同步已停止",
     "message": {
       "canceled": "已取消上次的同步監測"
+    },
+    "estimated_time": {
+      "started_at": "開始同步： ",
+      "spent_time": "已用時間： ",
+      "left_time": "剩餘時間： ",
+      "estimating": "預計仍需..."
     }
+  },
+  "sum": "總計",
+  "sum_up_cols": "加總：{{sum}}",
+  "sum_up_tooltip": {
+    "title": "加總"
   },
   "taxreport": {
     "title": "稅務報告",
@@ -460,6 +658,7 @@
   },
   "tickers": {
     "title": "牌價",
+    "spot": "現貨",
     "minlength": "應至少選擇一個貨幣對"
   },
   "timeframe": {
@@ -469,9 +668,12 @@
       "title": "選擇查詢時段",
       "view": "查詢"
     },
+    "go_to": "移至",
     "day": "日",
+    "date": "日期",
     "refresh": "重新載入",
     "custom_time": "自訂",
+    "custom_range": "自訂範圍",
     "custom-timerange": "自訂時段",
     "custom_year": "{{year}}年",
     "24h": "24 小時間",
@@ -487,9 +689,13 @@
     "range_limit": "無法查詢實際日期後六年以上的資訊",
     "start-date-placeholder": "開始日期時間",
     "end-date-placeholder": "結束日期時間",
+    "select-date": "選擇日期",
+    "from": "從",
+    "to": "換成",
     "today": "今日",
+    "query_range": "查詢範圍",
     "year": "年",
-    "week": "星期"
+    "week": "週"
   },
   "tradedvolume": {
     "title": "交易量"
@@ -502,15 +708,25 @@
   "wallets": {
     "title": "錢包",
     "header": {
+      "capital-raise": "集資",
       "exchange": "交易",
       "margin": "保證金",
       "funding": "融資",
-      "token-sales": "令牌銷售"
+      "token-sales": "金鑰銷售"
     },
     "nodata": "此日期與時間沒有相關資料，請重新輸入其他日期與時間。",
     "query": {
       "title": "查詢",
       "tooltip": "選擇一個時間以查看過去時刻的錢包"
+    }
+  },
+  "weightedaverages": {
+    "title": "加權平均",
+    "limitNote": {
+      "title": "無法顯示所有交易",
+      "note1": "您的請求超出10萬筆交易上限。",
+      "link": "下載報告應用程式",
+      "note2": " 以顯示更多，或變更選定的日期範圍。"
     }
   },
   "withdrawals": {

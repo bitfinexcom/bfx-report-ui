@@ -14,6 +14,7 @@ export const getLatestPaginationTimestamp = state => getUI(state).latestPaginati
 export const getErrorDialogMessage = state => getUI(state).errorMessage
 export const getDevice = state => getUI(state).device
 export const getWindowWidth = state => getUI(state).windowWidth
+export const getIsExtraInfoDialogOpen = state => getUI(state)?.isExtraInfoDialogOpen ?? false
 
 export default {
   getIsElectronBackendLoaded,
@@ -30,4 +31,5 @@ export default {
   getErrorDialogMessage,
   getDevice,
   getWindowWidth,
+  getIsExtraInfoDialogOpen,
 }

@@ -45,6 +45,7 @@ import WeightedAverages from 'components/WeightedAverages'
 import ExportDialog from 'components/ExportDialog'
 import ExportSuccessDialog from 'components/ExportSuccessDialog'
 import Preferences from 'components/Preferences'
+import ExtraInfoDialog from 'components/ExtraInfoDialog'
 import TimeFrameDialog from 'components/TimeFrameDialog'
 import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
@@ -376,6 +377,7 @@ class Main extends PureComponent {
         <TimeFrameDialog />
         <GoToRangeDialog />
         <NavMenuDrawer />
+        <ExtraInfoDialog />
       </>
     ) : ''
   }

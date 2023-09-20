@@ -25,6 +25,16 @@
     "auth": "Autenticação",
     "title": "Login",
     "addAccount": "Adicionar conta",
+    "addAccounts": "Adicionar Contas",
+    "addAccountsTo": "Adicionar contas a:",
+    "primaryAccount": "Conta principal:",
+    "addAccountsToThisAcc": "Adicionar contas a esta conta",
+    "manageAccounts": "Gerir contas",
+    "manageMultipleAccs": "Gerir várias contas",
+    "removeAccount": "Remover conta",
+    "removeSelectedAccount": "Remover conta: ",
+    "accountRemoved": "Conta removida",
+    "accountRemoving": "Remoção de contas",
     "useApiKey": "Usar Chave API",
     "loginEmail": {
       "emailOrUserName": "E-mail ou usuário",
@@ -48,13 +58,17 @@
     "accWithoutApiKey": "Adicionar conta sem chave de API",
     "simpleAccounts": "Contas simples",
     "multipleAccounts": "Múltiplas contas",
-    "signUp": "Cadastre-se",
+    "login": "Login",
+    "multyAccsApi": "Várias contas - Chave API",
+    "signUp": "Cadastrar-se",
     "signIn": "Conectar-se",
+    "signInTo": "Iniciar sessão em:",
     "signInToExistingAcc": "Entrar com uma conta existente",
     "signInToDifferentAcc": "Entrar com uma conta diferente",
     "selectMasterAccount": "Selecione a conta mestra",
     "forgotPassword": "Esqueceu a senha",
     "forgotPasswordNote": "Redefina sua conta do Reports App inserindo os detalhes da sua conta e uma nova senha.",
+    "forgotPasswordLink": "Esqueceu a senha?",
     "subAccount": "Subconta",
     "enterAPIKey": "Inserir chave de API:",
     "enterAPISecret": "Inserir segredo de API:",
@@ -83,6 +97,16 @@
   },
   "averagewinloss": {
     "title": "Média de perda/ganho"
+  },
+  "download_app": {
+    "title": "Obtenha a melhor experiência em relatórios com nosso aplicativo para desktop",
+    "description": "Obtenha acesso a funcionalidades avançadas que irão potenciar a sua análise de dados.",
+    "risk": "Risco de concentração",
+    "win_loss": "Sequências de ganhos/Perdas",
+    "tax": "Relatórios fiscais",
+    "snapshots": "Snapshots",
+    "more": "E mais...",
+    "download_reports": "Baixar Bitfinex Reports"
   },
   "candles": {
     "title": "Velas",
@@ -115,20 +139,23 @@
     "category": "Categoria",
     "clampMax": "Clamp máx",
     "clampMin": "Trava mín",
-    "closed": "Fechado",
+    "closed": "Fechadas",
     "collateral": "Colateral",
+    "cost": "Custo",
     "created": "Criado",
     "cumulativeAmount": "Valor cumulativo",
     "currency": "Moeda",
     "customerInfo": "Informação do cliente",
     "date": "Data",
     "days": "Dias",
+    "deselectionHint": "Cmd/Ctrl + clique para cancelar a seleção",
     "description": "Descrição",
     "destination": "Destino",
     "duration": "Duração",
     "fee": "Taxa",
     "feePercent": "Perc taxa",
     "fees": "Taxas",
+    "firstTrade": "Primeira negociação",
     "fundBalance": "Saldo do fundo de seguro",
     "fundingAccrued": "Próximo finaciamento calculado",
     "fundingCost": "Custo de financiamento",
@@ -137,6 +164,7 @@
     "id": "#",
     "ip": "IP",
     "invoices": "Faturas",
+    "lastTrade": "Última negociação",
     "lastpayout": "Último pagamento",
     "liq-price": "Preço de liquidação",
     "maker_fees": "Taxas de maker",
@@ -165,6 +193,7 @@
     "rate": "Taxa",
     "rateperc": "Taxa %",
     "redirectUrl": "URL de redirecionamento",
+    "sale": "Venda",
     "sellingAmount": "Quantidade de venda",
     "sellingWeightedPrice": "Preço Ponderado de Venda",
     "side": "Lado",
@@ -191,11 +220,13 @@
     "webhook": "Webhook"
   },
   "columnsfilter": {
-    "title": "Filtrar colunas",
+    "title": "Filtro",
     "clear": "Limpar",
     "cancel": "Cancelar",
     "apply": "Aplicar",
+    "none": "Nenhuma",
     "filters": {
+      "title": "Filtros",
       "contains": "Contém",
       "beginsWith": "Começa com",
       "endsWith": "Termina com",
@@ -282,7 +313,7 @@
     "warning": "Aviso"
   },
   "header": {
-    "logout": "Logout",
+    "logout": "Encerrar sessão",
     "preferences": "Preferências",
     "help": "Ajuda",
     "top_navigation": "Navegação superior"
@@ -307,7 +338,7 @@
       "interest_payment": "Pagamento de juros de margem",
       "derivatives_funding_event": "Evento de financiamento de derivativos",
       "settlement": "Ajuste",
-      "transfer": "Transferência",
+      "transfer": "Transferir",
       "deposit": "Depósito",
       "withdrawal": "Retirada",
       "cancelled_withdrawal": "Retirada cancelada",
@@ -349,7 +380,7 @@
       "title": "Minha Conta",
       "summary": "Resumo",
       "balance": "Saldo",
-      "analysisStat": "Análise/Estatística",
+      "analysisStat": "Análise e estatísticas",
       "analysisStatTabs": {
         "weightedAvgs": "Médias ponderadas",
         "volume": "Volume",
@@ -362,14 +393,6 @@
     },
     "myHistory": {
       "title": "Histórico",
-      "general": "Geral",
-      "generalTabs": {
-        "ledgers": "Livro-razão",
-        "trades": "Trades",
-        "orders": "Ordens",
-        "movements": "Movimentos",
-        "positions": "Posições"
-      },
       "funding": "Financiamento",
       "fundingTabs": {
         "bidsOffers": "Compras e ofertas",
@@ -382,7 +405,11 @@
         "staking": "Staking",
         "affiliates": "Afiliados"
       },
-      "wallets": "Carteiras"
+      "wallets": "Carteiras",
+      "walletsTabs": {
+        "balances": "Saldos",
+        "movements": "Movimentos"
+      }
     },
     "merchantHistory": {
       "title": "Histórico do Comerciante",
@@ -390,7 +417,7 @@
     },
     "marketHistory": {
       "title": "Histórico de mercado",
-      "trades": "Trades",
+      "trades": "Negociações",
       "funding": "Financiamento",
       "spot": "À vista",
       "derivatives": "Derivativos"
@@ -486,7 +513,7 @@
   },
   "selector": {
     "select": "Selecionar",
-    "all": "Tudo",
+    "all": "Todos",
     "inactive": "Inativo",
     "balance-precision": {
       "title": "Saldo (USD)",
@@ -494,9 +521,11 @@
       "exact": "Exato"
     },
     "filter": {
-      "symbol": "Filtro de símbolos",
+      "symbol": "Símbolo",
       "pair": "Filtro de pares",
-      "category": "Filtro de categorias"
+      "category": "Filtro de categorias",
+      "columns": "Colunas",
+      "date": "Data"
     },
     "report-type": {
       "title": "Selecione o tipo de relatório",
@@ -552,14 +581,23 @@
     "netResumed": "Conexão com a Internet restaurada, busca de dados retomada"
   },
   "subaccounts": {
-    "add_account": "Adicionar conta",
+    "add_account": "Adicionar outra conta",
     "title": "Subcontas",
+    "add_accounts": "Adicionar Contas",
+    "update_accounts": "Atualizar contas",
     "create": "Criar subconta",
+    "select": "Selecionar subconta",
+    "sub_account": "Subconta:",
+    "remove_item": "Remover",
     "api_key": "Chave de API",
     "api_secret": "Segredo de API",
     "password": "Senha",
     "remove": "Remover subconta",
-    "login": "Fazer login na subconta"
+    "login": "Fazer login na subconta",
+    "name_label": "Nome",
+    "name_placeholder": "Nome do grupo de contas (opcional)",
+    "use_api_key": "Utilizar chave API",
+    "name_updated": "Nome do grupo de contas atualizado"
   },
   "symbols": {
     "title": "Obter símbolos",
@@ -674,7 +712,7 @@
       "exchange": "Corretora",
       "margin": "Margem",
       "funding": "Financiamento",
-      "token-sales": "Token Sales"
+      "token-sales": "Venda de token"
     },
     "nodata": "Nenhum dado relacionado nesta data. Você pode tentar outro intervalo.",
     "query": {
@@ -683,13 +721,12 @@
     }
   },
   "weightedaverages": {
-    "title": "Médias Ponderadas",
+    "title": "Médias ponderadas",
     "limitNote": {
-      "displayDate": "Data de exibição: ",
-      "note1": "Observe que as datas selecionadas não são iguais às datas de exibição. Isso ocorre porque a versão da web é limitada a exibir 2.000 transações por vez.",
-      "note2": "Caso deseje um período de tempo maior, você pode tentar selecionando apenas um símbolo ou baixando ",
-      "link": "nosso software",
-      "note3": " que nao tenha esse limite."
+      "title": "Nem todas as transações podem ser apresentadas",
+      "note1": "O seu pedido excede o limite de 100 mil transações.",
+      "link": "Baixar o Aplicativo Relatórios",
+      "note2": " para visualizar mais ou alterar o intervalo de datas."
     }
   },
   "withdrawals": {

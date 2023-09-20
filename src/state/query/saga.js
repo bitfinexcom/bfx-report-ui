@@ -49,7 +49,7 @@ import {
   getTimeframe as getWinLossTimeframe,
 } from 'state/winLoss/selectors'
 import { getTargetIds as getPositionsIds } from 'state/audit/selectors'
-import { toggleExportSuccessDialog } from 'state/ui/actions'
+import { toggleExportDialog, toggleExportSuccessDialog } from 'state/ui/actions'
 import LEDGERS_CATEGORIES from 'var/ledgersCategories'
 import {
   getTimezone, getDateFormat, getShowMilliseconds, getLocale,
@@ -442,16 +442,27 @@ function* exportCSV({ payload: targets }) {
     if (exportEmail) {
       params.email = exportEmail
     }
+
+    if (showFrameworkMode) {
+      yield put(actions.setIsCsvExporting(true))
+    }
+
     const { result, error } = yield call(getMultipleCsv, params)
 
     if (result) {
       const { localCsvFolderPath, remoteCsvUrn = null } = result
       yield put(actions.setRemoteUrn(remoteCsvUrn))
       yield put(actions.setLocalExportPath(localCsvFolderPath))
-      yield put(toggleExportSuccessDialog())
+      if (!showFrameworkMode) {
+        yield put(toggleExportDialog())
+        yield put(toggleExportSuccessDialog())
+      }
     }
 
     if (error) {
+      if (showFrameworkMode) {
+        yield put(actions.setIsCsvExporting(false))
+      }
       yield put(updateErrorStatus({
         id: 'status.fail',
         topic: 'download.export',
@@ -459,6 +470,9 @@ function* exportCSV({ payload: targets }) {
       }))
     }
   } catch (fail) {
+    if (showFrameworkMode) {
+      yield put(actions.setIsCsvExporting(false))
+    }
     yield put(updateErrorStatus({
       id: 'status.request.error',
       topic: 'download.export',

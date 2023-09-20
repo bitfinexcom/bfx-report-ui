@@ -28,6 +28,7 @@ class Movements extends PureComponent {
       destinationAddress: PropTypes.bool,
       fees: PropTypes.bool,
       id: PropTypes.bool,
+      moreDetails: PropTypes.bool,
       mtsUpdated: PropTypes.bool,
       note: PropTypes.bool,
       status: PropTypes.bool,
@@ -49,6 +50,7 @@ class Movements extends PureComponent {
     jumpPage: PropTypes.func,
     existingCoins: PropTypes.arrayOf(PropTypes.string),
     getFullTime: PropTypes.func.isRequired,
+    getMovementInfo: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
@@ -85,6 +87,12 @@ class Movements extends PureComponent {
 
   clearSymbols = () => clearAllSymbols(TYPE, this.props)
 
+  showExtraInfo = (e, { id }) => {
+    const { getMovementInfo } = this.props
+    e.preventDefault()
+    getMovementInfo(id)
+  }
+
   render() {
     const {
       t,
@@ -106,6 +114,7 @@ class Movements extends PureComponent {
       getFullTime,
       columnsWidth,
       filteredData: entries,
+      onDetailsClick: this.showExtraInfo,
     }).filter(({ id }) => columns[id])
 
     const title = 'movements.title'

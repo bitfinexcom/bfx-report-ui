@@ -6,6 +6,7 @@ const initialState = {
   exportEmail: '',
   localExportPath: null,
   remoteUrn: null,
+  isCsvExporting: false,
 }
 
 export function queryReducer(state = initialState, action) {
@@ -25,6 +26,11 @@ export function queryReducer(state = initialState, action) {
       return {
         ...state,
         remoteUrn: payload || null,
+      }
+    case types.SET_IS_CSV_EXPORTING:
+      return {
+        ...state,
+        isCsvExporting: payload,
       }
     case authTypes.LOGOUT:
       return initialState
