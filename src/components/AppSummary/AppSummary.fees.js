@@ -12,6 +12,7 @@ const getColumns = ({
   takerFeeToStable,
   takerFeeToCrypto,
   derivMakerRebate,
+  isTurkishSite,
 }) => [
   {
     id: 'makerFee',
@@ -57,7 +58,7 @@ const getColumns = ({
       </Cell>
     ),
   },
-  {
+  ...(!isTurkishSite ? [{
     id: 'derivMakerRebate',
     name: 'column.derivMakerRebate',
     width: 140,
@@ -78,13 +79,14 @@ const getColumns = ({
         %
       </Cell>
     ),
-  },
+  }] : []),
 ]
 
 const AppSummaryFees = ({
   t,
   data,
   title,
+  isTurkishSite,
 }) => {
   const {
     makerFee,
@@ -96,6 +98,7 @@ const AppSummaryFees = ({
   } = data
 
   const columns = getColumns({
+    isTurkishSite,
     makerFee: makerFee || 0,
     takerFeeToCrypto: takerFeeToCrypto || 0,
     takerFeeToFiat: takerFeeToFiat || 0,
@@ -129,6 +132,7 @@ AppSummaryFees.propTypes = {
   }).isRequired,
   title: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
+  isTurkishSite: PropTypes.bool.isRequired,
 }
 
 export default memo(AppSummaryFees)
