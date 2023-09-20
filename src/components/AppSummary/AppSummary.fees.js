@@ -79,21 +79,17 @@ const AccountSummaryFees = ({
 }) => {
   const {
     makerFee,
-    makerRebate,
     takerFeeToFiat,
     takerFeeToStable,
     takerFeeToCrypto,
-    takerRebateToFiat,
-    takerRebateToCrypto,
-    takerRebateToStable,
   } = data
 
   const columns = getColumns({
     t,
-    makerFee: makerFee || makerRebate || 0,
-    takerFeeToCrypto: takerFeeToCrypto || takerRebateToCrypto || 0,
-    takerFeeToFiat: takerFeeToFiat || takerRebateToFiat || 0,
-    takerFeeToStable: takerFeeToStable || takerRebateToStable || 0,
+    makerFee: makerFee || 0,
+    takerFeeToCrypto: takerFeeToCrypto || 0,
+    takerFeeToFiat: takerFeeToFiat || 0,
+    takerFeeToStable: takerFeeToStable || 0,
   })
 
   return (
@@ -113,13 +109,9 @@ const AccountSummaryFees = ({
 AccountSummaryFees.propTypes = {
   data: PropTypes.shape({
     makerFee: PropTypes.number,
-    makerRebate: PropTypes.number,
     takerFeeToCrypto: PropTypes.number,
     takerFeeToFiat: PropTypes.number,
     takerFeeToStable: PropTypes.number,
-    takerRebateToCrypto: PropTypes.number,
-    takerRebateToFiat: PropTypes.number,
-    takerRebateToStable: PropTypes.number,
   }).isRequired,
   title: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
