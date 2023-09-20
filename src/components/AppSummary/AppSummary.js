@@ -9,7 +9,6 @@ import { SectionHeader, SectionHeaderTitle } from 'ui/SectionHeader'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
-import DerivFees from './AppSummary.derivFees'
 
 const AppSummary = ({
   t,
@@ -36,17 +35,8 @@ const AppSummary = ({
           t={t}
           data={data}
           title='accountsummary.fees'
+          isTurkishSite={isTurkishSite}
         />
-        {!isTurkishSite && (
-          <>
-            <DerivFees
-              t={t}
-              title='accountsummary.fees_deriv'
-              makerFee={data.derivMakerRebate || 0}
-              takerFee={data.derivTakerFee || 0}
-            />
-          </>
-        )}
       </div>
     )
   }
