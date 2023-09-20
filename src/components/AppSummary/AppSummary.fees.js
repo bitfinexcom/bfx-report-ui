@@ -16,7 +16,7 @@ const getColumns = ({
 }) => [
   {
     id: 'makerFee',
-    name: 'column.maker_fees',
+    name: 'summary.fees.maker',
     width: 100,
     renderer: () => (
       <Cell>
@@ -27,7 +27,7 @@ const getColumns = ({
   },
   {
     id: 'takerFeeCrypto',
-    name: 'column.taker_fees_crypto',
+    name: 'summary.fees.taker_crypto',
     width: 140,
     renderer: () => (
       <Cell>
@@ -38,7 +38,7 @@ const getColumns = ({
   },
   {
     id: 'takerFeeFiat',
-    name: 'column.taker_fees_fiat',
+    name: 'summary.fees.taker_fiat',
     width: 140,
     renderer: () => (
       <Cell>
@@ -49,7 +49,7 @@ const getColumns = ({
   },
   {
     id: 'takerFeeStable',
-    name: 'column.taker_fees_stable',
+    name: 'summary.fees.taker_stables',
     width: 140,
     renderer: () => (
       <Cell>
@@ -60,7 +60,7 @@ const getColumns = ({
   },
   ...(!isTurkishSite ? [{
     id: 'derivMakerRebate',
-    name: 'column.derivMakerRebate',
+    name: 'summary.fees.deriv_maker',
     width: 140,
     renderer: () => (
       <Cell>
@@ -71,7 +71,7 @@ const getColumns = ({
   },
   {
     id: 'derivTakerFee',
-    name: 'column.derivTakerFee',
+    name: 'summary.fees.deriv_taker',
     width: 140,
     renderer: () => (
       <Cell>
