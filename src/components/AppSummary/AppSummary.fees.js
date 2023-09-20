@@ -6,8 +6,6 @@ import DataTable from 'ui/DataTable'
 import { getTooltipContent } from 'utils/columns'
 import { formatAmount, formatFraction } from 'ui/utils'
 
-const getColor = val => (val > 0 ? 'red' : 'green')
-
 const getColumns = ({
   t,
   makerFee,
@@ -27,7 +25,7 @@ const getColumns = ({
       width: 100,
       renderer: () => (
         <Cell tooltip={getTooltipContent(formattedMakerFee, t)}>
-          {formatAmount(makerFee * 100, { color: getColor(makerFee), minDigits: 2 })}
+          {formatAmount(makerFee * 100, { color: '#fff', minDigits: 2 })}
           %
         </Cell>
       ),
@@ -39,7 +37,7 @@ const getColumns = ({
       width: 140,
       renderer: () => (
         <Cell tooltip={getTooltipContent(formattedTakerFeeToCrypto, t)}>
-          {formatAmount(takerFeeToCrypto * 100, { color: getColor(takerFeeToCrypto), minDigits: 2 })}
+          {formatAmount(takerFeeToCrypto * 100, { color: '#fff', minDigits: 2 })}
           %
         </Cell>
       ),
@@ -51,7 +49,7 @@ const getColumns = ({
       width: 140,
       renderer: () => (
         <Cell tooltip={getTooltipContent(formattedTakerFeeToFiat, t)}>
-          {formatAmount(takerFeeToFiat * 100, { color: getColor(takerFeeToFiat), minDigits: 2 })}
+          {formatAmount(takerFeeToFiat * 100, { color: '#fff', minDigits: 2 })}
           %
         </Cell>
       ),
@@ -63,7 +61,7 @@ const getColumns = ({
       width: 140,
       renderer: () => (
         <Cell tooltip={getTooltipContent(formattedTakerFeeToStable, t)}>
-          {formatAmount(takerFeeToStable * 100, { color: getColor(takerFeeToStable), minDigits: 2 })}
+          {formatAmount(takerFeeToStable * 100, { color: '#fff', minDigits: 2 })}
           %
         </Cell>
       ),
@@ -72,7 +70,7 @@ const getColumns = ({
   ]
 }
 
-const AccountSummaryFees = ({
+const AppSummaryFees = ({
   t,
   data,
   title,
@@ -106,7 +104,7 @@ const AccountSummaryFees = ({
   )
 }
 
-AccountSummaryFees.propTypes = {
+AppSummaryFees.propTypes = {
   data: PropTypes.shape({
     makerFee: PropTypes.number,
     takerFeeToCrypto: PropTypes.number,
@@ -117,4 +115,4 @@ AccountSummaryFees.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-export default memo(AccountSummaryFees)
+export default memo(AppSummaryFees)
