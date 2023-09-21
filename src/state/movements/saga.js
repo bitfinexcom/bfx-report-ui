@@ -80,7 +80,7 @@ function* getExtraInfo({ payload }) {
 
     if (result) {
       yield put(actions.setMovementInfo(result))
-      yield put(toggleExtraInfoDialog(result))
+      yield put(toggleExtraInfoDialog())
     }
 
     if (error) {
