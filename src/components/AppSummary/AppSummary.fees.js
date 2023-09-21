@@ -5,6 +5,8 @@ import { Cell } from '@blueprintjs/table'
 import DataTable from 'ui/DataTable'
 import { formatAmount } from 'ui/utils'
 
+const formatFee = (fee) => formatAmount(fee * 100, { color: '#fff', minDigits: 2 })
+
 const getColumns = ({
   makerFee,
   derivTakerFee,
@@ -20,7 +22,7 @@ const getColumns = ({
     width: 100,
     renderer: () => (
       <Cell>
-        {formatAmount(makerFee * 100, { color: '#fff', minDigits: 2 })}
+        {formatFee(makerFee)}
         %
       </Cell>
     ),
@@ -31,7 +33,7 @@ const getColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatAmount(takerFeeToCrypto * 100, { color: '#fff', minDigits: 2 })}
+        {formatFee(takerFeeToCrypto )}
         %
       </Cell>
     ),
@@ -42,7 +44,7 @@ const getColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatAmount(takerFeeToFiat * 100, { color: '#fff', minDigits: 2 })}
+        {formatFee(takerFeeToFiat)}
         %
       </Cell>
     ),
@@ -53,7 +55,7 @@ const getColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatAmount(takerFeeToStable * 100, { color: '#fff', minDigits: 2 })}
+        {formatFee(takerFeeToStable)}
         %
       </Cell>
     ),
@@ -64,7 +66,7 @@ const getColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatAmount(derivMakerRebate * 100, { color: '#fff', minDigits: 2 })}
+        {formatFee(derivMakerRebate)}
         %
       </Cell>
     ),
@@ -75,7 +77,7 @@ const getColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatAmount(derivTakerFee * 100, { color: '#fff', minDigits: 2 })}
+        {formatFee(derivTakerFee)}
         %
       </Cell>
     ),
