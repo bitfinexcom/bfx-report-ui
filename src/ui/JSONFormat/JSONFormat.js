@@ -8,6 +8,10 @@ const JSONFormat = ({ content, children }) => {
     return null
   }
 
+  if (!content) {
+    return children
+  }
+
   return (
     <Tooltip
       placement='left'

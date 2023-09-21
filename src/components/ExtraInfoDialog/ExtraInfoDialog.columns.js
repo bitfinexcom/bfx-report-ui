@@ -249,7 +249,7 @@ const getColumns = ({
       const { externalBankAccInfo } = preparedData[rowIndex]
       return (
         <Cell>
-          {externalBankAccInfo}
+          {externalBankAccInfo && JSON.stringify(externalBankAccInfo)}
         </Cell>
       )
     },
