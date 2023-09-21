@@ -111,8 +111,8 @@ const AppSummaryFees = ({
       <div className='app-summary-item-title'>
         {t('summary.fees.title')}
       </div>
-      <div div className='app-summary-item-sub-title'>
-      {t('summary.fees.sub_title')}
+      <div className='app-summary-item-sub-title'>
+        {t('summary.fees.sub_title')}
       </div>
       <CollapsedTable
         numRows={1}
