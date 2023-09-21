@@ -34,7 +34,6 @@ const AppSummary = ({
         <Fees
           t={t}
           data={data}
-          title='accountsummary.fees'
           isTurkishSite={isTurkishSite}
         />
       </div>
