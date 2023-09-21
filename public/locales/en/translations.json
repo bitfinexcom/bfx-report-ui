@@ -622,6 +622,8 @@
     "leo_level": "LEO level",
     "avg_amount": "Avg.Amount",
     "fees": {
+      "title": "Account Fees",
+      "sub_title": "Based on your trading volume",
       "maker": "Maker Fees",
       "taker_crypto": "Taker Fees Crypto",
       "taker_fiat": "Taker Fees Fiat",
