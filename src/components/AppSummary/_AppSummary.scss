@@ -8,6 +8,13 @@
     max-width: 1008px;
   }
 
+  &-data-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   &-title-row {
     display: flex;
     align-items: center;
@@ -15,6 +22,7 @@
   }
 
   &-item {
+    width: 48%;
 
     &-title {
       font-size: 18px;
