@@ -85,7 +85,6 @@ const getColumns = ({
 const AppSummaryFees = ({
   t,
   data,
-  title,
   isTurkishSite,
 }) => {
   const {
@@ -108,10 +107,12 @@ const AppSummaryFees = ({
   })
 
   return (
-    <div className='section-account-summary-data-item'>
-      <div>
-        {t(title)}
-        <div>{t('accountsummary.fees_explain')}</div>
+    <div className='app-summary-item'>
+      <div className='app-summary-item-title'>
+        {t('summary.fees.title')}
+      </div>
+      <div div className='app-summary-item-sub-title'>
+      {t('summary.fees.sub_title')}
       </div>
       <CollapsedTable
         numRows={1}
@@ -130,7 +131,6 @@ AppSummaryFees.propTypes = {
     takerFeeToFiat: PropTypes.number,
     takerFeeToStable: PropTypes.number,
   }).isRequired,
-  title: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
   isTurkishSite: PropTypes.bool.isRequired,
 }
