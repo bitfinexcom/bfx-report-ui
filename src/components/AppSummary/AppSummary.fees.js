@@ -33,7 +33,7 @@ const getColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatFee(takerFeeToCrypto )}
+        {formatFee(takerFeeToCrypto)}
         %
       </Cell>
     ),
