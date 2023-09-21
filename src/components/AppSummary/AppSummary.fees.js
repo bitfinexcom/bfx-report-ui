@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
-import { formatAmount } from 'ui/utils'
-
-const formatFee = (fee) => formatAmount(fee * 100, { color: '#fff', minDigits: 2 })
+import { formatFee } from 'ui/utils'
 
 const getColumns = ({
   makerFee,
@@ -91,22 +89,22 @@ const AppSummaryFees = ({
   isTurkishSite,
 }) => {
   const {
+    makerFee = 0,
+    derivTakerFee = 0,
+    takerFeeToFiat = 0,
+    takerFeeToStable = 0,
+    takerFeeToCrypto = 0,
+    derivMakerRebate = 0,
+  } = data
+
+  const columns = getColumns({
     makerFee,
+    isTurkishSite,
     derivTakerFee,
     takerFeeToFiat,
     takerFeeToStable,
     takerFeeToCrypto,
     derivMakerRebate,
-  } = data
-
-  const columns = getColumns({
-    isTurkishSite,
-    makerFee: makerFee || 0,
-    takerFeeToCrypto: takerFeeToCrypto || 0,
-    takerFeeToFiat: takerFeeToFiat || 0,
-    takerFeeToStable: takerFeeToStable || 0,
-    derivMakerRebate: derivMakerRebate || 0,
-    derivTakerFee: derivTakerFee || 0,
   })
 
   return (
