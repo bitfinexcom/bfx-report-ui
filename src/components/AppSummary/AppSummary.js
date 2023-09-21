@@ -30,7 +30,12 @@ const AppSummary = ({
     showContent = <NoData refresh={refresh} />
   } else {
     showContent = (
-      <div className='section-account-summary-data'>
+      <div className='app-summary-data-row'>
+        <Fees
+          t={t}
+          data={data}
+          isTurkishSite={isTurkishSite}
+        />
         <Fees
           t={t}
           data={data}
