@@ -2,17 +2,17 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Cell } from '@blueprintjs/table'
 
-import DataTable from 'ui/DataTable'
 import { formatFee } from 'ui/utils'
+import CollapsedTable from 'ui/CollapsedTable'
 
 const getColumns = ({
   makerFee,
+  isTurkishSite,
   derivTakerFee,
   takerFeeToFiat,
   takerFeeToStable,
   takerFeeToCrypto,
   derivMakerRebate,
-  isTurkishSite,
 }) => [
   {
     id: 'makerFee',
@@ -113,7 +113,7 @@ const AppSummaryFees = ({
         {t(title)}
         <div>{t('accountsummary.fees_explain')}</div>
       </div>
-      <DataTable
+      <CollapsedTable
         numRows={1}
         tableColumns={columns}
       />
