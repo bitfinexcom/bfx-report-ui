@@ -12,7 +12,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-  } 
+  }
+
+  &-item {
+
+    &-title {
+      font-size: 18px;
+      color: var(--color);
+    }
+
+    &-sub-title {
+      font-size: 14px;
+      color: var(--color2);
+      margin-bottom: 15px;
+    }
+  }
 }
 
 .leo-level {
@@ -54,22 +68,6 @@
 
       .collapsed-table {
         margin-bottom: 0;
-      }
-
-      > div:first-child {
-        margin-bottom: 5px;
-        color: var(--activeColor);
-
-        > div {
-          font-size: 13px;
-          color: var(--color);
-        }
-      }
-
-      &:first-child {
-        > div:first-child {
-          margin-bottom: 10px;
-        }
       }
     }
   }
