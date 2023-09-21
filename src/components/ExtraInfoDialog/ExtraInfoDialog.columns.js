@@ -2,7 +2,6 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import Explorer from 'ui/Explorer'
-import JSONFormat from 'ui/JSONFormat'
 import { formatAmount } from 'ui/utils'
 
 const getColumns = ({
@@ -250,12 +249,7 @@ const getColumns = ({
       const { externalBankAccInfo } = preparedData[rowIndex]
       return (
         <Cell>
-          {externalBankAccInfo && (
-            <JSONFormat>
-              {JSON.stringify(externalBankAccInfo)}
-            </JSONFormat>
-          )
-        }
+          {externalBankAccInfo && JSON.stringify(externalBankAccInfo)}
         </Cell>
       )
     },
