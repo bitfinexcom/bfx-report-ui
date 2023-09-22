@@ -36,11 +36,6 @@ const AppSummary = ({
           data={data}
           isTurkishSite={isTurkishSite}
         />
-        <Fees
-          t={t}
-          data={data}
-          isTurkishSite={isTurkishSite}
-        />
       </div>
     )
   }
