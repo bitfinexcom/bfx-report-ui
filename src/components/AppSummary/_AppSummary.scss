@@ -23,6 +23,7 @@
 
   &-item {
     width: 48%;
+    max-width: 470px;
 
     &-title {
       font-size: 18px;
@@ -33,6 +34,61 @@
       font-size: 14px;
       color: var(--color2);
       margin-bottom: 15px;
+    }
+
+    .collapsed-table {
+
+      &-item {
+        padding: 0;
+        border: none;
+        border-radius: 0;
+        background-color: var(--bgColor2);
+        border-top: 1px solid var(--tableBorder);
+        border-bottom: 1px solid var(--tableBorder);
+
+        & > div {
+          &:first-child {
+            border-top: 1px solid var(--tableBorder);
+          }
+
+          &:last-child {
+            border-bottom: 1px solid var(--tableBorder);
+          }
+
+
+          &:nth-child(odd) {
+            background-color: var(--bgColor2);
+          }
+    
+          &:nth-child(even) {
+            background-color: var(--bgColor2);
+          }
+
+          & > div {
+            display: table-cell;
+            min-height: 24px;
+            padding: 16px 8px;
+            vertical-align: middle;
+            border-bottom: 1px solid var(--tableBorder);
+    
+            &:first-child {
+              width: 45%;
+            }
+    
+            &:last-child {
+              padding: 4px 5px;
+              text-align: end;
+              word-break: break-word;
+            }
+          }
+    
+          &:last-child {
+            & > div {
+              border-bottom: none;
+            }
+          }
+        }
+      }
     }
   }
 }
