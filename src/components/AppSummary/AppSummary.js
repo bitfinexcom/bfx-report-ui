@@ -57,7 +57,10 @@ const AppSummary = ({
                 {t('summary.title')}
               </div>
               <div className='app-summary-title-item'>
-                <Leo data={data} />
+                <Leo
+                  data={data}
+                  isLoading={pageLoading}
+                />
               </div>
             </div>
           </SectionHeaderTitle>
