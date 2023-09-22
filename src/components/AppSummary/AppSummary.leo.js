@@ -5,14 +5,14 @@ import PropTypes from 'prop-types'
 import Icon from 'icons'
 import { fixedFloat } from 'ui/utils'
 
-const AccountSummaryLeo = ({ data }) => {
+const AccountSummaryLeo = ({ data, isLoading }) => {
   const { t } = useTranslation()
-  const { leoLev, leoAmountAvg } = data
+  const { leoLev = 0, leoAmountAvg = 0 } = data
   const formattedLeoAmount = fixedFloat(leoAmountAvg)
 
   return (
     <>
-      {formattedLeoAmount && (
+      {!isLoading && (
         <div className='leo-level'>
           <div className='leo-level--row'>
             <div className='leo-level--title'>
@@ -35,6 +35,7 @@ AccountSummaryLeo.propTypes = {
     leoLev: PropTypes.number,
     leoAmountAvg: PropTypes.number,
   }).isRequired,
+  isLoading: PropTypes.bool.isRequired,
 }
 
 export default memo(AccountSummaryLeo)
