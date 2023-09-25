@@ -189,6 +189,7 @@ function* progressUpdate({ payload }) {
   const { result } = payload
   const {
     state,
+    error,
     progress,
     isSyncInProgress,
     ...estimatedTimeValues
@@ -196,6 +197,7 @@ function* progressUpdate({ payload }) {
 
   if (!isSyncInProgress || state === types.SYNC_INTERRUPTED) {
     yield put(actions.setIsSyncing(false))
+    if (error) yield put(updateSyncErrorStatus(error))
   } else {
     const syncProgress = Number.isInteger(progress)
       ? progress
