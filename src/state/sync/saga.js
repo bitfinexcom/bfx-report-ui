@@ -166,8 +166,8 @@ function* initQueryMode() {
 
 export function* initSync() {
   yield call(initQueryMode)
-  const { result: { progress } } = yield call(fetchSyncProgress)
-  if (progress === types.SYNC_NOT_STARTED || progress === 100) {
+  const { result: { progress, isSyncInProgress } } = yield call(fetchSyncProgress)
+  if (!isSyncInProgress || progress === 100) {
     yield put(actions.setIsSyncing(false))
     yield call(startSyncing)
   } else {
@@ -197,6 +197,8 @@ function* progressUpdate({ payload }) {
     yield put(actions.setEstimatedTime(estimatedTimeValues))
   }
 }
+
+
 
 function* requestsRedirectUpdate({ payload }) {
   const { result } = payload
