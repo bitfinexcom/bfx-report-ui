@@ -186,8 +186,15 @@ export function* initSync() {
 }
 
 function* progressUpdate({ payload }) {
-  const { result: { progress, ...estimatedTimeValues } } = payload
-  if (progress === types.SYNC_INTERRUPTED) {
+  const { result } = payload
+  const {
+    state,
+    progress,
+    isSyncInProgress,
+    ...estimatedTimeValues
+  } = result
+
+  if (!isSyncInProgress || state === types.SYNC_INTERRUPTED) {
     yield put(actions.setIsSyncing(false))
   } else {
     const syncProgress = Number.isInteger(progress)
@@ -197,8 +204,6 @@ function* progressUpdate({ payload }) {
     yield put(actions.setEstimatedTime(estimatedTimeValues))
   }
 }
-
-
 
 function* requestsRedirectUpdate({ payload }) {
   const { result } = payload
