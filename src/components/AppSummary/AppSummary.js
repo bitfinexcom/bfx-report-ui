@@ -5,7 +5,14 @@ import { Card, Elevation } from '@blueprintjs/core'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
-import { SectionHeader, SectionHeaderTitle } from 'ui/SectionHeader'
+import {
+  SectionHeader,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderTitle,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
+import TimeRange from 'ui/TimeRange'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
@@ -59,6 +66,14 @@ const AppSummary = ({
               </div>
             </div>
           </SectionHeaderTitle>
+          <SectionHeaderRow>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.filter.date')}
+              </SectionHeaderItemLabel>
+              <TimeRange className='section-header-time-range' />
+            </SectionHeaderItem>
+          </SectionHeaderRow>
         </SectionHeader>
         {showContent}
       </div>
