@@ -1,0 +1,735 @@
+{
+  "accountbalance": {
+    "title": "Số dư tài khoản"
+  },
+  "accountsummary": {
+    "title": "Tóm tắt tài khoản",
+    "fees": "Phí trên Bitfinex của bạn",
+    "fees_explain": "(dựa trên khối lượng giao dịch của bạn)",
+    "fees_deriv": "Phí trên Phái sinh Bitfinex của bạn",
+    "fee_tier_volume": "Khối lượng giao dịch (đủ điều kiện để tính mức phí) trong 30 ngày qua",
+    "30dVolume": "Khối lượng giao dịch trong 30 ngày qua của bạn",
+    "margin_funds": "Tổng tiền lãi trên khoản vay ký quỹ được cung cấp trong 30 ngày qua của bạn",
+    "trading_funds": "Phí giao dịch được tính trong 30 ngày qua",
+    "leo_level": "Cấp LEO",
+    "average_amount": "Số lượng tiền trung bình"
+  },
+  "activepositions": {
+    "title": "Vị thế hoạt động"
+  },
+  "affiliatesearnings": {
+    "title": "Thu nhập từ đại lý liên kết",
+    "dashboard_link": "Dashboard Chương trình liên kết"
+  },
+  "auth": {
+    "auth": "Tự động",
+    "title": "Đăng nhập",
+    "addAccount": "Thêm tài khoản",
+    "addAccounts": "Thêm tài khoản",
+    "addAccountsTo": "Thêm tài khoản:",
+    "primaryAccount": "Tài khoản chính:",
+    "addAccountsToThisAcc": "Thêm tài khoản vào tài khoản này",
+    "manageAccounts": "Quản lí tài khoản",
+    "manageMultipleAccs": "Quản lí nhiều tài khoản",
+    "removeAccount": "Xoá tài khoản",
+    "removeSelectedAccount": "Xoá tài khoản: ",
+    "accountRemoved": "Tài khoản đã xoá",
+    "accountRemoving": "Tài khoản đang được xoá",
+    "useApiKey": "Sử dụng khoá API",
+    "loginEmail": {
+      "emailOrUserName": "Email hoặc Tên người dùng",
+      "bfxAccPassword": "Mật khẩu",
+      "loginEmailError": "Email/tên người dùng hoặc mật khẩu không chính xác",
+      "loginEmailNo2FA": "Vui lòng thiết lập 2FA cho tài khoản của bạn hoặc sử dụng khóa API để đăng nhập",
+      "loginTokenExpired": "Lần đăng nhập gần đây nhất đã hết hạn, vui lòng đăng nhập lại"
+    },
+    "2FA": {
+      "title": "Xác thực hai yếu tố",
+      "auth": "Xác thực",
+      "cancel": "Huỷ",
+      "sixDigits": "6 chữ số",
+      "GAToken": "Token Google Authenticator 2FA",
+      "invalidToken": "Token không hợp lệ, vui lòng thử lại",
+      "loginSessionExpired": "Phiên đăng nhập của bạn đã hết hạn, vui lòng thử lại"
+    },
+    "apiKey": "Khoá API",
+    "apiSecret": "Bí mật API",
+    "accWithApiKey": "Thêm tài khoản bằng khóa API",
+    "accWithoutApiKey": "Thêm tài khoản mà không cần khóa API",
+    "simpleAccounts": "Một tài khoản",
+    "multipleAccounts": "Nhiều tài khoản",
+    "login": "Đăng nhập",
+    "multyAccsApi": "Nhiều tài khoản - Khoá API",
+    "signUp": "Đăng ký",
+    "signIn": "Đăng nhập",
+    "signInTo": "Đăng nhập vào:",
+    "signInToExistingAcc": "Đăng nhập vào tài khoản hiện có",
+    "signInToDifferentAcc": "Đăng nhập vào một tài khoản khác",
+    "selectMasterAccount": "Chọn tài khoản chính",
+    "forgotPassword": "Quên mật khẩu",
+    "forgotPasswordNote": "Đặt lại tài khoản Ứng dụng báo cáo bằng cách nhập thông tin chi tiết tài khoản và mật khẩu mới.",
+    "forgotPasswordLink": "Quên mật khẩu?",
+    "subAccount": "Tài khoản phụ",
+    "enterAPIKey": "Nhập Khoá API:",
+    "enterAPISecret": "Nhập Bí mật API:",
+    "enterPassword": "Nhập mật khẩu Ứng dụng báo cáo Bitfinex",
+    "repeatPassword": "Nhập lại mật khẩu Ứng dụng báo cáo Bitfinex",
+    "enterNewPassword": "Nhập mật khẩu Ứng dụng báo cáo Bitfinex mới",
+    "repeatNewPassword": "Nhập lại mật khẩu Ứng dụng báo cáo Bitfinex mới",
+    "resetPassword": "Đặt lại mật khẩu",
+    "removeLoginPassword": "Xóa mật khẩu khi đăng nhập",
+    "resetAccWithApiKey": "Reset tài khoản bằng khóa API",
+    "resetAccWithoutApiKey": "Reset tài khoản mà không cần khóa API",
+    "enterEmail": "Nhập Email:",
+    "checkAuth": "Kiểm tra xác thực",
+    "note1": "Truy cập ",
+    "note2": " để nhận cặp khóa và bí mật API chỉ đọc.",
+    "passwordProtection": "Yêu cầu mật khẩu khi đăng nhập",
+    "passwordLengthValidationError": "Mật khẩu phải chứa ít nhất 8 ký tự",
+    "passwordCharactersValidationError": "Mật khẩu phải bao gồm cả chữ hoa và chữ thường",
+    "passwordRepeatValidationError": "Mật khẩu không trùng khớp",
+    "rememberMe": "Nhớ mật khẩu",
+    "required": "(bắt buộc)",
+    "nonideal": {
+      "title": "Báo cáo 2.0",
+      "description": "Đăng nhập vào Báo cáo bằng token..."
+    }
+  },
+  "averagewinloss": {
+    "title": "Lãi/Lỗ trung bình"
+  },
+  "download_app": {
+    "title": "Trải nghiệm báo cáo tối ưu với ứng dụng cho máy tính",
+    "description": "Thêm quyền truy cập các tính năng nâng cao sẽ tăng cường khả năng phân tích dữ liệu của bạn.",
+    "risk": "Rủi ro tập trung",
+    "win_loss": "Báo cáo lãi/lỗ",
+    "tax": "Báo cáo thuế",
+    "snapshots": "Snapshot",
+    "more": "Và hơn thế nữa...",
+    "download_reports": "Tải ứng dụng Báo cáo Bitfinex"
+  },
+  "candles": {
+    "title": "Nến",
+    "amount": "Số lượng tiền",
+    "orderid": "ID lệnh",
+    "fee": "Phí",
+    "toggle_trades": "Chuyển đổi giao dịch"
+  },
+  "changelogs": {
+    "title": "Thay đổi nhật ký"
+  },
+  "charts": {
+    "cumulative": "Tích lũy",
+    "percent": "%"
+  },
+  "column": {
+    "actual-price": "Giá thực tế",
+    "amount": "Số lượng tiền",
+    "amount-exe": "Số lượng tiền đã thực hiện",
+    "amountUsd": "Số lượng tiền (USD)",
+    "ask": "Bán",
+    "avgprice": "Giá thực hiện trung bình",
+    "balance": "Số dư",
+    "balanceUsd": "Số dư (USD)",
+    "base-price": "Giá cơ sở",
+    "bid": "Mua",
+    "browser": "Trình duyệt",
+    "buyingAmount": "Số lượng mua",
+    "buyingWeightedPrice": "Giá gia quyền mua",
+    "category": "Loại",
+    "clampMax": "Clamp tối đa",
+    "clampMin": "Clamp tối thiểu",
+    "closed": "Đóng",
+    "collateral": "Tài sản thế chấp ",
+    "cost": "Phí",
+    "created": "Tạo",
+    "cumulativeAmount": "Tổng số lượng",
+    "currency": "Tiền tệ",
+    "customerInfo": "Thông tin khách hàng",
+    "date": "Ngày",
+    "days": "Ngày",
+    "deselectionHint": "Cmd/Ctrl + click để bỏ chọn",
+    "description": "Mô tả",
+    "destination": "Đích",
+    "duration": "Thời hạn",
+    "fee": "Phí",
+    "feePercent": "Phí Perc",
+    "fees": "Phí",
+    "firstTrade": "Giao dịch đầu tiên",
+    "fundBalance": "Số dư quỹ bảo hiểm",
+    "fundingAccrued": "Khoản cấp vốn tiếp theo được tích lũy",
+    "fundingCost": "Chi phí vốn vay",
+    "fundingStep": "Bước cấp vốn tiếp theo",
+    "fundingType": "Các loại cấp vốn vay ",
+    "id": "#",
+    "ip": "IP",
+    "invoices": "Hoá đơn",
+    "lastTrade": "Giao dịch cuối cùng",
+    "lastpayout": "Mức chỉ trả cuối cùng",
+    "liq-price": "Giá thanh lý\n",
+    "maker_fees": "Phí Maker",
+    "maker_rebate": "Mức giảm giá Maker",
+    "merchantName": "Tên nhà bán hàng",
+    "meta": "Siêu dữ liệu",
+    "mobile": "Di động",
+    "movementsTotal": "Tống số lượng tiền biến động (USD)",
+    "note": "Lưu ý",
+    "opened": "Mở",
+    "orderid": "ID lệnh",
+    "pair": "Cặp",
+    "payCurrencies": "Loại tiền thanh toán",
+    "payment": "Thanh toán",
+    "percent": "Phần trăm",
+    "period": "Giai đoạn ",
+    "pl": "Lãi/Lỗ",
+    "plUsd": "Lãi/Lỗ (USD)",
+    "plperc": "Lãi/Lỗ%",
+    "positionpair": "Cặp vị thế",
+    "positionsTotal": "Tổng Lãi/Lỗ vị thế (USD)",
+    "price": "Giá",
+    "priceDeriv": "Giá phái sinh",
+    "priceSpot": "Giá giao ngay",
+    "pricetrail": "Giá Trailing",
+    "rate": "Lãi suất",
+    "rateperc": "Lãi suất %",
+    "redirectUrl": "Chuyển hướng URL",
+    "sale": "Doanh thu",
+    "sellingAmount": "Số lượng bán",
+    "sellingWeightedPrice": "Giá gia quyền bán",
+    "side": "Cạnh",
+    "status": "Trạng thái",
+    "taker_fees": "Phí taker",
+    "taker_fees_crypto": "Tiền mã hoá phí taker",
+    "taker_fees_fiat": "Tiền pháp định phí taker",
+    "taker_fees_stable": "Ổn định phí taker",
+    "taker_rebate": "Mức giảm giá taker",
+    "taker_rebate_crypto": "Tiền mã hoá mức giảm giá taker",
+    "taker_rebate_fiat": "Tiền pháp định mức giảm giá taker",
+    "taker_rebate_stable": "Ổn định mức giảm giá taker",
+    "time": "Thời gian",
+    "totalResult": "Tổng kết quả (USD)",
+    "transactionId": "ID giao dịch",
+    "type": "Loại",
+    "typeprev": "Loại lệnh trước đó",
+    "updated": "Cập nhật",
+    "usd": "USD",
+    "version": "Phiên bản",
+    "volume": "Khối lượng giao dịch",
+    "wallet": "Ví",
+    "walletsTotal": "Tổng số dư ví (USD)",
+    "webhook": "Webhook"
+  },
+  "columnsfilter": {
+    "title": "Lọc",
+    "clear": "Xoá",
+    "cancel": "Huỷ",
+    "apply": "Áp dụng",
+    "none": "Không có",
+    "filters": {
+      "title": "Lọc",
+      "contains": "Bao gồm",
+      "beginsWith": "Bắt đầu với",
+      "endsWith": "Kết thúc với",
+      "equalTo": "Tương đương với",
+      "notEqualTo": "Không tương đương với",
+      "greaterThan": "Lớn hơn",
+      "greaterThanEqual": "Lớn hơn / bằng",
+      "lessThan": "Ít hơn",
+      "lessThanEqual": "Ít hơn / bằng",
+      "after": "Sau khi",
+      "before": "Trước khi"
+    }
+  },
+  "columnsselect": {
+    "title": "Lựa chọn cột",
+    "cancel": "Huỷ",
+    "apply": "Áp dụng"
+  },
+  "concentrationrisk": {
+    "title": "Rủi ro tập trung",
+    "query": {
+      "title": "Truy vấn",
+      "tooltip": "Chọn thời gian để truy vấn snapshot ví"
+    }
+  },
+  "copy": "Sao chép",
+  "deposits": {
+    "title": "Tiền nạp"
+  },
+  "derivatives": {
+    "title": "Phái sinh"
+  },
+  "download": {
+    "query": "Chuẩn bị xuất",
+    "title": "Xuất CSV",
+    "prepare": "Bitfinex sẽ chuẩn bị dữ liệu của bạn trong suốt quá trình",
+    "send": "và gửi tới {{email}}.",
+    "store": "và lưu trữ vào thư mục cục bộ.",
+    "export": "Xuất",
+    "cancel": "Huỷ",
+    "okay": "Ok",
+    "remoteStorage": "Lưu trữ từ xa",
+    "status": {
+      "local": "Xuất csv được tạo, các tệp được lưu trong: ",
+      "email": "Đang tạo báo cáo CSV, chúng tôi sẽ gửi báo cáo đó cho bạn qua email ngay khi tạo xong..."
+    },
+    "success": "Thành công",
+    "targets": "Dữ liệu để xuất"
+  },
+  "fcredit": {
+    "title": "Tín dụng vốn vay (Đã sử dụng)",
+    "side": {
+      "provided": "CUNG CẤP",
+      "taken": "LẤY",
+      "both": "CẢ",
+      "null": "vô hiệu"
+    }
+  },
+  "feesreport": {
+    "title": "Báo cáo phí"
+  },
+  "floan": {
+    "title": "Khoản vay cấp vốn (Chưa sử dụng)",
+    "side": {
+      "provided": "CUNG CẤP",
+      "taken": "LẤY",
+      "both": "CẢ",
+      "null": "vô hiệu"
+    }
+  },
+  "foffer": {
+    "title": "Giá mua và chào bán vốn vay"
+  },
+  "fpayment": {
+    "title": "Thu nhập cấp vốn"
+  },
+  "framework": {
+    "title": "Vui lòng đợi cho đến khi hoàn tất quá trình đồng bộ hóa",
+    "no_sync": "Chưa kích hoạt đồng bộ hoá",
+    "proceed": "Vẫn tiếp tục",
+    "cancel": "Huỷ",
+    "notagain": "Không hiển thị lại thông báo này",
+    "continue": "Tiếp tục",
+    "warning": "Cảnh báo"
+  },
+  "header": {
+    "logout": "Đăng xuất",
+    "preferences": "Tuỳ chọn",
+    "help": "Trợ giúp",
+    "top_navigation": "Điều hướng đầu"
+  },
+  "inputs": {
+    "filter_placeholder": "Lọc...",
+    "timezone_local": "Múi giờ hiện tại",
+    "timezone_placeholder": "Tìm kiếm múi giờ..."
+  },
+  "invoices": {
+    "title": "Hoá đơn"
+  },
+  "ledgers": {
+    "title": "Sổ cái",
+    "categories": {
+      "exchange": "Giao dịch giao ngay",
+      "position_modified": "Vị trí được sửa đổi, đóng hoặc thanh lý",
+      "position_claim": "Điều chỉnh vị thế",
+      "position_transfer": "Chuyển vị thế",
+      "position_swap": "Hoán đổi vị thế",
+      "position_funding_cost": "Chi phí vốn vay vị thế",
+      "interest_payment": "Thanh toán lãi ký quỹ",
+      "derivatives_funding_event": "Sự kiện cấp vốn phái sinh",
+      "settlement": "Thanh toán",
+      "transfer": "Chuyển khoản ",
+      "deposit": "Nạp tiền",
+      "withdrawal": "Rút tiền",
+      "cancelled_withdrawal": "Huỷ rút tiền",
+      "trading_fee": "Phí giao dịch",
+      "trading_rebate": "Mức giảm giá giao dịch",
+      "hidden_order_fee": "Phí lệnh ẩn",
+      "otc_trade_fee": "Phí giao dịch OTC",
+      "swap_fee": "Phí hoán đổi",
+      "claiming_fee": "Phí điều chỉnh",
+      "margin_funding_charge": "Phí vốn vay ký quỹ đã sử dụng",
+      "margin_funding_fee": "Phí cấp vốn ký quỹ chưa sử dụng",
+      "affiliate_rebate": "Mức giảm giá liên kết",
+      "ethfx_loyalty_fee": "Phí trung thành ETHFX",
+      "deposit_fee": "Phí nạp tiền",
+      "withdrawal_fee": "Phí rút tiền",
+      "withdrawal_express_fee": "Phí rút tiền nhanh",
+      "miner_fee": "Phí Miner",
+      "staking_payment": "Thanh toán đặt cược",
+      "adjustment": "Điều chỉnh",
+      "expense": "Chi phí",
+      "currency_conversion": "Chuyển đổi tiền tệ",
+      "monthly_profit_payment": "Thanh toán lãi hàng tháng",
+      "losses": "Lỗ"
+    }
+  },
+  "loading": "Đang tải...",
+  "loanreport": {
+    "title": "Báo cáo khoản vay"
+  },
+  "logins": {
+    "title": "Đăng nhập"
+  },
+  "movements": {
+    "title": "Biến động dòng tiền"
+  },
+  "navItems": {
+    "reports": "Báo cáo",
+    "myAccount": {
+      "title": "Tài khoản của tôi",
+      "summary": "Tóm tắt",
+      "balance": "Số dư",
+      "analysisStat": "Phân tích và Thống kê",
+      "analysisStatTabs": {
+        "weightedAvgs": "Mức trung bình gia quyền",
+        "volume": "Khối lượng giao dịch",
+        "winLoss": "Lãi/Lỗ",
+        "conRisk": "Rủi ro tập trung",
+        "loan": "Báo cáo khoản vay",
+        "fees": "Báo cáo phí"
+      },
+      "snapshotsTax": "Snapshot & Báo cáo thuế"
+    },
+    "myHistory": {
+      "title": "Lịch sử của tôi",
+      "funding": "Cấp vốn",
+      "fundingTabs": {
+        "bidsOffers": "Giá mua & chào bán",
+        "loans": "Khoảng vay",
+        "credits": "Tín dụng"
+      },
+      "earnings": "Thu nhập",
+      "earningsTabs": {
+        "funding": "Cấp vốn",
+        "staking": "Staking",
+        "affiliates": "Đại lý liên kết"
+      },
+      "wallets": "Ví",
+      "walletsTabs": {
+        "balances": "Số dư",
+        "movements": "Biến động dòng tiền"
+      }
+    },
+    "merchantHistory": {
+      "title": "Lịch sử nhà bán hàng",
+      "invoices": "Hoá đơn"
+    },
+    "marketHistory": {
+      "title": "Lịch sử thị trường",
+      "trades": "Giao dịch",
+      "funding": "Cấp vốn",
+      "spot": "Giao ngay",
+      "derivatives": "Phái sinh"
+    },
+    "loginHistory": "Lịch sử đăng nhập",
+    "subAccounts": "Tài khoản phụ",
+    "changeLogs": "Thay đổi nhật ký"
+  },
+  "nodata": "Không có dữ liệu liên quan trong phạm vi thời gian này. Bạn có thể thử với phạm vi thời gian khác.",
+  "no_merchant": {
+    "title": "Phần này chỉ dành cho ",
+    "link": "tài khoản nhà bán hàng"
+  },
+  "orders": {
+    "title": "Lệnh"
+  },
+  "ordertrades": {
+    "title": "Giao dịch lệnh",
+    "noid": {
+      "title": "Không có ID lệnh",
+      "description": "Vui lòng chọn từ trang Lệnh để truy vấn nhật ký thay đổi Lệnh theo ID."
+    }
+  },
+  "pagination": {
+    "page": "Trang",
+    "of": "/",
+    "loading": "đang tải...",
+    "no_results": "Không tìm thấy kết quả",
+    "proceed": "Tiến hành tìm kiếm",
+    "last_data_timestamp": "Ngày nhận dữ liệu gần đây nhất: {{date}}"
+  },
+  "paudit": {
+    "title": "Kiểm tra vị thế",
+    "input": {
+      "ids": "ID vị thế"
+    },
+    "noid": {
+      "title": "Không có ID vị thế",
+      "description": "Vui lòng chọn ID vị thế từ trang Vị thế để thực hiện truy vấn."
+    }
+  },
+  "positions": {
+    "title": "Vị thế",
+    "active": "Hoạt động",
+    "closed": "Đóng",
+    "no_active": "Không có vị thế hoạt động tại thời điểm này.",
+    "swap": {
+      "daily": "Hằng ngày",
+      "period": "Giai đoạn ",
+      "term": "Điều khoản"
+    }
+  },
+  "preferences": {
+    "title": "Tuỳ chọn",
+    "close": "Đóng",
+    "language": "Ngôn ngữ",
+    "theme": "Chủ đề",
+    "timezone": "Múi giờ",
+    "dateformat": "Định dạng ngày",
+    "milliseconds": "Hiển thị mili giây",
+    "table_scroll": "Cuộn bảng",
+    "preserve_timeframe": "Giữ nguyên khung thời gian",
+    "remove_account": "Xóa tài khoản",
+    "sync": {
+      "add-filter": "Thêm bộ lọc",
+      "add-pair": "Thêm cặp",
+      "title": "Tùy chọn đồng bộ hóa",
+      "notset": "Chưa thiết lập tuỳ chọn đồng bộ hoá",
+      "description": "Để truy cập Giao dịch đại chúng và Ticker ngoại tuyến, bạn cần thiết lập các cặp khả dụng ngoại tuyến và thời gian bắt đầu truy vấn.",
+      "symbol-description": "Để truy cập Vốn vay đại chúng ngoại tuyến, bạn cần thiết lập các loại tiền khả dụng ngoại tuyến và thời gian bắt đầu truy vấn.",
+      "setup": "Thiết lập tùy chọn Đồng bộ hóa",
+      "symbols": "Loại tiền ngoại tuyến",
+      "pairs": "Các cặp ngoại tuyến",
+      "starttime": "Thời gian bắt đầu",
+      "btn-apply": "Ứng dụng",
+      "apply-tooltip": "Các thay đổi sẽ được áp dụng trong lần đồng bộ tiếp theo.",
+      "insync-warning": "Không thể áp dụng khi đồng bộ hóa. Vui lòng chờ cho đến khi hoàn tất quá trình đồng bộ hóa."
+    }
+  },
+  "publicfunding": {
+    "title": "Vốn vay đại chúng"
+  },
+  "publictrades": {
+    "title": "Giao dịch đại chúng"
+  },
+  "query": {
+    "title": "Truy vấn",
+    "startTime": "Thời gian bắt đầu",
+    "endTime": "Thời gian kết thúc"
+  },
+  "querylimit": {
+    "tooltip": "Chọn kích thước cho mỗi truy vấn. Kích thước lớn hơn sẽ mất nhiều thời gian truy vấn hơn"
+  },
+  "selector": {
+    "select": "Chọn",
+    "all": "Tất cả",
+    "inactive": "Không hoạt động",
+    "balance-precision": {
+      "title": "Số dư (USD)",
+      "approximate": "Xấp xỉ",
+      "exact": "Chính xác"
+    },
+    "filter": {
+      "symbol": "Biểu tượng",
+      "pair": "Lọc cặp",
+      "category": "Lọc loại",
+      "columns": "Cột",
+      "date": "Ngày"
+    },
+    "report-type": {
+      "title": "Chọn loại báo cáo",
+      "win_loss": {
+        "title": "Lãi/Lỗ"
+      },
+      "gains_deposits": {
+        "title": "Phần trăm lãi (tiền lãi/tiền nạp)",
+        "description": "% tiền lãi đang được tính so với số tiền nạp vào tài khoản"
+      },
+      "gains_balance": {
+        "title": "Phần trăm lãi (tiền lãi/số dư)",
+        "description": "% tiền lãi được tính hàng ngày so với số dư của ngày hôm trước và gộp lại"
+      },
+      "trading_fees": {
+        "title": "Phí giao dịch"
+      },
+      "funding_fees": {
+        "title": "Phí cấp vốn"
+      },
+      "funding_trading_fees": {
+        "title": "Phí giao dịch + cấp vốn"
+      }
+    },
+    "unrealized-profits": {
+      "title": "Hiển thị lãi chưa thực nhận",
+      "yes": "Có",
+      "no": "Không"
+    }
+  },
+  "snapshots": {
+    "title": "Snapshot",
+    "query": {
+      "title": "Truy vấn",
+      "tooltip": "Chọn thời gian để truy vấn snapshot"
+    }
+  },
+  "spayments": {
+    "title": "Thu nhập đặt cược"
+  },
+  "status": {
+    "success": "{{topic}} Thành công lúc {{time}}",
+    "warn": "{{topic}}",
+    "fail": "{{topic}} thất bại: {{detail}}",
+    "noid": "dev: hành động trạng thái phải chứa tham số id",
+    "request": {
+      "error": "{{topic}} yêu cầu thất bại {{detail}}"
+    },
+    "signInFail": "Thông tin xác thực không hợp lệ",
+    "timeframe_update": "Khung thời gian được cập nhật",
+    "signUpFail": "Khóa hoặc bí mật API không hợp lệ",
+    "netError": "Tìm nạp dữ liệu bị tạm dừng do không có kết nối internet",
+    "netResumed": "Đã khôi phục kết nối Internet, tiếp tục tìm nạp dữ liệu"
+  },
+  "subaccounts": {
+    "add_account": "Thêm tài khoản nữa",
+    "title": "Tài khoản phụ",
+    "add_accounts": "Thêm tài khoản",
+    "update_accounts": "Cập nhật các tài khoản",
+    "create": "Tạo tài khoản phụ",
+    "select": "Chọn tài khoản phụ",
+    "sub_account": "Tài khoản phụ:",
+    "remove_item": "Xóa",
+    "api_key": "Khoá API",
+    "api_secret": "Bí mật API",
+    "password": "Mật khẩu",
+    "remove": "Xóa tài khoản phụ",
+    "login": "Đăng nhập tài khoản phụ",
+    "name_label": "Tên",
+    "name_placeholder": "Tên nhóm tài khoản (tùy chọn)",
+    "use_api_key": "Sử dụng khoá API",
+    "name_updated": "Tên nhóm tài khoản đã cập nhật"
+  },
+  "symbols": {
+    "title": "Lấy biểu tượng",
+    "clear_symbols": "Xoá biểu tượng"
+  },
+  "sync": {
+    "title": "Đồng bộ hóa",
+    "switch-mode": "Chuyển đổi chế độ đồng bộ hóa",
+    "online": "Truy vấn trực tuyến",
+    "online_tooltip": "Nhấp để chuyển sang chế độ truy vấn ngoại tuyến",
+    "offline": "Truy vấn ngoại tuyến",
+    "offline_tooltip": "Nhấp để chuyển sang chế độ truy vấn trực tuyến",
+    "insync": "Đang đồng bộ hóa",
+    "insync_tooltip": "Nhấp để dừng quy trình đồng bộ hóa",
+    "description": "Chúng tôi sẽ bắt đầu lưu trữ cục bộ dữ liệu của bạn. Khi hoàn tất quá trình đồng bộ hóa, bạn có thể truy vấn cục bộ ở chế độ ngoại tuyến. Bạn vẫn có thể truy vấn trực tuyến khi đồng bộ hóa.",
+    "sync-description": "Dữ liệu của bạn đang đồng bộ hóa cục bộ. Bạn có muốn dừng quá trình đồng bộ hóa và tiếp tục ở chế độ truy vấn trực tuyến không?",
+    "close": "Huỷ",
+    "start": "Bắt đầu đồng bộ hoá",
+    "start-sync": "Đã bắt đầu đồng bộ hóa",
+    "start_sync_tooltip": "Nhấp để bắt đầu quy trình đồng bộ hóa",
+    "stop-sync": "Dừng đồng bộ hoá",
+    "sync-done": "Đồng bộ hóa",
+    "go-online": "Chuyển sang chế độ truy vấn trực tuyến",
+    "go-offline": "Chuyển sang chế độ truy vấn ngoại tuyến (truy vấn từ bảng điều khiển)",
+    "logout": "Đã dừng đồng bộ hóa",
+    "message": {
+      "canceled": "Đã hủy Sync Watcher cũ"
+    },
+    "estimated_time": {
+      "started_at": "Đã bắt đầu đồng bộ hóa lúc: ",
+      "spent_time": "Thời gian sử dụng: ",
+      "left_time": "Thời gian còn lại: ",
+      "estimating": "Ước tính..."
+    }
+  },
+  "sum": "Tổng",
+  "sum_up_cols": "Tổng hợp: {{sum}}",
+  "sum_up_tooltip": {
+    "title": "Tổng hợp"
+  },
+  "taxreport": {
+    "title": "Báo cáo thuế",
+    "sections": {
+      "startSnapshot": "Bắt đầu Snapshot",
+      "endSnapshot": "Kết thúc Snapshot",
+      "finalResult": "Kết quả cuối cùng"
+    },
+    "startingPeriodBalances": "Bắt đầu với số dư giai đoạn",
+    "endingPeriodBalances": "Kết thúc với số dư giai đoạn",
+    "startPositions": "Bắt đầu snapshot vị thế",
+    "endPositions": "Chỉnh sửa snapshot vị thế",
+    "movements": "Biến động dòng tiền"
+  },
+  "theme": {
+    "light": "Sáng",
+    "dark": "Tối",
+    "midnight": "Nửa đêm"
+  },
+  "tickers": {
+    "title": "Ticker",
+    "spot": "Giao ngay",
+    "minlength": "Nên chọn ít nhất một cặp"
+  },
+  "timeframe": {
+    "custom": {
+      "cancel": "Huỷ",
+      "confirm": "Xác nhận",
+      "title": "Chọn phạm vi truy vấn",
+      "view": "Xem"
+    },
+    "go_to": "Truy cập",
+    "day": "Ngày",
+    "date": "Ngày",
+    "refresh": "Làm mới",
+    "custom_time": "Tuỳ chỉnh",
+    "custom_range": "Phạm vi tuỳ chỉnh",
+    "custom-timerange": "Phạm vi thời gian tùy chỉnh",
+    "custom_year": "{{year}} năm",
+    "24h": "24 giờ qua",
+    "yesterday": "Hôm qua",
+    "2w": "2 tuần qua",
+    "month": "Tháng",
+    "month_to_date": "Từ đầu tháng đến thời điểm hiện tại",
+    "past_month": "Tháng trước",
+    "past_3m": "3 tháng qua",
+    "past_week": "Tuần qua",
+    "past_year": "Năm qua",
+    "past_2y": "2 năm qua",
+    "range_limit": "Không được truy vấn nhiều hơn sáu năm sau ngày thực tế",
+    "start-date-placeholder": "Ngày bắt đầu",
+    "end-date-placeholder": "Ngày kết thúc",
+    "select-date": "Chọn ngày",
+    "from": "Từ",
+    "to": "Đến",
+    "today": "Ngày",
+    "query_range": "Phạm vi truy vấn",
+    "year": "Năm",
+    "week": "Tuần"
+  },
+  "tradedvolume": {
+    "title": "Khối lượng giao dịch"
+  },
+  "trades": {
+    "title": "Giao dịch"
+  },
+  "update": "Cập nhật",
+  "updated": "Cập nhật",
+  "wallets": {
+    "title": "Ví",
+    "header": {
+      "capital-raise": "Tăng vốn",
+      "exchange": "Giao dịch giao ngay",
+      "margin": "Ký quỹ",
+      "funding": "Cấp vốn",
+      "token-sales": "Bán token"
+    },
+    "nodata": "Không có dữ liệu liên quan trong thời gian này. Bạn có thể thử thời gian khác.",
+    "query": {
+      "title": "Truy vấn",
+      "tooltip": "Chọn thời gian để truy vấn snapshot ví"
+    }
+  },
+  "weightedaverages": {
+    "title": "Giá trung bình gia quyền",
+    "limitNote": {
+      "title": "Không phải tất cả các giao dịch có thể được hiển thị",
+      "note1": "Yêu cầu của bạn vượt quá giới hạn 100k giao dịch.",
+      "link": "Tải ứng dụng Báo cáo",
+      "note2": " hiển thị thêm hoặc thay đổi phạm vi ngày bạn đã chọn."
+    }
+  },
+  "withdrawals": {
+    "title": "Tiền rút"
+  }
+}
