@@ -6,6 +6,13 @@
 
   &-wrapper {
     max-width: 1000px;
+
+    .section-header {
+      &-title {
+        max-height: 35px;
+        margin-bottom: 5px;
+      }
+    }
   }
 
   &-data-row {
