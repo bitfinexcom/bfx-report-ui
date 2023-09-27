@@ -8,6 +8,11 @@ import {
   fetchData,
 } from 'state/accountSummary/actions'
 import {
+  setParams,
+  fetchBalance,
+  refresh as refreshBalance,
+} from 'state/accountBalance/actions'
+import {
   getData,
   getPageLoading,
   getDataReceived,
@@ -26,6 +31,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   refresh,
   fetchData,
+  setParams,
+  fetchBalance,
+  refreshBalance,
 }
 
 export default compose(
