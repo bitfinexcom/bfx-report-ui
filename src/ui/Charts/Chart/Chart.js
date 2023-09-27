@@ -111,6 +111,7 @@ class Chart extends React.PureComponent {
       t,
       data,
       className,
+      showLegend,
       isSumUpEnabled,
     } = this.props
     const {
@@ -163,12 +164,14 @@ class Chart extends React.PureComponent {
               stroke='#57636b'
               strokeDasharray='3 3'
             />
-            <Legend
-              iconType='rect'
-              verticalAlign='top'
-              onClick={this.onLegendClick}
-              wrapperStyle={{ paddingBottom: 15 }}
-            />
+            {showLegend && (
+              <Legend
+                iconType='rect'
+                verticalAlign='top'
+                onClick={this.onLegendClick}
+                wrapperStyle={{ paddingBottom: 15 }}
+              />
+            )}
             {this.getAreas()}
             {shouldShowReferenceArea ? (
               <ReferenceArea
