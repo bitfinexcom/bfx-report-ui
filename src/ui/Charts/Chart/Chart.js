@@ -146,6 +146,7 @@ class Chart extends React.PureComponent {
             <YAxis
               width={90}
               stroke='#9e9494'
+              orientation='right'
               tickFormatter={formatChartData}
             />
             <Tooltip
