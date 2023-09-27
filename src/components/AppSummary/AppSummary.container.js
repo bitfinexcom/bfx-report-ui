@@ -17,6 +17,10 @@ import {
   getPageLoading,
   getDataReceived,
 } from 'state/accountSummary/selectors'
+import {
+  getTimeframe,
+  getIsUnrealizedProfitExcluded,
+} from 'state/accountBalance/selectors'
 import { getIsTurkishSite } from 'state/base/selectors'
 
 import AccountSummary from './AppSummary'
@@ -25,7 +29,9 @@ const mapStateToProps = state => ({
   data: getData(state),
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
+  currentTimeFrame: getTimeframe(state),
   isTurkishSite: getIsTurkishSite(state),
+  isUnrealizedProfitExcluded: getIsUnrealizedProfitExcluded(state),
 })
 
 const mapDispatchToProps = {
