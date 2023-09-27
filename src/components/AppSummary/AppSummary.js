@@ -98,6 +98,9 @@ AppSummary.propTypes = {
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  setParams: PropTypes.func.isRequired,
+  fetchBalance: PropTypes.func.isRequired,
+  refreshBalance: PropTypes.func.isRequired,
 }
 
 AppSummary.defaultProps = {
