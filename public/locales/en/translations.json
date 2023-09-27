@@ -630,6 +630,10 @@
       "taker_stables": "Taker Fees Stablecoins",
       "deriv_maker": "Derivatives Maker Fees",
       "deriv_taker": "Derivatives Taker Fees"
+    },
+    "value": {
+      "title": "Account Value",
+      "sub_title": "Total Balance including Deposits/Withdrawals"
     }
   },
   "symbols": {
