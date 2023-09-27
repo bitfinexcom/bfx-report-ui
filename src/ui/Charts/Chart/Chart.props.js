@@ -5,8 +5,10 @@ export const propTypes = {
   dataKeys: PropTypes.array.isRequired,
   t: PropTypes.func.isRequired,
   isSumUpEnabled: PropTypes.bool,
+  showLegend: PropTypes.bool,
 }
 
 export const defaultProps = {
   isSumUpEnabled: false,
+  showLegend: true,
 }
