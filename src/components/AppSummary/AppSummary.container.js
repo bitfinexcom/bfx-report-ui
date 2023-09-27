@@ -23,7 +23,7 @@ import {
 } from 'state/accountBalance/selectors'
 import { getIsTurkishSite } from 'state/base/selectors'
 
-import AccountSummary from './AppSummary'
+import AppSummary from './AppSummary'
 
 const mapStateToProps = state => ({
   data: getData(state),
@@ -46,4 +46,4 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withTranslation('translations'),
   withRouter,
-)(AccountSummary)
+)(AppSummary)
