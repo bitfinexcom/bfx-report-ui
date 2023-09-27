@@ -14,6 +14,7 @@ import {
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
+import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
@@ -28,6 +29,7 @@ const AppSummary = ({
   dataReceived,
   isTurkishSite,
   currentTimeFrame,
+  isUnrealizedProfitExcluded,
 }) => {
   useEffect(() => {
     if (!dataReceived && !pageLoading) fetchData()
@@ -35,6 +37,10 @@ const AppSummary = ({
 
   const handleTimeFrameChange = (timeframe) => {
     setParams({ timeframe })
+  }
+
+  const handleUnrealizedProfitChange = (value) => {
+    setParams({ isUnrealizedProfitExcluded: value })
   }
 
   let showContent
@@ -89,6 +95,15 @@ const AppSummary = ({
                 onChange={handleTimeFrameChange}
               />
             </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.unrealized-profits.title')}
+              </SectionHeaderItemLabel>
+              <UnrealizedProfitSelector
+                value={isUnrealizedProfitExcluded}
+                onChange={handleUnrealizedProfitChange}
+              />
+            </SectionHeaderItem>
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
@@ -109,15 +124,16 @@ AppSummary.propTypes = {
     takerFeeToStable: PropTypes.number,
   }),
   dataReceived: PropTypes.bool.isRequired,
-  fetchBalance: PropTypes.func.isRequired,
+  // fetchBalance: PropTypes.func.isRequired,
   fetchData: PropTypes.func.isRequired,
   isTurkishSite: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  refreshBalance: PropTypes.func.isRequired,
+  // refreshBalance: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   currentTimeFrame: PropTypes.string.isRequired,
+  isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
 }
 
 AppSummary.defaultProps = {
