@@ -13,6 +13,7 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
+import TimeFrameSelector from 'ui/TimeFrameSelector'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
@@ -22,13 +23,19 @@ const AppSummary = ({
   data,
   refresh,
   fetchData,
+  setParams,
   pageLoading,
   dataReceived,
   isTurkishSite,
+  currentTimeFrame,
 }) => {
   useEffect(() => {
     if (!dataReceived && !pageLoading) fetchData()
   }, [])
+
+  const handleTimeFrameChange = (timeframe) => {
+    setParams({ timeframe })
+  }
 
   let showContent
   if (!dataReceived && pageLoading) {
@@ -73,6 +80,15 @@ const AppSummary = ({
               </SectionHeaderItemLabel>
               <TimeRange className='section-header-time-range' />
             </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.select')}
+              </SectionHeaderItemLabel>
+              <TimeFrameSelector
+                value={currentTimeFrame}
+                onChange={handleTimeFrameChange}
+              />
+            </SectionHeaderItem>
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
@@ -93,14 +109,15 @@ AppSummary.propTypes = {
     takerFeeToStable: PropTypes.number,
   }),
   dataReceived: PropTypes.bool.isRequired,
+  fetchBalance: PropTypes.func.isRequired,
   fetchData: PropTypes.func.isRequired,
   isTurkishSite: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
-  setParams: PropTypes.func.isRequired,
-  fetchBalance: PropTypes.func.isRequired,
   refreshBalance: PropTypes.func.isRequired,
+  setParams: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
+  currentTimeFrame: PropTypes.string.isRequired,
 }
 
 AppSummary.defaultProps = {
