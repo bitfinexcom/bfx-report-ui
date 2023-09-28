@@ -49,6 +49,7 @@ export function balanceReducer(state = initialState, action) {
       return {
         ...initialState,
         timeframe: state.timeframe,
+        isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
       }
     case authTypes.LOGOUT:
       return initialState
