@@ -110,6 +110,15 @@
   .line-chart {
     width:110%;
   }
+
+  .no-data {
+    display: flex;
+    min-height: 230px;
+
+    &-wrapper {
+      margin: auto;
+    }
+  }
 }
 
 .leo-level {
