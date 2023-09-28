@@ -13,11 +13,13 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
+import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
+// import Value from './AppSummary.value'
 
 const AppSummary = ({
   t,
@@ -28,6 +30,7 @@ const AppSummary = ({
   pageLoading,
   dataReceived,
   isTurkishSite,
+  refreshBalance,
   currentTimeFrame,
   isUnrealizedProfitExcluded,
 }) => {
@@ -56,6 +59,7 @@ const AppSummary = ({
           data={data}
           isTurkishSite={isTurkishSite}
         />
+        {/* <Value t={t} /> */}
       </div>
     )
   }
@@ -104,6 +108,7 @@ const AppSummary = ({
                 onChange={handleUnrealizedProfitChange}
               />
             </SectionHeaderItem>
+            <RefreshButton onClick={refreshBalance} />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
@@ -129,7 +134,7 @@ AppSummary.propTypes = {
   isTurkishSite: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
-  // refreshBalance: PropTypes.func.isRequired,
+  refreshBalance: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   currentTimeFrame: PropTypes.string.isRequired,
