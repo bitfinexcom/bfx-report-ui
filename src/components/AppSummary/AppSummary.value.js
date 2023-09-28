@@ -63,6 +63,7 @@ class AccountSummaryValue extends PureComponent {
       showContent = (
         <Chart
           data={chartData}
+          showLegend={false}
           dataKeys={presentCurrencies}
         />
       )
@@ -70,10 +71,10 @@ class AccountSummaryValue extends PureComponent {
     return (
       <div className='app-summary-item'>
         <div className='app-summary-item-title'>
-          {t('summary.fees.title')}
+          {t('summary.value.title')}
         </div>
         <div className='app-summary-item-sub-title'>
-          {t('summary.fees.sub_title')}
+          {t('summary.value.sub_title')}
         </div>
         {showContent}
       </div>
