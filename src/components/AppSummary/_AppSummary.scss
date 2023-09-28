@@ -22,6 +22,7 @@
     flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
+    margin-bottom: 35px;
   }
 
   &-title-row {
@@ -33,6 +34,7 @@
   &-item {
     width: 48%;
     max-width: 460px;
+    min-height: 270px;
 
     &-title {
       font-size: 18px;
@@ -139,6 +141,7 @@
     &-data-row {
       display: flex;
       flex-direction: column;
+      margin-bottom: 30px;
     }
     &-item {
       width: 100%;
