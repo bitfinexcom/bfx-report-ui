@@ -19,7 +19,7 @@ import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
-// import Value from './AppSummary.value'
+import Value from './AppSummary.value.container'
 
 const AppSummary = ({
   t,
@@ -54,12 +54,12 @@ const AppSummary = ({
   } else {
     showContent = (
       <div className='app-summary-data-row'>
+        <Value />
         <Fees
           t={t}
           data={data}
           isTurkishSite={isTurkishSite}
         />
-        {/* <Value t={t} /> */}
       </div>
     )
   }
