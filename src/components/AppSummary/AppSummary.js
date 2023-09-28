@@ -53,14 +53,18 @@ const AppSummary = ({
     showContent = <NoData refresh={refresh} />
   } else {
     showContent = (
-      <div className='app-summary-data-row'>
-        <Value />
-        <Fees
-          t={t}
-          data={data}
-          isTurkishSite={isTurkishSite}
-        />
-      </div>
+      <>
+        <div className='app-summary-data-row'>
+          <Value />
+        </div>
+        <div className='app-summary-data-row'>
+          <Fees
+            t={t}
+            data={data}
+            isTurkishSite={isTurkishSite}
+          />
+        </div>
+      </>
     )
   }
   return (
