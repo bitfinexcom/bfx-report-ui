@@ -143,7 +143,13 @@
     &-item {
       width: 100%;
       margin-bottom: 30px;
+    }
+  }
+}
 
+@media screen and (max-width: 400px) {
+  .app-summary {
+    &-item {
       .line-chart {
         width:120%;
       }
