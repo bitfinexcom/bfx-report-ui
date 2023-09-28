@@ -62,6 +62,7 @@ class AccountSummaryValue extends PureComponent {
     } else {
       showContent = (
         <Chart
+          aspect={2}
           data={chartData}
           showLegend={false}
           dataKeys={presentCurrencies}
@@ -69,7 +70,7 @@ class AccountSummaryValue extends PureComponent {
       )
     }
     return (
-      <div className='app-summary-item'>
+      <div className='app-summary-item chart-item'>
         <div className='app-summary-item-title'>
           {t('summary.value.title')}
         </div>
