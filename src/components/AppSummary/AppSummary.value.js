@@ -2,17 +2,18 @@ import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import _sortBy from 'lodash/sortBy'
+import _isEmpty from 'lodash/isEmpty'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import parseChartData from 'ui/Charts/Charts.helpers'
-import { getTimeRange } from 'state/timeRange/selectors'
 import {
   getEntries,
   getCurrentTimeFrame,
   getPageLoading, getDataReceived,
 } from 'state/accountBalance/selectors'
+import { getTimeRange } from 'state/timeRange/selectors'
 import { fetchBalance } from 'state/accountBalance/actions'
 
 const AccountSummaryValue = () => {
@@ -36,7 +37,7 @@ const AccountSummaryValue = () => {
   let showContent
   if (!dataReceived && pageLoading) {
     showContent = <Loading />
-  } else if (!entries.length) {
+  } else if (_isEmpty(entries)) {
     showContent = <NoData />
   } else {
     showContent = (
