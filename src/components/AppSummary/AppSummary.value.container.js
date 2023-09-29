@@ -17,7 +17,7 @@ import {
   getIsUnrealizedProfitExcluded,
 } from 'state/accountBalance/selectors'
 
-import AccountBalance from './AppSummary.value'
+import AccountBalance from './_AppSummary.value'
 
 const mapStateToProps = state => ({
   currentFetchParams: getCurrentFetchParams(state),
