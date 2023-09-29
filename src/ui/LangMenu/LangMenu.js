@@ -6,7 +6,7 @@ import { LANGUAGE_NAMES } from 'locales/i18n'
 
 import { propTypes, defaultProps } from './LangMenu.props'
 
-const items = _keys(LANGUAGE_NAMES).map(lang => ({ value: lang, label: LANGUAGE_NAMES[lang] }))
+const items = _map(_keys(LANGUAGE_NAMES), (lang) => ({ value: lang, label: LANGUAGE_NAMES[lang] }))
 
 const LangMenu = (props) => {
   const { setLang, value } = props
