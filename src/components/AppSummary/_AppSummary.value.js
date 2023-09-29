@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import _sortBy from 'lodash/sortBy'
 
 import NoData from 'ui/NoData'
@@ -8,35 +9,28 @@ import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import { getTimeRange } from 'state/timeRange/selectors'
-// import queryConstants from 'state/query/constants'
-// import { checkFetch, checkInit } from 'state/utils'
+import {
+  getEntries,
+  getCurrentTimeFrame,
+  getPageLoading, getDataReceived,
+} from 'state/accountBalance/selectors'
+import { fetchBalance } from 'state/accountBalance/actions'
 
-// const TYPE = queryConstants.MENU_ACCOUNT_BALANCE
-
-const AccountSummaryValue = ({
-  entries,
-  pageLoading,
-  dataReceived,
-  timeframe,
-  fetchData,
-  currentFetchParams,
-  currentFetchParams: { timeframe: currTimeframe },
-  t,
-}) => {
+const AccountSummaryValue = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const entries = useSelector(getEntries)
   const timeRange = useSelector(getTimeRange)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const currTimeFrame = useSelector(getCurrentTimeFrame)
 
   useEffect(() => {
-    if (!dataReceived && !pageLoading) fetchData()
+    if (!dataReceived && !pageLoading) dispatch(fetchBalance())
   }, [timeRange])
 
-
-  console.log('+++timeRange', timeRange)
-  console.log('+++timeframe', timeframe)
-  console.log('+++currentFetchParams', currentFetchParams)
-
-
   const { chartData, presentCurrencies } = parseChartData({
-    timeframe: currTimeframe,
+    timeframe: currTimeFrame,
     data: _sortBy(entries, ['mts']),
   })
 
@@ -68,7 +62,6 @@ const AccountSummaryValue = ({
     </div>
   )
 }
-
 
 AccountSummaryValue.propTypes = {
   currentFetchParams: PropTypes.shape({
