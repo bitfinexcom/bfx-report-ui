@@ -133,7 +133,6 @@ AppSummary.propTypes = {
     takerFeeToStable: PropTypes.number,
   }),
   dataReceived: PropTypes.bool.isRequired,
-  // fetchBalance: PropTypes.func.isRequired,
   fetchData: PropTypes.func.isRequired,
   isTurkishSite: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
