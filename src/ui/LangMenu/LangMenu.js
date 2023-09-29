@@ -1,4 +1,5 @@
 import React from 'react'
+import _map from 'lodash/map'
 import _keys from 'lodash/keys'
 
 import Select from 'ui/Select'
