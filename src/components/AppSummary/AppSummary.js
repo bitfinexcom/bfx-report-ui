@@ -19,7 +19,7 @@ import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
-import Value from './AppSummary.value.container'
+import Value from './AppSummary.value'
 
 const AppSummary = ({
   t,
