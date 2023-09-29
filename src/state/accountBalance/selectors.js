@@ -6,6 +6,7 @@ export const getEntries = state => getBalance(state).entries
 export const getPageLoading = state => getBalance(state).pageLoading
 export const getTimeframe = state => getBalance(state).timeframe
 export const getIsUnrealizedProfitExcluded = state => getBalance(state).isUnrealizedProfitExcluded
+export const getCurrentTimeFrame = state => getCurrentFetchParams(state)?.timeframe
 
 export default {
   getBalance,
@@ -15,4 +16,5 @@ export default {
   getPageLoading,
   getTimeframe,
   getIsUnrealizedProfitExcluded,
+  getCurrentTimeFrame,
 }
