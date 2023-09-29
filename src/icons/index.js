@@ -31,6 +31,7 @@ import { ReactComponent as FILTER_CLEAR } from './filter-clear.svg'
 import { ReactComponent as GO_TO } from './go-to.svg'
 import { ReactComponent as HAMBURGER_MENU } from './hamburger-menu.svg'
 import { ReactComponent as INFO_CIRCLE } from './info-circle.svg'
+import { ReactComponent as LEO } from './leo.svg'
 import { ReactComponent as LIGHT_THEME } from './light-theme.svg'
 import { ReactComponent as LIST_NUMBER } from './list-number.svg'
 import { ReactComponent as LOOP } from './loop.svg'
@@ -90,6 +91,7 @@ export default {
   GO_TO,
   HAMBURGER_MENU,
   INFO_CIRCLE,
+  LEO,
   LIGHT_THEME,
   LIST_NUMBER,
   LOOP,

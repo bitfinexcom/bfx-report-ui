@@ -1,5 +1,5 @@
 svg {
-  &:not(.recharts-surface) path {
+  &:not(.recharts-surface, .icon-leo) path {
     fill: var(--iconColor);
   }
   
