@@ -9,7 +9,6 @@ import {
 } from 'state/accountSummary/actions'
 import {
   setParams,
-  fetchBalance,
   refresh as refreshBalance,
 } from 'state/accountBalance/actions'
 import {
@@ -38,7 +37,6 @@ const mapDispatchToProps = {
   refresh,
   fetchData,
   setParams,
-  fetchBalance,
   refreshBalance,
 }
 
