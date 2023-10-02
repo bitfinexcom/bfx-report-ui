@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import _last from 'lodash/last'
 import _sortBy from 'lodash/sortBy'
 import _isEmpty from 'lodash/isEmpty'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
-import parseChartData from 'ui/Charts/Charts.helpers'
+import {
+  parseChartData,
+  getFormattedChartLastValue,
+} from 'ui/Charts/Charts.helpers'
 import {
   getEntries,
   getCurrentTimeFrame,
@@ -35,7 +37,7 @@ const AccountSummaryValue = () => {
     data: _sortBy(entries, ['mts']),
   })
 
-  const chartLastValue = _last(chartData)?.USD ?? null
+  const chartLastValue = getFormattedChartLastValue(chartData)
 
   let showContent
   if (!dataReceived && pageLoading) {
