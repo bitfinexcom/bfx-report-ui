@@ -34,6 +34,9 @@ const AccountSummaryValue = () => {
     data: _sortBy(entries, ['mts']),
   })
 
+  console.log('++chartData', chartData)
+  console.log('++presentCurrencies', presentCurrencies)
+
   let showContent
   if (!dataReceived && pageLoading) {
     showContent = <Loading />
@@ -41,12 +44,17 @@ const AccountSummaryValue = () => {
     showContent = <NoData />
   } else {
     showContent = (
-      <Chart
-        aspect={2}
-        data={chartData}
-        showLegend={false}
-        dataKeys={presentCurrencies}
-      />
+      <div className='chart-wrapper'>
+        <div className='chart-value'>
+          $ 96.19
+        </div>
+        <Chart
+          aspect={2}
+          data={chartData}
+          showLegend={false}
+          dataKeys={presentCurrencies}
+        />
+      </div>
     )
   }
 
