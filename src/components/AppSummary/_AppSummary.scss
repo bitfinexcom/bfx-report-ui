@@ -107,6 +107,17 @@
   width: 50%;
   max-width: 500px;
 
+  .chart-wrapper {
+    position: relative;
+
+    .chart-value {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 1;
+    }
+  }
+
   .line-chart {
     width:110%;
   }
