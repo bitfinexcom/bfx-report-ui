@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import _sortBy from 'lodash/sortBy'
@@ -32,12 +32,17 @@ const AccountSummaryValue = () => {
     if (!dataReceived && !pageLoading) dispatch(fetchBalance())
   }, [timeRange])
 
-  const { chartData, presentCurrencies } = parseChartData({
-    timeframe: currTimeFrame,
-    data: _sortBy(entries, ['mts']),
-  })
+  const { chartData, presentCurrencies } = useMemo(
+    () => parseChartData({
+      timeframe: currTimeFrame,
+      data: _sortBy(entries, ['mts']),
+    }), [currTimeFrame, entries],
+  )
 
-  const chartLastValue = getFormattedChartLastValue(chartData)
+  const chartLastValue = useMemo(
+    () => getFormattedChartLastValue(chartData),
+    [chartData],
+  )
 
   let showContent
   if (!dataReceived && pageLoading) {
