@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import _last from 'lodash/last'
 import _sortBy from 'lodash/sortBy'
 import _isEmpty from 'lodash/isEmpty'
 
@@ -34,8 +35,7 @@ const AccountSummaryValue = () => {
     data: _sortBy(entries, ['mts']),
   })
 
-  console.log('++chartData', chartData)
-  console.log('++presentCurrencies', presentCurrencies)
+  const chartLastValue = _last(chartData)?.USD ?? null
 
   let showContent
   if (!dataReceived && pageLoading) {
@@ -46,7 +46,8 @@ const AccountSummaryValue = () => {
     showContent = (
       <div className='chart-wrapper'>
         <div className='chart-value'>
-          $ 96.19
+          $
+          {chartLastValue}
         </div>
         <Chart
           aspect={2}
