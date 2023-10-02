@@ -1,4 +1,5 @@
 import moment from 'moment-timezone'
+import _last from 'lodash/last'
 import _sumBy from 'lodash/sumBy'
 import _slice from 'lodash/slice'
 import _reduce from 'lodash/reduce'
@@ -139,5 +140,7 @@ export const getSumUpRangeValue = (data, start, end) => {
     _slice(data, dataRange[0], dataRange[1] + 1), 'USD',
   ).toFixed(2))
 }
+
+export const getFormattedChartLastValue = (chartData) => formatChartData(_last(chartData)?.USD ?? null)
 
 export default parseChartData
