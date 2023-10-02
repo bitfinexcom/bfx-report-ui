@@ -94,8 +94,6 @@ export const formatAmount = (val, options = {}) => {
   )
 }
 
-export const formatFee = (fee) => formatAmount(fee * 100, { color: 'white', minDigits: 2 })
-
 export const formatColor = (value, color) => {
   const classes = classNames({
     'bitfinex-green-text': color === 'green',
@@ -125,7 +123,6 @@ export default {
   fixedFloat,
   insertIf,
   formatAmount,
-  formatFee,
   formatColor,
   formatExecPrice,
   formatFraction,
