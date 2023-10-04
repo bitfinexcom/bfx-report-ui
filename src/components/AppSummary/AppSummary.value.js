@@ -41,10 +41,13 @@ const AccountSummaryValue = () => {
     }), [currTimeFrame, entries],
   )
 
-  const formattedPercValue = getFormattedPercentChange(chartData)
-
   const chartLastValue = useMemo(
     () => getFormattedChartLastValue(chartData),
+    [chartData],
+  )
+
+  const formattedPercValue = useMemo(
+    () => getFormattedPercentChange(chartData),
     [chartData],
   )
 
@@ -56,12 +59,12 @@ const AccountSummaryValue = () => {
   } else {
     showContent = (
       <div className='chart-wrapper'>
-        <div className=''>
-          {formattedPercValue}
-        </div>
         <div className='chart-value'>
           $
           {chartLastValue}
+        </div>
+        <div className='chart-value-perc'>
+          {formattedPercValue}
         </div>
         <Chart
           aspect={2}
