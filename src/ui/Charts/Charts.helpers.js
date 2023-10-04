@@ -1,3 +1,4 @@
+import React from 'react';
 import moment from 'moment-timezone'
 import _last from 'lodash/last'
 import _head from 'lodash/head'
@@ -149,6 +150,15 @@ export const getChartValueChangePerc = (chartData) => {
   const firstChartValue = _head(chartData)?.USD
   const lastChartValue = _last(chartData)?.USD
   return _round(((lastChartValue - firstChartValue) / lastChartValue) * 100, 2)
+}
+
+export const formatPercent = (perc) => `${perc}%`
+
+export const getFormattedPercentChange = (value) => {
+  const val = +value
+  if (val < 0) return <span className='red-text'>{`${formatPercent(val)}`}</span>
+  if (val > 0) return <span className='green-text'>{`+${formatPercent(val)}`}</span>
+  return <span>{formatPercent(val)}</span>
 }
 
 export default parseChartData
