@@ -1,7 +1,9 @@
 import moment from 'moment-timezone'
 import _last from 'lodash/last'
+import _head from 'lodash/head'
 import _sumBy from 'lodash/sumBy'
 import _slice from 'lodash/slice'
+import _round from 'lodash/round'
 import _reduce from 'lodash/reduce'
 import _values from 'lodash/values'
 import _findIndex from 'lodash/findIndex'
@@ -142,5 +144,11 @@ export const getSumUpRangeValue = (data, start, end) => {
 }
 
 export const getFormattedChartLastValue = (chartData) => formatChartData(_last(chartData)?.USD ?? null)
+
+export const getChartValueChangePerc = (chartData) => {
+  const firstChartValue = _head(chartData)?.USD
+  const lastChartValue = _last(chartData)?.USD
+  return _round(((lastChartValue - firstChartValue) / lastChartValue) * 100, 2)
+}
 
 export default parseChartData
