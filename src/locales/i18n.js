@@ -22,6 +22,7 @@ export const LANGUAGES = {
   pt: 'pt-BR',
   'pt-PT': 'pt-BR',
   'pt-BR': 'pt-BR',
+  vi: 'vi',
 }
 
 export const LANGUAGE_NAMES = {
@@ -32,6 +33,7 @@ export const LANGUAGE_NAMES = {
   tr: 'Türkçe',
   'es-EM': 'Español',
   'pt-BR': 'Português',
+  vi: 'Vietnamese',
 }
 
 i18n

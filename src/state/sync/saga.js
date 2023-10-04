@@ -166,8 +166,8 @@ function* initQueryMode() {
 
 export function* initSync() {
   yield call(initQueryMode)
-  const { result: { progress } } = yield call(fetchSyncProgress)
-  if (progress === types.SYNC_NOT_STARTED || progress === 100) {
+  const { result: { progress, isSyncInProgress } } = yield call(fetchSyncProgress)
+  if (!isSyncInProgress || progress === 100) {
     yield put(actions.setIsSyncing(false))
     yield call(startSyncing)
   } else {
@@ -186,9 +186,18 @@ export function* initSync() {
 }
 
 function* progressUpdate({ payload }) {
-  const { result: { progress, ...estimatedTimeValues } } = payload
-  if (progress === types.SYNC_INTERRUPTED) {
+  const { result } = payload
+  const {
+    state,
+    error,
+    progress,
+    isSyncInProgress,
+    ...estimatedTimeValues
+  } = result
+
+  if (!isSyncInProgress || state === types.SYNC_INTERRUPTED) {
     yield put(actions.setIsSyncing(false))
+    if (error) yield put(updateSyncErrorStatus(error))
   } else {
     const syncProgress = Number.isInteger(progress)
       ? progress
