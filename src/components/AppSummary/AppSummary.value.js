@@ -9,7 +9,6 @@ import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import {
   parseChartData,
-  getChartValueChangePerc,
   getFormattedChartLastValue,
   getFormattedPercentChange,
 } from 'ui/Charts/Charts.helpers'
@@ -42,8 +41,7 @@ const AccountSummaryValue = () => {
     }), [currTimeFrame, entries],
   )
 
-  const valueChangePerc = getChartValueChangePerc(chartData)
-  const formattedPercValue = getFormattedPercentChange(valueChangePerc)
+  const formattedPercValue = getFormattedPercentChange(chartData)
 
   const chartLastValue = useMemo(
     () => getFormattedChartLastValue(chartData),
