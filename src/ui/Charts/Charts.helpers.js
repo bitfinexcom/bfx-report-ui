@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import moment from 'moment-timezone'
 import _last from 'lodash/last'
 import _head from 'lodash/head'
