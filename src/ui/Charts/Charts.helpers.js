@@ -156,8 +156,8 @@ export const getChartValueChangePerc = (chartData) => {
 
 export const formatPercent = (perc) => `${perc}%`
 
-export const getFormattedPercentChange = (value) => {
-  const val = +value
+export const getFormattedPercentChange = (chartData) => {
+  const val = +getChartValueChangePerc(chartData)
   if (val < 0) return <span className='red-text'>{`${formatPercent(val)}`}</span>
   if (val > 0) return <span className='green-text'>{`+${formatPercent(val)}`}</span>
   return <span>{formatPercent(val)}</span>
