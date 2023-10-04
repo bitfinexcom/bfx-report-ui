@@ -3,20 +3,21 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import _sortBy from 'lodash/sortBy'
 import _isEmpty from 'lodash/isEmpty'
-import _head from 'lodash/head'
-import _last from 'lodash/last'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import {
   parseChartData,
+  getChartValueChangePerc,
   getFormattedChartLastValue,
+  getFormattedPercentChange,
 } from 'ui/Charts/Charts.helpers'
 import {
   getEntries,
+  getPageLoading,
+  getDataReceived,
   getCurrentTimeFrame,
-  getPageLoading, getDataReceived,
 } from 'state/accountBalance/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
 import { fetchBalance } from 'state/accountBalance/actions'
@@ -41,20 +42,8 @@ const AccountSummaryValue = () => {
     }), [currTimeFrame, entries],
   )
 
-  const getValueChangePerc = (data) => {
-    const firstChartValue = _head(data)?.USD
-    const lastChartValue = _last(data)?.USD
-
-    console.log('+++firstChartValue', firstChartValue)
-    console.log('+++lastChartValue', lastChartValue)
-
-    return ((lastChartValue - firstChartValue) / lastChartValue) * 100
-  }
-
-  const valueChangePerc = getValueChangePerc(chartData)
-
-  console.log('++chartData', chartData)
-  console.log('++valueChangePerc', valueChangePerc)
+  const valueChangePerc = getChartValueChangePerc(chartData)
+  const formattedPercValue = getFormattedPercentChange(valueChangePerc)
 
   const chartLastValue = useMemo(
     () => getFormattedChartLastValue(chartData),
@@ -69,6 +58,9 @@ const AccountSummaryValue = () => {
   } else {
     showContent = (
       <div className='chart-wrapper'>
+        <div className=''>
+          {formattedPercValue}
+        </div>
         <div className='chart-value'>
           $
           {chartLastValue}
