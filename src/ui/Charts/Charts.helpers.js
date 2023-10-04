@@ -144,11 +144,13 @@ export const getSumUpRangeValue = (data, start, end) => {
   ).toFixed(2))
 }
 
-export const getFormattedChartLastValue = (chartData) => formatChartData(_last(chartData)?.USD ?? null)
+export const getFormattedChartLastValue = (chartData) => formatChartData(
+  _last(chartData)?.[CURRENCY_USD] ?? null,
+)
 
 export const getChartValueChangePerc = (chartData) => {
-  const firstChartValue = _head(chartData)?.USD
-  const lastChartValue = _last(chartData)?.USD
+  const firstChartValue = _head(chartData)?.[CURRENCY_USD]
+  const lastChartValue = _last(chartData)?.[CURRENCY_USD]
   return _round(((lastChartValue - firstChartValue) / lastChartValue) * 100, 2)
 }
 
