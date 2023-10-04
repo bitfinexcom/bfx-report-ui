@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import _sortBy from 'lodash/sortBy'
 import _isEmpty from 'lodash/isEmpty'
+import _head from 'lodash/head'
+import _last from 'lodash/last'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
@@ -38,6 +40,21 @@ const AccountSummaryValue = () => {
       data: _sortBy(entries, ['mts']),
     }), [currTimeFrame, entries],
   )
+
+  const getValueChangePerc = (data) => {
+    const firstChartValue = _head(data)?.USD
+    const lastChartValue = _last(data)?.USD
+
+    console.log('+++firstChartValue', firstChartValue)
+    console.log('+++lastChartValue', lastChartValue)
+
+    return ((lastChartValue - firstChartValue) / lastChartValue) * 100
+  }
+
+  const valueChangePerc = getValueChangePerc(chartData)
+
+  console.log('++chartData', chartData)
+  console.log('++valueChangePerc', valueChangePerc)
 
   const chartLastValue = useMemo(
     () => getFormattedChartLastValue(chartData),
