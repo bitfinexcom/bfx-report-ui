@@ -122,6 +122,14 @@
       top: 35px;
       left: 15px;
       z-index: 1;
+
+      .red-text {
+        color: var(--tableAmountFractionNegColor);
+      }
+
+      .green-text {
+        color: var(--tableAmountFractionPosColor);;
+      }
     }
   }
 
