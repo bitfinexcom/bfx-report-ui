@@ -56,8 +56,6 @@ const AppSummary = ({
       <>
         <div className='app-summary-data-row'>
           <Value />
-        </div>
-        <div className='app-summary-data-row'>
           <Fees
             t={t}
             data={data}
