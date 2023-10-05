@@ -5,6 +5,7 @@ import _head from 'lodash/head'
 import _sumBy from 'lodash/sumBy'
 import _slice from 'lodash/slice'
 import _round from 'lodash/round'
+import _isNaN from 'lodash/isNaN'
 import _reduce from 'lodash/reduce'
 import _values from 'lodash/values'
 import _findIndex from 'lodash/findIndex'
@@ -157,7 +158,8 @@ export const getChartValueChangePerc = (chartData) => {
 export const formatPercent = (perc) => `${perc}%`
 
 export const getFormattedPercentChange = (chartData) => {
-  const val = +getChartValueChangePerc(chartData)
+  let val = getChartValueChangePerc(chartData)
+  if (_isNaN(val)) val = 0
   if (val < 0) return <span className='red-text'>{`${formatPercent(val)}`}</span>
   if (val > 0) return <span className='green-text'>{`+${formatPercent(val)}`}</span>
   return <span>{formatPercent(val)}</span>
