@@ -617,6 +617,21 @@
     "use_api_key": "Use API key",
     "name_updated": "Accounts group name updated"
   },
+  "summary": {
+    "title": "Summary",
+    "leo_level": "LEO level",
+    "avg_amount": "Avg.Amount",
+    "fees": {
+      "title": "Account Fees",
+      "sub_title": "Based on your trading volume",
+      "maker": "Maker Fees",
+      "taker_crypto": "Taker Fees Crypto",
+      "taker_fiat": "Taker Fees Fiat",
+      "taker_stables": "Taker Fees Stablecoins",
+      "deriv_maker": "Derivatives Maker Fees",
+      "deriv_taker": "Derivatives Taker Fees"
+    }
+  },
   "symbols": {
     "title": "Get symbols",
     "clear_symbols": "Clear Symbols"
