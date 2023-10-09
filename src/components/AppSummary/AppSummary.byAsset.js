@@ -109,10 +109,10 @@ const AppSummaryByAsset = ({
   return (
     <div className='app-summary-item'>
       <div className='app-summary-item-title'>
-        {t('summary.fees.title')}
+        {t('summary.by_asset.title')}
       </div>
       <div className='app-summary-item-sub-title'>
-        {t('summary.fees.sub_title')}
+        {t('summary.by_asset.sub_title')}
       </div>
       <CollapsedTable
         numRows={1}
