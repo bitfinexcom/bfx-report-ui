@@ -636,7 +636,8 @@
       "sub_title": "Total Balance including Deposits/Withdrawals"
     },
     "by_asset":{
-      "title": "Summary by Asset"
+      "title": "Summary by Asset",
+      "sub_title":  "For the last 30 days"
     }
   },
   "symbols": {
