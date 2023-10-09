@@ -634,6 +634,9 @@
     "value": {
       "title": "Account Value",
       "sub_title": "Total Balance including Deposits/Withdrawals"
+    },
+    "by_asset":{
+      "title": "Summary by Asset"
     }
   },
   "symbols": {
