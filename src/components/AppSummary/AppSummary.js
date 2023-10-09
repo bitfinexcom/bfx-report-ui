@@ -20,6 +20,7 @@ import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
 import Value from './AppSummary.value'
+import ByAsset from './AppSummary.byAsset'
 
 const AppSummary = ({
   t,
@@ -57,6 +58,13 @@ const AppSummary = ({
         <div className='app-summary-data-row'>
           <Value />
           <Fees
+            t={t}
+            data={data}
+            isTurkishSite={isTurkishSite}
+          />
+        </div>
+        <div className='app-summary-data-row'>
+          <ByAsset
             t={t}
             data={data}
             isTurkishSite={isTurkishSite}
