@@ -5,4 +5,6 @@ export default {
   WS_NET_RESUMED: 'ws_emitENetResumed',
   WS_BFX_TOKEN_AUTH_REQUIRED: 'ws_emitBfxUnamePwdAuthRequire',
   WS_CSV_GENERATION_COMPLETED: 'ws_emitCsvGenerationCompletedToOne',
+  WS_MAINTENANCE_TURNED_ON: 'emitMaintenanceTurnedOn',
+  WS_MAINTENANCE_TURNED_OFF: 'emitMaintenanceTurnedOff',
 }
