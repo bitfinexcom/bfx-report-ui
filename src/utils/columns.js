@@ -2,11 +2,10 @@ import React from 'react'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
 import _head from 'lodash/head'
-import _pick from 'lodash/pick'
 import _filter from 'lodash/filter'
 import _isEqual from 'lodash/isEqual'
-
 import { Cell } from '@blueprintjs/table'
+import { pick } from '@bitfinex/lib-js-util-base'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 
@@ -189,7 +188,7 @@ export const COLUMN_WIDTHS = window.innerWidth < 2560
   : COLUMN_WIDTHS_BIG_SCREENS
 
 export const pickColumnsWidth = columns => _map(columns,
-  column => _pick(column, ['id', 'width']))
+  column => pick(column, ['id', 'width']))
 
 export const getColumnWidth = (id, columns) => _head(_filter(columns,
   column => column.id === id))?.width ?? COLUMN_WIDTHS[id]

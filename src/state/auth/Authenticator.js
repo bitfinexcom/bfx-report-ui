@@ -1,5 +1,4 @@
-import _pick from 'lodash/pick'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, pick } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 
@@ -59,7 +58,7 @@ class Authenticator {
     const persistedData = {
       ...auth,
       isPersisted: true,
-      ..._pick(data, persistedParams),
+      ...pick(data, persistedParams),
     }
 
     // remove auth token after successful auth with apiKey and apiSecret
