@@ -1,5 +1,5 @@
-import _isEmpty from 'lodash/isEmpty'
 import _pick from 'lodash/pick'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 
@@ -34,10 +34,10 @@ class Authenticator {
   hasData = () => {
     const storedData = this.getStored()
     const storedKeys = Object.keys(storedData)
-    const isEmpty = _isEmpty(storedData)
+    const isDataEmpty = isEmpty(storedData)
     const hasSingleKey = storedKeys.length === 1 && storedKeys.includes('isPersisted')
 
-    return !isEmpty && !hasSingleKey
+    return !isDataEmpty && !hasSingleKey
   }
 
   persist = (data) => {

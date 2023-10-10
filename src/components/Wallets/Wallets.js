@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
-import _isEmpty from 'lodash/isEmpty'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import NoData from 'ui/NoData'
@@ -85,7 +85,7 @@ class Wallets extends PureComponent {
     const walletsData = (isFrameworkMode && exactBalance) ? walletsSnapshotEntries : entries
     const isLoading = (!dataReceived && pageLoading)
       || (exactBalance && !snapshotReceived && snapshotLoading)
-    const isNoData = _isEmpty(entries) || (exactBalance && _isEmpty(walletsSnapshotEntries))
+    const isNoData = isEmpty(entries) || (exactBalance && isEmpty(walletsSnapshotEntries))
 
     let showContent
     if (isLoading) {

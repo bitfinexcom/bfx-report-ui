@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _split from 'lodash/split'
 import _filter from 'lodash/filter'
-import _isEmpty from 'lodash/isEmpty'
 import _isEqual from 'lodash/isEqual'
 import _isString from 'lodash/isString'
 import _includes from 'lodash/includes'
 import { Classes, Dialog } from '@blueprintjs/core'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
 import config from 'config'
@@ -25,12 +25,12 @@ const formatAccountName = (email = '') => {
 
 const filterRestrictedUsers = (users) => _filter(
   users, user => !user?.isRestrictedToBeAddedToSubAccount
-  && _isEmpty(user?.subUsers),
+  && isEmpty(user?.subUsers),
 )
 
 const isUserHasSubAccounts = (users, masterAccount) => _filter(
   users, user => _isEqual(user?.email, masterAccount)
-  && !_isEmpty(user?.subUsers),
+  && !isEmpty(user?.subUsers),
 ).length > 0
 
 const isMasterAccountProtected = (users, masterAccount) => _filter(
@@ -78,7 +78,7 @@ class RegisterSubAccounts extends PureComponent {
 
   componentDidUpdate() {
     const { users } = this.props
-    if (_isEmpty(users)) {
+    if (isEmpty(users)) {
       this.clearMasterAccEmail()
     }
   }

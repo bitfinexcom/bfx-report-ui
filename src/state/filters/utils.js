@@ -1,5 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-import _isEmpty from 'lodash/isEmpty'
 import _reduce from 'lodash/reduce'
 import _get from 'lodash/get'
 import _set from 'lodash/set'
@@ -10,6 +9,7 @@ import _findKey from 'lodash/findKey'
 import _sortBy from 'lodash/sortBy'
 import _find from 'lodash/find'
 import _isNaN from 'lodash/isNaN'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import SECTION_COLUMNS, { TRANSFORMS } from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import FILTER_TYPES, { FILTER_QUERY_TYPES, FILTERS, FILTER_KEYS } from 'var/filterTypes'
@@ -55,7 +55,7 @@ const getValidFilters = filters => filters.filter((filter) => {
 export const getValidSortedFilters = filters => _sortBy(getValidFilters(filters), ['column', 'type', 'value'])
 
 export const calculateFilterQuery = (filters = [], section) => {
-  if (_isEmpty(filters) || !section) {
+  if (isEmpty(filters) || !section) {
     return {}
   }
 

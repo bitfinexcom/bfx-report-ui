@@ -1,6 +1,6 @@
 import { put, select, takeLatest } from 'redux-saga/effects'
 import { LOCATION_CHANGE, replace } from 'connected-react-router'
-import _isEmpty from 'lodash/isEmpty'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import { getTarget } from 'state/query/utils'
 import { encodeFilters } from 'state/filters/utils'
@@ -27,7 +27,7 @@ function* locationChange({ payload }) {
     }
   }
 
-  if (!_isEmpty(state) && state.isSkipped) {
+  if (!isEmpty(state) && state.isSkipped) {
     return
   }
 
@@ -45,7 +45,7 @@ function* locationChange({ payload }) {
   // return previously saved params on route change
   if (route !== lastRoute && !isFirstRendering) {
     const routeParams = yield select(getRouteParams, route)
-    if (_isEmpty(routeParams)) {
+    if (isEmpty(routeParams)) {
       const query = getQueryWithoutParams(Object.keys(FILTER_KEYS)) // remove filters of current section
       yield put(replace(`${pathname}${query}`, { isSkipped: true }))
       return

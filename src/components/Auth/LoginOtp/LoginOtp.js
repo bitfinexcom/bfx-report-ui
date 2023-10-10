@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
-import _isEmpty from 'lodash/isEmpty'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import InputKey from '../InputKey'
 
@@ -35,7 +35,7 @@ export const LoginOtp = ({
         <Button
           name='auth'
           intent={Intent.SUCCESS}
-          disabled={_isEmpty(otp)}
+          disabled={isEmpty(otp)}
           className='bitfinex-auth-check'
           onClick={handleOneTimePassword}
         >

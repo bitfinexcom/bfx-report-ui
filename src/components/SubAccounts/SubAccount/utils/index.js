@@ -1,6 +1,6 @@
 import _filter from 'lodash/filter'
-import _isEmpty from 'lodash/isEmpty'
 import _isEqual from 'lodash/isEqual'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 export const USE_API_KEY = 'subaccounts.use_api_key'
 
@@ -33,7 +33,7 @@ export const MAX_ACCOUNTS = 15
 
 export const filterRestrictedUsers = (users) => _filter(
   users, user => !user?.isRestrictedToBeAddedToSubAccount
-  && _isEmpty(user?.subUsers),
+  && isEmpty(user?.subUsers),
 )
 
 export default {

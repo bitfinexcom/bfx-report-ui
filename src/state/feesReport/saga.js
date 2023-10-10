@@ -4,7 +4,7 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
-import _isEmpty from 'lodash/isEmpty'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import { makeFetchCall } from 'state/utils'
 import { toggleErrorDialog } from 'state/ui/actions'
@@ -30,7 +30,7 @@ export const getFeesReport = ({
     timeframe,
     isTradingFees,
     isFundingFees,
-    symbol: !_isEmpty(targetSymbols)
+    symbol: !isEmpty(targetSymbols)
       ? mapRequestSymbols(targetSymbols)
       : undefined,
   }

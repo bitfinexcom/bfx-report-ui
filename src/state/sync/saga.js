@@ -6,8 +6,8 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import _isEmpty from 'lodash/isEmpty'
 import _includes from 'lodash/includes'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import { makeFetchCall } from 'state/utils'
@@ -135,7 +135,7 @@ function* forceQueryFromDb() {
 
 function* syncLogout() {
   yield delay(300)
-  const isLoggedIn = !_isEmpty(yield select(selectAuth))
+  const isLoggedIn = !isEmpty(yield select(selectAuth))
   if (isLoggedIn) {
     const { result, error } = yield call(logout)
     if (result) {
