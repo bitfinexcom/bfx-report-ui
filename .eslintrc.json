@@ -22,7 +22,6 @@
     "react/state-in-constructor": 0,
     "import/no-cycle": 0,
     "import/prefer-default-export": 0,
-    "import/no-extraneous-dependencies": 0,
     "jsx-a11y/control-has-associated-label": 0,
     "jsx-a11y/anchor-is-valid": 0
   },
