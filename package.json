@@ -16,6 +16,7 @@
   },
   "homepage": "/",
   "dependencies": {
+    "@bitfinex/lib-js-util-base": "github:bitfinexcom/lib-js-util-base",
     "@blueprintjs/core": "^3.15.0",
     "@blueprintjs/datetime": "^3.15.2",
     "@blueprintjs/icons": "^3.7.0",
@@ -29,7 +30,6 @@
     "i18next": "15.0.7",
     "i18next-browser-languagedetector": "3.0.1",
     "i18next-http-backend": "1.4.0",
-    "lib-js-util-base": "git+https://github.com/bitfinexcom/lib-js-util-base.git",
     "lightweight-charts": "^1.2.1",
     "lodash": "4.17.21",
     "memoize-one": "^5.0.2",
