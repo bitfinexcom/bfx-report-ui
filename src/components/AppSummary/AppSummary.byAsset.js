@@ -107,7 +107,7 @@ const AppSummaryByAsset = ({
   })
 
   return (
-    <div className='app-summary-item'>
+    <div className='app-summary-item full-width-item'>
       <div className='app-summary-item-title'>
         {t('summary.by_asset.title')}
       </div>
