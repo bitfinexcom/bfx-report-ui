@@ -637,7 +637,13 @@
     },
     "by_asset":{
       "title": "Summary by Asset",
-      "sub_title":  "For the last 30 days"
+      "sub_title":  "For the last 30 days",
+      "currency": "Currency",
+      "amount": "Amount",
+      "balance": "Balance",
+      "balance_change": "Balance Change",
+      "profits": "Profits",
+      "volume": "Volume"
     }
   },
   "symbols": {
