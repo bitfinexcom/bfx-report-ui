@@ -21,6 +21,7 @@ const initialState = {
   isFetched: false,
   pairs: [], // pair
   fundingCoins: [],
+  tetherNames: {},
 }
 
 export function symbolsReducer(state = initialState, action) {
