@@ -34,6 +34,10 @@ class Movements extends PureComponent {
       status: PropTypes.bool,
       transactionId: PropTypes.bool,
     }),
+    tetherNames: PropTypes.shape({
+      TETHERUSX: PropTypes.string,
+      TETHERUSE: PropTypes.string,
+    }),
     columnsWidth: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       width: PropTypes.number.isRequired,
@@ -62,6 +66,7 @@ class Movements extends PureComponent {
   static defaultProps = {
     columns: {},
     entries: [],
+    tetherNames: {},
     columnsWidth: [],
     existingCoins: [],
     targetSymbols: [],
@@ -102,6 +107,7 @@ class Movements extends PureComponent {
       timeOffset,
       getFullTime,
       pageLoading,
+      tetherNames,
       columnsWidth,
       dataReceived,
       existingCoins,
@@ -111,6 +117,7 @@ class Movements extends PureComponent {
     const tableColumns = getColumns({
       t,
       timeOffset,
+      tetherNames,
       getFullTime,
       columnsWidth,
       filteredData: entries,
