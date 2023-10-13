@@ -10,9 +10,7 @@ const prepareCurrency = (curr, currName, tetherNames) => {
   let preparedCurrency
   if (curr === 'USDt') {
     preparedCurrency = tetherNames?.[currName] ?? curr
-  } else {
-    preparedCurrency = curr
-  }
+  } else preparedCurrency = curr
   return preparedCurrency
 }
 
