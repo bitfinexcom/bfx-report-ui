@@ -13,6 +13,7 @@ import {
   clearTargetSymbols,
 } from 'state/movements/actions'
 import { jumpPage } from 'state/pagination/actions'
+import { getTetherNames } from 'state/symbols/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
@@ -32,6 +33,7 @@ const mapStateToProps = state => ({
   getFullTime: getFullTime(state),
   timeOffset: getTimeOffset(state),
   pageLoading: getPageLoading(state),
+  tetherNames: getTetherNames(state),
   dataReceived: getDataReceived(state),
   existingCoins: getExistingCoins(state),
   targetSymbols: getTargetSymbols(state),
