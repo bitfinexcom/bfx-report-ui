@@ -9,6 +9,7 @@ import { getColumnWidth } from 'utils/columns'
 const getColumns = ({
   t,
   timeOffset,
+  tetherNames,
   getFullTime,
   filteredData,
   columnsWidth,
@@ -72,10 +73,21 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
-      const { currency } = filteredData[rowIndex]
+      const { currency, currencyName } = filteredData[rowIndex]
+      let preparedCurrency
+      if (currency === 'USDt') {
+        preparedCurrency = tetherNames?.[currencyName] ?? currency
+      } else {
+        preparedCurrency = currency
+      }
+
+      console.log('+++TN', tetherNames)
+      console.log('+++preparedCurrency', preparedCurrency)
+      console.log('+++currency', currency)
+      console.log('+++currencyName', currencyName)
       return (
-        <Cell tooltip={currency}>
-          {currency}
+        <Cell tooltip={preparedCurrency}>
+          {preparedCurrency}
         </Cell>
       )
     },
