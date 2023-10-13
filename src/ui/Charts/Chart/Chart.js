@@ -15,7 +15,7 @@ import {
 import _isEmpty from 'lodash/isEmpty'
 
 import SumUpTooltip from './Chart.tooltip'
-import { formatChartData, getSumUpRangeValue } from '../Charts.helpers'
+import { formatChartData, formatChartValue, getSumUpRangeValue } from '../Charts.helpers'
 import { propTypes, defaultProps } from './Chart.props'
 
 const COLORS = [
@@ -153,7 +153,7 @@ class Chart extends React.PureComponent {
             />
             <Tooltip
               isAnimationActive={false}
-              formatter={formatChartData}
+              formatter={formatChartValue}
               content={showSum && (
                 <SumUpTooltip
                   t={t}

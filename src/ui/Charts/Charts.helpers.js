@@ -148,7 +148,7 @@ export const getSumUpRangeValue = (data, start, end) => {
   ).toFixed(2))
 }
 
-export const getFormattedChartValue = (chartData) => formatChartValue(
+export const getFormattedChartLastValue = (chartData) => formatChartValue(
   _last(chartData)?.[CURRENCY_USD] ?? null,
 )
 
