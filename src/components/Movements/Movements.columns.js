@@ -1,19 +1,11 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
-import _replace from 'lodash/replace'
 
-import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
-import Explorer from 'ui/Explorer'
 import config from 'config'
+import Explorer from 'ui/Explorer'
 import { getColumnWidth } from 'utils/columns'
-
-const prepareCurrency = (curr, currName, tetherNames) => {
-  let preparedCurrency
-  if (curr === 'USDt') {
-    preparedCurrency = tetherNames?.[_replace(currName, 'TETHER', '')] ?? curr
-  } else preparedCurrency = curr
-  return preparedCurrency
-}
+import { prepareCurrency } from 'state/symbols/utils'
+import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 
 const getColumns = ({
   t,
