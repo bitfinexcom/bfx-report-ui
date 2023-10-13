@@ -133,8 +133,8 @@ export const mergeSimilarTrades = (trades) => _values(
   }, {}),
 )
 
-// Formatting: 1000000 ---> 1,000,000
-export const formatChartData = value => new Intl.NumberFormat('en').format(value)
+// Formatting: 1000 ---> 1K
+export const formatChartData = value => new Intl.NumberFormat('en', { notation: 'compact' }).format(value)
 
 export const getSumUpRangeValue = (data, start, end) => {
   const rangeStart = _findIndex(data, entry => entry?.name === start)
