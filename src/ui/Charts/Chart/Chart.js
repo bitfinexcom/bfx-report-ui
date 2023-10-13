@@ -143,11 +143,11 @@ class Chart extends React.PureComponent {
             </defs>
             <XAxis
               dataKey='name'
-              stroke='#9e9494'
+              stroke='#808B93'
             />
             <YAxis
               width={90}
-              stroke='#9e9494'
+              stroke='#808B93'
               orientation='right'
               tickFormatter={formatChartData}
             />
