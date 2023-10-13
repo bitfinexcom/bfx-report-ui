@@ -133,8 +133,11 @@ export const mergeSimilarTrades = (trades) => _values(
   }, {}),
 )
 
-// Formatting: 1000 ---> 1K
+// Formatting: 10000 ---> 10K
 export const formatChartData = value => new Intl.NumberFormat('en', { notation: 'compact' }).format(value)
+
+// Formatting: 10000 ---> 10,000
+export const formatChartValue = value => new Intl.NumberFormat('en').format(value)
 
 export const getSumUpRangeValue = (data, start, end) => {
   const rangeStart = _findIndex(data, entry => entry?.name === start)
@@ -145,7 +148,7 @@ export const getSumUpRangeValue = (data, start, end) => {
   ).toFixed(2))
 }
 
-export const getFormattedChartLastValue = (chartData) => formatChartData(
+export const getFormattedChartValue = (chartData) => formatChartValue(
   _last(chartData)?.[CURRENCY_USD] ?? null,
 )
 
