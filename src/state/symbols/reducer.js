@@ -51,7 +51,7 @@ export function symbolsReducer(state = initialState, action) {
         let { symbol } = currency
 
         if (symbol === 'USDt' || _includes(symbol, 'USDT')) {
-          tetherNames[`TETHER${id}`] = name
+          tetherNames[id] = name
         }
 
         if (id !== 'LNX' && !isInPair) {
