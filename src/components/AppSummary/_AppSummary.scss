@@ -108,6 +108,10 @@
   width: 50%;
   max-width: 500px;
 
+  .app-summary-item-sub-title {
+    margin-bottom: 10px;
+  }
+
   .chart-wrapper {
     position: relative;
 
@@ -135,7 +139,7 @@
   }
 
   .line-chart {
-    width:110%;
+    width:115%;
   }
 
   .no-data {
