@@ -6,6 +6,16 @@ import Explorer from 'ui/Explorer'
 import config from 'config'
 import { getColumnWidth } from 'utils/columns'
 
+const prepareCurrency = (curr, currName, tetherNames) => {
+  let preparedCurrency
+  if (curr === 'USDt') {
+    preparedCurrency = tetherNames?.[currName] ?? curr
+  } else {
+    preparedCurrency = curr
+  }
+  return preparedCurrency
+}
+
 const getColumns = ({
   t,
   timeOffset,
@@ -74,17 +84,7 @@ const getColumns = ({
     width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
       const { currency, currencyName } = filteredData[rowIndex]
-      let preparedCurrency
-      if (currency === 'USDt') {
-        preparedCurrency = tetherNames?.[currencyName] ?? currency
-      } else {
-        preparedCurrency = currency
-      }
-
-      console.log('+++TN', tetherNames)
-      console.log('+++preparedCurrency', preparedCurrency)
-      console.log('+++currency', currency)
-      console.log('+++currencyName', currencyName)
+      const preparedCurrency = prepareCurrency(currency, currencyName, tetherNames)
       return (
         <Cell tooltip={preparedCurrency}>
           {preparedCurrency}
