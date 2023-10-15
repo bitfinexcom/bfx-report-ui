@@ -1,10 +1,10 @@
 import _size from 'lodash/size'
 import _filter from 'lodash/filter'
-import _isEmpty from 'lodash/isEmpty'
 import _toString from 'lodash/toString'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 const getActiveFilters = (filters) => _filter(
-  filters, filter => !_isEmpty(_toString(filter?.value ?? '')),
+  filters, filter => !isEmpty(_toString(filter?.value ?? '')),
 )
 
 export const getFiltersClassNames = (filters) => {

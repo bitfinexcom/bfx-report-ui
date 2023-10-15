@@ -12,7 +12,7 @@ import {
   ReferenceArea,
   ResponsiveContainer,
 } from 'recharts'
-import _isEmpty from 'lodash/isEmpty'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import SumUpTooltip from './Chart.tooltip'
 import { formatChartData, getSumUpRangeValue } from '../Charts.helpers'
@@ -121,7 +121,7 @@ class Chart extends React.PureComponent {
     const sumUpValue = getSumUpRangeValue(data, refAreaStart, refAreaEnd)
     const shouldShowReferenceArea = isSumUpEnabled && refAreaStart && refAreaEnd
 
-    if (_isEmpty(data)) {
+    if (isEmpty(data)) {
       return null
     }
 
