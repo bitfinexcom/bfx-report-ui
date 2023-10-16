@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
@@ -13,6 +13,21 @@ export const LoginOtp = ({
   handleOneTimePassword,
 }) => {
   const { t } = useTranslation()
+
+  useEffect(() => {
+    const keyDownHandler = (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        handleOneTimePassword()
+      }
+    }
+    document.addEventListener('keydown', keyDownHandler)
+
+    return () => {
+      document.removeEventListener('keydown', keyDownHandler)
+    }
+  }, [])
+
   return (
     <div className='sign-in--otp'>
       <InputKey
