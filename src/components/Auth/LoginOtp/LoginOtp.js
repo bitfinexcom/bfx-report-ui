@@ -16,7 +16,7 @@ export const LoginOtp = ({
 
   useEffect(() => {
     const keyDownHandler = (event) => {
-      if (event.key === 'Enter') {
+      if (event?.key === 'Enter') {
         event.preventDefault()
         handleOneTimePassword()
       }
