@@ -9,6 +9,7 @@
 @import "components/Auth/_Auth.scss";
 @import "components/AccountSummary/_AccountSummary.scss";
 @import "components/AppDownload/_AppDownload.scss";
+@import "components/AppSummary/_AppSummary.scss";
 @import "components/Candles/_Candles.scss";
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
 @import "components/ErrorDialog/_ErrorDialog.scss";
@@ -63,6 +64,10 @@ html {
   // firefox
   scrollbar-width: thin;
   scrollbar-color: var(--tableScrollThumbBg) var(--tableScrollBg);
+}
+
+#webpack-dev-server-client-overlay {
+  display: none !important;
 }
 
 .app {
