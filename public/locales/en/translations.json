@@ -643,7 +643,8 @@
       "balance": "Balance",
       "balance_change": "Balance Change",
       "profits": "Profits",
-      "volume": "Volume"
+      "volume": "Volume",
+      "total": "Total"
     }
   },
   "symbols": {
