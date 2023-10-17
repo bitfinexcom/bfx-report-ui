@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
 import { formatFee } from 'ui/utils'
@@ -10,9 +11,7 @@ import {
 } from 'state/summaryByAsset/selectors'
 import CollapsedTable from 'ui/CollapsedTable'
 
-const prepareData = (entries, total, t) => (
-  [...entries, { currency: t('summary.by_asset.total'), ...total }]
-)
+import { prepareSummaryByAssetData } from './AppSummary.helpers'
 
 const getColumns = ({
   makerFee,
@@ -92,13 +91,13 @@ const getColumns = ({
 ]
 
 const AppSummaryByAsset = ({
-  t,
   data,
   isTurkishSite,
 }) => {
+  const { t } = useTranslation()
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
-  const preparedData = prepareData(entries, total, t)
+  const preparedData = prepareSummaryByAssetData(entries, total, t)
 
   const {
     makerFee = 0,
@@ -144,7 +143,6 @@ AppSummaryByAsset.propTypes = {
     takerFeeToFiat: PropTypes.number,
     takerFeeToStable: PropTypes.number,
   }).isRequired,
-  t: PropTypes.func.isRequired,
   isTurkishSite: PropTypes.bool.isRequired,
 }
 
