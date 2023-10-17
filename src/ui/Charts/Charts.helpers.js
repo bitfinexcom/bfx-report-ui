@@ -1,6 +1,11 @@
+import React from 'react'
 import moment from 'moment-timezone'
+import _last from 'lodash/last'
+import _head from 'lodash/head'
 import _sumBy from 'lodash/sumBy'
 import _slice from 'lodash/slice'
+import _round from 'lodash/round'
+import _isNaN from 'lodash/isNaN'
 import _reduce from 'lodash/reduce'
 import _values from 'lodash/values'
 import _findIndex from 'lodash/findIndex'
@@ -128,8 +133,11 @@ export const mergeSimilarTrades = (trades) => _values(
   }, {}),
 )
 
-// Formatting: 1000000 ---> 1,000,000
-export const formatChartData = value => new Intl.NumberFormat('en').format(value)
+// Formatting: 10000 ---> 10K
+export const formatChartData = value => new Intl.NumberFormat('en', { notation: 'compact' }).format(value)
+
+// Formatting: 10000 ---> 10,000
+export const formatChartValue = value => new Intl.NumberFormat('en').format(value)
 
 export const getSumUpRangeValue = (data, start, end) => {
   const rangeStart = _findIndex(data, entry => entry?.name === start)
@@ -138,6 +146,26 @@ export const getSumUpRangeValue = (data, start, end) => {
   return formatChartData(_sumBy(
     _slice(data, dataRange[0], dataRange[1] + 1), 'USD',
   ).toFixed(2))
+}
+
+export const getFormattedChartLastValue = (chartData) => formatChartValue(
+  _last(chartData)?.[CURRENCY_USD] ?? null,
+)
+
+export const getChartValueChangePerc = (chartData) => {
+  const firstChartValue = _head(chartData)?.[CURRENCY_USD]
+  const lastChartValue = _last(chartData)?.[CURRENCY_USD]
+  return _round(((lastChartValue - firstChartValue) / lastChartValue) * 100, 2)
+}
+
+export const formatPercent = (perc) => `${perc}%`
+
+export const getFormattedPercentChange = (chartData) => {
+  let val = getChartValueChangePerc(chartData)
+  if (_isNaN(val)) val = 0
+  if (val < 0) return <span className='red-text'>{`${formatPercent(val)}`}</span>
+  if (val > 0) return <span className='green-text'>{`+${formatPercent(val)}`}</span>
+  return <span>{formatPercent(val)}</span>
 }
 
 export default parseChartData

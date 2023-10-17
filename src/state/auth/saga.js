@@ -10,8 +10,8 @@ import {
 import { delay } from 'redux-saga'
 import _last from 'lodash/last'
 import _isArray from 'lodash/isArray'
-import _isEmpty from 'lodash/isEmpty'
 import _isEqual from 'lodash/isEqual'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
@@ -342,7 +342,7 @@ function* checkAuth() {
     }
 
     const auth = yield select(selectAuth)
-    if (_isEmpty(auth)) {
+    if (isEmpty(auth)) {
       return
     }
 

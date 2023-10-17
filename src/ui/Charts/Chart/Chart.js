@@ -12,10 +12,10 @@ import {
   ReferenceArea,
   ResponsiveContainer,
 } from 'recharts'
-import _isEmpty from 'lodash/isEmpty'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import SumUpTooltip from './Chart.tooltip'
-import { formatChartData, getSumUpRangeValue } from '../Charts.helpers'
+import { formatChartData, formatChartValue, getSumUpRangeValue } from '../Charts.helpers'
 import { propTypes, defaultProps } from './Chart.props'
 
 const COLORS = [
@@ -110,7 +110,9 @@ class Chart extends React.PureComponent {
     const {
       t,
       data,
+      aspect,
       className,
+      showLegend,
       isSumUpEnabled,
     } = this.props
     const {
@@ -121,7 +123,7 @@ class Chart extends React.PureComponent {
     const sumUpValue = getSumUpRangeValue(data, refAreaStart, refAreaEnd)
     const shouldShowReferenceArea = isSumUpEnabled && refAreaStart && refAreaEnd
 
-    if (_isEmpty(data)) {
+    if (isEmpty(data)) {
       return null
     }
 
@@ -129,7 +131,7 @@ class Chart extends React.PureComponent {
 
     return (
       <div className={classes}>
-        <ResponsiveContainer aspect={4.0 / 1.8}>
+        <ResponsiveContainer aspect={aspect}>
           <AreaChart
             data={data}
             onMouseUp={this.onMouseUp}
@@ -141,16 +143,17 @@ class Chart extends React.PureComponent {
             </defs>
             <XAxis
               dataKey='name'
-              stroke='#9e9494'
+              stroke='#808B93'
             />
             <YAxis
               width={90}
-              stroke='#9e9494'
+              stroke='#808B93'
+              orientation='right'
               tickFormatter={formatChartData}
             />
             <Tooltip
               isAnimationActive={false}
-              formatter={formatChartData}
+              formatter={formatChartValue}
               content={showSum && (
                 <SumUpTooltip
                   t={t}
@@ -162,12 +165,14 @@ class Chart extends React.PureComponent {
               stroke='#57636b'
               strokeDasharray='3 3'
             />
-            <Legend
-              iconType='rect'
-              verticalAlign='top'
-              onClick={this.onLegendClick}
-              wrapperStyle={{ paddingBottom: 15 }}
-            />
+            {showLegend && (
+              <Legend
+                iconType='rect'
+                verticalAlign='top'
+                onClick={this.onLegendClick}
+                wrapperStyle={{ paddingBottom: 15 }}
+              />
+            )}
             {this.getAreas()}
             {shouldShowReferenceArea ? (
               <ReferenceArea

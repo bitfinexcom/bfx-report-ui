@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Intent } from '@blueprintjs/core'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 import _get from 'lodash/get'
 import _map from 'lodash/map'
 import _isEqual from 'lodash/isEqual'
-import _isEmpty from 'lodash/isEmpty'
 import _differenceBy from 'lodash/differenceBy'
 
 import Loading from 'ui/Loading'
@@ -156,10 +156,10 @@ class SubAccount extends PureComponent {
     const subAccountData = users.find((user) => user.email === masterAccountEmail && user.isSubAccount)
     const subUsers = _get(subAccountData, 'subUsers', [])
     const hasFilledAccounts = getFilledAccounts(accounts, t).length > 0
-      || (hasValidUsername(localUsername) && !_isEmpty(subUsers))
+      || (hasValidUsername(localUsername) && !isEmpty(subUsers))
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)
     const preparedUsers = _differenceBy(allowedUsers, subUsers, 'email')
-    const isConfirmDisabled = _isEmpty(masterAccountEmail) || (!hasFilledAccounts && _isEmpty(subUsersToRemove))
+    const isConfirmDisabled = isEmpty(masterAccountEmail) || (!hasFilledAccounts && isEmpty(subUsersToRemove))
 
     let showContent
     if (isSubAccountsLoading) {
@@ -167,7 +167,7 @@ class SubAccount extends PureComponent {
     } else {
       showContent = (
         <>
-          {!_isEmpty(subUsers) && (
+          {!isEmpty(subUsers) && (
             <SubUsersList
               subUsers={subUsers}
               email={masterAccountEmail}
@@ -193,9 +193,9 @@ class SubAccount extends PureComponent {
                   intent={Intent.SUCCESS}
                   disabled={isConfirmDisabled}
                   className='sub-account-confirm-btn'
-                  onClick={_isEmpty(subUsers) ? this.createSubAccount : this.updateSubAccount}
+                  onClick={isEmpty(subUsers) ? this.createSubAccount : this.updateSubAccount}
                 >
-                  {_isEmpty(subUsers)
+                  {isEmpty(subUsers)
                     ? t('subaccounts.add_accounts')
                     : t('subaccounts.update_accounts')}
                 </Button>

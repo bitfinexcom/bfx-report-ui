@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import _get from 'lodash/get'
-import _isEmpty from 'lodash/isEmpty'
 import { Card, Elevation } from '@blueprintjs/core'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
@@ -74,7 +74,7 @@ class AccountSummary extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
-    } else if (_isEmpty(data)) {
+    } else if (isEmpty(data)) {
       showContent = <NoData refresh={refresh} />
     } else {
       showContent = (

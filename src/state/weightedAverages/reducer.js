@@ -1,6 +1,6 @@
 import _map from 'lodash/map'
-import _isNil from 'lodash/isNil'
 import _sortBy from 'lodash/sortBy'
+import { isNil } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import queryTypes from 'state/query/constants'
@@ -28,7 +28,7 @@ export function weightedAveragesReducer(state = initialState, action) {
     case types.FETCH_WEIGHTED_AVERAGES:
       return fetch(state)
     case types.UPDATE_WEIGHTED_AVERAGES: {
-      if (_isNil(payload?.data)) {
+      if (isNil(payload?.data)) {
         return {
           ...state,
           dataReceived: true,
