@@ -10,8 +10,8 @@ import {
 } from 'state/summaryByAsset/selectors'
 import CollapsedTable from 'ui/CollapsedTable'
 
-const prepareData = (entries, total) => (
-  [...entries, { currency: 'Total', ...total }]
+const prepareData = (entries, total, t) => (
+  [...entries, { currency: t('summary.by_asset.total'), ...total }]
 )
 
 const getColumns = ({
@@ -98,7 +98,7 @@ const AppSummaryByAsset = ({
 }) => {
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
-  const preparedData = prepareData(entries, total)
+  const preparedData = prepareData(entries, total, t)
 
   const {
     makerFee = 0,
