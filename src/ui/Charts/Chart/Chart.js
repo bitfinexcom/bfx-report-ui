@@ -154,6 +154,7 @@ class Chart extends React.PureComponent {
             <Tooltip
               isAnimationActive={false}
               formatter={formatChartValue}
+              wrapperStyle={{ zIndex: 2 }}
               content={showSum && (
                 <SumUpTooltip
                   t={t}
