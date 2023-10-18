@@ -23,7 +23,7 @@ const getColumns = ({
   derivMakerRebate,
 }) => [
   {
-    id: 'makerFee',
+    id: 'currency',
     name: 'summary.by_asset.currency',
     width: 100,
     renderer: () => (
@@ -34,7 +34,7 @@ const getColumns = ({
     ),
   },
   {
-    id: 'takerFeeCrypto',
+    id: 'balance',
     name: 'summary.by_asset.amount',
     width: 140,
     renderer: () => (
@@ -45,7 +45,7 @@ const getColumns = ({
     ),
   },
   {
-    id: 'takerFeeFiat',
+    id: 'balanceUsd',
     name: 'summary.by_asset.balance',
     width: 140,
     renderer: () => (
@@ -56,7 +56,7 @@ const getColumns = ({
     ),
   },
   {
-    id: 'takerFeeStable',
+    id: 'valueChange30dUsd',
     name: 'summary.by_asset.balance_change',
     width: 140,
     renderer: () => (
@@ -67,7 +67,7 @@ const getColumns = ({
     ),
   },
   ...(!isTurkishSite ? [{
-    id: 'derivMakerRebate',
+    id: 'result30dUsd',
     name: 'summary.by_asset.profits',
     width: 140,
     renderer: () => (
@@ -78,7 +78,7 @@ const getColumns = ({
     ),
   },
   {
-    id: 'derivTakerFee',
+    id: 'volume30dUsd',
     name: 'summary.by_asset.volume',
     width: 140,
     renderer: () => (
