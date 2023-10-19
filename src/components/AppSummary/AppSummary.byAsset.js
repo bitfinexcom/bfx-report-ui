@@ -31,6 +31,7 @@ const getColumns = ({
         </Cell>
       )
     },
+    copyText: rowIndex => preparedData[rowIndex]?.currency,
   },
   {
     id: 'balance',
@@ -44,6 +45,7 @@ const getColumns = ({
         </Cell>
       )
     },
+    copyText: rowIndex => preparedData[rowIndex]?.balance,
   },
   {
     id: 'balanceUsd',
@@ -57,6 +59,7 @@ const getColumns = ({
         </Cell>
       )
     },
+    copyText: rowIndex => preparedData[rowIndex]?.balanceUsd,
   },
   {
     id: 'valueChange30dUsd',
@@ -71,6 +74,7 @@ const getColumns = ({
         </Cell>
       )
     },
+    copyText: rowIndex => preparedData[rowIndex]?.valueChange30dUsd,
   },
   {
     id: 'result30dUsd',
@@ -85,6 +89,7 @@ const getColumns = ({
         </Cell>
       )
     },
+    copyText: rowIndex => preparedData[rowIndex]?.result30dUsd,
   },
   {
     id: 'volume30dUsd',
@@ -98,6 +103,7 @@ const getColumns = ({
         </Cell>
       )
     },
+    copyText: rowIndex => preparedData[rowIndex]?.volume30dUsd,
   },
 ]
 
