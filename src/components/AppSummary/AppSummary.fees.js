@@ -30,7 +30,7 @@ const AppSummaryFees = ({
   })
 
   return (
-    <div className='app-summary-item'>
+    <div className='app-summary-item account-fees'>
       <div className='app-summary-item-title'>
         {t('summary.fees.title')}
       </div>
