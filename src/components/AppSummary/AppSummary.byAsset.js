@@ -1,19 +1,15 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
-// import { formatFee } from 'ui/utils'
 import {
   getSummaryByAssetTotal,
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
-// import CollapsedTable from 'ui/CollapsedTable'
 import DataTable from 'ui/DataTable'
 import { getTooltipContent } from 'utils/columns'
 
-import { getFeesColumns } from './AppSummary.columns'
 import { prepareSummaryByAssetData } from './AppSummary.helpers'
 
 const getColumns = ({
@@ -108,10 +104,7 @@ const getColumns = ({
   },
 ]
 
-const AppSummaryByAsset = ({
-  data,
-  isTurkishSite,
-}) => {
+const AppSummaryByAsset = () => {
   const { t } = useTranslation()
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
@@ -119,27 +112,7 @@ const AppSummaryByAsset = ({
 
   console.log('++preparedData', preparedData)
 
-  const {
-    makerFee = 0,
-    derivTakerFee = 0,
-    takerFeeToFiat = 0,
-    takerFeeToStable = 0,
-    takerFeeToCrypto = 0,
-    derivMakerRebate = 0,
-  } = data
-
-  const columns = getFeesColumns({
-    makerFee,
-    isTurkishSite,
-    derivTakerFee,
-    takerFeeToFiat,
-    takerFeeToStable,
-    takerFeeToCrypto,
-    derivMakerRebate,
-  })
-
   const assetColumns = getColumns({ preparedData, t })
-  console.log('+++assetColumns', assetColumns)
 
   return (
     <div className='app-summary-item full-width-item'>
@@ -149,10 +122,6 @@ const AppSummaryByAsset = ({
       <div className='app-summary-item-sub-title'>
         {t('summary.by_asset.sub_title')}
       </div>
-      {/* <CollapsedTable
-        tableColumns={assetColumns}
-        numRows={preparedData.length}
-      /> */}
       <DataTable
         tableColumns={assetColumns}
         numRows={preparedData.length}
@@ -161,16 +130,4 @@ const AppSummaryByAsset = ({
   )
 }
 
-AppSummaryByAsset.propTypes = {
-  data: PropTypes.shape({
-    derivMakerRebate: PropTypes.number,
-    derivTakerFee: PropTypes.number,
-    makerFee: PropTypes.number,
-    takerFeeToCrypto: PropTypes.number,
-    takerFeeToFiat: PropTypes.number,
-    takerFeeToStable: PropTypes.number,
-  }).isRequired,
-  isTurkishSite: PropTypes.bool.isRequired,
-}
-
-export default memo(AppSummaryByAsset)
+export default AppSummaryByAsset
