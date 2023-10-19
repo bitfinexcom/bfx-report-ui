@@ -20,7 +20,7 @@ const getColumns = ({
     id: 'currency',
     className: 'align-left',
     name: 'summary.by_asset.currency',
-    width: 100,
+    width: 110,
     renderer: (rowIndex) => {
       const { currency } = preparedData[rowIndex]
       return (
@@ -34,7 +34,7 @@ const getColumns = ({
   {
     id: 'balance',
     name: 'summary.by_asset.amount',
-    width: 140,
+    width: 178,
     renderer: (rowIndex) => {
       const { balance = null } = preparedData[rowIndex]
       return (
@@ -48,7 +48,7 @@ const getColumns = ({
   {
     id: 'balanceUsd',
     name: 'summary.by_asset.balance',
-    width: 140,
+    width: 178,
     renderer: (rowIndex) => {
       const { balanceUsd } = preparedData[rowIndex]
       return (
@@ -62,7 +62,7 @@ const getColumns = ({
   {
     id: 'valueChange30dUsd',
     name: 'summary.by_asset.balance_change',
-    width: 140,
+    width: 178,
     renderer: (rowIndex) => {
       const { valueChange30dUsd, valueChange30dPerc } = preparedData[rowIndex]
       return (
@@ -77,7 +77,7 @@ const getColumns = ({
   {
     id: 'result30dUsd',
     name: 'summary.by_asset.profits',
-    width: 140,
+    width: 178,
     renderer: (rowIndex) => {
       const { result30dUsd, result30dPerc } = preparedData[rowIndex]
       return (
@@ -92,7 +92,7 @@ const getColumns = ({
   {
     id: 'volume30dUsd',
     name: 'summary.by_asset.volume',
-    width: 140,
+    width: 178,
     renderer: (rowIndex) => {
       const { volume30dUsd } = preparedData[rowIndex]
       return (
@@ -110,8 +110,6 @@ const AppSummaryByAsset = () => {
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
   const preparedData = prepareSummaryByAssetData(entries, total, t)
-
-  console.log('++preparedData', preparedData)
 
   const assetColumns = getColumns({ preparedData, t })
 
