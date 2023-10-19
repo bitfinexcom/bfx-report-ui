@@ -18,6 +18,7 @@ const getColumns = ({
 }) => [
   {
     id: 'currency',
+    className: 'align-left',
     name: 'summary.by_asset.currency',
     width: 100,
     renderer: (rowIndex) => {
