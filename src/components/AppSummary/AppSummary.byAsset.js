@@ -4,90 +4,101 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Cell } from '@blueprintjs/table'
 
-import { formatFee } from 'ui/utils'
+// import { formatFee } from 'ui/utils'
 import {
   getSummaryByAssetTotal,
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
 import CollapsedTable from 'ui/CollapsedTable'
+import { getTooltipContent } from 'utils/columns'
 
+import { getFeesColumns } from './AppSummary.columns'
 import { prepareSummaryByAssetData } from './AppSummary.helpers'
 
 const getColumns = ({
-  makerFee,
-  isTurkishSite,
-  derivTakerFee,
-  takerFeeToFiat,
-  takerFeeToStable,
-  takerFeeToCrypto,
-  derivMakerRebate,
+  t,
+  preparedData,
 }) => [
   {
     id: 'currency',
     name: 'summary.by_asset.currency',
     width: 100,
-    renderer: () => (
-      <Cell>
-        {formatFee(makerFee)}
-        %
-      </Cell>
-    ),
+    renderer: (rowIndex) => {
+      const { currency } = preparedData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(currency, t)}>
+          {currency}
+        </Cell>
+      )
+    },
   },
   {
     id: 'balance',
     name: 'summary.by_asset.amount',
     width: 140,
-    renderer: () => (
-      <Cell>
-        {formatFee(takerFeeToCrypto)}
-        %
-      </Cell>
-    ),
+    renderer: (rowIndex) => {
+      const { balance = null } = preparedData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(balance, t)}>
+          {balance}
+        </Cell>
+      )
+    },
   },
   {
     id: 'balanceUsd',
     name: 'summary.by_asset.balance',
     width: 140,
-    renderer: () => (
-      <Cell>
-        {formatFee(takerFeeToFiat)}
-        %
-      </Cell>
-    ),
+    renderer: (rowIndex) => {
+      const { balanceUsd } = preparedData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(balanceUsd, t)}>
+          {balanceUsd}
+        </Cell>
+      )
+    },
   },
   {
     id: 'valueChange30dUsd',
     name: 'summary.by_asset.balance_change',
     width: 140,
-    renderer: () => (
-      <Cell>
-        {formatFee(takerFeeToStable)}
-        %
-      </Cell>
-    ),
+    renderer: (rowIndex) => {
+      const { valueChange30dUsd, valueChange30dPerc } = preparedData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(valueChange30dUsd, t)}>
+          {valueChange30dUsd}
+          {valueChange30dPerc}
+        </Cell>
+      )
+    },
   },
-  ...(!isTurkishSite ? [{
+  {
     id: 'result30dUsd',
     name: 'summary.by_asset.profits',
     width: 140,
-    renderer: () => (
-      <Cell>
-        {formatFee(derivMakerRebate)}
-        %
-      </Cell>
-    ),
+    renderer: (rowIndex) => {
+      const { result30dUsd, result30dPerc } = preparedData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(result30dUsd, t)}>
+          {result30dUsd}
+          {result30dPerc}
+        </Cell>
+      )
+    },
   },
   {
     id: 'volume30dUsd',
     name: 'summary.by_asset.volume',
     width: 140,
-    renderer: () => (
-      <Cell>
-        {formatFee(derivTakerFee)}
-        %
-      </Cell>
-    ),
-  }] : []),
+    renderer: (rowIndex) => {
+      const { volume30dUsd } = preparedData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(volume30dUsd, t)}>
+          {volume30dUsd}
+        </Cell>
+      )
+    },
+  },
 ]
 
 const AppSummaryByAsset = ({
@@ -99,6 +110,8 @@ const AppSummaryByAsset = ({
   const entries = useSelector(getSummaryByAssetEntries)
   const preparedData = prepareSummaryByAssetData(entries, total, t)
 
+  console.log('++preparedData', preparedData)
+
   const {
     makerFee = 0,
     derivTakerFee = 0,
@@ -108,7 +121,7 @@ const AppSummaryByAsset = ({
     derivMakerRebate = 0,
   } = data
 
-  const columns = getColumns({
+  const columns = getFeesColumns({
     makerFee,
     isTurkishSite,
     derivTakerFee,
@@ -117,6 +130,9 @@ const AppSummaryByAsset = ({
     takerFeeToCrypto,
     derivMakerRebate,
   })
+
+  const assetColumns = getColumns({ preparedData, t })
+  console.log('+++assetColumns', assetColumns)
 
   return (
     <div className='app-summary-item full-width-item'>
@@ -127,8 +143,8 @@ const AppSummaryByAsset = ({
         {t('summary.by_asset.sub_title')}
       </div>
       <CollapsedTable
-        numRows={1}
-        tableColumns={columns}
+        tableColumns={assetColumns}
+        numRows={preparedData.length}
       />
     </div>
   )
