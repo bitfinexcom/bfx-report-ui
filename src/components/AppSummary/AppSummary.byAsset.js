@@ -9,7 +9,8 @@ import {
   getSummaryByAssetTotal,
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
-import CollapsedTable from 'ui/CollapsedTable'
+// import CollapsedTable from 'ui/CollapsedTable'
+import DataTable from 'ui/DataTable'
 import { getTooltipContent } from 'utils/columns'
 
 import { getFeesColumns } from './AppSummary.columns'
@@ -148,7 +149,11 @@ const AppSummaryByAsset = ({
       <div className='app-summary-item-sub-title'>
         {t('summary.by_asset.sub_title')}
       </div>
-      <CollapsedTable
+      {/* <CollapsedTable
+        tableColumns={assetColumns}
+        numRows={preparedData.length}
+      /> */}
+      <DataTable
         tableColumns={assetColumns}
         numRows={preparedData.length}
       />
