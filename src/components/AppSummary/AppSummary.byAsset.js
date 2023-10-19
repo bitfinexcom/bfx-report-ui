@@ -123,6 +123,7 @@ const AppSummaryByAsset = () => {
         {t('summary.by_asset.sub_title')}
       </div>
       <DataTable
+        defaultRowHeight={73}
         tableColumns={assetColumns}
         numRows={preparedData.length}
       />
