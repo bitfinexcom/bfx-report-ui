@@ -113,6 +113,14 @@
 
   .summary-by-asset-table {
     border-top: none;
+
+    .bp3-table-column-name {
+      font-size: 14px;
+
+      &-text {
+        padding: 0 5px 0 2px;
+      }
+    }
   }
 
   .app-summary-item-sub-title {
