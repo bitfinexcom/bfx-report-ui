@@ -110,6 +110,11 @@
   width: 100%;
   max-width: 100%;
   min-height: 270px;
+
+  .summary-by-asset-table {
+    border-top: none;
+  }
+
 }
 
 .chart-item {

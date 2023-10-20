@@ -30,6 +30,7 @@ const AppSummaryByAsset = () => {
         defaultRowHeight={73}
         tableColumns={columns}
         numRows={preparedData.length}
+        className='summary-by-asset-table'
       />
     </div>
   )
