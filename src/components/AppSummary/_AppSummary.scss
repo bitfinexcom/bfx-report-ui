@@ -5,8 +5,6 @@
   }
 
   &-wrapper {
-    max-width: 1000px;
-
     .section-header {
       margin-bottom: 25px; 
 
@@ -20,6 +18,7 @@
   &-data-row {
     display: flex;
     flex-wrap: wrap;
+    max-width: 1000px;
     align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 35px;
@@ -27,6 +26,7 @@
 
   &-title-row {
     display: flex;
+    max-width: 1000px;
     align-items: center;
     justify-content: space-between;
   }
