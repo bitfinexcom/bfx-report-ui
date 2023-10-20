@@ -167,10 +167,11 @@ export const getAssetColumns = ({
       const { volume30dUsd } = preparedData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(volume30dUsd, t)}>
-          {volume30dUsd}
+          $
+          {fixedFloat(volume30dUsd, 2)}
         </Cell>
       )
     },
-    copyText: rowIndex => preparedData[rowIndex]?.volume30dUsd,
+    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume30dUsd, 2),
   },
 ]
