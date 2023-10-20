@@ -125,6 +125,10 @@
     .bp3-table-cell {
       font-size: 14px;
       padding: 0 5px 0 2px;
+
+      &:nth-child(n+19) {
+        box-shadow: none;
+      }
     }
   }
 
