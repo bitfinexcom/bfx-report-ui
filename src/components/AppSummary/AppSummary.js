@@ -63,13 +63,7 @@ const AppSummary = ({
             isTurkishSite={isTurkishSite}
           />
         </div>
-        <div className='app-summary-data-row'>
-          <ByAsset
-            t={t}
-            data={data}
-            isTurkishSite={isTurkishSite}
-          />
-        </div>
+        <ByAsset />
       </>
     )
   }
