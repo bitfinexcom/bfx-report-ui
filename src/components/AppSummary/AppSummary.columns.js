@@ -1,7 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { formatFee } from 'ui/utils'
+import { formatFee, fixedFloat } from 'ui/utils'
 import { getTooltipContent } from 'utils/columns'
 
 export const getFeesColumns = ({
@@ -108,11 +108,11 @@ export const getAssetColumns = ({
       const { balance = null } = preparedData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(balance, t)}>
-          {balance}
+          {fixedFloat(balance)}
         </Cell>
       )
     },
-    copyText: rowIndex => preparedData[rowIndex]?.balance,
+    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.balance),
   },
   {
     id: 'balanceUsd',
@@ -122,11 +122,12 @@ export const getAssetColumns = ({
       const { balanceUsd } = preparedData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(balanceUsd, t)}>
-          {balanceUsd}
+          $
+          {fixedFloat(balanceUsd, 2)}
         </Cell>
       )
     },
-    copyText: rowIndex => preparedData[rowIndex]?.balanceUsd,
+    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.balanceUsd, 2),
   },
   {
     id: 'valueChange30dUsd',
