@@ -1,14 +1,16 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
-import Explorer from 'ui/Explorer'
 import config from 'config'
+import Explorer from 'ui/Explorer'
 import { getColumnWidth } from 'utils/columns'
+import { prepareCurrency } from 'state/symbols/utils'
+import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 
 const getColumns = ({
   t,
   timeOffset,
+  tetherNames,
   getFullTime,
   filteredData,
   columnsWidth,
@@ -72,10 +74,11 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
-      const { currency } = filteredData[rowIndex]
+      const { currency, currencyName } = filteredData[rowIndex]
+      const preparedCurrency = prepareCurrency(currency, currencyName, tetherNames)
       return (
-        <Cell tooltip={currency}>
-          {currency}
+        <Cell tooltip={preparedCurrency}>
+          {preparedCurrency}
         </Cell>
       )
     },
