@@ -130,6 +130,12 @@
       &:nth-last-child(-n+6) {
         box-shadow: none;
       }
+
+      &:nth-last-child(6) {
+        .bp3-table-truncated-text {
+          font-weight: 600;
+        }
+      }     
     }
   }
 
