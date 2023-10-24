@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-import { useKeyDown } from 'hooks/useKeyDown'
+import useKeyDown from 'hooks/useKeyDown'
 
 import InputKey from '../InputKey'
 

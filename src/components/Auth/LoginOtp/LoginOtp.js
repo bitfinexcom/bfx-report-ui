@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
-import { useKeyDown } from 'hooks/useKeyDown'
+import useKeyDown from 'hooks/useKeyDown'
 
 import InputKey from '../InputKey'
 

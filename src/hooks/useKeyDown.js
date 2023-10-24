@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export const useKeyDown = (callback, keys) => {
+const useKeyDown = (callback, keys) => {
   const onKeyDown = (event) => {
     const wasAnyKeyPressed = keys.some((key) => event.key === key)
     if (wasAnyKeyPressed) {
@@ -15,3 +15,5 @@ export const useKeyDown = (callback, keys) => {
     }
   }, [onKeyDown])
 }
+
+export default useKeyDown
