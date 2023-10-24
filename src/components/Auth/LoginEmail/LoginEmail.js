@@ -1,5 +1,7 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+
+import { useKeyDown } from 'hooks/useKeyDown'
 
 import InputKey from '../InputKey'
 
@@ -9,19 +11,9 @@ export const LoginEmail = ({
   onSignUp,
   userPassword,
 }) => {
-  useEffect(() => {
-    const keyDownHandler = (event) => {
-      if (event?.key === 'Enter') {
-        event.preventDefault()
-        onSignUp()
-      }
-    }
-    document.addEventListener('keydown', keyDownHandler)
-
-    return () => {
-      document.removeEventListener('keydown', keyDownHandler)
-    }
-  }, [])
+  useKeyDown(() => {
+    onSignUp()
+  }, ['Enter'])
 
   return (
     <>
