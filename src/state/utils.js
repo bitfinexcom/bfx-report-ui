@@ -1,11 +1,11 @@
 import moment from 'moment-timezone'
 import queryString from 'query-string'
 import memoizeOne from 'memoize-one'
-import _omit from 'lodash/omit'
 import _castArray from 'lodash/castArray'
 import _get from 'lodash/get'
 import _isEqual from 'lodash/isEqual'
 import _sortBy from 'lodash/sortBy'
+import { omit } from '@bitfinex/lib-js-util-base'
 
 import { store } from 'state/store'
 import config from 'config'
@@ -283,7 +283,7 @@ export const concatQueryStrings = (...args) => {
 export const getQueryWithoutParams = (params) => {
   const arrayParams = _castArray(params)
   const currentUrlParams = window.location.search
-  const updatedParams = _omit(queryString.parse(currentUrlParams), arrayParams)
+  const updatedParams = omit(queryString.parse(currentUrlParams), arrayParams)
   const nextUrlParams = queryString.stringify(updatedParams, { encode: false })
 
   return nextUrlParams ? `?${nextUrlParams}` : ''
