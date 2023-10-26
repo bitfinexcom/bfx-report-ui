@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Cell } from '@blueprintjs/table'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 import { fixedFloat, formatAmount } from 'ui/utils'
@@ -47,7 +48,7 @@ const getColumns = ({ data, t }) => [
 ]
 
 const AccountSummaryVolume = ({ data, t }) => {
-  if (!data.length) {
+  if (isEmpty(data)) {
     return null
   }
 
