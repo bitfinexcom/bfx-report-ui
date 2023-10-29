@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
 import _isEqual from 'lodash/isEqual'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -80,7 +81,7 @@ class TradedVolume extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
-    } else if (!entries.length) {
+    } else if (isEmpty(entries)) {
       showContent = <NoData />
     } else {
       showContent = (
