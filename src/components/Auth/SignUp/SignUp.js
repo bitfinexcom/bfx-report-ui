@@ -235,6 +235,7 @@ class SignUp extends PureComponent {
                 {showLoginEmail && (
                   <LoginEmail
                     userName={userName}
+                    onSignUp={this.onSignUp}
                     userPassword={userPassword}
                     onChange={this.handleInputChange}
                   />
