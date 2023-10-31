@@ -152,6 +152,12 @@
       margin: auto;
     }
   }
+
+  .no-data {
+    &-wrapper {
+      margin: 150px auto;
+    }
+  }
 }
 
 .chart-item {
