@@ -29,7 +29,7 @@ const AppSummaryByAsset = () => {
   if (!dataReceived && pageLoading) {
     showContent = <Loading />
   } else if (isEmpty(entries)) {
-    showContent = <NoData />
+    showContent = <NoData title='summary.by_asset.no_data' />
   } else {
     showContent = (
       <DataTable
