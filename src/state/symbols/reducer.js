@@ -21,6 +21,7 @@ const initialState = {
   isFetched: false,
   pairs: [], // pair
   fundingCoins: [],
+  tetherNames: {},
 }
 
 export function symbolsReducer(state = initialState, action) {
@@ -40,17 +41,22 @@ export function symbolsReducer(state = initialState, action) {
       const dict = {}
       const explorersDict = {}
       const symbolMapping = {}
+      const tetherNames = {}
 
       currencies.forEach((currency) => {
         const {
           id, explorer, name, isInPair, isFunding,
         } = currency
 
+        let { symbol } = currency
+
+        if (symbol === 'USDt' || _includes(symbol, 'USDT')) {
+          tetherNames[id] = name
+        }
+
         if (id !== 'LNX' && !isInPair) {
           return
         }
-
-        let { symbol } = currency
 
         if (symbol && id !== symbol) {
           if (id.includes('TEST')) {
@@ -113,6 +119,7 @@ export function symbolsReducer(state = initialState, action) {
         isFetched: true,
         pairs: preparedPairs,
         fundingCoins,
+        tetherNames,
       }
     }
     case authTypes.LOGOUT:

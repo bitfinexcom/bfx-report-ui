@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
+import useKeyDown from 'hooks/useKeyDown'
+
 import InputKey from '../InputKey'
 
 export const LoginOtp = ({
@@ -13,6 +15,11 @@ export const LoginOtp = ({
   handleOneTimePassword,
 }) => {
   const { t } = useTranslation()
+
+  useKeyDown(() => {
+    handleOneTimePassword()
+  }, ['Enter'])
+
   return (
     <div className='sign-in--otp'>
       <InputKey

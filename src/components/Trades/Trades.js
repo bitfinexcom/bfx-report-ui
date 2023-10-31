@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
@@ -59,7 +60,7 @@ class Trades extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
-    } else if (!entries.length) {
+    } else if (isEmpty(entries)) {
       showContent = <NoData />
     } else {
       showContent = (

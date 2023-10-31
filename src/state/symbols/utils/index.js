@@ -1,3 +1,4 @@
+import _replace from 'lodash/replace'
 import _includes from 'lodash/includes'
 import _castArray from 'lodash/castArray'
 
@@ -81,6 +82,14 @@ export const formatRawSymbols = (symbols, isFunding) => {
 
 export const isTestSymbol = (symbol) => _includes(symbol, ' (Test)')
 
+export const prepareCurrency = (curr, currName, tetherNames) => {
+  let preparedCurrency
+  if (curr === 'USDt') {
+    preparedCurrency = tetherNames?.[_replace(currName, 'TETHER', '')] ?? curr
+  } else preparedCurrency = curr
+  return preparedCurrency
+}
+
 export default {
   formatPair,
   formatRawSymbols,
@@ -90,4 +99,5 @@ export default {
   isTradingPair,
   removePrefix,
   isTestSymbol,
+  prepareCurrency,
 }

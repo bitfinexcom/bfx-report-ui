@@ -1,4 +1,5 @@
 import _get from 'lodash/get'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -49,7 +50,7 @@ function paginationReducer(state = initialState, { type, payload }) {
       }
       const { section, data } = payload
       const { res: entries, nextPage } = data
-      if (!entries.length) {
+      if (isEmpty(entries)) {
         return state
       }
 

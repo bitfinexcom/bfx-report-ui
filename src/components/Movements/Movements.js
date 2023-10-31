@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
@@ -34,6 +35,26 @@ class Movements extends PureComponent {
       status: PropTypes.bool,
       transactionId: PropTypes.bool,
     }),
+    tetherNames: PropTypes.shape({
+      TESTUSDT: PropTypes.string,
+      TESTUSDTF0: PropTypes.string,
+      UST: PropTypes.string,
+      USDTKSM: PropTypes.string,
+      USTF0: PropTypes.string,
+      USDTAVAX: PropTypes.string,
+      USDTALG: PropTypes.string,
+      USDTBCH: PropTypes.string,
+      USS: PropTypes.string,
+      USE: PropTypes.string,
+      USDTKAVA: PropTypes.string,
+      USDTNEAR: PropTypes.string,
+      USDTDOT: PropTypes.string,
+      USDTPLY: PropTypes.string,
+      USDTSOL: PropTypes.string,
+      USDTXTZ: PropTypes.string,
+      USX: PropTypes.string,
+      USDTZK: PropTypes.string,
+    }),
     columnsWidth: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       width: PropTypes.number.isRequired,
@@ -62,6 +83,7 @@ class Movements extends PureComponent {
   static defaultProps = {
     columns: {},
     entries: [],
+    tetherNames: {},
     columnsWidth: [],
     existingCoins: [],
     targetSymbols: [],
@@ -102,6 +124,7 @@ class Movements extends PureComponent {
       timeOffset,
       getFullTime,
       pageLoading,
+      tetherNames,
       columnsWidth,
       dataReceived,
       existingCoins,
@@ -111,6 +134,7 @@ class Movements extends PureComponent {
     const tableColumns = getColumns({
       t,
       timeOffset,
+      tetherNames,
       getFullTime,
       columnsWidth,
       filteredData: entries,
@@ -121,7 +145,7 @@ class Movements extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
-    } else if (!entries.length) {
+    } else if (isEmpty(entries)) {
       showContent = <NoData />
     } else {
       showContent = (

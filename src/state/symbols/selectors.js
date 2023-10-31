@@ -8,6 +8,7 @@ export const getInactivePairs = state => getSymbols(state).inactivePairs
 export const getPairs = state => getSymbols(state).pairs
 export const getSymbolsFetchStatus = state => getSymbols(state).isFetched
 export const getFundingCoins = state => getSymbols(state)?.fundingCoins ?? []
+export const getTetherNames = state => getSymbols(state)?.tetherNames ?? {}
 
 export default {
   getCoins,
@@ -18,4 +19,5 @@ export default {
   getPairs,
   getSymbolsFetchStatus,
   getFundingCoins,
+  getTetherNames,
 }

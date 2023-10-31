@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _keys from 'lodash/keys'
 import _sortBy from 'lodash/sortBy'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -132,7 +133,7 @@ class ConcentrationRisk extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
-    } else if (!entries.length) {
+    } else if (isEmpty(entries)) {
       showContent = <NoData />
     } else {
       showContent = (

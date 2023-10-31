@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -63,7 +64,7 @@ class PublicTrades extends PureComponent {
     let showContent
     if (!dataReceived && pageLoading) {
       showContent = <Loading />
-    } else if (!entries.length) {
+    } else if (isEmpty(entries)) {
       showContent = <NoData />
     } else {
       showContent = (
