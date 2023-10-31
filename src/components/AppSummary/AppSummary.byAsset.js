@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import {
+  getPageLoading,
+  getDataReceived,
   getSummaryByAssetTotal,
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
@@ -13,6 +15,8 @@ import { prepareSummaryByAssetData } from './AppSummary.helpers'
 
 const AppSummaryByAsset = () => {
   const { t } = useTranslation()
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
   const preparedData = prepareSummaryByAssetData(entries, total, t)
