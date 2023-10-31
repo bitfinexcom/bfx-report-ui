@@ -111,7 +111,7 @@
 .full-width-item {
   width: 100%;
   max-width: 100%;
-  min-height: 270px;
+  min-height: 320px;
 
   .summary-by-asset-table {
     border-top: none;
@@ -142,6 +142,15 @@
 
   .app-summary-item-sub-title {
     margin-bottom: 0;
+  }
+
+  .loading-container {
+    display: flex;
+    min-height: 320px;
+
+    .loading {
+      margin: auto;
+    }
   }
 }
 
