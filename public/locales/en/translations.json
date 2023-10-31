@@ -644,7 +644,8 @@
       "balance_change": "Balance Change",
       "profits": "Profits",
       "volume": "Volume",
-      "total": "Total"
+      "total": "Total",
+      "no_data": "No related data for this period." 
     }
   },
   "symbols": {
