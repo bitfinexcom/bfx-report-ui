@@ -1,7 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { formatFee, fixedFloat } from 'ui/utils'
+import { formatFee, fixedFloat, formatThousands } from 'ui/utils'
 import { getTooltipContent } from 'utils/columns'
 
 export const getFeesColumns = ({
@@ -123,7 +123,7 @@ export const getAssetColumns = ({
       return (
         <Cell tooltip={getTooltipContent(balanceUsd, t)}>
           $
-          {fixedFloat(balanceUsd, 2)}
+          {formatThousands(fixedFloat(balanceUsd, 2))}
         </Cell>
       )
     },
@@ -174,7 +174,7 @@ export const getAssetColumns = ({
       return (
         <Cell tooltip={getTooltipContent(volume30dUsd, t)}>
           $
-          {fixedFloat(volume30dUsd, 2)}
+          {formatThousands(fixedFloat(volume30dUsd, 2))}
         </Cell>
       )
     },
