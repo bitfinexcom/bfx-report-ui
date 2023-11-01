@@ -129,6 +129,7 @@ export const getAssetColumns = ({
         </Cell>
       )
     },
+    isNumericValue: true,
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.balanceUsd, 2),
   },
   {
@@ -180,6 +181,7 @@ export const getAssetColumns = ({
         </Cell>
       )
     },
+    isNumericValue: true,
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume30dUsd, 2),
   },
 ]
