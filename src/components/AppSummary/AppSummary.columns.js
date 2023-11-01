@@ -148,6 +148,7 @@ export const getAssetColumns = ({
         </Cell>
       )
     },
+    isNumericValue: true,
     copyText: rowIndex => preparedData[rowIndex]?.valueChange30dUsd,
   },
   {
@@ -166,6 +167,7 @@ export const getAssetColumns = ({
         </Cell>
       )
     },
+    isNumericValue: true,
     copyText: rowIndex => preparedData[rowIndex]?.result30dUsd,
   },
   {
