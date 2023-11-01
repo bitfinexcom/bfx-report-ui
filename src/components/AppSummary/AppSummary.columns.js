@@ -137,8 +137,11 @@ export const getAssetColumns = ({
       const { valueChange30dUsd, valueChange30dPerc } = preparedData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(valueChange30dUsd, t)}>
-          {valueChange30dUsd}
-          {valueChange30dPerc}
+          <>
+            {valueChange30dUsd}
+            <br />
+            {valueChange30dPerc}
+          </>
         </Cell>
       )
     },
@@ -152,8 +155,11 @@ export const getAssetColumns = ({
       const { result30dUsd, result30dPerc } = preparedData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(result30dUsd, t)}>
-          {result30dUsd}
-          {result30dPerc}
+          <>
+            {result30dUsd}
+            <br />
+            {result30dPerc}
+          </>
         </Cell>
       )
     },
