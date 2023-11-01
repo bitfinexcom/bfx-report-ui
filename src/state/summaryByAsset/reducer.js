@@ -11,12 +11,12 @@ const initialData = {
     {
       currency: 'LEO',
       balance: 1.998,
-      balanceUsd: 7.9858062,
+      balanceUsd: 7000000.9858062,
       valueChange30dUsd: 7.9858062,
       valueChange30dPerc: 0,
       result30dUsd: 0.00011699999999999921,
       result30dPerc: 0,
-      volume30dUsd: 8.0017938,
+      volume30dUsd: 8000.0017938,
     },
     {
       currency: 'USD',
