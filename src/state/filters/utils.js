@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 import _reduce from 'lodash/reduce'
-import _get from 'lodash/get'
 import _set from 'lodash/set'
 import _toNumber from 'lodash/toNumber'
 import _toInteger from 'lodash/toInteger'
@@ -9,7 +8,7 @@ import _findKey from 'lodash/findKey'
 import _sortBy from 'lodash/sortBy'
 import _find from 'lodash/find'
 import _isNaN from 'lodash/isNaN'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import SECTION_COLUMNS, { TRANSFORMS } from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import FILTER_TYPES, { FILTER_QUERY_TYPES, FILTERS, FILTER_KEYS } from 'var/filterTypes'
@@ -91,7 +90,7 @@ export const calculateFilterQuery = (filters = [], section) => {
         _set(acc, `${FILTER_TYPES.EQ}.${column}`, filterValue)
         break
       case FILTERS.NOT_EQUAL_TO: {
-        const currentFilters = _get(acc, `${FILTER_TYPES.NIN}.${column}`, [])
+        const currentFilters = get(acc, `${FILTER_TYPES.NIN}.${column}`, [])
         _set(acc, `${FILTER_TYPES.NIN}.${column}`, currentFilters.concat(filterValue))
         break
       }

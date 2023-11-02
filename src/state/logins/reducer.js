@@ -1,6 +1,6 @@
 // https://docs.bitfinex.com/reference#rest-auth-logins-hist
-import _get from 'lodash/get'
 import _toString from 'lodash/toString'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -20,7 +20,7 @@ export function loginsReducer(state = initialState, action) {
     case types.FETCH:
       return fetch(state)
     case types.UPDATE: {
-      const res = _get(payload, ['data', 'res'])
+      const res = get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,
@@ -40,7 +40,7 @@ export function loginsReducer(state = initialState, action) {
           browser = '',
           version = '',
           is_mobile: mobile,
-        } = _get(extraData, 'user_agent', {})
+        } = get(extraData, 'user_agent', {})
 
         return {
           id,

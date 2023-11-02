@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#TICKERS-history
-import _get from 'lodash/get'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import { formatPair, mapPair } from 'state/symbols/utils'
 import authTypes from 'state/auth/constants'
@@ -32,7 +32,7 @@ export function TickersReducer(state = initialState, action) {
     case types.FETCH_TICKERS:
       return fetch(state)
     case types.UPDATE_TICKERS: {
-      const res = _get(payload, ['data', 'res'])
+      const res = get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,

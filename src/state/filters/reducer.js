@@ -1,5 +1,5 @@
-import _get from 'lodash/get'
 import _defaultTo from 'lodash/defaultTo'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import { FILTERS_WHITELIST } from 'state/query/utils'
@@ -28,7 +28,7 @@ const getSectionsColumns = () => {
 
   const sectionsColumns = FILTERS_WHITELIST.reduce((acc, section) => {
     acc[section] = SECTION_COLUMNS[section].reduce((columns, { id, hidden }) => {
-      const storedParam = _get(storedData, [section, id])
+      const storedParam = get(storedData, [section, id])
       columns[id] = _defaultTo(storedParam, !hidden) // eslint-disable-line no-param-reassign
       return columns
     }, {})

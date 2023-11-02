@@ -2,10 +2,9 @@ import moment from 'moment-timezone'
 import queryString from 'query-string'
 import memoizeOne from 'memoize-one'
 import _castArray from 'lodash/castArray'
-import _get from 'lodash/get'
 import _isEqual from 'lodash/isEqual'
 import _sortBy from 'lodash/sortBy'
-import { omit } from '@bitfinex/lib-js-util-base'
+import { get, omit } from '@bitfinex/lib-js-util-base'
 
 import { store } from 'state/store'
 import config from 'config'
@@ -230,7 +229,7 @@ export const checkInit = (props, type) => {
       break
     }
     case MENU_POSITIONS_AUDIT: {
-      const ids = _get(match, 'params.id', '').split(',')
+      const ids = get(match, 'params.id', '').split(',')
 
       const isIdChanged = !_isEqual(_sortBy(ids), _sortBy(targetIds))
       if (ids.length && ((!dataReceived && !pageLoading) || isIdChanged)) {

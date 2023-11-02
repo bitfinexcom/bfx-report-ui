@@ -1,11 +1,11 @@
 import { call } from 'redux-saga/effects'
-import _get from 'lodash/get'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import { paginationCheck } from 'state/ui/saga'
 
 import { PAGINATION_SEARCH_LIMIT } from 'var'
 
-const shouldFetchNext = ({ result }) => _get(result, 'res.length', 0) === 0 && _get(result, 'nextPage')
+const shouldFetchNext = ({ result }) => get(result, 'res.length', 0) === 0 && get(result, 'nextPage')
 
 export function* fetchDataWithPagination(requestFunction, options) {
   let requestsCounter = 0
@@ -13,7 +13,7 @@ export function* fetchDataWithPagination(requestFunction, options) {
   let response = yield call(requestFunction, options)
   while (shouldFetchNext(response)) {
     requestsCounter += 1
-    const nextPage = _get(response, 'result.nextPage')
+    const nextPage = get(response, 'result.nextPage')
     if (PAGINATION_SEARCH_LIMIT <= requestsCounter) {
       const shouldProceed = yield call(paginationCheck, nextPage)
       if (!shouldProceed) {

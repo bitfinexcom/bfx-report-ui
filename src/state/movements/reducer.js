@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/reference#rest-auth-movements
-import _get from 'lodash/get'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -32,7 +32,7 @@ export function movementsReducer(state = initialState, action) {
     case types.FETCH_MOVEMENTS:
       return fetch(state)
     case types.UPDATE_MOVEMENTS: {
-      const res = _get(payload, ['data', 'res'])
+      const res = get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,
