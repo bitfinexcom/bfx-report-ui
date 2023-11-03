@@ -10,11 +10,11 @@ import { updateErrorStatus } from 'state/status/actions'
 import types from './constants'
 import actions from './actions'
 
-export const getReqAccountSummary = () => makeFetchCall('getAccountSummary')
+export const getReqSummaryByAsset = () => makeFetchCall('getSummaryByAsset')
 
 export function* fetchSummaryByAsset() {
   try {
-    const { result = {}, error } = yield call(getReqAccountSummary)
+    const { result = {}, error } = yield call(getReqSummaryByAsset)
     yield put(actions.updateData(result))
 
     if (error) {
