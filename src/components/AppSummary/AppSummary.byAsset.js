@@ -1,11 +1,12 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
+import { fetchData } from 'state/summaryByAsset/actions'
 import {
   getPageLoading,
   getDataReceived,
@@ -18,12 +19,17 @@ import { prepareSummaryByAssetData } from './AppSummary.helpers'
 
 const AppSummaryByAsset = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
   const preparedData = prepareSummaryByAssetData(entries, total, t)
   const columns = getAssetColumns({ preparedData, t })
+
+  useEffect(() => {
+    if (!dataReceived && !pageLoading) dispatch(fetchData())
+  }, [])
 
   let showContent
   if (!dataReceived && pageLoading) {
