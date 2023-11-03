@@ -20,14 +20,14 @@ export function* fetchSummaryByAsset() {
     if (error) {
       yield put(actions.fetchFail({
         id: 'status.fail',
-        topic: 'accountsummary.title',
+        topic: 'summary.by_asset.title',
         detail: error?.message ?? JSON.stringify(error),
       }))
     }
   } catch (fail) {
     yield put(actions.fetchFail({
       id: 'status.request.error',
-      topic: 'accountsummary.title',
+      topic: 'summary.by_asset.title',
       detail: JSON.stringify(fail),
     }))
   }
