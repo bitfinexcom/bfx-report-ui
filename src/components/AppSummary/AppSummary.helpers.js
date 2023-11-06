@@ -21,6 +21,7 @@ export const formatPercentValues = (value) => {
 
 export const formatUsdValueChange = (value) => {
   const val = prepareNumericValue(value)
-  if (val > 0) return <span>{`+${formatThousands(val)}$`}</span>
-  return <span>{`${formatThousands(val)}$`}</span>
+  if (val > 0) return <span>{`+$${formatThousands(val)}`}</span>
+  if (val < 0) return <span>{`-$${formatThousands(Math.abs(val))}`}</span>
+  return <span>{`$${formatThousands(val)}`}</span>
 }
