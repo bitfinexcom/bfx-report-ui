@@ -8,15 +8,15 @@ export const prepareSummaryByAssetData = (entries, total, t) => (
 export const formatUsdValue = (value) => formatThousands(fixedFloat(value, 2))
 
 export const formatPercentValues = (value) => {
-  let val = fixedFloat(value, 2)
+  let val = +fixedFloat(value, 2)
   if (Number.isNaN(val)) val = 0
   if (val > 0) return <span>{`+${val}%`}</span>
   return <span>{`${val}%`}</span>
 }
 
 export const formatUsdValueChange = (value) => {
-  let val = formatUsdValue(value)
+  let val = +fixedFloat(value, 2)
   if (Number.isNaN(val)) val = 0
-  if (val > 0) return <span>{`+${val}$`}</span>
-  return <span>{`${val}$`}</span>
+  if (val > 0) return <span>{`+${formatThousands(val)}$`}</span>
+  return <span>{`${formatThousands(val)}$`}</span>
 }
