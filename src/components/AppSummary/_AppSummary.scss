@@ -139,7 +139,10 @@
     }
 
     .secondary-value {
+      width: 100%;
+      text-align: end;
       color: var(--color2);
+      display: inline-block;
     }
   }
 
