@@ -32,7 +32,7 @@ const AppSummaryByAsset = () => {
 
   useEffect(() => {
     if (!dataReceived && !pageLoading) dispatch(fetchData())
-  }, [])
+  }, [dataReceived, pageLoading])
 
   let showContent
   if (!dataReceived && pageLoading) {
