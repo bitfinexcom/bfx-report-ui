@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
@@ -25,7 +25,10 @@ const AppSummaryByAsset = () => {
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
   const preparedData = prepareSummaryByAssetData(entries, total, t)
-  const columns = getAssetColumns({ preparedData, t })
+  const columns = useMemo(
+    () => getAssetColumns({ preparedData, t }),
+    [preparedData, t],
+  )
 
   useEffect(() => {
     if (!dataReceived && !pageLoading) dispatch(fetchData())
