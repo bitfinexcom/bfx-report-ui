@@ -13,3 +13,10 @@ export const formatPercentValues = (value) => {
   if (val > 0) return <span>{`+${val}%`}</span>
   return <span>{`${val}%`}</span>
 }
+
+export const formatUsdValueChange = (value) => {
+  let val = formatUsdValue(value)
+  if (Number.isNaN(val)) val = 0
+  if (val > 0) return <span>{`+${val}$`}</span>
+  return <span>{`${val}$`}</span>
+}
