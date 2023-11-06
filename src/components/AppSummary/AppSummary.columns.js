@@ -4,7 +4,11 @@ import { Cell } from '@blueprintjs/table'
 import { formatFee, fixedFloat } from 'ui/utils'
 import { getTooltipContent } from 'utils/columns'
 
-import { formatUsdValue, formatPercentValues } from './AppSummary.helpers'
+import {
+  formatUsdValue,
+  formatPercentValues,
+  formatUsdValueChange,
+} from './AppSummary.helpers'
 
 export const getFeesColumns = ({
   makerFee,
@@ -141,7 +145,7 @@ export const getAssetColumns = ({
       return (
         <Cell tooltip={getTooltipContent(valueChange30dUsd, t)}>
           <>
-            {valueChange30dUsd}
+            {formatUsdValueChange(valueChange30dUsd)}
             <br />
             <span className='secondary-value'>
               {formatPercentValues(valueChange30dPerc)}
@@ -162,7 +166,7 @@ export const getAssetColumns = ({
       return (
         <Cell tooltip={getTooltipContent(result30dUsd, t)}>
           <>
-            {result30dUsd}
+            {formatUsdValueChange(result30dUsd)}
             <br />
             <span className='secondary-value'>
               {formatPercentValues(result30dPerc)}
