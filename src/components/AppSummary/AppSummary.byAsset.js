@@ -24,7 +24,12 @@ const AppSummaryByAsset = () => {
   const dataReceived = useSelector(getDataReceived)
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
-  const preparedData = prepareSummaryByAssetData(entries, total, t)
+
+  const preparedData = useMemo(
+    () => prepareSummaryByAssetData(entries, total, t),
+    [entries, total, t],
+  )
+
   const columns = useMemo(
     () => getAssetColumns({ preparedData, t }),
     [preparedData, t],
