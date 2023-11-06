@@ -138,12 +138,15 @@
       }
     }
 
-    .secondary-value {
+    .cell-value {
       width: 100%;
       text-align: end;
-      color: var(--color2);
       display: inline-block;
-    }
+      
+      &.secondary-value {
+        color: var(--color2);   
+      }
+    } 
   }
 
   .app-summary-item-sub-title {
