@@ -143,7 +143,9 @@ export const getAssetColumns = ({
           <>
             {valueChange30dUsd}
             <br />
-            {valueChange30dPerc}
+            <span className='secondary-value'>
+              {valueChange30dPerc}
+            </span>
           </>
         </Cell>
       )
@@ -162,7 +164,9 @@ export const getAssetColumns = ({
           <>
             {result30dUsd}
             <br />
-            {result30dPerc}
+            <span className='secondary-value'>
+              {result30dPerc}
+            </span>
           </>
         </Cell>
       )
