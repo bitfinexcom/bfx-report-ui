@@ -11,7 +11,7 @@ export const prepareNumericValue = (value) => {
   return val
 }
 
-export const formatUsdValue = (value) => formatThousands(fixedFloat(value, 2))
+export const formatUsdValue = (value) => formatThousands(prepareNumericValue(value))
 
 export const formatPercentValues = (value) => {
   const val = prepareNumericValue(value)
