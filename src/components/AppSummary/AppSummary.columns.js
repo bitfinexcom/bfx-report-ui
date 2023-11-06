@@ -145,9 +145,11 @@ export const getAssetColumns = ({
       return (
         <Cell tooltip={getTooltipContent(valueChange30dUsd, t)}>
           <>
-            {formatUsdValueChange(valueChange30dUsd)}
+            <span className='cell-value'>
+              {formatUsdValueChange(valueChange30dUsd)}
+            </span>
             <br />
-            <span className='secondary-value'>
+            <span className='cell-value secondary-value'>
               {formatPercentValues(valueChange30dPerc)}
             </span>
           </>
@@ -166,9 +168,11 @@ export const getAssetColumns = ({
       return (
         <Cell tooltip={getTooltipContent(result30dUsd, t)}>
           <>
-            {formatUsdValueChange(result30dUsd)}
+            <span className='cell-value'>
+              {formatUsdValueChange(result30dUsd)}
+            </span>
             <br />
-            <span className='secondary-value'>
+            <span className='cell-value secondary-value'>
               {formatPercentValues(result30dPerc)}
             </span>
           </>
