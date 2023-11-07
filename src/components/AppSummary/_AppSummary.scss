@@ -112,6 +112,12 @@
   max-width: 100%;
   min-height: 320px;
 
+  .collapsed-table {
+    .secondary-value {
+      color: var(--color2);
+    }
+  }
+
   .summary-by-asset-table {
     border-top: none;
 
