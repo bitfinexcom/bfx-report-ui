@@ -25,6 +25,10 @@ const AppSummaryByAsset = () => {
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
 
+  useEffect(() => {
+    if (!dataReceived && !pageLoading) dispatch(fetchData())
+  }, [dataReceived, pageLoading])
+
   const preparedData = useMemo(
     () => prepareSummaryByAssetData(entries, total, t),
     [entries, total, t],
@@ -34,10 +38,6 @@ const AppSummaryByAsset = () => {
     () => getAssetColumns({ preparedData, t }),
     [preparedData, t],
   )
-
-  useEffect(() => {
-    if (!dataReceived && !pageLoading) dispatch(fetchData())
-  }, [dataReceived, pageLoading])
 
   let showContent
   if (!dataReceived && pageLoading) {
