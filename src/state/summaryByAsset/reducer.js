@@ -3,48 +3,48 @@ import { fetch, fetchFail } from 'state/reducers.helper'
 
 import types from './constants'
 
-// const initialData = {
-//   summaryByAsset: [
-//     {
-//       currency: 'LEO',
-//       balance: 1.998,
-//       balanceUsd: 7000000.9858062,
-//       valueChange30dUsd: 7.9858062,
-//       valueChange30dPerc: 0,
-//       result30dUsd: 0.00011699999999999921,
-//       result30dPerc: 0,
-//       volume30dUsd: 8000.0017938,
-//     },
-//     {
-//       currency: 'USD',
-//       balance: 2388.39007987,
-//       balanceUsd: 2388.39007987,
-//       valueChange30dUsd: -7.943199999999706,
-//       valueChange30dPerc: -0.3314730912734568,
-//       result30dUsd: 0,
-//       result30dPerc: 0,
-//       volume30dUsd: 7.9432,
-//     },
-//     {
-//       currency: 'BTC',
-//       balance: 0.00134209,
-//       balanceUsd: 39.51784005,
-//       valueChange30dUsd: 0,
-//       valueChange30dPerc: 0,
-//       result30dUsd: 0,
-//       result30dPerc: 0,
-//       volume30dUsd: 0,
-//     },
-//   ],
-//   total: {
-//     balanceUsd: 2435.89372612,
-//     valueChange30dUsd: 0.042606200000293803,
-//     valueChange30dPerc: 0,
-//     result30dUsd: 0.00011699999999999921,
-//     result30dPerc: 0,
-//     volume30dUsd: 15.944993799999999,
-//   },
-// }
+const initialData = {
+  summaryByAsset: [
+    {
+      currency: 'BTC',
+      balance: 3.02134209,
+      balanceUsd: 104930.51784005,
+      valueChange30dUsd: 34517.84005,
+      valueChange30dPerc: 32.37147309,
+      result30dUsd: 8632.74321,
+      result30dPerc: 17.64147309,
+      volume30dUsd: 12766.83322,
+    },
+    {
+      currency: 'ETH',
+      balance: 1.97806237,
+      balanceUsd: 3709.75707,
+      valueChange30dUsd: 743.9858062,
+      valueChange30dPerc: 17.0523,
+      result30dUsd: 869.137234,
+      result30dPerc: 23.4271,
+      volume30dUsd: 2213.35707,
+    },
+    {
+      currency: 'LEO',
+      balance: 8.72879652,
+      balanceUsd: 34.653322,
+      valueChange30dUsd: -7.943199999999706,
+      valueChange30dPerc: -0.3314730912734568,
+      result30dUsd: -18.6432,
+      result30dPerc: -2.3714730912734568,
+      volume30dUsd: 17.9432,
+    },
+  ],
+  total: {
+    balanceUsd: 108674.93,
+    valueChange30dUsd: 35253.8826,
+    valueChange30dPerc: 49.09,
+    result30dUsd: 9483.2372,
+    result30dPerc: 38.71,
+    volume30dUsd: 14998.13,
+  },
+}
 
 export const initialState = {
   dataReceived: false,
@@ -62,7 +62,7 @@ export function summaryByAssetReducer(state = initialState, action) {
         ...state,
         dataReceived: true,
         pageLoading: false,
-        data: payload,
+        data: initialData,
       }
     }
     case types.FETCH_FAIL:
