@@ -13,7 +13,7 @@ export const prepareNumericValue = (value) => {
 
 export const formatUsdValue = (value) => formatThousands(prepareNumericValue(value))
 
-export const formatPercentValues = (value) => {
+export const formatPercentValue = (value) => {
   const val = prepareNumericValue(value)
   if (val > 0) return <span>{`+${val}%`}</span>
   return <span>{`${val}%`}</span>

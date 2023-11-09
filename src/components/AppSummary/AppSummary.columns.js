@@ -6,7 +6,7 @@ import { getTooltipContent } from 'utils/columns'
 
 import {
   formatUsdValue,
-  formatPercentValues,
+  formatPercentValue,
   formatUsdValueChange,
 } from './AppSummary.helpers'
 
@@ -150,7 +150,7 @@ export const getAssetColumns = ({
             </span>
             <br />
             <span className='cell-value secondary-value'>
-              {formatPercentValues(valueChange30dPerc)}
+              {formatPercentValue(valueChange30dPerc)}
             </span>
           </>
         </Cell>
@@ -173,7 +173,7 @@ export const getAssetColumns = ({
             </span>
             <br />
             <span className='cell-value secondary-value'>
-              {formatPercentValues(result30dPerc)}
+              {formatPercentValue(result30dPerc)}
             </span>
           </>
         </Cell>
