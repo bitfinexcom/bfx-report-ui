@@ -112,6 +112,10 @@
   max-width: 100%;
   min-height: 320px;
 
+  .bp3-table-container {
+    box-shadow: none;
+  }
+
   .collapsed-table {
     .secondary-value {
       color: var(--color2);
