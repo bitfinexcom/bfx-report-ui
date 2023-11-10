@@ -632,7 +632,7 @@
       "deriv_taker": "Derivatives Taker Fees"
     },
     "value": {
-      "title": "Account Value",
+      "title": "Account Balance",
       "sub_title": "Total Balance including Deposits/Withdrawals"
     },
     "by_asset":{
