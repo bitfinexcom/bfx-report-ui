@@ -33,6 +33,7 @@ const AppSummary = ({
   isTurkishSite,
   refreshBalance,
   currentTimeFrame,
+  refreshSummaryByAsset,
   isUnrealizedProfitExcluded,
 }) => {
   useEffect(() => {
@@ -45,6 +46,11 @@ const AppSummary = ({
 
   const handleUnrealizedProfitChange = (value) => {
     setParams({ isUnrealizedProfitExcluded: value })
+  }
+
+  const onRefresh = () => {
+    refreshBalance()
+    refreshSummaryByAsset()
   }
 
   let showContent
@@ -112,7 +118,7 @@ const AppSummary = ({
                 onChange={handleUnrealizedProfitChange}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={refreshBalance} />
+            <RefreshButton onClick={onRefresh} />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
@@ -142,6 +148,7 @@ AppSummary.propTypes = {
   t: PropTypes.func.isRequired,
   currentTimeFrame: PropTypes.string.isRequired,
   isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
+  refreshSummaryByAsset: PropTypes.func.isRequired,
 }
 
 AppSummary.defaultProps = {
