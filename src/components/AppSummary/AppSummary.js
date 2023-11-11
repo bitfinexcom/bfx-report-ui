@@ -1,10 +1,7 @@
 import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
 
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import {
   SectionHeader,
   SectionHeaderRow,
@@ -49,30 +46,11 @@ const AppSummary = ({
   }
 
   const onRefresh = () => {
+    refresh()
     refreshBalance()
     refreshSummaryByAsset()
   }
 
-  let showContent
-  if (!dataReceived && pageLoading) {
-    showContent = <Loading />
-  } else if (isEmpty(data)) {
-    showContent = <NoData refresh={refresh} />
-  } else {
-    showContent = (
-      <>
-        <div className='app-summary-data-row'>
-          <Value />
-          <Fees
-            t={t}
-            data={data}
-            isTurkishSite={isTurkishSite}
-          />
-        </div>
-        <ByAsset />
-      </>
-    )
-  }
   return (
     <Card
       elevation={Elevation.ZERO}
@@ -121,7 +99,17 @@ const AppSummary = ({
             <RefreshButton onClick={onRefresh} />
           </SectionHeaderRow>
         </SectionHeader>
-        {showContent}
+        <div className='app-summary-data-row'>
+          <Value />
+          <Fees
+            t={t}
+            data={data}
+            pageLoading={pageLoading}
+            dataReceived={dataReceived}
+            isTurkishSite={isTurkishSite}
+          />
+        </div>
+        <ByAsset />
       </div>
     </Card>
   )
