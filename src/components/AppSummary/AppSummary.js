@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -45,11 +45,11 @@ const AppSummary = ({
     setParams({ isUnrealizedProfitExcluded: value })
   }
 
-  const onRefresh = () => {
+  const onRefresh = useCallback(() => {
     refresh()
     refreshBalance()
     refreshSummaryByAsset()
-  }
+  }, [refresh, refreshBalance, refreshSummaryByAsset])
 
   return (
     <Card
