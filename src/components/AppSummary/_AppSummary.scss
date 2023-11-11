@@ -166,6 +166,7 @@
   .loading-container {
     display: flex;
     min-height: 320px;
+    max-width: 1000px;
 
     .loading {
       margin: auto;
