@@ -28,6 +28,7 @@
 
   &-title-row {
     display: flex;
+    min-height: 35px;
     max-width: 1000px;
     align-items: center;
     justify-content: space-between;
@@ -103,6 +104,15 @@
           }
         }
       } 
+
+      .loading-container {
+        display: flex;
+        min-height: 320px;
+
+        .loading {
+          margin: auto;
+        }
+      }
     }
   }
 }
