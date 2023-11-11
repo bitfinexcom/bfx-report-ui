@@ -113,6 +113,15 @@
           margin: auto;
         }
       }
+
+      .no-data {
+        display: flex;
+        min-height: 270px;
+    
+        &-wrapper {
+          margin: auto;
+        }
+      }
     }
   }
 }
