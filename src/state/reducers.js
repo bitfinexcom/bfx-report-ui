@@ -46,6 +46,7 @@ import timeRangeReducer from './timeRange/reducer'
 import tradedVolumeReducer from './tradedVolume/reducer'
 import tradesReducer from './trades/reducer'
 import statusReducer from './status/reducer'
+import summaryByAssetReducer from './summaryByAsset/reducer'
 import symbolsReducer from './symbols/reducer'
 import syncReducer from './sync/reducer'
 import uiReducer from './ui/reducer'
@@ -120,6 +121,7 @@ const FRAMEWORK_REDUCERS = {
   snapshots: snapshotsReducer,
   sync: syncReducer,
   taxReport: taxReportReducer,
+  summaryByAsset: summaryByAssetReducer,
 }
 
 const REDUCERS = {

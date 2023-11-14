@@ -11,6 +11,7 @@ import {
   setParams,
   refresh as refreshBalance,
 } from 'state/accountBalance/actions'
+import { refresh as refreshSummaryByAsset } from 'state/summaryByAsset/actions'
 import {
   getData,
   getPageLoading,
@@ -38,6 +39,7 @@ const mapDispatchToProps = {
   fetchData,
   setParams,
   refreshBalance,
+  refreshSummaryByAsset,
 }
 
 export default compose(

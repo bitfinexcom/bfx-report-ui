@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import _sortBy from 'lodash/sortBy'
-import _isEmpty from 'lodash/isEmpty'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
@@ -54,7 +54,7 @@ const AccountSummaryValue = () => {
   let showContent
   if (!dataReceived && pageLoading) {
     showContent = <Loading />
-  } else if (_isEmpty(entries)) {
+  } else if (isEmpty(entries)) {
     showContent = <NoData />
   } else {
     showContent = (
