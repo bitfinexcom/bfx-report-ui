@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/reference#rest-auth-orders-history
-import _get from 'lodash/get'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import { formatPair, mapPair } from 'state/symbols/utils'
 import authTypes from 'state/auth/constants'
@@ -31,7 +31,7 @@ export function ordersReducer(state = initialState, action) {
     case types.FETCH_ORDERS:
       return fetch(state)
     case types.UPDATE_ORDERS: {
-      const res = _get(payload, ['data', 'res'])
+      const res = get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,

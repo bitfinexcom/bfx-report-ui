@@ -1,5 +1,4 @@
-import _get from 'lodash/get'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -45,7 +44,7 @@ const SMALLEST_MTS_MAP = {
 function paginationReducer(state = initialState, { type, payload }) {
   switch (type) {
     case types.UPDATE: {
-      if (!_get(payload, ['data', 'res'])) {
+      if (!get(payload, ['data', 'res'])) {
         return state
       }
       const { section, data } = payload

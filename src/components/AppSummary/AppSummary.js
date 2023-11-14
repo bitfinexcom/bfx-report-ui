@@ -1,10 +1,7 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
 
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import {
   SectionHeader,
   SectionHeaderRow,
@@ -20,6 +17,7 @@ import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
 import Value from './AppSummary.value'
+import ByAsset from './AppSummary.byAsset'
 
 const AppSummary = ({
   t,
@@ -32,6 +30,7 @@ const AppSummary = ({
   isTurkishSite,
   refreshBalance,
   currentTimeFrame,
+  refreshSummaryByAsset,
   isUnrealizedProfitExcluded,
 }) => {
   useEffect(() => {
@@ -46,25 +45,12 @@ const AppSummary = ({
     setParams({ isUnrealizedProfitExcluded: value })
   }
 
-  let showContent
-  if (!dataReceived && pageLoading) {
-    showContent = <Loading />
-  } else if (isEmpty(data)) {
-    showContent = <NoData refresh={refresh} />
-  } else {
-    showContent = (
-      <>
-        <div className='app-summary-data-row'>
-          <Value />
-          <Fees
-            t={t}
-            data={data}
-            isTurkishSite={isTurkishSite}
-          />
-        </div>
-      </>
-    )
-  }
+  const onRefresh = useCallback(() => {
+    refresh()
+    refreshBalance()
+    refreshSummaryByAsset()
+  }, [refresh, refreshBalance, refreshSummaryByAsset])
+
   return (
     <Card
       elevation={Elevation.ZERO}
@@ -110,10 +96,20 @@ const AppSummary = ({
                 onChange={handleUnrealizedProfitChange}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={refreshBalance} />
+            <RefreshButton onClick={onRefresh} />
           </SectionHeaderRow>
         </SectionHeader>
-        {showContent}
+        <div className='app-summary-data-row'>
+          <Value />
+          <Fees
+            t={t}
+            data={data}
+            pageLoading={pageLoading}
+            dataReceived={dataReceived}
+            isTurkishSite={isTurkishSite}
+          />
+        </div>
+        <ByAsset />
       </div>
     </Card>
   )
@@ -140,6 +136,7 @@ AppSummary.propTypes = {
   t: PropTypes.func.isRequired,
   currentTimeFrame: PropTypes.string.isRequired,
   isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
+  refreshSummaryByAsset: PropTypes.func.isRequired,
 }
 
 AppSummary.defaultProps = {

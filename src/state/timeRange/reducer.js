@@ -1,5 +1,5 @@
 import { REHYDRATE } from 'redux-persist'
-import _get from 'lodash/get'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 
@@ -17,7 +17,7 @@ export function timeRangeReducer(state = initialState, action) {
 
   switch (type) {
     case REHYDRATE:
-      if (_get(payload, ['timeRange', 'isTimeRangePreserved'], true)) {
+      if (get(payload, ['timeRange', 'isTimeRangePreserved'], true)) {
         return state
       }
 

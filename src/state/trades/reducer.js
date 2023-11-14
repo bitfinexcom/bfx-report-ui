@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/reference#rest-auth-trades
-import _get from 'lodash/get'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import { formatPair, mapSymbol, mapPair } from 'state/symbols/utils'
 import authTypes from 'state/auth/constants'
@@ -31,7 +31,7 @@ export function tradesReducer(state = initialState, action) {
     case types.FETCH_TRADES:
       return fetch(state)
     case types.UPDATE_TRADES: {
-      const res = _get(payload, ['data', 'res'])
+      const res = get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,

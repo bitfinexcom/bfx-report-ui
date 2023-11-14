@@ -1,5 +1,5 @@
 // https://docs.bitfinex.com/v2/reference#rest-auth-funding-credits-hist
-import _get from 'lodash/get'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -32,7 +32,7 @@ export function fundingCreditHistoryReducer(state = initialState, action) {
     case types.FETCH_FCREDIT:
       return fetch(state)
     case types.UPDATE_FCREDIT: {
-      const res = _get(payload, ['data', 'res'])
+      const res = get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,

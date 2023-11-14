@@ -160,7 +160,13 @@ class DataTable extends PureComponent {
 
   render() {
     const {
-      className, numRows, t, tableColumns, device, tableScroll,
+      t,
+      device,
+      numRows,
+      className,
+      tableScroll,
+      tableColumns,
+      defaultRowHeight,
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
 
@@ -179,7 +185,7 @@ class DataTable extends PureComponent {
         getCellClipboardData={this.getCellClipboardData}
         onCopy={this.onCopy}
         bodyContextMenuRenderer={this.renderBodyContextMenu}
-        defaultRowHeight={26}
+        defaultRowHeight={defaultRowHeight}
       >
         {tableColumns.map(column => (
           <Column
@@ -215,11 +221,13 @@ DataTable.propTypes = {
   setColumnsWidth: PropTypes.func.isRequired,
   showColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
+  defaultRowHeight: PropTypes.number,
 }
 
 DataTable.defaultProps = {
   className: '',
   section: undefined,
+  defaultRowHeight: 26,
 }
 
 export default DataTable

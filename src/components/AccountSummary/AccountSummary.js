@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import _get from 'lodash/get'
 import { Card, Elevation } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
@@ -81,7 +80,7 @@ class AccountSummary extends PureComponent {
         <div className='section-account-summary-data'>
           <Volume
             t={t}
-            data={_get(data, 'trade_vol_30d', [])}
+            data={get(data, 'trade_vol_30d', [])}
           />
           <Fees
             t={t}
@@ -99,8 +98,8 @@ class AccountSummary extends PureComponent {
               <PaidFees
                 t={t}
                 title='accountsummary.margin_funds'
-                data={_get(data, 'fees_funding_30d', {})}
-                total={_get(data, 'fees_funding_total_30d', 0)}
+                data={get(data, 'fees_funding_30d', {})}
+                total={get(data, 'fees_funding_total_30d', 0)}
               />
             </>
           )}
@@ -108,12 +107,12 @@ class AccountSummary extends PureComponent {
           <PaidFees
             t={t}
             title='accountsummary.trading_funds'
-            data={_get(data, 'fees_trading_30d', {})}
-            total={_get(data, 'fees_trading_total_30d', 0)}
+            data={get(data, 'fees_trading_30d', {})}
+            total={get(data, 'fees_trading_total_30d', 0)}
           />
           <FeeTierVolume
             t={t}
-            data={_get(data, 'trade_vol_30d', {})}
+            data={get(data, 'trade_vol_30d', {})}
           />
           <Leo t={t} data={data} />
         </div>

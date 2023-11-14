@@ -1,9 +1,9 @@
 // https://docs.bitfinex.com/reference#rest-auth-order-trades
+import { get } from '@bitfinex/lib-js-util-base'
 
-import { mapPair, formatPair } from 'state/symbols/utils'
 import authTypes from 'state/auth/constants'
 import { fetchFail } from 'state/reducers.helper'
-import _get from 'lodash/get'
+import { mapPair, formatPair } from 'state/symbols/utils'
 
 import types from './constants'
 
@@ -24,7 +24,7 @@ export function ordersIdReducer(state = initialState, action) {
         pageLoading: true,
       }
     case types.UPDATE_ORDER_TRADES: {
-      const res = _get(payload, ['data', 'res'])
+      const res = get(payload, ['data', 'res'])
       if (!res) {
         return {
           ...state,
