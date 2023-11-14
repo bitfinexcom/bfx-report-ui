@@ -5,7 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import _get from 'lodash/get'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import i18n, { LANGUAGES } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
@@ -20,7 +20,7 @@ export function* fetchTimezone() {
   const { result } = yield call(getUsersTimeConf)
 
   if (result) {
-    const timezone = _get(result, 'timezoneName', types.DEFAULT_TIMEZONE)
+    const timezone = get(result, 'timezoneName', types.DEFAULT_TIMEZONE)
     yield put(setTimezone(timezone))
   }
 }

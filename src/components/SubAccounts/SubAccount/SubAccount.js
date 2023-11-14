@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Intent } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
-import _get from 'lodash/get'
 import _map from 'lodash/map'
 import _isEqual from 'lodash/isEqual'
 import _differenceBy from 'lodash/differenceBy'
+import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import Loading from 'ui/Loading'
 import { hasValidUsername } from 'components/Auth/SignInList/SignInList.helpers'
@@ -154,7 +153,7 @@ class SubAccount extends PureComponent {
     const { email: currentUserEmail, isSubAccount } = authData
     const masterAccountEmail = masterAccount || currentUserEmail
     const subAccountData = users.find((user) => user.email === masterAccountEmail && user.isSubAccount)
-    const subUsers = _get(subAccountData, 'subUsers', [])
+    const subUsers = get(subAccountData, 'subUsers', [])
     const hasFilledAccounts = getFilledAccounts(accounts, t).length > 0
       || (hasValidUsername(localUsername) && !isEmpty(subUsers))
     const hasSubAccount = !!users.find(user => user.email === masterAccountEmail && user.isSubAccount)

@@ -1,6 +1,6 @@
 // https://docs.bitfinex.com/v2/reference#rest-public-status
-import _get from 'lodash/get'
 import _sortBy from 'lodash/sortBy'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import queryTypes from 'state/query/constants'
@@ -30,7 +30,7 @@ export function derivativesReducer(state = initialState, action) {
     case types.FETCH_DERIVATIVES:
       return fetch(state)
     case types.UPDATE_DERIVATIVES: {
-      if (!_get(payload, ['data', 'res'])) {
+      if (!get(payload, ['data', 'res'])) {
         return {
           ...state,
           dataReceived: true,

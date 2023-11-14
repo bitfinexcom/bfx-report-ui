@@ -1,9 +1,9 @@
-import _get from 'lodash/get'
+import { get } from '@bitfinex/lib-js-util-base'
 
 import { mapDescription, mapSymbol } from 'state/symbols/utils'
 
 export const updateLedgers = (state, payload) => {
-  const res = _get(payload, ['data', 'res'])
+  const res = get(payload, ['data', 'res'])
   if (!res) {
     return {
       ...state,
