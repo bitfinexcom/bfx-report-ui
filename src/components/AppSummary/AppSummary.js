@@ -28,14 +28,17 @@ const AppSummary = ({
   pageLoading,
   dataReceived,
   isTurkishSite,
+  isSyncRequired,
   refreshBalance,
   currentTimeFrame,
   refreshSummaryByAsset,
   isUnrealizedProfitExcluded,
 }) => {
   useEffect(() => {
-    if (!dataReceived && !pageLoading) fetchData()
-  }, [])
+    if (!dataReceived && !pageLoading && !isSyncRequired) {
+      fetchData()
+    }
+  }, [dataReceived, pageLoading, isSyncRequired])
 
   const handleTimeFrameChange = (timeframe) => {
     setParams({ timeframe })
@@ -134,6 +137,7 @@ AppSummary.propTypes = {
   refreshBalance: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  isSyncRequired: PropTypes.bool.isRequired,
   currentTimeFrame: PropTypes.string.isRequired,
   isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
   refreshSummaryByAsset: PropTypes.func.isRequired,
