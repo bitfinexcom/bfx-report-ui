@@ -9,6 +9,7 @@ import { makeFetchCall } from 'state/utils'
 import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 import types from './constants'
 import actions from './actions'
@@ -44,7 +45,10 @@ export function* fetchAccountBalance() {
 }
 
 function* refreshAccountBalance() {
-  yield put(actions.fetchBalance())
+  const isSyncRequired = yield select(getIsSyncRequired)
+  if (!isSyncRequired) {
+    yield put(actions.fetchBalance())
+  }
 }
 
 function* fetchAccountBalanceFail({ payload }) {
