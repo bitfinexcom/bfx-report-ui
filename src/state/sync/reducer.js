@@ -20,6 +20,7 @@ const initialState = {
   isSyncing: false,
   progress: 0,
   estimatedSyncTime: {},
+  isNotSyncRequired: false,
 }
 
 export function syncReducer(state = initialState, action) {
@@ -119,6 +120,12 @@ export function syncReducer(state = initialState, action) {
       return {
         ...state,
         estimatedSyncTime: payload,
+      }
+    }
+    case types.SET_IS_NOT_SYNC_REQUIRED: {
+      return {
+        ...state,
+        isNotSyncRequired: payload,
       }
     }
     default: {
