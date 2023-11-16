@@ -192,9 +192,9 @@ export function editSyncConf(config) {
   }
 }
 
-export function setIsNotSyncRequired(payload) {
+export function setIsSyncRequired(payload) {
   return {
-    type: types.SET_IS_NOT_SYNC_REQUIRED,
+    type: types.SET_IS_SYNC_REQUIRED,
     payload,
   }
 }
@@ -217,5 +217,5 @@ export default {
   stopSyncing,
   startSyncNow,
   stopSyncNow,
-  setIsNotSyncRequired,
+  setIsSyncRequired,
 }
