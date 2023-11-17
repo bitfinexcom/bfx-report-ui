@@ -59,7 +59,7 @@ const AccountSummaryValue = () => {
   if (!dataReceived && pageLoading) {
     showContent = <Loading />
   } else if (isEmpty(entries)) {
-    showContent = <NoData />
+    showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
       <div className='chart-wrapper'>
