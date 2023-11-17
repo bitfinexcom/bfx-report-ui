@@ -621,6 +621,7 @@
     "title": "Summary",
     "leo_level": "LEO level",
     "avg_amount": "Avg.Amount",
+    "no_data": "No related data for this period or data should be synced." ,
     "fees": {
       "title": "Account Fees",
       "sub_title": "Based on your trading volume",
@@ -644,8 +645,7 @@
       "balance_change": "Balance Change",
       "profits": "Profits",
       "volume": "Volume",
-      "total": "Total",
-      "no_data": "No related data for this period." 
+      "total": "Total"
     }
   },
   "symbols": {
