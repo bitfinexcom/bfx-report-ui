@@ -121,7 +121,6 @@ function* signUp({ payload }) {
       }
       yield put(actions.addUser(newUser))
       yield put(actions.showOtpLogin(false))
-      if (showFrameworkMode) yield put(actions.fetchUsers())
       return
     }
 
@@ -483,6 +482,7 @@ function* deleteAccount({ payload }) {
 
 function* logout() {
   yield put(tokenRefreshStop())
+  if (showFrameworkMode) yield put(actions.fetchUsers())
 }
 
 function* handleSyncAfterUpdate({ payload }) {
