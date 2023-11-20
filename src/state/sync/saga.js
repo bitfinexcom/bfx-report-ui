@@ -78,6 +78,7 @@ function* stopSyncNow() {
   if (result) {
     yield put(actions.setIsSyncing(false))
     yield put(actions.setEstimatedTime({}))
+    yield put(actions.setIsSyncRequired(true))
     yield put(updateStatus({ id: 'sync.logout' }))
   }
   if (error) {
@@ -130,9 +131,9 @@ function* forceQueryFromDb() {
   const syncProgress = yield select(getSyncProgress)
   if (syncProgress === 100) {
     yield put(updateStatus({ id: 'sync.sync-done' }))
+    yield put(actions.setIsSyncRequired(false))
   }
   yield put(actions.setIsSyncing(false))
-  yield put(actions.setIsSyncRequired(false))
 }
 
 function* syncLogout() {
