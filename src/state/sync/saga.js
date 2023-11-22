@@ -43,6 +43,7 @@ function* startSyncing() {
     return
   }
   const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
+  yield put(actions.setIsSyncRequired(!isNotSyncRequired))
   const { result, error } = yield call(enableSyncMode, { isNotSyncRequired })
 
   if (result && !isNotSyncRequired) {
@@ -77,6 +78,7 @@ function* stopSyncNow() {
   if (result) {
     yield put(actions.setIsSyncing(false))
     yield put(actions.setEstimatedTime({}))
+    yield put(actions.setIsSyncRequired(true))
     yield put(updateStatus({ id: 'sync.logout' }))
   }
   if (error) {
@@ -131,6 +133,7 @@ function* forceQueryFromDb() {
     yield put(updateStatus({ id: 'sync.sync-done' }))
   }
   yield put(actions.setIsSyncing(false))
+  yield put(actions.setIsSyncRequired(false))
 }
 
 function* syncLogout() {
@@ -218,6 +221,7 @@ function* requestsRedirectUpdate({ payload }) {
       yield put(actions.setIsSyncing(true))
     } else {
       yield put(actions.setIsSyncing(false))
+      yield put(actions.setIsSyncRequired(false))
       yield put(updateStatus({ id: 'sync.sync-done' }))
     }
   } else {
@@ -238,6 +242,7 @@ function* updateSyncStatus() {
       }
       if (progress === 100) {
         yield put(actions.setIsSyncing(false))
+        yield put(actions.setIsSyncRequired(false))
         yield put(updateStatus({ id: 'sync.sync-done' }))
       }
       break

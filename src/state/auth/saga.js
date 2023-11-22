@@ -29,6 +29,7 @@ import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
 import { updateErrorStatus, updateSuccessStatus, updateWarningStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
+import { setIsSyncRequired } from 'state/sync/actions'
 import { refreshToken, tokenRefreshStart, tokenRefreshStop } from 'state/auth/tokenRefresh/actions'
 import config from 'config'
 
@@ -121,7 +122,6 @@ function* signUp({ payload }) {
       }
       yield put(actions.addUser(newUser))
       yield put(actions.showOtpLogin(false))
-      if (showFrameworkMode) yield put(actions.fetchUsers())
       return
     }
 
@@ -483,6 +483,10 @@ function* deleteAccount({ payload }) {
 
 function* logout() {
   yield put(tokenRefreshStop())
+  if (showFrameworkMode) {
+    yield put(actions.fetchUsers())
+    yield put(setIsSyncRequired(true))
+  }
 }
 
 function* handleSyncAfterUpdate({ payload }) {

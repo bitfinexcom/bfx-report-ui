@@ -22,6 +22,7 @@ import {
   getIsUnrealizedProfitExcluded,
 } from 'state/accountBalance/selectors'
 import { getIsTurkishSite } from 'state/base/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 import AppSummary from './AppSummary'
 
@@ -31,6 +32,7 @@ const mapStateToProps = state => ({
   dataReceived: getDataReceived(state),
   currentTimeFrame: getTimeframe(state),
   isTurkishSite: getIsTurkishSite(state),
+  isSyncRequired: getIsSyncRequired(state),
   isUnrealizedProfitExcluded: getIsUnrealizedProfitExcluded(state),
 })
 

@@ -192,6 +192,13 @@ export function editSyncConf(config) {
   }
 }
 
+export function setIsSyncRequired(payload) {
+  return {
+    type: types.SET_IS_SYNC_REQUIRED,
+    payload,
+  }
+}
+
 export default {
   editPublicTradesPref,
   editPublicTradesSymbolPref,
@@ -210,4 +217,5 @@ export default {
   stopSyncing,
   startSyncNow,
   stopSyncNow,
+  setIsSyncRequired,
 }

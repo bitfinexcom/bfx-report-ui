@@ -38,7 +38,7 @@ const AppSummaryFees = ({
   if (!dataReceived && pageLoading) {
     showContent = <Loading />
   } else if (isEmpty(data)) {
-    showContent = <NoData />
+    showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
       <CollapsedTable
