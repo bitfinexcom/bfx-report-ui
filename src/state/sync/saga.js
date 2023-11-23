@@ -218,7 +218,6 @@ function* requestsRedirectUpdate({ payload }) {
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
     yield put(actions.setIsSyncing(false))
-    yield put(actions.setIsSyncRequired(false))
   } else {
     yield put(actions.setSyncMode(types.MODE_OFFLINE))
     yield put(actions.forceQueryFromDb())
