@@ -90,15 +90,17 @@ const AppSummary = ({
                 onChange={handleTimeFrameChange}
               />
             </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.unrealized-profits.title')}
-              </SectionHeaderItemLabel>
-              <UnrealizedProfitSelector
-                value={isUnrealizedProfitExcluded}
-                onChange={handleUnrealizedProfitChange}
-              />
-            </SectionHeaderItem>
+            <div className='hidden'>
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('selector.unrealized-profits.title')}
+                </SectionHeaderItemLabel>
+                <UnrealizedProfitSelector
+                  value={isUnrealizedProfitExcluded}
+                  onChange={handleUnrealizedProfitChange}
+                />
+              </SectionHeaderItem>
+            </div>
             <RefreshButton onClick={onRefresh} />
           </SectionHeaderRow>
         </SectionHeader>
