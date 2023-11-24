@@ -46,6 +46,8 @@ const {
   MENU_WEIGHTED_AVERAGES,
 } = queryType
 
+const { isElectronApp, HOME_URL } = config
+
 export const getAuthFromStore = () => {
   const state = store.getState()
   return selectAuth(state)
@@ -57,13 +59,13 @@ export const getApiUrlFromStore = () => {
 }
 
 // turned off for firefox
-export const getDefaultTableScrollSetting = () => config.isElectronApp || !navigator.userAgent.includes('Firefox')
+export const getDefaultTableScrollSetting = () => isElectronApp || !navigator.userAgent.includes('Firefox')
 
 export function postJsonFetch(url, bodyJson) {
   return fetch(url, {
     method: 'POST',
     headers: {
-      Origin: config.HOME_URL,
+      Origin: HOME_URL,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
