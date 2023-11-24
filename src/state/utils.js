@@ -269,9 +269,19 @@ export function checkFetch(prevProps, props, type) {
   if (!isValidateType(type)) {
     return
   }
-  const { dataReceived: prevDataReceived } = prevProps
-  const { dataReceived, pageLoading, fetchData } = props
+  const {
+    dataReceived: prevDataReceived, isSyncRequired: prevIsSyncRequired,
+  } = prevProps
+  const {
+    dataReceived, pageLoading, fetchData, isSyncRequired,
+  } = props
+  const shouldRefresh = prevIsSyncRequired !== isSyncRequired
+  console.log('+++prevIsSyncRequired', prevIsSyncRequired)
+  console.log('+++isSyncRequired', prevIsSyncRequired)
   if (!dataReceived && dataReceived !== prevDataReceived && !pageLoading) {
+    fetchData()
+  }
+  if (showFrameworkMode && shouldRefresh) {
     fetchData()
   }
 }
