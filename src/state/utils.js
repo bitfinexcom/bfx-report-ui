@@ -46,7 +46,7 @@ const {
   MENU_WEIGHTED_AVERAGES,
 } = queryType
 
-const { isElectronApp, HOME_URL } = config
+const { isElectronApp, showFrameworkMode, HOME_URL } = config
 
 export const getAuthFromStore = () => {
   const state = store.getState()
@@ -164,7 +164,7 @@ export const checkInit = (props, type) => {
     pageLoading,
     fetchData,
     match,
-
+    isSyncRequired,
     setTargetSymbol,
     setTargetSymbols,
     setTargetPair,
@@ -172,6 +172,16 @@ export const checkInit = (props, type) => {
     targetIds,
     setTargetIds,
   } = props
+
+  const shouldWaitInitialSync = showFrameworkMode && isSyncRequired
+
+  console.log('++iisSyncRequired', isSyncRequired)
+  console.log('++isFrameworkMode', showFrameworkMode)
+  console.log('++shouldWaitInitialSync', shouldWaitInitialSync)
+
+  if (shouldWaitInitialSync) {
+    return
+  }
 
   switch (type) {
     case MENU_PUBLIC_FUNDING: {
