@@ -8,6 +8,7 @@ import {
   formatUsdValue,
   formatPercentValue,
   formatUsdValueChange,
+  shouldShowPercentCheck,
 } from './AppSummary.helpers'
 
 export const getFeesColumns = ({
@@ -142,7 +143,7 @@ export const getAssetColumns = ({
     width: 178,
     renderer: (rowIndex) => {
       const { balanceUsd, valueChange30dUsd, valueChange30dPerc } = preparedData[rowIndex]
-      const shouldShowPercentChange = balanceUsd !== valueChange30dUsd
+      const shouldShowPercentChange = shouldShowPercentCheck(balanceUsd, valueChange30dUsd)
       return (
         <Cell tooltip={getTooltipContent(valueChange30dUsd, t)}>
           <>
