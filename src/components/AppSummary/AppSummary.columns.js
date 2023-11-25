@@ -141,17 +141,23 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.balance_change',
     width: 178,
     renderer: (rowIndex) => {
-      const { valueChange30dUsd, valueChange30dPerc } = preparedData[rowIndex]
+      const { balanceUsd, valueChange30dUsd, valueChange30dPerc } = preparedData[rowIndex]
+      const shouldShowPercentChange = balanceUsd !== valueChange30dUsd
       return (
         <Cell tooltip={getTooltipContent(valueChange30dUsd, t)}>
           <>
             <span className='cell-value'>
               {formatUsdValueChange(valueChange30dUsd)}
             </span>
-            <br />
-            <span className='cell-value secondary-value'>
-              {formatPercentValue(valueChange30dPerc)}
-            </span>
+            {shouldShowPercentChange && (
+              <>
+                <br />
+                <span className='cell-value secondary-value'>
+                  {formatPercentValue(valueChange30dPerc)}
+                </span>
+              </>
+            )}
+
           </>
         </Cell>
       )
