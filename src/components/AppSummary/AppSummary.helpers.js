@@ -25,3 +25,11 @@ export const formatUsdValueChange = (value) => {
   if (val < 0) return <span>{`-$${formatThousands(Math.abs(val))}`}</span>
   return <span>{`$${formatThousands(val)}`}</span>
 }
+
+export const shouldShowPercentCheck = (balance, balanceChange) => {
+  const bal = prepareNumericValue(balance)
+  const balChange = prepareNumericValue(balanceChange)
+  if (balChange === 0) return true
+  if (bal === balChange) return false
+  return true
+}
