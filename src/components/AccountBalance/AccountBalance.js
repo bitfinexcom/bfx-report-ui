@@ -142,15 +142,17 @@ class AccountBalance extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.unrealized-profits.title')}
-              </SectionHeaderItemLabel>
-              <UnrealizedProfitSelector
-                value={isUnrealizedProfitExcluded}
-                onChange={this.handleUnrealizedProfitChange}
-              />
-            </SectionHeaderItem>
+            <div className='hidden'>
+              <SectionHeaderItem>
+                <SectionHeaderItemLabel>
+                  {t('selector.unrealized-profits.title')}
+                </SectionHeaderItemLabel>
+                <UnrealizedProfitSelector
+                  value={isUnrealizedProfitExcluded}
+                  onChange={this.handleUnrealizedProfitChange}
+                />
+              </SectionHeaderItem>
+            </div>
             <QueryButton
               disabled={!hasChanges}
               onClick={this.handleQuery}

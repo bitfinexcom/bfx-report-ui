@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
@@ -135,13 +135,13 @@ export default function getColumns(props) {
             className='bitfinex-text-align-right'
             tooltip={tooltip}
           >
-            <Fragment>
+            <>
               {formatAmount(fee)}
               {' '}
               <span className='bitfinex-show-soft'>
                 {feeCurrency}
               </span>
-            </Fragment>
+            </>
           </Cell>
         )
       },

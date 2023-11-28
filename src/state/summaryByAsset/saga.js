@@ -1,11 +1,13 @@
 import {
   call,
   put,
+  select,
   takeLatest,
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 import types from './constants'
 import actions from './actions'
@@ -34,7 +36,10 @@ export function* fetchSummaryByAsset() {
 }
 
 function* refreshSummaryByAsset() {
-  yield put(actions.fetchData())
+  const isSyncRequired = yield select(getIsSyncRequired)
+  if (!isSyncRequired) {
+    yield put(actions.fetchData())
+  }
 }
 
 function* fetchSummaryByAssetFail({ payload }) {

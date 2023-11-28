@@ -19,6 +19,7 @@ import {
   getCurrentTimeFrame,
 } from 'state/accountBalance/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { fetchBalance } from 'state/accountBalance/actions'
 
 const AccountSummaryValue = () => {
@@ -28,11 +29,14 @@ const AccountSummaryValue = () => {
   const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
+  const isSyncRequired = useSelector(getIsSyncRequired)
   const currTimeFrame = useSelector(getCurrentTimeFrame)
 
   useEffect(() => {
-    if (!dataReceived && !pageLoading) dispatch(fetchBalance())
-  }, [timeRange])
+    if (!dataReceived && !pageLoading && !isSyncRequired) {
+      dispatch(fetchBalance())
+    }
+  }, [timeRange, dataReceived, pageLoading, isSyncRequired])
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
@@ -55,7 +59,7 @@ const AccountSummaryValue = () => {
   if (!dataReceived && pageLoading) {
     showContent = <Loading />
   } else if (isEmpty(entries)) {
-    showContent = <NoData />
+    showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
       <div className='chart-wrapper'>

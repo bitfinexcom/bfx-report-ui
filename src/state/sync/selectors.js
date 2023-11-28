@@ -20,6 +20,7 @@ export const getTickersHistoryPairs = state => getTickersHistoryConf(state).pair
 
 export const getCandlesConf = state => getSyncConf(state).candlesConf || []
 export const getStatusMessagesConf = state => getSyncConf(state).statusMessagesConf || []
+export const getIsSyncRequired = state => getSync(state)?.isSyncRequired ?? false
 
 export default {
   getSyncMode,
@@ -37,4 +38,5 @@ export default {
   getTickersHistoryPairs,
   getCandlesConf,
   getStatusMessagesConf,
+  getIsSyncRequired,
 }

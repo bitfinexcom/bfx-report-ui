@@ -13,6 +13,7 @@ import {
   getSummaryByAssetTotal,
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 import { getAssetColumns } from './AppSummary.columns'
 import { prepareSummaryByAssetData } from './AppSummary.helpers'
@@ -24,10 +25,13 @@ const AppSummaryByAsset = () => {
   const dataReceived = useSelector(getDataReceived)
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
+  const isSyncRequired = useSelector(getIsSyncRequired)
 
   useEffect(() => {
-    if (!dataReceived && !pageLoading) dispatch(fetchData())
-  }, [dataReceived, pageLoading])
+    if (!dataReceived && !pageLoading && !isSyncRequired) {
+      dispatch(fetchData())
+    }
+  }, [dataReceived, pageLoading, isSyncRequired])
 
   const preparedData = useMemo(
     () => prepareSummaryByAssetData(entries, total, t),
@@ -43,7 +47,7 @@ const AppSummaryByAsset = () => {
   if (!dataReceived && pageLoading) {
     showContent = <Loading />
   } else if (isEmpty(entries)) {
-    showContent = <NoData title='summary.by_asset.no_data' />
+    showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
       <DataTable
