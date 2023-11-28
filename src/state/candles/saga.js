@@ -90,8 +90,7 @@ export function* fetchCandles({ payload: type }) {
 }
 
 function* refreshCandles() {
-  const params = yield select(selectors.getParams)
-  yield put(actions.fetchData(params))
+  yield put(actions.fetchData())
 }
 
 function* fetchCandlesFail({ payload }) {

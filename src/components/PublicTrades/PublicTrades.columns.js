@@ -56,9 +56,11 @@ export default function getColumns(props) {
         const classes = amountStyle(amount)
         return (
           <Cell tooltip={getTooltipContent(type, t)}>
-            <span className={classes}>
-              {type}
-            </span>
+            <>
+              <span className={classes}>
+                {type}
+              </span>
+            </>
           </Cell>
         )
       },
