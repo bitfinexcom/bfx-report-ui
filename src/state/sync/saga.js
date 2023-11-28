@@ -76,9 +76,10 @@ function* startSyncNow() {
 function* stopSyncNow() {
   const { result, error } = yield call(syncNowStop)
   if (result) {
+    const { result: haveSyncedAtLeastOnce } = yield call(haveCollsBeenSyncedAtLeastOnce)
+    yield put(actions.setIsSyncRequired(!haveSyncedAtLeastOnce))
     yield put(actions.setIsSyncing(false))
     yield put(actions.setEstimatedTime({}))
-    yield put(actions.setIsSyncRequired(true))
     yield put(updateStatus({ id: 'sync.logout' }))
   }
   if (error) {
@@ -201,6 +202,8 @@ function* progressUpdate({ payload }) {
   if (!isSyncInProgress || state === types.SYNC_INTERRUPTED) {
     yield put(actions.setIsSyncing(false))
     if (error) yield put(updateSyncErrorStatus(error))
+  } else if (state === types.SYNC_FINISHED) {
+    yield put(actions.setIsSyncing(false))
   } else {
     const syncProgress = Number.isInteger(progress)
       ? progress
@@ -215,15 +218,7 @@ function* requestsRedirectUpdate({ payload }) {
 
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
-    const syncProgress = yield select(getSyncProgress)
-    const isSyncing = Number.isInteger(syncProgress) && syncProgress !== 100
-    if (isSyncing) {
-      yield put(actions.setIsSyncing(true))
-    } else {
-      yield put(actions.setIsSyncing(false))
-      yield put(actions.setIsSyncRequired(false))
-      yield put(updateStatus({ id: 'sync.sync-done' }))
-    }
+    yield put(actions.setIsSyncing(false))
   } else {
     yield put(actions.setSyncMode(types.MODE_OFFLINE))
     yield put(actions.forceQueryFromDb())

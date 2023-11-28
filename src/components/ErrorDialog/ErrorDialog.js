@@ -29,7 +29,7 @@ const ErrorDialog = ({
 
   useEffect(() => {
     if (shouldStartSync) startSync()
-  }, [shouldStartSync])
+  }, [])
 
   const handleClose = () => {
     toggleDialog(false)
