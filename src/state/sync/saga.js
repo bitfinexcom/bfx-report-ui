@@ -76,9 +76,10 @@ function* startSyncNow() {
 function* stopSyncNow() {
   const { result, error } = yield call(syncNowStop)
   if (result) {
+    const { result: haveSyncedAtLeastOnce } = yield call(haveCollsBeenSyncedAtLeastOnce)
+    yield put(actions.setIsSyncRequired(!haveSyncedAtLeastOnce))
     yield put(actions.setIsSyncing(false))
     yield put(actions.setEstimatedTime({}))
-    yield put(actions.setIsSyncRequired(true))
     yield put(updateStatus({ id: 'sync.logout' }))
   }
   if (error) {
