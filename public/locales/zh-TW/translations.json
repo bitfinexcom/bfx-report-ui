@@ -15,7 +15,7 @@
     "average_amount": "平均數量"
   },
   "activepositions": {
-    "title": "活躍的倉位"
+    "title": "未平倉位"
   },
   "affiliatesearnings": {
     "title": "推薦計畫收益",
@@ -129,8 +129,8 @@
     "amountUsd": "數量(美元)",
     "ask": "賣出",
     "avgprice": "平均執行價格",
-    "balance": "金額",
-    "balanceUsd": "金額(美元)",
+    "balance": "餘額",
+    "balanceUsd": "餘額（美元）",
     "base-price": "基價",
     "bid": "買入",
     "browser": "瀏覽器",
@@ -157,10 +157,10 @@
     "fees": "費用",
     "firstTrade": "首次交易",
     "fundBalance": "保險基金餘額",
-    "fundingAccrued": "下階段累計資金",
-    "fundingCost": "互換成本",
-    "fundingStep": "下階段累加值",
-    "fundingType": "互換類型",
+    "fundingAccrued": "累計資金（下一期）",
+    "fundingCost": "融資成本",
+    "fundingStep": "累計資金（下一期）加值",
+    "fundingType": "融資類型",
     "id": "#",
     "ip": "IP",
     "invoices": "發票",
@@ -176,7 +176,7 @@
     "note": "備註",
     "opened": "開始",
     "orderid": "訂單 ID",
-    "pair": "對",
+    "pair": "交易對",
     "payCurrencies": "支付幣別",
     "payment": "付款",
     "percent": "百分比",
@@ -214,7 +214,7 @@
     "updated": "更新",
     "usd": "美元",
     "version": "版本",
-    "volume": "網路聲量",
+    "volume": "交易量",
     "wallet": "錢包",
     "walletsTotal": "錢包總餘額 (美元)",
     "webhook": "Webhook"
@@ -280,7 +280,7 @@
     "title": "融資（已使用）",
     "side": {
       "provided": "已提供",
-      "taken": "已領取",
+      "taken": "已借入",
       "both": "兩者",
       "null": "空"
     }
@@ -292,13 +292,13 @@
     "title": "提供的融資（未使用）",
     "side": {
       "provided": "已提供",
-      "taken": "已領取",
+      "taken": "已借入",
       "both": "兩者",
       "null": "空"
     }
   },
   "foffer": {
-    "title": "保證金融資出價與報價"
+    "title": "借入資金和出借資金"
   },
   "fpayment": {
     "title": "放貸收益"
@@ -327,9 +327,9 @@
     "title": "發票"
   },
   "ledgers": {
-    "title": "餘額",
+    "title": "分類帳",
     "categories": {
-      "exchange": "交易",
+      "exchange": "現貨",
       "position_modified": "倉位修改、關閉或清算",
       "position_claim": "倉位贖回",
       "position_transfer": "倉位轉移",
@@ -356,7 +356,7 @@
       "withdrawal_fee": "提款手續費",
       "withdrawal_express_fee": "快速提款手續費",
       "miner_fee": "礦工費",
-      "staking_payment": "Staking收益",
+      "staking_payment": "質押收益",
       "adjustment": "調整",
       "expense": "費用",
       "currency_conversion": "貨幣轉換",
@@ -372,18 +372,18 @@
     "title": "登入"
   },
   "movements": {
-    "title": "活動"
+    "title": "資金動向"
   },
   "navItems": {
     "reports": "報告",
     "myAccount": {
       "title": "我的帳戶",
       "summary": "摘要",
-      "balance": "金額",
+      "balance": "餘額",
       "analysisStat": "分析及統計",
       "analysisStatTabs": {
         "weightedAvgs": "加權平均",
-        "volume": "網路聲量",
+        "volume": "交易量",
         "winLoss": "獲利／虧損",
         "conRisk": "集中風險",
         "loan": "借貸報告",
@@ -395,20 +395,20 @@
       "title": "帳戶歷史紀錄",
       "funding": "融資",
       "fundingTabs": {
-        "bidsOffers": "出價和報價",
-        "loans": "出借資金",
+        "bidsOffers": "借入和出借",
+        "loans": "融資（未使用）",
         "credits": "融資（已使用）"
       },
       "earnings": "收益",
       "earningsTabs": {
         "funding": "融資",
-        "staking": "Staking",
+        "staking": "質押",
         "affiliates": "推薦計畫"
       },
       "wallets": "錢包",
       "walletsTabs": {
         "balances": "餘額",
-        "movements": "活動"
+        "movements": "資金動向"
       }
     },
     "merchantHistory": {
@@ -461,11 +461,11 @@
   },
   "positions": {
     "title": "倉位",
-    "active": "活躍",
+    "active": "未平倉位",
     "closed": "已關閉",
     "no_active": "目前沒有未平倉位。",
     "swap": {
-      "daily": "每日",
+      "daily": "日結",
       "period": "期間",
       "term": "條件"
     }
@@ -490,7 +490,7 @@
       "symbol-description": "為了離線查詢公開融資，請先設定欲離線查詢的貨幣與開始日期。",
       "setup": "設定同步喜好設定",
       "symbols": "暫存貨幣",
-      "pairs": "暫存代幣對",
+      "pairs": "離線交易對",
       "starttime": "起始時間",
       "btn-apply": "確認",
       "apply-tooltip": "資料將於下次同步時變更。",
@@ -516,15 +516,15 @@
     "all": "全部",
     "inactive": "最後更新",
     "balance-precision": {
-      "title": "金額(美元)",
+      "title": "餘額（美元）",
       "approximate": "約等值",
       "exact": "Exact"
     },
     "filter": {
-      "symbol": "符號",
-      "pair": "代幣對過濾器",
+      "symbol": "幣別或交易對",
+      "pair": "交易對篩選",
       "category": "分類篩選",
-      "columns": "欄",
+      "columns": "篩選欄",
       "date": "日期"
     },
     "report-type": {
@@ -564,7 +564,7 @@
     }
   },
   "spayments": {
-    "title": "Staking收益"
+    "title": "質押收益"
   },
   "status": {
     "success": "於 {{time}} {{topic}}成功",
@@ -649,7 +649,7 @@
     "endingPeriodBalances": "期末餘額",
     "startPositions": "倉位期初快照",
     "endPositions": "倉位期末快照",
-    "movements": "活動"
+    "movements": "資金動向"
   },
   "theme": {
     "light": "白",
@@ -659,7 +659,7 @@
   "tickers": {
     "title": "牌價",
     "spot": "現貨",
-    "minlength": "應至少選擇一個貨幣對"
+    "minlength": "應至少選擇一個交易對"
   },
   "timeframe": {
     "custom": {
@@ -709,7 +709,7 @@
     "title": "錢包",
     "header": {
       "capital-raise": "集資",
-      "exchange": "交易",
+      "exchange": "現貨",
       "margin": "保證金",
       "funding": "融資",
       "token-sales": "金鑰銷售"
