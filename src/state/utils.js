@@ -175,10 +175,6 @@ export const checkInit = (props, type) => {
 
   const shouldWaitInitialSync = showFrameworkMode && isSyncRequired
 
-  console.log('++iisSyncRequired', isSyncRequired)
-  console.log('++isFrameworkMode', showFrameworkMode)
-  console.log('++shouldWaitInitialSync', shouldWaitInitialSync)
-
   if (shouldWaitInitialSync) {
     return
   }
