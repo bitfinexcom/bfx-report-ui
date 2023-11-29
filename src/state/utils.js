@@ -272,8 +272,6 @@ export function checkFetch(prevProps, props, type) {
     dataReceived, pageLoading, fetchData, isSyncRequired,
   } = props
   const shouldRefresh = prevIsSyncRequired !== isSyncRequired
-  console.log('+++prevIsSyncRequired', prevIsSyncRequired)
-  console.log('+++isSyncRequired', prevIsSyncRequired)
   if (!dataReceived && dataReceived !== prevDataReceived && !pageLoading) {
     fetchData()
   }
