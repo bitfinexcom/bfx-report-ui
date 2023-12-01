@@ -11,7 +11,6 @@ import {
 } from 'state/taxReport/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
 
-
 import Snapshot from './Snapshot'
 
 const mapStateToProps = (state, { match }) => {
