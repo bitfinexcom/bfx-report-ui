@@ -21,6 +21,7 @@ import {
   getTargetSymbols,
 } from 'state/fundingCreditHistory/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
@@ -33,6 +34,7 @@ const mapStateToProps = state => ({
   dataReceived: getDataReceived(state),
   existingCoins: getExistingCoins(state),
   targetSymbols: getTargetSymbols(state),
+  isSyncRequired: getIsSyncRequired(state),
   columns: getColumns(state, queryConstants.MENU_FCREDIT),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_FCREDIT),
   entries: getFilteredEntries(state, queryConstants.MENU_FCREDIT, getEntries(state)),
