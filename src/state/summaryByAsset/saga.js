@@ -8,15 +8,18 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { getIsSyncRequired } from 'state/sync/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
 import actions from './actions'
 
-export const getReqSummaryByAsset = () => makeFetchCall('getSummaryByAsset')
+export const getReqSummaryByAsset = (params) => makeFetchCall('getSummaryByAsset', params)
 
 export function* fetchSummaryByAsset() {
   try {
-    const { result = {}, error } = yield call(getReqSummaryByAsset)
+    const { start, end } = yield select(getTimeFrame)
+    const params = { start, end }
+    const { result = {}, error } = yield call(getReqSummaryByAsset, params)
     yield put(actions.updateData(result))
 
     if (error) {
