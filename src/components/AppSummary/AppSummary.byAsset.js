@@ -6,13 +6,14 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
-import { fetchData } from 'state/summaryByAsset/actions'
+import { fetchData, refresh } from 'state/summaryByAsset/actions'
 import {
   getPageLoading,
   getDataReceived,
   getSummaryByAssetTotal,
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
+import { getTimeRange } from 'state/timeRange/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
 
 import { getAssetColumns } from './AppSummary.columns'
@@ -21,6 +22,7 @@ import { prepareSummaryByAssetData } from './AppSummary.helpers'
 const AppSummaryByAsset = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const total = useSelector(getSummaryByAssetTotal)
@@ -32,6 +34,10 @@ const AppSummaryByAsset = () => {
       dispatch(fetchData())
     }
   }, [dataReceived, pageLoading, isSyncRequired])
+
+  useEffect(() => {
+    dispatch(refresh())
+  }, [timeRange])
 
   const preparedData = useMemo(
     () => prepareSummaryByAssetData(entries, total, t),
