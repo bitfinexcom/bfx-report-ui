@@ -70,9 +70,6 @@ const AppSummaryByAsset = () => {
       <div className='app-summary-item-title'>
         {t('summary.by_asset.title')}
       </div>
-      <div className='app-summary-item-sub-title'>
-        {t('summary.by_asset.sub_title')}
-      </div>
       {showContent}
     </div>
   )
