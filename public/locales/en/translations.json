@@ -638,7 +638,6 @@
     },
     "by_asset":{
       "title": "Summary by Asset",
-      "sub_title":  "For the last 30 days",
       "currency": "Currency",
       "amount": "Amount",
       "balance": "Balance",
