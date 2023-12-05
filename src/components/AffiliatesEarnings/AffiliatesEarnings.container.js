@@ -22,6 +22,7 @@ import {
 } from 'state/affiliatesEarnings/selectors'
 import queryConstants from 'state/query/constants'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 
 import AffiliatesEarnings from './AffiliatesEarnings'
@@ -33,6 +34,7 @@ const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_AFFILIATES_EARNINGS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
+  isSyncRequired: getIsSyncRequired(state),
   pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
   timeOffset: getTimeOffset(state),
