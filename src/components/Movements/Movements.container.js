@@ -14,6 +14,7 @@ import {
 } from 'state/movements/actions'
 import { jumpPage } from 'state/pagination/actions'
 import { getTetherNames } from 'state/symbols/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
@@ -37,6 +38,7 @@ const mapStateToProps = state => ({
   dataReceived: getDataReceived(state),
   existingCoins: getExistingCoins(state),
   targetSymbols: getTargetSymbols(state),
+  isSyncRequired: getIsSyncRequired(state),
   columns: getColumns(state, queryConstants.MENU_MOVEMENTS),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_MOVEMENTS),
   entries: getFilteredEntries(state, queryConstants.MENU_MOVEMENTS, getEntries(state)),
