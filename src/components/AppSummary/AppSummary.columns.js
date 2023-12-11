@@ -96,7 +96,7 @@ export const getAssetColumns = ({
     id: 'currency',
     className: 'align-left',
     name: 'summary.by_asset.currency',
-    width: 110,
+    width: 100,
     renderer: (rowIndex) => {
       const { currency } = preparedData[rowIndex]
       return (
@@ -110,7 +110,7 @@ export const getAssetColumns = ({
   {
     id: 'balance',
     name: 'summary.by_asset.amount',
-    width: 178,
+    width: 225,
     renderer: (rowIndex) => {
       const { balance = null } = preparedData[rowIndex]
       return (
@@ -124,7 +124,7 @@ export const getAssetColumns = ({
   {
     id: 'balanceUsd',
     name: 'summary.by_asset.balance',
-    width: 178,
+    width: 225,
     renderer: (rowIndex) => {
       const { balanceUsd } = preparedData[rowIndex]
       return (
@@ -140,7 +140,7 @@ export const getAssetColumns = ({
   {
     id: 'valueChange30dUsd',
     name: 'summary.by_asset.balance_change',
-    width: 178,
+    width: 225,
     renderer: (rowIndex) => {
       const { balanceUsd, valueChange30dUsd, valueChange30dPerc } = preparedData[rowIndex]
       const shouldShowPercentChange = shouldShowPercentCheck(balanceUsd, valueChange30dUsd)
@@ -169,7 +169,7 @@ export const getAssetColumns = ({
   {
     id: 'volume30dUsd',
     name: 'summary.by_asset.volume',
-    width: 178,
+    width: 225,
     renderer: (rowIndex) => {
       const { volume30dUsd } = preparedData[rowIndex]
       return (
