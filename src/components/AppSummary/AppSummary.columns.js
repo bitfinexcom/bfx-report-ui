@@ -167,29 +167,6 @@ export const getAssetColumns = ({
     copyText: rowIndex => preparedData[rowIndex]?.valueChange30dUsd,
   },
   {
-    id: 'result30dUsd',
-    name: 'summary.by_asset.profits',
-    width: 178,
-    renderer: (rowIndex) => {
-      const { result30dUsd, result30dPerc } = preparedData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(result30dUsd, t)}>
-          <>
-            <span className='cell-value'>
-              {formatUsdValueChange(result30dUsd)}
-            </span>
-            <br />
-            <span className='cell-value secondary-value'>
-              {formatPercentValue(result30dPerc)}
-            </span>
-          </>
-        </Cell>
-      )
-    },
-    isNumericValue: true,
-    copyText: rowIndex => preparedData[rowIndex]?.result30dUsd,
-  },
-  {
     id: 'volume30dUsd',
     name: 'summary.by_asset.volume',
     width: 178,
