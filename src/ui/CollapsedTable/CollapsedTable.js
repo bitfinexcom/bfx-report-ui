@@ -21,7 +21,11 @@ class CollapsedTable extends PureComponent {
                   <div>
                     {nameStr || t(name)}
                     <br />
-                    {description && t(description)}
+                    {description && (
+                    <span className='cell-description'>
+                      {t(description)}
+                    </span>
+                    )}
                   </div>
                   <div>{cell.props.children}</div>
                 </div>
