@@ -24,6 +24,7 @@ export const getFeesColumns = ({
   {
     id: 'feeTierVolume',
     name: 'summary.fees.fee_tier_volume_main',
+    description: 'summary.fees.fee_tier_volume_secondary',
     width: 100,
     renderer: () => (
       <Cell>
