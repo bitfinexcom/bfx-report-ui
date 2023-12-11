@@ -13,13 +13,16 @@ class CollapsedTable extends PureComponent {
           <div className='collapsed-table-item' key={rowIndex}>
             {tableColumns.map((column) => {
               const {
-                id, name, nameStr, renderer,
+                id, name, nameStr, renderer, description,
               } = column
               const cell = renderer(rowIndex)
-
               return (
                 <div key={id}>
-                  <div>{nameStr || t(name)}</div>
+                  <div>
+                    {nameStr || t(name)}
+                    <br />
+                    {description && t(description)}
+                  </div>
                   <div>{cell.props.children}</div>
                 </div>
               )
