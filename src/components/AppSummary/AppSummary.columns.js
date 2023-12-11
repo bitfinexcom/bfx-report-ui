@@ -13,6 +13,7 @@ import {
 
 export const getFeesColumns = ({
   makerFee,
+  feeTierVolume,
   isTurkishSite,
   derivTakerFee,
   takerFeeToFiat,
@@ -20,6 +21,17 @@ export const getFeesColumns = ({
   takerFeeToCrypto,
   derivMakerRebate,
 }) => [
+  {
+    id: 'feeTierVolume',
+    name: 'summary.fees.fee_tier_volume_main',
+    width: 100,
+    renderer: () => (
+      <Cell>
+        $
+        {formatUsdValue(feeTierVolume)}
+      </Cell>
+    ),
+  },
   {
     id: 'makerFee',
     name: 'summary.fees.maker',
