@@ -625,6 +625,8 @@
     "fees": {
       "title": "Account Fees",
       "sub_title": "Based on your trading volume",
+      "fee_tier_volume_main": "Volume in the last 30 days",
+      "fee_tier_volume_secondary": "(Eligible for fee tier calculation)",
       "maker": "Maker Fees",
       "taker_crypto": "Taker Fees Crypto",
       "taker_fiat": "Taker Fees Fiat",
