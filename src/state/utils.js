@@ -128,9 +128,8 @@ export function formatTime(mts, {
 export function formatDate(mts, timezone, format = 'MMM DD YYYY') {
   if (timezone) {
     return moment(mts, 'x').tz(timezone).utcOffset('0').format(format)
-      .toUpperCase()
   }
-  return moment(mts, 'x').format('MMM DD YYYY').toUpperCase()
+  return moment(mts, 'x').format('MMM DD YYYY')
 }
 
 export function timeOffset(timezone) {
