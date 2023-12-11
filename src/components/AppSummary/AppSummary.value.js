@@ -71,7 +71,7 @@ const AccountSummaryValue = () => {
           {formattedPercValue}
         </div>
         <Chart
-          aspect={1.675}
+          aspect={1.39}
           data={chartData}
           showLegend={false}
           dataKeys={presentCurrencies}
