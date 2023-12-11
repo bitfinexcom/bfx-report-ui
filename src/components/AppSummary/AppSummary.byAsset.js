@@ -6,6 +6,7 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
+import { formatDate } from 'state/utils'
 import { fetchData, refresh } from 'state/summaryByAsset/actions'
 import {
   getPageLoading,
@@ -13,8 +14,9 @@ import {
   getSummaryByAssetTotal,
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
-import { getTimeRange } from 'state/timeRange/selectors'
+import { getTimezone } from 'state/base/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
+import { getTimeRange, getTimeFrame } from 'state/timeRange/selectors'
 
 import { getAssetColumns } from './AppSummary.columns'
 import { prepareSummaryByAssetData } from './AppSummary.helpers'
@@ -22,12 +24,14 @@ import { prepareSummaryByAssetData } from './AppSummary.helpers'
 const AppSummaryByAsset = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const timezone = useSelector(getTimezone)
   const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const total = useSelector(getSummaryByAssetTotal)
   const entries = useSelector(getSummaryByAssetEntries)
   const isSyncRequired = useSelector(getIsSyncRequired)
+  const { start, end } = useSelector(getTimeFrame)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -69,6 +73,10 @@ const AppSummaryByAsset = () => {
     <div className='app-summary-item full-width-item'>
       <div className='app-summary-item-title'>
         {t('summary.by_asset.title')}
+      </div>
+      <div className='app-summary-item-sub-title'>
+        {t('summary.by_asset.sub_title')}
+        {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
       </div>
       {showContent}
     </div>
