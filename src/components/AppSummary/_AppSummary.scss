@@ -165,6 +165,10 @@
       &:nth-last-child(6) {
         .bp3-table-truncated-text {
           font-weight: 600;
+
+          .secondary-value {
+            font-weight: 400;
+          }
         }
       }
     }
