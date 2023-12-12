@@ -645,7 +645,8 @@
       "balance_change": "Balance Change",
       "profits": "Profits",
       "volume": "Volume",
-      "total": "Total"
+      "total": "Total",
+      "trading_fees": "Trading Fees"
     }
   },
   "symbols": {
