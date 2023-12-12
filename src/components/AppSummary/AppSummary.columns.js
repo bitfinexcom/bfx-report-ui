@@ -5,6 +5,7 @@ import { formatFee, fixedFloat } from 'ui/utils'
 import { getTooltipContent } from 'utils/columns'
 
 import {
+  getIsTotal,
   formatUsdValue,
   formatPercentValue,
   formatUsdValueChange,
@@ -113,7 +114,7 @@ export const getAssetColumns = ({
     width: 225,
     renderer: (rowIndex) => {
       const { currency, balance = null, balanceUsd = null } = preparedData[rowIndex]
-      const isTotal = currency === t('summary.by_asset.total')
+      const isTotal = getIsTotal(currency, t)
       return (
         <Cell tooltip={getTooltipContent(balance, t)}>
           {isTotal ? (
@@ -183,7 +184,7 @@ export const getAssetColumns = ({
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume30dUsd, 2),
   },
   {
-    id: 'volume30dUsd',
+    id: 'tradingFees',
     name: 'summary.by_asset.volume',
     width: 225,
     renderer: (rowIndex) => {
