@@ -188,7 +188,6 @@ export const getAssetColumns = ({
         </Cell>
       )
     },
-    isNumericValue: true,
     copyText: rowIndex => preparedData[rowIndex]?.balanceChange,
   },
   {
@@ -220,7 +219,6 @@ export const getAssetColumns = ({
         </Cell>
       )
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume, 2),
   },
   {
@@ -247,7 +245,6 @@ export const getAssetColumns = ({
         </Cell>
       )
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.tradingFees, 2),
   },
   {
@@ -262,7 +259,6 @@ export const getAssetColumns = ({
         </Cell>
       )
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.marginFundingPayment, 2),
   },
 ]
