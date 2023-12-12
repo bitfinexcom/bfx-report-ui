@@ -9,7 +9,6 @@ import {
   formatUsdValue,
   formatPercentValue,
   formatUsdValueChange,
-  shouldShowPercentCheck,
 } from './AppSummary.helpers'
 
 export const getFeesColumns = ({
@@ -140,32 +139,42 @@ export const getAssetColumns = ({
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.balance),
   },
   {
-    id: 'valueChange30dUsd',
+    id: 'balanceChange',
     name: 'summary.by_asset.balance_change',
     width: 178,
     renderer: (rowIndex) => {
-      const { balanceUsd, valueChange30dUsd, valueChange30dPerc } = preparedData[rowIndex]
-      const shouldShowPercentChange = shouldShowPercentCheck(balanceUsd, valueChange30dUsd)
+      const {
+        currency, balanceChange, balanceChangeUsd, balanceChangePerc,
+      } = preparedData[rowIndex]
+      const isTotal = getIsTotal(currency, t)
       return (
-        <Cell tooltip={getTooltipContent(valueChange30dUsd, t)}>
-          <>
-            <span className='cell-value'>
-              {formatUsdValueChange(valueChange30dUsd)}
-            </span>
-            {shouldShowPercentChange && (
-              <>
-                <br />
-                <span className='cell-value secondary-value'>
-                  {formatPercentValue(valueChange30dPerc)}
-                </span>
-              </>
-            )}
-          </>
+        <Cell tooltip={getTooltipContent(balanceChange, t)}>
+          {isTotal ? (
+            <>
+              <span className='cell-value'>
+                {formatUsdValueChange(balanceChangeUsd)}
+              </span>
+              <br />
+              <span className='cell-value secondary-value'>
+                {formatPercentValue(balanceChangePerc)}
+              </span>
+            </>
+          ) : (
+            <>
+              <span className='cell-value'>
+                {fixedFloat(balanceChange)}
+              </span>
+              <br />
+              <span className='cell-value secondary-value'>
+                {formatPercentValue(balanceChangePerc)}
+              </span>
+            </>
+          )}
         </Cell>
       )
     },
     isNumericValue: true,
-    copyText: rowIndex => preparedData[rowIndex]?.valueChange30dUsd,
+    copyText: rowIndex => preparedData[rowIndex]?.balanceChange,
   },
   {
     id: 'volume30dUsd',
