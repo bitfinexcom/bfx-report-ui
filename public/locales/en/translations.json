@@ -624,7 +624,8 @@
     "no_data": "No related data for this period is available or data should be synced.",
     "fees": {
       "title": "Account Fees",
-      "sub_title": "Based on your trading volume",
+      "sub_title": "Based on your 30 days eligible trading volume",
+      "fee_tier_volume": "Eligible Trading Volume",
       "maker": "Maker Fees",
       "taker_crypto": "Taker Fees Crypto",
       "taker_fiat": "Taker Fees Fiat",

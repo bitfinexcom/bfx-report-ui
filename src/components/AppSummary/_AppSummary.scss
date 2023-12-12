@@ -86,13 +86,17 @@
               border-bottom: 1px solid var(--tableBorder);
       
               &:first-child {
-                width: 45%;
+                width: 50%;
               }
       
               &:last-child {
                 padding: 4px 5px;
                 text-align: end;
                 word-break: break-word;
+              }
+
+              .cell-description {
+                font-size: 14px;
               }
             }
       

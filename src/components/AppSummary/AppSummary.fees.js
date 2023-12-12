@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -7,6 +7,7 @@ import Loading from 'ui/Loading'
 import CollapsedTable from 'ui/CollapsedTable'
 
 import { getFeesColumns } from './AppSummary.columns'
+import { getFeeTierVolume } from './AppSummary.helpers'
 
 const AppSummaryFees = ({
   t,
@@ -24,8 +25,14 @@ const AppSummaryFees = ({
     derivMakerRebate = 0,
   } = data
 
+  const feeTierVolume = useMemo(
+    () => getFeeTierVolume(data),
+    [data],
+  )
+
   const columns = getFeesColumns({
     makerFee,
+    feeTierVolume,
     isTurkishSite,
     derivTakerFee,
     takerFeeToFiat,
