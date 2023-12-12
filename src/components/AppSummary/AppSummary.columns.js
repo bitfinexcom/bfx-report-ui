@@ -129,8 +129,9 @@ export const getAssetColumns = ({
     renderer: (rowIndex) => {
       const { currency, balance = null, balanceUsd = null } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
+      const tooltipContent = isTotal ? balanceUsd : balance
       return (
-        <Cell tooltip={getTooltipContent(balance, t)}>
+        <Cell tooltip={getTooltipContent(tooltipContent, t)}>
           {isTotal ? (
             <span className='cell-value'>
               $
@@ -162,8 +163,9 @@ export const getAssetColumns = ({
         currency, balanceChange, balanceChangeUsd, balanceChangePerc,
       } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
+      const tooltipContent = isTotal ? balanceChangeUsd : balanceChange
       return (
-        <Cell tooltip={getTooltipContent(balanceChange, t)}>
+        <Cell tooltip={getTooltipContent(tooltipContent, t)}>
           {isTotal ? (
             <>
               <span className='cell-value'>
@@ -197,8 +199,9 @@ export const getAssetColumns = ({
     renderer: (rowIndex) => {
       const { currency, volume, volumeUsd } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
+      const tooltipContent = isTotal ? volumeUsd : volume
       return (
-        <Cell tooltip={getTooltipContent(volume, t)}>
+        <Cell tooltip={getTooltipContent(tooltipContent, t)}>
           {isTotal ? (
             <span className='cell-value'>
               $
@@ -228,8 +231,9 @@ export const getAssetColumns = ({
     renderer: (rowIndex) => {
       const { tradingFees, tradingFeesUsd, currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
+      const tooltipContent = isTotal ? tradingFeesUsd : tradingFees
       return (
-        <Cell tooltip={getTooltipContent(tradingFees, t)}>
+        <Cell tooltip={getTooltipContent(tooltipContent, t)}>
           {isTotal ? (
             <span className='cell-value'>
               $
@@ -252,9 +256,11 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.fund_earnings',
     width: 178,
     renderer: (rowIndex) => {
-      const { marginFundingPayment = null } = preparedData[rowIndex]
+      const { marginFundingPayment, currency } = preparedData[rowIndex]
+      const isTotal = getIsTotal(currency, t)
+      const tooltipContent = isTotal ? '' : marginFundingPayment
       return (
-        <Cell tooltip={getTooltipContent(marginFundingPayment, t)}>
+        <Cell tooltip={getTooltipContent(tooltipContent, t)}>
           {fixedFloat(marginFundingPayment)}
         </Cell>
       )
