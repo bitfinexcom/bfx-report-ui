@@ -640,6 +640,7 @@
       "title": "Summary by Asset",
       "sub_title": "For period ",
       "currency": "Currency",
+      "all_assets": "All Assets",
       "amount": "Amount",
       "balance": "Balance",
       "balance_change": "Balance Change",
