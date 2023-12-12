@@ -177,20 +177,36 @@ export const getAssetColumns = ({
     copyText: rowIndex => preparedData[rowIndex]?.balanceChange,
   },
   {
-    id: 'volume30dUsd',
+    id: 'volume',
     name: 'summary.by_asset.volume',
     width: 178,
     renderer: (rowIndex) => {
-      const { volume30dUsd } = preparedData[rowIndex]
+      const { currency, volume, volumeUsd } = preparedData[rowIndex]
+      const isTotal = getIsTotal(currency, t)
       return (
-        <Cell tooltip={getTooltipContent(volume30dUsd, t)}>
-          $
-          {formatUsdValue(volume30dUsd)}
+        <Cell tooltip={getTooltipContent(volume, t)}>
+          {isTotal ? (
+            <span className='cell-value'>
+              $
+              {formatUsdValue(volumeUsd)}
+            </span>
+          ) : (
+            <>
+              <span className='cell-value'>
+                {fixedFloat(volume)}
+              </span>
+              <br />
+              <span className='cell-value secondary-value'>
+                $
+                {formatUsdValue(volumeUsd)}
+              </span>
+            </>
+          )}
         </Cell>
       )
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume30dUsd, 2),
+    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume, 2),
   },
   {
     id: 'tradingFees',
