@@ -646,7 +646,8 @@
       "profits": "Profits",
       "volume": "Volume",
       "total": "Total",
-      "trading_fees": "Trading Fees"
+      "trading_fees": "Trading Fees",
+      "fund_earnings": "Funding Earnings"
     }
   },
   "symbols": {
