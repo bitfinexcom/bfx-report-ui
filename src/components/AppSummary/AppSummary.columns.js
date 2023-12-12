@@ -109,33 +109,34 @@ export const getAssetColumns = ({
   },
   {
     id: 'balance',
-    name: 'summary.by_asset.amount',
+    name: 'summary.by_asset.balance',
     width: 225,
     renderer: (rowIndex) => {
-      const { balance = null } = preparedData[rowIndex]
+      const { currency, balance = null, balanceUsd = null } = preparedData[rowIndex]
+      const isTotal = currency === 'Total'
       return (
         <Cell tooltip={getTooltipContent(balance, t)}>
-          {fixedFloat(balance)}
+          {isTotal ? (
+            <span className='cell-value'>
+              $
+              {formatUsdValue(balanceUsd)}
+            </span>
+          ) : (
+            <>
+              <span className='cell-value'>
+                {fixedFloat(balance)}
+              </span>
+              <br />
+              <span className='cell-value secondary-value'>
+                $
+                {formatUsdValue(balanceUsd)}
+              </span>
+            </>
+          )}
         </Cell>
       )
     },
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.balance),
-  },
-  {
-    id: 'balanceUsd',
-    name: 'summary.by_asset.balance',
-    width: 225,
-    renderer: (rowIndex) => {
-      const { balanceUsd } = preparedData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(balanceUsd, t)}>
-          $
-          {formatUsdValue(balanceUsd)}
-        </Cell>
-      )
-    },
-    isNumericValue: true,
-    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.balanceUsd, 2),
   },
   {
     id: 'valueChange30dUsd',
@@ -158,13 +159,28 @@ export const getAssetColumns = ({
                 </span>
               </>
             )}
-
           </>
         </Cell>
       )
     },
     isNumericValue: true,
     copyText: rowIndex => preparedData[rowIndex]?.valueChange30dUsd,
+  },
+  {
+    id: 'volume30dUsd',
+    name: 'summary.by_asset.volume',
+    width: 225,
+    renderer: (rowIndex) => {
+      const { volume30dUsd } = preparedData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(volume30dUsd, t)}>
+          $
+          {formatUsdValue(volume30dUsd)}
+        </Cell>
+      )
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume30dUsd, 2),
   },
   {
     id: 'volume30dUsd',
