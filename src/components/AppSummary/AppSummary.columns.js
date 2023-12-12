@@ -113,7 +113,7 @@ export const getAssetColumns = ({
     width: 225,
     renderer: (rowIndex) => {
       const { currency, balance = null, balanceUsd = null } = preparedData[rowIndex]
-      const isTotal = currency === 'Total'
+      const isTotal = currency === t('summary.by_asset.total')
       return (
         <Cell tooltip={getTooltipContent(balance, t)}>
           {isTotal ? (
