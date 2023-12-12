@@ -97,7 +97,7 @@ export const getAssetColumns = ({
     id: 'currency',
     className: 'align-left',
     name: 'summary.by_asset.currency',
-    width: 100,
+    width: 110,
     renderer: (rowIndex) => {
       const { currency } = preparedData[rowIndex]
       return (
@@ -111,7 +111,7 @@ export const getAssetColumns = ({
   {
     id: 'balance',
     name: 'summary.by_asset.balance',
-    width: 225,
+    width: 178,
     renderer: (rowIndex) => {
       const { currency, balance = null, balanceUsd = null } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
@@ -142,7 +142,7 @@ export const getAssetColumns = ({
   {
     id: 'valueChange30dUsd',
     name: 'summary.by_asset.balance_change',
-    width: 225,
+    width: 178,
     renderer: (rowIndex) => {
       const { balanceUsd, valueChange30dUsd, valueChange30dPerc } = preparedData[rowIndex]
       const shouldShowPercentChange = shouldShowPercentCheck(balanceUsd, valueChange30dUsd)
@@ -170,7 +170,7 @@ export const getAssetColumns = ({
   {
     id: 'volume30dUsd',
     name: 'summary.by_asset.volume',
-    width: 225,
+    width: 178,
     renderer: (rowIndex) => {
       const { volume30dUsd } = preparedData[rowIndex]
       return (
@@ -185,8 +185,24 @@ export const getAssetColumns = ({
   },
   {
     id: 'tradingFees',
-    name: 'summary.by_asset.volume',
-    width: 225,
+    name: 'summary.by_asset.trading_fees',
+    width: 178,
+    renderer: (rowIndex) => {
+      const { volume30dUsd } = preparedData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(volume30dUsd, t)}>
+          $
+          {formatUsdValue(volume30dUsd)}
+        </Cell>
+      )
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume30dUsd, 2),
+  },
+  {
+    id: 'marginFundingPayment',
+    name: 'summary.by_asset.fund_earnings',
+    width: 178,
     renderer: (rowIndex) => {
       const { volume30dUsd } = preparedData[rowIndex]
       return (
