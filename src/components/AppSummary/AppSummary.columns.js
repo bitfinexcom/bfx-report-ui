@@ -188,16 +188,27 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.trading_fees',
     width: 178,
     renderer: (rowIndex) => {
-      const { volume30dUsd } = preparedData[rowIndex]
+      const { tradingFees, tradingFeesUsd, currency } = preparedData[rowIndex]
+      const isTotal = getIsTotal(currency, t)
       return (
-        <Cell tooltip={getTooltipContent(volume30dUsd, t)}>
-          $
-          {formatUsdValue(volume30dUsd)}
+        <Cell tooltip={getTooltipContent(tradingFees, t)}>
+          {isTotal ? (
+            <span className='cell-value'>
+              $
+              {formatUsdValue(tradingFeesUsd)}
+            </span>
+          ) : (
+            <>
+              <span className='cell-value'>
+                {fixedFloat(tradingFees)}
+              </span>
+            </>
+          )}
         </Cell>
       )
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume30dUsd, 2),
+    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.tradingFees, 2),
   },
   {
     id: 'marginFundingPayment',
