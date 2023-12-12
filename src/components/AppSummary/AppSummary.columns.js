@@ -215,15 +215,14 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.fund_earnings',
     width: 178,
     renderer: (rowIndex) => {
-      const { volume30dUsd } = preparedData[rowIndex]
+      const { marginFundingPayment = null } = preparedData[rowIndex]
       return (
-        <Cell tooltip={getTooltipContent(volume30dUsd, t)}>
-          $
-          {formatUsdValue(volume30dUsd)}
+        <Cell tooltip={getTooltipContent(marginFundingPayment, t)}>
+          {fixedFloat(marginFundingPayment)}
         </Cell>
       )
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.volume30dUsd, 2),
+    copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.marginFundingPayment, 2),
   },
 ]
