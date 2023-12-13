@@ -9,6 +9,7 @@ import {
   getSnapshotPageLoading,
   getSnapshotDataReceived,
 } from 'state/taxReport/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 import Snapshot from './Snapshot'
 
@@ -18,6 +19,7 @@ const mapStateToProps = (state, { match }) => {
     data: getSnapshot(state, snapshotSection),
     pageLoading: getSnapshotPageLoading(state, snapshotSection),
     dataReceived: getSnapshotDataReceived(state, snapshotSection),
+    isSyncRequired: getIsSyncRequired(state),
   }
 }
 

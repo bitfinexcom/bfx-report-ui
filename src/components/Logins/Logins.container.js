@@ -16,6 +16,7 @@ import {
 } from 'state/logins/selectors'
 import queryConstants from 'state/query/constants'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 
 import Logins from './Logins'
@@ -25,6 +26,7 @@ const mapStateToProps = state => ({
   timeOffset: getTimeOffset(state),
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
+  isSyncRequired: getIsSyncRequired(state),
   columns: getColumns(state, queryConstants.MENU_LOGINS),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_LOGINS),
   entries: getFilteredEntries(state, queryConstants.MENU_LOGINS, getEntries(state)),

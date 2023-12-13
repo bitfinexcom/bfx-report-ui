@@ -11,6 +11,7 @@ import {
   removeTargetPair,
   clearTargetPairs,
 } from 'state/positions/actions'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
@@ -33,6 +34,7 @@ const mapStateToProps = state => ({
   targetPairs: getTargetPairs(state),
   dataReceived: getDataReceived(state),
   existingPairs: getExistingPairs(state),
+  isSyncRequired: getIsSyncRequired(state),
   columns: getColumns(state, queryConstants.MENU_POSITIONS),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_POSITIONS),
   entries: getFilteredEntries(state, queryConstants.MENU_POSITIONS, getEntries(state)),

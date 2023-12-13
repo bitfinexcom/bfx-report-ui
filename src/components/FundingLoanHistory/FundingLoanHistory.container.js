@@ -22,6 +22,7 @@ import {
 } from 'state/fundingLoanHistory/selectors'
 import queryConstants from 'state/query/constants'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 
 import FundingLoanHistory from './FundingLoanHistory'
@@ -33,6 +34,7 @@ const mapStateToProps = state => ({
   dataReceived: getDataReceived(state),
   existingCoins: getExistingCoins(state),
   targetSymbols: getTargetSymbols(state),
+  isSyncRequired: getIsSyncRequired(state),
   columns: getColumns(state, queryConstants.MENU_FLOAN),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_FLOAN),
   entries: getFilteredEntries(state, queryConstants.MENU_FLOAN, getEntries(state)),

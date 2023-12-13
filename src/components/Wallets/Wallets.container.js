@@ -19,6 +19,7 @@ import {
   getPageLoading as getSnapshotLoading,
   getDataReceived as getSnapshotReceived,
 } from 'state/snapshots/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 import Wallets from './Wallets'
 
@@ -28,6 +29,7 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   exactBalance: getExactBalance(state),
+  isSyncRequired: getIsSyncRequired(state),
   snapshotLoading: getSnapshotLoading(state),
   snapshotReceived: getSnapshotReceived(state),
   walletsSnapshotEntries: getWalletsEntries(state),

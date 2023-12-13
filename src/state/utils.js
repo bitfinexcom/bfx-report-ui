@@ -46,6 +46,8 @@ const {
   MENU_WEIGHTED_AVERAGES,
 } = queryType
 
+const { isElectronApp, showFrameworkMode, HOME_URL } = config
+
 export const getAuthFromStore = () => {
   const state = store.getState()
   return selectAuth(state)
@@ -57,13 +59,13 @@ export const getApiUrlFromStore = () => {
 }
 
 // turned off for firefox
-export const getDefaultTableScrollSetting = () => config.isElectronApp || !navigator.userAgent.includes('Firefox')
+export const getDefaultTableScrollSetting = () => isElectronApp || !navigator.userAgent.includes('Firefox')
 
 export function postJsonFetch(url, bodyJson) {
   return fetch(url, {
     method: 'POST',
     headers: {
-      Origin: config.HOME_URL,
+      Origin: HOME_URL,
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
@@ -128,9 +130,8 @@ export function formatTime(mts, {
 export function formatDate(mts, timezone, format = 'MMM DD YYYY') {
   if (timezone) {
     return moment(mts, 'x').tz(timezone).utcOffset('0').format(format)
-      .toUpperCase()
   }
-  return moment(mts, 'x').format('MMM DD YYYY').toUpperCase()
+  return moment(mts, 'x').format('MMM DD YYYY')
 }
 
 export function timeOffset(timezone) {
@@ -162,7 +163,7 @@ export const checkInit = (props, type) => {
     pageLoading,
     fetchData,
     match,
-
+    isSyncRequired,
     setTargetSymbol,
     setTargetSymbols,
     setTargetPair,
@@ -170,6 +171,12 @@ export const checkInit = (props, type) => {
     targetIds,
     setTargetIds,
   } = props
+
+  const shouldWaitInitialSync = showFrameworkMode && isSyncRequired
+
+  if (shouldWaitInitialSync) {
+    return
+  }
 
   switch (type) {
     case MENU_PUBLIC_FUNDING: {
@@ -257,9 +264,17 @@ export function checkFetch(prevProps, props, type) {
   if (!isValidateType(type)) {
     return
   }
-  const { dataReceived: prevDataReceived } = prevProps
-  const { dataReceived, pageLoading, fetchData } = props
+  const {
+    dataReceived: prevDataReceived, isSyncRequired: prevIsSyncRequired,
+  } = prevProps
+  const {
+    dataReceived, pageLoading, fetchData, isSyncRequired,
+  } = props
+  const shouldRefresh = prevIsSyncRequired !== isSyncRequired
   if (!dataReceived && dataReceived !== prevDataReceived && !pageLoading) {
+    fetchData()
+  }
+  if (showFrameworkMode && shouldRefresh) {
     fetchData()
   }
 }

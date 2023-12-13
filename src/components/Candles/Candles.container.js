@@ -19,6 +19,7 @@ import {
   getDataReceived,
   getCurrentFetchParams,
 } from 'state/candles/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 import Candles from './Candles'
 
@@ -27,6 +28,7 @@ const mapStateToProps = state => ({
   currentFetchParams: getCurrentFetchParams(state),
   dataReceived: getDataReceived(state),
   isChartLoading: getChartLoading(state),
+  isSyncRequired: getIsSyncRequired(state),
   pairs: getPairs(state),
   pageLoading: getPageLoading(state),
   params: getParams(state),

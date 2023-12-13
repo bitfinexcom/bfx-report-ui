@@ -20,6 +20,7 @@ import {
   getTargetPairs,
 } from 'state/tickers/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
@@ -31,6 +32,7 @@ const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_TICKERS, getEntries(state)),
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
+  isSyncRequired: getIsSyncRequired(state),
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),

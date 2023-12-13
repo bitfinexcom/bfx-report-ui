@@ -15,6 +15,7 @@ import {
   getTargetSymbol,
 } from 'state/publicFunding/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
@@ -25,6 +26,7 @@ const mapStateToProps = state => ({
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_PUBLIC_FUNDING),
   entries: getFilteredEntries(state, queryConstants.MENU_PUBLIC_FUNDING, getEntries(state)),
   getFullTime: getFullTime(state),
+  isSyncRequired: getIsSyncRequired(state),
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   targetSymbol: getTargetSymbol(state),
