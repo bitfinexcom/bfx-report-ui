@@ -624,7 +624,8 @@
     "no_data": "No related data for this period is available or data should be synced.",
     "fees": {
       "title": "Account Fees",
-      "sub_title": "Based on your trading volume",
+      "sub_title": "Based on your 30 days eligible trading volume",
+      "fee_tier_volume": "Eligible Trading Volume",
       "maker": "Maker Fees",
       "taker_crypto": "Taker Fees Crypto",
       "taker_fiat": "Taker Fees Fiat",
@@ -638,14 +639,17 @@
     },
     "by_asset":{
       "title": "Summary by Asset",
-      "sub_title":  "For the last 30 days",
+      "sub_title": "For period ",
       "currency": "Currency",
+      "all_assets": "All Assets",
       "amount": "Amount",
       "balance": "Balance",
       "balance_change": "Balance Change",
       "profits": "Profits",
       "volume": "Volume",
-      "total": "Total"
+      "total": "Total",
+      "trading_fees": "Trading Fees",
+      "fund_earnings": "Funding Earnings"
     }
   },
   "symbols": {

@@ -86,13 +86,17 @@
               border-bottom: 1px solid var(--tableBorder);
       
               &:first-child {
-                width: 45%;
+                width: 50%;
               }
       
               &:last-child {
                 padding: 4px 5px;
                 text-align: end;
                 word-break: break-word;
+              }
+
+              .cell-description {
+                font-size: 14px;
               }
             }
       
@@ -131,7 +135,7 @@
 .full-width-item {
   width: 100%;
   max-width: 100%;
-  min-height: 320px;
+  min-height: 300px;
 
   .bp3-table-container {
     box-shadow: none;
@@ -165,6 +169,10 @@
       &:nth-last-child(6) {
         .bp3-table-truncated-text {
           font-weight: 600;
+
+          .secondary-value {
+            font-weight: 400;
+          }
         }
       }
     }
@@ -186,7 +194,7 @@
 
   .loading-container {
     display: flex;
-    min-height: 320px;
+    min-height: 300px;
     max-width: 1000px;
 
     .loading {
@@ -196,7 +204,7 @@
 
   .no-data {
     max-width: 1000px;
-    min-height: 320px;
+    min-height: 300px;
     
     &-wrapper {
       margin: 150px auto;

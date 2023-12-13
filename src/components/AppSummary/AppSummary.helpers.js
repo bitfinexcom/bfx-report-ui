@@ -33,3 +33,7 @@ export const shouldShowPercentCheck = (balance, balanceChange) => {
   if (bal === balChange) return false
   return true
 }
+
+export const getIsTotal = (currency, t) => currency === t('summary.by_asset.total')
+
+export const getFeeTierVolume = (data) => data?.trade_vol_30d?.at(-1)?.vol_safe ?? 0
