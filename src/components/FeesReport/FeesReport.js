@@ -28,6 +28,7 @@ import queryConstants from 'state/query/constants'
 import constants from 'ui/ReportTypeSelector/constants'
 import {
   checkInit,
+  checkFetch,
   toggleSymbol,
   clearAllSymbols,
 } from 'state/utils'
@@ -80,6 +81,10 @@ class FeesReport extends PureComponent {
 
   componentDidMount() {
     checkInit(this.props, TYPE)
+  }
+
+  componentDidUpdate(prevProps) {
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   handleQuery = () => {

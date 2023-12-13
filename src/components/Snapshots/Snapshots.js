@@ -40,8 +40,18 @@ class Snapshots extends PureComponent {
   }
 
   componentDidMount() {
-    const { dataReceived, pageLoading, fetchData } = this.props
-    if (!dataReceived && !pageLoading) {
+    const {
+      dataReceived, pageLoading, fetchData, isSyncRequired,
+    } = this.props
+    if (!isSyncRequired && !dataReceived && !pageLoading) {
+      fetchData()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { fetchData, isSyncRequired } = this.props
+    const { isSyncRequired: prevIsSyncRequired } = prevProps
+    if (isSyncRequired !== prevIsSyncRequired) {
       fetchData()
     }
   }

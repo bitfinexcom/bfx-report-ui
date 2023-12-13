@@ -20,6 +20,7 @@ import {
 } from 'state/weightedAverages/selectors'
 import { getColumns } from 'state/filters/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
@@ -35,6 +36,7 @@ const mapStateToProps = state => ({
   dataReceived: getDataReceived(state),
   existingPairs: getExistingPairs(state),
   inactivePairs: getInactivePairs(state),
+  isSyncRequired: getIsSyncRequired(state),
   columns: getColumns(state, queryConstants.MENU_WEIGHTED_AVERAGES),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_WEIGHTED_AVERAGES),
   getFullTime: getFullTime(state),

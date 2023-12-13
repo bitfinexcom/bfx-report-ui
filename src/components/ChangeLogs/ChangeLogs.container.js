@@ -9,6 +9,7 @@ import {
 } from 'state/changeLogs/actions'
 import queryConstants from 'state/query/constants'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
@@ -23,6 +24,7 @@ const mapStateToProps = state => ({
   columns: getColumns(state, queryConstants.MENU_CHANGE_LOGS),
   entries: getFilteredEntries(state, queryConstants.MENU_CHANGE_LOGS, getEntries(state)),
   getFullTime: getFullTime(state),
+  isSyncRequired: getIsSyncRequired(state),
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   timeOffset: getTimeOffset(state),

@@ -22,6 +22,7 @@ import {
   getTargetCategory,
 } from 'state/ledgers/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import queryConstants from 'state/query/constants'
@@ -35,6 +36,7 @@ const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_LEDGERS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
+  isSyncRequired: getIsSyncRequired(state),
   pageLoading: getPageLoading(state),
   targetCategory: getTargetCategory(state),
   targetSymbols: getTargetSymbols(state),

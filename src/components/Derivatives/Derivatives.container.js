@@ -21,6 +21,7 @@ import {
   getExistingPairs,
 } from 'state/derivatives/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
@@ -34,6 +35,7 @@ const mapStateToProps = state => ({
   existingPairs: getExistingPairs(state),
   getFullTime: getFullTime(state),
   inactivePairs: getInactivePairs(state),
+  isSyncRequired: getIsSyncRequired(state),
   pairs: getPairs(state),
   pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),

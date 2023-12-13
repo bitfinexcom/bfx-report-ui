@@ -9,8 +9,9 @@ import {
   removeTargetPair,
   clearTargetPairs,
 } from 'state/trades/actions'
-import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getDataReceived,
   getEntries,
@@ -34,6 +35,7 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   targetPairs: getTargetPairs(state),
   timeOffset: getTimeOffset(state),
+  isSyncRequired: getIsSyncRequired(state),
 })
 
 const mapDispatchToProps = {

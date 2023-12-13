@@ -21,6 +21,7 @@ import {
   getTargetSymbols,
 } from 'state/stakingPayments/selectors'
 import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
@@ -33,6 +34,7 @@ const mapStateToProps = state => ({
   entries: getFilteredEntries(state, queryConstants.MENU_SPAYMENTS, getEntries(state)),
   existingCoins: getExistingCoins(state),
   getFullTime: getFullTime(state),
+  isSyncRequired: getIsSyncRequired(state),
   pageLoading: getPageLoading(state),
   targetSymbols: getTargetSymbols(state),
   timeOffset: getTimeOffset(state),

@@ -9,6 +9,7 @@ import {
   getDataReceived,
   getPageLoading,
 } from 'state/taxReport/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 
 import Result from './Result'
@@ -19,6 +20,7 @@ const mapStateToProps = state => ({
   timeOffset: getTimeOffset(state),
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
+  isSyncRequired: getIsSyncRequired(state),
 })
 
 const mapDispatchToProps = {

@@ -38,6 +38,7 @@ class ConcentrationRisk extends PureComponent {
     fetchWallets: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
+    isSyncRequired: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
   }
@@ -57,8 +58,18 @@ class ConcentrationRisk extends PureComponent {
   }
 
   componentDidMount() {
-    const { dataReceived, pageLoading, fetchWallets } = this.props
-    if (!dataReceived && !pageLoading) {
+    const {
+      dataReceived, pageLoading, fetchWallets, isSyncRequired,
+    } = this.props
+    if (!isSyncRequired && !dataReceived && !pageLoading) {
+      fetchWallets()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { fetchWallets, isSyncRequired } = this.props
+    const { isSyncRequired: prevIsSyncRequired } = prevProps
+    if (isSyncRequired !== prevIsSyncRequired) {
       fetchWallets()
     }
   }

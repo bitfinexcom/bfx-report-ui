@@ -20,6 +20,7 @@ import {
   getTargetSymbols,
   getCurrentFetchParams,
 } from 'state/loanReport/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 import LoanReport from './LoanReport'
 
@@ -29,6 +30,7 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   targetSymbols: getTargetSymbols(state),
+  isSyncRequired: getIsSyncRequired(state),
   currentFetchParams: getCurrentFetchParams(state),
 })
 

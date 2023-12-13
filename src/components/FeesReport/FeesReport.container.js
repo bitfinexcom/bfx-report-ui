@@ -22,6 +22,7 @@ import {
   getTargetSymbols,
   getCurrentFetchParams,
 } from 'state/feesReport/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 import FeesReport from './FeesReport'
 
@@ -33,6 +34,7 @@ const mapStateToProps = state => ({
   dataReceived: getDataReceived(state),
   currentFetchParams: getCurrentFetchParams(state),
   targetSymbols: getTargetSymbols(state),
+  isSyncRequired: getIsSyncRequired(state),
 })
 
 const mapDispatchToProps = {
