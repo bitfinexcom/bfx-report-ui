@@ -649,7 +649,12 @@
       "volume": "Volume",
       "total": "Total",
       "trading_fees": "Trading Fees",
-      "fund_earnings": "Funding Earnings"
+      "fund_earnings": "Funding Earnings",
+      "filter": {
+        "title": "Filter",
+        "min_balance_switch": "Minimum Balance",
+        "min_balance_input": "Set a minimum balance for assets to show up in the table."
+      }
     }
   },
   "symbols": {
