@@ -153,7 +153,6 @@ export const getAssetColumns = ({
                 {formatUsdValue(balanceUsd)}
               </span>
             </>
-
           ) : (
             <>
               <span className='cell-value'>
