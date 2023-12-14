@@ -2,9 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Button, Intent } from '@blueprintjs/core'
 import _map from 'lodash/map'
-import _isEqual from 'lodash/isEqual'
 import _differenceBy from 'lodash/differenceBy'
-import { get, isEmpty } from '@bitfinex/lib-js-util-base'
+import { get, isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import Loading from 'ui/Loading'
 import { hasValidUsername } from 'components/Auth/SignInList/SignInList.helpers'
@@ -70,7 +69,7 @@ class SubAccount extends PureComponent {
         apiSecret,
       } = account
 
-      return !_isEqual(email, t(USE_API_KEY))
+      return !isEqual(email, t(USE_API_KEY))
         ? { email, password: password || undefined }
         : { apiKey, apiSecret }
     })
@@ -113,7 +112,7 @@ class SubAccount extends PureComponent {
 
     const filledAccounts = getFilledAccounts(accounts, t)
     const preparedAccounts = _map(filledAccounts, account => {
-      if (_isEqual(account?.email, t(USE_API_KEY))) {
+      if (isEqual(account?.email, t(USE_API_KEY))) {
         return { ...account, email: '' }
       }
       return account

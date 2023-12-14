@@ -7,7 +7,7 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
-import _isEqual from 'lodash/isEqual'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
 
@@ -24,7 +24,7 @@ const ErrorDialog = ({
   disableDialog,
 }) => {
   const [isDialogDisabled, setIsDialogDisabled] = useState(isDisabled)
-  const isFirstSync = _isEqual(FIRST_SYNC_ERROR, errorMessage)
+  const isFirstSync = isEqual(FIRST_SYNC_ERROR, errorMessage)
   const shouldStartSync = isFirstSync && isOpen && !isSyncing
 
   useEffect(() => {

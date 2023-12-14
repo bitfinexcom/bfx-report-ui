@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import _filter from 'lodash/filter'
-import _isEqual from 'lodash/isEqual'
 import {
   Button,
   Classes,
   Dialog,
   Intent,
 } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import PlatformLogo from 'ui/PlatformLogo'
@@ -113,7 +112,7 @@ class SignIn extends PureComponent {
     const {
       email, password, userPassword, isSubAccount,
     } = this.state
-    if (_isEqual(email, userShouldReLogin)) {
+    if (isEqual(email, userShouldReLogin)) {
       signUpEmail({
         login: email,
         password: userPassword,
@@ -257,7 +256,7 @@ class SignIn extends PureComponent {
     const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isEmailSelected = !isEmpty(email)
-    const isCurrentUserShouldReLogin = isEmailSelected && _isEqual(email, userShouldReLogin) && !showUsersList
+    const isCurrentUserShouldReLogin = isEmailSelected && isEqual(email, userShouldReLogin) && !showUsersList
     const showSelectedUser = !showUsersList && isEmailSelected && !showDeleteAccount
     const showInputPassword = !isNotProtected && showSelectedUser && users.length > 0
     const showSignInActions = !isOtpLoginShown && !showUsersList

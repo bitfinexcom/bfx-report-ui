@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
-import _isEqual from 'lodash/isEqual'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
 import Select from 'ui/Select'
@@ -136,7 +136,7 @@ class SubUsersAdd extends PureComponent {
               ...accountOptions,
             ]
 
-            const showApiInputs = _isEqual(email, t(USE_API_KEY))
+            const showApiInputs = isEqual(email, t(USE_API_KEY))
 
             return (
               /* eslint-disable-next-line react/no-array-index-key */

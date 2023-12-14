@@ -2,9 +2,8 @@ import React from 'react'
 import _map from 'lodash/map'
 import _head from 'lodash/head'
 import _filter from 'lodash/filter'
-import _isEqual from 'lodash/isEqual'
 import { Cell } from '@blueprintjs/table'
-import { get, pick } from '@bitfinex/lib-js-util-base'
+import { get, pick, isEqual } from '@bitfinex/lib-js-util-base'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 
@@ -529,7 +528,7 @@ export const getWalletsTickersColumns = (props) => {
   ]
 }
 
-export const singleColumnSelectedCheck = context => _isEqual(
+export const singleColumnSelectedCheck = context => isEqual(
   get(context, 'selectedRegions[0].cols[0]'),
   get(context, 'selectedRegions[0].cols[1]'),
 )

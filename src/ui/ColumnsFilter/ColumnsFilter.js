@@ -4,8 +4,8 @@ import {
   Button,
   InputGroup,
 } from '@blueprintjs/core'
-import _isEqual from 'lodash/isEqual'
 import _isString from 'lodash/isString'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 
 import ColumnsSelect from 'ui/ColumnsSelect'
@@ -170,7 +170,7 @@ class ColumnsFilter extends PureComponent {
     const nextValidFilters = getValidSortedFilters(filters)
 
     const hasFilterValueChanged = nextValidFilters
-      .some((filter, index) => !_isEqual(filter, currentValidFilters[index]))
+      .some((filter, index) => !isEqual(filter, currentValidFilters[index]))
 
     return currentValidFilters.length !== nextValidFilters.length || hasFilterValueChanged
   }

@@ -1,6 +1,6 @@
 import memoizeOne from 'memoize-one'
 import _isNull from 'lodash/isNull'
-import _isEqual from 'lodash/isEqual'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import { formatTime, timeOffset } from 'state/utils'
@@ -18,7 +18,7 @@ export const getDateFormat = state => getBase(state).dateFormat || types.DATE_FO
 export const getShowMilliseconds = state => getBase(state).milliseconds || false
 export const getTableScroll = state => getBase(state).tableScroll || false
 export const getSrc = state => getBase(state)?.src ?? types.DEFAULT_SRC
-export const getIsTurkishSite = state => _isEqual(getSrc(state), types.TR_SRC)
+export const getIsTurkishSite = state => isEqual(getSrc(state), types.TR_SRC)
 export const getCustomApiPort = state => getBase(state)?.customApiPort ?? null
 
 export const getTimeOffset = state => timeOffset(getTimezone(state))
