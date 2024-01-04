@@ -13,7 +13,7 @@ import { getMinimumBalance } from 'state/summaryByAsset/selectors'
 
 const SummaryFilters = () => {
   // const { t } = useTranslation()
-  const { minimumBalance } = useSelector(getMinimumBalance)
+  const minimumBalance = useSelector(getMinimumBalance)
   const [isOpen, setIsOpen] = useState(false)
 
   const togglePopover = (isPopoverOpen) => {
