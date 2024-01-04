@@ -33,10 +33,18 @@ export function setMinimumBalance(payload) {
   }
 }
 
+export function useMinimumBalance(payload) {
+  return {
+    type: types.USE_MIN_BALANCE,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   fetchData,
   refresh,
   updateData,
   setMinimumBalance,
+  useMinimumBalance,
 }
