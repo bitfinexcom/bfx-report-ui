@@ -44,7 +44,7 @@ const SummaryFilters = () => {
         popoverClassName='summary-filters--menu-popover'
       >
         <span>
-          <Icon.MORE />
+          <Icon.FILTER_SUMMARY />
         </span>
       </Popover>
     </div>
