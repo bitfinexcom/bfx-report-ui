@@ -8,6 +8,7 @@ export const initialState = {
   pageLoading: false,
   data: {},
   minimumBalance: 0,
+  useMinBalance: true,
 }
 
 export function summaryByAssetReducer(state = initialState, action) {
@@ -27,6 +28,12 @@ export function summaryByAssetReducer(state = initialState, action) {
       return {
         ...state,
         minimumBalance: payload,
+      }
+    }
+    case types.USE_MIN_BALANCE: {
+      return {
+        ...state,
+        useMinBalance: payload,
       }
     }
     case types.FETCH_FAIL:
