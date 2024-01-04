@@ -7,6 +7,7 @@ export const initialState = {
   dataReceived: false,
   pageLoading: false,
   data: {},
+  minimumBalance: 0,
 }
 
 export function summaryByAssetReducer(state = initialState, action) {
@@ -20,6 +21,12 @@ export function summaryByAssetReducer(state = initialState, action) {
         dataReceived: true,
         pageLoading: false,
         data: payload,
+      }
+    }
+    case types.SET_MIN_BALANCE: {
+      return {
+        ...state,
+        minimumBalance: payload,
       }
     }
     case types.FETCH_FAIL:
