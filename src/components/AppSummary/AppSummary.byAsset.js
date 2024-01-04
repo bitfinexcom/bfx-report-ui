@@ -18,6 +18,7 @@ import { getTimezone } from 'state/base/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
 import { getTimeRange, getTimeFrame } from 'state/timeRange/selectors'
 
+import SummaryFilters from './AppSummary.filters'
 import { getAssetColumns } from './AppSummary.columns'
 import { prepareSummaryByAssetData } from './AppSummary.helpers'
 
@@ -74,6 +75,7 @@ const AppSummaryByAsset = () => {
       <div className='app-summary-item-title'>
         {t('summary.by_asset.title')}
       </div>
+      <SummaryFilters />
       <div className='app-summary-item-sub-title'>
         {t('summary.by_asset.sub_title')}
         {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
