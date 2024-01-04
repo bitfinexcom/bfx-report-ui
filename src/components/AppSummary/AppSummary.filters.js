@@ -1,6 +1,6 @@
-import React, { useState, memo } from 'react'
+import React, { useState } from 'react'
 // import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
 import {
   Popover,
@@ -8,11 +8,12 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-
 import { getMinimumBalance } from 'state/summaryByAsset/selectors'
+// import { setMinimumBalance, useMinimumBalance } from 'state/summaryByAsset/actions'
 
 const SummaryFilters = () => {
   // const { t } = useTranslation()
+  // const dispatch = useDispatch()
   const minimumBalance = useSelector(getMinimumBalance)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -51,4 +52,4 @@ const SummaryFilters = () => {
   )
 }
 
-export default memo(SummaryFilters)
+export default SummaryFilters
