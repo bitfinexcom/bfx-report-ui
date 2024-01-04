@@ -137,6 +137,12 @@
   max-width: 100%;
   min-height: 300px;
 
+  .app-summary-item-title--row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .bp3-table-container {
     box-shadow: none;
   }

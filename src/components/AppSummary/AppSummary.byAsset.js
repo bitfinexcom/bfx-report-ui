@@ -72,10 +72,12 @@ const AppSummaryByAsset = () => {
 
   return (
     <div className='app-summary-item full-width-item'>
-      <div className='app-summary-item-title'>
-        {t('summary.by_asset.title')}
+      <div className='app-summary-item-title--row'>
+        <div className='app-summary-item-title'>
+          {t('summary.by_asset.title')}
+        </div>
+        <SummaryFilters />
       </div>
-      <SummaryFilters />
       <div className='app-summary-item-sub-title'>
         {t('summary.by_asset.sub_title')}
         {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
