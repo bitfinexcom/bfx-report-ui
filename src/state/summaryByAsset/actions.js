@@ -26,9 +26,17 @@ export function updateData(payload) {
   }
 }
 
+export function setMinimumBalance(payload) {
+  return {
+    type: types.SET_MIN_BALANCE,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   fetchData,
   refresh,
   updateData,
+  setMinimumBalance,
 }
