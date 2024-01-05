@@ -142,6 +142,16 @@
     max-width: 1000px;
     align-items: center;
     justify-content: space-between;
+
+    .summary-filters {
+      &--button {
+        display: flex;
+        min-width: 84px;
+        min-height: 34px;
+        border-radius: 4px;
+        border: 1px solid grey;
+      }
+    }
   }
 
   .bp3-table-container {
