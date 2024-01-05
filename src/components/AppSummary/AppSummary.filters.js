@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
 import {
@@ -12,7 +12,7 @@ import { getMinimumBalance } from 'state/summaryByAsset/selectors'
 // import { setMinimumBalance, useMinimumBalance } from 'state/summaryByAsset/actions'
 
 const SummaryFilters = () => {
-  // const { t } = useTranslation()
+  const { t } = useTranslation()
   // const dispatch = useDispatch()
   const minimumBalance = useSelector(getMinimumBalance)
   const [isOpen, setIsOpen] = useState(false)
@@ -44,9 +44,10 @@ const SummaryFilters = () => {
         targetTagName='div'
         popoverClassName='summary-filters--menu-popover'
       >
-        <span>
+        <div className='summary-filters--button'>
           <Icon.FILTER_SUMMARY />
-        </span>
+          <span>{t('summary.by_asset.filter.title')}</span>
+        </div>
       </Popover>
     </div>
   )
