@@ -140,11 +140,15 @@
   .app-summary-item-title--row {
     display: flex;
     max-width: 1000px;
+    position: relative;
     align-items: center;
     justify-content: space-between;
 
     .summary-filters {
       &--button {
+        top: 7px;
+        right: 0;
+        position: absolute;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -152,7 +156,11 @@
         min-height: 34px;
         border-radius: 4px;
         color:  var(--color2);
-        border: 1px solid  var(--color2);
+        border: 1px solid  var(--borderColor);
+
+        &:hover {
+          cursor: pointer;
+        }
 
         svg {
           margin-top: -3px;
