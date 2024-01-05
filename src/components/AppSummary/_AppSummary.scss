@@ -146,10 +146,18 @@
     .summary-filters {
       &--button {
         display: flex;
+        align-items: center;
+        justify-content: center;
         min-width: 84px;
         min-height: 34px;
         border-radius: 4px;
-        border: 1px solid grey;
+        color:  var(--color2);
+        border: 1px solid  var(--color2);
+
+        svg {
+          margin-top: -3px;
+          margin-right: 5px;
+        }
       }
     }
   }
