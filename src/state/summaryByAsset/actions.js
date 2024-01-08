@@ -33,10 +33,9 @@ export function setMinimumBalance(payload) {
   }
 }
 
-export function useMinimumBalance(payload) {
+export function toggleUseMinimumBalance() {
   return {
-    type: types.USE_MIN_BALANCE,
-    payload,
+    type: types.TOGGLE_USE_MIN_BALANCE,
   }
 }
 
@@ -46,5 +45,5 @@ export default {
   refresh,
   updateData,
   setMinimumBalance,
-  useMinimumBalance,
+  toggleUseMinimumBalance,
 }
