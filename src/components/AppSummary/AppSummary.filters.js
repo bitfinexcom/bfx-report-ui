@@ -43,6 +43,9 @@ const SummaryFilters = () => {
                 {t('summary.by_asset.filter.min_balance_switch')}
               </div>
             </div>
+            <div className='balance-input-label'>
+              {t('summary.by_asset.filter.min_balance_input')}
+            </div>
           </div>
           )}
         targetTagName='div'
