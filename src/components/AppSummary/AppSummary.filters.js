@@ -17,6 +17,8 @@ const SummaryFilters = () => {
   const minimumBalance = useSelector(getMinimumBalance)
   const [isOpen, setIsOpen] = useState(false)
 
+  console.log('++minimumBalance', minimumBalance)
+
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
   }
@@ -36,9 +38,11 @@ const SummaryFilters = () => {
         onClosing={() => togglePopover(false)}
         content={(
           <div className='summary-filters--menu-content'>
-            Minimum Balance:
-            {' '}
-            {minimumBalance}
+            <div className='switch-row'>
+              <div className='switch-title'>
+                {t('summary.by_asset.filter.min_balance_switch')}
+              </div>
+            </div>
           </div>
           )}
         targetTagName='div'
