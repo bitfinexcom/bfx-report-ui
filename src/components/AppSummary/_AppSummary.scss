@@ -163,6 +163,17 @@
           margin-top: -2px;
           margin-right: 5px;
         }
+
+        &.bp3-active {
+          color:  var(--thColor);
+          border-color: var(--thColor);
+
+          svg {
+            path {
+              stroke: var(--thColor);
+            }
+          }
+        }
       }
     }
   }
