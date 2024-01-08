@@ -27,12 +27,12 @@ const SummaryFilters = () => {
     setIsOpen(isPopoverOpen)
   }
 
-  const toggleSwitch = (e) => {
-    console.log('+++swicth e', e)
-  }
-
   const classes = classNames('.summary-filters--menu', {
     '.summary-filters--menu-open': isOpen,
+  })
+
+  const switchClasses = classNames('.switch-btn', {
+    '.switch-btn--active': useMinimumBalance,
   })
 
   return (
@@ -52,6 +52,7 @@ const SummaryFilters = () => {
               </div>
               <Switch
                 large
+                className={switchClasses}
                 checked={useMinimumBalance}
                 alignIndicator={Alignment.RIGHT}
                 onChange={() => dispatch(toggleUseMinimumBalance())}
