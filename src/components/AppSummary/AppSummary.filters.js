@@ -10,19 +10,25 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import { getMinimumBalance } from 'state/summaryByAsset/selectors'
-// import { setMinimumBalance, useMinimumBalance } from 'state/summaryByAsset/actions'
+import { getMinimumBalance, getUseMinBalance } from 'state/summaryByAsset/selectors'
+import { setMinimumBalance, toggleUseMinimumBalance } from 'state/summaryByAsset/actions'
 
 const SummaryFilters = () => {
   const { t } = useTranslation()
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const minimumBalance = useSelector(getMinimumBalance)
+  const useMinimumBalance = useSelector(getUseMinBalance)
   const [isOpen, setIsOpen] = useState(false)
 
   console.log('++minimumBalance', minimumBalance)
+  console.log('++useMinimumBalance', useMinimumBalance)
 
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
+  }
+
+  const toggleSwitch = (e) => {
+    console.log('+++swicth e', e)
   }
 
   const classes = classNames('.summary-filters--menu', {
@@ -46,8 +52,9 @@ const SummaryFilters = () => {
               </div>
               <Switch
                 large
-                checked
+                checked={useMinimumBalance}
                 alignIndicator={Alignment.RIGHT}
+                onChange={() => dispatch(toggleUseMinimumBalance())}
               />
             </div>
             <div className='balance-input-label'>
