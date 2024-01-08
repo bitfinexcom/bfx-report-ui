@@ -183,6 +183,23 @@
         border-radius: 4px;
         background-color: var(--bgColor2);
         border: 1px solid var(--borderColor);
+
+        .bp3-popover-content {
+          background-color: var(--bgColor2);
+
+          .switch {
+            &-row {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            }
+
+            &-title {
+              font-size: 14px;
+            }
+          }
+
+        }
       }
     }
   }
