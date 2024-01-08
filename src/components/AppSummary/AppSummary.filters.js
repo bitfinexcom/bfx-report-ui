@@ -27,12 +27,12 @@ const SummaryFilters = () => {
     setIsOpen(isPopoverOpen)
   }
 
-  const classes = classNames('.summary-filters--menu', {
-    '.summary-filters--menu-open': isOpen,
+  const classes = classNames('summary-filters--menu', {
+    'summary-filters--menu-open': isOpen,
   })
 
-  const switchClasses = classNames('.switch-btn', {
-    '.switch-btn--active': useMinimumBalance,
+  const switchClasses = classNames('switch-btn', {
+    active: useMinimumBalance,
   })
 
   return (
