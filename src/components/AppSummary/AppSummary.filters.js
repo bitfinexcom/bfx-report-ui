@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
 import {
+  Alignment,
   Switch,
   Popover,
   Position,
@@ -43,7 +44,11 @@ const SummaryFilters = () => {
               <div className='switch-title'>
                 {t('summary.by_asset.filter.min_balance_switch')}
               </div>
-              <Switch large checked />
+              <Switch
+                large
+                checked
+                alignIndicator={Alignment.RIGHT}
+              />
             </div>
             <div className='balance-input-label'>
               {t('summary.by_asset.filter.min_balance_input')}
