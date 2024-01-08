@@ -193,6 +193,10 @@
               align-items: center;
               justify-content: space-between;
               margin-bottom: 10px;
+
+              .bp3-control {
+                margin-bottom: 0;
+              }
             }
 
             &-title {
