@@ -194,9 +194,17 @@
               justify-content: space-between;
               margin-bottom: 10px;
 
-              .bp3-control {
+              .bp3-control.bp3-switch {
                 margin-bottom: 0;
-              }
+
+                .bp3-control-indicator {
+                  background: var(--bgColor);
+                  
+                  &::before  {
+                    background: var(--switchBtnColor);
+                  }
+                }
+              } 
             }
 
             &-title {
