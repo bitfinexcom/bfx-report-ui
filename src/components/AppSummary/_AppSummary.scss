@@ -175,6 +175,15 @@
           }
         }
       }
+
+      &--menu-popover {
+        min-width: 314px;
+        min-height: 150px;
+        padding: 26px 24px;
+        border-radius: 4px;
+        background-color: var(--bgColor2);
+        border: 1px solid var(--borderColor);
+      }
     }
   }
 
