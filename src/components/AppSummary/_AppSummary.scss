@@ -194,17 +194,25 @@
               justify-content: space-between;
               margin-bottom: 10px;
 
-              .bp3-control.bp3-switch {
+              .switch-btn{
                 margin-bottom: 0;
 
                 .bp3-control-indicator {
                   background: var(--bgColor);
-                  
                   &::before  {
                     background: var(--switchBtnColor);
                   }
                 }
-              } 
+
+                &.active {
+                  .bp3-control-indicator {
+                    background: var(--thColor);
+                    &::before  {
+                      background: var(--color);
+                    }
+                  }
+                }
+              }
             }
 
             &-title {
