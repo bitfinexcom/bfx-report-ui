@@ -43,7 +43,7 @@ const SummaryFilters = () => {
               <div className='switch-title'>
                 {t('summary.by_asset.filter.min_balance_switch')}
               </div>
-              <Switch checked />
+              <Switch large checked />
             </div>
             <div className='balance-input-label'>
               {t('summary.by_asset.filter.min_balance_input')}
