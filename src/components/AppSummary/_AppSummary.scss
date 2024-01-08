@@ -192,6 +192,7 @@
               display: flex;
               align-items: center;
               justify-content: space-between;
+              margin-bottom: 10px;
             }
 
             &-title {
@@ -199,6 +200,11 @@
             }
           }
 
+          .balance-input-label {
+            font-size: 14px;
+            max-width: 266px;
+            color:  var(--color2);
+          }
         }
       }
     }
