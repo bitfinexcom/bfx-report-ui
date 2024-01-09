@@ -74,6 +74,9 @@ const SummaryFilters = () => {
                 onChange={onChange}
                 disabled={!useMinimumBalance}
               />
+              <span className='balance-input-currency'>
+                USD
+              </span>
             </div>
           </div>
           )}
