@@ -11,6 +11,8 @@ import { fetchData, refresh } from 'state/summaryByAsset/actions'
 import {
   getPageLoading,
   getDataReceived,
+  getUseMinBalance,
+  getMinimumBalance,
   getSummaryByAssetTotal,
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
@@ -33,6 +35,11 @@ const AppSummaryByAsset = () => {
   const entries = useSelector(getSummaryByAssetEntries)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const { start, end } = useSelector(getTimeFrame)
+  const minimumBalance = useSelector(getMinimumBalance)
+  const useMinimumBalance = useSelector(getUseMinBalance)
+
+  console.log('+++minimumBalance', minimumBalance)
+  console.log('+++useMinimumBalance', useMinimumBalance)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -45,9 +52,12 @@ const AppSummaryByAsset = () => {
   }, [timeRange])
 
   const preparedData = useMemo(
-    () => prepareSummaryByAssetData(entries, total, t),
-    [entries, total, t],
+    () => prepareSummaryByAssetData(entries, total, t, minimumBalance, useMinimumBalance),
+    [entries, total, t, minimumBalance, useMinimumBalance],
   )
+
+  console.log('preparedData', preparedData)
+
 
   const columns = useMemo(
     () => getAssetColumns({ preparedData, t }),
