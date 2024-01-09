@@ -18,7 +18,7 @@ export const InputKey = ({
   return (
     <div className='bitfinex-auth-form-input'>
       <FormGroup
-        label={t(label)}
+        label={label ? t(label) : ''}
         labelFor={name}
       />
       <InputGroup
