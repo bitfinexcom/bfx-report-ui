@@ -10,6 +10,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
+import InputKey from 'components/Auth/InputKey'
 import { getMinimumBalance, getUseMinBalance } from 'state/summaryByAsset/selectors'
 import { setMinimumBalance, toggleUseMinimumBalance } from 'state/summaryByAsset/actions'
 
@@ -25,6 +26,15 @@ const SummaryFilters = () => {
 
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
+  }
+
+  // const onChange = (isPopoverOpen) => {
+  //   setIsOpen(isPopoverOpen)
+  // }
+
+  const onChange = (event) => {
+    // const { name, value } = event.target
+    console.log('+++event', event)
   }
 
   const classes = classNames('summary-filters--menu', {
@@ -60,6 +70,14 @@ const SummaryFilters = () => {
             </div>
             <div className='balance-input-label'>
               {t('summary.by_asset.filter.min_balance_input')}
+            </div>
+            <div className='balance-input'>
+              <InputKey
+                type='number'
+                name='minimumBalance'
+                value={minimumBalance}
+                onChange={onChange}
+              />
             </div>
           </div>
           )}
