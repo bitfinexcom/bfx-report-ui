@@ -35,11 +35,11 @@ export const InputKey = ({
 
 InputKey.propTypes = {
   name: PropTypes.string,
+  type: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.string,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  type: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 InputKey.defaultProps = {
