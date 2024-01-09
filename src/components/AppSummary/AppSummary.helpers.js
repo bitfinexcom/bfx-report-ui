@@ -1,9 +1,14 @@
 import React from 'react'
 import { fixedFloat, formatThousands } from 'ui/utils'
 
-export const prepareSummaryByAssetData = (entries, total, t) => (
-  [...entries, { currency: t('summary.by_asset.total'), ...total }]
-)
+export const prepareSummaryByAssetData = (entries, total, t, minimumBalance, useMinimumBalance) => {
+  const mergedEntries = [...entries, { currency: t('summary.by_asset.total'), ...total }]
+  if (useMinimumBalance) {
+    return mergedEntries.filter(entry => entry?.balanceUsd >= minimumBalance)
+  }
+  return mergedEntries
+}
+
 
 export const prepareNumericValue = (value) => {
   let val = +fixedFloat(value, 2)
