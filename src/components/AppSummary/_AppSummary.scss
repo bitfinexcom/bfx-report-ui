@@ -220,10 +220,27 @@
             }
           }
 
-          .balance-input-label {
-            font-size: 14px;
-            max-width: 266px;
-            color:  var(--color2);
+          .balance-input {
+            &-label {
+              font-size: 14px;
+              max-width: 266px;
+              color:  var(--color2);
+            }
+
+            .bp3-form-group {
+              margin-bottom: 8px;
+            }
+
+            .bp3-input-group {
+              margin-bottom: 0;
+
+              .bp3-input {
+                height: 30px;
+                max-width: 133px;
+              }
+
+            }
+
           }
         }
       }
