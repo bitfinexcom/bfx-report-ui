@@ -22,10 +22,6 @@ const SummaryFilters = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [balanceValue, setBalanceValue] = useState(minimumBalance)
 
-  console.log('++balanceValue', balanceValue)
-  console.log('++minimumBalance', minimumBalance)
-  console.log('++useMinimumBalance', useMinimumBalance)
-
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
   }
