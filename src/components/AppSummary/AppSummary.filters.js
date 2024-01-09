@@ -27,7 +27,7 @@ const SummaryFilters = () => {
   }
 
   const onChange = (event) => {
-    const value = +event?.target?.value ?? 0
+    const value = event?.target?.value
     setBalanceValue(value)
     dispatch(setMinimumBalance(value))
   }
