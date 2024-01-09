@@ -72,6 +72,7 @@ const SummaryFilters = () => {
                 name='minimumBalance'
                 value={balanceValue}
                 onChange={onChange}
+                disabled={!useMinimumBalance}
               />
             </div>
           </div>
