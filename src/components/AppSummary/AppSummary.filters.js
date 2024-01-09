@@ -20,7 +20,9 @@ const SummaryFilters = () => {
   const minimumBalance = useSelector(getMinimumBalance)
   const useMinimumBalance = useSelector(getUseMinBalance)
   const [isOpen, setIsOpen] = useState(false)
+  const [balanceValue, setBalanceValue] = useState(minimumBalance)
 
+  console.log('++balanceValue', balanceValue)
   console.log('++minimumBalance', minimumBalance)
   console.log('++useMinimumBalance', useMinimumBalance)
 
@@ -28,13 +30,10 @@ const SummaryFilters = () => {
     setIsOpen(isPopoverOpen)
   }
 
-  // const onChange = (isPopoverOpen) => {
-  //   setIsOpen(isPopoverOpen)
-  // }
-
   const onChange = (event) => {
-    // const { name, value } = event.target
-    console.log('+++event', event)
+    const value = +event?.target?.value ?? 0
+    setBalanceValue(value)
+    dispatch(setMinimumBalance(value))
   }
 
   const classes = classNames('summary-filters--menu', {
@@ -75,7 +74,7 @@ const SummaryFilters = () => {
               <InputKey
                 type='number'
                 name='minimumBalance'
-                value={minimumBalance}
+                value={balanceValue}
                 onChange={onChange}
               />
             </div>
