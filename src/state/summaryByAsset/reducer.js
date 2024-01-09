@@ -7,7 +7,7 @@ export const initialState = {
   dataReceived: false,
   pageLoading: false,
   data: {},
-  minimumBalance: 0,
+  minimumBalance: 0.01,
   useMinBalance: false,
 }
 
