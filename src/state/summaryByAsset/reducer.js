@@ -27,7 +27,7 @@ export function summaryByAssetReducer(state = initialState, action) {
     case types.SET_MIN_BALANCE: {
       return {
         ...state,
-        minimumBalance: payload,
+        minimumBalance: +payload,
       }
     }
     case types.TOGGLE_USE_MIN_BALANCE: {
