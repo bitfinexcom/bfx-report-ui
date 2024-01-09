@@ -8,7 +8,7 @@ export const initialState = {
   pageLoading: false,
   data: {},
   minimumBalance: 0,
-  useMinBalance: true,
+  useMinBalance: false,
 }
 
 export function summaryByAssetReducer(state = initialState, action) {
