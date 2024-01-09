@@ -221,6 +221,10 @@
           }
 
           .balance-input {
+            display: flex;
+            max-width: 140px;
+            position: relative;
+
             &-label {
               font-size: 14px;
               max-width: 266px;
@@ -235,13 +239,25 @@
               margin-bottom: 0;
 
               .bp3-input {
-                height: 30px;
-                max-width: 133px;
+                height: 31px;
+                max-width: 140px;
+                padding: 0 40px 0 10px ;
+                font-size: 13px;
               }
             }
 
-            .bp3-disabled {
-              background: inherit;
+            .bp3-disabled,
+            .bp3-input:disabled {
+              border-radius: 4px;
+              background: var(--multiBg);
+            }
+            
+            &-currency {
+              right: 8px;
+              top: 16px;
+              font-size: 13px;
+              position: absolute;
+              color:  var(--color2);;
             }
           }
         }
