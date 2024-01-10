@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import classNames from 'classnames'
 import { createChart, CrosshairMode } from 'lightweight-charts'
-import _isEqual from 'lodash/isEqual'
 import _debounce from 'lodash/debounce'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import { THEME_CLASSES } from 'utils/themes'
 import { getPriceFormat, mergeSimilarTrades } from '../Charts.helpers'
@@ -126,10 +126,10 @@ class Candlestick extends React.PureComponent {
     if (theme !== prevProps?.theme) {
       this.recreateChart()
     }
-    if (isGoToRangePreserved && !_isEqual(timeRange, prevProps?.timeRange)) {
+    if (isGoToRangePreserved && !isEqual(timeRange, prevProps?.timeRange)) {
       this.recreateChart()
     }
-    if (!_isEqual(prevProps?.chartScrollTime, chartScrollTime)) {
+    if (!isEqual(prevProps?.chartScrollTime, chartScrollTime)) {
       handleChartScrollTime({
         currentScrollTime: (chartScrollTime * 1000),
       })

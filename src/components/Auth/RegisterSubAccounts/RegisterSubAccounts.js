@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _split from 'lodash/split'
 import _filter from 'lodash/filter'
-import _isEqual from 'lodash/isEqual'
 import _isString from 'lodash/isString'
 import _includes from 'lodash/includes'
 import { Classes, Dialog } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
 import config from 'config'
@@ -29,12 +28,12 @@ const filterRestrictedUsers = (users) => _filter(
 )
 
 const isUserHasSubAccounts = (users, masterAccount) => _filter(
-  users, user => _isEqual(user?.email, masterAccount)
+  users, user => isEqual(user?.email, masterAccount)
   && !isEmpty(user?.subUsers),
 ).length > 0
 
 const isMasterAccountProtected = (users, masterAccount) => _filter(
-  users, user => _isEqual(user?.email, masterAccount) && !user.isNotProtected,
+  users, user => isEqual(user?.email, masterAccount) && !user.isNotProtected,
 ).length > 0
 
 const { showFrameworkMode } = config

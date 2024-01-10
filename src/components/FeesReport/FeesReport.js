@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
-import _isEqual from 'lodash/isEqual'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -99,7 +98,7 @@ class FeesReport extends PureComponent {
 
   hasChanges = () => {
     const { currentFetchParams, params } = this.props
-    return !_isEqual(currentFetchParams, params)
+    return !isEqual(currentFetchParams, params)
   }
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)

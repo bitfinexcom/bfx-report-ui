@@ -1,6 +1,5 @@
 import _filter from 'lodash/filter'
-import _isEqual from 'lodash/isEqual'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 export const USE_API_KEY = 'subaccounts.use_api_key'
 
@@ -14,7 +13,7 @@ export const getFilledAccounts = (accounts, t) => accounts
       apiSecret,
     } = account
 
-    if (_isEqual(email, t(USE_API_KEY))) {
+    if (isEqual(email, t(USE_API_KEY))) {
       return (apiKey && apiSecret)
     }
 

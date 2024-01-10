@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import _map from 'lodash/map'
-import _isEqual from 'lodash/isEqual'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import { removeSubAccount } from 'state/subAccounts/actions'
 
@@ -35,7 +35,7 @@ const SubUsersList = ({
               <div className='account-title--label'>
                 {t('subaccounts.sub_account')}
               </div>
-              {isRemovalEnabled && _isEqual(email, accountEmail) && (
+              {isRemovalEnabled && isEqual(email, accountEmail) && (
                 <div
                   className='account-title--remove'
                   onClick={() => dispatch(removeSubAccount({ masterAccount: email, password }))}
@@ -43,7 +43,7 @@ const SubUsersList = ({
                   {t('subaccounts.remove_item')}
                 </div>
               )}
-              {isRemovalEnabled && !_isEqual(email, accountEmail) && (
+              {isRemovalEnabled && !isEqual(email, accountEmail) && (
                 <div
                   className='account-title--remove'
                   onClick={() => onToggle(accountEmail)}

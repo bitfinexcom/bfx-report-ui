@@ -10,8 +10,7 @@ import {
 import { delay } from 'redux-saga'
 import _last from 'lodash/last'
 import _isArray from 'lodash/isArray'
-import _isEqual from 'lodash/isEqual'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import WS from 'state/ws'
 import wsTypes from 'state/ws/constants'
@@ -156,7 +155,7 @@ function* signUpEmail({ payload }) {
     if (_isArray(result)) {
       const [loginToken, twoFaTypes] = result
       const [twoFaMain] = _last(twoFaTypes)
-      if (_isEqual(twoFaMain, types.LOGIN_2FA_OTP)) {
+      if (isEqual(twoFaMain, types.LOGIN_2FA_OTP)) {
         yield put(actions.setLoginToken(loginToken))
         yield put(actions.showOtpLogin(true))
       } else {
@@ -228,7 +227,7 @@ function* signIn({ payload }) {
     if (result) {
       yield call(onAuthSuccess, { ...payload, ...result })
       const userShouldReLogin = yield select(getUserShouldReLogin)
-      if (_isEqual(email, userShouldReLogin)) {
+      if (isEqual(email, userShouldReLogin)) {
         yield put(actions.setUserShouldReLogin(''))
       }
       return

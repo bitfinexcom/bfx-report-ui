@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
-import _isEqual from 'lodash/isEqual'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -56,7 +55,7 @@ class TradedVolume extends PureComponent {
 
   hasChanges = () => {
     const { currentFetchParams, params } = this.props
-    return !_isEqual(currentFetchParams, params)
+    return !isEqual(currentFetchParams, params)
   }
 
   clearPairs = () => clearAllPairs(TYPE, this.props)
