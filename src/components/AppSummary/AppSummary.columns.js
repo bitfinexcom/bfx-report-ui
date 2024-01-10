@@ -125,9 +125,11 @@ export const getAssetColumns = ({
               </span>
             </>
           ) : (
-            <span className='cell-value'>
-              {currency}
-            </span>
+            <>
+              <span className='cell-value'>
+                {currency}
+              </span>
+            </>
           )}
         </Cell>
       )
@@ -145,10 +147,12 @@ export const getAssetColumns = ({
       return (
         <Cell tooltip={getTooltipContent(tooltipContent, t)}>
           {isTotal ? (
-            <span className='cell-value'>
-              $
-              {formatUsdValue(balanceUsd)}
-            </span>
+            <>
+              <span className='cell-value'>
+                $
+                {formatUsdValue(balanceUsd)}
+              </span>
+            </>
           ) : (
             <>
               <span className='cell-value'>
@@ -215,10 +219,12 @@ export const getAssetColumns = ({
       return (
         <Cell tooltip={getTooltipContent(tooltipContent, t)}>
           {isTotal ? (
-            <span className='cell-value'>
-              $
-              {formatUsdValue(volumeUsd)}
-            </span>
+            <>
+              <span className='cell-value'>
+                $
+                {formatUsdValue(volumeUsd)}
+              </span>
+            </>
           ) : (
             <>
               <span className='cell-value'>
@@ -247,10 +253,12 @@ export const getAssetColumns = ({
       return (
         <Cell tooltip={getTooltipContent(tooltipContent, t)}>
           {isTotal ? (
-            <span className='cell-value'>
-              $
-              {formatUsdValue(tradingFeesUsd)}
-            </span>
+            <>
+              <span className='cell-value'>
+                $
+                {formatUsdValue(tradingFeesUsd)}
+              </span>
+            </>
           ) : (
             <>
               <span className='cell-value'>
