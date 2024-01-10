@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
 import {
-  Alignment,
   Switch,
   Popover,
   Position,
+  Alignment,
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
