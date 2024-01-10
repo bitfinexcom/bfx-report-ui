@@ -1,7 +1,7 @@
 import config from 'config'
 import _first from 'lodash/first'
 import _filter from 'lodash/filter'
-import _isEqual from 'lodash/isEqual'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 const getAuth = state => state.auth
 
@@ -19,7 +19,7 @@ export const getLoginToken = state => getAuth(state)?.loginToken ?? ''
 export const getUserShouldReLogin = state => getAuth(state)?.userShouldReLogin ?? ''
 export const getShouldNotSyncOnStartupAfterUpdate = state => getAuth(state)?.shouldNotSyncOnStartupAfterUpdate ?? false
 export const getIsSubAccsAvailable = state => _first(
-  _filter(getUsers(state), user => _isEqual(user?.email, getEmail(state))),
+  _filter(getUsers(state), user => isEqual(user?.email, getEmail(state))),
 )?.isApiKeysAuth ?? true
 export const getLocalUsername = state => getAuth(state)?.localUsername ?? null
 
