@@ -11,6 +11,7 @@ const initialState = {
   src: types.DEFAULT_SRC,
   customApiPort: null,
   tableScroll: getDefaultTableScrollSetting(),
+  showMaintenanceModal: false,
 }
 
 export function baseReducer(state = initialState, action) {
@@ -50,6 +51,11 @@ export function baseReducer(state = initialState, action) {
       return {
         ...state,
         milliseconds: payload,
+      }
+    case types.SHOW_MAINTENANCE_MODAL:
+      return {
+        ...state,
+        showMaintenanceModal: payload,
       }
     case types.TOGGLE_TABLE_SCROLL:
       return {
