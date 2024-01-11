@@ -87,6 +87,13 @@ export function setApiPort(apiPort) {
   }
 }
 
+export function showMaintenanceModal(status) {
+  return {
+    type: types.SHOW_MAINTENANCE_MODAL,
+    payload: status,
+  }
+}
+
 export default {
   setApiPort,
   setDateFormat,
@@ -95,6 +102,7 @@ export default {
   setTheme,
   setTimezone,
   showMilliseconds,
+  showMaintenanceModal,
   toggleTableScroll,
   updateTheme,
 }
