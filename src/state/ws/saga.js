@@ -4,6 +4,7 @@ import { initSync } from 'state/sync/saga'
 import { authExpired } from 'state/auth/actions'
 import { updateSyncStatus } from 'state/sync/actions'
 import { setIsCsvExporting } from 'state/query/actions'
+import { showMaintenanceModal } from 'state/base/actions'
 import { updateStatus, updateWarningStatus } from 'state/status/actions'
 import { toggleExportDialog, toggleExportSuccessDialog } from 'state/ui/actions'
 
@@ -36,10 +37,20 @@ function* handleCsvGenerationCompleted() {
   yield put(toggleExportSuccessDialog())
 }
 
+function* handleMaintenanceTurnedOn() {
+  yield put(showMaintenanceModal(true))
+}
+
+function* handleMaintenanceTurnedOff() {
+  yield put(showMaintenanceModal(false))
+}
+
 export default function* wsSaga() {
   yield takeLatest(types.WS_RECONNECT, reconnect)
   yield takeLatest(types.WS_NET_ERROR, notifyNetError)
   yield takeLatest(types.WS_NET_RESUMED, notifyNetResumed)
   yield takeLatest(types.WS_BFX_TOKEN_AUTH_REQUIRED, handleTokenAuthRequired)
+  yield takeLatest(types.WS_MAINTENANCE_TURNED_ON, handleMaintenanceTurnedOn)
+  yield takeLatest(types.WS_MAINTENANCE_TURNED_OFF, handleMaintenanceTurnedOff)
   yield takeLatest(types.WS_CSV_GENERATION_COMPLETED, handleCsvGenerationCompleted)
 }
