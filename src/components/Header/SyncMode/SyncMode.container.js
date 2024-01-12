@@ -3,7 +3,12 @@ import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
 import { startSyncNow, stopSyncNow } from 'state/sync/actions'
-import { getSyncProgress, getIsSyncing, getEstimatedSyncTime } from 'state/sync/selectors'
+import {
+  getIsSyncing,
+  getSyncProgress,
+  getEstimatedSyncTime,
+  getIsInitSyncPopupOpen,
+} from 'state/sync/selectors'
 
 import SyncMode from './SyncMode'
 
@@ -11,6 +16,7 @@ const mapStateToProps = state => ({
   isSyncing: getIsSyncing(state),
   syncProgress: getSyncProgress(state),
   estimatedSyncTime: getEstimatedSyncTime(state),
+  isInitSyncPopupOpen: getIsInitSyncPopupOpen(state),
 })
 
 const mapDispatchToProps = {
