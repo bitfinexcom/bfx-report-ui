@@ -20,6 +20,7 @@ const SyncMode = ({
   syncProgress,
   startSyncNow,
   estimatedSyncTime,
+  isInitSyncPopupOpen,
 }) => {
   const handleSync = () => {
     if (isSyncing) {
@@ -60,6 +61,7 @@ SyncMode.propTypes = {
   stopSyncNow: PropTypes.func,
   startSyncNow: PropTypes.func,
   isSyncing: PropTypes.bool.isRequired,
+  isInitSyncPopupOpen: PropTypes.bool.isRequired,
   syncProgress: PropTypes.number.isRequired,
   estimatedSyncTime: PropTypes.shape({
     leftTime: PropTypes.number,
