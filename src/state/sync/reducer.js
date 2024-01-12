@@ -21,6 +21,7 @@ const initialState = {
   progress: 0,
   estimatedSyncTime: {},
   isSyncRequired: true,
+  showInitSyncPopup: false,
 }
 
 export function syncReducer(state = initialState, action) {
@@ -126,6 +127,12 @@ export function syncReducer(state = initialState, action) {
       return {
         ...state,
         isSyncRequired: payload,
+      }
+    }
+    case types.SHOW_INIT_SYNC_POPUP: {
+      return {
+        ...state,
+        showInitSyncPopup: payload,
       }
     }
     default: {
