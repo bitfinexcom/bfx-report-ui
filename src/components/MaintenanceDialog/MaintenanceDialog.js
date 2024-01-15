@@ -2,35 +2,38 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
-  Button,
-  Checkbox,
   Classes,
   Dialog,
-  Intent,
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
+import { getShowMaintenanceModal } from 'state/base/selectors'
 
-// const BFX_STATUS_LINK = 'https://bitfinex.statuspage.io/'
+const BFX_STATUS_LINK = 'https://bitfinex.statuspage.io/'
 
-const MaintenanceDialog = ({
-
-  isOpen,
-}) => {
+const MaintenanceDialog = () => {
   const { t } = useTranslation()
-  const isOpen = useSelector(getTimezone)
+  const isOpen = useSelector(getShowMaintenanceModal)
 
   return (
     <Dialog
-      className='maintenance-dialog'
+      isOpen={isOpen}
       icon={<Icon.INFO_CIRCLE />}
       title={t('maintenance.title')}
+      className='maintenance-dialog'
       isCloseButtonShown={false}
-      isOpen={true}
     >
       <div className={Classes.DIALOG_BODY}>
         <div className='maintenance-dialog-message'>
-          {errorMessage}
+          <span>{t('maintenance.message_1')}</span>
+          <br />
+          <span>{t('maintenance.message_2')}</span>
+          <a href={BFX_STATUS_LINK}>
+            bitfinex.statuspage.io
+          </a>
+          <span>{t('maintenance.message_3')}</span>
+          <br />
+          <span>{t('maintenance.message_4')}</span>
         </div>
       </div>
     </Dialog>
