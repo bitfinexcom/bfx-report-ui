@@ -28,7 +28,11 @@ const MaintenanceDialog = () => {
           <span>{t('maintenance.message_1')}</span>
           <br />
           <span>{t('maintenance.message_2')}</span>
-          <a href={BFX_STATUS_LINK}>
+          <a
+            target='_blank'
+            href={BFX_STATUS_LINK}
+            rel='noopener noreferrer'
+          >
             bitfinex.statuspage.io
           </a>
           <span>{t('maintenance.message_3')}</span>
