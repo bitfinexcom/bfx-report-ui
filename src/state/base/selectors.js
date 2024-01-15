@@ -20,6 +20,7 @@ export const getTableScroll = state => getBase(state).tableScroll || false
 export const getSrc = state => getBase(state)?.src ?? types.DEFAULT_SRC
 export const getIsTurkishSite = state => isEqual(getSrc(state), types.TR_SRC)
 export const getCustomApiPort = state => getBase(state)?.customApiPort ?? null
+export const getShowMaintenanceModal = state => getBase(state)?.showMaintenanceModal ?? false
 
 export const getTimeOffset = state => timeOffset(getTimezone(state))
 
@@ -79,4 +80,5 @@ export default {
   getTimeOffset,
   getTimezone,
   getWsAddress,
+  getShowMaintenanceModal,
 }
