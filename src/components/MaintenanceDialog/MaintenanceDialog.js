@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
-  Classes,
   Dialog,
+  Classes,
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
@@ -18,10 +18,10 @@ const MaintenanceDialog = () => {
   return (
     <Dialog
       isOpen={isOpen}
+      isCloseButtonShown={false}
       icon={<Icon.INFO_CIRCLE />}
       title={t('maintenance.title')}
       className='maintenance-dialog'
-      isCloseButtonShown={false}
     >
       <div className={Classes.DIALOG_BODY}>
         <div className='maintenance-dialog-message'>
