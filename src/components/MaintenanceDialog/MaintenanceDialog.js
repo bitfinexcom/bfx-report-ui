@@ -10,6 +10,8 @@ import {
 
 import Icon from 'icons'
 
+const BFX_STATUS_LINK = 'https://bitfinex.statuspage.io/'
+
 const MaintenanceDialog = ({
   t,
   isOpen,
