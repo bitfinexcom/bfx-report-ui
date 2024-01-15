@@ -1,1 +1,1 @@
-export { default } from './MaintenanceDialog.container'
+export { default } from './MaintenanceDialog'
