@@ -1,8 +1,9 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import {
-  Position,
   Tooltip,
+  Popover,
+  Position,
 } from '@blueprintjs/core'
 
 import config from 'config'
@@ -38,6 +39,21 @@ const SyncMode = ({
 
   return (
     <>
+      <Popover
+        autoFocus={false}
+        usePortal={false}
+        isOpen
+        position={Position.BOTTOM}
+        // onOpening={() => togglePopover(true)}
+        // onClosing={() => togglePopover(false)}
+        content={(
+          <div className='sync-mode--popover-content'>
+            "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports."
+          </div>
+          )}
+        targetTagName='div'
+        popoverClassName='summary-filters--menu-popover'
+      >
       <Tooltip
         className='sync-mode'
         position={Position.BOTTOM}
@@ -52,6 +68,7 @@ const SyncMode = ({
           <span className='sync-mode-status'>{t(getSyncTitle(isSyncing))}</span>
         </div>
       </Tooltip>
+    </Popover>
     </>
   )
 }
