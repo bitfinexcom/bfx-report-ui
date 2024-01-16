@@ -2,7 +2,11 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
-import { startSyncNow, stopSyncNow } from 'state/sync/actions'
+import {
+  stopSyncNow,
+  startSyncNow,
+  showInitSyncPopup,
+} from 'state/sync/actions'
 import {
   getIsSyncing,
   getSyncProgress,
@@ -22,6 +26,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   startSyncNow,
   stopSyncNow,
+  showInitSyncPopup,
 }
 
 export default compose(
