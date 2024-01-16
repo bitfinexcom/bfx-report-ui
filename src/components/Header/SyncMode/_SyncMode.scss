@@ -13,6 +13,13 @@
     padding: 15px 20px 15px 15px;
     border-radius: 4px;
     border: 1px solid var(--borderColor);
+
+    .bp3-popover-arrow {
+      &-border {
+        fill-opacity: 1;
+        fill: var(--borderColor);
+      }
+    }
   }
 
   &-icon {
