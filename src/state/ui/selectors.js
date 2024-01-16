@@ -15,6 +15,7 @@ export const getErrorDialogMessage = state => getUI(state).errorMessage
 export const getDevice = state => getUI(state).device
 export const getWindowWidth = state => getUI(state).windowWidth
 export const getIsExtraInfoDialogOpen = state => getUI(state)?.isExtraInfoDialogOpen ?? false
+export const getShowMaintenanceModal = state => getUI(state)?.showMaintenanceModal ?? false
 
 export default {
   getIsElectronBackendLoaded,
