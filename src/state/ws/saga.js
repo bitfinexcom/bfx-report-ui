@@ -4,9 +4,12 @@ import { initSync } from 'state/sync/saga'
 import { authExpired } from 'state/auth/actions'
 import { updateSyncStatus } from 'state/sync/actions'
 import { setIsCsvExporting } from 'state/query/actions'
-import { showMaintenanceModal } from 'state/base/actions'
 import { updateStatus, updateWarningStatus } from 'state/status/actions'
-import { toggleExportDialog, toggleExportSuccessDialog } from 'state/ui/actions'
+import {
+  toggleExportDialog,
+  showMaintenanceModal,
+  toggleExportSuccessDialog,
+} from 'state/ui/actions'
 
 import types from './constants'
 import login from './signIn'

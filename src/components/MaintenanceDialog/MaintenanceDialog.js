@@ -7,7 +7,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import { getShowMaintenanceModal } from 'state/base/selectors'
+import { getShowMaintenanceModal } from 'state/ui/selectors'
 
 const BFX_STATUS_LINK = 'https://bitfinex.statuspage.io/'
 
