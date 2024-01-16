@@ -22,6 +22,7 @@ const SyncMode = ({
   syncProgress,
   startSyncNow,
   estimatedSyncTime,
+  showInitSyncPopup,
   isInitSyncPopupOpen,
 }) => {
   const handleSync = () => {
@@ -44,13 +45,14 @@ const SyncMode = ({
         autoFocus={false}
         usePortal={false}
         position={Position.BOTTOM}
-        isOpen={isInitSyncPopupOpen}
-        // onOpening={() => togglePopover(true)}
-        // onClosing={() => togglePopover(false)}
+        isOpen={!isInitSyncPopupOpen}
         content={(
           <div className='sync-mode--popover-content'>
             {t('sync.init-sync-info.main')}
-            <div className='sync-mode--close-btn'>
+            <div
+              className='sync-mode--close-btn'
+              onClick={() => showInitSyncPopup(true)}
+            >
               <Icon.CLOSE />
             </div>
           </div>
@@ -81,6 +83,7 @@ SyncMode.propTypes = {
   t: PropTypes.func.isRequired,
   stopSyncNow: PropTypes.func,
   startSyncNow: PropTypes.func,
+  showInitSyncPopup: PropTypes.func,
   isSyncing: PropTypes.bool.isRequired,
   isInitSyncPopupOpen: PropTypes.bool.isRequired,
   syncProgress: PropTypes.number.isRequired,
@@ -94,6 +97,7 @@ SyncMode.propTypes = {
 SyncMode.defaultProps = {
   stopSyncNow: () => {},
   startSyncNow: () => {},
+  showInitSyncPopup: () => {},
 }
 
 export default memo(SyncMode)
