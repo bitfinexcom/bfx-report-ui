@@ -48,7 +48,7 @@ const SyncMode = ({
         // onClosing={() => togglePopover(false)}
         content={(
           <div className='sync-mode--popover-content'>
-            "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports."
+            Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.
           </div>
           )}
         targetTagName='div'
