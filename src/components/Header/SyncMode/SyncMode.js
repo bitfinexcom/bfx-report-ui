@@ -52,7 +52,7 @@ const SyncMode = ({
           </div>
           )}
         targetTagName='div'
-        popoverClassName='summary-filters--menu-popover'
+        popoverClassName='sync-mode--info-popover'
       >
       <Tooltip
         className='sync-mode'
