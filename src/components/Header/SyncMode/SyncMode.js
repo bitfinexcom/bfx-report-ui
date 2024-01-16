@@ -42,16 +42,16 @@ const SyncMode = ({
   return (
     <>
       <Popover
+        usePortal
         autoFocus={false}
-        usePortal={false}
         position={Position.BOTTOM}
-        isOpen={!isInitSyncPopupOpen}
+        isOpen={isInitSyncPopupOpen}
         content={(
           <div className='sync-mode--popover-content'>
             {t('sync.init-sync-info.main')}
             <div
               className='sync-mode--close-btn'
-              onClick={() => showInitSyncPopup(true)}
+              onClick={() => showInitSyncPopup(false)}
             >
               <Icon.CLOSE />
             </div>
