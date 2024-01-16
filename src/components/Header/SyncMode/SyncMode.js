@@ -6,6 +6,7 @@ import {
   Position,
 } from '@blueprintjs/core'
 
+import Icon from 'icons'
 import config from 'config'
 
 import {
@@ -40,15 +41,18 @@ const SyncMode = ({
   return (
     <>
       <Popover
-        isOpen
         autoFocus={false}
         usePortal={false}
         position={Position.BOTTOM}
+        isOpen={isInitSyncPopupOpen}
         // onOpening={() => togglePopover(true)}
         // onClosing={() => togglePopover(false)}
         content={(
           <div className='sync-mode--popover-content'>
             {t('sync.init-sync-info.main')}
+            <div className='sync-mode--close-btn'>
+              <Icon.CLOSE />
+            </div>
           </div>
           )}
         targetTagName='div'
