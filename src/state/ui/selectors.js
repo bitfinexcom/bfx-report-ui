@@ -33,4 +33,5 @@ export default {
   getDevice,
   getWindowWidth,
   getIsExtraInfoDialogOpen,
+  getShowMaintenanceModal,
 }
