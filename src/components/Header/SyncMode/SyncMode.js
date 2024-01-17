@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
 import {
   Tooltip,
@@ -25,6 +25,23 @@ const SyncMode = ({
   showInitSyncPopup,
   isInitSyncPopupOpen,
 }) => {
+  const [prevProgress, setPrevProgress] = useState(null)
+
+  useEffect(() => {
+    setPrevProgress(syncProgress)
+  }, [])
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (syncProgress === prevProgress) {
+        // Do something if the prop value remains the same after 30 seconds
+        console.log('+++ syncProgress === pevProgress')
+      } else {
+        setPrevProgress(syncProgress)
+      }
+    }, 1000)
+    return () => clearTimeout(timeout)
+  }, [syncProgress, prevProgress])
   const handleSync = () => {
     if (isSyncing) {
       stopSyncNow()
@@ -38,6 +55,9 @@ const SyncMode = ({
   if (!config.showFrameworkMode) {
     return null
   }
+
+  console.log('+++1pevProgress', prevProgress)
+  console.log('+++2syncProgress', syncProgress)
 
   return (
     <>
