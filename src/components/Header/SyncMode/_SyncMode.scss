@@ -87,3 +87,9 @@
     }
   }
 }
+
+@media screen and (max-width: 1170px) {
+  .sync-mode--info-popover  {
+      display: none;
+    }
+}
