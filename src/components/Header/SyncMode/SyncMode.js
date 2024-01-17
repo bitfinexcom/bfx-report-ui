@@ -40,6 +40,7 @@ const SyncMode = ({
         // Do something if the prop value remains the same after 30 seconds
         console.log('+++ syncProgress === pevProgress')
       } else {
+        setIsLongSync(false)
         setPrevProgress(syncProgress)
       }
     }, 5000)
