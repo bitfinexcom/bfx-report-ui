@@ -42,7 +42,7 @@ const SyncMode = ({
       } else {
         setPrevProgress(syncProgress)
       }
-    }, 3000)
+    }, 5000)
     return () => clearTimeout(timeout)
   }, [syncProgress, prevProgress])
   const handleSync = () => {
@@ -53,7 +53,11 @@ const SyncMode = ({
     }
   }
 
-  const syncIcon = getSyncIcon(isSyncing, syncProgress, isLongSync)
+  const syncIcon = getSyncIcon(isSyncing, syncProgress, !isLongSync)
+
+  const popupInfo = isLongSync
+    ? t('sync.init-sync-info.additional')
+    : t('sync.init-sync-info.main')
 
   if (!config.showFrameworkMode) {
     return null
@@ -72,7 +76,7 @@ const SyncMode = ({
         isOpen={isInitSyncPopupOpen}
         content={(
           <div className='sync-mode--popover-content'>
-            {t('sync.init-sync-info.main')}
+            {popupInfo}
             <div
               className='sync-mode--close-btn'
               onClick={() => showInitSyncPopup(false)}
