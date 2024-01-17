@@ -45,8 +45,7 @@ function* startSyncing() {
   const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
   yield put(actions.setIsSyncRequired(!isNotSyncRequired))
   const { result, error } = yield call(enableSyncMode, { isNotSyncRequired })
-
-  console.log('+++startSyncing')
+  if (!isNotSyncRequired) yield put(actions.showInitSyncPopup(true))
 
   if (result && !isNotSyncRequired) {
     yield put(actions.setSyncPref({
@@ -80,6 +79,7 @@ function* stopSyncNow() {
   if (result) {
     const { result: haveSyncedAtLeastOnce } = yield call(haveCollsBeenSyncedAtLeastOnce)
     yield put(actions.setIsSyncRequired(!haveSyncedAtLeastOnce))
+    yield put(actions.showInitSyncPopup(false))
     yield put(actions.setIsSyncing(false))
     yield put(actions.setEstimatedTime({}))
     yield put(updateStatus({ id: 'sync.logout' }))
@@ -173,7 +173,6 @@ function* initQueryMode() {
 
 export function* initSync() {
   yield call(initQueryMode)
-  yield put(actions.showInitSyncPopup(true))
   const { result: { progress, isSyncInProgress } } = yield call(fetchSyncProgress)
   if (!isSyncInProgress || progress === 100) {
     yield put(actions.setIsSyncing(false))
