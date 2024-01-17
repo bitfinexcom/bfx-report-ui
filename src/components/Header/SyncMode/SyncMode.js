@@ -5,6 +5,7 @@ import {
   Popover,
   Position,
 } from '@blueprintjs/core'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
 import config from 'config'
@@ -25,6 +26,7 @@ const SyncMode = ({
   showInitSyncPopup,
   isInitSyncPopupOpen,
 }) => {
+  const [isLongSync, setIsLongSync] = useState(false)
   const [prevProgress, setPrevProgress] = useState(null)
 
   useEffect(() => {
@@ -33,13 +35,14 @@ const SyncMode = ({
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (syncProgress === prevProgress) {
+      if (isEqual(prevProgress, syncProgress)) {
+        setIsLongSync(true)
         // Do something if the prop value remains the same after 30 seconds
         console.log('+++ syncProgress === pevProgress')
       } else {
         setPrevProgress(syncProgress)
       }
-    }, 1000)
+    }, 3000)
     return () => clearTimeout(timeout)
   }, [syncProgress, prevProgress])
   const handleSync = () => {
@@ -50,7 +53,7 @@ const SyncMode = ({
     }
   }
 
-  const syncIcon = getSyncIcon(isSyncing, syncProgress)
+  const syncIcon = getSyncIcon(isSyncing, syncProgress, isLongSync)
 
   if (!config.showFrameworkMode) {
     return null
@@ -58,6 +61,7 @@ const SyncMode = ({
 
   console.log('+++1pevProgress', prevProgress)
   console.log('+++2syncProgress', syncProgress)
+  console.log('+++isLongSync', isLongSync)
 
   return (
     <>
