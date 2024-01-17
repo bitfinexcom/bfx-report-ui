@@ -45,13 +45,13 @@ function* startSyncing() {
   const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
   yield put(actions.setIsSyncRequired(!isNotSyncRequired))
   const { result, error } = yield call(enableSyncMode, { isNotSyncRequired })
-  if (!isNotSyncRequired) yield put(actions.showInitSyncPopup(true))
 
   if (result && !isNotSyncRequired) {
     yield put(actions.setSyncPref({
       progress: 0,
       isSyncing: true,
     }))
+    yield put(actions.showInitSyncPopup(true))
     yield put(updateStatus({ id: 'sync.start' }))
   }
   if (error) {
@@ -79,9 +79,9 @@ function* stopSyncNow() {
   if (result) {
     const { result: haveSyncedAtLeastOnce } = yield call(haveCollsBeenSyncedAtLeastOnce)
     yield put(actions.setIsSyncRequired(!haveSyncedAtLeastOnce))
-    yield put(actions.showInitSyncPopup(false))
     yield put(actions.setIsSyncing(false))
     yield put(actions.setEstimatedTime({}))
+    yield put(actions.showInitSyncPopup(false))
     yield put(updateStatus({ id: 'sync.logout' }))
   }
   if (error) {
@@ -95,6 +95,7 @@ function* stopSyncing() {
   if (result) {
     yield put(actions.setIsSyncing(false))
     yield put(actions.setEstimatedTime({}))
+    yield put(actions.showInitSyncPopup(false))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
   }
   if (error) {
@@ -208,6 +209,7 @@ function* progressUpdate({ payload }) {
     if (error) yield put(updateSyncErrorStatus(error))
   } else if (state === types.SYNC_FINISHED) {
     yield put(actions.setIsSyncing(false))
+    yield put(actions.showInitSyncPopup(false))
   } else {
     const syncProgress = Number.isInteger(progress)
       ? progress
@@ -223,6 +225,7 @@ function* requestsRedirectUpdate({ payload }) {
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
     yield put(actions.setIsSyncing(false))
+    yield put(actions.showInitSyncPopup(false))
   } else {
     yield put(actions.setSyncMode(types.MODE_OFFLINE))
     yield put(actions.forceQueryFromDb())
@@ -242,6 +245,7 @@ function* updateSyncStatus() {
       if (progress === 100) {
         yield put(actions.setIsSyncing(false))
         yield put(actions.setIsSyncRequired(false))
+        yield put(actions.showInitSyncPopup(false))
         yield put(updateStatus({ id: 'sync.sync-done' }))
       }
       break
