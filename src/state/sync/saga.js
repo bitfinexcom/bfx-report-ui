@@ -46,6 +46,8 @@ function* startSyncing() {
   yield put(actions.setIsSyncRequired(!isNotSyncRequired))
   const { result, error } = yield call(enableSyncMode, { isNotSyncRequired })
 
+  console.log('+++startSyncing')
+
   if (result && !isNotSyncRequired) {
     yield put(actions.setSyncPref({
       progress: 0,
@@ -139,6 +141,7 @@ function* forceQueryFromDb() {
 
 function* syncLogout() {
   yield delay(300)
+  yield put(actions.showInitSyncPopup(false))
   const isLoggedIn = !isEmpty(yield select(selectAuth))
   if (isLoggedIn) {
     const { result, error } = yield call(logout)
@@ -170,6 +173,7 @@ function* initQueryMode() {
 
 export function* initSync() {
   yield call(initQueryMode)
+  yield put(actions.showInitSyncPopup(true))
   const { result: { progress, isSyncInProgress } } = yield call(fetchSyncProgress)
   if (!isSyncInProgress || progress === 100) {
     yield put(actions.setIsSyncing(false))

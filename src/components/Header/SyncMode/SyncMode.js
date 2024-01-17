@@ -42,8 +42,8 @@ const SyncMode = ({
   return (
     <>
       <Popover
-        usePortal
         autoFocus={false}
+        usePortal={false}
         position={Position.BOTTOM}
         isOpen={isInitSyncPopupOpen}
         content={(
