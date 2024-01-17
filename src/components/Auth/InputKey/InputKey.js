@@ -12,13 +12,14 @@ export const InputKey = ({
   label,
   value,
   onChange,
+  disabled,
   placeholder,
 }) => {
   const { t } = useTranslation()
   return (
     <div className='bitfinex-auth-form-input'>
       <FormGroup
-        label={t(label)}
+        label={label ? t(label) : ''}
         labelFor={name}
       />
       <InputGroup
@@ -27,6 +28,7 @@ export const InputKey = ({
         type={type}
         value={value}
         onChange={onChange}
+        disabled={disabled}
         placeholder={placeholder && t(placeholder)}
       />
     </div>
@@ -35,11 +37,12 @@ export const InputKey = ({
 
 InputKey.propTypes = {
   name: PropTypes.string,
+  type: PropTypes.string,
   label: PropTypes.string,
-  value: PropTypes.string,
+  disabled: PropTypes.bool,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
-  type: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 InputKey.defaultProps = {
@@ -47,6 +50,7 @@ InputKey.defaultProps = {
   value: '',
   label: '',
   placeholder: '',
+  disabled: false,
   type: 'password',
   onChange: () => {},
 }

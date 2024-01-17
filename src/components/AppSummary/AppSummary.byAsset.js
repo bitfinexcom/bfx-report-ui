@@ -11,6 +11,8 @@ import { fetchData, refresh } from 'state/summaryByAsset/actions'
 import {
   getPageLoading,
   getDataReceived,
+  getUseMinBalance,
+  getMinimumBalance,
   getSummaryByAssetTotal,
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
@@ -18,6 +20,7 @@ import { getTimezone } from 'state/base/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
 import { getTimeRange, getTimeFrame } from 'state/timeRange/selectors'
 
+import SummaryFilters from './AppSummary.filters'
 import { getAssetColumns } from './AppSummary.columns'
 import { prepareSummaryByAssetData } from './AppSummary.helpers'
 
@@ -32,6 +35,8 @@ const AppSummaryByAsset = () => {
   const entries = useSelector(getSummaryByAssetEntries)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const { start, end } = useSelector(getTimeFrame)
+  const minimumBalance = useSelector(getMinimumBalance)
+  const useMinimumBalance = useSelector(getUseMinBalance)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -44,8 +49,8 @@ const AppSummaryByAsset = () => {
   }, [timeRange])
 
   const preparedData = useMemo(
-    () => prepareSummaryByAssetData(entries, total, t),
-    [entries, total, t],
+    () => prepareSummaryByAssetData(entries, total, t, minimumBalance, useMinimumBalance),
+    [entries, total, t, minimumBalance, useMinimumBalance],
   )
 
   const columns = useMemo(
@@ -71,12 +76,17 @@ const AppSummaryByAsset = () => {
 
   return (
     <div className='app-summary-item full-width-item'>
-      <div className='app-summary-item-title'>
-        {t('summary.by_asset.title')}
-      </div>
-      <div className='app-summary-item-sub-title'>
-        {t('summary.by_asset.sub_title')}
-        {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
+      <div className='app-summary-item-title--row'>
+        <div>
+          <div className='app-summary-item-title'>
+            {t('summary.by_asset.title')}
+          </div>
+          <div className='app-summary-item-sub-title'>
+            {t('summary.by_asset.sub_title')}
+            {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
+          </div>
+        </div>
+        <SummaryFilters />
       </div>
       {showContent}
     </div>

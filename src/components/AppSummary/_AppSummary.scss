@@ -20,7 +20,7 @@
     display: flex;
     flex-wrap: wrap;
     max-width: 1000px;
-    min-height: 390px;
+    min-height: 441px;
     align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 35px;
@@ -112,7 +112,7 @@
       .loading-container {
         display: flex;
         margin-top: -4px;
-        min-height: 320px;
+        min-height: 387px;
 
         .loading {
           margin: auto;
@@ -136,6 +136,134 @@
   width: 100%;
   max-width: 100%;
   min-height: 300px;
+
+  .app-summary-item-title--row {
+    display: flex;
+    max-width: 1000px;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+
+    .summary-filters {
+      &--button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 84px;
+        min-height: 34px;
+        border-radius: 4px;
+        color:  var(--color2);
+        border: 1px solid  var(--borderColor);
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        svg {
+          margin-top: -2px;
+          margin-right: 5px;
+        }
+
+        &.bp3-active {
+          color:  var(--thColor);
+          border-color: var(--thColor);
+
+          svg {
+            path {
+              stroke: var(--thColor);
+            }
+          }
+        }
+      }
+
+      &--menu-popover {
+        min-width: 314px;
+        min-height: 150px;
+        padding: 26px 24px;
+        border-radius: 4px;
+        background-color: var(--bgColor2);
+        border: 1px solid var(--borderColor);
+
+        .bp3-popover-content {
+          background-color: var(--bgColor2);
+
+          .switch {
+            &-row {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 10px;
+
+              .switch-btn{
+                margin-bottom: 0;
+
+                .bp3-control-indicator {
+                  background: var(--bgColor);
+                  &::before  {
+                    background: var(--switchBtnColor);
+                  }
+                }
+
+                &.active {
+                  .bp3-control-indicator {
+                    background: var(--thColor);
+                    &::before  {
+                      background: var(--color);
+                    }
+                  }
+                }
+              }
+            }
+
+            &-title {
+              font-size: 14px;
+            }
+          }
+
+          .balance-input {
+            display: flex;
+            max-width: 140px;
+            position: relative;
+
+            &-label {
+              font-size: 14px;
+              max-width: 266px;
+              color:  var(--color2);
+            }
+
+            .bp3-form-group {
+              margin-bottom: 8px;
+            }
+
+            .bp3-input-group {
+              margin-bottom: 0;
+
+              .bp3-input {
+                height: 31px;
+                max-width: 140px;
+                padding: 0 40px 0 10px ;
+                font-size: 13px;
+              }
+            }
+
+            .bp3-disabled,
+            .bp3-input:disabled {
+              border-radius: 4px;
+              background: var(--multiBg);
+            }
+            
+            &-currency {
+              right: 8px;
+              top: 16px;
+              font-size: 13px;
+              position: absolute;
+              color:  var(--color2);;
+            }
+          }
+        }
+      }
+    }
+  }
 
   .bp3-table-container {
     box-shadow: none;
@@ -261,7 +389,7 @@
 
   .loading-container {
     display: flex;
-    min-height: 320px;
+    min-height: 387px;
 
     .loading {
       margin: auto;
