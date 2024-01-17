@@ -37,8 +37,6 @@ const SyncMode = ({
     const timeout = setTimeout(() => {
       if (isEqual(prevProgress, syncProgress)) {
         setIsLongSync(true)
-        // Do something if the prop value remains the same after 30 seconds
-        console.log('+++ syncProgress === pevProgress')
       } else {
         setIsLongSync(false)
         setPrevProgress(syncProgress)
@@ -46,6 +44,7 @@ const SyncMode = ({
     }, 5000)
     return () => clearTimeout(timeout)
   }, [syncProgress, prevProgress])
+
   const handleSync = () => {
     if (isSyncing) {
       stopSyncNow()
@@ -63,10 +62,6 @@ const SyncMode = ({
   if (!config.showFrameworkMode) {
     return null
   }
-
-  console.log('+++1pevProgress', prevProgress)
-  console.log('+++2syncProgress', syncProgress)
-  console.log('+++isLongSync', isLongSync)
 
   return (
     <>
