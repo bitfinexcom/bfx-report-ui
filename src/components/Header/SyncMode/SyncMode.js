@@ -1,4 +1,9 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, {
+  memo,
+  useMemo,
+  useState,
+  useEffect,
+} from 'react'
 import PropTypes from 'prop-types'
 import {
   Tooltip,
@@ -59,7 +64,10 @@ const SyncMode = ({
     }
   }
 
-  const syncIcon = getSyncIcon(isSyncing, syncProgress, !isLongSync)
+  const syncIcon = useMemo(
+    () => getSyncIcon(isSyncing, syncProgress, !isLongSync),
+    [isSyncing, syncProgress, isLongSync],
+  )
 
   const popupInfo = isLongSync
     ? t('sync.init-sync-info.additional')
