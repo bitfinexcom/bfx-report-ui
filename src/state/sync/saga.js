@@ -80,6 +80,7 @@ function* stopSyncNow() {
     const { result: haveSyncedAtLeastOnce } = yield call(haveCollsBeenSyncedAtLeastOnce)
     yield put(actions.setIsSyncRequired(!haveSyncedAtLeastOnce))
     yield put(actions.setIsSyncing(false))
+    yield put(actions.setIsLongSync(false))
     yield put(actions.setEstimatedTime({}))
     yield put(actions.showInitSyncPopup(false))
     yield put(updateStatus({ id: 'sync.logout' }))
@@ -94,6 +95,7 @@ function* stopSyncing() {
   const { result, error } = yield call(disableSyncMode)
   if (result) {
     yield put(actions.setIsSyncing(false))
+    yield put(actions.setIsLongSync(false))
     yield put(actions.setEstimatedTime({}))
     yield put(actions.showInitSyncPopup(false))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
@@ -137,6 +139,7 @@ function* forceQueryFromDb() {
     yield put(updateStatus({ id: 'sync.sync-done' }))
   }
   yield put(actions.setIsSyncing(false))
+  yield put(actions.setIsLongSync(false))
   yield put(actions.setIsSyncRequired(false))
   yield put(actions.showInitSyncPopup(false))
 }
@@ -209,6 +212,7 @@ function* progressUpdate({ payload }) {
     if (error) yield put(updateSyncErrorStatus(error))
   } else if (state === types.SYNC_FINISHED) {
     yield put(actions.setIsSyncing(false))
+    yield put(actions.setIsLongSync(false))
     yield put(actions.showInitSyncPopup(false))
   } else {
     const syncProgress = Number.isInteger(progress)
@@ -225,6 +229,7 @@ function* requestsRedirectUpdate({ payload }) {
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
     yield put(actions.setIsSyncing(false))
+    yield put(actions.setIsLongSync(false))
     yield put(actions.showInitSyncPopup(false))
   } else {
     yield put(actions.setSyncMode(types.MODE_OFFLINE))
@@ -244,6 +249,7 @@ function* updateSyncStatus() {
       }
       if (progress === 100) {
         yield put(actions.setIsSyncing(false))
+        yield put(actions.setIsLongSync(false))
         yield put(actions.setIsSyncRequired(false))
         yield put(actions.showInitSyncPopup(false))
         yield put(updateStatus({ id: 'sync.sync-done' }))
