@@ -206,6 +206,13 @@ export function showInitSyncPopup(payload) {
   }
 }
 
+export function setIsLongSync(payload) {
+  return {
+    type: types.SET_IS_LONG_SYNC,
+    payload,
+  }
+}
+
 export default {
   editPublicTradesPref,
   editPublicTradesSymbolPref,

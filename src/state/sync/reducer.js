@@ -21,6 +21,7 @@ const initialState = {
   progress: 0,
   estimatedSyncTime: {},
   isSyncRequired: true,
+  isLongSync: false,
   showInitSyncPopup: false,
 }
 
@@ -133,6 +134,12 @@ export function syncReducer(state = initialState, action) {
       return {
         ...state,
         showInitSyncPopup: payload,
+      }
+    }
+    case types.SET_IS_LONG_SYNC: {
+      return {
+        ...state,
+        isLongSync: payload,
       }
     }
     default: {

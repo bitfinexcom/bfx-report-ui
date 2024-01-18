@@ -22,6 +22,7 @@ export const getCandlesConf = state => getSyncConf(state).candlesConf || []
 export const getStatusMessagesConf = state => getSyncConf(state).statusMessagesConf || []
 export const getIsSyncRequired = state => getSync(state)?.isSyncRequired ?? false
 export const getIsInitSyncPopupOpen = state => getSync(state)?.showInitSyncPopup ?? false
+export const getIsLongSync = state => getSync(state)?.isLongSync ?? false
 
 export default {
   getSyncMode,
@@ -41,4 +42,5 @@ export default {
   getStatusMessagesConf,
   getIsSyncRequired,
   getIsInitSyncPopupOpen,
+  getIsLongSync,
 }
