@@ -19,14 +19,15 @@ import {
 const SyncMode = ({
   t,
   isSyncing,
+  isLongSync,
   stopSyncNow,
   syncProgress,
   startSyncNow,
+  setIsLongSync,
   estimatedSyncTime,
   showInitSyncPopup,
   isInitSyncPopupOpen,
 }) => {
-  const [isLongSync, setIsLongSync] = useState(false)
   const [prevProgress, setPrevProgress] = useState(null)
 
   useEffect(() => {
@@ -38,10 +39,10 @@ const SyncMode = ({
       if (isEqual(prevProgress, syncProgress)) {
         setIsLongSync(true)
       } else {
-        setIsLongSync(false)
         setPrevProgress(syncProgress)
       }
-    }, 5000)
+    }, 3000)
+
     return () => clearTimeout(timeout)
   }, [syncProgress, prevProgress])
 
@@ -107,8 +108,10 @@ SyncMode.propTypes = {
   t: PropTypes.func.isRequired,
   stopSyncNow: PropTypes.func,
   startSyncNow: PropTypes.func,
+  setIsLongSync: PropTypes.func,
   showInitSyncPopup: PropTypes.func,
   isSyncing: PropTypes.bool.isRequired,
+  isLongSync: PropTypes.bool.isRequired,
   isInitSyncPopupOpen: PropTypes.bool.isRequired,
   syncProgress: PropTypes.number.isRequired,
   estimatedSyncTime: PropTypes.shape({
@@ -121,6 +124,7 @@ SyncMode.propTypes = {
 SyncMode.defaultProps = {
   stopSyncNow: () => {},
   startSyncNow: () => {},
+  setIsLongSync: () => {},
   showInitSyncPopup: () => {},
 }
 
