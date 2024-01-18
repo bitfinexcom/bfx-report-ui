@@ -43,8 +43,13 @@ const SyncMode = ({
       }
     }, 3000)
 
+    if (!isSyncing) {
+      setIsLongSync(false)
+      clearTimeout(timeout)
+    }
+
     return () => clearTimeout(timeout)
-  }, [syncProgress, prevProgress])
+  }, [syncProgress, prevProgress, isSyncing])
 
   const handleSync = () => {
     if (isSyncing) {
