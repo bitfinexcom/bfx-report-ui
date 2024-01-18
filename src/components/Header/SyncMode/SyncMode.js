@@ -46,7 +46,7 @@ const SyncMode = ({
       } else {
         setPrevProgress(syncProgress)
       }
-    }, 3000)
+    }, 30000)
 
     if (!isSyncing) {
       setIsLongSync(false)
