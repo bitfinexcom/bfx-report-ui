@@ -1,17 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import './_LoadingPlaceholder.scss'
 
 const LoadingPlaceholder = ({ color, size, width }) => {
-  // const randomWidth = Math.floor(Math.random() * 21) + width - 10;
-
   const placeholderStyle = {
     backgroundColor: color,
     width: `${width}px`,
     height: `${size}px`,
-    animation: 'shimmer 1s infinite',
   }
 
-  return <div style={placeholderStyle} />
+  return <div className='loading-placeholder' style={placeholderStyle} />
 }
 
 LoadingPlaceholder.propTypes = {
@@ -22,6 +20,7 @@ LoadingPlaceholder.propTypes = {
 
 LoadingPlaceholder.defaultProps = {
   color: '#2A3F4D',
+  // color: '#334A59',
   size: 22,
   width: 80,
 }
