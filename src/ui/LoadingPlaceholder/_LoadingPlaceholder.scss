@@ -1,37 +1,15 @@
-.loading {
-  width: fit-content;
-  height: fit-content;
-  margin: 195px auto 0 auto;
-
-  &.bp3-spinner {
-    display: block;
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
   }
-
-  &-container {
-    height: 100%;
-    position: relative;
-  }
-
-}
-
-@media screen and (min-width: 2560px) {
-  .loading {
-    margin: 255px auto 0 auto;
-
-    &.bp3-spinner {
-      width: 100px;
-      height: 100px;
-
-      svg {
-        width: 100px;
-        height: 100px;
-      }
-    }
+  100% {
+    background-position: 200px 0;
   }
 }
 
-@media screen and (max-width: 390px) {
-  .loading {
-    margin: 55px auto 0 auto;
-  }
+.loading-placeholder {
+  border-radius: 4px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
 }
