@@ -36,10 +36,6 @@ const SyncMode = ({
   const [prevProgress, setPrevProgress] = useState(null)
 
   useEffect(() => {
-    setPrevProgress(syncProgress)
-  }, [])
-
-  useEffect(() => {
     const timeout = setTimeout(() => {
       if (isEqual(prevProgress, syncProgress)) {
         setIsLongSync(true)
