@@ -9,7 +9,11 @@
 
 .loading-placeholder {
   border-radius: 4px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.1) 60%);
+  background: linear-gradient(
+    to right, 
+    rgba(42, 63, 77, 0.1) 20%,
+    rgba(255, 255, 255, 0.3) 40%,
+    rgba(42, 63, 77, 0.1) 60%);
   background-size: 200px 100%;
-  animation: shimmer 2s infinite;
+  animation: shimmer 2s infinite linear;
 }
