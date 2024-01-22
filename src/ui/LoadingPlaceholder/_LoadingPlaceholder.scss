@@ -11,9 +11,19 @@
   border-radius: 4px;
   background: linear-gradient(
     to right, 
-    rgba(42, 63, 77, 0.1) 10%,
+    rgba(42, 63, 77, 0.5) 10%,
     rgba(255, 255, 255, 0.3) 50%,
-    rgba(42, 63, 77, 0.1) 100%);
+    rgba(42, 63, 77, 1) 100%);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+.strong {
+  background: linear-gradient(
+    to right, 
+    rgba(51, 74, 89, 0.3) 10%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(51, 74, 89, 1) 100%);
   background-size: 200px 100%;
   animation: shimmer 2s infinite linear;
 }
