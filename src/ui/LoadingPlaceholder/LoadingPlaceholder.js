@@ -17,8 +17,6 @@ LoadingPlaceholder.propTypes = {
 }
 
 LoadingPlaceholder.defaultProps = {
-  // color: '#2A3F4D',
-  // color: '#334A59',
   height: 22,
   baseWidth: 80,
   isStrong: false,
