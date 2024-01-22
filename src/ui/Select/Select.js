@@ -2,13 +2,13 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withTranslation } from 'react-i18next'
+import { isObject } from '@bitfinex/lib-js-util-base'
 import {
   Button,
   Intent,
   MenuItem,
 } from '@blueprintjs/core'
 import { Select as BlueprintSelect } from '@blueprintjs/select'
-import _isObject from 'lodash/isObject'
 
 import Icons from 'icons'
 import { filterSelectorItem } from 'ui/utils'
@@ -59,7 +59,7 @@ class Select extends PureComponent {
     const { value } = this.props
 
     let options = {}
-    if (_isObject(item)) {
+    if (isObject(item)) {
       const { value: itemValue, label } = item
       options = {
         isCurrent: itemValue === value,
@@ -90,7 +90,7 @@ class Select extends PureComponent {
 
   onChange = (item, e) => {
     const { onChange } = this.props
-    if (_isObject(item)) {
+    if (isObject(item)) {
       return onChange(item.value, e)
     }
     return onChange(item, e)
@@ -113,7 +113,7 @@ class Select extends PureComponent {
     } = this.props
     const { isOpen } = this.state
 
-    const selectedText = _isObject(items[0])
+    const selectedText = isObject(items[0])
       ? (items.find(item => item.value === value, {}) || {}).label
       : value
 
