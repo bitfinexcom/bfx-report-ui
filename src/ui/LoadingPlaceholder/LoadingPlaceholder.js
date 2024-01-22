@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 const LoadingPlaceholder = ({ height, baseWidth, isStrong }) => {
   const randomWidth = Math.floor(Math.random() * 21) + baseWidth - 10
-  const placeholderSize = { height: `${height}px`, width: `${randomWidth}px` }
   const classes = classNames('loading-placeholder', { strong: isStrong })
+  const placeholderSize = { height: `${height}px`, width: `${randomWidth}px` }
 
   return <div className={classes} style={placeholderSize} />
 }
@@ -22,4 +22,4 @@ LoadingPlaceholder.defaultProps = {
   isStrong: false,
 }
 
-export default LoadingPlaceholder
+export default memo(LoadingPlaceholder)
