@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './_LoadingPlaceholder.scss'
 
 const LoadingPlaceholder = ({ color, size, baseWidth }) => {
   const randomWidth = Math.floor(Math.random() * 21) + baseWidth - 10
