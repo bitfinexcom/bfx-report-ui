@@ -20,3 +20,23 @@ const loadAnalyticsIfCookiesAccepted = () => {
     })
   } else initGoogleTag()
 }
+
+const createTracker = () => {
+  loadAnalyticsIfCookiesAccepted()
+
+  const gtmTrackEvent = (label, source, event = 'click') => {
+    dataLayerPush({
+      label,
+      event,
+      ...(source && { area_source: source }),
+    })
+  }
+
+  return {
+    trackEvent: (label, source, event) => {
+      gtmTrackEvent(label, source, event)
+    },
+  }
+}
+
+export const tracker = createTracker()
