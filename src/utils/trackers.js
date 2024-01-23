@@ -18,7 +18,7 @@ const loadAnalyticsIfCookiesAccepted = () => {
         initGoogleTag()
       }
     })
-  } else initGoogleTag()
+  } else initGoogleTag() // No need for waiting cookies confirmation in the app
 }
 
 const createTracker = () => {
