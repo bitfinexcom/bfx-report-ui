@@ -12,6 +12,7 @@ import {
   getIsSyncing,
   getIsLongSync,
   getSyncProgress,
+  getIsSyncRequired,
   getEstimatedSyncTime,
   getIsInitSyncPopupOpen,
 } from 'state/sync/selectors'
@@ -21,6 +22,7 @@ import SyncMode from './SyncMode'
 const mapStateToProps = state => ({
   isSyncing: getIsSyncing(state),
   isLongSync: getIsLongSync(state),
+  isInitSync: getIsSyncRequired(state),
   syncProgress: getSyncProgress(state),
   estimatedSyncTime: getEstimatedSyncTime(state),
   isInitSyncPopupOpen: getIsInitSyncPopupOpen(state),
