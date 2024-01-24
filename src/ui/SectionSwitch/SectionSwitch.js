@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 import _map from 'lodash/map'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
+import { tracker } from 'utils/trackers'
 import { getPath } from 'state/query/utils'
 import RefreshButton from 'ui/RefreshButton'
 
@@ -21,7 +22,7 @@ const SectionSwitch = ({
     if (isEqual(value, target)) {
       return
     }
-
+    tracker.trackEvent(value, 'Tab')
     history.push({
       pathname: getPath(value),
       search: history.location.search,
