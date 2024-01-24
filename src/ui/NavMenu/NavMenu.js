@@ -13,6 +13,7 @@ import _includes from 'lodash/includes'
 import _castArray from 'lodash/castArray'
 
 import Icons from 'icons'
+import { tracker } from 'utils/trackers'
 import { getPath, getTarget } from 'state/query/utils'
 
 import menuTypes from './NavMenu.constants'
@@ -39,6 +40,7 @@ const NavMenu = ({
   const handleItemClick = (e, nextTarget) => {
     e.preventDefault()
 
+    tracker.trackEvent(nextTarget, 'Navigation')
     const [path] = _castArray(getPath(nextTarget))
     history.push({
       pathname: path,
