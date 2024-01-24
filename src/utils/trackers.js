@@ -7,12 +7,12 @@ import { canUseAnalyticalCookies } from 'bfxuilib/functions/web/cookieBanner'
 
 import config from 'config'
 
-const isFrameworkMode = config?.showFrameworkMode ?? false
+const { showFrameworkMode } = config
 
 const loadAnalyticsIfCookiesAccepted = () => {
   loadGoogleTag()
 
-  if (!isFrameworkMode) {
+  if (!showFrameworkMode) {
     canUseAnalyticalCookies().then((accepted) => {
       if (accepted) {
         initGoogleTag()
