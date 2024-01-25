@@ -15,6 +15,7 @@ import { getMovementInfo } from 'state/movements/selectors'
 import { getIsExtraInfoDialogOpen } from 'state/ui/selectors'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
+import { tracker } from 'utils/trackers'
 
 import getColumns from './ExtraInfoDialog.columns'
 
@@ -31,6 +32,11 @@ const ExtraInfoDialog = () => {
       t, timeOffset, formatTime, preparedData,
     }), [t, timeOffset, formatTime, preparedData],
   )
+
+  const onClose = () => {
+    tracker.trackEvent('Close')
+    dispatch(toggleExtraInfoDialog())
+  }
 
   return (
     <Dialog
@@ -49,7 +55,7 @@ const ExtraInfoDialog = () => {
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
           <Button
             intent={Intent.PRIMARY}
-            onClick={() => dispatch(toggleExtraInfoDialog())}
+            onClick={onClose}
           >
             {t('preferences.close')}
           </Button>
