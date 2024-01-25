@@ -40,7 +40,7 @@ class ColumnsSelect extends PureComponent {
 
   onCancel = () => {
     const { columns } = this.props
-
+    tracker.trackEvent('Cancel')
     this.toggleDialog()
     this.setState({
       columns,
@@ -50,7 +50,7 @@ class ColumnsSelect extends PureComponent {
   onApply = () => {
     const { columns } = this.state
     const { target, setColumns } = this.props
-
+    tracker.trackEvent('Apply')
     this.toggleDialog()
     setColumns({
       section: target,
