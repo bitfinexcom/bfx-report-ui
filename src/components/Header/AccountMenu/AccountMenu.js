@@ -47,6 +47,11 @@ const AccountMenu = ({
 }) => {
   const showSubAccounts = showFrameworkMode && isSubAccsAvailable
 
+  const onLogout = () => {
+    tracker.trackEvent('Logout')
+    logout()
+  }
+
   const switchSection = (type) => {
     tracker.trackEvent(type, 'Navigation')
     history.push({ pathname: getPath(type) })
@@ -116,9 +121,9 @@ const AccountMenu = ({
                 text={<QueryMode />}
               />
               <MenuItem
-                onClick={logout}
                 icon={<Icon.SIGN_OUT />}
                 text={t('header.logout')}
+                onClick={(() => onLogout())}
               />
             </Menu>
           </div>

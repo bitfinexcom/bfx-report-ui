@@ -14,6 +14,7 @@ import _toString from 'lodash/toString'
 
 import Icon from 'icons'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 import { getMenuItemChevron } from 'ui/NavMenu/NavMenu.helpers'
@@ -50,13 +51,18 @@ const TopNavigation = ({
 
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
-
+    tracker.trackEvent('Account Menu', 'Navigation')
     const headerBrand = document.getElementsByClassName('header-brand')[0]
     if (isOpen) {
       headerBrand.classList.add('top-navigation--open')
     } else {
       headerBrand.classList.remove('top-navigation--open')
     }
+  }
+
+  const onLogout = () => {
+    tracker.trackEvent('Logout')
+    logout()
   }
 
   const switchSection = (type) => {
@@ -137,9 +143,9 @@ const TopNavigation = ({
                 icon={<Icon.INFO_CIRCLE />}
               />
               <MenuItem
-                onClick={logout}
                 icon={<Icon.SIGN_OUT />}
                 text={t('header.logout')}
+                onClick={(() => onLogout())}
               />
             </Menu>
           </div>
