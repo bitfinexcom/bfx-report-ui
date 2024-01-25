@@ -5,6 +5,7 @@ import { IconNames } from '@blueprintjs/icons'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import SignUp from './SignUp'
 import SignIn from './SignIn'
@@ -69,10 +70,12 @@ class Auth extends PureComponent {
   }
 
   switchMode = (mode) => {
+    tracker.trackEvent(mode, 'Navigation')
     this.setState({ mode })
   }
 
   switchAuthType = (authType) => {
+    tracker.trackEvent(authType, 'Navigation')
     this.setState({ authType })
   }
 
