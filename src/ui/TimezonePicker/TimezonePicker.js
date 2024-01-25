@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next'
 import { TimezonePicker as BlueprintTimezonePicker } from '@blueprintjs/timezone'
 
 import Icon from 'icons'
+import { tracker } from 'utils/trackers'
 
 import { propTypes, defaultProps } from './TimezonePicker.props'
 
@@ -12,6 +13,7 @@ class TimezonePicker extends PureComponent {
   }
 
   onToggle = (nextOpenState) => {
+    tracker.trackEvent('Timezone')
     this.setState({ isOpen: nextOpenState })
   }
 
