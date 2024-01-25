@@ -16,6 +16,7 @@ import { getValidSortedFilters } from 'state/filters/utils'
 import { EMPTY_FILTER } from 'var/filterTypes'
 import DEFAULT_FILTERS from 'ui/ColumnsFilter/var/defaultFilters'
 import DATA_TYPES from 'var/dataTypes'
+import { tracker } from 'utils/trackers'
 
 import ColumnsFilterDialog from './Dialog'
 import ColumnSelector from './ColumnSelector'
@@ -43,12 +44,13 @@ class ColumnsFilter extends PureComponent {
 
   toggleDialog = () => {
     const { isOpen } = this.state
+    tracker.trackEvent('Columns')
     this.setState({ isOpen: !isOpen })
   }
 
   onClear = () => {
     const { target } = this.props
-
+    tracker.trackEvent('Clear')
     this.setState({
       filters: DEFAULT_FILTERS[target],
     })
@@ -56,7 +58,7 @@ class ColumnsFilter extends PureComponent {
 
   onCancel = () => {
     const { filters } = this.props
-
+    tracker.trackEvent('Cancel')
     this.toggleDialog()
     this.setState({
       filters,
@@ -66,7 +68,7 @@ class ColumnsFilter extends PureComponent {
   onFiltersApply = () => {
     const { filters } = this.state
     const { target, setFilters } = this.props
-
+    tracker.trackEvent('Apply')
     const trimmedFilters = filters.map(filter => ({
       ...filter,
       value: _isString(filter.value)
@@ -87,6 +89,7 @@ class ColumnsFilter extends PureComponent {
 
   onFilterAdd = () => {
     const { filters } = this.state
+    tracker.trackEvent('Add Filter')
     this.setState({
       filters: filters.concat(EMPTY_FILTER),
     })
@@ -94,7 +97,7 @@ class ColumnsFilter extends PureComponent {
 
   onFilterRemove = (index) => {
     const { filters } = this.state
-
+    tracker.trackEvent('Remove Filter')
     // last filter removal
     if (filters.length === 1) {
       this.setState({
