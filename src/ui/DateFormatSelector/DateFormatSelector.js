@@ -2,13 +2,11 @@ import React, { PureComponent } from 'react'
 
 import Select from 'ui/Select'
 import types from 'state/base/constants'
-import { tracker } from 'utils/trackers'
 
 import { propTypes, defaultProps } from './DateFormatSelector.props'
 
 class DateFormatSelector extends PureComponent {
   handleClick = (format) => {
-    tracker.trackEvent('Date Format')
     const { dateFormat, setDateFormat } = this.props
     if (dateFormat !== format) {
       setDateFormat(format)
@@ -25,6 +23,7 @@ class DateFormatSelector extends PureComponent {
         value={dateFormat}
         items={types.DATE_FORMATS}
         onChange={this.handleClick}
+        type={'Date Format'}
       />
     )
   }
