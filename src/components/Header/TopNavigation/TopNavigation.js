@@ -66,6 +66,7 @@ const TopNavigation = ({
   }
 
   const switchSection = (type) => {
+    tracker.trackEvent(type, 'Navigation')
     history.push({ pathname: getPath(type) })
   }
 
