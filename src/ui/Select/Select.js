@@ -11,6 +11,7 @@ import {
 import { Select as BlueprintSelect } from '@blueprintjs/select'
 
 import Icons from 'icons'
+import { tracker } from 'utils/trackers'
 import { filterSelectorItem } from 'ui/utils'
 
 class Select extends PureComponent {
@@ -35,6 +36,7 @@ class Select extends PureComponent {
     onChange: PropTypes.func.isRequired,
     popoverClassName: PropTypes.string,
     t: PropTypes.func.isRequired,
+    type: PropTypes.string,
     value: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
@@ -48,6 +50,7 @@ class Select extends PureComponent {
     popoverClassName: '',
     itemRenderer: undefined,
     itemPredicate: undefined,
+    type: 'Select',
   }
 
   state = {
@@ -97,6 +100,8 @@ class Select extends PureComponent {
   }
 
   onToggle = (nextOpenState) => {
+    const { type } = this.props
+    tracker.trackEvent(type)
     this.setState({ isOpen: nextOpenState })
   }
 
