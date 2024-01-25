@@ -146,7 +146,7 @@ const TopNavigation = ({
               <MenuItem
                 icon={<Icon.SIGN_OUT />}
                 text={t('header.logout')}
-                onClick={(() => onLogout())}
+                onClick={onLogout}
               />
             </Menu>
           </div>

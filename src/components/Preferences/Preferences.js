@@ -46,7 +46,7 @@ const Preferences = ({
     <Dialog
       usePortal
       isOpen={isOpen}
-      onClose={() => onClose()}
+      onClose={onClose}
       className='preferences'
       isCloseButtonShown={false}
       title={t('preferences.title')}
@@ -103,7 +103,7 @@ const Preferences = ({
             {showRemoveBtn && (
             <Button
               intent={Intent.PRIMARY}
-              onClick={() => onAccRemove()}
+              onClick={onAccRemove}
             >
               {t('preferences.remove_account')}
             </Button>
@@ -111,7 +111,7 @@ const Preferences = ({
           </div>
           <Button
             intent={Intent.PRIMARY}
-            onClick={() => onClose()}
+            onClick={onClose}
           >
             {t('preferences.close')}
           </Button>
