@@ -15,6 +15,7 @@ import SyncButton from 'ui/SyncButton'
 import DateInput from 'ui/DateInput'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import { propTypes, defaultProps } from './SyncSymbolPrefButton.props'
 
@@ -51,10 +52,12 @@ class SyncSymbolPrefButton extends PureComponent {
   }
 
   handleOpen = () => {
+    tracker.trackEvent('Sync Preferences')
     this.setState({ isOpen: true })
   }
 
   handleClose = () => {
+    tracker.trackEvent('Close')
     this.setState(this.getInitialState())
   }
 
