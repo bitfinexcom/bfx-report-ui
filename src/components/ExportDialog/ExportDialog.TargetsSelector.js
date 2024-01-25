@@ -53,6 +53,7 @@ class ExportDialogTargetsSelector extends PureComponent {
           onRemove: (target, index) => toggleTarget(currentTargets[index]),
         }}
         tagRenderer={this.renderTag}
+        type={'Data to Export'}
         selectedItems={currentTargets}
       />
     )
