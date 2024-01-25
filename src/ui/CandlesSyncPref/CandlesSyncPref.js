@@ -11,6 +11,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
+import { tracker } from 'utils/trackers'
 import PairSelector from 'ui/PairSelector'
 import SyncButton from 'ui/SyncButton'
 import Timeframe from 'ui/CandlesTimeframe'
@@ -58,10 +59,12 @@ class CandlesSyncPref extends PureComponent {
 
   handleOpen = () => {
     this.setState({ isOpen: true })
+    tracker.trackEvent('Sync Preferences')
   }
 
   handleClose = () => {
     const { config } = this.props
+    tracker.trackEvent('Close')
     this.setState({
       isOpen: false,
       options: config.length ? config : [this.getDefaultOption()],
@@ -71,12 +74,13 @@ class CandlesSyncPref extends PureComponent {
   handleApply = () => {
     const { options } = this.state
     const { editConfig } = this.props
-
+    tracker.trackEvent('Apply')
     this.setState({ isOpen: false })
     editConfig(options)
   }
 
   onOptionAdd = () => {
+    tracker.trackEvent('Add pair')
     this.setState(({ options }) => ({
       options: [
         ...options,
@@ -87,7 +91,7 @@ class CandlesSyncPref extends PureComponent {
 
   onOptionRemove = (index) => {
     const { options } = this.state
-
+    tracker.trackEvent('Remove pair')
     // last option removal
     if (options.length === 1) {
       this.setState({
