@@ -4,6 +4,7 @@ import { Checkbox } from '@blueprintjs/core'
 
 import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import ColumnsSelectDialog from './Dialog'
 import { propTypes, defaultProps } from './ColumnsSelect.props'
@@ -21,6 +22,7 @@ class ColumnsSelect extends PureComponent {
 
   toggleDialog = () => {
     const { isOpen } = this.state
+    tracker.trackEvent('Column Selection')
     this.setState({ isOpen: !isOpen })
   }
 
