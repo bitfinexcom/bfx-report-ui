@@ -42,12 +42,10 @@ const AppSummary = ({
   }, [dataReceived, pageLoading, isSyncRequired])
 
   const handleTimeFrameChange = (timeframe) => {
-    tracker.trackEvent('Select')
     setParams({ timeframe })
   }
 
   const handleUnrealizedProfitChange = (value) => {
-    tracker.trackEvent('Show Unrealized Profits')
     setParams({ isUnrealizedProfitExcluded: value })
   }
 
