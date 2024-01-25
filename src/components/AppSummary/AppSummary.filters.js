@@ -10,6 +10,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
+import { tracker } from 'utils/trackers'
 import InputKey from 'components/Auth/InputKey'
 import { getMinimumBalance, getUseMinBalance } from 'state/summaryByAsset/selectors'
 import { setMinimumBalance, toggleUseMinimumBalance } from 'state/summaryByAsset/actions'
@@ -23,6 +24,7 @@ const SummaryFilters = () => {
   const [balanceValue, setBalanceValue] = useState(minimumBalance)
 
   const togglePopover = (isPopoverOpen) => {
+    tracker.trackEvent('Filter')
     setIsOpen(isPopoverOpen)
   }
 
@@ -30,6 +32,11 @@ const SummaryFilters = () => {
     const { value } = event.target
     setBalanceValue(value)
     dispatch(setMinimumBalance(value))
+  }
+
+  const toggleinimumBalance = () => {
+    tracker.trackEvent('Minimum Balance')
+    dispatch(toggleUseMinimumBalance())
   }
 
   const classes = classNames('summary-filters--menu', {
@@ -60,7 +67,7 @@ const SummaryFilters = () => {
                 className={switchClasses}
                 checked={useMinimumBalance}
                 alignIndicator={Alignment.RIGHT}
-                onChange={() => dispatch(toggleUseMinimumBalance())}
+                onChange={toggleinimumBalance}
               />
             </div>
             <div className='balance-input-label'>
