@@ -71,6 +71,7 @@ class SymbolSelector extends PureComponent {
         items={items}
         popoverClassName='bitfinex-select-menu--symbol'
         value={currentCoin}
+        type={'Symbol'}
       />
     )
   }

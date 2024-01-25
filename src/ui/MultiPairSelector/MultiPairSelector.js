@@ -80,6 +80,7 @@ class MultiPairSelector extends PureComponent {
         }}
         tagRenderer={pair => pair}
         selectedItems={currentFilters}
+        type={'Symbol'}
       />
     )
   }

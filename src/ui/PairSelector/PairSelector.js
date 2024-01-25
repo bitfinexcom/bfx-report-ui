@@ -59,6 +59,7 @@ class PairSelector extends PureComponent {
         filterable
         items={items}
         value={currentPair}
+        type={'Symbol'}
       />
     )
   }
