@@ -10,6 +10,7 @@ import {
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
+import { tracker } from 'utils/trackers'
 
 import { FIRST_SYNC_ERROR } from './ErrorDialog.constants'
 
@@ -32,11 +33,13 @@ const ErrorDialog = ({
   }, [])
 
   const handleClose = () => {
+    tracker.trackEvent('Okay')
     toggleDialog(false)
     disableDialog(isDialogDisabled)
   }
 
   const handleChange = (e) => {
+    tracker.trackEvent('Don\'t show this message again')
     const { checked } = e.target
     setIsDialogDisabled(checked)
   }
