@@ -9,20 +9,17 @@ import config from 'config'
 
 const { showFrameworkMode } = config
 
-const loadAnalyticsIfCookiesAccepted = () => {
+const loadAnalytics = () => {
   loadGoogleTag()
 
   if (!showFrameworkMode) {
-    canUseAnalyticalCookies().then((accepted) => {
-      if (accepted) {
-        initGoogleTag()
-      }
-    })
+    canUseAnalyticalCookies()
+      .then((accepted) => initGoogleTag({ accepted }))
   } else initGoogleTag() // No need for waiting cookies confirmation in the app
 }
 
 const createTracker = () => {
-  loadAnalyticsIfCookiesAccepted()
+  loadAnalytics()
 
   const gtmTrackEvent = (label, source, event = 'click') => {
     dataLayerPush({
