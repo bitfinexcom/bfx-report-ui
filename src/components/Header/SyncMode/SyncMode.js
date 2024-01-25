@@ -6,6 +6,7 @@ import {
 } from '@blueprintjs/core'
 
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import {
   getSyncIcon,
@@ -22,6 +23,7 @@ const SyncMode = ({
   estimatedSyncTime,
 }) => {
   const handleSync = () => {
+    tracker.trackEvent('Start Sync')
     if (isSyncing) {
       stopSyncNow()
     } else {
