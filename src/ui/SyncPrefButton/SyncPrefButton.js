@@ -15,6 +15,7 @@ import Icon from 'icons'
 import DateInput from 'ui/DateInput'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import { propTypes, defaultProps } from './SyncPrefButton.props'
 
@@ -51,10 +52,12 @@ class SyncPrefButton extends PureComponent {
   }
 
   handleOpen = () => {
+    tracker.trackEvent('Sync Preferences')
     this.setState({ isOpen: true })
   }
 
   handleClose = () => {
+    tracker.trackEvent('Close')
     this.setState(this.getInitialState())
   }
 
@@ -76,6 +79,7 @@ class SyncPrefButton extends PureComponent {
   handleApply = () => {
     const { pairs, start } = this.state
     const { setSyncPref } = this.props
+    tracker.trackEvent('Apply')
     this.setState({ isOpen: false })
     setSyncPref(pairs, start, true)
   }
