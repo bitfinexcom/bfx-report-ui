@@ -56,6 +56,7 @@ const LedgersCategorySelect = (props) => {
       items={getLedgersCategories(t)}
       onChange={onChange}
       value={value}
+      type={'Category Filter'}
     />
   )
 }
