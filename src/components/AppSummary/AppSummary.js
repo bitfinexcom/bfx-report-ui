@@ -13,6 +13,7 @@ import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
+import { tracker } from 'utils/trackers'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
@@ -41,10 +42,12 @@ const AppSummary = ({
   }, [dataReceived, pageLoading, isSyncRequired])
 
   const handleTimeFrameChange = (timeframe) => {
+    tracker.trackEvent('Select')
     setParams({ timeframe })
   }
 
   const handleUnrealizedProfitChange = (value) => {
+    tracker.trackEvent('Show Unrealized Profits')
     setParams({ isUnrealizedProfitExcluded: value })
   }
 
