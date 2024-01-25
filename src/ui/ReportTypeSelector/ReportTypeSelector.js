@@ -16,6 +16,7 @@ const ReportTypeSelector = ({
       value={value}
       items={items}
       onChange={onChange}
+      type={'Select Report Type'}
       className='bitfinex-select--report-type'
       popoverClassName='bitfinex-select-menu--report-type'
     />
