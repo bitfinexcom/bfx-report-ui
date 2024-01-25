@@ -19,6 +19,7 @@ const LangMenu = (props) => {
       value={value}
       items={items}
       onChange={setLang}
+      type={'Language'}
     />
   )
 }
