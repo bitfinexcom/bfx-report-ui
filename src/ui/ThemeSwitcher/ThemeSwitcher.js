@@ -4,6 +4,7 @@ import { Radio } from '@blueprintjs/core'
 
 import Icon from 'icons'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import { propTypes, defaultProps } from './ThemeSwitcher.props'
 
@@ -15,6 +16,7 @@ class ThemeSwitcher extends PureComponent {
   switchTheme = (e) => {
     const { value } = e.target
     const { setTheme } = this.props
+    tracker.trackEvent(value)
     setTheme(value)
   }
 
