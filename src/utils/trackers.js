@@ -25,7 +25,7 @@ const createTracker = () => {
     dataLayerPush({
       label,
       event,
-      ...(source && { area_source: source }),
+      area_source: source,
     })
   }
 
