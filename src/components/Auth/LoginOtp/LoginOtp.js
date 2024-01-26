@@ -24,7 +24,7 @@ export const LoginOtp = ({
     if (otp?.length === 6) {
       handleOneTimePassword()
     }
-  }, [otp]);
+  }, [otp])
 
   return (
     <div className='sign-in--otp'>
