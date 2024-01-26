@@ -199,6 +199,20 @@ export function setIsSyncRequired(payload) {
   }
 }
 
+export function showInitSyncPopup(payload) {
+  return {
+    type: types.SHOW_INIT_SYNC_POPUP,
+    payload,
+  }
+}
+
+export function setIsLongSync(payload) {
+  return {
+    type: types.SET_IS_LONG_SYNC,
+    payload,
+  }
+}
+
 export default {
   editPublicTradesPref,
   editPublicTradesSymbolPref,
@@ -218,4 +232,5 @@ export default {
   startSyncNow,
   stopSyncNow,
   setIsSyncRequired,
+  showInitSyncPopup,
 }

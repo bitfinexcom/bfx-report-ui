@@ -36,6 +36,10 @@
     }
   }
 
+  &-row {
+    display: flex;
+  }
+
   .export,
   .sync-mode,
   .query-mode {
