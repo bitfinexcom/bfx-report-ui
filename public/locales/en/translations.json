@@ -387,6 +387,13 @@
   "logins": {
     "title": "Logins"
   },
+  "maintenance": {
+    "title": "Maintenance Notice",
+    "message_1": "The platform is currently in maintenance mode.",
+    "message_2": "Please check the ",
+    "message_3": " for updates.",
+    "message_4": "We will be back soon."
+  },
   "movements": {
     "title": "Movements",
     "moreDetails": "More Details"

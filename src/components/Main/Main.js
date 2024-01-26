@@ -48,6 +48,7 @@ import ExportSuccessDialog from 'components/ExportSuccessDialog'
 import Preferences from 'components/Preferences'
 import ExtraInfoDialog from 'components/ExtraInfoDialog'
 import TimeFrameDialog from 'components/TimeFrameDialog'
+import MaintenanceDialog from 'components/MaintenanceDialog'
 import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import NavMenu from 'ui/NavMenu'
@@ -379,6 +380,7 @@ class Main extends PureComponent {
         <GoToRangeDialog />
         <NavMenuDrawer />
         <ExtraInfoDialog />
+        {showFrameworkMode && <MaintenanceDialog />}
       </>
     ) : ''
   }
