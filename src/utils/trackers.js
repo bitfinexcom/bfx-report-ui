@@ -23,8 +23,8 @@ const createTracker = () => {
 
   const gtmTrackEvent = (label, source, event = 'click') => {
     dataLayerPush({
-      label,
       event,
+      label,
       area_source: source,
     })
   }
