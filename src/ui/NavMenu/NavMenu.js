@@ -1,6 +1,7 @@
 import React, { memo, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Menu,
   Collapse,
@@ -15,6 +16,8 @@ import _castArray from 'lodash/castArray'
 import Icons from 'icons'
 import { getPath, getTarget } from 'state/query/utils'
 
+import { toggleNavigationDrawer } from 'state/ui/actions'
+import { getIsNavigationDrawerOpen } from 'state/ui/selectors'
 import menuTypes from './NavMenu.constants'
 import { getSections, getMenuItemChevron } from './NavMenu.helpers'
 
@@ -35,6 +38,8 @@ const NavMenu = ({
   const [isMyHistoryOpen, setIsMyHistoryOpen] = useState(true)
   const [isMarketHistoryOpen, setIsMarketHistoryOpen] = useState(false)
   const [isMerchantHistoryOpen, setIsMerchantHistoryOpen] = useState(false)
+  const dispatch = useDispatch()
+  const isNavigationDrawerOpen = useSelector(getIsNavigationDrawerOpen)
 
   const handleItemClick = (e, nextTarget) => {
     e.preventDefault()
@@ -45,6 +50,9 @@ const NavMenu = ({
       search: window.location.search,
     })
     window.scrollTo(0, 0) // scroll to the top of the page on section change
+    if (isNavigationDrawerOpen) {
+      dispatch(toggleNavigationDrawer())
+    }
   }
 
   const getMenuItems = (menuType, target) => (
