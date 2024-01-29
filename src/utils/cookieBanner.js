@@ -8,8 +8,7 @@ import {
   setCookie,
   getCookieValue,
 } from './browser'
-import { COOKIES } from '../var/platform'
-import { COUNTRY_CODES } from '../../var/locales'
+import { COOKIES, COUNTRY_CODES } from '../var/platform'
 import { getIpInfo } from '../../api/conf'
 
 export const COOKIES_GROUP_NECESSARY = 'necessary'

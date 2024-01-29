@@ -25,6 +25,19 @@ export const COOKIES = {
   UK_USERS_WARNED: 'bfx_uk_users_warned',
 }
 
+export const COUNTRY_CODES = {
+  ARGENTINA: 'AR',
+  BRAZIL: 'BR',
+  CHILE: 'CL',
+  COLOMBIA: 'CO',
+  PERU: 'PE',
+  EL_SALVADOR: 'SV',
+  MEXICO: 'MX',
+  POLAND: 'PL',
+  TURKEY: 'TR',
+  VENEZUELA: 'VE',
+}
+
 export const getBfxDomain = () => {
   if (typeof window === 'undefined') return DOMAINS.default
 
