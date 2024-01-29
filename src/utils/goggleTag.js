@@ -3,7 +3,7 @@ import _includes from 'lodash/includes'
 import _keys from 'lodash/keys'
 import _get from 'lodash/get'
 
-import { loadScript } from '../../functions/browser.utils'
+import { loadScript } from './browser'
 import { getBfxEnvName } from '../../var/platform'
 import { logger } from '../../functions/utils'
 
