@@ -3,9 +3,9 @@ import _includes from 'lodash/includes'
 import _keys from 'lodash/keys'
 import _get from 'lodash/get'
 
+import { logger } from './logger'
 import { loadScript } from './browser'
 import { getBfxEnvName } from '../var/platform'
-import { logger } from '../../functions/utils'
 
 const GOOGLE_TAG_PARAMS_BY_ENV = {
   production: 'id=GTM-563T9K2&gtm_auth=vIxlKeWaoJV1jbfRu0Kmow&gtm_preview=env-1&gtm_cookies_win=x',
