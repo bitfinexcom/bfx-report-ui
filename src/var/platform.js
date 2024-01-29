@@ -10,6 +10,21 @@ export const DOMAINS = {
   jp: 'bitfinex.co.jp',
 }
 
+export const COOKIES = {
+  FORCE_LOGIN: 'bfx_force_login',
+  FORCE_LOGIN_MESSAGE: 'bfx_force_login_message',
+  MAINTENCE_NOTICE_ID: 'bfx_maintenance_id',
+  WELCOME_MESSAGE_COOKIE: 'new_login_session',
+  PROHIBITED_PERSON_COOKIE: 'ask_if_prohibited',
+  LAST_PROHIBITED_WARN_COOKIE: 'last_prohibited_warn',
+  BOARD_SESSION: '__bfx_board_session',
+  NOTIFY_RESTRICTED_BY_VER_LEVEL: 'bfx_notify_restricted_level',
+  COOKIE_BANNER_DATA: 'bfx_cookie_banner_data',
+  COOKIE_BANNER_TIMESTAMP: 'bfx_cookie_banner_timestamp',
+  COOKIE_COUNTRY_RULE: 'bfx_cookies_country_rule',
+  UK_USERS_WARNED: 'bfx_uk_users_warned',
+}
+
 export const getBfxDomain = () => {
   if (typeof window === 'undefined') return DOMAINS.default
 

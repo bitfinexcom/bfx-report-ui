@@ -7,8 +7,8 @@ import _filter from 'lodash/filter'
 import {
   setCookie,
   getCookieValue,
-} from '../browser.utils'
-import { COOKIES } from '../../var/ui'
+} from './browser'
+import { COOKIES } from '../var/platform'
 import { COUNTRY_CODES } from '../../var/locales'
 import { getIpInfo } from '../../api/conf'
 
