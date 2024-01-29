@@ -8,8 +8,8 @@ import {
   setCookie,
   getCookieValue,
 } from './browser'
+import { getIpInfo } from './api'
 import { COOKIES, COUNTRY_CODES } from '../var/platform'
-import { getIpInfo } from '../../api/conf'
 
 export const COOKIES_GROUP_NECESSARY = 'necessary'
 export const COOKIES_GROUP_ANALYTICAL = 'analytical'
@@ -56,6 +56,7 @@ const getCookiesCountryRuleByIp = async () => {
       : RULE_BANNER_REQUIRED
   } catch (error) {
     value = RULE_BANNER_REQUIRED
+    // eslint-disable-next-line no-console
     console.error(error)
   }
 
