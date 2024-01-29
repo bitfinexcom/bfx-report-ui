@@ -1,11 +1,11 @@
+import { canUseAnalyticalCookies } from 'bfxuilib/functions/web/cookieBanner'
+
+import config from 'config'
 import {
   initGoogleTag,
   loadGoogleTag,
   dataLayerPush,
-} from 'bfxuilib/utils/analytics/googleTag'
-import { canUseAnalyticalCookies } from 'bfxuilib/functions/web/cookieBanner'
-
-import config from 'config'
+} from './goggleTag'
 
 const { showFrameworkMode } = config
 
