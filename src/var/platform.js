@@ -58,3 +58,5 @@ export const loggerLevels = (process.env.REACT_APP_LOGGER_LEVELS
 export const bfxDomain = process.env.DOMAIN || getBfxDomain()
 
 export const cookieDomain = process.env.REACT_APP_COOKIE_DOMAIN || bfxDomain
+
+export const corsProxyUrl = process.env.REACT_APP_CORS_PROXY_URL || ''
