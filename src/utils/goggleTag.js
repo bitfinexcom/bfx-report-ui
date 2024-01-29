@@ -4,7 +4,7 @@ import _keys from 'lodash/keys'
 import _get from 'lodash/get'
 
 import { loadScript } from './browser'
-import { getBfxEnvName } from '../../var/platform'
+import { getBfxEnvName } from '../var/platform'
 import { logger } from '../../functions/utils'
 
 const GOOGLE_TAG_PARAMS_BY_ENV = {
