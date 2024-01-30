@@ -4,6 +4,7 @@ import { Checkbox } from '@blueprintjs/core'
 
 import SECTION_COLUMNS from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import ColumnsSelectDialog from './Dialog'
 import { propTypes, defaultProps } from './ColumnsSelect.props'
@@ -21,6 +22,7 @@ class ColumnsSelect extends PureComponent {
 
   toggleDialog = () => {
     const { isOpen } = this.state
+    tracker.trackEvent('Column Selection')
     this.setState({ isOpen: !isOpen })
   }
 
@@ -38,7 +40,7 @@ class ColumnsSelect extends PureComponent {
 
   onCancel = () => {
     const { columns } = this.props
-
+    tracker.trackEvent('Cancel')
     this.toggleDialog()
     this.setState({
       columns,
@@ -48,7 +50,7 @@ class ColumnsSelect extends PureComponent {
   onApply = () => {
     const { columns } = this.state
     const { target, setColumns } = this.props
-
+    tracker.trackEvent('Apply')
     this.toggleDialog()
     setColumns({
       section: target,

@@ -60,14 +60,16 @@ export const getSyncTooltipContent = (t, isSyncing, estimatedSyncTime) => {
   return <>{t('sync.start_sync_tooltip')}</>
 }
 
-export const getSyncIcon = (isSyncing, syncProgress) => {
+export const getSyncIcon = (isSyncing, syncProgress, shouldShowProgress = true) => {
   if (isSyncing) {
     return (
       <>
         <Spinner size={20} />
-        <div className='bitfinex-sync-progress'>
-          {syncProgress}
-        </div>
+        {shouldShowProgress && (
+          <div className='bitfinex-sync-progress'>
+            {syncProgress}
+          </div>
+        )}
       </>
     )
   }

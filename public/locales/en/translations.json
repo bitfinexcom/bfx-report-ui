@@ -387,6 +387,13 @@
   "logins": {
     "title": "Logins"
   },
+  "maintenance": {
+    "title": "Maintenance Notice",
+    "message_1": "The platform is currently in maintenance mode.",
+    "message_2": "Please check the ",
+    "message_3": " for updates.",
+    "message_4": "We will be back soon."
+  },
   "movements": {
     "title": "Movements",
     "moreDetails": "More Details"
@@ -649,7 +656,12 @@
       "volume": "Volume",
       "total": "Total",
       "trading_fees": "Trading Fees",
-      "fund_earnings": "Funding Earnings"
+      "fund_earnings": "Funding Earnings",
+      "filter": {
+        "title": "Filter",
+        "min_balance_switch": "Minimum Balance",
+        "min_balance_input": "Set a minimum balance for assets to show up in the table."
+      }
     }
   },
   "symbols": {
@@ -678,6 +690,10 @@
     "logout": "Sync Stopped",
     "message": {
       "canceled": "Canceled old Sync Watcher"
+    },
+    "init-sync-info": {
+      "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",
+      "additional": "Syncing is still in progress, this might take several minutes. Keep this window open until it's finished in case you have a large history."
     },
     "estimated_time": {
       "started_at": "Sync started at: ",

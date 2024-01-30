@@ -9,6 +9,7 @@ import {
 
 import Icon from 'icons'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 const ExportSuccessDialog = ({
   t,
@@ -19,6 +20,11 @@ const ExportSuccessDialog = ({
 }) => {
   if (!isOpen) {
     return null
+  }
+
+  const onClose = () => {
+    tracker.trackEvent('Okay')
+    toggleDialog()
   }
 
   const message = config.localExport
@@ -45,7 +51,7 @@ const ExportSuccessDialog = ({
       className='export-success-dialog'
       isCloseButtonShown={false}
       isOpen={isOpen}
-      onClose={toggleDialog}
+      onClose={onClose}
       title={t('download.success')}
     >
       <div className={Classes.DIALOG_BODY}>
@@ -53,7 +59,7 @@ const ExportSuccessDialog = ({
         <div className='export-success-dialog-message'>{message}</div>
       </div>
       <div className={Classes.DIALOG_FOOTER}>
-        <Button intent={Intent.PRIMARY} onClick={toggleDialog}>
+        <Button intent={Intent.PRIMARY} onClick={onClose}>
           {t('download.okay')}
         </Button>
       </div>

@@ -10,6 +10,7 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
+import { tracker } from 'utils/trackers'
 
 const UserItemMenu = ({
   showAddAccounts,
@@ -21,6 +22,7 @@ const UserItemMenu = ({
   const [isOpen, setIsOpen] = useState(false)
 
   const togglePopover = (isPopoverOpen) => {
+    tracker.trackEvent('Account Menu')
     setIsOpen(isPopoverOpen)
   }
 

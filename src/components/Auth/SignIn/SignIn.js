@@ -10,6 +10,7 @@ import {
 import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
+import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { AUTH_TYPES, MODES } from '../Auth'
@@ -112,6 +113,7 @@ class SignIn extends PureComponent {
     const {
       email, password, userPassword, isSubAccount,
     } = this.state
+    tracker.trackEvent('Sign In')
     if (isEqual(email, userShouldReLogin)) {
       signUpEmail({
         login: email,
@@ -149,6 +151,7 @@ class SignIn extends PureComponent {
 
   handle2FACancel = () => {
     const { showOtpLogin } = this.props
+    tracker.trackEvent('Cancel')
     this.setState({ otp: '' })
     showOtpLogin(false)
   }
@@ -158,6 +161,7 @@ class SignIn extends PureComponent {
     const {
       otp, password, email,
     } = this.state
+    tracker.trackEvent('Authenticate')
     signInOtp({
       otp,
       email,
@@ -198,6 +202,7 @@ class SignIn extends PureComponent {
     const {
       switchMode, switchAuthType, setMasterAccount, setLocalUsername,
     } = this.props
+    tracker.trackEvent('Add accounts to this account')
     switchAuthType(AUTH_TYPES.MULTIPLE_ACCOUNTS)
     switchMode(MODES.SIGN_UP)
     setMasterAccount(email)
@@ -207,6 +212,7 @@ class SignIn extends PureComponent {
   handleDeleteUser = (user) => {
     const { deleteAccount } = this.props
     const { isNotProtected, email, isSubAccount } = user
+    tracker.trackEvent('Remove account')
     if (isNotProtected) {
       deleteAccount(user)
     } else {

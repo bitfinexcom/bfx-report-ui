@@ -19,6 +19,7 @@ const BalancePrecisionSelector = ({ onChange, t, value }) => {
       value={value}
       items={items}
       onChange={onChange}
+      type={'Balance(USD)'}
       className='bitfinex-select--balance-precision'
       popoverClassName='bitfinex-select-menu--balance-precision'
     />

@@ -24,6 +24,7 @@
 @import "components/TimeFrameDialog/_TimeFrameDialog.scss";
 @import "components/GoToRangeDialog/_GoToRangeDialog.scss";
 @import "components/ExtraInfoDialog/_ExtraInfoDialog.scss";
+@import "components/MaintenanceDialog/_MaintenanceDialog.scss";
 @import "icons/_icons.scss";
 @import "ui/_index.scss";
 @import "themes";
@@ -68,6 +69,18 @@ html {
 
 #webpack-dev-server-client-overlay {
   display: none !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 .app {

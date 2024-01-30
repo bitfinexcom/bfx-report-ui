@@ -4,6 +4,7 @@ import { withTranslation } from 'react-i18next'
 import { MultiSelect as BlueprintMultiSelect } from '@blueprintjs/select'
 
 import Icon from 'icons'
+import { tracker } from 'utils/trackers'
 
 import { propTypes, defaultProps } from './MultiSymbolSelector.props'
 
@@ -20,6 +21,8 @@ class MultiSelect extends PureComponent {
   }
 
   onToggle = (isOpen) => {
+    const { type } = this.props
+    tracker.trackEvent(type)
     this.setState({ isOpen })
   }
 

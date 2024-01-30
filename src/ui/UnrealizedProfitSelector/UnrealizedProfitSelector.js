@@ -19,6 +19,7 @@ const UnrealizedProfitSelector = ({ onChange, t, value }) => {
       value={value}
       items={items}
       onChange={onChange}
+      type='Show Unrealized Profits'
       className='bitfinex-select--unrealized-profit'
       popoverClassName='bitfinex-select-menu--unrealized-profit'
     />

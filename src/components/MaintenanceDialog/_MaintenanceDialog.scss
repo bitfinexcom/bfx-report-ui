@@ -1,0 +1,9 @@
+.maintenance-dialog {
+  width: 450px;
+  max-width: 90vw;
+
+  &-message {
+    max-width: 400px;
+    margin: 15px 0 25px 15px;
+  }
+}

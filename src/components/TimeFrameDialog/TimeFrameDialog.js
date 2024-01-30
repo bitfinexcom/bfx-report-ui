@@ -8,6 +8,7 @@ import {
 
 import Icon from 'icons'
 import TimeFrame from 'ui/TimeFrame'
+import { tracker } from 'utils/trackers'
 import timeRangeTypes from 'state/timeRange/constants'
 
 import { propTypes, defaultProps } from './TimeFrameDialog.props'
@@ -45,7 +46,13 @@ const TimeFrameDialog = ({
   const { start, end, range } = selectedTimeFrame
 
   const onConfirm = () => {
+    tracker.trackEvent('Confirm')
     setTimeRange({ start, end, range })
+    toggleDialog()
+  }
+
+  const onClose = () => {
+    tracker.trackEvent('Cancel')
     toggleDialog()
   }
 
@@ -59,7 +66,7 @@ const TimeFrameDialog = ({
       className='time-frame-dialog'
       isCloseButtonShown={false}
       isOpen={isOpen}
-      onClose={toggleDialog}
+      onClose={onClose}
       title={t('timeframe.custom.title')}
     >
       <div className={Classes.DIALOG_BODY}>
@@ -75,7 +82,7 @@ const TimeFrameDialog = ({
           <Button
             className='time-frame-dialog--button'
             intent={Intent.NONE}
-            onClick={toggleDialog}
+            onClick={onClose}
           >
             {t('timeframe.custom.cancel')}
           </Button>

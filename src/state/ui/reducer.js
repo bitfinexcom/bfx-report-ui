@@ -14,6 +14,7 @@ const initialState = {
   isGoToRangeDialogOpen: false,
   isNavigationDrawerOpen: false,
   isExtraInfoDialogOpen: false,
+  showMaintenanceModal: false,
   latestPaginationTimestamp: undefined,
   errorMessage: undefined,
   device: getDeviceType(),
@@ -92,6 +93,11 @@ export function uiReducer(state = initialState, action) {
         isExtraInfoDialogOpen: !state.isExtraInfoDialogOpen,
       }
     }
+    case types.SHOW_MAINTENANCE_MODAL:
+      return {
+        ...state,
+        showMaintenanceModal: payload,
+      }
     case types.UI_RESIZED:
       return {
         ...state,

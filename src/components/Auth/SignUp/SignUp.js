@@ -11,6 +11,7 @@ import {
 
 import Icon from 'icons'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
@@ -82,6 +83,7 @@ class SignUp extends PureComponent {
     this.setState({
       isBeingValidated: true,
     })
+    tracker.trackEvent('Add Account')
     const isValid = this.validateForm()
     if (isValid) {
       if (useApiKey) {
@@ -152,6 +154,7 @@ class SignUp extends PureComponent {
 
   handleCheckboxChange = (e) => {
     const { name, checked } = e.target
+    tracker.trackEvent('Remove Password on Login')
     this.setState({
       [name]: checked,
     })
@@ -159,6 +162,7 @@ class SignUp extends PureComponent {
 
   handle2FACancel = () => {
     const { showOtpLogin } = this.props
+    tracker.trackEvent('Cancel')
     this.setState({ otp: '' })
     showOtpLogin(false)
   }
@@ -166,6 +170,7 @@ class SignUp extends PureComponent {
   handleOneTimePassword = () => {
     const { signUpOtp } = this.props
     const { otp, password, isPasswordProtected } = this.state
+    tracker.trackEvent('Authenticate')
     signUpOtp({
       otp,
       password,
@@ -174,6 +179,7 @@ class SignUp extends PureComponent {
   }
 
   toggleUseApiKey =() => {
+    tracker.trackEvent('Add account with API key')
     this.setState((state) => ({ useApiKey: !state.useApiKey }))
   }
 

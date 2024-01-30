@@ -9,6 +9,7 @@ import {
 
 import Icon from 'icons'
 import GoToRange from 'ui/GoToRange'
+import { tracker } from 'utils/trackers'
 import gotToRangeTypes from 'state/goToRange/constants'
 
 const GoToRangeDialog = ({
@@ -44,10 +45,16 @@ const GoToRangeDialog = ({
   const { start, end, range } = selectedTimeFrame
 
   const onConfirm = () => {
+    tracker.trackEvent('Go to')
     setTimeRange({
       start, end, range, timeFrame,
     })
     setGoToRangePreserve(true)
+    toggleDialog()
+  }
+
+  const onCancel = () => {
+    tracker.trackEvent('Cancel')
     toggleDialog()
   }
 
@@ -77,7 +84,7 @@ const GoToRangeDialog = ({
           <Button
             className='go-to-range-dialog--button'
             intent={Intent.NONE}
-            onClick={toggleDialog}
+            onClick={onCancel}
           >
             {t('timeframe.custom.cancel')}
           </Button>

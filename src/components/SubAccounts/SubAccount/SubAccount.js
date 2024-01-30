@@ -6,6 +6,7 @@ import _differenceBy from 'lodash/differenceBy'
 import { get, isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import Loading from 'ui/Loading'
+import { tracker } from 'utils/trackers'
 import { hasValidUsername } from 'components/Auth/SignInList/SignInList.helpers'
 
 import SubUsersAdd from './SubUsersAdd'
@@ -60,7 +61,7 @@ class SubAccount extends PureComponent {
       masterAccount,
     } = this.props
     const { accounts } = this.state
-
+    tracker.trackEvent('Add Accounts')
     const preparedAccountData = getFilledAccounts(accounts, t).map((account) => {
       const {
         email,
@@ -87,6 +88,7 @@ class SubAccount extends PureComponent {
   }
 
   onSubUsersChange = (accounts) => {
+    tracker.trackEvent('Add another account')
     this.setState({ accounts })
   }
 
@@ -109,7 +111,7 @@ class SubAccount extends PureComponent {
       updateLocalUsername,
     } = this.props
     const { accounts, subUsersToRemove } = this.state
-
+    tracker.trackEvent('Update Accounts')
     const filledAccounts = getFilledAccounts(accounts, t)
     const preparedAccounts = _map(filledAccounts, account => {
       if (isEqual(account?.email, t(USE_API_KEY))) {

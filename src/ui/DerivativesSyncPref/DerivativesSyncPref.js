@@ -14,6 +14,7 @@ import SyncButton from 'ui/SyncButton'
 import Icon from 'icons'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import { propTypes, defaultProps } from './DerivativesSyncPref.props'
 
@@ -49,10 +50,12 @@ class DerivativesSyncPref extends PureComponent {
   }
 
   handleOpen = () => {
+    tracker.trackEvent('Sync Preferences')
     this.setState({ isOpen: true })
   }
 
   handleClose = () => {
+    tracker.trackEvent('Close')
     this.setState(this.getInitialState())
   }
 
@@ -74,6 +77,7 @@ class DerivativesSyncPref extends PureComponent {
   handleApply = () => {
     const { pairs, start } = this.state
     const { setSyncPref } = this.props
+    tracker.trackEvent('Apply')
     this.setState({ isOpen: false })
     setSyncPref(pairs, start, true)
   }

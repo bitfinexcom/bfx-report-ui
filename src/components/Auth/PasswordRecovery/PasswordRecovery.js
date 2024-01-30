@@ -12,6 +12,7 @@ import {
 
 import Icon from 'icons'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
@@ -76,6 +77,7 @@ class PasswordRecovery extends PureComponent {
       userName,
       userPassword,
     } = this.state
+    tracker.trackEvent('Reset Password')
     this.setState({
       isBeingValidated: true,
     })
@@ -155,6 +157,7 @@ class PasswordRecovery extends PureComponent {
 
   handleCheckboxChange = (e) => {
     const { name, checked } = e.target
+    tracker.trackEvent('Remove Password on Login')
     this.setState({
       [name]: checked,
     })
@@ -177,6 +180,7 @@ class PasswordRecovery extends PureComponent {
   }
 
   toggleUseApiKey =() => {
+    tracker.trackEvent('Reset account with API key')
     this.setState((state) => ({ useApiKey: !state.useApiKey }))
   }
 
