@@ -13,6 +13,7 @@ import _toString from 'lodash/toString'
 
 import Icon from 'icons'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
@@ -46,8 +47,19 @@ const AccountMenu = ({
 }) => {
   const showSubAccounts = showFrameworkMode && isSubAccsAvailable
 
+  const onLogout = () => {
+    tracker.trackEvent('Logout')
+    logout()
+  }
+
   const switchSection = (type) => {
+    tracker.trackEvent(type, 'Navigation')
     history.push({ pathname: getPath(type) })
+  }
+
+  const toggleDialog = (type, toggler) => {
+    tracker.trackEvent(type, 'Navigation')
+    toggler()
   }
 
   return (
@@ -64,9 +76,9 @@ const AccountMenu = ({
           <div className='account-menu-content'>
             <Menu>
               <MenuItem
-                onClick={togglePrefDialog}
-                icon={<Icon.SLIDER_CIRCLE_H />}
                 text={t('header.preferences')}
+                icon={<Icon.SLIDER_CIRCLE_H />}
+                onClick={() => toggleDialog('Preferences', togglePrefDialog)}
               />
               <MenuItem
                 onClick={() => switchSection(MENU_LOGINS)}
@@ -74,10 +86,10 @@ const AccountMenu = ({
                 text={t('navItems.loginHistory')}
               />
               <MenuItem
-                className='account-menu-export'
-                onClick={toggleExportDialog}
-                icon={<Icon.FILE_EXPORT />}
                 text={t('download.export')}
+                icon={<Icon.FILE_EXPORT />}
+                className='account-menu-export'
+                onClick={() => toggleDialog('Export', toggleExportDialog)}
               />
               {showSubAccounts && (
                 <MenuItem
@@ -109,9 +121,9 @@ const AccountMenu = ({
                 text={<QueryMode />}
               />
               <MenuItem
-                onClick={logout}
                 icon={<Icon.SIGN_OUT />}
                 text={t('header.logout')}
+                onClick={(() => onLogout())}
               />
             </Menu>
           </div>

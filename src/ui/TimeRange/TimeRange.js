@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import classNames from 'classnames'
 
 import Icon from 'icons'
+import { tracker } from 'utils/trackers'
 import { formatDate } from 'state/utils'
 
 import { propTypes, defaultProps } from './TimeRange.props'
@@ -13,17 +14,24 @@ const TimeRange = ({
   start,
   timezone,
   toggleTimeFrameDialog,
-}) => (
-  <div
-    className={classNames('time-range', className)}
-    onClick={toggleTimeFrameDialog}
-  >
-    <span>
-      {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
-    </span>
-    {icon && <Icon.CALENDAR />}
-  </div>
-)
+}) => {
+  const onClick = () => {
+    tracker.trackEvent('Date')
+    toggleTimeFrameDialog()
+  }
+
+  return (
+    <div
+      onClick={() => onClick()}
+      className={classNames('time-range', className)}
+    >
+      <span>
+        {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
+      </span>
+      {icon && <Icon.CALENDAR />}
+    </div>
+  )
+}
 
 TimeRange.propTypes = propTypes
 TimeRange.defaultProps = defaultProps

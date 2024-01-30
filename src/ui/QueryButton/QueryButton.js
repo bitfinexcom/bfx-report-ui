@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 
+import { tracker } from 'utils/trackers'
+
 const QueryButton = (props) => {
   const {
     disabled,
@@ -10,10 +12,15 @@ const QueryButton = (props) => {
     t,
   } = props
 
+  const handleClick = () => {
+    tracker.trackEvent('Query')
+    onClick()
+  }
+
   return (
     <Button
       className='query-button'
-      onClick={onClick}
+      onClick={handleClick}
       intent={Intent.SUCCESS}
       disabled={disabled}
     >

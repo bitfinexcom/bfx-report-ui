@@ -10,6 +10,7 @@ import {
 
 import Icon from 'icons'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 import { formatDate } from 'state/utils'
 import { getTarget } from 'state/query/utils'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
@@ -77,6 +78,7 @@ class ExportDialog extends PureComponent {
   startExport = () => {
     const { exportCsv, location } = this.props
     const { currentTargets } = this.state
+    tracker.trackEvent('Export')
     const target = getTarget(location.pathname)
     const targets = queryConstants.MENU_POSITIONS_AUDIT !== target
       ? currentTargets
@@ -98,6 +100,12 @@ class ExportDialog extends PureComponent {
     }
   }
 
+  onCancel = () => {
+    const { toggleDialog } = this.props
+    tracker.trackEvent('Cancel')
+    toggleDialog()
+  }
+
   render() {
     const {
       t,
@@ -110,7 +118,6 @@ class ExportDialog extends PureComponent {
       timezone,
       timestamp,
       getFullTime,
-      toggleDialog,
     } = this.props
     const { currentTargets } = this.state
     if (!isOpen) {
@@ -150,7 +157,7 @@ class ExportDialog extends PureComponent {
         icon={<Icon.FILE_EXPORT />}
         isCloseButtonShown={false}
         isOpen={isOpen}
-        onClose={toggleDialog}
+        onClose={this.onCancel}
         title={t('download.title')}
       >
         <div className={Classes.DIALOG_BODY}>
@@ -181,7 +188,7 @@ class ExportDialog extends PureComponent {
         </div>
         <div className={Classes.DIALOG_FOOTER}>
           <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-            <Button onClick={toggleDialog}>
+            <Button onClick={this.onCancel}>
               {t('download.cancel')}
             </Button>
             <Button

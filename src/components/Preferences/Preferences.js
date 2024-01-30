@@ -10,6 +10,7 @@ import {
 import Icon from 'icons'
 import config from 'config'
 import LangMenu from 'ui/LangMenu'
+import { tracker } from 'utils/trackers'
 import ThemeSwitcher from 'ui/ThemeSwitcher'
 import TimezonePicker from 'ui/TimezonePicker'
 import TableScrollPref from 'ui/TableScrollPref'
@@ -31,11 +32,21 @@ const Preferences = ({
 }) => {
   const showRemoveBtn = showFrameworkMode && !isSyncing
 
+  const onClose = () => {
+    tracker.trackEvent('Close')
+    toggleDialog()
+  }
+
+  const onAccRemove = () => {
+    tracker.trackEvent('Remove Account')
+    removeAccount()
+  }
+
   return (
     <Dialog
       usePortal
       isOpen={isOpen}
-      onClose={toggleDialog}
+      onClose={onClose}
       className='preferences'
       isCloseButtonShown={false}
       title={t('preferences.title')}
@@ -91,16 +102,16 @@ const Preferences = ({
           <div className='remove-account-wrapper'>
             {showRemoveBtn && (
             <Button
-              onClick={removeAccount}
               intent={Intent.PRIMARY}
+              onClick={onAccRemove}
             >
               {t('preferences.remove_account')}
             </Button>
             )}
           </div>
           <Button
-            onClick={toggleDialog}
             intent={Intent.PRIMARY}
+            onClick={onClose}
           >
             {t('preferences.close')}
           </Button>

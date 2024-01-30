@@ -7,6 +7,7 @@ import {
 
 import Icon from 'icons'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import {
   getModeIcon,
@@ -16,6 +17,7 @@ import {
 
 const QueryMode = ({ syncMode, switchSyncMode, t }) => {
   const switchMode = () => {
+    tracker.trackEvent(`Query ${syncMode}`)
     switchSyncMode(syncMode)
   }
 

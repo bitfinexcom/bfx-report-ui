@@ -23,6 +23,7 @@ class DateFormatSelector extends PureComponent {
         value={dateFormat}
         items={types.DATE_FORMATS}
         onChange={this.handleClick}
+        type={'Date Format'}
       />
     )
   }

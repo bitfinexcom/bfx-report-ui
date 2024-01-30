@@ -11,8 +11,10 @@ import _map from 'lodash/map'
 import _isNull from 'lodash/isNull'
 import _includes from 'lodash/includes'
 import _castArray from 'lodash/castArray'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icons from 'icons'
+import { tracker } from 'utils/trackers'
 import { getPath, getTarget } from 'state/query/utils'
 
 import menuTypes from './NavMenu.constants'
@@ -39,12 +41,21 @@ const NavMenu = ({
   const handleItemClick = (e, nextTarget) => {
     e.preventDefault()
 
+    tracker.trackEvent(nextTarget, 'Navigation')
     const [path] = _castArray(getPath(nextTarget))
     history.push({
       pathname: path,
       search: window.location.search,
     })
     window.scrollTo(0, 0) // scroll to the top of the page on section change
+  }
+
+  const handleMenuClick = (menuType) => {
+    tracker.trackEvent(menuType, 'Navigation')
+    if (isEqual(menuType, MENU_MY_ACCOUNT)) setIsMyAccountOpen(!isMyAccountOpen)
+    if (isEqual(menuType, MENU_MY_HISTORY)) setIsMyHistoryOpen(!isMyHistoryOpen)
+    if (isEqual(menuType, MENU_MARKET_HISTORY)) setIsMarketHistoryOpen(!isMarketHistoryOpen)
+    if (isEqual(menuType, MENU_MERCHANT_HISTORY)) setIsMerchantHistoryOpen(!isMerchantHistoryOpen)
   }
 
   const getMenuItems = (menuType, target) => (
@@ -89,7 +100,7 @@ const NavMenu = ({
         icon={<Icons.ADDRESS_BOOK />}
         text={t('navItems.myAccount.title')}
         labelElement={getMenuItemChevron(isMyAccountOpen)}
-        onClick={() => setIsMyAccountOpen(!isMyAccountOpen)}
+        onClick={() => handleMenuClick(MENU_MY_ACCOUNT)}
       />
       <Collapse
         keepChildrenMounted
@@ -102,7 +113,7 @@ const NavMenu = ({
         icon={<Icons.BOOK />}
         text={t('navItems.myHistory.title')}
         labelElement={getMenuItemChevron(isMyHistoryOpen)}
-        onClick={() => setIsMyHistoryOpen(!isMyHistoryOpen)}
+        onClick={() => handleMenuClick(MENU_MY_HISTORY)}
       />
       <Collapse
         keepChildrenMounted
@@ -117,7 +128,7 @@ const NavMenu = ({
             icon={<Icons.CART />}
             text={t('navItems.merchantHistory.title')}
             labelElement={getMenuItemChevron(isMerchantHistoryOpen)}
-            onClick={() => setIsMerchantHistoryOpen(!isMerchantHistoryOpen)}
+            onClick={() => handleMenuClick(MENU_MERCHANT_HISTORY)}
           />
           <Collapse
             keepChildrenMounted
@@ -132,7 +143,7 @@ const NavMenu = ({
         icon={<Icons.CHART />}
         text={t('navItems.marketHistory.title')}
         labelElement={getMenuItemChevron(isMarketHistoryOpen)}
-        onClick={() => setIsMarketHistoryOpen(!isMarketHistoryOpen)}
+        onClick={() => handleMenuClick(MENU_MARKET_HISTORY)}
       />
       <Collapse
         keepChildrenMounted

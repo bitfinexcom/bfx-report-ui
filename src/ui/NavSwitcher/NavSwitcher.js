@@ -1,10 +1,15 @@
 import React from 'react'
 import classNames from 'classnames'
 
+import { tracker } from 'utils/trackers'
 import { propTypes, defaultProps } from './NavSwitcher.props'
 
 const NavSwitcher = (props) => {
   const { items, onChange, value: activeItem } = props
+  const handleClick = (itemValue) => {
+    tracker.trackEvent(itemValue, 'Tab')
+    onChange(itemValue)
+  }
 
   return (
     <div className='nav-switcher'>
@@ -15,7 +20,7 @@ const NavSwitcher = (props) => {
         })
 
         return (
-          <span className={itemClasses} onClick={() => onChange(itemValue)} key={itemValue}>
+          <span className={itemClasses} onClick={() => handleClick(itemValue)} key={itemValue}>
             {label}
           </span>
         )

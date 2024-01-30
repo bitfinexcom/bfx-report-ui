@@ -14,6 +14,7 @@ import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
 import config from 'config'
+import { tracker } from 'utils/trackers'
 
 import {
   getSyncIcon,
@@ -58,6 +59,7 @@ const SyncMode = ({
   }, [syncProgress, prevProgress, isSyncing, isInitSync, shouldCheckProgress])
 
   const handleSync = () => {
+    tracker.trackEvent('Start Sync')
     if (isSyncing) {
       stopSyncNow()
     } else {
