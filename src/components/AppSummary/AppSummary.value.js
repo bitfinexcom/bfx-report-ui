@@ -81,7 +81,15 @@ const AccountSummaryValue = () => {
           </div>
         )}
         <div className='chart-value-perc'>
-          {formattedPercValue}
+          {isLoading
+            ? (
+              <LoadingPlaceholder
+                height={22}
+                baseWidth={36}
+              />
+            ) : (
+              { formattedPercValue }
+            )}
         </div>
         <Chart
           aspect={1.455}
