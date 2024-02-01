@@ -7,6 +7,7 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
+import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import {
   parseChartData,
   getFormattedChartLastValue,
@@ -55,6 +56,8 @@ const AccountSummaryValue = () => {
     [chartData],
   )
 
+  const isLoading = true
+
   let showContent
   if (!dataReceived && pageLoading) {
     showContent = <Loading />
@@ -63,10 +66,20 @@ const AccountSummaryValue = () => {
   } else {
     showContent = (
       <div className='chart-wrapper'>
-        <div className='chart-value'>
-          $
-          {chartLastValue}
-        </div>
+        {isLoading ? (
+          <div className='chart-value'>
+            <LoadingPlaceholder
+              isStrong
+              height={22}
+              baseWidth={72}
+            />
+          </div>
+        ) : (
+          <div className='chart-value'>
+            $
+            {chartLastValue}
+          </div>
+        )}
         <div className='chart-value-perc'>
           {formattedPercValue}
         </div>
