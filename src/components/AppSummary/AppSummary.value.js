@@ -67,30 +67,27 @@ const AccountSummaryValue = () => {
     showContent = (
       <div className='chart-wrapper'>
         {isLoading ? (
-          <div className='chart-value'>
-            <LoadingPlaceholder
-              isStrong
-              height={22}
-              baseWidth={72}
-            />
-          </div>
+          <LoadingPlaceholder
+            isStrong
+            height={22}
+            baseWidth={72}
+          />
         ) : (
           <div className='chart-value'>
             $
             {chartLastValue}
           </div>
         )}
-        <div className='chart-value-perc'>
-          {isLoading
-            ? (
-              <LoadingPlaceholder
-                height={22}
-                baseWidth={36}
-              />
-            ) : (
-              { formattedPercValue }
-            )}
-        </div>
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={22}
+            baseWidth={36}
+          />
+        ) : (
+          <div className='chart-value-perc'>
+            { formattedPercValue }
+          </div>
+        )}
         <Chart
           aspect={1.455}
           data={chartData}
