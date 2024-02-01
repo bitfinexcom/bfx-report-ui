@@ -372,6 +372,18 @@
         color: var(--tableAmountFractionPosColor);;
       }
     }
+
+    .loading-placeholder {
+      position: absolute;
+      top: 42px;
+      left: 15px;
+      z-index: 1;
+
+      &.strong {
+        top: 23px;
+        left: 15px;
+      }
+    }
   }
 
   .line-chart {
