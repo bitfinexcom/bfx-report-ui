@@ -39,7 +39,6 @@ const formatTimestamp = (timestamp, timeframe) => {
 }
 
 export const parseChartData = ({ data, timeframe }) => {
-  console.log('+++data', data)
   let chartData
   if (isEmpty(data)) {
     chartData = DEFAULT_CHART_DATA
@@ -53,9 +52,6 @@ export const parseChartData = ({ data, timeframe }) => {
       }
     })
   }
-
-  // console.log('+++data', data)
-
 
   return {
     chartData,
