@@ -5,7 +5,6 @@ import _sortBy from 'lodash/sortBy'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import {
@@ -56,26 +55,10 @@ const AccountSummaryValue = () => {
     [chartData],
   )
 
-  console.log('+++chartData', chartData)
-
-  const cahrtData1 = [
-    { name: '-', USD: 0 },
-    { name: '-', USD: 0 },
-    { name: '-', USD: 0 },
-    { name: '-', USD: 0 },
-    { name: '-', USD: 0 },
-    { name: '-', USD: 0 },
-    { name: '-', USD: 0 },
-    { name: '-', USD: 0 },
-    { name: '-', USD: 0 },
-  ]
-
-  const isLoading = true
+  const isLoading = !dataReceived && pageLoading
 
   let showContent
-  if (!dataReceived && pageLoading) {
-    showContent = <Loading />
-  } else if (isEmpty(entries)) {
+  if (!isLoading && isEmpty(entries)) {
     showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
@@ -104,7 +87,7 @@ const AccountSummaryValue = () => {
         )}
         <Chart
           aspect={1.455}
-          data={cahrtData1}
+          data={chartData}
           showLegend={false}
           dataKeys={presentCurrencies}
         />
