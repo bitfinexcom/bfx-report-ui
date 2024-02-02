@@ -56,6 +56,20 @@ const AccountSummaryValue = () => {
     [chartData],
   )
 
+  console.log('+++chartData', chartData)
+
+  const cahrtData1 = [
+    { name: '-', USD: 0 },
+    { name: '-', USD: 0 },
+    { name: '-', USD: 0 },
+    { name: '-', USD: 0 },
+    { name: '-', USD: 0 },
+    { name: '-', USD: 0 },
+    { name: '-', USD: 0 },
+    { name: '-', USD: 0 },
+    { name: '-', USD: 0 },
+  ]
+
   const isLoading = true
 
   let showContent
@@ -90,7 +104,7 @@ const AccountSummaryValue = () => {
         )}
         <Chart
           aspect={1.455}
-          data={chartData}
+          data={cahrtData1}
           showLegend={false}
           dataKeys={presentCurrencies}
         />
