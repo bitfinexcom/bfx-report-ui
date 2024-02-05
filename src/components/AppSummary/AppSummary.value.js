@@ -86,7 +86,7 @@ const AccountSummaryValue = () => {
           </div>
         )}
         <Chart
-          aspect={1.455}
+          aspect={1.44}
           data={chartData}
           showLegend={false}
           dataKeys={presentCurrencies}
