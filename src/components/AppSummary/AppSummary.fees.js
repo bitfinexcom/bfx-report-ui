@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import CollapsedTable from 'ui/CollapsedTable'
 
 import { getFeesColumns } from './AppSummary.columns'
