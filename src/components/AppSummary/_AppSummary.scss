@@ -81,7 +81,7 @@
             & > div {
               display: table-cell;
               min-height: 24px;
-              padding: 16px 8px;
+              padding: 14px 8px;
               vertical-align: middle;
               border-bottom: 1px solid var(--tableBorder);
       
@@ -94,6 +94,12 @@
                 text-align: end;
                 word-break: break-word;
                 justify-content: flex-end;
+              }
+
+              .cell-value {
+                display: flex;
+                min-height: 22px;
+                align-items: center;
               }
 
               .cell-description {
