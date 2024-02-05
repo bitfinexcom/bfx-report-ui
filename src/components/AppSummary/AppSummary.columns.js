@@ -14,7 +14,7 @@ import {
 
 export const getFeesColumns = ({
   makerFee,
-  isLoading = true,
+  isLoading = false,
   feeTierVolume,
   isTurkishSite,
   derivTakerFee,
@@ -29,13 +29,13 @@ export const getFeesColumns = ({
     width: 100,
     renderer: () => (
       <Cell>
-        {isLoading ? (
+        {!isLoading ? (
           <LoadingPlaceholder />
         ) : (
-          <>
+          <div className='cell-value'>
             $
             {formatUsdValue(feeTierVolume)}
-          </>
+          </div>
         )}
       </Cell>
     ),
@@ -49,10 +49,10 @@ export const getFeesColumns = ({
         {isLoading ? (
           <LoadingPlaceholder />
         ) : (
-          <>
+          <div className='cell-value'>
             {formatFee(makerFee)}
             %
-          </>
+          </div>
         )}
       </Cell>
     ),
@@ -66,10 +66,10 @@ export const getFeesColumns = ({
         {isLoading ? (
           <LoadingPlaceholder />
         ) : (
-          <>
+          <div className='cell-value'>
             {formatFee(takerFeeToCrypto)}
             %
-          </>
+          </div>
         )}
       </Cell>
     ),
@@ -83,10 +83,10 @@ export const getFeesColumns = ({
         {isLoading ? (
           <LoadingPlaceholder />
         ) : (
-          <>
+          <div className='cell-value'>
             {formatFee(takerFeeToFiat)}
             %
-          </>
+          </div>
         )}
       </Cell>
     ),
@@ -100,10 +100,10 @@ export const getFeesColumns = ({
         {isLoading ? (
           <LoadingPlaceholder />
         ) : (
-          <>
+          <div className='cell-value'>
             {formatFee(takerFeeToStable)}
             %
-          </>
+          </div>
         )}
       </Cell>
     ),
@@ -117,10 +117,10 @@ export const getFeesColumns = ({
         {isLoading ? (
           <LoadingPlaceholder />
         ) : (
-          <>
+          <div className='cell-value'>
             {formatFee(derivMakerRebate)}
             %
-          </>
+          </div>
         )}
       </Cell>
     ),
@@ -134,10 +134,10 @@ export const getFeesColumns = ({
         {isLoading ? (
           <LoadingPlaceholder />
         ) : (
-          <>
+          <div className='cell-value'>
             {formatFee(derivTakerFee)}
             %
-          </>
+          </div>
         )}
       </Cell>
     ),
