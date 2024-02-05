@@ -24,6 +24,7 @@ const AppSummaryFees = ({
     takerFeeToCrypto = 0,
     derivMakerRebate = 0,
   } = data
+  const isLoading = !dataReceived && pageLoading
 
   const feeTierVolume = useMemo(
     () => getFeeTierVolume(data),
@@ -32,6 +33,7 @@ const AppSummaryFees = ({
 
   const columns = getFeesColumns({
     makerFee,
+    isLoading,
     feeTierVolume,
     isTurkishSite,
     derivTakerFee,
@@ -42,9 +44,7 @@ const AppSummaryFees = ({
   })
 
   let showContent
-  if (!dataReceived && pageLoading) {
-    showContent = <Loading />
-  } else if (isEmpty(data)) {
+  if (!isLoading && isEmpty(data)) {
     showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
