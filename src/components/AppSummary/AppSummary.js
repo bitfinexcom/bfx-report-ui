@@ -113,10 +113,6 @@ const AppSummary = ({
             isTurkishSite={isTurkishSite}
           />
         </div>
-        Default
-        <LoadingPlaceholder />
-        Strong
-        <LoadingPlaceholder isStrong />
         <ByAsset />
       </div>
     </Card>
