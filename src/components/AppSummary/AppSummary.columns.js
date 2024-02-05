@@ -46,8 +46,14 @@ export const getFeesColumns = ({
     width: 100,
     renderer: () => (
       <Cell>
-        {formatFee(makerFee)}
-        %
+        {isLoading ? (
+          <LoadingPlaceholder />
+        ) : (
+          <>
+            {formatFee(makerFee)}
+            %
+          </>
+        )}
       </Cell>
     ),
   },
@@ -57,8 +63,14 @@ export const getFeesColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatFee(takerFeeToCrypto)}
-        %
+        {isLoading ? (
+          <LoadingPlaceholder />
+        ) : (
+          <>
+            {formatFee(takerFeeToCrypto)}
+            %
+          </>
+        )}
       </Cell>
     ),
   },
@@ -68,8 +80,14 @@ export const getFeesColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatFee(takerFeeToFiat)}
-        %
+        {isLoading ? (
+          <LoadingPlaceholder />
+        ) : (
+          <>
+            {formatFee(takerFeeToFiat)}
+            %
+          </>
+        )}
       </Cell>
     ),
   },
@@ -79,8 +97,14 @@ export const getFeesColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatFee(takerFeeToStable)}
-        %
+        {isLoading ? (
+          <LoadingPlaceholder />
+        ) : (
+          <>
+            {formatFee(takerFeeToStable)}
+            %
+          </>
+        )}
       </Cell>
     ),
   },
@@ -90,8 +114,14 @@ export const getFeesColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatFee(derivMakerRebate)}
-        %
+        {isLoading ? (
+          <LoadingPlaceholder />
+        ) : (
+          <>
+            {formatFee(derivMakerRebate)}
+            %
+          </>
+        )}
       </Cell>
     ),
   },
@@ -101,8 +131,14 @@ export const getFeesColumns = ({
     width: 140,
     renderer: () => (
       <Cell>
-        {formatFee(derivTakerFee)}
-        %
+        {isLoading ? (
+          <LoadingPlaceholder />
+        ) : (
+          <>
+            {formatFee(derivTakerFee)}
+            %
+          </>
+        )}
       </Cell>
     ),
   }] : []),
