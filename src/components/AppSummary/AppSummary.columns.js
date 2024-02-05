@@ -3,6 +3,7 @@ import { Cell } from '@blueprintjs/table'
 
 import { formatFee, fixedFloat } from 'ui/utils'
 import { getTooltipContent } from 'utils/columns'
+import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 
 import {
   getIsTotal,
@@ -13,6 +14,7 @@ import {
 
 export const getFeesColumns = ({
   makerFee,
+  isLoading = true,
   feeTierVolume,
   isTurkishSite,
   derivTakerFee,
@@ -27,8 +29,14 @@ export const getFeesColumns = ({
     width: 100,
     renderer: () => (
       <Cell>
-        $
-        {formatUsdValue(feeTierVolume)}
+        {isLoading ? (
+          <LoadingPlaceholder />
+        ) : (
+          <>
+            $
+            {formatUsdValue(feeTierVolume)}
+          </>
+        )}
       </Cell>
     ),
   },
