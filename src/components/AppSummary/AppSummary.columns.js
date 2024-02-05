@@ -14,7 +14,7 @@ import {
 
 export const getFeesColumns = ({
   makerFee,
-  isLoading = false,
+  isLoading,
   feeTierVolume,
   isTurkishSite,
   derivTakerFee,
@@ -29,7 +29,7 @@ export const getFeesColumns = ({
     width: 100,
     renderer: () => (
       <Cell>
-        {!isLoading ? (
+        {isLoading ? (
           <LoadingPlaceholder />
         ) : (
           <div className='cell-value'>
