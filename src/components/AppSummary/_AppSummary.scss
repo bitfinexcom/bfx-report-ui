@@ -90,9 +90,10 @@
               }
       
               &:last-child {
-                padding: 4px 5px;
+                display: flex;
                 text-align: end;
                 word-break: break-word;
+                justify-content: flex-end;
               }
 
               .cell-description {
