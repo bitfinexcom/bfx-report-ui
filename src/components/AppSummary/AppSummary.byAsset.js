@@ -16,8 +16,8 @@ import {
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
 import { getTimezone } from 'state/base/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
 import { getTimeRange, getTimeFrame } from 'state/timeRange/selectors'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import SummaryFilters from './AppSummary.filters'
 import { getAssetColumns } from './AppSummary.columns'
@@ -31,12 +31,13 @@ const AppSummaryByAsset = () => {
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const total = useSelector(getSummaryByAssetTotal)
+  const isFirstSync = useSelector(getIsFirstSyncing)
   const entries = useSelector(getSummaryByAssetEntries)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const { start, end } = useSelector(getTimeFrame)
   const minimumBalance = useSelector(getMinimumBalance)
   const useMinimumBalance = useSelector(getUseMinBalance)
-  const isLoading = !dataReceived && pageLoading
+  const isLoading = isFirstSync || (!dataReceived && pageLoading)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {

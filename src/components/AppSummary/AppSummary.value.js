@@ -29,10 +29,10 @@ const AccountSummaryValue = () => {
   const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
-  const isFirstSyncing = useSelector(getIsFirstSyncing)
+  const isFirstSync = useSelector(getIsFirstSyncing)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const currTimeFrame = useSelector(getCurrentTimeFrame)
-  const isLoading = isFirstSyncing || (!dataReceived && pageLoading)
+  const isLoading = isFirstSync || (!dataReceived && pageLoading)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
