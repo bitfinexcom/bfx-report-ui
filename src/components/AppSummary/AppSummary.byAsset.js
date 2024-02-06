@@ -66,8 +66,8 @@ const AppSummaryByAsset = () => {
       <DataTable
         defaultRowHeight={73}
         tableColumns={columns}
-        numRows={preparedData.length}
         className='summary-by-asset-table'
+        numRows={isLoading ? 3 : preparedData.length}
       />
     )
   }
