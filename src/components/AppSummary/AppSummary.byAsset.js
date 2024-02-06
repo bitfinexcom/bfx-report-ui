@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import { formatDate } from 'state/utils'
 import { fetchData, refresh } from 'state/summaryByAsset/actions'
@@ -37,6 +36,7 @@ const AppSummaryByAsset = () => {
   const { start, end } = useSelector(getTimeFrame)
   const minimumBalance = useSelector(getMinimumBalance)
   const useMinimumBalance = useSelector(getUseMinBalance)
+  const isLoading = !dataReceived && pageLoading
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -54,14 +54,12 @@ const AppSummaryByAsset = () => {
   )
 
   const columns = useMemo(
-    () => getAssetColumns({ preparedData, t }),
-    [preparedData, t],
+    () => getAssetColumns({ preparedData, t, isLoading }),
+    [preparedData, t, isLoading],
   )
 
   let showContent
-  if (!dataReceived && pageLoading) {
-    showContent = <Loading />
-  } else if (isEmpty(entries)) {
+  if (!isLoading && isEmpty(entries)) {
     showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
