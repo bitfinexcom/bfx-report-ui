@@ -30,7 +30,10 @@ export const getFeesColumns = ({
     renderer: () => (
       <Cell>
         {isLoading ? (
-          <LoadingPlaceholder />
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
         ) : (
           <div className='cell-value'>
             $
@@ -47,7 +50,10 @@ export const getFeesColumns = ({
     renderer: () => (
       <Cell>
         {isLoading ? (
-          <LoadingPlaceholder />
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
         ) : (
           <div className='cell-value'>
             {formatFee(makerFee)}
@@ -64,7 +70,10 @@ export const getFeesColumns = ({
     renderer: () => (
       <Cell>
         {isLoading ? (
-          <LoadingPlaceholder />
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
         ) : (
           <div className='cell-value'>
             {formatFee(takerFeeToCrypto)}
@@ -81,7 +90,10 @@ export const getFeesColumns = ({
     renderer: () => (
       <Cell>
         {isLoading ? (
-          <LoadingPlaceholder />
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
         ) : (
           <div className='cell-value'>
             {formatFee(takerFeeToFiat)}
@@ -98,7 +110,10 @@ export const getFeesColumns = ({
     renderer: () => (
       <Cell>
         {isLoading ? (
-          <LoadingPlaceholder />
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
         ) : (
           <div className='cell-value'>
             {formatFee(takerFeeToStable)}
@@ -115,7 +130,10 @@ export const getFeesColumns = ({
     renderer: () => (
       <Cell>
         {isLoading ? (
-          <LoadingPlaceholder />
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
         ) : (
           <div className='cell-value'>
             {formatFee(derivMakerRebate)}
@@ -132,7 +150,10 @@ export const getFeesColumns = ({
     renderer: () => (
       <Cell>
         {isLoading ? (
-          <LoadingPlaceholder />
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
         ) : (
           <div className='cell-value'>
             {formatFee(derivTakerFee)}
