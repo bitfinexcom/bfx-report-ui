@@ -85,9 +85,12 @@
               padding: 15px 8px;
               vertical-align: middle;
               border-bottom: 1px solid var(--tableBorder);
-      
+
               &:first-child {
                 width: 50%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
               }
       
               &:last-child {
@@ -360,14 +363,14 @@
 
     .chart-value {
       position: absolute;
-      top: 23px;
+      top: 28px;
       left: 15px;
       z-index: 1;
     }
 
     .chart-value-perc {
       position: absolute;
-      top: 42px;
+      top: 50px;
       left: 15px;
       z-index: 1;
 
