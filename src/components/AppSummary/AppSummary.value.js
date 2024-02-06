@@ -19,8 +19,8 @@ import {
   getCurrentTimeFrame,
 } from 'state/accountBalance/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
 import { fetchBalance } from 'state/accountBalance/actions'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 const AccountSummaryValue = () => {
   const { t } = useTranslation()
@@ -29,9 +29,10 @@ const AccountSummaryValue = () => {
   const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
+  const isFirstSyncing = useSelector(getIsFirstSyncing)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const currTimeFrame = useSelector(getCurrentTimeFrame)
-  const isLoading = !dataReceived && pageLoading
+  const isLoading = isFirstSyncing || (!dataReceived && pageLoading)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
