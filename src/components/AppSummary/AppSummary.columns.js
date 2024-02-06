@@ -167,6 +167,7 @@ export const getFeesColumns = ({
 
 export const getAssetColumns = ({
   t,
+  isLoading,
   preparedData,
 }) => [
   {
@@ -175,6 +176,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.currency',
     width: 110,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       return (
@@ -206,6 +217,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.balance',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { currency, balance = null, balanceUsd = null } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? balanceUsd : balance
@@ -240,6 +261,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.balance_change',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const {
         currency, balanceChange, balanceChangeUsd, balanceChangePerc,
       } = preparedData[rowIndex]
@@ -278,6 +309,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.volume',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { currency, volume, volumeUsd } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? volumeUsd : volume
@@ -312,6 +353,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.trading_fees',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { tradingFees, tradingFeesUsd, currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? tradingFeesUsd : tradingFees
@@ -341,6 +392,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.fund_earnings',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { marginFundingPayment, currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? '' : marginFundingPayment
