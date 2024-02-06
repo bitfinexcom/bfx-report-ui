@@ -12,6 +12,7 @@ const AppSummaryFees = ({
   t,
   data,
   pageLoading,
+  isFirstSync,
   dataReceived,
   isTurkishSite,
 }) => {
@@ -23,7 +24,7 @@ const AppSummaryFees = ({
     takerFeeToCrypto = 0,
     derivMakerRebate = 0,
   } = data
-  const isLoading = !dataReceived && pageLoading
+  const isLoading = isFirstSync || (!dataReceived && pageLoading)
 
   const feeTierVolume = useMemo(
     () => getFeeTierVolume(data),
@@ -77,9 +78,10 @@ AppSummaryFees.propTypes = {
     takerFeeToStable: PropTypes.number,
   }).isRequired,
   t: PropTypes.func.isRequired,
-  isTurkishSite: PropTypes.bool.isRequired,
+  isFirstSync: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   dataReceived: PropTypes.bool.isRequired,
+  isTurkishSite: PropTypes.bool.isRequired,
 }
 
 export default memo(AppSummaryFees)
