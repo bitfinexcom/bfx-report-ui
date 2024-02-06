@@ -43,7 +43,7 @@ const AppSummaryFees = ({
   })
 
   let showContent
-  if (!isLoading && isEmpty(data)) {
+  if (dataReceived && isEmpty(data)) {
     showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (

@@ -57,7 +57,7 @@ const AccountSummaryValue = () => {
   )
 
   let showContent
-  if (!isLoading && isEmpty(entries)) {
+  if (dataReceived && isEmpty(entries)) {
     showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
