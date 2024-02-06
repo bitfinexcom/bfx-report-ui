@@ -31,6 +31,7 @@ const AccountSummaryValue = () => {
   const dataReceived = useSelector(getDataReceived)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const currTimeFrame = useSelector(getCurrentTimeFrame)
+  const isLoading = !dataReceived && pageLoading
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -54,8 +55,6 @@ const AccountSummaryValue = () => {
     () => getFormattedPercentChange(chartData),
     [chartData],
   )
-
-  const isLoading = !dataReceived && pageLoading
 
   let showContent
   if (!isLoading && isEmpty(entries)) {
