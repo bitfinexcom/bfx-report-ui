@@ -1,13 +1,14 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { formatFee, fixedFloat } from 'ui/utils'
+import { fixedFloat } from 'ui/utils'
 import { getTooltipContent } from 'utils/columns'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 
 import {
   getIsTotal,
   formatUsdValue,
+  getFeePercentCell,
   formatPercentValue,
   formatUsdValueChange,
 } from './AppSummary.helpers'
@@ -48,19 +49,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.maker',
     width: 100,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {formatFee(makerFee)}
-            %
-          </div>
-        )}
-      </Cell>
+      getFeePercentCell(isLoading, makerFee)
     ),
   },
   {
@@ -68,19 +57,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.taker_crypto',
     width: 140,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {formatFee(takerFeeToCrypto)}
-            %
-          </div>
-        )}
-      </Cell>
+      getFeePercentCell(isLoading, takerFeeToCrypto)
     ),
   },
   {
@@ -88,19 +65,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.taker_fiat',
     width: 140,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {formatFee(takerFeeToFiat)}
-            %
-          </div>
-        )}
-      </Cell>
+      getFeePercentCell(isLoading, takerFeeToFiat)
     ),
   },
   {
@@ -108,19 +73,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.taker_stables',
     width: 140,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {formatFee(takerFeeToStable)}
-            %
-          </div>
-        )}
-      </Cell>
+      getFeePercentCell(isLoading, takerFeeToStable)
     ),
   },
   ...(!isTurkishSite ? [{
@@ -128,19 +81,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.deriv_maker',
     width: 140,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {formatFee(derivMakerRebate)}
-            %
-          </div>
-        )}
-      </Cell>
+      getFeePercentCell(isLoading, derivMakerRebate)
     ),
   },
   {
@@ -148,19 +89,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.deriv_taker',
     width: 140,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {formatFee(derivTakerFee)}
-            %
-          </div>
-        )}
-      </Cell>
+      getFeePercentCell(isLoading, derivTakerFee)
     ),
   }] : []),
 ]
