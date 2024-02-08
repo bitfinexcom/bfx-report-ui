@@ -14,13 +14,19 @@ const POSITIONS_ENTRIES_PROPS = PropTypes.shape({
 })
 
 const MOVEMENTS_ENTRIES_PROPS = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  currency: PropTypes.string.isRequired,
-  mtsStarted: PropTypes.number.isRequired,
-  mtsUpdated: PropTypes.number.isRequired,
-  status: PropTypes.string.isRequired,
-  amount: PropTypes.number.isRequired,
+  amount: PropTypes.number,
+  amountUsd: PropTypes.number,
+  currency: PropTypes.string,
+  currencyName: PropTypes.string,
   destinationAddress: PropTypes.string,
+  fees: PropTypes.number,
+  id: PropTypes.number,
+  mtsStarted: PropTypes.number,
+  mtsUpdated: PropTypes.number,
+  note: PropTypes.string,
+  status: PropTypes.string,
+  subUserId: PropTypes.number,
+  transactionId: PropTypes.string,
 })
 
 export const propTypes = {
@@ -33,7 +39,7 @@ export const propTypes = {
         positionsTotalPlUsd: PropTypes.number,
         totalResult: PropTypes.number,
       }),
-      movements: PropTypes.arrayOf(MOVEMENTS_ENTRIES_PROPS).isRequired,
+      movements: PropTypes.arrayOf(MOVEMENTS_ENTRIES_PROPS),
       movementsTotalAmount: PropTypes.number,
       endingPeriodBalances: PropTypes.shape({
         walletsTotalBalanceUsd: PropTypes.number,
