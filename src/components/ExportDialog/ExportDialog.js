@@ -123,6 +123,7 @@ class ExportDialog extends PureComponent {
     if (!isOpen) {
       return null
     }
+    const isTaxReport = currentTargets.includes(queryConstants.MENU_TAX_REPORT)
     const showLoader = showFrameworkMode && isExporting
     const target = getTarget(location.pathname)
     const isWallets = location && location.pathname && target === queryConstants.MENU_WALLETS
@@ -182,8 +183,16 @@ class ExportDialog extends PureComponent {
             </div>
           </div>
           <div className='export-dialog-row'>
-            <span>{t('preferences.milliseconds')}</span>
-            <ShowMilliseconds />
+            <div className='export-dialog-item'>
+              <span>{t('preferences.milliseconds')}</span>
+              <ShowMilliseconds />
+            </div>
+            {isTaxReport && (
+              <div className='export-dialog-item'>
+                <span>{t('download.exportAsPdf')}</span>
+                <ShowMilliseconds />
+              </div>
+            )}
           </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
