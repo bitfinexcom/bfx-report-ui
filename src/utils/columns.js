@@ -6,6 +6,7 @@ import { Cell } from '@blueprintjs/table'
 import { get, pick, isEqual } from '@bitfinex/lib-js-util-base'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
+import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 
 const COLUMN_WIDTH_STANDARD = {
   actualPrice: 132,
@@ -195,6 +196,15 @@ export const getTooltipContent = (value, t) => {
   if (t) return `${value}\n${t('column.deselectionHint')}`
   return `${value}`
 }
+
+export const getCellLoader = () => (
+  <Cell>
+    <LoadingPlaceholder
+      height={14}
+      baseWidth={72}
+    />
+  </Cell>
+)
 
 export const getFrameworkPositionsColumns = (props) => {
   const {
