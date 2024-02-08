@@ -274,7 +274,7 @@
   },
   "download": {
     "query": "Prepare Export",
-    "title": "Export CSV",
+    "title": "Export",
     "prepare": "Bitfinex will prepare your data during",
     "send": "and send to {{email}}.",
     "store": "and store to your local folder.",
