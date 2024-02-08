@@ -287,7 +287,8 @@
       "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
     },
     "success": "Success",
-    "targets": "Data to Export"
+    "targets": "Data to Export",
+    "exportAsPdf": "Export as PDF"
   },
   "fcredit": {
     "title": "Funding Credits (Used)",
