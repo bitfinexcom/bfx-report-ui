@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox } from '@blueprintjs/core'
 
@@ -10,10 +10,10 @@ const ExportToPdf = () => {
   const dispatch = useDispatch()
   const isPdfExportRequired = useSelector(getIsPdfExportRequired)
 
-  const handleChange = () => {
+  const handleChange = useCallback(() => {
     tracker.trackEvent('Export as PDF')
     dispatch(setIsPdfRequired(!isPdfExportRequired))
-  }
+  }, [dispatch, tracker, isPdfExportRequired])
 
   return (
     <Checkbox
