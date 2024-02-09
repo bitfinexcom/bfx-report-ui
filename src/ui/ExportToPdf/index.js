@@ -1,1 +1,1 @@
-export { default } from './ExportToPdf.container'
+export { default } from './ExportToPdf'
