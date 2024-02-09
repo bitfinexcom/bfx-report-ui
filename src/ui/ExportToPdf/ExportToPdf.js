@@ -1,22 +1,25 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox } from '@blueprintjs/core'
 
 import { tracker } from 'utils/trackers'
+import { setIsPdfRequired } from 'state/query/actions'
+import { getIsPdfExportRequired } from 'state/query/selectors'
 
-const ExportToPdf = ({
-  milliseconds,
-  showMilliseconds,
-}) => {
+const ExportToPdf = () => {
+  const dispatch = useDispatch()
+  const isPdfExportRequired = useSelector(getIsPdfExportRequired)
+
   const handleChange = () => {
-    tracker.trackEvent('Display Milliseconds')
-    showMilliseconds(!milliseconds)
+    tracker.trackEvent('Export as PDF')
+    dispatch(setIsPdfRequired(!isPdfExportRequired))
   }
 
   return (
     <Checkbox
       large
-      checked={milliseconds}
       onChange={handleChange}
+      checked={isPdfExportRequired}
     />
   )
 }
