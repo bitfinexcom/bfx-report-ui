@@ -1,3 +1,1 @@
-import ExportToPdf from './ExportToPdf.container'
-
-export default ExportToPdf
+export { default } from './ExportToPdf.container'
