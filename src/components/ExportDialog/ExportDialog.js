@@ -184,16 +184,16 @@ class ExportDialog extends PureComponent {
             </div>
           </div>
           <div className='export-dialog-row'>
-            <div className='export-dialog-item'>
-              <span>{t('preferences.milliseconds')}</span>
-              <ShowMilliseconds />
-            </div>
             {isTaxReport && (
               <div className='export-dialog-item'>
                 <span>{t('download.exportAsPdf')}</span>
                 <ExportToPdf />
               </div>
             )}
+            <div className='export-dialog-item'>
+              <span>{t('preferences.milliseconds')}</span>
+              <ShowMilliseconds />
+            </div>
           </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>
