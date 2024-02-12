@@ -129,7 +129,7 @@ const {
 }
 */
 
-const getMultipleCsv = params => makeFetchCall('getMultipleCsv', params)
+const getMultipleCsv = params => makeFetchCall('getMultipleFile', params)
 
 function getSelector(target) {
   switch (target) {
@@ -388,7 +388,7 @@ function* getOptions({ target }) {
       options.method = 'getFullSnapshotReportCsv'
       break
     case MENU_TAX_REPORT:
-      options.method = 'getFullTaxReportCsv'
+      options.method = 'getFullTaxReportFile'
       break
     case MENU_TRADED_VOLUME:
       options.method = 'getTradedVolumeCsv'
