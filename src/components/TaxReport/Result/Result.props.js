@@ -39,7 +39,7 @@ export const propTypes = {
         positionsTotalPlUsd: PropTypes.number,
         totalResult: PropTypes.number,
       }),
-      movements: PropTypes.arrayOf(MOVEMENTS_ENTRIES_PROPS),
+      movements: PropTypes.arrayOf(MOVEMENTS_ENTRIES_PROPS).isRequired,
       movementsTotalAmount: PropTypes.number,
       endingPeriodBalances: PropTypes.shape({
         walletsTotalBalanceUsd: PropTypes.number,
