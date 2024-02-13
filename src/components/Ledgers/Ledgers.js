@@ -10,8 +10,6 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import TimeRange from 'ui/TimeRange'
 import Pagination from 'ui/Pagination'
@@ -27,6 +25,7 @@ import {
   toggleSymbol,
   clearAllSymbols,
 } from 'state/utils'
+import { getRowsNumber} from 'utils/columns'
 
 import getColumns from './Ledgers.columns'
 
@@ -110,34 +109,20 @@ class Ledgers extends PureComponent {
       targetCategory,
       timeOffset,
     } = this.props
+    // const isNoData = isEmpty(entries)
+    const isLoading = !dataReceived && pageLoading
+    const isNoData = true
+    // const isLoading = true
+    const showPagination = !isLoading && !isNoData
     const tableColumns = getColumns({
+      t,
+      isNoData,
+      isLoading,
+      timeOffset,
+      getFullTime,
       columnsWidth,
       filteredData: entries,
-      getFullTime,
-      t,
-      timeOffset,
     }).filter(({ id }) => columns[id])
-
-    let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
-    } else {
-      showContent = (
-        <div className='data-table-wrapper'>
-          <DataTable
-            section={TYPE}
-            numRows={entries.length}
-            tableColumns={tableColumns}
-          />
-          <Pagination
-            target={TYPE}
-            loading={pageLoading}
-          />
-        </div>
-      )
-    }
 
     return (
       <Card
@@ -182,7 +167,19 @@ class Ledgers extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
-        {showContent}
+        <div className='data-table-wrapper'>
+          <DataTable
+            section={TYPE}
+            tableColumns={tableColumns}
+            numRows={getRowsNumber(isLoading, isNoData, entries)}
+          />
+          {showPagination && (
+            <Pagination
+              target={TYPE}
+              loading={pageLoading}
+            />
+          )}
+        </div>
       </Card>
     )
   }
