@@ -341,7 +341,7 @@ function* getOptions({ target }) {
       options.method = 'getPayInvoiceListCsv'
       break
     case MENU_LEDGERS:
-      options.method = 'getLedgersCsv'
+      options.method = 'getLedgersFile'
       options.category = yield select(getLedgersCategory)
       break
     case MENU_LOAN_REPORT:
