@@ -120,6 +120,7 @@ class Ledgers extends PureComponent {
       columnsWidth,
       filteredData: entries,
     }).filter(({ id }) => columns[id])
+    const firstVisibleColumn = tableColumns[0]?.id
 
     let showContent
     if (isNoData) {
@@ -129,6 +130,7 @@ class Ledgers extends PureComponent {
             section={TYPE}
             numRows={isLoading ? 5 : 1}
             tableColumns={tableColumns}
+            firstColumn={firstVisibleColumn}
           />
         </div>
       )
