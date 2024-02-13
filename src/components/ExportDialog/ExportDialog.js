@@ -18,6 +18,7 @@ import ShowMilliseconds from 'ui/ShowMilliseconds'
 import queryConstants from 'state/query/constants'
 import DateFormatSelector from 'ui/DateFormatSelector'
 
+import { getShowPdfSwitcher } from './ExportDialog.helpers'
 import ExportTargetsSelector from './ExportDialog.TargetsSelector'
 
 const { showFrameworkMode } = config
@@ -124,7 +125,7 @@ class ExportDialog extends PureComponent {
     if (!isOpen) {
       return null
     }
-    const isTaxReport = currentTargets.includes(queryConstants.MENU_TAX_REPORT)
+    const showPdfSwitcher = getShowPdfSwitcher(currentTargets)
     const showLoader = showFrameworkMode && isExporting
     const target = getTarget(location.pathname)
     const isWallets = location && location.pathname && target === queryConstants.MENU_WALLETS
@@ -184,7 +185,7 @@ class ExportDialog extends PureComponent {
             </div>
           </div>
           <div className='export-dialog-row'>
-            {isTaxReport && (
+            {showPdfSwitcher && (
               <div className='export-dialog-item'>
                 <span>{t('download.exportAsPdf')}</span>
                 <ExportToPdf />
