@@ -342,6 +342,7 @@ function* getOptions({ target }) {
       break
     case MENU_LEDGERS:
       options.method = 'getLedgersFile'
+      options.isPDFRequired = isPdfExportRequired
       options.category = yield select(getLedgersCategory)
       break
     case MENU_LOAN_REPORT:
