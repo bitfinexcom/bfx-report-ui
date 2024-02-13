@@ -25,7 +25,6 @@ import {
   toggleSymbol,
   clearAllSymbols,
 } from 'state/utils'
-import { getRowsNumber} from 'utils/columns'
 
 import getColumns from './Ledgers.columns'
 
@@ -99,7 +98,7 @@ class Ledgers extends PureComponent {
       columns,
       columnsWidth,
       dataReceived,
-      entries,
+      // entries,
       existingCoins,
       getFullTime,
       pageLoading,
@@ -109,9 +108,10 @@ class Ledgers extends PureComponent {
       targetCategory,
       timeOffset,
     } = this.props
-    // const isNoData = isEmpty(entries)
+    const entries = {}
+    const isNoData = isEmpty(entries)
     const isLoading = !dataReceived && pageLoading
-    const isNoData = true
+    // const isNoData = true
     // const isLoading = true
     const showPagination = !isLoading && !isNoData
     const tableColumns = getColumns({
@@ -123,6 +123,35 @@ class Ledgers extends PureComponent {
       columnsWidth,
       filteredData: entries,
     }).filter(({ id }) => columns[id])
+
+    let showContent
+    if (isNoData) {
+      showContent = (
+        <div className='data-table-wrapper'>
+          <DataTable
+            section={TYPE}
+            numRows={isLoading ? 5 : 1}
+            tableColumns={tableColumns}
+          />
+        </div>
+      )
+    } else {
+      showContent = (
+        <div className='data-table-wrapper'>
+          <DataTable
+            section={TYPE}
+            tableColumns={tableColumns}
+            numRows={isLoading ? 5 : tableColumns.length}
+          />
+          {showPagination && (
+          <Pagination
+            target={TYPE}
+            loading={pageLoading}
+          />
+          )}
+        </div>
+      )
+    }
 
     return (
       <Card
@@ -167,19 +196,7 @@ class Ledgers extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
-        <div className='data-table-wrapper'>
-          <DataTable
-            section={TYPE}
-            tableColumns={tableColumns}
-            numRows={getRowsNumber(isLoading, isNoData, entries)}
-          />
-          {showPagination && (
-            <Pagination
-              target={TYPE}
-              loading={pageLoading}
-            />
-          )}
-        </div>
+        { showContent }
       </Card>
     )
   }
