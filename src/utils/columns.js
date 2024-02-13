@@ -197,7 +197,7 @@ export const getTooltipContent = (value, t) => {
   return `${value}`
 }
 
-export const getCellLoader = () => (
+const CellLoader = (
   <Cell>
     <LoadingPlaceholder
       height={14}
@@ -205,6 +205,20 @@ export const getCellLoader = () => (
     />
   </Cell>
 )
+
+const CellNoData = (
+  <Cell>
+    <span className='cell-no-data'>
+      --
+    </span>
+  </Cell>
+)
+
+export const getCellState = (isLoading, isNoData) => {
+  if (isLoading) return CellLoader
+  if (isNoData) return CellNoData
+  return null
+}
 
 export const getFrameworkPositionsColumns = (props) => {
   const {
