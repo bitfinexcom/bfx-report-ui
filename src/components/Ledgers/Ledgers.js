@@ -98,7 +98,7 @@ class Ledgers extends PureComponent {
       columns,
       columnsWidth,
       dataReceived,
-      // entries,
+      entries,
       existingCoins,
       getFullTime,
       pageLoading,
@@ -108,12 +108,9 @@ class Ledgers extends PureComponent {
       targetCategory,
       timeOffset,
     } = this.props
-    const entries = {}
+    // const entries = {}
     const isNoData = isEmpty(entries)
     const isLoading = !dataReceived && pageLoading
-    // const isNoData = true
-    // const isLoading = true
-    const showPagination = !isLoading && !isNoData
     const tableColumns = getColumns({
       t,
       isNoData,
@@ -143,12 +140,10 @@ class Ledgers extends PureComponent {
             tableColumns={tableColumns}
             numRows={isLoading ? 5 : tableColumns.length}
           />
-          {showPagination && (
           <Pagination
             target={TYPE}
             loading={pageLoading}
           />
-          )}
         </div>
       )
     }
