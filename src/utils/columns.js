@@ -220,6 +220,12 @@ export const getCellState = (isLoading, isNoData) => {
   return null
 }
 
+export const getRowsNumber = (isLoading, isNoData, entries) => {
+  if (isLoading) return 5
+  if (isNoData) return 1
+  return entries.length
+}
+
 export const getFrameworkPositionsColumns = (props) => {
   const {
     filteredData,
