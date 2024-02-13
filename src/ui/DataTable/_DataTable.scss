@@ -53,6 +53,10 @@
       color: var(--tableAmountFractionNegColor);
     }
   }
+
+  .cell-no-data {
+    color: var(--color2);
+  }
 }
 
 .bp3-table {
