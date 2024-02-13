@@ -208,9 +208,11 @@ const CellLoader = (
 
 const CellNoData = (
   <Cell>
-    <span className='cell-no-data'>
-      --
-    </span>
+    <>
+      <span className='cell-no-data'>
+        --
+      </span>
+    </>
   </Cell>
 )
 
@@ -218,12 +220,6 @@ export const getCellState = (isLoading, isNoData) => {
   if (isLoading) return CellLoader
   if (isNoData) return CellNoData
   return null
-}
-
-export const getRowsNumber = (isLoading, isNoData, entries) => {
-  if (isLoading) return 5
-  if (isNoData) return 1
-  return entries.length
 }
 
 export const getFrameworkPositionsColumns = (props) => {
