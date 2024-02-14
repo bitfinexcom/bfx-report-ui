@@ -174,7 +174,7 @@ class DataTable extends PureComponent {
     const columnWidths = tableColumns.map(column => column.width)
 
     if (isNoData && !isLoading) {
-      tableColumns[0].renderer = () => getCellNoData('No Data')
+      tableColumns[0].renderer = () => getCellNoData(t('column.noResults'))
     }
 
     if (device === DEVICES.PHONE && tableColumns.length >= 2) {
