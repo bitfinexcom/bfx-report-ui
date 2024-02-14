@@ -165,6 +165,7 @@ class DataTable extends PureComponent {
       device,
       numRows,
       isNoData,
+      isLoading,
       className,
       tableScroll,
       tableColumns,
@@ -172,7 +173,7 @@ class DataTable extends PureComponent {
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
 
-    if (isNoData) {
+    if (isNoData && !isLoading) {
       tableColumns[0].renderer = () => getCellNoData('No Data')
     }
 
@@ -229,11 +230,13 @@ DataTable.propTypes = {
   tableScroll: PropTypes.bool.isRequired,
   defaultRowHeight: PropTypes.number,
   isNoData: PropTypes.bool,
+  isLoading: PropTypes.bool,
 }
 
 DataTable.defaultProps = {
   className: '',
   isNoData: false,
+  isLoading: false,
   section: undefined,
   defaultRowHeight: 26,
 }
