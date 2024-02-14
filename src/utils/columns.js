@@ -210,7 +210,7 @@ export const getCellNoData = (title = '--') => (
   <Cell>
     <>
       <span className='cell-no-data'>
-        { title }
+        {title}
       </span>
     </>
   </Cell>
