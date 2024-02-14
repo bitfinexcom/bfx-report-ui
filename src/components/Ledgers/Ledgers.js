@@ -98,7 +98,7 @@ class Ledgers extends PureComponent {
       columns,
       columnsWidth,
       dataReceived,
-      entries,
+      // entries,
       existingCoins,
       getFullTime,
       pageLoading,
@@ -108,8 +108,9 @@ class Ledgers extends PureComponent {
       targetCategory,
       timeOffset,
     } = this.props
-    // const entries = {}
-    const isNoData = isEmpty(entries)
+    const entries = {}
+    // const isNoData = isEmpty(entries)
+    const isNoData = true
     const isLoading = !dataReceived && pageLoading
     const tableColumns = getColumns({
       t,
@@ -120,7 +121,6 @@ class Ledgers extends PureComponent {
       columnsWidth,
       filteredData: entries,
     }).filter(({ id }) => columns[id])
-    const firstVisibleColumn = tableColumns[0]?.id
 
     let showContent
     if (isNoData) {
@@ -128,9 +128,10 @@ class Ledgers extends PureComponent {
         <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
-            numRows={isLoading ? 5 : 1}
+            isNoData={isNoData}
+            isLoading={isLoading}
             tableColumns={tableColumns}
-            firstColumn={firstVisibleColumn}
+            numRows={isLoading ? 5 : 1}
           />
         </div>
       )
