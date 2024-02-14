@@ -95,22 +95,20 @@ class Ledgers extends PureComponent {
 
   render() {
     const {
+      t,
       columns,
-      columnsWidth,
-      dataReceived,
-      // entries,
-      existingCoins,
+      entries,
+      refresh,
+      timeOffset,
       getFullTime,
       pageLoading,
-      refresh,
-      t,
+      dataReceived,
+      columnsWidth,
       targetSymbols,
+      existingCoins,
       targetCategory,
-      timeOffset,
     } = this.props
-    const entries = {}
-    // const isNoData = isEmpty(entries)
-    const isNoData = true
+    const isNoData = isEmpty(entries)
     const isLoading = !dataReceived && pageLoading
     const tableColumns = getColumns({
       t,
