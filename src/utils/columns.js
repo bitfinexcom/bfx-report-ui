@@ -206,11 +206,11 @@ const CellLoader = (
   </Cell>
 )
 
-const CellNoData = (
+export const getCellNoData = (title = '--') => (
   <Cell>
     <>
       <span className='cell-no-data'>
-        --
+        { title }
       </span>
     </>
   </Cell>
@@ -218,7 +218,7 @@ const CellNoData = (
 
 export const getCellState = (isLoading, isNoData) => {
   if (isLoading) return CellLoader
-  if (isNoData) return CellNoData
+  if (isNoData) return getCellNoData()
   return null
 }
 
