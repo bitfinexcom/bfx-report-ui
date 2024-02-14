@@ -11,6 +11,7 @@ import _keys from 'lodash/keys'
 import _isNull from 'lodash/isNull'
 
 import {
+  getCellNoData,
   singleColumnSelectedCheck,
   columnHasNumericValueCheck,
 } from 'utils/columns'
@@ -163,12 +164,17 @@ class DataTable extends PureComponent {
       t,
       device,
       numRows,
+      isNoData,
       className,
       tableScroll,
       tableColumns,
       defaultRowHeight,
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
+
+    if (isNoData) {
+      tableColumns[0].renderer = () => getCellNoData('No Data')
+    }
 
     if (device === DEVICES.PHONE && tableColumns.length >= 2) {
       return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
@@ -222,10 +228,12 @@ DataTable.propTypes = {
   showColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
   defaultRowHeight: PropTypes.number,
+  isNoData: PropTypes.bool,
 }
 
 DataTable.defaultProps = {
   className: '',
+  isNoData: false,
   section: undefined,
   defaultRowHeight: 26,
 }
