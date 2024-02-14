@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import { formatDate } from 'state/utils'
 import { fetchData, refresh } from 'state/summaryByAsset/actions'
@@ -17,8 +16,8 @@ import {
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
 import { getTimezone } from 'state/base/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
 import { getTimeRange, getTimeFrame } from 'state/timeRange/selectors'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import SummaryFilters from './AppSummary.filters'
 import { getAssetColumns } from './AppSummary.columns'
@@ -32,11 +31,13 @@ const AppSummaryByAsset = () => {
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const total = useSelector(getSummaryByAssetTotal)
+  const isFirstSync = useSelector(getIsFirstSyncing)
   const entries = useSelector(getSummaryByAssetEntries)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const { start, end } = useSelector(getTimeFrame)
   const minimumBalance = useSelector(getMinimumBalance)
   const useMinimumBalance = useSelector(getUseMinBalance)
+  const isLoading = isFirstSync || (!dataReceived && pageLoading)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -54,22 +55,20 @@ const AppSummaryByAsset = () => {
   )
 
   const columns = useMemo(
-    () => getAssetColumns({ preparedData, t }),
-    [preparedData, t],
+    () => getAssetColumns({ preparedData, t, isLoading }),
+    [preparedData, t, isLoading],
   )
 
   let showContent
-  if (!dataReceived && pageLoading) {
-    showContent = <Loading />
-  } else if (isEmpty(entries)) {
+  if (dataReceived && isEmpty(entries)) {
     showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
       <DataTable
         defaultRowHeight={73}
         tableColumns={columns}
-        numRows={preparedData.length}
         className='summary-by-asset-table'
+        numRows={isLoading ? 3 : preparedData.length}
       />
     )
   }

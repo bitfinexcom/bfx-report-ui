@@ -23,6 +23,7 @@ export const getStatusMessagesConf = state => getSyncConf(state).statusMessagesC
 export const getIsSyncRequired = state => getSync(state)?.isSyncRequired ?? false
 export const getIsInitSyncPopupOpen = state => getSync(state)?.showInitSyncPopup ?? false
 export const getIsLongSync = state => getSync(state)?.isLongSync ?? false
+export const getIsFirstSyncing = state => (getIsSyncRequired(state) && getIsSyncing(state)) ?? false
 
 export default {
   getSyncMode,
@@ -43,4 +44,5 @@ export default {
   getIsSyncRequired,
   getIsInitSyncPopupOpen,
   getIsLongSync,
+  getIsFirstSyncing,
 }

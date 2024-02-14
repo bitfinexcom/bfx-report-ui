@@ -1,5 +1,8 @@
 import React from 'react'
-import { fixedFloat, formatThousands } from 'ui/utils'
+import { Cell } from '@blueprintjs/table'
+
+import LoadingPlaceholder from 'ui/LoadingPlaceholder'
+import { fixedFloat, formatFee, formatThousands } from 'ui/utils'
 
 export const prepareSummaryByAssetData = (entries, total, t, minimumBalance, useMinimumBalance) => {
   const mergedEntries = [...entries, { currency: t('summary.by_asset.total'), ...total }]
@@ -8,7 +11,6 @@ export const prepareSummaryByAssetData = (entries, total, t, minimumBalance, use
   }
   return mergedEntries
 }
-
 
 export const prepareNumericValue = (value) => {
   let val = +fixedFloat(value, 2)
@@ -42,3 +44,19 @@ export const shouldShowPercentCheck = (balance, balanceChange) => {
 export const getIsTotal = (currency, t) => currency === t('summary.by_asset.total')
 
 export const getFeeTierVolume = (data) => data?.trade_vol_30d?.at(-1)?.vol_safe ?? 0
+
+export const getFeePercentCell = (isLoading, value) => (
+  <Cell>
+    {isLoading ? (
+      <LoadingPlaceholder
+        height={18}
+        baseWidth={60}
+      />
+    ) : (
+      <div className='cell-value'>
+        {formatFee(value)}
+        %
+      </div>
+    )}
+  </Cell>
+)

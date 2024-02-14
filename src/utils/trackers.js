@@ -8,14 +8,15 @@ import {
 import { canUseAnalyticalCookies } from './cookieBanner'
 
 const { showFrameworkMode } = config
+const { REACT_APP_ENV } = process.env
 
 const loadAnalytics = () => {
   loadGoogleTag()
 
   if (!showFrameworkMode) {
     canUseAnalyticalCookies()
-      .then((accepted) => initGoogleTag({ accepted }))
-  } else initGoogleTag() // No need for waiting cookies confirmation in the app
+      .then((accepted) => initGoogleTag({ env: REACT_APP_ENV, accepted }))
+  } else initGoogleTag({ env: REACT_APP_ENV }) // No need for waiting cookies confirmation in the app
 }
 
 const createTracker = () => {

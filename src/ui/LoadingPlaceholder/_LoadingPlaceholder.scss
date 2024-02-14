@@ -1,0 +1,29 @@
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.loading-placeholder {
+  border-radius: 4px;
+  background: linear-gradient(
+    to right, 
+    rgba(42, 63, 77, 0.4) 10%,
+    rgba(255, 255, 255, 0.2) 30%,
+    rgba(42, 63, 77, 0.8) 60%);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+.strong {
+  background: linear-gradient(
+    to right, 
+    rgba(51, 74, 89, 0.5) 10%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(51, 74, 89, 1) 100%);
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite linear;
+}

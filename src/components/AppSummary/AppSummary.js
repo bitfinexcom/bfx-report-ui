@@ -26,6 +26,7 @@ const AppSummary = ({
   fetchData,
   setParams,
   pageLoading,
+  isFirstSync,
   dataReceived,
   isTurkishSite,
   isSyncRequired,
@@ -108,6 +109,7 @@ const AppSummary = ({
             t={t}
             data={data}
             pageLoading={pageLoading}
+            isFirstSync={isFirstSync}
             dataReceived={dataReceived}
             isTurkishSite={isTurkishSite}
           />
@@ -132,6 +134,7 @@ AppSummary.propTypes = {
   dataReceived: PropTypes.bool.isRequired,
   fetchData: PropTypes.func.isRequired,
   isTurkishSite: PropTypes.bool.isRequired,
+  isFirstSync: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   refreshBalance: PropTypes.func.isRequired,
