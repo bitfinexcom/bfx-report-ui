@@ -5,8 +5,8 @@ import _sortBy from 'lodash/sortBy'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
+import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import {
   parseChartData,
   getFormattedChartLastValue,
@@ -19,8 +19,8 @@ import {
   getCurrentTimeFrame,
 } from 'state/accountBalance/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
 import { fetchBalance } from 'state/accountBalance/actions'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 const AccountSummaryValue = () => {
   const { t } = useTranslation()
@@ -29,8 +29,10 @@ const AccountSummaryValue = () => {
   const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
+  const isFirstSync = useSelector(getIsFirstSyncing)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const currTimeFrame = useSelector(getCurrentTimeFrame)
+  const isLoading = isFirstSync || (!dataReceived && pageLoading)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -56,22 +58,35 @@ const AccountSummaryValue = () => {
   )
 
   let showContent
-  if (!dataReceived && pageLoading) {
-    showContent = <Loading />
-  } else if (isEmpty(entries)) {
+  if (dataReceived && isEmpty(entries)) {
     showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
       <div className='chart-wrapper'>
-        <div className='chart-value'>
-          $
-          {chartLastValue}
-        </div>
-        <div className='chart-value-perc'>
-          {formattedPercValue}
-        </div>
+        {isLoading ? (
+          <LoadingPlaceholder
+            isStrong
+            height={22}
+            baseWidth={72}
+          />
+        ) : (
+          <div className='chart-value'>
+            $
+            {chartLastValue}
+          </div>
+        )}
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={22}
+            baseWidth={36}
+          />
+        ) : (
+          <div className='chart-value-perc'>
+            { formattedPercValue }
+          </div>
+        )}
         <Chart
-          aspect={1.455}
+          aspect={1.5}
           data={chartData}
           showLegend={false}
           dataKeys={presentCurrencies}

@@ -80,19 +80,29 @@
   
             & > div {
               display: table-cell;
-              min-height: 24px;
-              padding: 16px 8px;
+              height: 50px;
+              font-size: 14px;
+              padding: 15px 8px;
               vertical-align: middle;
               border-bottom: 1px solid var(--tableBorder);
-      
+
               &:first-child {
                 width: 50%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
               }
       
               &:last-child {
-                padding: 4px 5px;
+                display: flex;
                 text-align: end;
                 word-break: break-word;
+                justify-content: flex-end;
+              }
+
+              .cell-value {
+                display: flex;
+                align-items: center;
               }
 
               .cell-description {
@@ -353,14 +363,14 @@
 
     .chart-value {
       position: absolute;
-      top: 23px;
+      top: 28px;
       left: 15px;
       z-index: 1;
     }
 
     .chart-value-perc {
       position: absolute;
-      top: 42px;
+      top: 50px;
       left: 15px;
       z-index: 1;
 
@@ -370,6 +380,18 @@
 
       .green-text {
         color: var(--tableAmountFractionPosColor);;
+      }
+    }
+
+    .loading-placeholder {
+      position: absolute;
+      top: 50px;
+      left: 15px;
+      z-index: 1;
+
+      &.strong {
+        top: 23px;
+        left: 15px;
       }
     }
   }

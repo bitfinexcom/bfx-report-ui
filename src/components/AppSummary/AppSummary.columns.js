@@ -1,18 +1,21 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { formatFee, fixedFloat } from 'ui/utils'
+import { fixedFloat } from 'ui/utils'
 import { getTooltipContent } from 'utils/columns'
+import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 
 import {
   getIsTotal,
   formatUsdValue,
+  getFeePercentCell,
   formatPercentValue,
   formatUsdValueChange,
 } from './AppSummary.helpers'
 
 export const getFeesColumns = ({
   makerFee,
+  isLoading,
   feeTierVolume,
   isTurkishSite,
   derivTakerFee,
@@ -27,8 +30,17 @@ export const getFeesColumns = ({
     width: 100,
     renderer: () => (
       <Cell>
-        $
-        {formatUsdValue(feeTierVolume)}
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
+        ) : (
+          <div className='cell-value'>
+            $
+            {formatUsdValue(feeTierVolume)}
+          </div>
+        )}
       </Cell>
     ),
   },
@@ -37,10 +49,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.maker',
     width: 100,
     renderer: () => (
-      <Cell>
-        {formatFee(makerFee)}
-        %
-      </Cell>
+      getFeePercentCell(isLoading, makerFee)
     ),
   },
   {
@@ -48,10 +57,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.taker_crypto',
     width: 140,
     renderer: () => (
-      <Cell>
-        {formatFee(takerFeeToCrypto)}
-        %
-      </Cell>
+      getFeePercentCell(isLoading, takerFeeToCrypto)
     ),
   },
   {
@@ -59,10 +65,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.taker_fiat',
     width: 140,
     renderer: () => (
-      <Cell>
-        {formatFee(takerFeeToFiat)}
-        %
-      </Cell>
+      getFeePercentCell(isLoading, takerFeeToFiat)
     ),
   },
   {
@@ -70,10 +73,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.taker_stables',
     width: 140,
     renderer: () => (
-      <Cell>
-        {formatFee(takerFeeToStable)}
-        %
-      </Cell>
+      getFeePercentCell(isLoading, takerFeeToStable)
     ),
   },
   ...(!isTurkishSite ? [{
@@ -81,10 +81,7 @@ export const getFeesColumns = ({
     name: 'summary.fees.deriv_maker',
     width: 140,
     renderer: () => (
-      <Cell>
-        {formatFee(derivMakerRebate)}
-        %
-      </Cell>
+      getFeePercentCell(isLoading, derivMakerRebate)
     ),
   },
   {
@@ -92,16 +89,14 @@ export const getFeesColumns = ({
     name: 'summary.fees.deriv_taker',
     width: 140,
     renderer: () => (
-      <Cell>
-        {formatFee(derivTakerFee)}
-        %
-      </Cell>
+      getFeePercentCell(isLoading, derivTakerFee)
     ),
   }] : []),
 ]
 
 export const getAssetColumns = ({
   t,
+  isLoading,
   preparedData,
 }) => [
   {
@@ -110,6 +105,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.currency',
     width: 110,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       return (
@@ -141,6 +146,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.balance',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { currency, balance = null, balanceUsd = null } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? balanceUsd : balance
@@ -175,6 +190,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.balance_change',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const {
         currency, balanceChange, balanceChangeUsd, balanceChangePerc,
       } = preparedData[rowIndex]
@@ -213,6 +238,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.volume',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { currency, volume, volumeUsd } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? volumeUsd : volume
@@ -247,6 +282,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.trading_fees',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { tradingFees, tradingFeesUsd, currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? tradingFeesUsd : tradingFees
@@ -276,6 +321,16 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.fund_earnings',
     width: 178,
     renderer: (rowIndex) => {
+      if (isLoading) {
+        return (
+          <Cell>
+            <LoadingPlaceholder
+              height={22}
+              baseWidth={80}
+            />
+          </Cell>
+        )
+      }
       const { marginFundingPayment, currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? '' : marginFundingPayment

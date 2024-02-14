@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import CollapsedTable from 'ui/CollapsedTable'
 
 import { getFeesColumns } from './AppSummary.columns'
@@ -13,6 +12,7 @@ const AppSummaryFees = ({
   t,
   data,
   pageLoading,
+  isFirstSync,
   dataReceived,
   isTurkishSite,
 }) => {
@@ -24,6 +24,7 @@ const AppSummaryFees = ({
     takerFeeToCrypto = 0,
     derivMakerRebate = 0,
   } = data
+  const isLoading = isFirstSync || (!dataReceived && pageLoading)
 
   const feeTierVolume = useMemo(
     () => getFeeTierVolume(data),
@@ -32,6 +33,7 @@ const AppSummaryFees = ({
 
   const columns = getFeesColumns({
     makerFee,
+    isLoading,
     feeTierVolume,
     isTurkishSite,
     derivTakerFee,
@@ -42,9 +44,7 @@ const AppSummaryFees = ({
   })
 
   let showContent
-  if (!dataReceived && pageLoading) {
-    showContent = <Loading />
-  } else if (isEmpty(data)) {
+  if (dataReceived && isEmpty(data)) {
     showContent = <NoData title='summary.no_data' />
   } else {
     showContent = (
@@ -78,9 +78,10 @@ AppSummaryFees.propTypes = {
     takerFeeToStable: PropTypes.number,
   }).isRequired,
   t: PropTypes.func.isRequired,
-  isTurkishSite: PropTypes.bool.isRequired,
+  isFirstSync: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   dataReceived: PropTypes.bool.isRequired,
+  isTurkishSite: PropTypes.bool.isRequired,
 }
 
 export default memo(AppSummaryFees)

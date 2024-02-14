@@ -9,10 +9,11 @@ import _isNaN from 'lodash/isNaN'
 import _reduce from 'lodash/reduce'
 import _values from 'lodash/values'
 import _findIndex from 'lodash/findIndex'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import timeframeConstants from 'ui/TimeFrameSelector/constants'
 
-import { CURRENCY_USD } from './constants'
+import { CURRENCY_USD, DEFAULT_CHART_DATA } from './constants'
 
 const formatValue = val => val && +val.toFixed(2)
 
@@ -38,14 +39,19 @@ const formatTimestamp = (timestamp, timeframe) => {
 }
 
 export const parseChartData = ({ data, timeframe }) => {
-  const chartData = data.map((entry) => {
-    const { mts } = entry
+  let chartData
+  if (isEmpty(data)) {
+    chartData = DEFAULT_CHART_DATA
+  } else {
+    chartData = data.map((entry) => {
+      const { mts } = entry
 
-    return {
-      name: formatTimestamp(mts, timeframe),
-      [CURRENCY_USD]: formatValue(entry[CURRENCY_USD]),
-    }
-  })
+      return {
+        name: formatTimestamp(mts, timeframe),
+        [CURRENCY_USD]: formatValue(entry[CURRENCY_USD]),
+      }
+    })
+  }
 
   return {
     chartData,
