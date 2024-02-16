@@ -78,7 +78,7 @@ class Trades extends PureComponent {
           <DataTable
             section={TYPE}
             tableColumns={tableColumns}
-            numRows={isLoading ? 5 : tableColumns.length}
+            numRows={isLoading ? 5 : entries.length}
           />
           <Pagination
             target={TYPE}
