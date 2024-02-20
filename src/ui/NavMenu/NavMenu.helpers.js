@@ -7,7 +7,6 @@ import {
   ANALYSIS_STAT_TARGETS,
   FUNDING_TARGETS,
   EARNINGS_TARGETS,
-  WALLETS_TARGETS,
 } from 'ui/SectionSwitch/SectionSwitch.helpers'
 
 import constants from './NavMenu.constants'
@@ -22,6 +21,7 @@ const {
   MENU_FPAYMENT,
   MENU_INVOICES,
   MENU_LEDGERS,
+  MENU_MOVEMENTS,
   MENU_TRADES,
   MENU_CANDLES,
   MENU_ORDERS,
@@ -70,12 +70,13 @@ export const getSections = (menuType, isTurkishSite) => {
     case MENU_MY_HISTORY:
       return [
         [MENU_LEDGERS, 'ledgers.title'],
+        [MENU_MOVEMENTS, 'movements.title'],
         [[MENU_TRADES, MENU_CANDLES], 'trades.title'],
         [[MENU_ORDERS, MENU_ORDER_TRADES], 'orders.title'],
         [[MENU_POSITIONS, MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT], 'positions.title'],
         [MENU_FOFFER, 'navItems.myHistory.funding', isTurkishSite, FUNDING_TARGETS],
         [MENU_FPAYMENT, 'navItems.myHistory.earnings', isTurkishSite, EARNINGS_TARGETS],
-        [MENU_WALLETS, 'wallets.title', false, WALLETS_TARGETS],
+        [MENU_WALLETS, 'wallets.title'],
       ]
     case MENU_MERCHANT_HISTORY:
       return [
