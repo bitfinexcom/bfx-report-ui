@@ -48,7 +48,7 @@
       "auth": "Xác thực",
       "cancel": "Huỷ",
       "sixDigits": "6 chữ số",
-      "GAToken": "Token Google Authenticator 2FA",
+      "GAToken": "Mã xác thực hai yếu tố 2FA của Google",
       "invalidToken": "Token không hợp lệ, vui lòng thử lại",
       "loginSessionExpired": "Phiên đăng nhập của bạn đã hết hạn, vui lòng thử lại"
     },
