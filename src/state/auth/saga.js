@@ -177,6 +177,7 @@ function* signUpEmail({ payload }) {
 
 function* signUpOtp({ payload }) {
   try {
+    yield put(actions.disableAuthBtn(true))
     const { otp, password, isNotProtected } = payload
     const loginToken = yield select(getLoginToken)
     const params = {
@@ -193,16 +194,19 @@ function* signUpOtp({ payload }) {
         password,
         isNotProtected,
       }
+      yield put(actions.disableAuthBtn(false))
       yield put(actions.signUp(authParams))
     }
 
     if (error) {
+      yield put(actions.disableAuthBtn(false))
       yield put(updateErrorStatus({
         id: 'auth.2FA.invalidToken',
       }))
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
+    yield put(actions.disableAuthBtn(false))
   }
 }
 
