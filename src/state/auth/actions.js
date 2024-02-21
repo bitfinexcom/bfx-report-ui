@@ -217,6 +217,13 @@ export function syncAfterUpdate(payload) {
   }
 }
 
+export function disableAuthBtn(payload) {
+  return {
+    type: types.DISABLE_AUTH_BUTTON,
+    payload,
+  }
+}
+
 export default {
   checkAuth,
   addUser,
@@ -243,4 +250,5 @@ export default {
   signInOtp,
   deleteAccount,
   syncAfterUpdate,
+  disableAuthBtn,
 }
