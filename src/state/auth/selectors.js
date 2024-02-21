@@ -22,6 +22,7 @@ export const getIsSubAccsAvailable = state => _first(
   _filter(getUsers(state), user => isEqual(user?.email, getEmail(state))),
 )?.isApiKeysAuth ?? true
 export const getLocalUsername = state => getAuth(state)?.localUsername ?? null
+export const getIsAuthBtnDisabled = state => getAuth(state)?.isAuthBtnDisabled ?? false
 
 export const getAuthData = state => {
   const {
@@ -108,4 +109,5 @@ export default {
   getIsSubAccsAvailable,
   getLocalUsername,
   getShouldNotSyncOnStartupAfterUpdate,
+  getIsAuthBtnDisabled,
 }
