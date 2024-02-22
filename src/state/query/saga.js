@@ -251,6 +251,7 @@ function* getOptions({ target }) {
   const isUnrealizedProfitExcluded = showFrameworkMode ? yield select(getIsUnrealizedProfitExcluded) : ''
   const isVsAccountBalanceSelected = showFrameworkMode ? yield select(getIsVsAccountBalanceSelected) : ''
   const isPdfExportRequired = yield select(getIsPdfExportRequired)
+
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
     case MENU_WIN_LOSS:
