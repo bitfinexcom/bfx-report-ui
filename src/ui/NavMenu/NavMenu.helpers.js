@@ -71,12 +71,12 @@ export const getSections = (menuType, isTurkishSite) => {
       return [
         [MENU_LEDGERS, 'ledgers.title'],
         [MENU_MOVEMENTS, 'movements.title'],
+        [MENU_WALLETS, 'wallets.title'],
+        [MENU_FPAYMENT, 'navItems.myHistory.earnings', isTurkishSite, EARNINGS_TARGETS],
         [[MENU_TRADES, MENU_CANDLES], 'trades.title'],
         [[MENU_ORDERS, MENU_ORDER_TRADES], 'orders.title'],
         [[MENU_POSITIONS, MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT], 'positions.title'],
         [MENU_FOFFER, 'navItems.myHistory.funding', isTurkishSite, FUNDING_TARGETS],
-        [MENU_FPAYMENT, 'navItems.myHistory.earnings', isTurkishSite, EARNINGS_TARGETS],
-        [MENU_WALLETS, 'wallets.title'],
       ]
     case MENU_MERCHANT_HISTORY:
       return [
