@@ -250,7 +250,7 @@ function* getOptions({ target }) {
   const isVSPrevDayBalance = showFrameworkMode ? yield select(getIsVSPrevDayBalance) : ''
   const isUnrealizedProfitExcluded = showFrameworkMode ? yield select(getIsUnrealizedProfitExcluded) : ''
   const isVsAccountBalanceSelected = showFrameworkMode ? yield select(getIsVsAccountBalanceSelected) : ''
-  const isPdfExportRequired = showFrameworkMode ? yield select(getIsPdfExportRequired) : false
+  const isPdfExportRequired = yield select(getIsPdfExportRequired)
 
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
