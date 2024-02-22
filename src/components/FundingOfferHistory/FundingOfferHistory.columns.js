@@ -2,10 +2,12 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
+  isNoData,
+  isLoading,
   timeOffset,
   getFullTime,
   filteredData,
@@ -17,6 +19,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { id } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(id, t)}>
@@ -32,6 +37,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('symbol', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { symbol } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(symbol, t)}>
@@ -46,6 +54,9 @@ export const getColumns = ({
     name: 'column.amount',
     width: getColumnWidth('amountOrig', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { amountOrig } = filteredData[rowIndex]
       const fixedAmount = fixedFloat(amountOrig)
       return (
@@ -65,6 +76,9 @@ export const getColumns = ({
     name: 'column.amount-exe',
     width: getColumnWidth('amountExecuted', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { amountExecuted } = filteredData[rowIndex]
       return (
         <Cell
@@ -84,6 +98,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('type', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { type } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(type, t)}>
@@ -99,6 +116,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { status } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(status, t)}>
@@ -113,6 +133,9 @@ export const getColumns = ({
     name: 'column.rateperc',
     width: getColumnWidth('rate', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { rate } = filteredData[rowIndex]
       const fixedRate = fixedFloat(rate)
       return (
@@ -133,6 +156,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('period', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const period = `${filteredData[rowIndex].period} ${t('column.days')}`
       return (
         <Cell
@@ -154,6 +180,9 @@ export const getColumns = ({
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mtsUpdate', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
