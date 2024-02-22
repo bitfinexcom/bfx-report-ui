@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
@@ -93,7 +91,7 @@ class AffiliatesEarnings extends PureComponent {
       existingCoins,
       targetSymbols,
     } = this.props
-    const isNoData = isEmpty([])
+    const isNoData = isEmpty(entries)
     const isLoading = !dataReceived && pageLoading
     const tableColumns = getColumns({
       t,
