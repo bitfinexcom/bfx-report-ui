@@ -15,8 +15,6 @@ import ColumnsFilter from 'ui/ColumnsFilter'
 import Pagination from 'ui/Pagination'
 import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
 import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
-import NoData from 'ui/NoData'
 import SymbolSelector from 'ui/SymbolSelector'
 import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
@@ -48,32 +46,43 @@ class PublicFunding extends PureComponent {
 
   render() {
     const {
-      columns,
-      columnsWidth,
-      getFullTime,
-      entries,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
-      targetSymbol,
+      columns,
+      entries,
+      refresh,
       timeOffset,
+      getFullTime,
+      pageLoading,
+      dataReceived,
+      targetSymbol,
+      columnsWidth,
     } = this.props
-
+    const isNoData = isEmpty(entries)
+    const isLoading = !dataReceived && pageLoading
     const tableColumns = getColumns({
+      t,
+      isNoData,
+      isLoading,
+      timeOffset,
+      getFullTime,
+      targetSymbol,
       columnsWidth,
       filteredData: entries,
-      getFullTime,
-      t,
-      targetSymbol,
-      timeOffset,
     }).filter(({ id }) => columns[id])
 
     let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
+    if (isNoData) {
+      showContent = (
+        <div className='data-table-wrapper'>
+          <DataTable
+            section={TYPE}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            tableColumns={tableColumns}
+            numRows={isLoading ? 5 : 1}
+          />
+        </div>
+      )
     } else {
       showContent = (
         <div className='data-table-wrapper'>
