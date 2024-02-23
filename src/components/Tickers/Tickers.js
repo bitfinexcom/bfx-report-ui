@@ -18,8 +18,6 @@ import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
-import NoData from 'ui/NoData'
 import queryConstants from 'state/query/constants'
 import {
   checkInit,
