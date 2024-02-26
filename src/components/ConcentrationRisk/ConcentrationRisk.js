@@ -12,8 +12,6 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import DateInput from 'ui/DateInput'
 import QueryButton from 'ui/QueryButton'
@@ -125,33 +123,42 @@ class ConcentrationRisk extends PureComponent {
 
   render() {
     const {
-      currentTime,
-      entries,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      entries,
+      refresh,
+      pageLoading,
+      currentTime,
+      dataReceived,
     } = this.props
+    const isNoData = isEmpty(entries)
+    const isLoading = !dataReceived && pageLoading
     const { timestamp } = this.state
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
 
     const filteredData = entries.filter(entry => entry.balanceUsd)
 
     const { tableData, chartData } = this.parseData(filteredData)
-    const numRows = tableData.length
-    const tableColumns = getColumns({ data: tableData })
+    const tableColumns = getColumns({ data: tableData, isNoData, isLoading })
 
     let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
+    if (isNoData) {
+      showContent = (
+        <div className='data-table-wrapper'>
+          <DataTable
+            section={TYPE}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            tableColumns={tableColumns}
+            numRows={isLoading ? 5 : 1}
+          />
+        </div>
+      )
     } else {
       showContent = (
         <div className='concentration-risk-data'>
           <DataTable
-            numRows={numRows}
             tableColumns={tableColumns}
+            numRows={isLoading ? 5 : tableData.length}
           />
           <div className='concentration-risk-data-chart'>
             <PieChart data={chartData} />
