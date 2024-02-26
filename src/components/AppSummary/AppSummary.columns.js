@@ -2,8 +2,8 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { fixedFloat } from 'ui/utils'
-import { getTooltipContent } from 'utils/columns'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
+import { getCellLoader, getCellNoData, getTooltipContent } from 'utils/columns'
 
 import {
   getIsTotal,
@@ -96,6 +96,7 @@ export const getFeesColumns = ({
 
 export const getAssetColumns = ({
   t,
+  isNoData,
   isLoading,
   preparedData,
 }) => [
@@ -105,16 +106,8 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.currency',
     width: 110,
     renderer: (rowIndex) => {
-      if (isLoading) {
-        return (
-          <Cell>
-            <LoadingPlaceholder
-              height={22}
-              baseWidth={80}
-            />
-          </Cell>
-        )
-      }
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData(t('column.noResults'))
       const { currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       return (
@@ -146,16 +139,8 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.balance',
     width: 178,
     renderer: (rowIndex) => {
-      if (isLoading) {
-        return (
-          <Cell>
-            <LoadingPlaceholder
-              height={22}
-              baseWidth={80}
-            />
-          </Cell>
-        )
-      }
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const { currency, balance = null, balanceUsd = null } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? balanceUsd : balance
@@ -190,16 +175,8 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.balance_change',
     width: 178,
     renderer: (rowIndex) => {
-      if (isLoading) {
-        return (
-          <Cell>
-            <LoadingPlaceholder
-              height={22}
-              baseWidth={80}
-            />
-          </Cell>
-        )
-      }
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const {
         currency, balanceChange, balanceChangeUsd, balanceChangePerc,
       } = preparedData[rowIndex]
@@ -238,16 +215,8 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.volume',
     width: 178,
     renderer: (rowIndex) => {
-      if (isLoading) {
-        return (
-          <Cell>
-            <LoadingPlaceholder
-              height={22}
-              baseWidth={80}
-            />
-          </Cell>
-        )
-      }
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const { currency, volume, volumeUsd } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? volumeUsd : volume
@@ -282,16 +251,8 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.trading_fees',
     width: 178,
     renderer: (rowIndex) => {
-      if (isLoading) {
-        return (
-          <Cell>
-            <LoadingPlaceholder
-              height={22}
-              baseWidth={80}
-            />
-          </Cell>
-        )
-      }
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const { tradingFees, tradingFeesUsd, currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? tradingFeesUsd : tradingFees
@@ -321,16 +282,8 @@ export const getAssetColumns = ({
     name: 'summary.by_asset.fund_earnings',
     width: 178,
     renderer: (rowIndex) => {
-      if (isLoading) {
-        return (
-          <Cell>
-            <LoadingPlaceholder
-              height={22}
-              baseWidth={80}
-            />
-          </Cell>
-        )
-      }
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const { marginFundingPayment, currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
       const tooltipContent = isTotal ? '' : marginFundingPayment
