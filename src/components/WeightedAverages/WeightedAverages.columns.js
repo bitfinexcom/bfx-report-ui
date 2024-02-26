@@ -2,10 +2,12 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
+  isNoData,
+  isLoading,
   getFullTime,
   filteredData,
   columnsWidth,
@@ -16,6 +18,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('pair', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { pair } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(pair, t)}>
@@ -30,6 +35,9 @@ export const getColumns = ({
     name: 'column.buyingWeightedPrice',
     width: getColumnWidth('buyingWeightedPrice', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { buyingWeightedPrice } = filteredData[rowIndex]
       const fixedPrice = fixedFloat(buyingWeightedPrice)
       return (
@@ -49,6 +57,9 @@ export const getColumns = ({
     name: 'column.buyingAmount',
     width: getColumnWidth('buyingAmount', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { buyingAmount } = filteredData[rowIndex]
       const tooltip = fixedFloat(buyingAmount)
       return (
@@ -68,6 +79,9 @@ export const getColumns = ({
     name: 'column.cost',
     width: getColumnWidth('cost', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { cost } = filteredData[rowIndex]
       const tooltip = fixedFloat(cost)
       return (
@@ -87,6 +101,9 @@ export const getColumns = ({
     name: 'column.sellingWeightedPrice',
     width: getColumnWidth('sellingWeightedPrice', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { sellingWeightedPrice } = filteredData[rowIndex]
       const fixedPrice = fixedFloat(sellingWeightedPrice)
       return (
@@ -106,6 +123,9 @@ export const getColumns = ({
     name: 'column.sellingAmount',
     width: getColumnWidth('sellingAmount', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { sellingAmount } = filteredData[rowIndex]
       const tooltip = fixedFloat(sellingAmount)
       return (
@@ -125,6 +145,9 @@ export const getColumns = ({
     name: 'column.sale',
     width: getColumnWidth('sale', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { sale } = filteredData[rowIndex]
       const tooltip = fixedFloat(sale)
       return (
@@ -144,6 +167,9 @@ export const getColumns = ({
     name: 'column.cumulativeAmount',
     width: getColumnWidth('cumulativeAmount', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { cumulativeAmount } = filteredData[rowIndex]
       const tooltip = fixedFloat(cumulativeAmount)
       return (
@@ -163,6 +189,9 @@ export const getColumns = ({
     name: 'column.firstTrade',
     width: getColumnWidth('firstTradeMts', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const timestamp = getFullTime(filteredData[rowIndex].firstTradeMts)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -177,6 +206,9 @@ export const getColumns = ({
     name: 'column.lastTrade',
     width: getColumnWidth('lastTradeMts', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const timestamp = getFullTime(filteredData[rowIndex].lastTradeMts)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
