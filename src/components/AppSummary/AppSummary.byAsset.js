@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import classNames from 'classnames'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
@@ -38,6 +39,9 @@ const AppSummaryByAsset = () => {
   const useMinimumBalance = useSelector(getUseMinBalance)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   const isNoData = dataReceived && isEmpty(entries)
+  const tableClasses = classNames('summary-by-asset-table', {
+    'empty-table': isNoData,
+  })
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -78,7 +82,7 @@ const AppSummaryByAsset = () => {
       <DataTable
         defaultRowHeight={73}
         tableColumns={columns}
-        className='summary-by-asset-table'
+        className={tableClasses}
         numRows={isLoading ? 3 : preparedData.length}
       />
     </div>
