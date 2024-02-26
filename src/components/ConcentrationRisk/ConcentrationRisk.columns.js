@@ -2,14 +2,22 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { fixedFloat } from 'ui/utils'
+import { getCellState } from 'utils/columns'
 
-export const getColumns = ({ data }) => [
+export const getColumns = ({
+  data,
+  isNoData,
+  isLoading,
+}) => [
   {
     id: 'currency',
     name: 'column.currency',
     className: 'align-left',
     width: 100,
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { currency } = data[rowIndex]
       return (
         <Cell tooltip={currency}>
@@ -24,6 +32,9 @@ export const getColumns = ({ data }) => [
     name: 'column.balanceUsd',
     width: 150,
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { balanceUsd } = data[rowIndex]
       const fixedBalanceUsd = fixedFloat(balanceUsd)
       return (
@@ -42,6 +53,9 @@ export const getColumns = ({ data }) => [
     name: 'column.percent',
     width: 150,
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { percent } = data[rowIndex]
       const fixedPercent = fixedFloat(percent)
       return (
