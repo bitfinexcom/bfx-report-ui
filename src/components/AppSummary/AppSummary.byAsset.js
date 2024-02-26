@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
-import NoData from 'ui/NoData'
 import DataTable from 'ui/DataTable'
 import { formatDate } from 'state/utils'
 import { fetchData, refresh } from 'state/summaryByAsset/actions'
@@ -38,6 +37,7 @@ const AppSummaryByAsset = () => {
   const minimumBalance = useSelector(getMinimumBalance)
   const useMinimumBalance = useSelector(getUseMinBalance)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
+  const isNoData = dataReceived && isEmpty(entries)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -55,23 +55,11 @@ const AppSummaryByAsset = () => {
   )
 
   const columns = useMemo(
-    () => getAssetColumns({ preparedData, t, isLoading }),
-    [preparedData, t, isLoading],
+    () => getAssetColumns({
+      preparedData, t, isLoading, isNoData,
+    }),
+    [preparedData, t, isLoading, isNoData],
   )
-
-  let showContent
-  if (dataReceived && isEmpty(entries)) {
-    showContent = <NoData title='summary.no_data' />
-  } else {
-    showContent = (
-      <DataTable
-        defaultRowHeight={73}
-        tableColumns={columns}
-        className='summary-by-asset-table'
-        numRows={isLoading ? 3 : preparedData.length}
-      />
-    )
-  }
 
   return (
     <div className='app-summary-item full-width-item'>
@@ -87,7 +75,12 @@ const AppSummaryByAsset = () => {
         </div>
         <SummaryFilters />
       </div>
-      {showContent}
+      <DataTable
+        defaultRowHeight={73}
+        tableColumns={columns}
+        className='summary-by-asset-table'
+        numRows={isLoading ? 3 : preparedData.length}
+      />
     </div>
   )
 }
