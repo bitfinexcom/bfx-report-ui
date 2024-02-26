@@ -121,8 +121,8 @@ class AffiliatesEarnings extends PureComponent {
         <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
-            numRows={entries.length}
             tableColumns={tableColumns}
+            numRows={isLoading ? 5 : entries.length}
           />
           <Pagination
             target={TYPE}
