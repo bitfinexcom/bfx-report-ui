@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
-import _size from 'lodash/size'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import {
   SectionHeader,
@@ -94,26 +92,36 @@ class WeightedAverages extends PureComponent {
       columnsWidth,
       dataReceived,
     } = this.props
-
-    const numRows = _size(entries)
+    const isNoData = isEmpty(entries)
+    const isLoading = !dataReceived && pageLoading
     const tableColumns = getColumns({
       t,
-      columnsWidth,
+      isNoData,
+      isLoading,
       getFullTime,
+      columnsWidth,
       filteredData: entries,
     }).filter(({ id }) => columns[id])
 
     let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (numRows === 0) {
-      showContent = <NoData />
+    if (isNoData) {
+      showContent = (
+        <div className='data-table-wrapper'>
+          <DataTable
+            numRows={1}
+            section={TYPE}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            tableColumns={tableColumns}
+          />
+        </div>
+      )
     } else {
       showContent = (
         <>
           <DataTable
+            numRows={1}
             section={TYPE}
-            numRows={numRows}
             tableColumns={tableColumns}
           />
         </>
