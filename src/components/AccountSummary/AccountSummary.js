@@ -67,7 +67,6 @@ class AccountSummary extends PureComponent {
     } = this.props
     const isNoData = isEmpty(data)
     const isLoading = !dataReceived && pageLoading
-  console.log('++APPisLoading', isLoading )
 
     return (
       <Card
