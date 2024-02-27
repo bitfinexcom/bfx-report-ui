@@ -127,7 +127,12 @@ class AccountSummary extends PureComponent {
             isLoading={isLoading}
             data={get(data, 'trade_vol_30d', [])}
           />
-          <Leo t={t} data={data} />
+          <Leo
+            t={t}
+            data={data}
+            isNoData={isNoData}
+            isLoading={isLoading}
+          />
         </div>
       </Card>
     )
