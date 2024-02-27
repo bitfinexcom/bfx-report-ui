@@ -67,6 +67,7 @@ class AccountSummary extends PureComponent {
     } = this.props
     const isNoData = isEmpty(data)
     const isLoading = !dataReceived && pageLoading
+  console.log('++APPisLoading', isLoading )
 
     return (
       <Card
@@ -125,7 +126,7 @@ class AccountSummary extends PureComponent {
             t={t}
             isNoData={isNoData}
             isLoading={isLoading}
-            data={get(data, 'trade_vol_30d', {})}
+            data={get(data, 'trade_vol_30d', [])}
           />
           <Leo t={t} data={data} />
         </div>
