@@ -103,32 +103,6 @@ const {
   MENU_WIN_LOSS,
 } = types
 
-/**
- {
-  "auth": {
-      "apiKey": "fake",
-      "apiSecret": "fake"
-  },
-  "method": "getMultipleCsv",
-  "params": {
-      "email": "fake@email.fake",
-      "multiExport": [
-          {
-              "method": "getTradesCsv",
-              "symbol": "tBTCUSD",
-              "end": 1546765168000
-          },
-          {
-              "method": "getLedgersCsv",
-              "symbol": "BTC",
-              "end": 1546765168000,
-              "timezone": "America/Los_Angeles"
-          }
-      ]
-  }
-}
-*/
-
 const getMultipleFile = params => makeFetchCall('getMultipleFile', params)
 
 function getSelector(target) {
