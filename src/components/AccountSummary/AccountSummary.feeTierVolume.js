@@ -6,11 +6,18 @@ import DataTable from 'ui/DataTable'
 
 import { getColumns } from './AccountSummary.paidFees'
 
-const AccountSummaryFeeTierVolume = ({ data, t }) => {
+const AccountSummaryFeeTierVolume = ({
+  t,
+  data,
+  isNoData,
+  isLoading,
+}) => {
   const lastVolumeItem = get(data, [data.length - 1], {})
   const { curr, vol_safe: amount } = lastVolumeItem
 
-  const columns = getColumns({ data: [{ curr, amount }], t })
+  const columns = getColumns({
+    data: [{ curr, amount }], t, isNoData, isLoading,
+  })
 
   return (
     <div className='section-account-summary-data-item'>
@@ -28,6 +35,8 @@ AccountSummaryFeeTierVolume.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     curr: PropTypes.string,
   })).isRequired,
+  isNoData: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 }
 
 export default memo(AccountSummaryFeeTierVolume)
