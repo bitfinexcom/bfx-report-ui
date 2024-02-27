@@ -3,42 +3,59 @@ import PropTypes from 'prop-types'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
-import { getTooltipContent } from 'utils/columns'
 import { fixedFloat, formatAmount } from 'ui/utils'
+import { getCellLoader, getCellNoData, getTooltipContent } from 'utils/columns'
 
-const getColumns = ({ leoLev, leoAmountAvg, t }) => {
+const getColumns = ({
+  t,
+  leoLev,
+  isNoData,
+  isLoading,
+  leoAmountAvg,
+}) => {
   const formattedLeoAmountAvg = fixedFloat(leoAmountAvg)
-
   return [
     {
       id: 'leo_level',
       name: 'accountsummary.leo_level',
       width: 100,
-      renderer: () => (
-        <Cell tooltip={getTooltipContent(leoLev, t)}>
-          {leoLev}
-        </Cell>
-      ),
+      renderer: () => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData(t('column.noResults'))
+        return (
+          <Cell tooltip={getTooltipContent(leoLev, t)}>
+            {leoLev}
+          </Cell>
+        )
+      },
       copyText: () => leoLev,
     },
     {
       id: 'leo_average_amount',
       name: 'accountsummary.average_amount',
       width: 120,
-      renderer: () => (
-        <Cell tooltip={getTooltipContent(formattedLeoAmountAvg, t)}>
-          {formatAmount(formattedLeoAmountAvg)}
-        </Cell>
-      ),
+      renderer: () => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
+        return (
+          <Cell tooltip={getTooltipContent(formattedLeoAmountAvg, t)}>
+            {formatAmount(formattedLeoAmountAvg)}
+          </Cell>
+        )
+      },
       copyText: () => leoAmountAvg,
     },
   ]
 }
 
-const AccountSummaryLeo = ({ data, t }) => {
+const AccountSummaryLeo = ({
+  data, t, isLoading, isNoData,
+}) => {
   const { leoLev, leoAmountAvg } = data
 
-  const columns = getColumns({ leoLev, leoAmountAvg, t })
+  const columns = getColumns({
+    leoLev, leoAmountAvg, t, isLoading, isNoData,
+  })
 
   return (
     <div className='section-account-summary-data-item'>
@@ -57,6 +74,8 @@ AccountSummaryLeo.propTypes = {
     leoAmountAvg: PropTypes.number.isRequired,
   }).isRequired,
   t: PropTypes.func.isRequired,
+  isNoData: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 }
 
 export default memo(AccountSummaryLeo)
