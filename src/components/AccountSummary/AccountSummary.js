@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import SectionHeader from 'ui/SectionHeader'
 
 import Leo from './AccountSummary.leo'
@@ -64,60 +62,13 @@ class AccountSummary extends PureComponent {
     const {
       t,
       data,
-      refresh,
       pageLoading,
       dataReceived,
       isTurkishSite,
     } = this.props
+    const isNoData = isEmpty(data)
+    const isLoading = !dataReceived && pageLoading
 
-    let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(data)) {
-      showContent = <NoData refresh={refresh} />
-    } else {
-      showContent = (
-        <div className='section-account-summary-data'>
-          <Volume
-            t={t}
-            data={get(data, 'trade_vol_30d', [])}
-          />
-          <Fees
-            t={t}
-            data={data}
-            title='accountsummary.fees'
-          />
-          {!isTurkishSite && (
-            <>
-              <DerivFees
-                t={t}
-                title='accountsummary.fees_deriv'
-                makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
-                takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
-              />
-              <PaidFees
-                t={t}
-                title='accountsummary.margin_funds'
-                data={get(data, 'fees_funding_30d', {})}
-                total={get(data, 'fees_funding_total_30d', 0)}
-              />
-            </>
-          )}
-          <br />
-          <PaidFees
-            t={t}
-            title='accountsummary.trading_funds'
-            data={get(data, 'fees_trading_30d', {})}
-            total={get(data, 'fees_trading_total_30d', 0)}
-          />
-          <FeeTierVolume
-            t={t}
-            data={get(data, 'trade_vol_30d', {})}
-          />
-          <Leo t={t} data={data} />
-        </div>
-      )
-    }
     return (
       <Card
         elevation={Elevation.ZERO}
@@ -128,7 +79,57 @@ class AccountSummary extends PureComponent {
           timeframe={false}
           title='accountsummary.title'
         />
-        {showContent}
+        <div className='section-account-summary-data'>
+          <Volume
+            t={t}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            data={get(data, 'trade_vol_30d', [])}
+          />
+          <Fees
+            t={t}
+            data={data}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            title='accountsummary.fees'
+          />
+          {!isTurkishSite && (
+            <>
+              <DerivFees
+                t={t}
+                isNoData={isNoData}
+                isLoading={isLoading}
+                title='accountsummary.fees_deriv'
+                makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
+                takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
+              />
+              <PaidFees
+                t={t}
+                isNoData={isNoData}
+                isLoading={isLoading}
+                title='accountsummary.margin_funds'
+                data={get(data, 'fees_funding_30d', {})}
+                total={get(data, 'fees_funding_total_30d', 0)}
+              />
+            </>
+          )}
+          <br />
+          <PaidFees
+            t={t}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            title='accountsummary.trading_funds'
+            data={get(data, 'fees_trading_30d', {})}
+            total={get(data, 'fees_trading_total_30d', 0)}
+          />
+          <FeeTierVolume
+            t={t}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            data={get(data, 'trade_vol_30d', {})}
+          />
+          <Leo t={t} data={data} />
+        </div>
       </Card>
     )
   }
