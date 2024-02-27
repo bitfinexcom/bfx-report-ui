@@ -41,7 +41,6 @@ class AccountSummary extends PureComponent {
     fetchData: PropTypes.func.isRequired,
     isTurkishSite: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
   }
 
