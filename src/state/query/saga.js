@@ -129,7 +129,7 @@ const {
 }
 */
 
-const getMultipleCsv = params => makeFetchCall('getMultipleFile', params)
+const getMultipleFile = params => makeFetchCall('getMultipleFile', params)
 
 function getSelector(target) {
   switch (target) {
@@ -451,7 +451,7 @@ function* exportCSV({ payload: targets }) {
       yield put(actions.setIsCsvExporting(true))
     }
 
-    const { result, error } = yield call(getMultipleCsv, params)
+    const { result, error } = yield call(getMultipleFile, params)
 
     if (result) {
       const { localCsvFolderPath, remoteCsvUrn = null } = result
