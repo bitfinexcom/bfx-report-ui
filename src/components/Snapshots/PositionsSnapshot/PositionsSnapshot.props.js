@@ -17,7 +17,6 @@ export const propTypes = {
   entries: PropTypes.arrayOf(POSITIONS_ENTRIES_PROPS).isRequired,
   getFullTime: PropTypes.func,
   timeOffset: PropTypes.string.isRequired,
-  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
