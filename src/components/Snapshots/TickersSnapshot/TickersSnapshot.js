@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { useTranslation } from 'react-i18next'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 import {
@@ -10,23 +11,27 @@ import {
 import { propTypes, defaultProps } from './TickersSnapshot.props'
 
 const TickersSnapshot = ({
-  isNoData,
   isLoading,
   walletsTickersEntries,
   positionsTickersEntries,
 }) => {
   const { t } = useTranslation()
   const positionsTickersColumns = getPositionsTickersColumns({
-    filteredData: positionsTickersEntries, t, isNoData, isLoading,
+    t,
+    isLoading,
+    filteredData: positionsTickersEntries,
+    isNoData: isEmpty(positionsTickersEntries),
   })
   const walletsTickersColumns = getWalletsTickersColumns({
-    filteredData: walletsTickersEntries, t, isNoData, isLoading,
+    t,
+    isLoading,
+    filteredData: walletsTickersEntries,
+    isNoData: isEmpty(walletsTickersEntries),
   })
 
   return (
     <>
       <div className='tables-row no-table-scroll'>
-        {positionsTickersEntries.length > 0 && (
         <div className='tables-row-item'>
           <div>{t('positions.title')}</div>
           <DataTable
@@ -34,8 +39,6 @@ const TickersSnapshot = ({
             numRows={positionsTickersEntries.length || 1}
           />
         </div>
-        )}
-        {walletsTickersEntries.length > 0 && (
         <div className='tables-row-item'>
           <div>{t('wallets.title')}</div>
           <DataTable
@@ -43,7 +46,6 @@ const TickersSnapshot = ({
             numRows={walletsTickersEntries.length || 1}
           />
         </div>
-        )}
       </div>
     </>
   )
