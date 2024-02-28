@@ -39,7 +39,9 @@ const PositionsSnapshot = ({
       </div>
       ) }
       <DataTable
-        numRows={entries.length || 1}
+        isNoData={isNoData}
+        isLoading={isLoading}
+        numRows={entries.length}
         tableColumns={positionsColumns}
       />
     </>
