@@ -224,10 +224,12 @@ export const getCellState = (isLoading, isNoData) => {
 
 export const getFrameworkPositionsColumns = (props) => {
   const {
-    filteredData,
-    getFullTime,
     t,
+    isNoData,
+    isLoading,
     timeOffset,
+    getFullTime,
+    filteredData,
   } = props
 
   function showType(swapType) {
@@ -243,6 +245,8 @@ export const getFrameworkPositionsColumns = (props) => {
       className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData(t('column.noResults'))
         const { id } = filteredData[rowIndex]
         return (
           <Cell tooltip={getTooltipContent(id, t)}>
@@ -258,6 +262,8 @@ export const getFrameworkPositionsColumns = (props) => {
       className: 'align-left',
       width: COLUMN_WIDTHS.pair,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { pair } = filteredData[rowIndex]
         return (
           <Cell tooltip={getTooltipContent(pair, t)}>
@@ -272,6 +278,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.amount',
       width: COLUMN_WIDTHS.amount,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { amount } = filteredData[rowIndex]
         return (
           <Cell
@@ -289,6 +297,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.base-price',
       width: COLUMN_WIDTHS.basePrice,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { basePrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(basePrice)
         return (
@@ -307,6 +317,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.actual-price',
       width: COLUMN_WIDTHS.actualPrice,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { actualPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(actualPrice)
         return (
@@ -325,6 +337,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.liq-price',
       width: COLUMN_WIDTHS.priceLiq,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { liquidationPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(liquidationPrice)
         return (
@@ -343,6 +357,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.pl',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { pl } = filteredData[rowIndex]
         return (
           <Cell
@@ -360,6 +376,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.plUsd',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { plUsd } = filteredData[rowIndex]
         return (
           <Cell
@@ -377,6 +395,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.plperc',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { plPerc } = filteredData[rowIndex]
         return (
           <Cell
@@ -394,6 +414,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.fundingCost',
       width: COLUMN_WIDTHS.swap,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { marginFunding } = filteredData[rowIndex]
         const fixedSwap = fixedFloat(marginFunding)
         return (
@@ -413,6 +435,8 @@ export const getFrameworkPositionsColumns = (props) => {
       className: 'align-left',
       width: 120,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const swapType = showType(filteredData[rowIndex].marginFundingType)
         return (
           <Cell tooltip={getTooltipContent(swapType, t)}>
@@ -428,6 +452,8 @@ export const getFrameworkPositionsColumns = (props) => {
       className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { status } = filteredData[rowIndex]
         return (
           <Cell tooltip={getTooltipContent(status, t)}>
@@ -443,6 +469,8 @@ export const getFrameworkPositionsColumns = (props) => {
       nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.mtsUpdate,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
           <Cell tooltip={getTooltipContent(timestamp, t)}>
