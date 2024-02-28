@@ -135,8 +135,9 @@ class Snapshots extends PureComponent {
     } else if (section === MENU_WALLETS) {
       showContent = (
         <WalletsSnapshot
-          totalBalanceUsd={walletsTotalBalanceUsd}
+          isLoading={isLoading}
           entries={walletsEntries}
+          totalBalanceUsd={walletsTotalBalanceUsd}
         />
       )
     } else if (section === MENU_POSITIONS) {
