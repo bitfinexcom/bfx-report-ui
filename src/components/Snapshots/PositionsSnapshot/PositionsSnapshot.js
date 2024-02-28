@@ -41,7 +41,7 @@ const PositionsSnapshot = ({
       <DataTable
         isNoData={isNoData}
         isLoading={isLoading}
-        numRows={entries.length}
+        numRows={entries.length || 1}
         tableColumns={positionsColumns}
       />
     </>
