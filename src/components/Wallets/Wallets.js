@@ -1,11 +1,8 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DateInput from 'ui/DateInput'
 import BalancePrecisionSelector from 'ui/BalancePrecisionSelector'
 import {
@@ -93,16 +90,6 @@ class Wallets extends PureComponent {
     const walletsData = (isFrameworkMode && exactBalance) ? walletsSnapshotEntries : entries
     const isLoading = (!dataReceived && pageLoading)
       || (exactBalance && !snapshotReceived && snapshotLoading)
-    const isNoData = isEmpty(entries) || (exactBalance && isEmpty(walletsSnapshotEntries))
-
-    let showContent
-    if (isLoading) {
-      showContent = <Loading />
-    } else if (isNoData) {
-      showContent = <NoData title='wallets.nodata' refresh={refresh} />
-    } else {
-      showContent = <WalletsData entries={walletsData} />
-    }
 
     return (
       <Card
@@ -141,7 +128,10 @@ class Wallets extends PureComponent {
             </SectionHeaderRow>
           )}
         </SectionHeader>
-        {showContent}
+        <WalletsData
+          isLoading={isLoading}
+          entries={walletsData}
+        />
       </Card>
     )
   }
