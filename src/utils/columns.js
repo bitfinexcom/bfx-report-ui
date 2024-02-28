@@ -524,64 +524,72 @@ export const getPositionsTickersColumns = ({
   },
 ]
 
-export const getWalletsTickersColumns = (props) => {
-  const { filteredData, t } = props
+export const getWalletsTickersColumns = ({
+  t,
+  isNoData,
+  isLoading,
+  filteredData,
+}) => [
+  {
+    id: 'type',
+    name: 'column.type',
+    className: 'align-left',
+    width: 80,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData(t('column.noResults'))
+      const { walletType } = filteredData[rowIndex]
+      const walletTypeText = t(`wallets.header.${walletType}`)
+      return (
+        <Cell tooltip={getTooltipContent(walletTypeText, t)}>
+          {walletTypeText}
+        </Cell>
+      )
+    },
+    copyText: (rowIndex) => {
+      const { walletType } = filteredData[rowIndex]
+      return t(`wallets.header.${walletType}`)
+    },
+  },
+  {
+    id: 'pair',
+    name: 'column.pair',
+    className: 'align-left',
+    width: 100,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData()
+      const { pair } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(pair, t)}>
+          {pair}
+        </Cell>
+      )
+    },
+    copyText: rowIndex => filteredData[rowIndex].pair,
+  },
+  {
+    id: 'amount',
+    name: 'column.amount',
+    width: 120,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData()
+      const { amount } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={getTooltipContent(fixedFloat(amount), t)}
+        >
+          {formatAmount(amount)}
+        </Cell>
+      )
+    },
+    isNumericValue: true,
+    copyText: rowIndex => filteredData[rowIndex].amount,
+  },
+]
 
-  return [
-    {
-      id: 'type',
-      name: 'column.type',
-      className: 'align-left',
-      width: 80,
-      renderer: (rowIndex) => {
-        const { walletType } = filteredData[rowIndex]
-        const walletTypeText = t(`wallets.header.${walletType}`)
-        return (
-          <Cell tooltip={getTooltipContent(walletTypeText, t)}>
-            {walletTypeText}
-          </Cell>
-        )
-      },
-      copyText: (rowIndex) => {
-        const { walletType } = filteredData[rowIndex]
-        return t(`wallets.header.${walletType}`)
-      },
-    },
-    {
-      id: 'pair',
-      name: 'column.pair',
-      className: 'align-left',
-      width: 100,
-      renderer: (rowIndex) => {
-        const { pair } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(pair, t)}>
-            {pair}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].pair,
-    },
-    {
-      id: 'amount',
-      name: 'column.amount',
-      width: 120,
-      renderer: (rowIndex) => {
-        const { amount } = filteredData[rowIndex]
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedFloat(amount), t)}
-          >
-            {formatAmount(amount)}
-          </Cell>
-        )
-      },
-      isNumericValue: true,
-      copyText: rowIndex => filteredData[rowIndex].amount,
-    },
-  ]
-}
 
 export const singleColumnSelectedCheck = context => isEqual(
   get(context, 'selectedRegions[0].cols[0]'),
