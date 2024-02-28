@@ -184,7 +184,7 @@ class DataTable extends PureComponent {
     return (
       <Table
         className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
-        numRows={numRows}
+        numRows={isNoData ? 1 : numRows}
         enableRowHeader={false}
         columnWidths={columnWidths}
         onSelection={this.onSelection}
