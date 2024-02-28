@@ -222,6 +222,12 @@ export const getCellState = (isLoading, isNoData) => {
   return null
 }
 
+export const getRowsConfig = (isLoading, isNoData, numRows = 0) => {
+  if (isLoading) return 5
+  if (isNoData) return 1
+  return numRows
+}
+
 export const getFrameworkPositionsColumns = ({
   t,
   isNoData,
