@@ -222,21 +222,17 @@ export const getCellState = (isLoading, isNoData) => {
   return null
 }
 
-export const getFrameworkPositionsColumns = (props) => {
-  const {
-    t,
-    isNoData,
-    isLoading,
-    timeOffset,
-    getFullTime,
-    filteredData,
-  } = props
-
-  function showType(swapType) {
-    return swapType
-      ? t('positions.swap.term')
-      : t('positions.swap.daily')
-  }
+export const getFrameworkPositionsColumns = ({
+  t,
+  isNoData,
+  isLoading,
+  timeOffset,
+  getFullTime,
+  filteredData,
+}) => {
+  const showType = (swapType) => (swapType
+    ? t('positions.swap.term')
+    : t('positions.swap.daily'))
 
   return [
     {
