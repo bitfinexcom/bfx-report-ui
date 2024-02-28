@@ -143,15 +143,19 @@ class Snapshots extends PureComponent {
     } else if (section === MENU_POSITIONS) {
       showContent = (
         <PositionsSnapshot
-          totalPlUsd={positionsTotalPlUsd}
+          isNoData={isNoData}
+          isLoading={isLoading}
           entries={positionsEntries}
+          totalPlUsd={positionsTotalPlUsd}
         />
       )
     } else {
       showContent = (
         <TickersSnapshot
-          positionsTickersEntries={positionsTickersEntries}
+          isNoData={isNoData}
+          isLoading={isLoading}
           walletsTickersEntries={walletsTickersEntries}
+          positionsTickersEntries={positionsTickersEntries}
         />
       )
     }
