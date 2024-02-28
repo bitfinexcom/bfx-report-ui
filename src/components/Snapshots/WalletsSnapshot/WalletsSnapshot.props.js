@@ -10,7 +10,6 @@ const WALLETS_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   totalBalanceUsd: PropTypes.number,
   entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
-  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
