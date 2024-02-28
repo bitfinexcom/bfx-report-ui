@@ -10,9 +10,7 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
-import Loading from 'ui/Loading'
 import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
-import NoData from 'ui/NoData'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
@@ -128,11 +126,7 @@ class Snapshots extends PureComponent {
       || (section === MENU_WALLETS && !walletsEntries.length)
 
     let showContent
-    if (isLoading) {
-      showContent = <Loading />
-    } else if (isNoData) {
-      showContent = <NoData />
-    } else if (section === MENU_WALLETS) {
+    if (section === MENU_WALLETS) {
       showContent = (
         <WalletsSnapshot
           isLoading={isLoading}
@@ -152,7 +146,6 @@ class Snapshots extends PureComponent {
     } else {
       showContent = (
         <TickersSnapshot
-          isNoData={isNoData}
           isLoading={isLoading}
           walletsTickersEntries={walletsTickersEntries}
           positionsTickersEntries={positionsTickersEntries}
