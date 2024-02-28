@@ -354,3 +354,11 @@ a {
     order: 2
   }
 }
+
+@media screen and (max-width: 585px) {
+  .tables-row {
+    &-item {
+      width: 100%;
+    }
+  }
+}
