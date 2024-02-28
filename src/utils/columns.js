@@ -479,45 +479,50 @@ export const getFrameworkPositionsColumns = ({
   ]
 }
 
-export const getPositionsTickersColumns = (props) => {
-  const { filteredData, t } = props
-
-  return [
-    {
-      id: 'pair',
-      name: 'column.pair',
-      className: 'align-left',
-      width: COLUMN_WIDTHS.pair,
-      renderer: (rowIndex) => {
-        const { pair } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(pair, t)}>
-            {pair}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].pair,
+export const getPositionsTickersColumns = ({
+  t,
+  isNoData,
+  isLoading,
+  filteredData,
+}) => [
+  {
+    id: 'pair',
+    name: 'column.pair',
+    className: 'align-left',
+    width: COLUMN_WIDTHS.pair,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData(t('column.noResults'))
+      const { pair } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(pair, t)}>
+          {pair}
+        </Cell>
+      )
     },
-    {
-      id: 'amount',
-      name: 'column.amount',
-      width: COLUMN_WIDTHS.amount,
-      renderer: (rowIndex) => {
-        const { amount } = filteredData[rowIndex]
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedFloat(amount), t)}
-          >
-            {formatAmount(amount)}
-          </Cell>
-        )
-      },
-      isNumericValue: true,
-      copyText: rowIndex => filteredData[rowIndex].amount,
+    copyText: rowIndex => filteredData[rowIndex].pair,
+  },
+  {
+    id: 'amount',
+    name: 'column.amount',
+    width: COLUMN_WIDTHS.amount,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData()
+      const { amount } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={getTooltipContent(fixedFloat(amount), t)}
+        >
+          {formatAmount(amount)}
+        </Cell>
+      )
     },
-  ]
-}
+    isNumericValue: true,
+    copyText: rowIndex => filteredData[rowIndex].amount,
+  },
+]
 
 export const getWalletsTickersColumns = (props) => {
   const { filteredData, t } = props
