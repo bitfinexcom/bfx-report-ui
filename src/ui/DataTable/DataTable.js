@@ -11,6 +11,7 @@ import _keys from 'lodash/keys'
 import _isNull from 'lodash/isNull'
 
 import {
+  getRowsConfig,
   getCellNoData,
   singleColumnSelectedCheck,
   columnHasNumericValueCheck,
@@ -184,7 +185,7 @@ class DataTable extends PureComponent {
     return (
       <Table
         className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
-        numRows={isNoData ? 1 : numRows}
+        numRows={getRowsConfig(isLoading, isNoData, numRows)}
         enableRowHeader={false}
         columnWidths={columnWidths}
         onSelection={this.onSelection}
