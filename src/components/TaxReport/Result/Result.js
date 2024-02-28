@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import _isNumber from 'lodash/isNumber'
 
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import { fixedFloat } from 'ui/utils'
 import queryConstants from 'state/query/constants'
@@ -88,7 +86,7 @@ class Result extends PureComponent {
     )
   }
 
-  getMovements = () => {
+  getMovements = (isNoData, isLoading) => {
     const {
       t,
       data,
@@ -101,6 +99,8 @@ class Result extends PureComponent {
 
     const movementsColumns = getMovementsColumns({
       t,
+      isNoData,
+      isLoading,
       timeOffset,
       getFullTime,
       filteredData: movements,
@@ -112,9 +112,11 @@ class Result extends PureComponent {
           {t('taxreport.movements')}
         </div>
         <DataTable
+          isNoData={isNoData}
+          isLoading={isLoading}
           className='movements-table'
-          numRows={movements.length}
           tableColumns={movementsColumns}
+          numRows={isLoading ? 5 : movements.length}
         />
       </>
     )
@@ -155,22 +157,14 @@ class Result extends PureComponent {
         totalResult,
       },
     } = data
-
-    if (!dataReceived && pageLoading) {
-      return <Loading />
-    }
-
-    const isEmpty = !startingPositionsSnapshot.length
+    const isLoading = !dataReceived && pageLoading
+    const isNoData = !startingPositionsSnapshot.length
       && !endingPositionsSnapshot.length
       && this.isBalancesEmpty(startingPeriodBalances)
       && this.isBalancesEmpty(endingPeriodBalances)
       && !movements.length
       && !_isNumber(movementsTotalAmount)
       && !totalResult // can be 0 even if data is absent
-
-    if (isEmpty) {
-      return <NoData refresh={this.refresh} />
-    }
 
     const positionsNotEmpty = startingPositionsSnapshot.length || endingPositionsSnapshot.length
 
@@ -194,7 +188,7 @@ class Result extends PureComponent {
           </div>
           )}
         </div>
-        {movements.length > 0 && this.getMovements()}
+        {this.getMovements(isNoData, isLoading)}
         {this.getPositionsSnapshot({
           positions: startingPositionsSnapshot,
           title: t('taxreport.startPositions'),
