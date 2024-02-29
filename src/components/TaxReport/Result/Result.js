@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import _isNumber from 'lodash/isNumber'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 import { fixedFloat } from 'ui/utils'
@@ -23,22 +24,20 @@ class Result extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  getPositionsSnapshot = ({ positions, title }) => {
+  getPositionsSnapshot = ({ positions, title, isLoading }) => {
     const {
       t,
       timeOffset,
       getFullTime,
     } = this.props
 
-    if (!positions.length) {
-      return null
-    }
-
     const positionsColumns = getFrameworkPositionsColumns({
       t,
+      isLoading,
       timeOffset,
       getFullTime,
       filteredData: positions,
+      isNoData: isEmpty(positions),
     })
 
     return (
@@ -47,7 +46,9 @@ class Result extends PureComponent {
           {title}
         </div>
         <DataTable
+          isLoading={isLoading}
           numRows={positions.length}
+          isNoData={isEmpty(positions)}
           tableColumns={positionsColumns}
         />
       </>
@@ -190,10 +191,13 @@ class Result extends PureComponent {
         </div>
         {this.getMovements(isNoData, isLoading)}
         {this.getPositionsSnapshot({
+          isLoading,
           positions: startingPositionsSnapshot,
           title: t('taxreport.startPositions'),
         })}
+        <br />
         {this.getPositionsSnapshot({
+          isLoading,
           positions: endingPositionsSnapshot,
           title: t('taxreport.endPositions'),
         })}
