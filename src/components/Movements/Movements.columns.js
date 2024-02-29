@@ -18,7 +18,7 @@ const getColumns = ({
   columnsWidth,
   onDetailsClick,
 }) => [
-  {
+  ...(onDetailsClick ? [{
     id: 'moreDetails',
     name: 'column.moreDetails',
     className: 'align-left',
@@ -42,7 +42,7 @@ const getColumns = ({
       )
     },
     copyText: rowIndex => filteredData[rowIndex].id,
-  },
+  }] : []),
   {
     id: 'id',
     name: 'column.id',
