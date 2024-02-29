@@ -55,12 +55,9 @@ class Result extends PureComponent {
     )
   }
 
-  getBalances = ({ balances, title }) => {
+  getBalances = ({ balances, title, isLoading }) => {
     const { t } = this.props
-    if (this.isBalancesEmpty(balances)) {
-      return null
-    }
-
+    const isNoData = this.isBalancesEmpty(balances)
     const {
       totalResult,
       positionsTotalPlUsd,
@@ -69,6 +66,8 @@ class Result extends PureComponent {
 
     const balancesColumns = getBalancesColumns({
       t,
+      isNoData,
+      isLoading,
       totalResult,
       positionsTotalPlUsd,
       walletsTotalBalanceUsd,
@@ -81,6 +80,8 @@ class Result extends PureComponent {
         </div>
         <DataTable
           numRows={1}
+          isNoData={isNoData}
+          isLoading={isLoading}
           tableColumns={balancesColumns}
         />
       </>
@@ -167,8 +168,6 @@ class Result extends PureComponent {
       && !_isNumber(movementsTotalAmount)
       && !totalResult // can be 0 even if data is absent
 
-    const positionsNotEmpty = startingPositionsSnapshot.length || endingPositionsSnapshot.length
-
     return (
       <>
         <div className='total-stats'>
@@ -201,13 +200,15 @@ class Result extends PureComponent {
           positions: endingPositionsSnapshot,
           title: t('taxreport.endPositions'),
         })}
-        {positionsNotEmpty ? <br /> : null}
+        <br />
         {this.getBalances({
+          isLoading,
           balances: startingPeriodBalances,
           title: t('taxreport.startingPeriodBalances'),
         })}
         <br />
         {this.getBalances({
+          isLoading,
           balances: endingPeriodBalances,
           title: t('taxreport.endingPeriodBalances'),
         })}
