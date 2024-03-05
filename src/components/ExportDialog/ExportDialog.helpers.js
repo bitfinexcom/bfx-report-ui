@@ -1,4 +1,7 @@
+import config from 'config'
 import queryConstants from 'state/query/constants'
+
+const { showFrameworkMode } = config
 
 const EXPORT_TO_PDF_WHITELIST = [
   queryConstants.MENU_LEDGERS,
@@ -6,5 +9,5 @@ const EXPORT_TO_PDF_WHITELIST = [
 ]
 
 export const getShowPdfSwitcher = (targets) => (
-  EXPORT_TO_PDF_WHITELIST.some(target => targets.includes(target))
+  showFrameworkMode && EXPORT_TO_PDF_WHITELIST.some(target => targets.includes(target))
 )
