@@ -10,8 +10,6 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import TimeRange from 'ui/TimeRange'
 import NoMerchant from 'ui/NoMerchant'
@@ -115,9 +113,12 @@ class Invoices extends PureComponent {
       existingCoins,
       targetSymbols,
     } = this.props
-
+    const isNoData = isEmpty(entries)
+    const isLoading = !dataReceived && pageLoading
     const tableColumns = getColumns({
       t,
+      isNoData,
+      isLoading,
       timeOffset,
       getFullTime,
       columnsWidth,
@@ -125,19 +126,27 @@ class Invoices extends PureComponent {
     }).filter(({ id }) => columns[id])
 
     let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (!isMerchant) {
+    if (!isMerchant) {
       showContent = <NoMerchant />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
+    } else if (isNoData) {
+      showContent = (
+        <div className='data-table-wrapper'>
+          <DataTable
+            section={TYPE}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            tableColumns={tableColumns}
+            numRows={isLoading ? 5 : 1}
+          />
+        </div>
+      )
     } else {
       showContent = (
         <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
-            numRows={entries.length}
             tableColumns={tableColumns}
+            numRows={isLoading ? 5 : entries.length}
           />
           <Pagination
             target={TYPE}

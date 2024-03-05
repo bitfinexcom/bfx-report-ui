@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import WalletsSnapshot from 'components/Snapshots/WalletsSnapshot'
 import TickersSnapshot from 'components/Snapshots/TickersSnapshot'
 import PositionsSnapshot from 'components/Snapshots/PositionsSnapshot'
@@ -55,7 +53,6 @@ class Snapshot extends PureComponent {
       t,
       data,
       match,
-      refresh,
       pageLoading,
       dataReceived,
     } = this.props
@@ -67,35 +64,17 @@ class Snapshot extends PureComponent {
       walletsTotalBalanceUsd,
       positionsTickersEntries,
     } = data
-
-    if (!dataReceived && pageLoading) {
-      return <Loading />
-    }
-
     const { subsection } = match.params
-
-    const isNotEmpty = !!(positionsEntries.length || positionsTickersEntries.length
-      || walletsTickersEntries.length || walletsEntries.length)
-
-    if (!isNotEmpty) {
-      return <NoData refresh={refresh} />
-    }
-
-    const isEmpty = (subsection === MENU_POSITIONS && !positionsEntries.length)
+    const isLoading = !dataReceived && pageLoading
+    const isNoData = (subsection === MENU_POSITIONS && !positionsEntries.length)
       || (subsection === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries)
       || (subsection === MENU_WALLETS && !walletsEntries.length)
 
     let showContent
-    if (isEmpty) {
-      showContent = (
-        <>
-          <br />
-          <NoData refresh={refresh} />
-        </>
-      )
-    } else if (subsection === MENU_WALLETS) {
+    if (subsection === MENU_WALLETS) {
       showContent = (
         <WalletsSnapshot
+          isLoading={isLoading}
           entries={walletsEntries}
           totalBalanceUsd={walletsTotalBalanceUsd}
         />
@@ -103,6 +82,8 @@ class Snapshot extends PureComponent {
     } else if (subsection === MENU_POSITIONS) {
       showContent = (
         <PositionsSnapshot
+          isNoData={isNoData}
+          isLoading={isLoading}
           entries={positionsEntries}
           totalPlUsd={positionsTotalPlUsd}
         />
@@ -110,6 +91,7 @@ class Snapshot extends PureComponent {
     } else {
       showContent = (
         <TickersSnapshot
+          isLoading={isLoading}
           walletsTickersEntries={walletsTickersEntries}
           positionsTickersEntries={positionsTickersEntries}
         />

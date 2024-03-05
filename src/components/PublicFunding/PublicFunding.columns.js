@@ -2,16 +2,18 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { fixedFloat, formatAmount } from 'ui/utils'
-import { getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
-    columnsWidth,
-    filteredData,
-    getFullTime,
     t,
-    targetSymbol,
+    isNoData,
+    isLoading,
     timeOffset,
+    getFullTime,
+    filteredData,
+    targetSymbol,
+    columnsWidth,
   } = props
 
   return [
@@ -21,6 +23,9 @@ export default function getColumns(props) {
       className: 'align-left',
       width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
+        if (isLoading || isNoData) {
+          return getCellState(isLoading, isNoData)
+        }
         const { id } = filteredData[rowIndex]
         return (
           <Cell tooltip={getTooltipContent(id, t)}>
@@ -36,6 +41,9 @@ export default function getColumns(props) {
       nameStr: `${t('column.time')} (${timeOffset})`,
       width: getColumnWidth('mts', columnsWidth),
       renderer: (rowIndex) => {
+        if (isLoading || isNoData) {
+          return getCellState(isLoading, isNoData)
+        }
         const timestamp = getFullTime(filteredData[rowIndex].mts)
         return (
           <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -50,6 +58,9 @@ export default function getColumns(props) {
       name: 'column.amount',
       width: getColumnWidth('amount', columnsWidth),
       renderer: (rowIndex) => {
+        if (isLoading || isNoData) {
+          return getCellState(isLoading, isNoData)
+        }
         const { amount } = filteredData[rowIndex]
         const fixedAmount = fixedFloat(amount)
         return (
@@ -69,6 +80,9 @@ export default function getColumns(props) {
       name: 'column.rateperc',
       width: getColumnWidth('rate', columnsWidth),
       renderer: (rowIndex) => {
+        if (isLoading || isNoData) {
+          return getCellState(isLoading, isNoData)
+        }
         const { rate } = filteredData[rowIndex]
         return (
           <Cell
@@ -88,6 +102,9 @@ export default function getColumns(props) {
       className: 'align-left',
       width: getColumnWidth('period', columnsWidth),
       renderer: (rowIndex) => {
+        if (isLoading || isNoData) {
+          return getCellState(isLoading, isNoData)
+        }
         const period = `${filteredData[rowIndex].period} ${t('column.days')}`
         return (
           <Cell
@@ -108,11 +125,16 @@ export default function getColumns(props) {
       name: 'column.currency',
       className: 'align-left',
       width: getColumnWidth('currency', columnsWidth),
-      renderer: () => (
-        <Cell tooltip={getTooltipContent(targetSymbol, t)}>
-          {targetSymbol}
-        </Cell>
-      ),
+      renderer: () => {
+        if (isLoading || isNoData) {
+          return getCellState(isLoading, isNoData)
+        }
+        return (
+          <Cell tooltip={getTooltipContent(targetSymbol, t)}>
+            {targetSymbol}
+          </Cell>
+        )
+      },
       copyText: () => targetSymbol,
     },
   ]

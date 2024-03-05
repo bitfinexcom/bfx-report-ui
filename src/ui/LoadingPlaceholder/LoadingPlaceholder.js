@@ -17,8 +17,8 @@ LoadingPlaceholder.propTypes = {
 }
 
 LoadingPlaceholder.defaultProps = {
-  height: 22,
-  baseWidth: 80,
+  height: 14,
+  baseWidth: 72,
   isStrong: false,
 }
 

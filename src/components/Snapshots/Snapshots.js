@@ -10,9 +10,7 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
-import Loading from 'ui/Loading'
 import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
-import NoData from 'ui/NoData'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
@@ -107,51 +105,50 @@ class Snapshots extends PureComponent {
 
   render() {
     const {
-      currentTime,
-      dataReceived,
-      pageLoading,
-      positionsTotalPlUsd,
-      positionsEntries,
-      positionsTickersEntries,
-      walletsTotalBalanceUsd,
-      walletsTickersEntries,
-      walletsEntries,
-      refresh,
       t,
+      refresh,
+      currentTime,
+      pageLoading,
+      dataReceived,
+      walletsEntries,
+      positionsEntries,
+      positionsTotalPlUsd,
+      walletsTickersEntries,
+      walletsTotalBalanceUsd,
+      positionsTickersEntries,
     } = this.props
     const { timestamp } = this.state
-
+    const isLoading = !dataReceived && pageLoading
     const section = this.getCurrentSection()
     const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
-
-    const isEmpty = (section === MENU_POSITIONS && !positionsEntries.length)
+    const isNoData = (section === MENU_POSITIONS && !positionsEntries.length)
       || (section === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries.length)
       || (section === MENU_WALLETS && !walletsEntries.length)
 
     let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty) {
-      showContent = <NoData />
-    } else if (section === MENU_WALLETS) {
+    if (section === MENU_WALLETS) {
       showContent = (
         <WalletsSnapshot
-          totalBalanceUsd={walletsTotalBalanceUsd}
+          isLoading={isLoading}
           entries={walletsEntries}
+          totalBalanceUsd={walletsTotalBalanceUsd}
         />
       )
     } else if (section === MENU_POSITIONS) {
       showContent = (
         <PositionsSnapshot
-          totalPlUsd={positionsTotalPlUsd}
+          isNoData={isNoData}
+          isLoading={isLoading}
           entries={positionsEntries}
+          totalPlUsd={positionsTotalPlUsd}
         />
       )
     } else {
       showContent = (
         <TickersSnapshot
-          positionsTickersEntries={positionsTickersEntries}
+          isLoading={isLoading}
           walletsTickersEntries={walletsTickersEntries}
+          positionsTickersEntries={positionsTickersEntries}
         />
       )
     }
@@ -188,7 +185,6 @@ class Snapshots extends PureComponent {
           onChange={this.switchSection}
           value={section}
         />
-
         {showContent}
       </Card>
     )

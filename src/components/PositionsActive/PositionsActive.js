@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import { checkFetch } from 'state/utils'
 import { getPath } from 'state/query/utils'
@@ -72,8 +70,12 @@ class PositionsActive extends PureComponent {
       pageLoading,
       dataReceived,
     } = this.props
+    const isNoData = isEmpty(entries)
+    const isLoading = !dataReceived && pageLoading
     const tableColumns = getColumns({
       t,
+      isNoData,
+      isLoading,
       timeOffset,
       getFullTime,
       target: TYPE,
@@ -82,15 +84,20 @@ class PositionsActive extends PureComponent {
     })
 
     let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData title='positions.no_active' />
+    if (isNoData) {
+      showContent = (
+        <DataTable
+          isNoData={isNoData}
+          isLoading={isLoading}
+          tableColumns={tableColumns}
+          numRows={isLoading ? 5 : 1}
+        />
+      )
     } else {
       showContent = (
         <DataTable
-          numRows={entries.length}
           tableColumns={tableColumns}
+          numRows={isLoading ? 5 : entries.length}
         />
       )
     }

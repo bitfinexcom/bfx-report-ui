@@ -2,10 +2,12 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
+  isNoData,
+  isLoading,
   timeOffset,
   getFullTime,
   filteredData,
@@ -17,6 +19,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('pair', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { pair } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(pair, t)}>
@@ -31,6 +36,9 @@ export const getColumns = ({
     name: 'column.priceDeriv',
     width: getColumnWidth('price', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { price } = filteredData[rowIndex]
       const fixedPrice = fixedFloat(price)
       return (
@@ -50,6 +58,9 @@ export const getColumns = ({
     name: 'column.priceSpot',
     width: getColumnWidth('priceSpot', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { priceSpot } = filteredData[rowIndex]
       const fixedPrice = fixedFloat(priceSpot)
       return (
@@ -69,6 +80,9 @@ export const getColumns = ({
     name: 'column.fundBalance',
     width: getColumnWidth('fundBal', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { fundBal } = filteredData[rowIndex]
       const fixedBalance = fixedFloat(fundBal)
       return (
@@ -88,6 +102,9 @@ export const getColumns = ({
     name: 'column.fundingAccrued',
     width: getColumnWidth('fundingAccrued', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { fundingAccrued } = filteredData[rowIndex]
       const fixedFunding = fixedFloat(fundingAccrued)
       return (
@@ -107,6 +124,9 @@ export const getColumns = ({
     name: 'column.fundingStep',
     width: getColumnWidth('fundingStep', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { fundingStep } = filteredData[rowIndex]
       return (
         <Cell
@@ -125,6 +145,9 @@ export const getColumns = ({
     nameStr: `${t('column.updated')} (${timeOffset})`,
     width: getColumnWidth('timestamp', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const timestamp = getFullTime(filteredData[rowIndex].timestamp)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -139,6 +162,9 @@ export const getColumns = ({
     name: 'column.clampMin',
     width: getColumnWidth('clampMin', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { clampMin } = filteredData[rowIndex]
       return (
         <Cell
@@ -156,6 +182,9 @@ export const getColumns = ({
     name: 'column.clampMax',
     width: getColumnWidth('clampMax', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { clampMax } = filteredData[rowIndex]
       return (
         <Cell
