@@ -390,7 +390,7 @@ function* getOptions({ target }) {
   return options
 }
 
-function* exportCSV({ payload: targets }) {
+function* exportReport({ payload: targets }) {
   try {
     const exportEmail = yield select(getExportEmail)
     const multiExport = []
@@ -484,5 +484,5 @@ function* prepareExport() {
 
 export default function* exportSaga() {
   yield takeLatest(types.PREPARE_EXPORT, prepareExport)
-  yield takeLatest(types.EXPORT_CSV, exportCSV)
+  yield takeLatest(types.EXPORT_REPORT, exportReport)
 }
