@@ -83,10 +83,12 @@ function* onAuthSuccess(result) {
       time: formatAuthDate(new Date()),
     }))
 
+    yield put(actions.disableAuthBtn(false))
     yield put(actions.authSuccess(result))
     yield put(actions.hideAuth())
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
+    yield put(actions.disableAuthBtn(false))
   }
 }
 
@@ -127,6 +129,7 @@ function* signUp({ payload }) {
     yield put(actions.updateAuthStatus())
 
     if (error) {
+      yield put(actions.disableAuthBtn(false))
       if (authToken) {
         yield put(actions.updateAuth({ authToken: '' }))
       }
@@ -145,6 +148,7 @@ function* signUp({ payload }) {
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
+    yield put(actions.disableAuthBtn(false))
   }
 }
 
@@ -177,6 +181,7 @@ function* signUpEmail({ payload }) {
 
 function* signUpOtp({ payload }) {
   try {
+    yield put(actions.disableAuthBtn(true))
     const { otp, password, isNotProtected } = payload
     const loginToken = yield select(getLoginToken)
     const params = {
@@ -197,12 +202,14 @@ function* signUpOtp({ payload }) {
     }
 
     if (error) {
+      yield put(actions.disableAuthBtn(false))
       yield put(updateErrorStatus({
         id: 'auth.2FA.invalidToken',
       }))
     }
   } catch (fail) {
     yield put(updateAuthErrorStatus(fail))
+    yield put(actions.disableAuthBtn(false))
   }
 }
 

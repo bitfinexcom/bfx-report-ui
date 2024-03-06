@@ -1,19 +1,30 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Cell } from '@blueprintjs/table'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 import { fixedFloat, formatAmount } from 'ui/utils'
-import { COLUMN_WIDTHS, getTooltipContent } from 'utils/columns'
+import {
+  COLUMN_WIDTHS,
+  getCellLoader,
+  getCellNoData,
+  getTooltipContent,
+} from 'utils/columns'
 
-const getColumns = ({ data, t }) => [
+const getColumns = ({
+  t,
+  data,
+  isNoData,
+  isLoading,
+}) => [
   {
     id: 'currency',
     name: 'column.currency',
     className: 'align-left',
     width: COLUMN_WIDTHS.SYMBOL,
     renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData(t('column.noResults'))
       const { curr } = data[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(curr, t)}>
@@ -28,6 +39,8 @@ const getColumns = ({ data, t }) => [
     name: 'column.volume',
     width: COLUMN_WIDTHS.AMOUNT,
     renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData()
       const { curr, vol } = data[rowIndex]
       const fixedVolume = fixedFloat(vol)
       return (
@@ -47,19 +60,22 @@ const getColumns = ({ data, t }) => [
   },
 ]
 
-const AccountSummaryVolume = ({ data, t }) => {
-  if (isEmpty(data)) {
-    return null
-  }
-
-  const columns = getColumns({ data, t })
+const AccountSummaryVolume = ({
+  t,
+  data,
+  isNoData,
+  isLoading,
+}) => {
+  const columns = getColumns({
+    data, t, isNoData, isLoading,
+  })
 
   return (
     <div className='section-account-summary-data-item'>
       <div>{t('accountsummary.30dVolume')}</div>
       <DataTable
-        numRows={data.length}
         tableColumns={columns}
+        numRows={isLoading ? 1 : data.length}
       />
     </div>
   )
@@ -72,6 +88,8 @@ const VOLUME_ENTRIES_PROPS = PropTypes.shape({
 
 AccountSummaryVolume.propTypes = {
   t: PropTypes.func.isRequired,
+  isNoData: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   data: PropTypes.arrayOf(VOLUME_ENTRIES_PROPS).isRequired,
 }
 

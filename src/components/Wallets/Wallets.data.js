@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 
@@ -15,46 +16,57 @@ const {
   WALLET_CONTRIBUTION,
 } = constants
 
-const WalletsData = (props) => {
-  const { entries, t } = props
-
+const WalletsData = ({
+  t,
+  entries,
+  isLoading,
+}) => {
   const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
   const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
   const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
   const contributionData = entries.filter(entry => entry.type === WALLET_CONTRIBUTION)
-  const exchangeColumns = getColumns({ filteredData: exchangeData, t })
-  const marginColumns = getColumns({ filteredData: marginData, t })
-  const fundingColumns = getColumns({ filteredData: fundingData, t })
-  const contributionColumns = getColumns({ filteredData: contributionData, t })
+
+  const exchangeColumns = getColumns({
+    filteredData: exchangeData, t, isNoData: isEmpty(exchangeData), isLoading,
+  })
+  const marginColumns = getColumns({
+    filteredData: marginData, t, isNoData: isEmpty(marginData), isLoading,
+  })
+  const fundingColumns = getColumns({
+    filteredData: fundingData, t, isNoData: isEmpty(fundingData), isLoading,
+  })
+  const contributionColumns = getColumns({
+    filteredData: contributionData, t, isNoData: isEmpty(contributionData), isLoading,
+  })
 
   return (
     <div className='tables-row no-table-scroll'>
       <div className='tables-row-item'>
         <div>{t('wallets.header.exchange')}</div>
         <DataTable
-          numRows={exchangeData.length}
           tableColumns={exchangeColumns}
+          numRows={exchangeData.length || 1}
         />
       </div>
       <div className='tables-row-item'>
         <div>{t('wallets.header.margin')}</div>
         <DataTable
-          numRows={marginData.length}
           tableColumns={marginColumns}
+          numRows={marginData.length || 1}
         />
       </div>
       <div className='tables-row-item'>
         <div>{t('wallets.header.funding')}</div>
         <DataTable
-          numRows={fundingData.length}
           tableColumns={fundingColumns}
+          numRows={fundingData.length || 1}
         />
       </div>
       <div className='tables-row-item'>
         <div>{t('wallets.header.capital-raise')}</div>
         <DataTable
-          numRows={contributionData.length}
           tableColumns={contributionColumns}
+          numRows={contributionData.length || 1}
         />
       </div>
     </div>
@@ -62,8 +74,9 @@ const WalletsData = (props) => {
 }
 
 WalletsData.propTypes = {
-  entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
   t: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  entries: PropTypes.arrayOf(WALLETS_ENTRIES_PROPS).isRequired,
 }
 
 export default withTranslation('translations')(WalletsData)

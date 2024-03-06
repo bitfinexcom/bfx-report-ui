@@ -183,6 +183,7 @@
     "mobile": "Mobile",
     "moreDetails": "More Details",
     "movementsTotal": "Movements Total Amount (USD)",
+    "noResults": "No results",
     "note": "Note",
     "opened": "Opened",
     "orderid": "Order ID",
@@ -274,7 +275,7 @@
   },
   "download": {
     "query": "Prepare Export",
-    "title": "Export CSV",
+    "title": "Export",
     "prepare": "Bitfinex will prepare your data during",
     "send": "and send to {{email}}.",
     "store": "and store to your local folder.",
@@ -283,11 +284,12 @@
     "okay": "Okay",
     "remoteStorage": "Remote storage",
     "status": {
-      "local": "Export csv generated, files are saved in: ",
+      "local": "Export generated, files are saved in: ",
       "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
     },
     "success": "Success",
-    "targets": "Data to Export"
+    "targets": "Data to Export",
+    "exportAsPdf": "Export as PDF"
   },
   "fcredit": {
     "title": "Funding Credits (Used)",

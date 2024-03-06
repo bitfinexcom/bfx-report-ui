@@ -5,20 +5,18 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
-  SectionHeaderTitle,
   SectionHeaderRow,
   SectionHeaderItem,
+  SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
-import ColumnsFilter from 'ui/ColumnsFilter'
-import RefreshButton from 'ui/RefreshButton'
-import PairSelector from 'ui/PairSelector'
-import Pagination from 'ui/Pagination'
-import SyncPrefButton from 'ui/SyncPrefButton'
 import DataTable from 'ui/DataTable'
-import Loading from 'ui/Loading'
-import NoData from 'ui/NoData'
+import Pagination from 'ui/Pagination'
+import PairSelector from 'ui/PairSelector'
+import RefreshButton from 'ui/RefreshButton'
+import ColumnsFilter from 'ui/ColumnsFilter'
+import SyncPrefButton from 'ui/SyncPrefButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, setPair } from 'state/utils'
 
@@ -40,39 +38,50 @@ class PublicTrades extends PureComponent {
 
   render() {
     const {
-      columns,
-      columnsWidth,
-      getFullTime,
-      entries,
-      dataReceived,
-      pageLoading,
-      refresh,
       t,
+      columns,
+      entries,
+      refresh,
       targetPair,
       timeOffset,
+      getFullTime,
+      pageLoading,
+      dataReceived,
+      columnsWidth,
     } = this.props
-
+    const isNoData = isEmpty(entries)
+    const isLoading = !dataReceived && pageLoading
     const tableColumns = getColumns({
+      t,
+      isNoData,
+      isLoading,
+      targetPair,
+      timeOffset,
+      getFullTime,
       columnsWidth,
       filteredData: entries,
-      getFullTime,
-      t,
-      targetPair,
-      timeOffset,
     }).filter(({ id }) => columns[id])
 
     let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
+    if (isNoData) {
+      showContent = (
+        <div className='data-table-wrapper'>
+          <DataTable
+            section={TYPE}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            tableColumns={tableColumns}
+            numRows={isLoading ? 5 : 1}
+          />
+        </div>
+      )
     } else {
       showContent = (
         <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
-            numRows={entries.length}
             tableColumns={tableColumns}
+            numRows={isLoading ? 5 : entries.length}
           />
           <Pagination target={TYPE} loading={pageLoading} />
         </div>

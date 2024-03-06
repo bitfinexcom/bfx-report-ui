@@ -3,10 +3,12 @@ import { Cell } from '@blueprintjs/table'
 
 import { getSideMsg, getSideColor } from 'state/utils'
 import { formatAmount, formatColor, fixedFloat } from 'ui/utils'
-import { getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
+  isNoData,
+  isLoading,
   timeOffset,
   getFullTime,
   filteredData,
@@ -18,6 +20,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { id } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(id, t)}>
@@ -33,6 +38,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('symbol', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { symbol } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(symbol, t)}>
@@ -48,6 +56,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('side', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { side } = filteredData[rowIndex]
       const formattedSide = t(`fcredit.side.${getSideMsg(side)}`)
       return (
@@ -63,6 +74,9 @@ export const getColumns = ({
     name: 'column.amount',
     width: getColumnWidth('amount', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { amount } = filteredData[rowIndex]
       return (
         <Cell
@@ -82,6 +96,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { status } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(status, t)}>
@@ -97,6 +114,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('type', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { type } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(type, t)}>
@@ -111,6 +131,9 @@ export const getColumns = ({
     name: 'column.rateperc',
     width: getColumnWidth('rate', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { rate } = filteredData[rowIndex]
       return (
         <Cell
@@ -130,6 +153,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('period', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const period = `${filteredData[rowIndex].period} ${t('column.days')}`
       return (
         <Cell
@@ -151,6 +177,9 @@ export const getColumns = ({
     nameStr: `${t('column.opened')} (${timeOffset})`,
     width: getColumnWidth('mtsOpening', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const timestamp = getFullTime(filteredData[rowIndex].mtsOpening)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -166,6 +195,9 @@ export const getColumns = ({
     nameStr: `${t('column.lastpayout')} (${timeOffset})`,
     width: getColumnWidth('mtsLastPayout', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const timestamp = getFullTime(filteredData[rowIndex].mtsLastPayout)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -181,6 +213,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('positionPair', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { positionPair } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(positionPair, t)}>
@@ -196,6 +231,9 @@ export const getColumns = ({
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mtsUpdate', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>

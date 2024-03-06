@@ -11,6 +11,8 @@ import _keys from 'lodash/keys'
 import _isNull from 'lodash/isNull'
 
 import {
+  getRowsConfig,
+  getCellNoData,
   singleColumnSelectedCheck,
   columnHasNumericValueCheck,
 } from 'utils/columns'
@@ -163,12 +165,18 @@ class DataTable extends PureComponent {
       t,
       device,
       numRows,
+      isNoData,
+      isLoading,
       className,
       tableScroll,
       tableColumns,
       defaultRowHeight,
     } = this.props
     const columnWidths = tableColumns.map(column => column.width)
+
+    if (isNoData && !isLoading) {
+      tableColumns[0].renderer = () => getCellNoData(t('column.noResults'))
+    }
 
     if (device === DEVICES.PHONE && tableColumns.length >= 2) {
       return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
@@ -177,7 +185,7 @@ class DataTable extends PureComponent {
     return (
       <Table
         className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
-        numRows={numRows}
+        numRows={getRowsConfig(isLoading, isNoData, numRows)}
         enableRowHeader={false}
         columnWidths={columnWidths}
         onSelection={this.onSelection}
@@ -222,10 +230,14 @@ DataTable.propTypes = {
   showColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
   defaultRowHeight: PropTypes.number,
+  isNoData: PropTypes.bool,
+  isLoading: PropTypes.bool,
 }
 
 DataTable.defaultProps = {
   className: '',
+  isNoData: false,
+  isLoading: false,
   section: undefined,
   defaultRowHeight: 26,
 }

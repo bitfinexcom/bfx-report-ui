@@ -6,6 +6,7 @@ import { Cell } from '@blueprintjs/table'
 import { get, pick, isEqual } from '@bitfinex/lib-js-util-base'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
+import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 
 const COLUMN_WIDTH_STANDARD = {
   actualPrice: 132,
@@ -196,19 +197,48 @@ export const getTooltipContent = (value, t) => {
   return `${value}`
 }
 
-export const getFrameworkPositionsColumns = (props) => {
-  const {
-    filteredData,
-    getFullTime,
-    t,
-    timeOffset,
-  } = props
+export const getCellLoader = (height, width) => (
+  <Cell>
+    <LoadingPlaceholder
+      height={height}
+      baseWidth={width}
+    />
+  </Cell>
+)
 
-  function showType(swapType) {
-    return swapType
-      ? t('positions.swap.term')
-      : t('positions.swap.daily')
-  }
+export const getCellNoData = (title = '--') => (
+  <Cell>
+    <>
+      <span className='cell-no-data'>
+        {title}
+      </span>
+    </>
+  </Cell>
+)
+
+export const getCellState = (isLoading, isNoData) => {
+  if (isLoading) return getCellLoader(14, 72)
+  if (isNoData) return getCellNoData()
+  return null
+}
+
+export const getRowsConfig = (isLoading, isNoData, numRows = 0) => {
+  if (isLoading) return 5
+  if (isNoData) return 1
+  return numRows
+}
+
+export const getFrameworkPositionsColumns = ({
+  t,
+  isNoData,
+  isLoading,
+  timeOffset,
+  getFullTime,
+  filteredData,
+}) => {
+  const showType = (swapType) => (swapType
+    ? t('positions.swap.term')
+    : t('positions.swap.daily'))
 
   return [
     {
@@ -217,6 +247,8 @@ export const getFrameworkPositionsColumns = (props) => {
       className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData(t('column.noResults'))
         const { id } = filteredData[rowIndex]
         return (
           <Cell tooltip={getTooltipContent(id, t)}>
@@ -232,6 +264,8 @@ export const getFrameworkPositionsColumns = (props) => {
       className: 'align-left',
       width: COLUMN_WIDTHS.pair,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { pair } = filteredData[rowIndex]
         return (
           <Cell tooltip={getTooltipContent(pair, t)}>
@@ -246,6 +280,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.amount',
       width: COLUMN_WIDTHS.amount,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { amount } = filteredData[rowIndex]
         return (
           <Cell
@@ -263,6 +299,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.base-price',
       width: COLUMN_WIDTHS.basePrice,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { basePrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(basePrice)
         return (
@@ -281,6 +319,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.actual-price',
       width: COLUMN_WIDTHS.actualPrice,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { actualPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(actualPrice)
         return (
@@ -299,6 +339,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.liq-price',
       width: COLUMN_WIDTHS.priceLiq,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { liquidationPrice } = filteredData[rowIndex]
         const fixedPrice = fixedFloat(liquidationPrice)
         return (
@@ -317,6 +359,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.pl',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { pl } = filteredData[rowIndex]
         return (
           <Cell
@@ -334,6 +378,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.plUsd',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { plUsd } = filteredData[rowIndex]
         return (
           <Cell
@@ -351,6 +397,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.plperc',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { plPerc } = filteredData[rowIndex]
         return (
           <Cell
@@ -368,6 +416,8 @@ export const getFrameworkPositionsColumns = (props) => {
       name: 'column.fundingCost',
       width: COLUMN_WIDTHS.swap,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { marginFunding } = filteredData[rowIndex]
         const fixedSwap = fixedFloat(marginFunding)
         return (
@@ -387,6 +437,8 @@ export const getFrameworkPositionsColumns = (props) => {
       className: 'align-left',
       width: 120,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const swapType = showType(filteredData[rowIndex].marginFundingType)
         return (
           <Cell tooltip={getTooltipContent(swapType, t)}>
@@ -402,6 +454,8 @@ export const getFrameworkPositionsColumns = (props) => {
       className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const { status } = filteredData[rowIndex]
         return (
           <Cell tooltip={getTooltipContent(status, t)}>
@@ -417,6 +471,8 @@ export const getFrameworkPositionsColumns = (props) => {
       nameStr: `${t('column.updated')} (${timeOffset})`,
       width: COLUMN_WIDTHS.mtsUpdate,
       renderer: (rowIndex) => {
+        if (isLoading) return getCellLoader(14, 72)
+        if (isNoData) return getCellNoData()
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
         return (
           <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -429,104 +485,117 @@ export const getFrameworkPositionsColumns = (props) => {
   ]
 }
 
-export const getPositionsTickersColumns = (props) => {
-  const { filteredData, t } = props
+export const getPositionsTickersColumns = ({
+  t,
+  isNoData,
+  isLoading,
+  filteredData,
+}) => [
+  {
+    id: 'pair',
+    name: 'column.pair',
+    className: 'align-left',
+    width: COLUMN_WIDTHS.pair,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData(t('column.noResults'))
+      const { pair } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(pair, t)}>
+          {pair}
+        </Cell>
+      )
+    },
+    copyText: rowIndex => filteredData[rowIndex].pair,
+  },
+  {
+    id: 'amount',
+    name: 'column.amount',
+    width: COLUMN_WIDTHS.amount,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData()
+      const { amount } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={getTooltipContent(fixedFloat(amount), t)}
+        >
+          {formatAmount(amount)}
+        </Cell>
+      )
+    },
+    isNumericValue: true,
+    copyText: rowIndex => filteredData[rowIndex].amount,
+  },
+]
 
-  return [
-    {
-      id: 'pair',
-      name: 'column.pair',
-      className: 'align-left',
-      width: COLUMN_WIDTHS.pair,
-      renderer: (rowIndex) => {
-        const { pair } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(pair, t)}>
-            {pair}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].pair,
+export const getWalletsTickersColumns = ({
+  t,
+  isNoData,
+  isLoading,
+  filteredData,
+}) => [
+  {
+    id: 'type',
+    name: 'column.type',
+    className: 'align-left',
+    width: 80,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData(t('column.noResults'))
+      const { walletType } = filteredData[rowIndex]
+      const walletTypeText = t(`wallets.header.${walletType}`)
+      return (
+        <Cell tooltip={getTooltipContent(walletTypeText, t)}>
+          {walletTypeText}
+        </Cell>
+      )
     },
-    {
-      id: 'amount',
-      name: 'column.amount',
-      width: COLUMN_WIDTHS.amount,
-      renderer: (rowIndex) => {
-        const { amount } = filteredData[rowIndex]
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedFloat(amount), t)}
-          >
-            {formatAmount(amount)}
-          </Cell>
-        )
-      },
-      isNumericValue: true,
-      copyText: rowIndex => filteredData[rowIndex].amount,
+    copyText: (rowIndex) => {
+      const { walletType } = filteredData[rowIndex]
+      return t(`wallets.header.${walletType}`)
     },
-  ]
-}
+  },
+  {
+    id: 'pair',
+    name: 'column.pair',
+    className: 'align-left',
+    width: 100,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData()
+      const { pair } = filteredData[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(pair, t)}>
+          {pair}
+        </Cell>
+      )
+    },
+    copyText: rowIndex => filteredData[rowIndex].pair,
+  },
+  {
+    id: 'amount',
+    name: 'column.amount',
+    width: 120,
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(14, 72)
+      if (isNoData) return getCellNoData()
+      const { amount } = filteredData[rowIndex]
+      return (
+        <Cell
+          className='bitfinex-text-align-right'
+          tooltip={getTooltipContent(fixedFloat(amount), t)}
+        >
+          {formatAmount(amount)}
+        </Cell>
+      )
+    },
+    isNumericValue: true,
+    copyText: rowIndex => filteredData[rowIndex].amount,
+  },
+]
 
-export const getWalletsTickersColumns = (props) => {
-  const { filteredData, t } = props
-
-  return [
-    {
-      id: 'type',
-      name: 'column.type',
-      className: 'align-left',
-      width: 80,
-      renderer: (rowIndex) => {
-        const { walletType } = filteredData[rowIndex]
-        const walletTypeText = t(`wallets.header.${walletType}`)
-        return (
-          <Cell tooltip={getTooltipContent(walletTypeText, t)}>
-            {walletTypeText}
-          </Cell>
-        )
-      },
-      copyText: (rowIndex) => {
-        const { walletType } = filteredData[rowIndex]
-        return t(`wallets.header.${walletType}`)
-      },
-    },
-    {
-      id: 'pair',
-      name: 'column.pair',
-      className: 'align-left',
-      width: 100,
-      renderer: (rowIndex) => {
-        const { pair } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(pair, t)}>
-            {pair}
-          </Cell>
-        )
-      },
-      copyText: rowIndex => filteredData[rowIndex].pair,
-    },
-    {
-      id: 'amount',
-      name: 'column.amount',
-      width: 120,
-      renderer: (rowIndex) => {
-        const { amount } = filteredData[rowIndex]
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedFloat(amount), t)}
-          >
-            {formatAmount(amount)}
-          </Cell>
-        )
-      },
-      isNumericValue: true,
-      copyText: rowIndex => filteredData[rowIndex].amount,
-    },
-  ]
-}
 
 export const singleColumnSelectedCheck = context => isEqual(
   get(context, 'selectedRegions[0].cols[0]'),

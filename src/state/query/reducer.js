@@ -7,6 +7,7 @@ const initialState = {
   localExportPath: null,
   remoteUrn: null,
   isCsvExporting: false,
+  isPDFRequired: true,
 }
 
 export function queryReducer(state = initialState, action) {
@@ -31,6 +32,11 @@ export function queryReducer(state = initialState, action) {
       return {
         ...state,
         isCsvExporting: payload,
+      }
+    case types.SET_IS_PDF_REQUIRED:
+      return {
+        ...state,
+        isPDFRequired: payload,
       }
     case authTypes.LOGOUT:
       return initialState

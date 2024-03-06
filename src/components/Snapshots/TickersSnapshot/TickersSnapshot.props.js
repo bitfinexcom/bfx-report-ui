@@ -14,7 +14,6 @@ const WALLETS_TICKERS_ENTRIES_PROPS = PropTypes.shape({
 export const propTypes = {
   positionsTickersEntries: PropTypes.arrayOf(POSITIONS_TICKERS_ENTRIES_PROPS).isRequired,
   walletsTickersEntries: PropTypes.arrayOf(WALLETS_TICKERS_ENTRIES_PROPS).isRequired,
-  t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {

@@ -6,8 +6,6 @@ import {
 } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
@@ -82,39 +80,51 @@ class FundingPayment extends PureComponent {
 
   render() {
     const {
+      t,
       columns,
-      columnsWidth,
-      dataReceived,
       entries,
-      existingCoins,
+      refresh,
+      timeOffset,
       getFullTime,
       pageLoading,
-      refresh,
-      t,
+      columnsWidth,
+      dataReceived,
+      existingCoins,
       targetSymbols,
-      timeOffset,
     } = this.props
+    const isNoData = isEmpty(entries)
+    const isLoading = !dataReceived && pageLoading
     const tableColumns = getColumns({
+      t,
+      isNoData,
+      isLoading,
+      timeOffset,
+      getFullTime,
+      target: TYPE,
       columnsWidth,
       filteredData: entries,
-      getFullTime,
-      t,
-      target: TYPE,
-      timeOffset,
     }).filter(({ id }) => columns[id])
 
     let showContent
-    if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
+    if (isNoData) {
+      showContent = (
+        <div className='data-table-wrapper'>
+          <DataTable
+            section={TYPE}
+            isNoData={isNoData}
+            isLoading={isLoading}
+            tableColumns={tableColumns}
+            numRows={isLoading ? 5 : 1}
+          />
+        </div>
+      )
     } else {
       showContent = (
         <div className='data-table-wrapper'>
           <DataTable
             section={TYPE}
-            numRows={entries.length}
             tableColumns={tableColumns}
+            numRows={isLoading ? 5 : entries.length}
           />
           <Pagination
             target={TYPE}

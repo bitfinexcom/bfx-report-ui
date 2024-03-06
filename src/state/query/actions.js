@@ -60,11 +60,19 @@ export function setIsCsvExporting(isExporting) {
   }
 }
 
+export function setIsPdfRequired(isPdfRequired) {
+  return {
+    type: types.SET_IS_PDF_REQUIRED,
+    payload: isPdfRequired,
+  }
+}
+
 export default {
   exportCsv,
   setRemoteUrn,
   prepareExport,
   setExportEmail,
+  setIsPdfRequired,
   setIsCsvExporting,
   setLocalExportPath,
 }

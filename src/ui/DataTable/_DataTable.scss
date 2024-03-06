@@ -33,7 +33,7 @@
   }
 
   .bp3-table-cell-client {
-    background-color: var(--bgColor);
+    background-color: var(--bgColor2);
   }
 
   .bitfinex-green-text, .bitfinex-green-text > div {
@@ -52,6 +52,10 @@
     &.bitfinex-red-text > .bitfinex-amount-fraction {
       color: var(--tableAmountFractionNegColor);
     }
+  }
+
+  .cell-no-data {
+    color: var(--color2);
   }
 }
 

@@ -60,7 +60,7 @@ import config from 'config'
 
 import actions from './actions'
 import types from './constants'
-import { getExportEmail } from './selectors'
+import { getExportEmail, getIsPdfExportRequired } from './selectors'
 import {
   getQueryLimit,
   NO_TIME_FRAME_TARGETS,
@@ -129,7 +129,7 @@ const {
 }
 */
 
-const getMultipleCsv = params => makeFetchCall('getMultipleCsv', params)
+const getMultipleCsv = params => makeFetchCall('getMultipleFile', params)
 
 function getSelector(target) {
   switch (target) {
@@ -250,6 +250,7 @@ function* getOptions({ target }) {
   const isVSPrevDayBalance = showFrameworkMode ? yield select(getIsVSPrevDayBalance) : ''
   const isUnrealizedProfitExcluded = showFrameworkMode ? yield select(getIsUnrealizedProfitExcluded) : ''
   const isVsAccountBalanceSelected = showFrameworkMode ? yield select(getIsVsAccountBalanceSelected) : ''
+  const isPdfExportRequired = showFrameworkMode ? yield select(getIsPdfExportRequired) : false
 
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
@@ -288,6 +289,8 @@ function* getOptions({ target }) {
       options.symbol = formatSymbol(target, sign.targetSymbols)
       break
     case MENU_TAX_REPORT:
+      options.isPDFRequired = isPdfExportRequired
+      break
     case MENU_LOGINS:
     case MENU_CHANGE_LOGS:
       break
@@ -338,7 +341,8 @@ function* getOptions({ target }) {
       options.method = 'getPayInvoiceListCsv'
       break
     case MENU_LEDGERS:
-      options.method = 'getLedgersCsv'
+      options.method = 'getLedgersFile'
+      options.isPDFRequired = isPdfExportRequired
       options.category = yield select(getLedgersCategory)
       break
     case MENU_LOAN_REPORT:
@@ -385,7 +389,7 @@ function* getOptions({ target }) {
       options.method = 'getFullSnapshotReportCsv'
       break
     case MENU_TAX_REPORT:
-      options.method = 'getFullTaxReportCsv'
+      options.method = 'getFullTaxReportFile'
       break
     case MENU_TRADED_VOLUME:
       options.method = 'getTradedVolumeCsv'

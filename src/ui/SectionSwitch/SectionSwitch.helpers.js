@@ -33,11 +33,6 @@ export const EARNINGS_TARGETS = [
   queryConstants.MENU_AFFILIATES_EARNINGS,
 ]
 
-export const WALLETS_TARGETS = [
-  queryConstants.MENU_WALLETS,
-  queryConstants.MENU_MOVEMENTS,
-]
-
 
 export const ANALYSIS_STAT_SECTIONS = [
   {
@@ -118,24 +113,12 @@ export const POSITIONS_SECTIONS = [
   },
 ]
 
-export const WALLETS_SECTIONS = [
-  {
-    targetSection: queryConstants.MENU_WALLETS,
-    description: 'navItems.myHistory.walletsTabs.balances',
-  },
-  {
-    targetSection: queryConstants.MENU_MOVEMENTS,
-    description: 'navItems.myHistory.walletsTabs.movements',
-  },
-]
-
 export const getSections = (target, hasSubSections) => {
   if (_includes(TRADES_TARGETS, target) && hasSubSections) return TRADES_SECTIONS
   if (_includes(POSITIONS_TARGETS, target) && hasSubSections) return POSITIONS_SECTIONS
   if (_includes(ANALYSIS_STAT_TARGETS, target)) return ANALYSIS_STAT_SECTIONS
   if (_includes(FUNDING_TARGETS, target)) return FUNDING_SECTIONS
   if (_includes(EARNINGS_TARGETS, target)) return EARNINGS_SECTIONS
-  if (_includes(WALLETS_TARGETS, target)) return WALLETS_SECTIONS
 
   return []
 }

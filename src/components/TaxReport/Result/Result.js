@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import _isNumber from 'lodash/isNumber'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DataTable from 'ui/DataTable'
 import { fixedFloat } from 'ui/utils'
 import queryConstants from 'state/query/constants'
@@ -10,7 +10,6 @@ import { checkFetch, checkInit } from 'state/utils'
 import { getFrameworkPositionsColumns } from 'utils/columns'
 import getMovementsColumns from 'components/Movements/Movements.columns'
 
-import { propTypes } from './Result.props'
 import getBalancesColumns from './Balances.columns'
 import TAX_REPORT_SECTIONS from '../TaxReport.sections'
 
@@ -25,22 +24,20 @@ class Result extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  getPositionsSnapshot = ({ positions, title }) => {
+  getPositionsSnapshot = ({ positions, title, isLoading }) => {
     const {
       t,
       timeOffset,
       getFullTime,
     } = this.props
 
-    if (!positions.length) {
-      return null
-    }
-
     const positionsColumns = getFrameworkPositionsColumns({
       t,
+      isLoading,
       timeOffset,
       getFullTime,
       filteredData: positions,
+      isNoData: isEmpty(positions),
     })
 
     return (
@@ -49,19 +46,18 @@ class Result extends PureComponent {
           {title}
         </div>
         <DataTable
+          isLoading={isLoading}
           numRows={positions.length}
+          isNoData={isEmpty(positions)}
           tableColumns={positionsColumns}
         />
       </>
     )
   }
 
-  getBalances = ({ balances, title }) => {
+  getBalances = ({ balances, title, isLoading }) => {
     const { t } = this.props
-    if (this.isBalancesEmpty(balances)) {
-      return null
-    }
-
+    const isNoData = this.isBalancesEmpty(balances)
     const {
       totalResult,
       positionsTotalPlUsd,
@@ -70,6 +66,8 @@ class Result extends PureComponent {
 
     const balancesColumns = getBalancesColumns({
       t,
+      isNoData,
+      isLoading,
       totalResult,
       positionsTotalPlUsd,
       walletsTotalBalanceUsd,
@@ -82,13 +80,15 @@ class Result extends PureComponent {
         </div>
         <DataTable
           numRows={1}
+          isNoData={isNoData}
+          isLoading={isLoading}
           tableColumns={balancesColumns}
         />
       </>
     )
   }
 
-  getMovements = () => {
+  getMovements = (isNoData, isLoading) => {
     const {
       t,
       data,
@@ -101,6 +101,8 @@ class Result extends PureComponent {
 
     const movementsColumns = getMovementsColumns({
       t,
+      isNoData,
+      isLoading,
       timeOffset,
       getFullTime,
       filteredData: movements,
@@ -112,9 +114,11 @@ class Result extends PureComponent {
           {t('taxreport.movements')}
         </div>
         <DataTable
+          isNoData={isNoData}
+          isLoading={isLoading}
           className='movements-table'
-          numRows={movements.length}
           tableColumns={movementsColumns}
+          numRows={isLoading ? 5 : movements.length}
         />
       </>
     )
@@ -155,24 +159,14 @@ class Result extends PureComponent {
         totalResult,
       },
     } = data
-
-    if (!dataReceived && pageLoading) {
-      return <Loading />
-    }
-
-    const isEmpty = !startingPositionsSnapshot.length
+    const isLoading = !dataReceived && pageLoading
+    const isNoData = !startingPositionsSnapshot.length
       && !endingPositionsSnapshot.length
       && this.isBalancesEmpty(startingPeriodBalances)
       && this.isBalancesEmpty(endingPeriodBalances)
       && !movements.length
       && !_isNumber(movementsTotalAmount)
       && !totalResult // can be 0 even if data is absent
-
-    if (isEmpty) {
-      return <NoData refresh={this.refresh} />
-    }
-
-    const positionsNotEmpty = startingPositionsSnapshot.length || endingPositionsSnapshot.length
 
     return (
       <>
@@ -194,22 +188,27 @@ class Result extends PureComponent {
           </div>
           )}
         </div>
-        {movements.length > 0 && this.getMovements()}
+        {this.getMovements(isNoData, isLoading)}
         {this.getPositionsSnapshot({
+          isLoading,
           positions: startingPositionsSnapshot,
           title: t('taxreport.startPositions'),
         })}
+        <br />
         {this.getPositionsSnapshot({
+          isLoading,
           positions: endingPositionsSnapshot,
           title: t('taxreport.endPositions'),
         })}
-        {positionsNotEmpty ? <br /> : null}
+        <br />
         {this.getBalances({
+          isLoading,
           balances: startingPeriodBalances,
           title: t('taxreport.startingPeriodBalances'),
         })}
         <br />
         {this.getBalances({
+          isLoading,
           balances: endingPeriodBalances,
           title: t('taxreport.endingPeriodBalances'),
         })}
@@ -218,6 +217,70 @@ class Result extends PureComponent {
   }
 }
 
-Result.propTypes = propTypes
+Result.propTypes = {
+  data: PropTypes.shape({
+    startingPositionsSnapshot: PropTypes.arrayOf(
+      PropTypes.shape({
+        amount: PropTypes.number,
+        basePrice: PropTypes.number,
+        liquidationPrice: PropTypes.number,
+        marginFunding: PropTypes.number,
+        marginFundingType: PropTypes.number,
+        mtsUpdate: PropTypes.number,
+        pair: PropTypes.string.isRequired,
+        pl: PropTypes.number,
+        plPerc: PropTypes.number,
+      }),
+    ).isRequired,
+    endingPositionsSnapshot: PropTypes.arrayOf(
+      PropTypes.shape({
+        amount: PropTypes.number,
+        basePrice: PropTypes.number,
+        liquidationPrice: PropTypes.number,
+        marginFunding: PropTypes.number,
+        marginFundingType: PropTypes.number,
+        mtsUpdate: PropTypes.number,
+        pair: PropTypes.string.isRequired,
+        pl: PropTypes.number,
+        plPerc: PropTypes.number,
+      }),
+    ).isRequired,
+    finalState: PropTypes.shape({
+      startingPeriodBalances: PropTypes.shape({
+        walletsTotalBalanceUsd: PropTypes.number,
+        positionsTotalPlUsd: PropTypes.number,
+        totalResult: PropTypes.number,
+      }),
+      movements: PropTypes.arrayOf(PropTypes.shape({
+        amount: PropTypes.number,
+        amountUsd: PropTypes.number,
+        currency: PropTypes.string,
+        currencyName: PropTypes.string,
+        destinationAddress: PropTypes.string,
+        fees: PropTypes.number,
+        id: PropTypes.number,
+        mtsStarted: PropTypes.number,
+        mtsUpdated: PropTypes.number,
+        note: PropTypes.string,
+        status: PropTypes.string,
+        subUserId: PropTypes.number,
+        transactionId: PropTypes.string,
+      })).isRequired,
+      movementsTotalAmount: PropTypes.number,
+      endingPeriodBalances: PropTypes.shape({
+        walletsTotalBalanceUsd: PropTypes.number,
+        positionsTotalPlUsd: PropTypes.number,
+        totalResult: PropTypes.number,
+      }),
+      totalResult: PropTypes.number,
+    }).isRequired,
+  }).isRequired,
+  pageLoading: PropTypes.bool.isRequired,
+  dataReceived: PropTypes.bool.isRequired,
+  getFullTime: PropTypes.func.isRequired,
+  timeOffset: PropTypes.string.isRequired,
+  refresh: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
+}
 
 export default Result

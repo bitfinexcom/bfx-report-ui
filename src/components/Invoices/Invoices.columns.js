@@ -3,10 +3,12 @@ import { Cell } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
 import { fixedFloat, formatAmount } from 'ui/utils'
-import { getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
+  isNoData,
+  isLoading,
   timeOffset,
   getFullTime,
   filteredData,
@@ -18,6 +20,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { id } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(id, t)}>
@@ -32,6 +37,9 @@ export const getColumns = ({
     name: 'column.amount',
     width: getColumnWidth('amount', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { amount, currency } = filteredData[rowIndex]
       const tooltip = `${fixedFloat(amount)} ${currency}`
       return (
@@ -52,6 +60,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { currency } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(currency, t)}>
@@ -67,6 +78,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('orderId', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { orderId } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(orderId, t)}>
@@ -81,6 +95,9 @@ export const getColumns = ({
     name: 'column.payCurrencies',
     width: getColumnWidth('payCurrencies', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { payCurrencies } = filteredData[rowIndex]
       const formattedPayCurrenciesInfo = JSON.stringify(payCurrencies, undefined, 2)
       return (
@@ -99,6 +116,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { status } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(status, t)}>
@@ -114,6 +134,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('customerInfo', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { customerInfo } = filteredData[rowIndex]
       const formattedCustomerInfo = JSON.stringify(customerInfo, undefined, 2)
       return (
@@ -132,6 +155,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('invoices', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { invoices } = filteredData[rowIndex]
       const formattedInvoicesInfo = JSON.stringify(invoices, undefined, 2)
       return (
@@ -150,6 +176,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('payment', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { payment } = filteredData[rowIndex]
       const formattedPayment = JSON.stringify(payment, undefined, 2)
       return (
@@ -168,6 +197,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('duration', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { duration } = filteredData[rowIndex]
       return (
         <Cell>
@@ -183,6 +215,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('merchantName', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { merchantName } = filteredData[rowIndex]
       return (
         <Cell>
@@ -198,6 +233,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('redirectUrl', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { redirectUrl } = filteredData[rowIndex]
       return (
         <Cell>
@@ -221,6 +259,9 @@ export const getColumns = ({
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mts', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const timestamp = getFullTime(filteredData[rowIndex].mts)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -236,6 +277,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('webhook', columnsWidth),
     renderer: (rowIndex) => {
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { webhook } = filteredData[rowIndex]
       return (
         <Cell>

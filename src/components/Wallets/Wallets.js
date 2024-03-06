@@ -1,11 +1,8 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
-import NoData from 'ui/NoData'
-import Loading from 'ui/Loading'
 import DateInput from 'ui/DateInput'
 import BalancePrecisionSelector from 'ui/BalancePrecisionSelector'
 import {
@@ -17,15 +14,12 @@ import {
 } from 'ui/SectionHeader'
 import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
-import SectionSwitch from 'ui/SectionSwitch'
 import { isValidTimeStamp } from 'state/query/utils'
-import queryConstants from 'state/query/constants'
 
 import WalletsData from './Wallets.data'
 import { propTypes, defaultProps } from './Wallets.props'
 
 const isFrameworkMode = config.showFrameworkMode
-const TYPE = queryConstants.MENU_WALLETS
 
 class Wallets extends PureComponent {
   constructor(props) {
@@ -96,16 +90,6 @@ class Wallets extends PureComponent {
     const walletsData = (isFrameworkMode && exactBalance) ? walletsSnapshotEntries : entries
     const isLoading = (!dataReceived && pageLoading)
       || (exactBalance && !snapshotReceived && snapshotLoading)
-    const isNoData = isEmpty(entries) || (exactBalance && isEmpty(walletsSnapshotEntries))
-
-    let showContent
-    if (isLoading) {
-      showContent = <Loading />
-    } else if (isNoData) {
-      showContent = <NoData title='wallets.nodata' refresh={refresh} />
-    } else {
-      showContent = <WalletsData entries={walletsData} />
-    }
 
     return (
       <Card
@@ -116,7 +100,6 @@ class Wallets extends PureComponent {
           <SectionHeaderTitle>
             {t('navItems.myHistory.walletsTabs.balances')}
           </SectionHeaderTitle>
-          <SectionSwitch target={TYPE} />
           {isFrameworkMode && (
             <SectionHeaderRow>
               <SectionHeaderItem>
@@ -145,7 +128,10 @@ class Wallets extends PureComponent {
             </SectionHeaderRow>
           )}
         </SectionHeader>
-        {showContent}
+        <WalletsData
+          isLoading={isLoading}
+          entries={walletsData}
+        />
       </Card>
     )
   }

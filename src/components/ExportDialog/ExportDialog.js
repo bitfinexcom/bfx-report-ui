@@ -13,10 +13,12 @@ import config from 'config'
 import { tracker } from 'utils/trackers'
 import { formatDate } from 'state/utils'
 import { getTarget } from 'state/query/utils'
+import ExportToPdf from 'ui/ExportToPdf'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
 import queryConstants from 'state/query/constants'
 import DateFormatSelector from 'ui/DateFormatSelector'
 
+import { getShowPdfSwitcher } from './ExportDialog.helpers'
 import ExportTargetsSelector from './ExportDialog.TargetsSelector'
 
 const { showFrameworkMode } = config
@@ -123,6 +125,7 @@ class ExportDialog extends PureComponent {
     if (!isOpen) {
       return null
     }
+    const showPdfSwitcher = getShowPdfSwitcher(currentTargets)
     const showLoader = showFrameworkMode && isExporting
     const target = getTarget(location.pathname)
     const isWallets = location && location.pathname && target === queryConstants.MENU_WALLETS
@@ -182,8 +185,16 @@ class ExportDialog extends PureComponent {
             </div>
           </div>
           <div className='export-dialog-row'>
-            <span>{t('preferences.milliseconds')}</span>
-            <ShowMilliseconds />
+            {showPdfSwitcher && (
+              <div className='export-dialog-item'>
+                <span>{t('download.exportAsPdf')}</span>
+                <ExportToPdf />
+              </div>
+            )}
+            <div className='export-dialog-item'>
+              <span>{t('preferences.milliseconds')}</span>
+              <ShowMilliseconds />
+            </div>
           </div>
         </div>
         <div className={Classes.DIALOG_FOOTER}>

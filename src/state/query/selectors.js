@@ -4,6 +4,7 @@ export const getRemoteUrn = state => getQuery(state).remoteUrn
 export const getExportEmail = state => getQuery(state).exportEmail
 export const getLocalExportPath = state => getQuery(state).localExportPath
 export const getIsCsvExporting = state => getQuery(state)?.isCsvExporting ?? false
+export const getIsPdfExportRequired = state => getQuery(state)?.isPDFRequired ?? false
 
 export default {
   getQuery,
@@ -11,4 +12,5 @@ export default {
   getExportEmail,
   getIsCsvExporting,
   getLocalExportPath,
+  getIsPdfExportRequired,
 }
