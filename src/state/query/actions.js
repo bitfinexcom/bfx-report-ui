@@ -53,7 +53,7 @@ export function setExportEmail(email) {
   }
 }
 
-export function setIsCsvExporting(isExporting) {
+export function setIsReportExporting(isExporting) {
   return {
     type: types.SET_IS_REPORT_EXPORTING,
     payload: isExporting,
@@ -73,6 +73,6 @@ export default {
   prepareExport,
   setExportEmail,
   setIsPdfRequired,
-  setIsCsvExporting,
+  setIsReportExporting,
   setLocalExportPath,
 }
