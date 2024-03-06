@@ -1,18 +1,18 @@
 import types from './constants'
 
 /**
- * Create an action to export CSV.
+ * Create an action to export report.
  * @param {string[]} targets array of export types
  */
-export function exportCsv(targets) {
+export function exportReport(targets) {
   return {
-    type: types.EXPORT_CSV,
+    type: types.EXPORT_REPORT,
     payload: targets,
   }
 }
 
 /**
- * Create an action to set path to local export CSV folder.
+ * Create an action to set path to local export folder.
  * @param {string} path to local export folder
  */
 export function setLocalExportPath(path) {
@@ -23,12 +23,12 @@ export function setLocalExportPath(path) {
 }
 
 /**
- * Create an action to set remote CSV URN.
+ * Create an action to set remote report URN.
  * @param {string} urn to generated report.
  */
 export function setRemoteUrn(urn) {
   return {
-    type: types.SET_REMOTE_CSV_URN,
+    type: types.SET_REMOTE_REPORT_URN,
     payload: urn,
   }
 }
@@ -55,7 +55,7 @@ export function setExportEmail(email) {
 
 export function setIsCsvExporting(isExporting) {
   return {
-    type: types.SET_IS_CSV_EXPORTING,
+    type: types.SET_IS_REPORT_EXPORTING,
     payload: isExporting,
   }
 }
@@ -68,7 +68,7 @@ export function setIsPdfRequired(isPdfRequired) {
 }
 
 export default {
-  exportCsv,
+  exportReport,
   setRemoteUrn,
   prepareExport,
   setExportEmail,
