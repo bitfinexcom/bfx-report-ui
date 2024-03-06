@@ -422,7 +422,7 @@ function* exportReport({ payload: targets }) {
     }
 
     if (showFrameworkMode) {
-      yield put(actions.setIsCsvExporting(true))
+      yield put(actions.setIsReportExporting(true))
     }
 
     const { result, error } = yield call(getMultipleFile, params)
@@ -439,7 +439,7 @@ function* exportReport({ payload: targets }) {
 
     if (error) {
       if (showFrameworkMode) {
-        yield put(actions.setIsCsvExporting(false))
+        yield put(actions.setIsReportExporting(false))
       }
       yield put(updateErrorStatus({
         id: 'status.fail',
@@ -449,7 +449,7 @@ function* exportReport({ payload: targets }) {
     }
   } catch (fail) {
     if (showFrameworkMode) {
-      yield put(actions.setIsCsvExporting(false))
+      yield put(actions.setIsReportExporting(false))
     }
     yield put(updateErrorStatus({
       id: 'status.request.error',
