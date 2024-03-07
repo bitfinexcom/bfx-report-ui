@@ -66,11 +66,12 @@ class MultiPairSelector extends PureComponent {
         ...inactivePairs,
       ]
       : shownPairs
+    const preparedItems = [...new Set(items)]
 
     return (
       <MultiSelect
         disabled={!pairs.length && !existingPairs.length}
-        items={items}
+        items={preparedItems}
         itemRenderer={this.renderPair}
         itemPredicate={this.itemPredicate}
         onItemSelect={togglePair}
