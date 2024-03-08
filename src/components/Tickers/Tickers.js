@@ -124,7 +124,10 @@ class Tickers extends PureComponent {
               </SectionHeaderItemLabel>
               <ColumnsFilter target={TYPE} />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
+            <RefreshButton
+              onClick={refresh}
+              disabled={isEmpty(targetPairs)}
+            />
             <SyncPrefButton sectionType={TYPE} />
           </SectionHeaderRow>
         </SectionHeader>
