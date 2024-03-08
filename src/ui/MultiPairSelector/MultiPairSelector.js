@@ -16,14 +16,10 @@ class MultiPairSelector extends PureComponent {
     if (!matchesPredicate) {
       return null
     }
-    const { currentFilters, existingPairs, t } = this.props
+    const { currentFilters, t } = this.props
     const isCurrent = currentFilters.includes(pair)
     const text = pair === 'inactive' ? t('selector.inactive') : pair
-
-    const classes = classNames({
-      'bitfinex-queried-symbol': existingPairs.includes(pair) && !isCurrent && !active,
-      'bp3-menu-item--selected': isCurrent,
-    })
+    const classes = classNames({ 'bp3-menu-item--selected': isCurrent })
 
     return (
       <MenuItem
