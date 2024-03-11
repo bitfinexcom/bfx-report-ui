@@ -1,5 +1,5 @@
-.export-success-dialog {
-  .icon--checked {
+.export-fail-dialog {
+  .icon--warning {
     display: block;
     margin: 23px auto 28px auto;
   }
@@ -21,7 +21,7 @@
 }
 
 @media screen and (min-width: 2560px) {
-  .export-success-dialog {
+  .export-fail-dialog {
     &-message {
       line-height: 1.3;
     }
