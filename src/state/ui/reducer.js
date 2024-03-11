@@ -7,7 +7,7 @@ const initialState = {
   isExportDialogOpen: false,
   isErrorDialogDisabled: false,
   isErrorDialogOpen: false,
-  isExportSuccessDialogOpen: false,
+  isExportSuccessDialogOpen: true,
   isExportFailDialogOpen: false,
   isPaginationDialogOpen: false,
   isPreferencesDialogOpen: false,
