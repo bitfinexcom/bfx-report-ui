@@ -27,36 +27,19 @@ const ExportSuccessDialog = ({
     toggleDialog()
   }
 
-  const message = config.localExport
-    ? (
-      <>
-        {t('download.status.local')}
-        {remoteUrn
-          ? (
-            <a href={remoteUrn}>
-              {t('download.remoteStorage')}
-            </a>
-          ) : (
-            <span>
-              {localExportPath}
-            </span>
-          )
-        }
-      </>
-    )
-    : t('download.status.email')
-
   return (
     <Dialog
       className='export-success-dialog'
       isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={onClose}
-      title={t('download.success')}
+      title={t('download.fail')}
     >
       <div className={Classes.DIALOG_BODY}>
         <Icon.WARNING />
-        <div className='export-success-dialog-message'>{message}</div>
+        <div className='export-success-dialog-message'>
+          {t('download.status.failed')}
+        </div>
       </div>
       <div className={Classes.DIALOG_FOOTER}>
         <Button intent={Intent.PRIMARY} onClick={onClose}>
