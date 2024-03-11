@@ -143,6 +143,12 @@ export function showMaintenanceModal(status) {
   }
 }
 
+export function toggleExportFailDialog() {
+  return {
+    type: types.TOGGLE_EXPORT_FAIL_DIALOG,
+  }
+}
+
 export default {
   electronBackendLoaded,
   disableErrorDialog,
@@ -157,4 +163,5 @@ export default {
   proceedPaginationRequest,
   toggleExtraInfoDialog,
   showMaintenanceModal,
+  toggleExportFailDialog,
 }
