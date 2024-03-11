@@ -55,7 +55,7 @@ const ExportSuccessDialog = ({
       title={t('download.success')}
     >
       <div className={Classes.DIALOG_BODY}>
-        <Icon.CHECKED />
+        <Icon.WARNING />
         <div className='export-success-dialog-message'>{message}</div>
       </div>
       <div className={Classes.DIALOG_FOOTER}>
