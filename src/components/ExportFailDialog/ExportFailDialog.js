@@ -48,15 +48,9 @@ const ExportSuccessDialog = ({
 }
 
 ExportSuccessDialog.propTypes = {
-  remoteUrn: PropTypes.string,
-  localExportPath: PropTypes.string,
   t: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   toggleDialog: PropTypes.func.isRequired,
-}
-ExportSuccessDialog.defaultProps = {
-  remoteUrn: null,
-  localExportPath: null,
 }
 
 export default memo(ExportSuccessDialog)
