@@ -8,15 +8,12 @@ import {
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-import config from 'config'
 import { tracker } from 'utils/trackers'
 
 const ExportSuccessDialog = ({
   t,
   isOpen,
-  remoteUrn,
   toggleDialog,
-  localExportPath,
 }) => {
   if (!isOpen) {
     return null
@@ -29,7 +26,7 @@ const ExportSuccessDialog = ({
 
   return (
     <Dialog
-      className='export-success-dialog'
+      className='export-fail-dialog'
       isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={onClose}
@@ -37,7 +34,7 @@ const ExportSuccessDialog = ({
     >
       <div className={Classes.DIALOG_BODY}>
         <Icon.WARNING />
-        <div className='export-success-dialog-message'>
+        <div className='export-fail-dialog-message'>
           {t('download.status.failed')}
         </div>
       </div>
