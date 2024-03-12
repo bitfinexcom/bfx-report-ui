@@ -1,1 +1,1 @@
-export { default } from './ExportFailDialog.container'
+export { default } from './ExportFailDialog'
