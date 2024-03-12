@@ -1,5 +1,6 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import {
   Button,
   Classes,
@@ -9,28 +10,26 @@ import {
 
 import Icon from 'icons'
 import { tracker } from 'utils/trackers'
+import { toggleExportFailDialog } from 'state/ui/actions'
+import { getIsExportFailDialogOpen } from 'state/ui/selectors'
 
-const ExportSuccessDialog = ({
-  t,
-  isOpen,
-  toggleDialog,
-}) => {
-  if (!isOpen) {
-    return null
-  }
+const ExportFailDialog = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const isOpen = useSelector(getIsExportFailDialogOpen)
 
   const onClose = () => {
     tracker.trackEvent('Okay')
-    toggleDialog()
+    dispatch(toggleExportFailDialog())
   }
 
   return (
     <Dialog
-      className='export-fail-dialog'
-      isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={onClose}
       title={t('download.fail')}
+      isCloseButtonShown={false}
+      className='export-fail-dialog'
     >
       <div className={Classes.DIALOG_BODY}>
         <Icon.WARNING />
@@ -39,7 +38,10 @@ const ExportSuccessDialog = ({
         </div>
       </div>
       <div className={Classes.DIALOG_FOOTER}>
-        <Button intent={Intent.PRIMARY} onClick={onClose}>
+        <Button
+          onClick={onClose}
+          intent={Intent.PRIMARY}
+        >
           {t('download.okay')}
         </Button>
       </div>
@@ -47,10 +49,4 @@ const ExportSuccessDialog = ({
   )
 }
 
-ExportSuccessDialog.propTypes = {
-  t: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  toggleDialog: PropTypes.func.isRequired,
-}
-
-export default memo(ExportSuccessDialog)
+export default ExportFailDialog
