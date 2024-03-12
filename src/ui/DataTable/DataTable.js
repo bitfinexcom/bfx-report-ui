@@ -189,28 +189,30 @@ class DataTable extends PureComponent {
     }
 
     return (
-      <Table
-        className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
-        numRows={getRowsConfig(isLoading, isNoData, numRows)}
-        enableRowHeader={false}
-        columnWidths={columnWidths}
-        onSelection={this.onSelection}
-        onColumnWidthChanged={this.onColumnWidthChanged}
-        getCellClipboardData={this.getCellClipboardData}
-        onCopy={this.onCopy}
-        bodyContextMenuRenderer={this.renderBodyContextMenu}
-        defaultRowHeight={defaultRowHeight}
-      >
-        {tableColumns.map(column => (
-          <Column
-            key={column.id}
-            id={column.id}
-            name={column.nameStr ? column.nameStr : t(column.name)}
-            className={column?.className ?? 'align-right'}
-            cellRenderer={column.renderer}
-          />
-        ))}
-      </Table>
+      <div className='data-table-container'>
+        <Table
+          className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
+          numRows={getRowsConfig(isLoading, isNoData, numRows)}
+          enableRowHeader={false}
+          columnWidths={columnWidths}
+          onSelection={this.onSelection}
+          onColumnWidthChanged={this.onColumnWidthChanged}
+          getCellClipboardData={this.getCellClipboardData}
+          onCopy={this.onCopy}
+          bodyContextMenuRenderer={this.renderBodyContextMenu}
+          defaultRowHeight={defaultRowHeight}
+        >
+          {tableColumns.map(column => (
+            <Column
+              key={column.id}
+              id={column.id}
+              name={column.nameStr ? column.nameStr : t(column.name)}
+              className={column?.className ?? 'align-right'}
+              cellRenderer={column.renderer}
+            />
+          ))}
+        </Table>
+      </div>
     )
   }
 }
