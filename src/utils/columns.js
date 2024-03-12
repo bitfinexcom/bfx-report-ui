@@ -612,6 +612,24 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
+export const getCalculatedColumnWidths = (columns, containerWidth) => {
+  if (columns.length === 0) {
+    return []
+  }
+
+  const innerWidth = containerWidth - 2 // border
+  const avgWidth = Math.floor(innerWidth / columns.length)
+  const minWidth = 100
+  if (avgWidth < minWidth) {
+    return _map(columns, () => minWidth)
+  }
+
+  const columnWidths = _map(columns, () => avgWidth)
+  columnWidths[0] = innerWidth - ((columns.length - 1) * avgWidth)
+
+  return columnWidths
+}
+
 export default {
   COLUMN_WIDTHS,
   pickColumnsWidth,
@@ -623,4 +641,5 @@ export default {
   columnHasNumericValueCheck,
   formatSumUpValue,
   getTooltipContent,
+  getCalculatedColumnWidths,
 }
