@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, {
+  useRef,
+  useMemo,
+  useState,
+  useEffect,
+} from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Menu } from '@blueprintjs/core'
@@ -14,6 +19,7 @@ import { isEqual } from '@bitfinex/lib-js-util-base'
 import {
   getRowsConfig,
   getCellNoData,
+  getCalculatedColumnWidths,
   singleColumnSelectedCheck,
   columnHasNumericValueCheck,
 } from 'utils/columns'
@@ -32,10 +38,12 @@ const DataTable = ({
   tableScroll,
   tableColumns,
   showColumnsSum,
-  setColumnsWidth,
+  // setColumnsWidth,
   defaultRowHeight,
 }) => {
+  const containerRef = useRef(null)
   const [sumValue, setSumValue] = useState(null)
+  const [containerWidth, setContainerWidth] = useState(0)
   const [selectedColumns, setSelectedColumns] = useState({})
 
   useEffect(() => {
@@ -44,6 +52,24 @@ const DataTable = ({
       setSumValue(null)
     }
   }, [sumValue])
+
+  const onScreenSizeChanged = () => {
+    setContainerWidth(containerRef.current.offsetWidth)
+  }
+
+  useEffect(() => {
+    setContainerWidth(containerRef.current.offsetWidth)
+    window.addEventListener('resize', onScreenSizeChanged)
+
+    return () => {
+      window.removeEventListener('resize', onScreenSizeChanged)
+    }
+  }, [])
+
+  const columnWidths = useMemo(
+    () => getCalculatedColumnWidths(tableColumns, containerWidth),
+    [tableColumns, containerWidth],
+  )
 
   const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex].copyText(rowIndex)
 
@@ -142,19 +168,19 @@ const DataTable = ({
   const getCellClipboardData = (row, col) => tableColumns[col].copyText(row)
 
 
-  const onColumnWidthChanged = (index, width) => {
-    if (section) {
-      const updatedColumn = {
-        ...tableColumns[index],
-        width,
-      }
-      tableColumns[index] = updatedColumn
-      setColumnsWidth({ section, tableColumns })
-    }
-  }
+  // const onColumnWidthChanged = (index, width) => {
+  //   if (section) {
+  //     const updatedColumn = {
+  //       ...tableColumns[index],
+  //       width,
+  //     }
+  //     tableColumns[index] = updatedColumn
+  //     setColumnsWidth({ section, tableColumns })
+  //   }
+  // }
 
 
-  const columnWidths = tableColumns.map(column => column.width)
+  // const columnWidths = tableColumns.map(column => column.width)
 
   if (isNoData && !isLoading) {
     const noDataTitle = isEqual(section, queryConstants.MENU_TICKERS)
@@ -168,7 +194,10 @@ const DataTable = ({
   }
 
   return (
-    <div className='data-table-container'>
+    <div
+      ref={containerRef}
+      className='data-table-container'
+    >
       <Table
         onCopy={onCopy}
         enableRowHeader={false}
@@ -213,7 +242,7 @@ DataTable.propTypes = {
   tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
   device: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
-  setColumnsWidth: PropTypes.func.isRequired,
+  // setColumnsWidth: PropTypes.func.isRequired,
   showColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
   defaultRowHeight: PropTypes.number,
