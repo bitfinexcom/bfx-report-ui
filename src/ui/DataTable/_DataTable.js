@@ -45,23 +45,23 @@ const DataTable = ({
     }
   }, [sumValue])
 
-
   const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex].copyText(rowIndex)
-
-  const getCellSum = (rowIndex, columnIndex) => {
-    const { isNumericValue } = tableColumns[columnIndex]
-
-    if (isNumericValue) {
-      const colValue = +tableColumns[columnIndex].copyText(rowIndex)
-      setSumValue(sumValue + colValue)
-    }
-  }
-
 
   const renderBodyContextMenu = (context) => {
     const isSingleColumnSelected = singleColumnSelectedCheck(context)
     const hasNumericValue = columnHasNumericValueCheck(context, tableColumns)
     const shouldShowSum = isSingleColumnSelected && hasNumericValue
+    let sum = 0
+
+    const getCellSum = (rowIndex, columnIndex) => {
+      const { isNumericValue } = tableColumns[columnIndex]
+
+      if (isNumericValue) {
+        const colValue = +tableColumns[columnIndex].copyText(rowIndex)
+        sum += colValue
+        setSumValue(sum)
+      }
+    }
 
     return (
       <Menu>
@@ -170,24 +170,24 @@ const DataTable = ({
   return (
     <div className='data-table-container'>
       <Table
-        className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
-        numRows={getRowsConfig(isLoading, isNoData, numRows)}
-        enableRowHeader={false}
-        columnWidths={columnWidths}
-        onSelection={onSelection}
-        // onColumnWidthChanged={onColumnWidthChanged}
-        getCellClipboardData={getCellClipboardData}
         onCopy={onCopy}
-        bodyContextMenuRenderer={renderBodyContextMenu}
+        enableRowHeader={false}
+        onSelection={onSelection}
+        columnWidths={columnWidths}
+        // onColumnWidthChanged={onColumnWidthChanged}
         defaultRowHeight={defaultRowHeight}
+        getCellClipboardData={getCellClipboardData}
+        bodyContextMenuRenderer={renderBodyContextMenu}
+        numRows={getRowsConfig(isLoading, isNoData, numRows)}
+        className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
       >
         {tableColumns.map(column => (
           <Column
-            key={column.id}
             id={column.id}
-            name={column.nameStr ? column.nameStr : t(column.name)}
-            className={column?.className ?? 'align-right'}
+            key={column.id}
             cellRenderer={column.renderer}
+            className={column?.className ?? 'align-right'}
+            name={column.nameStr ? column.nameStr : t(column.name)}
           />
         ))}
       </Table>
