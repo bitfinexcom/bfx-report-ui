@@ -6,7 +6,7 @@ import { getDevice } from 'state/ui/selectors'
 import { getTableScroll } from 'state/base/selectors'
 import { showColumnsSum, setColumnsWidth } from 'state/columns/actions'
 
-import DataTable from './DataTable'
+import DataTable from './_DataTable'
 
 const mapStateToProps = state => ({
   device: getDevice(state),
