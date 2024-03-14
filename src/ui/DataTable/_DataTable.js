@@ -38,7 +38,6 @@ const DataTable = ({
   tableScroll,
   tableColumns,
   showColumnsSum,
-  // setColumnsWidth,
   defaultRowHeight,
 }) => {
   const containerRef = useRef(null)
@@ -166,21 +165,6 @@ const DataTable = ({
   }
 
   const getCellClipboardData = (row, col) => tableColumns[col].copyText(row)
-
-
-  // const onColumnWidthChanged = (index, width) => {
-  //   if (section) {
-  //     const updatedColumn = {
-  //       ...tableColumns[index],
-  //       width,
-  //     }
-  //     tableColumns[index] = updatedColumn
-  //     setColumnsWidth({ section, tableColumns })
-  //   }
-  // }
-
-
-  // const columnWidths = tableColumns.map(column => column.width)
 
   if (isNoData && !isLoading) {
     const noDataTitle = isEqual(section, queryConstants.MENU_TICKERS)
