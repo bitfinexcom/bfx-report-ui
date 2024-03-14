@@ -187,7 +187,6 @@ const DataTable = ({
         enableRowHeader={false}
         onSelection={onSelection}
         columnWidths={columnWidths}
-        // onColumnWidthChanged={onColumnWidthChanged}
         defaultRowHeight={defaultRowHeight}
         getCellClipboardData={getCellClipboardData}
         bodyContextMenuRenderer={renderBodyContextMenu}
@@ -226,7 +225,6 @@ DataTable.propTypes = {
   tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
   device: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
-  // setColumnsWidth: PropTypes.func.isRequired,
   showColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
   defaultRowHeight: PropTypes.number,
