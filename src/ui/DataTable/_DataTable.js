@@ -145,7 +145,6 @@ const DataTable = ({
         } else {
           columnHeaders.push('')
         }
-
         cur += 1
       }
 
