@@ -1,4 +1,5 @@
 import React, {
+  memo,
   useRef,
   useMemo,
   useState,
@@ -205,22 +206,18 @@ const DataTable = ({
   )
 }
 
-
-const TABLE_COLUMNS_PROPS = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string,
-  nameStr: PropTypes.string,
-  renderer: PropTypes.func.isRequired,
-  copyText: PropTypes.func.isRequired,
-  width: PropTypes.number,
-  isNumericValue: PropTypes.bool,
-})
-
 DataTable.propTypes = {
   className: PropTypes.string,
   section: PropTypes.string,
   numRows: PropTypes.number.isRequired,
-  tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
+  tableColumns: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    nameStr: PropTypes.string,
+    renderer: PropTypes.func.isRequired,
+    copyText: PropTypes.func.isRequired,
+    isNumericValue: PropTypes.bool,
+  })).isRequired,
   device: PropTypes.string.isRequired,
   showColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
@@ -237,4 +234,4 @@ DataTable.defaultProps = {
   defaultRowHeight: 26,
 }
 
-export default DataTable
+export default memo(DataTable)
