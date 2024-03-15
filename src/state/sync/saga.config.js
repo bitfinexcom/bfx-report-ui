@@ -27,8 +27,8 @@ import {
   getPublicTradesStartTime,
 } from './selectors'
 
-const getSyncConfReq = () => makeFetchCall('getAllPublicСollsСonfs')
-const editSyncConfReq = params => makeFetchCall('editAllPublicСollsСonfs', params)
+const getSyncConfReq = () => makeFetchCall('getAllPublicCollsConfs')
+const editSyncConfReq = params => makeFetchCall('editAllPublicCollsConfs', params)
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
