@@ -612,15 +612,18 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
+export const MIN_COLUMN_WIDTH = 100
+
+export const DEFAULT_CONTAINER_WIDTH = 1000
+
 export const getCalculatedColumnWidths = (columns, containerWidth) => {
   if (columns.length === 0) {
     return []
   }
 
   const avgWidth = Math.floor(containerWidth / columns.length)
-  const minWidth = 100
-  if (avgWidth < minWidth) {
-    return _map(columns, () => minWidth)
+  if (avgWidth < MIN_COLUMN_WIDTH) {
+    return _map(columns, () => MIN_COLUMN_WIDTH)
   }
 
   const columnWidths = _map(columns, () => avgWidth)
