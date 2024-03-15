@@ -19,6 +19,7 @@ import { isEqual } from '@bitfinex/lib-js-util-base'
 import {
   getRowsConfig,
   getCellNoData,
+  DEFAULT_CONTAINER_WIDTH,
   getCalculatedColumnWidths,
   singleColumnSelectedCheck,
   columnHasNumericValueCheck,
@@ -53,11 +54,11 @@ const DataTable = ({
   }, [sumValue])
 
   const onScreenSizeChanged = () => {
-    setContainerWidth(containerRef?.current?.offsetWidth ?? 1000)
+    setContainerWidth(containerRef?.current?.offsetWidth ?? DEFAULT_CONTAINER_WIDTH)
   }
 
   useEffect(() => {
-    setContainerWidth(containerRef?.current?.offsetWidth ?? 1000)
+    setContainerWidth(containerRef?.current?.offsetWidth ?? DEFAULT_CONTAINER_WIDTH)
     window.addEventListener('resize', onScreenSizeChanged)
 
     return () => {
