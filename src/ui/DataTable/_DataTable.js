@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Menu } from '@blueprintjs/core'
@@ -28,18 +28,18 @@ import {
   columnHasNumericValueCheck,
 } from 'utils/columns'
 import DEVICES from 'var/devices'
+import { getDevice } from 'state/ui/selectors'
 import queryConstants from 'state/query/constants'
+import { getTableScroll } from 'state/base/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 
 const DataTable = ({
-  device,
   numRows,
   section,
   isNoData,
   isLoading,
   className,
-  tableScroll,
   tableColumns,
   showColumnsSum,
   defaultRowHeight,
@@ -47,6 +47,8 @@ const DataTable = ({
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const containerRef = useRef(null)
+  const device = useSelector(getDevice)
+  const tableScroll = useSelector(getTableScroll)
   const [sumValue, setSumValue] = useState(null)
   const [containerWidth, setContainerWidth] = useState(0)
   const [selectedColumns, setSelectedColumns] = useState({})
@@ -219,9 +221,7 @@ DataTable.propTypes = {
     copyText: PropTypes.func.isRequired,
     isNumericValue: PropTypes.bool,
   })).isRequired,
-  device: PropTypes.string.isRequired,
   showColumnsSum: PropTypes.func.isRequired,
-  tableScroll: PropTypes.bool.isRequired,
   defaultRowHeight: PropTypes.number,
   isNoData: PropTypes.bool,
   isLoading: PropTypes.bool,
