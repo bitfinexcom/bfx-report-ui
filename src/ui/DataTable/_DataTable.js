@@ -31,6 +31,7 @@ import DEVICES from 'var/devices'
 import { getDevice } from 'state/ui/selectors'
 import queryConstants from 'state/query/constants'
 import { getTableScroll } from 'state/base/selectors'
+import { showColumnsSum } from 'state/columns/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 
@@ -41,7 +42,6 @@ const DataTable = ({
   isLoading,
   className,
   tableColumns,
-  showColumnsSum,
   defaultRowHeight,
 }) => {
   const { t } = useTranslation()
@@ -55,10 +55,10 @@ const DataTable = ({
 
   useEffect(() => {
     if (!_isNull(sumValue)) {
-      showColumnsSum(sumValue)
+      dispatch(showColumnsSum(sumValue))
       setSumValue(null)
     }
-  }, [sumValue])
+  }, [dispatch, sumValue])
 
   useEffect(() => {
     const onScreenSizeChanged = () => {
@@ -221,7 +221,6 @@ DataTable.propTypes = {
     copyText: PropTypes.func.isRequired,
     isNumericValue: PropTypes.bool,
   })).isRequired,
-  showColumnsSum: PropTypes.func.isRequired,
   defaultRowHeight: PropTypes.number,
   isNoData: PropTypes.bool,
   isLoading: PropTypes.bool,
