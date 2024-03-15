@@ -165,15 +165,16 @@ const DataTable = ({
 
   const getCellClipboardData = (row, col) => tableColumns[col].copyText(row)
 
+  const columns = tableColumns
   if (isNoData && !isLoading) {
     const noDataTitle = isEqual(section, queryConstants.MENU_TICKERS)
       ? t('column.noHistory')
       : t('column.noResults')
-    tableColumns[0].renderer = () => getCellNoData(noDataTitle)
+    columns[0].renderer = () => getCellNoData(noDataTitle)
   }
 
-  if (device === DEVICES.PHONE && tableColumns.length >= 2) {
-    return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
+  if (device === DEVICES.PHONE && columns.length >= 2) {
+    return <CollapsedTable numRows={numRows} tableColumns={columns} />
   }
 
   return (
@@ -192,7 +193,7 @@ const DataTable = ({
         numRows={getRowsConfig(isLoading, isNoData, numRows)}
         className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
       >
-        {tableColumns.map(column => (
+        {columns.map(column => (
           <Column
             id={column.id}
             key={column.id}
