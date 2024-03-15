@@ -6,6 +6,7 @@ import React, {
   useEffect,
 } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Menu } from '@blueprintjs/core'
@@ -28,6 +29,7 @@ import {
 } from 'utils/columns'
 import DEVICES from 'var/devices'
 import queryConstants from 'state/query/constants'
+import { updateErrorStatus } from 'state/status/actions'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 
 const DataTable = ({
@@ -43,6 +45,7 @@ const DataTable = ({
   defaultRowHeight,
 }) => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const containerRef = useRef(null)
   const [sumValue, setSumValue] = useState(null)
   const [containerWidth, setContainerWidth] = useState(0)
@@ -153,12 +156,10 @@ const DataTable = ({
       const headersText = `${columnHeaders.join('\t')}${newLineChar}`
 
       navigator.clipboard.writeText(`${headersText}${text}`).catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error(err)
+        dispatch(updateErrorStatus(err))
       })
     }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      dispatch(updateErrorStatus(err))
     })
   }
 
