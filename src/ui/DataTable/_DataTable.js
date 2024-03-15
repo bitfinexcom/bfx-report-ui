@@ -53,12 +53,11 @@ const DataTable = ({
     }
   }, [sumValue])
 
-  const onScreenSizeChanged = () => {
-    setContainerWidth(containerRef?.current?.offsetWidth ?? DEFAULT_CONTAINER_WIDTH)
-  }
-
   useEffect(() => {
-    setContainerWidth(containerRef?.current?.offsetWidth ?? DEFAULT_CONTAINER_WIDTH)
+    const onScreenSizeChanged = () => {
+      setContainerWidth(containerRef?.current?.offsetWidth ?? DEFAULT_CONTAINER_WIDTH)
+    }
+    onScreenSizeChanged()
     window.addEventListener('resize', onScreenSizeChanged)
 
     return () => {
