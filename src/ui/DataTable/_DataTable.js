@@ -4,6 +4,7 @@ import React, {
   useState,
   useEffect,
 } from 'react'
+import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Menu } from '@blueprintjs/core'
@@ -29,7 +30,6 @@ import queryConstants from 'state/query/constants'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 
 const DataTable = ({
-  t,
   device,
   numRows,
   section,
@@ -41,6 +41,7 @@ const DataTable = ({
   showColumnsSum,
   defaultRowHeight,
 }) => {
+  const { t } = useTranslation()
   const containerRef = useRef(null)
   const [sumValue, setSumValue] = useState(null)
   const [containerWidth, setContainerWidth] = useState(0)
@@ -70,7 +71,7 @@ const DataTable = ({
     [tableColumns, containerWidth],
   )
 
-  const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex].copyText(rowIndex)
+  const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex]?.copyText(rowIndex)
 
   const renderBodyContextMenu = (context) => {
     const isSingleColumnSelected = singleColumnSelectedCheck(context)
@@ -80,7 +81,6 @@ const DataTable = ({
 
     const getCellSum = (rowIndex, columnIndex) => {
       const { isNumericValue } = tableColumns[columnIndex]
-
       if (isNumericValue) {
         const colValue = +tableColumns[columnIndex].copyText(rowIndex)
         sum += colValue
@@ -108,7 +108,6 @@ const DataTable = ({
 
   const onSelection = (selection) => {
     const isWholeColumnSelected = selection.find(({ rows }) => !rows)
-
     if (!isWholeColumnSelected) {
       setSelectedColumns({})
       return
@@ -117,7 +116,6 @@ const DataTable = ({
     const selectedCols = selection.reduce((acc, sel) => {
       const { cols } = sel
       const [start, end] = cols
-
       let cur = start
 
       while (cur <= end) {
@@ -224,7 +222,6 @@ DataTable.propTypes = {
   numRows: PropTypes.number.isRequired,
   tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
   device: PropTypes.string.isRequired,
-  t: PropTypes.func.isRequired,
   showColumnsSum: PropTypes.func.isRequired,
   tableScroll: PropTypes.bool.isRequired,
   defaultRowHeight: PropTypes.number,
