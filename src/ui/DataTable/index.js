@@ -1,3 +1,3 @@
-import DataTable from './DataTable.container'
+import DataTable from './_DataTable'
 
 export default DataTable
