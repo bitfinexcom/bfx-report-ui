@@ -1,0 +1,25 @@
+.wallets {
+  .tables-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &-item {
+      width: 49%;
+      margin-right: 0;
+    }
+  }
+
+}
+
+@media screen and (max-width: 1020px) {
+  .wallets {
+    .tables-row {
+      flex-direction: column;
+
+      &-item {
+        width: 100%
+      }
+    }
+  }
+}
