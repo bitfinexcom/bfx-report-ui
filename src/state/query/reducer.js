@@ -6,7 +6,7 @@ const initialState = {
   exportEmail: '',
   localExportPath: null,
   remoteUrn: null,
-  isCsvExporting: false,
+  isReportExporting: false,
   isPDFRequired: true,
 }
 
@@ -23,15 +23,15 @@ export function queryReducer(state = initialState, action) {
         ...state,
         localExportPath: payload || null,
       }
-    case types.SET_REMOTE_CSV_URN:
+    case types.SET_REMOTE_REPORT_URN:
       return {
         ...state,
         remoteUrn: payload || null,
       }
-    case types.SET_IS_CSV_EXPORTING:
+    case types.SET_IS_REPORT_EXPORTING:
       return {
         ...state,
-        isCsvExporting: payload,
+        isReportExporting: payload,
       }
     case types.SET_IS_PDF_REQUIRED:
       return {

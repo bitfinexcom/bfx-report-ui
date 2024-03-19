@@ -31,7 +31,7 @@ class ExportDialog extends PureComponent {
     end: PropTypes.number,
     email: PropTypes.string,
     toggleDialog: PropTypes.func.isRequired,
-    exportCsv: PropTypes.func.isRequired,
+    exportReport: PropTypes.func.isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
@@ -78,7 +78,7 @@ class ExportDialog extends PureComponent {
   }
 
   startExport = () => {
-    const { exportCsv, location } = this.props
+    const { exportReport, location } = this.props
     const { currentTargets } = this.state
     tracker.trackEvent('Export')
     const target = getTarget(location.pathname)
@@ -86,7 +86,7 @@ class ExportDialog extends PureComponent {
       ? currentTargets
       : [queryConstants.MENU_POSITIONS_AUDIT]
 
-    exportCsv(targets)
+    exportReport(targets)
   }
 
   toggleTarget = (target) => {
