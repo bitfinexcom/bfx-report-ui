@@ -112,7 +112,6 @@ class Chart extends React.PureComponent {
       data,
       width,
       height,
-      aspect,
       className,
       showLegend,
       isSumUpEnabled,
@@ -134,9 +133,8 @@ class Chart extends React.PureComponent {
     return (
       <div className={classes}>
         <ResponsiveContainer
-          width={height}
-          height={width}
-          aspect={aspect}
+          width={width}
+          height={height}
         >
           <AreaChart
             data={data}
