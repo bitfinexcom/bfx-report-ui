@@ -86,7 +86,7 @@ const AccountSummaryValue = () => {
           </div>
         )}
         <Chart
-          height={378}
+          height={375}
           data={chartData}
           showLegend={false}
           dataKeys={presentCurrencies}
