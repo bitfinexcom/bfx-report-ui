@@ -1,0 +1,25 @@
+.export-fail-dialog {
+  .icon--warning {
+    display: block;
+    margin: 23px auto 28px auto;
+  }
+
+  &-message {
+    width: 283px;
+    text-align: center;
+    margin: 0 auto 10px auto;
+  }
+
+  .bp3-button {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .export-fail-dialog {
+    &-message {
+      line-height: 1.3;
+    }
+  }
+}

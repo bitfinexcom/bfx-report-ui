@@ -8,6 +8,7 @@ import { updateStatus, updateWarningStatus } from 'state/status/actions'
 import {
   toggleExportDialog,
   showMaintenanceModal,
+  toggleExportFailDialog,
   toggleExportSuccessDialog,
 } from 'state/ui/actions'
 
@@ -40,6 +41,12 @@ function* handleReportGenerationCompleted() {
   yield put(toggleExportSuccessDialog())
 }
 
+function* handleReportGenerationFailed() {
+  yield put(setIsReportExporting(false))
+  yield put(toggleExportDialog())
+  yield put(toggleExportFailDialog())
+}
+
 function* handleMaintenanceTurnedOn() {
   yield put(showMaintenanceModal(true))
 }
@@ -56,4 +63,5 @@ export default function* wsSaga() {
   yield takeLatest(types.WS_MAINTENANCE_TURNED_ON, handleMaintenanceTurnedOn)
   yield takeLatest(types.WS_MAINTENANCE_TURNED_OFF, handleMaintenanceTurnedOff)
   yield takeLatest(types.WS_REPORT_GENERATION_COMPLETED, handleReportGenerationCompleted)
+  yield takeLatest(types.WS_REPORT_GENERATION_FAILED, handleReportGenerationFailed)
 }
