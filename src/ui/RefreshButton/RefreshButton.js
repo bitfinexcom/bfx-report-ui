@@ -5,7 +5,7 @@ import { Button, Intent } from '@blueprintjs/core'
 
 import { tracker } from 'utils/trackers'
 
-const RefreshButton = ({ onClick }) => {
+const RefreshButton = ({ onClick, disabled }) => {
   const { t } = useTranslation()
 
   const handleClick = () => {
@@ -15,6 +15,7 @@ const RefreshButton = ({ onClick }) => {
 
   return (
     <Button
+      disabled={disabled}
       onClick={handleClick}
       intent={Intent.SUCCESS}
       className='refresh-button'
@@ -25,7 +26,12 @@ const RefreshButton = ({ onClick }) => {
 }
 
 RefreshButton.propTypes = {
+  disabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
+}
+
+RefreshButton.defaultProps = {
+  disabled: false,
 }
 
 export default memo(RefreshButton)

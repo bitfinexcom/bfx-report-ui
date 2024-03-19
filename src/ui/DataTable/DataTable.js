@@ -9,6 +9,7 @@ import {
 } from '@blueprintjs/table'
 import _keys from 'lodash/keys'
 import _isNull from 'lodash/isNull'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import {
   getRowsConfig,
@@ -17,6 +18,7 @@ import {
   columnHasNumericValueCheck,
 } from 'utils/columns'
 import DEVICES from 'var/devices'
+import queryConstants from 'state/query/constants'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 
 class DataTable extends PureComponent {
@@ -165,6 +167,7 @@ class DataTable extends PureComponent {
       t,
       device,
       numRows,
+      section,
       isNoData,
       isLoading,
       className,
@@ -175,7 +178,10 @@ class DataTable extends PureComponent {
     const columnWidths = tableColumns.map(column => column.width)
 
     if (isNoData && !isLoading) {
-      tableColumns[0].renderer = () => getCellNoData(t('column.noResults'))
+      const noDataTitle = isEqual(section, queryConstants.MENU_TICKERS)
+        ? t('column.noHistory')
+        : t('column.noResults')
+      tableColumns[0].renderer = () => getCellNoData(noDataTitle)
     }
 
     if (device === DEVICES.PHONE && tableColumns.length >= 2) {

@@ -23,7 +23,6 @@ export const propTypes = {
   t: PropTypes.func.isRequired,
   targetPairs: PropTypes.arrayOf(PropTypes.string),
   timeOffset: PropTypes.string.isRequired,
-  updateErrorStatus: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
