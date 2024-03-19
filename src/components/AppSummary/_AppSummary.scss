@@ -29,7 +29,7 @@
   &-title-row {
     display: flex;
     min-height: 35px;
-    max-width: 1000px;
+    max-width: 100%;
     align-items: center;
     justify-content: space-between;
   }
@@ -150,7 +150,7 @@
 
   .app-summary-item-title--row {
     display: flex;
-    max-width: 1000px;
+    max-width: 100%;
     position: relative;
     align-items: center;
     justify-content: space-between;
