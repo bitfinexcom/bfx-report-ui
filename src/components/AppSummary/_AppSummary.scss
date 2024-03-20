@@ -348,7 +348,7 @@
   .loading-container {
     display: flex;
     min-height: 300px;
-    max-width: 1000px;
+    max-width: 100%;
 
     .loading {
       margin: auto;
@@ -356,7 +356,7 @@
   }
 
   .no-data {
-    max-width: 1000px;
+    max-width: 100%;
     min-height: 300px;
     
     &-wrapper {
