@@ -4,7 +4,8 @@ export default {
   WS_NET_ERROR: 'ws_emitENetError',
   WS_NET_RESUMED: 'ws_emitENetResumed',
   WS_BFX_TOKEN_AUTH_REQUIRED: 'ws_emitBfxUnamePwdAuthRequire',
-  WS_CSV_GENERATION_COMPLETED: 'ws_emitCsvGenerationCompletedToOne',
+  WS_REPORT_GENERATION_COMPLETED: 'ws_emitReportFileGenerationCompletedToOne',
+  WS_REPORT_GENERATION_FAILED: 'ws_emitReportFileGenerationFailedToOne',
   WS_MAINTENANCE_TURNED_ON: 'ws_emitMaintenanceTurnedOn',
   WS_MAINTENANCE_TURNED_OFF: 'ws_emitMaintenanceTurnedOff',
 }

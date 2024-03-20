@@ -4,6 +4,7 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestPairs } from 'state/symbols/utils'
@@ -41,6 +42,10 @@ function getReqTickers({
 function* fetchTickers() {
   try {
     const { targetPairs } = yield select(getTickers)
+    if (isEmpty(targetPairs)) {
+      yield put(actions.updateTickers([]))
+      return
+    }
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const { start, end } = yield select(getTimeFrame, smallestMts)
     const filter = yield select(getFilterQuery, TYPE)

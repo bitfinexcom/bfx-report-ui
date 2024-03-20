@@ -16,6 +16,7 @@ export const getDevice = state => getUI(state).device
 export const getWindowWidth = state => getUI(state).windowWidth
 export const getIsExtraInfoDialogOpen = state => getUI(state)?.isExtraInfoDialogOpen ?? false
 export const getShowMaintenanceModal = state => getUI(state)?.showMaintenanceModal ?? false
+export const getIsExportFailDialogOpen = state => getUI(state)?.isExportFailDialogOpen ?? false
 
 export default {
   getIsElectronBackendLoaded,
@@ -34,4 +35,5 @@ export default {
   getWindowWidth,
   getIsExtraInfoDialogOpen,
   getShowMaintenanceModal,
+  getIsExportFailDialogOpen,
 }

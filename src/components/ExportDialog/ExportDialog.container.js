@@ -7,9 +7,9 @@ import { toggleExportDialog } from 'state/ui/actions'
 import { getTimestamp } from 'state/wallets/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getIsExportDialogOpen } from 'state/ui/selectors'
-import { exportCsv, prepareExport } from 'state/query/actions'
+import { exportReport, prepareExport } from 'state/query/actions'
 import { getFullTime, getTimezone } from 'state/base/selectors'
-import { getExportEmail, getIsCsvExporting } from 'state/query/selectors'
+import { getExportEmail, getIsReportExporting } from 'state/query/selectors'
 
 import ExportDialog from './ExportDialog'
 
@@ -20,11 +20,11 @@ const mapStateToProps = state => ({
   timestamp: getTimestamp(state),
   getFullTime: getFullTime(state),
   isOpen: getIsExportDialogOpen(state),
-  isExporting: getIsCsvExporting(state),
+  isExporting: getIsReportExporting(state),
 })
 
 const mapDispatchToProps = {
-  exportCsv,
+  exportReport,
   prepareExport,
   toggleDialog: toggleExportDialog,
 }

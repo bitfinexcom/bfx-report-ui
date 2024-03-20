@@ -103,33 +103,7 @@ const {
   MENU_WIN_LOSS,
 } = types
 
-/**
- {
-  "auth": {
-      "apiKey": "fake",
-      "apiSecret": "fake"
-  },
-  "method": "getMultipleCsv",
-  "params": {
-      "email": "fake@email.fake",
-      "multiExport": [
-          {
-              "method": "getTradesCsv",
-              "symbol": "tBTCUSD",
-              "end": 1546765168000
-          },
-          {
-              "method": "getLedgersCsv",
-              "symbol": "BTC",
-              "end": 1546765168000,
-              "timezone": "America/Los_Angeles"
-          }
-      ]
-  }
-}
-*/
-
-const getMultipleCsv = params => makeFetchCall('getMultipleFile', params)
+const getMultipleFile = params => makeFetchCall('getMultipleFile', params)
 
 function getSelector(target) {
   switch (target) {
@@ -309,36 +283,36 @@ function* getOptions({ target }) {
 
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
-      options.method = 'getBalanceHistoryCsv'
+      options.method = 'getBalanceHistoryFile'
       break
     case MENU_AFFILIATES_EARNINGS:
-      options.method = 'getLedgersCsv'
+      options.method = 'getLedgersFile'
       options.category = LEDGERS_CATEGORIES.AFFILIATE_REBATE
       break
     case MENU_CANDLES:
-      options.method = 'getCandlesCsv'
+      options.method = 'getCandlesFile'
       break
     case MENU_CHANGE_LOGS:
-      options.method = 'getChangeLogsCsv'
+      options.method = 'getChangeLogsFile'
       break
     case MENU_DERIVATIVES:
-      options.method = 'getStatusMessagesCsv'
+      options.method = 'getStatusMessagesFile'
       break
     case MENU_FCREDIT:
-      options.method = 'getFundingCreditHistoryCsv'
+      options.method = 'getFundingCreditHistoryFile'
       break
     case MENU_FLOAN:
-      options.method = 'getFundingLoanHistoryCsv'
+      options.method = 'getFundingLoanHistoryFile'
       break
     case MENU_FOFFER:
-      options.method = 'getFundingOfferHistoryCsv'
+      options.method = 'getFundingOfferHistoryFile'
       break
     case MENU_FPAYMENT:
-      options.method = 'getLedgersCsv'
+      options.method = 'getLedgersFile'
       options.category = LEDGERS_CATEGORIES.FUNDING_PAYMENT
       break
     case MENU_INVOICES:
-      options.method = 'getPayInvoiceListCsv'
+      options.method = 'getPayInvoiceListFile'
       break
     case MENU_LEDGERS:
       options.method = 'getLedgersFile'
@@ -346,77 +320,77 @@ function* getOptions({ target }) {
       options.category = yield select(getLedgersCategory)
       break
     case MENU_LOAN_REPORT:
-      options.method = 'getPerformingLoanCsv'
+      options.method = 'getPerformingLoanFile'
       break
     case MENU_LOGINS:
-      options.method = 'getLoginsCsv'
+      options.method = 'getLoginsFile'
       break
     case MENU_ORDERS:
-      options.method = 'getOrdersCsv'
+      options.method = 'getOrdersFile'
       break
     case MENU_ORDER_TRADES:
-      options.method = 'getOrderTradesCsv'
+      options.method = 'getOrderTradesFile'
       break
     case MENU_SPAYMENTS:
-      options.method = 'getLedgersCsv'
+      options.method = 'getLedgersFile'
       options.category = LEDGERS_CATEGORIES.STAKING_PAYMENT
       break
     case MENU_TICKERS:
-      options.method = 'getTickersHistoryCsv'
+      options.method = 'getTickersHistoryFile'
       break
     case MENU_TRADES:
-      options.method = 'getTradesCsv'
+      options.method = 'getTradesFile'
       break
     case MENU_MOVEMENTS:
-      options.method = 'getMovementsCsv'
+      options.method = 'getMovementsFile'
       break
     case MENU_POSITIONS:
-      options.method = 'getPositionsHistoryCsv'
+      options.method = 'getPositionsHistoryFile'
       break
     case MENU_POSITIONS_ACTIVE:
-      options.method = 'getActivePositionsCsv'
+      options.method = 'getActivePositionsFile'
       break
     case MENU_POSITIONS_AUDIT:
-      options.method = 'getPositionsAuditCsv'
+      options.method = 'getPositionsAuditFile'
       break
     case MENU_PUBLIC_FUNDING:
-      options.method = 'getPublicTradesCsv'
+      options.method = 'getPublicTradesFile'
       break
     case MENU_PUBLIC_TRADES:
-      options.method = 'getPublicTradesCsv'
+      options.method = 'getPublicTradesFile'
       break
     case MENU_SNAPSHOTS:
-      options.method = 'getFullSnapshotReportCsv'
+      options.method = 'getFullSnapshotReportFile'
       break
     case MENU_TAX_REPORT:
       options.method = 'getFullTaxReportFile'
       break
     case MENU_TRADED_VOLUME:
-      options.method = 'getTradedVolumeCsv'
+      options.method = 'getTradedVolumeFile'
       break
     case MENU_FEES_REPORT:
-      options.method = 'getTotalFeesReportCsv'
+      options.method = 'getTotalFeesReportFile'
       break
     case MENU_WALLETS:
-      options.method = 'getWalletsCsv'
+      options.method = 'getWalletsFile'
       break
     case MENU_WEIGHTED_AVERAGES:
-      options.method = 'getWeightedAveragesReportCsv'
+      options.method = 'getWeightedAveragesReportFile'
       break
     case MENU_WIN_LOSS:
       options.method = isVsAccountBalanceSelected
-        ? 'getWinLossVSAccountBalanceCsv'
-        : 'getWinLossCsv'
+        ? 'getWinLossVSAccountBalanceFile'
+        : 'getWinLossFile'
       break
     default:
-      options.method = 'getLedgersCsv'
+      options.method = 'getLedgersFile'
       break
   }
 
   return options
 }
 
-function* exportCSV({ payload: targets }) {
+function* exportReport({ payload: targets }) {
   try {
     const exportEmail = yield select(getExportEmail)
     const multiExport = []
@@ -448,15 +422,15 @@ function* exportCSV({ payload: targets }) {
     }
 
     if (showFrameworkMode) {
-      yield put(actions.setIsCsvExporting(true))
+      yield put(actions.setIsReportExporting(true))
     }
 
-    const { result, error } = yield call(getMultipleCsv, params)
+    const { result, error } = yield call(getMultipleFile, params)
 
     if (result) {
-      const { localCsvFolderPath, remoteCsvUrn = null } = result
-      yield put(actions.setRemoteUrn(remoteCsvUrn))
-      yield put(actions.setLocalExportPath(localCsvFolderPath))
+      const { localReportFolderPath, remoteReportUrn = null } = result
+      yield put(actions.setRemoteUrn(remoteReportUrn))
+      yield put(actions.setLocalExportPath(localReportFolderPath))
       if (!showFrameworkMode) {
         yield put(toggleExportDialog())
         yield put(toggleExportSuccessDialog())
@@ -465,7 +439,7 @@ function* exportCSV({ payload: targets }) {
 
     if (error) {
       if (showFrameworkMode) {
-        yield put(actions.setIsCsvExporting(false))
+        yield put(actions.setIsReportExporting(false))
       }
       yield put(updateErrorStatus({
         id: 'status.fail',
@@ -475,7 +449,7 @@ function* exportCSV({ payload: targets }) {
     }
   } catch (fail) {
     if (showFrameworkMode) {
-      yield put(actions.setIsCsvExporting(false))
+      yield put(actions.setIsReportExporting(false))
     }
     yield put(updateErrorStatus({
       id: 'status.request.error',
@@ -510,5 +484,5 @@ function* prepareExport() {
 
 export default function* exportSaga() {
   yield takeLatest(types.PREPARE_EXPORT, prepareExport)
-  yield takeLatest(types.EXPORT_CSV, exportCSV)
+  yield takeLatest(types.EXPORT_REPORT, exportReport)
 }

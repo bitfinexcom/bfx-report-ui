@@ -184,6 +184,7 @@
     "moreDetails": "More Details",
     "movementsTotal": "Movements Total Amount (USD)",
     "noResults": "No results",
+    "noHistory": "No history to display",
     "note": "Note",
     "opened": "Opened",
     "orderid": "Order ID",
@@ -285,9 +286,11 @@
     "remoteStorage": "Remote storage",
     "status": {
       "local": "Export generated, files are saved in: ",
-      "email": "Generating your CSV report, we'll send it to you via email as soon as it's ready..."
+      "email": "Generating your report, we'll send it to you via email as soon as it's ready...",
+      "failed": "Export generation failed. Please select a smaller date range or try again later."
     },
     "success": "Success",
+    "fail": "Fail",
     "targets": "Data to Export",
     "exportAsPdf": "Export as PDF"
   },

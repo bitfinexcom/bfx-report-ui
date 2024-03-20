@@ -40,14 +40,7 @@ class Tickers extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  togglePair = (pair) => {
-    const { targetPairs, updateErrorStatus } = this.props
-    if (targetPairs.length === 1 && targetPairs.includes(pair)) {
-      updateErrorStatus({ id: 'tickers.minlength' })
-    } else {
-      togglePair(TYPE, this.props, pair)
-    }
-  }
+  togglePair = pair => togglePair(TYPE, this.props, pair)
 
   clearPairs = () => clearAllPairs(TYPE, this.props)
 
@@ -131,7 +124,10 @@ class Tickers extends PureComponent {
               </SectionHeaderItemLabel>
               <ColumnsFilter target={TYPE} />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
+            <RefreshButton
+              onClick={refresh}
+              disabled={isEmpty(targetPairs)}
+            />
             <SyncPrefButton sectionType={TYPE} />
           </SectionHeaderRow>
         </SectionHeader>

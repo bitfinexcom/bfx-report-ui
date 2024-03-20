@@ -9,7 +9,6 @@ import {
   removeTargetPair,
   clearTargetPairs,
 } from 'state/tickers/actions'
-import { updateErrorStatus } from 'state/status/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import {
@@ -45,7 +44,6 @@ const mapDispatchToProps = {
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
-  updateErrorStatus,
   clearTargetPairs,
 }
 
