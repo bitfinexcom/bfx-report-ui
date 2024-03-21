@@ -1,20 +1,30 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { setIsPdfRequired } from 'state/query/actions'
+import { getIsPdfExportRequired } from 'state/query/selectors'
 
 import Select from 'ui/Select'
 
-const ExportTypeSelector = ({ onChange, t, value }) => {
+const ExportTypeSelector = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const isPdfExportRequired = useSelector(getIsPdfExportRequired)
   const items = [
     { value: false, label: t('download.exportAsCsv') },
     { value: true, label: t('download.exportAsPdf') },
   ]
 
+  const handleChange = useCallback((value) => {
+    dispatch(setIsPdfRequired(value))
+  }, [dispatch])
+
   return (
     <Select
-      value={value}
       items={items}
-      onChange={onChange}
+      onChange={handleChange}
+      value={isPdfExportRequired}
       // type='Export Format'
       // className='bitfinex-select--unrealized-profit'
       // popoverClassName='bitfinex-select-menu--unrealized-profit'
@@ -22,10 +32,4 @@ const ExportTypeSelector = ({ onChange, t, value }) => {
   )
 }
 
-ExportTypeSelector.propTypes = {
-  t: PropTypes.func.isRequired,
-  value: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-}
-
-export default withTranslation('translations')(ExportTypeSelector)
+export default ExportTypeSelector
