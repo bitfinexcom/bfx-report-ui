@@ -25,9 +25,6 @@ const ExportTypeSelector = () => {
       items={items}
       onChange={handleChange}
       value={isPdfExportRequired}
-      // type='Export Format'
-      // className='bitfinex-select--unrealized-profit'
-      // popoverClassName='bitfinex-select-menu--unrealized-profit'
     />
   )
 }
