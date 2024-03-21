@@ -17,6 +17,7 @@ import ExportToPdf from 'ui/ExportToPdf'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
 import queryConstants from 'state/query/constants'
 import DateFormatSelector from 'ui/DateFormatSelector'
+import ExportTypeSelector from 'ui/ExportTypeSelector'
 
 import { getShowPdfSwitcher } from './ExportDialog.helpers'
 import ExportTargetsSelector from './ExportDialog.TargetsSelector'
@@ -188,7 +189,7 @@ class ExportDialog extends PureComponent {
             <div className='export-dialog-row'>
               <div className='export-dialog-item'>
                 <div>{t('download.exportFormat')}</div>
-                <DateFormatSelector />
+                <ExportTypeSelector />
               </div>
             </div>
           )}
