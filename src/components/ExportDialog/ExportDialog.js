@@ -184,6 +184,14 @@ class ExportDialog extends PureComponent {
               <DateFormatSelector />
             </div>
           </div>
+          {showPdfSwitcher && (
+            <div className='export-dialog-row'>
+              <div className='export-dialog-item'>
+                <div>{t('download.exportFormat')}</div>
+                <DateFormatSelector />
+              </div>
+            </div>
+          )}
           <div className='export-dialog-row'>
             {showPdfSwitcher && (
               <div className='export-dialog-item'>
