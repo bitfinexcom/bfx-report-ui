@@ -4,14 +4,10 @@ import { withTranslation } from 'react-i18next'
 
 import Select from 'ui/Select'
 
-import constants from './constants'
-
-const { TRUE, FALSE } = constants
-
-const UnrealizedProfitSelector = ({ onChange, t, value }) => {
+const ExportTypeSelector = ({ onChange, t, value }) => {
   const items = [
-    { value: FALSE, label: t('selector.unrealized-profits.yes') },
-    { value: TRUE, label: t('selector.unrealized-profits.no') },
+    { value: false, label: t('download.exportAsCsv') },
+    { value: true, label: t('download.exportAsPdf') },
   ]
 
   return (
@@ -19,17 +15,17 @@ const UnrealizedProfitSelector = ({ onChange, t, value }) => {
       value={value}
       items={items}
       onChange={onChange}
-      type='Show Unrealized Profits'
-      className='bitfinex-select--unrealized-profit'
-      popoverClassName='bitfinex-select-menu--unrealized-profit'
+      // type='Export Format'
+      // className='bitfinex-select--unrealized-profit'
+      // popoverClassName='bitfinex-select-menu--unrealized-profit'
     />
   )
 }
 
-UnrealizedProfitSelector.propTypes = {
+ExportTypeSelector.propTypes = {
   t: PropTypes.func.isRequired,
   value: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(UnrealizedProfitSelector)
+export default withTranslation('translations')(ExportTypeSelector)
