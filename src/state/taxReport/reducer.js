@@ -182,6 +182,16 @@ export function taxReportReducer(state = initialState, action) {
         },
       }
     }
+    case types.UPDATE_TRANSACTIONS: {
+      return {
+        ...state,
+        transactions: {
+          dataReceived: true,
+          pageLoading: false,
+          data: payload,
+        },
+      }
+    }
     case types.FETCH_FAIL:
       return state
     case types.REFRESH:
