@@ -2,7 +2,7 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCellState, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -10,7 +10,6 @@ export const getColumns = ({
   isLoading,
   getFullTime,
   filteredData,
-  columnsWidth,
 }) => [
   {
     id: 'asset',
