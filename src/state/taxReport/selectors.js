@@ -3,9 +3,12 @@ import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
 export const getTaxReport = state => state.taxReport
 export const getStartSnapshot = state => getTaxReport(state).startSnapshot
 export const getEndSnapshot = state => getTaxReport(state).endSnapshot
+export const getTaxTransactions = state => getTaxReport(state).transactions
 
 export const getDataReceived = state => getTaxReport(state).dataReceived
 export const getPageLoading = state => getTaxReport(state).pageLoading
+export const getTransactionsDataReceived = state => getTaxTransactions(state)?.dataReceived ?? false
+export const getTransactionsPageLoading = state => getTaxTransactions(state)?.pageLoading ?? false
 
 export const getData = (state) => {
   const {
@@ -46,4 +49,7 @@ export default {
   getSnapshotDataReceived,
   getSnapshotPageLoading,
   getTaxReport,
+  getTaxTransactions,
+  getTransactionsDataReceived,
+  getTransactionsPageLoading,
 }
