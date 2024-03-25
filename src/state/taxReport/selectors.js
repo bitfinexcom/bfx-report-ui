@@ -9,6 +9,7 @@ export const getDataReceived = state => getTaxReport(state).dataReceived
 export const getPageLoading = state => getTaxReport(state).pageLoading
 export const getTransactionsDataReceived = state => getTaxTransactions(state)?.dataReceived ?? false
 export const getTransactionsPageLoading = state => getTaxTransactions(state)?.pageLoading ?? false
+export const getTransactionsData = state => getTaxTransactions(state)?.data ?? []
 
 export const getData = (state) => {
   const {
@@ -50,6 +51,7 @@ export default {
   getSnapshotPageLoading,
   getTaxReport,
   getTaxTransactions,
+  getTransactionsData,
   getTransactionsDataReceived,
   getTransactionsPageLoading,
 }
