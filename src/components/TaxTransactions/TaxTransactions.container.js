@@ -4,23 +4,17 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
 import {
-  refresh,
-  setTargetPair,
-  fetchWeightedAwerages,
-} from 'state/weightedAverages/actions'
+  fetchTaxReportTransactions,
+  refreshTaxReportTransactions,
+} from 'state/taxReport/actions'
 import { getFullTime } from 'state/base/selectors'
-import { getInactivePairs, getPairs } from 'state/symbols/selectors'
 import {
-  getEntries,
-  getNextPage,
-  getPageLoading,
-  getTargetPair,
-  getDataReceived,
-  getExistingPairs,
-} from 'state/weightedAverages/selectors'
+  getTransactionsData,
+  getTransactionsPageLoading,
+  getTransactionsDataReceived,
+} from 'state/taxReport/selectors'
 import { getColumns } from 'state/filters/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
@@ -28,24 +22,17 @@ import TaxTransactions from './TaxTransactions'
 
 const mapStateToProps = state => ({
   ...getTimeFrame(state),
-  pairs: getPairs(state),
-  entries: getEntries(state),
-  nextPage: getNextPage(state),
-  pageLoading: getPageLoading(state),
-  targetPair: getTargetPair(state),
-  dataReceived: getDataReceived(state),
-  existingPairs: getExistingPairs(state),
-  inactivePairs: getInactivePairs(state),
-  isSyncRequired: getIsSyncRequired(state),
+  entries: getTransactionsData(state),
+  pageLoading: getTransactionsPageLoading(state),
+  dataReceived: getTransactionsDataReceived(state),
   columns: getColumns(state, queryConstants.MENU_WEIGHTED_AVERAGES),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_WEIGHTED_AVERAGES),
   getFullTime: getFullTime(state),
 })
 
 const mapDispatchToProps = {
-  refresh,
-  setTargetPair,
-  fetchData: fetchWeightedAwerages,
+  refresh: refreshTaxReportTransactions,
+  fetchData: fetchTaxReportTransactions,
 }
 
 export default compose(
