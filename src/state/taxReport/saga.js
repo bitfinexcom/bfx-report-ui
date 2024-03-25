@@ -75,7 +75,7 @@ function* fetchTaxReportSnapshot({ payload: section }) {
 function* refreshTaxReport({ payload }) {
   const { section } = payload
 
-  if (section === TAX_REPORT_SECTIONS.RESULT) {
+  if (section === TAX_REPORT_SECTIONS.RESULT || TAX_REPORT_SECTIONS.TRANSACTIONS) {
     yield put(actions.fetchTaxReport())
   } else {
     yield put(actions.fetchTaxReportSnapshot(section))
