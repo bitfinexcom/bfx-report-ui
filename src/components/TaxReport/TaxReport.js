@@ -17,6 +17,7 @@ const {
   START_SNAPSHOT,
   END_SNAPSHOT,
   RESULT,
+  TRANSACTIONS,
 } = TAX_REPORT_SECTIONS
 
 const SECTIONS_URL = {
@@ -41,6 +42,8 @@ class TaxReport extends PureComponent {
       case END_SNAPSHOT:
         return <Snapshot key={END_SNAPSHOT} />
       case RESULT:
+        return <Result />
+      case TRANSACTIONS:
       default:
         return <Result />
     }
@@ -54,6 +57,8 @@ class TaxReport extends PureComponent {
         return `${SECTIONS_URL.END_SNAPSHOT}/positions`
       case RESULT:
         return SECTIONS_URL.RESULT
+      case TRANSACTIONS:
+        return SECTIONS_URL.TRANSACTIONS
       default:
         return ''
     }
@@ -80,6 +85,7 @@ class TaxReport extends PureComponent {
             { value: START_SNAPSHOT, label: t('taxreport.sections.startSnapshot') },
             { value: END_SNAPSHOT, label: t('taxreport.sections.endSnapshot') },
             { value: RESULT, label: t('taxreport.sections.finalResult') },
+            { value: TRANSACTIONS, label: t('taxreport.sections.transactions') },
           ]}
           onChange={this.switchSection}
           value={section}
