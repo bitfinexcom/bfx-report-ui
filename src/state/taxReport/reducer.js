@@ -195,6 +195,7 @@ export function taxReportReducer(state = initialState, action) {
     case types.FETCH_FAIL:
       return state
     case types.REFRESH:
+    case types.REFRESH_TRANSACTIONS:
     case timeRangeTypes.SET_TIME_RANGE:
     case authTypes.LOGOUT:
       return initialState
