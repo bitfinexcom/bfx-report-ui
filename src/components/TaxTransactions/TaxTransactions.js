@@ -27,25 +27,9 @@ const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
 
 class TaxTransactions extends PureComponent {
   static propTypes = {
-    columns: PropTypes.shape({
-      pair: PropTypes.bool,
-      buyingWeightedPrice: PropTypes.bool,
-      buyingAmount: PropTypes.bool,
-      sellingWeightedPrice: PropTypes.bool,
-      sellingAmount: PropTypes.bool,
-      cost: PropTypes.bool,
-      sale: PropTypes.bool,
-      cumulativeAmount: PropTypes.bool,
-      firstTradeMts: PropTypes.bool,
-      lastTradeMts: PropTypes.bool,
-    }),
-    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      width: PropTypes.number,
-    })),
     dataReceived: PropTypes.bool.isRequired,
     entries: PropTypes.arrayOf(PropTypes.shape({
-      pair: PropTypes.string,
+      asset: PropTypes.string,
     })),
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
@@ -54,8 +38,6 @@ class TaxTransactions extends PureComponent {
   }
 
   static defaultProps = {
-    columns: {},
-    columnsWidth: [],
     entries: [],
   }
 
@@ -72,12 +54,10 @@ class TaxTransactions extends PureComponent {
   render() {
     const {
       t,
-      columns,
       entries,
       refresh,
       getFullTime,
       pageLoading,
-      columnsWidth,
       dataReceived,
     } = this.props
     const isNoData = isEmpty(entries)
@@ -87,20 +67,19 @@ class TaxTransactions extends PureComponent {
       isNoData,
       isLoading,
       getFullTime,
-      columnsWidth,
       filteredData: entries,
-    }).filter(({ id }) => columns[id])
+    })
 
     let showContent
     if (isNoData) {
       showContent = (
         <div className='data-table-wrapper'>
           <DataTable
-            numRows={1}
             section={TYPE}
             isNoData={isNoData}
             isLoading={isLoading}
             tableColumns={tableColumns}
+            numRows={isLoading ? 5 : 1}
           />
         </div>
       )
@@ -108,9 +87,9 @@ class TaxTransactions extends PureComponent {
       showContent = (
         <>
           <DataTable
-            numRows={1}
             section={TYPE}
             tableColumns={tableColumns}
+            numRows={isLoading ? 5 : entries.length}
           />
         </>
       )
