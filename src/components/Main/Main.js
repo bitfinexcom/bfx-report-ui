@@ -119,10 +119,6 @@ const PATHS = {
   MENU_FEES_REPORT: [getPath(MENU_FEES_REPORT), `${getPath(MENU_FEES_REPORT)}/:symbol`],
   MENU_LOAN_REPORT: [getPath(MENU_LOAN_REPORT), `${getPath(MENU_LOAN_REPORT)}/:symbol`],
   MENU_TRADED_VOLUME: [getPath(MENU_TRADED_VOLUME), `${getPath(MENU_TRADED_VOLUME)}/:pair`],
-  // MENU_TAX_REPORT: [
-  //   getPath(MENU_TAX_REPORT),
-  //   `${getPath(MENU_TAX_REPORT)}/:section(result)`,
-  //   `${getPath(MENU_TAX_REPORT)}/:section(start_snapshot|end_snapshot|result)/:subsection(positions|tickers|wallets)`],
   MENU_TAX_REPORT: [
     getPath(MENU_TAX_REPORT),
     `${getPath(MENU_TAX_REPORT)}/:section(result)`,

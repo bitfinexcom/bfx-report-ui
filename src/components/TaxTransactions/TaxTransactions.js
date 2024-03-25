@@ -47,22 +47,16 @@ class TaxTransactions extends PureComponent {
     entries: PropTypes.arrayOf(PropTypes.shape({
       pair: PropTypes.string,
     })),
-    nextPage: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.bool,
-    ]),
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     getFullTime: PropTypes.func.isRequired,
-    targetPair: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
     columns: {},
     columnsWidth: [],
     entries: [],
-    nextPage: false,
   }
 
   componentDidMount() {
