@@ -745,7 +745,7 @@
       "dateSold": "Date Sold",
       "proceeds": "Proceeds",
       "cost": "Cost",
-      "gainLoss": "Gain or Loss"
+      "gainOrLoss": "Gain or Loss"
     }
   },
   "theme": {
