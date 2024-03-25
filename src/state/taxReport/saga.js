@@ -84,6 +84,29 @@ function* refreshTaxReport({ payload }) {
   }
 }
 
+export function* fetchTransactions() {
+  try {
+    const { start, end } = yield select(getTimeFrame)
+    const params = { start, end }
+    const { result = {}, error } = yield call(getReqTaxTransactions, params)
+    yield put(actions.updateTaxReportTransactions(result))
+
+    if (error) {
+      yield put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'taxreport.sections.transactions',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(actions.fetchFail({
+      id: 'status.request.error',
+      topic: 'taxreport.sections.transactions',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
 function* fetchTaxReportFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
@@ -93,4 +116,5 @@ export default function* taxReportSaga() {
   yield takeLatest(types.FETCH_SNAPSHOT, fetchTaxReportSnapshot)
   yield takeLatest(types.REFRESH, refreshTaxReport)
   yield takeLatest(types.FETCH_FAIL, fetchTaxReportFail)
+  yield takeLatest(types.FETCH_TRANSACTIONS, fetchTransactions)
 }
