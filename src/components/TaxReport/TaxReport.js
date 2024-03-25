@@ -23,6 +23,7 @@ const SECTIONS_URL = {
   START_SNAPSHOT: '/tax_report/start_snapshot',
   END_SNAPSHOT: '/tax_report/end_snapshot',
   RESULT: '/tax_report/result',
+  TRANSACTIONS: '/tax_report/transactions',
 }
 
 class TaxReport extends PureComponent {
