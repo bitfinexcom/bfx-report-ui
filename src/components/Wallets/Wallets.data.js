@@ -40,34 +40,36 @@ const WalletsData = ({
   })
 
   return (
-    <div className='tables-row no-table-scroll'>
-      <div className='tables-row-item'>
-        <div>{t('wallets.header.exchange')}</div>
-        <DataTable
-          tableColumns={exchangeColumns}
-          numRows={exchangeData.length || 1}
-        />
-      </div>
-      <div className='tables-row-item'>
-        <div>{t('wallets.header.margin')}</div>
-        <DataTable
-          tableColumns={marginColumns}
-          numRows={marginData.length || 1}
-        />
-      </div>
-      <div className='tables-row-item'>
-        <div>{t('wallets.header.funding')}</div>
-        <DataTable
-          tableColumns={fundingColumns}
-          numRows={fundingData.length || 1}
-        />
-      </div>
-      <div className='tables-row-item'>
-        <div>{t('wallets.header.capital-raise')}</div>
-        <DataTable
-          tableColumns={contributionColumns}
-          numRows={contributionData.length || 1}
-        />
+    <div className='wallets'>
+      <div className='tables-row no-table-scroll'>
+        <div className='tables-row-item'>
+          <div>{t('wallets.header.exchange')}</div>
+          <DataTable
+            tableColumns={exchangeColumns}
+            numRows={exchangeData.length || 1}
+          />
+        </div>
+        <div className='tables-row-item'>
+          <div>{t('wallets.header.margin')}</div>
+          <DataTable
+            tableColumns={marginColumns}
+            numRows={marginData.length || 1}
+          />
+        </div>
+        <div className='tables-row-item'>
+          <div>{t('wallets.header.funding')}</div>
+          <DataTable
+            tableColumns={fundingColumns}
+            numRows={fundingData.length || 1}
+          />
+        </div>
+        <div className='tables-row-item'>
+          <div>{t('wallets.header.capital-raise')}</div>
+          <DataTable
+            tableColumns={contributionColumns}
+            numRows={contributionData.length || 1}
+          />
+        </div>
       </div>
     </div>
   )

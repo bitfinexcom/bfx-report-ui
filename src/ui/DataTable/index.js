@@ -1,3 +1,1 @@
-import DataTable from './DataTable.container'
-
-export default DataTable
+export { default } from './DataTable'
