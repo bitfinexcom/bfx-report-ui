@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
-import config from 'config'
 import DataTable from 'ui/DataTable'
 import {
   SectionHeader,
@@ -14,8 +13,7 @@ import {
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
-import PairSelector from 'ui/PairSelector'
-import SectionSwitch from 'ui/SectionSwitch'
+
 import {
   checkInit,
   checkFetch,
@@ -23,10 +21,8 @@ import {
 } from 'state/utils'
 import queryConstants from 'state/query/constants'
 
-import LimitNote from './WeightedAverages.note'
 import { getColumns } from './WeightedAverages.columns'
 
-const { showFrameworkMode } = config
 const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
 
 class WeightedAverages extends PureComponent {
@@ -135,27 +131,14 @@ class WeightedAverages extends PureComponent {
       >
         <SectionHeader>
           <SectionHeaderTitle>
-            {t('weightedaverages.title')}
+            {t('taxreport.title')}
           </SectionHeaderTitle>
-          {showFrameworkMode && (
-            <SectionSwitch target={TYPE} />
-          )}
-          {nextPage && <LimitNote />}
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.date')}
               </SectionHeaderItemLabel>
               <TimeRange className='section-header-time-range' />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
-              </SectionHeaderItemLabel>
-              <PairSelector
-                currentPair={targetPair}
-                onPairSelect={this.onPairSelect}
-              />
             </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
