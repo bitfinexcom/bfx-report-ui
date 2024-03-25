@@ -24,10 +24,7 @@ const getReqTaxReportSnapshot = (end) => {
   return makeFetchCall('getFullSnapshotReport', params)
 }
 
-export const getReqTaxTransactions = (params) => {
-  const { start, end } = params
-  return makeFetchCall('getTransactionTaxReport', { start, end })
-}
+export const getReqTaxTransactions = (params) => makeFetchCall('getTransactionTaxReport', params)
 
 /* eslint-disable-next-line consistent-return */
 export function* fetchTaxReport() {
