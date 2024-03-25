@@ -730,7 +730,8 @@
     "sections": {
       "startSnapshot": "Start Snapshot",
       "endSnapshot": "End Snapshot",
-      "finalResult": "Final Result"
+      "finalResult": "Final Result",
+      "transactions": "Transactions"
     },
     "startingPeriodBalances": "Starting Period Balances",
     "endingPeriodBalances": "Ending Period Balances",
