@@ -37,7 +37,8 @@ import PublicTrades from 'components/PublicTrades'
 import Snapshots from 'components/Snapshots'
 import StakingPayments from 'components/StakingPayments'
 import SubAccounts from 'components/SubAccounts'
-import TaxReport from 'components/TaxReport'
+// import TaxReport from 'components/TaxReport'
+import TaxReport from 'components/TaxTransactions'
 import Tickers from 'components/Tickers'
 import TradedVolume from 'components/TradedVolume'
 import Trades from 'components/Trades'
@@ -118,6 +119,10 @@ const PATHS = {
   MENU_FEES_REPORT: [getPath(MENU_FEES_REPORT), `${getPath(MENU_FEES_REPORT)}/:symbol`],
   MENU_LOAN_REPORT: [getPath(MENU_LOAN_REPORT), `${getPath(MENU_LOAN_REPORT)}/:symbol`],
   MENU_TRADED_VOLUME: [getPath(MENU_TRADED_VOLUME), `${getPath(MENU_TRADED_VOLUME)}/:pair`],
+  // MENU_TAX_REPORT: [
+  //   getPath(MENU_TAX_REPORT),
+  //   `${getPath(MENU_TAX_REPORT)}/:section(result)`,
+  //   `${getPath(MENU_TAX_REPORT)}/:section(start_snapshot|end_snapshot|result)/:subsection(positions|tickers|wallets)`],
   MENU_TAX_REPORT: [
     getPath(MENU_TAX_REPORT),
     `${getPath(MENU_TAX_REPORT)}/:section(result)`,
