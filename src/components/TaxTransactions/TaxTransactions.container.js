@@ -24,7 +24,7 @@ import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import queryConstants from 'state/query/constants'
 
-import WeightedAverages from './WeightedAverages'
+import TaxTransactions from './TaxTransactions'
 
 const mapStateToProps = state => ({
   ...getTimeFrame(state),
@@ -52,4 +52,4 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withTranslation('translations'),
   withRouter,
-)(WeightedAverages)
+)(TaxTransactions)

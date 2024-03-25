@@ -1,1 +1,1 @@
-export { default } from './WeightedAverages.container'
+export { default } from './TaxTransactions.container'

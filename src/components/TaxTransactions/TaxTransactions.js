@@ -21,11 +21,11 @@ import {
 } from 'state/utils'
 import queryConstants from 'state/query/constants'
 
-import { getColumns } from './WeightedAverages.columns'
+import { getColumns } from './TaxTransactions.columns'
 
 const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
 
-class WeightedAverages extends PureComponent {
+class TaxTransactions extends PureComponent {
   static propTypes = {
     columns: PropTypes.shape({
       pair: PropTypes.bool,
@@ -81,8 +81,6 @@ class WeightedAverages extends PureComponent {
       columns,
       entries,
       refresh,
-      nextPage,
-      targetPair,
       getFullTime,
       pageLoading,
       columnsWidth,
@@ -149,4 +147,4 @@ class WeightedAverages extends PureComponent {
   }
 }
 
-export default WeightedAverages
+export default TaxTransactions
