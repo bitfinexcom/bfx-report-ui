@@ -64,6 +64,25 @@ export function updateTaxReportSnapshot(payload) {
   }
 }
 
+export function fetchTaxReportTransactions() {
+  return {
+    type: types.FETCH_TRANSACTIONS,
+  }
+}
+
+export function refreshTaxReportTransactions() {
+  return {
+    type: types.REFRESH_TRANSACTIONS,
+  }
+}
+
+export function updateTaxReportTransactions(payload) {
+  return {
+    type: types.UPDATE_TRANSACTIONS,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   fetchTaxReport,
@@ -71,4 +90,7 @@ export default {
   refresh,
   updateTaxReport,
   updateTaxReportSnapshot,
+  fetchTaxReportTransactions,
+  refreshTaxReportTransactions,
+  updateTaxReportTransactions,
 }
