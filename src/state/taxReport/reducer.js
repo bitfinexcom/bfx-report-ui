@@ -44,9 +44,16 @@ const finalResultInitState = {
   },
 }
 
+const transactionsInitState = {
+  dataReceived: false,
+  pageLoading: false,
+  data: [],
+}
+
 const initialState = {
   startSnapshot: snapshotInitState,
   endSnapshot: snapshotInitState,
+  transactions: transactionsInitState,
   ...finalResultInitState,
 }
 
