@@ -182,6 +182,13 @@ export function taxReportReducer(state = initialState, action) {
         },
       }
     }
+    case types.FETCH_TRANSACTIONS:
+      return {
+        ...state,
+        transactions: {
+          pageLoading: true,
+        },
+      }
     case types.UPDATE_TRANSACTIONS: {
       return {
         ...state,
