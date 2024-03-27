@@ -105,6 +105,7 @@ const NavMenu = ({
       />
       <MenuDivider />
       <MenuItem
+        className='section_title'
         icon={<Icons.ADDRESS_BOOK />}
         text={t('navItems.myAccount.title')}
         labelElement={getMenuItemChevron(isMyAccountOpen)}
@@ -119,6 +120,7 @@ const NavMenu = ({
       </Collapse>
       <MenuItem
         icon={<Icons.BOOK />}
+        className='section_title'
         text={t('navItems.myHistory.title')}
         labelElement={getMenuItemChevron(isMyHistoryOpen)}
         onClick={() => handleMenuClick(MENU_MY_HISTORY)}
@@ -134,6 +136,7 @@ const NavMenu = ({
         <>
           <MenuItem
             icon={<Icons.CART />}
+            className='section_title'
             text={t('navItems.merchantHistory.title')}
             labelElement={getMenuItemChevron(isMerchantHistoryOpen)}
             onClick={() => handleMenuClick(MENU_MERCHANT_HISTORY)}
@@ -149,6 +152,7 @@ const NavMenu = ({
       )}
       <MenuItem
         icon={<Icons.CHART />}
+        className='section_title'
         text={t('navItems.marketHistory.title')}
         labelElement={getMenuItemChevron(isMarketHistoryOpen)}
         onClick={() => handleMenuClick(MENU_MARKET_HISTORY)}
