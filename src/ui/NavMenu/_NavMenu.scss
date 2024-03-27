@@ -57,9 +57,14 @@
     border-radius: 0;
     color: var(--color2);
 
-    &-active,
+    &.active,
     &.reports_title {
       color: var(--color1);
+    }
+
+    &.section_title {
+      height: 44px;
+      line-height: 44px;
     }
 
     svg {
