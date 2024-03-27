@@ -21,7 +21,7 @@ import { getPath, getTarget } from 'state/query/utils'
 import { toggleNavigationDrawer } from 'state/ui/actions'
 import { getIsNavigationDrawerOpen } from 'state/ui/selectors'
 import menuTypes from './NavMenu.constants'
-import { getSections, getMenuItemChevron } from './NavMenu.helpers'
+import { getSections, getMenuItemChevron, getSectionClasses } from './NavMenu.helpers'
 
 const {
   MENU_MY_ACCOUNT,
@@ -95,7 +95,6 @@ const NavMenu = ({
 
   const classes = classNames('bitfinex-nav-menu', className)
   const target = getTarget(history.location.pathname, false)
-  const getSectionClasses = (active) => classNames('section_title', { active })
 
   return (
     <Menu large className={classes}>
