@@ -6,20 +6,6 @@
   clip-path: inset(0 -1px 0 0);
   border-bottom: 1px solid var(--bgColor2);
 
-  .reports_title {
-    padding: 0 0 0 20px;
-    pointer-events: none;
-
-    svg {
-      margin-left: 1px;
-      margin-right: 9px;
-    }
-
-    .bp3-fill {
-      width: 200px;
-    }
-  }
-
   &--popover {
     box-shadow: 0 0 1px var(--menuPopoverShadow);
 
@@ -107,13 +93,19 @@
     border-top: 1px solid var(--borderColor);
   }
 
-  // .sub_items_menu {
-  //   .bp3-collapse-body {
-  //     li {
-  //       padding-left: 40px;
-  //     }
-  //   }
-  // }
+  .reports_title {
+    padding: 0 0 0 20px;
+    pointer-events: none;
+
+    svg {
+      margin-left: 1px;
+      margin-right: 9px;
+    }
+
+    .bp3-fill {
+      width: 200px;
+    }
+  }
 
   &--mobile {
     display: none;
