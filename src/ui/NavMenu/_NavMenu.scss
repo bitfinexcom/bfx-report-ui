@@ -55,6 +55,12 @@
     padding: 0 0 0 20px;
     font-size: 1rem;
     border-radius: 0;
+    color: var(--color2);
+
+    &-active,
+    &.reports_title {
+      color: var(--color1);
+    }
 
     svg {
       height: 44px;
