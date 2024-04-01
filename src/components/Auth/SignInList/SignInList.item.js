@@ -29,7 +29,9 @@ export const SignInListItem = ({
   )
 
   const userType = useMemo(
-    () => (isStagingBfxApi ? `${t(getUserType(user))} - Staging` : t(getUserType(user))),
+    () => (isStagingBfxApi
+      ? `${t(getUserType(user))} - Staging`
+      : t(getUserType(user))),
     [isStagingBfxApi, t, user],
   )
 
