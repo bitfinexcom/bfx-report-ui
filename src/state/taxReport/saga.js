@@ -116,5 +116,5 @@ export default function* taxReportSaga() {
   yield takeLatest(types.FETCH_SNAPSHOT, fetchTaxReportSnapshot)
   yield takeLatest(types.REFRESH, refreshTaxReport)
   yield takeLatest(types.FETCH_FAIL, fetchTaxReportFail)
-  yield takeLatest([types.FETCH_TRANSACTIONS, types.REFRESH_TRANSACTIONS], fetchTransactions)
+  yield takeLatest([types.FETCH_TRANSACTIONS], fetchTransactions)
 }
