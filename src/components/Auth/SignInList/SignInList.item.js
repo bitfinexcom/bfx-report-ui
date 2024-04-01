@@ -30,7 +30,10 @@ export const SignInListItem = ({
     [user],
   )
 
-  const userType = !isStagingBfxApi ? `${t(getUserType(user))} - Staging` : t(getUserType(user))
+  const userType = useMemo(
+    () => (!isStagingBfxApi ? `${t(getUserType(user))} - Staging` : t(getUserType(user))),
+    [isStagingBfxApi, t, user],
+  )
 
   return (
     <div className='sign-in-list--wrapper'>
