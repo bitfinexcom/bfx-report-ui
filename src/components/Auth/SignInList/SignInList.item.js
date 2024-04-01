@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react'
+import React, { memo, useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -14,7 +14,11 @@ export const SignInListItem = ({
   handleDeleteAccount,
 }) => {
   const { t } = useTranslation()
-  const { email, isApiKeysAuth, localUsername } = user
+  const {
+    email, isApiKeysAuth, localUsername, isStagingBfxApi,
+  } = user
+
+  console.log('+++isStagingBfxApi', isStagingBfxApi)
 
   const addAccounts = useCallback(
     () => handleAddAccounts(email, localUsername),
@@ -25,6 +29,8 @@ export const SignInListItem = ({
     () => handleDeleteAccount(user),
     [user],
   )
+
+  const userType = !isStagingBfxApi ? `${t(getUserType(user))} - Staging` : t(getUserType(user))
 
   return (
     <div className='sign-in-list--wrapper'>
@@ -38,7 +44,7 @@ export const SignInListItem = ({
             {getUserTitle(user)}
           </p>
           <p className='sign-in-list--item-type'>
-            {t(getUserType(user))}
+            {userType}
           </p>
         </div>
       </div>
