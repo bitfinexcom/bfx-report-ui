@@ -18,8 +18,6 @@ export const SignInListItem = ({
     email, isApiKeysAuth, localUsername, isStagingBfxApi,
   } = user
 
-  console.log('+++isStagingBfxApi', isStagingBfxApi)
-
   const addAccounts = useCallback(
     () => handleAddAccounts(email, localUsername),
     [email, localUsername],
@@ -31,7 +29,7 @@ export const SignInListItem = ({
   )
 
   const userType = useMemo(
-    () => (!isStagingBfxApi ? `${t(getUserType(user))} - Staging` : t(getUserType(user))),
+    () => (isStagingBfxApi ? `${t(getUserType(user))} - Staging` : t(getUserType(user))),
     [isStagingBfxApi, t, user],
   )
 
@@ -69,6 +67,7 @@ SignInListItem.propTypes = {
     isSubAccount: PropTypes.bool.isRequired,
     isApiKeysAuth: PropTypes.bool.isRequired,
     isNotProtected: PropTypes.bool.isRequired,
+    isStagingBfxApi: PropTypes.bool.isRequired,
     localUsername: PropTypes.string,
   }).isRequired,
   handleUserSelect: PropTypes.func.isRequired,
