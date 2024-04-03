@@ -7,7 +7,7 @@ const initialState = {
   localExportPath: null,
   remoteUrn: null,
   isReportExporting: false,
-  isPDFRequired: true,
+  isPDFRequired: false,
 }
 
 export function queryReducer(state = initialState, action) {
