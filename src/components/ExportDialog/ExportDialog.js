@@ -13,10 +13,10 @@ import config from 'config'
 import { tracker } from 'utils/trackers'
 import { formatDate } from 'state/utils'
 import { getTarget } from 'state/query/utils'
-import ExportToPdf from 'ui/ExportToPdf'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
 import queryConstants from 'state/query/constants'
 import DateFormatSelector from 'ui/DateFormatSelector'
+import ExportTypeSelector from 'ui/ExportTypeSelector'
 
 import { getShowPdfSwitcher } from './ExportDialog.helpers'
 import ExportTargetsSelector from './ExportDialog.TargetsSelector'
@@ -184,13 +184,15 @@ class ExportDialog extends PureComponent {
               <DateFormatSelector />
             </div>
           </div>
-          <div className='export-dialog-row'>
-            {showPdfSwitcher && (
+          {showPdfSwitcher && (
+            <div className='export-dialog-row'>
               <div className='export-dialog-item'>
-                <span>{t('download.exportAsPdf')}</span>
-                <ExportToPdf />
+                <div>{t('download.exportFormat')}</div>
+                <ExportTypeSelector />
               </div>
-            )}
+            </div>
+          )}
+          <div className='export-dialog-row'>
             <div className='export-dialog-item'>
               <span>{t('preferences.milliseconds')}</span>
               <ShowMilliseconds />

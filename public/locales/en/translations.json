@@ -292,6 +292,8 @@
     "success": "Success",
     "fail": "Fail",
     "targets": "Data to Export",
+    "exportFormat": "Export Format",
+    "exportAsCsv": "Export as CSV",
     "exportAsPdf": "Export as PDF"
   },
   "fcredit": {

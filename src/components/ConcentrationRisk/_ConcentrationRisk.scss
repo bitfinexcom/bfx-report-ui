@@ -1,13 +1,18 @@
 .concentration-risk-data {
+  width: 100%;
   display: flex;
 
-  .bitfinex-table {
-    height: fit-content;
-    flex: 0 0 400px;
+  &-table {
+    width: 50%;
+    margin-right: 100px;
+
+    .data-table-container {
+      flex: 0 0 400px;
+      height: fit-content;
+    }
   }
 
   &-chart {
-    width: 100%;
     margin-left: 15px;
 
     .recharts-wrapper {
@@ -23,12 +28,19 @@
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 1020px) {
   .concentration-risk-data {
     flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
 
-    .bitfinex-table {
-      margin: 0 auto 25px auto;
+    &-table {
+      width: 100%;
+      margin-right: 0;
+
+      .bitfinex-table {
+        margin: 0 auto 25px auto;
+      }
     }
 
     &-chart {
