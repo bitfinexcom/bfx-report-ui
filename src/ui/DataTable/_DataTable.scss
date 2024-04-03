@@ -1,3 +1,9 @@
+.data-table-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .bitfinex-table {
   width: fit-content;
   min-height: unset;

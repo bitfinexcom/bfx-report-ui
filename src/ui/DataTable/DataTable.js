@@ -1,4 +1,12 @@
-import React, { PureComponent } from 'react'
+import React, {
+  memo,
+  useRef,
+  useMemo,
+  useState,
+  useEffect,
+} from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Menu } from '@blueprintjs/core'
@@ -14,88 +22,106 @@ import { isEqual } from '@bitfinex/lib-js-util-base'
 import {
   getRowsConfig,
   getCellNoData,
+  DEFAULT_CONTAINER_WIDTH,
+  getCalculatedColumnWidths,
   singleColumnSelectedCheck,
   columnHasNumericValueCheck,
 } from 'utils/columns'
 import DEVICES from 'var/devices'
+import { getDevice } from 'state/ui/selectors'
 import queryConstants from 'state/query/constants'
+import { getTableScroll } from 'state/base/selectors'
+import { showColumnsSum } from 'state/columns/actions'
+import { updateErrorStatus } from 'state/status/actions'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 
-class DataTable extends PureComponent {
-  state = {
-    sumValue: null,
-  }
+const DataTable = ({
+  numRows,
+  section,
+  isNoData,
+  isLoading,
+  className,
+  tableColumns,
+  defaultRowHeight,
+}) => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const containerRef = useRef(null)
+  const device = useSelector(getDevice)
+  const tableScroll = useSelector(getTableScroll)
+  const [sumValue, setSumValue] = useState(null)
+  const [containerWidth, setContainerWidth] = useState(0)
+  const [selectedColumns, setSelectedColumns] = useState({})
 
-  selectedColumns = {}
-
-  componentDidUpdate() {
-    const { showColumnsSum } = this.props
-    const { sumValue } = this.state
-
+  useEffect(() => {
     if (!_isNull(sumValue)) {
-      showColumnsSum(sumValue)
-      this.clearSumValue()
+      dispatch(showColumnsSum(sumValue))
+      setSumValue(null)
     }
-  }
+  }, [dispatch, sumValue])
 
-  getCellData = (rowIndex, columnIndex) => {
-    const { tableColumns } = this.props
-
-    return tableColumns[columnIndex].copyText(rowIndex)
-  }
-
-  getCellSum = (rowIndex, columnIndex) => {
-    const { tableColumns } = this.props
-    const { isNumericValue } = tableColumns[columnIndex]
-
-    if (isNumericValue) {
-      const colValue = +tableColumns[columnIndex].copyText(rowIndex)
-      this.setState(state => ({
-        sumValue: state.sumValue + colValue,
-      }))
+  useEffect(() => {
+    const onScreenSizeChanged = () => {
+      setContainerWidth(containerRef?.current?.offsetWidth ?? DEFAULT_CONTAINER_WIDTH)
     }
-  }
+    onScreenSizeChanged()
+    window.addEventListener('resize', onScreenSizeChanged)
 
-  clearSumValue = () => {
-    this.setState({ sumValue: null })
-  }
+    return () => {
+      window.removeEventListener('resize', onScreenSizeChanged)
+    }
+  }, [])
 
-  renderBodyContextMenu = (context) => {
-    const { t, tableColumns } = this.props
+  const columnWidths = useMemo(
+    () => getCalculatedColumnWidths(tableColumns, containerWidth),
+    [tableColumns, containerWidth],
+  )
+
+  const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex]?.copyText(rowIndex)
+
+  const renderBodyContextMenu = (context) => {
     const isSingleColumnSelected = singleColumnSelectedCheck(context)
     const hasNumericValue = columnHasNumericValueCheck(context, tableColumns)
     const shouldShowSum = isSingleColumnSelected && hasNumericValue
+    let sum = 0
+
+    const getCellSum = (rowIndex, columnIndex) => {
+      const { isNumericValue } = tableColumns[columnIndex]
+      if (isNumericValue) {
+        const colValue = +tableColumns[columnIndex].copyText(rowIndex)
+        sum += colValue
+        setSumValue(sum)
+      }
+    }
 
     return (
       <Menu>
         <CopyCellsMenuItem
           text={t('copy')}
           context={context}
-          getCellData={this.getCellData}
+          getCellData={getCellData}
         />
         {shouldShowSum && (
           <CopyCellsMenuItem
             text={t('sum')}
             context={context}
-            getCellData={this.getCellSum}
+            getCellData={getCellSum}
           />
         )}
       </Menu>
     )
   }
 
-  onSelection = (selection) => {
+  const onSelection = (selection) => {
     const isWholeColumnSelected = selection.find(({ rows }) => !rows)
-
     if (!isWholeColumnSelected) {
-      this.selectedColumns = {}
+      setSelectedColumns({})
       return
     }
 
-    this.selectedColumns = selection.reduce((acc, sel) => {
+    const selectedCols = selection.reduce((acc, sel) => {
       const { cols } = sel
       const [start, end] = cols
-
       let cur = start
 
       while (cur <= end) {
@@ -105,26 +131,24 @@ class DataTable extends PureComponent {
 
       return acc
     }, {})
+    setSelectedColumns(selectedCols)
   }
 
-  onCopy = () => {
-    const { tableColumns, t } = this.props
-
+  const onCopy = () => {
     navigator.clipboard.readText().then((text) => {
       const columnHeaders = []
-      const selectedColumns = _keys(this.selectedColumns).sort()
-      const start = +selectedColumns[0]
-      const end = +selectedColumns[selectedColumns.length - 1]
+      const selectedCols = _keys(selectedColumns).sort()
+      const start = +selectedCols[0]
+      const end = +selectedCols[selectedCols.length - 1]
       let cur = start
 
       while (cur <= end) {
-        if (this.selectedColumns[cur]) {
+        if (selectedColumns[cur]) {
           const columnName = t(tableColumns[cur].name)
           columnHeaders.push(columnName)
         } else {
           columnHeaders.push('')
         }
-
         cur += 1
       }
 
@@ -134,107 +158,69 @@ class DataTable extends PureComponent {
       const headersText = `${columnHeaders.join('\t')}${newLineChar}`
 
       navigator.clipboard.writeText(`${headersText}${text}`).catch((err) => {
-        // eslint-disable-next-line no-console
-        console.error(err)
+        dispatch(updateErrorStatus(err))
       })
     }).catch((err) => {
-      // eslint-disable-next-line no-console
-      console.error(err)
+      dispatch(updateErrorStatus(err))
     })
   }
 
-  getCellClipboardData = (row, col) => {
-    const { tableColumns } = this.props
+  const getCellClipboardData = (row, col) => tableColumns[col].copyText(row)
 
-    return tableColumns[col].copyText(row)
+  const columns = tableColumns
+  if (isNoData && !isLoading) {
+    const noDataTitle = isEqual(section, queryConstants.MENU_TICKERS)
+      ? t('column.noHistory')
+      : t('column.noResults')
+    columns[0].renderer = () => getCellNoData(noDataTitle)
   }
 
-  onColumnWidthChanged = (index, width) => {
-    const { section, tableColumns, setColumnsWidth } = this.props
-
-    if (section) {
-      const updatedColumn = {
-        ...tableColumns[index],
-        width,
-      }
-      tableColumns[index] = updatedColumn
-      setColumnsWidth({ section, tableColumns })
-    }
+  if (device === DEVICES.PHONE && columns.length >= 2) {
+    return <CollapsedTable numRows={numRows} tableColumns={columns} />
   }
 
-  render() {
-    const {
-      t,
-      device,
-      numRows,
-      section,
-      isNoData,
-      isLoading,
-      className,
-      tableScroll,
-      tableColumns,
-      defaultRowHeight,
-    } = this.props
-    const columnWidths = tableColumns.map(column => column.width)
-
-    if (isNoData && !isLoading) {
-      const noDataTitle = isEqual(section, queryConstants.MENU_TICKERS)
-        ? t('column.noHistory')
-        : t('column.noResults')
-      tableColumns[0].renderer = () => getCellNoData(noDataTitle)
-    }
-
-    if (device === DEVICES.PHONE && tableColumns.length >= 2) {
-      return <CollapsedTable numRows={numRows} tableColumns={tableColumns} />
-    }
-
-    return (
+  return (
+    <div
+      ref={containerRef}
+      className='data-table-container'
+    >
       <Table
-        className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
-        numRows={getRowsConfig(isLoading, isNoData, numRows)}
+        onCopy={onCopy}
         enableRowHeader={false}
+        onSelection={onSelection}
         columnWidths={columnWidths}
-        onSelection={this.onSelection}
-        onColumnWidthChanged={this.onColumnWidthChanged}
-        getCellClipboardData={this.getCellClipboardData}
-        onCopy={this.onCopy}
-        bodyContextMenuRenderer={this.renderBodyContextMenu}
         defaultRowHeight={defaultRowHeight}
+        getCellClipboardData={getCellClipboardData}
+        bodyContextMenuRenderer={renderBodyContextMenu}
+        numRows={getRowsConfig(isLoading, isNoData, numRows)}
+        className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
       >
-        {tableColumns.map(column => (
+        {columns.map(column => (
           <Column
-            key={column.id}
             id={column.id}
-            name={column.nameStr ? column.nameStr : t(column.name)}
-            className={column?.className ?? 'align-right'}
+            key={column.id}
             cellRenderer={column.renderer}
+            className={column?.className ?? 'align-right'}
+            name={column.nameStr ? column.nameStr : t(column.name)}
           />
         ))}
       </Table>
-    )
-  }
+    </div>
+  )
 }
-
-const TABLE_COLUMNS_PROPS = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string,
-  nameStr: PropTypes.string,
-  renderer: PropTypes.func.isRequired,
-  copyText: PropTypes.func.isRequired,
-  width: PropTypes.number,
-  isNumericValue: PropTypes.bool,
-})
 
 DataTable.propTypes = {
   className: PropTypes.string,
   section: PropTypes.string,
   numRows: PropTypes.number.isRequired,
-  tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
-  device: PropTypes.string.isRequired,
-  t: PropTypes.func.isRequired,
-  setColumnsWidth: PropTypes.func.isRequired,
-  showColumnsSum: PropTypes.func.isRequired,
-  tableScroll: PropTypes.bool.isRequired,
+  tableColumns: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    nameStr: PropTypes.string,
+    renderer: PropTypes.func.isRequired,
+    copyText: PropTypes.func.isRequired,
+    isNumericValue: PropTypes.bool,
+  })).isRequired,
   defaultRowHeight: PropTypes.number,
   isNoData: PropTypes.bool,
   isLoading: PropTypes.bool,
@@ -248,4 +234,4 @@ DataTable.defaultProps = {
   defaultRowHeight: 26,
 }
 
-export default DataTable
+export default memo(DataTable)
