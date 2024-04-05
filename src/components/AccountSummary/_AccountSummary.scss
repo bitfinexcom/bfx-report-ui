@@ -1,15 +1,14 @@
 .section-account-summary {
   &-data {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     &-item {
-      width: 49%;
-      min-width: 400px;
+      width: fit-content;
+      max-width: calc(100vw - 20px);
+      margin-right: 20px;
       margin-bottom: 35px;
 
       .collapsed-table {
@@ -50,16 +49,6 @@
   }
 }
 
-@media screen and (max-width: 1210px) {
-  .section-account-summary {
-    &-data {
-      &-item {
-        width: 100%;
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 768px) {
   .section-account-summary {
     &-data {
@@ -74,8 +63,8 @@
       &-item {
         width: 100%;
         margin-right: 0;
-        min-width: inherit;
       }
     }
   }
 }
+

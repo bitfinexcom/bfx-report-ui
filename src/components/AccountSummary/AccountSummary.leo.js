@@ -70,19 +70,12 @@ const AccountSummaryLeo = ({
 
 AccountSummaryLeo.propTypes = {
   data: PropTypes.shape({
-    leoLev: PropTypes.number,
-    leoAmountAvg: PropTypes.number,
-  }),
+    leoLev: PropTypes.number.isRequired,
+    leoAmountAvg: PropTypes.number.isRequired,
+  }).isRequired,
   t: PropTypes.func.isRequired,
   isNoData: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
-}
-
-AccountSummaryLeo.defaultProps = {
-  data: PropTypes.shape({
-    leoLev: 0,
-    leoAmountAvg: 0,
-  }),
 }
 
 export default memo(AccountSummaryLeo)
