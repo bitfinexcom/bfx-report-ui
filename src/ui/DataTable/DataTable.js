@@ -31,9 +31,9 @@ import DEVICES from 'var/devices'
 import { getDevice } from 'state/ui/selectors'
 import queryConstants from 'state/query/constants'
 import { getTableScroll } from 'state/base/selectors'
-import { showColumnsSum } from 'state/columns/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
+import { showColumnsSum, setColumnsWidth } from 'state/columns/actions'
 
 const DataTable = ({
   numRows,
@@ -51,6 +51,7 @@ const DataTable = ({
   const tableScroll = useSelector(getTableScroll)
   const [sumValue, setSumValue] = useState(null)
   const [containerWidth, setContainerWidth] = useState(0)
+  const [useCustomColsWidth, setUseCustomColsWidth] = useState(false)
   const [selectedColumns, setSelectedColumns] = useState({})
 
   useEffect(() => {
@@ -63,6 +64,7 @@ const DataTable = ({
   useEffect(() => {
     const onScreenSizeChanged = () => {
       setContainerWidth(containerRef?.current?.offsetWidth ?? DEFAULT_CONTAINER_WIDTH)
+      setUseCustomColsWidth(false)
     }
     onScreenSizeChanged()
     window.addEventListener('resize', onScreenSizeChanged)
@@ -73,8 +75,11 @@ const DataTable = ({
   }, [])
 
   const columnWidths = useMemo(
-    () => getCalculatedColumnWidths(tableColumns, containerWidth),
-    [tableColumns, containerWidth],
+    () => (useCustomColsWidth
+      ? tableColumns.map(column => column.width)
+      : getCalculatedColumnWidths(tableColumns, containerWidth)),
+
+    [tableColumns, containerWidth, useCustomColsWidth],
   )
 
   const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex]?.copyText(rowIndex)
@@ -175,6 +180,21 @@ const DataTable = ({
     columns[0].renderer = () => getCellNoData(noDataTitle)
   }
 
+  const onColumnWidthChanged = (index, width) => {
+    console.log('+++columns', columns)
+    console.log('+++index', index)
+    console.log('+++width', width)
+    if (section) {
+      const updatedColumn = {
+        ...columns[index],
+        width,
+      }
+      columns[index] = updatedColumn
+      dispatch(setColumnsWidth({ section, columns }))
+    }
+    setUseCustomColsWidth(true)
+  }
+
   if (device === DEVICES.PHONE && columns.length >= 2) {
     return <CollapsedTable numRows={numRows} tableColumns={columns} />
   }
@@ -191,6 +211,7 @@ const DataTable = ({
         columnWidths={columnWidths}
         defaultRowHeight={defaultRowHeight}
         getCellClipboardData={getCellClipboardData}
+        onColumnWidthChanged={onColumnWidthChanged}
         bodyContextMenuRenderer={renderBodyContextMenu}
         numRows={getRowsConfig(isLoading, isNoData, numRows)}
         className={classNames('bitfinex-table', className, { 'bitfinex-table-full-height': !tableScroll })}
