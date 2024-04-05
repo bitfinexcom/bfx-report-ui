@@ -30,7 +30,7 @@ const TickersSnapshot = ({
   })
 
   return (
-    <>
+    <div className='tickers'>
       <div className='tables-row no-table-scroll'>
         <div className='tables-row-item'>
           <div>{t('positions.title')}</div>
@@ -47,7 +47,7 @@ const TickersSnapshot = ({
           />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
