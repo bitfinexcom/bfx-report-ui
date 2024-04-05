@@ -2,11 +2,11 @@ import { pickColumnsWidth } from 'utils/columns'
 
 import types from './constants'
 
-export function setColumnsWidth({ section, tableColumns }) {
-  const columns = pickColumnsWidth(tableColumns)
+export function setColumnsWidth({ section, columns }) {
+  const preparedColumns = pickColumnsWidth(columns)
   return {
     type: types.SET_COLUMNS_WIDTH,
-    payload: { section, columns },
+    payload: { section, preparedColumns },
   }
 }
 
