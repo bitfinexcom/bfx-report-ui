@@ -110,8 +110,7 @@ class Chart extends React.PureComponent {
     const {
       t,
       data,
-      width,
-      height,
+      aspect,
       className,
       showLegend,
       isSumUpEnabled,
@@ -132,10 +131,7 @@ class Chart extends React.PureComponent {
 
     return (
       <div className={classes}>
-        <ResponsiveContainer
-          width={width}
-          height={height}
-        >
+        <ResponsiveContainer aspect={aspect}>
           <AreaChart
             data={data}
             onMouseUp={this.onMouseUp}

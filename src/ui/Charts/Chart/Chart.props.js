@@ -6,13 +6,11 @@ export const propTypes = {
   t: PropTypes.func.isRequired,
   isSumUpEnabled: PropTypes.bool,
   showLegend: PropTypes.bool,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  aspect: PropTypes.number,
 }
 
 export const defaultProps = {
   isSumUpEnabled: false,
   showLegend: true,
-  width: '100%',
-  height: '100%',
+  aspect: 2.22,
 }

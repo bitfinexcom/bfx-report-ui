@@ -19,7 +19,7 @@
   &-data-row {
     display: flex;
     flex-wrap: wrap;
-    max-width: 100%;
+    max-width: 1000px;
     min-height: 441px;
     align-items: flex-start;
     justify-content: space-between;
@@ -29,14 +29,14 @@
   &-title-row {
     display: flex;
     min-height: 35px;
-    max-width: 100%;
+    max-width: 1000px;
     align-items: center;
     justify-content: space-between;
   }
 
   &-item {
     width: 48%;
-    min-width: 300px;
+    max-width: 460px;
     min-height: 270px;
 
     &-title {
@@ -150,7 +150,7 @@
 
   .app-summary-item-title--row {
     display: flex;
-    max-width: 100%;
+    max-width: 1000px;
     position: relative;
     align-items: center;
     justify-content: space-between;
@@ -348,7 +348,7 @@
   .loading-container {
     display: flex;
     min-height: 300px;
-    max-width: 100%;
+    max-width: 1000px;
 
     .loading {
       margin: auto;
@@ -356,7 +356,7 @@
   }
 
   .no-data {
-    max-width: 100%;
+    max-width: 1000px;
     min-height: 300px;
     
     &-wrapper {
@@ -366,8 +366,8 @@
 }
 
 .chart-item {
-  width: 48%;
-  margin-right: 15px;
+  width: 50%;
+  max-width: 500px;
 
   .app-summary-item-sub-title {
     margin-bottom: 11px;
@@ -464,41 +464,25 @@
   }
 }
 
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 547px) {
   .app-summary {
     &-data-row {
       display: flex;
       flex-direction: column;
       margin-bottom: 0;
     }
-
     &-item {
       width: 100%;
       margin-bottom: 30px;
     }
-
-    .chart-item {
-      width: 100%;
-      margin-right: 0;
-    }
   }
 }
 
-@media screen and (max-width: 855px) {
+@media screen and (max-width: 400px) {
   .app-summary {
     &-item {
       .line-chart {
-        width:107%;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .app-summary {
-    &-item {
-      .line-chart {
-        width:115%;
+        width:120%;
       }
     }
   }

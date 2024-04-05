@@ -20,9 +20,7 @@
 @import "components/Status/_Status.scss";
 @import "components/SubAccounts/_SubAccounts.scss";
 @import "components/TaxReport/_TaxReport.scss";
-@import "components/Wallets/_Wallets.scss";
 @import "components/WeightedAverages/_WeightedAverages.scss";
-@import "components/Snapshots/_Snapshots.scss";
 @import "components/TimeFrameDialog/_TimeFrameDialog.scss";
 @import "components/GoToRangeDialog/_GoToRangeDialog.scss";
 @import "components/ExtraInfoDialog/_ExtraInfoDialog.scss";
@@ -125,7 +123,7 @@ input[type=number] {
 .data-table-wrapper {
   display: flex;
   flex-direction: column;
-  max-width: 100%;
+  max-width: fit-content;
 }
 
 @media screen and (max-width: 770px) {
