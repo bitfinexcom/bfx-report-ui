@@ -112,6 +112,7 @@ class AccountSummary extends PureComponent {
               />
             </>
           )}
+          <br />
           <PaidFees
             t={t}
             isNoData={isNoData}
