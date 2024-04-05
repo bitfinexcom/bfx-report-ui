@@ -5,6 +5,7 @@ import { DateInput as BptDateInput, TimePrecision } from '@blueprintjs/datetime'
 
 import Icon from 'icons'
 import { tracker } from 'utils/trackers'
+import { getSourceFromPathName } from 'utils/browser'
 import {
   DEFAULT_DATETIME_FORMAT, momentFormatter, momentFormatterDays,
 } from 'state/utils'
@@ -28,7 +29,7 @@ class DateInput extends PureComponent {
   }
 
   onToggle = (isOpen) => {
-    tracker.trackEvent('Date Input')
+    tracker.trackEvent('Date Input', getSourceFromPathName())
     this.setState({ isOpen })
   }
 
