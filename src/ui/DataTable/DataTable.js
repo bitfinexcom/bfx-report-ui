@@ -82,6 +82,8 @@ const DataTable = ({
     [tableColumns, containerWidth, useCustomColsWidth],
   )
 
+  console.log('+++columnWidths', columnWidths)
+
   const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex]?.copyText(rowIndex)
 
   const renderBodyContextMenu = (context) => {
@@ -180,6 +182,10 @@ const DataTable = ({
     columns[0].renderer = () => getCellNoData(noDataTitle)
   }
 
+  columnWidths.forEach((value, index) => {
+    columns[index].width = value
+  })
+
   const onColumnWidthChanged = (index, width) => {
     console.log('+++columns', columns)
     console.log('+++index', index)
@@ -211,7 +217,7 @@ const DataTable = ({
         onCopy={onCopy}
         enableRowHeader={false}
         onSelection={onSelection}
-        columnWidths={columnWidths}
+        columnWidths={columns.map(column => column.width)}
         defaultRowHeight={defaultRowHeight}
         getCellClipboardData={getCellClipboardData}
         onColumnWidthChanged={onColumnWidthChanged}
