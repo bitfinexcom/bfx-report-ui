@@ -612,7 +612,7 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
-export const MIN_COLUMN_WIDTH = 100
+export const MIN_COLUMN_WIDTH = 50
 
 export const DEFAULT_CONTAINER_WIDTH = 1000
 
