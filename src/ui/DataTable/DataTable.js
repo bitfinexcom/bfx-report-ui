@@ -184,15 +184,18 @@ const DataTable = ({
     console.log('+++columns', columns)
     console.log('+++index', index)
     console.log('+++width', width)
+    console.log('+++section', section)
+    columnWidths[index] = width
     if (section) {
       const updatedColumn = {
         ...columns[index],
         width,
       }
+      console.log('+++updatedColumn', updatedColumn)
       columns[index] = updatedColumn
       dispatch(setColumnsWidth({ section, columns }))
     }
-    setUseCustomColsWidth(true)
+    // setUseCustomColsWidth(true)
   }
 
   if (device === DEVICES.PHONE && columns.length >= 2) {
