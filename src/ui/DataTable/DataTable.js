@@ -214,9 +214,6 @@ const DataTable = ({
     ? columns.map(column => column.width)
     : calculatedColsWidths
 
-  console.log('+++calculatedColsWidths', calculatedColsWidths)
-  console.log('+++useCustomColsWidth', useCustomColsWidth)
-
   return (
     <div
       ref={containerRef}
