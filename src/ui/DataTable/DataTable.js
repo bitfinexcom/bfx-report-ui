@@ -44,6 +44,7 @@ const DataTable = ({
   className,
   tableColumns,
   defaultRowHeight,
+  enableColumnResizing,
 }) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -225,6 +226,7 @@ const DataTable = ({
         onSelection={onSelection}
         columnWidths={columnWidths}
         defaultRowHeight={defaultRowHeight}
+        enableColumnResizing={enableColumnResizing}
         getCellClipboardData={getCellClipboardData}
         onColumnWidthChanged={onColumnWidthChanged}
         bodyContextMenuRenderer={renderBodyContextMenu}
@@ -260,6 +262,7 @@ DataTable.propTypes = {
   defaultRowHeight: PropTypes.number,
   isNoData: PropTypes.bool,
   isLoading: PropTypes.bool,
+  enableColumnResizing: PropTypes.bool,
 }
 
 DataTable.defaultProps = {
@@ -268,6 +271,7 @@ DataTable.defaultProps = {
   isLoading: false,
   section: undefined,
   defaultRowHeight: 26,
+  enableColumnResizing: true,
 }
 
 export default memo(DataTable)
