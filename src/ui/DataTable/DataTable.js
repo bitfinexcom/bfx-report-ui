@@ -118,9 +118,9 @@ const DataTable = ({
           />
         )}
         <CopyCellsMenuItem
-          text={t('Reset')}
           context={context}
           getCellData={columnWidthReset}
+          text={t('column.defaultWidth')}
         />
       </Menu>
     )
