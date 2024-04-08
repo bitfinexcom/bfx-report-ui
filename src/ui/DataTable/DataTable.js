@@ -57,6 +57,11 @@ const DataTable = ({
   const customColsWidths = useSelector((state) => getColumnsWidth(state, section))
 
   console.log('+++customColsWidths', customColsWidths)
+  useEffect(() => {
+    if (customColsWidths) {
+      setUseCustomColsWidth(true)
+    }
+  }, [dispatch, customColsWidths])
 
   useEffect(() => {
     if (!_isNull(sumValue)) {
@@ -68,7 +73,6 @@ const DataTable = ({
   useEffect(() => {
     const onScreenSizeChanged = () => {
       setContainerWidth(containerRef?.current?.offsetWidth ?? DEFAULT_CONTAINER_WIDTH)
-      setUseCustomColsWidth(false)
     }
     onScreenSizeChanged()
     window.addEventListener('resize', onScreenSizeChanged)
@@ -177,16 +181,21 @@ const DataTable = ({
   }
 
   const calculatedColsWidths = useMemo(
-    () => getCalculatedColumnWidths(tableColumns, containerWidth),
-    [tableColumns, containerWidth, useCustomColsWidth],
+    () => getCalculatedColumnWidths(columns, containerWidth),
+    [columns, containerWidth, useCustomColsWidth],
   )
 
-  calculatedColsWidths.forEach((value, index) => {
-    columns[index].width = value
-  })
+  // const calculatedColsWidths = getCalculatedColumnWidths(columns, containerWidth)
+
+  // calculatedColsWidths.forEach((value, index) => {
+  //   columns[index].width = value
+  // })
 
   const onColumnWidthChanged = (index, width) => {
     calculatedColsWidths[index] = width
+    console.log('+++index', index)
+    console.log('+++width', width)
+    console.log('+++calculatedColsWidths2', calculatedColsWidths)
     if (section) {
       const updatedColumn = {
         ...columns[index],
@@ -205,6 +214,8 @@ const DataTable = ({
   const columnWidths = useCustomColsWidth
     ? columns.map(column => column.width)
     : calculatedColsWidths
+
+  console.log('+++calculatedColsWidths', calculatedColsWidths)
 
   return (
     <div
