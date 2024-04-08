@@ -6,7 +6,7 @@ export function setColumnsWidth({ section, columns }) {
   const preparedColumns = pickColumnsWidth(columns)
   return {
     type: types.SET_COLUMNS_WIDTH,
-    payload: { section, preparedColumns },
+    payload: { section, columns: preparedColumns },
   }
 }
 
