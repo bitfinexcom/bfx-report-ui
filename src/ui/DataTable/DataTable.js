@@ -31,6 +31,7 @@ import DEVICES from 'var/devices'
 import { getDevice } from 'state/ui/selectors'
 import queryConstants from 'state/query/constants'
 import { getTableScroll } from 'state/base/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import CollapsedTable from 'ui/CollapsedTable/CollapsedTable'
 import { showColumnsSum, setColumnsWidth } from 'state/columns/actions'
@@ -53,6 +54,9 @@ const DataTable = ({
   const [containerWidth, setContainerWidth] = useState(0)
   const [selectedColumns, setSelectedColumns] = useState({})
   const [useCustomColsWidth, setUseCustomColsWidth] = useState(false)
+  const customColsWidths = useSelector((state) => getColumnsWidth(state, section))
+
+  console.log('+++customColsWidths', customColsWidths)
 
   useEffect(() => {
     if (!_isNull(sumValue)) {
