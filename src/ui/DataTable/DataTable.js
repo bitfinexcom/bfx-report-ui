@@ -198,6 +198,10 @@ const DataTable = ({
     return <CollapsedTable numRows={numRows} tableColumns={columns} />
   }
 
+  const columnWidths = useCustomColsWidth
+    ? columns.map(column => column.width)
+    : calculatedColsWidths
+
   return (
     <div
       ref={containerRef}
@@ -207,7 +211,7 @@ const DataTable = ({
         onCopy={onCopy}
         enableRowHeader={false}
         onSelection={onSelection}
-        columnWidths={columns.map(column => column.width)}
+        columnWidths={columnWidths}
         defaultRowHeight={defaultRowHeight}
         getCellClipboardData={getCellClipboardData}
         onColumnWidthChanged={onColumnWidthChanged}
