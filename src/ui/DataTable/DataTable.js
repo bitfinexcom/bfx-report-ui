@@ -51,8 +51,8 @@ const DataTable = ({
   const tableScroll = useSelector(getTableScroll)
   const [sumValue, setSumValue] = useState(null)
   const [containerWidth, setContainerWidth] = useState(0)
-  const [useCustomColsWidth, setUseCustomColsWidth] = useState(false)
   const [selectedColumns, setSelectedColumns] = useState({})
+  const [useCustomColsWidth, setUseCustomColsWidth] = useState(false)
 
   useEffect(() => {
     if (!_isNull(sumValue)) {
