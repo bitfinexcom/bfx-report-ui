@@ -45,6 +45,7 @@ const WalletsData = ({
         <div className='tables-row-item'>
           <div>{t('wallets.header.exchange')}</div>
           <DataTable
+            enableColumnResizing={false}
             tableColumns={exchangeColumns}
             numRows={exchangeData.length || 1}
           />
@@ -52,6 +53,7 @@ const WalletsData = ({
         <div className='tables-row-item'>
           <div>{t('wallets.header.margin')}</div>
           <DataTable
+            enableColumnResizing={false}
             tableColumns={marginColumns}
             numRows={marginData.length || 1}
           />
@@ -59,6 +61,7 @@ const WalletsData = ({
         <div className='tables-row-item'>
           <div>{t('wallets.header.funding')}</div>
           <DataTable
+            enableColumnResizing={false}
             tableColumns={fundingColumns}
             numRows={fundingData.length || 1}
           />
@@ -66,6 +69,7 @@ const WalletsData = ({
         <div className='tables-row-item'>
           <div>{t('wallets.header.capital-raise')}</div>
           <DataTable
+            enableColumnResizing={false}
             tableColumns={contributionColumns}
             numRows={contributionData.length || 1}
           />
