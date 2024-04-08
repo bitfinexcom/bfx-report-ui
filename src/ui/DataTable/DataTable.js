@@ -74,16 +74,6 @@ const DataTable = ({
     }
   }, [])
 
-  const columnWidths = useMemo(
-    () => (useCustomColsWidth
-      ? tableColumns.map(column => column.width)
-      : getCalculatedColumnWidths(tableColumns, containerWidth)),
-
-    [tableColumns, containerWidth, useCustomColsWidth],
-  )
-
-  console.log('+++columnWidths', columnWidths)
-
   const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex]?.copyText(rowIndex)
 
   const renderBodyContextMenu = (context) => {
@@ -182,16 +172,17 @@ const DataTable = ({
     columns[0].renderer = () => getCellNoData(noDataTitle)
   }
 
-  columnWidths.forEach((value, index) => {
+  const calculatedColsWidths = useMemo(
+    () => getCalculatedColumnWidths(tableColumns, containerWidth),
+    [tableColumns, containerWidth, useCustomColsWidth],
+  )
+
+  calculatedColsWidths.forEach((value, index) => {
     columns[index].width = value
   })
 
   const onColumnWidthChanged = (index, width) => {
-    console.log('+++columns', columns)
-    console.log('+++index', index)
-    console.log('+++width', width)
-    console.log('+++section', section)
-    columnWidths[index] = width
+    calculatedColsWidths[index] = width
     if (section) {
       const updatedColumn = {
         ...columns[index],
@@ -201,7 +192,6 @@ const DataTable = ({
       columns[index] = updatedColumn
       dispatch(setColumnsWidth({ section, columns }))
     }
-    // setUseCustomColsWidth(true)
   }
 
   if (device === DEVICES.PHONE && columns.length >= 2) {
