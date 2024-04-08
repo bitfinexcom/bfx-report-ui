@@ -33,6 +33,7 @@ export default {
   MENU_WALLETS: 'wallets',
   MENU_WIN_LOSS: 'averagewinloss',
   MENU_WEIGHTED_AVERAGES: 'weightedaverages',
+  SUMMARY_BY_ASSET: 'summarybyasset',
   TIME_TYPE_UTC: 'utc',
   TIME_TYPE_LOCALTIME: 'local',
   DEFAULT_QUERY_LIMIT: 500,
