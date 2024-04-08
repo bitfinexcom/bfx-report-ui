@@ -16,6 +16,7 @@ import {
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
 import { getTimezone } from 'state/base/selectors'
+import queryConstants from 'state/query/constants'
 import { getTimeRange, getTimeFrame } from 'state/timeRange/selectors'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
@@ -83,6 +84,7 @@ const AppSummaryByAsset = () => {
         defaultRowHeight={73}
         tableColumns={columns}
         className={tableClasses}
+        section={queryConstants.SUMMARY_BY_ASSET}
         numRows={isLoading ? 3 : preparedData.length}
       />
     </div>
