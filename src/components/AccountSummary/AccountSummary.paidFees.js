@@ -88,6 +88,7 @@ const AccountSummaryPaidFees = ({
       <div>{t(title)}</div>
       <DataTable
         tableColumns={columns}
+        enableColumnResizing={false}
         numRows={isLoading ? 1 : formattedData.length}
       />
     </div>

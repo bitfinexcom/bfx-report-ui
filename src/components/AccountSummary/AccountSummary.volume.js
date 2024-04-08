@@ -75,6 +75,7 @@ const AccountSummaryVolume = ({
       <div>{t('accountsummary.30dVolume')}</div>
       <DataTable
         tableColumns={columns}
+        enableColumnResizing={false}
         numRows={isLoading ? 1 : data.length}
       />
     </div>
