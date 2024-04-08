@@ -17,7 +17,7 @@ import {
 } from '@blueprintjs/table'
 import _keys from 'lodash/keys'
 import _isNull from 'lodash/isNull'
-import { isEqual } from '@bitfinex/lib-js-util-base'
+import { isEqual, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import {
   getRowsConfig,
@@ -56,9 +56,8 @@ const DataTable = ({
   const [useCustomColsWidth, setUseCustomColsWidth] = useState(false)
   const customColsWidths = useSelector((state) => getColumnsWidth(state, section))
 
-  console.log('+++customColsWidths', customColsWidths)
   useEffect(() => {
-    if (customColsWidths) {
+    if (!isEmpty(customColsWidths)) {
       setUseCustomColsWidth(true)
     }
   }, [dispatch, customColsWidths])
@@ -99,6 +98,11 @@ const DataTable = ({
       }
     }
 
+    const columnWidthReset = () => {
+      setUseCustomColsWidth(false)
+      dispatch(setColumnsWidth({ section }))
+    }
+
     return (
       <Menu>
         <CopyCellsMenuItem
@@ -113,6 +117,11 @@ const DataTable = ({
             getCellData={getCellSum}
           />
         )}
+        <CopyCellsMenuItem
+          text={t('Reset')}
+          context={context}
+          getCellData={columnWidthReset}
+        />
       </Menu>
     )
   }
@@ -182,26 +191,16 @@ const DataTable = ({
 
   const calculatedColsWidths = useMemo(
     () => getCalculatedColumnWidths(columns, containerWidth),
-    [columns, containerWidth, useCustomColsWidth],
+    [columns, containerWidth],
   )
-
-  // const calculatedColsWidths = getCalculatedColumnWidths(columns, containerWidth)
-
-  // calculatedColsWidths.forEach((value, index) => {
-  //   columns[index].width = value
-  // })
 
   const onColumnWidthChanged = (index, width) => {
     calculatedColsWidths[index] = width
-    console.log('+++index', index)
-    console.log('+++width', width)
-    console.log('+++calculatedColsWidths2', calculatedColsWidths)
     if (section) {
       const updatedColumn = {
         ...columns[index],
         width,
       }
-      console.log('+++updatedColumn', updatedColumn)
       columns[index] = updatedColumn
       dispatch(setColumnsWidth({ section, columns }))
     }
@@ -216,6 +215,7 @@ const DataTable = ({
     : calculatedColsWidths
 
   console.log('+++calculatedColsWidths', calculatedColsWidths)
+  console.log('+++useCustomColsWidth', useCustomColsWidth)
 
   return (
     <div
