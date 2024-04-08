@@ -118,11 +118,13 @@ const DataTable = ({
             getCellData={getCellSum}
           />
         )}
-        <CopyCellsMenuItem
-          context={context}
-          getCellData={columnWidthReset}
-          text={t('column.defaultWidth')}
-        />
+        {enableColumnResizing && (
+          <CopyCellsMenuItem
+            context={context}
+            getCellData={columnWidthReset}
+            text={t('column.defaultWidth')}
+          />
+        )}
       </Menu>
     )
   }
