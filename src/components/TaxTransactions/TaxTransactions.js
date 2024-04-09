@@ -13,6 +13,7 @@ import {
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
+import TaxStrategySelector from 'ui/TaxStrategySelector'
 
 import {
   checkInit,
@@ -110,6 +111,12 @@ class TaxTransactions extends PureComponent {
                 {t('selector.filter.date')}
               </SectionHeaderItemLabel>
               <TimeRange className='section-header-time-range' />
+            </SectionHeaderItem>
+            <SectionHeaderItem>
+              <SectionHeaderItemLabel>
+                {t('selector.strategy')}
+              </SectionHeaderItemLabel>
+              <TaxStrategySelector />
             </SectionHeaderItem>
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
