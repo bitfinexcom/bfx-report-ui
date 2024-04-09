@@ -83,6 +83,13 @@ export function updateTaxReportTransactions(payload) {
   }
 }
 
+export function setTransactionsStrategy(payload) {
+  return {
+    type: types.SET_TRANSACTIONS_STRATEGY,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   fetchTaxReport,
@@ -93,4 +100,5 @@ export default {
   fetchTaxReportTransactions,
   refreshTaxReportTransactions,
   updateTaxReportTransactions,
+  setTransactionsStrategy,
 }
