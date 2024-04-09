@@ -1,32 +1,30 @@
 import React, { useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setIsPdfRequired } from 'state/query/actions'
-import { getIsPdfExportRequired } from 'state/query/selectors'
+import { setTransactionsStrategy } from 'state/taxReport/actions'
+import { getTransactionsStrategy } from 'state/taxReport/selectors'
 
 import Select from 'ui/Select'
 
-const ExportTypeSelector = () => {
-  const { t } = useTranslation()
+const TaxStrategySelector = () => {
   const dispatch = useDispatch()
-  const isPdfExportRequired = useSelector(getIsPdfExportRequired)
+  const strategy = useSelector(getTransactionsStrategy)
   const items = [
-    { value: false, label: t('download.exportAsCsv') },
-    { value: true, label: t('download.exportAsPdf') },
+    { value: 'LIFO', label: 'LIFO' },
+    { value: 'FIFO', label: 'FIFO' },
   ]
 
   const handleChange = useCallback((value) => {
-    dispatch(setIsPdfRequired(value))
+    dispatch(setTransactionsStrategy(value))
   }, [dispatch])
 
   return (
     <Select
       items={items}
+      value={strategy}
       onChange={handleChange}
-      value={isPdfExportRequired}
     />
   )
 }
 
-export default ExportTypeSelector
+export default TaxStrategySelector
