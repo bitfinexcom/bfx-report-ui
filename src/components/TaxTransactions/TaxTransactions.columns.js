@@ -13,6 +13,7 @@ export const getColumns = ({
 }) => [
   {
     id: 'asset',
+    width: 178,
     name: 'taxreport.cols.propertyDesc',
     className: 'align-left',
     renderer: (rowIndex) => {
@@ -30,6 +31,7 @@ export const getColumns = ({
   },
   {
     id: 'amount',
+    width: 178,
     name: 'taxreport.cols.amount',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -51,6 +53,7 @@ export const getColumns = ({
   },
   {
     id: 'mtsAcquired',
+    width: 178,
     name: 'taxreport.cols.dateAcquired',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -67,6 +70,7 @@ export const getColumns = ({
   },
   {
     id: 'mtsSold',
+    width: 178,
     name: 'taxreport.cols.dateSold',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -83,6 +87,7 @@ export const getColumns = ({
   },
   {
     id: 'proceeds',
+    width: 178,
     name: 'taxreport.cols.proceeds',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -104,6 +109,7 @@ export const getColumns = ({
   },
   {
     id: 'cost',
+    width: 178,
     name: 'taxreport.cols.cost',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -125,6 +131,7 @@ export const getColumns = ({
   },
   {
     id: 'gainOrLoss',
+    width: 178,
     name: 'taxreport.cols.gainOrLoss',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
