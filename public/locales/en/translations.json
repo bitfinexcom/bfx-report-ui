@@ -556,6 +556,7 @@
   },
   "selector": {
     "select": "Select",
+    "strategy": "Strategy",
     "all": "All",
     "inactive": "Inactive",
     "balance-precision": {
