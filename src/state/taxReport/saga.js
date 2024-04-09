@@ -13,6 +13,7 @@ import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
 
 import types from './constants'
 import actions from './actions'
+import { getTransactionsStrategy } from './selectors'
 
 export const getReqTaxReport = (params) => {
   const { start, end } = params
@@ -87,7 +88,8 @@ function* refreshTaxReport({ payload }) {
 export function* fetchTransactions() {
   try {
     const { start, end } = yield select(getTimeFrame)
-    const params = { start, end }
+    const strategy = yield select(getTransactionsStrategy)
+    const params = { start, end, strategy }
     const { result = {}, error } = yield call(getReqTaxTransactions, params)
     yield put(actions.updateTaxReportTransactions(result))
 
