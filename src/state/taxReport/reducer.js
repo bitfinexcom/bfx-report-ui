@@ -187,6 +187,7 @@ export function taxReportReducer(state = initialState, action) {
       return {
         ...state,
         transactions: {
+          ...state.transactions,
           pageLoading: true,
         },
       }
@@ -194,6 +195,7 @@ export function taxReportReducer(state = initialState, action) {
       return {
         ...state,
         transactions: {
+          ...state.transactions,
           dataReceived: true,
           pageLoading: false,
           data: payload,
