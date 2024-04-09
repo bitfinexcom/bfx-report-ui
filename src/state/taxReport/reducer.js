@@ -48,6 +48,7 @@ const transactionsInitState = {
   dataReceived: false,
   pageLoading: false,
   data: [],
+  strategy: 'LIFO',
 }
 
 const initialState = {
