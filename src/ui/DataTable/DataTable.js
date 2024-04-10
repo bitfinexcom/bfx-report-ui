@@ -197,19 +197,19 @@ const DataTable = ({
     [columns, containerWidth],
   )
 
-  const onColumnWidthChanged = (index, width) => {
-    calculatedColsWidths[index] = width
+  const onColumnWidthChanged = (colIndex, width) => {
+    calculatedColsWidths[colIndex] = width
     if (!section) return
     if (useCustomColsWidth) {
       const updatedColumn = {
-        ...columns[index],
+        ...columns[colIndex],
         width,
       }
-      columns[index] = updatedColumn
+      columns[colIndex] = updatedColumn
       dispatch(setColumnsWidth({ section, columns }))
     } else {
-      const updatedColumns = calculatedColsWidths.map((value, ind) => ({
-        ...columns[ind],
+      const updatedColumns = calculatedColsWidths.map((value, index) => ({
+        ...columns[index],
         width: value,
       }))
       dispatch(setColumnsWidth({ section, columns: updatedColumns }))
