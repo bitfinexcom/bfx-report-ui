@@ -93,12 +93,16 @@ const DataTable = ({
 
   const columnHeaderCellRenderer = (name) => {
     const menuRenderer = () => (
-      <Menu>
-        <MenuItem
-          onClick={columnWidthReset}
-          text={t('column.defaultWidth')}
-        />
-      </Menu>
+      <>
+        {enableColumnResizing && (
+          <Menu>
+            <MenuItem
+              onClick={columnWidthReset}
+              text={t('column.defaultWidth')}
+            />
+          </Menu>
+        )}
+      </>
     )
     return <ColumnHeaderCell name={t(name)} menuRenderer={menuRenderer} />
   }
