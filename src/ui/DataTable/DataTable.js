@@ -85,12 +85,12 @@ const DataTable = ({
 
   const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex]?.copyText(rowIndex)
 
-  const columnHeaderCellRenderer = (name) => {
-    const columnWidthReset = () => {
-      setUseCustomColsWidth(false)
-      dispatch(setColumnsWidth({ section }))
-    }
+  const columnWidthReset = () => {
+    setUseCustomColsWidth(false)
+    dispatch(setColumnsWidth({ section }))
+  }
 
+  const columnHeaderCellRenderer = (name) => {
     const menuRenderer = () => (
       <Menu>
         <MenuItem
@@ -99,7 +99,6 @@ const DataTable = ({
         />
       </Menu>
     )
-
     return <ColumnHeaderCell name={name} menuRenderer={menuRenderer} />
   }
 
@@ -116,11 +115,6 @@ const DataTable = ({
         sum += colValue
         setSumValue(sum)
       }
-    }
-
-    const columnWidthReset = () => {
-      setUseCustomColsWidth(false)
-      dispatch(setColumnsWidth({ section }))
     }
 
     return (
