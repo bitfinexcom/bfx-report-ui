@@ -268,7 +268,7 @@ const DataTable = ({
             cellRenderer={column.renderer}
             className={column?.className ?? 'align-right'}
             name={column.nameStr ? column.nameStr : t(column.name)}
-            columnHeaderCellRenderer={() => columnHeaderCellRenderer(column.name)}
+            columnHeaderCellRenderer={() => columnHeaderCellRenderer(t(column.name))}
           />
         ))}
       </Table>
