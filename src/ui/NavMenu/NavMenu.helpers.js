@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import Icons from 'icons'
 import config from 'config'
@@ -93,3 +94,5 @@ export const getSections = (menuType, isTurkishSite) => {
       return []
   }
 }
+
+export const getSectionClasses = (active) => classNames('section_title', { active })
