@@ -100,7 +100,7 @@ const DataTable = ({
         />
       </Menu>
     )
-    return <ColumnHeaderCell name={name} menuRenderer={menuRenderer} />
+    return <ColumnHeaderCell name={t(name)} menuRenderer={menuRenderer} />
   }
 
   const renderBodyContextMenu = (context) => {
@@ -263,7 +263,7 @@ const DataTable = ({
             cellRenderer={column.renderer}
             className={column?.className ?? 'align-right'}
             name={column.nameStr ? column.nameStr : t(column.name)}
-            columnHeaderCellRenderer={() => columnHeaderCellRenderer(t(column.name))}
+            columnHeaderCellRenderer={() => columnHeaderCellRenderer(column.name)}
           />
         ))}
       </Table>
