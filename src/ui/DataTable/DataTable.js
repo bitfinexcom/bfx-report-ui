@@ -9,9 +9,10 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Menu } from '@blueprintjs/core'
+import { Menu, MenuItem } from '@blueprintjs/core'
 import {
   Column,
+  ColumnHeaderCell,
   CopyCellsMenuItem,
   Table,
 } from '@blueprintjs/table'
@@ -83,6 +84,24 @@ const DataTable = ({
   }, [])
 
   const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex]?.copyText(rowIndex)
+
+  const columnHeaderCellRenderer = (name) => {
+    const columnWidthReset = () => {
+      setUseCustomColsWidth(false)
+      dispatch(setColumnsWidth({ section }))
+    }
+
+    const menuRenderer = () => (
+      <Menu>
+        <MenuItem
+          onClick={columnWidthReset}
+          text={t('column.defaultWidth')}
+        />
+      </Menu>
+    )
+
+    return <ColumnHeaderCell name={name} menuRenderer={menuRenderer} />
+  }
 
   const renderBodyContextMenu = (context) => {
     const isSingleColumnSelected = singleColumnSelectedCheck(context)
@@ -249,6 +268,7 @@ const DataTable = ({
             cellRenderer={column.renderer}
             className={column?.className ?? 'align-right'}
             name={column.nameStr ? column.nameStr : t(column.name)}
+            columnHeaderCellRenderer={() => columnHeaderCellRenderer(column.name)}
           />
         ))}
       </Table>
