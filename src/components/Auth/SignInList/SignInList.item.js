@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react'
+import React, { memo, useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -14,7 +14,9 @@ export const SignInListItem = ({
   handleDeleteAccount,
 }) => {
   const { t } = useTranslation()
-  const { email, isApiKeysAuth, localUsername } = user
+  const {
+    email, isApiKeysAuth, localUsername, isStagingBfxApi,
+  } = user
 
   const addAccounts = useCallback(
     () => handleAddAccounts(email, localUsername),
@@ -24,6 +26,13 @@ export const SignInListItem = ({
   const deleteAccount = useCallback(
     () => handleDeleteAccount(user),
     [user],
+  )
+
+  const userType = useMemo(
+    () => (isStagingBfxApi
+      ? `${t(getUserType(user))} - Staging`
+      : t(getUserType(user))),
+    [isStagingBfxApi, t, user],
   )
 
   return (
@@ -38,7 +47,7 @@ export const SignInListItem = ({
             {getUserTitle(user)}
           </p>
           <p className='sign-in-list--item-type'>
-            {t(getUserType(user))}
+            {userType}
           </p>
         </div>
       </div>
@@ -60,6 +69,7 @@ SignInListItem.propTypes = {
     isSubAccount: PropTypes.bool.isRequired,
     isApiKeysAuth: PropTypes.bool.isRequired,
     isNotProtected: PropTypes.bool.isRequired,
+    isStagingBfxApi: PropTypes.bool.isRequired,
     localUsername: PropTypes.string,
   }).isRequired,
   handleUserSelect: PropTypes.func.isRequired,
