@@ -16,6 +16,7 @@ const COLUMN_WIDTH_STANDARD = {
   amountExecuted: 132,
   ask: 132,
   balance: 132,
+  balanceChange: 178,
   balanceUsd: 137,
   basePrice: 132,
   bid: 132,
@@ -51,6 +52,7 @@ const COLUMN_WIDTH_STANDARD = {
   log: 200,
   marginFunding: 132,
   marginFundingType: 130,
+  marginFundingPayment: 178,
   moreDetails: 95,
   meta: 160,
   merchantName: 120,
@@ -87,10 +89,12 @@ const COLUMN_WIDTH_STANDARD = {
   time: 150,
   timestamp: 150,
   transactionId: 135,
+  tradingFees: 178,
   type: 135,
   typePrev: 135,
   userAgent: 160,
   version: 120,
+  volume: 178,
   wallet: 80,
   webhook: 150,
 }
@@ -103,6 +107,7 @@ const COLUMN_WIDTHS_BIG_SCREENS = {
   amountExecuted: 160,
   ask: 160,
   balance: 160,
+  balanceChange: 178,
   balanceUsd: 160,
   basePrice: 160,
   bid: 160,
@@ -138,6 +143,7 @@ const COLUMN_WIDTHS_BIG_SCREENS = {
   log: 200,
   marginFunding: 160,
   marginFundingType: 130,
+  marginFundingPayment: 178,
   moreDetails: 140,
   meta: 160,
   merchantName: 140,
@@ -174,10 +180,12 @@ const COLUMN_WIDTHS_BIG_SCREENS = {
   time: 170,
   timestamp: 170,
   transactionId: 165,
+  tradingFees: 178,
   type: 165,
   typePrev: 165,
   userAgent: 160,
   version: 120,
+  volume: 178,
   wallet: 120,
   webhook: 250,
 }
@@ -612,6 +620,26 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
+export const MIN_COLUMN_WIDTH = 100
+
+export const DEFAULT_CONTAINER_WIDTH = 1000
+
+export const getCalculatedColumnWidths = (columns, containerWidth) => {
+  if (columns.length === 0) {
+    return []
+  }
+
+  const avgWidth = Math.floor(containerWidth / columns.length)
+  if (avgWidth < MIN_COLUMN_WIDTH) {
+    return _map(columns, () => MIN_COLUMN_WIDTH)
+  }
+
+  const columnWidths = _map(columns, () => avgWidth)
+  columnWidths[0] = containerWidth - ((columns.length - 1) * avgWidth)
+
+  return columnWidths
+}
+
 export default {
   COLUMN_WIDTHS,
   pickColumnsWidth,
@@ -623,4 +651,5 @@ export default {
   columnHasNumericValueCheck,
   formatSumUpValue,
   getTooltipContent,
+  getCalculatedColumnWidths,
 }

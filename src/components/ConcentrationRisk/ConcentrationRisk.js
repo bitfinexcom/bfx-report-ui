@@ -143,7 +143,7 @@ class ConcentrationRisk extends PureComponent {
     let showContent
     if (isNoData) {
       showContent = (
-        <div className='data-table-wrapper'>
+        <div className='concentration-risk-data-table'>
           <DataTable
             section={TYPE}
             isNoData={isNoData}
@@ -156,10 +156,13 @@ class ConcentrationRisk extends PureComponent {
     } else {
       showContent = (
         <div className='concentration-risk-data'>
-          <DataTable
-            tableColumns={tableColumns}
-            numRows={isLoading ? 5 : tableData.length}
-          />
+          <div className='concentration-risk-data-table'>
+            <DataTable
+              tableColumns={tableColumns}
+              enableColumnResizing={false}
+              numRows={isLoading ? 5 : tableData.length}
+            />
+          </div>
           <div className='concentration-risk-data-chart'>
             <PieChart data={chartData} />
           </div>

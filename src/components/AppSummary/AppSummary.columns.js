@@ -3,7 +3,12 @@ import { Cell } from '@blueprintjs/table'
 
 import { fixedFloat } from 'ui/utils'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
-import { getCellLoader, getCellNoData, getTooltipContent } from 'utils/columns'
+import {
+  getCellLoader,
+  getCellNoData,
+  getColumnWidth,
+  getTooltipContent,
+} from 'utils/columns'
 
 import {
   getIsTotal,
@@ -99,12 +104,13 @@ export const getAssetColumns = ({
   isNoData,
   isLoading,
   preparedData,
+  columnsWidth,
 }) => [
   {
     id: 'currency',
     className: 'align-left',
     name: 'summary.by_asset.currency',
-    width: 110,
+    width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading) return getCellLoader(22, 80)
       if (isNoData) return getCellNoData(t('column.noResults'))
@@ -137,7 +143,7 @@ export const getAssetColumns = ({
   {
     id: 'balance',
     name: 'summary.by_asset.balance',
-    width: 178,
+    width: getColumnWidth('balance', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading) return getCellLoader(22, 80)
       if (isNoData) return getCellNoData()
@@ -173,7 +179,7 @@ export const getAssetColumns = ({
   {
     id: 'balanceChange',
     name: 'summary.by_asset.balance_change',
-    width: 178,
+    width: getColumnWidth('balanceChange', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading) return getCellLoader(22, 80)
       if (isNoData) return getCellNoData()
@@ -213,7 +219,7 @@ export const getAssetColumns = ({
   {
     id: 'volume',
     name: 'summary.by_asset.volume',
-    width: 178,
+    width: getColumnWidth('volume', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading) return getCellLoader(22, 80)
       if (isNoData) return getCellNoData()
@@ -249,7 +255,7 @@ export const getAssetColumns = ({
   {
     id: 'tradingFees',
     name: 'summary.by_asset.trading_fees',
-    width: 178,
+    width: getColumnWidth('tradingFees', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading) return getCellLoader(22, 80)
       if (isNoData) return getCellNoData()
@@ -280,7 +286,7 @@ export const getAssetColumns = ({
   {
     id: 'marginFundingPayment',
     name: 'summary.by_asset.fund_earnings',
-    width: 178,
+    width: getColumnWidth('marginFundingPayment', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading) return getCellLoader(22, 80)
       if (isNoData) return getCellNoData()

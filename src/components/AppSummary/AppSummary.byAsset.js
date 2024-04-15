@@ -16,12 +16,16 @@ import {
   getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
 import { getTimezone } from 'state/base/selectors'
+import queryConstants from 'state/query/constants'
+import { getColumnsWidth } from 'state/columns/selectors'
 import { getTimeRange, getTimeFrame } from 'state/timeRange/selectors'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import SummaryFilters from './AppSummary.filters'
 import { getAssetColumns } from './AppSummary.columns'
 import { prepareSummaryByAssetData } from './AppSummary.helpers'
+
+const TYPE = queryConstants.SUMMARY_BY_ASSET
 
 const AppSummaryByAsset = () => {
   const { t } = useTranslation()
@@ -37,6 +41,7 @@ const AppSummaryByAsset = () => {
   const { start, end } = useSelector(getTimeFrame)
   const minimumBalance = useSelector(getMinimumBalance)
   const useMinimumBalance = useSelector(getUseMinBalance)
+  const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   const isNoData = dataReceived && isEmpty(entries)
   const tableClasses = classNames('summary-by-asset-table', {
@@ -60,9 +65,9 @@ const AppSummaryByAsset = () => {
 
   const columns = useMemo(
     () => getAssetColumns({
-      preparedData, t, isLoading, isNoData,
+      preparedData, t, isLoading, isNoData, columnsWidth,
     }),
-    [preparedData, t, isLoading, isNoData],
+    [preparedData, t, isLoading, isNoData, columnsWidth],
   )
 
   return (
@@ -80,6 +85,7 @@ const AppSummaryByAsset = () => {
         <SummaryFilters />
       </div>
       <DataTable
+        section={TYPE}
         defaultRowHeight={73}
         tableColumns={columns}
         className={tableClasses}
