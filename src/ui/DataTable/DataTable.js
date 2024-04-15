@@ -4,6 +4,7 @@ import React, {
   useMemo,
   useState,
   useEffect,
+  useCallback,
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -85,10 +86,10 @@ const DataTable = ({
 
   const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex]?.copyText(rowIndex)
 
-  const columnWidthReset = () => {
+  const columnWidthReset = useCallback(() => {
     setUseCustomColsWidth(false)
     dispatch(setColumnsWidth({ section }))
-  }
+  }, [dispatch])
 
   const columnHeaderCellRenderer = (name) => {
     const menuRenderer = () => (
