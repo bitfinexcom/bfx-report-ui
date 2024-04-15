@@ -5,6 +5,7 @@ import { MultiSelect as BlueprintMultiSelect } from '@blueprintjs/select'
 
 import Icon from 'icons'
 import { tracker } from 'utils/trackers'
+import { getSourceFromPathName } from 'utils/browser'
 
 import { propTypes, defaultProps } from './MultiSymbolSelector.props'
 
@@ -22,7 +23,7 @@ class MultiSelect extends PureComponent {
 
   onToggle = (isOpen) => {
     const { type } = this.props
-    tracker.trackEvent(type)
+    tracker.trackEvent(type, getSourceFromPathName())
     this.setState({ isOpen })
   }
 

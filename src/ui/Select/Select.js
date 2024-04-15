@@ -13,6 +13,7 @@ import { Select as BlueprintSelect } from '@blueprintjs/select'
 import Icons from 'icons'
 import { tracker } from 'utils/trackers'
 import { filterSelectorItem } from 'ui/utils'
+import { getSourceFromPathName } from 'utils/browser'
 
 class Select extends PureComponent {
   static propTypes = {
@@ -101,7 +102,7 @@ class Select extends PureComponent {
 
   onToggle = (nextOpenState) => {
     const { type } = this.props
-    tracker.trackEvent(type)
+    tracker.trackEvent(type, getSourceFromPathName())
     this.setState({ isOpen: nextOpenState })
   }
 

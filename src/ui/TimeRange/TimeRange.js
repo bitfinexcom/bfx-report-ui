@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import Icon from 'icons'
 import { tracker } from 'utils/trackers'
 import { formatDate } from 'state/utils'
+import { getSourceFromPathName } from 'utils/browser'
 
 import { propTypes, defaultProps } from './TimeRange.props'
 
@@ -16,7 +17,7 @@ const TimeRange = ({
   toggleTimeFrameDialog,
 }) => {
   const onClick = () => {
-    tracker.trackEvent('Date')
+    tracker.trackEvent('Date', getSourceFromPathName())
     toggleTimeFrameDialog()
   }
 
