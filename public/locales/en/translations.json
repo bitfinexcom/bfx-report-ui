@@ -53,6 +53,16 @@
       "invalidToken": "Invalid token, please try again",
       "loginSessionExpired": "Your login session has expired, please try again"
     },
+    "ttlSelect": {
+      "title": "Auth Token TTL",
+      "1day": "1 Day",
+      "2days": "2 Days",
+      "3days": "3 Days",
+      "4days": "4 Days",
+      "5days": "5 Days",
+      "6days": "6 Days",
+      "7days": "7 Days"
+    },
     "apiKey": "API Key",
     "apiSecret": "API Secret",
     "accWithApiKey": "Add account with API key",
