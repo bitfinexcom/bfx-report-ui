@@ -59,7 +59,7 @@ class Select extends PureComponent {
   }
 
   itemRenderer = (item, { modifiers, handleClick }) => {
-    const { active, disabled } = modifiers
+    const { disabled } = modifiers
     const { value } = this.props
 
     let options = {}
@@ -82,7 +82,7 @@ class Select extends PureComponent {
 
     return (
       <MenuItem
-        active={active}
+        active={isCurrent}
         intent={isCurrent ? Intent.PRIMARY : Intent.NONE}
         disabled={disabled}
         key={key}
