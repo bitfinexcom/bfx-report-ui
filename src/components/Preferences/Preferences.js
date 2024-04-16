@@ -78,10 +78,12 @@ const Preferences = ({
             <div>{t('preferences.dateformat')}</div>
             <DateFormatSelector />
           </div>
-          <div className='preferences-item'>
-            <div>{t('auth.ttlSelect.title')}</div>
-            <TokenTTLSelector />
-          </div>
+          {showFrameworkMode && (
+            <div className='preferences-item'>
+              <div>{t('auth.ttlSelect.title')}</div>
+              <TokenTTLSelector />
+            </div>
+          )}
         </div>
         <div className='preferences-row'>
           <span>{t('preferences.milliseconds')}</span>
