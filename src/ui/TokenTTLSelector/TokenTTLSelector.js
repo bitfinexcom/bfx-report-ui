@@ -12,8 +12,13 @@ const ExportTypeSelector = () => {
   const dispatch = useDispatch()
   const isPdfExportRequired = useSelector(getIsPdfExportRequired)
   const items = [
-    { value: false, label: t('download.exportAsCsv') },
-    { value: true, label: t('download.exportAsPdf') },
+    { value: 86400, label: t('auth.ttlSelect.1day') },
+    { value: 172800, label: t('auth.ttlSelect.2days') },
+    { value: 259200, label: t('auth.ttlSelect.3days') },
+    { value: 345600, label: t('auth.ttlSelect.4days') },
+    { value: 432000, label: t('auth.ttlSelect.5days') },
+    { value: 518400, label: t('auth.ttlSelect.6days') },
+    { value: 604800, label: t('auth.ttlSelect.7days') },
   ]
 
   const handleChange = useCallback((value) => {
