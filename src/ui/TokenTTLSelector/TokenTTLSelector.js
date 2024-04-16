@@ -2,15 +2,15 @@ import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setIsPdfRequired } from 'state/query/actions'
-import { getIsPdfExportRequired } from 'state/query/selectors'
+import { setAuthTokenTTL } from 'state/auth/actions'
+import { getAuthTokenTTL } from 'state/auth/selectors'
 
 import Select from 'ui/Select'
 
 const ExportTypeSelector = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const isPdfExportRequired = useSelector(getIsPdfExportRequired)
+  const authTokenTTL = useSelector(getAuthTokenTTL)
   const items = [
     { value: 86400, label: t('auth.ttlSelect.1day') },
     { value: 172800, label: t('auth.ttlSelect.2days') },
@@ -22,14 +22,14 @@ const ExportTypeSelector = () => {
   ]
 
   const handleChange = useCallback((value) => {
-    dispatch(setIsPdfRequired(value))
+    dispatch(setAuthTokenTTL(value))
   }, [dispatch])
 
   return (
     <Select
       items={items}
+      value={authTokenTTL}
       onChange={handleChange}
-      value={isPdfExportRequired}
     />
   )
 }
