@@ -57,7 +57,7 @@ const initialState = {
   userShouldReLogin: '',
   shouldNotSyncOnStartupAfterUpdate: false,
   isAuthBtnDisabled: false,
-  authTokenTTLSec: 86400,
+  authTokenTTLSec: types.DEFAULT_TOKEN_TTL,
 }
 
 export function authReducer(state = initialState, action) {
