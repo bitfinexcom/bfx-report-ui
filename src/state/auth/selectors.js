@@ -3,6 +3,8 @@ import _first from 'lodash/first'
 import _filter from 'lodash/filter'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
+import types from './constants'
+
 const getAuth = state => state.auth
 
 export const getAuthStatus = state => getAuth(state).authStatus
@@ -23,7 +25,7 @@ export const getIsSubAccsAvailable = state => _first(
 )?.isApiKeysAuth ?? true
 export const getLocalUsername = state => getAuth(state)?.localUsername ?? null
 export const getIsAuthBtnDisabled = state => getAuth(state)?.isAuthBtnDisabled ?? false
-export const getAuthTokenTTL = state => getAuth(state)?.authTokenTTLSec ?? 86400
+export const getAuthTokenTTL = state => getAuth(state)?.authTokenTTLSec ?? types.DEFAULT_TOKEN_TTL
 
 export const getAuthData = state => {
   const {
