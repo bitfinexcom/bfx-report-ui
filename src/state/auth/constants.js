@@ -29,4 +29,5 @@ export default {
 
   WS_SIGN_IN: 'ws_signIn',
   LOGIN_2FA_OTP: 'otp',
+  DEFAULT_TOKEN_TTL: 86400, // 24h
 }
