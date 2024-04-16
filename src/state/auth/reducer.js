@@ -57,6 +57,7 @@ const initialState = {
   userShouldReLogin: '',
   shouldNotSyncOnStartupAfterUpdate: false,
   isAuthBtnDisabled: false,
+  authTokenTTLSec: 86400,
 }
 
 export function authReducer(state = initialState, action) {
@@ -153,6 +154,11 @@ export function authReducer(state = initialState, action) {
       return {
         ...state,
         isAuthBtnDisabled: payload,
+      }
+    case types.SET_TOKEN_TTL:
+      return {
+        ...state,
+        authTokenTTLSec: payload,
       }
     case types.HIDE_AUTH:
       return {
