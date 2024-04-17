@@ -21,7 +21,7 @@ import { getPath, getTarget } from 'state/query/utils'
 import { toggleNavigationDrawer } from 'state/ui/actions'
 import { getIsNavigationDrawerOpen } from 'state/ui/selectors'
 import menuTypes from './NavMenu.constants'
-import { getSections, getMenuItemChevron } from './NavMenu.helpers'
+import { getSections, getMenuItemChevron, getSectionClasses } from './NavMenu.helpers'
 
 const {
   MENU_MY_ACCOUNT,
@@ -107,6 +107,7 @@ const NavMenu = ({
       <MenuItem
         icon={<Icons.ADDRESS_BOOK />}
         text={t('navItems.myAccount.title')}
+        className={getSectionClasses(isMyAccountOpen)}
         labelElement={getMenuItemChevron(isMyAccountOpen)}
         onClick={() => handleMenuClick(MENU_MY_ACCOUNT)}
       />
@@ -120,6 +121,7 @@ const NavMenu = ({
       <MenuItem
         icon={<Icons.BOOK />}
         text={t('navItems.myHistory.title')}
+        className={getSectionClasses(isMyHistoryOpen)}
         labelElement={getMenuItemChevron(isMyHistoryOpen)}
         onClick={() => handleMenuClick(MENU_MY_HISTORY)}
       />
@@ -135,6 +137,7 @@ const NavMenu = ({
           <MenuItem
             icon={<Icons.CART />}
             text={t('navItems.merchantHistory.title')}
+            className={getSectionClasses(isMerchantHistoryOpen)}
             labelElement={getMenuItemChevron(isMerchantHistoryOpen)}
             onClick={() => handleMenuClick(MENU_MERCHANT_HISTORY)}
           />
@@ -150,6 +153,7 @@ const NavMenu = ({
       <MenuItem
         icon={<Icons.CHART />}
         text={t('navItems.marketHistory.title')}
+        className={getSectionClasses(isMarketHistoryOpen)}
         labelElement={getMenuItemChevron(isMarketHistoryOpen)}
         onClick={() => handleMenuClick(MENU_MARKET_HISTORY)}
       />

@@ -6,19 +6,6 @@
   clip-path: inset(0 -1px 0 0);
   border-bottom: 1px solid var(--bgColor2);
 
-  .reports_title {
-    pointer-events: none;
-
-    svg {
-      margin-left: 1px;
-      margin-right: 9px;
-    }
-
-    .bp3-fill {
-      width: 200px;
-    }
-  }
-
   &--popover {
     box-shadow: 0 0 1px var(--menuPopoverShadow);
 
@@ -50,11 +37,26 @@
   .bp3-menu-item {
     display: flex;
     width: 100%;
-    height: 44px;
-    line-height: 44px;
-    padding: 0 0 0 20px;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 0 0 51px;
     font-size: 1rem;
     border-radius: 0;
+    color: var(--color2);
+
+    &.active,
+    &.reports_title {
+      height: 44px;
+      line-height: 44px;
+      padding: 0 0 0 20px;
+      color: var(--color1);
+    }
+
+    &.section_title {
+      height: 44px;
+      line-height: 44px;
+      padding: 0 0 0 20px;
+    }
 
     svg {
       height: 44px;
@@ -91,11 +93,17 @@
     border-top: 1px solid var(--borderColor);
   }
 
-  .sub_items_menu {
-    .bp3-collapse-body {
-      li {
-        padding-left: 40px;
-      }
+  .reports_title {
+    padding: 0 0 0 20px;
+    pointer-events: none;
+
+    svg {
+      margin-left: 1px;
+      margin-right: 9px;
+    }
+
+    .bp3-fill {
+      width: 200px;
     }
   }
 

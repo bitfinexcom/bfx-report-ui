@@ -75,6 +75,7 @@ const AccountSummaryDerivFees = ({
       <DataTable
         numRows={1}
         tableColumns={columns}
+        enableColumnResizing={false}
       />
     </div>
   )

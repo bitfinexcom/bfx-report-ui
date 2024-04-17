@@ -63,6 +63,7 @@ const AccountSummaryLeo = ({
       <DataTable
         numRows={1}
         tableColumns={columns}
+        enableColumnResizing={false}
       />
     </div>
   )
@@ -70,12 +71,19 @@ const AccountSummaryLeo = ({
 
 AccountSummaryLeo.propTypes = {
   data: PropTypes.shape({
-    leoLev: PropTypes.number.isRequired,
-    leoAmountAvg: PropTypes.number.isRequired,
-  }).isRequired,
+    leoLev: PropTypes.number,
+    leoAmountAvg: PropTypes.number,
+  }),
   t: PropTypes.func.isRequired,
   isNoData: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
+}
+
+AccountSummaryLeo.defaultProps = {
+  data: PropTypes.shape({
+    leoLev: 0,
+    leoAmountAvg: 0,
+  }),
 }
 
 export default memo(AccountSummaryLeo)
