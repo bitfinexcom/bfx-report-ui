@@ -624,7 +624,7 @@ export const MIN_COLUMN_WIDTH = 100
 
 export const DEFAULT_CONTAINER_WIDTH = 1000
 
-const getColumnsMinWidths = (columns) => _map(columns,
+export const getColumnsMinWidths = (columns) => _map(columns,
   (column) => COLUMN_WIDTHS?.[column.id] ?? MIN_COLUMN_WIDTH)
 
 export const getCalculatedColumnWidths = (columns, containerWidth) => {
@@ -632,7 +632,7 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
     return []
   }
 
-  console.log('++columns', columns)
+  console.log('++containerWidth', containerWidth)
   console.log('+++MIN_WIDTH', getColumnsMinWidths(columns))
 
   const avgWidth = Math.floor(containerWidth / columns.length)
