@@ -3,6 +3,7 @@ import _map from 'lodash/map'
 import _sum from 'lodash/sum'
 import _head from 'lodash/head'
 import _filter from 'lodash/filter'
+import _forEach from 'lodash/forEach'
 import { Cell } from '@blueprintjs/table'
 import { get, pick, isEqual } from '@bitfinex/lib-js-util-base'
 
@@ -622,7 +623,7 @@ export const formatSumUpValue = value => {
 }
 
 export const MIN_COLUMN_WIDTH = 100
-
+export const WIDE_COLUMN_DEFAULT_WIDTH = 400
 export const DEFAULT_CONTAINER_WIDTH = 1000
 
 export const getColumnsMinWidths = (columns) => _map(columns,
@@ -638,6 +639,23 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
 
   const isDefaultsWiderThanContainer = getIsDefaultsWiderThanContainer(columns, containerWidth)
 
+  if (isDefaultsWiderThanContainer) {
+    const colsDefaults = getColumnsMinWidths(columns)
+    const smallColsIndexes = []
+    const wideColsIndexes = []
+
+    _forEach(colsDefaults, (value, index) => {
+      if (value < MIN_COLUMN_WIDTH) smallColsIndexes.push(index)
+      if (value > WIDE_COLUMN_DEFAULT_WIDTH) wideColsIndexes.push(index)
+    })
+
+
+    console.log('+++smallColsIndexes', smallColsIndexes)
+    console.log('+++wideColsIndexes', wideColsIndexes)
+  }
+
+
+  console.log('++def', getColumnsMinWidths(columns))
   console.log('++isDefaultsWiderThanContainer', isDefaultsWiderThanContainer)
 
   const avgWidth = Math.floor(containerWidth / columns.length)
