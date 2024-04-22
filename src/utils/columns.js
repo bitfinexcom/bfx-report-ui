@@ -641,7 +641,6 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
   }
 
   const columnWidths = _map(columns, () => avgWidth)
-  columnWidths[0] = containerWidth - ((columns.length - 1) * avgWidth)
 
   return columnWidths
 }
