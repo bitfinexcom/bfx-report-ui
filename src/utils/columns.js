@@ -1,5 +1,6 @@
 import React from 'react'
 import _map from 'lodash/map'
+import _sum from 'lodash/sum'
 import _head from 'lodash/head'
 import _filter from 'lodash/filter'
 import { Cell } from '@blueprintjs/table'
@@ -627,11 +628,17 @@ export const DEFAULT_CONTAINER_WIDTH = 1000
 export const getColumnsMinWidths = (columns) => _map(columns,
   (column) => COLUMN_WIDTHS?.[column.id] ?? MIN_COLUMN_WIDTH)
 
+const getIsDefaultsWiderThanContainer = (columns, container) => _sum(getColumnsMinWidths(columns)) > container
+
+
 export const getCalculatedColumnWidths = (columns, containerWidth) => {
   if (columns.length === 0) {
     return []
   }
 
+  const isDefaultsWiderThanContainer = getIsDefaultsWiderThanContainer(columns, containerWidth)
+
+  console.log('++isDefaultsWiderThanContainer', isDefaultsWiderThanContainer)
   console.log('++containerWidth', containerWidth)
   console.log('+++MIN_WIDTH', getColumnsMinWidths(columns))
 
