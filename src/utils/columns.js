@@ -639,8 +639,6 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
   const isDefaultsWiderThanContainer = getIsDefaultsWiderThanContainer(columns, containerWidth)
 
   console.log('++isDefaultsWiderThanContainer', isDefaultsWiderThanContainer)
-  console.log('++containerWidth', containerWidth)
-  console.log('+++MIN_WIDTH', getColumnsMinWidths(columns))
 
   const avgWidth = Math.floor(containerWidth / columns.length)
   if (avgWidth < MIN_COLUMN_WIDTH) {
