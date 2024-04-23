@@ -656,9 +656,6 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
   if (avgWidth < MIN_COLUMN_WIDTH) avgWidth = MIN_COLUMN_WIDTH
   _forEach(preparedColsWidths, (value, index) => { if (isEqual(value, 0)) preparedColsWidths[index] = avgWidth })
 
-  console.log('++avgWidth2', avgWidth)
-  console.log('++preparedColsWidths', preparedColsWidths)
-
   return preparedColsWidths
 }
 
