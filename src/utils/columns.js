@@ -3,6 +3,7 @@ import _map from 'lodash/map'
 import _sum from 'lodash/sum'
 import _size from 'lodash/size'
 import _head from 'lodash/head'
+import _fill from 'lodash/fill'
 import _filter from 'lodash/filter'
 import _forEach from 'lodash/forEach'
 import { Cell } from '@blueprintjs/table'
@@ -641,6 +642,8 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
   const colsDefaults = getColumnsMinWidths(columns)
   let avgWidth = Math.floor(containerWidth / _size(columns))
   const isDefaultsWiderThanContainer = getIsDefaultsWiderThanContainer(columns, containerWidth)
+  const preparedColsWidths = _fill(Array(_size(columns)), 0)
+
 
   if (isDefaultsWiderThanContainer) {
     const smallColsIndexes = []
@@ -651,13 +654,19 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
       if (value > WIDE_COLUMN_DEFAULT_WIDTH) wideColsIndexes.push(index)
     })
 
-    console.log('+++smallColsIndexes', smallColsIndexes)
-    console.log('+++wideColsIndexes', wideColsIndexes)
+    _forEach(smallColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 0.5 })
+    _forEach(wideColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 3 })
+
+    console.log('++avgWidth', avgWidth)
+    console.log('++preparedColsWidths', preparedColsWidths)
+
+    // console.log('+++smallColsIndexes', smallColsIndexes)
+    // console.log('+++wideColsIndexes', wideColsIndexes)
   }
 
 
-  console.log('++def', getColumnsMinWidths(columns))
-  console.log('++isDefaultsWiderThanContainer', isDefaultsWiderThanContainer)
+  // console.log('++def', getColumnsMinWidths(columns))
+  // console.log('++isDefaultsWiderThanContainer', isDefaultsWiderThanContainer)
 
   if (avgWidth < MIN_COLUMN_WIDTH) {
     return _map(columns, () => MIN_COLUMN_WIDTH)
