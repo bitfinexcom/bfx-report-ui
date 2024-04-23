@@ -109,7 +109,6 @@ const DataTable = ({
         name={name}
         className={headerClassName}
         menuRenderer={menuRenderer}
-
       />
     )
   }
