@@ -4,6 +4,7 @@ import _sum from 'lodash/sum'
 import _size from 'lodash/size'
 import _head from 'lodash/head'
 import _fill from 'lodash/fill'
+import _floor from 'lodash/floor'
 import _filter from 'lodash/filter'
 import _forEach from 'lodash/forEach'
 import { Cell } from '@blueprintjs/table'
@@ -624,15 +625,12 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
-export const MIN_COLUMN_WIDTH = 100
+export const MIN_COLUMN_WIDTH = 125
 export const WIDE_COLUMN_DEFAULT_WIDTH = 400
 export const DEFAULT_CONTAINER_WIDTH = 1000
 
 export const getColumnsMinWidths = (columns) => _map(columns,
   (column) => COLUMN_WIDTHS?.[column.id] ?? MIN_COLUMN_WIDTH)
-
-const getIsDefaultsWiderThanContainer = (columns, container) => _sum(getColumnsMinWidths(columns)) > container
-
 
 export const getCalculatedColumnWidths = (columns, containerWidth) => {
   if (_size(columns) === 0) {
@@ -640,44 +638,26 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
   }
 
   const colsDefaults = getColumnsMinWidths(columns)
-  let avgWidth = Math.floor(containerWidth / _size(columns))
-  if (avgWidth < MIN_COLUMN_WIDTH) return _map(columns, () => MIN_COLUMN_WIDTH)
-  console.log('++avgWidth1', avgWidth)
-  const isDefaultsWiderThanContainer = getIsDefaultsWiderThanContainer(columns, containerWidth)
-  let preparedColsWidths = _fill(Array(_size(columns)), 0)
+  let avgWidth = _floor(containerWidth / _size(columns))
+  if (avgWidth < MIN_COLUMN_WIDTH) avgWidth = MIN_COLUMN_WIDTH
+  const preparedColsWidths = _fill(Array(_size(columns)), 0)
+  const wideColsIndexes = []
+  const smallColsIndexes = []
 
+  _forEach(colsDefaults, (value, index) => {
+    if (value < MIN_COLUMN_WIDTH) smallColsIndexes.push(index)
+    if (value > WIDE_COLUMN_DEFAULT_WIDTH) wideColsIndexes.push(index)
+  })
+  _forEach(wideColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = _floor(avgWidth * 2) })
+  _forEach(smallColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = _floor(avgWidth * 0.7) })
 
-  if (isDefaultsWiderThanContainer) {
-    const smallColsIndexes = []
-    const wideColsIndexes = []
+  const calculatedCols = _size(smallColsIndexes) + _size(wideColsIndexes)
+  avgWidth = _floor((containerWidth - _sum(preparedColsWidths)) / (_size(columns) - calculatedCols))
+  if (avgWidth < MIN_COLUMN_WIDTH) avgWidth = MIN_COLUMN_WIDTH
+  _forEach(preparedColsWidths, (value, index) => { if (isEqual(value, 0)) preparedColsWidths[index] = avgWidth })
 
-    _forEach(colsDefaults, (value, index) => {
-      if (value < MIN_COLUMN_WIDTH) smallColsIndexes.push(index)
-      if (value > WIDE_COLUMN_DEFAULT_WIDTH) wideColsIndexes.push(index)
-    })
-
-    _forEach(smallColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 0.8 })
-    _forEach(wideColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 2 })
-
-    const calculatedCols = _size(smallColsIndexes) + _size(wideColsIndexes)
-
-    avgWidth = Math.floor((containerWidth - _sum(preparedColsWidths)) / (_size(columns) - calculatedCols))
-
-    _forEach(preparedColsWidths, (value, index) => {
-      if (isEqual(value, 0)) preparedColsWidths[index] = avgWidth
-    })
-
-    console.log('++avgWidth2', avgWidth)
-    console.log('++preparedColsWidths', preparedColsWidths)
-
-    // console.log('+++smallColsIndexes', smallColsIndexes)
-    // console.log('+++wideColsIndexes', wideColsIndexes)
-  } else preparedColsWidths = _map(columns, () => avgWidth)
-
-  // console.log('++def', getColumnsMinWidths(columns))
-  // console.log('++isDefaultsWiderThanContainer', isDefaultsWiderThanContainer)
-
-  // const columnWidths = _map(columns, () => avgWidth)
+  console.log('++avgWidth2', avgWidth)
+  console.log('++preparedColsWidths', preparedColsWidths)
 
   return preparedColsWidths
 }
