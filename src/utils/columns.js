@@ -641,8 +641,10 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
 
   const colsDefaults = getColumnsMinWidths(columns)
   let avgWidth = Math.floor(containerWidth / _size(columns))
+  if (avgWidth < MIN_COLUMN_WIDTH) return _map(columns, () => MIN_COLUMN_WIDTH)
+  console.log('++avgWidth1', avgWidth)
   const isDefaultsWiderThanContainer = getIsDefaultsWiderThanContainer(columns, containerWidth)
-  const preparedColsWidths = _fill(Array(_size(columns)), 0)
+  let preparedColsWidths = _fill(Array(_size(columns)), 0)
 
 
   if (isDefaultsWiderThanContainer) {
@@ -654,27 +656,30 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
       if (value > WIDE_COLUMN_DEFAULT_WIDTH) wideColsIndexes.push(index)
     })
 
-    _forEach(smallColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 0.5 })
-    _forEach(wideColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 3 })
+    _forEach(smallColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 0.7 })
+    _forEach(wideColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 2 })
 
-    console.log('++avgWidth', avgWidth)
+    const calculatedCols = _size(smallColsIndexes) + _size(wideColsIndexes)
+
+    avgWidth = Math.floor((containerWidth - _sum(preparedColsWidths)) / (_size(columns) - calculatedCols))
+
+    _forEach(preparedColsWidths, (value, index) => {
+      if (isEqual(value, 0)) preparedColsWidths[index] = avgWidth
+    })
+
+    console.log('++avgWidth2', avgWidth)
     console.log('++preparedColsWidths', preparedColsWidths)
 
     // console.log('+++smallColsIndexes', smallColsIndexes)
     // console.log('+++wideColsIndexes', wideColsIndexes)
-  }
-
+  } else preparedColsWidths = _map(columns, () => avgWidth)
 
   // console.log('++def', getColumnsMinWidths(columns))
   // console.log('++isDefaultsWiderThanContainer', isDefaultsWiderThanContainer)
 
-  if (avgWidth < MIN_COLUMN_WIDTH) {
-    return _map(columns, () => MIN_COLUMN_WIDTH)
-  }
+  // const columnWidths = _map(columns, () => avgWidth)
 
-  const columnWidths = _map(columns, () => avgWidth)
-
-  return columnWidths
+  return preparedColsWidths
 }
 
 export default {
