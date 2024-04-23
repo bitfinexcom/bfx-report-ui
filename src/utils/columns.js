@@ -656,7 +656,7 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
       if (value > WIDE_COLUMN_DEFAULT_WIDTH) wideColsIndexes.push(index)
     })
 
-    _forEach(smallColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 0.7 })
+    _forEach(smallColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 0.8 })
     _forEach(wideColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = avgWidth * 2 })
 
     const calculatedCols = _size(smallColsIndexes) + _size(wideColsIndexes)
