@@ -91,7 +91,7 @@ const DataTable = ({
     dispatch(setColumnsWidth({ section }))
   }, [dispatch])
 
-  const columnHeaderCellRenderer = (name) => {
+  const columnHeaderCellRenderer = (name, headerClassName) => {
     const menuRenderer = () => (
       <>
         {enableColumnResizing && (
@@ -104,7 +104,14 @@ const DataTable = ({
         )}
       </>
     )
-    return <ColumnHeaderCell name={name} menuRenderer={menuRenderer} />
+    return (
+      <ColumnHeaderCell
+        name={name}
+        className={headerClassName}
+        menuRenderer={menuRenderer}
+
+      />
+    )
   }
 
   const renderBodyContextMenu = (context) => {
@@ -267,7 +274,12 @@ const DataTable = ({
             cellRenderer={column.renderer}
             className={column?.className ?? 'align-right'}
             name={column.nameStr ? column.nameStr : t(column.name)}
-            columnHeaderCellRenderer={() => columnHeaderCellRenderer(column?.nameStr ?? t(column.name))}
+            columnHeaderCellRenderer={
+              () => columnHeaderCellRenderer(
+                column?.nameStr ?? t(column.name),
+                column?.className ?? 'align-right',
+              )
+            }
           />
         ))}
       </Table>
