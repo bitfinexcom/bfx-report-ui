@@ -1,6 +1,7 @@
 import React from 'react'
 import _map from 'lodash/map'
 import _sum from 'lodash/sum'
+import _size from 'lodash/size'
 import _head from 'lodash/head'
 import _filter from 'lodash/filter'
 import _forEach from 'lodash/forEach'
@@ -633,14 +634,15 @@ const getIsDefaultsWiderThanContainer = (columns, container) => _sum(getColumnsM
 
 
 export const getCalculatedColumnWidths = (columns, containerWidth) => {
-  if (columns.length === 0) {
+  if (_size(columns) === 0) {
     return []
   }
 
+  const colsDefaults = getColumnsMinWidths(columns)
+  let avgWidth = Math.floor(containerWidth / _size(columns))
   const isDefaultsWiderThanContainer = getIsDefaultsWiderThanContainer(columns, containerWidth)
 
   if (isDefaultsWiderThanContainer) {
-    const colsDefaults = getColumnsMinWidths(columns)
     const smallColsIndexes = []
     const wideColsIndexes = []
 
@@ -648,7 +650,6 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
       if (value < MIN_COLUMN_WIDTH) smallColsIndexes.push(index)
       if (value > WIDE_COLUMN_DEFAULT_WIDTH) wideColsIndexes.push(index)
     })
-
 
     console.log('+++smallColsIndexes', smallColsIndexes)
     console.log('+++wideColsIndexes', wideColsIndexes)
@@ -658,7 +659,6 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
   console.log('++def', getColumnsMinWidths(columns))
   console.log('++isDefaultsWiderThanContainer', isDefaultsWiderThanContainer)
 
-  const avgWidth = Math.floor(containerWidth / columns.length)
   if (avgWidth < MIN_COLUMN_WIDTH) {
     return _map(columns, () => MIN_COLUMN_WIDTH)
   }
