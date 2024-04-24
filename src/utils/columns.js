@@ -82,7 +82,7 @@ const COLUMN_WIDTH_STANDARD = {
   priceLiq: 132,
   priceSpot: 132,
   priceTrailing: 132,
-  rate: 120,
+  rate: 130,
   redirectUrl: 300,
   sale: 152,
   side: 100,
@@ -625,7 +625,7 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
-export const MIN_COLUMN_WIDTH = 127
+export const MIN_COLUMN_WIDTH = 125
 export const WIDE_COLUMN_DEFAULT_WIDTH = 300
 export const DEFAULT_CONTAINER_WIDTH = 1000
 
