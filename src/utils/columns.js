@@ -632,14 +632,17 @@ export const DEFAULT_CONTAINER_WIDTH = 1000
 export const getColumnsMinWidths = (columns) => _map(columns,
   (column) => COLUMN_WIDTHS?.[column.id] ?? MIN_COLUMN_WIDTH)
 
+export const getAverageWidth = (avgWidth) => (avgWidth < MIN_COLUMN_WIDTH
+  ? MIN_COLUMN_WIDTH
+  : avgWidth)
+
 export const getCalculatedColumnWidths = (columns, containerWidth) => {
   if (_size(columns) === 0) {
     return []
   }
 
   const colsDefaults = getColumnsMinWidths(columns)
-  let avgWidth = _floor(containerWidth / _size(columns))
-  if (avgWidth < MIN_COLUMN_WIDTH) avgWidth = MIN_COLUMN_WIDTH
+  let avgWidth = getAverageWidth(_floor(containerWidth / _size(columns)))
   const preparedColsWidths = _fill(Array(_size(columns)), 0)
   const wideColsIndexes = []
   const smallColsIndexes = []
@@ -652,8 +655,9 @@ export const getCalculatedColumnWidths = (columns, containerWidth) => {
   _forEach(smallColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = _floor(avgWidth * 0.7) })
 
   const calculatedCols = _size(smallColsIndexes) + _size(wideColsIndexes)
-  avgWidth = _floor((containerWidth - _sum(preparedColsWidths)) / (_size(columns) - calculatedCols))
-  if (avgWidth < MIN_COLUMN_WIDTH) avgWidth = MIN_COLUMN_WIDTH
+  avgWidth = getAverageWidth(
+    _floor((containerWidth - _sum(preparedColsWidths)) / (_size(columns) - calculatedCols)),
+  )
   _forEach(preparedColsWidths, (value, index) => { if (isEqual(value, 0)) preparedColsWidths[index] = avgWidth })
 
   return preparedColsWidths
