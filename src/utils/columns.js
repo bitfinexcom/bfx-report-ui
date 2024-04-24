@@ -58,7 +58,7 @@ const COLUMN_WIDTH_STANDARD = {
   marginFunding: 132,
   marginFundingType: 130,
   marginFundingPayment: 178,
-  moreDetails: 95,
+  moreDetails: 130,
   meta: 160,
   merchantName: 120,
   mobile: 90,
@@ -88,7 +88,7 @@ const COLUMN_WIDTH_STANDARD = {
   side: 100,
   sellingAmount: 132,
   sellingWeightedPrice: 160,
-  status: 105,
+  status: 135,
   symbol: 92,
   swap: 132,
   time: 150,
@@ -625,8 +625,8 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
-export const MIN_COLUMN_WIDTH = 125
-export const WIDE_COLUMN_DEFAULT_WIDTH = 400
+export const MIN_COLUMN_WIDTH = 127
+export const WIDE_COLUMN_DEFAULT_WIDTH = 300
 export const DEFAULT_CONTAINER_WIDTH = 1000
 
 export const getColumnsMinWidths = (columns) => _map(columns,
