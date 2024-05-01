@@ -14,7 +14,7 @@ export const getColumns = ({
   {
     id: 'asset',
     width: 178,
-    name: 'taxreport.cols.propertyDesc',
+    name: 'taxreport.cols.currency',
     className: 'align-left',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {

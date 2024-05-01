@@ -23,7 +23,7 @@ const transctionsResult = [
     mtsSold: 1712042359302,
     proceeds: 142.64861307412,
     cost: 142.41853930451998,
-    gainOrLoss: 0.23007376960001125,
+    gainOrLoss: -0.23007376960001125,
   },
   {
     asset: 'BTC',
