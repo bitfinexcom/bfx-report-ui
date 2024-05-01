@@ -740,7 +740,7 @@
     "endPositions": "Ending Positions Snapshot",
     "movements": "Movements",
     "cols": {
-      "propertyDesc": "Description of Property",
+      "currency": "Currency",
       "amount": "Amount",
       "dateAcquired": "Date Acquired ",
       "dateSold": "Date Sold",
