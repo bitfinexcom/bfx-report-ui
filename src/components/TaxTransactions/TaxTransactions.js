@@ -44,6 +44,7 @@ class TaxTransactions extends PureComponent {
 
   static defaultProps = {
     entries: [],
+    columnsWidth: [],
   }
 
   componentDidMount() {
