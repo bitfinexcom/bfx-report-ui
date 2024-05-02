@@ -75,7 +75,14 @@ function* fetchTaxReportFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
+function* handleTaxTrxReportGenerationCompleted({ payload }) {
+  const { result } = payload
+  console.log('+++WS result', result)
+  yield put(actions.updateTaxReportTransactions(result))
+}
+
 export default function* taxReportSaga() {
   yield takeLatest(types.FETCH_FAIL, fetchTaxReportFail)
   yield takeLatest([types.FETCH_TRANSACTIONS, types.REFRESH_TRANSACTIONS], fetchTransactions)
+  yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_COMPLETED, handleTaxTrxReportGenerationCompleted)
 }
