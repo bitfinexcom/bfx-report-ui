@@ -56,7 +56,8 @@ function* handleMaintenanceTurnedOff() {
   yield put(showMaintenanceModal(false))
 }
 
-function* handleTaxTrxReportGenerationCompleted(result) {
+function* handleTaxTrxReportGenerationCompleted({ payload }) {
+  const { result } = payload
   console.log('+++WS result', result)
   yield put(updateTaxReportTransactions(result))
 }
