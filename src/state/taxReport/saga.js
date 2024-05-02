@@ -43,16 +43,17 @@ const transctionsResult = [
   },
 ]
 
-export const getReqTaxTransactions = (params) => makeFetchCall('getTransactionTaxReport', params)
+export const getReqTaxTransactions = (params) => makeFetchCall('makeTrxTaxReportInBackground', params)
 
 export function* fetchTransactions() {
-  yield put(actions.updateTaxReportTransactions(transctionsResult))
+  // yield put(actions.updateTaxReportTransactions(transctionsResult))
   try {
     const { start, end } = yield select(getTimeFrame)
     const strategy = yield select(getTransactionsStrategy)
     const params = { start, end, strategy }
     const { result = {}, error } = yield call(getReqTaxTransactions, params)
-    yield put(actions.updateTaxReportTransactions(result))
+    console.log('++result', result)
+    // yield put(actions.updateTaxReportTransactions(result))
 
     if (error) {
       yield put(actions.fetchFail({
