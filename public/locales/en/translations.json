@@ -728,12 +728,6 @@
   },
   "taxreport": {
     "title": "Tax Report",
-    "sections": {
-      "startSnapshot": "Start Snapshot",
-      "endSnapshot": "End Snapshot",
-      "finalResult": "Final Result",
-      "transactions": "Transactions"
-    },
     "startingPeriodBalances": "Starting Period Balances",
     "endingPeriodBalances": "Ending Period Balances",
     "startPositions": "Starting Positions Snapshot",
