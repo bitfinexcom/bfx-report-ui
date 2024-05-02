@@ -122,7 +122,10 @@ class TaxTransactions extends PureComponent {
               </SectionHeaderItemLabel>
               <TaxStrategySelector />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
+            <RefreshButton 
+              onClick={refresh}
+              disabled={isLoading}
+            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
