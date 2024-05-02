@@ -2,7 +2,7 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getCellState, getTooltipContent } from 'utils/columns'
+import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -10,10 +10,11 @@ export const getColumns = ({
   isLoading,
   getFullTime,
   filteredData,
+  columnsWidth,
 }) => [
   {
     id: 'asset',
-    width: 178,
+    width: getColumnWidth('asset', columnsWidth),
     name: 'taxreport.cols.currency',
     className: 'align-left',
     renderer: (rowIndex) => {
@@ -31,7 +32,7 @@ export const getColumns = ({
   },
   {
     id: 'amount',
-    width: 178,
+    width: getColumnWidth('amount', columnsWidth),
     name: 'taxreport.cols.amount',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -53,7 +54,7 @@ export const getColumns = ({
   },
   {
     id: 'mtsAcquired',
-    width: 178,
+    width: getColumnWidth('mtsAcquired', columnsWidth),
     name: 'taxreport.cols.dateAcquired',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -70,7 +71,7 @@ export const getColumns = ({
   },
   {
     id: 'mtsSold',
-    width: 178,
+    width: getColumnWidth('mtsSold', columnsWidth),
     name: 'taxreport.cols.dateSold',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -87,7 +88,7 @@ export const getColumns = ({
   },
   {
     id: 'proceeds',
-    width: 178,
+    width: getColumnWidth('proceeds', columnsWidth),
     name: 'taxreport.cols.proceeds',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -109,7 +110,7 @@ export const getColumns = ({
   },
   {
     id: 'cost',
-    width: 178,
+    width: getColumnWidth('cost', columnsWidth),
     name: 'taxreport.cols.cost',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
@@ -131,7 +132,7 @@ export const getColumns = ({
   },
   {
     id: 'gainOrLoss',
-    width: 178,
+    width: getColumnWidth('gainOrLoss', columnsWidth),
     name: 'taxreport.cols.gainOrLoss',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) {
