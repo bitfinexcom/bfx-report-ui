@@ -24,13 +24,17 @@ import queryConstants from 'state/query/constants'
 
 import { getColumns } from './TaxTransactions.columns'
 
-const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
+const TYPE = queryConstants.MENU_TAX_REPORT
 
 class TaxTransactions extends PureComponent {
   static propTypes = {
     dataReceived: PropTypes.bool.isRequired,
     entries: PropTypes.arrayOf(PropTypes.shape({
       asset: PropTypes.string,
+    })),
+    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string,
+      width: PropTypes.number,
     })),
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
@@ -60,6 +64,7 @@ class TaxTransactions extends PureComponent {
       getFullTime,
       pageLoading,
       dataReceived,
+      columnsWidth,
     } = this.props
     const isNoData = isEmpty(entries)
     const isLoading = !dataReceived && pageLoading
@@ -68,6 +73,7 @@ class TaxTransactions extends PureComponent {
       isNoData,
       isLoading,
       getFullTime,
+      columnsWidth,
       filteredData: entries,
     })
 
