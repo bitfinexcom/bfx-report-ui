@@ -56,12 +56,6 @@ function* handleMaintenanceTurnedOff() {
   yield put(showMaintenanceModal(false))
 }
 
-function* handleTaxTrxReportGenerationCompleted({ payload }) {
-  const { result } = payload
-  console.log('+++WS result', result)
-  yield put(updateTaxReportTransactions(result))
-}
-
 export default function* wsSaga() {
   yield takeLatest(types.WS_RECONNECT, reconnect)
   yield takeLatest(types.WS_NET_ERROR, notifyNetError)
@@ -71,5 +65,4 @@ export default function* wsSaga() {
   yield takeLatest(types.WS_MAINTENANCE_TURNED_OFF, handleMaintenanceTurnedOff)
   yield takeLatest(types.WS_REPORT_GENERATION_COMPLETED, handleReportGenerationCompleted)
   yield takeLatest(types.WS_REPORT_GENERATION_FAILED, handleReportGenerationFailed)
-  yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_COMPLETED, handleTaxTrxReportGenerationCompleted)
 }

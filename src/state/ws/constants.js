@@ -8,5 +8,4 @@ export default {
   WS_REPORT_GENERATION_FAILED: 'ws_emitReportFileGenerationFailedToOne',
   WS_MAINTENANCE_TURNED_ON: 'ws_emitMaintenanceTurnedOn',
   WS_MAINTENANCE_TURNED_OFF: 'ws_emitMaintenanceTurnedOff',
-  WS_TAX_TRANSACTION_REPORT_GENERATION_COMPLETED: 'ws_emitTrxTaxReportGenerationInBackgroundToOne',
 }
