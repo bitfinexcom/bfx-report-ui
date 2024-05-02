@@ -18,7 +18,6 @@ import TaxStrategySelector from 'ui/TaxStrategySelector'
 import {
   checkInit,
   checkFetch,
-  setPair,
 } from 'state/utils'
 import queryConstants from 'state/query/constants'
 
@@ -54,8 +53,6 @@ class TaxTransactions extends PureComponent {
   componentDidUpdate(prevProps) {
     checkFetch(prevProps, this.props, TYPE)
   }
-
-  onPairSelect = pair => setPair(TYPE, this.props, pair)
 
   render() {
     const {
