@@ -14,6 +14,8 @@ import {
   getTransactionsDataReceived,
 } from 'state/taxReport/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
+import queryConstants from 'state/query/constants'
 
 import TaxTransactions from './TaxTransactions'
 
@@ -23,6 +25,7 @@ const mapStateToProps = state => ({
   pageLoading: getTransactionsPageLoading(state),
   dataReceived: getTransactionsDataReceived(state),
   getFullTime: getFullTime(state),
+  columnsWidth: getColumnsWidth(state, queryConstants.MENU_TAX_REPORT),
 })
 
 const mapDispatchToProps = {
