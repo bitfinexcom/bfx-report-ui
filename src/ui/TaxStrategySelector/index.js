@@ -1,1 +1,1 @@
-export { default } from './ExportTypeSelector'
+export { default } from './TaxStrategySelector'

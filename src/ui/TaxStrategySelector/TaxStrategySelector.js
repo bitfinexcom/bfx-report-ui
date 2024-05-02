@@ -6,13 +6,14 @@ import { getTransactionsStrategy } from 'state/taxReport/selectors'
 
 import Select from 'ui/Select'
 
+const items = [
+  { value: 'LIFO', label: 'LIFO' },
+  { value: 'FIFO', label: 'FIFO' },
+]
+
 const TaxStrategySelector = () => {
   const dispatch = useDispatch()
   const strategy = useSelector(getTransactionsStrategy)
-  const items = [
-    { value: 'LIFO', label: 'LIFO' },
-    { value: 'FIFO', label: 'FIFO' },
-  ]
 
   const handleChange = useCallback((value) => {
     dispatch(setTransactionsStrategy(value))
