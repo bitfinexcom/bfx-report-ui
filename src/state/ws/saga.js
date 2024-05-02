@@ -4,7 +4,6 @@ import { initSync } from 'state/sync/saga'
 import { authExpired } from 'state/auth/actions'
 import { updateSyncStatus } from 'state/sync/actions'
 import { setIsReportExporting } from 'state/query/actions'
-import { updateTaxReportTransactions } from 'state/taxReport/actions'
 import { updateStatus, updateWarningStatus } from 'state/status/actions'
 import {
   toggleExportDialog,
