@@ -43,15 +43,15 @@ import { getTransactionsStrategy } from './selectors'
 //   },
 // ]
 
-export const getReqTaxTransactions = (params) => makeFetchCall('makeTrxTaxReportInBackground', params)
+export const getReqTaxReport = (params) => makeFetchCall('makeTrxTaxReportInBackground', params)
 
-export function* fetchTransactions() {
+export function* fetchTaxReport() {
   // yield put(actions.updateTaxReportTransactions(transctionsResult))
   try {
     const { start, end } = yield select(getTimeFrame)
     const strategy = yield select(getTransactionsStrategy)
     const params = { start, end, strategy }
-    const { result = {}, error } = yield call(getReqTaxTransactions, params)
+    const { result = {}, error } = yield call(getReqTaxReport, params)
     console.log('++result', result)
     // yield put(actions.updateTaxReportTransactions(result))
 
@@ -83,6 +83,6 @@ function* handleTaxTrxReportGenerationCompleted({ payload }) {
 
 export default function* taxReportSaga() {
   yield takeLatest(types.FETCH_FAIL, fetchTaxReportFail)
-  yield takeLatest([types.FETCH_TRANSACTIONS, types.REFRESH_TRANSACTIONS], fetchTransactions)
+  yield takeLatest([types.FETCH_TRANSACTIONS, types.REFRESH_TRANSACTIONS], fetchTaxReport)
   yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_COMPLETED, handleTaxTrxReportGenerationCompleted)
 }
