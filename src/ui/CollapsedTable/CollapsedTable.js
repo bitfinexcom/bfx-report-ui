@@ -6,6 +6,7 @@ import _times from 'lodash/times'
 
 const CollapsedTable = ({ numRows, tableColumns }) => {
   const { t } = useTranslation()
+
   return (
     <div className='collapsed-table'>
       {_times(numRows, rowIndex => (
