@@ -15,16 +15,18 @@ import {
 } from 'state/taxReport/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 import queryConstants from 'state/query/constants'
 
 import TaxTransactions from './TaxTransactions'
 
 const mapStateToProps = state => ({
   ...getTimeFrame(state),
+  getFullTime: getFullTime(state),
   entries: getTransactionsData(state),
   pageLoading: getTransactionsPageLoading(state),
   dataReceived: getTransactionsDataReceived(state),
-  getFullTime: getFullTime(state),
+  isSyncRequired: getIsSyncRequired(state),
   columnsWidth: getColumnsWidth(state, queryConstants.MENU_TAX_REPORT),
 })
 
