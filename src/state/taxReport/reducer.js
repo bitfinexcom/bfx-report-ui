@@ -5,9 +5,9 @@ import types from './constants'
 
 const transactionsInitState = {
   data: [],
-  strategy: 'LIFO',
   pageLoading: false,
   dataReceived: false,
+  strategy: types.STRATEGY_LIFO,
 }
 
 const initialState = {
