@@ -1,14 +1,15 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import types from 'state/taxReport/constants'
 import { setTransactionsStrategy } from 'state/taxReport/actions'
 import { getTransactionsStrategy } from 'state/taxReport/selectors'
 
 import Select from 'ui/Select'
 
 const items = [
-  { value: 'LIFO', label: 'LIFO' },
-  { value: 'FIFO', label: 'FIFO' },
+  { value: types.STRATEGY_LIFO, label: 'LIFO' },
+  { value: types.STRATEGY_FIFO, label: 'FIFO' },
 ]
 
 const TaxStrategySelector = () => {
