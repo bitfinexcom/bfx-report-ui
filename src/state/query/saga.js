@@ -401,18 +401,6 @@ function* exportReport({ payload: targets }) {
     for (const target of targets) {
       const options = yield call(getOptions, { target })
       multiExport.push(options)
-
-      // add 2 additional snapshot reports
-      if (target === MENU_TAX_REPORT) {
-        multiExport.push({
-          ...options,
-          isStartSnapshot: true,
-        })
-        multiExport.push({
-          ...options,
-          isEndSnapshot: true,
-        })
-      }
     }
 
     const locale = yield select(getLocale)
