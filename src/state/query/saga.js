@@ -366,7 +366,7 @@ function* getOptions({ target }) {
       options.method = 'getFullSnapshotReportFile'
       break
     case MENU_TAX_REPORT:
-      options.method = 'getFullTaxReportFile'
+      options.method = 'getTransactionTaxReportFile'
       break
     case MENU_TRADED_VOLUME:
       options.method = 'getTradedVolumeFile'
