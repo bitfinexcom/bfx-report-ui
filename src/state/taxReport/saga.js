@@ -76,9 +76,18 @@ function* fetchTaxReportFail({ payload }) {
 }
 
 function* handleTaxTrxReportGenerationCompleted({ payload }) {
-  const { result } = payload
+  const { result, error } = payload
   console.log('+++WS result', result)
-  yield put(actions.updateTaxReportTransactions(result))
+  if (result) {
+    yield put(actions.updateTaxReportTransactions(result))
+  }
+  if (error) {
+    yield put(actions.fetchFail({
+      id: 'status.fail',
+      topic: 'taxreport.title',
+      detail: error?.message ?? JSON.stringify(error),
+    }))
+  }
 }
 
 export default function* taxReportSaga() {
