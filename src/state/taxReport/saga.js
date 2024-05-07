@@ -51,9 +51,7 @@ export function* fetchTaxReport() {
     const { start, end } = yield select(getTimeFrame)
     const strategy = yield select(getTransactionsStrategy)
     const params = { start, end, strategy }
-    const { result = {}, error } = yield call(getReqTaxReport, params)
-    console.log('++result', result)
-    // yield put(actions.updateTaxReportTransactions(result))
+    const { error } = yield call(getReqTaxReport, params)
 
     if (error) {
       yield put(actions.fetchFail({
