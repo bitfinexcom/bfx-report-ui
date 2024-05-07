@@ -56,6 +56,7 @@ import {
 } from 'state/base/selectors'
 import { getEmail } from 'state/auth/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
+import { getTransactionsStrategy } from 'state/taxReport/selectors'
 import config from 'config'
 
 import actions from './actions'
@@ -225,6 +226,7 @@ function* getOptions({ target }) {
   const isUnrealizedProfitExcluded = showFrameworkMode ? yield select(getIsUnrealizedProfitExcluded) : ''
   const isVsAccountBalanceSelected = showFrameworkMode ? yield select(getIsVsAccountBalanceSelected) : ''
   const isPdfExportRequired = showFrameworkMode ? yield select(getIsPdfExportRequired) : false
+  const taxReportStrategy = showFrameworkMode ? yield select(getTransactionsStrategy) : ''
 
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
@@ -264,6 +266,7 @@ function* getOptions({ target }) {
       break
     case MENU_TAX_REPORT:
       options.isPDFRequired = isPdfExportRequired
+      options.strategy = taxReportStrategy
       break
     case MENU_LOGINS:
     case MENU_CHANGE_LOGS:
