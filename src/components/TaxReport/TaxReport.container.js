@@ -18,7 +18,7 @@ import { getColumnsWidth } from 'state/columns/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
 import queryConstants from 'state/query/constants'
 
-import TaxTransactions from './TaxReport'
+import TaxReport from './TaxReport'
 
 const mapStateToProps = state => ({
   ...getTimeFrame(state),
@@ -39,4 +39,4 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withTranslation('translations'),
   withRouter,
-)(TaxTransactions)
+)(TaxReport)
