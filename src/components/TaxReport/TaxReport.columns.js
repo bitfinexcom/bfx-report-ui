@@ -1,6 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
+import { mapSymbol } from 'state/symbols/utils'
 import { formatAmount, fixedFloat } from 'ui/utils'
 import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
@@ -22,9 +23,10 @@ export const getColumns = ({
         return getCellState(isLoading, isNoData)
       }
       const { asset } = filteredData[rowIndex]
+      const preparedAsset = mapSymbol(asset)
       return (
-        <Cell tooltip={getTooltipContent(asset, t)}>
-          {asset}
+        <Cell tooltip={getTooltipContent(preparedAsset, t)}>
+          {preparedAsset}
         </Cell>
       )
     },
