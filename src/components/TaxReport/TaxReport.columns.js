@@ -30,7 +30,7 @@ export const getColumns = ({
         </Cell>
       )
     },
-    copyText: rowIndex => filteredData[rowIndex].asset,
+    copyText: rowIndex => mapSymbol(filteredData[rowIndex].asset),
   },
   {
     id: 'amount',
