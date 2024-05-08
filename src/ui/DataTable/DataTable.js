@@ -4,14 +4,16 @@ import React, {
   useMemo,
   useState,
   useEffect,
+  useCallback,
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { Menu } from '@blueprintjs/core'
+import { Menu, MenuItem } from '@blueprintjs/core'
 import {
   Column,
+  ColumnHeaderCell,
   CopyCellsMenuItem,
   Table,
 } from '@blueprintjs/table'
@@ -84,6 +86,33 @@ const DataTable = ({
 
   const getCellData = (rowIndex, columnIndex) => tableColumns[columnIndex]?.copyText(rowIndex)
 
+  const columnWidthReset = useCallback(() => {
+    setUseCustomColsWidth(false)
+    dispatch(setColumnsWidth({ section }))
+  }, [dispatch])
+
+  const columnHeaderCellRenderer = (name, headerClassName) => {
+    const menuRenderer = () => (
+      <>
+        {enableColumnResizing && (
+          <Menu>
+            <MenuItem
+              onClick={columnWidthReset}
+              text={t('column.defaultWidth')}
+            />
+          </Menu>
+        )}
+      </>
+    )
+    return (
+      <ColumnHeaderCell
+        name={name}
+        className={headerClassName}
+        menuRenderer={menuRenderer}
+      />
+    )
+  }
+
   const renderBodyContextMenu = (context) => {
     const isSingleColumnSelected = singleColumnSelectedCheck(context)
     const hasNumericValue = columnHasNumericValueCheck(context, tableColumns)
@@ -97,11 +126,6 @@ const DataTable = ({
         sum += colValue
         setSumValue(sum)
       }
-    }
-
-    const columnWidthReset = () => {
-      setUseCustomColsWidth(false)
-      dispatch(setColumnsWidth({ section }))
     }
 
     return (
@@ -249,6 +273,12 @@ const DataTable = ({
             cellRenderer={column.renderer}
             className={column?.className ?? 'align-right'}
             name={column.nameStr ? column.nameStr : t(column.name)}
+            columnHeaderCellRenderer={
+              () => columnHeaderCellRenderer(
+                column?.nameStr ?? t(column.name),
+                column?.className ?? 'align-right',
+              )
+            }
           />
         ))}
       </Table>
