@@ -15,6 +15,7 @@ import ThemeSwitcher from 'ui/ThemeSwitcher'
 import TimezonePicker from 'ui/TimezonePicker'
 import TableScrollPref from 'ui/TableScrollPref'
 import ShowMilliseconds from 'ui/ShowMilliseconds'
+import TokenTTLSelector from 'ui/TokenTTLSelector'
 import DateFormatSelector from 'ui/DateFormatSelector'
 import SyncAfterUpdatePref from 'ui/SyncAfterUpdatePref'
 import TimeRangePreservePref from 'ui/TimeRangePreservePref'
@@ -77,6 +78,12 @@ const Preferences = ({
             <div>{t('preferences.dateformat')}</div>
             <DateFormatSelector />
           </div>
+          {showFrameworkMode && (
+            <div className='preferences-item'>
+              <div>{t('auth.ttlSelect.title')}</div>
+              <TokenTTLSelector />
+            </div>
+          )}
         </div>
         <div className='preferences-row'>
           <span>{t('preferences.milliseconds')}</span>

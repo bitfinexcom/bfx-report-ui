@@ -224,6 +224,13 @@ export function disableAuthBtn(payload) {
   }
 }
 
+export function setAuthTokenTTL(payload) {
+  return {
+    type: types.SET_TOKEN_TTL,
+    payload,
+  }
+}
+
 export default {
   checkAuth,
   addUser,
@@ -251,4 +258,5 @@ export default {
   deleteAccount,
   syncAfterUpdate,
   disableAuthBtn,
+  setAuthTokenTTL,
 }
