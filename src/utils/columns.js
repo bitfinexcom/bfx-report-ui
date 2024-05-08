@@ -1,7 +1,12 @@
 import React from 'react'
 import _map from 'lodash/map'
+import _sum from 'lodash/sum'
+import _size from 'lodash/size'
 import _head from 'lodash/head'
+import _fill from 'lodash/fill'
+import _floor from 'lodash/floor'
 import _filter from 'lodash/filter'
+import _forEach from 'lodash/forEach'
 import { Cell } from '@blueprintjs/table'
 import { get, pick, isEqual } from '@bitfinex/lib-js-util-base'
 
@@ -53,7 +58,7 @@ const COLUMN_WIDTH_STANDARD = {
   marginFunding: 132,
   marginFundingType: 130,
   marginFundingPayment: 178,
-  moreDetails: 95,
+  moreDetails: 130,
   meta: 160,
   merchantName: 120,
   mobile: 90,
@@ -77,13 +82,13 @@ const COLUMN_WIDTH_STANDARD = {
   priceLiq: 132,
   priceSpot: 132,
   priceTrailing: 132,
-  rate: 120,
+  rate: 130,
   redirectUrl: 300,
   sale: 152,
   side: 100,
   sellingAmount: 132,
   sellingWeightedPrice: 160,
-  status: 105,
+  status: 135,
   symbol: 92,
   swap: 132,
   time: 150,
@@ -620,24 +625,42 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
-export const MIN_COLUMN_WIDTH = 100
-
+export const MIN_COLUMN_WIDTH = 125
+export const WIDE_COLUMN_DEFAULT_WIDTH = 300
 export const DEFAULT_CONTAINER_WIDTH = 1000
 
+export const getColumnsMinWidths = (columns) => _map(columns,
+  (column) => COLUMN_WIDTHS?.[column.id] ?? MIN_COLUMN_WIDTH)
+
+export const getAverageWidth = (avgWidth) => (avgWidth < MIN_COLUMN_WIDTH
+  ? MIN_COLUMN_WIDTH
+  : avgWidth)
+
 export const getCalculatedColumnWidths = (columns, containerWidth) => {
-  if (columns.length === 0) {
+  if (_size(columns) === 0) {
     return []
   }
 
-  const avgWidth = Math.floor(containerWidth / columns.length)
-  if (avgWidth < MIN_COLUMN_WIDTH) {
-    return _map(columns, () => MIN_COLUMN_WIDTH)
-  }
+  const colsDefaults = getColumnsMinWidths(columns)
+  let avgWidth = getAverageWidth(_floor(containerWidth / _size(columns)))
+  const preparedColsWidths = _fill(Array(_size(columns)), 0)
+  const wideColsIndexes = []
+  const smallColsIndexes = []
 
-  const columnWidths = _map(columns, () => avgWidth)
-  columnWidths[0] = containerWidth - ((columns.length - 1) * avgWidth)
+  _forEach(colsDefaults, (value, index) => {
+    if (value < MIN_COLUMN_WIDTH) smallColsIndexes.push(index)
+    if (value > WIDE_COLUMN_DEFAULT_WIDTH) wideColsIndexes.push(index)
+  })
+  _forEach(wideColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = _floor(avgWidth * 2) })
+  _forEach(smallColsIndexes, (colIndex) => { preparedColsWidths[colIndex] = _floor(avgWidth * 0.7) })
 
-  return columnWidths
+  const calculatedCols = _size(smallColsIndexes) + _size(wideColsIndexes)
+  avgWidth = getAverageWidth(
+    _floor((containerWidth - _sum(preparedColsWidths)) / (_size(columns) - calculatedCols)),
+  )
+  _forEach(preparedColsWidths, (value, index) => { if (isEqual(value, 0)) preparedColsWidths[index] = avgWidth })
+
+  return preparedColsWidths
 }
 
 export default {

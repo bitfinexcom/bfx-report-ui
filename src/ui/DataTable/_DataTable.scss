@@ -63,6 +63,16 @@
   .cell-no-data {
     color: var(--color2);
   }
+
+  .bp3-table-thead {
+    .bp3-table-header {
+      .bp3-table-column-name {
+        .bp3-table-th-menu-container{
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 .bp3-table {

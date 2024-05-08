@@ -513,6 +513,24 @@ function* handleSyncAfterUpdate({ payload }) {
   }
 }
 
+function* handleUpdateTokenTTL({ payload }) {
+  try {
+    const auth = yield select(selectAuth)
+    const params = { authTokenTTLSec: payload }
+    const { error } = yield makeFetchCall('updateUser', params, auth)
+
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'auth.updateUser',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateAuthErrorStatus(fail))
+  }
+}
+
 export default function* authSaga() {
   yield takeLatest(types.CHECK_AUTH, checkAuth)
   yield takeLatest(types.FETCH_USERS, fetchUsers)
@@ -528,5 +546,6 @@ export default function* authSaga() {
   yield takeLatest(types.REMOVE_USER, removeUser)
   yield takeLatest(types.AUTH_EXPIRED, handleExpiredAuth)
   yield takeLatest(types.SET_SYNC_AFTER_UPDATE, handleSyncAfterUpdate)
+  yield takeLatest(types.SET_TOKEN_TTL, handleUpdateTokenTTL)
   yield fork(tokenRefreshSaga)
 }
