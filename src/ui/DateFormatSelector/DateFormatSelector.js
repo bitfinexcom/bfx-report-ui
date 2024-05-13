@@ -1,31 +1,26 @@
-import React, { PureComponent } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 import Select from 'ui/Select'
 import types from 'state/base/constants'
 
-class DateFormatSelector extends PureComponent {
-  handleClick = (format) => {
-    const { dateFormat, setDateFormat } = this.props
+const DateFormatSelector = ({ dateFormat, setDateFormat }) => {
+  const handleClick = (format) => {
     if (dateFormat !== format) {
       setDateFormat(format)
     }
   }
 
-  render() {
-    const { dateFormat } = this.props
-
-    return (
-      <Select
-        className='bitfinex-select--date-format'
-        popoverClassName='bitfinex-select-menu--date-format'
-        value={dateFormat}
-        items={types.DATE_FORMATS}
-        onChange={this.handleClick}
-        type={'Date Format'}
-      />
-    )
-  }
+  return (
+    <Select
+      type={'Date Format'}
+      value={dateFormat}
+      onChange={handleClick}
+      items={types.DATE_FORMATS}
+      className='bitfinex-select--date-format'
+      popoverClassName='bitfinex-select-menu--date-format'
+    />
+  )
 }
 
 DateFormatSelector.propTypes = {
@@ -33,4 +28,4 @@ DateFormatSelector.propTypes = {
   setDateFormat: PropTypes.func.isRequired,
 }
 
-export default DateFormatSelector
+export default memo(DateFormatSelector)
