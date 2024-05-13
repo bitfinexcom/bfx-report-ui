@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Select from 'ui/Select'
 import types from 'state/base/constants'
@@ -10,7 +11,7 @@ const DateFormatSelector = () => {
   const dispatch = useDispatch()
   const dateFormat = useSelector(getDateFormat)
   const handleClick = useCallback((format) => {
-    if (dateFormat !== format) {
+    if (!isEqual(dateFormat, format)) {
       dispatch(setDateFormat(format))
     }
   }, [dateFormat, setDateFormat])
