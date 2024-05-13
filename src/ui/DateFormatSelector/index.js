@@ -1,3 +1,1 @@
-import DateFormatSelector from './DateFormatSelector.container'
-
-export default DateFormatSelector
+export { default } from './DateFormatSelector.container'
