@@ -1,13 +1,17 @@
 import React, { memo, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Select from 'ui/Select'
 import types from 'state/base/constants'
+import { setDateFormat } from 'state/base/actions'
+import { getDateFormat } from 'state/base/selectors'
 
-const DateFormatSelector = ({ dateFormat, setDateFormat }) => {
+const DateFormatSelector = () => {
+  const dispatch = useDispatch()
+  const dateFormat = useSelector(getDateFormat)
   const handleClick = useCallback((format) => {
     if (dateFormat !== format) {
-      setDateFormat(format)
+      dispatch(setDateFormat(format))
     }
   }, [dateFormat, setDateFormat])
 
@@ -21,11 +25,6 @@ const DateFormatSelector = ({ dateFormat, setDateFormat }) => {
       popoverClassName='bitfinex-select-menu--date-format'
     />
   )
-}
-
-DateFormatSelector.propTypes = {
-  dateFormat: PropTypes.string.isRequired,
-  setDateFormat: PropTypes.func.isRequired,
 }
 
 export default memo(DateFormatSelector)
