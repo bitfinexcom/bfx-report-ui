@@ -1,1 +1,1 @@
-export { default } from './DateFormatSelector.container'
+export { default } from './DateFormatSelector'
