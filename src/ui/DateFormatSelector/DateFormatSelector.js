@@ -14,7 +14,7 @@ const DateFormatSelector = () => {
     if (!isEqual(dateFormat, format)) {
       dispatch(setDateFormat(format))
     }
-  }, [dateFormat, setDateFormat])
+  }, [dispatch, dateFormat, setDateFormat])
 
   return (
     <Select
