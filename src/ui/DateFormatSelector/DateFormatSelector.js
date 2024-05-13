@@ -1,15 +1,15 @@
-import React, { memo } from 'react'
+import React, { memo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import Select from 'ui/Select'
 import types from 'state/base/constants'
 
 const DateFormatSelector = ({ dateFormat, setDateFormat }) => {
-  const handleClick = (format) => {
+  const handleClick = useCallback((format) => {
     if (dateFormat !== format) {
       setDateFormat(format)
     }
-  }
+  }, [dateFormat, setDateFormat])
 
   return (
     <Select
