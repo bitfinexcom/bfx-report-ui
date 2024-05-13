@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 import Select from 'ui/Select'
 import types from 'state/base/constants'
-
-import { propTypes, defaultProps } from './DateFormatSelector.props'
 
 class DateFormatSelector extends PureComponent {
   handleClick = (format) => {
@@ -29,7 +28,9 @@ class DateFormatSelector extends PureComponent {
   }
 }
 
-DateFormatSelector.propTypes = propTypes
-DateFormatSelector.defaultProps = defaultProps
+DateFormatSelector.propTypes = {
+  dateFormat: PropTypes.string.isRequired,
+  setDateFormat: PropTypes.func.isRequired,
+}
 
 export default DateFormatSelector
