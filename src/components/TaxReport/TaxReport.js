@@ -83,7 +83,7 @@ class TaxReport extends PureComponent {
     return (
       <Card
         elevation={Elevation.ZERO}
-        className='weighted-averages col-lg-12 col-md-12 col-sm-12 col-xs-12'
+        className='tax-report col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader>
           <SectionHeaderTitle>
