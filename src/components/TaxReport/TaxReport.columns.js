@@ -18,13 +18,10 @@ export const getColumns = ({
     name: 'taxreport.cols.currency',
     className: 'align-left',
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { asset } = filteredData[rowIndex]
-      const preparedAsset = mapSymbol(asset)
-      const tooltip = getTooltipContent(preparedAsset, t)
-      return getCell(preparedAsset, tooltip)
+      const tooltip = getTooltipContent(mapSymbol(asset), t)
+      return getCell(mapSymbol(asset), tooltip)
     },
     copyText: rowIndex => mapSymbol(filteredData[rowIndex].asset),
   },
@@ -33,9 +30,7 @@ export const getColumns = ({
     width: getColumnWidth('amount', columnsWidth),
     name: 'taxreport.cols.amount',
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount } = filteredData[rowIndex]
       const tooltip = getTooltipContent(fixedFloat(amount), t)
       return getCell(formatAmount(amount), tooltip)
@@ -48,9 +43,7 @@ export const getColumns = ({
     width: getColumnWidth('mtsAcquired', columnsWidth),
     name: 'taxreport.cols.dateAcquired',
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsAcquired)
       const tooltip = getTooltipContent(timestamp, t)
       return getCell(timestamp, tooltip)
@@ -62,9 +55,7 @@ export const getColumns = ({
     width: getColumnWidth('mtsSold', columnsWidth),
     name: 'taxreport.cols.dateSold',
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsSold)
       const tooltip = getTooltipContent(timestamp, t)
       return getCell(timestamp, tooltip)
@@ -76,9 +67,7 @@ export const getColumns = ({
     width: getColumnWidth('proceeds', columnsWidth),
     name: 'taxreport.cols.proceeds',
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { proceeds } = filteredData[rowIndex]
       const tooltip = getTooltipContent(fixedFloat(proceeds), t)
       return getCell(formatAmount(proceeds), tooltip)
@@ -91,9 +80,7 @@ export const getColumns = ({
     width: getColumnWidth('cost', columnsWidth),
     name: 'taxreport.cols.cost',
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { cost } = filteredData[rowIndex]
       const tooltip = getTooltipContent(fixedFloat(cost), t)
       return getCell(formatAmount(cost), tooltip)
@@ -106,9 +93,7 @@ export const getColumns = ({
     width: getColumnWidth('gainOrLoss', columnsWidth),
     name: 'taxreport.cols.gainOrLoss',
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { gainOrLoss } = filteredData[rowIndex]
       const tooltip = getTooltipContent(fixedFloat(gainOrLoss), t)
       return getCell(formatAmount(gainOrLoss), tooltip)
