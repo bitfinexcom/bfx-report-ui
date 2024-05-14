@@ -1,9 +1,8 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
 import { mapSymbol } from 'state/symbols/utils'
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import {
+  getCell, getCellState, getColumnWidth, getTooltipContent,
+} from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -24,11 +23,8 @@ export const getColumns = ({
       }
       const { asset } = filteredData[rowIndex]
       const preparedAsset = mapSymbol(asset)
-      return (
-        <Cell tooltip={getTooltipContent(preparedAsset, t)}>
-          {preparedAsset}
-        </Cell>
-      )
+      const tooltip = getTooltipContent(preparedAsset, t)
+      return getCell(preparedAsset, tooltip)
     },
     copyText: rowIndex => mapSymbol(filteredData[rowIndex].asset),
   },
@@ -41,15 +37,8 @@ export const getColumns = ({
         return getCellState(isLoading, isNoData)
       }
       const { amount } = filteredData[rowIndex]
-      const tooltip = fixedFloat(amount)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(tooltip, t)}
-        >
-          {formatAmount(amount)}
-        </Cell>
-      )
+      const tooltip = getTooltipContent(fixedFloat(amount), t)
+      return getCell(formatAmount(amount), tooltip)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
@@ -63,11 +52,8 @@ export const getColumns = ({
         return getCellState(isLoading, isNoData)
       }
       const timestamp = getFullTime(filteredData[rowIndex].mtsAcquired)
-      return (
-        <Cell tooltip={getTooltipContent(timestamp, t)}>
-          {timestamp}
-        </Cell>
-      )
+      const tooltip = getTooltipContent(timestamp, t)
+      return getCell(timestamp, tooltip)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsAcquired),
   },
@@ -80,11 +66,8 @@ export const getColumns = ({
         return getCellState(isLoading, isNoData)
       }
       const timestamp = getFullTime(filteredData[rowIndex].mtsSold)
-      return (
-        <Cell tooltip={getTooltipContent(timestamp, t)}>
-          {timestamp}
-        </Cell>
-      )
+      const tooltip = getTooltipContent(timestamp, t)
+      return getCell(timestamp, tooltip)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsSold),
   },
@@ -97,15 +80,8 @@ export const getColumns = ({
         return getCellState(isLoading, isNoData)
       }
       const { proceeds } = filteredData[rowIndex]
-      const tooltip = fixedFloat(proceeds)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(tooltip, t)}
-        >
-          {formatAmount(proceeds)}
-        </Cell>
-      )
+      const tooltip = getTooltipContent(fixedFloat(proceeds), t)
+      return getCell(formatAmount(proceeds), tooltip)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].proceeds),
@@ -119,15 +95,8 @@ export const getColumns = ({
         return getCellState(isLoading, isNoData)
       }
       const { cost } = filteredData[rowIndex]
-      const tooltip = fixedFloat(cost)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(tooltip, t)}
-        >
-          {formatAmount(cost)}
-        </Cell>
-      )
+      const tooltip = getTooltipContent(fixedFloat(cost), t)
+      return getCell(formatAmount(cost), tooltip)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].cost),
@@ -141,15 +110,8 @@ export const getColumns = ({
         return getCellState(isLoading, isNoData)
       }
       const { gainOrLoss } = filteredData[rowIndex]
-      const tooltip = fixedFloat(gainOrLoss)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(tooltip, t)}
-        >
-          {formatAmount(gainOrLoss)}
-        </Cell>
-      )
+      const tooltip = getTooltipContent(fixedFloat(gainOrLoss), t)
+      return getCell(formatAmount(gainOrLoss), tooltip)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].gainOrLoss),
