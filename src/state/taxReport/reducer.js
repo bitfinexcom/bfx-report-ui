@@ -1,5 +1,4 @@
 import authTypes from 'state/auth/constants'
-import timeRangeTypes from 'state/timeRange/constants'
 
 import types from './constants'
 
@@ -48,7 +47,6 @@ export function taxReportReducer(state = initialState, action) {
     }
     case types.FETCH_FAIL:
       return state
-    case timeRangeTypes.SET_TIME_RANGE:
     case authTypes.LOGOUT:
       return initialState
     default: {
