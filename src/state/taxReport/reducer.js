@@ -17,7 +17,6 @@ export function taxReportReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
     case types.FETCH_TRANSACTIONS:
-    case types.REFRESH_TRANSACTIONS:
       return {
         ...state,
         transactions: {

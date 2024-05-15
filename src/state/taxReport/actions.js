@@ -13,12 +13,6 @@ export function fetchTaxReportTransactions() {
   }
 }
 
-export function refreshTaxReportTransactions() {
-  return {
-    type: types.REFRESH_TRANSACTIONS,
-  }
-}
-
 export function updateTaxReportTransactions(payload) {
   return {
     type: types.UPDATE_TRANSACTIONS,
@@ -35,8 +29,7 @@ export function setTransactionsStrategy(payload) {
 
 export default {
   fetchFail,
-  fetchTaxReportTransactions,
-  refreshTaxReportTransactions,
-  updateTaxReportTransactions,
   setTransactionsStrategy,
+  fetchTaxReportTransactions,
+  updateTaxReportTransactions,
 }
