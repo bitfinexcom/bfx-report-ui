@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -14,6 +15,18 @@ import {
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import TaxStrategySelector from 'ui/TaxStrategySelector'
+import {
+  fetchTaxReportTransactions,
+  refreshTaxReportTransactions,
+} from 'state/taxReport/actions'
+import {
+  getTransactionsData,
+  getTransactionsPageLoading,
+  getTransactionsDataReceived,
+} from 'state/taxReport/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
+import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
 
 import queryConstants from 'state/query/constants'
 
@@ -21,25 +34,24 @@ import { getColumns } from './TaxReport.columns'
 
 const TYPE = queryConstants.MENU_TAX_REPORT
 
-const TaxReport = ({
-  t,
-  entries,
-  refresh,
-  fetchData,
-  getFullTime,
-  pageLoading,
-  dataReceived,
-  columnsWidth,
-  isSyncRequired,
-}) => {
+const TaxReport = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const entries = useSelector(getTransactionsData)
+  const getFullTime = useSelector(getFullTimeSelector)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const pageLoading = useSelector(getTransactionsPageLoading)
+  const dataReceived = useSelector(getTransactionsDataReceived)
+  const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
+
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
 
   useEffect(() => {
-    if (!dataReceived && !isLoading && !isSyncRequired) {
-      fetchData()
+    if (!isSyncRequired) {
+      dispatch(fetchTaxReportTransactions())
     }
-  }, [dataReceived, isLoading, isSyncRequired])
+  }, [dispatch, isSyncRequired])
 
   const tableColumns = getColumns({
     t,
@@ -98,36 +110,14 @@ const TaxReport = ({
             <TaxStrategySelector />
           </SectionHeaderItem>
           <RefreshButton
-            onClick={refresh}
             disabled={isLoading}
+            onClick={() => dispatch(refreshTaxReportTransactions())}
           />
         </SectionHeaderRow>
       </SectionHeader>
       {showContent}
     </Card>
   )
-}
-
-TaxReport.propTypes = {
-  dataReceived: PropTypes.bool.isRequired,
-  entries: PropTypes.arrayOf(PropTypes.shape({
-    asset: PropTypes.string,
-  })),
-  columnsWidth: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    width: PropTypes.number,
-  })),
-  pageLoading: PropTypes.bool.isRequired,
-  isSyncRequired: PropTypes.bool.isRequired,
-  refresh: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
-  fetchData: PropTypes.func.isRequired,
-  getFullTime: PropTypes.func.isRequired,
-}
-
-TaxReport.defaultProps = {
-  entries: [],
-  columnsWidth: [],
 }
 
 export default memo(TaxReport)
