@@ -58,6 +58,6 @@ function* handleTaxTrxReportGenerationCompleted({ payload }) {
 
 export default function* taxReportSaga() {
   yield takeLatest(types.FETCH_FAIL, fetchTaxReportFail)
-  yield takeLatest([types.FETCH_TRANSACTIONS, types.REFRESH_TRANSACTIONS], fetchTaxReport)
+  yield takeLatest([types.FETCH_TRANSACTIONS], fetchTaxReport)
   yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_COMPLETED, handleTaxTrxReportGenerationCompleted)
 }
