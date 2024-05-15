@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -43,7 +43,7 @@ const TaxReport = () => {
 
   useEffect(() => {
     if (!isSyncRequired) dispatch(fetchTaxReportTransactions())
-  }, [dispatch, isSyncRequired])
+  }, [isSyncRequired])
 
   const onRefresh = useCallback(
     () => dispatch(fetchTaxReportTransactions()),
