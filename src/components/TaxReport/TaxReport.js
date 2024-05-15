@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -43,21 +43,20 @@ const TaxReport = () => {
   const pageLoading = useSelector(getTransactionsPageLoading)
   const dataReceived = useSelector(getTransactionsDataReceived)
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
-  const isNoData = isEmpty(entries)
-  const isLoading = !dataReceived && pageLoading
 
   useEffect(() => {
     if (!isSyncRequired) dispatch(fetchTaxReportTransactions())
   }, [dispatch, isSyncRequired])
 
-  const tableColumns = getColumns({
-    t,
-    entries,
-    isNoData,
-    isLoading,
-    getFullTime,
-    columnsWidth,
-  })
+  const isNoData = isEmpty(entries)
+  const isLoading = !dataReceived && pageLoading
+  const columns = useMemo(
+    () => getColumns({
+      t, entries, isNoData, isLoading, getFullTime, columnsWidth,
+    }),
+    [t, entries, isNoData, isLoading, getFullTime, columnsWidth],
+  )
+
 
   let showContent
   if (isNoData) {
@@ -67,7 +66,7 @@ const TaxReport = () => {
           section={TYPE}
           isNoData={isNoData}
           isLoading={isLoading}
-          tableColumns={tableColumns}
+          tableColumns={columns}
           numRows={isLoading ? 5 : 1}
         />
       </div>
@@ -77,7 +76,7 @@ const TaxReport = () => {
       <>
         <DataTable
           section={TYPE}
-          tableColumns={tableColumns}
+          tableColumns={columns}
           numRows={isLoading ? 5 : entries.length}
         />
       </>
