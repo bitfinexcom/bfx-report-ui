@@ -43,23 +43,20 @@ const TaxReport = () => {
   const pageLoading = useSelector(getTransactionsPageLoading)
   const dataReceived = useSelector(getTransactionsDataReceived)
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
-
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
 
   useEffect(() => {
-    if (!isSyncRequired) {
-      dispatch(fetchTaxReportTransactions())
-    }
+    if (!isSyncRequired) dispatch(fetchTaxReportTransactions())
   }, [dispatch, isSyncRequired])
 
   const tableColumns = getColumns({
     t,
+    entries,
     isNoData,
     isLoading,
     getFullTime,
     columnsWidth,
-    filteredData: entries,
   })
 
   let showContent
