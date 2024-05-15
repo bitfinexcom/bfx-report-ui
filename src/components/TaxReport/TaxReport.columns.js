@@ -6,10 +6,10 @@ import {
 
 export const getColumns = ({
   t,
+  entries,
   isNoData,
   isLoading,
   getFullTime,
-  filteredData,
   columnsWidth,
 }) => [
   {
@@ -19,11 +19,11 @@ export const getColumns = ({
     className: 'align-left',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { asset } = filteredData[rowIndex]
+      const { asset } = entries[rowIndex]
       const tooltip = getTooltipContent(mapSymbol(asset), t)
       return getCell(mapSymbol(asset), tooltip)
     },
-    copyText: rowIndex => mapSymbol(filteredData[rowIndex].asset),
+    copyText: rowIndex => mapSymbol(entries[rowIndex].asset),
   },
   {
     id: 'amount',
@@ -31,12 +31,12 @@ export const getColumns = ({
     name: 'taxreport.cols.amount',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { amount } = filteredData[rowIndex]
+      const { amount } = entries[rowIndex]
       const tooltip = getTooltipContent(fixedFloat(amount), t)
       return getCell(formatAmount(amount), tooltip)
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].amount),
   },
   {
     id: 'mtsAcquired',
@@ -44,11 +44,11 @@ export const getColumns = ({
     name: 'taxreport.cols.dateAcquired',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const timestamp = getFullTime(filteredData[rowIndex].mtsAcquired)
+      const timestamp = getFullTime(entries[rowIndex].mtsAcquired)
       const tooltip = getTooltipContent(timestamp, t)
       return getCell(timestamp, tooltip)
     },
-    copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsAcquired),
+    copyText: rowIndex => getFullTime(entries[rowIndex].mtsAcquired),
   },
   {
     id: 'mtsSold',
@@ -56,11 +56,11 @@ export const getColumns = ({
     name: 'taxreport.cols.dateSold',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const timestamp = getFullTime(filteredData[rowIndex].mtsSold)
+      const timestamp = getFullTime(entries[rowIndex].mtsSold)
       const tooltip = getTooltipContent(timestamp, t)
       return getCell(timestamp, tooltip)
     },
-    copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsSold),
+    copyText: rowIndex => getFullTime(entries[rowIndex].mtsSold),
   },
   {
     id: 'proceeds',
@@ -68,12 +68,12 @@ export const getColumns = ({
     name: 'taxreport.cols.proceeds',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { proceeds } = filteredData[rowIndex]
+      const { proceeds } = entries[rowIndex]
       const tooltip = getTooltipContent(fixedFloat(proceeds), t)
       return getCell(formatAmount(proceeds), tooltip)
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].proceeds),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].proceeds),
   },
   {
     id: 'cost',
@@ -81,12 +81,12 @@ export const getColumns = ({
     name: 'taxreport.cols.cost',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { cost } = filteredData[rowIndex]
+      const { cost } = entries[rowIndex]
       const tooltip = getTooltipContent(fixedFloat(cost), t)
       return getCell(formatAmount(cost), tooltip)
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].cost),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].cost),
   },
   {
     id: 'gainOrLoss',
@@ -94,11 +94,11 @@ export const getColumns = ({
     name: 'taxreport.cols.gainOrLoss',
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { gainOrLoss } = filteredData[rowIndex]
+      const { gainOrLoss } = entries[rowIndex]
       const tooltip = getTooltipContent(fixedFloat(gainOrLoss), t)
       return getCell(formatAmount(gainOrLoss), tooltip)
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].gainOrLoss),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].gainOrLoss),
   },
 ]
