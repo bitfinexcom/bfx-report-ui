@@ -1,9 +1,4 @@
-import React, {
-  memo,
-  useMemo,
-  useEffect,
-  useCallback,
-} from 'react'
+import React, { useMemo, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -122,4 +117,4 @@ const TaxReport = () => {
   )
 }
 
-export default memo(TaxReport)
+export default TaxReport
