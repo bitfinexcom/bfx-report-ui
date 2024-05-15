@@ -20,10 +20,7 @@ import {
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import TaxStrategySelector from 'ui/TaxStrategySelector'
-import {
-  fetchTaxReportTransactions,
-  refreshTaxReportTransactions,
-} from 'state/taxReport/actions'
+import { fetchTaxReportTransactions } from 'state/taxReport/actions'
 import {
   getTransactionsData,
   getTransactionsPageLoading,
@@ -54,7 +51,7 @@ const TaxReport = () => {
   }, [dispatch, isSyncRequired])
 
   const onRefresh = useCallback(
-    () => dispatch(refreshTaxReportTransactions()),
+    () => dispatch(fetchTaxReportTransactions()),
     [dispatch],
   )
 
