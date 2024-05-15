@@ -1,6 +1,11 @@
-import React, { memo, useEffect, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, {
+  memo,
+  useMemo,
+  useEffect,
+  useCallback,
+} from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -48,6 +53,11 @@ const TaxReport = () => {
     if (!isSyncRequired) dispatch(fetchTaxReportTransactions())
   }, [dispatch, isSyncRequired])
 
+  const onRefresh = useCallback(
+    () => dispatch(refreshTaxReportTransactions()),
+    [dispatch],
+  )
+
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
   const columns = useMemo(
@@ -56,7 +66,6 @@ const TaxReport = () => {
     }),
     [t, entries, isNoData, isLoading, getFullTime, columnsWidth],
   )
-
 
   let showContent
   if (isNoData) {
@@ -106,8 +115,8 @@ const TaxReport = () => {
             <TaxStrategySelector />
           </SectionHeaderItem>
           <RefreshButton
+            onClick={onRefresh}
             disabled={isLoading}
-            onClick={() => dispatch(refreshTaxReportTransactions())}
           />
         </SectionHeaderRow>
       </SectionHeader>
