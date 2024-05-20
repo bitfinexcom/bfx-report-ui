@@ -1,8 +1,5 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
 import { fixedFloat } from 'ui/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCell, getCellState, getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -22,15 +19,9 @@ export default function getColumns(props) {
       className: 'align-left',
       width: getColumnWidth('symbol', columnsWidth),
       renderer: (rowIndex) => {
-        if (isLoading || isNoData) {
-          return getCellState(isLoading, isNoData)
-        }
+        if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { pair } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(pair, t)}>
-            {pair}
-          </Cell>
-        )
+        return getCell(pair, t)
       },
       copyText: rowIndex => filteredData[rowIndex].pair,
     },
@@ -39,19 +30,9 @@ export default function getColumns(props) {
       name: 'column.bid',
       width: getColumnWidth('bid', columnsWidth),
       renderer: (rowIndex) => {
-        if (isLoading || isNoData) {
-          return getCellState(isLoading, isNoData)
-        }
+        if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { bid } = filteredData[rowIndex]
-        const fixedBid = fixedFloat(bid)
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedBid, t)}
-          >
-            {fixedBid}
-          </Cell>
-        )
+        return getCell(fixedFloat(bid), t)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].bid),
@@ -61,19 +42,9 @@ export default function getColumns(props) {
       name: 'column.ask',
       width: getColumnWidth('ask', columnsWidth),
       renderer: (rowIndex) => {
-        if (isLoading || isNoData) {
-          return getCellState(isLoading, isNoData)
-        }
+        if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { ask } = filteredData[rowIndex]
-        const fixedAsk = fixedFloat(ask)
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedAsk, t)}
-          >
-            {fixedAsk}
-          </Cell>
-        )
+        return getCell(fixedFloat(ask), t)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].ask),
@@ -84,15 +55,9 @@ export default function getColumns(props) {
       nameStr: `${t('column.time')} (${timeOffset})`,
       width: getColumnWidth('mtsUpdate', columnsWidth),
       renderer: (rowIndex) => {
-        if (isLoading || isNoData) {
-          return getCellState(isLoading, isNoData)
-        }
+        if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
-        return (
-          <Cell tooltip={getTooltipContent(timestamp, t)}>
-            {timestamp}
-          </Cell>
-        )
+        return getCell(fixedFloat(timestamp), t)
       },
       copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
