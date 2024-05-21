@@ -1,8 +1,6 @@
 import { mapSymbol } from 'state/symbols/utils'
 import { formatAmount, fixedFloat } from 'ui/utils'
-import {
-  getCell, getCellState, getColumnWidth, getTooltipContent,
-} from 'utils/columns'
+import { getCell, getCellState, getColumnWidth } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -20,8 +18,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { asset } = entries[rowIndex]
-      const tooltip = getTooltipContent(mapSymbol(asset), t)
-      return getCell(mapSymbol(asset), tooltip)
+      return getCell(mapSymbol(asset), t)
     },
     copyText: rowIndex => mapSymbol(entries[rowIndex].asset),
   },
@@ -32,8 +29,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount } = entries[rowIndex]
-      const tooltip = getTooltipContent(fixedFloat(amount), t)
-      return getCell(formatAmount(amount), tooltip)
+      return getCell(formatAmount(amount), t, fixedFloat(amount))
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].amount),
@@ -45,8 +41,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(entries[rowIndex].mtsAcquired)
-      const tooltip = getTooltipContent(timestamp, t)
-      return getCell(timestamp, tooltip)
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(entries[rowIndex].mtsAcquired),
   },
@@ -57,8 +52,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(entries[rowIndex].mtsSold)
-      const tooltip = getTooltipContent(timestamp, t)
-      return getCell(timestamp, tooltip)
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(entries[rowIndex].mtsSold),
   },
@@ -69,8 +63,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { proceeds } = entries[rowIndex]
-      const tooltip = getTooltipContent(fixedFloat(proceeds), t)
-      return getCell(formatAmount(proceeds), tooltip)
+      return getCell(formatAmount(proceeds), t, fixedFloat(proceeds))
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].proceeds),
@@ -82,8 +75,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { cost } = entries[rowIndex]
-      const tooltip = getTooltipContent(fixedFloat(cost), t)
-      return getCell(formatAmount(cost), tooltip)
+      return getCell(formatAmount(cost), t, fixedFloat(cost))
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].cost),
@@ -95,8 +87,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { gainOrLoss } = entries[rowIndex]
-      const tooltip = getTooltipContent(fixedFloat(gainOrLoss), t)
-      return getCell(formatAmount(gainOrLoss), tooltip)
+      return getCell(formatAmount(gainOrLoss), t, fixedFloat(gainOrLoss))
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].gainOrLoss),
