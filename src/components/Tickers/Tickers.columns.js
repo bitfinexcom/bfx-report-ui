@@ -54,7 +54,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
-      return getCell(fixedFloat(timestamp), t)
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
   },
