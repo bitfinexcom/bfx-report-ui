@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
@@ -28,4 +28,4 @@ const DateFormatSelector = () => {
   )
 }
 
-export default memo(DateFormatSelector)
+export default DateFormatSelector
