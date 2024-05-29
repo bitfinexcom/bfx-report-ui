@@ -1,3 +1,1 @@
-import LangMenu from './LangMenu.container'
-
-export default LangMenu
+export { default } from './LangMenu.container'
