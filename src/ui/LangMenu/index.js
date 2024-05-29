@@ -1,1 +1,1 @@
-export { default } from './LangMenu.container'
+export { default } from './LangMenu'
