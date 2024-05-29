@@ -1,11 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _map from 'lodash/map'
 import _keys from 'lodash/keys'
 
 import Select from 'ui/Select'
 import { LANGUAGE_NAMES } from 'locales/i18n'
-
-import { propTypes, defaultProps } from './LangMenu.props'
 
 const items = _map(_keys(LANGUAGE_NAMES), (lang) => ({ value: lang, label: LANGUAGE_NAMES[lang] }))
 
@@ -24,7 +23,9 @@ const LangMenu = (props) => {
   )
 }
 
-LangMenu.propTypes = propTypes
-LangMenu.defaultProps = defaultProps
+LangMenu.propTypes = {
+  value: PropTypes.string.isRequired,
+  setLang: PropTypes.func.isRequired,
+}
 
 export default LangMenu
