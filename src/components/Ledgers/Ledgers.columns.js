@@ -5,7 +5,9 @@ import { isEqual } from '@bitfinex/lib-js-util-base'
 import config from 'config'
 import queryConstants from 'state/query/constants'
 import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import {
+  getCell, getCellState, getColumnWidth, getTooltipContent,
+} from 'utils/columns'
 
 const { showFrameworkMode } = config
 const { MENU_FPAYMENT } = queryConstants
@@ -28,11 +30,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(id, t)}>
-          {id}
-        </Cell>
-      )
+      return getCell(id, t)
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   },
@@ -45,11 +43,7 @@ export const getColumns = ({
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { description } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(description, t)}>
-            {description}
-          </Cell>
-        )
+        return getCell(description, t)
       },
       copyText: rowIndex => filteredData[rowIndex].description,
     }
@@ -62,11 +56,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { currency } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(currency, t)}>
-          {currency}
-        </Cell>
-      )
+      return getCell(currency, t)
     },
     copyText: rowIndex => filteredData[rowIndex].currency,
   },
@@ -77,15 +67,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount, currency } = filteredData[rowIndex]
-      const tooltip = getTooltipContent(`${fixedFloat(amount)} ${currency}`, t)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          {formatAmount(amount)}
-        </Cell>
-      )
+      return getCell(formatAmount(amount), t, `${fixedFloat(amount)} ${currency}`)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
@@ -98,15 +80,7 @@ export const getColumns = ({
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { amountUsd } = filteredData[rowIndex]
-        const tooltip = getTooltipContent(`${fixedFloat(amountUsd)} ${t('column.usd')}`, t)
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={tooltip}
-          >
-            {formatAmount(amountUsd)}
-          </Cell>
-        )
+        return getCell(formatAmount(amountUsd), t, `${fixedFloat(amountUsd)} ${t('column.usd')}`)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
@@ -119,16 +93,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { balance, currency } = filteredData[rowIndex]
-      const fixedBalance = fixedFloat(balance)
-      const tooltip = getTooltipContent(`${fixedBalance} ${currency}`, t)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          {fixedBalance}
-        </Cell>
-      )
+      return getCell(fixedFloat(balance), t, `${fixedFloat(balance)} ${currency}`)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
@@ -141,16 +106,7 @@ export const getColumns = ({
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { balanceUsd } = filteredData[rowIndex]
-        const fixedBalanceUsd = fixedFloat(balanceUsd)
-        const tooltip = getTooltipContent(`${fixedBalanceUsd} ${t('column.usd')}`, t)
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={tooltip}
-          >
-            {fixedBalanceUsd}
-          </Cell>
-        )
+        return getCell(fixedFloat(balanceUsd), t, `${fixedFloat(balanceUsd)} ${t('column.usd')}`)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].balanceUsd),
@@ -164,11 +120,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mts)
-      return (
-        <Cell tooltip={getTooltipContent(timestamp, t)}>
-          {timestamp}
-        </Cell>
-      )
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mts),
   },
@@ -180,11 +132,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { wallet } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(wallet, t)}>
-          {wallet}
-        </Cell>
-      )
+      return getCell(wallet, t)
     },
     copyText: rowIndex => filteredData[rowIndex].wallet,
   },
