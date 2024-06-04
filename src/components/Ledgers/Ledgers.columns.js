@@ -1,10 +1,12 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
-import queryConstants from 'state/query/constants'
 import config from 'config'
+import queryConstants from 'state/query/constants'
+import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
 import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+
+const { showFrameworkMode } = config
 
 
 export default function getColumns(props) {
@@ -98,7 +100,7 @@ export default function getColumns(props) {
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
     },
-    ...insertIf(config.showFrameworkMode, (
+    ...insertIf(showFrameworkMode, (
       {
         id: 'amountUsd',
         name: 'column.amountUsd',
