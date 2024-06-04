@@ -1,13 +1,9 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import queryConstants from 'state/query/constants'
 import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
-import {
-  getCell, getCellState, getColumnWidth, getTooltipContent,
-} from 'utils/columns'
+import { getCell, getCellState, getColumnWidth } from 'utils/columns'
 
 const { showFrameworkMode } = config
 const { MENU_FPAYMENT } = queryConstants
