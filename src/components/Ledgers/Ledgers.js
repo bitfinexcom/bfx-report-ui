@@ -26,7 +26,7 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
-import getColumns from './Ledgers.columns'
+import { getColumns } from './Ledgers.columns'
 
 const TYPE = queryConstants.MENU_LEDGERS
 

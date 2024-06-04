@@ -17,7 +17,7 @@ import {
   clearAllSymbols,
 } from 'state/utils'
 
-import getColumns from 'components/Ledgers/Ledgers.columns'
+import { getColumns } from 'components/Ledgers/Ledgers.columns'
 
 const TYPE = queryConstants.MENU_FPAYMENT
 
