@@ -1,5 +1,6 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import queryConstants from 'state/query/constants'
@@ -7,7 +8,7 @@ import { insertIf, fixedFloat, formatAmount } from 'ui/utils'
 import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
 const { showFrameworkMode } = config
-
+const { MENU_FPAYMENT } = queryConstants
 
 export default function getColumns(props) {
   const {
@@ -40,7 +41,7 @@ export default function getColumns(props) {
       },
       copyText: rowIndex => filteredData[rowIndex].id,
     },
-    ...insertIf(target !== queryConstants.MENU_FPAYMENT, (
+    ...insertIf(!isEqual(target, MENU_FPAYMENT), (
       {
         id: 'description',
         name: 'column.description',
@@ -147,7 +148,7 @@ export default function getColumns(props) {
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
     },
-    ...insertIf(config.showFrameworkMode, (
+    ...insertIf(showFrameworkMode, (
       {
         id: 'balanceUsd',
         name: 'column.balanceUsd',
