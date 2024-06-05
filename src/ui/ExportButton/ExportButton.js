@@ -1,20 +1,24 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import PropTypes from 'prop-types'
 import { Button } from '@blueprintjs/core'
 import { IconNames } from '@blueprintjs/icons'
 
-const ExportButton = ({ toggleDialog }) => {
+import { toggleExportDialog } from 'state/ui/actions'
+
+const ExportButton = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    dispatch(toggleExportDialog())
+  }
+
   return (
-    <Button icon={IconNames.CLOUD_DOWNLOAD} onClick={toggleDialog}>
+    <Button icon={IconNames.CLOUD_DOWNLOAD} onClick={handleClick}>
       {t('download.export')}
     </Button>
   )
-}
-
-ExportButton.propTypes = {
-  toggleDialog: PropTypes.func.isRequired,
 }
 
 export default ExportButton
