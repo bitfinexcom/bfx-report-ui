@@ -13,7 +13,7 @@ export const amountStyle = (amount) => {
 export const formatType = (type, amount) => {
   const classes = amountStyle(amount)
   return (
-    /* Fragment fixes blueprint's parentCellHeight warnings */
+    // Fragment fixes blueprint's parentCellHeight warnings
     <>
       <span className={classes}>
         {type}
