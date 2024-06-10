@@ -10,6 +10,18 @@ export const amountStyle = (amount) => {
   })
 }
 
+export const formatType = (type, amount) => {
+  const classes = amountStyle(amount)
+  return (
+    /* Fragment fixes blueprint's parentCellHeight warnings */
+    <>
+      <span className={classes}>
+        {type}
+      </span>
+    </>
+  )
+}
+
 export const insertIf = (condition, ...elements) => (condition ? elements : [])
 
 export const filterSelectorItem = (query, item) => item.toLowerCase().indexOf(query.toLowerCase()) >= 0
