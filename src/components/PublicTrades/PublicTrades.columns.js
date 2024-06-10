@@ -62,18 +62,8 @@ export default function getColumns(props) {
       width: getColumnWidth('price', columnsWidth),
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-        const { price, amount } = filteredData[rowIndex]
-        const color = (amount > 0)
-          ? 'green'
-          : 'red'
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedFloat(price), t)}
-          >
-            {formatAmount(price, { color })}
-          </Cell>
-        )
+        const { price } = filteredData[rowIndex]
+        return getCell(formatAmount(price), t, fixedFloat(price))
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].price),
@@ -85,15 +75,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { amount } = filteredData[rowIndex]
-        const fixedAmount = fixedFloat(amount)
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedAmount, t)}
-          >
-            {formatAmount(amount)}
-          </Cell>
-        )
+        return getCell(formatAmount(amount), t, fixedFloat(amount))
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
@@ -105,12 +87,7 @@ export default function getColumns(props) {
       width: getColumnWidth('pair', columnsWidth),
       renderer: () => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-        const formattedCurrentPair = formatPair(targetPair)
-        return (
-          <Cell tooltip={getTooltipContent(formattedCurrentPair, t)}>
-            {formattedCurrentPair}
-          </Cell>
-        )
+        return getCell(formatPair(targetPair), t)
       },
       copyText: () => formatPair(targetPair),
     },
