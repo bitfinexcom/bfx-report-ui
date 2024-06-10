@@ -52,12 +52,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { type, amount } = filteredData[rowIndex]
-        const formattedType = formatType(type, amount)
-        return (
-          <Cell tooltip={getTooltipContent(type, t)}>
-            {formattedType}
-          </Cell>
-        )
+        return getCell(formatType(type, amount), t, type)
       },
       copyText: rowIndex => filteredData[rowIndex].type,
     },
