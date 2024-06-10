@@ -2,8 +2,10 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import { formatPair } from 'state/symbols/utils'
-import { formatAmount, fixedFloat, amountStyle } from 'ui/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import { formatAmount, fixedFloat, formatType } from 'ui/utils'
+import {
+  getCell, getCellState, getColumnWidth, getTooltipContent,
+} from 'utils/columns'
 
 export default function getColumns(props) {
   const {
@@ -26,11 +28,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { id } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(id, t)}>
-            {id}
-          </Cell>
-        )
+        return getCell(id, t)
       },
       copyText: rowIndex => filteredData[rowIndex].id,
     },
@@ -42,11 +40,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const timestamp = getFullTime(filteredData[rowIndex].mts)
-        return (
-          <Cell tooltip={getTooltipContent(timestamp, t)}>
-            {timestamp}
-          </Cell>
-        )
+        return getCell(timestamp, t)
       },
       copyText: rowIndex => getFullTime(filteredData[rowIndex].mts),
     },
@@ -58,14 +52,10 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { type, amount } = filteredData[rowIndex]
-        const classes = amountStyle(amount)
+        const formattedType = formatType(type, amount)
         return (
           <Cell tooltip={getTooltipContent(type, t)}>
-            <>
-              <span className={classes}>
-                {type}
-              </span>
-            </>
+            {formattedType}
           </Cell>
         )
       },
