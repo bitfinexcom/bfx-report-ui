@@ -1,11 +1,6 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
 import { formatPair } from 'state/symbols/utils'
 import { formatAmount, fixedFloat, formatType } from 'ui/utils'
-import {
-  getCell, getCellState, getColumnWidth, getTooltipContent,
-} from 'utils/columns'
+import { getCell, getCellState, getColumnWidth } from 'utils/columns'
 
 export default function getColumns(props) {
   const {
