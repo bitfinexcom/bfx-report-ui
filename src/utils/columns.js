@@ -235,8 +235,8 @@ export const getCellState = (isLoading, isNoData) => {
   return null
 }
 
-export const getCell = (content, t) => {
-  const tooltipContent = getTooltipContent(content, t)
+export const getCell = (content, t, tooltip) => {
+  const tooltipContent = getTooltipContent(tooltip || content, t)
   return (
     <Cell tooltip={tooltipContent}>
       {content}
