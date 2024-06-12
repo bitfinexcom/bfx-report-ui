@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import { tracker } from 'utils/trackers'
 
@@ -16,7 +17,7 @@ const NavSwitcher = (props) => {
       {items.map((item) => {
         const { label, value: itemValue } = item
         const itemClasses = classNames('nav-switcher-item', {
-          'nav-switcher-item--active': itemValue === activeItem,
+          'nav-switcher-item--active': isEqual(itemValue, activeItem),
         })
 
         return (
