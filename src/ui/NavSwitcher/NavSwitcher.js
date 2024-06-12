@@ -1,8 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import { tracker } from 'utils/trackers'
-import { propTypes, defaultProps } from './NavSwitcher.props'
 
 const NavSwitcher = (props) => {
   const { items, onChange, value: activeItem } = props
@@ -29,7 +29,13 @@ const NavSwitcher = (props) => {
   )
 }
 
-NavSwitcher.propTypes = propTypes
-NavSwitcher.defaultProps = defaultProps
+NavSwitcher.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  })).isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+}
 
 export default NavSwitcher
