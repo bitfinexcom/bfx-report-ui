@@ -26,7 +26,7 @@ import {
   clearAllPairs,
 } from 'state/utils'
 
-import getColumns from './Tickers.columns'
+import { getColumns } from './Tickers.columns'
 import { propTypes, defaultProps } from './Tickers.props'
 
 const TYPE = queryConstants.MENU_TICKERS
