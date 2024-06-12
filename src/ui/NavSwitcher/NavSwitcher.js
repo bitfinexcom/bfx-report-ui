@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import _map from 'lodash/map'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import { tracker } from 'utils/trackers'
@@ -14,7 +15,7 @@ const NavSwitcher = (props) => {
 
   return (
     <div className='nav-switcher'>
-      {items.map((item) => {
+      {_map(items, (item) => {
         const { label, value: itemValue } = item
         const itemClasses = classNames('nav-switcher-item', {
           'nav-switcher-item--active': isEqual(itemValue, activeItem),
