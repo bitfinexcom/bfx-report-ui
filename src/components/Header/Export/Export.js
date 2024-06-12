@@ -1,19 +1,23 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 import Icon from 'icons'
 import { tracker } from 'utils/trackers'
+import { toggleExportDialog } from 'state/ui/actions'
 
-const Export = ({ t, toggleDialog }) => {
+const Export = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
   const toggleExport = () => {
     tracker.trackEvent('Export', 'Navigation')
-    toggleDialog()
+    dispatch(toggleExportDialog())
   }
 
   return (
     <div
       className='export'
-      onClick={() => toggleExport()}
+      onClick={toggleExport}
     >
       <Icon.FILE_EXPORT />
       <span>
@@ -23,9 +27,4 @@ const Export = ({ t, toggleDialog }) => {
   )
 }
 
-Export.propTypes = {
-  t: PropTypes.func.isRequired,
-  toggleDialog: PropTypes.func.isRequired,
-}
-
-export default memo(Export)
+export default Export
