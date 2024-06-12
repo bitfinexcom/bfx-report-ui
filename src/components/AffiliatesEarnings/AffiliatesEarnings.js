@@ -13,7 +13,7 @@ import {
   toggleSymbol,
   clearAllSymbols,
 } from 'state/utils'
-import getColumns from 'components/Ledgers/Ledgers.columns'
+import { getColumns } from 'components/Ledgers/Ledgers.columns'
 
 import AffiliatesLink from './AffiliatesEarnings.link'
 
