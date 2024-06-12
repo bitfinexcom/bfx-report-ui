@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _map from 'lodash/map'
@@ -6,8 +6,11 @@ import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import { tracker } from 'utils/trackers'
 
-const NavSwitcher = (props) => {
-  const { items, onChange, value: activeItem } = props
+const NavSwitcher = ({
+  items,
+  onChange,
+  value: activeItem,
+}) => {
   const handleClick = (itemValue) => {
     tracker.trackEvent(itemValue, 'Tab')
     onChange(itemValue)
@@ -22,7 +25,11 @@ const NavSwitcher = (props) => {
         })
 
         return (
-          <span className={itemClasses} onClick={() => handleClick(itemValue)} key={itemValue}>
+          <span
+            key={itemValue}
+            className={itemClasses}
+            onClick={() => handleClick(itemValue)}
+          >
             {label}
           </span>
         )
@@ -40,4 +47,4 @@ NavSwitcher.propTypes = {
   value: PropTypes.string.isRequired,
 }
 
-export default NavSwitcher
+export default memo(NavSwitcher)
