@@ -1,56 +1,55 @@
-import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { memo } from 'react'
+import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
+import _map from 'lodash/map'
 import _times from 'lodash/times'
 
-class CollapsedTable extends PureComponent {
-  render() {
-    const { numRows, tableColumns, t } = this.props
+const CollapsedTable = ({ numRows, tableColumns }) => {
+  const { t } = useTranslation()
 
-    return (
-      <div className='collapsed-table'>
-        {_times(numRows, rowIndex => (
-          <div className='collapsed-table-item' key={rowIndex}>
-            {tableColumns.map((column) => {
-              const {
-                id, name, nameStr, renderer, description,
-              } = column
-              const cell = renderer(rowIndex)
-              return (
-                <div key={id}>
-                  <div>
-                    {nameStr || t(name)}
-                    <br />
-                    {description && (
-                      <span className='cell-description'>
-                        {t(description)}
-                      </span>
-                    )}
-                  </div>
-                  <div>{cell.props.children}</div>
+  return (
+    <div className='collapsed-table'>
+      {_times(numRows, rowIndex => (
+        <div
+          key={rowIndex}
+          className='collapsed-table-item'
+        >
+          {_map(tableColumns, (column) => {
+            const {
+              id, name, nameStr, renderer, description,
+            } = column
+            const cell = renderer(rowIndex)
+            return (
+              <div key={id}>
+                <div>
+                  {nameStr || t(name)}
+                  <br />
+                  {description && (
+                    <span className='cell-description'>
+                      {t(description)}
+                    </span>
+                  )}
                 </div>
-              )
-            })}
-          </div>
-        ))}
-      </div>
-    )
-  }
+                <div>{cell.props.children}</div>
+              </div>
+            )
+          })}
+        </div>
+      ))}
+    </div>
+  )
 }
-
-const TABLE_COLUMNS_PROPS = PropTypes.shape({
-  name: PropTypes.string,
-  width: PropTypes.number,
-  nameStr: PropTypes.string,
-  id: PropTypes.string.isRequired,
-  renderer: PropTypes.func.isRequired,
-  copyText: PropTypes.func,
-})
 
 CollapsedTable.propTypes = {
-  t: PropTypes.func.isRequired,
   numRows: PropTypes.number.isRequired,
-  tableColumns: PropTypes.arrayOf(TABLE_COLUMNS_PROPS).isRequired,
+  tableColumns: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+    width: PropTypes.number,
+    nameStr: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    renderer: PropTypes.func.isRequired,
+    copyText: PropTypes.func,
+  })).isRequired,
 }
 
-export default withTranslation('translations')(CollapsedTable)
+export default memo(CollapsedTable)
