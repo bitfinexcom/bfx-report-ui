@@ -3,7 +3,9 @@ import { Cell } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
 import { fixedFloat, formatAmount } from 'ui/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import {
+  getCell, getCellState, getColumnWidth, getTooltipContent,
+} from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -22,11 +24,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(id, t)}>
-          {id}
-        </Cell>
-      )
+      return getCell(id, t)
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   },
@@ -37,15 +35,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount, currency } = filteredData[rowIndex]
-      const tooltip = `${fixedFloat(amount)} ${currency}`
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(tooltip, t)}
-        >
-          {formatAmount(amount)}
-        </Cell>
-      )
+      return getCell(formatAmount(amount), t, `${fixedFloat(amount)} ${currency}`)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
@@ -58,11 +48,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { currency } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(currency, t)}>
-          {currency}
-        </Cell>
-      )
+      return getCell(currency, t)
     },
     copyText: rowIndex => filteredData[rowIndex].currency,
   },
@@ -74,11 +60,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { orderId } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(orderId, t)}>
-          {orderId}
-        </Cell>
-      )
+      return getCell(orderId, t)
     },
     copyText: rowIndex => filteredData[rowIndex].orderId,
   },
@@ -108,11 +90,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { status } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(status, t)}>
-          {status}
-        </Cell>
-      )
+      return getCell(status, t)
     },
     copyText: rowIndex => filteredData[rowIndex].status,
   },
@@ -181,11 +159,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { duration } = filteredData[rowIndex]
-      return (
-        <Cell>
-          {duration}
-        </Cell>
-      )
+      return getCell(duration, t)
     },
     copyText: rowIndex => filteredData[rowIndex].duration,
   },
@@ -197,11 +171,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { merchantName } = filteredData[rowIndex]
-      return (
-        <Cell>
-          {merchantName}
-        </Cell>
-      )
+      return getCell(merchantName, t)
     },
     copyText: rowIndex => filteredData[rowIndex].merchantName,
   },
@@ -237,11 +207,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mts)
-      return (
-        <Cell tooltip={getTooltipContent(timestamp, t)}>
-          {timestamp}
-        </Cell>
-      )
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mts),
   },
