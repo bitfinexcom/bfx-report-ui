@@ -3,9 +3,7 @@ import { Cell } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
 import { fixedFloat, formatAmount } from 'ui/utils'
-import {
-  getCell, getCellState, getColumnWidth, getTooltipContent,
-} from 'utils/columns'
+import { getCell, getCellState, getColumnWidth } from 'utils/columns'
 
 export const getColumns = ({
   t,
