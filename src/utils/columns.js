@@ -256,6 +256,21 @@ export const getJsonFormattedCell = (value) => {
   )
 }
 
+export const getLinkCell = (link) => (
+  <Cell>
+    <>
+      <a
+        target='_blank'
+        href={`${link}`}
+        rel='noopener noreferrer'
+      >
+        {link}
+      </a>
+    </>
+  </Cell>
+)
+
+
 export const getRowsConfig = (isLoading, isNoData, numRows = 0) => {
   if (isLoading) return 5
   if (isNoData) return 1
