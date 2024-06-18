@@ -1,9 +1,10 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import JSONFormat from 'ui/JSONFormat'
 import { fixedFloat, formatAmount } from 'ui/utils'
-import { getCell, getCellState, getColumnWidth } from 'utils/columns'
+import {
+  getCell, getJsonFormattedCell, getCellState, getColumnWidth,
+} from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -69,14 +70,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { payCurrencies } = filteredData[rowIndex]
-      const formattedPayCurrenciesInfo = JSON.stringify(payCurrencies, undefined, 2)
-      return (
-        <Cell>
-          <JSONFormat content={formattedPayCurrenciesInfo}>
-            {formattedPayCurrenciesInfo}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(payCurrencies)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].payCurrencies, undefined, 2),
   },
@@ -100,14 +94,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { customerInfo } = filteredData[rowIndex]
-      const formattedCustomerInfo = JSON.stringify(customerInfo, undefined, 2)
-      return (
-        <Cell>
-          <JSONFormat content={formattedCustomerInfo}>
-            {formattedCustomerInfo}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(customerInfo)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].customerInfo, undefined, 2),
   },
@@ -119,14 +106,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { invoices } = filteredData[rowIndex]
-      const formattedInvoicesInfo = JSON.stringify(invoices, undefined, 2)
-      return (
-        <Cell>
-          <JSONFormat content={formattedInvoicesInfo}>
-            {formattedInvoicesInfo}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(invoices)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].invoices, undefined, 2),
   },
@@ -138,14 +118,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { payment } = filteredData[rowIndex]
-      const formattedPayment = JSON.stringify(payment, undefined, 2)
-      return (
-        <Cell>
-          <JSONFormat content={formattedPayment}>
-            {formattedPayment}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(payment)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].payment, undefined, 2),
   },
