@@ -3,6 +3,7 @@ import { Cell } from '@blueprintjs/table'
 
 import {
   getCell,
+  getLinkCell,
   getCellState,
   getColumnWidth,
   getJsonFormattedCell,
@@ -157,19 +158,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { redirectUrl } = filteredData[rowIndex]
-      return (
-        <Cell>
-          <>
-            <a
-              target='_blank'
-              href={`${redirectUrl}`}
-              rel='noopener noreferrer'
-            >
-              {redirectUrl}
-            </a>
-          </>
-        </Cell>
-      )
+      return getLinkCell(redirectUrl)
     },
     copyText: rowIndex => filteredData[rowIndex].redirectUrl,
   },
@@ -193,19 +182,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { webhook } = filteredData[rowIndex]
-      return (
-        <Cell>
-          <>
-            <a
-              target='_blank'
-              href={`${webhook}`}
-              rel='noopener noreferrer'
-            >
-              {webhook}
-            </a>
-          </>
-        </Cell>
-      )
+      return getLinkCell(webhook)
     },
     copyText: rowIndex => filteredData[rowIndex].webhook,
   },
