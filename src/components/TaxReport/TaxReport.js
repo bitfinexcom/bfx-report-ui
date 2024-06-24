@@ -40,18 +40,18 @@ const TaxReport = () => {
   const pageLoading = useSelector(getTransactionsPageLoading)
   const dataReceived = useSelector(getTransactionsDataReceived)
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
+  const isNoData = isEmpty(entries)
+  const isLoading = !dataReceived && pageLoading
 
   useEffect(() => {
-    if (!isSyncRequired) dispatch(fetchTaxReportTransactions())
-  }, [isSyncRequired])
+    if (!isSyncRequired && isNoData) dispatch(fetchTaxReportTransactions())
+  }, [isSyncRequired, isNoData])
 
   const onRefresh = useCallback(
     () => dispatch(fetchTaxReportTransactions()),
     [dispatch],
   )
 
-  const isNoData = isEmpty(entries)
-  const isLoading = !dataReceived && pageLoading
   const columns = useMemo(
     () => getColumns({
       t, entries, isNoData, isLoading, getFullTime, columnsWidth,
