@@ -1,1 +1,1 @@
-export { default } from './ShowMilliseconds.container'
+export { default } from './ShowMilliseconds'
