@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox } from '@blueprintjs/core'
 
@@ -10,16 +10,16 @@ const ShowMilliseconds = () => {
   const dispatch = useDispatch()
   const milliseconds = useSelector(getShowMilliseconds)
 
-  const handleChange = () => {
+  const handleChange = useCallback(() => {
     tracker.trackEvent('Display Milliseconds')
     dispatch(showMilliseconds(!milliseconds))
-  }
+  }, [dispatch, tracker])
 
   return (
     <Checkbox
+      large
       checked={milliseconds}
       onChange={handleChange}
-      large
     />
   )
 }
