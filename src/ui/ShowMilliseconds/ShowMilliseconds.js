@@ -1,16 +1,18 @@
-import React, { memo } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox } from '@blueprintjs/core'
 
 import { tracker } from 'utils/trackers'
+import { showMilliseconds } from 'state/base/actions'
+import { getShowMilliseconds } from 'state/base/selectors'
 
-const ShowMilliseconds = ({
-  milliseconds,
-  showMilliseconds,
-}) => {
+const ShowMilliseconds = () => {
+  const dispatch = useDispatch()
+  const milliseconds = useSelector(getShowMilliseconds)
+
   const handleChange = () => {
     tracker.trackEvent('Display Milliseconds')
-    showMilliseconds(!milliseconds)
+    dispatch(showMilliseconds(!milliseconds))
   }
 
   return (
@@ -22,14 +24,4 @@ const ShowMilliseconds = ({
   )
 }
 
-ShowMilliseconds.propTypes = {
-  milliseconds: PropTypes.bool,
-  showMilliseconds: PropTypes.func,
-}
-
-ShowMilliseconds.defaultProps = {
-  milliseconds: false,
-  showMilliseconds: () => {},
-}
-
-export default memo(ShowMilliseconds)
+export default ShowMilliseconds
