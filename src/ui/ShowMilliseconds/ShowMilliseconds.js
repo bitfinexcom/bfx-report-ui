@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { Checkbox } from '@blueprintjs/core'
 
 import { tracker } from 'utils/trackers'
-
-import { propTypes, defaultProps } from './ShowMilliseconds.props'
 
 class ShowMilliseconds extends PureComponent {
   handleChange = () => {
@@ -29,7 +28,14 @@ class ShowMilliseconds extends PureComponent {
   }
 }
 
-ShowMilliseconds.propTypes = propTypes
-ShowMilliseconds.defaultProps = defaultProps
+ShowMilliseconds.propTypes = {
+  milliseconds: PropTypes.bool,
+  showMilliseconds: PropTypes.func,
+}
+
+ShowMilliseconds.defaultProps = {
+  milliseconds: false,
+  showMilliseconds: () => {},
+}
 
 export default ShowMilliseconds
