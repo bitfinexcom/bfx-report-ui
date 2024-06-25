@@ -1,31 +1,25 @@
-import React, { PureComponent } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Checkbox } from '@blueprintjs/core'
 
 import { tracker } from 'utils/trackers'
 
-class ShowMilliseconds extends PureComponent {
-  handleChange = () => {
-    const {
-      milliseconds,
-      showMilliseconds,
-    } = this.props
+const ShowMilliseconds = ({
+  milliseconds,
+  showMilliseconds,
+}) => {
+  const handleChange = () => {
     tracker.trackEvent('Display Milliseconds')
     showMilliseconds(!milliseconds)
   }
 
-  render() {
-    const {
-      milliseconds,
-    } = this.props
-    return (
-      <Checkbox
-        checked={milliseconds}
-        onChange={this.handleChange}
-        large
-      />
-    )
-  }
+  return (
+    <Checkbox
+      checked={milliseconds}
+      onChange={handleChange}
+      large
+    />
+  )
 }
 
 ShowMilliseconds.propTypes = {
@@ -38,4 +32,4 @@ ShowMilliseconds.defaultProps = {
   showMilliseconds: () => {},
 }
 
-export default ShowMilliseconds
+export default memo(ShowMilliseconds)
