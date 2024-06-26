@@ -13,7 +13,7 @@ const ShowMilliseconds = () => {
   const handleChange = useCallback(() => {
     tracker.trackEvent('Display Milliseconds')
     dispatch(showMilliseconds(!milliseconds))
-  }, [dispatch, tracker])
+  }, [dispatch, tracker, milliseconds])
 
   return (
     <Checkbox
