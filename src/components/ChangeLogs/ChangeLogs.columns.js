@@ -1,8 +1,9 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
-import JSONFormat from 'ui/JSONFormat'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import {
+  getCell,
+  getCellState,
+  getColumnWidth,
+  getJsonFormattedCell,
+} from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -20,11 +21,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
-      return (
-        <Cell tooltip={getTooltipContent(timestamp, t)}>
-          {timestamp}
-        </Cell>
-      )
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsCreate),
   },
@@ -35,11 +32,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { log } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(log, t)}>
-          {log}
-        </Cell>
-      )
+      return getCell(log, t)
     },
     copyText: rowIndex => filteredData[rowIndex].log,
   },
@@ -50,11 +43,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { ip } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(ip, t)}>
-          {ip}
-        </Cell>
-      )
+      return getCell(ip, t)
     },
     copyText: rowIndex => filteredData[rowIndex].ip,
   },
@@ -65,14 +54,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { userAgent } = filteredData[rowIndex]
-
-      return (
-        <Cell>
-          <JSONFormat content={userAgent}>
-            {userAgent}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(userAgent)
     },
     copyText: rowIndex => filteredData[rowIndex].userAgent,
   },
