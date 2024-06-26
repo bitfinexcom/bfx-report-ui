@@ -1,8 +1,9 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
-import JSONFormat from 'ui/JSONFormat'
-import { getCell, getCellState, getColumnWidth } from 'utils/columns'
+import {
+  getCell,
+  getCellState,
+  getColumnWidth,
+  getJsonFormattedCell,
+} from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -93,14 +94,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { extra } = filteredData[rowIndex]
-      const formattedExtra = JSON.stringify(extra, undefined, 2)
-      return (
-        <Cell>
-          <JSONFormat content={formattedExtra}>
-            {formattedExtra}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(extra)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].extra, undefined, 2),
   },
