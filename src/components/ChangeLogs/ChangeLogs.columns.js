@@ -18,9 +18,7 @@ export const getColumns = ({
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mtsCreate', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -35,9 +33,7 @@ export const getColumns = ({
     name: 'column.description',
     width: getColumnWidth('log', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { log } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(log, t)}>
@@ -52,9 +48,7 @@ export const getColumns = ({
     name: 'column.ip',
     width: getColumnWidth('ip', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { ip } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(ip, t)}>
@@ -69,9 +63,7 @@ export const getColumns = ({
     name: 'column.meta',
     width: getColumnWidth('userAgent', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { userAgent } = filteredData[rowIndex]
 
       return (
