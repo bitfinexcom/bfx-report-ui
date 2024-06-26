@@ -2,7 +2,7 @@ import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
 import JSONFormat from 'ui/JSONFormat'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCell, getCellState, getColumnWidth } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -21,11 +21,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(id, t)}>
-          {id}
-        </Cell>
-      )
+      return getCell(id, t)
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   },
@@ -37,11 +33,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].time)
-      return (
-        <Cell tooltip={getTooltipContent(timestamp, t)}>
-          {timestamp}
-        </Cell>
-      )
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].time),
   },
@@ -53,11 +45,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { ip } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(ip, t)}>
-          {ip}
-        </Cell>
-      )
+      return getCell(ip, t)
     },
     copyText: rowIndex => filteredData[rowIndex].ip,
   },
@@ -69,11 +57,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { browser } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(browser, t)}>
-          {browser}
-        </Cell>
-      )
+      return getCell(browser, t)
     },
     copyText: rowIndex => filteredData[rowIndex].browser,
   },
@@ -85,11 +69,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { version } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(version, t)}>
-          {version}
-        </Cell>
-      )
+      return getCell(version, t)
     },
     copyText: rowIndex => filteredData[rowIndex].version,
   },
@@ -101,11 +81,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { mobile } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(mobile, t)}>
-          {mobile}
-        </Cell>
-      )
+      return getCell(mobile, t)
     },
     copyText: rowIndex => filteredData[rowIndex].mobile,
   },
