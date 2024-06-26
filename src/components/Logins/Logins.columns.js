@@ -19,9 +19,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(id, t)}>
@@ -37,9 +35,7 @@ export const getColumns = ({
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('time', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].time)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -55,9 +51,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('ip', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { ip } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(ip, t)}>
@@ -73,9 +67,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('browser', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { browser } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(browser, t)}>
@@ -91,9 +83,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('version', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { version } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(version, t)}>
@@ -109,9 +99,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('mobile', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { mobile } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(mobile, t)}>
@@ -127,9 +115,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('extra', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { extra } = filteredData[rowIndex]
       const formattedExtra = JSON.stringify(extra, undefined, 2)
       return (
