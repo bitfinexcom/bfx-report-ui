@@ -21,7 +21,7 @@ import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
 
-import getColumns from './PublicFunding.columns'
+import { getColumns } from './PublicFunding.columns'
 import { propTypes, defaultProps } from './PublicFunding.props'
 
 const TYPE = queryConstants.MENU_PUBLIC_FUNDING

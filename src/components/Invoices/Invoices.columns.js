@@ -1,9 +1,11 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
-import JSONFormat from 'ui/JSONFormat'
+import {
+  getCell,
+  getLinkCell,
+  getCellState,
+  getColumnWidth,
+  getJsonFormattedCell,
+} from 'utils/columns'
 import { fixedFloat, formatAmount } from 'ui/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -20,15 +22,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(id, t)}>
-          {id}
-        </Cell>
-      )
+      return getCell(id, t)
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   },
@@ -37,19 +33,9 @@ export const getColumns = ({
     name: 'column.amount',
     width: getColumnWidth('amount', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount, currency } = filteredData[rowIndex]
-      const tooltip = `${fixedFloat(amount)} ${currency}`
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(tooltip, t)}
-        >
-          {formatAmount(amount)}
-        </Cell>
-      )
+      return getCell(formatAmount(amount), t, `${fixedFloat(amount)} ${currency}`)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
@@ -60,15 +46,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { currency } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(currency, t)}>
-          {currency}
-        </Cell>
-      )
+      return getCell(currency, t)
     },
     copyText: rowIndex => filteredData[rowIndex].currency,
   },
@@ -78,15 +58,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('orderId', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { orderId } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(orderId, t)}>
-          {orderId}
-        </Cell>
-      )
+      return getCell(orderId, t)
     },
     copyText: rowIndex => filteredData[rowIndex].orderId,
   },
@@ -95,18 +69,9 @@ export const getColumns = ({
     name: 'column.payCurrencies',
     width: getColumnWidth('payCurrencies', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { payCurrencies } = filteredData[rowIndex]
-      const formattedPayCurrenciesInfo = JSON.stringify(payCurrencies, undefined, 2)
-      return (
-        <Cell>
-          <JSONFormat content={formattedPayCurrenciesInfo}>
-            {formattedPayCurrenciesInfo}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(payCurrencies)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].payCurrencies, undefined, 2),
   },
@@ -116,15 +81,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { status } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(status, t)}>
-          {status}
-        </Cell>
-      )
+      return getCell(status, t)
     },
     copyText: rowIndex => filteredData[rowIndex].status,
   },
@@ -134,18 +93,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('customerInfo', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { customerInfo } = filteredData[rowIndex]
-      const formattedCustomerInfo = JSON.stringify(customerInfo, undefined, 2)
-      return (
-        <Cell>
-          <JSONFormat content={formattedCustomerInfo}>
-            {formattedCustomerInfo}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(customerInfo)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].customerInfo, undefined, 2),
   },
@@ -155,18 +105,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('invoices', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { invoices } = filteredData[rowIndex]
-      const formattedInvoicesInfo = JSON.stringify(invoices, undefined, 2)
-      return (
-        <Cell>
-          <JSONFormat content={formattedInvoicesInfo}>
-            {formattedInvoicesInfo}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(invoices)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].invoices, undefined, 2),
   },
@@ -176,18 +117,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('payment', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { payment } = filteredData[rowIndex]
-      const formattedPayment = JSON.stringify(payment, undefined, 2)
-      return (
-        <Cell>
-          <JSONFormat content={formattedPayment}>
-            {formattedPayment}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(payment)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].payment, undefined, 2),
   },
@@ -197,15 +129,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('duration', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { duration } = filteredData[rowIndex]
-      return (
-        <Cell>
-          {duration}
-        </Cell>
-      )
+      return getCell(duration, t)
     },
     copyText: rowIndex => filteredData[rowIndex].duration,
   },
@@ -215,15 +141,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('merchantName', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { merchantName } = filteredData[rowIndex]
-      return (
-        <Cell>
-          {merchantName}
-        </Cell>
-      )
+      return getCell(merchantName, t)
     },
     copyText: rowIndex => filteredData[rowIndex].merchantName,
   },
@@ -233,23 +153,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('redirectUrl', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { redirectUrl } = filteredData[rowIndex]
-      return (
-        <Cell>
-          <>
-            <a
-              target='_blank'
-              href={`${redirectUrl}`}
-              rel='noopener noreferrer'
-            >
-              {redirectUrl}
-            </a>
-          </>
-        </Cell>
-      )
+      return getLinkCell(redirectUrl)
     },
     copyText: rowIndex => filteredData[rowIndex].redirectUrl,
   },
@@ -259,15 +165,9 @@ export const getColumns = ({
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mts', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mts)
-      return (
-        <Cell tooltip={getTooltipContent(timestamp, t)}>
-          {timestamp}
-        </Cell>
-      )
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mts),
   },
@@ -277,23 +177,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('webhook', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { webhook } = filteredData[rowIndex]
-      return (
-        <Cell>
-          <>
-            <a
-              target='_blank'
-              href={`${webhook}`}
-              rel='noopener noreferrer'
-            >
-              {webhook}
-            </a>
-          </>
-        </Cell>
-      )
+      return getLinkCell(webhook)
     },
     copyText: rowIndex => filteredData[rowIndex].webhook,
   },

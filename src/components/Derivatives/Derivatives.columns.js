@@ -1,8 +1,5 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import { getCell, getCellState, getColumnWidth } from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -19,15 +16,9 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('pair', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { pair } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(pair, t)}>
-          {pair}
-        </Cell>
-      )
+      return getCell(pair, t)
     },
     copyText: rowIndex => filteredData[rowIndex].pair,
   },
@@ -36,19 +27,9 @@ export const getColumns = ({
     name: 'column.priceDeriv',
     width: getColumnWidth('price', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { price } = filteredData[rowIndex]
-      const fixedPrice = fixedFloat(price)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(fixedPrice, t)}
-        >
-          {fixedPrice}
-        </Cell>
-      )
+      return getCell(fixedFloat(price), t)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].price),
@@ -58,19 +39,9 @@ export const getColumns = ({
     name: 'column.priceSpot',
     width: getColumnWidth('priceSpot', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { priceSpot } = filteredData[rowIndex]
-      const fixedPrice = fixedFloat(priceSpot)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(fixedPrice, t)}
-        >
-          {fixedPrice}
-        </Cell>
-      )
+      return getCell(fixedFloat(priceSpot), t)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].priceSpot),
@@ -80,19 +51,9 @@ export const getColumns = ({
     name: 'column.fundBalance',
     width: getColumnWidth('fundBal', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { fundBal } = filteredData[rowIndex]
-      const fixedBalance = fixedFloat(fundBal)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(fixedBalance, t)}
-        >
-          {fixedBalance}
-        </Cell>
-      )
+      return getCell(fixedFloat(fundBal), t)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].fundBal),
@@ -102,19 +63,9 @@ export const getColumns = ({
     name: 'column.fundingAccrued',
     width: getColumnWidth('fundingAccrued', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { fundingAccrued } = filteredData[rowIndex]
-      const fixedFunding = fixedFloat(fundingAccrued)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(fixedFunding, t)}
-        >
-          {formatAmount(fundingAccrued)}
-        </Cell>
-      )
+      return getCell(formatAmount(fundingAccrued), t, fixedFloat(fundingAccrued))
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].fundingAccrued),
@@ -124,18 +75,9 @@ export const getColumns = ({
     name: 'column.fundingStep',
     width: getColumnWidth('fundingStep', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { fundingStep } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(fundingStep, t)}
-        >
-          {fundingStep}
-        </Cell>
-      )
+      return getCell(fundingStep, t)
     },
     copyText: rowIndex => filteredData[rowIndex].fundingStep,
   },
@@ -145,15 +87,9 @@ export const getColumns = ({
     nameStr: `${t('column.updated')} (${timeOffset})`,
     width: getColumnWidth('timestamp', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].timestamp)
-      return (
-        <Cell tooltip={getTooltipContent(timestamp, t)}>
-          {timestamp}
-        </Cell>
-      )
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].timestamp),
   },
@@ -162,18 +98,9 @@ export const getColumns = ({
     name: 'column.clampMin',
     width: getColumnWidth('clampMin', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { clampMin } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(clampMin, t)}
-        >
-          {clampMin}
-        </Cell>
-      )
+      return getCell(clampMin, t)
     },
     copyText: rowIndex => filteredData[rowIndex].clampMin,
   },
@@ -182,18 +109,9 @@ export const getColumns = ({
     name: 'column.clampMax',
     width: getColumnWidth('clampMax', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { clampMax } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(clampMax, t)}
-        >
-          {clampMax}
-        </Cell>
-      )
+      return getCell(clampMax, t)
     },
     copyText: rowIndex => filteredData[rowIndex].clampMax,
   },
