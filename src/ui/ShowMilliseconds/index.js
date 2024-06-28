@@ -1,3 +1,1 @@
-import ShowMilliseconds from './ShowMilliseconds.container'
-
-export default ShowMilliseconds
+export { default } from './ShowMilliseconds'
