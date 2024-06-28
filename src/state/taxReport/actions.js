@@ -27,8 +27,16 @@ export function setTransactionsStrategy(payload) {
   }
 }
 
+export function setShowDisclaimer(payload) {
+  return {
+    type: types.SET_SHOW_DISCLAIMER,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
+  setShowDisclaimer,
   setTransactionsStrategy,
   fetchTaxReportTransactions,
   updateTaxReportTransactions,
