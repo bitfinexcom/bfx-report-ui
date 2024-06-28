@@ -23,6 +23,7 @@ export function taxReportReducer(state = initialState, action) {
         transactions: {
           pageLoading: true,
           strategy: state.transactions.strategy,
+          showDisclaimer: state.transactions.showDisclaimer,
         },
       }
     case types.UPDATE_TRANSACTIONS: {
@@ -33,6 +34,7 @@ export function taxReportReducer(state = initialState, action) {
           pageLoading: false,
           data: payload,
           strategy: state.transactions.strategy,
+          showDisclaimer: state.transactions.showDisclaimer,
         },
       }
     }
