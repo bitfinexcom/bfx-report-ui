@@ -6,6 +6,7 @@ const transactionsInitState = {
   data: [],
   pageLoading: false,
   dataReceived: false,
+  showDisclaimer: true,
   strategy: types.STRATEGY_LIFO,
 }
 
@@ -41,6 +42,15 @@ export function taxReportReducer(state = initialState, action) {
         transactions: {
           ...state.transactions,
           strategy: payload,
+        },
+      }
+    }
+    case types.SET_SHOW_DISCLAIMER: {
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          showDisclaimer: payload,
         },
       }
     }
