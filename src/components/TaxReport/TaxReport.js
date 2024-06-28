@@ -20,6 +20,7 @@ import {
   getTransactionsData,
   getTransactionsPageLoading,
   getTransactionsDataReceived,
+  getTransactionsShowDisclaimer,
 } from 'state/taxReport/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
@@ -40,9 +41,12 @@ const TaxReport = () => {
   const isSyncRequired = useSelector(getIsSyncRequired)
   const pageLoading = useSelector(getTransactionsPageLoading)
   const dataReceived = useSelector(getTransactionsDataReceived)
+  const showDisclaimer = useSelector(getTransactionsShowDisclaimer)
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
+
+  console.log('++showDisclaimer', showDisclaimer)
 
   useEffect(() => {
     if (!isSyncRequired && isNoData) dispatch(fetchTaxReportTransactions())
@@ -94,9 +98,11 @@ const TaxReport = () => {
         <SectionHeaderTitle>
           {t('taxreport.title')}
         </SectionHeaderTitle>
-        <SectionHeaderRow>
-          <Disclaimer />
-        </SectionHeaderRow>
+        {showDisclaimer && (
+          <SectionHeaderRow>
+            <Disclaimer />
+          </SectionHeaderRow>
+        )}
         <SectionHeaderRow>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
