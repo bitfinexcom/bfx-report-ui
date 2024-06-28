@@ -27,6 +27,7 @@ import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
 
 import queryConstants from 'state/query/constants'
 
+import Disclaimer from './TaxReport.disclaimer'
 import { getColumns } from './TaxReport.columns'
 
 const TYPE = queryConstants.MENU_TAX_REPORT
@@ -93,6 +94,9 @@ const TaxReport = () => {
         <SectionHeaderTitle>
           {t('taxreport.title')}
         </SectionHeaderTitle>
+        <SectionHeaderRow>
+          <Disclaimer />
+        </SectionHeaderRow>
         <SectionHeaderRow>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
