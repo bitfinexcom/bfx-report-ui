@@ -46,8 +46,6 @@ const TaxReport = () => {
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
 
-  console.log('++showDisclaimer', showDisclaimer)
-
   useEffect(() => {
     if (!isSyncRequired && isNoData) dispatch(fetchTaxReportTransactions())
   }, [isSyncRequired, isNoData])
