@@ -1,1 +1,1 @@
-export { default } from './TaxReport.container'
+export { default } from './TaxReport'
