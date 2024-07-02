@@ -1,3 +1,1 @@
-import CollapsedTable from './CollapsedTable'
-
-export default CollapsedTable
+export { default } from './CollapsedTable'

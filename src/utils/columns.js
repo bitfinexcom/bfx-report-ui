@@ -10,6 +10,7 @@ import _forEach from 'lodash/forEach'
 import { Cell } from '@blueprintjs/table'
 import { get, pick, isEqual } from '@bitfinex/lib-js-util-base'
 
+import JSONFormat from 'ui/JSONFormat'
 import { formatAmount, fixedFloat } from 'ui/utils'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 
@@ -234,6 +235,41 @@ export const getCellState = (isLoading, isNoData) => {
   if (isNoData) return getCellNoData()
   return null
 }
+
+export const getCell = (content, t, tooltip) => {
+  const tooltipContent = getTooltipContent(tooltip || content, t)
+  return (
+    <Cell tooltip={tooltipContent}>
+      {content}
+    </Cell>
+  )
+}
+
+export const getJsonFormattedCell = (value) => {
+  const formattedValue = JSON.stringify(value, undefined, 2)
+  return (
+    <Cell>
+      <JSONFormat content={formattedValue}>
+        {formattedValue }
+      </JSONFormat>
+    </Cell>
+  )
+}
+
+export const getLinkCell = (link) => (
+  <Cell>
+    <>
+      <a
+        target='_blank'
+        href={`${link}`}
+        rel='noopener noreferrer'
+      >
+        {link}
+      </a>
+    </>
+  </Cell>
+)
+
 
 export const getRowsConfig = (isLoading, isNoData, numRows = 0) => {
   if (isLoading) return 5

@@ -20,7 +20,7 @@ import SyncPrefButton from 'ui/SyncPrefButton'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch, setPair } from 'state/utils'
 
-import getColumns from './PublicTrades.columns'
+import { getColumns } from './PublicTrades.columns'
 import { propTypes, defaultProps } from './PublicTrades.props'
 
 const TYPE = queryConstants.MENU_PUBLIC_TRADES

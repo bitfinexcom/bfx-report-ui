@@ -1,35 +1,27 @@
-import React, { PureComponent } from 'react'
+import React, { useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox } from '@blueprintjs/core'
 
 import { tracker } from 'utils/trackers'
+import { showMilliseconds } from 'state/base/actions'
+import { getShowMilliseconds } from 'state/base/selectors'
 
-import { propTypes, defaultProps } from './ShowMilliseconds.props'
+const ShowMilliseconds = () => {
+  const dispatch = useDispatch()
+  const milliseconds = useSelector(getShowMilliseconds)
 
-class ShowMilliseconds extends PureComponent {
-  handleChange = () => {
-    const {
-      milliseconds,
-      showMilliseconds,
-    } = this.props
+  const handleChange = useCallback(() => {
     tracker.trackEvent('Display Milliseconds')
-    showMilliseconds(!milliseconds)
-  }
+    dispatch(showMilliseconds(!milliseconds))
+  }, [dispatch, tracker, milliseconds])
 
-  render() {
-    const {
-      milliseconds,
-    } = this.props
-    return (
-      <Checkbox
-        checked={milliseconds}
-        onChange={this.handleChange}
-        large
-      />
-    )
-  }
+  return (
+    <Checkbox
+      large
+      checked={milliseconds}
+      onChange={handleChange}
+    />
+  )
 }
-
-ShowMilliseconds.propTypes = propTypes
-ShowMilliseconds.defaultProps = defaultProps
 
 export default ShowMilliseconds
