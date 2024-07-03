@@ -57,7 +57,14 @@ export function taxReportReducer(state = initialState, action) {
       }
     }
     case types.FETCH_FAIL:
-      return state
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          dataReceived: false,
+          pageLoading: false,
+        },
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {
