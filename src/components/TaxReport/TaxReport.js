@@ -48,7 +48,7 @@ const TaxReport = () => {
 
   useEffect(() => {
     if (!isSyncRequired && isNoData) dispatch(fetchTaxReportTransactions())
-  }, [isSyncRequired, isNoData])
+  }, [isSyncRequired])
 
   const onRefresh = useCallback(
     () => dispatch(fetchTaxReportTransactions()),
