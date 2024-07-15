@@ -20,6 +20,7 @@ import {
   getTransactionsData,
   getTransactionsPageLoading,
   getTransactionsDataReceived,
+  getTransactionsShowDisclaimer,
 } from 'state/taxReport/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
@@ -27,6 +28,7 @@ import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
 
 import queryConstants from 'state/query/constants'
 
+import Disclaimer from './TaxReport.disclaimer'
 import { getColumns } from './TaxReport.columns'
 
 const TYPE = queryConstants.MENU_TAX_REPORT
@@ -39,6 +41,7 @@ const TaxReport = () => {
   const isSyncRequired = useSelector(getIsSyncRequired)
   const pageLoading = useSelector(getTransactionsPageLoading)
   const dataReceived = useSelector(getTransactionsDataReceived)
+  const showDisclaimer = useSelector(getTransactionsShowDisclaimer)
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
@@ -87,12 +90,17 @@ const TaxReport = () => {
   return (
     <Card
       elevation={Elevation.ZERO}
-      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+      className='tax-report col-lg-12 col-md-12 col-sm-12 col-xs-12'
     >
       <SectionHeader>
         <SectionHeaderTitle>
           {t('taxreport.title')}
         </SectionHeaderTitle>
+        {showDisclaimer && (
+          <SectionHeaderRow>
+            <Disclaimer />
+          </SectionHeaderRow>
+        )}
         <SectionHeaderRow>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
