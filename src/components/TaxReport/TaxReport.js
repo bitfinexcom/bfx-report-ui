@@ -1,95 +1,120 @@
-import React, { PureComponent } from 'react'
+import React, { useMemo, useEffect, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
+import DataTable from 'ui/DataTable'
 import {
   SectionHeader,
+  SectionHeaderRow,
+  SectionHeaderItem,
   SectionHeaderTitle,
+  SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
-import NavSwitcher from 'ui/NavSwitcher'
+import RefreshButton from 'ui/RefreshButton'
+import TaxStrategySelector from 'ui/TaxStrategySelector'
+import { fetchTaxReportTransactions } from 'state/taxReport/actions'
+import {
+  getTransactionsData,
+  getTransactionsPageLoading,
+  getTransactionsDataReceived,
+} from 'state/taxReport/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
+import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
 
-import Result from './Result'
-import Snapshot from './Snapshot'
-import { propTypes } from './TaxReport.props'
-import TAX_REPORT_SECTIONS from './TaxReport.sections'
+import queryConstants from 'state/query/constants'
 
-const {
-  START_SNAPSHOT,
-  END_SNAPSHOT,
-  RESULT,
-} = TAX_REPORT_SECTIONS
+import { getColumns } from './TaxReport.columns'
 
-const SECTIONS_URL = {
-  START_SNAPSHOT: '/tax_report/start_snapshot',
-  END_SNAPSHOT: '/tax_report/end_snapshot',
-  RESULT: '/tax_report/result',
-}
+const TYPE = queryConstants.MENU_TAX_REPORT
 
-class TaxReport extends PureComponent {
-  switchSection = (section) => {
-    const { history } = this.props
+const TaxReport = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const entries = useSelector(getTransactionsData)
+  const getFullTime = useSelector(getFullTimeSelector)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const pageLoading = useSelector(getTransactionsPageLoading)
+  const dataReceived = useSelector(getTransactionsDataReceived)
+  const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
+  const isNoData = isEmpty(entries)
+  const isLoading = !dataReceived && pageLoading
 
-    const path = this.getSectionURL(section)
-    history.push(`${path}${window.location.search}`)
-  }
+  useEffect(() => {
+    if (!isSyncRequired && isNoData) dispatch(fetchTaxReportTransactions())
+  }, [isSyncRequired, isNoData])
 
-  getSection = (section) => {
-    switch (section) {
-      case START_SNAPSHOT:
-        return <Snapshot key={START_SNAPSHOT} />
-      case END_SNAPSHOT:
-        return <Snapshot key={END_SNAPSHOT} />
-      case RESULT:
-      default:
-        return <Result />
-    }
-  }
+  const onRefresh = useCallback(
+    () => dispatch(fetchTaxReportTransactions()),
+    [dispatch],
+  )
 
-  getSectionURL = (section) => {
-    switch (section) {
-      case START_SNAPSHOT:
-        return `${SECTIONS_URL.START_SNAPSHOT}/positions`
-      case END_SNAPSHOT:
-        return `${SECTIONS_URL.END_SNAPSHOT}/positions`
-      case RESULT:
-        return SECTIONS_URL.RESULT
-      default:
-        return ''
-    }
-  }
+  const columns = useMemo(
+    () => getColumns({
+      t, entries, isNoData, isLoading, getFullTime, columnsWidth,
+    }),
+    [t, entries, isNoData, isLoading, getFullTime, columnsWidth],
+  )
 
-  render() {
-    const { match, t } = this.props
-    const { section = RESULT } = match.params
-
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='tax-report col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader>
-          <SectionHeaderTitle>
-            {t('taxreport.title')}
-          </SectionHeaderTitle>
-          <TimeRange className='section-header-time-range' />
-        </SectionHeader>
-
-        <NavSwitcher
-          items={[
-            { value: START_SNAPSHOT, label: t('taxreport.sections.startSnapshot') },
-            { value: END_SNAPSHOT, label: t('taxreport.sections.endSnapshot') },
-            { value: RESULT, label: t('taxreport.sections.finalResult') },
-          ]}
-          onChange={this.switchSection}
-          value={section}
+  let showContent
+  if (isNoData) {
+    showContent = (
+      <div className='data-table-wrapper'>
+        <DataTable
+          section={TYPE}
+          isNoData={isNoData}
+          isLoading={isLoading}
+          tableColumns={columns}
+          numRows={isLoading ? 5 : 1}
         />
-
-        {this.getSection(section)}
-      </Card>
+      </div>
+    )
+  } else {
+    showContent = (
+      <>
+        <DataTable
+          section={TYPE}
+          tableColumns={columns}
+          numRows={isLoading ? 5 : entries.length}
+        />
+      </>
     )
   }
-}
 
-TaxReport.propTypes = propTypes
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('taxreport.title')}
+        </SectionHeaderTitle>
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.date')}
+            </SectionHeaderItemLabel>
+            <TimeRange className='section-header-time-range' />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.strategy')}
+            </SectionHeaderItemLabel>
+            <TaxStrategySelector />
+          </SectionHeaderItem>
+          <RefreshButton
+            onClick={onRefresh}
+            disabled={isLoading}
+          />
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
+}
 
 export default TaxReport
