@@ -4,9 +4,11 @@ import _sum from 'lodash/sum'
 import _size from 'lodash/size'
 import _head from 'lodash/head'
 import _fill from 'lodash/fill'
+import _replace from 'lodash/replace'
 import _floor from 'lodash/floor'
 import _filter from 'lodash/filter'
 import _forEach from 'lodash/forEach'
+import _capitalize from 'lodash/capitalize'
 import { Cell } from '@blueprintjs/table'
 import { get, pick, isEqual } from '@bitfinex/lib-js-util-base'
 
@@ -671,6 +673,8 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
+export const formatSourceType = (type) => _replace(_capitalize(type), '_', ' ') 
+
 export const MIN_COLUMN_WIDTH = 125
 export const WIDE_COLUMN_DEFAULT_WIDTH = 300
 export const DEFAULT_CONTAINER_WIDTH = 1000
@@ -721,4 +725,5 @@ export default {
   formatSumUpValue,
   getTooltipContent,
   getCalculatedColumnWidths,
+  formatSourceType,
 }
