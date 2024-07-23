@@ -6,7 +6,7 @@ import {
 } from 'redux-saga/effects'
 
 import { makeFetchCall } from 'state/utils'
-import { updateErrorStatus } from 'state/status/actions'
+import { updateSuccessStatus, updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
@@ -46,6 +46,7 @@ function* handleTaxTrxReportGenerationCompleted({ payload }) {
   const { result, error } = payload
   if (result) {
     yield put(actions.updateTaxReportTransactions(result))
+    yield put(updateSuccessStatus({ id: 'taxreport.generation.success' }))
   }
   if (error) {
     yield put(actions.fetchFail({
