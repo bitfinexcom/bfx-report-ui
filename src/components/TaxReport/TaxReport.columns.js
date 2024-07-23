@@ -1,6 +1,11 @@
 import { mapSymbol } from 'state/symbols/utils'
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getCell, getCellState, getColumnWidth } from 'utils/columns'
+import {
+  getCell,
+  getCellState,
+  getColumnWidth,
+  formatSourceType,
+} from 'utils/columns'
 
 export const getColumns = ({
   t,
@@ -21,6 +26,18 @@ export const getColumns = ({
       return getCell(mapSymbol(asset), t)
     },
     copyText: rowIndex => mapSymbol(entries[rowIndex].asset),
+  },
+  {
+    id: 'type',
+    width: getColumnWidth('type', columnsWidth),
+    name: 'taxreport.cols.source',
+    className: 'align-left',
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { type } = entries[rowIndex]
+      return getCell(formatSourceType(type), t)
+    },
+    copyText: rowIndex => formatSourceType(entries[rowIndex].type),
   },
   {
     id: 'amount',
