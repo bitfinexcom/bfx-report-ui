@@ -673,7 +673,7 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
-export const formatSourceType = (type) => _replace(_capitalize(type), '_', ' ') 
+export const formatSourceType = (type) => _replace(_capitalize(type), '_', ' ')
 
 export const MIN_COLUMN_WIDTH = 125
 export const WIDE_COLUMN_DEFAULT_WIDTH = 300
