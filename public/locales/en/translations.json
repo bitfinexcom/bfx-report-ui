@@ -735,6 +735,7 @@
     "movements": "Movements",
     "cols": {
       "currency": "Currency",
+      "source": "Source",
       "amount": "Amount",
       "dateAcquired": "Date Acquired ",
       "dateSold": "Date Sold",
