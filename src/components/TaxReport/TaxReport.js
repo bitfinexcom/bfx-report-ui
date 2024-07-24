@@ -28,6 +28,7 @@ import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
 
 import queryConstants from 'state/query/constants'
 
+import Loader from './TaxReport.loader'
 import Disclaimer from './TaxReport.disclaimer'
 import { getColumns } from './TaxReport.columns'
 
@@ -64,7 +65,9 @@ const TaxReport = () => {
   )
 
   let showContent
-  if (isNoData) {
+  if (isLoading) {
+    showContent = <Loader />
+  } else if (isNoData) {
     showContent = (
       <div className='data-table-wrapper'>
         <DataTable
