@@ -8,6 +8,7 @@ export const getTransactionsPageLoading = state => getTaxTransactions(state)?.pa
 export const getTransactionsDataReceived = state => getTaxTransactions(state)?.dataReceived ?? false
 export const getTransactionsStrategy = state => getTaxTransactions(state)?.strategy ?? types.STRATEGY_LIFO
 export const getTransactionsShowDisclaimer = state => getTaxTransactions(state)?.showDisclaimer ?? false
+export const getTransactionsGenerationProgress = state => getTaxTransactions(state)?.progress ?? null
 
 export default {
   getTaxReport,
@@ -17,4 +18,5 @@ export default {
   getTransactionsPageLoading,
   getTransactionsDataReceived,
   getTransactionsShowDisclaimer,
+  getTransactionsGenerationProgress,
 }
