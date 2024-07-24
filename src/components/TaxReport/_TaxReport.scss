@@ -33,3 +33,47 @@
     position: absolute;
   }
 }
+
+.loading {
+  &.bp3-spinner {
+    display: block;
+  }
+
+  &-container {
+    height: 60%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-progress {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  .loading {
+    margin: 255px auto 0 auto;
+
+    &.bp3-spinner {
+      width: 100px;
+      height: 100px;
+
+      svg {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .loading {
+    margin: 55px auto 0 auto;
+  }
+}
+
