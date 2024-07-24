@@ -35,9 +35,9 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { type } = entries[rowIndex]
-      return getCell(formatSourceType(type), t)
+      return getCell(formatSourceType(type, t), t)
     },
-    copyText: rowIndex => formatSourceType(entries[rowIndex].type),
+    copyText: rowIndex => formatSourceType(entries[rowIndex].type, t),
   },
   {
     id: 'amount',
