@@ -7,5 +7,6 @@ export default {
 
   STRATEGY_LIFO: 'LIFO',
   STRATEGY_FIFO: 'FIFO',
+  WS_TAX_TRANSACTION_REPORT_GENERATION_PROGRESS: 'ws_emitTrxTaxReportGenerationProgressToOne',
   WS_TAX_TRANSACTION_REPORT_GENERATION_COMPLETED: 'ws_emitTrxTaxReportGenerationInBackgroundToOne',
 }
