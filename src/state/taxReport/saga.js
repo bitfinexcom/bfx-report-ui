@@ -57,8 +57,17 @@ function* handleTaxTrxReportGenerationCompleted({ payload }) {
   }
 }
 
+function* handleTaxTrxReportGenerationProgress({ payload }) {
+  const { result } = payload
+  if (result) {
+    const { progress } = result
+    yield put(actions.setGenerationProgress(progress))
+  }
+}
+
 export default function* taxReportSaga() {
   yield takeLatest(types.FETCH_FAIL, fetchTaxReportFail)
   yield takeLatest([types.FETCH_TRANSACTIONS], fetchTaxReport)
+  yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_PROGRESS, handleTaxTrxReportGenerationProgress)
   yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_COMPLETED, handleTaxTrxReportGenerationCompleted)
 }
