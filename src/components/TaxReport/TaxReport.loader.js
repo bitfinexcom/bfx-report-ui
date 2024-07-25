@@ -13,13 +13,15 @@ export const Loader = () => {
 
   return (
     <div className='loading-container'>
-      <div className='loading-progress'>
-        {spinnerContent}
+      <div className='spinner-wrapper'>
+        <div className='loading-progress'>
+          {spinnerContent}
+        </div>
+        <Spinner
+          className='loading'
+          size={Spinner.SIZE_STANDARD}
+        />
       </div>
-      <Spinner
-        className='loading'
-        size={Spinner.SIZE_STANDARD}
-      />
       <div className='loading-note'>
         <p>{t('taxreport.generation.title')}</p>
         <p>{t('taxreport.generation.note')}</p>
