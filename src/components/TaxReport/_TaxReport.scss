@@ -16,10 +16,17 @@
   
     &-container {
       height: 60%;
-      position: relative;
       display: flex;
+      position: relative;
       align-items: center;
+      flex-direction: column;
       justify-content: center;
+
+      .spinner-wrapper {
+        display: flex;
+        position: relative;
+        margin-bottom: 20px;
+      }
     }
   
     &-progress {
@@ -28,6 +35,11 @@
       position: absolute;
       line-height: initial;
       transform: translate(-50%, -50%);
+    }
+
+    &-note {
+      min-width: 340px;
+      text-align: center;
     }
   }
 }
@@ -56,26 +68,3 @@
     position: absolute;
   }
 }
-
-@media screen and (min-width: 2560px) {
-  .loading {
-    margin: 255px auto 0 auto;
-
-    &.bp3-spinner {
-      width: 100px;
-      height: 100px;
-
-      svg {
-        width: 100px;
-        height: 100px;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 390px) {
-  .loading {
-    margin: 55px auto 0 auto;
-  }
-}
-
