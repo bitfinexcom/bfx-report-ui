@@ -50,7 +50,7 @@ const TaxReport = () => {
 
   useEffect(() => {
     if (shouldFetchTaxReport) dispatch(fetchTaxReportTransactions())
-  }, [shouldFetchTaxReport])
+  }, [])
 
   const onRefresh = useCallback(
     () => dispatch(fetchTaxReportTransactions()),
