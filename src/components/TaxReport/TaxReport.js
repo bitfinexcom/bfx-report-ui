@@ -46,11 +46,11 @@ const TaxReport = () => {
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
-  const shouldFetchTaxReport = !isSyncRequired && isNoData && !isLoading
+  const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
 
   useEffect(() => {
     if (shouldFetchTaxReport) dispatch(fetchTaxReportTransactions())
-  }, [])
+  }, [shouldFetchTaxReport])
 
   const onRefresh = useCallback(
     () => dispatch(fetchTaxReportTransactions()),
