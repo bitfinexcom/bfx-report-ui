@@ -31,10 +31,10 @@ export function taxReportReducer(state = initialState, action) {
       return {
         ...state,
         transactions: {
-          dataReceived: true,
-          pageLoading: false,
           data: payload,
           progress: null,
+          pageLoading: false,
+          dataReceived: true,
           strategy: state.transactions.strategy,
           showDisclaimer: state.transactions.showDisclaimer,
         },
@@ -72,9 +72,9 @@ export function taxReportReducer(state = initialState, action) {
         ...state,
         transactions: {
           ...state.transactions,
-          dataReceived: false,
-          pageLoading: false,
           progress: null,
+          pageLoading: false,
+          dataReceived: true,
         },
       }
     case authTypes.LOGOUT:
