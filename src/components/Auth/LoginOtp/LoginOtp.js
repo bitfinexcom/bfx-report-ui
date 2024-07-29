@@ -55,7 +55,7 @@ export const LoginOtp = ({
           intent={Intent.SUCCESS}
           className='bitfinex-auth-check'
           onClick={handleOneTimePassword}
-          disabled={isEmpty(otp || isAuthBtnDisabled)}
+          disabled={isEmpty(otp) || isAuthBtnDisabled}
         >
           {t('auth.2FA.auth')}
         </Button>
