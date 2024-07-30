@@ -4,6 +4,7 @@ import types from './constants'
 
 const transactionsInitState = {
   data: [],
+  progress: null,
   pageLoading: false,
   dataReceived: false,
   showDisclaimer: true,
@@ -30,9 +31,10 @@ export function taxReportReducer(state = initialState, action) {
       return {
         ...state,
         transactions: {
-          dataReceived: true,
-          pageLoading: false,
           data: payload,
+          progress: null,
+          pageLoading: false,
+          dataReceived: true,
           strategy: state.transactions.strategy,
           showDisclaimer: state.transactions.showDisclaimer,
         },
@@ -56,13 +58,23 @@ export function taxReportReducer(state = initialState, action) {
         },
       }
     }
+    case types.SET_GENERATION_PROGRESS: {
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          progress: payload,
+        },
+      }
+    }
     case types.FETCH_FAIL:
       return {
         ...state,
         transactions: {
           ...state.transactions,
-          dataReceived: false,
+          progress: null,
           pageLoading: false,
+          dataReceived: true,
         },
       }
     case authTypes.LOGOUT:

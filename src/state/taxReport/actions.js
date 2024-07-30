@@ -34,9 +34,17 @@ export function setShowDisclaimer(payload) {
   }
 }
 
+export function setGenerationProgress(payload) {
+  return {
+    type: types.SET_GENERATION_PROGRESS,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   setShowDisclaimer,
+  setGenerationProgress,
   setTransactionsStrategy,
   fetchTaxReportTransactions,
   updateTaxReportTransactions,
