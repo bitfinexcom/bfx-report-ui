@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import useKeyDown from 'hooks/useKeyDown'
 import { getIsAuthBtnDisabled } from 'state/auth/selectors'
@@ -26,7 +26,7 @@ export const LoginOtp = ({
   }, ['Enter'])
 
   useEffect(() => {
-    if (otp?.length === 6) {
+    if (isEqual(otp?.length, 6) && !isAuthBtnDisabled) {
       handleOneTimePassword()
     }
   }, [otp])
@@ -55,7 +55,7 @@ export const LoginOtp = ({
           intent={Intent.SUCCESS}
           className='bitfinex-auth-check'
           onClick={handleOneTimePassword}
-          disabled={isEmpty(otp || isAuthBtnDisabled)}
+          disabled={isEmpty(otp) || isAuthBtnDisabled}
         >
           {t('auth.2FA.auth')}
         </Button>
