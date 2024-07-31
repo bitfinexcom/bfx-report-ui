@@ -1,3 +1,1 @@
-import TimeFrameSelector from './TimeFrameSelector'
-
-export default TimeFrameSelector
+export { default } from './TimeFrameSelector'
