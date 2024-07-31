@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -13,11 +13,9 @@ const getItems = (t) => [
   { value: constants.YEAR, label: t('timeframe.year') },
 ]
 
-const TimeFrameSelector = (props) => {
-  const { onChange, value } = props
+const TimeFrameSelector = ({ onChange, value }) => {
   const { t } = useTranslation()
-
-  const items = getItems(t)
+  const items = useMemo(() => getItems(t), [t])
 
   return (
     <Select
