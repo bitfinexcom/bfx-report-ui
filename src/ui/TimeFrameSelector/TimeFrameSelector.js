@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -33,4 +33,4 @@ TimeFrameSelector.propTypes = {
   onChange: PropTypes.func.isRequired,
 }
 
-export default TimeFrameSelector
+export default memo(TimeFrameSelector)
