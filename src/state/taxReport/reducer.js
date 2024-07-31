@@ -1,184 +1,82 @@
 import authTypes from 'state/auth/constants'
-import {
-  getFrameworkPositionsEntries,
-  getFrameworkPositionsTickersEntries,
-  getWalletsTickersEntries,
-  getWalletsEntries,
-} from 'state/utils'
-import { mapSymbol } from 'state/symbols/utils'
-import timeRangeTypes from 'state/timeRange/constants'
-import TAX_REPORT_SECTIONS from 'components/TaxReport/TaxReport.sections'
 
 import types from './constants'
 
-const snapshotInitState = {
-  dataReceived: false,
+const transactionsInitState = {
+  data: [],
+  progress: null,
   pageLoading: false,
-  positionsTotalPlUsd: null,
-  positionsEntries: [],
-  positionsTickersEntries: [],
-  walletsTotalBalanceUsd: null,
-  walletsTickersEntries: [],
-  walletsEntries: [],
-}
-
-const finalResultInitState = {
   dataReceived: false,
-  pageLoading: false,
-  startingPositionsSnapshot: [],
-  endingPositionsSnapshot: [],
-  finalState: {
-    startingPeriodBalances: {
-      walletsTotalBalanceUsd: null,
-      positionsTotalPlUsd: null,
-      totalResult: null,
-    },
-    movements: [],
-    movementsTotalAmount: null,
-    endingPeriodBalances: {
-      walletsTotalBalanceUsd: null,
-      positionsTotalPlUsd: null,
-      totalResult: null,
-    },
-    totalResult: null,
-  },
+  showDisclaimer: true,
+  strategy: types.STRATEGY_LIFO,
 }
 
 const initialState = {
-  startSnapshot: snapshotInitState,
-  endSnapshot: snapshotInitState,
-  ...finalResultInitState,
-}
-
-const getMovementsEntries = entries => entries.map((entry) => {
-  const {
-    amount,
-    amountUsd,
-    currency,
-    currencyName,
-    destinationAddress,
-    fees,
-    id,
-    mtsStarted,
-    mtsUpdated,
-    status,
-    transactionId,
-  } = entry
-
-  return {
-    amount,
-    amountUsd,
-    currency: mapSymbol(currency),
-    currencyName,
-    destinationAddress,
-    fees,
-    id,
-    mtsStarted,
-    mtsUpdated,
-    status,
-    transactionId,
-  }
-})
-
-const getSectionProperty = (section) => {
-  if (section === TAX_REPORT_SECTIONS.START_SNAPSHOT) {
-    return 'startSnapshot'
-  }
-  return 'endSnapshot'
+  transactions: transactionsInitState,
 }
 
 export function taxReportReducer(state = initialState, action) {
   const { type: actionType, payload } = action
   switch (actionType) {
-    case types.FETCH_TAX_REPORT:
+    case types.FETCH_TRANSACTIONS:
       return {
         ...state,
-        pageLoading: true,
-      }
-    case types.FETCH_SNAPSHOT: {
-      const snapshotSection = payload === TAX_REPORT_SECTIONS.START_SNAPSHOT ? 'startSnapshot' : 'endSnapshot'
-
-      return {
-        ...state,
-        [snapshotSection]: {
-          ...state[snapshotSection],
+        transactions: {
           pageLoading: true,
+          strategy: state.transactions.strategy,
+          showDisclaimer: state.transactions.showDisclaimer,
+        },
+      }
+    case types.UPDATE_TRANSACTIONS: {
+      return {
+        ...state,
+        transactions: {
+          data: payload,
+          progress: null,
+          pageLoading: false,
+          dataReceived: true,
+          strategy: state.transactions.strategy,
+          showDisclaimer: state.transactions.showDisclaimer,
         },
       }
     }
-    case types.UPDATE_TAX_REPORT: {
-      if (!payload) {
-        return {
-          ...state,
-          dataReceived: true,
-          pageLoading: false,
-        }
-      }
-
-      const {
-        startingPositionsSnapshot,
-        endingPositionsSnapshot,
-        finalState: {
-          startingPeriodBalances,
-          movements,
-          movementsTotalAmount,
-          endingPeriodBalances,
-          totalResult,
-        },
-      } = payload
-
+    case types.SET_TRANSACTIONS_STRATEGY: {
       return {
         ...state,
-        dataReceived: true,
-        pageLoading: false,
-        endingPositionsSnapshot: getFrameworkPositionsEntries(endingPositionsSnapshot),
-        finalState: {
-          startingPeriodBalances: startingPeriodBalances || {},
-          movements: getMovementsEntries(movements),
-          movementsTotalAmount,
-          endingPeriodBalances: endingPeriodBalances || {},
-          totalResult,
+        transactions: {
+          ...state.transactions,
+          strategy: payload,
         },
-        startingPositionsSnapshot: getFrameworkPositionsEntries(startingPositionsSnapshot),
       }
     }
-    case types.UPDATE_TAX_REPORT_SNAPSHOT: {
-      const { result, section } = payload
-      const snapshotSection = getSectionProperty(section)
-      if (!result) {
-        return {
-          ...state,
-          [snapshotSection]: {
-            ...state[snapshotSection],
-            dataReceived: true,
-            pageLoading: false,
-          },
-        }
-      }
-
-      const {
-        positionsSnapshot = [], positionsTickers = [], walletsTickers = [], walletsSnapshot = [],
-        positionsTotalPlUsd, walletsTotalBalanceUsd,
-      } = result
-
+    case types.SET_SHOW_DISCLAIMER: {
       return {
         ...state,
-        [snapshotSection]: {
-          dataReceived: true,
-          pageLoading: false,
-          positionsTotalPlUsd,
-          positionsEntries: getFrameworkPositionsEntries(positionsSnapshot),
-          positionsTickersEntries: getFrameworkPositionsTickersEntries(positionsTickers),
-          walletsTotalBalanceUsd,
-          walletsTickersEntries: getWalletsTickersEntries(walletsTickers),
-          walletsEntries: getWalletsEntries(walletsSnapshot),
+        transactions: {
+          ...state.transactions,
+          showDisclaimer: payload,
+        },
+      }
+    }
+    case types.SET_GENERATION_PROGRESS: {
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          progress: payload,
         },
       }
     }
     case types.FETCH_FAIL:
-      return state
-    case types.REFRESH:
-    case timeRangeTypes.SET_TIME_RANGE:
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          progress: null,
+          pageLoading: false,
+          dataReceived: true,
+        },
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {

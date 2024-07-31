@@ -6,6 +6,7 @@ import _head from 'lodash/head'
 import _fill from 'lodash/fill'
 import _floor from 'lodash/floor'
 import _filter from 'lodash/filter'
+import _toLower from 'lodash/toLower'
 import _forEach from 'lodash/forEach'
 import { Cell } from '@blueprintjs/table'
 import { get, pick, isEqual } from '@bitfinex/lib-js-util-base'
@@ -21,6 +22,7 @@ const COLUMN_WIDTH_STANDARD = {
   amountUsd: 132,
   amountExecuted: 132,
   ask: 132,
+  asset: 92,
   balance: 132,
   balanceChange: 178,
   balanceUsd: 137,
@@ -50,6 +52,7 @@ const COLUMN_WIDTH_STANDARD = {
   fundBal: 205,
   fundingAccrued: 185,
   fundingStep: 155,
+  gainOrLoss: 152,
   id: 95,
   invoices: 160,
   ip: 125,
@@ -64,9 +67,11 @@ const COLUMN_WIDTH_STANDARD = {
   merchantName: 120,
   mobile: 90,
   mts: 150,
+  mtsAcquired: 150,
   mtsCreate: 150,
   mtsOpening: 150,
   mtsLastPayout: 150,
+  mtsSold: 150,
   mtsUpdate: 150,
   mtsUpdated: 150,
   note: 135,
@@ -82,6 +87,7 @@ const COLUMN_WIDTH_STANDARD = {
   priceAvg: 132,
   priceLiq: 132,
   priceSpot: 132,
+  proceeds: 152,
   priceTrailing: 132,
   rate: 130,
   redirectUrl: 300,
@@ -112,6 +118,7 @@ const COLUMN_WIDTHS_BIG_SCREENS = {
   amountUsd: 160,
   amountExecuted: 160,
   ask: 160,
+  asset: 110,
   balance: 160,
   balanceChange: 178,
   balanceUsd: 160,
@@ -141,6 +148,7 @@ const COLUMN_WIDTHS_BIG_SCREENS = {
   fundBal: 205,
   fundingAccrued: 185,
   fundingStep: 155,
+  gainOrLoss: 160,
   id: 140,
   ip: 115,
   invoices: 160,
@@ -155,9 +163,11 @@ const COLUMN_WIDTHS_BIG_SCREENS = {
   merchantName: 140,
   mobile: 90,
   mts: 170,
+  mtsAcquired: 180,
   mtsCreate: 180,
   mtsOpening: 180,
   mtsLastPayout: 180,
+  mtsSold: 180,
   mtsUpdate: 180,
   mtsUpdated: 180,
   note: 250,
@@ -169,6 +179,7 @@ const COLUMN_WIDTHS_BIG_SCREENS = {
   pl: 110,
   plPerc: 110,
   positionPair: 120,
+  proceeds: 160,
   price: 160,
   priceAvg: 160,
   priceSpot: 160,
@@ -661,6 +672,8 @@ export const formatSumUpValue = value => {
   return parseFloat(value).toFixed(8).replace(/\d(?=(\d{3})+\.)/g, '$&,')
 }
 
+export const formatSourceType = (type, t) => t(`taxreport.sources.${_toLower(type)}`)
+
 export const MIN_COLUMN_WIDTH = 125
 export const WIDE_COLUMN_DEFAULT_WIDTH = 300
 export const DEFAULT_CONTAINER_WIDTH = 1000
@@ -711,4 +724,5 @@ export default {
   formatSumUpValue,
   getTooltipContent,
   getCalculatedColumnWidths,
+  formatSourceType,
 }

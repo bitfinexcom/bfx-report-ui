@@ -211,9 +211,11 @@ function* progressUpdate({ payload }) {
     yield put(actions.setIsSyncing(false))
     yield put(actions.showInitSyncPopup(false))
   } else {
+    const isSyncing = yield select(getIsSyncing)
     const syncProgress = Number.isInteger(progress)
       ? progress
       : 0
+    if (isSyncInProgress && !isSyncing) yield put(actions.setIsSyncing(true))
     yield put(actions.setSyncProgress(syncProgress))
     yield put(actions.setEstimatedTime(estimatedTimeValues))
   }

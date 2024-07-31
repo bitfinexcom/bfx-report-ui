@@ -51,12 +51,15 @@
   }
 
   .bitfinex-amount {
+    font-weight: 600;
     &.bitfinex-green-text > .bitfinex-amount-fraction {
       color: var(--tableAmountFractionPosColor);
+      font-weight: 400;
     }
 
     &.bitfinex-red-text > .bitfinex-amount-fraction {
       color: var(--tableAmountFractionNegColor);
+      font-weight: 400;
     }
   }
 

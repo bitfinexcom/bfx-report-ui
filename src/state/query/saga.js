@@ -56,6 +56,7 @@ import {
 } from 'state/base/selectors'
 import { getEmail } from 'state/auth/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
+import { getTransactionsStrategy } from 'state/taxReport/selectors'
 import config from 'config'
 
 import actions from './actions'
@@ -225,6 +226,7 @@ function* getOptions({ target }) {
   const isUnrealizedProfitExcluded = showFrameworkMode ? yield select(getIsUnrealizedProfitExcluded) : ''
   const isVsAccountBalanceSelected = showFrameworkMode ? yield select(getIsVsAccountBalanceSelected) : ''
   const isPdfExportRequired = showFrameworkMode ? yield select(getIsPdfExportRequired) : false
+  const taxReportStrategy = showFrameworkMode ? yield select(getTransactionsStrategy) : ''
 
   switch (target) {
     case MENU_ACCOUNT_BALANCE:
@@ -264,6 +266,7 @@ function* getOptions({ target }) {
       break
     case MENU_TAX_REPORT:
       options.isPDFRequired = isPdfExportRequired
+      options.strategy = taxReportStrategy
       break
     case MENU_LOGINS:
     case MENU_CHANGE_LOGS:
@@ -363,7 +366,7 @@ function* getOptions({ target }) {
       options.method = 'getFullSnapshotReportFile'
       break
     case MENU_TAX_REPORT:
-      options.method = 'getFullTaxReportFile'
+      options.method = 'getTransactionTaxReportFile'
       break
     case MENU_TRADED_VOLUME:
       options.method = 'getTradedVolumeFile'
@@ -398,18 +401,6 @@ function* exportReport({ payload: targets }) {
     for (const target of targets) {
       const options = yield call(getOptions, { target })
       multiExport.push(options)
-
-      // add 2 additional snapshot reports
-      if (target === MENU_TAX_REPORT) {
-        multiExport.push({
-          ...options,
-          isStartSnapshot: true,
-        })
-        multiExport.push({
-          ...options,
-          isEndSnapshot: true,
-        })
-      }
     }
 
     const locale = yield select(getLocale)

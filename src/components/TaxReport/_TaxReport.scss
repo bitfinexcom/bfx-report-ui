@@ -1,20 +1,70 @@
 .tax-report {
-  .snapshot {
-    height: 100%;
+  .section-header {
+    margin-bottom: 10px;
 
-    .bp3-button-group {
-      transform: translateY(-20px);
-      margin-bottom: 10px;
+    &-row {
+      margin-bottom: 0;
+      margin-top: 10px;
     }
   }
 
-  .bp3-table-container {
-    &:last-child {
-      margin-bottom: 40px;
-    }  
+  .loading {
+    &.bp3-spinner {
+      margin: auto;
+      display: block;
+    }
+  
+    &-container {
+      height: 60%;
+      display: flex;
+      position: relative;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+
+      .spinner-wrapper {
+        display: flex;
+        position: relative;
+        margin-bottom: 20px;
+      }
+    }
+  
+    &-progress {
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      line-height: initial;
+      transform: translate(-50%, -50%);
+    }
+
+    &-note {
+      min-width: 340px;
+      text-align: center;
+    }
+  }
+}
+
+.disclaimer {
+  position: relative;
+  padding: 14px;
+  font-size: 14px;
+  border-radius: 4px;
+  padding-bottom: 18px;
+  background-color: var(--bgColor);
+
+  &-header {
+    font-weight: 600;
+    margin-bottom: 6px;
   }
 
-  .movements-table {
-    margin-bottom: 40px;
+  &-body {
+    font-weight: 400;
+  }
+
+  &-icon {
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    position: absolute;
   }
 }
