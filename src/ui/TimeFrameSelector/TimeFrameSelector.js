@@ -10,16 +10,18 @@ const {
   DAY, WEEK, MONTH, YEAR,
 } = constants
 
+const getItems = (t) => [
+  { value: DAY, label: t('timeframe.day') },
+  { value: WEEK, label: t('timeframe.week') },
+  { value: MONTH, label: t('timeframe.month') },
+  { value: YEAR, label: t('timeframe.year') },
+]
+
 const TimeFrameSelector = (props) => {
   const { onChange, value } = props
   const { t } = useTranslation()
 
-  const items = [
-    { value: DAY, label: t('timeframe.day') },
-    { value: WEEK, label: t('timeframe.week') },
-    { value: MONTH, label: t('timeframe.month') },
-    { value: YEAR, label: t('timeframe.year') },
-  ]
+  const items = getItems(t)
 
   return (
     <Select
