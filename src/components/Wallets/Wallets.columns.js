@@ -1,11 +1,7 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
 import {
   getCell,
   getCellState,
   COLUMN_WIDTHS,
-  getTooltipContent,
 } from 'utils/columns'
 import config from 'config'
 import { insertIf, fixedFloat } from 'ui/utils'
