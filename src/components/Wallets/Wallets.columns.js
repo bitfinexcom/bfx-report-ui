@@ -1,13 +1,14 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { insertIf, fixedFloat } from 'ui/utils'
 import {
-  COLUMN_WIDTHS,
+  getCell,
   getCellState,
+  COLUMN_WIDTHS,
   getTooltipContent,
 } from 'utils/columns'
 import config from 'config'
+import { insertIf, fixedFloat } from 'ui/utils'
 
 export default function getColumns(props) {
   const {
@@ -26,11 +27,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData, t('column.noResults'))
         const { currency } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(currency, t)}>
-            {currency}
-          </Cell>
-        )
+        return getCell(currency, t)
       },
       copyText: rowIndex => filteredData[rowIndex].currency,
     },
@@ -41,15 +38,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { balance } = filteredData[rowIndex]
-        const fixedBalance = fixedFloat(balance)
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedBalance, t)}
-          >
-            {fixedBalance}
-          </Cell>
-        )
+        return getCell(fixedFloat(balance), t)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].balance),
@@ -62,15 +51,7 @@ export default function getColumns(props) {
         renderer: (rowIndex) => {
           if (isLoading || isNoData) return getCellState(isLoading, isNoData)
           const { balanceUsd } = filteredData[rowIndex]
-          const fixedBalanceUsd = fixedFloat(balanceUsd)
-          return (
-            <Cell
-              className='bitfinex-text-align-right'
-              tooltip={getTooltipContent(fixedBalanceUsd, t)}
-            >
-              {fixedBalanceUsd}
-            </Cell>
-          )
+          return getCell(fixedFloat(balanceUsd), t)
         },
         isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].balanceUsd),
