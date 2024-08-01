@@ -4,8 +4,7 @@ import { Cell } from '@blueprintjs/table'
 import { insertIf, fixedFloat } from 'ui/utils'
 import {
   COLUMN_WIDTHS,
-  getCellLoader,
-  getCellNoData,
+  getCellState,
   getTooltipContent,
 } from 'utils/columns'
 import config from 'config'
@@ -25,8 +24,7 @@ export default function getColumns(props) {
       className: 'align-left',
       width: 100,
       renderer: (rowIndex) => {
-        if (isLoading) return getCellLoader(14, 72)
-        if (isNoData) return getCellNoData(t('column.noResults'))
+        if (isLoading || isNoData) return getCellState(isLoading, isNoData, t('column.noResults'))
         const { currency } = filteredData[rowIndex]
         return (
           <Cell tooltip={getTooltipContent(currency, t)}>
@@ -41,8 +39,7 @@ export default function getColumns(props) {
       name: 'column.balance',
       width: COLUMN_WIDTHS.amount,
       renderer: (rowIndex) => {
-        if (isLoading) return getCellLoader(14, 72)
-        if (isNoData) return getCellNoData()
+        if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { balance } = filteredData[rowIndex]
         const fixedBalance = fixedFloat(balance)
         return (
@@ -63,8 +60,7 @@ export default function getColumns(props) {
         name: 'column.balanceUsd',
         width: COLUMN_WIDTHS.balanceUsd,
         renderer: (rowIndex) => {
-          if (isLoading) return getCellLoader(14, 72)
-          if (isNoData) return getCellNoData()
+          if (isLoading || isNoData) return getCellState(isLoading, isNoData)
           const { balanceUsd } = filteredData[rowIndex]
           const fixedBalanceUsd = fixedFloat(balanceUsd)
           return (
