@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import _memoize from 'lodash/memoize'
@@ -42,12 +42,7 @@ const getLedgersCategories = _memoize((t) => ([
   { value: 911, label: t('ledgers.categories.losses') },
 ]))
 
-const LedgersCategorySelect = (props) => {
-  const {
-    className,
-    onChange,
-    value,
-  } = props
+const LedgersCategorySelect = ({ className, onChange, value }) => {
   const { t } = useTranslation()
   const items = getLedgersCategories(t)
 
@@ -73,4 +68,4 @@ LedgersCategorySelect.defaultProps = {
   value: '',
 }
 
-export default LedgersCategorySelect
+export default memo(LedgersCategorySelect)
