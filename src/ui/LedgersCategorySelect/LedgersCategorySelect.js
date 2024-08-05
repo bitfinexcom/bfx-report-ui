@@ -49,13 +49,14 @@ const LedgersCategorySelect = (props) => {
     value,
   } = props
   const { t } = useTranslation()
+  const items = getLedgersCategories(t)
 
   return (
     <Select
-      className={className}
-      items={getLedgersCategories(t)}
-      onChange={onChange}
+      items={items}
       value={value}
+      onChange={onChange}
+      className={className}
       type={'Category Filter'}
     />
   )
