@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import _memoize from 'lodash/memoize'
 
 import Select from 'ui/Select'
@@ -46,9 +46,9 @@ const LedgersCategorySelect = (props) => {
   const {
     className,
     onChange,
-    t,
     value,
   } = props
+  const { t } = useTranslation()
 
   return (
     <Select
@@ -64,7 +64,6 @@ const LedgersCategorySelect = (props) => {
 LedgersCategorySelect.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }
 
@@ -73,4 +72,4 @@ LedgersCategorySelect.defaultProps = {
   value: '',
 }
 
-export default withTranslation('translations')(LedgersCategorySelect)
+export default LedgersCategorySelect
