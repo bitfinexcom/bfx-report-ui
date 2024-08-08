@@ -12,7 +12,6 @@ import {
 import { prepareCurrency } from 'state/symbols/utils'
 import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 
-
 const getColumns = ({
   t,
   isNoData,
