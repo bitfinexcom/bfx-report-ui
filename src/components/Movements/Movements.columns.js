@@ -4,7 +4,7 @@ import { Cell } from '@blueprintjs/table'
 import config from 'config'
 import Explorer from 'ui/Explorer'
 import { prepareCurrency } from 'state/symbols/utils'
-import { getCellState, getColumnWidth } from 'utils/columns'
+import { getCell, getCellState, getColumnWidth } from 'utils/columns'
 import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 
 const getColumns = ({
@@ -49,11 +49,7 @@ const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={id}>
-          {id}
-        </Cell>
-      )
+      return getCell(id, t)
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   },
@@ -65,11 +61,7 @@ const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
-      return (
-        <Cell tooltip={timestamp}>
-          {timestamp}
-        </Cell>
-      )
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
   },
@@ -82,11 +74,7 @@ const getColumns = ({
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { currency, currencyName } = filteredData[rowIndex]
       const preparedCurrency = prepareCurrency(currency, currencyName, tetherNames)
-      return (
-        <Cell tooltip={preparedCurrency}>
-          {preparedCurrency}
-        </Cell>
-      )
+      return getCell(preparedCurrency, t)
     },
     copyText: rowIndex => filteredData[rowIndex].currency,
   },
@@ -98,11 +86,7 @@ const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { status } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={status}>
-          {status}
-        </Cell>
-      )
+      return getCell(status, t)
     },
     copyText: rowIndex => filteredData[rowIndex].status,
   },
@@ -114,14 +98,7 @@ const getColumns = ({
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount, currency } = filteredData[rowIndex]
       const tooltip = `${fixedFloat(amount)} ${currency}`
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          {formatAmount(amount)}
-        </Cell>
-      )
+      return getCell(formatAmount(amount), t, tooltip)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
@@ -135,14 +112,7 @@ const getColumns = ({
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { amountUsd } = filteredData[rowIndex]
         const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={tooltip}
-          >
-            {formatAmount(amountUsd)}
-          </Cell>
-        )
+        return getCell(formatAmount(amountUsd), t, tooltip)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
@@ -202,11 +172,7 @@ const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { transactionId } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={transactionId}>
-          {transactionId}
-        </Cell>
-      )
+      return getCell(transactionId, t)
     },
     copyText: rowIndex => filteredData[rowIndex].transactionId,
   },
@@ -218,11 +184,7 @@ const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { note } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={note}>
-          {note}
-        </Cell>
-      )
+      return getCell(note, t)
     },
     copyText: rowIndex => filteredData[rowIndex].note,
   },
