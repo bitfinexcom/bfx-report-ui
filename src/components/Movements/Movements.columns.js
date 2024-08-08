@@ -3,9 +3,15 @@ import { Cell } from '@blueprintjs/table'
 
 import config from 'config'
 import Explorer from 'ui/Explorer'
+import {
+  getCell,
+  getFeeCell,
+  getCellState,
+  getColumnWidth,
+} from 'utils/columns'
 import { prepareCurrency } from 'state/symbols/utils'
-import { getCell, getCellState, getColumnWidth } from 'utils/columns'
 import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
+
 
 const getColumns = ({
   t,
@@ -126,20 +132,7 @@ const getColumns = ({
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { fees, currency } = filteredData[rowIndex]
       const tooltip = `${fixedFloat(fees)} ${currency}`
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          <>
-            {formatAmount(fees)}
-            {' '}
-            <span className='bitfinex-show-soft'>
-              {currency}
-            </span>
-          </>
-        </Cell>
-      )
+      return getFeeCell(fees, currency, tooltip)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].fees),
