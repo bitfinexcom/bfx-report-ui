@@ -138,7 +138,9 @@ class ConcentrationRisk extends PureComponent {
     const filteredData = entries.filter(entry => entry.balanceUsd)
 
     const { tableData, chartData } = this.parseData(filteredData)
-    const tableColumns = getColumns({ data: tableData, isNoData, isLoading })
+    const tableColumns = getColumns({
+      data: tableData, isNoData, isLoading, t,
+    })
 
     let showContent
     if (isNoData) {

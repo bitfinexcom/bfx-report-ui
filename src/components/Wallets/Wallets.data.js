@@ -5,7 +5,7 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 
-import getColumns from './Wallets.columns'
+import { getColumns } from './Wallets.columns'
 import { WALLETS_ENTRIES_PROPS } from './Wallets.props'
 import constants from './var'
 

@@ -241,9 +241,9 @@ export const getCellNoData = (title = '--') => (
   </Cell>
 )
 
-export const getCellState = (isLoading, isNoData) => {
+export const getCellState = (isLoading, isNoData, noDataTitle) => {
   if (isLoading) return getCellLoader(14, 72)
-  if (isNoData) return getCellNoData()
+  if (isNoData) return getCellNoData(noDataTitle)
   return null
 }
 
