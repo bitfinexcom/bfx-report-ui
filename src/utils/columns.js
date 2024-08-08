@@ -736,4 +736,9 @@ export default {
   getTooltipContent,
   getCalculatedColumnWidths,
   formatSourceType,
+  getCell,
+  getFeeCell,
+  getLinkCell,
+  getCellState,
+  getJsonFormattedCell,
 }
