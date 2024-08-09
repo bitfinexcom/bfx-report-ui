@@ -3,7 +3,9 @@ import { Cell } from '@blueprintjs/table'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 import { demapPairs, demapSymbols } from 'state/symbols/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import {
+  getCell, getCellState, getColumnWidth, getTooltipContent, getFeeCell,
+} from 'utils/columns'
 
 const getFeePercent = (entry) => {
   const {
@@ -47,11 +49,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(id, t)}>
-          {id}
-        </Cell>
-      )
+      return getCell(id, t)
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   },
@@ -63,11 +61,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { orderID } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(orderID, t)}>
-          {orderID}
-        </Cell>
-      )
+      return getCell(orderID, t)
     },
     copyText: rowIndex => filteredData[rowIndex].orderID,
   },
@@ -79,11 +73,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { pair } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(pair, t)}>
-          {pair}
-        </Cell>
-      )
+      return getCell(pair, t)
     },
     copyText: rowIndex => filteredData[rowIndex].pair,
   },
@@ -94,14 +84,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { execAmount } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={fixedFloat(getTooltipContent(execAmount, t))}
-        >
-          {formatAmount(execAmount)}
-        </Cell>
-      )
+      return getCell(formatAmount(execAmount), t, fixedFloat(execAmount))
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].execAmount),
@@ -113,15 +96,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { execPrice } = filteredData[rowIndex]
-      const fixedPrice = fixedFloat(execPrice)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(fixedPrice, t)}
-        >
-          {fixedPrice}
-        </Cell>
-      )
+      return getCell(fixedFloat(execPrice), t)
     },
     isNumericValue: true,
     copyText: rowIndex => filteredData[rowIndex].execPrice,
@@ -133,22 +108,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { fee, feeCurrency } = filteredData[rowIndex]
-      const fixedFee = fixedFloat(fee)
-      const tooltip = getTooltipContent(`${fixedFee} ${feeCurrency}`, t)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          <>
-            {formatAmount(fee)}
-            {' '}
-            <span className='bitfinex-show-soft'>
-              {feeCurrency}
-            </span>
-          </>
-        </Cell>
-      )
+      return getFeeCell(fee, feeCurrency, t, `${fixedFloat(fee)} ${feeCurrency}`)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].fee),
@@ -160,14 +120,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const feePercent = getFeePercent(filteredData[rowIndex])
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(feePercent, t)}
-        >
-          {feePercent}
-        </Cell>
-      )
+      return getCell(feePercent, t)
     },
     copyText: rowIndex => getFeePercent(filteredData[rowIndex]),
   },
@@ -179,11 +132,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
-      return (
-        <Cell tooltip={getTooltipContent(timestamp, t)}>
-          {timestamp}
-        </Cell>
-      )
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsCreate),
   },
