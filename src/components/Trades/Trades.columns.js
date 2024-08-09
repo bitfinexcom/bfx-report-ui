@@ -1,11 +1,11 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
+import {
+  getCell,
+  getFeeCell,
+  getCellState,
+  getColumnWidth,
+} from 'utils/columns'
 import { formatAmount, fixedFloat } from 'ui/utils'
 import { demapPairs, demapSymbols } from 'state/symbols/utils'
-import {
-  getCell, getCellState, getColumnWidth, getTooltipContent, getFeeCell,
-} from 'utils/columns'
 
 const getFeePercent = (entry) => {
   const {
