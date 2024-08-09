@@ -102,8 +102,7 @@ const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount, currency } = filteredData[rowIndex]
-      const tooltip = `${fixedFloat(amount)} ${currency}`
-      return getCell(formatAmount(amount), t, tooltip)
+      return getCell(formatAmount(amount), t, `${fixedFloat(amount)} ${currency}`)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
@@ -116,8 +115,7 @@ const getColumns = ({
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { amountUsd } = filteredData[rowIndex]
-        const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
-        return getCell(formatAmount(amountUsd), t, tooltip)
+        return getCell(formatAmount(amountUsd), t, `${fixedFloat(amountUsd)} ${t('column.usd')}`)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
