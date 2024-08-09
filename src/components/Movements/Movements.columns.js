@@ -130,8 +130,7 @@ const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { fees, currency } = filteredData[rowIndex]
-      const tooltip = `${fixedFloat(fees)} ${currency}`
-      return getFeeCell(fees, currency, t, tooltip)
+      return getFeeCell(fees, currency, t, `${fixedFloat(fees)} ${currency}`)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].fees),
