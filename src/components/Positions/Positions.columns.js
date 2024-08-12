@@ -7,7 +7,11 @@ import queryConstants from 'state/query/constants'
 import JSONFormat from 'ui/JSONFormat'
 import { formatAmount, fixedFloat } from 'ui/utils'
 import {
-  getCell, getCellState, getColumnWidth, getTooltipContent,
+  getCell,
+  getCellState,
+  getColumnWidth,
+  getTooltipContent,
+  getJsonFormattedCell,
 } from 'utils/columns'
 
 const { MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT } = queryConstants
@@ -87,15 +91,7 @@ export default function getColumns(props) {
         renderer: (rowIndex) => {
           if (isLoading || isNoData) return getCellState(isLoading, isNoData)
           const { collateral } = filteredData[rowIndex]
-          const fixedCollateral = fixedFloat(collateral)
-          return (
-            <Cell
-              className='bitfinex-text-align-right'
-              tooltip={getTooltipContent(fixedCollateral, t)}
-            >
-              {fixedCollateral}
-            </Cell>
-          )
+          return getCell(fixedFloat(collateral), t)
         },
         isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].collateral),
@@ -108,15 +104,7 @@ export default function getColumns(props) {
         renderer: (rowIndex) => {
           if (isLoading || isNoData) return getCellState(isLoading, isNoData)
           const { meta = '' } = filteredData[rowIndex]
-          const formattedMeta = JSON.stringify(meta, undefined, 2)
-
-          return (
-            <Cell>
-              <JSONFormat content={formattedMeta}>
-                {formattedMeta}
-              </JSONFormat>
-            </Cell>
-          )
+          return getJsonFormattedCell(meta)
         },
         copyText: rowIndex => JSON.stringify(filteredData[rowIndex].meta) || '',
       },
