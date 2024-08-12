@@ -1,8 +1,6 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import JSONFormat from 'ui/JSONFormat'
-import { formatAmount, fixedFloat } from 'ui/utils'
 import {
   getCell,
   getCellState,
@@ -10,6 +8,7 @@ import {
   getTooltipContent,
   getJsonFormattedCell,
 } from 'utils/columns'
+import { formatAmount, fixedFloat } from 'ui/utils'
 
 export const getColumns = ({
   t,
