@@ -6,7 +6,9 @@ import { Cell } from '@blueprintjs/table'
 import queryConstants from 'state/query/constants'
 import JSONFormat from 'ui/JSONFormat'
 import { formatAmount, fixedFloat } from 'ui/utils'
-import { getCellState, getColumnWidth, getTooltipContent } from 'utils/columns'
+import {
+  getCell, getCellState, getColumnWidth, getTooltipContent,
+} from 'utils/columns'
 
 const { MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT } = queryConstants
 
@@ -44,15 +46,7 @@ export default function getColumns(props) {
         renderer: (rowIndex) => {
           if (isLoading || isNoData) return getCellState(isLoading, isNoData)
           const { liquidationPrice } = filteredData[rowIndex]
-          const fixedPrice = fixedFloat(liquidationPrice)
-          return (
-            <Cell
-              className='bitfinex-text-align-right'
-              tooltip={getTooltipContent(fixedPrice, t)}
-            >
-              {fixedPrice}
-            </Cell>
-          )
+          return getCell(fixedFloat(liquidationPrice), t)
         },
         isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].liquidationPrice),
@@ -64,14 +58,7 @@ export default function getColumns(props) {
         renderer: (rowIndex) => {
           if (isLoading || isNoData) return getCellState(isLoading, isNoData)
           const { pl } = filteredData[rowIndex]
-          return (
-            <Cell
-              className='bitfinex-text-align-right'
-              tooltip={getTooltipContent(fixedFloat(pl), t)}
-            >
-              {formatAmount(pl)}
-            </Cell>
-          )
+          return getCell(formatAmount(pl), t, fixedFloat(pl))
         },
         isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].pl),
@@ -83,14 +70,7 @@ export default function getColumns(props) {
         renderer: (rowIndex) => {
           if (isLoading || isNoData) return getCellState(isLoading, isNoData)
           const { plPerc } = filteredData[rowIndex]
-          return (
-            <Cell
-              className='bitfinex-text-align-right'
-              tooltip={getTooltipContent(fixedFloat(plPerc), t)}
-            >
-              {formatAmount(plPerc)}
-            </Cell>
-          )
+          return getCell(formatAmount(plPerc), t, fixedFloat(plPerc))
         },
         isNumericValue: true,
         copyText: rowIndex => fixedFloat(filteredData[rowIndex].plPerc),
