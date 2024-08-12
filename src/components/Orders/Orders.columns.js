@@ -45,9 +45,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('pair', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { pair } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(pair, t)}>
@@ -63,9 +61,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('type', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { type } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(type, t)}>
@@ -80,9 +76,7 @@ export const getColumns = ({
     name: 'column.amount',
     width: getColumnWidth('amountOrig', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amountOrig } = filteredData[rowIndex]
       const fixedAmount = fixedFloat(amountOrig)
       return (
@@ -102,9 +96,7 @@ export const getColumns = ({
     name: 'column.amount-exe',
     width: getColumnWidth('amountExecuted', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amountExecuted } = filteredData[rowIndex]
       return (
         <Cell
@@ -123,9 +115,7 @@ export const getColumns = ({
     name: 'column.price',
     width: getColumnWidth('price', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { price } = filteredData[rowIndex]
       const fixedPrice = fixedFloat(price)
       return (
@@ -145,9 +135,7 @@ export const getColumns = ({
     name: 'column.avgprice',
     width: getColumnWidth('priceAvg', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { priceAvg } = filteredData[rowIndex]
       const fixedPrice = fixedFloat(priceAvg)
       return (
@@ -168,9 +156,7 @@ export const getColumns = ({
     nameStr: `${t('column.created')} (${timeOffset})`,
     width: getColumnWidth('mtsCreate', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsCreate)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -186,9 +172,7 @@ export const getColumns = ({
     nameStr: `${t('column.updated')} (${timeOffset})`,
     width: getColumnWidth('mtsUpdate', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
       return (
         <Cell tooltip={getTooltipContent(timestamp, t)}>
@@ -204,9 +188,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { status } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(status, t)}>
@@ -221,9 +203,7 @@ export const getColumns = ({
     name: 'column.pricetrail',
     width: getColumnWidth('priceTrailing', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { priceTrailing } = filteredData[rowIndex]
       const fixedPrice = fixedFloat(priceTrailing)
       return (
@@ -244,9 +224,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('typePrev', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { typePrev } = filteredData[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(typePrev, t)}>
@@ -262,9 +240,7 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('meta', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { meta } = filteredData[rowIndex]
       const formattedMeta = JSON.stringify(meta, undefined, 2)
 

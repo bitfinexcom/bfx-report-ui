@@ -29,7 +29,9 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('moreDetails', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      if (isLoading || isNoData) {
+        return getCellState(isLoading, isNoData)
+      }
       const { id } = filteredData[rowIndex]
       return (
         <Cell tooltip={t('column.moreDetails')}>
