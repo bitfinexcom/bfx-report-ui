@@ -4,7 +4,6 @@ import _endsWith from 'lodash/endsWith'
 import { Cell } from '@blueprintjs/table'
 
 import queryConstants from 'state/query/constants'
-import JSONFormat from 'ui/JSONFormat'
 import { formatAmount, fixedFloat } from 'ui/utils'
 import {
   getCell,
@@ -142,11 +141,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { pair } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(pair, t)}>
-            {pair}
-          </Cell>
-        )
+        return getCell(pair, t)
       },
       copyText: rowIndex => filteredData[rowIndex].pair,
     },
@@ -157,14 +152,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { amount } = filteredData[rowIndex]
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedFloat(amount), t)}
-          >
-            {formatAmount(amount)}
-          </Cell>
-        )
+        return getCell(formatAmount(amount), t, fixedFloat(amount))
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
@@ -176,15 +164,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { basePrice } = filteredData[rowIndex]
-        const fixedPrice = fixedFloat(basePrice)
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedPrice, t)}
-          >
-            {fixedPrice}
-          </Cell>
-        )
+        return getCell(fixedFloat(basePrice), t)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].basePrice),
@@ -197,15 +177,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { marginFunding } = filteredData[rowIndex]
-        const fixedSwap = fixedFloat(marginFunding)
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={getTooltipContent(fixedSwap, t)}
-          >
-            {fixedSwap}
-          </Cell>
-        )
+        return getCell(fixedFloat(marginFunding), t)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].marginFunding),
@@ -218,11 +190,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const swapType = showType(filteredData[rowIndex])
-        return (
-          <Cell tooltip={getTooltipContent(swapType, t)}>
-            {swapType}
-          </Cell>
-        )
+        return getCell(swapType, t)
       },
       copyText: rowIndex => showType(filteredData[rowIndex]),
     },
@@ -234,11 +202,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { status } = filteredData[rowIndex]
-        return (
-          <Cell tooltip={getTooltipContent(status, t)}>
-            {status}
-          </Cell>
-        )
+        return getCell(status, t)
       },
       copyText: rowIndex => filteredData[rowIndex].status,
     },
@@ -250,11 +214,7 @@ export default function getColumns(props) {
       renderer: (rowIndex) => {
         if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const timestamp = getFullTime(filteredData[rowIndex].mtsUpdate)
-        return (
-          <Cell tooltip={getTooltipContent(timestamp, t)}>
-            {timestamp}
-          </Cell>
-        )
+        return getCell(timestamp, t)
       },
       copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdate),
     },
