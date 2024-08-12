@@ -8,6 +8,7 @@ import {
   getCellState,
   getColumnWidth,
   getTooltipContent,
+  getJsonFormattedCell,
 } from 'utils/columns'
 
 export const getColumns = ({
@@ -184,15 +185,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { meta } = filteredData[rowIndex]
-      const formattedMeta = JSON.stringify(meta, undefined, 2)
-
-      return (
-        <Cell>
-          <JSONFormat content={getTooltipContent(formattedMeta, t)}>
-            {formattedMeta}
-          </JSONFormat>
-        </Cell>
-      )
+      return getJsonFormattedCell(meta)
     },
     copyText: rowIndex => JSON.stringify(filteredData[rowIndex].meta) || '',
   },
