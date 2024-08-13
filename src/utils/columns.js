@@ -296,6 +296,22 @@ export const getFeeCell = (fee, feeCurrency, t, tooltip) => {
   )
 }
 
+export const getActionCell = (content, action, t, tooltip) => {
+  const tooltipContent = getTooltipContent(tooltip || content, t)
+  return (
+    <Cell tooltip={tooltipContent}>
+      <>
+        <a
+          href='#'
+          onClick={action}
+        >
+          {t('column.show')}
+        </a>
+      </>
+    </Cell>
+  )
+}
+
 export const getRowsConfig = (isLoading, isNoData, numRows = 0) => {
   if (isLoading) return 5
   if (isNoData) return 1
@@ -743,5 +759,6 @@ export default {
   getFeeCell,
   getLinkCell,
   getCellState,
+  getActionCell,
   getJsonFormattedCell,
 }
