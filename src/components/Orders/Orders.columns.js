@@ -4,6 +4,7 @@ import { Cell } from '@blueprintjs/table'
 import {
   getCell,
   getCellState,
+  getActionCell,
   getColumnWidth,
   getTooltipContent,
   getJsonFormattedCell,
@@ -26,21 +27,10 @@ export const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id, pair, amountExecuted } = filteredData[rowIndex]
-      /* eslint-disable jsx-a11y/anchor-is-valid */
-      return (
-        <Cell tooltip={getTooltipContent(id, t)}>
-          <>
-            {amountExecuted
-              ? <a href='#' onClick={e => onIdClick(e, { id, pair })}>{id}</a>
-              : id}
-          </>
-        </Cell>
-      )
-      /* eslint-enable jsx-a11y/anchor-is-valid */
+      const cellAction = e => onIdClick(e, { id, pair })
+      return amountExecuted ? getActionCell(id, cellAction, t) : getCell(id, t)
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   },
