@@ -1,15 +1,12 @@
-import React from 'react'
 import _endsWith from 'lodash/endsWith'
-
-import { Cell } from '@blueprintjs/table'
 
 import queryConstants from 'state/query/constants'
 import { formatAmount, fixedFloat } from 'ui/utils'
 import {
   getCell,
   getCellState,
+  getActionCell,
   getColumnWidth,
-  getTooltipContent,
   getJsonFormattedCell,
 } from 'utils/columns'
 
@@ -117,19 +114,9 @@ export default function getColumns(props) {
       className: 'align-left',
       width: getColumnWidth('id', columnsWidth),
       renderer: (rowIndex) => {
-        if (isLoading || isNoData) {
-          return getCellState(isLoading, isNoData)
-        }
+        if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { id } = filteredData[rowIndex]
-        /* eslint-disable jsx-a11y/anchor-is-valid */
-        return (
-          <Cell tooltip={getTooltipContent(id, t)}>
-            <>
-              <a href='#' onClick={onIdClick} value={id}>{id}</a>
-            </>
-          </Cell>
-        )
-        /* eslint-enable jsx-a11y/anchor-is-valid */
+        return getActionCell(id, onIdClick, t)
       },
       copyText: rowIndex => filteredData[rowIndex].id,
     },
