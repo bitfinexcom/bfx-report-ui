@@ -303,6 +303,7 @@ export const getActionCell = (content, action, t, tooltip) => {
       <>
         <a
           href='#'
+          value={content}
           onClick={action}
         >
           {content}
