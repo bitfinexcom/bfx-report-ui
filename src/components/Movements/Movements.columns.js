@@ -7,6 +7,7 @@ import {
   getCell,
   getFeeCell,
   getCellState,
+  getActionCell,
   getColumnWidth,
 } from 'utils/columns'
 import { prepareCurrency } from 'state/symbols/utils'
@@ -29,22 +30,10 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('moreDetails', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={t('column.moreDetails')}>
-          <>
-            <a
-              href='#'
-              onClick={e => onDetailsClick(e, { id })}
-            >
-              {t('column.show')}
-            </a>
-          </>
-        </Cell>
-      )
+      const cellAction = e => onDetailsClick(e, { id })
+      return getActionCell(t('column.show'), cellAction, t, t('column.moreDetails'))
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   }] : []),
