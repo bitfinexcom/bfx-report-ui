@@ -305,7 +305,7 @@ export const getActionCell = (content, action, t, tooltip) => {
           href='#'
           onClick={action}
         >
-          {t('column.show')}
+          {content}
         </a>
       </>
     </Cell>
