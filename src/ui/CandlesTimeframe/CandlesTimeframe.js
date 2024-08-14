@@ -1,9 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import _map from 'lodash/map'
 
 import Select from 'ui/Select'
 
-import { propTypes, defaultProps } from './CandlesTimeframe.props'
 import TIMEFRAMES from './var'
 
 const CandlesTimeframe = (props) => {
@@ -21,7 +21,9 @@ const CandlesTimeframe = (props) => {
   )
 }
 
-CandlesTimeframe.propTypes = propTypes
-CandlesTimeframe.defaultProps = defaultProps
+CandlesTimeframe.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+}
 
 export default CandlesTimeframe
