@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import _map from 'lodash/map'
 
@@ -23,4 +23,4 @@ CandlesTimeframe.propTypes = {
   onChange: PropTypes.func.isRequired,
 }
 
-export default CandlesTimeframe
+export default memo(CandlesTimeframe)
