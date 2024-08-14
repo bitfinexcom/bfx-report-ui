@@ -1,3 +1,1 @@
-import TickersSnapshot from './TickersSnapshot'
-
-export default TickersSnapshot
+export { default } from './TickersSnapshot'
