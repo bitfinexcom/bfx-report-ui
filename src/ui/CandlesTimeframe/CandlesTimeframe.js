@@ -6,17 +6,16 @@ import Select from 'ui/Select'
 
 import TIMEFRAMES from './var'
 
-const CandlesTimeframe = (props) => {
-  const { value, onChange } = props
+const CandlesTimeframe = ({ value, onChange }) => {
   const items = _map(TIMEFRAMES, timeframe => timeframe)
 
   return (
     <Select
-      className='bitfinex-select--timeframe'
-      popoverClassName='bitfinex-select-menu--timeframe'
       value={value}
       items={items}
       onChange={onChange}
+      className='bitfinex-select--timeframe'
+      popoverClassName='bitfinex-select-menu--timeframe'
     />
   )
 }
