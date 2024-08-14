@@ -495,14 +495,9 @@ export const getPositionsTickersColumns = ({
     className: 'align-left',
     width: COLUMN_WIDTHS.pair,
     renderer: (rowIndex) => {
-      if (isLoading) return getCellLoader(14, 72)
-      if (isNoData) return getCellNoData(t('column.noResults'))
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData, t('column.noResults'))
       const { pair } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(pair, t)}>
-          {pair}
-        </Cell>
-      )
+      return getCell(pair, t)
     },
     copyText: rowIndex => filteredData[rowIndex].pair,
   },
@@ -511,17 +506,9 @@ export const getPositionsTickersColumns = ({
     name: 'column.amount',
     width: COLUMN_WIDTHS.amount,
     renderer: (rowIndex) => {
-      if (isLoading) return getCellLoader(14, 72)
-      if (isNoData) return getCellNoData()
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(fixedFloat(amount), t)}
-        >
-          {formatAmount(amount)}
-        </Cell>
-      )
+      return getCell(formatAmount(amount), t, fixedFloat(amount))
     },
     isNumericValue: true,
     copyText: rowIndex => filteredData[rowIndex].amount,
