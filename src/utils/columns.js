@@ -527,15 +527,10 @@ export const getWalletsTickersColumns = ({
     className: 'align-left',
     width: 80,
     renderer: (rowIndex) => {
-      if (isLoading) return getCellLoader(14, 72)
-      if (isNoData) return getCellNoData(t('column.noResults'))
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData, t('column.noResults'))
       const { walletType } = filteredData[rowIndex]
       const walletTypeText = t(`wallets.header.${walletType}`)
-      return (
-        <Cell tooltip={getTooltipContent(walletTypeText, t)}>
-          {walletTypeText}
-        </Cell>
-      )
+      return getCell(walletTypeText, t)
     },
     copyText: (rowIndex) => {
       const { walletType } = filteredData[rowIndex]
@@ -548,14 +543,9 @@ export const getWalletsTickersColumns = ({
     className: 'align-left',
     width: 100,
     renderer: (rowIndex) => {
-      if (isLoading) return getCellLoader(14, 72)
-      if (isNoData) return getCellNoData()
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { pair } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={getTooltipContent(pair, t)}>
-          {pair}
-        </Cell>
-      )
+      return getCell(pair, t)
     },
     copyText: rowIndex => filteredData[rowIndex].pair,
   },
@@ -564,17 +554,9 @@ export const getWalletsTickersColumns = ({
     name: 'column.amount',
     width: 120,
     renderer: (rowIndex) => {
-      if (isLoading) return getCellLoader(14, 72)
-      if (isNoData) return getCellNoData()
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount } = filteredData[rowIndex]
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={getTooltipContent(fixedFloat(amount), t)}
-        >
-          {formatAmount(amount)}
-        </Cell>
-      )
+      return getCell(formatAmount(amount), t, fixedFloat(amount))
     },
     isNumericValue: true,
     copyText: rowIndex => filteredData[rowIndex].amount,
