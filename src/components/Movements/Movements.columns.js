@@ -32,7 +32,7 @@ const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      const cellAction = e => onDetailsClick(e, { id })
+      const cellAction = (e) => onDetailsClick(e, { id })
       return getActionCell(t('column.show'), cellAction, t, t('column.moreDetails'))
     },
     copyText: rowIndex => filteredData[rowIndex].id,

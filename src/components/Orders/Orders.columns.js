@@ -25,7 +25,7 @@ export const getColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id, pair, amountExecuted } = filteredData[rowIndex]
-      const cellAction = e => onIdClick(e, { id, pair })
+      const cellAction = (e) => onIdClick(e, { id, pair })
       return amountExecuted ? getActionCell(id, cellAction, t) : getCell(id, t)
     },
     copyText: rowIndex => filteredData[rowIndex].id,
