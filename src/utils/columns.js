@@ -281,6 +281,37 @@ export const getLinkCell = (link) => (
   </Cell>
 )
 
+export const getFeeCell = (fee, feeCurrency, t, tooltip) => {
+  const tooltipContent = getTooltipContent(tooltip || fee, t)
+  return (
+    <Cell tooltip={tooltipContent}>
+      <>
+        {formatAmount(fee)}
+        {' '}
+        <span className='bitfinex-show-soft'>
+          {feeCurrency}
+        </span>
+      </>
+    </Cell>
+  )
+}
+
+export const getActionCell = (content, action, t, tooltip) => {
+  const tooltipContent = getTooltipContent(tooltip || content, t)
+  return (
+    <Cell tooltip={tooltipContent}>
+      <>
+        <a
+          href='#'
+          value={content}
+          onClick={action}
+        >
+          {content}
+        </a>
+      </>
+    </Cell>
+  )
+}
 
 export const getRowsConfig = (isLoading, isNoData, numRows = 0) => {
   if (isLoading) return 5
@@ -725,4 +756,10 @@ export default {
   getTooltipContent,
   getCalculatedColumnWidths,
   formatSourceType,
+  getCell,
+  getFeeCell,
+  getLinkCell,
+  getCellState,
+  getActionCell,
+  getJsonFormattedCell,
 }

@@ -15,7 +15,7 @@ import {
   clearAllPairs,
 } from 'state/utils'
 
-import getColumns from './Trades.columns'
+import { getColumns } from './Trades.columns'
 import { propTypes, defaultProps } from './Trades.props'
 
 const TYPE = queryConstants.MENU_TRADES
