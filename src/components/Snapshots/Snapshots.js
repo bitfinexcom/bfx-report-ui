@@ -11,7 +11,6 @@ import {
 } from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
 import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
-import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
@@ -63,13 +62,6 @@ class Snapshots extends PureComponent {
     }
   }
 
-  handleQuery = () => {
-    const { fetchData } = this.props
-    const { timestamp } = this.state
-    const time = timestamp ? timestamp.getTime() : null
-    fetchData(time)
-  }
-
   getCurrentSection = () => {
     const { history } = this.props
 
@@ -109,7 +101,6 @@ class Snapshots extends PureComponent {
     const {
       t,
       refresh,
-      currentTime,
       pageLoading,
       dataReceived,
       walletsEntries,
@@ -122,7 +113,6 @@ class Snapshots extends PureComponent {
     const { timestamp } = this.state
     const isLoading = !dataReceived && pageLoading
     const section = this.getCurrentSection()
-    const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
     const isNoData = (section === MENU_POSITIONS && !positionsEntries.length)
       || (section === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries.length)
       || (section === MENU_WALLETS && !walletsEntries.length)
@@ -169,11 +159,6 @@ class Snapshots extends PureComponent {
                 defaultValue={timestamp}
               />
             </SectionHeaderItem>
-
-            <QueryButton
-              disabled={!hasNewTime}
-              onClick={this.handleQuery}
-            />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
