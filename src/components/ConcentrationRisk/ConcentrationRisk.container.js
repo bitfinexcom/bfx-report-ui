@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
-import { fetchWallets } from 'state/wallets/actions'
+import { fetchWallets, refresh } from 'state/wallets/actions'
 import {
   getEntries,
   getTimestamp,
@@ -23,6 +23,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
+  refresh,
   fetchWallets,
 }
 
