@@ -60,7 +60,7 @@ class Wallets extends PureComponent {
     const end = time && time.getTime()
     if (isValidTimeStamp(end) || time === null) {
       this.setState({ timestamp: time })
-      setTimestamp(time.getTime())
+      setTimestamp(end)
     }
   }
 
