@@ -14,6 +14,7 @@ import {
 } from 'ui/SectionHeader'
 import DataTable from 'ui/DataTable'
 import DateInput from 'ui/DateInput'
+import QueryButton from 'ui/QueryButton'
 import PieChart from 'ui/Charts/PieChart'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
@@ -36,6 +37,7 @@ class ConcentrationRisk extends PureComponent {
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     isSyncRequired: PropTypes.bool.isRequired,
+    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
   }
 
@@ -112,7 +114,7 @@ class ConcentrationRisk extends PureComponent {
     }
   }
 
-  handleRefresh = () => {
+  handleQuery = () => {
     const { fetchWallets } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
@@ -123,12 +125,15 @@ class ConcentrationRisk extends PureComponent {
     const {
       t,
       entries,
+      refresh,
       pageLoading,
+      currentTime,
       dataReceived,
     } = this.props
     const isNoData = isEmpty(entries)
     const isLoading = !dataReceived && pageLoading
     const { timestamp } = this.state
+    const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
 
     const filteredData = entries.filter(entry => entry.balanceUsd)
 
@@ -187,7 +192,11 @@ class ConcentrationRisk extends PureComponent {
                 onChange={this.handleDateChange}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={this.handleRefresh} />
+            <QueryButton
+              disabled={!hasNewTime}
+              onClick={this.handleQuery}
+            />
+            <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
