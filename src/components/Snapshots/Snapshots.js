@@ -55,9 +55,11 @@ class Snapshots extends PureComponent {
   }
 
   handleDateChange = (time) => {
+    const { setTimestamp } = this.props
     const end = time && time.getTime()
     if (isValidTimeStamp(end) || time === null) {
       this.setState({ timestamp: time })
+      setTimestamp(end)
     }
   }
 
