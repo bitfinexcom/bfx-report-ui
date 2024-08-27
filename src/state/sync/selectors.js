@@ -24,6 +24,7 @@ export const getIsSyncRequired = state => getSync(state)?.isSyncRequired ?? fals
 export const getIsInitSyncPopupOpen = state => getSync(state)?.showInitSyncPopup ?? false
 export const getIsLongSync = state => getSync(state)?.isLongSync ?? false
 export const getIsFirstSyncing = state => (getIsSyncRequired(state) && getIsSyncing(state)) ?? false
+export const getLastSyncTime = state => getSync(state)?.lastSyncMts ?? null
 
 export default {
   getSyncMode,
@@ -45,4 +46,5 @@ export default {
   getIsInitSyncPopupOpen,
   getIsLongSync,
   getIsFirstSyncing,
+  getLastSyncTime,
 }
