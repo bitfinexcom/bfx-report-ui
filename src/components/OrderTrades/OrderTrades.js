@@ -13,7 +13,7 @@ import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 import { SectionHeader, SectionHeaderTitle } from 'ui/SectionHeader'
 
 import OrderTradesNoData from './OrderTrades.NoData'
-import getColumns from '../Trades/Trades.columns'
+import { getColumns } from '../Trades/Trades.columns'
 
 const { MENU_ORDER_TRADES } = queryConstants
 

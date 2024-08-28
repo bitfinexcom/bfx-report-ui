@@ -1,10 +1,8 @@
-import React from 'react'
-import { Cell } from '@blueprintjs/table'
-
 import { fixedFloat } from 'ui/utils'
-import { getCellState } from 'utils/columns'
+import { getCell, getCellState } from 'utils/columns'
 
 export const getColumns = ({
+  t,
   data,
   isNoData,
   isLoading,
@@ -15,15 +13,9 @@ export const getColumns = ({
     className: 'align-left',
     width: 100,
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { currency } = data[rowIndex]
-      return (
-        <Cell tooltip={currency}>
-          {currency}
-        </Cell>
-      )
+      return getCell(currency, t)
     },
     copyText: rowIndex => data[rowIndex].currency,
   },
@@ -32,19 +24,9 @@ export const getColumns = ({
     name: 'column.balanceUsd',
     width: 150,
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { balanceUsd } = data[rowIndex]
-      const fixedBalanceUsd = fixedFloat(balanceUsd)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={fixedBalanceUsd}
-        >
-          {fixedBalanceUsd}
-        </Cell>
-      )
+      return getCell(fixedFloat(balanceUsd), t)
     },
     copyText: rowIndex => fixedFloat(data[rowIndex].balanceUsd),
   },
@@ -53,19 +35,9 @@ export const getColumns = ({
     name: 'column.percent',
     width: 150,
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { percent } = data[rowIndex]
-      const fixedPercent = fixedFloat(percent)
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={fixedPercent}
-        >
-          {fixedPercent}
-        </Cell>
-      )
+      return getCell(fixedFloat(percent), t)
     },
     copyText: rowIndex => fixedFloat(data[rowIndex].percent),
   },

@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
-import _memoize from 'lodash/memoize'
+import { useTranslation } from 'react-i18next'
 
 import Select from 'ui/Select'
 
-const getLedgersCategories = _memoize((t) => ([
+const getLedgersCategories = (t) => [
   { value: '', label: t('selector.all') },
   { value: 5, label: t('ledgers.categories.exchange') },
   { value: 22, label: t('ledgers.categories.position_modified') },
@@ -40,22 +39,18 @@ const getLedgersCategories = _memoize((t) => ([
   { value: 905, label: t('ledgers.categories.currency_conversion') },
   { value: 907, label: t('ledgers.categories.monthly_profit_payment') },
   { value: 911, label: t('ledgers.categories.losses') },
-]))
+]
 
-const LedgersCategorySelect = (props) => {
-  const {
-    className,
-    onChange,
-    t,
-    value,
-  } = props
+const LedgersCategorySelect = ({ className, onChange, value }) => {
+  const { t } = useTranslation()
+  const items = useMemo(() => getLedgersCategories(t), [t])
 
   return (
     <Select
-      className={className}
-      items={getLedgersCategories(t)}
-      onChange={onChange}
+      items={items}
       value={value}
+      onChange={onChange}
+      className={className}
       type={'Category Filter'}
     />
   )
@@ -64,7 +59,6 @@ const LedgersCategorySelect = (props) => {
 LedgersCategorySelect.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }
 
@@ -73,4 +67,4 @@ LedgersCategorySelect.defaultProps = {
   value: '',
 }
 
-export default withTranslation('translations')(LedgersCategorySelect)
+export default memo(LedgersCategorySelect)

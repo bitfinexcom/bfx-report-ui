@@ -3,8 +3,14 @@ import { Cell } from '@blueprintjs/table'
 
 import config from 'config'
 import Explorer from 'ui/Explorer'
+import {
+  getCell,
+  getFeeCell,
+  getCellState,
+  getActionCell,
+  getColumnWidth,
+} from 'utils/columns'
 import { prepareCurrency } from 'state/symbols/utils'
-import { getCellState, getColumnWidth } from 'utils/columns'
 import { formatAmount, fixedFloat, insertIf } from 'ui/utils'
 
 const getColumns = ({
@@ -24,22 +30,10 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('moreDetails', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={t('column.moreDetails')}>
-          <>
-            <a
-              href='#'
-              onClick={e => onDetailsClick(e, { id })}
-            >
-              {t('column.show')}
-            </a>
-          </>
-        </Cell>
-      )
+      const cellAction = (e) => onDetailsClick(e, { id })
+      return getActionCell(t('column.show'), cellAction, t, t('column.moreDetails'))
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   }] : []),
@@ -49,15 +43,9 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('id', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { id } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={id}>
-          {id}
-        </Cell>
-      )
+      return getCell(id, t)
     },
     copyText: rowIndex => filteredData[rowIndex].id,
   },
@@ -67,15 +55,9 @@ const getColumns = ({
     nameStr: `${t('column.date')} (${timeOffset})`,
     width: getColumnWidth('mtsUpdated', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
-      return (
-        <Cell tooltip={timestamp}>
-          {timestamp}
-        </Cell>
-      )
+      return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
   },
@@ -85,16 +67,10 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('currency', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { currency, currencyName } = filteredData[rowIndex]
       const preparedCurrency = prepareCurrency(currency, currencyName, tetherNames)
-      return (
-        <Cell tooltip={preparedCurrency}>
-          {preparedCurrency}
-        </Cell>
-      )
+      return getCell(preparedCurrency, t)
     },
     copyText: rowIndex => filteredData[rowIndex].currency,
   },
@@ -104,15 +80,9 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('status', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { status } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={status}>
-          {status}
-        </Cell>
-      )
+      return getCell(status, t)
     },
     copyText: rowIndex => filteredData[rowIndex].status,
   },
@@ -121,19 +91,9 @@ const getColumns = ({
     name: 'column.amount',
     width: getColumnWidth('amount', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { amount, currency } = filteredData[rowIndex]
-      const tooltip = `${fixedFloat(amount)} ${currency}`
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          {formatAmount(amount)}
-        </Cell>
-      )
+      return getCell(formatAmount(amount), t, `${fixedFloat(amount)} ${currency}`)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
@@ -144,19 +104,9 @@ const getColumns = ({
       name: 'column.amountUsd',
       width: getColumnWidth('amountUsd', columnsWidth),
       renderer: (rowIndex) => {
-        if (isLoading || isNoData) {
-          return getCellState(isLoading, isNoData)
-        }
+        if (isLoading || isNoData) return getCellState(isLoading, isNoData)
         const { amountUsd } = filteredData[rowIndex]
-        const tooltip = `${fixedFloat(amountUsd)} ${t('column.usd')}`
-        return (
-          <Cell
-            className='bitfinex-text-align-right'
-            tooltip={tooltip}
-          >
-            {formatAmount(amountUsd)}
-          </Cell>
-        )
+        return getCell(formatAmount(amountUsd), t, `${fixedFloat(amountUsd)} ${t('column.usd')}`)
       },
       isNumericValue: true,
       copyText: rowIndex => fixedFloat(filteredData[rowIndex].amountUsd),
@@ -167,25 +117,9 @@ const getColumns = ({
     name: 'column.fees',
     width: getColumnWidth('fees', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { fees, currency } = filteredData[rowIndex]
-      const tooltip = `${fixedFloat(fees)} ${currency}`
-      return (
-        <Cell
-          className='bitfinex-text-align-right'
-          tooltip={tooltip}
-        >
-          <>
-            {formatAmount(fees)}
-            {' '}
-            <span className='bitfinex-show-soft'>
-              {currency}
-            </span>
-          </>
-        </Cell>
-      )
+      return getFeeCell(fees, currency, t, `${fixedFloat(fees)} ${currency}`)
     },
     isNumericValue: true,
     copyText: rowIndex => fixedFloat(filteredData[rowIndex].fees),
@@ -196,9 +130,7 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('destinationAddress', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { currency, destinationAddress } = filteredData[rowIndex]
       return (
         <Cell tooltip={destinationAddress}>
@@ -218,15 +150,9 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('transactionId', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { transactionId } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={transactionId}>
-          {transactionId}
-        </Cell>
-      )
+      return getCell(transactionId, t)
     },
     copyText: rowIndex => filteredData[rowIndex].transactionId,
   },
@@ -236,15 +162,9 @@ const getColumns = ({
     className: 'align-left',
     width: getColumnWidth('note', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) {
-        return getCellState(isLoading, isNoData)
-      }
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { note } = filteredData[rowIndex]
-      return (
-        <Cell tooltip={note}>
-          {note}
-        </Cell>
-      )
+      return getCell(note, t)
     },
     copyText: rowIndex => filteredData[rowIndex].note,
   },
