@@ -1,3 +1,1 @@
-import CandlesTimeframe from './CandlesTimeframe'
-
-export default CandlesTimeframe
+export { default } from './CandlesTimeframe'

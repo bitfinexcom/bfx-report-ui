@@ -1,27 +1,26 @@
-import React from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import _map from 'lodash/map'
 
 import Select from 'ui/Select'
 
-import { propTypes, defaultProps } from './CandlesTimeframe.props'
 import TIMEFRAMES from './var'
 
-const CandlesTimeframe = (props) => {
-  const { value, onChange } = props
-  const items = _map(TIMEFRAMES, timeframe => timeframe)
+const items = _map(TIMEFRAMES, timeframe => timeframe)
 
-  return (
-    <Select
-      className='bitfinex-select--timeframe'
-      popoverClassName='bitfinex-select-menu--timeframe'
-      value={value}
-      items={items}
-      onChange={onChange}
-    />
-  )
+const CandlesTimeframe = ({ value, onChange }) => (
+  <Select
+    value={value}
+    items={items}
+    onChange={onChange}
+    className='bitfinex-select--timeframe'
+    popoverClassName='bitfinex-select-menu--timeframe'
+  />
+)
+
+CandlesTimeframe.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 }
 
-CandlesTimeframe.propTypes = propTypes
-CandlesTimeframe.defaultProps = defaultProps
-
-export default CandlesTimeframe
+export default memo(CandlesTimeframe)
