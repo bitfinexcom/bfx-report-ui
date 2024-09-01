@@ -6,7 +6,6 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import SectionHeader from 'ui/SectionHeader'
-import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import {
   checkInit,
@@ -102,7 +101,6 @@ class Trades extends PureComponent {
           refresh={refresh}
           clearTargetPairs={this.clearPairs}
         />
-        <SectionSwitch target={TYPE} hasSubSections />
         {showContent}
       </Card>
     )
