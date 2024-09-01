@@ -132,15 +132,13 @@ class Candles extends PureComponent {
     return (
       <Card
         elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+        className='candles col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader>
           <SectionHeaderTitle>
             {t('candles.title')}
           </SectionHeaderTitle>
-          <SectionHeaderRow>
-            <SectionSwitch target={TYPE} />
-          </SectionHeaderRow>
+          <SectionSwitch target={TYPE} />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
