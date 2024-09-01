@@ -139,6 +139,9 @@ class Candles extends PureComponent {
             {t('candles.title')}
           </SectionHeaderTitle>
           <SectionHeaderRow>
+            <SectionSwitch target={TYPE} />
+          </SectionHeaderRow>
+          <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.date')}
@@ -165,12 +168,9 @@ class Candles extends PureComponent {
             />
             <RefreshButton onClick={refresh} />
             <CandlesSyncPref />
+            <GoToButton onClick={toggleGoToRangeDialog} />
           </SectionHeaderRow>
         </SectionHeader>
-        <div className='candles-header'>
-          <SectionSwitch target={TYPE} hasSubSections />
-          <GoToButton onClick={toggleGoToRangeDialog} />
-        </div>
         {showContent}
       </Card>
     )
