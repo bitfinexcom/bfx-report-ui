@@ -41,6 +41,12 @@ export function setGenerationProgress(payload) {
   }
 }
 
+export function cancelTaxReportGeneration() {
+  return {
+    type: types.CANCEL_TAX_REPORT_GENERATION,
+  }
+}
+
 export default {
   fetchFail,
   setShowDisclaimer,
@@ -48,4 +54,5 @@ export default {
   setTransactionsStrategy,
   fetchTaxReportTransactions,
   updateTaxReportTransactions,
+  cancelTaxReportGeneration,
 }
