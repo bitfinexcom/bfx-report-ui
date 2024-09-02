@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Button, Spinner } from '@blueprintjs/core'
@@ -12,7 +12,11 @@ export const Loader = () => {
   const dispatch = useDispatch()
   const progress = useSelector(getTransactionsGenerationProgress)
   const spinnerContent = isNil(progress) ? '' : `${progress}%`
-  const onCancel = () => dispatch(cancelTaxReportGeneration())
+
+  const onCancel = useCallback(
+    () => dispatch(cancelTaxReportGeneration()),
+    [dispatch],
+  )
 
   return (
     <div className='loading-container'>
@@ -30,7 +34,7 @@ export const Loader = () => {
         <p>{t('taxreport.generation.note')}</p>
       </div>
       <Button
-        onClick={() => onCancel()}
+        onClick={onCancel}
         className='loading-cancel-btn'
       >
         {t('framework.cancel')}
