@@ -77,6 +77,16 @@ export function taxReportReducer(state = initialState, action) {
           dataReceived: true,
         },
       }
+    case types.CANCEL_TAX_REPORT_GENERATION:
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          progress: null,
+          pageLoading: false,
+          dataReceived: true,
+        },
+      }
     case authTypes.LOGOUT:
       return initialState
     default: {
