@@ -7,10 +7,10 @@
 
 .tickers {
   .tables-row {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
 
     &-item {
         width: 49%;
@@ -20,6 +20,7 @@
     }
   }
 }
+
 @media screen and (max-width: 1020px) {
   .tickers {
     .tables-row {
