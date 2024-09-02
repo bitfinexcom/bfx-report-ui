@@ -1,3 +1,10 @@
+.snapshots {
+  .section-header {
+    &-title {
+      margin-bottom: 30px;
+    }
+  }
+
 .tickers {
   .tables-row {
     display: flex;
@@ -6,13 +13,13 @@
     justify-content: space-between;
 
     &-item {
-      width: 49%;
-      margin-right: 0;
-      min-width: 300px;
+        width: 49%;
+        margin-right: 0;
+        min-width: 300px;
+      }
     }
   }
 }
-
 @media screen and (max-width: 1020px) {
   .tickers {
     .tables-row {
