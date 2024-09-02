@@ -14,6 +14,8 @@ import actions from './actions'
 import { getTransactionsStrategy } from './selectors'
 
 export const getReqTaxReport = (params) => makeFetchCall('makeTrxTaxReportInBackground', params)
+export const getReqTaxReportCancel = () => makeFetchCall('interruptOperations',
+  { names: ['TRX_TAX_REPORT_INTERRUPTER'] })
 
 export function* fetchTaxReport() {
   try {
