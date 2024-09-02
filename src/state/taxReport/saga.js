@@ -66,9 +66,29 @@ function* handleTaxTrxReportGenerationProgress({ payload }) {
   }
 }
 
+function* cancelTaxReportGeneration() {
+  try {
+    const { error } = yield call(getReqTaxReportCancel)
+    if (error) {
+      yield put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'taxreport.title',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(actions.fetchFail({
+      id: 'status.request.error',
+      topic: 'taxreport.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
 export default function* taxReportSaga() {
   yield takeLatest(types.FETCH_FAIL, fetchTaxReportFail)
   yield takeLatest([types.FETCH_TRANSACTIONS], fetchTaxReport)
+  yield takeLatest([types.CANCEL_TAX_REPORT_GENERATION], cancelTaxReportGeneration)
   yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_PROGRESS, handleTaxTrxReportGenerationProgress)
   yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_COMPLETED, handleTaxTrxReportGenerationCompleted)
 }
