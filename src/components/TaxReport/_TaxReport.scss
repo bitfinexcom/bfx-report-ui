@@ -41,6 +41,16 @@
       min-width: 340px;
       text-align: center;
     }
+
+    &-cancel-btn {
+      border: none;
+      color: var(--color2);
+
+      &:hover {
+        border: none;
+        color: var(--color);
+      }
+    }
   }
 }
 
