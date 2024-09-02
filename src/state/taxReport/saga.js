@@ -4,6 +4,7 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import { makeFetchCall } from 'state/utils'
 import { updateSuccessStatus, updateErrorStatus } from 'state/status/actions'
@@ -47,7 +48,7 @@ function* handleTaxTrxReportGenerationCompleted({ payload }) {
   const { result, error } = payload
   if (result) {
     yield put(actions.updateTaxReportTransactions(result))
-    yield put(updateSuccessStatus({ id: 'taxreport.generation.success' }))
+    if (!isEmpty(result)) yield put(updateSuccessStatus({ id: 'taxreport.generation.success' }))
   }
   if (error) {
     yield put(actions.fetchFail({
