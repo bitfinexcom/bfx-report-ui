@@ -157,6 +157,15 @@ class Snapshots extends PureComponent {
       <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('snapshots.title')}</SectionHeaderTitle>
+          <NavSwitcher
+            items={[
+              { value: MENU_POSITIONS, label: t('positions.title') },
+              { value: MENU_TICKERS, label: t('tickers.title') },
+              { value: MENU_WALLETS, label: t('wallets.title') },
+            ]}
+            onChange={this.switchSection}
+            value={section}
+          />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
@@ -175,16 +184,6 @@ class Snapshots extends PureComponent {
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
-
-        <NavSwitcher
-          items={[
-            { value: MENU_POSITIONS, label: t('positions.title') },
-            { value: MENU_TICKERS, label: t('tickers.title') },
-            { value: MENU_WALLETS, label: t('wallets.title') },
-          ]}
-          onChange={this.switchSection}
-          value={section}
-        />
         {showContent}
       </Card>
     )
