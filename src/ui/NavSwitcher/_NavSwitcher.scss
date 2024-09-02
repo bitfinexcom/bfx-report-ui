@@ -1,22 +1,22 @@
 .nav-switcher {
   width: 100%;
-  border-bottom: 1px solid var(--borderColor);
-  padding-bottom: 5px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+  padding-bottom: 3px;
+  border-bottom: 2px solid var(--borderColor);
 
   &-item {
-    width: fit-content;
-    margin-bottom: 10px;
-    padding: 0 3px 6px 3px;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 0;
+    min-width: fit-content;
+    color: var(--color2);
+    background-color: var(--bgColor2);
+    border-bottom: 2px solid var(--borderColor);
     cursor: pointer;
 
-    &:not(:last-child) {
-      margin-right: 24px;
-    }
-
     &--active {
-      color: var(--activeColor);
-      border-bottom: 4px solid var(--activeColor);
+      color: var(--color);
+      border-bottom: 2px solid var(--color);
     }
   }
 }
