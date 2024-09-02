@@ -7,7 +7,6 @@ import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import { getPath } from 'state/query/utils'
 import SectionHeader from 'ui/SectionHeader'
-import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import { checkInit, checkFetch } from 'state/utils'
 import getColumns from 'components/Positions/Positions.columns'
@@ -113,12 +112,9 @@ class PositionsAudit extends PureComponent {
         <SectionHeader
           filter={false}
           target={TYPE}
-          title='paudit.title'
-        />
-        <SectionSwitch
-          target={TYPE}
-          hasSubSections
+          showHeaderTabs
           refresh={refresh}
+          title='paudit.title'
         />
         {showContent}
       </Card>
