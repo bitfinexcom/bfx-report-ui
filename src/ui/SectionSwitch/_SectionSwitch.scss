@@ -8,10 +8,11 @@
 
     .bp3-button {
       border: none;
-      padding: 17px 10px;
+      padding: 17px 0;
       border-radius: 0;
-      min-width: fit-content;
       color: var(--color2);
+      min-width: fit-content;
+      margin-right: 20px !important;
       background-color: var(--bgColor2);
       border-bottom: 2px solid var(--borderColor);
 
