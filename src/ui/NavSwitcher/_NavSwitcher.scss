@@ -6,10 +6,11 @@
 
   &-item {
     border: none;
-    padding: 7px 10px;
+    padding: 7px 0;
     border-radius: 0;
-    min-width: fit-content;
+    margin-right: 20px;
     color: var(--color2);
+    min-width: fit-content;
     background-color: var(--bgColor2);
     border-bottom: 2px solid var(--borderColor);
     cursor: pointer;
