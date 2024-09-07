@@ -8,6 +8,8 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+import _map from 'lodash/map'
+import _includes from 'lodash/includes'
 
 import Icon from 'icons'
 import config from 'config'
@@ -85,6 +87,8 @@ class SignUp extends PureComponent {
     })
     tracker.trackEvent('Add Account')
     const isValid = this.validateForm()
+    const isRegisteredUserName = this.validateUsername(userName)
+    console.log('+++isRegisteredUserName', isRegisteredUserName)
     if (isValid) {
       if (useApiKey) {
         signUp({
@@ -142,6 +146,14 @@ class SignUp extends PureComponent {
     }
 
     return isValid
+  }
+
+  validateUsername = (userName) => {
+    const { users } = this.props
+    const isRegisteredUserName = _includes(
+      _map(users, user => user.email), userName,
+    )
+    return isRegisteredUserName
   }
 
   handleInputChange = (e) => {
