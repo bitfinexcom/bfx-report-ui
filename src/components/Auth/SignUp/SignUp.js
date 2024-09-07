@@ -18,7 +18,7 @@ import config from 'config'
 import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
-import { MODES } from '../Auth'
+import { AUTH_TYPES, MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import LoginApiKey from '../LoginApiKey'
@@ -73,7 +73,9 @@ class SignUp extends PureComponent {
   }
 
   onSignUp = () => {
-    const { signUp, signUpEmail, users } = this.props
+    const {
+      signUp, signUpEmail, users, switchMode, updateStatus,
+    } = this.props
     const {
       apiKey,
       apiSecret,
@@ -101,6 +103,10 @@ class SignUp extends PureComponent {
         })
       } else if (isRegisteredUserName) {
         const registeredUser = _find(users, user => _isEqual(user.email, userName))
+        updateStatus({ id: 'auth.accAddedWithApiKey' })
+        switchMode(MODES.SIGN_IN)
+
+
         console.log('+++isRegisteredUserName', isRegisteredUserName)
         console.log('++userName', userName)
         console.log('++registeredUser', registeredUser)
