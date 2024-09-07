@@ -4,6 +4,107 @@ import {
   PieChart as SimplePieChart, Pie, Legend, Cell,
 } from 'recharts'
 
+const testData = [
+  {
+    name: 'BTC',
+    value: 34.13116728,
+  },
+  {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  },
+  {
+    name: 'ZEC',
+    value: 0.612238568,
+  },
+  {
+    name: 'SOL',
+    value: 0.4284770967,
+  },
+  {
+    name: 'LUNA2',
+    value: 0.3158846987747,
+  },
+  {
+    name: 'AVAX',
+    value: 0.25771596661999996,
+  },
+  {
+    name: 'OMG',
+    value: 0.102529873789,
+  },
+  {
+    name: 'UNI',
+    value: 0.0873126,
+  },
+  {
+    name: 'MKR',
+    value: 0.062973,
+  },
+  {
+    name: 'BTC',
+    value: 34.13116728,
+  },
+  {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  },
+  {
+    name: 'ZEC',
+    value: 0.612238568,
+  },
+  {
+    name: 'SOL',
+    value: 0.4284770967,
+  },
+  {
+    name: 'LUNA2',
+    value: 0.3158846987747,
+  },
+  {
+    name: 'AVAX',
+    value: 0.25771596661999996,
+  },
+  {
+    name: 'OMG',
+    value: 0.102529873789,
+  },
+  {
+    name: 'UNI',
+    value: 0.0873126,
+  },
+  {
+    name: 'MKR',
+    value: 0.062973,
+  },
+  {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  },
+  {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  }, {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  }, {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  }, {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  }, {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  }, {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  }, {
+    name: 'LN-BTC',
+    value: 2.69066532,
+  },
+]
+
 const COLORS = [
   '#8a36d8',
   '#FF3333',
@@ -63,13 +164,19 @@ class PieChart extends PureComponent {
     return COLORS[index % COLORS.length]
   }
 
+  getChartHeight = () => {
+    const { data } = this.props
+    // base height + 18px for each 4 items row
+    return 340 + data?.length / 4 * 18
+  }
+
   render() {
     const { data } = this.props
 
     return (
       <SimplePieChart
         width={282}
-        height={340}
+        height={this.getChartHeight()}
       >
         <Pie
           data={data}
