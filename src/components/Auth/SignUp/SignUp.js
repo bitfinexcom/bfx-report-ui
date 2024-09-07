@@ -9,6 +9,8 @@ import {
   Intent,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
+import _find from 'lodash/find'
+import _isEqual from 'lodash/isEqual'
 import _includes from 'lodash/includes'
 
 import Icon from 'icons'
@@ -71,7 +73,7 @@ class SignUp extends PureComponent {
   }
 
   onSignUp = () => {
-    const { signUp, signUpEmail } = this.props
+    const { signUp, signUpEmail, users } = this.props
     const {
       apiKey,
       apiSecret,
@@ -88,7 +90,6 @@ class SignUp extends PureComponent {
     tracker.trackEvent('Add Account')
     const isValid = this.validateForm()
     const isRegisteredUserName = this.validateUsername(userName)
-    console.log('+++isRegisteredUserName', isRegisteredUserName)
     if (isValid) {
       if (useApiKey) {
         signUp({
@@ -98,6 +99,11 @@ class SignUp extends PureComponent {
           isNotProtected: !isPasswordProtected,
           isPersisted,
         })
+      } else if (isRegisteredUserName) {
+        const registeredUser = _find(users, user => _isEqual(user.email, userName))
+        console.log('+++isRegisteredUserName', isRegisteredUserName)
+        console.log('++userName', userName)
+        console.log('++registeredUser', registeredUser)
       } else {
         signUpEmail({
           login: userName,
