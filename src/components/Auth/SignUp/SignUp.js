@@ -9,8 +9,8 @@ import {
   Intent,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
-import _find from 'lodash/find'
-import _isEqual from 'lodash/isEqual'
+// import _find from 'lodash/find'
+// import _isEqual from 'lodash/isEqual'
 import _includes from 'lodash/includes'
 
 import Icon from 'icons'
@@ -44,6 +44,7 @@ class SignUp extends PureComponent {
     showOtpLogin: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchMode: PropTypes.func.isRequired,
+    updateStatus: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string.isRequired,
       isSubAccount: PropTypes.bool.isRequired,
@@ -74,7 +75,11 @@ class SignUp extends PureComponent {
 
   onSignUp = () => {
     const {
-      signUp, signUpEmail, users, switchMode, updateStatus,
+      // users,
+      signUp,
+      switchMode,
+      signUpEmail,
+      updateStatus,
     } = this.props
     const {
       apiKey,
@@ -102,14 +107,9 @@ class SignUp extends PureComponent {
           isPersisted,
         })
       } else if (isRegisteredUserName) {
-        const registeredUser = _find(users, user => _isEqual(user.email, userName))
+        // const registeredUser = _find(users, user => _isEqual(user.email, userName))
         updateStatus({ id: 'auth.accAddedWithApiKey' })
         switchMode(MODES.SIGN_IN)
-
-
-        console.log('+++isRegisteredUserName', isRegisteredUserName)
-        console.log('++userName', userName)
-        console.log('++registeredUser', registeredUser)
       } else {
         signUpEmail({
           login: userName,
