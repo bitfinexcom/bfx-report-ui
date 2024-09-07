@@ -9,6 +9,7 @@ import {
   signUpEmail,
   showOtpLogin,
 } from 'state/auth/actions'
+import { updateStatus } from 'state/status/actions'
 import {
   getUsers,
   getAuthData,
@@ -31,6 +32,7 @@ const mapDispatchToProps = {
   updateAuth,
   signUpEmail,
   showOtpLogin,
+  updateStatus,
 }
 
 export default compose(
