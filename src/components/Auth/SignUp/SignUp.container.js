@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
 import {
+  signIn,
   signUp,
   signUpOtp,
   updateAuth,
@@ -27,6 +28,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
+  signIn,
   signUp,
   signUpOtp,
   updateAuth,
