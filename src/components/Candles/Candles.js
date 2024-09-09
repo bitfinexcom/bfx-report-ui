@@ -132,12 +132,13 @@ class Candles extends PureComponent {
     return (
       <Card
         elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+        className='candles col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader>
           <SectionHeaderTitle>
             {t('candles.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
@@ -165,12 +166,9 @@ class Candles extends PureComponent {
             />
             <RefreshButton onClick={refresh} />
             <CandlesSyncPref />
+            <GoToButton onClick={toggleGoToRangeDialog} />
           </SectionHeaderRow>
         </SectionHeader>
-        <div className='candles-header'>
-          <SectionSwitch target={TYPE} hasSubSections />
-          <GoToButton onClick={toggleGoToRangeDialog} />
-        </div>
         {showContent}
       </Card>
     )
