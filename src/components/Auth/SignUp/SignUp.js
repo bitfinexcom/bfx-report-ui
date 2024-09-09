@@ -161,10 +161,17 @@ class SignUp extends PureComponent {
   }
 
   handleExistingUser = (userName) => {
-    const { users, switchMode, updateStatus } = this.props
+    const {
+      users, switchMode, updateStatus, signIn,
+    } = this.props
     const registeredUser = _find(users, user => _isEqual(user.email, userName))
+    const { email, isNotProtected } = registeredUser
     updateStatus({ id: 'auth.accAddedWithApiKey' })
-    switchMode(MODES.SIGN_IN)
+    if (isNotProtected) {
+      signIn({ email })
+    } else {
+      switchMode(MODES.SIGN_IN)
+    }
   }
 
   handleInputChange = (e) => {
