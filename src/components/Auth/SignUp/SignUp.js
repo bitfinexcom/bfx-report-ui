@@ -38,6 +38,7 @@ class SignUp extends PureComponent {
     }).isRequired,
     loading: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
+    signIn: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
     signUpOtp: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
