@@ -9,8 +9,8 @@ import {
   Intent,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
-// import _find from 'lodash/find'
-// import _isEqual from 'lodash/isEqual'
+import _find from 'lodash/find'
+import _isEqual from 'lodash/isEqual'
 import _includes from 'lodash/includes'
 
 import Icon from 'icons'
@@ -74,13 +74,7 @@ class SignUp extends PureComponent {
   }
 
   onSignUp = () => {
-    const {
-      // users,
-      signUp,
-      switchMode,
-      signUpEmail,
-      updateStatus,
-    } = this.props
+    const { signUp, signUpEmail } = this.props
     const {
       apiKey,
       apiSecret,
@@ -107,9 +101,7 @@ class SignUp extends PureComponent {
           isPersisted,
         })
       } else if (isRegisteredUserName) {
-        // const registeredUser = _find(users, user => _isEqual(user.email, userName))
-        updateStatus({ id: 'auth.accAddedWithApiKey' })
-        switchMode(MODES.SIGN_IN)
+        this.handleExistingUser(userName)
       } else {
         signUpEmail({
           login: userName,
@@ -166,6 +158,13 @@ class SignUp extends PureComponent {
       _map(users, user => user.email), userName,
     )
     return isRegisteredUserName
+  }
+
+  handleExistingUser = (userName) => {
+    const { users, switchMode, updateStatus } = this.props
+    const registeredUser = _find(users, user => _isEqual(user.email, userName))
+    updateStatus({ id: 'auth.accAddedWithApiKey' })
+    switchMode(MODES.SIGN_IN)
   }
 
   handleInputChange = (e) => {
