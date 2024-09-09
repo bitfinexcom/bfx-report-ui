@@ -68,6 +68,7 @@
     "accWithApiKey": "Add account with API key",
     "accWithoutApiKey": "Add account without API key",
     "accAddedWithApiKey": "You have already added this account using an API key",
+    "accAddedWithApiKeyLogin": "You have already added this account using an API key, logging you in...",
     "simpleAccounts": "Simple Accounts",
     "multipleAccounts": "Multiple Accounts",
     "login": "Login",
