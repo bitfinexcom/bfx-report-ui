@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import {
   fetchSnapshots,
   refresh,
+  setTimestamp,
 } from 'state/snapshots/actions'
 import {
   getDataReceived,
@@ -36,6 +37,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchData: fetchSnapshots,
   refresh,
+  setTimestamp,
 }
 
 const SnapshotsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Snapshots))

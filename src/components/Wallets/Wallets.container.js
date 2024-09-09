@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import {
   refresh,
+  setTimestamp,
   fetchWallets,
   setExactBalance,
 } from 'state/wallets/actions'
@@ -37,6 +38,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   refresh,
+  setTimestamp,
   fetchSnapshots,
   setExactBalance,
   fetchData: fetchWallets,

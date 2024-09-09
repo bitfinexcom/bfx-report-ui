@@ -54,9 +54,7 @@ export function snapshotsReducer(state = initialState, action) {
     }
     case types.SET_TIMESTAMP:
       return {
-        ...initialState,
-        dataReceived: false,
-        pageLoading: true,
+        ...state,
         timestamp: payload,
       }
     case types.FETCH_FAIL:
