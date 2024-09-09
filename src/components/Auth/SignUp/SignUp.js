@@ -18,7 +18,7 @@ import config from 'config'
 import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
-import { AUTH_TYPES, MODES } from '../Auth'
+import { MODES } from '../Auth'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import LoginApiKey from '../LoginApiKey'
