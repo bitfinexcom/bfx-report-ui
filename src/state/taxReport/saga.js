@@ -4,6 +4,7 @@ import {
   select,
   takeLatest,
 } from 'redux-saga/effects'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import { makeFetchCall } from 'state/utils'
 import { updateSuccessStatus, updateErrorStatus } from 'state/status/actions'
@@ -14,6 +15,7 @@ import actions from './actions'
 import { getTransactionsStrategy } from './selectors'
 
 export const getReqTaxReport = (params) => makeFetchCall('makeTrxTaxReportInBackground', params)
+export const getReqTaxReportCancel = () => makeFetchCall('interruptOperations', { names: [types.TAX_REPORT_CANCEL] })
 
 export function* fetchTaxReport() {
   try {
@@ -46,7 +48,7 @@ function* handleTaxTrxReportGenerationCompleted({ payload }) {
   const { result, error } = payload
   if (result) {
     yield put(actions.updateTaxReportTransactions(result))
-    yield put(updateSuccessStatus({ id: 'taxreport.generation.success' }))
+    if (!isEmpty(result)) yield put(updateSuccessStatus({ id: 'taxreport.generation.success' }))
   }
   if (error) {
     yield put(actions.fetchFail({
@@ -65,9 +67,29 @@ function* handleTaxTrxReportGenerationProgress({ payload }) {
   }
 }
 
+function* cancelTaxReportGeneration() {
+  try {
+    const { error } = yield call(getReqTaxReportCancel)
+    if (error) {
+      yield put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'taxreport.title',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(actions.fetchFail({
+      id: 'status.request.error',
+      topic: 'taxreport.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
 export default function* taxReportSaga() {
   yield takeLatest(types.FETCH_FAIL, fetchTaxReportFail)
   yield takeLatest([types.FETCH_TRANSACTIONS], fetchTaxReport)
+  yield takeLatest([types.CANCEL_TAX_REPORT_GENERATION], cancelTaxReportGeneration)
   yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_PROGRESS, handleTaxTrxReportGenerationProgress)
   yield takeLatest(types.WS_TAX_TRANSACTION_REPORT_GENERATION_COMPLETED, handleTaxTrxReportGenerationCompleted)
 }
