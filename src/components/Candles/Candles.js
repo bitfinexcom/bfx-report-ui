@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
-import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -14,7 +13,6 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import TimeRange from 'ui/TimeRange'
 import GoToButton from 'ui/GoToButton'
-import QueryButton from 'ui/QueryButton'
 import PairSelector from 'ui/PairSelector'
 import Timeframe from 'ui/CandlesTimeframe'
 import RefreshButton from 'ui/RefreshButton'
@@ -73,17 +71,6 @@ class Candles extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  hasChanges = () => {
-    const { currentFetchParams, params } = this.props
-    return !isEqual(currentFetchParams, params)
-  }
-
-  handleQuery = () => {
-    const { refresh, fetchData } = this.props
-    refresh()
-    fetchData()
-  }
-
   onPairSelect = (pair) => {
     const { setParams } = this.props
     setParams({ pair })
@@ -107,7 +94,6 @@ class Candles extends PureComponent {
       toggleGoToRangeDialog,
     } = this.props
     const { pair, timeframe } = params
-    const hasChanges = this.hasChanges()
     const chartClassName = isChartLoading ? 'candlestick--loading' : ''
 
     let showContent
@@ -132,12 +118,13 @@ class Candles extends PureComponent {
     return (
       <Card
         elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+        className='candles col-lg-12 col-md-12 col-sm-12 col-xs-12'
       >
         <SectionHeader>
           <SectionHeaderTitle>
             {t('candles.title')}
           </SectionHeaderTitle>
+          <SectionSwitch target={TYPE} />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
@@ -159,18 +146,11 @@ class Candles extends PureComponent {
               value={timeframe}
               onChange={this.onTimeframeChange}
             />
-            <QueryButton
-              disabled={!hasChanges}
-              onClick={this.handleQuery}
-            />
             <RefreshButton onClick={refresh} />
             <CandlesSyncPref />
+            <GoToButton onClick={toggleGoToRangeDialog} />
           </SectionHeaderRow>
         </SectionHeader>
-        <div className='candles-header'>
-          <SectionSwitch target={TYPE} hasSubSections />
-          <GoToButton onClick={toggleGoToRangeDialog} />
-        </div>
         {showContent}
       </Card>
     )

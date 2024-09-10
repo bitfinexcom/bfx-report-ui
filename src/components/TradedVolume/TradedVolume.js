@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
-import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -15,7 +15,6 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
-import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import MultiPairSelector from 'ui/MultiPairSelector'
@@ -43,19 +42,9 @@ class TradedVolume extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleQuery = () => {
-    const { fetchData } = this.props
-    fetchData()
-  }
-
   handleTimeframeChange = (timeframe) => {
     const { setParams } = this.props
     setParams({ timeframe })
-  }
-
-  hasChanges = () => {
-    const { currentFetchParams, params } = this.props
-    return !isEqual(currentFetchParams, params)
   }
 
   clearPairs = () => clearAllPairs(TYPE, this.props)
@@ -70,7 +59,6 @@ class TradedVolume extends PureComponent {
       dataReceived,
       params: { timeframe },
     } = this.props
-    const hasChanges = this.hasChanges()
 
     const { chartData, presentCurrencies } = parseChartData({
       timeframe,
@@ -127,10 +115,6 @@ class TradedVolume extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-            <QueryButton
-              disabled={!hasChanges}
-              onClick={this.handleQuery}
-            />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>

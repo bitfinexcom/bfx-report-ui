@@ -12,7 +12,6 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 
@@ -57,17 +56,19 @@ class Wallets extends PureComponent {
   }
 
   handleDateChange = (time) => {
+    const { setTimestamp } = this.props
     const end = time && time.getTime()
     if (isValidTimeStamp(end) || time === null) {
       this.setState({ timestamp: time })
+      setTimestamp(end)
     }
   }
 
-  handleQuery = () => {
-    const { fetchData, fetchSnapshots } = this.props
+  handleRefresh = () => {
+    const { refresh, fetchSnapshots } = this.props
     const { timestamp } = this.state
     const time = timestamp ? timestamp.getTime() : null
-    fetchData(time)
+    refresh()
     if (isFrameworkMode) fetchSnapshots(time)
   }
 
@@ -75,9 +76,7 @@ class Wallets extends PureComponent {
     const {
       t,
       entries,
-      refresh,
       pageLoading,
-      currentTime,
       exactBalance,
       dataReceived,
       setExactBalance,
@@ -86,7 +85,6 @@ class Wallets extends PureComponent {
       walletsSnapshotEntries,
     } = this.props
     const { timestamp } = this.state
-    const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
     const walletsData = (isFrameworkMode && exactBalance) ? walletsSnapshotEntries : entries
     const isLoading = (!dataReceived && pageLoading)
       || (exactBalance && !snapshotReceived && snapshotLoading)
@@ -120,11 +118,7 @@ class Wallets extends PureComponent {
                   onChange={setExactBalance}
                 />
               </SectionHeaderItem>
-              <QueryButton
-                disabled={!hasNewTime}
-                onClick={this.handleQuery}
-              />
-              <RefreshButton onClick={refresh} />
+              <RefreshButton onClick={this.handleRefresh} />
             </SectionHeaderRow>
           )}
         </SectionHeader>

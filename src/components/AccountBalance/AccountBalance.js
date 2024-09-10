@@ -15,7 +15,6 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
-import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
@@ -36,7 +35,6 @@ class AccountBalance extends PureComponent {
       mts: PropTypes.number,
       USD: PropTypes.number,
     })),
-    fetchData: PropTypes.func.isRequired,
     isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
@@ -58,11 +56,6 @@ class AccountBalance extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleQuery = () => {
-    const { fetchData } = this.props
-    fetchData()
-  }
-
   handleTimeframeChange = (timeframe) => {
     const { setParams } = this.props
     setParams({ timeframe })
@@ -71,19 +64,6 @@ class AccountBalance extends PureComponent {
   handleUnrealizedProfitChange = (isUnrealizedProfitExcluded) => {
     const { setParams } = this.props
     setParams({ isUnrealizedProfitExcluded })
-  }
-
-  hasChanges = () => {
-    const {
-      currentFetchParams: {
-        timeframe: currTimeframe,
-        isUnrealizedProfitExcluded: currUnrealizedProfitState,
-      },
-      isUnrealizedProfitExcluded,
-      timeframe,
-    } = this.props
-    return currTimeframe !== timeframe
-      || currUnrealizedProfitState !== isUnrealizedProfitExcluded
   }
 
   render() {
@@ -97,7 +77,6 @@ class AccountBalance extends PureComponent {
       t,
       timeframe,
     } = this.props
-    const hasChanges = this.hasChanges()
 
     const { chartData, presentCurrencies } = parseChartData({
       data: _sortBy(entries, ['mts']),
@@ -151,10 +130,6 @@ class AccountBalance extends PureComponent {
                 onChange={this.handleUnrealizedProfitChange}
               />
             </SectionHeaderItem>
-            <QueryButton
-              disabled={!hasChanges}
-              onClick={this.handleQuery}
-            />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>

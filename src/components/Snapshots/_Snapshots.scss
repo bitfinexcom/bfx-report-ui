@@ -1,14 +1,22 @@
+.snapshots {
+  .section-header {
+    &-title {
+      margin-bottom: 29px;
+    }
+  }
+
 .tickers {
   .tables-row {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
 
     &-item {
-      width: 49%;
-      margin-right: 0;
-      min-width: 300px;
+        width: 49%;
+        margin-right: 0;
+        min-width: 300px;
+      }
     }
   }
 }

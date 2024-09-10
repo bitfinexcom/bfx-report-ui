@@ -1,15 +1,22 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Spinner } from '@blueprintjs/core'
+import { Button, Spinner } from '@blueprintjs/core'
 import { isNil } from '@bitfinex/lib-js-util-base'
 
+import { cancelTaxReportGeneration } from 'state/taxReport/actions'
 import { getTransactionsGenerationProgress } from 'state/taxReport/selectors'
 
 export const Loader = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const progress = useSelector(getTransactionsGenerationProgress)
   const spinnerContent = isNil(progress) ? '' : `${progress}%`
+
+  const onCancel = useCallback(
+    () => dispatch(cancelTaxReportGeneration()),
+    [dispatch],
+  )
 
   return (
     <div className='loading-container'>
@@ -26,6 +33,12 @@ export const Loader = () => {
         <p>{t('taxreport.generation.title')}</p>
         <p>{t('taxreport.generation.note')}</p>
       </div>
+      <Button
+        onClick={onCancel}
+        className='loading-cancel-btn'
+      >
+        {t('framework.cancel')}
+      </Button>
     </div>
   )
 }

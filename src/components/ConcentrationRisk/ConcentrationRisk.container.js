@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
-import { fetchWallets, refresh } from 'state/wallets/actions'
+import { fetchWallets, refresh, setTimestamp } from 'state/wallets/actions'
 import {
   getEntries,
   getTimestamp,
@@ -25,6 +25,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   refresh,
   fetchWallets,
+  setTimestamp,
 }
 
 export default compose(

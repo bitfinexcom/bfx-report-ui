@@ -7,7 +7,6 @@ import DataTable from 'ui/DataTable'
 import { checkFetch } from 'state/utils'
 import { getPath } from 'state/query/utils'
 import SectionHeader from 'ui/SectionHeader'
-import SectionSwitch from 'ui/SectionSwitch'
 import queryConstants from 'state/query/constants'
 import getColumns from 'components/Positions/Positions.columns'
 
@@ -110,13 +109,10 @@ class PositionsActive extends PureComponent {
         <SectionHeader
           filter={false}
           target={TYPE}
+          showHeaderTabs
           timeframe={false}
-          title='activepositions.title'
-        />
-        <SectionSwitch
-          target={TYPE}
-          hasSubSections
           refresh={refresh}
+          title='activepositions.title'
         />
         {showContent}
       </Card>

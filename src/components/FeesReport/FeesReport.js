@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
-import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -15,7 +15,6 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
-import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
@@ -57,7 +56,6 @@ class FeesReport extends PureComponent {
     entries: PropTypes.arrayOf(PropTypes.shape({
       mts: PropTypes.number.isRequired,
     })),
-    fetchData: PropTypes.func.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     params: PropTypes.shape({
       timeframe: PropTypes.string,
@@ -86,19 +84,9 @@ class FeesReport extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleQuery = () => {
-    const { fetchData } = this.props
-    fetchData()
-  }
-
   handleTimeframeChange = (timeframe) => {
     const { setParams } = this.props
     setParams({ timeframe })
-  }
-
-  hasChanges = () => {
-    const { currentFetchParams, params } = this.props
-    return !isEqual(currentFetchParams, params)
   }
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
@@ -189,10 +177,6 @@ class FeesReport extends PureComponent {
                 onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
-            <QueryButton
-              onClick={this.handleQuery}
-              disabled={!this.hasChanges()}
-            />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>

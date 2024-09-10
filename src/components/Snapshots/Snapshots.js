@@ -11,7 +11,6 @@ import {
 } from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
 import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
-import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
@@ -55,17 +54,12 @@ class Snapshots extends PureComponent {
   }
 
   handleDateChange = (time) => {
+    const { setTimestamp } = this.props
     const end = time && time.getTime()
     if (isValidTimeStamp(end) || time === null) {
       this.setState({ timestamp: time })
+      setTimestamp(end)
     }
-  }
-
-  handleQuery = () => {
-    const { fetchData } = this.props
-    const { timestamp } = this.state
-    const time = timestamp ? timestamp.getTime() : null
-    fetchData(time)
   }
 
   getCurrentSection = () => {
@@ -107,7 +101,6 @@ class Snapshots extends PureComponent {
     const {
       t,
       refresh,
-      currentTime,
       pageLoading,
       dataReceived,
       walletsEntries,
@@ -120,7 +113,6 @@ class Snapshots extends PureComponent {
     const { timestamp } = this.state
     const isLoading = !dataReceived && pageLoading
     const section = this.getCurrentSection()
-    const hasNewTime = timestamp ? currentTime !== timestamp.getTime() : !!currentTime !== !!timestamp
     const isNoData = (section === MENU_POSITIONS && !positionsEntries.length)
       || (section === MENU_TICKERS && !positionsTickersEntries.length && !walletsTickersEntries.length)
       || (section === MENU_WALLETS && !walletsEntries.length)
@@ -154,9 +146,18 @@ class Snapshots extends PureComponent {
     }
 
     return (
-      <Card elevation={Elevation.ZERO} className='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+      <Card elevation={Elevation.ZERO} className='snapshots col-lg-12 col-md-12 col-sm-12 col-xs-12'>
         <SectionHeader>
           <SectionHeaderTitle>{t('snapshots.title')}</SectionHeaderTitle>
+          <NavSwitcher
+            items={[
+              { value: MENU_POSITIONS, label: t('positions.title') },
+              { value: MENU_TICKERS, label: t('tickers.title') },
+              { value: MENU_WALLETS, label: t('wallets.title') },
+            ]}
+            onChange={this.switchSection}
+            value={section}
+          />
           <SectionHeaderRow>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
@@ -167,24 +168,9 @@ class Snapshots extends PureComponent {
                 defaultValue={timestamp}
               />
             </SectionHeaderItem>
-
-            <QueryButton
-              disabled={!hasNewTime}
-              onClick={this.handleQuery}
-            />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
-
-        <NavSwitcher
-          items={[
-            { value: MENU_POSITIONS, label: t('positions.title') },
-            { value: MENU_TICKERS, label: t('tickers.title') },
-            { value: MENU_WALLETS, label: t('wallets.title') },
-          ]}
-          onChange={this.switchSection}
-          value={section}
-        />
         {showContent}
       </Card>
     )

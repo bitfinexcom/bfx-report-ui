@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _sortBy from 'lodash/sortBy'
-import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
+import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -15,7 +15,6 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
-import QueryButton from 'ui/QueryButton'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
@@ -50,7 +49,6 @@ class LoanReport extends PureComponent {
       timeframe: PropTypes.string,
       targetSymbols: PropTypes.arrayOf(PropTypes.string),
     }),
-    fetchData: PropTypes.func.isRequired,
     setParams: PropTypes.func.isRequired,
   }
 
@@ -69,19 +67,9 @@ class LoanReport extends PureComponent {
     checkFetch(prevProps, this.props, TYPE)
   }
 
-  handleQuery = () => {
-    const { fetchData } = this.props
-    fetchData()
-  }
-
   handleTimeframeChange = (timeframe) => {
     const { setParams } = this.props
     setParams({ timeframe })
-  }
-
-  hasChanges = () => {
-    const { currentFetchParams, params } = this.props
-    return !isEqual(currentFetchParams, params)
   }
 
   toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
@@ -102,7 +90,6 @@ class LoanReport extends PureComponent {
       },
     } = this.props
     const { timeframe } = params
-    const hasChanges = this.hasChanges()
 
     const { chartData, dataKeys } = parseLoanReportChartData({
       data: _sortBy(entries, ['mts']),
@@ -159,10 +146,6 @@ class LoanReport extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-            <QueryButton
-              disabled={!hasChanges}
-              onClick={this.handleQuery}
-            />
             <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
