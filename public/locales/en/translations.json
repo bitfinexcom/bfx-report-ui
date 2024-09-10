@@ -712,6 +712,9 @@
     "message": {
       "canceled": "Canceled old Sync Watcher"
     },
+    "last-sync-time": {
+      "fail": "Failed to get last sync time"
+    },
     "init-sync-info": {
       "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",
       "additional": "Syncing is still in progress, this might take several minutes. Keep this window open until it's finished in case you have a large history."
