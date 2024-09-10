@@ -132,11 +132,30 @@ function* switchSyncMode({ mode }) {
   }
 }
 
+function* refreshLastFinishedSyncMts() {
+  try {
+    const { result } = yield call(getLastFinishedSyncMts)
+    if (result) {
+      const { lastSyncMts } = result
+      yield put(actions.setLastSyncTime(lastSyncMts))
+    }
+  } catch (fail) {
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'symbols.title',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
+
 function* forceQueryFromDb() {
   const syncProgress = yield select(getSyncProgress)
   if (syncProgress === 100) {
     yield put(updateStatus({ id: 'sync.sync-done' }))
   }
+  yield call(refreshLastFinishedSyncMts)
+  console.log('++1')
   yield put(actions.setIsSyncing(false))
   yield put(actions.setIsSyncRequired(false))
   yield put(actions.showInitSyncPopup(false))
@@ -229,6 +248,8 @@ function* requestsRedirectUpdate({ payload }) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
     yield put(actions.setIsSyncing(false))
     yield put(actions.showInitSyncPopup(false))
+    console.log('+++')
+    yield call(refreshLastFinishedSyncMts)
   } else {
     yield put(actions.setSyncMode(types.MODE_OFFLINE))
     yield put(actions.forceQueryFromDb())
