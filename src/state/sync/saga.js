@@ -134,15 +134,22 @@ function* switchSyncMode({ mode }) {
 
 function* refreshLastFinishedSyncMts() {
   try {
-    const { result } = yield call(getLastFinishedSyncMts)
+    const { result, error } = yield call(getLastFinishedSyncMts)
     if (result) {
       const { lastSyncMts } = result
       yield put(actions.setLastSyncTime(lastSyncMts))
     }
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'sync.last-sync-time.fail',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
   } catch (fail) {
     yield put(updateErrorStatus({
       id: 'status.request.error',
-      topic: 'symbols.title',
+      topic: 'sync.last-sync-time.fail',
       detail: JSON.stringify(fail),
     }))
   }
