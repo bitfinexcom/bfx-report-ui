@@ -31,6 +31,7 @@ const disableSyncMode = () => makeFetchCall('disableSyncMode')
 const haveCollsBeenSyncedAtLeastOnce = () => makeFetchCall('haveCollsBeenSyncedAtLeastOnce')
 const syncNow = () => makeFetchCall('syncNow')
 const syncNowStop = () => makeFetchCall('stopSyncNow')
+const getLastFinishedSyncMts = () => makeFetchCall('getLastFinishedSyncMts')
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
