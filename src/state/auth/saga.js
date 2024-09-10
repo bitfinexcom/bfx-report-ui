@@ -28,7 +28,7 @@ import tokenRefreshSaga from 'state/auth/tokenRefresh/saga'
 import { togglePreferencesDialog } from 'state/ui/actions'
 import { updateErrorStatus, updateSuccessStatus, updateWarningStatus } from 'state/status/actions'
 import { fetchSymbols } from 'state/symbols/actions'
-import { setIsSyncRequired } from 'state/sync/actions'
+import { setIsSyncRequired, setLastSyncTime } from 'state/sync/actions'
 import { refreshToken, tokenRefreshStart, tokenRefreshStop } from 'state/auth/tokenRefresh/actions'
 import config from 'config'
 
@@ -45,6 +45,8 @@ const updateAuthErrorStatus = msg => updateErrorStatus({
 
 function* onAuthSuccess(result) {
   try {
+    const { lastSyncMts } = result
+    yield put(setLastSyncTime(lastSyncMts))
     yield put(actions.updateAuth(result))
     yield put(fetchSymbols())
 
