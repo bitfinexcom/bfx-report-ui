@@ -154,11 +154,10 @@ function* forceQueryFromDb() {
   if (syncProgress === 100) {
     yield put(updateStatus({ id: 'sync.sync-done' }))
   }
-  yield call(refreshLastFinishedSyncMts)
-  console.log('++1')
   yield put(actions.setIsSyncing(false))
   yield put(actions.setIsSyncRequired(false))
   yield put(actions.showInitSyncPopup(false))
+  yield call(refreshLastFinishedSyncMts)
 }
 
 function* syncLogout() {
@@ -248,7 +247,6 @@ function* requestsRedirectUpdate({ payload }) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
     yield put(actions.setIsSyncing(false))
     yield put(actions.showInitSyncPopup(false))
-    console.log('+++')
     yield call(refreshLastFinishedSyncMts)
   } else {
     yield put(actions.setSyncMode(types.MODE_OFFLINE))
