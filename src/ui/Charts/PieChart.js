@@ -63,13 +63,19 @@ class PieChart extends PureComponent {
     return COLORS[index % COLORS.length]
   }
 
+  getChartHeight = () => {
+    const { data } = this.props
+    // base height + 18px for each 4 items row
+    return 340 + data?.length / 4 * 18
+  }
+
   render() {
     const { data } = this.props
 
     return (
       <SimplePieChart
         width={282}
-        height={340}
+        height={this.getChartHeight()}
       >
         <Pie
           data={data}
