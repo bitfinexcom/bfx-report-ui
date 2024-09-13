@@ -1,16 +1,21 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { getLastSyncTime } from 'state/sync/selectors'
+import { getIsSyncing, getLastSyncTime } from 'state/sync/selectors'
 
 const LastSyncTime = () => {
+  const isSyncing = useSelector(getIsSyncing)
   const lasSyncTime = useSelector(getLastSyncTime)
   console.log('+++lasSyncTime', lasSyncTime)
 
+  const content = isSyncing
+    ? 'Syncing...'
+    : 'Last Sync was 3 hours ago'
+
   return (
-    <p className='last-sync-time'>
-      Last sync was 3 hours ago
-    </p>
+    <div className='last-sync-time'>
+      <span>{content}</span>
+    </div>
   )
 }
 
