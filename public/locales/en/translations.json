@@ -715,8 +715,8 @@
     "last-sync-time": {
       "fail": "Failed to get last sync time",
       "syncing": "Syncing...",
-      "sync-was-less-than-hour": "Last sync was less than a hour ago",
-      "sync-was":"Last sync was {{hours}} ago"
+      "sync-was-less-than-hour": "Last Sync was less than a hour ago",
+      "sync-was":"Last Sync was {{hours}} ago"
     },
     "init-sync-info": {
       "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",
