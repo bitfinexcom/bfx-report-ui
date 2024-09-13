@@ -9,6 +9,7 @@ import Export from './Export'
 import SyncMode from './SyncMode'
 import QueryMode from './QueryMode'
 import AccountMenu from './AccountMenu'
+import LastSyncTime from './LastSyncTime'
 import TopNavigation from './TopNavigation'
 
 const Header = () => {
@@ -23,6 +24,7 @@ const Header = () => {
         </a>
       </div>
       <div className='header-row'>
+        <LastSyncTime />
         <Export />
         <SyncMode />
         <QueryMode />
