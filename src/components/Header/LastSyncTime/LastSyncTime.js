@@ -21,7 +21,7 @@ const LastSyncTime = () => {
   const lastSyncLabel = getLastSyncLabel(lasSyncTime, t)
 
   const content = isSyncing
-    ? 'Syncing...'
+    ? t('sync.last-sync-time.syncing')
     : lastSyncLabel
 
   return (
