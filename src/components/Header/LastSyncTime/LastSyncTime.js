@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import _floor from 'lodash/floor'
@@ -18,9 +18,12 @@ const getLastSyncLabel = (lastSyncTime, t) => {
 const LastSyncTime = () => {
   const { t } = useTranslation()
   const isSyncing = useSelector(getIsSyncing)
-  const lasSyncTime = useSelector(getLastSyncTime)
-  console.log('+++lasSyncTime', lasSyncTime)
-  const lastSyncLabel = getLastSyncLabel(lasSyncTime, t)
+  const lastSyncTime = useSelector(getLastSyncTime)
+
+  const lastSyncLabel = useMemo(
+    () => getLastSyncLabel(lastSyncTime, t),
+    [lastSyncTime, t],
+  )
 
   const content = isSyncing
     ? t('sync.last-sync-time.syncing')
