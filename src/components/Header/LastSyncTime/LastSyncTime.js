@@ -7,12 +7,10 @@ import { getIsSyncing, getLastSyncTime } from 'state/sync/selectors'
 
 const getLastSyncLabel = (lastSyncTime, t) => {
   const now = Date.now()
-  const duration = now - lastSyncTime
-  const hours = _floor(duration / 3600000)
-  const label = hours > 1
+  const hours = _floor((now - lastSyncTime) / 3600000)
+  return hours > 1
     ? t('sync.last-sync-time.sync-was', { hours })
     : t('sync.last-sync-time.sync-was-less-than-hour')
-  return label
 }
 
 const LastSyncTime = () => {
