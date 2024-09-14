@@ -26,7 +26,7 @@ const Header = () => {
         </a>
       </div>
       <div className='header-row'>
-        { showFrameworkMode && (<LastSyncTime />)}
+        {showFrameworkMode && (<LastSyncTime />)}
         <Export />
         <SyncMode />
         <QueryMode />
