@@ -715,7 +715,7 @@
     "last-sync-time": {
       "fail": "Failed to get last sync time",
       "syncing": "Syncing...",
-      "sync-was-less-than-hour": "Last Sync was less than a hour ago",
+      "sync-was-less-than-hour": "Last Sync was less than an hour ago",
       "sync-was":"Last Sync was {{hours}} ago"
     },
     "init-sync-info": {
