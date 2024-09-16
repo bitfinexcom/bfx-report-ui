@@ -53,6 +53,7 @@ import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
 import weightedAveragesReducer from './weightedAverages/reducer'
+import profitsReducer from './profits/reducer'
 
 const PERSIST_WHITELIST = [
   'base',
@@ -96,6 +97,7 @@ const BASE_REDUCERS = {
   orderTrades: orderTradesReducer,
   pagination: paginationReducer,
   positions: positionsReducer,
+  profits: profitsReducer,
   publicFunding: publicFundingReducer,
   publicTrades: publicTradesReducer,
   router: connectRouter(history),
