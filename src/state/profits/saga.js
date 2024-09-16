@@ -18,7 +18,7 @@ export const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
 export const getReqWinLossVSAccountBalance = params => makeFetchCall('getWinLossVSAccountBalance', params)
 
 /* eslint-disable-next-line consistent-return */
-export function* fetchWinLoss() {
+export function* fetchProfits() {
   try {
     const { start, end } = yield select(getTimeFrame)
     const {
@@ -51,17 +51,17 @@ export function* fetchWinLoss() {
   }
 }
 
-function* refreshWinLoss() {
+function* refreshProfits() {
   const params = yield select(selectors.getParams)
   yield put(actions.fetchWinLoss(params))
 }
 
-function* fetchWinLossFail({ payload }) {
+function* fetchProfitsFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
 export default function* winLossSaga() {
-  yield takeLatest(types.FETCH_WIN_LOSS, fetchWinLoss)
-  yield takeLatest(types.REFRESH, refreshWinLoss)
-  yield takeLatest(types.FETCH_FAIL, fetchWinLossFail)
+  yield takeLatest(types.FETCH_PROFITS, fetchProfits)
+  yield takeLatest(types.REFRESH, refreshProfits)
+  yield takeLatest(types.FETCH_FAIL, fetchProfitsFail)
 }
