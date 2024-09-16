@@ -37,7 +37,7 @@ export function* fetchProfits() {
       isUnrealizedProfitExcluded,
       ...(isVsAccountBalanceSelected && { isVSPrevDayBalance }),
     })
-    yield put(actions.updateWinLoss(result))
+    yield put(actions.updateProfits(result))
 
     if (error) {
       yield put(toggleErrorDialog(true, error.message))
@@ -53,14 +53,14 @@ export function* fetchProfits() {
 
 function* refreshProfits() {
   const params = yield select(selectors.getParams)
-  yield put(actions.fetchWinLoss(params))
+  yield put(actions.fetchProfits(params))
 }
 
 function* fetchProfitsFail({ payload }) {
   yield put(updateErrorStatus(payload))
 }
 
-export default function* winLossSaga() {
+export default function* profitsSaga() {
   yield takeLatest(types.FETCH_PROFITS, fetchProfits)
   yield takeLatest(types.REFRESH, refreshProfits)
   yield takeLatest(types.FETCH_FAIL, fetchProfitsFail)
