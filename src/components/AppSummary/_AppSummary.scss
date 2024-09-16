@@ -411,7 +411,7 @@
   }
 
   .line-chart {
-    width:115%;
+    width:113%;
   }
 
   .no-data {
@@ -463,7 +463,7 @@
   }
 }
 
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 1130px) {
   .app-summary {
     &-data-row {
       display: flex;
@@ -474,21 +474,15 @@
     &-item {
       width: 100%;
       margin-bottom: 30px;
+
+      .line-chart {
+        width:107%;
+      }
     }
 
     .chart-item {
       width: 100%;
       margin-right: 0;
-    }
-  }
-}
-
-@media screen and (max-width: 855px) {
-  .app-summary {
-    &-item {
-      .line-chart {
-        width:107%;
-      }
     }
   }
 }
