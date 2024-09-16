@@ -11,10 +11,10 @@ import {
   getEntries,
   getPageLoading,
   getDataReceived,
-  getCurrentTimeFrame,
-} from 'state/accountBalance/selectors'
+} from 'state/profits/selectors'
+import { getCurrentTimeFrame } from 'state/accountBalance/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
-import { fetchBalance } from 'state/accountBalance/actions'
+import { fetchProfits } from 'state/profits/actions'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 const AccountSummaryProfits = () => {
@@ -31,7 +31,7 @@ const AccountSummaryProfits = () => {
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
-      dispatch(fetchBalance())
+      dispatch(fetchProfits())
     }
   }, [timeRange, dataReceived, pageLoading, isSyncRequired])
 
