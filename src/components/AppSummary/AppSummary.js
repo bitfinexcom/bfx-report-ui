@@ -32,6 +32,7 @@ const AppSummary = ({
   isTurkishSite,
   isSyncRequired,
   refreshBalance,
+  refreshProfits,
   currentTimeFrame,
   refreshSummaryByAsset,
   isUnrealizedProfitExcluded,
@@ -53,8 +54,9 @@ const AppSummary = ({
   const onRefresh = useCallback(() => {
     refresh()
     refreshBalance()
+    refreshProfits()
     refreshSummaryByAsset()
-  }, [refresh, refreshBalance, refreshSummaryByAsset])
+  }, [refresh, refreshBalance, refreshSummaryByAsset, refreshProfits])
 
   return (
     <Card
@@ -148,6 +150,7 @@ AppSummary.propTypes = {
   currentTimeFrame: PropTypes.string.isRequired,
   isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
   refreshSummaryByAsset: PropTypes.func.isRequired,
+  refreshProfits: PropTypes.func.isRequired,
 }
 
 AppSummary.defaultProps = {
