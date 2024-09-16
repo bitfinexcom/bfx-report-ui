@@ -6,12 +6,7 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
-import LoadingPlaceholder from 'ui/LoadingPlaceholder'
-import {
-  parseChartData,
-  getFormattedChartLastValue,
-  getFormattedPercentChange,
-} from 'ui/Charts/Charts.helpers'
+import { parseChartData } from 'ui/Charts/Charts.helpers'
 import {
   getEntries,
   getPageLoading,
@@ -29,10 +24,10 @@ const AccountSummaryProfits = () => {
   const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
-  const isFirstSync = useSelector(getIsFirstSyncing)
+  // const isFirstSync = useSelector(getIsFirstSyncing)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const currTimeFrame = useSelector(getCurrentTimeFrame)
-  const isLoading = isFirstSync || (!dataReceived && pageLoading)
+  // const isLoading = isFirstSync || (!dataReceived && pageLoading)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -47,15 +42,7 @@ const AccountSummaryProfits = () => {
     }), [currTimeFrame, entries],
   )
 
-  const chartLastValue = useMemo(
-    () => getFormattedChartLastValue(chartData),
-    [chartData],
-  )
-
-  const formattedPercValue = useMemo(
-    () => getFormattedPercentChange(chartData),
-    [chartData],
-  )
+  console.log('+++chartData', chartData)
 
   let showContent
   if (dataReceived && isEmpty(entries)) {
@@ -63,28 +50,6 @@ const AccountSummaryProfits = () => {
   } else {
     showContent = (
       <div className='chart-wrapper'>
-        {isLoading ? (
-          <LoadingPlaceholder
-            isStrong
-            height={22}
-            baseWidth={72}
-          />
-        ) : (
-          <div className='chart-value'>
-            $
-            {chartLastValue}
-          </div>
-        )}
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={22}
-            baseWidth={36}
-          />
-        ) : (
-          <div className='chart-value-perc'>
-            { formattedPercValue }
-          </div>
-        )}
         <Chart
           height={375}
           data={chartData}
