@@ -7,13 +7,6 @@ export function fetchProfits(payload) {
   }
 }
 
-export function setParams(payload) {
-  return {
-    type: types.SET_PARAMS,
-    payload,
-  }
-}
-
 export function fetchFail(payload) {
   return {
     type: types.FETCH_FAIL,
@@ -34,18 +27,9 @@ export function updateProfits(payload) {
   }
 }
 
-export function setReportType(payload) {
-  return {
-    type: types.SET_REPORT_TYPE,
-    payload,
-  }
-}
-
 export default {
   fetchFail,
   fetchProfits,
   refresh,
-  setParams,
-  setReportType,
   updateProfits,
 }
