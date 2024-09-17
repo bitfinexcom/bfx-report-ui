@@ -7,15 +7,15 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 import NoData from 'ui/NoData'
 import Chart from 'ui/Charts/Chart'
 import { parseChartData } from 'ui/Charts/Charts.helpers'
+import timeframeConstants from 'ui/TimeFrameSelector/constants'
 import {
   getEntries,
   getPageLoading,
   getDataReceived,
 } from 'state/profits/selectors'
-import { getCurrentTimeFrame } from 'state/accountBalance/selectors'
-import { getTimeRange } from 'state/timeRange/selectors'
 import { fetchProfits } from 'state/profits/actions'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import { getTimeRange } from 'state/timeRange/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
 
 const AccountSummaryProfits = () => {
   const { t } = useTranslation()
@@ -24,10 +24,7 @@ const AccountSummaryProfits = () => {
   const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
-  // const isFirstSync = useSelector(getIsFirstSyncing)
   const isSyncRequired = useSelector(getIsSyncRequired)
-  const currTimeFrame = useSelector(getCurrentTimeFrame)
-  // const isLoading = isFirstSync || (!dataReceived && pageLoading)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -37,9 +34,9 @@ const AccountSummaryProfits = () => {
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
-      timeframe: currTimeFrame,
+      timeframe: timeframeConstants.DAY,
       data: _sortBy(entries, ['mts']),
-    }), [currTimeFrame, entries],
+    }), [entries],
   )
 
   console.log('+++chartData', chartData)
