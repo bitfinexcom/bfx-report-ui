@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
 import {
+  signIn,
   signUp,
   signUpOtp,
   updateAuth,
   signUpEmail,
   showOtpLogin,
 } from 'state/auth/actions'
+import { updateStatus } from 'state/status/actions'
 import {
   getUsers,
   getAuthData,
@@ -26,11 +28,13 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
+  signIn,
   signUp,
   signUpOtp,
   updateAuth,
   signUpEmail,
   showOtpLogin,
+  updateStatus,
 }
 
 export default compose(

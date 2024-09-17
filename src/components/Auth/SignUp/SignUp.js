@@ -8,6 +8,10 @@ import {
   Dialog,
   Intent,
 } from '@blueprintjs/core'
+import _map from 'lodash/map'
+import _find from 'lodash/find'
+import _isEqual from 'lodash/isEqual'
+import _includes from 'lodash/includes'
 
 import Icon from 'icons'
 import config from 'config'
@@ -34,12 +38,14 @@ class SignUp extends PureComponent {
     }).isRequired,
     loading: PropTypes.bool.isRequired,
     t: PropTypes.func.isRequired,
+    signIn: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
     signUpOtp: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
     showOtpLogin: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchMode: PropTypes.func.isRequired,
+    updateStatus: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string.isRequired,
       isSubAccount: PropTypes.bool.isRequired,
@@ -85,6 +91,7 @@ class SignUp extends PureComponent {
     })
     tracker.trackEvent('Add Account')
     const isValid = this.validateForm()
+    const isRegisteredUserName = this.validateUsername(userName)
     if (isValid) {
       if (useApiKey) {
         signUp({
@@ -94,6 +101,8 @@ class SignUp extends PureComponent {
           isNotProtected: !isPasswordProtected,
           isPersisted,
         })
+      } else if (isRegisteredUserName) {
+        this.handleExistingUser(userName)
       } else {
         signUpEmail({
           login: userName,
@@ -142,6 +151,29 @@ class SignUp extends PureComponent {
     }
 
     return isValid
+  }
+
+  validateUsername = (userName) => {
+    const { users } = this.props
+    const isRegisteredUserName = _includes(
+      _map(users, user => user.email), userName,
+    )
+    return isRegisteredUserName
+  }
+
+  handleExistingUser = (userName) => {
+    const {
+      users, switchMode, updateStatus, signIn,
+    } = this.props
+    const registeredUser = _find(users, user => _isEqual(user.email, userName))
+    const { email, isSubAccount, isNotProtected } = registeredUser
+    if (isNotProtected) {
+      updateStatus({ id: 'auth.accAddedWithApiKeyLogin' })
+      signIn({ email, isSubAccount })
+    } else {
+      switchMode(MODES.SIGN_IN)
+      updateStatus({ id: 'auth.accAddedWithApiKey' })
+    }
   }
 
   handleInputChange = (e) => {
