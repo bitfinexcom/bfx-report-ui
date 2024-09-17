@@ -34,6 +34,7 @@ import paginationReducer from './pagination/reducer'
 import positionsAuditReducer from './audit/reducer'
 import positionsActiveReducer from './positionsActive/reducer'
 import positionsReducer from './positions/reducer'
+import profitsReducer from './profits/reducer'
 import publicFundingReducer from './publicFunding/reducer'
 import publicTradesReducer from './publicTrades/reducer'
 import routingReducer from './routing/reducer'
@@ -53,7 +54,6 @@ import uiReducer from './ui/reducer'
 import walletsReducer from './wallets/reducer'
 import winLossReducer from './winLoss/reducer'
 import weightedAveragesReducer from './weightedAverages/reducer'
-import profitsReducer from './profits/reducer'
 
 const PERSIST_WHITELIST = [
   'base',
