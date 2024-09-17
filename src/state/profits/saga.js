@@ -9,34 +9,25 @@ import { makeFetchCall } from 'state/utils'
 import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
+import timeframeConstants from 'ui/TimeFrameSelector/constants'
+import unrealizedProfitConstants from 'ui/UnrealizedProfitSelector/constants'
 
 import types from './constants'
 import actions from './actions'
 import selectors from './selectors'
 
 export const getReqWinLoss = params => makeFetchCall('getWinLoss', params)
-export const getReqWinLossVSAccountBalance = params => makeFetchCall('getWinLossVSAccountBalance', params)
 
-/* eslint-disable-next-line consistent-return */
 export function* fetchProfits() {
   try {
     const { start, end } = yield select(getTimeFrame)
-    const {
-      timeframe,
-      isVSPrevDayBalance,
-      isUnrealizedProfitExcluded,
-      isVsAccountBalanceSelected,
-    } = yield select(selectors.getParams)
-
-    const { result = [], error } = yield call((isVsAccountBalanceSelected
-      ? getReqWinLossVSAccountBalance
-      : getReqWinLoss), {
-      start,
-      end,
-      timeframe,
-      isUnrealizedProfitExcluded,
-      ...(isVsAccountBalanceSelected && { isVSPrevDayBalance }),
-    })
+    const { result = [], error } = yield call((getReqWinLoss),
+      {
+        start,
+        end,
+        timeframe: timeframeConstants.DAY,
+        isUnrealizedProfitExcluded: unrealizedProfitConstants.FALSE,
+      })
     yield put(actions.updateProfits(result))
 
     if (error) {
