@@ -34,12 +34,10 @@ const AccountSummaryProfits = () => {
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
-      timeframe: timeframeConstants.DAY,
       data: _sortBy(entries, ['mts']),
+      timeframe: timeframeConstants.DAY,
     }), [entries],
   )
-
-  console.log('+++chartData', chartData)
 
   let showContent
   if (dataReceived && isEmpty(entries)) {
