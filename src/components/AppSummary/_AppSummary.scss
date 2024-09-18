@@ -411,7 +411,7 @@
   }
 
   .line-chart {
-    width:112%;
+    width:114%;
   }
 
   .no-data {
@@ -496,3 +496,14 @@
     }
   }
 }
+
+@media screen and (min-width: 1800px) {
+  .app-summary {
+    &-item {
+      .line-chart {
+        width:110%;
+      }
+    }
+  }
+}
+
