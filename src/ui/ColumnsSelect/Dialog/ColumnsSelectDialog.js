@@ -7,24 +7,23 @@ import {
 
 import Icon from 'icons'
 
-const ColumnsSelectDialog = (props) => {
-  const {
-    children,
-    isOpen,
-    hasChanges,
-    onCancel,
-    onApply,
-  } = props
+const ColumnsSelectDialog = ({
+  isOpen,
+  onApply,
+  children,
+  onCancel,
+  hasChanges,
+}) => {
   const { t } = useTranslation()
 
   return (
     <Dialog
-      className='columns-select-dialog'
-      icon={<Icon.CURSOR_SQUARE />}
-      isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={onCancel}
+      isCloseButtonShown={false}
+      icon={<Icon.CURSOR_SQUARE />}
       title={t('columnsselect.title')}
+      className='columns-select-dialog'
     >
       <div className={Classes.DIALOG_BODY}>
         {children}
@@ -37,9 +36,9 @@ const ColumnsSelectDialog = (props) => {
             {t('columnsselect.cancel')}
           </Button>
           <Button
-            intent={Intent.PRIMARY}
             onClick={onApply}
             disabled={!hasChanges}
+            intent={Intent.PRIMARY}
           >
             {t('columnsselect.apply')}
           </Button>
