@@ -1,12 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-
-import { propTypes, defaultProps } from './ColumnsSelectDialog.props'
 
 const ColumnsSelectDialog = (props) => {
   const {
@@ -50,7 +49,13 @@ const ColumnsSelectDialog = (props) => {
   )
 }
 
-ColumnsSelectDialog.propTypes = propTypes
-ColumnsSelectDialog.defaultProps = defaultProps
+ColumnsSelectDialog.propTypes = {
+  children: PropTypes.element.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  hasChanges: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onApply: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
+}
 
 export default withTranslation('translations')(ColumnsSelectDialog)
