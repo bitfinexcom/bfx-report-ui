@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
@@ -14,8 +14,8 @@ const ColumnsSelectDialog = (props) => {
     hasChanges,
     onCancel,
     onApply,
-    t,
   } = props
+  const { t } = useTranslation()
 
   return (
     <Dialog
@@ -55,7 +55,6 @@ ColumnsSelectDialog.propTypes = {
   hasChanges: PropTypes.bool.isRequired,
   onCancel: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(ColumnsSelectDialog)
+export default ColumnsSelectDialog
