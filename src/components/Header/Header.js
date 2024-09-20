@@ -9,7 +9,10 @@ import Export from './Export'
 import SyncMode from './SyncMode'
 import QueryMode from './QueryMode'
 import AccountMenu from './AccountMenu'
+import LastSyncTime from './LastSyncTime'
 import TopNavigation from './TopNavigation'
+
+const { showFrameworkMode } = config
 
 const Header = () => {
   const HOME_URL = config.isElectronApp ? '/' : config.HOME_URL
@@ -23,6 +26,7 @@ const Header = () => {
         </a>
       </div>
       <div className='header-row'>
+        {showFrameworkMode && (<LastSyncTime />)}
         <Export />
         <SyncMode />
         <QueryMode />

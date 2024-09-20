@@ -23,6 +23,7 @@ const initialState = {
   isSyncRequired: true,
   isLongSync: false,
   showInitSyncPopup: false,
+  lastSyncMts: null,
 }
 
 export function syncReducer(state = initialState, action) {
@@ -140,6 +141,12 @@ export function syncReducer(state = initialState, action) {
       return {
         ...state,
         isLongSync: payload,
+      }
+    }
+    case types.SET_LAST_SYNC_TIME: {
+      return {
+        ...state,
+        lastSyncMts: payload,
       }
     }
     default: {
