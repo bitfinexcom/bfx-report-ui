@@ -1,0 +1,12 @@
+.last-sync-time {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  color: var(--color2);
+}
+
+@media screen and (max-width: 580px) {
+  .last-sync-time {
+    display: none;
+  }
+}

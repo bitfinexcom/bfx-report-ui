@@ -31,6 +31,7 @@ const disableSyncMode = () => makeFetchCall('disableSyncMode')
 const haveCollsBeenSyncedAtLeastOnce = () => makeFetchCall('haveCollsBeenSyncedAtLeastOnce')
 const syncNow = () => makeFetchCall('syncNow')
 const syncNowStop = () => makeFetchCall('stopSyncNow')
+const getLastFinishedSyncMts = () => makeFetchCall('getLastFinishedSyncMts')
 const updateSyncErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'sync.title',
@@ -131,6 +132,30 @@ function* switchSyncMode({ mode }) {
   }
 }
 
+function* refreshLastFinishedSyncMts() {
+  try {
+    const { result, error } = yield call(getLastFinishedSyncMts)
+    if (result) {
+      const { lastSyncMts } = result
+      yield put(actions.setLastSyncTime(lastSyncMts))
+    }
+    if (error) {
+      yield put(updateErrorStatus({
+        id: 'status.fail',
+        topic: 'sync.last-sync-time.fail',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
+    }
+  } catch (fail) {
+    yield put(updateErrorStatus({
+      id: 'status.request.error',
+      topic: 'sync.last-sync-time.fail',
+      detail: JSON.stringify(fail),
+    }))
+  }
+}
+
+
 function* forceQueryFromDb() {
   const syncProgress = yield select(getSyncProgress)
   if (syncProgress === 100) {
@@ -139,6 +164,7 @@ function* forceQueryFromDb() {
   yield put(actions.setIsSyncing(false))
   yield put(actions.setIsSyncRequired(false))
   yield put(actions.showInitSyncPopup(false))
+  yield call(refreshLastFinishedSyncMts)
 }
 
 function* syncLogout() {
@@ -228,6 +254,7 @@ function* requestsRedirectUpdate({ payload }) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
     yield put(actions.setIsSyncing(false))
     yield put(actions.showInitSyncPopup(false))
+    yield call(refreshLastFinishedSyncMts)
   } else {
     yield put(actions.setSyncMode(types.MODE_OFFLINE))
     yield put(actions.forceQueryFromDb())

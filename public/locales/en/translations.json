@@ -67,6 +67,8 @@
     "apiSecret": "API Secret",
     "accWithApiKey": "Add account with API key",
     "accWithoutApiKey": "Add account without API key",
+    "accAddedWithApiKey": "You have already added this account using an API key",
+    "accAddedWithApiKeyLogin": "You have already added this account using an API key, logging you in...",
     "simpleAccounts": "Simple Accounts",
     "multipleAccounts": "Multiple Accounts",
     "login": "Login",
@@ -663,6 +665,10 @@
       "title": "Account Balance",
       "sub_title": "Total Balance including Deposits/Withdrawals"
     },
+    "profits": {
+      "title": "Profits",
+      "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
+    },
     "by_asset":{
       "title": "Summary by Asset",
       "sub_title": "For period ",
@@ -709,6 +715,12 @@
     "logout": "Sync Stopped",
     "message": {
       "canceled": "Canceled old Sync Watcher"
+    },
+    "last-sync-time": {
+      "fail": "Failed to get last sync time",
+      "syncing": "Syncing...",
+      "sync-was-less-than-hour": "Last Sync was less than an hour ago",
+      "sync-was":"Last Sync was {{hours}} hours ago"
     },
     "init-sync-info": {
       "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",

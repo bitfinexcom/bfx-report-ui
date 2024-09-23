@@ -17,6 +17,7 @@ import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
 import Value from './AppSummary.value'
+import Profits from './AppSummary.profits'
 import ByAsset from './AppSummary.byAsset'
 
 const AppSummary = ({
@@ -31,6 +32,7 @@ const AppSummary = ({
   isTurkishSite,
   isSyncRequired,
   refreshBalance,
+  refreshProfits,
   currentTimeFrame,
   refreshSummaryByAsset,
   isUnrealizedProfitExcluded,
@@ -52,8 +54,9 @@ const AppSummary = ({
   const onRefresh = useCallback(() => {
     refresh()
     refreshBalance()
+    refreshProfits()
     refreshSummaryByAsset()
-  }, [refresh, refreshBalance, refreshSummaryByAsset])
+  }, [refresh, refreshBalance, refreshSummaryByAsset, refreshProfits])
 
   return (
     <Card
@@ -105,6 +108,9 @@ const AppSummary = ({
         </SectionHeader>
         <div className='app-summary-data-row'>
           <Value />
+          <Profits />
+        </div>
+        <div className='app-summary-data-row'>
           <Fees
             t={t}
             data={data}
@@ -144,6 +150,7 @@ AppSummary.propTypes = {
   currentTimeFrame: PropTypes.string.isRequired,
   isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
   refreshSummaryByAsset: PropTypes.func.isRequired,
+  refreshProfits: PropTypes.func.isRequired,
 }
 
 AppSummary.defaultProps = {

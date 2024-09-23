@@ -213,6 +213,13 @@ export function setIsLongSync(payload) {
   }
 }
 
+export function setLastSyncTime(payload) {
+  return {
+    type: types.SET_LAST_SYNC_TIME,
+    payload,
+  }
+}
+
 export default {
   editPublicTradesPref,
   editPublicTradesSymbolPref,
@@ -233,4 +240,5 @@ export default {
   stopSyncNow,
   setIsSyncRequired,
   showInitSyncPopup,
+  setLastSyncTime,
 }
