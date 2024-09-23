@@ -62,7 +62,7 @@ class Chart extends React.PureComponent {
           dot={false}
           connectNulls
           dataKey={key}
-          type='monotone'
+          type='line'
           strokeWidth={1.2}
           fill={`url(#${key})`}
           stroke={COLORS[i]}

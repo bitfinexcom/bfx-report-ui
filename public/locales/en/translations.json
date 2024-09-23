@@ -665,6 +665,10 @@
       "title": "Account Balance",
       "sub_title": "Total Balance including Deposits/Withdrawals"
     },
+    "profits": {
+      "title": "Profits",
+      "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
+    },
     "by_asset":{
       "title": "Summary by Asset",
       "sub_title": "For period ",

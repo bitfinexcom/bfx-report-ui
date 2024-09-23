@@ -12,6 +12,7 @@ import {
   refresh as refreshBalance,
 } from 'state/accountBalance/actions'
 import { refresh as refreshSummaryByAsset } from 'state/summaryByAsset/actions'
+import { refresh as refreshProfits } from 'state/profits/actions'
 import {
   getData,
   getPageLoading,
@@ -42,6 +43,7 @@ const mapDispatchToProps = {
   fetchData,
   setParams,
   refreshBalance,
+  refreshProfits,
   refreshSummaryByAsset,
 }
 

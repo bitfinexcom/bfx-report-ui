@@ -28,6 +28,7 @@ import paginationSaga from './pagination/saga'
 import positionsSaga from './positions/saga'
 import positionsActiveSaga from './positionsActive/saga'
 import positionsAuditSaga from './audit/saga'
+import profitsSaga from './profits/saga'
 import publicFundingSaga from './publicFunding/saga'
 import publicTradesSaga from './publicTrades/saga'
 import routingSaga from './routing/saga'
@@ -96,6 +97,7 @@ export default function* rootSaga() {
     yield fork(taxReportSaga)
     yield fork(tradedVolumeSaga)
     yield fork(winLossSaga)
+    yield fork(profitsSaga)
     yield fork(wsSaga)
   }
 }
