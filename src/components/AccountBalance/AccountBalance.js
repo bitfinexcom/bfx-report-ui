@@ -49,12 +49,11 @@ const AccountBalance = () => {
   const currTimeFrame = useSelector(getCurrentTimeFrame)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   const isProfitExcluded = useSelector(getIsUnrealizedProfitExcluded)
+  const shouldFetchAccountBalance = !dataReceived && !pageLoading && !isSyncRequired
 
   useEffect(() => {
-    if (!dataReceived && !pageLoading && !isSyncRequired) {
-      dispatch(fetchBalance())
-    }
-  }, [timeRange, dataReceived, pageLoading, isSyncRequired])
+    if (shouldFetchAccountBalance) dispatch(fetchBalance())
+  }, [timeRange, shouldFetchAccountBalance])
 
   const handleTimeframeChange = useCallback((timeframe) => {
     dispatch(setParams({ timeframe }))
