@@ -28,6 +28,7 @@ import {
 } from 'state/accountBalance/actions'
 import {
   getEntries,
+  getTimeframe,
   getPageLoading,
   getDataReceived,
   getCurrentTimeFrame,
@@ -40,6 +41,7 @@ const AccountBalance = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const entries = useSelector(getEntries)
+  const timeFrame = useSelector(getTimeframe)
   const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
@@ -64,7 +66,6 @@ const AccountBalance = () => {
   }
 
   const onRefresh = () => dispatch(refresh())
-
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
@@ -107,7 +108,7 @@ const AccountBalance = () => {
               {t('selector.select')}
             </SectionHeaderItemLabel>
             <TimeFrameSelector
-              value={timeRange}
+              value={timeFrame}
               onChange={handleTimeframeChange}
             />
           </SectionHeaderItem>
