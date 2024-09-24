@@ -25,29 +25,6 @@ import { checkFetch, checkInit } from 'state/utils'
 const TYPE = queryConstants.MENU_ACCOUNT_BALANCE
 
 class AccountBalance extends PureComponent {
-  static propTypes = {
-    currentFetchParams: PropTypes.shape({
-      timeframe: PropTypes.string,
-      isUnrealizedProfitExcluded: PropTypes.bool,
-    }),
-    dataReceived: PropTypes.bool.isRequired,
-    entries: PropTypes.arrayOf(PropTypes.shape({
-      mts: PropTypes.number,
-      USD: PropTypes.number,
-    })),
-    isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
-    pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
-    setParams: PropTypes.func.isRequired,
-    t: PropTypes.func.isRequired,
-    timeframe: PropTypes.string.isRequired,
-  }
-
-  static defaultProps = {
-    currentFetchParams: {},
-    entries: [],
-  }
-
   componentDidMount() {
     checkInit(this.props, TYPE)
   }
@@ -137,6 +114,29 @@ class AccountBalance extends PureComponent {
       </Card>
     )
   }
+}
+
+AccountBalance.propTypes = {
+  currentFetchParams: PropTypes.shape({
+    timeframe: PropTypes.string,
+    isUnrealizedProfitExcluded: PropTypes.bool,
+  }),
+  dataReceived: PropTypes.bool.isRequired,
+  entries: PropTypes.arrayOf(PropTypes.shape({
+    mts: PropTypes.number,
+    USD: PropTypes.number,
+  })),
+  isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
+  pageLoading: PropTypes.bool.isRequired,
+  refresh: PropTypes.func.isRequired,
+  setParams: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
+  timeframe: PropTypes.string.isRequired,
+}
+
+AccountBalance.defaultProps = {
+  currentFetchParams: {},
+  entries: [],
 }
 
 export default AccountBalance
