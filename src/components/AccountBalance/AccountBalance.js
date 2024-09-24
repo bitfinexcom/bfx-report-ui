@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -57,9 +57,9 @@ const AccountBalance = () => {
     }
   }, [timeRange, dataReceived, pageLoading, isSyncRequired])
 
-  const handleTimeframeChange = (timeframe) => {
+  const handleTimeframeChange = useCallback((timeframe) => {
     dispatch(setParams({ timeframe }))
-  }
+  }, [dispatch, setParams])
 
   const handleUnrealizedProfitChange = (isUnrealizedProfitExcluded) => {
     dispatch(setParams({ isUnrealizedProfitExcluded }))
