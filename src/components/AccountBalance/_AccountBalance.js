@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from 'react'
-import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -22,7 +21,6 @@ import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
-import queryConstants from 'state/query/constants'
 import {
   refresh,
   setParams,
@@ -37,8 +35,6 @@ import {
 } from 'state/accountBalance/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
-
-const TYPE = queryConstants.MENU_ACCOUNT_BALANCE
 
 const AccountBalance = () => {
   const { t } = useTranslation()
@@ -127,29 +123,6 @@ const AccountBalance = () => {
       {showContent}
     </Card>
   )
-}
-
-AccountBalance.propTypes = {
-  currentFetchParams: PropTypes.shape({
-    timeframe: PropTypes.string,
-    isUnrealizedProfitExcluded: PropTypes.bool,
-  }),
-  dataReceived: PropTypes.bool.isRequired,
-  entries: PropTypes.arrayOf(PropTypes.shape({
-    mts: PropTypes.number,
-    USD: PropTypes.number,
-  })),
-  isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
-  pageLoading: PropTypes.bool.isRequired,
-  refresh: PropTypes.func.isRequired,
-  setParams: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
-  timeframe: PropTypes.string.isRequired,
-}
-
-AccountBalance.defaultProps = {
-  currentFetchParams: {},
-  entries: [],
 }
 
 export default AccountBalance
