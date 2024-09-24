@@ -64,7 +64,9 @@ const AccountBalance = () => {
     dispatch(setParams({ isUnrealizedProfitExcluded }))
   }, [dispatch, setParams])
 
-  const onRefresh = () => dispatch(refresh())
+  const onRefresh = useCallback(() => {
+    dispatch(refresh())
+  }, [dispatch, refresh])
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
