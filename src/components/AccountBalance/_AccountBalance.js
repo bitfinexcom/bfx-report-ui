@@ -63,6 +63,9 @@ const AccountBalance = () => {
     dispatch(setParams({ isUnrealizedProfitExcluded }))
   }
 
+  const onRefresh = () => dispatch(refresh())
+
+
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
       timeframe: currTimeFrame,
@@ -117,7 +120,7 @@ const AccountBalance = () => {
               onChange={handleUnrealizedProfitChange}
             />
           </SectionHeaderItem>
-          <RefreshButton onClick={() => dispatch(refresh)} />
+          <RefreshButton onClick={onRefresh} />
         </SectionHeaderRow>
       </SectionHeader>
       {showContent}
