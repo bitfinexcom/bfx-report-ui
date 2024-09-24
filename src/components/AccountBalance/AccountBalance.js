@@ -61,9 +61,9 @@ const AccountBalance = () => {
     dispatch(setParams({ timeframe }))
   }, [dispatch, setParams])
 
-  const handleUnrealizedProfitChange = (isUnrealizedProfitExcluded) => {
+  const handleUnrealizedProfitChange = useCallback((isUnrealizedProfitExcluded) => {
     dispatch(setParams({ isUnrealizedProfitExcluded }))
-  }
+  }, [dispatch, setParams])
 
   const onRefresh = () => dispatch(refresh())
 
