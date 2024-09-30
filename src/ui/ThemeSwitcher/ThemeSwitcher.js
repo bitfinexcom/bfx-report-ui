@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { Radio } from '@blueprintjs/core'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
 import config from 'config'
@@ -25,7 +26,7 @@ const ThemeSwitcher = ({ theme, setTheme }) => {
       <div className='theme-switcher-theme theme-switcher-theme--dark'>
         <Icon.DARK_THEME />
         <Radio
-          checked={theme === 'theme-dark'}
+          checked={isEqual(theme, 'theme-dark')}
           label={t('theme.dark')}
           onChange={switchTheme}
           value='theme-dark'
@@ -34,7 +35,7 @@ const ThemeSwitcher = ({ theme, setTheme }) => {
       <div className='theme-switcher-theme theme-switcher-theme--light'>
         <Icon.LIGHT_THEME />
         <Radio
-          checked={theme === 'theme-light'}
+          checked={isEqual(theme, 'theme-light')}
           label={t('theme.light')}
           onChange={switchTheme}
           value='theme-light'
