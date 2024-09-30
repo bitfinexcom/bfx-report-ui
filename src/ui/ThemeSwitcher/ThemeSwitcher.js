@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { Radio } from '@blueprintjs/core'
@@ -16,11 +16,11 @@ const ThemeSwitcher = () => {
   const dispatch = useDispatch()
   const theme = useSelector(getTheme)
 
-  const switchTheme = (e) => {
+  const switchTheme = useCallback((e) => {
     const { value } = e.target
     tracker.trackEvent(value)
     dispatch(setTheme(value))
-  }
+  }, [dispatch, tracker])
 
   if (config.hideSwitchTheme) {
     return null
