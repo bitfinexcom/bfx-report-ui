@@ -1,1 +1,1 @@
-export { default } from './TimeRangePreservePref.container'
+export { default } from './TimeRangePreservePref'
