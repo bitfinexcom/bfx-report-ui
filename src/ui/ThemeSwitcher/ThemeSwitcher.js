@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
+import { useSelector, useDispatch } from 'react-redux'
 import { Radio } from '@blueprintjs/core'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
@@ -8,14 +9,18 @@ import Icon from 'icons'
 import config from 'config'
 import { tracker } from 'utils/trackers'
 import types from 'state/base/constants'
+import { setTheme } from 'state/base/actions'
+import { getTheme } from 'state/base/selectors'
 
-const ThemeSwitcher = ({ theme, setTheme }) => {
+const ThemeSwitcher = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const theme = useSelector(getTheme)
 
   const switchTheme = (e) => {
     const { value } = e.target
     tracker.trackEvent(value)
-    setTheme(value)
+    dispatch(setTheme(value))
   }
 
   if (config.hideSwitchTheme) {
