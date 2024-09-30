@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Checkbox } from '@blueprintjs/core'
 
@@ -11,15 +11,15 @@ const TimeRangePreservePref = () => {
   const dispatch = useDispatch()
   const isTimeRangePreserved = useSelector(getIsTimeRangePreserved)
 
-  const onChange = () => {
+  const onChange = useCallback(() => {
     dispatch(toggleTimeRangePreserve())
     tracker.trackEvent('Preserve Timeframe')
-  }
+  }, [dispatch, tracker])
 
   return (
     <Checkbox
       large
-      onChange={() => onChange()}
+      onChange={onChange}
       checked={isTimeRangePreserved}
     />
   )
