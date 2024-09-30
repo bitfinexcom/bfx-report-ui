@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { useSelector, useDispatch } from 'react-redux'
 import { Radio } from '@blueprintjs/core'
@@ -49,11 +48,6 @@ const ThemeSwitcher = () => {
       </div>
     </div>
   )
-}
-
-ThemeSwitcher.propTypes = {
-  theme: PropTypes.string.isRequired,
-  setTheme: PropTypes.func.isRequired,
 }
 
 export default ThemeSwitcher
