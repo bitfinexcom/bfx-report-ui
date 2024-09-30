@@ -1,9 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Checkbox } from '@blueprintjs/core'
 
 import { tracker } from 'utils/trackers'
-
-import { propTypes, defaultProps } from './TimeRangePreservePref.props'
 
 const TimeRangePreservePref = (props) => {
   const { isTimeRangePreserved, toggleTimeRangePreserve } = props
@@ -22,7 +21,9 @@ const TimeRangePreservePref = (props) => {
   )
 }
 
-TimeRangePreservePref.propTypes = propTypes
-TimeRangePreservePref.defaultProps = defaultProps
+TimeRangePreservePref.propTypes = {
+  isTimeRangePreserved: PropTypes.bool.isRequired,
+  toggleTimeRangePreserve: PropTypes.func.isRequired,
+}
 
 export default TimeRangePreservePref
