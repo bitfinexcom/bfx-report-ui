@@ -7,6 +7,7 @@ import { isEqual } from '@bitfinex/lib-js-util-base'
 import Icon from 'icons'
 import config from 'config'
 import { tracker } from 'utils/trackers'
+import types from 'state/base/constants'
 
 const ThemeSwitcher = ({ theme, setTheme }) => {
   const { t } = useTranslation()
@@ -26,19 +27,19 @@ const ThemeSwitcher = ({ theme, setTheme }) => {
       <div className='theme-switcher-theme theme-switcher-theme--dark'>
         <Icon.DARK_THEME />
         <Radio
-          checked={isEqual(theme, 'theme-dark')}
-          label={t('theme.dark')}
           onChange={switchTheme}
-          value='theme-dark'
+          label={t('theme.dark')}
+          value={types.THEME_DARK}
+          checked={isEqual(theme, types.THEME_DARK)}
         />
       </div>
       <div className='theme-switcher-theme theme-switcher-theme--light'>
         <Icon.LIGHT_THEME />
         <Radio
-          checked={isEqual(theme, 'theme-light')}
-          label={t('theme.light')}
           onChange={switchTheme}
-          value='theme-light'
+          label={t('theme.light')}
+          value={types.THEME_LIGHT}
+          checked={isEqual(theme, types.THEME_LIGHT)}
         />
       </div>
     </div>
