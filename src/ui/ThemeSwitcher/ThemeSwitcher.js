@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Radio } from '@blueprintjs/core'
 
@@ -6,13 +7,7 @@ import Icon from 'icons'
 import config from 'config'
 import { tracker } from 'utils/trackers'
 
-import { propTypes, defaultProps } from './ThemeSwitcher.props'
-
 class ThemeSwitcher extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
-
   switchTheme = (e) => {
     const { value } = e.target
     const { setTheme } = this.props
@@ -51,6 +46,12 @@ class ThemeSwitcher extends PureComponent {
       </div>
     )
   }
+}
+
+ThemeSwitcher.propTypes = {
+  t: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
+  setTheme: PropTypes.func.isRequired,
 }
 
 export default withTranslation('translations')(ThemeSwitcher)
