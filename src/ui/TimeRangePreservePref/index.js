@@ -1,3 +1,1 @@
-import TimeFramePreservePref from './TimeRangePreservePref.container'
-
-export default TimeFramePreservePref
+export { default } from './TimeRangePreservePref.container'
