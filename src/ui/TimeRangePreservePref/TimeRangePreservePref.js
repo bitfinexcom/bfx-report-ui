@@ -4,19 +4,20 @@ import { Checkbox } from '@blueprintjs/core'
 
 import { tracker } from 'utils/trackers'
 
-const TimeRangePreservePref = (props) => {
-  const { isTimeRangePreserved, toggleTimeRangePreserve } = props
-
+const TimeRangePreservePref = ({
+  isTimeRangePreserved,
+  toggleTimeRangePreserve,
+}) => {
   const onChange = () => {
-    tracker.trackEvent('Preserve Timeframe')
     toggleTimeRangePreserve()
+    tracker.trackEvent('Preserve Timeframe')
   }
 
   return (
     <Checkbox
-      checked={isTimeRangePreserved}
-      onChange={() => onChange()}
       large
+      onChange={() => onChange()}
+      checked={isTimeRangePreserved}
     />
   )
 }
