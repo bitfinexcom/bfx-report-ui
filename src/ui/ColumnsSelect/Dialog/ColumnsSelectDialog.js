@@ -1,31 +1,29 @@
-import React from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
 
-import { propTypes, defaultProps } from './ColumnsSelectDialog.props'
-
-const ColumnsSelectDialog = (props) => {
-  const {
-    children,
-    isOpen,
-    hasChanges,
-    onCancel,
-    onApply,
-    t,
-  } = props
+const ColumnsSelectDialog = ({
+  isOpen,
+  onApply,
+  children,
+  onCancel,
+  hasChanges,
+}) => {
+  const { t } = useTranslation()
 
   return (
     <Dialog
-      className='columns-select-dialog'
-      icon={<Icon.CURSOR_SQUARE />}
-      isCloseButtonShown={false}
       isOpen={isOpen}
       onClose={onCancel}
+      isCloseButtonShown={false}
+      icon={<Icon.CURSOR_SQUARE />}
       title={t('columnsselect.title')}
+      className='columns-select-dialog'
     >
       <div className={Classes.DIALOG_BODY}>
         {children}
@@ -38,9 +36,9 @@ const ColumnsSelectDialog = (props) => {
             {t('columnsselect.cancel')}
           </Button>
           <Button
-            intent={Intent.PRIMARY}
             onClick={onApply}
             disabled={!hasChanges}
+            intent={Intent.PRIMARY}
           >
             {t('columnsselect.apply')}
           </Button>
@@ -50,7 +48,12 @@ const ColumnsSelectDialog = (props) => {
   )
 }
 
-ColumnsSelectDialog.propTypes = propTypes
-ColumnsSelectDialog.defaultProps = defaultProps
+ColumnsSelectDialog.propTypes = {
+  children: PropTypes.element.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  hasChanges: PropTypes.bool.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onApply: PropTypes.func.isRequired,
+}
 
-export default withTranslation('translations')(ColumnsSelectDialog)
+export default memo(ColumnsSelectDialog)
