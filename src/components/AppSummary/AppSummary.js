@@ -33,6 +33,7 @@ const AppSummary = ({
   isSyncRequired,
   refreshBalance,
   refreshProfits,
+  refreshPositions,
   currentTimeFrame,
   refreshSummaryByAsset,
   isUnrealizedProfitExcluded,
@@ -55,8 +56,9 @@ const AppSummary = ({
     refresh()
     refreshBalance()
     refreshProfits()
+    refreshPositions()
     refreshSummaryByAsset()
-  }, [refresh, refreshBalance, refreshSummaryByAsset, refreshProfits])
+  }, [refresh, refreshBalance, refreshSummaryByAsset, refreshProfits, refreshPositions])
 
   return (
     <Card
@@ -151,6 +153,7 @@ AppSummary.propTypes = {
   isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
   refreshSummaryByAsset: PropTypes.func.isRequired,
   refreshProfits: PropTypes.func.isRequired,
+  refreshPositions: PropTypes.func.isRequired,
 }
 
 AppSummary.defaultProps = {
