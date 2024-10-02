@@ -48,6 +48,30 @@ const SummaryActivePositions = () => {
     [entries, t, isLoading, isNoData, columnsWidth],
   )
 
+  let showContent
+  if (isNoData) {
+    showContent = (
+      <DataTable
+        isNoData={isNoData}
+        isLoading={isLoading}
+        defaultRowHeight={73}
+        tableColumns={columns}
+        className={tableClasses}
+        numRows={isLoading ? 3 : 1}
+      />
+    )
+  } else {
+    showContent = (
+      <DataTable
+        section={TYPE}
+        defaultRowHeight={73}
+        tableColumns={columns}
+        className={tableClasses}
+        numRows={isLoading ? 3 : entries.length}
+      />
+    )
+  }
+
   return (
     <div className='app-summary-item full-width-item'>
       <div className='app-summary-item-title--row'>
@@ -57,13 +81,7 @@ const SummaryActivePositions = () => {
           </div>
         </div>
       </div>
-      <DataTable
-        section={TYPE}
-        defaultRowHeight={73}
-        tableColumns={columns}
-        className={tableClasses}
-        numRows={isLoading ? 3 : entries.length}
-      />
+      {showContent}
     </div>
   )
 }
