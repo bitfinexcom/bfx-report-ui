@@ -19,6 +19,7 @@ import Fees from './AppSummary.fees'
 import Value from './AppSummary.value'
 import Profits from './AppSummary.profits'
 import ByAsset from './AppSummary.byAsset'
+import Positions from './AppSummary.positions'
 
 const AppSummary = ({
   t,
@@ -113,6 +114,7 @@ const AppSummary = ({
           <Profits />
         </div>
         <ByAsset />
+        <Positions />
         <div className='app-summary-data-row'>
           <Fees
             t={t}
