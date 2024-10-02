@@ -22,7 +22,7 @@ import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 import { getAssetColumns } from './AppSummary.columns'
 import { prepareSummaryByAssetData } from './AppSummary.helpers'
 
-const TYPE = queryConstants.SUMMARY_BY_ASSET
+const TYPE = queryConstants.SUMMARY_POSITIONS
 
 const SummaryActivePositions = () => {
   const { t } = useTranslation()
