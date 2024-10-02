@@ -687,6 +687,16 @@
         "min_balance_switch": "Minimum Balance",
         "min_balance_input": "Set a minimum balance for assets to show up in the table."
       }
+    },
+    "positions": {
+      "title": "Active Positions",
+      "pair": "Pair",
+      "derivative": "Derivative",
+      "amount": "Amount",
+      "pl":"P/L",
+      "liq_price": "Liq Price",
+      "fund_cost": "Funding Cost",
+      "collateral": "Collateral"
     }
   },
   "symbols": {
