@@ -5,37 +5,28 @@ import classNames from 'classnames'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
-import { fetchData, refresh } from 'state/summaryByAsset/actions'
+import { fetchAPositions } from 'state/positionsActive/actions'
 import {
+  getEntries,
   getPageLoading,
   getDataReceived,
-  getUseMinBalance,
-  getMinimumBalance,
-  getSummaryByAssetTotal,
-  getSummaryByAssetEntries,
-} from 'state/summaryByAsset/selectors'
+} from 'state/positionsActive/selectors'
 import queryConstants from 'state/query/constants'
-import { getTimeRange } from 'state/timeRange/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
-import { getAssetColumns } from './AppSummary.columns'
-import { prepareSummaryByAssetData } from './AppSummary.helpers'
+import { getPositionsColumns } from './AppSummary.columns'
 
 const TYPE = queryConstants.SUMMARY_POSITIONS
 
 const SummaryActivePositions = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const timeRange = useSelector(getTimeRange)
+  const entries = useSelector(getEntries)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
-  const total = useSelector(getSummaryByAssetTotal)
   const isFirstSync = useSelector(getIsFirstSyncing)
-  const entries = useSelector(getSummaryByAssetEntries)
   const isSyncRequired = useSelector(getIsSyncRequired)
-  const minimumBalance = useSelector(getMinimumBalance)
-  const useMinimumBalance = useSelector(getUseMinBalance)
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   const isNoData = dataReceived && isEmpty(entries)
@@ -45,24 +36,16 @@ const SummaryActivePositions = () => {
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
-      dispatch(fetchData())
+      dispatch(fetchAPositions())
     }
   }, [dataReceived, pageLoading, isSyncRequired])
 
-  useEffect(() => {
-    dispatch(refresh())
-  }, [timeRange])
-
-  const preparedData = useMemo(
-    () => prepareSummaryByAssetData(entries, total, t, minimumBalance, useMinimumBalance),
-    [entries, total, t, minimumBalance, useMinimumBalance],
-  )
 
   const columns = useMemo(
-    () => getAssetColumns({
-      preparedData, t, isLoading, isNoData, columnsWidth,
+    () => getPositionsColumns({
+      entries, t, isLoading, isNoData, columnsWidth,
     }),
-    [preparedData, t, isLoading, isNoData, columnsWidth],
+    [entries, t, isLoading, isNoData, columnsWidth],
   )
 
   return (
@@ -79,7 +62,7 @@ const SummaryActivePositions = () => {
         defaultRowHeight={73}
         tableColumns={columns}
         className={tableClasses}
-        numRows={isLoading ? 3 : preparedData.length}
+        numRows={isLoading ? 3 : entries.length}
       />
     </div>
   )
