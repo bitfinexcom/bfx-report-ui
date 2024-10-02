@@ -110,6 +110,7 @@ const AppSummary = ({
           <Value />
           <Profits />
         </div>
+        <ByAsset />
         <div className='app-summary-data-row'>
           <Fees
             t={t}
@@ -120,7 +121,6 @@ const AppSummary = ({
             isTurkishSite={isTurkishSite}
           />
         </div>
-        <ByAsset />
       </div>
     </Card>
   )
