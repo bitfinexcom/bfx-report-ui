@@ -690,13 +690,8 @@
     },
     "positions": {
       "title": "Active Positions",
-      "pair": "Pair",
       "derivative": "Derivative",
-      "amount": "Amount",
-      "pl":"P/L",
-      "liq_price": "Liq Price",
-      "fund_cost": "Funding Cost",
-      "collateral": "Collateral"
+      "amount": "Amount"
     }
   },
   "symbols": {
