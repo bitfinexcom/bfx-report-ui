@@ -310,7 +310,7 @@ export const getPositionsColumns = ({
   t,
   isNoData,
   isLoading,
-  filteredData,
+  entries,
   columnsWidth,
 }) => [
   {
@@ -320,10 +320,10 @@ export const getPositionsColumns = ({
     width: getColumnWidth('pair', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { pair } = filteredData[rowIndex]
+      const { pair } = entries[rowIndex]
       return getCell(pair, t)
     },
-    copyText: rowIndex => filteredData[rowIndex].pair,
+    copyText: rowIndex => entries[rowIndex].pair,
   },
   {
     id: 'amount',
@@ -331,11 +331,11 @@ export const getPositionsColumns = ({
     width: getColumnWidth('amount', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { amount } = filteredData[rowIndex]
+      const { amount } = entries[rowIndex]
       return getCell(formatAmount(amount), t, fixedFloat(amount))
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].amount),
   },
   {
     id: 'basePrice',
@@ -343,11 +343,11 @@ export const getPositionsColumns = ({
     width: getColumnWidth('basePrice', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { basePrice } = filteredData[rowIndex]
+      const { basePrice } = entries[rowIndex]
       return getCell(fixedFloat(basePrice), t)
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].basePrice),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].basePrice),
   },
   {
     id: 'pl',
@@ -355,11 +355,11 @@ export const getPositionsColumns = ({
     width: getColumnWidth('pl', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { pl } = filteredData[rowIndex]
+      const { pl } = entries[rowIndex]
       return getCell(formatAmount(pl), t, fixedFloat(pl))
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].pl),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].pl),
   },
   {
     id: 'plPerc',
@@ -367,11 +367,11 @@ export const getPositionsColumns = ({
     width: getColumnWidth('plPerc', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { plPerc } = filteredData[rowIndex]
+      const { plPerc } = entries[rowIndex]
       return getCell(formatAmount(plPerc), t, fixedFloat(plPerc))
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].plPerc),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].plPerc),
   },
   {
     id: 'liquidationPrice',
@@ -379,11 +379,11 @@ export const getPositionsColumns = ({
     width: getColumnWidth('liquidationPrice', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { liquidationPrice } = filteredData[rowIndex]
+      const { liquidationPrice } = entries[rowIndex]
       return getCell(fixedFloat(liquidationPrice), t)
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].liquidationPrice),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].liquidationPrice),
   },
   {
     id: 'marginFunding',
@@ -391,11 +391,11 @@ export const getPositionsColumns = ({
     width: getColumnWidth('marginFunding', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { marginFunding } = filteredData[rowIndex]
+      const { marginFunding } = entries[rowIndex]
       return getCell(fixedFloat(marginFunding), t)
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].marginFunding),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].marginFunding),
   },
   {
     id: 'collateral',
@@ -403,11 +403,11 @@ export const getPositionsColumns = ({
     width: getColumnWidth('collateral', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { collateral } = filteredData[rowIndex]
+      const { collateral } = entries[rowIndex]
       return getCell(fixedFloat(collateral), t)
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(filteredData[rowIndex].collateral),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].collateral),
   },
 ]
 
