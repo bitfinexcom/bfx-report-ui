@@ -30,7 +30,7 @@ const SummaryActivePositions = () => {
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   const isNoData = dataReceived && isEmpty(entries)
-  const tableClasses = classNames('summary-by-asset-table', {
+  const tableClasses = classNames('summary-positions-table', {
     'empty-table': isNoData,
   })
 
