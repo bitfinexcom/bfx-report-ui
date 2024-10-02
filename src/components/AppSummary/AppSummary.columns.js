@@ -1,9 +1,12 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
+// import _endsWith from 'lodash/endsWith'
 
-import { fixedFloat } from 'ui/utils'
+import { formatAmount, fixedFloat } from 'ui/utils'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import {
+  getCell,
+  getCellState,
   getCellLoader,
   getCellNoData,
   getColumnWidth,
@@ -302,3 +305,120 @@ export const getAssetColumns = ({
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.marginFundingPayment, 2),
   },
 ]
+
+export const getPositionsColumns = ({
+  t,
+  isNoData,
+  isLoading,
+  filteredData,
+  columnsWidth,
+}) => [
+  {
+    id: 'pair',
+    name: 'column.pair',
+    className: 'align-left',
+    width: getColumnWidth('pair', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { pair } = filteredData[rowIndex]
+      return getCell(pair, t)
+    },
+    copyText: rowIndex => filteredData[rowIndex].pair,
+  },
+  {
+    id: 'amount',
+    name: 'column.amount',
+    width: getColumnWidth('amount', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { amount } = filteredData[rowIndex]
+      return getCell(formatAmount(amount), t, fixedFloat(amount))
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].amount),
+  },
+  {
+    id: 'basePrice',
+    name: 'column.base-price',
+    width: getColumnWidth('basePrice', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { basePrice } = filteredData[rowIndex]
+      return getCell(fixedFloat(basePrice), t)
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].basePrice),
+  },
+  {
+    id: 'pl',
+    name: 'column.pl',
+    width: getColumnWidth('pl', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { pl } = filteredData[rowIndex]
+      return getCell(formatAmount(pl), t, fixedFloat(pl))
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].pl),
+  },
+  {
+    id: 'plPerc',
+    name: 'column.plperc',
+    width: getColumnWidth('plPerc', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { plPerc } = filteredData[rowIndex]
+      return getCell(formatAmount(plPerc), t, fixedFloat(plPerc))
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].plPerc),
+  },
+  {
+    id: 'liquidationPrice',
+    name: 'column.liq-price',
+    width: getColumnWidth('liquidationPrice', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { liquidationPrice } = filteredData[rowIndex]
+      return getCell(fixedFloat(liquidationPrice), t)
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].liquidationPrice),
+  },
+  {
+    id: 'marginFunding',
+    name: 'column.fundingCost',
+    width: getColumnWidth('marginFunding', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { marginFunding } = filteredData[rowIndex]
+      return getCell(fixedFloat(marginFunding), t)
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].marginFunding),
+  },
+  {
+    id: 'collateral',
+    name: 'column.collateral',
+    width: getColumnWidth('collateral', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { collateral } = filteredData[rowIndex]
+      return getCell(fixedFloat(collateral), t)
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(filteredData[rowIndex].collateral),
+  },
+]
+
+// function showType(data) {
+//   const { marginFundingType, pair } = data
+
+//   if (_endsWith(pair, 'PERP')) {
+//     return t('positions.swap.period')
+//   }
+
+//   return marginFundingType
+//     ? t('positions.swap.term')
+//     : t('positions.swap.daily')
+// }
