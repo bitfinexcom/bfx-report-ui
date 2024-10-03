@@ -322,6 +322,9 @@ export const getPositionsColumns = ({
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { pair } = entries[rowIndex]
       const isDerivative = isDerivativePair(pair)
+      const pairLabel = isDerivative
+        ? t('summary.positions.derivative')
+        : t('summary.positions.margin')
       return (
         <Cell tooltip={getTooltipContent(pair, t)}>
           <>
@@ -330,7 +333,7 @@ export const getPositionsColumns = ({
             </span>
             <br />
             <span className='cell-value secondary-value-left'>
-              {isDerivative ? 'Derivative' : 'Margin'}
+              {pairLabel}
             </span>
           </>
         </Cell>
