@@ -334,7 +334,6 @@ export const getPositionsColumns = ({
       const { amount } = entries[rowIndex]
       return getCell(formatAmount(amount), t, fixedFloat(amount))
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].amount),
   },
   {
@@ -346,7 +345,6 @@ export const getPositionsColumns = ({
       const { basePrice } = entries[rowIndex]
       return getCell(fixedFloat(basePrice), t)
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].basePrice),
   },
   {
@@ -358,7 +356,6 @@ export const getPositionsColumns = ({
       const { pl } = entries[rowIndex]
       return getCell(formatAmount(pl), t, fixedFloat(pl))
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].pl),
   },
   {
@@ -370,7 +367,6 @@ export const getPositionsColumns = ({
       const { plPerc } = entries[rowIndex]
       return getCell(formatAmount(plPerc), t, fixedFloat(plPerc))
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].plPerc),
   },
   {
@@ -382,7 +378,6 @@ export const getPositionsColumns = ({
       const { liquidationPrice } = entries[rowIndex]
       return getCell(fixedFloat(liquidationPrice), t)
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].liquidationPrice),
   },
   {
@@ -394,7 +389,6 @@ export const getPositionsColumns = ({
       const { marginFunding } = entries[rowIndex]
       return getCell(fixedFloat(marginFunding), t)
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].marginFunding),
   },
   {
@@ -406,7 +400,6 @@ export const getPositionsColumns = ({
       const { collateral } = entries[rowIndex]
       return getCell(fixedFloat(collateral), t)
     },
-    isNumericValue: true,
     copyText: rowIndex => fixedFloat(entries[rowIndex].collateral),
   },
 ]
