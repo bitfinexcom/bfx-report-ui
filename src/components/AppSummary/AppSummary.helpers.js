@@ -1,5 +1,6 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
+import _endsWith from 'lodash/endsWith'
 
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import { fixedFloat, formatFee, formatThousands } from 'ui/utils'
@@ -60,3 +61,5 @@ export const getFeePercentCell = (isLoading, value) => (
     )}
   </Cell>
 )
+
+export const isDerivativePair = (pair) => _endsWith(pair, 'PERP')
