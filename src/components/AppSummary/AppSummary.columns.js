@@ -418,7 +418,7 @@ export const getPositionsColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { collateral } = entries[rowIndex]
-      return getCell(fixedFloat(collateral), t)
+      return getCell(`$${fixedFloat(collateral)}`, t)
     },
     copyText: rowIndex => fixedFloat(entries[rowIndex].collateral),
   },
