@@ -19,6 +19,7 @@ import {
   getFeePercentCell,
   formatPercentValue,
   formatUsdValueChange,
+  formatSecondaryPercentValue,
 } from './AppSummary.helpers'
 
 export const getFeesColumns = ({
@@ -380,8 +381,7 @@ export const getPositionsColumns = ({
             </span>
             <br />
             <span className='cell-value secondary-value'>
-              {fixedFloat(plPerc, 2)}
-              %
+              {formatSecondaryPercentValue(plPerc)}
             </span>
           </>
         </Cell>
