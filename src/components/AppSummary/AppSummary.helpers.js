@@ -1,7 +1,6 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 import _endsWith from 'lodash/endsWith'
-import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import { fixedFloat, formatFee, formatThousands } from 'ui/utils'
