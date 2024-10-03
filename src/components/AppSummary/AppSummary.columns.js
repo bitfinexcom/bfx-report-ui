@@ -355,21 +355,23 @@ export const getPositionsColumns = ({
     width: getColumnWidth('pl', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { pl } = entries[rowIndex]
-      return getCell(formatAmount(pl), t, fixedFloat(pl))
+      const { pl, plPerc } = entries[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(fixedFloat(pl), t)}>
+          <>
+            <span className='cell-value'>
+              {formatAmount(pl)}
+            </span>
+            <br />
+            <span className='cell-value secondary-value'>
+              {fixedFloat(plPerc, 2)}
+              %
+            </span>
+          </>
+        </Cell>
+      )
     },
     copyText: rowIndex => fixedFloat(entries[rowIndex].pl),
-  },
-  {
-    id: 'plPerc',
-    name: 'column.plperc',
-    width: getColumnWidth('plPerc', columnsWidth),
-    renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { plPerc } = entries[rowIndex]
-      return getCell(formatAmount(plPerc), t, fixedFloat(plPerc))
-    },
-    copyText: rowIndex => fixedFloat(entries[rowIndex].plPerc),
   },
   {
     id: 'liquidationPrice',
