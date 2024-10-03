@@ -282,6 +282,11 @@
   .collapsed-table {
     .secondary-value {
       color: var(--color2);
+
+      &-left {
+        text-align: left;
+        color: var(--color2);
+      }
     }
   }
 
