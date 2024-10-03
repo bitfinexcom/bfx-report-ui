@@ -512,6 +512,14 @@
   }
 }
 
+.percent-pos-value {
+  color: var(--tableAmountFractionPosColor);
+}
+
+.percent-neg-value {
+  color: var(--tableAmountFractionNegColor);
+}
+
 @media screen and (max-width: 768px) {
   .full-width-item .app-summary-item-sub-title {
       margin-bottom: 15px;
