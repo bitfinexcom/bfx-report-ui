@@ -1,6 +1,5 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
-// import _endsWith from 'lodash/endsWith'
 
 import { formatAmount, fixedFloat } from 'ui/utils'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
@@ -16,6 +15,7 @@ import {
 import {
   getIsTotal,
   formatUsdValue,
+  isDerivativePair,
   getFeePercentCell,
   formatPercentValue,
   formatUsdValueChange,
@@ -321,7 +321,20 @@ export const getPositionsColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { pair } = entries[rowIndex]
-      return getCell(pair, t)
+      const isDerivative = isDerivativePair(pair)
+      return (
+        <Cell tooltip={getTooltipContent(pair, t)}>
+          <>
+            <span className='cell-value'>
+              {pair}
+            </span>
+            <br />
+            <span className='cell-value secondary-value-left'>
+              {isDerivative ? 'Derivative' : 'Margin'}
+            </span>
+          </>
+        </Cell>
+      )
     },
     copyText: rowIndex => entries[rowIndex].pair,
   },
@@ -407,15 +420,3 @@ export const getPositionsColumns = ({
     copyText: rowIndex => fixedFloat(entries[rowIndex].collateral),
   },
 ]
-
-// function showType(data) {
-//   const { marginFundingType, pair } = data
-
-//   if (_endsWith(pair, 'PERP')) {
-//     return t('positions.swap.period')
-//   }
-
-//   return marginFundingType
-//     ? t('positions.swap.term')
-//     : t('positions.swap.daily')
-// }
