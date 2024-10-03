@@ -18,8 +18,8 @@ import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import { getPositionsColumns } from './AppSummary.columns'
 
-const TYPE = queryConstants.SUMMARY_POSITIONS
 const { showFrameworkMode } = config
+const TYPE = queryConstants.SUMMARY_POSITIONS
 
 const SummaryActivePositions = () => {
   const { t } = useTranslation()
