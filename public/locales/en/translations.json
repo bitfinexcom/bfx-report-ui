@@ -691,6 +691,7 @@
     "positions": {
       "title": "Active Positions",
       "derivative": "Derivative",
+      "margin": "Margin",
       "amount": "Amount"
     }
   },
