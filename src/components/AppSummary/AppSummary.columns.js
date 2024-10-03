@@ -331,21 +331,23 @@ export const getPositionsColumns = ({
     width: getColumnWidth('amount', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { amount } = entries[rowIndex]
-      return getCell(formatAmount(amount), t, fixedFloat(amount))
+      const { amount, basePrice } = entries[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(fixedFloat(amount), t)}>
+          <>
+            <span className='cell-value'>
+              {fixedFloat(amount)}
+            </span>
+            <br />
+            <span className='cell-value secondary-value'>
+              @
+              {fixedFloat(basePrice)}
+            </span>
+          </>
+        </Cell>
+      )
     },
     copyText: rowIndex => fixedFloat(entries[rowIndex].amount),
-  },
-  {
-    id: 'basePrice',
-    name: 'column.base-price',
-    width: getColumnWidth('basePrice', columnsWidth),
-    renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { basePrice } = entries[rowIndex]
-      return getCell(fixedFloat(basePrice), t)
-    },
-    copyText: rowIndex => fixedFloat(entries[rowIndex].basePrice),
   },
   {
     id: 'pl',
