@@ -396,7 +396,7 @@ export const getPositionsColumns = ({
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
       const { liquidationPrice } = entries[rowIndex]
-      return getCell(fixedFloat(liquidationPrice), t)
+      return getCell(formatAmount(liquidationPrice, { color: 'red' }), t, fixedFloat(liquidationPrice))
     },
     copyText: rowIndex => fixedFloat(entries[rowIndex].liquidationPrice),
   },
