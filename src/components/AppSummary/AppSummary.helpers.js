@@ -1,6 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 import _endsWith from 'lodash/endsWith'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import { fixedFloat, formatFee, formatThousands } from 'ui/utils'
@@ -63,3 +64,10 @@ export const getFeePercentCell = (isLoading, value) => (
 )
 
 export const isDerivativePair = (pair) => _endsWith(pair, 'PERP')
+
+export const formatSecondaryPercentValue = (value) => {
+  const val = prepareNumericValue(value)
+  if (val > 1) return <span className='percent-pos-value'>{`${val}%`}</span>
+  if (val < 1) return <span className='percent-neg-value'>{`${val}%`}</span>
+  return <span>{`${val}%`}</span>
+}
