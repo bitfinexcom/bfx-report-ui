@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
+import config from 'config'
 import DataTable from 'ui/DataTable'
 import { fetchAPositions } from 'state/positionsActive/actions'
 import {
@@ -18,6 +19,7 @@ import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 import { getPositionsColumns } from './AppSummary.columns'
 
 const TYPE = queryConstants.SUMMARY_POSITIONS
+const { showFrameworkMode } = config
 
 const SummaryActivePositions = () => {
   const { t } = useTranslation()
@@ -58,6 +60,7 @@ const SummaryActivePositions = () => {
         tableColumns={columns}
         className={tableClasses}
         numRows={isLoading ? 3 : 1}
+        enableColumnResizing={showFrameworkMode}
       />
     )
   } else {
@@ -68,6 +71,7 @@ const SummaryActivePositions = () => {
         tableColumns={columns}
         className={tableClasses}
         numRows={isLoading ? 3 : entries.length}
+        enableColumnResizing={showFrameworkMode}
       />
     )
   }
