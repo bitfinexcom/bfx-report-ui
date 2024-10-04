@@ -13,8 +13,8 @@ import {
 
 import {
   getIsTotal,
+  getPairLabel,
   formatUsdValue,
-  isDerivativePair,
   getFeePercentCell,
   formatPercentValue,
   formatUsdValueChange,
@@ -321,11 +321,8 @@ export const getPositionsColumns = ({
     renderer: (rowIndex) => {
       if (isLoading) return getCellLoader(22, 80)
       if (isNoData) return getCellNoData(t('column.noResults'))
-      const { pair } = entries[rowIndex]
-      const isDerivative = isDerivativePair(pair)
-      const pairLabel = isDerivative
-        ? t('summary.positions.derivative')
-        : t('summary.positions.margin')
+      const { pair, leverage } = entries[rowIndex]
+      const pairLabel = getPairLabel(t, pair, leverage)
       return (
         <Cell tooltip={getTooltipContent(pair, t)}>
           <>
