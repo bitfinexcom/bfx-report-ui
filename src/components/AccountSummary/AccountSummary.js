@@ -79,8 +79,8 @@ class AccountSummary extends PureComponent {
           timeframe={false}
           title='accountsummary.title'
         />
-        <Positions />
         <div className='section-account-summary-data'>
+          <Positions />
           <Volume
             t={t}
             isNoData={isNoData}
