@@ -5,7 +5,6 @@ import { formatAmount, fixedFloat } from 'ui/utils'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import {
   getCell,
-  getCellState,
   getCellLoader,
   getCellNoData,
   getColumnWidth,
@@ -320,7 +319,8 @@ export const getPositionsColumns = ({
     className: 'align-left',
     width: getColumnWidth('pair', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData(t('column.noResults'))
       const { pair } = entries[rowIndex]
       const isDerivative = isDerivativePair(pair)
       const pairLabel = isDerivative
@@ -347,7 +347,8 @@ export const getPositionsColumns = ({
     name: 'column.amount',
     width: getColumnWidth('amount', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const { amount, basePrice } = entries[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(fixedFloat(amount), t)}>
@@ -371,7 +372,8 @@ export const getPositionsColumns = ({
     name: 'column.pl',
     width: getColumnWidth('pl', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const { pl, plPerc } = entries[rowIndex]
       return (
         <Cell tooltip={getTooltipContent(fixedFloat(pl), t)}>
@@ -394,7 +396,8 @@ export const getPositionsColumns = ({
     name: 'column.liq-price',
     width: getColumnWidth('liquidationPrice', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const { liquidationPrice } = entries[rowIndex]
       return getCell(formatAmount(liquidationPrice, { color: 'red' }), t, fixedFloat(liquidationPrice))
     },
@@ -405,7 +408,8 @@ export const getPositionsColumns = ({
     name: 'column.fundingCost',
     width: getColumnWidth('marginFunding', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const { marginFunding } = entries[rowIndex]
       return getCell(fixedFloat(marginFunding), t)
     },
@@ -416,7 +420,8 @@ export const getPositionsColumns = ({
     name: 'column.collateral',
     width: getColumnWidth('collateral', columnsWidth),
     renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
       const { collateral } = entries[rowIndex]
       return getCell(`$${fixedFloat(collateral)}`, t)
     },
