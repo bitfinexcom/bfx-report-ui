@@ -63,10 +63,6 @@ export const getFeePercentCell = (isLoading, value) => (
   </Cell>
 )
 
-export const isDerivativePair = (pair) => _endsWith(pair, 'PERP')
-
-export const isPositionPair = (leverage) => _isNill(leverage)
-
 export const formatSecondaryPercentValue = (value) => {
   const val = prepareNumericValue(value)
   if (val > 1) return <span className='percent-pos-value'>{`${val}%`}</span>
