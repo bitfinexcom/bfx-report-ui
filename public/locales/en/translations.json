@@ -670,7 +670,7 @@
       "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
     },
     "by_asset":{
-      "title": "Summary by Asset",
+      "title": "Your Assets",
       "sub_title": "For period ",
       "currency": "Currency",
       "all_assets": "All Assets",
