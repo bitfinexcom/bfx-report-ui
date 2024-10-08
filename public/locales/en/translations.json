@@ -671,7 +671,7 @@
     },
     "by_asset":{
       "title": "Your Assets",
-      "sub_title": "For period ",
+      "sub_title": "Summary for period ",
       "currency": "Currency",
       "all_assets": "All Assets",
       "amount": "Amount",
