@@ -1,1 +1,1 @@
-export { default } from './AccountBalance.container'
+export { default } from './AccountBalance'
