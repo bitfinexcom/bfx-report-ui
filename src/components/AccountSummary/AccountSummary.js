@@ -4,6 +4,7 @@ import { Card, Elevation } from '@blueprintjs/core'
 import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import SectionHeader from 'ui/SectionHeader'
+import Positions from 'components/AppSummary/AppSummary.positions'
 
 import Leo from './AccountSummary.leo'
 import Fees from './AccountSummary.fees'
@@ -79,6 +80,7 @@ class AccountSummary extends PureComponent {
           title='accountsummary.title'
         />
         <div className='section-account-summary-data'>
+          <Positions />
           <Volume
             t={t}
             isNoData={isNoData}
