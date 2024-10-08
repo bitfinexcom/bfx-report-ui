@@ -1,5 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
+import _isNil from 'lodash/isNil'
+import _endsWith from 'lodash/endsWith'
 
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import { fixedFloat, formatFee, formatThousands } from 'ui/utils'
@@ -60,3 +62,16 @@ export const getFeePercentCell = (isLoading, value) => (
     )}
   </Cell>
 )
+
+export const formatSecondaryPercentValue = (value) => {
+  const val = prepareNumericValue(value)
+  if (val > 1) return <span className='percent-pos-value'>{`${val}%`}</span>
+  if (val < 1) return <span className='percent-neg-value'>{`${val}%`}</span>
+  return <span>{`${val}%`}</span>
+}
+
+export const getPairLabel = (t, pair, leverage) => {
+  if (_endsWith(pair, 'PERP')) return t('summary.positions.derivative')
+  if (_isNil(leverage)) return t('summary.positions.position')
+  return t('summary.positions.margin')
+}

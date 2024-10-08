@@ -1,9 +1,10 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
-import { fixedFloat } from 'ui/utils'
+import { formatAmount, fixedFloat } from 'ui/utils'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import {
+  getCell,
   getCellLoader,
   getCellNoData,
   getColumnWidth,
@@ -12,10 +13,12 @@ import {
 
 import {
   getIsTotal,
+  getPairLabel,
   formatUsdValue,
   getFeePercentCell,
   formatPercentValue,
   formatUsdValueChange,
+  formatSecondaryPercentValue,
 } from './AppSummary.helpers'
 
 export const getFeesColumns = ({
@@ -300,5 +303,125 @@ export const getAssetColumns = ({
       )
     },
     copyText: rowIndex => fixedFloat(preparedData[rowIndex]?.marginFundingPayment, 2),
+  },
+]
+
+export const getPositionsColumns = ({
+  t,
+  isNoData,
+  isLoading,
+  entries,
+  columnsWidth,
+}) => [
+  {
+    id: 'pair',
+    name: 'column.pair',
+    className: 'align-left',
+    width: getColumnWidth('pair', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData(t('column.noResults'))
+      const { pair, leverage } = entries[rowIndex]
+      const pairLabel = getPairLabel(t, pair, leverage)
+      return (
+        <Cell tooltip={getTooltipContent(pair, t)}>
+          <>
+            <span className='cell-value'>
+              {pair}
+            </span>
+            <br />
+            <span className='cell-value secondary-value-left'>
+              {pairLabel}
+            </span>
+          </>
+        </Cell>
+      )
+    },
+    copyText: rowIndex => entries[rowIndex].pair,
+  },
+  {
+    id: 'amount',
+    name: 'column.amount',
+    width: getColumnWidth('amount', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
+      const { amount, basePrice } = entries[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(fixedFloat(amount), t)}>
+          <>
+            <span className='cell-value'>
+              {fixedFloat(amount)}
+            </span>
+            <br />
+            <span className='cell-value secondary-value'>
+              @
+              {fixedFloat(basePrice)}
+            </span>
+          </>
+        </Cell>
+      )
+    },
+    copyText: rowIndex => fixedFloat(entries[rowIndex].amount),
+  },
+  {
+    id: 'pl',
+    name: 'column.pl',
+    width: getColumnWidth('pl', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
+      const { pl, plPerc } = entries[rowIndex]
+      return (
+        <Cell tooltip={getTooltipContent(fixedFloat(pl), t)}>
+          <>
+            <span className='cell-value'>
+              {formatAmount(pl)}
+            </span>
+            <br />
+            <span className='cell-value secondary-value'>
+              {formatSecondaryPercentValue(plPerc)}
+            </span>
+          </>
+        </Cell>
+      )
+    },
+    copyText: rowIndex => fixedFloat(entries[rowIndex].pl),
+  },
+  {
+    id: 'liquidationPrice',
+    name: 'column.liq-price',
+    width: getColumnWidth('liquidationPrice', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
+      const { liquidationPrice } = entries[rowIndex]
+      return getCell(formatAmount(liquidationPrice, { color: 'red' }), t, fixedFloat(liquidationPrice))
+    },
+    copyText: rowIndex => fixedFloat(entries[rowIndex].liquidationPrice),
+  },
+  {
+    id: 'marginFunding',
+    name: 'column.fundingCost',
+    width: getColumnWidth('marginFunding', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
+      const { marginFunding } = entries[rowIndex]
+      return getCell(fixedFloat(marginFunding), t)
+    },
+    copyText: rowIndex => fixedFloat(entries[rowIndex].marginFunding),
+  },
+  {
+    id: 'collateral',
+    name: 'column.collateral',
+    width: getColumnWidth('collateral', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading) return getCellLoader(22, 80)
+      if (isNoData) return getCellNoData()
+      const { collateral } = entries[rowIndex]
+      return getCell(`$${fixedFloat(collateral)}`, t)
+    },
+    copyText: rowIndex => fixedFloat(entries[rowIndex].collateral),
   },
 ]

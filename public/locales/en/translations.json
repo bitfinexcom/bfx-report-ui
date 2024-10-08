@@ -687,6 +687,13 @@
         "min_balance_switch": "Minimum Balance",
         "min_balance_input": "Set a minimum balance for assets to show up in the table."
       }
+    },
+    "positions": {
+      "title": "Active Positions",
+      "derivative": "Derivative",
+      "margin": "Margin",
+      "position": "Position",
+      "amount": "Amount"
     }
   },
   "symbols": {
