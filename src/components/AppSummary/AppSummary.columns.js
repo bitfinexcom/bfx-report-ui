@@ -1,6 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 
+import { mapSymbol } from 'state/symbols/utils'
 import { formatAmount, fixedFloat } from 'ui/utils'
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
 import {
@@ -119,12 +120,13 @@ export const getAssetColumns = ({
       if (isNoData) return getCellNoData(t('column.noResults'))
       const { currency } = preparedData[rowIndex]
       const isTotal = getIsTotal(currency, t)
+      const formattedCurrency = mapSymbol(currency)
       return (
-        <Cell tooltip={getTooltipContent(currency, t)}>
+        <Cell tooltip={getTooltipContent(formattedCurrency, t)}>
           {isTotal ? (
             <>
               <span>
-                {currency}
+                {formattedCurrency}
               </span>
               <br />
               <span className='cell-value secondary-value'>
@@ -134,14 +136,14 @@ export const getAssetColumns = ({
           ) : (
             <>
               <span className='cell-value'>
-                {currency}
+                {formattedCurrency}
               </span>
             </>
           )}
         </Cell>
       )
     },
-    copyText: rowIndex => preparedData[rowIndex]?.currency,
+    copyText: rowIndex => mapSymbol(preparedData[rowIndex]?.currency),
   },
   {
     id: 'balance',
