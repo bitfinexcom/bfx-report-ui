@@ -351,7 +351,7 @@ class Main extends PureComponent {
             <Route
               exact
               path={PATHS.MENU_ACCOUNT_SUMMARY}
-              component={showFrameworkMode ? AppSummary : AccountSummary}
+              component={!showFrameworkMode ? AppSummary : AccountSummary}
             />
             <Route
               exact

@@ -240,6 +240,8 @@ class AccountSummary extends PureComponent {
     } = this.props
     const isNoData = isEmpty(data)
     const isLoading = !dataReceived && pageLoading
+    const preparedData = prepareAssetsData(walletsMock)
+    console.log('+++preparedData', preparedData)
 
     return (
       <Card
