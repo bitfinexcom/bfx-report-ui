@@ -4,7 +4,6 @@ import { Card, Elevation } from '@blueprintjs/core'
 import _map from 'lodash/map'
 import _sumBy from 'lodash/sumBy'
 import _groupBy from 'lodash/groupBy'
-
 import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import SectionHeader from 'ui/SectionHeader'
