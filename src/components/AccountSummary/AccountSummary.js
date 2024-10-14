@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
+import _map from 'lodash/map'
+import _sumBy from 'lodash/sumBy'
+import _groupBy from 'lodash/groupBy'
+
 import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import SectionHeader from 'ui/SectionHeader'
@@ -175,6 +179,11 @@ const walletsMock = [
     _isDataFromApiV2: true,
   },
 ]
+
+const prepareAssetsData = (data) => {
+  const groupedBalances = _groupBy(data, 'currency')
+  return _map(groupedBalances, (group, key) => ({ currency: key, balance: _sumBy(group, 'balance') }))
+}
 
 class AccountSummary extends PureComponent {
   static propTypes = {
