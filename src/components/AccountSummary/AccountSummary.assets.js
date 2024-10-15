@@ -7,13 +7,12 @@ import _groupBy from 'lodash/groupBy'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
-import { fetchAPositions } from 'state/positionsActive/actions'
+import { fetchWallets } from 'state/wallets/actions'
 import {
   getEntries,
   getPageLoading,
   getDataReceived,
-} from 'state/positionsActive/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+} from 'state/wallets/selectors'
 
 import { getColumns } from '../Wallets/Wallets.columns'
 
@@ -189,21 +188,17 @@ const SummaryByAsset = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const entries = useSelector(getEntries)
+  console.log('+++', entries)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
-  const isFirstSync = useSelector(getIsFirstSyncing)
-  const isSyncRequired = useSelector(getIsSyncRequired)
-  const isLoading = isFirstSync || (!dataReceived && pageLoading)
-  const isNoData = false
+  const isLoading = !dataReceived && pageLoading
+  const isNoData = true
 
   useEffect(() => {
-    if (!dataReceived && !pageLoading && !isSyncRequired) {
-      dispatch(fetchAPositions())
-    }
-  }, [dataReceived, pageLoading, isSyncRequired])
+    dispatch(fetchWallets())
+  }, [])
 
   const filteredData = prepareAssetsData(walletsMock)
-
 
   const columns = useMemo(
     () => getColumns({
@@ -212,37 +207,14 @@ const SummaryByAsset = () => {
     [filteredData, t, isLoading, isNoData],
   )
 
-  let showContent
-  if (isNoData) {
-    showContent = (
-      <DataTable
-        isNoData={isNoData}
-        isLoading={isLoading}
-        tableColumns={columns}
-        enableColumnResizing={false}
-        numRows={filteredData.length || 1}
-      />
-    )
-  } else {
-    showContent = (
-      <DataTable
-        tableColumns={columns}
-        enableColumnResizing={false}
-        numRows={filteredData.length || 1}
-      />
-    )
-  }
-
   return (
-    <div className='app-summary-item full-width-item'>
-      <div className='app-summary-item-title--row'>
-        <div>
-          <div className='app-summary-item-title'>
-            {t('summary.positions.title')}
-          </div>
-        </div>
-      </div>
-      {showContent}
+    <div className='section-account-summary-data-item'>
+      <div>{t('summary.by_asset.title')}</div>
+      <DataTable
+        tableColumns={columns}
+        enableColumnResizing={false}
+        numRows={columns.length || 1}
+      />
     </div>
   )
 }
