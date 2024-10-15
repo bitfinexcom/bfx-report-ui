@@ -191,9 +191,9 @@ const prepareAssetsData = (data) => {
 
 export const getColumns = ({
   t,
+  entries,
   isNoData,
   isLoading,
-  preparedData,
 }) => [
   {
     id: 'currency',
@@ -202,10 +202,10 @@ export const getColumns = ({
     width: COLUMN_WIDTHS.currency,
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData, t('column.noResults'))
-      const { currency } = preparedData[rowIndex]
+      const { currency } = entries[rowIndex]
       return getCell(mapSymbol(currency), t)
     },
-    copyText: rowIndex => mapSymbol(preparedData[rowIndex].currency),
+    copyText: rowIndex => mapSymbol(entries[rowIndex].currency),
   },
   {
     id: 'balance',
@@ -213,39 +213,34 @@ export const getColumns = ({
     width: COLUMN_WIDTHS.amount,
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const { balance } = preparedData[rowIndex]
+      const { balance } = entries[rowIndex]
       return getCell(fixedFloat(balance), t)
     },
     isNumericValue: true,
-    copyText: rowIndex => fixedFloat(preparedData[rowIndex].balance),
+    copyText: rowIndex => fixedFloat(entries[rowIndex].balance),
   }]
 
 const SummaryByAsset = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const entries = useSelector(getEntries)
-  // console.log('+++', entries)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
-  const isLoading = !dataReceived && pageLoading
+  const entries = prepareAssetsData(useSelector(getEntries))
   const isNoData = isEmpty(entries)
+  const isLoading = !dataReceived && pageLoading
 
   useEffect(() => {
     dispatch(fetchWallets())
   }, [])
 
-  const preparedData = prepareAssetsData(entries)
+  // const preparedData = prepareAssetsData(entries)
 
   const columns = useMemo(
     () => getColumns({
-      preparedData, t, isLoading, isNoData,
+      entries, t, isLoading, isNoData,
     }),
-    [preparedData, t, isLoading, isNoData],
+    [entries, t, isLoading, isNoData],
   )
-
-  // const
-
-  console.log('+++columns', columns)
 
   return (
     <div className='section-account-summary-data-item'>
