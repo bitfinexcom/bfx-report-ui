@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import classNames from 'classnames'
 import _map from 'lodash/map'
 import _sumBy from 'lodash/sumBy'
 import _groupBy from 'lodash/groupBy'
@@ -16,7 +15,7 @@ import {
 } from 'state/positionsActive/selectors'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
-import { getPositionsColumns } from '../AppSummary/AppSummary.columns'
+import { getColumns } from '../Wallets/Wallets.columns'
 
 const walletsMock = [
   {
@@ -195,10 +194,7 @@ const SummaryByAsset = () => {
   const isFirstSync = useSelector(getIsFirstSyncing)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
-  const isNoData = dataReceived && isEmpty(entries)
-  const tableClasses = classNames('summary-positions-table', {
-    'empty-table': isNoData,
-  })
+  const isNoData = false
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -206,12 +202,14 @@ const SummaryByAsset = () => {
     }
   }, [dataReceived, pageLoading, isSyncRequired])
 
+  const filteredData = prepareAssetsData(walletsMock)
+
 
   const columns = useMemo(
-    () => getPositionsColumns({
-      entries, t, isLoading, isNoData,
+    () => getColumns({
+      filteredData, t, isLoading, isNoData,
     }),
-    [entries, t, isLoading, isNoData],
+    [filteredData, t, isLoading, isNoData],
   )
 
   let showContent
@@ -221,18 +219,16 @@ const SummaryByAsset = () => {
         isNoData={isNoData}
         isLoading={isLoading}
         tableColumns={columns}
-        className={tableClasses}
-        numRows={isLoading ? 3 : 1}
         enableColumnResizing={false}
+        numRows={filteredData.length || 1}
       />
     )
   } else {
     showContent = (
       <DataTable
         tableColumns={columns}
-        className={tableClasses}
         enableColumnResizing={false}
-        numRows={isLoading ? 3 : entries.length}
+        numRows={filteredData.length || 1}
       />
     )
   }
