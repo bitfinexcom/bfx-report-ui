@@ -7,14 +7,19 @@ import _groupBy from 'lodash/groupBy'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
+import { fixedFloat } from 'ui/utils'
+import { mapSymbol } from 'state/symbols/utils'
 import { fetchWallets } from 'state/wallets/actions'
+import {
+  getCell,
+  getCellState,
+  COLUMN_WIDTHS,
+} from 'utils/columns'
 import {
   getEntries,
   getPageLoading,
   getDataReceived,
 } from 'state/wallets/selectors'
-
-import { getColumns } from '../Wallets/Wallets.columns'
 
 const walletsMock = [
   {
@@ -184,28 +189,63 @@ const prepareAssetsData = (data) => {
   return _map(groupedBalances, (group, key) => ({ currency: key, balance: _sumBy(group, 'balance') }))
 }
 
+export const getColumns = ({
+  t,
+  isNoData,
+  isLoading,
+  preparedData,
+}) => [
+  {
+    id: 'currency',
+    name: 'column.currency',
+    className: 'align-left',
+    width: COLUMN_WIDTHS.currency,
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData, t('column.noResults'))
+      const { currency } = preparedData[rowIndex]
+      return getCell(mapSymbol(currency), t)
+    },
+    copyText: rowIndex => mapSymbol(preparedData[rowIndex].currency),
+  },
+  {
+    id: 'balance',
+    name: 'column.balance',
+    width: COLUMN_WIDTHS.amount,
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const { balance } = preparedData[rowIndex]
+      return getCell(fixedFloat(balance), t)
+    },
+    isNumericValue: true,
+    copyText: rowIndex => fixedFloat(preparedData[rowIndex].balance),
+  }]
+
 const SummaryByAsset = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const entries = useSelector(getEntries)
-  console.log('+++', entries)
+  // console.log('+++', entries)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const isLoading = !dataReceived && pageLoading
-  const isNoData = true
+  const isNoData = isEmpty(entries)
 
   useEffect(() => {
     dispatch(fetchWallets())
   }, [])
 
-  const filteredData = prepareAssetsData(walletsMock)
+  const preparedData = prepareAssetsData(entries)
 
   const columns = useMemo(
     () => getColumns({
-      filteredData, t, isLoading, isNoData,
+      preparedData, t, isLoading, isNoData,
     }),
-    [filteredData, t, isLoading, isNoData],
+    [preparedData, t, isLoading, isNoData],
   )
+
+  // const
+
+  console.log('+++columns', columns)
 
   return (
     <div className='section-account-summary-data-item'>
@@ -213,7 +253,7 @@ const SummaryByAsset = () => {
       <DataTable
         tableColumns={columns}
         enableColumnResizing={false}
-        numRows={columns.length || 1}
+        numRows={(isLoading || isNoData) ? 1 : entries.length}
       />
     </div>
   )
