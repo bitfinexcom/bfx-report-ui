@@ -19,6 +19,7 @@ import Fees from './AppSummary.fees'
 import Value from './AppSummary.value'
 import Profits from './AppSummary.profits'
 import ByAsset from './AppSummary.byAsset'
+import Positions from './AppSummary.positions'
 
 const AppSummary = ({
   t,
@@ -33,6 +34,7 @@ const AppSummary = ({
   isSyncRequired,
   refreshBalance,
   refreshProfits,
+  refreshPositions,
   currentTimeFrame,
   refreshSummaryByAsset,
   isUnrealizedProfitExcluded,
@@ -55,8 +57,9 @@ const AppSummary = ({
     refresh()
     refreshBalance()
     refreshProfits()
+    refreshPositions()
     refreshSummaryByAsset()
-  }, [refresh, refreshBalance, refreshSummaryByAsset, refreshProfits])
+  }, [refresh, refreshBalance, refreshSummaryByAsset, refreshProfits, refreshPositions])
 
   return (
     <Card
@@ -110,6 +113,8 @@ const AppSummary = ({
           <Value />
           <Profits />
         </div>
+        <ByAsset />
+        <Positions />
         <div className='app-summary-data-row'>
           <Fees
             t={t}
@@ -120,7 +125,6 @@ const AppSummary = ({
             isTurkishSite={isTurkishSite}
           />
         </div>
-        <ByAsset />
       </div>
     </Card>
   )
@@ -151,6 +155,7 @@ AppSummary.propTypes = {
   isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
   refreshSummaryByAsset: PropTypes.func.isRequired,
   refreshProfits: PropTypes.func.isRequired,
+  refreshPositions: PropTypes.func.isRequired,
 }
 
 AppSummary.defaultProps = {

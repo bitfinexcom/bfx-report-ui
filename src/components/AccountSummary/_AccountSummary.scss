@@ -7,6 +7,15 @@
     align-items: flex-end;
     justify-content: space-between;
 
+    .full-width-item {
+      .app-summary-item-title {
+        font-size: 15px;
+        font-weight: 400;
+        margin-bottom: 5px;
+        color: var(--activeColor);
+      }
+    }
+
     &-item {
       width: 49%;
       min-width: 400px;

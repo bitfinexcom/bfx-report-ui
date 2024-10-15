@@ -670,8 +670,8 @@
       "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
     },
     "by_asset":{
-      "title": "Summary by Asset",
-      "sub_title": "For period ",
+      "title": "Your Assets",
+      "sub_title": "Summary for period ",
       "currency": "Currency",
       "all_assets": "All Assets",
       "amount": "Amount",
@@ -687,6 +687,12 @@
         "min_balance_switch": "Minimum Balance",
         "min_balance_input": "Set a minimum balance for assets to show up in the table."
       }
+    },
+    "positions": {
+      "title": "Active Positions",
+      "derivative": "Derivative",
+      "margin": "Margin",
+      "position": "Position"
     }
   },
   "symbols": {
