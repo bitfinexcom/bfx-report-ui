@@ -14,7 +14,6 @@ import PaidFees from './AccountSummary.paidFees'
 import DerivFees from './AccountSummary.derivFees'
 import FeeTierVolume from './AccountSummary.feeTierVolume'
 
-
 class AccountSummary extends PureComponent {
   static propTypes = {
     data: PropTypes.shape({
