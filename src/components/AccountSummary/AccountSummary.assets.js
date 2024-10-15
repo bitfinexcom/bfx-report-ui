@@ -185,6 +185,7 @@ const walletsMock = [
 ]
 
 const prepareAssetsData = (data) => {
+  if (isEmpty(data)) return []
   const groupedBalances = _groupBy(data, 'currency')
   return _map(groupedBalances, (group, key) => ({ currency: key, balance: _sumBy(group, 'balance') }))
 }
