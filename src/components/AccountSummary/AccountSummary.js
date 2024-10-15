@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
-import _map from 'lodash/map'
-import _sumBy from 'lodash/sumBy'
-import _groupBy from 'lodash/groupBy'
 import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import SectionHeader from 'ui/SectionHeader'
@@ -16,173 +13,6 @@ import PaidFees from './AccountSummary.paidFees'
 import DerivFees from './AccountSummary.derivFees'
 import FeeTierVolume from './AccountSummary.feeTierVolume'
 
-const walletsMock = [
-  {
-    type: 'contribution',
-    currency: 'UST',
-    balance: 500,
-    unsettledInterest: 0,
-    balanceAvailable: 500,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'creditline',
-    currency: 'UST',
-    balance: 500,
-    unsettledInterest: 0,
-    balanceAvailable: 500,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'funding',
-    currency: 'ETH',
-    balance: 75.19748273,
-    unsettledInterest: 0,
-    balanceAvailable: 9.4150902,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'funding',
-    currency: 'IOT',
-    balance: 101.65617908,
-    unsettledInterest: 0,
-    balanceAvailable: 101.65617908,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'funding',
-    currency: 'JPY',
-    balance: 23468.18510406,
-    unsettledInterest: 0,
-    balanceAvailable: 23468.18510406,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'funding',
-    currency: 'USD',
-    balance: 543.59104978,
-    unsettledInterest: 0,
-    balanceAvailable: 0.85983473,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'funding',
-    currency: 'UST',
-    balance: 200.72123561,
-    unsettledInterest: 0,
-    balanceAvailable: 200.72123561,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'exchange',
-    currency: 'BTC',
-    balance: 1.0745711,
-    unsettledInterest: 0,
-    balanceAvailable: 1.0745711,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'exchange',
-    currency: 'ETH',
-    balance: 41.27958958,
-    unsettledInterest: 0,
-    balanceAvailable: 41.27958958,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'exchange',
-    currency: 'EUR',
-    balance: 550.27976385,
-    unsettledInterest: 0,
-    balanceAvailable: 550.27976385,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'exchange',
-    currency: 'IOT',
-    balance: 301.22971424,
-    unsettledInterest: 0,
-    balanceAvailable: 301.22971424,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'exchange',
-    currency: 'JPY',
-    balance: 46691.61216429,
-    unsettledInterest: 0,
-    balanceAvailable: 46691.61216429,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'exchange',
-    currency: 'USD',
-    balance: 21836.75178168,
-    unsettledInterest: 0,
-    balanceAvailable: 21836.75178168,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'exchange',
-    currency: 'UST',
-    balance: 1336.81517648,
-    unsettledInterest: 0,
-    balanceAvailable: 1336.81517648,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'margin',
-    currency: 'USD',
-    balance: 320.00399401,
-    unsettledInterest: 0,
-    balanceAvailable: 320.00399401,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-  {
-    type: 'margin',
-    currency: 'USTF0',
-    balance: 150,
-    unsettledInterest: 0,
-    balanceAvailable: 150,
-    description: null,
-    meta: null,
-    _isDataFromApiV2: true,
-  },
-]
-
-const prepareAssetsData = (data) => {
-  const groupedBalances = _groupBy(data, 'currency')
-  return _map(groupedBalances, (group, key) => ({ currency: key, balance: _sumBy(group, 'balance') }))
-}
 
 class AccountSummary extends PureComponent {
   static propTypes = {
@@ -239,8 +69,6 @@ class AccountSummary extends PureComponent {
     } = this.props
     const isNoData = isEmpty(data)
     const isLoading = !dataReceived && pageLoading
-    const preparedData = prepareAssetsData(walletsMock)
-    console.log('+++preparedData', preparedData)
 
     return (
       <Card
