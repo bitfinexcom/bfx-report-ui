@@ -21,7 +21,6 @@ import {
   getDataReceived,
 } from 'state/wallets/selectors'
 
-
 const prepareAssetsData = (data) => {
   if (isEmpty(data)) return data
   const groupedBalances = _groupBy(data, 'currency')
