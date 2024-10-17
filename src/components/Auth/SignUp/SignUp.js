@@ -43,6 +43,7 @@ class SignUp extends PureComponent {
     signUpOtp: PropTypes.func.isRequired,
     signUpEmail: PropTypes.func.isRequired,
     showOtpLogin: PropTypes.func.isRequired,
+    disableAuthBtn: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchMode: PropTypes.func.isRequired,
     updateStatus: PropTypes.func.isRequired,
@@ -200,9 +201,10 @@ class SignUp extends PureComponent {
   }
 
   handleOneTimePassword = () => {
-    const { signUpOtp } = this.props
+    const { signUpOtp, disableAuthBtn } = this.props
     const { otp, password, isPasswordProtected } = this.state
     tracker.trackEvent('Authenticate')
+    disableAuthBtn(true)
     signUpOtp({
       otp,
       password,
