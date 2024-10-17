@@ -9,6 +9,7 @@ import {
   updateAuth,
   signUpEmail,
   showOtpLogin,
+  disableAuthBtn,
 } from 'state/auth/actions'
 import { updateStatus } from 'state/status/actions'
 import {
@@ -35,6 +36,7 @@ const mapDispatchToProps = {
   signUpEmail,
   showOtpLogin,
   updateStatus,
+  disableAuthBtn,
 }
 
 export default compose(
