@@ -162,7 +162,6 @@ class SignIn extends PureComponent {
       otp, password, email,
     } = this.state
     tracker.trackEvent('Authenticate')
-    // disableAuthBtn(true)
     signInOtp({
       otp,
       email,
