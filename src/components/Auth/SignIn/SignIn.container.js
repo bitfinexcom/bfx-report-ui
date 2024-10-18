@@ -9,6 +9,7 @@ import {
   signUpEmail,
   showOtpLogin,
   deleteAccount,
+  disableAuthBtn,
 } from 'state/auth/actions'
 import {
   getAuthData,
@@ -41,6 +42,7 @@ const mapDispatchToProps = {
   signUpEmail,
   showOtpLogin,
   deleteAccount,
+  disableAuthBtn,
 }
 
 export default compose(
