@@ -10,9 +10,9 @@
     .full-width-item {
       .app-summary-item-title {
         font-size: 15px;
-        font-weight: 400;
+        font-weight: 600;
         margin-bottom: 5px;
-        color: var(--activeColor);
+        color: var(--color);
       }
     }
 
@@ -26,12 +26,15 @@
       }
 
       > div:first-child {
+        font-size: 15px;
+        font-weight: 600;
         margin-bottom: 5px;
-        color: var(--activeColor);
+        color: var(--color);
 
         > div {
           font-size: 13px;
-          color: var(--color);
+          font-weight: 400;
+          color: var(--color2);
         }
       }
 
@@ -85,6 +88,18 @@
         margin-right: 0;
         min-width: inherit;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .section-account-summary-data {
+    .full-width-item {
+      margin-bottom: 10px;
+    }
+
+    .app-summary-item  {
+      min-width: inherit;
     }
   }
 }
