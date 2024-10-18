@@ -45,7 +45,6 @@ class SignIn extends PureComponent {
     signUpEmail: PropTypes.func.isRequired,
     showOtpLogin: PropTypes.func.isRequired,
     deleteAccount: PropTypes.func.isRequired,
-    disableAuthBtn: PropTypes.func.isRequired,
     isOtpLoginShown: PropTypes.bool.isRequired,
     switchAuthType: PropTypes.func.isRequired,
     setMasterAccount: PropTypes.func.isRequired,
@@ -158,12 +157,12 @@ class SignIn extends PureComponent {
   }
 
   handle2FASignIn = () => {
-    const { signInOtp, disableAuthBtn } = this.props
+    const { signInOtp } = this.props
     const {
       otp, password, email,
     } = this.state
     tracker.trackEvent('Authenticate')
-    disableAuthBtn(true)
+    // disableAuthBtn(true)
     signInOtp({
       otp,
       email,
