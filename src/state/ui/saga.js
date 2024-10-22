@@ -24,7 +24,7 @@ import { togglePaginationDialog } from './actions'
 function* uiLoaded() {
   if (config.isElectronApp) {
     handleElectronLoad()
-    const lang = yield call(window.bfxReportElectronApi.getLanguage) || LANGUAGES.en
+    const lang = yield call(window?.bfxReportElectronApi?.getLanguage) || LANGUAGES.en
     yield put(setLang(lang))
   }
 
