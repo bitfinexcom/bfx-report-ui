@@ -1,5 +1,5 @@
 import {
-  take, put, select, takeLatest,
+  call, take, put, select, takeLatest,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
 
@@ -24,6 +24,8 @@ import { togglePaginationDialog } from './actions'
 function* uiLoaded() {
   if (config.isElectronApp) {
     handleElectronLoad()
+    const lang = yield call(window.bfxReportElectronApi.getLanguage) || LANGUAGES.en
+    yield put(setLang(lang))
   }
 
   const parsed = getParsedUrlParams(window.location.search)
