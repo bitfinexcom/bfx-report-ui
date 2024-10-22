@@ -40,10 +40,10 @@ function* updateLang() {
   i18n.changeLanguage(LANGUAGES[locale])
 }
 
-function* updateElectronLang({ lang }) {
+function* updateElectronLang({ payload }) {
   try {
-    if (!isElectronApp) return
-    yield call(window?.bfxReportElectronApi?.setLanguage, lang)
+    if (isElectronApp) return
+    yield call(window?.bfxReportElectronApi?.setLanguage, payload)
   } catch (error) {
     yield put(updateErrorStatus({
       id: 'status.fail',
