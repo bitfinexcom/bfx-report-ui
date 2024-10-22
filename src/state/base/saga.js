@@ -42,8 +42,8 @@ function* updateLang() {
 
 function* updateElectronLang({ payload }) {
   try {
-    if (isElectronApp) return
-    yield call(window?.bfxReportElectronApi?.setLanguage, payload)
+    if (!isElectronApp) return
+    yield call(window?.bfxReportElectronApi?.setLanguage, { language: payload })
   } catch (error) {
     yield put(updateErrorStatus({
       id: 'status.fail',
