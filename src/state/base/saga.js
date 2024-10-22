@@ -42,7 +42,7 @@ function* updateLang() {
 
 function* updateElectronLang({ lang }) {
   try {
-    if (isElectronApp) return
+    if (!isElectronApp) return
     yield call(window?.bfxReportElectronApi?.setLanguage, lang)
   } catch (error) {
     yield put(updateErrorStatus({
