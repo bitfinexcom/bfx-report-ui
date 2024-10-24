@@ -9,6 +9,7 @@ import Positions from 'components/AppSummary/AppSummary.positions'
 import Leo from './AccountSummary.leo'
 import Fees from './AccountSummary.fees'
 import Volume from './AccountSummary.volume'
+import Assets from './AccountSummary.assets'
 import PaidFees from './AccountSummary.paidFees'
 import DerivFees from './AccountSummary.derivFees'
 import FeeTierVolume from './AccountSummary.feeTierVolume'
@@ -81,6 +82,7 @@ class AccountSummary extends PureComponent {
         />
         <div className='section-account-summary-data'>
           <Positions />
+          <Assets />
           <Volume
             t={t}
             isNoData={isNoData}
