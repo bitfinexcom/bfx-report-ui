@@ -87,10 +87,18 @@ export function setApiPort(apiPort) {
   }
 }
 
+export function setElectronLang(lang) {
+  return {
+    type: types.SET_ELECTRON_LANG,
+    payload: lang,
+  }
+}
+
 export default {
   setApiPort,
   setDateFormat,
   setLang,
+  setElectronLang,
   setSrc,
   setTheme,
   setTimezone,
