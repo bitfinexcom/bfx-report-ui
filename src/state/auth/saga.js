@@ -276,6 +276,7 @@ function* signInOtp({ payload }) {
       otp, password, email, isNotProtected, isSubAccount,
     } = payload
     const loginToken = yield select(getLoginToken)
+    yield put(actions.disableAuthBtn(true))
     const params = {
       loginToken,
       token: otp,
@@ -297,11 +298,13 @@ function* signInOtp({ payload }) {
     }
 
     if (error) {
+      yield put(actions.disableAuthBtn(false))
       yield put(updateErrorStatus({
         id: 'auth.2FA.invalidToken',
       }))
     }
   } catch (fail) {
+    yield put(actions.disableAuthBtn(false))
     yield put(updateAuthErrorStatus(fail))
   }
 }
