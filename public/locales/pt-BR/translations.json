@@ -36,6 +36,7 @@
     "accountRemoved": "Conta removida",
     "accountRemoving": "Remoção de contas",
     "useApiKey": "Usar Chave API",
+    "updateUser": "Update user",
     "loginEmail": {
       "emailOrUserName": "E-mail ou usuário",
       "bfxAccPassword": "Senha",
@@ -52,10 +53,22 @@
       "invalidToken": "Token inválido. Tente novamente",
       "loginSessionExpired": "Sua sessão de login expirou, por favor tente novamente"
     },
+    "ttlSelect": {
+      "title": "Auth Token TTL",
+      "1day": "1 Day",
+      "2days": "2 Days",
+      "3days": "3 Days",
+      "4days": "4 Days",
+      "5days": "5 Days",
+      "6days": "6 Days",
+      "7days": "7 Days"
+    },
     "apiKey": "Chave de API",
     "apiSecret": "Segredo de API",
     "accWithApiKey": "Adicionar conta com chave de API",
     "accWithoutApiKey": "Adicionar conta sem chave de API",
+    "accAddedWithApiKey": "You have already added this account using an API key",
+    "accAddedWithApiKeyLogin": "You have already added this account using an API key, logging you in...",
     "simpleAccounts": "Contas simples",
     "multipleAccounts": "Múltiplas contas",
     "login": "Login",
@@ -129,6 +142,8 @@
     "amountUsd": "Quantidade (USD)",
     "ask": "Venda",
     "avgprice": "Preço médio de execução",
+    "bankFees": "Bank Fees",
+    "bankRouterId": "Bank Router ID",
     "balance": "Saldo",
     "balanceUsd": "Saldo (USD)",
     "base-price": "Preço base",
@@ -145,13 +160,19 @@
     "created": "Criado",
     "cumulativeAmount": "Valor cumulativo",
     "currency": "Moeda",
+    "currencyName": "Currency Name",
     "customerInfo": "Informação do cliente",
     "date": "Data",
     "days": "Dias",
+    "defaultWidth": "Reset Column Widths",
     "deselectionHint": "Cmd/Ctrl + clique para cancelar a seleção",
     "description": "Descrição",
     "destination": "Destino",
     "duration": "Duração",
+    "externalProviderId": "External Provider ID",
+    "externalProviderStatus": "External Provider Status",
+    "externalProviderInfo": "External Provider Info",
+    "externalProviderBankAccInfo": "External Provider Bank Account Info",
     "fee": "Taxa",
     "feePercent": "Perc taxa",
     "fees": "Taxas",
@@ -171,8 +192,12 @@
     "maker_rebate": "Reembolso de maker",
     "merchantName": "Nome do comerciante",
     "meta": "Metadados",
+    "memo": "Memo",
     "mobile": "Móvel",
+    "moreDetails": "More Details",
     "movementsTotal": "Quantidade total de movimentos (USD)",
+    "noResults": "No results",
+    "noHistory": "No history to display",
     "note": "Nota",
     "opened": "Aberta",
     "orderid": "ID da ordem",
@@ -193,11 +218,14 @@
     "rate": "Taxa",
     "rateperc": "Taxa %",
     "redirectUrl": "URL de redirecionamento",
+    "remark": "Remark",
     "sale": "Venda",
+    "show": "Show",
     "sellingAmount": "Quantidade de venda",
     "sellingWeightedPrice": "Preço Ponderado de Venda",
     "side": "Lado",
     "status": "Status",
+    "started": "Started",
     "taker_fees": "Taxas de taker",
     "taker_fees_crypto": "Taxas de taker Cripto",
     "taker_fees_fiat": "Taxas de taker Fiat",
@@ -271,10 +299,15 @@
     "remoteStorage": "Armazenamento remoto",
     "status": {
       "local": "Exportar csv gerado, os arquivos são salvos em: ",
-      "email": "Gerando seu relatório CSV, enviaremos para você por e-mail assim que estiver pronto..."
+      "email": "Gerando seu relatório CSV, enviaremos para você por e-mail assim que estiver pronto...",
+      "failed": "Export generation failed. Please select a smaller date range or try again later."
     },
     "success": "Sucesso",
-    "targets": "Dados a exportar"
+    "fail": "Fail",
+    "targets": "Dados a exportar",
+    "exportFormat": "Export Format",
+    "exportAsCsv": "Export as CSV",
+    "exportAsPdf": "Export as PDF"
   },
   "fcredit": {
     "title": "Créditos de financiamento (usados)",
@@ -310,7 +343,10 @@
     "cancel": "Cancelar",
     "notagain": "Não mostrar esta mensagem novamente",
     "continue": "Continuar",
-    "warning": "Aviso"
+    "warning": "Aviso",
+    "sync-in-progress": "Syncing in Progress",
+    "first-sync-message": "Your data is downloading, please wait until the syncing process is finished.",
+    "okay_btn": "Okay"
   },
   "header": {
     "logout": "Encerrar sessão",
@@ -371,8 +407,16 @@
   "logins": {
     "title": "Logins"
   },
+  "maintenance": {
+    "title": "Maintenance Notice",
+    "message_1": "The platform is currently in maintenance mode.",
+    "message_2": "Please check the ",
+    "message_3": " for updates.",
+    "message_4": "We will be back soon."
+  },
   "movements": {
-    "title": "Movimentos"
+    "title": "Movimentos",
+    "moreDetails": "More Details"
   },
   "navItems": {
     "reports": "Relatórios",
@@ -481,6 +525,7 @@
     "table_scroll": "Rolagem de tabela",
     "preserve_timeframe": "Preservar período",
     "remove_account": "Remover conta",
+    "sync_after_update": "Auto Sync After Update",
     "sync": {
       "add-filter": "Adicionar filtro",
       "add-pair": "Adicionar par",
@@ -513,6 +558,7 @@
   },
   "selector": {
     "select": "Selecionar",
+    "strategy": "Strategy",
     "all": "Todos",
     "inactive": "Inativo",
     "balance-precision": {
@@ -599,6 +645,56 @@
     "use_api_key": "Utilizar chave API",
     "name_updated": "Nome do grupo de contas atualizado"
   },
+  "summary": {
+    "title": "Summary",
+    "leo_level": "LEO level",
+    "avg_amount": "Avg.Amount",
+    "no_data": "No related data for this period is available or data should be synced.",
+    "fees": {
+      "title": "Account Fees",
+      "sub_title": "Based on your 30 days eligible trading volume",
+      "fee_tier_volume": "Eligible Trading Volume",
+      "maker": "Maker Fees",
+      "taker_crypto": "Taker Fees Crypto",
+      "taker_fiat": "Taker Fees Fiat",
+      "taker_stables": "Taker Fees Stablecoins",
+      "deriv_maker": "Derivatives Maker Fees",
+      "deriv_taker": "Derivatives Taker Fees"
+    },
+    "value": {
+      "title": "Account Balance",
+      "sub_title": "Total Balance including Deposits/Withdrawals"
+    },
+    "profits": {
+      "title": "Profits",
+      "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
+    },
+    "by_asset": {
+      "title": "Your Assets",
+      "sub_title": "Summary for period ",
+      "currency": "Currency",
+      "all_assets": "All Assets",
+      "amount": "Amount",
+      "balance": "Balance",
+      "balance_change": "Balance Change",
+      "profits": "Profits",
+      "volume": "Volume",
+      "total": "Total",
+      "trading_fees": "Trading Fees",
+      "fund_earnings": "Funding Earnings",
+      "filter": {
+        "title": "Filter",
+        "min_balance_switch": "Minimum Balance",
+        "min_balance_input": "Set a minimum balance for assets to show up in the table."
+      }
+    },
+    "positions": {
+      "title": "Active Positions",
+      "derivative": "Derivative",
+      "margin": "Margin",
+      "position": "Position"
+    }
+  },
   "symbols": {
     "title": "Obter símbolos",
     "clear_symbols": "Limpar Símbolos"
@@ -626,6 +722,16 @@
     "message": {
       "canceled": "Cancelar antigo Sync Watcher"
     },
+    "last-sync-time": {
+      "fail": "Failed to get last sync time",
+      "syncing": "Syncing...",
+      "sync-was-less-than-hour": "Last Sync was less than an hour ago",
+      "sync-was": "Last Sync was {{hours}} hours ago"
+    },
+    "init-sync-info": {
+      "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",
+      "additional": "Syncing is still in progress, this might take several minutes. Keep this window open until it's finished in case you have a large history."
+    },
     "estimated_time": {
       "started_at": "Sincronização iniciada em: ",
       "spent_time": "Tempo gasto: ",
@@ -640,16 +746,42 @@
   },
   "taxreport": {
     "title": "Relatório de impostos",
-    "sections": {
-      "startSnapshot": "Iniciar Snapshot",
-      "endSnapshot": "Encerrar Snapshot",
-      "finalResult": "Resultado final"
-    },
     "startingPeriodBalances": "Saldos do início do período",
     "endingPeriodBalances": "Saldos do fim do período",
     "startPositions": "Snapshot das posições iniciais",
     "endPositions": "Snapshot das posições finais",
-    "movements": "Movimentos"
+    "movements": "Movimentos",
+    "cols": {
+      "currency": "Currency",
+      "source": "Source",
+      "amount": "Amount",
+      "dateAcquired": "Date Acquired ",
+      "dateSold": "Date Sold",
+      "proceeds": "Proceeds",
+      "cost": "Cost",
+      "gainOrLoss": "Gain or Loss"
+    },
+    "sources": {
+      "airdrop_on_wallet": "Airdrop on wallet",
+      "margin_funding_payment": "Margin funding payment",
+      "affiliate_rebate": "Affiliate rebate",
+      "staking_payment": "Staking payment",
+      "exchange": "Exchange"
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "message": "The tax reports generated by this app are for informational purposes only. We do not guarantee accuracy or completeness. Always consult a qualified tax advisor to ensure compliance with current tax laws and personalized advice. Your reliance on the generated reports is at your own risk."
+    },
+    "generation": {
+      "success": "Tax Report generated",
+      "title": "Your tax report is being generated. This process can take a while.",
+      "note": "If you have a large history it's recommended to keep the window open in the background until it's completed."
+    },
+    "sections": {
+      "startSnapshot": "Iniciar Snapshot",
+      "endSnapshot": "Encerrar Snapshot",
+      "finalResult": "Resultado final"
+    }
   },
   "theme": {
     "light": "Claro",
