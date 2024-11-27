@@ -264,11 +264,6 @@
     "disclaimer": {
       "title": "Descargo de responsabilidad",
       "message": "Los informes fiscales generados por esta aplicación son solo para fines informativos. No garantizamos precisión o integridad. Siempre consulta a un asesor fiscal calificado para garantizar el cumplimiento de las leyes fiscales vigentes y obtener asesoramiento personalizado. La confianza en los informes generados es bajo tu propio riesgo."
-    },
-    "generation": {
-      "success": "Informe fiscal generado",
-      "title": "Tu informe fiscal está siendo generado. Este proceso puede tomar un tiempo.",
-      "note": "Si tienes un historial extenso se recomienda mantener la ventana abierta en segundo plano hasta que se complete."
-    },
+    }
   }
 }
