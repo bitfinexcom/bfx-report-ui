@@ -36,7 +36,7 @@
     "accountRemoved": "Conta removida",
     "accountRemoving": "Remoção de contas",
     "useApiKey": "Usar Chave API",
-    "updateUser": "Update user",
+    "updateUser": "Atualizar usuário",
     "loginEmail": {
       "emailOrUserName": "E-mail ou usuário",
       "bfxAccPassword": "Senha",
@@ -54,21 +54,21 @@
       "loginSessionExpired": "Sua sessão de login expirou, por favor tente novamente"
     },
     "ttlSelect": {
-      "title": "Auth Token TTL",
-      "1day": "1 Day",
-      "2days": "2 Days",
-      "3days": "3 Days",
-      "4days": "4 Days",
-      "5days": "5 Days",
-      "6days": "6 Days",
-      "7days": "7 Days"
+      "title": "TTL do Token de Autenticação",
+      "1day": "1 Dia",
+      "2days": "2 Dias",
+      "3days": "3 Dias",
+      "4days": "4 Dias",
+      "5days": "5 Dias",
+      "6days": "6 Dias",
+      "7days": "7 Dias"
     },
     "apiKey": "Chave de API",
     "apiSecret": "Segredo de API",
     "accWithApiKey": "Adicionar conta com chave de API",
     "accWithoutApiKey": "Adicionar conta sem chave de API",
-    "accAddedWithApiKey": "You have already added this account using an API key",
-    "accAddedWithApiKeyLogin": "You have already added this account using an API key, logging you in...",
+    "accAddedWithApiKey": "Você já adicionou esta conta usando uma chave API",
+    "accAddedWithApiKeyLogin": "Você já adicionou esta conta usando uma chave API, entrando agora...",
     "simpleAccounts": "Contas simples",
     "multipleAccounts": "Múltiplas contas",
     "login": "Login",
@@ -142,8 +142,8 @@
     "amountUsd": "Quantidade (USD)",
     "ask": "Venda",
     "avgprice": "Preço médio de execução",
-    "bankFees": "Bank Fees",
-    "bankRouterId": "Bank Router ID",
+    "bankFees": "Taxas Bancárias",
+    "bankRouterId": "ID do Roteador Bancário",
     "balance": "Saldo",
     "balanceUsd": "Saldo (USD)",
     "base-price": "Preço base",
@@ -160,19 +160,19 @@
     "created": "Criado",
     "cumulativeAmount": "Valor cumulativo",
     "currency": "Moeda",
-    "currencyName": "Currency Name",
+    "currencyName": "Nome da Moeda",
     "customerInfo": "Informação do cliente",
     "date": "Data",
     "days": "Dias",
-    "defaultWidth": "Reset Column Widths",
+    "defaultWidth": "Redefinir Largura das Colunas",
     "deselectionHint": "Cmd/Ctrl + clique para cancelar a seleção",
     "description": "Descrição",
     "destination": "Destino",
     "duration": "Duração",
-    "externalProviderId": "External Provider ID",
-    "externalProviderStatus": "External Provider Status",
-    "externalProviderInfo": "External Provider Info",
-    "externalProviderBankAccInfo": "External Provider Bank Account Info",
+    "externalProviderId": "ID do Provedor Externo",
+    "externalProviderStatus": "Status do Provedor Externo",
+    "externalProviderInfo": "Informações do Provedor Externo",
+    "externalProviderBankAccInfo": "Informações da Conta Bancária do Provedor Externo",
     "fee": "Taxa",
     "feePercent": "Perc taxa",
     "fees": "Taxas",
@@ -192,12 +192,12 @@
     "maker_rebate": "Reembolso de maker",
     "merchantName": "Nome do comerciante",
     "meta": "Metadados",
-    "memo": "Memo",
+    "memo": "Memorando",
     "mobile": "Móvel",
-    "moreDetails": "More Details",
+    "moreDetails": "Mais detalhes",
     "movementsTotal": "Quantidade total de movimentos (USD)",
-    "noResults": "No results",
-    "noHistory": "No history to display",
+    "noResults": "Sem resultados",
+    "noHistory": "Nenhum histórico para exibir",
     "note": "Nota",
     "opened": "Aberta",
     "orderid": "ID da ordem",
@@ -218,14 +218,14 @@
     "rate": "Taxa",
     "rateperc": "Taxa %",
     "redirectUrl": "URL de redirecionamento",
-    "remark": "Remark",
+    "remark": "Observação",
     "sale": "Venda",
-    "show": "Show",
+    "show": "Exibir",
     "sellingAmount": "Quantidade de venda",
     "sellingWeightedPrice": "Preço Ponderado de Venda",
     "side": "Lado",
     "status": "Status",
-    "started": "Started",
+    "started": "Iniciado",
     "taker_fees": "Taxas de taker",
     "taker_fees_crypto": "Taxas de taker Cripto",
     "taker_fees_fiat": "Taxas de taker Fiat",
@@ -300,14 +300,14 @@
     "status": {
       "local": "Exportar csv gerado, os arquivos são salvos em: ",
       "email": "Gerando seu relatório CSV, enviaremos para você por e-mail assim que estiver pronto...",
-      "failed": "Export generation failed. Please select a smaller date range or try again later."
+      "failed": "A geração da exportação falhou. Por favor, selecione um intervalo de datas menor ou tente novamente mais tarde."
     },
     "success": "Sucesso",
     "fail": "Fail",
     "targets": "Dados a exportar",
-    "exportFormat": "Export Format",
-    "exportAsCsv": "Export as CSV",
-    "exportAsPdf": "Export as PDF"
+    "exportFormat": "Formato de Exportação",
+    "exportAsCsv": "Exportar como CSV",
+    "exportAsPdf": "Exportar como PDF"
   },
   "fcredit": {
     "title": "Créditos de financiamento (usados)",
@@ -344,8 +344,8 @@
     "notagain": "Não mostrar esta mensagem novamente",
     "continue": "Continuar",
     "warning": "Aviso",
-    "sync-in-progress": "Syncing in Progress",
-    "first-sync-message": "Your data is downloading, please wait until the syncing process is finished.",
+    "sync-in-progress": "Sincronização em andamento",
+    "first-sync-message": "Seus dados estão sendo baixados, por favor, aguarde até que o processo de sincronização seja concluído.",
     "okay_btn": "Okay"
   },
   "header": {
@@ -408,15 +408,15 @@
     "title": "Logins"
   },
   "maintenance": {
-    "title": "Maintenance Notice",
-    "message_1": "The platform is currently in maintenance mode.",
-    "message_2": "Please check the ",
-    "message_3": " for updates.",
-    "message_4": "We will be back soon."
-  },
+      "title": "Aviso de Manutenção",
+      "message_1": "A plataforma está atualmente em modo de manutenção.",
+      "message_2": "Por favor, verifique o ",
+      "message_3": " para atualizações.",
+      "message_4": "Estaremos de volta em breve."
+    },
   "movements": {
     "title": "Movimentos",
-    "moreDetails": "More Details"
+    "moreDetails": "Mais detalhes"
   },
   "navItems": {
     "reports": "Relatórios",
@@ -525,7 +525,7 @@
     "table_scroll": "Rolagem de tabela",
     "preserve_timeframe": "Preservar período",
     "remove_account": "Remover conta",
-    "sync_after_update": "Auto Sync After Update",
+    "sync_after_update": "Sincronizar automaticamente após a atualização",
     "sync": {
       "add-filter": "Adicionar filtro",
       "add-pair": "Adicionar par",
@@ -558,7 +558,7 @@
   },
   "selector": {
     "select": "Selecionar",
-    "strategy": "Strategy",
+    "strategy": "Estratégia",
     "all": "Todos",
     "inactive": "Inativo",
     "balance-precision": {
@@ -646,53 +646,53 @@
     "name_updated": "Nome do grupo de contas atualizado"
   },
   "summary": {
-    "title": "Summary",
-    "leo_level": "LEO level",
-    "avg_amount": "Avg.Amount",
-    "no_data": "No related data for this period is available or data should be synced.",
+    "title": "Resumo",
+    "leo_level": "Nível LEO",
+    "avg_amount": "Valor Médio",
+    "no_data": "Não há dados relacionados para este período ou os dados precisam ser sincronizados.",
     "fees": {
-      "title": "Account Fees",
-      "sub_title": "Based on your 30 days eligible trading volume",
-      "fee_tier_volume": "Eligible Trading Volume",
-      "maker": "Maker Fees",
-      "taker_crypto": "Taker Fees Crypto",
-      "taker_fiat": "Taker Fees Fiat",
-      "taker_stables": "Taker Fees Stablecoins",
-      "deriv_maker": "Derivatives Maker Fees",
-      "deriv_taker": "Derivatives Taker Fees"
+      "title": "Taxas da Conta",
+      "sub_title": "Com base no seu volume de negociação elegível dos últimos 30 dias",
+      "fee_tier_volume": "Volume de Negociação Elegível",
+      "maker": "Taxas do Maker",
+      "taker_crypto": "Taxas do Taker Cripto",
+      "taker_fiat": "Taxas do Taker Fiat",
+      "taker_stables": "Taxas do Taker Stablecoins",
+      "deriv_maker": "Taxas do Maker de Derivativos",
+      "deriv_taker": "Taxas do Taker de Derivativos"
     },
     "value": {
-      "title": "Account Balance",
-      "sub_title": "Total Balance including Deposits/Withdrawals"
+      "title": "Saldo da Conta",
+      "sub_title": "Saldo Total incluindo Depósitos/Saques"
     },
     "profits": {
-      "title": "Profits",
-      "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
+      "title": "Lucros",
+      "sub_title": "Lucros/prejuízos do final do dia, excluindo Depósitos/Saques"
     },
     "by_asset": {
-      "title": "Your Assets",
-      "sub_title": "Summary for period ",
-      "currency": "Currency",
-      "all_assets": "All Assets",
-      "amount": "Amount",
-      "balance": "Balance",
-      "balance_change": "Balance Change",
-      "profits": "Profits",
+      "title": "Seus Ativos",
+      "sub_title": "Resumo para o período ",
+      "currency": "Moeda",
+      "all_assets": "Todos os Ativos",
+      "amount": "Quantidade",
+      "balance": "Saldo",
+      "balance_change": "Alteração no Saldo",
+      "profits": "Lucros",
       "volume": "Volume",
       "total": "Total",
-      "trading_fees": "Trading Fees",
-      "fund_earnings": "Funding Earnings",
+      "trading_fees": "Taxas de Negociação",
+      "fund_earnings": "Ganhos de Financiamento",
       "filter": {
-        "title": "Filter",
-        "min_balance_switch": "Minimum Balance",
-        "min_balance_input": "Set a minimum balance for assets to show up in the table."
+        "title": "Filtro",
+        "min_balance_switch": "Saldo Mínimo",
+        "min_balance_input": "Defina um saldo mínimo para que os ativos apareçam na tabela."
       }
     },
     "positions": {
-      "title": "Active Positions",
-      "derivative": "Derivative",
-      "margin": "Margin",
-      "position": "Position"
+      "title": "Posições Ativas",
+      "derivative": "Derivativo",
+      "margin": "Margem",
+      "position": "Posição"
     }
   },
   "symbols": {
@@ -723,14 +723,14 @@
       "canceled": "Cancelar antigo Sync Watcher"
     },
     "last-sync-time": {
-      "fail": "Failed to get last sync time",
-      "syncing": "Syncing...",
-      "sync-was-less-than-hour": "Last Sync was less than an hour ago",
-      "sync-was": "Last Sync was {{hours}} hours ago"
+      "fail": "Falha ao obter o horário da última sincronização",
+      "syncing": "Sincronizando...",
+      "sync-was-less-than-hour": "A última sincronização foi há menos de uma hora",
+      "sync-was": "A última sincronização foi há {{hours}} horas"
     },
     "init-sync-info": {
-      "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",
-      "additional": "Syncing is still in progress, this might take several minutes. Keep this window open until it's finished in case you have a large history."
+      "main": "Bem-vindo ao App de Relatórios Bitfinex. Seu histórico de negociações está sendo sincronizado, por favor, aguarde até que seja concluído para visualizar seus relatórios.",
+      "additional": "A sincronização ainda está em andamento, isso pode levar vários minutos. Mantenha esta janela aberta até que seja concluído caso tenha um histórico extenso."
     },
     "estimated_time": {
       "started_at": "Sincronização iniciada em: ",
@@ -752,30 +752,30 @@
     "endPositions": "Snapshot das posições finais",
     "movements": "Movimentos",
     "cols": {
-      "currency": "Currency",
-      "source": "Source",
-      "amount": "Amount",
-      "dateAcquired": "Date Acquired ",
-      "dateSold": "Date Sold",
-      "proceeds": "Proceeds",
-      "cost": "Cost",
-      "gainOrLoss": "Gain or Loss"
+      "currency": "Moeda",
+      "source": "Fonte",
+      "amount": "Quantidade",
+      "dateAcquired": "Data de Aquisição",
+      "dateSold": "Data de Venda",
+      "proceeds": "Receitas",
+      "cost": "Custo",
+      "gainOrLoss": "Lucro ou Prejuízo"
     },
     "sources": {
-      "airdrop_on_wallet": "Airdrop on wallet",
-      "margin_funding_payment": "Margin funding payment",
-      "affiliate_rebate": "Affiliate rebate",
-      "staking_payment": "Staking payment",
+      "airdrop_on_wallet": "Airdrop na carteira",
+      "margin_funding_payment": "Pagamento de financiamento com margem",
+      "affiliate_rebate": "Reembolso de afiliado",
+      "staking_payment": "Pagamento de staking",
       "exchange": "Exchange"
     },
     "disclaimer": {
-      "title": "Disclaimer",
-      "message": "The tax reports generated by this app are for informational purposes only. We do not guarantee accuracy or completeness. Always consult a qualified tax advisor to ensure compliance with current tax laws and personalized advice. Your reliance on the generated reports is at your own risk."
+      "title": "Aviso Legal",
+      "message": "Os relatórios fiscais gerados por este aplicativo são apenas para fins informativos. Não garantimos precisão ou completude. Sempre consulte um consultor fiscal qualificado para garantir conformidade com as leis fiscais vigentes e obter aconselhamento personalizado. A confiança nos relatórios gerados é de sua responsabilidade."
     },
     "generation": {
-      "success": "Tax Report generated",
-      "title": "Your tax report is being generated. This process can take a while.",
-      "note": "If you have a large history it's recommended to keep the window open in the background until it's completed."
+      "success": "Relatório fiscal gerado",
+      "title": "Seu relatório fiscal está sendo gerado. Esse processo pode levar algum tempo.",
+      "note": "Se você tiver um histórico extenso, é recomendável manter a janela aberta em segundo plano até que seja concluído."
     },
     "sections": {
       "startSnapshot": "Iniciar Snapshot",
