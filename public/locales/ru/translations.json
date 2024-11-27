@@ -36,7 +36,7 @@
     "accountRemoved": "Аккаунт удален",
     "accountRemoving": "Удаление аккаунта",
     "useApiKey": "Использовать ключ API",
-    "updateUser": "Update user",
+    "updateUser": "Обновить пользователя",
     "loginEmail": {
       "emailOrUserName": "Имя пользователя или эл. почта",
       "bfxAccPassword": "Пароль",
@@ -54,21 +54,21 @@
       "loginSessionExpired": "Ваша сессия истекла, попробуйте еще раз"
     },
     "ttlSelect": {
-      "title": "Auth Token TTL",
-      "1day": "1 Day",
-      "2days": "2 Days",
-      "3days": "3 Days",
-      "4days": "4 Days",
-      "5days": "5 Days",
-      "6days": "6 Days",
-      "7days": "7 Days"
+      "title": "TTL токена авторизации",
+      "1day": "1 день",
+      "2days": "2 дня",
+      "3days": "3 дня",
+      "4days": "4 дня",
+      "5days": "5 дней",
+      "6days": "6 дней",
+      "7days": "7 дней"
     },
     "apiKey": "Ключ API",
     "apiSecret": "Секретный ключ API",
     "accWithApiKey": "Добавить аккаунт с ключом API",
     "accWithoutApiKey": "Добавить аккаунт без ключа API",
-    "accAddedWithApiKey": "You have already added this account using an API key",
-    "accAddedWithApiKeyLogin": "You have already added this account using an API key, logging you in...",
+    "accAddedWithApiKey": "Вы уже добавили этот аккаунт, используя API-ключ",
+    "accAddedWithApiKeyLogin": "Вы уже добавили этот аккаунт, используя API-ключ, вход в систему...",
     "simpleAccounts": "Простые учетные записи",
     "multipleAccounts": "Несколько учетных записей",
     "login": "Войдите в аккаунт",
@@ -142,8 +142,8 @@
     "amountUsd": "Сумма (USD)",
     "ask": "Продажа",
     "avgprice": "Средняя цена исполнения",
-    "bankFees": "Bank Fees",
-    "bankRouterId": "Bank Router ID",
+    "bankFees": "Банковские комиссии",
+    "bankRouterId": "ID банковского маршрутизатора",
     "balance": "Баланс",
     "balanceUsd": "Баланс (USD)",
     "base-price": "Базовая цена",
@@ -160,19 +160,19 @@
     "created": "Создано",
     "cumulativeAmount": "Совокупная сумма",
     "currency": "Валюта",
-    "currencyName": "Currency Name",
+    "currencyName": "Название валюты",
     "customerInfo": "Информация о клиенте",
     "date": "Дата",
     "days": "Дней",
-    "defaultWidth": "Reset Column Widths",
+    "defaultWidth": "Сброс ширины колонок",
     "deselectionHint": "Cmd/Ctrl + щелчок для снятия выделения",
     "description": "Описание",
     "destination": "Назначение",
     "duration": "Продолжительность",
-    "externalProviderId": "External Provider ID",
-    "externalProviderStatus": "External Provider Status",
-    "externalProviderInfo": "External Provider Info",
-    "externalProviderBankAccInfo": "External Provider Bank Account Info",
+    "externalProviderId": "ID внешнего провайдера",
+    "externalProviderStatus": "Статус внешнего провайдера",
+    "externalProviderInfo": "Информация о внешнем провайдере",
+    "externalProviderBankAccInfo": "Информация о банковском счете внешнего провайдера",
     "fee": "Комиссия",
     "feePercent": "Комиссия проц",
     "fees": "Комиссии",
@@ -192,12 +192,12 @@
     "maker_rebate": "Вознаграждение маркет-мейкера",
     "merchantName": "Имя продавца",
     "meta": "Метаданные",
-    "memo": "Memo",
+    "memo": "Примечание",
     "mobile": "Мобильный",
-    "moreDetails": "More Details",
+    "moreDetails": "Подробнее",
     "movementsTotal": "Сумма движений (USD)",
-    "noResults": "No results",
-    "noHistory": "No history to display",
+    "noResults": "Нет результатов",
+    "noHistory": "Нет доступной истории для отображения",
     "note": "Примечание",
     "opened": "Открыто",
     "orderid": "ID ордера",
@@ -218,14 +218,14 @@
     "rate": "Ставка",
     "rateperc": "Ставка %",
     "redirectUrl": "URL переадресации",
-    "remark": "Remark",
+    "remark": "Комментарий",
     "sale": "Продажа",
-    "show": "Show",
+    "show": "Показать",
     "sellingAmount": "Сумма продажи",
     "sellingWeightedPrice": "Взвешенная цена продажи",
     "side": "Сторона",
     "status": "Статус",
-    "started": "Started",
+    "started": "Начато",
     "taker_fees": "Комиссии маркет-тейкера",
     "taker_fees_crypto": "Комиссия тейкера (Криптовалюта)",
     "taker_fees_fiat": "Комиссия тейкера (Фиат)",
@@ -300,14 +300,14 @@
     "status": {
       "local": "Файлы созданы в формате csv и сохраняются в: ",
       "email": "CSV-отчет сейчас создается. Мы отправим его на вашу почту, когда он будет готов...",
-      "failed": "Export generation failed. Please select a smaller date range or try again later."
+      "failed": "Не удалось создать экспорт. Пожалуйста, выберите меньший диапазон дат или попробуйте позже."
     },
     "success": "Выполнено",
-    "fail": "Fail",
+    "fail": "Ошибка",
     "targets": "Данные для экспорта",
-    "exportFormat": "Export Format",
-    "exportAsCsv": "Export as CSV",
-    "exportAsPdf": "Export as PDF"
+    "exportFormat": "Формат экспорта",
+    "exportAsCsv": "Экспорт в CSV",
+    "exportAsPdf": "Экспорт в PDF"
   },
   "fcredit": {
     "title": "Объем обеспечения (использ.)",
@@ -344,9 +344,9 @@
     "notagain": "Больше не показывать это сообщение",
     "continue": "Далее",
     "warning": "Предупреждение",
-    "sync-in-progress": "Syncing in Progress",
-    "first-sync-message": "Your data is downloading, please wait until the syncing process is finished.",
-    "okay_btn": "Okay"
+    "sync-in-progress": "Синхронизация в процессе",
+    "first-sync-message": "Ваши данные загружаются, пожалуйста, подождите завершения процесса синхронизации.",
+    "okay_btn": "Ок"
   },
   "header": {
     "logout": "Выйти",
@@ -408,11 +408,11 @@
     "title": "Логины"
   },
   "maintenance": {
-    "title": "Maintenance Notice",
-    "message_1": "The platform is currently in maintenance mode.",
-    "message_2": "Please check the ",
-    "message_3": " for updates.",
-    "message_4": "We will be back soon."
+    "title": "Уведомление о технических работах",
+    "message_1": "Платформа в настоящее время находится в режиме технического обслуживания.",
+    "message_2": "Пожалуйста, проверьте ",
+    "message_3": " для получения обновлений.",
+    "message_4": "Мы скоро вернемся."
   },
   "movements": {
     "title": "Движения",
@@ -525,7 +525,7 @@
     "table_scroll": "Прокрутка таблицы",
     "preserve_timeframe": "Сохранить временной промежуток",
     "remove_account": "Удалить аккаунт",
-    "sync_after_update": "Auto Sync After Update",
+    "sync_after_update": "Автосинхронизация после обновления",
     "sync": {
       "add-filter": "Добавить Фильтр",
       "add-pair": "Добавить Пару",
@@ -558,7 +558,7 @@
   },
   "selector": {
     "select": "Выбрать",
-    "strategy": "Strategy",
+    "strategy": "Стратегия",
     "all": "Bсе",
     "inactive": "Неактивен",
     "balance-precision": {
@@ -646,53 +646,53 @@
     "name_updated": "Имя группы аккаунтов обновлено"
   },
   "summary": {
-    "title": "Summary",
-    "leo_level": "LEO level",
-    "avg_amount": "Avg.Amount",
-    "no_data": "No related data for this period is available or data should be synced.",
+    "title": "Сводка",
+    "leo_level": "Уровень LEO",
+    "avg_amount": "Средняя сумма",
+    "no_data": "Нет данных за этот период или данные требуют синхронизации.",
     "fees": {
-      "title": "Account Fees",
-      "sub_title": "Based on your 30 days eligible trading volume",
-      "fee_tier_volume": "Eligible Trading Volume",
-      "maker": "Maker Fees",
-      "taker_crypto": "Taker Fees Crypto",
-      "taker_fiat": "Taker Fees Fiat",
-      "taker_stables": "Taker Fees Stablecoins",
-      "deriv_maker": "Derivatives Maker Fees",
-      "deriv_taker": "Derivatives Taker Fees"
+      "title": "Комиссии аккаунта",
+      "sub_title": "Основано на вашем торговом объеме за последние 30 дней",
+      "fee_tier_volume": "Подходящий торговый объем",
+      "maker": "Комиссия мейкера",
+      "taker_crypto": "Комиссия тейкера криптовалюты",
+      "taker_fiat": "Комиссия тейкера фиат",
+      "taker_stables": "Комиссия тейкера стейблкоинов",
+      "deriv_maker": "Комиссия мейкера деривативов",
+      "deriv_taker": "Комиссия тейкера деривативов"
     },
     "value": {
-      "title": "Account Balance",
-      "sub_title": "Total Balance including Deposits/Withdrawals"
+      "title": "Баланс аккаунта",
+      "sub_title": "Общий баланс с учетом депозитов/выводов"
     },
     "profits": {
-      "title": "Profits",
-      "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
+      "title": "Прибыль",
+      "sub_title": "Прибыль/убытки на конец дня без учета депозитов/выводов"
     },
     "by_asset": {
-      "title": "Your Assets",
-      "sub_title": "Summary for period ",
-      "currency": "Currency",
-      "all_assets": "All Assets",
-      "amount": "Amount",
-      "balance": "Balance",
-      "balance_change": "Balance Change",
-      "profits": "Profits",
-      "volume": "Volume",
-      "total": "Total",
-      "trading_fees": "Trading Fees",
-      "fund_earnings": "Funding Earnings",
+      "title": "Ваши активы",
+      "sub_title": "Сводка за период ",
+      "currency": "Валюта",
+      "all_assets": "Все активы",
+      "amount": "Сумма",
+      "balance": "Баланс",
+      "balance_change": "Изменение баланса",
+      "profits": "Прибыль",
+      "volume": "Объем",
+      "total": "Итого",
+      "trading_fees": "Торговые комиссии",
+      "fund_earnings": "Доходы от фондирования",
       "filter": {
-        "title": "Filter",
-        "min_balance_switch": "Minimum Balance",
-        "min_balance_input": "Set a minimum balance for assets to show up in the table."
+        "title": "Фильтр",
+        "min_balance_switch": "Минимальный баланс",
+        "min_balance_input": "Установите минимальный баланс для отображения активов в таблице."
       }
     },
     "positions": {
-      "title": "Active Positions",
-      "derivative": "Derivative",
-      "margin": "Margin",
-      "position": "Position"
+      "title": "Активные позиции",
+      "derivative": "Дериватив",
+      "margin": "Маржа",
+      "position": "Позиция"
     }
   },
   "symbols": {
@@ -723,14 +723,14 @@
       "canceled": "Отмененный старый Sync Watcher"
     },
     "last-sync-time": {
-      "fail": "Failed to get last sync time",
-      "syncing": "Syncing...",
-      "sync-was-less-than-hour": "Last Sync was less than an hour ago",
-      "sync-was": "Last Sync was {{hours}} hours ago"
+      "fail": "Не удалось получить время последней синхронизации",
+      "syncing": "Синхронизация...",
+      "sync-was-less-than-hour": "Последняя синхронизация была менее часа назад",
+      "sync-was": "Последняя синхронизация была {{hours}} часов назад"
     },
     "init-sync-info": {
-      "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",
-      "additional": "Syncing is still in progress, this might take several minutes. Keep this window open until it's finished in case you have a large history."
+      "main": "Добро пожаловать в приложение отчетов Bitfinex. Ваш торговый журнал синхронизируется, пожалуйста, подождите завершения для просмотра отчетов.",
+      "additional": "Синхронизация продолжается, это может занять несколько минут. Держите это окно открытым до завершения, если у вас большой объем истории."
     },
     "estimated_time": {
       "started_at": "Синхронизация началась: ",
@@ -752,30 +752,30 @@
     "endPositions": "Конечный снапшот позиций",
     "movements": "Движения",
     "cols": {
-      "currency": "Currency",
-      "source": "Source",
-      "amount": "Amount",
-      "dateAcquired": "Date Acquired ",
-      "dateSold": "Date Sold",
-      "proceeds": "Proceeds",
-      "cost": "Cost",
-      "gainOrLoss": "Gain or Loss"
+      "currency": "Валюта",
+      "source": "Источник",
+      "amount": "Сумма",
+      "dateAcquired": "Дата приобретения",
+      "dateSold": "Дата продажи",
+      "proceeds": "Доход",
+      "cost": "Стоимость",
+      "gainOrLoss": "Прибыль или убыток"
     },
     "sources": {
-      "airdrop_on_wallet": "Airdrop on wallet",
-      "margin_funding_payment": "Margin funding payment",
-      "affiliate_rebate": "Affiliate rebate",
-      "staking_payment": "Staking payment",
-      "exchange": "Exchange"
+      "airdrop_on_wallet": "Эйрдроп на кошелек",
+      "margin_funding_payment": "Оплата за маржинальное фондирование",
+      "affiliate_rebate": "Кэшбэк от партнера",
+      "staking_payment": "Выплата за стейкинг",
+      "exchange": "Биржа"
     },
     "disclaimer": {
-      "title": "Disclaimer",
-      "message": "The tax reports generated by this app are for informational purposes only. We do not guarantee accuracy or completeness. Always consult a qualified tax advisor to ensure compliance with current tax laws and personalized advice. Your reliance on the generated reports is at your own risk."
+      "title": "Отказ от ответственности",
+      "message": "Налоговые отчеты, созданные этим приложением, предназначены только для информационных целей. Мы не гарантируем точность или полноту данных. Всегда консультируйтесь с квалифицированным налоговым консультантом для соблюдения актуального налогового законодательства и получения персонализированной консультации. Использование сгенерированных отчетов осуществляется на ваш собственный риск."
     },
     "generation": {
-      "success": "Tax Report generated",
-      "title": "Your tax report is being generated. This process can take a while.",
-      "note": "If you have a large history it's recommended to keep the window open in the background until it's completed."
+      "success": "Налоговый отчет создан",
+      "title": "Ваш налоговый отчет создается. Этот процесс может занять некоторое время.",
+      "note": "Если у вас большая история, рекомендуется оставить окно открытым в фоновом режиме до завершения."
     },
     "sections": {
       "startSnapshot": "Начальный снапшот",
