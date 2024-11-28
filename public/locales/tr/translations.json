@@ -36,7 +36,7 @@
     "accountRemoved": "Hesap kaldırıldı",
     "accountRemoving": "Hesap kaldırma",
     "useApiKey": "API Anahtarını Kullan",
-    "updateUser": "Update user",
+    "updateUser": "Kullanıcıyı Güncelle",
     "loginEmail": {
       "emailOrUserName": "E-posta veya Kullanıcı adı",
       "bfxAccPassword": "Parola",
@@ -54,21 +54,21 @@
       "loginSessionExpired": "Oturumunuzun süresi doldu, lütfen tekrar deneyin"
     },
     "ttlSelect": {
-      "title": "Auth Token TTL",
-      "1day": "1 Day",
-      "2days": "2 Days",
-      "3days": "3 Days",
-      "4days": "4 Days",
-      "5days": "5 Days",
-      "6days": "6 Days",
-      "7days": "7 Days"
+      "title": "Yetkilendirme Tokeni TTL",
+      "1day": "1 Gün",
+      "2days": "2 Gün",
+      "3days": "3 Gün",
+      "4days": "4 Gün",
+      "5days": "5 Gün",
+      "6days": "6 Gün",
+      "7days": "7 Gün"
     },
     "apiKey": "API Anahtarı",
     "apiSecret": "API Gizli Dizisi",
     "accWithApiKey": "API anahtarıyla hesap ekle",
     "accWithoutApiKey": "API anahtarı olmadan hesap ekle",
-    "accAddedWithApiKey": "You have already added this account using an API key",
-    "accAddedWithApiKeyLogin": "You have already added this account using an API key, logging you in...",
+    "accAddedWithApiKey": "Bu hesabı zaten bir API anahtarı kullanarak eklediniz",
+    "accAddedWithApiKeyLogin": "Bu hesabı zaten bir API anahtarı kullanarak eklediniz, giriş yapılıyor...",
     "simpleAccounts": "Basit Hesaplar",
     "multipleAccounts": "Çoklu Hesap",
     "login": "Login",
@@ -142,8 +142,8 @@
     "amountUsd": "Tutar (USD)",
     "ask": "Sat",
     "avgprice": "Ortalama Yürütme Fiyatı",
-    "bankFees": "Bank Fees",
-    "bankRouterId": "Bank Router ID",
+    "bankFees": "Banka Ücretleri",
+    "bankRouterId": "Banka Yönlendirici Kimliği",
     "balance": "Bakiye",
     "balanceUsd": "Bakiye (USD)",
     "base-price": "Baz Fiyat",
@@ -160,19 +160,19 @@
     "created": "Oluşturuldu",
     "cumulativeAmount": "Kümülatif Tutar",
     "currency": "Para birimi",
-    "currencyName": "Currency Name",
+    "currencyName": "Para Birimi Adı",
     "customerInfo": "Müşteri Bilgisi",
     "date": "Tarih",
     "days": "Gün",
-    "defaultWidth": "Reset Column Widths",
+    "defaultWidth": "Sütun Genişliklerini Sıfırla",
     "deselectionHint": "Seçimi kaldırmak için Cmd/Ctrl + tıklayın",
     "description": "Açıklama",
     "destination": "Hedef",
     "duration": "Süre",
-    "externalProviderId": "External Provider ID",
-    "externalProviderStatus": "External Provider Status",
-    "externalProviderInfo": "External Provider Info",
-    "externalProviderBankAccInfo": "External Provider Bank Account Info",
+    "externalProviderId": "Harici Sağlayıcı Kimliği",
+    "externalProviderStatus": "Harici Sağlayıcı Durumu",
+    "externalProviderInfo": "Harici Sağlayıcı Bilgisi",
+    "externalProviderBankAccInfo": "Harici Sağlayıcı Banka Hesap Bilgisi",
     "fee": "Ücret",
     "feePercent": "Ücret Yüzdesi",
     "fees": "Fees",
@@ -192,12 +192,12 @@
     "maker_rebate": "Yapıcı Geri Ödemesi",
     "merchantName": "Satıcı Adı",
     "meta": "Meta Veri",
-    "memo": "Memo",
+    "memo": "Not",
     "mobile": "Mobil",
-    "moreDetails": "More Details",
+    "moreDetails": "Daha fazla detay",
     "movementsTotal": "Toplam Hareket Tutarı (USD)",
-    "noResults": "No results",
-    "noHistory": "No history to display",
+    "noResults": "Sonuç yok",
+    "noHistory": "Gösterilecek geçmiş yok",
     "note": "Not",
     "opened": "Açıldı",
     "orderid": "Emir Kimliği",
@@ -218,14 +218,14 @@
     "rate": "Oran",
     "rateperc": "Oran %",
     "redirectUrl": "Yönlendirme URL'si",
-    "remark": "Remark",
+    "remark": "Açıklama",
     "sale": "Satış",
-    "show": "Show",
+    "show": "Göster",
     "sellingAmount": "Satış Tutarı",
     "sellingWeightedPrice": "Satış Ağırlıklı Fiyat",
     "side": "Taraf",
     "status": "Durum",
-    "started": "Started",
+    "started": "Başlatıldı",
     "taker_fees": "Alıcı Ücretleri",
     "taker_fees_crypto": "Kripto Alıcı Ücretleri",
     "taker_fees_fiat": "İtibari Para Alıcı Ücretleri",
@@ -300,14 +300,14 @@
     "status": {
       "local": "Oluşturulan csv'yi dışa aktarın, dosyalar şuraya kaydedilir: ",
       "email": "CSV raporunuz oluşturuluyor. Hazır olur olmaz size e-posta ile göndereceğiz...",
-      "failed": "Export generation failed. Please select a smaller date range or try again later."
+      "failed": "Dışa aktarma işlemi başarısız oldu. Daha küçük bir tarih aralığı seçin veya daha sonra tekrar deneyin."
     },
     "success": "Başarılı",
-    "fail": "Fail",
+    "fail": "Başarısız",
     "targets": "Dışa Aktarılacak Veriler",
-    "exportFormat": "Export Format",
-    "exportAsCsv": "Export as CSV",
-    "exportAsPdf": "Export as PDF"
+    "exportFormat": "Dışa Aktarma Formatı",
+    "exportAsCsv": "CSV Olarak Dışa Aktar",
+    "exportAsPdf": "PDF Olarak Dışa Aktar"
   },
   "fcredit": {
     "title": "Fonlama Kredileri (Kullanılmış)",
@@ -344,9 +344,9 @@
     "notagain": "Bu mesajı bir daha gösterme",
     "continue": "Continue",
     "warning": "Uyarı",
-    "sync-in-progress": "Syncing in Progress",
-    "first-sync-message": "Your data is downloading, please wait until the syncing process is finished.",
-    "okay_btn": "Okay"
+    "sync-in-progress": "Senkronizasyon Devam Ediyor",
+    "first-sync-message": "Verileriniz indiriliyor, lütfen senkronizasyon işlemi tamamlanana kadar bekleyin.",
+    "okay_btn": "Tamam"
   },
   "header": {
     "logout": "Logout",
@@ -408,15 +408,15 @@
     "title": "Girişler"
   },
   "maintenance": {
-    "title": "Maintenance Notice",
-    "message_1": "The platform is currently in maintenance mode.",
-    "message_2": "Please check the ",
-    "message_3": " for updates.",
-    "message_4": "We will be back soon."
+    "title": "Bakım Bildirimi",
+    "message_1": "Platform şu anda bakım modunda.",
+    "message_2": "Güncellemeler için lütfen ",
+    "message_3": " kontrol edin.",
+    "message_4": "Kısa sürede geri döneceğiz."
   },
   "movements": {
     "title": "Hareketler",
-    "moreDetails": "More Details"
+    "moreDetails": "Daha fazla detay"
   },
   "navItems": {
     "reports": "Raporlar",
@@ -525,7 +525,7 @@
     "table_scroll": "Tablo Kaydırma",
     "preserve_timeframe": "Zaman Dilimini Koru",
     "remove_account": "Hesabı Kaldır",
-    "sync_after_update": "Auto Sync After Update",
+    "sync_after_update": "Güncellemeden Sonra Otomatik Senkronizasyon",
     "sync": {
       "add-filter": "Filtre Ekle",
       "add-pair": "Parite Ekle",
@@ -558,7 +558,7 @@
   },
   "selector": {
     "select": "Seç",
-    "strategy": "Strategy",
+    "strategy": "Strateji",
     "all": "Tümü",
     "inactive": "Inactive",
     "balance-precision": {
@@ -646,53 +646,53 @@
     "name_updated": "Hesap grubu adı güncellendi"
   },
   "summary": {
-    "title": "Summary",
-    "leo_level": "LEO level",
-    "avg_amount": "Avg.Amount",
-    "no_data": "No related data for this period is available or data should be synced.",
+    "title": "Özet",
+    "leo_level": "LEO Seviyesi",
+    "avg_amount": "Ortalama Miktar",
+    "no_data": "Bu dönemle ilgili veri bulunmamaktadır veya veriler senkronize edilmelidir.",
     "fees": {
-      "title": "Account Fees",
-      "sub_title": "Based on your 30 days eligible trading volume",
-      "fee_tier_volume": "Eligible Trading Volume",
-      "maker": "Maker Fees",
-      "taker_crypto": "Taker Fees Crypto",
-      "taker_fiat": "Taker Fees Fiat",
-      "taker_stables": "Taker Fees Stablecoins",
-      "deriv_maker": "Derivatives Maker Fees",
-      "deriv_taker": "Derivatives Taker Fees"
+      "title": "Hesap Ücretleri",
+      "sub_title": "Son 30 günlük uygun ticaret hacminize göre",
+      "fee_tier_volume": "Uygun Ticaret Hacmi",
+      "maker": "Market Yapıcı Ücretleri",
+      "taker_crypto": "Market Alıcı Kripto Ücretleri",
+      "taker_fiat": "Market Alıcı Fiat Ücretleri",
+      "taker_stables": "Market Alıcı Stablecoin Ücretleri",
+      "deriv_maker": "Türev Market Yapıcı Ücretleri",
+      "deriv_taker": "Türev Market Alıcı Ücretleri"
     },
     "value": {
-      "title": "Account Balance",
-      "sub_title": "Total Balance including Deposits/Withdrawals"
+      "title": "Hesap Bakiyesi",
+      "sub_title": "Mevduat/Çekim Dahil Toplam Bakiye"
     },
     "profits": {
-      "title": "Profits",
-      "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
+      "title": "Kârlar",
+      "sub_title": "Gün sonu kâr/zarar, Mevduat/Çekim hariç"
     },
     "by_asset": {
-      "title": "Your Assets",
-      "sub_title": "Summary for period ",
-      "currency": "Currency",
-      "all_assets": "All Assets",
-      "amount": "Amount",
-      "balance": "Balance",
-      "balance_change": "Balance Change",
-      "profits": "Profits",
-      "volume": "Volume",
-      "total": "Total",
-      "trading_fees": "Trading Fees",
-      "fund_earnings": "Funding Earnings",
+      "title": "Varlıklarınız",
+      "sub_title": "Dönem Özeti ",
+      "currency": "Para Birimi",
+      "all_assets": "Tüm Varlıklar",
+      "amount": "Miktar",
+      "balance": "Bakiye",
+      "balance_change": "Bakiye Değişimi",
+      "profits": "Kârlar",
+      "volume": "Hacim",
+      "total": "Toplam",
+      "trading_fees": "Ticaret Ücretleri",
+      "fund_earnings": "Fon Kazançları",
       "filter": {
-        "title": "Filter",
-        "min_balance_switch": "Minimum Balance",
-        "min_balance_input": "Set a minimum balance for assets to show up in the table."
+        "title": "Filtre",
+        "min_balance_switch": "Minimum Bakiye",
+        "min_balance_input": "Tabloda görünecek varlıklar için bir minimum bakiye belirleyin."
       }
     },
     "positions": {
-      "title": "Active Positions",
-      "derivative": "Derivative",
-      "margin": "Margin",
-      "position": "Position"
+      "title": "Aktif Pozisyonlar",
+      "derivative": "Türev",
+      "margin": "Marj",
+      "position": "Pozisyon"
     }
   },
   "symbols": {
@@ -723,14 +723,14 @@
       "canceled": "Eski Senkronizasyon Takipçisi iptal edildi"
     },
     "last-sync-time": {
-      "fail": "Failed to get last sync time",
-      "syncing": "Syncing...",
-      "sync-was-less-than-hour": "Last Sync was less than an hour ago",
-      "sync-was": "Last Sync was {{hours}} hours ago"
+      "fail": "Son senkronizasyon zamanı alınamadı",
+      "syncing": "Senkronize ediliyor...",
+      "sync-was-less-than-hour": "Son Senkronizasyon bir saatten az önce yapıldı",
+      "sync-was": "Son Senkronizasyon {{hours}} saat önce yapıldı"
     },
     "init-sync-info": {
-      "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",
-      "additional": "Syncing is still in progress, this might take several minutes. Keep this window open until it's finished in case you have a large history."
+      "main": "Bitfinex Raporları Uygulamasına Hoş Geldiniz. Ticaret geçmişiniz senkronize ediliyor, raporlarınızı görüntülemek için tamamlanmasını bekleyin.",
+      "additional": "Senkronizasyon devam ediyor, bu birkaç dakika sürebilir. Büyük bir geçmişiniz varsa bu pencereyi açık tutun."
     },
     "estimated_time": {
       "started_at": "Senkronizasyon şu andan itibaren başladı: ",
@@ -752,30 +752,30 @@
     "endPositions": "Bitiş Pozisyonlarının Anlık Görüntüsü",
     "movements": "Hareketler",
     "cols": {
-      "currency": "Currency",
-      "source": "Source",
-      "amount": "Amount",
-      "dateAcquired": "Date Acquired ",
-      "dateSold": "Date Sold",
-      "proceeds": "Proceeds",
-      "cost": "Cost",
-      "gainOrLoss": "Gain or Loss"
+      "currency": "Para Birimi",
+      "source": "Kaynak",
+      "amount": "Miktar",
+      "dateAcquired": "Edinim Tarihi",
+      "dateSold": "Satış Tarihi",
+      "proceeds": "Gelir",
+      "cost": "Maliyet",
+      "gainOrLoss": "Kâr veya Zarar"
     },
     "sources": {
-      "airdrop_on_wallet": "Airdrop on wallet",
-      "margin_funding_payment": "Margin funding payment",
-      "affiliate_rebate": "Affiliate rebate",
-      "staking_payment": "Staking payment",
-      "exchange": "Exchange"
+      "airdrop_on_wallet": "Cüzdana Airdrop",
+      "margin_funding_payment": "Marj Fonlama Ödemesi",
+      "affiliate_rebate": "Bağlı Kuruluş İndirimi",
+      "staking_payment": "Staking Ödemesi",
+      "exchange": "Borsa"
     },
     "disclaimer": {
-      "title": "Disclaimer",
-      "message": "The tax reports generated by this app are for informational purposes only. We do not guarantee accuracy or completeness. Always consult a qualified tax advisor to ensure compliance with current tax laws and personalized advice. Your reliance on the generated reports is at your own risk."
+      "title": "Feragatname",
+      "message": "Bu uygulama tarafından oluşturulan vergi raporları yalnızca bilgilendirme amaçlıdır. Doğruluğunu veya eksiksizliğini garanti etmiyoruz. Geçerli vergi yasalarına uyumu sağlamak ve kişiselleştirilmiş tavsiye almak için her zaman nitelikli bir vergi danışmanına danışın. Oluşturulan raporlara güvenmek kendi sorumluluğunuzdadır."
     },
     "generation": {
-      "success": "Tax Report generated",
-      "title": "Your tax report is being generated. This process can take a while.",
-      "note": "If you have a large history it's recommended to keep the window open in the background until it's completed."
+      "success": "Vergi Raporu Oluşturuldu",
+      "title": "Vergi raporunuz oluşturuluyor. Bu işlem biraz zaman alabilir.",
+      "note": "Büyük bir geçmişiniz varsa pencereyi arka planda açık tutmanız önerilir."
     },
     "sections": {
       "startSnapshot": "Anlık Görüntü Başlat",
