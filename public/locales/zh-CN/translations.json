@@ -36,7 +36,7 @@
     "accountRemoved": "账号已移除",
     "accountRemoving": "账号移除中",
     "useApiKey": "使用API密钥",
-    "updateUser": "Update user",
+    "updateUser": "更新用户",
     "loginEmail": {
       "emailOrUserName": "电子邮件或用户名",
       "bfxAccPassword": "密码",
@@ -54,21 +54,21 @@
       "loginSessionExpired": "登录已超时，请重新登录。"
     },
     "ttlSelect": {
-      "title": "Auth Token TTL",
-      "1day": "1 Day",
-      "2days": "2 Days",
-      "3days": "3 Days",
-      "4days": "4 Days",
-      "5days": "5 Days",
-      "6days": "6 Days",
-      "7days": "7 Days"
+      "title": "授权令牌有效期",
+      "1day": "1 天",
+      "2days": "2 天",
+      "3days": "3 天",
+      "4days": "4 天",
+      "5days": "5 天",
+      "6days": "6 天",
+      "7days": "7 天"
     },
     "apiKey": "API密钥",
     "apiSecret": "API密码",
     "accWithApiKey": "使用API密钥添加账号",
     "accWithoutApiKey": "不使用API密钥添加账号",
-    "accAddedWithApiKey": "You have already added this account using an API key",
-    "accAddedWithApiKeyLogin": "You have already added this account using an API key, logging you in...",
+    "accAddedWithApiKey": "您已通过 API 密钥添加了此账户",
+    "accAddedWithApiKeyLogin": "您已通过 API 密钥添加了此账户，正在登录...",
     "simpleAccounts": "简易账号",
     "multipleAccounts": "多账号",
     "login": "登录",
@@ -142,8 +142,8 @@
     "amountUsd": "金额 (USD)",
     "ask": "卖出",
     "avgprice": "平均执行价格",
-    "bankFees": "Bank Fees",
-    "bankRouterId": "Bank Router ID",
+    "bankFees": "银行费用",
+    "bankRouterId": "银行路由器 ID",
     "balance": "余额",
     "balanceUsd": "余额 (USD)",
     "base-price": "基价",
@@ -160,19 +160,19 @@
     "created": "已创建",
     "cumulativeAmount": "累计数量",
     "currency": "币种",
-    "currencyName": "Currency Name",
+    "currencyName": "货币名称",
     "customerInfo": "客户信息",
     "date": "日期",
     "days": "天",
-    "defaultWidth": "Reset Column Widths",
+    "defaultWidth": "重置列宽",
     "deselectionHint": "按压Cmd/Ctrl键并点击以取消选择",
     "description": "描述",
     "destination": "目的地",
     "duration": "期间",
-    "externalProviderId": "External Provider ID",
-    "externalProviderStatus": "External Provider Status",
-    "externalProviderInfo": "External Provider Info",
-    "externalProviderBankAccInfo": "External Provider Bank Account Info",
+    "externalProviderId": "外部提供商 ID",
+    "externalProviderStatus": "外部提供商状态",
+    "externalProviderInfo": "外部提供商信息",
+    "externalProviderBankAccInfo": "外部提供商银行账户信息",
     "fee": "费用",
     "feePercent": "费用百分比",
     "fees": "费用",
@@ -192,12 +192,12 @@
     "maker_rebate": "做市商返点奖励",
     "merchantName": "商店名称",
     "meta": "元数据",
-    "memo": "Memo",
+    "memo": "备注",
     "mobile": "移动设备",
-    "moreDetails": "More Details",
+    "moreDetails": "更多详情",
     "movementsTotal": "运用资金总额 (美元)",
-    "noResults": "No results",
-    "noHistory": "No history to display",
+    "noResults": "没有结果",
+    "noHistory": "没有可显示的历史记录",
     "note": "提现备注",
     "opened": "已打开",
     "orderid": "订单 ID",
@@ -218,14 +218,14 @@
     "rate": "利率",
     "rateperc": "利率 %",
     "redirectUrl": "重新跳转网址",
-    "remark": "Remark",
+    "remark": "备注",
     "sale": "卖出价值",
-    "show": "Show",
+    "show": "显示",
     "sellingAmount": "卖出数量",
     "sellingWeightedPrice": "卖出加权价格",
     "side": "方向",
     "status": "状态",
-    "started": "Started",
+    "started": "已开始",
     "taker_fees": "吃单手续费",
     "taker_fees_crypto": "吃单手续费 (加密货币）",
     "taker_fees_fiat": "吃单手续费 (法币)",
@@ -300,14 +300,14 @@
     "status": {
       "local": "已成功汇出CSV，档案保存于： ",
       "email": "正在生成您的 CSV 报告，我们会在报告就绪后通过电子邮件发送给您…",
-      "failed": "Export generation failed. Please select a smaller date range or try again later."
+      "failed": "导出失败。请选择较小的日期范围或稍后重试。"
     },
     "success": "成功",
-    "fail": "Fail",
+    "fail": "失败",
     "targets": "要导出的数据",
-    "exportFormat": "Export Format",
-    "exportAsCsv": "Export as CSV",
-    "exportAsPdf": "Export as PDF"
+    "exportFormat": "导出格式",
+    "exportAsCsv": "导出为 CSV",
+    "exportAsPdf": "导出为 PDF"
   },
   "fcredit": {
     "title": "融资 (已使用)",
@@ -344,9 +344,9 @@
     "notagain": "不再显示此消息",
     "continue": "继续",
     "warning": "警告",
-    "sync-in-progress": "Syncing in Progress",
-    "first-sync-message": "Your data is downloading, please wait until the syncing process is finished.",
-    "okay_btn": "Okay"
+    "sync-in-progress": "正在同步",
+    "first-sync-message": "您的数据正在下载，请等待同步过程完成。",
+    "okay_btn": "好的"
   },
   "header": {
     "logout": "注销",
@@ -408,15 +408,15 @@
     "title": "登录"
   },
   "maintenance": {
-    "title": "Maintenance Notice",
-    "message_1": "The platform is currently in maintenance mode.",
-    "message_2": "Please check the ",
-    "message_3": " for updates.",
-    "message_4": "We will be back soon."
+    "title": "维护通知",
+    "message_1": "平台目前处于维护模式。",
+    "message_2": "请查看 ",
+    "message_3": " 以获取更新。",
+    "message_4": "我们很快会回来。"
   },
   "movements": {
     "title": "移动",
-    "moreDetails": "More Details"
+    "moreDetails": "更多详情"
   },
   "navItems": {
     "reports": "报告",
@@ -525,7 +525,7 @@
     "table_scroll": "滚动条",
     "preserve_timeframe": "指定的保持时间",
     "remove_account": "移除账号",
-    "sync_after_update": "Auto Sync After Update",
+    "sync_after_update": "更新后自动同步",
     "sync": {
       "add-filter": "增加筛选条件",
       "add-pair": "增加交易对",
@@ -558,7 +558,7 @@
   },
   "selector": {
     "select": "选取",
-    "strategy": "Strategy",
+    "strategy": "策略",
     "all": "全部",
     "inactive": "时间",
     "balance-precision": {
@@ -646,53 +646,53 @@
     "name_updated": "账号群组名称已更新"
   },
   "summary": {
-    "title": "Summary",
-    "leo_level": "LEO level",
-    "avg_amount": "Avg.Amount",
-    "no_data": "No related data for this period is available or data should be synced.",
+    "title": "摘要",
+    "leo_level": "LEO 等级",
+    "avg_amount": "平均金额",
+    "no_data": "此期间没有相关数据或需要同步数据。",
     "fees": {
-      "title": "Account Fees",
-      "sub_title": "Based on your 30 days eligible trading volume",
-      "fee_tier_volume": "Eligible Trading Volume",
-      "maker": "Maker Fees",
-      "taker_crypto": "Taker Fees Crypto",
-      "taker_fiat": "Taker Fees Fiat",
-      "taker_stables": "Taker Fees Stablecoins",
-      "deriv_maker": "Derivatives Maker Fees",
-      "deriv_taker": "Derivatives Taker Fees"
+      "title": "账户费用",
+      "sub_title": "基于过去 30 天的合格交易量",
+      "fee_tier_volume": "合格交易量",
+      "maker": "挂单费用",
+      "taker_crypto": "吃单费用（加密货币）",
+      "taker_fiat": "吃单费用（法币）",
+      "taker_stables": "吃单费用（稳定币）",
+      "deriv_maker": "衍生品挂单费用",
+      "deriv_taker": "衍生品吃单费用"
     },
     "value": {
-      "title": "Account Balance",
-      "sub_title": "Total Balance including Deposits/Withdrawals"
+      "title": "账户余额",
+      "sub_title": "包括存款/取款的总余额"
     },
     "profits": {
-      "title": "Profits",
-      "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
+      "title": "利润",
+      "sub_title": "扣除存款/取款后的每日利润/损失"
     },
     "by_asset": {
-      "title": "Your Assets",
-      "sub_title": "Summary for period ",
-      "currency": "Currency",
-      "all_assets": "All Assets",
-      "amount": "Amount",
-      "balance": "Balance",
-      "balance_change": "Balance Change",
-      "profits": "Profits",
-      "volume": "Volume",
-      "total": "Total",
-      "trading_fees": "Trading Fees",
-      "fund_earnings": "Funding Earnings",
+      "title": "您的资产",
+      "sub_title": "期间摘要 ",
+      "currency": "货币",
+      "all_assets": "所有资产",
+      "amount": "金额",
+      "balance": "余额",
+      "balance_change": "余额变化",
+      "profits": "利润",
+      "volume": "交易量",
+      "total": "总计",
+      "trading_fees": "交易费用",
+      "fund_earnings": "资金收益",
       "filter": {
-        "title": "Filter",
-        "min_balance_switch": "Minimum Balance",
-        "min_balance_input": "Set a minimum balance for assets to show up in the table."
+        "title": "过滤器",
+        "min_balance_switch": "最低余额",
+        "min_balance_input": "设置资产显示在表格中的最低余额。"
       }
     },
     "positions": {
-      "title": "Active Positions",
-      "derivative": "Derivative",
-      "margin": "Margin",
-      "position": "Position"
+      "title": "活跃头寸",
+      "derivative": "衍生品",
+      "margin": "保证金",
+      "position": "头寸"
     }
   },
   "symbols": {
@@ -723,14 +723,14 @@
       "canceled": "已取消旧同步观察程序"
     },
     "last-sync-time": {
-      "fail": "Failed to get last sync time",
-      "syncing": "Syncing...",
-      "sync-was-less-than-hour": "Last Sync was less than an hour ago",
-      "sync-was": "Last Sync was {{hours}} hours ago"
+      "fail": "获取上次同步时间失败",
+      "syncing": "正在同步...",
+      "sync-was-less-than-hour": "上次同步在一小时以内",
+      "sync-was": "上次同步是 {{hours}} 小时前"
     },
     "init-sync-info": {
-      "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",
-      "additional": "Syncing is still in progress, this might take several minutes. Keep this window open until it's finished in case you have a large history."
+      "main": "欢迎使用 Bitfinex 报告应用。您的交易历史正在同步，请等待完成后查看您的报告。",
+      "additional": "同步仍在进行中，这可能需要几分钟。如果您的历史记录较大，请保持此窗口打开直到完成。"
     },
     "estimated_time": {
       "started_at": "已开始同步: ",
@@ -752,30 +752,30 @@
     "endPositions": "仓位期末快照",
     "movements": "移动",
     "cols": {
-      "currency": "Currency",
-      "source": "Source",
-      "amount": "Amount",
-      "dateAcquired": "Date Acquired ",
-      "dateSold": "Date Sold",
-      "proceeds": "Proceeds",
-      "cost": "Cost",
-      "gainOrLoss": "Gain or Loss"
+      "currency": "货币",
+      "source": "来源",
+      "amount": "金额",
+      "dateAcquired": "获取日期",
+      "dateSold": "出售日期",
+      "proceeds": "收益",
+      "cost": "成本",
+      "gainOrLoss": "盈利或亏损"
     },
     "sources": {
-      "airdrop_on_wallet": "Airdrop on wallet",
-      "margin_funding_payment": "Margin funding payment",
-      "affiliate_rebate": "Affiliate rebate",
-      "staking_payment": "Staking payment",
-      "exchange": "Exchange"
+      "airdrop_on_wallet": "钱包空投",
+      "margin_funding_payment": "保证金资助付款",
+      "affiliate_rebate": "联盟回扣",
+      "staking_payment": "质押付款",
+      "exchange": "交易所"
     },
     "disclaimer": {
-      "title": "Disclaimer",
-      "message": "The tax reports generated by this app are for informational purposes only. We do not guarantee accuracy or completeness. Always consult a qualified tax advisor to ensure compliance with current tax laws and personalized advice. Your reliance on the generated reports is at your own risk."
+      "title": "免责声明",
+      "message": "本应用生成的税务报告仅供参考。我们不保证其准确性或完整性。请始终咨询合格的税务顾问，以确保遵守当前税法并获得个性化建议。对生成的报告的依赖风险由您自行承担。"
     },
     "generation": {
-      "success": "Tax Report generated",
-      "title": "Your tax report is being generated. This process can take a while.",
-      "note": "If you have a large history it's recommended to keep the window open in the background until it's completed."
+      "success": "税务报告已生成",
+      "title": "您的税务报告正在生成。此过程可能需要一段时间。",
+      "note": "如果您的历史记录较大，建议将窗口保持在后台打开直到完成。"
     },
     "sections": {
       "startSnapshot": "期初快照",
