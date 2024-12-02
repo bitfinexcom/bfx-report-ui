@@ -36,7 +36,7 @@
     "accountRemoved": "已移除帳戶",
     "accountRemoving": "正在移除帳戶",
     "useApiKey": "使用API金鑰",
-    "updateUser": "Update user",
+    "updateUser": "更新用戶",
     "loginEmail": {
       "emailOrUserName": "電子郵件或用戶名",
       "bfxAccPassword": "密碼",
@@ -54,21 +54,21 @@
       "loginSessionExpired": "登入逾時，請重新再試。"
     },
     "ttlSelect": {
-      "title": "Auth Token TTL",
-      "1day": "1 Day",
-      "2days": "2 Days",
-      "3days": "3 Days",
-      "4days": "4 Days",
-      "5days": "5 Days",
-      "6days": "6 Days",
-      "7days": "7 Days"
+      "title": "授權令牌有效期",
+      "1day": "1 天",
+      "2days": "2 天",
+      "3days": "3 天",
+      "4days": "4 天",
+      "5days": "5 天",
+      "6days": "6 天",
+      "7days": "7 天"
     },
     "apiKey": "API 金鑰",
     "apiSecret": "API 密碼",
     "accWithApiKey": "使用API 金鑰新增帳戶",
     "accWithoutApiKey": "不使用API 金鑰新增帳戶",
-    "accAddedWithApiKey": "You have already added this account using an API key",
-    "accAddedWithApiKeyLogin": "You have already added this account using an API key, logging you in...",
+    "accAddedWithApiKey": "您已通過 API 金鑰新增了此帳戶",
+    "accAddedWithApiKeyLogin": "您已通過 API 金鑰新增了此帳戶，正在登錄...",
     "simpleAccounts": "簡易帳戶",
     "multipleAccounts": "多個帳戶",
     "login": "登入",
@@ -142,8 +142,8 @@
     "amountUsd": "數量(美元)",
     "ask": "賣出",
     "avgprice": "平均執行價格",
-    "bankFees": "Bank Fees",
-    "bankRouterId": "Bank Router ID",
+    "bankFees": "銀行費用",
+    "bankRouterId": "銀行路由器 ID",
     "balance": "餘額",
     "balanceUsd": "餘額（美元）",
     "base-price": "基價",
@@ -160,19 +160,19 @@
     "created": "已建立",
     "cumulativeAmount": "累計數量",
     "currency": "幣別",
-    "currencyName": "Currency Name",
+    "currencyName": "貨幣名稱",
     "customerInfo": "顧客資訊",
     "date": "日期",
     "days": "天",
-    "defaultWidth": "Reset Column Widths",
+    "defaultWidth": "重設欄位寬度",
     "deselectionHint": "按Cmd（或者Ctrl）鍵加點擊滑鼠以取消選擇",
     "description": "說明",
     "destination": "目的地",
     "duration": "持續時間",
-    "externalProviderId": "External Provider ID",
-    "externalProviderStatus": "External Provider Status",
-    "externalProviderInfo": "External Provider Info",
-    "externalProviderBankAccInfo": "External Provider Bank Account Info",
+    "externalProviderId": "外部提供商 ID",
+    "externalProviderStatus": "外部提供商狀態",
+    "externalProviderInfo": "外部提供商資訊",
+    "externalProviderBankAccInfo": "外部提供商銀行帳戶資訊",
     "fee": "手續費",
     "feePercent": "費用百分比",
     "fees": "費用",
@@ -192,12 +192,12 @@
     "maker_rebate": "做市商返利",
     "merchantName": "店家名稱",
     "meta": "後設資料",
-    "memo": "Memo",
+    "memo": "備註",
     "mobile": "行動裝置",
-    "moreDetails": "More Details",
+    "moreDetails": "更多詳情",
     "movementsTotal": "運用資金總額 (美元)",
-    "noResults": "No results",
-    "noHistory": "No history to display",
+    "noResults": "沒有結果",
+    "noHistory": "沒有可顯示的歷史記錄",
     "note": "備註",
     "opened": "開始",
     "orderid": "訂單 ID",
@@ -218,14 +218,14 @@
     "rate": "利率",
     "rateperc": "利率 %",
     "redirectUrl": "重新導向網址",
-    "remark": "Remark",
+    "remark": "備註",
     "sale": "賣出價值",
-    "show": "Show",
+    "show": "顯示",
     "sellingAmount": "賣出數量",
     "sellingWeightedPrice": "賣出加權價格",
     "side": "方向",
     "status": "狀態",
-    "started": "Started",
+    "started": "已開始",
     "taker_fees": "吃單手續費",
     "taker_fees_crypto": "吃單手續費（加密貨幣）",
     "taker_fees_fiat": "吃單手續費（法幣）",
@@ -300,14 +300,14 @@
     "status": {
       "local": "已成功匯出至CSV檔，檔案儲存於： ",
       "email": "正在生成您的 CSV 格式報告。生成後將立即透過 Email 送出。",
-      "failed": "Export generation failed. Please select a smaller date range or try again later."
+      "failed": "匯出失敗。請選擇較小的日期範圍或稍後重試。"
     },
     "success": "成功",
-    "fail": "Fail",
+    "fail": "失敗",
     "targets": "匯出項目",
-    "exportFormat": "Export Format",
-    "exportAsCsv": "Export as CSV",
-    "exportAsPdf": "Export as PDF"
+    "exportFormat": "匯出格式",
+    "exportAsCsv": "匯出為 CSV",
+    "exportAsPdf": "匯出為 PDF"
   },
   "fcredit": {
     "title": "融資（已使用）",
@@ -344,9 +344,9 @@
     "notagain": "不要再顯示此信息",
     "continue": "繼續",
     "warning": "警告",
-    "sync-in-progress": "Syncing in Progress",
-    "first-sync-message": "Your data is downloading, please wait until the syncing process is finished.",
-    "okay_btn": "Okay"
+    "sync-in-progress": "正在同步",
+    "first-sync-message": "您的數據正在下載，請等待同步過程完成。",
+    "okay_btn": "好的"
   },
   "header": {
     "logout": "登出",
@@ -408,15 +408,15 @@
     "title": "登入"
   },
   "maintenance": {
-    "title": "Maintenance Notice",
-    "message_1": "The platform is currently in maintenance mode.",
-    "message_2": "Please check the ",
-    "message_3": " for updates.",
-    "message_4": "We will be back soon."
+    "title": "維護通知",
+    "message_1": "平台目前處於維護模式。",
+    "message_2": "請查看 ",
+    "message_3": " 以獲取更新。",
+    "message_4": "我們很快會回來。"
   },
   "movements": {
     "title": "資金動向",
-    "moreDetails": "More Details"
+    "moreDetails": "更多詳情"
   },
   "navItems": {
     "reports": "報告",
@@ -525,7 +525,7 @@
     "table_scroll": "顯示捲軸",
     "preserve_timeframe": "保留指定時間",
     "remove_account": "移除帳戶",
-    "sync_after_update": "Auto Sync After Update",
+    "sync_after_update": "更新後自動同步",
     "sync": {
       "add-filter": "增加篩選條件",
       "add-pair": "增加交易對",
@@ -558,7 +558,7 @@
   },
   "selector": {
     "select": "選取",
-    "strategy": "Strategy",
+    "strategy": "策略",
     "all": "全部",
     "inactive": "最後更新",
     "balance-precision": {
@@ -646,53 +646,53 @@
     "name_updated": "帳戶群組名稱已更新"
   },
   "summary": {
-    "title": "Summary",
-    "leo_level": "LEO level",
-    "avg_amount": "Avg.Amount",
-    "no_data": "No related data for this period is available or data should be synced.",
+    "title": "摘要",
+    "leo_level": "LEO 等級",
+    "avg_amount": "平均金額",
+    "no_data": "此期間無相關數據或需要同步數據。",
     "fees": {
-      "title": "Account Fees",
-      "sub_title": "Based on your 30 days eligible trading volume",
-      "fee_tier_volume": "Eligible Trading Volume",
-      "maker": "Maker Fees",
-      "taker_crypto": "Taker Fees Crypto",
-      "taker_fiat": "Taker Fees Fiat",
-      "taker_stables": "Taker Fees Stablecoins",
-      "deriv_maker": "Derivatives Maker Fees",
-      "deriv_taker": "Derivatives Taker Fees"
+      "title": "帳戶費用",
+      "sub_title": "基於過去 30 天的合格交易量",
+      "fee_tier_volume": "合格交易量",
+      "maker": "掛單費用",
+      "taker_crypto": "吃單費用（加密貨幣）",
+      "taker_fiat": "吃單費用（法幣）",
+      "taker_stables": "吃單費用（穩定幣）",
+      "deriv_maker": "衍生品掛單費用",
+      "deriv_taker": "衍生品吃單費用"
     },
     "value": {
-      "title": "Account Balance",
-      "sub_title": "Total Balance including Deposits/Withdrawals"
+      "title": "帳戶餘額",
+      "sub_title": "包括存款/提款的總餘額"
     },
     "profits": {
-      "title": "Profits",
-      "sub_title": "End of day profits/losses excluding Deposits/Withdrawals"
+      "title": "利潤",
+      "sub_title": "扣除存款/提款後的每日利潤/虧損"
     },
     "by_asset": {
-      "title": "Your Assets",
-      "sub_title": "Summary for period ",
-      "currency": "Currency",
-      "all_assets": "All Assets",
-      "amount": "Amount",
-      "balance": "Balance",
-      "balance_change": "Balance Change",
-      "profits": "Profits",
-      "volume": "Volume",
-      "total": "Total",
-      "trading_fees": "Trading Fees",
-      "fund_earnings": "Funding Earnings",
+      "title": "您的資產",
+      "sub_title": "期間摘要 ",
+      "currency": "貨幣",
+      "all_assets": "所有資產",
+      "amount": "數量",
+      "balance": "餘額",
+      "balance_change": "餘額變化",
+      "profits": "利潤",
+      "volume": "交易量",
+      "total": "總計",
+      "trading_fees": "交易費用",
+      "fund_earnings": "資金收益",
       "filter": {
-        "title": "Filter",
-        "min_balance_switch": "Minimum Balance",
-        "min_balance_input": "Set a minimum balance for assets to show up in the table."
+        "title": "篩選器",
+        "min_balance_switch": "最低餘額",
+        "min_balance_input": "設定資產顯示於表格中的最低餘額。"
       }
     },
     "positions": {
-      "title": "Active Positions",
-      "derivative": "Derivative",
-      "margin": "Margin",
-      "position": "Position"
+      "title": "活躍頭寸",
+      "derivative": "衍生品",
+      "margin": "保證金",
+      "position": "頭寸"
     }
   },
   "symbols": {
@@ -723,14 +723,14 @@
       "canceled": "已取消上次的同步監測"
     },
     "last-sync-time": {
-      "fail": "Failed to get last sync time",
-      "syncing": "Syncing...",
-      "sync-was-less-than-hour": "Last Sync was less than an hour ago",
-      "sync-was": "Last Sync was {{hours}} hours ago"
+      "fail": "無法獲取上次同步時間",
+      "syncing": "正在同步...",
+      "sync-was-less-than-hour": "上次同步在一小時以內",
+      "sync-was": "上次同步是 {{hours}} 小時前"
     },
     "init-sync-info": {
-      "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",
-      "additional": "Syncing is still in progress, this might take several minutes. Keep this window open until it's finished in case you have a large history."
+      "main": "歡迎使用 Bitfinex 報告應用。您的交易歷史正在同步，請等待完成後查看您的報告。",
+      "additional": "同步仍在進行中，這可能需要幾分鐘。如果您的歷史記錄較多，請保持此窗口開啟直到完成。"
     },
     "estimated_time": {
       "started_at": "開始同步： ",
@@ -752,30 +752,30 @@
     "endPositions": "倉位期末快照",
     "movements": "資金動向",
     "cols": {
-      "currency": "Currency",
-      "source": "Source",
-      "amount": "Amount",
-      "dateAcquired": "Date Acquired ",
-      "dateSold": "Date Sold",
-      "proceeds": "Proceeds",
-      "cost": "Cost",
-      "gainOrLoss": "Gain or Loss"
+      "currency": "貨幣",
+      "source": "來源",
+      "amount": "數量",
+      "dateAcquired": "獲取日期",
+      "dateSold": "出售日期",
+      "proceeds": "收益",
+      "cost": "成本",
+      "gainOrLoss": "盈利或虧損"
     },
     "sources": {
-      "airdrop_on_wallet": "Airdrop on wallet",
-      "margin_funding_payment": "Margin funding payment",
-      "affiliate_rebate": "Affiliate rebate",
-      "staking_payment": "Staking payment",
-      "exchange": "Exchange"
+      "airdrop_on_wallet": "錢包空投",
+      "margin_funding_payment": "保證金資助付款",
+      "affiliate_rebate": "聯盟回扣",
+      "staking_payment": "質押付款",
+      "exchange": "交易所"
     },
     "disclaimer": {
-      "title": "Disclaimer",
-      "message": "The tax reports generated by this app are for informational purposes only. We do not guarantee accuracy or completeness. Always consult a qualified tax advisor to ensure compliance with current tax laws and personalized advice. Your reliance on the generated reports is at your own risk."
+      "title": "免責聲明",
+      "message": "本應用生成的稅務報告僅供參考。我們不保證其準確性或完整性。請始終諮詢合格的稅務顧問，以確保遵守當前稅法並獲得個性化建議。對生成的報告的依賴風險由您自行承擔。"
     },
     "generation": {
-      "success": "Tax Report generated",
-      "title": "Your tax report is being generated. This process can take a while.",
-      "note": "If you have a large history it's recommended to keep the window open in the background until it's completed."
+      "success": "稅務報告已生成",
+      "title": "您的稅務報告正在生成。此過程可能需要一段時間。",
+      "note": "如果您的歷史記錄較多，建議將窗口保持在背景開啟直到完成。"
     },
     "sections": {
       "startSnapshot": "期初快照",
