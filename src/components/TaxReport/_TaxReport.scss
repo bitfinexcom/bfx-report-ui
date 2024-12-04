@@ -78,3 +78,16 @@
     position: absolute;
   }
 }
+
+.sync-note {
+  min-width: 340px;
+  text-align: center;
+
+  &-container {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
