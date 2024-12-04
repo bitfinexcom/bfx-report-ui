@@ -777,7 +777,8 @@
       "success": "Tax Report generated",
       "title": "Your tax report is being generated. This process can take a while.",
       "note": "If you have a large history it's recommended to keep the window open in the background until it's completed.",
-      "sync": "Sync in progress. Please wait until it’s complete to generate your tax report."
+      "sync_1": "Sync in progress." ,
+      "sync_2": "Please wait until it’s complete to generate your tax report."
     }
   },
   "theme": {
