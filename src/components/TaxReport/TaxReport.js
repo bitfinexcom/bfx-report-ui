@@ -46,7 +46,7 @@ const TaxReport = () => {
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
-  // const isFirstSyncing = useSelector(getIsFirstSyncing)
+  const isFirstSyncing = useSelector(getIsFirstSyncing)
   const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
 
   useEffect(() => {
@@ -121,8 +121,8 @@ const TaxReport = () => {
           </SectionHeaderItem>
           <RefreshButton
             onClick={onRefresh}
-            disabled={isLoading}
             label={t('taxreport.generation.btn')}
+            disabled={isFirstSyncing || isLoading}
           />
         </SectionHeaderRow>
       </SectionHeader>
