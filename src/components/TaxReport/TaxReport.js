@@ -29,6 +29,7 @@ import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 import queryConstants from 'state/query/constants'
 
 import Loader from './TaxReport.loader'
+import SyncNote from './TaxReport.note'
 import Disclaimer from './TaxReport.disclaimer'
 import { getColumns } from './TaxReport.columns'
 
@@ -66,7 +67,9 @@ const TaxReport = () => {
   )
 
   let showContent
-  if (isLoading) {
+  if (isFirstSyncing) {
+    showContent = <SyncNote />
+  } else if (isLoading) {
     showContent = <Loader />
   } else if (isNoData) {
     showContent = (
