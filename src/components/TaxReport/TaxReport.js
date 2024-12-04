@@ -22,9 +22,9 @@ import {
   getTransactionsDataReceived,
   getTransactionsShowDisclaimer,
 } from 'state/taxReport/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import queryConstants from 'state/query/constants'
 
@@ -46,6 +46,7 @@ const TaxReport = () => {
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
+  // const isFirstSyncing = useSelector(getIsFirstSyncing)
   const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
 
   useEffect(() => {
@@ -121,6 +122,7 @@ const TaxReport = () => {
           <RefreshButton
             onClick={onRefresh}
             disabled={isLoading}
+            label={t('taxreport.generation.btn')}
           />
         </SectionHeaderRow>
       </SectionHeader>
