@@ -497,6 +497,8 @@ function* logout() {
   if (showFrameworkMode) {
     yield put(actions.fetchUsers())
     yield put(setIsSyncRequired(true))
+  } else {
+    yield put(actions.clearAuth())
   }
 }
 
