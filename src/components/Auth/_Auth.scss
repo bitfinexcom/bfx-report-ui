@@ -58,6 +58,10 @@
         margin-bottom: 40px;
         justify-content: space-between;
 
+        &:has(> *:only-child) {
+          justify-content: center;
+        }
+
         &:last-child {
           margin-bottom: 0;
         }
