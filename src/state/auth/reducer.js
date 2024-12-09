@@ -1,7 +1,10 @@
+import config from 'config'
 import subAccountsTypes from 'state/subAccounts/constants'
 
 import types from './constants'
 import Authenticator from './Authenticator'
+
+const { showFrameworkMode } = config
 
 const initialAuthData = {
   apiKey: '',
@@ -167,6 +170,7 @@ export function authReducer(state = initialState, action) {
         loading: false,
       }
     case types.LOGOUT:
+      if (!showFrameworkMode) Authenticator.clearStored()
       return {
         ...initialState,
         ...getStoredAuth(),
