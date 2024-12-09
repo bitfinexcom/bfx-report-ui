@@ -39,7 +39,7 @@ const environments = {
     HOME_URL: 'https://www.bitfinex.com',
     WS_ADDRESS: 'ws://127.0.0.1:31339/ws',
     localExport: false,
-    showAuthPage: false,
+    showAuthPage: true,
     showFrameworkMode: false,
     hostedFrameworkMode: false,
   },
