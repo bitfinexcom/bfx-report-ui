@@ -30,6 +30,10 @@ class Authenticator {
     return auth ? JSON.parse(auth) : {}
   }
 
+  clearStored = () => {
+    window.localStorage.removeItem('auth')
+  }
+
   hasData = () => {
     const storedData = this.getStored()
     const storedKeys = Object.keys(storedData)
