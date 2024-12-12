@@ -23,7 +23,7 @@ const config = {
   DEFAULT_ELECTRON_VERSION,
   getElectronReleaseLink: ({ version, platform, ext = getDefaultExt(platform) }) => {
     const normVersion = version.replace('v', '')
-    const currExt = normVersion === DEFAULT_ELECTRON_VERSION
+    const currExt = isEqual(normVersion, DEFAULT_ELECTRON_VERSION)
       ? getDefaultExt(platform)
       : ext
 
