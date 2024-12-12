@@ -1,19 +1,33 @@
-import _replace from 'lodash/replace'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
-const DEFAULT_ELECTRON_VERSION = '3.0.1'
+import { PLATFORMS } from 'utils/getOS'
+
+const DEFAULT_ELECTRON_VERSION = '4.17.0'
 
 const APP_RELEASES_URL = 'https://github.com/bitfinexcom/bfx-report-electron/releases/download/'
+
+const getDefaultExt = (platform) => {
+  if (isEqual(platform, PLATFORMS.windows)) {
+    return 'exe'
+  }
+  if (isEqual(platform, PLATFORMS.linux)) {
+    return 'AppImage.zip'
+  }
+
+  return 'zip'
+}
 
 const config = {
   GITHUB_LINK: 'https://github.com/bitfinexcom/bfx-report-electron',
   LATEST_ELECTRON_RELEASE_LINK: 'https://api.github.com/repos/bitfinexcom/bfx-report-electron/releases/latest',
   DEFAULT_ELECTRON_VERSION,
-  getElectronReleaseLink: ({ version, platform, ext = 'zip' }) => {
-    const currExt = version === DEFAULT_ELECTRON_VERSION
-      ? 'zip'
+  getElectronReleaseLink: ({ version, platform, ext = getDefaultExt(platform) }) => {
+    const normVersion = version.replace('v', '')
+    const currExt = isEqual(normVersion, DEFAULT_ELECTRON_VERSION)
+      ? getDefaultExt(platform)
       : ext
 
-    return `${APP_RELEASES_URL}/${version}/BitfinexReport-${_replace(version, 'v', '')}-x64-${platform}.${currExt}`
+    return `${APP_RELEASES_URL}/${version}/BitfinexReport-${normVersion}-x64-${platform}.${currExt}`
   },
 }
 
