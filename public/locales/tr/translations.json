@@ -773,9 +773,11 @@
       "message": "Bu uygulama tarafından oluşturulan vergi raporları yalnızca bilgilendirme amaçlıdır. Doğruluğunu veya eksiksizliğini garanti etmiyoruz. Geçerli vergi yasalarına uyumu sağlamak ve kişiselleştirilmiş tavsiye almak için her zaman nitelikli bir vergi danışmanına danışın. Oluşturulan raporlara güvenmek kendi sorumluluğunuzdadır."
     },
     "generation": {
+      "btn": "Oluştur",
       "success": "Vergi Raporu Oluşturuldu",
       "title": "Vergi raporunuz oluşturuluyor. Bu işlem biraz zaman alabilir.",
-      "note": "Büyük bir geçmişiniz varsa pencereyi arka planda açık tutmanız önerilir."
+      "note": "Büyük bir geçmişiniz varsa pencereyi arka planda açık tutmanız önerilir.",
+       "sync": "Senkronizasyon devam ediyor. Vergi raporunuzu oluşturmak için lütfen tamamlanmasını bekleyin."
     },
     "sections": {
       "startSnapshot": "Anlık Görüntü Başlat",

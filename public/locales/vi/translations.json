@@ -773,9 +773,11 @@
       "message": "Các báo cáo thuế được tạo bởi ứng dụng này chỉ dành cho mục đích thông tin. Chúng tôi không đảm bảo tính chính xác hoặc đầy đủ. Luôn tham khảo ý kiến cố vấn thuế đủ điều kiện để đảm bảo tuân thủ các luật thuế hiện hành và nhận lời khuyên cá nhân hóa. Việc dựa vào các báo cáo được tạo ra là rủi ro của bạn."
     },
     "generation": {
+      "btn": "Tạo",
       "success": "Báo cáo thuế đã được tạo",
       "title": "Báo cáo thuế của bạn đang được tạo. Quá trình này có thể mất một thời gian.",
-      "note": "Nếu bạn có lịch sử lớn, nên giữ cửa sổ này mở trong nền cho đến khi hoàn tất."
+      "note": "Nếu bạn có lịch sử lớn, nên giữ cửa sổ này mở trong nền cho đến khi hoàn tất.",
+      "sync": "Đồng bộ hóa đang tiến hành. Vui lòng chờ cho đến khi hoàn tất để tạo báo cáo thuế của bạn."
     },
     "sections": {
       "startSnapshot": "Bắt đầu Snapshot",
