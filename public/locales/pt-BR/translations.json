@@ -777,7 +777,8 @@
       "success": "Relatório fiscal gerado",
       "title": "Seu relatório fiscal está sendo gerado. Esse processo pode levar algum tempo.",
       "note": "Se você tiver um histórico extenso, é recomendável manter a janela aberta em segundo plano até que seja concluído.",
-      "sync": "Sincronização em andamento. Aguarde até que seja concluída para gerar seu relatório fiscal."
+      "sync_1": "Sincronização em andamento.",
+      "sync_2": "Aguarde até que seja concluída para gerar seu relatório fiscal."
     },
     "sections": {
       "startSnapshot": "Iniciar Snapshot",

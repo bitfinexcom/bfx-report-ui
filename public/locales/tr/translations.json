@@ -777,7 +777,8 @@
       "success": "Vergi Raporu Oluşturuldu",
       "title": "Vergi raporunuz oluşturuluyor. Bu işlem biraz zaman alabilir.",
       "note": "Büyük bir geçmişiniz varsa pencereyi arka planda açık tutmanız önerilir.",
-       "sync": "Senkronizasyon devam ediyor. Vergi raporunuzu oluşturmak için lütfen tamamlanmasını bekleyin."
+      "sync_1": "Senkronizasyon devam ediyor.",
+      "sync_2": "Vergi raporunuzu oluşturmak için lütfen tamamlanmasını bekleyin."
     },
     "sections": {
       "startSnapshot": "Anlık Görüntü Başlat",
