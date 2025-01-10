@@ -55,13 +55,9 @@
     },
     "ttlSelect": {
       "title": "Yetkilendirme Tokeni TTL",
-      "1day": "1 Gün",
-      "2days": "2 Gün",
-      "3days": "3 Gün",
-      "4days": "4 Gün",
-      "5days": "5 Gün",
-      "6days": "6 Gün",
-      "7days": "7 Gün"
+      "day": "Gün",
+      "days_1": "Gün",
+      "days_2": "Gün"
     },
     "apiKey": "API Anahtarı",
     "apiSecret": "API Gizli Dizisi",

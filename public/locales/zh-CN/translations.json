@@ -55,13 +55,9 @@
     },
     "ttlSelect": {
       "title": "授权令牌有效期",
-      "1day": "1 天",
-      "2days": "2 天",
-      "3days": "3 天",
-      "4days": "4 天",
-      "5days": "5 天",
-      "6days": "6 天",
-      "7days": "7 天"
+      "day": "天",
+      "days_1": "天",
+      "days_2": "天"
     },
     "apiKey": "API密钥",
     "apiSecret": "API密码",

@@ -55,13 +55,9 @@
     },
     "ttlSelect": {
       "title": "TTL del Token de Autenticación",
-      "1day": "1 Día",
-      "2days": "2 Días",
-      "3days": "3 Días",
-      "4days": "4 Días",
-      "5days": "5 Días",
-      "6days": "6 Días",
-      "7days": "7 Días"
+      "day": "Día",
+      "days_1": "Días",
+      "days_2": "Días"
     },
     "apiKey": "Claves API",
     "apiSecret": "API Secreta",

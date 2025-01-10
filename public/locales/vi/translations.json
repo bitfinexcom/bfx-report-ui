@@ -55,13 +55,9 @@
     },
     "ttlSelect": {
       "title": "Thời hạn hiệu lực Token",
-      "1day": "1 Ngày",
-      "2days": "2 Ngày",
-      "3days": "3 Ngày",
-      "4days": "4 Ngày",
-      "5days": "5 Ngày",
-      "6days": "6 Ngày",
-      "7days": "7 Ngày"
+      "day": "Ngày",
+      "days_1": "Ngày",
+      "days_2": "Ngày"
     },
     "apiKey": "Khoá API",
     "apiSecret": "Bí mật API",
