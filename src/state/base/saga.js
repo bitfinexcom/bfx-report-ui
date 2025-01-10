@@ -29,7 +29,7 @@ export function* fetchTimezone() {
 }
 
 function* updateTheme() {
-  document.body.className = yield select(getTheme)
+  document.documentElement.className = yield select(getTheme)
 }
 
 const WAIT_INTERVAL = 500
