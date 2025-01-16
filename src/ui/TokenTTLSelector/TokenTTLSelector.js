@@ -8,13 +8,13 @@ import { getAuthTokenTTL } from 'state/auth/selectors'
 import Select from 'ui/Select'
 
 const getItems = (t) => [
-  { value: 86400, label: t('auth.ttlSelect.1day') },
-  { value: 172800, label: t('auth.ttlSelect.2days') },
-  { value: 259200, label: t('auth.ttlSelect.3days') },
-  { value: 345600, label: t('auth.ttlSelect.4days') },
-  { value: 432000, label: t('auth.ttlSelect.5days') },
-  { value: 518400, label: t('auth.ttlSelect.6days') },
-  { value: 604800, label: t('auth.ttlSelect.7days') },
+  { value: 86400, label: `1 ${t('auth.ttlSelect.day')}` },
+  { value: 172800, label: `2 ${t('auth.ttlSelect.days_1')}` },
+  { value: 259200, label: `3 ${t('auth.ttlSelect.days_1')}` },
+  { value: 345600, label: `4 ${t('auth.ttlSelect.days_1')}` },
+  { value: 432000, label: `5 ${t('auth.ttlSelect.days_2')}` },
+  { value: 518400, label: `6 ${t('auth.ttlSelect.days_2')}` },
+  { value: 604800, label: `7 ${t('auth.ttlSelect.days_2')}` },
 ]
 
 const ExportTypeSelector = () => {

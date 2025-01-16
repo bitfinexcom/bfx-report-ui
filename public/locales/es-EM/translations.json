@@ -36,6 +36,7 @@
     "accountRemoved": "Cuenta eliminada",
     "accountRemoving": "Eliminación de la cuenta",
     "useApiKey": "Usar llave API",
+    "updateUser": "Actualizar usuario",
     "loginEmail": {
       "emailOrUserName": "Correo electrónico o Nombre de Usuario",
       "bfxAccPassword": "Contraseña",
@@ -52,10 +53,18 @@
       "invalidToken": "Token inválido, inténtalo de nuevo",
       "loginSessionExpired": "Tu login ha expirado, favor de intentar nuevamente"
     },
+    "ttlSelect": {
+      "title": "TTL del Token de Autenticación",
+      "day": "Día",
+      "days_1": "Días",
+      "days_2": "Días"
+    },
     "apiKey": "Claves API",
     "apiSecret": "API Secreta",
     "accWithApiKey": "Agregar cuenta con llave API",
     "accWithoutApiKey": "Agregar cuenta sin llave API",
+    "accAddedWithApiKey": "Ya has agregado esta cuenta utilizando una clave API",
+    "accAddedWithApiKeyLogin": "Ya has agregado esta cuenta utilizando una clave API, iniciando sesión...",
     "simpleAccounts": "Cuentas simples",
     "multipleAccounts": "Multiples Cuentas",
     "login": "Inicio de sesión",
@@ -129,6 +138,8 @@
     "amountUsd": "Monto (USD)",
     "ask": "Ask",
     "avgprice": "Precio de Ejecución promedio",
+    "bankFees": "Comisiones bancarias",
+    "bankRouterId": "ID del Router Bancario",
     "balance": "Balance",
     "balanceUsd": "Balance en (USD)",
     "base-price": "Precio Base",
@@ -145,13 +156,19 @@
     "created": "Creado",
     "cumulativeAmount": "Cantidad acumulativa",
     "currency": "Moneda",
+    "currencyName": "Nombre de la moneda",
     "customerInfo": "Información del Cliente",
     "date": "Fecha",
     "days": "Días",
+    "defaultWidth": "Restablecer anchura de columnas",
     "deselectionHint": "Cmd/Ctrl + clic para anular la selección",
     "description": "Descripción",
     "destination": "Destino",
     "duration": "Duración",
+    "externalProviderId": "ID del Proveedor Externo",
+    "externalProviderStatus": "Estado del Proveedor Externo",
+    "externalProviderInfo": "Información del Proveedor Externo",
+    "externalProviderBankAccInfo": "Información de la Cuenta Bancaria del Proveedor Externo",
     "fee": "Comisiones",
     "feePercent": "% Comisión",
     "fees": "Comisiones",
@@ -171,8 +188,12 @@
     "maker_rebate": "Reembolso del Creador",
     "merchantName": "Nombre del Comerciante",
     "meta": "Metadatos",
+    "memo": "Nota",
     "mobile": "Móvil",
+    "moreDetails": "Más detalles",
     "movementsTotal": "Monto total de movimientos (USD)",
+    "noResults": "Sin resultados",
+    "noHistory": "No hay historial para mostrar",
     "note": "Nota",
     "opened": "Abierto",
     "orderid": "ID de la orden",
@@ -193,11 +214,14 @@
     "rate": "Tasa",
     "rateperc": "Tasa %",
     "redirectUrl": "Redirigir URL",
+    "remark": "Comentario",
     "sale": "Venta",
+    "show": "Mostrar",
     "sellingAmount": "Monto de venta",
     "sellingWeightedPrice": "Precio ponderado de venta",
     "side": "Lado",
     "status": "Estado",
+    "started": "Iniciado",
     "taker_fees": "Tarifas de tomador",
     "taker_fees_crypto": "Comisiones del Tomador Crypto",
     "taker_fees_fiat": "Comisiones del Tomador Fiat",
@@ -271,10 +295,15 @@
     "remoteStorage": "Almacenamiento Remoto",
     "status": {
       "local": "Exportar csv generado, los archivos se guardan en: ",
-      "email": "Generando tu reporte CSV, lo enviaremos por correo electrónico tan pronto como esté listo..."
+      "email": "Generando tu reporte CSV, lo enviaremos por correo electrónico tan pronto como esté listo...",
+      "failed": "La generación de la exportación falló. Por favor, selecciona un rango de fechas más pequeño o inténtalo de nuevo más tarde."
     },
     "success": "Éxito",
-    "targets": "Datos para Exportar"
+    "fail": "Fallo",
+    "targets": "Datos para Exportar",
+    "exportFormat": "Formato de Exportación",
+    "exportAsCsv": "Exportar como CSV",
+    "exportAsPdf": "Exportar como PDF"
   },
   "fcredit": {
     "title": "Créditos de financiamiento (usados)",
@@ -310,7 +339,10 @@
     "cancel": "Cancelar",
     "notagain": "No volver a mostrar este mensaje",
     "continue": "Continue",
-    "warning": "Advertencia"
+    "warning": "Advertencia",
+    "sync-in-progress": "Sincronización en progreso",
+    "first-sync-message": "Tus datos se están descargando, por favor espera a que finalice el proceso de sincronización.",
+    "okay_btn": "De acuerdo"
   },
   "header": {
     "logout": "Cerrar sesión",
@@ -371,8 +403,16 @@
   "logins": {
     "title": "Inicios de sesión"
   },
+  "maintenance": {
+    "title": "Aviso de Mantenimiento",
+    "message_1": "La plataforma está actualmente en modo de mantenimiento.",
+    "message_2": "Por favor revisa el ",
+    "message_3": " para actualizaciones.",
+    "message_4": "Volveremos pronto."
+  },
   "movements": {
-    "title": "Movimientos"
+    "title": "Movimientos",
+    "moreDetails": "Más detalles"
   },
   "navItems": {
     "reports": "Reportes",
@@ -481,6 +521,7 @@
     "table_scroll": "Desplazamiento de tabla",
     "preserve_timeframe": "Conservar el marco de tiempo",
     "remove_account": "Elminar cuenta",
+    "sync_after_update": "Sincronización automática después de la actualización",
     "sync": {
       "add-filter": "Añadir filtro",
       "add-pair": "Agregar par",
@@ -513,6 +554,7 @@
   },
   "selector": {
     "select": "Seleccionar",
+    "strategy": "Estrategia",
     "all": "Todo",
     "inactive": "Inactive",
     "balance-precision": {
@@ -599,6 +641,56 @@
     "use_api_key": "Usar llave API",
     "name_updated": "Nombre del grupo de cuentas actualizado"
   },
+  "summary": {
+    "title": "Resumen",
+    "leo_level": "Nivel LEO",
+    "avg_amount": "Prom. Monto",
+    "no_data": "No hay datos relacionados para este período o los datos deben sincronizarse.",
+    "fees": {
+      "title": "Comisiones de Cuenta",
+      "sub_title": "Basado en tu volumen de trading elegible de 30 días",
+      "fee_tier_volume": "Volumen de Trading Elegible",
+      "maker": "Comisiones de Maker",
+      "taker_crypto": "Comisiones de Taker Cripto",
+      "taker_fiat": "Comisiones de Taker Fiat",
+      "taker_stables": "Comisiones de Taker Stablecoins",
+      "deriv_maker": "Comisiones de Maker en Derivados",
+      "deriv_taker": "Comisiones de Taker en Derivados"
+    },
+    "value": {
+      "title": "Balance de Cuenta",
+      "sub_title": "Balance Total incluyendo Depósitos/Retiros"
+    },
+    "profits": {
+      "title": "Ganancias",
+      "sub_title": "Ganancias/pérdidas al final del día excluyendo Depósitos/Retiros"
+    },
+    "by_asset": {
+      "title": "Tus Activos",
+      "sub_title": "Resumen para el período ",
+      "currency": "Moneda",
+      "all_assets": "Todos los Activos",
+      "amount": "Monto",
+      "balance": "Balance",
+      "balance_change": "Cambio en el Balance",
+      "profits": "Ganancias",
+      "volume": "Volumen",
+      "total": "Total",
+      "trading_fees": "Comisiones de Trading",
+      "fund_earnings": "Ganancias de Fondos",
+      "filter": {
+        "title": "Filtrar",
+        "min_balance_switch": "Balance Mínimo",
+        "min_balance_input": "Establece un balance mínimo para que los activos aparezcan en la tabla."
+      }
+    },
+    "positions": {
+      "title": "Posiciones Activas",
+      "derivative": "Derivado",
+      "margin": "Margen",
+      "position": "Posición"
+    }
+  },
   "symbols": {
     "title": "Obtener símbolos",
     "clear_symbols": "Borrar símbolos"
@@ -626,6 +718,16 @@
     "message": {
       "canceled": "Cancelar antiguo Sync Watcher"
     },
+    "last-sync-time": {
+      "fail": "No se pudo obtener la hora de la última sincronización",
+      "syncing": "Sincronizando...",
+      "sync-was-less-than-hour": "La última sincronización fue hace menos de una hora",
+      "sync-was": "La última sincronización fue hace {{hours}} horas"
+    },
+    "init-sync-info": {
+      "main": "Bienvenido a la Aplicación de Informes de Bitfinex. Tu historial de trading se está sincronizando, por favor espera hasta que termine para ver tus informes.",
+      "additional": "La sincronización aún está en progreso, esto podría tomar varios minutos. Mantén esta ventana abierta hasta que termine en caso de que tengas un historial extenso."
+    },
     "estimated_time": {
       "started_at": "Sincronización empezada: ",
       "spent_time": "Tiempo utilizado: ",
@@ -640,16 +742,45 @@
   },
   "taxreport": {
     "title": "Reporte de impuestos",
-    "sections": {
-      "startSnapshot": "Empezar instantánea",
-      "endSnapshot": "Finalizar Instantánea",
-      "finalResult": "Resultado Final"
-    },
     "startingPeriodBalances": "Balances del período inicial",
     "endingPeriodBalances": "Balances del período concluido",
     "startPositions": "Instantánea del periodo inicial",
     "endPositions": "Instantánea del periodo concluido",
-    "movements": "Movimientos"
+    "movements": "Movimientos",
+    "cols": {
+      "currency": "Moneda",
+      "source": "Fuente",
+      "amount": "Monto",
+      "dateAcquired": "Fecha de Adquisición",
+      "dateSold": "Fecha de Venta",
+      "proceeds": "Ingresos",
+      "cost": "Costo",
+      "gainOrLoss": "Ganancia o Pérdida"
+    },
+    "sources": {
+      "airdrop_on_wallet": "Airdrop en monedero",
+      "margin_funding_payment": "Pago de financiación con margen",
+      "affiliate_rebate": "Reembolso de afiliado",
+      "staking_payment": "Pago por staking",
+      "exchange": "Intercambio"
+    },
+    "disclaimer": {
+      "title": "Descargo de responsabilidad",
+      "message": "Los informes fiscales generados por esta aplicación son solo para fines informativos. No garantizamos precisión o integridad. Siempre consulta a un asesor fiscal calificado para garantizar el cumplimiento de las leyes fiscales vigentes y obtener asesoramiento personalizado. La confianza en los informes generados es bajo tu propio riesgo."
+    },
+    "generation": {
+      "btn": "Generar",
+      "success": "Informe fiscal generado",
+      "title": "Tu informe fiscal está siendo generado. Este proceso puede tomar un tiempo.",
+      "note": "Si tienes un historial extenso se recomienda mantener la ventana abierta en segundo plano hasta que se complete.",
+      "sync_1": "Sincronización en progreso.",
+      "sync_2": "Por favor, espere hasta que se complete para generar su informe fiscal."
+    },
+    "sections": {
+      "startSnapshot": "Empezar instantánea",
+      "endSnapshot": "Finalizar Instantánea",
+      "finalResult": "Resultado Final"
+    }
   },
   "theme": {
     "light": "Claro",

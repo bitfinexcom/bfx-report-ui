@@ -36,6 +36,7 @@
     "accountRemoved": "Tài khoản đã xoá",
     "accountRemoving": "Tài khoản đang được xoá",
     "useApiKey": "Sử dụng khoá API",
+    "updateUser": "Cập nhật người dùng",
     "loginEmail": {
       "emailOrUserName": "Email hoặc Tên người dùng",
       "bfxAccPassword": "Mật khẩu",
@@ -52,10 +53,18 @@
       "invalidToken": "Token không hợp lệ, vui lòng thử lại",
       "loginSessionExpired": "Phiên đăng nhập của bạn đã hết hạn, vui lòng thử lại"
     },
+    "ttlSelect": {
+      "title": "Thời hạn hiệu lực Token",
+      "day": "Ngày",
+      "days_1": "Ngày",
+      "days_2": "Ngày"
+    },
     "apiKey": "Khoá API",
     "apiSecret": "Bí mật API",
     "accWithApiKey": "Thêm tài khoản bằng khóa API",
     "accWithoutApiKey": "Thêm tài khoản mà không cần khóa API",
+    "accAddedWithApiKey": "Bạn đã thêm tài khoản này bằng API key",
+    "accAddedWithApiKeyLogin": "Bạn đã thêm tài khoản này bằng API key, đang đăng nhập...",
     "simpleAccounts": "Một tài khoản",
     "multipleAccounts": "Nhiều tài khoản",
     "login": "Đăng nhập",
@@ -129,6 +138,8 @@
     "amountUsd": "Số lượng tiền (USD)",
     "ask": "Bán",
     "avgprice": "Giá thực hiện trung bình",
+    "bankFees": "Phí ngân hàng",
+    "bankRouterId": "ID bộ định tuyến ngân hàng",
     "balance": "Số dư",
     "balanceUsd": "Số dư (USD)",
     "base-price": "Giá cơ sở",
@@ -145,13 +156,19 @@
     "created": "Tạo",
     "cumulativeAmount": "Tổng số lượng",
     "currency": "Tiền tệ",
+    "currencyName": "Tên tiền tệ",
     "customerInfo": "Thông tin khách hàng",
     "date": "Ngày",
     "days": "Ngày",
+    "defaultWidth": "Đặt lại độ rộng cột",
     "deselectionHint": "Cmd/Ctrl + click để bỏ chọn",
     "description": "Mô tả",
     "destination": "Đích",
     "duration": "Thời hạn",
+    "externalProviderId": "ID nhà cung cấp bên ngoài",
+    "externalProviderStatus": "Trạng thái nhà cung cấp bên ngoài",
+    "externalProviderInfo": "Thông tin nhà cung cấp bên ngoài",
+    "externalProviderBankAccInfo": "Thông tin tài khoản ngân hàng của nhà cung cấp bên ngoài",
     "fee": "Phí",
     "feePercent": "Phí Perc",
     "fees": "Phí",
@@ -171,8 +188,12 @@
     "maker_rebate": "Mức giảm giá Maker",
     "merchantName": "Tên nhà bán hàng",
     "meta": "Siêu dữ liệu",
+    "memo": "Ghi chú",
     "mobile": "Di động",
+    "moreDetails": "Thêm chi tiết",
     "movementsTotal": "Tống số lượng tiền biến động (USD)",
+    "noResults": "Không có kết quả",
+    "noHistory": "Không có lịch sử để hiển thị",
     "note": "Lưu ý",
     "opened": "Mở",
     "orderid": "ID lệnh",
@@ -193,11 +214,14 @@
     "rate": "Lãi suất",
     "rateperc": "Lãi suất %",
     "redirectUrl": "Chuyển hướng URL",
+    "remark": "Nhận xét",
     "sale": "Doanh thu",
+    "show": "Hiển thị",
     "sellingAmount": "Số lượng bán",
     "sellingWeightedPrice": "Giá gia quyền bán",
     "side": "Cạnh",
     "status": "Trạng thái",
+    "started": "Bắt đầu",
     "taker_fees": "Phí taker",
     "taker_fees_crypto": "Tiền mã hoá phí taker",
     "taker_fees_fiat": "Tiền pháp định phí taker",
@@ -271,10 +295,15 @@
     "remoteStorage": "Lưu trữ từ xa",
     "status": {
       "local": "Xuất csv được tạo, các tệp được lưu trong: ",
-      "email": "Đang tạo báo cáo CSV, chúng tôi sẽ gửi báo cáo đó cho bạn qua email ngay khi tạo xong..."
+      "email": "Đang tạo báo cáo CSV, chúng tôi sẽ gửi báo cáo đó cho bạn qua email ngay khi tạo xong...",
+      "failed": "Xuất thất bại. Vui lòng chọn một phạm vi ngày nhỏ hơn hoặc thử lại sau."
     },
     "success": "Thành công",
-    "targets": "Dữ liệu để xuất"
+    "fail": "Thất bại",
+    "targets": "Dữ liệu để xuất",
+    "exportFormat": "Định dạng xuất",
+    "exportAsCsv": "Xuất dưới dạng CSV",
+    "exportAsPdf": "Xuất dưới dạng PDF"
   },
   "fcredit": {
     "title": "Tín dụng vốn vay (Đã sử dụng)",
@@ -310,7 +339,10 @@
     "cancel": "Huỷ",
     "notagain": "Không hiển thị lại thông báo này",
     "continue": "Tiếp tục",
-    "warning": "Cảnh báo"
+    "warning": "Cảnh báo",
+    "sync-in-progress": "Đang đồng bộ hóa",
+    "first-sync-message": "Dữ liệu của bạn đang được tải xuống, vui lòng chờ cho đến khi quá trình đồng bộ hóa hoàn tất.",
+    "okay_btn": "Đồng ý"
   },
   "header": {
     "logout": "Đăng xuất",
@@ -371,8 +403,16 @@
   "logins": {
     "title": "Đăng nhập"
   },
+  "maintenance": {
+    "title": "Thông báo bảo trì",
+    "message_1": "Nền tảng hiện đang trong chế độ bảo trì.",
+    "message_2": "Vui lòng kiểm tra ",
+    "message_3": " để biết các cập nhật.",
+    "message_4": "Chúng tôi sẽ trở lại sớm."
+  },
   "movements": {
-    "title": "Biến động dòng tiền"
+    "title": "Biến động dòng tiền",
+    "moreDetails": "Thêm chi tiết"
   },
   "navItems": {
     "reports": "Báo cáo",
@@ -481,6 +521,7 @@
     "table_scroll": "Cuộn bảng",
     "preserve_timeframe": "Giữ nguyên khung thời gian",
     "remove_account": "Xóa tài khoản",
+    "sync_after_update": "Tự động đồng bộ sau khi cập nhật",
     "sync": {
       "add-filter": "Thêm bộ lọc",
       "add-pair": "Thêm cặp",
@@ -513,6 +554,7 @@
   },
   "selector": {
     "select": "Chọn",
+    "strategy": "Chiến lược",
     "all": "Tất cả",
     "inactive": "Không hoạt động",
     "balance-precision": {
@@ -599,6 +641,56 @@
     "use_api_key": "Sử dụng khoá API",
     "name_updated": "Tên nhóm tài khoản đã cập nhật"
   },
+  "summary": {
+    "title": "Tóm tắt",
+    "leo_level": "Cấp độ LEO",
+    "avg_amount": "Số lượng trung bình",
+    "no_data": "Không có dữ liệu liên quan cho khoảng thời gian này hoặc dữ liệu cần được đồng bộ hóa.",
+    "fees": {
+      "title": "Phí tài khoản",
+      "sub_title": "Dựa trên khối lượng giao dịch đủ điều kiện trong 30 ngày của bạn",
+      "fee_tier_volume": "Khối lượng giao dịch đủ điều kiện",
+      "maker": "Phí Maker",
+      "taker_crypto": "Phí Taker Crypto",
+      "taker_fiat": "Phí Taker Fiat",
+      "taker_stables": "Phí Taker Stablecoins",
+      "deriv_maker": "Phí Maker Phái sinh",
+      "deriv_taker": "Phí Taker Phái sinh"
+    },
+    "value": {
+      "title": "Số dư tài khoản",
+      "sub_title": "Tổng số dư bao gồm Tiền gửi/Rút tiền"
+    },
+    "profits": {
+      "title": "Lợi nhuận",
+      "sub_title": "Lợi nhuận/lỗ cuối ngày, không bao gồm Tiền gửi/Rút tiền"
+    },
+    "by_asset": {
+      "title": "Tài sản của bạn",
+      "sub_title": "Tóm tắt cho khoảng thời gian ",
+      "currency": "Tiền tệ",
+      "all_assets": "Tất cả tài sản",
+      "amount": "Số lượng",
+      "balance": "Số dư",
+      "balance_change": "Thay đổi số dư",
+      "profits": "Lợi nhuận",
+      "volume": "Khối lượng",
+      "total": "Tổng cộng",
+      "trading_fees": "Phí giao dịch",
+      "fund_earnings": "Thu nhập từ quỹ",
+      "filter": {
+        "title": "Bộ lọc",
+        "min_balance_switch": "Số dư tối thiểu",
+        "min_balance_input": "Đặt số dư tối thiểu để các tài sản xuất hiện trong bảng."
+      }
+    },
+    "positions": {
+      "title": "Vị trí đang hoạt động",
+      "derivative": "Phái sinh",
+      "margin": "Ký quỹ",
+      "position": "Vị trí"
+    }
+  },
   "symbols": {
     "title": "Lấy biểu tượng",
     "clear_symbols": "Xoá biểu tượng"
@@ -626,6 +718,16 @@
     "message": {
       "canceled": "Đã hủy Sync Watcher cũ"
     },
+    "last-sync-time": {
+      "fail": "Không thể lấy thời gian đồng bộ cuối cùng",
+      "syncing": "Đang đồng bộ...",
+      "sync-was-less-than-hour": "Đồng bộ cuối cùng chưa đầy một giờ trước",
+      "sync-was": "Đồng bộ cuối cùng cách đây {{hours}} giờ"
+    },
+    "init-sync-info": {
+      "main": "Chào mừng đến với ứng dụng Báo cáo Bitfinex. Lịch sử giao dịch của bạn đang được đồng bộ hóa, vui lòng chờ cho đến khi hoàn tất để xem báo cáo của bạn.",
+      "additional": "Đồng bộ hóa vẫn đang diễn ra, quá trình này có thể mất vài phút. Giữ cửa sổ này mở cho đến khi hoàn tất nếu bạn có lịch sử lớn."
+    },
     "estimated_time": {
       "started_at": "Đã bắt đầu đồng bộ hóa lúc: ",
       "spent_time": "Thời gian sử dụng: ",
@@ -640,16 +742,45 @@
   },
   "taxreport": {
     "title": "Báo cáo thuế",
-    "sections": {
-      "startSnapshot": "Bắt đầu Snapshot",
-      "endSnapshot": "Kết thúc Snapshot",
-      "finalResult": "Kết quả cuối cùng"
-    },
     "startingPeriodBalances": "Bắt đầu với số dư giai đoạn",
     "endingPeriodBalances": "Kết thúc với số dư giai đoạn",
     "startPositions": "Bắt đầu snapshot vị thế",
     "endPositions": "Chỉnh sửa snapshot vị thế",
-    "movements": "Biến động dòng tiền"
+    "movements": "Biến động dòng tiền",
+    "cols": {
+      "currency": "Tiền tệ",
+      "source": "Nguồn",
+      "amount": "Số lượng",
+      "dateAcquired": "Ngày nhận",
+      "dateSold": "Ngày bán",
+      "proceeds": "Thu nhập",
+      "cost": "Chi phí",
+      "gainOrLoss": "Lãi hoặc Lỗ"
+    },
+    "sources": {
+      "airdrop_on_wallet": "Airdrop trên ví",
+      "margin_funding_payment": "Thanh toán tài trợ ký quỹ",
+      "affiliate_rebate": "Hoàn tiền cộng tác viên",
+      "staking_payment": "Thanh toán staking",
+      "exchange": "Sàn giao dịch"
+    },
+    "disclaimer": {
+      "title": "Tuyên bố từ chối trách nhiệm",
+      "message": "Các báo cáo thuế được tạo bởi ứng dụng này chỉ dành cho mục đích thông tin. Chúng tôi không đảm bảo tính chính xác hoặc đầy đủ. Luôn tham khảo ý kiến cố vấn thuế đủ điều kiện để đảm bảo tuân thủ các luật thuế hiện hành và nhận lời khuyên cá nhân hóa. Việc dựa vào các báo cáo được tạo ra là rủi ro của bạn."
+    },
+    "generation": {
+      "btn": "Tạo",
+      "success": "Báo cáo thuế đã được tạo",
+      "title": "Báo cáo thuế của bạn đang được tạo. Quá trình này có thể mất một thời gian.",
+      "note": "Nếu bạn có lịch sử lớn, nên giữ cửa sổ này mở trong nền cho đến khi hoàn tất.",
+      "sync_1": "Đồng bộ hóa đang tiến hành.",
+      "sync_2": "Vui lòng chờ cho đến khi hoàn tất để tạo báo cáo thuế của bạn."
+    },
+    "sections": {
+      "startSnapshot": "Bắt đầu Snapshot",
+      "endSnapshot": "Kết thúc Snapshot",
+      "finalResult": "Kết quả cuối cùng"
+    }
   },
   "theme": {
     "light": "Sáng",
