@@ -22,13 +22,14 @@ import {
   getTransactionsDataReceived,
   getTransactionsShowDisclaimer,
 } from 'state/taxReport/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import queryConstants from 'state/query/constants'
 
 import Loader from './TaxReport.loader'
+import SyncNote from './TaxReport.note'
 import Disclaimer from './TaxReport.disclaimer'
 import { getColumns } from './TaxReport.columns'
 
@@ -46,6 +47,7 @@ const TaxReport = () => {
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
+  const isFirstSyncing = useSelector(getIsFirstSyncing)
   const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
 
   useEffect(() => {
@@ -65,7 +67,9 @@ const TaxReport = () => {
   )
 
   let showContent
-  if (isLoading) {
+  if (isFirstSyncing) {
+    showContent = <SyncNote />
+  } else if (isLoading) {
     showContent = <Loader />
   } else if (isNoData) {
     showContent = (
@@ -120,7 +124,8 @@ const TaxReport = () => {
           </SectionHeaderItem>
           <RefreshButton
             onClick={onRefresh}
-            disabled={isLoading}
+            label={t('taxreport.generation.btn')}
+            disabled={isFirstSyncing || isLoading}
           />
         </SectionHeaderRow>
       </SectionHeader>
