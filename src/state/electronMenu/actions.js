@@ -13,14 +13,14 @@ export function setElectronMenuTitle(title) {
   }
 }
 
-export function settElectronMenuTemplate(template) {
+export function setElectronMenuTemplate(template) {
   return {
     type: types.SET_ELECTRON_MENU_TEMPLATE,
     payload: template,
   }
 }
 
-export function settElectronMenuHidden(state) {
+export function setElectronMenuHidden(state) {
   return {
     type: types.SET_ELECTRON_MENU_HIDDEN,
     payload: state,
