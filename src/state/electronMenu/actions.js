@@ -30,6 +30,6 @@ export function setElectronMenuHidden(state) {
 export default {
   setElectronMenuTitle,
   getElectronMenuConfig,
-  settElectronMenuHidden,
-  settElectronMenuTemplate,
+  setElectronMenuHidden,
+  setElectronMenuTemplate,
 }
