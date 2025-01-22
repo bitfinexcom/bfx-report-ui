@@ -8,7 +8,7 @@ export const getDownloadLink = (version) => {
 
   switch (platform) {
     case PLATFORMS.mac:
-      return getElectronReleaseLink({ version, platform, ext: 'zip' })
+      return getElectronReleaseLink({ version, platform, ext: 'dmg' })
     case PLATFORMS.windows:
       return getElectronReleaseLink({ version, platform, ext: 'exe' })
     case PLATFORMS.linux:

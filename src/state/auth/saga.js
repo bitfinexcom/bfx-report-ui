@@ -247,7 +247,7 @@ function* signIn({ payload }) {
     if (error) {
       if (error.code === 401) {
         const { data } = error
-        if (data?.isAuthTokenGenerationError) {
+        if (data?.errorMetadata?.isAuthTokenGenerationError) {
           yield put(actions.setUserShouldReLogin(email))
           yield put(updateWarningStatus({ id: 'auth.loginEmail.loginTokenExpired' }))
         } else {
@@ -497,6 +497,8 @@ function* logout() {
   if (showFrameworkMode) {
     yield put(actions.fetchUsers())
     yield put(setIsSyncRequired(true))
+  } else {
+    yield put(actions.clearAuth())
   }
 }
 

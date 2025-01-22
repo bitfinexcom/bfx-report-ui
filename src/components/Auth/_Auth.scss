@@ -5,7 +5,9 @@
 @import './RegisterSubAccounts/RegisterSubAccounts';
 
 .bitfinex-auth {
-  min-width: 500px;
+  margin: 0 10px;
+  min-width: 330px;
+
   .bp3-dialog {
     &-body {
       display: flex;
@@ -57,6 +59,10 @@
       &-actions {
         margin-bottom: 40px;
         justify-content: space-between;
+
+        &:has(> *:only-child) {
+          justify-content: center;
+        }
 
         &:last-child {
           margin-bottom: 0;
