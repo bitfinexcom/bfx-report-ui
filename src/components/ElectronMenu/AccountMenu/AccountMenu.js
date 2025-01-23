@@ -63,7 +63,7 @@ const AccountMenu = ({
   return (
     <div
       className={classNames(
-        'account-menu',
+        '.electron-menu-item',
         { 'account-menu--no-email': !authStatus || !email },
       )}
     >
@@ -71,7 +71,7 @@ const AccountMenu = ({
         minimal
         position={Position.BOTTOM_LEFT}
         content={(
-          <div className='account-menu-content'>
+          <div className='electron-menu-item-content'>
             <Menu>
               <MenuItem
                 text={t('header.preferences')}
@@ -116,14 +116,11 @@ const AccountMenu = ({
             )}
         targetTagName='div'
       >
-        <div className='account-menu-wrapper'>
-          <div className='account-menu-target'>
-            <Icon.USER_CIRCLE />
-            <span className='account-menu-username'>
+        <div className='electron-menu-item-wrapper'>
+          <div className='electron-menu-item-target'>
+            <span className='electron-menu-item-username'>
               {authStatus ? formatUsername(email, localUsername) : ''}
             </span>
-            <Icon.CHEVRON_DOWN />
-            <Icon.CHEVRON_UP />
           </div>
         </div>
       </Popover>
