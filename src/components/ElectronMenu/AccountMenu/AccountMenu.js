@@ -17,8 +17,6 @@ import { tracker } from 'utils/trackers'
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
-import SyncMode from '../SyncMode'
-import QueryMode from '../QueryMode'
 import { openHelp } from '../utils'
 
 const { showFrameworkMode } = config
@@ -107,18 +105,6 @@ const AccountMenu = ({
                 onClick={openHelp}
                 icon={<Icon.INFO_CIRCLE />}
                 text={t('header.help')}
-              />
-              {showFrameworkMode && (
-                <MenuItem
-                  className='account-menu-sync'
-                  shouldDismissPopover={false}
-                  text={<SyncMode />}
-                />
-              )}
-              <MenuItem
-                className='account-menu-query'
-                shouldDismissPopover={false}
-                text={<QueryMode />}
               />
               <MenuItem
                 icon={<Icon.SIGN_OUT />}
