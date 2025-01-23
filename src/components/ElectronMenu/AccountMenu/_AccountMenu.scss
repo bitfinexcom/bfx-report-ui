@@ -1,9 +1,8 @@
-.account-menu {
+.electron-menu-item {
   min-width: 208px;
   max-width: 375px;
-  float: right;
-  height: 44px;
-  line-height: 44px;
+  height: 25px;
+  line-height: 25px;
   user-select: none;
   cursor: pointer;
   border-left: 1px solid var(--borderColor);
@@ -13,7 +12,7 @@
   }
 
   &-wrapper {
-    height: 44px;
+    height: 20px;
 
     .icon--chevron-up {
       display: none;
@@ -53,7 +52,7 @@
   }
 
   svg {
-    height: 44px;
+    height: 20px;
   }
 
   &-username {
@@ -79,13 +78,13 @@
 
 
       &-item {
-        height: 40px;
+        height: 16px;
         line-height: 40px;
         padding: 0 14px;
         border-bottom: 1px solid var(--borderColor);
 
         svg {
-          height: 40px;
+          height: 16px;
           margin-right: 14px;
         }
 
@@ -193,33 +192,6 @@
 
     .bp3-popover-target {
       height: 57px;
-    }
-  }
-}
-
-@media screen and (max-width: 1550px) {
-  .account-menu {
-    max-width: 275px;
-
-    &-username {
-      max-width: 187px;
-    }
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .account-menu {
-     &-query {
-      display: flex;
-    }
-  }
-}
-
-@media screen and (max-width: 1170px) {
-  .account-menu {
-    &-sync,
-    &-export {
-      display: flex;
     }
   }
 }
