@@ -6,6 +6,7 @@ import {
   MenuItem,
   Popover,
   Position,
+  PopoverInteractionKind,
 } from '@blueprintjs/core'
 import _isNull from 'lodash/isNull'
 import _isString from 'lodash/isString'
@@ -115,6 +116,7 @@ const AccountMenu = ({
           </div>
             )}
         targetTagName='div'
+        interactionKind={PopoverInteractionKind.HOVER}
       >
         <div className='electron-menu-item-wrapper'>
           <div className='electron-menu-item-target'>
