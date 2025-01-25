@@ -466,7 +466,7 @@ const testTemplate = [
 ]
 
 const initialState = {
-  menuTitle: '',
+  menuTitle: 'Bitfinex Reporting & Performance Tools',
   menuTemplate: testTemplate,
   menuHidden: true,
 }
