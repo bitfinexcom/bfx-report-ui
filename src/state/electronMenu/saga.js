@@ -14,14 +14,20 @@ import actions from './actions'
 
 
 function* getElectronMenuConfig() {
+  console.log('+++ start getElectronMenuConfig+++')
   try {
-    const title = yield call(window?.bfxReportElectronApi?.getTitle())
-    const { menuTemplate, shouldMenuBeHidden } = yield call(window?.bfxReportElectronApi?.getMenuTemplate())
+    const title = yield call([window.bfxReportElectronApi, 'getTitle'])
+    const { menuTemplate, shouldMenuBeHidden } = yield call([window.bfxReportElectronApi, 'getMenuTemplate'])
+
+    console.log('+++ title +++', title)
+    console.log('+++ menuTemplate +++', menuTemplate)
+    console.log('+++ shouldMenuBeHidden +++', shouldMenuBeHidden)
 
     yield put(actions.setElectronMenuTitle(title))
     yield put(actions.setElectronMenuTemplate(menuTemplate))
     yield put(actions.setElectronMenuHidden(shouldMenuBeHidden))
   } catch (error) {
+    console.log('+++ error getElectronMenuConfig+++', error)
     yield put(updateErrorStatus({
       id: 'status.fail',
       detail: error?.message ?? JSON.stringify(error),
