@@ -1,5 +1,5 @@
 import {
-  call, take, put, select, takeLatest,
+  call, take, put, select, takeLatest, fork, takeEvery,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
 
@@ -13,9 +13,10 @@ import { setTimeRange } from 'state/timeRange/actions'
 import timeRangeTypes from 'state/timeRange/constants'
 import handleElectronLoad from 'utils/handleElectronLoad'
 import { checkAuth, updateAuth } from 'state/auth/actions'
-import { checkAuth, updateAuth } from 'state/auth/actions'
-import { setElectronMenuHidden } from 'state/electronMenu/actions'
-import { getElectronMenuConfig } from 'state/electronMenu/actions'
+import {
+  getElectronMenuConfig,
+  setElectronMenuHidden,
+} from 'state/electronMenu/actions'
 import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 
@@ -23,6 +24,23 @@ import types from './constants'
 import selectors from './selectors'
 import { togglePaginationDialog } from './actions'
 
+function* watchElectronMenuHideEvent() {
+  try {
+    yield takeEvery(
+      () => new Promise(resolve => {
+        window.bfxReportElectronApi.onHideMenuEvent(({ state }) => {
+          resolve(state)
+          console.log('+++state', state)
+        })
+      }),
+      function* (state) {
+        yield put(setElectronMenuHidden(state))
+      },
+    )
+  } catch (error) {
+    console.log('+++hideState error', error)
+  }
+}
 
 function* uiLoaded() {
   if (config.isElectronApp) {
@@ -30,16 +48,7 @@ function* uiLoaded() {
     const lang = yield call(window?.bfxReportElectronApi?.getLanguage) || LANGUAGES.en
     yield put(setLang(lang))
     yield put(getElectronMenuConfig())
-    try {
-      const hideState = yield call([window.bfxReportElectronApi, 'onHideMenuEvent'],
-        ({ state }) => {
-          console.log('++++state', state)
-          yield put(actions.setElectronMenuHidden(state))
-        })
-      console.log('+++hideState', hideState)
-    } catch (error) {
-      console.log('+++hideState error', error)
-    }
+    yield fork(watchElectronMenuHideEvent)
   }
 
   const parsed = getParsedUrlParams(window.location.search)
