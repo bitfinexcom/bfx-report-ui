@@ -59,6 +59,8 @@ const AccountMenu = ({
         </div>
             )}
       targetTagName='div'
+      hoverOpenDelay={0}
+      hoverCloseDelay={0}
       interactionKind={PopoverInteractionKind.HOVER}
     >
       <div className='electron-menu-item-wrapper'>
