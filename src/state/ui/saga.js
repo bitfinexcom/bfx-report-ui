@@ -13,6 +13,8 @@ import { setTimeRange } from 'state/timeRange/actions'
 import timeRangeTypes from 'state/timeRange/constants'
 import handleElectronLoad from 'utils/handleElectronLoad'
 import { checkAuth, updateAuth } from 'state/auth/actions'
+import { checkAuth, updateAuth } from 'state/auth/actions'
+import { setElectronMenuHidden } from 'state/electronMenu/actions'
 import { getElectronMenuConfig } from 'state/electronMenu/actions'
 import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
@@ -28,6 +30,16 @@ function* uiLoaded() {
     const lang = yield call(window?.bfxReportElectronApi?.getLanguage) || LANGUAGES.en
     yield put(setLang(lang))
     yield put(getElectronMenuConfig())
+    try {
+      const hideState = yield call([window.bfxReportElectronApi, 'onHideMenuEvent'],
+        ({ state }) => {
+          console.log('++++state', state)
+          yield put(actions.setElectronMenuHidden(state))
+        })
+      console.log('+++hideState', hideState)
+    } catch (error) {
+      console.log('+++hideState error', error)
+    }
   }
 
   const parsed = getParsedUrlParams(window.location.search)
