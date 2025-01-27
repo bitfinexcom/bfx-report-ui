@@ -1,5 +1,5 @@
 import {
-  call, take, put, select, takeLatest, fork, takeEvery,
+  call, take, put, select, takeLatest, takeEvery,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
 
@@ -24,16 +24,17 @@ import types from './constants'
 import selectors from './selectors'
 import { togglePaginationDialog } from './actions'
 
-function* watchElectronMenuHideEvent() {
+export function* watchElectronMenuHideEvent() {
   try {
+    // yield takeLatest
     yield takeEvery(
       () => new Promise(resolve => {
-        window.bfxReportElectronApi.onHideMenuEvent(({ state }) => {
-          resolve(state)
+        window.bfxReportElectronApi?.onHideMenuEvent(({ state }) => {
           console.log('+++state', state)
+          resolve(state)
         })
       }),
-      function* (state) {
+      function* handleElectronMenuHideEvent(state) {
         yield put(setElectronMenuHidden(state))
       },
     )
@@ -48,7 +49,7 @@ function* uiLoaded() {
     const lang = yield call(window?.bfxReportElectronApi?.getLanguage) || LANGUAGES.en
     yield put(setLang(lang))
     yield put(getElectronMenuConfig())
-    yield fork(watchElectronMenuHideEvent)
+    // yield fork(watchElectronMenuHideEvent)
   }
 
   const parsed = getParsedUrlParams(window.location.search)
