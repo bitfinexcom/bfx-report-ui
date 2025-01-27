@@ -44,13 +44,13 @@ import subAccountsSaga from './subAccounts/saga'
 import summaryByAssetSaga from './summaryByAsset/saga'
 import symbolsSaga from './symbols/saga'
 import syncSaga from './sync/saga'
-import uiSaga from './ui/saga'
+import uiSaga, { watchElectronMenuHideEvent } from './ui/saga'
 import walletsSaga from './wallets/saga'
 import winLossSaga from './winLoss/saga'
 import wsSaga from './ws/saga'
 import weightedAveragesSaga from './weightedAverages/saga'
 
-const { showFrameworkMode } = config
+const { showFrameworkMode, isElectronApp } = config
 
 export default function* rootSaga() {
   yield fork(authSaga)
@@ -101,5 +101,9 @@ export default function* rootSaga() {
     yield fork(winLossSaga)
     yield fork(profitsSaga)
     yield fork(wsSaga)
+    if (isElectronApp) {
+      // yield fork(watchElectronMenuHideEvent)
+      console.log('++watchElectronMenuHideEvent', watchElectronMenuHideEvent)
+    }
   }
 }
