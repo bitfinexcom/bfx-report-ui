@@ -1,5 +1,5 @@
 import {
-  call, take, put, select, takeLatest, takeEvery,
+  call, take, put, select, takeLatest,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
 
@@ -13,10 +13,7 @@ import { setTimeRange } from 'state/timeRange/actions'
 import timeRangeTypes from 'state/timeRange/constants'
 import handleElectronLoad from 'utils/handleElectronLoad'
 import { checkAuth, updateAuth } from 'state/auth/actions'
-import {
-  getElectronMenuConfig,
-  setElectronMenuHidden,
-} from 'state/electronMenu/actions'
+import { getElectronMenuConfig } from 'state/electronMenu/actions'
 import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 
@@ -24,32 +21,12 @@ import types from './constants'
 import selectors from './selectors'
 import { togglePaginationDialog } from './actions'
 
-export function* watchElectronMenuHideEvent() {
-  try {
-    // yield takeLatest
-    yield takeEvery(
-      () => new Promise(resolve => {
-        window.bfxReportElectronApi?.onHideMenuEvent(({ state }) => {
-          console.log('+++state', state)
-          resolve(state)
-        })
-      }),
-      function* handleElectronMenuHideEvent(state) {
-        yield put(setElectronMenuHidden(state))
-      },
-    )
-  } catch (error) {
-    console.log('+++hideState error', error)
-  }
-}
-
 function* uiLoaded() {
   if (config.isElectronApp) {
     handleElectronLoad()
     const lang = yield call(window?.bfxReportElectronApi?.getLanguage) || LANGUAGES.en
     yield put(setLang(lang))
     yield put(getElectronMenuConfig())
-    // yield fork(watchElectronMenuHideEvent)
   }
 
   const parsed = getParsedUrlParams(window.location.search)
