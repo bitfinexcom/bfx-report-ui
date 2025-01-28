@@ -8,6 +8,9 @@
   font-size: 12px;
   display: inline-flex;
   justify-content: flex-start;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 
 
   &-row {
