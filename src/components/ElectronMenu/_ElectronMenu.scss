@@ -2,7 +2,7 @@
 
 .electron-menu {
   width: 100%;
-  // min-height: 25px;
+  min-height: 25px;
   // box-shadow: 0 0 0 1px var(--borderColor);
   margin-bottom: 1px;
   font-size: 12px;
@@ -11,6 +11,10 @@
   user-select: none;
   -webkit-user-select: none;
   -webkit-app-region: drag;
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  background-color: var(--bgColor);
 
 
   &-row {
