@@ -18,7 +18,7 @@ const AccountMenu = ({
 }) => (
   <div
     className={classNames(
-      '.electron-menu-item',
+      'electron-menu-item',
     )}
   >
     <Popover
