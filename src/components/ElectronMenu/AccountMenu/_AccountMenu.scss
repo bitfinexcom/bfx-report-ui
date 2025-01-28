@@ -1,18 +1,16 @@
 .electron-menu-item {
-  min-width: 208px;
-  max-width: 375px;
   height: 25px;
   line-height: 25px;
-  user-select: none;
   cursor: pointer;
   border-left: 1px solid var(--borderColor);
+  -webkit-app-region: no-drag;
 
   &--no-email {
     min-width: initial;
   }
 
   &-wrapper {
-    height: 20px;
+    // height: 20px;
 
     .icon--chevron-up {
       display: none;
@@ -136,14 +134,6 @@
 
   .bp3-popover-content {
     border-radius: 0;
-  }
-
-  .bp3-popover-target {
-    height: 45px;
-  }
-
-  &-export, &-sync, &-query {
-    display: none;
   }
 }
 
