@@ -27,7 +27,15 @@ export function setElectronMenuHidden(state) {
   }
 }
 
+export function executeMenuCommand(id) {
+  return {
+    type: types.EXEC_MENU_COMMAND,
+    payload: id,
+  }
+}
+
 export default {
+  executeMenuCommand,
   setElectronMenuTitle,
   getElectronMenuConfig,
   setElectronMenuHidden,
