@@ -468,7 +468,7 @@ const testTemplate = [
 const initialState = {
   menuTitle: 'Bitfinex Reporting & Performance Tools',
   menuTemplate: testTemplate,
-  menuHidden: true,
+  menuHidden: false,
 }
 
 export function electronMenuReducer(state = initialState, action) {
