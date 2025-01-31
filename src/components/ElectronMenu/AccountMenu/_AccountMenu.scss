@@ -1,9 +1,8 @@
 .electron-menu-item {
-  height: 25px;
+  height: 28px;
   cursor: pointer;
-  line-height: 25px;
+  line-height: 28px;
   -webkit-app-region: no-drag;
-  // border-left: 1px solid var(--borderColor);
 
   .bp3-popover-open {
     color: var(--activeColor);
@@ -23,7 +22,7 @@
   &-username {
     vertical-align: top;
     margin: 0 3px 0 10px;
-    font-size: 1rem;
+    font-size: 13px;
     text-overflow: ellipsis;
     max-width: 287px;
     display: inline-block;
