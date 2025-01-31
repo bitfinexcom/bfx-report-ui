@@ -12,8 +12,7 @@ import types from './constants'
 import actions from './actions'
 // import selectors from './selectors'
 
-
-function* getElectronMenuConfig() {
+function* getElectronMenuConfigSaga() {
   console.log('+++ start getElectronMenuConfig+++')
   try {
     const title = yield call([window.bfxReportElectronApi, 'getTitle'])
@@ -31,6 +30,17 @@ function* getElectronMenuConfig() {
   }
 }
 
+function* executeMenuCommandSaga({ payload }) {
+  const { id } = payload
+  console.log('+++ executeMenuCommandSaga+++', payload, id)
+  try {
+    yield call([window.bfxReportElectronApi, 'execMenuCmd'], { id })
+  } catch (error) {
+    yield call(logger.error, error)
+  }
+}
+
 export default function* electronMenuSaga() {
-  yield takeLatest(types.GET_ELECTRON_MENU_CONFIG, getElectronMenuConfig)
+  yield takeLatest(types.EXEC_MENU_COMMAND, executeMenuCommandSaga)
+  yield takeLatest(types.GET_ELECTRON_MENU_CONFIG, getElectronMenuConfigSaga)
 }
