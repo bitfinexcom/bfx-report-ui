@@ -1,46 +1,13 @@
 .electron-menu-item {
   height: 25px;
-  line-height: 25px;
   cursor: pointer;
-  border-left: 1px solid var(--borderColor);
+  line-height: 25px;
   -webkit-app-region: no-drag;
+  // border-left: 1px solid var(--borderColor);
 
-  &--no-email {
-    min-width: initial;
-  }
-
-  &-wrapper {
-    // height: 20px;
-
-    .icon--chevron-up {
-      display: none;
-    }
-
-    &.bp3-active {
-      background-color: var(--bgColor2);
-      color: var(--activeColor);
-
-      svg path {
-        fill: var(--activeColor);
-      }
-
-      .icon--chevron-down {
-        display: none;
-      }
-
-      .icon--chevron-up {
-        display: inline-block;
-      }
-    }
-
-    &:hover {
-      background-color: var(--menuHover);
-      color: var(--activeColor);
-
-      svg path {
-        fill: var(--activeColor);
-      }
-    }
+  .bp3-popover-open {
+    color: var(--activeColor);
+    background-color: var(--bgColor2);
   }
 
   &-target {
