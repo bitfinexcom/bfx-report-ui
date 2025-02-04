@@ -1,20 +1,19 @@
 @import './AccountMenu/_AccountMenu.scss';
 
 .electron-menu {
+  position: sticky;
+  top: 0;
   width: 100%;
-  min-height: 28px;
+  z-index: 10;
   font-size: 13px;
+  min-height: 28px;
   display: inline-flex;
   justify-content: flex-start;
   user-select: none;
-  -webkit-user-select: none;
   -webkit-app-region: drag;
-  position: sticky;
-  z-index: 10;
-  top: 0;
+  -webkit-user-select: none;
   background-color: var(--bgColor);
-  box-shadow: 0 0 0 1px var(--borderColor);
-
+  border-bottom: 1px solid var(--borderColor);
 
   &-row {
     display: flex;
