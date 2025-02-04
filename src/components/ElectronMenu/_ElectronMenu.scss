@@ -6,7 +6,6 @@
   width: 100%;
   z-index: 10;
   font-size: 13px;
-  min-height: 28px;
   display: inline-flex;
   justify-content: flex-start;
   user-select: none;
@@ -14,6 +13,7 @@
   -webkit-user-select: none;
   background-color: var(--bgColor);
   border-bottom: 1px solid var(--borderColor);
+  min-height: env(titlebar-area-height, var(--fallback-title-bar-height));
 
   &-title {
     top: 50%;
