@@ -1,8 +1,8 @@
 .electron-menu-item {
-  height: 28px;
   cursor: pointer;
-  line-height: 28px;
   -webkit-app-region: no-drag;
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  line-height: env(titlebar-area-height, var(--fallback-title-bar-height));
 
   .bp3-popover-open {
     color: var(--activeColor);
