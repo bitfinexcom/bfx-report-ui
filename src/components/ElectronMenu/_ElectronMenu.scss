@@ -15,6 +15,13 @@
   background-color: var(--bgColor);
   border-bottom: 1px solid var(--borderColor);
 
+  &-title {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+
   &-row {
     display: flex;
   }
