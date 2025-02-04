@@ -33,6 +33,10 @@
 @import "ui/_index.scss";
 @import "themes";
 
+:root {
+  --fallback-title-bar-height: 28px;
+}
+
 html {
   font-size: 15px;
 }
