@@ -1,5 +1,3 @@
-@import './AccountMenu/_AccountMenu.scss';
-
 .electron-menu {
   position: sticky;
   top: 0;
@@ -66,40 +64,106 @@
   }
 }
 
-@media screen and (min-width: 2560px) {
-  .header {
-    height: 56px;
+.electron-menu-item {
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  line-height: env(titlebar-area-height, var(--fallback-title-bar-height));
 
-    &-brand {
-      width: 347px;
+  .bp3-popover-open {
+    color: var(--activeColor);
+    background-color: var(--bgColor2);
+  }
 
-      &-logo, .platform-logo {
-        width: 250px;
-        height: 31px;
+  &-target {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0 13px;
+  }
+
+  svg {
+    height: 20px;
+  }
+
+  &-username {
+    vertical-align: top;
+    margin: 0 3px 0 10px;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    max-width: 287px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &-content {
+    min-width: 198px;
+    color: var(--color);
+    height: fit-content;
+    background-color: var(--bgColor2);
+    border: 1px solid var(--borderColor);
+
+    .bp3-menu {
+      padding: 0;
+
+      &-item {
+        padding: 0 14px;
+        font-size: 13px;
+        border-bottom: 1px solid var(--borderColor);
+
+        svg {
+          height: 16px;
+          margin-right: 14px;
+        }
+
+        &.bp3-active {
+          color: var(--activeColor);
+          background-color: var(--menuActive);
+          border-right: 6px solid var(--menuActiveBorder);
+
+          svg path {
+            fill: var(--activeColor);
+          }
+        }
+
+        &:hover {
+          background-color: var(--menuHover);
+          color: var(--activeColor);
+
+          svg path {
+            fill: var(--activeColor);
+          }
+        }
+
+        .sync-mode, .query-mode {
+          .bp3-popover-target {
+            height: 35px;
+          }
+          &-icon {
+            height: 35px;
+
+            &-wrapper {
+              height: 35px;
+            }
+          }
+
+          &-status {
+            margin-left: 13px;
+            vertical-align: top;
+          }
+        }
+      }
+
+      li:last-child {
+        .bp3-menu-item {
+          border-bottom: none;
+        }
       }
     }
+  }
 
-    .export,
-    .sync-mode,
-    .query-mode {
-      padding: 0 20px;
-      line-height: 56px;
-
-      svg {
-        width: 28px;
-        height: 56px;
-      }
-
-      span {
-        margin-left: 14px;
-      }
-    }
-
-    .sync-mode, .query-mode {
-      .bp3-popover-target {
-        height: 56px;
-      }
-    }
+  .bp3-popover-content {
+    border-radius: 0;
   }
 }
 
