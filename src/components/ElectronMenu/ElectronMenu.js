@@ -4,7 +4,7 @@ import _map from 'lodash/map'
 
 import { getElectronMenuTitle, getElectronMenuTemplate } from 'state/electronMenu/selectors'
 
-import DropdownItem from './ElectronMenu.dropdown'
+import DropdownMenu from './ElectronMenu.dropdown'
 
 const ElectronMenu = () => {
   const menuTitle = useSelector(getElectronMenuTitle)
@@ -15,7 +15,7 @@ const ElectronMenu = () => {
   return (
     <div className='electron-menu'>
       {_map(entries, (entry, index) => (
-        <DropdownItem
+        <DropdownMenu
           key={index}
           label={entry?.label}
           items={entries[index]?.submenu}
