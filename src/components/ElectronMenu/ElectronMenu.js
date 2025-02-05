@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-// import _size from 'lodash/size'
 import _map from 'lodash/map'
 
 import { getElectronMenuTitle, getElectronMenuTemplate } from 'state/electronMenu/selectors'
@@ -17,6 +16,7 @@ const ElectronMenu = () => {
     <div className='electron-menu'>
       {_map(entries, (entry, index) => (
         <DropdownItem
+          key={index}
           label={entry?.label}
           items={entries[index]?.submenu}
         />
