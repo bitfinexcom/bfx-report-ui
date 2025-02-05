@@ -1,56 +1,53 @@
-import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useSelector, useDispatch } from 'react-redux'
 import { Radio } from '@blueprintjs/core'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
 import config from 'config'
 import { tracker } from 'utils/trackers'
+import types from 'state/base/constants'
+import { setTheme } from 'state/base/actions'
+import { getTheme } from 'state/base/selectors'
 
-import { propTypes, defaultProps } from './ThemeSwitcher.props'
+const ThemeSwitcher = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const theme = useSelector(getTheme)
 
-class ThemeSwitcher extends PureComponent {
-  static propTypes = propTypes
-
-  static defaultProps = defaultProps
-
-  switchTheme = (e) => {
+  const switchTheme = useCallback((e) => {
     const { value } = e.target
-    const { setTheme } = this.props
     tracker.trackEvent(value)
-    setTheme(value)
+    dispatch(setTheme(value))
+  }, [dispatch, tracker])
+
+  if (config.hideSwitchTheme) {
+    return null
   }
 
-  render() {
-    const { theme, t } = this.props
-
-    if (config.hideSwitchTheme) {
-      return null
-    }
-
-    return (
-      <div className='theme-switcher'>
-        <div className='theme-switcher-theme theme-switcher-theme--dark'>
-          <Icon.DARK_THEME />
-          <Radio
-            checked={theme === 'theme-dark'}
-            label={t('theme.dark')}
-            onChange={this.switchTheme}
-            value='theme-dark'
-          />
-        </div>
-
-        <div className='theme-switcher-theme theme-switcher-theme--light'>
-          <Icon.LIGHT_THEME />
-          <Radio
-            checked={theme === 'theme-light'}
-            label={t('theme.light')}
-            onChange={this.switchTheme}
-            value='theme-light'
-          />
-        </div>
+  return (
+    <div className='theme-switcher'>
+      <div className='theme-switcher-theme theme-switcher-theme--dark'>
+        <Icon.DARK_THEME />
+        <Radio
+          onChange={switchTheme}
+          label={t('theme.dark')}
+          value={types.THEME_DARK}
+          checked={isEqual(theme, types.THEME_DARK)}
+        />
       </div>
-    )
-  }
+      <div className='theme-switcher-theme theme-switcher-theme--light'>
+        <Icon.LIGHT_THEME />
+        <Radio
+          onChange={switchTheme}
+          label={t('theme.light')}
+          value={types.THEME_LIGHT}
+          checked={isEqual(theme, types.THEME_LIGHT)}
+        />
+      </div>
+    </div>
+  )
 }
 
-export default withTranslation('translations')(ThemeSwitcher)
+export default ThemeSwitcher

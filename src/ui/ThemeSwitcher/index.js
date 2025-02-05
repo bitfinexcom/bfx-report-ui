@@ -1,3 +1,1 @@
-import ThemeSwitcher from './ThemeSwitcher.container'
-
-export default ThemeSwitcher
+export { default } from './ThemeSwitcher'
