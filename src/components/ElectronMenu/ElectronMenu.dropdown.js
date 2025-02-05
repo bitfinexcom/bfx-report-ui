@@ -9,14 +9,9 @@ import {
   PopoverInteractionKind,
 } from '@blueprintjs/core'
 
-// import config from 'config'
-
 import { openHelp } from './utils'
 
-const DropdownMenu = ({
-  label,
-  items,
-}) => {
+const DropdownMenu = ({ label, items }) => {
   console.log('+++item label', label)
   console.log('+++item submenu', items)
 
@@ -73,12 +68,22 @@ const DropdownMenu = ({
 }
 
 DropdownMenu.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-    location: PropTypes.shape({
-      search: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    type: PropTypes.string,
+    label: PropTypes.string,
+    checked: PropTypes.bool,
+    enabled: PropTypes.bool,
+    visible: PropTypes.bool,
+    submenu: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+    accelerator: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  })),
+  label: PropTypes.string,
+}
+
+DropdownMenu.defaultProps = {
+  items: [],
+  label: '',
 }
 
 export default memo(DropdownMenu)
