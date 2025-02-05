@@ -40,9 +40,22 @@ const DropdownMenu = ({ label, items }) => {
                 text={'HELP'}
               />
               <MenuItem
-                onClick={openHelp}
                 text={'HELP'}
-              />
+                onClick={openHelp}
+              >
+                <MenuItem
+                  onClick={openHelp}
+                  text={'HELP2'}
+                />
+                <MenuItem
+                  onClick={openHelp}
+                  text={'HELP'}
+                />
+                <MenuItem
+                  onClick={openHelp}
+                  text={'HELP'}
+                />
+              </MenuItem>
               <MenuItem
                 onClick={openHelp}
                 text={'HELP'}
