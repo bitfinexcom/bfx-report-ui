@@ -20,150 +20,106 @@
     transform: translate(-50%, -50%);
   }
 
-  &-row {
-    display: flex;
-  }
-
-  .export,
-  .sync-mode,
-  .query-mode {
+  &-item {
     cursor: pointer;
-    height: 100%;
-    padding: 0 13px;
-    line-height: 14px;
-    user-select: none;
-    vertical-align: top;
-    display: inline-block;
-    border-left: 1px solid var(--borderColor);
-    border-right: 1px solid var(--borderColor);
-
-    svg {
-      height: 25px;
-    }
-
-    span {
-      margin-left: 10px;
-      vertical-align: top;
-    }
-
-    &:hover {
-      background-color: var(--menuHover);
+    -webkit-app-region: no-drag;
+    height: env(titlebar-area-height, var(--fallback-title-bar-height));
+    line-height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  
+    .bp3-popover-open {
       color: var(--activeColor);
-
-      svg path {
-        fill: var(--activeColor);
-      }
+      background-color: var(--bgColor2);
     }
-  }
-
-  .sync-mode, .query-mode {
-    .bp3-popover-target {
+  
+    &-target {
+      width: fit-content;
+      margin: 0 auto;
+      padding: 0 13px;
+    }
+  
+    svg {
       height: 20px;
-      margin-left: 0;
     }
-  }
-}
-
-.electron-menu-item {
-  cursor: pointer;
-  -webkit-app-region: no-drag;
-  height: env(titlebar-area-height, var(--fallback-title-bar-height));
-  line-height: env(titlebar-area-height, var(--fallback-title-bar-height));
-
-  .bp3-popover-open {
-    color: var(--activeColor);
-    background-color: var(--bgColor2);
-  }
-
-  &-target {
-    width: fit-content;
-    margin: 0 auto;
-    padding: 0 13px;
-  }
-
-  svg {
-    height: 20px;
-  }
-
-  &-username {
-    vertical-align: top;
-    margin: 0 3px 0 10px;
-    font-size: 13px;
-    text-overflow: ellipsis;
-    max-width: 287px;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-
-  &-content {
-    min-width: 198px;
-    color: var(--color);
-    height: fit-content;
-    background-color: var(--bgColor2);
-    border: 1px solid var(--borderColor);
-
-    .bp3-menu {
-      padding: 0;
-
-      &-item {
-        padding: 0 14px;
-        font-size: 13px;
-        border-bottom: 1px solid var(--borderColor);
-
-        svg {
-          height: 16px;
-          margin-right: 14px;
-        }
-
-        &.bp3-active {
-          color: var(--activeColor);
-          background-color: var(--menuActive);
-          border-right: 6px solid var(--menuActiveBorder);
-
-          svg path {
-            fill: var(--activeColor);
+  
+    &-username {
+      vertical-align: top;
+      margin: 0 3px 0 10px;
+      font-size: 13px;
+      text-overflow: ellipsis;
+      max-width: 287px;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  
+    &-content {
+      min-width: 198px;
+      color: var(--color);
+      height: fit-content;
+      background-color: var(--bgColor2);
+      border: 1px solid var(--borderColor);
+  
+      .bp3-menu {
+        padding: 0;
+  
+        &-item {
+          padding: 0 14px;
+          font-size: 13px;
+          border-bottom: 1px solid var(--borderColor);
+  
+          svg {
+            height: 16px;
+            margin-right: 14px;
           }
-        }
-
-        &:hover {
-          background-color: var(--menuHover);
-          color: var(--activeColor);
-
-          svg path {
-            fill: var(--activeColor);
-          }
-        }
-
-        .sync-mode, .query-mode {
-          .bp3-popover-target {
-            height: 35px;
-          }
-          &-icon {
-            height: 35px;
-
-            &-wrapper {
-              height: 35px;
+  
+          &.bp3-active {
+            color: var(--activeColor);
+            background-color: var(--menuActive);
+            border-right: 6px solid var(--menuActiveBorder);
+  
+            svg path {
+              fill: var(--activeColor);
             }
           }
-
-          &-status {
-            margin-left: 13px;
-            vertical-align: top;
+  
+          &:hover {
+            background-color: var(--menuHover);
+            color: var(--activeColor);
+  
+            svg path {
+              fill: var(--activeColor);
+            }
+          }
+  
+          .sync-mode, .query-mode {
+            .bp3-popover-target {
+              height: 35px;
+            }
+            &-icon {
+              height: 35px;
+  
+              &-wrapper {
+                height: 35px;
+              }
+            }
+  
+            &-status {
+              margin-left: 13px;
+              vertical-align: top;
+            }
+          }
+        }
+  
+        li:last-child {
+          .bp3-menu-item {
+            border-bottom: none;
           }
         }
       }
-
-      li:last-child {
-        .bp3-menu-item {
-          border-bottom: none;
-        }
-      }
+    }
+  
+    .bp3-popover-content {
+      border-radius: 0;
     }
   }
-
-  .bp3-popover-content {
-    border-radius: 0;
-  }
 }
-
