@@ -38,7 +38,7 @@ const DropdownMenu = ({ label, items }) => {
                 } = item
                 console.log('+++submenu', submenu)
 
-                if (isEqual(type, types.SEPARATOR)) return <MenuDivider />
+                if (isEqual(type, types.SEPARATOR)) return <MenuDivider key={index} />
 
                 return (
                   <MenuItem
