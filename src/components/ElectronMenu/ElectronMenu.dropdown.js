@@ -1,13 +1,19 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import {
   Menu,
   MenuItem,
+  MenuDivider,
   Popover,
   Position,
   PopoverInteractionKind,
 } from '@blueprintjs/core'
+import _map from 'lodash/map'
+import classNames from 'classnames'
+import { isEqual } from '@bitfinex/lib-js-util-base'
+
+import types from 'state/electronMenu/constants'
+import { executeMenuCommand } from 'state/electronMenu/actions'
 
 import { openHelp } from './utils'
 
@@ -23,50 +29,33 @@ const DropdownMenu = ({ label, items }) => {
     >
       <Popover
         minimal
+        hoverOpenDelay={0}
+        hoverCloseDelay={0}
+        targetTagName='div'
         position={Position.BOTTOM_LEFT}
+        interactionKind={PopoverInteractionKind.HOVER}
         content={(
           <div className='electron-menu-item-content'>
             <Menu>
-              <MenuItem
-                onClick={openHelp}
-                text={'HELP'}
-              />
-              <MenuItem
-                onClick={openHelp}
-                text={'HELP'}
-              />
-              <MenuItem
-                onClick={openHelp}
-                text={'HELP'}
-              />
-              <MenuItem
-                text={'HELP'}
-                onClick={openHelp}
-              >
-                <MenuItem
-                  onClick={openHelp}
-                  text={'HELP2'}
-                />
-                <MenuItem
-                  onClick={openHelp}
-                  text={'HELP'}
-                />
-                <MenuItem
-                  onClick={openHelp}
-                  text={'HELP'}
-                />
-              </MenuItem>
-              <MenuItem
-                onClick={openHelp}
-                text={'HELP'}
-              />
+              {_map(items, (item, index) => {
+                const {
+                  id, label: text, type, accelerator, enabled, submenu,
+                } = item
+
+                if (isEqual(type, types.SEPARATOR)) return <MenuDivider />
+
+                return (
+                  <MenuItem
+                    key={index}
+                    text={text}
+                    disabled={enabled}
+                    label={accelerator}
+                  />
+                )
+              })}
             </Menu>
           </div>
         )}
-        targetTagName='div'
-        hoverOpenDelay={0}
-        hoverCloseDelay={0}
-        interactionKind={PopoverInteractionKind.HOVER}
       >
         <div className='electron-menu-item-wrapper'>
           <div className='electron-menu-item-target'>
