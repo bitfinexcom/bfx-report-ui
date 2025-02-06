@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import {
   Menu,
@@ -9,24 +10,19 @@ import {
   PopoverInteractionKind,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
-import classNames from 'classnames'
+// import classNames from 'classnames'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import types from 'state/electronMenu/constants'
 import { executeMenuCommand } from 'state/electronMenu/actions'
 
-import { openHelp } from './utils'
-
 const DropdownMenu = ({ label, items }) => {
+  const dispatch = useDispatch()
   console.log('+++item label', label)
   console.log('+++item submenu', items)
 
   return (
-    <div
-      className={classNames(
-        'electron-menu-item',
-      )}
-    >
+    <div className='electron-menu-item'>
       <Popover
         minimal
         hoverOpenDelay={0}
@@ -48,8 +44,9 @@ const DropdownMenu = ({ label, items }) => {
                   <MenuItem
                     key={index}
                     text={text}
-                    disabled={enabled}
+                    disabled={!enabled}
                     label={accelerator}
+                    onClick={() => dispatch(executeMenuCommand(id))}
                   />
                 )
               })}
