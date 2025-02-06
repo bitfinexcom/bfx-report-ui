@@ -53,15 +53,16 @@
     
 
         &-divider {
-          margin: 0 5px;
+          margin: 0 12px;
           border-top: 1px solid var(--borderColor);
         }
   
         &-item {
-          padding: 4px 14px;
           font-size: 13px;
+          padding: 4px 14px;
 
           &-label {
+            margin-left: 17px;
             color: var(--color2);
           }
   
