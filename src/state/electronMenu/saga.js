@@ -31,10 +31,9 @@ function* getElectronMenuConfigSaga() {
 }
 
 function* executeMenuCommandSaga({ payload }) {
-  const { id } = payload
-  console.log('+++ executeMenuCommandSaga+++', payload, id)
+  console.log('+++ executeMenuCommandSaga+++', payload)
   try {
-    yield call([window.bfxReportElectronApi, 'execMenuCmd'], { id })
+    yield call([window.bfxReportElectronApi, 'execMenuCmd'], { id: payload })
   } catch (error) {
     yield call(logger.error, error)
   }
