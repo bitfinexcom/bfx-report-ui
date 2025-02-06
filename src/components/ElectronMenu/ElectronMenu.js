@@ -8,17 +8,17 @@ import DropdownMenu from './ElectronMenu.dropdown'
 
 const ElectronMenu = () => {
   const menuTitle = useSelector(getElectronMenuTitle)
-  const entries = useSelector(getElectronMenuTemplate)
+  const items = useSelector(getElectronMenuTemplate)
 
-  console.log('+++entries', entries)
+  console.log('+++entries', items)
 
   return (
     <div className='electron-menu'>
-      {_map(entries, (entry, index) => (
+      {_map(items, ({ label, submenu }, index) => (
         <DropdownMenu
           key={index}
-          label={entry?.label}
-          items={entries[index]?.submenu}
+          label={label}
+          items={submenu}
         />
       ))}
       <div className='electron-menu-title'>
