@@ -120,3 +120,9 @@
     }
   }
 }
+
+@media (max-width: 900px) {
+  .electron-menu-title {
+    display: none;
+  }
+}
