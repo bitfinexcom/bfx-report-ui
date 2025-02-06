@@ -10,7 +10,6 @@ import {
   PopoverInteractionKind,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
-// import classNames from 'classnames'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import types from 'state/electronMenu/constants'
@@ -37,6 +36,7 @@ const DropdownMenu = ({ label, items }) => {
                 const {
                   id, label: text, type, accelerator, enabled, submenu,
                 } = item
+                console.log('+++submenu', submenu)
 
                 if (isEqual(type, types.SEPARATOR)) return <MenuDivider />
 
