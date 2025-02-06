@@ -61,11 +61,18 @@
   
       .bp3-menu {
         padding: 0;
+
+        &-divider {
+          border-top: 1px solid var(--borderColor);
+        }
   
         &-item {
-          padding: 0 14px;
+          padding: 5px 14px;
           font-size: 13px;
-          border-bottom: 1px solid var(--borderColor);
+
+          &-label {
+            color: var(--color2);
+          }
   
           svg {
             height: 16px;
