@@ -8,4 +8,6 @@ export default {
   ENABLED: 'enabled',
   VISIBLE: 'visible',
   CHECKED: 'checked',
+  SUBMENU: 'submenu',
+  SEPARATOR: 'separator',
 }
