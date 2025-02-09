@@ -20,6 +20,7 @@ const SubMenu = ({ label, items }) => {
             text={text}
             disabled={!enabled}
             label={accelerator}
+            className='submenu-item'
             onClick={() => dispatch(executeMenuCommand(id))}
           />
         ))}
