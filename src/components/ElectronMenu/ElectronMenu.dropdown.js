@@ -32,17 +32,16 @@ const DropdownMenu = ({ label, items }) => {
         content={(
           <div className='electron-menu-item-content'>
             <Menu>
-              {_map(items, (item, index) => {
-                const {
-                  id, label: text, type, accelerator, enabled, submenu,
-                } = item
+              {_map(items, ({
+                id, label: itemLabel, type, accelerator, enabled, submenu,
+              }, index) => {
                 if (isEqual(type, types.SEPARATOR)) return <MenuDivider key={index} />
-                if (isEqual(type, types.SUBMENU)) return <SubMenu key={index} label={text} items={submenu} />
+                if (isEqual(type, types.SUBMENU)) return <SubMenu key={index} label={itemLabel} items={submenu} />
 
                 return (
                   <MenuItem
                     key={index}
-                    text={text}
+                    text={itemLabel}
                     disabled={!enabled}
                     label={accelerator}
                     onClick={() => dispatch(executeMenuCommand(id))}
@@ -70,9 +69,7 @@ DropdownMenu.propTypes = {
     id: PropTypes.string,
     type: PropTypes.string,
     label: PropTypes.string,
-    checked: PropTypes.bool,
     enabled: PropTypes.bool,
-    visible: PropTypes.bool,
     submenu: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
     accelerator: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   })),
