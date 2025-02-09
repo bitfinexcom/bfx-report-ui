@@ -15,10 +15,10 @@ import { isEqual } from '@bitfinex/lib-js-util-base'
 import types from 'state/electronMenu/constants'
 import { executeMenuCommand } from 'state/electronMenu/actions'
 
+import SubMenu from './ElectronMenu.submenu'
+
 const DropdownMenu = ({ label, items }) => {
   const dispatch = useDispatch()
-  console.log('+++item label', label)
-  console.log('+++item submenu', items)
 
   return (
     <div className='electron-menu-item'>
@@ -36,9 +36,8 @@ const DropdownMenu = ({ label, items }) => {
                 const {
                   id, label: text, type, accelerator, enabled, submenu,
                 } = item
-                console.log('+++submenu', submenu)
-
                 if (isEqual(type, types.SEPARATOR)) return <MenuDivider key={index} />
+                if (isEqual(type, types.SUBMENU)) return <SubMenu key={index} label={text} items={submenu} />
 
                 return (
                   <MenuItem
