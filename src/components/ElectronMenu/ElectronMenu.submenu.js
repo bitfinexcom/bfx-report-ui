@@ -13,11 +13,11 @@ const SubMenu = ({ label, items }) => {
     <div className='electron-menu-submenu'>
       <MenuItem text={label}>
         {_map(items, ({
-          id, label: text, accelerator, enabled,
+          id, label: itemLabel, accelerator, enabled,
         }, index) => (
           <MenuItem
             key={index}
-            text={text}
+            text={itemLabel}
             disabled={!enabled}
             label={accelerator}
             className='submenu-item'
