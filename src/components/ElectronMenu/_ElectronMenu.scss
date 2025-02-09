@@ -60,6 +60,7 @@
         &-item {
           font-size: 13px;
           padding: 4px 14px;
+          background-color: var(--bgColor2);
 
           &-label {
             margin-left: 17px;
@@ -68,7 +69,6 @@
   
           svg {
             height: 16px;
-            margin-right: 14px;
           }
   
           &.bp3-active {
@@ -89,24 +89,6 @@
               fill: var(--activeColor);
             }
           }
-  
-          .sync-mode, .query-mode {
-            .bp3-popover-target {
-              height: 35px;
-            }
-            &-icon {
-              height: 35px;
-  
-              &-wrapper {
-                height: 35px;
-              }
-            }
-  
-            &-status {
-              margin-left: 13px;
-              vertical-align: top;
-            }
-          }
         }
   
         li:last-child {
@@ -119,6 +101,43 @@
   
     .bp3-popover-content {
       border-radius: 0;
+    }
+  }
+
+  &-submenu {
+    background-color: var(--bgColor2);
+
+    .bp3-popover-target.bp3-popover-open {
+       > .bp3-menu-item {
+        color: var(--activeColor);
+        background-color:  var(--bgColor2);
+
+        svg path {
+          fill: var(--activeColor);
+        }
+
+        &:hover,
+        &:active {
+          color: var(--activeColor);
+          background-color:  var(--menuHover);
+        }
+        }
+
+        .submenu-item {
+          color: var(--color);
+          height: fit-content;
+          background-color: var(--bgColor2);
+        }
+    
+        &.bp3-active, 
+        .bp3-popover-open {
+          color: var(--activeColor);
+          background-color: var(--menuActive);
+        }
+    
+        .bp3-overlay-open {
+          background-color: var(--bgColor2);
+        }
     }
   }
 }
