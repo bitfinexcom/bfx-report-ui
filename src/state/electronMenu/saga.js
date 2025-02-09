@@ -13,7 +13,6 @@ import actions from './actions'
 // import selectors from './selectors'
 
 function* getElectronMenuConfigSaga() {
-  console.log('+++ start getElectronMenuConfig+++')
   try {
     const title = yield call([window.bfxReportElectronApi, 'getTitle'])
     const { menuTemplate, shouldMenuBeHidden } = yield call([window.bfxReportElectronApi, 'getMenuTemplate'])
