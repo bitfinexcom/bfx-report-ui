@@ -7,7 +7,7 @@ import {
   MenuDivider,
   Popover,
   Position,
-  PopoverInteractionKind,
+  // PopoverInteractionKind,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
 import { isEqual } from '@bitfinex/lib-js-util-base'
@@ -28,7 +28,7 @@ const DropdownMenu = ({ label, items }) => {
         hoverCloseDelay={0}
         targetTagName='div'
         position={Position.BOTTOM_LEFT}
-        interactionKind={PopoverInteractionKind.HOVER}
+        // interactionKind={PopoverInteractionKind.HOVER}
         content={(
           <div className='electron-menu-item-content'>
             <Menu>
