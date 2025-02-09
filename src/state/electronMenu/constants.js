@@ -5,9 +5,6 @@ export default {
   SET_ELECTRON_MENU_HIDDEN: 'BITFINEX/ELECTRON/MENU_HIDDEN/SET',
   EXEC_MENU_COMMAND: 'BITFINEX/ELECTRON/MENU/COMMAND/EXECUTE',
 
-  ENABLED: 'enabled',
-  VISIBLE: 'visible',
-  CHECKED: 'checked',
   SUBMENU: 'submenu',
   SEPARATOR: 'separator',
 }
