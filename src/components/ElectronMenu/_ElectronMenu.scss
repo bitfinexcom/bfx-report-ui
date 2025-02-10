@@ -26,6 +26,10 @@
     height: env(titlebar-area-height, var(--fallback-title-bar-height));
     line-height: env(titlebar-area-height, var(--fallback-title-bar-height));
 
+    &:hover {
+      color: var(--activeColor);
+    }
+
     .bp3-popover-open {
       color: var(--activeColor);
       background-color: var(--bgColor2);
