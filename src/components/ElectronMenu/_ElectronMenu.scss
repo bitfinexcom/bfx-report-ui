@@ -21,11 +21,11 @@
   }
 
   &-item {
-    cursor: pointer;
+    cursor: pointer !important;
     -webkit-app-region: no-drag;
     height: env(titlebar-area-height, var(--fallback-title-bar-height));
     line-height: env(titlebar-area-height, var(--fallback-title-bar-height));
-  
+
     .bp3-popover-open {
       color: var(--activeColor);
       background-color: var(--bgColor2);
@@ -36,11 +36,7 @@
       margin: 0 auto;
       padding: 0 13px;
     }
-  
-    svg {
-      height: 20px;
-    }
-    
+
     &-content {
       color: var(--color);
       height: fit-content;
@@ -50,7 +46,6 @@
       .bp3-menu {
         padding: 0;
         min-width: 120px;
-    
 
         &-divider {
           margin: 0 12px;
@@ -66,39 +61,25 @@
             margin-left: 17px;
             color: var(--color2);
           }
-  
-          svg {
-            height: 16px;
-          }
-  
+
           &.bp3-active {
             color: var(--activeColor);
             background-color: var(--menuActive);
             border-right: 6px solid var(--menuActiveBorder);
-  
-            svg path {
-              fill: var(--activeColor);
-            }
           }
-  
+
           &:hover {
-            background-color: var(--menuHover);
             color: var(--activeColor);
-  
+            background-color: var(--menuHover);
+
             svg path {
               fill: var(--activeColor);
             }
-          }
-        }
-  
-        li:last-child {
-          .bp3-menu-item {
-            border-bottom: none;
           }
         }
       }
     }
-  
+
     .bp3-popover-content {
       border-radius: 0;
     }
@@ -112,15 +93,15 @@
         color: var(--activeColor);
         background-color:  var(--bgColor2);
 
-        svg path {
-          fill: var(--activeColor);
-        }
+          svg path {
+            fill: var(--activeColor);
+          }
 
-        &:hover,
-        &:active {
-          color: var(--activeColor);
-          background-color:  var(--menuHover);
-        }
+          &:hover,
+          &:active {
+            color: var(--activeColor);
+            background-color:  var(--menuHover);
+          }
         }
 
         .submenu-item {
@@ -128,16 +109,16 @@
           height: fit-content;
           background-color: var(--bgColor2);
         }
-    
-        &.bp3-active, 
+
+        &.bp3-active,
         .bp3-popover-open {
           color: var(--activeColor);
           background-color: var(--menuActive);
         }
-    
+
         .bp3-overlay-open {
           background-color: var(--bgColor2);
-        }
+      }
     }
   }
 }
