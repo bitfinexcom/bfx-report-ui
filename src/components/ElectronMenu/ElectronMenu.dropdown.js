@@ -3,11 +3,10 @@ import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import {
   Menu,
-  MenuItem,
-  MenuDivider,
   Popover,
   Position,
-  // PopoverInteractionKind,
+  MenuItem,
+  MenuDivider,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
 import { isEqual } from '@bitfinex/lib-js-util-base'
@@ -24,11 +23,8 @@ const DropdownMenu = ({ label, items }) => {
     <div className='electron-menu-item'>
       <Popover
         minimal
-        hoverOpenDelay={0}
-        hoverCloseDelay={0}
         targetTagName='div'
         position={Position.BOTTOM_LEFT}
-        // interactionKind={PopoverInteractionKind.HOVER}
         content={(
           <div className='electron-menu-item-content'>
             <Menu>
