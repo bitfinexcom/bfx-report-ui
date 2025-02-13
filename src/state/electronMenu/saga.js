@@ -1,25 +1,18 @@
 import {
   put,
   call,
-  // select,
   takeLatest,
 } from 'redux-saga/effects'
 
-// import config from 'config'
 import { logger } from 'utils/logger'
 
 import types from './constants'
 import actions from './actions'
-// import selectors from './selectors'
 
 function* getElectronMenuConfigSaga() {
   try {
     const title = yield call([window.bfxReportElectronApi, 'getTitle'])
     const { menuTemplate, shouldMenuBeHidden } = yield call([window.bfxReportElectronApi, 'getMenuTemplate'])
-
-    console.log('+++ title +++', title)
-    console.log('+++ menuTemplate +++', menuTemplate)
-    console.log('+++ shouldMenuBeHidden +++', shouldMenuBeHidden)
 
     yield put(actions.setElectronMenuTitle(title))
     yield put(actions.setElectronMenuTemplate(menuTemplate))
@@ -30,7 +23,6 @@ function* getElectronMenuConfigSaga() {
 }
 
 function* executeMenuCommandSaga({ payload }) {
-  console.log('+++ executeMenuCommandSaga+++', payload)
   try {
     yield call([window.bfxReportElectronApi, 'execMenuCmd'], { id: payload })
   } catch (error) {
