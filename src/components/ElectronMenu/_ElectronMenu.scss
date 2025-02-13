@@ -5,7 +5,6 @@
   z-index: 10;
   font-size: 13px;
   display: flex;
-  padding-left: 6px;
   justify-content: flex-start;
   user-select: none;
   -webkit-app-region: drag;
@@ -32,7 +31,7 @@
 
     .bp3-popover-open {
       color: var(--activeColor);
-      background-color: var(--bgColor2);
+      background-color: var(--bgColor);
     }
   
     &-target {
