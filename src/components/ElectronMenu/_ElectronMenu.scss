@@ -10,8 +10,7 @@
   user-select: none;
   -webkit-app-region: drag;
   -webkit-user-select: none;
-  background-color: var(--bgColor);
-  border-bottom: 1px solid var(--borderColor);
+  background-color: var(--bgColor2);
   min-height: env(titlebar-area-height, var(--fallback-title-bar-height));
 
   &-title {
