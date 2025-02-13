@@ -13,7 +13,6 @@ import { setTimeRange } from 'state/timeRange/actions'
 import timeRangeTypes from 'state/timeRange/constants'
 import handleElectronLoad from 'utils/handleElectronLoad'
 import { checkAuth, updateAuth } from 'state/auth/actions'
-import { getElectronMenuConfig } from 'state/electronMenu/actions'
 import { getNewTheme, getThemeClass, verifyTheme } from 'utils/themes'
 import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/utils'
 
@@ -26,7 +25,6 @@ function* uiLoaded() {
     handleElectronLoad()
     const lang = yield call(window?.bfxReportElectronApi?.getLanguage) || LANGUAGES.en
     yield put(setLang(lang))
-    yield put(getElectronMenuConfig())
   }
 
   const parsed = getParsedUrlParams(window.location.search)
