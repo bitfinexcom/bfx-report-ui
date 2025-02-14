@@ -12,6 +12,7 @@
 @import "components/AppSummary/_AppSummary.scss";
 @import "components/Candles/_Candles.scss";
 @import "components/ConcentrationRisk/_ConcentrationRisk.scss";
+@import "components/ElectronMenu/_ElectronMenu.scss";
 @import "components/ErrorDialog/_ErrorDialog.scss";
 @import "components/ExportDialog/_ExportDialog.scss";
 @import "components/ExportSuccessDialog/_ExportSuccessDialog.scss";
@@ -31,6 +32,10 @@
 @import "icons/_icons.scss";
 @import "ui/_index.scss";
 @import "themes";
+
+:root {
+  --fallback-title-bar-height: 28px;
+}
 
 html {
   font-size: 15px;
@@ -100,6 +105,11 @@ input[type=number] {
   .bp3-overlay-inline .bp3-overlay-backdrop {
     position: fixed;
   }
+}
+
+.bp3-submenu.bp3-popover {
+  padding: 0;
+  border: 1px solid var(--borderColor);
 }
 
 .nav-menu {

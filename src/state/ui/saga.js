@@ -20,7 +20,6 @@ import types from './constants'
 import selectors from './selectors'
 import { togglePaginationDialog } from './actions'
 
-
 function* uiLoaded() {
   if (config.isElectronApp) {
     handleElectronLoad()
