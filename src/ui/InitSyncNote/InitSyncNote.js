@@ -5,8 +5,8 @@ export const InitSyncNote = () => {
   const { t } = useTranslation()
 
   return (
-    <div className='sync-note-container'>
-      <div className='sync-note'>
+    <div className='init-sync-note-container'>
+      <div className='init-sync-note'>
         <p>{t('sync.init-sync-info.note_1')}</p>
         <p>{t('sync.init-sync-info.note_2')}</p>
       </div>
