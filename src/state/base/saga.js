@@ -11,6 +11,7 @@ import config from 'config'
 import { makeFetchCall } from 'state/utils'
 import i18n, { LANGUAGES } from 'locales/i18n'
 import { updateErrorStatus } from 'state/status/actions'
+import { getElectronMenuConfig } from 'state/electronMenu/actions'
 
 import types from './constants'
 import { setTimezone } from './actions'
@@ -44,6 +45,7 @@ function* updateElectronLang({ payload }) {
   try {
     if (!isElectronApp) return
     yield call(window?.bfxReportElectronApi?.setLanguage, { language: payload })
+    yield put(getElectronMenuConfig())
   } catch (error) {
     yield put(updateErrorStatus({
       id: 'status.fail',

@@ -1,6 +1,8 @@
 export default {
   MENU_MODE_ICON: 'icon',
   MENU_MODE_NORMAL: 'normal',
+  THEME_DARK: 'theme-dark',
+  THEME_LIGHT: 'theme-light',
   DATE_FORMATS: [
     'DD-MM-YY',
     'DD-MM-YYYY',
