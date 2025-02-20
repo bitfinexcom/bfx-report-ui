@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 
 import Icon from 'icons'
 
-const NoData = (props) => {
-  const { refresh, title } = props
+const NoData = ({ refresh, title }) => {
   const { t } = useTranslation()
 
   return (
@@ -39,4 +38,4 @@ NoData.defaultProps = {
   title: 'nodata',
 }
 
-export default NoData
+export default memo(NoData)
