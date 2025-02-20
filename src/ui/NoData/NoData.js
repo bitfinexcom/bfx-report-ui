@@ -12,12 +12,12 @@ const NoData = (props) => {
     <div className='no-data'>
       <div className='no-data-wrapper'>
         <Icon.WARNING />
-        <div>{t(title || 'nodata')}</div>
+        <div>{t(title)}</div>
         {refresh && (
           <Button
             onClick={refresh}
-            className='no-data-update button--large'
             intent={Intent.PRIMARY}
+            className='no-data-update button--large'
           >
             {t('update')}
           </Button>
@@ -34,8 +34,8 @@ NoData.propTypes = {
 }
 
 NoData.defaultProps = {
-  title: null,
-  refresh: () => {},
+  refresh: null,
+  title: 'nodata',
 }
 
 export default withTranslation('translations')(NoData)
