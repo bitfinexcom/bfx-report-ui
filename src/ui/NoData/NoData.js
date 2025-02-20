@@ -1,10 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 
 import Icon from 'icons'
-
-import { propTypes, defaultProps } from './NoData.props'
 
 const NoData = (props) => {
   const { refresh, t, title } = props
@@ -28,7 +27,15 @@ const NoData = (props) => {
   )
 }
 
-NoData.propTypes = propTypes
-NoData.defaultProps = defaultProps
+NoData.propTypes = {
+  title: PropTypes.string,
+  refresh: PropTypes.func,
+  t: PropTypes.func.isRequired,
+}
+
+NoData.defaultProps = {
+  title: null,
+  refresh: () => {},
+}
 
 export default withTranslation('translations')(NoData)
