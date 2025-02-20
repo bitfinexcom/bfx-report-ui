@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 
 import Icon from 'icons'
 
 const NoData = (props) => {
-  const { refresh, t, title } = props
+  const { refresh, title } = props
+  const { t } = useTranslation()
 
   return (
     <div className='no-data'>
@@ -38,4 +39,4 @@ NoData.defaultProps = {
   title: 'nodata',
 }
 
-export default withTranslation('translations')(NoData)
+export default NoData
