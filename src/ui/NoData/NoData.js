@@ -30,7 +30,6 @@ const NoData = ({ refresh, title }) => {
 NoData.propTypes = {
   title: PropTypes.string,
   refresh: PropTypes.func,
-  t: PropTypes.func.isRequired,
 }
 
 NoData.defaultProps = {
