@@ -100,7 +100,6 @@
     "rememberMe": "Lembrar",
     "required": "(obrigatório)",
     "nonideal": {
-      "title": "Reports 2.0",
       "description": "Login no Reports com token..."
     }
   },

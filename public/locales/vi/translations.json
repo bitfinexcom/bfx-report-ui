@@ -100,7 +100,6 @@
     "rememberMe": "Nhớ mật khẩu",
     "required": "(bắt buộc)",
     "nonideal": {
-      "title": "Báo cáo 2.0",
       "description": "Đăng nhập vào Báo cáo bằng token..."
     }
   },

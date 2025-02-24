@@ -100,7 +100,6 @@
     "rememberMe": "Beni Hatırla",
     "required": "(gerekli)",
     "nonideal": {
-      "title": "Raporlar 2.0",
       "description": "Raporlar'a token ile giriş yapın..."
     }
   },
