@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
@@ -15,6 +16,7 @@ import Icon from 'icons'
 import config from 'config'
 import { tracker } from 'utils/trackers'
 import { getPath } from 'state/query/utils'
+import { getAuthData } from 'state/auth/selectors'
 import queryConstants from 'state/query/constants'
 
 import SyncMode from '../SyncMode'
@@ -45,6 +47,7 @@ const AccountMenu = ({
   toggleExportDialog,
   isSubAccsAvailable,
 }) => {
+  const { hasAuthData } = useSelector(getAuthData)
   const showSubAccounts = showFrameworkMode && isSubAccsAvailable
 
   const onLogout = () => {
@@ -71,6 +74,7 @@ const AccountMenu = ({
     >
       <Popover
         minimal
+        disabled={!hasAuthData}
         position={Position.BOTTOM_LEFT}
         content={(
           <div className='account-menu-content'>
