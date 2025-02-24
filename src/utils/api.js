@@ -31,7 +31,7 @@ export const getIpInfo = (ip) => pubApi({
   },
 })
 
-const clearAuthToken = () => {
+export const clearAuthToken = () => {
   removeCookie(BFX_TOKEN_COOKIE)
   removeCookie(BFX_SUBACCOUNT_COOKIE)
   removeCookie(BFX_TOKEN_COOKIE_TIMESTAMP)
