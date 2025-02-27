@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 
 import { initSync } from 'state/sync/saga'
+import { makeFetchCall } from 'state/utils'
 import { authExpired } from 'state/auth/actions'
 import { updateSyncStatus } from 'state/sync/actions'
 import { setIsReportExporting } from 'state/query/actions'
@@ -14,6 +15,8 @@ import {
 
 import types from './constants'
 import login from './signIn'
+
+const fetchSyncProgress = () => makeFetchCall('getSyncProgress')
 
 function* reconnect() {
   const wsAuth = yield call(login)
