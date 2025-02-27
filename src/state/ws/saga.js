@@ -13,6 +13,8 @@ import {
   toggleExportSuccessDialog,
 } from 'state/ui/actions'
 
+import syncTypes from 'state/sync/constants'
+
 import types from './constants'
 import login from './signIn'
 
@@ -36,6 +38,11 @@ function* notifyNetResumed() {
 
 function* handleTokenAuthRequired() {
   yield put(authExpired())
+}
+
+function* checkSyncState() {
+  const { result: { state } } = yield call(fetchSyncProgress)
+  
 }
 
 function* handleReportGenerationCompleted() {
