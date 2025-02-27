@@ -1,24 +1,39 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import { initSync } from 'state/sync/saga'
 import { makeFetchCall } from 'state/utils'
 import { authExpired } from 'state/auth/actions'
-import { updateSyncStatus } from 'state/sync/actions'
-import { setIsReportExporting } from 'state/query/actions'
-import { updateStatus, updateWarningStatus } from 'state/status/actions'
+import {
+  setIsSyncing,
+  updateSyncStatus,
+  showInitSyncPopup,
+  setIsSyncRequired,
+} from 'state/sync/actions'
+
 import {
   toggleExportDialog,
   showMaintenanceModal,
   toggleExportFailDialog,
   toggleExportSuccessDialog,
 } from 'state/ui/actions'
-
 import syncTypes from 'state/sync/constants'
+import { setIsReportExporting } from 'state/query/actions'
+import { updateStatus, updateWarningStatus } from 'state/status/actions'
 
 import types from './constants'
 import login from './signIn'
 
 const fetchSyncProgress = () => makeFetchCall('getSyncProgress')
+
+function* checkSyncState() {
+  const { result: { state } } = yield call(fetchSyncProgress)
+  if (!isEqual(state, syncTypes.SYNC_STARTED)) {
+    yield put(setIsSyncing(false))
+    yield put(setIsSyncRequired(false))
+    yield put(showInitSyncPopup(false))
+  }
+}
 
 function* reconnect() {
   const wsAuth = yield call(login)
@@ -34,15 +49,11 @@ function* notifyNetError() {
 
 function* notifyNetResumed() {
   yield put(updateStatus({ id: 'status.netResumed' }))
+  yield call(checkSyncState)
 }
 
 function* handleTokenAuthRequired() {
   yield put(authExpired())
-}
-
-function* checkSyncState() {
-  const { result: { state } } = yield call(fetchSyncProgress)
-  
 }
 
 function* handleReportGenerationCompleted() {
