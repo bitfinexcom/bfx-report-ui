@@ -15,6 +15,14 @@ const preparePair = (pair) => {
   return pair
 }
 
+const prepareTestPair = (pair) => {
+  const [firstSymbol, secondSymbol] = _split(pair, ':')
+  if (firstSymbol.endsWith('(Test)')) {
+    return _join([`TEST${firstSymbol.replace(' (Test)', '')}`, secondSymbol.replace('TEST', '(Test)')], ':')
+  }
+  return pair
+}
+
 // BAB -> BCH
 export const mapSymbol = symbol => SymbolMap.symbols[symbol] || symbol
 
