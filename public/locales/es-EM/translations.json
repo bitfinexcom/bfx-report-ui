@@ -100,7 +100,6 @@
     "rememberMe": "Recuérdame",
     "required": "(obligatorio)",
     "nonideal": {
-      "title": "Reportes 2.0",
       "description": "Iniciar sesión de Reportes con token..."
     }
   },

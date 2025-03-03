@@ -1,6 +1,13 @@
 import axios from 'axios'
 
-import { corsProxyUrl } from '../var/platform'
+import {
+  corsProxyUrl,
+  BFX_TOKEN_COOKIE,
+  BFX_SUBACCOUNT_COOKIE,
+  BFX_TOKEN_COOKIE_TIMESTAMP,
+} from '../var/platform'
+
+import { removeCookie } from './browser'
 
 const DEFAULT_REQUEST_HEADERS = {
   Accept: '*/*',
@@ -23,3 +30,9 @@ export const getIpInfo = (ip) => pubApi({
     ip,
   },
 })
+
+export const clearAuthToken = () => {
+  removeCookie(BFX_TOKEN_COOKIE)
+  removeCookie(BFX_SUBACCOUNT_COOKIE)
+  removeCookie(BFX_TOKEN_COOKIE_TIMESTAMP)
+}

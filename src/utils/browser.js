@@ -21,4 +21,8 @@ export const setCookie = (key, value, opts) => {
   cookie.set(key, value, { ...defaultCookieOpts, ...opts })
 }
 
+export const removeCookie = (key, opts) => {
+  cookie.remove(key, { ...defaultCookieOpts, ...opts })
+}
+
 export const getSourceFromPathName = () => window?.location?.pathname?.slice(1) ?? ''

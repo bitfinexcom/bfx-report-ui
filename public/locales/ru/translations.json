@@ -100,7 +100,6 @@
     "rememberMe": "Запомнить меня",
     "required": "(обязательно)",
     "nonideal": {
-      "title": "Reports 2.0",
       "description": "Войти в Reports по токену..."
     }
   },
