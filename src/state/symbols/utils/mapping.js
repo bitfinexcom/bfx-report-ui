@@ -71,9 +71,7 @@ export const demapPairs = (pairs, returnString = false) => {
     if (SymbolMap.pairsDemap[pair]) {
       return SymbolMap.pairsDemap[pair]
     }
-    console.log('+++pair', pair)
     const preparedPair = isTestSymbol(pair) ? prepareTestPair(pair) : preparePair(pair)
-    console.log('+++preparedPair', preparedPair)
     return demapSymbols(preparedPair.split(':')).join(':')
   })
 
