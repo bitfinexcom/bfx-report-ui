@@ -187,8 +187,6 @@ function* syncLogout() {
 }
 
 function* initQueryMode() {
-  const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
-  yield put(actions.setIsSyncRequired(!isNotSyncRequired))
   const { result, error } = yield call(isSyncModeWithDbData)
 
   if (result) {
@@ -208,6 +206,8 @@ export function* initSync() {
     yield put(actions.setIsSyncing(false))
     yield call(startSyncing)
   } else {
+    const { result: isNotSyncRequired } = yield call(haveCollsBeenSyncedAtLeastOnce)
+    yield put(actions.setIsSyncRequired(!isNotSyncRequired))
     yield put(actions.setIsSyncing(true))
     const isSyncing = Number.isInteger(progress) && progress !== 100
     if (isSyncing) {
