@@ -59,10 +59,6 @@ export function symbolsReducer(state = initialState, action) {
           return
         }
 
-        if (_isEqual(symbol, id) && _includes(id, 'F0')) {
-          symbol = _replace(symbol, 'F0', ' (deriv)')
-        }
-
         if (symbol && id !== symbol) {
           if (id.includes('TEST')) {
             symbol = `${symbol} (Test)`
@@ -76,13 +72,18 @@ export function symbolsReducer(state = initialState, action) {
           dict[symbol] = name
           coins.push(symbol)
           if (isFunding) fundingCoins.push(symbol)
-          return
+        } else if (_includes(id, 'F0')) {
+          symbol = _replace(symbol, 'F0', ' (deriv)')
+          symbolMapping[id] = symbol
+          explorersDict[symbol] = explorer
+          dict[symbol] = name
+          coins.push(symbol)
+        } else {
+          explorersDict[id] = explorer
+          dict[id] = name
+          coins.push(id)
+          if (isFunding) fundingCoins.push(id)
         }
-
-        explorersDict[id] = explorer
-        dict[id] = name
-        coins.push(id)
-        if (isFunding) fundingCoins.push(id)
       })
 
       const preparedCoins = [...new Set(coins)].sort()
