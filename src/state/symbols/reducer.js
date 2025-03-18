@@ -6,7 +6,6 @@ import _map from 'lodash/map'
 import _join from 'lodash/join'
 import _split from 'lodash/split'
 import _reduce from 'lodash/reduce'
-import _isEqual from 'lodash/isEqual'
 import _replace from 'lodash/replace'
 import _includes from 'lodash/includes'
 
