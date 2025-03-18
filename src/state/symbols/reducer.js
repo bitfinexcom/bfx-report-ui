@@ -71,7 +71,7 @@ export function symbolsReducer(state = initialState, action) {
           dict[symbol] = name
           coins.push(symbol)
           if (isFunding) fundingCoins.push(symbol)
-        } else if (_includes(id, 'F0')) {
+        } else if (_includes(symbol, 'F0')) {
           symbol = _replace(symbol, 'F0', ' (deriv)')
           symbolMapping[id] = symbol
           explorersDict[symbol] = explorer
