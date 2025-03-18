@@ -60,7 +60,7 @@ export function symbolsReducer(state = initialState, action) {
         }
 
         if (_isEqual(symbol, id) && _includes(id, 'F0')) {
-          _replace(symbol, 'F0', ' (deriv)')
+          symbol = _replace(symbol, 'F0', ' (deriv)')
         }
 
         if (symbol && id !== symbol) {
