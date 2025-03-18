@@ -762,7 +762,9 @@
       "margin_funding_payment": "Margin funding payment",
       "affiliate_rebate": "Affiliate rebate",
       "staking_payment": "Staking payment",
-      "exchange": "Exchange"
+      "exchange": "Exchange",
+      "margin_trading": "Margin trading",
+      "derivative": "Derivative" 
     },
     "disclaimer": {
       "title": "Disclaimer",
