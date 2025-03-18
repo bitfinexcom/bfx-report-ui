@@ -841,7 +841,8 @@
       "exchange": "Exchange",
       "margin": "Margin",
       "funding": "Funding",
-      "token-sales": "Token Sales"
+      "token-sales": "Token Sales",
+      "credit-line": "Credit Line"
     },
     "nodata": "No related data in this date time. You can try another date time.",
     "query": {
