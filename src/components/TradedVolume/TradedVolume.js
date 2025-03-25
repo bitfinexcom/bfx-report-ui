@@ -15,6 +15,7 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
+import InitSyncNote from 'ui/InitSyncNote'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import MultiPairSelector from 'ui/MultiPairSelector'
@@ -57,6 +58,7 @@ class TradedVolume extends PureComponent {
       targetPairs,
       pageLoading,
       dataReceived,
+      isFirstSyncing,
       params: { timeframe },
     } = this.props
 
@@ -66,7 +68,9 @@ class TradedVolume extends PureComponent {
     })
 
     let showContent
-    if (!dataReceived && pageLoading) {
+    if (isFirstSyncing) {
+      showContent = <InitSyncNote />
+    } else if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (isEmpty(entries)) {
       showContent = <NoData />
@@ -115,7 +119,10 @@ class TradedVolume extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
+            <RefreshButton
+              onClick={refresh}
+              disabled={isFirstSyncing}
+            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
