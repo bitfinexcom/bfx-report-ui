@@ -100,7 +100,6 @@
     "rememberMe": "自动储存",
     "required": "(必需)",
     "nonideal": {
-      "title": "Reports 2.0",
       "description": "使用令牌登录 Reports…"
     }
   },

@@ -111,7 +111,6 @@ class Auth extends PureComponent {
         <NonIdealState
           className='bitfinex-nonideal'
           icon={IconNames.KEY}
-          title={t('auth.nonideal.title')}
           description={t('auth.nonideal.description')}
         />
       )

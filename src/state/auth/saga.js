@@ -21,6 +21,7 @@ import {
   getLoginToken,
   getUserShouldReLogin,
 } from 'state/auth/selectors'
+import { clearAuthToken } from 'utils/api'
 import {
   formatAuthDate, makeFetchCall, makePublicFetchCall,
 } from 'state/utils'
@@ -499,6 +500,7 @@ function* logout() {
     yield put(setIsSyncRequired(true))
   } else {
     yield put(actions.clearAuth())
+    yield call(clearAuthToken)
   }
 }
 

@@ -15,6 +15,14 @@ const preparePair = (pair) => {
   return pair
 }
 
+const prepareTestPair = (pair) => {
+  const [firstSymbol, secondSymbol] = _split(pair, ':')
+  if (firstSymbol.endsWith('(Test)')) {
+    return _join([`TEST${firstSymbol.replace(' (Test)', '')}`, secondSymbol], ':')
+  }
+  return pair
+}
+
 // BAB -> BCH
 export const mapSymbol = symbol => SymbolMap.symbols[symbol] || symbol
 
@@ -63,7 +71,7 @@ export const demapPairs = (pairs, returnString = false) => {
     if (SymbolMap.pairsDemap[pair]) {
       return SymbolMap.pairsDemap[pair]
     }
-    const preparedPair = preparePair(pair)
+    const preparedPair = isTestSymbol(pair) ? prepareTestPair(pair) : preparePair(pair)
     return demapSymbols(preparedPair.split(':')).join(':')
   })
 

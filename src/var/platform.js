@@ -38,6 +38,10 @@ export const COUNTRY_CODES = {
   VENEZUELA: 'VE',
 }
 
+export const BFX_TOKEN_COOKIE = '__bfx_token'
+export const BFX_TOKEN_COOKIE_TIMESTAMP = '__bfx_token_timestamp'
+export const BFX_SUBACCOUNT_COOKIE = '__bfx_subaccount_id'
+
 export const getBfxDomain = () => {
   if (typeof window === 'undefined') return DOMAINS.default
 

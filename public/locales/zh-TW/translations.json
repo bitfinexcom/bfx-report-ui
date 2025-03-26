@@ -100,7 +100,6 @@
     "rememberMe": "自動儲存",
     "required": "（必填）",
     "nonideal": {
-      "title": "報告 2.0",
       "description": "使用令牌登入報告..."
     }
   },

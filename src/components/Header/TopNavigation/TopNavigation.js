@@ -1,4 +1,5 @@
 import React, { useState, memo } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
@@ -17,6 +18,7 @@ import config from 'config'
 import { tracker } from 'utils/trackers'
 import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
+import { getAuthData } from 'state/auth/selectors'
 import { getMenuItemChevron } from 'ui/NavMenu/NavMenu.helpers'
 
 import SyncMode from '../SyncMode'
@@ -47,6 +49,7 @@ const TopNavigation = ({
   isSubAccsAvailable,
 }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const { hasAuthData } = useSelector(getAuthData)
   const showSubAccounts = showFrameworkMode && isSubAccsAvailable
 
   const togglePopover = (isPopoverOpen) => {
@@ -83,6 +86,7 @@ const TopNavigation = ({
       <Popover
         minimal
         autoFocus={false}
+        disabled={!hasAuthData}
         position={Position.BOTTOM_RIGHT}
         portalClassName='top-navigation-portal'
         onOpening={() => togglePopover(true)}
