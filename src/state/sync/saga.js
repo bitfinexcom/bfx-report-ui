@@ -133,6 +133,9 @@ function* switchSyncMode({ mode }) {
 }
 
 function* refreshLastFinishedSyncMts() {
+  const isAuthenticated = yield select(getAuthStatus)
+  if (!isAuthenticated) return
+
   try {
     const { result, error } = yield call(getLastFinishedSyncMts)
     if (result) {
