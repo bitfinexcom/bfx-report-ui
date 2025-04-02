@@ -14,6 +14,7 @@ const {
   WALLET_MARGIN,
   WALLET_FUNDING,
   WALLET_CONTRIBUTION,
+  WALLET_CREDITLINE,
 } = constants
 
 const WalletsData = ({
@@ -25,6 +26,9 @@ const WalletsData = ({
   const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
   const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
   const contributionData = entries.filter(entry => entry.type === WALLET_CONTRIBUTION)
+  const creditLineData = entries.filter(entry => entry.type === WALLET_CREDITLINE)
+
+  console.log('+++creditLineData', creditLineData)
 
   const exchangeColumns = getColumns({
     filteredData: exchangeData, t, isNoData: isEmpty(exchangeData), isLoading,
