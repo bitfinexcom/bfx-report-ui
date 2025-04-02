@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 
@@ -22,11 +22,11 @@ const WalletsData = ({
   entries,
   isLoading,
 }) => {
-  const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
-  const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
-  const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
-  const contributionData = entries.filter(entry => entry.type === WALLET_CONTRIBUTION)
-  const creditLineData = entries.filter(entry => entry.type === WALLET_CREDITLINE)
+  const exchangeData = entries.filter(entry => isEqual(entry.type, WALLET_EXCHANGE))
+  const marginData = entries.filter(entry => isEqual(entry.type, WALLET_MARGIN))
+  const fundingData = entries.filter(entry => isEqual(entry.type, WALLET_FUNDING))
+  const contributionData = entries.filter(entry => isEqual(entry.type, WALLET_CONTRIBUTION))
+  const creditLineData = entries.filter(entry => isEqual(entry.type, WALLET_CREDITLINE))
 
   const exchangeColumns = getColumns({
     filteredData: exchangeData, t, isNoData: isEmpty(exchangeData), isLoading,
