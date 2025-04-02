@@ -28,8 +28,6 @@ const WalletsData = ({
   const contributionData = entries.filter(entry => entry.type === WALLET_CONTRIBUTION)
   const creditLineData = entries.filter(entry => entry.type === WALLET_CREDITLINE)
 
-  console.log('+++creditLineData', creditLineData)
-
   const exchangeColumns = getColumns({
     filteredData: exchangeData, t, isNoData: isEmpty(exchangeData), isLoading,
   })
@@ -41,6 +39,9 @@ const WalletsData = ({
   })
   const contributionColumns = getColumns({
     filteredData: contributionData, t, isNoData: isEmpty(contributionData), isLoading,
+  })
+  const creditLineColumns = getColumns({
+    filteredData: creditLineData, t, isNoData: isEmpty(creditLineData), isLoading,
   })
 
   return (
@@ -76,6 +77,14 @@ const WalletsData = ({
             enableColumnResizing={false}
             tableColumns={contributionColumns}
             numRows={contributionData.length || 1}
+          />
+        </div>
+        <div className='tables-row-item'>
+          <div>{t('wallets.header.credit-line')}</div>
+          <DataTable
+            enableColumnResizing={false}
+            tableColumns={creditLineColumns}
+            numRows={creditLineData.length || 1}
           />
         </div>
       </div>
