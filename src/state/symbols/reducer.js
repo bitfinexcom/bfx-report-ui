@@ -71,13 +71,18 @@ export function symbolsReducer(state = initialState, action) {
           dict[symbol] = name
           coins.push(symbol)
           if (isFunding) fundingCoins.push(symbol)
-          return
+        } else if (_includes(symbol, 'F0')) {
+          symbol = _replace(symbol, 'F0', ' (deriv)')
+          symbolMapping[id] = symbol
+          explorersDict[symbol] = explorer
+          dict[symbol] = name
+          coins.push(symbol)
+        } else {
+          explorersDict[id] = explorer
+          dict[id] = name
+          coins.push(id)
+          if (isFunding) fundingCoins.push(id)
         }
-
-        explorersDict[id] = explorer
-        dict[id] = name
-        coins.push(id)
-        if (isFunding) fundingCoins.push(id)
       })
 
       const preparedCoins = [...new Set(coins)].sort()

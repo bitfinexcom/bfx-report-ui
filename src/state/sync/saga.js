@@ -11,7 +11,7 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import authTypes from 'state/auth/constants'
 import { makeFetchCall } from 'state/utils'
-import { selectAuth } from 'state/auth/selectors'
+import { getAuthStatus, selectAuth } from 'state/auth/selectors'
 import { updateErrorStatus, updateStatus } from 'state/status/actions'
 
 import types from './constants'
@@ -133,6 +133,9 @@ function* switchSyncMode({ mode }) {
 }
 
 function* refreshLastFinishedSyncMts() {
+  const isAuthenticated = yield select(getAuthStatus)
+  if (!isAuthenticated) return
+
   try {
     const { result, error } = yield call(getLastFinishedSyncMts)
     if (result) {
@@ -223,6 +226,9 @@ export function* initSync() {
 }
 
 function* progressUpdate({ payload }) {
+  const isAuthenticated = yield select(getAuthStatus)
+  if (!isAuthenticated) return
+
   const { result } = payload
   const {
     state,

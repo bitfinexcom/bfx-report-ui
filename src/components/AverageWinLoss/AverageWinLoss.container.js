@@ -17,7 +17,7 @@ import {
   getDataReceived,
   getCurrentFetchParams,
 } from 'state/winLoss/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import AverageWinLoss from './AverageWinLoss'
 
@@ -28,6 +28,7 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   isSyncRequired: getIsSyncRequired(state),
+  isFirstSyncing: getIsFirstSyncing(state),
   currentFetchParams: getCurrentFetchParams(state),
 })
 

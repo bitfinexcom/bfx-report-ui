@@ -18,7 +18,7 @@ import {
   getParams,
   getTargetPairs,
 } from 'state/tradedVolume/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import TradedVolume from './TradedVolume'
 
@@ -30,6 +30,7 @@ const mapStateToProps = state => ({
   dataReceived: getDataReceived(state),
   pageLoading: getPageLoading(state),
   isSyncRequired: getIsSyncRequired(state),
+  isFirstSyncing: getIsFirstSyncing(state),
 })
 
 const mapDispatchToProps = {
