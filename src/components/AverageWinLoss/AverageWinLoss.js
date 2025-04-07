@@ -15,6 +15,7 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
+import InitSyncNote from 'ui/InitSyncNote'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
@@ -74,6 +75,7 @@ class AverageWinLoss extends PureComponent {
       mts: PropTypes.number,
       USD: PropTypes.number,
     })),
+    isFirstSyncing: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     params: PropTypes.shape({
       timeframe: PropTypes.string,
@@ -125,6 +127,7 @@ class AverageWinLoss extends PureComponent {
       refresh,
       pageLoading,
       dataReceived,
+      isFirstSyncing,
       currentFetchParams: {
         timeframe: currTimeframe,
       },
@@ -141,7 +144,9 @@ class AverageWinLoss extends PureComponent {
     )
 
     let showContent
-    if (!dataReceived && pageLoading) {
+    if (isFirstSyncing) {
+      showContent = <InitSyncNote />
+    } else if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (isEmpty(entries)) {
       showContent = <NoData />
@@ -198,7 +203,10 @@ class AverageWinLoss extends PureComponent {
                 onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
+            <RefreshButton
+              onClick={refresh}
+              disabled={isFirstSyncing}
+            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
