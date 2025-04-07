@@ -107,6 +107,10 @@ input[type=number] {
   }
 }
 
+.bp3-transition-container {
+  z-index: 21;
+}
+
 .bp3-submenu.bp3-popover {
   padding: 0;
   border: 1px solid var(--borderColor);
