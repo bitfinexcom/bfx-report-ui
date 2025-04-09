@@ -8,6 +8,7 @@ import { LANGUAGES } from 'locales/i18n'
 import {
   setTimezone, setTheme, setLang, setSrc,
 } from 'state/base/actions'
+import baseTypes from 'state/base/constants'
 import { getTheme } from 'state/base/selectors'
 import { setTimeRange } from 'state/timeRange/actions'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -25,6 +26,9 @@ function* uiLoaded() {
     handleElectronLoad()
     const lang = yield call(window?.bfxReportElectronApi?.getLanguage) || LANGUAGES.en
     yield put(setLang(lang))
+    const { isDarkTheme, isLightTheme } = yield call(window?.bfxReportElectronApi?.getTheme)
+    if (isDarkTheme) yield put(setTheme(baseTypes.THEME_DARK))
+    if (isLightTheme) yield put(setTheme(baseTypes.THEME_LIGHT))
   }
 
   const parsed = getParsedUrlParams(window.location.search)
