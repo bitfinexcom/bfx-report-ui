@@ -42,8 +42,8 @@ function* updateLang() {
 }
 
 function* updateElectronLang({ payload }) {
+  if (!isElectronApp) return
   try {
-    if (!isElectronApp) return
     yield call(window?.bfxReportElectronApi?.setLanguage, { language: payload })
     yield put(getElectronMenuConfig())
   } catch (error) {
@@ -55,8 +55,8 @@ function* updateElectronLang({ payload }) {
 }
 
 function* updateElectronTheme({ payload }) {
+  if (!isElectronApp) return
   try {
-    if (!isElectronApp) return
     const options = {
       isDarkTheme: isEqual(payload, types.THEME_DARK),
       isLightTheme: isEqual(payload, types.THEME_LIGHT),
