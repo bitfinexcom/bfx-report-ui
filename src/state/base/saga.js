@@ -5,7 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import { get } from '@bitfinex/lib-js-util-base'
+import { get, isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import { makeFetchCall } from 'state/utils'
@@ -54,8 +54,20 @@ function* updateElectronLang({ payload }) {
   }
 }
 
+function* updateElectronTheme({ payload }) {
+  yield console.log('+++updateElectronTheme', payload)
+
+  if (!isElectronApp) return
+  const options = {
+    isDarkTheme: isEqual(payload, types.THEME_DARK),
+    isLightTheme: isEqual(payload, types.THEME_LIGHT),
+  }
+  yield call(window?.bfxReportElectronApi?.setTheme, options)
+}
+
 export default function* baseSaga() {
   yield takeLatest([types.SET_THEME, types.UPDATE_THEME, 'persist/REHYDRATE'], updateTheme)
   yield takeLatest(types.SET_LANG, updateLang)
   yield takeLatest(types.SET_ELECTRON_LANG, updateElectronLang)
+  yield takeLatest(types.SET_ELECTRON_THEME, updateElectronTheme)
 }
