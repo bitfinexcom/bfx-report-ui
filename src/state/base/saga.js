@@ -55,14 +55,19 @@ function* updateElectronLang({ payload }) {
 }
 
 function* updateElectronTheme({ payload }) {
-  yield console.log('+++updateElectronTheme', payload)
-
-  if (!isElectronApp) return
-  const options = {
-    isDarkTheme: isEqual(payload, types.THEME_DARK),
-    isLightTheme: isEqual(payload, types.THEME_LIGHT),
+  try {
+    if (!isElectronApp) return
+    const options = {
+      isDarkTheme: isEqual(payload, types.THEME_DARK),
+      isLightTheme: isEqual(payload, types.THEME_LIGHT),
+    }
+    yield call(window?.bfxReportElectronApi?.setTheme, options)
+  } catch (error) {
+    yield put(updateErrorStatus({
+      id: 'status.fail',
+      detail: error?.message ?? JSON.stringify(error),
+    }))
   }
-  yield call(window?.bfxReportElectronApi?.setTheme, options)
 }
 
 export default function* baseSaga() {
