@@ -6,7 +6,7 @@ import { REHYDRATE } from 'redux-persist'
 import config from 'config'
 import { LANGUAGES } from 'locales/i18n'
 import {
-  setTimezone, setTheme, setLang, setSrc,
+  setTimezone, setTheme, setLang, setSrc, setElectronTheme,
 } from 'state/base/actions'
 import baseTypes from 'state/base/constants'
 import { getTheme } from 'state/base/selectors'
@@ -26,9 +26,13 @@ function* uiLoaded() {
     handleElectronLoad()
     const lang = yield call(window?.bfxReportElectronApi?.getLanguage) || LANGUAGES.en
     yield put(setLang(lang))
-    const { isDarkTheme, isLightTheme } = yield call(window?.bfxReportElectronApi?.getTheme)
+    const { isDarkTheme, isLightTheme, isSystemTheme } = yield call(window?.bfxReportElectronApi?.getTheme)
+    console.log('++isDarkTheme', isDarkTheme)
+    console.log('++isLightTheme', isLightTheme)
+    console.log('++isSystemTheme', isSystemTheme)
     if (isDarkTheme) yield put(setTheme(baseTypes.THEME_DARK))
     if (isLightTheme) yield put(setTheme(baseTypes.THEME_LIGHT))
+    if (isSystemTheme) yield put(setElectronTheme(baseTypes.DEFAULT_THEME))
   }
 
   const parsed = getParsedUrlParams(window.location.search)
