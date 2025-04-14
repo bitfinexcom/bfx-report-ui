@@ -57,11 +57,11 @@ function* updateElectronLang({ payload }) {
 function* updateElectronTheme({ payload }) {
   if (!isElectronApp) return
   try {
-    const options = {
+    const params = {
       isDarkTheme: isEqual(payload, types.THEME_DARK),
       isLightTheme: isEqual(payload, types.THEME_LIGHT),
     }
-    yield call(window?.bfxReportElectronApi?.setTheme, options)
+    yield call(window?.bfxReportElectronApi?.setTheme, params)
   } catch (error) {
     yield put(updateErrorStatus({
       id: 'status.fail',
