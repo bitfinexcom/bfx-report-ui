@@ -27,9 +27,6 @@ function* uiLoaded() {
     const lang = yield call(window?.bfxReportElectronApi?.getLanguage) || LANGUAGES.en
     yield put(setLang(lang))
     const { isDarkTheme, isLightTheme, isSystemTheme } = yield call(window?.bfxReportElectronApi?.getTheme)
-    console.log('++isDarkTheme', isDarkTheme)
-    console.log('++isLightTheme', isLightTheme)
-    console.log('++isSystemTheme', isSystemTheme)
     if (isDarkTheme) yield put(setTheme(baseTypes.THEME_DARK))
     if (isLightTheme) yield put(setTheme(baseTypes.THEME_LIGHT))
     if (isSystemTheme) yield put(setElectronTheme(baseTypes.DEFAULT_THEME))
