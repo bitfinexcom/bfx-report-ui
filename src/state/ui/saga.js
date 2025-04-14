@@ -28,8 +28,8 @@ function* uiLoaded() {
     yield put(setLang(lang))
     const { isDarkTheme, isLightTheme, isSystemTheme } = yield call(window?.bfxReportElectronApi?.getTheme)
     if (isDarkTheme) yield put(setTheme(baseTypes.THEME_DARK))
-    if (isLightTheme) yield put(setTheme(baseTypes.THEME_LIGHT))
     if (isSystemTheme) yield put(setElectronTheme(baseTypes.DEFAULT_THEME))
+    if (isLightTheme && !isSystemTheme) yield put(setTheme(baseTypes.THEME_LIGHT))
   }
 
   const parsed = getParsedUrlParams(window.location.search)
