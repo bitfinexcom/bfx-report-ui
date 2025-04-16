@@ -5,7 +5,7 @@ import {
   takeLatest,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import { get } from '@bitfinex/lib-js-util-base'
+import { get, isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import { makeFetchCall } from 'state/utils'
@@ -42,10 +42,26 @@ function* updateLang() {
 }
 
 function* updateElectronLang({ payload }) {
+  if (!isElectronApp) return
   try {
-    if (!isElectronApp) return
     yield call(window?.bfxReportElectronApi?.setLanguage, { language: payload })
     yield put(getElectronMenuConfig())
+  } catch (error) {
+    yield put(updateErrorStatus({
+      id: 'status.fail',
+      detail: error?.message ?? JSON.stringify(error),
+    }))
+  }
+}
+
+function* updateElectronTheme({ payload }) {
+  if (!isElectronApp) return
+  try {
+    const params = {
+      isDarkTheme: isEqual(payload, types.THEME_DARK),
+      isLightTheme: isEqual(payload, types.THEME_LIGHT),
+    }
+    yield call(window?.bfxReportElectronApi?.setTheme, params)
   } catch (error) {
     yield put(updateErrorStatus({
       id: 'status.fail',
@@ -58,4 +74,5 @@ export default function* baseSaga() {
   yield takeLatest([types.SET_THEME, types.UPDATE_THEME, 'persist/REHYDRATE'], updateTheme)
   yield takeLatest(types.SET_LANG, updateLang)
   yield takeLatest(types.SET_ELECTRON_LANG, updateElectronLang)
+  yield takeLatest(types.SET_ELECTRON_THEME, updateElectronTheme)
 }

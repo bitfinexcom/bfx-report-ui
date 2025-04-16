@@ -8,8 +8,10 @@ import Icon from 'icons'
 import config from 'config'
 import { tracker } from 'utils/trackers'
 import types from 'state/base/constants'
-import { setTheme } from 'state/base/actions'
 import { getTheme } from 'state/base/selectors'
+import { setTheme, setElectronTheme } from 'state/base/actions'
+
+const { isElectronApp } = config
 
 const ThemeSwitcher = () => {
   const { t } = useTranslation()
@@ -20,6 +22,7 @@ const ThemeSwitcher = () => {
     const { value } = e.target
     tracker.trackEvent(value)
     dispatch(setTheme(value))
+    if (isElectronApp) dispatch(setElectronTheme(value))
   }, [dispatch, tracker])
 
   if (config.hideSwitchTheme) {
