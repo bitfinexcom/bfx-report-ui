@@ -15,6 +15,7 @@ import {
 import DataTable from 'ui/DataTable'
 import DateInput from 'ui/DateInput'
 import PieChart from 'ui/Charts/PieChart'
+import InitSyncNote from 'ui/InitSyncNote'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import { fixedFloat } from 'ui/utils'
@@ -36,6 +37,7 @@ class ConcentrationRisk extends PureComponent {
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     isSyncRequired: PropTypes.bool.isRequired,
+    isFirstSyncing: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     setTimestamp: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
@@ -123,6 +125,7 @@ class ConcentrationRisk extends PureComponent {
       refresh,
       pageLoading,
       dataReceived,
+      isFirstSyncing,
     } = this.props
     const isNoData = isEmpty(entries)
     const isLoading = !dataReceived && pageLoading
@@ -136,7 +139,9 @@ class ConcentrationRisk extends PureComponent {
     })
 
     let showContent
-    if (isNoData) {
+    if (isFirstSyncing) {
+      showContent = <InitSyncNote />
+    } else if (isNoData) {
       showContent = (
         <div className='concentration-risk-data-table'>
           <DataTable
