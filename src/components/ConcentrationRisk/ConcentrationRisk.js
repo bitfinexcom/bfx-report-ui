@@ -190,7 +190,10 @@ class ConcentrationRisk extends PureComponent {
                 onChange={this.handleDateChange}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
+            <RefreshButton
+              onClick={refresh}
+              disabled={isFirstSyncing}
+            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
