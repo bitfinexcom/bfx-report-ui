@@ -10,7 +10,7 @@ import {
   getPageLoading,
   getDataReceived,
 } from 'state/wallets/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import ConcentrationRisk from './ConcentrationRisk'
 
@@ -20,6 +20,7 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   isSyncRequired: getIsSyncRequired(state),
+  isFirstSyncing: getIsFirstSyncing(state),
 })
 
 const mapDispatchToProps = {
