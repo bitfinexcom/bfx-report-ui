@@ -51,6 +51,7 @@ function* handleTaxTrxReportGenerationCompleted({ payload }) {
     console.log('+++delistedCcyList', delistedCcyList)
     yield put(actions.updateTaxReportTransactions(result))
     if (!isEmpty(taxes)) yield put(updateSuccessStatus({ id: 'taxreport.generation.success' }))
+    if (!isEmpty(delistedCcyList)) yield put(actions.showCalcPrecisionModal(true))
   }
   if (error) {
     yield put(actions.fetchFail({
