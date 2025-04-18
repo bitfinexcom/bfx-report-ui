@@ -47,6 +47,13 @@ export function cancelTaxReportGeneration() {
   }
 }
 
+export function showCalcPrecisionModal(payload) {
+  return {
+    type: types.SHOW_TAX_REPORT_PRECISION_MODAL,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
   setShowDisclaimer,
@@ -55,4 +62,5 @@ export default {
   fetchTaxReportTransactions,
   updateTaxReportTransactions,
   cancelTaxReportGeneration,
+  showCalcPrecisionModal,
 }
