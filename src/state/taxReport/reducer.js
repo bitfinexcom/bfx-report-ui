@@ -9,6 +9,7 @@ const transactionsInitState = {
   dataReceived: false,
   showDisclaimer: true,
   strategy: types.STRATEGY_LIFO,
+  showCalcPrecisionModal: false,
 }
 
 const initialState = {
@@ -55,6 +56,15 @@ export function taxReportReducer(state = initialState, action) {
         transactions: {
           ...state.transactions,
           showDisclaimer: payload,
+        },
+      }
+    }
+    case types.SET_SHOW_TAX_REPORT_PRECISION_MODAL: {
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          showCalcPrecisionModal: payload,
         },
       }
     }
