@@ -4,6 +4,7 @@ export const getTaxReport = state => state.taxReport
 export const getTaxTransactions = state => getTaxReport(state).transactions
 
 export const getTransactionsData = state => getTaxTransactions(state)?.data ?? []
+export const getTransactionsDataEntries = state => getTransactionsData(state)?.taxes ?? []
 export const getTransactionsPageLoading = state => getTaxTransactions(state)?.pageLoading ?? false
 export const getTransactionsDataReceived = state => getTaxTransactions(state)?.dataReceived ?? false
 export const getTransactionsStrategy = state => getTaxTransactions(state)?.strategy ?? types.STRATEGY_LIFO
@@ -16,6 +17,7 @@ export default {
   getTransactionsData,
   getTransactionsStrategy,
   getTransactionsPageLoading,
+  getTransactionsDataEntries,
   getTransactionsDataReceived,
   getTransactionsShowDisclaimer,
   getTransactionsGenerationProgress,
