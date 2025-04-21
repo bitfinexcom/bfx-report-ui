@@ -10,6 +10,7 @@ export const getTransactionsDataReceived = state => getTaxTransactions(state)?.d
 export const getTransactionsStrategy = state => getTaxTransactions(state)?.strategy ?? types.STRATEGY_LIFO
 export const getTransactionsShowDisclaimer = state => getTaxTransactions(state)?.showDisclaimer ?? false
 export const getTransactionsGenerationProgress = state => getTaxTransactions(state)?.progress ?? null
+export const getTransactionsDelistedCurrencies = state => getTransactionsData(state)?.delistedCcyList ?? []
 export const getTransactionsShowCalcPrecisionModal = state => getTaxTransactions(state)?.showDisclaimer ?? false
 
 export default {
@@ -22,5 +23,6 @@ export default {
   getTransactionsDataReceived,
   getTransactionsShowDisclaimer,
   getTransactionsGenerationProgress,
+  getTransactionsDelistedCurrencies,
   getTransactionsShowCalcPrecisionModal,
 }
