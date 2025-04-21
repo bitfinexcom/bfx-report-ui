@@ -94,6 +94,13 @@ export function setElectronLang(lang) {
   }
 }
 
+export function setElectronTheme(theme) {
+  return {
+    type: types.SET_ELECTRON_THEME,
+    payload: theme,
+  }
+}
+
 export default {
   setApiPort,
   setDateFormat,
@@ -101,6 +108,7 @@ export default {
   setElectronLang,
   setSrc,
   setTheme,
+  setElectronTheme,
   setTimezone,
   showMilliseconds,
   toggleTableScroll,

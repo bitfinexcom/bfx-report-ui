@@ -3,4 +3,5 @@ export default {
   WALLET_MARGIN: 'margin',
   WALLET_FUNDING: 'funding',
   WALLET_CONTRIBUTION: 'contribution',
+  WALLET_CREDITLINE: 'creditline',
 }

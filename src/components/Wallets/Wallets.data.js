@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 
@@ -14,6 +14,7 @@ const {
   WALLET_MARGIN,
   WALLET_FUNDING,
   WALLET_CONTRIBUTION,
+  WALLET_CREDITLINE,
 } = constants
 
 const WalletsData = ({
@@ -21,10 +22,11 @@ const WalletsData = ({
   entries,
   isLoading,
 }) => {
-  const exchangeData = entries.filter(entry => entry.type === WALLET_EXCHANGE)
-  const marginData = entries.filter(entry => entry.type === WALLET_MARGIN)
-  const fundingData = entries.filter(entry => entry.type === WALLET_FUNDING)
-  const contributionData = entries.filter(entry => entry.type === WALLET_CONTRIBUTION)
+  const exchangeData = entries.filter(entry => isEqual(entry.type, WALLET_EXCHANGE))
+  const marginData = entries.filter(entry => isEqual(entry.type, WALLET_MARGIN))
+  const fundingData = entries.filter(entry => isEqual(entry.type, WALLET_FUNDING))
+  const contributionData = entries.filter(entry => isEqual(entry.type, WALLET_CONTRIBUTION))
+  const creditLineData = entries.filter(entry => isEqual(entry.type, WALLET_CREDITLINE))
 
   const exchangeColumns = getColumns({
     filteredData: exchangeData, t, isNoData: isEmpty(exchangeData), isLoading,
@@ -37,6 +39,9 @@ const WalletsData = ({
   })
   const contributionColumns = getColumns({
     filteredData: contributionData, t, isNoData: isEmpty(contributionData), isLoading,
+  })
+  const creditLineColumns = getColumns({
+    filteredData: creditLineData, t, isNoData: isEmpty(creditLineData), isLoading,
   })
 
   return (
@@ -72,6 +77,14 @@ const WalletsData = ({
             enableColumnResizing={false}
             tableColumns={contributionColumns}
             numRows={contributionData.length || 1}
+          />
+        </div>
+        <div className='tables-row-item'>
+          <div>{t('wallets.header.credit-line')}</div>
+          <DataTable
+            enableColumnResizing={false}
+            tableColumns={creditLineColumns}
+            numRows={creditLineData.length || 1}
           />
         </div>
       </div>

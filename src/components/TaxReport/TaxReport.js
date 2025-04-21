@@ -17,7 +17,7 @@ import RefreshButton from 'ui/RefreshButton'
 import TaxStrategySelector from 'ui/TaxStrategySelector'
 import { fetchTaxReportTransactions } from 'state/taxReport/actions'
 import {
-  getTransactionsData,
+  getTransactionsDataEntries,
   getTransactionsPageLoading,
   getTransactionsDataReceived,
   getTransactionsShowDisclaimer,
@@ -38,7 +38,7 @@ const TYPE = queryConstants.MENU_TAX_REPORT
 const TaxReport = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const entries = useSelector(getTransactionsData)
+  const entries = useSelector(getTransactionsDataEntries)
   const getFullTime = useSelector(getFullTimeSelector)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const pageLoading = useSelector(getTransactionsPageLoading)

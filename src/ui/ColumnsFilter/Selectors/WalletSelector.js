@@ -17,6 +17,7 @@ const WalletSelector = (props) => {
     { value: 'margin', label: t('wallets.header.margin') },
     { value: 'funding', label: t('wallets.header.funding') },
     { value: 'contribution', label: t('wallets.header.token-sales') },
+    { value: 'creditline', label: t('wallets.header.credit-line') },
   ]
 
   return (
