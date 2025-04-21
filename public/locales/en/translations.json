@@ -778,7 +778,8 @@
       "note": "If you have a large history it's recommended to keep the window open in the background until it's completed.",
       "sync_1": "Sync in progress." ,
       "sync_2": "Please wait until it’s complete to generate your tax report."
-    }
+    },
+    "precision_warning": "The tax report contains the following delisted tokens: {{tokens}}. These tokens no longer have publicly available trading history, which causes the report to be inaccurate. Please verify all figures independently or with a certified tax advisor."
   },
   "theme": {
     "light": "Light",
