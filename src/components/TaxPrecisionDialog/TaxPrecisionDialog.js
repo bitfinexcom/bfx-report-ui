@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
   Dialog,
@@ -7,39 +7,45 @@ import {
   Button,
   Classes,
 } from '@blueprintjs/core'
-// import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
+import {
+  setShowCalcPrecisionModal,
+  updateTaxReportTransactions,
+} from 'state/taxReport/actions'
 import {
   getTransactionsDelistedCurrencies,
   getTransactionsShowCalcPrecisionModal,
 } from 'state/taxReport/selectors'
 
-// import { FIRST_SYNC_ERROR } from './ErrorDialog.constants'
-
 const TaxPrecisionDialog = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const isOpen = useSelector(getTransactionsShowCalcPrecisionModal)
-  const delistedTokens = useSelector(getTransactionsDelistedCurrencies)
+  const delistedTokens = useSelector(getTransactionsDelistedCurrencies).join(', ')
 
-  // const handleClose = () => {
-  //   tracker.trackEvent('Okay')
-  //   toggleDialog(false)
-  //   disableDialog(isDialogDisabled)
-  // }
+  console.log('++delistedTokens', typeof delistedTokens)
 
-  // const handleChange = (e) => {
-  //   tracker.trackEvent('Don\'t show this message again')
-  //   const { checked } = e.target
-  //   setIsDialogDisabled(checked)
-  // }
+  const handleSubmit = () => {
+    dispatch(setShowCalcPrecisionModal(false))
+  }
+
+  const handleDecline = () => {
+    dispatch(setShowCalcPrecisionModal(false))
+    dispatch(updateTaxReportTransactions([]))
+  }
 
   // const tokens = ['MTO', ' TERRAUST']
 
+  //  const onRefresh = useCallback(
+  //     () => dispatch(fetchTaxReportTransactions()),
+  //     [dispatch],
+  //   )
+
   return (
     <Dialog
-      isOpen
-      // onClose={handleClose}
+      isOpen={isOpen}
+      onClose={handleSubmit}
       icon={<Icon.INFO_CIRCLE />}
       isCloseButtonShown={false}
       title={t('framework.warning')}
@@ -53,10 +59,10 @@ const TaxPrecisionDialog = () => {
       </div>
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-          <Button intent={Intent.PRIMARY} onClick={() => {}}>
+          <Button intent={Intent.PRIMARY} onClick={handleSubmit}>
             { t('taxreport.precision_modal.ok')}
           </Button>
-          <Button onClick={() => {}}>
+          <Button onClick={handleDecline}>
             { t('taxreport.precision_modal.decline')}
           </Button>
         </div>
