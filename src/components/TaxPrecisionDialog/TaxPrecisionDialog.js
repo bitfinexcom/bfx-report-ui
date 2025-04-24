@@ -10,13 +10,17 @@ import {
 // import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import Icon from 'icons'
-import { getTransactionsShowCalcPrecisionModal } from 'state/taxReport/selectors'
+import {
+  getTransactionsDelistedCurrencies,
+  getTransactionsShowCalcPrecisionModal,
+} from 'state/taxReport/selectors'
 
 // import { FIRST_SYNC_ERROR } from './ErrorDialog.constants'
 
 const TaxPrecisionDialog = () => {
   const { t } = useTranslation()
   const isOpen = useSelector(getTransactionsShowCalcPrecisionModal)
+  const delistedTokens = useSelector(getTransactionsDelistedCurrencies)
 
   // const handleClose = () => {
   //   tracker.trackEvent('Okay')
@@ -30,9 +34,11 @@ const TaxPrecisionDialog = () => {
   //   setIsDialogDisabled(checked)
   // }
 
+  // const tokens = ['MTO', ' TERRAUST']
+
   return (
     <Dialog
-      isOpen={isOpen}
+      isOpen
       // onClose={handleClose}
       icon={<Icon.INFO_CIRCLE />}
       isCloseButtonShown={false}
@@ -41,15 +47,16 @@ const TaxPrecisionDialog = () => {
     >
       <div className={Classes.DIALOG_BODY}>
         <div className='tax-precision-dialog-message'>
-          {t('taxreport.precision_modal.message')}
+          <p>{t('taxreport.precision_modal.message_1', { delistedTokens })}</p>
+          <p>{t('taxreport.precision_modal.message_2')}</p>
         </div>
       </div>
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-          <Button intent={Intent.PRIMARY} onClick={handleClose}>
+          <Button intent={Intent.PRIMARY} onClick={() => {}}>
             { t('taxreport.precision_modal.ok')}
           </Button>
-          <Button onClick={handleClose}>
+          <Button onClick={() => {}}>
             { t('taxreport.precision_modal.decline')}
           </Button>
         </div>
