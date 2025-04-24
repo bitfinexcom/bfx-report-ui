@@ -40,14 +40,17 @@ const TaxPrecisionDialog = () => {
       className='tax-precision-dialog'
     >
       <div className={Classes.DIALOG_BODY}>
-        <div className='error-dialog-message'>
-          {isFirstSync ? t('framework.first-sync-message') : errorMessage}
+        <div className='tax-precision-dialog-message'>
+          {t('taxreport.precision_modal.message')}
         </div>
       </div>
       <div className={Classes.DIALOG_FOOTER}>
         <div className={Classes.DIALOG_FOOTER_ACTIONS}>
           <Button intent={Intent.PRIMARY} onClick={handleClose}>
-            {isFirstSync ? t('framework.okay_btn') : t('framework.continue')}
+            { t('taxreport.precision_modal.ok')}
+          </Button>
+          <Button onClick={handleClose}>
+            { t('taxreport.precision_modal.decline')}
           </Button>
         </div>
       </div>
