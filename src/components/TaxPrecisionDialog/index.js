@@ -1,1 +1,1 @@
-export { default } from './TaxPrecisionDialog.container'
+export { default } from './TaxPrecisionDialog'
