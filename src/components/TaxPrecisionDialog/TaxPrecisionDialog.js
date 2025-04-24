@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
@@ -24,23 +24,18 @@ const TaxPrecisionDialog = () => {
   const isOpen = useSelector(getTransactionsShowCalcPrecisionModal)
   const delistedTokens = useSelector(getTransactionsDelistedCurrencies).join(', ')
 
-  console.log('++delistedTokens', typeof delistedTokens)
+  const handleSubmit = useCallback(
+    () => dispatch(setShowCalcPrecisionModal(false)),
+    [dispatch],
+  )
 
-  const handleSubmit = () => {
-    dispatch(setShowCalcPrecisionModal(false))
-  }
-
-  const handleDecline = () => {
-    dispatch(setShowCalcPrecisionModal(false))
-    dispatch(updateTaxReportTransactions([]))
-  }
-
-  // const tokens = ['MTO', ' TERRAUST']
-
-  //  const onRefresh = useCallback(
-  //     () => dispatch(fetchTaxReportTransactions()),
-  //     [dispatch],
-  //   )
+  const handleDecline = useCallback(
+    () => {
+      dispatch(setShowCalcPrecisionModal(false))
+      dispatch(updateTaxReportTransactions([]))
+    },
+    [dispatch],
+  )
 
   return (
     <Dialog
