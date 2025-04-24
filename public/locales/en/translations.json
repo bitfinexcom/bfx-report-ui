@@ -780,7 +780,8 @@
       "sync_2": "Please wait until it’s complete to generate your tax report."
     },
     "precision_modal": {
-      "message": "The tax report contains the following delisted tokens: {{tokens}}. These tokens no longer have publicly available trading history, which causes the report to be inaccurate. Please verify all figures independently or with a certified tax advisor.",
+      "message_1": "The tax report contains the following delisted tokens: {{tokens}}.",
+      "message_2": "These tokens no longer have publicly available trading history, which causes the report to be inaccurate. Please verify all figures independently or with a certified tax advisor.",
       "ok": "Ok",
       "decline": "Decline"
     }
