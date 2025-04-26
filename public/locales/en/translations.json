@@ -748,6 +748,7 @@
     "startPositions": "Starting Positions Snapshot",
     "endPositions": "Ending Positions Snapshot",
     "movements": "Movements",
+    "deductFees": "Deduct Fees",
     "cols": {
       "currency": "Currency",
       "source": "Source",
