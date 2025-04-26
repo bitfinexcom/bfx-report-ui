@@ -23,10 +23,7 @@ export function* fetchTaxReport() {
     const strategy = yield select(getTransactionsStrategy)
     const shouldFeesBeDeducted = yield select(getTransactionsShouldFeesBeDeducted)
     const params = {
-      start,
-      end,
-      strategy,
-      shouldFeesBeDeducted,
+      start, end, strategy, shouldFeesBeDeducted,
     }
     const { error } = yield call(getReqTaxReport, params)
 
