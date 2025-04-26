@@ -12,7 +12,7 @@ import { getTimeFrame } from 'state/timeRange/selectors'
 
 import types from './constants'
 import actions from './actions'
-import { getTransactionsStrategy } from './selectors'
+import { getTransactionsStrategy, getTransactionsShouldFeesBeDeducted } from './selectors'
 
 export const getReqTaxReport = (params) => makeFetchCall('makeTrxTaxReportInBackground', params)
 export const getReqTaxReportCancel = () => makeFetchCall('interruptOperations', { names: [types.TAX_REPORT_CANCEL] })
@@ -21,7 +21,13 @@ export function* fetchTaxReport() {
   try {
     const { start, end } = yield select(getTimeFrame)
     const strategy = yield select(getTransactionsStrategy)
-    const params = { start, end, strategy }
+    const shouldFeesBeDeducted = yield select(getTransactionsShouldFeesBeDeducted)
+    const params = {
+      start,
+      end,
+      strategy,
+      shouldFeesBeDeducted,
+    }
     const { error } = yield call(getReqTaxReport, params)
 
     if (error) {
