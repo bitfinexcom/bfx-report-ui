@@ -8,6 +8,7 @@ const transactionsInitState = {
   pageLoading: false,
   dataReceived: false,
   showDisclaimer: true,
+  shouldFeesBeDeducted: false,
   strategy: types.STRATEGY_LIFO,
   showCalcPrecisionModal: false,
 }
@@ -26,6 +27,7 @@ export function taxReportReducer(state = initialState, action) {
           pageLoading: true,
           strategy: state.transactions.strategy,
           showDisclaimer: state.transactions.showDisclaimer,
+          shouldFeesBeDeducted: state.transactions.shouldFeesBeDeducted,
         },
       }
     case types.UPDATE_TRANSACTIONS: {
@@ -38,6 +40,7 @@ export function taxReportReducer(state = initialState, action) {
           dataReceived: true,
           strategy: state.transactions.strategy,
           showDisclaimer: state.transactions.showDisclaimer,
+          shouldFeesBeDeducted: state.transactions.shouldFeesBeDeducted,
         },
       }
     }
@@ -97,6 +100,15 @@ export function taxReportReducer(state = initialState, action) {
           dataReceived: true,
         },
       }
+    case types.SET_DEDUCT_FEES: {
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          shouldFeesBeDeducted: payload,
+        },
+      }
+    }
     case authTypes.LOGOUT:
       return initialState
     default: {
