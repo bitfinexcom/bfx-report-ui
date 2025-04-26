@@ -151,7 +151,10 @@ class LoanReport extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
+            <RefreshButton
+              onClick={refresh}
+              disabled={isFirstSyncing}
+            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
