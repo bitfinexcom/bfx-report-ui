@@ -54,8 +54,16 @@ export function setShowCalcPrecisionModal(payload) {
   }
 }
 
+export function setDeductFees(payload) {
+  return {
+    type: types.SET_DEDUCT_FEES,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
+  setDeductFees,
   setShowDisclaimer,
   setGenerationProgress,
   setTransactionsStrategy,
