@@ -1,4 +1,6 @@
-import React, { useMemo, useEffect, useCallback } from 'react'
+import React, {
+  useMemo, useEffect, useCallback, useState,
+} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -15,6 +17,7 @@ import {
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import TaxStrategySelector from 'ui/TaxStrategySelector'
+import FeesDeductionSelector from 'ui/FeesDeductionSelector'
 import { fetchTaxReportTransactions } from 'state/taxReport/actions'
 import {
   getTransactionsDataEntries,
@@ -49,6 +52,7 @@ const TaxReport = () => {
   const isLoading = !dataReceived && pageLoading
   const isFirstSyncing = useSelector(getIsFirstSyncing)
   const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
+  const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
     if (shouldFetchTaxReport) dispatch(fetchTaxReportTransactions())
@@ -65,6 +69,10 @@ const TaxReport = () => {
     }),
     [t, entries, isNoData, isLoading, getFullTime, columnsWidth],
   )
+
+  // const switchClasses = classNames('switch-btn', {
+  //   active: isActive,
+  // })
 
   let showContent
   if (isFirstSyncing) {
@@ -121,6 +129,15 @@ const TaxReport = () => {
               {t('selector.strategy')}
             </SectionHeaderItemLabel>
             <TaxStrategySelector />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.fees-deduction.title')}
+            </SectionHeaderItemLabel>
+            <FeesDeductionSelector
+              value={isActive}
+              onChange={() => setIsActive(!isActive)}
+            />
           </SectionHeaderItem>
           <RefreshButton
             onClick={onRefresh}
