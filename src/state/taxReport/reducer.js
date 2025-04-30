@@ -1,4 +1,5 @@
 import authTypes from 'state/auth/constants'
+import deductFeesTypes from 'ui/FeesDeductionSelector/constants'
 
 import types from './constants'
 
@@ -8,9 +9,9 @@ const transactionsInitState = {
   pageLoading: false,
   dataReceived: false,
   showDisclaimer: true,
-  shouldFeesBeDeducted: false,
   strategy: types.STRATEGY_LIFO,
   showCalcPrecisionModal: false,
+  shouldFeesBeDeducted: deductFeesTypes.FALSE,
 }
 
 const initialState = {
