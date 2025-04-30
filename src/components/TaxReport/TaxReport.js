@@ -62,16 +62,16 @@ const TaxReport = () => {
     [dispatch],
   )
 
+  const handleDeductFees = useCallback((value) => {
+    dispatch(setDeductFees(value))
+  }, [dispatch])
+
   const columns = useMemo(
     () => getColumns({
       t, entries, isNoData, isLoading, getFullTime, columnsWidth,
     }),
     [t, entries, isNoData, isLoading, getFullTime, columnsWidth],
   )
-
-  const handleDeductFees = (value) => {
-    dispatch(setDeductFees(value))
-  }
 
   let showContent
   if (isFirstSyncing) {
