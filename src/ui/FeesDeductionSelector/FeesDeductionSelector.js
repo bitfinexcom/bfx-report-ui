@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 import Select from 'ui/Select'
 
@@ -8,7 +8,8 @@ import constants from './constants'
 
 const { TRUE, FALSE } = constants
 
-const FeesDeductionSelector = ({ onChange, t, value }) => {
+const FeesDeductionSelector = ({ onChange, value }) => {
+  const { t } = useTranslation()
   const items = [
     { value: FALSE, label: t('selector.fees-deduction.yes') },
     { value: TRUE, label: t('selector.fees-deduction.no') },
@@ -26,9 +27,8 @@ const FeesDeductionSelector = ({ onChange, t, value }) => {
 }
 
 FeesDeductionSelector.propTypes = {
-  t: PropTypes.func.isRequired,
   value: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(FeesDeductionSelector)
+export default FeesDeductionSelector
