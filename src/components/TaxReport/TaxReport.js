@@ -1,6 +1,4 @@
-import React, {
-  useMemo, useEffect, useCallback, useState,
-} from 'react'
+import React, { useMemo, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
@@ -18,12 +16,13 @@ import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import TaxStrategySelector from 'ui/TaxStrategySelector'
 import FeesDeductionSelector from 'ui/FeesDeductionSelector'
-import { fetchTaxReportTransactions } from 'state/taxReport/actions'
+import { fetchTaxReportTransactions, setDeductFees } from 'state/taxReport/actions'
 import {
   getTransactionsDataEntries,
   getTransactionsPageLoading,
   getTransactionsDataReceived,
   getTransactionsShowDisclaimer,
+  getTransactionsShouldFeesBeDeducted,
 } from 'state/taxReport/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
@@ -47,12 +46,12 @@ const TaxReport = () => {
   const pageLoading = useSelector(getTransactionsPageLoading)
   const dataReceived = useSelector(getTransactionsDataReceived)
   const showDisclaimer = useSelector(getTransactionsShowDisclaimer)
+  const shouldFeesBeDeducted = useSelector(getTransactionsShouldFeesBeDeducted)
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
   const isFirstSyncing = useSelector(getIsFirstSyncing)
   const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
-  const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
     if (shouldFetchTaxReport) dispatch(fetchTaxReportTransactions())
@@ -70,9 +69,9 @@ const TaxReport = () => {
     [t, entries, isNoData, isLoading, getFullTime, columnsWidth],
   )
 
-  // const switchClasses = classNames('switch-btn', {
-  //   active: isActive,
-  // })
+  const handleDeductFees = (value) => {
+    dispatch(setDeductFees(value))
+  }
 
   let showContent
   if (isFirstSyncing) {
@@ -135,8 +134,8 @@ const TaxReport = () => {
               {t('selector.fees-deduction.title')}
             </SectionHeaderItemLabel>
             <FeesDeductionSelector
-              value={isActive}
-              onChange={() => setIsActive(!isActive)}
+              value={shouldFeesBeDeducted}
+              onChange={handleDeductFees}
             />
           </SectionHeaderItem>
           <RefreshButton
