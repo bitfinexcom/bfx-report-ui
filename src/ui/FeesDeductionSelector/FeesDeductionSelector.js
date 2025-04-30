@@ -12,8 +12,8 @@ const FeesDeductionSelector = ({ onChange, value }) => {
   const { t } = useTranslation()
 
   const items = useMemo(() => [
-    { value: TRUE, label: t('selector.fees-deduction.yes') },
-    { value: FALSE, label: t('selector.fees-deduction.no') },
+    { value: TRUE, label: t('selector.fees_deduction.yes') },
+    { value: FALSE, label: t('selector.fees_deduction.no') },
   ], [t])
 
   return (

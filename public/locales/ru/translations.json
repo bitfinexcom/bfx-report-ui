@@ -561,7 +561,7 @@
       "approximate": "Приблизительный",
       "exact": "Exact"
     },
-    "fees-deduction": {
+    "fees_deduction": {
       "title": "Вычесть комиссии",
       "yes": "Да",
       "no": "Нет"

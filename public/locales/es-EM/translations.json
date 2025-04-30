@@ -561,7 +561,7 @@
       "approximate": "Aproximado",
       "exact": "Exacto"
     },
-    "fees-deduction": {
+    "fees_deduction": {
       "title": "Deducir comisiones",
       "yes": "Sí",
       "no": "No"

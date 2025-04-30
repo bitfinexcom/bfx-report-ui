@@ -561,7 +561,7 @@
       "approximate": "Approximate",
       "exact": "Exact"
     },
-    "fees-deduction": {
+    "fees_deduction": {
       "title": "Deduct Fees",
       "yes": "Yes",
       "no": "No"

@@ -561,7 +561,7 @@
       "approximate": "Xấp xỉ",
       "exact": "Chính xác"
     },
-    "fees-deduction": {
+    "fees_deduction": {
       "title": "Khấu trừ phí",
       "yes": "Có",
       "no": "Không"

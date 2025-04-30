@@ -561,7 +561,7 @@
       "approximate": "Yaklaşık",
       "exact": "Tam"
     },
-    "fees-deduction": {
+    "fees_deduction": {
       "title": "Ücretleri düş",
       "yes": "Evet",
       "no": "Hayır"

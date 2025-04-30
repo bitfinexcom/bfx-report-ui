@@ -131,7 +131,7 @@ const TaxReport = () => {
           </SectionHeaderItem>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
-              {t('selector.fees-deduction.title')}
+              {t('selector.fees_deduction.title')}
             </SectionHeaderItemLabel>
             <FeesDeductionSelector
               value={shouldFeesBeDeducted}
