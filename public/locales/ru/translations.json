@@ -561,6 +561,11 @@
       "approximate": "Приблизительный",
       "exact": "Exact"
     },
+    "fees_deduction": {
+      "title": "Вычесть комиссии",
+      "yes": "Да",
+      "no": "Нет"
+    },
     "filter": {
       "symbol": "Символ",
       "pair": "Фильтр по паре",

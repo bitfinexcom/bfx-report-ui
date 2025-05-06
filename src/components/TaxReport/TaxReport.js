@@ -15,12 +15,14 @@ import {
 import TimeRange from 'ui/TimeRange'
 import RefreshButton from 'ui/RefreshButton'
 import TaxStrategySelector from 'ui/TaxStrategySelector'
-import { fetchTaxReportTransactions } from 'state/taxReport/actions'
+import FeesDeductionSelector from 'ui/FeesDeductionSelector'
+import { fetchTaxReportTransactions, setDeductFees } from 'state/taxReport/actions'
 import {
   getTransactionsDataEntries,
   getTransactionsPageLoading,
   getTransactionsDataReceived,
   getTransactionsShowDisclaimer,
+  getTransactionsShouldFeesBeDeducted,
 } from 'state/taxReport/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
@@ -44,6 +46,7 @@ const TaxReport = () => {
   const pageLoading = useSelector(getTransactionsPageLoading)
   const dataReceived = useSelector(getTransactionsDataReceived)
   const showDisclaimer = useSelector(getTransactionsShowDisclaimer)
+  const shouldFeesBeDeducted = useSelector(getTransactionsShouldFeesBeDeducted)
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
@@ -58,6 +61,10 @@ const TaxReport = () => {
     () => dispatch(fetchTaxReportTransactions()),
     [dispatch],
   )
+
+  const handleDeductFees = useCallback((value) => {
+    dispatch(setDeductFees(value))
+  }, [dispatch])
 
   const columns = useMemo(
     () => getColumns({
@@ -121,6 +128,15 @@ const TaxReport = () => {
               {t('selector.strategy')}
             </SectionHeaderItemLabel>
             <TaxStrategySelector />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.fees_deduction.title')}
+            </SectionHeaderItemLabel>
+            <FeesDeductionSelector
+              value={shouldFeesBeDeducted}
+              onChange={handleDeductFees}
+            />
           </SectionHeaderItem>
           <RefreshButton
             onClick={onRefresh}

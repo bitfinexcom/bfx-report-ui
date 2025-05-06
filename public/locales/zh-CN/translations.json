@@ -561,6 +561,11 @@
       "approximate": "约等值",
       "exact": "Exact"
     },
+    "fees_deduction": {
+      "title": "扣除费用",
+      "yes": "是",
+      "no": "否"
+    },
     "filter": {
       "symbol": "交易对",
       "pair": "货币对筛选器",

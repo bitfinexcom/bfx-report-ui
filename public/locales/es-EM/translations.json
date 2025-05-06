@@ -561,6 +561,11 @@
       "approximate": "Aproximado",
       "exact": "Exacto"
     },
+    "fees_deduction": {
+      "title": "Deducir comisiones",
+      "yes": "Sí",
+      "no": "No"
+    },
     "filter": {
       "symbol": "Symbol",
       "pair": "Filtro de par",

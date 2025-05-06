@@ -561,6 +561,11 @@
       "approximate": "Yaklaşık",
       "exact": "Tam"
     },
+    "fees_deduction": {
+      "title": "Ücretleri düş",
+      "yes": "Evet",
+      "no": "Hayır"
+    },
     "filter": {
       "symbol": "Symbol",
       "pair": "Parite Filtresi",

@@ -561,6 +561,11 @@
       "approximate": "約等值",
       "exact": "Exact"
     },
+    "fees_deduction": {
+      "title": "扣除費用",
+      "yes": "是",
+      "no": "否"
+    },
     "filter": {
       "symbol": "幣別或交易對",
       "pair": "交易對篩選",

@@ -11,6 +11,7 @@ export const getTransactionsStrategy = state => getTaxTransactions(state)?.strat
 export const getTransactionsShowDisclaimer = state => getTaxTransactions(state)?.showDisclaimer ?? false
 export const getTransactionsGenerationProgress = state => getTaxTransactions(state)?.progress ?? null
 export const getTransactionsDelistedCurrencies = state => getTransactionsData(state)?.delistedCcyList ?? []
+export const getTransactionsShouldFeesBeDeducted = state => getTaxTransactions(state)?.shouldFeesBeDeducted ?? false
 export const getTransactionsShowCalcPrecisionModal = state => getTaxTransactions(state)?.showCalcPrecisionModal ?? false
 
 export default {
@@ -24,5 +25,6 @@ export default {
   getTransactionsShowDisclaimer,
   getTransactionsGenerationProgress,
   getTransactionsDelistedCurrencies,
+  getTransactionsShouldFeesBeDeducted,
   getTransactionsShowCalcPrecisionModal,
 }
