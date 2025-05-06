@@ -775,6 +775,12 @@
       "sync_1": "Sincronización en progreso.",
       "sync_2": "Por favor, espere hasta que se complete para generar su informe fiscal."
     },
+    "precision_modal": {
+      "message_1": "El informe fiscal contiene los siguientes tokens eliminados de la lista: {{delistedTokens}}.",
+      "message_2": "Estos tokens ya no tienen un historial de operaciones públicamente disponible, lo que provoca que el informe sea inexacto. Por favor, verifique todas las cifras de forma independiente o con un asesor fiscal certificado.",
+      "ok": "Aceptar",
+      "decline": "Rechazar"
+    },
     "sections": {
       "startSnapshot": "Empezar instantánea",
       "endSnapshot": "Finalizar Instantánea",

@@ -1,0 +1,12 @@
+.tax-precision-dialog {
+  width: 600px;
+  margin: 0 15px;
+
+  &-message {
+    margin: 15px 0 25px 15px;
+  }
+
+  .bp3-dialog-footer-actions {
+    justify-content: space-between;
+  }
+}

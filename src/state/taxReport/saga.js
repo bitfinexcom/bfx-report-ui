@@ -47,8 +47,10 @@ function* fetchTaxReportFail({ payload }) {
 function* handleTaxTrxReportGenerationCompleted({ payload }) {
   const { result, error } = payload
   if (result) {
+    const { taxes, delistedCcyList } = result
     yield put(actions.updateTaxReportTransactions(result))
-    if (!isEmpty(result)) yield put(updateSuccessStatus({ id: 'taxreport.generation.success' }))
+    if (!isEmpty(taxes)) yield put(updateSuccessStatus({ id: 'taxreport.generation.success' }))
+    if (!isEmpty(delistedCcyList)) yield put(actions.setShowCalcPrecisionModal(true))
   }
   if (error) {
     yield put(actions.fetchFail({
