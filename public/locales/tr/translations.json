@@ -561,6 +561,11 @@
       "approximate": "Yaklaşık",
       "exact": "Tam"
     },
+    "fees_deduction": {
+      "title": "Ücretleri düş",
+      "yes": "Evet",
+      "no": "Hayır"
+    },
     "filter": {
       "symbol": "Symbol",
       "pair": "Parite Filtresi",
@@ -774,6 +779,12 @@
       "note": "Büyük bir geçmişiniz varsa pencereyi arka planda açık tutmanız önerilir.",
       "sync_1": "Senkronizasyon devam ediyor.",
       "sync_2": "Vergi raporunuzu oluşturmak için lütfen tamamlanmasını bekleyin."
+    },
+    "precision_modal": {
+      "message_1": "Vergi raporu aşağıdaki listeden çıkarılmış tokenları içermektedir: {{delistedTokens}}.",
+      "message_2": "Bu tokenların artık kamuya açık işlem geçmişi bulunmamaktadır, bu da raporun doğruluğunu etkilemektedir. Lütfen tüm rakamları bağımsız olarak ya da sertifikalı bir vergi danışmanıyla birlikte doğrulayın.",
+      "ok": "Tamam",
+      "decline": "Reddet"
     },
     "sections": {
       "startSnapshot": "Anlık Görüntü Başlat",

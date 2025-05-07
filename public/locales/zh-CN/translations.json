@@ -561,6 +561,11 @@
       "approximate": "约等值",
       "exact": "Exact"
     },
+    "fees_deduction": {
+      "title": "扣除费用",
+      "yes": "是",
+      "no": "否"
+    },
     "filter": {
       "symbol": "交易对",
       "pair": "货币对筛选器",
@@ -774,6 +779,12 @@
       "note": "如果您的历史记录较大，建议将窗口保持在后台打开直到完成。",
       "sync_1": "同步进行中。",
       "sync_2": "请等待完成后再生成您的税务报告。"
+    },
+    "precision_modal": {
+      "message_1": "税务报告包含以下已退市的代币：{{delistedTokens}}。",
+      "message_2": "这些代币已无公开交易历史，可能导致报告不准确。请自行核实所有数据，或咨询认证税务顾问。",
+      "ok": "确定",
+      "decline": "取消"
     },
     "sections": {
       "startSnapshot": "期初快照",

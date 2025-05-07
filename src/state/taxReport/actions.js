@@ -47,12 +47,28 @@ export function cancelTaxReportGeneration() {
   }
 }
 
+export function setShowCalcPrecisionModal(payload) {
+  return {
+    type: types.SET_SHOW_TAX_REPORT_PRECISION_MODAL,
+    payload,
+  }
+}
+
+export function setDeductFees(payload) {
+  return {
+    type: types.SET_DEDUCT_FEES,
+    payload,
+  }
+}
+
 export default {
   fetchFail,
+  setDeductFees,
   setShowDisclaimer,
   setGenerationProgress,
   setTransactionsStrategy,
   fetchTaxReportTransactions,
   updateTaxReportTransactions,
   cancelTaxReportGeneration,
+  setShowCalcPrecisionModal,
 }

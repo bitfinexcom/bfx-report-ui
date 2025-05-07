@@ -48,6 +48,7 @@ import ExportSuccessDialog from 'components/ExportSuccessDialog'
 import Preferences from 'components/Preferences'
 import ExtraInfoDialog from 'components/ExtraInfoDialog'
 import TimeFrameDialog from 'components/TimeFrameDialog'
+import TaxPrecisionDialog from 'components/TaxPrecisionDialog'
 import MaintenanceDialog from 'components/MaintenanceDialog'
 import ExportFailDialog from 'components/ExportFailDialog'
 import queryType from 'state/query/constants'
@@ -383,6 +384,7 @@ class Main extends PureComponent {
         <ExtraInfoDialog />
         <ExportFailDialog />
         {showFrameworkMode && <MaintenanceDialog />}
+        {showFrameworkMode && <TaxPrecisionDialog />}
       </>
     ) : ''
   }

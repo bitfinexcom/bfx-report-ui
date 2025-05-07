@@ -561,6 +561,11 @@
       "approximate": "Xấp xỉ",
       "exact": "Chính xác"
     },
+    "fees_deduction": {
+      "title": "Khấu trừ phí",
+      "yes": "Có",
+      "no": "Không"
+    },
     "filter": {
       "symbol": "Biểu tượng",
       "pair": "Lọc cặp",

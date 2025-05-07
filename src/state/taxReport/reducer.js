@@ -1,4 +1,5 @@
 import authTypes from 'state/auth/constants'
+import deductFeesTypes from 'ui/FeesDeductionSelector/constants'
 
 import types from './constants'
 
@@ -9,6 +10,8 @@ const transactionsInitState = {
   dataReceived: false,
   showDisclaimer: true,
   strategy: types.STRATEGY_LIFO,
+  showCalcPrecisionModal: false,
+  shouldFeesBeDeducted: deductFeesTypes.FALSE,
 }
 
 const initialState = {
@@ -25,6 +28,7 @@ export function taxReportReducer(state = initialState, action) {
           pageLoading: true,
           strategy: state.transactions.strategy,
           showDisclaimer: state.transactions.showDisclaimer,
+          shouldFeesBeDeducted: state.transactions.shouldFeesBeDeducted,
         },
       }
     case types.UPDATE_TRANSACTIONS: {
@@ -37,6 +41,7 @@ export function taxReportReducer(state = initialState, action) {
           dataReceived: true,
           strategy: state.transactions.strategy,
           showDisclaimer: state.transactions.showDisclaimer,
+          shouldFeesBeDeducted: state.transactions.shouldFeesBeDeducted,
         },
       }
     }
@@ -55,6 +60,15 @@ export function taxReportReducer(state = initialState, action) {
         transactions: {
           ...state.transactions,
           showDisclaimer: payload,
+        },
+      }
+    }
+    case types.SET_SHOW_TAX_REPORT_PRECISION_MODAL: {
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          showCalcPrecisionModal: payload,
         },
       }
     }
@@ -87,6 +101,15 @@ export function taxReportReducer(state = initialState, action) {
           dataReceived: true,
         },
       }
+    case types.SET_DEDUCT_FEES: {
+      return {
+        ...state,
+        transactions: {
+          ...state.transactions,
+          shouldFeesBeDeducted: payload,
+        },
+      }
+    }
     case authTypes.LOGOUT:
       return initialState
     default: {

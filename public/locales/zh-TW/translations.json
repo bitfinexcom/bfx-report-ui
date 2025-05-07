@@ -561,6 +561,11 @@
       "approximate": "約等值",
       "exact": "Exact"
     },
+    "fees_deduction": {
+      "title": "扣除費用",
+      "yes": "是",
+      "no": "否"
+    },
     "filter": {
       "symbol": "幣別或交易對",
       "pair": "交易對篩選",
@@ -774,6 +779,12 @@
       "note": "如果您的歷史記錄較多，建議將窗口保持在背景開啟直到完成。",
       "sync_1": "同步進行中。",
       "sync_2": "請等待完成後再生成您的稅務報告。"
+    },
+    "precision_modal": {
+      "message_1": "稅務報告包含以下已下市的代幣：{{delistedTokens}}。",
+      "message_2": "這些代幣已無公開交易紀錄，可能導致報告不準確。請自行核實所有數據，或諮詢具資格的稅務顧問。",
+      "ok": "確定",
+      "decline": "取消"
     },
     "sections": {
       "startSnapshot": "期初快照",
