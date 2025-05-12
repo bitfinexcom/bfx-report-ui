@@ -120,7 +120,7 @@ const getColumns = ({
             {formatAmount(fees)}
             {' '}
             <span className='bitfinex-show-soft'>
-              {currency}
+              {mapSymbol(currency)}
             </span>
           </>
         </Cell>
