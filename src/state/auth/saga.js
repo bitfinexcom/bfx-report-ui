@@ -36,7 +36,8 @@ import config from 'config'
 import types from './constants'
 import actions from './actions'
 
-const { showFrameworkMode } = config
+const { showFrameworkMode, showAuthPage } = config
+const isProduction = isEqual(process.env.REACT_APP_ENV, 'production')
 
 function redirectToBitfinex() {
   window.location.href = 'https://www.bitfinex.com/login/'
@@ -505,6 +506,7 @@ function* logout() {
   } else {
     yield put(actions.clearAuth())
     yield call(clearAuthToken)
+    if (isProduction && !showAuthPage) yield call(redirectToBitfinex)
   }
 }
 
