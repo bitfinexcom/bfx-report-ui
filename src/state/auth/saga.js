@@ -38,6 +38,10 @@ import actions from './actions'
 
 const { showFrameworkMode } = config
 
+function redirectToBitfinex() {
+  window.location.href = 'https://www.bitfinex.com/login/'
+}
+
 const updateAuthErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
   topic: 'auth.auth',
