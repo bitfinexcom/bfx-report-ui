@@ -86,9 +86,6 @@ function* uiLoaded() {
       apiSecret,
       authToken,
     }))
-  } else if (process.env.REACT_APP_ENV === 'development' && !config.showFrameworkMode) {
-    // redirect to bfx login if no auth fro the web
-    window.location.href = 'https://www.bitfinex.com/login/'
   }
 
   // skip auto auth for electron build because front is loading faster
