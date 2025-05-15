@@ -37,8 +37,8 @@ import types from './constants'
 import actions from './actions'
 
 const { showFrameworkMode, showAuthPage } = config
-const isProduction = isEqual(process.env.REACT_APP_ENV, 'development')
-const shouldRedirectToBfxLogin = isProduction && !showAuthPage
+const isProduction = isEqual(process.env.REACT_APP_ENV, 'production')
+const shouldRedirectToBfxLogin = isProduction && !showAuthPage && !showFrameworkMode
 
 function redirectToBfxLogin() {
   window.location.href = 'https://www.bitfinex.com/login/'
