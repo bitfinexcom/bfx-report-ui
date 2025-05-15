@@ -37,9 +37,9 @@ import types from './constants'
 import actions from './actions'
 
 const { showFrameworkMode, showAuthPage } = config
-const isProduction = isEqual(process.env.REACT_APP_ENV, 'production')
+const isProduction = isEqual(process.env.REACT_APP_ENV, 'development')
 
-function redirectToBitfinex() {
+function redirectToBitfinexLogin() {
   window.location.href = 'https://www.bitfinex.com/login/'
 }
 
@@ -360,6 +360,7 @@ function* checkAuth() {
 
     const auth = yield select(selectAuth)
     if (isEmpty(auth)) {
+      if (isProduction && !showAuthPage) yield call(redirectToBitfinexLogin)
       return
     }
 
@@ -506,7 +507,7 @@ function* logout() {
   } else {
     yield put(actions.clearAuth())
     yield call(clearAuthToken)
-    if (isProduction && !showAuthPage) yield call(redirectToBitfinex)
+    if (isProduction && !showAuthPage) yield call(redirectToBitfinexLogin)
   }
 }
 
