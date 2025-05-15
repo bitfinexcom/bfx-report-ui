@@ -38,8 +38,9 @@ import actions from './actions'
 
 const { showFrameworkMode, showAuthPage } = config
 const isProduction = isEqual(process.env.REACT_APP_ENV, 'development')
+const shouldRedirectToBfxLogin = isProduction && !showAuthPage
 
-function redirectToBitfinexLogin() {
+function redirectToBfxLogin() {
   window.location.href = 'https://www.bitfinex.com/login/'
 }
 
@@ -360,7 +361,7 @@ function* checkAuth() {
 
     const auth = yield select(selectAuth)
     if (isEmpty(auth)) {
-      if (isProduction && !showAuthPage) yield call(redirectToBitfinexLogin)
+      if (shouldRedirectToBfxLogin) yield call(redirectToBfxLogin)
       return
     }
 
@@ -507,7 +508,7 @@ function* logout() {
   } else {
     yield put(actions.clearAuth())
     yield call(clearAuthToken)
-    if (isProduction && !showAuthPage) yield call(redirectToBitfinexLogin)
+    if (shouldRedirectToBfxLogin) yield call(redirectToBfxLogin)
   }
 }
 
