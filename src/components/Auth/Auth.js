@@ -31,7 +31,6 @@ class Auth extends PureComponent {
     }).isRequired,
     isShown: PropTypes.bool,
     isUsersLoaded: PropTypes.bool,
-    t: PropTypes.func.isRequired,
     usersLoading: PropTypes.bool,
     users: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string,
