@@ -98,10 +98,7 @@
     "passwordCharactersValidationError": "Parola hem büyük hem küçük harf karakterleri içermelidir",
     "passwordRepeatValidationError": "Parolalar eşleşmiyor",
     "rememberMe": "Beni Hatırla",
-    "required": "(gerekli)",
-    "nonideal": {
-      "description": "Raporlar'a token ile giriş yapın..."
-    }
+    "required": "(gerekli)"
   },
   "averagewinloss": {
     "title": "Ortalama Kazanç/Kayıp"

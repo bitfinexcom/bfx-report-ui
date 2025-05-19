@@ -98,10 +98,7 @@
     "passwordCharactersValidationError": "Mật khẩu phải bao gồm cả chữ hoa và chữ thường",
     "passwordRepeatValidationError": "Mật khẩu không trùng khớp",
     "rememberMe": "Nhớ mật khẩu",
-    "required": "(bắt buộc)",
-    "nonideal": {
-      "description": "Đăng nhập vào Báo cáo bằng token..."
-    }
+    "required": "(bắt buộc)"
   },
   "averagewinloss": {
     "title": "Lãi/Lỗ trung bình"
