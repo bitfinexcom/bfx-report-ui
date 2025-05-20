@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 export const propTypes = {
   currentTime: PropTypes.number,
   dataReceived: PropTypes.bool.isRequired,
+  isFirstSyncing: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   positionsTotalPlUsd: PropTypes.number,
   positionsEntries: PropTypes.array.isRequired,

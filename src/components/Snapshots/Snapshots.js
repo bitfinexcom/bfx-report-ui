@@ -10,6 +10,7 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import DateInput from 'ui/DateInput'
+import InitSyncNote from 'ui/InitSyncNote'
 import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
 import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
@@ -104,6 +105,7 @@ class Snapshots extends PureComponent {
       pageLoading,
       dataReceived,
       walletsEntries,
+      isFirstSyncing,
       positionsEntries,
       positionsTotalPlUsd,
       walletsTickersEntries,
@@ -118,7 +120,9 @@ class Snapshots extends PureComponent {
       || (section === MENU_WALLETS && !walletsEntries.length)
 
     let showContent
-    if (section === MENU_WALLETS) {
+    if (isFirstSyncing) {
+      showContent = <InitSyncNote />
+    } else if (section === MENU_WALLETS) {
       showContent = (
         <WalletsSnapshot
           isLoading={isLoading}
