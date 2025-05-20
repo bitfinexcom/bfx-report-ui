@@ -4,6 +4,7 @@ import { Card, Elevation } from '@blueprintjs/core'
 
 import config from 'config'
 import DateInput from 'ui/DateInput'
+import InitSyncNote from 'ui/InitSyncNote'
 import BalancePrecisionSelector from 'ui/BalancePrecisionSelector'
 import {
   SectionHeader,
@@ -79,6 +80,7 @@ class Wallets extends PureComponent {
       pageLoading,
       exactBalance,
       dataReceived,
+      isFirstSyncing,
       setExactBalance,
       snapshotLoading,
       snapshotReceived,
@@ -88,6 +90,18 @@ class Wallets extends PureComponent {
     const walletsData = (isFrameworkMode && exactBalance) ? walletsSnapshotEntries : entries
     const isLoading = (!dataReceived && pageLoading)
       || (exactBalance && !snapshotReceived && snapshotLoading)
+
+    let showContent
+    if (isFirstSyncing) {
+      showContent = <InitSyncNote />
+    } else {
+      showContent = (
+        <WalletsData
+          isLoading={isLoading}
+          entries={walletsData}
+        />
+      )
+    }
 
     return (
       <Card
@@ -122,10 +136,7 @@ class Wallets extends PureComponent {
             </SectionHeaderRow>
           )}
         </SectionHeader>
-        <WalletsData
-          isLoading={isLoading}
-          entries={walletsData}
-        />
+        {showContent}
       </Card>
     )
   }
