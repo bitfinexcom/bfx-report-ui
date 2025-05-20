@@ -182,7 +182,10 @@ class FeesReport extends PureComponent {
                 onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
+            <RefreshButton
+              onClick={refresh}
+              disabled={isFirstSyncing}
+            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
