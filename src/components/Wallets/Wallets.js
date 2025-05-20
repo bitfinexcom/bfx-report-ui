@@ -132,7 +132,10 @@ class Wallets extends PureComponent {
                   onChange={setExactBalance}
                 />
               </SectionHeaderItem>
-              <RefreshButton onClick={this.handleRefresh} />
+              <RefreshButton
+                disabled={isFirstSyncing}
+                onClick={this.handleRefresh}
+              />
             </SectionHeaderRow>
           )}
         </SectionHeader>
