@@ -15,6 +15,7 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
+import InitSyncNote from 'ui/InitSyncNote'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
@@ -56,6 +57,7 @@ class FeesReport extends PureComponent {
     entries: PropTypes.arrayOf(PropTypes.shape({
       mts: PropTypes.number.isRequired,
     })),
+    isFirstSyncing: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     params: PropTypes.shape({
       timeframe: PropTypes.string,
@@ -109,6 +111,7 @@ class FeesReport extends PureComponent {
       pageLoading,
       dataReceived,
       targetSymbols,
+      isFirstSyncing,
       params: { timeframe },
     } = this.props
     const { chartData, dataKeys } = parseFeesReportChartData({
@@ -118,7 +121,9 @@ class FeesReport extends PureComponent {
     })
 
     let showContent
-    if (!dataReceived && pageLoading) {
+    if (isFirstSyncing) {
+      showContent = <InitSyncNote />
+    } else if (!dataReceived && pageLoading) {
       showContent = <Loading />
     } else if (isEmpty(entries)) {
       showContent = <NoData />
