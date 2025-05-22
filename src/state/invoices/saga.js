@@ -60,7 +60,6 @@ function* fetchInvoices() {
     if (error) {
       const { code, message } = error
       if (code === 409) {
-        yield put(actions.setMerchantStatus(false))
         yield put(actions.fetchFail({
           id: 'status.fail',
           topic: 'invoices.title',
