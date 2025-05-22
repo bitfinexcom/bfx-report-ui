@@ -97,6 +97,7 @@ const NavMenu = ({
 
   const classes = classNames('bitfinex-nav-menu', className)
   const target = getTarget(history.location.pathname, false)
+  const shouldShowMerchantHistory = !isTurkishSite && isUserMerchant
 
   return (
     <Menu large className={classes}>
@@ -134,7 +135,7 @@ const NavMenu = ({
       >
         {getMenuItems(MENU_MY_HISTORY, target)}
       </Collapse>
-      {!isTurkishSite && isUserMerchant && (
+      {shouldShowMerchantHistory && (
         <>
           <MenuItem
             icon={<Icons.CART />}
