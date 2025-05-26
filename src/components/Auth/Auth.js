@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { NonIdealState } from '@blueprintjs/core'
-import { IconNames } from '@blueprintjs/icons'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
@@ -33,7 +31,6 @@ class Auth extends PureComponent {
     }).isRequired,
     isShown: PropTypes.bool,
     isUsersLoaded: PropTypes.bool,
-    t: PropTypes.func.isRequired,
     usersLoading: PropTypes.bool,
     users: PropTypes.arrayOf(PropTypes.shape({
       email: PropTypes.string,
@@ -89,7 +86,6 @@ class Auth extends PureComponent {
 
   render() {
     const {
-      t,
       isShown,
       usersLoading,
       authData: { hasAuthData },
@@ -102,19 +98,10 @@ class Auth extends PureComponent {
     } = this.state
     const isMultipleAccsSelected = (isEqual(authType, AUTH_TYPES.MULTIPLE_ACCOUNTS) && showFrameworkMode)
 
-    if (!isShown || (showFrameworkMode && !hasAuthData && usersLoading)) {
+    if (!isShown || (showFrameworkMode && !hasAuthData && usersLoading) || !showAuthPage) {
       return null
     }
 
-    if (!showAuthPage) {
-      return (
-        <NonIdealState
-          className='bitfinex-nonideal'
-          icon={IconNames.KEY}
-          description={t('auth.nonideal.description')}
-        />
-      )
-    }
     switch (mode) {
       case isMultipleAccsSelected && MODES.SIGN_UP:
         return (

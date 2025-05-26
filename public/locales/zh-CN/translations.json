@@ -98,10 +98,7 @@
     "passwordCharactersValidationError": "密码须包含大小写字母",
     "passwordRepeatValidationError": "密码不相符",
     "rememberMe": "自动储存",
-    "required": "(必需)",
-    "nonideal": {
-      "description": "使用令牌登录 Reports…"
-    }
+    "required": "(必需)"
   },
   "averagewinloss": {
     "title": "平均盈利/损失"

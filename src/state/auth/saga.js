@@ -36,7 +36,13 @@ import config from 'config'
 import types from './constants'
 import actions from './actions'
 
-const { showFrameworkMode } = config
+const { showFrameworkMode, showAuthPage } = config
+const isProduction = isEqual(process.env.REACT_APP_ENV, 'production')
+const shouldRedirectToBfxLogin = isProduction && !showAuthPage && !showFrameworkMode
+
+function redirectToBfxLogin() {
+  window.location.href = 'https://www.bitfinex.com/login/'
+}
 
 const updateAuthErrorStatus = msg => updateErrorStatus({
   id: 'status.request.error',
@@ -355,6 +361,7 @@ function* checkAuth() {
 
     const auth = yield select(selectAuth)
     if (isEmpty(auth)) {
+      if (shouldRedirectToBfxLogin) yield call(redirectToBfxLogin)
       return
     }
 
@@ -501,6 +508,7 @@ function* logout() {
   } else {
     yield put(actions.clearAuth())
     yield call(clearAuthToken)
+    if (shouldRedirectToBfxLogin) yield call(redirectToBfxLogin)
   }
 }
 

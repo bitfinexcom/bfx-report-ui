@@ -98,10 +98,7 @@
     "passwordCharactersValidationError": "Пароль должен включать как заглавные, так и строчные буквы",
     "passwordRepeatValidationError": "Пароль не совпадает",
     "rememberMe": "Запомнить меня",
-    "required": "(обязательно)",
-    "nonideal": {
-      "description": "Войти в Reports по токену..."
-    }
+    "required": "(обязательно)"
   },
   "averagewinloss": {
     "title": "Среднее от выигрышей/проигрышей"

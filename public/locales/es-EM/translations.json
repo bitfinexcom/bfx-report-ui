@@ -98,10 +98,7 @@
     "passwordCharactersValidationError": "La contraseña debe incluir caracteres en mayúsculas y minúsculas",
     "passwordRepeatValidationError": "Las contraseñas no coinciden",
     "rememberMe": "Recuérdame",
-    "required": "(obligatorio)",
-    "nonideal": {
-      "description": "Iniciar sesión de Reportes con token..."
-    }
+    "required": "(obligatorio)"
   },
   "averagewinloss": {
     "title": "Pérdida/Ganancia promedio"
