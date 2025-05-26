@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Cell } from '@blueprintjs/table'
 
 import DataTable from 'ui/DataTable'
+import { mapSymbol } from 'state/symbols/utils'
 import { fixedFloat, formatAmount } from 'ui/utils'
 import {
   COLUMN_WIDTHS,
@@ -28,13 +29,14 @@ export const getColumns = ({
       if (isLoading) return getCellLoader(14, 72)
       if (isNoData) return getCellNoData(t('column.noResults'))
       const { curr } = data[rowIndex]
+      const formattedCurrency = mapSymbol(curr)
       return (
-        <Cell tooltip={getTooltipContent(curr, t)}>
-          {curr}
+        <Cell tooltip={getTooltipContent(formattedCurrency, t)}>
+          {formattedCurrency}
         </Cell>
       )
     },
-    copyText: rowIndex => data[rowIndex].curr,
+    copyText: rowIndex => mapSymbol(data[rowIndex].curr),
   },
   {
     id: 'volume',
