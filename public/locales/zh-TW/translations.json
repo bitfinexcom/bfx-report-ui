@@ -98,10 +98,7 @@
     "passwordCharactersValidationError": "密碼必須包含英文大小寫字母",
     "passwordRepeatValidationError": "密碼不一致",
     "rememberMe": "自動儲存",
-    "required": "（必填）",
-    "nonideal": {
-      "description": "使用令牌登入報告..."
-    }
+    "required": "（必填）"
   },
   "averagewinloss": {
     "title": "平均淨/損失"
