@@ -463,10 +463,6 @@
     "changeLogs": "Change Logs"
   },
   "nodata": "No related data in this time range. You can try another time range.",
-  "no_merchant": {
-    "title": "This section is only available for ",
-    "link": "merchant accounts"
-  },
   "orders": {
     "title": "Orders"
   },

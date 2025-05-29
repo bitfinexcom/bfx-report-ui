@@ -463,10 +463,6 @@
     "changeLogs": "變更紀錄"
   },
   "nodata": "沒有相關資料。請試試其他時間範圍。",
-  "no_merchant": {
-    "title": "此部分僅適用於 ",
-    "link": "店家帳戶"
-  },
   "orders": {
     "title": "訂單"
   },

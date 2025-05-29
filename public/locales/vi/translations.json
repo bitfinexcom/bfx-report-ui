@@ -463,10 +463,6 @@
     "changeLogs": "Thay đổi nhật ký"
   },
   "nodata": "Không có dữ liệu liên quan trong phạm vi thời gian này. Bạn có thể thử với phạm vi thời gian khác.",
-  "no_merchant": {
-    "title": "Phần này chỉ dành cho ",
-    "link": "tài khoản nhà bán hàng"
-  },
   "orders": {
     "title": "Lệnh"
   },
