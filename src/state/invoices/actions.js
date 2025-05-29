@@ -86,13 +86,6 @@ export function clearTargetSymbols() {
   }
 }
 
-export function setMerchantStatus(status) {
-  return {
-    type: types.SET_MERCHANT,
-    payload: status,
-  }
-}
-
 export default {
   addTargetSymbol,
   clearTargetSymbols,
@@ -100,7 +93,6 @@ export default {
   fetchInvoices,
   refresh,
   removeTargetSymbol,
-  setMerchantStatus,
   setTargetSymbols,
   updateInvoices,
 }

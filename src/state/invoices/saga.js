@@ -58,21 +58,11 @@ function* fetchInvoices() {
     yield put(updatePagination(TYPE, result))
 
     if (error) {
-      const { code, message } = error
-      if (code === 409) {
-        yield put(actions.setMerchantStatus(false))
-        yield put(actions.fetchFail({
-          id: 'status.fail',
-          topic: 'invoices.title',
-          detail: message,
-        }))
-      } else {
-        yield put(actions.fetchFail({
-          id: 'status.fail',
-          topic: 'invoices.title',
-          detail: error?.message ?? JSON.stringify(error),
-        }))
-      }
+      yield put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'invoices.title',
+        detail: error?.message ?? JSON.stringify(error),
+      }))
     }
   } catch (fail) {
     yield put(actions.fetchFail({

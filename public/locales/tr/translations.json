@@ -463,10 +463,6 @@
     "changeLogs": "Değişiklik Günlükleri"
   },
   "nodata": "Bu zaman aralığında ilgili veri yok. Başka bir zaman aralığı deneyebilirsiniz.",
-  "no_merchant": {
-    "title": "Bu bölüm yalnızca şunlar için mevcuttur ",
-    "link": "satıcı hesapları"
-  },
   "orders": {
     "title": "Emirler"
   },

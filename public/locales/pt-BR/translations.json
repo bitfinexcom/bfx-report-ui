@@ -463,10 +463,6 @@
     "changeLogs": "Registro de alterações"
   },
   "nodata": "Nenhum dado relacionado neste intervalo de tempo. Você pode tentar outro intervalo.",
-  "no_merchant": {
-    "title": "Esta seção está disponível apenas para ",
-    "link": "contas de comerciante"
-  },
   "orders": {
     "title": "Ordens"
   },

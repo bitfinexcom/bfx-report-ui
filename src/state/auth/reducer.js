@@ -60,6 +60,7 @@ const initialState = {
   userShouldReLogin: '',
   shouldNotSyncOnStartupAfterUpdate: false,
   isAuthBtnDisabled: false,
+  isUserMerchant: false,
   authTokenTTLSec: types.DEFAULT_TOKEN_TTL,
 }
 

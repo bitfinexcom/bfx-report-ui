@@ -463,10 +463,6 @@
     "changeLogs": "更改日志"
   },
   "nodata": "此时间范围没有相关数据。您可以尝试其他时间范围。",
-  "no_merchant": {
-    "title": "此部分仅适用于 ",
-    "link": "商家账号"
-  },
   "orders": {
     "title": "订单"
   },

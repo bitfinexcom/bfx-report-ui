@@ -463,10 +463,6 @@
     "changeLogs": "Cambiar registro"
   },
   "nodata": "No hay datos relacionados en este rango de tiempo. Puedes probar con otras fechas.",
-  "no_merchant": {
-    "title": "Esta sección solo está disponible para ",
-    "link": "cuentas de Comerciante"
-  },
   "orders": {
     "title": "Órdenes"
   },
