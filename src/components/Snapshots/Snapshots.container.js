@@ -17,7 +17,7 @@ import {
   getWalletsEntries,
   getTimestamp,
 } from 'state/snapshots/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import Snapshots from './Snapshots'
 
@@ -32,6 +32,7 @@ const mapStateToProps = state => ({
   walletsTickersEntries: getWalletsTickersEntries(state),
   walletsEntries: getWalletsEntries(state),
   isSyncRequired: getIsSyncRequired(state),
+  isFirstSyncing: getIsFirstSyncing(state),
 })
 
 const mapDispatchToProps = {
