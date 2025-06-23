@@ -1,4 +1,5 @@
 import _isArray from 'lodash/isArray'
+import _includes from 'lodash/includes'
 
 import Icons from 'icons'
 import config from 'config'
@@ -499,6 +500,8 @@ export function getPageSize(target) {
   return 0
 }
 
+export const getIsExportDisabled = (path) => _includes(NO_EXPORT_TARGETS, getTarget(path))
+
 export default {
   getIcon,
   getFilterType,
@@ -507,6 +510,7 @@ export default {
   getQueryLimit,
   getTarget,
   isValidTimeStamp,
+  getIsExportDisabled,
   EXPORT_TARGETS,
   ROUTE_WHITELIST,
   TYPE_WHITELIST,
