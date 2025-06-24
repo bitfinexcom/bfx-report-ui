@@ -1,5 +1,6 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
@@ -15,9 +16,9 @@ import _toString from 'lodash/toString'
 import Icon from 'icons'
 import config from 'config'
 import { tracker } from 'utils/trackers'
-import { getPath } from 'state/query/utils'
 import { getAuthData } from 'state/auth/selectors'
 import queryConstants from 'state/query/constants'
+import { getPath, getIsExportHidden } from 'state/query/utils'
 
 import SyncMode from '../SyncMode'
 import QueryMode from '../QueryMode'
@@ -47,6 +48,7 @@ const AccountMenu = ({
   toggleExportDialog,
   isSubAccsAvailable,
 }) => {
+  const { pathname } = useLocation()
   const { hasAuthData } = useSelector(getAuthData)
   const showSubAccounts = showFrameworkMode && isSubAccsAvailable
 
@@ -64,6 +66,11 @@ const AccountMenu = ({
     tracker.trackEvent(type, 'Navigation')
     toggler()
   }
+
+  const showExport = useMemo(
+    () => !getIsExportHidden(pathname),
+    [pathname],
+  )
 
   return (
     <div
@@ -89,12 +96,14 @@ const AccountMenu = ({
                 icon={<Icon.SIGN_IN />}
                 text={t('navItems.loginHistory')}
               />
-              <MenuItem
-                text={t('download.export')}
-                icon={<Icon.FILE_EXPORT />}
-                className='account-menu-export'
-                onClick={() => toggleDialog('Export', toggleExportDialog)}
-              />
+              {showExport && (
+                <MenuItem
+                  text={t('download.export')}
+                  icon={<Icon.FILE_EXPORT />}
+                  className='account-menu-export'
+                  onClick={() => toggleDialog('Export', toggleExportDialog)}
+                />
+              )}
               {showSubAccounts && (
                 <MenuItem
                   onClick={() => switchSection(MENU_SUB_ACCOUNTS)}
