@@ -13,6 +13,7 @@ const Export = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { pathname } = useLocation()
+
   const toggleExport = () => {
     tracker.trackEvent('Export', 'Navigation')
     dispatch(toggleExportDialog())
