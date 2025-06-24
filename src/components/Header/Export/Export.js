@@ -7,26 +7,26 @@ import classNames from 'classnames'
 import Icon from 'icons'
 import { tracker } from 'utils/trackers'
 import { toggleExportDialog } from 'state/ui/actions'
-import { getIsExportDisabled } from 'state/query/utils'
+import { getIsExportHidden } from 'state/query/utils'
 
 const Export = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const location = useLocation()
+  const { pathname } = useLocation()
   const toggleExport = () => {
     tracker.trackEvent('Export', 'Navigation')
     dispatch(toggleExportDialog())
   }
 
-  const disabled = useMemo(
-    () => getIsExportDisabled(location.pathname),
-    [location.pathname],
+  const hidden = useMemo(
+    () => getIsExportHidden(pathname),
+    [pathname],
   )
 
   return (
     <div
       onClick={toggleExport}
-      className={classNames('export', { disabled })}
+      className={classNames('export', { hidden })}
     >
       <Icon.FILE_EXPORT />
       <span>
