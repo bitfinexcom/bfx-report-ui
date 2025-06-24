@@ -72,13 +72,8 @@
       }
     }
 
-    &.disabled {
-      color: var(--color2);
-      pointer-events: none;
-
-      svg path {
-        fill: var(--color2);
-      }
+    &.hidden {
+      display: none;
     }
   }
 
