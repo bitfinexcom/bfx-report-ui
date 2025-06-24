@@ -61,6 +61,7 @@ class SymbolSelector extends PureComponent {
         ...inactiveCurrencies,
       ]
       : preparedCoins
+    const preparedItems = [...new Set(items)]
 
     return (
       <Select
@@ -68,7 +69,7 @@ class SymbolSelector extends PureComponent {
         filterable
         itemRenderer={this.itemRenderer}
         itemPredicate={this.itemPredicate}
-        items={items}
+        items={preparedItems}
         popoverClassName='bitfinex-select-menu--symbol'
         value={currentCoin}
         type={'Symbol'}
