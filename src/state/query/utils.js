@@ -500,7 +500,7 @@ export function getPageSize(target) {
   return 0
 }
 
-export const getIsExportDisabled = (path) => _includes(NO_EXPORT_TARGETS, getTarget(path))
+export const getIsExportHidden = (path) => _includes(NO_EXPORT_TARGETS, getTarget(path))
 
 export default {
   getIcon,
@@ -510,7 +510,7 @@ export default {
   getQueryLimit,
   getTarget,
   isValidTimeStamp,
-  getIsExportDisabled,
+  getIsExportHidden,
   EXPORT_TARGETS,
   ROUTE_WHITELIST,
   TYPE_WHITELIST,
