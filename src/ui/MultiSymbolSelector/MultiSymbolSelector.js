@@ -70,11 +70,12 @@ class MultiSymbolSelector extends PureComponent {
         ...inactiveCurrencies,
       ]
       : shownCoins
+    const preparedItems = [...new Set(items)]
 
     return (
       <MultiSelect
         disabled={!coins.length && !existingCoins.length}
-        items={items}
+        items={preparedItems}
         itemRenderer={this.renderSymbol}
         itemPredicate={this.itemPredicate}
         onItemSelect={toggleSymbol}
