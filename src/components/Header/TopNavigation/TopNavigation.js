@@ -1,5 +1,6 @@
-import React, { useState, memo } from 'react'
+import React, { useMemo, useState, memo } from 'react'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import {
@@ -16,9 +17,9 @@ import _toString from 'lodash/toString'
 import Icon from 'icons'
 import config from 'config'
 import { tracker } from 'utils/trackers'
-import { getPath } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 import { getAuthData } from 'state/auth/selectors'
+import { getPath, getIsExportHidden } from 'state/query/utils'
 import { getMenuItemChevron } from 'ui/NavMenu/NavMenu.helpers'
 
 import SyncMode from '../SyncMode'
@@ -48,9 +49,15 @@ const TopNavigation = ({
   toggleExportDialog,
   isSubAccsAvailable,
 }) => {
+  const { pathname } = useLocation()
   const [isOpen, setIsOpen] = useState(false)
   const { hasAuthData } = useSelector(getAuthData)
   const showSubAccounts = showFrameworkMode && isSubAccsAvailable
+
+  const showExport = useMemo(
+    () => !getIsExportHidden(pathname),
+    [pathname],
+  )
 
   const togglePopover = (isPopoverOpen) => {
     setIsOpen(isPopoverOpen)
@@ -124,12 +131,14 @@ const TopNavigation = ({
                 text={t('navItems.loginHistory')}
                 onClick={() => switchSection(MENU_LOGINS)}
               />
-              <MenuItem
-                className='account-menu-export'
-                onClick={toggleExportDialog}
-                icon={<Icon.FILE_EXPORT />}
-                text={t('download.export')}
-              />
+              {showExport && (
+                <MenuItem
+                  className='account-menu-export'
+                  onClick={toggleExportDialog}
+                  icon={<Icon.FILE_EXPORT />}
+                  text={t('download.export')}
+                />
+              )}
               {showSubAccounts && (
                 <MenuItem
                   icon={<Icon.USER_CIRCLE />}
