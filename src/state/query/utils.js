@@ -1,4 +1,5 @@
 import _isArray from 'lodash/isArray'
+import _includes from 'lodash/includes'
 
 import Icons from 'icons'
 import config from 'config'
@@ -193,6 +194,10 @@ export const EXPORT_TARGETS = [
   ...FRAMEWORK,
   MENU_LOGINS,
   MENU_CHANGE_LOGS,
+]
+
+export const NO_EXPORT_TARGETS = [
+  MENU_ACCOUNT_SUMMARY,
 ]
 
 export const NO_QUERY_LIMIT_TARGETS = [
@@ -495,6 +500,8 @@ export function getPageSize(target) {
   return 0
 }
 
+export const getIsExportHidden = (path) => _includes(NO_EXPORT_TARGETS, getTarget(path))
+
 export default {
   getIcon,
   getFilterType,
@@ -503,8 +510,10 @@ export default {
   getQueryLimit,
   getTarget,
   isValidTimeStamp,
+  getIsExportHidden,
   EXPORT_TARGETS,
   ROUTE_WHITELIST,
   TYPE_WHITELIST,
   NO_QUERY_LIMIT_TARGETS,
+  NO_EXPORT_TARGETS,
 }

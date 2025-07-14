@@ -71,6 +71,10 @@
         fill: var(--activeColor);
       }
     }
+
+    &.hidden {
+      display: none;
+    }
   }
 
   .sync-mode, .query-mode {
