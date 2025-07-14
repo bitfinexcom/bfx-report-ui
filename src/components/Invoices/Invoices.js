@@ -12,7 +12,6 @@ import {
 } from 'ui/SectionHeader'
 import DataTable from 'ui/DataTable'
 import TimeRange from 'ui/TimeRange'
-import NoMerchant from 'ui/NoMerchant'
 import Pagination from 'ui/Pagination'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import RefreshButton from 'ui/RefreshButton'
@@ -71,7 +70,6 @@ class Invoices extends PureComponent {
     })).isRequired,
     existingCoins: PropTypes.arrayOf(PropTypes.string),
     getFullTime: PropTypes.func.isRequired,
-    isMerchant: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
@@ -105,7 +103,6 @@ class Invoices extends PureComponent {
       refresh,
       columns,
       timeOffset,
-      isMerchant,
       getFullTime,
       pageLoading,
       columnsWidth,
@@ -126,9 +123,7 @@ class Invoices extends PureComponent {
     }).filter(({ id }) => columns[id])
 
     let showContent
-    if (!isMerchant) {
-      showContent = <NoMerchant />
-    } else if (isNoData) {
+    if (isNoData) {
       showContent = (
         <div className='data-table-wrapper'>
           <DataTable

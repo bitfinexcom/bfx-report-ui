@@ -14,7 +14,6 @@ import {
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import {
   getEntries,
-  getIsMerchant,
   getPageLoading,
   getDataReceived,
   getExistingCoins,
@@ -31,7 +30,6 @@ import Invoices from './Invoices'
 const mapStateToProps = state => ({
   getFullTime: getFullTime(state),
   timeOffset: getTimeOffset(state),
-  isMerchant: getIsMerchant(state),
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
   existingCoins: getExistingCoins(state),

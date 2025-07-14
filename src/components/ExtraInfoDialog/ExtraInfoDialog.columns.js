@@ -3,6 +3,7 @@ import { Cell } from '@blueprintjs/table'
 
 import Explorer from 'ui/Explorer'
 import { formatAmount } from 'ui/utils'
+import { mapSymbol } from 'state/symbols/utils'
 
 const getColumns = ({
   t,
@@ -29,7 +30,7 @@ const getColumns = ({
       const { currency } = preparedData[rowIndex]
       return (
         <Cell>
-          {currency}
+          {mapSymbol(currency)}
         </Cell>
       )
     },
@@ -119,7 +120,7 @@ const getColumns = ({
             {formatAmount(fees)}
             {' '}
             <span className='bitfinex-show-soft'>
-              {currency}
+              {mapSymbol(currency)}
             </span>
           </>
         </Cell>

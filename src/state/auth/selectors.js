@@ -26,6 +26,7 @@ export const getIsSubAccsAvailable = state => _first(
 export const getLocalUsername = state => getAuth(state)?.localUsername ?? null
 export const getIsAuthBtnDisabled = state => getAuth(state)?.isAuthBtnDisabled ?? false
 export const getAuthTokenTTL = state => getAuth(state)?.authTokenTTLSec ?? types.DEFAULT_TOKEN_TTL
+export const getIsUserMerchant = state => getAuth(state)?.isUserMerchant ?? false
 
 export const getAuthData = state => {
   const {
@@ -114,4 +115,5 @@ export default {
   getShouldNotSyncOnStartupAfterUpdate,
   getIsAuthBtnDisabled,
   getAuthTokenTTL,
+  getIsUserMerchant,
 }
