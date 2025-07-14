@@ -49,6 +49,7 @@ class PairSelector extends PureComponent {
         ...inactivePairs,
       ]
       : pairs
+    const preparedItems = [...new Set(items)]
 
     return (
       <Select
@@ -57,7 +58,7 @@ class PairSelector extends PureComponent {
         itemPredicate={this.itemPredicate}
         onChange={onPairSelect}
         filterable
-        items={items}
+        items={preparedItems}
         value={currentPair}
       />
     )
