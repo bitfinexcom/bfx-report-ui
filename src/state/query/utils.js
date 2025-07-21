@@ -218,6 +218,7 @@ export const NO_TIME_FRAME_TARGETS = [
   MENU_DERIVATIVES,
   MENU_WALLETS,
   MENU_SNAPSHOTS,
+  MENU_POSITIONS_ACTIVE,
 ]
 
 export function isValidTimeStamp(n) {
