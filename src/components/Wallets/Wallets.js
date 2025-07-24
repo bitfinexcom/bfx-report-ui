@@ -91,18 +91,6 @@ class Wallets extends PureComponent {
     const isLoading = (!dataReceived && pageLoading)
       || (exactBalance && !snapshotReceived && snapshotLoading)
 
-    let showContent
-    if (isFirstSyncing) {
-      showContent = <InitSyncNote />
-    } else {
-      showContent = (
-        <WalletsData
-          isLoading={isLoading}
-          entries={walletsData}
-        />
-      )
-    }
-
     return (
       <Card
         elevation={Elevation.ZERO}
@@ -139,7 +127,14 @@ class Wallets extends PureComponent {
             </SectionHeaderRow>
           )}
         </SectionHeader>
-        {showContent}
+        {isFirstSyncing ? (
+          <InitSyncNote />
+        ) : (
+          <WalletsData
+            isLoading={isLoading}
+            entries={walletsData}
+          />
+        )}
       </Card>
     )
   }
