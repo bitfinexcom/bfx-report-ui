@@ -6,6 +6,7 @@ import {
 } from 'redux-saga/effects'
 import queryString from 'query-string'
 import _assign from 'lodash/assign'
+import _isArray from 'lodash/isArray'
 import _includes from 'lodash/includes'
 
 import { LANGUAGES } from 'locales/i18n'
@@ -272,7 +273,7 @@ function* getOptions({ target }) {
     case MENU_CHANGE_LOGS:
       break
     case MENU_POSITIONS_AUDIT:
-      options.id = sign || undefined
+      options.id = _isArray(sign) ? sign.map(Number) : undefined
       break
     default: {
       const symbol = formatSymbol(target, sign)

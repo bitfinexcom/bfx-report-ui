@@ -15,6 +15,7 @@ export const propTypes = {
   fetchData: PropTypes.func.isRequired,
   fetchSnapshots: PropTypes.func.isRequired,
   dataReceived: PropTypes.bool.isRequired,
+  isFirstSyncing: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   snapshotLoading: PropTypes.bool.isRequired,
   snapshotReceived: PropTypes.bool.isRequired,
