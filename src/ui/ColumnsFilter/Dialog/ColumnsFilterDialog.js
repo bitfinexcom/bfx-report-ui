@@ -1,12 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
-
-import { propTypes, defaultProps } from './ColumnsFilterDialog.props'
 
 const ColumnsFilterDialog = ({
   isOpen,
@@ -56,7 +55,13 @@ const ColumnsFilterDialog = ({
   )
 }
 
-ColumnsFilterDialog.propTypes = propTypes
-ColumnsFilterDialog.defaultProps = defaultProps
+ColumnsFilterDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClear: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  hasChanges: PropTypes.bool.isRequired,
+  children: PropTypes.element.isRequired,
+  onFiltersApply: PropTypes.func.isRequired,
+}
 
 export default ColumnsFilterDialog
