@@ -1,3 +1,1 @@
-import ColumnsFilterDialog from './ColumnsFilterDialog'
-
-export default ColumnsFilterDialog
+export { default } from './ColumnsFilterDialog'
