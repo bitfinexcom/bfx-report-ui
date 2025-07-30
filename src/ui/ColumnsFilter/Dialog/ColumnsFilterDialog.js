@@ -1,5 +1,5 @@
 import React from 'react'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
@@ -16,8 +16,8 @@ const ColumnsFilterDialog = (props) => {
     onClear,
     onCancel,
     onFiltersApply,
-    t,
   } = props
+  const { t } = useTranslation()
 
   return (
     <Dialog
@@ -60,4 +60,4 @@ const ColumnsFilterDialog = (props) => {
 ColumnsFilterDialog.propTypes = propTypes
 ColumnsFilterDialog.defaultProps = defaultProps
 
-export default withTranslation('translations')(ColumnsFilterDialog)
+export default ColumnsFilterDialog
