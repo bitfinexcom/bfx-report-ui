@@ -20,12 +20,12 @@ const ColumnsFilterDialog = ({
 
   return (
     <Dialog
-      className='columns-filter-dialog'
+      isOpen={isOpen}
       onClose={onCancel}
-      title={t('columnsfilter.title')}
       icon={<Icon.FILTER />}
       isCloseButtonShown={false}
-      isOpen={isOpen}
+      title={t('columnsfilter.title')}
+      className='columns-filter-dialog'
     >
       <div className={Classes.DIALOG_BODY}>
         {children}
@@ -44,9 +44,9 @@ const ColumnsFilterDialog = ({
             {t('columnsfilter.cancel')}
           </Button>
           <Button
+            disabled={!hasChanges}
             intent={Intent.PRIMARY}
             onClick={onFiltersApply}
-            disabled={!hasChanges}
           >
             {t('columnsfilter.apply')}
           </Button>
