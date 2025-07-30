@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import {
@@ -64,4 +64,4 @@ ColumnsFilterDialog.propTypes = {
   onFiltersApply: PropTypes.func.isRequired,
 }
 
-export default ColumnsFilterDialog
+export default memo(ColumnsFilterDialog)
