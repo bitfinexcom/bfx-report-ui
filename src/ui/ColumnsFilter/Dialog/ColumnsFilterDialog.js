@@ -8,15 +8,14 @@ import Icon from 'icons'
 
 import { propTypes, defaultProps } from './ColumnsFilterDialog.props'
 
-const ColumnsFilterDialog = (props) => {
-  const {
-    children,
-    isOpen,
-    hasChanges,
-    onClear,
-    onCancel,
-    onFiltersApply,
-  } = props
+const ColumnsFilterDialog = ({
+  isOpen,
+  onClear,
+  onCancel,
+  children,
+  hasChanges,
+  onFiltersApply,
+}) => {
   const { t } = useTranslation()
 
   return (
