@@ -24,6 +24,7 @@ const initialState = {
   isLongSync: false,
   showInitSyncPopup: false,
   lastSyncMts: null,
+  shouldRefreshAfterSync: false,
 }
 
 export function syncReducer(state = initialState, action) {
