@@ -150,6 +150,12 @@ export function syncReducer(state = initialState, action) {
         lastSyncMts: payload,
       }
     }
+    case types.SET_SHOULD_REFRESH_REPORT_AFTER_SYNC: {
+      return {
+        ...state,
+        shouldRefreshAfterSync: payload,
+      }
+    }
     default: {
       return state
     }
