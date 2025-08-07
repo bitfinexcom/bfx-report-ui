@@ -5,24 +5,24 @@ import { useTranslation } from 'react-i18next'
 import Select from 'ui/Select'
 
 const SideSelector = ({
-  className,
-  onChange,
   value,
+  onChange,
+  className,
 }) => {
   const { t } = useTranslation()
 
   const items = [
-    { value: 1, label: t('floan.side.provided') },
     { value: 0, label: t('floan.side.both') },
     { value: -1, label: t('floan.side.taken') },
+    { value: 1, label: t('floan.side.provided') },
   ]
 
   return (
     <Select
-      className={className}
+      value={value}
       items={items}
       onChange={onChange}
-      value={value}
+      className={className}
     />
   )
 }
@@ -34,8 +34,8 @@ SideSelector.propTypes = {
 }
 
 SideSelector.defaultProps = {
-  className: '',
   value: '',
+  className: '',
 }
 
 export default SideSelector
