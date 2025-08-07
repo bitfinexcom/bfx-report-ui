@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -11,11 +11,11 @@ const SideSelector = ({
 }) => {
   const { t } = useTranslation()
 
-  const items = [
+  const items = useMemo(() => [
     { value: 0, label: t('floan.side.both') },
     { value: -1, label: t('floan.side.taken') },
     { value: 1, label: t('floan.side.provided') },
-  ]
+  ], [t])
 
   return (
     <Select
