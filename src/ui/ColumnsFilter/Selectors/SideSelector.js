@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -38,4 +38,4 @@ SideSelector.defaultProps = {
   className: '',
 }
 
-export default SideSelector
+export default memo(SideSelector)
