@@ -4,12 +4,11 @@ import { useTranslation } from 'react-i18next'
 
 import Select from 'ui/Select'
 
-const SideSelector = (props) => {
-  const {
-    className,
-    onChange,
-    value,
-  } = props
+const SideSelector = ({
+  className,
+  onChange,
+  value,
+}) => {
   const { t } = useTranslation()
 
   const items = [
