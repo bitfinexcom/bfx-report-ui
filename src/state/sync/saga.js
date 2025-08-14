@@ -84,6 +84,7 @@ function* stopSyncNow() {
     yield put(actions.setEstimatedTime({}))
     yield put(actions.showInitSyncPopup(false))
     yield put(updateStatus({ id: 'sync.logout' }))
+    yield put(actions.setShouldRefreshAfterSync(false))
   }
   if (error) {
     yield put(updateSyncErrorStatus('during stopSyncNow'))
@@ -98,6 +99,7 @@ function* stopSyncing() {
     yield put(actions.setEstimatedTime({}))
     yield put(actions.showInitSyncPopup(false))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
+    yield put(actions.setShouldRefreshAfterSync(false))
   }
   if (error) {
     yield put(updateSyncErrorStatus('during disableSyncMode'))
