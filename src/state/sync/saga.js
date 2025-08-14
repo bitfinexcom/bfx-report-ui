@@ -170,6 +170,7 @@ function* forceQueryFromDb() {
   yield put(actions.setIsSyncRequired(false))
   yield put(actions.showInitSyncPopup(false))
   yield call(refreshLastFinishedSyncMts)
+  yield put(actions.setShouldRefreshAfterSync(true))
 }
 
 function* syncLogout() {
