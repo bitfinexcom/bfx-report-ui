@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -40,4 +40,4 @@ WalletSelector.defaultProps = {
   className: '',
 }
 
-export default WalletSelector
+export default memo(WalletSelector)
