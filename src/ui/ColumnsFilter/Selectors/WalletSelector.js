@@ -4,12 +4,11 @@ import { useTranslation } from 'react-i18next'
 
 import Select from 'ui/Select'
 
-const WalletSelector = (props) => {
-  const {
-    className,
-    onChange,
-    value,
-  } = props
+const WalletSelector = ({
+  value,
+  onChange,
+  className,
+}) => {
   const { t } = useTranslation()
 
   const items = useMemo(() => [
@@ -22,10 +21,10 @@ const WalletSelector = (props) => {
 
   return (
     <Select
-      className={className}
       items={items}
-      onChange={onChange}
       value={value}
+      onChange={onChange}
+      className={className}
     />
   )
 }
@@ -37,8 +36,8 @@ WalletSelector.propTypes = {
 }
 
 WalletSelector.defaultProps = {
-  className: '',
   value: '',
+  className: '',
 }
 
 export default WalletSelector
