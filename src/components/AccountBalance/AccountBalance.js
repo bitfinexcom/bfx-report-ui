@@ -34,7 +34,12 @@ import {
   getIsUnrealizedProfitExcluded,
 } from 'state/accountBalance/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 const AccountBalance = () => {
   const { t } = useTranslation()
@@ -49,11 +54,19 @@ const AccountBalance = () => {
   const currTimeFrame = useSelector(getCurrentTimeFrame)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   const isProfitExcluded = useSelector(getIsUnrealizedProfitExcluded)
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
   const shouldFetchAccountBalance = !dataReceived && !pageLoading && !isSyncRequired
 
   useEffect(() => {
     if (shouldFetchAccountBalance) dispatch(fetchBalance())
   }, [timeRange, shouldFetchAccountBalance])
+
+  useEffect(() => {
+    if (shouldRefreshAfterSync) {
+      dispatch(fetchBalance())
+      dispatch(setShouldRefreshAfterSync(false))
+    }
+  }, [shouldRefreshAfterSync])
 
   const handleTimeframeChange = useCallback((timeframe) => {
     dispatch(setParams({ timeframe }))
