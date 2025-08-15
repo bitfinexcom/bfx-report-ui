@@ -20,6 +20,7 @@ import {
   getSyncMode,
   getIsSyncing,
   getSyncProgress,
+  getIsSyncRequired,
 } from './selectors'
 import syncConfigSaga, { getSyncConf } from './saga.config'
 
@@ -163,14 +164,17 @@ function* refreshLastFinishedSyncMts() {
 
 function* forceQueryFromDb() {
   const syncProgress = yield select(getSyncProgress)
+  const isSyncRequired = yield select(getIsSyncRequired)
   if (syncProgress === 100) {
     yield put(updateStatus({ id: 'sync.sync-done' }))
+  }
+  if (!isSyncRequired) {
+    yield put(actions.setShouldRefreshAfterSync(true))
   }
   yield put(actions.setIsSyncing(false))
   yield put(actions.setIsSyncRequired(false))
   yield put(actions.showInitSyncPopup(false))
   yield call(refreshLastFinishedSyncMts)
-  yield put(actions.setShouldRefreshAfterSync(true))
 }
 
 function* syncLogout() {
