@@ -275,13 +275,14 @@ export function checkFetch(prevProps, props, type) {
     dataReceived, pageLoading, fetchData, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync,
   } = props
   const shouldRefresh = prevIsSyncRequired !== isSyncRequired
+  const shouldBeRefreshedAfterSync = showFrameworkMode && getIsSyncRequiredType(type) && shouldRefreshAfterSync
   if (!dataReceived && dataReceived !== prevDataReceived && !pageLoading) {
     fetchData()
   }
   if (showFrameworkMode && shouldRefresh) {
     fetchData()
   }
-  if (getIsSyncRequiredType(type) && shouldRefreshAfterSync) {
+  if (shouldBeRefreshedAfterSync) {
     fetchData()
     setShouldRefreshAfterSync(false)
   }
