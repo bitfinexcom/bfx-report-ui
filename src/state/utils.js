@@ -7,8 +7,10 @@ import { get, omit, isEqual } from '@bitfinex/lib-js-util-base'
 
 import { store } from 'state/store'
 import config from 'config'
-import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import queryType from 'state/query/constants'
+import {
+  getPath, getIsSyncRequiredType, TYPE_WHITELIST, ROUTE_WHITELIST,
+} from 'state/query/utils'
 import {
   getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol, getMappedSymbolsFromUrl,
 } from 'state/symbols/utils'
@@ -263,6 +265,9 @@ export function checkFetch(prevProps, props, type) {
   if (!isValidateType(type)) {
     return
   }
+  console.log('+++', getIsSyncRequiredType(type))
+  console.log('+++type', type)
+
   const {
     dataReceived: prevDataReceived, isSyncRequired: prevIsSyncRequired,
   } = prevProps
@@ -276,7 +281,7 @@ export function checkFetch(prevProps, props, type) {
   if (showFrameworkMode && shouldRefresh) {
     fetchData()
   }
-  if (shouldRefreshAfterSync) {
+  if (getIsSyncRequiredType(type) && shouldRefreshAfterSync) {
     fetchData()
     setShouldRefreshAfterSync(false)
   }
