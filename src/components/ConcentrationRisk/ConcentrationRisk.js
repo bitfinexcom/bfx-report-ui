@@ -61,22 +61,24 @@ class ConcentrationRisk extends PureComponent {
 
   componentDidMount() {
     const {
-      dataReceived, pageLoading, isSyncRequired, setShouldRefreshAfterSync, refresh, shouldRefreshAfterSync,
+      dataReceived, pageLoading, isSyncRequired, fetchWallets,
     } = this.props
     if (!isSyncRequired && !dataReceived && !pageLoading) {
+      fetchWallets()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      refresh, isSyncRequired, setShouldRefreshAfterSync, shouldRefreshAfterSync,
+    } = this.props
+    const { isSyncRequired: prevIsSyncRequired } = prevProps
+    if (isSyncRequired !== prevIsSyncRequired) {
       refresh()
     }
     if (shouldRefreshAfterSync) {
       refresh()
       setShouldRefreshAfterSync(false)
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { fetchWallets, isSyncRequired } = this.props
-    const { isSyncRequired: prevIsSyncRequired } = prevProps
-    if (isSyncRequired !== prevIsSyncRequired) {
-      fetchWallets()
     }
   }
 
