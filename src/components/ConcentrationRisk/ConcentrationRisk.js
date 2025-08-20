@@ -40,6 +40,8 @@ class ConcentrationRisk extends PureComponent {
     isFirstSyncing: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     setTimestamp: PropTypes.func.isRequired,
+    shouldRefreshAfterSync: PropTypes.bool.isRequired,
+    setShouldRefreshAfterSync: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
   }
 
@@ -59,10 +61,14 @@ class ConcentrationRisk extends PureComponent {
 
   componentDidMount() {
     const {
-      dataReceived, pageLoading, fetchWallets, isSyncRequired,
+      dataReceived, pageLoading, isSyncRequired, setShouldRefreshAfterSync, refresh, shouldRefreshAfterSync,
     } = this.props
     if (!isSyncRequired && !dataReceived && !pageLoading) {
-      fetchWallets()
+      refresh()
+    }
+    if (shouldRefreshAfterSync) {
+      refresh()
+      setShouldRefreshAfterSync(false)
     }
   }
 
