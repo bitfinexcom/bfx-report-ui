@@ -61,7 +61,7 @@ class ConcentrationRisk extends PureComponent {
 
   componentDidMount() {
     const {
-      dataReceived, pageLoading, isSyncRequired, fetchWallets,
+      dataReceived, pageLoading, fetchWallets, isSyncRequired,
     } = this.props
     if (!isSyncRequired && !dataReceived && !pageLoading) {
       fetchWallets()
