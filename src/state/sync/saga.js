@@ -169,6 +169,7 @@ function* forceQueryFromDb() {
     yield put(updateStatus({ id: 'sync.sync-done' }))
   }
   if (!isSyncRequired) {
+    console.log('+++forceQueryFromDb')
     yield put(actions.setShouldRefreshAfterSync(true))
   }
   yield put(actions.setIsSyncing(false))
@@ -249,6 +250,7 @@ function* progressUpdate({ payload }) {
     yield put(actions.setIsSyncing(false))
     if (error) yield put(updateSyncErrorStatus(error))
   } else if (state === types.SYNC_FINISHED) {
+    console.log('++++SYNC_FINISHED')
     yield put(actions.setIsSyncing(false))
     yield put(actions.showInitSyncPopup(false))
   } else {
@@ -268,7 +270,9 @@ function* requestsRedirectUpdate({ payload }) {
   if (result) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
     yield put(actions.setIsSyncing(false))
+    // console.log('+++requestsRedirectUpdate')
     yield put(actions.showInitSyncPopup(false))
+    yield put(actions.setShouldRefreshAfterSync(true))
     yield call(refreshLastFinishedSyncMts)
   } else {
     yield put(actions.setSyncMode(types.MODE_OFFLINE))
