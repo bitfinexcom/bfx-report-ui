@@ -1,32 +1,30 @@
-import React from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import {
   Button, Classes, Dialog, Intent,
 } from '@blueprintjs/core'
 
 import Icon from 'icons'
 
-import { propTypes, defaultProps } from './ColumnsFilterDialog.props'
-
-const ColumnsFilterDialog = (props) => {
-  const {
-    children,
-    isOpen,
-    hasChanges,
-    onClear,
-    onCancel,
-    onFiltersApply,
-    t,
-  } = props
+const ColumnsFilterDialog = ({
+  isOpen,
+  onClear,
+  onCancel,
+  children,
+  hasChanges,
+  onFiltersApply,
+}) => {
+  const { t } = useTranslation()
 
   return (
     <Dialog
-      className='columns-filter-dialog'
+      isOpen={isOpen}
       onClose={onCancel}
-      title={t('columnsfilter.title')}
       icon={<Icon.FILTER />}
       isCloseButtonShown={false}
-      isOpen={isOpen}
+      title={t('columnsfilter.title')}
+      className='columns-filter-dialog'
     >
       <div className={Classes.DIALOG_BODY}>
         {children}
@@ -45,9 +43,9 @@ const ColumnsFilterDialog = (props) => {
             {t('columnsfilter.cancel')}
           </Button>
           <Button
+            disabled={!hasChanges}
             intent={Intent.PRIMARY}
             onClick={onFiltersApply}
-            disabled={!hasChanges}
           >
             {t('columnsfilter.apply')}
           </Button>
@@ -57,7 +55,13 @@ const ColumnsFilterDialog = (props) => {
   )
 }
 
-ColumnsFilterDialog.propTypes = propTypes
-ColumnsFilterDialog.defaultProps = defaultProps
+ColumnsFilterDialog.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClear: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  hasChanges: PropTypes.bool.isRequired,
+  children: PropTypes.element.isRequired,
+  onFiltersApply: PropTypes.func.isRequired,
+}
 
-export default withTranslation('translations')(ColumnsFilterDialog)
+export default memo(ColumnsFilterDialog)
