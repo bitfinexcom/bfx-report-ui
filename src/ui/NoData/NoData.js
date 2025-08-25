@@ -1,24 +1,23 @@
-import React from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import { Button, Intent } from '@blueprintjs/core'
 
 import Icon from 'icons'
 
-import { propTypes, defaultProps } from './NoData.props'
-
-const NoData = (props) => {
-  const { refresh, t, title } = props
+const NoData = ({ refresh, title }) => {
+  const { t } = useTranslation()
 
   return (
     <div className='no-data'>
       <div className='no-data-wrapper'>
         <Icon.WARNING />
-        <div>{t(title || 'nodata')}</div>
+        <div>{t(title)}</div>
         {refresh && (
           <Button
             onClick={refresh}
-            className='no-data-update button--large'
             intent={Intent.PRIMARY}
+            className='no-data-update button--large'
           >
             {t('update')}
           </Button>
@@ -28,7 +27,14 @@ const NoData = (props) => {
   )
 }
 
-NoData.propTypes = propTypes
-NoData.defaultProps = defaultProps
+NoData.propTypes = {
+  title: PropTypes.string,
+  refresh: PropTypes.func,
+}
 
-export default withTranslation('translations')(NoData)
+NoData.defaultProps = {
+  refresh: null,
+  title: 'nodata',
+}
+
+export default memo(NoData)
