@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 import _map from 'lodash/map'
@@ -13,10 +14,10 @@ import getSections from './SectionSwitch.helpers'
 
 const SectionSwitch = ({
   target,
-  history,
   refresh,
   hasSubSections,
 }) => {
+  const history = useHistory()
   const { t } = useTranslation()
 
   const switchSection = (e) => {
@@ -59,12 +60,6 @@ SectionSwitch.propTypes = {
   refresh: PropTypes.func,
   hasSubSections: PropTypes.bool,
   target: PropTypes.string.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-    location: PropTypes.shape({
-      search: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
 }
 
 SectionSwitch.defaultProps = {
