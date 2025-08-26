@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import { Button, ButtonGroup, Intent } from '@blueprintjs/core'
 import _map from 'lodash/map'
 import { isEqual } from '@bitfinex/lib-js-util-base'
@@ -11,12 +12,13 @@ import RefreshButton from 'ui/RefreshButton'
 import getSections from './SectionSwitch.helpers'
 
 const SectionSwitch = ({
-  t,
   target,
   history,
   refresh,
   hasSubSections,
 }) => {
+  const { t } = useTranslation()
+
   const switchSection = (e) => {
     const { value } = e.currentTarget
     if (isEqual(value, target)) {
@@ -63,7 +65,6 @@ SectionSwitch.propTypes = {
       search: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  t: PropTypes.func.isRequired,
 }
 
 SectionSwitch.defaultProps = {
