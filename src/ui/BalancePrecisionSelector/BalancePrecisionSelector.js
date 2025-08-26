@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -11,10 +11,10 @@ const { APPROXIMATE, EXACT } = constants
 const BalancePrecisionSelector = ({ onChange, value }) => {
   const { t } = useTranslation()
 
-  const items = [
+  const items = useMemo(() => [
     { value: APPROXIMATE, label: t('selector.balance-precision.approximate') },
     { value: EXACT, label: t('selector.balance-precision.exact') },
-  ]
+  ], [t])
 
   return (
     <Select
