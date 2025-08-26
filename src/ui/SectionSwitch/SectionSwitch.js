@@ -44,7 +44,7 @@ const SectionSwitch = ({
             key={description}
             value={targetSection}
             onClick={switchSection}
-            intent={target === targetSection ? Intent.PRIMARY : undefined}
+            intent={isEqual(target, targetSection) ? Intent.PRIMARY : undefined}
           >
             {t(description)}
           </Button>
