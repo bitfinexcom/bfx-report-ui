@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +20,7 @@ const SectionSwitch = ({
   const history = useHistory()
   const { t } = useTranslation()
 
-  const switchSection = (e) => {
+  const switchSection = useCallback((e) => {
     const { value } = e.currentTarget
     if (isEqual(value, target)) {
       return
@@ -30,7 +30,7 @@ const SectionSwitch = ({
       pathname: getPath(value),
       search: history.location.search,
     })
-  }
+  }, [target, history, getPath])
 
   const sections = useMemo(
     () => getSections(target, hasSubSections),
