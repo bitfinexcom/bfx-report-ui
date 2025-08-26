@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react'
+import React, { memo, useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -67,4 +67,4 @@ SectionSwitch.defaultProps = {
   hasSubSections: false,
 }
 
-export default SectionSwitch
+export default memo(SectionSwitch)
