@@ -265,7 +265,6 @@ export function checkFetch(prevProps, props, type) {
   if (!isValidateType(type)) {
     return
   }
-
   const { isSyncRequired: prevIsSyncRequired } = prevProps
   const {
     refresh, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync,
