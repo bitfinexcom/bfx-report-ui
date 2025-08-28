@@ -24,7 +24,12 @@ import {
   getIsUnrealizedProfitExcluded,
 } from 'state/accountBalance/selectors'
 import { getIsTurkishSite } from 'state/base/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import AppSummary from './AppSummary'
 
@@ -36,6 +41,7 @@ const mapStateToProps = state => ({
   isFirstSync: getIsFirstSyncing(state),
   isTurkishSite: getIsTurkishSite(state),
   isSyncRequired: getIsSyncRequired(state),
+  shouldRefreshAfterSync: getShouldRefreshAfterSync(state),
   isUnrealizedProfitExcluded: getIsUnrealizedProfitExcluded(state),
 })
 
@@ -47,6 +53,7 @@ const mapDispatchToProps = {
   refreshProfits,
   refreshPositions,
   refreshSummaryByAsset,
+  setShouldRefreshAfterSync,
 }
 
 export default compose(
