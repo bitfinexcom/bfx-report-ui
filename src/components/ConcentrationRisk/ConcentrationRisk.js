@@ -19,6 +19,7 @@ import InitSyncNote from 'ui/InitSyncNote'
 import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import { fixedFloat } from 'ui/utils'
+import { checkFetch } from 'state/utils'
 import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
 
@@ -69,17 +70,7 @@ class ConcentrationRisk extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      refresh, isSyncRequired, setShouldRefreshAfterSync, shouldRefreshAfterSync,
-    } = this.props
-    const { isSyncRequired: prevIsSyncRequired } = prevProps
-    if (isSyncRequired !== prevIsSyncRequired) {
-      refresh()
-    }
-    if (shouldRefreshAfterSync) {
-      refresh()
-      setShouldRefreshAfterSync(false)
-    }
+    checkFetch(prevProps, this.props, TYPE)
   }
 
   parseData = (filteredData) => {
