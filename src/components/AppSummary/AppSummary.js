@@ -37,6 +37,8 @@ const AppSummary = ({
   refreshPositions,
   currentTimeFrame,
   refreshSummaryByAsset,
+  shouldRefreshAfterSync,
+  setShouldRefreshAfterSync,
   isUnrealizedProfitExcluded,
 }) => {
   useEffect(() => {
@@ -60,6 +62,13 @@ const AppSummary = ({
     refreshPositions()
     refreshSummaryByAsset()
   }, [refresh, refreshBalance, refreshSummaryByAsset, refreshProfits, refreshPositions])
+
+  useEffect(() => {
+    if (shouldRefreshAfterSync) {
+      onRefresh()
+      setShouldRefreshAfterSync(false)
+    }
+  }, [shouldRefreshAfterSync])
 
   return (
     <Card
