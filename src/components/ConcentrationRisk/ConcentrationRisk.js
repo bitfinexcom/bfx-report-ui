@@ -40,6 +40,8 @@ class ConcentrationRisk extends PureComponent {
     isFirstSyncing: PropTypes.bool.isRequired,
     refresh: PropTypes.func.isRequired,
     setTimestamp: PropTypes.func.isRequired,
+    shouldRefreshAfterSync: PropTypes.bool.isRequired,
+    setShouldRefreshAfterSync: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
   }
 
