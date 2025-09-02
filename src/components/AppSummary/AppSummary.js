@@ -156,8 +156,6 @@ AppSummary.propTypes = {
   refreshSummaryByAsset: PropTypes.func.isRequired,
   refreshProfits: PropTypes.func.isRequired,
   refreshPositions: PropTypes.func.isRequired,
-  shouldRefreshAfterSync: PropTypes.bool.isRequired,
-  setShouldRefreshAfterSync: PropTypes.func.isRequired,
 }
 
 AppSummary.defaultProps = {

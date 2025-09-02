@@ -15,7 +15,8 @@ import {
 } from 'state/profits/selectors'
 import { fetchProfits } from 'state/profits/actions'
 import { getTimeRange } from 'state/timeRange/selectors'
-import { getIsSyncRequired } from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
+import { getIsSyncRequired, getShouldRefreshAfterSync } from 'state/sync/selectors'
 
 const AccountSummaryProfits = () => {
   const { t } = useTranslation()
@@ -25,12 +26,20 @@ const AccountSummaryProfits = () => {
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const isSyncRequired = useSelector(getIsSyncRequired)
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
       dispatch(fetchProfits())
     }
   }, [timeRange, dataReceived, pageLoading, isSyncRequired])
+
+  useEffect(() => {
+    if (shouldRefreshAfterSync) {
+      dispatch(fetchProfits())
+      dispatch(setShouldRefreshAfterSync(false))
+    }
+  }, [shouldRefreshAfterSync])
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
