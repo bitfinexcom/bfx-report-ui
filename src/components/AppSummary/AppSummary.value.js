@@ -20,7 +20,12 @@ import {
 } from 'state/accountBalance/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
 import { fetchBalance } from 'state/accountBalance/actions'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 const AccountSummaryValue = () => {
   const { t } = useTranslation()
@@ -33,12 +38,20 @@ const AccountSummaryValue = () => {
   const isSyncRequired = useSelector(getIsSyncRequired)
   const currTimeFrame = useSelector(getCurrentTimeFrame)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
       dispatch(fetchBalance())
     }
   }, [timeRange, dataReceived, pageLoading, isSyncRequired])
+
+  useEffect(() => {
+    if (shouldRefreshAfterSync) {
+      dispatch(fetchBalance())
+      dispatch(setShouldRefreshAfterSync(false))
+    }
+  }, [shouldRefreshAfterSync])
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
