@@ -19,7 +19,12 @@ import { getTimezone } from 'state/base/selectors'
 import queryConstants from 'state/query/constants'
 import { getColumnsWidth } from 'state/columns/selectors'
 import { getTimeRange, getTimeFrame } from 'state/timeRange/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import SummaryFilters from './AppSummary.filters'
 import { getAssetColumns } from './AppSummary.columns'
@@ -41,6 +46,7 @@ const AppSummaryByAsset = () => {
   const { start, end } = useSelector(getTimeFrame)
   const minimumBalance = useSelector(getMinimumBalance)
   const useMinimumBalance = useSelector(getUseMinBalance)
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
   const columnsWidth = useSelector((state) => getColumnsWidth(state, TYPE))
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   const isNoData = dataReceived && isEmpty(entries)
@@ -52,7 +58,11 @@ const AppSummaryByAsset = () => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
       dispatch(fetchData())
     }
-  }, [dataReceived, pageLoading, isSyncRequired])
+    if (shouldRefreshAfterSync) {
+      dispatch(fetchData())
+      dispatch(setShouldRefreshAfterSync(false))
+    }
+  }, [dataReceived, pageLoading, isSyncRequired, shouldRefreshAfterSync])
 
   useEffect(() => {
     dispatch(refresh())
