@@ -59,14 +59,11 @@ const AccountBalance = () => {
 
   useEffect(() => {
     if (shouldFetchAccountBalance) dispatch(fetchBalance())
-  }, [timeRange, shouldFetchAccountBalance])
-
-  useEffect(() => {
     if (shouldRefreshAfterSync) {
       dispatch(fetchBalance())
       dispatch(setShouldRefreshAfterSync(false))
     }
-  }, [shouldRefreshAfterSync])
+  }, [timeRange, shouldFetchAccountBalance, shouldRefreshAfterSync])
 
   const handleTimeframeChange = useCallback((timeframe) => {
     dispatch(setParams({ timeframe }))
