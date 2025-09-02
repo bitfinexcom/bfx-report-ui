@@ -32,14 +32,11 @@ const AccountSummaryProfits = () => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
       dispatch(fetchProfits())
     }
-  }, [timeRange, dataReceived, pageLoading, isSyncRequired])
-
-  useEffect(() => {
     if (shouldRefreshAfterSync) {
       dispatch(fetchProfits())
       dispatch(setShouldRefreshAfterSync(false))
     }
-  }, [shouldRefreshAfterSync])
+  }, [timeRange, dataReceived, pageLoading, isSyncRequired, shouldRefreshAfterSync])
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
