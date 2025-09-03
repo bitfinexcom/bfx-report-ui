@@ -124,7 +124,10 @@ const AccountBalance = () => {
               onChange={handleUnrealizedProfitChange}
             />
           </SectionHeaderItem>
-          <RefreshButton onClick={onRefresh} />
+          <RefreshButton
+            onClick={onRefresh}
+            disabled={isFirstSync}
+          />
         </SectionHeaderRow>
       </SectionHeader>
       {showContent}
