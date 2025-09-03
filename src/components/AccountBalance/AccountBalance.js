@@ -16,6 +16,7 @@ import NoData from 'ui/NoData'
 import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
+import InitSyncNote from 'ui/InitSyncNote'
 import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
@@ -75,7 +76,9 @@ const AccountBalance = () => {
   )
 
   let showContent
-  if (isLoading) {
+  if (isFirstSync) {
+    showContent = <InitSyncNote />
+  } else if (isLoading) {
     showContent = <Loading />
   } else if (isEmpty(entries)) {
     showContent = <NoData />
