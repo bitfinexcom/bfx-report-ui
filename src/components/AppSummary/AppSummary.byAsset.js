@@ -58,7 +58,7 @@ const AppSummaryByAsset = () => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
       dispatch(fetchData())
     }
-    if (shouldRefreshAfterSync) {
+    if (shouldRefreshAfterSync && !isSyncRequired) {
       dispatch(fetchData())
       dispatch(setShouldRefreshAfterSync(false))
     }

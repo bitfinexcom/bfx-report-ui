@@ -76,7 +76,7 @@ class ConcentrationRisk extends PureComponent {
     if (isSyncRequired !== prevIsSyncRequired) {
       refresh()
     }
-    if (shouldRefreshAfterSync) {
+    if (shouldRefreshAfterSync && !isSyncRequired) {
       refresh()
       setShouldRefreshAfterSync(false)
     }

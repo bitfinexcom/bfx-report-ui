@@ -44,7 +44,7 @@ const AccountSummaryValue = () => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
       dispatch(fetchBalance())
     }
-    if (shouldRefreshAfterSync) {
+    if (shouldRefreshAfterSync && !isSyncRequired) {
       dispatch(fetchBalance())
       dispatch(setShouldRefreshAfterSync(false))
     }

@@ -279,7 +279,7 @@ export function checkFetch(prevProps, props, type) {
   if (showFrameworkMode && shouldRefresh) {
     fetchData()
   }
-  if (shouldBeRefreshedAfterSync) {
+  if (shouldBeRefreshedAfterSync && !isSyncRequired) {
     fetchData()
     setShouldRefreshAfterSync(false)
   }

@@ -59,7 +59,7 @@ const AccountBalance = () => {
 
   useEffect(() => {
     if (shouldFetchAccountBalance) dispatch(fetchBalance())
-    if (shouldRefreshAfterSync) {
+    if (shouldRefreshAfterSync && !isSyncRequired) {
       dispatch(fetchBalance())
       dispatch(setShouldRefreshAfterSync(false))
     }

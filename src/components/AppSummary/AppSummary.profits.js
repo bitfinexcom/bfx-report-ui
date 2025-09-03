@@ -32,7 +32,7 @@ const AccountSummaryProfits = () => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
       dispatch(fetchProfits())
     }
-    if (shouldRefreshAfterSync) {
+    if (shouldRefreshAfterSync && !isSyncRequired) {
       dispatch(fetchProfits())
       dispatch(setShouldRefreshAfterSync(false))
     }
