@@ -155,7 +155,6 @@ export const SYNC_REQUIRED_TARGETS = [
   MENU_LOAN_REPORT,
   MENU_SNAPSHOTS,
   MENU_TAX_REPORT,
-  MENU_WALLETS,
 ]
 
 // Should keep the order, which used in ExportTargetsSelector
