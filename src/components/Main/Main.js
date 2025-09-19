@@ -20,7 +20,6 @@ import FundingLoanHistory from 'components/FundingLoanHistory'
 import FundingOfferHistory from 'components/FundingOfferHistory'
 import FundingPayment from 'components/FundingPayment'
 import GoToRangeDialog from 'components/GoToRangeDialog'
-import Invoices from 'components/Invoices'
 import Ledgers from 'components/Ledgers'
 import LoanReport from 'components/LoanReport'
 import Logins from 'components/Logins'
@@ -134,7 +133,6 @@ class Main extends PureComponent {
     authIsShown: PropTypes.bool,
     authStatus: PropTypes.bool.isRequired,
     isTurkishSite: PropTypes.bool.isRequired,
-    isUserMerchant: PropTypes.bool.isRequired,
     isSubAccsAvailable: PropTypes.bool.isRequired,
     errorDialogDisabled: PropTypes.bool.isRequired,
   }
@@ -148,12 +146,10 @@ class Main extends PureComponent {
       authStatus,
       authIsShown,
       isTurkishSite,
-      isUserMerchant,
       isSubAccsAvailable,
       errorDialogDisabled,
     } = this.props
     const showSubAccounts = showFrameworkMode && isSubAccsAvailable
-    const showInvoices = !isTurkishSite && isUserMerchant
 
     return authStatus && !authIsShown ? (
       <>
@@ -174,13 +170,6 @@ class Main extends PureComponent {
               path={PATHS.MENU_LEDGERS}
               component={Ledgers}
             />
-            {showInvoices && (
-              <Route
-                exact
-                path={PATHS.MENU_INVOICES}
-                component={Invoices}
-              />
-            )}
             <Route
               exact
               path={PATHS.MENU_CANDLES}
