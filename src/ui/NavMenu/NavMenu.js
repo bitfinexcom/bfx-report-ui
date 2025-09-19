@@ -19,7 +19,6 @@ import { tracker } from 'utils/trackers'
 import { getPath, getTarget } from 'state/query/utils'
 
 import { toggleNavigationDrawer } from 'state/ui/actions'
-import { getIsUserMerchant } from 'state/auth/selectors'
 import { getIsNavigationDrawerOpen } from 'state/ui/selectors'
 import menuTypes from './NavMenu.constants'
 import { getSections, getMenuItemChevron, getSectionClasses } from './NavMenu.helpers'
@@ -42,7 +41,6 @@ const NavMenu = ({
   const [isMarketHistoryOpen, setIsMarketHistoryOpen] = useState(false)
   const [isMerchantHistoryOpen, setIsMerchantHistoryOpen] = useState(false)
   const dispatch = useDispatch()
-  const isUserMerchant = useSelector(getIsUserMerchant)
   const isNavigationDrawerOpen = useSelector(getIsNavigationDrawerOpen)
 
   const handleItemClick = (e, nextTarget) => {
@@ -97,7 +95,6 @@ const NavMenu = ({
 
   const classes = classNames('bitfinex-nav-menu', className)
   const target = getTarget(history.location.pathname, false)
-  const showMerchantHistory = !isTurkishSite && isUserMerchant
 
   return (
     <Menu large className={classes}>
@@ -135,24 +132,6 @@ const NavMenu = ({
       >
         {getMenuItems(MENU_MY_HISTORY, target)}
       </Collapse>
-      {showMerchantHistory && (
-        <>
-          <MenuItem
-            icon={<Icons.CART />}
-            text={t('navItems.merchantHistory.title')}
-            className={getSectionClasses(isMerchantHistoryOpen)}
-            labelElement={getMenuItemChevron(isMerchantHistoryOpen)}
-            onClick={() => handleMenuClick(MENU_MERCHANT_HISTORY)}
-          />
-          <Collapse
-            keepChildrenMounted
-            isOpen={isMerchantHistoryOpen}
-            className='sub_items_menu'
-          >
-            {getMenuItems(MENU_MERCHANT_HISTORY, target)}
-          </Collapse>
-        </>
-      )}
       <MenuItem
         icon={<Icons.CHART />}
         text={t('navItems.marketHistory.title')}
