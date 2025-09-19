@@ -114,7 +114,7 @@ const SECTION_COLUMNS = {
   [MENU_MOVEMENTS]: [
     { id: 'moreDetails', name: 'moreDetails' },
     { id: 'id', name: 'id', type: INTEGER, filter: true, hidden: true },
-    { id: 'mtsUpdated', name: 'date', type: DATE, filter: true },
+    { id: 'mtsStarted', name: 'date', type: DATE, filter: true },
     { id: 'currency', name: 'currency' },
     { id: 'status', name: 'status', type: STRING, filter: true },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
