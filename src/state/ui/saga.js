@@ -9,6 +9,8 @@ import {
   setTimezone, setTheme, setLang, setSrc, setElectronTheme,
 } from 'state/base/actions'
 import baseTypes from 'state/base/constants'
+import { getCookieValue } from 'utils/browser'
+import { BFX_TOKEN_COOKIE } from 'var/platform'
 import { getTheme } from 'state/base/selectors'
 import { setTimeRange } from 'state/timeRange/actions'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -85,6 +87,14 @@ function* uiLoaded() {
       apiKey,
       apiSecret,
       authToken,
+    }))
+  }
+  // handle auth from the cookie
+  const cookieToken = getCookieValue(BFX_TOKEN_COOKIE)
+  console.log('+++cookieToken', cookieToken)
+  if (cookieToken) {
+    yield put(updateAuth({
+      authToken: cookieToken,
     }))
   }
 
