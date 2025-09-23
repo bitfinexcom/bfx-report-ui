@@ -24,6 +24,8 @@ import types from './constants'
 import selectors from './selectors'
 import { togglePaginationDialog } from './actions'
 
+const { showFrameworkMode } = config
+
 function* uiLoaded() {
   if (config.isElectronApp) {
     handleElectronLoad()
@@ -90,11 +92,11 @@ function* uiLoaded() {
       authToken,
     }))
   }
+
   // handle auth from the cookie
   const cookieToken = getCookieValue(BFX_TOKEN_COOKIE)
   const isProduction = isEqual(process.env.REACT_APP_ENV, 'production')
-  console.log('+++cookieToken', cookieToken)
-  if (!isProduction && cookieToken) {
+  if (!showFrameworkMode && isProduction && cookieToken) {
     yield put(updateAuth({
       authToken: cookieToken,
     }))
