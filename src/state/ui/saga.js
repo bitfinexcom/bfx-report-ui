@@ -2,6 +2,7 @@ import {
   call, take, put, select, takeLatest,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import { LANGUAGES } from 'locales/i18n'
@@ -91,8 +92,9 @@ function* uiLoaded() {
   }
   // handle auth from the cookie
   const cookieToken = getCookieValue(BFX_TOKEN_COOKIE)
+  const isProduction = isEqual(process.env.REACT_APP_ENV, 'production')
   console.log('+++cookieToken', cookieToken)
-  if (cookieToken) {
+  if (!isProduction && cookieToken) {
     yield put(updateAuth({
       authToken: cookieToken,
     }))
