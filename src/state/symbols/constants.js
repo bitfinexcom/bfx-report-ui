@@ -1,4 +1,4 @@
-export const EXTENDED_CCY_LIST = ['LNX', 'ETH2P', 'ETH2R', 'ETH2U']
+export const EXTENDED_CCY_LIST = ['LNX', 'ETH2P', 'ETH2R', 'ETH2U', 'USDT0ARB', 'USDT0INK', 'USDT0OPX']
 
 export default {
   FETCH_SYMBOLS: 'BITFINEX/SYMBOLS/FETCH',

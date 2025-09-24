@@ -50,16 +50,16 @@ const getColumns = ({
     copyText: rowIndex => filteredData[rowIndex].id,
   },
   {
-    id: 'mtsUpdated',
+    id: 'mtsStarted',
     className: 'align-left',
     nameStr: `${t('column.date')} (${timeOffset})`,
-    width: getColumnWidth('mtsUpdated', columnsWidth),
+    width: getColumnWidth('mtsStarted', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
+      const timestamp = getFullTime(filteredData[rowIndex].mtsStarted)
       return getCell(timestamp, t)
     },
-    copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
+    copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsStarted),
   },
   {
     id: 'currency',

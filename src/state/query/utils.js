@@ -147,7 +147,6 @@ export const FILTERS_WHITELIST = [
 // Should keep the order, which used in ExportTargetsSelector
 const BASIC_TARGETS = [
   MENU_LEDGERS,
-  MENU_INVOICES,
   MENU_TRADES,
   MENU_ORDERS,
   // MENU_ORDER_TRADES, // needs specific id

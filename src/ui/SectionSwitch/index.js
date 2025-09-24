@@ -1,1 +1,1 @@
-export { default } from './SectionSwitch.container'
+export { default } from './SectionSwitch'
