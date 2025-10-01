@@ -24,11 +24,15 @@ import {
   getTransactionsShowDisclaimer,
   getTransactionsShouldFeesBeDeducted,
 } from 'state/taxReport/selectors'
+import queryConstants from 'state/query/constants'
 import { getColumnsWidth } from 'state/columns/selectors'
 import { getFullTime as getFullTimeSelector } from 'state/base/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
-
-import queryConstants from 'state/query/constants'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import Loader from './TaxReport.loader'
 import SyncNote from './TaxReport.note'
@@ -51,11 +55,16 @@ const TaxReport = () => {
   const isNoData = isEmpty(entries)
   const isLoading = !dataReceived && pageLoading
   const isFirstSyncing = useSelector(getIsFirstSyncing)
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
   const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
 
   useEffect(() => {
     if (shouldFetchTaxReport) dispatch(fetchTaxReportTransactions())
-  }, [shouldFetchTaxReport])
+    if (shouldRefreshAfterSync && !isSyncRequired) {
+      dispatch(fetchTaxReportTransactions())
+      dispatch(setShouldRefreshAfterSync(false))
+    }
+  }, [shouldFetchTaxReport, shouldRefreshAfterSync])
 
   const onRefresh = useCallback(
     () => dispatch(fetchTaxReportTransactions()),
