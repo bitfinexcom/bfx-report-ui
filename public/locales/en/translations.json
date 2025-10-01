@@ -176,7 +176,6 @@
     "fundingType": "Funding Type",
     "id": "#",
     "ip": "IP",
-    "invoices": "Invoices",
     "lastTrade": "Last Trade",
     "lastpayout": "Last Payout",
     "liq-price": "Liq Price",
@@ -351,9 +350,6 @@
     "timezone_local": "Current timezone",
     "timezone_placeholder": "Search for timezones..."
   },
-  "invoices":{
-    "title": "Invoices"
-  },
   "ledgers":{
     "title": "Ledgers",
     "categories": {
@@ -446,10 +442,6 @@
         "balances": "Balances",
         "movements": "Movements"
       }
-    },
-    "merchantHistory": {
-      "title": "Merchant History",
-      "invoices": "Invoices"
     },
     "marketHistory": {
       "title": "Market History",

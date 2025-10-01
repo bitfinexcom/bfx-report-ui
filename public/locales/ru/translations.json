@@ -176,7 +176,6 @@
     "fundingType": "Тип обеспечения",
     "id": "#",
     "ip": "IP",
-    "invoices": "Инвойсы",
     "lastTrade": "Last Trade",
     "lastpayout": "Последняя выплата",
     "liq-price": "Цена ликв.",
@@ -351,9 +350,6 @@
     "timezone_local": "Текущий часовой пояс",
     "timezone_placeholder": "Поиск часовых поясов..."
   },
-  "invoices": {
-    "title": "Инвойсы"
-  },
   "ledgers": {
     "title": "Журналы",
     "categories": {
@@ -446,10 +442,6 @@
         "balances": "Баланс",
         "movements": "Движения"
       }
-    },
-    "merchantHistory": {
-      "title": "История Продавца",
-      "invoices": "Инвойсы"
     },
     "marketHistory": {
       "title": "История рынка",

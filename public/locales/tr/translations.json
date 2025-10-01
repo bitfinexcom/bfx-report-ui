@@ -176,7 +176,6 @@
     "fundingType": "Fonlama Türü",
     "id": "No.",
     "ip": "IP",
-    "invoices": "Faturalar",
     "lastTrade": "Last Trade",
     "lastpayout": "Son Ödeme",
     "liq-price": "Likidasyon Fiyatı",
@@ -351,9 +350,6 @@
     "timezone_local": "Geçerli zaman dilimi",
     "timezone_placeholder": "Zaman dilimi ara..."
   },
-  "invoices": {
-    "title": "Faturalar"
-  },
   "ledgers": {
     "title": "Kayıt defterleri",
     "categories": {
@@ -446,10 +442,6 @@
         "balances": "Bakiyeler",
         "movements": "Hareketler"
       }
-    },
-    "merchantHistory": {
-      "title": "Satıcı Geçmişi",
-      "invoices": "Faturalar"
     },
     "marketHistory": {
       "title": "Piyasa Geçmişi",
