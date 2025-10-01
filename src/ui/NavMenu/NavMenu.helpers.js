@@ -41,7 +41,6 @@ const {
 const {
   MENU_MY_ACCOUNT,
   MENU_MY_HISTORY,
-  MENU_MERCHANT_HISTORY,
   MENU_MARKET_HISTORY,
 } = constants
 
