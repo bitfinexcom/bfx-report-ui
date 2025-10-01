@@ -20,7 +20,6 @@ const {
   MENU_DERIVATIVES,
   MENU_FOFFER,
   MENU_FPAYMENT,
-  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_MOVEMENTS,
   MENU_TRADES,
@@ -78,10 +77,6 @@ export const getSections = (menuType, isTurkishSite) => {
         [[MENU_ORDERS, MENU_ORDER_TRADES], 'orders.title'],
         [[MENU_POSITIONS, MENU_POSITIONS_ACTIVE, MENU_POSITIONS_AUDIT], 'positions.title'],
         [MENU_FOFFER, 'navItems.myHistory.funding', isTurkishSite, FUNDING_TARGETS],
-      ]
-    case MENU_MERCHANT_HISTORY:
-      return [
-        [MENU_INVOICES, 'invoices.title', isTurkishSite],
       ]
     case MENU_MARKET_HISTORY:
       return [
