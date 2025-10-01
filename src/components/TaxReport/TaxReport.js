@@ -64,7 +64,7 @@ const TaxReport = () => {
       dispatch(fetchTaxReportTransactions())
       dispatch(setShouldRefreshAfterSync(false))
     }
-  }, [shouldFetchTaxReport, shouldRefreshAfterSync])
+  }, [shouldFetchTaxReport, shouldRefreshAfterSync, isSyncRequired])
 
   const onRefresh = useCallback(
     () => dispatch(fetchTaxReportTransactions()),
