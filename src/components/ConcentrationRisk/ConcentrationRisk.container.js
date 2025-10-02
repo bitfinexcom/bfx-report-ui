@@ -10,7 +10,12 @@ import {
   getPageLoading,
   getDataReceived,
 } from 'state/wallets/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import ConcentrationRisk from './ConcentrationRisk'
 
@@ -21,12 +26,14 @@ const mapStateToProps = state => ({
   dataReceived: getDataReceived(state),
   isSyncRequired: getIsSyncRequired(state),
   isFirstSyncing: getIsFirstSyncing(state),
+  shouldRefreshAfterSync: getShouldRefreshAfterSync(state),
 })
 
 const mapDispatchToProps = {
   refresh,
   fetchWallets,
   setTimestamp,
+  setShouldRefreshAfterSync,
 }
 
 export default compose(

@@ -18,7 +18,12 @@ import {
   getParams,
   getTargetPairs,
 } from 'state/tradedVolume/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import {
+  getIsFirstSyncing,
+  getIsSyncRequired,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import TradedVolume from './TradedVolume'
 
@@ -31,6 +36,7 @@ const mapStateToProps = state => ({
   pageLoading: getPageLoading(state),
   isSyncRequired: getIsSyncRequired(state),
   isFirstSyncing: getIsFirstSyncing(state),
+  shouldRefreshAfterSync: getShouldRefreshAfterSync(state),
 })
 
 const mapDispatchToProps = {
@@ -41,6 +47,7 @@ const mapDispatchToProps = {
   setTargetPairs,
   removeTargetPair,
   clearTargetPairs,
+  setShouldRefreshAfterSync,
 }
 
 const TradedVolumeContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(TradedVolume))

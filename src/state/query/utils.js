@@ -144,6 +144,19 @@ export const FILTERS_WHITELIST = [
   MENU_WEIGHTED_AVERAGES,
 ]
 
+export const SYNC_REQUIRED_TARGETS = [
+  MENU_ACCOUNT_SUMMARY,
+  MENU_ACCOUNT_BALANCE,
+  MENU_TRADED_VOLUME,
+  MENU_WIN_LOSS,
+  MENU_WEIGHTED_AVERAGES,
+  MENU_CONCENTRATION_RISK,
+  MENU_FEES_REPORT,
+  MENU_LOAN_REPORT,
+  MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
+]
+
 // Should keep the order, which used in ExportTargetsSelector
 const BASIC_TARGETS = [
   MENU_LEDGERS,
@@ -504,6 +517,8 @@ export function getPageSize(target) {
 
 export const getIsExportHidden = (path) => _includes(NO_EXPORT_TARGETS, getTarget(path))
 
+export const getIsSyncRequiredType = (type) => _includes(SYNC_REQUIRED_TARGETS, type)
+
 export default {
   getIcon,
   getFilterType,
@@ -513,9 +528,11 @@ export default {
   getTarget,
   isValidTimeStamp,
   getIsExportHidden,
+  getIsSyncRequiredType,
   EXPORT_TARGETS,
   ROUTE_WHITELIST,
   TYPE_WHITELIST,
   NO_QUERY_LIMIT_TARGETS,
   NO_EXPORT_TARGETS,
+  SYNC_REQUIRED_TARGETS,
 }

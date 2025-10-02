@@ -13,6 +13,8 @@ export const propTypes = {
   walletsEntries: PropTypes.array.isRequired,
   fetchData: PropTypes.func.isRequired,
   refresh: PropTypes.func.isRequired,
+  shouldRefreshAfterSync: PropTypes.bool.isRequired,
+  setShouldRefreshAfterSync: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 

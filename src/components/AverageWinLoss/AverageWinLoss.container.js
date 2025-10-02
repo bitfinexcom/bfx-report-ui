@@ -17,7 +17,12 @@ import {
   getDataReceived,
   getCurrentFetchParams,
 } from 'state/winLoss/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import AverageWinLoss from './AverageWinLoss'
 
@@ -30,6 +35,7 @@ const mapStateToProps = state => ({
   isSyncRequired: getIsSyncRequired(state),
   isFirstSyncing: getIsFirstSyncing(state),
   currentFetchParams: getCurrentFetchParams(state),
+  shouldRefreshAfterSync: getShouldRefreshAfterSync(state),
 })
 
 const mapDispatchToProps = {
@@ -37,6 +43,7 @@ const mapDispatchToProps = {
   setParams,
   setReportType,
   fetchData: fetchWinLoss,
+  setShouldRefreshAfterSync,
 }
 
 export default compose(

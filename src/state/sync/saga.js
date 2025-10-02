@@ -20,6 +20,7 @@ import {
   getSyncMode,
   getIsSyncing,
   getSyncProgress,
+  getIsSyncRequired,
 } from './selectors'
 import syncConfigSaga, { getSyncConf } from './saga.config'
 
@@ -84,6 +85,7 @@ function* stopSyncNow() {
     yield put(actions.setEstimatedTime({}))
     yield put(actions.showInitSyncPopup(false))
     yield put(updateStatus({ id: 'sync.logout' }))
+    yield put(actions.setShouldRefreshAfterSync(false))
   }
   if (error) {
     yield put(updateSyncErrorStatus('during stopSyncNow'))
@@ -98,6 +100,7 @@ function* stopSyncing() {
     yield put(actions.setEstimatedTime({}))
     yield put(actions.showInitSyncPopup(false))
     yield put(updateStatus({ id: 'sync.stop-sync' }))
+    yield put(actions.setShouldRefreshAfterSync(false))
   }
   if (error) {
     yield put(updateSyncErrorStatus('during disableSyncMode'))
@@ -161,8 +164,12 @@ function* refreshLastFinishedSyncMts() {
 
 function* forceQueryFromDb() {
   const syncProgress = yield select(getSyncProgress)
+  const isSyncRequired = yield select(getIsSyncRequired)
   if (syncProgress === 100) {
     yield put(updateStatus({ id: 'sync.sync-done' }))
+  }
+  if (!isSyncRequired) {
+    yield put(actions.setShouldRefreshAfterSync(true))
   }
   yield put(actions.setIsSyncing(false))
   yield put(actions.setIsSyncRequired(false))
@@ -262,6 +269,7 @@ function* requestsRedirectUpdate({ payload }) {
     yield put(actions.setSyncMode(types.MODE_ONLINE))
     yield put(actions.setIsSyncing(false))
     yield put(actions.showInitSyncPopup(false))
+    yield put(actions.setShouldRefreshAfterSync(true))
     yield call(refreshLastFinishedSyncMts)
   } else {
     yield put(actions.setSyncMode(types.MODE_OFFLINE))

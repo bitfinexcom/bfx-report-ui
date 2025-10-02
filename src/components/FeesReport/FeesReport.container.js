@@ -22,7 +22,12 @@ import {
   getTargetSymbols,
   getCurrentFetchParams,
 } from 'state/feesReport/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import FeesReport from './FeesReport'
 
@@ -36,6 +41,7 @@ const mapStateToProps = state => ({
   targetSymbols: getTargetSymbols(state),
   isSyncRequired: getIsSyncRequired(state),
   isFirstSyncing: getIsFirstSyncing(state),
+  shouldRefreshAfterSync: getShouldRefreshAfterSync(state),
 })
 
 const mapDispatchToProps = {
@@ -47,6 +53,7 @@ const mapDispatchToProps = {
   removeTargetSymbol,
   clearTargetSymbols,
   fetchData: fetchFeesReport,
+  setShouldRefreshAfterSync,
 }
 
 export default compose(

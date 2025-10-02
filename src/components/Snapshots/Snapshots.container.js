@@ -17,7 +17,12 @@ import {
   getWalletsEntries,
   getTimestamp,
 } from 'state/snapshots/selectors'
-import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import Snapshots from './Snapshots'
 
@@ -33,12 +38,14 @@ const mapStateToProps = state => ({
   walletsEntries: getWalletsEntries(state),
   isSyncRequired: getIsSyncRequired(state),
   isFirstSyncing: getIsFirstSyncing(state),
+  shouldRefreshAfterSync: getShouldRefreshAfterSync(state),
 })
 
 const mapDispatchToProps = {
   fetchData: fetchSnapshots,
   refresh,
   setTimestamp,
+  setShouldRefreshAfterSync,
 }
 
 const SnapshotsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Snapshots))

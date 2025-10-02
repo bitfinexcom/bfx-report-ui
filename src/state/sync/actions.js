@@ -220,6 +220,13 @@ export function setLastSyncTime(payload) {
   }
 }
 
+export function setShouldRefreshAfterSync(payload) {
+  return {
+    type: types.SET_SHOULD_REFRESH_REPORT_AFTER_SYNC,
+    payload,
+  }
+}
+
 export default {
   editPublicTradesPref,
   editPublicTradesSymbolPref,
@@ -241,4 +248,5 @@ export default {
   setIsSyncRequired,
   showInitSyncPopup,
   setLastSyncTime,
+  setShouldRefreshAfterSync,
 }
