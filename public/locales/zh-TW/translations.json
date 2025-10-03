@@ -176,7 +176,6 @@
     "fundingType": "融資類型",
     "id": "#",
     "ip": "IP",
-    "invoices": "發票",
     "lastTrade": "上次交易",
     "lastpayout": "結束",
     "liq-price": "清算價格",
@@ -351,9 +350,6 @@
     "timezone_local": "目前時區",
     "timezone_placeholder": "搜尋時區..."
   },
-  "invoices": {
-    "title": "發票"
-  },
   "ledgers": {
     "title": "分類帳",
     "categories": {
@@ -446,10 +442,6 @@
         "balances": "餘額",
         "movements": "資金動向"
       }
-    },
-    "merchantHistory": {
-      "title": "店家歷史紀錄",
-      "invoices": "發票"
     },
     "marketHistory": {
       "title": "市場歷史紀錄",
