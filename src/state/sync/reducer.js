@@ -24,6 +24,7 @@ const initialState = {
   isLongSync: false,
   showInitSyncPopup: false,
   lastSyncMts: null,
+  shouldRefreshAfterSync: false,
 }
 
 export function syncReducer(state = initialState, action) {
@@ -147,6 +148,12 @@ export function syncReducer(state = initialState, action) {
       return {
         ...state,
         lastSyncMts: payload,
+      }
+    }
+    case types.SET_SHOULD_REFRESH_REPORT_AFTER_SYNC: {
+      return {
+        ...state,
+        shouldRefreshAfterSync: payload,
       }
     }
     default: {

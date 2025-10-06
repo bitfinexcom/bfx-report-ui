@@ -24,7 +24,6 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
-  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -61,7 +60,6 @@ export const TYPE_WHITELIST = [
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
-  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -98,7 +96,6 @@ export const ROUTE_WHITELIST = [
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
-  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -124,7 +121,6 @@ export const ROUTE_WHITELIST = [
 
 export const FILTERS_WHITELIST = [
   MENU_LEDGERS,
-  MENU_INVOICES,
   MENU_TRADES,
   MENU_ORDERS,
   MENU_MOVEMENTS,
@@ -142,6 +138,19 @@ export const FILTERS_WHITELIST = [
   MENU_LOGINS,
   MENU_CHANGE_LOGS,
   MENU_WEIGHTED_AVERAGES,
+]
+
+export const SYNC_REQUIRED_TARGETS = [
+  MENU_ACCOUNT_SUMMARY,
+  MENU_ACCOUNT_BALANCE,
+  MENU_TRADED_VOLUME,
+  MENU_WIN_LOSS,
+  MENU_WEIGHTED_AVERAGES,
+  MENU_CONCENTRATION_RISK,
+  MENU_FEES_REPORT,
+  MENU_LOAN_REPORT,
+  MENU_SNAPSHOTS,
+  MENU_TAX_REPORT,
 ]
 
 // Should keep the order, which used in ExportTargetsSelector
@@ -315,12 +324,6 @@ const MAPPING = {
     path: '/ledgers',
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
-    pageSize: 125,
-  },
-  [MENU_INVOICES]: {
-    icon: Icons.NOTEBOOK,
-    path: '/invoices',
-    filterType: FILTER_SYMBOL,
     pageSize: 125,
   },
   [MENU_LOAN_REPORT]: {
@@ -504,6 +507,8 @@ export function getPageSize(target) {
 
 export const getIsExportHidden = (path) => _includes(NO_EXPORT_TARGETS, getTarget(path))
 
+export const getIsSyncRequiredType = (type) => _includes(SYNC_REQUIRED_TARGETS, type)
+
 export default {
   getIcon,
   getFilterType,
@@ -513,9 +518,11 @@ export default {
   getTarget,
   isValidTimeStamp,
   getIsExportHidden,
+  getIsSyncRequiredType,
   EXPORT_TARGETS,
   ROUTE_WHITELIST,
   TYPE_WHITELIST,
   NO_QUERY_LIMIT_TARGETS,
   NO_EXPORT_TARGETS,
+  SYNC_REQUIRED_TARGETS,
 }

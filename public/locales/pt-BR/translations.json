@@ -176,7 +176,6 @@
     "fundingType": "Tipo de financiamento",
     "id": "#",
     "ip": "IP",
-    "invoices": "Faturas",
     "lastTrade": "Última negociação",
     "lastpayout": "Último pagamento",
     "liq-price": "Preço de liquidação",
@@ -351,9 +350,6 @@
     "timezone_local": "Fuso horário atual",
     "timezone_placeholder": "Pesquisar fusos horários..."
   },
-  "invoices": {
-    "title": "Faturas"
-  },
   "ledgers": {
     "title": "Livro-razão",
     "categories": {
@@ -446,10 +442,6 @@
         "balances": "Saldos",
         "movements": "Movimentos"
       }
-    },
-    "merchantHistory": {
-      "title": "Histórico do Comerciante",
-      "invoices": "Faturas"
     },
     "marketHistory": {
       "title": "Histórico de mercado",

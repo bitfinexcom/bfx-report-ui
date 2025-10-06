@@ -176,7 +176,6 @@
     "fundingType": "融资类型",
     "id": "#",
     "ip": "IP",
-    "invoices": "充值单",
     "lastTrade": "最新交易",
     "lastpayout": "上一次支出",
     "liq-price": "清算价格",
@@ -351,9 +350,6 @@
     "timezone_local": "目前时区",
     "timezone_placeholder": "搜索时区"
   },
-  "invoices": {
-    "title": "充值单"
-  },
   "ledgers": {
     "title": "分类账",
     "categories": {
@@ -446,10 +442,6 @@
         "balances": "余额",
         "movements": "移动"
       }
-    },
-    "merchantHistory": {
-      "title": "商家历史记录",
-      "invoices": "充值单"
     },
     "marketHistory": {
       "title": "市场历史记录",

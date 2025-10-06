@@ -18,7 +18,6 @@ import filtersSaga from './filters/saga'
 import floanSaga from './fundingLoanHistory/saga'
 import fofferSaga from './fundingOfferHistory/saga'
 import fpaymentSaga from './fundingPayment/saga'
-import invoicesSaga from './invoices/saga'
 import ledgersSaga from './ledgers/saga'
 import loanReportSaga from './loanReport/saga'
 import loginsSaga from './logins/saga'
@@ -65,7 +64,6 @@ export default function* rootSaga() {
   yield fork(filtersSaga)
   yield fork(floanSaga)
   yield fork(fofferSaga)
-  yield fork(invoicesSaga)
   yield fork(ledgersSaga)
   yield fork(loginsSaga)
   yield fork(fpaymentSaga)

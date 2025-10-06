@@ -7,8 +7,10 @@ import { get, omit, isEqual } from '@bitfinex/lib-js-util-base'
 
 import { store } from 'state/store'
 import config from 'config'
-import { getPath, TYPE_WHITELIST, ROUTE_WHITELIST } from 'state/query/utils'
 import queryType from 'state/query/constants'
+import {
+  getPath, getIsSyncRequiredType, TYPE_WHITELIST, ROUTE_WHITELIST,
+} from 'state/query/utils'
 import {
   getSymbolsURL, formatPair, demapSymbols, demapPairs, mapSymbol, getMappedSymbolsFromUrl,
 } from 'state/symbols/utils'
@@ -26,7 +28,6 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
-  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -200,7 +201,6 @@ export const checkInit = (props, type) => {
       break
     }
     case MENU_LEDGERS:
-    case MENU_INVOICES:
     case MENU_MOVEMENTS:
     case MENU_FOFFER:
     case MENU_FLOAN:
@@ -267,14 +267,19 @@ export function checkFetch(prevProps, props, type) {
     dataReceived: prevDataReceived, isSyncRequired: prevIsSyncRequired,
   } = prevProps
   const {
-    dataReceived, pageLoading, fetchData, isSyncRequired,
+    dataReceived, pageLoading, fetchData, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync,
   } = props
   const shouldRefresh = prevIsSyncRequired !== isSyncRequired
+  const shouldBeRefreshedAfterSync = showFrameworkMode && getIsSyncRequiredType(type) && shouldRefreshAfterSync
   if (!dataReceived && dataReceived !== prevDataReceived && !pageLoading) {
     fetchData()
   }
   if (showFrameworkMode && shouldRefresh) {
     fetchData()
+  }
+  if (shouldBeRefreshedAfterSync && !isSyncRequired) {
+    fetchData()
+    setShouldRefreshAfterSync(false)
   }
 }
 
