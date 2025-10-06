@@ -176,7 +176,6 @@
     "fundingType": "Các loại cấp vốn vay ",
     "id": "#",
     "ip": "IP",
-    "invoices": "Hoá đơn",
     "lastTrade": "Giao dịch cuối cùng",
     "lastpayout": "Mức chỉ trả cuối cùng",
     "liq-price": "Giá thanh lý\n",
@@ -351,9 +350,6 @@
     "timezone_local": "Múi giờ hiện tại",
     "timezone_placeholder": "Tìm kiếm múi giờ..."
   },
-  "invoices": {
-    "title": "Hoá đơn"
-  },
   "ledgers": {
     "title": "Sổ cái",
     "categories": {
@@ -446,10 +442,6 @@
         "balances": "Số dư",
         "movements": "Biến động dòng tiền"
       }
-    },
-    "merchantHistory": {
-      "title": "Lịch sử nhà bán hàng",
-      "invoices": "Hoá đơn"
     },
     "marketHistory": {
       "title": "Lịch sử thị trường",

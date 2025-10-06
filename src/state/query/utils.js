@@ -24,7 +24,6 @@ const {
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
-  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -61,7 +60,6 @@ export const TYPE_WHITELIST = [
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
-  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -98,7 +96,6 @@ export const ROUTE_WHITELIST = [
   MENU_FLOAN,
   MENU_FOFFER,
   MENU_FPAYMENT,
-  MENU_INVOICES,
   MENU_LEDGERS,
   MENU_LOAN_REPORT,
   MENU_LOGINS,
@@ -124,7 +121,6 @@ export const ROUTE_WHITELIST = [
 
 export const FILTERS_WHITELIST = [
   MENU_LEDGERS,
-  MENU_INVOICES,
   MENU_TRADES,
   MENU_ORDERS,
   MENU_MOVEMENTS,
@@ -328,12 +324,6 @@ const MAPPING = {
     path: '/ledgers',
     filterType: FILTER_SYMBOL,
     // queryLimit: 500,
-    pageSize: 125,
-  },
-  [MENU_INVOICES]: {
-    icon: Icons.NOTEBOOK,
-    path: '/invoices',
-    filterType: FILTER_SYMBOL,
     pageSize: 125,
   },
   [MENU_LOAN_REPORT]: {
