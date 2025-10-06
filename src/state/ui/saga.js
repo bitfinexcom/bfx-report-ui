@@ -2,6 +2,7 @@ import {
   call, take, put, select, takeLatest,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import { LANGUAGES } from 'locales/i18n'
@@ -9,6 +10,8 @@ import {
   setTimezone, setTheme, setLang, setSrc, setElectronTheme,
 } from 'state/base/actions'
 import baseTypes from 'state/base/constants'
+import { getCookieValue } from 'utils/browser'
+import { BFX_TOKEN_COOKIE } from 'var/platform'
 import { getTheme } from 'state/base/selectors'
 import { setTimeRange } from 'state/timeRange/actions'
 import timeRangeTypes from 'state/timeRange/constants'
@@ -20,6 +23,8 @@ import { getParsedUrlParams, isValidTimezone, removeUrlParams } from 'state/util
 import types from './constants'
 import selectors from './selectors'
 import { togglePaginationDialog } from './actions'
+
+const { showFrameworkMode } = config
 
 function* uiLoaded() {
   if (config.isElectronApp) {
@@ -85,6 +90,15 @@ function* uiLoaded() {
       apiKey,
       apiSecret,
       authToken,
+    }))
+  }
+
+  // handle auth from the cookie
+  const cookieToken = getCookieValue(BFX_TOKEN_COOKIE)
+  const isProduction = isEqual(process.env.REACT_APP_ENV, 'production')
+  if (!showFrameworkMode && isProduction && cookieToken) {
+    yield put(updateAuth({
+      authToken: cookieToken,
     }))
   }
 
