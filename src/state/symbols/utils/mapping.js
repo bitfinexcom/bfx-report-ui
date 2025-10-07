@@ -17,7 +17,7 @@ const preparePair = (pair) => {
 
 const prepareTestPair = (pair) => {
   const [firstSymbol, secondSymbol] = _split(pair, ':')
-  if (firstSymbol.endsWith('(Test)')) {
+  if (secondSymbol.endsWith('(Test)')) {
     return _join([`TEST${firstSymbol.replace(' (Test)', '')}`, secondSymbol], ':')
   }
   return pair
