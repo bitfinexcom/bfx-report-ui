@@ -1,9 +1,13 @@
 import React, { memo, useMemo } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import NoData from 'ui/NoData'
 import CollapsedTable from 'ui/CollapsedTable'
+import { formatDate } from 'state/utils'
+import { getTimezone } from 'state/base/selectors'
+import { getTimeFrame } from 'state/timeRange/selectors'
 
 import { getFeesColumns } from './AppSummary.columns'
 import { getFeeTierVolume } from './AppSummary.helpers'
@@ -16,6 +20,8 @@ const AppSummaryStatistics = ({
   dataReceived,
   isTurkishSite,
 }) => {
+  const timezone = useSelector(getTimezone)
+  const { start, end } = useSelector(getTimeFrame)
   const {
     makerFee = 0,
     derivTakerFee = 0,
@@ -58,10 +64,11 @@ const AppSummaryStatistics = ({
   return (
     <div className='app-summary-item account-fees'>
       <div className='app-summary-item-title'>
-        {t('summary.fees.title')}
+        {t('summary.statistics.title')}
       </div>
       <div className='app-summary-item-sub-title'>
-        {t('summary.fees.sub_title')}
+        {t('summary.statistics.sub_title')}
+        {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
       </div>
       {showContent}
     </div>
