@@ -671,19 +671,6 @@
         "title": "Filter",
         "min_balance_switch": "Minimum Balance",
         "min_balance_input": "Set a minimum balance for assets to show up in the table."
-      },
-      "statistics": {
-        "title": "Statistics",
-        "sub_title": "For period ",
-        "balance": "Balance",
-        "profits": "Profits",
-        "max_drawdown": "Max Drawdown",
-        "volatility": "Volatility",
-        "sharpe_ratio": "Sharpe Ratio",
-        "sortino_ratio": "Sortino Ratio",
-        "volume": "Volume",
-        "deps_withdrawals": "Deposits/Withdrawals",
-        "fees": "Fees Occurred"
       }
     },
     "positions": {
@@ -691,6 +678,19 @@
       "derivative": "Derivative",
       "margin": "Margin",
       "position": "Position"
+    },
+    "statistics": {
+      "title": "Statistics",
+      "sub_title": "For period ",
+      "balance": "Balance",
+      "profits": "Profits",
+      "max_drawdown": "Max Drawdown",
+      "volatility": "Volatility",
+      "sharpe_ratio": "Sharpe Ratio",
+      "sortino_ratio": "Sortino Ratio",
+      "volume": "Volume",
+      "deps_withdrawals": "Deposits/Withdrawals",
+      "fees": "Fees Occurred"
     }
   },
   "symbols": {
