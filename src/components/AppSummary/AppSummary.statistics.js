@@ -1,5 +1,6 @@
 import React, { memo, useMemo } from 'react'
 import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -13,13 +14,13 @@ import { getFeesColumns } from './AppSummary.columns'
 import { getFeeTierVolume } from './AppSummary.helpers'
 
 const AppSummaryStatistics = ({
-  t,
   data,
   pageLoading,
   isFirstSync,
   dataReceived,
   isTurkishSite,
 }) => {
+  const { t } = useTranslation()
   const timezone = useSelector(getTimezone)
   const { start, end } = useSelector(getTimeFrame)
   const {
@@ -84,7 +85,6 @@ AppSummaryStatistics.propTypes = {
     takerFeeToFiat: PropTypes.number,
     takerFeeToStable: PropTypes.number,
   }).isRequired,
-  t: PropTypes.func.isRequired,
   isFirstSync: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   dataReceived: PropTypes.bool.isRequired,
