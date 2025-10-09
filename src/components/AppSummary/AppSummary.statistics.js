@@ -20,7 +20,6 @@ import { getFeesColumns } from './AppSummary.columns'
 import { getFeeTierVolume } from './AppSummary.helpers'
 
 const AppSummaryStatistics = ({
-  data,
   pageLoading,
   isFirstSync,
   dataReceived,
