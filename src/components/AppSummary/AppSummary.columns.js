@@ -427,3 +427,163 @@ export const getPositionsColumns = ({
     copyText: rowIndex => fixedFloat(entries[rowIndex].collateral),
   },
 ]
+
+export const getStatisticsColumns = ({
+  data,
+  isLoading,
+}) => [
+  {
+    id: 'balanceUsd',
+    name: 'summary.statistics.balance',
+    width: 100,
+    renderer: () => (
+      <Cell>
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
+        ) : (
+          <div className='cell-value'>
+            $
+            {formatUsdValue(data?.balanceUsd)}
+          </div>
+        )}
+      </Cell>
+    ),
+  },
+  {
+    id: 'plUsd',
+    name: 'summary.statistics.profits',
+    width: 100,
+    renderer: () => (
+      <Cell>
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
+        ) : (
+          <div className='cell-value'>
+            $
+            {formatUsdValue(data?.plUsd)}
+          </div>
+        )}
+      </Cell>
+    ),
+  },
+  {
+    id: 'maxDrawdownPerc',
+    name: 'summary.statistics.max_drawdown',
+    width: 140,
+    renderer: () => (
+      getFeePercentCell(isLoading, data?.maxDrawdownPerc)
+    ),
+  },
+  {
+    id: 'volatilityPerc',
+    name: 'summary.statistics.volatility',
+    width: 140,
+    renderer: () => (
+      getFeePercentCell(isLoading, data?.volatilityPerc)
+    ),
+  },
+  {
+    id: 'sharpeRatio',
+    name: 'summary.statistics.sharpe_ratio',
+    width: 100,
+    renderer: () => (
+      <Cell>
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
+        ) : (
+          <div className='cell-value'>
+            {data?.sharpeRatio}
+          </div>
+        )}
+      </Cell>
+    ),
+  },
+  {
+    id: 'sortinoRatio',
+    name: 'summary.statistics.sortino_ratio',
+    width: 100,
+    renderer: () => (
+      <Cell>
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
+        ) : (
+          <div className='cell-value'>
+            {data?.sharpeRatio}
+          </div>
+        )}
+      </Cell>
+    ),
+  },
+  {
+    id: 'volumeUsd',
+    name: 'summary.statistics.volume',
+    width: 100,
+    renderer: () => (
+      <Cell>
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
+        ) : (
+          <div className='cell-value'>
+            $
+            {formatUsdValue(data?.volumeUsd)}
+          </div>
+        )}
+      </Cell>
+    ),
+  },
+  {
+    id: 'depositsWithdrawalsUsd',
+    name: 'summary.statistics.deps_withdrawals',
+    width: 100,
+    renderer: () => (
+      <Cell>
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
+        ) : (
+          <div className='cell-value'>
+            $
+            {formatUsdValue(data?.depositsWithdrawalsUsd)}
+          </div>
+        )}
+      </Cell>
+    ),
+  },
+  {
+    id: 'allFeesUsd',
+    name: 'summary.statistics.fees',
+    width: 100,
+    renderer: () => (
+      <Cell>
+        {isLoading ? (
+          <LoadingPlaceholder
+            height={18}
+            baseWidth={60}
+          />
+        ) : (
+          <div className='cell-value'>
+            $
+            {formatUsdValue(data?.allFeesUsd)}
+          </div>
+        )}
+      </Cell>
+    ),
+  },
+]

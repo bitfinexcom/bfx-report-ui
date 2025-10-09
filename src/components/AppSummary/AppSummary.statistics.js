@@ -9,6 +9,12 @@ import CollapsedTable from 'ui/CollapsedTable'
 import { formatDate } from 'state/utils'
 import { getTimezone } from 'state/base/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
+import {
+  // getPageLoading,
+  // getDataReceived,
+  getSummaryByAssetTotal,
+  // getSummaryByAssetEntries,
+} from 'state/summaryByAsset/selectors'
 
 import { getFeesColumns } from './AppSummary.columns'
 import { getFeeTierVolume } from './AppSummary.helpers'
@@ -23,6 +29,8 @@ const AppSummaryStatistics = ({
   const { t } = useTranslation()
   const timezone = useSelector(getTimezone)
   const { start, end } = useSelector(getTimeFrame)
+  const data = useSelector(getSummaryByAssetTotal)
+  console.log('+++total', data)
   const {
     makerFee = 0,
     derivTakerFee = 0,
