@@ -1,5 +1,6 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
+import _round from 'lodash/round'
 
 import { mapSymbol } from 'state/symbols/utils'
 import { formatAmount, fixedFloat } from 'ui/utils'
@@ -500,7 +501,7 @@ export const getStatisticsColumns = ({
           />
         ) : (
           <div className='cell-value'>
-            {data?.sharpeRatio}
+            {_round(data?.sharpeRatio, 2)}
           </div>
         )}
       </Cell>
@@ -519,7 +520,7 @@ export const getStatisticsColumns = ({
           />
         ) : (
           <div className='cell-value'>
-            {data?.sharpeRatio}
+            {_round(data?.sortinoRatio, 2)}
           </div>
         )}
       </Cell>
