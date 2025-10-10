@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
@@ -28,10 +28,10 @@ const AppSummaryStatistics = () => {
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   console.log('+++total', data)
 
-  const columns = getStatisticsColumns({
-    data,
-    isLoading,
-  })
+  const columns = useMemo(
+    () => getStatisticsColumns({ data, isLoading }),
+    [data, isLoading],
+  )
 
   let showContent
   if (dataReceived && isEmpty(data)) {
@@ -59,4 +59,4 @@ const AppSummaryStatistics = () => {
   )
 }
 
-export default memo(AppSummaryStatistics)
+export default AppSummaryStatistics
