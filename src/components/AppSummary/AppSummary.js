@@ -117,14 +117,7 @@ const AppSummary = ({
         <ByAsset />
         <Positions />
         <div className='app-summary-data-row'>
-          <Statistics
-            t={t}
-            data={data}
-            pageLoading={pageLoading}
-            isFirstSync={isFirstSync}
-            dataReceived={dataReceived}
-            isTurkishSite={isTurkishSite}
-          />
+          <Statistics />
           <Fees
             t={t}
             data={data}
