@@ -9,52 +9,29 @@ import CollapsedTable from 'ui/CollapsedTable'
 import { formatDate } from 'state/utils'
 import { getTimezone } from 'state/base/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
+import { getIsFirstSyncing } from 'state/sync/selectors'
 import {
-  // getPageLoading,
-  // getDataReceived,
+  getPageLoading,
+  getDataReceived,
   getSummaryByAssetTotal,
-  // getSummaryByAssetEntries,
 } from 'state/summaryByAsset/selectors'
 
-import { getFeesColumns } from './AppSummary.columns'
-import { getFeeTierVolume } from './AppSummary.helpers'
+import { getStatisticsColumns } from './AppSummary.columns'
 
-const AppSummaryStatistics = ({
-  pageLoading,
-  isFirstSync,
-  dataReceived,
-  isTurkishSite,
-}) => {
+const AppSummaryStatistics = () => {
   const { t } = useTranslation()
   const timezone = useSelector(getTimezone)
-  const { start, end } = useSelector(getTimeFrame)
+  const pageLoading = useSelector(getPageLoading)
   const data = useSelector(getSummaryByAssetTotal)
-  console.log('+++total', data)
-  const {
-    makerFee = 0,
-    derivTakerFee = 0,
-    takerFeeToFiat = 0,
-    takerFeeToStable = 0,
-    takerFeeToCrypto = 0,
-    derivMakerRebate = 0,
-  } = data
+  const { start, end } = useSelector(getTimeFrame)
+  const dataReceived = useSelector(getDataReceived)
+  const isFirstSync = useSelector(getIsFirstSyncing)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
+  console.log('+++total', data)
 
-  const feeTierVolume = useMemo(
-    () => getFeeTierVolume(data),
-    [data],
-  )
-
-  const columns = getFeesColumns({
-    makerFee,
+  const columns = getStatisticsColumns({
+    data,
     isLoading,
-    feeTierVolume,
-    isTurkishSite,
-    derivTakerFee,
-    takerFeeToFiat,
-    takerFeeToStable,
-    takerFeeToCrypto,
-    derivMakerRebate,
   })
 
   let showContent
