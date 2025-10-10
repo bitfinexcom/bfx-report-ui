@@ -558,8 +558,7 @@ export const getStatisticsColumns = ({
           />
         ) : (
           <div className='cell-value'>
-            $
-            {formatUsdValue(data?.depositsWithdrawalsUsd)}
+            {formatUsdValueChange(data?.depositsWithdrawalsUsd)}
           </div>
         )}
       </Cell>
