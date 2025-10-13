@@ -85,14 +85,15 @@ function* uiLoaded() {
   }
 
   // handle auth from url params & cookie token
+  const apiKeys = apiKey && apiSecret
   const cookieToken = getCookieValue(BFX_TOKEN_COOKIE)
-  if (authToken || (apiKey && apiSecret)) {
+  if (authToken || apiKeys) {
     yield put(updateAuth({
       apiKey,
       apiSecret,
       authToken,
     }))
-  } else if (!showFrameworkMode && cookieToken) {
+  } else if (!authToken && !apiKeys && !showFrameworkMode && cookieToken) {
     yield put(updateAuth({
       authToken: cookieToken,
     }))
