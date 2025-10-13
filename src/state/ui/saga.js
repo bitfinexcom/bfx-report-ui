@@ -2,7 +2,6 @@ import {
   call, take, put, select, takeLatest,
 } from 'redux-saga/effects'
 import { REHYDRATE } from 'redux-persist'
-import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import { LANGUAGES } from 'locales/i18n'
@@ -84,19 +83,16 @@ function* uiLoaded() {
     }))
   }
 
-  // handle auth from url params
-  if (authToken || (apiKey && apiSecret)) {
+  // handle auth from url params & cookie token
+  const apiKeys = apiKey && apiSecret
+  const cookieToken = getCookieValue(BFX_TOKEN_COOKIE)
+  if (authToken || apiKeys) {
     yield put(updateAuth({
       apiKey,
       apiSecret,
       authToken,
     }))
-  }
-
-  // handle auth from the cookie
-  const cookieToken = getCookieValue(BFX_TOKEN_COOKIE)
-  const isProduction = isEqual(process.env.REACT_APP_ENV, 'production')
-  if (!showFrameworkMode && isProduction && cookieToken) {
+  } else if (!authToken && !apiKeys && !showFrameworkMode && cookieToken) {
     yield put(updateAuth({
       authToken: cookieToken,
     }))
