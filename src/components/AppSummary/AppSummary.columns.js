@@ -448,7 +448,7 @@ export const getStatisticsColumns = ({
         ) : (
           <div className='cell-value'>
             $
-            {formatUsdValue(data?.balanceUsd)}
+            {formatUsdValue(data?.balanceUsd ?? 0)}
           </div>
         )}
       </Cell>
@@ -467,7 +467,7 @@ export const getStatisticsColumns = ({
           />
         ) : (
           <div className='cell-value'>
-            {formatUsdValueChange(data?.plUsd)}
+            {formatUsdValueChange(data?.plUsd ?? 0)}
           </div>
         )}
       </Cell>
@@ -486,7 +486,7 @@ export const getStatisticsColumns = ({
           />
         ) : (
           <div className='cell-value'>
-            {prepareNumericValue(data?.maxDrawdownPerc)}
+            {prepareNumericValue(data?.maxDrawdownPerc ?? 0)}
             %
           </div>
         )}
@@ -506,7 +506,7 @@ export const getStatisticsColumns = ({
           />
         ) : (
           <div className='cell-value'>
-            {prepareNumericValue(data?.volatilityPerc)}
+            {prepareNumericValue(data?.volatilityPerc ?? 0)}
             %
           </div>
         )}
@@ -526,7 +526,7 @@ export const getStatisticsColumns = ({
           />
         ) : (
           <div className='cell-value'>
-            {_round(data?.sharpeRatio, 2)}
+            {_round(data?.sharpeRatio ?? 0, 2)}
           </div>
         )}
       </Cell>
@@ -545,7 +545,7 @@ export const getStatisticsColumns = ({
           />
         ) : (
           <div className='cell-value'>
-            {_round(data?.sortinoRatio, 2)}
+            {_round(data?.sortinoRatio ?? 0, 2)}
           </div>
         )}
       </Cell>
@@ -565,7 +565,7 @@ export const getStatisticsColumns = ({
         ) : (
           <div className='cell-value'>
             $
-            {formatUsdValue(data?.volumeUsd)}
+            {formatUsdValue(data?.volumeUsd ?? 0)}
           </div>
         )}
       </Cell>
@@ -584,7 +584,7 @@ export const getStatisticsColumns = ({
           />
         ) : (
           <div className='cell-value'>
-            {formatUsdValueChange(data?.depositsWithdrawalsUsd)}
+            {formatUsdValueChange(data?.depositsWithdrawalsUsd ?? 0)}
           </div>
         )}
       </Cell>
@@ -604,7 +604,7 @@ export const getStatisticsColumns = ({
         ) : (
           <div className='cell-value'>
             $
-            {formatUsdValue(data?.allFeesUsd)}
+            {formatUsdValue(data?.allFeesUsd ?? 0)}
           </div>
         )}
       </Cell>
