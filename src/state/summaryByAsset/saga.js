@@ -9,6 +9,7 @@ import { makeFetchCall } from 'state/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import { getIsSyncRequired } from 'state/sync/selectors'
 import { getTimeFrame } from 'state/timeRange/selectors'
+import unrealizedProfitConstants from 'ui/UnrealizedProfitSelector/constants'
 
 import types from './constants'
 import actions from './actions'
@@ -18,7 +19,11 @@ export const getReqSummaryByAsset = (params) => makeFetchCall('getSummaryByAsset
 export function* fetchSummaryByAsset() {
   try {
     const { start, end } = yield select(getTimeFrame)
-    const params = { start, end }
+    const params = {
+      end,
+      start,
+      isUnrealizedProfitExcluded: unrealizedProfitConstants.FALSE,
+    }
     const { result = {}, error } = yield call(getReqSummaryByAsset, params)
     yield put(actions.updateData(result))
 
