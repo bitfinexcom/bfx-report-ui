@@ -63,6 +63,22 @@ export const getFeePercentCell = (isLoading, value) => (
   </Cell>
 )
 
+export const getUsdValueCell = (isLoading, value) => (
+  <Cell>
+    {isLoading ? (
+      <LoadingPlaceholder
+        height={18}
+        baseWidth={60}
+      />
+    ) : (
+      <div className='cell-value'>
+        $
+        {formatUsdValue(value)}
+      </div>
+    )}
+  </Cell>
+)
+
 export const formatSecondaryPercentValue = (value) => {
   const val = prepareNumericValue(value)
   if (val > 1) return <span className='percent-pos-value'>{`${val}%`}</span>
