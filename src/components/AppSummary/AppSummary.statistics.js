@@ -25,6 +25,7 @@ const AppSummaryStatistics = () => {
   const { start, end } = useSelector(getTimeFrame)
   const dataReceived = useSelector(getDataReceived)
   const isFirstSync = useSelector(getIsFirstSyncing)
+  const isNoData = dataReceived && isEmpty(data)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   console.log('+++total', data)
 
@@ -32,18 +33,6 @@ const AppSummaryStatistics = () => {
     () => getStatisticsColumns({ data, isLoading }),
     [data, isLoading],
   )
-
-  let showContent
-  if (dataReceived && isEmpty(data)) {
-    showContent = <NoData title='summary.no_data' />
-  } else {
-    showContent = (
-      <CollapsedTable
-        numRows={1}
-        tableColumns={columns}
-      />
-    )
-  }
 
   return (
     <div className='app-summary-item account-fees'>
@@ -54,7 +43,14 @@ const AppSummaryStatistics = () => {
         {t('summary.statistics.sub_title')}
         {`${formatDate(start, timezone)} - ${formatDate(end, timezone)}`}
       </div>
-      {showContent}
+      {isNoData ? (
+        <NoData title={t('summary.no_data')} />
+      ) : (
+        <CollapsedTable
+          numRows={1}
+          tableColumns={columns}
+        />
+      )}
     </div>
   )
 }
