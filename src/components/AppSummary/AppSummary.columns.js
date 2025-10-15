@@ -22,6 +22,7 @@ import {
   formatPercentValue,
   prepareNumericValue,
   formatUsdValueChange,
+  getUsdValueChangeCell,
   formatSecondaryPercentValue,
 } from './AppSummary.helpers'
 
@@ -448,18 +449,7 @@ export const getStatisticsColumns = ({
     name: 'summary.statistics.profits',
     width: 100,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {formatUsdValueChange(data?.plUsd ?? 0)}
-          </div>
-        )}
-      </Cell>
+      getUsdValueChangeCell(isLoading, data?.plUsd ?? 0)
     ),
   },
   {
@@ -553,18 +543,7 @@ export const getStatisticsColumns = ({
     name: 'summary.statistics.deps_withdrawals',
     width: 100,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {formatUsdValueChange(data?.depositsWithdrawalsUsd ?? 0)}
-          </div>
-        )}
-      </Cell>
+      getUsdValueChangeCell(isLoading, data?.depositsWithdrawalsUsd ?? 0)
     ),
   },
   {
