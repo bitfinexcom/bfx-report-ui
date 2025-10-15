@@ -17,6 +17,7 @@ import {
   getIsTotal,
   getPairLabel,
   formatUsdValue,
+  getUsdValueCell,
   getFeePercentCell,
   formatPercentValue,
   prepareNumericValue,
@@ -439,19 +440,7 @@ export const getStatisticsColumns = ({
     name: 'summary.statistics.balance',
     width: 100,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            $
-            {formatUsdValue(data?.balanceUsd ?? 0)}
-          </div>
-        )}
-      </Cell>
+      getUsdValueCell(isLoading, data?.balanceUsd ?? 0)
     ),
   },
   {
@@ -556,19 +545,7 @@ export const getStatisticsColumns = ({
     name: 'summary.statistics.volume',
     width: 100,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            $
-            {formatUsdValue(data?.volumeUsd ?? 0)}
-          </div>
-        )}
-      </Cell>
+      getUsdValueCell(isLoading, data?.volumeUsd ?? 0)
     ),
   },
   {
@@ -595,19 +572,7 @@ export const getStatisticsColumns = ({
     name: 'summary.statistics.fees',
     width: 100,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            $
-            {formatUsdValue(data?.allFeesUsd ?? 0)}
-          </div>
-        )}
-      </Cell>
+      getUsdValueCell(isLoading, data?.allFeesUsd ?? 0)
     ),
   },
 ]
