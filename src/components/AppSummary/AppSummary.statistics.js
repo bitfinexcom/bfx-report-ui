@@ -27,7 +27,6 @@ const AppSummaryStatistics = () => {
   const isFirstSync = useSelector(getIsFirstSyncing)
   const isNoData = dataReceived && isEmpty(data)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
-  console.log('+++total', data)
 
   const columns = useMemo(
     () => getStatisticsColumns({ data, isLoading }),
