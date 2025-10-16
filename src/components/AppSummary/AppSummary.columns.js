@@ -20,7 +20,7 @@ import {
   getUsdValueCell,
   getFeePercentCell,
   formatPercentValue,
-  prepareNumericValue,
+  getPercentValueCell,
   formatUsdValueChange,
   getUsdValueChangeCell,
   formatSecondaryPercentValue,
@@ -457,19 +457,7 @@ export const getStatisticsColumns = ({
     name: 'summary.statistics.max_drawdown',
     width: 140,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {prepareNumericValue(data?.maxDrawdownPerc ?? 0)}
-            %
-          </div>
-        )}
-      </Cell>
+      getPercentValueCell(isLoading, data?.maxDrawdownPerc ?? 0)
     ),
   },
   {
@@ -477,19 +465,7 @@ export const getStatisticsColumns = ({
     name: 'summary.statistics.volatility',
     width: 140,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {prepareNumericValue(data?.volatilityPerc ?? 0)}
-            %
-          </div>
-        )}
-      </Cell>
+      getPercentValueCell(isLoading, data?.volatilityPerc ?? 0)
     ),
   },
   {
