@@ -1,6 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 import _isNil from 'lodash/isNil'
+import _round from 'lodash/round'
 import _endsWith from 'lodash/endsWith'
 
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
@@ -105,6 +106,21 @@ export const getPercentValueCell = (isLoading, value) => (
       <div className='cell-value'>
         {prepareNumericValue(value)}
         %
+      </div>
+    )}
+  </Cell>
+)
+
+export const getRatioValueCell = (isLoading, value) => (
+  <Cell>
+    {isLoading ? (
+      <LoadingPlaceholder
+        height={18}
+        baseWidth={60}
+      />
+    ) : (
+      <div className='cell-value'>
+        {_round(value, 2)}
       </div>
     )}
   </Cell>
