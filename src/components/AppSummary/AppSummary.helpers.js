@@ -48,6 +48,13 @@ export const getIsTotal = (currency, t) => currency === t('summary.by_asset.tota
 
 export const getFeeTierVolume = (data) => data?.trade_vol_30d?.at(-1)?.vol_safe ?? 0
 
+export const getLoader = (height, width) => (
+  <LoadingPlaceholder
+    height={height}
+    baseWidth={width}
+  />
+)
+
 export const getFeePercentCell = (isLoading, value) => (
   <Cell>
     {isLoading ? (
@@ -66,12 +73,7 @@ export const getFeePercentCell = (isLoading, value) => (
 
 export const getUsdValueCell = (isLoading, value) => (
   <Cell>
-    {isLoading ? (
-      <LoadingPlaceholder
-        height={18}
-        baseWidth={60}
-      />
-    ) : (
+    {isLoading ? (getLoader(18, 60)) : (
       <div className='cell-value'>
         $
         {formatUsdValue(value)}
@@ -82,12 +84,7 @@ export const getUsdValueCell = (isLoading, value) => (
 
 export const getUsdValueChangeCell = (isLoading, value) => (
   <Cell>
-    {isLoading ? (
-      <LoadingPlaceholder
-        height={18}
-        baseWidth={60}
-      />
-    ) : (
+    {isLoading ? (getLoader(18, 60)) : (
       <div className='cell-value'>
         {formatUsdValueChange(value)}
       </div>
@@ -97,12 +94,7 @@ export const getUsdValueChangeCell = (isLoading, value) => (
 
 export const getPercentValueCell = (isLoading, value) => (
   <Cell>
-    {isLoading ? (
-      <LoadingPlaceholder
-        height={18}
-        baseWidth={60}
-      />
-    ) : (
+    {isLoading ? (getLoader(18, 60)) : (
       <div className='cell-value'>
         {prepareNumericValue(value)}
         %
@@ -113,12 +105,7 @@ export const getPercentValueCell = (isLoading, value) => (
 
 export const getRatioValueCell = (isLoading, value) => (
   <Cell>
-    {isLoading ? (
-      <LoadingPlaceholder
-        height={18}
-        baseWidth={60}
-      />
-    ) : (
+    {isLoading ? (getLoader(18, 60)) : (
       <div className='cell-value'>
         {_round(value, 2)}
       </div>
