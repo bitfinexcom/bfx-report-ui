@@ -106,7 +106,7 @@ export const formatAmount = (val, options = {}) => {
   )
 }
 
-export const formatFee = (fee) => formatAmount(fee * 100, { color: 'white', digits: 2 })
+export const formatFee = (fee) => formatAmount(fee * 100, { color: 'white', minDigits: 2 })
 
 export const formatColor = (value, color) => {
   const classes = classNames({
