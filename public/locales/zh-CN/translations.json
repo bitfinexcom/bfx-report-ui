@@ -678,6 +678,19 @@
       "derivative": "衍生品",
       "margin": "保证金",
       "position": "头寸"
+    },
+    "statistics": {
+      "title": "统计数据",
+      "sub_title": "期间：",
+      "balance": "余额",
+      "profits": "利润",
+      "max_drawdown": "最大回撤",
+      "volatility": "波动率",
+      "sharpe_ratio": "夏普比率",
+      "sortino_ratio": "索提诺比率",
+      "volume": "交易量",
+      "deps_withdrawals": "存款/取款",
+      "fees": "产生的费用"
     }
   },
   "symbols": {

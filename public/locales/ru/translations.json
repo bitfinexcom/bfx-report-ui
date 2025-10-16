@@ -678,6 +678,19 @@
       "derivative": "Дериватив",
       "margin": "Маржа",
       "position": "Позиция"
+    },
+    "statistics": {
+      "title": "Статистика",
+      "sub_title": "За период ",
+      "balance": "Баланс",
+      "profits": "Прибыль",
+      "max_drawdown": "Максимальная просадка",
+      "volatility": "Волатильность",
+      "sharpe_ratio": "Коэффициент Шарпа",
+      "sortino_ratio": "Коэффициент Сортино",
+      "volume": "Объём",
+      "deps_withdrawals": "Депозиты/Выводы",
+      "fees": "Начисленные комиссии"
     }
   },
   "symbols": {

@@ -678,6 +678,19 @@
       "derivative": "Derivado",
       "margin": "Margen",
       "position": "Posición"
+    },
+    "statistics": {
+      "title": "Estadísticas",
+      "sub_title": "Para el período ",
+      "balance": "Saldo",
+      "profits": "Ganancias",
+      "max_drawdown": "Caída Máxima",
+      "volatility": "Volatilidad",
+      "sharpe_ratio": "Ratio de Sharpe",
+      "sortino_ratio": "Ratio de Sortino",
+      "volume": "Volumen",
+      "deps_withdrawals": "Depósitos/Retiros",
+      "fees": "Comisiones Generadas"
     }
   },
   "symbols": {
