@@ -1,6 +1,5 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
-import _round from 'lodash/round'
 
 import { mapSymbol } from 'state/symbols/utils'
 import { formatAmount, fixedFloat } from 'ui/utils'
@@ -19,6 +18,7 @@ import {
   formatUsdValue,
   getUsdValueCell,
   getFeePercentCell,
+  getRatioValueCell,
   formatPercentValue,
   getPercentValueCell,
   formatUsdValueChange,
@@ -473,18 +473,7 @@ export const getStatisticsColumns = ({
     name: 'summary.statistics.sharpe_ratio',
     width: 100,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {_round(data?.sharpeRatio ?? 0, 2)}
-          </div>
-        )}
-      </Cell>
+      getRatioValueCell(isLoading, data?.sharpeRatio ?? 0)
     ),
   },
   {
@@ -492,18 +481,7 @@ export const getStatisticsColumns = ({
     name: 'summary.statistics.sortino_ratio',
     width: 100,
     renderer: () => (
-      <Cell>
-        {isLoading ? (
-          <LoadingPlaceholder
-            height={18}
-            baseWidth={60}
-          />
-        ) : (
-          <div className='cell-value'>
-            {_round(data?.sortinoRatio ?? 0, 2)}
-          </div>
-        )}
-      </Cell>
+      getRatioValueCell(isLoading, data?.sortinoRatio ?? 0)
     ),
   },
   {
