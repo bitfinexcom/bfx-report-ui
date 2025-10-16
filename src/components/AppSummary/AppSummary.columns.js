@@ -455,7 +455,7 @@ export const getStatisticsColumns = ({
   {
     id: 'maxDrawdownPerc',
     name: 'summary.statistics.max_drawdown',
-    width: 140,
+    width: 100,
     renderer: () => (
       getPercentValueCell(isLoading, data?.maxDrawdownPerc ?? 0)
     ),
@@ -463,7 +463,7 @@ export const getStatisticsColumns = ({
   {
     id: 'volatilityPerc',
     name: 'summary.statistics.volatility',
-    width: 140,
+    width: 100,
     renderer: () => (
       getPercentValueCell(isLoading, data?.volatilityPerc ?? 0)
     ),
