@@ -1,6 +1,7 @@
 import React from 'react'
 import { Cell } from '@blueprintjs/table'
 import _isNil from 'lodash/isNil'
+import _round from 'lodash/round'
 import _endsWith from 'lodash/endsWith'
 
 import LoadingPlaceholder from 'ui/LoadingPlaceholder'
@@ -47,6 +48,13 @@ export const getIsTotal = (currency, t) => currency === t('summary.by_asset.tota
 
 export const getFeeTierVolume = (data) => data?.trade_vol_30d?.at(-1)?.vol_safe ?? 0
 
+export const getLoader = (height, width) => (
+  <LoadingPlaceholder
+    height={height}
+    baseWidth={width}
+  />
+)
+
 export const getFeePercentCell = (isLoading, value) => (
   <Cell>
     {isLoading ? (
@@ -58,6 +66,48 @@ export const getFeePercentCell = (isLoading, value) => (
       <div className='cell-value'>
         {formatFee(value)}
         %
+      </div>
+    )}
+  </Cell>
+)
+
+export const getUsdValueCell = (isLoading, value) => (
+  <Cell>
+    {isLoading ? (getLoader(18, 60)) : (
+      <div className='cell-value'>
+        $
+        {formatUsdValue(value)}
+      </div>
+    )}
+  </Cell>
+)
+
+export const getUsdValueChangeCell = (isLoading, value) => (
+  <Cell>
+    {isLoading ? (getLoader(18, 60)) : (
+      <div className='cell-value'>
+        {formatUsdValueChange(value)}
+      </div>
+    )}
+  </Cell>
+)
+
+export const getPercentValueCell = (isLoading, value) => (
+  <Cell>
+    {isLoading ? (getLoader(18, 60)) : (
+      <div className='cell-value'>
+        {prepareNumericValue(value)}
+        %
+      </div>
+    )}
+  </Cell>
+)
+
+export const getRatioValueCell = (isLoading, value) => (
+  <Cell>
+    {isLoading ? (getLoader(18, 60)) : (
+      <div className='cell-value'>
+        {_round(value, 2)}
       </div>
     )}
   </Cell>

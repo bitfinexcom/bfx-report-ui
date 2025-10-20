@@ -678,6 +678,19 @@
       "derivative": "Phái sinh",
       "margin": "Ký quỹ",
       "position": "Vị trí"
+    },
+    "statistics": {
+      "title": "Thống kê",
+      "sub_title": "Trong giai đoạn ",
+      "balance": "Số dư",
+      "profits": "Lợi nhuận",
+      "max_drawdown": "Mức sụt giảm tối đa",
+      "volatility": "Độ biến động",
+      "sharpe_ratio": "Tỷ lệ Sharpe",
+      "sortino_ratio": "Tỷ lệ Sortino",
+      "volume": "Khối lượng",
+      "deps_withdrawals": "Nạp/Rút tiền",
+      "fees": "Phí phát sinh"
     }
   },
   "symbols": {

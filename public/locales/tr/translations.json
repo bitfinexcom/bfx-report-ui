@@ -678,6 +678,19 @@
       "derivative": "Türev",
       "margin": "Marj",
       "position": "Pozisyon"
+    },
+    "statistics": {
+      "title": "İstatistikler",
+      "sub_title": "Dönem için ",
+      "balance": "Bakiye",
+      "profits": "Kâr",
+      "max_drawdown": "Maksimum Gerileme",
+      "volatility": "Oynaklık",
+      "sharpe_ratio": "Sharpe Oranı",
+      "sortino_ratio": "Sortino Oranı",
+      "volume": "Hacim",
+      "deps_withdrawals": "Yatırma/Çekme İşlemleri",
+      "fees": "Oluşan Ücretler"
     }
   },
   "symbols": {
