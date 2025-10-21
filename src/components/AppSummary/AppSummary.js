@@ -16,8 +16,9 @@ import {
   getPageLoading,
   getDataReceived,
 } from 'state/accountSummary/selectors'
-import { fetchData } from 'state/accountSummary/actions'
 import { getIsTurkishSite } from 'state/base/selectors'
+import { getTimeRange } from 'state/timeRange/selectors'
+import { fetchData, refresh } from 'state/accountSummary/actions'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import Leo from './AppSummary.leo'
@@ -32,6 +33,7 @@ const AppSummary = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const data = useSelector(getData)
+  const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const isFirstSync = useSelector(getIsFirstSyncing)
@@ -43,6 +45,10 @@ const AppSummary = () => {
       dispatch(fetchData())
     }
   }, [dataReceived, pageLoading, isSyncRequired])
+
+  useEffect(() => {
+    dispatch(refresh())
+  }, [timeRange])
 
   return (
     <Card
