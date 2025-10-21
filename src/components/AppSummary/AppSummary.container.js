@@ -3,17 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
-import {
-  refresh,
-  fetchData,
-} from 'state/accountSummary/actions'
-import {
-  setParams,
-  refresh as refreshBalance,
-} from 'state/accountBalance/actions'
-import { refresh as refreshSummaryByAsset } from 'state/summaryByAsset/actions'
-import { refresh as refreshProfits } from 'state/profits/actions'
-import { refresh as refreshPositions } from 'state/positionsActive/actions'
+import { fetchData } from 'state/accountSummary/actions'
+import { setParams } from 'state/accountBalance/actions'
 import {
   getData,
   getPageLoading,
@@ -40,13 +31,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  refresh,
   fetchData,
   setParams,
-  refreshBalance,
-  refreshProfits,
-  refreshPositions,
-  refreshSummaryByAsset,
 }
 
 export default compose(
