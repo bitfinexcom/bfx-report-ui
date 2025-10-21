@@ -42,10 +42,10 @@ const AccountSummaryValue = () => {
 
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
-      dispatch(fetchBalance())
+      dispatch(fetchBalance({ useDefaults: true }))
     }
     if (shouldRefreshAfterSync && !isSyncRequired) {
-      dispatch(fetchBalance())
+      dispatch(fetchBalance({ useDefaults: true }))
       dispatch(setShouldRefreshAfterSync(false))
     }
   }, [timeRange, dataReceived, pageLoading, isSyncRequired, shouldRefreshAfterSync])
