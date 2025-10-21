@@ -133,16 +133,11 @@ AppSummary.propTypes = {
   isTurkishSite: PropTypes.bool.isRequired,
   isFirstSync: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
-  refresh: PropTypes.func.isRequired,
-  refreshBalance: PropTypes.func.isRequired,
   setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   isSyncRequired: PropTypes.bool.isRequired,
   currentTimeFrame: PropTypes.string.isRequired,
   isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
-  refreshSummaryByAsset: PropTypes.func.isRequired,
-  refreshProfits: PropTypes.func.isRequired,
-  refreshPositions: PropTypes.func.isRequired,
 }
 
 AppSummary.defaultProps = {
