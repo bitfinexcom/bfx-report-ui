@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useCallback } from 'react'
+import React, { memo, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -10,7 +10,6 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
-import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 
@@ -25,7 +24,6 @@ import Statistics from './AppSummary.statistics'
 const AppSummary = ({
   t,
   data,
-  refresh,
   fetchData,
   setParams,
   pageLoading,
@@ -33,11 +31,7 @@ const AppSummary = ({
   dataReceived,
   isTurkishSite,
   isSyncRequired,
-  refreshBalance,
-  refreshProfits,
-  refreshPositions,
   currentTimeFrame,
-  refreshSummaryByAsset,
   isUnrealizedProfitExcluded,
 }) => {
   useEffect(() => {
@@ -53,14 +47,6 @@ const AppSummary = ({
   const handleUnrealizedProfitChange = (value) => {
     setParams({ isUnrealizedProfitExcluded: value })
   }
-
-  const onRefresh = useCallback(() => {
-    refresh()
-    refreshBalance()
-    refreshProfits()
-    refreshPositions()
-    refreshSummaryByAsset()
-  }, [refresh, refreshBalance, refreshSummaryByAsset, refreshProfits, refreshPositions])
 
   return (
     <Card
@@ -107,7 +93,6 @@ const AppSummary = ({
                 onChange={handleUnrealizedProfitChange}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={onRefresh} />
           </SectionHeaderRow>
         </SectionHeader>
         <div className='app-summary-data-row'>
