@@ -6,13 +6,14 @@ import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import DataTable from 'ui/DataTable'
-import { fetchAPositions } from 'state/positionsActive/actions'
+import { fetchAPositions, refresh } from 'state/positionsActive/actions'
 import {
   getEntries,
   getPageLoading,
   getDataReceived,
 } from 'state/positionsActive/selectors'
 import queryConstants from 'state/query/constants'
+import { getTimeRange } from 'state/timeRange/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
@@ -25,6 +26,7 @@ const SummaryActivePositions = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const entries = useSelector(getEntries)
+  const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const isFirstSync = useSelector(getIsFirstSyncing)
@@ -41,6 +43,10 @@ const SummaryActivePositions = () => {
       dispatch(fetchAPositions())
     }
   }, [dataReceived, pageLoading, isSyncRequired])
+
+  useEffect(() => {
+    dispatch(refresh())
+  }, [timeRange])
 
 
   const columns = useMemo(
