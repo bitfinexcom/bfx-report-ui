@@ -22,7 +22,6 @@ import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import {
-  // refresh,
   setParams,
   fetchBalance,
 } from 'state/accountBalance/actions'
