@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -11,6 +12,14 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
+import {
+  getData,
+  getPageLoading,
+  getDataReceived,
+} from 'state/accountSummary/selectors'
+import { fetchData } from 'state/accountSummary/actions'
+import { getIsTurkishSite } from 'state/base/selectors'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
@@ -20,19 +29,19 @@ import ByAsset from './AppSummary.byAsset'
 import Positions from './AppSummary.positions'
 import Statistics from './AppSummary.statistics'
 
-const AppSummary = ({
-  data,
-  fetchData,
-  pageLoading,
-  isFirstSync,
-  dataReceived,
-  isTurkishSite,
-  isSyncRequired,
-}) => {
+const AppSummary = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const data = useSelector(getData)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const isFirstSync = useSelector(getIsFirstSyncing)
+  const isTurkishSite = useSelector(getIsTurkishSite)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
-      fetchData()
+      dispatch(fetchData())
     }
   }, [dataReceived, pageLoading, isSyncRequired])
 
