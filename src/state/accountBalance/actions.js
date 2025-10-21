@@ -3,9 +3,10 @@ import types from './constants'
 /**
  * Create an action to fetch Account Balance data.
  */
-export function fetchBalance() {
+export function fetchBalance(payload) {
   return {
     type: types.FETCH_BALANCE,
+    payload,
   }
 }
 
@@ -34,9 +35,10 @@ export function fetchFail(payload) {
 /**
  * Create an action to refresh Account Balance.
  */
-export function refresh() {
+export function refresh(payload) {
   return {
     type: types.REFRESH,
+    payload,
   }
 }
 
