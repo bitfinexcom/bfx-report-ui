@@ -10,7 +10,6 @@ import {
   getPageLoading,
   getDataReceived,
 } from 'state/accountSummary/selectors'
-import { getTimeframe } from 'state/accountBalance/selectors'
 import { getIsTurkishSite } from 'state/base/selectors'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
@@ -20,7 +19,6 @@ const mapStateToProps = state => ({
   data: getData(state),
   pageLoading: getPageLoading(state),
   dataReceived: getDataReceived(state),
-  currentTimeFrame: getTimeframe(state),
   isFirstSync: getIsFirstSyncing(state),
   isTurkishSite: getIsTurkishSite(state),
   isSyncRequired: getIsSyncRequired(state),

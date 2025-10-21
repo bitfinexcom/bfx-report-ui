@@ -10,7 +10,6 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
-import TimeFrameSelector from 'ui/TimeFrameSelector'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
@@ -24,23 +23,17 @@ const AppSummary = ({
   t,
   data,
   fetchData,
-  setParams,
   pageLoading,
   isFirstSync,
   dataReceived,
   isTurkishSite,
   isSyncRequired,
-  currentTimeFrame,
 }) => {
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
       fetchData()
     }
   }, [dataReceived, pageLoading, isSyncRequired])
-
-  const handleTimeFrameChange = (timeframe) => {
-    setParams({ timeframe })
-  }
 
   return (
     <Card
@@ -68,15 +61,6 @@ const AppSummary = ({
                 {t('selector.filter.date')}
               </SectionHeaderItemLabel>
               <TimeRange className='section-header-time-range' />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.select')}
-              </SectionHeaderItemLabel>
-              <TimeFrameSelector
-                value={currentTimeFrame}
-                onChange={handleTimeFrameChange}
-              />
             </SectionHeaderItem>
           </SectionHeaderRow>
         </SectionHeader>
@@ -118,10 +102,8 @@ AppSummary.propTypes = {
   isTurkishSite: PropTypes.bool.isRequired,
   isFirstSync: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
-  setParams: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   isSyncRequired: PropTypes.bool.isRequired,
-  currentTimeFrame: PropTypes.string.isRequired,
 }
 
 AppSummary.defaultProps = {
