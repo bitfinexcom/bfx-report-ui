@@ -22,7 +22,7 @@ import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import {
-  refresh,
+  // refresh,
   setParams,
   fetchBalance,
 } from 'state/accountBalance/actions'
@@ -59,9 +59,9 @@ const AccountBalance = () => {
   const shouldFetchAccountBalance = !dataReceived && !pageLoading && !isSyncRequired
 
   useEffect(() => {
-    if (shouldFetchAccountBalance) dispatch(fetchBalance())
+    if (shouldFetchAccountBalance) dispatch(fetchBalance({ useDefaults: false }))
     if (shouldRefreshAfterSync && !isSyncRequired) {
-      dispatch(fetchBalance())
+      dispatch(fetchBalance({ useDefaults: false }))
       dispatch(setShouldRefreshAfterSync(false))
     }
   }, [timeRange, shouldFetchAccountBalance, shouldRefreshAfterSync])
@@ -75,8 +75,8 @@ const AccountBalance = () => {
   }, [dispatch, setParams])
 
   const onRefresh = useCallback(() => {
-    dispatch(refresh())
-  }, [dispatch, refresh])
+    dispatch(fetchBalance({ useDefaults: false }))
+  }, [dispatch, fetchBalance])
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
