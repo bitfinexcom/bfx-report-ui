@@ -32,7 +32,6 @@ const AppSummary = ({
   isTurkishSite,
   isSyncRequired,
   currentTimeFrame,
-  isUnrealizedProfitExcluded,
 }) => {
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
@@ -42,10 +41,6 @@ const AppSummary = ({
 
   const handleTimeFrameChange = (timeframe) => {
     setParams({ timeframe })
-  }
-
-  const handleUnrealizedProfitChange = (value) => {
-    setParams({ isUnrealizedProfitExcluded: value })
   }
 
   return (
@@ -82,15 +77,6 @@ const AppSummary = ({
               <TimeFrameSelector
                 value={currentTimeFrame}
                 onChange={handleTimeFrameChange}
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.unrealized-profits.title')}
-              </SectionHeaderItemLabel>
-              <UnrealizedProfitSelector
-                value={isUnrealizedProfitExcluded}
-                onChange={handleUnrealizedProfitChange}
               />
             </SectionHeaderItem>
           </SectionHeaderRow>
