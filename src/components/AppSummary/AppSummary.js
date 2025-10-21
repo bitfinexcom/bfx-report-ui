@@ -11,7 +11,6 @@ import {
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
-import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
@@ -123,7 +122,6 @@ AppSummary.propTypes = {
   t: PropTypes.func.isRequired,
   isSyncRequired: PropTypes.bool.isRequired,
   currentTimeFrame: PropTypes.string.isRequired,
-  isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
 }
 
 AppSummary.defaultProps = {

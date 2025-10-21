@@ -10,10 +10,7 @@ import {
   getPageLoading,
   getDataReceived,
 } from 'state/accountSummary/selectors'
-import {
-  getTimeframe,
-  getIsUnrealizedProfitExcluded,
-} from 'state/accountBalance/selectors'
+import { getTimeframe } from 'state/accountBalance/selectors'
 import { getIsTurkishSite } from 'state/base/selectors'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
@@ -27,7 +24,6 @@ const mapStateToProps = state => ({
   isFirstSync: getIsFirstSyncing(state),
   isTurkishSite: getIsTurkishSite(state),
   isSyncRequired: getIsSyncRequired(state),
-  isUnrealizedProfitExcluded: getIsUnrealizedProfitExcluded(state),
 })
 
 const mapDispatchToProps = {
