@@ -1,4 +1,5 @@
 import React, { memo, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
@@ -20,7 +21,6 @@ import Positions from './AppSummary.positions'
 import Statistics from './AppSummary.statistics'
 
 const AppSummary = ({
-  t,
   data,
   fetchData,
   pageLoading,
@@ -29,6 +29,7 @@ const AppSummary = ({
   isTurkishSite,
   isSyncRequired,
 }) => {
+  const { t } = useTranslation()
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
       fetchData()
@@ -102,7 +103,6 @@ AppSummary.propTypes = {
   isTurkishSite: PropTypes.bool.isRequired,
   isFirstSync: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
-  t: PropTypes.func.isRequired,
   isSyncRequired: PropTypes.bool.isRequired,
 }
 
