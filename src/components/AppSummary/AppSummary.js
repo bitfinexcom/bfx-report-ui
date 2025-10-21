@@ -1,7 +1,6 @@
-import React, { memo, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
@@ -96,27 +95,4 @@ const AppSummary = () => {
   )
 }
 
-AppSummary.propTypes = {
-  data: PropTypes.shape({
-    derivMakerRebate: PropTypes.number,
-    derivTakerFee: PropTypes.number,
-    leoAmountAvg: PropTypes.number,
-    leoLev: PropTypes.number,
-    makerFee: PropTypes.number,
-    takerFeeToCrypto: PropTypes.number,
-    takerFeeToFiat: PropTypes.number,
-    takerFeeToStable: PropTypes.number,
-  }),
-  dataReceived: PropTypes.bool.isRequired,
-  fetchData: PropTypes.func.isRequired,
-  isTurkishSite: PropTypes.bool.isRequired,
-  isFirstSync: PropTypes.bool.isRequired,
-  pageLoading: PropTypes.bool.isRequired,
-  isSyncRequired: PropTypes.bool.isRequired,
-}
-
-AppSummary.defaultProps = {
-  data: {},
-}
-
-export default memo(AppSummary)
+export default AppSummary
