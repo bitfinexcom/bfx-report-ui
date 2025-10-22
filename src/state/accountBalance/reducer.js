@@ -9,6 +9,7 @@ import types from './constants'
 export const initialState = {
   currentFetchParams: {},
   dataReceived: false,
+  defaultDataReceived: false,
   entries: [],
   pageLoading: false,
   timeframe: timeframeConstants.DAY,
@@ -30,11 +31,13 @@ export function balanceReducer(state = initialState, action) {
         isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
       }
     case types.UPDATE_BALANCE: {
+      const { result, useDefaults } = payload
       return {
         ...state,
-        dataReceived: true,
+        dataReceived: !useDefaults,
         pageLoading: false,
-        entries: payload,
+        entries: result,
+        defaultDataReceived: useDefaults,
       }
     }
     case types.SET_PARAMS:
