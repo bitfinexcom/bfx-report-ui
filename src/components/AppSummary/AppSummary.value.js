@@ -15,8 +15,8 @@ import {
 import {
   getEntries,
   getPageLoading,
-  getDataReceived,
   getCurrentTimeFrame,
+  getDefaultDataReceived,
 } from 'state/accountBalance/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
 import { fetchBalance } from 'state/accountBalance/actions'
@@ -33,10 +33,10 @@ const AccountSummaryValue = () => {
   const entries = useSelector(getEntries)
   const timeRange = useSelector(getTimeRange)
   const pageLoading = useSelector(getPageLoading)
-  const dataReceived = useSelector(getDataReceived)
   const isFirstSync = useSelector(getIsFirstSyncing)
   const isSyncRequired = useSelector(getIsSyncRequired)
   const currTimeFrame = useSelector(getCurrentTimeFrame)
+  const dataReceived = useSelector(getDefaultDataReceived)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
   const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
 
