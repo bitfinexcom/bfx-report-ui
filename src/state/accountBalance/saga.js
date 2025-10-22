@@ -10,6 +10,8 @@ import { toggleErrorDialog } from 'state/ui/actions'
 import { updateErrorStatus } from 'state/status/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
+import timeframeConstants from 'ui/TimeFrameSelector/constants'
+import unrealizedProfitConstants from 'ui/UnrealizedProfitSelector/constants'
 
 import types from './constants'
 import actions from './actions'
@@ -28,11 +30,11 @@ export function* fetchAccountBalance({ payload }) {
     const params = {
       start,
       end,
-      timeframe: useDefaults ? 'day' : timeframe,
-      isUnrealizedProfitExcluded: useDefaults ? false : isUnrealizedProfitExcluded,
+      timeframe: useDefaults ? timeframeConstants.DAY : timeframe,
+      isUnrealizedProfitExcluded: useDefaults ? unrealizedProfitConstants.FALSE : isUnrealizedProfitExcluded,
     }
     const { result = [], error } = yield call(getReqBalance, params)
-    yield put(actions.updateBalance(result))
+    yield put(actions.updateBalance({ result, useDefaults }))
 
     if (error) {
       yield put(toggleErrorDialog(true, error.message))
