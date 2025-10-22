@@ -20,7 +20,7 @@ export const getReqBalance = params => makeFetchCall('getBalanceHistory', params
 /* eslint-disable-next-line consistent-return */
 export function* fetchAccountBalance({ payload }) {
   console.log('+++{ payload }', payload)
-  const { useDefaults = false } = payload
+  const { useDefaults } = payload
   try {
     const timeframe = yield select(selectors.getTimeframe)
     const isUnrealizedProfitExcluded = yield select(selectors.getIsUnrealizedProfitExcluded)
@@ -49,7 +49,8 @@ export function* fetchAccountBalance({ payload }) {
 function* refreshAccountBalance({ payload }) {
   const isSyncRequired = yield select(getIsSyncRequired)
   if (!isSyncRequired) {
-    yield put(actions.fetchBalance({ payload }))
+    const { useDefaults } = payload
+    yield put(actions.fetchBalance({ useDefaults }))
   }
 }
 
