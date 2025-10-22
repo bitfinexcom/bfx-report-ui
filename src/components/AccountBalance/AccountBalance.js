@@ -22,6 +22,7 @@ import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
 import {
+  refresh,
   setParams,
   fetchBalance,
 } from 'state/accountBalance/actions'
@@ -74,8 +75,8 @@ const AccountBalance = () => {
   }, [dispatch, setParams])
 
   const onRefresh = useCallback(() => {
-    dispatch(fetchBalance({ useDefaults: false }))
-  }, [dispatch, fetchBalance])
+    dispatch(refresh({ useDefaults: false }))
+  }, [dispatch, refresh])
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
