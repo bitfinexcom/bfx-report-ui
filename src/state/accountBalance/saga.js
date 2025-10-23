@@ -21,7 +21,6 @@ export const getReqBalance = params => makeFetchCall('getBalanceHistory', params
 
 /* eslint-disable-next-line consistent-return */
 export function* fetchAccountBalance({ payload }) {
-  console.log('+++{ payload }', payload)
   const { useDefaults } = payload
   try {
     const timeframe = yield select(selectors.getTimeframe)
