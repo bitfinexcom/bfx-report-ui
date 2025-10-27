@@ -75,7 +75,7 @@ const AccountBalance = () => {
 
   useEffect(() => {
     dispatch(refresh({ useDefaults: false }))
-  }, [isProfitExcluded])
+  }, [timeFrame, isProfitExcluded])
 
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
