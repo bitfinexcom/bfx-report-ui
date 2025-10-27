@@ -1,5 +1,6 @@
-import React, { memo, useEffect, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 
 import {
@@ -10,9 +11,15 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
-import RefreshButton from 'ui/RefreshButton'
-import TimeFrameSelector from 'ui/TimeFrameSelector'
-import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
+import {
+  getData,
+  getPageLoading,
+  getDataReceived,
+} from 'state/accountSummary/selectors'
+import { getIsTurkishSite } from 'state/base/selectors'
+import { getTimeRange } from 'state/timeRange/selectors'
+import { fetchData, refresh } from 'state/accountSummary/actions'
+import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import Leo from './AppSummary.leo'
 import Fees from './AppSummary.fees'
@@ -22,45 +29,26 @@ import ByAsset from './AppSummary.byAsset'
 import Positions from './AppSummary.positions'
 import Statistics from './AppSummary.statistics'
 
-const AppSummary = ({
-  t,
-  data,
-  refresh,
-  fetchData,
-  setParams,
-  pageLoading,
-  isFirstSync,
-  dataReceived,
-  isTurkishSite,
-  isSyncRequired,
-  refreshBalance,
-  refreshProfits,
-  refreshPositions,
-  currentTimeFrame,
-  refreshSummaryByAsset,
-  isUnrealizedProfitExcluded,
-}) => {
+const AppSummary = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const data = useSelector(getData)
+  const timeRange = useSelector(getTimeRange)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const isFirstSync = useSelector(getIsFirstSyncing)
+  const isTurkishSite = useSelector(getIsTurkishSite)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+
   useEffect(() => {
     if (!dataReceived && !pageLoading && !isSyncRequired) {
-      fetchData()
+      dispatch(fetchData())
     }
   }, [dataReceived, pageLoading, isSyncRequired])
 
-  const handleTimeFrameChange = (timeframe) => {
-    setParams({ timeframe })
-  }
-
-  const handleUnrealizedProfitChange = (value) => {
-    setParams({ isUnrealizedProfitExcluded: value })
-  }
-
-  const onRefresh = useCallback(() => {
-    refresh()
-    refreshBalance()
-    refreshProfits()
-    refreshPositions()
-    refreshSummaryByAsset()
-  }, [refresh, refreshBalance, refreshSummaryByAsset, refreshProfits, refreshPositions])
+  useEffect(() => {
+    dispatch(refresh())
+  }, [timeRange])
 
   return (
     <Card
@@ -89,25 +77,6 @@ const AppSummary = ({
               </SectionHeaderItemLabel>
               <TimeRange className='section-header-time-range' />
             </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.select')}
-              </SectionHeaderItemLabel>
-              <TimeFrameSelector
-                value={currentTimeFrame}
-                onChange={handleTimeFrameChange}
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.unrealized-profits.title')}
-              </SectionHeaderItemLabel>
-              <UnrealizedProfitSelector
-                value={isUnrealizedProfitExcluded}
-                onChange={handleUnrealizedProfitChange}
-              />
-            </SectionHeaderItem>
-            <RefreshButton onClick={onRefresh} />
           </SectionHeaderRow>
         </SectionHeader>
         <div className='app-summary-data-row'>
@@ -132,36 +101,4 @@ const AppSummary = ({
   )
 }
 
-AppSummary.propTypes = {
-  data: PropTypes.shape({
-    derivMakerRebate: PropTypes.number,
-    derivTakerFee: PropTypes.number,
-    leoAmountAvg: PropTypes.number,
-    leoLev: PropTypes.number,
-    makerFee: PropTypes.number,
-    takerFeeToCrypto: PropTypes.number,
-    takerFeeToFiat: PropTypes.number,
-    takerFeeToStable: PropTypes.number,
-  }),
-  dataReceived: PropTypes.bool.isRequired,
-  fetchData: PropTypes.func.isRequired,
-  isTurkishSite: PropTypes.bool.isRequired,
-  isFirstSync: PropTypes.bool.isRequired,
-  pageLoading: PropTypes.bool.isRequired,
-  refresh: PropTypes.func.isRequired,
-  refreshBalance: PropTypes.func.isRequired,
-  setParams: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
-  isSyncRequired: PropTypes.bool.isRequired,
-  currentTimeFrame: PropTypes.string.isRequired,
-  isUnrealizedProfitExcluded: PropTypes.bool.isRequired,
-  refreshSummaryByAsset: PropTypes.func.isRequired,
-  refreshProfits: PropTypes.func.isRequired,
-  refreshPositions: PropTypes.func.isRequired,
-}
-
-AppSummary.defaultProps = {
-  data: {},
-}
-
-export default memo(AppSummary)
+export default AppSummary

@@ -1,1 +1,1 @@
-export { default } from './AppSummary.container'
+export { default } from './AppSummary'
