@@ -17,7 +17,6 @@ import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
 import InitSyncNote from 'ui/InitSyncNote'
-import RefreshButton from 'ui/RefreshButton'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
@@ -78,10 +77,6 @@ const AccountBalance = () => {
     dispatch(refresh({ useDefaults: false }))
   }, [isProfitExcluded])
 
-  const onRefresh = useCallback(() => {
-    dispatch(refresh({ useDefaults: false }))
-  }, [dispatch, refresh])
-
   const { chartData, presentCurrencies } = useMemo(
     () => parseChartData({
       timeframe: currTimeFrame,
@@ -138,10 +133,6 @@ const AccountBalance = () => {
               onChange={handleUnrealizedProfitChange}
             />
           </SectionHeaderItem>
-          <RefreshButton
-            onClick={onRefresh}
-            disabled={isFirstSync}
-          />
         </SectionHeaderRow>
       </SectionHeader>
       {showContent}
