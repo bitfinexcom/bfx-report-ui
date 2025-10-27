@@ -74,6 +74,10 @@ const AccountBalance = () => {
     dispatch(setParams({ isUnrealizedProfitExcluded }))
   }, [dispatch, setParams])
 
+  useEffect(() => {
+    dispatch(refresh({ useDefaults: false }))
+  }, [isProfitExcluded])
+
   const onRefresh = useCallback(() => {
     dispatch(refresh({ useDefaults: false }))
   }, [dispatch, refresh])
