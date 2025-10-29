@@ -16,9 +16,13 @@ import {
   getIsTotal,
   getPairLabel,
   formatUsdValue,
+  getUsdValueCell,
   getFeePercentCell,
+  getRatioValueCell,
   formatPercentValue,
+  getPercentValueCell,
   formatUsdValueChange,
+  getUsdValueChangeCell,
   formatSecondaryPercentValue,
 } from './AppSummary.helpers'
 
@@ -425,5 +429,83 @@ export const getPositionsColumns = ({
       return getCell(`$${fixedFloat(collateral)}`, t)
     },
     copyText: rowIndex => fixedFloat(entries[rowIndex].collateral),
+  },
+]
+
+export const getStatisticsColumns = ({
+  data,
+  isLoading,
+}) => [
+  {
+    id: 'balanceUsd',
+    name: 'summary.statistics.balance',
+    width: 100,
+    renderer: () => (
+      getUsdValueCell(isLoading, data?.balanceUsd ?? 0)
+    ),
+  },
+  {
+    id: 'plUsd',
+    name: 'summary.statistics.profits',
+    width: 100,
+    renderer: () => (
+      getUsdValueChangeCell(isLoading, data?.plUsd ?? 0)
+    ),
+  },
+  {
+    id: 'maxDrawdownPerc',
+    name: 'summary.statistics.max_drawdown',
+    width: 100,
+    renderer: () => (
+      getPercentValueCell(isLoading, data?.maxDrawdownPerc ?? 0)
+    ),
+  },
+  {
+    id: 'volatilityPerc',
+    name: 'summary.statistics.volatility',
+    width: 100,
+    renderer: () => (
+      getPercentValueCell(isLoading, data?.volatilityPerc ?? 0)
+    ),
+  },
+  {
+    id: 'sharpeRatio',
+    name: 'summary.statistics.sharpe_ratio',
+    width: 100,
+    renderer: () => (
+      getRatioValueCell(isLoading, data?.sharpeRatio ?? 0)
+    ),
+  },
+  {
+    id: 'sortinoRatio',
+    name: 'summary.statistics.sortino_ratio',
+    width: 100,
+    renderer: () => (
+      getRatioValueCell(isLoading, data?.sortinoRatio ?? 0)
+    ),
+  },
+  {
+    id: 'volumeUsd',
+    name: 'summary.statistics.volume',
+    width: 100,
+    renderer: () => (
+      getUsdValueCell(isLoading, data?.volumeUsd ?? 0)
+    ),
+  },
+  {
+    id: 'depositsWithdrawalsUsd',
+    name: 'summary.statistics.deps_withdrawals',
+    width: 100,
+    renderer: () => (
+      getUsdValueChangeCell(isLoading, data?.depositsWithdrawalsUsd ?? 0)
+    ),
+  },
+  {
+    id: 'allFeesUsd',
+    name: 'summary.statistics.fees',
+    width: 100,
+    renderer: () => (
+      getUsdValueCell(isLoading, data?.allFeesUsd ?? 0)
+    ),
   },
 ]

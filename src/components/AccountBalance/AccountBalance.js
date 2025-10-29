@@ -59,9 +59,9 @@ const AccountBalance = () => {
   const shouldFetchAccountBalance = !dataReceived && !pageLoading && !isSyncRequired
 
   useEffect(() => {
-    if (shouldFetchAccountBalance) dispatch(fetchBalance())
+    if (shouldFetchAccountBalance) dispatch(fetchBalance({ useDefaults: false }))
     if (shouldRefreshAfterSync && !isSyncRequired) {
-      dispatch(fetchBalance())
+      dispatch(fetchBalance({ useDefaults: false }))
       dispatch(setShouldRefreshAfterSync(false))
     }
   }, [timeRange, shouldFetchAccountBalance, shouldRefreshAfterSync])
@@ -75,7 +75,7 @@ const AccountBalance = () => {
   }, [dispatch, setParams])
 
   const onRefresh = useCallback(() => {
-    dispatch(refresh())
+    dispatch(refresh({ useDefaults: false }))
   }, [dispatch, refresh])
 
   const { chartData, presentCurrencies } = useMemo(
