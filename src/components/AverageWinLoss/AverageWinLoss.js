@@ -16,7 +16,6 @@ import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
 import InitSyncNote from 'ui/InitSyncNote'
-import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import {
@@ -82,7 +81,6 @@ class AverageWinLoss extends PureComponent {
       isUnrealizedProfitExcluded: PropTypes.bool,
       isVsAccountBalanceSelected: PropTypes.bool,
     }),
-    refresh: PropTypes.func.isRequired,
     reportType: PropTypes.string.isRequired,
     setParams: PropTypes.func.isRequired,
     setReportType: PropTypes.func.isRequired,
@@ -124,7 +122,6 @@ class AverageWinLoss extends PureComponent {
     const {
       t,
       entries,
-      refresh,
       pageLoading,
       dataReceived,
       isFirstSyncing,
@@ -203,10 +200,6 @@ class AverageWinLoss extends PureComponent {
                 onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
-            <RefreshButton
-              onClick={refresh}
-              disabled={isFirstSyncing}
-            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
