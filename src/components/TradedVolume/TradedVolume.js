@@ -52,7 +52,6 @@ class TradedVolume extends PureComponent {
   render() {
     const {
       t,
-      refresh,
       entries,
       targetPairs,
       pageLoading,
