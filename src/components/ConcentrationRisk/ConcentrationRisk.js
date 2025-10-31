@@ -16,7 +16,6 @@ import DataTable from 'ui/DataTable'
 import DateInput from 'ui/DateInput'
 import PieChart from 'ui/Charts/PieChart'
 import InitSyncNote from 'ui/InitSyncNote'
-import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import { fixedFloat } from 'ui/utils'
 import queryConstants from 'state/query/constants'
@@ -131,7 +130,6 @@ class ConcentrationRisk extends PureComponent {
     const {
       t,
       entries,
-      refresh,
       pageLoading,
       dataReceived,
       isFirstSyncing,
@@ -199,10 +197,6 @@ class ConcentrationRisk extends PureComponent {
                 onChange={this.handleDateChange}
               />
             </SectionHeaderItem>
-            <RefreshButton
-              onClick={refresh}
-              disabled={isFirstSyncing}
-            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
