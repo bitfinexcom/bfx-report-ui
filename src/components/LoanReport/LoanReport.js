@@ -44,7 +44,6 @@ class LoanReport extends PureComponent {
     dataReceived: PropTypes.bool.isRequired,
     isFirstSyncing: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     params: PropTypes.shape({
       timeframe: PropTypes.string,
