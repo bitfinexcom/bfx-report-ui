@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _keys from 'lodash/keys'
 import _sortBy from 'lodash/sortBy'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -70,16 +70,18 @@ class ConcentrationRisk extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {
-      refresh, isSyncRequired, setShouldRefreshAfterSync, shouldRefreshAfterSync,
+      refresh, isSyncRequired, setShouldRefreshAfterSync, shouldRefreshAfterSync, currentTime,
     } = this.props
-    const { isSyncRequired: prevIsSyncRequired } = prevProps
-    if (isSyncRequired !== prevIsSyncRequired) {
+    const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime } = prevProps
+    if ((isSyncRequired !== prevIsSyncRequired) || !isEqual(prevTime, currentTime)) {
       refresh()
     }
     if (shouldRefreshAfterSync && !isSyncRequired) {
       refresh()
       setShouldRefreshAfterSync(false)
     }
+    console.log('++currentTime', currentTime)
+    console.log('++prevTime', prevTime)
   }
 
   parseData = (filteredData) => {
