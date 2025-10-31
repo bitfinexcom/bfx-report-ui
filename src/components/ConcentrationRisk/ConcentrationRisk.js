@@ -73,15 +73,14 @@ class ConcentrationRisk extends PureComponent {
       refresh, isSyncRequired, setShouldRefreshAfterSync, shouldRefreshAfterSync, currentTime,
     } = this.props
     const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime } = prevProps
-    if ((isSyncRequired !== prevIsSyncRequired) || !isEqual(prevTime, currentTime)) {
+    const shouldRefresh = !isEqual(prevIsSyncRequired, isSyncRequired) || !isEqual(prevTime, currentTime)
+    if (shouldRefresh) {
       refresh()
     }
     if (shouldRefreshAfterSync && !isSyncRequired) {
       refresh()
       setShouldRefreshAfterSync(false)
     }
-    console.log('++currentTime', currentTime)
-    console.log('++prevTime', prevTime)
   }
 
   parseData = (filteredData) => {
