@@ -16,7 +16,6 @@ import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
 import InitSyncNote from 'ui/InitSyncNote'
-import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import ReportTypeSelector from 'ui/ReportTypeSelector'
@@ -63,7 +62,6 @@ class FeesReport extends PureComponent {
       timeframe: PropTypes.string,
       targetPairs: PropTypes.arrayOf(PropTypes.string),
     }),
-    refresh: PropTypes.func.isRequired,
     reportType: PropTypes.string.isRequired,
     setParams: PropTypes.func.isRequired,
     setReportType: PropTypes.func.isRequired,
@@ -106,7 +104,6 @@ class FeesReport extends PureComponent {
     const {
       t,
       entries,
-      refresh,
       reportType,
       pageLoading,
       dataReceived,
@@ -182,10 +179,6 @@ class FeesReport extends PureComponent {
                 onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
-            <RefreshButton
-              onClick={refresh}
-              disabled={isFirstSyncing}
-            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}

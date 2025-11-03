@@ -10,7 +10,6 @@ export const propTypes = {
   targetPairs: PropTypes.array.isRequired,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
-  refresh: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
   fetchData: PropTypes.func.isRequired,

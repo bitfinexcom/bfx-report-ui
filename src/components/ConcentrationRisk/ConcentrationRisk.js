@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
 import _keys from 'lodash/keys'
 import _sortBy from 'lodash/sortBy'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -16,7 +16,6 @@ import DataTable from 'ui/DataTable'
 import DateInput from 'ui/DateInput'
 import PieChart from 'ui/Charts/PieChart'
 import InitSyncNote from 'ui/InitSyncNote'
-import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import { fixedFloat } from 'ui/utils'
 import queryConstants from 'state/query/constants'
@@ -70,10 +69,11 @@ class ConcentrationRisk extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {
-      refresh, isSyncRequired, setShouldRefreshAfterSync, shouldRefreshAfterSync,
+      refresh, isSyncRequired, setShouldRefreshAfterSync, shouldRefreshAfterSync, currentTime,
     } = this.props
-    const { isSyncRequired: prevIsSyncRequired } = prevProps
-    if (isSyncRequired !== prevIsSyncRequired) {
+    const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime } = prevProps
+    const shouldRefresh = !isEqual(prevIsSyncRequired, isSyncRequired) || !isEqual(prevTime, currentTime)
+    if (shouldRefresh) {
       refresh()
     }
     if (shouldRefreshAfterSync && !isSyncRequired) {
@@ -130,7 +130,6 @@ class ConcentrationRisk extends PureComponent {
     const {
       t,
       entries,
-      refresh,
       pageLoading,
       dataReceived,
       isFirstSyncing,
@@ -198,10 +197,6 @@ class ConcentrationRisk extends PureComponent {
                 onChange={this.handleDateChange}
               />
             </SectionHeaderItem>
-            <RefreshButton
-              onClick={refresh}
-              disabled={isFirstSyncing}
-            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}

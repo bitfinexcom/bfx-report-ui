@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
 import {
-  refresh,
   setParams,
   fetchWinLoss,
   setReportType,
@@ -39,7 +38,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  refresh,
   setParams,
   setReportType,
   fetchData: fetchWinLoss,

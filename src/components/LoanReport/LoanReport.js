@@ -16,7 +16,6 @@ import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
 import InitSyncNote from 'ui/InitSyncNote'
-import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
@@ -45,7 +44,6 @@ class LoanReport extends PureComponent {
     dataReceived: PropTypes.bool.isRequired,
     isFirstSyncing: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     params: PropTypes.shape({
       timeframe: PropTypes.string,
@@ -82,7 +80,6 @@ class LoanReport extends PureComponent {
     const {
       t,
       params,
-      refresh,
       entries,
       pageLoading,
       dataReceived,
@@ -151,10 +148,6 @@ class LoanReport extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-            <RefreshButton
-              onClick={refresh}
-              disabled={isFirstSyncing}
-            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}

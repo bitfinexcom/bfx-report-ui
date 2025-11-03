@@ -13,7 +13,6 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
-import RefreshButton from 'ui/RefreshButton'
 import PairSelector from 'ui/PairSelector'
 import SectionSwitch from 'ui/SectionSwitch'
 import {
@@ -56,7 +55,6 @@ class WeightedAverages extends PureComponent {
       PropTypes.bool,
     ]),
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     getFullTime: PropTypes.func.isRequired,
     targetPair: PropTypes.string.isRequired,
@@ -84,7 +82,6 @@ class WeightedAverages extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       nextPage,
       targetPair,
       getFullTime,
@@ -157,7 +154,6 @@ class WeightedAverages extends PureComponent {
                 onPairSelect={this.onPairSelect}
               />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}

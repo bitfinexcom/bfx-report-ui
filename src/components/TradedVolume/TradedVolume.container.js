@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 
 import {
   fetchTradedVolume,
-  refresh,
   addTargetPair,
   removeTargetPair,
   setTargetPairs,
@@ -41,7 +40,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchData: fetchTradedVolume,
-  refresh,
   setParams,
   addTargetPair,
   setTargetPairs,
