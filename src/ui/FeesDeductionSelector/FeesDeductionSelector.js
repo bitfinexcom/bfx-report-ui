@@ -8,7 +8,7 @@ import constants from './constants'
 
 const { TRUE, FALSE } = constants
 
-const FeesDeductionSelector = ({ onChange, value }) => {
+const FeesDeductionSelector = ({ onChange, value, className }) => {
   const { t } = useTranslation()
 
   const items = useMemo(() => [
@@ -21,6 +21,7 @@ const FeesDeductionSelector = ({ onChange, value }) => {
       value={value}
       items={items}
       onChange={onChange}
+      className={className}
     />
   )
 }
@@ -28,6 +29,11 @@ const FeesDeductionSelector = ({ onChange, value }) => {
 FeesDeductionSelector.propTypes = {
   value: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
+}
+
+FeesDeductionSelector.defaultProps = {
+  className: '',
 }
 
 export default memo(FeesDeductionSelector)
