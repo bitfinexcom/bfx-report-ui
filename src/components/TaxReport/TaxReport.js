@@ -137,7 +137,7 @@ const TaxReport = () => {
             <SectionHeaderItemLabel>
               {t('selector.strategy')}
             </SectionHeaderItemLabel>
-            <TaxStrategySelector />
+            <TaxStrategySelector className={classNames({ disabled: isFirstSyncing || isLoading })} />
           </SectionHeaderItem>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
@@ -146,6 +146,7 @@ const TaxReport = () => {
             <FeesDeductionSelector
               value={shouldFeesBeDeducted}
               onChange={handleDeductFees}
+              className={classNames({ disabled: isFirstSyncing || isLoading })}
             />
           </SectionHeaderItem>
           <RefreshButton
