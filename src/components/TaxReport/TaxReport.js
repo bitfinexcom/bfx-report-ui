@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import classNames from 'classnames'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -130,7 +131,7 @@ const TaxReport = () => {
             <SectionHeaderItemLabel>
               {t('selector.filter.date')}
             </SectionHeaderItemLabel>
-            <TimeRange className='section-header-time-range' />
+            <TimeRange className={classNames({ disabled: isFirstSyncing || isLoading })} />
           </SectionHeaderItem>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
