@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
+import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 
 import types from 'state/taxReport/constants'
@@ -12,7 +13,7 @@ const items = [
   { value: types.STRATEGY_FIFO, label: 'FIFO' },
 ]
 
-const TaxStrategySelector = () => {
+const TaxStrategySelector = ({ className }) => {
   const dispatch = useDispatch()
   const strategy = useSelector(getTransactionsStrategy)
 
@@ -24,9 +25,18 @@ const TaxStrategySelector = () => {
     <Select
       items={items}
       value={strategy}
+      className={className}
       onChange={handleChange}
     />
   )
 }
 
-export default TaxStrategySelector
+TaxStrategySelector.propTypes = {
+  className: PropTypes.string,
+}
+
+TaxStrategySelector.defaultProps = {
+  className: '',
+}
+
+export default memo(TaxStrategySelector)
