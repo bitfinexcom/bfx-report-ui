@@ -33,6 +33,7 @@ import {
   getIsFirstSyncing,
   getShouldRefreshAfterSync,
 } from 'state/sync/selectors'
+import { getTimeRange } from 'state/timeRange/selectors'
 import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import Loader from './TaxReport.loader'
@@ -45,6 +46,7 @@ const TYPE = queryConstants.MENU_TAX_REPORT
 const TaxReport = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const timeRange = useSelector(getTimeRange)
   const entries = useSelector(getTransactionsDataEntries)
   const getFullTime = useSelector(getFullTimeSelector)
   const isSyncRequired = useSelector(getIsSyncRequired)
@@ -75,7 +77,7 @@ const TaxReport = () => {
 
   useEffect(() => {
     dispatch(fetchTaxReportTransactions())
-  }, [shouldFeesBeDeducted])
+  }, [timeRange, shouldFeesBeDeducted])
 
   const handleDeductFees = useCallback((value) => {
     dispatch(setDeductFees(value))
