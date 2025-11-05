@@ -73,6 +73,10 @@ const TaxReport = () => {
     [dispatch],
   )
 
+  useEffect(() => {
+    dispatch(fetchTaxReportTransactions())
+  }, [shouldFeesBeDeducted])
+
   const handleDeductFees = useCallback((value) => {
     dispatch(setDeductFees(value))
   }, [dispatch])
