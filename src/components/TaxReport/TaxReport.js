@@ -19,6 +19,7 @@ import TaxStrategySelector from 'ui/TaxStrategySelector'
 import FeesDeductionSelector from 'ui/FeesDeductionSelector'
 import { fetchTaxReportTransactions, setDeductFees } from 'state/taxReport/actions'
 import {
+  getTransactionsStrategy,
   getTransactionsDataEntries,
   getTransactionsPageLoading,
   getTransactionsDataReceived,
@@ -47,6 +48,7 @@ const TaxReport = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const timeRange = useSelector(getTimeRange)
+  const strategy = useSelector(getTransactionsStrategy)
   const entries = useSelector(getTransactionsDataEntries)
   const getFullTime = useSelector(getFullTimeSelector)
   const isSyncRequired = useSelector(getIsSyncRequired)
@@ -77,7 +79,7 @@ const TaxReport = () => {
 
   useEffect(() => {
     dispatch(fetchTaxReportTransactions())
-  }, [timeRange, shouldFeesBeDeducted])
+  }, [timeRange, strategy, shouldFeesBeDeducted])
 
   const handleDeductFees = useCallback((value) => {
     dispatch(setDeductFees(value))
