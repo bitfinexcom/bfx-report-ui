@@ -14,7 +14,6 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
-import RefreshButton from 'ui/RefreshButton'
 import TaxStrategySelector from 'ui/TaxStrategySelector'
 import FeesDeductionSelector from 'ui/FeesDeductionSelector'
 import { fetchTaxReportTransactions, setDeductFees } from 'state/taxReport/actions'
@@ -71,11 +70,6 @@ const TaxReport = () => {
       dispatch(setShouldRefreshAfterSync(false))
     }
   }, [shouldFetchTaxReport, shouldRefreshAfterSync, isSyncRequired])
-
-  const onRefresh = useCallback(
-    () => dispatch(fetchTaxReportTransactions()),
-    [dispatch],
-  )
 
   useEffect(() => {
     dispatch(fetchTaxReportTransactions())
@@ -158,11 +152,6 @@ const TaxReport = () => {
               className={paramChangerClass}
             />
           </SectionHeaderItem>
-          <RefreshButton
-            onClick={onRefresh}
-            label={t('taxreport.generation.btn')}
-            disabled={isFirstSyncing || isLoading}
-          />
         </SectionHeaderRow>
       </SectionHeader>
       {showContent}
