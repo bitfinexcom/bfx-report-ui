@@ -58,6 +58,7 @@ const TaxReport = () => {
   const isFirstSyncing = useSelector(getIsFirstSyncing)
   const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
   const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
+  const paramChangerClass = classNames({ disabled: isFirstSyncing || isLoading })
 
   useEffect(() => {
     if (shouldFetchTaxReport) dispatch(fetchTaxReportTransactions())
@@ -131,13 +132,13 @@ const TaxReport = () => {
             <SectionHeaderItemLabel>
               {t('selector.filter.date')}
             </SectionHeaderItemLabel>
-            <TimeRange className={classNames({ disabled: isFirstSyncing || isLoading })} />
+            <TimeRange className={paramChangerClass} />
           </SectionHeaderItem>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
               {t('selector.strategy')}
             </SectionHeaderItemLabel>
-            <TaxStrategySelector className={classNames({ disabled: isFirstSyncing || isLoading })} />
+            <TaxStrategySelector className={paramChangerClass} />
           </SectionHeaderItem>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
@@ -146,7 +147,7 @@ const TaxReport = () => {
             <FeesDeductionSelector
               value={shouldFeesBeDeducted}
               onChange={handleDeductFees}
-              className={classNames({ disabled: isFirstSyncing || isLoading })}
+              className={paramChangerClass}
             />
           </SectionHeaderItem>
           <RefreshButton
