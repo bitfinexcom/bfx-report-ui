@@ -72,8 +72,8 @@ const TaxReport = () => {
   }, [shouldFetchTaxReport, shouldRefreshAfterSync, isSyncRequired])
 
   useEffect(() => {
-    dispatch(fetchTaxReportTransactions())
-  }, [timeRange, strategy, shouldFeesBeDeducted])
+    if (!isSyncRequired) dispatch(fetchTaxReportTransactions())
+  }, [timeRange, strategy, shouldFeesBeDeducted, isSyncRequired])
 
   const handleDeductFees = useCallback((value) => {
     dispatch(setDeductFees(value))
