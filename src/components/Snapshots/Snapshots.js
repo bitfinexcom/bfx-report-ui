@@ -48,10 +48,10 @@ class Snapshots extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {
-      refresh, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync,
+      refresh, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync, currentTime,
     } = this.props
-    const { isSyncRequired: prevIsSyncRequired } = prevProps
-    if (isSyncRequired !== prevIsSyncRequired) {
+    const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime } = prevProps
+    if ((isSyncRequired !== prevIsSyncRequired) || (prevTime !== currentTime)) {
       refresh()
     }
     if (shouldRefreshAfterSync && !isSyncRequired) {
