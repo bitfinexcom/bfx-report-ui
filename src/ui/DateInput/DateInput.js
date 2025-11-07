@@ -44,6 +44,7 @@ class DateInput extends PureComponent {
       t,
       timezone,
       value,
+      isDisabled,
     } = this.props
     const { isOpen } = this.state
 
@@ -58,6 +59,7 @@ class DateInput extends PureComponent {
 
     return (
       <BptDateInput
+        disabled={isDisabled}
         defaultValue={this.formatDate(defaultValue)}
         formatDate={formatDate}
         inputProps={{
