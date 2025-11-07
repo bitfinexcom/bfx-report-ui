@@ -176,8 +176,9 @@ class Snapshots extends PureComponent {
                 {t('query.endTime')}
               </SectionHeaderItemLabel>
               <DateInput
-                onChange={this.handleDateChange}
                 defaultValue={timestamp}
+                onChange={this.handleDateChange}
+                isDisabled={isFirstSyncing || isLoading}
               />
             </SectionHeaderItem>
             <RefreshButton
