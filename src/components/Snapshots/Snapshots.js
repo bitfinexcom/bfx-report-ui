@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -51,7 +52,8 @@ class Snapshots extends PureComponent {
       refresh, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync, currentTime,
     } = this.props
     const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime } = prevProps
-    if ((isSyncRequired !== prevIsSyncRequired) || (prevTime !== currentTime)) {
+    const shouldRefresh = !isEqual(prevIsSyncRequired, isSyncRequired) || !isEqual(prevTime, currentTime)
+    if (shouldRefresh) {
       refresh()
     }
     if (shouldRefreshAfterSync && !isSyncRequired) {
