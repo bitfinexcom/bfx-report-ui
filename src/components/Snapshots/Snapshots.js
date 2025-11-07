@@ -13,7 +13,6 @@ import {
 import DateInput from 'ui/DateInput'
 import InitSyncNote from 'ui/InitSyncNote'
 import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
-import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
@@ -109,7 +108,6 @@ class Snapshots extends PureComponent {
   render() {
     const {
       t,
-      refresh,
       pageLoading,
       dataReceived,
       walletsEntries,
@@ -181,10 +179,6 @@ class Snapshots extends PureComponent {
                 isDisabled={isFirstSyncing || isLoading}
               />
             </SectionHeaderItem>
-            <RefreshButton
-              onClick={refresh}
-              disabled={isFirstSyncing}
-            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}
