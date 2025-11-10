@@ -37,7 +37,6 @@ class Trades extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       targetPairs,
       getFullTime,
@@ -98,7 +97,6 @@ class Trades extends PureComponent {
             existingPairs,
             togglePair: this.togglePair,
           }}
-          refresh={refresh}
           clearTargetPairs={this.clearPairs}
         />
         {showContent}
