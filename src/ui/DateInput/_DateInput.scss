@@ -19,6 +19,18 @@
 .date-input-popover {
   .bp3-input {
     height: 34px;
+
+    &:disabled {
+      background-color: var(--bgColor)
+    }
+  }
+
+  .bp3-disabled {
+    .bp3-input-action {
+      svg path {
+        fill: var(--color2);
+      }
+    }
   }
 
   .bp3-input-action {
