@@ -15,7 +15,6 @@ import TimeRange from 'ui/TimeRange'
 import GoToButton from 'ui/GoToButton'
 import PairSelector from 'ui/PairSelector'
 import Timeframe from 'ui/CandlesTimeframe'
-import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import Candlestick from 'ui/Charts/Candlestick'
 import CandlesSyncPref from 'ui/CandlesSyncPref'
@@ -44,7 +43,7 @@ class Candles extends PureComponent {
       pair: PropTypes.string.isRequired,
       timeframe: PropTypes.string.isRequired,
     }).isRequired,
-    refresh: PropTypes.func.isRequired,
+    // refresh: PropTypes.func.isRequired,
     setParams: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     toggleGoToRangeDialog: PropTypes.func.isRequired,
@@ -88,7 +87,6 @@ class Candles extends PureComponent {
       isChartLoading,
       pairs,
       params,
-      refresh,
       t,
       trades,
       toggleGoToRangeDialog,
@@ -146,7 +144,6 @@ class Candles extends PureComponent {
               value={timeframe}
               onChange={this.onTimeframeChange}
             />
-            <RefreshButton onClick={refresh} />
             <CandlesSyncPref />
             <GoToButton onClick={toggleGoToRangeDialog} />
           </SectionHeaderRow>
