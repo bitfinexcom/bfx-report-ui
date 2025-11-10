@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import classNames from 'classnames'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -13,11 +14,11 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
-import RefreshButton from 'ui/RefreshButton'
 import TaxStrategySelector from 'ui/TaxStrategySelector'
 import FeesDeductionSelector from 'ui/FeesDeductionSelector'
 import { fetchTaxReportTransactions, setDeductFees } from 'state/taxReport/actions'
 import {
+  getTransactionsStrategy,
   getTransactionsDataEntries,
   getTransactionsPageLoading,
   getTransactionsDataReceived,
@@ -32,6 +33,7 @@ import {
   getIsFirstSyncing,
   getShouldRefreshAfterSync,
 } from 'state/sync/selectors'
+import { getTimeRange } from 'state/timeRange/selectors'
 import { setShouldRefreshAfterSync } from 'state/sync/actions'
 
 import Loader from './TaxReport.loader'
@@ -44,6 +46,8 @@ const TYPE = queryConstants.MENU_TAX_REPORT
 const TaxReport = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const timeRange = useSelector(getTimeRange)
+  const strategy = useSelector(getTransactionsStrategy)
   const entries = useSelector(getTransactionsDataEntries)
   const getFullTime = useSelector(getFullTimeSelector)
   const isSyncRequired = useSelector(getIsSyncRequired)
@@ -57,6 +61,7 @@ const TaxReport = () => {
   const isFirstSyncing = useSelector(getIsFirstSyncing)
   const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
   const shouldFetchTaxReport = !isSyncRequired && !dataReceived && !isLoading
+  const paramChangerClass = classNames({ disabled: isFirstSyncing || isLoading })
 
   useEffect(() => {
     if (shouldFetchTaxReport) dispatch(fetchTaxReportTransactions())
@@ -66,10 +71,9 @@ const TaxReport = () => {
     }
   }, [shouldFetchTaxReport, shouldRefreshAfterSync, isSyncRequired])
 
-  const onRefresh = useCallback(
-    () => dispatch(fetchTaxReportTransactions()),
-    [dispatch],
-  )
+  useEffect(() => {
+    if (!isSyncRequired) dispatch(fetchTaxReportTransactions())
+  }, [timeRange, strategy, shouldFeesBeDeducted])
 
   const handleDeductFees = useCallback((value) => {
     dispatch(setDeductFees(value))
@@ -130,13 +134,13 @@ const TaxReport = () => {
             <SectionHeaderItemLabel>
               {t('selector.filter.date')}
             </SectionHeaderItemLabel>
-            <TimeRange className='section-header-time-range' />
+            <TimeRange className={paramChangerClass} />
           </SectionHeaderItem>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
               {t('selector.strategy')}
             </SectionHeaderItemLabel>
-            <TaxStrategySelector />
+            <TaxStrategySelector className={paramChangerClass} />
           </SectionHeaderItem>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
@@ -145,13 +149,9 @@ const TaxReport = () => {
             <FeesDeductionSelector
               value={shouldFeesBeDeducted}
               onChange={handleDeductFees}
+              className={paramChangerClass}
             />
           </SectionHeaderItem>
-          <RefreshButton
-            onClick={onRefresh}
-            label={t('taxreport.generation.btn')}
-            disabled={isFirstSyncing || isLoading}
-          />
         </SectionHeaderRow>
       </SectionHeader>
       {showContent}
