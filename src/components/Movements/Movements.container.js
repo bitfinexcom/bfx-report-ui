@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
 import {
-  refresh,
   fetchMovements,
   addTargetSymbol,
   getMovementInfo,
@@ -45,7 +44,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  refresh,
   jumpPage,
   addTargetSymbol,
   getMovementInfo,
