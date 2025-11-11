@@ -53,7 +53,6 @@ class FundingOfferHistory extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetSymbols: PropTypes.arrayOf(PropTypes.string),
     timeOffset: PropTypes.string.isRequired,
@@ -83,7 +82,6 @@ class FundingOfferHistory extends PureComponent {
     const {
       t,
       columns,
-      refresh,
       entries,
       timeOffset,
       getFullTime,
@@ -142,7 +140,6 @@ class FundingOfferHistory extends PureComponent {
         <SectionHeader
           target={TYPE}
           showHeaderTabs
-          refresh={refresh}
           title='foffer.title'
           symbolsSelectorProps={{
             currentFilters: targetSymbols,
