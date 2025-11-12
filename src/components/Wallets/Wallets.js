@@ -46,9 +46,9 @@ class Wallets extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime } = prevProps
+    const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime, exactBalance: prevExactBalance } = prevProps
     const {
-      fetchData, fetchSnapshots, isSyncRequired, currentTime,
+      fetchData, fetchSnapshots, isSyncRequired, currentTime, exactBalance,
     } = this.props
 
     if (isSyncRequired !== prevIsSyncRequired) {
@@ -56,7 +56,7 @@ class Wallets extends PureComponent {
       if (isFrameworkMode)fetchSnapshots()
     }
 
-    if (prevTime !== currentTime) {
+    if ((prevTime !== currentTime) || (prevExactBalance !== exactBalance)) {
       this.handleRefresh()
     }
   }
