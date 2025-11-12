@@ -47,12 +47,18 @@ class Wallets extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { isSyncRequired: prevIsSyncRequired } = prevProps
-    const { fetchData, fetchSnapshots, isSyncRequired } = this.props
+    const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime } = prevProps
+    const {
+      fetchData, fetchSnapshots, isSyncRequired, currentTime,
+    } = this.props
 
     if (isSyncRequired !== prevIsSyncRequired) {
       fetchData()
       if (isFrameworkMode)fetchSnapshots()
+    }
+
+    if (prevTime !== currentTime) {
+      this.handleRefresh()
     }
   }
 
