@@ -13,7 +13,6 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 
 import WalletsData from './Wallets.data'
@@ -126,10 +125,6 @@ class Wallets extends PureComponent {
                   onChange={setExactBalance}
                 />
               </SectionHeaderItem>
-              <RefreshButton
-                disabled={isFirstSyncing}
-                onClick={this.handleRefresh}
-              />
             </SectionHeaderRow>
           )}
         </SectionHeader>
