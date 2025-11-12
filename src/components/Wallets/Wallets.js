@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import DateInput from 'ui/DateInput'
@@ -56,7 +57,8 @@ class Wallets extends PureComponent {
       if (isFrameworkMode)fetchSnapshots()
     }
 
-    if ((prevTime !== currentTime) || (prevExactBalance !== exactBalance)) {
+    const shouldRefresh = !isEqual(prevTime, currentTime) || !isEqual(prevExactBalance, exactBalance)
+    if (shouldRefresh) {
       this.handleRefresh()
     }
   }
