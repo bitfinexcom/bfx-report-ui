@@ -20,11 +20,292 @@
     <meta name="twitter:title" content="Bitfinex Reporting & Performance Tools" />
     <meta name="twitter:description" content="Manage risk, money & strategies with our state-of-the-art pro reporting tools" />
     <meta name="twitter:image" content="https://report.bitfinex.com/report-thumbnail-2.png">
+
+    <style>
+      .au-toast {
+        display: none;
+        position: absolute;
+        z-index: 99;
+        top: 40px;
+        right: 0;
+        width: auto;
+        margin: auto;
+        min-height: 44px;
+        min-width: 200px;
+        background-color: #0B1923;
+        font-size: 14px;
+      }
+
+      .au-toast__icon {
+        padding: 5px;
+        margin: 4px 10px;
+        font-size: 20px;
+      }
+
+      .au-toast__icon--error {
+        color: #fc7777;
+      }
+
+      .au-toast__icon--loading {
+        padding: 0px;
+        margin: 12px 10px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #3498db;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .au-toast__icon--success {
+        color: #239d23;
+      }
+
+      .au-toast__icon--info {
+        color: #3498db;
+      }
+
+      .au-toast__icon--question {
+        color: #eded50;
+      }
+
+      .au-toast__title {
+        font-weight: bold;
+        margin: 2px 10px 2px 0;
+        padding: 11px 0;
+      }
+
+      .au-toast__text {
+        font-weight: lighter;
+        margin: 2px 10px 2px 0;
+        padding: 11px 0;
+      }
+
+      .au-toast__perc {
+        font-weight: lighter;
+        margin: 2px 10px 2px 0;
+        padding: 11px 0;
+        min-width: 50px;
+      }
+
+      .au-toast__confirm-btn {
+        padding: 5px;
+        margin: 8px 10px 8px 0;
+        border-radius: 2px;
+        background-color: #82baf6;
+        border: 1px solid #82baf6;
+        color: #102331;
+        transition: all 0.3s;
+        box-shadow: none;
+        background-image: none;
+        cursor: pointer;
+      }
+
+      .au-toast__confirm-btn:hover,
+      .au-toast__confirm-btn:focus,
+      .au-toast__confirm-btn:active {
+        background-color: #4c88c8;
+        border: 1px solid #4c88c8;
+        color: #102331;
+        box-shadow: none;
+      }
+
+      .au-toast__cancel-btn {
+        padding: 5px;
+        margin: 8px 10px 8px 0;
+        border-radius: 2px;
+        background-color: #0B1923;
+        border: 1px solid #334A59;
+        color: #ffffff;
+        box-shadow: none;
+        background-image: none;
+        cursor: pointer;
+      }
+
+      .au-toast__cancel-btn:hover,
+      .au-toast__cancel-btn:focus,
+      .au-toast__cancel-btn:active {
+        background-color: #19354a;
+        border: 1px solid #334A59;
+        box-shadow: none;
+      }
+    </style>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
+    <div id="autoUpdateToast" class="au-toast"></div>
   </body>
+
+  <script>
+    window.document.addEventListener('electronLoad', async () => {
+      try {
+        const autoUpdateToastElem = document.getElementById('autoUpdateToast')
+        let toastId = null
+        let timeout = null
+
+        const sendToastClosedEvent = (args) => {
+          window.bfxReportElectronApi?.sendToastClosedEvent({
+            // https://github.com/rocketlaunchr/electron-alert/blob/master/src/alert.js#L10
+            //  - `timer` if toast is hidden due to timer considering `timer` ms val
+            //  - `cancel` if toast is hidden due to cancel btn being pushed
+            //  - `confirm` if toast is hidden due to confirm btn being pushed
+            //  - `close` if toast is hidden due to other reasons
+            dismiss: 'cancel',
+
+            ...args
+          })
+        }
+        const hideToast = () => {
+          autoUpdateToastElem.style.display = 'none'
+        }
+        const showToast = () => {
+          autoUpdateToastElem.style.display = 'flex'
+        }
+        const renderToast = (args) => {
+          const {
+            icon = 'info', // it can be one of ['error', 'loading', 'success', 'info', 'question']
+            title = null,
+            text = null,
+            showConfirmButton = true,
+            showCancelButton = false,
+            confirmButtonText = 'OK',
+            cancelButtonText = 'Cancel',
+            progress = null // >=0, <=100
+          } = args ?? {}
+          const elems = []
+
+          const iconMap = {
+            error: '<span class="au-toast__icon au-toast__icon--error">X</span>',
+            loading: '<span class="au-toast__icon au-toast__icon--loading"></span>',
+            success: '<span class="au-toast__icon au-toast__icon--success">V</span>',
+            info: '<span class="au-toast__icon au-toast__icon--info">i</span>',
+            question: '<span class="au-toast__icon au-toast__icon--question">?</span>' 
+          }
+          const iconHTML = iconMap[icon]
+
+          if (iconHTML) {
+            elems.push(iconHTML)
+          }
+          if (title) {
+            elems.push(`<span class="au-toast__title">${title}</span>`)
+          }
+          if (text) {
+            elems.push(`<span class="au-toast__text">${text}</span>`)
+          }
+          if (Number.isFinite(progress)) {
+            elems.push(`<span id="auPerc" class="au-toast__perc">${Math.trunc(progress)} %</span>`)
+          }
+          if (showConfirmButton) {
+            elems.push(`<button id="confirmBtn" class="au-toast__confirm-btn">${confirmButtonText}</button>`)
+          }
+          if (showCancelButton) {
+            elems.push(`<button id="cancelBtn" class="au-toast__cancel-btn">${cancelButtonText}</button>`)
+          }
+
+          autoUpdateToastElem.innerHTML = elems.join('\n')
+
+          if (showConfirmButton) {
+            const confirmBtnElem = document.getElementById('confirmBtn')
+            confirmBtnElem.addEventListener('click', (e) => {
+              e.preventDefault()
+              console.log('[---confirmBtn---]:', args?.toastId)
+
+              clearTimeout(timeout)
+              hideToast()
+              sendToastClosedEvent({
+                dismiss: 'confirm',
+                toastId: args?.toastId
+              })
+            }, false)
+          }
+          if (showCancelButton) {
+            const cancelBtnElem = document.getElementById('cancelBtn')
+            cancelBtnElem.addEventListener('click', (e) => {
+              e.preventDefault()
+              console.log('[---cancelBtn---]:', args?.toastId)
+
+              clearTimeout(timeout)
+              hideToast()
+              sendToastClosedEvent({
+                dismiss: 'cancel',
+                toastId: args?.toastId
+              })
+            }, false)
+          }
+        }
+
+        window.bfxReportElectronApi?.onFireToastEvent((args) => {
+          console.log('[---onFireToastEvent--]:', args)
+
+          if (toastId) {
+            sendToastClosedEvent({
+              dismiss: 'close',
+              toastId
+            })
+          }
+
+          let timer = args?.timer
+          toastId = args?.toastId
+          renderToast(args)
+          showToast()
+
+          if (args?.progress >= 100) {
+            timer = 1000
+          }
+          if (!Number.isInteger(timer)) {
+            return
+          }
+
+          clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            console.log('[---timeout--]:', timer, args.toastId)
+            hideToast()
+            sendToastClosedEvent({
+              dismiss: args?.timer ? 'timer' : 'close',
+              toastId: toastId
+            })
+          }, timer)
+        })
+        window.bfxReportElectronApi?.onProgressToastEvent((args) => {
+          console.log('[---onProgressToastEventToastEvent--]:', args)
+
+          const auPercElem = document.getElementById('auPerc')
+
+          if (
+            !Number.isFinite(args?.progress) ||
+            autoUpdateToastElem.style.display === 'none' ||
+            !auPercElem
+          ) {
+            return
+          }
+
+          auPercElem.innerText = `${Math.trunc(args.progress)} %`
+
+          if (args?.progress < 100) {
+            return
+          }
+
+          clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            console.log('[---progress-timeout--]')
+            hideToast()
+            sendToastClosedEvent({
+              dismiss: 'close',
+              toastId: toastId
+            })
+          }, 1000)
+        })
+      } catch (err) {
+        console.log('[---ERROR---]:', err)
+      }
+    })
+  </script>
 </html>
