@@ -14,7 +14,6 @@ import TimeRange from 'ui/TimeRange'
 import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
 import PairSelector from 'ui/PairSelector'
-import RefreshButton from 'ui/RefreshButton'
 import ColumnsFilter from 'ui/ColumnsFilter'
 import SyncPrefButton from 'ui/SyncPrefButton'
 import queryConstants from 'state/query/constants'
@@ -41,7 +40,6 @@ class PublicTrades extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       targetPair,
       timeOffset,
       getFullTime,
@@ -114,7 +112,6 @@ class PublicTrades extends PureComponent {
               </SectionHeaderItemLabel>
               <ColumnsFilter target={TYPE} />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
             <SyncPrefButton sectionType={TYPE} />
           </SectionHeaderRow>
         </SectionHeader>
