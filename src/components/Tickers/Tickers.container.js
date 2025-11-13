@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 
 import {
   fetchTickers,
-  refresh,
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
@@ -40,7 +39,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchData: fetchTickers,
-  refresh,
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
