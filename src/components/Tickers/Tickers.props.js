@@ -18,7 +18,6 @@ export const propTypes = {
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
   pairs: PropTypes.arrayOf(PropTypes.string),
-  refresh: PropTypes.func.isRequired,
   removeTargetPair: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   targetPairs: PropTypes.arrayOf(PropTypes.string),
