@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
 import {
-  refresh,
   fetchFCredit,
   addTargetSymbol,
   setTargetSymbols,
@@ -41,7 +40,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  refresh,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,

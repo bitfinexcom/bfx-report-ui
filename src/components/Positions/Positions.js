@@ -53,7 +53,6 @@ class Positions extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetPairs: PropTypes.arrayOf(PropTypes.string),
     timeOffset: PropTypes.string.isRequired,
@@ -91,7 +90,6 @@ class Positions extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       getFullTime,
       targetPairs,
@@ -157,7 +155,6 @@ class Positions extends PureComponent {
             currentFilters: targetPairs,
             togglePair: this.togglePair,
           }}
-          refresh={refresh}
           clearTargetPairs={this.clearPairs}
         />
         {showContent}

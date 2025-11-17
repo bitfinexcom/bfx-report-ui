@@ -58,7 +58,6 @@ class Orders extends PureComponent {
     existingPairs: PropTypes.arrayOf(PropTypes.string),
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetPairs: PropTypes.arrayOf(PropTypes.string),
     getFullTime: PropTypes.func.isRequired,
@@ -112,7 +111,6 @@ class Orders extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       targetPairs,
       getFullTime,
@@ -170,7 +168,6 @@ class Orders extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
-          refresh={refresh}
           title='orders.title'
           pairsSelectorProps={{
             currentFilters: targetPairs,

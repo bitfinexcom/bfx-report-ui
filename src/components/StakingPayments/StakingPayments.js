@@ -54,7 +54,6 @@ class StakingPayments extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetSymbols: PropTypes.arrayOf(PropTypes.string),
     timeOffset: PropTypes.string.isRequired,
@@ -83,7 +82,6 @@ class StakingPayments extends PureComponent {
   render() {
     const {
       t,
-      refresh,
       columns,
       entries,
       timeOffset,
@@ -143,7 +141,6 @@ class StakingPayments extends PureComponent {
         <SectionHeader
           target={TYPE}
           showHeaderTabs
-          refresh={refresh}
           title='spayments.title'
           symbolsSelectorProps={{
             existingCoins,

@@ -56,7 +56,6 @@ class FundingLoanHistory extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetSymbols: PropTypes.arrayOf(PropTypes.string),
     timeOffset: PropTypes.string.isRequired,
@@ -86,7 +85,6 @@ class FundingLoanHistory extends PureComponent {
     const {
       t,
       columns,
-      refresh,
       entries,
       timeOffset,
       pageLoading,
@@ -145,7 +143,6 @@ class FundingLoanHistory extends PureComponent {
         <SectionHeader
           target={TYPE}
           showHeaderTabs
-          refresh={refresh}
           title='floan.title'
           symbolsSelectorProps={{
             currentFilters: targetSymbols,
