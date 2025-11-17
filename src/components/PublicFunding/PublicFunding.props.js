@@ -15,7 +15,6 @@ export const propTypes = {
   getFullTime: PropTypes.func,
   dataReceived: PropTypes.bool.isRequired,
   pageLoading: PropTypes.bool.isRequired,
-  refresh: PropTypes.func.isRequired,
   setTargetSymbol: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   targetSymbol: PropTypes.string,

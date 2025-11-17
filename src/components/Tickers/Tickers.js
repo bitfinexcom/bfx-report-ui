@@ -12,7 +12,6 @@ import {
 } from 'ui/SectionHeader'
 import TimeRange from 'ui/TimeRange'
 import ColumnsFilter from 'ui/ColumnsFilter'
-import RefreshButton from 'ui/RefreshButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import Pagination from 'ui/Pagination'
 import SyncPrefButton from 'ui/SyncPrefButton'
@@ -49,7 +48,6 @@ class Tickers extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       getFullTime,
       pageLoading,
@@ -124,10 +122,6 @@ class Tickers extends PureComponent {
               </SectionHeaderItemLabel>
               <ColumnsFilter target={TYPE} />
             </SectionHeaderItem>
-            <RefreshButton
-              onClick={refresh}
-              disabled={isEmpty(targetPairs)}
-            />
             <SyncPrefButton sectionType={TYPE} />
           </SectionHeaderRow>
         </SectionHeader>

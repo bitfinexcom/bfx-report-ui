@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom'
 
 import {
   fetchPublicFunding,
-  refresh,
   setTargetSymbol,
 } from 'state/publicFunding/actions'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
@@ -35,7 +34,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchData: fetchPublicFunding,
-  refresh,
   setTargetSymbol,
 }
 

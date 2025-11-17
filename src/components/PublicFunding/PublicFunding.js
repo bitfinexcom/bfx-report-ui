@@ -16,7 +16,6 @@ import Pagination from 'ui/Pagination'
 import SyncSymbolPrefButton from 'ui/SyncSymbolPrefButton'
 import DataTable from 'ui/DataTable'
 import SymbolSelector from 'ui/SymbolSelector'
-import RefreshButton from 'ui/RefreshButton'
 import queryConstants from 'state/query/constants'
 import { getPath } from 'state/query/utils'
 import { checkInit, checkFetch } from 'state/utils'
@@ -49,7 +48,6 @@ class PublicFunding extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       getFullTime,
       pageLoading,
@@ -123,7 +121,6 @@ class PublicFunding extends PureComponent {
               </SectionHeaderItemLabel>
               <ColumnsFilter target={TYPE} />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
             <SyncSymbolPrefButton />
           </SectionHeaderRow>
         </SectionHeader>

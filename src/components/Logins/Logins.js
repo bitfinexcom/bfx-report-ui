@@ -40,7 +40,6 @@ class Logins extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     timeOffset: PropTypes.string.isRequired,
   }
@@ -64,7 +63,6 @@ class Logins extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       getFullTime,
       pageLoading,
@@ -118,7 +116,6 @@ class Logins extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
-          refresh={refresh}
           title='logins.title'
         />
         {showContent}
