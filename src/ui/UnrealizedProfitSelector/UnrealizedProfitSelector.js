@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 
@@ -8,12 +8,14 @@ import constants from './constants'
 
 const { TRUE, FALSE } = constants
 
+const getItems = (t) => [
+  { value: FALSE, label: t('selector.unrealized-profits.yes') },
+  { value: TRUE, label: t('selector.unrealized-profits.no') },
+]
+
 const UnrealizedProfitSelector = ({ onChange, value }) => {
   const { t } = useTranslation()
-  const items = [
-    { value: FALSE, label: t('selector.unrealized-profits.yes') },
-    { value: TRUE, label: t('selector.unrealized-profits.no') },
-  ]
+  const items = useMemo(() => getItems(t), [t])
 
   return (
     <Select
@@ -32,4 +34,4 @@ UnrealizedProfitSelector.propTypes = {
   onChange: PropTypes.func.isRequired,
 }
 
-export default UnrealizedProfitSelector
+export default memo(UnrealizedProfitSelector)
