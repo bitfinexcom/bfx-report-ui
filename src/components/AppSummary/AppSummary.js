@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
+import classNames from 'classnames'
 
 import {
   SectionHeader,
@@ -75,7 +76,7 @@ const AppSummary = () => {
               <SectionHeaderItemLabel>
                 {t('selector.filter.date')}
               </SectionHeaderItemLabel>
-              <TimeRange className='section-header-time-range' />
+              <TimeRange className={classNames({ disabled: isFirstSync })} />
             </SectionHeaderItem>
           </SectionHeaderRow>
         </SectionHeader>
