@@ -13,7 +13,7 @@ const getItems = (t) => [
   { value: TRUE, label: t('selector.unrealized-profits.no') },
 ]
 
-const UnrealizedProfitSelector = ({ onChange, value }) => {
+const UnrealizedProfitSelector = ({ onChange, value, className }) => {
   const { t } = useTranslation()
   const items = useMemo(() => getItems(t), [t])
 
@@ -22,16 +22,21 @@ const UnrealizedProfitSelector = ({ onChange, value }) => {
       value={value}
       items={items}
       onChange={onChange}
+      className={className}
       type='Show Unrealized Profits'
-      className='bitfinex-select--unrealized-profit'
       popoverClassName='bitfinex-select-menu--unrealized-profit'
     />
   )
 }
 
 UnrealizedProfitSelector.propTypes = {
+  className: PropTypes.string,
   value: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+}
+
+UnrealizedProfitSelector.defaultProps = {
+  className: '',
 }
 
 export default memo(UnrealizedProfitSelector)
