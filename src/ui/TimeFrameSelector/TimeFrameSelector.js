@@ -13,7 +13,7 @@ const getItems = (t) => [
   { value: constants.YEAR, label: t('timeframe.year') },
 ]
 
-const TimeFrameSelector = ({ onChange, value }) => {
+const TimeFrameSelector = ({ onChange, value, className }) => {
   const { t } = useTranslation()
   const items = useMemo(() => getItems(t), [t])
 
@@ -22,15 +22,20 @@ const TimeFrameSelector = ({ onChange, value }) => {
       value={value}
       items={items}
       onChange={onChange}
-      className='bitfinex-select--timeframe'
+      className={className}
       popoverClassName='bitfinex-select-menu--timeframe'
     />
   )
 }
 
 TimeFrameSelector.propTypes = {
+  className: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+}
+
+TimeFrameSelector.defaultProps = {
+  className: '',
 }
 
 export default memo(TimeFrameSelector)
