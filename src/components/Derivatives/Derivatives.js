@@ -13,7 +13,6 @@ import {
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
 import ColumnsFilter from 'ui/ColumnsFilter'
-import RefreshButton from 'ui/RefreshButton'
 import DerivativesSyncPref from 'ui/DerivativesSyncPref'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
@@ -55,7 +54,6 @@ class Derivatives extends PureComponent {
     inactivePairs: PropTypes.arrayOf(PropTypes.string),
     pairs: PropTypes.arrayOf(PropTypes.string),
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetPairs: PropTypes.arrayOf(PropTypes.string),
     timeOffset: PropTypes.string.isRequired,
@@ -97,7 +95,6 @@ class Derivatives extends PureComponent {
       pairs,
       columns,
       entries,
-      refresh,
       timeOffset,
       pageLoading,
       targetPairs,
@@ -173,7 +170,6 @@ class Derivatives extends PureComponent {
               </SectionHeaderItemLabel>
               <ColumnsFilter target={TYPE} />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
             <DerivativesSyncPref />
           </SectionHeaderRow>
         </SectionHeader>

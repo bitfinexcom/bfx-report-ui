@@ -52,7 +52,6 @@ class AffiliatesEarnings extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetSymbols: PropTypes.arrayOf(PropTypes.string),
     timeOffset: PropTypes.string.isRequired,
@@ -81,7 +80,6 @@ class AffiliatesEarnings extends PureComponent {
     const {
       t,
       columns,
-      refresh,
       entries,
       timeOffset,
       getFullTime,
@@ -139,7 +137,6 @@ class AffiliatesEarnings extends PureComponent {
         <SectionHeader
           target={TYPE}
           showHeaderTabs
-          refresh={refresh}
           title='affiliatesearnings.title'
           getTitleLink={() => <AffiliatesLink />}
           symbolsSelectorProps={{

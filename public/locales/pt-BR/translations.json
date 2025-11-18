@@ -771,7 +771,6 @@
       "message": "Os relatórios fiscais gerados por este aplicativo são apenas para fins informativos. Não garantimos precisão ou completude. Sempre consulte um consultor fiscal qualificado para garantir conformidade com as leis fiscais vigentes e obter aconselhamento personalizado. A confiança nos relatórios gerados é de sua responsabilidade."
     },
     "generation": {
-      "btn": "Gerar",
       "success": "Relatório fiscal gerado",
       "title": "Seu relatório fiscal está sendo gerado. Esse processo pode levar algum tempo.",
       "note": "Se você tiver um histórico extenso, é recomendável manter a janela aberta em segundo plano até que seja concluído.",

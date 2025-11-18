@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -12,7 +13,6 @@ import {
 import DateInput from 'ui/DateInput'
 import InitSyncNote from 'ui/InitSyncNote'
 import NavSwitcher from 'ui/NavSwitcher/NavSwitcher'
-import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 import queryConstants from 'state/query/constants'
 
@@ -48,10 +48,11 @@ class Snapshots extends PureComponent {
 
   componentDidUpdate(prevProps) {
     const {
-      refresh, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync,
+      refresh, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync, currentTime,
     } = this.props
-    const { isSyncRequired: prevIsSyncRequired } = prevProps
-    if (isSyncRequired !== prevIsSyncRequired) {
+    const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime } = prevProps
+    const shouldRefresh = !isEqual(prevIsSyncRequired, isSyncRequired) || !isEqual(prevTime, currentTime)
+    if (shouldRefresh) {
       refresh()
     }
     if (shouldRefreshAfterSync && !isSyncRequired) {
@@ -107,7 +108,6 @@ class Snapshots extends PureComponent {
   render() {
     const {
       t,
-      refresh,
       pageLoading,
       dataReceived,
       walletsEntries,
@@ -174,14 +174,11 @@ class Snapshots extends PureComponent {
                 {t('query.endTime')}
               </SectionHeaderItemLabel>
               <DateInput
-                onChange={this.handleDateChange}
                 defaultValue={timestamp}
+                onChange={this.handleDateChange}
+                isDisabled={isFirstSyncing || isLoading}
               />
             </SectionHeaderItem>
-            <RefreshButton
-              onClick={refresh}
-              disabled={isFirstSyncing}
-            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}

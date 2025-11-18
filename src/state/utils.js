@@ -264,10 +264,10 @@ export function checkFetch(prevProps, props, type) {
     return
   }
   const {
-    dataReceived: prevDataReceived, isSyncRequired: prevIsSyncRequired,
+    dataReceived: prevDataReceived, isSyncRequired: prevIsSyncRequired, params: prevParams,
   } = prevProps
   const {
-    dataReceived, pageLoading, fetchData, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync,
+    params, dataReceived, pageLoading, fetchData, isSyncRequired, shouldRefreshAfterSync, setShouldRefreshAfterSync,
   } = props
   const shouldRefresh = prevIsSyncRequired !== isSyncRequired
   const shouldBeRefreshedAfterSync = showFrameworkMode && getIsSyncRequiredType(type) && shouldRefreshAfterSync
@@ -280,6 +280,9 @@ export function checkFetch(prevProps, props, type) {
   if (shouldBeRefreshedAfterSync && !isSyncRequired) {
     fetchData()
     setShouldRefreshAfterSync(false)
+  }
+  if (!isEqual(prevParams, params)) {
+    fetchData()
   }
 }
 

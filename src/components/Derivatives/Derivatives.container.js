@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
 import {
-  refresh,
   addTargetPair,
   setTargetPairs,
   removeTargetPair,
@@ -46,7 +45,6 @@ const mapDispatchToProps = {
   addTargetPair,
   clearTargetPairs,
   fetchData: fetchDerivatives,
-  refresh,
   removeTargetPair,
   setTargetPairs,
 }

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
 import DateInput from 'ui/DateInput'
@@ -13,7 +14,6 @@ import {
   SectionHeaderTitle,
   SectionHeaderItemLabel,
 } from 'ui/SectionHeader'
-import RefreshButton from 'ui/RefreshButton'
 import { isValidTimeStamp } from 'state/query/utils'
 
 import WalletsData from './Wallets.data'
@@ -47,12 +47,19 @@ class Wallets extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { isSyncRequired: prevIsSyncRequired } = prevProps
-    const { fetchData, fetchSnapshots, isSyncRequired } = this.props
+    const { isSyncRequired: prevIsSyncRequired, currentTime: prevTime, exactBalance: prevExactBalance } = prevProps
+    const {
+      fetchData, fetchSnapshots, isSyncRequired, currentTime, exactBalance,
+    } = this.props
 
     if (isSyncRequired !== prevIsSyncRequired) {
       fetchData()
       if (isFrameworkMode)fetchSnapshots()
+    }
+
+    const shouldRefresh = !isEqual(prevTime, currentTime) || !isEqual(prevExactBalance, exactBalance)
+    if (shouldRefresh) {
+      this.handleRefresh()
     }
   }
 
@@ -120,10 +127,6 @@ class Wallets extends PureComponent {
                   onChange={setExactBalance}
                 />
               </SectionHeaderItem>
-              <RefreshButton
-                disabled={isFirstSyncing}
-                onClick={this.handleRefresh}
-              />
             </SectionHeaderRow>
           )}
         </SectionHeader>

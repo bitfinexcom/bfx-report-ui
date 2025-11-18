@@ -262,6 +262,18 @@
   }
 }
 
+.disabled {
+  pointer-events: none;
+
+  .bp3-button  {
+    color: var(--color2);
+
+    svg path {
+      fill: var(--color2);
+    }
+  }
+}
+
 .bp3-html-select.bp3-minimal {
   select {
     color: var(--color);

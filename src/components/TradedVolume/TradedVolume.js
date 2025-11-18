@@ -16,7 +16,6 @@ import Loading from 'ui/Loading'
 import Chart from 'ui/Charts/Chart'
 import TimeRange from 'ui/TimeRange'
 import InitSyncNote from 'ui/InitSyncNote'
-import RefreshButton from 'ui/RefreshButton'
 import SectionSwitch from 'ui/SectionSwitch'
 import MultiPairSelector from 'ui/MultiPairSelector'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
@@ -53,7 +52,6 @@ class TradedVolume extends PureComponent {
   render() {
     const {
       t,
-      refresh,
       entries,
       targetPairs,
       pageLoading,
@@ -119,10 +117,6 @@ class TradedVolume extends PureComponent {
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
-            <RefreshButton
-              onClick={refresh}
-              disabled={isFirstSyncing}
-            />
           </SectionHeaderRow>
         </SectionHeader>
         {showContent}

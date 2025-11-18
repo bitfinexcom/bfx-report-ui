@@ -6,6 +6,7 @@ export const propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
   daysOnly: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   t: PropTypes.func.isRequired,
   timezone: PropTypes.string,
 }
@@ -14,5 +15,6 @@ export const defaultProps = {
   className: '',
   defaultValue: null,
   daysOnly: false,
+  isDisabled: false,
   timezone: moment.tz.guess(), // current timezone
 }

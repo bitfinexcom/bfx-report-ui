@@ -70,7 +70,7 @@ class WS {
 
     websocket.onclose = () => {
       this.isConnected = false
-      this.connect()
+      setTimeout(() => this.connect(), 300)
     }
 
     websocket.onmessage = this.onMessage

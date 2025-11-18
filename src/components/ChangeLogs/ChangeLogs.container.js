@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
 import {
-  refresh,
   fetchData,
 } from 'state/changeLogs/actions'
 import queryConstants from 'state/query/constants'
@@ -31,7 +30,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  refresh,
   fetchData,
 }
 

@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
 import {
-  refresh,
   addTargetSymbol,
   setTargetSymbols,
   removeTargetSymbol,
@@ -44,7 +43,6 @@ const mapDispatchToProps = {
   addTargetSymbol,
   clearTargetSymbols,
   fetchData: fetchAffiliatesEarnings,
-  refresh,
   removeTargetSymbol,
   setTargetSymbols,
 }

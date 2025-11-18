@@ -30,7 +30,6 @@ class ChangeLogs extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     timeOffset: PropTypes.string.isRequired,
   }
@@ -53,7 +52,6 @@ class ChangeLogs extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       pageLoading,
       getFullTime,
@@ -104,7 +102,6 @@ class ChangeLogs extends PureComponent {
       >
         <SectionHeader
           target={TYPE}
-          refresh={refresh}
           title='changelogs.title'
         />
         {showContent}

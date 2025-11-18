@@ -14,7 +14,6 @@ import DataTable from 'ui/DataTable'
 import TimeRange from 'ui/TimeRange'
 import Pagination from 'ui/Pagination'
 import ColumnsFilter from 'ui/ColumnsFilter'
-import RefreshButton from 'ui/RefreshButton'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import LedgersCategorySelect from 'ui/LedgersCategorySelect'
@@ -60,7 +59,6 @@ class Ledgers extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetSymbols: PropTypes.arrayOf(PropTypes.string),
     setParams: PropTypes.func.isRequired,
@@ -98,7 +96,6 @@ class Ledgers extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       getFullTime,
       pageLoading,
@@ -189,7 +186,6 @@ class Ledgers extends PureComponent {
               </SectionHeaderItemLabel>
               <ColumnsFilter target={TYPE} />
             </SectionHeaderItem>
-            <RefreshButton onClick={refresh} />
           </SectionHeaderRow>
         </SectionHeader>
         { showContent }

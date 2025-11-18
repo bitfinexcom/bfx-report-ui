@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import { withTranslation } from 'react-i18next'
 
 import {
-  refresh,
   fetchData,
   setParams,
 } from 'state/candles/actions'
@@ -37,7 +36,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchData,
-  refresh,
   setParams,
   toggleGoToRangeDialog,
 }

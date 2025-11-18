@@ -59,7 +59,6 @@ class FundingCreditHistory extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetSymbols: PropTypes.arrayOf(PropTypes.string),
     timeOffset: PropTypes.string.isRequired,
@@ -89,7 +88,6 @@ class FundingCreditHistory extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       getFullTime,
       pageLoading,
@@ -150,7 +148,6 @@ class FundingCreditHistory extends PureComponent {
             currentFilters: targetSymbols,
             toggleSymbol: this.toggleSymbol,
           }}
-          refresh={refresh}
           clearTargetSymbols={this.clearSymbols}
         />
         {showContent}

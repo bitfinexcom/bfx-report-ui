@@ -53,7 +53,6 @@ class FundingPayment extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     targetSymbols: PropTypes.arrayOf(PropTypes.string),
     timeOffset: PropTypes.string.isRequired,
@@ -83,7 +82,6 @@ class FundingPayment extends PureComponent {
       t,
       columns,
       entries,
-      refresh,
       timeOffset,
       getFullTime,
       pageLoading,
@@ -141,7 +139,6 @@ class FundingPayment extends PureComponent {
         <SectionHeader
           target={TYPE}
           showHeaderTabs
-          refresh={refresh}
           title='fpayment.title'
           symbolsSelectorProps={{
             existingCoins,

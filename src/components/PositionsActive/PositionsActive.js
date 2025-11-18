@@ -32,7 +32,6 @@ class PositionsActive extends PureComponent {
     getFullTime: PropTypes.func.isRequired,
     dataReceived: PropTypes.bool.isRequired,
     pageLoading: PropTypes.bool.isRequired,
-    refresh: PropTypes.func.isRequired,
     t: PropTypes.func.isRequired,
     timeOffset: PropTypes.string.isRequired,
   }
@@ -63,7 +62,6 @@ class PositionsActive extends PureComponent {
     const {
       t,
       entries,
-      refresh,
       timeOffset,
       getFullTime,
       pageLoading,
@@ -111,7 +109,6 @@ class PositionsActive extends PureComponent {
           target={TYPE}
           showHeaderTabs
           timeframe={false}
-          refresh={refresh}
           title='activepositions.title'
         />
         {showContent}
