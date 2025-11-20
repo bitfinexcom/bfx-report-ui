@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
+import classNames from 'classnames'
 import _sortBy from 'lodash/sortBy'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -135,6 +136,7 @@ class AverageWinLoss extends PureComponent {
       },
       reportType,
     } = this.props
+    const paramChangerClass = classNames({ disabled: isFirstSyncing })
 
     const { chartData, dataKeys } = prepareChartData(
       entries, currTimeframe, isVsAccountBalanceSelected, t,
@@ -170,7 +172,7 @@ class AverageWinLoss extends PureComponent {
               <SectionHeaderItemLabel>
                 {t('selector.filter.date')}
               </SectionHeaderItemLabel>
-              <TimeRange className='section-header-time-range' />
+              <TimeRange className={paramChangerClass} />
             </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
@@ -178,6 +180,7 @@ class AverageWinLoss extends PureComponent {
               </SectionHeaderItemLabel>
               <TimeFrameSelector
                 value={timeframe}
+                className={paramChangerClass}
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
@@ -186,6 +189,7 @@ class AverageWinLoss extends PureComponent {
                 {t('selector.unrealized-profits.title')}
               </SectionHeaderItemLabel>
               <UnrealizedProfitSelector
+                className={paramChangerClass}
                 value={isUnrealizedProfitExcluded}
                 onChange={this.handleUnrealizedProfitChange}
               />
@@ -197,6 +201,7 @@ class AverageWinLoss extends PureComponent {
               <ReportTypeSelector
                 section={TYPE}
                 value={reportType}
+                className={paramChangerClass}
                 onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>
