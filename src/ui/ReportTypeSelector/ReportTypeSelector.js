@@ -9,6 +9,7 @@ const ReportTypeSelector = ({
   value,
   section,
   onChange,
+  className,
 }) => {
   const items = useMemo(() => getItems(section), [section])
   return (
@@ -16,17 +17,22 @@ const ReportTypeSelector = ({
       value={value}
       items={items}
       onChange={onChange}
+      className={className}
       type={'Select Report Type'}
-      className='bitfinex-select--report-type'
       popoverClassName='bitfinex-select-menu--report-type'
     />
   )
 }
 
 ReportTypeSelector.propTypes = {
+  className: PropTypes.string,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   section: PropTypes.string.isRequired,
+}
+
+ReportTypeSelector.defaultProps = {
+  className: '',
 }
 
 export default memo(ReportTypeSelector)
