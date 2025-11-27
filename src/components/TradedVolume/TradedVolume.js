@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { withTranslation } from 'react-i18next'
 import { Card, Elevation } from '@blueprintjs/core'
+import classNames from 'classnames'
 import _sortBy from 'lodash/sortBy'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -59,6 +60,7 @@ class TradedVolume extends PureComponent {
       isFirstSyncing,
       params: { timeframe },
     } = this.props
+    const paramChangerClass = classNames({ disabled: isFirstSyncing })
 
     const { chartData, presentCurrencies } = parseChartData({
       timeframe,
@@ -96,13 +98,14 @@ class TradedVolume extends PureComponent {
               <SectionHeaderItemLabel>
                 {t('selector.filter.date')}
               </SectionHeaderItemLabel>
-              <TimeRange className='section-header-time-range' />
+              <TimeRange className={paramChangerClass} />
             </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
               <MultiPairSelector
+                className={paramChangerClass}
                 currentFilters={targetPairs}
                 togglePair={pair => togglePair(TYPE, this.props, pair)}
               />
@@ -114,6 +117,7 @@ class TradedVolume extends PureComponent {
               </SectionHeaderItemLabel>
               <TimeFrameSelector
                 value={timeframe}
+                className={paramChangerClass}
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>

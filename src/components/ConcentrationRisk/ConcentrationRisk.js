@@ -194,6 +194,7 @@ class ConcentrationRisk extends PureComponent {
               </SectionHeaderItemLabel>
               <DateInput
                 defaultValue={timestamp}
+                isDisabled={isFirstSyncing}
                 onChange={this.handleDateChange}
               />
             </SectionHeaderItem>

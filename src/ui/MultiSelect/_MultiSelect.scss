@@ -49,6 +49,22 @@
   }
 }
 
+.disabled {
+  pointer-events: none;
+
+  .bp3-input {
+    svg path {
+      fill: var(--color2);
+    }
+
+    .bp3-tag-input-values {
+      input::placeholder {
+        color: var(--color2);
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 2560px) {
   .bp3-multi-select {
     min-width: 253px;

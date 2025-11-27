@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { withTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 import Select from 'ui/Select'
 
@@ -8,28 +8,35 @@ import constants from './constants'
 
 const { TRUE, FALSE } = constants
 
-const UnrealizedProfitSelector = ({ onChange, t, value }) => {
-  const items = [
-    { value: FALSE, label: t('selector.unrealized-profits.yes') },
-    { value: TRUE, label: t('selector.unrealized-profits.no') },
-  ]
+const getItems = (t) => [
+  { value: FALSE, label: t('selector.unrealized-profits.yes') },
+  { value: TRUE, label: t('selector.unrealized-profits.no') },
+]
+
+const UnrealizedProfitSelector = ({ onChange, value, className }) => {
+  const { t } = useTranslation()
+  const items = useMemo(() => getItems(t), [t])
 
   return (
     <Select
       value={value}
       items={items}
       onChange={onChange}
+      className={className}
       type='Show Unrealized Profits'
-      className='bitfinex-select--unrealized-profit'
       popoverClassName='bitfinex-select-menu--unrealized-profit'
     />
   )
 }
 
 UnrealizedProfitSelector.propTypes = {
-  t: PropTypes.func.isRequired,
+  className: PropTypes.string,
   value: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translations')(UnrealizedProfitSelector)
+UnrealizedProfitSelector.defaultProps = {
+  className: '',
+}
+
+export default memo(UnrealizedProfitSelector)
