@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withTranslation } from 'react-i18next'
-import { isObject } from '@bitfinex/lib-js-util-base'
+import { isObject, isEqual } from '@bitfinex/lib-js-util-base'
 import {
   Button,
   Intent,
@@ -12,6 +12,7 @@ import { Select as BlueprintSelect } from '@blueprintjs/select'
 
 import Icons from 'icons'
 import { tracker } from 'utils/trackers'
+import { LANGUAGE_NAMES } from 'locales/i18n'
 import { filterSelectorItem } from 'ui/utils'
 import { getSourceFromPathName } from 'utils/browser'
 
@@ -116,12 +117,15 @@ class Select extends PureComponent {
       popoverClassName,
       t,
       value,
+      type,
     } = this.props
     const { isOpen } = this.state
 
-    const selectedText = isObject(items[0])
+    let selectedText = isObject(items[0])
       ? (items.find(item => item.value === value, {}) || {}).label
       : value
+
+    if (isEqual(type, 'Language')) selectedText = LANGUAGE_NAMES[value]
 
     const icon = isOpen
       ? <Icons.CHEVRON_UP />
