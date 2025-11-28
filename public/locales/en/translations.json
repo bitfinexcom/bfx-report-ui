@@ -176,6 +176,7 @@
     "fundingType": "Funding Type",
     "id": "#",
     "ip": "IP",
+    "lastUpdated": "Last Updated",
     "lastTrade": "Last Trade",
     "lastpayout": "Last Payout",
     "liq-price": "Liq Price",
