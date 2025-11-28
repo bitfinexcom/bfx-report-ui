@@ -176,6 +176,7 @@
     "fundingType": "Tipo de financiamento",
     "id": "#",
     "ip": "IP",
+    "lastUpdated": "Última atualização",
     "lastTrade": "Última negociação",
     "lastpayout": "Último pagamento",
     "liq-price": "Preço de liquidação",

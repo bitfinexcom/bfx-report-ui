@@ -176,6 +176,7 @@
     "fundingType": "融资类型",
     "id": "#",
     "ip": "IP",
+    "lastUpdated": "最后更新",
     "lastTrade": "最新交易",
     "lastpayout": "上一次支出",
     "liq-price": "清算价格",

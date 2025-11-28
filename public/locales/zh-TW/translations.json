@@ -176,6 +176,7 @@
     "fundingType": "融資類型",
     "id": "#",
     "ip": "IP",
+    "lastUpdated": "最後更新",
     "lastTrade": "上次交易",
     "lastpayout": "結束",
     "liq-price": "清算價格",
