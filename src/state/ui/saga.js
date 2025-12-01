@@ -45,7 +45,7 @@ function* uiLoaded() {
     yield put(setSrc(src))
   }
 
-  removeUrlParams(['timezone', 'theme', 'locale', 'authToken', 'apiKey', 'apiSecret'])
+  removeUrlParams(['timezone', 'theme', 'locale', 'apiKey', 'apiSecret'])
 
   // handle custom timezone
   if (timezone && isValidTimezone(timezone)) {
