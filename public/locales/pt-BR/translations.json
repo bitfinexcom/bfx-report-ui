@@ -231,6 +231,7 @@
     "type": "Tipo",
     "typeprev": "Tipo de pedido anterior",
     "updated": "Atualizado",
+    "updatedAt": "Atualizado em",
     "usd": "USD",
     "version": "Versão",
     "volume": "Volume",

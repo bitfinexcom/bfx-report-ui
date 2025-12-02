@@ -231,6 +231,7 @@
     "type": "类型",
     "typeprev": "先前订单类型",
     "updated": "更新时间",
+    "updatedAt": "更新于",
     "usd": "美元",
     "version": "版本",
     "volume": "网络声量",
