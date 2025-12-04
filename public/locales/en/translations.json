@@ -556,7 +556,7 @@
       "symbol": "Symbol",
       "pair": "Pair Filter",
       "category": "Category Filter",
-      "columns": "Columns",
+      "columns": "Columns Filter",
       "date": "Date"
     },
     "report-type": {
