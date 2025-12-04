@@ -556,7 +556,7 @@
       "symbol": "交易对",
       "pair": "货币对筛选器",
       "category": "分类筛选",
-      "columns": "栏",
+      "columns": "列筛选器",
       "date": "日期"
     },
     "report-type": {
