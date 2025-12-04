@@ -556,7 +556,7 @@
       "symbol": "幣別或交易對",
       "pair": "交易對篩選",
       "category": "分類篩選",
-      "columns": "篩選欄",
+      "columns": "欄位篩選器",
       "date": "日期"
     },
     "report-type": {
