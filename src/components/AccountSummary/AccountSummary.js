@@ -86,32 +86,15 @@ class AccountSummary extends PureComponent {
             isLoading={isLoading}
             data={get(data, 'trade_vol_30d', [])}
           />
-          {/* <Fees
+          {!isTurkishSite && (
+          <PaidFees
             t={t}
-            data={data}
             isNoData={isNoData}
             isLoading={isLoading}
-            title='accountsummary.fees'
-          /> */}
-          {!isTurkishSite && (
-            <>
-              {/* <DerivFees
-                t={t}
-                isNoData={isNoData}
-                isLoading={isLoading}
-                title='accountsummary.fees_deriv'
-                makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
-                takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
-              /> */}
-              <PaidFees
-                t={t}
-                isNoData={isNoData}
-                isLoading={isLoading}
-                title='accountsummary.margin_funds'
-                data={get(data, 'fees_funding_30d', {})}
-                total={get(data, 'fees_funding_total_30d', 0)}
-              />
-            </>
+            title='accountsummary.margin_funds'
+            data={get(data, 'fees_funding_30d', {})}
+            total={get(data, 'fees_funding_total_30d', 0)}
+          />
           )}
           <PaidFees
             t={t}
@@ -121,12 +104,6 @@ class AccountSummary extends PureComponent {
             data={get(data, 'fees_trading_30d', {})}
             total={get(data, 'fees_trading_total_30d', 0)}
           />
-          {/* <FeeTierVolume
-            t={t}
-            isNoData={isNoData}
-            isLoading={isLoading}
-            data={get(data, 'trade_vol_30d', [])}
-          /> */}
           <Leo
             t={t}
             data={data}
