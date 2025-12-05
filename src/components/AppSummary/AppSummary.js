@@ -17,7 +17,6 @@ import {
   getPageLoading,
   getDataReceived,
 } from 'state/accountSummary/selectors'
-import { getIsTurkishSite } from 'state/base/selectors'
 import { getTimeRange } from 'state/timeRange/selectors'
 import { fetchData, refresh } from 'state/accountSummary/actions'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
@@ -37,7 +36,6 @@ const AppSummary = () => {
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
   const isFirstSync = useSelector(getIsFirstSyncing)
-  const isTurkishSite = useSelector(getIsTurkishSite)
   const isSyncRequired = useSelector(getIsSyncRequired)
 
   useEffect(() => {
