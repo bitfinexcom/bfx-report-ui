@@ -87,14 +87,14 @@ class AccountSummary extends PureComponent {
             data={get(data, 'trade_vol_30d', [])}
           />
           {!isTurkishSite && (
-          <PaidFees
-            t={t}
-            isNoData={isNoData}
-            isLoading={isLoading}
-            title='accountsummary.margin_funds'
-            data={get(data, 'fees_funding_30d', {})}
-            total={get(data, 'fees_funding_total_30d', 0)}
-          />
+            <PaidFees
+              t={t}
+              isNoData={isNoData}
+              isLoading={isLoading}
+              title='accountsummary.margin_funds'
+              data={get(data, 'fees_funding_30d', {})}
+              total={get(data, 'fees_funding_total_30d', 0)}
+            />
           )}
           <PaidFees
             t={t}
