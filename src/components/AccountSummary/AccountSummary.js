@@ -7,12 +7,9 @@ import SectionHeader from 'ui/SectionHeader'
 import Positions from 'components/AppSummary/AppSummary.positions'
 
 import Leo from './AccountSummary.leo'
-import Fees from './AccountSummary.fees'
 import Volume from './AccountSummary.volume'
 import Assets from './AccountSummary.assets'
 import PaidFees from './AccountSummary.paidFees'
-import DerivFees from './AccountSummary.derivFees'
-import FeeTierVolume from './AccountSummary.feeTierVolume'
 
 class AccountSummary extends PureComponent {
   static propTypes = {
@@ -89,23 +86,23 @@ class AccountSummary extends PureComponent {
             isLoading={isLoading}
             data={get(data, 'trade_vol_30d', [])}
           />
-          <Fees
+          {/* <Fees
             t={t}
             data={data}
             isNoData={isNoData}
             isLoading={isLoading}
             title='accountsummary.fees'
-          />
+          /> */}
           {!isTurkishSite && (
             <>
-              <DerivFees
+              {/* <DerivFees
                 t={t}
                 isNoData={isNoData}
                 isLoading={isLoading}
                 title='accountsummary.fees_deriv'
                 makerFee={data.derivMakerFee || data.derivMakerRebate || 0}
                 takerFee={data.derivTakerFee || data.derivTakerRebate || 0}
-              />
+              /> */}
               <PaidFees
                 t={t}
                 isNoData={isNoData}
@@ -124,12 +121,12 @@ class AccountSummary extends PureComponent {
             data={get(data, 'fees_trading_30d', {})}
             total={get(data, 'fees_trading_total_30d', 0)}
           />
-          <FeeTierVolume
+          {/* <FeeTierVolume
             t={t}
             isNoData={isNoData}
             isLoading={isLoading}
             data={get(data, 'trade_vol_30d', [])}
-          />
+          /> */}
           <Leo
             t={t}
             data={data}
