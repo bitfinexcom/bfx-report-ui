@@ -23,7 +23,6 @@ import { fetchData, refresh } from 'state/accountSummary/actions'
 import { getIsSyncRequired, getIsFirstSyncing } from 'state/sync/selectors'
 
 import Leo from './AppSummary.leo'
-import Fees from './AppSummary.fees'
 import Value from './AppSummary.value'
 import Profits from './AppSummary.profits'
 import ByAsset from './AppSummary.byAsset'
@@ -88,14 +87,6 @@ const AppSummary = () => {
         <Positions />
         <div className='app-summary-data-row'>
           <Statistics />
-          <Fees
-            t={t}
-            data={data}
-            pageLoading={pageLoading}
-            isFirstSync={isFirstSync}
-            dataReceived={dataReceived}
-            isTurkishSite={isTurkishSite}
-          />
         </div>
       </div>
     </Card>
