@@ -97,6 +97,7 @@ const SECTION_COLUMNS = {
     { id: 'mtsStarted', name: 'date', type: DATE, filter: true },
     { id: 'currency', name: 'currency' },
     { id: 'status', name: 'status', type: STRING, filter: true },
+    { id: 'mtsUpdated', name: 'updatedAt', type: DATE, filter: true },
     { id: 'amount', name: 'amount', type: NUMBER, filter: true },
     { id: 'amountUsd', name: 'amountUsd', type: NUMBER, filter: true, frameworkOnly: true },
     { id: 'fees', name: 'fees', type: NUMBER, filter: true },

@@ -176,7 +176,7 @@
     "fundingType": "Fonlama Türü",
     "id": "No.",
     "ip": "IP",
-    "lastTrade": "Last Trade",
+    "lastTrade": "Son işlem",
     "lastpayout": "Son Ödeme",
     "liq-price": "Likidasyon Fiyatı",
     "maker_fees": "Yapıcı Ücretleri",
@@ -231,6 +231,7 @@
     "type": "Tür",
     "typeprev": "Önceki Emir Türü",
     "updated": "Güncellendi",
+    "updatedAt": "Güncellenme zamanı",
     "usd": "USD",
     "version": "Sürüm",
     "volume": "Hacim",
@@ -555,7 +556,7 @@
       "symbol": "Symbol",
       "pair": "Parite Filtresi",
       "category": "Kategori Filtresi",
-      "columns": "Sütunlar",
+      "columns": "Sütun Filtresi",
       "date": "Tarih"
     },
     "report-type": {

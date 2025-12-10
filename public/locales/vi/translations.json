@@ -231,6 +231,7 @@
     "type": "Loại",
     "typeprev": "Loại lệnh trước đó",
     "updated": "Cập nhật",
+    "updatedAt": "Cập nhật lúc",
     "usd": "USD",
     "version": "Phiên bản",
     "volume": "Khối lượng giao dịch",
@@ -555,7 +556,7 @@
       "symbol": "Biểu tượng",
       "pair": "Lọc cặp",
       "category": "Lọc loại",
-      "columns": "Cột",
+      "columns": "Bộ lọc cột",
       "date": "Ngày"
     },
     "report-type": {

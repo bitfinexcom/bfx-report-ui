@@ -231,6 +231,7 @@
     "type": "类型",
     "typeprev": "先前订单类型",
     "updated": "更新时间",
+    "updatedAt": "更新于",
     "usd": "美元",
     "version": "版本",
     "volume": "网络声量",
@@ -555,7 +556,7 @@
       "symbol": "交易对",
       "pair": "货币对筛选器",
       "category": "分类筛选",
-      "columns": "栏",
+      "columns": "列筛选器",
       "date": "日期"
     },
     "report-type": {

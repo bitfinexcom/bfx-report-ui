@@ -53,6 +53,7 @@ class MultiSymbolSelector extends PureComponent {
   render() {
     const {
       coins,
+      className,
       currentFilters,
       existingCoins,
       inactiveCurrencies,
@@ -80,6 +81,7 @@ class MultiSymbolSelector extends PureComponent {
         itemPredicate={this.itemPredicate}
         onItemSelect={toggleSymbol}
         tagInputProps={{ tagProps: { minimal: true }, onRemove: toggleSymbol }}
+        className={className}
         tagRenderer={coin => coin}
         selectedItems={currentFilters}
       />

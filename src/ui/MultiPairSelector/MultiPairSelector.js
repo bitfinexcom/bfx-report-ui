@@ -45,6 +45,7 @@ class MultiPairSelector extends PureComponent {
 
   render() {
     const {
+      className,
       currentFilters,
       existingPairs,
       inactivePairs,
@@ -75,6 +76,7 @@ class MultiPairSelector extends PureComponent {
           tagProps: { minimal: true },
           onRemove: togglePair,
         }}
+        className={className}
         tagRenderer={pair => pair}
         selectedItems={currentFilters}
         type={'Symbol'}

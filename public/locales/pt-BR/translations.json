@@ -231,6 +231,7 @@
     "type": "Tipo",
     "typeprev": "Tipo de pedido anterior",
     "updated": "Atualizado",
+    "updatedAt": "Atualizado em",
     "usd": "USD",
     "version": "Versão",
     "volume": "Volume",
@@ -555,7 +556,7 @@
       "symbol": "Símbolo",
       "pair": "Filtro de pares",
       "category": "Filtro de categorias",
-      "columns": "Colunas",
+      "columns": "Filtro de colunas",
       "date": "Data"
     },
     "report-type": {

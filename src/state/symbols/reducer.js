@@ -11,7 +11,7 @@ import _replace from 'lodash/replace'
 import _includes from 'lodash/includes'
 
 import SymbolMap from './map'
-import types, { EXTENDED_CCY_LIST } from './constants'
+import types from './constants'
 
 const initialState = {
   coins: [], // symbol
@@ -46,7 +46,7 @@ export function symbolsReducer(state = initialState, action) {
 
       currencies.forEach((currency) => {
         const {
-          id, explorer, name, isInPair, isFunding,
+          active, id, explorer, name, isInPair, isFunding,
         } = currency
 
         let { symbol } = currency
@@ -55,7 +55,7 @@ export function symbolsReducer(state = initialState, action) {
           tetherNames[id] = name
         }
 
-        if (!EXTENDED_CCY_LIST.includes(id) && !isInPair) {
+        if (!active && !isInPair) {
           return
         }
 

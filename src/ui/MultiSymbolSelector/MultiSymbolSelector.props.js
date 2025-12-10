@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 
 export const propTypes = {
+  className: PropTypes.string,
   coins: PropTypes.arrayOf(PropTypes.string),
   currencies: PropTypes.objectOf(PropTypes.string),
   currentFilters: PropTypes.arrayOf(PropTypes.string),
@@ -11,6 +12,7 @@ export const propTypes = {
 
 export const defaultProps = {
   coins: [],
+  className: '',
   currencies: {},
   currentFilters: [],
   existingCoins: [],

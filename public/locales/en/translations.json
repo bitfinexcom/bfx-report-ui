@@ -231,6 +231,7 @@
     "type": "Type",
     "typeprev": "Previous Order Type",
     "updated": "Updated",
+    "updatedAt": "Updated At",
     "usd": "USD",
     "version": "Version",
     "volume": "Volume",
@@ -555,7 +556,7 @@
       "symbol": "Symbol",
       "pair": "Pair Filter",
       "category": "Category Filter",
-      "columns": "Columns",
+      "columns": "Columns Filter",
       "date": "Date"
     },
     "report-type": {

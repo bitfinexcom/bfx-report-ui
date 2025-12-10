@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Card, Elevation } from '@blueprintjs/core'
+import classNames from 'classnames'
 import _sortBy from 'lodash/sortBy'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -111,6 +112,7 @@ class FeesReport extends PureComponent {
       isFirstSyncing,
       params: { timeframe },
     } = this.props
+    const paramChangerClass = classNames({ disabled: isFirstSyncing })
     const { chartData, dataKeys } = parseFeesReportChartData({
       data: _sortBy(entries, ['mts']),
       timeframe,
@@ -148,13 +150,14 @@ class FeesReport extends PureComponent {
               <SectionHeaderItemLabel>
                 {t('selector.filter.date')}
               </SectionHeaderItemLabel>
-              <TimeRange className='section-header-time-range' />
+              <TimeRange className={paramChangerClass} />
             </SectionHeaderItem>
             <SectionHeaderItem>
               <SectionHeaderItemLabel>
                 {t('selector.filter.symbol')}
               </SectionHeaderItemLabel>
               <MultiSymbolSelector
+                className={paramChangerClass}
                 currentFilters={targetSymbols}
                 toggleSymbol={this.toggleSymbol}
               />
@@ -166,6 +169,7 @@ class FeesReport extends PureComponent {
               </SectionHeaderItemLabel>
               <TimeFrameSelector
                 value={timeframe}
+                className={paramChangerClass}
                 onChange={this.handleTimeframeChange}
               />
             </SectionHeaderItem>
@@ -176,6 +180,7 @@ class FeesReport extends PureComponent {
               <ReportTypeSelector
                 section={TYPE}
                 value={reportType}
+                className={paramChangerClass}
                 onChange={this.handleReportTypeChange}
               />
             </SectionHeaderItem>

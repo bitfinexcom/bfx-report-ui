@@ -176,7 +176,7 @@
     "fundingType": "Tipo de Financiamiento",
     "id": "#",
     "ip": "IP",
-    "lastTrade": "Last Trade",
+    "lastTrade": "Última operación",
     "lastpayout": "Último pago",
     "liq-price": "Precio de Liq",
     "maker_fees": "Tarifas del Creador",
@@ -231,6 +231,7 @@
     "type": "Tipo",
     "typeprev": "Tipo de orden anterior",
     "updated": "Actualizado",
+    "updatedAt": "Actualizado a las",
     "usd": "USD",
     "version": "Versión",
     "volume": "Volumen",
@@ -555,7 +556,7 @@
       "symbol": "Symbol",
       "pair": "Filtro de par",
       "category": "Filtro de categoría",
-      "columns": "Columnas",
+      "columns": "Filtro de columnas",
       "date": "Fecha"
     },
     "report-type": {

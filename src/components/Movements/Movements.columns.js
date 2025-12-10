@@ -87,6 +87,18 @@ const getColumns = ({
     copyText: rowIndex => filteredData[rowIndex].status,
   },
   {
+    id: 'mtsUpdated',
+    className: 'align-left',
+    nameStr: `${t('column.updatedAt')} (${timeOffset})`,
+    width: getColumnWidth('mtsUpdated', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
+      return getCell(timestamp, t)
+    },
+    copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
+  },
+  {
     id: 'amount',
     name: 'column.amount',
     width: getColumnWidth('amount', columnsWidth),

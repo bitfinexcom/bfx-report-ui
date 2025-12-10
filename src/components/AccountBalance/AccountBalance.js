@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
+import classNames from 'classnames'
 import _sortBy from 'lodash/sortBy'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -53,6 +54,7 @@ const AccountBalance = () => {
   const isSyncRequired = useSelector(getIsSyncRequired)
   const currTimeFrame = useSelector(getCurrentTimeFrame)
   const isLoading = isFirstSync || (!dataReceived && pageLoading)
+  const paramChangerClass = classNames({ disabled: isFirstSync })
   const isProfitExcluded = useSelector(getIsUnrealizedProfitExcluded)
   const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
   const shouldFetchAccountBalance = !dataReceived && !pageLoading && !isSyncRequired
@@ -113,7 +115,7 @@ const AccountBalance = () => {
             <SectionHeaderItemLabel>
               {t('selector.filter.date')}
             </SectionHeaderItemLabel>
-            <TimeRange className='section-header-time-range' />
+            <TimeRange className={paramChangerClass} />
           </SectionHeaderItem>
           <SectionHeaderItem>
             <SectionHeaderItemLabel>
@@ -121,6 +123,7 @@ const AccountBalance = () => {
             </SectionHeaderItemLabel>
             <TimeFrameSelector
               value={timeFrame}
+              className={paramChangerClass}
               onChange={handleTimeframeChange}
             />
           </SectionHeaderItem>
@@ -130,6 +133,7 @@ const AccountBalance = () => {
             </SectionHeaderItemLabel>
             <UnrealizedProfitSelector
               value={isProfitExcluded}
+              className={paramChangerClass}
               onChange={handleUnrealizedProfitChange}
             />
           </SectionHeaderItem>

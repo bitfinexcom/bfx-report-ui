@@ -231,6 +231,7 @@
     "type": "類型",
     "typeprev": "先前訂單類型",
     "updated": "更新",
+    "updatedAt": "更新於",
     "usd": "美元",
     "version": "版本",
     "volume": "交易量",
@@ -555,7 +556,7 @@
       "symbol": "幣別或交易對",
       "pair": "交易對篩選",
       "category": "分類篩選",
-      "columns": "篩選欄",
+      "columns": "欄位篩選器",
       "date": "日期"
     },
     "report-type": {

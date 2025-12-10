@@ -29,6 +29,7 @@ class Movements extends PureComponent {
       id: PropTypes.bool,
       moreDetails: PropTypes.bool,
       mtsStarted: PropTypes.bool,
+      mtsUpdated: PropTypes.bool,
       note: PropTypes.bool,
       status: PropTypes.bool,
       transactionId: PropTypes.bool,
