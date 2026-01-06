@@ -4,13 +4,9 @@
   },
   "accountsummary": {
     "title": "Resumen de la cuenta",
-    "fees": "Tus comisiones en Bitfinex",
-    "fees_explain": "(basado en tu volumen de trading)",
-    "fees_deriv": "Tus comisiones en Derivados Bitfinex",
     "fee_tier_volume": "Volumen (elegible para calcular el nivel de comisiones) en los últimos 30 dias",
     "30dVolume": "Tu volumen en los últimos 30 días",
     "margin_funds": "Retorno total de fondos proporcionados para margen en los últimos 30 días",
-    "trading_funds": "Comisiones de trading cargadas en los últimos 30 días",
     "leo_level": "nivel LEO",
     "average_amount": "Monto promedio"
   },
