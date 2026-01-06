@@ -96,14 +96,6 @@ class AccountSummary extends PureComponent {
               total={get(data, 'fees_funding_total_30d', 0)}
             />
           )}
-          <PaidFees
-            t={t}
-            isNoData={isNoData}
-            isLoading={isLoading}
-            title='accountsummary.trading_funds'
-            data={get(data, 'fees_trading_30d', {})}
-            total={get(data, 'fees_trading_total_30d', 0)}
-          />
           <Leo
             t={t}
             data={data}
