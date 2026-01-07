@@ -2,7 +2,7 @@
   "short_name": "Bitfinex",
   "name": "Bitfinex",
   "icons": [
-     {
+    {
       "src": "favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
