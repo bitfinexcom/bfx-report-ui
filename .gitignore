@@ -21,5 +21,4 @@ yarn-error.log*
 
 src/ui/PlatformLogo/files/*
 !src/ui/PlatformLogo/files/.gitkeep
-public/favicon.ico
-public/favicon.png
+public/favicon.svg
