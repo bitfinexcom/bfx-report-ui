@@ -10,8 +10,8 @@ const filesMap = [
     destination: 'src/ui/PlatformLogo/files/logo-light-theme.svg',
   },
   {
-    source: 'scripts/template/bitfinex-favicon.ico',
-    destination: 'public/favicon.ico',
+    source: 'scripts/template/bitfinex-favicon.svg',
+    destination: 'public/favicon.svg',
   },
 ]
 
