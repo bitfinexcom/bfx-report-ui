@@ -52,7 +52,7 @@ const getColumns = ({
   {
     id: 'mtsStarted',
     className: 'align-left',
-    nameStr: `${t('column.date')} (${timeOffset})`,
+    nameStr: `${t('column.created')} (${timeOffset})`,
     width: getColumnWidth('mtsStarted', columnsWidth),
     renderer: (rowIndex) => {
       if (isLoading || isNoData) return getCellState(isLoading, isNoData)
@@ -60,6 +60,18 @@ const getColumns = ({
       return getCell(timestamp, t)
     },
     copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsStarted),
+  },
+  {
+    id: 'mtsUpdated',
+    className: 'align-left',
+    nameStr: `${t('column.updated')} (${timeOffset})`,
+    width: getColumnWidth('mtsUpdated', columnsWidth),
+    renderer: (rowIndex) => {
+      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
+      const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
+      return getCell(timestamp, t)
+    },
+    copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
   },
   {
     id: 'currency',
@@ -85,18 +97,6 @@ const getColumns = ({
       return getCell(status, t)
     },
     copyText: rowIndex => filteredData[rowIndex].status,
-  },
-  {
-    id: 'mtsUpdated',
-    className: 'align-left',
-    nameStr: `${t('column.updatedAt')} (${timeOffset})`,
-    width: getColumnWidth('mtsUpdated', columnsWidth),
-    renderer: (rowIndex) => {
-      if (isLoading || isNoData) return getCellState(isLoading, isNoData)
-      const timestamp = getFullTime(filteredData[rowIndex].mtsUpdated)
-      return getCell(timestamp, t)
-    },
-    copyText: rowIndex => getFullTime(filteredData[rowIndex].mtsUpdated),
   },
   {
     id: 'amount',
