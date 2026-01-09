@@ -4,13 +4,9 @@
   },
   "accountsummary": {
     "title": "Hesap Özeti",
-    "fees": "Bitfinex'teki ücretleriniz",
-    "fees_explain": "(al-sat hacminize göre)",
-    "fees_deriv": "Bitfinex Türevler ile ilgili ücretleriniz",
     "fee_tier_volume": "Son 30 gündeki hacim (ücret seviyesi hesaplaması için uygun)",
     "30dVolume": "Son 30 gündeki hacminiz",
     "margin_funds": "Son 30 günde sağlanan marjin fonlarınızın toplam getirisi",
-    "trading_funds": "Son 30 gün içinde alınan işlem ücretleri",
     "leo_level": "LEO seviyesi",
     "average_amount": "Ortalama miktar"
   },

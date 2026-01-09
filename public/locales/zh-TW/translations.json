@@ -4,13 +4,9 @@
   },
   "accountsummary": {
     "title": "帳戶摘要",
-    "fees": "您在Bitfinex交易的手續費率",
-    "fees_explain": "（基於您的交易量）",
-    "fees_deriv": "您於衍生品交易的手續費率",
     "fee_tier_volume": "過去30天交易量（符合手續費等級計算）",
     "30dVolume": "過去30天交易量",
     "margin_funds": "過去30天提供的保證金融資之總收益",
-    "trading_funds": "過去30天交易手續費",
     "leo_level": "LEO級別\n",
     "average_amount": "平均數量"
   },

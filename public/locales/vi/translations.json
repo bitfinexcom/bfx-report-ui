@@ -4,13 +4,9 @@
   },
   "accountsummary": {
     "title": "Tóm tắt tài khoản",
-    "fees": "Phí trên Bitfinex của bạn",
-    "fees_explain": "(dựa trên khối lượng giao dịch của bạn)",
-    "fees_deriv": "Phí trên Phái sinh Bitfinex của bạn",
     "fee_tier_volume": "Khối lượng giao dịch (đủ điều kiện để tính mức phí) trong 30 ngày qua",
     "30dVolume": "Khối lượng giao dịch trong 30 ngày qua của bạn",
     "margin_funds": "Tổng tiền lãi trên khoản vay ký quỹ được cung cấp trong 30 ngày qua của bạn",
-    "trading_funds": "Phí giao dịch được tính trong 30 ngày qua",
     "leo_level": "Cấp LEO",
     "average_amount": "Số lượng tiền trung bình"
   },
