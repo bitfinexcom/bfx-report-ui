@@ -19,6 +19,9 @@ const handleElectronLoad = () => {
     window.bfxReportElectronApi?.onHideMenuEvent(({ state }) => {
       store.dispatch(setElectronMenuHidden(state))
     })
+    window.bfxReportElectronApi?.onFireToastEvent((args) => {
+      console.log('[---onFireToastEvent--]:', args)
+    })
   })
 }
 
