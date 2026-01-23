@@ -1,28 +1,22 @@
 import types from './constants'
 
 const initialState = {
-  menuTitle: '',
-  menuTemplate: [],
-  menuHidden: true,
+  toastTemplate: {},
+  autoUpdateProgress: null,
 }
 
-export function electronMenuReducer(state = initialState, action) {
+export function electronAutoUpdateToast(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
-    case types.SET_ELECTRON_MENU_TITLE:
+    case types.SET_AUTO_UPDATE_TOAST_TEMPLATE:
       return {
         ...state,
-        menuTitle: payload,
+        toastTemplate: payload,
       }
-    case types.SET_ELECTRON_MENU_TEMPLATE:
+    case types.SET_AUTO_UPDATE_TOAST_PROGRESS:
       return {
         ...state,
-        menuTemplate: payload,
-      }
-    case types.SET_ELECTRON_MENU_HIDDEN:
-      return {
-        ...state,
-        menuHidden: payload,
+        autoUpdateProgress: payload,
       }
     default: {
       return state
@@ -30,4 +24,4 @@ export function electronMenuReducer(state = initialState, action) {
   }
 }
 
-export default electronMenuReducer
+export default electronAutoUpdateToast
