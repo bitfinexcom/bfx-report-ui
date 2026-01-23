@@ -5,7 +5,7 @@ const initialState = {
   autoUpdateProgress: null,
 }
 
-export function electronAutoUpdateToast(state = initialState, action) {
+export function electronAutoUpdateToastReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case types.SET_AUTO_UPDATE_TOAST_TEMPLATE:
@@ -24,4 +24,4 @@ export function electronAutoUpdateToast(state = initialState, action) {
   }
 }
 
-export default electronAutoUpdateToast
+export default electronAutoUpdateToastReducer
