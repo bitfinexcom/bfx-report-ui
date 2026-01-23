@@ -22,6 +22,9 @@ const handleElectronLoad = () => {
     window.bfxReportElectronApi?.onFireToastEvent((args) => {
       console.log('[---onFireToastEvent--]:', args)
     })
+    window.bfxReportElectronApi?.onProgressToastEvent((args) => {
+      console.log('[---onProgressToastEventToastEvent--]:', args)
+    })
   })
 }
 
