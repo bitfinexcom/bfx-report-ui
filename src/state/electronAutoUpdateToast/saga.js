@@ -1,36 +1,41 @@
 import {
-  put,
-  call,
-  takeLatest,
+  takeLatest, put, select, delay,
 } from 'redux-saga/effects'
 
-import { logger } from 'utils/logger'
-
 import types from './constants'
-import actions from './actions'
+import { hideAutoUpdateToast } from './actions'
+import { selectAutoUpdateToast } from './selectors'
 
-function* getElectronMenuConfigSaga() {
-  try {
-    const title = yield call([window.bfxReportElectronApi, 'getTitle'])
-    const { menuTemplate, shouldMenuBeHidden } = yield call([window.bfxReportElectronApi, 'getMenuTemplate'])
+function* callClose(dismiss, toastId) {
+  window.bfxReportElectronApi?.sendToastClosedEvent({
+    toastId,
+    dismiss,
+  })
 
-    yield put(actions.setElectronMenuTitle(title))
-    yield put(actions.setElectronMenuTemplate(menuTemplate))
-    yield put(actions.setElectronMenuHidden(shouldMenuBeHidden))
-  } catch (error) {
-    yield call(logger.error, error)
+  yield put(hideAutoUpdateToast(dismiss))
+}
+
+function* handleTemplate({ payload }) {
+  const { timer, toastId } = payload
+
+  // auto close by timer
+  if (Number.isInteger(timer)) {
+    yield delay(timer)
+    yield callClose('timer', toastId)
   }
 }
 
-function* executeMenuCommandSaga({ payload }) {
-  try {
-    yield call([window.bfxReportElectronApi, 'execMenuCmd'], { id: payload })
-  } catch (error) {
-    yield call(logger.error, error)
+function* handleProgress({ payload }) {
+  const { progress } = payload
+
+  if (progress >= 100) {
+    yield delay(1000)
+    const { toastId } = yield select(selectAutoUpdateToast)
+    yield callClose('close', toastId)
   }
 }
 
-export default function* electronMenuSaga() {
-  yield takeLatest(types.EXEC_MENU_COMMAND, executeMenuCommandSaga)
-  yield takeLatest(types.GET_ELECTRON_MENU_CONFIG, getElectronMenuConfigSaga)
+export default function* autoUpdateToastSaga() {
+  yield takeLatest(types.SET_AUTO_UPDATE_TOAST_TEMPLATE, handleTemplate)
+  yield takeLatest(types.SET_AUTO_UPDATE_TOAST_PROGRESS, handleProgress)
 }
