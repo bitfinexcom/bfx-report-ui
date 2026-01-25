@@ -1,8 +1,10 @@
 .au-toast {
+  gap: 6px;
   min-width: 320px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  position: fixed;
+  top: 37px;
 
   &__title {
     font-weight: 600;
