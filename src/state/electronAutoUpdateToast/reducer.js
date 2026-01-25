@@ -1,8 +1,17 @@
 import types from './constants'
 
 const initialState = {
-  toastTemplate: {},
-  autoUpdateProgress: null,
+  visible: false,
+  toastId: null,
+  title: null,
+  text: null,
+  icon: 'info',
+  timer: null,
+  showConfirmButton: true,
+  showCancelButton: false,
+  confirmButtonText: 'OK',
+  cancelButtonText: 'Cancel',
+  progress: null,
 }
 
 export function electronAutoUpdateToastReducer(state = initialState, action) {
@@ -11,13 +20,17 @@ export function electronAutoUpdateToastReducer(state = initialState, action) {
     case types.SET_AUTO_UPDATE_TOAST_TEMPLATE:
       return {
         ...state,
-        toastTemplate: payload,
+        ...action.payload,
+        visible: true,
+        progress: action.payload.progress ?? state.progress,
       }
     case types.SET_AUTO_UPDATE_TOAST_PROGRESS:
       return {
         ...state,
-        autoUpdateProgress: payload,
+        progress: payload,
       }
+    case types.HIDE_AUTO_UPDATE_TOAST:
+      return initialState
     default: {
       return state
     }
