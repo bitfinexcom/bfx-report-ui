@@ -1,14 +1,17 @@
-/* ===============================
-   Auto Update Toast (content)
-   =============================== */
-
 .au-toast {
-  // min-width: 320px;
+  position: absolute;
+  z-index: 99;
+  top: 5px;
+  right: 0;
+  gap: 6px;
+  font-size: 14px;
+  min-width: 320px;
   display: flex;
   flex-direction: row;
-  gap: 6px;
-  width: fit-content;
-  padding: 5px 10px;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+  background-color: var(--bgColor2);
 
   &__title {
     font-weight: 600;
@@ -18,7 +21,6 @@
   &__text {
     font-size: 13px;
     opacity: 0.85;
-     width: fit-content;
   }
 
   &__spinner {
@@ -45,18 +47,16 @@
     margin-top: 10px;
   }
 }
-
-.au-update-overlay {
-  position: fixed;
-  top: -3px;
-  right: 1px;
+.au-toast-portal {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 9999;
   pointer-events: none;
+
+  .bp3-toast {
+    pointer-events: auto;
+  }
 }
 
-.au-update-overlay__inner {
-  width: 360px;
-  pointer-events: auto;
-  border-radius: 6px;
-  padding: 12px 14px;
-}
