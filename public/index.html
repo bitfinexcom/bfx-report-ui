@@ -22,31 +22,31 @@
     <meta name="twitter:image" content="https://report.bitfinex.com/report-thumbnail-2.png">
 
     <style>
-      .au-toast {
+      .au-toast-test {
         display: none;
         position: absolute;
         z-index: 99;
-        top: 90px;
+        top: 130px;
         right: 0;
         width: auto;
         margin: auto;
         min-height: 44px;
         min-width: 200px;
-        background-color: ##3498db;
+        background-color: #3498db;
         font-size: 14px;
       }
 
-      .au-toast__icon {
+      .au-toast-test__icon {
         padding: 5px;
         margin: 4px 10px;
         font-size: 20px;
       }
 
-      .au-toast__icon--error {
+      .au-toast-test__icon--error {
         color: #fc7777;
       }
 
-      .au-toast__icon--loading {
+      .au-toast-test__icon--loading {
         padding: 0px;
         margin: 12px 10px;
         border: 3px solid #f3f3f3;
@@ -62,38 +62,38 @@
         100% { transform: rotate(360deg); }
       }
 
-      .au-toast__icon--success {
+      .au-toast-test__icon--success {
         color: #239d23;
       }
 
-      .au-toast__icon--info {
+      .au-toast-test__icon--info {
         color: #3498db;
       }
 
-      .au-toast__icon--question {
+      .au-toast-test__icon--question {
         color: #eded50;
       }
 
-      .au-toast__title {
+      .au-toast-test__title {
         font-weight: bold;
         margin: 2px 10px 2px 0;
         padding: 11px 0;
       }
 
-      .au-toast__text {
+      .au-toast-test__text {
         font-weight: lighter;
         margin: 2px 10px 2px 0;
         padding: 11px 0;
       }
 
-      .au-toast__perc {
+      .au-toast-test__perc {
         font-weight: lighter;
         margin: 2px 10px 2px 0;
         padding: 11px 0;
         min-width: 50px;
       }
 
-      .au-toast__confirm-btn {
+      .au-toast-test__confirm-btn {
         padding: 5px;
         margin: 8px 10px 8px 0;
         border-radius: 2px;
@@ -106,16 +106,16 @@
         cursor: pointer;
       }
 
-      .au-toast__confirm-btn:hover,
-      .au-toast__confirm-btn:focus,
-      .au-toast__confirm-btn:active {
+      .au-toast-test__confirm-btn:hover,
+      .au-toast-test__confirm-btn:focus,
+      .au-toast-test__confirm-btn:active {
         background-color: #4c88c8;
         border: 1px solid #4c88c8;
         color: #102331;
         box-shadow: none;
       }
 
-      .au-toast__cancel-btn {
+      .au-toast-test__cancel-btn {
         padding: 5px;
         margin: 8px 10px 8px 0;
         border-radius: 2px;
@@ -127,9 +127,9 @@
         cursor: pointer;
       }
 
-      .au-toast__cancel-btn:hover,
-      .au-toast__cancel-btn:focus,
-      .au-toast__cancel-btn:active {
+      .au-toast-test__cancel-btn:hover,
+      .au-toast-test__cancel-btn:focus,
+      .au-toast-test__cancel-btn:active {
         background-color: #19354a;
         border: 1px solid #334A59;
         box-shadow: none;
@@ -141,7 +141,7 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-    <div id="autoUpdateToast" class="au-toast"></div>
+    <div id="autoUpdateToast" class="au-toast-test"></div>
   </body>
 
   <script>
@@ -183,11 +183,11 @@
           const elems = []
 
           const iconMap = {
-            error: '<span class="au-toast__icon au-toast__icon--error">X</span>',
-            loading: '<span class="au-toast__icon au-toast__icon--loading"></span>',
-            success: '<span class="au-toast__icon au-toast__icon--success">V</span>',
-            info: '<span class="au-toast__icon au-toast__icon--info">i</span>',
-            question: '<span class="au-toast__icon au-toast__icon--question">?</span>' 
+            error: '<span class="au-toast-test__icon au-toast__icon--error">X</span>',
+            loading: '<span class="au-toast-test__icon au-toast__icon--loading"></span>',
+            success: '<span class="au-toast-test__icon au-toast__icon--success">V</span>',
+            info: '<span class="au-toast-test__icon au-toast__icon--info">i</span>',
+            question: '<span class="au-toast-test__icon au-toast__icon--question">?</span>' 
           }
           const iconHTML = iconMap[icon]
 
@@ -195,19 +195,19 @@
             elems.push(iconHTML)
           }
           if (title) {
-            elems.push(`<span class="au-toast__title">${title}</span>`)
+            elems.push(`<span class="au-toast-test__title">${title}</span>`)
           }
           if (text) {
-            elems.push(`<span class="au-toast__text">${text}</span>`)
+            elems.push(`<span class="au-toast-test__text">${text}</span>`)
           }
           if (Number.isFinite(progress)) {
-            elems.push(`<span id="auPerc" class="au-toast__perc">${Math.trunc(progress)} %</span>`)
+            elems.push(`<span id="auPerc" class="au-toast-test__perc">${Math.trunc(progress)} %</span>`)
           }
           if (showConfirmButton) {
-            elems.push(`<button id="confirmBtn" class="au-toast__confirm-btn">${confirmButtonText}</button>`)
+            elems.push(`<button id="confirmBtn" class="au-toast-test__confirm-btn">${confirmButtonText}</button>`)
           }
           if (showCancelButton) {
-            elems.push(`<button id="cancelBtn" class="au-toast__cancel-btn">${cancelButtonText}</button>`)
+            elems.push(`<button id="cancelBtn" class="au-toast-test__cancel-btn">${cancelButtonText}</button>`)
           }
 
           autoUpdateToastElem.innerHTML = elems.join('\n')
