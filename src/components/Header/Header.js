@@ -1,8 +1,9 @@
 import React from 'react'
 
+import config from 'config'
 import Status from 'components/Status'
 import PlatformLogo from 'ui/PlatformLogo'
-import config from 'config'
+import AppUpdateToast from 'components/AppUpdateToast'
 
 import HamburgerMenu from './HamburgerMenu'
 import Export from './Export'
@@ -33,6 +34,7 @@ const Header = () => {
         <Status />
         <AccountMenu />
         <TopNavigation />
+        <AppUpdateToast />
       </div>
     </div>
   )
