@@ -9,7 +9,7 @@ export function setAutoUpdateToastTemplate(template) {
 
 export function setAutoUpdateToastProgress(progress) {
   return {
-    type: types.SET_ELECTRON_MENU_TEMPLATE,
+    type: types.SET_AUTO_UPDATE_TOAST_PROGRESS,
     payload: progress,
   }
 }
