@@ -317,6 +317,19 @@ export const removeUrlParams = (params) => {
   window.history.replaceState(null, null, window.location.href.replace(search, updatedQuery))
 }
 
+export const updateUrlParam = (param, value) => {
+  const currentUrlParams = queryString.parse(window.location.search)
+
+  if (!currentUrlParams[param]) {
+    return
+  }
+
+  currentUrlParams[param] = value
+  const updatedQuery = `?${queryString.stringify(currentUrlParams, { encode: false })}`
+
+  window.history.replaceState(null, null, `${window.location.pathname}${updatedQuery}`)
+}
+
 // genererate url with route and params
 export function generateUrl(type, params, symbols) {
   if (!isValidRouteType(type)) {
@@ -549,6 +562,7 @@ export default {
   momentFormatterDays,
   postJsonFetch,
   removeUrlParams,
+  updateUrlParam,
   getFrameworkPositionsEntries,
   getFrameworkPositionsTickersEntries,
   getWalletsTickersEntries,

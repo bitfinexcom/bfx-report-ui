@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import _round from 'lodash/round'
+import BigNumber from 'bignumber.js'
 
 export const amountStyle = (amount) => {
   const val = parseFloat(amount)
@@ -26,7 +26,11 @@ export const insertIf = (condition, ...elements) => (condition ? elements : [])
 
 export const filterSelectorItem = (query, item) => item.toLowerCase().indexOf(query.toLowerCase()) >= 0
 
-export const fixedFloat = (val, num = 8) => (typeof val === 'number' ? val && val.toFixed(num) : val)
+export const fixedFloat = (val, num = 8) => {
+  if (!val && val !== 0) return val
+  const bn = new BigNumber(val)
+  return bn.isNaN() ? val : bn.toFixed(num)
+}
 
 export const formatThousands = (value) => {
   const parts = value.toString().split('.')
@@ -71,11 +75,12 @@ export const formatAmount = (val, options = {}) => {
     formatThousands: shouldFormatThousands = false,
     dollarSign = false,
   } = options
-  let roundedValue = _round(val, 8)
+  const bnValue = new BigNumber(val)
+  let roundedValue = bnValue.dp(8, BigNumber.ROUND_HALF_UP).toFixed()
 
   const classes = classNames('bitfinex-amount', {
-    'bitfinex-green-text': color ? color === 'green' : roundedValue > 0,
-    'bitfinex-red-text': color ? color === 'red' : roundedValue < 0,
+    'bitfinex-green-text': color ? color === 'green' : bnValue.gt(0),
+    'bitfinex-red-text': color ? color === 'red' : bnValue.lt(0),
   })
 
   if (fixFraction) {
@@ -106,7 +111,7 @@ export const formatAmount = (val, options = {}) => {
   )
 }
 
-export const formatFee = (fee) => formatAmount(fee * 100, { color: 'white', minDigits: 2 })
+export const formatFee = (fee) => formatAmount(new BigNumber(fee).times(100), { color: 'white', minDigits: 2 })
 
 export const formatColor = (value, color) => {
   const classes = classNames({

@@ -1,5 +1,7 @@
 import authTypes from 'state/auth/constants'
 import { fetch, fetchFail } from 'state/reducers.helper'
+import _get from 'lodash/get'
+import _isPlainObject from 'lodash/isPlainObject'
 import _map from 'lodash/map'
 
 import { mapSymbol } from 'state/symbols/utils'
@@ -12,13 +14,19 @@ export const initialState = {
   data: {},
 }
 
-const mapPerpetualCurrencies = (data = {}) => ({
-  ...data,
-  trade_vol_30d: _map(data.trade_vol_30d, (item) => ({
-    ...item,
-    curr: mapSymbol(item.curr, true),
-  })),
-})
+const mapPerpetualCurrencies = (data) => {
+  if (!_isPlainObject(data)) {
+    return {}
+  }
+
+  return {
+    ...data,
+    trade_vol_30d: _map(data.trade_vol_30d, (item) => ({
+      ...item,
+      curr: mapSymbol(_get(item, 'curr'), true),
+    })),
+  }
+}
 
 export function accountSummaryReducer(state = initialState, action) {
   const { type: actionType, payload } = action
