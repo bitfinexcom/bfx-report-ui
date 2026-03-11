@@ -1,33 +1,62 @@
 .au-toast {
   position: absolute;
   z-index: 99;
-  top: 5px;
+  top: 35px;
   right: 0;
-  gap: 6px;
-  font-size: 14px;
-  min-width: 320px;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: space-around;
+  align-items: center;
+  min-height: 44px;
+  min-width: 200px;
+  font-size: 14px;
   background-color: var(--bgColor2);
+
+  & > :first-child {
+    margin-left: 10px;
+  }
+
+  &__icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    margin: 0 10px;
+
+    &--error {
+      fill: #fc7777;
+    }
+
+    &--success {
+      fill: #239d23;
+    }
+
+    &--info {
+      fill: #3498db;
+    }
+
+    &--question {
+      fill: #eded50;
+    }
+  }
 
   &__title {
     font-weight: 600;
     font-size: 14px;
+    padding: 11px 0;
+    margin-right: 10px;
   }
 
   &__text {
     font-size: 13px;
     opacity: 0.85;
+    padding: 11px 0;
+    margin-right: 10px;
   }
 
   &__spinner {
     position: relative;
     width: 36px;
     height: 36px;
-    margin-top: 8px;
+    margin: 4px 10px;
   }
 
   &__spinner-percent {
@@ -44,19 +73,6 @@
   &__actions {
     display: flex;
     gap: 8px;
-    margin-top: 10px;
+    margin: 0 10px;
   }
 }
-.au-toast-portal {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  pointer-events: none;
-
-  .bp3-toast {
-    pointer-events: auto;
-  }
-}
-
