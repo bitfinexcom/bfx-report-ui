@@ -24,12 +24,10 @@ const handleElectronLoad = () => {
       store.dispatch(setElectronMenuHidden(state))
     })
     window.bfxReportElectronApi?.onFireToastEvent((args) => {
-      console.log('[---onFireToastEvent--]:', args)
       store.dispatch(setAutoUpdateToastTemplate(args))
     })
     window.bfxReportElectronApi?.onProgressToastEvent((args) => {
-      console.log('[---onProgressToastEventToastEvent--]:', args)
-      store.dispatch(setAutoUpdateToastProgress(args))
+      store.dispatch(setAutoUpdateToastProgress(args?.progress))
     })
   })
 }
