@@ -1,60 +1,70 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Overlay, Button, Intent } from '@blueprintjs/core'
+import { Button, Intent } from '@blueprintjs/core'
 
-import { hideAutoUpdateToast } from 'state/electronAutoUpdateToast/actions'
+import Icon from 'icons'
+import { closeAutoUpdateToast } from 'state/electronAutoUpdateToast/actions'
 import { selectAutoUpdateToast } from 'state/electronAutoUpdateToast/selectors'
 import Spinner from './AppUpdateToast.spinner'
 
 import './_AppUpdateToast.scss'
 
-export default function AppUpdateOverlay() {
+const ICON_MAP = {
+  error: <Icon.EXCLAMATION_CIRCLE className='au-toast__icon au-toast__icon--error' />,
+  success: <Icon.CHECKMARK_CIRCLE className='au-toast__icon au-toast__icon--success' />,
+  info: <Icon.INFO_CIRCLE className='au-toast__icon au-toast__icon--info' />,
+  question: <Icon.INFO_CIRCLE className='au-toast__icon au-toast__icon--question' />,
+}
+
+export default function AppUpdateToast() {
   const dispatch = useDispatch()
   const toast = useSelector(selectAutoUpdateToast)
 
+  if (!toast.visible) return null
+
+  const showSpinner = toast.icon === 'loading' || Number.isFinite(toast.progress)
+  const iconElement = !showSpinner ? ICON_MAP[toast.icon] : null
+
   return (
-    <Overlay
-      isOpen={toast.visible}
-      hasBackdrop={false}
-      enforceFocus={false}
-      autoFocus={false}
-      canEscapeKeyClose={false}
-      canOutsideClickClose={false}
-      usePortal={false}
-      className='au-update-overlay-root'
-    >
-      <div className='au-update-overlay'>
-        <div className='au-update-overlay__inner'>
-          <div className='au-toast'>
-            {toast.title && (
-              <div className='au-toast__title'>
-                {toast.title}
-              </div>
-            )}
+    <div className='au-toast'>
+      {iconElement}
 
-            {toast.text && (
-              <div className='au-toast__text'>
-                {toast.text}
-              </div>
-            )}
-
-            <Spinner progress={toast.progress} />
-
-            <div className='au-toast__actions'>
-              {toast.showConfirmButton && (
-                <Button
-                  intent={Intent.PRIMARY}
-                  small
-                  onClick={() => dispatch(hideAutoUpdateToast('confirm'))
-                  }
-                >
-                  {toast.confirmButtonText}
-                </Button>
-              )}
-            </div>
-          </div>
+      {toast.title && (
+        <div className='au-toast__title'>
+          {toast.title}
         </div>
+      )}
+
+      {toast.text && (
+        <div className='au-toast__text'>
+          {toast.text}
+        </div>
+      )}
+
+      {showSpinner && (
+        <Spinner progress={toast.progress} />
+      )}
+
+      <div className='au-toast__actions'>
+        {toast.showCancelButton && (
+          <Button
+            minimal
+            small
+            onClick={() => dispatch(closeAutoUpdateToast('cancel'))}
+          >
+            {toast.cancelButtonText}
+          </Button>
+        )}
+        {toast.showConfirmButton && (
+          <Button
+            intent={Intent.PRIMARY}
+            small
+            onClick={() => dispatch(closeAutoUpdateToast('confirm'))}
+          >
+            {toast.confirmButtonText}
+          </Button>
+        )}
       </div>
-    </Overlay>
+    </div>
   )
 }
