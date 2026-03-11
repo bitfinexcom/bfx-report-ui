@@ -11,6 +11,7 @@ import candlesSaga from './candles/saga'
 import changeLogsSaga from './changeLogs/saga'
 import columnsSaga from './columns/saga'
 import derivativesSaga from './derivatives/saga'
+import autoUpdateToastSaga from './electronAutoUpdateToast/saga'
 import electronMenuSaga from './electronMenu/saga'
 import fcreditSaga from './fundingCreditHistory/saga'
 import feesReportSaga from './feesReport/saga'
@@ -87,6 +88,7 @@ export default function* rootSaga() {
   yield fork(weightedAveragesSaga)
   if (showFrameworkMode) {
     yield fork(accountBalanceSaga)
+    yield fork(autoUpdateToastSaga)
     yield fork(electronMenuSaga)
     yield fork(feesReportSaga)
     yield fork(loanReportSaga)
