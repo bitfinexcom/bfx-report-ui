@@ -14,14 +14,21 @@ export function setAutoUpdateToastProgress(progress) {
   }
 }
 
-export function hideAutoUpdateToast(dismiss) {
+export function closeAutoUpdateToast(dismiss) {
+  return {
+    type: types.CLOSE_AUTO_UPDATE_TOAST,
+    payload: dismiss,
+  }
+}
+
+export function hideAutoUpdateToast() {
   return {
     type: types.HIDE_AUTO_UPDATE_TOAST,
-    payload: dismiss,
   }
 }
 
 export default {
   setAutoUpdateToastTemplate,
   setAutoUpdateToastProgress,
+  closeAutoUpdateToast,
 }
