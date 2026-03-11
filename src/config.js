@@ -48,7 +48,7 @@ const environments = {
 const environmentConfig = environments[REACT_APP_ENV] || {}
 
 const config = {
-  isElectronApp: false,
+  isElectronApp: true,
   ...environmentConfig,
 }
 
