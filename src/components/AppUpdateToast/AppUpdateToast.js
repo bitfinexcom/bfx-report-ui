@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Intent } from '@blueprintjs/core'
+import { Button, Intent, Spinner as BpSpinner } from '@blueprintjs/core'
 
 import Icon from 'icons'
 import { closeAutoUpdateToast } from 'state/electronAutoUpdateToast/actions'
@@ -14,6 +14,7 @@ const ICON_MAP = {
   success: <Icon.CHECKMARK_CIRCLE className='au-toast__icon au-toast__icon--success' />,
   info: <Icon.INFO_CIRCLE className='au-toast__icon au-toast__icon--info' />,
   question: <Icon.INFO_CIRCLE className='au-toast__icon au-toast__icon--question' />,
+  loading: <BpSpinner className='au-toast__icon au-toast__icon--loading' size={20} />,
 }
 
 export default function AppUpdateToast() {
@@ -22,7 +23,7 @@ export default function AppUpdateToast() {
 
   if (!toast.visible) return null
 
-  const showSpinner = toast.icon === 'loading' || Number.isFinite(toast.progress)
+  const showSpinner = Number.isFinite(toast.progress)
   const iconElement = !showSpinner ? ICON_MAP[toast.icon] : null
 
   return (
