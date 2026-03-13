@@ -11,62 +11,57 @@ import Spinner from './AppUpdateToast.spinner'
 import './_AppUpdateToast.scss'
 
 const ICON_MAP = {
-  error: <Icon.EXCLAMATION_CIRCLE className='au-toast__icon au-toast__icon--error' />,
+  error: <Icon.WARNING className='au-toast__icon au-toast__icon--error' />,
   success: <Icon.CHECKMARK_CIRCLE className='au-toast__icon au-toast__icon--success' />,
   info: <Icon.INFO_CIRCLE className='au-toast__icon au-toast__icon--info' />,
-  question: <Icon.INFO_CIRCLE className='au-toast__icon au-toast__icon--question' />,
+  question: <Icon.QUESTION_CIRCLE className='au-toast__icon au-toast__icon--question' />,
 }
 
 const AppUpdateToast = () => {
   const dispatch = useDispatch()
   const toast = useSelector(selectAutoUpdateToast)
 
-  if (!toast.visible) return null
+  if (!toast?.visible) {
+    return null
+  }
 
-  const showSpinner = _isFinite(toast.progress)
-  const iconElement = !showSpinner ? ICON_MAP[toast.icon] : null
+  const {
+    icon, title, text, showConfirmButton, showCancelButton,
+    confirmButtonText, cancelButtonText, progress,
+  } = toast
+
+  const showSpinner = _isFinite(progress)
+  const iconElement = ICON_MAP[icon]
 
   return (
     <div className='au-toast'>
-      {iconElement}
-
-      {toast.title && (
-        <div className='au-toast__title'>
-          {toast.title}
+      {showSpinner && <Spinner progress={progress} />}
+      {!showSpinner && iconElement}
+      {title && <div className='au-toast__title'>{title}</div>}
+      {text && <div className='au-toast__text'>{text}</div>}
+      {(showConfirmButton || showCancelButton) && (
+        <div className='au-toast__actions'>
+          {showCancelButton && (
+            <Button
+              small
+              minimal
+              className='au-toast__cancel-btn'
+              onClick={() => dispatch(closeAutoUpdateToast('cancel'))}
+            >
+              {cancelButtonText || 'Cancel'}
+            </Button>
+          )}
+          {showConfirmButton && (
+            <Button
+              intent={Intent.PRIMARY}
+              small
+              onClick={() => dispatch(closeAutoUpdateToast('confirm'))}
+            >
+              {confirmButtonText || 'OK'}
+            </Button>
+          )}
         </div>
       )}
-
-      {toast.text && (
-        <div className='au-toast__text'>
-          {toast.text}
-        </div>
-      )}
-
-      {showSpinner && (
-        <Spinner progress={toast.progress} />
-      )}
-
-      <div className='au-toast__actions'>
-        {toast.showCancelButton && (
-          <Button
-            small
-            minimal
-            className='au-toast__cancel-btn'
-            onClick={() => dispatch(closeAutoUpdateToast('cancel'))}
-          >
-            {toast.cancelButtonText}
-          </Button>
-        )}
-        {toast.showConfirmButton && (
-          <Button
-            intent={Intent.PRIMARY}
-            small
-            onClick={() => dispatch(closeAutoUpdateToast('confirm'))}
-          >
-            {toast.confirmButtonText}
-          </Button>
-        )}
-      </div>
     </div>
   )
 }
