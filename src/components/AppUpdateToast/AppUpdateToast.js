@@ -17,7 +17,7 @@ const ICON_MAP = {
   question: <Icon.INFO_CIRCLE className='au-toast__icon au-toast__icon--question' />,
 }
 
-export default function AppUpdateToast() {
+const AppUpdateToast = () => {
   const dispatch = useDispatch()
   const toast = useSelector(selectAutoUpdateToast)
 
@@ -69,3 +69,5 @@ export default function AppUpdateToast() {
     </div>
   )
 }
+
+export default AppUpdateToast
