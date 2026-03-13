@@ -21,20 +21,20 @@
     min-width: 28px;
     margin: 0 10px;
 
-    &--error {
-      fill: #fc7777;
+    &--error path {
+      fill: #fc7777 !important;
     }
 
-    &--success {
-      fill: #239d23;
+    &--success path {
+      fill: #239d23 !important;
     }
 
-    &--info {
-      fill: #3498db;
+    &--info path {
+      fill: #3498db !important;
     }
 
-    &--question {
-      fill: #eded50;
+    &--question path {
+      fill: #eded50 !important;
     }
   }
 
