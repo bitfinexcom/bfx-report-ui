@@ -6,14 +6,13 @@ import _isFinite from 'lodash/isFinite'
 import Icon from 'icons'
 import { closeAutoUpdateToast } from 'state/electronAutoUpdateToast/actions'
 import { selectAutoUpdateToast } from 'state/electronAutoUpdateToast/selectors'
-import Spinner from './AppUpdateToast.spinner'
 
-import './_AppUpdateToast.scss'
+import Spinner from './AppUpdateToast.spinner'
 
 const ICON_MAP = {
   error: <Icon.WARNING className='au-toast__icon au-toast__icon--error' />,
-  success: <Icon.CHECKMARK_CIRCLE className='au-toast__icon au-toast__icon--success' />,
   info: <Icon.INFO_CIRCLE className='au-toast__icon au-toast__icon--info' />,
+  success: <Icon.CHECKMARK_CIRCLE className='au-toast__icon au-toast__icon--success' />,
   question: <Icon.QUESTION_CIRCLE className='au-toast__icon au-toast__icon--question' />,
 }
 
