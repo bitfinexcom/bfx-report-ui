@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Intent } from '@blueprintjs/core'
+import _isFinite from 'lodash/isFinite'
 
 import Icon from 'icons'
 import { closeAutoUpdateToast } from 'state/electronAutoUpdateToast/actions'
@@ -22,7 +23,7 @@ export default function AppUpdateToast() {
 
   if (!toast.visible) return null
 
-  const showSpinner = Number.isFinite(toast.progress)
+  const showSpinner = _isFinite(toast.progress)
   const iconElement = !showSpinner ? ICON_MAP[toast.icon] : null
 
   return (
