@@ -43,7 +43,6 @@ const AppUpdateToast = () => {
           {showCancelButton && (
             <Button
               small
-              minimal
               className='au-toast__cancel-btn'
               onClick={() => dispatch(closeAutoUpdateToast('cancel'))}
             >
