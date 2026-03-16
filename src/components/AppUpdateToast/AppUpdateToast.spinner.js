@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Spinner } from '@blueprintjs/core'
 
@@ -28,4 +28,4 @@ SpinnerWithPercent.defaultProps = {
   progress: null,
 }
 
-export default SpinnerWithPercent
+export default memo(SpinnerWithPercent)
