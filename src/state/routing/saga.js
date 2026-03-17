@@ -1,5 +1,5 @@
 import { put, select, takeLatest } from 'redux-saga/effects'
-import { LOCATION_CHANGE, replace } from 'connected-react-router'
+import { LOCATION_CHANGE, replace } from 'redux-first-history'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import { getTarget } from 'state/query/utils'
@@ -14,11 +14,15 @@ import { getLastRoute, getRouteParams } from './selectors'
 
 const { MENU_ORDER_TRADES } = queryConstants
 
+let isFirstRendering = true
+
 function* locationChange({ payload }) {
-  const { isFirstRendering, location } = payload
+  const { location } = payload
   const { pathname, search, state } = location
 
-  if (isFirstRendering) {
+  const isFirstRender = isFirstRendering
+  if (isFirstRender) {
+    isFirstRendering = false
     // redirects from legacy sections `deposits' and 'withdrawals' to 'movements' on first render
     if (pathname.includes('/deposits') || pathname.includes('/withdrawals')) {
       const [, , symbols] = pathname.split('/')
@@ -43,7 +47,7 @@ function* locationChange({ payload }) {
   }
 
   // return previously saved params on route change
-  if (route !== lastRoute && !isFirstRendering) {
+  if (route !== lastRoute && !isFirstRender) {
     const routeParams = yield select(getRouteParams, route)
     if (isEmpty(routeParams)) {
       const query = getQueryWithoutParams(Object.keys(FILTER_KEYS)) // remove filters of current section
