@@ -99,6 +99,7 @@
   ],
   "overrides": {
     "bfj": "9.1.3",
-    "serialize-javascript": "7.0.3"
+    "serialize-javascript": "7.0.3",
+    "html-parse-stringify2": "2.0.2"
   }
 }
