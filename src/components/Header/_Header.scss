@@ -17,7 +17,7 @@
     position: relative;
     display: inline-flex;
     align-items: center;
-    width: 283px;
+    width: 228px;
     height: 100%;
 
     .hamburger-menu {
@@ -27,13 +27,12 @@
     &-logo {
       display: block;
       position: absolute;
-      width: 230px;
+      width: 160px;
       height: 22px;
-      margin: auto;
       top: 0;
-      left: 0;
       bottom: 0;
-      right: 0;
+      left: 24px;
+      margin: auto 0;
     }
   }
 
@@ -90,7 +89,7 @@
     height: 56px;
 
     &-brand {
-      width: 347px;
+      width: 275px;
 
       &-logo, .platform-logo {
         width: 250px;
@@ -144,16 +143,17 @@
 @media screen and (max-width: 855px) {
   .header {
     &-brand {
+      width: auto;
       border-right: none;
 
       &-logo {
+        position: relative;
         width: 175px;
       }
 
       .hamburger-menu {
         display: block;
-        margin-top: 6px;
-        margin-left: 15px;
+        margin: 6px 0 0 15px;
       }
     }
     

@@ -1,38 +1,41 @@
 .app-download {
-  padding: 24px;
+  padding: 16px;
 
   &--title {
     margin: 0;
-    font-size: 16px;
-    max-width: 240px;
-    margin-bottom: 6px;
+    font-size: 14px;
+    max-width: 200px;
+    margin-bottom: 4px;
   }
 
   &--sub-title {
     margin: 0;
-    font-size: 14px;
-    max-width: 240px;
+    font-size: 12px;
+    max-width: 200px;
     color: var(--color2);
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 
   &--list {
-    padding-left: 20px;
+    padding-left: 16px;
 
     li {
-      font-size: 14px;
+      font-size: 12px;
       color: var(--color2);
-      padding-bottom: 6px;
+      padding-bottom: 4px;
     }
   }
 
   &--btn {
-    min-height: 40px;
-    padding: 5px 20px;
+    min-height: 34px;
+    padding: 4px 10px;
+    width: 100%;
 
     .bp3-button-text {
-      font-size: 15px;
+      font-size: 12px;
       font-weight: 700;
+      white-space: normal;
+      line-height: 1.3;
     }
   }
 }
