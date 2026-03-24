@@ -8,6 +8,7 @@ import { hideAutoUpdateToast } from './actions'
 import { selectAutoUpdateToast } from './selectors'
 
 function* sendCloseEvent(dismiss, toastId) {
+  console.log('==bfxReportElectronApi?.sendToastClosedEvent==', dismiss, toastId)
   window.bfxReportElectronApi?.sendToastClosedEvent({
     toastId,
     dismiss,
@@ -21,6 +22,7 @@ function* handleTemplate({ payload }) {
 
   // close previous toast if exists
   if (prevToastId) {
+    console.log('==bfxReportElectronApi?.sendToastClosedEvent==', 'close', prevToastId)
     window.bfxReportElectronApi?.sendToastClosedEvent({
       toastId: prevToastId,
       dismiss: 'close',
