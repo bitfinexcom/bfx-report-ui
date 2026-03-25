@@ -9,6 +9,7 @@ import {
   setAutoUpdateToastTemplate,
   setAutoUpdateToastProgress,
 } from 'state/electronAutoUpdateToast/actions'
+import { selectAutoUpdateToast } from 'state/electronAutoUpdateToast/selectors'
 
 const handleElectronLoad = () => {
   window.document.addEventListener('electronLoad', (e) => {
@@ -25,6 +26,16 @@ const handleElectronLoad = () => {
     })
     window.bfxReportElectronApi?.onFireToastEvent((args) => {
       console.log('==bfxReportElectronApi?.onFireToastEvent==', args)
+
+      const { toastId: prevToastId } = selectAutoUpdateToast(store.getState())
+      if (prevToastId) {
+        console.log('==bfxReportElectronApi?.sendToastClosedEvent==', 'close', prevToastId)
+        window.bfxReportElectronApi?.sendToastClosedEvent({
+          toastId: prevToastId,
+          dismiss: 'close',
+        })
+      }
+
       store.dispatch(setAutoUpdateToastTemplate(args))
     })
     window.bfxReportElectronApi?.onProgressToastEvent((args) => {
