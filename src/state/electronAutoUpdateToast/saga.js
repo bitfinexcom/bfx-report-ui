@@ -34,37 +34,25 @@ function* waitForCloseOrNext() {
 // so the main loop can handle it immediately without waiting for another take.
 function* handleTemplate({ timer, toastId, progress }) {
   // auto close by timer or when progress is already 100
-  const effectiveTimer = progress >= 100 ? 1000 : timer
+  let effectiveTimer = progress >= 100 ? 1000 : timer
 
   if (!Number.isInteger(effectiveTimer)) {
     // no timer - wait for user action, next template, or progress 100%
-    const { close, next, progress100 } = yield* waitForCloseOrNext()
+    const { close, next } = yield* waitForCloseOrNext()
 
     if (close) {
       yield* sendCloseEvent(close.payload, toastId)
-    } else if (next) {
+      return null
+    }
+    if (next) {
       // race consumed the next template action, pass it back
       // to the main loop so it's handled immediately
       return next
-    } else if (progress100) {
-      // Download complete - give 1s grace period before auto-closing.
-      // If user clicks a button or a new toast arrives during that
-      // second, the timeout is cancelled and their action takes priority.
-      const result = yield race({
-        timeout: delay(1000),
-        close: take(types.CLOSE_AUTO_UPDATE_TOAST),
-        next: take(types.SET_AUTO_UPDATE_TOAST_TEMPLATE),
-      })
-
-      if (result.timeout) {
-        yield* sendCloseEvent('close', toastId)
-      } else if (result.close) {
-        yield* sendCloseEvent(result.close.payload, toastId)
-      } else if (result.next) {
-        return result.next
-      }
     }
-    return null
+
+    // Download complete - give 1s grace period before auto-closing,
+    // fall through to the common timer race below
+    effectiveTimer = 1000
   }
 
   // wait for timer, user action, or next template - whichever comes first
@@ -81,7 +69,7 @@ function* handleTemplate({ timer, toastId, progress }) {
   } else if (next) {
     return next
   }
-  // if next - do nothing, handleElectronLoad already sent close for prev toast
+
   return null
 }
 
