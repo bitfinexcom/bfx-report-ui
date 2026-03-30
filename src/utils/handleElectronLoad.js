@@ -25,21 +25,17 @@ const handleElectronLoad = () => {
       store.dispatch(setElectronMenuHidden(state))
     })
     window.bfxReportElectronApi?.onFireToastEvent((args) => {
-      console.log('==bfxReportElectronApi?.onFireToastEvent==', args)
-
+      // close previous toast before showing the next one
       const { toastId: prevToastId } = selectAutoUpdateToast(store.getState())
       if (prevToastId) {
-        console.log('==bfxReportElectronApi?.sendToastClosedEvent==', 'close', prevToastId)
         window.bfxReportElectronApi?.sendToastClosedEvent({
           toastId: prevToastId,
           dismiss: 'close',
         })
       }
-
       store.dispatch(setAutoUpdateToastTemplate(args))
     })
     window.bfxReportElectronApi?.onProgressToastEvent((args) => {
-      console.log('==bfxReportElectronApi?.onProgressToastEvent==', args)
       store.dispatch(setAutoUpdateToastProgress(args?.progress))
     })
   })

@@ -7,7 +7,6 @@ import types from './constants'
 import { hideAutoUpdateToast } from './actions'
 
 function* sendCloseEvent(dismiss, toastId) {
-  console.log('==bfxReportElectronApi?.sendToastClosedEvent==', dismiss, toastId)
   window.bfxReportElectronApi?.sendToastClosedEvent({
     toastId,
     dismiss,
