@@ -1,5 +1,5 @@
 import { put, call } from 'redux-saga/effects'
-import { cloneableGenerator } from 'redux-saga/utils'
+import { cloneableGenerator } from '@redux-saga/testing-utils'
 
 import { fetchFeesReport, getFeesReport } from '../saga'
 import actions from '../actions'
