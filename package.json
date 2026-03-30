@@ -82,11 +82,6 @@
     "lint": "eslint src scripts --ignore-path .gitignore",
     "lintFix": "eslint src scripts --fix --ignore-path .gitignore"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run lint"
-    }
-  },
   "engines": {
     "node": ">=18.17.1",
     "npm": ">=9.6.7"
