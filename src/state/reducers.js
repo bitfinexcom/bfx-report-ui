@@ -16,6 +16,7 @@ import changeLogsReducer from './changeLogs/reducer'
 import columnsReducer from './columns/reducer'
 import derivativesReducer from './derivatives/reducer'
 import electronMenuReducer from './electronMenu/reducer'
+import electronAutoUpdateToastReducer from './electronAutoUpdateToast/reducer'
 import feesReportReducer from './feesReport/reducer'
 import filtersReducer from './filters/reducer'
 import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
@@ -117,6 +118,7 @@ const FRAMEWORK_REDUCERS = {
   loanReport: loanReportReducer,
   tradedVolume: tradedVolumeReducer,
   electronMenu: electronMenuReducer,
+  electronAutoUpdateToast: electronAutoUpdateToastReducer,
   feesReport: feesReportReducer,
   winLoss: winLossReducer,
   snapshots: snapshotsReducer,
