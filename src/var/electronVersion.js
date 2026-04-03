@@ -11,7 +11,7 @@ const getDefaultExt = (platform) => {
     return 'exe'
   }
   if (isEqual(platform, PLATFORMS.linux)) {
-    return 'AppImage.zip'
+    return 'deb'
   }
 
   return 'zip'
