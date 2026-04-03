@@ -52,7 +52,7 @@
     "redux-first-history": "^5.2.0",
     "redux-logger": "3.0.6",
     "redux-persist": "6.0.0",
-    "redux-saga": "0.16.2",
+    "redux-saga": "1.4.2",
     "sass": "1.50.0",
     "shelljs": "^0.10.0"
   },
