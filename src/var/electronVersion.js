@@ -2,7 +2,7 @@ import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import { PLATFORMS } from 'utils/getOS'
 
-const DEFAULT_ELECTRON_VERSION = '4.17.0'
+const DEFAULT_ELECTRON_VERSION = '4.42.0'
 
 const APP_RELEASES_URL = 'https://github.com/bitfinexcom/bfx-report-electron/releases/download/'
 
