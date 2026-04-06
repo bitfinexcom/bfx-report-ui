@@ -14,14 +14,23 @@ export const AppToaster = Toaster.create({
   position: Position.BOTTOM_RIGHT,
 })
 
+let lastShownMsg = null
+
 export const Status = ({
   clearStatus,
   intent,
   msg = {},
 }) => {
   if (!msg.id) {
+    lastShownMsg = null
     return ''
   }
+
+  if (msg === lastShownMsg) {
+    return ''
+  }
+
+  lastShownMsg = msg
 
   const params = {
     ...msg,

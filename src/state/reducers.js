@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux'
 import { persistReducer, createMigrate } from 'redux-persist'
-import { connectRouter } from 'connected-react-router'
 import storage from 'redux-persist/lib/storage'
 
 import config from 'config'
 import persistMigrations from 'state/persist.migrations'
 
-import history from './createdHistory'
+import { routerReducer } from './createdHistory'
 import accountBalanceReducer from './accountBalance/reducer'
 import accountSummaryReducer from './accountSummary/reducer'
 import affiliatesEarningsReducer from './affiliatesEarnings/reducer'
@@ -17,6 +16,7 @@ import changeLogsReducer from './changeLogs/reducer'
 import columnsReducer from './columns/reducer'
 import derivativesReducer from './derivatives/reducer'
 import electronMenuReducer from './electronMenu/reducer'
+import electronAutoUpdateToastReducer from './electronAutoUpdateToast/reducer'
 import feesReportReducer from './feesReport/reducer'
 import filtersReducer from './filters/reducer'
 import fundingCreditHistoryReducer from './fundingCreditHistory/reducer'
@@ -99,7 +99,7 @@ const BASE_REDUCERS = {
   profits: profitsReducer,
   publicFunding: publicFundingReducer,
   publicTrades: publicTradesReducer,
-  router: connectRouter(history),
+  router: routerReducer,
   routing: routingReducer,
   spayments: stakingPaymentsReducer,
   query: queryReducer,
@@ -118,6 +118,7 @@ const FRAMEWORK_REDUCERS = {
   loanReport: loanReportReducer,
   tradedVolume: tradedVolumeReducer,
   electronMenu: electronMenuReducer,
+  electronAutoUpdateToast: electronAutoUpdateToastReducer,
   feesReport: feesReportReducer,
   winLoss: winLossReducer,
   snapshots: snapshotsReducer,

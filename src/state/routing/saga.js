@@ -1,5 +1,7 @@
-import { put, select, takeLatest } from 'redux-saga/effects'
-import { LOCATION_CHANGE, replace } from 'connected-react-router'
+import {
+  call, put, select, takeLatest,
+} from 'redux-saga/effects'
+import { LOCATION_CHANGE, replace } from 'redux-first-history'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import { getTarget } from 'state/query/utils'
@@ -14,18 +16,19 @@ import { getLastRoute, getRouteParams } from './selectors'
 
 const { MENU_ORDER_TRADES } = queryConstants
 
-function* locationChange({ payload }) {
-  const { isFirstRendering, location } = payload
-  const { pathname, search, state } = location
-
-  if (isFirstRendering) {
-    // redirects from legacy sections `deposits' and 'withdrawals' to 'movements' on first render
-    if (pathname.includes('/deposits') || pathname.includes('/withdrawals')) {
-      const [, , symbols] = pathname.split('/')
-      yield put(replace(`/movements${symbols ? `/${symbols}` : ''}${search || ''}`, { isSkipped: true }))
-      return
-    }
+// handles legacy route redirects on app startup
+// runs once before LOCATION_CHANGE listeners are set up, avoiding takeLatest race conditions
+function* handleLegacyRedirects() {
+  const { pathname, search } = window.location
+  if (pathname.includes('/deposits') || pathname.includes('/withdrawals')) {
+    const [, , symbols] = pathname.split('/')
+    yield put(replace(`/movements${symbols ? `/${symbols}` : ''}${search || ''}`, { isSkipped: true }))
   }
+}
+
+function* locationChange({ payload }) {
+  const { location } = payload
+  const { pathname, state } = location
 
   if (!isEmpty(state) && state.isSkipped) {
     return
@@ -42,8 +45,8 @@ function* locationChange({ payload }) {
     return
   }
 
-  // return previously saved params on route change
-  if (route !== lastRoute && !isFirstRendering) {
+  // return previously saved params on route change (skip on first load when lastRoute is not yet set)
+  if (route !== lastRoute && lastRoute) {
     const routeParams = yield select(getRouteParams, route)
     if (isEmpty(routeParams)) {
       const query = getQueryWithoutParams(Object.keys(FILTER_KEYS)) // remove filters of current section
@@ -100,6 +103,7 @@ function* filtersSet({ payload }) {
 }
 
 export default function* routingSaga() {
+  yield call(handleLegacyRedirects)
   yield takeLatest(LOCATION_CHANGE, locationChange)
   yield takeLatest(LOCATION_CHANGE, lastRouteSet)
   yield takeLatest(filterTypes.SET_FILTERS, filtersSet)
