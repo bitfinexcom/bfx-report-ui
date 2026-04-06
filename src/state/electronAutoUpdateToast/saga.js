@@ -1,7 +1,6 @@
 import {
-  take, race, put,
+  take, race, put, delay,
 } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
 
 import types from './constants'
 import { hideAutoUpdateToast } from './actions'
