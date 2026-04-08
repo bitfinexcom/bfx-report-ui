@@ -33,7 +33,7 @@
     "i18next-http-backend": "1.4.0",
     "js-cookie": "2.2.1",
     "lightweight-charts": "^1.2.1",
-    "lodash": "4.17.23",
+    "lodash": "4.18.1",
     "memoize-one": "^5.0.2",
     "moment": "2.29.4",
     "moment-timezone": "0.5.35",
@@ -81,11 +81,6 @@
     "test": "react-scripts test --env=jsdom --modulePaths=src --verbose --color --watchAll=false",
     "lint": "eslint src scripts --ignore-path .gitignore",
     "lintFix": "eslint src scripts --fix --ignore-path .gitignore"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run lint"
-    }
   },
   "engines": {
     "node": ">=18.17.1",
