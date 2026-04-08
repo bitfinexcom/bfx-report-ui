@@ -1,5 +1,5 @@
 import React from 'react'
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { FocusStyleManager } from '@blueprintjs/core'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -23,13 +23,13 @@ import packageInfo from '../package.json'
 
 const { version } = packageInfo
 
-const root = createRoot(document.getElementById('root'))
-root.render(
+ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <App />
     </PersistGate>
   </Provider>,
+  document.getElementById('root'),
 )
 
 window.addEventListener('load', () => {
