@@ -1,5 +1,6 @@
 import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import Select from 'ui/Select'
 
@@ -17,9 +18,9 @@ const ReportTypeSelector = ({
       value={value}
       items={items}
       onChange={onChange}
-      className={className}
       type={'Select Report Type'}
       popoverClassName='bitfinex-select-menu--report-type'
+      className={classNames('bitfinex-select--report-type', className)}
     />
   )
 }
