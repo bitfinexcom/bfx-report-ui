@@ -6,8 +6,8 @@ import {
   put,
   select,
   takeLatest,
+  delay,
 } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
 import _last from 'lodash/last'
 import _isArray from 'lodash/isArray'
 import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
