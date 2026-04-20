@@ -1,5 +1,6 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import React, { useMemo, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import classNames from 'classnames'
 import _sortBy from 'lodash/sortBy'
@@ -25,9 +26,29 @@ import {
 } from 'ui/Charts/Charts.helpers'
 import ReportTypeSelector from 'ui/ReportTypeSelector'
 import UnrealizedProfitSelector from 'ui/UnrealizedProfitSelector'
+import {
+  setParams,
+  fetchWinLoss,
+  setReportType,
+} from 'state/winLoss/actions'
+import {
+  getParams,
+  getEntries,
+  getReportType,
+  getPageLoading,
+  getDataReceived,
+  getCurrentFetchParams,
+} from 'state/winLoss/selectors'
+import { getIsTimeframeMoreThanYear } from 'state/timeRange/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
 import queryConstants from 'state/query/constants'
-import { checkFetch, checkInit } from 'state/utils'
 import constants from 'ui/ReportTypeSelector/constants'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
 
 const TYPE = queryConstants.MENU_WIN_LOSS
 
@@ -65,156 +86,125 @@ const getReportTypeParams = (type) => {
   }
 }
 
-class AverageWinLoss extends PureComponent {
-  static propTypes = {
-    currentFetchParams: PropTypes.shape({
-      timeframe: PropTypes.string,
-      isUnrealizedProfitExcluded: PropTypes.bool,
-      isVsAccountBalanceSelected: PropTypes.bool,
-    }),
-    dataReceived: PropTypes.bool.isRequired,
-    entries: PropTypes.arrayOf(PropTypes.shape({
-      mts: PropTypes.number,
-      USD: PropTypes.number,
-    })),
-    isFirstSyncing: PropTypes.bool.isRequired,
-    pageLoading: PropTypes.bool.isRequired,
-    params: PropTypes.shape({
-      timeframe: PropTypes.string,
-      isUnrealizedProfitExcluded: PropTypes.bool,
-      isVsAccountBalanceSelected: PropTypes.bool,
-    }),
-    reportType: PropTypes.string.isRequired,
-    setParams: PropTypes.func.isRequired,
-    setReportType: PropTypes.func.isRequired,
-    shouldShowYear: PropTypes.bool.isRequired,
-    t: PropTypes.func.isRequired,
-  }
+const AverageWinLoss = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const entries = useSelector(getEntries)
+  const params = useSelector(getParams)
+  const reportType = useSelector(getReportType)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const isFirstSyncing = useSelector(getIsFirstSyncing)
+  const currentFetchParams = useSelector(getCurrentFetchParams)
+  const shouldShowYear = useSelector(getIsTimeframeMoreThanYear)
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
 
-  static defaultProps = {
-    currentFetchParams: {},
-    entries: [],
-    params: {},
-  }
+  const { timeframe, isUnrealizedProfitExcluded, isVsAccountBalanceSelected } = params
+  const { timeframe: currTimeframe } = currentFetchParams
 
-  componentDidMount() {
-    checkInit(this.props, TYPE)
-  }
+  useFetchLifecycle(TYPE, {
+    params,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    shouldRefreshAfterSync,
+    fetchData: () => dispatch(fetchWinLoss()),
+    setShouldRefreshAfterSync: (val) => dispatch(setShouldRefreshAfterSync(val)),
+  })
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
-  }
+  const handleTimeframeChange = useCallback((tf) => {
+    dispatch(setParams({ timeframe: tf }))
+  }, [dispatch])
 
-  handleTimeframeChange = (timeframe) => {
-    const { setParams } = this.props
-    setParams({ timeframe })
-  }
+  const handleUnrealizedProfitChange = useCallback((val) => {
+    dispatch(setParams({ isUnrealizedProfitExcluded: val }))
+  }, [dispatch])
 
-  handleUnrealizedProfitChange = (isUnrealizedProfitExcluded) => {
-    const { setParams } = this.props
-    setParams({ isUnrealizedProfitExcluded })
-  }
+  const handleReportTypeChange = useCallback((rpType) => {
+    const rpParams = getReportTypeParams(rpType)
+    dispatch(setReportType(rpType))
+    dispatch(setParams(rpParams))
+  }, [dispatch])
 
-  handleReportTypeChange = (type) => {
-    const { setParams, setReportType } = this.props
-    const params = getReportTypeParams(type)
-    setReportType(type)
-    setParams(params)
-  }
+  const paramChangerClass = classNames({ disabled: isFirstSyncing })
 
-  render() {
-    const {
-      t,
-      entries,
-      pageLoading,
-      dataReceived,
-      isFirstSyncing,
-      currentFetchParams: {
-        timeframe: currTimeframe,
-      },
-      params: {
-        timeframe,
-        isUnrealizedProfitExcluded,
-        isVsAccountBalanceSelected,
-      },
-      reportType,
-      shouldShowYear,
-    } = this.props
-    const paramChangerClass = classNames({ disabled: isFirstSyncing })
-
-    const { chartData, dataKeys } = prepareChartData(
+  const { chartData, dataKeys } = useMemo(
+    () => prepareChartData(
       entries, currTimeframe, isVsAccountBalanceSelected, shouldShowYear, t,
-    )
+    ),
+    [entries, currTimeframe, isVsAccountBalanceSelected, shouldShowYear, t],
+  )
 
-    let showContent
-    if (isFirstSyncing) {
-      showContent = <InitSyncNote />
-    } else if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
-    } else {
-      showContent = (
-        <Chart
-          data={chartData}
-          dataKeys={dataKeys}
-        />
-      )
-    }
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader>
-          <SectionHeaderTitle>
-            {t('averagewinloss.title')}
-          </SectionHeaderTitle>
-          <SectionSwitch target={TYPE} />
-          <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.date')}
-              </SectionHeaderItemLabel>
-              <TimeRange className={paramChangerClass} />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.select')}
-              </SectionHeaderItemLabel>
-              <TimeFrameSelector
-                value={timeframe}
-                className={paramChangerClass}
-                onChange={this.handleTimeframeChange}
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.unrealized-profits.title')}
-              </SectionHeaderItemLabel>
-              <UnrealizedProfitSelector
-                className={paramChangerClass}
-                value={isUnrealizedProfitExcluded}
-                onChange={this.handleUnrealizedProfitChange}
-              />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.report-type.title')}
-              </SectionHeaderItemLabel>
-              <ReportTypeSelector
-                section={TYPE}
-                value={reportType}
-                className={paramChangerClass}
-                onChange={this.handleReportTypeChange}
-              />
-            </SectionHeaderItem>
-          </SectionHeaderRow>
-        </SectionHeader>
-        {showContent}
-      </Card>
+  let showContent
+  if (isFirstSyncing) {
+    showContent = <InitSyncNote />
+  } else if (!dataReceived && pageLoading) {
+    showContent = <Loading />
+  } else if (isEmpty(entries)) {
+    showContent = <NoData />
+  } else {
+    showContent = (
+      <Chart
+        data={chartData}
+        dataKeys={dataKeys}
+      />
     )
   }
+
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('averagewinloss.title')}
+        </SectionHeaderTitle>
+        <SectionSwitch target={TYPE} />
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.date')}
+            </SectionHeaderItemLabel>
+            <TimeRange className={paramChangerClass} />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.select')}
+            </SectionHeaderItemLabel>
+            <TimeFrameSelector
+              value={timeframe}
+              className={paramChangerClass}
+              onChange={handleTimeframeChange}
+            />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.unrealized-profits.title')}
+            </SectionHeaderItemLabel>
+            <UnrealizedProfitSelector
+              className={paramChangerClass}
+              value={isUnrealizedProfitExcluded}
+              onChange={handleUnrealizedProfitChange}
+            />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.report-type.title')}
+            </SectionHeaderItemLabel>
+            <ReportTypeSelector
+              section={TYPE}
+              value={reportType}
+              className={paramChangerClass}
+              onChange={handleReportTypeChange}
+            />
+          </SectionHeaderItem>
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
 }
 
 export default AverageWinLoss
