@@ -104,12 +104,12 @@ const AverageWinLoss = () => {
   const { timeframe: currTimeframe } = currentFetchParams
 
   useFetchLifecycle(TYPE, {
-    dataReceived,
-    pageLoading,
-    isSyncRequired,
-    fetchData: () => dispatch(fetchWinLoss()),
     params,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
     shouldRefreshAfterSync,
+    fetchData: () => dispatch(fetchWinLoss()),
     setShouldRefreshAfterSync: (val) => dispatch(setShouldRefreshAfterSync(val)),
   })
 

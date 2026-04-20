@@ -9,23 +9,23 @@ import { getMappedSymbolsFromUrl } from 'state/symbols/utils'
 const { showFrameworkMode } = config
 
 const useFetchLifecycle = (type, {
-  dataReceived,
-  pageLoading,
-  isSyncRequired,
-  fetchData,
   match,
+  params,
+  fetchData,
+  pageLoading,
+  dataReceived,
   setTargetPair,
+  isSyncRequired,
   setTargetPairs,
   setTargetSymbol,
   setTargetSymbols,
-  params,
   shouldRefreshAfterSync,
   setShouldRefreshAfterSync,
 } = {}) => {
+  const prevParams = useRef(params)
   const isFirstRender = useRef(true)
   const prevDataReceived = useRef(dataReceived)
   const prevIsSyncRequired = useRef(isSyncRequired)
-  const prevParams = useRef(params)
 
   // checkInit (mount only)
   useEffect(() => {
