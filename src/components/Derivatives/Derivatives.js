@@ -92,9 +92,9 @@ const Derivatives = () => {
     isNoData,
     isLoading,
     timeOffset,
-    getFullTime: getFullTimeFn,
     columnsWidth,
     filteredData: entries,
+    getFullTime: getFullTimeFn,
   }).filter(({ id }) => columns[id])
 
   let showContent
