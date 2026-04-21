@@ -6,8 +6,8 @@ import { generateUrl } from 'state/utils'
 import { demapPairs } from 'state/symbols/utils'
 
 const usePairFilter = (type, {
-  getTargetPairs,
   addTargetPair,
+  getTargetPairs,
   removeTargetPair,
   clearTargetPairs,
 }) => {

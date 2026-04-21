@@ -47,25 +47,25 @@ const TYPE = queryConstants.MENU_DERIVATIVES
 const Derivatives = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const match = useRouteMatch('/derivatives/:pair')
-  const entries = useSelector(getEntries)
   const pairs = useSelector(getPairs)
-  const columns = useSelector(state => getColumns(state, TYPE))
-  const columnsWidth = useSelector(state => getColumnsWidth(state, TYPE))
+  const entries = useSelector(getEntries)
   const timeOffset = useSelector(getTimeOffset)
   const getFullTimeFn = useSelector(getFullTime)
   const pageLoading = useSelector(getPageLoading)
   const dataReceived = useSelector(getDataReceived)
+  const match = useRouteMatch('/derivatives/:pair')
   const existingPairs = useSelector(getExistingPairs)
   const inactivePairs = useSelector(getInactivePairs)
   const isSyncRequired = useSelector(getIsSyncRequired)
+  const columns = useSelector(state => getColumns(state, TYPE))
+  const columnsWidth = useSelector(state => getColumnsWidth(state, TYPE))
 
   useFetchLifecycle(TYPE, {
-    dataReceived,
+    match,
     pageLoading,
+    dataReceived,
     isSyncRequired,
     fetchData: () => dispatch(fetchDerivatives()),
-    match,
     setTargetPairs: (p) => dispatch(setTargetPairs(p)),
   })
 
