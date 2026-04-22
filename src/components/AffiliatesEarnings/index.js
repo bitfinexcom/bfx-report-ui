@@ -1,1 +1,1 @@
-export { default } from './AffiliatesEarnings.container'
+export { default } from './AffiliatesEarnings'
