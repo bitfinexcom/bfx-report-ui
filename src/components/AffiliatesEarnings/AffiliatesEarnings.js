@@ -33,14 +33,14 @@ import {
   getDataReceived,
   getExistingCoins,
 } from 'state/affiliatesEarnings/selectors'
-import { getFullTime, getTimeOffset } from 'state/base/selectors'
-import { getFilteredEntries } from 'state/pagination/selectors'
+import useSymbolFilter from 'hooks/useSymbolFilter'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
+import queryConstants from 'state/query/constants'
 import { getColumns } from 'state/filters/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
 import { getColumnsWidth } from 'state/columns/selectors'
-import queryConstants from 'state/query/constants'
-import useFetchLifecycle from 'hooks/useFetchLifecycle'
-import useSymbolFilter from 'hooks/useSymbolFilter'
+import { getFilteredEntries } from 'state/pagination/selectors'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getColumns as getTableColumns } from 'components/Ledgers/Ledgers.columns'
 
 import AffiliatesLink from './AffiliatesEarnings.link'
