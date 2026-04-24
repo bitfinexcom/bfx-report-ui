@@ -9,6 +9,7 @@ import {
   MenuDivider,
 } from '@blueprintjs/core'
 import _map from 'lodash/map'
+import _filter from 'lodash/filter'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import types from 'state/electronMenu/constants'
@@ -18,6 +19,7 @@ import SubMenu from './ElectronMenu.submenu'
 
 const DropdownMenu = ({ label, items }) => {
   const dispatch = useDispatch()
+  const visibleItems = _filter(items, 'visible')
 
   return (
     <div className='electron-menu-item'>
@@ -28,7 +30,7 @@ const DropdownMenu = ({ label, items }) => {
         content={(
           <div className='electron-menu-item-content'>
             <Menu>
-              {_map(items, ({
+              {_map(visibleItems, ({
                 id, label: itemLabel, type, accelerator, enabled, submenu,
               }, index) => {
                 if (isEqual(type, types.SEPARATOR)) return <MenuDivider key={index} />
@@ -66,6 +68,7 @@ DropdownMenu.propTypes = {
     type: PropTypes.string,
     label: PropTypes.string,
     enabled: PropTypes.bool,
+    visible: PropTypes.bool,
     submenu: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
     accelerator: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   })),
