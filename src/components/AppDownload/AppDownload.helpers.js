@@ -13,7 +13,7 @@ export const getDownloadLink = (version) => {
       return getElectronReleaseLink({ version, platform, ext: 'exe' })
     case PLATFORMS.linux:
     default:
-      return getElectronReleaseLink({ version, platform, ext: 'AppImage.zip' })
+      return getElectronReleaseLink({ version, platform, ext: 'deb' })
   }
 }
 

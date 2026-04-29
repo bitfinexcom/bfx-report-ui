@@ -57,6 +57,6 @@ function* fetchWeightedAveragesFail({ payload }) {
 }
 
 export default function* weightedAveragesSaga() {
-  yield takeLatest([types.FETCH_WEIGHTED_AVERAGES, types.CLEAR_PAIRS], fetchWeightedAverages)
+  yield takeLatest(types.FETCH_WEIGHTED_AVERAGES, fetchWeightedAverages)
   yield takeLatest(types.FETCH_FAIL, fetchWeightedAveragesFail)
 }

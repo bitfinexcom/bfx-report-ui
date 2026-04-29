@@ -3,8 +3,8 @@ import {
   call,
   select,
   takeLatest,
+  delay,
 } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
 import { get, isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
@@ -36,7 +36,7 @@ function* updateTheme() {
 const WAIT_INTERVAL = 500
 
 function* updateLang() {
-  yield call(delay, WAIT_INTERVAL)
+  yield delay(WAIT_INTERVAL)
   const locale = yield select(getLocale)
   i18n.changeLanguage(LANGUAGES[locale])
 }

@@ -4,8 +4,8 @@ import {
   put,
   select,
   takeLatest,
+  delay,
 } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
 import _includes from 'lodash/includes'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 

@@ -1,1 +1,1 @@
-export { default } from './AverageWinLoss.container'
+export { default } from './AverageWinLoss'
