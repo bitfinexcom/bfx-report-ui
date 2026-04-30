@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import memoizeOne from 'memoize-one'
+import React, { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouteMatch } from 'react-router-dom'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -16,167 +17,146 @@ import ColumnsFilter from 'ui/ColumnsFilter'
 import DerivativesSyncPref from 'ui/DerivativesSyncPref'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiPairSelector from 'ui/MultiPairSelector'
-import queryConstants from 'state/query/constants'
 import {
-  checkInit,
-  checkFetch,
-  togglePair,
-  clearAllPairs,
-} from 'state/utils'
+  addTargetPair,
+  setTargetPairs,
+  removeTargetPair,
+  clearTargetPairs,
+  fetchDerivatives,
+} from 'state/derivatives/actions'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getInactivePairs, getPairs } from 'state/symbols/selectors'
+import {
+  getEntries,
+  getPageLoading,
+  getTargetPairs,
+  getDataReceived,
+  getExistingPairs,
+} from 'state/derivatives/selectors'
+import queryConstants from 'state/query/constants'
+import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
+import usePairFilter from 'hooks/usePairFilter'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
 
-import { getColumns } from './Derivatives.columns'
+import { getColumns as getTableColumns } from './Derivatives.columns'
 
 const TYPE = queryConstants.MENU_DERIVATIVES
 
-class Derivatives extends PureComponent {
-  static propTypes = {
-    columns: PropTypes.shape({
-      clampMax: PropTypes.bool,
-      clampMin: PropTypes.bool,
-      fundBal: PropTypes.bool,
-      fundingAccrued: PropTypes.bool,
-      fundingStep: PropTypes.bool,
-      pair: PropTypes.bool,
-      price: PropTypes.bool,
-      priceSpot: PropTypes.bool,
-      timestamp: PropTypes.bool,
-    }),
-    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      width: PropTypes.number,
-    })),
-    dataReceived: PropTypes.bool.isRequired,
-    entries: PropTypes.arrayOf(PropTypes.shape({
-      pair: PropTypes.string,
-    })),
-    existingPairs: PropTypes.arrayOf(PropTypes.string),
-    getFullTime: PropTypes.func.isRequired,
-    inactivePairs: PropTypes.arrayOf(PropTypes.string),
-    pairs: PropTypes.arrayOf(PropTypes.string),
-    pageLoading: PropTypes.bool.isRequired,
-    t: PropTypes.func.isRequired,
-    targetPairs: PropTypes.arrayOf(PropTypes.string),
-    timeOffset: PropTypes.string.isRequired,
-  }
+const Derivatives = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const pairs = useSelector(getPairs)
+  const entries = useSelector(getEntries)
+  const timeOffset = useSelector(getTimeOffset)
+  const getFullTimeFn = useSelector(getFullTime)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const match = useRouteMatch('/derivatives/:pair')
+  const existingPairs = useSelector(getExistingPairs)
+  const inactivePairs = useSelector(getInactivePairs)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const columns = useSelector(state => getColumns(state, TYPE))
+  const columnsWidth = useSelector(state => getColumnsWidth(state, TYPE))
 
-  static defaultProps = {
-    columns: {},
-    columnsWidth: [],
-    entries: [],
-    existingPairs: [],
-    inactivePairs: [],
-    pairs: [],
-    targetPairs: [],
-  }
+  useFetchLifecycle(TYPE, {
+    match,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    fetchData: () => dispatch(fetchDerivatives()),
+    setTargetPairs: (p) => dispatch(setTargetPairs(p)),
+  })
 
-  constructor() {
-    super()
+  const { targetPairs, togglePair, clearPairs } = usePairFilter(TYPE, {
+    getTargetPairs,
+    addTargetPair,
+    removeTargetPair,
+    clearTargetPairs,
+  })
 
-    this.getFilteredPairs = memoizeOne(this.getFilteredPairs)
-  }
+  const filteredPairs = useMemo(
+    () => pairs.filter(pair => pair.includes('F0') || pair.includes('PERP')),
+    [pairs],
+  )
+  const filteredInactivePairs = useMemo(
+    () => inactivePairs.filter(pair => pair.includes('F0') || pair.includes('PERP')),
+    [inactivePairs],
+  )
 
-  componentDidMount() {
-    checkInit(this.props, TYPE)
-  }
+  const isNoData = isEmpty(entries)
+  const isLoading = !dataReceived && pageLoading
+  const tableColumns = getTableColumns({
+    t,
+    isNoData,
+    isLoading,
+    timeOffset,
+    columnsWidth,
+    filteredData: entries,
+    getFullTime: getFullTimeFn,
+  }).filter(({ id }) => columns[id])
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
-  }
-
-  getFilteredPairs = pairs => pairs.filter(pair => pair.includes('F0') || pair.includes('PERP'))
-
-  togglePair = pair => togglePair(TYPE, this.props, pair)
-
-  clearPairs = () => clearAllPairs(TYPE, this.props)
-
-  render() {
-    const {
-      t,
-      pairs,
-      columns,
-      entries,
-      timeOffset,
-      pageLoading,
-      targetPairs,
-      getFullTime,
-      columnsWidth,
-      dataReceived,
-      existingPairs,
-      inactivePairs,
-    } = this.props
-    const isNoData = isEmpty(entries)
-    const isLoading = !dataReceived && pageLoading
-    const tableColumns = getColumns({
-      t,
-      isNoData,
-      isLoading,
-      timeOffset,
-      getFullTime,
-      columnsWidth,
-      filteredData: entries,
-    }).filter(({ id }) => columns[id])
-
-    let showContent
-    if (isNoData) {
-      showContent = (
-        <div className='data-table-wrapper'>
-          <DataTable
-            section={TYPE}
-            isNoData={isNoData}
-            isLoading={isLoading}
-            tableColumns={tableColumns}
-            numRows={isLoading ? 5 : 1}
-          />
-        </div>
-      )
-    } else {
-      showContent = (
-        <>
-          <DataTable
-            section={TYPE}
-            tableColumns={tableColumns}
-            numRows={isLoading ? 5 : entries.length}
-          />
-        </>
-      )
-    }
-
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader>
-          <SectionHeaderTitle>
-            {t('derivatives.title')}
-          </SectionHeaderTitle>
-          <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
-              </SectionHeaderItemLabel>
-              <MultiPairSelector
-                currentFilters={targetPairs}
-                togglePair={this.togglePair}
-                existingPairs={existingPairs}
-                pairs={this.getFilteredPairs(pairs)}
-                inactivePairs={this.getFilteredPairs(inactivePairs)}
-              />
-            </SectionHeaderItem>
-            <ClearFiltersButton onClick={this.clearPairs} />
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.columns')}
-              </SectionHeaderItemLabel>
-              <ColumnsFilter target={TYPE} />
-            </SectionHeaderItem>
-            <DerivativesSyncPref />
-          </SectionHeaderRow>
-        </SectionHeader>
-        {showContent}
-      </Card>
+  let showContent
+  if (isNoData) {
+    showContent = (
+      <div className='data-table-wrapper'>
+        <DataTable
+          section={TYPE}
+          isNoData={isNoData}
+          isLoading={isLoading}
+          tableColumns={tableColumns}
+          numRows={isLoading ? 5 : 1}
+        />
+      </div>
+    )
+  } else {
+    showContent = (
+      <>
+        <DataTable
+          section={TYPE}
+          tableColumns={tableColumns}
+          numRows={isLoading ? 5 : entries.length}
+        />
+      </>
     )
   }
+
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('derivatives.title')}
+        </SectionHeaderTitle>
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.symbol')}
+            </SectionHeaderItemLabel>
+            <MultiPairSelector
+              currentFilters={targetPairs}
+              togglePair={togglePair}
+              existingPairs={existingPairs}
+              pairs={filteredPairs}
+              inactivePairs={filteredInactivePairs}
+            />
+          </SectionHeaderItem>
+          <ClearFiltersButton onClick={clearPairs} />
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.columns')}
+            </SectionHeaderItemLabel>
+            <ColumnsFilter target={TYPE} />
+          </SectionHeaderItem>
+          <DerivativesSyncPref />
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
 }
 
 export default Derivatives
