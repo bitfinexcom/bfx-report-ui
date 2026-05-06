@@ -3,16 +3,18 @@ import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { MenuItem } from '@blueprintjs/core'
 import _map from 'lodash/map'
+import _filter from 'lodash/filter'
 
 import { executeMenuCommand } from 'state/electronMenu/actions'
 
 const SubMenu = ({ label, items }) => {
   const dispatch = useDispatch()
+  const visibleItems = _filter(items, 'visible')
 
   return (
     <div className='electron-menu-submenu'>
       <MenuItem text={label}>
-        {_map(items, ({
+        {_map(visibleItems, ({
           id, label: itemLabel, accelerator, enabled,
         }, index) => (
           <MenuItem
@@ -34,6 +36,7 @@ SubMenu.propTypes = {
     id: PropTypes.string,
     label: PropTypes.string,
     enabled: PropTypes.bool,
+    visible: PropTypes.bool,
     accelerator: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   })),
   label: PropTypes.string,
