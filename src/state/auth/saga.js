@@ -151,6 +151,7 @@ function* signUp({ payload }) {
         yield put(updateErrorStatus({
           id: 'status.authFail',
         }))
+        if (shouldRedirectToBfxLogin) yield call(redirectToBfxLogin)
       }
     }
   } catch (fail) {
