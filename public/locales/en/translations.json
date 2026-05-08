@@ -602,6 +602,7 @@
     "request": {
       "error": "{{topic}} request fail {{detail}}"
     },
+    "authFail": "Authentication Failed: Please login again",
     "signInFail": "Invalid credentials",
     "timeframe_update": "Time frame updated",
     "signUpFail": "Invalid API Key or Secret",
