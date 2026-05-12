@@ -32,9 +32,9 @@ import {
   getIsFirstSyncing,
   getShouldRefreshAfterSync,
 } from 'state/sync/selectors'
-import useFetchLifecycle from 'hooks/useFetchLifecycle'
 import queryConstants from 'state/query/constants'
 import { isValidTimeStamp } from 'state/query/utils'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
 
 import { getColumns } from './ConcentrationRisk.columns'
 
