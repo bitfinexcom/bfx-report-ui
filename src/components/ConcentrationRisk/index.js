@@ -1,1 +1,1 @@
-export { default } from './ConcentrationRisk.container'
+export { default } from './ConcentrationRisk'
