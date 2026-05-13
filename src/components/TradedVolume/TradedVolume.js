@@ -24,6 +24,7 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
+import queryConstants from 'state/query/constants'
 import {
   setParams,
   addTargetPair,
@@ -48,7 +49,6 @@ import {
 import { getIsTimeframeMoreThanYear } from 'state/timeRange/selectors'
 import usePairFilter from 'hooks/usePairFilter'
 import useFetchLifecycle from 'hooks/useFetchLifecycle'
-import queryConstants from 'state/query/constants'
 
 const TYPE = queryConstants.MENU_TRADED_VOLUME
 
