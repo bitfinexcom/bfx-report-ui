@@ -1,5 +1,7 @@
-import React, { PureComponent } from 'react'
-import { withTranslation } from 'react-i18next'
+import React, { useMemo, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouteMatch } from 'react-router-dom'
 import { Card, Elevation } from '@blueprintjs/core'
 import classNames from 'classnames'
 import _sortBy from 'lodash/sortBy'
@@ -22,116 +24,143 @@ import MultiPairSelector from 'ui/MultiPairSelector'
 import TimeFrameSelector from 'ui/TimeFrameSelector'
 import parseChartData from 'ui/Charts/Charts.helpers'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
-import queryConstants from 'state/query/constants'
 import {
-  checkInit,
-  checkFetch,
-  togglePair,
-  clearAllPairs,
-} from 'state/utils'
-
-import { propTypes, defaultProps } from './TradedVolume.props'
+  setParams,
+  addTargetPair,
+  setTargetPairs,
+  removeTargetPair,
+  clearTargetPairs,
+  fetchTradedVolume,
+} from 'state/tradedVolume/actions'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
+import {
+  getParams,
+  getEntries,
+  getTargetPairs,
+  getPageLoading,
+  getDataReceived,
+} from 'state/tradedVolume/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { getIsTimeframeMoreThanYear } from 'state/timeRange/selectors'
+import usePairFilter from 'hooks/usePairFilter'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
+import queryConstants from 'state/query/constants'
 
 const TYPE = queryConstants.MENU_TRADED_VOLUME
 
-class TradedVolume extends PureComponent {
-  componentDidMount() {
-    checkInit(this.props, TYPE)
-  }
+const TradedVolume = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const params = useSelector(getParams)
+  const entries = useSelector(getEntries)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const match = useRouteMatch('/traded_volume/:pair')
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const isFirstSyncing = useSelector(getIsFirstSyncing)
+  const shouldShowYear = useSelector(getIsTimeframeMoreThanYear)
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
-  }
+  const { timeframe } = params
 
-  handleTimeframeChange = (timeframe) => {
-    const { setParams } = this.props
-    setParams({ timeframe })
-  }
+  useFetchLifecycle(TYPE, {
+    match,
+    params,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    shouldRefreshAfterSync,
+    fetchData: () => dispatch(fetchTradedVolume()),
+    setTargetPairs: (p) => dispatch(setTargetPairs(p)),
+    setShouldRefreshAfterSync: (v) => dispatch(setShouldRefreshAfterSync(v)),
+  })
 
-  clearPairs = () => clearAllPairs(TYPE, this.props)
+  const { targetPairs, togglePair, clearPairs } = usePairFilter(TYPE, {
+    getTargetPairs,
+    addTargetPair,
+    removeTargetPair,
+    clearTargetPairs,
+  })
 
-  render() {
-    const {
-      t,
-      entries,
-      targetPairs,
-      pageLoading,
-      dataReceived,
-      isFirstSyncing,
-      shouldShowYear,
-      params: { timeframe },
-    } = this.props
-    const paramChangerClass = classNames({ disabled: isFirstSyncing })
+  const handleTimeframeChange = useCallback((tf) => {
+    dispatch(setParams({ timeframe: tf }))
+  }, [dispatch])
 
-    const { chartData, presentCurrencies } = parseChartData({
+  const { chartData, presentCurrencies } = useMemo(
+    () => parseChartData({
       timeframe,
       shouldShowYear,
       data: _sortBy(entries, ['mts']),
-    })
+    }),
+    [entries, timeframe, shouldShowYear],
+  )
 
-    let showContent
-    if (isFirstSyncing) {
-      showContent = <InitSyncNote />
-    } else if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
-    } else {
-      showContent = (
-        <Chart
-          isSumUpEnabled
-          data={chartData}
-          dataKeys={presentCurrencies}
-        />
-      )
-    }
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader>
-          <SectionHeaderTitle>
-            {t('tradedvolume.title')}
-          </SectionHeaderTitle>
-          <SectionSwitch target={TYPE} />
-          <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.date')}
-              </SectionHeaderItemLabel>
-              <TimeRange className={paramChangerClass} />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
-              </SectionHeaderItemLabel>
-              <MultiPairSelector
-                className={paramChangerClass}
-                currentFilters={targetPairs}
-                togglePair={pair => togglePair(TYPE, this.props, pair)}
-              />
-            </SectionHeaderItem>
-            <ClearFiltersButton onClick={this.clearPairs} />
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.select')}
-              </SectionHeaderItemLabel>
-              <TimeFrameSelector
-                value={timeframe}
-                className={paramChangerClass}
-                onChange={this.handleTimeframeChange}
-              />
-            </SectionHeaderItem>
-          </SectionHeaderRow>
-        </SectionHeader>
-        {showContent}
-      </Card>
+  const paramChangerClass = classNames({ disabled: isFirstSyncing })
+
+  let showContent
+  if (isFirstSyncing) {
+    showContent = <InitSyncNote />
+  } else if (!dataReceived && pageLoading) {
+    showContent = <Loading />
+  } else if (isEmpty(entries)) {
+    showContent = <NoData />
+  } else {
+    showContent = (
+      <Chart
+        isSumUpEnabled
+        data={chartData}
+        dataKeys={presentCurrencies}
+      />
     )
   }
+
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('tradedvolume.title')}
+        </SectionHeaderTitle>
+        <SectionSwitch target={TYPE} />
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.date')}
+            </SectionHeaderItemLabel>
+            <TimeRange className={paramChangerClass} />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.symbol')}
+            </SectionHeaderItemLabel>
+            <MultiPairSelector
+              togglePair={togglePair}
+              currentFilters={targetPairs}
+              className={paramChangerClass}
+            />
+          </SectionHeaderItem>
+          <ClearFiltersButton onClick={clearPairs} />
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.select')}
+            </SectionHeaderItemLabel>
+            <TimeFrameSelector
+              value={timeframe}
+              className={paramChangerClass}
+              onChange={handleTimeframeChange}
+            />
+          </SectionHeaderItem>
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
 }
 
-TradedVolume.propTypes = propTypes
-TradedVolume.defaultProps = defaultProps
-
-export default withTranslation('translations')(TradedVolume)
+export default TradedVolume
