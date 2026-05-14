@@ -602,6 +602,7 @@
     "request": {
       "error": "{{topic}} solicitud fallida {{detail}}"
     },
+    "authFail": "Autenticación fallida: por favor inicie sesión nuevamente",
     "signInFail": "Credenciales no válidas",
     "timeframe_update": "Marco de tiempo actualizado",
     "signUpFail": "Clave de API no válida o secreta",

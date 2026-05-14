@@ -602,6 +602,7 @@
     "request": {
       "error": "{{topic}}请求失败{{detail}}"
     },
+    "authFail": "身份验证失败：请重新登录",
     "signInFail": "凭证无效",
     "timeframe_update": "时间已更新",
     "signUpFail": "无效的API金钥或密钥",

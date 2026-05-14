@@ -602,6 +602,7 @@
     "request": {
       "error": "{{topic}} 請求失敗 {{detail}}"
     },
+    "authFail": "驗證失敗：請重新登入",
     "signInFail": "憑證無效",
     "timeframe_update": "時間已更新",
     "signUpFail": "無效的API金鑰或密碼",

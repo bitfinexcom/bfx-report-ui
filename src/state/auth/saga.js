@@ -149,10 +149,12 @@ function* signUp({ payload }) {
         }))
       } else {
         yield put(updateErrorStatus({
-          id: 'status.fail',
-          topic: 'auth.auth',
-          detail: error?.message ?? JSON.stringify(error),
+          id: 'status.authFail',
         }))
+        if (shouldRedirectToBfxLogin) {
+          yield delay(1000)
+          yield call(redirectToBfxLogin)
+        }
       }
     }
   } catch (fail) {
