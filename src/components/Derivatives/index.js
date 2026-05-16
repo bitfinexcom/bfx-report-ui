@@ -1,1 +1,1 @@
-export { default } from './Derivatives.container'
+export { default } from './Derivatives'

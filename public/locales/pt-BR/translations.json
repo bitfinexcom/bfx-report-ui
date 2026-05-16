@@ -602,6 +602,7 @@
     "request": {
       "error": "{{topic}} falha da solicitação {{detail}}"
     },
+    "authFail": "Falha na autenticação: por favor, faça login novamente",
     "signInFail": "Credenciais inválidas",
     "timeframe_update": "Período atualizado",
     "signUpFail": "Chave ou segreto de API inválido",

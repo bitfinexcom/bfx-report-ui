@@ -24,6 +24,9 @@ const handleElectronLoad = () => {
     window.bfxReportElectronApi?.onHideMenuEvent(({ state }) => {
       store.dispatch(setElectronMenuHidden(state))
     })
+    window.bfxReportElectronApi?.onRerenderMenuEvent(() => {
+      store.dispatch(getElectronMenuConfig())
+    })
     window.bfxReportElectronApi?.onFireToastEvent((args) => {
       // close previous toast before showing the next one
       const { toastId: prevToastId } = selectAutoUpdateToast(store.getState())

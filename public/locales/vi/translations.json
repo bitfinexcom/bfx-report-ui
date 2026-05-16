@@ -602,6 +602,7 @@
     "request": {
       "error": "{{topic}} yêu cầu thất bại {{detail}}"
     },
+    "authFail": "Xác thực thất bại: Vui lòng đăng nhập lại",
     "signInFail": "Thông tin xác thực không hợp lệ",
     "timeframe_update": "Khung thời gian được cập nhật",
     "signUpFail": "Khóa hoặc bí mật API không hợp lệ",

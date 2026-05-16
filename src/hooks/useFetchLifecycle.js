@@ -27,6 +27,28 @@ const useFetchLifecycle = (type, {
   const prevDataReceived = useRef(dataReceived)
   const prevIsSyncRequired = useRef(isSyncRequired)
 
+  // URL -> Redux hydration (mount only). Decoupled from sync-gated fetch so
+  // selections from URL survive framework-mode reloads where isSyncRequired
+  // starts as true and fetch is deferred until initial sync completes.
+  useEffect(() => {
+    // multi-pair from URL (MENU_TRADES, MENU_ORDERS, MENU_DERIVATIVES, etc.)
+    if (setTargetPairs && match?.params?.pair) {
+      setTargetPairs(getMappedSymbolsFromUrl(match.params.pair))
+    }
+    // single pair from URL (MENU_PUBLIC_TRADES, MENU_WEIGHTED_AVERAGES)
+    if (setTargetPair && match?.params?.pair) {
+      setTargetPair(getMappedSymbolsFromUrl(match.params.pair)[0])
+    }
+    // multi-symbol from URL (MENU_LEDGERS, MENU_MOVEMENTS, etc.)
+    if (setTargetSymbols && match?.params?.symbol) {
+      setTargetSymbols(getMappedSymbolsFromUrl(match.params.symbol))
+    }
+    // single symbol from URL (MENU_PUBLIC_FUNDING)
+    if (setTargetSymbol && match?.params?.symbol) {
+      setTargetSymbol(getMappedSymbolsFromUrl(match.params.symbol)[0])
+    }
+  }, [])
+
   // checkInit (mount only)
   useEffect(() => {
     const shouldWaitInitialSync = showFrameworkMode && isSyncRequired
@@ -36,23 +58,6 @@ const useFetchLifecycle = (type, {
     }
 
     if (!dataReceived && !pageLoading) {
-      // multi-pair from URL (MENU_TRADES, MENU_ORDERS, MENU_DERIVATIVES, etc.)
-      if (setTargetPairs && match?.params?.pair) {
-        setTargetPairs(getMappedSymbolsFromUrl(match.params.pair))
-      }
-      // single pair from URL (MENU_PUBLIC_TRADES, MENU_WEIGHTED_AVERAGES)
-      if (setTargetPair && match?.params?.pair) {
-        setTargetPair(getMappedSymbolsFromUrl(match.params.pair)[0])
-      }
-      // multi-symbol from URL (MENU_LEDGERS, MENU_MOVEMENTS, etc.)
-      if (setTargetSymbols && match?.params?.symbol) {
-        setTargetSymbols(getMappedSymbolsFromUrl(match.params.symbol))
-      }
-      // single symbol from URL (MENU_PUBLIC_FUNDING)
-      if (setTargetSymbol && match?.params?.symbol) {
-        setTargetSymbol(getMappedSymbolsFromUrl(match.params.symbol)[0])
-      }
-
       fetchData()
     }
   }, [])
