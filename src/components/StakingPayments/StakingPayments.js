@@ -1,158 +1,161 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import {
-  Card,
-  Elevation,
-} from '@blueprintjs/core'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouteMatch } from 'react-router-dom'
+import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
 import Pagination from 'ui/Pagination'
-import SectionHeader from 'ui/SectionHeader'
-import queryConstants from 'state/query/constants'
+import TimeRange from 'ui/TimeRange'
 import {
-  checkInit,
-  checkFetch,
-  toggleSymbol,
-  clearAllSymbols,
-} from 'state/utils'
-
-import { getColumns } from 'components/Ledgers/Ledgers.columns'
+  SectionHeader,
+  SectionHeaderRow,
+  SectionHeaderItem,
+  SectionHeaderTitle,
+  SectionHeaderItemLabel,
+} from 'ui/SectionHeader'
+import ColumnsFilter from 'ui/ColumnsFilter'
+import SectionSwitch from 'ui/SectionSwitch'
+import ClearFiltersButton from 'ui/ClearFiltersButton'
+import MultiSymbolSelector from 'ui/MultiSymbolSelector'
+import {
+  addTargetSymbol,
+  setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
+  fetchData as fetchStakingPayments,
+} from 'state/stakingPayments/actions'
+import {
+  getEntries,
+  getPageLoading,
+  getTargetSymbols,
+  getDataReceived,
+  getExistingCoins,
+} from 'state/stakingPayments/selectors'
+import useSymbolFilter from 'hooks/useSymbolFilter'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
+import queryConstants from 'state/query/constants'
+import { getColumns } from 'state/filters/selectors'
+import { getIsSyncRequired } from 'state/sync/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
+import { getFilteredEntries } from 'state/pagination/selectors'
+import { getFullTime, getTimeOffset } from 'state/base/selectors'
+import { getColumns as getTableColumns } from 'components/Ledgers/Ledgers.columns'
 
 const TYPE = queryConstants.MENU_SPAYMENTS
 
-/**
- * Staking Payments has the same state and columns as Ledgers
- */
-class StakingPayments extends PureComponent {
-  static propTypes = {
-    columns: PropTypes.shape({
-      amount: PropTypes.bool,
-      amountUsd: PropTypes.bool,
-      balance: PropTypes.bool,
-      balanceUsd: PropTypes.bool,
-      currency: PropTypes.bool,
-      description: PropTypes.bool,
-      id: PropTypes.bool,
-      mts: PropTypes.bool,
-      wallet: PropTypes.bool,
-    }),
-    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      width: PropTypes.number,
-    })),
-    entries: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      amount: PropTypes.number,
-      balance: PropTypes.number,
-      currency: PropTypes.string,
-      description: PropTypes.string,
-      mts: PropTypes.number,
-      wallet: PropTypes.string,
-    })),
-    existingCoins: PropTypes.arrayOf(PropTypes.string),
-    getFullTime: PropTypes.func.isRequired,
-    dataReceived: PropTypes.bool.isRequired,
-    pageLoading: PropTypes.bool.isRequired,
-    t: PropTypes.func.isRequired,
-    targetSymbols: PropTypes.arrayOf(PropTypes.string),
-    timeOffset: PropTypes.string.isRequired,
-  }
+const StakingPayments = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const timeOffset = useSelector(getTimeOffset)
+  const getFullTimeFn = useSelector(getFullTime)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const existingCoins = useSelector(getExistingCoins)
+  const match = useRouteMatch('/staking/:symbol')
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const columns = useSelector(state => getColumns(state, TYPE))
+  const columnsWidth = useSelector(state => getColumnsWidth(state, TYPE))
+  const entries = useSelector(state => getFilteredEntries(state, TYPE, getEntries(state)))
 
-  static defaultProps = {
-    columns: {},
-    entries: [],
-    columnsWidth: [],
-    existingCoins: [],
-    targetSymbols: [],
-  }
+  useFetchLifecycle(TYPE, {
+    match,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    fetchData: () => dispatch(fetchStakingPayments()),
+    setTargetSymbols: (s) => dispatch(setTargetSymbols(s)),
+  })
 
-  componentDidMount() {
-    checkInit(this.props, TYPE)
-  }
+  const { targetSymbols, toggleSymbol, clearSymbols } = useSymbolFilter(TYPE, {
+    getTargetSymbols,
+    addTargetSymbol,
+    removeTargetSymbol,
+    clearTargetSymbols,
+  })
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
-  }
+  const isNoData = isEmpty(entries)
+  const isLoading = !dataReceived && pageLoading
+  const tableColumns = getTableColumns({
+    t,
+    isNoData,
+    isLoading,
+    timeOffset,
+    columnsWidth,
+    target: TYPE,
+    filteredData: entries,
+    getFullTime: getFullTimeFn,
+  }).filter(({ id }) => columns[id])
 
-  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
-
-  clearSymbols = () => clearAllSymbols(TYPE, this.props)
-
-  render() {
-    const {
-      t,
-      columns,
-      entries,
-      timeOffset,
-      getFullTime,
-      pageLoading,
-      columnsWidth,
-      dataReceived,
-      existingCoins,
-      targetSymbols,
-    } = this.props
-    const isNoData = isEmpty(entries)
-    const isLoading = !dataReceived && pageLoading
-    const tableColumns = getColumns({
-      t,
-      isNoData,
-      isLoading,
-      timeOffset,
-      getFullTime,
-      columnsWidth,
-      target: TYPE,
-      filteredData: entries,
-    }).filter(({ id }) => columns[id])
-
-    let showContent
-    if (isNoData) {
-      showContent = (
-        <div className='data-table-wrapper'>
-          <DataTable
-            section={TYPE}
-            isNoData={isNoData}
-            isLoading={isLoading}
-            tableColumns={tableColumns}
-            numRows={isLoading ? 5 : 1}
-          />
-        </div>
-      )
-    } else {
-      showContent = (
-        <div className='data-table-wrapper'>
-          <DataTable
-            section={TYPE}
-            tableColumns={tableColumns}
-            numRows={isLoading ? 5 : entries.length}
-          />
-          <Pagination
-            target={TYPE}
-            loading={pageLoading}
-          />
-        </div>
-      )
-    }
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader
-          target={TYPE}
-          showHeaderTabs
-          title='spayments.title'
-          symbolsSelectorProps={{
-            existingCoins,
-            currentFilters: targetSymbols,
-            toggleSymbol: this.toggleSymbol,
-          }}
-          clearTargetSymbols={this.clearSymbols}
+  let showContent
+  if (isNoData) {
+    showContent = (
+      <div className='data-table-wrapper'>
+        <DataTable
+          section={TYPE}
+          isNoData={isNoData}
+          isLoading={isLoading}
+          tableColumns={tableColumns}
+          numRows={isLoading ? 5 : 1}
         />
-        {showContent}
-      </Card>
+      </div>
+    )
+  } else {
+    showContent = (
+      <div className='data-table-wrapper'>
+        <DataTable
+          section={TYPE}
+          tableColumns={tableColumns}
+          numRows={isLoading ? 5 : entries.length}
+        />
+        <Pagination
+          target={TYPE}
+          loading={pageLoading}
+        />
+      </div>
     )
   }
+
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('spayments.title')}
+        </SectionHeaderTitle>
+        <SectionSwitch target={TYPE} />
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.date')}
+            </SectionHeaderItemLabel>
+            <TimeRange className='section-header-time-range' />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.symbol')}
+            </SectionHeaderItemLabel>
+            <MultiSymbolSelector
+              existingCoins={existingCoins}
+              currentFilters={targetSymbols}
+              toggleSymbol={toggleSymbol}
+            />
+          </SectionHeaderItem>
+          <ClearFiltersButton onClick={clearSymbols} />
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.columns')}
+            </SectionHeaderItemLabel>
+            <ColumnsFilter target={TYPE} />
+          </SectionHeaderItem>
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
 }
 
 export default StakingPayments
