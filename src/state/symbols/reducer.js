@@ -51,11 +51,13 @@ export function symbolsReducer(state = initialState, action) {
 
         let { symbol } = currency
 
+        const isUSDT0 = _isEqual(symbol, 'USDT0')
+
         if (symbol === 'USDt' || _includes(symbol, 'USDT')) {
           tetherNames[id] = name
         }
 
-        if (!EXTENDED_CCY_LIST.includes(id) && !isInPair) {
+        if (!EXTENDED_CCY_LIST.includes(id) && !isInPair && !isUSDT0) {
           return
         }
 
@@ -66,7 +68,7 @@ export function symbolsReducer(state = initialState, action) {
           if (id.includes('F0')) {
             symbol = `${symbol} (deriv)`
           }
-          if (_isEqual(symbol, 'USDT0')) {
+          if (isUSDT0) {
             symbol = id
           }
 
