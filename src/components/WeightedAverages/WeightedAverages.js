@@ -1,5 +1,7 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouteMatch } from 'react-router-dom'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
@@ -16,150 +18,132 @@ import TimeRange from 'ui/TimeRange'
 import PairSelector from 'ui/PairSelector'
 import SectionSwitch from 'ui/SectionSwitch'
 import {
-  checkInit,
-  checkFetch,
-  setPair,
-} from 'state/utils'
+  setTargetPair,
+  fetchWeightedAwerages,
+} from 'state/weightedAverages/actions'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
+import {
+  getEntries,
+  getNextPage,
+  getPageLoading,
+  getTargetPair,
+  getDataReceived,
+} from 'state/weightedAverages/selectors'
+import {
+  getIsSyncRequired,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import { getFullTime } from 'state/base/selectors'
+import { getColumns } from 'state/filters/selectors'
+import { getColumnsWidth } from 'state/columns/selectors'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
+import useSinglePairFilter from 'hooks/useSinglePairFilter'
 import queryConstants from 'state/query/constants'
 
 import LimitNote from './WeightedAverages.note'
-import { getColumns } from './WeightedAverages.columns'
+import { getColumns as getTableColumns } from './WeightedAverages.columns'
 
 const { showFrameworkMode } = config
 const TYPE = queryConstants.MENU_WEIGHTED_AVERAGES
 
-class WeightedAverages extends PureComponent {
-  static propTypes = {
-    columns: PropTypes.shape({
-      pair: PropTypes.bool,
-      buyingWeightedPrice: PropTypes.bool,
-      buyingAmount: PropTypes.bool,
-      sellingWeightedPrice: PropTypes.bool,
-      sellingAmount: PropTypes.bool,
-      cost: PropTypes.bool,
-      sale: PropTypes.bool,
-      cumulativeAmount: PropTypes.bool,
-      firstTradeMts: PropTypes.bool,
-      lastTradeMts: PropTypes.bool,
-    }),
-    columnsWidth: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string,
-      width: PropTypes.number,
-    })),
-    dataReceived: PropTypes.bool.isRequired,
-    entries: PropTypes.arrayOf(PropTypes.shape({
-      pair: PropTypes.string,
-    })),
-    nextPage: PropTypes.oneOfType([
-      PropTypes.number,
-      PropTypes.bool,
-    ]),
-    pageLoading: PropTypes.bool.isRequired,
-    t: PropTypes.func.isRequired,
-    getFullTime: PropTypes.func.isRequired,
-    targetPair: PropTypes.string.isRequired,
-  }
+const WeightedAverages = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const entries = useSelector(getEntries)
+  const nextPage = useSelector(getNextPage)
+  const getFullTimeFn = useSelector(getFullTime)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const match = useRouteMatch('/weighted_averages/:pair')
+  const columns = useSelector(state => getColumns(state, TYPE))
+  const columnsWidth = useSelector(state => getColumnsWidth(state, TYPE))
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
 
-  static defaultProps = {
-    columns: {},
-    columnsWidth: [],
-    entries: [],
-    nextPage: false,
-  }
+  useFetchLifecycle(TYPE, {
+    match,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    shouldRefreshAfterSync,
+    setTargetPair: (p) => dispatch(setTargetPair(p)),
+    fetchData: () => dispatch(fetchWeightedAwerages()),
+    setShouldRefreshAfterSync: (v) => dispatch(setShouldRefreshAfterSync(v)),
+  })
 
-  componentDidMount() {
-    checkInit(this.props, TYPE)
-  }
+  const { targetPair, setPair } = useSinglePairFilter(TYPE, {
+    getTargetPair,
+    setTargetPair,
+  })
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
-  }
+  const isNoData = isEmpty(entries)
+  const isLoading = !dataReceived && pageLoading
+  const tableColumns = getTableColumns({
+    t,
+    isNoData,
+    isLoading,
+    columnsWidth,
+    filteredData: entries,
+    getFullTime: getFullTimeFn,
+  }).filter(({ id }) => columns[id])
 
-  onPairSelect = pair => setPair(TYPE, this.props, pair)
-
-  render() {
-    const {
-      t,
-      columns,
-      entries,
-      nextPage,
-      targetPair,
-      getFullTime,
-      pageLoading,
-      columnsWidth,
-      dataReceived,
-    } = this.props
-    const isNoData = isEmpty(entries)
-    const isLoading = !dataReceived && pageLoading
-    const tableColumns = getColumns({
-      t,
-      isNoData,
-      isLoading,
-      getFullTime,
-      columnsWidth,
-      filteredData: entries,
-    }).filter(({ id }) => columns[id])
-
-    let showContent
-    if (isNoData) {
-      showContent = (
-        <div className='data-table-wrapper'>
-          <DataTable
-            numRows={1}
-            section={TYPE}
-            isNoData={isNoData}
-            isLoading={isLoading}
-            tableColumns={tableColumns}
-          />
-        </div>
-      )
-    } else {
-      showContent = (
-        <>
-          <DataTable
-            numRows={1}
-            section={TYPE}
-            tableColumns={tableColumns}
-          />
-        </>
-      )
-    }
-
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='weighted-averages col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader>
-          <SectionHeaderTitle>
-            {t('weightedaverages.title')}
-          </SectionHeaderTitle>
-          {showFrameworkMode && (
-            <SectionSwitch target={TYPE} />
-          )}
-          {nextPage && <LimitNote />}
-          <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.date')}
-              </SectionHeaderItemLabel>
-              <TimeRange className='section-header-time-range' />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
-              </SectionHeaderItemLabel>
-              <PairSelector
-                currentPair={targetPair}
-                onPairSelect={this.onPairSelect}
-              />
-            </SectionHeaderItem>
-          </SectionHeaderRow>
-        </SectionHeader>
-        {showContent}
-      </Card>
+  let showContent
+  if (isNoData) {
+    showContent = (
+      <div className='data-table-wrapper'>
+        <DataTable
+          numRows={1}
+          section={TYPE}
+          isNoData={isNoData}
+          isLoading={isLoading}
+          tableColumns={tableColumns}
+        />
+      </div>
+    )
+  } else {
+    showContent = (
+      <DataTable
+        numRows={1}
+        section={TYPE}
+        tableColumns={tableColumns}
+      />
     )
   }
+
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='weighted-averages col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('weightedaverages.title')}
+        </SectionHeaderTitle>
+        {showFrameworkMode && (
+          <SectionSwitch target={TYPE} />
+        )}
+        {nextPage && <LimitNote />}
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.date')}
+            </SectionHeaderItemLabel>
+            <TimeRange className='section-header-time-range' />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.symbol')}
+            </SectionHeaderItemLabel>
+            <PairSelector
+              currentPair={targetPair}
+              onPairSelect={setPair}
+            />
+          </SectionHeaderItem>
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
 }
 
 export default WeightedAverages
