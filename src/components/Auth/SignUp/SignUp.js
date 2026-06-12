@@ -19,6 +19,7 @@ import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
+import Captcha from '../Captcha'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import LoginApiKey from '../LoginApiKey'
@@ -72,9 +73,10 @@ class SignUp extends PureComponent {
       userPassword: '',
       isPasswordProtected: config.hostedFrameworkMode,
     }
+    this.captchaRef = React.createRef()
   }
 
-  onSignUp = () => {
+  onSignUp = async () => {
     const { signUp, signUpEmail } = this.props
     const {
       apiKey,
@@ -104,9 +106,12 @@ class SignUp extends PureComponent {
       } else if (isRegisteredUserName) {
         this.handleExistingUser(userName)
       } else {
+        const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
         signUpEmail({
           login: userName,
           password: userPassword,
+          captchaToken,
+          captchaProvider,
         })
       }
     }
@@ -312,6 +317,9 @@ class SignUp extends PureComponent {
                 </div>
               </>
             )}
+          {showLoginEmail && (
+            <Captcha ref={this.captchaRef} />
+          )}
         </div>
         {!isOtpLoginShown && (
           <div className={Classes.DIALOG_FOOTER}>
