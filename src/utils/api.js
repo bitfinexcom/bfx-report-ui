@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+import config from 'config'
 import {
   corsProxyUrl,
   BFX_TOKEN_COOKIE,
@@ -22,6 +23,7 @@ const createApiInstance = (baseURL) => axios.create({
 })
 
 export const pubApi = createApiInstance(`//${PUB_API_URL}`)
+export const captchaApi = createApiInstance(`//${config.pubApiUrl}`)
 
 export const getIpInfo = (ip) => pubApi({
   method: 'get',
@@ -29,6 +31,17 @@ export const getIpInfo = (ip) => pubApi({
   params: {
     ip,
   },
+})
+
+export const getCaptchaProviders = () => captchaApi({
+  method: 'post',
+  url: '/v2/int/captcha/providers',
+})
+
+export const getCaptchaRequired = (method) => captchaApi({
+  method: 'post',
+  url: '/v2/int/captcha/required',
+  data: { method },
 })
 
 export const clearAuthToken = () => {
