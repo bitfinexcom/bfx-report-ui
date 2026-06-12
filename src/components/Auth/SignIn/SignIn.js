@@ -10,6 +10,7 @@ import {
 import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
+import { logger } from 'utils/logger'
 import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
@@ -117,13 +118,18 @@ class SignIn extends PureComponent {
     } = this.state
     tracker.trackEvent('Sign In')
     if (isEqual(email, userShouldReLogin)) {
-      const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
-      signUpEmail({
-        login: email,
-        password: userPassword,
-        captchaToken,
-        captchaProvider,
-      })
+      try {
+        const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
+        signUpEmail({
+          login: email,
+          password: userPassword,
+          captchaToken,
+          captchaProvider,
+        })
+      } catch (e) {
+        // captcha challenge was closed or failed to load, the user can simply retry
+        logger.error('Captcha challenge failed', e)
+      }
     } else {
       signIn({
         email,

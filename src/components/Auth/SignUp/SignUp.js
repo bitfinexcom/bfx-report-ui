@@ -15,6 +15,7 @@ import _includes from 'lodash/includes'
 
 import Icon from 'icons'
 import config from 'config'
+import { logger } from 'utils/logger'
 import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
@@ -106,13 +107,18 @@ class SignUp extends PureComponent {
       } else if (isRegisteredUserName) {
         this.handleExistingUser(userName)
       } else {
-        const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
-        signUpEmail({
-          login: userName,
-          password: userPassword,
-          captchaToken,
-          captchaProvider,
-        })
+        try {
+          const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
+          signUpEmail({
+            login: userName,
+            password: userPassword,
+            captchaToken,
+            captchaProvider,
+          })
+        } catch (e) {
+          // captcha challenge was closed or failed to load, the user can simply retry
+          logger.error('Captcha challenge failed', e)
+        }
       }
     }
   }
