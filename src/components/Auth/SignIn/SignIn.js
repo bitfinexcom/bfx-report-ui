@@ -14,6 +14,7 @@ import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { AUTH_TYPES, MODES } from '../Auth'
+import Captcha from '../Captcha'
 import LoginOtp from '../LoginOtp'
 import InputKey from '../InputKey'
 import SignInList from '../SignInList'
@@ -77,6 +78,7 @@ class SignIn extends PureComponent {
       isSubAccount: false,
       showDeleteAccount: false,
     }
+    this.captchaRef = React.createRef()
   }
 
   componentDidMount() {
@@ -106,7 +108,7 @@ class SignIn extends PureComponent {
     this.handleSubAccounts()
   }
 
-  onSignIn = () => {
+  onSignIn = async () => {
     const {
       signIn, userShouldReLogin, signUpEmail,
     } = this.props
@@ -115,9 +117,12 @@ class SignIn extends PureComponent {
     } = this.state
     tracker.trackEvent('Sign In')
     if (isEqual(email, userShouldReLogin)) {
+      const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
       signUpEmail({
         login: email,
         password: userPassword,
+        captchaToken,
+        captchaProvider,
       })
     } else {
       signIn({
@@ -321,6 +326,9 @@ class SignIn extends PureComponent {
                     onChange={this.handleInputChange}
                     label='auth.loginEmail.bfxAccPassword'
                   />
+                )}
+                {isCurrentUserShouldReLogin && (
+                  <Captcha ref={this.captchaRef} />
                 )}
                 {showInputPassword && (
                   <InputKey
