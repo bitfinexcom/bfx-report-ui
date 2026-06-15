@@ -72,6 +72,7 @@ class SignUp extends PureComponent {
       passwordRepeatError: '',
       userName: '',
       userPassword: '',
+      isCaptchaPending: false,
       isPasswordProtected: config.hostedFrameworkMode,
     }
     this.captchaRef = React.createRef()
@@ -107,6 +108,9 @@ class SignUp extends PureComponent {
       } else if (isRegisteredUserName) {
         this.handleExistingUser(userName)
       } else {
+        // lock the button while the captcha loads/runs so repeated clicks
+        // don't spawn parallel challenges on the same widget
+        this.setState({ isCaptchaPending: true })
         try {
           const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
           signUpEmail({
@@ -118,6 +122,8 @@ class SignUp extends PureComponent {
         } catch (e) {
           // captcha challenge was closed or failed to load, the user can simply retry
           logger.error('Captcha challenge failed', e)
+        } finally {
+          this.setState({ isCaptchaPending: false })
         }
       }
     }
@@ -244,6 +250,7 @@ class SignUp extends PureComponent {
       userPassword,
       passwordError,
       passwordRepeat,
+      isCaptchaPending,
       passwordRepeatError,
       isPasswordProtected,
     } = this.state
@@ -251,7 +258,8 @@ class SignUp extends PureComponent {
     const frameworkTitle = isOtpLoginShown ? t('auth.2FA.title') : t('auth.addAccount')
     const title = showFrameworkMode ? frameworkTitle : t('auth.title')
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
-    const isSignUpDisabled = (useApiKey && (!apiKey || !apiSecret))
+    const isSignUpDisabled = isCaptchaPending
+      || (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
       || (showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
@@ -340,7 +348,7 @@ class SignUp extends PureComponent {
               )}
               <Button
                 name='check'
-                loading={loading}
+                loading={loading || isCaptchaPending}
                 intent={Intent.SUCCESS}
                 onClick={this.onSignUp}
                 disabled={isSignUpDisabled}

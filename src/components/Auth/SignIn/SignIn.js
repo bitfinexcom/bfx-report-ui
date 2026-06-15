@@ -77,6 +77,7 @@ class SignIn extends PureComponent {
       userPassword: '',
       showUsersList: true,
       isSubAccount: false,
+      isCaptchaPending: false,
       showDeleteAccount: false,
     }
     this.captchaRef = React.createRef()
@@ -118,6 +119,9 @@ class SignIn extends PureComponent {
     } = this.state
     tracker.trackEvent('Sign In')
     if (isEqual(email, userShouldReLogin)) {
+      // lock the button while the captcha loads/runs so repeated clicks
+      // don't spawn parallel challenges on the same widget
+      this.setState({ isCaptchaPending: true })
       try {
         const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
         signUpEmail({
@@ -129,6 +133,8 @@ class SignIn extends PureComponent {
       } catch (e) {
         // captcha challenge was closed or failed to load, the user can simply retry
         logger.error('Captcha challenge failed', e)
+      } finally {
+        this.setState({ isCaptchaPending: false })
       }
     } else {
       signIn({
@@ -266,11 +272,12 @@ class SignIn extends PureComponent {
       password,
       userPassword,
       showUsersList,
+      isCaptchaPending,
       showDeleteAccount,
     } = this.state
 
     const { isNotProtected } = users.find(user => user.email === email && user.isSubAccount === isSubAccount) || {}
-    const isSignInDisabled = !email || (isElectronApp && !isElectronBackendLoaded)
+    const isSignInDisabled = isCaptchaPending || !email || (isElectronApp && !isElectronBackendLoaded)
       || (!isNotProtected && !password)
     const isEmailSelected = !isEmpty(email)
     const isCurrentUserShouldReLogin = isEmailSelected && isEqual(email, userShouldReLogin) && !showUsersList
@@ -361,7 +368,7 @@ class SignIn extends PureComponent {
               <div>
                 <Button
                   name='check'
-                  loading={loading}
+                  loading={loading || isCaptchaPending}
                   intent={Intent.SUCCESS}
                   disabled={isSignInDisabled}
                   className='bitfinex-auth-check'
