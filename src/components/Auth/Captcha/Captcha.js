@@ -5,11 +5,11 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from 'react'
-import HCaptcha from '@hcaptcha/react-hcaptcha'
-import ReCAPTCHA from 'react-google-recaptcha'
 import _get from 'lodash/get'
 import _first from 'lodash/first'
 import _isArray from 'lodash/isArray'
+import ReCAPTCHA from 'react-google-recaptcha'
+import HCaptcha from '@hcaptcha/react-hcaptcha'
 import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
@@ -73,6 +73,11 @@ const Captcha = forwardRef((props, ref) => {
     reset,
   } = getCaptchaConfig(provider)
 
+  // the class-based auth forms hold a ref to this component and must pull a fresh
+  // token on submit (an imperative, on-demand action that returns a promise, not
+  // declarative data) - and only this component can drive the widget via its ref.
+  // useImperativeHandle exposes a clean `getToken` over that ref while hiding the
+  // provider/required/execute/reset internals.
   useImperativeHandle(ref, () => ({
     getToken: async (method) => {
       const isRequired = await checkCaptchaRequired(method)
