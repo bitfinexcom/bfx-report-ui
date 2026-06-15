@@ -9,9 +9,11 @@ import HCaptcha from '@hcaptcha/react-hcaptcha'
 import ReCAPTCHA from 'react-google-recaptcha'
 import _get from 'lodash/get'
 import _first from 'lodash/first'
+import _isArray from 'lodash/isArray'
+import { isEqual } from '@bitfinex/lib-js-util-base'
 
 import config from 'config'
-import { getCaptchaProviders, getCaptchaRequired } from 'utils/api'
+import { getCaptchaProviders, isCaptchaRequired } from 'state/utils'
 
 const { recaptchaSiteKey, hcaptchaSiteKey } = config
 
@@ -37,10 +39,10 @@ const getCaptchaConfig = (provider) => {
 
 const checkCaptchaRequired = async (method) => {
   try {
-    const { data } = await getCaptchaRequired(method)
-    return data
+    const { result } = await isCaptchaRequired(method)
+    // fail-safe: only an explicit `false` means the captcha can be skipped
+    return !isEqual(result, false)
   } catch (e) {
-    // fail-safe: if the check fails, assume captcha is required
     return true
   }
 }
@@ -55,8 +57,8 @@ const Captcha = forwardRef((props, ref) => {
   useEffect(() => {
     let isSubscribed = true
     getCaptchaProviders()
-      .then(({ data }) => {
-        if (isSubscribed) setProvider(_first(data))
+      .then(({ result }) => {
+        if (isSubscribed && _isArray(result)) setProvider(_first(result))
       })
       .catch(() => {})
     return () => {
