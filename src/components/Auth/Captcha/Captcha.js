@@ -47,12 +47,31 @@ const checkCaptchaRequired = async (method) => {
   }
 }
 
+// the widget needs its script loaded before `execute()`; even then the first
+// execute can reject with a transient `network-error` (notably on an unauthorized
+// host like localhost) - we wait for load, then retry once on failure
+const WIDGET_LOAD_TIMEOUT = 8000
+const RETRY_DELAY = 600
+
+const delay = (ms) => new Promise((resolve) => { setTimeout(resolve, ms) })
+
+const createDeferred = () => {
+  const deferred = {}
+  deferred.promise = new Promise((resolve) => { deferred.resolve = resolve })
+  return deferred
+}
+
 // Invisible captcha widget that auto-selects the provider returned by the
 // BFX `captcha/providers` endpoint (reCAPTCHA or hCaptcha). Exposes an
 // imperative `getToken(method)` for the auth forms to call before login.
 const Captcha = forwardRef((props, ref) => {
   const captchaRef = useRef(null)
   const [provider, setProvider] = useState()
+  // resolves once the widget signals (onLoad) that it is ready to `execute()`
+  const loadedRef = useRef()
+  if (!loadedRef.current) {
+    loadedRef.current = createDeferred()
+  }
 
   useEffect(() => {
     let isSubscribed = true
@@ -84,7 +103,17 @@ const Captcha = forwardRef((props, ref) => {
       if (!isRequired) {
         return { captchaToken: null, captchaProvider: provider }
       }
+      // wait for the widget to load (timeout guards a stuck load), then run it;
+      // the first execute can still reject (network-error before the challenge is
+      // ready / unauthorized host), so reset and retry once - the second attempt
+      // reliably succeeds
+      await Promise.race([loadedRef.current.promise, delay(WIDGET_LOAD_TIMEOUT)])
       try {
+        const captchaToken = await getToken(captchaRef)
+        return { captchaToken, captchaProvider: provider }
+      } catch (err) {
+        reset(captchaRef)
+        await delay(RETRY_DELAY)
         const captchaToken = await getToken(captchaRef)
         return { captchaToken, captchaProvider: provider }
       } finally {
@@ -100,6 +129,8 @@ const Captcha = forwardRef((props, ref) => {
       ref={captchaRef}
       sitekey={sitekey}
       size='invisible'
+      onLoad={() => loadedRef.current.resolve()}
+      asyncScriptOnLoad={() => loadedRef.current.resolve()}
     />
   )
 })
