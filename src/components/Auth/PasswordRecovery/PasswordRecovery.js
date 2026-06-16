@@ -12,10 +12,12 @@ import {
 
 import Icon from 'icons'
 import config from 'config'
+import { logger } from 'utils/logger'
 import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
+import Captcha from '../Captcha'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import LoginApiKey from '../LoginApiKey'
@@ -62,10 +64,12 @@ class PasswordRecovery extends PureComponent {
       useApiKey: false,
       userName: '',
       userPassword: '',
+      isCaptchaPending: false,
     }
+    this.captchaRef = React.createRef()
   }
 
-  onPasswordRecovery = () => {
+  onPasswordRecovery = async () => {
     const { recoverPassword, signUpEmail } = this.props
     const {
       apiKey,
@@ -93,10 +97,23 @@ class PasswordRecovery extends PureComponent {
           isPersisted,
         })
       } else {
-        signUpEmail({
-          login: userName,
-          password: userPassword,
-        })
+        // lock the button while the captcha loads/runs so repeated clicks
+        // don't spawn parallel challenges on the same widget
+        this.setState({ isCaptchaPending: true })
+        try {
+          const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
+          signUpEmail({
+            login: userName,
+            password: userPassword,
+            captchaToken,
+            captchaProvider,
+          })
+        } catch (e) {
+          // captcha challenge was closed or failed to load, the user can simply retry
+          logger.error('Captcha challenge failed', e)
+        } finally {
+          this.setState({ isCaptchaPending: false })
+        }
       }
     }
   }
@@ -201,13 +218,15 @@ class PasswordRecovery extends PureComponent {
       userPassword,
       passwordError,
       passwordRepeat,
+      isCaptchaPending,
       passwordRepeatError,
       isPasswordProtectionDisabled,
     } = this.state
 
     const showEnterPassword = showFrameworkMode && !isPasswordProtectionDisabled
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
-    const isPasswordRecoveryDisabled = (useApiKey && (!apiKey || !apiSecret))
+    const isPasswordRecoveryDisabled = isCaptchaPending
+      || (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
       || (showFrameworkMode && !isPasswordProtectionDisabled
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
@@ -277,6 +296,9 @@ class PasswordRecovery extends PureComponent {
                 )}
               </>
             )}
+          {!useApiKey && (
+            <Captcha ref={this.captchaRef} />
+          )}
         </div>
         {!isOtpLoginShown && (
           <div className={Classes.DIALOG_FOOTER}>
@@ -293,7 +315,7 @@ class PasswordRecovery extends PureComponent {
                 intent={Intent.SUCCESS}
                 onClick={this.onPasswordRecovery}
                 disabled={isPasswordRecoveryDisabled}
-                loading={loading}
+                loading={loading || isCaptchaPending}
               >
                 {t('auth.resetPassword')}
               </Button>
