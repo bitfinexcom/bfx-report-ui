@@ -15,10 +15,12 @@ import _includes from 'lodash/includes'
 
 import Icon from 'icons'
 import config from 'config'
+import { logger } from 'utils/logger'
 import { tracker } from 'utils/trackers'
 import PlatformLogo from 'ui/PlatformLogo'
 
 import { MODES } from '../Auth'
+import Captcha from '../Captcha'
 import LoginOtp from '../LoginOtp'
 import LoginEmail from '../LoginEmail'
 import LoginApiKey from '../LoginApiKey'
@@ -70,11 +72,13 @@ class SignUp extends PureComponent {
       passwordRepeatError: '',
       userName: '',
       userPassword: '',
+      isCaptchaPending: false,
       isPasswordProtected: config.hostedFrameworkMode,
     }
+    this.captchaRef = React.createRef()
   }
 
-  onSignUp = () => {
+  onSignUp = async () => {
     const { signUp, signUpEmail } = this.props
     const {
       apiKey,
@@ -104,10 +108,23 @@ class SignUp extends PureComponent {
       } else if (isRegisteredUserName) {
         this.handleExistingUser(userName)
       } else {
-        signUpEmail({
-          login: userName,
-          password: userPassword,
-        })
+        // lock the button while the captcha loads/runs so repeated clicks
+        // don't spawn parallel challenges on the same widget
+        this.setState({ isCaptchaPending: true })
+        try {
+          const { captchaToken, captchaProvider } = await this.captchaRef.current.getToken('login')
+          signUpEmail({
+            login: userName,
+            password: userPassword,
+            captchaToken,
+            captchaProvider,
+          })
+        } catch (e) {
+          // captcha challenge was closed or failed to load, the user can simply retry
+          logger.error('Captcha challenge failed', e)
+        } finally {
+          this.setState({ isCaptchaPending: false })
+        }
       }
     }
   }
@@ -233,6 +250,7 @@ class SignUp extends PureComponent {
       userPassword,
       passwordError,
       passwordRepeat,
+      isCaptchaPending,
       passwordRepeatError,
       isPasswordProtected,
     } = this.state
@@ -240,7 +258,8 @@ class SignUp extends PureComponent {
     const frameworkTitle = isOtpLoginShown ? t('auth.2FA.title') : t('auth.addAccount')
     const title = showFrameworkMode ? frameworkTitle : t('auth.title')
     const showPasswordProtection = showFrameworkMode && !hostedFrameworkMode
-    const isSignUpDisabled = (useApiKey && (!apiKey || !apiSecret))
+    const isSignUpDisabled = isCaptchaPending
+      || (useApiKey && (!apiKey || !apiSecret))
       || (!useApiKey && (!userName || !userPassword))
       || (showFrameworkMode && isPasswordProtected
         && (!password || !passwordRepeat || passwordError || passwordRepeatError))
@@ -312,6 +331,9 @@ class SignUp extends PureComponent {
                 </div>
               </>
             )}
+          {showLoginEmail && (
+            <Captcha ref={this.captchaRef} />
+          )}
         </div>
         {!isOtpLoginShown && (
           <div className={Classes.DIALOG_FOOTER}>
@@ -326,7 +348,7 @@ class SignUp extends PureComponent {
               )}
               <Button
                 name='check'
-                loading={loading}
+                loading={loading || isCaptchaPending}
                 intent={Intent.SUCCESS}
                 onClick={this.onSignUp}
                 disabled={isSignUpDisabled}

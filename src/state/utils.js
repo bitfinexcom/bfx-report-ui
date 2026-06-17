@@ -93,6 +93,16 @@ export function makeFetchCall(method, params = undefined, auth = getAuthFromStor
   })
 }
 
+// Captcha metadata is proxied through the backend (json-rpc) because api-pub
+// does not allow cross-origin requests from local origins (dev / electron app)
+export function getCaptchaProviders() {
+  return makePublicFetchCall('getCaptchaProviders')
+}
+
+export function isCaptchaRequired(method) {
+  return makePublicFetchCall('isCaptchaRequired', { method })
+}
+
 export const formatAuthDate = mts => moment(mts).format('M/D/YYYY, h:mm:ss A')
 
 export const dispatchAction = (action) => {
