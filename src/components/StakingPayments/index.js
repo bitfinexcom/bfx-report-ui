@@ -1,1 +1,1 @@
-export { default } from './StakingPayments.container'
+export { default } from './StakingPayments'
