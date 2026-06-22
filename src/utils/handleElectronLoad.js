@@ -12,8 +12,8 @@ import {
 import { selectAutoUpdateToast } from 'state/electronAutoUpdateToast/selectors'
 
 const handleElectronLoad = () => {
-  window.document.addEventListener('electronLoad', (e) => {
-    const apiPort = e?.detail?.getApiPort() ?? null
+  window.bfxReportElectronApi?.onTriggerElectronLoad((loadArgs) => {
+    const apiPort = loadArgs?.expressApiPort ?? null
 
     if (!_isNull(apiPort)) {
       store.dispatch(setApiPort(apiPort))
