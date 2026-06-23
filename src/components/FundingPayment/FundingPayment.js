@@ -1,13 +1,13 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import { isEmpty } from '@bitfinex/lib-js-util-base'
 
 import DataTable from 'ui/DataTable'
-import Pagination from 'ui/Pagination'
 import TimeRange from 'ui/TimeRange'
+import Pagination from 'ui/Pagination'
 import {
   SectionHeader,
   SectionHeaderRow,
@@ -33,8 +33,6 @@ import {
   getDataReceived,
   getExistingCoins,
 } from 'state/fundingPayment/selectors'
-import useSymbolFilter from 'hooks/useSymbolFilter'
-import useFetchLifecycle from 'hooks/useFetchLifecycle'
 import queryConstants from 'state/query/constants'
 import { getColumns } from 'state/filters/selectors'
 import { getIsSyncRequired } from 'state/sync/selectors'
@@ -42,6 +40,8 @@ import { getColumnsWidth } from 'state/columns/selectors'
 import { getFilteredEntries } from 'state/pagination/selectors'
 import { getFullTime, getTimeOffset } from 'state/base/selectors'
 import { getColumns as getTableColumns } from 'components/Ledgers/Ledgers.columns'
+import useSymbolFilter from 'hooks/useSymbolFilter'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
 
 const TYPE = queryConstants.MENU_FPAYMENT
 
