@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import classNames from 'classnames'
 import _sortBy from 'lodash/sortBy'
@@ -46,10 +46,10 @@ import {
   getIsFirstSyncing,
   getShouldRefreshAfterSync,
 } from 'state/sync/selectors'
-import { getIsTimeframeMoreThanYear } from 'state/timeRange/selectors'
+import queryConstants from 'state/query/constants'
 import useSymbolFilter from 'hooks/useSymbolFilter'
 import useFetchLifecycle from 'hooks/useFetchLifecycle'
-import queryConstants from 'state/query/constants'
+import { getIsTimeframeMoreThanYear } from 'state/timeRange/selectors'
 
 const TYPE = queryConstants.MENU_LOAN_REPORT
 
