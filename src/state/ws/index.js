@@ -1,3 +1,6 @@
+import _clamp from 'lodash/clamp'
+import _random from 'lodash/random'
+
 import { store } from 'state/store'
 
 import { getWsAddress } from 'state/base/selectors'
@@ -7,6 +10,19 @@ import config from 'config'
 import types from './constants'
 
 const { REACT_APP_ENV } = process.env
+
+const RECONNECT_BASE_DELAY = 300 // ms
+const RECONNECT_MAX_DELAY = 30000 // ms (cap)
+
+// Full Jitter: random(0, min(cap, base * 2^attempt))
+const getReconnectDelay = (attempt = 0) => {
+  const exponential = _clamp(
+    RECONNECT_BASE_DELAY * (2 ** attempt),
+    RECONNECT_BASE_DELAY,
+    RECONNECT_MAX_DELAY,
+  )
+  return _random(0, exponential)
+}
 
 const getAuth = () => {
   const state = store.getState()
@@ -30,6 +46,8 @@ class WS {
     this.isConnected = false
     this.websocket = null
     this.isFirstConnect = true
+    this.reconnectAttempts = 0
+    this.reconnectTimeout = null
   }
 
   heartbeat = () => {
@@ -41,6 +59,8 @@ class WS {
   }
 
   connect = () => {
+    clearTimeout(this.reconnectTimeout)
+
     if (!config.showFrameworkMode || this.isConnected) {
       return
     }
@@ -57,6 +77,7 @@ class WS {
 
     websocket.onopen = () => {
       this.isConnected = true
+      this.reconnectAttempts = 0
       store.dispatch({ type: types.WS_CONNECT })
 
       if (!this.isFirstConnect) {
@@ -70,7 +91,9 @@ class WS {
 
     websocket.onclose = () => {
       this.isConnected = false
-      setTimeout(() => this.connect(), 300)
+      const delay = getReconnectDelay(this.reconnectAttempts)
+      this.reconnectAttempts += 1
+      this.reconnectTimeout = setTimeout(() => this.connect(), delay)
     }
 
     websocket.onmessage = this.onMessage
