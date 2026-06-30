@@ -721,8 +721,14 @@
     "last-sync-time": {
       "fail": "No se pudo obtener la hora de la última sincronización",
       "syncing": "Sincronizando...",
+      "just-now": "La última sincronización fue hace un momento",
+      "less-than-mins": "La última sincronización fue hace menos de {{mins}} min",
       "sync-was-less-than-hour": "La última sincronización fue hace menos de una hora",
-      "sync-was": "La última sincronización fue hace {{hours}} horas"
+      "sync-was-hour": "La última sincronización fue hace ~1 hora",
+      "sync-was": "La última sincronización fue hace ~{{hours}} horas",
+      "yesterday": "La última sincronización fue ayer",
+      "days-ago": "La última sincronización fue hace {{days}} días",
+      "on-date": "La última sincronización fue el {{date}}"
     },
     "init-sync-info": {
       "main": "Bienvenido a la Aplicación de Informes de Bitfinex. Tu historial de trading se está sincronizando, por favor espera hasta que termine para ver tus informes.",

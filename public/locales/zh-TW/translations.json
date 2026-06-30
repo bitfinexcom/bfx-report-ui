@@ -721,8 +721,14 @@
     "last-sync-time": {
       "fail": "無法獲取上次同步時間",
       "syncing": "正在同步...",
+      "just-now": "上次同步就在剛剛",
+      "less-than-mins": "上次同步在 {{mins}} 分鐘以內",
       "sync-was-less-than-hour": "上次同步在一小時以內",
-      "sync-was": "上次同步是 {{hours}} 小時前"
+      "sync-was-hour": "上次同步約在 1 小時前",
+      "sync-was": "上次同步約在 {{hours}} 小時前",
+      "yesterday": "上次同步在昨天",
+      "days-ago": "上次同步在 {{days}} 天前",
+      "on-date": "上次同步在 {{date}}"
     },
     "init-sync-info": {
       "main": "歡迎使用 Bitfinex 報告應用。您的交易歷史正在同步，請等待完成後查看您的報告。",
