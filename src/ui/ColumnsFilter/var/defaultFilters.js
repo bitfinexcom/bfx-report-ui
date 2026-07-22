@@ -1,5 +1,6 @@
 import queryConstants from 'state/query/constants'
 import { FILTERS, EMPTY_FILTER } from 'var/filterTypes'
+import { FILTERS_SELECTOR } from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import DATA_TYPES from 'var/dataTypes'
 
 const {
@@ -83,7 +84,7 @@ const DEFAULT_FILTERS = {
   [MENU_FPAYMENT]: [
     { column: 'amount', type: GREATER_THAN, dataType: NUMBER, value: '' },
     { column: 'balance', type: GREATER_THAN, dataType: NUMBER, value: '' },
-    { column: 'wallet', type: CONTAINS, dataType: STRING, value: '' },
+    { column: 'wallet', type: EQUAL_TO, dataType: STRING, select: FILTERS_SELECTOR.WALLET, value: '' },
   ],
   [MENU_SPAYMENTS]: DEFAULT_LEDGERS,
   [MENU_AFFILIATES_EARNINGS]: DEFAULT_LEDGERS,
