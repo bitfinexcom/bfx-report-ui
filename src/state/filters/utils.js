@@ -1,18 +1,30 @@
 /* eslint-disable import/prefer-default-export */
-import _reduce from 'lodash/reduce'
 import _set from 'lodash/set'
+import _find from 'lodash/find'
+import _omit from 'lodash/omit'
+import _uniq from 'lodash/uniq'
+import _isNaN from 'lodash/isNaN'
+import _reduce from 'lodash/reduce'
+import _sortBy from 'lodash/sortBy'
+import _filter from 'lodash/filter'
+import _countBy from 'lodash/countBy'
+import _findKey from 'lodash/findKey'
+import _toString from 'lodash/toString'
 import _toNumber from 'lodash/toNumber'
 import _toInteger from 'lodash/toInteger'
-import _toString from 'lodash/toString'
-import _findKey from 'lodash/findKey'
-import _sortBy from 'lodash/sortBy'
-import _find from 'lodash/find'
-import _isNaN from 'lodash/isNaN'
 import { get, isEmpty } from '@bitfinex/lib-js-util-base'
 
 import SECTION_COLUMNS, { TRANSFORMS } from 'ui/ColumnsFilter/ColumnSelector/ColumnSelector.columns'
 import FILTER_TYPES, { FILTER_QUERY_TYPES, FILTERS, FILTER_KEYS } from 'var/filterTypes'
+import queryConstants from 'state/query/constants'
 import DATA_TYPES from 'var/dataTypes'
+
+const {
+  MENU_LEDGERS,
+  MENU_FPAYMENT,
+  MENU_SPAYMENTS,
+  MENU_AFFILIATES_EARNINGS,
+} = queryConstants
 
 const {
   NUMBER,
@@ -60,6 +72,9 @@ export const calculateFilterQuery = (filters = [], section) => {
 
   const validFilters = getValidFilters(filters)
   const columns = SECTION_COLUMNS[section]
+  const notEqualCountsByColumn = _countBy(
+    _filter(validFilters, { type: FILTERS.NOT_EQUAL_TO }), 'column',
+  )
 
   return _reduce(validFilters, (acc, filter) => {
     const {
@@ -90,8 +105,13 @@ export const calculateFilterQuery = (filters = [], section) => {
         _set(acc, `${FILTER_TYPES.EQ}.${column}`, filterValue)
         break
       case FILTERS.NOT_EQUAL_TO: {
-        const currentFilters = get(acc, `${FILTER_TYPES.NIN}.${column}`, [])
-        _set(acc, `${FILTER_TYPES.NIN}.${column}`, currentFilters.concat(filterValue))
+        // a single exclusion maps to $ne, multiple ones are collected into a $nin list
+        if (get(notEqualCountsByColumn, column, 0) > 1) {
+          const currentValues = get(acc, `${FILTER_TYPES.NIN}.${column}`, [])
+          _set(acc, `${FILTER_TYPES.NIN}.${column}`, _uniq(currentValues.concat(filterValue)))
+        } else {
+          _set(acc, `${FILTER_TYPES.NE}.${column}`, filterValue)
+        }
         break
       }
       case FILTERS.GREATER_THAN:
@@ -111,6 +131,29 @@ export const calculateFilterQuery = (filters = [], section) => {
 
     return acc
   }, {})
+}
+
+// sections backed by the getLedgers/getLedgersFile methods, which accept a dedicated wallet param
+export const WALLET_PARAM_SECTIONS = [
+  MENU_LEDGERS,
+  MENU_FPAYMENT,
+  MENU_SPAYMENTS,
+  MENU_AFFILIATES_EARNINGS,
+]
+
+// the backend resolves the dedicated `wallet` param faster than a generic $eq filter
+export const splitWalletFilter = (filterQuery) => {
+  const wallet = get(filterQuery, [FILTER_TYPES.EQ, 'wallet'])
+  if (isEmpty(wallet)) {
+    return { filter: filterQuery, wallet: undefined }
+  }
+
+  const restEqFilters = _omit(get(filterQuery, FILTER_TYPES.EQ), 'wallet')
+  const filter = isEmpty(restEqFilters)
+    ? _omit(filterQuery, FILTER_TYPES.EQ)
+    : { ...filterQuery, [FILTER_TYPES.EQ]: restEqFilters }
+
+  return { wallet, filter: isEmpty(filter) ? undefined : filter }
 }
 
 // returns a string with the encoded filters
