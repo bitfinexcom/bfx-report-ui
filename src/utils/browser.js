@@ -1,4 +1,4 @@
-import * as cookie from 'js-cookie'
+import cookie from 'js-cookie'
 
 import { cookieDomain } from '../var/platform'
 

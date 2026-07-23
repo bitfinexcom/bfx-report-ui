@@ -17,9 +17,6 @@ export const LANGUAGES = {
   'zh-TW': 'zh-TW',
   es: 'es-EM',
   'es-EM': 'es-EM',
-  pt: 'pt-BR',
-  'pt-PT': 'pt-BR',
-  'pt-BR': 'pt-BR',
   vi: 'vi',
 }
 
@@ -29,7 +26,6 @@ export const LANGUAGE_NAMES = {
   'zh-CN': '中文 (简化)',
   'zh-TW': '中文 (繁體)',
   'es-EM': 'Español',
-  'pt-BR': 'Português',
   vi: 'Vietnamese',
 }
 

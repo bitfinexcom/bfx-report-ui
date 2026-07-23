@@ -1,1 +1,1 @@
-export { default } from './FundingPayment.container'
+export { default } from './FundingPayment'

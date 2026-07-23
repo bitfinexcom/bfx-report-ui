@@ -721,8 +721,14 @@
     "last-sync-time": {
       "fail": "Failed to get last sync time",
       "syncing": "Syncing...",
+      "just-now": "Last Sync was just now",
+      "less-than-mins": "Last Sync was less than {{mins}} mins ago",
       "sync-was-less-than-hour": "Last Sync was less than an hour ago",
-      "sync-was":"Last Sync was {{hours}} hours ago"
+      "sync-was-hour": "Last Sync was ~1 hour ago",
+      "sync-was": "Last Sync was ~{{hours}} hours ago",
+      "yesterday": "Last Sync was yesterday",
+      "days-ago": "Last Sync was {{days}} days ago",
+      "on-date": "Last Sync was on {{date}}"
     },
     "init-sync-info": {
       "main": "Welcome to the Bitfinex Reports App. Your trading history is currently synchronizing, please wait until it's finished in order to view your reports.",

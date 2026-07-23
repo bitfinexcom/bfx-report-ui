@@ -721,8 +721,14 @@
     "last-sync-time": {
       "fail": "Không thể lấy thời gian đồng bộ cuối cùng",
       "syncing": "Đang đồng bộ...",
+      "just-now": "Đồng bộ cuối cùng vừa xong",
+      "less-than-mins": "Đồng bộ cuối cùng chưa đầy {{mins}} phút trước",
       "sync-was-less-than-hour": "Đồng bộ cuối cùng chưa đầy một giờ trước",
-      "sync-was": "Đồng bộ cuối cùng cách đây {{hours}} giờ"
+      "sync-was-hour": "Đồng bộ cuối cùng khoảng ~1 giờ trước",
+      "sync-was": "Đồng bộ cuối cùng khoảng ~{{hours}} giờ trước",
+      "yesterday": "Đồng bộ cuối cùng hôm qua",
+      "days-ago": "Đồng bộ cuối cùng {{days}} ngày trước",
+      "on-date": "Đồng bộ cuối cùng vào {{date}}"
     },
     "init-sync-info": {
       "main": "Chào mừng đến với ứng dụng Báo cáo Bitfinex. Lịch sử giao dịch của bạn đang được đồng bộ hóa, vui lòng chờ cho đến khi hoàn tất để xem báo cáo của bạn.",
