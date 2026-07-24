@@ -1,20 +1,43 @@
-import { put, call } from 'redux-saga/effects'
+import { put, call, select } from 'redux-saga/effects'
 import { cloneableGenerator } from '@redux-saga/testing-utils'
 
-import { fetchAccountBalance, getReqBalance } from '../saga'
+import { toggleErrorDialog } from 'state/ui/actions'
+import { getTimeFrame } from 'state/timeRange/selectors'
+
 import actions from '../actions'
+import selectors from '../selectors'
+import { getReqBalance, fetchAccountBalance } from '../saga'
+
+const ERROR = { message: 'fail' }
+const TIMEFRAME = 'day'
+const TIME_FRAME = { start: 1000, end: 2000 }
 
 describe('Account balance saga', () => {
-  const generator = cloneableGenerator(fetchAccountBalance)(actions.fetchBalance())
+  const generator = cloneableGenerator(fetchAccountBalance)(actions.fetchBalance({ useDefaults: false }))
 
-  it('sets params from the payload', () => {
-    const result = generator.next(true).value
-    expect(result).toEqual(put(actions.setParams({})))
+  it('selects the timeframe', () => {
+    const result = generator.next().value
+    expect(result).toEqual(select(selectors.getTimeframe))
+  })
+
+  it('selects the unrealized profit setting', () => {
+    const result = generator.next(TIMEFRAME).value
+    expect(result).toEqual(select(selectors.getIsUnrealizedProfitExcluded))
+  })
+
+  it('selects the time frame', () => {
+    const result = generator.next(false).value
+    expect(result).toEqual(select(getTimeFrame))
   })
 
   it('calls the API', () => {
-    const result = generator.next().value
-    expect(result).toEqual(call(getReqBalance, {}))
+    const result = generator.next(TIME_FRAME).value
+    expect(result).toEqual(call(getReqBalance, {
+      start: TIME_FRAME.start,
+      end: TIME_FRAME.end,
+      timeframe: TIMEFRAME,
+      isUnrealizedProfitExcluded: false,
+    }))
   })
 
   describe('request returns error', () => {
@@ -22,16 +45,12 @@ describe('Account balance saga', () => {
 
     beforeAll(() => {
       clone = generator.clone()
-      clone.next({ error: {} }) // skips data update
+      clone.next({ result: [], error: ERROR }) // skips data update
     })
 
-    it('raises failed action', () => {
+    it('toggles the error dialog', () => {
       const result = clone.next().value
-      expect(result).toEqual(put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'accountbalance.title',
-        detail: JSON.stringify({}),
-      })))
+      expect(result).toEqual(put(toggleErrorDialog(true, ERROR.message)))
     })
   })
 
@@ -59,6 +78,6 @@ describe('Account balance saga', () => {
 
   it('updates data', () => {
     const result = generator.next({ result: [], error: false }).value
-    expect(result).toEqual(put(actions.updateBalance([])))
+    expect(result).toEqual(put(actions.updateBalance({ result: [], useDefaults: false })))
   })
 })
