@@ -11,7 +11,7 @@ import { getQueryLimit } from 'state/query/utils'
 import { updateErrorStatus } from 'state/status/actions'
 import queryTypes from 'state/query/constants'
 import { mapRequestSymbols } from 'state/symbols/utils'
-import { getFilterQuery } from 'state/filters/selectors'
+import { getLedgersFilterQuery } from 'state/filters/selectors'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
 import { fetchDataWithPagination } from 'state/sagas.helper'
@@ -23,16 +23,18 @@ import { getLedgers } from './selectors'
 const TYPE = queryTypes.MENU_LEDGERS
 
 function getReqLedgers({
-  start,
   end,
+  start,
+  filter,
+  wallet,
   targetCategory,
   targetSymbols,
-  filter,
 }) {
   const params = {
     start,
     end,
     filter,
+    wallet,
     limit: getQueryLimit(TYPE),
     category: targetCategory,
     symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
@@ -45,15 +47,16 @@ function* fetchLedgers() {
   try {
     const { targetCategory, targetSymbols } = yield select(getLedgers)
     const { smallestMts } = yield select(getPaginationData, TYPE)
-    const filter = yield select(getFilterQuery, TYPE)
+    const { filter, wallet } = yield select(getLedgersFilterQuery, TYPE)
 
     const { start, end } = yield select(getTimeFrame, smallestMts)
     const { result, error } = yield call(fetchDataWithPagination, getReqLedgers, {
-      start,
       end,
+      start,
+      filter,
+      wallet,
       targetCategory,
       targetSymbols,
-      filter,
     })
     yield put(actions.updateLedgers(result))
     yield put(updatePagination(TYPE, result))
