@@ -1,21 +1,42 @@
-import { put, select, call } from 'redux-saga/effects'
+import { put, call, select } from 'redux-saga/effects'
 import { cloneableGenerator } from '@redux-saga/testing-utils'
 
-import { fetchTaxReport, getReqTaxReport } from '../saga'
+import { getTimeFrame } from 'state/timeRange/selectors'
+
 import actions from '../actions'
-import selectors from '../selectors'
+import { fetchTaxReport, getReqTaxReport } from '../saga'
+import { getTransactionsStrategy, getTransactionsShouldFeesBeDeducted } from '../selectors'
+
+const ERROR = { message: 'fail' }
+const STRATEGY = 'FIFO'
+const TIME_FRAME = { start: 1000, end: 2000 }
 
 describe('Tax report saga', () => {
-  const generator = cloneableGenerator(fetchTaxReport)(actions.fetchTaxReport())
+  const generator = cloneableGenerator(fetchTaxReport)(actions.fetchTaxReportTransactions())
 
-  it('gets params from store', () => {
-    const result = generator.next(true).value
-    expect(result).toEqual(select(selectors.getParams))
+  it('selects the time frame', () => {
+    const result = generator.next().value
+    expect(result).toEqual(select(getTimeFrame))
+  })
+
+  it('selects the transactions strategy', () => {
+    const result = generator.next(TIME_FRAME).value
+    expect(result).toEqual(select(getTransactionsStrategy))
+  })
+
+  it('selects the deduct fees setting', () => {
+    const result = generator.next(STRATEGY).value
+    expect(result).toEqual(select(getTransactionsShouldFeesBeDeducted))
   })
 
   it('calls the API', () => {
-    const result = generator.next({}).value
-    expect(result).toEqual(call(getReqTaxReport, {}))
+    const result = generator.next(false).value
+    expect(result).toEqual(call(getReqTaxReport, {
+      start: TIME_FRAME.start,
+      end: TIME_FRAME.end,
+      strategy: STRATEGY,
+      shouldFeesBeDeducted: false,
+    }))
   })
 
   describe('request returns error', () => {
@@ -23,15 +44,14 @@ describe('Tax report saga', () => {
 
     beforeAll(() => {
       clone = generator.clone()
-      clone.next({ error: {} }) // skips data update
     })
 
     it('raises failed action', () => {
-      const result = clone.next().value
+      const result = clone.next({ error: ERROR }).value
       expect(result).toEqual(put(actions.fetchFail({
         id: 'status.fail',
         topic: 'taxreport.title',
-        detail: JSON.stringify({}),
+        detail: ERROR.message,
       })))
     })
   })
@@ -58,8 +78,8 @@ describe('Tax report saga', () => {
     })
   })
 
-  it('updates data', () => {
-    const result = generator.next({ result: [], error: false }).value
-    expect(result).toEqual(put(actions.updateTaxReport([])))
+  it('finishes with no error', () => {
+    const result = generator.next({ error: false }).done
+    expect(result).toBe(true)
   })
 })
