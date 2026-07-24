@@ -1,3 +1,6 @@
+import timeframeConstants from 'ui/TimeFrameSelector/constants'
+import unrealizedProfitConstants from 'ui/UnrealizedProfitSelector/constants'
+
 import actions from '../actions'
 import reducer, { initialState } from '../reducer'
 
@@ -9,18 +12,18 @@ describe('Account balance state', () => {
   })
 
   it('should update balance', () => {
-    expect(reducer(initialState, actions.updateBalance([TEST_ENTRY])))
+    expect(reducer(initialState, actions.updateBalance({ result: [TEST_ENTRY], useDefaults: false })))
       .toEqual({
         ...initialState,
         dataReceived: true,
         entries: [TEST_ENTRY],
+        defaultDataReceived: false,
       })
   })
 
   it('should set params', () => {
     const params = {
-      start: 1000,
-      end: 2000,
+      timeframe: timeframeConstants.WEEK,
     }
     expect(reducer(initialState, actions.setParams(params)))
       .toEqual({
@@ -32,14 +35,14 @@ describe('Account balance state', () => {
   it('should refresh data', () => {
     const state = {
       ...initialState,
-      start: 1000,
+      timeframe: timeframeConstants.WEEK,
+      isUnrealizedProfitExcluded: unrealizedProfitConstants.TRUE,
     }
     expect(reducer(state, actions.refresh()))
       .toEqual({
         ...initialState,
-        start: state.start,
-        end: state.end,
         timeframe: state.timeframe,
+        isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
       })
   })
 })
