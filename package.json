@@ -81,13 +81,18 @@
     "startAll": "concurrently \"npm run start\" \"npm run --prefix ../bfx-reports-framework startSimulEnv\" \"npm run --prefix ../bfx-reports-framework startServDev\" \"npm run --prefix ../bfx-reports-framework startDev\"",
     "startAllWeb": "concurrently \"npm run start\" \"npm run --prefix ../bfx-report startSimulEnv\" \"npm run --prefix ../bfx-report startServDev\" \"npm run --prefix ../bfx-report startDev\"",
     "build": "npm run prepare && npm run lint && cross-env REACT_APP_ENV=$CI_ENVIRONMENT_NAME react-scripts build",
-    "test": "react-scripts test --env=jsdom --modulePaths=src --verbose --color --watchAll=false",
+    "test": "cross-env REACT_APP_ENV=testing react-scripts test --env=jsdom --modulePaths=src --verbose --color --watchAll=false",
     "lint": "eslint src scripts --ignore-path .gitignore",
     "lintFix": "eslint src scripts --fix --ignore-path .gitignore"
   },
   "engines": {
     "node": ">=18.17.1",
     "npm": ">=9.6.7"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!(query-string|decode-uri-component|split-on-first|filter-obj)/)"
+    ]
   },
   "browserslist": [
     ">0.2%",
