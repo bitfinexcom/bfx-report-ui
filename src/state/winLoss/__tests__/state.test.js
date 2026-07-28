@@ -1,3 +1,7 @@
+import timeframeConstants from 'ui/TimeFrameSelector/constants'
+import reportTypeConstants from 'ui/ReportTypeSelector/constants'
+import unrealizedProfitConstants from 'ui/UnrealizedProfitSelector/constants'
+
 import actions from '../actions'
 import reducer, { initialState } from '../reducer'
 
@@ -19,8 +23,7 @@ describe('WinLoss state', () => {
 
   it('should set params', () => {
     const params = {
-      start: 1000,
-      end: 2000,
+      timeframe: timeframeConstants.WEEK,
     }
     expect(reducer(initialState, actions.setParams(params)))
       .toEqual({
@@ -32,14 +35,20 @@ describe('WinLoss state', () => {
   it('should refresh data', () => {
     const state = {
       ...initialState,
-      start: 1000,
+      isVSPrevDayBalance: true,
+      isVsAccountBalanceSelected: true,
+      timeframe: timeframeConstants.WEEK,
+      reportType: reportTypeConstants.GAINS_BALANCE,
+      isUnrealizedProfitExcluded: unrealizedProfitConstants.TRUE,
     }
     expect(reducer(state, actions.refresh()))
       .toEqual({
         ...initialState,
-        start: state.start,
-        end: state.end,
         timeframe: state.timeframe,
+        reportType: state.reportType,
+        isVSPrevDayBalance: state.isVSPrevDayBalance,
+        isUnrealizedProfitExcluded: state.isUnrealizedProfitExcluded,
+        isVsAccountBalanceSelected: state.isVsAccountBalanceSelected,
       })
   })
 })

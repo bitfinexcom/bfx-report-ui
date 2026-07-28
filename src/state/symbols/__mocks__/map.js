@@ -1,10 +1,26 @@
-export const getSymbolMap = () => ({
+const symbols = {
   BAB: 'BCH',
   CNHT: 'CNHt',
-})
+}
 
-const symbolMap = getSymbolMap()
+const pairs = {
+  BABUSD: 'BCHUSD',
+}
 
-export const setSymbolMap = () => {}
+const symbolsDemap = {
+  BCH: 'BAB',
+  CNHt: 'CNHT',
+}
 
-export default symbolMap
+const pairsDemap = {
+  BCHUSD: 'BABUSD',
+}
+
+export default {
+  pairs,
+  symbols,
+  pairsDemap,
+  symbolsDemap,
+  setPairs: () => {},
+  setSymbols: () => {},
+}

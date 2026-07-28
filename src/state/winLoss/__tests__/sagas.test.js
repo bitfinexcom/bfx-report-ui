@@ -1,20 +1,43 @@
-import { put, call } from 'redux-saga/effects'
+import { put, call, select } from 'redux-saga/effects'
 import { cloneableGenerator } from '@redux-saga/testing-utils'
 
-import { fetchWinLoss, getReqWinLoss } from '../saga'
+import { toggleErrorDialog } from 'state/ui/actions'
+import { getTimeFrame } from 'state/timeRange/selectors'
+
 import actions from '../actions'
+import selectors from '../selectors'
+import { fetchWinLoss, getReqWinLoss } from '../saga'
+
+const ERROR = { message: 'fail' }
+const TIME_FRAME = { start: 1000, end: 2000 }
+const PARAMS = {
+  timeframe: 'day',
+  isVSPrevDayBalance: false,
+  isUnrealizedProfitExcluded: false,
+  isVsAccountBalanceSelected: false,
+}
 
 describe('WinLoss saga', () => {
-  const generator = cloneableGenerator(fetchWinLoss)(actions.fetchWinLoss())
+  const generator = cloneableGenerator(fetchWinLoss)()
 
-  it('sets params from the payload', () => {
-    const result = generator.next(true).value
-    expect(result).toEqual(put(actions.setParams({})))
+  it('selects the time frame', () => {
+    const result = generator.next().value
+    expect(result).toEqual(select(getTimeFrame))
+  })
+
+  it('selects the params', () => {
+    const result = generator.next(TIME_FRAME).value
+    expect(result).toEqual(select(selectors.getParams))
   })
 
   it('calls the API', () => {
-    const result = generator.next().value
-    expect(result).toEqual(call(getReqWinLoss, {}))
+    const result = generator.next(PARAMS).value
+    expect(result).toEqual(call(getReqWinLoss, {
+      start: TIME_FRAME.start,
+      end: TIME_FRAME.end,
+      timeframe: PARAMS.timeframe,
+      isUnrealizedProfitExcluded: PARAMS.isUnrealizedProfitExcluded,
+    }))
   })
 
   describe('request returns error', () => {
@@ -22,16 +45,12 @@ describe('WinLoss saga', () => {
 
     beforeAll(() => {
       clone = generator.clone()
-      clone.next({ error: {} }) // skips data update
+      clone.next({ result: [], error: ERROR }) // skips data update
     })
 
-    it('raises failed action', () => {
+    it('toggles the error dialog', () => {
       const result = clone.next().value
-      expect(result).toEqual(put(actions.fetchFail({
-        id: 'status.fail',
-        topic: 'averagewinloss.title',
-        detail: JSON.stringify({}),
-      })))
+      expect(result).toEqual(put(toggleErrorDialog(true, ERROR.message)))
     })
   })
 
