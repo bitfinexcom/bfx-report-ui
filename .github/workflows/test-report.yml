@@ -24,8 +24,8 @@ jobs:
       id: test-results
       with:
         name: Jest Tests
-        path: test-results/test-report.json
-        reporter: jest-json
+        path: test-results/test-report.xml
+        reporter: jest-junit
         collapsed: never
         # Workaround for error 'fatal: not a git repository' caused by a call to 'git ls-files'
         # See: https://github.com/dorny/test-reporter/issues/169#issuecomment-1583560458
