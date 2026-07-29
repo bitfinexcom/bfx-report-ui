@@ -25,7 +25,7 @@ jobs:
     - name: Install deps
       run: npm ci && npm run prepare
     - name: Run tests
-      run: npm test -- --json --outputFile=jest-results.json
+      run: npm test -- --json --outputFile=test-report.json
     - uses: actions/upload-artifact@v7.0.0
       if: success() || failure()
       with:
