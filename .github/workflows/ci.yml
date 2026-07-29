@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: 24.14.0
     - name: Install deps
-      run: npm ci
+      run: npm ci && npm run prepare
     - name: Run tests
       run: npm test -- --json --outputFile=jest-results.json
     - uses: actions/upload-artifact@v7.0.0
