@@ -25,7 +25,12 @@ import { propTypes, defaultProps } from './ColumnsFilter.props'
 import { FILTERS_SELECTOR } from './ColumnSelector/ColumnSelector.columns'
 import SideSelector from './Selectors/SideSelector'
 import WalletSelector from './Selectors/WalletSelector'
-import { getFiltersTitle, getFiltersClassNames } from './ColumnsFilter.helpers'
+import {
+  getFiltersTitle,
+  getUsedFilterTypes,
+  getUsedFilterValues,
+  getFiltersClassNames,
+} from './ColumnsFilter.helpers'
 
 const MAX_FILTERS = 7
 const { DATE } = DATA_TYPES
@@ -180,10 +185,11 @@ class ColumnsFilter extends PureComponent {
 
   renderSelect = ({ filter, index }) => {
     const { select, value } = filter
-    // eslint-disable-next-line no-unused-vars
+    const { filters } = this.state
     const selectProps = {
-      className: 'columns-filter-item-input columns-filter-item-input--select',
       value,
+      className: 'columns-filter-item-input columns-filter-item-input--select',
+      disabledValues: getUsedFilterValues(filters, index),
       onChange: itemValue => this.onSelectChange(index, itemValue),
     }
 
@@ -239,9 +245,10 @@ class ColumnsFilter extends PureComponent {
                       onChange={(column) => this.onColumnChange({ index, ...column })}
                     />
                     <FilterTypeSelector
-                      isSelect={!!select}
                       value={type}
+                      isSelect={!!select}
                       dataType={dataType}
+                      disabledTypes={getUsedFilterTypes(filters, index)}
                       onChange={filterType => this.updateFilter({ index, type: filterType })}
                     />
                     {select && this.renderSelect({ filter, index })}
