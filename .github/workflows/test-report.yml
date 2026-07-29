@@ -1,0 +1,32 @@
+name: 'Test Report'
+run-name: 'Test Report: Commit ${{ github.sha }}'
+
+on:
+  workflow_call
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
+jobs:
+  web-page-report:
+    name: Web Page Report
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Download test results
+      uses: actions/download-artifact@v8.0.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        name: test-results
+        path: test-results
+    - uses: dorny/test-reporter@v3.0.0
+      id: test-results
+      with:
+        name: Jest Tests
+        path: test-results/test-report.json
+        reporter: jest-json
+        collapsed: never
+        # Workaround for error 'fatal: not a git repository' caused by a call to 'git ls-files'
+        # See: https://github.com/dorny/test-reporter/issues/169#issuecomment-1583560458
+        max-annotations: 0

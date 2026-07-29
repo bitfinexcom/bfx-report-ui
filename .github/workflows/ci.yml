@@ -1,0 +1,40 @@
+name: CI
+run-name: 'Run tests: Commit ${{ github.sha }}'
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - master
+      - staging
+  workflow_dispatch:
+
+jobs:
+  linux-test-runner:
+    name: Linux Test Runner
+    timeout-minutes: 90
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6.0.2
+      with:
+        submodules: recursive
+    - uses: actions/setup-node@v6.3.0
+      with:
+        node-version: 24.14.0
+    - name: Install deps
+      run: npm ci
+    - name: Run tests
+      run: npm test -- --json --outputFile=jest-results.json
+    - uses: actions/upload-artifact@v7.0.0
+      if: success() || failure()
+      with:
+        name: test-results
+        path: test-report.json
+  web-page-report:
+    needs: linux-test-runner
+    permissions:
+      contents: read
+      actions: read
+      checks: write
+    uses: ./.github/workflows/test-report.yml
