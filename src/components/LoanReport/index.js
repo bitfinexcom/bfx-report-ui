@@ -1,1 +1,1 @@
-export { default } from './LoanReport.container'
+export { default } from './LoanReport'
