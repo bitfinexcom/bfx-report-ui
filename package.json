@@ -70,6 +70,7 @@
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.32.2",
     "husky": "9.1.7",
+    "jest-junit": "17.0.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
@@ -78,7 +79,7 @@
     "startAll": "concurrently \"npm run start\" \"npm run --prefix ../bfx-reports-framework startSimulEnv\" \"npm run --prefix ../bfx-reports-framework startServDev\" \"npm run --prefix ../bfx-reports-framework startDev\"",
     "startAllWeb": "concurrently \"npm run start\" \"npm run --prefix ../bfx-report startSimulEnv\" \"npm run --prefix ../bfx-report startServDev\" \"npm run --prefix ../bfx-report startDev\"",
     "build": "npm run prepare && npm run lint && cross-env REACT_APP_ENV=$CI_ENVIRONMENT_NAME react-scripts build",
-    "test": "cross-env REACT_APP_ENV=testing react-scripts test --env=jsdom --modulePaths=src --verbose --color --watchAll=false",
+    "test": "npm run lint && cross-env REACT_APP_ENV=testing react-scripts test --env=jsdom --modulePaths=src --verbose --color --watchAll=false",
     "lint": "eslint src scripts --ignore-path .gitignore",
     "lintFix": "eslint src scripts --fix --ignore-path .gitignore"
   },
