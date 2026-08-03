@@ -72,6 +72,9 @@ export const calculateFilterQuery = (filters = [], section) => {
 
   const validFilters = getValidFilters(filters)
   const columns = SECTION_COLUMNS[section]
+  const equalCountsByColumn = _countBy(
+    _filter(validFilters, { type: FILTERS.EQUAL_TO }), 'column',
+  )
   const notEqualCountsByColumn = _countBy(
     _filter(validFilters, { type: FILTERS.NOT_EQUAL_TO }), 'column',
   )
@@ -101,9 +104,16 @@ export const calculateFilterQuery = (filters = [], section) => {
       case FILTERS.ENDS_WITH:
         _set(acc, `${FILTER_TYPES.LIKE}.${column}`, `%${filterValue}`)
         break
-      case FILTERS.EQUAL_TO:
-        _set(acc, `${FILTER_TYPES.EQ}.${column}`, filterValue)
+      case FILTERS.EQUAL_TO: {
+        // a single value maps to $eq, multiple ones are collected into a $in list
+        if (get(equalCountsByColumn, column, 0) > 1) {
+          const currentValues = get(acc, `${FILTER_TYPES.IN}.${column}`, [])
+          _set(acc, `${FILTER_TYPES.IN}.${column}`, _uniq(currentValues.concat(filterValue)))
+        } else {
+          _set(acc, `${FILTER_TYPES.EQ}.${column}`, filterValue)
+        }
         break
+      }
       case FILTERS.NOT_EQUAL_TO: {
         // a single exclusion maps to $ne, multiple ones are collected into a $nin list
         if (get(notEqualCountsByColumn, column, 0) > 1) {
