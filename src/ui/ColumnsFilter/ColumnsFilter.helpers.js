@@ -3,16 +3,21 @@ import _size from 'lodash/size'
 import _filter from 'lodash/filter'
 import _reduce from 'lodash/reduce'
 import _toString from 'lodash/toString'
+import _includes from 'lodash/includes'
 import { isEmpty, isEqual } from '@bitfinex/lib-js-util-base'
 
 import { FILTERS } from 'var/filterTypes'
+
+// filter types whose repeated use on the same column is collected into a list ($in/$nin)
+// instead of overwriting the previous value, so duplicates are allowed for them
+const LIST_FILTER_TYPES = [FILTERS.EQUAL_TO, FILTERS.NOT_EQUAL_TO]
 
 const getActiveFilters = (filters) => _filter(
   filters, filter => !isEmpty(_toString(filter?.value ?? '')),
 )
 
 // filter types already applied to the same column, as re-using one overwrites the previous filter;
-// "not equal to" is exempt, since multiple exclusions are collected into a $nin list
+// list types (equal to / not equal to) are exempt, since their values are collected into a $in/$nin list
 export const getUsedFilterTypes = (filters, index) => {
   const { column } = _get(filters, index, {})
   if (isEmpty(column)) {
@@ -25,7 +30,7 @@ export const getUsedFilterTypes = (filters, index) => {
     if (!isEqual(i, index)
       && isEqual(filterColumn, column)
       && !isEmpty(type)
-      && !isEqual(type, FILTERS.NOT_EQUAL_TO)) {
+      && !_includes(LIST_FILTER_TYPES, type)) {
       acc.push(type)
     }
 
