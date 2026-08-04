@@ -20,6 +20,7 @@ class Select extends PureComponent {
   static propTypes = {
     className: PropTypes.string,
     filterable: PropTypes.bool,
+    itemDisabled: PropTypes.func,
     itemPredicate: PropTypes.func,
     itemRenderer: PropTypes.func,
     items: PropTypes.arrayOf(PropTypes.oneOfType([
@@ -51,6 +52,7 @@ class Select extends PureComponent {
     filterable: false,
     popoverClassName: '',
     itemRenderer: undefined,
+    itemDisabled: undefined,
     itemPredicate: undefined,
     type: 'Select',
   }
@@ -111,6 +113,7 @@ class Select extends PureComponent {
     const {
       className,
       filterable,
+      itemDisabled,
       itemPredicate,
       itemRenderer,
       items,
@@ -144,6 +147,7 @@ class Select extends PureComponent {
           placeholder: t('inputs.filter_placeholder'),
         }}
         items={items}
+        itemDisabled={itemDisabled}
         itemRenderer={itemRenderer || this.itemRenderer}
         itemPredicate={itemPredicate || (filterable && filterSelectorItem)}
         onItemSelect={this.onChange}

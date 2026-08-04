@@ -8,7 +8,7 @@ import {
 import { makeFetchCall } from 'state/utils'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getQueryLimit } from 'state/query/utils'
-import { getFilterQuery } from 'state/filters/selectors'
+import { getLedgersFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getAffiliatesEarnings } from 'state/affiliatesEarnings/selectors'
@@ -24,15 +24,17 @@ import actions from './actions'
 const TYPE = queryTypes.MENU_AFFILIATES_EARNINGS
 
 function getReqLedgers({
-  start,
   end,
-  targetSymbols,
+  start,
   filter,
+  wallet,
+  targetSymbols,
 }) {
   const params = {
     start,
     end,
     filter,
+    wallet,
     limit: getQueryLimit(TYPE),
     category: LEDGERS_CATEGORIES.AFFILIATE_REBATE,
     symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
@@ -47,12 +49,13 @@ function* fetchAffiliatesEarnings() {
     const { smallestMts } = yield select(getPaginationData, TYPE)
 
     const { start, end } = yield select(getTimeFrame, smallestMts)
-    const filter = yield select(getFilterQuery, TYPE)
+    const { filter, wallet } = yield select(getLedgersFilterQuery, TYPE)
     const { result, error } = yield call(fetchDataWithPagination, getReqLedgers, {
-      start,
       end,
-      targetSymbols,
+      start,
       filter,
+      wallet,
+      targetSymbols,
     })
     yield put(actions.updateAffiliatesEarnings(result))
     yield put(updatePagination(TYPE, result))

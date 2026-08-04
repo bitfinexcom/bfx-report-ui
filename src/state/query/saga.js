@@ -14,7 +14,8 @@ import { LANGUAGES } from 'locales/i18n'
 import { makeFetchCall } from 'state/utils'
 import { formatRawSymbols, mapRequestSymbols, mapRequestPairs } from 'state/symbols/utils'
 import { updateErrorStatus } from 'state/status/actions'
-import { getFilterQuery } from 'state/filters/selectors'
+import { WALLET_PARAM_SECTIONS } from 'state/filters/utils'
+import { getFilterQuery, getLedgersFilterQuery } from 'state/filters/selectors'
 import { getTimeframe as getAccountBalanceTimeframe } from 'state/accountBalance/selectors'
 import { getTargetSymbols as getAffiliatesEarningsSymbols } from 'state/affiliatesEarnings/selectors'
 import { getParams as getCandlesParams } from 'state/candles/selectors'
@@ -221,7 +222,13 @@ function* getOptions({ target }) {
   options.timezone = yield select(getTimezone)
   options.dateFormat = yield select(getDateFormat)
   options.milliseconds = yield select(getShowMilliseconds)
-  options.filter = yield select(getFilterQuery, target)
+  if (_includes(WALLET_PARAM_SECTIONS, target)) {
+    const { filter, wallet } = yield select(getLedgersFilterQuery, target)
+    options.filter = filter
+    options.wallet = wallet
+  } else {
+    options.filter = yield select(getFilterQuery, target)
+  }
   const selector = getSelector(target)
   const sign = selector ? yield select(selector) : ''
   const isFundingFees = showFrameworkMode ? yield select(getIsFundingFees) : ''

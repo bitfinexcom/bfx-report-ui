@@ -9,7 +9,7 @@ import { makeFetchCall } from 'state/utils'
 import { toggleErrorDialog } from 'state/ui/actions'
 import { getTimeFrame } from 'state/timeRange/selectors'
 import { getQueryLimit } from 'state/query/utils'
-import { getFilterQuery } from 'state/filters/selectors'
+import { getLedgersFilterQuery } from 'state/filters/selectors'
 import { updateErrorStatus } from 'state/status/actions'
 import { refreshPagination, updatePagination } from 'state/pagination/actions'
 import { getPaginationData } from 'state/pagination/selectors'
@@ -25,15 +25,17 @@ import selectors from './selectors'
 const TYPE = queryTypes.MENU_SPAYMENTS
 
 function getReqLedgers({
-  start,
   end,
-  targetSymbols,
+  start,
   filter,
+  wallet,
+  targetSymbols,
 }) {
   const params = {
     start,
     end,
     filter,
+    wallet,
     limit: getQueryLimit(TYPE),
     category: LEDGERS_CATEGORIES.STAKING_PAYMENT,
     symbol: targetSymbols.length ? mapRequestSymbols(targetSymbols) : undefined,
@@ -47,12 +49,13 @@ function* fetchSPayments() {
     const targetSymbols = yield select(selectors.getTargetSymbols, TYPE)
     const { smallestMts } = yield select(getPaginationData, TYPE)
     const { start, end } = yield select(getTimeFrame, smallestMts)
-    const filter = yield select(getFilterQuery, TYPE)
+    const { filter, wallet } = yield select(getLedgersFilterQuery, TYPE)
     const { result, error } = yield call(fetchDataWithPagination, getReqLedgers, {
-      start,
       end,
-      targetSymbols,
+      start,
       filter,
+      wallet,
+      targetSymbols,
     })
     yield put(actions.updateData(result))
     yield put(updatePagination(TYPE, result))

@@ -1,5 +1,6 @@
 import React from 'react'
 import { withTranslation } from 'react-i18next'
+import _includes from 'lodash/includes'
 
 import Select from 'ui/Select'
 import { FILTERS } from 'var/filterTypes'
@@ -22,7 +23,7 @@ class FilterTypeSelector extends React.PureComponent {
 
   render() {
     const {
-      dataType, isSelect, value, t,
+      dataType, disabledTypes, isSelect, value, t,
     } = this.props
 
     const dateTypes = (dataType === DATE)
@@ -65,6 +66,7 @@ class FilterTypeSelector extends React.PureComponent {
         className='columns-filter-item-filter'
         filterable={false}
         items={items}
+        itemDisabled={item => _includes(disabledTypes, item.value)}
         onChange={this.onChange}
         value={value}
       />
