@@ -13,14 +13,28 @@ const { REACT_APP_ENV } = process.env
 
 const RECONNECT_BASE_DELAY = 300 // ms
 const RECONNECT_MAX_DELAY = 30000 // ms (cap)
+const RECONNECT_FLAT_ATTEMPTS = 3 // attempts 1-3 retry with the flat base delay
+const RECONNECT_EXPONENTIAL_ATTEMPTS = 3 // attempts 4-6 grow exponentially, no jitter
 
-// Full Jitter: random(0, min(cap, base * 2^attempt))
+const getExponentialDelay = (attempt) => _clamp(
+  RECONNECT_BASE_DELAY * (2 ** (attempt - RECONNECT_FLAT_ATTEMPTS + 1)),
+  RECONNECT_BASE_DELAY,
+  RECONNECT_MAX_DELAY,
+)
+
+// Attempts 1-3: flat base delay, 4-6: plain exponential,
+// then Full Jitter: random(0, min(cap, base * 2^attempt))
 const getReconnectDelay = (attempt = 0) => {
-  const exponential = _clamp(
-    RECONNECT_BASE_DELAY * (2 ** attempt),
-    RECONNECT_BASE_DELAY,
-    RECONNECT_MAX_DELAY,
-  )
+  if (attempt < RECONNECT_FLAT_ATTEMPTS) {
+    return RECONNECT_BASE_DELAY
+  }
+
+  const exponential = getExponentialDelay(attempt)
+
+  if (attempt < RECONNECT_FLAT_ATTEMPTS + RECONNECT_EXPONENTIAL_ATTEMPTS) {
+    return exponential
+  }
+
   return _random(0, exponential)
 }
 
