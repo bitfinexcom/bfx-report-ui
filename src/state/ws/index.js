@@ -91,7 +91,6 @@ class WS {
 
     websocket.onopen = () => {
       this.isConnected = true
-      this.reconnectAttempts = 0
       store.dispatch({ type: types.WS_CONNECT })
 
       if (!this.isFirstConnect) {
@@ -170,6 +169,7 @@ class WS {
       }
 
       if (action === '__ping__') {
+        this.reconnectAttempts = 0
         this.heartbeat()
         return
       }
