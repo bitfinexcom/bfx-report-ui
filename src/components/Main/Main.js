@@ -1,60 +1,67 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Suspense } from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import { Card } from '@blueprintjs/core'
 
 import AppDownload from 'components/AppDownload'
-import AppSummary from 'components/AppSummary'
-import AccountBalance from 'components/AccountBalance'
-import AccountSummary from 'components/AccountSummary'
-import AffiliatesEarnings from 'components/AffiliatesEarnings'
-import AverageWinLoss from 'components/AverageWinLoss'
-import Candles from 'components/Candles'
-import ChangeLogs from 'components/ChangeLogs'
-import ConcentrationRisk from 'components/ConcentrationRisk'
-import Derivatives from 'components/Derivatives'
-import FeesReport from 'components/FeesReport'
-import ErrorDialog from 'components/ErrorDialog'
-import FundingCreditHistory from 'components/FundingCreditHistory'
-import FundingLoanHistory from 'components/FundingLoanHistory'
-import FundingOfferHistory from 'components/FundingOfferHistory'
-import FundingPayment from 'components/FundingPayment'
-import GoToRangeDialog from 'components/GoToRangeDialog'
-import Ledgers from 'components/Ledgers'
-import LoanReport from 'components/LoanReport'
-import Logins from 'components/Logins'
-import Movements from 'components/Movements'
-import Orders from 'components/Orders'
-import OrderTrades from 'components/OrderTrades'
-import PaginationDialog from 'components/PaginationDialog'
-import Positions from 'components/Positions'
-import PositionsActive from 'components/PositionsActive'
-import PositionsAudit from 'components/PositionsAudit'
-import PositionsAuditNoId from 'components/PositionsAudit/PositionsAudit.NoId'
-import PublicFunding from 'components/PublicFunding'
-import PublicTrades from 'components/PublicTrades'
-import Snapshots from 'components/Snapshots'
-import StakingPayments from 'components/StakingPayments'
-import SubAccounts from 'components/SubAccounts'
-import TaxReport from 'components/TaxReport'
-import Tickers from 'components/Tickers'
-import TradedVolume from 'components/TradedVolume'
-import Trades from 'components/Trades'
-import Wallets from 'components/Wallets'
-import WeightedAverages from 'components/WeightedAverages'
-import ExportDialog from 'components/ExportDialog'
-import ExportSuccessDialog from 'components/ExportSuccessDialog'
-import Preferences from 'components/Preferences'
-import ExtraInfoDialog from 'components/ExtraInfoDialog'
-import TimeFrameDialog from 'components/TimeFrameDialog'
-import TaxPrecisionDialog from 'components/TaxPrecisionDialog'
-import MaintenanceDialog from 'components/MaintenanceDialog'
-import ExportFailDialog from 'components/ExportFailDialog'
 import queryType from 'state/query/constants'
 import { getPath } from 'state/query/utils'
+import lazyLoad from 'utils/lazyLoad'
+import Loading from 'ui/Loading'
 import NavMenu from 'ui/NavMenu'
-import NavMenuDrawer from 'ui/NavMenuDrawer'
 import config from 'config'
+
+const Trades = lazyLoad(() => import(/* webpackChunkName: 'trades' */ 'components/Trades'))
+const Orders = lazyLoad(() => import(/* webpackChunkName: 'orders' */ 'components/Orders'))
+const Logins = lazyLoad(() => import(/* webpackChunkName: 'logins' */ 'components/Logins'))
+const Ledgers = lazyLoad(() => import(/* webpackChunkName: 'ledgers' */ 'components/Ledgers'))
+const Candles = lazyLoad(() => import(/* webpackChunkName: 'candles' */ 'components/Candles'))
+const Wallets = lazyLoad(() => import(/* webpackChunkName: 'wallets' */ 'components/Wallets'))
+const Tickers = lazyLoad(() => import(/* webpackChunkName: 'tickers' */ 'components/Tickers'))
+const Movements = lazyLoad(() => import(/* webpackChunkName: 'movements' */ 'components/Movements'))
+const Positions = lazyLoad(() => import(/* webpackChunkName: 'positions' */ 'components/Positions'))
+const Snapshots = lazyLoad(() => import(/* webpackChunkName: 'snapshots' */ 'components/Snapshots'))
+const TaxReport = lazyLoad(() => import(/* webpackChunkName: 'tax-report' */ 'components/TaxReport'))
+const AppSummary = lazyLoad(() => import(/* webpackChunkName: 'app-summary' */ 'components/AppSummary'))
+const ChangeLogs = lazyLoad(() => import(/* webpackChunkName: 'change-logs' */ 'components/ChangeLogs'))
+const FeesReport = lazyLoad(() => import(/* webpackChunkName: 'fees-report' */ 'components/FeesReport'))
+const LoanReport = lazyLoad(() => import(/* webpackChunkName: 'loan-report' */ 'components/LoanReport'))
+const Derivatives = lazyLoad(() => import(/* webpackChunkName: 'derivatives' */ 'components/Derivatives'))
+const OrderTrades = lazyLoad(() => import(/* webpackChunkName: 'order-trades' */ 'components/OrderTrades'))
+const SubAccounts = lazyLoad(() => import(/* webpackChunkName: 'sub-accounts' */ 'components/SubAccounts'))
+const PublicTrades = lazyLoad(() => import(/* webpackChunkName: 'public-trades' */ 'components/PublicTrades'))
+const TradedVolume = lazyLoad(() => import(/* webpackChunkName: 'traded-volume' */ 'components/TradedVolume'))
+const PublicFunding = lazyLoad(() => import(/* webpackChunkName: 'public-funding' */ 'components/PublicFunding'))
+const AccountBalance = lazyLoad(() => import(/* webpackChunkName: 'account-balance' */ 'components/AccountBalance'))
+const AccountSummary = lazyLoad(() => import(/* webpackChunkName: 'account-summary' */ 'components/AccountSummary'))
+const FundingPayment = lazyLoad(() => import(/* webpackChunkName: 'funding-payment' */ 'components/FundingPayment'))
+const PositionsAudit = lazyLoad(() => import(/* webpackChunkName: 'positions-audit' */ 'components/PositionsAudit'))
+const AverageWinLoss = lazyLoad(() => import(/* webpackChunkName: 'average-win-loss' */ 'components/AverageWinLoss'))
+const PositionsActive = lazyLoad(() => import(/* webpackChunkName: 'positions-active' */ 'components/PositionsActive'))
+const StakingPayments = lazyLoad(() => import(/* webpackChunkName: 'staking-payments' */ 'components/StakingPayments'))
+const WeightedAverages = lazyLoad(
+  () => import(/* webpackChunkName: 'weighted-averages' */ 'components/WeightedAverages'),
+)
+const ConcentrationRisk = lazyLoad(
+  () => import(/* webpackChunkName: 'concentration-risk' */ 'components/ConcentrationRisk'),
+)
+const AffiliatesEarnings = lazyLoad(
+  () => import(/* webpackChunkName: 'affiliates-earnings' */ 'components/AffiliatesEarnings'),
+)
+const FundingLoanHistory = lazyLoad(
+  () => import(/* webpackChunkName: 'funding-loan-history' */ 'components/FundingLoanHistory'),
+)
+const FundingOfferHistory = lazyLoad(
+  () => import(/* webpackChunkName: 'funding-offer-history' */ 'components/FundingOfferHistory'),
+)
+const FundingCreditHistory = lazyLoad(
+  () => import(/* webpackChunkName: 'funding-credit-history' */ 'components/FundingCreditHistory'),
+)
+const PositionsAuditNoId = lazyLoad(
+  () => import(/* webpackChunkName: 'positions-audit-no-id' */ 'components/PositionsAudit/PositionsAudit.NoId'),
+)
+
+const MainDialogs = lazyLoad(() => import(/* webpackChunkName: 'main-dialogs' */ './Main.dialogs'))
 
 const { showFrameworkMode } = config
 
@@ -160,211 +167,204 @@ class Main extends PureComponent {
           )}
         </div>
         <div className='bitfinex-dataset'>
-          <Switch>
-            <Route
-              exact
-              path={PATHS.MENU_LEDGERS}
-              component={Ledgers}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_CANDLES}
-              component={Candles}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_TRADES}
-              component={Trades}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_ORDERS}
-              component={Orders}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_ORDER_TRADES}
-              component={OrderTrades}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_MOVEMENTS}
-              component={Movements}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FCREDIT}
-              component={FundingCreditHistory}
-              key={PATHS.MENU_FCREDIT}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FLOAN}
-              component={FundingLoanHistory}
-              key={PATHS.MENU_FLOAN}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FOFFER}
-              component={FundingOfferHistory}
-              key={PATHS.MENU_FOFFER}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_FPAYMENT}
-              component={FundingPayment}
-              key={PATHS.MENU_FPAYMENT}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_SPAYMENTS}
-              component={StakingPayments}
-              key={PATHS.MENU_SPAYMENTS}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_AFFILIATES_EARNINGS}
-              component={AffiliatesEarnings}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_PUBLIC_FUNDING}
-              component={PublicFunding}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_PUBLIC_TRADES}
-              component={PublicTrades}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_TICKERS}
-              component={Tickers}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_DERIVATIVES}
-              component={Derivatives}
-            />
-            <Route
-              exact
-              path={getPath(MENU_POSITIONS_AUDIT)}
-              component={PositionsAuditNoId}
-            />
-            <Route
-              exact
-              path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}
-              component={PositionsAudit}
-            />
-            <Route
-              exact
-              path={getPath(MENU_POSITIONS_ACTIVE)}
-              component={PositionsActive}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_POSITIONS}
-              component={Positions}
-            />
-            <Route
-              exact
-              path={getPath(MENU_WALLETS)}
-              component={Wallets}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_WEIGHTED_AVERAGES}
-              component={WeightedAverages}
-              key={MENU_WEIGHTED_AVERAGES}
-            />
-            {showFrameworkMode && (
-              [
-                <Route
-                  exact
-                  path={getPath(MENU_ACCOUNT_BALANCE)}
-                  component={AccountBalance}
-                  key={MENU_ACCOUNT_BALANCE}
-                />,
-                <Route
-                  exact
-                  path={PATHS.MENU_LOAN_REPORT}
-                  component={LoanReport}
-                  key={MENU_LOAN_REPORT}
-                />,
-                <Route
-                  exact
-                  path={PATHS.MENU_TRADED_VOLUME}
-                  component={TradedVolume}
-                  key={MENU_TRADED_VOLUME}
-                />,
-                <Route
-                  exact
-                  path={PATHS.MENU_FEES_REPORT}
-                  component={FeesReport}
-                  key={MENU_FEES_REPORT}
-                />,
-                <Route
-                  exact
-                  path={getPath(MENU_WIN_LOSS)}
-                  component={AverageWinLoss}
-                  key={MENU_WIN_LOSS}
-                />,
-                <Route
-                  exact
-                  path={getPath(MENU_CONCENTRATION_RISK)}
-                  component={ConcentrationRisk}
-                  key={MENU_CONCENTRATION_RISK}
-                />,
-                <Route
-                  exact
-                  path={getPath(MENU_SNAPSHOTS)}
-                  component={Snapshots}
-                  key={MENU_SNAPSHOTS}
-                />,
-                <Route
-                  exact
-                  path={PATHS.MENU_TAX_REPORT}
-                  component={TaxReport}
-                  key={MENU_TAX_REPORT}
-                />,
-              ]
-            )}
-            <Route
-              exact
-              path={PATHS.MENU_ACCOUNT_SUMMARY}
-              component={showFrameworkMode ? AppSummary : AccountSummary}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_LOGINS}
-              component={Logins}
-            />
-            <Route
-              exact
-              path={PATHS.MENU_CHANGE_LOGS}
-              component={ChangeLogs}
-            />
-            {showSubAccounts && (
+          <Suspense fallback={<Loading />}>
+            <Switch>
               <Route
                 exact
-                path={PATHS.MENU_SUB_ACCOUNTS}
-                component={SubAccounts}
+                path={PATHS.MENU_LEDGERS}
+                component={Ledgers}
               />
-            )}
-          </Switch>
+              <Route
+                exact
+                path={PATHS.MENU_CANDLES}
+                component={Candles}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_TRADES}
+                component={Trades}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_ORDERS}
+                component={Orders}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_ORDER_TRADES}
+                component={OrderTrades}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_MOVEMENTS}
+                component={Movements}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_FCREDIT}
+                component={FundingCreditHistory}
+                key={PATHS.MENU_FCREDIT}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_FLOAN}
+                component={FundingLoanHistory}
+                key={PATHS.MENU_FLOAN}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_FOFFER}
+                component={FundingOfferHistory}
+                key={PATHS.MENU_FOFFER}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_FPAYMENT}
+                component={FundingPayment}
+                key={PATHS.MENU_FPAYMENT}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_SPAYMENTS}
+                component={StakingPayments}
+                key={PATHS.MENU_SPAYMENTS}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_AFFILIATES_EARNINGS}
+                component={AffiliatesEarnings}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_PUBLIC_FUNDING}
+                component={PublicFunding}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_PUBLIC_TRADES}
+                component={PublicTrades}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_TICKERS}
+                component={Tickers}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_DERIVATIVES}
+                component={Derivatives}
+              />
+              <Route
+                exact
+                path={getPath(MENU_POSITIONS_AUDIT)}
+                component={PositionsAuditNoId}
+              />
+              <Route
+                exact
+                path={`${getPath(MENU_POSITIONS_AUDIT)}/:id`}
+                component={PositionsAudit}
+              />
+              <Route
+                exact
+                path={getPath(MENU_POSITIONS_ACTIVE)}
+                component={PositionsActive}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_POSITIONS}
+                component={Positions}
+              />
+              <Route
+                exact
+                path={getPath(MENU_WALLETS)}
+                component={Wallets}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_WEIGHTED_AVERAGES}
+                component={WeightedAverages}
+                key={MENU_WEIGHTED_AVERAGES}
+              />
+              {showFrameworkMode && (
+                [
+                  <Route
+                    exact
+                    path={getPath(MENU_ACCOUNT_BALANCE)}
+                    component={AccountBalance}
+                    key={MENU_ACCOUNT_BALANCE}
+                  />,
+                  <Route
+                    exact
+                    path={PATHS.MENU_LOAN_REPORT}
+                    component={LoanReport}
+                    key={MENU_LOAN_REPORT}
+                  />,
+                  <Route
+                    exact
+                    path={PATHS.MENU_TRADED_VOLUME}
+                    component={TradedVolume}
+                    key={MENU_TRADED_VOLUME}
+                  />,
+                  <Route
+                    exact
+                    path={PATHS.MENU_FEES_REPORT}
+                    component={FeesReport}
+                    key={MENU_FEES_REPORT}
+                  />,
+                  <Route
+                    exact
+                    path={getPath(MENU_WIN_LOSS)}
+                    component={AverageWinLoss}
+                    key={MENU_WIN_LOSS}
+                  />,
+                  <Route
+                    exact
+                    path={getPath(MENU_CONCENTRATION_RISK)}
+                    component={ConcentrationRisk}
+                    key={MENU_CONCENTRATION_RISK}
+                  />,
+                  <Route
+                    exact
+                    path={getPath(MENU_SNAPSHOTS)}
+                    component={Snapshots}
+                    key={MENU_SNAPSHOTS}
+                  />,
+                  <Route
+                    exact
+                    path={PATHS.MENU_TAX_REPORT}
+                    component={TaxReport}
+                    key={MENU_TAX_REPORT}
+                  />,
+                ]
+              )}
+              <Route
+                exact
+                path={PATHS.MENU_ACCOUNT_SUMMARY}
+                component={showFrameworkMode ? AppSummary : AccountSummary}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_LOGINS}
+                component={Logins}
+              />
+              <Route
+                exact
+                path={PATHS.MENU_CHANGE_LOGS}
+                component={ChangeLogs}
+              />
+              {showSubAccounts && (
+                <Route
+                  exact
+                  path={PATHS.MENU_SUB_ACCOUNTS}
+                  component={SubAccounts}
+                />
+              )}
+            </Switch>
+          </Suspense>
         </div>
-        <ExportDialog />
-        <ExportSuccessDialog />
-        {showFrameworkMode && !errorDialogDisabled && <ErrorDialog />}
-        <PaginationDialog />
-        <Preferences />
-        <TimeFrameDialog />
-        <GoToRangeDialog />
-        <NavMenuDrawer />
-        <ExtraInfoDialog />
-        <ExportFailDialog />
-        {showFrameworkMode && <MaintenanceDialog />}
-        {showFrameworkMode && <TaxPrecisionDialog />}
+        <Suspense fallback={null}>
+          <MainDialogs errorDialogDisabled={errorDialogDisabled} />
+        </Suspense>
       </>
     ) : ''
   }
