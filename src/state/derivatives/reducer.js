@@ -18,7 +18,7 @@ import { formatPair, mapPair } from 'state/symbols/utils'
 
 import types from './constants'
 
-const initialState = {
+export const initialState = {
   ...basePairState,
 }
 
