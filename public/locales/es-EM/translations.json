@@ -295,7 +295,12 @@
     "targets": "Datos para Exportar",
     "exportFormat": "Formato de Exportación",
     "exportAsCsv": "Exportar como CSV",
-    "exportAsPdf": "Exportar como PDF"
+    "exportAsPdf": "Exportar como PDF",
+    "folderPerm": {
+      "title": "Problema al acceder a la carpeta de exportación de reportes",
+      "noAccess": "La aplicación no tiene acceso de escritura a la carpeta de exportación de reportes en:",
+      "hint": "Por favor, cambia la configuración del sistema o selecciona otra carpeta de exportación en el menú de la aplicación"
+    }
   },
   "fcredit": {
     "title": "Créditos de financiamiento (usados)",
