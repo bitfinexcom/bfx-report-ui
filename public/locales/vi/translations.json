@@ -295,7 +295,12 @@
     "targets": "Dữ liệu để xuất",
     "exportFormat": "Định dạng xuất",
     "exportAsCsv": "Xuất dưới dạng CSV",
-    "exportAsPdf": "Xuất dưới dạng PDF"
+    "exportAsPdf": "Xuất dưới dạng PDF",
+    "folderPerm": {
+      "title": "Sự cố khi truy cập thư mục xuất báo cáo",
+      "noAccess": "Ứng dụng không có quyền ghi vào thư mục xuất báo cáo tại:",
+      "hint": "Vui lòng thay đổi cài đặt hệ thống hoặc chọn một thư mục xuất khác trong menu ứng dụng"
+    }
   },
   "fcredit": {
     "title": "Tín dụng vốn vay (Đã sử dụng)",
