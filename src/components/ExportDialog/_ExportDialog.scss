@@ -45,6 +45,11 @@
       margin: 10px auto;
       word-break: break-all;
     }
+
+    &-actions {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
