@@ -21,7 +21,7 @@ import ExportTypeSelector from 'ui/ExportTypeSelector'
 import { getShowPdfSwitcher } from './ExportDialog.helpers'
 import ExportTargetsSelector from './ExportDialog.TargetsSelector'
 
-const { showFrameworkMode } = config
+const { isElectronApp, showFrameworkMode } = config
 
 class ExportDialog extends PureComponent {
   static propTypes = {
@@ -39,6 +39,11 @@ class ExportDialog extends PureComponent {
     timestamp: PropTypes.number,
     timezone: PropTypes.string.isRequired,
     isExporting: PropTypes.bool,
+    reportFolderWritePerm: PropTypes.shape({
+      invalidPath: PropTypes.bool,
+      noWritePerm: PropTypes.bool,
+      reportFilePath: PropTypes.string,
+    }),
   }
 
   static defaultProps = {
@@ -47,6 +52,7 @@ class ExportDialog extends PureComponent {
     email: '',
     timestamp: null,
     isExporting: false,
+    reportFolderWritePerm: null,
   }
 
   state = {
@@ -108,6 +114,43 @@ class ExportDialog extends PureComponent {
     toggleDialog()
   }
 
+  renderFolderPermError = () => {
+    const { t, isOpen, reportFolderWritePerm } = this.props
+    const { reportFilePath } = reportFolderWritePerm ?? {}
+
+    return (
+      <Dialog
+        className='export-dialog'
+        icon={<Icon.FILE_EXPORT />}
+        isCloseButtonShown={false}
+        isOpen={isOpen}
+        onClose={this.onCancel}
+        title={t('download.title')}
+      >
+        <div className={Classes.DIALOG_BODY}>
+          <div className='export-dialog-perm-error'>
+            <Icon.WARNING />
+            <p className='export-dialog-perm-error-title'>
+              {t('download.folderPerm.title')}
+            </p>
+            <p>{t('download.folderPerm.noAccess')}</p>
+            <p className='export-dialog-perm-error-path'>
+              {reportFilePath}
+            </p>
+            <p>{t('download.folderPerm.hint')}</p>
+          </div>
+        </div>
+        <div className={Classes.DIALOG_FOOTER}>
+          <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+            <Button onClick={this.onCancel}>
+              {t('download.cancel')}
+            </Button>
+          </div>
+        </div>
+      </Dialog>
+    )
+  }
+
   render() {
     const {
       t,
@@ -120,10 +163,15 @@ class ExportDialog extends PureComponent {
       timezone,
       timestamp,
       getFullTime,
+      reportFolderWritePerm,
     } = this.props
     const { currentTargets } = this.state
     if (!isOpen) {
       return null
+    }
+    const { invalidPath, noWritePerm } = reportFolderWritePerm ?? {}
+    if (isElectronApp && (invalidPath || noWritePerm)) {
+      return this.renderFolderPermError()
     }
     const showPdfSwitcher = getShowPdfSwitcher(currentTargets)
     const showLoader = showFrameworkMode && isExporting
