@@ -25,6 +25,27 @@
   .bp3-checkbox {
     width: 14px;
   }
+
+  &-perm-error {
+    text-align: center;
+
+    .icon--warning {
+      display: block;
+      margin: 23px auto 28px auto;
+    }
+
+    &-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    &-path {
+      color: #e7984c;
+      margin: 10px auto;
+      word-break: break-all;
+    }
+  }
 }
 
 @media screen and (min-width: 2560px) {
