@@ -46,7 +46,7 @@ const {
   MENU_WEIGHTED_AVERAGES,
 } = queryType
 
-const { isElectronApp, showFrameworkMode, HOME_URL } = config
+const { showFrameworkMode, HOME_URL } = config
 
 export const getAuthFromStore = () => {
   const state = store.getState()
@@ -57,9 +57,6 @@ export const getApiUrlFromStore = () => {
   const state = store.getState()
   return getApiUrl(state)
 }
-
-// turned off for firefox
-export const getDefaultTableScrollSetting = () => isElectronApp || !navigator.userAgent.includes('Firefox')
 
 export function postJsonFetch(url, bodyJson) {
   return fetch(url, {
@@ -553,7 +550,6 @@ export default {
   clearAllPairs,
   clearAllSymbols,
   DEFAULT_DATETIME_FORMAT,
-  getDefaultTableScrollSetting,
   getQueryWithoutParams,
   makeFetchCall,
   formatAuthDate,

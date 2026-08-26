@@ -1,3 +1,5 @@
+import timeframeConstants from 'ui/TimeFrameSelector/constants'
+
 import actions from '../actions'
 import reducer, { initialState } from '../reducer'
 
@@ -20,8 +22,7 @@ describe('Loan Report state', () => {
 
   it('should set params', () => {
     const params = {
-      start: 1000,
-      end: 2000,
+      timeframe: timeframeConstants.WEEK,
     }
     expect(reducer(initialState, actions.setParams(params)))
       .toEqual({
@@ -33,14 +34,14 @@ describe('Loan Report state', () => {
   it('should refresh data', () => {
     const state = {
       ...initialState,
-      start: 1000,
+      targetSymbols: ['BTC'],
+      timeframe: timeframeConstants.WEEK,
     }
     expect(reducer(state, actions.refresh()))
       .toEqual({
         ...initialState,
-        start: state.start,
-        end: state.end,
         timeframe: state.timeframe,
+        targetSymbols: state.targetSymbols,
       })
   })
 })

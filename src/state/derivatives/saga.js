@@ -17,7 +17,7 @@ import { getTargetPairs } from './selectors'
 
 const TYPE = queryTypes.MENU_DERIVATIVES
 
-function getReqDerivatives({ targetPairs, filter }) {
+export function getReqDerivatives({ targetPairs, filter }) {
   const params = { filter }
   if (targetPairs.length) {
     params.symbol = formatRawSymbols(mapRequestPairs(targetPairs))
@@ -26,7 +26,7 @@ function getReqDerivatives({ targetPairs, filter }) {
   return makeFetchCall('getStatusMessages', params)
 }
 
-function* fetchDerivatives() {
+export function* fetchDerivatives() {
   try {
     const targetPairs = yield select(getTargetPairs)
     const filter = yield select(getFilterQuery, TYPE)

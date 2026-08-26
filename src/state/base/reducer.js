@@ -1,6 +1,11 @@
-import { getDefaultTableScrollSetting } from 'state/utils'
+import config from 'config'
 
 import types from './constants'
+
+const { isElectronApp } = config
+
+// turned off for firefox
+const getDefaultTableScrollSetting = () => isElectronApp || !navigator.userAgent.includes('Firefox')
 
 const initialState = {
   dateFormat: types.DATE_FORMATS[0],

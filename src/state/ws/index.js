@@ -1,3 +1,6 @@
+import _clamp from 'lodash/clamp'
+import _random from 'lodash/random'
+
 import { store } from 'state/store'
 
 import { getWsAddress } from 'state/base/selectors'
@@ -7,6 +10,33 @@ import config from 'config'
 import types from './constants'
 
 const { REACT_APP_ENV } = process.env
+
+const RECONNECT_BASE_DELAY = 300 // ms
+const RECONNECT_MAX_DELAY = 30000 // ms (cap)
+const RECONNECT_FLAT_ATTEMPTS = 3 // attempts 1-3 retry with the flat base delay
+const RECONNECT_EXPONENTIAL_ATTEMPTS = 3 // attempts 4-6 grow exponentially, no jitter
+
+const getExponentialDelay = (attempt) => _clamp(
+  RECONNECT_BASE_DELAY * (2 ** (attempt - RECONNECT_FLAT_ATTEMPTS + 1)),
+  RECONNECT_BASE_DELAY,
+  RECONNECT_MAX_DELAY,
+)
+
+// Attempts 1-3: flat base delay, 4-6: plain exponential,
+// then Full Jitter: random(0, min(cap, base * 2^attempt))
+const getReconnectDelay = (attempt = 0) => {
+  if (attempt < RECONNECT_FLAT_ATTEMPTS) {
+    return RECONNECT_BASE_DELAY
+  }
+
+  const exponential = getExponentialDelay(attempt)
+
+  if (attempt < RECONNECT_FLAT_ATTEMPTS + RECONNECT_EXPONENTIAL_ATTEMPTS) {
+    return exponential
+  }
+
+  return _random(0, exponential)
+}
 
 const getAuth = () => {
   const state = store.getState()
@@ -30,6 +60,8 @@ class WS {
     this.isConnected = false
     this.websocket = null
     this.isFirstConnect = true
+    this.reconnectAttempts = 0
+    this.reconnectTimeout = null
   }
 
   heartbeat = () => {
@@ -41,6 +73,8 @@ class WS {
   }
 
   connect = () => {
+    clearTimeout(this.reconnectTimeout)
+
     if (!config.showFrameworkMode || this.isConnected) {
       return
     }
@@ -70,7 +104,9 @@ class WS {
 
     websocket.onclose = () => {
       this.isConnected = false
-      setTimeout(() => this.connect(), 300)
+      const delay = getReconnectDelay(this.reconnectAttempts)
+      this.reconnectAttempts += 1
+      this.reconnectTimeout = setTimeout(() => this.connect(), delay)
     }
 
     websocket.onmessage = this.onMessage
@@ -133,6 +169,7 @@ class WS {
       }
 
       if (action === '__ping__') {
+        this.reconnectAttempts = 0
         this.heartbeat()
         return
       }

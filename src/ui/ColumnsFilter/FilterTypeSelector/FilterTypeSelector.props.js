@@ -4,10 +4,12 @@ export const propTypes = {
   isSelect: PropTypes.bool.isRequired,
   value: PropTypes.string.isRequired,
   dataType: PropTypes.string,
+  disabledTypes: PropTypes.arrayOf(PropTypes.string),
   onChange: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 }
 
 export const defaultProps = {
   dataType: '',
+  disabledTypes: [],
 }

@@ -1,40 +1,35 @@
 import { put, call, select } from 'redux-saga/effects'
 import { cloneableGenerator } from '@redux-saga/testing-utils'
 
-import { toggleErrorDialog } from 'state/ui/actions'
-import { getTimeFrame } from 'state/timeRange/selectors'
+import queryTypes from 'state/query/constants'
+import { getFilterQuery } from 'state/filters/selectors'
 
 import actions from '../actions'
-import { getParams } from '../selectors'
-import { getLoanReport, fetchLoanReport } from '../saga'
+import { getTargetPairs } from '../selectors'
+import { fetchDerivatives, getReqDerivatives } from '../saga'
 
+const FILTER = {}
 const ERROR = { message: 'fail' }
-const TIME_FRAME = { start: 1000, end: 2000 }
-const PARAMS = {
-  timeframe: 'day',
-  targetSymbols: [],
-}
+const TARGET_PAIRS = ['BTCF0:USTF0']
 
-describe('Loan Report saga', () => {
-  const generator = cloneableGenerator(fetchLoanReport)(actions.fetchLoanReport())
+describe('Derivatives saga', () => {
+  const generator = cloneableGenerator(fetchDerivatives)()
 
-  it('selects the params', () => {
+  it('selects the target pairs', () => {
     const result = generator.next().value
-    expect(result).toEqual(select(getParams))
+    expect(result).toEqual(select(getTargetPairs))
   })
 
-  it('selects the time frame', () => {
-    const result = generator.next(PARAMS).value
-    expect(result).toEqual(select(getTimeFrame))
+  it('selects the filter query', () => {
+    const result = generator.next(TARGET_PAIRS).value
+    expect(result).toEqual(select(getFilterQuery, queryTypes.MENU_DERIVATIVES))
   })
 
   it('calls the API', () => {
-    const result = generator.next(TIME_FRAME).value
-    expect(result).toEqual(call(getLoanReport, {
-      start: TIME_FRAME.start,
-      end: TIME_FRAME.end,
-      timeframe: PARAMS.timeframe,
-      targetSymbols: PARAMS.targetSymbols,
+    const result = generator.next(FILTER).value
+    expect(result).toEqual(call(getReqDerivatives, {
+      targetPairs: TARGET_PAIRS,
+      filter: FILTER,
     }))
   })
 
@@ -46,9 +41,13 @@ describe('Loan Report saga', () => {
       clone.next({ result: [], error: ERROR }) // skips data update
     })
 
-    it('toggles the error dialog', () => {
+    it('raises failed action', () => {
       const result = clone.next().value
-      expect(result).toEqual(put(toggleErrorDialog(true, ERROR.message)))
+      expect(result).toEqual(put(actions.fetchFail({
+        id: 'status.fail',
+        topic: 'derivatives.title',
+        detail: ERROR.message,
+      })))
     })
   })
 
@@ -63,7 +62,7 @@ describe('Loan Report saga', () => {
       const result = clone.throw({}).value
       expect(result).toEqual(put(actions.fetchFail({
         id: 'status.request.error',
-        topic: 'loanreport.title',
+        topic: 'derivatives.title',
         detail: JSON.stringify({}),
       })))
     })
@@ -76,6 +75,6 @@ describe('Loan Report saga', () => {
 
   it('updates data', () => {
     const result = generator.next({ result: [], error: false }).value
-    expect(result).toEqual(put(actions.updateLoanReport([])))
+    expect(result).toEqual(put(actions.updateDerivatives([])))
   })
 })

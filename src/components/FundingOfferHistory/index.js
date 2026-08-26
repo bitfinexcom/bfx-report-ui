@@ -1,1 +1,1 @@
-export { default } from './FundingOfferHistory.container'
+export { default } from './FundingOfferHistory'

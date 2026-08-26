@@ -1,5 +1,7 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import React, { useMemo, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useRouteMatch } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card, Elevation } from '@blueprintjs/core'
 import classNames from 'classnames'
 import _sortBy from 'lodash/sortBy'
@@ -22,145 +24,146 @@ import TimeFrameSelector from 'ui/TimeFrameSelector'
 import ClearFiltersButton from 'ui/ClearFiltersButton'
 import MultiSymbolSelector from 'ui/MultiSymbolSelector'
 import { parseLoanReportChartData } from 'ui/Charts/Charts.helpers'
-import queryConstants from 'state/query/constants'
 import {
-  checkInit,
-  checkFetch,
-  toggleSymbol,
-  clearAllSymbols,
-} from 'state/utils'
+  setParams,
+  addTargetSymbol,
+  fetchLoanReport,
+  setTargetSymbols,
+  removeTargetSymbol,
+  clearTargetSymbols,
+} from 'state/loanReport/actions'
+import { setShouldRefreshAfterSync } from 'state/sync/actions'
+import {
+  getParams,
+  getEntries,
+  getPageLoading,
+  getDataReceived,
+  getTargetSymbols,
+  getCurrentFetchParams,
+} from 'state/loanReport/selectors'
+import {
+  getIsSyncRequired,
+  getIsFirstSyncing,
+  getShouldRefreshAfterSync,
+} from 'state/sync/selectors'
+import queryConstants from 'state/query/constants'
+import useSymbolFilter from 'hooks/useSymbolFilter'
+import useFetchLifecycle from 'hooks/useFetchLifecycle'
+import { getIsTimeframeMoreThanYear } from 'state/timeRange/selectors'
 
 const TYPE = queryConstants.MENU_LOAN_REPORT
 
-class LoanReport extends PureComponent {
-  static propTypes = {
-    currentFetchParams: PropTypes.shape({
-      timeframe: PropTypes.string,
-      targetSymbols: PropTypes.arrayOf(PropTypes.string),
-    }),
-    entries: PropTypes.arrayOf(PropTypes.shape({
-      mts: PropTypes.number.isRequired,
-    })),
-    targetSymbols: PropTypes.arrayOf(PropTypes.string),
-    dataReceived: PropTypes.bool.isRequired,
-    isFirstSyncing: PropTypes.bool.isRequired,
-    pageLoading: PropTypes.bool.isRequired,
-    t: PropTypes.func.isRequired,
-    params: PropTypes.shape({
-      timeframe: PropTypes.string,
-      targetSymbols: PropTypes.arrayOf(PropTypes.string),
-    }),
-    setParams: PropTypes.func.isRequired,
-    shouldShowYear: PropTypes.bool.isRequired,
-  }
+const LoanReport = () => {
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const params = useSelector(getParams)
+  const entries = useSelector(getEntries)
+  const pageLoading = useSelector(getPageLoading)
+  const dataReceived = useSelector(getDataReceived)
+  const match = useRouteMatch('/loan_report/:symbol')
+  const isSyncRequired = useSelector(getIsSyncRequired)
+  const isFirstSyncing = useSelector(getIsFirstSyncing)
+  const shouldShowYear = useSelector(getIsTimeframeMoreThanYear)
+  const currentFetchParams = useSelector(getCurrentFetchParams)
+  const shouldRefreshAfterSync = useSelector(getShouldRefreshAfterSync)
 
-  static defaultProps = {
-    params: [],
-    entries: [],
-    targetSymbols: [],
-    currentFetchParams: [],
-  }
+  const { timeframe } = params
+  const { timeframe: currTimeframe } = currentFetchParams
 
-  componentDidMount() {
-    checkInit(this.props, TYPE)
-  }
+  useFetchLifecycle(TYPE, {
+    match,
+    params,
+    pageLoading,
+    dataReceived,
+    isSyncRequired,
+    shouldRefreshAfterSync,
+    fetchData: () => dispatch(fetchLoanReport()),
+    setTargetSymbols: (s) => dispatch(setTargetSymbols(s)),
+    setShouldRefreshAfterSync: (v) => dispatch(setShouldRefreshAfterSync(v)),
+  })
 
-  componentDidUpdate(prevProps) {
-    checkFetch(prevProps, this.props, TYPE)
-  }
+  const { targetSymbols, toggleSymbol, clearSymbols } = useSymbolFilter(TYPE, {
+    getTargetSymbols,
+    addTargetSymbol,
+    removeTargetSymbol,
+    clearTargetSymbols,
+  })
 
-  handleTimeframeChange = (timeframe) => {
-    const { setParams } = this.props
-    setParams({ timeframe })
-  }
+  const handleTimeframeChange = useCallback((tf) => {
+    dispatch(setParams({ timeframe: tf }))
+  }, [dispatch])
 
-  toggleSymbol = symbol => toggleSymbol(TYPE, this.props, symbol)
-
-  clearSymbols = () => clearAllSymbols(TYPE, this.props)
-
-  render() {
-    const {
+  const { chartData, dataKeys } = useMemo(
+    () => parseLoanReportChartData({
       t,
-      params,
-      entries,
-      pageLoading,
-      dataReceived,
-      targetSymbols,
-      isFirstSyncing,
-      currentFetchParams: {
-        timeframe: currTimeframe,
-      },
       shouldShowYear,
-    } = this.props
-    const { timeframe } = params
-    const paramChangerClass = classNames({ disabled: isFirstSyncing })
-
-    const { chartData, dataKeys } = parseLoanReportChartData({
-      data: _sortBy(entries, ['mts']),
       timeframe: currTimeframe,
-      shouldShowYear,
-      t,
-    })
+      data: _sortBy(entries, ['mts']),
+    }),
+    [entries, currTimeframe, shouldShowYear, t],
+  )
 
-    let showContent
-    if (isFirstSyncing) {
-      showContent = <InitSyncNote />
-    } else if (!dataReceived && pageLoading) {
-      showContent = <Loading />
-    } else if (isEmpty(entries)) {
-      showContent = <NoData />
-    } else {
-      showContent = (
-        <Chart
-          data={chartData}
-          dataKeys={dataKeys}
-        />
-      )
-    }
-    return (
-      <Card
-        elevation={Elevation.ZERO}
-        className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
-      >
-        <SectionHeader>
-          <SectionHeaderTitle>
-            {t('loanreport.title')}
-          </SectionHeaderTitle>
-          <SectionSwitch target={TYPE} />
-          <SectionHeaderRow>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.date')}
-              </SectionHeaderItemLabel>
-              <TimeRange className={paramChangerClass} />
-            </SectionHeaderItem>
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.filter.symbol')}
-              </SectionHeaderItemLabel>
-              <MultiSymbolSelector
-                className={paramChangerClass}
-                currentFilters={targetSymbols}
-                toggleSymbol={this.toggleSymbol}
-              />
-            </SectionHeaderItem>
-            <ClearFiltersButton onClick={this.clearSymbols} />
-            <SectionHeaderItem>
-              <SectionHeaderItemLabel>
-                {t('selector.select')}
-              </SectionHeaderItemLabel>
-              <TimeFrameSelector
-                value={timeframe}
-                className={paramChangerClass}
-                onChange={this.handleTimeframeChange}
-              />
-            </SectionHeaderItem>
-          </SectionHeaderRow>
-        </SectionHeader>
-        {showContent}
-      </Card>
+  const paramChangerClass = classNames({ disabled: isFirstSyncing })
+
+  let showContent
+  if (isFirstSyncing) {
+    showContent = <InitSyncNote />
+  } else if (!dataReceived && pageLoading) {
+    showContent = <Loading />
+  } else if (isEmpty(entries)) {
+    showContent = <NoData />
+  } else {
+    showContent = (
+      <Chart
+        data={chartData}
+        dataKeys={dataKeys}
+      />
     )
   }
+
+  return (
+    <Card
+      elevation={Elevation.ZERO}
+      className='col-lg-12 col-md-12 col-sm-12 col-xs-12'
+    >
+      <SectionHeader>
+        <SectionHeaderTitle>
+          {t('loanreport.title')}
+        </SectionHeaderTitle>
+        <SectionSwitch target={TYPE} />
+        <SectionHeaderRow>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.date')}
+            </SectionHeaderItemLabel>
+            <TimeRange className={paramChangerClass} />
+          </SectionHeaderItem>
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.filter.symbol')}
+            </SectionHeaderItemLabel>
+            <MultiSymbolSelector
+              toggleSymbol={toggleSymbol}
+              currentFilters={targetSymbols}
+              className={paramChangerClass}
+            />
+          </SectionHeaderItem>
+          <ClearFiltersButton onClick={clearSymbols} />
+          <SectionHeaderItem>
+            <SectionHeaderItemLabel>
+              {t('selector.select')}
+            </SectionHeaderItemLabel>
+            <TimeFrameSelector
+              value={timeframe}
+              className={paramChangerClass}
+              onChange={handleTimeframeChange}
+            />
+          </SectionHeaderItem>
+        </SectionHeaderRow>
+      </SectionHeader>
+      {showContent}
+    </Card>
+  )
 }
 
 export default LoanReport

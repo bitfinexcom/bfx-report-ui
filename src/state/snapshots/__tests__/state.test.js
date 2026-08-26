@@ -44,6 +44,7 @@ describe('Snapshots state', () => {
     expect(reducer(state, actions.refresh()))
       .toEqual({
         ...initialState,
+        pageLoading: true,
         timestamp: state.timestamp,
       })
   })
