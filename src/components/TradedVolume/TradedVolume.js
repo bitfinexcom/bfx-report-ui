@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
 import { Card, Elevation } from '@blueprintjs/core'
 import classNames from 'classnames'
-import _sortBy from 'lodash/sortBy'
-import { isEmpty } from '@bitfinex/lib-js-util-base'
+import { isEmpty, orderBy } from '@bitfinex/lib-js-util-base'
 
 import {
   SectionHeader,
@@ -94,7 +93,7 @@ const TradedVolume = () => {
     () => parseChartData({
       timeframe,
       shouldShowYear,
-      data: _sortBy(entries, ['mts']),
+      data: orderBy(entries, ['mts']),
     }),
     [entries, timeframe, shouldShowYear],
   )
