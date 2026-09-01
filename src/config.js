@@ -1,6 +1,6 @@
 // Static config files to tune components
 
-const { REACT_APP_ENV } = process.env
+const { REACT_APP_ENV, REACT_APP_FRAMEWORK_MODE } = process.env
 
 const environments = {
   development: {
@@ -13,7 +13,7 @@ const environments = {
     hcaptchaSiteKey: '4674d299-d095-4b1a-8638-3443251be2d9',
     localExport: true,
     showAuthPage: true,
-    showFrameworkMode: true,
+    showFrameworkMode: REACT_APP_FRAMEWORK_MODE !== 'false',
     hostedFrameworkMode: false,
   },
   testing: {
