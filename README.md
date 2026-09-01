@@ -73,6 +73,13 @@ npm run start
     npm run start
     ```
 
+    The `development` env runs in framework mode, which expects the `bfx-reports-framework`
+    backend. To run against `bfx-report` (step 1) instead, disable it:
+
+    ```
+    REACT_APP_FRAMEWORK_MODE=false npm run start
+    ```
+
 Make sure you have access permission to test with the staging server/API.
 
 ## Web Token authentication
@@ -81,7 +88,11 @@ Web Token authentication will be used for site `https://report.bitfinex.com`.
 
 To test web token authentication locally,
 
-1. Visit `https://www.bitfinex.com`, login and open web console, type `window.WSTOKEN` to copy the authToken.
+1. Visit the site matching `restUrl` in `bfx-report/config/service.report.json` (`https://www.bitfinex.com` for production, `https://staging.bitfinex.com` for staging), login and open web console, then copy the authToken from the `__bfx_token` cookie:
+
+    ```js
+    document.cookie.split('; ').find(c => c.startsWith('__bfx_token='))?.split('=')[1]
+    ```
 
 2. Start server locally via `npm start` and visit `http://localhost:3000/?authToken=pub:api:<token string>`, you'll auto login without enter auth secret and key.
 
